@@ -6,7 +6,10 @@ import {
   History, 
   Settings,
   Home,
-  LineChart
+  LineChart,
+  Info,
+  Eye,
+  Leaf
 } from "lucide-react"
 import { NavLink } from "react-router-dom"
 import {
@@ -22,10 +25,10 @@ import {
 
 const navigationItems = [
   { title: "Dashboard", url: "/", icon: Home },
-  { title: "Trading", url: "/trading", icon: BarChart3 },
   { title: "Markets", url: "/markets", icon: TrendingUp },
-  { title: "Portfolio", url: "/portfolio", icon: Wallet },
-  { title: "Charts", url: "/charts", icon: LineChart },
+  { title: "Harmony Wallet", url: "/wallet", icon: Wallet },
+  { title: "Transparency", url: "/transparency", icon: Eye },
+  { title: "About GAiA", url: "/about", icon: Info },
   { title: "History", url: "/history", icon: History },
   { title: "Settings", url: "/settings", icon: Settings },
 ]
@@ -35,8 +38,14 @@ export function AppSidebar() {
     <Sidebar className="w-60 border-r border-border">
       <SidebarContent className="bg-sidebar-background">
         <div className="p-6 border-b border-border">
-          <h1 className="text-xl font-bold text-primary">CryptoEx</h1>
-          <p className="text-sm text-muted-foreground">Professional Trading</p>
+          <div className="flex items-center gap-2 mb-2">
+            <Leaf className="h-6 w-6 text-green-400" />
+            <h1 className="text-xl font-bold text-green-400">Harmony of Gaia</h1>
+          </div>
+          <p className="text-sm text-muted-foreground">Environmental Exchange</p>
+          <div className="mt-2 text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded">
+            No Trading • Full Transparency
+          </div>
         </div>
         
         <SidebarGroup>
@@ -53,7 +62,7 @@ export function AppSidebar() {
                       className={({ isActive }) =>
                         `flex items-center gap-3 px-6 py-3 text-sm transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground ${
                           isActive 
-                            ? 'bg-sidebar-accent text-sidebar-primary font-medium border-r-2 border-primary' 
+                            ? 'bg-sidebar-accent text-sidebar-primary font-medium border-r-2 border-green-400' 
                             : 'text-sidebar-foreground'
                         }`
                       }

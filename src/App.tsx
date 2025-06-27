@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./components/AppSidebar";
 import Index from "./pages/Index";
+import About from "./pages/About";
+import Wallet from "./pages/Wallet";
+import Transparency from "./pages/Transparency";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,12 +29,12 @@ const App = () => (
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-4">
                     <span className="text-sm text-muted-foreground">
-                      Real-time market data • Professional trading tools
+                      Environmental Impact • Transparent Operations • No Staking/Trading
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <div className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
-                      Live
+                    <div className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-medium">
+                      Eco-Active
                     </div>
                   </div>
                 </div>
@@ -39,6 +42,9 @@ const App = () => (
               <main className="flex-1 p-6">
                 <Routes>
                   <Route path="/" element={<Index />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/wallet" element={<Wallet />} />
+                  <Route path="/transparency" element={<Transparency />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
