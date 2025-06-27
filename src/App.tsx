@@ -10,6 +10,8 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Wallet from "./pages/Wallet";
 import Transparency from "./pages/Transparency";
+import Markets from "./pages/Markets";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,6 +47,8 @@ const App = () => (
                   <Route path="/about" element={<About />} />
                   <Route path="/wallet" element={<Wallet />} />
                   <Route path="/transparency" element={<Transparency />} />
+                  <Route path="/markets" element={<Markets />} />
+                  <Route path="/admin" element={<Admin />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>

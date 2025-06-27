@@ -1,4 +1,3 @@
-
 import { 
   BarChart3, 
   TrendingUp, 
@@ -29,8 +28,7 @@ const navigationItems = [
   { title: "Harmony Wallet", url: "/wallet", icon: Wallet },
   { title: "Transparency", url: "/transparency", icon: Eye },
   { title: "About GAiA", url: "/about", icon: Info },
-  { title: "History", url: "/history", icon: History },
-  { title: "Settings", url: "/settings", icon: Settings },
+  { title: "Admin Control", url: "/admin", icon: Settings },
 ]
 
 export function AppSidebar() {

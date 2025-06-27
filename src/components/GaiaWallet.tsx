@@ -5,12 +5,14 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
-import { Wallet, Send, QrCode, History, Shield, Leaf, Eye } from 'lucide-react'
+import { Wallet, Send, QrCode, History, Shield, Leaf, Eye, ExternalLink, Globe } from 'lucide-react'
 
 const walletData = {
+  connectedAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+  burningWalletAddress: '7BurningSystemWalletAddressForTransparency123',
   gaiaBalance: 15750.25,
   usdValue: 47250.75,
-  stakingRewards: 0, // No staking available
+  stakingRewards: 0,
   transactions: [
     { type: 'received', amount: 1250, from: 'Environmental Reward', time: '2 hours ago', hash: '0x742d35cc6c' },
     { type: 'burned', amount: 500, to: 'Ocean Cleanup', time: '1 day ago', hash: '0x9f4e8c2a1b' },
@@ -39,7 +41,6 @@ export function GaiaWallet() {
 
   const handleSend = () => {
     console.log('Sending GAiA:', { amount: sendAmount, to: recipientAddress })
-    // Here you would integrate with the GAiA network
   }
 
   const getTransactionIcon = (type: string) => {
@@ -62,15 +63,33 @@ export function GaiaWallet() {
 
   return (
     <div className="space-y-6">
-      {/* Wallet Header */}
+      {/* Wallet Header with Connected Address */}
       <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-500/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Leaf className="h-5 w-5" />
-            Harmony of Gaia Wallet
+            Harmony of Gaia Wallet - Connected
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          <div className="bg-muted/30 rounded-lg p-4 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">Main Wallet Address:</span>
+              <Button variant="outline" size="sm" onClick={() => navigator.clipboard.writeText(walletData.connectedAddress)}>
+                Copy
+              </Button>
+            </div>
+            <code className="text-xs break-all text-green-400 font-mono">{walletData.connectedAddress}</code>
+            
+            <div className="flex items-center justify-between mt-3">
+              <span className="text-sm text-muted-foreground">Burning System Wallet:</span>
+              <Button variant="outline" size="sm" onClick={() => navigator.clipboard.writeText(walletData.burningWalletAddress)}>
+                Copy
+              </Button>
+            </div>
+            <code className="text-xs break-all text-orange-400 font-mono">{walletData.burningWalletAddress}</code>
+          </div>
+          
           <div className="text-center space-y-2">
             <div className="text-4xl font-bold mono-numbers text-green-400">
               {formatGaia(walletData.gaiaBalance)} GAiA
@@ -80,7 +99,7 @@ export function GaiaWallet() {
             </div>
           </div>
           
-          <div className="flex items-center justify-center gap-4 text-sm">
+          <div className="flex items-center justify-center gap-4 text-sm flex-wrap">
             <Badge variant="outline" className="border-green-500/20 text-green-400">
               <Shield className="h-3 w-3 mr-1" />
               Eco-Secured
@@ -89,6 +108,54 @@ export function GaiaWallet() {
               <Eye className="h-3 w-3 mr-1" />
               Transparent
             </Badge>
+            <Badge variant="outline" className="border-purple-500/20 text-purple-400">
+              <Globe className="h-3 w-3 mr-1" />
+              DEXScreener Listed
+            </Badge>
+          </div>
+
+          <div className="flex items-center justify-center gap-4">
+            <a 
+              href="https://sites.google.com/view/culture-of-harmony/harmony-of-gaia" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 text-sm underline flex items-center gap-1"
+            >
+              Culture of Harmony Website <ExternalLink className="h-3 w-3" />
+            </a>
+            <a 
+              href="https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-green-400 hover:text-green-300 text-sm underline flex items-center gap-1"
+            >
+              Pump.fun Chart <ExternalLink className="h-3 w-3" />
+            </a>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Contact Information */}
+      <Card className="border-blue-500/20">
+        <CardHeader>
+          <CardTitle className="text-blue-400">Contact & Support</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Official Email:</span>
+              <a href="mailto:Info@cultureofharmony.com" className="text-blue-400 hover:text-blue-300">
+                Info@cultureofharmony.com
+              </a>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Support Hours:</span>
+              <span className="text-green-400">24/7 Available</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Response Time:</span>
+              <span className="text-green-400">Within 1 Hour</span>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -110,9 +177,9 @@ export function GaiaWallet() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
-                <p className="text-sm text-yellow-400">
-                  <strong>Note:</strong> Staking is not available. GAiA tokens are designed for direct environmental impact through our burning and reinvestment system.
+              <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                <p className="text-sm text-blue-400">
+                  <strong>Zero-Fee Transfers:</strong> We always find the cheapest or zero-cost transfer methods for our transparent community.
                 </p>
               </div>
               
@@ -122,7 +189,7 @@ export function GaiaWallet() {
                   <Input
                     value={recipientAddress}
                     onChange={(e) => setRecipientAddress(e.target.value)}
-                    placeholder="0x... or GAiA address"
+                    placeholder="Enter recipient wallet address"
                     className="mono-numbers"
                   />
                 </div>
@@ -145,7 +212,7 @@ export function GaiaWallet() {
                   className="w-full bg-green-600 hover:bg-green-700"
                   disabled={!sendAmount || !recipientAddress}
                 >
-                  Send GAiA Tokens
+                  Send GAiA Tokens (Zero Fee)
                 </Button>
               </div>
             </CardContent>
@@ -169,11 +236,15 @@ export function GaiaWallet() {
                 <div className="space-y-2">
                   <p className="font-medium">Your GAiA Wallet Address</p>
                   <div className="bg-muted p-3 rounded-lg">
-                    <code className="text-sm break-all">0x742d35Cc6cF3B4C4e6A7D8E9F0A1B2C3D4E5F6789ABC</code>
+                    <code className="text-sm break-all">{walletData.connectedAddress}</code>
                   </div>
                 </div>
                 
-                <Button variant="outline" className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => navigator.clipboard.writeText(walletData.connectedAddress)}
+                >
                   Copy Address
                 </Button>
               </div>
