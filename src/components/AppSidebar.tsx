@@ -44,7 +44,7 @@ export function AppSidebar() {
           </div>
           <p className="text-sm text-muted-foreground">Environmental Exchange</p>
           <div className="mt-2 text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded">
-            No Trading • Full Transparency
+            Simple Trading • Full Transparency
           </div>
         </div>
         

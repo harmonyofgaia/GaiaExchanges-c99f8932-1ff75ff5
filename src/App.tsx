@@ -29,12 +29,12 @@ const App = () => (
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-4">
                     <span className="text-sm text-muted-foreground">
-                      Environmental Impact • Transparent Operations • No Staking/Trading
+                      Simple Trading • Environmental Impact • Transparent Operations
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <div className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-medium">
-                      Eco-Active
+                      Trading Active
                     </div>
                   </div>
                 </div>
