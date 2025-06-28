@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -20,6 +21,7 @@ import { CloudResilienceManager } from '@/components/admin/CloudResilienceManage
 import { ServerResilienceEngine } from '@/components/admin/ServerResilienceEngine'
 import { GitHubAdminIntegration } from '@/components/github/GitHubAdminIntegration'
 import { MasterArtworkGenerator } from '@/components/admin/MasterArtworkGenerator'
+import { SystemStatusChecker } from '@/components/admin/SystemStatusChecker'
 
 const Admin = () => {
   const navigate = useNavigate()
@@ -95,7 +97,7 @@ const Admin = () => {
               Secure Admin Dashboard
             </h1>
             <p className="text-muted-foreground mt-2">
-              Complete system management and security oversight
+              Complete system management and creative tools oversight
             </p>
           </div>
           <div className="flex items-center gap-4">
@@ -122,7 +124,10 @@ const Admin = () => {
         <Tabs defaultValue="artwork-generator" className="w-full">
           <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
             <TabsTrigger value="artwork-generator" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-              🎨 Artwork AI
+              🎨 Creative Suite
+            </TabsTrigger>
+            <TabsTrigger value="system-status" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              📊 System Status
             </TabsTrigger>
             <TabsTrigger value="server-resilience" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
               <Server className="h-4 w-4 mr-2" />
@@ -164,14 +169,14 @@ const Admin = () => {
               <FileText className="h-4 w-4 mr-2" />
               Security Reports
             </TabsTrigger>
-            <TabsTrigger value="cloud-manager" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
-              <CloudLightning className="h-4 w-4 mr-2" />
-              Cloud Manager
-            </TabsTrigger>
           </TabsList>
           
           <TabsContent value="artwork-generator" className="space-y-6 mt-6">
             <MasterArtworkGenerator />
+          </TabsContent>
+          
+          <TabsContent value="system-status" className="space-y-6 mt-6">
+            <SystemStatusChecker />
           </TabsContent>
           
           <TabsContent value="server-resilience" className="space-y-6 mt-6">
@@ -212,10 +217,6 @@ const Admin = () => {
           
           <TabsContent value="security-reports" className="space-y-6 mt-6">
             <EncryptedSecurityReports />
-          </TabsContent>
-          
-          <TabsContent value="cloud-manager" className="space-y-6 mt-6">
-            <CloudResilienceManager />
           </TabsContent>
         </Tabs>
       </div>

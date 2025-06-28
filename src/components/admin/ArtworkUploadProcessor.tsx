@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Upload, Image, Sparkles, Wand2 } from 'lucide-react'
 import { toast } from 'sonner'
-import { supabase } from '@/integrations/supabase/client'
 
 export function ArtworkUploadProcessor() {
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
@@ -34,23 +33,22 @@ export function ArtworkUploadProcessor() {
     
     for (const imageData of uploadedImages) {
       try {
-        // Create variations based on the uploaded image
-        const variations = [
-          'abstract geometric patterns inspired by nature',
-          'fluid art with organic flowing shapes',
-          'cosmic abstract with ethereal colors',
-          'minimalist geometric with harmony elements',
-          'vibrant abstract fusion with natural elements'
-        ]
-
-        for (const variation of variations) {
-          await supabase.from('generated_artwork').insert({
-            prompt: `Based on uploaded nature image: ${variation}`,
-            artwork_type: 'user_inspired',
-            style: 'abstract_variation',
-            image_data: imageData, // Store original for now
-            generated_at: new Date().toISOString()
+        // Create variations based on the uploaded image using the edge function
+        const response = await fetch('/functions/v1/generate-artwork', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            basePrompt: 'Based on uploaded nature image: abstract geometric patterns inspired by nature',
+            artworkType: 'user_inspired',
+            style: 'abstract_variation'
           })
+        })
+
+        if (response.ok) {
+          const result = await response.json()
+          console.log('Generated artwork:', result)
         }
       } catch (error) {
         console.error('Error processing image:', error)
