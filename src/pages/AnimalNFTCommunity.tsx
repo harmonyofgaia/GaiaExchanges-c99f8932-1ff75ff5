@@ -1,9 +1,7 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
 import { 
   Heart, 
   Coins, 
@@ -36,6 +34,7 @@ import { toast } from 'sonner'
 import { MinecraftLandscapeBuilder } from '@/components/MinecraftLandscapeBuilder'
 import { PhantomWalletConnector } from '@/components/PhantomWalletConnector'
 import { RealTimeAnimalTracker } from '@/components/RealTimeAnimalTracker'
+import { TaskTracker } from '@/components/TaskTracker'
 
 const AnimalNFTCommunity = () => {
   const [animalNFTs, setAnimalNFTs] = useState([
@@ -350,6 +349,9 @@ const AnimalNFTCommunity = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Task Tracker */}
+        <TaskTracker />
 
         {/* Phantom Wallet Connector */}
         <PhantomWalletConnector />
