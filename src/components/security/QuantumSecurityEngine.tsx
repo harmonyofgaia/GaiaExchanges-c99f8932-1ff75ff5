@@ -185,28 +185,20 @@ export function QuantumSecurityEngine() {
             await activateQuantumResponse(criticalThreats[0])
           }
 
-          // Log all threats to Supabase for admin review
+          // Log threats to security_events table (which exists in current schema)
           for (const threat of newThreats) {
             try {
-              await supabase.from('security_logs').insert({
+              const severityLevel = threat.threatLevel.toLowerCase() as 'low' | 'medium' | 'high' | 'maximum'
+              await supabase.from('security_events').insert({
                 event_type: threat.attackType,
-                severity: threat.threatLevel.toLowerCase(),
+                event_description: threat.behaviorPattern,
+                severity: severityLevel === 'critical' ? 'maximum' : severityLevel,
                 ip_address: threat.ipAddress,
                 user_agent: threat.userAgent,
-                device_fingerprint: threat.deviceFingerprint,
-                geolocation: threat.geolocation,
-                threat_description: threat.behaviorPattern,
-                threat_data: {
-                  targetedAsset: threat.targetedAsset,
-                  preventionAction: threat.preventionAction,
-                  quantumEncrypted: threat.quantumEncrypted,
-                  networkSignature: threat.networkSignature
-                },
-                action_taken: threat.preventionAction,
                 resolved: threat.status === 'NEUTRALIZED'
               })
             } catch (error) {
-              console.log('🔒 Quantum security logging protected')
+              console.log('🔒 Quantum security logging protected:', error)
             }
           }
 
