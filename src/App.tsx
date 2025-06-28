@@ -1,48 +1,44 @@
+
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/components/auth/AuthProvider";
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import Index from "./pages/Index";
 import Wallet from "./pages/Wallet";
-import Admin from "./pages/Admin";
+import Exchange from "./pages/Exchange";
+import Markets from "./pages/Markets";
+import Profile from "./pages/Profile";
+import Contact from "./pages/Contact";
+import Downloads from "./pages/Downloads";
+import Security from "./pages/Security";
 import UltimateSecurity from "./pages/UltimateSecurity";
-import Community from "./pages/Community";
-import Marketing from "./pages/Marketing";
-import AppStoreSubmission from "./pages/AppStoreSubmission";
+import MarketingHub from "./pages/MarketingHub";
 
 const queryClient = new QueryClient();
 
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
       <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/wallet" element={
-                <ProtectedRoute>
-                  <Wallet />
-                </ProtectedRoute>
-              } />
-              <Route path="/community" element={
-                <ProtectedRoute>
-                  <Community />
-                </ProtectedRoute>
-              } />
-              <Route path="/security" element={<UltimateSecurity />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/marketing" element={<Marketing />} />
-              <Route path="/app-submission" element={<AppStoreSubmission />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
+        <Toaster />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/exchange" element={<Exchange />} />
+            <Route path="/markets" element={<Markets />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/downloads" element={<Downloads />} />
+            <Route path="/security" element={<Security />} />
+            <Route path="/ultimate-security" element={<UltimateSecurity />} />
+            <Route path="/marketing" element={<MarketingHub />} />
+          </Routes>
+        </BrowserRouter>
       </AuthProvider>
-    </QueryClientProvider>
-  );
-}
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
