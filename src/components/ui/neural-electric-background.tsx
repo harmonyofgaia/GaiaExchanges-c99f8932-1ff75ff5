@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react'
 
 interface NeuralNode {
@@ -337,7 +338,7 @@ export function NeuralElectricBackground({
         })
       })
 
-      // Draw nodes with electric glow (smaller size)
+      // Draw nodes with electric glow
       nodesRef.current.forEach(node => {
         const size = 1 + node.energy * 2
         const glowSize = 6 + node.energy * 12
@@ -352,7 +353,7 @@ export function NeuralElectricBackground({
         ctx.arc(node.x, node.y, glowSize, 0, Math.PI * 2)
         ctx.fill()
 
-        // Core node (smaller)
+        // Core node
         ctx.fillStyle = currentStyle.nodeColor
         ctx.shadowColor = currentStyle.glowColor
         ctx.shadowBlur = 6
@@ -377,15 +378,39 @@ export function NeuralElectricBackground({
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0">
+      {/* Background gradient */}
       <div 
         className="absolute inset-0"
         style={{ background: currentStyle.background }}
       />
+      
+      {/* Canvas with fading zones */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 opacity-30 pointer-events-auto"
-        style={{ mixBlendMode: 'screen' }}
+        className="absolute inset-0 pointer-events-auto"
+        style={{ 
+          opacity: 0.4,
+          mixBlendMode: 'screen'
+        }}
       />
+      
+      {/* Fade zones for better content visibility */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Top fade */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/60 via-black/30 to-transparent" />
+        
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+        
+        {/* Left fade */}
+        <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
+        
+        {/* Right fade */}
+        <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-black/40 via-black/20 to-transparent" />
+        
+        {/* Center content area fade */}
+        <div className="absolute top-1/4 left-1/4 right-1/4 bottom-1/4 bg-gradient-to-br from-black/30 via-transparent to-black/30 rounded-lg" />
+      </div>
     </div>
   )
 }
