@@ -9,6 +9,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, userData?: any) => Promise<{ error: any }>
   signIn: (email: string, password: string) => Promise<{ error: any }>
   signOut: () => Promise<{ error: any }>
+  grantAdminRole: (email: string) => Promise<{ error: any }>
   loading: boolean
 }
 
@@ -18,6 +19,7 @@ const AuthContext = createContext<AuthContextType>({
   signUp: async () => ({ error: null }),
   signIn: async () => ({ error: null }),
   signOut: async () => ({ error: null }),
+  grantAdminRole: async () => ({ error: null }),
   loading: true
 })
 
@@ -99,12 +101,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error }
   }
 
+  const grantAdminRole = async (email: string) => {
+    try {
+      const { error } = await supabase.rpc('grant_admin_role', {
+        user_email: email
+      })
+      return { error }
+    } catch (error) {
+      return { error }
+    }
+  }
+
   const value = {
     user,
     session,
     signUp,
     signIn,
     signOut,
+    grantAdminRole,
     loading
   }
 
