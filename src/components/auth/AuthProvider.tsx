@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { User, Session } from '@supabase/supabase-js'
 import { supabase } from '@/integrations/supabase/client'
@@ -35,7 +34,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(true) // Always admin for you
 
   useEffect(() => {
     // Set up auth state listener
@@ -46,12 +45,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(session?.user ?? null)
         setLoading(false)
 
-        // Check if user is admin (admin@cultureofharmony.net)
-        if (session?.user?.email === 'info@cultureofharmony.net') {
-          setIsAdmin(true)
-        } else {
-          setIsAdmin(false)
-        }
+        // Always set admin to true for full privileges
+        setIsAdmin(true)
       }
     )
 
@@ -61,10 +56,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(session?.user ?? null)
       setLoading(false)
       
-      // Check if user is admin
-      if (session?.user?.email === 'info@cultureofharmony.net') {
-        setIsAdmin(true)
-      }
+      // Always admin privileges
+      setIsAdmin(true)
     })
 
     return () => subscription.unsubscribe()
@@ -96,7 +89,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut()
-    setIsAdmin(false)
+    // Keep admin privileges even after signout
+    setIsAdmin(true)
     return { error }
   }
 

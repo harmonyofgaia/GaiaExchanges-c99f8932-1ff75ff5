@@ -1,29 +1,19 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AdminControlSystem } from '@/components/AdminControlSystem'
 import { EnhancedAdminControls } from '@/components/EnhancedAdminControls'
-import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const Admin = () => {
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
 
-  // Check if admin is already authenticated from localStorage
-  useState(() => {
-    const adminToken = localStorage.getItem('secure_admin_token')
-    if (adminToken) {
-      setIsAdminAuthenticated(true)
-    }
-  })
-
-  const handleAdminLogin = () => {
+  // Automatically grant admin access without any authentication
+  useEffect(() => {
+    // Auto-authenticate as admin immediately
     setIsAdminAuthenticated(true)
-  }
-
-  // If not authenticated, show secure login
-  if (!isAdminAuthenticated) {
-    return <SecureAdminLogin onLoginSuccess={handleAdminLogin} />
-  }
+    // Store admin token for consistency
+    localStorage.setItem('secure_admin_token', 'admin-auto-authenticated')
+  }, [])
 
   return (
     <div className="space-y-6">
@@ -35,6 +25,7 @@ const Admin = () => {
             <span className="px-2 py-1 bg-green-600 text-white text-xs rounded">ADMIN AUTHENTICATED</span>
             <span className="px-2 py-1 bg-blue-600 text-white text-xs rounded">IP SECURED</span>
             <span className="px-2 py-1 bg-purple-600 text-white text-xs rounded">MAX PRIVILEGES</span>
+            <span className="px-2 py-1 bg-orange-600 text-white text-xs rounded">AUTO ACCESS</span>
           </div>
         </div>
       </div>
