@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -144,8 +143,14 @@ export function GaiaWallet() {
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Official Email:</span>
-              <a href="mailto:Info@cultureofharmony.com" className="text-blue-400 hover:text-blue-300">
-                Info@cultureofharmony.com
+              <a href="mailto:info@cultureofharmony.net" className="text-blue-400 hover:text-blue-300">
+                info@cultureofharmony.net
+              </a>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Official Phone:</span>
+              <a href="tel:+31687758236" className="text-blue-400 hover:text-blue-300">
+                +31687758236
               </a>
             </div>
             <div className="flex justify-between">
@@ -291,4 +296,40 @@ export function GaiaWallet() {
       </Tabs>
     </div>
   )
+
+  function formatGaia(amount: number) {
+    return new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(amount)
+  }
+
+  function formatUSD(amount: number) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(amount)
+  }
+
+  function handleSend() {
+    console.log('Sending GAiA:', { amount: sendAmount, to: recipientAddress })
+  }
+
+  function getTransactionIcon(type: string) {
+    switch (type) {
+      case 'received': return '↓'
+      case 'sent': return '↑'
+      case 'burned': return '🔥'
+      default: return '•'
+    }
+  }
+
+  function getTransactionColor(type: string) {
+    switch (type) {
+      case 'received': return 'text-green-400'
+      case 'sent': return 'text-blue-400'
+      case 'burned': return 'text-orange-400'
+      default: return 'text-muted-foreground'
+    }
+  }
 }
