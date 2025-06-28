@@ -12,6 +12,10 @@ export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
   subtitle = "Culture of Harmony - Together We Make The World A Better Place",
   className = ""
 }) => {
+  const handleLogoClick = () => {
+    window.open('https://sites.google.com/view/culture-of-harmony/harmony-of-gaia', '_blank')
+  }
+
   return (
     <div 
       className={`relative w-full h-64 bg-cover bg-center rounded-lg overflow-hidden ${className}`}
@@ -21,11 +25,17 @@ export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60 flex items-center justify-center">
         <div className="text-center px-4">
-          <img 
-            src="/lovable-uploads/ab19f9f8-2069-4211-955c-dab937602141.png" 
-            alt="Gaia of Harmony Logo" 
-            className="w-20 h-20 mx-auto mb-4 drop-shadow-lg"
-          />
+          <button
+            onClick={handleLogoClick}
+            className="cursor-pointer hover:scale-105 transition-transform duration-300 mb-4 block mx-auto"
+            title="Visit Culture of Harmony - Harmony of Gaia Projects"
+          >
+            <img 
+              src="/lovable-uploads/ab19f9f8-2069-4211-955c-dab937602141.png" 
+              alt="Gaia of Harmony Logo - Click to visit Harmony of Gaia Projects" 
+              className="w-20 h-20 drop-shadow-lg opacity-98 hover:opacity-100 transition-opacity duration-300"
+            />
+          </button>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-lg">
             {title}
           </h1>
@@ -36,6 +46,14 @@ export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
             <span className="text-green-300 text-sm font-medium">
               World's Most Secure Crypto Exchange
             </span>
+          </div>
+          <div className="mt-3">
+            <button
+              onClick={handleLogoClick}
+              className="text-xs text-blue-300 hover:text-blue-200 underline transition-colors duration-300"
+            >
+              🌍 Explore All Harmony of Gaia Projects
+            </button>
           </div>
         </div>
       </div>

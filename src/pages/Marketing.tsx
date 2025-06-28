@@ -23,18 +23,23 @@ const Marketing = () => {
   const campaignTemplates = [
     {
       platform: 'Twitter/X',
-      template: '🌍 Join the #GaiaExchange revolution! Trade $GAiA tokens with ZERO fees and military-grade security. The future of eco-friendly crypto trading is here! 🚀 #DeFi #CryptoTrading #Sustainability',
+      template: '🌍 Join the #GaiaExchange revolution! Trade $GAiA tokens with ZERO fees and military-grade security. The future of eco-friendly crypto trading is here! 🚀 Explore all Harmony of Gaia projects: https://sites.google.com/view/culture-of-harmony/harmony-of-gaia #DeFi #CryptoTrading #Sustainability',
       engagement: 'High'
     },
     {
       platform: 'Reddit',
-      template: 'Introducing Gaia\'s Exchanges - The most secure crypto trading platform with zero-fee GAiA token swaps. Built with transparency and environmental impact in mind.',
+      template: 'Introducing Gaia\'s Exchanges - The most secure crypto trading platform with zero-fee GAiA token swaps. Built with transparency and environmental impact in mind. Discover the full Harmony of Gaia ecosystem: https://sites.google.com/view/culture-of-harmony/harmony-of-gaia',
       engagement: 'Medium'
     },
     {
       platform: 'LinkedIn',
-      template: 'Professional crypto traders are choosing Gaia\'s Exchanges for its enterprise-grade security and innovative fee optimization. Join the sustainable trading revolution.',
+      template: 'Professional crypto traders are choosing Gaia\'s Exchanges for its enterprise-grade security and innovative fee optimization. Join the sustainable trading revolution and explore Harmony of Gaia projects: https://sites.google.com/view/culture-of-harmony/harmony-of-gaia',
       engagement: 'Professional'
+    },
+    {
+      platform: 'Radio Station Script',
+      template: 'Stay Tuned And Connect With the most Loveable Project of Our Human Race, called Harmony of Gaia. Find more info at www.cultureofharmony.net - The future of sustainable cryptocurrency trading is here with Gaia\'s Exchanges!',
+      engagement: 'Broadcast'
     }
   ]
 
@@ -80,6 +85,15 @@ const Marketing = () => {
     })
   }
 
+  const handleCopyRadioScript = () => {
+    const radioScript = "Stay Tuned And Connect With the most Loveable Project of Our Human Race, called Harmony of Gaia. Find more info at www.cultureofharmony.net"
+    navigator.clipboard.writeText(radioScript)
+    toast({
+      title: "Radio Script Copied!",
+      description: "Weekly radio announcement script copied to clipboard. Contact radio stations manually to arrange broadcasts.",
+    })
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -114,20 +128,22 @@ const Marketing = () => {
               <CardContent className="space-y-6">
                 <div className="text-center">
                   <div 
-                    className="w-full h-64 bg-cover bg-center rounded-lg mb-4 relative overflow-hidden"
+                    className="w-full h-64 bg-cover bg-center rounded-lg mb-4 relative overflow-hidden cursor-pointer"
                     style={{ 
                       backgroundImage: `url(/lovable-uploads/0ca4bd04-3680-4cfa-acd8-d61ae9a40101.png)` 
                     }}
+                    onClick={() => window.open('https://sites.google.com/view/culture-of-harmony/harmony-of-gaia', '_blank')}
                   >
                     <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                       <div className="text-center">
                         <img 
                           src="/lovable-uploads/ab19f9f8-2069-4211-955c-dab937602141.png" 
                           alt="Gaia of Harmony Logo" 
-                          className="w-16 h-16 mx-auto mb-2"
+                          className="w-16 h-16 mx-auto mb-2 opacity-98 hover:opacity-100 transition-opacity"
                         />
                         <h3 className="text-2xl font-bold text-white">Gaia's Exchanges</h3>
                         <p className="text-green-300">Culture of Harmony - Together We Make The World A Better Place</p>
+                        <p className="text-xs text-blue-300 mt-2">Click to explore all Harmony of Gaia projects</p>
                       </div>
                     </div>
                   </div>
@@ -174,12 +190,41 @@ const Marketing = () => {
                 </div>
 
                 <div className="bg-gradient-to-r from-purple-900/20 to-orange-900/20 border border-purple-500/20 rounded-lg p-4">
-                  <h4 className="font-medium text-purple-400 mb-2">🌍 Culture of Harmony Message</h4>
+                  <h4 className="font-medium text-purple-400 mb-2">🌍 Culture of Harmony Message & Link Integration</h4>
                   <p className="text-sm text-muted-foreground mb-3">
                     "Together We Can Make The World A Better Place" - This powerful message represents our commitment to environmental sustainability, global unity, and positive change through cryptocurrency innovation.
                   </p>
+                  <div className="bg-blue-500/10 border border-blue-500/20 rounded p-3 mb-3">
+                    <p className="text-sm text-blue-300 mb-2">
+                      <strong>Project Link:</strong> Always include link to all Harmony of Gaia projects:
+                    </p>
+                    <code className="text-xs bg-black/20 p-1 rounded">
+                      https://sites.google.com/view/culture-of-harmony/harmony-of-gaia
+                    </code>
+                  </div>
                   <p className="text-xs text-purple-300">
-                    Use this message consistently across all advertising to reinforce our mission of creating harmony between technology and nature.
+                    Use this message and link consistently across all advertising to reinforce our mission and direct users to our complete project ecosystem.
+                  </p>
+                </div>
+
+                <div className="bg-gradient-to-r from-yellow-900/20 to-red-900/20 border border-yellow-500/20 rounded-lg p-4">
+                  <h4 className="font-medium text-yellow-400 mb-2">📻 Radio Station Outreach</h4>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Weekly radio announcement script for manual distribution to radio stations worldwide:
+                  </p>
+                  <div className="bg-yellow-500/10 border border-yellow-500/20 rounded p-3 mb-3">
+                    <p className="text-sm text-yellow-300 italic">
+                      "Stay Tuned And Connect With the most Loveable Project of Our Human Race, called Harmony of Gaia. Find more info at www.cultureofharmony.net"
+                    </p>
+                  </div>
+                  <Button 
+                    onClick={handleCopyRadioScript}
+                    className="bg-yellow-600 hover:bg-yellow-700 mr-2"
+                  >
+                    Copy Radio Script
+                  </Button>
+                  <p className="text-xs text-yellow-400 mt-2">
+                    Note: Radio station outreach requires manual contact with each station's programming department
                   </p>
                 </div>
               </CardContent>
