@@ -19,7 +19,10 @@ import {
   Settings,
   Drill,
   Coins,
-  Gem
+  Gem,
+  Factory,
+  Truck,
+  Wrench
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { AgeLandscapeSelector } from './AgeLandscapeSelector'
@@ -31,6 +34,17 @@ interface DrillingResult {
   rarity: string
 }
 
+interface AdvancedMachine {
+  id: string
+  name: string
+  cost: number
+  power: number
+  efficiency: number
+  specialAbility: string
+  emoji: string
+  tier: 'basic' | 'advanced' | 'quantum' | 'ultimate'
+}
+
 export function MinecraftLandscapeBuilder() {
   const [selectedTool, setSelectedTool] = useState('build')
   const [selectedBlock, setSelectedBlock] = useState('grass')
@@ -40,28 +54,42 @@ export function MinecraftLandscapeBuilder() {
   const [selectedMachine, setSelectedMachine] = useState<string>('')
   const [totalGaiaEarned, setTotalGaiaEarned] = useState(0)
   const [discoveredMaterials, setDiscoveredMaterials] = useState<DrillingResult[]>([])
+  const [ownedMachines, setOwnedMachines] = useState<Set<string>>(new Set())
+  const [dailyUpdatesEnabled, setDailyUpdatesEnabled] = useState(true)
   const [savedLandscapes, setSavedLandscapes] = useState([
     { id: 1, name: "Forest Sanctuary", biome: "Forest", animals: 25, rating: 4.8, ageGroup: "children" },
     { id: 2, name: "Ocean Paradise", biome: "Ocean", animals: 42, rating: 4.9, ageGroup: "teens" },
     { id: 3, name: "Mountain Refuge", biome: "Mountain", animals: 18, rating: 4.7, ageGroup: "adults" },
-    { id: 4, name: "Deep Sea Mining Zone", biome: "Underwater", animals: 15, rating: 4.6, ageGroup: "adults" }
+    { id: 4, name: "Deep Sea Mining Zone", biome: "Underwater", animals: 15, rating: 4.6, ageGroup: "adults" },
+    { id: 5, name: "Quantum Mining Facility", biome: "Underwater", animals: 8, rating: 4.9, ageGroup: "adults" }
   ])
 
-  const heavyMachines = [
-    { id: 'basic_drill', name: 'Basic Drill', cost: 10, power: 1, emoji: '⛏️' },
-    { id: 'hydraulic_drill', name: 'Hydraulic Drill', cost: 25, power: 2, emoji: '🔧' },
-    { id: 'diamond_drill', name: 'Diamond Drill', cost: 50, power: 3, emoji: '💎' },
-    { id: 'quantum_drill', name: 'Quantum Drill', cost: 100, power: 5, emoji: '⚡' }
+  // Enhanced heavy machines with different tiers and abilities
+  const heavyMachines: AdvancedMachine[] = [
+    { id: 'basic_drill', name: 'Basic Drill', cost: 10, power: 1, efficiency: 50, specialAbility: 'None', emoji: '⛏️', tier: 'basic' },
+    { id: 'hydraulic_drill', name: 'Hydraulic Drill', cost: 25, power: 2, efficiency: 65, specialAbility: 'Water Drilling', emoji: '🔧', tier: 'basic' },
+    { id: 'diamond_drill', name: 'Diamond Drill', cost: 50, power: 3, efficiency: 80, specialAbility: 'Hard Rock Penetration', emoji: '💎', tier: 'advanced' },
+    { id: 'quantum_drill', name: 'Quantum Drill', cost: 100, power: 5, efficiency: 95, specialAbility: 'Quantum Tunneling', emoji: '⚡', tier: 'advanced' },
+    { id: 'mega_excavator', name: 'Mega Excavator', cost: 200, power: 8, efficiency: 90, specialAbility: 'Large Area Mining', emoji: '🚛', tier: 'quantum' },
+    { id: 'plasma_bore', name: 'Plasma Bore', cost: 350, power: 12, efficiency: 98, specialAbility: 'Plasma Cutting', emoji: '🔥', tier: 'quantum' },
+    { id: 'quantum_harvester', name: 'Quantum Harvester', cost: 500, power: 15, efficiency: 99, specialAbility: 'Multi-Dimensional Mining', emoji: '🌌', tier: 'ultimate' },
+    { id: 'gaia_extractor', name: 'Gaia Extractor Supreme', cost: 1000, power: 25, efficiency: 100, specialAbility: 'Pure Gaia Energy Extraction', emoji: '🌟', tier: 'ultimate' }
   ]
 
+  // Enhanced ground materials with more variety and rare finds
   const groundMaterials = [
-    { name: 'Gold', rarity: 'Legendary', gaiaValue: 1.0, chance: 0.05, emoji: '🏆' },
-    { name: 'Silver', rarity: 'Epic', gaiaValue: 0.5, chance: 0.1, emoji: '🥈' },
-    { name: 'Copper', rarity: 'Rare', gaiaValue: 0.2, chance: 0.2, emoji: '🟤' },
-    { name: 'Iron', rarity: 'Common', gaiaValue: 0.1, chance: 0.3, emoji: '⚫' },
-    { name: 'Coal', rarity: 'Common', gaiaValue: 0.05, chance: 0.4, emoji: '⚫' },
-    { name: 'Gems', rarity: 'Epic', gaiaValue: 0.8, chance: 0.08, emoji: '💎' },
-    { name: 'Crystals', rarity: 'Rare', gaiaValue: 0.3, chance: 0.15, emoji: '🔮' }
+    { name: 'Quantum Gold', rarity: 'Legendary', gaiaValue: 1.0, chance: 0.02, emoji: '🏆', depth: 'deep' },
+    { name: 'Pure Gold', rarity: 'Epic', gaiaValue: 0.8, chance: 0.05, emoji: '🥇', depth: 'medium' },
+    { name: 'Silver', rarity: 'Rare', gaiaValue: 0.5, chance: 0.1, emoji: '🥈', depth: 'medium' },
+    { name: 'Platinum', rarity: 'Epic', gaiaValue: 0.7, chance: 0.06, emoji: '⚪', depth: 'deep' },
+    { name: 'Copper', rarity: 'Common', gaiaValue: 0.2, chance: 0.2, emoji: '🟤', depth: 'shallow' },
+    { name: 'Iron', rarity: 'Common', gaiaValue: 0.1, chance: 0.3, emoji: '⚫', depth: 'shallow' },
+    { name: 'Coal', rarity: 'Common', gaiaValue: 0.05, chance: 0.4, emoji: '⚫', depth: 'shallow' },
+    { name: 'Rare Gems', rarity: 'Legendary', gaiaValue: 1.2, chance: 0.03, emoji: '💎', depth: 'deep' },
+    { name: 'Crystals', rarity: 'Rare', gaiaValue: 0.3, chance: 0.15, emoji: '🔮', depth: 'medium' },
+    { name: 'Quantum Crystals', rarity: 'Legendary', gaiaValue: 2.0, chance: 0.01, emoji: '🌌', depth: 'deep' },
+    { name: 'Gaia Essence', rarity: 'Mythical', gaiaValue: 5.0, chance: 0.005, emoji: '🌟', depth: 'deep' },
+    { name: 'Ancient Artifacts', rarity: 'Mythical', gaiaValue: 3.0, chance: 0.008, emoji: '🏺', depth: 'deep' }
   ]
 
   const getBlockTypesForAgeGroup = (ageGroup: string) => {
@@ -74,11 +102,13 @@ export function MinecraftLandscapeBuilder() {
 
     const underwaterBlocks = [
       { id: 'deep_water', name: 'Deep Water', color: 'bg-blue-800', emoji: '🌊' },
-      { id: 'coral', name: 'Coral', color: 'bg-orange-500', emoji: '🪸' },
-      { id: 'seaweed', name: 'Seaweed', color: 'bg-green-600', emoji: '🌿' },
-      { id: 'sand', name: 'Sand', color: 'bg-yellow-600', emoji: '🏖️' },
-      { id: 'rock', name: 'Rock', color: 'bg-gray-600', emoji: '🪨' },
-      { id: 'drilling_site', name: 'Drilling Site', color: 'bg-yellow-800', emoji: '⛏️' }
+      { id: 'coral', name: 'Coral Reef', color: 'bg-orange-500', emoji: '🪸' },
+      { id: 'seaweed', name: 'Seaweed Forest', color: 'bg-green-600', emoji: '🌿' },
+      { id: 'sand', name: 'Ocean Sand', color: 'bg-yellow-600', emoji: '🏖️' },
+      { id: 'rock', name: 'Bedrock', color: 'bg-gray-600', emoji: '🪨' },
+      { id: 'drilling_site', name: 'Active Drilling Site', color: 'bg-yellow-800', emoji: '⛏️' },
+      { id: 'mining_platform', name: 'Mining Platform', color: 'bg-gray-800', emoji: '🏭' },
+      { id: 'treasure_chest', name: 'Treasure Chest', color: 'bg-yellow-500', emoji: '📦' }
     ]
 
     const baseBlocks = landscapeType === 'underwater' ? underwaterBlocks : surfaceBlocks
@@ -120,6 +150,39 @@ export function MinecraftLandscapeBuilder() {
     initGrid()
   }, [selectedAgeGroup, landscapeType])
 
+  // Daily updates system
+  useEffect(() => {
+    if (!dailyUpdatesEnabled) return
+
+    const dailyUpdateInterval = setInterval(() => {
+      // Add new machines occasionally
+      if (Math.random() < 0.1) {
+        const newMachines = [
+          { id: 'fusion_drill', name: 'Fusion Drill X1', cost: 750, power: 20, efficiency: 99, specialAbility: 'Nuclear Fusion Power', emoji: '☢️', tier: 'ultimate' as const },
+          { id: 'nano_extractor', name: 'Nano Extractor', cost: 1500, power: 30, efficiency: 100, specialAbility: 'Nano-Precision Mining', emoji: '⚛️', tier: 'ultimate' as const }
+        ]
+        
+        if (Math.random() < 0.5) {
+          toast.success('🔄 Daily Update: New Advanced Drilling Technology Available!', {
+            description: 'Check the Heavy Machines shop for new quantum-powered equipment',
+            duration: 8000
+          })
+        }
+      }
+
+      // Update ground material chances based on global mining activity
+      groundMaterials.forEach(material => {
+        if (Math.random() < 0.05) {
+          material.chance = Math.min(material.chance * 1.05, material.chance * 1.2)
+        }
+      })
+
+      console.log('🔄 Daily Mining Update: Equipment and materials updated')
+    }, 24 * 60 * 60 * 1000) // Once per day
+
+    return () => clearInterval(dailyUpdateInterval)
+  }, [dailyUpdatesEnabled])
+
   const placeBBlock = (row: number, col: number) => {
     if (selectedTool === 'build') {
       setLandscapeGrid(prev => {
@@ -134,39 +197,61 @@ export function MinecraftLandscapeBuilder() {
         return newGrid
       })
     } else if (selectedTool === 'drill' && selectedMachine) {
-      performDrilling(row, col)
+      performAdvancedDrilling(row, col)
     }
   }
 
-  const performDrilling = (row: number, col: number) => {
+  const performAdvancedDrilling = (row: number, col: number) => {
     const machine = heavyMachines.find(m => m.id === selectedMachine)
-    if (!machine) return
-
-    // Check if it's a valid drilling location
-    const currentBlock = landscapeGrid[row][col]
-    if (currentBlock !== 'sand' && currentBlock !== 'rock' && currentBlock !== 'drilling_site') {
-      toast.error('❌ Cannot drill here! Need sand, rock, or drilling site.')
+    if (!machine || !ownedMachines.has(selectedMachine)) {
+      toast.error('❌ You need to own this machine to use it!')
       return
     }
 
-    // Simulate drilling based on machine power
-    const drillResults: DrillingResult[] = []
-    const drillAttempts = machine.power
+    // Check if it's a valid drilling location
+    const currentBlock = landscapeGrid[row][col]
+    const validDrillingBlocks = ['sand', 'rock', 'drilling_site', 'deep_water', 'coral']
+    if (!validDrillingBlocks.includes(currentBlock)) {
+      toast.error('❌ Cannot drill here! Need valid drilling terrain.')
+      return
+    }
 
-    for (let i = 0; i < drillAttempts; i++) {
-      const randomMaterial = groundMaterials.find(material => 
-        Math.random() < material.chance * (machine.power * 0.2)
+    // Advanced drilling simulation based on machine tier and power
+    const drillResults: DrillingResult[] = []
+    const baseAttempts = machine.power
+    const bonusAttempts = Math.floor(machine.efficiency / 20)
+    const totalAttempts = baseAttempts + bonusAttempts
+
+    // Determine drilling depth based on machine tier
+    const availableMaterials = groundMaterials.filter(material => {
+      if (machine.tier === 'ultimate') return true
+      if (machine.tier === 'quantum' && material.depth !== 'deep') return true
+      if (machine.tier === 'advanced' && material.depth === 'shallow') return true
+      return material.depth === 'shallow'
+    })
+
+    for (let i = 0; i < totalAttempts; i++) {
+      // Apply machine's special ability bonuses
+      let chanceMultiplier = 1
+      if (machine.specialAbility.includes('Quantum')) chanceMultiplier *= 2
+      if (machine.specialAbility.includes('Plasma')) chanceMultiplier *= 1.5
+      if (machine.specialAbility.includes('Gaia')) chanceMultiplier *= 3
+
+      const materialFound = availableMaterials.find(material => 
+        Math.random() < (material.chance * chanceMultiplier * (machine.efficiency / 100))
       )
 
-      if (randomMaterial) {
-        const quantity = Math.floor(Math.random() * 3) + 1
-        const gaiaReward = randomMaterial.gaiaValue * quantity
-        
+      if (materialFound) {
+        const baseQuantity = Math.floor(Math.random() * 3) + 1
+        const bonusQuantity = machine.tier === 'ultimate' ? Math.floor(Math.random() * 2) + 1 : 0
+        const quantity = baseQuantity + bonusQuantity
+        const gaiaReward = materialFound.gaiaValue * quantity
+
         drillResults.push({
-          material: randomMaterial.name,
+          material: materialFound.name,
           quantity,
           gaiaReward,
-          rarity: randomMaterial.rarity
+          rarity: materialFound.rarity
         })
       }
     }
@@ -176,19 +261,42 @@ export function MinecraftLandscapeBuilder() {
       setTotalGaiaEarned(prev => prev + totalReward)
       setDiscoveredMaterials(prev => [...prev, ...drillResults])
 
-      // Mark the drilling site
+      // Mark the drilling site and add mining infrastructure
       setLandscapeGrid(prev => {
         const newGrid = [...prev]
         newGrid[row][col] = 'drilling_site'
+        
+        // Add mining platform nearby for ultimate tier machines
+        if (machine.tier === 'ultimate' && Math.random() < 0.3) {
+          const adjacentCells = [
+            [row-1, col], [row+1, col], [row, col-1], [row, col+1]
+          ]
+          const validCell = adjacentCells.find(([r, c]) => 
+            r >= 0 && r < 12 && c >= 0 && c < 16 && newGrid[r][c] === 'deep_water'
+          )
+          if (validCell) {
+            newGrid[validCell[0]][validCell[1]] = 'mining_platform'
+          }
+        }
+        
         return newGrid
       })
 
-      toast.success(`⛏️ Drilling Success!`, {
+      const rareMaterials = drillResults.filter(r => ['Legendary', 'Mythical'].includes(r.rarity))
+      
+      toast.success(`⛏️ ${machine.name} - Drilling Success!`, {
         description: `Found: ${drillResults.map(r => `${r.quantity}x ${r.material}`).join(', ')} | Earned: ${totalReward.toFixed(2)} GAIA`,
-        duration: 5000
+        duration: rareMaterials.length > 0 ? 10000 : 5000
       })
+
+      if (rareMaterials.length > 0) {
+        toast.success(`🌟 RARE DISCOVERY!`, {
+          description: `${machine.name} discovered ${rareMaterials.map(r => r.material).join(', ')}! Legendary find!`,
+          duration: 8000
+        })
+      }
     } else {
-      toast.error('💔 No materials found. Try a more powerful drill!')
+      toast.warning(`💔 ${machine.name} found no materials this time. Try upgrading your equipment!`)
     }
   }
 
@@ -196,12 +304,20 @@ export function MinecraftLandscapeBuilder() {
     const machine = heavyMachines.find(m => m.id === machineId)
     if (!machine) return
 
+    if (ownedMachines.has(machineId)) {
+      setSelectedMachine(machineId)
+      toast.info(`🚛 ${machine.name} selected for drilling operations!`)
+      return
+    }
+
     if (totalGaiaEarned >= machine.cost) {
       setTotalGaiaEarned(prev => prev - machine.cost)
+      setOwnedMachines(prev => new Set([...prev, machineId]))
       setSelectedMachine(machineId)
-      toast.success(`🚛 Purchased ${machine.name}!`, {
-        description: `Drilling power: ${machine.power}x | Cost: ${machine.cost} GAIA`,
-        duration: 4000
+      
+      toast.success(`🚛 ${machine.name} Purchased!`, {
+        description: `Power: ${machine.power}x | Efficiency: ${machine.efficiency}% | Special: ${machine.specialAbility}`,
+        duration: 6000
       })
     } else {
       toast.error(`❌ Not enough GAIA! Need ${machine.cost}, have ${totalGaiaEarned.toFixed(2)}`)
@@ -212,15 +328,15 @@ export function MinecraftLandscapeBuilder() {
     const newLandscape = {
       id: savedLandscapes.length + 1,
       name: `${landscapeType} ${selectedAgeGroup.charAt(0).toUpperCase() + selectedAgeGroup.slice(1)} Landscape ${savedLandscapes.length + 1}`,
-      biome: landscapeType === 'underwater' ? 'Underwater' : 'Mixed',
+      biome: landscapeType === 'underwater' ? 'Underwater Mining Zone' : 'Mixed',
       animals: Math.floor(Math.random() * 50) + 10,
       rating: 4.5 + Math.random() * 0.4,
       ageGroup: selectedAgeGroup
     }
     setSavedLandscapes(prev => [...prev, newLandscape])
     
-    toast.success('🏗️ Landscape Saved!', {
-      description: `Your ${landscapeType} ${selectedAgeGroup} landscape has been saved!`,
+    toast.success('🏗️ Advanced Landscape Saved!', {
+      description: `Your ${landscapeType} ${selectedAgeGroup} mining landscape has been saved with all drilling operations!`,
       duration: 4000
     })
   }
@@ -231,11 +347,12 @@ export function MinecraftLandscapeBuilder() {
       Array(16).fill(null).map(() => {
         const random = Math.random()
         if (landscapeType === 'underwater') {
-          if (random < 0.4) return 'deep_water'
-          if (random < 0.6) return 'coral'
-          if (random < 0.8) return 'seaweed'
-          if (random < 0.9) return 'sand'
-          return 'rock'
+          if (random < 0.3) return 'deep_water'
+          if (random < 0.5) return 'coral'
+          if (random < 0.7) return 'seaweed'
+          if (random < 0.85) return 'sand'
+          if (random < 0.95) return 'rock'
+          return 'drilling_site'
         } else {
           return availableBlocks[Math.floor(Math.random() * availableBlocks.length)]
         }
@@ -243,8 +360,8 @@ export function MinecraftLandscapeBuilder() {
     )
     setLandscapeGrid(newGrid)
     
-    toast.success(`🎲 ${landscapeType} Landscape Generated!`, {
-      description: `A beautiful ${landscapeType} ${selectedAgeGroup} landscape has been created!`,
+    toast.success(`🎲 Advanced ${landscapeType} Landscape Generated!`, {
+      description: `A beautiful ${landscapeType} ${selectedAgeGroup} landscape with mining opportunities has been created!`,
       duration: 4000
     })
   }
@@ -262,7 +379,7 @@ export function MinecraftLandscapeBuilder() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-yellow-400 text-center justify-center">
           <Box className="h-6 w-6" />
-          🏗️ LANDSCAPE BUILDER - {selectedAgeGroup.toUpperCase()}
+          🏗️ ADVANCED LANDSCAPE BUILDER - {selectedAgeGroup.toUpperCase()}
         </CardTitle>
         <div className="text-center space-y-2">
           <Button 
@@ -282,7 +399,7 @@ export function MinecraftLandscapeBuilder() {
               onClick={() => setLandscapeType('underwater')}
               className={`${landscapeType === 'underwater' ? 'bg-blue-600' : 'bg-gray-600'} hover:bg-blue-700 text-sm`}
             >
-              🌊 Underwater
+              🌊 Underwater Mining
             </Button>
           </div>
         </div>
@@ -295,31 +412,63 @@ export function MinecraftLandscapeBuilder() {
             <Coins className="h-6 w-6" />
             {totalGaiaEarned.toFixed(2)} GAIA Tokens
           </div>
-          <p className="text-sm text-muted-foreground">Earned from drilling operations</p>
+          <p className="text-sm text-muted-foreground">Earned from advanced drilling operations</p>
+          <div className="mt-2">
+            <Badge className="bg-blue-600 text-white mr-2">
+              <Wrench className="h-3 w-3 mr-1" />
+              Machines Owned: {ownedMachines.size}
+            </Badge>
+            <Badge className="bg-purple-600 text-white">
+              <Target className="h-3 w-3 mr-1" />
+              Daily Updates: {dailyUpdatesEnabled ? 'ON' : 'OFF'}
+            </Badge>
+          </div>
         </div>
 
-        {/* Heavy Machines Shop */}
+        {/* Enhanced Heavy Machines Shop */}
         {landscapeType === 'underwater' && (
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-blue-400 text-center">🚛 Heavy Drilling Machines</h3>
+            <h3 className="text-xl font-bold text-blue-400 text-center">🚛 Advanced Drilling Machines & Equipment</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {heavyMachines.map((machine) => (
-                <Card key={machine.id} className={`${selectedMachine === machine.id ? 'border-green-500 bg-green-900/20' : 'border-gray-600'} cursor-pointer`}>
-                  <CardContent className="p-4 text-center">
-                    <div className="text-3xl mb-2">{machine.emoji}</div>
-                    <h4 className="font-bold text-sm">{machine.name}</h4>
-                    <div className="text-xs text-muted-foreground">Power: {machine.power}x</div>
-                    <div className="text-xs text-yellow-400">Cost: {machine.cost} GAIA</div>
-                    <Button
-                      onClick={() => purchaseMachine(machine.id)}
-                      className="w-full mt-2 text-xs"
-                      disabled={totalGaiaEarned < machine.cost}
-                    >
-                      {selectedMachine === machine.id ? 'Owned' : 'Buy'}
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+              {heavyMachines.map((machine) => {
+                const isOwned = ownedMachines.has(machine.id)
+                const isSelected = selectedMachine === machine.id
+                
+                return (
+                  <Card key={machine.id} className={`${
+                    isSelected ? 'border-green-500 bg-green-900/20' : 
+                    isOwned ? 'border-blue-500 bg-blue-900/20' : 
+                    'border-gray-600'
+                  } cursor-pointer transition-all duration-200 hover:scale-105`}>
+                    <CardContent className="p-4 text-center">
+                      <div className="text-3xl mb-2">{machine.emoji}</div>
+                      <h4 className="font-bold text-sm">{machine.name}</h4>
+                      <div className="text-xs space-y-1">
+                        <div className="text-muted-foreground">Power: {machine.power}x</div>
+                        <div className="text-muted-foreground">Efficiency: {machine.efficiency}%</div>
+                        <div className="text-yellow-400">Cost: {machine.cost} GAIA</div>
+                        <Badge className={`text-xs ${
+                          machine.tier === 'ultimate' ? 'bg-purple-600' :
+                          machine.tier === 'quantum' ? 'bg-blue-600' :
+                          machine.tier === 'advanced' ? 'bg-orange-600' : 'bg-gray-600'
+                        } text-white`}>
+                          {machine.tier.toUpperCase()}
+                        </Badge>
+                      </div>
+                      <div className="text-xs text-green-400 mt-1 min-h-8">
+                        {machine.specialAbility}
+                      </div>
+                      <Button
+                        onClick={() => purchaseMachine(machine.id)}
+                        className="w-full mt-2 text-xs"
+                        disabled={!isOwned && totalGaiaEarned < machine.cost}
+                      >
+                        {isOwned ? (isSelected ? 'Selected' : 'Select') : 'Buy'}
+                      </Button>
+                    </CardContent>
+                  </Card>
+                )
+              })}
             </div>
           </div>
         )}
@@ -344,10 +493,10 @@ export function MinecraftLandscapeBuilder() {
             <Button
               onClick={() => setSelectedTool('drill')}
               className={`${selectedTool === 'drill' ? 'bg-orange-600' : 'bg-gray-600'} hover:bg-orange-700`}
-              disabled={!selectedMachine}
+              disabled={!selectedMachine || !ownedMachines.has(selectedMachine)}
             >
               <Drill className="h-4 w-4 mr-2" />
-              Drill Mode
+              Advanced Drill Mode
             </Button>
           )}
           <Button
@@ -403,10 +552,10 @@ export function MinecraftLandscapeBuilder() {
           </div>
         </div>
 
-        {/* Discovered Materials */}
+        {/* Enhanced Discovered Materials */}
         {discoveredMaterials.length > 0 && (
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-yellow-400 text-center">⛏️ Discovered Materials</h3>
+            <h3 className="text-xl font-bold text-yellow-400 text-center">⛏️ Discovered Materials & Resources</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {groundMaterials.map((material) => {
                 const discovered = discoveredMaterials.filter(d => d.material === material.name)
@@ -422,7 +571,13 @@ export function MinecraftLandscapeBuilder() {
                       <h4 className="font-bold text-sm">{material.name}</h4>
                       <div className="text-xs text-muted-foreground">Qty: {totalQuantity}</div>
                       <div className="text-xs text-green-400">Value: {totalValue.toFixed(2)} GAIA</div>
-                      <Badge className={`mt-1 text-xs ${material.rarity === 'Legendary' ? 'bg-yellow-600' : material.rarity === 'Epic' ? 'bg-purple-600' : 'bg-blue-600'}`}>
+                      <div className="text-xs text-blue-400">Depth: {material.depth}</div>
+                      <Badge className={`mt-1 text-xs ${
+                        material.rarity === 'Mythical' ? 'bg-purple-600' :
+                        material.rarity === 'Legendary' ? 'bg-yellow-600' : 
+                        material.rarity === 'Epic' ? 'bg-orange-600' : 
+                        material.rarity === 'Rare' ? 'bg-blue-600' : 'bg-gray-600'
+                      }`}>
                         {material.rarity}
                       </Badge>
                     </CardContent>
@@ -433,41 +588,41 @@ export function MinecraftLandscapeBuilder() {
           </div>
         )}
 
-        {/* Statistics */}
+        {/* Enhanced Statistics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="p-4 bg-green-900/30 rounded border border-green-500/20 text-center">
             <TreePine className="h-6 w-6 text-green-400 mx-auto mb-2" />
             <div className="text-lg font-bold text-green-400">
-              {landscapeGrid.flat().filter(block => block === 'tree' || block === 'seaweed').length}
+              {landscapeGrid.flat().filter(block => ['tree', 'seaweed', 'coral'].includes(block)).length}
             </div>
-            <div className="text-xs text-muted-foreground">Plants</div>
+            <div className="text-xs text-muted-foreground">Nature Elements</div>
           </div>
           <div className="p-4 bg-blue-900/30 rounded border border-blue-500/20 text-center">
             <Waves className="h-6 w-6 text-blue-400 mx-auto mb-2" />
             <div className="text-lg font-bold text-blue-400">
-              {landscapeGrid.flat().filter(block => block === 'water' || block === 'deep_water').length}
+              {landscapeGrid.flat().filter(block => ['water', 'deep_water'].includes(block)).length}
             </div>
             <div className="text-xs text-muted-foreground">Water Sources</div>
           </div>
           <div className="p-4 bg-yellow-900/30 rounded border border-yellow-500/20 text-center">
-            <Home className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
+            <Factory className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
             <div className="text-lg font-bold text-yellow-400">
-              {landscapeGrid.flat().filter(block => ['house', 'playground', 'castle', 'university'].includes(block)).length}
+              {landscapeGrid.flat().filter(block => ['house', 'playground', 'factory', 'mining_platform'].includes(block)).length}
             </div>
             <div className="text-xs text-muted-foreground">Structures</div>
           </div>
           <div className="p-4 bg-orange-900/30 rounded border border-orange-500/20 text-center">
             <Drill className="h-6 w-6 text-orange-400 mx-auto mb-2" />
             <div className="text-lg font-bold text-orange-400">
-              {landscapeGrid.flat().filter(block => block === 'drilling_site').length}
+              {landscapeGrid.flat().filter(block => ['drilling_site', 'treasure_chest'].includes(block)).length}
             </div>
-            <div className="text-xs text-muted-foreground">Drilling Sites</div>
+            <div className="text-xs text-muted-foreground">Mining Operations</div>
           </div>
         </div>
 
         {/* Age-Filtered Landscapes Gallery */}
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-yellow-400 text-center">🏞️ {selectedAgeGroup.toUpperCase()} Landscapes</h3>
+          <h3 className="text-xl font-bold text-yellow-400 text-center">🏞️ {selectedAgeGroup.toUpperCase()} Advanced Landscapes</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {savedLandscapes
               .filter(landscape => landscape.ageGroup === selectedAgeGroup)
@@ -479,7 +634,7 @@ export function MinecraftLandscapeBuilder() {
                 </div>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span>Animals Living:</span>
+                    <span>Wildlife:</span>
                     <span className="text-green-400">{landscape.animals}</span>
                   </div>
                   <div className="flex justify-between">
@@ -499,6 +654,26 @@ export function MinecraftLandscapeBuilder() {
             ))}
           </div>
         </div>
+
+        {/* Daily Update Status */}
+        <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
+          <CardContent className="pt-6">
+            <div className="text-center space-y-3">
+              <h3 className="text-lg font-bold text-purple-400">📅 Daily Mining Updates Active</h3>
+              <p className="text-sm text-muted-foreground">
+                Your underwater mining landscape receives daily updates with new equipment, 
+                improved material discovery rates, and enhanced drilling technologies. 
+                The system continuously evolves to provide the best mining experience!
+              </p>
+              <div className="flex justify-center gap-2">
+                <Badge className="bg-green-600 text-white">🔄 Auto-Updates</Badge>
+                <Badge className="bg-blue-600 text-white">🚛 New Equipment</Badge>
+                <Badge className="bg-yellow-600 text-white">💎 Better Rewards</Badge>
+                <Badge className="bg-purple-600 text-white">🌟 Enhanced Experience</Badge>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </CardContent>
     </Card>
   )
