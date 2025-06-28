@@ -207,7 +207,7 @@ export function GitHubIntegration() {
                   <div className="font-semibold flex items-center gap-2">
                     {githubStatus.organization}/{githubStatus.repository}
                     {githubStatus.isPrivate && (
-                      <Lock className="h-4 w-4 text-green-400" title="Private Repository" />
+                      <Lock className="h-4 w-4 text-green-400" />
                     )}
                   </div>
                   <div className="text-sm text-muted-foreground">
