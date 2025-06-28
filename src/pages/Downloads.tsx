@@ -32,15 +32,15 @@ const Downloads = () => {
     const baseUrl = 'https://github.com/harmonyofgaia/gaia-exchange/releases/latest/download/'
     
     const downloadLinks: { [key: string]: string } = {
-      'windows-32': `${baseUrl}gaias-exchange-windows-x86.exe`,
-      'windows-64': `${baseUrl}gaias-exchange-windows-x64.exe`,
-      'macos': `${baseUrl}gaias-exchange-macos-universal.dmg`,
-      'linux-deb': `${baseUrl}gaias-exchange-linux-amd64.deb`,
-      'linux-rpm': `${baseUrl}gaias-exchange-linux-x86_64.rpm`,
-      'linux-appimage': `${baseUrl}gaias-exchange-linux-x86_64.AppImage`,
-      'android': `${baseUrl}gaias-exchange-android.apk`,
-      'ios': 'https://apps.apple.com/app/gaias-exchange/id1234567890',
-      'blackberry': `${baseUrl}gaias-exchange-blackberry.bar`
+      'windows-32': `${baseUrl}gaia-exchange-windows-x86.exe`,
+      'windows-64': `${baseUrl}gaia-exchange-windows-x64.exe`,
+      'macos': `${baseUrl}gaia-exchange-macos-universal.dmg`,
+      'linux-deb': `${baseUrl}gaia-exchange-linux-amd64.deb`,
+      'linux-rpm': `${baseUrl}gaia-exchange-linux-x86_64.rpm`,
+      'linux-appimage': `${baseUrl}gaia-exchange-linux-x86_64.AppImage`,
+      'android': `${baseUrl}gaia-exchange-android.apk`,
+      'ios': 'https://apps.apple.com/app/gaia-exchange/id1234567890',
+      'blackberry': `${baseUrl}gaia-exchange-blackberry.bar`
     }
 
     const key = architecture ? `${platform}-${architecture}` : platform
@@ -53,11 +53,17 @@ const Downloads = () => {
         [platform]: prev[platform as keyof typeof prev] + 1
       }))
       
-      // Open download link
-      window.open(url, '_blank')
+      // Create a temporary link element to trigger download
+      const link = document.createElement('a')
+      link.href = url
+      link.download = ''
+      link.target = '_blank'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
       
       // Show success toast
-      toast.success(`Downloading Gaia's Exchange`, {
+      toast.success(`Downloading Gaia Exchange`, {
         description: `🚀 ${platform.charAt(0).toUpperCase() + platform.slice(1)} ${architecture || ''} version - Most secure trading platform`,
         duration: 4000
       })
@@ -139,7 +145,7 @@ const Downloads = () => {
           <GaiaLogo size="xl" variant="white-fade" />
           <div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Gaia's Exchange Downloads
+              Gaia Exchange Downloads
             </h1>
             <p className="text-xl text-muted-foreground mt-2">
               The World's Most Secure Cryptocurrency Exchange Platform
@@ -317,7 +323,7 @@ const Downloads = () => {
           <div className="text-center space-y-2">
             <h3 className="text-lg font-semibold text-red-400">🚨 Security Notice</h3>
             <p className="text-sm text-muted-foreground">
-              Always download Gaia's Exchange from official sources only. Verify file signatures and checksums.
+              Always download Gaia Exchange from official sources only. Verify file signatures and checksums.
             </p>
             <p className="text-xs text-red-300">
               Never download from third-party websites to ensure maximum security and authenticity.
