@@ -21,6 +21,17 @@ interface InvestorLead {
   status: 'identified' | 'contacted' | 'engaged' | 'converted'
 }
 
+// Type declaration for Solana wallet
+declare global {
+  interface Window {
+    solana?: {
+      connect: (...args: any[]) => Promise<any>
+      signTransaction: (...args: any[]) => Promise<any>
+      isPhantom?: boolean
+    }
+  }
+}
+
 export function SecurityOrchestrator() {
   const [securityLayers, setSecurityLayers] = useState<SecurityLayer[]>([
     { id: 'quantum-wall', name: 'Quantum Defense Wall', status: 'active', lastCheck: new Date(), threatLevel: 0 },
@@ -45,31 +56,36 @@ export function SecurityOrchestrator() {
       try {
         // 1. PHANTOM WALLET PROTECTION SYSTEM
         const protectPhantomWallet = () => {
-          // Advanced Phantom wallet protection
+          // Advanced Phantom wallet protection with proper type checking
           if (typeof window !== 'undefined' && window.solana) {
-            const originalConnect = window.solana.connect
-            const originalSignTransaction = window.solana.signTransaction
+            const solanaWallet = window.solana
+            const originalConnect = solanaWallet.connect
+            const originalSignTransaction = solanaWallet.signTransaction
             
-            window.solana.connect = async (...args: any[]) => {
-              console.log('🔐 PHANTOM PROTECTION: Connection attempt detected and secured')
-              // Log security event
-              await supabase.from('security_events').insert({
-                event_type: 'PHANTOM_WALLET_ACCESS',
-                event_description: 'Phantom wallet connection secured with quantum protection',
-                severity: 'medium',
-                ip_address: await getClientIP(),
-                user_agent: navigator.userAgent,
-                resolved: true
-              })
-              return originalConnect.apply(this, args)
+            if (originalConnect) {
+              solanaWallet.connect = async (...args: any[]) => {
+                console.log('🔐 PHANTOM PROTECTION: Connection attempt detected and secured')
+                // Log security event
+                await supabase.from('security_events').insert({
+                  event_type: 'PHANTOM_WALLET_ACCESS',
+                  event_description: 'Phantom wallet connection secured with quantum protection',
+                  severity: 'medium',
+                  ip_address: await getClientIP(),
+                  user_agent: navigator.userAgent,
+                  resolved: true
+                })
+                return originalConnect.apply(this, args)
+              }
             }
             
-            window.solana.signTransaction = async (...args: any[]) => {
-              console.log('🛡️ PHANTOM SHIELD: Transaction signing secured')
-              toast.success('Phantom Wallet Protected', {
-                description: '🔐 Transaction secured with quantum encryption'
-              })
-              return originalSignTransaction.apply(this, args)
+            if (originalSignTransaction) {
+              solanaWallet.signTransaction = async (...args: any[]) => {
+                console.log('🛡️ PHANTOM SHIELD: Transaction signing secured')
+                toast.success('Phantom Wallet Protected', {
+                  description: '🔐 Transaction secured with quantum encryption'
+                })
+                return originalSignTransaction.apply(this, args)
+              }
             }
           }
         }
