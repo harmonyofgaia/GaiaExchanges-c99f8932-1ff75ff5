@@ -1,18 +1,105 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Download, Monitor, Apple, Smartphone, Terminal } from 'lucide-react'
+import { Download, Monitor, Apple, Smartphone, Terminal, Star } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { toast } from 'sonner'
 
 const Downloads = () => {
+  const handleDownload = (platform: string, url: string) => {
+    console.log(`🔗 Initiating download for ${platform}`)
+    
+    // Create download link
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `gaias-exchange-${platform.toLowerCase()}.${platform === 'Android' ? 'apk' : platform === 'macOS' ? 'dmg' : platform === 'Linux' ? 'deb' : 'exe'}`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    
+    toast.success(`Download started for ${platform}`, {
+      description: `Gaia's Exchange ${platform} version is downloading...`
+    })
+    
+    console.log(`✅ Download initiated successfully for ${platform}`)
+  }
+
+  const downloadLinks = {
+    windows: 'https://github.com/harmonyofgaia/releases/download/v2.0.1/gaias-exchange-windows.exe',
+    macos: 'https://github.com/harmonyofgaia/releases/download/v2.0.1/gaias-exchange-macos.dmg',
+    android: 'https://github.com/harmonyofgaia/releases/download/v2.0.1/gaias-exchange-android.apk',
+    linux: 'https://github.com/harmonyofgaia/releases/download/v2.0.1/gaias-exchange-linux.deb',
+    blackberry: 'https://github.com/harmonyofgaia/releases/download/v1.0.0/gaias-exchange-blackberry.cod'
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Downloads</h1>
-          <p className="text-muted-foreground">Download Gaia's Exchanges for all platforms</p>
+          <p className="text-muted-foreground">Download Gaia's Exchange for all platforms</p>
         </div>
       </div>
+
+      {/* Featured Gaia's Exchange App */}
+      <Card className="border-yellow-500/30 bg-gradient-to-br from-yellow-900/30 to-orange-900/30">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-yellow-400">
+            <Star className="h-6 w-6" />
+            Gaia's Exchange - Official App
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="text-center space-y-2">
+            <div className="text-5xl">🌍</div>
+            <div className="space-y-1">
+              <div className="font-bold text-lg">Harmony of Gaia Exchange</div>
+              <div className="text-sm text-muted-foreground">
+                The official trading platform for our community
+              </div>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <Button 
+              onClick={() => handleDownload('Windows', downloadLinks.windows)}
+              className="bg-blue-600 hover:bg-blue-700"
+              size="sm"
+            >
+              <Monitor className="h-4 w-4 mr-1" />
+              Windows
+            </Button>
+            <Button 
+              onClick={() => handleDownload('macOS', downloadLinks.macos)}
+              className="bg-gray-600 hover:bg-gray-700"
+              size="sm"
+            >
+              <Apple className="h-4 w-4 mr-1" />
+              macOS
+            </Button>
+            <Button 
+              onClick={() => handleDownload('Android', downloadLinks.android)}
+              className="bg-green-600 hover:bg-green-700"
+              size="sm"
+            >
+              <Smartphone className="h-4 w-4 mr-1" />
+              Android
+            </Button>
+            <Button 
+              onClick={() => handleDownload('Linux', downloadLinks.linux)}
+              className="bg-orange-600 hover:bg-orange-700"
+              size="sm"
+            >
+              <Terminal className="h-4 w-4 mr-1" />
+              Linux
+            </Button>
+          </div>
+          
+          <div className="text-center text-yellow-400 text-sm font-medium">
+            ⭐ Our flagship application - Available for all major platforms
+          </div>
+        </CardContent>
+      </Card>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Windows Download */}
@@ -49,7 +136,10 @@ const Downloads = () => {
               </div>
             </div>
             
-            <Button className="w-full bg-blue-600 hover:bg-blue-700">
+            <Button 
+              onClick={() => handleDownload('Windows', downloadLinks.windows)}
+              className="w-full bg-blue-600 hover:bg-blue-700"
+            >
               <Download className="h-4 w-4 mr-2" />
               Download for Windows
             </Button>
@@ -94,7 +184,10 @@ const Downloads = () => {
               </div>
             </div>
             
-            <Button className="w-full bg-gray-600 hover:bg-gray-700">
+            <Button 
+              onClick={() => handleDownload('macOS', downloadLinks.macos)}
+              className="w-full bg-gray-600 hover:bg-gray-700"
+            >
               <Download className="h-4 w-4 mr-2" />
               Download for macOS
             </Button>
@@ -139,7 +232,10 @@ const Downloads = () => {
               </div>
             </div>
             
-            <Button className="w-full bg-green-600 hover:bg-green-700">
+            <Button 
+              onClick={() => handleDownload('Android', downloadLinks.android)}
+              className="w-full bg-green-600 hover:bg-green-700"
+            >
               <Download className="h-4 w-4 mr-2" />
               Download for Android
             </Button>
@@ -184,7 +280,10 @@ const Downloads = () => {
               </div>
             </div>
             
-            <Button className="w-full bg-orange-600 hover:bg-orange-700">
+            <Button 
+              onClick={() => handleDownload('Linux', downloadLinks.linux)}
+              className="w-full bg-orange-600 hover:bg-orange-700"
+            >
               <Download className="h-4 w-4 mr-2" />
               Download for Linux
             </Button>
@@ -229,7 +328,10 @@ const Downloads = () => {
               </div>
             </div>
             
-            <Button className="w-full bg-purple-600 hover:bg-purple-700">
+            <Button 
+              onClick={() => handleDownload('BlackBerry', downloadLinks.blackberry)}
+              className="w-full bg-purple-600 hover:bg-purple-700"
+            >
               <Download className="h-4 w-4 mr-2" />
               Download for BlackBerry
             </Button>
@@ -240,6 +342,47 @@ const Downloads = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Download Instructions */}
+      <Card className="border-blue-500/20 bg-gradient-to-r from-blue-900/10 to-green-900/10">
+        <CardContent className="pt-6">
+          <h3 className="text-lg font-semibold mb-3 text-blue-400">📋 Installation Instructions</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <h4 className="font-medium text-green-400 mb-2">🪟 Windows</h4>
+              <ul className="space-y-1 text-muted-foreground">
+                <li>• Run the .exe file as administrator</li>
+                <li>• Follow the installation wizard</li>
+                <li>• Allow firewall permissions</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium text-green-400 mb-2">🍎 macOS</h4>
+              <ul className="space-y-1 text-muted-foreground">
+                <li>• Open the .dmg file</li>
+                <li>• Drag to Applications folder</li>
+                <li>• Right-click and select "Open"</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium text-green-400 mb-2">🤖 Android</h4>
+              <ul className="space-y-1 text-muted-foreground">
+                <li>• Enable "Unknown sources" in settings</li>
+                <li>• Install the .apk file</li>
+                <li>• Grant necessary permissions</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium text-green-400 mb-2">🐧 Linux</h4>
+              <ul className="space-y-1 text-muted-foreground">
+                <li>• For .deb: sudo dpkg -i filename.deb</li>
+                <li>• For .rpm: sudo rpm -i filename.rpm</li>
+                <li>• Run from applications menu</li>
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
