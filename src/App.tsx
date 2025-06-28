@@ -33,12 +33,12 @@ const App = () => (
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-4">
                     <span className="text-sm text-muted-foreground">
-                      Simple Trading • Environmental Impact • Transparent Operations
+                      Gaia's Exchanges • World's Most Secure Crypto Trading Platform
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <div className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-medium">
-                      Trading Active
+                      World Leader Status
                     </div>
                   </div>
                 </div>
@@ -50,6 +50,7 @@ const App = () => (
                   <Route path="/wallet" element={<Wallet />} />
                   <Route path="/transparency" element={<Transparency />} />
                   <Route path="/markets" element={<Markets />} />
+                  <Route path="/marketing" element={<Marketing />} />
                   <Route path="/admin" element={<Admin />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
