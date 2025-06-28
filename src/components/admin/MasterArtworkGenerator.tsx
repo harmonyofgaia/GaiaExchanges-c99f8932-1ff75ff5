@@ -129,6 +129,36 @@ export function MasterArtworkGenerator() {
         
         setArtworks(prev => [newArtwork, ...prev])
         setTotalGenerated(prev => prev + 1)
+
+        // Save to cloud storage and send email
+        try {
+          const cloudResponse = await fetch('/functions/v1/save-artwork-to-cloud', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              artworkId: newArtwork.id,
+              imageData: result.image,
+              artworkType: selectedStyle,
+              prompt: randomPrompt
+            })
+          })
+
+          const cloudResult = await cloudResponse.json()
+          
+          if (cloudResult.success) {
+            toast.success('🎨 Artwork Saved to Cloud!', {
+              description: `Generated and sent to info@cultureofharmony.net with download link`,
+              duration: 6000
+            })
+          }
+        } catch (cloudError) {
+          console.error('Cloud save error:', cloudError)
+          toast.warning('⚠️ Artwork generated but cloud save failed', {
+            description: 'Check your connection and try again'
+          })
+        }
         
         toast.success('🎨 New Masterpiece Created!', {
           description: `Abstract artwork generated with ${selectedStyle} style`,
