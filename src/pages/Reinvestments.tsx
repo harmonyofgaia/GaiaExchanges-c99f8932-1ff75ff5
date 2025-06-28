@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -22,17 +21,28 @@ import {
 const Reinvestments = () => {
   // Mock reinvestment data
   const reinvestmentData = {
-    totalReinvested: 847523.67,
+    totalReinvested: 947523.67, // Updated to include coral reef project
     totalTokensBurned: 1250000,
-    environmentalProjects: 12,
+    environmentalProjects: 13, // Increased by 1
     partnersOnboarded: 156,
     exchangesConnected: 8,
-    weeklyGrowth: 15.7
+    weeklyGrowth: 18.2 // Improved growth
   }
 
   const reinvestmentProjects = [
     {
       id: 1,
+      name: "Sound Riffs Re Grau dio - Coral Reef Restoration",
+      allocation: 100000,
+      progress: 12,
+      status: "Active",
+      impact: "Audio signals helping 3 reef sites",
+      description: "Restoring coral reefs with balanced underwater audio signals to attract marine life and recover ecosystems",
+      burnContribution: 5, // 5% of all burns go here
+      category: "Marine Conservation"
+    },
+    {
+      id: 2,
       name: "Ocean Cleanup Initiative",
       allocation: 125000,
       progress: 78,
@@ -40,7 +50,7 @@ const Reinvestments = () => {
       impact: "2.3M plastic bottles removed"
     },
     {
-      id: 2,
+      id: 3,
       name: "Solar Energy Expansion",
       allocation: 200000,
       progress: 92,
@@ -48,7 +58,7 @@ const Reinvestments = () => {
       impact: "500 solar panels installed"
     },
     {
-      id: 3,
+      id: 4,
       name: "Forest Restoration",
       allocation: 85000,
       progress: 45,
@@ -56,7 +66,7 @@ const Reinvestments = () => {
       impact: "15,000 trees planted"
     },
     {
-      id: 4,
+      id: 5,
       name: "Clean Water Access",
       allocation: 150000,
       progress: 63,
@@ -93,6 +103,67 @@ const Reinvestments = () => {
           Live Data • Updates Every 5s
         </Badge>
       </div>
+
+      {/* Featured Coral Reef Project */}
+      <Card className="border-2 border-cyan-500/50 bg-gradient-to-br from-cyan-900/30 to-blue-900/30">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-cyan-400">
+            <div className="text-4xl">🪸</div>
+            🌊 FEATURED: Sound Riffs Re Grau dio - Coral Reef Restoration
+            <Badge className="bg-cyan-600 text-white animate-pulse">NEW PROJECT</Badge>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="text-center">
+            <div className="text-6xl animate-bounce mb-4">🐠🪸🎵</div>
+            <p className="text-lg text-cyan-300 mb-4">
+              Revolutionary underwater audio technology helping coral reefs recover and attract marine life back to damaged ecosystems
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-cyan-400">{formatMoney(100000)}</div>
+              <div className="text-sm text-muted-foreground">Allocated Funding</div>
+            </div>
+            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-blue-400">5%</div>
+              <div className="text-sm text-muted-foreground">Of All Token Burns</div>
+            </div>
+            <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-green-400">3</div>
+              <div className="text-sm text-muted-foreground">Active Reef Sites</div>
+            </div>
+            <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-purple-400">12%</div>
+              <div className="text-sm text-muted-foreground">Progress Complete</div>
+            </div>
+          </div>
+          
+          <div className="bg-muted/30 p-4 rounded-lg">
+            <h4 className="font-bold text-cyan-400 mb-2">🎵 How Sound Riffs Re Grau dio Works:</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div className="space-y-1">
+                <div>🔊 Balanced underwater audio signals</div>
+                <div>🐟 Attracts fish and marine life</div>
+                <div>🪸 Stimulates coral growth</div>
+              </div>
+              <div className="space-y-1">
+                <div>🌊 Restores natural ecosystem balance</div>
+                <div>🔬 Scientifically proven methods</div>
+                <div>📈 Measurable recovery results</div>
+              </div>
+            </div>
+          </div>
+          
+          <Progress value={12} className="h-3 bg-cyan-900/30" />
+          <div className="text-center">
+            <p className="text-sm text-cyan-400">
+              🚀 Every GAiA token burn contributes 5% directly to coral reef restoration!
+            </p>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -222,26 +293,37 @@ const Reinvestments = () => {
         <CardContent>
           <div className="space-y-4">
             {reinvestmentProjects.map((project) => (
-              <Card key={project.id} className="bg-muted/20 border-border/30">
+              <Card key={project.id} className={`${project.id === 1 ? 'bg-cyan-900/20 border-cyan-500/30' : 'bg-muted/20 border-border/30'}`}>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-semibold">{project.name}</h3>
-                    <Badge 
-                      className={
-                        project.status === 'Completed' 
-                          ? 'bg-green-600' 
-                          : project.status === 'Active'
-                          ? 'bg-blue-600'
-                          : 'bg-yellow-600'
-                      }
-                    >
-                      {project.status}
-                    </Badge>
+                    <h3 className={`font-semibold ${project.id === 1 ? 'text-cyan-400' : ''}`}>
+                      {project.id === 1 && '🪸 '}{project.name}
+                    </h3>
+                    <div className="flex items-center gap-2">
+                      <Badge 
+                        className={
+                          project.status === 'Completed' 
+                            ? 'bg-green-600' 
+                            : project.status === 'Active'
+                            ? project.id === 1 ? 'bg-cyan-600' : 'bg-blue-600'
+                            : 'bg-yellow-600'
+                        }
+                      >
+                        {project.status}
+                      </Badge>
+                      {project.id === 1 && (
+                        <Badge className="bg-orange-600 text-white">
+                          5% Burn Share
+                        </Badge>
+                      )}
+                    </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
                     <div>
                       <div className="text-sm text-muted-foreground">Allocation</div>
-                      <div className="font-semibold text-green-400">{formatMoney(project.allocation)}</div>
+                      <div className={`font-semibold ${project.id === 1 ? 'text-cyan-400' : 'text-green-400'}`}>
+                        {formatMoney(project.allocation)}
+                      </div>
                     </div>
                     <div>
                       <div className="text-sm text-muted-foreground">Progress</div>
@@ -249,10 +331,19 @@ const Reinvestments = () => {
                     </div>
                     <div>
                       <div className="text-sm text-muted-foreground">Impact</div>
-                      <div className="font-semibold text-primary">{project.impact}</div>
+                      <div className={`font-semibold ${project.id === 1 ? 'text-cyan-400' : 'text-primary'}`}>
+                        {project.impact}
+                      </div>
                     </div>
                   </div>
                   <Progress value={project.progress} className="h-2" />
+                  {project.id === 1 && (
+                    <div className="mt-3 p-3 bg-cyan-500/10 rounded border border-cyan-500/20">
+                      <p className="text-sm text-cyan-300">
+                        🎵 This project receives 5% of all GAiA token burns automatically, helping restore marine ecosystems through innovative sound technology.
+                      </p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}

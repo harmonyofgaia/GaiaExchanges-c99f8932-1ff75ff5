@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -12,6 +11,7 @@ export function BurningSystem() {
   const [burnAmount, setBurnAmount] = useState('')
   const [totalBurned, setTotalBurned] = useState(1_250_000)
   const [burnRate, setBurnRate] = useState(25000)
+  const [coralReefFunding, setCoralReefFunding] = useState(62500) // 5% of total burned
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
 
@@ -21,9 +21,16 @@ export function BurningSystem() {
 
   const environmentalProjects = [
     {
+      name: 'Sound Riffs Re Grau dio - Coral Reef Restoration',
+      allocated: coralReefFunding,
+      status: 'Active',
+      impact: 'Audio signals helping 3 reef sites recover',
+      burnPercentage: 5
+    },
+    {
       name: 'Ocean Cleanup Initiative',
       allocated: 150000,
-      status: 'Active',
+      status: 'Active', 
       impact: 'Removed 45 tons of plastic'
     },
     {
@@ -60,12 +67,15 @@ export function BurningSystem() {
     
     setTimeout(() => {
       const amount = parseFloat(burnAmount)
+      const coralReefShare = amount * 0.05 // 5% goes to coral reef project
+      
       setTotalBurned(prev => prev + amount)
       setBurnRate(prev => prev + Math.floor(amount / 10))
+      setCoralReefFunding(prev => prev + coralReefShare)
       
       toast({
         title: "Tokens Burned Successfully",
-        description: `${amount.toLocaleString()} GAiA tokens have been permanently removed from circulation`,
+        description: `${amount.toLocaleString()} GAiA tokens burned. ${coralReefShare.toLocaleString()} GAiA (5%) allocated to coral reef restoration!`,
       })
       
       setBurnAmount('')
@@ -84,7 +94,7 @@ export function BurningSystem() {
   return (
     <div className="space-y-6">
       {/* Header Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
         <Card className="border-orange-500/20 bg-gradient-to-br from-orange-900/10 to-red-900/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Burned</CardTitle>
@@ -95,6 +105,19 @@ export function BurningSystem() {
               {totalBurned.toLocaleString()}
             </div>
             <p className="text-xs text-orange-400">GAiA tokens permanently removed</p>
+          </CardContent>
+        </Card>
+
+        <Card className="border-cyan-500/20 bg-gradient-to-br from-cyan-900/10 to-blue-900/10">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Coral Reef Funding</CardTitle>
+            <div className="text-lg">🪸</div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold mono-numbers text-cyan-400">
+              {coralReefFunding.toLocaleString()}
+            </div>
+            <p className="text-xs text-cyan-400">GAiA from 5% burn allocation</p>
           </CardContent>
         </Card>
 
@@ -144,6 +167,23 @@ export function BurningSystem() {
 
         <TabsContent value="burning">
           <div className="space-y-6">
+            {/* Coral Reef Burn Allocation Banner */}
+            <Card className="bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border-cyan-500/30">
+              <CardContent className="pt-6">
+                <div className="text-center space-y-3">
+                  <div className="text-4xl">🪸🎵🌊</div>
+                  <h3 className="text-xl font-bold text-cyan-400">Sound Riffs Re Grau dio</h3>
+                  <p className="text-cyan-300">
+                    5% of every token burn automatically funds coral reef restoration through underwater audio technology
+                  </p>
+                  <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-4 max-w-md mx-auto">
+                    <div className="text-2xl font-bold text-cyan-400">{coralReefFunding.toLocaleString()} GAiA</div>
+                    <div className="text-sm text-cyan-300">Total Coral Reef Funding</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             <Card className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border-orange-500/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-orange-400">
@@ -368,23 +408,41 @@ export function BurningSystem() {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {environmentalProjects.map((project, index) => (
-                    <div key={index} className="bg-muted/30 rounded-lg p-4 space-y-3">
+                    <div key={index} className={`${index === 0 ? 'bg-cyan-500/10 border-cyan-500/20' : 'bg-muted/30 border-border/30'} rounded-lg p-4 space-y-3 border`}>
                       <div className="flex items-center justify-between">
-                        <h4 className="font-medium">{project.name}</h4>
-                        <Badge variant={project.status === 'Active' ? 'default' : 'secondary'}>
-                          {project.status}
-                        </Badge>
+                        <h4 className={`font-medium ${index === 0 ? 'text-cyan-400' : ''}`}>
+                          {index === 0 && '🪸 '}{project.name}
+                        </h4>
+                        <div className="flex items-center gap-2">
+                          <Badge variant={project.status === 'Active' ? 'default' : 'secondary'}>
+                            {project.status}
+                          </Badge>
+                          {project.burnPercentage && (
+                            <Badge className="bg-orange-600 text-white">
+                              {project.burnPercentage}% Burn
+                            </Badge>
+                          )}
+                        </div>
                       </div>
                       <div className="space-y-1 text-sm">
                         <div className="flex justify-between">
                           <span className="text-muted-foreground">Allocated:</span>
-                          <span className="text-green-400">${project.allocated.toLocaleString()}</span>
+                          <span className={index === 0 ? 'text-cyan-400' : 'text-green-400'}>
+                            {project.allocated.toLocaleString()} GAiA
+                          </span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-muted-foreground">Impact:</span>
-                          <span className="text-blue-400">{project.impact}</span>
+                          <span className={index === 0 ? 'text-cyan-400' : 'text-blue-400'}>
+                            {project.impact}
+                          </span>
                         </div>
                       </div>
+                      {index === 0 && (
+                        <div className="text-xs text-cyan-300 bg-cyan-500/5 p-2 rounded">
+                          🎵 Automated funding from token burns helps restore marine ecosystems
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
