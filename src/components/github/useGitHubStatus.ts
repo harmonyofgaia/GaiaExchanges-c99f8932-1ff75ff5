@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { GitHubStatus } from './types'
 
@@ -9,12 +10,18 @@ export function useGitHubStatus() {
     hasReleases: true,
     lastRelease: 'v2.1.0',
     isPrivate: false,
+    websiteUrl: 'https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange',
     securityEnabled: true,
     branchProtection: true,
     secretsScanning: true,
     dependencyAlerts: true,
     codeScanning: true,
-    websiteUrl: 'https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange'
+    securityFeatures: {
+      secretsScanning: true,
+      dependencyScanning: true,
+      codeScanning: true,
+      branchProtection: true
+    }
   })
 
   useEffect(() => {
