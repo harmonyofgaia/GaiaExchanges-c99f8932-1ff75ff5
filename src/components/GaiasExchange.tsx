@@ -121,21 +121,55 @@ export function GaiasExchange() {
   }, [isSecurityScanActive])
 
   const handleDownloadApp = (platform: string) => {
+    const githubOrg = 'harmonyofgaia'
+    const repoName = 'gaia-exchanges'
+    const baseGithubUrl = `https://github.com/${githubOrg}/${repoName}`
+    
     const downloadLinks = {
-      windows: 'https://github.com/harmonyofgaia/gaia-exchanges/releases/latest/download/gaia-exchanges-windows-x64.exe',
-      macos: 'https://github.com/harmonyofgaia/gaia-exchanges/releases/latest/download/gaia-exchanges-macos-universal.dmg',
-      android: 'https://play.google.com/store/apps/details?id=com.harmonyofgaia.exchanges',
-      linux: 'https://github.com/harmonyofgaia/gaia-exchanges/releases/latest/download/gaia-exchanges-linux-amd64.deb',
-      ios: 'https://apps.apple.com/app/gaia-exchanges/id1234567890',
-      web: 'https://dapp.gaiaexchanges.com'
+      windows: `${baseGithubUrl}/releases/latest/download/gaia-exchanges-windows-x64.exe`,
+      macos: `${baseGithubUrl}/releases/latest/download/gaia-exchanges-macos-universal.dmg`,
+      android: `${baseGithubUrl}/releases/latest/download/gaia-exchanges-android.apk`,
+      linux: `${baseGithubUrl}/releases/latest/download/gaia-exchanges-linux-amd64.deb`,
+      ios: 'https://apps.apple.com/search?term=gaia+exchanges',
+      web: 'https://app.gaiaexchanges.com'
     }
 
     const url = downloadLinks[platform as keyof typeof downloadLinks]
     if (url) {
-      window.open(url, '_blank')
-      toast.success(`Opening Gaia's Exchanges for ${platform}`, {
-        description: '🚀 World\'s most secure crypto exchange platform'
-      })
+      console.log(`🚀 Opening Gaia's Exchanges for ${platform}: ${url}`)
+      
+      // For GitHub releases, check if available first
+      if (url.includes('github.com') && url.includes('releases')) {
+        fetch(`https://api.github.com/repos/${githubOrg}/${repoName}/releases/latest`)
+          .then(response => {
+            if (response.ok) {
+              window.open(url, '_blank', 'noopener,noreferrer')
+              toast.success(`Downloading Gaia's Exchanges for ${platform}`, {
+                description: '🎯 Culture of Harmony - World\'s most secure crypto exchange',
+                duration: 5000
+              })
+            } else {
+              // Fallback to GitHub repo
+              window.open(baseGithubUrl, '_blank', 'noopener,noreferrer')
+              toast.info(`Opening GitHub Repository`, {
+                description: `Release for ${platform} coming soon!`,
+                duration: 3000
+              })
+            }
+          })
+          .catch(() => {
+            window.open(baseGithubUrl, '_blank', 'noopener,noreferrer')
+            toast.info(`Opening GitHub Repository`, {
+              description: `Visit our GitHub for latest updates`,
+              duration: 3000
+            })
+          })
+      } else {
+        window.open(url, '_blank', 'noopener,noreferrer')
+        toast.success(`Opening Gaia's Exchanges for ${platform}`, {
+          description: '🌍 Culture of Harmony platform'
+        })
+      }
     }
   }
 
