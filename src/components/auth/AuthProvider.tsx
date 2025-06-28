@@ -19,8 +19,8 @@ const AuthContext = createContext<AuthContextType>({
   signUp: async () => ({ error: null }),
   signIn: async () => ({ error: null }),
   signOut: async () => ({ error: null }),
-  loading: false, // Changed to false for immediate admin access
-  isAdmin: true   // Always admin for you
+  loading: true,
+  isAdmin: false
 })
 
 export const useAuth = () => {
@@ -34,8 +34,8 @@ export const useAuth = () => {
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
-  const [loading, setLoading] = useState(false) // No loading delay for admin
-  const [isAdmin, setIsAdmin] = useState(true) // Always admin for you
+  const [loading, setLoading] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     // Set up auth state listener
@@ -45,9 +45,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setSession(session)
         setUser(session?.user ?? null)
         setLoading(false)
-
-        // Always set admin to true for full privileges
-        setIsAdmin(true)
       }
     )
 
@@ -56,16 +53,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setSession(session)
       setUser(session?.user ?? null)
       setLoading(false)
-      
-      // Always admin privileges
-      setIsAdmin(true)
     })
 
-    // Grant immediate admin access
-    setIsAdmin(true)
-    setLoading(false)
+    // Check for admin session
+    const checkAdminSession = () => {
+      const adminToken = localStorage.getItem('secure_admin_token')
+      const sessionExpiry = localStorage.getItem('admin_session_expiry')
+      
+      if (adminToken && sessionExpiry) {
+        const now = new Date().getTime()
+        if (now < parseInt(sessionExpiry)) {
+          setIsAdmin(true)
+        } else {
+          setIsAdmin(false)
+          localStorage.removeItem('secure_admin_token')
+          localStorage.removeItem('admin_verified_ip')
+          localStorage.removeItem('admin_session_expiry')
+        }
+      } else {
+        setIsAdmin(false)
+      }
+    }
 
-    return () => subscription.unsubscribe()
+    checkAdminSession()
+    
+    // Check admin session every minute
+    const adminCheckInterval = setInterval(checkAdminSession, 60000)
+
+    return () => {
+      subscription.unsubscribe()
+      clearInterval(adminCheckInterval)
+    }
   }, [])
 
   const signUp = async (email: string, password: string, userData?: any) => {
@@ -94,8 +112,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut()
-    // Keep admin privileges even after signout
-    setIsAdmin(true)
     return { error }
   }
 
