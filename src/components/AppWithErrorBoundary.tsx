@@ -1,70 +1,59 @@
 
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { SidebarProvider } from '@/components/ui/sidebar'
-import { AppSidebar } from '@/components/AppSidebar'
-import { Toaster } from '@/components/ui/toaster'
-import { GlobalErrorBoundary } from '@/components/GlobalErrorBoundary'
-import { AutoIssueResolver } from '@/components/AutoIssueResolver'
-import { AnimatedBackground } from '@/components/ui/animated-background'
+import { Toaster } from "@/components/ui/sonner"
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/AppSidebar"
+import { AdvertisingHeader } from "@/components/AdvertisingHeader"
+import { SystemMonitor } from "@/components/SystemMonitor"
+import Index from "../pages/Index"
+import About from "../pages/About"
+import Wallet from "../pages/Wallet"
+import Markets from "../pages/Markets"
+import Transparency from "../pages/Transparency"
+import Reinvestments from "../pages/Reinvestments"
+import Downloads from "../pages/Downloads"
+import SmartContracts from "../pages/SmartContracts"
+import UltimateSecurity from "../pages/UltimateSecurity"
+import Marketing from "../pages/Marketing"
+import Admin from "../pages/Admin"
+import NotFound from "../pages/NotFound"
 
-// Import all your pages
-import Index from '@/pages/Index'
-import Markets from '@/pages/Markets'
-import Wallet from '@/pages/Wallet'
-import Admin from '@/pages/Admin'
-import Transparency from '@/pages/Transparency'
-import About from '@/pages/About'
-import Downloads from '@/pages/Downloads'
-import Marketing from '@/pages/Marketing'
-import NotFound from '@/pages/NotFound'
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      refetchInterval: 5000, // 5 seconds - as requested
-    },
-  },
-})
+const queryClient = new QueryClient()
 
 export function AppWithErrorBoundary() {
   return (
-    <GlobalErrorBoundary>
-      <QueryClientProvider client={queryClient}>
-        <Router>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <SystemMonitor />
+        <BrowserRouter>
           <SidebarProvider>
-            <div className="min-h-screen bg-background text-foreground">
-              <AnimatedBackground />
-              
-              {/* Global Auto Issue Resolver - Hidden but Active */}
-              <div className="sr-only">
-                <AutoIssueResolver />
+            <AppSidebar />
+            <main className="flex-1 overflow-auto">
+              <AdvertisingHeader />
+              <div className="p-4">
+                <SidebarTrigger />
               </div>
-              
-              <div className="flex">
-                <AppSidebar />
-                <main className="flex-1 p-6">
-                  <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/markets" element={<Markets />} />
-                    <Route path="/wallet" element={<Wallet />} />
-                    <Route path="/admin" element={<Admin />} />
-                    <Route path="/transparency" element={<Transparency />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/downloads" element={<Downloads />} />
-                    <Route path="/marketing" element={<Marketing />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </main>
-              </div>
-              
-              <Toaster />
-            </div>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/wallet" element={<Wallet />} />
+                <Route path="/markets" element={<Markets />} />
+                <Route path="/transparency" element={<Transparency />} />
+                <Route path="/reinvestments" element={<Reinvestments />} />
+                <Route path="/downloads" element={<Downloads />} />
+                <Route path="/smart-contracts" element={<SmartContracts />} />
+                <Route path="/ultimate-security" element={<UltimateSecurity />} />
+                <Route path="/marketing" element={<Marketing />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
           </SidebarProvider>
-        </Router>
-      </QueryClientProvider>
-    </GlobalErrorBoundary>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
   )
 }

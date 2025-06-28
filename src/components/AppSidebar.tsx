@@ -1,5 +1,5 @@
 
-import { Home, Wallet, TrendingUp, Search, Download, Code, FileText, Users, Settings, Shield, BarChart3 } from "lucide-react"
+import { Home, Wallet, TrendingUp, Search, Download, Code, FileText, Users, Settings, Shield, BarChart3, Lock } from "lucide-react"
 
 import {
   Sidebar,
@@ -49,6 +49,11 @@ const items = [
     title: "Smart Contracts",
     url: "/smart-contracts",
     icon: Code,
+  },
+  {
+    title: "Ultimate Security",
+    url: "/ultimate-security",
+    icon: Lock,
   },
   {
     title: "Marketing",
