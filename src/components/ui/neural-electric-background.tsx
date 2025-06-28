@@ -32,7 +32,7 @@ export function NeuralElectricBackground({
   intensity = 'medium' 
 }: NeuralElectricBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [nodes, setNodes] = useState<NeuralNode[]>([])
+  const nodesRef = useRef<NeuralNode[]>([])
   const [electricShocks, setElectricShocks] = useState<ElectricShock[]>([])
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const animationRef = useRef<number>()
@@ -162,7 +162,7 @@ export function NeuralElectricBackground({
     updateCanvasSize()
     window.addEventListener('resize', updateCanvasSize)
 
-    // Initialize nodes
+    // Initialize nodes only once
     const initialNodes: NeuralNode[] = Array.from({ length: nodeCount }, (_, i) => ({
       id: i,
       x: Math.random() * canvas.width,
@@ -190,7 +190,7 @@ export function NeuralElectricBackground({
       node.connections = nearbyNodes
     })
 
-    setNodes(initialNodes)
+    nodesRef.current = initialNodes
 
     return () => {
       window.removeEventListener('resize', updateCanvasSize)
@@ -217,7 +217,7 @@ export function NeuralElectricBackground({
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas || nodes.length === 0) return
+    if (!canvas || nodesRef.current.length === 0) return
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
@@ -229,15 +229,14 @@ export function NeuralElectricBackground({
 
       const time = Date.now() * 0.001
 
-      // Update node positions based on mouse influence
-      const updatedNodes = nodes.map(node => {
+      // Update node positions directly in the ref
+      nodesRef.current.forEach(node => {
         const mouseDistance = Math.sqrt(
           Math.pow(node.x - mousePosition.x, 2) + Math.pow(node.y - mousePosition.y, 2)
         )
         
         const mouseInfluence = Math.max(0, 200 - mouseDistance) / 200
-        const influenceStrength = mouseInfluence * 0.02
-
+        
         let targetX = node.targetX
         let targetY = node.targetY
 
@@ -255,18 +254,14 @@ export function NeuralElectricBackground({
         targetX = Math.max(50, Math.min(canvas.width - 50, targetX))
         targetY = Math.max(50, Math.min(canvas.height - 50, targetY))
 
-        return {
-          ...node,
-          x: node.x + (targetX - node.x) * 0.02,
-          y: node.y + (targetY - node.y) * 0.02,
-          targetX,
-          targetY,
-          energy: (Math.sin(time + node.pulsePhase) + 1) / 2,
-          pulsePhase: node.pulsePhase + 0.02
-        }
+        // Update node properties
+        node.x = node.x + (targetX - node.x) * 0.02
+        node.y = node.y + (targetY - node.y) * 0.02
+        node.targetX = targetX
+        node.targetY = targetY
+        node.energy = (Math.sin(time + node.pulsePhase) + 1) / 2
+        node.pulsePhase = node.pulsePhase + 0.02
       })
-
-      setNodes(updatedNodes)
 
       // Draw electric shocks
       const currentTime = Date.now()
@@ -311,9 +306,9 @@ export function NeuralElectricBackground({
       })
 
       // Draw connections with electric effect
-      updatedNodes.forEach(node => {
+      nodesRef.current.forEach(node => {
         node.connections.forEach(connectionId => {
-          const connectedNode = updatedNodes.find(n => n.id === connectionId)
+          const connectedNode = nodesRef.current.find(n => n.id === connectionId)
           if (!connectedNode) return
 
           const distance = Math.sqrt(
@@ -343,13 +338,13 @@ export function NeuralElectricBackground({
       })
 
       // Draw nodes with electric glow (smaller size)
-      updatedNodes.forEach(node => {
-        const size = 1 + node.energy * 2 // Reduced from 2 + node.energy * 4
-        const glowSize = 6 + node.energy * 12 // Reduced from 10 + node.energy * 20
+      nodesRef.current.forEach(node => {
+        const size = 1 + node.energy * 2
+        const glowSize = 6 + node.energy * 12
 
         // Outer glow
         const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, glowSize)
-        gradient.addColorStop(0, currentStyle.glowColor + '60') // Reduced opacity
+        gradient.addColorStop(0, currentStyle.glowColor + '60')
         gradient.addColorStop(1, currentStyle.glowColor + '00')
         
         ctx.fillStyle = gradient
@@ -360,7 +355,7 @@ export function NeuralElectricBackground({
         // Core node (smaller)
         ctx.fillStyle = currentStyle.nodeColor
         ctx.shadowColor = currentStyle.glowColor
-        ctx.shadowBlur = 6 // Reduced from 10
+        ctx.shadowBlur = 6
         ctx.beginPath()
         ctx.arc(node.x, node.y, size, 0, Math.PI * 2)
         ctx.fill()
@@ -378,7 +373,7 @@ export function NeuralElectricBackground({
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [nodes, mousePosition, currentStyle, electricShocks])
+  }, [mousePosition, currentStyle, electricShocks])
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0">
