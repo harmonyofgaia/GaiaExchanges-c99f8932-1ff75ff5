@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -32,7 +33,7 @@ interface BackupServer {
 interface SecurityLayer {
   id: number
   name: string
-  status: 'secure' | 'compromised' | 'destroyed'
+  status: 'secure' | 'compromised' | 'critical'
   lastCheck: Date
   strength: number
 }
@@ -84,7 +85,7 @@ export function ServerResilienceEngine() {
   useEffect(() => {
     const advancedSecurityEngine = () => {
       console.log('🛡️ ADVANCED SECURITY ENGINE - PREEMPTIVE THREAT DISCONNECTION ACTIVE')
-      console.log('🚫 NEVER ACCEPT SERVER BREAKDOWN - RESILIENCE ENGINE MONITORING')
+      console.log('🚫 NEVER ACCEPT SERVER BREAKDOWN - resilience ENGINE MONITORING')
       console.log('🔒 3-LAYER SECURITY PROTOCOL - ADMIN RECOVERY PROTECTION')
 
       // 1. PREEMPTIVE THREAT DETECTION & IMMEDIATE DISCONNECTION
@@ -129,7 +130,7 @@ export function ServerResilienceEngine() {
         setSecurityLayers(prev => prev.map(layer => {
           // Simulate security layer monitoring
           let newStrength = layer.strength
-          let newStatus: 'secure' | 'compromised' | 'destroyed' = layer.status
+          let newStatus: 'secure' | 'compromised' | 'critical' = layer.status
 
           // Very rare chance of layer compromise (only for testing)
           if (Math.random() < 0.001) { // 0.1% chance
@@ -146,11 +147,11 @@ export function ServerResilienceEngine() {
             }
             
             if (newStrength === 0 && layer.id === 3) {
-              newStatus = 'destroyed'
-              console.log('🚨 CRITICAL: 3RD SECURITY LAYER DESTROYED - BACKUP MODE ACTIVATION AUTHORIZED')
+              newStatus = 'critical'
+              console.log('🚨 CRITICAL: 3RD SECURITY LAYER CRITICAL - BACKUP MODE ACTIVATION AUTHORIZED')
               
               toast.error('🚨 CRITICAL SECURITY BREACH!', {
-                description: '3rd Recovery Layer Destroyed - Backup Mode Activation Required',
+                description: '3rd Recovery Layer Critical - Backup Mode Activation Required',
                 duration: 8000
               })
             }
@@ -172,12 +173,12 @@ export function ServerResilienceEngine() {
         }))
       }
 
-      // 3. BACKUP MODE CONDITION CHECK (ONLY WHEN 3RD LAYER DESTROYED)
+      // 3. BACKUP MODE CONDITION CHECK (ONLY WHEN 3RD LAYER CRITICAL)
       const checkBackupModeConditions = () => {
         const thirdLayer = securityLayers.find(layer => layer.id === 3)
         
-        if (thirdLayer?.status === 'destroyed') {
-          console.log('🚨 BACKUP MODE CONDITIONS MET - 3RD SECURITY LAYER DESTROYED')
+        if (thirdLayer?.status === 'critical') {
+          console.log('🚨 BACKUP MODE CONDITIONS MET - 3RD SECURITY LAYER CRITICAL')
           console.log('⚡ ACTIVATING BACKUP SERVERS - EMERGENCY PROTOCOL ENGAGED')
           
           if (!backupModeEnabled) {
@@ -190,13 +191,13 @@ export function ServerResilienceEngine() {
             })))
             
             toast.error('🚨 BACKUP MODE ACTIVATED!', {
-              description: '3rd Security Layer Destroyed - All backup servers now active',
+              description: '3rd Security Layer Critical - All backup servers now active',
               duration: 10000
             })
           }
         } else {
-          // Ensure backup mode is disabled if 3rd layer is not destroyed
-          if (backupModeEnabled && thirdLayer?.status !== 'destroyed') {
+          // Ensure backup mode is disabled if 3rd layer is not critical
+          if (backupModeEnabled && thirdLayer?.status !== 'critical') {
             setBackupModeEnabled(false)
             
             // Return backup servers to standby
@@ -439,7 +440,7 @@ export function ServerResilienceEngine() {
                   />
                   {layer.id === 3 && (
                     <p className="text-xs text-red-400 font-medium">
-                      🚨 BACKUP MODE ACTIVATES ONLY IF THIS LAYER IS DESTROYED
+                      🚨 BACKUP MODE ACTIVATES ONLY IF THIS LAYER IS CRITICAL
                     </p>
                   )}
                 </div>
@@ -628,7 +629,7 @@ export function ServerResilienceEngine() {
               <div className="text-6xl">🛡️</div>
               <div className="font-bold text-purple-400">3-LAYER SECURITY</div>
               <div className="text-sm text-muted-foreground">
-                Backup mode only activates when 3rd recovery layer is destroyed
+                Backup mode only activates when 3rd recovery layer is critical
               </div>
             </div>
             <div className="space-y-2">
@@ -641,7 +642,7 @@ export function ServerResilienceEngine() {
           </div>
           <div className="mt-6 p-4 bg-red-900/20 rounded-lg">
             <div className="text-xl font-bold text-red-400">
-              🚨 BACKUP MODE: ONLY WHEN 3RD SECURITY LAYER DESTROYED 🚨
+              🚨 BACKUP MODE: ONLY WHEN 3RD SECURITY LAYER CRITICAL 🚨
             </div>
             <div className="text-sm text-muted-foreground mt-2">
               Attackers are permanently disconnected before they can compromise our recovery systems
