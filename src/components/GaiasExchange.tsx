@@ -23,7 +23,8 @@ import {
   Bell,
   Settings,
   Lock,
-  ExternalLink
+  ExternalLink,
+  Github
 } from 'lucide-react'
 import { GaiaLogo } from './GaiaLogo'
 import { TradingInterface } from './TradingInterface'
@@ -121,17 +122,19 @@ export function GaiasExchange() {
 
   const handleDownloadApp = (platform: string) => {
     const downloadLinks = {
-      windows: 'https://github.com/harmonyofgaia/gaia-exchange/releases/latest/download/gaias-exchange-windows.exe',
-      macos: 'https://github.com/harmonyofgaia/gaia-exchange/releases/latest/download/gaias-exchange-macos.dmg',
-      android: 'https://github.com/harmonyofgaia/gaia-exchange/releases/latest/download/gaias-exchange-android.apk',
-      linux: 'https://github.com/harmonyofgaia/gaia-exchange/releases/latest/download/gaias-exchange-linux.deb'
+      windows: 'https://github.com/harmonyofgaia/gaia-exchanges/releases/latest/download/gaia-exchanges-windows-x64.exe',
+      macos: 'https://github.com/harmonyofgaia/gaia-exchanges/releases/latest/download/gaia-exchanges-macos-universal.dmg',
+      android: 'https://play.google.com/store/apps/details?id=com.harmonyofgaia.exchanges',
+      linux: 'https://github.com/harmonyofgaia/gaia-exchanges/releases/latest/download/gaia-exchanges-linux-amd64.deb',
+      ios: 'https://apps.apple.com/app/gaia-exchanges/id1234567890',
+      web: 'https://dapp.gaiaexchanges.com'
     }
 
     const url = downloadLinks[platform as keyof typeof downloadLinks]
     if (url) {
       window.open(url, '_blank')
-      toast.success(`Downloading Gaia's Exchange for ${platform}`, {
-        description: '🚀 Most secure trading platform in history'
+      toast.success(`Opening Gaia's Exchanges for ${platform}`, {
+        description: '🚀 World\'s most secure crypto exchange platform'
       })
     }
   }
@@ -153,8 +156,8 @@ export function GaiasExchange() {
             <div className="flex items-center gap-4">
               <GaiaLogo size="lg" variant="white-fade" />
               <div>
-                <h1 className="text-2xl font-bold text-primary">Gaia's Exchange</h1>
-                <p className="text-sm text-green-400">World's Most Secure Trading Platform</p>
+                <h1 className="text-2xl font-bold text-primary">Gaia's Exchanges</h1>
+                <p className="text-sm text-green-400">World's Most Secure Web3 Trading Platform</p>
               </div>
             </div>
             
@@ -233,18 +236,18 @@ export function GaiasExchange() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-green-400">
               <Download className="h-5 w-5" />
-              Download Gaia's Exchange Apps
+              Download Gaia's Exchanges - Multi-Platform
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
               <Button 
                 onClick={() => handleDownloadApp('windows')}
                 className="bg-blue-600 hover:bg-blue-700 h-auto py-4 flex-col gap-2"
               >
                 <div className="text-2xl">🪟</div>
                 <div className="text-sm">Windows</div>
-                <div className="text-xs opacity-75">x32/x64</div>
+                <div className="text-xs opacity-75">x64</div>
               </Button>
               <Button 
                 onClick={() => handleDownloadApp('macos')}
@@ -252,7 +255,7 @@ export function GaiasExchange() {
               >
                 <div className="text-2xl">🍎</div>
                 <div className="text-sm">macOS</div>
-                <div className="text-xs opacity-75">10.15+</div>
+                <div className="text-xs opacity-75">Universal</div>
               </Button>
               <Button 
                 onClick={() => handleDownloadApp('android')}
@@ -260,7 +263,15 @@ export function GaiasExchange() {
               >
                 <div className="text-2xl">🤖</div>
                 <div className="text-sm">Android</div>
-                <div className="text-xs opacity-75">6.0+</div>
+                <div className="text-xs opacity-75">Play Store</div>
+              </Button>
+              <Button 
+                onClick={() => handleDownloadApp('ios')}
+                className="bg-purple-600 hover:bg-purple-700 h-auto py-4 flex-col gap-2"
+              >
+                <div className="text-2xl">📱</div>
+                <div className="text-sm">iOS</div>
+                <div className="text-xs opacity-75">App Store</div>
               </Button>
               <Button 
                 onClick={() => handleDownloadApp('linux')}
@@ -268,17 +279,41 @@ export function GaiasExchange() {
               >
                 <div className="text-2xl">🐧</div>
                 <div className="text-sm">Linux</div>
-                <div className="text-xs opacity-75">Ubuntu/Debian</div>
+                <div className="text-xs opacity-75">DEB/RPM</div>
+              </Button>
+              <Button 
+                onClick={() => handleDownloadApp('web')}
+                className="bg-cyan-600 hover:bg-cyan-700 h-auto py-4 flex-col gap-2"
+              >
+                <div className="text-2xl">🌐</div>
+                <div className="text-sm">Web3 DApp</div>
+                <div className="text-xs opacity-75">Browser</div>
               </Button>
             </div>
             
-            <div className="mt-4 text-center">
-              <p className="text-sm text-muted-foreground">
-                ⚡ All apps are automatically updated and synchronized across platforms
-              </p>
-              <p className="text-xs text-green-400 mt-1">
-                🔒 Bank-level security with multi-layer encryption
-              </p>
+            <div className="mt-6 space-y-2">
+              <div className="flex items-center justify-center gap-4">
+                <Button variant="outline" size="sm" asChild>
+                  <a href="https://github.com/harmonyofgaia/gaia-exchanges" target="_blank" rel="noopener noreferrer">
+                    <Github className="h-4 w-4 mr-2" />
+                    GitHub Repository
+                  </a>
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <a href="https://docs.gaiaexchanges.com" target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Documentation
+                  </a>
+                </Button>
+              </div>
+              <div className="text-center">
+                <p className="text-sm text-muted-foreground">
+                  ⚡ Multi-platform sync with Web3 integration
+                </p>
+                <p className="text-xs text-green-400 mt-1">
+                  🔒 Military-grade security across all platforms
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -314,38 +349,42 @@ export function GaiasExchange() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-yellow-400">
               <TrendingUp className="h-5 w-5" />
-              Investment Opportunities & Legal Partnerships
+              Global Expansion & Investment Opportunities
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-3">
-                <h4 className="font-semibold text-green-400">🤝 Seeking Strategic Partners</h4>
+                <h4 className="font-semibold text-green-400">🤝 Strategic Partnerships</h4>
                 <ul className="text-sm space-y-1 text-muted-foreground">
-                  <li>• Institutional investors with $1M+ portfolio</li>
-                  <li>• Licensed financial services providers</li>
-                  <li>• Regulatory compliance specialists</li>
-                  <li>• Blockchain security auditors</li>
+                  <li>• Institutional investors ($5M+ portfolio)</li>
+                  <li>• Licensed financial service providers</li>
+                  <li>• Global regulatory compliance teams</li>
+                  <li>• Web3 infrastructure partners</li>
                 </ul>
               </div>
               <div className="space-y-3">
-                <h4 className="font-semibold text-blue-400">📈 Market Expansion</h4>
+                <h4 className="font-semibold text-blue-400">🌍 Global Market Presence</h4>
                 <ul className="text-sm space-y-1 text-muted-foreground">
-                  <li>• Multi-platform integration complete</li>
-                  <li>• 24/7 automated market monitoring</li>
-                  <li>• Cross-platform synchronization</li>
-                  <li>• Real-time security threat detection</li>
+                  <li>• Available on all major app stores</li>
+                  <li>• Multi-blockchain network support</li>
+                  <li>• 24/7 automated trading systems</li>
+                  <li>• Real-time global market data</li>
                 </ul>
               </div>
             </div>
-            <div className="mt-4 flex gap-4">
+            <div className="mt-4 flex gap-4 flex-wrap">
               <Button className="bg-green-600 hover:bg-green-700">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Partner With Us
               </Button>
               <Button variant="outline">
                 <Globe className="h-4 w-4 mr-2" />
-                View Legal Documents
+                Global Expansion Plan
+              </Button>
+              <Button variant="outline">
+                <Shield className="h-4 w-4 mr-2" />
+                Security Audit Reports
               </Button>
             </div>
           </CardContent>

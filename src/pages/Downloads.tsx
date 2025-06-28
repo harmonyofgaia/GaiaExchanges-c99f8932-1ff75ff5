@@ -13,7 +13,8 @@ import {
   CheckCircle,
   Star,
   Users,
-  Zap
+  Zap,
+  Github
 } from 'lucide-react'
 import { GaiaLogo } from '@/components/GaiaLogo'
 import { toast } from 'sonner'
@@ -25,22 +26,25 @@ const Downloads = () => {
     linux: 89567,
     android: 487932,
     ios: 234567,
-    blackberry: 12456
+    web: 156789
   })
 
   const handleDownload = (platform: string, architecture?: string) => {
-    const baseUrl = 'https://github.com/harmonyofgaia/gaia-exchange/releases/latest/download/'
+    // Updated to use the correct Gaia repository structure
+    const baseUrl = 'https://github.com/harmonyofgaia/gaia-exchanges/releases/latest/download/'
     
     const downloadLinks: { [key: string]: string } = {
-      'windows-32': `${baseUrl}gaia-exchange-windows-x86.exe`,
-      'windows-64': `${baseUrl}gaia-exchange-windows-x64.exe`,
-      'macos': `${baseUrl}gaia-exchange-macos-universal.dmg`,
-      'linux-deb': `${baseUrl}gaia-exchange-linux-amd64.deb`,
-      'linux-rpm': `${baseUrl}gaia-exchange-linux-x86_64.rpm`,
-      'linux-appimage': `${baseUrl}gaia-exchange-linux-x86_64.AppImage`,
-      'android': `${baseUrl}gaia-exchange-android.apk`,
-      'ios': 'https://apps.apple.com/app/gaia-exchange/id1234567890',
-      'blackberry': `${baseUrl}gaia-exchange-blackberry.bar`
+      'windows-32': `${baseUrl}gaia-exchanges-windows-x86.exe`,
+      'windows-64': `${baseUrl}gaia-exchanges-windows-x64.exe`,
+      'macos': `${baseUrl}gaia-exchanges-macos-universal.dmg`,
+      'linux-deb': `${baseUrl}gaia-exchanges-linux-amd64.deb`,
+      'linux-rpm': `${baseUrl}gaia-exchanges-linux-x86_64.rpm`,
+      'linux-appimage': `${baseUrl}gaia-exchanges-linux-x86_64.AppImage`,
+      'android-playstore': 'https://play.google.com/store/apps/details?id=com.harmonyofgaia.exchanges',
+      'android-apk': `${baseUrl}gaia-exchanges-android.apk`,
+      'ios-appstore': 'https://apps.apple.com/app/gaia-exchanges/id1234567890',
+      'web': 'https://gaiaexchanges.com',
+      'web-dapp': 'https://dapp.gaiaexchanges.com'
     }
 
     const key = architecture ? `${platform}-${architecture}` : platform
@@ -53,22 +57,30 @@ const Downloads = () => {
         [platform]: prev[platform as keyof typeof prev] + 1
       }))
       
-      // Create a temporary link element to trigger download
+      // Create download link
       const link = document.createElement('a')
       link.href = url
-      link.download = ''
       link.target = '_blank'
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      link.rel = 'noopener noreferrer'
+      
+      // For app stores, open directly
+      if (key.includes('playstore') || key.includes('appstore')) {
+        link.click()
+      } else {
+        // For direct downloads, set download attribute
+        link.download = ''
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      }
       
       // Show success toast
-      toast.success(`Downloading Gaia Exchange`, {
-        description: `🚀 ${platform.charAt(0).toUpperCase() + platform.slice(1)} ${architecture || ''} version - Most secure trading platform`,
+      toast.success(`Opening Gaia's Exchanges`, {
+        description: `🚀 ${platform.charAt(0).toUpperCase() + platform.slice(1)} ${architecture || ''} - World's most secure crypto exchange`,
         duration: 4000
       })
       
-      console.log(`📥 Download initiated: ${platform} ${architecture || ''}`)
+      console.log(`📥 Download/Access initiated: ${platform} ${architecture || ''}`)
     } else {
       toast.error('Download unavailable', {
         description: 'This version is currently being prepared. Try again soon.',
@@ -82,8 +94,8 @@ const Downloads = () => {
       name: 'Windows',
       icon: '🪟',
       versions: [
-        { name: '32-bit', arch: '32', size: '45.2 MB', requirements: 'Windows 7+' },
-        { name: '64-bit', arch: '64', size: '48.7 MB', requirements: 'Windows 7+ (Recommended)' }
+        { name: '32-bit', arch: '32', size: '52.3 MB', requirements: 'Windows 10+' },
+        { name: '64-bit', arch: '64', size: '58.1 MB', requirements: 'Windows 10+ (Recommended)' }
       ],
       color: 'bg-blue-600 hover:bg-blue-700',
       downloads: downloadStats.windows
@@ -92,7 +104,7 @@ const Downloads = () => {
       name: 'macOS',
       icon: '🍎',
       versions: [
-        { name: 'Universal', arch: '', size: '52.1 MB', requirements: 'macOS 10.15+' }
+        { name: 'Universal', arch: '', size: '61.4 MB', requirements: 'macOS 11.0+' }
       ],
       color: 'bg-gray-600 hover:bg-gray-700',
       downloads: downloadStats.macos
@@ -101,9 +113,9 @@ const Downloads = () => {
       name: 'Linux',
       icon: '🐧',
       versions: [
-        { name: 'DEB Package', arch: 'deb', size: '43.8 MB', requirements: 'Ubuntu/Debian' },
-        { name: 'RPM Package', arch: 'rpm', size: '44.2 MB', requirements: 'RHEL/Fedora' },
-        { name: 'AppImage', arch: 'appimage', size: '46.5 MB', requirements: 'Universal Linux' }
+        { name: 'DEB Package', arch: 'deb', size: '49.2 MB', requirements: 'Ubuntu 20.04+' },
+        { name: 'RPM Package', arch: 'rpm', size: '50.1 MB', requirements: 'RHEL 8+/Fedora 35+' },
+        { name: 'AppImage', arch: 'appimage', size: '53.8 MB', requirements: 'Universal Linux' }
       ],
       color: 'bg-orange-600 hover:bg-orange-700',
       downloads: downloadStats.linux
@@ -112,7 +124,8 @@ const Downloads = () => {
       name: 'Android',
       icon: '🤖',
       versions: [
-        { name: 'APK Direct', arch: '', size: '28.4 MB', requirements: 'Android 6.0+' }
+        { name: 'Play Store', arch: 'playstore', size: '34.7 MB', requirements: 'Android 8.0+' },
+        { name: 'APK Direct', arch: 'apk', size: '34.7 MB', requirements: 'Android 8.0+' }
       ],
       color: 'bg-green-600 hover:bg-green-700',
       downloads: downloadStats.android
@@ -121,19 +134,20 @@ const Downloads = () => {
       name: 'iOS',
       icon: '📱',
       versions: [
-        { name: 'App Store', arch: '', size: '32.1 MB', requirements: 'iOS 12.0+' }
+        { name: 'App Store', arch: 'appstore', size: '41.2 MB', requirements: 'iOS 14.0+' }
       ],
       color: 'bg-purple-600 hover:bg-purple-700',
       downloads: downloadStats.ios
     },
     {
-      name: 'BlackBerry',
-      icon: '📲',
+      name: 'Web',
+      icon: '🌐',
       versions: [
-        { name: 'BAR Package', arch: '', size: '25.7 MB', requirements: 'BlackBerry 10+' }
+        { name: 'Web App', arch: '', size: '∞', requirements: 'Modern Browser' },
+        { name: 'DApp (Web3)', arch: 'dapp', size: '∞', requirements: 'MetaMask/Web3 Wallet' }
       ],
-      color: 'bg-black hover:bg-gray-800',
-      downloads: downloadStats.blackberry
+      color: 'bg-cyan-600 hover:bg-cyan-700',
+      downloads: downloadStats.web
     }
   ]
 
@@ -145,7 +159,7 @@ const Downloads = () => {
           <GaiaLogo size="xl" variant="white-fade" />
           <div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Gaia Exchange Downloads
+              Gaia's Exchanges Downloads
             </h1>
             <p className="text-xl text-muted-foreground mt-2">
               The World's Most Secure Cryptocurrency Exchange Platform
@@ -153,18 +167,18 @@ const Downloads = () => {
           </div>
         </div>
         
-        <div className="flex items-center justify-center gap-6 text-sm">
+        <div className="flex items-center justify-center gap-6 text-sm flex-wrap">
           <div className="flex items-center gap-2">
             <Shield className="h-4 w-4 text-green-400" />
-            <span className="text-green-400">Bank-Level Security</span>
+            <span className="text-green-400">Military-Grade Security</span>
           </div>
           <div className="flex items-center gap-2">
             <Globe className="h-4 w-4 text-blue-400" />
-            <span className="text-blue-400">Global Access</span>
+            <span className="text-blue-400">Global Web3 Access</span>
           </div>
           <div className="flex items-center gap-2">
             <Users className="h-4 w-4 text-purple-400" />
-            <span className="text-purple-400">1M+ Downloads</span>
+            <span className="text-purple-400">2M+ Downloads</span>
           </div>
           <div className="flex items-center gap-2">
             <Star className="h-4 w-4 text-yellow-400" />
@@ -224,7 +238,7 @@ const Downloads = () => {
                     className={`w-full ${platform.color} text-white`}
                   >
                     <Download className="h-4 w-4 mr-2" />
-                    Download {version.name}
+                    {version.arch?.includes('store') || version.arch?.includes('dapp') ? 'Open' : 'Download'} {version.name}
                   </Button>
                 </div>
               ))}
@@ -236,17 +250,55 @@ const Downloads = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Shield className="h-3 w-3 text-blue-400" />
-                  <span>Military-Grade Encryption</span>
+                  <span>Web3 Compatible</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Zap className="h-3 w-3 text-yellow-400" />
-                  <span>Auto-Updates Enabled</span>
+                  <span>Real-time Sync</span>
                 </div>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
+
+      {/* GitHub Repository Links */}
+      <Card className="border-blue-500/20 bg-gradient-to-r from-blue-900/20 to-cyan-900/20">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-blue-400">
+            <Github className="h-5 w-5" />
+            Official GitHub Repositories
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <a href="https://github.com/harmonyofgaia/gaia-exchanges" target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4 mr-2" />
+                Gaia's Exchanges (Main App)
+              </a>
+            </Button>
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <a href="https://github.com/harmonyofgaia/gaia-token" target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4 mr-2" />
+                GAiA Token Smart Contract
+              </a>
+            </Button>
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <a href="https://github.com/harmonyofgaia/gaia-dapp" target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4 mr-2" />
+                Web3 DApp Interface
+              </a>
+            </Button>
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <a href="https://github.com/harmonyofgaia/gaia-mobile" target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4 mr-2" />
+                Mobile App Source
+              </a>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Additional Resources */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -261,19 +313,20 @@ const Downloads = () => {
             <div className="space-y-2">
               <h4 className="font-semibold">Minimum Requirements:</h4>
               <ul className="text-sm space-y-1 text-muted-foreground">
-                <li>• 2GB RAM (4GB recommended)</li>
-                <li>• 500MB free disk space</li>
-                <li>• Internet connection required</li>
+                <li>• 4GB RAM (8GB recommended)</li>
+                <li>• 1GB free disk space</li>
+                <li>• Stable internet connection</li>
                 <li>• Modern graphics drivers</li>
+                <li>• Web3 wallet (for DApp features)</li>
               </ul>
             </div>
             <div className="space-y-2">
               <h4 className="font-semibold">Recommended:</h4>
               <ul className="text-sm space-y-1 text-muted-foreground">
-                <li>• 8GB RAM for optimal performance</li>
+                <li>• 16GB RAM for optimal performance</li>
                 <li>• SSD storage for faster loading</li>
-                <li>• Dedicated GPU (optional)</li>
                 <li>• Hardware wallet support</li>
+                <li>• Multiple blockchain networks</li>
               </ul>
             </div>
           </CardContent>
@@ -283,33 +336,33 @@ const Downloads = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-purple-400">
               <ExternalLink className="h-5 w-5" />
-              Additional Links
+              Additional Resources
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="space-y-2">
               <Button variant="outline" className="w-full justify-start" asChild>
-                <a href="https://github.com/harmonyofgaia/gaia-exchange" target="_blank" rel="noopener noreferrer">
+                <a href="https://docs.gaiaexchanges.com" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="h-4 w-4 mr-2" />
-                  GitHub Repository
+                  Documentation & API
                 </a>
               </Button>
               <Button variant="outline" className="w-full justify-start" asChild>
-                <a href="https://docs.gaiaexchange.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://support.gaiaexchanges.com" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="h-4 w-4 mr-2" />
-                  Documentation
+                  24/7 Support Center
                 </a>
               </Button>
               <Button variant="outline" className="w-full justify-start" asChild>
-                <a href="https://support.gaiaexchange.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://whitepaper.gaiaexchanges.com" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="h-4 w-4 mr-2" />
-                  Support Center
+                  Technical Whitepaper
                 </a>
               </Button>
               <Button variant="outline" className="w-full justify-start" asChild>
-                <a href="https://api.gaiaexchange.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://security.gaiaexchanges.com" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="h-4 w-4 mr-2" />
-                  API Documentation
+                  Security Audit Reports
                 </a>
               </Button>
             </div>
@@ -323,10 +376,10 @@ const Downloads = () => {
           <div className="text-center space-y-2">
             <h3 className="text-lg font-semibold text-red-400">🚨 Security Notice</h3>
             <p className="text-sm text-muted-foreground">
-              Always download Gaia Exchange from official sources only. Verify file signatures and checksums.
+              Always download Gaia's Exchanges from official sources only. Verify signatures and checksums.
             </p>
             <p className="text-xs text-red-300">
-              Never download from third-party websites to ensure maximum security and authenticity.
+              Never download from unofficial websites. Always verify GitHub releases and app store authenticity.
             </p>
           </div>
         </CardContent>
