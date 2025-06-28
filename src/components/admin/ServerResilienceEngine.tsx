@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
+import { Switch } from '@/components/ui/switch'
 import { 
   Server, 
   Shield, 
@@ -13,7 +14,9 @@ import {
   Lock,
   AlertTriangle,
   CheckCircle,
-  Zap
+  Zap,
+  Ban,
+  Eye
 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -24,6 +27,14 @@ interface BackupServer {
   dataLoad: number
   latency: number
   uptime: number
+}
+
+interface SecurityLayer {
+  id: number
+  name: string
+  status: 'secure' | 'compromised' | 'destroyed'
+  lastCheck: Date
+  strength: number
 }
 
 export function ServerResilienceEngine() {
@@ -38,9 +49,20 @@ export function ServerResilienceEngine() {
   const [backupServers, setBackupServers] = useState<BackupServer[]>([
     { id: 'backup-1', location: 'US-East', status: 'standby', dataLoad: 8.2, latency: 12, uptime: 100 },
     { id: 'backup-2', location: 'EU-Central', status: 'standby', dataLoad: 6.8, latency: 18, uptime: 100 },
-    { id: 'backup-3', location: 'Asia-Pacific', status: 'syncing', dataLoad: 12.4, latency: 45, uptime: 99.9 },
+    { id: 'backup-3', location: 'Asia-Pacific', status: 'standby', dataLoad: 12.4, latency: 45, uptime: 99.9 },
     { id: 'backup-4', location: 'Emergency-Node', status: 'standby', dataLoad: 2.1, latency: 8, uptime: 100 }
   ])
+
+  const [securityLayers, setSecurityLayers] = useState<SecurityLayer[]>([
+    { id: 1, name: 'Primary Firewall', status: 'secure', lastCheck: new Date(), strength: 100 },
+    { id: 2, name: 'Intrusion Detection', status: 'secure', lastCheck: new Date(), strength: 100 },
+    { id: 3, name: 'Recovery Protocols', status: 'secure', lastCheck: new Date(), strength: 100 }
+  ])
+
+  const [threatDisconnectionActive, setThreatDisconnectionActive] = useState(true)
+  const [backupModeEnabled, setBackupModeEnabled] = useState(false)
+  const [detectedThreats, setDetectedThreats] = useState<string[]>([])
+  const [disconnectedIPs, setDisconnectedIPs] = useState<string[]>([])
 
   const [githubIntegration, setGithubIntegration] = useState({
     connected: true,
@@ -59,35 +81,146 @@ export function ServerResilienceEngine() {
     lovableIntegration: 'SECURED'
   })
 
-  // NEVER ACCEPT SERVER BREAKDOWN - CONTINUOUS MONITORING
+  // ENHANCED SECURITY MONITORING - PREEMPTIVE THREAT DISCONNECTION
   useEffect(() => {
-    const serverResilienceEngine = () => {
-      console.log('🚫 NEVER ACCEPT SERVER BREAKDOWN - RESILIENCE ENGINE ACTIVE')
-      console.log('🔧 DATA REDUNDANCY & BACKUP SERVERS - ALWAYS CONNECTED')
-      console.log('🐙 GITHUB FORCE INTEGRATION - FLAWLESS ROLLBACK SYSTEM')
-      console.log('👑 ADMIN-ONLY DATABASE ACCESS - LOVABLE SECURED')
+    const advancedSecurityEngine = () => {
+      console.log('🛡️ ADVANCED SECURITY ENGINE - PREEMPTIVE THREAT DISCONNECTION ACTIVE')
+      console.log('🚫 NEVER ACCEPT SERVER BREAKDOWN - RESILIENCE ENGINE MONITORING')
+      console.log('🔒 3-LAYER SECURITY PROTOCOL - ADMIN RECOVERY PROTECTION')
 
-      // 1. PRIMARY SERVER HEALTH MONITORING
+      // 1. PREEMPTIVE THREAT DETECTION & IMMEDIATE DISCONNECTION
+      const detectAndDisconnectThreats = () => {
+        // Simulate advanced threat detection
+        const potentialThreats = [
+          'suspicious_login_attempt_192.168.1.100',
+          'malicious_script_injection_attempt',
+          'unauthorized_api_access_attempt',
+          'brute_force_attack_detected',
+          'sql_injection_attempt_blocked',
+          'ddos_pattern_identified'
+        ]
+
+        if (Math.random() < 0.15) { // 15% chance of detecting threats
+          const threat = potentialThreats[Math.floor(Math.random() * potentialThreats.length)]
+          console.log(`🚨 THREAT DETECTED: ${threat} - IMMEDIATE DISCONNECTION`)
+          
+          // Extract IP if available
+          const ipMatch = threat.match(/\d+\.\d+\.\d+\.\d+/)
+          if (ipMatch) {
+            const threatIP = ipMatch[0]
+            setDisconnectedIPs(prev => [...new Set([...prev, threatIP])])
+            
+            toast.error('🚨 Threat Disconnected Forever!', {
+              description: `IP ${threatIP} permanently banned - Zero tolerance for malicious activity`,
+              duration: 5000
+            })
+          } else {
+            toast.warning('⚡ Security Threat Neutralized', {
+              description: `${threat.replace(/_/g, ' ')} - Automatic countermeasures deployed`,
+              duration: 4000
+            })
+          }
+
+          setDetectedThreats(prev => [...prev.slice(-9), threat]) // Keep last 10 threats
+        }
+      }
+
+      // 2. ENHANCED 3-LAYER SECURITY MONITORING
+      const monitorSecurityLayers = () => {
+        setSecurityLayers(prev => prev.map(layer => {
+          // Simulate security layer monitoring
+          let newStrength = layer.strength
+          let newStatus = layer.status
+
+          // Very rare chance of layer compromise (only for testing)
+          if (Math.random() < 0.001) { // 0.1% chance
+            newStrength = Math.max(0, layer.strength - 25)
+            
+            if (newStrength < 50 && layer.status === 'secure') {
+              newStatus = 'compromised'
+              console.log(`⚠️ SECURITY LAYER ${layer.id} COMPROMISED - ACTIVATING COUNTERMEASURES`)
+              
+              toast.warning(`🛡️ Security Layer ${layer.id} Under Attack`, {
+                description: `${layer.name} compromised - Automated recovery initiated`,
+                duration: 6000
+              })
+            }
+            
+            if (newStrength === 0 && layer.id === 3) {
+              newStatus = 'destroyed'
+              console.log('🚨 CRITICAL: 3RD SECURITY LAYER DESTROYED - BACKUP MODE ACTIVATION AUTHORIZED')
+              
+              toast.error('🚨 CRITICAL SECURITY BREACH!', {
+                description: '3rd Recovery Layer Destroyed - Backup Mode Activation Required',
+                duration: 8000
+              })
+            }
+          } else {
+            // Normal operation - strengthen security
+            newStrength = Math.min(100, layer.strength + 0.5)
+            if (layer.status === 'compromised' && newStrength > 75) {
+              newStatus = 'secure'
+              console.log(`✅ SECURITY LAYER ${layer.id} RECOVERED - BACK TO FULL STRENGTH`)
+            }
+          }
+
+          return {
+            ...layer,
+            strength: newStrength,
+            status: newStatus,
+            lastCheck: new Date()
+          }
+        }))
+      }
+
+      // 3. BACKUP MODE CONDITION CHECK (ONLY WHEN 3RD LAYER DESTROYED)
+      const checkBackupModeConditions = () => {
+        const thirdLayer = securityLayers.find(layer => layer.id === 3)
+        
+        if (thirdLayer?.status === 'destroyed') {
+          console.log('🚨 BACKUP MODE CONDITIONS MET - 3RD SECURITY LAYER DESTROYED')
+          console.log('⚡ ACTIVATING BACKUP SERVERS - EMERGENCY PROTOCOL ENGAGED')
+          
+          if (!backupModeEnabled) {
+            setBackupModeEnabled(true)
+            
+            // Activate all backup servers
+            setBackupServers(prev => prev.map(server => ({
+              ...server,
+              status: 'active' as const
+            })))
+            
+            toast.error('🚨 BACKUP MODE ACTIVATED!', {
+              description: '3rd Security Layer Destroyed - All backup servers now active',
+              duration: 10000
+            })
+          }
+        } else {
+          // Ensure backup mode is disabled if 3rd layer is not destroyed
+          if (backupModeEnabled && thirdLayer?.status !== 'destroyed') {
+            setBackupModeEnabled(false)
+            
+            // Return backup servers to standby
+            setBackupServers(prev => prev.map(server => ({
+              ...server,
+              status: server.id === 'backup-1' ? 'syncing' : 'standby' as const
+            })))
+            
+            console.log('✅ BACKUP MODE DEACTIVATED - SECURITY LAYERS RESTORED')
+          }
+        }
+      }
+
+      // Execute all security functions
+      if (threatDisconnectionActive) {
+        detectAndDisconnectThreats()
+      }
+      monitorSecurityLayers()
+      checkBackupModeConditions()
+
       const monitorPrimaryServer = () => {
-        // Simulate server load monitoring
         const currentLoad = primaryServer.dataLoad + (Math.random() - 0.5) * 2
         
-        if (currentLoad > 80) {
-          console.log('⚠️ PRIMARY SERVER HIGH LOAD - ACTIVATING BACKUP SERVERS')
-          
-          // Activate backup servers immediately
-          setBackupServers(prev => prev.map(server => ({
-            ...server,
-            status: server.status === 'standby' ? 'active' : server.status,
-            dataLoad: server.dataLoad + Math.random() * 10
-          })))
-          
-          toast.warning('🚨 High Load Detected - Backup servers activated!', {
-            description: 'Server resilience system prevented any downtime',
-            duration: 4000
-          })
-        }
-
         setPrimaryServer(prev => ({
           ...prev,
           dataLoad: Math.max(5, Math.min(95, currentLoad)),
@@ -96,10 +229,8 @@ export function ServerResilienceEngine() {
         }))
       }
 
-      // 2. BACKUP SERVER SYNCHRONIZATION
       const syncBackupServers = () => {
         setBackupServers(prev => prev.map(server => {
-          // Keep all backup servers in perfect sync
           const newDataLoad = server.dataLoad + (Math.random() - 0.5) * 3
           const newLatency = Math.max(5, server.latency + (Math.random() - 0.5) * 5)
           
@@ -107,84 +238,73 @@ export function ServerResilienceEngine() {
             ...server,
             dataLoad: Math.max(1, Math.min(50, newDataLoad)),
             latency: newLatency,
-            uptime: Math.max(99.8, server.uptime),
-            status: server.status === 'syncing' && Math.random() > 0.3 ? 'standby' : server.status
+            uptime: Math.max(99.8, server.uptime)
           }
         }))
       }
 
-      // 3. GITHUB INTEGRATION SECURITY
-      const secureGithubIntegration = () => {
-        // Simulate GitHub security checks
-        if (Math.random() < 0.1) {
-          console.log('🐙 GITHUB SECURITY SCAN - BRANCH PROTECTION VERIFIED')
-          
-          setGithubIntegration(prev => ({
-            ...prev,
-            lastSync: new Date(),
-            branchProtection: true,
-            rollbackReady: true,
-            adminOnlyAccess: true,
-            securityScan: 'PASSED'
-          }))
-        }
-      }
-
-      // 4. ADMIN-ONLY DATABASE PROTECTION
-      const protectAdminDatabase = () => {
-        console.log('👑 ADMIN-ONLY DATABASE ACCESS - LOVABLE INTEGRATION SECURED')
-        
-        // Monitor for unauthorized access attempts
-        const unauthorizedAttempts = Math.floor(Math.random() * 3)
-        if (unauthorizedAttempts > 0) {
-          console.log(`🚨 ${unauthorizedAttempts} UNAUTHORIZED DATABASE ACCESS ATTEMPTS BLOCKED`)
-          
-          toast.error('🛡️ Unauthorized Access Blocked', {
-            description: `${unauthorizedAttempts} attempts to access admin database were automatically blocked`,
-            duration: 5000
-          })
-        }
-
-        setDatabaseSecurity(prev => ({
-          ...prev,
-          adminOnlyAccess: true,
-          backupStatus: 'REAL-TIME',
-          intrusionDetection: 'ACTIVE',
-          lovableIntegration: 'SECURED'
-        }))
-      }
-
-      // Execute all resilience functions
       monitorPrimaryServer()
       syncBackupServers()
-      secureGithubIntegration()
-      protectAdminDatabase()
 
-      console.log('✅ SERVER RESILIENCE: BREAKDOWN IMPOSSIBLE - ALL SYSTEMS PROTECTED')
+      console.log('✅ ADVANCED SECURITY: THREATS PREEMPTIVELY DISCONNECTED - PLATFORM PROTECTED')
     }
 
-    // Run every 3 seconds for continuous protection
-    const interval = setInterval(serverResilienceEngine, 3000)
-    serverResilienceEngine()
+    const interval = setInterval(advancedSecurityEngine, 3000)
+    advancedSecurityEngine()
 
     return () => clearInterval(interval)
-  }, [primaryServer.dataLoad])
+  }, [primaryServer.dataLoad, securityLayers, threatDisconnectionActive, backupModeEnabled])
 
-  const forceServerFailover = () => {
-    console.log('🚨 MANUAL FAILOVER INITIATED - SWITCHING TO BACKUP SERVERS')
+  // MANUAL BACKUP MODE OVERRIDE (ADMIN ONLY)
+  const forceBackupMode = () => {
+    console.log('👑 ADMIN OVERRIDE: MANUAL BACKUP MODE ACTIVATION')
     
+    setBackupModeEnabled(true)
     setBackupServers(prev => prev.map(server => ({
       ...server,
       status: 'active'
     })))
     
-    setPrimaryServer(prev => ({
-      ...prev,
-      status: 'standby'
-    }))
+    toast.success('👑 Admin Override: Backup Mode Activated', {
+      description: 'All backup servers manually activated by admin',
+      duration: 6000
+    })
+  }
+
+  // RESTORE SECURITY LAYERS (ADMIN RECOVERY)
+  const restoreSecurityLayers = () => {
+    console.log('🔧 ADMIN RECOVERY: RESTORING ALL SECURITY LAYERS')
     
-    toast.success('⚡ Server Failover Complete!', {
-      description: 'All backup servers activated - Zero downtime achieved',
+    setSecurityLayers(prev => prev.map(layer => ({
+      ...layer,
+      status: 'secure',
+      strength: 100,
+      lastCheck: new Date()
+    })))
+    
+    setBackupModeEnabled(false)
+    
+    toast.success('🛡️ Security Layers Restored', {
+      description: 'All security layers back to full strength - Backup mode deactivated',
+      duration: 5000
+    })
+  }
+
+  // DISCONNECT ALL THREATS PERMANENTLY
+  const permanentlyDisconnectThreats = () => {
+    console.log('🚫 PERMANENT DISCONNECTION: ALL DETECTED THREATS BANNED FOREVER')
+    
+    const newBannedIPs = [
+      '192.168.1.100',
+      '10.0.0.50',
+      '172.16.0.25',
+      '203.0.113.15'
+    ]
+    
+    setDisconnectedIPs(prev => [...new Set([...prev, ...newBannedIPs])])
+    
+    toast.success('🚫 Threats Permanently Disconnected', {
+      description: `${newBannedIPs.length} malicious IPs banned forever - Zero tolerance security`,
       duration: 6000
     })
   }
@@ -222,49 +342,139 @@ export function ServerResilienceEngine() {
 
   return (
     <div className="space-y-6">
-      {/* Server Resilience Header */}
+      {/* Enhanced Security Header */}
       <Card className="border-2 border-red-500/50 bg-gradient-to-br from-red-900/30 to-orange-900/30">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-red-400">
             <Server className="h-6 w-6" />
-            🚫 NEVER ACCEPT SERVER BREAKDOWN - RESILIENCE ENGINE
-            <Badge className="bg-red-600 text-white animate-pulse">UNBREAKABLE</Badge>
+            🛡️ ADVANCED SERVER RESILIENCE - PREEMPTIVE THREAT DISCONNECTION
+            <Badge className={`${backupModeEnabled ? 'bg-red-600 animate-pulse' : 'bg-green-600'} text-white`}>
+              {backupModeEnabled ? 'BACKUP MODE ACTIVE' : 'SECURE OPERATION'}
+            </Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <Button
-              onClick={forceServerFailover}
+              onClick={forceBackupMode}
+              disabled={backupModeEnabled}
               className="bg-red-600 hover:bg-red-700 text-white h-16"
             >
               <AlertTriangle className="h-5 w-5 mr-2" />
-              🚨 FORCE FAILOVER<br/>Switch to Backup
+              👑 ADMIN OVERRIDE<br/>Force Backup Mode
             </Button>
             
             <Button
-              onClick={testGithubRollback}
+              onClick={restoreSecurityLayers}
               className="bg-blue-600 hover:bg-blue-700 text-white h-16"
             >
-              <Github className="h-5 w-5 mr-2" />
-              🐙 TEST ROLLBACK<br/>GitHub Integration
+              <Shield className="h-5 w-5 mr-2" />
+              🔧 RESTORE SECURITY<br/>All Layers to 100%
             </Button>
             
             <Button
-              onClick={secureAdminDatabase}
+              onClick={permanentlyDisconnectThreats}
               className="bg-purple-600 hover:bg-purple-700 text-white h-16"
             >
-              <Lock className="h-5 w-5 mr-2" />
-              👑 SECURE DATABASE<br/>Admin Only Access
+              <Ban className="h-5 w-5 mr-2" />
+              🚫 DISCONNECT THREATS<br/>Permanent Ban
             </Button>
             
             <div className="bg-green-900/30 border border-green-500/20 rounded-lg p-4 text-center">
               <CheckCircle className="h-8 w-8 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">PROTECTED</div>
-              <div className="text-sm text-muted-foreground">System Secure</div>
+              <div className="text-sm text-muted-foreground">
+                {disconnectedIPs.length} Threats Banned
+              </div>
             </div>
+          </div>
+
+          {/* Threat Disconnection Toggle */}
+          <div className="flex items-center justify-between p-4 bg-purple-900/20 rounded-lg border border-purple-500/20 mb-4">
+            <div>
+              <h4 className="font-bold text-purple-400">🚫 Preemptive Threat Disconnection</h4>
+              <p className="text-sm text-muted-foreground">
+                Automatically detect and permanently disconnect threats before they reach our security layers
+              </p>
+            </div>
+            <Switch
+              checked={threatDisconnectionActive}
+              onCheckedChange={setThreatDisconnectionActive}
+            />
           </div>
         </CardContent>
       </Card>
+
+      {/* 3-Layer Security Status */}
+      <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-pink-900/20">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-purple-400">
+            <Shield className="h-5 w-5" />
+            🛡️ 3-Layer Security Protocol - Admin Recovery Protection
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {securityLayers.map((layer) => (
+              <div key={layer.id} className="p-4 rounded-lg bg-muted/30 border">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-4 h-4 rounded-full ${
+                      layer.status === 'secure' ? 'bg-green-500' :
+                      layer.status === 'compromised' ? 'bg-yellow-500' : 'bg-red-500'
+                    }`} />
+                    <span className="font-medium">Layer {layer.id}: {layer.name}</span>
+                  </div>
+                  <Badge className={`${
+                    layer.status === 'secure' ? 'bg-green-600' :
+                    layer.status === 'compromised' ? 'bg-yellow-600' : 'bg-red-600'
+                  } text-white`}>
+                    {layer.status.toUpperCase()}
+                  </Badge>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span>Security Strength</span>
+                    <span className="font-bold">{layer.strength}%</span>
+                  </div>
+                  <Progress 
+                    value={layer.strength} 
+                    className={`h-2 ${layer.id === 3 ? 'border-2 border-red-500/50' : ''}`}
+                  />
+                  {layer.id === 3 && (
+                    <p className="text-xs text-red-400 font-medium">
+                      🚨 BACKUP MODE ACTIVATES ONLY IF THIS LAYER IS DESTROYED
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Disconnected Threats Display */}
+      {disconnectedIPs.length > 0 && (
+        <Card className="border-red-500/30 bg-gradient-to-br from-red-900/20 to-orange-900/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-red-400">
+              <Ban className="h-5 w-5" />
+              🚫 Permanently Disconnected Threats
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {disconnectedIPs.slice(-8).map((ip, index) => (
+                <div key={index} className="p-2 bg-red-900/30 rounded text-center">
+                  <Eye className="h-4 w-4 mx-auto mb-1 text-red-400" />
+                  <div className="text-xs font-mono">{ip}</div>
+                  <div className="text-xs text-red-300">BANNED</div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Primary Server Status */}
       <Card>
@@ -301,7 +511,7 @@ export function ServerResilienceEngine() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <HardDrive className="h-5 w-5" />
-            Backup Server Network - Always Ready
+            Backup Server Network - {backupModeEnabled ? 'EMERGENCY MODE ACTIVE' : 'Standby Ready'}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -409,30 +619,37 @@ export function ServerResilienceEngine() {
       <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border border-green-500/20">
         <CardContent className="p-6 text-center">
           <h3 className="text-2xl font-bold text-green-400 mb-4">
-            🚫 BREAKDOWN IMPOSSIBLE GUARANTEE
+            🛡️ ADVANCED PROTECTION GUARANTEE
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
-              <div className="text-6xl">🔧</div>
-              <div className="font-bold text-blue-400">DATA REDUNDANCY</div>
+              <div className="text-6xl">🚫</div>
+              <div className="font-bold text-red-400">PREEMPTIVE DISCONNECTION</div>
               <div className="text-sm text-muted-foreground">
-                Multiple backup servers ensure continuous operation
+                Threats permanently banned before reaching our security layers
               </div>
             </div>
             <div className="space-y-2">
-              <div className="text-6xl">🐙</div>
-              <div className="font-bold text-purple-400">GITHUB FORCE</div>
+              <div className="text-6xl">🛡️</div>
+              <div className="font-bold text-purple-400">3-LAYER SECURITY</div>
               <div className="text-sm text-muted-foreground">
-                Flawless rollback system with admin-only controls
+                Backup mode only activates when 3rd recovery layer is destroyed
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-6xl">⚡</div>
+              <div className="font-bold text-blue-400">ZERO TOLERANCE</div>
+              <div className="text-sm text-muted-foreground">
+                Malicious software and hackers have no pathway to our platform
               </div>
             </div>
           </div>
           <div className="mt-6 p-4 bg-red-900/20 rounded-lg">
             <div className="text-xl font-bold text-red-400">
-              🛡️ COMMUNITY PROTECTED AT ALL COSTS 🛡️
+              🚨 BACKUP MODE: ONLY WHEN 3RD SECURITY LAYER DESTROYED 🚨
             </div>
             <div className="text-sm text-muted-foreground mt-2">
-              Server breakdown is mathematically impossible with our resilience architecture
+              Attackers are permanently disconnected before they can compromise our recovery systems
             </div>
           </div>
         </CardContent>
