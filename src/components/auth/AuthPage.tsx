@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Crown } from 'lucide-react'
 import { useAuth } from './AuthProvider'
 import { AdminSetup } from '@/components/admin/AdminSetup'
 import { AuthHeader } from './AuthHeader'
@@ -78,10 +77,7 @@ export function AuthPage() {
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
                 <TabsTrigger value="signup">Sign Up</TabsTrigger>
-                <TabsTrigger value="admin" className="text-purple-400">
-                  <Crown className="h-3 w-3 mr-1" />
-                  Admin
-                </TabsTrigger>
+                <TabsTrigger value="admin">Admin Access</TabsTrigger>
               </TabsList>
               
               <TabsContent value="signin" className="space-y-4 mt-6">

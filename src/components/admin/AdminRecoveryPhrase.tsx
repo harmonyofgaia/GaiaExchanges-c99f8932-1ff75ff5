@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Key, Shield, Copy, Eye, EyeOff, RefreshCw } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { RecoveryPhrasePDF } from './RecoveryPhrasePDF'
 
 export function AdminRecoveryPhrase() {
   const [recoveryPhrase, setRecoveryPhrase] = useState<string[]>([])
@@ -51,7 +52,7 @@ export function AdminRecoveryPhrase() {
     })
   }
 
-  // Load existing phrase from localStorage
+  // Load existing phrase from localStorage or generate new one
   useEffect(() => {
     const stored = localStorage.getItem('admin_recovery_phrase')
     if (stored) {
@@ -60,11 +61,14 @@ export function AdminRecoveryPhrase() {
         if (Array.isArray(phrase) && phrase.length === 12) {
           setRecoveryPhrase(phrase)
           setIsGenerated(true)
+          return
         }
       } catch (error) {
         console.error('Error loading recovery phrase:', error)
       }
     }
+    // Auto-generate if none exists
+    generateRecoveryPhrase()
   }, [])
 
   const copyToClipboard = () => {
@@ -116,20 +120,7 @@ export function AdminRecoveryPhrase() {
           </AlertDescription>
         </Alert>
 
-        {!isGenerated ? (
-          <div className="text-center space-y-4">
-            <p className="text-muted-foreground">
-              Generate a secure 12-word recovery phrase for admin account access on other devices.
-            </p>
-            <Button 
-              onClick={generateRecoveryPhrase}
-              className="bg-red-600 hover:bg-red-700"
-            >
-              <Key className="h-4 w-4 mr-2" />
-              Generate Recovery Phrase
-            </Button>
-          </div>
-        ) : (
+        {isGenerated && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h4 className="font-medium text-red-400">Your Recovery Phrase</h4>
@@ -172,6 +163,8 @@ export function AdminRecoveryPhrase() {
               ))}
             </div>
 
+            <RecoveryPhrasePDF recoveryPhrase={recoveryPhrase} />
+
             <div className="space-y-3">
               <h4 className="font-medium text-red-400">Verify Recovery Phrase</h4>
               <Input
@@ -194,8 +187,8 @@ export function AdminRecoveryPhrase() {
               <Key className="h-4 w-4 text-orange-400" />
               <AlertDescription className="text-orange-300 text-sm">
                 <strong>Recovery Instructions:</strong><br/>
-                1. Write down these 12 words in exact order<br/>
-                2. Store in a secure, offline location<br/>
+                1. Download the PDF document using the button above<br/>
+                2. Store the document in multiple secure, offline locations<br/>
                 3. Use this phrase to recover admin access on new devices<br/>
                 4. Never store digitally or share with anyone
               </AlertDescription>
