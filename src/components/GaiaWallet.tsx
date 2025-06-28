@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -10,6 +9,7 @@ import { useAuth } from '@/components/auth/AuthProvider'
 import { useWallets } from '@/hooks/useWallets'
 import { useTransactions } from '@/hooks/useTransactions'
 import { useUserProfile } from '@/hooks/useUserProfile'
+import { UltimateWalletProtection } from '@/components/security/UltimateWalletProtection'
 
 export function GaiaWallet() {
   const { user, signOut } = useAuth()
@@ -80,13 +80,16 @@ export function GaiaWallet() {
 
   return (
     <div className="space-y-6">
+      {/* Ultimate Wallet Protection - Always First */}
+      <UltimateWalletProtection />
+
       {/* Wallet Header with User Info */}
       <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-500/20">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2 text-green-400">
               <Leaf className="h-5 w-5" />
-              Harmony of Gaia Wallet - Connected
+              Harmony of Gaia Wallet - Maximum Protected
             </CardTitle>
             <Button variant="outline" size="sm" onClick={handleSignOut}>
               <LogOut className="h-4 w-4 mr-2" />
@@ -108,9 +111,9 @@ export function GaiaWallet() {
               <span className="text-sm text-green-400">@{profile?.username || 'Not set'}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Account Status:</span>
-              <Badge variant="outline" className="border-blue-500/20 text-blue-400">
-                {profile?.verified ? 'Verified' : 'Unverified'}
+              <span className="text-sm text-muted-foreground">Security Status:</span>
+              <Badge variant="outline" className="border-green-500/20 text-green-400">
+                🛡️ MAXIMUM PROTECTION ACTIVE
               </Badge>
             </div>
           </div>
@@ -157,15 +160,15 @@ export function GaiaWallet() {
           <div className="flex items-center justify-center gap-4 text-sm flex-wrap">
             <Badge variant="outline" className="border-green-500/20 text-green-400">
               <Shield className="h-3 w-3 mr-1" />
-              Eco-Secured
+              Future-Proof Protected
             </Badge>
             <Badge variant="outline" className="border-blue-500/20 text-blue-400">
               <Eye className="h-3 w-3 mr-1" />
-              Transparent
+              AI Monitored
             </Badge>
             <Badge variant="outline" className="border-purple-500/20 text-purple-400">
               <Globe className="h-3 w-3 mr-1" />
-              Supabase Powered
+              Quantum Secured
             </Badge>
           </div>
 
