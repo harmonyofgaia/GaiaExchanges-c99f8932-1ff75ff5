@@ -12,30 +12,36 @@ export function ProtectedRoute({ children, isAdminRoute = false }: ProtectedRout
   const { user, loading } = useAuth()
   const { isAdmin, isValidating } = useSecureAdmin()
 
-  // For admin routes, bypass regular auth completely
+  // For admin routes, use enhanced validation
   if (isAdminRoute) {
     if (isValidating) {
       return (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="animate-pulse text-center space-y-4">
-            <div className="w-16 h-16 bg-green-500/20 rounded-full mx-auto animate-bounce"></div>
-            <p className="text-muted-foreground">Validating Admin Access...</p>
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-green-900">
+          <div className="text-center space-y-4">
+            <div className="w-16 h-16 bg-green-500/20 rounded-full mx-auto animate-pulse flex items-center justify-center">
+              <div className="w-8 h-8 bg-green-400 rounded-full animate-bounce"></div>
+            </div>
+            <p className="text-green-400 font-medium">Validating Admin Access...</p>
+            <p className="text-green-300 text-sm">Maximum security verification in progress</p>
           </div>
         </div>
       )
     }
     
-    // For admin routes, always render children (SecureAdminLogin will handle auth)
+    // Admin routes always render children (SecureAdminLogin handles authentication)
     return <>{children}</>
   }
 
   // Regular auth flow for non-admin routes
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-center space-y-4">
-          <div className="w-16 h-16 bg-green-500/20 rounded-full mx-auto animate-bounce"></div>
-          <p className="text-muted-foreground">Loading Gaia's Exchanges...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
+        <div className="text-center space-y-4">
+          <div className="w-16 h-16 bg-green-500/20 rounded-full mx-auto animate-pulse flex items-center justify-center">
+            <div className="w-8 h-8 bg-green-400 rounded-full animate-bounce"></div>
+          </div>
+          <p className="text-green-600 font-medium">Loading Harmony of Gaia...</p>
+          <p className="text-green-500 text-sm">Connecting to secure servers</p>
         </div>
       </div>
     )
