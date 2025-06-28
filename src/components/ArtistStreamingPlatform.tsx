@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -20,9 +19,12 @@ import {
   Star,
   Leaf,
   Eye,
-  TrendingUp
+  TrendingUp,
+  Coins,
+  Flame
 } from 'lucide-react'
 import { AbstractArtOverlay } from '@/components/ui/abstract-art-overlay'
+import { PhantomWalletConnector } from '@/components/PhantomWalletConnector'
 
 interface StreamingSlot {
   id: string
@@ -44,6 +46,16 @@ interface LiveStream {
   duration: string
   category: string
   environmentalImpact: number
+  gaiaTokensBurned: number
+  foundationSplit: number
+  artistSplit: number
+}
+
+interface RevenueAgreement {
+  foundationPercentage: number
+  artistPercentage: number
+  gaiaTokensPerViewer: number
+  investmentTargets: string[]
 }
 
 export function ArtistStreamingPlatform() {
@@ -56,7 +68,10 @@ export function ArtistStreamingPlatform() {
       revenue: 89.32,
       duration: '02:34:12',
       category: 'Ambient/Healing',
-      environmentalImpact: 45.2
+      environmentalImpact: 45.2,
+      gaiaTokensBurned: 1247,
+      foundationSplit: 44.66,
+      artistSplit: 44.66
     },
     {
       id: '2',
@@ -66,7 +81,10 @@ export function ArtistStreamingPlatform() {
       revenue: 67.89,
       duration: '01:45:33',
       category: 'Folk/Acoustic',
-      environmentalImpact: 32.8
+      environmentalImpact: 32.8,
+      gaiaTokensBurned: 892,
+      foundationSplit: 33.95,
+      artistSplit: 33.95
     }
   ])
 
@@ -85,17 +103,33 @@ export function ArtistStreamingPlatform() {
     description: '',
     streamingLink: '',
     preferredTime: '',
-    environmentalCause: ''
+    environmentalCause: '',
+    revenueAgreement: 'foundation_artist_50_50' as 'foundation_artist_50_50' | 'foundation_60_artist_40' | 'foundation_40_artist_60'
+  })
+
+  const [revenueAgreement, setRevenueAgreement] = useState<RevenueAgreement>({
+    foundationPercentage: 50,
+    artistPercentage: 50,
+    gaiaTokensPerViewer: 1,
+    investmentTargets: ['Coral Reef Restoration', 'Forest Regeneration', 'Ocean Cleanup', 'Renewable Energy']
   })
 
   const totalViewers = activeStreams.reduce((sum, stream) => sum + stream.viewers, 0)
   const totalRevenue = activeStreams.reduce((sum, stream) => sum + stream.revenue, 0)
   const totalEnvironmentalImpact = activeStreams.reduce((sum, stream) => sum + stream.environmentalImpact, 0)
+  const totalGaiaTokensBurned = activeStreams.reduce((sum, stream) => sum + stream.gaiaTokensBurned, 0)
 
   const handleApplication = () => {
-    console.log('Artist Application Submitted:', applicationForm)
-    // Here would be the logic to send to info@cultureofharmony.net
-    alert(`Application submitted! We'll contact you at ${applicationForm.email} with streaming details.`)
+    const agreementDetails = {
+      ...applicationForm,
+      revenueAgreement: revenueAgreement,
+      submissionDate: new Date().toISOString(),
+      gaiaTokenAddress: 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7'
+    }
+    
+    console.log('Artist Application with Revenue Agreement:', agreementDetails)
+    alert(`Application submitted with ${revenueAgreement.foundationPercentage}/${revenueAgreement.artistPercentage} revenue split! We'll contact you at ${applicationForm.email} with streaming details and investment agreement.`)
+    
     setApplicationForm({
       artistName: '',
       email: '',
@@ -103,8 +137,23 @@ export function ArtistStreamingPlatform() {
       description: '',
       streamingLink: '',
       preferredTime: '',
-      environmentalCause: ''
+      environmentalCause: '',
+      revenueAgreement: 'foundation_artist_50_50'
     })
+  }
+
+  const updateRevenueAgreement = (type: string) => {
+    switch (type) {
+      case 'foundation_artist_50_50':
+        setRevenueAgreement({...revenueAgreement, foundationPercentage: 50, artistPercentage: 50})
+        break
+      case 'foundation_60_artist_40':
+        setRevenueAgreement({...revenueAgreement, foundationPercentage: 60, artistPercentage: 40})
+        break
+      case 'foundation_40_artist_60':
+        setRevenueAgreement({...revenueAgreement, foundationPercentage: 40, artistPercentage: 60})
+        break
+    }
   }
 
   return (
@@ -117,11 +166,11 @@ export function ArtistStreamingPlatform() {
           🎵 ARTIST STREAMING PLATFORM
         </h1>
         <p className="text-xl text-muted-foreground mb-6">
-          Perform Live • Earn Revenue • Support Environmental Causes
+          Perform Live • Earn Revenue • Support Environmental Causes • Burn GAiA Tokens
         </p>
         
         {/* Live Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
           <Card className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border-green-500/30">
             <CardContent className="p-4 text-center">
               <Users className="w-8 h-8 text-green-400 mx-auto mb-2" />
@@ -153,16 +202,99 @@ export function ArtistStreamingPlatform() {
               <div className="text-sm text-orange-300">Live Streams</div>
             </CardContent>
           </Card>
+
+          <Card className="bg-gradient-to-br from-yellow-900/20 to-amber-900/20 border-yellow-500/30">
+            <CardContent className="p-4 text-center">
+              <Coins className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-white">{totalGaiaTokensBurned.toLocaleString()}</div>
+              <div className="text-sm text-yellow-300">GAiA Burned</div>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
-      {/* Live Streams */}
+      {/* Phantom Wallet Integration */}
+      <PhantomWalletConnector />
+
+      {/* Revenue Agreement System */}
+      <Card className="bg-gradient-to-br from-emerald-900/20 to-teal-900/20 border-emerald-500/20 relative">
+        <AbstractArtOverlay artType="fractals" intensity="medium" />
+        <CardHeader className="relative z-10">
+          <CardTitle className="text-emerald-400 flex items-center gap-2">
+            <DollarSign className="w-5 h-5" />
+            Foundation & Artist Revenue Agreement System
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="relative z-10 space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="bg-black/30 border-emerald-500/30 cursor-pointer hover:border-emerald-400 transition-colors"
+                  onClick={() => updateRevenueAgreement('foundation_artist_50_50')}>
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-emerald-400 mb-2">50% / 50%</div>
+                <div className="text-sm text-muted-foreground mb-3">Equal Partnership</div>
+                <div className="flex justify-between text-xs">
+                  <span>Foundation: 50%</span>
+                  <span>Artist: 50%</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-black/30 border-blue-500/30 cursor-pointer hover:border-blue-400 transition-colors"
+                  onClick={() => updateRevenueAgreement('foundation_60_artist_40')}>
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-blue-400 mb-2">60% / 40%</div>
+                <div className="text-sm text-muted-foreground mb-3">Foundation Priority</div>
+                <div className="flex justify-between text-xs">
+                  <span>Foundation: 60%</span>
+                  <span>Artist: 40%</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-black/30 border-purple-500/30 cursor-pointer hover:border-purple-400 transition-colors"
+                  onClick={() => updateRevenueAgreement('foundation_40_artist_60')}>
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-purple-400 mb-2">40% / 60%</div>
+                <div className="text-sm text-muted-foreground mb-3">Artist Priority</div>
+                <div className="flex justify-between text-xs">
+                  <span>Foundation: 40%</span>
+                  <span>Artist: 60%</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded-lg border border-green-500/20">
+            <h4 className="font-bold text-green-400 mb-3">Current Agreement Details</h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+              <div>
+                <div className="text-2xl font-bold text-green-400">{revenueAgreement.foundationPercentage}%</div>
+                <div className="text-sm text-muted-foreground">Foundation Share</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-blue-400">{revenueAgreement.artistPercentage}%</div>
+                <div className="text-sm text-muted-foreground">Artist Share</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-yellow-400">{revenueAgreement.gaiaTokensPerViewer}</div>
+                <div className="text-sm text-muted-foreground">GAiA per Viewer</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-purple-400">{revenueAgreement.investmentTargets.length}</div>
+                <div className="text-sm text-muted-foreground">Investment Areas</div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Live Streams with Revenue Tracking */}
       <Card className="bg-gradient-to-br from-gray-900/40 to-black/40 border-green-500/20 relative">
         <AbstractArtOverlay artType="waves" intensity="subtle" />
         <CardHeader className="relative z-10">
           <CardTitle className="text-green-400 flex items-center gap-2">
             <Play className="w-5 h-5" />
-            Live Performances
+            Live Performances with Revenue Sharing
           </CardTitle>
         </CardHeader>
         <CardContent className="relative z-10">
@@ -189,7 +321,7 @@ export function ArtistStreamingPlatform() {
                       <span className="text-gray-300">Impact: {stream.environmentalImpact}kg CO2</span>
                     </div>
                     
-                    <div className="flex justify-between items-center">
+                    <div className="grid grid-cols-2 gap-4 text-sm">
                       <div className="flex items-center gap-2 text-blue-300">
                         <Eye className="w-4 h-4" />
                         {stream.viewers.toLocaleString()} viewers
@@ -197,6 +329,31 @@ export function ArtistStreamingPlatform() {
                       <div className="flex items-center gap-2 text-green-300">
                         <DollarSign className="w-4 h-4" />
                         ${stream.revenue.toFixed(2)}
+                      </div>
+                      <div className="flex items-center gap-2 text-yellow-300">
+                        <Coins className="w-4 h-4" />
+                        {stream.gaiaTokensBurned} GAiA
+                      </div>
+                      <div className="flex items-center gap-2 text-purple-300">
+                        <Flame className="w-4 h-4" />
+                        Burned for Reinvestment
+                      </div>
+                    </div>
+
+                    {/* Revenue Split Display */}
+                    <div className="p-3 bg-gradient-to-r from-green-900/20 to-blue-900/20 rounded border border-green-500/20">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm font-bold text-green-400">Revenue Split:</span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="text-center">
+                          <div className="font-bold text-green-300">${stream.foundationSplit.toFixed(2)}</div>
+                          <div className="text-muted-foreground">Foundation (50%)</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="font-bold text-blue-300">${stream.artistSplit.toFixed(2)}</div>
+                          <div className="text-muted-foreground">Artist (50%)</div>
+                        </div>
                       </div>
                     </div>
                     
@@ -266,15 +423,15 @@ export function ArtistStreamingPlatform() {
         </CardContent>
       </Card>
 
-      {/* Artist Application Form */}
+      {/* Enhanced Artist Application Form */}
       <Card className="bg-gradient-to-br from-cyan-900/20 to-teal-900/20 border-cyan-500/20 relative">
         <AbstractArtOverlay artType="matrix" intensity="medium" />
         <CardHeader className="relative z-10">
           <CardTitle className="text-cyan-400 flex items-center gap-2">
             <Star className="w-5 h-5" />
-            Apply for Streaming Slot
+            Apply for Streaming Slot with Revenue Agreement
           </CardTitle>
-          <p className="text-gray-300">Join our platform and help restore natural health through your art</p>
+          <p className="text-gray-300">Join our platform and help restore natural health through your art while earning revenue</p>
         </CardHeader>
         <CardContent className="relative z-10 space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -325,18 +482,57 @@ export function ArtistStreamingPlatform() {
             onChange={(e) => setApplicationForm({...applicationForm, environmentalCause: e.target.value})}
             className="bg-black/20 border-cyan-500/20 min-h-[80px]"
           />
+
+          {/* Revenue Agreement Selection */}
+          <div className="p-4 bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-lg border border-purple-500/20">
+            <h4 className="font-bold text-purple-400 mb-3">Select Revenue Agreement:</h4>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <Button
+                variant={applicationForm.revenueAgreement === 'foundation_artist_50_50' ? 'default' : 'outline'}
+                onClick={() => setApplicationForm({...applicationForm, revenueAgreement: 'foundation_artist_50_50'})}
+                className="text-center"
+              >
+                50% / 50%<br/>
+                <span className="text-xs">Equal Split</span>
+              </Button>
+              <Button
+                variant={applicationForm.revenueAgreement === 'foundation_60_artist_40' ? 'default' : 'outline'}
+                onClick={() => setApplicationForm({...applicationForm, revenueAgreement: 'foundation_60_artist_40'})}
+                className="text-center"
+              >
+                60% / 40%<br/>
+                <span className="text-xs">Foundation Priority</span>
+              </Button>
+              <Button
+                variant={applicationForm.revenueAgreement === 'foundation_40_artist_60' ? 'default' : 'outline'}
+                onClick={() => setApplicationForm({...applicationForm, revenueAgreement: 'foundation_40_artist_60'})}
+                className="text-center"
+              >
+                40% / 60%<br/>
+                <span className="text-xs">Artist Priority</span>
+              </Button>
+            </div>
+          </div>
           
           <Button 
             onClick={handleApplication}
             className="w-full bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700"
           >
             <Music className="w-4 h-4 mr-2" />
-            Submit Application
+            Submit Application with Revenue Agreement
           </Button>
           
           <p className="text-sm text-gray-400 text-center">
-            Applications will be sent to info@cultureofharmony.net for review
+            Applications will be sent to info@cultureofharmony.net for review with your selected revenue agreement
           </p>
+
+          <div className="p-3 bg-gradient-to-r from-yellow-900/20 to-orange-900/20 rounded border border-yellow-500/20">
+            <p className="text-sm text-yellow-300 text-center">
+              <Coins className="w-4 h-4 inline mr-1" />
+              GAiA Token: ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7
+              <br/>1 GAiA token burned per viewer for environmental reinvestment
+            </p>
+          </div>
         </CardContent>
       </Card>
     </div>
