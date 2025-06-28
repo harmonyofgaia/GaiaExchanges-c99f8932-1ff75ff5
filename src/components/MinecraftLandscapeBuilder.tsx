@@ -13,7 +13,7 @@ import {
   Hammer,
   Zap,
   Eye,
-  Cube,
+  Box,
   Globe,
   Sparkles,
   Target,
@@ -115,7 +115,7 @@ export function MinecraftLandscapeBuilder() {
     <Card className="border-2 border-yellow-500/50 bg-gradient-to-r from-yellow-900/30 to-orange-900/30 mb-8">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-yellow-400 text-center justify-center">
-          <Cube className="h-6 w-6" />
+          <Box className="h-6 w-6" />
           🏗️ MINECRAFT LANDSCAPE BUILDER - ULTRA REALISTIC
         </CardTitle>
       </CardHeader>
