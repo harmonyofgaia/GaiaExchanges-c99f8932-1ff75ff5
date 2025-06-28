@@ -100,14 +100,18 @@ export function AutoIssueResolver() {
           }
         })
 
-        // Memory leak prevention
-        if (typeof window !== 'undefined' && window.performance && window.performance.memory) {
-          const memory = (window.performance as any).memory
-          if (memory.usedJSHeapSize > memory.totalJSHeapSize * 0.8) {
-            console.log('🧹 Memory optimization triggered')
-            // Force garbage collection if possible
-            if (window.gc) {
-              window.gc()
+        // Memory leak prevention - Fixed TypeScript error
+        if (typeof window !== 'undefined' && window.performance) {
+          // Use type assertion to access memory property safely
+          const performanceWithMemory = window.performance as any
+          if (performanceWithMemory.memory) {
+            const memory = performanceWithMemory.memory
+            if (memory.usedJSHeapSize > memory.totalJSHeapSize * 0.8) {
+              console.log('🧹 Memory optimization triggered')
+              // Force garbage collection if possible
+              if ((window as any).gc) {
+                (window as any).gc()
+              }
             }
           }
         }
