@@ -5,26 +5,23 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
-import { Wallet, Send, QrCode, History, Shield, Leaf, Eye, ExternalLink, Globe } from 'lucide-react'
-
-const walletData = {
-  connectedAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-  burningWalletAddress: '7BurningSystemWalletAddressForTransparency123',
-  gaiaBalance: 15750.25,
-  usdValue: 47250.75,
-  stakingRewards: 0,
-  transactions: [
-    { type: 'received', amount: 1250, from: 'Environmental Reward', time: '2 hours ago', hash: '0x742d35cc6c' },
-    { type: 'burned', amount: 500, to: 'Ocean Cleanup', time: '1 day ago', hash: '0x9f4e8c2a1b' },
-    { type: 'received', amount: 2000, from: 'Token Purchase', time: '3 days ago', hash: '0x1a2b3c4d5e' },
-    { type: 'burned', amount: 750, to: 'Reforestation', time: '5 days ago', hash: '0x6f7g8h9i0j' }
-  ]
-}
+import { Wallet, Send, QrCode, History, Shield, Leaf, Eye, ExternalLink, Globe, LogOut } from 'lucide-react'
+import { useAuth } from '@/components/auth/AuthProvider'
+import { useWallets } from '@/hooks/useWallets'
+import { useTransactions } from '@/hooks/useTransactions'
+import { useUserProfile } from '@/hooks/useUserProfile'
 
 export function GaiaWallet() {
+  const { user, signOut } = useAuth()
+  const { wallets, loading: walletsLoading } = useWallets()
+  const { transactions, loading: transactionsLoading } = useTransactions()
+  const { profile } = useUserProfile()
   const [sendAmount, setSendAmount] = useState('')
   const [recipientAddress, setRecipientAddress] = useState('')
 
+  const gaiaWallet = wallets.find(w => w.currency === 'GAIA')
+  const btcWallet = wallets.find(w => w.currency === 'BTC')
+  
   const formatGaia = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       minimumFractionDigits: 2,
@@ -43,60 +40,118 @@ export function GaiaWallet() {
     console.log('Sending GAiA:', { amount: sendAmount, to: recipientAddress })
   }
 
+  const handleSignOut = async () => {
+    await signOut()
+  }
+
   const getTransactionIcon = (type: string) => {
     switch (type) {
-      case 'received': return '↓'
-      case 'sent': return '↑'
-      case 'burned': return '🔥'
+      case 'reward': return '↓'
+      case 'transfer': return '↑'
+      case 'burn': return '🔥'
       default: return '•'
     }
   }
 
   const getTransactionColor = (type: string) => {
     switch (type) {
-      case 'received': return 'text-green-400'
-      case 'sent': return 'text-blue-400'
-      case 'burned': return 'text-orange-400'
+      case 'reward': return 'text-green-400'
+      case 'transfer': return 'text-blue-400'
+      case 'burn': return 'text-orange-400'
       default: return 'text-muted-foreground'
     }
   }
 
+  if (walletsLoading) {
+    return (
+      <div className="space-y-6">
+        <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-500/20">
+          <CardContent className="p-8">
+            <div className="animate-pulse space-y-4">
+              <div className="h-8 bg-green-500/20 rounded w-3/4 mx-auto"></div>
+              <div className="h-12 bg-green-500/20 rounded w-1/2 mx-auto"></div>
+              <div className="h-6 bg-green-500/20 rounded w-1/3 mx-auto"></div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-6">
-      {/* Wallet Header with Connected Address */}
+      {/* Wallet Header with User Info */}
       <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-500/20">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-400">
-            <Leaf className="h-5 w-5" />
-            Harmony of Gaia Wallet - Connected
-          </CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2 text-green-400">
+              <Leaf className="h-5 w-5" />
+              Harmony of Gaia Wallet - Connected
+            </CardTitle>
+            <Button variant="outline" size="sm" onClick={handleSignOut}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Sign Out
+            </Button>
+          </div>
         </CardHeader>
         <CardContent className="space-y-4">
+          {/* User Info */}
           <div className="bg-muted/30 rounded-lg p-4 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Main Wallet Address:</span>
-              <Button variant="outline" size="sm" onClick={() => navigator.clipboard.writeText(walletData.connectedAddress)}>
-                Copy
-              </Button>
+              <span className="text-sm text-muted-foreground">Welcome:</span>
+              <Badge variant="outline" className="border-green-500/20 text-green-400">
+                {profile?.full_name || user?.email}
+              </Badge>
             </div>
-            <code className="text-xs break-all text-green-400 font-mono">{walletData.connectedAddress}</code>
-            
-            <div className="flex items-center justify-between mt-3">
-              <span className="text-sm text-muted-foreground">Burning System Wallet:</span>
-              <Button variant="outline" size="sm" onClick={() => navigator.clipboard.writeText(walletData.burningWalletAddress)}>
-                Copy
-              </Button>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">Username:</span>
+              <span className="text-sm text-green-400">@{profile?.username || 'Not set'}</span>
             </div>
-            <code className="text-xs break-all text-orange-400 font-mono">{walletData.burningWalletAddress}</code>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">Account Status:</span>
+              <Badge variant="outline" className="border-blue-500/20 text-blue-400">
+                {profile?.verified ? 'Verified' : 'Unverified'}
+              </Badge>
+            </div>
           </div>
           
+          {/* Balance Display */}
           <div className="text-center space-y-2">
             <div className="text-4xl font-bold mono-numbers text-green-400">
-              {formatGaia(walletData.gaiaBalance)} GAiA
+              {formatGaia(gaiaWallet?.balance || 0)} GAiA
             </div>
             <div className="text-xl text-muted-foreground mono-numbers">
-              ≈ {formatUSD(walletData.usdValue)}
+              ≈ {formatUSD((gaiaWallet?.balance || 0) * 3.00)}
             </div>
+            {gaiaWallet?.locked_balance && gaiaWallet.locked_balance > 0 && (
+              <div className="text-sm text-yellow-400">
+                {formatGaia(gaiaWallet.locked_balance)} GAiA Locked in Staking
+              </div>
+            )}
+          </div>
+          
+          {/* Wallet Addresses */}
+          <div className="bg-muted/30 rounded-lg p-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">GAIA Wallet:</span>
+              <Button variant="outline" size="sm" onClick={() => navigator.clipboard.writeText(user?.id || '')}>
+                Copy
+              </Button>
+            </div>
+            <code className="text-xs break-all text-green-400 font-mono block">
+              {gaiaWallet?.wallet_address || user?.id}
+            </code>
+            
+            {btcWallet && (
+              <>
+                <div className="flex items-center justify-between mt-3">
+                  <span className="text-sm text-muted-foreground">BTC Balance:</span>
+                  <span className="text-sm text-orange-400 font-mono">
+                    {btcWallet.balance.toFixed(8)} BTC
+                  </span>
+                </div>
+              </>
+            )}
           </div>
           
           <div className="flex items-center justify-center gap-4 text-sm flex-wrap">
@@ -110,7 +165,7 @@ export function GaiaWallet() {
             </Badge>
             <Badge variant="outline" className="border-purple-500/20 text-purple-400">
               <Globe className="h-3 w-3 mr-1" />
-              DEXScreener Listed
+              Supabase Powered
             </Badge>
           </div>
 
@@ -209,7 +264,7 @@ export function GaiaWallet() {
                     className="mono-numbers"
                   />
                   <div className="text-sm text-muted-foreground mt-1">
-                    Available: {formatGaia(walletData.gaiaBalance)} GAiA
+                    Available: {formatGaia(gaiaWallet?.balance || 0)} GAiA
                   </div>
                 </div>
                 
@@ -242,14 +297,14 @@ export function GaiaWallet() {
                 <div className="space-y-2">
                   <p className="font-medium">Your GAiA Wallet Address</p>
                   <div className="bg-muted p-3 rounded-lg">
-                    <code className="text-sm break-all">{walletData.connectedAddress}</code>
+                    <code className="text-sm break-all">{gaiaWallet?.wallet_address || user?.id}</code>
                   </div>
                 </div>
                 
                 <Button 
                   variant="outline" 
                   className="w-full"
-                  onClick={() => navigator.clipboard.writeText(walletData.connectedAddress)}
+                  onClick={() => navigator.clipboard.writeText(gaiaWallet?.wallet_address || user?.id || '')}
                 >
                   Copy Address
                 </Button>
@@ -267,30 +322,53 @@ export function GaiaWallet() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {walletData.transactions.map((tx, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <div className={`text-lg ${getTransactionColor(tx.type)}`}>
-                        {getTransactionIcon(tx.type)}
+              {transactionsLoading ? (
+                <div className="space-y-4">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="animate-pulse flex items-center justify-between p-4 rounded-lg bg-muted/30">
+                      <div className="space-y-2">
+                        <div className="h-4 bg-muted rounded w-20"></div>
+                        <div className="h-3 bg-muted rounded w-32"></div>
                       </div>
-                      <div>
-                        <div className="font-medium capitalize">{tx.type}</div>
+                      <div className="space-y-2 text-right">
+                        <div className="h-4 bg-muted rounded w-24"></div>
+                        <div className="h-3 bg-muted rounded w-16"></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : transactions.length > 0 ? (
+                <div className="space-y-4">
+                  {transactions.map((tx) => (
+                    <div key={tx.id} className="flex items-center justify-between p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className={`text-lg ${getTransactionColor(tx.transaction_type)}`}>
+                          {getTransactionIcon(tx.transaction_type)}
+                        </div>
+                        <div>
+                          <div className="font-medium capitalize">{tx.transaction_type}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {tx.from_address ? `From: ${tx.from_address.slice(0, 16)}...` : 'System Transaction'}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="text-right">
+                        <div className={`font-medium mono-numbers ${getTransactionColor(tx.transaction_type)}`}>
+                          {tx.transaction_type === 'reward' ? '+' : '-'}{formatGaia(tx.amount)} {tx.currency}
+                        </div>
                         <div className="text-sm text-muted-foreground">
-                          {tx.type === 'received' ? `From: ${tx.from}` : `To: ${tx.to}`}
+                          {new Date(tx.created_at).toLocaleDateString()}
                         </div>
                       </div>
                     </div>
-                    
-                    <div className="text-right">
-                      <div className={`font-medium mono-numbers ${getTransactionColor(tx.type)}`}>
-                        {tx.type === 'received' ? '+' : '-'}{formatGaia(tx.amount)} GAiA
-                      </div>
-                      <div className="text-sm text-muted-foreground">{tx.time}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-muted-foreground">
+                  No transactions found. Start by receiving some GAiA tokens!
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>

@@ -9,16 +9,487 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      environmental_impact: {
+        Row: {
+          action_type: string
+          carbon_offset: number | null
+          created_at: string | null
+          description: string | null
+          id: string
+          ocean_cleanup_contribution: number | null
+          transaction_id: string | null
+          trees_planted: number | null
+          user_id: string
+        }
+        Insert: {
+          action_type: string
+          carbon_offset?: number | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          ocean_cleanup_contribution?: number | null
+          transaction_id?: string | null
+          trees_planted?: number | null
+          user_id: string
+        }
+        Update: {
+          action_type?: string
+          carbon_offset?: number | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          ocean_cleanup_contribution?: number | null
+          transaction_id?: string | null
+          trees_planted?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "environmental_impact_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          action_url: string | null
+          created_at: string | null
+          id: string
+          message: string
+          read: boolean | null
+          title: string
+          type: string | null
+          user_id: string
+        }
+        Insert: {
+          action_url?: string | null
+          created_at?: string | null
+          id?: string
+          message: string
+          read?: boolean | null
+          title: string
+          type?: string | null
+          user_id: string
+        }
+        Update: {
+          action_url?: string | null
+          created_at?: string | null
+          id?: string
+          message?: string
+          read?: boolean | null
+          title?: string
+          type?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      orders: {
+        Row: {
+          amount: number
+          created_at: string | null
+          fee: number | null
+          filled_amount: number | null
+          id: string
+          order_type: Database["public"]["Enums"]["transaction_type"]
+          price: number
+          status: Database["public"]["Enums"]["order_status"] | null
+          trading_pair_id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          fee?: number | null
+          filled_amount?: number | null
+          id?: string
+          order_type: Database["public"]["Enums"]["transaction_type"]
+          price: number
+          status?: Database["public"]["Enums"]["order_status"] | null
+          trading_pair_id: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          fee?: number | null
+          filled_amount?: number | null
+          id?: string
+          order_type?: Database["public"]["Enums"]["transaction_type"]
+          price?: number
+          status?: Database["public"]["Enums"]["order_status"] | null
+          trading_pair_id?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_trading_pair_id_fkey"
+            columns: ["trading_pair_id"]
+            isOneToOne: false
+            referencedRelation: "trading_pairs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          country: string | null
+          created_at: string | null
+          full_name: string | null
+          id: string
+          kyc_status: string | null
+          phone: string | null
+          security_level: Database["public"]["Enums"]["security_level"] | null
+          two_factor_enabled: boolean | null
+          updated_at: string | null
+          username: string | null
+          verified: boolean | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          country?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id: string
+          kyc_status?: string | null
+          phone?: string | null
+          security_level?: Database["public"]["Enums"]["security_level"] | null
+          two_factor_enabled?: boolean | null
+          updated_at?: string | null
+          username?: string | null
+          verified?: boolean | null
+        }
+        Update: {
+          avatar_url?: string | null
+          country?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string
+          kyc_status?: string | null
+          phone?: string | null
+          security_level?: Database["public"]["Enums"]["security_level"] | null
+          two_factor_enabled?: boolean | null
+          updated_at?: string | null
+          username?: string | null
+          verified?: boolean | null
+        }
+        Relationships: []
+      }
+      security_events: {
+        Row: {
+          created_at: string | null
+          event_description: string
+          event_type: string
+          id: string
+          ip_address: unknown | null
+          resolved: boolean | null
+          severity: Database["public"]["Enums"]["security_level"] | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          event_description: string
+          event_type: string
+          id?: string
+          ip_address?: unknown | null
+          resolved?: boolean | null
+          severity?: Database["public"]["Enums"]["security_level"] | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          event_description?: string
+          event_type?: string
+          id?: string
+          ip_address?: unknown | null
+          resolved?: boolean | null
+          severity?: Database["public"]["Enums"]["security_level"] | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      staking_pools: {
+        Row: {
+          active: boolean | null
+          apy_rate: number
+          created_at: string | null
+          currency: string
+          id: string
+          max_stake_amount: number | null
+          min_stake_amount: number | null
+          reward_pool: number | null
+          total_staked: number | null
+        }
+        Insert: {
+          active?: boolean | null
+          apy_rate: number
+          created_at?: string | null
+          currency: string
+          id?: string
+          max_stake_amount?: number | null
+          min_stake_amount?: number | null
+          reward_pool?: number | null
+          total_staked?: number | null
+        }
+        Update: {
+          active?: boolean | null
+          apy_rate?: number
+          created_at?: string | null
+          currency?: string
+          id?: string
+          max_stake_amount?: number | null
+          min_stake_amount?: number | null
+          reward_pool?: number | null
+          total_staked?: number | null
+        }
+        Relationships: []
+      }
+      trading_pairs: {
+        Row: {
+          base_currency: string
+          created_at: string | null
+          current_price: number | null
+          id: string
+          market_cap: number | null
+          max_trade_amount: number | null
+          min_trade_amount: number | null
+          price_change_24h: number | null
+          quote_currency: string
+          status: Database["public"]["Enums"]["trading_pair_status"] | null
+          symbol: string
+          trading_fee_percentage: number | null
+          updated_at: string | null
+          volume_24h: number | null
+        }
+        Insert: {
+          base_currency: string
+          created_at?: string | null
+          current_price?: number | null
+          id?: string
+          market_cap?: number | null
+          max_trade_amount?: number | null
+          min_trade_amount?: number | null
+          price_change_24h?: number | null
+          quote_currency: string
+          status?: Database["public"]["Enums"]["trading_pair_status"] | null
+          symbol: string
+          trading_fee_percentage?: number | null
+          updated_at?: string | null
+          volume_24h?: number | null
+        }
+        Update: {
+          base_currency?: string
+          created_at?: string | null
+          current_price?: number | null
+          id?: string
+          market_cap?: number | null
+          max_trade_amount?: number | null
+          min_trade_amount?: number | null
+          price_change_24h?: number | null
+          quote_currency?: string
+          status?: Database["public"]["Enums"]["trading_pair_status"] | null
+          symbol?: string
+          trading_fee_percentage?: number | null
+          updated_at?: string | null
+          volume_24h?: number | null
+        }
+        Relationships: []
+      }
+      transactions: {
+        Row: {
+          amount: number
+          block_number: number | null
+          created_at: string | null
+          currency: string
+          fee: number | null
+          from_address: string | null
+          id: string
+          metadata: Json | null
+          order_id: string | null
+          status: string | null
+          to_address: string | null
+          transaction_hash: string | null
+          transaction_type: Database["public"]["Enums"]["transaction_type"]
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          block_number?: number | null
+          created_at?: string | null
+          currency: string
+          fee?: number | null
+          from_address?: string | null
+          id?: string
+          metadata?: Json | null
+          order_id?: string | null
+          status?: string | null
+          to_address?: string | null
+          transaction_hash?: string | null
+          transaction_type: Database["public"]["Enums"]["transaction_type"]
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          block_number?: number | null
+          created_at?: string | null
+          currency?: string
+          fee?: number | null
+          from_address?: string | null
+          id?: string
+          metadata?: Json | null
+          order_id?: string | null
+          status?: string | null
+          to_address?: string | null
+          transaction_hash?: string | null
+          transaction_type?: Database["public"]["Enums"]["transaction_type"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transactions_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          granted_at: string | null
+          granted_by: string | null
+          id: string
+          role: Database["public"]["Enums"]["user_role"]
+          user_id: string
+        }
+        Insert: {
+          granted_at?: string | null
+          granted_by?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          user_id: string
+        }
+        Update: {
+          granted_at?: string | null
+          granted_by?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_stakes: {
+        Row: {
+          amount: number
+          created_at: string | null
+          id: string
+          last_reward_calculation: string | null
+          rewards_earned: number | null
+          staking_pool_id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          id?: string
+          last_reward_calculation?: string | null
+          rewards_earned?: number | null
+          staking_pool_id: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          id?: string
+          last_reward_calculation?: string | null
+          rewards_earned?: number | null
+          staking_pool_id?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_stakes_staking_pool_id_fkey"
+            columns: ["staking_pool_id"]
+            isOneToOne: false
+            referencedRelation: "staking_pools"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wallets: {
+        Row: {
+          balance: number | null
+          created_at: string | null
+          currency: string
+          id: string
+          is_primary: boolean | null
+          locked_balance: number | null
+          updated_at: string | null
+          user_id: string
+          wallet_address: string | null
+        }
+        Insert: {
+          balance?: number | null
+          created_at?: string | null
+          currency: string
+          id?: string
+          is_primary?: boolean | null
+          locked_balance?: number | null
+          updated_at?: string | null
+          user_id: string
+          wallet_address?: string | null
+        }
+        Update: {
+          balance?: number | null
+          created_at?: string | null
+          currency?: string
+          id?: string
+          is_primary?: boolean | null
+          locked_balance?: number | null
+          updated_at?: string | null
+          user_id?: string
+          wallet_address?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _user_id: string
+          _role: Database["public"]["Enums"]["user_role"]
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      order_status: "pending" | "completed" | "cancelled" | "partial"
+      security_level: "low" | "medium" | "high" | "maximum"
+      trading_pair_status: "active" | "inactive" | "maintenance"
+      transaction_type:
+        | "buy"
+        | "sell"
+        | "transfer"
+        | "stake"
+        | "unstake"
+        | "reward"
+        | "burn"
+      user_role: "user" | "trader" | "admin" | "moderator"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +604,20 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      order_status: ["pending", "completed", "cancelled", "partial"],
+      security_level: ["low", "medium", "high", "maximum"],
+      trading_pair_status: ["active", "inactive", "maintenance"],
+      transaction_type: [
+        "buy",
+        "sell",
+        "transfer",
+        "stake",
+        "unstake",
+        "reward",
+        "burn",
+      ],
+      user_role: ["user", "trader", "admin", "moderator"],
+    },
   },
 } as const
