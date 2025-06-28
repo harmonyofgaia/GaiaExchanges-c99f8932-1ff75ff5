@@ -2,15 +2,17 @@
 import { GaiasExchange } from '@/components/GaiasExchange'
 import { InvestorScoutingSystem } from '@/components/InvestorScoutingSystem'
 import { FullyFunctionalExchange } from '@/components/FullyFunctionalExchange'
+import { MultiExchangeIntegration } from '@/components/MultiExchangeIntegration'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const Markets = () => {
   return (
     <div className="space-y-6">
       <Tabs defaultValue="exchange" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="exchange">Live Exchange</TabsTrigger>
           <TabsTrigger value="investors">Investor Scouting</TabsTrigger>
+          <TabsTrigger value="listings">Exchange Listings</TabsTrigger>
           <TabsTrigger value="platform">Full Platform</TabsTrigger>
         </TabsList>
         
@@ -20,6 +22,10 @@ const Markets = () => {
         
         <TabsContent value="investors" className="space-y-6">
           <InvestorScoutingSystem />
+        </TabsContent>
+        
+        <TabsContent value="listings" className="space-y-6">
+          <MultiExchangeIntegration />
         </TabsContent>
         
         <TabsContent value="platform" className="space-y-6">
