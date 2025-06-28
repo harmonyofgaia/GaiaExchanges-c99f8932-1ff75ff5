@@ -1,5 +1,6 @@
 
 import React from 'react'
+import { GaiaLogo } from './GaiaLogo'
 
 interface AdvertisingHeaderProps {
   title?: string
@@ -25,17 +26,14 @@ export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60 flex items-center justify-center">
         <div className="text-center px-4">
-          <button
-            onClick={handleLogoClick}
-            className="cursor-pointer hover:scale-105 transition-transform duration-300 mb-4 block mx-auto"
-            title="Visit Culture of Harmony - Harmony of Gaia Projects"
-          >
-            <img 
-              src="/lovable-uploads/ab19f9f8-2069-4211-955c-dab937602141.png" 
-              alt="Gaia of Harmony Logo - Click to visit Harmony of Gaia Projects" 
-              className="w-20 h-20 drop-shadow-lg opacity-98 hover:opacity-100 transition-opacity duration-300"
+          <div className="mb-4">
+            <GaiaLogo 
+              size="xl" 
+              variant="white-fade" 
+              onClick={handleLogoClick}
+              className="mx-auto"
             />
-          </button>
+          </div>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-lg">
             {title}
           </h1>

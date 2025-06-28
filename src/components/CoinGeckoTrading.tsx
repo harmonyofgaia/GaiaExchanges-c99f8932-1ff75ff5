@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -6,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Search, TrendingUp, TrendingDown, Shield, AlertTriangle, CheckCircle, Globe } from 'lucide-react'
+import { GaiaLogo } from './GaiaLogo'
 
 interface CoinData {
   id: string
@@ -22,8 +22,22 @@ interface CoinData {
   rank: number
 }
 
-// Mock CoinGecko data with reliability checks
+// Mock CoinGecko data with GAiA featured prominently
 const mockCoinData: CoinData[] = [
+  {
+    id: 'gaia-harmony',
+    name: 'GAiA',
+    symbol: 'GAIA',
+    image: 'GAIA_LOGO',
+    price: 3.00,
+    change24h: 5.67,
+    volume24h: 8750000,
+    marketCap: 257250000,
+    trustScore: 98,
+    isReliable: true,
+    isVerified: true,
+    rank: 1 // Featured as #1
+  },
   {
     id: 'bitcoin',
     name: 'Bitcoin',
@@ -36,7 +50,7 @@ const mockCoinData: CoinData[] = [
     trustScore: 95,
     isReliable: true,
     isVerified: true,
-    rank: 1
+    rank: 2
   },
   {
     id: 'ethereum',
@@ -50,21 +64,7 @@ const mockCoinData: CoinData[] = [
     trustScore: 94,
     isReliable: true,
     isVerified: true,
-    rank: 2
-  },
-  {
-    id: 'gaia-harmony',
-    name: 'GAiA',
-    symbol: 'GAIA',
-    image: '🌍',
-    price: 3.00,
-    change24h: 5.67,
-    volume24h: 8750000,
-    marketCap: 257250000,
-    trustScore: 98,
-    isReliable: true,
-    isVerified: true,
-    rank: 127
+    rank: 3
   },
   {
     id: 'binancecoin',
@@ -172,12 +172,20 @@ export function CoinGeckoTrading() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+      {/* Header with GAiA Logo */}
       <Card className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 border-blue-500/30">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <Globe className="h-6 w-6" />
-            Gaia's Exchanges - World's Most Secure Trading Platform
+          <CardTitle className="flex items-center gap-3 text-blue-400">
+            <GaiaLogo size="lg" variant="white-fade" />
+            <div>
+              <div className="flex items-center gap-2">
+                <Globe className="h-6 w-6" />
+                Gaia's Exchanges - World's Most Secure Trading Platform
+              </div>
+              <div className="text-sm font-normal text-green-400 mt-1">
+                Featuring GAiA Token - The Future of Environmental Cryptocurrency
+              </div>
+            </div>
           </CardTitle>
           <div className="flex items-center gap-4 text-sm">
             <div className="flex items-center gap-2">
@@ -189,6 +197,34 @@ export function CoinGeckoTrading() {
             </div>
           </div>
         </CardHeader>
+      </Card>
+
+      {/* GAiA Token Spotlight */}
+      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
+        <CardContent className="pt-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <GaiaLogo size="xl" variant="white-fade" />
+              <div>
+                <h3 className="text-2xl font-bold text-green-400">GAiA Token Spotlight</h3>
+                <p className="text-green-300">Harmony of Gaia - Leading Environmental Cryptocurrency</p>
+                <div className="flex items-center gap-4 mt-2">
+                  <div className="text-3xl font-bold text-white">${mockCoinData[0].price.toFixed(2)}</div>
+                  <Badge className="bg-green-600 text-white">
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    +{mockCoinData[0].change24h.toFixed(2)}%
+                  </Badge>
+                </div>
+              </div>
+            </div>
+            <div className="text-right">
+              <Button className="bg-green-600 hover:bg-green-700 text-white">
+                Trade GAiA Now
+              </Button>
+              <p className="text-xs text-green-300 mt-2">Zero Fees • Maximum Security</p>
+            </div>
+          </div>
+        </CardContent>
       </Card>
 
       {/* Platform Support Banner */}
@@ -260,13 +296,20 @@ export function CoinGeckoTrading() {
               </TableHeader>
               <TableBody>
                 {filteredCoins.map((coin) => (
-                  <TableRow key={coin.id} className="hover:bg-muted/20">
+                  <TableRow key={coin.id} className={`hover:bg-muted/20 ${coin.id === 'gaia-harmony' ? 'bg-green-500/10 border-green-500/20' : ''}`}>
                     <TableCell className="font-mono text-sm">
                       #{coin.rank}
+                      {coin.id === 'gaia-harmony' && (
+                        <Badge className="ml-2 bg-green-600 text-white text-xs">FEATURED</Badge>
+                      )}
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-3">
-                        <div className="text-2xl">{coin.image}</div>
+                        {coin.id === 'gaia-harmony' ? (
+                          <GaiaLogo size="sm" />
+                        ) : (
+                          <div className="text-2xl">{coin.image}</div>
+                        )}
                         <div>
                           <div className="font-semibold">{coin.name}</div>
                           <div className="text-sm text-muted-foreground uppercase">{coin.symbol}</div>

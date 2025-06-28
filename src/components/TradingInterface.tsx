@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -6,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { ArrowUpRight, ArrowDownRight, TrendingUp, Activity } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { GaiaLogo } from './GaiaLogo'
 
 export function TradingInterface() {
   const [buyAmount, setBuyAmount] = useState('')
@@ -90,7 +90,10 @@ export function TradingInterface() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
-          <span>GAiA Token Trading</span>
+          <div className="flex items-center gap-3">
+            <GaiaLogo size="lg" variant="white-fade" />
+            <span>GAiA Token Trading</span>
+          </div>
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="border-green-500/20 text-green-400">
               <Activity className="h-3 w-3 mr-1" />
@@ -107,9 +110,12 @@ export function TradingInterface() {
           {/* Current Price & Chart Link */}
           <div className="bg-muted/30 rounded-lg p-4">
             <div className="flex items-center justify-between mb-4">
-              <div>
-                <h3 className="text-lg font-semibold text-primary">Current GAiA Price</h3>
-                <div className="text-3xl font-bold mono-numbers text-green-400">${currentPrice.toFixed(2)}</div>
+              <div className="flex items-center gap-4">
+                <GaiaLogo size="md" />
+                <div>
+                  <h3 className="text-lg font-semibold text-primary">Current GAiA Price</h3>
+                  <div className="text-3xl font-bold mono-numbers text-green-400">${currentPrice.toFixed(2)}</div>
+                </div>
               </div>
               <div className="text-right">
                 <div className="text-sm text-muted-foreground">Pump.fun Token</div>
@@ -135,6 +141,7 @@ export function TradingInterface() {
               <div className="flex items-center gap-2 text-green-400">
                 <ArrowUpRight className="h-4 w-4" />
                 <span className="font-medium">Buy GAiA</span>
+                <GaiaLogo size="sm" />
               </div>
               
               <div className="space-y-3">
@@ -175,6 +182,7 @@ export function TradingInterface() {
               <div className="flex items-center gap-2 text-red-400">
                 <ArrowDownRight className="h-4 w-4" />
                 <span className="font-medium">Sell GAiA</span>
+                <GaiaLogo size="sm" />
               </div>
               
               <div className="space-y-3">
@@ -248,7 +256,10 @@ export function TradingInterface() {
 
           {/* Important Notice */}
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-            <h4 className="font-medium text-blue-400 mb-2">Simple Trading Model</h4>
+            <div className="flex items-center gap-3 mb-2">
+              <GaiaLogo size="sm" />
+              <h4 className="font-medium text-blue-400">Simple Trading Model</h4>
+            </div>
             <p className="text-sm text-blue-300">
               Our trading system focuses on simplicity and transparency. Buy and sell directly at market price 
               with instant execution. No complex order types, no hidden fees - just pure, simple trading 
