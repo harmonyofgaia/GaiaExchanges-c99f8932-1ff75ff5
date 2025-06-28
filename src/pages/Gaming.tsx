@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -21,7 +22,24 @@ import {
   Brain,
   Eye,
   Atom,
-  Globe
+  Globe,
+  TreePine,
+  Leaf,
+  Bird,
+  Fish,
+  Rabbit,
+  Bug,
+  Cat,
+  Dog,
+  Mountain,
+  Waves,
+  Flame,
+  Snowflake,
+  Coffee,
+  Wrench,
+  Palette,
+  Music,
+  Sword
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { HarmonyGamingEngine } from '@/components/HarmonyGamingEngine'
@@ -36,6 +54,8 @@ const Gaming = () => {
     achievements: 0,
     animalsSaved: 0
   })
+
+  const [selectedProject, setSelectedProject] = useState<string | null>(null)
 
   const [activeGames, setActiveGames] = useState([
     { 
@@ -125,6 +145,127 @@ const Gaming = () => {
     }
   ])
 
+  const gaiaProjects = [
+    {
+      id: 1,
+      name: 'The Heart of Gaia',
+      description: 'Fight to protect the core essence of nature itself',
+      icon: <Heart className="h-8 w-8" />,
+      color: 'from-red-500 to-pink-600',
+      textColor: 'text-red-400',
+      creature: '🐉 Ancient Forest Dragon',
+      animals: [<TreePine key="tree" className="h-6 w-6 text-green-400" />, <Bird key="bird" className="h-6 w-6 text-blue-400" />],
+      level: 'Legendary',
+      danger: 95,
+      reward: '500-1000 GAIA'
+    },
+    {
+      id: 2,
+      name: 'Seed Splitter',
+      description: 'Battle to spread life across barren lands',
+      icon: <Leaf className="h-8 w-8" />,
+      color: 'from-green-500 to-emerald-600',
+      textColor: 'text-green-400',
+      creature: '🌱 Ancient Seed Guardian',
+      animals: [<Rabbit key="rabbit" className="h-6 w-6 text-brown-400" />, <Bug key="bug" className="h-6 w-6 text-yellow-400" />],
+      level: 'Expert',
+      danger: 70,
+      reward: '200-400 GAIA'
+    },
+    {
+      id: 3,
+      name: 'Railing Energy',
+      description: 'Harness the power of lightning and storm',
+      icon: <Zap className="h-8 w-8" />,
+      color: 'from-yellow-500 to-orange-600',
+      textColor: 'text-yellow-400',
+      creature: '⚡ Thunder Beast',
+      animals: [<Bird key="eagle" className="h-6 w-6 text-gray-400" />, <Cat key="cat" className="h-6 w-6 text-orange-400" />],
+      level: 'Master',
+      danger: 85,
+      reward: '300-600 GAIA'
+    },
+    {
+      id: 4,
+      name: 'Freeze Capital',
+      description: 'Control the frozen realms and ice powers',
+      icon: <Snowflake className="h-8 w-8" />,
+      color: 'from-cyan-500 to-blue-600',
+      textColor: 'text-cyan-400',
+      creature: '❄️ Ice Demon',
+      animals: [<Fish key="fish" className="h-6 w-6 text-cyan-400" />, <Dog key="dog" className="h-6 w-6 text-white" />],
+      level: 'Elite',
+      danger: 80,
+      reward: '250-500 GAIA'
+    },
+    {
+      id: 5,
+      name: 'Earth Aquarium of Shrooms',
+      description: 'Dive into mystical underwater fungal worlds',
+      icon: <Waves className="h-8 w-8" />,
+      color: 'from-blue-500 to-purple-600',
+      textColor: 'text-blue-400',
+      creature: '🍄 Coral Leviathan',
+      animals: [<Fish key="fish1" className="h-6 w-6 text-blue-400" />, <Fish key="fish2" className="h-6 w-6 text-purple-400" />],
+      level: 'Champion',
+      danger: 75,
+      reward: '350-700 GAIA'
+    },
+    {
+      id: 6,
+      name: 'Vintage Internet Café\'s',
+      description: 'Battle in retro digital cyber realms',
+      icon: <Coffee className="h-8 w-8" />,
+      color: 'from-purple-500 to-indigo-600',
+      textColor: 'text-purple-400',
+      creature: '💻 Cyber Phantom',
+      animals: [<Cat key="cybercat" className="h-6 w-6 text-purple-400" />, <Bug key="pixel" className="h-6 w-6 text-green-400" />],
+      level: 'Pro',
+      danger: 65,
+      reward: '150-300 GAIA'
+    },
+    {
+      id: 7,
+      name: 'Techno Soul Solutions',
+      description: 'Fight against digital corruption and bugs',
+      icon: <Wrench className="h-8 w-8" />,
+      color: 'from-gray-500 to-slate-600',
+      textColor: 'text-gray-400',
+      creature: '🔧 System Destroyer',
+      animals: [<Bug key="techbug" className="h-6 w-6 text-red-400" />, <Rabbit key="robot" className="h-6 w-6 text-gray-400" />],
+      level: 'Advanced',
+      danger: 60,
+      reward: '100-250 GAIA'
+    },
+    {
+      id: 8,
+      name: 'Nft Gameswap',
+      description: 'Trade and battle with rare digital creatures',
+      icon: <Palette className="h-8 w-8" />,
+      color: 'from-pink-500 to-rose-600',
+      textColor: 'text-pink-400',
+      creature: '🎨 Art Mimic',
+      animals: [<Bird key="artbird" className="h-6 w-6 text-pink-400" />, <Cat key="nftcat" className="h-6 w-6 text-rose-400" />],
+      level: 'Collector',
+      danger: 55,
+      reward: '120-280 GAIA'
+    },
+    {
+      id: 9,
+      name: 'Sound Riffs Re grau dio',
+      description: 'Create harmony through musical combat',
+      icon: <Music className="h-8 w-8" />,
+      color: 'from-indigo-500 to-violet-600',
+      textColor: 'text-indigo-400',
+      creature: '🎵 Echo Siren',
+      animals: [<Bird key="songbird" className="h-6 w-6 text-indigo-400" />, <Dog key="howl" className="h-6 w-6 text-violet-400" />],
+      level: 'Harmonist',
+      danger: 50,
+      reward: '80-200 GAIA',
+      fadeEffect: true
+    }
+  ]
+
   useEffect(() => {
     const updateStats = () => {
       setPlayerStats(prev => ({
@@ -181,9 +322,63 @@ const Gaming = () => {
     }))
   }
 
+  const selectProject = (project: any) => {
+    setSelectedProject(project.name)
+    toast.success(`🎯 Entered ${project.name} Arena!`, {
+      description: `Ready to fight ${project.creature} - Danger Level: ${project.danger}%`,
+      duration: 5000
+    })
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-green-900/20 to-blue-900/20">
-      <div className="container mx-auto px-4 py-6">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-green-900/20 to-blue-900/20 relative overflow-hidden">
+      
+      {/* Animated Forest Animals Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(20)].map((_, i) => {
+          const animals = [TreePine, Bird, Fish, Rabbit, Bug, Cat, Dog, Mountain]
+          const Animal = animals[i % animals.length]
+          return (
+            <div
+              key={i}
+              className="absolute animate-float opacity-10"
+              style={{
+                left: `${Math.random() * 90}%`,
+                top: `${Math.random() * 80}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${4 + Math.random() * 4}s`
+              }}
+            >
+              <Animal className="h-8 w-8 text-green-400" />
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Floating Gaia Logos */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute animate-bounce opacity-20"
+            style={{
+              left: `${Math.random() * 90}%`,
+              top: `${Math.random() * 80}%`,
+              animationDelay: `${i * 0.5}s`,
+              animationDuration: `${3 + Math.random() * 2}s`
+            }}
+          >
+            <img 
+              src="/lovable-uploads/78f81378-5535-4da5-bb6c-28f9a9866f3e.png" 
+              alt="Harmony of Gaia Logo"
+              className="w-12 h-12 object-contain animate-spin"
+              style={{ animationDuration: '10s' }}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="container mx-auto px-4 py-6 relative z-10">
         
         {/* Enhanced Gaming Header */}
         <div className="text-center mb-8">
@@ -194,22 +389,8 @@ const Gaming = () => {
             🌍 Beyond Reality Gaming - Ultra-Realistic Animal Liberation Universe
           </p>
           <p className="text-lg text-green-400 mt-2">
-            🚀 Quantum-Powered • Neural AI • Infinite Worlds • Cross-Dimensional Multiplayer
+            🚀 Choose Your Project Arena - Fight Ancient Creatures - Save the World
           </p>
-          <div className="flex justify-center gap-4 mt-4">
-            <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm px-4 py-2">
-              <Rocket className="h-4 w-4 mr-2" />
-              QUANTUM ENABLED
-            </Badge>
-            <Badge className="bg-gradient-to-r from-green-600 to-blue-600 text-white text-sm px-4 py-2">
-              <Brain className="h-4 w-4 mr-2" />
-              NEURAL AI ACTIVE
-            </Badge>
-            <Badge className="bg-gradient-to-r from-cyan-600 to-purple-600 text-white text-sm px-4 py-2">
-              <Eye className="h-4 w-4 mr-2" />
-              ULTRA GRAPHICS
-            </Badge>
-          </div>
         </div>
 
         {/* Player Stats Dashboard */}
@@ -262,6 +443,101 @@ const Gaming = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Gaia Project Fighting Arenas */}
+        <Card className="bg-gradient-to-br from-green-900/30 to-blue-900/30 border-2 border-green-500/50 mb-8">
+          <CardHeader>
+            <CardTitle className="text-green-400 flex items-center gap-2 text-center justify-center">
+              <Target className="h-6 w-6" />
+              ⚔️ GAIA PROJECT FIGHTING ARENAS - CHOOSE YOUR BATTLE
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {gaiaProjects.map((project, index) => (
+                <Card 
+                  key={project.id} 
+                  className={`bg-gradient-to-br ${project.color}/20 border-2 border-gray-500/30 hover:scale-105 transition-all duration-500 cursor-pointer relative overflow-hidden ${project.fadeEffect ? 'animate-pulse' : ''}`}
+                  onClick={() => selectProject(project)}
+                >
+                  {/* Ancient Creature Background */}
+                  <div className="absolute top-2 right-2 text-4xl opacity-20 animate-pulse">
+                    {project.creature.split(' ')[0]}
+                  </div>
+
+                  {/* Forest Animals Decoration */}
+                  <div className="absolute bottom-2 left-2 flex gap-1 opacity-30">
+                    {project.animals.map((animal, i) => (
+                      <div key={i} className="animate-bounce" style={{ animationDelay: `${i * 0.2}s` }}>
+                        {animal}
+                      </div>
+                    ))}
+                  </div>
+
+                  <CardContent className="p-6 space-y-4 relative z-10">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className={`p-2 rounded-lg bg-gradient-to-br ${project.color}/30`}>
+                          {project.icon}
+                        </div>
+                        <h3 className={`font-bold ${project.textColor} ${project.fadeEffect ? 'animate-pulse opacity-70' : ''}`}>
+                          {project.fadeEffect ? (
+                            <span className="fade-text">{project.name}</span>
+                          ) : (
+                            project.name
+                          )}
+                        </h3>
+                      </div>
+                      <Badge className={`bg-gradient-to-r ${project.color} text-white`}>
+                        {project.level}
+                      </Badge>
+                    </div>
+
+                    <p className="text-sm text-muted-foreground">{project.description}</p>
+
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Ancient Enemy:</span>
+                        <span className={`font-bold ${project.textColor} text-xs`}>{project.creature}</span>
+                      </div>
+                      
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Danger Level:</span>
+                        <span className={`font-bold ${project.textColor}`}>{project.danger}%</span>
+                      </div>
+                      
+                      <Progress value={project.danger} className="h-2" />
+                      
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Reward:</span>
+                        <span className="text-yellow-400 font-bold text-sm">{project.reward}</span>
+                      </div>
+                    </div>
+
+                    <Button 
+                      className={`w-full bg-gradient-to-r ${project.color} hover:opacity-80 text-white font-bold`}
+                    >
+                      <Sword className="h-4 w-4 mr-2" />
+                      ENTER {project.name.toUpperCase()} ARENA
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {selectedProject && (
+              <div className="mt-8 text-center">
+                <div className="bg-gradient-to-r from-green-900/30 to-blue-900/30 p-6 rounded-lg border border-green-500/30">
+                  <h3 className="text-2xl font-bold text-green-400 mb-2">🎯 Currently Fighting In:</h3>
+                  <div className="text-3xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                    {selectedProject}
+                  </div>
+                  <p className="text-muted-foreground mt-2">Battle ancient creatures to earn GAIA tokens for environmental projects!</p>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         {/* Enhanced Gaming Modes */}
         <EnhancedGamingModes />
@@ -455,6 +731,28 @@ const Gaming = () => {
           </div>
         </div>
       </div>
+
+      <style>{`
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        .fade-text {
+          animation: fadeLetters 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeLetters {
+          0%, 100% { opacity: 1; }
+          25% { opacity: 0.8; }
+          50% { opacity: 0.6; }
+          75% { opacity: 0.4; }
+        }
+      `}</style>
     </div>
   )
 }

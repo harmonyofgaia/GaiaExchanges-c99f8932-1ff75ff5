@@ -19,6 +19,7 @@ import DrivingToNature from "./pages/DrivingToNature";
 import TechnoSoulSolutions from "./pages/TechnoSoulSolutions";
 import GaiaFighterGame from "./pages/GaiaFighterGame";
 import GaiasExchange from "./pages/GaiasExchange";
+import HeartOfGaia from "./pages/HeartOfGaia";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
             <Route path="/techno-soul-solutions" element={<TechnoSoulSolutions />} />
             <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
             <Route path="/gaias-exchange" element={<GaiasExchange />} />
+            <Route path="/heart-of-gaia" element={<HeartOfGaia />} />
           </Routes>
         </BrowserRouter>
       </div>
