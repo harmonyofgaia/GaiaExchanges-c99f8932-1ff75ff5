@@ -1,6 +1,9 @@
 
 import { UltimateSecurityWall } from '@/components/security/UltimateSecurityWall'
 import { ComprehensiveSecurityMonitor } from '@/components/security/ComprehensiveSecurityMonitor'
+import { UltraSecureCloudVault } from '@/components/security/UltraSecureCloudVault'
+import { CloudRecoverySystem } from '@/components/security/CloudRecoverySystem'
+import { AdminRecoveryPortal } from '@/components/security/AdminRecoveryPortal'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const UltimateSecurity = () => {
@@ -20,12 +23,21 @@ const UltimateSecurity = () => {
         </div>
 
         <Tabs defaultValue="fortress" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-black/50 backdrop-blur-md border border-red-500/20">
+          <TabsList className="grid w-full grid-cols-5 bg-black/50 backdrop-blur-md border border-red-500/20">
             <TabsTrigger value="fortress" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-              🛡️ Ultimate Security Wall
+              🛡️ Security Wall
             </TabsTrigger>
             <TabsTrigger value="monitor" className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-400">
-              📊 Comprehensive Monitor
+              📊 Monitor
+            </TabsTrigger>
+            <TabsTrigger value="cloud-vault" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+              🔒 Cloud Vault
+            </TabsTrigger>
+            <TabsTrigger value="recovery-system" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              🔄 Recovery System
+            </TabsTrigger>
+            <TabsTrigger value="admin-recovery" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+              🔑 Admin Recovery
             </TabsTrigger>
           </TabsList>
           
@@ -35,6 +47,18 @@ const UltimateSecurity = () => {
           
           <TabsContent value="monitor" className="space-y-6 mt-6">
             <ComprehensiveSecurityMonitor />
+          </TabsContent>
+          
+          <TabsContent value="cloud-vault" className="space-y-6 mt-6">
+            <UltraSecureCloudVault />
+          </TabsContent>
+          
+          <TabsContent value="recovery-system" className="space-y-6 mt-6">
+            <CloudRecoverySystem />
+          </TabsContent>
+          
+          <TabsContent value="admin-recovery" className="space-y-6 mt-6">
+            <AdminRecoveryPortal />
           </TabsContent>
         </Tabs>
       </div>
