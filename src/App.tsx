@@ -13,6 +13,7 @@ import Wallet from "./pages/Wallet";
 import Transparency from "./pages/Transparency";
 import Markets from "./pages/Markets";
 import Marketing from "./pages/Marketing";
+import Downloads from "./pages/Downloads";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
@@ -33,6 +34,11 @@ const App = () => (
                 <SidebarTrigger className="mr-4" />
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-4">
+                    <img 
+                      src="/lovable-uploads/ab19f9f8-2069-4211-955c-dab937602141.png" 
+                      alt="Gaia of Harmony Logo" 
+                      className="w-8 h-8 object-contain"
+                    />
                     <span className="text-sm text-muted-foreground">
                       Gaia's Exchanges • World's Most Secure Crypto Trading Platform
                     </span>
@@ -52,6 +58,7 @@ const App = () => (
                   <Route path="/transparency" element={<Transparency />} />
                   <Route path="/markets" element={<Markets />} />
                   <Route path="/marketing" element={<Marketing />} />
+                  <Route path="/downloads" element={<Downloads />} />
                   <Route path="/admin" element={<Admin />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>

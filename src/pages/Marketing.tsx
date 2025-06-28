@@ -13,7 +13,8 @@ import {
   ExternalLink,
   Megaphone,
   Target,
-  BarChart3
+  BarChart3,
+  Image
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
@@ -55,6 +56,15 @@ const Marketing = () => {
     })
   }
 
+  const handleCopyLogo = () => {
+    const logoUrl = `${window.location.origin}/lovable-uploads/ab19f9f8-2069-4211-955c-dab937602141.png`
+    navigator.clipboard.writeText(logoUrl)
+    toast({
+      title: "Logo URL Copied!",
+      description: "Official Gaia of Harmony logo URL copied to clipboard for advertising use.",
+    })
+  }
+
   const handleSubmitToCoinGecko = () => {
     toast({
       title: "CoinGecko Submission Guide",
@@ -74,13 +84,67 @@ const Marketing = () => {
         </Badge>
       </div>
 
-      <Tabs defaultValue="campaigns" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+      <Tabs defaultValue="branding" className="w-full">
+        <TabsList className="grid w-full grid-cols-5">
+          <TabsTrigger value="branding">Official Branding</TabsTrigger>
           <TabsTrigger value="campaigns">Marketing Campaigns</TabsTrigger>
           <TabsTrigger value="advantages">Competitive Edge</TabsTrigger>
           <TabsTrigger value="listings">Exchange Listings</TabsTrigger>
           <TabsTrigger value="growth">Growth Metrics</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="branding">
+          <div className="space-y-6">
+            <Card className="bg-gradient-to-r from-green-900/20 to-teal-900/20 border-green-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-green-400">
+                  <Image className="h-5 w-5" />
+                  Official Gaia of Harmony Logo & Branding
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="text-center">
+                  <img 
+                    src="/lovable-uploads/ab19f9f8-2069-4211-955c-dab937602141.png" 
+                    alt="Official Gaia of Harmony Logo" 
+                    className="w-48 h-48 object-contain mx-auto mb-4 bg-white/5 rounded-lg p-4"
+                  />
+                  <h3 className="text-xl font-semibold text-green-400 mb-2">Official Gaia of Harmony Logo</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Use this official logo across all advertising platforms, exchange listings, and marketing materials
+                  </p>
+                  <Button 
+                    onClick={handleCopyLogo}
+                    className="bg-green-600 hover:bg-green-700"
+                  >
+                    Copy Logo URL for Advertising
+                  </Button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+                    <h4 className="font-medium text-green-400 mb-2">Logo Usage Guidelines</h4>
+                    <ul className="text-sm space-y-1">
+                      <li>• Use on white or dark backgrounds</li>
+                      <li>• Maintain aspect ratio when resizing</li>
+                      <li>• Minimum size: 32x32 pixels</li>
+                      <li>• Clear space: Logo height around all sides</li>
+                    </ul>
+                  </div>
+                  <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                    <h4 className="font-medium text-blue-400 mb-2">Brand Colors</h4>
+                    <ul className="text-sm space-y-1">
+                      <li>• Primary: Turquoise Eye (#40E0D0)</li>
+                      <li>• Secondary: Deep Black (#1A1A1A)</li>
+                      <li>• Accent: Soft Green (#90EE90)</li>
+                      <li>• Background: Clean White (#FFFFFF)</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
 
         <TabsContent value="campaigns">
           <div className="space-y-6">
