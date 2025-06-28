@@ -5,8 +5,14 @@ export interface GitHubStatus {
   repository: string
   lastRelease: string | null
   hasReleases: boolean
-  isLoading: boolean
+  isLoading?: boolean
   isPrivate: boolean
+  websiteUrl: string
+  securityEnabled: boolean
+  branchProtection: boolean
+  secretsScanning: boolean
+  dependencyAlerts: boolean
+  codeScanning: boolean
   securityFeatures: {
     secretsScanning: boolean
     dependencyScanning: boolean
