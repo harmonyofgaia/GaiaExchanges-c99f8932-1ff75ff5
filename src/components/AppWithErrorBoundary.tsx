@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/AppSidebar"
-import { AdvertisingHeader } from "@/components/AdvertisingHeader"
 import { SystemMonitor } from "@/components/SystemMonitor"
 import Index from "../pages/Index"
 import About from "../pages/About"
@@ -32,24 +31,25 @@ export function AppWithErrorBoundary() {
           <SidebarProvider>
             <AppSidebar />
             <main className="flex-1 overflow-auto">
-              <AdvertisingHeader />
               <div className="p-4">
                 <SidebarTrigger />
               </div>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/wallet" element={<Wallet />} />
-                <Route path="/markets" element={<Markets />} />
-                <Route path="/transparency" element={<Transparency />} />
-                <Route path="/reinvestments" element={<Reinvestments />} />
-                <Route path="/downloads" element={<Downloads />} />
-                <Route path="/smart-contracts" element={<SmartContracts />} />
-                <Route path="/ultimate-security" element={<UltimateSecurity />} />
-                <Route path="/marketing" element={<Marketing />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <div className="px-4 pb-4">
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/wallet" element={<Wallet />} />
+                  <Route path="/markets" element={<Markets />} />
+                  <Route path="/transparency" element={<Transparency />} />
+                  <Route path="/reinvestments" element={<Reinvestments />} />
+                  <Route path="/downloads" element={<Downloads />} />
+                  <Route path="/smart-contracts" element={<SmartContracts />} />
+                  <Route path="/ultimate-security" element={<UltimateSecurity />} />
+                  <Route path="/marketing" element={<Marketing />} />
+                  <Route path="/admin" element={<Admin />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
             </main>
           </SidebarProvider>
         </BrowserRouter>
