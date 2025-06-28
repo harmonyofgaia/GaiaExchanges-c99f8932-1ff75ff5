@@ -274,7 +274,7 @@ export function ServerResilienceEngine() {
     
     setSecurityLayers(prev => prev.map(layer => ({
       ...layer,
-      status: 'secure',
+      status: 'secure' as const,
       strength: 100,
       lastCheck: new Date()
     })))
