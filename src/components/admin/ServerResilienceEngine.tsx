@@ -129,7 +129,7 @@ export function ServerResilienceEngine() {
         setSecurityLayers(prev => prev.map(layer => {
           // Simulate security layer monitoring
           let newStrength = layer.strength
-          let newStatus = layer.status
+          let newStatus: 'secure' | 'compromised' | 'destroyed' = layer.status
 
           // Very rare chance of layer compromise (only for testing)
           if (Math.random() < 0.001) { // 0.1% chance
