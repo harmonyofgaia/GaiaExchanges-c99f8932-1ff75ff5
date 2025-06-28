@@ -11,6 +11,17 @@ interface NeuralNode {
   pulsePhase: number
 }
 
+interface ElectricShock {
+  id: number
+  startX: number
+  startY: number
+  endX: number
+  endY: number
+  intensity: number
+  duration: number
+  timestamp: number
+}
+
 interface NeuralElectricBackgroundProps {
   style?: 'classic' | 'plasma' | 'galaxy' | 'forest' | 'ocean' | 'fire' | 'ice' | 'void' | 'rainbow' | 'matrix'
   intensity?: 'low' | 'medium' | 'high'
@@ -22,6 +33,7 @@ export function NeuralElectricBackground({
 }: NeuralElectricBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [nodes, setNodes] = useState<NeuralNode[]>([])
+  const [electricShocks, setElectricShocks] = useState<ElectricShock[]>([])
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const animationRef = useRef<number>()
 
@@ -92,6 +104,52 @@ export function NeuralElectricBackground({
 
   const currentStyle = styleConfigs[style]
 
+  // Generate electric shock on click
+  const generateElectricShock = (clickX: number, clickY: number) => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    // Create multiple shocks from different directions
+    const shockCount = 3 + Math.floor(Math.random() * 3) // 3-5 shocks
+    const newShocks: ElectricShock[] = []
+
+    for (let i = 0; i < shockCount; i++) {
+      // Random direction from edge of screen
+      const angle = Math.random() * Math.PI * 2
+      const distance = 200 + Math.random() * 300
+      const startX = clickX + Math.cos(angle) * distance
+      const startY = clickY + Math.sin(angle) * distance
+
+      // Keep start points within reasonable bounds
+      const boundedStartX = Math.max(-100, Math.min(canvas.width + 100, startX))
+      const boundedStartY = Math.max(-100, Math.min(canvas.height + 100, startY))
+
+      const shock: ElectricShock = {
+        id: Date.now() + i,
+        startX: boundedStartX,
+        startY: boundedStartY,
+        endX: clickX,
+        endY: clickY,
+        intensity: 0.8 + Math.random() * 0.4,
+        duration: 800 + Math.random() * 400,
+        timestamp: Date.now()
+      }
+
+      newShocks.push(shock)
+    }
+
+    setElectricShocks(prev => [...prev, ...newShocks])
+
+    // Clean up old shocks after they expire
+    setTimeout(() => {
+      setElectricShocks(prev => 
+        prev.filter(shock => 
+          !newShocks.some(newShock => newShock.id === shock.id)
+        )
+      )
+    }, 1200)
+  }
+
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -144,8 +202,17 @@ export function NeuralElectricBackground({
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
 
+    const handleClick = (e: MouseEvent) => {
+      generateElectricShock(e.clientX, e.clientY)
+    }
+
     window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+    window.addEventListener('click', handleClick)
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('click', handleClick)
+    }
   }, [])
 
   useEffect(() => {
@@ -201,6 +268,48 @@ export function NeuralElectricBackground({
 
       setNodes(updatedNodes)
 
+      // Draw electric shocks
+      const currentTime = Date.now()
+      electricShocks.forEach(shock => {
+        const elapsed = currentTime - shock.timestamp
+        const progress = Math.min(elapsed / shock.duration, 1)
+        
+        if (progress < 1) {
+          const opacity = (1 - progress) * shock.intensity
+          
+          // Blue neon electric shock
+          ctx.strokeStyle = `rgba(0, 150, 255, ${opacity})`
+          ctx.lineWidth = 2 + opacity * 3
+          ctx.shadowColor = '#00aaff'
+          ctx.shadowBlur = 8 + opacity * 15
+          
+          ctx.beginPath()
+          ctx.moveTo(shock.startX, shock.startY)
+          
+          // Create zigzag electric effect
+          const segments = 8
+          for (let i = 1; i <= segments; i++) {
+            const segmentProgress = i / segments
+            const x = shock.startX + (shock.endX - shock.startX) * segmentProgress
+            const y = shock.startY + (shock.endY - shock.startY) * segmentProgress
+            
+            // Add random zigzag
+            const zigzagIntensity = opacity * 20 * (1 - Math.abs(segmentProgress - 0.5) * 2)
+            const offsetX = (Math.random() - 0.5) * zigzagIntensity
+            const offsetY = (Math.random() - 0.5) * zigzagIntensity
+            
+            if (i === segments) {
+              ctx.lineTo(shock.endX, shock.endY)
+            } else {
+              ctx.lineTo(x + offsetX, y + offsetY)
+            }
+          }
+          
+          ctx.stroke()
+          ctx.shadowBlur = 0
+        }
+      })
+
       // Draw connections with electric effect
       updatedNodes.forEach(node => {
         node.connections.forEach(connectionId => {
@@ -216,16 +325,16 @@ export function NeuralElectricBackground({
             
             // Electric connection effect
             ctx.strokeStyle = currentStyle.connectionColor + Math.floor(opacity * 255).toString(16).padStart(2, '0')
-            ctx.lineWidth = 1 + opacity * 2
+            ctx.lineWidth = 0.5 + opacity * 1.5
             ctx.shadowColor = currentStyle.glowColor
-            ctx.shadowBlur = 5 + opacity * 10
+            ctx.shadowBlur = 3 + opacity * 8
             
             ctx.beginPath()
             ctx.moveTo(node.x, node.y)
             
             // Add some electric zigzag effect
-            const midX = (node.x + connectedNode.x) / 2 + (Math.random() - 0.5) * 20 * opacity
-            const midY = (node.y + connectedNode.y) / 2 + (Math.random() - 0.5) * 20 * opacity
+            const midX = (node.x + connectedNode.x) / 2 + (Math.random() - 0.5) * 15 * opacity
+            const midY = (node.y + connectedNode.y) / 2 + (Math.random() - 0.5) * 15 * opacity
             
             ctx.quadraticCurveTo(midX, midY, connectedNode.x, connectedNode.y)
             ctx.stroke()
@@ -233,14 +342,14 @@ export function NeuralElectricBackground({
         })
       })
 
-      // Draw nodes with electric glow
+      // Draw nodes with electric glow (smaller size)
       updatedNodes.forEach(node => {
-        const size = 2 + node.energy * 4
-        const glowSize = 10 + node.energy * 20
+        const size = 1 + node.energy * 2 // Reduced from 2 + node.energy * 4
+        const glowSize = 6 + node.energy * 12 // Reduced from 10 + node.energy * 20
 
         // Outer glow
         const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, glowSize)
-        gradient.addColorStop(0, currentStyle.glowColor + '80')
+        gradient.addColorStop(0, currentStyle.glowColor + '60') // Reduced opacity
         gradient.addColorStop(1, currentStyle.glowColor + '00')
         
         ctx.fillStyle = gradient
@@ -248,10 +357,10 @@ export function NeuralElectricBackground({
         ctx.arc(node.x, node.y, glowSize, 0, Math.PI * 2)
         ctx.fill()
 
-        // Core node
+        // Core node (smaller)
         ctx.fillStyle = currentStyle.nodeColor
         ctx.shadowColor = currentStyle.glowColor
-        ctx.shadowBlur = 10
+        ctx.shadowBlur = 6 // Reduced from 10
         ctx.beginPath()
         ctx.arc(node.x, node.y, size, 0, Math.PI * 2)
         ctx.fill()
@@ -269,7 +378,7 @@ export function NeuralElectricBackground({
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [nodes, mousePosition, currentStyle])
+  }, [nodes, mousePosition, currentStyle, electricShocks])
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0">
@@ -279,7 +388,7 @@ export function NeuralElectricBackground({
       />
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-30 pointer-events-auto"
         style={{ mixBlendMode: 'screen' }}
       />
     </div>
