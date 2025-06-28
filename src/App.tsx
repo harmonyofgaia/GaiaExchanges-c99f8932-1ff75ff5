@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import Reinvestments from "./pages/Reinvestments";
 import Downloads from "./pages/Downloads";
 import PlatformCompatibility from "./pages/PlatformCompatibility";
+import Gaming from "./pages/Gaming";
+import Webshop from "./pages/Webshop";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,8 @@ const App = () => (
           <Route path="/reinvestments" element={<Reinvestments />} />
           <Route path="/downloads" element={<Downloads />} />
           <Route path="/platform-compatibility" element={<PlatformCompatibility />} />
+          <Route path="/gaming" element={<Gaming />} />
+          <Route path="/webshop" element={<Webshop />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
