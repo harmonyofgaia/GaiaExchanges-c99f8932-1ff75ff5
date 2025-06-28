@@ -135,10 +135,10 @@ export function EnhancedSwapSystem() {
         })
       }
 
-      // Record the swap transaction
+      // Record the swap transaction using 'transfer' type instead of 'swap'
       await supabase.from('transactions').insert({
         user_id: user.id,
-        transaction_type: 'swap',
+        transaction_type: 'transfer',
         currency: swapData.fromCurrency,
         amount: swapData.fromAmount,
         fee: feeAmount,
@@ -146,7 +146,8 @@ export function EnhancedSwapSystem() {
         metadata: {
           swap_to_currency: swapData.toCurrency,
           swap_to_amount: toAmount,
-          fee_destination: config.preferred_fee_destination
+          fee_destination: config.preferred_fee_destination,
+          transaction_subtype: 'swap'
         }
       })
 
