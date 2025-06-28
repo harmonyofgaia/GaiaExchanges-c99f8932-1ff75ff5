@@ -1,5 +1,6 @@
 
 import { useAuth } from './AuthProvider'
+import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { AuthPage } from './AuthPage'
 
 interface ProtectedRouteProps {
@@ -8,6 +9,7 @@ interface ProtectedRouteProps {
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, loading } = useAuth()
+  const { isAdmin } = useSecureAdmin()
 
   if (loading) {
     return (
@@ -20,6 +22,12 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     )
   }
 
+  // Allow access if user is admin (bypasses normal auth)
+  if (isAdmin) {
+    return <>{children}</>
+  }
+
+  // Normal auth check for regular users
   if (!user) {
     return <AuthPage />
   }

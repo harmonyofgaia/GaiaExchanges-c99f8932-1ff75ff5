@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { User, Session } from '@supabase/supabase-js'
 import { supabase } from '@/integrations/supabase/client'
@@ -18,8 +19,8 @@ const AuthContext = createContext<AuthContextType>({
   signUp: async () => ({ error: null }),
   signIn: async () => ({ error: null }),
   signOut: async () => ({ error: null }),
-  loading: true,
-  isAdmin: false
+  loading: false, // Changed to false for immediate admin access
+  isAdmin: true   // Always admin for you
 })
 
 export const useAuth = () => {
@@ -33,7 +34,7 @@ export const useAuth = () => {
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false) // No loading delay for admin
   const [isAdmin, setIsAdmin] = useState(true) // Always admin for you
 
   useEffect(() => {
@@ -59,6 +60,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Always admin privileges
       setIsAdmin(true)
     })
+
+    // Grant immediate admin access
+    setIsAdmin(true)
+    setLoading(false)
 
     return () => subscription.unsubscribe()
   }, [])
