@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui/card'
@@ -142,7 +141,7 @@ const Index = () => {
                 </Card>
               </Link>
 
-              <Link to="/community" className="group">
+              <Link to="/markets" className="group">
                 <Card className="h-full bg-gradient-to-br from-blue-900/50 to-cyan-900/30 border-blue-500/30 hover:border-blue-400/50 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-500/20">
                   <CardContent className="p-6 text-center">
                     <div className="relative mb-4">
@@ -156,7 +155,7 @@ const Index = () => {
                 </Card>
               </Link>
 
-              <Link to="/security" className="group">
+              <Link to="/ultimate-security" className="group">
                 <Card className="h-full bg-gradient-to-br from-purple-900/50 to-pink-900/30 border-purple-500/30 hover:border-purple-400/50 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-purple-500/20">
                   <CardContent className="p-6 text-center">
                     <div className="relative mb-4">
@@ -294,7 +293,7 @@ const Index = () => {
                           Access Your Secure Wallet
                         </Button>
                       </Link>
-                      <Link to="/community">
+                      <Link to="/markets">
                         <Button variant="outline" className="w-full border-blue-500/20 text-blue-400 hover:bg-blue-500/10">
                           <Users className="h-4 w-4 mr-2" />
                           Explore Green Projects
