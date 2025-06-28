@@ -7,8 +7,8 @@ import { Toaster } from '@/components/ui/toaster'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/AppSidebar'
 import { GlobalErrorBoundary } from '@/components/GlobalErrorBoundary'
-import { NeuralElectricBackground } from '@/components/ui/neural-electric-background'
-import { useGlobalBackground } from '@/hooks/useGlobalBackground'
+import { PageSpecificBackground } from '@/components/ui/page-specific-background'
+import { AdminReverseButton } from '@/components/admin/AdminReverseButton'
 
 // Import pages
 import Index from '@/pages/Index'
@@ -29,11 +29,10 @@ import NotFound from '@/pages/NotFound'
 const queryClient = new QueryClient()
 
 const AppContent = () => {
-  const { backgroundStyle } = useGlobalBackground()
-
   return (
     <>
-      <NeuralElectricBackground style={backgroundStyle} intensity="medium" />
+      <PageSpecificBackground />
+      <AdminReverseButton />
       <div className="relative z-10 flex min-h-screen">
         <Routes>
           {/* Admin route - no sidebar, special handling */}

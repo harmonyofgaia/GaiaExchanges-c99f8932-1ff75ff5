@@ -1,9 +1,10 @@
+
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Settings, Activity, Database, Users, FileText, Leaf } from 'lucide-react'
+import { Shield, Settings, Activity, Database, Users, FileText, Leaf, RotateCcw } from 'lucide-react'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin'
 import { AdminMFA } from '@/components/admin/AdminMFA'
@@ -13,14 +14,20 @@ import { DailyAdvertising } from '@/components/admin/DailyAdvertising'
 import { AuthTest } from '@/components/auth/AuthTest'
 import { GreenProjectManager } from '@/components/admin/GreenProjectManager'
 import { BackgroundManager } from '@/components/admin/BackgroundManager'
+import { toast } from 'sonner'
 
 const Admin = () => {
   const navigate = useNavigate()
   const { isAdmin, isValidating, adminLogout } = useSecureAdmin()
   const [showMFA, setShowMFA] = useState(false)
+  const [reverseButtonEnabled, setReverseButtonEnabled] = useState(false)
 
   useEffect(() => {
     console.log('🔐 Admin Page Access Check:', { isAdmin, isValidating })
+    
+    // Load reverse button state
+    const savedState = localStorage.getItem('admin-reverse-button-visible')
+    setReverseButtonEnabled(savedState === 'true')
   }, [isAdmin, isValidating])
 
   const handleLogout = () => {
@@ -29,12 +36,28 @@ const Admin = () => {
   }
 
   const handleLoginSuccess = () => {
-    // Login success is handled by useSecureAdmin hook
     console.log('Admin login successful')
   }
 
   const handleMFASuccess = () => {
     setShowMFA(false)
+  }
+
+  const toggleReverseButton = () => {
+    const newState = !reverseButtonEnabled
+    setReverseButtonEnabled(newState)
+    localStorage.setItem('admin-reverse-button-visible', newState.toString())
+    
+    // Trigger storage event for other components
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'admin-reverse-button-visible',
+      newValue: newState.toString()
+    }))
+    
+    toast.success(`Reverse Button ${newState ? 'Enabled' : 'Disabled'}`, {
+      description: `Admin reverse button is now ${newState ? 'visible' : 'hidden'} on all pages.`,
+      duration: 3000
+    })
   }
 
   if (isValidating) {
@@ -71,6 +94,13 @@ const Admin = () => {
             </p>
           </div>
           <div className="flex items-center gap-4">
+            <Button
+              onClick={toggleReverseButton}
+              className={`${reverseButtonEnabled ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 hover:bg-gray-700'}`}
+            >
+              <RotateCcw className="h-4 w-4 mr-2" />
+              Reverse Button {reverseButtonEnabled ? 'ON' : 'OFF'}
+            </Button>
             <Button
               onClick={() => setShowMFA(true)}
               className="bg-blue-600 hover:bg-blue-700"
