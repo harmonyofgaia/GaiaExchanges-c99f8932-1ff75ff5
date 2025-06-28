@@ -75,17 +75,17 @@ export function BackgroundManager() {
     const today = new Date().toDateString()
     const storedDate = localStorage.getItem('dailyInspirationDate')
     
+    const inspirations = [
+      "🎨 Today's energy: Quantum creativity flows through neural pathways of innovation",
+      "✨ Artistic vision: Where technology meets soul, beauty emerges in sacred geometry",
+      "🌟 Creative force: Each pixel carries the DNA of infinite possibility",
+      "🔥 Design spirit: From chaos comes order, from order comes transcendent beauty",
+      "💫 Visual harmony: The universe speaks through color, form, and divine proportion",
+      "🌈 Aesthetic power: Every background tells a story of human-AI collaboration",
+      "⚡ Creative lightning: Innovation strikes when art and code dance together"
+    ]
+    
     if (storedDate !== today) {
-      const inspirations = [
-        "🎨 Today's energy: Quantum creativity flows through neural pathways of innovation",
-        "✨ Artistic vision: Where technology meets soul, beauty emerges in sacred geometry",
-        "🌟 Creative force: Each pixel carries the DNA of infinite possibility",
-        "🔥 Design spirit: From chaos comes order, from order comes transcendent beauty",
-        "💫 Visual harmony: The universe speaks through color, form, and divine proportion",
-        "🌈 Aesthetic power: Every background tells a story of human-AI collaboration",
-        "⚡ Creative lightning: Innovation strikes when art and code dance together"
-      ]
-      
       const newInspiration = inspirations[Math.floor(Math.random() * inspirations.length)]
       setDailyInspiration(newInspiration)
       localStorage.setItem('dailyInspiration', newInspiration)
