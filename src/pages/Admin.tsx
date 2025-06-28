@@ -19,6 +19,7 @@ import { UltimateResilienceEngine } from '@/components/security/UltimateResilien
 import { CloudResilienceManager } from '@/components/admin/CloudResilienceManager'
 import { ServerResilienceEngine } from '@/components/admin/ServerResilienceEngine'
 import { GitHubAdminIntegration } from '@/components/github/GitHubAdminIntegration'
+import { MasterArtworkGenerator } from '@/components/admin/MasterArtworkGenerator'
 
 const Admin = () => {
   const navigate = useNavigate()
@@ -118,8 +119,11 @@ const Admin = () => {
           </div>
         </div>
 
-        <Tabs defaultValue="server-resilience" className="w-full">
-          <TabsList className="grid w-full grid-cols-11 bg-black/50 backdrop-blur-md border border-green-500/20">
+        <Tabs defaultValue="artwork-generator" className="w-full">
+          <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
+            <TabsTrigger value="artwork-generator" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+              🎨 Artwork AI
+            </TabsTrigger>
             <TabsTrigger value="server-resilience" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
               <Server className="h-4 w-4 mr-2" />
               Server Shield
@@ -165,6 +169,10 @@ const Admin = () => {
               Cloud Manager
             </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="artwork-generator" className="space-y-6 mt-6">
+            <MasterArtworkGenerator />
+          </TabsContent>
           
           <TabsContent value="server-resilience" className="space-y-6 mt-6">
             <ServerResilienceEngine />
