@@ -2,25 +2,26 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { User, Session } from '@supabase/supabase-js'
 import { supabase } from '@/integrations/supabase/client'
+import { useToast } from '@/hooks/use-toast'
 
 interface AuthContextType {
   user: User | null
   session: Session | null
-  signUp: (email: string, password: string, userData?: any) => Promise<{ error: any }>
+  loading: boolean
   signIn: (email: string, password: string) => Promise<{ error: any }>
+  signUp: (email: string, password: string, metadata?: any) => Promise<{ error: any }>
   signOut: () => Promise<{ error: any }>
   grantAdminRole: (email: string) => Promise<{ error: any }>
-  loading: boolean
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   session: null,
-  signUp: async () => ({ error: null }),
+  loading: true,
   signIn: async () => ({ error: null }),
+  signUp: async () => ({ error: null }),
   signOut: async () => ({ error: null }),
-  grantAdminRole: async () => ({ error: null }),
-  loading: true
+  grantAdminRole: async () => ({ error: null })
 })
 
 export const useAuth = () => {
@@ -35,29 +36,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
+  const { toast } = useToast()
 
   useEffect(() => {
-    // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
         console.log('Auth state changed:', event, session?.user?.email)
         setSession(session)
         setUser(session?.user ?? null)
         setLoading(false)
 
-        // Log security events for important auth changes
-        if (event === 'SIGNED_IN' && session?.user) {
-          setTimeout(async () => {
-            const { error } = await supabase.from('security_events').insert({
-              user_id: session.user.id,
-              event_type: 'LOGIN',
-              event_description: 'User signed in successfully',
-              severity: 'low'
-            })
-            if (error) {
-              console.error('Error logging security event:', error)
-            }
-          }, 0)
+        if (session?.user && event === 'SIGNED_IN') {
+          toast({
+            title: "Welcome!",
+            description: `Successfully signed in as ${session.user.email}`,
+          })
         }
       }
     )
@@ -70,35 +63,79 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     })
 
     return () => subscription.unsubscribe()
-  }, [])
-
-  const signUp = async (email: string, password: string, userData?: any) => {
-    const redirectUrl = `${window.location.origin}/`
-    
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: redirectUrl,
-        data: userData
-      }
-    })
-    
-    return { error }
-  }
+  }, [toast])
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    })
-    
-    return { error }
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      })
+      
+      if (error) {
+        toast({
+          title: "Sign In Failed",
+          description: error.message,
+          variant: "destructive"
+        })
+      }
+      
+      return { error }
+    } catch (error) {
+      console.error('Sign in error:', error)
+      return { error }
+    }
+  }
+
+  const signUp = async (email: string, password: string, metadata?: any) => {
+    try {
+      const redirectUrl = `${window.location.origin}/`
+      
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: redirectUrl,
+          data: metadata
+        }
+      })
+      
+      if (error) {
+        toast({
+          title: "Sign Up Failed",
+          description: error.message,
+          variant: "destructive"
+        })
+      } else {
+        toast({
+          title: "Account Created",
+          description: "Please check your email to verify your account",
+        })
+      }
+      
+      return { error }
+    } catch (error) {
+      console.error('Sign up error:', error)
+      return { error }
+    }
   }
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut()
-    return { error }
+    try {
+      const { error } = await supabase.auth.signOut()
+      
+      if (!error) {
+        toast({
+          title: "Signed Out",
+          description: "You have been successfully signed out",
+        })
+      }
+      
+      return { error }
+    } catch (error) {
+      console.error('Sign out error:', error)
+      return { error }
+    }
   }
 
   const grantAdminRole = async (email: string) => {
@@ -106,8 +143,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const { error } = await supabase.rpc('grant_admin_role', {
         user_email: email
       })
+      
       return { error }
     } catch (error) {
+      console.error('Grant admin role error:', error)
       return { error }
     }
   }
@@ -115,11 +154,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const value = {
     user,
     session,
-    signUp,
+    loading,
     signIn,
+    signUp,
     signOut,
-    grantAdminRole,
-    loading
+    grantAdminRole
   }
 
   return (
