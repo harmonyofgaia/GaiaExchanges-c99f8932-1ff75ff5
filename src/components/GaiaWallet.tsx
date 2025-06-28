@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -10,6 +11,8 @@ import { useWallets } from '@/hooks/useWallets'
 import { useTransactions } from '@/hooks/useTransactions'
 import { useUserProfile } from '@/hooks/useUserProfile'
 import { UltimateWalletProtection } from '@/components/security/UltimateWalletProtection'
+import { WalletEnhancementEngine } from '@/components/WalletEnhancementEngine'
+import { ApexWalletConditions } from '@/components/ApexWalletConditions'
 
 export function GaiaWallet() {
   const { user, signOut } = useAuth()
@@ -83,13 +86,19 @@ export function GaiaWallet() {
       {/* Ultimate Wallet Protection - Always First */}
       <UltimateWalletProtection />
 
+      {/* Lions & Dolphins Enhancement Engine */}
+      <WalletEnhancementEngine />
+
+      {/* Apex Wallet Conditions - 100% Perfect */}
+      <ApexWalletConditions />
+
       {/* Wallet Header with User Info */}
       <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-500/20">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2 text-green-400">
               <Leaf className="h-5 w-5" />
-              Harmony of Gaia Wallet - Maximum Protected
+              Harmony of Gaia Wallet - 🦁🐬 Apex Level Protection
             </CardTitle>
             <Button variant="outline" size="sm" onClick={handleSignOut}>
               <LogOut className="h-4 w-4 mr-2" />
@@ -113,7 +122,7 @@ export function GaiaWallet() {
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">Security Status:</span>
               <Badge variant="outline" className="border-green-500/20 text-green-400">
-                🛡️ MAXIMUM PROTECTION ACTIVE
+                🛡️ 🦁🐬 APEX PROTECTION ACTIVE
               </Badge>
             </div>
           </div>
