@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -20,6 +19,7 @@ import {
   Sparkles
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { HarmonyGamingEngine } from '@/components/HarmonyGamingEngine'
 
 const Gaming = () => {
   const [playerStats, setPlayerStats] = useState({
@@ -192,8 +192,11 @@ const Gaming = () => {
           </Card>
         </div>
 
+        {/* Ultimate Gaming Engine */}
+        <HarmonyGamingEngine />
+
         {/* Download Gaming App */}
-        <Card className="border-2 border-purple-500/50 bg-gradient-to-r from-purple-900/30 to-pink-900/30 mb-8">
+        <Card className="border-2 border-purple-500/50 bg-gradient-to-r from-purple-900/30 to-pink-900/30 mb-8 mt-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-purple-400 text-center justify-center">
               <Sparkles className="h-6 w-6" />

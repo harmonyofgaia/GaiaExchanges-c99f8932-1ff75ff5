@@ -10,6 +10,7 @@ import Downloads from "./pages/Downloads";
 import PlatformCompatibility from "./pages/PlatformCompatibility";
 import Gaming from "./pages/Gaming";
 import Webshop from "./pages/Webshop";
+import AnimalNFTCommunity from "./pages/AnimalNFTCommunity";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/platform-compatibility" element={<PlatformCompatibility />} />
           <Route path="/gaming" element={<Gaming />} />
           <Route path="/webshop" element={<Webshop />} />
+          <Route path="/animal-nft-community" element={<AnimalNFTCommunity />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
