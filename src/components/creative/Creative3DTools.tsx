@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -7,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge'
 import { 
   Box, 
-  Sphere, 
+  Circle, 
   Cylinder, 
   Zap, 
   Palette, 
@@ -32,7 +31,7 @@ export function Creative3DTools() {
 
   const tools3D = [
     { id: 'cube', name: '3D Cube', icon: Box, color: 'from-blue-600 to-cyan-600' },
-    { id: 'sphere', name: '3D Sphere', icon: Sphere, color: 'from-purple-600 to-pink-600' },
+    { id: 'sphere', name: '3D Sphere', icon: Circle, color: 'from-purple-600 to-pink-600' },
     { id: 'cylinder', name: '3D Cylinder', icon: Cylinder, color: 'from-green-600 to-emerald-600' },
     { id: 'neural', name: 'Neural Network', icon: Zap, color: 'from-yellow-600 to-orange-600' },
     { id: 'fractal', name: 'Fractal Generator', icon: Sparkles, color: 'from-red-600 to-rose-600' },
