@@ -10,6 +10,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: any }>
   signOut: () => Promise<{ error: any }>
   loading: boolean
+  isAdmin: boolean
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -18,7 +19,8 @@ const AuthContext = createContext<AuthContextType>({
   signUp: async () => ({ error: null }),
   signIn: async () => ({ error: null }),
   signOut: async () => ({ error: null }),
-  loading: true
+  loading: true,
+  isAdmin: false
 })
 
 export const useAuth = () => {
@@ -33,6 +35,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     // Set up auth state listener
@@ -43,19 +46,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(session?.user ?? null)
         setLoading(false)
 
-        // Log security events for important auth changes
-        if (event === 'SIGNED_IN' && session?.user) {
-          setTimeout(async () => {
-            const { error } = await supabase.from('security_events').insert({
-              user_id: session.user.id,
-              event_type: 'LOGIN',
-              event_description: 'User signed in successfully',
-              severity: 'low'
-            })
-            if (error) {
-              console.error('Error logging security event:', error)
-            }
-          }, 0)
+        // Check if user is admin (admin@cultureofharmony.net)
+        if (session?.user?.email === 'info@cultureofharmony.net') {
+          setIsAdmin(true)
+        } else {
+          setIsAdmin(false)
         }
       }
     )
@@ -65,6 +60,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setSession(session)
       setUser(session?.user ?? null)
       setLoading(false)
+      
+      // Check if user is admin
+      if (session?.user?.email === 'info@cultureofharmony.net') {
+        setIsAdmin(true)
+      }
     })
 
     return () => subscription.unsubscribe()
@@ -96,6 +96,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut()
+    setIsAdmin(false)
     return { error }
   }
 
@@ -105,7 +106,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signUp,
     signIn,
     signOut,
-    loading
+    loading,
+    isAdmin
   }
 
   return (

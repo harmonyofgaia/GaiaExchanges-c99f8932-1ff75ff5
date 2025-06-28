@@ -1,37 +1,12 @@
 
-import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Settings, Shield, DollarSign, Eye } from 'lucide-react'
-import { AdminLogin } from './admin/AdminLogin'
-import { AdminMFA } from './admin/AdminMFA'
 import { TokenManagement } from './admin/TokenManagement'
 import { DailyAdvertising } from './admin/DailyAdvertising'
 
 export function AdminControlSystem() {
-  const [authStep, setAuthStep] = useState<'login' | 'mfa' | 'authenticated'>('login')
-
-  const handleLoginSuccess = () => {
-    setAuthStep('authenticated')
-  }
-
-  const handleMFARequired = () => {
-    setAuthStep('mfa')
-  }
-
-  const handleMFASuccess = () => {
-    setAuthStep('authenticated')
-  }
-
-  if (authStep === 'login') {
-    return <AdminLogin onLoginSuccess={handleLoginSuccess} onMFARequired={handleMFARequired} />
-  }
-
-  if (authStep === 'mfa') {
-    return <AdminMFA onMFASuccess={handleMFASuccess} />
-  }
-
   return (
     <div className="space-y-6">
       <Card className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border-blue-500/20">

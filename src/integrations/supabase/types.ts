@@ -9,6 +9,36 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      admin_sessions: {
+        Row: {
+          created_at: string | null
+          device_fingerprint: string | null
+          expires_at: string
+          id: string
+          ip_address: unknown
+          session_token: string
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          device_fingerprint?: string | null
+          expires_at?: string
+          id?: string
+          ip_address: unknown
+          session_token: string
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          device_fingerprint?: string | null
+          expires_at?: string
+          id?: string
+          ip_address?: unknown
+          session_token?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       environmental_impact: {
         Row: {
           action_type: string
@@ -363,30 +393,6 @@ export type Database = {
           },
         ]
       }
-      user_roles: {
-        Row: {
-          granted_at: string | null
-          granted_by: string | null
-          id: string
-          role: Database["public"]["Enums"]["user_role"]
-          user_id: string
-        }
-        Insert: {
-          granted_at?: string | null
-          granted_by?: string | null
-          id?: string
-          role?: Database["public"]["Enums"]["user_role"]
-          user_id: string
-        }
-        Update: {
-          granted_at?: string | null
-          granted_by?: string | null
-          id?: string
-          role?: Database["public"]["Enums"]["user_role"]
-          user_id?: string
-        }
-        Relationships: []
-      }
       user_stakes: {
         Row: {
           amount: number
@@ -469,11 +475,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      has_role: {
+      create_admin_session: {
         Args: {
-          _user_id: string
-          _role: Database["public"]["Enums"]["user_role"]
+          client_ip: unknown
+          client_user_agent?: string
+          client_fingerprint?: string
         }
+        Returns: string
+      }
+      validate_admin_access: {
+        Args: { client_ip: unknown }
+        Returns: boolean
+      }
+      validate_admin_session: {
+        Args: { token: string; client_ip: unknown }
         Returns: boolean
       }
     }
@@ -489,7 +504,6 @@ export type Database = {
         | "unstake"
         | "reward"
         | "burn"
-      user_role: "user" | "trader" | "admin" | "moderator"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -617,7 +631,6 @@ export const Constants = {
         "reward",
         "burn",
       ],
-      user_role: ["user", "trader", "admin", "moderator"],
     },
   },
 } as const
