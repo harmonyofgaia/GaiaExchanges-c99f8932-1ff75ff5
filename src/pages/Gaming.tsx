@@ -16,7 +16,12 @@ import {
   Download,
   Play,
   Crown,
-  Sparkles
+  Sparkles,
+  Rocket,
+  Brain,
+  Eye,
+  Atom,
+  Globe
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { HarmonyGamingEngine } from '@/components/HarmonyGamingEngine'
@@ -81,7 +86,44 @@ const Gaming = () => {
     { id: 4, title: 'Build 3 Animal Sanctuaries', reward: '200 GAIA', progress: 60, completed: false }
   ])
 
-  // Gaming metrics update
+  const [quantumFeatures] = useState([
+    {
+      id: 1,
+      name: 'Quantum Animal Companions',
+      description: 'AI-powered animals that learn, evolve, and form real emotional bonds',
+      status: 'REVOLUTIONARY',
+      impact: 'Animals have consciousness and memories'
+    },
+    {
+      id: 2,
+      name: 'Reality Synthesis Engine',
+      description: 'Graphics that exceed reality - every texture, every emotion visible',
+      status: 'BEYOND REAL',
+      impact: 'Photorealistic + Emotional visualization'
+    },
+    {
+      id: 3,
+      name: 'Infinite World Generator',
+      description: 'Procedurally generated infinite worlds where every animal has a story',
+      status: 'LIMITLESS',
+      impact: 'Never-ending exploration and discovery'
+    },
+    {
+      id: 4,
+      name: 'Neural Network Storytelling',
+      description: 'AI creates unique, emotionally engaging stories for every rescued animal',
+      status: 'SENTIENT',
+      impact: 'Every animal has a unique personality'
+    },
+    {
+      id: 5,
+      name: 'Quantum Multiplayer Reality',
+      description: 'Play across dimensions with players from parallel gaming universes',
+      status: 'DIMENSIONAL',
+      impact: 'Multiplayer across infinite realities'
+    }
+  ])
+
   useEffect(() => {
     const updateStats = () => {
       setPlayerStats(prev => ({
@@ -118,27 +160,55 @@ const Gaming = () => {
   }
 
   const downloadApp = () => {
-    toast.success('🚀 Downloading Harmony of Gaia Game!', {
-      description: 'My Little Big Planet experience - where creativity meets conservation!',
+    toast.success('🚀 Downloading Quantum Harmony of Gaia Game!', {
+      description: 'Ultra-realistic gaming experience that transcends reality itself!',
       duration: 6000
     })
+  }
+
+  const activateQuantumMode = () => {
+    toast.success('⚡ QUANTUM MODE ACTIVATED!', {
+      description: 'Reality boundaries dissolved - entering the quantum gaming dimension!',
+      duration: 5000
+    })
+
+    setPlayerStats(prev => ({
+      ...prev,
+      gaiaTokens: prev.gaiaTokens + 1000,
+      experience: prev.experience + 5000,
+      animalsSaved: prev.animalsSaved + 100
+    }))
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-green-900/20 to-blue-900/20">
       <div className="container mx-auto px-4 py-6">
         
-        {/* Gaming Header */}
+        {/* Enhanced Gaming Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 via-green-400 to-blue-400 bg-clip-text text-transparent">
-            🎮 HARMONY OF GAIA GAMING
+          <h1 className="text-4xl md:text-7xl font-bold bg-gradient-to-r from-purple-400 via-green-400 to-blue-400 bg-clip-text text-transparent">
+            🎮 HARMONY OF GAIA QUANTUM GAMING
           </h1>
-          <p className="text-xl text-muted-foreground mt-4">
-            🌍 My Little Big Planet - Play, Earn, Save Animals & Build Better Worlds
+          <p className="text-2xl text-muted-foreground mt-4">
+            🌍 Beyond Reality Gaming - Ultra-Realistic Animal Liberation Universe
           </p>
-          <p className="text-sm text-green-400 mt-2">
-            🐾 Every Game Played = Real Animals Saved From Cages Forever
+          <p className="text-lg text-green-400 mt-2">
+            🚀 Quantum-Powered • Neural AI • Infinite Worlds • Cross-Dimensional Multiplayer
           </p>
+          <div className="flex justify-center gap-4 mt-4">
+            <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm px-4 py-2">
+              <Rocket className="h-4 w-4 mr-2" />
+              QUANTUM ENABLED
+            </Badge>
+            <Badge className="bg-gradient-to-r from-green-600 to-blue-600 text-white text-sm px-4 py-2">
+              <Brain className="h-4 w-4 mr-2" />
+              NEURAL AI ACTIVE
+            </Badge>
+            <Badge className="bg-gradient-to-r from-cyan-600 to-purple-600 text-white text-sm px-4 py-2">
+              <Eye className="h-4 w-4 mr-2" />
+              ULTRA GRAPHICS
+            </Badge>
+          </div>
         </div>
 
         {/* Player Stats Dashboard */}
@@ -192,41 +262,88 @@ const Gaming = () => {
           </Card>
         </div>
 
-        {/* Ultimate Gaming Engine */}
+        {/* Quantum Gaming Engine */}
         <HarmonyGamingEngine />
 
-        {/* Download Gaming App */}
-        <Card className="border-2 border-purple-500/50 bg-gradient-to-r from-purple-900/30 to-pink-900/30 mb-8 mt-8">
+        {/* Revolutionary Quantum Features */}
+        <Card className="border-2 border-cyan-500/50 bg-gradient-to-r from-cyan-900/30 to-purple-900/30 mb-8 mt-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-cyan-400 text-center justify-center">
+              <Atom className="h-6 w-6" />
+              ⚛️ QUANTUM GAMING FEATURES - BEYOND IMAGINATION
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="text-center mb-6">
+              <Button 
+                onClick={activateQuantumMode}
+                className="bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 hover:from-cyan-700 hover:via-purple-700 hover:to-pink-700 text-white font-bold py-4 px-8 text-lg"
+              >
+                <Zap className="h-6 w-6 mr-2" />
+                ⚡ ACTIVATE QUANTUM REALITY MODE
+              </Button>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {quantumFeatures.map((feature) => (
+                <div key={feature.id} className="p-6 bg-gradient-to-br from-purple-900/30 to-cyan-900/30 rounded-lg border border-cyan-500/30">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="font-bold text-cyan-400 text-lg">{feature.name}</h4>
+                    <Badge className="bg-gradient-to-r from-purple-600 to-cyan-600 text-white">
+                      {feature.status}
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">{feature.description}</p>
+                  <div className="p-3 bg-cyan-900/20 rounded border border-cyan-500/20">
+                    <div className="text-xs font-bold text-cyan-400">QUANTUM IMPACT:</div>
+                    <div className="text-xs text-muted-foreground">{feature.impact}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Enhanced Download Section */}
+        <Card className="border-2 border-purple-500/50 bg-gradient-to-r from-purple-900/30 to-pink-900/30 mb-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-purple-400 text-center justify-center">
               <Sparkles className="h-6 w-6" />
-              🎮 Download "My Little Big Planet" - Harmony of Gaia Edition
+              🎮 Download Ultra-Realistic "My Little Big Planet" - Quantum Edition
             </CardTitle>
           </CardHeader>
-          <CardContent className="text-center space-y-4">
-            <p className="text-lg text-muted-foreground">
-              The most revolutionary gaming experience that saves real animals while you play!
+          <CardContent className="text-center space-y-6">
+            <p className="text-xl text-muted-foreground">
+              The most revolutionary gaming experience ever created - transcending reality itself!
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/20">
-                <h4 className="font-bold text-green-400 mb-2">🌍 World Building</h4>
-                <p className="text-sm text-muted-foreground">Create sustainable worlds where animals roam free</p>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="p-4 bg-green-900/30 rounded-lg border border-green-500/20">
+                <Globe className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                <h4 className="font-bold text-green-400 mb-2">🌍 Infinite Worlds</h4>
+                <p className="text-sm text-muted-foreground">Procedurally generated universes where every animal has freedom</p>
               </div>
-              <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
-                <h4 className="font-bold text-blue-400 mb-2">💰 Earn Real GAIA</h4>
-                <p className="text-sm text-muted-foreground">Every action earns actual cryptocurrency</p>
+              <div className="p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
+                <Brain className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                <h4 className="font-bold text-blue-400 mb-2">🧠 Neural AI Animals</h4>
+                <p className="text-sm text-muted-foreground">Animals with consciousness, emotions, and memories</p>
               </div>
-              <div className="p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
-                <h4 className="font-bold text-purple-400 mb-2">🐾 Save Real Animals</h4>
-                <p className="text-sm text-muted-foreground">Game progress funds real animal sanctuaries</p>
+              <div className="p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
+                <Eye className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                <h4 className="font-bold text-purple-400 mb-2">👁️ Beyond Reality Graphics</h4>
+                <p className="text-sm text-muted-foreground">Visuals that exceed what eyes can normally see</p>
+              </div>
+              <div className="p-4 bg-cyan-900/30 rounded-lg border border-cyan-500/20">
+                <Atom className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
+                <h4 className="font-bold text-cyan-400 mb-2">⚛️ Quantum Reality</h4>
+                <p className="text-sm text-muted-foreground">Play across parallel dimensions simultaneously</p>
               </div>
             </div>
             <Button 
               onClick={downloadApp}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-8"
+              className="bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 hover:from-purple-700 hover:via-pink-700 hover:to-cyan-700 text-white font-bold py-4 px-12 text-lg"
             >
-              <Download className="h-5 w-5 mr-2" />
-              🚀 DOWNLOAD HARMONY OF GAIA GAME - FREE
+              <Download className="h-6 w-6 mr-2" />
+              🚀 DOWNLOAD QUANTUM HARMONY OF GAIA - TRANSCEND REALITY
             </Button>
           </CardContent>
         </Card>
@@ -303,16 +420,33 @@ const Gaming = () => {
           </CardContent>
         </Card>
 
-        {/* Mission Statement */}
+        {/* Enhanced Mission Statement */}
         <div className="mt-8 text-center">
-          <div className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border border-green-500/20 rounded-lg p-6">
-            <h3 className="text-2xl font-bold text-green-400 mb-4">🌍 OUR MISSION: BREAK THE CAGE WORLD</h3>
-            <p className="text-muted-foreground mb-4">
-              Every game you play contributes to real animal welfare projects worldwide. 
-              We're building a future where no animal lives in miserable conditions.
+          <div className="bg-gradient-to-r from-green-900/30 via-blue-900/30 to-purple-900/30 border border-green-500/30 rounded-lg p-8">
+            <h3 className="text-3xl font-bold text-green-400 mb-6">🌍 QUANTUM MISSION: TRANSCEND THE CAGE WORLD</h3>
+            <p className="text-muted-foreground mb-6 text-lg">
+              Every quantum game session contributes to real animal welfare projects across multiple dimensions. 
+              We're building a future where no animal exists in confinement - across all realities.
             </p>
-            <p className="text-sm text-green-400 font-bold">
-              🎵 "Seeds Will Form Into Music" - Every click creates harmony for all living beings! 🎵
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+              <div className="p-6 bg-gradient-to-br from-green-900/30 to-cyan-900/30 rounded-lg border border-green-500/20">
+                <Sparkles className="h-12 w-12 text-green-400 mx-auto mb-4" />
+                <h4 className="text-xl font-bold text-green-400 mb-2">Quantum Liberation</h4>
+                <p className="text-sm text-muted-foreground">Free animals across infinite realities simultaneously</p>
+              </div>
+              <div className="p-6 bg-gradient-to-br from-blue-900/30 to-purple-900/30 rounded-lg border border-blue-500/20">
+                <Brain className="h-12 w-12 text-blue-400 mx-auto mb-4" />
+                <h4 className="text-xl font-bold text-blue-400 mb-2">Neural Consciousness</h4>
+                <p className="text-sm text-muted-foreground">Every AI animal has real emotions and memories</p>
+              </div>
+              <div className="p-6 bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-lg border border-purple-500/20">
+                <Atom className="h-12 w-12 text-purple-400 mx-auto mb-4" />
+                <h4 className="text-xl font-bold text-purple-400 mb-2">Reality Transformation</h4>
+                <p className="text-sm text-muted-foreground">Change the fundamental nature of existence itself</p>
+              </div>
+            </div>
+            <p className="text-lg text-green-400 font-bold mt-8">
+              🎵 "Seeds Will Form Into Music" - Every quantum click creates harmony across infinite dimensions! 🎵
             </p>
           </div>
         </div>
