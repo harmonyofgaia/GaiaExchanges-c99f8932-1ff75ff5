@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useAuth } from './AuthProvider'
-import { AdminSetup } from '@/components/admin/AdminSetup'
 import { AuthHeader } from './AuthHeader'
 import { SignInForm } from './SignInForm'
 import { SignUpForm } from './SignUpForm'
@@ -74,10 +73,9 @@ export function AuthPage() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
+              <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
                 <TabsTrigger value="signup">Sign Up</TabsTrigger>
-                <TabsTrigger value="admin">Admin Access</TabsTrigger>
               </TabsList>
               
               <TabsContent value="signin" className="space-y-4 mt-6">
@@ -86,10 +84,6 @@ export function AuthPage() {
               
               <TabsContent value="signup" className="space-y-4 mt-6">
                 <SignUpForm onSubmit={handleSignUp} isLoading={isLoading} />
-              </TabsContent>
-
-              <TabsContent value="admin" className="mt-6">
-                <AdminSetup />
               </TabsContent>
             </Tabs>
 
