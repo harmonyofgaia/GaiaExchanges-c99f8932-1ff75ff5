@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -44,6 +43,9 @@ import {
 import { toast } from 'sonner'
 import { HarmonyGamingEngine } from '@/components/HarmonyGamingEngine'
 import { EnhancedGamingModes } from '@/components/EnhancedGamingModes'
+import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
+import { WormsGameArena } from '@/components/WormsGameArena'
+import { SnakeGameArena } from '@/components/SnakeGameArena'
 
 const Gaming = () => {
   const [playerStats, setPlayerStats] = useState({
@@ -544,6 +546,51 @@ const Gaming = () => {
 
         {/* Quantum Gaming Engine */}
         <HarmonyGamingEngine />
+
+        {/* NFT Marketplace for Gaming */}
+        <div className="mb-8">
+          <GamingNFTMarketplace />
+        </div>
+
+        {/* Classic Games Arena */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <WormsGameArena />
+          <SnakeGameArena />
+        </div>
+
+        {/* Cross-Game Integration Info */}
+        <Card className="border-2 border-cyan-500/50 bg-gradient-to-r from-cyan-900/30 to-purple-900/30 mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-cyan-400 text-center justify-center">
+              <Zap className="h-6 w-6" />
+              🌌 CROSS-GAME BLACKHOLE MECHANICS
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="text-center mb-6">
+              <p className="text-lg text-muted-foreground mb-4">
+                When Snake reaches 100 GAIA tokens, a blackhole opens to transport you into random multiplayer battles!
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="p-6 bg-gradient-to-br from-green-900/30 to-cyan-900/30 rounded-lg border border-green-500/20">
+                  <div className="text-4xl mb-2">🐍</div>
+                  <h4 className="text-lg font-bold text-green-400 mb-2">Snake Game</h4>
+                  <p className="text-sm text-muted-foreground">Collect 100 GAIA tokens to activate blackhole</p>
+                </div>
+                <div className="p-6 bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-lg border border-purple-500/20">
+                  <div className="text-4xl mb-2">🌌</div>
+                  <h4 className="text-lg font-bold text-purple-400 mb-2">Blackhole Portal</h4>
+                  <p className="text-sm text-muted-foreground">Random transport to multiplayer arenas</p>
+                </div>
+                <div className="p-6 bg-gradient-to-br from-orange-900/30 to-red-900/30 rounded-lg border border-orange-500/20">
+                  <div className="text-4xl mb-2">🐛</div>
+                  <h4 className="text-lg font-bold text-orange-400 mb-2">Worms Integration</h4>
+                  <p className="text-sm text-muted-foreground">Snake can eat worms from other games</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Revolutionary Quantum Features */}
         <Card className="border-2 border-cyan-500/50 bg-gradient-to-r from-cyan-900/30 to-purple-900/30 mb-8 mt-8">
