@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react'
 import { toast } from 'sonner'
 import { supabase } from '@/integrations/supabase/client'
@@ -107,8 +108,9 @@ export function QuantumSecurityCore() {
         // 7-12. ZERO-TRACE PROTOCOL
         const zeroTraceProtocol = () => {
           // Quantum memory scrubbing
-          if (performance.memory) {
-            const memory = (performance as any).memory
+          const performanceWithMemory = performance as any
+          if (performanceWithMemory.memory) {
+            const memory = performanceWithMemory.memory
             if (memory.usedJSHeapSize > memory.jsHeapSizeLimit * 0.8) {
               // Trigger garbage collection
               if ('gc' in window) {

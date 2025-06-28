@@ -101,20 +101,22 @@ export function QuantumPerformanceEngine() {
         }
 
         // 17. QUANTUM PARALLEL PROCESSING
-        const quantumParallelProcessing = () => {
+        const quantumParallelProcessing = async () => {
           const parallelTasks = [
             () => Promise.resolve(Math.random() * 100),
             () => Promise.resolve(Date.now() % 1000),
             () => Promise.resolve(performance.now())
           ]
 
-          return Promise.all(parallelTasks).then(results => results.every(r => r > 0))
+          const results = await Promise.all(parallelTasks.map(task => task()))
+          return results.every(r => r > 0)
         }
 
         // 18. MEMORY QUANTUM COMPRESSION
         const memoryCompression = () => {
-          if (performance.memory) {
-            const memory = (performance as any).memory
+          const performanceWithMemory = performance as any
+          if (performanceWithMemory.memory) {
+            const memory = performanceWithMemory.memory
             const usageRatio = memory.usedJSHeapSize / memory.jsHeapSizeLimit
             
             if (usageRatio > 0.7) {
