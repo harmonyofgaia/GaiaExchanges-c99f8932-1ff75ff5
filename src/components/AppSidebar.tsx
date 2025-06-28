@@ -1,20 +1,5 @@
 
-import {
-  Calendar,
-  Home,
-  Inbox,
-  Search,
-  Settings,
-  Wallet,
-  TrendingUp,
-  Shield,
-  Info,
-  Download,
-  Megaphone,
-  BarChart3,
-  Recycle
-} from "lucide-react"
-import { NavLink, useLocation } from "react-router-dom"
+import { Home, Wallet, TrendingUp, Search, Download, Code, FileText, Users, Settings, Shield, BarChart3 } from "lucide-react"
 
 import {
   Sidebar,
@@ -25,20 +10,15 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar"
+import { GaiaLogo } from "./GaiaLogo"
 
 // Menu items.
 const items = [
   {
-    title: "Dashboard",
+    title: "Home",
     url: "/",
     icon: Home,
-  },
-  {
-    title: "Markets",
-    url: "/markets",
-    icon: TrendingUp,
   },
   {
     title: "Wallet",
@@ -46,19 +26,19 @@ const items = [
     icon: Wallet,
   },
   {
-    title: "Reinvestments",
-    url: "/reinvestments",
-    icon: Recycle,
+    title: "Markets",
+    url: "/markets",
+    icon: TrendingUp,
   },
   {
     title: "Transparency",
     url: "/transparency",
-    icon: Shield,
+    icon: Search,
   },
   {
-    title: "About",
-    url: "/about",
-    icon: Info,
+    title: "Reinvestments",
+    url: "/reinvestments",
+    icon: BarChart3,
   },
   {
     title: "Downloads",
@@ -66,9 +46,14 @@ const items = [
     icon: Download,
   },
   {
+    title: "Smart Contracts",
+    url: "/smart-contracts",
+    icon: Code,
+  },
+  {
     title: "Marketing",
     url: "/marketing",
-    icon: Megaphone,
+    icon: Users,
   },
   {
     title: "Admin",
@@ -78,35 +63,23 @@ const items = [
 ]
 
 export function AppSidebar() {
-  const { state } = useSidebar()
-  const location = useLocation()
-
-  const getNavClassName = ({ isActive }: { isActive: boolean }) => {
-    return isActive 
-      ? "bg-primary/20 text-primary font-medium border-r-2 border-primary" 
-      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-  }
-
   return (
-    <Sidebar collapsible="icon">
-      <SidebarContent className="bg-background/80 backdrop-blur-sm border-r border-border/50">
+    <Sidebar className="border-r-green-500/20 bg-gradient-to-b from-green-900/20 to-black/40 backdrop-blur-sm">
+      <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-primary font-semibold">
-            🌍 Harmony of Gaia
+          <SidebarGroupLabel className="text-green-400 font-bold text-lg flex items-center gap-2">
+            <GaiaLogo size="sm" variant="white-fade" />
+            Gaia's Ecosystem
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <NavLink
-                      to={item.url}
-                      className={getNavClassName}
-                      end={item.url === "/"}
-                    >
-                      <item.icon />
+                    <a href={item.url} className="flex items-center gap-2 text-white/80 hover:text-green-400 transition-colors">
+                      <item.icon className="h-4 w-4" />
                       <span>{item.title}</span>
-                    </NavLink>
+                    </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

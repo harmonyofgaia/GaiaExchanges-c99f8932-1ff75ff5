@@ -1,75 +1,60 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "./components/AppSidebar";
-import { AnimatedBackground } from "./components/ui/animated-background";
-import Index from "./pages/Index";
-import About from "./pages/About";
-import Wallet from "./pages/Wallet";
-import Transparency from "./pages/Transparency";
-import Markets from "./pages/Markets";
-import Marketing from "./pages/Marketing";
-import Downloads from "./pages/Downloads";
-import Admin from "./pages/Admin";
-import NotFound from "./pages/NotFound";
-import Reinvestments from "./pages/Reinvestments";
 
-const queryClient = new QueryClient();
+import { Toaster } from "@/components/ui/sonner"
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/AppSidebar"
+import { AdvertisingHeader } from "@/components/AdvertisingHeader"
+import { AppWithErrorBoundary } from "@/components/AppWithErrorBoundary"
+import Index from "./pages/Index"
+import About from "./pages/About"
+import Wallet from "./pages/Wallet"
+import Markets from "./pages/Markets"
+import Transparency from "./pages/Transparency"
+import Reinvestments from "./pages/Reinvestments"
+import Downloads from "./pages/Downloads"
+import SmartContracts from "./pages/SmartContracts"
+import Marketing from "./pages/Marketing"
+import Admin from "./pages/Admin"
+import NotFound from "./pages/NotFound"
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <SidebarProvider>
-          <div className="min-h-screen flex w-full bg-background relative">
-            <AnimatedBackground />
+const queryClient = new QueryClient()
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <BrowserRouter>
+          <SidebarProvider>
             <AppSidebar />
-            <div className="flex-1 flex flex-col relative z-10">
-              <header className="h-14 flex items-center border-b border-border px-6 bg-background/80 backdrop-blur-sm">
-                <SidebarTrigger className="mr-4" />
-                <div className="flex items-center justify-between w-full">
-                  <div className="flex items-center gap-4">
-                    <img 
-                      src="/lovable-uploads/ab19f9f8-2069-4211-955c-dab937602141.png" 
-                      alt="Gaia of Harmony Logo" 
-                      className="w-8 h-8 object-contain"
-                    />
-                    <span className="text-sm text-muted-foreground">
-                      Gaia's Exchanges • World's Most Secure Crypto Trading Platform
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <div className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-medium">
-                      World Leader Status
-                    </div>
-                  </div>
-                </div>
-              </header>
-              <main className="flex-1 p-6 bg-background/50 backdrop-blur-sm">
+            <main className="flex-1 overflow-auto">
+              <AdvertisingHeader />
+              <div className="p-4">
+                <SidebarTrigger />
+              </div>
+              <AppWithErrorBoundary>
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/wallet" element={<Wallet />} />
-                  <Route path="/reinvestments" element={<Reinvestments />} />
-                  <Route path="/transparency" element={<Transparency />} />
                   <Route path="/markets" element={<Markets />} />
-                  <Route path="/marketing" element={<Marketing />} />
+                  <Route path="/transparency" element={<Transparency />} />
+                  <Route path="/reinvestments" element={<Reinvestments />} />
                   <Route path="/downloads" element={<Downloads />} />
+                  <Route path="/smart-contracts" element={<SmartContracts />} />
+                  <Route path="/marketing" element={<Marketing />} />
                   <Route path="/admin" element={<Admin />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
-              </main>
-            </div>
-          </div>
-        </SidebarProvider>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+              </AppWithErrorBoundary>
+            </main>
+          </SidebarProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  )
+}
 
-export default App;
+export default App

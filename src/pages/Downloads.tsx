@@ -7,6 +7,7 @@ import { AdvancedWalletSecurity } from '@/components/AdvancedWalletSecurity'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Download, Shield, Globe, Code, Lock } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 const Downloads = () => {
   return (
@@ -62,6 +63,29 @@ const Downloads = () => {
 
         {/* Web3 Integration */}
         <Web3Integration />
+
+        {/* Smart Contracts Navigation */}
+        <Card className="border-purple-500/20 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-purple-400">
+              <Code className="h-5 w-5" />
+              Smart Contract Development Suite
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-center space-y-4">
+              <p className="text-muted-foreground">
+                Access our comprehensive smart contract development tools, legal frameworks, and deployment systems
+              </p>
+              <Button asChild className="bg-purple-600 hover:bg-purple-700 text-white">
+                <a href="/smart-contracts">
+                  <Code className="h-4 w-4 mr-2" />
+                  Access Smart Contract Suite
+                </a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* GitHub Repositories */}
         <GitHubRepositories />
