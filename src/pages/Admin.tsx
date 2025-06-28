@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Settings, Activity, Database, Users, FileText, Leaf, RotateCcw, CloudLightning } from 'lucide-react'
+import { Shield, Settings, Activity, Database, Users, FileText, Leaf, RotateCcw, CloudLightning, Server, Github } from 'lucide-react'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin'
 import { AdminMFA } from '@/components/admin/AdminMFA'
@@ -18,6 +17,8 @@ import { toast } from 'sonner'
 import { EncryptedSecurityReports } from '@/components/admin/EncryptedSecurityReports'
 import { UltimateResilienceEngine } from '@/components/security/UltimateResilienceEngine'
 import { CloudResilienceManager } from '@/components/admin/CloudResilienceManager'
+import { ServerResilienceEngine } from '@/components/admin/ServerResilienceEngine'
+import { GitHubAdminIntegration } from '@/components/github/GitHubAdminIntegration'
 
 const Admin = () => {
   const navigate = useNavigate()
@@ -117,8 +118,16 @@ const Admin = () => {
           </div>
         </div>
 
-        <Tabs defaultValue="resilience" className="w-full">
-          <TabsList className="grid w-full grid-cols-9 bg-black/50 backdrop-blur-md border border-green-500/20">
+        <Tabs defaultValue="server-resilience" className="w-full">
+          <TabsList className="grid w-full grid-cols-11 bg-black/50 backdrop-blur-md border border-green-500/20">
+            <TabsTrigger value="server-resilience" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+              <Server className="h-4 w-4 mr-2" />
+              Server Shield
+            </TabsTrigger>
+            <TabsTrigger value="github-integration" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+              <Github className="h-4 w-4 mr-2" />
+              GitHub Force
+            </TabsTrigger>
             <TabsTrigger value="resilience" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
               <CloudLightning className="h-4 w-4 mr-2" />
               Resilience
@@ -156,6 +165,14 @@ const Admin = () => {
               Cloud Manager
             </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="server-resilience" className="space-y-6 mt-6">
+            <ServerResilienceEngine />
+          </TabsContent>
+          
+          <TabsContent value="github-integration" className="space-y-6 mt-6">
+            <GitHubAdminIntegration />
+          </TabsContent>
           
           <TabsContent value="resilience" className="space-y-6 mt-6">
             <UltimateResilienceEngine />
