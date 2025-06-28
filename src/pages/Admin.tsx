@@ -1,9 +1,10 @@
+
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Settings, Activity, Database, Users, FileText, Leaf, RotateCcw } from 'lucide-react'
+import { Shield, Settings, Activity, Database, Users, FileText, Leaf, RotateCcw, CloudLightning } from 'lucide-react'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin'
 import { AdminMFA } from '@/components/admin/AdminMFA'
@@ -15,6 +16,8 @@ import { GreenProjectManager } from '@/components/admin/GreenProjectManager'
 import { BackgroundManager } from '@/components/admin/BackgroundManager'
 import { toast } from 'sonner'
 import { EncryptedSecurityReports } from '@/components/admin/EncryptedSecurityReports'
+import { UltimateResilienceEngine } from '@/components/security/UltimateResilienceEngine'
+import { CloudResilienceManager } from '@/components/admin/CloudResilienceManager'
 
 const Admin = () => {
   const navigate = useNavigate()
@@ -114,8 +117,12 @@ const Admin = () => {
           </div>
         </div>
 
-        <Tabs defaultValue="system-check" className="w-full">
-          <TabsList className="grid w-full grid-cols-7 bg-black/50 backdrop-blur-md border border-green-500/20">
+        <Tabs defaultValue="resilience" className="w-full">
+          <TabsList className="grid w-full grid-cols-9 bg-black/50 backdrop-blur-md border border-green-500/20">
+            <TabsTrigger value="resilience" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+              <CloudLightning className="h-4 w-4 mr-2" />
+              Resilience
+            </TabsTrigger>
             <TabsTrigger value="system-check" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
               <Activity className="h-4 w-4 mr-2" />
               System Check
@@ -144,7 +151,15 @@ const Admin = () => {
               <FileText className="h-4 w-4 mr-2" />
               Security Reports
             </TabsTrigger>
+            <TabsTrigger value="cloud-manager" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+              <CloudLightning className="h-4 w-4 mr-2" />
+              Cloud Manager
+            </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="resilience" className="space-y-6 mt-6">
+            <UltimateResilienceEngine />
+          </TabsContent>
           
           <TabsContent value="system-check" className="space-y-6 mt-6">
             <ComprehensiveSystemCheck />
@@ -172,6 +187,10 @@ const Admin = () => {
           
           <TabsContent value="security-reports" className="space-y-6 mt-6">
             <EncryptedSecurityReports />
+          </TabsContent>
+          
+          <TabsContent value="cloud-manager" className="space-y-6 mt-6">
+            <CloudResilienceManager />
           </TabsContent>
         </Tabs>
       </div>
