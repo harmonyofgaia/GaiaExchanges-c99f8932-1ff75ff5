@@ -1,50 +1,28 @@
 
 import { useState, useEffect } from 'react'
-import { supabase } from '@/integrations/supabase/client'
 import { useAuth } from '@/components/auth/AuthProvider'
 
 export type UserRole = 'user' | 'admin' | 'moderator'
 
 export function useUserRole() {
   const { user } = useAuth()
-  const [roles, setRoles] = useState<UserRole[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!user) {
-      setRoles([])
-      setLoading(false)
-      return
-    }
-
-    const fetchUserRoles = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', user.id)
-
-        if (error) {
-          console.error('Error fetching user roles:', error)
-        } else {
-          setRoles(data?.map(r => r.role as UserRole) || [])
-        }
-      } catch (error) {
-        console.error('Error fetching user roles:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchUserRoles()
+    setLoading(false)
   }, [user])
 
-  const hasRole = (role: UserRole) => roles.includes(role)
-  const isAdmin = () => hasRole('admin')
-  const isModerator = () => hasRole('moderator')
+  // Simple admin check based on email
+  const isAdmin = () => user?.email === 'info@cultureofharmony.net'
+  const isModerator = () => false
+  const hasRole = (role: UserRole) => {
+    if (role === 'admin') return isAdmin()
+    if (role === 'moderator') return isModerator()
+    return true // everyone is a user
+  }
 
   return {
-    roles,
+    roles: isAdmin() ? ['admin'] as UserRole[] : ['user'] as UserRole[],
     loading,
     hasRole,
     isAdmin,
