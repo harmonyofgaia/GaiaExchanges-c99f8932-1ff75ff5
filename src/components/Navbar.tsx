@@ -13,7 +13,8 @@ import {
   Menu,
   X,
   Leaf,
-  Target
+  Target,
+  Wrench
 } from 'lucide-react'
 
 export function Navbar() {
@@ -27,6 +28,7 @@ export function Navbar() {
     { name: 'Markets', href: '/markets', icon: BarChart3 },
     { name: 'Security', href: '/ultimate-security', icon: Shield },
     { name: 'Marketing', href: '/marketing', icon: Target },
+    { name: 'Tech Support', href: '/techno-soul-solutions', icon: Wrench },
     { name: 'Downloads', href: '/downloads', icon: Download },
     { name: 'Profile', href: '/profile', icon: User },
     { name: 'Contact', href: '/contact', icon: Mail },

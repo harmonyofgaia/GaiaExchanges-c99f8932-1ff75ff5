@@ -28,7 +28,7 @@ import { HarmonyGamingEngine } from '@/components/HarmonyGamingEngine'
 import { EnhancedGamingModes } from '@/components/EnhancedGamingModes'
 
 const Gaming = () => {
-  const [playerStats, setPlayerStats = useState({
+  const [playerStats, setPlayerStats] = useState({
     gaiaTokens: 0,
     level: 1,
     experience: 0,
@@ -37,7 +37,7 @@ const Gaming = () => {
     animalsSaved: 0
   })
 
-  const [activeGames, setActiveGames = useState([
+  const [activeGames, setActiveGames] = useState([
     { 
       id: 1, 
       name: 'Harmony Builders', 
