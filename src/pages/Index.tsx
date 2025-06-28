@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -55,10 +56,15 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
+import { RobotAdvertisement } from "@/components/advertising/RobotAdvertisement";
+import { ExoticDefenseSystem } from "@/components/security/ExoticDefenseSystem";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-900/20 via-zinc-900/50 to-zinc-900/20 text-white">
+      {/* Robot Advertisement - Only on Home Page */}
+      <RobotAdvertisement />
+      
       <div className="container mx-auto p-8">
 
         {/* Hero Section */}
@@ -80,6 +86,11 @@ const Index = () => {
               <a href="/gaming">🎮 Gaming Hub</a>
             </Button>
           </div>
+        </section>
+
+        {/* Exotic Defense System Section */}
+        <section className="mb-12">
+          <ExoticDefenseSystem />
         </section>
 
         {/* Key Features */}
