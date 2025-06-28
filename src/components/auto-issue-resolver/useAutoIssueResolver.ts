@@ -90,15 +90,15 @@ export function useAutoIssueResolver() {
         })
 
         // Memory leak prevention - Fixed TypeScript error
-        if (typeof window !== 'undefined' && window.performance) {
-          // Use type assertion to access memory property safely
-          const performanceWithMemory = window.performance as any
-          if (performanceWithMemory.memory) {
-            const memory = performanceWithMemory.memory
+        if (typeof window !== 'undefined' && 'performance' in window) {
+          // Use type assertion to safely access memory property
+          const performanceAny = performance as any
+          if (performanceAny.memory) {
+            const memory = performanceAny.memory
             if (memory.usedJSHeapSize > memory.totalJSHeapSize * 0.8) {
               console.log('🧹 Memory optimization triggered')
               // Force garbage collection if possible
-              if ((window as any).gc) {
+              if ('gc' in window && typeof (window as any).gc === 'function') {
                 (window as any).gc()
               }
             }
