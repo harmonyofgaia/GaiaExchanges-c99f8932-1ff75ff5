@@ -4,8 +4,9 @@ import { AdminControlSystem } from '@/components/AdminControlSystem'
 import { EnhancedAdminControls } from '@/components/EnhancedAdminControls'
 import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
-const Admin = () => {
+const AdminContent = () => {
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
 
   // Check for existing admin session
@@ -81,6 +82,14 @@ const Admin = () => {
         </TabsContent>
       </Tabs>
     </div>
+  )
+}
+
+const Admin = () => {
+  return (
+    <ProtectedRoute isAdminRoute={true}>
+      <AdminContent />
+    </ProtectedRoute>
   )
 }
 

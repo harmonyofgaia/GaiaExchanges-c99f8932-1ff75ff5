@@ -1,66 +1,119 @@
 
-import { useState } from "react"
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { Toaster } from "@/components/ui/sonner"
-import { Toaster as ToastProvider } from "@/components/ui/toaster"
-import { AuthProvider } from "@/components/auth/AuthProvider"
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute"
-import { GlobalErrorBoundary } from "./GlobalErrorBoundary"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AuthProvider } from '@/components/auth/AuthProvider'
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
+import { Toaster } from '@/components/ui/toaster'
+import { SidebarProvider } from '@/components/ui/sidebar'
+import { AppSidebar } from '@/components/AppSidebar'
+import { GlobalErrorBoundary } from '@/components/GlobalErrorBoundary'
 
-// Import all pages
-import Index from "@/pages/Index"
-import About from "@/pages/About"
-import Admin from "@/pages/Admin"
-import ComprehensiveStatus from "@/pages/ComprehensiveStatus"
-import Downloads from "@/pages/Downloads"
-import Marketing from "@/pages/Marketing"
-import Markets from "@/pages/Markets"
-import NotFound from "@/pages/NotFound"
-import Reinvestments from "@/pages/Reinvestments"
-import SmartContracts from "@/pages/SmartContracts"
-import SystemStatus from "@/pages/SystemStatus"
-import Transparency from "@/pages/Transparency"
-import UltimateSecurity from "@/pages/UltimateSecurity"
-import Wallet from "@/pages/Wallet"
+// Import pages
+import Index from '@/pages/Index'
+import Admin from '@/pages/Admin'
+import About from '@/pages/About'
+import Wallet from '@/pages/Wallet'
+import Markets from '@/pages/Markets'
+import SmartContracts from '@/pages/SmartContracts'
+import UltimateSecurity from '@/pages/UltimateSecurity'
+import SystemStatus from '@/pages/SystemStatus'
+import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
+import Downloads from '@/pages/Downloads'
+import Marketing from '@/pages/Marketing'
+import Reinvestments from '@/pages/Reinvestments'
+import Transparency from '@/pages/Transparency'
+import NotFound from '@/pages/NotFound'
+
+const queryClient = new QueryClient()
 
 export function AppWithErrorBoundary() {
-  const [queryClient] = useState(() => new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000,
-        retry: 1,
-      },
-    },
-  }))
-
   return (
     <GlobalErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <Router>
-            <ProtectedRoute>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/status" element={<ComprehensiveStatus />} />
-                <Route path="/downloads" element={<Downloads />} />
-                <Route path="/marketing" element={<Marketing />} />
-                <Route path="/markets" element={<Markets />} />
-                <Route path="/reinvestments" element={<Reinvestments />} />
-                <Route path="/smart-contracts" element={<SmartContracts />} />
-                <Route path="/system-status" element={<SystemStatus />} />
-                <Route path="/transparency" element={<Transparency />} />
-                <Route path="/security" element={<UltimateSecurity />} />
-                <Route path="/wallet" element={<Wallet />} />
-                <Route path="/404" element={<NotFound />} />
-                <Route path="*" element={<Navigate to="/404" replace />} />
-              </Routes>
-            </ProtectedRoute>
+            <SidebarProvider>
+              <div className="flex min-h-screen">
+                <Routes>
+                  {/* Admin route - no sidebar, special handling */}
+                  <Route path="/admin" element={<Admin />} />
+                  
+                  {/* All other routes with sidebar */}
+                  <Route path="/*" element={
+                    <>
+                      <AppSidebar />
+                      <div className="flex-1 p-6">
+                        <Routes>
+                          <Route path="/" element={
+                            <ProtectedRoute>
+                              <Index />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="/about" element={
+                            <ProtectedRoute>
+                              <About />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="/wallet" element={
+                            <ProtectedRoute>
+                              <Wallet />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="/markets" element={
+                            <ProtectedRoute>
+                              <Markets />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="/smart-contracts" element={
+                            <ProtectedRoute>
+                              <SmartContracts />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="/ultimate-security" element={
+                            <ProtectedRoute>
+                              <UltimateSecurity />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="/system-status" element={
+                            <ProtectedRoute>
+                              <SystemStatus />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="/comprehensive-status" element={
+                            <ProtectedRoute>
+                              <ComprehensiveStatus />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="/downloads" element={
+                            <ProtectedRoute>
+                              <Downloads />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="/marketing" element={
+                            <ProtectedRoute>
+                              <Marketing />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="/reinvestments" element={
+                            <ProtectedRoute>
+                              <Reinvestments />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="/transparency" element={
+                            <ProtectedRoute>
+                              <Transparency />
+                            </ProtectedRoute>
+                          } />
+                          <Route path="*" element={<NotFound />} />
+                        </Routes>
+                      </div>
+                    </>
+                  } />
+                </Routes>
+              </div>
+            </SidebarProvider>
+            <Toaster />
           </Router>
-          <Toaster />
-          <ToastProvider />
         </AuthProvider>
       </QueryClientProvider>
     </GlobalErrorBoundary>
