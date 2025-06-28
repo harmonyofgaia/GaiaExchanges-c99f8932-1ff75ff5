@@ -39,6 +39,45 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_vault_access: {
+        Row: {
+          access_granted: boolean | null
+          admin_user_id: string
+          created_at: string
+          expires_at: string | null
+          id: string
+          session_token: string | null
+          step_1_verified: boolean | null
+          step_2_verified: boolean | null
+          step_3_verified: boolean | null
+          step_4_verified: boolean | null
+        }
+        Insert: {
+          access_granted?: boolean | null
+          admin_user_id: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          session_token?: string | null
+          step_1_verified?: boolean | null
+          step_2_verified?: boolean | null
+          step_3_verified?: boolean | null
+          step_4_verified?: boolean | null
+        }
+        Update: {
+          access_granted?: boolean | null
+          admin_user_id?: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          session_token?: string | null
+          step_1_verified?: boolean | null
+          step_2_verified?: boolean | null
+          step_3_verified?: boolean | null
+          step_4_verified?: boolean | null
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           contact_type: string
@@ -118,6 +157,114 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      fee_destinations: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          percentage_allocation: number | null
+          wallet_address: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          percentage_allocation?: number | null
+          wallet_address?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          percentage_allocation?: number | null
+          wallet_address?: string | null
+        }
+        Relationships: []
+      }
+      fee_transactions: {
+        Row: {
+          created_at: string
+          destination_id: string | null
+          destination_type: string
+          fee_amount: number
+          fee_currency: string
+          id: string
+          status: string
+          transaction_id: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          destination_id?: string | null
+          destination_type: string
+          fee_amount: number
+          fee_currency?: string
+          id?: string
+          status?: string
+          transaction_id?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          destination_id?: string | null
+          destination_type?: string
+          fee_amount?: number
+          fee_currency?: string
+          id?: string
+          status?: string
+          transaction_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fee_transactions_destination_id_fkey"
+            columns: ["destination_id"]
+            isOneToOne: false
+            referencedRelation: "fee_destinations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fee_transactions_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fee_vault: {
+        Row: {
+          created_at: string
+          currency: string
+          id: string
+          last_updated: string
+          total_balance: number
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          id?: string
+          last_updated?: string
+          total_balance?: number
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          id?: string
+          last_updated?: string
+          total_balance?: number
+        }
+        Relationships: []
       }
       notifications: {
         Row: {
@@ -316,6 +463,39 @@ export type Database = {
           min_stake_amount?: number | null
           reward_pool?: number | null
           total_staked?: number | null
+        }
+        Relationships: []
+      }
+      swap_configurations: {
+        Row: {
+          created_at: string
+          custom_fee_amount: number | null
+          default_fee_percentage: number | null
+          id: string
+          preferred_fee_destination: string | null
+          updated_at: string
+          user_id: string
+          zero_fee_enabled: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          custom_fee_amount?: number | null
+          default_fee_percentage?: number | null
+          id?: string
+          preferred_fee_destination?: string | null
+          updated_at?: string
+          user_id: string
+          zero_fee_enabled?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          custom_fee_amount?: number | null
+          default_fee_percentage?: number | null
+          id?: string
+          preferred_fee_destination?: string | null
+          updated_at?: string
+          user_id?: string
+          zero_fee_enabled?: boolean | null
         }
         Relationships: []
       }
