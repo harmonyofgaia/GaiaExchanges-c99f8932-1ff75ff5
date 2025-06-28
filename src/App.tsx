@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { QuantumAnimatedBackground } from "@/components/ui/quantum-animated-background";
+import { NeuralPathwaysBackground } from "@/components/ui/neural-pathways-background";
 import Index from "./pages/Index";
 import Reinvestments from "./pages/Reinvestments";
 import Downloads from "./pages/Downloads";
@@ -14,6 +14,7 @@ import Webshop from "./pages/Webshop";
 import AnimalNFTCommunity from "./pages/AnimalNFTCommunity";
 import Transparency from "./pages/Transparency";
 import ArtistStreaming from "./pages/ArtistStreaming";
+import GaiaCoinCrafterPage from "./pages/GaiaCoinCrafter";
 
 const queryClient = new QueryClient();
 
@@ -22,7 +23,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <QuantumAnimatedBackground />
+      <NeuralPathwaysBackground />
       <div className="relative z-10">
         <BrowserRouter>
           <Routes>
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/animal-nft-community" element={<AnimalNFTCommunity />} />
             <Route path="/transparency" element={<Transparency />} />
             <Route path="/artist-streaming" element={<ArtistStreaming />} />
+            <Route path="/gaia-coin-crafter" element={<GaiaCoinCrafterPage />} />
           </Routes>
         </BrowserRouter>
       </div>

@@ -25,6 +25,8 @@ import {
 } from 'lucide-react'
 import { AbstractArtOverlay } from '@/components/ui/abstract-art-overlay'
 import { PhantomWalletConnector } from '@/components/PhantomWalletConnector'
+import { FlexibleRevenueAgreements } from '@/components/FlexibleRevenueAgreements'
+import { ExclusiveNFTShowcase } from '@/components/ExclusiveNFTShowcase'
 
 interface StreamingSlot {
   id: string
@@ -216,77 +218,11 @@ export function ArtistStreamingPlatform() {
       {/* Phantom Wallet Integration */}
       <PhantomWalletConnector />
 
-      {/* Revenue Agreement System */}
-      <Card className="bg-gradient-to-br from-emerald-900/20 to-teal-900/20 border-emerald-500/20 relative">
-        <AbstractArtOverlay artType="fractals" intensity="medium" />
-        <CardHeader className="relative z-10">
-          <CardTitle className="text-emerald-400 flex items-center gap-2">
-            <DollarSign className="w-5 h-5" />
-            Foundation & Artist Revenue Agreement System
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="relative z-10 space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="bg-black/30 border-emerald-500/30 cursor-pointer hover:border-emerald-400 transition-colors"
-                  onClick={() => updateRevenueAgreement('foundation_artist_50_50')}>
-              <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-emerald-400 mb-2">50% / 50%</div>
-                <div className="text-sm text-muted-foreground mb-3">Equal Partnership</div>
-                <div className="flex justify-between text-xs">
-                  <span>Foundation: 50%</span>
-                  <span>Artist: 50%</span>
-                </div>
-              </CardContent>
-            </Card>
+      {/* Enhanced Flexible Revenue Agreement System */}
+      <FlexibleRevenueAgreements />
 
-            <Card className="bg-black/30 border-blue-500/30 cursor-pointer hover:border-blue-400 transition-colors"
-                  onClick={() => updateRevenueAgreement('foundation_60_artist_40')}>
-              <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-blue-400 mb-2">60% / 40%</div>
-                <div className="text-sm text-muted-foreground mb-3">Foundation Priority</div>
-                <div className="flex justify-between text-xs">
-                  <span>Foundation: 60%</span>
-                  <span>Artist: 40%</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-black/30 border-purple-500/30 cursor-pointer hover:border-purple-400 transition-colors"
-                  onClick={() => updateRevenueAgreement('foundation_40_artist_60')}>
-              <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-purple-400 mb-2">40% / 60%</div>
-                <div className="text-sm text-muted-foreground mb-3">Artist Priority</div>
-                <div className="flex justify-between text-xs">
-                  <span>Foundation: 40%</span>
-                  <span>Artist: 60%</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded-lg border border-green-500/20">
-            <h4 className="font-bold text-green-400 mb-3">Current Agreement Details</h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-              <div>
-                <div className="text-2xl font-bold text-green-400">{revenueAgreement.foundationPercentage}%</div>
-                <div className="text-sm text-muted-foreground">Foundation Share</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-blue-400">{revenueAgreement.artistPercentage}%</div>
-                <div className="text-sm text-muted-foreground">Artist Share</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-yellow-400">{revenueAgreement.gaiaTokensPerViewer}</div>
-                <div className="text-sm text-muted-foreground">GAiA per Viewer</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-purple-400">{revenueAgreement.investmentTargets.length}</div>
-                <div className="text-sm text-muted-foreground">Investment Areas</div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Exclusive NFT Showcase */}
+      <ExclusiveNFTShowcase />
 
       {/* Live Streams with Revenue Tracking */}
       <Card className="bg-gradient-to-br from-gray-900/40 to-black/40 border-green-500/20 relative">
