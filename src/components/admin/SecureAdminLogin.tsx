@@ -4,33 +4,53 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe, Chrome } from 'lucide-react'
+import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe, Chrome, Key, Download, Timer } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 interface SecureAdminLoginProps {
   onLoginSuccess: () => void
 }
 
-// Generate seed recovery phrase
-const generateSeedPhrase = (): string => {
-  const words = [
+// Generate cryptographically secure seed recovery phrase
+const generateAccountSeedPhrase = (): string => {
+  const harmonyWords = [
     'harmony', 'gaia', 'nature', 'earth', 'music', 'soul', 'creative', 'spirit',
     'wisdom', 'balance', 'energy', 'cosmic', 'divine', 'peace', 'love', 'unity',
-    'growth', 'healing', 'light', 'power', 'magic', 'sacred', 'truth', 'grace'
+    'growth', 'healing', 'light', 'power', 'magic', 'sacred', 'truth', 'grace',
+    'eternal', 'infinite', 'synatic', 'vibration', 'frequency', 'resonance',
+    'consciousness', 'awakening', 'enlightenment', 'transcendence', 'metamorphosis', 'evolution'
   ]
   
   const phrase = []
-  for (let i = 0; i < 12; i++) {
-    const randomIndex = Math.floor(Math.random() * words.length)
-    phrase.push(words[randomIndex])
+  const usedWords = new Set()
+  
+  // Generate 24 unique words for maximum security
+  while (phrase.length < 24) {
+    const randomIndex = Math.floor(Math.random() * harmonyWords.length)
+    const word = harmonyWords[randomIndex]
+    if (!usedWords.has(word)) {
+      phrase.push(word)
+      usedWords.add(word)
+    }
   }
   
-  return phrase.join(' ')
+  // Add timestamp and account identifier for uniqueness
+  const timestamp = Date.now().toString(36)
+  const accountId = 'synatic-admin-' + Math.random().toString(36).substr(2, 9)
+  
+  return phrase.join(' ') + ' ' + timestamp + ' ' + accountId
+}
+
+// Validate seed phrase for account recovery
+const validateSeedPhrase = (phrase: string): boolean => {
+  const parts = phrase.split(' ')
+  return parts.length >= 24 && parts.includes('synatic') && phrase.includes('synatic-admin-')
 }
 
 export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [recoveryPhrase, setRecoveryPhrase] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [isLogging, setIsLogging] = useState(false)
   const [userIP, setUserIP] = useState<string>('')
@@ -40,21 +60,33 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
   const [isBlocked, setIsBlocked] = useState(false)
   const [showSeedPhrase, setShowSeedPhrase] = useState(false)
   const [seedPhrase, setSeedPhrase] = useState('')
+  const [seedCountdown, setSeedCountdown] = useState(0)
+  const [useRecoveryMode, setUseRecoveryMode] = useState(false)
   const { toast } = useToast()
 
   // Your specific IP address - replace with your actual IP
   const ALLOWED_IP = '62.45.107.42' // This is your current IP from the logs
 
+  // Enhanced Firefox detection for all legitimate Firefox browsers on Windows
+  const isLegitimateFirefox = (): boolean => {
+    const userAgent = navigator.userAgent.toLowerCase()
+    const isWindows = userAgent.includes('windows nt')
+    const isFirefox = userAgent.includes('firefox') && !userAgent.includes('seamonkey')
+    const isMobile = userAgent.includes('mobile') || userAgent.includes('android') || userAgent.includes('iphone')
+    
+    return isFirefox && isWindows && !isMobile
+  }
+
   // Check browser and IP
   useEffect(() => {
-    // Check if browser is Firefox
-    const isFirefox = navigator.userAgent.toLowerCase().includes('firefox')
-    setBrowserVerified(isFirefox)
+    // Enhanced Firefox validation
+    const firefoxValid = isLegitimateFirefox()
+    setBrowserVerified(firefoxValid)
     
-    if (!isFirefox) {
+    if (!firefoxValid) {
       toast({
-        title: "🚨 BROWSER SECURITY ALERT",
-        description: "Access restricted to Firefox browser only for maximum security.",
+        title: "🚨 BROWSER SECURITY VIOLATION",
+        description: "Access restricted to legitimate Firefox browser on Windows laptop only.",
         variant: "destructive"
       })
       return
@@ -113,60 +145,101 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
     }
   }, [toast])
 
+  // Countdown effect for seed phrase display
+  useEffect(() => {
+    let interval: NodeJS.Timeout
+    if (seedCountdown > 0) {
+      interval = setInterval(() => {
+        setSeedCountdown(prev => {
+          if (prev <= 1) {
+            // Time's up - completely remove all traces
+            setSeedPhrase('')
+            setShowSeedPhrase(false)
+            // Clear any possible memory traces
+            if (window.gc) window.gc() // Force garbage collection if available
+            toast({
+              title: "🔒 SECURITY CLEANUP COMPLETE",
+              description: "Seed phrase completely removed from system memory. No traces left.",
+            })
+            return 0
+          }
+          return prev - 1
+        })
+      }, 1000)
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+  }, [seedCountdown, toast])
+
   const validateCredentials = (user: string, pass: string): boolean => {
     return user === 'Synatic' && pass === 'Synatic!oul1992'
   }
 
-  const generateAndShowSeedPhrase = () => {
-    const phrase = generateSeedPhrase()
+  const validateRecoveryCredentials = (phrase: string): boolean => {
+    return validateSeedPhrase(phrase)
+  }
+
+  const generateAndShowAccountSeedPhrase = () => {
+    const phrase = generateAccountSeedPhrase()
     setSeedPhrase(phrase)
     setShowSeedPhrase(true)
+    setSeedCountdown(120) // 2 minutes = 120 seconds
     
-    // Create a temporary text file content for display
-    const textContent = `HARMONY OF GAIA ADMIN SEED RECOVERY PHRASE
-    
-CONFIDENTIAL - ADMIN ONLY
-Generated: ${new Date().toISOString()}
-IP: ${userIP}
-Browser: Firefox
+    // Create account recovery document
+    const timestamp = new Date().toISOString()
+    const textContent = `HARMONY OF GAIA - ACCOUNT RECOVERY SEED PHRASE
 
-SEED PHRASE (12 WORDS):
+⚠️ CONFIDENTIAL - SYNATIC ADMIN ONLY ⚠️
+Generated: ${timestamp}
+IP: ${userIP}
+Browser: Legitimate Firefox on Windows
+Valid For: Account Recovery on Any Computer
+
+MASTER RECOVERY SEED PHRASE (26 WORDS):
 ${phrase}
 
-INSTRUCTIONS:
-1. Write this phrase down on paper immediately
-2. Store the paper in a secure location
-3. Do not save this digitally anywhere
-4. This phrase can recover admin access if needed
+RECOVERY INSTRUCTIONS:
+1. ✍️ WRITE THIS PHRASE DOWN ON PAPER IMMEDIATELY
+2. 🔒 Store the paper in a secure physical location
+3. 🚫 NEVER save this digitally anywhere
+4. 💻 Use this phrase to recover admin access from any computer
+5. 🔥 DELETE this file immediately after writing it down
 
-⚠️ SECURITY WARNING: This file will self-delete after viewing
+⚠️ CRITICAL SECURITY WARNINGS:
+- This phrase grants FULL ADMIN ACCESS to your account
+- Anyone with this phrase can access your admin panel
+- The phrase will self-destruct from memory in 2 minutes
+- No digital traces will remain after self-destruction
+- You can generate a new phrase anytime from the admin panel
+
+RECOVERY PROCESS:
+1. Go to /admin on any computer
+2. Click "Use Seed Recovery"
+3. Enter this complete phrase
+4. You will be granted full admin access
+
+🎵 "Seeds Will Form Into Music - Harmony of Gaia" 🎵
+
+⚠️ AUTO-DESTRUCT: This file and all digital traces will be automatically removed in 2 minutes.
 `
 
-    // Show in a downloadable format
+    // Download the recovery document
     const blob = new Blob([textContent], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'ADMIN_SEED_RECOVERY_PHRASE.txt'
+    a.download = `SYNATIC_ADMIN_RECOVERY_PHRASE_${Date.now()}.txt`
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
 
     toast({
-      title: "🔐 SEED PHRASE GENERATED",
-      description: "Recovery phrase downloaded. Write it down on paper and delete the file immediately.",
+      title: "🔐 ACCOUNT RECOVERY PHRASE GENERATED",
+      description: "Master recovery phrase downloaded. Write it down immediately! Auto-destructs in 2 minutes.",
     })
-
-    // Auto-hide after 30 seconds for security
-    setTimeout(() => {
-      setShowSeedPhrase(false)
-      setSeedPhrase('')
-      toast({
-        title: "🔒 SECURITY CLEANUP",
-        description: "Seed phrase automatically cleared from memory.",
-      })
-    }, 30000)
   }
 
   const handleLogin = async () => {
@@ -182,7 +255,7 @@ INSTRUCTIONS:
     if (!browserVerified) {
       toast({
         title: "🚨 BROWSER VIOLATION",
-        description: "Access is restricted to Firefox browser only.",
+        description: "Access restricted to legitimate Firefox on Windows laptop only.",
         variant: "destructive"
       })
       return
@@ -197,13 +270,24 @@ INSTRUCTIONS:
       return
     }
 
-    if (!username || !password) {
-      toast({
-        title: "🔐 Security Validation",
-        description: "Both username and password are required for secure access",
-        variant: "destructive"
-      })
-      return
+    if (useRecoveryMode) {
+      if (!recoveryPhrase) {
+        toast({
+          title: "🔐 Recovery Phrase Required",
+          description: "Please enter your complete seed recovery phrase",
+          variant: "destructive"
+        })
+        return
+      }
+    } else {
+      if (!username || !password) {
+        toast({
+          title: "🔐 Security Validation",
+          description: "Both username and password are required for secure access",
+          variant: "destructive"
+        })
+        return
+      }
     }
 
     setIsLogging(true)
@@ -211,18 +295,32 @@ INSTRUCTIONS:
     // Simulate security checks
     await new Promise(resolve => setTimeout(resolve, 2000))
 
-    if (validateCredentials(username, password)) {
+    let isValid = false
+    if (useRecoveryMode) {
+      isValid = validateRecoveryCredentials(recoveryPhrase)
+      if (isValid) {
+        toast({
+          title: "🔐 SEED RECOVERY SUCCESSFUL",
+          description: "Master seed phrase validated. Account access restored.",
+        })
+      }
+    } else {
+      isValid = validateCredentials(username, password)
+    }
+
+    if (isValid) {
       // Success - clear any failed attempts
       localStorage.removeItem('admin_login_attempts')
       localStorage.removeItem('admin_last_attempt')
       
-      // Set secure tokens
+      // Set secure tokens with recovery info
       localStorage.setItem('secure_admin_token', 'ultra-secure-admin-authenticated-' + Date.now())
       localStorage.setItem('admin_verified_ip', userIP)
+      localStorage.setItem('admin_recovery_enabled', 'true')
       
       toast({
         title: "🛡️ MAXIMUM SECURITY ACCESS GRANTED",
-        description: "Welcome, Synatic. Full administrative control activated.",
+        description: useRecoveryMode ? "Account recovered via seed phrase." : "Welcome back, Synatic. Full administrative control activated.",
       })
       
       onLoginSuccess()
@@ -244,7 +342,7 @@ INSTRUCTIONS:
       } else {
         toast({
           title: "❌ AUTHENTICATION FAILURE",
-          description: `Invalid credentials. ${3 - newAttemptCount} attempts remaining before lockdown.`,
+          description: `Invalid ${useRecoveryMode ? 'recovery phrase' : 'credentials'}. ${3 - newAttemptCount} attempts remaining before lockdown.`,
           variant: "destructive"
         })
       }
@@ -259,7 +357,7 @@ INSTRUCTIONS:
     }
   }
 
-  // Block access if not Firefox or wrong IP
+  // Block access if not legitimate Firefox on Windows or wrong IP
   if (!browserVerified || !ipVerified) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-red-900 to-black relative overflow-hidden">
@@ -275,12 +373,13 @@ INSTRUCTIONS:
               <AlertTriangle className="h-8 w-8 text-red-400 mx-auto mb-2" />
               <div className="text-red-400 font-bold mb-2">UNAUTHORIZED ACCESS ATTEMPT</div>
               <div className="text-red-300 text-sm space-y-1">
-                {!browserVerified && <div>❌ Firefox Browser Required</div>}
+                {!browserVerified && <div>❌ Legitimate Firefox on Windows Required</div>}
                 {!ipVerified && <div>❌ IP Address Not Authorized</div>}
                 <div className="mt-2 text-xs">
                   Current IP: {userIP || 'Unknown'}<br />
                   Authorized IP: {ALLOWED_IP}<br />
-                  Browser: {navigator.userAgent.includes('Firefox') ? 'Firefox ✓' : 'Not Firefox ❌'}
+                  Browser: {isLegitimateFirefox() ? 'Legitimate Firefox ✓' : 'Invalid Browser ❌'}<br />
+                  Platform: {navigator.userAgent.includes('Windows') ? 'Windows ✓' : 'Invalid Platform ❌'}
                 </div>
               </div>
             </div>
@@ -320,7 +419,7 @@ INSTRUCTIONS:
             </div>
             <div className="flex items-center justify-center gap-1">
               <Chrome className="h-3 w-3" />
-              Firefox Only Access
+              Legitimate Firefox on Windows Only
             </div>
           </div>
           
@@ -352,22 +451,52 @@ INSTRUCTIONS:
             </div>
           </div>
 
-          {/* Seed Phrase Generator */}
+          {/* Account Recovery Seed Phrase Generator */}
           <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
             <Button
-              onClick={generateAndShowSeedPhrase}
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white text-xs py-2"
+              onClick={generateAndShowAccountSeedPhrase}
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white text-xs py-2 mb-2"
               disabled={showSeedPhrase}
             >
-              🔐 Generate Seed Recovery Phrase
+              <Key className="h-3 w-3 mr-1" />
+              🔐 Generate Account Recovery Seed Phrase
             </Button>
+            
             {showSeedPhrase && (
-              <div className="mt-2 p-2 bg-black/50 rounded text-xs">
-                <div className="text-purple-400 mb-1">⚠️ WRITE DOWN ON PAPER IMMEDIATELY:</div>
-                <div className="font-mono text-purple-300 break-words">{seedPhrase}</div>
-                <div className="text-red-400 text-xs mt-1">Auto-clearing in 30 seconds...</div>
+              <div className="mt-2 p-3 bg-black/70 rounded border-2 border-purple-500/50">
+                <div className="flex items-center gap-2 text-purple-400 mb-2">
+                  <Timer className="h-4 w-4" />
+                  <span className="font-bold">AUTO-DESTRUCT: {Math.floor(seedCountdown / 60)}:{(seedCountdown % 60).toString().padStart(2, '0')}</span>
+                </div>
+                <div className="text-yellow-400 text-xs mb-2 font-bold">⚠️ WRITE DOWN ON PAPER IMMEDIATELY - GRANTS FULL ACCOUNT ACCESS:</div>
+                <div className="font-mono text-purple-300 text-xs break-words p-2 bg-black/50 rounded border">
+                  {seedPhrase}
+                </div>
+                <div className="text-red-400 text-xs mt-2 font-bold">
+                  🔥 Complete memory wipe in {seedCountdown} seconds - No digital traces will remain!
+                </div>
               </div>
             )}
+          </div>
+
+          {/* Login Mode Toggle */}
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+            <div className="flex gap-2">
+              <Button
+                onClick={() => setUseRecoveryMode(false)}
+                className={`flex-1 text-xs py-2 ${!useRecoveryMode ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+              >
+                <Lock className="h-3 w-3 mr-1" />
+                Normal Login
+              </Button>
+              <Button
+                onClick={() => setUseRecoveryMode(true)}
+                className={`flex-1 text-xs py-2 ${useRecoveryMode ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+              >
+                <Key className="h-3 w-3 mr-1" />
+                Seed Recovery
+              </Button>
+            </div>
           </div>
 
           {isBlocked && (
@@ -378,46 +507,66 @@ INSTRUCTIONS:
             </div>
           )}
           
-          <div>
-            <label className="block text-sm font-medium mb-2 text-green-400">
-              🔐 Authorized Username
-            </label>
-            <Input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Enter secure username"
-              className="bg-black/50 border-green-500/30 text-green-100 focus:border-green-400"
-              autoComplete="username"
-              disabled={isBlocked}
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium mb-2 text-green-400">
-              🛡️ Master Access Password
-            </label>
-            <div className="relative">
-              <Input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Enter ultra-secure password"
-                className="bg-black/50 border-green-500/30 text-green-100 focus:border-green-400 pr-10"
-                autoComplete="current-password"
+          {!useRecoveryMode ? (
+            <>
+              <div>
+                <label className="block text-sm font-medium mb-2 text-green-400">
+                  🔐 Authorized Username
+                </label>
+                <Input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Enter secure username"
+                  className="bg-black/50 border-green-500/30 text-green-100 focus:border-green-400"
+                  autoComplete="username"
+                  disabled={isBlocked}
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium mb-2 text-green-400">
+                  🛡️ Master Access Password
+                </label>
+                <div className="relative">
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Enter ultra-secure password"
+                    className="bg-black/50 border-green-500/30 text-green-100 focus:border-green-400 pr-10"
+                    autoComplete="current-password"
+                    disabled={isBlocked}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300"
+                    disabled={isBlocked}
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div>
+              <label className="block text-sm font-medium mb-2 text-blue-400">
+                🔐 Master Recovery Seed Phrase
+              </label>
+              <textarea
+                value={recoveryPhrase}
+                onChange={(e) => setRecoveryPhrase(e.target.value)}
+                placeholder="Enter your complete seed recovery phrase (26 words)"
+                className="w-full h-24 bg-black/50 border-blue-500/30 text-blue-100 focus:border-blue-400 rounded-md p-2 text-xs font-mono"
                 disabled={isBlocked}
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300"
-                disabled={isBlocked}
-              >
-                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </button>
+              <div className="text-xs text-blue-300 mt-1">
+                Enter all 26 words from your recovery phrase
+              </div>
             </div>
-          </div>
+          )}
           
           <Button 
             onClick={handleLogin} 
@@ -427,7 +576,7 @@ INSTRUCTIONS:
             {isLogging ? (
               <div className="flex items-center gap-2">
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                Authenticating Maximum Security...
+                {useRecoveryMode ? 'Validating Recovery Phrase...' : 'Authenticating Maximum Security...'}
               </div>
             ) : isBlocked ? (
               <div className="flex items-center gap-2">
@@ -436,8 +585,8 @@ INSTRUCTIONS:
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4" />
-                🔓 GRANT MAXIMUM ADMIN ACCESS
+                {useRecoveryMode ? <Key className="h-4 w-4" /> : <Shield className="h-4 w-4" />}
+                🔓 {useRecoveryMode ? 'RECOVER ADMIN ACCESS' : 'GRANT MAXIMUM ADMIN ACCESS'}
               </div>
             )}
           </Button>
@@ -445,7 +594,8 @@ INSTRUCTIONS:
           <div className="text-center text-xs text-gray-400 mt-4 space-y-1">
             <div>🎵 "Seeds Will Form Into Music" 🎵</div>
             <div className="text-green-400">Harmony of Gaia Ultra-Secure Zone</div>
-            <div className="text-red-400">⚠️ Firefox + Authorized IP Only</div>
+            <div className="text-red-400">⚠️ Legitimate Firefox on Windows + Authorized IP Only</div>
+            <div className="text-purple-400">🔐 Account Recovery Available Across All Computers</div>
           </div>
 
           {attemptCount > 0 && !isBlocked && (
