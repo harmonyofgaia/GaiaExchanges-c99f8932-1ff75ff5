@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { QuantumAnimatedBackground } from "@/components/ui/quantum-animated-background";
 import Index from "./pages/Index";
 import Reinvestments from "./pages/Reinvestments";
 import Downloads from "./pages/Downloads";
@@ -20,18 +21,21 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/reinvestments" element={<Reinvestments />} />
-          <Route path="/downloads" element={<Downloads />} />
-          <Route path="/platform-compatibility" element={<PlatformCompatibility />} />
-          <Route path="/gaming" element={<Gaming />} />
-          <Route path="/webshop" element={<Webshop />} />
-          <Route path="/animal-nft-community" element={<AnimalNFTCommunity />} />
-          <Route path="/transparency" element={<Transparency />} />
-        </Routes>
-      </BrowserRouter>
+      <QuantumAnimatedBackground />
+      <div className="relative z-10">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/reinvestments" element={<Reinvestments />} />
+            <Route path="/downloads" element={<Downloads />} />
+            <Route path="/platform-compatibility" element={<PlatformCompatibility />} />
+            <Route path="/gaming" element={<Gaming />} />
+            <Route path="/webshop" element={<Webshop />} />
+            <Route path="/animal-nft-community" element={<AnimalNFTCommunity />} />
+            <Route path="/transparency" element={<Transparency />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </TooltipProvider>
   </QueryClientProvider>
 );
