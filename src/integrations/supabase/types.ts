@@ -363,6 +363,30 @@ export type Database = {
           },
         ]
       }
+      user_roles: {
+        Row: {
+          granted_at: string | null
+          granted_by: string | null
+          id: string
+          role: Database["public"]["Enums"]["user_role"]
+          user_id: string
+        }
+        Insert: {
+          granted_at?: string | null
+          granted_by?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          user_id: string
+        }
+        Update: {
+          granted_at?: string | null
+          granted_by?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_stakes: {
         Row: {
           amount: number
@@ -445,7 +469,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _user_id: string
+          _role: Database["public"]["Enums"]["user_role"]
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       order_status: "pending" | "completed" | "cancelled" | "partial"
@@ -459,6 +489,7 @@ export type Database = {
         | "unstake"
         | "reward"
         | "burn"
+      user_role: "user" | "trader" | "admin" | "moderator"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -586,6 +617,7 @@ export const Constants = {
         "reward",
         "burn",
       ],
+      user_role: ["user", "trader", "admin", "moderator"],
     },
   },
 } as const

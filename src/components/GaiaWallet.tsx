@@ -1,22 +1,21 @@
+
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
-import { Wallet, Send, QrCode, History, Shield, Leaf, Eye, ExternalLink, Globe, LogOut, Crown } from 'lucide-react'
+import { Wallet, Send, QrCode, History, Shield, Leaf, Eye, ExternalLink, Globe, LogOut } from 'lucide-react'
 import { useAuth } from '@/components/auth/AuthProvider'
 import { useWallets } from '@/hooks/useWallets'
 import { useTransactions } from '@/hooks/useTransactions'
 import { useUserProfile } from '@/hooks/useUserProfile'
-import { useUserRole } from '@/hooks/useUserRole'
 
 export function GaiaWallet() {
   const { user, signOut } = useAuth()
   const { wallets, loading: walletsLoading } = useWallets()
   const { transactions, loading: transactionsLoading } = useTransactions()
   const { profile } = useUserProfile()
-  const { isAdmin, loading: rolesLoading } = useUserRole()
   const [sendAmount, setSendAmount] = useState('')
   const [recipientAddress, setRecipientAddress] = useState('')
 
@@ -63,7 +62,7 @@ export function GaiaWallet() {
     }
   }
 
-  if (walletsLoading || rolesLoading) {
+  if (walletsLoading) {
     return (
       <div className="space-y-6">
         <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-500/20">
@@ -81,13 +80,13 @@ export function GaiaWallet() {
 
   return (
     <div className="space-y-6">
-      {/* Wallet Header with User Info and Admin Badge */}
-      <Card className={`bg-gradient-to-r ${isAdmin() ? 'from-purple-900/20 to-emerald-900/20 border-purple-500/20' : 'from-green-900/20 to-emerald-900/20 border-green-500/20'}`}>
+      {/* Wallet Header with User Info */}
+      <Card className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-green-500/20">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle className={`flex items-center gap-2 ${isAdmin() ? 'text-purple-400' : 'text-green-400'}`}>
-              {isAdmin() ? <Crown className="h-5 w-5" /> : <Leaf className="h-5 w-5" />}
-              Harmony of Gaia Wallet - {isAdmin() ? 'Admin Access' : 'Connected'}
+            <CardTitle className="flex items-center gap-2 text-green-400">
+              <Leaf className="h-5 w-5" />
+              Harmony of Gaia Wallet - Connected
             </CardTitle>
             <Button variant="outline" size="sm" onClick={handleSignOut}>
               <LogOut className="h-4 w-4 mr-2" />
@@ -96,34 +95,13 @@ export function GaiaWallet() {
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* Admin Alert */}
-          {isAdmin() && (
-            <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <Crown className="h-4 w-4 text-purple-400" />
-                <span className="font-medium text-purple-400">Administrator Privileges Active</span>
-              </div>
-              <p className="text-sm text-purple-300">
-                You have full system access including transaction reversal, user management, and security controls.
-              </p>
-            </div>
-          )}
-
           {/* User Info */}
           <div className="bg-muted/30 rounded-lg p-4 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">Welcome:</span>
-              <div className="flex items-center gap-2">
-                <Badge variant="outline" className="border-green-500/20 text-green-400">
-                  {profile?.full_name || user?.email}
-                </Badge>
-                {isAdmin() && (
-                  <Badge variant="outline" className="border-purple-500/20 text-purple-400">
-                    <Crown className="h-3 w-3 mr-1" />
-                    Admin
-                  </Badge>
-                )}
-              </div>
+              <Badge variant="outline" className="border-green-500/20 text-green-400">
+                {profile?.full_name || user?.email}
+              </Badge>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">Username:</span>
@@ -189,12 +167,6 @@ export function GaiaWallet() {
               <Globe className="h-3 w-3 mr-1" />
               Supabase Powered
             </Badge>
-            {isAdmin() && (
-              <Badge variant="outline" className="border-purple-500/20 text-purple-400">
-                <Crown className="h-3 w-3 mr-1" />
-                Admin Access
-              </Badge>
-            )}
           </div>
 
           <div className="flex items-center justify-center gap-4">

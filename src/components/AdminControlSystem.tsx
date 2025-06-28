@@ -5,18 +5,31 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Settings, Shield, DollarSign, Eye } from 'lucide-react'
 import { AdminLogin } from './admin/AdminLogin'
+import { AdminMFA } from './admin/AdminMFA'
 import { TokenManagement } from './admin/TokenManagement'
 import { DailyAdvertising } from './admin/DailyAdvertising'
 
 export function AdminControlSystem() {
-  const [authStep, setAuthStep] = useState<'login' | 'authenticated'>('login')
+  const [authStep, setAuthStep] = useState<'login' | 'mfa' | 'authenticated'>('login')
 
   const handleLoginSuccess = () => {
     setAuthStep('authenticated')
   }
 
+  const handleMFARequired = () => {
+    setAuthStep('mfa')
+  }
+
+  const handleMFASuccess = () => {
+    setAuthStep('authenticated')
+  }
+
   if (authStep === 'login') {
-    return <AdminLogin onLoginSuccess={handleLoginSuccess} onMFARequired={handleLoginSuccess} />
+    return <AdminLogin onLoginSuccess={handleLoginSuccess} onMFARequired={handleMFARequired} />
+  }
+
+  if (authStep === 'mfa') {
+    return <AdminMFA onMFASuccess={handleMFASuccess} />
   }
 
   return (
