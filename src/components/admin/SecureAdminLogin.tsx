@@ -4,14 +4,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe, Chrome, Key, Download, Timer } from 'lucide-react'
+import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe, Chrome, Key, Timer } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 interface SecureAdminLoginProps {
   onLoginSuccess: () => void
 }
 
-// Generate cryptographically secure seed recovery phrase
+// Generate cryptographically secure seed recovery phrase (12 words)
 const generateAccountSeedPhrase = (): string => {
   const harmonyWords = [
     'harmony', 'gaia', 'nature', 'earth', 'music', 'soul', 'creative', 'spirit',
@@ -24,8 +24,8 @@ const generateAccountSeedPhrase = (): string => {
   const phrase = []
   const usedWords = new Set()
   
-  // Generate 24 unique words for maximum security
-  while (phrase.length < 24) {
+  // Generate 12 unique words for recovery phrase
+  while (phrase.length < 12) {
     const randomIndex = Math.floor(Math.random() * harmonyWords.length)
     const word = harmonyWords[randomIndex]
     if (!usedWords.has(word)) {
@@ -34,17 +34,13 @@ const generateAccountSeedPhrase = (): string => {
     }
   }
   
-  // Add timestamp and account identifier for uniqueness
-  const timestamp = Date.now().toString(36)
-  const accountId = 'synatic-admin-' + Math.random().toString(36).substr(2, 9)
-  
-  return phrase.join(' ') + ' ' + timestamp + ' ' + accountId
+  return phrase.join(' ')
 }
 
 // Validate seed phrase for account recovery
 const validateSeedPhrase = (phrase: string): boolean => {
   const parts = phrase.split(' ')
-  return parts.length >= 24 && parts.includes('synatic') && phrase.includes('synatic-admin-')
+  return parts.length >= 12 && parts.includes('synatic')
 }
 
 export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
@@ -187,58 +183,9 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
     setShowSeedPhrase(true)
     setSeedCountdown(120) // 2 minutes = 120 seconds
     
-    // Create account recovery document
-    const timestamp = new Date().toISOString()
-    const textContent = `HARMONY OF GAIA - ACCOUNT RECOVERY SEED PHRASE
-
-⚠️ CONFIDENTIAL - SYNATIC ADMIN ONLY ⚠️
-Generated: ${timestamp}
-IP: ${userIP}
-Browser: Legitimate Firefox on Windows
-Valid For: Account Recovery on Any Computer
-
-MASTER RECOVERY SEED PHRASE (26 WORDS):
-${phrase}
-
-RECOVERY INSTRUCTIONS:
-1. ✍️ WRITE THIS PHRASE DOWN ON PAPER IMMEDIATELY
-2. 🔒 Store the paper in a secure physical location
-3. 🚫 NEVER save this digitally anywhere
-4. 💻 Use this phrase to recover admin access from any computer
-5. 🔥 DELETE this file immediately after writing it down
-
-⚠️ CRITICAL SECURITY WARNINGS:
-- This phrase grants FULL ADMIN ACCESS to your account
-- Anyone with this phrase can access your admin panel
-- The phrase will self-destruct from memory in 2 minutes
-- No digital traces will remain after self-destruction
-- You can generate a new phrase anytime from the admin panel
-
-RECOVERY PROCESS:
-1. Go to /admin on any computer
-2. Click "Use Seed Recovery"
-3. Enter this complete phrase
-4. You will be granted full admin access
-
-🎵 "Seeds Will Form Into Music - Harmony of Gaia" 🎵
-
-⚠️ AUTO-DESTRUCT: This file and all digital traces will be automatically removed in 2 minutes.
-`
-
-    // Download the recovery document
-    const blob = new Blob([textContent], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `SYNATIC_ADMIN_RECOVERY_PHRASE_${Date.now()}.txt`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-
     toast({
       title: "🔐 ACCOUNT RECOVERY PHRASE GENERATED",
-      description: "Master recovery phrase downloaded. Write it down immediately! Auto-destructs in 2 minutes.",
+      description: "12-word recovery phrase generated. Write it down immediately! Auto-destructs in 2 minutes.",
     })
   }
 
@@ -459,7 +406,7 @@ RECOVERY PROCESS:
               disabled={showSeedPhrase}
             >
               <Key className="h-3 w-3 mr-1" />
-              🔐 Generate Account Recovery Seed Phrase
+              🔐 Generate 12-Word Recovery Phrase
             </Button>
             
             {showSeedPhrase && (
@@ -474,6 +421,9 @@ RECOVERY PROCESS:
                 </div>
                 <div className="text-red-400 text-xs mt-2 font-bold">
                   🔥 Complete memory wipe in {seedCountdown} seconds - No digital traces will remain!
+                </div>
+                <div className="text-blue-400 text-xs mt-2">
+                  💡 Use this 12-word phrase to recover admin access from any legitimate Firefox browser
                 </div>
               </div>
             )}
@@ -553,17 +503,17 @@ RECOVERY PROCESS:
           ) : (
             <div>
               <label className="block text-sm font-medium mb-2 text-blue-400">
-                🔐 Master Recovery Seed Phrase
+                🔐 12-Word Recovery Phrase
               </label>
               <textarea
                 value={recoveryPhrase}
                 onChange={(e) => setRecoveryPhrase(e.target.value)}
-                placeholder="Enter your complete seed recovery phrase (26 words)"
+                placeholder="Enter your complete 12-word seed recovery phrase"
                 className="w-full h-24 bg-black/50 border-blue-500/30 text-blue-100 focus:border-blue-400 rounded-md p-2 text-xs font-mono"
                 disabled={isBlocked}
               />
               <div className="text-xs text-blue-300 mt-1">
-                Enter all 26 words from your recovery phrase
+                Enter all 12 words from your recovery phrase
               </div>
             </div>
           )}
@@ -595,7 +545,7 @@ RECOVERY PROCESS:
             <div>🎵 "Seeds Will Form Into Music" 🎵</div>
             <div className="text-green-400">Harmony of Gaia Ultra-Secure Zone</div>
             <div className="text-red-400">⚠️ Legitimate Firefox on Windows + Authorized IP Only</div>
-            <div className="text-purple-400">🔐 Account Recovery Available Across All Computers</div>
+            <div className="text-purple-400">🔐 12-Word Recovery Available Across All Computers</div>
           </div>
 
           {attemptCount > 0 && !isBlocked && (
