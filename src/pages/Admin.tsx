@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -15,6 +14,7 @@ import { AuthTest } from '@/components/auth/AuthTest'
 import { GreenProjectManager } from '@/components/admin/GreenProjectManager'
 import { BackgroundManager } from '@/components/admin/BackgroundManager'
 import { toast } from 'sonner'
+import { EncryptedSecurityReports } from '@/components/admin/EncryptedSecurityReports'
 
 const Admin = () => {
   const navigate = useNavigate()
@@ -115,7 +115,7 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="system-check" className="w-full">
-          <TabsList className="grid w-full grid-cols-6 bg-black/50 backdrop-blur-md border border-green-500/20">
+          <TabsList className="grid w-full grid-cols-7 bg-black/50 backdrop-blur-md border border-green-500/20">
             <TabsTrigger value="system-check" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
               <Activity className="h-4 w-4 mr-2" />
               System Check
@@ -139,6 +139,10 @@ const Admin = () => {
             <TabsTrigger value="backgrounds" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
               <FileText className="h-4 w-4 mr-2" />
               Backgrounds
+            </TabsTrigger>
+            <TabsTrigger value="security-reports" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              <FileText className="h-4 w-4 mr-2" />
+              Security Reports
             </TabsTrigger>
           </TabsList>
           
@@ -164,6 +168,10 @@ const Admin = () => {
           
           <TabsContent value="backgrounds" className="space-y-6 mt-6">
             <BackgroundManager />
+          </TabsContent>
+          
+          <TabsContent value="security-reports" className="space-y-6 mt-6">
+            <EncryptedSecurityReports />
           </TabsContent>
         </Tabs>
       </div>
