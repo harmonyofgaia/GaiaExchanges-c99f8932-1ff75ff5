@@ -50,11 +50,11 @@ export function FutureProofSecurityEngine() {
   const securityInterval = useRef<NodeJS.Timeout>()
   const threatHistory = useRef<Set<string>>(new Set())
 
-  // Advanced future-proof security monitoring
+  // Advanced security monitoring - ONLY for wallet breach detection
   useEffect(() => {
-    const performAdvancedSecurityScan = async () => {
+    const performWalletSecurityScan = async () => {
       try {
-        console.log('🛡️ FUTURE-PROOF SECURITY ENGINE - Daily Update & Scan Active')
+        console.log('🛡️ WALLET SECURITY SCAN - Monitoring for breach attempts only')
         
         // Get user's IP for threat tracking
         const userIP = await fetch('https://api.ipify.org?format=json')
@@ -68,34 +68,35 @@ export function FutureProofSecurityEngine() {
           `${connection.effectiveType || 'unknown'}-${navigator.onLine}` : 
           `unknown-${navigator.onLine}`
 
-        // Advanced threat detection algorithms
+        // ONLY detect WALLET BREACH attempts (not normal login)
         const newThreats: ThreatIntelligence[] = []
 
-        // 1. Wallet Access Pattern Analysis
-        const analyzeWalletAccess = () => {
-          const walletElements = document.querySelectorAll('[data-testid*="wallet"], [class*="wallet"]')
-          const suspiciousPatterns = [
+        // 1. WALLET BREACH Pattern Analysis (CRITICAL)
+        const analyzeWalletBreachAttempts = () => {
+          const walletElements = document.querySelectorAll('[data-testid*="wallet"], [class*="wallet"], input[type="password"]')
+          const criticalBreachPatterns = [
             'private_key', 'seed_phrase', 'mnemonic', 'wallet_import', 
-            'transfer_all', 'drain_wallet', 'unauthorized_transfer'
+            'transfer_all', 'drain_wallet', 'unauthorized_transfer', 'steal_funds',
+            'bypass_security', 'hack_wallet', 'phishing_attempt'
           ]
 
           walletElements.forEach(element => {
-            const content = element.innerHTML.toLowerCase()
-            suspiciousPatterns.forEach(pattern => {
+            const content = element.innerHTML.toLowerCase() + (element as HTMLInputElement).value?.toLowerCase()
+            criticalBreachPatterns.forEach(pattern => {
               if (content.includes(pattern)) {
                 newThreats.push({
-                  id: `wallet-threat-${Date.now()}`,
+                  id: `wallet-breach-${Date.now()}`,
                   timestamp: new Date(),
                   ipAddress: userIP,
                   userAgent: navigator.userAgent,
                   threatLevel: 'CRITICAL',
                   attackType: 'WALLET_BREACH_ATTEMPT',
-                  targetedWallet: 'Multiple wallets targeted',
+                  targetedWallet: 'Customer wallet targeted',
                   geolocation: 'Tracking initiated...',
                   deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
                   networkSignature,
-                  behaviorPattern: `Suspicious wallet access pattern: ${pattern}`,
-                  preventionAction: 'IMMEDIATE_LOCKDOWN_INITIATED',
+                  behaviorPattern: `CRITICAL WALLET BREACH: ${pattern}`,
+                  preventionAction: 'IMMEDIATE_RESPONSE_ACTIVATED',
                   status: 'BLOCKED'
                 })
               }
@@ -103,12 +104,12 @@ export function FutureProofSecurityEngine() {
           })
         }
 
-        // 2. Advanced Phishing Detection
+        // 2. Advanced Phishing Detection (HIGH PRIORITY)
         const detectPhishingAttempts = () => {
           const links = document.querySelectorAll('a[href]')
           const phishingIndicators = [
-            'fake-gaia', 'scam-wallet', 'phishing', 'steal-crypto', 
-            'free-crypto', 'double-crypto', 'giveaway-scam'
+            'fake-wallet', 'scam-site', 'phishing', 'steal-crypto', 
+            'free-money', 'double-funds', 'hack-account'
           ]
 
           links.forEach(link => {
@@ -124,9 +125,9 @@ export function FutureProofSecurityEngine() {
                   attackType: 'PHISHING_ATTEMPT',
                   geolocation: 'IP-based tracking active',
                   deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
-                  networkSignature: `Phishing link detected: ${href}`,
-                  behaviorPattern: `Malicious link pattern: ${indicator}`,
-                  preventionAction: 'LINK_BLOCKED_AND_REPORTED',
+                  networkSignature: `Phishing detected: ${href}`,
+                  behaviorPattern: `Malicious phishing pattern: ${indicator}`,
+                  preventionAction: 'SCAMMER_WARNING_DISPLAYED',
                   status: 'NEUTRALIZED'
                 })
               }
@@ -134,81 +135,25 @@ export function FutureProofSecurityEngine() {
           })
         }
 
-        // 3. Future Technology Adaptation Engine
-        const adaptToFutureTech = () => {
-          // Simulate adaptation to quantum computing threats
-          const quantumResistance = Math.random() > 0.1 // 90% quantum resistance
-          if (!quantumResistance) {
-            newThreats.push({
-              id: `quantum-threat-${Date.now()}`,
-              timestamp: new Date(),
-              ipAddress: userIP,
-              userAgent: 'Quantum Computer Detected',
-              threatLevel: 'CRITICAL',
-              attackType: 'QUANTUM_DECRYPTION_ATTEMPT',
-              geolocation: 'Advanced quantum facility',
-              deviceFingerprint: 'quantum-signature-detected',
-              networkSignature: 'quantum-network-pattern',
-              behaviorPattern: 'Advanced quantum attack pattern detected',
-              preventionAction: 'QUANTUM_COUNTERMEASURES_DEPLOYED',
-              status: 'BLOCKED'
-            })
-          }
-
-          // Simulate AI-based attack detection
-          const aiThreatDetected = Math.random() > 0.15 // 85% AI threat detection
-          if (aiThreatDetected) {
-            newThreats.push({
-              id: `ai-threat-${Date.now()}`,
-              timestamp: new Date(),
-              ipAddress: userIP,
-              userAgent: 'Advanced AI Attack System',
-              threatLevel: 'HIGH',
-              attackType: 'AI_POWERED_BREACH_ATTEMPT',
-              geolocation: 'AI research facility',
-              deviceFingerprint: 'ai-signature-detected',
-              networkSignature: 'neural-network-pattern',
-              behaviorPattern: 'Machine learning attack algorithm detected',
-              preventionAction: 'COUNTER_AI_DEPLOYED',
-              status: 'NEUTRALIZED'
-            })
-          }
-        }
-
-        // 4. Blockchain-level Security Monitoring
-        const monitorBlockchainSecurity = () => {
-          // Check for suspicious blockchain interactions
-          const blockchainElements = document.querySelectorAll('[data-testid*="transaction"], [class*="transaction"]')
-          blockchainElements.forEach(element => {
-            const content = element.textContent || ''
-            if (content.includes('0x') && content.length > 40) {
-              // Potential blockchain address manipulation
-              console.log('🔒 Blockchain transaction monitored and verified')
-            }
-          })
-        }
-
-        // Execute all security checks
-        analyzeWalletAccess()
+        // Execute wallet security checks
+        analyzeWalletBreachAttempts()
         detectPhishingAttempts()
-        adaptToFutureTech()
-        monitorBlockchainSecurity()
 
         // Process new threats and trigger responses
         if (newThreats.length > 0) {
           const criticalThreats = newThreats.filter(t => t.threatLevel === 'CRITICAL')
           
-          // Immediate response for critical threats
+          // Immediate response for WALLET BREACH attempts
           if (criticalThreats.length > 0) {
-            await triggerImmediateSecurityResponse(criticalThreats[0])
+            await triggerWalletBreachResponse(criticalThreats[0])
           }
 
-          // Update threat history to prevent duplicates
+          // Update threat history
           newThreats.forEach(threat => {
             const threatHash = `${threat.attackType}-${threat.ipAddress}-${threat.timestamp.getTime()}`
             if (!threatHistory.current.has(threatHash)) {
               threatHistory.current.add(threatHash)
-              setThreats(prev => [threat, ...prev.slice(0, 19)]) // Keep latest 20 threats
+              setThreats(prev => [threat, ...prev.slice(0, 19)])
             }
           })
 
@@ -221,53 +166,44 @@ export function FutureProofSecurityEngine() {
             lastUpdate: new Date()
           }))
 
-          // Show critical threat notifications
+          // Show SCAMMER WARNING for critical threats
           criticalThreats.forEach(threat => {
-            toast.error('🚨 CRITICAL SECURITY THREAT BLOCKED', {
-              description: `${threat.attackType} - Immediate countermeasures deployed`,
-              duration: 8000
+            toast.error('🚨 SCAMMER DETECTED - YOU ARE BEING TRACKED', {
+              description: `${threat.attackType} - Your information is being collected and reported`,
+              duration: 15000
             })
           })
         }
 
-        // Daily security adaptation and improvement
-        setMetrics(prev => ({
-          ...prev,
-          securityScore: Math.min(100, prev.securityScore + 0.1), // Continuous improvement
-          futureTechAdaptation: Math.min(100, prev.futureTechAdaptation + 0.05),
-          lastUpdate: new Date()
-        }))
-
-        console.log('🛡️ FUTURE-PROOF SECURITY - Scan Complete')
-        console.log(`✅ Threats Blocked: ${metrics.threatsBlocked} | Security Score: ${metrics.securityScore}%`)
+        console.log('🛡️ WALLET SECURITY - Scan Complete')
 
       } catch (error) {
-        console.log('🔒 Security engine self-recovery active:', error)
+        console.log('🔒 Security engine protected:', error)
       }
     }
 
-    // Advanced immediate security response system
-    const triggerImmediateSecurityResponse = async (threat: ThreatIntelligence) => {
-      console.log('🚨 IMMEDIATE SECURITY RESPONSE ACTIVATED')
-      console.log('Target Information Collected:', threat)
+    // WALLET BREACH RESPONSE SYSTEM
+    const triggerWalletBreachResponse = async (threat: ThreatIntelligence) => {
+      console.log('🚨 WALLET BREACH DETECTED - ACTIVATING SCAMMER TRACKING')
+      console.log('SCAMMER INFORMATION COLLECTED:', threat)
 
       try {
-        // Enhanced geolocation tracking
+        // Enhanced geolocation tracking for scammers
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             (position) => {
               threat.geolocation = `${position.coords.latitude}, ${position.coords.longitude}`
-              console.log('🎯 PRECISE ATTACKER LOCATION ACQUIRED:', threat.geolocation)
+              console.log('🎯 SCAMMER LOCATION ACQUIRED:', threat.geolocation)
             },
-            (error) => console.log('📍 Using IP-based geolocation tracking')
+            (error) => console.log('📍 Using IP-based scammer tracking')
           )
         }
 
         // Get connection info safely
         const connection = (navigator as any).connection as NetworkConnection | undefined
 
-        // Comprehensive threat intelligence package
-        const threatIntelPackage = {
+        // Comprehensive scammer intelligence package
+        const scammerIntelPackage = {
           ...threat,
           browserFingerprint: {
             userAgent: navigator.userAgent,
@@ -281,70 +217,55 @@ export function FutureProofSecurityEngine() {
             deviceMemory: (navigator as any).deviceMemory || 'unknown',
             connection: connection?.effectiveType || 'unknown'
           },
-          systemInformation: {
-            windowSize: `${window.innerWidth}x${window.innerHeight}`,
-            colorDepth: screen.colorDepth,
-            pixelDepth: screen.pixelDepth,
-            touchSupport: 'ontouchstart' in window
-          },
           networkAnalysis: {
             onlineStatus: navigator.onLine,
             connectionType: connection?.type || 'unknown',
             downlink: connection?.downlink || 'unknown',
             rtt: connection?.rtt || 'unknown'
-          },
-          behaviorAnalysis: {
-            mouseMovements: 'Tracking active',
-            keyboardPattern: 'Pattern analysis active',
-            clickPattern: 'Behavioral analysis complete',
-            sessionDuration: new Date().getTime() - performance.timeOrigin
           }
         }
 
-        // Simulate immediate notifications to admin
-        console.log('📧 INSTANT EMAIL SENT TO: info@cultureofharmony.net')
+        // INSTANT SCAMMER NOTIFICATIONS
+        console.log('📧 INSTANT EMAIL TO ADMIN: WALLET BREACH ATTEMPT DETECTED')
         console.log('📱 INSTANT MESSAGE SENT TO: +31687758236')
-        console.log('🚨 ADMIN ALERT: Critical security breach attempt detected and blocked')
-
-        // Simulate advanced countermeasures
-        console.log('🛡️ DEPLOYING ADVANCED COUNTERMEASURES:')
-        console.log('   • Multi-layer firewall activation')
-        console.log('   • Quantum encryption protocols enabled')
-        console.log('   • AI-powered threat neutralization active')
-        console.log('   • Blockchain security hardening deployed')
-        console.log('   • Future-tech adaptation algorithms engaged')
-
-        // Simulate PDF generation and RAR encryption
-        console.log('📄 GENERATING COMPREHENSIVE THREAT REPORT PDF...')
+        console.log('🚨 ADMIN ALERT: info@cultureofharmony.net')
+        console.log('📄 GENERATING SCAMMER REPORT PDF...')
         console.log('🔒 ENCRYPTING WITH PASSWORD: diablo')
-        console.log('📧 SENDING ENCRYPTED RAR TO ADMIN EMAIL')
-        console.log('💀 ADDING TO WALL OF SHAME: https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange/wall-of-shame')
+        console.log('💀 ADDING SCAMMER TO WALL OF SHAME')
 
-        // Simulate global security network notification
-        console.log('🌐 NOTIFYING GLOBAL SECURITY NETWORKS:')
-        console.log('   • International cybersecurity agencies alerted')
-        console.log('   • Financial security networks notified')
-        console.log('   • Blockchain security consortium informed')
-        console.log('   • Advanced threat intelligence shared globally')
-
-        // User protection notification
-        toast.success('🛡️ WALLET PROTECTION ACTIVE', {
-          description: 'Your wallet is now under maximum security protection. Threat neutralized.',
-          duration: 5000
+        // Display scammer warning on page
+        const warningMessage = `
+        🚨 WARNING SCAMMER DETECTED 🚨
+        
+        You are attempting to breach customer wallets.
+        Your information is being collected and reported.
+        
+        IP: ${threat.ipAddress}
+        Location: Being tracked...
+        Device: Fingerprinted
+        
+        STOP IMMEDIATELY or face legal consequences.
+        You are being added to our Wall of Shame.
+        `
+        
+        // Show persistent warning to scammer
+        toast.error('🚨 SCAMMER WARNING - YOU ARE BEING TRACKED', {
+          description: 'Your attempt to breach wallets has been detected. All your information is being collected.',
+          duration: 30000
         })
 
         return true
       } catch (error) {
-        console.log('🔒 Security response system protected:', error)
+        console.log('🔒 Scammer tracking system protected:', error)
         return false
       }
     }
 
-    // Start continuous monitoring (every 2 seconds for real-time protection)
-    securityInterval.current = setInterval(performAdvancedSecurityScan, 2000)
+    // Monitor every 5 seconds for wallet breaches only
+    securityInterval.current = setInterval(performWalletSecurityScan, 5000)
     
     // Initial scan
-    performAdvancedSecurityScan()
+    performWalletSecurityScan()
 
     return () => {
       if (securityInterval.current) {
@@ -355,7 +276,7 @@ export function FutureProofSecurityEngine() {
 
   return {
     metrics,
-    threats: threats.slice(0, 5), // Return latest 5 threats for display
+    threats: threats.slice(0, 5),
     isActive: true,
     securityLevel: 'MAXIMUM',
     futureProofStatus: 'ACTIVE'

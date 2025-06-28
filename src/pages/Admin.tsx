@@ -1,112 +1,130 @@
 
 import { useState, useEffect } from 'react'
-import { AdminControlSystem } from '@/components/AdminControlSystem'
-import { EnhancedAdminControls } from '@/components/EnhancedAdminControls'
-import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin'
-import { AuthTest } from '@/components/auth/AuthTest'
+import { useNavigate } from 'react-router-dom'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
-
-const AdminContent = () => {
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
-
-  // Enhanced session validation with security checks
-  useEffect(() => {
-    const adminToken = localStorage.getItem('secure_admin_token')
-    const adminIP = localStorage.getItem('admin_verified_ip')
-    const sessionExpiry = localStorage.getItem('admin_session_expiry')
-    
-    if (adminToken && adminIP && sessionExpiry) {
-      const now = new Date().getTime()
-      if (now < parseInt(sessionExpiry)) {
-        setIsAdminAuthenticated(true)
-        console.log('🔐 Valid admin session restored')
-      } else {
-        // Clean expired session
-        localStorage.removeItem('secure_admin_token')
-        localStorage.removeItem('admin_verified_ip')
-        localStorage.removeItem('admin_session_expiry')
-        console.log('🧹 Expired admin session cleaned')
-      }
-    }
-  }, [])
-
-  const handleLoginSuccess = () => {
-    setIsAdminAuthenticated(true)
-    const expiry = new Date().getTime() + (24 * 60 * 60 * 1000)
-    localStorage.setItem('admin_session_expiry', expiry.toString())
-    console.log('👑 Admin access granted with maximum security')
-  }
-
-  const handleSecureLogout = () => {
-    localStorage.removeItem('secure_admin_token')
-    localStorage.removeItem('admin_verified_ip')
-    localStorage.removeItem('admin_session_expiry')
-    localStorage.removeItem('admin_recovery_enabled')
-    setIsAdminAuthenticated(false)
-    console.log('🔐 Secure admin logout completed - all traces removed')
-  }
-
-  // Show secure login if not authenticated
-  if (!isAdminAuthenticated) {
-    return <SecureAdminLogin onLoginSuccess={handleLoginSuccess} />
-  }
-
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-green-400">👑 GODMODE Admin Control System</h1>
-          <p className="text-muted-foreground">Ultimate control over Harmony of Gaia Exchange</p>
-          <div className="flex gap-2 mt-2">
-            <span className="px-2 py-1 bg-green-600 text-white text-xs rounded">GODMODE ACTIVE</span>
-            <span className="px-2 py-1 bg-blue-600 text-white text-xs rounded">QUAD-LAYER SECURED</span>
-            <span className="px-2 py-1 bg-purple-600 text-white text-xs rounded">MAXIMUM PRIVILEGES</span>
-            <span className="px-2 py-1 bg-red-600 text-white text-xs rounded">THREAT DETECTION ON</span>
-          </div>
-        </div>
-        <button
-          onClick={handleSecureLogout}
-          className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg"
-        >
-          🔐 Secure Logout
-        </button>
-      </div>
-      
-      <Tabs defaultValue="enhanced" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="enhanced">Enhanced Controls</TabsTrigger>
-          <TabsTrigger value="standard">Standard Controls</TabsTrigger>
-          <TabsTrigger value="auth-test">Auth System Test</TabsTrigger>
-        </TabsList>
-        
-        <TabsContent value="enhanced">
-          <EnhancedAdminControls />
-        </TabsContent>
-        
-        <TabsContent value="standard">
-          <AdminControlSystem />
-        </TabsContent>
-        
-        <TabsContent value="auth-test">
-          <div className="space-y-4">
-            <div className="text-center">
-              <h3 className="text-xl font-bold text-green-400 mb-2">🧪 Authentication System Test</h3>
-              <p className="text-muted-foreground">Test user registration and login functionality</p>
-            </div>
-            <AuthTest />
-          </div>
-        </TabsContent>
-      </Tabs>
-    </div>
-  )
-}
+import { Shield, Settings, Activity, Database, Users, FileText, Leaf } from 'lucide-react'
+import { useSecureAdmin } from '@/hooks/useSecureAdmin'
+import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin'
+import { AdminMFA } from '@/components/admin/AdminMFA'
+import { TokenManagement } from '@/components/admin/TokenManagement'
+import { ComprehensiveSystemCheck } from '@/components/admin/ComprehensiveSystemCheck'
+import { DailyAdvertising } from '@/components/admin/DailyAdvertising'
+import { AuthTest } from '@/components/auth/AuthTest'
+import { GreenProjectManager } from '@/components/admin/GreenProjectManager'
 
 const Admin = () => {
+  const navigate = useNavigate()
+  const { isAdmin, isValidating, adminLogout } = useSecureAdmin()
+  const [showMFA, setShowMFA] = useState(false)
+
+  useEffect(() => {
+    console.log('🔐 Admin Page Access Check:', { isAdmin, isValidating })
+  }, [isAdmin, isValidating])
+
+  const handleLogout = () => {
+    adminLogout()
+    navigate('/')
+  }
+
+  const handleMFASuccess = () => {
+    setShowMFA(false)
+  }
+
+  if (isValidating) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900/10 flex items-center justify-center">
+        <Card className="w-96 border-green-500/20">
+          <CardContent className="p-8 text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-400 mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Validating admin session...</p>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  if (!isAdmin) {
+    return <SecureAdminLogin />
+  }
+
+  if (showMFA) {
+    return <AdminMFA onSuccess={handleMFASuccess} />
+  }
+
   return (
-    <ProtectedRoute isAdminRoute={true}>
-      <AdminContent />
-    </ProtectedRoute>
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900/10">
+      <div className="container mx-auto px-4 py-6">
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Secure Admin Dashboard
+            </h1>
+            <p className="text-muted-foreground mt-2">
+              Complete system management and security oversight
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <Button
+              onClick={() => setShowMFA(true)}
+              className="bg-blue-600 hover:bg-blue-700"
+            >
+              <Shield className="h-4 w-4 mr-2" />
+              Enable MFA
+            </Button>
+            <Button onClick={handleLogout} variant="outline">
+              Secure Logout
+            </Button>
+          </div>
+        </div>
+
+        <Tabs defaultValue="system-check" className="w-full">
+          <TabsList className="grid w-full grid-cols-7 bg-black/50 backdrop-blur-md border border-green-500/20">
+            <TabsTrigger value="system-check" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              <Activity className="h-4 w-4 mr-2" />
+              System Check
+            </TabsTrigger>
+            <TabsTrigger value="token-management" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              <Database className="h-4 w-4 mr-2" />
+              Token Management
+            </TabsTrigger>
+            <TabsTrigger value="advertising" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              <Settings className="h-4 w-4 mr-2" />
+              Daily Advertising
+            </TabsTrigger>
+            <TabsTrigger value="auth-test" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              <Users className="h-4 w-4 mr-2" />
+              Auth System Test
+            </TabsTrigger>
+            <TabsTrigger value="green-projects" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              <Leaf className="h-4 w-4 mr-2" />
+              Green Projects
+            </TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="system-check" className="space-y-6 mt-6">
+            <ComprehensiveSystemCheck />
+          </TabsContent>
+          
+          <TabsContent value="token-management" className="space-y-6 mt-6">
+            <TokenManagement />
+          </TabsContent>
+          
+          <TabsContent value="advertising" className="space-y-6 mt-6">
+            <DailyAdvertising />
+          </TabsContent>
+          
+          <TabsContent value="auth-test" className="space-y-6 mt-6">
+            <AuthTest />
+          </TabsContent>
+          
+          <TabsContent value="green-projects" className="space-y-6 mt-6">
+            <GreenProjectManager />
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
   )
 }
 
