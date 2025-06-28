@@ -1,5 +1,5 @@
 
-import { Home, Wallet, TrendingUp, Search, Download, Code, FileText, Users, Settings, Shield, BarChart3, Lock } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings, Shield, Activity, Download, BarChart3 } from "lucide-react"
 
 import {
   Sidebar,
@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { GaiaLogo } from "./GaiaLogo"
+import { Link } from "react-router-dom"
 
 // Menu items.
 const items = [
@@ -21,70 +21,42 @@ const items = [
     icon: Home,
   },
   {
-    title: "Wallet",
-    url: "/wallet",
-    icon: Wallet,
+    title: "System Status", 
+    url: "/system-status",
+    icon: Settings,
   },
   {
-    title: "Markets",
-    url: "/markets",
-    icon: TrendingUp,
-  },
-  {
-    title: "Transparency",
-    url: "/transparency",
-    icon: Search,
-  },
-  {
-    title: "Reinvestments",
-    url: "/reinvestments",
+    title: "Comprehensive Status",
+    url: "/comprehensive-status", 
     icon: BarChart3,
-  },
-  {
-    title: "Downloads",
-    url: "/downloads",
-    icon: Download,
-  },
-  {
-    title: "Smart Contracts",
-    url: "/smart-contracts",
-    icon: Code,
   },
   {
     title: "Ultimate Security",
     url: "/ultimate-security",
-    icon: Lock,
+    icon: Shield,
   },
   {
-    title: "Marketing",
-    url: "/marketing",
-    icon: Users,
-  },
-  {
-    title: "Admin",
-    url: "/admin",
-    icon: Settings,
-  },
+    title: "Live Tracking",
+    url: "/live-tracking",
+    icon: Activity,
+  }
 ]
 
 export function AppSidebar() {
   return (
-    <Sidebar className="border-r-green-500/20 bg-gradient-to-b from-green-900/20 to-black/40 backdrop-blur-sm">
+    <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-green-400 font-bold text-lg flex items-center gap-2">
-            <GaiaLogo size="sm" variant="white-fade" />
-            Gaia's Ecosystem
-          </SidebarGroupLabel>
+          <SidebarGroupLabel>GAIA Ecosystem</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url} className="flex items-center gap-2 text-white/80 hover:text-green-400 transition-colors">
-                      <item.icon className="h-4 w-4" />
+                    <Link to={item.url}>
+                      <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
