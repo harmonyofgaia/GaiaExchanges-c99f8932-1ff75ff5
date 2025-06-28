@@ -39,7 +39,7 @@ export function ContactSystem() {
       }
 
       // Store contact in database for tracking
-      await supabase.from('contact_submissions').insert({
+      const { error: dbError } = await supabase.from('contact_submissions').insert({
         name: formData.name,
         email: formData.email,
         subject: formData.subject,
@@ -47,6 +47,11 @@ export function ContactSystem() {
         contact_type: formData.contactType,
         status: 'sent'
       })
+
+      if (dbError) {
+        console.error('Database error:', dbError)
+        // Continue anyway since email was sent
+      }
 
       toast.success('Message sent successfully!', {
         description: 'Your message has been sent to info@cultureofharmony.net'
