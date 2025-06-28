@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -150,10 +149,11 @@ export function SnakeGameArena() {
       newSnake.unshift(head)
 
       // Check token collision
+      let tokenEaten = false
+      let tokenValue = 0
+
       setGaiaTokens(prevTokens => {
         const newTokens = [...prevTokens]
-        let tokenEaten = false
-        let tokenValue = 0
 
         for (let i = 0; i < newTokens.length; i++) {
           if (newTokens[i].position.x === head.x && newTokens[i].position.y === head.y) {
