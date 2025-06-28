@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -39,7 +38,7 @@ export function AdminControlSystem() {
   const { toast } = useToast()
 
   const handleLogin = () => {
-    if (username === 'Synatic' && password === 'diablo92') {
+    if (username === 'Synatic' && password === 'Synatic!oul1992') {
       setIsAuthenticated(true)
       toast({
         title: "Login Successful",
