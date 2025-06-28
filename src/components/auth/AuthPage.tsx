@@ -1,13 +1,14 @@
 
 import React, { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { AlertCircle, Leaf, Shield, Globe, Crown } from 'lucide-react'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 import { useAuth } from './AuthProvider'
-import { AuthHeader } from './AuthHeader'
-import { SignInForm } from './SignInForm'
-import { SignUpForm } from './SignUpForm'
-import { AuthFeatures } from './AuthFeatures'
-import { AuthAlerts } from './AuthAlerts'
+import { AdminSetup } from '@/components/admin/AdminSetup'
 
 export function AuthPage() {
   const { signIn, signUp } = useAuth()
@@ -62,8 +63,18 @@ export function AuthPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
-        <AuthHeader />
+        {/* Header */}
+        <div className="text-center space-y-4">
+          <div className="flex items-center justify-center gap-2">
+            <Leaf className="h-8 w-8 text-green-400" />
+            <h1 className="text-3xl font-bold text-green-400">Gaia's Exchanges</h1>
+          </div>
+          <p className="text-muted-foreground">
+            Join the Culture of Harmony ecosystem - Your gateway to eco-conscious trading
+          </p>
+        </div>
 
+        {/* Auth Card */}
         <Card className="border-green-500/20">
           <CardHeader>
             <CardTitle className="text-center">Welcome to Gaia's Exchanges</CardTitle>
@@ -73,25 +84,135 @@ export function AuthPage() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
+              <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
                 <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                <TabsTrigger value="admin" className="text-purple-400">
+                  <Crown className="h-3 w-3 mr-1" />
+                  Admin
+                </TabsTrigger>
               </TabsList>
               
               <TabsContent value="signin" className="space-y-4 mt-6">
-                <SignInForm onSubmit={handleSignIn} isLoading={isLoading} />
+                <form onSubmit={handleSignIn} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="signin-email">Email</Label>
+                    <Input
+                      id="signin-email"
+                      name="email"
+                      type="email"
+                      placeholder="your@email.com"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="signin-password">Password</Label>
+                    <Input
+                      id="signin-password"
+                      name="password"
+                      type="password"
+                      placeholder="Your password"
+                      required
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-green-600 hover:bg-green-700"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? 'Signing In...' : 'Sign In'}
+                  </Button>
+                </form>
               </TabsContent>
               
               <TabsContent value="signup" className="space-y-4 mt-6">
-                <SignUpForm onSubmit={handleSignUp} isLoading={isLoading} />
+                <form onSubmit={handleSignUp} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-fullname">Full Name</Label>
+                    <Input
+                      id="signup-fullname"
+                      name="fullName"
+                      type="text"
+                      placeholder="Your full name"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-username">Username</Label>
+                    <Input
+                      id="signup-username"
+                      name="username"
+                      type="text"
+                      placeholder="Choose a username"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-email">Email</Label>
+                    <Input
+                      id="signup-email"
+                      name="email"
+                      type="email"
+                      placeholder="your@email.com"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-password">Password</Label>
+                    <Input
+                      id="signup-password"
+                      name="password"
+                      type="password"
+                      placeholder="Create a password"
+                      required
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-green-600 hover:bg-green-700"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? 'Creating Account...' : 'Create Account'}
+                  </Button>
+                </form>
+              </TabsContent>
+
+              <TabsContent value="admin" className="mt-6">
+                <AdminSetup />
               </TabsContent>
             </Tabs>
 
-            <AuthAlerts error={error} success={success} />
+            {error && (
+              <Alert className="mt-4 border-red-500/20 bg-red-500/10">
+                <AlertCircle className="h-4 w-4 text-red-400" />
+                <AlertDescription className="text-red-400">
+                  {error}
+                </AlertDescription>
+              </Alert>
+            )}
+
+            {success && (
+              <Alert className="mt-4 border-green-500/20 bg-green-500/10">
+                <Shield className="h-4 w-4 text-green-400" />
+                <AlertDescription className="text-green-400">
+                  {success}
+                </AlertDescription>
+              </Alert>
+            )}
           </CardContent>
         </Card>
 
-        <AuthFeatures />
+        {/* Features */}
+        <div className="space-y-3 text-center text-sm text-muted-foreground">
+          <div className="flex items-center justify-center gap-2">
+            <Shield className="h-4 w-4 text-green-400" />
+            <span>Bank-level security with environmental impact tracking</span>
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <Globe className="h-4 w-4 text-blue-400" />
+            <span>Connect with the global Culture of Harmony community</span>
+          </div>
+        </div>
       </div>
     </div>
   )
