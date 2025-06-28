@@ -53,12 +53,10 @@ const Index = () => {
         })
       }
     } else {
-      // Enhanced sign up with metadata
+      // Fixed sign up with correct metadata structure
       const { error } = await signUp(email, password, {
-        data: {
-          full_name: fullName,
-          username: email.split('@')[0] // Generate username from email
-        }
+        full_name: fullName,
+        username: email.split('@')[0] // Generate username from email
       })
       if (error) {
         toast({
