@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -24,12 +23,16 @@ export function AdminControlSystem() {
     setAuthStep('authenticated')
   }
 
+  const handleBackToLogin = () => {
+    setAuthStep('login')
+  }
+
   if (authStep === 'login') {
     return <AdminLogin onLoginSuccess={handleLoginSuccess} onMFARequired={handleMFARequired} />
   }
 
   if (authStep === 'mfa') {
-    return <AdminMFA onMFASuccess={handleMFASuccess} />
+    return <AdminMFA onMFASuccess={handleMFASuccess} onBackToLogin={handleBackToLogin} />
   }
 
   return (
