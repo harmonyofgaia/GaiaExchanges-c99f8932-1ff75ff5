@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -296,40 +297,4 @@ export function GaiaWallet() {
       </Tabs>
     </div>
   )
-
-  function formatGaia(amount: number) {
-    return new Intl.NumberFormat('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(amount)
-  }
-
-  function formatUSD(amount: number) {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    }).format(amount)
-  }
-
-  function handleSend() {
-    console.log('Sending GAiA:', { amount: sendAmount, to: recipientAddress })
-  }
-
-  function getTransactionIcon(type: string) {
-    switch (type) {
-      case 'received': return '↓'
-      case 'sent': return '↑'
-      case 'burned': return '🔥'
-      default: return '•'
-    }
-  }
-
-  function getTransactionColor(type: string) {
-    switch (type) {
-      case 'received': return 'text-green-400'
-      case 'sent': return 'text-blue-400'
-      case 'burned': return 'text-orange-400'
-      default: return 'text-muted-foreground'
-    }
-  }
 }
