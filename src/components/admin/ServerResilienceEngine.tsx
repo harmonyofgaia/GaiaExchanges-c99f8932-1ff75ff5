@@ -81,7 +81,6 @@ export function ServerResilienceEngine() {
     lovableIntegration: 'SECURED'
   })
 
-  // ENHANCED SECURITY MONITORING - PREEMPTIVE THREAT DISCONNECTION
   useEffect(() => {
     const advancedSecurityEngine = () => {
       console.log('🛡️ ADVANCED SECURITY ENGINE - PREEMPTIVE THREAT DISCONNECTION ACTIVE')
@@ -255,7 +254,6 @@ export function ServerResilienceEngine() {
     return () => clearInterval(interval)
   }, [primaryServer.dataLoad, securityLayers, threatDisconnectionActive, backupModeEnabled])
 
-  // MANUAL BACKUP MODE OVERRIDE (ADMIN ONLY)
   const forceBackupMode = () => {
     console.log('👑 ADMIN OVERRIDE: MANUAL BACKUP MODE ACTIVATION')
     
@@ -271,7 +269,6 @@ export function ServerResilienceEngine() {
     })
   }
 
-  // RESTORE SECURITY LAYERS (ADMIN RECOVERY)
   const restoreSecurityLayers = () => {
     console.log('🔧 ADMIN RECOVERY: RESTORING ALL SECURITY LAYERS')
     
@@ -290,7 +287,6 @@ export function ServerResilienceEngine() {
     })
   }
 
-  // DISCONNECT ALL THREATS PERMANENTLY
   const permanentlyDisconnectThreats = () => {
     console.log('🚫 PERMANENT DISCONNECTION: ALL DETECTED THREATS BANNED FOREVER')
     
@@ -453,7 +449,6 @@ export function ServerResilienceEngine() {
         </CardContent>
       </Card>
 
-      {/* Disconnected Threats Display */}
       {disconnectedIPs.length > 0 && (
         <Card className="border-red-500/30 bg-gradient-to-br from-red-900/20 to-orange-900/20">
           <CardHeader>
