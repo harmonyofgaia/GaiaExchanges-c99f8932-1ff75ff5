@@ -1,11 +1,12 @@
 
 import { GaiaLogo } from '@/components/GaiaLogo'
-import { AppStoreLinks } from '@/components/AppStoreLinks'
-import { GitHubRepositories } from '@/components/GitHubRepositories'
+import { DownloadManager } from '@/components/downloads/DownloadManager'
+import { AppStoreConnector } from '@/components/deployment/AppStoreConnector'
 import { GitHubIntegration } from '@/components/GitHubIntegration'
-import { Web3Integration } from '@/components/Web3Integration'
-import { SmartContractInterface } from '@/components/SmartContractInterface'
+import { GitHubRepositories } from '@/components/GitHubRepositories'
 import { AdvancedWalletSecurity } from '@/components/AdvancedWalletSecurity'
+import { SmartContractInterface } from '@/components/SmartContractInterface'
+import { Web3Integration } from '@/components/Web3Integration'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Download, Shield, Globe, Code, Lock, Github, Star } from 'lucide-react'
@@ -60,11 +61,14 @@ const Downloads = () => {
       </div>
 
       <div className="container mx-auto px-4 py-8 space-y-8">
+        {/* Enhanced Download Manager */}
+        <DownloadManager />
+
+        {/* App Store Connector */}
+        <AppStoreConnector />
+
         {/* GitHub Integration Status */}
         <GitHubIntegration />
-
-        {/* App Store Downloads */}
-        <AppStoreLinks />
 
         {/* GitHub Repositories */}
         <GitHubRepositories />

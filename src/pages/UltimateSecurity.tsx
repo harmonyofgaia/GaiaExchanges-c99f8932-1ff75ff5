@@ -1,7 +1,7 @@
 
+import { ComprehensiveSecurityMonitor } from '@/components/security/ComprehensiveSecurityMonitor'
 import { UltimateSecurityWall } from '@/components/security/UltimateSecurityWall'
 import { OptimalTradingCosts } from '@/components/security/OptimalTradingCosts'
-import { ComprehensiveSecurityMonitor } from '@/components/security/ComprehensiveSecurityMonitor'
 import { PhoneSecuritySystem } from '@/components/security/PhoneSecuritySystem'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
@@ -14,14 +14,17 @@ const UltimateSecurity = () => {
             Ultimate Security & Optimization Center
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Planet's Highest Security Defense + Zero-Fee Trading + Phone Protection + Comprehensive Monitoring
+            Planet's Highest Security Defense + Zero-Fee Trading + Phone Protection + Real-time Monitoring (Every Second)
+          </p>
+          <p className="text-sm text-green-400 mt-2">
+            🔒 Protecting +31687758236 & info@cultureofharmony.net with AI-powered security
           </p>
         </div>
 
         <Tabs defaultValue="comprehensive" className="w-full">
           <TabsList className="grid w-full grid-cols-4 bg-black/50 backdrop-blur-md border border-green-500/20">
             <TabsTrigger value="comprehensive" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-              🛡️ Comprehensive Protection
+              🛡️ Real-time Protection
             </TabsTrigger>
             <TabsTrigger value="phone" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
               📱 Phone Security
