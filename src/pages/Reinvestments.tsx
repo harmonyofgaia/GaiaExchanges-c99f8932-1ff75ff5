@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -19,59 +20,75 @@ import {
 } from 'lucide-react'
 
 const Reinvestments = () => {
-  // Mock reinvestment data
+  // Mock reinvestment data - Updated for correct allocation
   const reinvestmentData = {
-    totalReinvested: 947523.67, // Updated to include coral reef project
+    totalReinvested: 1247523.67, // Updated to reflect increased funding
     totalTokensBurned: 1250000,
-    environmentalProjects: 13, // Increased by 1
+    environmentalProjects: 13,
     partnersOnboarded: 156,
     exchangesConnected: 8,
-    weeklyGrowth: 18.2 // Improved growth
+    weeklyGrowth: 18.2,
+    coralReefAllocation: 5, // 5% to coral reef
+    otherProjectsAllocation: 95 // 95% to other projects
   }
 
   const reinvestmentProjects = [
     {
       id: 1,
       name: "Sound Riffs Re Grau dio - Coral Reef Restoration",
-      allocation: 100000,
+      allocation: 62500, // 5% of 1.25M burned tokens
       progress: 12,
       status: "Active",
       impact: "Audio signals helping 3 reef sites",
-      description: "Restoring coral reefs with balanced underwater audio signals to attract marine life and recover ecosystems",
+      description: "Personal project: Restoring coral reefs with balanced underwater audio signals to attract marine life and recover ecosystems",
       burnContribution: 5, // 5% of all burns go here
-      category: "Marine Conservation"
+      category: "Marine Conservation",
+      walletAddress: "ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7"
     },
     {
       id: 2,
       name: "Ocean Cleanup Initiative",
-      allocation: 125000,
+      allocation: 237500, // Part of 95% allocation
       progress: 78,
       status: "Active",
-      impact: "2.3M plastic bottles removed"
+      impact: "2.3M plastic bottles removed",
+      burnContribution: 19
     },
     {
       id: 3,
       name: "Solar Energy Expansion",
-      allocation: 200000,
+      allocation: 300000, // Part of 95% allocation
       progress: 92,
       status: "Completed",
-      impact: "500 solar panels installed"
+      impact: "500 solar panels installed",
+      burnContribution: 25
     },
     {
       id: 4,
-      name: "Forest Restoration",
-      allocation: 85000,
+      name: "Forest Restoration Brazil",
+      allocation: 200000, // Part of 95% allocation
       progress: 45,
       status: "In Progress",
-      impact: "15,000 trees planted"
+      impact: "15,000 trees planted",
+      burnContribution: 16
     },
     {
       id: 5,
-      name: "Clean Water Access",
-      allocation: 150000,
+      name: "Clean Water Access Global",
+      allocation: 187500, // Part of 95% allocation
       progress: 63,
       status: "Active",
-      impact: "8 communities served"
+      impact: "8 communities served",
+      burnContribution: 15
+    },
+    {
+      id: 6,
+      name: "Carbon Capture Technology",
+      allocation: 250000, // Part of 95% allocation
+      progress: 35,
+      status: "Active",
+      impact: "750 tons CO2 captured",
+      burnContribution: 20
     }
   ]
 
@@ -97,7 +114,7 @@ const Reinvestments = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-green-400">Harmony of Gaia - Reinvestments Overview</h1>
-          <p className="text-muted-foreground">Complete transparency of all environmental reinvestments and exchange integrations</p>
+          <p className="text-muted-foreground">Complete transparency: 5% coral reef restoration, 95% other green projects</p>
         </div>
         <Badge className="bg-green-600 text-white px-4 py-2">
           Live Data • Updates Every 5s
@@ -109,26 +126,26 @@ const Reinvestments = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-cyan-400">
             <div className="text-4xl">🪸</div>
-            🌊 FEATURED: Sound Riffs Re Grau dio - Coral Reef Restoration
-            <Badge className="bg-cyan-600 text-white animate-pulse">NEW PROJECT</Badge>
+            🌊 PERSONAL PROJECT: Sound Riffs Re Grau dio - Coral Reef Restoration
+            <Badge className="bg-cyan-600 text-white animate-pulse">5% BURN ALLOCATION</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="text-center">
             <div className="text-6xl animate-bounce mb-4">🐠🪸🎵</div>
             <p className="text-lg text-cyan-300 mb-4">
-              Revolutionary underwater audio technology helping coral reefs recover and attract marine life back to damaged ecosystems
+              Personal commitment: Revolutionary underwater audio technology helping coral reefs recover and attract marine life back to damaged ecosystems
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-4 text-center">
-              <div className="text-2xl font-bold text-cyan-400">{formatMoney(100000)}</div>
-              <div className="text-sm text-muted-foreground">Allocated Funding</div>
+              <div className="text-2xl font-bold text-cyan-400">{formatMoney(62500)}</div>
+              <div className="text-sm text-muted-foreground">Personal Funding (5%)</div>
             </div>
             <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 text-center">
-              <div className="text-2xl font-bold text-blue-400">5%</div>
-              <div className="text-sm text-muted-foreground">Of All Token Burns</div>
+              <div className="text-2xl font-bold text-blue-400">DEDICATED</div>
+              <div className="text-sm text-muted-foreground">Personal Wallet</div>
             </div>
             <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-center">
               <div className="text-2xl font-bold text-green-400">3</div>
@@ -138,6 +155,16 @@ const Reinvestments = () => {
               <div className="text-2xl font-bold text-purple-400">12%</div>
               <div className="text-sm text-muted-foreground">Progress Complete</div>
             </div>
+          </div>
+          
+          <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-4">
+            <h4 className="font-bold text-cyan-400 mb-2">🎵 Personal Wallet Address:</h4>
+            <div className="font-mono text-sm bg-black/30 p-2 rounded break-all text-cyan-300 mb-2">
+              ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7
+            </div>
+            <p className="text-sm text-cyan-300">
+              This is where 5% of ALL GAiA token burns are automatically sent to fund real-world coral reef restoration through Sound Riffs Re Grau dio technology.
+            </p>
           </div>
           
           <div className="bg-muted/30 p-4 rounded-lg">
@@ -159,13 +186,13 @@ const Reinvestments = () => {
           <Progress value={12} className="h-3 bg-cyan-900/30" />
           <div className="text-center">
             <p className="text-sm text-cyan-400">
-              🚀 Every GAiA token burn contributes 5% directly to coral reef restoration!
+              🚀 Personal commitment: Every GAiA token burn contributes 5% directly to coral reef restoration!
             </p>
           </div>
         </CardContent>
       </Card>
 
-      {/* Key Metrics */}
+      {/* Updated Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-500/30">
           <CardContent className="p-6">
@@ -183,33 +210,29 @@ const Reinvestments = () => {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-blue-500/30">
+        <Card className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-cyan-500/30">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-blue-500/20 rounded-lg">
-                <Coins className="h-6 w-6 text-blue-400" />
+              <div className="p-3 bg-cyan-500/20 rounded-lg">
+                <div className="text-2xl">🪸</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-blue-400">
-                  {reinvestmentData.totalTokensBurned.toLocaleString()}
-                </div>
-                <div className="text-sm text-muted-foreground">Tokens Burned</div>
+                <div className="text-2xl font-bold text-cyan-400">5%</div>
+                <div className="text-sm text-muted-foreground">Coral Reef (Personal)</div>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-purple-900/30 to-violet-900/30 border-purple-500/30">
+        <Card className="bg-gradient-to-br from-green-900/30 to-teal-900/30 border-green-500/30">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-purple-500/20 rounded-lg">
-                <Leaf className="h-6 w-6 text-purple-400" />
+              <div className="p-3 bg-green-500/20 rounded-lg">
+                <Leaf className="h-6 w-6 text-green-400" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-purple-400">
-                  {reinvestmentData.environmentalProjects}
-                </div>
-                <div className="text-sm text-muted-foreground">Green Projects</div>
+                <div className="text-2xl font-bold text-green-400">95%</div>
+                <div className="text-sm text-muted-foreground">Other Green Projects</div>
               </div>
             </div>
           </CardContent>
@@ -287,7 +310,7 @@ const Reinvestments = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Target className="h-5 w-5" />
-            Environmental Reinvestment Projects
+            Environmental Reinvestment Projects - Corrected Allocation (5% / 95%)
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -311,11 +334,9 @@ const Reinvestments = () => {
                       >
                         {project.status}
                       </Badge>
-                      {project.id === 1 && (
-                        <Badge className="bg-orange-600 text-white">
-                          5% Burn Share
-                        </Badge>
-                      )}
+                      <Badge className={project.id === 1 ? 'bg-cyan-600 text-white' : 'bg-green-600 text-white'}>
+                        {project.burnContribution}% Burn Share
+                      </Badge>
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
@@ -338,10 +359,18 @@ const Reinvestments = () => {
                   </div>
                   <Progress value={project.progress} className="h-2" />
                   {project.id === 1 && (
-                    <div className="mt-3 p-3 bg-cyan-500/10 rounded border border-cyan-500/20">
-                      <p className="text-sm text-cyan-300">
-                        🎵 This project receives 5% of all GAiA token burns automatically, helping restore marine ecosystems through innovative sound technology.
-                      </p>
+                    <div className="mt-3 space-y-2">
+                      <div className="p-3 bg-cyan-500/10 rounded border border-cyan-500/20">
+                        <p className="text-sm text-cyan-300">
+                          🎵 Personal project: {project.burnContribution}% of all GAiA token burns automatically fund coral reef restoration through innovative sound technology.
+                        </p>
+                      </div>
+                      <div className="bg-black/30 p-2 rounded">
+                        <div className="text-xs text-cyan-400 mb-1">Personal Wallet:</div>
+                        <div className="font-mono text-xs text-cyan-300 break-all">
+                          {project.walletAddress}
+                        </div>
+                      </div>
                     </div>
                   )}
                 </CardContent>
