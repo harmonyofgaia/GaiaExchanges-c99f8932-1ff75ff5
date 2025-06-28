@@ -14,7 +14,9 @@ import {
   X,
   Leaf,
   Target,
-  Wrench
+  Wrench,
+  Gamepad2,
+  Building
 } from 'lucide-react'
 
 export function Navbar() {
@@ -24,7 +26,8 @@ export function Navbar() {
   const navigation = [
     { name: 'Home', href: '/', icon: Leaf },
     { name: 'Wallet', href: '/wallet', icon: Wallet },
-    { name: 'Exchange', href: '/exchange', icon: TrendingUp },
+    { name: 'Exchange', href: '/gaias-exchange', icon: TrendingUp },
+    { name: 'Gaming', href: '/gaia-fighter-game', icon: Gamepad2 },
     { name: 'Markets', href: '/markets', icon: BarChart3 },
     { name: 'Security', href: '/ultimate-security', icon: Shield },
     { name: 'Marketing', href: '/marketing', icon: Target },

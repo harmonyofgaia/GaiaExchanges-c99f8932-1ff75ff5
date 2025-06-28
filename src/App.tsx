@@ -17,6 +17,8 @@ import ArtistStreaming from "./pages/ArtistStreaming";
 import GaiaCoinCrafterPage from "./pages/GaiaCoinCrafter";
 import DrivingToNature from "./pages/DrivingToNature";
 import TechnoSoulSolutions from "./pages/TechnoSoulSolutions";
+import GaiaFighterGame from "./pages/GaiaFighterGame";
+import GaiasExchange from "./pages/GaiasExchange";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +43,8 @@ const App = () => (
             <Route path="/gaia-coin-crafter" element={<GaiaCoinCrafterPage />} />
             <Route path="/driving-to-nature" element={<DrivingToNature />} />
             <Route path="/techno-soul-solutions" element={<TechnoSoulSolutions />} />
+            <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
+            <Route path="/gaias-exchange" element={<GaiasExchange />} />
           </Routes>
         </BrowserRouter>
       </div>
