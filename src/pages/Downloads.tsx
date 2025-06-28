@@ -1,6 +1,7 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Download, Windows, Apple, Android, Linux, Smartphone } from 'lucide-react'
+import { Download, Monitor, Apple, Smartphone, Terminal } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 
 const Downloads = () => {
@@ -18,7 +19,7 @@ const Downloads = () => {
         <Card className="border-blue-500/20 bg-gradient-to-br from-blue-900/20 to-blue-800/20">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-blue-400">
-              <Windows className="h-5 w-5" />
+              <Monitor className="h-5 w-5" />
               Windows
             </CardTitle>
           </CardHeader>
@@ -108,7 +109,7 @@ const Downloads = () => {
         <Card className="border-green-500/20 bg-gradient-to-br from-green-900/20 to-green-800/20">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-green-400">
-              <Android className="h-5 w-5" />
+              <Smartphone className="h-5 w-5" />
               Android
             </CardTitle>
           </CardHeader>
@@ -153,7 +154,7 @@ const Downloads = () => {
         <Card className="border-orange-500/20 bg-gradient-to-br from-orange-900/20 to-orange-800/20">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-orange-400">
-              <Linux className="h-5 w-5" />
+              <Terminal className="h-5 w-5" />
               Linux
             </CardTitle>
           </CardHeader>
