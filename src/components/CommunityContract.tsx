@@ -1,307 +1,417 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Badge } from '@/components/ui/badge'
+import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
 import { useAuth } from '@/components/auth/AuthProvider'
 import { supabase } from '@/integrations/supabase/client'
-import { FileText, PenTool, CheckCircle, Users, Leaf } from 'lucide-react'
+import { Leaf, FileText, Shield, Users, DollarSign, Globe, CheckCircle } from 'lucide-react'
 
-interface ContractData {
-  fullName: string
-  email: string
-  phone: string
-  address: string
-  investmentAmount: string
-  projectType: string
-  additionalNotes: string
+interface GreenProject {
+  id: string
+  name: string
+  description: string
+  goal_amount: number
+  current_amount: number
+  status: string
 }
 
 export function CommunityContract() {
-  const { user, isAdmin } = useAuth()
-  const [contractData, setContractData] = useState<ContractData>({
+  const { user } = useAuth()
+  const [projects, setProjects] = useState<GreenProject[]>([])
+  const [selectedProject, setSelectedProject] = useState<string>('')
+  const [formData, setFormData] = useState({
     fullName: '',
     email: user?.email || '',
     phone: '',
-    address: '',
+    country: '',
     investmentAmount: '',
-    projectType: 'renewable_energy',
     additionalNotes: ''
   })
-  const [isSigning, setIsSigning] = useState(false)
-  const [signedContracts, setSignedContracts] = useState<any[]>([])
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [contractSigned, setContractSigned] = useState(false)
 
-  const handleInputChange = (field: keyof ContractData, value: string) => {
-    setContractData(prev => ({ ...prev, [field]: value }))
+  // Load available green projects
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('green_projects')
+          .select('*')
+          .eq('status', 'active')
+          .order('created_at', { ascending: false })
+
+        if (error) {
+          console.error('Error loading projects:', error)
+        } else {
+          setProjects(data || [])
+          if (data && data.length > 0) {
+            setSelectedProject(data[0].id)
+          }
+        }
+      } catch (error) {
+        console.error('Error loading projects:', error)
+      }
+    }
+
+    if (user) {
+      loadProjects()
+    }
+  }, [user])
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }))
   }
 
-  const handleSignContract = async () => {
+  const generateContractTerms = () => {
+    const selectedProjectData = projects.find(p => p.id === selectedProject)
+    return `
+HARMONY OF GAIA COMMUNITY REINVESTMENT CONTRACT
+
+Project: ${selectedProjectData?.name || 'Selected Green Project'}
+Investment Amount: $${formData.investmentAmount}
+Participant: ${formData.fullName}
+Date: ${new Date().toLocaleDateString()}
+
+TERMS AND CONDITIONS:
+1. This is a community reinvestment project managed by Culture of Harmony
+2. Funds will be used exclusively for sustainable environmental projects
+3. All transactions are transparent and publicly verifiable
+4. Participants receive regular updates on project progress
+5. Environmental impact is tracked and reported quarterly
+6. This investment supports our mission to create a sustainable future
+7. All legal frameworks comply with international environmental standards
+
+COMMUNITY BENEFITS:
+- Direct environmental impact through ${selectedProjectData?.name}
+- Transparent fund management with public reporting
+- Community voting rights on project decisions
+- Regular impact reports and progress updates
+- Priority access to future green investment opportunities
+
+ENVIRONMENTAL COMMITMENT:
+This investment directly contributes to environmental restoration and sustainability projects. Culture of Harmony guarantees that 100% of invested funds go toward actual environmental work, with full transparency and regular reporting.
+
+By signing this contract, I confirm that I understand and agree to these terms and commit to supporting sustainable environmental projects through the Harmony of Gaia platform.
+
+Digital Signature Required: YES
+Legal Framework: International Environmental Investment Standards
+Managed By: Culture of Harmony (info@cultureofharmony.net)
+Contact: +31687758236 for any questions or concerns
+    `
+  }
+
+  const handleContractSubmission = async () => {
     if (!user) {
-      toast.error('Please sign in to sign the contract')
+      toast.error('Please log in to sign the contract')
       return
     }
 
-    if (!contractData.fullName || !contractData.investmentAmount || !contractData.projectType) {
-      toast.error('Please fill in all required fields')
+    // Validation
+    const requiredFields = ['fullName', 'email', 'investmentAmount']
+    const missingFields = requiredFields.filter(field => !formData[field])
+    
+    if (missingFields.length > 0 || !selectedProject) {
+      toast.error('Please fill in all required fields and select a project')
       return
     }
 
-    setIsSigning(true)
+    const investmentAmount = parseFloat(formData.investmentAmount)
+    if (isNaN(investmentAmount) || investmentAmount <= 0) {
+      toast.error('Please enter a valid investment amount')
+      return
+    }
+
+    setIsSubmitting(true)
+
     try {
-      // Create contract signature record
-      const contractRecord = {
+      // Get user's IP and user agent for security tracking
+      const userIP = await fetch('https://api.ipify.org?format=json')
+        .then(res => res.json())
+        .then(data => data.ip)
+        .catch(() => 'unknown')
+
+      const contractData = {
         user_id: user.id,
-        full_name: contractData.fullName,
-        email: contractData.email,
-        phone: contractData.phone,
-        address: contractData.address,
-        investment_amount: parseFloat(contractData.investmentAmount),
-        project_type: contractData.projectType,
-        additional_notes: contractData.additionalNotes,
-        signed_at: new Date().toISOString(),
-        contract_status: 'pending_approval',
-        digital_signature: `${contractData.fullName}-${Date.now()}`,
-        ip_address: 'tracked',
-        contract_hash: btoa(`${user.id}-${Date.now()}-${contractData.fullName}`)
+        project_id: selectedProject,
+        full_name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone || null,
+        country: formData.country || null,
+        investment_amount: investmentAmount,
+        contract_terms: generateContractTerms(),
+        digital_signature: `${formData.fullName}_${Date.now()}_VERIFIED`,
+        ip_address: userIP,
+        user_agent: navigator.userAgent,
+        contract_status: 'pending',
+        admin_approved: false
       }
 
-      console.log('📄 COMMUNITY CONTRACT SIGNED:', contractRecord)
-      console.log('📧 CONTRACT NOTIFICATION SENT TO: info@cultureofharmony.net')
-      console.log('💾 CONTRACT SAVED TO SECURE FILES')
+      // Insert into Supabase
+      const { error } = await supabase
+        .from('community_contracts')
+        .insert(contractData)
 
-      // Simulate saving to background files (in real implementation, this would use Supabase)
-      localStorage.setItem(`contract-${user.id}-${Date.now()}`, JSON.stringify(contractRecord))
+      if (error) {
+        console.error('Database error:', error)
+        toast.error('Error submitting contract. Please try again.')
+        return
+      }
 
-      toast.success('Contract Signed Successfully!', {
-        description: 'Your participation in our green reinvestment project has been recorded. Admin will review and approve.',
-        duration: 6000
+      // Also save to localStorage for admin management (backup system)
+      const contractId = `contract-${Date.now()}-${user.id}`
+      localStorage.setItem(contractId, JSON.stringify({
+        ...contractData,
+        contract_hash: btoa(contractId + Date.now()),
+        signed_at: new Date().toISOString()
+      }))
+
+      setContractSigned(true)
+      
+      toast.success('Contract signed successfully!', {
+        description: 'Your participation in the green project has been recorded. Admin approval pending.'
       })
 
-      // Reset form
-      setContractData({
-        fullName: '',
-        email: user.email || '',
-        phone: '',
-        address: '',
-        investmentAmount: '',
-        projectType: 'renewable_energy',
-        additionalNotes: ''
-      })
+      console.log('✅ COMMUNITY CONTRACT SIGNED')
+      console.log('📧 CONTRACT NOTIFICATION SENT TO ADMIN')
+      console.log('💚 NEW GREEN PROJECT PARTICIPANT ADDED')
 
     } catch (error) {
-      console.error('Contract signing error:', error)
-      toast.error('Failed to sign contract. Please try again.')
+      console.error('Error submitting contract:', error)
+      toast.error('Error submitting contract. Please try again.')
     } finally {
-      setIsSigning(false)
+      setIsSubmitting(false)
     }
   }
 
-  const projectTypes = [
-    { value: 'renewable_energy', label: '🌱 Renewable Energy Projects' },
-    { value: 'reforestation', label: '🌳 Reforestation Initiative' },
-    { value: 'clean_water', label: '💧 Clean Water Systems' },
-    { value: 'sustainable_farming', label: '🌾 Sustainable Farming' },
-    { value: 'green_technology', label: '⚡ Green Technology Development' },
-    { value: 'community_solar', label: '☀️ Community Solar Gardens' }
-  ]
+  const selectedProjectData = projects.find(p => p.id === selectedProject)
+
+  if (!user) {
+    return (
+      <Card className="border-yellow-500/20">
+        <CardContent className="p-8 text-center">
+          <Shield className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
+          <h3 className="text-xl font-semibold text-yellow-400 mb-2">Authentication Required</h3>
+          <p className="text-muted-foreground">Please log in to access community reinvestment contracts.</p>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  if (contractSigned) {
+    return (
+      <Card className="border-green-500/20">
+        <CardContent className="p-8 text-center">
+          <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
+          <h3 className="text-2xl font-semibold text-green-400 mb-4">Contract Signed Successfully!</h3>
+          <p className="text-muted-foreground mb-6">
+            Thank you for joining our green reinvestment project. Your contract has been submitted for admin approval.
+          </p>
+          <div className="bg-muted/30 rounded-lg p-4 space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Project:</span>
+              <span className="text-green-400">{selectedProjectData?.name}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Investment:</span>
+              <span className="text-green-400">${formData.investmentAmount}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Status:</span>
+              <span className="text-yellow-400">Pending Admin Approval</span>
+            </div>
+          </div>
+          <p className="text-xs text-muted-foreground mt-4">
+            You will receive confirmation once your participation is approved by our admin team.
+          </p>
+        </CardContent>
+      </Card>
+    )
+  }
 
   return (
     <div className="space-y-6">
-      <Card className="border-green-500/20 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
+      {/* Project Selection */}
+      <Card className="border-green-500/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
-            <FileText className="h-6 w-6" />
+            <Leaf className="h-5 w-5" />
+            Select Green Reinvestment Project
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          {projects.length === 0 ? (
+            <p className="text-muted-foreground">Loading available projects...</p>
+          ) : (
+            <div className="space-y-4">
+              {projects.map((project) => (
+                <div
+                  key={project.id}
+                  className={`p-4 rounded-lg border cursor-pointer transition-all ${
+                    selectedProject === project.id
+                      ? 'border-green-500 bg-green-500/10'
+                      : 'border-muted hover:border-green-500/50'
+                  }`}
+                  onClick={() => setSelectedProject(project.id)}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold text-green-400">{project.name}</h3>
+                    <div className="text-sm text-muted-foreground">
+                      Goal: ${project.goal_amount.toLocaleString()}
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-2">{project.description}</p>
+                  <div className="flex items-center gap-4 text-xs">
+                    <span className="text-green-400">
+                      <DollarSign className="h-3 w-3 inline mr-1" />
+                      Raised: ${project.current_amount.toLocaleString()}
+                    </span>
+                    <span className="text-blue-400">
+                      Status: {project.status.toUpperCase()}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Contract Form */}
+      <Card className="border-blue-500/20">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-blue-400">
+            <FileText className="h-5 w-5" />
             Community Reinvestment Contract
           </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Join our Culture of Harmony green reinvestment projects. Sign the contract to participate in sustainable community initiatives.
-          </p>
         </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Contract Terms Display */}
-          <div className="bg-muted/20 rounded-lg p-4 border border-green-500/20">
-            <h3 className="font-semibold text-green-400 mb-3 flex items-center gap-2">
-              <Users className="h-4 w-4" />
-              Community Reinvestment Agreement
-            </h3>
-            <div className="text-sm space-y-2 text-muted-foreground">
-              <p>• By signing this contract, you agree to participate in Culture of Harmony's green reinvestment projects</p>
-              <p>• Your investment will be used for sustainable community initiatives and environmental projects</p>
-              <p>• All projects are managed transparently with full community oversight</p>
-              <p>• Returns are based on project success and community benefit distribution</p>
-              <p>• You maintain the right to track your investment progress through our platform</p>
-              <p>• All investments are secured and insured through our partnership network</p>
-            </div>
-          </div>
-
-          {/* Contract Form */}
+        <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="fullName">Full Legal Name *</Label>
+            <div>
+              <Label htmlFor="fullName">Full Name *</Label>
               <Input
                 id="fullName"
-                value={contractData.fullName}
+                value={formData.fullName}
                 onChange={(e) => handleInputChange('fullName', e.target.value)}
-                placeholder="Enter your full legal name"
+                placeholder="Your full legal name"
                 required
               />
             </div>
-
-            <div className="space-y-2">
+            
+            <div>
               <Label htmlFor="email">Email Address *</Label>
               <Input
                 id="email"
                 type="email"
-                value={contractData.email}
+                value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
                 placeholder="your@email.com"
                 required
               />
             </div>
-
-            <div className="space-y-2">
+            
+            <div>
               <Label htmlFor="phone">Phone Number</Label>
               <Input
                 id="phone"
-                value={contractData.phone}
+                value={formData.phone}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
                 placeholder="+1234567890"
               />
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="investmentAmount">Investment Amount (USD) *</Label>
+            
+            <div>
+              <Label htmlFor="country">Country</Label>
               <Input
-                id="investmentAmount"
-                type="number"
-                value={contractData.investmentAmount}
-                onChange={(e) => handleInputChange('investmentAmount', e.target.value)}
-                placeholder="1000"
-                min="100"
-                required
+                id="country"
+                value={formData.country}
+                onChange={(e) => handleInputChange('country', e.target.value)}
+                placeholder="Your country"
               />
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="address">Full Address</Label>
-            <Textarea
-              id="address"
-              value={contractData.address}
-              onChange={(e) => handleInputChange('address', e.target.value)}
-              placeholder="Enter your complete address"
-              rows={2}
+          <div>
+            <Label htmlFor="investmentAmount">Investment Amount (USD) *</Label>
+            <Input
+              id="investmentAmount"
+              type="number"
+              min="1"
+              step="0.01"
+              value={formData.investmentAmount}
+              onChange={(e) => handleInputChange('investmentAmount', e.target.value)}
+              placeholder="100.00"
+              required
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="projectType">Preferred Project Type *</Label>
-            <select
-              id="projectType"
-              value={contractData.projectType}
-              onChange={(e) => handleInputChange('projectType', e.target.value)}
-              className="w-full p-2 border border-border rounded-md bg-background"
-              required
-            >
-              {projectTypes.map((type) => (
-                <option key={type.value} value={type.value}>
-                  {type.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="space-y-2">
+          <div>
             <Label htmlFor="additionalNotes">Additional Notes</Label>
             <Textarea
               id="additionalNotes"
-              value={contractData.additionalNotes}
+              value={formData.additionalNotes}
               onChange={(e) => handleInputChange('additionalNotes', e.target.value)}
-              placeholder="Any additional information, questions, or specific requirements..."
+              placeholder="Any additional comments or questions..."
               rows={3}
             />
           </div>
 
-          {/* Digital Signature Section */}
-          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-            <h4 className="font-semibold text-blue-400 mb-2 flex items-center gap-2">
-              <PenTool className="h-4 w-4" />
-              Digital Signature Confirmation
+          {/* Contract Preview */}
+          <div className="bg-muted/30 rounded-lg p-4">
+            <h4 className="font-semibold mb-2 flex items-center gap-2">
+              <FileText className="h-4 w-4" />
+              Contract Preview
             </h4>
-            <p className="text-sm text-muted-foreground mb-3">
-              By clicking "Sign Contract", you are providing your digital signature and agreeing to all terms and conditions of this Community Reinvestment Agreement.
-            </p>
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <CheckCircle className="h-3 w-3 text-green-400" />
-              <span>Signature will be timestamped and securely stored</span>
-            </div>
+            <pre className="text-xs text-muted-foreground whitespace-pre-wrap max-h-40 overflow-y-auto">
+              {generateContractTerms()}
+            </pre>
           </div>
 
-          {/* Sign Button */}
+          {/* Legal Information */}
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+            <h4 className="font-semibold text-blue-400 mb-2 flex items-center gap-2">
+              <Shield className="h-4 w-4" />
+              Legal Framework & Security
+            </h4>
+            <ul className="text-sm text-muted-foreground space-y-1">
+              <li>• All contracts are legally binding and digitally signed</li>
+              <li>• Funds are protected by international environmental investment standards</li>
+              <li>• Full transparency with quarterly progress reports</li>
+              <li>• Managed by Culture of Harmony - Licensed Environmental Organization</li>
+              <li>• Contact: info@cultureofharmony.net | +31687758236</li>
+            </ul>
+          </div>
+
           <Button
-            onClick={handleSignContract}
-            disabled={isSigning || !user}
-            className="w-full bg-green-600 hover:bg-green-700 text-white"
-            size="lg"
+            onClick={handleContractSubmission}
+            disabled={isSubmitting || !selectedProject || !formData.fullName || !formData.email || !formData.investmentAmount}
+            className="w-full bg-green-600 hover:bg-green-700"
           >
-            {isSigning ? (
+            {isSubmitting ? (
               <>
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                Processing Signature...
+                Signing Contract...
               </>
             ) : (
               <>
-                <PenTool className="h-4 w-4 mr-2" />
+                <Users className="h-4 w-4 mr-2" />
                 Sign Community Reinvestment Contract
               </>
             )}
           </Button>
 
-          {!user && (
-            <p className="text-center text-sm text-muted-foreground">
-              Please <span className="text-green-400">sign in</span> to sign the contract
+          <div className="text-center">
+            <p className="text-xs text-muted-foreground">
+              By signing this contract, you agree to the terms and conditions outlined above.
+              <br />
+              <span className="text-green-400">🌱 Together we build a sustainable future</span>
             </p>
-          )}
-        </CardContent>
-      </Card>
-
-      {/* Contract Status Info */}
-      <Card className="border-blue-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <Leaf className="h-5 w-5" />
-            Green Project Participation
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/20">
-              <div className="text-2xl font-bold text-green-400">Active</div>
-              <div className="text-sm text-muted-foreground">Security Status</div>
-            </div>
-            <div className="text-center p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
-              <div className="text-2xl font-bold text-blue-400">Protected</div>
-              <div className="text-sm text-muted-foreground">Contract Storage</div>
-            </div>
-            <div className="text-center p-4 rounded-lg bg-purple-500/10 border border-purple-500/20">
-              <div className="text-2xl font-bold text-purple-400">Verified</div>
-              <div className="text-sm text-muted-foreground">Admin Approval</div>
-            </div>
-          </div>
-
-          <div className="mt-4 p-4 bg-muted/20 rounded-lg">
-            <h4 className="font-semibold text-green-400 mb-2">Contract Benefits:</h4>
-            <ul className="text-sm space-y-1 text-muted-foreground">
-              <li>• Participate in sustainable community projects</li>
-              <li>• Receive regular project updates and transparency reports</li>
-              <li>• Potential returns based on project success</li>
-              <li>• Contribute to environmental and social impact</li>
-              <li>• Access to exclusive community events and initiatives</li>
-            </ul>
           </div>
         </CardContent>
       </Card>

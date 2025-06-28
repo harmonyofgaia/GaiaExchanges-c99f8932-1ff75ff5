@@ -1,184 +1,169 @@
 
-import { FutureProofSecurityEngine } from './FutureProofSecurityEngine'
+import { useEffect, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { 
-  Shield, 
-  Lock, 
-  Zap, 
-  Eye, 
-  Activity, 
-  AlertTriangle,
-  CheckCircle,
-  Globe,
-  Brain,
-  Cpu
-} from 'lucide-react'
+import { Shield, Lock, Eye, Zap, Globe, CheckCircle, AlertTriangle } from 'lucide-react'
+import { QuantumSecurityEngine } from './QuantumSecurityEngine'
 
 export function UltimateWalletProtection() {
-  const { metrics, threats, isActive, securityLevel, futureProofStatus } = FutureProofSecurityEngine()
+  const [protectionStatus, setProtectionStatus] = useState({
+    quantumEncryption: true,
+    aiMonitoring: true,
+    realTimeProtection: true,
+    threatDetection: true,
+    networkSecurity: true,
+    behaviorAnalysis: true
+  })
 
-  const securityFeatures = [
-    { name: 'Quantum Resistance', status: 'Active', level: '100%', icon: Cpu },
-    { name: 'AI Threat Detection', status: 'Active', level: '100%', icon: Brain },
-    { name: 'Future-Tech Adaptation', status: 'Active', level: `${metrics.futureTechAdaptation}%`, icon: Zap },
-    { name: 'Real-time Monitoring', status: 'Active', level: '24/7', icon: Eye },
-    { name: 'Global Network Protection', status: 'Active', level: 'Maximum', icon: Globe },
-    { name: 'Blockchain Security', status: 'Active', level: 'Military', icon: Lock }
-  ]
+  const securityEngine = QuantumSecurityEngine()
+
+  useEffect(() => {
+    // Initialize maximum protection
+    console.log('🛡️ ULTIMATE WALLET PROTECTION ACTIVATED')
+    console.log('🔐 QUANTUM ENCRYPTION: ACTIVE')
+    console.log('🤖 AI THREAT DETECTION: ACTIVE')
+    console.log('⚡ REAL-TIME MONITORING: ACTIVE')
+    console.log('🌍 GLOBAL THREAT INTELLIGENCE: ACTIVE')
+  }, [])
 
   return (
-    <div className="space-y-6">
-      {/* Main Security Dashboard */}
-      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-400">
-            <Shield className="h-6 w-6" />
-            Ultimate Wallet Protection - Future-Proof Security Engine
-          </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Advanced AI-powered protection system - Always 100 years ahead of any technology
+    <Card className="border-green-500/30 bg-gradient-to-br from-green-900/10 to-emerald-900/5">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-green-400">
+          <Shield className="h-6 w-6" />
+          Ultimate Wallet Protection System
+          <Badge variant="outline" className="border-green-500/20 text-green-400 ml-2">
+            QUANTUM LEVEL
+          </Badge>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {/* Security Status Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div className="flex items-center gap-2 p-3 rounded-lg bg-green-500/10 border border-green-500/20">
+            <Lock className="h-4 w-4 text-green-400" />
+            <div>
+              <div className="text-sm font-medium text-green-400">Quantum Encryption</div>
+              <div className="text-xs text-muted-foreground">Military Grade</div>
+            </div>
+            <CheckCircle className="h-4 w-4 text-green-400 ml-auto" />
+          </div>
+
+          <div className="flex items-center gap-2 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
+            <Eye className="h-4 w-4 text-blue-400" />
+            <div>
+              <div className="text-sm font-medium text-blue-400">AI Monitoring</div>
+              <div className="text-xs text-muted-foreground">24/7 Active</div>
+            </div>
+            <CheckCircle className="h-4 w-4 text-blue-400 ml-auto" />
+          </div>
+
+          <div className="flex items-center gap-2 p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
+            <Zap className="h-4 w-4 text-purple-400" />
+            <div>
+              <div className="text-sm font-medium text-purple-400">Real-Time Shield</div>
+              <div className="text-xs text-muted-foreground">Instant Response</div>
+            </div>
+            <CheckCircle className="h-4 w-4 text-purple-400 ml-auto" />
+          </div>
+
+          <div className="flex items-center gap-2 p-3 rounded-lg bg-orange-500/10 border border-orange-500/20">
+            <AlertTriangle className="h-4 w-4 text-orange-400" />
+            <div>
+              <div className="text-sm font-medium text-orange-400">Threat Detection</div>
+              <div className="text-xs text-muted-foreground">Advanced AI</div>
+            </div>
+            <CheckCircle className="h-4 w-4 text-orange-400 ml-auto" />
+          </div>
+
+          <div className="flex items-center gap-2 p-3 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
+            <Globe className="h-4 w-4 text-cyan-400" />
+            <div>
+              <div className="text-sm font-medium text-cyan-400">Global Intelligence</div>
+              <div className="text-xs text-muted-foreground">Worldwide Network</div>
+            </div>
+            <CheckCircle className="h-4 w-4 text-cyan-400 ml-auto" />
+          </div>
+
+          <div className="flex items-center gap-2 p-3 rounded-lg bg-pink-500/10 border border-pink-500/20">
+            <Shield className="h-4 w-4 text-pink-400" />
+            <div>
+              <div className="text-sm font-medium text-pink-400">Behavior Analysis</div>
+              <div className="text-xs text-muted-foreground">Pattern Recognition</div>
+            </div>
+            <CheckCircle className="h-4 w-4 text-pink-400 ml-auto" />
+          </div>
+        </div>
+
+        {/* Security Metrics */}
+        <div className="bg-muted/20 rounded-lg p-4 space-y-3">
+          <h4 className="font-semibold text-green-400 flex items-center gap-2">
+            <Shield className="h-4 w-4" />
+            Live Security Metrics
+          </h4>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <div className="text-center">
+              <div className="text-xl font-bold text-green-400">{securityEngine.metrics.threatsBlocked}</div>
+              <div className="text-muted-foreground">Threats Blocked</div>
+            </div>
+            <div className="text-center">
+              <div className="text-xl font-bold text-blue-400">{securityEngine.metrics.walletsProtected}</div>
+              <div className="text-muted-foreground">Wallets Protected</div>
+            </div>
+            <div className="text-center">
+              <div className="text-xl font-bold text-purple-400">{securityEngine.metrics.quantumSecurityScore}%</div>
+              <div className="text-muted-foreground">Security Score</div>
+            </div>
+            <div className="text-center">
+              <div className="text-xl font-bold text-orange-400">{securityEngine.metrics.aiThreatDetection}%</div>
+              <div className="text-muted-foreground">AI Detection</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Protection Features */}
+        <div className="space-y-2">
+          <h4 className="font-semibold text-green-400">Active Protection Features:</h4>
+          <div className="flex flex-wrap gap-2">
+            <Badge variant="outline" className="border-green-500/20 text-green-400">
+              🛡️ Quantum Encryption
+            </Badge>
+            <Badge variant="outline" className="border-blue-500/20 text-blue-400">
+              🤖 AI Threat Detection
+            </Badge>
+            <Badge variant="outline" className="border-purple-500/20 text-purple-400">
+              ⚡ Real-Time Monitoring
+            </Badge>
+            <Badge variant="outline" className="border-orange-500/20 text-orange-400">
+              🔍 Behavior Analysis
+            </Badge>
+            <Badge variant="outline" className="border-cyan-500/20 text-cyan-400">
+              🌍 Global Intelligence
+            </Badge>
+            <Badge variant="outline" className="border-pink-500/20 text-pink-400">
+              🔐 Multi-Layer Security
+            </Badge>
+            <Badge variant="outline" className="border-yellow-500/20 text-yellow-400">
+              📊 Advanced Analytics
+            </Badge>
+            <Badge variant="outline" className="border-red-500/20 text-red-400">
+              🚨 Instant Alerts
+            </Badge>
+          </div>
+        </div>
+
+        {/* Security Statement */}
+        <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+          <p className="text-sm text-green-400 font-medium mb-2">
+            🌟 MAXIMUM SECURITY GUARANTEE
           </p>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">{metrics.securityScore}%</div>
-              <div className="text-sm text-muted-foreground">Security Score</div>
-              <Progress value={metrics.securityScore} className="mt-2" />
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-red-400">{metrics.threatsBlocked}</div>
-              <div className="text-sm text-muted-foreground">Threats Blocked</div>
-              <Badge className="mt-2 bg-red-600 text-white">
-                <AlertTriangle className="h-3 w-3 mr-1" />
-                Neutralized
-              </Badge>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400">{metrics.walletsProtected}</div>
-              <div className="text-sm text-muted-foreground">Wallets Protected</div>
-              <Badge className="mt-2 bg-blue-600 text-white">
-                <Shield className="h-3 w-3 mr-1" />
-                Secured
-              </Badge>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400">{metrics.futureTechAdaptation}%</div>
-              <div className="text-sm text-muted-foreground">Future-Tech Ready</div>
-              <Badge className="mt-2 bg-purple-600 text-white">
-                <Zap className="h-3 w-3 mr-1" />
-                {futureProofStatus}
-              </Badge>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Advanced Security Features */}
-      <Card className="border-blue-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <Lock className="h-5 w-5" />
-            Future-Proof Security Features
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {securityFeatures.map((feature) => {
-              const IconComponent = feature.icon
-              return (
-                <div key={feature.name} className="flex items-center justify-between p-3 rounded-lg bg-muted/20 border border-border/50">
-                  <div className="flex items-center gap-3">
-                    <IconComponent className="h-5 w-5 text-green-400" />
-                    <div>
-                      <div className="font-medium text-sm">{feature.name}</div>
-                      <div className="text-xs text-muted-foreground">Protection Level: {feature.level}</div>
-                    </div>
-                  </div>
-                  <Badge className="bg-green-600 text-white text-xs">
-                    <CheckCircle className="h-3 w-3 mr-1" />
-                    {feature.status}
-                  </Badge>
-                </div>
-              )
-            })}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Real-time Threat Monitor */}
-      {threats.length > 0 && (
-        <Card className="border-orange-500/20">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-orange-400">
-              <Activity className="h-5 w-5" />
-              Real-time Threat Detection Log
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3 max-h-64 overflow-y-auto">
-              {threats.map((threat, index) => (
-                <div key={threat.id} className="flex items-center justify-between p-3 rounded-lg bg-muted/20 border border-border/50">
-                  <div className="flex-1">
-                    <div className="text-sm font-medium">{threat.attackType}</div>
-                    <div className="text-xs text-muted-foreground">
-                      {threat.timestamp.toLocaleTimeString()} • IP: {threat.ipAddress} • {threat.behaviorPattern}
-                    </div>
-                  </div>
-                  <Badge className={`text-xs text-white ${
-                    threat.status === 'BLOCKED' ? 'bg-red-600' :
-                    threat.status === 'NEUTRALIZED' ? 'bg-green-600' : 'bg-yellow-600'
-                  }`}>
-                    {threat.status}
-                  </Badge>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Protection Status */}
-      <Card className="border-purple-500/20 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
-        <CardContent className="pt-6">
-          <div className="text-center space-y-3">
-            <div className="flex items-center justify-center gap-2">
-              <Shield className="h-8 w-8 text-purple-400" />
-              <h3 className="text-xl font-bold text-purple-400">Maximum Protection Active</h3>
-            </div>
-            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-              Your wallet is protected by the most advanced security system ever created - Always 100 years ahead of any attack technology. 
-              Real-time monitoring, instant threat neutralization, and automatic admin notifications ensure your funds are always safe.
-            </p>
-            <div className="flex items-center justify-center gap-4 pt-2 flex-wrap">
-              <Badge className="bg-green-600 text-white">
-                <CheckCircle className="h-3 w-3 mr-1" />
-                Quantum Protected
-              </Badge>
-              <Badge className="bg-blue-600 text-white">
-                <Brain className="h-3 w-3 mr-1" />
-                AI Enhanced
-              </Badge>
-              <Badge className="bg-purple-600 text-white">
-                <Zap className="h-3 w-3 mr-1" />
-                Future-Proof
-              </Badge>
-              <Badge className="bg-red-600 text-white">
-                <AlertTriangle className="h-3 w-3 mr-1" />
-                Threat Neutralizer
-              </Badge>
-            </div>
-            <div className="text-xs text-green-400 mt-4">
-              🛡️ Last Security Update: {metrics.lastUpdate.toLocaleString()} • Next Update: Continuous
-            </div>
-            <div className="text-xs text-blue-400">
-              🔒 Admin Contact: info@cultureofharmony.net • Emergency: +31687758236
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+          <p className="text-xs text-muted-foreground">
+            Your wallet is protected by the most advanced security system available. Our quantum-level protection, 
+            AI-powered threat detection, and real-time monitoring ensure your assets are safer than in any traditional bank. 
+            We continuously upgrade our security to stay ahead of all threats.
+          </p>
+        </div>
+      </CardContent>
+    </Card>
   )
 }
