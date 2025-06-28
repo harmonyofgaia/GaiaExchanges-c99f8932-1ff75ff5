@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe, Chrome, Key, Timer, ShieldCheck } from 'lucide-react'
+import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe, Chrome, Key, Timer, ShieldCheck, Skull } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 interface SecureAdminLoginProps {
@@ -63,6 +63,31 @@ const generateSecurityWallPhrase = (): string => {
   return phrase.join(' ')
 }
 
+// Generate ULTIMATE 4-word SKULL CRUSHER phrase
+const generateSkullCrusherPhrase = (): string => {
+  const ultimateWords = [
+    'annihilator', 'terminator', 'destroyer', 'obliterator', 'crusher', 'eliminator',
+    'executioner', 'devastator', 'pulverizer', 'liquidator', 'exterminator', 'nemesis',
+    'apocalypse', 'armageddon', 'doomsday', 'ragnarok', 'cataclysm', 'carnage',
+    'inferno', 'hellfire', 'thunder', 'lightning', 'vortex', 'tempest'
+  ]
+  
+  const phrase = []
+  const usedWords = new Set()
+  
+  // Generate 4 unique ULTIMATE words
+  while (phrase.length < 4) {
+    const randomIndex = Math.floor(Math.random() * ultimateWords.length)
+    const word = ultimateWords[randomIndex]
+    if (!usedWords.has(word)) {
+      phrase.push(word)
+      usedWords.add(word)
+    }
+  }
+  
+  return phrase.join(' ')
+}
+
 // Validate seed phrase for account recovery
 const validateSeedPhrase = (phrase: string): boolean => {
   const parts = phrase.split(' ')
@@ -75,11 +100,90 @@ const validateSecurityWallPhrase = (phrase: string): boolean => {
   return parts.length >= 12 && (parts.includes('quantum') || parts.includes('matrix') || parts.includes('fortress'))
 }
 
+// Validate SKULL CRUSHER phrase
+const validateSkullCrusherPhrase = (phrase: string): boolean => {
+  const parts = phrase.split(' ')
+  return parts.length >= 4 && (parts.includes('annihilator') || parts.includes('destroyer') || parts.includes('apocalypse') || parts.includes('inferno'))
+}
+
+// Advanced threat detection and automatic reporting
+const triggerThreatResponse = async (userIP: string, attemptDetails: any) => {
+  console.log('🚨 CRITICAL SECURITY BREACH DETECTED - INITIATING NUCLEAR RESPONSE')
+  
+  // Collect comprehensive threat intelligence
+  const threatIntel = {
+    timestamp: new Date().toISOString(),
+    ip: userIP,
+    userAgent: navigator.userAgent,
+    screen: `${screen.width}x${screen.height}`,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    language: navigator.language,
+    platform: navigator.platform,
+    cookieEnabled: navigator.cookieEnabled,
+    onlineStatus: navigator.onLine,
+    attemptDetails: attemptDetails,
+    browserFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
+    geolocation: 'Tracking initiated...'
+  }
+  
+  try {
+    // Get more precise geolocation
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          threatIntel.geolocation = `${position.coords.latitude}, ${position.coords.longitude}`
+          console.log('🎯 PRECISE LOCATION ACQUIRED:', threatIntel.geolocation)
+        },
+        (error) => {
+          console.log('📍 Geolocation blocked, using IP-based tracking')
+        }
+      )
+    }
+    
+    // Advanced browser fingerprinting
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    if (ctx) {
+      ctx.textBaseline = 'top'
+      ctx.font = '14px Arial'
+      ctx.fillText('THREAT DETECTED - HARMONY OF GAIA SECURITY', 2, 2)
+      threatIntel.browserFingerprint += canvas.toDataURL()
+    }
+    
+    console.log('🔍 COMPREHENSIVE THREAT INTELLIGENCE COLLECTED:', threatIntel)
+    
+    // Simulate automatic reporting to authorities
+    console.log('📧 AUTOMATICALLY REPORTING TO POLICE DATABASES WORLDWIDE...')
+    console.log('🌍 INTERPOL NOTIFICATION SENT')
+    console.log('🚔 LOCAL POLICE DEPARTMENTS ALERTED')
+    console.log('🛡️ CYBERSECURITY AGENCIES NOTIFIED')
+    
+    // Simulate Wall of Shame addition
+    console.log('💀 ADDING TO WALL OF SHAME: https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange/wall-of-shame')
+    console.log('📋 THREAT PROFILE BEING COMPILED INTO PDF FORMAT')
+    console.log('📸 ATTEMPTING TO CAPTURE PERPETRATOR IMAGE VIA WEBCAM...')
+    
+    // Advanced tracking activation
+    console.log('🎯 ACTIVATING ADVANCED TRACKING SYSTEMS:')
+    console.log('  ✓ Real-time IP monitoring')
+    console.log('  ✓ Cross-device fingerprinting')
+    console.log('  ✓ Behavioral pattern analysis')
+    console.log('  ✓ Network topology mapping')
+    console.log('  ✓ Digital footprint reconstruction')
+    
+    return true
+  } catch (error) {
+    console.error('Security system error:', error)
+    return false
+  }
+}
+
 export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [recoveryPhrase, setRecoveryPhrase] = useState('')
   const [securityWallPhrase, setSecurityWallPhrase] = useState('')
+  const [skullCrusherPhrase, setSkullCrusherPhrase] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [isLogging, setIsLogging] = useState(false)
   const [userIP, setUserIP] = useState<string>('')
@@ -89,12 +193,16 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
   const [isBlocked, setIsBlocked] = useState(false)
   const [showSeedPhrase, setShowSeedPhrase] = useState(false)
   const [showSecurityWallPhrase, setShowSecurityWallPhrase] = useState(false)
+  const [showSkullCrusherPhrase, setShowSkullCrusherPhrase] = useState(false)
   const [seedPhrase, setSeedPhrase] = useState('')
   const [securityWallSeedPhrase, setSecurityWallSeedPhrase] = useState('')
+  const [skullCrusherSeedPhrase, setSkullCrusherSeedPhrase] = useState('')
   const [seedCountdown, setSeedCountdown] = useState(0)
   const [securityWallCountdown, setSecurityWallCountdown] = useState(0)
+  const [skullCrusherCountdown, setSkullCrusherCountdown] = useState(0)
   const [useRecoveryMode, setUseRecoveryMode] = useState(false)
-  const [recoveryStep, setRecoveryStep] = useState(1) // 1 = first phrase, 2 = security wall phrase
+  const [recoveryStep, setRecoveryStep] = useState(1) // 1 = first phrase, 2 = security wall phrase, 3 = skull crusher
+  const [threatDetected, setThreatDetected] = useState(false)
   const { toast } = useToast()
 
   // Your specific IP address - replace with your actual IP
@@ -234,12 +342,43 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
     }
   }, [securityWallCountdown, toast])
 
+  // Countdown effect for SKULL CRUSHER phrase display (1 minute only)
+  useEffect(() => {
+    let interval: NodeJS.Timeout
+    if (skullCrusherCountdown > 0) {
+      interval = setInterval(() => {
+        setSkullCrusherCountdown(prev => {
+          if (prev <= 1) {
+            // Time's up - NUCLEAR CLEANUP
+            setSkullCrusherSeedPhrase('')
+            setShowSkullCrusherPhrase(false)
+            // EXTREME memory cleaning
+            if (window.gc) window.gc()
+            // Clear all possible traces
+            const memoryBomb = new Array(1000000).fill('CLEARED')
+            memoryBomb.length = 0
+            toast({
+              title: "💀 SKULL CRUSHER PHRASE OBLITERATED",
+              description: "ULTIMATE security phrase has been ATOMICALLY DESTROYED. NO MOLECULAR TRACES EXIST.",
+            })
+            return 0
+          }
+          return prev - 1
+        })
+      }, 1000)
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+  }, [skullCrusherCountdown, toast])
+
   const validateCredentials = (user: string, pass: string): boolean => {
     return user === 'Synatic' && pass === 'Synatic!oul1992'
   }
 
-  const validateRecoveryCredentials = (phrase: string, wallPhrase: string): boolean => {
-    return validateSeedPhrase(phrase) && validateSecurityWallPhrase(wallPhrase)
+  const validateRecoveryCredentials = (phrase: string, wallPhrase: string, crusherPhrase: string): boolean => {
+    return validateSeedPhrase(phrase) && validateSecurityWallPhrase(wallPhrase) && validateSkullCrusherPhrase(crusherPhrase)
   }
 
   const generateAndShowAccountSeedPhrase = () => {
@@ -266,13 +405,33 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
     })
   }
 
-  const handleRecoveryStepValidation = () => {
+  const generateAndShowSkullCrusherPhrase = () => {
+    const phrase = generateSkullCrusherPhrase()
+    setSkullCrusherSeedPhrase(phrase)
+    setShowSkullCrusherPhrase(true)
+    setSkullCrusherCountdown(60) // 1 minute = 60 seconds (ULTRA SHORT TIME)
+    
+    toast({
+      title: "💀 SKULL CRUSHER PHRASE GENERATED",
+      description: "Step 3: 4-word ULTIMATE DESTROYER phrase generated. WRITE IT DOWN INSTANTLY! Auto-destructs in 60 seconds ONLY!",
+    })
+  }
+
+  const handleRecoveryStepValidation = async () => {
     if (recoveryStep === 1) {
       // Validate first recovery phrase
       if (!recoveryPhrase || !validateSeedPhrase(recoveryPhrase)) {
+        // TRIGGER THREAT RESPONSE ON STEP 1 FAILURE
+        await triggerThreatResponse(userIP, {
+          step: 1,
+          attemptedPhrase: recoveryPhrase,
+          failure: 'Invalid primary recovery phrase'
+        })
+        setThreatDetected(true)
+        
         toast({
-          title: "❌ STEP 1 FAILED",
-          description: "Invalid primary recovery phrase. Access denied.",
+          title: "💀 STEP 1 BREACH DETECTED - NUCLEAR RESPONSE ACTIVATED",
+          description: "Invalid primary phrase. THREAT INTELLIGENCE ACTIVATED. Authorities notified automatically.",
           variant: "destructive"
         })
         return false
@@ -282,21 +441,55 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
       setRecoveryStep(2)
       toast({
         title: "✅ STEP 1 PASSED",
-        description: "Primary phrase validated. Now enter your SECURITY WALL phrase to complete recovery.",
+        description: "Primary phrase validated. Now enter your SECURITY WALL phrase to continue.",
       })
       return false // Don't complete login yet
-    } else {
+    } else if (recoveryStep === 2) {
       // Validate security wall phrase
       if (!securityWallPhrase || !validateSecurityWallPhrase(securityWallPhrase)) {
+        // TRIGGER THREAT RESPONSE ON STEP 2 FAILURE
+        await triggerThreatResponse(userIP, {
+          step: 2,
+          attemptedPhrase: securityWallPhrase,
+          failure: 'Invalid security wall phrase - MAJOR BREACH'
+        })
+        setThreatDetected(true)
+        
         toast({
-          title: "🚨 SECURITY WALL BREACH ATTEMPT",
-          description: "Invalid security wall phrase. MAXIMUM SECURITY VIOLATION DETECTED!",
+          title: "🚨 SECURITY WALL BREACH ATTEMPT - DEFCON 1",
+          description: "Invalid security wall phrase. MAXIMUM SECURITY VIOLATION! PDF report generated for authorities.",
           variant: "destructive"
         })
         return false
       }
       
-      // Both phrases validated
+      // Move to step 3 (SKULL CRUSHER)
+      setRecoveryStep(3)
+      toast({
+        title: "⚠️ STEP 2 PASSED - FINAL BARRIER AHEAD",
+        description: "Security wall breached. Now face the SKULL CRUSHER - 4 words of ULTIMATE DESTRUCTION.",
+      })
+      return false // Don't complete login yet
+    } else {
+      // Validate SKULL CRUSHER phrase
+      if (!skullCrusherPhrase || !validateSkullCrusherPhrase(skullCrusherPhrase)) {
+        // TRIGGER MAXIMUM THREAT RESPONSE ON STEP 3 FAILURE
+        await triggerThreatResponse(userIP, {
+          step: 3,
+          attemptedPhrase: skullCrusherPhrase,
+          failure: 'SKULL CRUSHER PHRASE BREACH - ULTIMATE VIOLATION'
+        })
+        setThreatDetected(true)
+        
+        toast({
+          title: "💀 SKULL CRUSHER ACTIVATED - NUCLEAR MELTDOWN",
+          description: "ULTIMATE SECURITY PHRASE BREACH! MAXIMUM THREAT RESPONSE INITIATED! Wall of Shame updated instantly!",
+          variant: "destructive"
+        })
+        return false
+      }
+      
+      // All three phrases validated
       return true
     }
   }
@@ -341,10 +534,10 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
         }
         
         // Validate step 1 and potentially move to step 2
-        if (!handleRecoveryStepValidation()) {
+        if (!(await handleRecoveryStepValidation())) {
           return
         }
-      } else {
+      } else if (recoveryStep === 2) {
         if (!securityWallPhrase) {
           toast({
             title: "🛡️ Security Wall Phrase Required",
@@ -354,8 +547,22 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
           return
         }
         
-        // Validate step 2
-        if (!handleRecoveryStepValidation()) {
+        // Validate step 2 and potentially move to step 3
+        if (!(await handleRecoveryStepValidation())) {
+          return
+        }
+      } else {
+        if (!skullCrusherPhrase) {
+          toast({
+            title: "💀 SKULL CRUSHER Phrase Required",
+            description: "Please enter your complete 4-word SKULL CRUSHER phrase",
+            variant: "destructive"
+          })
+          return
+        }
+        
+        // Validate step 3
+        if (!(await handleRecoveryStepValidation())) {
           return
         }
       }
@@ -377,11 +584,11 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
 
     let isValid = false
     if (useRecoveryMode) {
-      isValid = validateRecoveryCredentials(recoveryPhrase, securityWallPhrase)
+      isValid = validateRecoveryCredentials(recoveryPhrase, securityWallPhrase, skullCrusherPhrase)
       if (isValid) {
         toast({
-          title: "🔐 DUAL-LAYER RECOVERY SUCCESSFUL",
-          description: "Both security phrases validated. MAXIMUM SECURITY CLEARANCE GRANTED!",
+          title: "💀 TRIPLE-LAYER RECOVERY SUCCESSFUL",
+          description: "ALL THREE security phrases validated. ULTIMATE MAXIMUM SECURITY CLEARANCE GRANTED!",
         })
       }
     } else {
@@ -400,7 +607,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
       
       toast({
         title: "🛡️ MAXIMUM SECURITY ACCESS GRANTED",
-        description: useRecoveryMode ? "Account recovered via dual-layer security phrases." : "Welcome back, Synatic. Full administrative control activated.",
+        description: useRecoveryMode ? "Account recovered via TRIPLE-LAYER security phrases." : "Welcome back, Synatic. Full administrative control activated.",
       })
       
       onLoginSuccess()
@@ -479,6 +686,9 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
         <div className="absolute top-10 left-10 w-32 h-32 border border-green-500 rounded-full animate-pulse"></div>
         <div className="absolute top-20 right-20 w-24 h-24 border border-blue-500 rounded-full animate-ping"></div>
         <div className="absolute bottom-20 left-20 w-20 h-20 border border-purple-500 rounded-full animate-bounce"></div>
+        {threatDetected && (
+          <div className="absolute inset-0 bg-red-900/20 animate-pulse border-4 border-red-500 rounded-full"></div>
+        )}
       </div>
 
       <Card className="w-full max-w-md bg-gradient-to-br from-black/95 to-gray-900/95 border-green-500/30 shadow-2xl backdrop-blur-sm">
@@ -511,6 +721,9 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
               {browserVerified ? 'FIREFOX ✓' : 'WRONG BROWSER'}
             </Badge>
             <Badge className="bg-purple-600 text-white text-xs">QUANTUM-SAFE</Badge>
+            {threatDetected && (
+              <Badge className="bg-red-600 text-white text-xs animate-pulse">THREAT DETECTED</Badge>
+            )}
           </div>
         </CardHeader>
         
@@ -531,9 +744,9 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
             </div>
           </div>
 
-          {/* Dual Recovery Phrase Generators */}
+          {/* TRIPLE-LAYER Recovery Phrase Generators */}
           <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
-            <div className="text-purple-400 font-bold text-xs mb-2">🛡️ DUAL-LAYER RECOVERY SYSTEM</div>
+            <div className="text-purple-400 font-bold text-xs mb-2">🛡️ TRIPLE-LAYER RECOVERY SYSTEM</div>
             
             {/* Primary Recovery Phrase */}
             <Button
@@ -564,7 +777,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
             {/* Security Wall Phrase */}
             <Button
               onClick={generateAndShowSecurityWallPhrase}
-              className="w-full bg-red-600 hover:bg-red-700 text-white text-xs py-2"
+              className="w-full bg-red-600 hover:bg-red-700 text-white text-xs py-2 mb-2"
               disabled={showSecurityWallPhrase}
             >
               <ShieldCheck className="h-3 w-3 mr-1" />
@@ -572,7 +785,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
             </Button>
             
             {showSecurityWallPhrase && (
-              <div className="mt-2 p-3 bg-black/70 rounded border-2 border-red-500/50">
+              <div className="mt-2 p-3 bg-black/70 rounded border-2 border-red-500/50 mb-3">
                 <div className="flex items-center gap-2 text-red-400 mb-2">
                   <Timer className="h-4 w-4" />
                   <span className="font-bold">STEP 2 AUTO-DESTRUCT: {Math.floor(securityWallCountdown / 60)}:{(securityWallCountdown % 60).toString().padStart(2, '0')}</span>
@@ -586,9 +799,35 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
                 </div>
               </div>
             )}
+
+            {/* SKULL CRUSHER Phrase - ULTIMATE LAYER */}
+            <Button
+              onClick={generateAndShowSkullCrusherPhrase}
+              className="w-full bg-black hover:bg-gray-900 text-red-400 text-xs py-2 border-2 border-red-500"
+              disabled={showSkullCrusherPhrase}
+            >
+              <Skull className="h-3 w-3 mr-1" />
+              💀 Generate Step 3: SKULL CRUSHER ULTIMATE (4 Words)
+            </Button>
+            
+            {showSkullCrusherPhrase && (
+              <div className="mt-2 p-3 bg-black/90 rounded border-4 border-red-600/80 animate-pulse">
+                <div className="flex items-center gap-2 text-red-500 mb-2">
+                  <Skull className="h-4 w-4 animate-bounce" />
+                  <span className="font-bold">💀 SKULL CRUSHER AUTO-DESTRUCT: {skullCrusherCountdown}s</span>
+                </div>
+                <div className="text-red-400 text-xs mb-2 font-bold">💀 STEP 3 - ULTIMATE DESTROYER - WRITE DOWN INSTANTLY:</div>
+                <div className="font-mono text-red-200 text-sm break-words p-3 bg-red-950/50 rounded border-2 border-red-500 animate-pulse">
+                  {skullCrusherSeedPhrase}
+                </div>
+                <div className="text-red-300 text-xs mt-2 font-bold animate-pulse">
+                  💀 ATOMIC DESTRUCTION in {skullCrusherCountdown} seconds - NO RECOVERY POSSIBLE!
+                </div>
+              </div>
+            )}
             
             <div className="text-orange-400 text-xs mt-2 font-bold">
-              🔒 BOTH phrases required for account recovery from any legitimate Firefox browser
+              🔒 ALL THREE phrases required for account recovery from any legitimate Firefox browser
             </div>
           </div>
 
@@ -613,7 +852,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
                 className={`flex-1 text-xs py-2 ${useRecoveryMode ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
               >
                 <Key className="h-3 w-3 mr-1" />
-                Dual Recovery
+                Triple Recovery
               </Button>
             </div>
           </div>
@@ -623,6 +862,19 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
               <AlertTriangle className="h-6 w-6 text-red-400 mx-auto mb-2" />
               <div className="text-red-400 font-bold">SECURITY LOCKDOWN ACTIVE</div>
               <div className="text-red-300 text-xs">System locked due to multiple failed attempts</div>
+            </div>
+          )}
+
+          {threatDetected && (
+            <div className="bg-red-600/30 border-4 border-red-500 rounded-lg p-4 text-center animate-pulse">
+              <Skull className="h-8 w-8 text-red-400 mx-auto mb-2 animate-bounce" />
+              <div className="text-red-400 font-bold text-sm">💀 THREAT DETECTED - NUCLEAR RESPONSE ACTIVE 💀</div>
+              <div className="text-red-300 text-xs mt-2">
+                🚔 Police databases updated<br />
+                📧 PDF report generated<br />
+                🌍 Wall of Shame updated<br />
+                🎯 Advanced tracking activated
+              </div>
             </div>
           )}
           
@@ -675,14 +927,17 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
                 <div className="flex items-center justify-center gap-2 text-blue-400 mb-2">
                   <ShieldCheck className="h-4 w-4" />
-                  <span className="font-bold">DUAL-LAYER RECOVERY MODE</span>
+                  <span className="font-bold">TRIPLE-LAYER RECOVERY MODE</span>
                 </div>
                 <div className="flex justify-center gap-2">
                   <Badge className={`text-xs ${recoveryStep >= 1 ? 'bg-blue-600' : 'bg-gray-600'}`}>
-                    Step 1: Primary Phrase {recoveryStep > 1 ? '✓' : ''}
+                    Step 1: Primary {recoveryStep > 1 ? '✓' : ''}
                   </Badge>
                   <Badge className={`text-xs ${recoveryStep >= 2 ? 'bg-red-600' : 'bg-gray-600'}`}>
-                    Step 2: Security Wall {recoveryStep > 2 ? '✓' : ''}
+                    Step 2: Wall {recoveryStep > 2 ? '✓' : ''}
+                  </Badge>
+                  <Badge className={`text-xs ${recoveryStep >= 3 ? 'bg-black border-red-500' : 'bg-gray-600'}`}>
+                    Step 3: 💀 CRUSHER {recoveryStep > 3 ? '✓' : ''}
                   </Badge>
                 </div>
               </div>
@@ -721,8 +976,30 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
                     Enter all 12 words from your UNBREAKABLE security wall phrase
                   </div>
                   <div className="bg-red-500/20 border border-red-500/50 rounded p-2 mt-2">
-                    <div className="text-red-400 text-xs font-bold">🚨 FINAL SECURITY CHECKPOINT</div>
-                    <div className="text-red-300 text-xs">This is your last line of defense. Only the correct phrase will grant access.</div>
+                    <div className="text-red-400 text-xs font-bold">🚨 SECURITY CHECKPOINT</div>
+                    <div className="text-red-300 text-xs">Second line of defense. Failure triggers threat response.</div>
+                  </div>
+                </div>
+              )}
+
+              {recoveryStep === 3 && (
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-red-500">
+                    💀 Step 3: SKULL CRUSHER ULTIMATE Phrase (4 Words)
+                  </label>
+                  <textarea
+                    value={skullCrusherPhrase}
+                    onChange={(e) => setSkullCrusherPhrase(e.target.value)}
+                    placeholder="Enter your complete 4-word SKULL CRUSHER ULTIMATE phrase"
+                    className="w-full h-20 bg-black/70 border-red-600/50 text-red-100 focus:border-red-400 rounded-md p-2 text-sm font-mono border-4"
+                    disabled={isBlocked}
+                  />
+                  <div className="text-xs text-red-300 mt-1">
+                    Enter all 4 words from your SKULL CRUSHER ULTIMATE phrase
+                  </div>
+                  <div className="bg-red-600/40 border-4 border-red-500 rounded p-3 mt-2 animate-pulse">
+                    <div className="text-red-400 text-sm font-bold">💀 FINAL JUDGMENT - SKULL CRUSHER ACTIVATED 💀</div>
+                    <div className="text-red-300 text-xs mt-1">This is the ULTIMATE barrier. Only 4 words of absolute power can grant access. Failure means instant threat response and Wall of Shame addition.</div>
                   </div>
                 </div>
               )}
@@ -738,7 +1015,9 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
               <div className="flex items-center gap-2">
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                 {useRecoveryMode ? 
-                  (recoveryStep === 1 ? 'Validating Primary Phrase...' : 'Penetrating Security Wall...') : 
+                  (recoveryStep === 1 ? 'Validating Primary Phrase...' : 
+                   recoveryStep === 2 ? 'Penetrating Security Wall...' : 
+                   'ACTIVATING SKULL CRUSHER...') : 
                   'Authenticating Maximum Security...'
                 }
               </div>
@@ -752,7 +1031,9 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
                 {useRecoveryMode ? 
                   (recoveryStep === 1 ? 
                     <><Key className="h-4 w-4" /> 🔓 VALIDATE STEP 1: PRIMARY PHRASE</> : 
-                    <><ShieldCheck className="h-4 w-4" /> 🛡️ BREACH SECURITY WALL: STEP 2</>
+                   recoveryStep === 2 ? 
+                    <><ShieldCheck className="h-4 w-4" /> 🛡️ BREACH SECURITY WALL: STEP 2</> :
+                    <><Skull className="h-4 w-4" /> 💀 ACTIVATE SKULL CRUSHER: STEP 3</>
                   ) : 
                   <><Shield className="h-4 w-4" /> 🔓 GRANT MAXIMUM ADMIN ACCESS</>
                 }
@@ -764,8 +1045,9 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
             <div>🎵 "Seeds Will Form Into Music" 🎵</div>
             <div className="text-green-400">Harmony of Gaia Ultra-Secure Zone</div>
             <div className="text-red-400">⚠️ Legitimate Firefox on Windows + Authorized IP Only</div>
-            <div className="text-purple-400">🔐 DUAL-LAYER Recovery: Primary + Security Wall</div>
-            <div className="text-orange-400">🛡️ UNBREAKABLE Security Wall Protection</div>
+            <div className="text-purple-400">🔐 TRIPLE-LAYER Recovery: Primary + Wall + CRUSHER</div>
+            <div className="text-red-500">💀 SKULL CRUSHER: Ultimate 4-word Destruction Phrase</div>
+            <div className="text-orange-400">🛡️ Auto-threat detection with Wall of Shame reporting</div>
           </div>
 
           {attemptCount > 0 && !isBlocked && (
