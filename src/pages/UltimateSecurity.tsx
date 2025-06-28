@@ -12,10 +12,10 @@ const UltimateSecurity = () => {
             ULTIMATE SECURITY FORTRESS
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            World's Most Advanced Security System - Always 2 Steps Ahead
+            Exotically Dangerous Hard Defensive System - Always 2 Steps Ahead
           </p>
           <p className="text-sm text-red-400 mt-2">
-            🔒 Unbreachable • Self-Learning • Quantum-Resistant • Future-Proof
+            🔒 Waterclosed • Counter-Attack Ready • IP Banning • System Lockdown • Quantum-Resistant
           </p>
         </div>
 

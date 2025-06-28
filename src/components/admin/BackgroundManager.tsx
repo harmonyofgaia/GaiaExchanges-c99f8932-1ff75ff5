@@ -1,375 +1,186 @@
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { Switch } from '@/components/ui/switch'
-import { Textarea } from '@/components/ui/textarea'
-import { Separator } from '@/components/ui/separator'
-import { Calendar } from "@/components/ui/calendar"
-import { CalendarIcon, CheckCircle2, Copy, ImagePlus, Palette, Shield } from 'lucide-react'
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { cn } from "@/lib/utils"
-import { format } from "date-fns"
-import { useToast } from '@/hooks/use-toast'
 
-interface BackgroundImage {
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Switch } from '@/components/ui/switch'
+import { Badge } from '@/components/ui/badge'
+import { Palette, Sparkles, Zap, Crown, Globe, Heart } from 'lucide-react'
+
+interface CollectedImage {
   id: string
   name: string
   description: string
-  tags: string[]
-  uploadDate: string
-  usageCount: number
-  isActive: boolean
+  artisticValue: string
+  inspiration: string
 }
 
 export function BackgroundManager() {
-  const [backgroundImages, setBackgroundImages] = useState<BackgroundImage[]>([
+  const [currentBackground, setCurrentBackground] = useState('neural-electric')
+  const [reverseButtonVisible, setReverseButtonVisible] = useState(true)
+  const [dailyInspiration, setDailyInspiration] = useState('')
+
+  const collectedImages: CollectedImage[] = [
     {
-      id: 'gaia-forest',
-      name: 'Gaia Forest',
-      description: 'Lush green forest with vibrant wildlife and mystical elements',
-      tags: ['forest', 'nature', 'green', 'wildlife'],
-      uploadDate: '2024-01-15',
-      usageCount: 42,
-      isActive: true
+      id: 'img1',
+      name: 'Neural Synapse Pattern',
+      description: 'Complex branching networks with electric blue pathways',
+      artisticValue: 'High-energy organic flow',
+      inspiration: 'Used for neural background dendrites'
     },
     {
-      id: 'ocean-waves',
-      name: 'Ocean Waves',
-      description: 'Calm ocean waves with a serene sunset and peaceful atmosphere',
-      tags: ['ocean', 'waves', 'sunset', 'peaceful'],
-      uploadDate: '2024-02-01',
-      usageCount: 28,
-      isActive: true
+      id: 'img2', 
+      name: 'Cosmic Web Formation',
+      description: 'Galaxy-like structures with interconnected nodes',
+      artisticValue: 'Universal connectivity theme',
+      inspiration: 'Applied to cosmic trading interfaces'
     },
     {
-      id: 'mountain-peaks',
-      name: 'Mountain Peaks',
-      description: 'Snow-capped mountain peaks with a clear blue sky and majestic view',
-      tags: ['mountain', 'snow', 'peaks', 'majestic'],
-      uploadDate: '2024-02-10',
-      usageCount: 35,
-      isActive: false
+      id: 'img3',
+      name: 'Digital Matrix Flow',
+      description: 'Green cascading code with depth layers',
+      artisticValue: 'Cyberpunk aesthetic energy',
+      inspiration: 'Enhanced security page backgrounds'
     },
     {
-      id: 'starry-night',
-      name: 'Starry Night',
-      description: 'A night sky filled with stars, galaxies, and cosmic wonders',
-      tags: ['stars', 'night', 'galaxy', 'cosmic'],
-      uploadDate: '2024-03-01',
-      usageCount: 58,
-      isActive: true
+      id: 'img4',
+      name: 'Organic Circuit Patterns',
+      description: 'Biological meets technological fusion',
+      artisticValue: 'Harmony of nature and tech',
+      inspiration: 'Bio-tech gaming environments'
     },
     {
-      id: 'desert-oasis',
-      name: 'Desert Oasis',
-      description: 'A hidden oasis in the desert with palm trees, clear water, and exotic wildlife',
-      tags: ['desert', 'oasis', 'palm trees', 'exotic'],
-      uploadDate: '2024-03-15',
-      usageCount: 19,
-      isActive: false
-    }
-  ])
-
-  const [newImage, setNewImage] = useState<Omit<BackgroundImage, 'id' | 'uploadDate' | 'usageCount'>>({
-    name: '',
-    description: '',
-    tags: [],
-    isActive: true
-  })
-
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
-  const [isAddingTag, setIsAddingTag] = useState(false)
-  const [newTag, setNewTag] = useState('')
-  const [date, setDate] = useState<Date | undefined>(new Date())
-  const { toast } = useToast()
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setNewImage(prev => ({ ...prev, [name]: value }))
-  }
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewImage(prev => ({ ...prev, isActive: e.target.checked }))
-  }
-
-  const handleTagInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewTag(e.target.value)
-  }
-
-  const handleAddTag = () => {
-    if (newTag && !selectedTags.includes(newTag)) {
-      setSelectedTags(prev => [...prev, newTag])
-      setNewImage(prev => ({ ...prev, tags: [...prev.tags, newTag] }))
-      setNewTag('')
-      setIsAddingTag(false)
-    }
-  }
-
-  const handleRemoveTag = (tagToRemove: string) => {
-    setSelectedTags(prev => prev.filter(tag => tag !== tagToRemove))
-    setNewImage(prev => ({ ...prev, tags: prev.tags.filter(tag => tag !== tagToRemove) }))
-  }
-
-  const handleCreateImage = () => {
-    if (newImage.name && newImage.description) {
-      const newBackgroundImage: BackgroundImage = {
-        id: Date.now().toString(),
-        name: newImage.name,
-        description: newImage.description,
-        tags: newImage.tags,
-        uploadDate: date ? date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-        usageCount: 0,
-        isActive: newImage.isActive
-      }
-      setBackgroundImages(prev => [...prev, newBackgroundImage])
-      setNewImage({ name: '', description: '', tags: [], isActive: true })
-      setSelectedTags([])
-      setDate(undefined)
-      toast({
-        title: "Background Image Created",
-        description: "New background image has been successfully created.",
-      })
-    } else {
-      toast({
-        title: "Error",
-        description: "Please fill in all required fields.",
-        variant: "destructive",
-      })
-    }
-  }
-
-  const exoticDefenseImages = [
-    {
-      id: 'exotic-quantum',
-      name: 'Quantum Defense Matrix',
-      description: 'Exotic quantum encryption patterns for maximum security visualization',
-      tags: ['exotic', 'quantum', 'defense', 'security'],
-      uploadDate: new Date().toISOString().split('T')[0],
-      usageCount: 1,
-      isActive: true
+      id: 'img5',
+      name: 'Quantum Particle Dance',
+      description: 'Subatomic particles in motion',
+      artisticValue: 'Microscopic universe beauty',
+      inspiration: 'Quantum security visualizations'
     },
     {
-      id: 'synatic-power',
-      name: 'Synatic AI Core',
-      description: 'Visual representation of Synatic AI power core and neural pathways',
-      tags: ['synatic', 'ai', 'power', 'neural'],
-      uploadDate: new Date().toISOString().split('T')[0],
-      usageCount: 1,
-      isActive: true
+      id: 'img6',
+      name: 'Ethereal Energy Waves',
+      description: 'Flowing energy with spectral colors',
+      artisticValue: 'Spiritual technological harmony',
+      inspiration: 'Meditation and wellness pages'
+    },
+    {
+      id: 'img7',
+      name: 'Fractal Growth Patterns',
+      description: 'Self-similar expanding structures',
+      artisticValue: 'Infinite creative potential',
+      inspiration: 'Growth and expansion themes'
     }
   ]
 
+  useEffect(() => {
+    const today = new Date().toDateString()
+    const storedDate = localStorage.getItem('dailyInspirationDate')
+    
+    if (storedDate !== today) {
+      const inspirations = [
+        "🎨 Today's energy: Quantum creativity flows through neural pathways of innovation",
+        "✨ Artistic vision: Where technology meets soul, beauty emerges in sacred geometry",
+        "🌟 Creative force: Each pixel carries the DNA of infinite possibility",
+        "🔥 Design spirit: From chaos comes order, from order comes transcendent beauty",
+        "💫 Visual harmony: The universe speaks through color, form, and divine proportion",
+        "🌈 Aesthetic power: Every background tells a story of human-AI collaboration",
+        "⚡ Creative lightning: Innovation strikes when art and code dance together"
+      ]
+      
+      const newInspiration = inspirations[Math.floor(Math.random() * inspirations.length)]
+      setDailyInspiration(newInspiration)
+      localStorage.setItem('dailyInspiration', newInspiration)
+      localStorage.setItem('dailyInspirationDate', today)
+    } else {
+      setDailyInspiration(localStorage.getItem('dailyInspiration') || inspirations[0])
+    }
+  }, [])
+
+  const handleReverseButtonToggle = (checked: boolean) => {
+    setReverseButtonVisible(checked)
+    localStorage.setItem('adminReverseButtonVisible', checked.toString())
+  }
+
   return (
-    <div className="space-y-8">
-      {/* Enhanced Header with Exotic Defense Integration */}
-      <Card className="border-2 border-purple-500/50 bg-gradient-to-r from-purple-900/40 to-blue-900/40">
+    <div className="space-y-6">
+      <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-pink-900/30">
         <CardHeader>
-          <CardTitle className="flex items-center gap-3 text-2xl">
-            <Palette className="h-8 w-8 text-purple-400" />
-            <div>
-              <div className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Enhanced Background Studio
-              </div>
-              <div className="text-sm font-normal text-purple-300">
-                Powered by Exotic Defense System & Synatic AI
-              </div>
-            </div>
+          <CardTitle className="flex items-center gap-2 text-purple-400">
+            <Palette className="h-6 w-6" />
+            Background Design Studio
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">{backgroundImages.length + exoticDefenseImages.length}</div>
-              <div className="text-sm text-muted-foreground">Total Backgrounds</div>
-              <Badge className="mt-2 bg-green-600">Enhanced</Badge>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400">Exotic</div>
-              <div className="text-sm text-muted-foreground">Defense Level</div>
-              <Badge className="mt-2 bg-purple-600">Maximum</Badge>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400">AI</div>
-              <div className="text-sm text-muted-foreground">Synatic Powered</div>
-              <Badge className="mt-2 bg-blue-600">Active</Badge>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-orange-400">∞</div>
-              <div className="text-sm text-muted-foreground">Creative Potential</div>
-              <Badge className="mt-2 bg-orange-600">Unlimited</Badge>
+        <CardContent className="space-y-6">
+          <div className="p-4 rounded-lg bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border border-cyan-500/20">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-2 flex items-center gap-2">
+              <Sparkles className="h-5 w-5" />
+              Daily Creative Inspiration
+            </h3>
+            <p className="text-cyan-200 italic">{dailyInspiration}</p>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+              <Crown className="h-5 w-5 text-yellow-400" />
+              Admin Controls
+            </h3>
+            
+            <div className="flex items-center justify-between p-3 rounded bg-zinc-800/50">
+              <div>
+                <span className="text-white font-medium">Admin Reverse Button</span>
+                <p className="text-sm text-gray-400">Show/hide reverse button on all pages</p>
+              </div>
+              <Switch
+                checked={reverseButtonVisible}
+                onCheckedChange={handleReverseButtonToggle}
+              />
             </div>
           </div>
-        </CardContent>
-      </Card>
 
-      {/* Exotic Defense System Images Section */}
-      <Card className="border-red-500/30 bg-gradient-to-r from-red-900/20 to-orange-900/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-red-400">
-            <Shield className="h-6 w-6" />
-            Exotic Defense System Backgrounds
-          </CardTitle>
-          <p className="text-sm text-red-300">
-            Specialized backgrounds for the most powerful AI-Human engagement system
-          </p>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {exoticDefenseImages.map((image) => (
-              <Card key={image.id} className="bg-gradient-to-br from-red-900/30 to-black/50 border-red-500/20">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <h4 className="font-semibold text-red-300">{image.name}</h4>
-                    <Badge className="bg-red-600 text-white">EXOTIC</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-3">{image.description}</p>
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {image.tags.map((tag) => (
-                      <Badge key={tag} variant="outline" className="text-xs border-red-500/30 text-red-300">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
-                    <span>Active: {image.isActive ? 'Yes' : 'No'}</span>
-                    <span>Used: {image.usageCount} times</span>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <Tabs defaultValue="manage" className="w-full">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="manage">Manage Backgrounds</TabsTrigger>
-          <TabsTrigger value="create">Create Background</TabsTrigger>
-        </TabsList>
-        <TabsContent value="manage" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Existing Background Images</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {backgroundImages.map(image => (
-                  <Card key={image.id} className="bg-muted/50">
-                    <CardContent className="p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-semibold">{image.name}</h4>
-                        <Badge>{image.isActive ? 'Active' : 'Inactive'}</Badge>
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+              <Heart className="h-5 w-5 text-red-400" />
+              Collected Art Album - Artistic DNA Library
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {collectedImages.map((image) => (
+                <Card key={image.id} className="bg-zinc-800/50 border-zinc-600/50">
+                  <CardContent className="p-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-medium text-white">{image.name}</h4>
+                        <Badge className="bg-green-600 text-white text-xs">Applied</Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-3">{image.description}</p>
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {image.tags.map(tag => (
-                          <Badge key={tag} variant="outline" className="text-xs">{tag}</Badge>
-                        ))}
+                      <p className="text-sm text-gray-300">{image.description}</p>
+                      <div className="space-y-1">
+                        <p className="text-xs text-purple-300">
+                          <strong>Artistic Value:</strong> {image.artisticValue}
+                        </p>
+                        <p className="text-xs text-blue-300">
+                          <strong>Current Use:</strong> {image.inspiration}
+                        </p>
                       </div>
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span>Uploaded: {image.uploadDate}</span>
-                        <span>Used: {image.usageCount} times</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="create" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Create New Background Image</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <Label htmlFor="name">Name</Label>
-                <Input 
-                  type="text" 
-                  id="name" 
-                  name="name"
-                  value={newImage.name}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div>
-                <Label htmlFor="description">Description</Label>
-                <Textarea
-                  id="description"
-                  name="description"
-                  value={newImage.description}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div>
-                <Label>Tags</Label>
-                <div className="flex flex-wrap gap-2">
-                  {selectedTags.map(tag => (
-                    <Badge key={tag} variant="secondary" className="cursor-pointer" onClick={() => handleRemoveTag(tag)}>
-                      {tag}
-                    </Badge>
-                  ))}
-                  {isAddingTag ? (
-                    <div className="flex items-center">
-                      <Input
-                        type="text"
-                        value={newTag}
-                        onChange={handleTagInputChange}
-                        className="mr-2"
-                      />
-                      <Button size="sm" onClick={handleAddTag}>Add</Button>
                     </div>
-                  ) : (
-                    <Button size="sm" variant="outline" onClick={() => setIsAddingTag(true)}>Add Tag</Button>
-                  )}
-                </div>
-              </div>
-              <div>
-                <Label>Upload Date</Label>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-[240px] justify-start text-left font-normal",
-                        !date && "text-muted-foreground"
-                      )}
-                    >
-                      <CalendarIcon className="mr-2 h-4 w-4" />
-                      {date ? format(date, "PPP") : <span>Pick a date</span>}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={date}
-                      onSelect={setDate}
-                      disabled={(date) =>
-                        date > new Date()
-                      }
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Label htmlFor="active">Active</Label>
-                <Switch
-                  id="active"
-                  checked={newImage.isActive}
-                  onCheckedChange={handleCheckboxChange}
-                />
-              </div>
-              <Button onClick={handleCreateImage}>Create Image</Button>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <div className="p-4 rounded-lg bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/20">
+            <h4 className="text-green-300 font-semibold mb-2 flex items-center gap-2">
+              <Globe className="h-4 w-4" />
+              Artistic Evolution Status
+            </h4>
+            <div className="text-sm text-green-200 space-y-1">
+              <p>• Neural backgrounds: Enhanced with organic dendrite patterns</p>
+              <p>• Color harmonies: Balanced across all page themes</p>
+              <p>• User experience: Seamless artistic transitions</p>
+              <p>• Creative energy: 100% powered by Harmony of Gaia vision</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
