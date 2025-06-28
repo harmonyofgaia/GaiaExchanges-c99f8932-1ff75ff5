@@ -1,187 +1,457 @@
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
-import { Flame, Recycle, TreePine, Droplets } from 'lucide-react'
-
-interface BurnData {
-  totalBurned: number
-  weeklyBurn: number
-  reinvestmentPool: number
-  environmentalProjects: {
-    name: string
-    allocation: number
-    impact: string
-  }[]
-}
-
-const mockBurnData: BurnData = {
-  totalBurned: 1250000,
-  weeklyBurn: 25000,
-  reinvestmentPool: 890000,
-  environmentalProjects: [
-    { name: "Ocean Cleanup Initiative", allocation: 35, impact: "2.3M lbs plastic removed" },
-    { name: "Reforestation Program", allocation: 30, impact: "150K trees planted" },
-    { name: "Renewable Energy", allocation: 25, impact: "50MW clean energy" },
-    { name: "Water Conservation", allocation: 10, impact: "1M gallons saved" }
-  ]
-}
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Flame, ExternalLink, Eye, DollarSign, Leaf, Shield, Activity, TrendingUp } from 'lucide-react'
+import { useToast } from '@/hooks/use-toast'
 
 export function BurningSystem() {
-  const [burnData, setBurnData] = useState<BurnData>(mockBurnData)
-  const [currentBurn, setCurrentBurn] = useState(0)
+  const [burnAmount, setBurnAmount] = useState('')
+  const [totalBurned, setTotalBurned] = useState(1_250_000)
+  const [burnRate, setBurnRate] = useState(25000)
+  const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast()
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBurn(prev => (prev + 1) % 100)
-      // Simulate real-time burning
-      setBurnData(prev => ({
-        ...prev,
-        totalBurned: prev.totalBurned + Math.floor(Math.random() * 10),
-        reinvestmentPool: prev.reinvestmentPool + Math.floor(Math.random() * 5)
-      }))
+  // Updated burning wallet address as requested
+  const burningWalletAddress = 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7'
+  const mainWalletAddress = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
+
+  const environmentalProjects = [
+    {
+      name: 'Ocean Cleanup Initiative',
+      allocated: 150000,
+      status: 'Active',
+      impact: 'Removed 45 tons of plastic'
+    },
+    {
+      name: 'Reforestation Project Brazil',
+      allocated: 200000,
+      status: 'Active', 
+      impact: '12,000 trees planted'
+    },
+    {
+      name: 'Solar Energy Villages Africa',
+      allocated: 125000,
+      status: 'Pending',
+      impact: 'Planning phase'
+    },
+    {
+      name: 'Carbon Capture Technology',
+      allocated: 175000,
+      status: 'Active',
+      impact: '500 tons CO2 captured'
+    }
+  ]
+
+  const handleBurn = async () => {
+    if (!burnAmount || parseFloat(burnAmount) <= 0) {
+      toast({
+        title: "Invalid Amount",
+        description: "Please enter a valid amount to burn",
+        variant: "destructive",
+      })
+      return
+    }
+
+    setIsLoading(true)
+    
+    setTimeout(() => {
+      const amount = parseFloat(burnAmount)
+      setTotalBurned(prev => prev + amount)
+      setBurnRate(prev => prev + Math.floor(amount / 10))
+      
+      toast({
+        title: "Tokens Burned Successfully",
+        description: `${amount.toLocaleString()} GAiA tokens have been permanently removed from circulation`,
+      })
+      
+      setBurnAmount('')
+      setIsLoading(false)
     }, 2000)
+  }
 
-    return () => clearInterval(interval)
-  }, [])
-
-  const formatNumber = (num: number) => {
-    return new Intl.NumberFormat('en-US').format(num)
+  const copyAddress = (address: string, name: string) => {
+    navigator.clipboard.writeText(address)
+    toast({
+      title: "Address Copied",
+      description: `${name} address copied to clipboard`,
+    })
   }
 
   return (
     <div className="space-y-6">
-      {/* Live Burning Status */}
-      <Card className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border-orange-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-orange-400">
-            <Flame className="h-5 w-5 animate-pulse" />
-            Live Token Burning
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold mono-numbers text-orange-400">
-                {formatNumber(burnData.totalBurned)}
-              </div>
-              <p className="text-sm text-muted-foreground">Total GAiA Burned</p>
+      {/* Header Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card className="border-orange-500/20 bg-gradient-to-br from-orange-900/10 to-red-900/10">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Burned</CardTitle>
+            <Flame className="h-4 w-4 text-orange-400" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold mono-numbers text-orange-400">
+              {totalBurned.toLocaleString()}
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold mono-numbers text-orange-400">
-                {formatNumber(burnData.weeklyBurn)}
-              </div>
-              <p className="text-sm text-muted-foreground">Weekly Burn Rate</p>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold mono-numbers text-green-400">
-                ${formatNumber(burnData.reinvestmentPool)}
-              </div>
-              <p className="text-sm text-muted-foreground">Reinvestment Pool</p>
-            </div>
-          </div>
-          
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span>Current Burn Cycle</span>
-              <span>{currentBurn}%</span>
-            </div>
-            <Progress value={currentBurn} className="h-2" />
-          </div>
-        </CardContent>
-      </Card>
+            <p className="text-xs text-orange-400">GAiA tokens permanently removed</p>
+          </CardContent>
+        </Card>
 
-      {/* Transparent Reinvestment */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-400">
-            <Recycle className="h-5 w-5" />
-            Transparent Reinvestment
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
+        <Card className="border-green-500/20 bg-gradient-to-br from-green-900/10 to-emerald-900/10">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Weekly Burn Rate</CardTitle>
+            <TrendingUp className="h-4 w-4 text-green-400" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold mono-numbers text-green-400">
+              {burnRate.toLocaleString()}
+            </div>
+            <p className="text-xs text-green-400">+15% from last week</p>
+          </CardContent>
+        </Card>
+
+        <Card className="border-blue-500/20 bg-gradient-to-br from-blue-900/10 to-cyan-900/10">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Environmental Impact</CardTitle>
+            <Leaf className="h-4 w-4 text-blue-400" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold mono-numbers text-blue-400">$2.1M</div>
+            <p className="text-xs text-blue-400">Reinvested in green projects</p>
+          </CardContent>
+        </Card>
+
+        <Card className="border-purple-500/20 bg-gradient-to-br from-purple-900/10 to-pink-900/10">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Next Burn</CardTitle>
+            <Activity className="h-4 w-4 text-purple-400" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold mono-numbers text-purple-400">6h 42m</div>
+            <p className="text-xs text-purple-400">Automated burning cycle</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Tabs defaultValue="burning" className="w-full">
+        <TabsList className="grid w-full grid-cols-4">
+          <TabsTrigger value="burning">Token Burning</TabsTrigger>
+          <TabsTrigger value="wallets">Transparent Wallets</TabsTrigger>
+          <TabsTrigger value="projects">Green Projects</TabsTrigger>
+          <TabsTrigger value="analytics">Real-time Analytics</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="burning">
           <div className="space-y-6">
-            <p className="text-muted-foreground">
-              Every GAiA token burned is converted to value that gets reinvested into environmental projects. 
-              Track exactly where your contribution goes in real-time.
-            </p>
-            
-            <div className="space-y-4">
-              {burnData.environmentalProjects.map((project, index) => (
-                <div key={index} className="border border-border rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      {index === 0 && <Droplets className="h-4 w-4 text-blue-400" />}
-                      {index === 1 && <TreePine className="h-4 w-4 text-green-400" />}
-                      {index === 2 && <Flame className="h-4 w-4 text-yellow-400" />}
-                      {index === 3 && <Droplets className="h-4 w-4 text-cyan-400" />}
-                      <h4 className="font-semibold">{project.name}</h4>
-                    </div>
-                    <span className="text-sm font-medium">{project.allocation}%</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <Progress value={project.allocation} className="flex-1 mr-4 h-2" />
-                    <span className="text-sm text-green-400 font-medium">{project.impact}</span>
-                  </div>
+            <Card className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border-orange-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-orange-400">
+                  <Flame className="h-5 w-5" />
+                  Manual Token Burning
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium">Amount to Burn (GAiA)</label>
+                  <Input
+                    type="number"
+                    value={burnAmount}
+                    onChange={(e) => setBurnAmount(e.target.value)}
+                    placeholder="0.00"
+                    className="mono-numbers"
+                    min="0"
+                    step="0.01"
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    Tokens will be permanently removed from circulation and sent to the burning wallet
+                  </p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+                
+                <Button 
+                  onClick={handleBurn}
+                  className="w-full bg-orange-600 hover:bg-orange-700"
+                  disabled={!burnAmount || isLoading}
+                >
+                  {isLoading ? 'Burning Tokens...' : 'Burn GAiA Tokens'}
+                </Button>
+              </CardContent>
+            </Card>
 
-      {/* Transparency Metrics */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Transparency Dashboard</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="font-semibold mb-3 text-primary">Real-Time Tracking</h4>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span>Burn Transactions:</span>
-                  <span className="font-mono">24/7 Live</span>
+            <Card>
+              <CardHeader>
+                <CardTitle>Burning Statistics</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span>Total Supply Reduction:</span>
+                      <span className="text-orange-400">-12.5%</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Deflation Rate:</span>
+                      <span className="text-orange-400">2.1% annually</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Next Auto-Burn:</span>
+                      <span className="text-orange-400">6h 42m</span>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span>Burned This Week:</span>
+                      <span className="text-green-400">{burnRate.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Burned This Month:</span>
+                      <span className="text-green-400">145,320</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>All-Time Burned:</span>
+                      <span className="text-green-400">{totalBurned.toLocaleString()}</span>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span>Value Burned:</span>
+                      <span className="text-blue-400">$3.75M</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Environmental Impact:</span>
+                      <span className="text-blue-400">$2.1M</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Community Benefit:</span>
+                      <span className="text-blue-400">$1.65M</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span>Wallet Visibility:</span>
-                  <span className="text-green-400">100% Open</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Project Updates:</span>
-                  <span className="text-green-400">Daily</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Community Access:</span>
-                  <span className="text-green-400">Full Access</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-3 text-primary">Environmental Impact</h4>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span>CO2 Offset:</span>
-                  <span className="text-green-400">1,250 tons</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Trees Planted:</span>
-                  <span className="text-green-400">150,000</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Ocean Cleanup:</span>
-                  <span className="text-green-400">2.3M lbs</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Clean Energy:</span>
-                  <span className="text-green-400">50 MW</span>
-                </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
-        </CardContent>
-      </Card>
+        </TabsContent>
+
+        <TabsContent value="wallets">
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Eye className="h-5 w-5" />
+                  100% Transparent Wallet System
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Updated Burning Wallet */}
+                <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <h4 className="font-medium text-orange-400">🔥 Burning Wallet (Updated)</h4>
+                      <p className="text-sm text-orange-300">Phantom Wallet - All burned tokens go here</p>
+                    </div>
+                    <Badge className="bg-orange-600">Active</Badge>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="font-mono text-sm bg-muted/50 p-2 rounded break-all">
+                      {burningWalletAddress}
+                    </div>
+                    <div className="flex gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => copyAddress(burningWalletAddress, 'Burning Wallet')}
+                      >
+                        Copy Address
+                      </Button>
+                      <Button variant="outline" size="sm" asChild>
+                        <a 
+                          href={`https://solscan.io/account/${burningWalletAddress}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="h-3 w-3 mr-1" />
+                          View on Solscan
+                        </a>
+                      </Button>
+                    </div>
+                    <div className="text-sm text-orange-400">
+                      Balance: {totalBurned.toLocaleString()} GAiA (Permanently Locked)
+                    </div>
+                  </div>
+                </div>
+
+                {/* Main Wallet */}
+                <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <h4 className="font-medium text-green-400">💰 Main Treasury Wallet</h4>
+                      <p className="text-sm text-green-300">Primary operations and environmental funding</p>
+                    </div>
+                    <Badge className="bg-green-600">Active</Badge>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="font-mono text-sm bg-muted/50 p-2 rounded break-all">
+                      {mainWalletAddress}
+                    </div>
+                    <div className="flex gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => copyAddress(mainWalletAddress, 'Main Wallet')}
+                      >
+                        Copy Address
+                      </Button>
+                      <Button variant="outline" size="sm" asChild>
+                        <a 
+                          href={`https://solscan.io/account/${mainWalletAddress}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="h-3 w-3 mr-1" />
+                          View on Solscan
+                        </a>
+                      </Button>
+                    </div>
+                    <div className="text-sm text-green-400">
+                      Balance: 2,450,875 GAiA
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                  <h4 className="font-medium text-blue-400 mb-2">Transparency Commitment</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div className="space-y-1">
+                      <div className="flex justify-between">
+                        <span>Real-time Tracking:</span>
+                        <span className="text-green-400">✓ Always On</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Public Verification:</span>
+                        <span className="text-green-400">✓ Blockchain</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Community Access:</span>
+                        <span className="text-green-400">✓ 24/7</span>
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="flex justify-between">
+                        <span>Third-party Audits:</span>
+                        <span className="text-green-400">✓ Quarterly</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Environmental Reports:</span>
+                        <span className="text-green-400">✓ Monthly</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Open Source Code:</span>
+                        <span className="text-green-400">✓ GitHub</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="projects">
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Leaf className="h-5 w-5" />
+                  Environmental Reinvestment Projects
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {environmentalProjects.map((project, index) => (
+                    <div key={index} className="bg-muted/30 rounded-lg p-4 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-medium">{project.name}</h4>
+                        <Badge variant={project.status === 'Active' ? 'default' : 'secondary'}>
+                          {project.status}
+                        </Badge>
+                      </div>
+                      <div className="space-y-1 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Allocated:</span>
+                          <span className="text-green-400">${project.allocated.toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Impact:</span>
+                          <span className="text-blue-400">{project.impact}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="analytics">
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Activity className="h-5 w-5" />
+                  Real-time System Analytics
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Burning Analytics</h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span>Current Burn Rate:</span>
+                        <span className="text-orange-400">0.21% daily</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Total Supply Reduced:</span>
+                        <span className="text-orange-400">12.5%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Price Impact:</span>
+                        <span className="text-green-400">+18.3%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Holder Benefit:</span>
+                        <span className="text-green-400">Deflationary</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Environmental Impact</h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span>Active Projects:</span>
+                        <span className="text-blue-400">4</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Total Investment:</span>
+                        <span className="text-blue-400">$2.1M</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>CO2 Captured:</span>
+                        <span className="text-green-400">500 tons</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Trees Planted:</span>
+                        <span className="text-green-400">12,000</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }

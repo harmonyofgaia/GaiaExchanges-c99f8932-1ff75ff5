@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./components/AppSidebar";
+import { AnimatedBackground } from "./components/ui/animated-background";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Wallet from "./pages/Wallet";
@@ -23,10 +24,11 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <SidebarProvider>
-          <div className="min-h-screen flex w-full bg-background">
+          <div className="min-h-screen flex w-full bg-background relative">
+            <AnimatedBackground />
             <AppSidebar />
-            <div className="flex-1 flex flex-col">
-              <header className="h-14 flex items-center border-b border-border px-6">
+            <div className="flex-1 flex flex-col relative z-10">
+              <header className="h-14 flex items-center border-b border-border px-6 bg-background/80 backdrop-blur-sm">
                 <SidebarTrigger className="mr-4" />
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-4">
@@ -41,7 +43,7 @@ const App = () => (
                   </div>
                 </div>
               </header>
-              <main className="flex-1 p-6">
+              <main className="flex-1 p-6 bg-background/50 backdrop-blur-sm">
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/about" element={<About />} />

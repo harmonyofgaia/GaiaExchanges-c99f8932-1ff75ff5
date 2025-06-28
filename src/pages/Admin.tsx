@@ -1,5 +1,7 @@
 
 import { AdminControlSystem } from '@/components/AdminControlSystem'
+import { EnhancedAdminControls } from '@/components/EnhancedAdminControls'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const Admin = () => {
   return (
@@ -11,7 +13,20 @@ const Admin = () => {
         </div>
       </div>
       
-      <AdminControlSystem />
+      <Tabs defaultValue="enhanced" className="w-full">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="enhanced">Enhanced Controls</TabsTrigger>
+          <TabsTrigger value="standard">Standard Controls</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="enhanced">
+          <EnhancedAdminControls />
+        </TabsContent>
+        
+        <TabsContent value="standard">
+          <AdminControlSystem />
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
