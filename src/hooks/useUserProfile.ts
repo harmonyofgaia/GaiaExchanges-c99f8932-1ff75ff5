@@ -12,7 +12,7 @@ interface UserProfile {
   country: string | null
   verified: boolean
   kyc_status: string
-  security_level: string
+  security_level: 'low' | 'medium' | 'high' | 'maximum'
   two_factor_enabled: boolean
 }
 

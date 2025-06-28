@@ -45,13 +45,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         // Log security events for important auth changes
         if (event === 'SIGNED_IN' && session?.user) {
-          setTimeout(() => {
-            supabase.from('security_events').insert({
+          setTimeout(async () => {
+            const { error } = await supabase.from('security_events').insert({
               user_id: session.user.id,
               event_type: 'LOGIN',
               event_description: 'User signed in successfully',
               severity: 'low'
-            }).catch(console.error)
+            })
+            if (error) {
+              console.error('Error logging security event:', error)
+            }
           }, 0)
         }
       }
