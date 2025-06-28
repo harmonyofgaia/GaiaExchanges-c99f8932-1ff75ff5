@@ -36,9 +36,9 @@ export function GlobalSEOOptimizer() {
     ]
 
     metaTags.forEach(tag => {
-      let metaElement = document.querySelector(`meta[name="${tag.name}"], meta[property="${tag.property}"]`)
+      let metaElement = document.querySelector(`meta[name="${tag.name}"], meta[property="${tag.property}"]`) as HTMLMetaElement
       if (!metaElement) {
-        metaElement = document.createElement('meta')
+        metaElement = document.createElement('meta') as HTMLMetaElement
         if (tag.name) metaElement.setAttribute('name', tag.name)
         if (tag.property) metaElement.setAttribute('property', tag.property)
         document.head.appendChild(metaElement)
@@ -76,18 +76,18 @@ export function GlobalSEOOptimizer() {
       }
     }
 
-    let scriptElement = document.querySelector('script[type="application/ld+json"]')
+    let scriptElement = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement
     if (!scriptElement) {
-      scriptElement = document.createElement('script')
+      scriptElement = document.createElement('script') as HTMLScriptElement
       scriptElement.type = 'application/ld+json'
       document.head.appendChild(scriptElement)
     }
     scriptElement.textContent = JSON.stringify(structuredData)
 
     // Add canonical URL
-    let canonicalElement = document.querySelector('link[rel="canonical"]')
+    let canonicalElement = document.querySelector('link[rel="canonical"]') as HTMLLinkElement
     if (!canonicalElement) {
-      canonicalElement = document.createElement('link')
+      canonicalElement = document.createElement('link') as HTMLLinkElement
       canonicalElement.rel = 'canonical'
       document.head.appendChild(canonicalElement)
     }
