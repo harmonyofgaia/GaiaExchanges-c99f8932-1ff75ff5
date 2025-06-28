@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Wallet from "./pages/Wallet";
 import Transparency from "./pages/Transparency";
 import Markets from "./pages/Markets";
+import Marketing from "./pages/Marketing";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
