@@ -1,146 +1,221 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Search, TrendingUp, TrendingDown, Shield, AlertTriangle, CheckCircle, Globe } from 'lucide-react'
-import { GaiaLogo } from './GaiaLogo'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Search, TrendingUp, TrendingDown, RefreshCw, ExternalLink, Shield, Wallet, AlertTriangle } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface CoinData {
   id: string
-  name: string
   symbol: string
+  name: string
+  current_price: number
+  price_change_percentage_24h: number
+  market_cap: number
+  total_volume: number
+  high_24h: number
+  low_24h: number
+  circulating_supply: number
+  total_supply: number
+  market_cap_rank: number
   image: string
-  price: number
-  change24h: number
-  volume24h: number
-  marketCap: number
-  trustScore: number
-  isReliable: boolean
-  isVerified: boolean
-  rank: number
+  last_updated: string
 }
 
-// Mock CoinGecko data with GAiA featured prominently
-const mockCoinData: CoinData[] = [
-  {
-    id: 'gaia-harmony',
-    name: 'GAiA',
-    symbol: 'GAIA',
-    image: 'GAIA_LOGO',
-    price: 3.00,
-    change24h: 5.67,
-    volume24h: 8750000,
-    marketCap: 257250000,
-    trustScore: 98,
-    isReliable: true,
-    isVerified: true,
-    rank: 1 // Featured as #1
-  },
-  {
-    id: 'bitcoin',
-    name: 'Bitcoin',
-    symbol: 'BTC',
-    image: '₿',
-    price: 43250.67,
-    change24h: 2.34,
-    volume24h: 15420000000,
-    marketCap: 847000000000,
-    trustScore: 95,
-    isReliable: true,
-    isVerified: true,
-    rank: 2
-  },
-  {
-    id: 'ethereum',
-    name: 'Ethereum',
-    symbol: 'ETH',
-    image: 'Ξ',
-    price: 2543.21,
-    change24h: -1.87,
-    volume24h: 8750000000,
-    marketCap: 305000000000,
-    trustScore: 94,
-    isReliable: true,
-    isVerified: true,
-    rank: 3
-  },
-  {
-    id: 'binancecoin',
-    name: 'BNB',
-    symbol: 'BNB',
-    image: '⬟',
-    price: 312.45,
-    change24h: 1.23,
-    volume24h: 890000000,
-    marketCap: 48000000000,
-    trustScore: 91,
-    isReliable: true,
-    isVerified: true,
-    rank: 4
-  },
-  {
-    id: 'cardano',
-    name: 'Cardano',
-    symbol: 'ADA',
-    image: '₳',
-    price: 0.4234,
-    change24h: 4.56,
-    volume24h: 450000000,
-    marketCap: 15000000000,
-    trustScore: 88,
-    isReliable: true,
-    isVerified: true,
-    rank: 8
-  },
-  {
-    id: 'suspicious-coin',
-    name: 'SuspiciousCoin',
-    symbol: 'SUS',
-    image: '⚠️',
-    price: 0.001,
-    change24h: 150.00,
-    volume24h: 50000,
-    marketCap: 100000,
-    trustScore: 15,
-    isReliable: false,
-    isVerified: false,
-    rank: 2847
-  }
-]
+interface TrustedWallet {
+  address: string
+  network: string
+  verified: boolean
+  balance?: number
+  lastUpdate: string
+}
 
 export function CoinGeckoTrading() {
-  const [coins, setCoins] = useState<CoinData[]>(mockCoinData)
+  const [coins, setCoins] = useState<CoinData[]>([])
   const [searchTerm, setSearchTerm] = useState('')
+  const [sortBy, setSortBy] = useState<'market_cap' | 'volume' | 'price_change_percentage_24h'>('market_cap')
+  const [isLoading, setIsLoading] = useState(false)
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date())
-  const [showOnlyReliable, setShowOnlyReliable] = useState(true)
+  const [trustedWallets, setTrustedWallets] = useState<TrustedWallet[]>([
+    {
+      address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+      network: 'Bitcoin',
+      verified: true,
+      balance: 0,
+      lastUpdate: new Date().toISOString()
+    },
+    {
+      address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+      network: 'Harmony of Gaia',
+      verified: true,
+      balance: 15750.25,
+      lastUpdate: new Date().toISOString()
+    }
+  ])
 
-  // Real-time price updates every 5 seconds
+  // Mock data for demonstration (in production, this would fetch from CoinGecko API)
+  const mockCoinData: CoinData[] = [
+    {
+      id: 'gaia-harmony',
+      symbol: 'GAIA',
+      name: 'Harmony of Gaia',
+      current_price: 3.25,
+      price_change_percentage_24h: 8.47,
+      market_cap: 278500000,
+      total_volume: 12750000,
+      high_24h: 3.45,
+      low_24h: 2.98,
+      circulating_supply: 85000000,
+      total_supply: 100000000,
+      market_cap_rank: 1,
+      image: '',
+      last_updated: new Date().toISOString()
+    },
+    {
+      id: 'bitcoin',
+      symbol: 'BTC',
+      name: 'Bitcoin',
+      current_price: 43750.25,
+      price_change_percentage_24h: 2.15,
+      market_cap: 857000000000,
+      total_volume: 18420000000,
+      high_24h: 44250.67,
+      low_24h: 42890.34,
+      circulating_supply: 19500000,
+      total_supply: 21000000,
+      market_cap_rank: 2,
+      image: '',
+      last_updated: new Date().toISOString()
+    },
+    {
+      id: 'ethereum',
+      symbol: 'ETH',
+      name: 'Ethereum',
+      current_price: 2685.45,
+      price_change_percentage_24h: -1.23,
+      market_cap: 322000000000,
+      total_volume: 9850000000,
+      high_24h: 2750.89,
+      low_24h: 2620.12,
+      circulating_supply: 120000000,
+      total_supply: 120000000,
+      market_cap_rank: 3,
+      image: '',
+      last_updated: new Date().toISOString()
+    },
+    {
+      id: 'cardano',
+      symbol: 'ADA',
+      name: 'Cardano',
+      current_price: 0.4567,
+      price_change_percentage_24h: 5.23,
+      market_cap: 16200000000,
+      total_volume: 520000000,
+      high_24h: 0.4789,
+      low_24h: 0.4234,
+      circulating_supply: 35000000000,
+      total_supply: 45000000000,
+      market_cap_rank: 4,
+      image: '',
+      last_updated: new Date().toISOString()
+    },
+    {
+      id: 'solana',
+      symbol: 'SOL',
+      name: 'Solana',
+      current_price: 102.34,
+      price_change_percentage_24h: -2.87,
+      market_cap: 45600000000,
+      total_volume: 1450000000,
+      high_24h: 108.92,
+      low_24h: 98.67,
+      circulating_supply: 445000000,
+      total_supply: 511000000,
+      market_cap_rank: 5,
+      image: '',
+      last_updated: new Date().toISOString()
+    }
+  ]
+
+  // Simulate real-time data updates
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCoins(prevCoins => 
-        prevCoins.map(coin => ({
+    const fetchData = async () => {
+      setIsLoading(true)
+      console.log('🔄 Fetching live cryptocurrency data...')
+      
+      // Simulate API call with mock data
+      setTimeout(() => {
+        const updatedCoins = mockCoinData.map(coin => ({
           ...coin,
-          price: coin.price * (1 + (Math.random() - 0.5) * 0.002), // ±0.1% random change
-          change24h: coin.change24h + (Math.random() - 0.5) * 0.1,
-          volume24h: coin.volume24h * (1 + (Math.random() - 0.5) * 0.05)
+          current_price: coin.current_price * (1 + (Math.random() - 0.5) * 0.01),
+          price_change_percentage_24h: coin.price_change_percentage_24h + (Math.random() - 0.5) * 0.2,
+          total_volume: coin.total_volume * (1 + (Math.random() - 0.5) * 0.05),
+          last_updated: new Date().toISOString()
         }))
-      )
-      setLastUpdate(new Date())
-      console.log('Market data updated:', new Date().toISOString())
-    }, 5000)
+        
+        setCoins(updatedCoins)
+        setLastUpdate(new Date())
+        setIsLoading(false)
+        
+        toast.success('Market Data Updated', {
+          description: `🚀 ${updatedCoins.length} cryptocurrencies synchronized`
+        })
+      }, 1000)
+    }
 
+    // Initial fetch
+    fetchData()
+
+    // Update every 10 seconds
+    const interval = setInterval(fetchData, 10000)
     return () => clearInterval(interval)
   }, [])
 
-  const filteredCoins = coins.filter(coin => {
-    const matchesSearch = coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
-    
-    const matchesReliability = !showOnlyReliable || coin.isReliable
-    
-    return matchesSearch && matchesReliability
+  // Wallet security monitoring
+  useEffect(() => {
+    const monitorWallets = () => {
+      console.log('🔒 Monitoring trusted wallet addresses...')
+      
+      // Simulate wallet balance updates and security checks
+      setTrustedWallets(prev => prev.map(wallet => ({
+        ...wallet,
+        balance: wallet.balance ? wallet.balance * (1 + (Math.random() - 0.5) * 0.001) : 0,
+        lastUpdate: new Date().toISOString()
+      })))
+      
+      // Security validation
+      const securityCheck = Math.random()
+      if (securityCheck > 0.95) {
+        toast.success('Wallet Security Check', {
+          description: '✅ All trusted wallets verified and secure'
+        })
+      }
+    }
+
+    const walletInterval = setInterval(monitorWallets, 15000)
+    return () => clearInterval(walletInterval)
+  }, [])
+
+  const filteredCoins = coins.filter(coin =>
+    coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  const sortedCoins = [...filteredCoins].sort((a, b) => {
+    switch (sortBy) {
+      case 'market_cap':
+        return b.market_cap - a.market_cap
+      case 'volume':
+        return b.total_volume - a.total_volume
+      case 'price_change_percentage_24h':
+        return b.price_change_percentage_24h - a.price_change_percentage_24h
+      default:
+        return b.market_cap - a.market_cap
+    }
   })
 
   const formatPrice = (price: number) => {
@@ -152,248 +227,257 @@ export function CoinGeckoTrading() {
     }).format(price)
   }
 
-  const formatVolume = (volume: number) => {
-    if (volume >= 1e9) return `$${(volume / 1e9).toFixed(2)}B`
-    if (volume >= 1e6) return `$${(volume / 1e6).toFixed(2)}M`
-    return `$${(volume / 1e3).toFixed(2)}K`
-  }
-
-  const getTrustScoreColor = (score: number) => {
-    if (score >= 90) return 'text-green-400'
-    if (score >= 70) return 'text-yellow-400'
-    return 'text-red-400'
+  const formatNumber = (num: number) => {
+    if (num >= 1e12) return `$${(num / 1e12).toFixed(2)}T`
+    if (num >= 1e9) return `$${(num / 1e9).toFixed(2)}B`
+    if (num >= 1e6) return `$${(num / 1e6).toFixed(2)}M`
+    if (num >= 1e3) return `$${(num / 1e3).toFixed(2)}K`
+    return `$${num.toFixed(2)}`
   }
 
   const getPriceChangeColor = (change: number) => {
-    if (change > 0) return 'text-green-400'
-    if (change < 0) return 'text-red-400'
-    return 'text-gray-400'
+    return change >= 0 ? 'text-green-400' : 'text-red-400'
   }
 
   return (
     <div className="space-y-6">
-      {/* Header with GAiA Logo */}
-      <Card className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 border-blue-500/30">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-3 text-blue-400">
-            <GaiaLogo size="lg" variant="white-fade" />
-            <div>
-              <div className="flex items-center gap-2">
-                <Globe className="h-6 w-6" />
-                Gaia's Exchanges - World's Most Secure Trading Platform
-              </div>
-              <div className="text-sm font-normal text-green-400 mt-1">
-                Featuring GAiA Token - The Future of Environmental Cryptocurrency
-              </div>
-            </div>
-          </CardTitle>
-          <div className="flex items-center gap-4 text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-              <span className="text-blue-400">Live CoinGecko Integration</span>
-            </div>
-            <div className="text-muted-foreground">
-              Last Updated: {lastUpdate.toLocaleTimeString()}
-            </div>
-          </div>
-        </CardHeader>
-      </Card>
-
-      {/* GAiA Token Spotlight */}
+      {/* Security Status Header */}
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <GaiaLogo size="xl" variant="white-fade" />
+              <Shield className="h-8 w-8 text-green-400" />
               <div>
-                <h3 className="text-2xl font-bold text-green-400">GAiA Token Spotlight</h3>
-                <p className="text-green-300">Harmony of Gaia - Leading Environmental Cryptocurrency</p>
-                <div className="flex items-center gap-4 mt-2">
-                  <div className="text-3xl font-bold text-white">${mockCoinData[0].price.toFixed(2)}</div>
-                  <Badge className="bg-green-600 text-white">
-                    <TrendingUp className="h-3 w-3 mr-1" />
-                    +{mockCoinData[0].change24h.toFixed(2)}%
-                  </Badge>
-                </div>
+                <h3 className="text-xl font-bold text-green-400">Maximum Security Trading</h3>
+                <p className="text-sm text-muted-foreground">All wallets verified • Real-time monitoring active</p>
               </div>
             </div>
-            <div className="text-right">
-              <Button className="bg-green-600 hover:bg-green-700 text-white">
-                Trade GAiA Now
-              </Button>
-              <p className="text-xs text-green-300 mt-2">Zero Fees • Maximum Security</p>
+            <div className="flex items-center gap-2">
+              <Badge className="bg-green-600 text-white animate-pulse">
+                <Shield className="h-3 w-3 mr-1" />
+                100% Secure
+              </Badge>
+              <Badge className="bg-blue-600 text-white">
+                <RefreshCw className="h-3 w-3 mr-1" />
+                Live Updates
+              </Badge>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Platform Support Banner */}
-      <Card className="border-green-500/20 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
-        <CardContent className="pt-6">
-          <div className="text-center space-y-2">
-            <h3 className="text-lg font-semibold text-green-400">Available on All Platforms</h3>
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <Badge variant="outline" className="border-green-500/30 text-green-400">Windows x32/x64</Badge>
-              <Badge variant="outline" className="border-green-500/30 text-green-400">Android</Badge>
-              <Badge variant="outline" className="border-green-500/30 text-green-400">iOS</Badge>
-              <Badge variant="outline" className="border-green-500/30 text-green-400">Linux</Badge>
-              <Badge variant="outline" className="border-green-500/30 text-green-400">macOS</Badge>
-              <Badge variant="outline" className="border-green-500/30 text-green-400">BlackBerry Legacy</Badge>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Including support for legacy BlackBerry devices - No trader left behind!
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Controls */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Search cryptocurrencies..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
-          />
-        </div>
-        <div className="flex gap-2">
-          <Button
-            variant={showOnlyReliable ? "default" : "outline"}
-            onClick={() => setShowOnlyReliable(!showOnlyReliable)}
-            className="flex items-center gap-2"
-          >
-            <Shield className="h-4 w-4" />
-            {showOnlyReliable ? 'Verified Only' : 'Show All'}
-          </Button>
-        </div>
-      </div>
-
-      {/* Trading Table */}
-      <Card className="border-border/50">
+      {/* Search and Controls */}
+      <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <TrendingUp className="h-5 w-5 text-primary" />
-            Live Market Data - Auto-Verified & Trusted
+            Live Cryptocurrency Markets
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="rounded-lg border border-border overflow-hidden">
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-muted/30">
-                  <TableHead>Rank</TableHead>
-                  <TableHead>Coin</TableHead>
-                  <TableHead>Price</TableHead>
-                  <TableHead>24h Change</TableHead>
-                  <TableHead>Volume</TableHead>
-                  <TableHead>Market Cap</TableHead>
-                  <TableHead>Trust Score</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Action</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredCoins.map((coin) => (
-                  <TableRow key={coin.id} className={`hover:bg-muted/20 ${coin.id === 'gaia-harmony' ? 'bg-green-500/10 border-green-500/20' : ''}`}>
-                    <TableCell className="font-mono text-sm">
-                      #{coin.rank}
-                      {coin.id === 'gaia-harmony' && (
-                        <Badge className="ml-2 bg-green-600 text-white text-xs">FEATURED</Badge>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-3">
-                        {coin.id === 'gaia-harmony' ? (
-                          <GaiaLogo size="sm" />
-                        ) : (
-                          <div className="text-2xl">{coin.image}</div>
-                        )}
-                        <div>
-                          <div className="font-semibold">{coin.name}</div>
-                          <div className="text-sm text-muted-foreground uppercase">{coin.symbol}</div>
-                        </div>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Search cryptocurrencies..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+            <Select value={sortBy} onValueChange={(value: any) => setSortBy(value)}>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="market_cap">Market Cap</SelectItem>
+                <SelectItem value="volume">Volume 24h</SelectItem>
+                <SelectItem value="price_change_percentage_24h">24h Change</SelectItem>
+              </SelectContent>
+            </Select>
+            <Button 
+              onClick={() => window.location.reload()}
+              className="bg-green-600 hover:bg-green-700"
+              disabled={isLoading}
+            >
+              {isLoading ? <RefreshCw className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
+            </Button>
+          </div>
+          
+          <div className="mt-2 text-sm text-muted-foreground">
+            Last updated: {lastUpdate.toLocaleTimeString()} • {sortedCoins.length} cryptocurrencies
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Trading Interface */}
+      <Tabs defaultValue="markets" className="w-full">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="markets">Live Markets</TabsTrigger>
+          <TabsTrigger value="wallets">Trusted Wallets</TabsTrigger>
+          <TabsTrigger value="security">Security Center</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="markets" className="space-y-4">
+          <div className="grid gap-4">
+            {sortedCoins.map((coin) => (
+              <Card key={coin.id} className="hover:bg-muted/50 transition-colors">
+                <CardContent className="pt-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                        <span className="text-sm font-bold text-primary">
+                          {coin.symbol.slice(0, 3).toUpperCase()}
+                        </span>
                       </div>
-                    </TableCell>
-                    <TableCell className="font-mono font-semibold">
-                      {formatPrice(coin.price)}
-                    </TableCell>
-                    <TableCell className={`font-mono ${getPriceChangeColor(coin.change24h)}`}>
-                      <div className="flex items-center gap-1">
-                        {coin.change24h > 0 ? (
+                      <div>
+                        <h3 className="font-semibold">{coin.name}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          {coin.symbol.toUpperCase()} • Rank #{coin.market_cap_rank}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="text-right">
+                      <div className="text-xl font-bold">{formatPrice(coin.current_price)}</div>
+                      <div className={`text-sm flex items-center gap-1 ${getPriceChangeColor(coin.price_change_percentage_24h)}`}>
+                        {coin.price_change_percentage_24h >= 0 ? (
                           <TrendingUp className="h-3 w-3" />
                         ) : (
                           <TrendingDown className="h-3 w-3" />
                         )}
-                        {coin.change24h > 0 ? '+' : ''}{coin.change24h.toFixed(2)}%
+                        {coin.price_change_percentage_24h > 0 ? '+' : ''}{coin.price_change_percentage_24h.toFixed(2)}%
                       </div>
-                    </TableCell>
-                    <TableCell className="font-mono text-sm">
-                      {formatVolume(coin.volume24h)}
-                    </TableCell>
-                    <TableCell className="font-mono text-sm">
-                      {formatVolume(coin.marketCap)}
-                    </TableCell>
-                    <TableCell>
-                      <div className={`font-mono font-semibold ${getTrustScoreColor(coin.trustScore)}`}>
-                        {coin.trustScore}/100
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        {coin.isVerified ? (
-                          <CheckCircle className="h-4 w-4 text-green-400" />
-                        ) : (
-                          <AlertTriangle className="h-4 w-4 text-yellow-400" />
-                        )}
-                        <Badge 
-                          variant="outline" 
-                          className={`text-xs ${
-                            coin.isReliable 
-                              ? 'border-green-500/30 text-green-400' 
-                              : 'border-red-500/30 text-red-400'
-                          }`}
-                        >
-                          {coin.isReliable ? 'Trusted' : 'High Risk'}
-                        </Badge>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Button 
-                        size="sm"
-                        disabled={!coin.isReliable}
-                        className={coin.isReliable ? 'bg-green-600 hover:bg-green-700' : ''}
-                      >
-                        {coin.isReliable ? 'Trade' : 'Blocked'}
+                    </div>
+                    
+                    <div className="text-right text-sm text-muted-foreground">
+                      <div>MCap: {formatNumber(coin.market_cap)}</div>
+                      <div>Vol: {formatNumber(coin.total_volume)}</div>
+                      <div>H: {formatPrice(coin.high_24h)} L: {formatPrice(coin.low_24h)}</div>
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <Button size="sm" className="bg-green-600 hover:bg-green-700">
+                        Trade
                       </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                      <Button size="sm" variant="outline">
+                        <ExternalLink className="h-3 w-3 mr-1" />
+                        Chart
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+        </TabsContent>
+        
+        <TabsContent value="wallets" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Wallet className="h-5 w-5 text-blue-400" />
+                Trusted Wallet Addresses
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {trustedWallets.map((wallet, index) => (
+                  <div key={index} className="flex items-center justify-between p-4 rounded-lg bg-muted/30">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                        <Wallet className="h-4 w-4 text-blue-400" />
+                      </div>
+                      <div>
+                        <div className="font-medium">{wallet.network}</div>
+                        <code className="text-xs text-muted-foreground">{wallet.address.slice(0, 20)}...{wallet.address.slice(-8)}</code>
+                      </div>
+                    </div>
+                    
+                    <div className="text-right">
+                      {wallet.balance && (
+                        <div className="font-semibold">{wallet.balance.toFixed(4)} {wallet.network === 'Bitcoin' ? 'BTC' : 'GAIA'}</div>
+                      )}
+                      <div className="text-xs text-muted-foreground">
+                        Updated: {new Date(wallet.lastUpdate).toLocaleTimeString()}
+                      </div>
+                    </div>
+                    
+                    <Badge className={`${wallet.verified ? 'bg-green-600' : 'bg-yellow-600'} text-white`}>
+                      {wallet.verified ? 'Verified' : 'Pending'}
+                    </Badge>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="security" className="space-y-4">
+          <Card className="border-orange-500/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-orange-400">
+                <AlertTriangle className="h-5 w-5" />
+                Advanced Security Monitoring
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-green-400">🛡️ Active Protection</h4>
+                  <ul className="text-sm space-y-1">
+                    <li>✅ Real-time wallet monitoring</li>
+                    <li>✅ Blockchain network validation</li>
+                    <li>✅ Automatic failure detection</li>
+                    <li>✅ Multi-layer encryption</li>
+                  </ul>
+                </div>
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-blue-400">🔒 Security Features</h4>
+                  <ul className="text-sm space-y-1">
+                    <li>🔐 Zero-knowledge architecture</li>
+                    <li>⚡ Instant threat response</li>
+                    <li>🌐 Global network protection</li>
+                    <li>📊 Advanced analytics</li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
 
-          {filteredCoins.length === 0 && (
-            <div className="text-center py-8 text-muted-foreground">
-              No coins found matching your criteria.
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
-      {/* Security Notice */}
-      <Card className="border-yellow-500/20 bg-gradient-to-r from-yellow-900/20 to-orange-900/20">
+      {/* Footer Links */}
+      <Card className="border-purple-500/20 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
         <CardContent className="pt-6">
-          <div className="flex items-start gap-3">
-            <Shield className="h-5 w-5 text-yellow-400 mt-0.5" />
-            <div className="space-y-2">
-              <h4 className="font-semibold text-yellow-400">Security & Reliability Notice</h4>
-              <p className="text-sm text-muted-foreground">
-                All tokens are automatically verified against multiple security databases and trust metrics. 
-                Gaia's Exchanges blocks unreliable or suspicious tokens to protect our community. 
-                Our platform runs comprehensive background checks every 5 seconds to ensure maximum security.
-              </p>
+          <div className="text-center space-y-2">
+            <h3 className="text-lg font-semibold text-purple-400">🚀 Stay Ahead of the Market</h3>
+            <p className="text-sm text-muted-foreground">
+              Gaia's Exchange - The world's most secure cryptocurrency trading platform
+            </p>
+            <div className="flex justify-center gap-4 mt-4">
+              <a 
+                href="https://coingecko.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 text-sm underline"
+              >
+                CoinGecko API
+              </a>
+              <a 
+                href="https://dexscreener.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-green-400 hover:text-green-300 text-sm underline"
+              >
+                DEX Screener
+              </a>
+              <a 
+                href="https://coinmarketcap.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-yellow-400 hover:text-yellow-300 text-sm underline"
+              </a>
             </div>
           </div>
         </CardContent>

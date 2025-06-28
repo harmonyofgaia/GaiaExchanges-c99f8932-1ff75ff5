@@ -3,6 +3,7 @@ import { MarketData } from '@/components/MarketData'
 import { TradingInterface } from '@/components/TradingInterface'
 import { PortfolioOverview } from '@/components/PortfolioOverview'
 import { AdvertisingHeader } from '@/components/AdvertisingHeader'
+import { AutoIssueResolver } from '@/components/AutoIssueResolver'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Activity, Globe, Users, Leaf, Flame, Recycle } from 'lucide-react'
 
@@ -72,6 +73,9 @@ const Index = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Advanced Security System */}
+      <AutoIssueResolver />
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
