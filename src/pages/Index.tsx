@@ -2,12 +2,16 @@
 import { MarketData } from '@/components/MarketData'
 import { TradingInterface } from '@/components/TradingInterface'
 import { PortfolioOverview } from '@/components/PortfolioOverview'
+import { AdvertisingHeader } from '@/components/AdvertisingHeader'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Activity, Globe, Users, Leaf, Flame, Recycle } from 'lucide-react'
 
 const Index = () => {
   return (
     <div className="space-y-6">
+      {/* Official Advertising Header */}
+      <AdvertisingHeader />
+
       {/* Welcome Header */}
       <div className="flex items-center justify-between">
         <div>
