@@ -28,6 +28,14 @@ interface SecurityMetrics {
   futureTechAdaptation: number
 }
 
+// Type for Network Information API
+interface NetworkConnection {
+  effectiveType?: string
+  type?: string
+  downlink?: number
+  rtt?: number
+}
+
 export function FutureProofSecurityEngine() {
   const [metrics, setMetrics] = useState<SecurityMetrics>({
     threatsBlocked: 0,
@@ -54,6 +62,12 @@ export function FutureProofSecurityEngine() {
           .then(data => data.ip)
           .catch(() => 'Unknown')
 
+        // Get network connection info safely
+        const connection = (navigator as any).connection as NetworkConnection | undefined
+        const networkSignature = connection ? 
+          `${connection.effectiveType || 'unknown'}-${navigator.onLine}` : 
+          `unknown-${navigator.onLine}`
+
         // Advanced threat detection algorithms
         const newThreats: ThreatIntelligence[] = []
 
@@ -79,7 +93,7 @@ export function FutureProofSecurityEngine() {
                   targetedWallet: 'Multiple wallets targeted',
                   geolocation: 'Tracking initiated...',
                   deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
-                  networkSignature: `${navigator.connection?.effectiveType || 'unknown'}-${navigator.onLine}`,
+                  networkSignature,
                   behaviorPattern: `Suspicious wallet access pattern: ${pattern}`,
                   preventionAction: 'IMMEDIATE_LOCKDOWN_INITIATED',
                   status: 'BLOCKED'
@@ -249,6 +263,9 @@ export function FutureProofSecurityEngine() {
           )
         }
 
+        // Get connection info safely
+        const connection = (navigator as any).connection as NetworkConnection | undefined
+
         // Comprehensive threat intelligence package
         const threatIntelPackage = {
           ...threat,
@@ -262,7 +279,7 @@ export function FutureProofSecurityEngine() {
             doNotTrack: navigator.doNotTrack,
             hardwareConcurrency: navigator.hardwareConcurrency,
             deviceMemory: (navigator as any).deviceMemory || 'unknown',
-            connection: (navigator as any).connection?.effectiveType || 'unknown'
+            connection: connection?.effectiveType || 'unknown'
           },
           systemInformation: {
             windowSize: `${window.innerWidth}x${window.innerHeight}`,
@@ -272,9 +289,9 @@ export function FutureProofSecurityEngine() {
           },
           networkAnalysis: {
             onlineStatus: navigator.onLine,
-            connectionType: (navigator as any).connection?.type || 'unknown',
-            downlink: (navigator as any).connection?.downlink || 'unknown',
-            rtt: (navigator as any).connection?.rtt || 'unknown'
+            connectionType: connection?.type || 'unknown',
+            downlink: connection?.downlink || 'unknown',
+            rtt: connection?.rtt || 'unknown'
           },
           behaviorAnalysis: {
             mouseMovements: 'Tracking active',
