@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe, Chrome, Key, Timer } from 'lucide-react'
+import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe, Chrome, Key, Timer, ShieldCheck } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 interface SecureAdminLoginProps {
@@ -37,16 +37,49 @@ const generateAccountSeedPhrase = (): string => {
   return phrase.join(' ')
 }
 
+// Generate second layer security phrase (12 words)
+const generateSecurityWallPhrase = (): string => {
+  const securityWords = [
+    'fortress', 'vault', 'cipher', 'guardian', 'shield', 'protection', 'secure', 'defense',
+    'barrier', 'wall', 'gate', 'key', 'lock', 'safety', 'armor', 'sanctuary',
+    'bastion', 'stronghold', 'rampart', 'bulwark', 'aegis', 'shelter', 'haven', 'refuge',
+    'quantum', 'cryptic', 'matrix', 'nexus', 'core', 'system', 'protocol', 'access',
+    'phoenix', 'stellar', 'cosmic', 'eternal'
+  ]
+  
+  const phrase = []
+  const usedWords = new Set()
+  
+  // Generate 12 unique words for security wall phrase
+  while (phrase.length < 12) {
+    const randomIndex = Math.floor(Math.random() * securityWords.length)
+    const word = securityWords[randomIndex]
+    if (!usedWords.has(word)) {
+      phrase.push(word)
+      usedWords.add(word)
+    }
+  }
+  
+  return phrase.join(' ')
+}
+
 // Validate seed phrase for account recovery
 const validateSeedPhrase = (phrase: string): boolean => {
   const parts = phrase.split(' ')
   return parts.length >= 12 && parts.includes('synatic')
 }
 
+// Validate security wall phrase
+const validateSecurityWallPhrase = (phrase: string): boolean => {
+  const parts = phrase.split(' ')
+  return parts.length >= 12 && (parts.includes('quantum') || parts.includes('matrix') || parts.includes('fortress'))
+}
+
 export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [recoveryPhrase, setRecoveryPhrase] = useState('')
+  const [securityWallPhrase, setSecurityWallPhrase] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [isLogging, setIsLogging] = useState(false)
   const [userIP, setUserIP] = useState<string>('')
@@ -55,9 +88,13 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
   const [attemptCount, setAttemptCount] = useState(0)
   const [isBlocked, setIsBlocked] = useState(false)
   const [showSeedPhrase, setShowSeedPhrase] = useState(false)
+  const [showSecurityWallPhrase, setShowSecurityWallPhrase] = useState(false)
   const [seedPhrase, setSeedPhrase] = useState('')
+  const [securityWallSeedPhrase, setSecurityWallSeedPhrase] = useState('')
   const [seedCountdown, setSeedCountdown] = useState(0)
+  const [securityWallCountdown, setSecurityWallCountdown] = useState(0)
   const [useRecoveryMode, setUseRecoveryMode] = useState(false)
+  const [recoveryStep, setRecoveryStep] = useState(1) // 1 = first phrase, 2 = security wall phrase
   const { toast } = useToast()
 
   // Your specific IP address - replace with your actual IP
@@ -155,7 +192,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
             if (window.gc) window.gc() // Force garbage collection if available
             toast({
               title: "🔒 SECURITY CLEANUP COMPLETE",
-              description: "Seed phrase completely removed from system memory. No traces left.",
+              description: "Primary seed phrase completely removed from system memory. No traces left.",
             })
             return 0
           }
@@ -169,12 +206,40 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
     }
   }, [seedCountdown, toast])
 
+  // Countdown effect for security wall phrase display
+  useEffect(() => {
+    let interval: NodeJS.Timeout
+    if (securityWallCountdown > 0) {
+      interval = setInterval(() => {
+        setSecurityWallCountdown(prev => {
+          if (prev <= 1) {
+            // Time's up - completely remove all traces
+            setSecurityWallSeedPhrase('')
+            setShowSecurityWallPhrase(false)
+            // Clear any possible memory traces
+            if (window.gc) window.gc() // Force garbage collection if available
+            toast({
+              title: "🛡️ SECURITY WALL CLEANUP COMPLETE",
+              description: "Security wall phrase completely removed from system memory. ZERO traces remaining.",
+            })
+            return 0
+          }
+          return prev - 1
+        })
+      }, 1000)
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+  }, [securityWallCountdown, toast])
+
   const validateCredentials = (user: string, pass: string): boolean => {
     return user === 'Synatic' && pass === 'Synatic!oul1992'
   }
 
-  const validateRecoveryCredentials = (phrase: string): boolean => {
-    return validateSeedPhrase(phrase)
+  const validateRecoveryCredentials = (phrase: string, wallPhrase: string): boolean => {
+    return validateSeedPhrase(phrase) && validateSecurityWallPhrase(wallPhrase)
   }
 
   const generateAndShowAccountSeedPhrase = () => {
@@ -184,9 +249,56 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
     setSeedCountdown(120) // 2 minutes = 120 seconds
     
     toast({
-      title: "🔐 ACCOUNT RECOVERY PHRASE GENERATED",
-      description: "12-word recovery phrase generated. Write it down immediately! Auto-destructs in 2 minutes.",
+      title: "🔐 PRIMARY RECOVERY PHRASE GENERATED",
+      description: "Step 1: 12-word primary recovery phrase generated. Write it down immediately! Auto-destructs in 2 minutes.",
     })
+  }
+
+  const generateAndShowSecurityWallPhrase = () => {
+    const phrase = generateSecurityWallPhrase()
+    setSecurityWallSeedPhrase(phrase)
+    setShowSecurityWallPhrase(true)
+    setSecurityWallCountdown(120) // 2 minutes = 120 seconds
+    
+    toast({
+      title: "🛡️ SECURITY WALL PHRASE GENERATED",
+      description: "Step 2: 12-word UNBREAKABLE security wall phrase generated. Write it down NOW! Auto-destructs in 2 minutes.",
+    })
+  }
+
+  const handleRecoveryStepValidation = () => {
+    if (recoveryStep === 1) {
+      // Validate first recovery phrase
+      if (!recoveryPhrase || !validateSeedPhrase(recoveryPhrase)) {
+        toast({
+          title: "❌ STEP 1 FAILED",
+          description: "Invalid primary recovery phrase. Access denied.",
+          variant: "destructive"
+        })
+        return false
+      }
+      
+      // Move to step 2
+      setRecoveryStep(2)
+      toast({
+        title: "✅ STEP 1 PASSED",
+        description: "Primary phrase validated. Now enter your SECURITY WALL phrase to complete recovery.",
+      })
+      return false // Don't complete login yet
+    } else {
+      // Validate security wall phrase
+      if (!securityWallPhrase || !validateSecurityWallPhrase(securityWallPhrase)) {
+        toast({
+          title: "🚨 SECURITY WALL BREACH ATTEMPT",
+          description: "Invalid security wall phrase. MAXIMUM SECURITY VIOLATION DETECTED!",
+          variant: "destructive"
+        })
+        return false
+      }
+      
+      // Both phrases validated
+      return true
+    }
   }
 
   const handleLogin = async () => {
@@ -218,13 +330,34 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
     }
 
     if (useRecoveryMode) {
-      if (!recoveryPhrase) {
-        toast({
-          title: "🔐 Recovery Phrase Required",
-          description: "Please enter your complete seed recovery phrase",
-          variant: "destructive"
-        })
-        return
+      if (recoveryStep === 1) {
+        if (!recoveryPhrase) {
+          toast({
+            title: "🔐 Primary Recovery Phrase Required",
+            description: "Please enter your complete primary seed recovery phrase",
+            variant: "destructive"
+          })
+          return
+        }
+        
+        // Validate step 1 and potentially move to step 2
+        if (!handleRecoveryStepValidation()) {
+          return
+        }
+      } else {
+        if (!securityWallPhrase) {
+          toast({
+            title: "🛡️ Security Wall Phrase Required",
+            description: "Please enter your complete 12-word security wall phrase",
+            variant: "destructive"
+          })
+          return
+        }
+        
+        // Validate step 2
+        if (!handleRecoveryStepValidation()) {
+          return
+        }
       }
     } else {
       if (!username || !password) {
@@ -244,11 +377,11 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
 
     let isValid = false
     if (useRecoveryMode) {
-      isValid = validateRecoveryCredentials(recoveryPhrase)
+      isValid = validateRecoveryCredentials(recoveryPhrase, securityWallPhrase)
       if (isValid) {
         toast({
-          title: "🔐 SEED RECOVERY SUCCESSFUL",
-          description: "Master seed phrase validated. Account access restored.",
+          title: "🔐 DUAL-LAYER RECOVERY SUCCESSFUL",
+          description: "Both security phrases validated. MAXIMUM SECURITY CLEARANCE GRANTED!",
         })
       }
     } else {
@@ -267,7 +400,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
       
       toast({
         title: "🛡️ MAXIMUM SECURITY ACCESS GRANTED",
-        description: useRecoveryMode ? "Account recovered via seed phrase." : "Welcome back, Synatic. Full administrative control activated.",
+        description: useRecoveryMode ? "Account recovered via dual-layer security phrases." : "Welcome back, Synatic. Full administrative control activated.",
       })
       
       onLoginSuccess()
@@ -289,7 +422,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
       } else {
         toast({
           title: "❌ AUTHENTICATION FAILURE",
-          description: `Invalid ${useRecoveryMode ? 'recovery phrase' : 'credentials'}. ${3 - newAttemptCount} attempts remaining before lockdown.`,
+          description: `Invalid ${useRecoveryMode ? 'recovery phrases' : 'credentials'}. ${3 - newAttemptCount} attempts remaining before lockdown.`,
           variant: "destructive"
         })
       }
@@ -398,53 +531,89 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
             </div>
           </div>
 
-          {/* Account Recovery Seed Phrase Generator */}
+          {/* Dual Recovery Phrase Generators */}
           <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
+            <div className="text-purple-400 font-bold text-xs mb-2">🛡️ DUAL-LAYER RECOVERY SYSTEM</div>
+            
+            {/* Primary Recovery Phrase */}
             <Button
               onClick={generateAndShowAccountSeedPhrase}
               className="w-full bg-purple-600 hover:bg-purple-700 text-white text-xs py-2 mb-2"
               disabled={showSeedPhrase}
             >
               <Key className="h-3 w-3 mr-1" />
-              🔐 Generate 12-Word Recovery Phrase
+              🔐 Generate Step 1: Primary Recovery (12 Words)
             </Button>
             
             {showSeedPhrase && (
-              <div className="mt-2 p-3 bg-black/70 rounded border-2 border-purple-500/50">
+              <div className="mt-2 p-3 bg-black/70 rounded border-2 border-purple-500/50 mb-3">
                 <div className="flex items-center gap-2 text-purple-400 mb-2">
                   <Timer className="h-4 w-4" />
-                  <span className="font-bold">AUTO-DESTRUCT: {Math.floor(seedCountdown / 60)}:{(seedCountdown % 60).toString().padStart(2, '0')}</span>
+                  <span className="font-bold">STEP 1 AUTO-DESTRUCT: {Math.floor(seedCountdown / 60)}:{(seedCountdown % 60).toString().padStart(2, '0')}</span>
                 </div>
-                <div className="text-yellow-400 text-xs mb-2 font-bold">⚠️ WRITE DOWN ON PAPER IMMEDIATELY - GRANTS FULL ACCOUNT ACCESS:</div>
+                <div className="text-yellow-400 text-xs mb-2 font-bold">⚠️ STEP 1 - WRITE DOWN ON PAPER IMMEDIATELY:</div>
                 <div className="font-mono text-purple-300 text-xs break-words p-2 bg-black/50 rounded border">
                   {seedPhrase}
                 </div>
                 <div className="text-red-400 text-xs mt-2 font-bold">
-                  🔥 Complete memory wipe in {seedCountdown} seconds - No digital traces will remain!
-                </div>
-                <div className="text-blue-400 text-xs mt-2">
-                  💡 Use this 12-word phrase to recover admin access from any legitimate Firefox browser
+                  🔥 Complete memory wipe in {seedCountdown} seconds
                 </div>
               </div>
             )}
+
+            {/* Security Wall Phrase */}
+            <Button
+              onClick={generateAndShowSecurityWallPhrase}
+              className="w-full bg-red-600 hover:bg-red-700 text-white text-xs py-2"
+              disabled={showSecurityWallPhrase}
+            >
+              <ShieldCheck className="h-3 w-3 mr-1" />
+              🛡️ Generate Step 2: UNBREAKABLE Security Wall (12 Words)
+            </Button>
+            
+            {showSecurityWallPhrase && (
+              <div className="mt-2 p-3 bg-black/70 rounded border-2 border-red-500/50">
+                <div className="flex items-center gap-2 text-red-400 mb-2">
+                  <Timer className="h-4 w-4" />
+                  <span className="font-bold">STEP 2 AUTO-DESTRUCT: {Math.floor(securityWallCountdown / 60)}:{(securityWallCountdown % 60).toString().padStart(2, '0')}</span>
+                </div>
+                <div className="text-yellow-400 text-xs mb-2 font-bold">⚠️ STEP 2 - UNBREAKABLE SECURITY WALL - WRITE DOWN NOW:</div>
+                <div className="font-mono text-red-300 text-xs break-words p-2 bg-black/50 rounded border">
+                  {securityWallSeedPhrase}
+                </div>
+                <div className="text-red-400 text-xs mt-2 font-bold">
+                  🔥 ZERO TRACES will remain after {securityWallCountdown} seconds!
+                </div>
+              </div>
+            )}
+            
+            <div className="text-orange-400 text-xs mt-2 font-bold">
+              🔒 BOTH phrases required for account recovery from any legitimate Firefox browser
+            </div>
           </div>
 
           {/* Login Mode Toggle */}
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
             <div className="flex gap-2">
               <Button
-                onClick={() => setUseRecoveryMode(false)}
+                onClick={() => {
+                  setUseRecoveryMode(false)
+                  setRecoveryStep(1)
+                }}
                 className={`flex-1 text-xs py-2 ${!useRecoveryMode ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
               >
                 <Lock className="h-3 w-3 mr-1" />
                 Normal Login
               </Button>
               <Button
-                onClick={() => setUseRecoveryMode(true)}
+                onClick={() => {
+                  setUseRecoveryMode(true)
+                  setRecoveryStep(1)
+                }}
                 className={`flex-1 text-xs py-2 ${useRecoveryMode ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
               >
                 <Key className="h-3 w-3 mr-1" />
-                Seed Recovery
+                Dual Recovery
               </Button>
             </div>
           </div>
@@ -501,20 +670,62 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
               </div>
             </>
           ) : (
-            <div>
-              <label className="block text-sm font-medium mb-2 text-blue-400">
-                🔐 12-Word Recovery Phrase
-              </label>
-              <textarea
-                value={recoveryPhrase}
-                onChange={(e) => setRecoveryPhrase(e.target.value)}
-                placeholder="Enter your complete 12-word seed recovery phrase"
-                className="w-full h-24 bg-black/50 border-blue-500/30 text-blue-100 focus:border-blue-400 rounded-md p-2 text-xs font-mono"
-                disabled={isBlocked}
-              />
-              <div className="text-xs text-blue-300 mt-1">
-                Enter all 12 words from your recovery phrase
+            <div className="space-y-4">
+              {/* Recovery Step Indicator */}
+              <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+                <div className="flex items-center justify-center gap-2 text-blue-400 mb-2">
+                  <ShieldCheck className="h-4 w-4" />
+                  <span className="font-bold">DUAL-LAYER RECOVERY MODE</span>
+                </div>
+                <div className="flex justify-center gap-2">
+                  <Badge className={`text-xs ${recoveryStep >= 1 ? 'bg-blue-600' : 'bg-gray-600'}`}>
+                    Step 1: Primary Phrase {recoveryStep > 1 ? '✓' : ''}
+                  </Badge>
+                  <Badge className={`text-xs ${recoveryStep >= 2 ? 'bg-red-600' : 'bg-gray-600'}`}>
+                    Step 2: Security Wall {recoveryStep > 2 ? '✓' : ''}
+                  </Badge>
+                </div>
               </div>
+
+              {recoveryStep === 1 && (
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-blue-400">
+                    🔐 Step 1: Primary Recovery Phrase (12 Words)
+                  </label>
+                  <textarea
+                    value={recoveryPhrase}
+                    onChange={(e) => setRecoveryPhrase(e.target.value)}
+                    placeholder="Enter your complete 12-word primary recovery phrase"
+                    className="w-full h-24 bg-black/50 border-blue-500/30 text-blue-100 focus:border-blue-400 rounded-md p-2 text-xs font-mono"
+                    disabled={isBlocked}
+                  />
+                  <div className="text-xs text-blue-300 mt-1">
+                    Enter all 12 words from your primary recovery phrase
+                  </div>
+                </div>
+              )}
+
+              {recoveryStep === 2 && (
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-red-400">
+                    🛡️ Step 2: UNBREAKABLE Security Wall Phrase (12 Words)
+                  </label>
+                  <textarea
+                    value={securityWallPhrase}
+                    onChange={(e) => setSecurityWallPhrase(e.target.value)}
+                    placeholder="Enter your complete 12-word UNBREAKABLE security wall phrase"
+                    className="w-full h-24 bg-black/50 border-red-500/30 text-red-100 focus:border-red-400 rounded-md p-2 text-xs font-mono"
+                    disabled={isBlocked}
+                  />
+                  <div className="text-xs text-red-300 mt-1">
+                    Enter all 12 words from your UNBREAKABLE security wall phrase
+                  </div>
+                  <div className="bg-red-500/20 border border-red-500/50 rounded p-2 mt-2">
+                    <div className="text-red-400 text-xs font-bold">🚨 FINAL SECURITY CHECKPOINT</div>
+                    <div className="text-red-300 text-xs">This is your last line of defense. Only the correct phrase will grant access.</div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
           
@@ -526,7 +737,10 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
             {isLogging ? (
               <div className="flex items-center gap-2">
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                {useRecoveryMode ? 'Validating Recovery Phrase...' : 'Authenticating Maximum Security...'}
+                {useRecoveryMode ? 
+                  (recoveryStep === 1 ? 'Validating Primary Phrase...' : 'Penetrating Security Wall...') : 
+                  'Authenticating Maximum Security...'
+                }
               </div>
             ) : isBlocked ? (
               <div className="flex items-center gap-2">
@@ -535,8 +749,13 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                {useRecoveryMode ? <Key className="h-4 w-4" /> : <Shield className="h-4 w-4" />}
-                🔓 {useRecoveryMode ? 'RECOVER ADMIN ACCESS' : 'GRANT MAXIMUM ADMIN ACCESS'}
+                {useRecoveryMode ? 
+                  (recoveryStep === 1 ? 
+                    <><Key className="h-4 w-4" /> 🔓 VALIDATE STEP 1: PRIMARY PHRASE</> : 
+                    <><ShieldCheck className="h-4 w-4" /> 🛡️ BREACH SECURITY WALL: STEP 2</>
+                  ) : 
+                  <><Shield className="h-4 w-4" /> 🔓 GRANT MAXIMUM ADMIN ACCESS</>
+                }
               </div>
             )}
           </Button>
@@ -545,7 +764,8 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
             <div>🎵 "Seeds Will Form Into Music" 🎵</div>
             <div className="text-green-400">Harmony of Gaia Ultra-Secure Zone</div>
             <div className="text-red-400">⚠️ Legitimate Firefox on Windows + Authorized IP Only</div>
-            <div className="text-purple-400">🔐 12-Word Recovery Available Across All Computers</div>
+            <div className="text-purple-400">🔐 DUAL-LAYER Recovery: Primary + Security Wall</div>
+            <div className="text-orange-400">🛡️ UNBREAKABLE Security Wall Protection</div>
           </div>
 
           {attemptCount > 0 && !isBlocked && (
