@@ -477,6 +477,8 @@ export function CoinGeckoTrading() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-yellow-400 hover:text-yellow-300 text-sm underline"
+              >
+                CoinMarketCap
               </a>
             </div>
           </div>
