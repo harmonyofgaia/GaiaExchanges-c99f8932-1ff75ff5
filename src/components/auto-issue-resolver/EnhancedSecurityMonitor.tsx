@@ -182,54 +182,16 @@ export function EnhancedSecurityMonitor() {
               <div className="text-3xl font-bold text-purple-400">{securityThreats.length}</div>
               <div className="text-sm text-muted-foreground">Events Today</div>
               <Badge className="mt-2 bg-purple-600 text-white">
-                <Zap className="h-3 w-3 mr-1" />
-                Tracked
+                <Eye className="h-3 w-3 mr-1" />
+                Monitored
               </Badge>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-yellow-400">0</div>
-              <div className="text-sm text-muted-foreground">Breaches Ever</div>
+              <div className="text-sm text-muted-foreground">Active Threats</div>
               <Badge className="mt-2 bg-green-600 text-white">
-                <Lock className="h-3 w-3 mr-1" />
-                Perfect
-              </Badge>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Network Security Status */}
-      <Card className="border-blue-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <Globe className="h-5 w-5" />
-            Network Security Status
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm">Firewall</span>
-              <Badge className={`${networkSecurity.firewallStatus === 'active' ? 'bg-green-600' : 'bg-red-600'} text-white`}>
-                {networkSecurity.firewallStatus}
-              </Badge>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm">DDoS Protection</span>
-              <Badge className={`${networkSecurity.ddosProtection === 'active' ? 'bg-green-600' : 'bg-red-600'} text-white`}>
-                {networkSecurity.ddosProtection}
-              </Badge>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm">SSL Certificate</span>
-              <Badge className={`${networkSecurity.sslStatus === 'valid' ? 'bg-green-600' : 'bg-red-600'} text-white`}>
-                {networkSecurity.sslStatus}
-              </Badge>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm">Intrusion Detection</span>
-              <Badge className={`${networkSecurity.intrusion === 'none' ? 'bg-green-600' : networkSecurity.intrusion === 'blocked' ? 'bg-yellow-600' : 'bg-red-600'} text-white`}>
-                {networkSecurity.intrusion}
+                <CheckCircle className="h-3 w-3 mr-1" />
+                Secure
               </Badge>
             </div>
           </div>
@@ -237,79 +199,113 @@ export function EnhancedSecurityMonitor() {
       </Card>
 
       {/* Recent Security Events */}
-      <Card className="border-orange-500/20">
+      <Card className="border-blue-500/20">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-orange-400">
-            <Eye className="h-5 w-5" />
-            Real-time Security Events
+          <CardTitle className="flex items-center gap-2 text-blue-400">
+            <Lock className="h-5 w-5" />
+            Recent Security Events
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3 max-h-64 overflow-y-auto">
-            {securityThreats.map((threat) => (
-              <div key={threat.id} className="flex items-center gap-3 p-3 rounded-lg bg-muted/20 border border-border/50">
-                <div className={getThreatColor(threat.type)}>
-                  {getThreatIcon(threat.type)}
-                </div>
-                <div className="flex-1">
-                  <div className="text-sm">{threat.message}</div>
-                  <div className="text-xs text-muted-foreground">
-                    {threat.timestamp.toLocaleTimeString()} • {threat.source}
+          <div className="space-y-3 max-h-60 overflow-y-auto">
+            {securityThreats.length === 0 ? (
+              <div className="text-center text-muted-foreground py-4">
+                <Shield className="h-8 w-8 mx-auto mb-2 text-green-400" />
+                <p>No security events - System running perfectly</p>
+              </div>
+            ) : (
+              securityThreats.map((threat) => (
+                <div key={threat.id} className="flex items-start gap-3 p-3 rounded-lg bg-muted/20">
+                  <div className={getThreatColor(threat.type)}>
+                    {getThreatIcon(threat.type)}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-medium">{threat.message}</p>
+                      <Badge className={threat.resolved ? 'bg-green-600' : 'bg-red-600'}>
+                        {threat.resolved ? 'Resolved' : 'Active'}
+                      </Badge>
+                    </div>
+                    <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
+                      <span>{threat.source}</span>
+                      <span>•</span>
+                      <span>{threat.timestamp.toLocaleTimeString()}</span>
+                    </div>
                   </div>
                 </div>
-                <Badge className={`text-white text-xs ${threat.resolved ? 'bg-green-600' : 'bg-yellow-600'}`}>
-                  {threat.resolved ? 'Resolved' : 'Monitoring'}
-                </Badge>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </CardContent>
       </Card>
 
-      {/* Advanced Protection Features */}
-      <Card className="border-purple-500/20 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
-        <CardContent className="pt-6">
-          <h3 className="text-lg font-semibold text-purple-400 mb-4">🛡️ Advanced Protection Features</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
-                <span>AI-Powered Threat Detection</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
-                <span>Quantum-Resistant Encryption</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
-                <span>Multi-Layer Wallet Protection</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
-                <span>Real-time Blockchain Monitoring</span>
-              </div>
+      {/* Network Security Status */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card className="border-cyan-500/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-cyan-400 text-lg">
+              <Globe className="h-5 w-5" />
+              Network Protection
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span>Firewall Status</span>
+              <Badge className={networkSecurity.firewallStatus === 'active' ? 'bg-green-600' : 'bg-red-600'}>
+                {networkSecurity.firewallStatus}
+              </Badge>
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
-                <span>Advanced DeFi Security Protocols</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
-                <span>Smart Contract Audit Integration</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
-                <span>Cross-Chain Bridge Protection</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-green-400" />
-                <span>Zero-Knowledge Privacy Layer</span>
-              </div>
+            <div className="flex items-center justify-between">
+              <span>DDoS Protection</span>
+              <Badge className={networkSecurity.ddosProtection === 'active' ? 'bg-green-600' : 'bg-red-600'}>
+                {networkSecurity.ddosProtection}
+              </Badge>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+            <div className="flex items-center justify-between">
+              <span>SSL Certificate</span>
+              <Badge className={networkSecurity.sslStatus === 'valid' ? 'bg-green-600' : 'bg-red-600'}>
+                {networkSecurity.sslStatus}
+              </Badge>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>Intrusion Detection</span>
+              <Badge className={
+                networkSecurity.intrusion === 'none' ? 'bg-green-600' : 
+                networkSecurity.intrusion === 'blocked' ? 'bg-yellow-600' : 'bg-red-600'
+              }>
+                {networkSecurity.intrusion}
+              </Badge>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-purple-500/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-purple-400 text-lg">
+              <Zap className="h-5 w-5" />
+              AI Security Engine
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span>Machine Learning</span>
+              <Badge className="bg-green-600">Active</Badge>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>Behavioral Analysis</span>
+              <Badge className="bg-green-600">Monitoring</Badge>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>Predictive Blocking</span>
+              <Badge className="bg-green-600">Enabled</Badge>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>Auto-Response</span>
+              <Badge className="bg-green-600">Ready</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }
