@@ -367,7 +367,7 @@ export function NetworkDefenseGrid() {
             </div>
             <div className="flex justify-between">
               <span className="text-sm">Response Time:</span>
-              <span className="text-green-400 font-semibold">< 50ms</span>
+              <span className="text-green-400 font-semibold">{"< 50ms"}</span>
             </div>
           </CardContent>
         </Card>
