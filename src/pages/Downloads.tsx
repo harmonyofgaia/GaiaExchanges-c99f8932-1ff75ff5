@@ -1,7 +1,6 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Download, Monitor, Apple, Smartphone, Terminal, Star } from 'lucide-react'
+import { Download, Monitor, Apple, Smartphone, Terminal, Star, ExternalLink } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
 
@@ -9,27 +8,54 @@ const Downloads = () => {
   const handleDownload = (platform: string, url: string) => {
     console.log(`🔗 Initiating download for ${platform}`)
     
-    // Create download link
-    const link = document.createElement('a')
-    link.href = url
-    link.download = `gaias-exchange-${platform.toLowerCase()}.${platform === 'Android' ? 'apk' : platform === 'macOS' ? 'dmg' : platform === 'Linux' ? 'deb' : 'exe'}`
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    
-    toast.success(`Download started for ${platform}`, {
-      description: `Gaia's Exchange ${platform} version is downloading...`
-    })
-    
-    console.log(`✅ Download initiated successfully for ${platform}`)
+    try {
+      // Firefox-compatible download approach
+      if (navigator.userAgent.includes('Firefox')) {
+        // Use window.open for Firefox compatibility
+        const newWindow = window.open(url, '_blank')
+        if (newWindow) {
+          newWindow.focus()
+        } else {
+          // Fallback if popup blocked
+          window.location.href = url
+        }
+      } else {
+        // Standard approach for other browsers
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `gaias-exchange-${platform.toLowerCase()}.${platform === 'Android' ? 'apk' : platform === 'macOS' ? 'dmg' : platform === 'Linux' ? 'deb' : platform === 'BlackBerry' ? 'cod' : 'exe'}`
+        link.target = '_blank'
+        link.rel = 'noopener noreferrer'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      }
+      
+      toast.success(`Download started for ${platform}`, {
+        description: `Gaia's Exchange ${platform} version is downloading...`
+      })
+      
+      console.log(`✅ Download initiated successfully for ${platform}`)
+    } catch (error) {
+      console.error(`❌ Download failed for ${platform}:`, error)
+      toast.error(`Download failed for ${platform}`, {
+        description: 'Please try again or contact support.'
+      })
+    }
   }
 
+  const handleViewOnGitHub = () => {
+    const githubUrl = 'https://github.com/harmonyofgaia/releases'
+    window.open(githubUrl, '_blank', 'noopener,noreferrer')
+  }
+
+  // Updated download links with proper GitHub releases
   const downloadLinks = {
-    windows: 'https://github.com/harmonyofgaia/releases/download/v2.0.1/gaias-exchange-windows.exe',
-    macos: 'https://github.com/harmonyofgaia/releases/download/v2.0.1/gaias-exchange-macos.dmg',
-    android: 'https://github.com/harmonyofgaia/releases/download/v2.0.1/gaias-exchange-android.apk',
-    linux: 'https://github.com/harmonyofgaia/releases/download/v2.0.1/gaias-exchange-linux.deb',
-    blackberry: 'https://github.com/harmonyofgaia/releases/download/v1.0.0/gaias-exchange-blackberry.cod'
+    windows: 'https://github.com/harmonyofgaia/gaia-exchange/releases/latest/download/gaias-exchange-windows.exe',
+    macos: 'https://github.com/harmonyofgaia/gaia-exchange/releases/latest/download/gaias-exchange-macos.dmg',
+    android: 'https://github.com/harmonyofgaia/gaia-exchange/releases/latest/download/gaias-exchange-android.apk',
+    linux: 'https://github.com/harmonyofgaia/gaia-exchange/releases/latest/download/gaias-exchange-linux.deb',
+    blackberry: 'https://github.com/harmonyofgaia/gaia-exchange/releases/download/v1.0.0/gaias-exchange-blackberry.cod'
   }
 
   return (
@@ -39,7 +65,42 @@ const Downloads = () => {
           <h1 className="text-3xl font-bold">Downloads</h1>
           <p className="text-muted-foreground">Download Gaia's Exchange for all platforms</p>
         </div>
+        <Button 
+          onClick={handleViewOnGitHub}
+          variant="outline"
+          className="flex items-center gap-2"
+        >
+          <ExternalLink className="h-4 w-4" />
+          View on GitHub
+        </Button>
       </div>
+
+      {/* App Link Banner */}
+      <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-blue-900/30">
+        <CardContent className="pt-6">
+          <div className="text-center space-y-3">
+            <div className="text-2xl font-bold text-green-400">🌍 Access Gaia's Exchange Web App</div>
+            <p className="text-muted-foreground">
+              Use our web application directly in your browser - no download required!
+            </p>
+            <Button 
+              onClick={() => {
+                const appUrl = window.location.origin
+                navigator.clipboard.writeText(appUrl)
+                toast.success('App link copied to clipboard!', {
+                  description: `${appUrl}`
+                })
+              }}
+              className="bg-green-600 hover:bg-green-700"
+            >
+              Copy App Link
+            </Button>
+            <div className="text-sm text-green-400 font-mono">
+              {window.location.origin}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Featured Gaia's Exchange App */}
       <Card className="border-yellow-500/30 bg-gradient-to-br from-yellow-900/30 to-orange-900/30">
@@ -381,6 +442,21 @@ const Downloads = () => {
               </ul>
             </div>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Firefox Compatibility Notice */}
+      <Card className="border-orange-500/20 bg-gradient-to-r from-orange-900/10 to-red-900/10">
+        <CardContent className="pt-6">
+          <h3 className="text-lg font-semibold mb-3 text-orange-400">🦊 Firefox Users</h3>
+          <p className="text-sm text-muted-foreground mb-2">
+            If downloads don't start automatically in Firefox, please:
+          </p>
+          <ul className="space-y-1 text-sm text-muted-foreground">
+            <li>• Allow pop-ups for this site in Firefox settings</li>
+            <li>• Try right-clicking the download button and selecting "Save Link As"</li>
+            <li>• Visit our GitHub releases page directly using the button above</li>
+          </ul>
         </CardContent>
       </Card>
     </div>
