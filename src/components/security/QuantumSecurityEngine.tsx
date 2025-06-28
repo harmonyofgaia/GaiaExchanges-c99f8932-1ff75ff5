@@ -54,6 +54,17 @@ export function QuantumSecurityEngine() {
     return crypto.split('').reverse().join('')
   }
 
+  // Map threat levels to database severity levels
+  const mapThreatLevelToSeverity = (threatLevel: string): 'low' | 'medium' | 'high' | 'maximum' => {
+    switch (threatLevel) {
+      case 'CRITICAL': return 'maximum'
+      case 'HIGH': return 'high'
+      case 'MEDIUM': return 'medium'
+      case 'LOW': return 'low'
+      default: return 'low'
+    }
+  }
+
   // Advanced AI-powered threat detection
   useEffect(() => {
     const performQuantumSecurityScan = async () => {
@@ -185,14 +196,14 @@ export function QuantumSecurityEngine() {
             await activateQuantumResponse(criticalThreats[0])
           }
 
-          // Log threats to security_events table (which exists in current schema)
+          // Log threats to security_events table with proper severity mapping
           for (const threat of newThreats) {
             try {
-              const severityLevel = threat.threatLevel.toLowerCase() as 'low' | 'medium' | 'high' | 'maximum'
+              const severityLevel = mapThreatLevelToSeverity(threat.threatLevel)
               await supabase.from('security_events').insert({
                 event_type: threat.attackType,
                 event_description: threat.behaviorPattern,
-                severity: severityLevel === 'critical' ? 'maximum' : severityLevel,
+                severity: severityLevel,
                 ip_address: threat.ipAddress,
                 user_agent: threat.userAgent,
                 resolved: threat.status === 'NEUTRALIZED'
