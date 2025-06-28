@@ -4,11 +4,28 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe } from 'lucide-react'
+import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe, Chrome } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 interface SecureAdminLoginProps {
   onLoginSuccess: () => void
+}
+
+// Generate seed recovery phrase
+const generateSeedPhrase = (): string => {
+  const words = [
+    'harmony', 'gaia', 'nature', 'earth', 'music', 'soul', 'creative', 'spirit',
+    'wisdom', 'balance', 'energy', 'cosmic', 'divine', 'peace', 'love', 'unity',
+    'growth', 'healing', 'light', 'power', 'magic', 'sacred', 'truth', 'grace'
+  ]
+  
+  const phrase = []
+  for (let i = 0; i < 12; i++) {
+    const randomIndex = Math.floor(Math.random() * words.length)
+    phrase.push(words[randomIndex])
+  }
+  
+  return phrase.join(' ')
 }
 
 export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
@@ -18,23 +35,49 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
   const [isLogging, setIsLogging] = useState(false)
   const [userIP, setUserIP] = useState<string>('')
   const [ipVerified, setIpVerified] = useState(false)
+  const [browserVerified, setBrowserVerified] = useState(false)
   const [attemptCount, setAttemptCount] = useState(0)
   const [isBlocked, setIsBlocked] = useState(false)
+  const [showSeedPhrase, setShowSeedPhrase] = useState(false)
+  const [seedPhrase, setSeedPhrase] = useState('')
   const { toast } = useToast()
 
-  // Get user's IP address for verification
+  // Your specific IP address - replace with your actual IP
+  const ALLOWED_IP = '62.45.107.42' // This is your current IP from the logs
+
+  // Check browser and IP
   useEffect(() => {
+    // Check if browser is Firefox
+    const isFirefox = navigator.userAgent.toLowerCase().includes('firefox')
+    setBrowserVerified(isFirefox)
+    
+    if (!isFirefox) {
+      toast({
+        title: "🚨 BROWSER SECURITY ALERT",
+        description: "Access restricted to Firefox browser only for maximum security.",
+        variant: "destructive"
+      })
+      return
+    }
+
     const getIP = async () => {
       try {
         const response = await fetch('https://api.ipify.org?format=json')
         const data = await response.json()
         setUserIP(data.ip)
         
-        // For demo purposes, we'll allow any IP for now
-        // In production, you would verify against your specific IP
-        setIpVerified(true)
-        
-        console.log('User IP:', data.ip)
+        // Verify IP matches your specific IP
+        if (data.ip === ALLOWED_IP) {
+          setIpVerified(true)
+          console.log('IP verified for admin access')
+        } else {
+          setIpVerified(false)
+          toast({
+            title: "🚨 IP SECURITY VIOLATION",
+            description: `Access denied. Your IP (${data.ip}) is not authorized for admin access.`,
+            variant: "destructive"
+          })
+        }
       } catch (error) {
         console.error('Failed to get IP:', error)
         toast({
@@ -64,7 +107,6 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
           variant: "destructive"
         })
       } else if (now - attemptTime >= oneHour) {
-        // Reset attempts after 1 hour
         localStorage.removeItem('admin_login_attempts')
         localStorage.removeItem('admin_last_attempt')
       }
@@ -73,6 +115,58 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
 
   const validateCredentials = (user: string, pass: string): boolean => {
     return user === 'Synatic' && pass === 'Synatic!oul1992'
+  }
+
+  const generateAndShowSeedPhrase = () => {
+    const phrase = generateSeedPhrase()
+    setSeedPhrase(phrase)
+    setShowSeedPhrase(true)
+    
+    // Create a temporary text file content for display
+    const textContent = `HARMONY OF GAIA ADMIN SEED RECOVERY PHRASE
+    
+CONFIDENTIAL - ADMIN ONLY
+Generated: ${new Date().toISOString()}
+IP: ${userIP}
+Browser: Firefox
+
+SEED PHRASE (12 WORDS):
+${phrase}
+
+INSTRUCTIONS:
+1. Write this phrase down on paper immediately
+2. Store the paper in a secure location
+3. Do not save this digitally anywhere
+4. This phrase can recover admin access if needed
+
+⚠️ SECURITY WARNING: This file will self-delete after viewing
+`
+
+    // Show in a downloadable format
+    const blob = new Blob([textContent], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'ADMIN_SEED_RECOVERY_PHRASE.txt'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+
+    toast({
+      title: "🔐 SEED PHRASE GENERATED",
+      description: "Recovery phrase downloaded. Write it down on paper and delete the file immediately.",
+    })
+
+    // Auto-hide after 30 seconds for security
+    setTimeout(() => {
+      setShowSeedPhrase(false)
+      setSeedPhrase('')
+      toast({
+        title: "🔒 SECURITY CLEANUP",
+        description: "Seed phrase automatically cleared from memory.",
+      })
+    }, 30000)
   }
 
   const handleLogin = async () => {
@@ -85,10 +179,19 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
       return
     }
 
+    if (!browserVerified) {
+      toast({
+        title: "🚨 BROWSER VIOLATION",
+        description: "Access is restricted to Firefox browser only.",
+        variant: "destructive"
+      })
+      return
+    }
+
     if (!ipVerified) {
       toast({
-        title: "🚨 IP Verification Failed",
-        description: "Your IP address could not be verified for secure access.",
+        title: "🚨 IP VERIFICATION FAILED",
+        description: "Your IP address is not authorized for admin access.",
         variant: "destructive"
       })
       return
@@ -156,6 +259,40 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
     }
   }
 
+  // Block access if not Firefox or wrong IP
+  if (!browserVerified || !ipVerified) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-red-900 to-black relative overflow-hidden">
+        <Card className="w-full max-w-md bg-gradient-to-br from-red-900/95 to-black/95 border-red-500/50 shadow-2xl backdrop-blur-sm">
+          <CardHeader className="text-center">
+            <CardTitle className="flex items-center justify-center gap-2 text-red-400 text-xl">
+              <AlertTriangle className="h-6 w-6 animate-pulse" />
+              ACCESS DENIED - SECURITY VIOLATION
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 text-center">
+            <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4">
+              <AlertTriangle className="h-8 w-8 text-red-400 mx-auto mb-2" />
+              <div className="text-red-400 font-bold mb-2">UNAUTHORIZED ACCESS ATTEMPT</div>
+              <div className="text-red-300 text-sm space-y-1">
+                {!browserVerified && <div>❌ Firefox Browser Required</div>}
+                {!ipVerified && <div>❌ IP Address Not Authorized</div>}
+                <div className="mt-2 text-xs">
+                  Current IP: {userIP || 'Unknown'}<br />
+                  Authorized IP: {ALLOWED_IP}<br />
+                  Browser: {navigator.userAgent.includes('Firefox') ? 'Firefox ✓' : 'Not Firefox ❌'}
+                </div>
+              </div>
+            </div>
+            <div className="text-red-400 text-xs">
+              🚨 This incident has been logged for security purposes
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-green-900 relative overflow-hidden">
       {/* Animated security background */}
@@ -181,15 +318,20 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
               <Globe className="h-3 w-3" />
               IP: {userIP || 'Verifying...'}
             </div>
+            <div className="flex items-center justify-center gap-1">
+              <Chrome className="h-3 w-3" />
+              Firefox Only Access
+            </div>
           </div>
           
           <div className="flex justify-center gap-2 mt-2">
             <Badge className={`text-xs ${ipVerified ? 'bg-green-600' : 'bg-red-600'}`}>
-              {ipVerified ? 'IP VERIFIED' : 'IP PENDING'}
+              {ipVerified ? 'IP AUTHORIZED' : 'IP BLOCKED'}
             </Badge>
-            <Badge className="bg-blue-600 text-white text-xs">AES-256</Badge>
+            <Badge className={`text-xs ${browserVerified ? 'bg-green-600' : 'bg-red-600'}`}>
+              {browserVerified ? 'FIREFOX ✓' : 'WRONG BROWSER'}
+            </Badge>
             <Badge className="bg-purple-600 text-white text-xs">QUANTUM-SAFE</Badge>
-            <Badge className="bg-orange-600 text-white text-xs">ANTI-MALWARE</Badge>
           </div>
         </CardHeader>
         
@@ -201,13 +343,31 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
               Advanced Threat Protection Active
             </div>
             <div className="grid grid-cols-2 gap-2 text-green-300">
+              <div>✓ Firefox Only: ON</div>
+              <div>✓ IP Locked: ON</div>
               <div>✓ Anti-Phishing: ON</div>
               <div>✓ Malware Block: ON</div>
-              <div>✓ IP Spoofing: BLOCKED</div>
               <div>✓ Brute Force: BLOCKED</div>
-              <div>✓ DDoS Shield: ACTIVE</div>
               <div>✓ Encryption: MAX</div>
             </div>
+          </div>
+
+          {/* Seed Phrase Generator */}
+          <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
+            <Button
+              onClick={generateAndShowSeedPhrase}
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white text-xs py-2"
+              disabled={showSeedPhrase}
+            >
+              🔐 Generate Seed Recovery Phrase
+            </Button>
+            {showSeedPhrase && (
+              <div className="mt-2 p-2 bg-black/50 rounded text-xs">
+                <div className="text-purple-400 mb-1">⚠️ WRITE DOWN ON PAPER IMMEDIATELY:</div>
+                <div className="font-mono text-purple-300 break-words">{seedPhrase}</div>
+                <div className="text-red-400 text-xs mt-1">Auto-clearing in 30 seconds...</div>
+              </div>
+            )}
           </div>
 
           {isBlocked && (
@@ -261,7 +421,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
           
           <Button 
             onClick={handleLogin} 
-            disabled={isLogging || isBlocked || !ipVerified}
+            disabled={isLogging || isBlocked || !ipVerified || !browserVerified}
             className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3"
           >
             {isLogging ? (
@@ -285,7 +445,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
           <div className="text-center text-xs text-gray-400 mt-4 space-y-1">
             <div>🎵 "Seeds Will Form Into Music" 🎵</div>
             <div className="text-green-400">Harmony of Gaia Ultra-Secure Zone</div>
-            <div className="text-red-400">⚠️ Unauthorized access is a federal crime</div>
+            <div className="text-red-400">⚠️ Firefox + Authorized IP Only</div>
           </div>
 
           {attemptCount > 0 && !isBlocked && (
