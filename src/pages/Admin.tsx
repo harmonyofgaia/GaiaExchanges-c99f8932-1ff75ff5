@@ -12,6 +12,7 @@ import { ComprehensiveSystemCheck } from '@/components/admin/ComprehensiveSystem
 import { DailyAdvertising } from '@/components/admin/DailyAdvertising'
 import { AuthTest } from '@/components/auth/AuthTest'
 import { GreenProjectManager } from '@/components/admin/GreenProjectManager'
+import { BackgroundManager } from '@/components/admin/BackgroundManager'
 
 const Admin = () => {
   const navigate = useNavigate()
@@ -84,7 +85,7 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="system-check" className="w-full">
-          <TabsList className="grid w-full grid-cols-7 bg-black/50 backdrop-blur-md border border-green-500/20">
+          <TabsList className="grid w-full grid-cols-6 bg-black/50 backdrop-blur-md border border-green-500/20">
             <TabsTrigger value="system-check" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
               <Activity className="h-4 w-4 mr-2" />
               System Check
@@ -104,6 +105,10 @@ const Admin = () => {
             <TabsTrigger value="green-projects" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
               <Leaf className="h-4 w-4 mr-2" />
               Green Projects
+            </TabsTrigger>
+            <TabsTrigger value="backgrounds" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              <FileText className="h-4 w-4 mr-2" />
+              Backgrounds
             </TabsTrigger>
           </TabsList>
           
@@ -125,6 +130,10 @@ const Admin = () => {
           
           <TabsContent value="green-projects" className="space-y-6 mt-6">
             <GreenProjectManager />
+          </TabsContent>
+          
+          <TabsContent value="backgrounds" className="space-y-6 mt-6">
+            <BackgroundManager />
           </TabsContent>
         </Tabs>
       </div>
