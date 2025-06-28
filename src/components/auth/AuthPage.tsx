@@ -1,14 +1,15 @@
 
 import React, { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { AlertCircle, Leaf, Shield, Globe, Crown } from 'lucide-react'
-import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Crown } from 'lucide-react'
 import { useAuth } from './AuthProvider'
 import { AdminSetup } from '@/components/admin/AdminSetup'
+import { AuthHeader } from './AuthHeader'
+import { SignInForm } from './SignInForm'
+import { SignUpForm } from './SignUpForm'
+import { AuthFeatures } from './AuthFeatures'
+import { AuthAlerts } from './AuthAlerts'
 
 export function AuthPage() {
   const { signIn, signUp } = useAuth()
@@ -63,18 +64,8 @@ export function AuthPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
-        {/* Header */}
-        <div className="text-center space-y-4">
-          <div className="flex items-center justify-center gap-2">
-            <Leaf className="h-8 w-8 text-green-400" />
-            <h1 className="text-3xl font-bold text-green-400">Gaia's Exchanges</h1>
-          </div>
-          <p className="text-muted-foreground">
-            Join the Culture of Harmony ecosystem - Your gateway to eco-conscious trading
-          </p>
-        </div>
+        <AuthHeader />
 
-        {/* Auth Card */}
         <Card className="border-green-500/20">
           <CardHeader>
             <CardTitle className="text-center">Welcome to Gaia's Exchanges</CardTitle>
@@ -94,87 +85,11 @@ export function AuthPage() {
               </TabsList>
               
               <TabsContent value="signin" className="space-y-4 mt-6">
-                <form onSubmit={handleSignIn} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="signin-email">Email</Label>
-                    <Input
-                      id="signin-email"
-                      name="email"
-                      type="email"
-                      placeholder="your@email.com"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="signin-password">Password</Label>
-                    <Input
-                      id="signin-password"
-                      name="password"
-                      type="password"
-                      placeholder="Your password"
-                      required
-                    />
-                  </div>
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-green-600 hover:bg-green-700"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? 'Signing In...' : 'Sign In'}
-                  </Button>
-                </form>
+                <SignInForm onSubmit={handleSignIn} isLoading={isLoading} />
               </TabsContent>
               
               <TabsContent value="signup" className="space-y-4 mt-6">
-                <form onSubmit={handleSignUp} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-fullname">Full Name</Label>
-                    <Input
-                      id="signup-fullname"
-                      name="fullName"
-                      type="text"
-                      placeholder="Your full name"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-username">Username</Label>
-                    <Input
-                      id="signup-username"
-                      name="username"
-                      type="text"
-                      placeholder="Choose a username"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-email">Email</Label>
-                    <Input
-                      id="signup-email"
-                      name="email"
-                      type="email"
-                      placeholder="your@email.com"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-password">Password</Label>
-                    <Input
-                      id="signup-password"
-                      name="password"
-                      type="password"
-                      placeholder="Create a password"
-                      required
-                    />
-                  </div>
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-green-600 hover:bg-green-700"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? 'Creating Account...' : 'Create Account'}
-                  </Button>
-                </form>
+                <SignUpForm onSubmit={handleSignUp} isLoading={isLoading} />
               </TabsContent>
 
               <TabsContent value="admin" className="mt-6">
@@ -182,37 +97,11 @@ export function AuthPage() {
               </TabsContent>
             </Tabs>
 
-            {error && (
-              <Alert className="mt-4 border-red-500/20 bg-red-500/10">
-                <AlertCircle className="h-4 w-4 text-red-400" />
-                <AlertDescription className="text-red-400">
-                  {error}
-                </AlertDescription>
-              </Alert>
-            )}
-
-            {success && (
-              <Alert className="mt-4 border-green-500/20 bg-green-500/10">
-                <Shield className="h-4 w-4 text-green-400" />
-                <AlertDescription className="text-green-400">
-                  {success}
-                </AlertDescription>
-              </Alert>
-            )}
+            <AuthAlerts error={error} success={success} />
           </CardContent>
         </Card>
 
-        {/* Features */}
-        <div className="space-y-3 text-center text-sm text-muted-foreground">
-          <div className="flex items-center justify-center gap-2">
-            <Shield className="h-4 w-4 text-green-400" />
-            <span>Bank-level security without captcha verification</span>
-          </div>
-          <div className="flex items-center justify-center gap-2">
-            <Globe className="h-4 w-4 text-blue-400" />
-            <span>Connect with the global Culture of Harmony community</span>
-          </div>
-        </div>
+        <AuthFeatures />
       </div>
     </div>
   )
