@@ -107,7 +107,7 @@ const Wallet = () => {
                 <GaiaTokenTracker />
               </div>
             </div>
-          </div>
+          </TabsContent>
         </Tabs>
       </div>
     </div>
