@@ -7,13 +7,21 @@ import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Shield, Crown } from 'lucide-react'
 import { useAuth } from '@/components/auth/AuthProvider'
+import { useUserRole } from '@/hooks/useUserRole'
 import { useToast } from '@/hooks/use-toast'
+import { AdminRecoveryPhrase } from './AdminRecoveryPhrase'
 
 export function AdminSetup() {
-  const { signUp, grantAdminRole } = useAuth()
+  const { signUp, grantAdminRole, user } = useAuth()
+  const { isAdmin } = useUserRole()
   const { toast } = useToast()
   const [isCreating, setIsCreating] = useState(false)
   const [success, setSuccess] = useState(false)
+
+  // Hide from non-admin users - only show if user is already admin or no user is logged in
+  if (user && !isAdmin()) {
+    return null
+  }
 
   const createAdminAccount = async () => {
     setIsCreating(true)
@@ -66,6 +74,32 @@ export function AdminSetup() {
     } finally {
       setIsCreating(false)
     }
+  }
+
+  // If user is already admin, show recovery phrase management
+  if (isAdmin()) {
+    return (
+      <div className="space-y-6">
+        <Card className="max-w-md mx-auto border-green-500/20">
+          <CardHeader className="text-center">
+            <CardTitle className="flex items-center justify-center gap-2 text-green-400">
+              <Crown className="h-6 w-6" />
+              Admin Account Active
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Alert className="border-green-500/20 bg-green-500/10">
+              <Shield className="h-4 w-4 text-green-400" />
+              <AlertDescription className="text-green-300">
+                ✅ You are logged in as the system administrator with full privileges.
+              </AlertDescription>
+            </Alert>
+          </CardContent>
+        </Card>
+        
+        <AdminRecoveryPhrase />
+      </div>
+    )
   }
 
   return (

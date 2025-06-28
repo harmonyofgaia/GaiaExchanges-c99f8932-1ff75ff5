@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -25,8 +26,8 @@ import { FileDocumentProtection } from '@/components/security/FileDocumentProtec
 export function GaiaWallet() {
   const { user } = useAuth()
   const { roles, isAdmin } = useUserRole()
-  const { wallets, isLoading: isLoadingWallets } = useWallets()
-  const { transactions, isLoading: isLoadingTransactions } = useTransactions()
+  const { wallets, loading: walletsLoading } = useWallets()
+  const { transactions, loading: transactionsLoading } = useTransactions()
   const [selectedWallet, setSelectedWallet] = useState<string | null>(null)
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export function GaiaWallet() {
     setSelectedWallet(walletId)
   }
 
-  if (isLoadingWallets || isLoadingTransactions) {
+  if (walletsLoading || transactionsLoading) {
     return <div>Loading...</div>
   }
 
@@ -104,8 +105,8 @@ export function GaiaWallet() {
                     onClick={() => handleWalletChange(wallet.id)}
                     className="w-full justify-between"
                   >
-                    {wallet.name}
-                    <Badge variant="secondary">{wallet.balance} GAiA</Badge>
+                    {wallet.currency}
+                    <Badge variant="secondary">{wallet.balance} {wallet.currency}</Badge>
                   </Button>
                 ))}
               </div>
@@ -145,12 +146,12 @@ export function GaiaWallet() {
                   className="flex items-center justify-between py-2 border-b border-border"
                 >
                   <div>
-                    <div className="font-semibold">{transaction.type}</div>
+                    <div className="font-semibold">{transaction.transaction_type}</div>
                     <div className="text-sm text-muted-foreground">
-                      {transaction.date}
+                      {new Date(transaction.created_at).toLocaleDateString()}
                     </div>
                   </div>
-                  <div className="font-semibold">{transaction.amount} GAiA</div>
+                  <div className="font-semibold">{transaction.amount} {transaction.currency}</div>
                 </div>
               ))}
             </CardContent>
