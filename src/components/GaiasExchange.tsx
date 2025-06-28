@@ -28,6 +28,8 @@ import {
 import { GaiaLogo } from './GaiaLogo'
 import { TradingInterface } from './TradingInterface'
 import { CoinGeckoTrading } from './CoinGeckoTrading'
+import { ChartAnalytics } from './ChartAnalytics'
+import { SecurityCenter } from './SecurityCenter'
 import { toast } from 'sonner'
 
 interface ExchangeStats {
