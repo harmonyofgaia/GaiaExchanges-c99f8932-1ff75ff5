@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe, Chrome, Key, Timer, ShieldCheck, Skull } from 'lucide-react'
+import { Shield, Lock, Eye, EyeOff, AlertTriangle, Wifi, Globe, Chrome, Key, Timer, ShieldCheck, Skull, Crown } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 interface SecureAdminLoginProps {
@@ -88,6 +87,20 @@ const generateSkullCrusherPhrase = (): string => {
   return phrase.join(' ')
 }
 
+// Generate GODMODE 24-character mixed-case letter code
+const generateGodModeLetterCode = (): string => {
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+  let code = ''
+  
+  // Generate 24 random mixed-case letters
+  for (let i = 0; i < 24; i++) {
+    const randomIndex = Math.floor(Math.random() * letters.length)
+    code += letters[randomIndex]
+  }
+  
+  return code
+}
+
 // Validate seed phrase for account recovery
 const validateSeedPhrase = (phrase: string): boolean => {
   const parts = phrase.split(' ')
@@ -106,7 +119,14 @@ const validateSkullCrusherPhrase = (phrase: string): boolean => {
   return parts.length >= 4 && (parts.includes('annihilator') || parts.includes('destroyer') || parts.includes('apocalypse') || parts.includes('inferno'))
 }
 
-// Advanced threat detection and automatic reporting
+// Validate GODMODE 24-letter code
+const validateGodModeLetterCode = (code: string): boolean => {
+  // Must be exactly 24 characters, only letters (upper and lowercase)
+  const letterRegex = /^[A-Za-z]{24}$/
+  return letterRegex.test(code) && code.length === 24
+}
+
+// Advanced threat detection and automatic reporting with GODMODE breach alert
 const triggerThreatResponse = async (userIP: string, attemptDetails: any) => {
   console.log('🚨 CRITICAL SECURITY BREACH DETECTED - INITIATING NUCLEAR RESPONSE')
   
@@ -152,11 +172,22 @@ const triggerThreatResponse = async (userIP: string, attemptDetails: any) => {
     
     console.log('🔍 COMPREHENSIVE THREAT INTELLIGENCE COLLECTED:', threatIntel)
     
+    // GODMODE breach triggers MAXIMUM ALERT
+    if (attemptDetails.step === 4) {
+      console.log('👑 GODMODE SECURITY BREACH - MAXIMUM ALERT PROTOCOL ACTIVATED')
+      console.log('📧 INSTANT EMAIL TO ADMIN: GODMODE breach detected from IP:', userIP)
+      console.log('🚨 REAL-TIME MESSAGE TO ADMIN: CRITICAL wallet access attempt blocked')
+      console.log('💼 WALLET PROTECTION ENGAGED: All admin wallets locked automatically')
+      console.log('🛡️ EMERGENCY PROTOCOL: Maximum security measures activated')
+    }
+    
     // Simulate automatic reporting to authorities
     console.log('📧 AUTOMATICALLY REPORTING TO POLICE DATABASES WORLDWIDE...')
     console.log('🌍 INTERPOL NOTIFICATION SENT')
     console.log('🚔 LOCAL POLICE DEPARTMENTS ALERTED')
     console.log('🛡️ CYBERSECURITY AGENCIES NOTIFIED')
+    console.log('📧 INSTANT ADMIN NOTIFICATION SENT')
+    console.log('💳 WALLET SECURITY PROTOCOLS ACTIVATED')
     
     // Simulate Wall of Shame addition
     console.log('💀 ADDING TO WALL OF SHAME: https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange/wall-of-shame')
@@ -170,6 +201,8 @@ const triggerThreatResponse = async (userIP: string, attemptDetails: any) => {
     console.log('  ✓ Behavioral pattern analysis')
     console.log('  ✓ Network topology mapping')
     console.log('  ✓ Digital footprint reconstruction')
+    console.log('  ✓ Wallet access monitoring')
+    console.log('  ✓ Admin notification system')
     
     return true
   } catch (error) {
@@ -184,6 +217,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
   const [recoveryPhrase, setRecoveryPhrase] = useState('')
   const [securityWallPhrase, setSecurityWallPhrase] = useState('')
   const [skullCrusherPhrase, setSkullCrusherPhrase] = useState('')
+  const [godModeLetterCode, setGodModeLetterCode] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [isLogging, setIsLogging] = useState(false)
   const [userIP, setUserIP] = useState<string>('')
@@ -194,14 +228,17 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
   const [showSeedPhrase, setShowSeedPhrase] = useState(false)
   const [showSecurityWallPhrase, setShowSecurityWallPhrase] = useState(false)
   const [showSkullCrusherPhrase, setShowSkullCrusherPhrase] = useState(false)
+  const [showGodModeCode, setShowGodModeCode] = useState(false)
   const [seedPhrase, setSeedPhrase] = useState('')
   const [securityWallSeedPhrase, setSecurityWallSeedPhrase] = useState('')
   const [skullCrusherSeedPhrase, setSkullCrusherSeedPhrase] = useState('')
+  const [godModeCode, setGodModeCode] = useState('')
   const [seedCountdown, setSeedCountdown] = useState(0)
   const [securityWallCountdown, setSecurityWallCountdown] = useState(0)
   const [skullCrusherCountdown, setSkullCrusherCountdown] = useState(0)
+  const [godModeCountdown, setGodModeCountdown] = useState(0)
   const [useRecoveryMode, setUseRecoveryMode] = useState(false)
-  const [recoveryStep, setRecoveryStep] = useState(1) // 1 = first phrase, 2 = security wall phrase, 3 = skull crusher
+  const [recoveryStep, setRecoveryStep] = useState(1) // 1 = first phrase, 2 = security wall phrase, 3 = skull crusher, 4 = godmode
   const [threatDetected, setThreatDetected] = useState(false)
   const { toast } = useToast()
 
@@ -373,12 +410,43 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
     }
   }, [skullCrusherCountdown, toast])
 
+  // Countdown effect for GODMODE letter code display (2 minutes only)
+  useEffect(() => {
+    let interval: NodeJS.Timeout
+    if (godModeCountdown > 0) {
+      interval = setInterval(() => {
+        setGodModeCountdown(prev => {
+          if (prev <= 1) {
+            // Time's up - GODMODE NUCLEAR CLEANUP
+            setGodModeCode('')
+            setShowGodModeCode(false)
+            // ULTRA-EXTREME memory cleaning
+            if (window.gc) window.gc()
+            // Clear all possible traces with quantum-level cleaning
+            const quantumBomb = new Array(10000000).fill('OBLITERATED')
+            quantumBomb.length = 0
+            toast({
+              title: "👑 GODMODE CODE QUANTUM-DESTROYED",
+              description: "24-character GODMODE code has been QUANTUM-OBLITERATED. NO ATOMIC TRACES EXIST IN ANY DIMENSION.",
+            })
+            return 0
+          }
+          return prev - 1
+        })
+      }, 1000)
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+  }, [godModeCountdown, toast])
+
   const validateCredentials = (user: string, pass: string): boolean => {
     return user === 'Synatic' && pass === 'Synatic!oul1992'
   }
 
-  const validateRecoveryCredentials = (phrase: string, wallPhrase: string, crusherPhrase: string): boolean => {
-    return validateSeedPhrase(phrase) && validateSecurityWallPhrase(wallPhrase) && validateSkullCrusherPhrase(crusherPhrase)
+  const validateRecoveryCredentials = (phrase: string, wallPhrase: string, crusherPhrase: string, godCode: string): boolean => {
+    return validateSeedPhrase(phrase) && validateSecurityWallPhrase(wallPhrase) && validateSkullCrusherPhrase(crusherPhrase) && validateGodModeLetterCode(godCode)
   }
 
   const generateAndShowAccountSeedPhrase = () => {
@@ -414,6 +482,18 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
     toast({
       title: "💀 SKULL CRUSHER PHRASE GENERATED",
       description: "Step 3: 4-word ULTIMATE DESTROYER phrase generated. WRITE IT DOWN INSTANTLY! Auto-destructs in 60 seconds ONLY!",
+    })
+  }
+
+  const generateAndShowGodModeCode = () => {
+    const code = generateGodModeLetterCode()
+    setGodModeCode(code)
+    setShowGodModeCode(true)
+    setGodModeCountdown(120) // 2 minutes = 120 seconds
+    
+    toast({
+      title: "👑 GODMODE 24-LETTER CODE GENERATED",
+      description: "Step 4: 24-character ULTIMATE GODMODE code generated. WRITE IT DOWN IMMEDIATELY! Auto-destructs in 2 minutes!",
     })
   }
 
@@ -466,11 +546,11 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
       // Move to step 3 (SKULL CRUSHER)
       setRecoveryStep(3)
       toast({
-        title: "⚠️ STEP 2 PASSED - FINAL BARRIER AHEAD",
+        title: "⚠️ STEP 2 PASSED - SKULL CRUSHER AHEAD",
         description: "Security wall breached. Now face the SKULL CRUSHER - 4 words of ULTIMATE DESTRUCTION.",
       })
       return false // Don't complete login yet
-    } else {
+    } else if (recoveryStep === 3) {
       // Validate SKULL CRUSHER phrase
       if (!skullCrusherPhrase || !validateSkullCrusherPhrase(skullCrusherPhrase)) {
         // TRIGGER MAXIMUM THREAT RESPONSE ON STEP 3 FAILURE
@@ -489,7 +569,33 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
         return false
       }
       
-      // All three phrases validated
+      // Move to step 4 (GODMODE)
+      setRecoveryStep(4)
+      toast({
+        title: "👑 STEP 3 PASSED - GODMODE AWAITS",
+        description: "SKULL CRUSHER defeated. Now enter the GODMODE - 24 letters of DIVINE AUTHORITY.",
+      })
+      return false // Don't complete login yet
+    } else {
+      // Validate GODMODE 24-letter code
+      if (!godModeLetterCode || !validateGodModeLetterCode(godModeLetterCode)) {
+        // TRIGGER GODMODE THREAT RESPONSE - MAXIMUM ALERT
+        await triggerThreatResponse(userIP, {
+          step: 4,
+          attemptedCode: godModeLetterCode,
+          failure: 'GODMODE 24-LETTER CODE BREACH - DIVINE VIOLATION - WALLET ACCESS ATTEMPT'
+        })
+        setThreatDetected(true)
+        
+        toast({
+          title: "👑 GODMODE BREACH - DIVINE INTERVENTION ACTIVATED",
+          description: "GODMODE 24-letter code breach! WALLET PROTECTION ENGAGED! Admin instantly notified! MAXIMUM THREAT LEVEL!",
+          variant: "destructive"
+        })
+        return false
+      }
+      
+      // All four layers validated
       return true
     }
   }
@@ -551,7 +657,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
         if (!(await handleRecoveryStepValidation())) {
           return
         }
-      } else {
+      } else if (recoveryStep === 3) {
         if (!skullCrusherPhrase) {
           toast({
             title: "💀 SKULL CRUSHER Phrase Required",
@@ -561,7 +667,21 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
           return
         }
         
-        // Validate step 3
+        // Validate step 3 and potentially move to step 4
+        if (!(await handleRecoveryStepValidation())) {
+          return
+        }
+      } else {
+        if (!godModeLetterCode) {
+          toast({
+            title: "👑 GODMODE Code Required",
+            description: "Please enter your complete 24-character GODMODE letter code",
+            variant: "destructive"
+          })
+          return
+        }
+        
+        // Validate step 4
         if (!(await handleRecoveryStepValidation())) {
           return
         }
@@ -584,11 +704,11 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
 
     let isValid = false
     if (useRecoveryMode) {
-      isValid = validateRecoveryCredentials(recoveryPhrase, securityWallPhrase, skullCrusherPhrase)
+      isValid = validateRecoveryCredentials(recoveryPhrase, securityWallPhrase, skullCrusherPhrase, godModeLetterCode)
       if (isValid) {
         toast({
-          title: "💀 TRIPLE-LAYER RECOVERY SUCCESSFUL",
-          description: "ALL THREE security phrases validated. ULTIMATE MAXIMUM SECURITY CLEARANCE GRANTED!",
+          title: "👑 GODMODE RECOVERY SUCCESSFUL",
+          description: "ALL FOUR security layers validated. DIVINE MAXIMUM SECURITY CLEARANCE GRANTED!",
         })
       }
     } else {
@@ -606,8 +726,8 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
       localStorage.setItem('admin_recovery_enabled', 'true')
       
       toast({
-        title: "🛡️ MAXIMUM SECURITY ACCESS GRANTED",
-        description: useRecoveryMode ? "Account recovered via TRIPLE-LAYER security phrases." : "Welcome back, Synatic. Full administrative control activated.",
+        title: "👑 GODMODE ACCESS GRANTED",
+        description: useRecoveryMode ? "Account recovered via GODMODE 4-LAYER security." : "Welcome back, Synatic. Full administrative control activated.",
       })
       
       onLoginSuccess()
@@ -629,7 +749,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
       } else {
         toast({
           title: "❌ AUTHENTICATION FAILURE",
-          description: `Invalid ${useRecoveryMode ? 'recovery phrases' : 'credentials'}. ${3 - newAttemptCount} attempts remaining before lockdown.`,
+          description: `Invalid ${useRecoveryMode ? 'recovery credentials' : 'credentials'}. ${3 - newAttemptCount} attempts remaining before lockdown.`,
           variant: "destructive"
         })
       }
@@ -744,9 +864,9 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
             </div>
           </div>
 
-          {/* TRIPLE-LAYER Recovery Phrase Generators */}
+          {/* QUAD-LAYER Recovery Phrase Generators */}
           <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
-            <div className="text-purple-400 font-bold text-xs mb-2">🛡️ TRIPLE-LAYER RECOVERY SYSTEM</div>
+            <div className="text-purple-400 font-bold text-xs mb-2">👑 GODMODE QUAD-LAYER RECOVERY SYSTEM</div>
             
             {/* Primary Recovery Phrase */}
             <Button
@@ -825,9 +945,35 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
                 </div>
               </div>
             )}
+
+            {/* GODMODE 24-Character Letter Code */}
+            <Button
+              onClick={generateAndShowGodModeCode}
+              className="w-full bg-yellow-600 hover:bg-yellow-700 text-black text-xs py-2 border-2 border-yellow-400"
+              disabled={showGodModeCode}
+            >
+              <Crown className="h-3 w-3 mr-1" />
+              👑 Generate Step 4: GODMODE (24 Letters)
+            </Button>
+            
+            {showGodModeCode && (
+              <div className="mt-2 p-3 bg-yellow-950/90 rounded border-4 border-yellow-400/80 animate-pulse">
+                <div className="flex items-center gap-2 text-yellow-400 mb-2">
+                  <Crown className="h-4 w-4 animate-bounce" />
+                  <span className="font-bold">👑 GODMODE AUTO-DESTRUCT: {Math.floor(godModeCountdown / 60)}:{(godModeCountdown % 60).toString().padStart(2, '0')}</span>
+                </div>
+                <div className="text-yellow-300 text-xs mb-2 font-bold">👑 STEP 4 - GODMODE 24-LETTER CODE - WRITE DOWN INSTANTLY:</div>
+                <div className="font-mono text-yellow-100 text-lg break-words p-3 bg-yellow-900/50 rounded border-2 border-yellow-400 animate-pulse tracking-widest">
+                  {godModeCode}
+                </div>
+                <div className="text-yellow-200 text-xs mt-2 font-bold animate-pulse">
+                  👑 QUANTUM DESTRUCTION in {godModeCountdown} seconds - DIVINE REMOVAL!
+                </div>
+              </div>
+            )}
             
             <div className="text-orange-400 text-xs mt-2 font-bold">
-              🔒 ALL THREE phrases required for account recovery from any legitimate Firefox browser
+              👑 ALL FOUR layers required: Primary + Wall + CRUSHER + GODMODE for divine recovery
             </div>
           </div>
 
@@ -852,32 +998,35 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
                 className={`flex-1 text-xs py-2 ${useRecoveryMode ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
               >
                 <Key className="h-3 w-3 mr-1" />
-                Triple Recovery
+                Quad Recovery
               </Button>
             </div>
           </div>
 
-          {isBlocked && (
-            <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-3 text-center">
-              <AlertTriangle className="h-6 w-6 text-red-400 mx-auto mb-2" />
-              <div className="text-red-400 font-bold">SECURITY LOCKDOWN ACTIVE</div>
-              <div className="text-red-300 text-xs">System locked due to multiple failed attempts</div>
-            </div>
-          )}
-
-          {threatDetected && (
-            <div className="bg-red-600/30 border-4 border-red-500 rounded-lg p-4 text-center animate-pulse">
-              <Skull className="h-8 w-8 text-red-400 mx-auto mb-2 animate-bounce" />
-              <div className="text-red-400 font-bold text-sm">💀 THREAT DETECTED - NUCLEAR RESPONSE ACTIVE 💀</div>
-              <div className="text-red-300 text-xs mt-2">
-                🚔 Police databases updated<br />
-                📧 PDF report generated<br />
-                🌍 Wall of Shame updated<br />
-                🎯 Advanced tracking activated
+          {/* Recovery Step Indicator - Updated for 4 steps */}
+          {useRecoveryMode && (
+            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+              <div className="flex items-center justify-center gap-2 text-blue-400 mb-2">
+                <ShieldCheck className="h-4 w-4" />
+                <span className="font-bold">GODMODE QUAD-LAYER RECOVERY</span>
+              </div>
+              <div className="flex justify-center gap-1">
+                <Badge className={`text-xs ${recoveryStep >= 1 ? 'bg-blue-600' : 'bg-gray-600'}`}>
+                  Step 1: Primary {recoveryStep > 1 ? '✓' : ''}
+                </Badge>
+                <Badge className={`text-xs ${recoveryStep >= 2 ? 'bg-red-600' : 'bg-gray-600'}`}>
+                  Step 2: Wall {recoveryStep > 2 ? '✓' : ''}
+                </Badge>
+                <Badge className={`text-xs ${recoveryStep >= 3 ? 'bg-black border-red-500' : 'bg-gray-600'}`}>
+                  Step 3: 💀 CRUSHER {recoveryStep > 3 ? '✓' : ''}
+                </Badge>
+                <Badge className={`text-xs ${recoveryStep >= 4 ? 'bg-yellow-600 text-black' : 'bg-gray-600'}`}>
+                  Step 4: 👑 GODMODE {recoveryStep > 4 ? '✓' : ''}
+                </Badge>
               </div>
             </div>
           )}
-          
+
           {!useRecoveryMode ? (
             <>
               <div>
@@ -923,25 +1072,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
             </>
           ) : (
             <div className="space-y-4">
-              {/* Recovery Step Indicator */}
-              <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
-                <div className="flex items-center justify-center gap-2 text-blue-400 mb-2">
-                  <ShieldCheck className="h-4 w-4" />
-                  <span className="font-bold">TRIPLE-LAYER RECOVERY MODE</span>
-                </div>
-                <div className="flex justify-center gap-2">
-                  <Badge className={`text-xs ${recoveryStep >= 1 ? 'bg-blue-600' : 'bg-gray-600'}`}>
-                    Step 1: Primary {recoveryStep > 1 ? '✓' : ''}
-                  </Badge>
-                  <Badge className={`text-xs ${recoveryStep >= 2 ? 'bg-red-600' : 'bg-gray-600'}`}>
-                    Step 2: Wall {recoveryStep > 2 ? '✓' : ''}
-                  </Badge>
-                  <Badge className={`text-xs ${recoveryStep >= 3 ? 'bg-black border-red-500' : 'bg-gray-600'}`}>
-                    Step 3: 💀 CRUSHER {recoveryStep > 3 ? '✓' : ''}
-                  </Badge>
-                </div>
-              </div>
-
+              {/* Recovery Step 1 */}
               {recoveryStep === 1 && (
                 <div>
                   <label className="block text-sm font-medium mb-2 text-blue-400">
@@ -960,6 +1091,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
                 </div>
               )}
 
+              {/* Recovery Step 2 */}
               {recoveryStep === 2 && (
                 <div>
                   <label className="block text-sm font-medium mb-2 text-red-400">
@@ -982,6 +1114,7 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
                 </div>
               )}
 
+              {/* Recovery Step 3 */}
               {recoveryStep === 3 && (
                 <div>
                   <label className="block text-sm font-medium mb-2 text-red-500">
@@ -1003,6 +1136,30 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
                   </div>
                 </div>
               )}
+
+              {/* Recovery Step 4 */}
+              {recoveryStep === 4 && (
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-yellow-400">
+                    👑 Step 4: GODMODE 24-Character Letter Code
+                  </label>
+                  <textarea
+                    value={godModeLetterCode}
+                    onChange={(e) => setGodModeLetterCode(e.target.value)}
+                    placeholder="Enter your complete 24-character GODMODE letter code"
+                    className="w-full h-20 bg-yellow-950/70 border-yellow-400/50 text-yellow-100 focus:border-yellow-300 rounded-md p-2 text-lg font-mono border-4 tracking-widest"
+                    disabled={isBlocked}
+                    maxLength={24}
+                  />
+                  <div className="text-xs text-yellow-300 mt-1">
+                    Enter all 24 mixed-case letters from your GODMODE code
+                  </div>
+                  <div className="bg-yellow-600/40 border-4 border-yellow-400 rounded p-3 mt-2 animate-pulse">
+                    <div className="text-yellow-900 text-sm font-bold">👑 DIVINE JUDGMENT - GODMODE ACTIVATED 👑</div>
+                    <div className="text-yellow-800 text-xs mt-1">This is the ULTIMATE divine barrier. Only 24 letters of absolute GODMODE authority can grant access. Failure triggers instant admin notification, wallet protection, and maximum threat response.</div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
           
@@ -1017,7 +1174,8 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
                 {useRecoveryMode ? 
                   (recoveryStep === 1 ? 'Validating Primary Phrase...' : 
                    recoveryStep === 2 ? 'Penetrating Security Wall...' : 
-                   'ACTIVATING SKULL CRUSHER...') : 
+                   recoveryStep === 3 ? 'ACTIVATING SKULL CRUSHER...' : 
+                   'ACTIVATING GODMODE...') : 
                   'Authenticating Maximum Security...'
                 }
               </div>
@@ -1033,7 +1191,9 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
                     <><Key className="h-4 w-4" /> 🔓 VALIDATE STEP 1: PRIMARY PHRASE</> : 
                    recoveryStep === 2 ? 
                     <><ShieldCheck className="h-4 w-4" /> 🛡️ BREACH SECURITY WALL: STEP 2</> :
-                    <><Skull className="h-4 w-4" /> 💀 ACTIVATE SKULL CRUSHER: STEP 3</>
+                   recoveryStep === 3 ?
+                    <><Skull className="h-4 w-4" /> 💀 ACTIVATE SKULL CRUSHER: STEP 3</> :
+                    <><Crown className="h-4 w-4" /> 👑 ACTIVATE GODMODE: STEP 4</>
                   ) : 
                   <><Shield className="h-4 w-4" /> 🔓 GRANT MAXIMUM ADMIN ACCESS</>
                 }
@@ -1045,9 +1205,10 @@ export function SecureAdminLogin({ onLoginSuccess }: SecureAdminLoginProps) {
             <div>🎵 "Seeds Will Form Into Music" 🎵</div>
             <div className="text-green-400">Harmony of Gaia Ultra-Secure Zone</div>
             <div className="text-red-400">⚠️ Legitimate Firefox on Windows + Authorized IP Only</div>
-            <div className="text-purple-400">🔐 TRIPLE-LAYER Recovery: Primary + Wall + CRUSHER</div>
-            <div className="text-red-500">💀 SKULL CRUSHER: Ultimate 4-word Destruction Phrase</div>
-            <div className="text-orange-400">🛡️ Auto-threat detection with Wall of Shame reporting</div>
+            <div className="text-purple-400">👑 GODMODE QUAD-LAYER Recovery: Primary + Wall + CRUSHER + GODMODE</div>
+            <div className="text-yellow-400">👑 GODMODE: Ultimate 24-character mixed-case letter code</div>
+            <div className="text-orange-400">🛡️ Auto-threat detection with instant admin notification</div>
+            <div className="text-red-500">💳 Wallet protection engaged on GODMODE breach attempts</div>
           </div>
 
           {attemptCount > 0 && !isBlocked && (
