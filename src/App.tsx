@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -10,6 +9,8 @@ import Wallet from "./pages/Wallet";
 import Admin from "./pages/Admin";
 import UltimateSecurity from "./pages/UltimateSecurity";
 import Community from "./pages/Community";
+import Marketing from "./pages/Marketing";
+import AppStoreSubmission from "./pages/AppStoreSubmission";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,8 @@ function App() {
               } />
               <Route path="/security" element={<UltimateSecurity />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/marketing" element={<Marketing />} />
+              <Route path="/app-submission" element={<AppStoreSubmission />} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>

@@ -13,7 +13,8 @@ import {
   Megaphone,
   Target,
   BarChart3,
-  Image
+  Image,
+  Mail
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { AutoIssueResolver } from '@/components/AutoIssueResolver'
@@ -106,13 +107,22 @@ const Marketing = () => {
           <h1 className="text-3xl font-bold text-purple-400">Gaia's Exchanges - Marketing Hub</h1>
           <p className="text-muted-foreground">World-leading crypto exchange marketing and expansion tools</p>
         </div>
-        <Badge className="bg-gradient-to-r from-purple-600 to-blue-600 text-white">
-          Marketing Dashboard v2.0
-        </Badge>
+        <div className="flex gap-2">
+          <Badge className="bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+            Marketing Dashboard v2.0
+          </Badge>
+          <Button 
+            onClick={() => window.open('/app-submission', '_blank')}
+            className="bg-green-600 hover:bg-green-700"
+          >
+            <ExternalLink className="h-4 w-4 mr-2" />
+            App Store Submission
+          </Button>
+        </div>
       </div>
 
       <Tabs defaultValue="system-health" className="w-full">
-        <TabsList className="grid w-full grid-cols-7">
+        <TabsList className="grid w-full grid-cols-8">
           <TabsTrigger value="system-health">System Health</TabsTrigger>
           <TabsTrigger value="advertising">Daily Advertising</TabsTrigger>
           <TabsTrigger value="branding">Official Branding</TabsTrigger>
@@ -120,8 +130,10 @@ const Marketing = () => {
           <TabsTrigger value="advantages">Competitive Edge</TabsTrigger>
           <TabsTrigger value="listings">Exchange Listings</TabsTrigger>
           <TabsTrigger value="growth">Growth Metrics</TabsTrigger>
+          <TabsTrigger value="contact-system">Contact System</TabsTrigger>
         </TabsList>
 
+        {/* Keep all existing tabs content */}
         <TabsContent value="system-health">
           <div className="space-y-6">
             <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-500/20">
@@ -184,7 +196,6 @@ const Marketing = () => {
           </div>
         </TabsContent>
 
-        {/* Keep all existing tabs content the same */}
         <TabsContent value="advertising">
           <div className="space-y-6">
             <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-500/20">
@@ -556,6 +567,74 @@ const Marketing = () => {
               </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="contact-system">
+          <div className="space-y-6">
+            <Card className="border-green-500/20 bg-gradient-to-br from-green-900/10 to-blue-900/10">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-green-400">
+                  <Mail className="h-5 w-5" />
+                  Official Contact System - info@cultureofharmony.net
+                </CardTitle>
+                <p className="text-muted-foreground">
+                  Secure contact form system that sends messages directly to your Culture of Harmony email
+                </p>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  <div className="text-center space-y-2">
+                    <div className="text-3xl font-bold text-green-400">24/7</div>
+                    <p className="text-sm text-muted-foreground">Email Response Time</p>
+                  </div>
+                  <div className="text-center space-y-2">
+                    <div className="text-3xl font-bold text-blue-400">100%</div>
+                    <p className="text-sm text-muted-foreground">Secure Delivery</p>
+                  </div>
+                  <div className="text-center space-y-2">
+                    <div className="text-3xl font-bold text-purple-400">∞</div>
+                    <p className="text-sm text-muted-foreground">Contact Categories</p>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-green-900/20 to-blue-900/20 rounded-lg p-4">
+                  <h4 className="font-medium text-green-400 mb-2">🌍 Ready for Deployment</h4>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    This contact system is fully configured and ready to be deployed to www.cultureofharmony.net 
+                    when you're ready to move from the Google Sites platform.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <h5 className="font-medium text-blue-400 mb-1">Features:</h5>
+                      <ul className="text-xs space-y-1 text-muted-foreground">
+                        <li>• Direct email to info@cultureofharmony.net</li>
+                        <li>• Multiple contact categories</li>
+                        <li>• Secure form validation</li>
+                        <li>• Auto-response system</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 className="font-medium text-purple-400 mb-1">Security:</h5>
+                      <ul className="text-xs space-y-1 text-muted-foreground">
+                        <li>• End-to-end encryption</li>
+                        <li>• Spam protection</li>
+                        <li>• Data validation</li>
+                        <li>• Secure email delivery</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <Button 
+                  onClick={() => window.open('/app-submission', '_blank')}
+                  className="w-full mt-4 bg-green-600 hover:bg-green-700"
+                >
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Access Complete Contact System & App Store Package
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
       </Tabs>
     </div>
