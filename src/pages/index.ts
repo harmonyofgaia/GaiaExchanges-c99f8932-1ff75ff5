@@ -1,11 +1,5 @@
-export { default as Home } from './Home'
-export { default as Pricing } from './Pricing'
-export { default as Contact } from './Contact'
+
 export { default as NotFound } from './NotFound'
-export { default as Auth } from './Auth'
-export { default as Dashboard } from './Dashboard'
 export { default as Admin } from './Admin'
 export { default as UltimateSecurity } from './UltimateSecurity'
-export { default as Marketplace } from './Marketplace'
-export { default as Web3 } from './Web3'
 export { default as SecureVault } from './SecureVault'
