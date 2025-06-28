@@ -121,102 +121,178 @@ const Admin = () => {
           </div>
         </div>
 
-        <Tabs defaultValue="artwork-generator" className="w-full">
-          <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
-            <TabsTrigger value="artwork-generator" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-              🎨 Creative Suite
+        <Tabs defaultValue="completed-systems" className="w-full">
+          <TabsList className="grid w-full grid-cols-4 bg-black/50 backdrop-blur-md border border-green-500/20">
+            <TabsTrigger value="completed-systems" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              ✅ Completed Systems
             </TabsTrigger>
-            <TabsTrigger value="system-status" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-              📊 System Status
+            <TabsTrigger value="active-systems" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+              🔄 Active Systems
             </TabsTrigger>
-            <TabsTrigger value="server-resilience" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-              <Server className="h-4 w-4 mr-2" />
-              Server Shield
+            <TabsTrigger value="security-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+              🛡️ Security Management
             </TabsTrigger>
-            <TabsTrigger value="github-integration" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
-              <Github className="h-4 w-4 mr-2" />
-              GitHub Force
-            </TabsTrigger>
-            <TabsTrigger value="resilience" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-              <CloudLightning className="h-4 w-4 mr-2" />
-              Resilience
-            </TabsTrigger>
-            <TabsTrigger value="system-check" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-              <Activity className="h-4 w-4 mr-2" />
-              System Check
-            </TabsTrigger>
-            <TabsTrigger value="token-management" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-              <Database className="h-4 w-4 mr-2" />
-              Token Management
-            </TabsTrigger>
-            <TabsTrigger value="advertising" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-              <Settings className="h-4 w-4 mr-2" />
-              Daily Advertising
-            </TabsTrigger>
-            <TabsTrigger value="auth-test" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-              <Users className="h-4 w-4 mr-2" />
-              Auth System Test
-            </TabsTrigger>
-            <TabsTrigger value="green-projects" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-              <Leaf className="h-4 w-4 mr-2" />
-              Green Projects
-            </TabsTrigger>
-            <TabsTrigger value="backgrounds" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-              <FileText className="h-4 w-4 mr-2" />
-              Backgrounds
-            </TabsTrigger>
-            <TabsTrigger value="security-reports" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-              <FileText className="h-4 w-4 mr-2" />
-              Security Reports
+            <TabsTrigger value="project-management" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+              📋 Project Management
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="artwork-generator" className="space-y-6 mt-6">
-            <MasterArtworkGenerator />
+          <TabsContent value="completed-systems" className="space-y-6 mt-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-emerald-900/20">
+                <CardHeader>
+                  <CardTitle className="text-green-400 flex items-center gap-2">
+                    🎨 Creative Suite (COMPLETED)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <MasterArtworkGenerator />
+                </CardContent>
+              </Card>
+              
+              <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-emerald-900/20">
+                <CardHeader>
+                  <CardTitle className="text-green-400 flex items-center gap-2">
+                    <Database className="h-4 w-4" />
+                    Token Management (COMPLETED)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <TokenManagement />
+                </CardContent>
+              </Card>
+              
+              <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-emerald-900/20">
+                <CardHeader>
+                  <CardTitle className="text-green-400 flex items-center gap-2">
+                    <Users className="h-4 w-4" />
+                    Authentication System (COMPLETED)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <AuthTest />
+                </CardContent>
+              </Card>
+              
+              <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-emerald-900/20">
+                <CardHeader>
+                  <CardTitle className="text-green-400 flex items-center gap-2">
+                    <Leaf className="h-4 w-4" />
+                    Green Projects (COMPLETED)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <GreenProjectManager />
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
           
-          <TabsContent value="system-status" className="space-y-6 mt-6">
-            <SystemStatusChecker />
+          <TabsContent value="active-systems" className="space-y-6 mt-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-cyan-900/20">
+                <CardHeader>
+                  <CardTitle className="text-blue-400 flex items-center gap-2">
+                    📊 System Status Monitor (ACTIVE)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <SystemStatusChecker />
+                </CardContent>
+              </Card>
+              
+              <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-cyan-900/20">
+                <CardHeader>
+                  <CardTitle className="text-blue-400 flex items-center gap-2">
+                    <Activity className="h-4 w-4" />
+                    System Health Check (ACTIVE)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ComprehensiveSystemCheck />
+                </CardContent>
+              </Card>
+              
+              <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-cyan-900/20">
+                <CardHeader>
+                  <CardTitle className="text-blue-400 flex items-center gap-2">
+                    <Settings className="h-4 w-4" />
+                    Daily Advertising (ACTIVE)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <DailyAdvertising />
+                </CardContent>
+              </Card>
+              
+              <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-cyan-900/20">
+                <CardHeader>
+                  <CardTitle className="text-blue-400 flex items-center gap-2">
+                    <Github className="h-4 w-4" />
+                    GitHub Integration (ACTIVE)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <GitHubAdminIntegration />
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
           
-          <TabsContent value="server-resilience" className="space-y-6 mt-6">
-            <ServerResilienceEngine />
+          <TabsContent value="security-management" className="space-y-6 mt-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="border-red-500/30 bg-gradient-to-br from-red-900/20 to-orange-900/20">
+                <CardHeader>
+                  <CardTitle className="text-red-400 flex items-center gap-2">
+                    <Server className="h-4 w-4" />
+                    Server Resilience Engine (ACTIVE)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ServerResilienceEngine />
+                </CardContent>
+              </Card>
+              
+              <Card className="border-red-500/30 bg-gradient-to-br from-red-900/20 to-orange-900/20">
+                <CardHeader>
+                  <CardTitle className="text-red-400 flex items-center gap-2">
+                    <CloudLightning className="h-4 w-4" />
+                    Ultimate Resilience (ACTIVE)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <UltimateResilienceEngine />
+                </CardContent>
+              </Card>
+              
+              <Card className="border-red-500/30 bg-gradient-to-br from-red-900/20 to-orange-900/20">
+                <CardHeader>
+                  <CardTitle className="text-red-400 flex items-center gap-2">
+                    <FileText className="h-4 w-4" />
+                    Security Reports (ACTIVE)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <EncryptedSecurityReports />
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
           
-          <TabsContent value="github-integration" className="space-y-6 mt-6">
-            <GitHubAdminIntegration />
-          </TabsContent>
-          
-          <TabsContent value="resilience" className="space-y-6 mt-6">
-            <UltimateResilienceEngine />
-          </TabsContent>
-          
-          <TabsContent value="system-check" className="space-y-6 mt-6">
-            <ComprehensiveSystemCheck />
-          </TabsContent>
-          
-          <TabsContent value="token-management" className="space-y-6 mt-6">
-            <TokenManagement />
-          </TabsContent>
-          
-          <TabsContent value="advertising" className="space-y-6 mt-6">
-            <DailyAdvertising />
-          </TabsContent>
-          
-          <TabsContent value="auth-test" className="space-y-6 mt-6">
-            <AuthTest />
-          </TabsContent>
-          
-          <TabsContent value="green-projects" className="space-y-6 mt-6">
-            <GreenProjectManager />
-          </TabsContent>
-          
-          <TabsContent value="backgrounds" className="space-y-6 mt-6">
-            <BackgroundManager />
-          </TabsContent>
-          
-          <TabsContent value="security-reports" className="space-y-6 mt-6">
-            <EncryptedSecurityReports />
+          <TabsContent value="project-management" className="space-y-6 mt-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-pink-900/20">
+                <CardHeader>
+                  <CardTitle className="text-purple-400 flex items-center gap-2">
+                    <FileText className="h-4 w-4" />
+                    Background Manager (COMPLETED)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <BackgroundManager />
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
         </Tabs>
       </div>
