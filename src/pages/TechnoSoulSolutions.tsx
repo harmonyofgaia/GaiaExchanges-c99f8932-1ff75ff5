@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -338,7 +339,7 @@ const TechnoSoulSolutions = () => {
         </Card>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .animate-float {
           animation: float 6s ease-in-out infinite;
         }
