@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -28,6 +27,11 @@ const Admin = () => {
     navigate('/')
   }
 
+  const handleLoginSuccess = () => {
+    // Login success is handled by useSecureAdmin hook
+    console.log('Admin login successful')
+  }
+
   const handleMFASuccess = () => {
     setShowMFA(false)
   }
@@ -46,11 +50,11 @@ const Admin = () => {
   }
 
   if (!isAdmin) {
-    return <SecureAdminLogin />
+    return <SecureAdminLogin onLoginSuccess={handleLoginSuccess} />
   }
 
   if (showMFA) {
-    return <AdminMFA onSuccess={handleMFASuccess} />
+    return <AdminMFA onMFASuccess={handleMFASuccess} />
   }
 
   return (
