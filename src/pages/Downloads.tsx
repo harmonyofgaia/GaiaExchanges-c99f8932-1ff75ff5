@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -17,6 +16,9 @@ import {
   Github
 } from 'lucide-react'
 import { GaiaLogo } from '@/components/GaiaLogo'
+import { Web3Integration } from '@/components/Web3Integration'
+import { GitHubRepositories } from '@/components/GitHubRepositories'
+import { AppStoreLinks } from '@/components/AppStoreLinks'
 import { toast } from 'sonner'
 
 const Downloads = () => {
@@ -262,43 +264,14 @@ const Downloads = () => {
         ))}
       </div>
 
-      {/* GitHub Repository Links */}
-      <Card className="border-blue-500/20 bg-gradient-to-r from-blue-900/20 to-cyan-900/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <Github className="h-5 w-5" />
-            Official GitHub Repositories
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Button variant="outline" className="w-full justify-start" asChild>
-              <a href="https://github.com/harmonyofgaia/gaia-exchanges" target="_blank" rel="noopener noreferrer">
-                <Github className="h-4 w-4 mr-2" />
-                Gaia's Exchanges (Main App)
-              </a>
-            </Button>
-            <Button variant="outline" className="w-full justify-start" asChild>
-              <a href="https://github.com/harmonyofgaia/gaia-token" target="_blank" rel="noopener noreferrer">
-                <Github className="h-4 w-4 mr-2" />
-                GAiA Token Smart Contract
-              </a>
-            </Button>
-            <Button variant="outline" className="w-full justify-start" asChild>
-              <a href="https://github.com/harmonyofgaia/gaia-dapp" target="_blank" rel="noopener noreferrer">
-                <Github className="h-4 w-4 mr-2" />
-                Web3 DApp Interface
-              </a>
-            </Button>
-            <Button variant="outline" className="w-full justify-start" asChild>
-              <a href="https://github.com/harmonyofgaia/gaia-mobile" target="_blank" rel="noopener noreferrer">
-                <Github className="h-4 w-4 mr-2" />
-                Mobile App Source
-              </a>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      {/* NEW: App Store Links */}
+      <AppStoreLinks />
+
+      {/* NEW: Web3 Integration */}
+      <Web3Integration />
+
+      {/* NEW: GitHub Repositories */}
+      <GitHubRepositories />
 
       {/* Additional Resources */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
