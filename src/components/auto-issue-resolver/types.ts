@@ -12,4 +12,5 @@ export interface SystemStats {
   systemHealth: number
   checkInterval: string
   activeIssues: number
+  securityLevel?: 'HIGH' | 'MEDIUM' | 'LOW'
 }

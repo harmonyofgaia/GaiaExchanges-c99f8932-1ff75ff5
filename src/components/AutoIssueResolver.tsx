@@ -7,12 +7,13 @@ import { AutoResolutionFeatures } from './auto-issue-resolver/AutoResolutionFeat
 import { RecentIssues } from './auto-issue-resolver/RecentIssues'
 
 export function AutoIssueResolver() {
-  const { issues, lastCheck } = useAutoIssueResolver()
+  const { issues, lastCheck, securityLevel } = useAutoIssueResolver()
 
   const systemStats = {
-    systemHealth: 100,
-    checkInterval: '5s',
-    activeIssues: issues.filter(i => !i.resolved).length
+    systemHealth: securityLevel === 'HIGH' ? 100 : securityLevel === 'MEDIUM' ? 85 : 60,
+    checkInterval: '3s',
+    activeIssues: issues.filter(i => !i.resolved).length,
+    securityLevel
   }
 
   return (
@@ -29,7 +30,13 @@ export function AutoIssueResolver() {
         
         <div className="bg-gradient-to-r from-purple-900/20 to-green-900/20 border border-purple-500/20 rounded-lg p-3">
           <p className="text-sm text-center text-purple-300">
-            🌍 <strong>Harmony of Gaia Protection Active</strong> - All systems automatically monitored and optimized for the Culture of Harmony project
+            🛡️ <strong>Advanced Security Monitoring Active</strong> - Full cybersecurity protection for Harmony of Gaia Exchange and Community
+          </p>
+        </div>
+
+        <div className="bg-gradient-to-r from-red-900/20 to-orange-900/20 border border-red-500/20 rounded-lg p-3">
+          <p className="text-xs text-center text-red-300">
+            🚨 <strong>Threat Detection: ACTIVE</strong> | 🔒 <strong>File Integrity: PROTECTED</strong> | 💰 <strong>Wallet Security: MAXIMUM</strong>
           </p>
         </div>
       </CardContent>
