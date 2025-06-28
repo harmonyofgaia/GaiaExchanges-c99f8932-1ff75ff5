@@ -7,6 +7,8 @@ import { Toaster } from '@/components/ui/toaster'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/AppSidebar'
 import { GlobalErrorBoundary } from '@/components/GlobalErrorBoundary'
+import { NeuralElectricBackground } from '@/components/ui/neural-electric-background'
+import { useGlobalBackground } from '@/hooks/useGlobalBackground'
 
 // Import pages
 import Index from '@/pages/Index'
@@ -26,6 +28,95 @@ import NotFound from '@/pages/NotFound'
 
 const queryClient = new QueryClient()
 
+const AppContent = () => {
+  const { backgroundStyle } = useGlobalBackground()
+
+  return (
+    <>
+      <NeuralElectricBackground style={backgroundStyle} intensity="medium" />
+      <div className="relative z-10 flex min-h-screen">
+        <Routes>
+          {/* Admin route - no sidebar, special handling */}
+          <Route path="/admin" element={<Admin />} />
+          
+          {/* All other routes with sidebar */}
+          <Route path="/*" element={
+            <>
+              <AppSidebar />
+              <div className="flex-1 p-6">
+                <Routes>
+                  <Route path="/" element={
+                    <ProtectedRoute>
+                      <Index />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/about" element={
+                    <ProtectedRoute>
+                      <About />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/wallet" element={
+                    <ProtectedRoute>
+                      <Wallet />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/markets" element={
+                    <ProtectedRoute>
+                      <Markets />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/smart-contracts" element={
+                    <ProtectedRoute>
+                      <SmartContracts />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/ultimate-security" element={
+                    <ProtectedRoute>
+                      <UltimateSecurity />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/system-status" element={
+                    <ProtectedRoute>
+                      <SystemStatus />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/comprehensive-status" element={
+                    <ProtectedRoute>
+                      <ComprehensiveStatus />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/downloads" element={
+                    <ProtectedRoute>
+                      <Downloads />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/marketing" element={
+                    <ProtectedRoute>
+                      <Marketing />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/reinvestments" element={
+                    <ProtectedRoute>
+                      <Reinvestments />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/transparency" element={
+                    <ProtectedRoute>
+                      <Transparency />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
+            </>
+          } />
+        </Routes>
+      </div>
+      <Toaster />
+    </>
+  )
+}
+
 export function AppWithErrorBoundary() {
   return (
     <GlobalErrorBoundary>
@@ -33,86 +124,8 @@ export function AppWithErrorBoundary() {
         <AuthProvider>
           <Router>
             <SidebarProvider>
-              <div className="flex min-h-screen">
-                <Routes>
-                  {/* Admin route - no sidebar, special handling */}
-                  <Route path="/admin" element={<Admin />} />
-                  
-                  {/* All other routes with sidebar */}
-                  <Route path="/*" element={
-                    <>
-                      <AppSidebar />
-                      <div className="flex-1 p-6">
-                        <Routes>
-                          <Route path="/" element={
-                            <ProtectedRoute>
-                              <Index />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="/about" element={
-                            <ProtectedRoute>
-                              <About />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="/wallet" element={
-                            <ProtectedRoute>
-                              <Wallet />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="/markets" element={
-                            <ProtectedRoute>
-                              <Markets />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="/smart-contracts" element={
-                            <ProtectedRoute>
-                              <SmartContracts />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="/ultimate-security" element={
-                            <ProtectedRoute>
-                              <UltimateSecurity />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="/system-status" element={
-                            <ProtectedRoute>
-                              <SystemStatus />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="/comprehensive-status" element={
-                            <ProtectedRoute>
-                              <ComprehensiveStatus />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="/downloads" element={
-                            <ProtectedRoute>
-                              <Downloads />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="/marketing" element={
-                            <ProtectedRoute>
-                              <Marketing />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="/reinvestments" element={
-                            <ProtectedRoute>
-                              <Reinvestments />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="/transparency" element={
-                            <ProtectedRoute>
-                              <Transparency />
-                            </ProtectedRoute>
-                          } />
-                          <Route path="*" element={<NotFound />} />
-                        </Routes>
-                      </div>
-                    </>
-                  } />
-                </Routes>
-              </div>
+              <AppContent />
             </SidebarProvider>
-            <Toaster />
           </Router>
         </AuthProvider>
       </QueryClientProvider>
