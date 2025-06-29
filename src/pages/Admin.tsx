@@ -1,7 +1,8 @@
-
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
+import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
+import { WorldwideDefenseMonitor } from '@/components/security/WorldwideDefenseMonitor'
 import { AdminOverview } from '@/components/admin/AdminOverview'
 import { SystemControlCenter } from '@/components/admin/SystemControlCenter'
 import { QuantumAdminDashboard } from '@/components/admin/QuantumAdminDashboard'
@@ -31,102 +32,111 @@ const Admin = () => {
             🌍 HARMONY OF GAIA ADMIN CONTROL CENTER
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Complete System Management • Neural Security • Global Reach • Perfect Harmony
+            Worldwide Defense • Neural Security • Global Reach • Perfect Harmony • Admin Eyes Only
           </p>
           <p className="text-lg text-green-400 mt-2">
-            🎵 "Seeds Will Form Into Music" - Together We Make The World A Better Place 🎵
+            🎵 "Seeds Will Form Into Music" - Protected By Quantum Defense 🎵
           </p>
         </div>
 
         <AdminProtectedRoute>
-          <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
-              <TabsTrigger value="overview" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-                🌍 Overview
-              </TabsTrigger>
-              <TabsTrigger value="guardian" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-                🦕 Guardian
-              </TabsTrigger>
-              <TabsTrigger value="creative-nft" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-                🎨 Creative NFTs
-              </TabsTrigger>
-              <TabsTrigger value="user-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-                👥 User Control
-              </TabsTrigger>
-              <TabsTrigger value="nft-marketplace" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-                🎮 NFT Market
-              </TabsTrigger>
-              <TabsTrigger value="gaming-assets" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
-                🛡️ Game Assets
-              </TabsTrigger>
-              <TabsTrigger value="live-blockchain" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-                ⚡ Live Blockchain
-              </TabsTrigger>
-              <TabsTrigger value="architek-blockchain" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-                🔗 Architek Network
-              </TabsTrigger>
-              <TabsTrigger value="secure-connections" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-                🛡️ Secure Matrix
-              </TabsTrigger>
-              <TabsTrigger value="marketing-engine" className="data-[state=active]:bg-gold-500/20 data-[state=active]:text-gold-400">
-                🚀 Marketing Engine
-              </TabsTrigger>
-              <TabsTrigger value="game-cloud" className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400">
-                🎮 Game Cloud
-              </TabsTrigger>
-              <TabsTrigger value="system" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
-                🛡️ System
-              </TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="overview" className="space-y-6 mt-6">
-              <AdminOverview />
-            </TabsContent>
-            
-            <TabsContent value="guardian" className="space-y-6 mt-6">
-              <PrehistoricGuardian />
-            </TabsContent>
-            
-            <TabsContent value="creative-nft" className="space-y-6 mt-6">
-              <CreativeNFTGenerator />
-            </TabsContent>
-            
-            <TabsContent value="user-management" className="space-y-6 mt-6">
-              <UserManagementSystemRefactored />
-            </TabsContent>
-            
-            <TabsContent value="nft-marketplace" className="space-y-6 mt-6">
-              <AdminNFTMarketplace />
-            </TabsContent>
-            
-            <TabsContent value="gaming-assets" className="space-y-6 mt-6">
-              <GamingAssetsManager />
-            </TabsContent>
-            
-            <TabsContent value="live-blockchain" className="space-y-6 mt-6">
-              <LiveBlockchainViewer />
-            </TabsContent>
-            
-            <TabsContent value="architek-blockchain" className="space-y-6 mt-6">
-              <QuantumBlockchainCore />
-            </TabsContent>
-            
-            <TabsContent value="secure-connections" className="space-y-6 mt-6">
-              <SecureConnectionManager />
-            </TabsContent>
-            
-            <TabsContent value="marketing-engine" className="space-y-6 mt-6">
-              <GlobalMarketingEngine />
-            </TabsContent>
-            
-            <TabsContent value="game-cloud" className="space-y-6 mt-6">
-              <GameDevelopmentCloud />
-            </TabsContent>
-            
-            <TabsContent value="system" className="space-y-6 mt-6">
-              <SystemControlCenter />
-            </TabsContent>
-          </Tabs>
+          <AdminOnlyAccess>
+            <Tabs defaultValue="worldwide-defense" className="w-full">
+              <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
+                <TabsTrigger value="worldwide-defense" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+                  🌍 Worldwide Defense
+                </TabsTrigger>
+                <TabsTrigger value="overview" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+                  📊 Overview
+                </TabsTrigger>
+                <TabsTrigger value="guardian" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                  🦕 Guardian
+                </TabsTrigger>
+                <TabsTrigger value="creative-nft" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                  🎨 Creative NFTs
+                </TabsTrigger>
+                <TabsTrigger value="user-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+                  👥 User Control
+                </TabsTrigger>
+                <TabsTrigger value="nft-marketplace" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                  🎮 NFT Market
+                </TabsTrigger>
+                <TabsTrigger value="gaming-assets" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+                  🛡️ Game Assets
+                </TabsTrigger>
+                <TabsTrigger value="live-blockchain" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+                  ⚡ Live Blockchain
+                </TabsTrigger>
+                <TabsTrigger value="architek-blockchain" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                  🔗 Architek Network
+                </TabsTrigger>
+                <TabsTrigger value="secure-connections" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+                  🛡️ Secure Matrix
+                </TabsTrigger>
+                <TabsTrigger value="marketing-engine" className="data-[state=active]:bg-gold-500/20 data-[state=active]:text-gold-400">
+                  🚀 Marketing Engine
+                </TabsTrigger>
+                <TabsTrigger value="game-cloud" className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400">
+                  🎮 Game Cloud
+                </TabsTrigger>
+                <TabsTrigger value="system" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+                  🛡️ System
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="worldwide-defense" className="space-y-6 mt-6">
+                <WorldwideDefenseMonitor />
+              </TabsContent>
+              
+              <TabsContent value="overview" className="space-y-6 mt-6">
+                <AdminOverview />
+              </TabsContent>
+              
+              <TabsContent value="guardian" className="space-y-6 mt-6">
+                <PrehistoricGuardian />
+              </TabsContent>
+              
+              <TabsContent value="creative-nft" className="space-y-6 mt-6">
+                <CreativeNFTGenerator />
+              </TabsContent>
+              
+              <TabsContent value="user-management" className="space-y-6 mt-6">
+                <UserManagementSystemRefactored />
+              </TabsContent>
+              
+              <TabsContent value="nft-marketplace" className="space-y-6 mt-6">
+                <AdminNFTMarketplace />
+              </TabsContent>
+              
+              <TabsContent value="gaming-assets" className="space-y-6 mt-6">
+                <GamingAssetsManager />
+              </TabsContent>
+              
+              <TabsContent value="live-blockchain" className="space-y-6 mt-6">
+                <LiveBlockchainViewer />
+              </TabsContent>
+              
+              <TabsContent value="architek-blockchain" className="space-y-6 mt-6">
+                <QuantumBlockchainCore />
+              </TabsContent>
+              
+              <TabsContent value="secure-connections" className="space-y-6 mt-6">
+                <SecureConnectionManager />
+              </TabsContent>
+              
+              <TabsContent value="marketing-engine" className="space-y-6 mt-6">
+                <GlobalMarketingEngine />
+              </TabsContent>
+              
+              <TabsContent value="game-cloud" className="space-y-6 mt-6">
+                <GameDevelopmentCloud />
+              </TabsContent>
+              
+              <TabsContent value="system" className="space-y-6 mt-6">
+                <SystemControlCenter />
+              </TabsContent>
+            </Tabs>
+          </AdminOnlyAccess>
         </AdminProtectedRoute>
       </div>
     </div>

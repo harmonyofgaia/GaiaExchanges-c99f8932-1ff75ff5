@@ -199,9 +199,10 @@ export function PrehistoricGuardian() {
           return true
 
         case 'security':
-          // Log security event with correct column names and severity values
+          // Log security event with correct database schema
           try {
             await supabase.from('security_events').insert({
+              event_type: 'guardian_resolution',
               event_description: `Guardian resolved: ${problem.description}`,
               severity: problem.severity as 'low' | 'medium' | 'high' | 'maximum',
               ip_address: '127.0.0.1',
