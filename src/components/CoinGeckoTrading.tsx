@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -7,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Search, TrendingUp, TrendingDown, RefreshCw, ExternalLink, Shield, Wallet, AlertTriangle } from 'lucide-react'
 import { toast } from 'sonner'
+import { GAIA_TOKEN, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
 
 interface CoinData {
   id: string
@@ -48,7 +50,7 @@ export function CoinGeckoTrading() {
       lastUpdate: new Date().toISOString()
     },
     {
-      address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+      address: GAIA_TOKEN.WALLET_ADDRESS,
       network: 'Harmony of Gaia',
       verified: true,
       balance: 15750.25,
@@ -60,9 +62,9 @@ export function CoinGeckoTrading() {
   const mockCoinData: CoinData[] = [
     {
       id: 'gaia-harmony',
-      symbol: 'GAIA',
-      name: 'Harmony of Gaia',
-      current_price: 3.25,
+      symbol: GAIA_TOKEN.SYMBOL,
+      name: GAIA_TOKEN.NAME,
+      current_price: GAIA_TOKEN.INITIAL_PRICE,
       price_change_percentage_24h: 8.47,
       market_cap: 278500000,
       total_volume: 12750000,
@@ -217,15 +219,6 @@ export function CoinGeckoTrading() {
     }
   })
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: price < 1 ? 6 : 2,
-      maximumFractionDigits: price < 1 ? 6 : 2
-    }).format(price)
-  }
-
   const formatNumber = (num: number) => {
     if (num >= 1e12) return `$${(num / 1e12).toFixed(2)}T`
     if (num >= 1e9) return `$${(num / 1e9).toFixed(2)}B`
@@ -249,6 +242,10 @@ export function CoinGeckoTrading() {
               <div>
                 <h3 className="text-xl font-bold text-green-400">Live Trading Charts & Market Data</h3>
                 <p className="text-sm text-muted-foreground">Real-time charts • Instant market execution • Zero fees</p>
+                <div className="mt-2 text-xs">
+                  <span className="text-green-400">New {GAIA_TOKEN.SYMBOL} Contract:</span> 
+                  <code className="ml-2 font-mono text-blue-400">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+                </div>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -335,11 +332,16 @@ export function CoinGeckoTrading() {
                           <p className="text-sm text-muted-foreground">
                             {coin.symbol.toUpperCase()} • Rank #{coin.market_cap_rank}
                           </p>
+                          {coin.symbol === GAIA_TOKEN.SYMBOL && (
+                            <p className="text-xs text-green-400 mt-1">
+                              Contract: {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...
+                            </p>
+                          )}
                         </div>
                       </div>
                       
                       <div className="text-right">
-                        <div className="text-xl font-bold">{formatPrice(coin.current_price)}</div>
+                        <div className="text-xl font-bold">{coin.symbol === GAIA_TOKEN.SYMBOL ? formatGaiaPrice(coin.current_price) : formatNumber(coin.current_price)}</div>
                         <div className={`text-sm flex items-center gap-1 ${getPriceChangeColor(coin.price_change_percentage_24h)}`}>
                           {coin.price_change_percentage_24h >= 0 ? (
                             <TrendingUp className="h-3 w-3" />
@@ -353,7 +355,7 @@ export function CoinGeckoTrading() {
                       <div className="text-right text-sm text-muted-foreground">
                         <div>MCap: {formatNumber(coin.market_cap)}</div>
                         <div>Vol: {formatNumber(coin.total_volume)}</div>
-                        <div>H: {formatPrice(coin.high_24h)} L: {formatPrice(coin.low_24h)}</div>
+                        <div>H: {coin.symbol === GAIA_TOKEN.SYMBOL ? formatGaiaPrice(coin.high_24h) : formatNumber(coin.high_24h)} L: {coin.symbol === GAIA_TOKEN.SYMBOL ? formatGaiaPrice(coin.low_24h) : formatNumber(coin.low_24h)}</div>
                       </div>
                       
                       <div className="flex gap-2">
@@ -401,7 +403,7 @@ export function CoinGeckoTrading() {
                       
                       <div className="flex justify-between items-center mt-3 text-xs">
                         <span className="text-muted-foreground">24h Range</span>
-                        <span className="text-green-400">{formatPrice(coin.low_24h)} - {formatPrice(coin.high_24h)}</span>
+                        <span className="text-green-400">{coin.symbol === GAIA_TOKEN.SYMBOL ? formatGaiaPrice(coin.low_24h) : formatNumber(coin.low_24h)} - {coin.symbol === GAIA_TOKEN.SYMBOL ? formatGaiaPrice(coin.high_24h) : formatNumber(coin.high_24h)}</span>
                       </div>
                     </div>
                   </div>
@@ -412,7 +414,7 @@ export function CoinGeckoTrading() {
         </TabsContent>
         
         <TabsContent value="wallets" className="space-y-4">
-                  <Card>
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Wallet className="h-5 w-5 text-blue-400" />
@@ -435,7 +437,7 @@ export function CoinGeckoTrading() {
                     
                     <div className="text-right">
                       {wallet.balance && (
-                        <div className="font-semibold">{wallet.balance.toFixed(4)} {wallet.network === 'Bitcoin' ? 'BTC' : 'GAIA'}</div>
+                        <div className="font-semibold">{wallet.balance.toFixed(4)} {wallet.network === 'Bitcoin' ? 'BTC' : GAIA_TOKEN.SYMBOL}</div>
                       )}
                       <div className="text-xs text-muted-foreground">
                         Updated: {new Date(wallet.lastUpdate).toLocaleTimeString()}
@@ -453,7 +455,7 @@ export function CoinGeckoTrading() {
         </TabsContent>
         
         <TabsContent value="security" className="space-y-4">
-                  <Card className="border-orange-500/20">
+          <Card className="border-orange-500/20">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-orange-400">
                 <AlertTriangle className="h-5 w-5" />

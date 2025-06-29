@@ -32,6 +32,7 @@ import { CoinGeckoTrading } from './CoinGeckoTrading'
 import { ChartAnalytics } from './ChartAnalytics'
 import { SecurityCenter } from './SecurityCenter'
 import { toast } from 'sonner'
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
 
 interface ExchangeStats {
   totalVolume: number
@@ -51,15 +52,15 @@ interface MarketData {
 
 export function GaiasExchange() {
   const [stats, setStats] = useState<ExchangeStats>({
-    totalVolume: 1250000000,
-    dailyUsers: 45000,
-    totalTrades: 8750000,
-    securityScore: 99.9,
-    uptime: 99.99
+    totalVolume: GAIA_METRICS.INITIAL_VOLUME,
+    dailyUsers: GAIA_METRICS.INITIAL_HOLDERS,
+    totalTrades: GAIA_METRICS.INITIAL_TRANSACTIONS,
+    securityScore: GAIA_METRICS.SECURITY_SCORE,
+    uptime: GAIA_METRICS.ECOSYSTEM_HEALTH
   })
 
   const [marketData, setMarketData] = useState<MarketData[]>([
-    { symbol: 'GAIA', price: 3.00, change24h: 5.67, volume: 8750000, marketCap: 257250000 },
+    { symbol: GAIA_TOKEN.SYMBOL, price: GAIA_TOKEN.INITIAL_PRICE, change24h: 5.67, volume: 8750000, marketCap: GAIA_METRICS.INITIAL_MARKET_CAP },
     { symbol: 'BTC', price: 43250.67, change24h: 2.34, volume: 15420000000, marketCap: 847000000000 },
     { symbol: 'ETH', price: 2543.21, change24h: -1.87, volume: 8750000000, marketCap: 305000000000 }
   ])
@@ -173,14 +174,6 @@ export function GaiasExchange() {
     }
   }
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      notation: value > 1000000 ? 'compact' : 'standard'
-    }).format(value)
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 to-blue-900/20">
       {/* Header */}
@@ -192,6 +185,9 @@ export function GaiasExchange() {
               <div>
                 <h1 className="text-2xl font-bold text-primary">Gaia's Exchanges</h1>
                 <p className="text-sm text-green-400">World's Most Secure Web3 Trading Platform</p>
+                <div className="text-xs text-blue-400 mt-1">
+                  Contract: <code className="font-mono">{GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...</code>
+                </div>
               </div>
             </div>
             
@@ -221,7 +217,7 @@ export function GaiasExchange() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">24h Volume</p>
-                  <p className="text-2xl font-bold text-green-400">{formatCurrency(stats.totalVolume)}</p>
+                  <p className="text-2xl font-bold text-green-400">{formatGaiaNumber(stats.totalVolume)}</p>
                 </div>
                 <DollarSign className="h-8 w-8 text-green-400" />
               </div>
@@ -272,6 +268,9 @@ export function GaiasExchange() {
               <Download className="h-5 w-5" />
               Download Gaia's Exchanges - Multi-Platform
             </CardTitle>
+            <div className="text-sm text-blue-400 mt-2">
+              <strong>New Contract Address:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+            </div>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
@@ -337,6 +336,12 @@ export function GaiasExchange() {
                   <a href="https://docs.gaiaexchanges.com" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     Documentation
+                  </a>
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <a href={GAIA_TOKEN.PUMP_FUN_URL} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Trade on Pump.fun
                   </a>
                 </Button>
               </div>

@@ -8,6 +8,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { Search, TrendingUp, BarChart3, Activity, RefreshCw } from 'lucide-react'
 import { GaiaLogo } from './GaiaLogo'
 import { toast } from 'sonner'
+import { GAIA_TOKEN, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
 
 interface ChartData {
   time: string
@@ -26,22 +27,19 @@ interface CoinInfo {
   walletAddress?: string
 }
 
-const GAIA_CONTRACT_ADDRESS = "t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump"
-const GAIA_WALLET_ADDRESS = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
-
 export function ChartAnalytics() {
-  const [searchCoin, setSearchCoin] = useState('GAiA')
+  const [searchCoin, setSearchCoin] = useState(GAIA_TOKEN.SYMBOL)
   const [timeframe, setTimeframe] = useState('1H')
   const [chartData, setChartData] = useState<ChartData[]>([])
   const [coinInfo, setCoinInfo] = useState<CoinInfo>({
-    symbol: 'GAiA',
-    name: 'Harmony of Culture Token',
-    price: 3.25,
+    symbol: GAIA_TOKEN.SYMBOL,
+    name: GAIA_TOKEN.NAME,
+    price: GAIA_TOKEN.INITIAL_PRICE,
     change24h: 8.47,
     volume: 8750000,
     marketCap: 278687500,
-    contractAddress: GAIA_CONTRACT_ADDRESS,
-    walletAddress: GAIA_WALLET_ADDRESS
+    contractAddress: GAIA_TOKEN.CONTRACT_ADDRESS,
+    walletAddress: GAIA_TOKEN.WALLET_ADDRESS
   })
   const [isLoading, setIsLoading] = useState(false)
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date())
@@ -149,40 +147,25 @@ export function ChartAnalytics() {
     // Updated mock coins data with correct GAiA information
     setTimeout(() => {
       const mockCoins: { [key: string]: CoinInfo } = {
-        'GAiA': { 
-          symbol: 'GAiA', 
-          name: 'Harmony of Culture Token', 
-          price: 3.25, 
+        [GAIA_TOKEN.SYMBOL]: { 
+          symbol: GAIA_TOKEN.SYMBOL, 
+          name: GAIA_TOKEN.NAME, 
+          price: GAIA_TOKEN.INITIAL_PRICE, 
           change24h: 8.47, 
           volume: 8750000, 
           marketCap: 278687500,
-          contractAddress: GAIA_CONTRACT_ADDRESS,
-          walletAddress: GAIA_WALLET_ADDRESS
+          contractAddress: GAIA_TOKEN.CONTRACT_ADDRESS,
+          walletAddress: GAIA_TOKEN.WALLET_ADDRESS
         },
         'BTC': { symbol: 'BTC', name: 'Bitcoin', price: 43250.67, change24h: 2.34, volume: 15420000000, marketCap: 847000000000 },
         'ETH': { symbol: 'ETH', name: 'Ethereum', price: 2543.21, change24h: -1.87, volume: 8750000000, marketCap: 305000000000 },
         'ADA': { symbol: 'ADA', name: 'Cardano', price: 0.4234, change24h: 4.56, volume: 450000000, marketCap: 15000000000 }
       }
 
-      const coin = mockCoins[searchCoin.toUpperCase()] || mockCoins['GAiA']
+      const coin = mockCoins[searchCoin.toUpperCase()] || mockCoins[GAIA_TOKEN.SYMBOL]
       setCoinInfo(coin)
       setIsLoading(false)
     }, 1000)
-  }
-
-  const formatPrice = (value: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: value < 1 ? 6 : 2,
-      maximumFractionDigits: value < 1 ? 6 : 2
-    }).format(value)
-  }
-
-  const formatVolume = (value: number) => {
-    if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`
-    if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`
-    return `$${(value / 1e3).toFixed(2)}K`
   }
 
   return (
@@ -192,22 +175,22 @@ export function ChartAnalytics() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <BarChart3 className="h-5 w-5 text-blue-400" />
-            GAiA Advanced Chart Analytics - Harmony of Culture
+            {GAIA_TOKEN.SYMBOL} Advanced Chart Analytics - Harmony of Culture
           </CardTitle>
           <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 mt-2">
             <div className="text-sm text-green-400 space-y-1">
-              <div><strong>Contract:</strong> <code className="font-mono text-xs">{GAIA_CONTRACT_ADDRESS}</code></div>
-              <div><strong>Wallet:</strong> <code className="font-mono text-xs">{GAIA_WALLET_ADDRESS}</code></div>
+              <div><strong>Contract:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code></div>
+              <div><strong>Wallet:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.WALLET_ADDRESS}</code></div>
+              <div><strong>Pump.fun:</strong> <a href={GAIA_TOKEN.PUMP_FUN_URL} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Trade Now</a></div>
             </div>
-          </div>
-        </CardHeader>
+          </CardHeader>
         <CardContent>
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1 flex gap-2">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
-                  placeholder="Search coin symbol (GAIA, BTC, ETH...)"
+                  placeholder={`Search coin symbol (${GAIA_TOKEN.SYMBOL}, BTC, ETH...)`}
                   value={searchCoin}
                   onChange={(e) => setSearchCoin(e.target.value)}
                   className="pl-10"
@@ -241,11 +224,11 @@ export function ChartAnalytics() {
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              {coinInfo.symbol === 'GAiA' && <GaiaLogo size="lg" />}
+              {coinInfo.symbol === GAIA_TOKEN.SYMBOL && <GaiaLogo size="lg" />}
               <div>
                 <h3 className="text-2xl font-bold">{coinInfo.name} ({coinInfo.symbol})</h3>
                 <div className="flex items-center gap-4 mt-2">
-                  <div className="text-3xl font-bold">{formatPrice(coinInfo.price)}</div>
+                  <div className="text-3xl font-bold">{formatGaiaPrice(coinInfo.price)}</div>
                   <Badge className={`${coinInfo.change24h >= 0 ? 'bg-green-600' : 'bg-red-600'} text-white`}>
                     {coinInfo.change24h >= 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingUp className="h-3 w-3 mr-1 rotate-180" />}
                     {coinInfo.change24h > 0 ? '+' : ''}{coinInfo.change24h.toFixed(2)}%
@@ -262,15 +245,14 @@ export function ChartAnalytics() {
             
             <div className="text-right">
               <div className="text-sm text-muted-foreground">24h Volume</div>
-              <div className="text-lg font-semibold">{formatVolume(coinInfo.volume)}</div>
+              <div className="text-lg font-semibold">{formatGaiaNumber(coinInfo.volume)}</div>
               <div className="text-sm text-muted-foreground mt-1">Market Cap</div>
-              <div className="text-lg font-semibold">{formatVolume(coinInfo.marketCap)}</div>
+              <div className="text-lg font-semibold">{formatGaiaNumber(coinInfo.marketCap)}</div>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Price Chart */}
       <Card className="border-border/50">
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -297,7 +279,7 @@ export function ChartAnalytics() {
                 <YAxis 
                   stroke="rgba(255,255,255,0.5)"
                   fontSize={12}
-                  tickFormatter={(value) => formatPrice(value)}
+                  tickFormatter={(value) => formatGaiaPrice(value)}
                 />
                 <Tooltip 
                   contentStyle={{
@@ -305,7 +287,7 @@ export function ChartAnalytics() {
                     border: '1px solid rgba(255,255,255,0.2)',
                     borderRadius: '8px'
                   }}
-                  formatter={(value: number) => [formatPrice(value), 'Price']}
+                  formatter={(value: number) => [formatGaiaPrice(value), 'Price']}
                 />
                 <Line 
                   type="monotone" 
@@ -320,7 +302,6 @@ export function ChartAnalytics() {
         </CardContent>
       </Card>
 
-      {/* Volume Chart */}
       <Card className="border-border/50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -341,7 +322,7 @@ export function ChartAnalytics() {
                 <YAxis 
                   stroke="rgba(255,255,255,0.5)"
                   fontSize={12}
-                  tickFormatter={(value) => formatVolume(value)}
+                  tickFormatter={(value) => formatGaiaNumber(value)}
                 />
                 <Tooltip 
                   contentStyle={{
@@ -349,7 +330,7 @@ export function ChartAnalytics() {
                     border: '1px solid rgba(255,255,255,0.2)',
                     borderRadius: '8px'
                   }}
-                  formatter={(value: number) => [formatVolume(value), 'Volume']}
+                  formatter={(value: number) => [formatGaiaNumber(value), 'Volume']}
                 />
                 <Bar dataKey="volume" fill="#3b82f6" />
               </BarChart>
@@ -358,7 +339,6 @@ export function ChartAnalytics() {
         </CardContent>
       </Card>
 
-      {/* Analytics Summary */}
       <Card className="border-purple-500/20 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
         <CardContent className="pt-6">
           <h3 className="text-lg font-semibold text-purple-400 mb-4">📊 Real-Time Analytics</h3>
