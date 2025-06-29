@@ -27,39 +27,43 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <GlobalErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <AuthProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <PageSpecificBackground />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/wallet" element={<Wallet />} />
-              <Route path="/markets" element={<Markets />} />
-              <Route path="/smart-contracts" element={<SmartContracts />} />
-              <Route path="/ultimate-security" element={<UltimateSecurity />} />
-              <Route path="/system-status" element={<SystemStatus />} />
-              <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
-              <Route path="/downloads" element={<Downloads />} />
-              <Route path="/marketing" element={<Marketing />} />
-              <Route path="/reinvestments" element={<Reinvestments />} />
-              <Route path="/transparency" element={<Transparency />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/gaming" element={<Gaming />} />
-              <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
-              <Route path="/live-tracking" element={<LiveTracking />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </AuthProvider>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </GlobalErrorBoundary>
-);
+const App = () => {
+  console.log("App component loaded - routes should be available");
+  
+  return (
+    <GlobalErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <AuthProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <PageSpecificBackground />
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/wallet" element={<Wallet />} />
+                <Route path="/markets" element={<Markets />} />
+                <Route path="/smart-contracts" element={<SmartContracts />} />
+                <Route path="/ultimate-security" element={<UltimateSecurity />} />
+                <Route path="/system-status" element={<SystemStatus />} />
+                <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+                <Route path="/downloads" element={<Downloads />} />
+                <Route path="/marketing" element={<Marketing />} />
+                <Route path="/reinvestments" element={<Reinvestments />} />
+                <Route path="/transparency" element={<Transparency />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/gaming" element={<Gaming />} />
+                <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
+                <Route path="/live-tracking" element={<LiveTracking />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </AuthProvider>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </GlobalErrorBoundary>
+  );
+};
 
 export default App;

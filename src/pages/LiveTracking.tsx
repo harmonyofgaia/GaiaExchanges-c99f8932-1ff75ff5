@@ -4,6 +4,8 @@ import { WhitepaperGenerator } from '@/components/whitepaper/WhitepaperGenerator
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const LiveTracking = () => {
+  console.log("LiveTracking component loaded successfully");
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10">
       <div className="container mx-auto px-4 py-6">
