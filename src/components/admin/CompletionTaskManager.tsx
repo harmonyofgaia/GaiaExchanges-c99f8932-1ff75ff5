@@ -76,9 +76,9 @@ export function CompletionTaskManager() {
     },
     {
       id: '8',
-      title: 'Community Exclusivity Campaign',
-      description: 'Launch campaign highlighting our exclusive, premium community benefits',
-      category: 'marketing',
+      title: 'Enhanced Tools & Weapons Making System',
+      description: 'Advanced 3D designer for creating superior gaming tools and weapons',
+      category: 'development',
       completed: false,
       priority: 'medium'
     }

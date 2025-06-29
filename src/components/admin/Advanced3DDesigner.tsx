@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Textarea } from '@/components/ui/textarea'
 import { 
-  Cube, 
+  Box, 
   Zap, 
   Palette, 
   Wrench,
@@ -147,7 +147,7 @@ export function Advanced3DDesigner() {
       <Card className="bg-gradient-to-r from-purple-900/30 to-cyan-900/30 border-purple-500/30">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-purple-400">
-            <Cube className="h-6 w-6" />
+            <Box className="h-6 w-6" />
             🎨 ADVANCED 3D DESIGNER - AI POWERED CREATION
           </CardTitle>
           <div className="flex gap-2">
