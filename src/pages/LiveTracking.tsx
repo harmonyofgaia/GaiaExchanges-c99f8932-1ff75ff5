@@ -1,80 +1,75 @@
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { Activity, TrendingUp, Zap, Globe, Shield, DollarSign, Users } from 'lucide-react'
 
-const LiveTracking = () => {
-  console.log("🚀 LiveTracking page initializing...")
-  
-  const [liveData, setLiveData] = useState([
-    { time: '10:00', price: 3.20, volume: 12000000, users: 48000, transactions: 124000 },
-    { time: '10:05', price: 3.22, volume: 12100000, users: 48100, transactions: 124500 },
-    { time: '10:10', price: 3.25, volume: 12200000, users: 48200, transactions: 125000 }
-  ])
-  
-  const [currentPrice, setCurrentPrice] = useState(3.25)
-  const [volume24h, setVolume24h] = useState(12500000)
-  const [activeUsers, setActiveUsers] = useState(48750)
-  const [transactions, setTransactions] = useState(125000)
-  const [isLive, setIsLive] = useState(true)
+const LiveTracking: React.FC = () => {
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [currentTime, setCurrentTime] = useState(new Date())
+  const [metrics, setMetrics] = useState({
+    price: 3.25,
+    volume: 12500000,
+    users: 48750,
+    transactions: 125000,
+    health: 99.9
+  })
 
   useEffect(() => {
-    console.log("✅ LiveTracking component mounted and running!")
+    console.log('🌍 LiveTracking page loading...')
     
-    if (!isLive) return
+    // Simple time update
+    const timeInterval = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 1000)
 
-    const updateData = () => {
-      const now = new Date()
-      const timeStr = now.toLocaleTimeString('en-US', { 
-        hour12: false, 
-        hour: '2-digit', 
-        minute: '2-digit' 
-      })
-      
-      const priceChange = (Math.random() - 0.5) * 0.1
-      const newPrice = Math.max(0.1, currentPrice + priceChange)
-      const newVolume = volume24h + Math.floor(Math.random() * 100000)
-      const newUsers = activeUsers + Math.floor(Math.random() * 50)
-      const newTransactions = transactions + Math.floor(Math.random() * 100)
-      
-      setCurrentPrice(newPrice)
-      setVolume24h(newVolume)
-      setActiveUsers(newUsers)
-      setTransactions(newTransactions)
-      
-      const newDataPoint = {
-        time: timeStr,
-        price: newPrice,
-        volume: newVolume,
-        users: newUsers,
-        transactions: newTransactions
-      }
-      
-      setLiveData(prev => [...prev.slice(-9), newDataPoint])
-      
-      console.log("📊 Live data updated:", { price: newPrice, volume: newVolume })
+    // Simple metrics update
+    const metricsInterval = setInterval(() => {
+      setMetrics(prev => ({
+        price: prev.price + (Math.random() - 0.5) * 0.1,
+        volume: prev.volume + Math.random() * 100000,
+        users: prev.users + Math.floor(Math.random() * 10),
+        transactions: prev.transactions + Math.floor(Math.random() * 50),
+        health: Math.min(99.9, prev.health + Math.random() * 0.1)
+      }))
+    }, 2000)
+
+    setIsLoaded(true)
+    console.log('✅ LiveTracking page loaded successfully!')
+
+    return () => {
+      clearInterval(timeInterval)
+      clearInterval(metricsInterval)
     }
+  }, [])
 
-    const interval = setInterval(updateData, 3000)
-    updateData() // Initial update
-    
-    return () => clearInterval(interval)
-  }, [isLive, currentPrice, volume24h, activeUsers, transactions])
-
-  const formatCurrency = (value) => {
+  const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      notation: 'compact'
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     }).format(value)
   }
 
-  const formatNumber = (value) => {
-    return new Intl.NumberFormat('en-US', { notation: 'compact' }).format(value)
+  const formatNumber = (value: number) => {
+    return new Intl.NumberFormat('en-US', { 
+      notation: 'compact',
+      maximumFractionDigits: 1
+    }).format(value)
+  }
+
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green-400 mx-auto mb-4"></div>
+          <p className="text-xl text-green-400">Loading GAIA Live Tracking...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -90,17 +85,13 @@ const LiveTracking = () => {
           </p>
           
           <div className="flex justify-center items-center gap-4 mb-6">
-            <Badge className={`${isLive ? 'bg-green-500 animate-pulse' : 'bg-red-500'} text-white px-4 py-2`}>
+            <Badge className="bg-green-500 animate-pulse text-white px-4 py-2">
               <Activity className="h-4 w-4 mr-2" />
-              {isLive ? 'Live Data Stream Active' : 'Stream Paused'}
+              Live Data Stream Active
             </Badge>
-            <Button 
-              onClick={() => setIsLive(!isLive)}
-              variant={isLive ? "destructive" : "default"}
-              size="sm"
-            >
-              {isLive ? 'Pause Stream' : 'Start Stream'}
-            </Button>
+            <Badge className="bg-blue-500 text-white px-4 py-2">
+              {currentTime.toLocaleTimeString()}
+            </Badge>
           </div>
         </div>
 
@@ -111,7 +102,7 @@ const LiveTracking = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-400">GAIA Price</p>
-                  <p className="text-2xl font-bold text-green-400">{formatCurrency(currentPrice)}</p>
+                  <p className="text-2xl font-bold text-green-400">{formatCurrency(metrics.price)}</p>
                   <Badge className="mt-2 bg-green-600 text-white text-xs">
                     <TrendingUp className="h-3 w-3 mr-1" />
                     Live
@@ -127,7 +118,7 @@ const LiveTracking = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-400">Volume 24h</p>
-                  <p className="text-2xl font-bold text-blue-400">{formatCurrency(volume24h)}</p>
+                  <p className="text-2xl font-bold text-blue-400">{formatCurrency(metrics.volume)}</p>
                   <Badge className="mt-2 bg-blue-600 text-white text-xs">Trading</Badge>
                 </div>
                 <Activity className="h-8 w-8 text-blue-400" />
@@ -140,7 +131,7 @@ const LiveTracking = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-400">Active Users</p>
-                  <p className="text-2xl font-bold text-purple-400">{formatNumber(activeUsers)}</p>
+                  <p className="text-2xl font-bold text-purple-400">{formatNumber(metrics.users)}</p>
                   <Badge className="mt-2 bg-purple-600 text-white text-xs">Online</Badge>
                 </div>
                 <Users className="h-8 w-8 text-purple-400" />
@@ -153,83 +144,10 @@ const LiveTracking = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-400">Transactions</p>
-                  <p className="text-2xl font-bold text-yellow-400">{formatNumber(transactions)}</p>
+                  <p className="text-2xl font-bold text-yellow-400">{formatNumber(metrics.transactions)}</p>
                   <Badge className="mt-2 bg-yellow-600 text-white text-xs">Real-time</Badge>
                 </div>
                 <Zap className="h-8 w-8 text-yellow-400" />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Live Chart */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <Card className="border-green-500/30">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <TrendingUp className="h-5 w-5" />
-                Live Price Chart
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={liveData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                    <XAxis dataKey="time" stroke="#9CA3AF" fontSize={12} />
-                    <YAxis stroke="#9CA3AF" fontSize={12} />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: '#1F2937', 
-                        border: '1px solid #374151',
-                        borderRadius: '8px',
-                        color: '#fff'
-                      }}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="price" 
-                      stroke="#22c55e" 
-                      strokeWidth={3}
-                      dot={{ fill: '#22c55e', strokeWidth: 2, r: 4 }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-500/30">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-400">
-                <Activity className="h-5 w-5" />
-                Volume Tracking
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={liveData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                    <XAxis dataKey="time" stroke="#9CA3AF" fontSize={12} />
-                    <YAxis stroke="#9CA3AF" fontSize={12} />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: '#1F2937', 
-                        border: '1px solid #374151',
-                        borderRadius: '8px',
-                        color: '#fff'
-                      }}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="volume" 
-                      stroke="#3b82f6" 
-                      strokeWidth={3}
-                      dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
               </div>
             </CardContent>
           </Card>
@@ -255,9 +173,9 @@ const LiveTracking = () => {
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-sm text-gray-400">System Health</span>
-                  <span className="text-sm font-bold text-green-400">99.9%</span>
+                  <span className="text-sm font-bold text-green-400">{metrics.health.toFixed(1)}%</span>
                 </div>
-                <Progress value={99.9} className="h-2" />
+                <Progress value={metrics.health} className="h-2" />
               </div>
               <div>
                 <div className="flex justify-between items-center mb-2">
@@ -269,6 +187,67 @@ const LiveTracking = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Live Data Display */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <Card className="border-green-500/30">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <TrendingUp className="h-5 w-5" />
+                Live Price Data
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-green-400 mb-2">
+                    {formatCurrency(metrics.price)}
+                  </p>
+                  <p className="text-sm text-gray-400">Current GAIA Price</p>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-3 border border-green-500/30 rounded">
+                    <p className="text-sm text-gray-400">24h High</p>
+                    <p className="text-lg font-bold text-green-400">{formatCurrency(metrics.price * 1.1)}</p>
+                  </div>
+                  <div className="text-center p-3 border border-red-500/30 rounded">
+                    <p className="text-sm text-gray-400">24h Low</p>
+                    <p className="text-lg font-bold text-red-400">{formatCurrency(metrics.price * 0.9)}</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-blue-500/30">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-400">
+                <Activity className="h-5 w-5" />
+                Network Activity
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-400">Total Transactions</span>
+                  <span className="text-lg font-bold text-blue-400">{formatNumber(metrics.transactions)}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-400">Active Users</span>
+                  <span className="text-lg font-bold text-purple-400">{formatNumber(metrics.users)}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-400">Network Speed</span>
+                  <span className="text-lg font-bold text-yellow-400">10x Faster</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-400">Global Reach</span>
+                  <span className="text-lg font-bold text-green-400">195 Countries</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Status Overview */}
         <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
@@ -300,6 +279,32 @@ const LiveTracking = () => {
                   🌍 Global Reach: 195+ COUNTRIES
                 </Badge>
               </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Control Panel */}
+        <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20 mt-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-purple-400">
+              <Globe className="h-5 w-5" />
+              Live Tracking Controls
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button className="bg-green-600 hover:bg-green-700 text-white">
+                Refresh Data
+              </Button>
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                Export Report
+              </Button>
+              <Button className="bg-purple-600 hover:bg-purple-700 text-white">
+                Advanced Analytics
+              </Button>
+              <Button className="bg-yellow-600 hover:bg-yellow-700 text-white">
+                Real-time Alerts
+              </Button>
             </div>
           </CardContent>
         </Card>
