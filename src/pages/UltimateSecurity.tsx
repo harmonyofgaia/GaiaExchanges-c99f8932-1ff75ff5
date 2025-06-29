@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import { UltraFastDatabaseGuard } from '@/components/security/UltraFastDatabaseGuard'
 import { DragonSecurityDashboard } from '@/components/security/DragonSecurityDashboard'
+import { DragonCloudProtection } from '@/components/security/DragonCloudProtection'
 
 const UltimateSecurity = () => {
   return (
@@ -28,7 +29,7 @@ const UltimateSecurity = () => {
         </div>
 
         <Tabs defaultValue="dragon-core" className="w-full">
-          <TabsList className="grid w-full grid-cols-10 bg-black/50 backdrop-blur-md border border-red-500/20">
+          <TabsList className="grid w-full grid-cols-11 bg-black/50 backdrop-blur-md border border-red-500/20">
             <TabsTrigger value="dragon-core" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
               🐉 Dragon Core
             </TabsTrigger>
@@ -58,6 +59,9 @@ const UltimateSecurity = () => {
             </TabsTrigger>
             <TabsTrigger value="admin-recovery" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
               🔑 Admin Recovery
+            </TabsTrigger>
+            <TabsTrigger value="dragon-cloud" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+              ☁️ Dragon Cloud
             </TabsTrigger>
           </TabsList>
           
@@ -99,6 +103,10 @@ const UltimateSecurity = () => {
           
           <TabsContent value="admin-recovery" className="space-y-6 mt-6">
             <AdminRecoveryPortal />
+          </TabsContent>
+          
+          <TabsContent value="dragon-cloud" className="space-y-6 mt-6">
+            <DragonCloudProtection />
           </TabsContent>
         </Tabs>
       </div>
