@@ -1,111 +1,41 @@
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Toaster } from '@/components/ui/toaster'
-import { Toaster as Sonner } from '@/components/ui/sonner'
-import { TooltipProvider } from '@/components/ui/tooltip'
-import { AuthProvider } from '@/components/auth/AuthProvider'
-import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
-import { HoverSidebar } from '@/components/HoverSidebar'
-import Home from '@/pages/Home'
-import About from '@/pages/About'
-import Contact from '@/pages/Contact'
-import Pricing from '@/pages/Pricing'
-import VirtualWorld from '@/pages/VirtualWorld'
-import CoinCrafter from '@/pages/CoinCrafter'
-import GaiaCoinCrafterPage from '@/pages/GaiaCoinCrafter'
-import LiveTracking from '@/pages/LiveTracking'
-import WalletPage from '@/pages/Wallet'
-import SystemStatus from '@/pages/SystemStatus'
-import { AuthPage } from '@/components/auth/AuthPage'
-import Admin from '@/pages/Admin'
-import SecureAdmin from '@/pages/SecureAdmin'
-import UltimateSecurity from '@/pages/UltimateSecurity'
-import SecureVault from '@/pages/SecureVault'
-import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
-import ImmortalSecurity from '@/pages/ImmortalSecurity'
-import { SystemMonitor } from '@/components/SystemMonitor'
-import { SystemVerification } from '@/components/SystemVerification'
+import { Toaster } from "@/components/ui/sonner"
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Navbar } from "@/components/Navbar"
+import Index from "./pages/Index"
+import CoinCrafter from "./pages/CoinCrafter"
+import GaiaCoinCrafterPage from "./pages/GaiaCoinCrafter"
+import LiveTracking from "./pages/LiveTracking"
+import ImmortalSecurity from "./pages/ImmortalSecurity"
+import Wallet from "./pages/Wallet"
+import Exchange from "./pages/Exchange"
+import Gaming from "./pages/Gaming"
+import "./App.css"
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 3,
-      refetchOnWindowFocus: false,
-    },
-  },
-})
+const queryClient = new QueryClient()
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <AuthProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            {/* Hover Sidebar - Always Present */}
-            <HoverSidebar />
-            
-            {/* Background Security Systems - Always Running */}
-            <SystemMonitor />
-            
+        <Toaster />
+        <BrowserRouter>
+          <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+            <Navbar />
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/auth" element={<AuthPage />} />
-              <Route path="/virtual-world" element={<VirtualWorld />} />
-              <Route path="/coin-crafter" element={<GaiaCoinCrafterPage />} />
+              <Route path="/" element={<Index />} />
+              <Route path="/coin-crafter" element={<CoinCrafter />} />
+              <Route path="/gaia-coin-crafter" element={<GaiaCoinCrafterPage />} />
               <Route path="/live-tracking" element={<LiveTracking />} />
-              <Route path="/wallet" element={<WalletPage />} />
-              <Route path="/system-status" element={
-                <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
-                  <div className="container mx-auto px-4 py-8">
-                    <SystemStatus />
-                  </div>
-                </div>
-              } />
-              <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
               <Route path="/immortal-security" element={<ImmortalSecurity />} />
-              
-              <Route path="/admin" element={
-                <ProtectedRoute isAdminRoute={true}>
-                  <Admin />
-                </ProtectedRoute>
-              } />
-              
-              <Route path="/secureadmin" element={
-                <ProtectedRoute isAdminRoute={true}>
-                  <SecureAdmin />
-                </ProtectedRoute>
-              } />
-              
-              <Route path="/ultimatesecurity" element={
-                <ProtectedRoute isAdminRoute={true}>
-                  <UltimateSecurity />
-                </ProtectedRoute>
-              } />
-              
-              <Route path="/securevault" element={
-                <ProtectedRoute isAdminRoute={true}>
-                  <SecureVault />
-                </ProtectedRoute>
-              } />
-
-              <Route path="/system-verification" element={
-                <ProtectedRoute isAdminRoute={true}>
-                  <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-cyan-900 p-6">
-                    <div className="container mx-auto">
-                      <SystemVerification />
-                    </div>
-                  </div>
-                </ProtectedRoute>
-              } />
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/exchange" element={<Exchange />} />
+              <Route path="/gaming" element={<Gaming />} />
             </Routes>
-          </BrowserRouter>
-        </AuthProvider>
+          </div>
+        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   )
