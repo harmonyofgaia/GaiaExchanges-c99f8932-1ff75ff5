@@ -12,7 +12,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
-import { Gamepad2 } from 'lucide-react'
+import { Gamepad2, Home, Wallet, TrendingUp, Shield, Settings, Download, Heart } from 'lucide-react'
 
 interface MainNavItem {
   title: string
@@ -25,8 +25,77 @@ interface MainNavProps {
   items?: MainNavItem[]
 }
 
+const navigationItems: MainNavItem[] = [
+  {
+    title: "Platform",
+    items: [
+      {
+        title: "Home",
+        href: "/",
+        description: "Welcome to Harmony of Gaia ecosystem"
+      },
+      {
+        title: "Gaming Hub",
+        href: "/gaming",
+        description: "Epic battles and environmental gaming"
+      },
+      {
+        title: "Gaia Fighter",
+        href: "/gaia-fighter-game",
+        description: "Environmental warrior battle arena"
+      },
+      {
+        title: "Virtual World",
+        href: "/virtual-world",
+        description: "Explore infinite Gaia landscapes"
+      }
+    ]
+  },
+  {
+    title: "Exchange",
+    items: [
+      {
+        title: "Markets",
+        href: "/markets",
+        description: "Trade GAiA tokens and view market data"
+      },
+      {
+        title: "Wallet",
+        href: "/wallet",
+        description: "Manage your GAiA tokens securely"
+      },
+      {
+        title: "Gaia Exchange",
+        href: "/gaias-exchange",
+        description: "Official GAiA token exchange platform"
+      }
+    ]
+  },
+  {
+    title: "Tools",
+    items: [
+      {
+        title: "Transparency",
+        href: "/transparency",
+        description: "View all transactions and project funding"
+      },
+      {
+        title: "Downloads",
+        href: "/downloads",
+        description: "Get mobile apps and resources"
+      },
+      {
+        title: "System Status",
+        href: "/system-status",
+        description: "Check platform health and uptime"
+      }
+    ]
+  }
+]
+
 export function MainNav({ items }: MainNavProps) {
   const location = useLocation()
+  const navItems = items || navigationItems
 
   return (
     <div className="flex gap-6 md:gap-10">
@@ -36,10 +105,10 @@ export function MainNav({ items }: MainNavProps) {
           Harmony of Gaia
         </span>
       </Link>
-      {items?.length ? (
+      {navItems?.length ? (
         <NavigationMenu>
           <NavigationMenuList>
-            {items?.map(
+            {navItems?.map(
               (item, i) =>
                 item.href ? (
                   <NavigationMenuItem key={i}>
@@ -131,14 +200,37 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 max-w-screen-2xl items-center">
-        <MainNav items={[]} />
+        <MainNav />
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
-            {/* Navigation items can go here */}
+            <nav className="hidden md:flex items-center space-x-4 text-sm">
+              <Link 
+                to="/gaming" 
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+              >
+                <Gamepad2 className="h-4 w-4 inline mr-1" />
+                Gaming
+              </Link>
+              <Link 
+                to="/wallet" 
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+              >
+                <Wallet className="h-4 w-4 inline mr-1" />
+                Wallet
+              </Link>
+              <Link 
+                to="/markets" 
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+              >
+                <TrendingUp className="h-4 w-4 inline mr-1" />
+                Markets
+              </Link>
+            </nav>
           </div>
-          <nav className="flex items-center">
+          <nav className="flex items-center space-x-2">
             <Link to="/complete-system-hub">
               <Button variant="outline" size="sm" className="border-green-500/30 text-green-400 hover:bg-green-500/10">
+                <Settings className="h-4 w-4 mr-1" />
                 System Hub
               </Button>
             </Link>
