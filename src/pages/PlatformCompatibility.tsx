@@ -1,4 +1,3 @@
-
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AbstractArtOverlay } from '@/components/ui/abstract-art-overlay'
@@ -6,11 +5,11 @@ import { AbstractArtOverlay } from '@/components/ui/abstract-art-overlay'
 const PlatformCompatibility = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-green-900/20 to-blue-900/20 relative">
-      <AbstractArtOverlay artType="quantum" intensity="low" />
+      <AbstractArtOverlay artType="quantum" intensity="subtle" />
       <div className="container mx-auto px-4 py-8 relative z-10">
         {/* Enhanced header with quantum effects */}
         <div className="text-center mb-12 relative">
-          <AbstractArtOverlay artType="organic" intensity="medium" className="absolute inset-0 rounded-lg" />
+          <AbstractArtOverlay artType="matrix" intensity="medium" className="absolute inset-0 rounded-lg" />
           <div className="relative z-10 p-8 bg-black/20 backdrop-blur-sm rounded-lg border border-green-500/20">
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
               🌍 HARMONY OF GAIA - QUANTUM PLATFORM

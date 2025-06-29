@@ -28,7 +28,7 @@ export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
         <div className="text-center px-4">
           <div className="mb-4">
             <GaiaLogo 
-              size="lg" 
+              size="xl" 
               variant="white-fade" 
               onClick={handleLogoClick}
               className="mx-auto"
