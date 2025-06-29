@@ -1,6 +1,7 @@
 
 import { ArtistStreamingPlatform } from '@/components/ArtistStreamingPlatform'
 import { ArtistRegistration } from '@/components/ArtistRegistration'
+import { LiveTVScreen } from '@/components/LiveTVScreen'
 import { GlobalAnnouncement } from '@/components/GlobalAnnouncement'
 import { EnhancedAnimatedBackground } from '@/components/ui/enhanced-animated-background'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -14,18 +15,23 @@ const ArtistStreaming = () => {
         <GlobalAnnouncement />
         
         <div className="mt-12">
-          <Tabs defaultValue="register" className="space-y-8">
-            <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto">
+          <Tabs defaultValue="live-tv" className="space-y-8">
+            <TabsList className="grid w-full grid-cols-3 max-w-2xl mx-auto">
+              <TabsTrigger value="live-tv">Live TV Shows</TabsTrigger>
+              <TabsTrigger value="streaming">Artist Streaming</TabsTrigger>
               <TabsTrigger value="register">Artist Registration</TabsTrigger>
-              <TabsTrigger value="streaming">Live Streaming</TabsTrigger>
             </TabsList>
             
-            <TabsContent value="register">
-              <ArtistRegistration />
+            <TabsContent value="live-tv">
+              <LiveTVScreen />
             </TabsContent>
             
             <TabsContent value="streaming">
               <ArtistStreamingPlatform />
+            </TabsContent>
+            
+            <TabsContent value="register">
+              <ArtistRegistration />
             </TabsContent>
           </Tabs>
         </div>
