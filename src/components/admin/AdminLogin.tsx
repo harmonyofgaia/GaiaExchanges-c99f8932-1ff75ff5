@@ -8,7 +8,7 @@ import { Shield, Lock, Eye, EyeOff } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface AdminLoginProps {
-  onLoginSuccess: () => void
+  onLoginSuccess: (username: string, password: string, adminKey: string) => boolean
 }
 
 export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
@@ -25,18 +25,9 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
     setIsLoading(true)
 
     try {
-      // Admin credential validation
-      if (credentials.username === 'harmony_admin' && 
-          credentials.password === 'GAiA_SecureAdmin2024!' &&
-          credentials.adminKey === 'HARMONY_QUANTUM_VAULT_ACCESS') {
-        
-        toast.success('🔐 Admin Credentials Verified!', {
-          description: 'Proceeding to MFA verification...',
-          duration: 3000
-        })
-        
-        onLoginSuccess()
-      } else {
+      const success = onLoginSuccess(credentials.username, credentials.password, credentials.adminKey)
+      
+      if (!success) {
         toast.error('❌ Invalid Admin Credentials', {
           description: 'Access denied. Security incident logged.',
           duration: 5000
@@ -53,36 +44,36 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
   }
 
   return (
-    <Card className="max-w-md mx-auto border-red-500/30 bg-gradient-to-br from-red-900/20 to-black/50">
+    <Card className="max-w-md mx-auto border-green-500/30 bg-gradient-to-br from-green-900/20 to-black/50">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-red-400 text-center">
+        <CardTitle className="flex items-center gap-2 text-green-400 text-center">
           <Shield className="h-5 w-5" />
-          GAIA Admin Security Login
+          GAIA Admin Login
         </CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="username" className="text-red-300">Admin Username</Label>
+            <Label htmlFor="username" className="text-green-300">Admin Username</Label>
             <Input
               id="username"
               type="text"
               value={credentials.username}
               onChange={(e) => setCredentials(prev => ({ ...prev, username: e.target.value }))}
-              className="bg-black/30 border-red-500/30"
+              className="bg-black/30 border-green-500/30"
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-red-300">Admin Password</Label>
+            <Label htmlFor="password" className="text-green-300">Admin Password</Label>
             <div className="relative">
               <Input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 value={credentials.password}
                 onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
-                className="bg-black/30 border-red-500/30 pr-10"
+                className="bg-black/30 border-green-500/30 pr-10"
                 required
               />
               <Button
@@ -98,13 +89,13 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="adminKey" className="text-red-300">Quantum Admin Key</Label>
+            <Label htmlFor="adminKey" className="text-green-300">Quantum Admin Key</Label>
             <Input
               id="adminKey"
               type="password"
               value={credentials.adminKey}
               onChange={(e) => setCredentials(prev => ({ ...prev, adminKey: e.target.value }))}
-              className="bg-black/30 border-red-500/30"
+              className="bg-black/30 border-green-500/30"
               required
             />
           </div>
@@ -112,16 +103,16 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
           <Button 
             type="submit" 
             disabled={isLoading}
-            className="w-full bg-red-600 hover:bg-red-700"
+            className="w-full bg-green-600 hover:bg-green-700"
           >
             <Lock className="h-4 w-4 mr-2" />
-            {isLoading ? 'Verifying...' : 'Step 1: Verify Credentials'}
+            {isLoading ? 'Verifying...' : 'Access GAIA Admin Vault'}
           </Button>
         </form>
 
-        <div className="mt-4 p-3 bg-red-900/20 border border-red-500/20 rounded-lg">
-          <p className="text-xs text-red-300 text-center">
-            🛡️ Ultra-Secure Admin Access • Dragon Protection Active • All Attempts Logged
+        <div className="mt-4 p-3 bg-green-900/20 border border-green-500/20 rounded-lg">
+          <p className="text-xs text-green-300 text-center">
+            🛡️ Direct Admin Access • Dragon Protection Active • All Attempts Logged
           </p>
         </div>
       </CardContent>
