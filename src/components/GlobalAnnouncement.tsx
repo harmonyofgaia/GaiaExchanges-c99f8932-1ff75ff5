@@ -87,7 +87,7 @@ Together we create a new culture until the end of the world - Seeds will form in
 
   return (
     <div className="relative p-6 bg-gradient-to-br from-green-900/20 to-purple-900/20 rounded-lg border border-green-500/20">
-      <AbstractArtOverlay artType="matrix" intensity="medium" />
+      <AbstractArtOverlay artType="quantum" intensity="medium" />
       
       <div className="relative z-10">
         <CardHeader className="text-center">
