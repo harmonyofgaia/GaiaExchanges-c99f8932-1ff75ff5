@@ -26,6 +26,7 @@ import { SecureConnectionManager } from '@/components/admin/SecureConnectionMana
 import { GitHubRollbackManager } from '@/components/github/GitHubRollbackManager'
 import { CloudArtworkManager } from '@/components/admin/CloudArtworkManager'
 import { WebsiteHostingManager } from '@/components/WebsiteHostingManager'
+import { SystemControlCenter } from '@/components/admin/SystemControlCenter'
 
 const Admin = () => {
   const navigate = useNavigate()
@@ -93,7 +94,7 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900/10">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900/10 relative z-10">
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -125,8 +126,11 @@ const Admin = () => {
           </div>
         </div>
 
-        <Tabs defaultValue="website-hosting" className="w-full">
+        <Tabs defaultValue="system-control" className="w-full">
           <TabsList className="grid w-full grid-cols-8 bg-black/50 backdrop-blur-md border border-green-500/20">
+            <TabsTrigger value="system-control" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              🎛️ System Control
+            </TabsTrigger>
             <TabsTrigger value="website-hosting" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
               🌐 Website Hosting
             </TabsTrigger>
@@ -145,13 +149,14 @@ const Admin = () => {
             <TabsTrigger value="completed-systems" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
               ✅ Completed Systems
             </TabsTrigger>
-            <TabsTrigger value="active-systems" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
-              🔄 Active Systems
-            </TabsTrigger>
             <TabsTrigger value="security-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
               🛡️ Security Management
             </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="system-control" className="space-y-6 mt-6">
+            <SystemControlCenter />
+          </TabsContent>
           
           <TabsContent value="website-hosting" className="space-y-6 mt-6">
             <Card className="border-2 border-green-500/50 bg-gradient-to-br from-green-900/20 to-emerald-900/20">
