@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Coins, Users, TrendingUp, Zap, Settings, Flame, Sparkles, Factory } from 'lucide-react'
+import { Coins, Users, TrendingUp, Zap, Settings, Flame, Sparkles, Factory, Hammer } from 'lucide-react'
 
 interface FloatingCoin {
   id: number
@@ -11,12 +10,29 @@ interface FloatingCoin {
   y: number
   delay: number
   size: number
+  direction: 'up' | 'down' | 'left' | 'right'
+  speed: number
 }
 
 interface CraftingRobot {
   isActive: boolean
   animation: string
   producing: boolean
+  hammerSwing: boolean
+  intensity: number
+}
+
+interface CoinExplosion {
+  id: number
+  x: number
+  y: number
+  coins: Array<{
+    id: number
+    x: number
+    y: number
+    rotation: number
+    scale: number
+  }>
 }
 
 export function AnimatedCoinCrafting() {
@@ -26,10 +42,14 @@ export function AnimatedCoinCrafting() {
   const [craftingRobot, setCraftingRobot] = useState<CraftingRobot>({
     isActive: false,
     animation: 'idle',
-    producing: false
+    producing: false,
+    hammerSwing: false,
+    intensity: 1
   })
   const [floatingCoins, setFloatingCoins] = useState<FloatingCoin[]>([])
   const [sparkles, setSparkles] = useState<Array<{id: number, x: number, y: number}>>([])
+  const [coinExplosions, setCoinExplosions] = useState<CoinExplosion[]>([])
+  const [hammerImpacts, setHammerImpacts] = useState<Array<{id: number, x: number, y: number}>>([])
 
   // Calculate coins based on investors
   const calculateMonthlyCoins = (investorCount: number) => {
@@ -38,56 +58,92 @@ export function AnimatedCoinCrafting() {
     return baseCoins + bonusCoins
   }
 
-  // Animated coin crafting process
+  // Enhanced coin crafting animation with smashing effects
   useEffect(() => {
     const craftingInterval = setInterval(() => {
-      // Start robot animation
+      const intensity = 1 + Math.random() * 2 // Random intensity 1-3
+      
+      // Start intense robot animation
       setCraftingRobot({
         isActive: true,
-        animation: 'crafting',
-        producing: true
+        animation: 'intense-crafting',
+        producing: true,
+        hammerSwing: true,
+        intensity: intensity
       })
       
-      // Create floating coins with different sizes and delays
-      const newCoins: FloatingCoin[] = Array.from({ length: 6 }, (_, i) => ({
+      // Create massive coin explosion effect
+      const explosionCount = Math.floor(4 + intensity * 3) // 4-12 explosions
+      const newExplosions: CoinExplosion[] = Array.from({ length: explosionCount }, (_, i) => ({
         id: Date.now() + i,
         x: 20 + Math.random() * 60,
-        y: 30 + Math.random() * 40,
-        delay: i * 0.3,
-        size: 0.8 + Math.random() * 0.4
+        y: 25 + Math.random() * 50,
+        coins: Array.from({ length: 8 + Math.floor(Math.random() * 12) }, (_, j) => ({
+          id: Date.now() + i * 100 + j,
+          x: (Math.random() - 0.5) * 200,
+          y: (Math.random() - 0.5) * 200,
+          rotation: Math.random() * 360,
+          scale: 0.5 + Math.random() * 1.5
+        }))
+      }))
+      
+      setCoinExplosions(prev => [...prev, ...newExplosions])
+      
+      // Create enhanced floating coins with different directions and speeds
+      const newCoins: FloatingCoin[] = Array.from({ length: 15 + Math.floor(intensity * 5) }, (_, i) => ({
+        id: Date.now() + i + 1000,
+        x: 10 + Math.random() * 80,
+        y: 20 + Math.random() * 60,
+        delay: i * 0.1,
+        size: 0.8 + Math.random() * 1.2,
+        direction: ['up', 'down', 'left', 'right'][Math.floor(Math.random() * 4)] as any,
+        speed: 1 + Math.random() * 2
       }))
       
       setFloatingCoins(prev => [...prev, ...newCoins])
       
-      // Add sparkle effects
-      const newSparkles = Array.from({ length: 8 }, (_, i) => ({
-        id: Date.now() + i + 100,
-        x: 10 + Math.random() * 80,
-        y: 20 + Math.random() * 60
+      // Create hammer impact effects
+      const hammerHits = Array.from({ length: 5 + Math.floor(intensity * 3) }, (_, i) => ({
+        id: Date.now() + i + 2000,
+        x: 30 + Math.random() * 40,
+        y: 40 + Math.random() * 30
+      }))
+      
+      setHammerImpacts(prev => [...prev, ...hammerHits])
+      
+      // Enhanced sparkle effects
+      const newSparkles = Array.from({ length: 20 + Math.floor(intensity * 10) }, (_, i) => ({
+        id: Date.now() + i + 3000,
+        x: 5 + Math.random() * 90,
+        y: 15 + Math.random() * 70
       }))
       
       setSparkles(prev => [...prev, ...newSparkles])
       
-      // Remove effects after animation
+      // Remove effects after animation with staggered timing
       setTimeout(() => {
         setFloatingCoins(prev => prev.filter(coin => !newCoins.includes(coin)))
+        setCoinExplosions(prev => prev.filter(explosion => !newExplosions.includes(explosion)))
+        setHammerImpacts(prev => prev.filter(hit => !hammerHits.includes(hit)))
         setSparkles(prev => prev.filter(sparkle => !newSparkles.includes(sparkle)))
         setCraftingRobot({
           isActive: false,
           animation: 'idle',
-          producing: false
+          producing: false,
+          hammerSwing: false,
+          intensity: 1
         })
-      }, 3000)
+      }, 4000)
       
-      // Update progress and production
+      // Update progress and production with intensity
       setMonthlyProgress(prev => {
-        const newProgress = (prev + 3) % 100
+        const newProgress = (prev + (2 + intensity)) % 100
         if (newProgress < prev) {
-          setCoinsProduced(prevCoins => prevCoins + Math.floor(Math.random() * 8) + 3)
+          setCoinsProduced(prevCoins => prevCoins + Math.floor(Math.random() * 15) + 5 + Math.floor(intensity * 3))
         }
         return newProgress
       })
-    }, 4000)
+    }, 3000) // Faster crafting cycles
 
     return () => clearInterval(craftingInterval)
   }, [])
@@ -95,39 +151,88 @@ export function AnimatedCoinCrafting() {
   // Simulate investor growth
   useEffect(() => {
     const growthInterval = setInterval(() => {
-      setInvestors(prev => prev + Math.floor(Math.random() * 15) + 5)
-    }, 6000)
+      setInvestors(prev => prev + Math.floor(Math.random() * 20) + 8)
+    }, 5000)
 
     return () => clearInterval(growthInterval)
   }, [])
 
   const monthlyPotential = calculateMonthlyCoins(investors)
 
+  const getDirectionClass = (direction: string, speed: number) => {
+    const baseSpeed = speed * 2
+    switch (direction) {
+      case 'up': return `animate-bounce duration-${Math.floor(1000/baseSpeed)}`
+      case 'down': return `animate-pulse duration-${Math.floor(1500/baseSpeed)}`
+      case 'left': return `animate-ping duration-${Math.floor(1200/baseSpeed)}`
+      case 'right': return `animate-spin duration-${Math.floor(800/baseSpeed)}`
+      default: return `animate-bounce duration-${Math.floor(1000/baseSpeed)}`
+    }
+  }
+
   return (
     <div className="space-y-6">
-      {/* Main Animated Crafting Display */}
-      <Card className="border-4 border-yellow-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30 relative overflow-hidden min-h-[500px]">
-        {/* Animated background glow */}
-        <div className={`absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 ${craftingRobot.isActive ? 'animate-pulse' : ''}`}></div>
+      {/* Enhanced Animated Crafting Display */}
+      <Card className="border-4 border-yellow-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30 relative overflow-hidden min-h-[600px]">
+        {/* Dynamic background with intensity */}
+        <div className={`absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 ${
+          craftingRobot.isActive ? `animate-pulse duration-${Math.floor(300/craftingRobot.intensity)}` : ''
+        }`}></div>
         
-        {/* Floating Coins Animation */}
+        {/* Coin Explosions */}
+        {coinExplosions.map((explosion) => (
+          <div key={explosion.id} className="absolute pointer-events-none z-30" 
+               style={{ left: `${explosion.x}%`, top: `${explosion.y}%` }}>
+            {explosion.coins.map((coin) => (
+              <div
+                key={coin.id}
+                className="absolute text-yellow-400 animate-ping"
+                style={{
+                  left: `${coin.x}px`,
+                  top: `${coin.y}px`,
+                  transform: `rotate(${coin.rotation}deg) scale(${coin.scale})`,
+                  fontSize: '1.5rem',
+                  animationDuration: '1s'
+                }}
+              >
+                🪙
+              </div>
+            ))}
+          </div>
+        ))}
+
+        {/* Enhanced Floating Coins Animation */}
         {floatingCoins.map((coin) => (
           <div
             key={coin.id}
-            className="absolute animate-bounce text-yellow-400 pointer-events-none z-20"
+            className={`absolute text-yellow-400 pointer-events-none z-20 ${getDirectionClass(coin.direction, coin.speed)}`}
             style={{
               left: `${coin.x}%`,
               top: `${coin.y}%`,
-              fontSize: `${coin.size * 2}rem`,
+              fontSize: `${coin.size * 2.5}rem`,
               animationDelay: `${coin.delay}s`,
-              animationDuration: '2s'
             }}
           >
             🪙
           </div>
         ))}
 
-        {/* Sparkle Effects */}
+        {/* Hammer Impact Effects */}
+        {hammerImpacts.map((impact) => (
+          <div
+            key={impact.id}
+            className="absolute animate-ping text-orange-400 pointer-events-none z-25 text-4xl"
+            style={{
+              left: `${impact.x}%`,
+              top: `${impact.y}%`,
+              animationDuration: '0.8s'
+            }}
+          >
+            💥
+          </div>
+        ))}
+
+        {/* Enhanced Sparkle Effects */}
         {sparkles.map((sparkle) => (
           <div
             key={sparkle.id}
@@ -135,7 +240,8 @@ export function AnimatedCoinCrafting() {
             style={{
               left: `${sparkle.x}%`,
               top: `${sparkle.y}%`,
-              animationDuration: '1.5s'
+              animationDuration: `${1 + Math.random()}s`,
+              fontSize: `${0.8 + Math.random() * 0.7}rem`
             }}
           >
             ✨
@@ -144,39 +250,66 @@ export function AnimatedCoinCrafting() {
 
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-yellow-400 text-center justify-center text-2xl">
-            <Factory className={`h-10 w-10 ${craftingRobot.isActive ? 'animate-spin' : 'animate-pulse'}`} />
-            🏭 ILLUSTRATED MOVING COIN CRAFTER
+            <Factory className={`h-10 w-10 ${craftingRobot.isActive ? 'animate-spin duration-300' : 'animate-pulse'}`} />
+            <Hammer className={`h-10 w-10 ${craftingRobot.hammerSwing ? 'animate-bounce duration-200' : 'animate-pulse'}`} />
+            🏭 INTENSE COIN SMASHING CRAFTER 🔨
           </CardTitle>
         </CardHeader>
         
         <CardContent className="space-y-8 relative z-10">
-          {/* Animated Crafting Robot Scene */}
+          {/* Enhanced Animated Crafting Robot Scene */}
           <div className="text-center space-y-6">
             <div className="relative">
-              {/* Robot with different states */}
-              <div className={`text-8xl ${craftingRobot.isActive ? 'animate-bounce' : 'animate-pulse'}`}>
-                {craftingRobot.producing ? '🤖⚡' : '🤖'}
+              {/* Enhanced Robot with hammer smashing */}
+              <div className={`text-8xl ${
+                craftingRobot.hammerSwing ? 'animate-bounce duration-200' : 
+                craftingRobot.isActive ? 'animate-pulse duration-500' : 'animate-pulse duration-2000'
+              }`}>
+                {craftingRobot.producing ? '🤖⚡🔨💥' : '🤖🔨'}
               </div>
               
-              {/* Crafting arms and gears */}
+              {/* Enhanced crafting scene with hammers and anvils */}
               <div className="text-6xl mt-4 flex justify-center gap-4">
-                <span className={`${craftingRobot.isActive ? 'animate-spin' : ''}`}>⚙️</span>
-                <span className={`${craftingRobot.producing ? 'animate-bounce' : 'animate-pulse'}`}>🪙</span>
-                <span className={`${craftingRobot.isActive ? 'animate-spin' : ''} animation-reverse`}>⚙️</span>
+                <span className={`${craftingRobot.hammerSwing ? 'animate-bounce duration-150' : 'animate-pulse'}`}>🔨</span>
+                <span className={`${craftingRobot.isActive ? 'animate-spin duration-300' : ''}`}>⚙️</span>
+                <span className={`${craftingRobot.producing ? 'animate-bounce duration-200' : 'animate-pulse'} text-yellow-400`}>🪙</span>
+                <span className={`${craftingRobot.hammerSwing ? 'animate-ping duration-300' : ''}`}>⚒️</span>
+                <span className={`${craftingRobot.isActive ? 'animate-spin duration-300' : ''} rotate-180`}>⚙️</span>
               </div>
               
-              {/* Crafting table/conveyor */}
+              {/* Enhanced crafting foundry with anvils */}
               <div className="text-4xl mt-4">
-                {craftingRobot.isActive ? '🏭⚡🏭⚡🏭' : '🏭___🏭___🏭'}
+                {craftingRobot.isActive ? 
+                  '🔥⚒️💥🪙💥⚒️🔥' : 
+                  '🏭___⚒️___🪙___⚒️___🏭'
+                }
+              </div>
+              
+              {/* Coin production line */}
+              <div className="text-3xl mt-2">
+                {craftingRobot.producing ? 
+                  '🪙💥🪙💥🪙💥🪙💥🪙' : 
+                  '🪙___🪙___🪙___🪙___🪙'
+                }
               </div>
             </div>
             
             <div className="space-y-2">
-              <p className={`text-2xl font-bold ${craftingRobot.producing ? 'text-green-400 animate-pulse' : 'text-yellow-400'}`}>
-                {craftingRobot.producing ? "CRAFTING COINS IN PROGRESS..." : "COIN CRAFTER READY"}
+              <p className={`text-2xl font-bold ${
+                craftingRobot.producing ? 'text-orange-400 animate-pulse duration-300' : 'text-yellow-400'
+              }`}>
+                {craftingRobot.producing ? 
+                  `🔨 INTENSE COIN SMASHING IN PROGRESS! 💥` : 
+                  "🔨 COIN SMASHER READY FOR ACTION"
+                }
               </p>
-              <p className={`text-lg ${craftingRobot.isActive ? 'text-orange-400' : 'text-gray-400'}`}>
-                {craftingRobot.isActive ? "⚡ High-Speed Production Mode Active ⚡" : "Standby Mode - Awaiting Next Cycle"}
+              <p className={`text-lg ${
+                craftingRobot.isActive ? 'text-red-400 animate-bounce' : 'text-gray-400'
+              }`}>
+                {craftingRobot.isActive ? 
+                  `⚡ MAXIMUM INTENSITY CRAFTING x${craftingRobot.intensity.toFixed(1)} ⚡` : 
+                  "Standby Mode - Preparing Next Smashing Cycle"
+                }
               </p>
             </div>
           </div>
@@ -210,37 +343,44 @@ export function AnimatedCoinCrafting() {
             </div>
           </div>
 
-          {/* Live Crafting Process Illustration */}
+          {/* Enhanced Live Crafting Process Illustration */}
           <div className="p-8 bg-gradient-to-r from-gray-900/50 to-yellow-900/50 rounded-xl border-2 border-yellow-500/30">
             <h4 className="text-yellow-400 font-bold mb-6 flex items-center gap-3 text-xl">
-              <Settings className={`h-6 w-6 ${craftingRobot.isActive ? 'animate-spin' : ''}`} />
-              Live Illustrated Crafting Process
+              <Hammer className={`h-6 w-6 ${craftingRobot.hammerSwing ? 'animate-bounce duration-200' : ''}`} />
+              Live Coin Smashing & Forging Process
             </h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
               <div className="space-y-3">
                 <div className="text-4xl">🔥</div>
-                <div className="text-sm">Token Burning</div>
+                <div className="text-sm">Metal Heating</div>
                 <div className={`text-xs ${craftingRobot.isActive ? 'text-red-400' : 'text-gray-400'}`}>
-                  {craftingRobot.isActive ? 'Active' : 'Standby'}
+                  {craftingRobot.isActive ? 'Blazing Hot' : 'Standby'}
                 </div>
               </div>
               <div className="space-y-3">
-                <div className="text-4xl">⚡</div>
-                <div className="text-sm">Energy Conversion</div>
+                <div className="text-4xl">🔨</div>
+                <div className="text-sm">Hammer Smashing</div>
+                <div className={`text-xs ${craftingRobot.hammerSwing ? 'text-orange-400 animate-pulse' : 'text-gray-400'}`}>
+                  {craftingRobot.hammerSwing ? 'SMASHING!' : 'Ready'}
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="text-4xl">⚒️</div>
+                <div className="text-sm">Forging Process</div>
                 <div className={`text-xs ${craftingRobot.producing ? 'text-yellow-400' : 'text-gray-400'}`}>
-                  {craftingRobot.producing ? 'Processing' : 'Ready'}
+                  {craftingRobot.producing ? 'Forging' : 'Idle'}
                 </div>
               </div>
               <div className="space-y-3">
                 <div className="text-4xl">🪙</div>
-                <div className="text-sm">Coin Generation</div>
-                <div className={`text-xs ${craftingRobot.producing ? 'text-green-400' : 'text-gray-400'}`}>
-                  {craftingRobot.producing ? 'Crafting' : 'Idle'}
+                <div className="text-sm">Coin Creation</div>
+                <div className={`text-xs ${craftingRobot.producing ? 'text-green-400 animate-pulse' : 'text-gray-400'}`}>
+                  {craftingRobot.producing ? 'Creating' : 'Waiting'}
                 </div>
               </div>
               <div className="space-y-3">
                 <div className="text-4xl">💰</div>
-                <div className="text-sm">Distribution</div>
+                <div className="text-sm">Final Polish</div>
                 <div className="text-xs text-blue-400">Ready</div>
               </div>
             </div>
