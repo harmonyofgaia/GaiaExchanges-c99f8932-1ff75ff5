@@ -74,41 +74,73 @@ export const HeroSection = () => {
             </span>
           </div>
 
-          {/* GAiA with special dragon styling */}
-          <div className="relative">
-            {/* Dragon Glow Effect */}
-            <div className="absolute inset-0 scale-110 opacity-40">
-              <div 
-                className="text-8xl font-bold text-red-400 blur-sm animate-pulse"
+          {/* GAiA with NEW CUSTOM LETTER STYLE and Logo Integration */}
+          <div className="relative flex items-center justify-center gap-8">
+            {/* Left Logo (Original) */}
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/32992cdc-cfdf-4b28-805d-7e30bac68456.png"
+                alt="Gaia of Harmony Logo Left"
+                className="w-24 h-24 object-contain animate-pulse drop-shadow-2xl"
                 style={{
-                  fontFamily: "'Uncial Antiqua', 'Cinzel Decorative', serif",
-                  letterSpacing: '0.15em',
-                  textShadow: '0 0 30px rgba(239, 68, 68, 0.8)'
+                  filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))'
+                }}
+              />
+            </div>
+
+            {/* NEW CUSTOM GAiA STYLING */}
+            <div className="relative">
+              {/* Glow Effect Background */}
+              <div className="absolute inset-0 scale-125 opacity-50">
+                <div 
+                  className="text-8xl font-bold text-emerald-400 blur-md animate-pulse"
+                  style={{
+                    fontFamily: "'Orbitron', 'Exo 2', 'Rajdhani', monospace",
+                    letterSpacing: '0.2em',
+                    textShadow: '0 0 30px rgba(34, 197, 94, 0.9), 0 0 60px rgba(34, 197, 94, 0.7)'
+                  }}
+                >
+                  𝙂𝒂𝒊𝒜
+                </div>
+              </div>
+              
+              {/* Main GAiA Title with NEW Custom Styling */}
+              <div 
+                className="relative text-8xl font-bold bg-gradient-to-r from-emerald-200 via-green-100 to-teal-200 bg-clip-text text-transparent animate-pulse"
+                style={{
+                  fontFamily: "'Orbitron', 'Exo 2', 'Rajdhani', monospace",
+                  letterSpacing: '0.2em',
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.9)',
+                  filter: 'drop-shadow(0 0 15px rgba(34, 197, 94, 0.8))',
+                  fontWeight: '900',
+                  textTransform: 'uppercase'
                 }}
               >
-                🐉 𝔊𝔞𝔦𝔄 🐉
+                𝙂𝒂𝒊𝒜
+              </div>
+              
+              {/* Decorative Tech Elements around GAiA */}
+              <div className="absolute -top-8 left-0 text-2xl text-emerald-400 opacity-70 animate-bounce">
+                ⚡
+              </div>
+              <div className="absolute -top-8 right-0 text-2xl text-emerald-400 opacity-70 animate-bounce" style={{animationDelay: '0.3s'}}>
+                ⚡
+              </div>
+              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-2xl text-emerald-400 opacity-70 animate-bounce" style={{animationDelay: '0.6s'}}>
+                🌿
               </div>
             </div>
-            
-            {/* Main GAiA Title */}
-            <div 
-              className="relative text-8xl font-bold bg-gradient-to-r from-red-300 via-orange-200 to-yellow-200 bg-clip-text text-transparent animate-pulse"
-              style={{
-                fontFamily: "'Uncial Antiqua', 'Cinzel Decorative', serif",
-                letterSpacing: '0.15em',
-                textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
-                filter: 'drop-shadow(0 0 15px rgba(239, 68, 68, 0.6))'
-              }}
-            >
-              🐉 𝔊𝔞𝔦𝔄 🐉
-            </div>
-            
-            {/* Dragon Decorative Elements */}
-            <div className="absolute -top-8 left-0 text-3xl text-red-400 opacity-70 animate-bounce">
-              🔥
-            </div>
-            <div className="absolute -top-8 right-0 text-3xl text-red-400 opacity-70 animate-bounce" style={{animationDelay: '0.5s'}}>
-              🔥
+
+            {/* Right Logo (Mirrored) */}
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/32992cdc-cfdf-4b28-805d-7e30bac68456.png"
+                alt="Gaia of Harmony Logo Right"
+                className="w-24 h-24 object-contain animate-pulse drop-shadow-2xl transform scale-x-[-1]"
+                style={{
+                  filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))'
+                }}
+              />
             </div>
           </div>
         </h1>
