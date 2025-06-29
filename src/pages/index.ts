@@ -1,9 +1,18 @@
 
-export { default as FeeVault } from './FeeVault'
-export { default as About } from './About'
-export { default as Wallet } from './Wallet'
-export { default as Markets } from './Markets'
-export { default as GaiasExchange } from './GaiasExchange'
-export { default as VirtualWorld } from './VirtualWorld'
-export { default as Gaming } from './Gaming'
-export { default as ComprehensiveDocumentation } from './ComprehensiveDocumentation'
+export { default as Index } from './Index';
+export { default as About } from './About';
+export { default as Wallet } from './Wallet';
+export { default as Markets } from './Markets';
+export { default as SmartContracts } from './SmartContracts';
+export { default as UltimateSecurity } from './UltimateSecurity';
+export { default as SystemStatus } from './SystemStatus';
+export { default as ComprehensiveStatus } from './ComprehensiveStatus';
+export { default as Downloads } from './Downloads';
+export { default as Marketing } from './Marketing';
+export { default as Reinvestments } from './Reinvestments';
+export { default as Transparency } from './Transparency';
+export { default as Admin } from './Admin';
+export { default as Gaming } from './Gaming';
+export { default as GaiaFighterGame } from './GaiaFighterGame';
+export { default as LiveTracking } from './LiveTracking';
+export { default as NotFound } from './NotFound';

@@ -28,7 +28,7 @@ const LiveTracking = () => {
   const [isLive, setIsLive] = useState(true)
 
   useEffect(() => {
-    console.log("🚀 LiveTracking page loaded successfully - All systems operational!")
+    console.log("✅ LiveTracking component mounted successfully!")
     
     const generateLiveData = () => {
       const now = new Date()
@@ -52,7 +52,7 @@ const LiveTracking = () => {
       const interval = setInterval(generateLiveData, 2000)
       return () => clearInterval(interval)
     }
-  }, [isLive, currentMetrics.price, currentMetrics.volume, currentMetrics.users, currentMetrics.transactions])
+  }, [isLive])
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-US', {
