@@ -20,25 +20,117 @@ export const HeroSection = () => {
       </div>
       
       <div className="mb-8 relative z-10">
-        <h1 className="text-7xl font-bold mb-6 relative">
-          {/* Artistic text effect */}
-          <span className="absolute inset-0 text-7xl font-bold bg-gradient-to-r from-red-400 via-purple-400 via-blue-400 to-green-400 bg-clip-text text-transparent blur-sm animate-pulse">
-            🐉 HARMONY OF GAiA 🐉
-          </span>
-          <span className="relative text-7xl font-bold bg-gradient-to-r from-red-400 via-purple-400 via-blue-400 to-green-400 bg-clip-text text-transparent">
-            🐉 HARMONY OF GAiA 🐉
-          </span>
+        {/* Custom Gothic Style Title */}
+        <h1 className="mb-6 relative flex flex-col items-center">
+          {/* Main Gothic Title with Custom Styling */}
+          <div className="relative mb-4">
+            {/* Shadow/Glow Effect */}
+            <div className="absolute inset-0 scale-110 opacity-30">
+              <div 
+                className="text-8xl font-bold text-white blur-sm"
+                style={{
+                  fontFamily: "'Uncial Antiqua', 'Cinzel Decorative', serif",
+                  letterSpacing: '0.15em',
+                  textShadow: '0 0 20px rgba(139, 92, 246, 0.8), 0 0 40px rgba(139, 92, 246, 0.6)'
+                }}
+              >
+                ℌ𝔞𝔯𝔪𝔬𝔫𝔶
+              </div>
+            </div>
+            
+            {/* Main Title with Gothic Styling */}
+            <div 
+              className="relative text-8xl font-bold bg-gradient-to-r from-purple-200 via-white to-purple-200 bg-clip-text text-transparent"
+              style={{
+                fontFamily: "'Uncial Antiqua', 'Cinzel Decorative', serif",
+                letterSpacing: '0.15em',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
+                filter: 'drop-shadow(0 0 10px rgba(139, 92, 246, 0.5))'
+              }}
+            >
+              ℌ𝔞𝔯𝔪𝔬𝔫𝔶
+            </div>
+            
+            {/* Gothic Decorative Elements */}
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-4xl text-purple-400 opacity-80">
+              ✠ ⚜ ✠
+            </div>
+            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-4xl text-purple-400 opacity-80">
+              ❦ ⚜ ❦
+            </div>
+          </div>
+
+          {/* "OF" with smaller gothic styling */}
+          <div className="relative mb-2">
+            <span 
+              className="text-4xl font-bold text-purple-300"
+              style={{
+                fontFamily: "'Uncial Antiqua', 'Cinzel Decorative', serif",
+                letterSpacing: '0.2em',
+                textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
+              }}
+            >
+              𝔬𝔣
+            </span>
+          </div>
+
+          {/* GAiA with special dragon styling */}
+          <div className="relative">
+            {/* Dragon Glow Effect */}
+            <div className="absolute inset-0 scale-110 opacity-40">
+              <div 
+                className="text-8xl font-bold text-red-400 blur-sm animate-pulse"
+                style={{
+                  fontFamily: "'Uncial Antiqua', 'Cinzel Decorative', serif",
+                  letterSpacing: '0.15em',
+                  textShadow: '0 0 30px rgba(239, 68, 68, 0.8)'
+                }}
+              >
+                🐉 𝔊𝔞𝔦𝔄 🐉
+              </div>
+            </div>
+            
+            {/* Main GAiA Title */}
+            <div 
+              className="relative text-8xl font-bold bg-gradient-to-r from-red-300 via-orange-200 to-yellow-200 bg-clip-text text-transparent animate-pulse"
+              style={{
+                fontFamily: "'Uncial Antiqua', 'Cinzel Decorative', serif",
+                letterSpacing: '0.15em',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
+                filter: 'drop-shadow(0 0 15px rgba(239, 68, 68, 0.6))'
+              }}
+            >
+              🐉 𝔊𝔞𝔦𝔄 🐉
+            </div>
+            
+            {/* Dragon Decorative Elements */}
+            <div className="absolute -top-8 left-0 text-3xl text-red-400 opacity-70 animate-bounce">
+              🔥
+            </div>
+            <div className="absolute -top-8 right-0 text-3xl text-red-400 opacity-70 animate-bounce" style={{animationDelay: '0.5s'}}>
+              🔥
+            </div>
+          </div>
         </h1>
         
-        {/* Artistic subtitle with layered effects */}
-        <div className="relative">
-          <p className="text-3xl mb-8 relative z-10">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 font-light">
-              Where Eternal Dragons Guard Digital Realms Forever
-            </span>
+        {/* Enhanced subtitle with gothic touch */}
+        <div className="relative mb-8">
+          <p 
+            className="text-2xl mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300"
+            style={{
+              fontFamily: "'Cinzel', serif",
+              letterSpacing: '0.1em'
+            }}
+          >
+            ⚔️ Where Eternal Dragons Guard Digital Realms Forever ⚔️
           </p>
-          {/* Abstract accent lines */}
-          <div className="absolute top-1/2 left-1/4 w-1/2 h-0.5 bg-gradient-to-r from-transparent via-purple-400/50 to-transparent transform -translate-y-1/2" />
+          
+          {/* Decorative border lines */}
+          <div className="flex justify-center items-center gap-4">
+            <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-transparent" />
+            <span className="text-purple-400 text-2xl">❦</span>
+            <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-transparent" />
+          </div>
         </div>
         
         {/* Enhanced GAiA Token Display with artistic frame */}
