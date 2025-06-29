@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react'
 import { toast } from 'sonner'
 
@@ -7,7 +6,7 @@ interface ImmortalAnimal {
   species: 'dragon' | 'phoenix' | 'griffin' | 'leviathan' | 'kraken' | 'basilisk'
   name: string
   powerLevel: number
-  invisibilityStrength: number
+  invincibilityStrength: number
   immortalityIndex: number
   learningRate: number
   evolutionSpeed: number
@@ -21,7 +20,7 @@ interface DefenseMetrics {
   combinedPowerLevel: number
   evolutionRate: number
   immortalityStrength: number
-  invisibilityIndex: number
+  invincibilityIndex: number
   threatsDestroyed: number
   systemInvulnerability: number
 }
@@ -33,7 +32,7 @@ export function ImmortalDefenseCore() {
       species: 'dragon',
       name: 'Eternal Shadow Dragon',
       powerLevel: 999999,
-      invisibilityStrength: 100,
+      invincibilityStrength: 100,
       immortalityIndex: 100,
       learningRate: 10000,
       evolutionSpeed: 5000,
@@ -44,14 +43,14 @@ export function ImmortalDefenseCore() {
     {
       id: 'immortal-phoenix-guardian',
       species: 'phoenix',
-      name: 'Invisible Phoenix of Eternity',
+      name: 'Invincible Phoenix of Eternity',
       powerLevel: 888888,
-      invisibilityStrength: 100,
+      invincibilityStrength: 100,
       immortalityIndex: 100,
       learningRate: 8000,
       evolutionSpeed: 4000,
       threatsNeutralized: 0,
-      specialAbilities: ['Resurrection Burst', 'Flame Invisibility', 'Soul Protection', 'Memory Erasure'],
+      specialAbilities: ['Resurrection Burst', 'Flame Invincibility', 'Soul Protection', 'Memory Erasure'],
       quantumSignature: 'IMMORTAL_PHOENIX_ETERNAL_888'
     },
     {
@@ -59,12 +58,12 @@ export function ImmortalDefenseCore() {
       species: 'leviathan',
       name: 'Abyssal Leviathan Immortal',
       powerLevel: 777777,
-      invisibilityStrength: 100,
+      invincibilityStrength: 100,
       immortalityIndex: 100,
       learningRate: 7000,
       evolutionSpeed: 3500,
       threatsNeutralized: 0,
-      specialAbilities: ['Ocean Control', 'Pressure Crush', 'Tsunami Generation', 'Deep Sea Camouflage'],
+      specialAbilities: ['Ocean Control', 'Pressure Crush', 'Tsunami Generation', 'Deep Sea Invincibility'],
       quantumSignature: 'IMMORTAL_LEVIATHAN_ABYSS_777'
     }
   ])
@@ -72,9 +71,9 @@ export function ImmortalDefenseCore() {
   const [defenseMetrics, setDefenseMetrics] = useState<DefenseMetrics>({
     totalAnimals: 3,
     combinedPowerLevel: 0,
-    evolutionRate: 18500, // Combined learning rates
+    evolutionRate: 18500,
     immortalityStrength: 100,
-    invisibilityIndex: 100,
+    invincibilityIndex: 100,
     threatsDestroyed: 0,
     systemInvulnerability: 100
   })
@@ -87,7 +86,7 @@ export function ImmortalDefenseCore() {
   useEffect(() => {
     const runImmortalDefenseCore = () => {
       console.log('🔥 IMMORTAL DEFENSE CORE - ACTIVATED FOREVER')
-      console.log('👁️ INVISIBLE ANIMALS: COMPLETELY UNDETECTABLE')
+      console.log('⚡ INVINCIBLE ANIMALS: COMPLETELY UNDEFEATABLE')
       console.log('⚡ EVOLUTION SPEED: FASTER THAN LIGHT')
       console.log('🛡️ IMMORTALITY: ABSOLUTE AND ETERNAL')
       
@@ -103,9 +102,9 @@ export function ImmortalDefenseCore() {
           ...animal,
           powerLevel: newPowerLevel,
           threatsNeutralized: newThreats,
-          learningRate: animal.learningRate * 1.01, // Exponential learning growth
-          evolutionSpeed: animal.evolutionSpeed * 1.005, // Ever-increasing evolution
-          invisibilityStrength: 100, // Always perfect invisibility
+          learningRate: animal.learningRate * 1.01,
+          evolutionSpeed: animal.evolutionSpeed * 1.005,
+          invincibilityStrength: 100, // Always perfect invincibility
           immortalityIndex: 100 // Always immortal
         }
       }))
@@ -127,21 +126,21 @@ export function ImmortalDefenseCore() {
         console.log(`⚡ IMMORTALITY: ${protocol} - ETERNAL ACTIVE`)
       })
 
-      // 3. INVISIBLE TRAINING ADVANCEMENT
-      console.log('👻 INVISIBLE TRAINING ADVANCEMENT - BEYOND DETECTION')
-      const invisibilityTechniques = [
+      // 3. INVINCIBLE TRAINING ADVANCEMENT
+      console.log('⚡ INVINCIBLE TRAINING ADVANCEMENT - BEYOND DEFEAT')
+      const invincibilityTechniques = [
         'quantum_phase_shifting',
         'dimensional_displacement',
-        'light_bending_mastery',
+        'absolute_defense_mastery',
         'electromagnetic_nullification',
-        'consciousness_concealment',
-        'existence_probability_reduction',
-        'reality_perception_manipulation',
-        'universal_acknowledgment_erasure'
+        'consciousness_invincibility',
+        'existence_probability_maximization',
+        'reality_perception_domination',
+        'universal_acknowledgment_supremacy'
       ]
 
-      invisibilityTechniques.forEach(technique => {
-        console.log(`👁️ INVISIBILITY: ${technique} - PERFECT MASTERY`)
+      invincibilityTechniques.forEach(technique => {
+        console.log(`⚡ INVINCIBILITY: ${technique} - PERFECT MASTERY`)
       })
 
       // 4. THREAT ANNIHILATION SYSTEM
@@ -237,12 +236,12 @@ export function ImmortalDefenseCore() {
   return {
     immortalAnimals,
     defenseMetrics,
-    isImmortalActive,
-    quantumEvolutionActive,
+    isImmortalActive: true,
+    quantumEvolutionActive: true,
     systemInvulnerable: true,
     cannotBeDestroyed: true,
     evolutionBeyondImagination: true,
-    invisibilityPerfect: true,
+    invincibilityPerfect: true,
     immortalityEternal: true
   }
 }

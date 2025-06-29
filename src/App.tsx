@@ -11,6 +11,9 @@ import Home from '@/pages/Home'
 import About from '@/pages/About'
 import Contact from '@/pages/Contact'
 import Pricing from '@/pages/Pricing'
+import VirtualWorld from '@/pages/VirtualWorld'
+import CoinCrafter from '@/pages/CoinCrafter'
+import GaiaCoinCrafterPage from '@/pages/GaiaCoinCrafter'
 import { AuthPage } from '@/components/auth/AuthPage'
 import Admin from '@/pages/Admin'
 import SecureAdmin from '@/pages/SecureAdmin'
@@ -50,6 +53,8 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/auth" element={<AuthPage />} />
+              <Route path="/virtual-world" element={<VirtualWorld />} />
+              <Route path="/coin-crafter" element={<GaiaCoinCrafterPage />} />
               <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
               <Route path="/immortal-security" element={<ImmortalSecurity />} />
               

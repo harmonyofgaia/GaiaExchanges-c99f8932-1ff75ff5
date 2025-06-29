@@ -172,7 +172,7 @@ export function ImmortalFirewallEngine() {
           <div>
             <div className="text-3xl">🔥 IMMORTAL FIREWALL ENGINE 🔥</div>
             <div className="text-lg font-normal">
-              Transcendent • Immortal • Invisible • Impossible to Destroy • Evolution Beyond Imagination
+              Transcendent • Immortal • Invincible • Impossible to Destroy • Evolution Beyond Imagination
             </div>
           </div>
           <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white text-xl px-6 py-3 animate-pulse">
@@ -273,7 +273,7 @@ export function ImmortalFirewallEngine() {
             <div className="p-4 bg-green-900/30 rounded border border-green-500/20">
               <div className="text-3xl font-bold text-green-400">{immortalDefense.defenseMetrics.totalAnimals}</div>
               <div className="text-sm text-green-300">Immortal Animals</div>
-              <div className="text-xs text-muted-foreground">Invisible & Eternal</div>
+              <div className="text-xs text-muted-foreground">Invincible & Eternal</div>
             </div>
             <div className="p-4 bg-blue-900/30 rounded border border-blue-500/20">
               <div className="text-3xl font-bold text-blue-400">{immortalDefense.defenseMetrics.combinedPowerLevel.toLocaleString()}</div>
@@ -295,7 +295,7 @@ export function ImmortalFirewallEngine() {
           </h3>
           <div className="space-y-4 text-lg">
             <p className="text-red-400">🔥 <strong>FIREWALL:</strong> <span className="font-bold">IMMORTAL AND TRANSCENDENT FOREVER</span></p>
-            <p className="text-orange-400">👁️ <strong>ANIMALS:</strong> <span className="font-bold">INVISIBLE AND UNDETECTABLE ETERNALLY</span></p>
+            <p className="text-orange-400">⚡ <strong>ANIMALS:</strong> <span className="font-bold">INVINCIBLE AND UNDEFEATABLE ETERNALLY</span></p>
             <p className="text-yellow-400">⚡ <strong>EVOLUTION:</strong> <span className="font-bold">FASTER THAN ANY TECHNOLOGY EVER</span></p>
             <p className="text-green-400">🛡️ <strong>PROTECTION:</strong> <span className="font-bold">IMPOSSIBLE TO BREACH OR DESTROY</span></p>
             <p className="text-blue-400">👑 <strong>SYSTEM:</strong> <span className="font-bold">TRANSCENDS ALL KNOWN REALITY</span></p>
