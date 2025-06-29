@@ -1,34 +1,59 @@
 
-import { DownloadManager } from '@/components/downloads/DownloadManager'
-import { AutomatedGrowthEngine } from '@/components/downloads/AutomatedGrowthEngine'
-import { AppStoreLinks } from '@/components/AppStoreLinks'
-import { AppStoreDeployment } from '@/components/appstore/AppStoreDeployment'
-import { MouseAttractionBackground } from '@/components/ui/mouse-attraction-background'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Download, Smartphone, Monitor, Shield } from 'lucide-react'
 
 const Downloads = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-emerald-900/10 relative">
-      {/* Mouse Attraction Background */}
-      <MouseAttractionBackground />
-      
-      <div className="container mx-auto px-4 py-6 relative z-10">
+    <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
+      <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-            📱 HARMONY OF GAIA DOWNLOADS
+          <h1 className="text-4xl font-bold text-green-400 mb-4">
+            📥 DOWNLOADS CENTER
           </h1>
-          <p className="text-xl text-muted-foreground mt-4">
-            🌍 Global Access - 100% Working Links - Full App Store Deployment
-          </p>
-          <p className="text-sm text-green-400 mt-2">
-            🦁🐬 Lions + Dolphins Power - Complete Cross-Platform Solution
+          <p className="text-muted-foreground">
+            Download GAIA apps and tools - All dragon-protected
           </p>
         </div>
 
-        <div className="space-y-8">
-          <AutomatedGrowthEngine />
-          <AppStoreDeployment />
-          <DownloadManager />
-          <AppStoreLinks />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="border-green-500/30 bg-green-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <Smartphone className="h-5 w-5" />
+                Mobile Apps
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                <Download className="h-4 w-4 mr-2" />
+                Download for iOS
+              </Button>
+              <Button className="w-full bg-green-600 hover:bg-green-700">
+                <Download className="h-4 w-4 mr-2" />
+                Download for Android
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="border-blue-500/30 bg-blue-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-400">
+                <Monitor className="h-5 w-5" />
+                Desktop Apps
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button className="w-full bg-gray-600 hover:bg-gray-700">
+                <Download className="h-4 w-4 mr-2" />
+                Download for Windows
+              </Button>
+              <Button className="w-full bg-gray-700 hover:bg-gray-800">
+                <Download className="h-4 w-4 mr-2" />
+                Download for macOS
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

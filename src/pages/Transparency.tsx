@@ -1,29 +1,28 @@
 
-import { BurningSystem } from '@/components/BurningSystem'
-import { AnimatedCoinCrafting } from '@/components/AnimatedCoinCrafting'
-import { VirtualAnimalWalk } from '@/components/VirtualAnimalWalk'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Download, Eye, Shield } from 'lucide-react'
 
 const Transparency = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-green-900/20 to-blue-900/20 p-6">
-      <div className="container mx-auto space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-900/20 via-blue-900/20 to-green-900/20">
+      <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-            🔥 TRANSPARENCY & CRAFTING CENTER
+          <h1 className="text-4xl font-bold text-cyan-400 mb-4">
+            🔥 TRANSPARENCY CENTER
           </h1>
-          <p className="text-muted-foreground text-lg mt-2">
-            Live token burning, coin crafting, and virtual world exploration
+          <p className="text-muted-foreground">
+            Full transparency with dragon-verified data
           </p>
         </div>
-        
-        {/* Animated Coin Crafting Section */}
-        <AnimatedCoinCrafting />
-        
-        {/* Token Burning System */}
-        <BurningSystem />
-        
-        {/* Virtual Animal Walks */}
-        <VirtualAnimalWalk />
+        <Card className="border-cyan-500/30 bg-cyan-900/20">
+          <CardContent className="pt-6 text-center">
+            <Eye className="h-16 w-16 text-cyan-400 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold text-cyan-400 mb-4">100% Transparent</h3>
+            <p className="text-muted-foreground">
+              Complete transparency with dragon-verified blockchain data
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )
