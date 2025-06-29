@@ -22,6 +22,7 @@ import { LiveBlockchainViewer } from '@/components/admin/LiveBlockchainViewer'
 import { GlobalMarketingEngine } from '@/components/marketing/GlobalMarketingEngine'
 import { AdminNFTMarketplace } from '@/components/admin/AdminNFTMarketplace'
 import { GamingAssetsManager } from '@/components/admin/GamingAssetsManager'
+import { GlobalTechIntelligence } from '@/components/security/GlobalTechIntelligence'
 
 const Admin = () => {
   return (
@@ -32,10 +33,10 @@ const Admin = () => {
             🌍 HARMONY OF GAIA ADMIN CONTROL CENTER
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Worldwide Defense • Neural Security • Global Reach • Perfect Harmony • Admin Eyes Only
+            Worldwide Defense • Tech Intelligence • Neural Security • Global Reach • Always 10x Ahead
           </p>
           <p className="text-lg text-green-400 mt-2">
-            🎵 "Seeds Will Form Into Music" - Protected By Quantum Defense 🎵
+            🎵 "Seeds Will Form Into Music" - Protected By Quantum Defense + Tech Superiority 🎵
           </p>
         </div>
 
@@ -45,6 +46,9 @@ const Admin = () => {
               <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
                 <TabsTrigger value="worldwide-defense" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                   🌍 Worldwide Defense
+                </TabsTrigger>
+                <TabsTrigger value="tech-intelligence" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
+                  🧠 Tech Intelligence
                 </TabsTrigger>
                 <TabsTrigger value="overview" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
                   📊 Overview
@@ -86,6 +90,10 @@ const Admin = () => {
               
               <TabsContent value="worldwide-defense" className="space-y-6 mt-6">
                 <WorldwideDefenseMonitor />
+              </TabsContent>
+              
+              <TabsContent value="tech-intelligence" className="space-y-6 mt-6">
+                <GlobalTechIntelligence />
               </TabsContent>
               
               <TabsContent value="overview" className="space-y-6 mt-6">
