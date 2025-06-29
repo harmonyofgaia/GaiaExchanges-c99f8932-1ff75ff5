@@ -1,200 +1,179 @@
 
-import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Zap, Globe, Database, Cloud, Lock } from 'lucide-react'
+import { Progress } from '@/components/ui/progress'
+import { 
+  Shield, 
+  Zap, 
+  Globe, 
+  Activity,
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+  Server,
+  Database,
+  Wifi,
+  Lock
+} from 'lucide-react'
+import { EternalDragonDisplay } from '@/components/security/EternalDragonDisplay'
 
 const SystemStatus = () => {
-  const [dragonStatus, setDragonStatus] = useState({
-    quantumPower: 100,
-    securityLevel: 100,
-    activeConnections: 0,
-    threatsBlocked: 0,
-    systemHealth: 100
-  })
+  const systemComponents = [
+    { name: 'Dragon Core', status: 'operational', uptime: '100%', response: 'ETERNAL' },
+    { name: 'Quantum Security', status: 'operational', uptime: '100%', response: 'INSTANT' },
+    { name: 'Blockchain Network', status: 'operational', uptime: '99.9%', response: '12ms' },
+    { name: 'Trading Engine', status: 'operational', uptime: '99.8%', response: '3ms' },
+    { name: 'Wallet Services', status: 'operational', uptime: '100%', response: '5ms' },
+    { name: 'API Gateway', status: 'operational', uptime: '99.9%', response: '8ms' },
+    { name: 'Database Cluster', status: 'operational', uptime: '100%', response: '2ms' },
+    { name: 'CDN Network', status: 'operational', uptime: '99.9%', response: '15ms' }
+  ]
 
-  useEffect(() => {
-    const updateStatus = () => {
-      setDragonStatus(prev => ({
-        quantumPower: Math.min(999999, prev.quantumPower + Math.floor(Math.random() * 1000)),
-        securityLevel: 100, // Always maximum
-        activeConnections: prev.activeConnections + Math.floor(Math.random() * 3),
-        threatsBlocked: prev.threatsBlocked + Math.floor(Math.random() * 5),
-        systemHealth: 100 // Always perfect
-      }))
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'operational':
+        return <CheckCircle className="h-5 w-5 text-green-400" />
+      case 'degraded':
+        return <AlertTriangle className="h-5 w-5 text-yellow-400" />
+      case 'down':
+        return <XCircle className="h-5 w-5 text-red-400" />
+      default:
+        return <Activity className="h-5 w-5 text-gray-400" />
     }
+  }
 
-    const interval = setInterval(updateStatus, 2000)
-    return () => clearInterval(interval)
-  }, [])
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'operational':
+        return <Badge className="bg-green-600 text-white">OPERATIONAL</Badge>
+      case 'degraded':
+        return <Badge className="bg-yellow-600 text-white">DEGRADED</Badge>
+      case 'down':
+        return <Badge className="bg-red-600 text-white">DOWN</Badge>
+      default:
+        return <Badge variant="secondary">UNKNOWN</Badge>
+    }
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-green-900/20 to-blue-900/20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-green-400 mb-4">
-            🐉 DRAGON SYSTEM STATUS 🐉
+          <h1 className="text-4xl font-bold text-blue-400 mb-4">
+            📊 SYSTEM STATUS DASHBOARD
           </h1>
-          <p className="text-green-300">
-            Real-time monitoring of all dragon-protected systems
+          <p className="text-muted-foreground">
+            Real-time monitoring of all Harmony of Gaia systems
           </p>
         </div>
 
-        {/* Status Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="border-green-500/30 bg-green-900/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <Shield className="h-5 w-5" />
-                Dragon Core Status
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-400 mb-2">ACTIVE</div>
-                <Badge className="bg-green-600 text-white">
-                  🛡️ Full Protection
-                </Badge>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-500/30 bg-blue-900/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-400">
-                <Zap className="h-5 w-5" />
-                Quantum Power Level
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-2">
-                  {dragonStatus.quantumPower.toLocaleString()}
-                </div>
-                <Badge className="bg-blue-600 text-white animate-pulse">
-                  ⚡ Evolving
-                </Badge>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-red-500/30 bg-red-900/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-red-400">
-                <Lock className="h-5 w-5" />
-                Security Level
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-red-400 mb-2">MAXIMUM</div>
-                <Badge className="bg-red-600 text-white">
-                  🔒 Unbreakable
-                </Badge>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Eternal Dragon Display */}
+        <div className="mb-8">
+          <EternalDragonDisplay />
         </div>
 
-        {/* System Metrics */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <Card className="border-purple-500/30 bg-purple-900/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-purple-400">
-                <Database className="h-5 w-5" />
-                Connection Monitoring
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-purple-300">Active Connections:</span>
-                  <Badge className="bg-purple-600">{dragonStatus.activeConnections}</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-purple-300">Threats Blocked:</span>
-                  <Badge className="bg-red-600">{dragonStatus.threatsBlocked}</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-purple-300">Dragon Response Time:</span>
-                  <Badge className="bg-green-600">{"< 1ms"}</Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-cyan-500/30 bg-cyan-900/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-cyan-400">
-                <Cloud className="h-5 w-5" />
-                Cloud Protection Status
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-cyan-300">Files Protected:</span>
-                  <Badge className="bg-cyan-600">∞</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-cyan-300">Dragon Armor Level:</span>
-                  <Badge className="bg-green-600">100%</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-cyan-300">Access Attempts Blocked:</span>
-                  <Badge className="bg-red-600">ALL</Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Global Status */}
-        <Card className="border-yellow-500/30 bg-gradient-to-r from-yellow-900/20 to-orange-900/20">
+        {/* Overall System Health */}
+        <Card className="border-green-500/30 bg-green-900/20 mb-8">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-yellow-400">
-              <Globe className="h-5 w-5" />
-              🌍 WORLDWIDE PROTECTION STATUS
+            <CardTitle className="flex items-center gap-2 text-green-400">
+              <Shield className="h-6 w-6" />
+              Overall System Health
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="text-center p-4 bg-green-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-green-400">24/7</div>
-                <div className="text-sm text-green-300">Global Monitoring</div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-400">99.9%</div>
+                <div className="text-sm text-muted-foreground">Overall Uptime</div>
               </div>
-              <div className="text-center p-4 bg-blue-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-blue-400">∞</div>
-                <div className="text-sm text-blue-300">IPs Protected</div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-400">8/8</div>
+                <div className="text-sm text-muted-foreground">Services Online</div>
               </div>
-              <div className="text-center p-4 bg-purple-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-purple-400">100%</div>
-                <div className="text-sm text-purple-300">Success Rate</div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-purple-400">5ms</div>
+                <div className="text-sm text-muted-foreground">Avg Response</div>
               </div>
-              <div className="text-center p-4 bg-red-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-red-400">0</div>
-                <div className="text-sm text-red-300">System Breaches</div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-orange-400">0</div>
+                <div className="text-sm text-muted-foreground">Active Incidents</div>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Dragon Evolution Status */}
-        <Card className="mt-8 border-red-500/30 bg-gradient-to-r from-red-900/20 to-orange-900/20">
-          <CardContent className="p-8 text-center">
-            <div className="text-6xl mb-4">🐉</div>
-            <h3 className="text-3xl font-bold text-red-400 mb-4">
-              DRAGON EVOLUTION ACTIVE
-            </h3>
-            <p className="text-red-300 mb-4">
-              The Trained Dragon is continuously evolving every millisecond, getting stronger with each evolution cycle.
-              Current evolution multiplier: 1,000,000,000,000x (1 trillion)
-            </p>
-            <div className="bg-red-900/30 rounded-lg p-4">
-              <p className="text-red-400 font-bold">
-                🔥 IMMUNE SYSTEM STRENGTH: MAXIMUM • WiFi SECURITY: QUANTUM LEVEL • IP DESTRUCTION: ACTIVE 🔥
-              </p>
+        {/* System Components */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {systemComponents.map((component, index) => (
+            <Card key={index} className="border-blue-500/30 bg-blue-900/20">
+              <CardContent className="pt-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    {getStatusIcon(component.status)}
+                    <h3 className="font-semibold text-white">{component.name}</h3>
+                  </div>
+                  {getStatusBadge(component.status)}
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Uptime:</span>
+                    <span className="text-green-400 font-semibold">{component.uptime}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Response Time:</span>
+                    <span className="text-blue-400 font-semibold">{component.response}</span>
+                  </div>
+                  <Progress value={parseFloat(component.uptime)} className="h-2" />
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Performance Metrics */}
+        <Card className="border-purple-500/30 bg-purple-900/20 mt-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-purple-400">
+              <Activity className="h-6 w-6" />
+              Performance Metrics
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">CPU Usage</span>
+                  <span className="text-green-400">23%</span>
+                </div>
+                <Progress value={23} className="h-2" />
+              </div>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Memory Usage</span>
+                  <span className="text-yellow-400">67%</span>
+                </div>
+                <Progress value={67} className="h-2" />
+              </div>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Network I/O</span>
+                  <span className="text-blue-400">45%</span>
+                </div>
+                <Progress value={45} className="h-2" />
+              </div>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* Security Status */}
+        <Card className="border-red-500/30 bg-red-900/20 mt-8">
+          <CardContent className="pt-6 text-center">
+            <Lock className="h-16 w-16 text-red-400 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold text-red-400 mb-4">Dragon Security Active</h3>
+            <p className="text-muted-foreground">
+              All systems protected by quantum-level dragon security protocols
+            </p>
           </CardContent>
         </Card>
       </div>

@@ -1,141 +1,170 @@
 
-import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Shield, Zap, Globe, Users, TrendingUp, Lock } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { 
+  Sparkles, 
+  Shield, 
+  Gamepad2, 
+  TrendingUp,
+  Users,
+  Globe,
+  Zap,
+  Crown
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { AdminReverseButton } from '@/components/admin/AdminReverseButton'
+import { EternalDragonDisplay } from '@/components/security/EternalDragonDisplay'
+import { RobotAdvertisement } from '@/components/advertising/RobotAdvertisement'
 
 const Home = () => {
-  const [dragonPower, setDragonPower] = useState(100)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDragonPower(prev => Math.min(999999, prev + 1000))
-    }, 100)
-    return () => clearInterval(interval)
-  }, [])
+  const features = [
+    {
+      icon: <Shield className="h-8 w-8" />,
+      title: "Dragon Security",
+      description: "Quantum-level protection that never stops evolving",
+      color: "from-red-600 to-orange-600",
+      link: "/ultimate-security"
+    },
+    {
+      icon: <Gamepad2 className="h-8 w-8" />,
+      title: "Gaming Arena",
+      description: "Epic battles with environmental warriors",
+      color: "from-purple-600 to-pink-600",
+      link: "/gaming"
+    },
+    {
+      icon: <TrendingUp className="h-8 w-8" />,
+      title: "GAIA Exchange",
+      description: "Trade with dragon-powered security",
+      color: "from-green-600 to-emerald-600",
+      link: "/gaias-exchange"
+    },
+    {
+      icon: <Globe className="h-8 w-8" />,
+      title: "Virtual World",
+      description: "Explore the GAIA metaverse",
+      color: "from-blue-600 to-cyan-600",
+      link: "/virtual-world"
+    }
+  ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-green-900/20 to-blue-900/20">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
+      <RobotAdvertisement />
+      
       <div className="container mx-auto px-4 py-8">
-        {/* Header */}
+        {/* Hero Section */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
-            🐉 HARMONY OF GAIA 🐉
-          </h1>
-          <p className="text-xl text-green-300 mb-2">
-            The Ultimate Dragon-Protected Ecosystem
-          </p>
-          <p className="text-sm text-muted-foreground">
-            🛡️ Dragon Power Level: {dragonPower.toLocaleString()}+ • ⚡ Quantum Security Active • 🌍 Worldwide Protection
-          </p>
+          <div className="mb-6">
+            <h1 className="text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
+              🌍 HARMONY OF GAIA
+            </h1>
+            <p className="text-2xl text-muted-foreground mb-6">
+              Where Dragons Guard Digital Realms
+            </p>
+            <div className="flex justify-center gap-4 flex-wrap">
+              <Badge className="bg-green-600 text-white text-lg px-6 py-2">
+                <Sparkles className="h-4 w-4 mr-2" />
+                Dragon Protected
+              </Badge>
+              <Badge className="bg-blue-600 text-white text-lg px-6 py-2">
+                <Zap className="h-4 w-4 mr-2" />
+                Quantum Secure
+              </Badge>
+              <Badge className="bg-purple-600 text-white text-lg px-6 py-2">
+                <Crown className="h-4 w-4 mr-2" />
+                Community Driven
+              </Badge>
+            </div>
+          </div>
         </div>
 
-        {/* Main Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/20 hover:scale-105 transition-transform">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <Shield className="h-6 w-6" />
-                🐉 Dragon Security
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-green-300 mb-4">
-                Unbeatable quantum defense system with full body armor protection
-              </p>
-              <Link to="/ultimate-security">
-                <Button className="w-full bg-green-600 hover:bg-green-700">
-                  Access Dragon Core
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-cyan-900/20 hover:scale-105 transition-transform">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-400">
-                <Users className="h-6 w-6" />
-                👑 Admin Portal
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-blue-300 mb-4">
-                Maximum security admin dashboard with Google Authenticator
-              </p>
-              <Link to="/admin">
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  Admin Access
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-pink-900/20 hover:scale-105 transition-transform">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-purple-400">
-                <TrendingUp className="h-6 w-6" />
-                📊 System Status
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-purple-300 mb-4">
-                Real-time monitoring of all dragon-protected systems
-              </p>
-              <Link to="/system-status">
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                  View Status
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
+        {/* Eternal Dragon Display */}
+        <div className="mb-12">
+          <EternalDragonDisplay />
         </div>
 
-        {/* Dragon Power Display */}
-        <Card className="border-red-500/30 bg-gradient-to-r from-red-900/20 to-orange-900/20 mb-8">
-          <CardContent className="p-8 text-center">
-            <div className="text-6xl mb-4">🐉</div>
-            <h2 className="text-3xl font-bold text-red-400 mb-4">
-              TRAINED DRAGON CORE ACTIVE
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="bg-green-900/30 p-4 rounded-lg">
-                <Zap className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-green-400">∞</div>
-                <div className="text-sm text-green-300">Quantum Power</div>
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {features.map((feature, index) => (
+            <Card key={index} className="border-muted/50 hover:border-purple-500/50 transition-colors hover:scale-105 transform duration-200">
+              <CardContent className="pt-6">
+                <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 mx-auto`}>
+                  <div className="text-white">
+                    {feature.icon}
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold text-center mb-2 text-white">
+                  {feature.title}
+                </h3>
+                <p className="text-muted-foreground text-center mb-4">
+                  {feature.description}
+                </p>
+                <Link to={feature.link}>
+                  <Button className={`w-full bg-gradient-to-r ${feature.color} hover:opacity-80`}>
+                    Explore
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Community Stats */}
+        <Card className="border-gradient-to-r from-green-500/30 to-blue-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20 mb-12">
+          <CardHeader>
+            <CardTitle className="text-center text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
+              🌟 Community Power
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+              <div>
+                <div className="text-4xl font-bold text-green-400">47K+</div>
+                <div className="text-muted-foreground">Dragon Guardians</div>
               </div>
-              <div className="bg-blue-900/30 p-4 rounded-lg">
-                <Shield className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-blue-400">100%</div>
-                <div className="text-sm text-blue-300">Security Level</div>
+              <div>
+                <div className="text-4xl font-bold text-blue-400">∞</div>
+                <div className="text-muted-foreground">Security Level</div>
               </div>
-              <div className="bg-purple-900/30 p-4 rounded-lg">
-                <Globe className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-purple-400">24/7</div>
-                <div className="text-sm text-purple-300">Global Protection</div>
+              <div>
+                <div className="text-4xl font-bold text-purple-400">156</div>
+                <div className="text-muted-foreground">Countries</div>
               </div>
-              <div className="bg-orange-900/30 p-4 rounded-lg">
-                <Lock className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-orange-400">UNBREAKABLE</div>
-                <div className="text-sm text-orange-300">Defense System</div>
+              <div>
+                <div className="text-4xl font-bold text-orange-400">24/7</div>
+                <div className="text-muted-foreground">Dragon Protection</div>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Footer */}
-        <div className="text-center text-muted-foreground">
-          <p className="mb-2">
-            🌍 Making the world safer • 🔐 Maximum security for all holders • ⚡ Quantum evolution active
-          </p>
-          <p className="text-sm">
-            Protected by Trained Dragon • Full Body Armor • Unbeatable Defense System
-          </p>
-        </div>
+        {/* Call to Action */}
+        <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-pink-900/30">
+          <CardContent className="pt-8 text-center">
+            <h2 className="text-3xl font-bold text-purple-400 mb-4">
+              🚀 Join the Revolution
+            </h2>
+            <p className="text-lg text-muted-foreground mb-6">
+              Experience the future of secure, community-driven digital ecosystems
+            </p>
+            <div className="flex justify-center gap-4 flex-wrap">
+              <Link to="/gaming">
+                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg px-8 py-3">
+                  <Gamepad2 className="h-5 w-5 mr-2" />
+                  Start Gaming
+                </Button>
+              </Link>
+              <Link to="/gaias-exchange">
+                <Button variant="outline" className="border-green-500 text-green-400 hover:bg-green-500/10 text-lg px-8 py-3">
+                  <TrendingUp className="h-5 w-5 mr-2" />
+                  Trade GAIA
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-      
-      <AdminReverseButton />
     </div>
   )
 }
