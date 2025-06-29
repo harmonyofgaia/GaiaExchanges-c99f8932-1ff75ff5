@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { MessageCircle, Send, Users, Globe, Heart, Flame, Crown, Star, Shield, Zap } from 'lucide-react'
+import { MessageCircle, Send, Users, Globe, Heart, Flame, Crown, Star, Shield, Zap, Waves } from 'lucide-react'
 import { GAIA_TOKEN } from '@/constants/gaia'
 import { toast } from 'sonner'
 

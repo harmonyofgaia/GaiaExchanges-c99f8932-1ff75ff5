@@ -1,3 +1,5 @@
+
+import { UnifiedDragonSecurity } from '@/components/security/UnifiedDragonSecurity'
 import { UltimateSecurityWall } from '@/components/security/UltimateSecurityWall'
 import { ComprehensiveSecurityMonitor } from '@/components/security/ComprehensiveSecurityMonitor'
 import { UltraSecureCloudVault } from '@/components/security/UltraSecureCloudVault'
@@ -6,32 +8,35 @@ import { AdminRecoveryPortal } from '@/components/security/AdminRecoveryPortal'
 import { WiFiNetworkProtection } from '@/components/security/WiFiNetworkProtection'
 import { AdvancedIPProtection } from '@/components/security/AdvancedIPProtection'
 import { UltimateSecurityOrchestrator } from '@/components/security/UltimateSecurityOrchestrator'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-
 import { UltraFastDatabaseGuard } from '@/components/security/UltraFastDatabaseGuard'
 import { DragonSecurityDashboard } from '@/components/security/DragonSecurityDashboard'
 import { DragonCloudProtection } from '@/components/security/DragonCloudProtection'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 
 const UltimateSecurity = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-red-900/10 to-orange-900/10">
+    <div className="min-h-screen bg-gradient-to-br from-black via-red-900/20 to-orange-900/20">
       <div className="container mx-auto px-4 py-6">
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
-            🐉 TRAINED DRAGON ULTIMATE SECURITY 🐉
+          <h1 className="text-4xl md:text-7xl font-bold bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
+            🐉 UNIFIED DRAGON SECURITY FORTRESS 🐉
           </h1>
-          <p className="text-xl text-muted-foreground mt-4">
-            Unbeatable Quantum Defense • Human + AI Power • Making World Safer • Priceless Value
+          <p className="text-2xl text-muted-foreground mt-4">
+            Triple-Bonded Protection • Eternal Dragon Core • Quantum Evolution • Invisible Forever
           </p>
-          <p className="text-sm text-red-400 mt-2">
-            🔒 Dragon Protected • ⚡ Quantum Evolution • 🌍 Worldwide IP Blocking • 👑 Admin Fortress • 💎 Holder Shield • 🧬 Immune System • 🔮 Github+Supabase Merged • 👑 Investor Attraction • ♾️ Endless Improvements
+          <p className="text-lg text-red-400 mt-2">
+            🔒 Dragon Protected • ⚡ Quantum Evolution • 🌍 Worldwide IP Blocking • 👑 Admin Fortress • 💎 Holder Shield • 🧬 Immune System • 🔮 Github+Supabase Merged • 👑 Investor Attraction • ♾️ Endless Improvements • 👻 Forever Invisible
           </p>
         </div>
 
-        <Tabs defaultValue="dragon-core" className="w-full">
-          <TabsList className="grid w-full grid-cols-11 bg-black/50 backdrop-blur-md border border-red-500/20">
+        <Tabs defaultValue="unified-core" className="w-full">
+          <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-red-500/20 text-xs">
+            <TabsTrigger value="unified-core" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+              🐉 Unified Core
+            </TabsTrigger>
             <TabsTrigger value="dragon-core" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-              🐉 Dragon Core
+              🔥 Dragon Core
             </TabsTrigger>
             <TabsTrigger value="orchestrator" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
               👑 Master Control
@@ -64,6 +69,10 @@ const UltimateSecurity = () => {
               ☁️ Dragon Cloud
             </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="unified-core" className="space-y-6 mt-6">
+            <UnifiedDragonSecurity />
+          </TabsContent>
           
           <TabsContent value="dragon-core" className="space-y-6 mt-6">
             <DragonSecurityDashboard />
@@ -102,7 +111,9 @@ const UltimateSecurity = () => {
           </TabsContent>
           
           <TabsContent value="admin-recovery" className="space-y-6 mt-6">
-            <AdminRecoveryPortal />
+            <AdminProtectedRoute>
+              <AdminRecoveryPortal />
+            </AdminProtectedRoute>
           </TabsContent>
           
           <TabsContent value="dragon-cloud" className="space-y-6 mt-6">
