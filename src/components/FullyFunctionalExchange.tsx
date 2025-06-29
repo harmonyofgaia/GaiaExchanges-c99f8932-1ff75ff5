@@ -39,7 +39,7 @@ interface TradeHistory {
 
 export function FullyFunctionalExchange() {
   const [gaiaPrice, setGaiaPrice] = useState(3.25)
-  const [userBalance, setUserBalance] = useState({ USD: 10000, GAIA: 5000 })
+  const [userBalance, setUserBalance] = useState({ USD: 10000, GAiA: 5000 })
   const [buyAmount, setBuyAmount] = useState('')
   const [sellAmount, setSellAmount] = useState('')
   const [buyPrice, setBuyPrice] = useState('')
@@ -50,6 +50,7 @@ export function FullyFunctionalExchange() {
   const [trades, setTrades] = useState<TradeHistory[]>([])
   const [orderBook, setOrderBook] = useState<OrderBook[]>([])
   const [activeUsers, setActiveUsers] = useState(1247)
+  const connectedWalletAddress = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
 
   // Real-time price updates
   useEffect(() => {
@@ -115,10 +116,10 @@ export function FullyFunctionalExchange() {
         if (userBalance.USD >= totalCost) {
           setUserBalance(prev => ({
             USD: prev.USD - totalCost,
-            GAIA: prev.GAIA + amount
+            GAiA: prev.GAiA + amount
           }))
           
-          toast.success(`✅ Buy Order Executed!`, {
+          toast.success(`✅ GAiA Buy Order Executed!`, {
             description: `Bought ${amount.toFixed(4)} GAiA at $${tradePrice.toFixed(4)} (Fee: $0.00)`,
             duration: 5000
           })
@@ -126,13 +127,13 @@ export function FullyFunctionalExchange() {
           throw new Error('Insufficient USD balance')
         }
       } else {
-        if (userBalance.GAIA >= amount) {
+        if (userBalance.GAiA >= amount) {
           setUserBalance(prev => ({
             USD: prev.USD + totalCost,
-            GAIA: prev.GAIA - amount
+            GAiA: prev.GAiA - amount
           }))
           
-          toast.success(`✅ Sell Order Executed!`, {
+          toast.success(`✅ GAiA Sell Order Executed!`, {
             description: `Sold ${amount.toFixed(4)} GAiA at $${tradePrice.toFixed(4)} (Fee: $0.00)`,
             duration: 5000
           })
@@ -154,7 +155,7 @@ export function FullyFunctionalExchange() {
       setTrades(prev => [newTrade, ...prev.slice(0, 19)])
       
     } catch (error) {
-      toast.error(`Trade Failed: ${(error as Error).message}`)
+      toast.error(`GAiA Trade Failed: ${(error as Error).message}`)
     } finally {
       setIsTrading(false)
     }
@@ -165,7 +166,7 @@ export function FullyFunctionalExchange() {
     const price = orderType === 'limit' ? parseFloat(buyPrice) : undefined
     
     if (!amount || amount <= 0) {
-      toast.error('Please enter a valid amount')
+      toast.error('Please enter a valid GAiA amount')
       return
     }
     
@@ -179,7 +180,7 @@ export function FullyFunctionalExchange() {
     const price = orderType === 'limit' ? parseFloat(sellPrice) : undefined
     
     if (!amount || amount <= 0) {
-      toast.error('Please enter a valid amount')
+      toast.error('Please enter a valid GAiA amount')
       return
     }
     
@@ -198,7 +199,10 @@ export function FullyFunctionalExchange() {
               <GaiaLogo size="lg" variant="white-fade" />
               <div>
                 <h2 className="text-2xl font-bold text-green-400">GAiA/USD Trading</h2>
-                <p className="text-sm text-muted-foreground">World's First Zero-Fee Crypto Exchange</p>
+                <p className="text-sm text-muted-foreground">World's First Zero-Fee GAiA Exchange</p>
+                <div className="text-xs font-mono text-green-300 mt-1">
+                  Wallet: {connectedWalletAddress}
+                </div>
               </div>
             </div>
             <div className="text-right">
@@ -215,7 +219,7 @@ export function FullyFunctionalExchange() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">24h Volume</p>
+                <p className="text-sm text-muted-foreground">GAiA 24h Volume</p>
                 <p className="text-xl font-bold text-blue-400">${volume24h.toLocaleString()}</p>
               </div>
               <DollarSign className="h-6 w-6 text-blue-400" />
@@ -227,7 +231,7 @@ export function FullyFunctionalExchange() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Active Traders</p>
+                <p className="text-sm text-muted-foreground">GAiA Traders</p>
                 <p className="text-xl font-bold text-purple-400">{activeUsers.toLocaleString()}</p>
               </div>
               <Users className="h-6 w-6 text-purple-400" />
@@ -239,7 +243,7 @@ export function FullyFunctionalExchange() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Trading Fees</p>
+                <p className="text-sm text-muted-foreground">GAiA Fees</p>
                 <p className="text-xl font-bold text-green-400">$0.00</p>
               </div>
               <Zap className="h-6 w-6 text-green-400" />
@@ -251,7 +255,7 @@ export function FullyFunctionalExchange() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Security Level</p>
+                <p className="text-sm text-muted-foreground">GAiA Security</p>
                 <p className="text-xl font-bold text-yellow-400">100%</p>
               </div>
               <Shield className="h-6 w-6 text-yellow-400" />
@@ -267,7 +271,7 @@ export function FullyFunctionalExchange() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
-                <span>Live Trading</span>
+                <span>Live GAiA Trading</span>
                 <div className="flex gap-2">
                   <Button 
                     size="sm" 
@@ -375,7 +379,7 @@ export function FullyFunctionalExchange() {
                     </div>
                     
                     <div className="text-sm text-muted-foreground">
-                      Available: {userBalance.GAIA.toLocaleString()} GAiA
+                      Available: {userBalance.GAiA.toLocaleString()} GAiA
                     </div>
                     
                     <Button 
@@ -394,29 +398,31 @@ export function FullyFunctionalExchange() {
           {/* Order Book */}
           <Card>
             <CardHeader>
-              <CardTitle>Live Order Book</CardTitle>
+              <CardTitle>GAiA Order Book</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Buy Orders */}
                 <div>
-                  <h4 className="text-sm font-medium text-green-400 mb-2">Buy Orders</h4>
-                  <div className="space-y-1">
-                    {orderBook.filter(o => o.type === 'buy').slice(0, 8).map((order, i) => (
-                      <div key={i} className="flex justify-between text-xs">
-                        <span className="text-green-400">${order.price.toFixed(4)}</span>
-                        <span>{order.amount.toFixed(2)}</span>
+                  <h4 className="font-medium text-green-400 mb-2">Buy Orders</h4>
+                  <div className="space-y-1 text-sm">
+                    {orderBook.filter(order => order.type === 'buy').slice(0, 8).map((order, index) => (
+                      <div key={index} className="flex justify-between text-green-300">
+                        <span>${order.price.toFixed(4)}</span>
+                        <span>{order.amount.toFixed(2)} GAiA</span>
                       </div>
                     ))}
                   </div>
                 </div>
-                
+
+                {/* Sell Orders */}
                 <div>
-                  <h4 className="text-sm font-medium text-red-400 mb-2">Sell Orders</h4>
-                  <div className="space-y-1">
-                    {orderBook.filter(o => o.type === 'sell').slice(0, 8).map((order, i) => (
-                      <div key={i} className="flex justify-between text-xs">
-                        <span className="text-red-400">${order.price.toFixed(4)}</span>
-                        <span>{order.amount.toFixed(2)}</span>
+                  <h4 className="font-medium text-red-400 mb-2">Sell Orders</h4>
+                  <div className="space-y-1 text-sm">
+                    {orderBook.filter(order => order.type === 'sell').slice(0, 8).map((order, index) => (
+                      <div key={index} className="flex justify-between text-red-300">
+                        <span>${order.price.toFixed(4)}</span>
+                        <span>{order.amount.toFixed(2)} GAiA</span>
                       </div>
                     ))}
                   </div>
@@ -428,114 +434,57 @@ export function FullyFunctionalExchange() {
 
         {/* Right Sidebar */}
         <div className="space-y-6">
-          {/* Balance */}
-          <Card className="border-blue-500/20">
+          {/* Portfolio */}
+          <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Wallet className="h-5 w-5" />
-                Account Balance
-              </CardTitle>
+              <CardTitle>GAiA Portfolio</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex justify-between">
-                <span>USD:</span>
-                <span className="font-semibold">${userBalance.USD.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>GAiA:</span>
-                <span className="font-semibold">{userBalance.GAIA.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between pt-2 border-t">
-                <span>Total Value:</span>
-                <span className="font-semibold text-green-400">
-                  ${(userBalance.USD + (userBalance.GAIA * gaiaPrice)).toLocaleString()}
-                </span>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex justify-between">
+                  <span>USD Balance:</span>
+                  <span className="font-mono">${userBalance.USD.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>GAiA Balance:</span>
+                  <span className="font-mono text-green-400">{userBalance.GAiA.toLocaleString()} GAiA</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>GAiA Value:</span>
+                  <span className="font-mono">${(userBalance.GAiA * gaiaPrice).toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between font-bold">
+                  <span>Total Value:</span>
+                  <span className="font-mono">${(userBalance.USD + (userBalance.GAiA * gaiaPrice)).toLocaleString()}</span>
+                </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* Recent Trades */}
+          {/* Recent GAiA Trades */}
           <Card>
             <CardHeader>
-              <CardTitle>Your Recent Trades</CardTitle>
+              <CardTitle>Recent GAiA Trades</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2">
-                {trades.length === 0 ? (
-                  <p className="text-sm text-muted-foreground text-center py-4">
-                    No trades yet. Start trading to see your history here.
-                  </p>
-                ) : (
-                  trades.slice(0, 8).map((trade) => (
-                    <div key={trade.id} className="flex justify-between items-center text-xs p-2 rounded bg-muted/30">
-                      <div className="flex items-center gap-2">
-                        <Badge className={`text-xs ${trade.type === 'buy' ? 'bg-green-600' : 'bg-red-600'}`}>
-                          {trade.type.toUpperCase()}
-                        </Badge>
-                        <span>{trade.amount.toFixed(4)} GAiA</span>
-                      </div>
-                      <div className="text-right">
-                        <div>${trade.price.toFixed(4)}</div>
-                        <div className="text-muted-foreground">Fee: $0.00</div>
-                      </div>
+              <div className="space-y-2 text-sm">
+                {trades.length > 0 ? (
+                  trades.slice(0, 10).map((trade) => (
+                    <div key={trade.id} className="flex justify-between">
+                      <span className={trade.type === 'buy' ? 'text-green-400' : 'text-red-400'}>
+                        {trade.type.toUpperCase()} {trade.amount.toFixed(4)} GAiA
+                      </span>
+                      <span>${trade.price.toFixed(4)}</span>
                     </div>
                   ))
+                ) : (
+                  <p className="text-muted-foreground">No GAiA trades yet</p>
                 )}
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
-
-      {/* Website Link for Testing */}
-      <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-900/20 to-blue-900/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-cyan-400">
-            <Globe className="h-5 w-5" />
-            🌍 Live Website - Test On Any Device
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="bg-black/20 p-4 rounded-lg mb-4">
-            <div className="text-sm text-muted-foreground mb-2">Full Website URL:</div>
-            <div className="text-lg font-mono text-cyan-400 break-all mb-4">
-              https://8dfae018-363f-4770-8e5c-27c14bec8426.lovableproject.com
-            </div>
-            <div className="flex gap-4 flex-wrap">
-              <Button asChild className="bg-cyan-600 hover:bg-cyan-700">
-                <a href="https://8dfae018-363f-4770-8e5c-27c14bec8426.lovableproject.com/markets" target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  Test Live Exchange
-                </a>
-              </Button>
-              <Button asChild variant="outline">
-                <a href="https://8dfae018-363f-4770-8e5c-27c14bec8426.lovableproject.com" target="_blank" rel="noopener noreferrer">
-                  <Globe className="h-4 w-4 mr-2" />
-                  Full Website
-                </a>
-              </Button>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            <div className="text-center">
-              <CheckCircle className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="font-semibold">📱 Mobile Ready</div>
-              <div className="text-muted-foreground">iPhone & Android optimized</div>
-            </div>
-            <div className="text-center">
-              <CheckCircle className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="font-semibold">💻 Desktop Perfect</div>
-              <div className="text-muted-foreground">All browsers supported</div>
-            </div>
-            <div className="text-center">
-              <CheckCircle className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-              <div className="font-semibold">🚀 Live Trading</div>
-              <div className="text-muted-foreground">100% functional exchange</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   )
 }

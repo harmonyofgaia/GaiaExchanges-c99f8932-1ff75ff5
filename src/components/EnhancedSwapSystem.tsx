@@ -50,20 +50,21 @@ export function EnhancedSwapSystem() {
   })
 
   const [swapData, setSwapData] = useState({
-    fromCurrency: 'GAIA',
+    fromCurrency: 'GAiA',
     toCurrency: 'BTC',
     fromAmount: 0,
     toAmount: 0
   })
 
   const [loading, setLoading] = useState(false)
+  const connectedWalletAddress = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
 
-  const currencies = ['GAIA', 'BTC', 'ETH', 'USDC', 'USDT']
+  const currencies = ['GAiA', 'BTC', 'ETH', 'USDC', 'USDT', 'GAIA'] // GAiA first, GAIA last for legacy swapping
   const feeDestinations = [
-    { id: 'vault', name: '🏦 Community Vault', description: 'Admin humanitarian surprises' },
-    { id: 'burning', name: '🔥 Token Burning', description: 'Increase token value' },
-    { id: 'green_projects', name: '🌱 Green Projects', description: 'Environmental initiatives' },
-    { id: 'humanity', name: '❤️ Humanity Fund', description: 'Global humanitarian aid' }
+    { id: 'vault', name: '🏦 GAiA Community Vault', description: 'Admin humanitarian surprises' },
+    { id: 'burning', name: '🔥 GAiA Token Burning', description: 'Increase GAiA token value' },
+    { id: 'green_projects', name: '🌱 GAiA Green Projects', description: 'Environmental initiatives' },
+    { id: 'humanity', name: '❤️ GAiA Humanity Fund', description: 'Global humanitarian aid' }
   ]
 
   useEffect(() => {
@@ -96,11 +97,12 @@ export function EnhancedSwapSystem() {
   const calculateSwapAmount = () => {
     // Mock exchange rates - in production, this would fetch real rates
     const exchangeRates: { [key: string]: number } = {
-      'GAIA': 1,
+      'GAiA': 1,
       'BTC': 0.000023,
       'ETH': 0.00034,
       'USDC': 1.2,
-      'USDT': 1.19
+      'USDT': 1.19,
+      'GAIA': 0.98 // Legacy token at slightly lower rate
     }
 
     const rate = exchangeRates[swapData.toCurrency] / exchangeRates[swapData.fromCurrency]
@@ -115,7 +117,7 @@ export function EnhancedSwapSystem() {
 
   const executeSwap = async () => {
     if (!user) {
-      toast.error('Please login to perform swaps')
+      toast.error('Please login to perform GAiA swaps')
       return
     }
 
@@ -147,11 +149,12 @@ export function EnhancedSwapSystem() {
           swap_to_currency: swapData.toCurrency,
           swap_to_amount: toAmount,
           fee_destination: config.preferred_fee_destination,
-          transaction_subtype: 'swap'
+          transaction_subtype: 'swap',
+          wallet_address: connectedWalletAddress
         }
       })
 
-      toast.success('🎉 Swap Executed Successfully!', {
+      toast.success('🎉 GAiA Swap Executed Successfully!', {
         description: `Swapped ${swapData.fromAmount} ${swapData.fromCurrency} for ${toAmount.toFixed(6)} ${swapData.toCurrency}`,
         duration: 5000
       })
@@ -160,7 +163,7 @@ export function EnhancedSwapSystem() {
       setSwapData(prev => ({ ...prev, fromAmount: 0, toAmount: 0 }))
 
     } catch (error) {
-      toast.error('Swap failed')
+      toast.error('GAiA Swap failed')
       console.error('Swap error:', error)
     } finally {
       setLoading(false)
@@ -180,9 +183,9 @@ export function EnhancedSwapSystem() {
         updated_at: new Date().toISOString()
       })
 
-      toast.success('💎 Configuration Saved!')
+      toast.success('💎 GAiA Configuration Saved!')
     } catch (error) {
-      toast.error('Failed to save configuration')
+      toast.error('Failed to save GAiA configuration')
     }
   }
 
@@ -192,14 +195,20 @@ export function EnhancedSwapSystem() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-blue-400">
             <ArrowUpDown className="h-6 w-6" />
-            🔄 Enhanced Swap System - Choose Your Fee Destination
+            🔄 Enhanced GAiA Swap System - Choose Your Fee Destination
           </CardTitle>
+          <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 mt-2">
+            <p className="text-green-400 font-medium">Connected GAiA Wallet:</p>
+            <code className="text-green-300 font-mono text-xs break-all">
+              {connectedWalletAddress}
+            </code>
+          </div>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="swap" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="swap">Swap Tokens</TabsTrigger>
-              <TabsTrigger value="settings">Fee Settings</TabsTrigger>
+              <TabsTrigger value="swap">Swap GAiA Tokens</TabsTrigger>
+              <TabsTrigger value="settings">GAiA Fee Settings</TabsTrigger>
             </TabsList>
 
             <TabsContent value="swap" className="space-y-6">
@@ -213,7 +222,9 @@ export function EnhancedSwapSystem() {
                     </SelectTrigger>
                     <SelectContent>
                       {currencies.map(currency => (
-                        <SelectItem key={currency} value={currency}>{currency}</SelectItem>
+                        <SelectItem key={currency} value={currency}>
+                          {currency} {currency === 'GAiA' ? '🌍 (Primary)' : currency === 'GAIA' ? '🌿 (Legacy)' : ''}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -234,7 +245,9 @@ export function EnhancedSwapSystem() {
                     </SelectTrigger>
                     <SelectContent>
                       {currencies.map(currency => (
-                        <SelectItem key={currency} value={currency}>{currency}</SelectItem>
+                        <SelectItem key={currency} value={currency}>
+                          {currency} {currency === 'GAiA' ? '🌍 (Primary)' : currency === 'GAIA' ? '🌿 (Legacy)' : ''}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -251,7 +264,7 @@ export function EnhancedSwapSystem() {
               <Card className="border-purple-500/20">
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="font-medium">Transaction Fee:</span>
+                    <span className="font-medium">GAiA Transaction Fee:</span>
                     <Badge className={config.zero_fee_enabled ? 'bg-green-600' : 'bg-blue-600'}>
                       {config.zero_fee_enabled ? 'ZERO FEE' : `${calculateFee().toFixed(6)} ${swapData.fromCurrency}`}
                     </Badge>
@@ -269,7 +282,7 @@ export function EnhancedSwapSystem() {
                 disabled={loading || swapData.fromAmount <= 0}
                 className="w-full bg-blue-600 hover:bg-blue-700 h-12"
               >
-                {loading ? 'Processing Swap...' : 'Execute Swap'}
+                {loading ? 'Processing GAiA Swap...' : 'Execute GAiA Swap'}
               </Button>
             </TabsContent>
 
@@ -277,8 +290,8 @@ export function EnhancedSwapSystem() {
               {/* Zero Fee Option */}
               <div className="flex items-center justify-between p-4 rounded-lg bg-green-500/10 border border-green-500/20">
                 <div>
-                  <Label className="text-base font-medium text-green-400">Zero Fee Mode</Label>
-                  <p className="text-sm text-muted-foreground">Enable completely free transactions</p>
+                  <Label className="text-base font-medium text-green-400">GAiA Zero Fee Mode</Label>
+                  <p className="text-sm text-muted-foreground">Enable completely free GAiA transactions</p>
                 </div>
                 <Switch
                   checked={config.zero_fee_enabled}
@@ -290,7 +303,7 @@ export function EnhancedSwapSystem() {
                 <>
                   {/* Fee Percentage */}
                   <div className="space-y-2">
-                    <Label>Default Fee Percentage</Label>
+                    <Label>Default GAiA Fee Percentage</Label>
                     <div className="flex items-center gap-2">
                       <Input
                         type="number"
@@ -306,7 +319,7 @@ export function EnhancedSwapSystem() {
 
                   {/* Custom Fee Amount */}
                   <div className="space-y-2">
-                    <Label>Custom Fee Amount (Optional)</Label>
+                    <Label>Custom GAiA Fee Amount (Optional)</Label>
                     <Input
                       type="number"
                       step="0.000001"
@@ -318,7 +331,7 @@ export function EnhancedSwapSystem() {
 
                   {/* Fee Destination */}
                   <div className="space-y-2">
-                    <Label>Fee Destination</Label>
+                    <Label>GAiA Fee Destination</Label>
                     <Select
                       value={config.preferred_fee_destination}
                       onValueChange={(value) => setConfig({ ...config, preferred_fee_destination: value })}
@@ -339,7 +352,7 @@ export function EnhancedSwapSystem() {
               )}
 
               <Button onClick={saveConfig} className="w-full bg-purple-600 hover:bg-purple-700">
-                Save Configuration
+                Save GAiA Configuration
               </Button>
             </TabsContent>
           </Tabs>

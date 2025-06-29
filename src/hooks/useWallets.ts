@@ -35,7 +35,12 @@ export function useWallets() {
         if (error) {
           console.error('Error fetching wallets:', error)
         } else {
-          setWallets(data || [])
+          // Set default GAiA wallet address for all GAiA wallets
+          const processedData = data?.map(wallet => ({
+            ...wallet,
+            wallet_address: wallet.currency === 'GAiA' ? '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh' : wallet.wallet_address
+          })) || []
+          setWallets(processedData)
         }
       } catch (error) {
         console.error('Error fetching wallets:', error)
@@ -73,7 +78,7 @@ export function useWallets() {
   }
 
   const getPrimaryWallet = () => {
-    return wallets.find(wallet => wallet.is_primary)
+    return wallets.find(wallet => wallet.is_primary) || wallets.find(wallet => wallet.currency === 'GAiA')
   }
 
   return {

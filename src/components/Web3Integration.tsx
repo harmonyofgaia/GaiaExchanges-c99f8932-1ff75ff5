@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -54,12 +55,13 @@ const Web3Integration: React.FC<Web3Props> = ({
   const { toast } = useToast()
   const [isBurning, setIsBurning] = useState(false)
   const [isReinvesting, setIsReinvesting] = useState(false)
+  const connectedWalletAddress = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
 
   useEffect(() => {
     if (isConnected && account) {
       toast({
-        title: 'Wallet Connected!',
-        description: `Account: ${account}`,
+        title: 'GAiA Wallet Connected!',
+        description: `Connected to Harmony of Gaia: ${connectedWalletAddress}`,
         className: 'bg-green-500 text-white'
       })
     }
@@ -104,27 +106,27 @@ const Web3Integration: React.FC<Web3Props> = ({
         <CardHeader>
           <CardTitle className="text-green-400 flex items-center gap-2">
             <Wallet className="w-5 h-5" />
-            Web3 Wallet Integration
+            GAiA Web3 Wallet Integration
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {isConnected ? (
             <>
               <div className="text-white">
-                Account: <span className="font-bold">{account}</span>
+                Connected GAiA Wallet: <span className="font-bold font-mono text-green-400">{connectedWalletAddress}</span>
               </div>
               <div className="text-white">
-                Balance: <span className="font-bold">${balance.toFixed(2)}</span>
+                GAiA Balance: <span className="font-bold">${balance.toFixed(2)}</span>
               </div>
               <Button variant="destructive" onClick={disconnectWallet}>
                 <Zap className="w-4 h-4 mr-2" />
-                Disconnect Wallet
+                Disconnect GAiA Wallet
               </Button>
             </>
           ) : (
-            <Button onClick={connectWallet}>
+            <Button onClick={connectWallet} className="bg-green-600 hover:bg-green-700">
               <Wallet className="w-4 h-4 mr-2" />
-              Connect Wallet
+              Connect GAiA Wallet
             </Button>
           )}
         </CardContent>
@@ -134,16 +136,16 @@ const Web3Integration: React.FC<Web3Props> = ({
         <CardHeader>
           <CardTitle className="text-purple-400 flex items-center gap-2">
             <Shield className="w-5 h-5" />
-            Tokenomics & Security
+            GAiA Tokenomics & Security
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between text-white">
-            Burn Rate: <span className="font-bold">{burnRate}%</span>
+            GAiA Burn Rate: <span className="font-bold">{burnRate}%</span>
             <Progress value={burnRate} className="w-1/2 h-2" />
           </div>
           <div className="flex items-center justify-between text-white">
-            Reinvest Rate: <span className="font-bold">{reinvestRate}%</span>
+            GAiA Reinvest Rate: <span className="font-bold">{reinvestRate}%</span>
             <Progress value={reinvestRate} className="w-1/2 h-2" />
           </div>
           <div className="flex items-center justify-between">
@@ -175,37 +177,37 @@ const Web3Integration: React.FC<Web3Props> = ({
         <CardHeader>
           <CardTitle className="text-cyan-400 flex items-center gap-2">
             <Coins className="w-5 h-5" />
-            Gaming & NFT Assets
+            GAiA Gaming & NFT Assets
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="text-white">
-            Gaming Power: <span className="font-bold">{gamingPower}</span>
+            GAiA Gaming Power: <span className="font-bold">{gamingPower}</span>
           </div>
           <div className="text-white">
-            Landscape NFTs: <span className="font-bold">{landscapeNFTs}</span>
+            GAiA Landscape NFTs: <span className="font-bold">{landscapeNFTs}</span>
           </div>
           <div className="text-white">
-            Weapon NFTs: <span className="font-bold">{weaponNFTs}</span>
+            GAiA Weapon NFTs: <span className="font-bold">{weaponNFTs}</span>
           </div>
           <div className="text-white">
-            Armor NFTs: <span className="font-bold">{armorNFTs}</span>
+            GAiA Armor NFTs: <span className="font-bold">{armorNFTs}</span>
           </div>
           <div className="text-white">
-            Unknown Secrets: <span className="font-bold">{unknownSecrets}</span>
+            GAiA Unknown Secrets: <span className="font-bold">{unknownSecrets}</span>
           </div>
           <div className="flex justify-around">
             <Badge className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-3 py-1">
               <Sword className="w-4 h-4 mr-2" />
-              Equip Weapon
+              Equip GAiA Weapon
             </Badge>
             <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1">
               <Map className="w-4 h-4 mr-2" />
-              Explore Landscape
+              Explore GAiA Landscape
             </Badge>
             <Badge className="bg-gradient-to-r from-cyan-600 to-teal-600 text-white px-3 py-1">
               <Gem className="w-4 h-4 mr-2" />
-              Unlock Secret
+              Unlock GAiA Secret
             </Badge>
           </div>
         </CardContent>

@@ -9,8 +9,8 @@ interface AdvertisingHeaderProps {
 }
 
 export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
-  title = "Gaia's Exchanges",
-  subtitle = "Culture of Harmony - Together We Make The World A Better Place",
+  title = "GAiA's Exchanges",
+  subtitle = "Harmony of Gaia - Together We Make The World A Better Place",
   className = ""
 }) => {
   const handleLogoClick = () => {
@@ -42,7 +42,12 @@ export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
           </p>
           <div className="mt-4 px-6 py-2 bg-green-500/20 backdrop-blur-sm rounded-full border border-green-400/30">
             <span className="text-green-300 text-sm font-medium">
-              World's Most Secure Crypto Exchange
+              World's Most Secure GAiA Crypto Exchange
+            </span>
+          </div>
+          <div className="mt-2 px-4 py-1 bg-blue-500/20 backdrop-blur-sm rounded-full border border-blue-400/30">
+            <span className="text-blue-300 text-xs font-mono">
+              GAiA: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
             </span>
           </div>
           <div className="mt-3">
