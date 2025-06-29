@@ -1,5 +1,3 @@
-
-
 export const GAIA_TOKEN = {
   SYMBOL: 'GAiA',
   NAME: 'Harmony of Gaia Token',
@@ -18,9 +16,14 @@ export const GAIA_METRICS = {
   INITIAL_HOLDERS: 1247,
   INITIAL_MARKET_CAP: 85750000,
   INITIAL_VOLUME: 8750000,
+  INITIAL_TRANSACTIONS: 15420,
   LIQUIDITY_POOL: 4250000,
   BURN_RATE: 5.5,
-  STAKING_APY: 12.8
+  STAKING_APY: 12.8,
+  SECURITY_SCORE: 99.8,
+  ECOSYSTEM_HEALTH: 95.7,
+  NETWORK_SPEED: 847,
+  DRAGON_POWER: 9999
 }
 
 // Allocation percentages for token burns and rewards
@@ -92,4 +95,3 @@ export const CORE_PRINCIPLES = {
     MASTERMIND_APPROACH: true
   }
 }
-
