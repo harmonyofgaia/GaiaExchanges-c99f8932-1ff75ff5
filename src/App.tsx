@@ -16,6 +16,7 @@ import SecureAdmin from '@/pages/SecureAdmin'
 import UltimateSecurity from '@/pages/UltimateSecurity'
 import SecureVault from '@/pages/SecureVault'
 import { SystemMonitor } from '@/components/SystemMonitor'
+import { SystemVerification } from '@/components/SystemVerification'
 
 const queryClient = new QueryClient()
 
@@ -57,6 +58,16 @@ function App() {
             <Route path="/securevault" element={
               <ProtectedRoute isAdminRoute={true}>
                 <SecureVault />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/system-verification" element={
+              <ProtectedRoute isAdminRoute={true}>
+                <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-cyan-900 p-6">
+                  <div className="container mx-auto">
+                    <SystemVerification />
+                  </div>
+                </div>
               </ProtectedRoute>
             } />
           </Routes>

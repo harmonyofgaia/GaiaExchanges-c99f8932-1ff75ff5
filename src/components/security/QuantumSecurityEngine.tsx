@@ -50,7 +50,7 @@ export function QuantumSecurityEngine() {
           event_type: 'QUANTUM_SECURITY_SCAN',
           event_description: `Quantum Security Engine: ${metrics.threatsBlocked} threats blocked, system integrity 100%`,
           severity: 'low',
-          ip_address: 'Quantum-Engine',
+          ip_address: '127.0.0.1', // Fixed: Use valid IP address format
           resolved: true
         })
       } catch (error) {
