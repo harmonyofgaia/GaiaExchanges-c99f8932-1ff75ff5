@@ -26,10 +26,11 @@ export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60 flex items-center justify-center">
         <div className="text-center px-4">
-          <div className="mb-4 cursor-pointer" onClick={handleLogoClick}>
+          <div className="mb-4">
             <GaiaLogo 
               size="lg" 
               variant="white-fade" 
+              onClick={handleLogoClick}
               className="mx-auto"
             />
           </div>
