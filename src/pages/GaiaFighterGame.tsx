@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Gamepad2, Zap, Shield, Trophy, Sparkles } from 'lucide-react'
-import { CommunityIllustrations } from '@/components/creative/CommunityIllustrations'
+import { GaiaFighterGameRestored } from '@/components/GaiaFighterGameRestored'
 
 const GaiaFighterGame = () => {
   return (
@@ -114,8 +114,8 @@ const GaiaFighterGame = () => {
           </Card>
         </div>
 
-        {/* Community Illustrations Section */}
-        <CommunityIllustrations />
+        {/* Enhanced Gaia Fighter Game */}
+        <GaiaFighterGameRestored />
       </div>
     </div>
   )

@@ -22,6 +22,7 @@ import LiveTracking from "./pages/LiveTracking";
 import Profile from "./pages/Profile";
 import Contact from "./pages/Contact";
 import Docs from "./pages/Docs";
+import Webshop from "./pages/Webshop";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
             <Route path="/profile" element={<Profile />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/docs" element={<Docs />} />
+            <Route path="/webshop" element={<Webshop />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
@@ -9,6 +8,8 @@ import { EnhancedArtworkCloud } from '@/components/creative/EnhancedArtworkCloud
 import { FeatureStatusChecker } from '@/components/admin/FeatureStatusChecker'
 import { MissingFeaturesChecker } from '@/components/admin/MissingFeaturesChecker'
 import { MasterArtworkGenerator } from '@/components/admin/MasterArtworkGenerator'
+import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
+import { WormsGameArena } from '@/components/WormsGameArena'
 
 const Admin = () => {
   return (
@@ -28,9 +29,12 @@ const Admin = () => {
 
         <AdminProtectedRoute>
           <Tabs defaultValue="neural-art" className="w-full">
-            <TabsList className="grid w-full grid-cols-7 bg-black/50 backdrop-blur-md border border-green-500/20">
+            <TabsList className="grid w-full grid-cols-8 bg-black/50 backdrop-blur-md border border-green-500/20">
               <TabsTrigger value="neural-art" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
                 🧠 Neural Art
+              </TabsTrigger>
+              <TabsTrigger value="gaming" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                🎮 Gaming NFTs
               </TabsTrigger>
               <TabsTrigger value="audit" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                 🔍 Feature Audit
@@ -54,6 +58,11 @@ const Admin = () => {
             
             <TabsContent value="neural-art" className="space-y-6 mt-6">
               <MasterArtworkGenerator />
+            </TabsContent>
+            
+            <TabsContent value="gaming" className="space-y-6 mt-6">
+              <GamingNFTMarketplace />
+              <WormsGameArena />
             </TabsContent>
             
             <TabsContent value="audit" className="space-y-6 mt-6">
