@@ -19,7 +19,8 @@ import {
   Atom,
   Sparkles,
   Eye,
-  Settings
+  Settings,
+  Trophy
 } from 'lucide-react'
 import { toast } from 'sonner'
 
