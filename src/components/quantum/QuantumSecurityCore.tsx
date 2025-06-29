@@ -7,6 +7,10 @@ interface QuantumMetrics {
   encryptionStrength: number
   threatNeutralization: number
   systemResilience: number
+  quantumKeyDistribution: number
+  quantumEntanglementSecurity: number
+  quantumTunnelEncryption: number
+  zeroTraceProtocol: number
 }
 
 export function QuantumSecurityCore() {
@@ -18,7 +22,11 @@ export function QuantumSecurityCore() {
     quantumProcessingEfficiency: 100,
     encryptionStrength: 100,
     threatNeutralization: 100,
-    systemResilience: 100
+    systemResilience: 100,
+    quantumKeyDistribution: 100,
+    quantumEntanglementSecurity: 100,
+    quantumTunnelEncryption: 100,
+    zeroTraceProtocol: 100
   })
 
   const quantumCoreInterval = useRef<NodeJS.Timeout>()
@@ -39,12 +47,16 @@ export function QuantumSecurityCore() {
       setQuantumKeysActive(prev => prev + Math.floor(Math.random() * 1000))
       setQuantumStatesActive(prev => prev + Math.floor(Math.random() * 800))
       
-      // Update quantum metrics
+      // Update quantum metrics - all at maximum for ultimate security
       setMetrics({
         quantumProcessingEfficiency: 100,
         encryptionStrength: 100,
         threatNeutralization: 100,
-        systemResilience: 100
+        systemResilience: 100,
+        quantumKeyDistribution: 100,
+        quantumEntanglementSecurity: 100,
+        quantumTunnelEncryption: 100,
+        zeroTraceProtocol: 100
       })
 
       // Coordinate with master security

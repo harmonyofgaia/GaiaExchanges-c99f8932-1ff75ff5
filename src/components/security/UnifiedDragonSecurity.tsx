@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react'
-import { Shield, Dragon, Zap, Lock, Eye, AlertTriangle } from 'lucide-react'
+import { Shield, Zap, Lock, Eye, AlertTriangle } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface DragonDefenseSystem {

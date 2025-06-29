@@ -1,7 +1,8 @@
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { QueryClient } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from '@/components/ui/toaster'
-import { Sonner } from '@/components/ui/sonner'
+import { Toaster as Sonner } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
@@ -9,16 +10,18 @@ import Home from '@/pages/Home'
 import About from '@/pages/About'
 import Contact from '@/pages/Contact'
 import Pricing from '@/pages/Pricing'
-import AuthPage from '@/components/auth/AuthPage'
+import { AuthPage } from '@/components/auth/AuthPage'
 import Admin from '@/pages/Admin'
 import SecureAdmin from '@/pages/SecureAdmin'
 import UltimateSecurity from '@/pages/UltimateSecurity'
 import SecureVault from '@/pages/SecureVault'
 import { SystemMonitor } from '@/components/SystemMonitor'
 
+const queryClient = new QueryClient()
+
 function App() {
   return (
-    <QueryClient>
+    <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -59,7 +62,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
-    </QueryClient>
+    </QueryClientProvider>
   )
 }
 
