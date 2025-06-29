@@ -8,13 +8,13 @@ import {
   Users
 } from 'lucide-react'
 import { GAIA_TOKEN } from '@/constants/gaia'
-import { ArtisticTitle } from './ArtisticTitle'
+import { EnhancedArtisticTitle } from './EnhancedArtisticTitle'
 
 export const HeroSection = () => {
   return (
     <div className="text-center mb-12 relative">
-      {/* New Artistic Title Component */}
-      <ArtisticTitle />
+      {/* Enhanced Artistic Title Component */}
+      <EnhancedArtisticTitle />
       
       <div className="relative mb-8">
         <div className="relative mb-8">

@@ -6,13 +6,15 @@ import { FeatureGrid } from '@/components/home/FeatureGrid'
 import { CommunityStats } from '@/components/home/CommunityStats'
 import { CallToAction } from '@/components/home/CallToAction'
 import { SecurityPreview } from '@/components/home/SecurityPreview'
-import { HomeBackground } from '@/components/home/HomeBackground'
+import { EnhancedHomeBackground } from '@/components/home/EnhancedHomeBackground'
+import { UniversalStyleController } from '@/components/admin/UniversalStyleController'
 
 const Home = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <HomeBackground />
+      <EnhancedHomeBackground />
       <RobotAdvertisement />
+      <UniversalStyleController />
       
       <div className="container mx-auto px-4 py-8 relative z-20">
         <HeroSection />
