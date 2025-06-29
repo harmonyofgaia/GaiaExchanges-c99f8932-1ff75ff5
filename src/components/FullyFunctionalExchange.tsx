@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -36,6 +35,9 @@ interface TradeHistory {
   timestamp: string
   fee: number
 }
+
+const GAIA_CONTRACT_ADDRESS = "t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump"
+const GAIA_WALLET_ADDRESS = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
 
 export function FullyFunctionalExchange() {
   const [gaiaPrice, setGaiaPrice] = useState(3.25)
@@ -191,24 +193,36 @@ export function FullyFunctionalExchange() {
 
   return (
     <div className="space-y-6">
-      {/* Exchange Header */}
-      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
-        <CardContent className="pt-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <GaiaLogo size="lg" variant="white-fade" />
-              <div>
-                <h2 className="text-2xl font-bold text-green-400">GAiA/USD Trading</h2>
-                <p className="text-sm text-muted-foreground">World's First Zero-Fee GAiA Exchange</p>
-                <div className="text-xs font-mono text-green-300 mt-1">
-                  Wallet: {connectedWalletAddress}
-                </div>
-              </div>
+      {/* Updated Header with Contract Info */}
+      <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-500/30">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-green-400">
+            <GaiaLogo size="md" />
+            GAiA Professional Exchange - Harmony of Culture
+          </CardTitle>
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 mt-2">
+            <div className="text-sm text-blue-400 space-y-1">
+              <div><strong>Contract:</strong> <code className="font-mono text-xs">{GAIA_CONTRACT_ADDRESS}</code></div>
+              <div><strong>Wallet:</strong> <code className="font-mono text-xs">{GAIA_WALLET_ADDRESS}</code></div>
             </div>
-            <div className="text-right">
-              <div className="text-3xl font-bold text-green-400">${gaiaPrice.toFixed(4)}</div>
-              <div className="text-sm text-green-300">+5.67% (24h)</div>
-            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-center gap-4">
+            <Button 
+              variant="outline"
+              onClick={() => window.open(`https://pump.fun/coin/${GAIA_CONTRACT_ADDRESS}`, '_blank')}
+            >
+              <ExternalLink className="h-4 w-4 mr-2" />
+              View on Pump.fun
+            </Button>
+            <Button 
+              variant="outline"
+              onClick={() => window.open(`https://dexscreener.com/solana/${GAIA_CONTRACT_ADDRESS}`, '_blank')}
+            >
+              <ExternalLink className="h-4 w-4 mr-2" />
+              View on DEXScreener
+            </Button>
           </div>
         </CardContent>
       </Card>

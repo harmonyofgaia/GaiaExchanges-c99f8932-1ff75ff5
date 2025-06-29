@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -26,11 +25,14 @@ const mockGaiaData: GaiaTokenData = {
   stakingRewards: 2500000,
   environmentalProjects: 47,
   holders: 12847,
-  price: 3.00,
-  marketCap: 257250000,
+  price: 3.25,
+  marketCap: 278687500,
   volume24h: 8750000,
-  priceChange24h: 5.67
+  priceChange24h: 8.47
 }
+
+const GAIA_CONTRACT_ADDRESS = "t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump"
+const GAIA_WALLET_ADDRESS = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
 
 export function GaiaTokenTracker() {
   const [gaiaData, setGaiaData] = useState<GaiaTokenData>(mockGaiaData)
@@ -75,15 +77,23 @@ export function GaiaTokenTracker() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Leaf className="h-6 w-6" />
-            GAiA Token Live Tracker - 100% Transparent
+            GAiA Token Live Tracker - Harmony of Culture - 100% Transparent
           </CardTitle>
-          <div className="flex items-center gap-4 text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-green-400">Live Updates Every 5 Seconds</span>
+          <div className="space-y-2">
+            <div className="flex items-center gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                <span className="text-green-400">Live Updates Every 5 Seconds</span>
+              </div>
+              <div className="text-muted-foreground">
+                Last Updated: {lastUpdate.toLocaleTimeString()}
+              </div>
             </div>
-            <div className="text-muted-foreground">
-              Last Updated: {lastUpdate.toLocaleTimeString()}
+            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+              <div className="text-sm text-blue-400 space-y-1">
+                <div><strong>Contract Address:</strong> <code className="font-mono">{GAIA_CONTRACT_ADDRESS}</code></div>
+                <div><strong>Official Wallet:</strong> <code className="font-mono">{GAIA_WALLET_ADDRESS}</code></div>
+              </div>
             </div>
           </div>
         </CardHeader>
@@ -117,7 +127,7 @@ export function GaiaTokenTracker() {
               {formatCurrency(gaiaData.marketCap)}
             </div>
             <div className="text-sm text-muted-foreground">
-              Rank: #1 Eco Token
+              Rank: #1 Harmony Token
             </div>
           </CardContent>
         </Card>
@@ -217,36 +227,48 @@ export function GaiaTokenTracker() {
         </Card>
       </div>
 
-      {/* External Links */}
+      {/* Updated External Links with Correct Contract */}
       <Card className="border-blue-500/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-blue-400" />
-            Official Links & Verification
+            Official GAiA Links & Verification
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Button variant="outline" className="justify-between h-auto p-4">
+            <Button 
+              variant="outline" 
+              className="justify-between h-auto p-4"
+              onClick={() => window.open(`https://pump.fun/coin/${GAIA_CONTRACT_ADDRESS}`, '_blank')}
+            >
               <div className="text-left">
                 <div className="font-semibold">Pump.fun Chart</div>
-                <div className="text-sm text-muted-foreground">Live trading data</div>
+                <div className="text-sm text-muted-foreground">Live GAiA trading data</div>
               </div>
               <ExternalLink className="h-4 w-4" />
             </Button>
             
-            <Button variant="outline" className="justify-between h-auto p-4">
+            <Button 
+              variant="outline" 
+              className="justify-between h-auto p-4"
+              onClick={() => window.open(`https://dexscreener.com/solana/${GAIA_CONTRACT_ADDRESS}`, '_blank')}
+            >
               <div className="text-left">
                 <div className="font-semibold">DEXScreener</div>
-                <div className="text-sm text-muted-foreground">Advanced analytics</div>
+                <div className="text-sm text-muted-foreground">Advanced GAiA analytics</div>
               </div>
               <ExternalLink className="h-4 w-4" />
             </Button>
             
-            <Button variant="outline" className="justify-between h-auto p-4">
+            <Button 
+              variant="outline" 
+              className="justify-between h-auto p-4"
+              onClick={() => window.open(`https://solscan.io/token/${GAIA_CONTRACT_ADDRESS}`, '_blank')}
+            >
               <div className="text-left">
                 <div className="font-semibold">Blockchain Explorer</div>
-                <div className="text-sm text-muted-foreground">Transaction history</div>
+                <div className="text-sm text-muted-foreground">GAiA transaction history</div>
               </div>
               <ExternalLink className="h-4 w-4" />
             </Button>

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -13,11 +12,14 @@ interface TradingData {
   change: number
 }
 
+const GAIA_CONTRACT_ADDRESS = "t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump"
+const GAIA_WALLET_ADDRESS = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
+
 export function TradingInterface() {
   const [tradingData, setTradingData] = useState<TradingData[]>([])
   const [currentPrice, setCurrentPrice] = useState(3.25)
   const [priceChange, setPriceChange] = useState(8.47)
-  const [volume24h, setVolume24h] = useState(12500000)
+  const [volume24h, setVolume24h] = useState(8750000)
 
   useEffect(() => {
     const generateTradingData = () => {
@@ -60,12 +62,25 @@ export function TradingInterface() {
 
   return (
     <div className="space-y-6">
+      {/* Updated Header with GAiA Contract Info */}
+      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
+        <CardHeader>
+          <CardTitle className="text-green-400">GAiA Trading Interface - Harmony of Culture</CardTitle>
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 mt-2">
+            <div className="text-sm text-blue-400 space-y-1">
+              <div><strong>Contract:</strong> <code className="font-mono text-xs">{GAIA_CONTRACT_ADDRESS}</code></div>
+              <div><strong>Wallet:</strong> <code className="font-mono text-xs">{GAIA_WALLET_ADDRESS}</code></div>
+            </div>
+          </div>
+        </CardHeader>
+      </Card>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">GAIA Price</p>
+                <p className="text-sm text-muted-foreground">GAiA Price</p>
                 <p className="text-3xl font-bold text-green-400">{formatCurrency(currentPrice)}</p>
                 <Badge className={`mt-2 ${priceChange >= 0 ? 'bg-green-600' : 'bg-red-600'} text-white`}>
                   {priceChange >= 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
@@ -114,7 +129,7 @@ export function TradingInterface() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <TrendingUp className="h-5 w-5" />
-            Live GAIA Trading Chart
+            Live GAiA Trading Chart - Harmony of Culture
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -147,18 +162,18 @@ export function TradingInterface() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="border-yellow-500/30">
           <CardHeader>
-            <CardTitle className="text-yellow-400">Quick Trade Actions</CardTitle>
+            <CardTitle className="text-yellow-400">Quick GAiA Trade Actions</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
-                Buy GAIA Token
+                Buy GAiA Token
               </Button>
               <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
-                Sell GAIA Token
+                Sell GAiA Token
               </Button>
               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                Swap Tokens
+                Swap GAiA Tokens
               </Button>
             </div>
           </CardContent>
@@ -166,21 +181,25 @@ export function TradingInterface() {
 
         <Card className="border-cyan-500/30">
           <CardHeader>
-            <CardTitle className="text-cyan-400">Market Information</CardTitle>
+            <CardTitle className="text-cyan-400">GAiA Market Information</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Market Cap:</span>
-                <span className="text-green-400 font-bold">{formatCurrency(currentPrice * 1000000)}</span>
+                <span className="text-green-400 font-bold">{formatCurrency(currentPrice * 85750000)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Total Supply:</span>
-                <span className="text-blue-400 font-bold">1,000,000 GAIA</span>
+                <span className="text-blue-400 font-bold">100,000,000 GAiA</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Circulating:</span>
-                <span className="text-purple-400 font-bold">750,000 GAIA</span>
+                <span className="text-purple-400 font-bold">85,750,000 GAiA</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Contract:</span>
+                <span className="text-orange-400 font-mono text-xs">{GAIA_CONTRACT_ADDRESS.slice(0, 20)}...</span>
               </div>
             </div>
           </CardContent>

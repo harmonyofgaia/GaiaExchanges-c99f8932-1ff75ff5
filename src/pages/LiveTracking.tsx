@@ -1,28 +1,28 @@
-
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { Activity, TrendingUp, Zap, Globe, Shield, DollarSign, Users } from 'lucide-react'
+import { Activity, TrendingUp, Zap, Globe, Shield, DollarSign, Users, ExternalLink } from 'lucide-react'
+
+const GAIA_CONTRACT_ADDRESS = "t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump"
+const GAIA_WALLET_ADDRESS = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
 
 const LiveTracking = () => {
   const [mounted, setMounted] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
   const [liveData, setLiveData] = useState({
     price: 3.25,
-    volume: 12500000,
+    volume: 8750000,
     users: 48750,
     transactions: 125000,
     health: 99.9,
     change: 8.47
   })
 
-  const connectedWalletAddress = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
-
   useEffect(() => {
     console.log('🌍 LiveTracking: Component mounting...')
-    console.log('🔗 Connected Wallet Address:', connectedWalletAddress)
+    console.log('🔗 Connected Wallet Address:', GAIA_WALLET_ADDRESS)
     setMounted(true)
     
     // Time update
@@ -79,22 +79,22 @@ const LiveTracking = () => {
   }
 
   return (
-    <div className="container mx-auto max-w-6xl">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
-          🌍 GAiA Live Tracking
+      <div className="text-center space-y-4">
+        <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+          🌍 GAiA Live Tracking - Harmony of Culture
         </h1>
-        <p className="text-lg text-gray-300 mb-4">
+        <p className="text-lg text-gray-300">
           Real-Time Performance Monitor
         </p>
         
-        {/* Connected Wallet Display */}
-        <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 mb-6">
+        {/* Updated Connected Wallet & Contract Display */}
+        <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-green-400 font-bold">Connected GAiA Wallet:</span>
             <Button 
-              onClick={() => navigator.clipboard.writeText(connectedWalletAddress)}
+              onClick={() => navigator.clipboard.writeText(GAIA_WALLET_ADDRESS)}
               variant="outline" 
               size="sm"
               className="border-green-500/30 text-green-400"
@@ -102,12 +102,27 @@ const LiveTracking = () => {
               Copy Address
             </Button>
           </div>
-          <code className="text-green-300 font-mono text-sm break-all block mt-2">
-            {connectedWalletAddress}
+          <code className="text-green-300 font-mono text-sm break-all block">
+            {GAIA_WALLET_ADDRESS}
+          </code>
+          
+          <div className="flex items-center justify-between mt-3">
+            <span className="text-blue-400 font-bold">GAiA Contract Address:</span>
+            <Button 
+              onClick={() => navigator.clipboard.writeText(GAIA_CONTRACT_ADDRESS)}
+              variant="outline" 
+              size="sm"
+              className="border-blue-500/30 text-blue-400"
+            >
+              Copy Contract
+            </Button>
+          </div>
+          <code className="text-blue-300 font-mono text-sm break-all block">
+            {GAIA_CONTRACT_ADDRESS}
           </code>
         </div>
         
-        <div className="flex justify-center items-center gap-4 mb-6">
+        <div className="flex justify-center items-center gap-4 flex-wrap">
           <Badge className="bg-green-500 animate-pulse text-white">
             <Activity className="h-4 w-4 mr-2" />
             Live Stream Active
@@ -115,6 +130,15 @@ const LiveTracking = () => {
           <Badge className="bg-blue-500 text-white">
             {currentTime.toLocaleTimeString()}
           </Badge>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => window.open(`https://pump.fun/coin/${GAIA_CONTRACT_ADDRESS}`, '_blank')}
+            className="border-purple-500/30 text-purple-400"
+          >
+            <ExternalLink className="h-3 w-3 mr-1" />
+            View on Pump.fun
+          </Button>
         </div>
       </div>
 

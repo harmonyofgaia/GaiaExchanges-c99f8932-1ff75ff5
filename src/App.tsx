@@ -1,69 +1,48 @@
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "@/components/auth/AuthProvider";
-import { GlobalErrorBoundary } from "@/components/GlobalErrorBoundary";
-import { PageSpecificBackground } from "@/components/ui/page-specific-background";
-import Index from "./pages/Index";
-import About from "./pages/About";
-import Wallet from "./pages/Wallet";
-import Markets from "./pages/Markets";
-import SmartContracts from "./pages/SmartContracts";
-import UltimateSecurity from "./pages/UltimateSecurity";
-import SystemStatus from "./pages/SystemStatus";
-import ComprehensiveStatus from "./pages/ComprehensiveStatus";
-import Downloads from "./pages/Downloads";
-import Marketing from "./pages/Marketing";
-import Reinvestments from "./pages/Reinvestments";
-import Transparency from "./pages/Transparency";
-import Admin from "./pages/Admin";
-import Gaming from "./pages/Gaming";
-import GaiaFighterGame from "./pages/GaiaFighterGame";
-import LiveTracking from "./pages/LiveTracking";
-import NotFound from "./pages/NotFound";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Toaster } from '@/components/ui/toaster'
+import { Toaster as Sonner } from '@/components/ui/sonner'
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { AppSidebar } from '@/components/AppSidebar'
+import { AuthProvider } from '@/components/auth/AuthProvider'
+import Index from '@/pages/Index'
+import SystemStatus from '@/pages/SystemStatus'
+import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
+import UltimateSecurity from '@/pages/UltimateSecurity'
+import LiveTracking from '@/pages/LiveTracking'
+import './App.css'
 
-const queryClient = new QueryClient();
+function App() {
+  console.log('✅ App component loaded - All routes should be available')
 
-const App = () => {
-  console.log("✅ App component loaded - LiveTracking route should be available at /live-tracking");
-  
   return (
-    <GlobalErrorBoundary>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <AuthProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <PageSpecificBackground />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/wallet" element={<Wallet />} />
-                <Route path="/markets" element={<Markets />} />
-                <Route path="/smart-contracts" element={<SmartContracts />} />
-                <Route path="/ultimate-security" element={<UltimateSecurity />} />
-                <Route path="/system-status" element={<SystemStatus />} />
-                <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
-                <Route path="/downloads" element={<Downloads />} />
-                <Route path="/marketing" element={<Marketing />} />
-                <Route path="/reinvestments" element={<Reinvestments />} />
-                <Route path="/transparency" element={<Transparency />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/gaming" element={<Gaming />} />
-                <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
-                <Route path="/live-tracking" element={<LiveTracking />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </AuthProvider>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </GlobalErrorBoundary>
-  );
-};
+    <AuthProvider>
+      <Router>
+        <SidebarProvider collapsedWidth={56}>
+          <div className="min-h-screen flex w-full bg-background">
+            <AppSidebar />
+            <div className="flex-1 flex flex-col">
+              <header className="h-12 flex items-center border-b px-4">
+                <SidebarTrigger />
+                <h1 className="ml-4 text-lg font-semibold text-green-400">GAiA Harmony Exchange</h1>
+              </header>
+              <main className="flex-1 p-6">
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/system-status" element={<SystemStatus />} />
+                  <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+                  <Route path="/ultimate-security" element={<UltimateSecurity />} />
+                  <Route path="/live-tracking" element={<LiveTracking />} />
+                </Routes>
+              </main>
+            </div>
+          </div>
+          <Toaster />
+          <Sonner />
+        </SidebarProvider>
+      </Router>
+    </AuthProvider>
+  )
+}
 
-export default App;
+export default App

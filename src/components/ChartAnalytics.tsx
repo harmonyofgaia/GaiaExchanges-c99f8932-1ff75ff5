@@ -22,19 +22,26 @@ interface CoinInfo {
   change24h: number
   volume: number
   marketCap: number
+  contractAddress?: string
+  walletAddress?: string
 }
 
+const GAIA_CONTRACT_ADDRESS = "t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump"
+const GAIA_WALLET_ADDRESS = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
+
 export function ChartAnalytics() {
-  const [searchCoin, setSearchCoin] = useState('GAIA')
+  const [searchCoin, setSearchCoin] = useState('GAiA')
   const [timeframe, setTimeframe] = useState('1H')
   const [chartData, setChartData] = useState<ChartData[]>([])
   const [coinInfo, setCoinInfo] = useState<CoinInfo>({
-    symbol: 'GAIA',
-    name: 'Gaia Token',
-    price: 3.00,
-    change24h: 5.67,
+    symbol: 'GAiA',
+    name: 'Harmony of Culture Token',
+    price: 3.25,
+    change24h: 8.47,
     volume: 8750000,
-    marketCap: 257250000
+    marketCap: 278687500,
+    contractAddress: GAIA_CONTRACT_ADDRESS,
+    walletAddress: GAIA_WALLET_ADDRESS
   })
   const [isLoading, setIsLoading] = useState(false)
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date())
@@ -139,16 +146,25 @@ export function ChartAnalytics() {
     
     setIsLoading(true)
     
-    // Simulate API call to fetch coin data
+    // Updated mock coins data with correct GAiA information
     setTimeout(() => {
       const mockCoins: { [key: string]: CoinInfo } = {
-        'GAIA': { symbol: 'GAIA', name: 'Gaia Token', price: 3.00, change24h: 5.67, volume: 8750000, marketCap: 257250000 },
+        'GAiA': { 
+          symbol: 'GAiA', 
+          name: 'Harmony of Culture Token', 
+          price: 3.25, 
+          change24h: 8.47, 
+          volume: 8750000, 
+          marketCap: 278687500,
+          contractAddress: GAIA_CONTRACT_ADDRESS,
+          walletAddress: GAIA_WALLET_ADDRESS
+        },
         'BTC': { symbol: 'BTC', name: 'Bitcoin', price: 43250.67, change24h: 2.34, volume: 15420000000, marketCap: 847000000000 },
         'ETH': { symbol: 'ETH', name: 'Ethereum', price: 2543.21, change24h: -1.87, volume: 8750000000, marketCap: 305000000000 },
         'ADA': { symbol: 'ADA', name: 'Cardano', price: 0.4234, change24h: 4.56, volume: 450000000, marketCap: 15000000000 }
       }
 
-      const coin = mockCoins[searchCoin.toUpperCase()] || mockCoins['GAIA']
+      const coin = mockCoins[searchCoin.toUpperCase()] || mockCoins['GAiA']
       setCoinInfo(coin)
       setIsLoading(false)
     }, 1000)
@@ -171,13 +187,19 @@ export function ChartAnalytics() {
 
   return (
     <div className="space-y-6">
-      {/* Search and Controls */}
+      {/* Updated Search and Controls */}
       <Card className="border-blue-500/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <BarChart3 className="h-5 w-5 text-blue-400" />
-            Advanced Chart Analytics
+            GAiA Advanced Chart Analytics - Harmony of Culture
           </CardTitle>
+          <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 mt-2">
+            <div className="text-sm text-green-400 space-y-1">
+              <div><strong>Contract:</strong> <code className="font-mono text-xs">{GAIA_CONTRACT_ADDRESS}</code></div>
+              <div><strong>Wallet:</strong> <code className="font-mono text-xs">{GAIA_WALLET_ADDRESS}</code></div>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col sm:flex-row gap-4">
@@ -214,12 +236,12 @@ export function ChartAnalytics() {
         </CardContent>
       </Card>
 
-      {/* Coin Information */}
+      {/* Updated Coin Information */}
       <Card className="border-green-500/20 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              {coinInfo.symbol === 'GAIA' && <GaiaLogo size="lg" />}
+              {coinInfo.symbol === 'GAiA' && <GaiaLogo size="lg" />}
               <div>
                 <h3 className="text-2xl font-bold">{coinInfo.name} ({coinInfo.symbol})</h3>
                 <div className="flex items-center gap-4 mt-2">
@@ -229,6 +251,12 @@ export function ChartAnalytics() {
                     {coinInfo.change24h > 0 ? '+' : ''}{coinInfo.change24h.toFixed(2)}%
                   </Badge>
                 </div>
+                {coinInfo.contractAddress && (
+                  <div className="mt-2 text-sm">
+                    <span className="text-muted-foreground">Contract: </span>
+                    <code className="text-blue-400 font-mono">{coinInfo.contractAddress}</code>
+                  </div>
+                )}
               </div>
             </div>
             
