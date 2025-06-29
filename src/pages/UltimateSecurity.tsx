@@ -7,7 +7,9 @@ import { WiFiNetworkProtection } from '@/components/security/WiFiNetworkProtecti
 import { AdvancedIPProtection } from '@/components/security/AdvancedIPProtection'
 import { UltimateSecurityOrchestrator } from '@/components/security/UltimateSecurityOrchestrator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+
 import { UltraFastDatabaseGuard } from '@/components/security/UltraFastDatabaseGuard'
+import { DragonSecurityDashboard } from '@/components/security/DragonSecurityDashboard'
 
 const UltimateSecurity = () => {
   return (
@@ -15,18 +17,21 @@ const UltimateSecurity = () => {
       <div className="container mx-auto px-4 py-6">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
-            ULTIMATE SECURITY FORTRESS
+            🐉 TRAINED DRAGON ULTIMATE SECURITY 🐉
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Exotically Dangerous Hard Defensive System - Always 2 Steps Ahead
+            Unbeatable Quantum Defense • Human + AI Power • Making World Safer
           </p>
           <p className="text-sm text-red-400 mt-2">
-            🔒 Waterclosed • Counter-Attack Ready • IP Banning • System Lockdown • Quantum-Resistant • WiFi Protected • IP Quantum Secured • Millisecond Evolution • Nanosecond Database Protection
+            🔒 Dragon Protected • ⚡ Quantum Evolution • 🌍 Worldwide IP Blocking • 👑 Admin Fortress • 💎 Holder Shield • 🧬 Immune System • 🔮 Github+Supabase Merged
           </p>
         </div>
 
-        <Tabs defaultValue="orchestrator" className="w-full">
-          <TabsList className="grid w-full grid-cols-9 bg-black/50 backdrop-blur-md border border-red-500/20">
+        <Tabs defaultValue="dragon-core" className="w-full">
+          <TabsList className="grid w-full grid-cols-10 bg-black/50 backdrop-blur-md border border-red-500/20">
+            <TabsTrigger value="dragon-core" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+              🐉 Dragon Core
+            </TabsTrigger>
             <TabsTrigger value="orchestrator" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
               👑 Master Control
             </TabsTrigger>
@@ -55,6 +60,10 @@ const UltimateSecurity = () => {
               🔑 Admin Recovery
             </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="dragon-core" className="space-y-6 mt-6">
+            <DragonSecurityDashboard />
+          </TabsContent>
           
           <TabsContent value="orchestrator" className="space-y-6 mt-6">
             <UltimateSecurityOrchestrator />
