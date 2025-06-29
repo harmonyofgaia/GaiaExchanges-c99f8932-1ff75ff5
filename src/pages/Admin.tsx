@@ -3,6 +3,7 @@ import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { ParabolicCommandCenter } from '@/components/admin/ParabolicCommandCenter'
 import { GlobalExchangeIntegration } from '@/components/marketing/GlobalExchangeIntegration'
 import { GlobalSatelliteSystem } from '@/components/intelligence/GlobalSatelliteSystem'
+import { SelfTrainingAnimal } from '@/components/security/SelfTrainingAnimal'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function Admin() {
@@ -20,7 +21,7 @@ export default function Admin() {
           </div>
           
           <Tabs defaultValue="command" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-black/50 backdrop-blur-md border border-purple-500/20">
+            <TabsList className="grid w-full grid-cols-4 bg-black/50 backdrop-blur-md border border-purple-500/20">
               <TabsTrigger value="command" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
                 👑 Parabolic Command
               </TabsTrigger>
@@ -29,6 +30,9 @@ export default function Admin() {
               </TabsTrigger>
               <TabsTrigger value="satellites" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
                 🛰️ Satellite Intelligence
+              </TabsTrigger>
+              <TabsTrigger value="training" className="data-[state=active]:bg-gold-500/20 data-[state=active]:text-gold-400">
+                🦁 Self-Training Engine
               </TabsTrigger>
             </TabsList>
             
@@ -42,6 +46,10 @@ export default function Admin() {
             
             <TabsContent value="satellites" className="space-y-6 mt-6">
               <GlobalSatelliteSystem />
+            </TabsContent>
+            
+            <TabsContent value="training" className="space-y-6 mt-6">
+              <SelfTrainingAnimal />
             </TabsContent>
           </Tabs>
         </div>
