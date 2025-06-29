@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Uncial+Antiqua&family=Old+English+Text+MT&family=Orbitron:wght@400;700;900&family=Exo+2:wght@400;700;900&family=Rajdhani:wght@400;700&family=Audiowide&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -94,7 +97,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Enhanced animations for abstract effects */
+/* Enhanced animations for abstract effects and new artistic styles */
 @keyframes matrix-fall {
   0% {
     transform: translateY(-100vh);
@@ -144,6 +147,77 @@
   }
 }
 
+/* New Enhanced Artistic Animations */
+@keyframes artistic-glow {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor,
+      0 0 40px currentColor;
+    filter: brightness(1);
+  }
+  50% {
+    text-shadow: 
+      0 0 20px currentColor,
+      0 0 40px currentColor,
+      0 0 60px currentColor,
+      0 0 80px currentColor;
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes gothic-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes particle-orbit {
+  0% {
+    transform: rotate(0deg) translateX(40px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(40px) rotate(-360deg);
+  }
+}
+
+@keyframes royal-entrance {
+  0% {
+    transform: scale(0.8) rotateY(-10deg);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  50% {
+    transform: scale(1.05) rotateY(5deg);
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+  100% {
+    transform: scale(1) rotateY(0deg);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+@keyframes quantum-breathe {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  33% {
+    transform: scale(1.1) rotate(2deg);
+    opacity: 1;
+  }
+  66% {
+    transform: scale(0.95) rotate(-1deg);
+    opacity: 0.9;
+  }
+}
+
 /* Custom utility classes */
 .matrix-fall {
   animation: matrix-fall 3s linear infinite;
@@ -162,6 +236,27 @@
   animation: glow-pulse 2s ease-in-out infinite;
 }
 
+.artistic-glow {
+  animation: artistic-glow 3s ease-in-out infinite;
+}
+
+.gothic-shimmer {
+  background-size: 200% auto;
+  animation: gothic-shimmer 3s linear infinite;
+}
+
+.particle-orbit {
+  animation: particle-orbit 8s linear infinite;
+}
+
+.royal-entrance {
+  animation: royal-entrance 2s ease-out forwards;
+}
+
+.quantum-breathe {
+  animation: quantum-breathe 4s ease-in-out infinite;
+}
+
 .bg-gradient-radial {
   background: radial-gradient(circle, var(--tw-gradient-stops));
 }
@@ -174,7 +269,7 @@
   transform: rotateX(12deg);
 }
 
-/* Abstract background textures */
+/* Enhanced abstract background textures */
 .texture-overlay {
   background-image: 
     radial-gradient(circle at 25% 25%, rgba(255,255,255,0.02) 1px, transparent 1px),
@@ -184,4 +279,33 @@
 
 .noise-overlay {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Gothic Typography Enhancements */
+.gothic-text {
+  font-family: 'Cinzel Decorative', 'Uncial Antiqua', 'Old English Text MT', serif;
+}
+
+.tech-text {
+  font-family: 'Orbitron', 'Exo 2', 'Rajdhani', 'Audiowide', monospace;
+}
+
+.artistic-text {
+  font-family: 'Cinzel', 'Playfair Display', serif;
+}
+
+/* Artistic Enhancement Classes */
+.golden-glow {
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)) drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
+}
+
+.emerald-glow {
+  filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.6)) drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
+}
+
+.royal-shadow {
+  text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(138, 43, 226, 0.6),
+    0 0 20px rgba(75, 0, 130, 0.4);
 }
