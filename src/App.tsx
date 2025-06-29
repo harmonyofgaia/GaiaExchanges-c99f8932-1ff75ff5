@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '@/pages/Home'
 import Docs from '@/pages/Docs'
@@ -32,6 +33,8 @@ import { Navbar } from '@/components/Navbar'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { PageSpecificBackground } from '@/components/ui/page-specific-background'
 import CompleteSystemHub from '@/pages/CompleteSystemHub'
+
+const queryClient = new QueryClient()
 
 function App() {
   return (

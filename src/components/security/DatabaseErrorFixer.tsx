@@ -21,7 +21,7 @@ export function DatabaseErrorFixer() {
         }
         
         // Create a proper logging function that handles IP validation
-        const logSecurityEvent = async (eventType: string, description: string, severity: string = 'low') => {
+        const logSecurityEvent = async (eventType: string, description: string, severity: 'low' | 'medium' | 'high' | 'maximum' = 'low') => {
           try {
             // Get real IP address
             const response = await fetch('https://api.ipify.org?format=json')

@@ -1,23 +1,8 @@
 
 import * as React from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-
-import { siteConfig } from '@/config/site'
+import { Link, useLocation } from 'react-router-dom'
 import { cn } from '@/lib/utils'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
-import { Icons } from '@/components/icons'
-import { MainNavItem } from '@/types'
-import { ModeToggle } from '@/components/mode-toggle'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -27,20 +12,28 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
+import { Gamepad2 } from 'lucide-react'
+
+interface MainNavItem {
+  title: string
+  href?: string
+  items?: MainNavItem[]
+  description?: string
+}
 
 interface MainNavProps {
   items?: MainNavItem[]
 }
 
 export function MainNav({ items }: MainNavProps) {
-  const pathname = usePathname()
+  const location = useLocation()
 
   return (
     <div className="flex gap-6 md:gap-10">
-      <Link href="/" className="flex items-center space-x-2">
-        <Icons.logo className="h-6 w-6" />
-        <span className="hidden font-bold sm:inline-block">
-          {siteConfig.name}
+      <Link to="/" className="flex items-center space-x-2">
+        <Gamepad2 className="h-6 w-6 text-green-400" />
+        <span className="hidden font-bold sm:inline-block text-green-400">
+          Harmony of Gaia
         </span>
       </Link>
       {items?.length ? (
@@ -50,12 +43,12 @@ export function MainNav({ items }: MainNavProps) {
               (item, i) =>
                 item.href ? (
                   <NavigationMenuItem key={i}>
-                    <Link href={item.href} legacyBehavior passHref>
+                    <Link to={item.href}>
                       <NavigationMenuLink
                         className={cn(
                           navigationMenuTriggerStyle(),
                           'data-[active]:text-foreground data-[active]:no-underline',
-                          pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
+                          location.pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
                         )}
                       >
                         {item.title}
@@ -72,13 +65,13 @@ export function MainNav({ items }: MainNavProps) {
                             <NavigationMenuLink asChild>
                               <Link
                                 className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                                href="/"
+                                to="/"
                               >
-                                <div className="mb-2 mt-4 text-lg font-medium">
-                                  {siteConfig.name}
+                                <div className="mb-2 mt-4 text-lg font-medium text-green-400">
+                                  Harmony of Gaia
                                 </div>
                                 <p className="text-sm leading-tight text-muted-foreground">
-                                  {siteConfig.description}
+                                  World's #1 Ecological Project & Exchange Platform
                                 </p>
                               </Link>
                             </NavigationMenuLink>
@@ -106,13 +99,16 @@ export function MainNav({ items }: MainNavProps) {
 }
 
 const ListItem = React.forwardRef<
-  React.ElementRef<'a'>,
-  React.ComponentPropsWithoutRef<'a'>
+  React.ElementRef<typeof Link>,
+  React.ComponentPropsWithoutRef<typeof Link> & {
+    title: string
+    children?: React.ReactNode
+  }
 >(({ className, title, children, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
-        <a
+        <Link
           ref={ref}
           className={cn(
             'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
@@ -124,7 +120,7 @@ const ListItem = React.forwardRef<
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
-        </a>
+        </Link>
       </NavigationMenuLink>
     </li>
   )
@@ -138,10 +134,14 @@ export function Navbar() {
         <MainNav items={[]} />
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
-            {/* Search or other nav items can go here */}
+            {/* Navigation items can go here */}
           </div>
           <nav className="flex items-center">
-            <ModeToggle />
+            <Link to="/complete-system-hub">
+              <Button variant="outline" size="sm" className="border-green-500/30 text-green-400 hover:bg-green-500/10">
+                System Hub
+              </Button>
+            </Link>
           </nav>
         </div>
       </div>
