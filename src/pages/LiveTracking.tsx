@@ -18,8 +18,11 @@ const LiveTracking = () => {
     change: 8.47
   })
 
+  const connectedWalletAddress = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
+
   useEffect(() => {
     console.log('🌍 LiveTracking: Component mounting...')
+    console.log('🔗 Connected Wallet Address:', connectedWalletAddress)
     setMounted(true)
     
     // Time update
@@ -39,7 +42,7 @@ const LiveTracking = () => {
       }))
     }, 3000)
 
-    console.log('✅ LiveTracking: All systems initialized')
+    console.log('✅ LiveTracking: All systems initialized with GAiA token')
 
     return () => {
       clearInterval(timeInterval)
@@ -69,7 +72,7 @@ const LiveTracking = () => {
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-400 mx-auto mb-4"></div>
-          <p className="text-lg text-green-400">Loading GAIA Live Tracking...</p>
+          <p className="text-lg text-green-400">Loading GAiA Live Tracking...</p>
         </div>
       </div>
     )
@@ -80,11 +83,29 @@ const LiveTracking = () => {
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
-          🌍 GAIA Live Tracking
+          🌍 GAiA Live Tracking
         </h1>
         <p className="text-lg text-gray-300 mb-4">
           Real-Time Performance Monitor
         </p>
+        
+        {/* Connected Wallet Display */}
+        <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 mb-6">
+          <div className="flex items-center justify-between">
+            <span className="text-green-400 font-bold">Connected GAiA Wallet:</span>
+            <Button 
+              onClick={() => navigator.clipboard.writeText(connectedWalletAddress)}
+              variant="outline" 
+              size="sm"
+              className="border-green-500/30 text-green-400"
+            >
+              Copy Address
+            </Button>
+          </div>
+          <code className="text-green-300 font-mono text-sm break-all block mt-2">
+            {connectedWalletAddress}
+          </code>
+        </div>
         
         <div className="flex justify-center items-center gap-4 mb-6">
           <Badge className="bg-green-500 animate-pulse text-white">
@@ -103,7 +124,7 @@ const LiveTracking = () => {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-400">GAIA Price</p>
+                <p className="text-sm text-gray-400">GAiA Price</p>
                 <p className="text-2xl font-bold text-green-400">{formatCurrency(liveData.price)}</p>
                 <Badge className={`mt-2 ${liveData.change >= 0 ? 'bg-green-600' : 'bg-red-600'} text-white text-xs`}>
                   {liveData.change >= 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingUp className="h-3 w-3 mr-1" />}
@@ -160,14 +181,14 @@ const LiveTracking = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Shield className="h-5 w-5" />
-            GAIA Ecosystem Status
+            GAiA Ecosystem Status
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center space-y-4">
             <h3 className="text-2xl font-bold text-green-400">🌍 ALL SYSTEMS OPERATIONAL</h3>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              GAIA ecosystem running at <span className="text-green-400 font-bold">peak performance</span>. 
+              GAiA ecosystem running at <span className="text-green-400 font-bold">peak performance</span>. 
               Network speed is <span className="text-blue-400 font-bold">10x faster</span> with 
               <span className="text-purple-400 font-bold"> 100% uptime</span>.
             </p>
@@ -201,25 +222,25 @@ const LiveTracking = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <Button 
               className="bg-green-600 hover:bg-green-700 text-white"
-              onClick={() => console.log('🔄 Data refreshed')}
+              onClick={() => console.log('🔄 GAiA Data refreshed')}
             >
               Refresh Data
             </Button>
             <Button 
               className="bg-blue-600 hover:bg-blue-700 text-white"
-              onClick={() => console.log('📊 Export initiated')}
+              onClick={() => console.log('📊 GAiA Export initiated')}
             >
               Export Report
             </Button>
             <Button 
               className="bg-purple-600 hover:bg-purple-700 text-white"
-              onClick={() => console.log('📈 Analytics opened')}
+              onClick={() => console.log('📈 GAiA Analytics opened')}
             >
               Advanced Analytics
             </Button>
             <Button 
               className="bg-yellow-600 hover:bg-yellow-700 text-white"
-              onClick={() => console.log('🔔 Alerts configured')}
+              onClick={() => console.log('🔔 GAiA Alerts configured')}
             >
               Configure Alerts
             </Button>

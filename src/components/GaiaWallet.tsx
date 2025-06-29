@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -22,8 +21,9 @@ export function GaiaWallet() {
   const [sendAmount, setSendAmount] = useState('')
   const [recipientAddress, setRecipientAddress] = useState('')
 
-  const gaiaWallet = wallets.find(w => w.currency === 'GAIA')
+  const gaiaWallet = wallets.find(w => w.currency === 'GAiA')
   const btcWallet = wallets.find(w => w.currency === 'BTC')
+  const connectedWalletAddress = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
   
   const formatGaia = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -145,13 +145,13 @@ export function GaiaWallet() {
           {/* Wallet Addresses */}
           <div className="bg-muted/30 rounded-lg p-4 space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">GAIA Wallet:</span>
-              <Button variant="outline" size="sm" onClick={() => navigator.clipboard.writeText(user?.id || '')}>
+              <span className="text-sm text-muted-foreground">GAiA Wallet:</span>
+              <Button variant="outline" size="sm" onClick={() => navigator.clipboard.writeText(connectedWalletAddress)}>
                 Copy
               </Button>
             </div>
             <code className="text-xs break-all text-green-400 font-mono block">
-              {gaiaWallet?.wallet_address || user?.id}
+              {connectedWalletAddress}
             </code>
             
             {btcWallet && (
@@ -309,14 +309,14 @@ export function GaiaWallet() {
                 <div className="space-y-2">
                   <p className="font-medium">Your GAiA Wallet Address</p>
                   <div className="bg-muted p-3 rounded-lg">
-                    <code className="text-sm break-all">{gaiaWallet?.wallet_address || user?.id}</code>
+                    <code className="text-sm break-all">{connectedWalletAddress}</code>
                   </div>
                 </div>
                 
                 <Button 
                   variant="outline" 
                   className="w-full"
-                  onClick={() => navigator.clipboard.writeText(gaiaWallet?.wallet_address || user?.id || '')}
+                  onClick={() => navigator.clipboard.writeText(connectedWalletAddress)}
                 >
                   Copy Address
                 </Button>
