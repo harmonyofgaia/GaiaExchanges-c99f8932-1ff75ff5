@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
 import { WorldwideDefenseMonitor } from '@/components/security/WorldwideDefenseMonitor'
+import { UltimateDefensiveBarrier } from '@/components/security/UltimateDefensiveBarrier'
 import { AdminOverview } from '@/components/admin/AdminOverview'
 import { SystemControlCenter } from '@/components/admin/SystemControlCenter'
 import { BrandClarificationManager } from '@/components/admin/BrandClarificationManager'
@@ -37,8 +38,11 @@ const Admin = () => {
 
         <AdminProtectedRoute>
           <AdminOnlyAccess>
-            <Tabs defaultValue="eye-recognition" className="w-full">
-              <TabsList className="grid w-full grid-cols-10 bg-black/50 backdrop-blur-md border border-green-500/20 text-xs">
+            <Tabs defaultValue="ultimate-barrier" className="w-full">
+              <TabsList className="grid w-full grid-cols-11 bg-black/50 backdrop-blur-md border border-green-500/20 text-xs">
+                <TabsTrigger value="ultimate-barrier" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                  🛡️ Ultimate Barrier
+                </TabsTrigger>
                 <TabsTrigger value="eye-recognition" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                   👁️ Eye Lock
                 </TabsTrigger>
@@ -70,6 +74,10 @@ const Admin = () => {
                   🛡️ System
                 </TabsTrigger>
               </TabsList>
+              
+              <TabsContent value="ultimate-barrier" className="space-y-6 mt-6">
+                <UltimateDefensiveBarrier />
+              </TabsContent>
               
               <TabsContent value="eye-recognition" className="space-y-6 mt-6">
                 <AdminEyeRecognition />
