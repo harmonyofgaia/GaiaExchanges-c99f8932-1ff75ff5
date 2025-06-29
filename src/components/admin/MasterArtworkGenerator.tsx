@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -46,24 +45,46 @@ export function MasterArtworkGenerator() {
   const intervalRef = useRef<NodeJS.Timeout>()
   const countdownRef = useRef<NodeJS.Timeout>()
 
-  // Base prompts inspired by user's uploaded nature images
+  // Enhanced base prompts inspired by user's uploaded artwork
   const basePrompts = [
-    "serene mountain landscape with crystal clear waters, harmony of nature",
-    "mystical forest with golden sunlight filtering through ancient trees",
-    "peaceful ocean waves meeting sandy shore at sunset",
-    "majestic mountain peaks reaching toward infinite sky",
-    "tranquil lake reflecting perfect mirror of surrounding wilderness",
-    "vibrant wildflower meadow dancing in gentle morning breeze",
-    "ethereal waterfall cascading through lush green paradise",
-    "cosmic night sky filled with brilliant stars above natural landscape"
+    // Based on atmospheric lighting scenes
+    "atmospheric green lighting with mysterious shadows, concert stage vibes, dramatic neon glow effects",
+    "purple and blue stage lighting creating ethereal atmosphere, silhouettes dancing in colorful beams",
+    "moody concert lighting with vibrant green and purple hues, atmospheric fog and dramatic shadows",
+    
+    // Based on architectural and nature scenes
+    "modern architectural stairway with turquoise and pink color palette, geometric clean lines",
+    "serene forest path through bare trees, natural lighting filtering through branches, peaceful wilderness",
+    
+    // Based on artistic compositions
+    "abstract fluid art with vibrant purple, pink and blue color flows, dreamy light effects",
+    "icy blue environment with person exploring frozen architecture, cool color temperature",
+    "mixed media collage with torn papers, red and metallic accents, textural artistic composition",
+    "dramatic black and white portrait with strong contrast, artistic lighting and shadows"
+  ]
+
+  // Reference images from user uploads for inspiration
+  const referenceImages = [
+    '/lovable-uploads/9f8183db-ec30-458e-b2ad-e8aadb73b9f8.png', // Green concert lighting
+    '/lovable-uploads/055bf9a1-d1cb-4664-956e-2ebc637b3711.png', // Turquoise stairway
+    '/lovable-uploads/4d3fb9fd-3758-4918-bb28-ca09e37d05f7.png', // Forest path
+    '/lovable-uploads/4076769c-cfd7-4713-a683-f24b2159c886.png', // Purple stage lights
+    '/lovable-uploads/3a38a38c-956c-4f89-9ec7-1286c72a7e6d.png', // Blue ice environment
+    '/lovable-uploads/fd5f65f4-4505-4265-95e4-ee83584267e5.png', // Mixed media collage
+    '/lovable-uploads/43b95089-a7f3-4b44-be43-628cf82e4dba.png', // B&W portrait
+    '/lovable-uploads/e10577c9-3490-48bb-ae51-138abf0a30fd.png'  // Concert atmosphere
   ]
 
   const artworkTypes = [
     { value: 'abstract', label: '🎨 Abstract Fusion' },
+    { value: 'atmospheric', label: '🌫️ Atmospheric Lighting' },
     { value: 'nature_fusion', label: '🌿 Nature Fusion' },
+    { value: 'architectural', label: '🏗️ Architectural Art' },
+    { value: 'concert_vibes', label: '🎵 Concert Atmosphere' },
     { value: 'cosmic', label: '🌌 Cosmic Art' },
     { value: 'geometric', label: '📐 Geometric' },
-    { value: 'fluid', label: '🌊 Fluid Art' }
+    { value: 'fluid', label: '🌊 Fluid Art' },
+    { value: 'mixed_media', label: '🖼️ Mixed Media' }
   ]
 
   useEffect(() => {
@@ -95,10 +116,32 @@ export function MasterArtworkGenerator() {
     }
   }
 
+  const startAutoGeneration = () => {
+    // Generate every 5 minutes
+    intervalRef.current = setInterval(() => {
+      if (autoGenerate) {
+        generateNewArtwork()
+      }
+    }, 300000) // 5 minutes
+
+    // Countdown timer
+    countdownRef.current = setInterval(() => {
+      setNextUpdateIn(prev => {
+        if (prev <= 1) {
+          return 300 // Reset to 5 minutes
+        }
+        return prev - 1
+      })
+    }, 1000)
+  }
+
   const generateNewArtwork = async () => {
     setIsGenerating(true)
     try {
       const randomPrompt = basePrompts[Math.floor(Math.random() * basePrompts.length)]
+      
+      // Enhanced prompt with reference to uploaded artwork styles
+      const enhancedPrompt = `${randomPrompt}, inspired by atmospheric concert lighting and artistic compositions, high quality digital art, vibrant colors, dramatic lighting effects, professional artwork`
       
       const response = await fetch('/functions/v1/generate-artwork', {
         method: 'POST',
@@ -106,9 +149,9 @@ export function MasterArtworkGenerator() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          basePrompt: randomPrompt,
+          basePrompt: enhancedPrompt,
           artworkType: selectedStyle,
-          style: 'masterpiece'
+          style: 'masterpiece_inspired_collection'
         })
       })
 
@@ -118,9 +161,9 @@ export function MasterArtworkGenerator() {
         // Add the new artwork to our local state
         const newArtwork: GeneratedArtwork = {
           id: result.artwork_id || `artwork-${Date.now()}`,
-          prompt: randomPrompt,
+          prompt: enhancedPrompt,
           artwork_type: selectedStyle,
-          style: 'masterpiece',
+          style: 'masterpiece_inspired_collection',
           image_data: result.image,
           generated_at: new Date().toISOString(),
           downloads: 0,
@@ -141,15 +184,15 @@ export function MasterArtworkGenerator() {
               artworkId: newArtwork.id,
               imageData: result.image,
               artworkType: selectedStyle,
-              prompt: randomPrompt
+              prompt: enhancedPrompt
             })
           })
 
           const cloudResult = await cloudResponse.json()
           
           if (cloudResult.success) {
-            toast.success('🎨 Artwork Saved to Cloud!', {
-              description: `Generated and sent to info@cultureofharmony.net with download link`,
+            toast.success('🎨 Artwork Created & Saved!', {
+              description: `Generated artwork inspired by your uploaded references and saved to cloud`,
               duration: 6000
             })
           }
@@ -160,8 +203,8 @@ export function MasterArtworkGenerator() {
           })
         }
         
-        toast.success('🎨 New Masterpiece Created!', {
-          description: `Abstract artwork generated with ${selectedStyle} style`,
+        toast.success('🎨 New Inspired Masterpiece Created!', {
+          description: `Abstract artwork generated with ${selectedStyle} style using your uploaded references`,
           duration: 4000
         })
       }
@@ -172,25 +215,6 @@ export function MasterArtworkGenerator() {
       })
     }
     setIsGenerating(false)
-  }
-
-  const startAutoGeneration = () => {
-    // Generate every 5 minutes
-    intervalRef.current = setInterval(() => {
-      if (autoGenerate) {
-        generateNewArtwork()
-      }
-    }, 300000) // 5 minutes
-
-    // Countdown timer
-    countdownRef.current = setInterval(() => {
-      setNextUpdateIn(prev => {
-        if (prev <= 1) {
-          return 300 // Reset to 5 minutes
-        }
-        return prev - 1
-      })
-    }, 1000)
   }
 
   const downloadArtwork = async (artwork: GeneratedArtwork) => {
@@ -235,13 +259,35 @@ export function MasterArtworkGenerator() {
                 Master Artwork Generator
               </div>
               <div className="text-sm font-normal text-purple-400">
-                AI-Powered Abstract Art Creation - Harmony of Gaia Collection
+                AI-Powered Art Creation - Inspired by Your Uploaded References
               </div>
             </div>
             <Sparkles className="h-6 w-6 text-pink-400 animate-bounce" />
           </CardTitle>
         </CardHeader>
         <CardContent>
+          {/* Reference Images Showcase */}
+          <div className="mb-6 p-4 bg-gradient-to-r from-green-900/20 to-blue-900/20 rounded-lg border border-green-500/30">
+            <h3 className="text-lg font-bold text-green-400 mb-3 flex items-center gap-2">
+              <ImageIcon className="h-5 w-5" />
+              Your Uploaded Reference Collection
+            </h3>
+            <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
+              {referenceImages.map((img, index) => (
+                <div key={index} className="aspect-square rounded-lg overflow-hidden border border-green-500/30">
+                  <img 
+                    src={img} 
+                    alt={`Reference ${index + 1}`} 
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-green-300 mt-2">
+              ✨ These images inspire the AI to create atmospheric lighting, concert vibes, nature scenes, and artistic compositions
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center space-y-2">
               <div className="text-3xl font-bold text-purple-400">{totalGenerated}</div>
@@ -310,7 +356,7 @@ export function MasterArtworkGenerator() {
             <div className="mb-6">
               <Progress value={75} className="h-3" />
               <p className="text-sm text-center mt-2 text-purple-300">
-                Creating abstract masterpiece with AI...
+                Creating artwork inspired by your uploaded references...
               </p>
             </div>
           )}
@@ -318,13 +364,55 @@ export function MasterArtworkGenerator() {
       </Card>
 
       <Tabs defaultValue="gallery" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="gallery">🎨 Gallery</TabsTrigger>
+          <TabsTrigger value="references">📸 References</TabsTrigger>
           <TabsTrigger value="3d-tools">🛠️ 3D Tools</TabsTrigger>
           <TabsTrigger value="animations">🎬 Animations</TabsTrigger>
           <TabsTrigger value="best">⭐ Best</TabsTrigger>
           <TabsTrigger value="analytics">📊 Analytics</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="references" className="space-y-4">
+          <Card className="border-2 border-green-500/50 bg-gradient-to-br from-green-900/20 to-blue-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <ImageIcon className="h-6 w-6" />
+                Your Uploaded Reference Artworks
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {referenceImages.map((img, index) => (
+                  <div key={index} className="bg-gradient-to-br from-green-900/10 to-blue-900/10 border border-green-500/20 rounded-lg overflow-hidden">
+                    <div className="aspect-square">
+                      <img 
+                        src={img} 
+                        alt={`Reference ${index + 1}`} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-3">
+                      <Badge className="mb-2 bg-green-600 text-white">
+                        Reference #{index + 1}
+                      </Badge>
+                      <p className="text-xs text-muted-foreground">
+                        {index < 3 ? 'Atmospheric Lighting' : 
+                         index < 5 ? 'Architectural & Nature' : 'Artistic Composition'}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 text-center">
+                <p className="text-sm text-green-300">
+                  🎨 These references inspire the AI to create similar atmospheric effects, 
+                  color palettes, and artistic styles in generated artworks.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
         <TabsContent value="gallery" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -18,13 +18,17 @@ serve(async (req) => {
     
     const hf = new HfInference(Deno.env.get('HUGGING_FACE_ACCESS_TOKEN'))
     
-    // Enhanced prompts for abstract artwork based on user's nature images
+    // Enhanced prompts for abstract artwork based on user's uploaded references
     const artPrompts = {
       abstract: `${basePrompt}, abstract digital art, vibrant colors, flowing patterns, geometric shapes, modern design, high quality, artistic masterpiece`,
-      nature_fusion: `${basePrompt}, nature-inspired abstract art, organic patterns, natural color palette, environmental harmony, flowing organic shapes`,
+      atmospheric: `${basePrompt}, atmospheric lighting effects, concert stage vibes, dramatic neon glow, purple and green lighting, ethereal mood, professional photography style`,
+      nature_fusion: `${basePrompt}, nature-inspired abstract art, organic patterns, natural color palette, environmental harmony, flowing organic shapes, forest atmosphere`,
+      architectural: `${basePrompt}, modern architectural art, geometric clean lines, turquoise and pink color palette, minimalist design, structural beauty`,
+      concert_vibes: `${basePrompt}, concert atmosphere art, stage lighting effects, vibrant neon colors, crowd silhouettes, musical energy, dynamic composition`,
       cosmic: `${basePrompt}, cosmic abstract art, space-inspired, nebula patterns, stellar colors, universe harmony, ethereal design`,
       geometric: `${basePrompt}, geometric abstract art, mathematical patterns, precise shapes, harmonious composition, modern minimalist`,
-      fluid: `${basePrompt}, fluid abstract art, liquid patterns, dynamic flow, color gradients, organic movement, artistic expression`
+      fluid: `${basePrompt}, fluid abstract art, liquid patterns, dynamic flow, color gradients, organic movement, artistic expression`,
+      mixed_media: `${basePrompt}, mixed media collage art, textural elements, torn papers, metallic accents, layered composition, artistic depth`
     }
 
     const selectedPrompt = artPrompts[artworkType] || artPrompts.abstract
