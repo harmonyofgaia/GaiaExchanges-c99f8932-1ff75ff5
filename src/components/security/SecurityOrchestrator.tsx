@@ -1,6 +1,5 @@
 
 import { useState, useEffect, useRef } from 'react'
-import { InvestorScoutingSystem } from './InvestorScoutingSystem'
 
 interface InvestorLead {
   id: string
@@ -12,11 +11,45 @@ interface InvestorLead {
   contactMethod: string
   dragonAttraction: number
   timestamp: Date
+  platform: string
+  profile: string
+  priority: 'high' | 'medium' | 'low'
+}
+
+interface SecurityLayer {
+  id: string
+  name: string
+  status: 'active' | 'inactive'
+  threatLevel: number
+  lastCheck: Date
 }
 
 export function SecurityOrchestrator() {
   const [investorLeads, setInvestorLeads] = useState<InvestorLead[]>([])
   const [unbreakableDefense, setUnbreakableDefense] = useState(true)
+  const [securityLayers, setSecurityLayers] = useState<SecurityLayer[]>([
+    {
+      id: 'quantum-shield',
+      name: 'Quantum Shield Layer',
+      status: 'active',
+      threatLevel: 0,
+      lastCheck: new Date()
+    },
+    {
+      id: 'dragon-core',
+      name: 'Dragon Core Protection',
+      status: 'active',
+      threatLevel: 0,
+      lastCheck: new Date()
+    },
+    {
+      id: 'ip-fortress',
+      name: 'IP Fortress System',
+      status: 'active',
+      threatLevel: 0,
+      lastCheck: new Date()
+    }
+  ])
   const orchestratorInterval = useRef<NodeJS.Timeout>()
 
   useEffect(() => {
@@ -29,6 +62,10 @@ export function SecurityOrchestrator() {
       
       // Generate investor leads
       if (Math.random() < 0.1) {
+        const platforms = ['LinkedIn', 'AngelList', 'Crunchbase', 'Twitter', 'Discord']
+        const profiles = ['Venture Capital Fund', 'Angel Investor', 'Crypto Fund', 'Tech Investor', 'Strategic Partner']
+        const priorities: ('high' | 'medium' | 'low')[] = ['high', 'medium', 'low']
+        
         const newLead: InvestorLead = {
           id: `lead-${Date.now()}`,
           name: 'Quantum Ventures Fund',
@@ -38,11 +75,21 @@ export function SecurityOrchestrator() {
           specialization: 'Revolutionary Security Technology',
           contactMethod: 'Dragon Demonstration',
           dragonAttraction: Math.floor(Math.random() * 50) + 50,
-          timestamp: new Date()
+          timestamp: new Date(),
+          platform: platforms[Math.floor(Math.random() * platforms.length)],
+          profile: profiles[Math.floor(Math.random() * profiles.length)],
+          priority: priorities[Math.floor(Math.random() * priorities.length)]
         }
         
         setInvestorLeads(prev => [newLead, ...prev.slice(0, 9)])
       }
+
+      // Update security layers
+      setSecurityLayers(prev => prev.map(layer => ({
+        ...layer,
+        lastCheck: new Date(),
+        threatLevel: Math.max(0, layer.threatLevel - 0.1)
+      })))
     }
 
     orchestratorInterval.current = setInterval(runSecurityOrchestrator, 5000)
@@ -57,6 +104,7 @@ export function SecurityOrchestrator() {
     investorLeads,
     unbreakableDefense,
     securityCoordination: true,
-    investorAttraction: true
+    investorAttraction: true,
+    securityLayers
   }
 }

@@ -5,21 +5,23 @@ import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Activity, TrendingUp, Zap, Globe, Shield, Database } from 'lucide-react'
 
-interface TrackingMetrics {
+interface GaiaTrackingMetrics {
   realTimeTransactions: number
-  marketVolume: number
-  userEngagement: number
+  gaiaMarketVolume: number
+  gaiaHolders: number
   networkSpeed: number
   securityScore: number
   performanceMultiplier: number
   ecosystemHealth: number
   globalReach: number
+  gaiaPrice: number
+  gaiaMarketCap: number
 }
 
-interface LiveEvent {
+interface LiveGaiaEvent {
   id: string
   timestamp: Date
-  type: 'TRANSACTION' | 'TRADE' | 'USER_ACTION' | 'MARKET_UPDATE' | 'SECURITY_EVENT'
+  type: 'GAIA_TRANSACTION' | 'GAIA_TRADE' | 'HOLDER_ACTION' | 'GAIA_UPDATE' | 'SECURITY_EVENT'
   description: string
   value: number
   location: string
@@ -27,32 +29,34 @@ interface LiveEvent {
 }
 
 export function LiveTrackingEngine() {
-  const [metrics, setMetrics] = useState<TrackingMetrics>({
+  const [metrics, setMetrics] = useState<GaiaTrackingMetrics>({
     realTimeTransactions: 0,
-    marketVolume: 1250000000,
-    userEngagement: 98.7,
+    gaiaMarketVolume: 15000000,
+    gaiaHolders: 48750,
     networkSpeed: 1000,
     securityScore: 100,
     performanceMultiplier: 10,
     ecosystemHealth: 99.9,
-    globalReach: 195
+    globalReach: 195,
+    gaiaPrice: 0.0001,
+    gaiaMarketCap: 1500000000
   })
 
-  const [liveEvents, setLiveEvents] = useState<LiveEvent[]>([])
+  const [liveEvents, setLiveEvents] = useState<LiveGaiaEvent[]>([])
   const trackingInterval = useRef<NodeJS.Timeout>()
   const eventCounter = useRef(0)
 
   useEffect(() => {
-    const performLiveTracking = () => {
-      const eventTypes = ['TRANSACTION', 'TRADE', 'USER_ACTION', 'MARKET_UPDATE', 'SECURITY_EVENT'] as const
+    const performLiveGaiaTracking = () => {
+      const eventTypes = ['GAIA_TRANSACTION', 'GAIA_TRADE', 'HOLDER_ACTION', 'GAIA_UPDATE', 'SECURITY_EVENT'] as const
       const locations = ['New York', 'London', 'Tokyo', 'Singapore', 'Frankfurt', 'Sydney', 'Dubai']
       
-      const newEvent: LiveEvent = {
-        id: `track-${Date.now()}-${eventCounter.current++}`,
+      const newEvent: LiveGaiaEvent = {
+        id: `gaia-track-${Date.now()}-${eventCounter.current++}`,
         timestamp: new Date(),
         type: eventTypes[Math.floor(Math.random() * eventTypes.length)],
-        description: generateEventDescription(),
-        value: Math.random() * 1000000,
+        description: generateGaiaEventDescription(),
+        value: Math.random() * 100000,
         location: locations[Math.floor(Math.random() * locations.length)],
         performanceBoost: 10 + Math.random() * 5
       }
@@ -60,35 +64,37 @@ export function LiveTrackingEngine() {
       setLiveEvents(prev => [newEvent, ...prev.slice(0, 49)])
 
       setMetrics(prev => ({
-        realTimeTransactions: prev.realTimeTransactions + Math.floor(Math.random() * 100),
-        marketVolume: prev.marketVolume + (Math.random() * 1000000),
-        userEngagement: Math.min(99.9, prev.userEngagement + (Math.random() * 0.1)),
+        realTimeTransactions: prev.realTimeTransactions + Math.floor(Math.random() * 50),
+        gaiaMarketVolume: prev.gaiaMarketVolume + (Math.random() * 500000),
+        gaiaHolders: prev.gaiaHolders + Math.floor(Math.random() * 10),
         networkSpeed: 1000 + Math.floor(Math.random() * 500),
         securityScore: 100,
         performanceMultiplier: 10 + Math.random() * 2,
         ecosystemHealth: Math.min(99.9, prev.ecosystemHealth + (Math.random() * 0.1)),
-        globalReach: Math.min(195, prev.globalReach + Math.floor(Math.random() * 2))
+        globalReach: Math.min(195, prev.globalReach + Math.floor(Math.random() * 2)),
+        gaiaPrice: Math.max(0.00001, prev.gaiaPrice + (Math.random() - 0.5) * 0.000005),
+        gaiaMarketCap: Math.max(1000000, prev.gaiaMarketCap + (Math.random() - 0.5) * 10000000)
       }))
 
       console.log('🌍 GAIA ECOSYSTEM - Live tracking update:', newEvent)
     }
 
-    const generateEventDescription = () => {
+    const generateGaiaEventDescription = () => {
       const descriptions = [
-        'GAIA Token transaction processed with 10x speed optimization',
-        'Market volume increased - outperforming all competitors',
-        'User engagement boosted through Love & Joy protocol',
-        'Security scan completed - 100% threat-free environment',
-        'Global network expansion - new country connection established',
-        'Performance enhancement applied - 10x faster than market leaders',
-        'Ecosystem health improved - sustainable growth metrics',
-        'Real-time analytics updated - predictive AI engaged'
+        'GAiA Token transaction processed with 10x speed optimization',
+        'GAiA market volume increased - outperforming all competitors',
+        'New GAiA holder joined through Love & Joy protocol',
+        'GAiA security scan completed - 100% threat-free environment',
+        'GAiA global network expansion - new country connection established',
+        'GAiA performance enhancement applied - 10x faster than market leaders',
+        'GAiA ecosystem health improved - sustainable growth metrics',
+        'GAiA real-time analytics updated - predictive AI engaged'
       ]
       return descriptions[Math.floor(Math.random() * descriptions.length)]
     }
 
-    trackingInterval.current = setInterval(performLiveTracking, 100)
-    performLiveTracking()
+    trackingInterval.current = setInterval(performLiveGaiaTracking, 100)
+    performLiveGaiaTracking()
 
     return () => {
       if (trackingInterval.current) clearInterval(trackingInterval.current)
@@ -99,7 +105,9 @@ export function LiveTrackingEngine() {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      notation: 'compact'
+      notation: 'compact',
+      minimumFractionDigits: value < 0.001 ? 6 : 2,
+      maximumFractionDigits: value < 0.001 ? 6 : 2
     }).format(value)
   }
 
@@ -110,7 +118,7 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Live Transactions</p>
+                <p className="text-sm text-muted-foreground">GAiA Transactions</p>
                 <p className="text-2xl font-bold text-green-400">{metrics.realTimeTransactions.toLocaleString()}</p>
                 <Badge className="mt-1 bg-green-600 text-white text-xs">
                   {metrics.performanceMultiplier.toFixed(1)}x FASTER
@@ -125,8 +133,8 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Market Volume</p>
-                <p className="text-2xl font-bold text-blue-400">{formatCurrency(metrics.marketVolume)}</p>
+                <p className="text-sm text-muted-foreground">GAiA Market Volume</p>
+                <p className="text-2xl font-bold text-blue-400">{formatCurrency(metrics.gaiaMarketVolume)}</p>
                 <Badge className="mt-1 bg-blue-600 text-white text-xs">
                   DOMINATING MARKETS
                 </Badge>
@@ -140,10 +148,10 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Network Speed</p>
-                <p className="text-2xl font-bold text-purple-400">{metrics.networkSpeed}ms</p>
+                <p className="text-sm text-muted-foreground">GAiA Price</p>
+                <p className="text-2xl font-bold text-purple-400">{formatCurrency(metrics.gaiaPrice)}</p>
                 <Badge className="mt-1 bg-purple-600 text-white text-xs">
-                  WORLD'S FASTEST
+                  LIVE PRICE
                 </Badge>
               </div>
               <Zap className="h-8 w-8 text-purple-400" />
@@ -155,10 +163,10 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Global Reach</p>
-                <p className="text-2xl font-bold text-yellow-400">{metrics.globalReach}</p>
+                <p className="text-sm text-muted-foreground">GAiA Holders</p>
+                <p className="text-2xl font-bold text-yellow-400">{metrics.gaiaHolders.toLocaleString()}</p>
                 <Badge className="mt-1 bg-yellow-600 text-white text-xs">
-                  COUNTRIES ACTIVE
+                  GROWING COMMUNITY
                 </Badge>
               </div>
               <Globe className="h-8 w-8 text-yellow-400" />
@@ -205,7 +213,7 @@ export function LiveTrackingEngine() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-cyan-400">
             <Database className="h-5 w-5" />
-            Live Events Stream - Real-Time Global Activity
+            Live GAiA Events Stream - Real-Time Global Activity
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -243,14 +251,15 @@ export function LiveTrackingEngine() {
           <div className="text-center space-y-4">
             <h3 className="text-2xl font-bold text-yellow-400">🌍 GAIA ECOSYSTEM WORLD DOMINATION</h3>
             <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
-              Our system operates at <span className="text-green-400 font-bold">{metrics.performanceMultiplier.toFixed(1)}x faster</span> speeds 
+              Our GAiA system operates at <span className="text-green-400 font-bold">{metrics.performanceMultiplier.toFixed(1)}x faster</span> speeds 
               than any existing platform, with <span className="text-blue-400 font-bold">100% security</span> and 
               <span className="text-purple-400 font-bold"> zero downtime</span>. 
-              Powered by Love & Joy protocols, we're not just competing - we're revolutionizing the entire industry.
+              Current GAiA price: <span className="text-green-400 font-bold">{formatCurrency(metrics.gaiaPrice)}</span> | 
+              Market cap: <span className="text-purple-400 font-bold">{formatCurrency(metrics.gaiaMarketCap)}</span>
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-4">
               <Badge className="bg-green-600 text-white text-sm py-2 px-4">
-                💚 Love Protocol Active
+                💚 GAiA Love Protocol Active
               </Badge>
               <Badge className="bg-yellow-600 text-white text-sm py-2 px-4">
                 😊 Joy Network Engaged
@@ -259,7 +268,7 @@ export function LiveTrackingEngine() {
                 🚀 10x Performance Guaranteed
               </Badge>
               <Badge className="bg-purple-600 text-white text-sm py-2 px-4">
-                🌍 Global Ecosystem Leader
+                🌍 Global GAiA Leader
               </Badge>
             </div>
           </div>
@@ -270,10 +279,10 @@ export function LiveTrackingEngine() {
 
   function getEventBadgeColor(type: string) {
     switch (type) {
-      case 'TRANSACTION': return 'bg-green-600 text-white'
-      case 'TRADE': return 'bg-blue-600 text-white'
-      case 'USER_ACTION': return 'bg-purple-600 text-white'
-      case 'MARKET_UPDATE': return 'bg-yellow-600 text-white'
+      case 'GAIA_TRANSACTION': return 'bg-green-600 text-white'
+      case 'GAIA_TRADE': return 'bg-blue-600 text-white'
+      case 'HOLDER_ACTION': return 'bg-purple-600 text-white'
+      case 'GAIA_UPDATE': return 'bg-yellow-600 text-white'
       case 'SECURITY_EVENT': return 'bg-red-600 text-white'
       default: return 'bg-gray-600 text-white'
     }

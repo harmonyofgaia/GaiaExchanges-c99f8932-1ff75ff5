@@ -5,30 +5,30 @@ import { Badge } from '@/components/ui/badge'
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { TrendingUp, TrendingDown, Activity, Users, DollarSign, Zap } from 'lucide-react'
 
-interface ChartData {
+interface GaiaChartData {
   time: string
   price: number
   volume: number
-  users: number
+  holders: number
   transactions: number
   marketCap: number
   engagement: number
 }
 
 export function LiveChartsGrid() {
-  const [chartData, setChartData] = useState<ChartData[]>([])
-  const [currentMetrics, setCurrentMetrics] = useState({
-    price: 3.25,
-    volume: 12500000,
-    users: 48750,
-    transactions: 125000,
-    marketCap: 278500000,
-    change24h: 8.47
+  const [chartData, setChartData] = useState<GaiaChartData[]>([])
+  const [currentGaiaMetrics, setCurrentGaiaMetrics] = useState({
+    price: 0.0001,
+    volume: 15000000,
+    holders: 48750,
+    transactions: 2750000,
+    marketCap: 1500000000,
+    change24h: 125.47
   })
 
-  // Generate live data every 2 seconds
+  // Generate live GAiA data every 2 seconds
   useEffect(() => {
-    const generateData = () => {
+    const generateGaiaData = () => {
       const now = new Date()
       const timeStr = now.toLocaleTimeString('en-US', { 
         hour12: false, 
@@ -37,63 +37,65 @@ export function LiveChartsGrid() {
         second: '2-digit' 
       })
       
-      const newDataPoint: ChartData = {
+      const newDataPoint: GaiaChartData = {
         time: timeStr,
-        price: currentMetrics.price * (1 + (Math.random() - 0.5) * 0.02),
-        volume: currentMetrics.volume * (1 + (Math.random() - 0.5) * 0.1),
-        users: currentMetrics.users + Math.floor(Math.random() * 100),
-        transactions: currentMetrics.transactions + Math.floor(Math.random() * 500),
-        marketCap: currentMetrics.marketCap * (1 + (Math.random() - 0.5) * 0.02),
+        price: Math.max(0.00001, currentGaiaMetrics.price * (1 + (Math.random() - 0.4) * 0.02)),
+        volume: currentGaiaMetrics.volume * (1 + (Math.random() - 0.5) * 0.1),
+        holders: currentGaiaMetrics.holders + Math.floor(Math.random() * 50),
+        transactions: currentGaiaMetrics.transactions + Math.floor(Math.random() * 100),
+        marketCap: Math.max(1000000, currentGaiaMetrics.marketCap * (1 + (Math.random() - 0.5) * 0.02)),
         engagement: 85 + Math.random() * 15
       }
 
       setChartData(prev => [...prev.slice(-19), newDataPoint])
       
-      // Update current metrics
-      setCurrentMetrics(prev => ({
+      // Update current GAiA metrics
+      setCurrentGaiaMetrics(prev => ({
         ...prev,
         price: newDataPoint.price,
         volume: newDataPoint.volume,
-        users: newDataPoint.users,
+        holders: newDataPoint.holders,
         transactions: newDataPoint.transactions,
         marketCap: newDataPoint.marketCap,
-        change24h: prev.change24h + (Math.random() - 0.5) * 0.5
+        change24h: prev.change24h + (Math.random() - 0.5) * 2
       }))
     }
 
-    generateData() // Initial data
-    const interval = setInterval(generateData, 2000)
+    generateGaiaData() // Initial data
+    const interval = setInterval(generateGaiaData, 2000)
     return () => clearInterval(interval)
-  }, [currentMetrics.price, currentMetrics.volume, currentMetrics.users, currentMetrics.transactions, currentMetrics.marketCap])
+  }, [currentGaiaMetrics.price, currentGaiaMetrics.volume, currentGaiaMetrics.holders, currentGaiaMetrics.transactions, currentGaiaMetrics.marketCap])
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      notation: 'compact'
+      notation: 'compact',
+      minimumFractionDigits: value < 0.001 ? 6 : 2,
+      maximumFractionDigits: value < 0.001 ? 6 : 2
     }).format(value)
   }
 
   const pieData = [
-    { name: 'Active Users', value: 45, color: '#22c55e' },
-    { name: 'Trading Volume', value: 30, color: '#3b82f6' },
-    { name: 'Market Activity', value: 15, color: '#f59e0b' },
-    { name: 'Network Usage', value: 10, color: '#8b5cf6' }
+    { name: 'GAiA Holders', value: 45, color: '#22c55e' },
+    { name: 'GAiA Trading Volume', value: 30, color: '#3b82f6' },
+    { name: 'GAiA Market Activity', value: 15, color: '#f59e0b' },
+    { name: 'GAiA Network Usage', value: 10, color: '#8b5cf6' }
   ]
 
   return (
     <div className="space-y-6">
-      {/* Live Metrics Overview */}
+      {/* Live GAiA Metrics Overview */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-muted-foreground">GAIA Price</p>
-                <p className="text-lg font-bold text-green-400">{formatCurrency(currentMetrics.price)}</p>
-                <Badge className={`text-xs ${currentMetrics.change24h >= 0 ? 'bg-green-600' : 'bg-red-600'} text-white`}>
-                  {currentMetrics.change24h >= 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
-                  {currentMetrics.change24h.toFixed(2)}%
+                <p className="text-lg font-bold text-green-400">{formatCurrency(currentGaiaMetrics.price)}</p>
+                <Badge className={`text-xs ${currentGaiaMetrics.change24h >= 0 ? 'bg-green-600' : 'bg-red-600'} text-white`}>
+                  {currentGaiaMetrics.change24h >= 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
+                  {currentGaiaMetrics.change24h.toFixed(2)}%
                 </Badge>
               </div>
               <DollarSign className="h-6 w-6 text-green-400" />
@@ -105,8 +107,8 @@ export function LiveChartsGrid() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-muted-foreground">Volume 24h</p>
-                <p className="text-lg font-bold text-blue-400">{formatCurrency(currentMetrics.volume)}</p>
+                <p className="text-xs text-muted-foreground">GAiA Volume 24h</p>
+                <p className="text-lg font-bold text-blue-400">{formatCurrency(currentGaiaMetrics.volume)}</p>
                 <Badge className="text-xs bg-blue-600 text-white">Live</Badge>
               </div>
               <Activity className="h-6 w-6 text-blue-400" />
@@ -118,9 +120,9 @@ export function LiveChartsGrid() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-muted-foreground">Active Users</p>
-                <p className="text-lg font-bold text-purple-400">{currentMetrics.users.toLocaleString()}</p>
-                <Badge className="text-xs bg-purple-600 text-white">Online</Badge>
+                <p className="text-xs text-muted-foreground">GAiA Holders</p>
+                <p className="text-lg font-bold text-purple-400">{currentGaiaMetrics.holders.toLocaleString()}</p>
+                <Badge className="text-xs bg-purple-600 text-white">Growing</Badge>
               </div>
               <Users className="h-6 w-6 text-purple-400" />
             </div>
@@ -131,8 +133,8 @@ export function LiveChartsGrid() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-muted-foreground">Transactions</p>
-                <p className="text-lg font-bold text-yellow-400">{currentMetrics.transactions.toLocaleString()}</p>
+                <p className="text-xs text-muted-foreground">GAiA Transactions</p>
+                <p className="text-lg font-bold text-yellow-400">{currentGaiaMetrics.transactions.toLocaleString()}</p>
                 <Badge className="text-xs bg-yellow-600 text-white">Real-time</Badge>
               </div>
               <Zap className="h-6 w-6 text-yellow-400" />
@@ -144,8 +146,8 @@ export function LiveChartsGrid() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-muted-foreground">Market Cap</p>
-                <p className="text-lg font-bold text-emerald-400">{formatCurrency(currentMetrics.marketCap)}</p>
+                <p className="text-xs text-muted-foreground">GAiA Market Cap</p>
+                <p className="text-lg font-bold text-emerald-400">{formatCurrency(currentGaiaMetrics.marketCap)}</p>
                 <Badge className="text-xs bg-emerald-600 text-white">Live</Badge>
               </div>
               <TrendingUp className="h-6 w-6 text-emerald-400" />
@@ -158,7 +160,7 @@ export function LiveChartsGrid() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-muted-foreground">Network Speed</p>
-                <p className="text-lg font-bold text-cyan-400">1.2s</p>
+                <p className="text-lg font-bold text-cyan-400">0.1s</p>
                 <Badge className="text-xs bg-cyan-600 text-white">10x Faster</Badge>
               </div>
               <Activity className="h-6 w-6 text-cyan-400" />
@@ -167,14 +169,14 @@ export function LiveChartsGrid() {
         </Card>
       </div>
 
-      {/* Live Charts Grid */}
+      {/* Live GAiA Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Price Chart */}
+        {/* GAiA Price Chart */}
         <Card className="border-green-500/30">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-green-400">
               <TrendingUp className="h-5 w-5" />
-              Live Price Chart - GAIA Token
+              Live GAiA Price Chart
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -204,12 +206,12 @@ export function LiveChartsGrid() {
           </CardContent>
         </Card>
 
-        {/* Volume Chart */}
+        {/* GAiA Volume Chart */}
         <Card className="border-blue-500/30">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-blue-400">
               <Activity className="h-5 w-5" />
-              Trading Volume (24h)
+              GAiA Trading Volume (24h)
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -244,12 +246,12 @@ export function LiveChartsGrid() {
           </CardContent>
         </Card>
 
-        {/* User Activity Chart */}
+        {/* GAiA Holder Activity Chart */}
         <Card className="border-purple-500/30">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-purple-400">
               <Users className="h-5 w-5" />
-              Active Users & Transactions
+              GAiA Holders & Transactions
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -267,20 +269,20 @@ export function LiveChartsGrid() {
                     }}
                   />
                   <Legend />
-                  <Bar dataKey="users" fill="#8b5cf6" name="Active Users" />
-                  <Bar dataKey="transactions" fill="#f59e0b" name="Transactions" />
+                  <Bar dataKey="holders" fill="#8b5cf6" name="GAiA Holders" />
+                  <Bar dataKey="transactions" fill="#f59e0b" name="GAiA Transactions" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
 
-        {/* Market Distribution */}
+        {/* GAiA Market Distribution */}
         <Card className="border-yellow-500/30">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-yellow-400">
               <Activity className="h-5 w-5" />
-              Market Activity Distribution
+              GAiA Market Activity Distribution
             </CardTitle>
           </CardHeader>
           <CardContent>
