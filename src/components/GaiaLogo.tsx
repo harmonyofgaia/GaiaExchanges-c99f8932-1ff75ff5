@@ -53,11 +53,11 @@ export const GaiaLogo: React.FC<GaiaLogoProps> = ({
       className={`${sizeClasses[size]} ${className} cursor-pointer hover:scale-105 transition-transform duration-300`}
       style={getLogoStyle()}
       onClick={handleClick}
-      title="Harmony of Gaia - GAiA Token"
+      title="Gaia of Harmony - GAiA Token"
     >
       <img 
-        src="/lovable-uploads/06c663c1-ac34-4329-adf2-b0eaef8b9d4d.png"
-        alt="GAiA Token - Harmony of Gaia Logo"
+        src="/lovable-uploads/cd880f33-2b91-4417-bb7b-8f80a79e1e58.png"
+        alt="Gaia of Harmony - GAiA Token Official Logo"
         className="w-full h-full object-contain drop-shadow-lg"
       />
     </div>
