@@ -22,6 +22,7 @@ import CoinCrafter from '@/pages/CoinCrafter'
 import Transparency from '@/pages/Transparency'
 import LandscapeBuilder from '@/pages/LandscapeBuilder'
 import GaiaFighterGame from '@/pages/GaiaFighterGame'
+import ArtistStreaming from '@/pages/ArtistStreaming'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from '@/components/ui/toaster'
 import { Toaster as Sonner } from '@/components/ui/sonner'
@@ -54,6 +55,7 @@ function App() {
               <Route path="/gaias-exchange" element={<GaiasExchange />} />
               <Route path="/gaming" element={<Gaming />} />
               <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
+              <Route path="/artist-streaming" element={<ArtistStreaming />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/contact" element={<Contact />} />

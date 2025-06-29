@@ -14,7 +14,9 @@ import {
   Flame,
   Star,
   Brain,
-  Lock
+  Lock,
+  Palette,
+  Music
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { EternalDragonDisplay } from '@/components/security/EternalDragonDisplay'
@@ -37,13 +39,13 @@ const Home = () => {
     {
       icon: <Gamepad2 className="h-8 w-8" />,
       title: "Gaming Arena",
-      description: "Epic battles with environmental warriors and GAIA rewards",
+      description: "Epic battles with environmental warriors and GAiA rewards",
       color: "from-purple-600 to-pink-600",
       link: "/gaming"
     },
     {
       icon: <TrendingUp className="h-8 w-8" />,
-      title: "GAIA Exchange",
+      title: "GAiA Exchange",
       description: "Trade with unbreakable dragon-powered security",
       color: "from-green-600 to-emerald-600",
       link: "/gaias-exchange"
@@ -51,23 +53,23 @@ const Home = () => {
     {
       icon: <Globe className="h-8 w-8" />,
       title: "Virtual World",
-      description: "Explore the infinite GAIA metaverse with live chat",
+      description: "Explore the infinite GAiA metaverse with live chat",
       color: "from-blue-600 to-cyan-600",
       link: "/virtual-world"
     },
     {
-      icon: <Brain className="h-8 w-8" />,
-      title: "AI Dragon Core",
-      description: "Advanced AI security that learns and adapts",
-      color: "from-cyan-600 to-blue-600",
-      link: "/ultimate-security"
+      icon: <Music className="h-8 w-8" />,
+      title: "Artist Streaming",
+      description: "Live shows, creative content, and fund allocation",
+      color: "from-pink-600 to-purple-600",
+      link: "/artist-streaming"
     },
     {
-      icon: <Lock className="h-8 w-8" />,
-      title: "Crypto Vault",
-      description: "Ultra-secure storage with quantum encryption",
-      color: "from-yellow-600 to-orange-600",
-      link: "/ultimate-security"
+      icon: <Palette className="h-8 w-8" />,
+      title: "Art Marketplace",
+      description: "Buy and sell exclusive art with token burning",
+      color: "from-cyan-600 to-blue-600",
+      link: "/markets"
     }
   ]
 
@@ -129,15 +131,15 @@ const Home = () => {
         <div className="text-center mb-12">
           <div className="mb-8">
             <h1 className="text-7xl font-bold bg-gradient-to-r from-red-400 via-purple-400 via-blue-400 to-green-400 bg-clip-text text-transparent mb-6 animate-pulse">
-              🐉 HARMONY OF GAIA 🐉
+              🐉 HARMONY OF GAiA 🐉
             </h1>
             <p className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 mb-8">
               Where Eternal Dragons Guard Digital Realms Forever
             </p>
             
-            {/* GAIA Token Display */}
+            {/* GAiA Token Display */}
             <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/30 rounded-lg p-6 max-w-4xl mx-auto mb-8">
-              <div className="text-2xl font-bold text-green-400 mb-2">🚀 POWERED BY GAIA TOKEN</div>
+              <div className="text-2xl font-bold text-green-400 mb-2">🚀 POWERED BY GAiA TOKEN</div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-green-400 font-semibold">Contract:</span>
@@ -294,13 +296,13 @@ const Home = () => {
               <Link to="/gaias-exchange">
                 <Button variant="outline" className="border-2 border-green-500 text-green-400 hover:bg-green-500/10 text-xl px-12 py-4">
                   <TrendingUp className="h-6 w-6 mr-2" />
-                  Trade GAIA Tokens
+                  Trade GAiA Tokens
                 </Button>
               </Link>
-              <Link to="/ultimate-security">
-                <Button className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-xl px-12 py-4">
-                  <Shield className="h-6 w-6 mr-2" />
-                  Dragon Security
+              <Link to="/artist-streaming">
+                <Button className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-xl px-12 py-4">
+                  <Music className="h-6 w-6 mr-2" />
+                  Artist Streaming
                 </Button>
               </Link>
             </div>
