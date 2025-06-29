@@ -113,7 +113,7 @@ export function TokenDataDisplay({ showFullDetails = false, autoRefresh = true }
             </div>
             <div>
               <div className="text-sm text-muted-foreground">Transactions</div>
-              <div className="text-lg font-bold">{tokenData.transactions.toLocaleString()}</div>
+              <div className="text-lg font-bold">{tokenData.transactions24h.toLocaleString()}</div>
             </div>
           </div>
         )}
