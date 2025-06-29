@@ -7,6 +7,7 @@ interface PageBackgroundConfig {
   style: 'classic' | 'plasma' | 'galaxy' | 'forest' | 'ocean' | 'fire' | 'ice' | 'void' | 'rainbow' | 'matrix'
   intensity: 'low' | 'medium' | 'high'
   useQuantum?: boolean
+  disableMouseInteraction?: boolean
 }
 
 const pageBackgrounds: Record<string, PageBackgroundConfig> = {
@@ -25,7 +26,7 @@ const pageBackgrounds: Record<string, PageBackgroundConfig> = {
   '/admin': { style: 'void', intensity: 'high', useQuantum: true },
   '/gaming': { style: 'fire', intensity: 'high' },
   '/gaia-fighter-game': { style: 'plasma', intensity: 'high' },
-  '/live-tracking': { style: 'matrix', intensity: 'medium' }
+  '/live-tracking': { style: 'matrix', intensity: 'low', disableMouseInteraction: true }
 }
 
 export function PageSpecificBackground() {
@@ -46,10 +47,21 @@ export function PageSpecificBackground() {
         />
       )}
       
-      {/* Enhanced visual layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/10 to-black/30" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.1)_0%,transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(59,130,246,0.1)_0%,transparent_50%)]" />
+      {/* Enhanced visual layers - reduced opacity for live-tracking */}
+      <div className={`absolute inset-0 bg-gradient-to-br from-transparent via-black/10 to-black/30 ${
+        config.disableMouseInteraction ? 'opacity-30' : ''
+      }`} />
+      <div className={`absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.1)_0%,transparent_50%)] ${
+        config.disableMouseInteraction ? 'opacity-20' : ''
+      }`} />
+      <div className={`absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(59,130,246,0.1)_0%,transparent_50%)] ${
+        config.disableMouseInteraction ? 'opacity-20' : ''
+      }`} />
+      
+      {/* Disable mouse attraction background for live-tracking */}
+      {config.disableMouseInteraction && (
+        <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
+      )}
     </div>
   )
 }
