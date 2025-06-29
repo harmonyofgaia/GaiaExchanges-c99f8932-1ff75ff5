@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
@@ -11,6 +12,9 @@ import { MasterArtworkGenerator } from '@/components/admin/MasterArtworkGenerato
 import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
 import { WormsGameArena } from '@/components/WormsGameArena'
 import { GameDevelopmentCloud } from '@/components/admin/GameDevelopmentCloud'
+import { UserManagementSystem } from '@/components/admin/UserManagementSystem'
+import { SecureConnectionManager } from '@/components/admin/SecureConnectionManager'
+import { QuantumBlockchainCore } from '@/components/quantum/QuantumBlockchainCore'
 
 const Admin = () => {
   return (
@@ -29,8 +33,17 @@ const Admin = () => {
         </div>
 
         <AdminProtectedRoute>
-          <Tabs defaultValue="game-cloud" className="w-full">
-            <TabsList className="grid w-full grid-cols-9 bg-black/50 backdrop-blur-md border border-green-500/20">
+          <Tabs defaultValue="user-management" className="w-full">
+            <TabsList className="grid w-full grid-cols-10 bg-black/50 backdrop-blur-md border border-green-500/20">
+              <TabsTrigger value="user-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+                👥 User Control
+              </TabsTrigger>
+              <TabsTrigger value="architek-blockchain" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                🔗 Architek Network
+              </TabsTrigger>
+              <TabsTrigger value="secure-connections" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+                🛡️ Secure Matrix
+              </TabsTrigger>
               <TabsTrigger value="game-cloud" className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400">
                 🎮 Game Cloud
               </TabsTrigger>
@@ -43,9 +56,6 @@ const Admin = () => {
               <TabsTrigger value="audit" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                 🔍 Feature Audit
               </TabsTrigger>
-              <TabsTrigger value="features" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-                ✅ Features
-              </TabsTrigger>
               <TabsTrigger value="system" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
                 🛡️ System
               </TabsTrigger>
@@ -55,10 +65,19 @@ const Admin = () => {
               <TabsTrigger value="hosting" className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-400">
                 🌐 Hosting
               </TabsTrigger>
-              <TabsTrigger value="artwork" className="data-[state=active]:bg-pink-500/20 data-[state=active]:text-pink-400">
-                🎨 Artwork Cloud
-              </TabsTrigger>
             </TabsList>
+            
+            <TabsContent value="user-management" className="space-y-6 mt-6">
+              <UserManagementSystem />
+            </TabsContent>
+            
+            <TabsContent value="architek-blockchain" className="space-y-6 mt-6">
+              <QuantumBlockchainCore />
+            </TabsContent>
+            
+            <TabsContent value="secure-connections" className="space-y-6 mt-6">
+              <SecureConnectionManager />
+            </TabsContent>
             
             <TabsContent value="game-cloud" className="space-y-6 mt-6">
               <GameDevelopmentCloud />
@@ -77,10 +96,6 @@ const Admin = () => {
               <MissingFeaturesChecker />
             </TabsContent>
             
-            <TabsContent value="features" className="space-y-6 mt-6">
-              <FeatureStatusChecker />
-            </TabsContent>
-            
             <TabsContent value="system" className="space-y-6 mt-6">
               <SystemControlCenter />
             </TabsContent>
@@ -91,10 +106,6 @@ const Admin = () => {
             
             <TabsContent value="hosting" className="space-y-6 mt-6">
               <WebsiteHostingManager />
-            </TabsContent>
-            
-            <TabsContent value="artwork" className="space-y-6 mt-6">
-              <EnhancedArtworkCloud />
             </TabsContent>
           </Tabs>
         </AdminProtectedRoute>

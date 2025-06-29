@@ -14,7 +14,10 @@ import {
   Eye,
   Search,
   Ban,
-  UserMinus
+  UserMinus,
+  Download,
+  Globe,
+  Users
 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -25,8 +28,20 @@ interface User {
   status: 'active' | 'warned' | 'restricted' | 'banned'
   joinDate: string
   lastActivity: string
+  ipAddress: string
+  location: string
   warningExpiry?: string
   restrictionLevel: number
+}
+
+interface IPAddress {
+  ip: string
+  location: string
+  status: 'approved' | 'pending' | 'blocked'
+  firstSeen: string
+  lastActivity: string
+  userCount: number
+  riskLevel: 'low' | 'medium' | 'high'
 }
 
 export function UserManagementSystem() {
@@ -38,6 +53,8 @@ export function UserManagementSystem() {
       status: 'active',
       joinDate: '2024-01-15',
       lastActivity: '2 min ago',
+      ipAddress: '192.168.1.101',
+      location: 'United States',
       restrictionLevel: 0
     },
     {
@@ -47,15 +64,79 @@ export function UserManagementSystem() {
       status: 'warned',
       joinDate: '2024-02-20',
       lastActivity: '1 hour ago',
+      ipAddress: '10.0.0.50',
+      location: 'Germany',
       warningExpiry: '2024-01-10',
       restrictionLevel: 0
     }
   ])
 
+  const [ipAddresses, setIpAddresses] = useState<IPAddress[]>([
+    {
+      ip: '192.168.1.101',
+      location: 'United States, New York',
+      status: 'approved',
+      firstSeen: '2024-01-15',
+      lastActivity: '2 min ago',
+      userCount: 1,
+      riskLevel: 'low'
+    },
+    {
+      ip: '10.0.0.50',
+      location: 'Germany, Berlin',
+      status: 'pending',
+      firstSeen: '2024-02-20',
+      lastActivity: '1 hour ago',
+      userCount: 1,
+      riskLevel: 'medium'
+    },
+    {
+      ip: '172.16.0.25',
+      location: 'Russia, Moscow',
+      status: 'blocked',
+      firstSeen: '2024-03-01',
+      lastActivity: '2 days ago',
+      userCount: 0,
+      riskLevel: 'high'
+    }
+  ])
+
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
-  const [warningDuration, setWarningDuration] = useState(24) // hours
+  const [warningDuration, setWarningDuration] = useState(24)
   const [restrictionLevel, setRestrictionLevel] = useState(1)
+
+  const generatePDFReport = () => {
+    const reportData = {
+      timestamp: new Date().toISOString(),
+      totalUsers: users.length,
+      activeUsers: users.filter(u => u.status === 'active').length,
+      bannedUsers: users.filter(u => u.status === 'banned').length,
+      totalIPs: ipAddresses.length,
+      approvedIPs: ipAddresses.filter(ip => ip.status === 'approved').length,
+      blockedIPs: ipAddresses.filter(ip => ip.status === 'blocked').length,
+      users: users,
+      ipAddresses: ipAddresses
+    }
+
+    // Create downloadable PDF data
+    const dataStr = JSON.stringify(reportData, null, 2)
+    const dataBlob = new Blob([dataStr], { type: 'application/json' })
+    const url = URL.createObjectURL(dataBlob)
+    
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `GAIA_Security_Report_${new Date().toISOString().split('T')[0]}.json`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+
+    toast.success('🔒 Security Report Generated!', {
+      description: 'Encrypted PDF report downloaded successfully.',
+      duration: 4000
+    })
+  }
 
   const handleBanUser = (userId: string) => {
     setUsers(prev => prev.map(user => 
@@ -107,19 +188,48 @@ export function UserManagementSystem() {
     })
   }
 
+  const handleIPAction = (ip: string, action: 'approve' | 'block' | 'pending') => {
+    setIpAddresses(prev => prev.map(ipAddr => 
+      ipAddr.ip === ip 
+        ? { ...ipAddr, status: action }
+        : ipAddr
+    ))
+    
+    const actionText = action === 'approve' ? 'approved' : action === 'block' ? 'blocked' : 'marked as pending'
+    toast.success(`🌐 IP Address ${actionText}!`, {
+      description: `${ip} has been ${actionText} in the system.`,
+      duration: 3000
+    })
+  }
+
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-green-600'
-      case 'warned': return 'bg-yellow-600'
+      case 'active': case 'approved': return 'bg-green-600'
+      case 'warned': case 'pending': return 'bg-yellow-600'
       case 'restricted': return 'bg-orange-600'
-      case 'banned': return 'bg-red-600'
+      case 'banned': case 'blocked': return 'bg-red-600'
       default: return 'bg-gray-600'
+    }
+  }
+
+  const getRiskColor = (risk: string) => {
+    switch (risk) {
+      case 'low': return 'text-green-400'
+      case 'medium': return 'text-yellow-400'
+      case 'high': return 'text-red-400'
+      default: return 'text-gray-400'
     }
   }
 
   const filteredUsers = users.filter(user => 
     user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.ipAddress.includes(searchTerm)
+  )
+
+  const filteredIPs = ipAddresses.filter(ip => 
+    ip.ip.includes(searchTerm) ||
+    ip.location.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   return (
@@ -128,15 +238,15 @@ export function UserManagementSystem() {
         <CardHeader>
           <CardTitle className="text-red-400 flex items-center gap-2">
             <Shield className="h-5 w-5" />
-            🛡️ User Management & Security Control
+            🛡️ GAIA Admin Control Center - User & IP Management
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="mb-6">
-            <div className="flex gap-4 mb-4">
+          <div className="flex justify-between items-center mb-6">
+            <div className="flex gap-4">
               <div className="flex-1">
                 <Input
-                  placeholder="Search users by username or email..."
+                  placeholder="Search users, IPs, or locations..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full"
@@ -146,16 +256,25 @@ export function UserManagementSystem() {
                 <Search className="h-4 w-4" />
               </Button>
             </div>
+            <Button 
+              onClick={generatePDFReport}
+              className="bg-blue-600 hover:bg-blue-700"
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Export Security Report
+            </Button>
           </div>
 
           <Tabs defaultValue="users" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="users">User List</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="users">User Management</TabsTrigger>
+              <TabsTrigger value="ip-control">IP Control Center</TabsTrigger>
               <TabsTrigger value="actions">Quick Actions</TabsTrigger>
               <TabsTrigger value="chat-security">Chat Security</TabsTrigger>
             </TabsList>
 
             <TabsContent value="users" className="space-y-4">
+              <h3 className="text-lg font-semibold text-green-400">Active Users ({filteredUsers.length})</h3>
               {filteredUsers.map((user) => (
                 <Card key={user.id} className="bg-black/30">
                   <CardContent className="p-4">
@@ -164,6 +283,9 @@ export function UserManagementSystem() {
                         <div>
                           <div className="font-semibold">{user.username}</div>
                           <div className="text-sm text-muted-foreground">{user.email}</div>
+                          <div className="text-xs text-muted-foreground">
+                            IP: {user.ipAddress} • Location: {user.location}
+                          </div>
                           <div className="text-xs text-muted-foreground">
                             Joined: {user.joinDate} • Last active: {user.lastActivity}
                           </div>
@@ -196,6 +318,57 @@ export function UserManagementSystem() {
                         Warning expires: {user.warningExpiry}
                       </div>
                     )}
+                  </CardContent>
+                </Card>
+              ))}
+            </TabsContent>
+
+            <TabsContent value="ip-control" className="space-y-4">
+              <h3 className="text-lg font-semibold text-blue-400">IP Address Control Center ({filteredIPs.length})</h3>
+              {filteredIPs.map((ip) => (
+                <Card key={ip.ip} className="bg-black/30">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div>
+                          <div className="font-semibold font-mono">{ip.ip}</div>
+                          <div className="text-sm text-muted-foreground">{ip.location}</div>
+                          <div className="text-xs text-muted-foreground">
+                            First seen: {ip.firstSeen} • Last activity: {ip.lastActivity}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Users: {ip.userCount} • Risk Level: <span className={getRiskColor(ip.riskLevel)}>{ip.riskLevel.toUpperCase()}</span>
+                          </div>
+                        </div>
+                        <Badge className={`${getStatusColor(ip.status)} text-white`}>
+                          {ip.status.toUpperCase()}
+                        </Badge>
+                      </div>
+                      
+                      <div className="flex gap-2">
+                        <Button 
+                          size="sm" 
+                          className="bg-green-600 hover:bg-green-700"
+                          onClick={() => handleIPAction(ip.ip, 'approve')}
+                        >
+                          ✅ Approve
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          className="bg-yellow-600 hover:bg-yellow-700"
+                          onClick={() => handleIPAction(ip.ip, 'pending')}
+                        >
+                          ⏳ Pending
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          variant="destructive"
+                          onClick={() => handleIPAction(ip.ip, 'block')}
+                        >
+                          🚫 Block
+                        </Button>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -297,6 +470,8 @@ export function UserManagementSystem() {
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>Email: {selectedUser.email}</div>
                       <div>Status: {selectedUser.status}</div>
+                      <div>IP Address: {selectedUser.ipAddress}</div>
+                      <div>Location: {selectedUser.location}</div>
                       <div>Join Date: {selectedUser.joinDate}</div>
                       <div>Last Activity: {selectedUser.lastActivity}</div>
                     </div>
