@@ -1,45 +1,36 @@
 
 export const GAIA_TOKEN = {
-  CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
-  WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
   SYMBOL: 'GAiA',
-  NAME: 'Harmony of Gaia',
-  DECIMALS: 9,
+  NAME: 'Harmony of Gaia Token',
+  WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+  CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
+  DECIMALS: 6,
+  INITIAL_PRICE: 0.000001,
+  TOTAL_SUPPLY: 1000000000000, // 1 trillion tokens
   NETWORK: 'Solana',
-  DESCRIPTION: 'The revolutionary token powering the Harmony of Gaia ecosystem with real environmental impact',
-  INITIAL_PRICE: 0.000125,
-  PUMP_FUN_URL: `https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump`
+  DESCRIPTION: 'Official Harmony of Gaia Token - Building a sustainable future through technology and environmental consciousness'
 }
 
-export const GAIA_METRICS = {
-  TOTAL_SUPPLY: 100000000,
-  CIRCULATING_SUPPLY: 85750000,
-  BURN_RATE: 3.5,
-  REINVEST_RATE: 4.2,
-  SECURITY_LEVEL: 98.7,
-  DRAGON_POWER: 150,
-  ENVIRONMENTAL_IMPACT: 97.8,
-  INITIAL_VOLUME: 8750000,
-  INITIAL_HOLDERS: 12450,
-  INITIAL_TRANSACTIONS: 45780,
-  INITIAL_MARKET_CAP: 278687500,
-  SECURITY_SCORE: 98.7,
-  ECOSYSTEM_HEALTH: 96.8,
-  NETWORK_SPEED: 2500
+// Allocation percentages for token burns and rewards
+export const ALLOCATION = {
+  CORAL_REEF_RESTORATION: 5, // 5% to coral reef restoration
+  PROJECT_REINVESTMENT: 90,  // 90% to project reinvestment
+  COMMUNITY_REWARDS: 10      // 10% to community rewards
 }
 
-export const formatGaiaPrice = (price: number): string => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 6,
-    maximumFractionDigits: 6
-  }).format(price)
+// Admin access levels
+export const ADMIN_LEVELS = {
+  BASIC: 'basic',
+  ADVANCED: 'advanced',
+  MASTER: 'master',
+  SUPREME: 'supreme'
 }
 
-export const formatGaiaNumber = (number: number): string => {
-  return new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(number)
+// Security configurations
+export const SECURITY_CONFIG = {
+  QUANTUM_PROTECTION: true,
+  MASTER_SECURITY: true,
+  THREAT_DETECTION: true,
+  AUTO_RESOLUTION: true,
+  HEAVENLY_FORTRESS_MODE: true
 }

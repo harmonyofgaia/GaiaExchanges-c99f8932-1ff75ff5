@@ -16,6 +16,7 @@ import CoinCrafter from '@/pages/CoinCrafter'
 import GaiaCoinCrafterPage from '@/pages/GaiaCoinCrafter'
 import LiveTracking from '@/pages/LiveTracking'
 import WalletPage from '@/pages/Wallet'
+import SystemStatus from '@/pages/SystemStatus'
 import { AuthPage } from '@/components/auth/AuthPage'
 import Admin from '@/pages/Admin'
 import SecureAdmin from '@/pages/SecureAdmin'
@@ -59,6 +60,13 @@ function App() {
               <Route path="/coin-crafter" element={<GaiaCoinCrafterPage />} />
               <Route path="/live-tracking" element={<LiveTracking />} />
               <Route path="/wallet" element={<WalletPage />} />
+              <Route path="/system-status" element={
+                <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
+                  <div className="container mx-auto px-4 py-8">
+                    <SystemStatus />
+                  </div>
+                </div>
+              } />
               <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
               <Route path="/immortal-security" element={<ImmortalSecurity />} />
               

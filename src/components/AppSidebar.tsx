@@ -1,5 +1,5 @@
 
-import { Calendar, Home, Inbox, Search, Settings, Shield, Activity, Download, BarChart3, Flame, Gamepad2, TreePine, Wrench, Wallet, Globe } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings, Shield, Activity, Download, BarChart3, Flame, Gamepad2, TreePine, Wrench, Wallet, Globe, Users, DollarSign } from "lucide-react"
 
 import {
   Sidebar,
@@ -13,10 +13,10 @@ import {
 } from "@/components/ui/sidebar"
 import { Link } from "react-router-dom"
 
-// Menu items.
+// Menu items with complete routing coverage
 const items = [
   {
-    title: "Home",
+    title: "🏠 Home",
     url: "/",
     icon: Home,
   },
@@ -31,44 +31,44 @@ const items = [
     icon: Globe,
   },
   {
-    title: "System Status", 
-    url: "/system-status",
-    icon: Settings,
-  },
-  {
-    title: "Comprehensive Status",
-    url: "/comprehensive-status", 
-    icon: BarChart3,
-  },
-  {
-    title: "Ultimate Security",
-    url: "/ultimate-security",
-    icon: Shield,
-  },
-  {
-    title: "Live Tracking",
-    url: "/live-tracking",
-    icon: Activity,
-  },
-  {
     title: "🔥 Coin Crafter",
     url: "/coin-crafter",
     icon: Flame,
   },
   {
-    title: "🔥 Transparency Center",
-    url: "/transparency",
-    icon: Download,
+    title: "📊 Live Tracking",
+    url: "/live-tracking",
+    icon: Activity,
   },
   {
-    title: "🎮 Gaming Arena",
-    url: "/gaming",
-    icon: Gamepad2,
+    title: "🛡️ System Status", 
+    url: "/system-status",
+    icon: Settings,
   },
   {
-    title: "🏗️ Landscape Builder",
-    url: "/landscape-builder",
-    icon: TreePine,
+    title: "📈 Comprehensive Status",
+    url: "/comprehensive-status", 
+    icon: BarChart3,
+  },
+  {
+    title: "🔒 Immortal Security",
+    url: "/immortal-security",
+    icon: Shield,
+  },
+  {
+    title: "ℹ️ About",
+    url: "/about",
+    icon: Users,
+  },
+  {
+    title: "📞 Contact",
+    url: "/contact",
+    icon: Inbox,
+  },
+  {
+    title: "💲 Pricing",
+    url: "/pricing",
+    icon: DollarSign,
   }
 ]
 
@@ -77,7 +77,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>🌍 GAIA Ecosystem - Token Burning Paradise</SidebarGroupLabel>
+          <SidebarGroupLabel>🌍 HARMONY OF GAIA - Heavenly Fortress Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
