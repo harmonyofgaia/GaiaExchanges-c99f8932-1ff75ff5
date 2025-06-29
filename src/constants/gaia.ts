@@ -1,40 +1,19 @@
 
-export interface TokenData {
-  price: number
-  volume24h: number
-  marketCap: number
-  priceChange24h: number
-  holders: number
-  transactions24h: number
-  lastUpdated: Date
-  isLive: boolean
-  error?: string
-  burnRate: number
-  totalBurned: number
-  circulatingSupply: number
-}
+import { 
+  TokenData, 
+  MetricsData, 
+  GaiaTokenConfig,
+  formatGaiaPrice as safeFormatGaiaPrice,
+  formatGaiaNumber as safeFormatGaiaNumber 
+} from '@/types/gaia-types'
+import { TypeValidator } from '@/utils/type-validator'
 
-export interface MetricsData {
-  INITIAL_PRICE: number
-  INITIAL_HOLDERS: number
-  INITIAL_MARKET_CAP: number
-  INITIAL_VOLUME: number
-  INITIAL_TRANSACTIONS: number
-  NETWORK_SPEED: number
-  SECURITY_SCORE: number
-  ECOSYSTEM_HEALTH: number
-  DRAGON_POWER: number
-}
+// Use the safe formatting functions from types
+export const formatGaiaPrice = safeFormatGaiaPrice
+export const formatGaiaNumber = safeFormatGaiaNumber
 
-export const formatGaiaPrice = (price: number): string => {
-  return `$${price.toFixed(8)}`
-}
-
-export const formatGaiaNumber = (number: number): string => {
-  return number.toLocaleString()
-}
-
-export const GAIA_TOKEN = {
+// Properly typed GAiA token configuration
+export const GAIA_TOKEN: GaiaTokenConfig = {
   NAME: 'Harmony of Gaia',
   SYMBOL: 'GAiA',
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
@@ -71,6 +50,7 @@ export const GAIA_TOKEN = {
   }
 }
 
+// Properly typed metrics with validation
 export const GAIA_METRICS: MetricsData = {
   INITIAL_PRICE: 0.000125,
   INITIAL_HOLDERS: 12345,
@@ -82,3 +62,13 @@ export const GAIA_METRICS: MetricsData = {
   ECOSYSTEM_HEALTH: 97.5,
   DRAGON_POWER: 95.2
 }
+
+// Runtime validation with logging
+const tokenConfigErrors = TypeValidator.validateTokenConfig(GAIA_TOKEN)
+TypeValidator.logValidationErrors('GAIA_TOKEN', tokenConfigErrors)
+
+const metricsErrors = TypeValidator.validateMetrics(GAIA_METRICS)
+TypeValidator.logValidationErrors('GAIA_METRICS', metricsErrors)
+
+// Export types for components to use
+export type { TokenData, MetricsData, GaiaTokenConfig }
