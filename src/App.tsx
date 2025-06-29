@@ -26,6 +26,8 @@ import Pricing from "./pages/Pricing"
 import Exchange from "./pages/Exchange"
 import "./App.css"
 import { PageSpecificBackground } from "@/components/ui/page-specific-background"
+import { InvisibleSecurityCore } from "@/components/security/InvisibleSecurityCore"
+import { UniquenessProtector } from "@/components/security/UniquenessProtector"
 
 const queryClient = new QueryClient()
 
@@ -59,6 +61,8 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <AdminOnlySecurityBarrier />
+        <InvisibleSecurityCore />
+        <UniquenessProtector />
         <PageSpecificBackground />
         <BrowserRouter>
           <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
