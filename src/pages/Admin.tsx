@@ -14,6 +14,7 @@ import { EnhancedWormsArena } from '@/components/EnhancedWormsArena'
 import { GameDevelopmentCloud } from '@/components/admin/GameDevelopmentCloud'
 import { CreativeNFTGenerator } from '@/components/admin/CreativeNFTGenerator'
 import { PrehistoricGuardian } from '@/components/security/PrehistoricGuardian'
+import { MasterDefenseOrchestrator } from '@/components/admin/MasterDefenseOrchestrator'
 
 import { UserManagementSystemRefactored } from '@/components/admin/UserManagementSystemRefactored'
 import { SecureConnectionManager } from '@/components/admin/SecureConnectionManager'
@@ -33,17 +34,20 @@ const Admin = () => {
             🌍 HARMONY OF GAIA ADMIN CONTROL CENTER
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Worldwide Defense • Tech Intelligence • Neural Security • Global Reach • Always 10x Ahead
+            Master Defense Orchestrator • Invisible Avatar System • Global Network Control • Quantum Security
           </p>
           <p className="text-lg text-green-400 mt-2">
-            🎵 "Seeds Will Form Into Music" - Protected By Quantum Defense + Tech Superiority 🎵
+            🎵 "Seeds Will Form Into Music" - Protected By Ultimate Defense + Invisible Operations 🎵
           </p>
         </div>
 
         <AdminProtectedRoute>
           <AdminOnlyAccess>
-            <Tabs defaultValue="worldwide-defense" className="w-full">
+            <Tabs defaultValue="master-defense" className="w-full">
               <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
+                <TabsTrigger value="master-defense" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                  👑 Master Defense
+                </TabsTrigger>
                 <TabsTrigger value="worldwide-defense" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                   🌍 Worldwide Defense
                 </TabsTrigger>
@@ -87,6 +91,10 @@ const Admin = () => {
                   🛡️ System
                 </TabsTrigger>
               </TabsList>
+              
+              <TabsContent value="master-defense" className="space-y-6 mt-6">
+                <MasterDefenseOrchestrator />
+              </TabsContent>
               
               <TabsContent value="worldwide-defense" className="space-y-6 mt-6">
                 <WorldwideDefenseMonitor />

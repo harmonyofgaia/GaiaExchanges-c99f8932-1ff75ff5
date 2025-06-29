@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 export function useSecureAdmin() {
   const [isAdmin, setIsAdmin] = useState(false)
+  const [isValidating, setIsValidating] = useState(true)
 
   useEffect(() => {
     // Check for admin status from localStorage or session
@@ -19,6 +20,8 @@ export function useSecureAdmin() {
       localStorage.setItem('harmony-admin-authenticated', 'true')
       sessionStorage.setItem('admin-session-active', 'true')
     }
+    
+    setIsValidating(false)
   }, [])
 
   const logout = () => {
@@ -27,8 +30,23 @@ export function useSecureAdmin() {
     sessionStorage.removeItem('admin-session-active')
   }
 
+  const grantAdminAccess = () => {
+    setIsAdmin(true)
+    localStorage.setItem('harmony-admin-authenticated', 'true')
+    sessionStorage.setItem('admin-session-active', 'true')
+  }
+
+  const revokeAdminAccess = () => {
+    setIsAdmin(false)
+    localStorage.removeItem('harmony-admin-authenticated')
+    sessionStorage.removeItem('admin-session-active')
+  }
+
   return {
     isAdmin,
-    logout
+    isValidating,
+    logout,
+    grantAdminAccess,
+    revokeAdminAccess
   }
 }
