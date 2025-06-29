@@ -4,6 +4,8 @@ import { ParabolicCommandCenter } from '@/components/admin/ParabolicCommandCente
 import { GlobalExchangeIntegration } from '@/components/marketing/GlobalExchangeIntegration'
 import { GlobalSatelliteSystem } from '@/components/intelligence/GlobalSatelliteSystem'
 import { SelfTrainingAnimal } from '@/components/security/SelfTrainingAnimal'
+import { Advanced3DDesigner } from '@/components/admin/Advanced3DDesigner'
+import { MasterplanEngine } from '@/components/admin/MasterplanEngine'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function Admin() {
@@ -13,26 +15,32 @@ export default function Admin() {
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-purple-400 mb-4">
-              👑 GAiA ULTIMATE ADMIN CONTROL CENTER
+              👑 GAiA ULTIMATE ADMIN GOD MODE CENTER
             </h1>
             <p className="text-gray-300 text-lg">
-              Parabolic Universe Access • Global Satellite Control • Exchange Domination • Infinite Power
+              Parabolic Universe Access • Global Control • 3D Design Studio • Infinite Power
             </p>
           </div>
           
           <Tabs defaultValue="command" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 bg-black/50 backdrop-blur-md border border-purple-500/20">
+            <TabsList className="grid w-full grid-cols-6 bg-black/50 backdrop-blur-md border border-purple-500/20">
               <TabsTrigger value="command" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-                👑 Parabolic Command
+                👑 Command Center
               </TabsTrigger>
               <TabsTrigger value="exchanges" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
                 🌍 Global Exchanges
               </TabsTrigger>
               <TabsTrigger value="satellites" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
-                🛰️ Satellite Intelligence
+                🛰️ Satellite Intel
               </TabsTrigger>
               <TabsTrigger value="training" className="data-[state=active]:bg-gold-500/20 data-[state=active]:text-gold-400">
-                🦁 Self-Training Engine
+                🦁 Self-Training
+              </TabsTrigger>
+              <TabsTrigger value="3d-designer" className="data-[state=active]:bg-pink-500/20 data-[state=active]:text-pink-400">
+                🎨 3D Designer
+              </TabsTrigger>
+              <TabsTrigger value="masterplan" className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-400">
+                🧠 Masterplan Engine
               </TabsTrigger>
             </TabsList>
             
@@ -50,6 +58,14 @@ export default function Admin() {
             
             <TabsContent value="training" className="space-y-6 mt-6">
               <SelfTrainingAnimal />
+            </TabsContent>
+            
+            <TabsContent value="3d-designer" className="space-y-6 mt-6">
+              <Advanced3DDesigner />
+            </TabsContent>
+            
+            <TabsContent value="masterplan" className="space-y-6 mt-6">
+              <MasterplanEngine />
             </TabsContent>
           </Tabs>
         </div>

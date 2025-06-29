@@ -33,7 +33,6 @@ import "./App.css"
 import { InvisibleSecurityCore } from "@/components/security/InvisibleSecurityCore"
 import { UniquenessProtector } from "@/components/security/UniquenessProtector"
 import { InvisibleAttachmentSystem } from "@/components/security/InvisibleAttachmentSystem"
-import { Navbar } from "@/components/Navbar"
 import { HoverSidebar } from "@/components/HoverSidebar"
 
 const queryClient = new QueryClient()
@@ -74,7 +73,7 @@ function App() {
           <InvisibleAttachmentSystem />
           <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
             <HoverSidebar />
-            <Navbar />
+            {/* Removed Navbar - only left sidebar remains */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/admin" element={<Admin />} />
