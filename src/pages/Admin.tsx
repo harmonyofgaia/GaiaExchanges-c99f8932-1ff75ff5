@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Settings, Activity, Database, Users, FileText, Leaf, RotateCcw, CloudLightning, Server, Github } from 'lucide-react'
+import { Shield, Settings, Activity, Database, Users, FileText, Leaf, RotateCcw, CloudLightning, Server, Github, UserCog } from 'lucide-react'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin'
 import { AdminMFA } from '@/components/admin/AdminMFA'
@@ -14,6 +13,7 @@ import { DailyAdvertising } from '@/components/admin/DailyAdvertising'
 import { AuthTest } from '@/components/auth/AuthTest'
 import { GreenProjectManager } from '@/components/admin/GreenProjectManager'
 import { BackgroundManager } from '@/components/admin/BackgroundManager'
+import { UserManagementSystem } from '@/components/admin/UserManagementSystem'
 import { toast } from 'sonner'
 import { EncryptedSecurityReports } from '@/components/admin/EncryptedSecurityReports'
 import { UltimateResilienceEngine } from '@/components/security/UltimateResilienceEngine'
@@ -121,8 +121,11 @@ const Admin = () => {
           </div>
         </div>
 
-        <Tabs defaultValue="completed-systems" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 bg-black/50 backdrop-blur-md border border-green-500/20">
+        <Tabs defaultValue="user-management" className="w-full">
+          <TabsList className="grid w-full grid-cols-5 bg-black/50 backdrop-blur-md border border-green-500/20">
+            <TabsTrigger value="user-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+              👥 User Management
+            </TabsTrigger>
             <TabsTrigger value="completed-systems" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
               ✅ Completed Systems
             </TabsTrigger>
@@ -136,6 +139,10 @@ const Admin = () => {
               📋 Project Management
             </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="user-management" className="space-y-6 mt-6">
+            <UserManagementSystem />
+          </TabsContent>
           
           <TabsContent value="completed-systems" className="space-y-6 mt-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

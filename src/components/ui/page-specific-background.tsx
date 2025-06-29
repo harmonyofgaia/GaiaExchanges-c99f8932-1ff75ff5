@@ -2,53 +2,44 @@
 import { useLocation } from 'react-router-dom'
 import { NeuralElectricBackground } from './neural-electric-background'
 import { QuantumAnimatedBackground } from './quantum-animated-background'
-import { OptimizedMouseAttraction } from './optimized-mouse-attraction'
-import { BackgroundManager } from './background-manager'
 
 interface PageBackgroundConfig {
   style: 'classic' | 'plasma' | 'galaxy' | 'forest' | 'ocean' | 'fire' | 'ice' | 'void' | 'rainbow' | 'matrix'
   intensity: 'low' | 'medium' | 'high'
   useQuantum?: boolean
-  useOptimized?: boolean
-  useManager?: boolean
 }
 
 const pageBackgrounds: Record<string, PageBackgroundConfig> = {
-  '/': { style: 'classic', intensity: 'medium', useManager: true },
-  '/about': { style: 'galaxy', intensity: 'high', useOptimized: true },
-  '/wallet': { style: 'matrix', intensity: 'medium', useManager: true },
-  '/markets': { style: 'fire', intensity: 'high', useOptimized: true },
-  '/smart-contracts': { style: 'plasma', intensity: 'medium', useManager: true },
+  '/': { style: 'classic', intensity: 'medium' },
+  '/about': { style: 'galaxy', intensity: 'high' },
+  '/wallet': { style: 'matrix', intensity: 'medium' },
+  '/markets': { style: 'fire', intensity: 'high' },
+  '/smart-contracts': { style: 'plasma', intensity: 'medium' },
   '/ultimate-security': { style: 'void', intensity: 'high', useQuantum: true },
-  '/system-status': { style: 'ice', intensity: 'medium', useManager: true },
-  '/comprehensive-status': { style: 'rainbow', intensity: 'high', useOptimized: true },
-  '/downloads': { style: 'forest', intensity: 'low', useManager: true },
-  '/marketing': { style: 'ocean', intensity: 'medium', useOptimized: true },
-  '/reinvestments': { style: 'plasma', intensity: 'high', useManager: true },
-  '/transparency': { style: 'galaxy', intensity: 'low', useManager: true },
+  '/system-status': { style: 'ice', intensity: 'medium' },
+  '/comprehensive-status': { style: 'rainbow', intensity: 'high' },
+  '/downloads': { style: 'forest', intensity: 'low' },
+  '/marketing': { style: 'ocean', intensity: 'medium' },
+  '/reinvestments': { style: 'plasma', intensity: 'high' },
+  '/transparency': { style: 'galaxy', intensity: 'low' },
   '/admin': { style: 'void', intensity: 'high', useQuantum: true },
-  '/gaming': { style: 'fire', intensity: 'high', useOptimized: true },
-  '/gaia-fighter-game': { style: 'plasma', intensity: 'high', useManager: true },
-  '/live-tracking': { style: 'matrix', intensity: 'medium', useOptimized: true }
+  '/gaming': { style: 'fire', intensity: 'high' },
+  '/gaia-fighter-game': { style: 'plasma', intensity: 'high' },
+  '/live-tracking': { style: 'matrix', intensity: 'medium' }
 }
 
 export function PageSpecificBackground() {
   const location = useLocation()
   const config = pageBackgrounds[location.pathname] || { 
     style: 'classic', 
-    intensity: 'medium', 
-    useManager: true 
+    intensity: 'medium' 
   }
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0">
-      {/* Performance optimized background selection */}
-      {config.useQuantum && <QuantumAnimatedBackground />}
-      {config.useOptimized && <OptimizedMouseAttraction />}
-      {config.useManager && <BackgroundManager />}
-      
-      {/* Fallback for pages without specific optimization */}
-      {!config.useQuantum && !config.useOptimized && !config.useManager && (
+      {config.useQuantum ? (
+        <QuantumAnimatedBackground />
+      ) : (
         <NeuralElectricBackground 
           style={config.style}
           intensity={config.intensity}

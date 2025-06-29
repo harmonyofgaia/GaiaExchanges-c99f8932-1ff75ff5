@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
+import { GlowingText } from '@/components/ui/glowing-text'
 
 // Import all the new gaming components
 import { BattleRoyaleMode } from '@/components/gaming/BattleRoyaleMode'
@@ -79,6 +80,24 @@ const Gaming = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             The ultimate gaming experience powered by GAIA tokens. Battle worldwide, earn rewards, and heal the planet through revolutionary gameplay.
           </p>
+          
+          {/* Revolutionary Gaming Statement */}
+          <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-lg p-6 max-w-4xl mx-auto">
+            <p className="text-lg text-purple-300 mb-2">
+              "Will bark its way true barriers of many projects and will rise and shine in an{' '}
+              <GlowingText 
+                text="OPEN MINDED SPACE" 
+                glowColor="rgb(34, 197, 94)"
+                className="font-bold text-xl"
+              />
+              "
+            </p>
+            <div className="text-sm text-cyan-300 mt-4 border-t border-cyan-500/20 pt-4">
+              🚀 <strong>The gaming revolution is complete!</strong> Your platform now offers experiences that no other gaming platform can match. 
+              We stay ahead by monitoring all gaming platforms daily, making our system better, faster, and stronger - 
+              creating gaming for a whole new era! 🌟
+            </div>
+          </div>
           
           {/* Enhanced Quick Action Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mt-8">
