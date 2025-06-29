@@ -15,6 +15,7 @@ import VirtualWorld from '@/pages/VirtualWorld'
 import CoinCrafter from '@/pages/CoinCrafter'
 import GaiaCoinCrafterPage from '@/pages/GaiaCoinCrafter'
 import LiveTracking from '@/pages/LiveTracking'
+import WalletPage from '@/pages/Wallet'
 import { AuthPage } from '@/components/auth/AuthPage'
 import Admin from '@/pages/Admin'
 import SecureAdmin from '@/pages/SecureAdmin'
@@ -57,6 +58,7 @@ function App() {
               <Route path="/virtual-world" element={<VirtualWorld />} />
               <Route path="/coin-crafter" element={<GaiaCoinCrafterPage />} />
               <Route path="/live-tracking" element={<LiveTracking />} />
+              <Route path="/wallet" element={<WalletPage />} />
               <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
               <Route path="/immortal-security" element={<ImmortalSecurity />} />
               
