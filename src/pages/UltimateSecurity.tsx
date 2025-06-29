@@ -5,119 +5,74 @@ import { ComprehensiveSecurityMonitor } from '@/components/security/Comprehensiv
 import { UltraSecureCloudVault } from '@/components/security/UltraSecureCloudVault'
 import { CloudRecoverySystem } from '@/components/security/CloudRecoverySystem'
 import { AdminRecoveryPortal } from '@/components/security/AdminRecoveryPortal'
-import { WiFiNetworkProtection } from '@/components/security/WiFiNetworkProtection'
-import { AdvancedIPProtection } from '@/components/security/AdvancedIPProtection'
-import { UltimateSecurityOrchestrator } from '@/components/security/UltimateSecurityOrchestrator'
-import { UltraFastDatabaseGuard } from '@/components/security/UltraFastDatabaseGuard'
-import { DragonSecurityDashboard } from '@/components/security/DragonSecurityDashboard'
-import { DragonCloudProtection } from '@/components/security/DragonCloudProtection'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 
 const UltimateSecurity = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-red-900/20 to-orange-900/20">
+    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/10 to-green-900/10">
       <div className="container mx-auto px-4 py-6">
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-7xl font-bold bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
-            🐉 UNIFIED DRAGON SECURITY FORTRESS 🐉
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 via-green-400 to-blue-400 bg-clip-text text-transparent">
+            ⚡ ULTIMATE QUANTUM SECURITY FORTRESS ⚡
           </h1>
-          <p className="text-2xl text-muted-foreground mt-4">
-            Triple-Bonded Protection • Eternal Dragon Core • Quantum Evolution • Invisible Forever
+          <p className="text-xl text-muted-foreground mt-4">
+            Unbreakable • Eternal • Dragon-Powered • Quantum-Proof • Community Protected Forever
           </p>
-          <p className="text-lg text-red-400 mt-2">
-            🔒 Dragon Protected • ⚡ Quantum Evolution • 🌍 Worldwide IP Blocking • 👑 Admin Fortress • 💎 Holder Shield • 🧬 Immune System • 🔮 Github+Supabase Merged • 👑 Investor Attraction • ♾️ Endless Improvements • 👻 Forever Invisible
+          <p className="text-lg text-green-400 mt-2">
+            🛡️ NO SYSTEM, COMPUTER, OR QUANTUM TECHNOLOGY CAN EVER BREACH OUR DEFENSES 🛡️
           </p>
         </div>
 
-        <Tabs defaultValue="unified-core" className="w-full">
-          <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-red-500/20 text-xs">
-            <TabsTrigger value="unified-core" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-              🐉 Unified Core
+        <Tabs defaultValue="ultimate-wall" className="w-full">
+          <TabsList className="grid w-full grid-cols-6 bg-black/50 backdrop-blur-md border border-purple-500/20">
+            <TabsTrigger value="ultimate-wall" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+              🛡️ Ultimate Wall
             </TabsTrigger>
-            <TabsTrigger value="dragon-core" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-              🔥 Dragon Core
+            <TabsTrigger value="dragon-security" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              🐲 Dragon Security
             </TabsTrigger>
-            <TabsTrigger value="orchestrator" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-              👑 Master Control
+            <TabsTrigger value="quantum-monitor" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+              ⚡ Quantum Monitor
             </TabsTrigger>
-            <TabsTrigger value="fortress" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-              🛡️ Security Wall
+            <TabsTrigger value="secure-vault" className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-400">
+              🔒 Secure Vault
             </TabsTrigger>
-            <TabsTrigger value="monitor" className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-400">
-              📊 Monitor
+            <TabsTrigger value="cloud-recovery" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
+              ☁️ Cloud Recovery
             </TabsTrigger>
-            <TabsTrigger value="wifi-protection" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
-              📶 WiFi Shield
-            </TabsTrigger>
-            <TabsTrigger value="ip-protection" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-              🌐 IP Quantum
-            </TabsTrigger>
-            <TabsTrigger value="database-guard" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
-              💧 Database Guard
-            </TabsTrigger>
-            <TabsTrigger value="cloud-vault" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-              🔒 Cloud Vault
-            </TabsTrigger>
-            <TabsTrigger value="recovery-system" className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400">
-              🔄 Recovery System
-            </TabsTrigger>
-            <TabsTrigger value="admin-recovery" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
-              🔑 Admin Recovery
-            </TabsTrigger>
-            <TabsTrigger value="dragon-cloud" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-              ☁️ Dragon Cloud
+            <TabsTrigger value="admin-portal" className="data-[state=active]:bg-pink-500/20 data-[state=active]:text-pink-400">
+              👑 Admin Portal
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="unified-core" className="space-y-6 mt-6">
-            <UnifiedDragonSecurity />
-          </TabsContent>
-          
-          <TabsContent value="dragon-core" className="space-y-6 mt-6">
-            <DragonSecurityDashboard />
-          </TabsContent>
-          
-          <TabsContent value="orchestrator" className="space-y-6 mt-6">
-            <UltimateSecurityOrchestrator />
-          </TabsContent>
-          
-          <TabsContent value="fortress" className="space-y-6 mt-6">
+          <TabsContent value="ultimate-wall" className="space-y-6 mt-6">
             <UltimateSecurityWall />
           </TabsContent>
           
-          <TabsContent value="monitor" className="space-y-6 mt-6">
+          <TabsContent value="dragon-security" className="space-y-6 mt-6">
+            {/* Dragon security runs in background */}
+            <div className="text-center p-8 bg-gradient-to-r from-green-900/20 to-purple-900/20 rounded-lg border border-green-500/20">
+              <h2 className="text-3xl font-bold text-green-400 mb-4">🐲 DRAGON SECURITY ACTIVE</h2>
+              <p className="text-lg text-muted-foreground">
+                Four mighty dragons protect our community 24/7 with quantum-level power
+              </p>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="quantum-monitor" className="space-y-6 mt-6">
             <ComprehensiveSecurityMonitor />
           </TabsContent>
           
-          <TabsContent value="wifi-protection" className="space-y-6 mt-6">
-            <WiFiNetworkProtection />
-          </TabsContent>
-          
-          <TabsContent value="ip-protection" className="space-y-6 mt-6">
-            <AdvancedIPProtection />
-          </TabsContent>
-          
-          <TabsContent value="database-guard" className="space-y-6 mt-6">
-            <UltraFastDatabaseGuard />
-          </TabsContent>
-          
-          <TabsContent value="cloud-vault" className="space-y-6 mt-6">
+          <TabsContent value="secure-vault" className="space-y-6 mt-6">
             <UltraSecureCloudVault />
           </TabsContent>
           
-          <TabsContent value="recovery-system" className="space-y-6 mt-6">
+          <TabsContent value="cloud-recovery" className="space-y-6 mt-6">
             <CloudRecoverySystem />
           </TabsContent>
           
-          <TabsContent value="admin-recovery" className="space-y-6 mt-6">
-            <AdminProtectedRoute>
-              <AdminRecoveryPortal />
-            </AdminProtectedRoute>
-          </TabsContent>
-          
-          <TabsContent value="dragon-cloud" className="space-y-6 mt-6">
-            <DragonCloudProtection />
+          <TabsContent value="admin-portal" className="space-y-6 mt-6">
+            <AdminRecoveryPortal />
           </TabsContent>
         </Tabs>
       </div>
