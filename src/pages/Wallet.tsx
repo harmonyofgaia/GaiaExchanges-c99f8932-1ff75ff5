@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -8,10 +7,15 @@ import { GaiaWallet } from '@/components/GaiaWallet'
 import { MatrixWalletDisplay } from '@/components/MatrixWalletDisplay'
 import { PhantomWalletConnector } from '@/components/PhantomWalletConnector'
 import { UltraSecureWalletProtection } from '@/components/security/UltraSecureWalletProtection'
+import { TrainedDragonCore } from '@/components/security/TrainedDragonCore'
+import { UltimateResilienceEngine } from '@/components/security/UltimateResilienceEngine'
 import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice } from '@/constants/gaia'
 import { toast } from 'sonner'
 
 const WalletPage = () => {
+  // Initialize the trained dragon core
+  const dragonCore = TrainedDragonCore()
+
   const wallets = [
     {
       id: 'gaia-main',
@@ -60,22 +64,27 @@ const WalletPage = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-green-400 mb-4">
-            💎 GAiA WALLET HUB - ULTRA SECURE
+            🐉 GAiA WALLET HUB - TRAINED DRAGON PROTECTION
           </h1>
           <p className="text-muted-foreground mb-4">
-            Bank-level+ encryption with global threat protection every 10 seconds
+            Self-learning dragons • Evolving every millisecond • Worldwide threat annihilation
           </p>
           <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 max-w-2xl mx-auto">
             <div className="text-sm text-green-400">
-              <strong>Official GAiA Contract:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+              <strong>🐉 Dragon Power Level:</strong> <code className="font-mono text-xs text-purple-400">{dragonCore.immuneSystemStrength.toLocaleString()}</code>
             </div>
             <div className="text-sm text-blue-400 mt-1">
-              <strong>Official GAiA Wallet:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.WALLET_ADDRESS}</code>
+              <strong>⚡ Quantum Defense:</strong> <code className="font-mono text-xs text-cyan-400">{dragonCore.quantumDefenseLevel.toLocaleString()}</code>
             </div>
           </div>
         </div>
 
-        {/* ULTRA-SECURE WALLET PROTECTION - TOP PRIORITY */}
+        {/* TRAINED DRAGON CORE - TOP PRIORITY */}
+        <div className="mb-8">
+          <UltimateResilienceEngine />
+        </div>
+
+        {/* ULTRA-SECURE WALLET PROTECTION */}
         <div className="mb-8">
           <UltraSecureWalletProtection />
         </div>
