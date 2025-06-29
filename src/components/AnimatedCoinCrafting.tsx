@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Hammer, Coins, Zap } from 'lucide-react'
+import { Hammer, Coins, Zap, ExternalLink } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { GAIA_TOKEN } from '@/constants/gaia'
 
 export function AnimatedCoinCrafting() {
@@ -53,18 +54,28 @@ export function AnimatedCoinCrafting() {
 
   const hammerProgress = (hammerStrikes / 5) * 100
 
+  const openPumpFun = () => {
+    window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
+  }
+
   return (
     <Card className="bg-gradient-to-br from-orange-900/30 to-yellow-900/30 border-orange-500/30">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-orange-400">
           <Hammer className="h-6 w-6" />
-          🔨 Official GAiA Coin Crafting Animation - Connected to {GAIA_TOKEN.CONTRACT_ADDRESS}
+          🔨 Original GAiA Coin Crafting System - Connected to PumpFun
         </CardTitle>
+        <div className="flex items-center gap-2">
+          <Button onClick={openPumpFun} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+            <ExternalLink className="h-3 w-3 mr-1" />
+            View on PumpFun
+          </Button>
+        </div>
       </CardHeader>
       <CardContent className="space-y-6">
-        {/* Simple Crafting Illustration */}
+        {/* Original Simple Crafting Illustration */}
         <div className="flex flex-col items-center space-y-6 p-8 bg-black/20 rounded-lg">
-          {/* Person with Hammer */}
+          {/* Simple Person with Hammer - Original Design */}
           <div className="relative">
             <div className="text-6xl mb-4">🧑‍🔧</div>
             <div 
@@ -76,7 +87,7 @@ export function AnimatedCoinCrafting() {
             </div>
           </div>
 
-          {/* Single Coin Being Crafted */}
+          {/* Simple Coin Being Crafted - Original Design */}
           <div className="flex items-center justify-center">
             <div 
               className={`text-8xl transition-all duration-500 ${
@@ -129,9 +140,9 @@ export function AnimatedCoinCrafting() {
           </div>
         </div>
 
-        {/* Official Token Info */}
+        {/* Official Token Info with PumpFun Connection */}
         <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-          <h4 className="font-medium text-green-400 mb-2">🌍 Connected to Official GAiA Token</h4>
+          <h4 className="font-medium text-green-400 mb-2">🌍 Connected to Official GAiA Token on PumpFun</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>
               <div className="text-green-300">Official Wallet:</div>
@@ -142,18 +153,24 @@ export function AnimatedCoinCrafting() {
               <div className="font-mono text-xs text-purple-400 break-all">{GAIA_TOKEN.CONTRACT_ADDRESS}</div>
             </div>
           </div>
+          <div className="mt-3 text-center">
+            <Button onClick={openPumpFun} className="bg-purple-600 hover:bg-purple-700">
+              <ExternalLink className="h-4 w-4 mr-2" />
+              Trade GAiA on PumpFun
+            </Button>
+          </div>
         </div>
 
         {/* Process Description */}
         <div className="text-center space-y-2">
-          <h4 className="text-lg font-semibold text-orange-400">🔨 Simple Crafting Process</h4>
+          <h4 className="text-lg font-semibold text-orange-400">🔨 Original Simple Crafting Process</h4>
           <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-            Our craftsperson uses a powerful hammer to forge new GAiA coins. Each coin requires exactly 5 precise strikes to achieve perfect quality. 
-            The process repeats automatically every 8 seconds, continuously supplying the official GAiA ecosystem.
+            Our simple craftsperson uses a hammer to forge new GAiA coins. Each coin requires exactly 5 precise strikes. 
+            The process repeats every 8 seconds, continuously supplying the official GAiA ecosystem connected to PumpFun.
           </p>
           <div className="flex items-center justify-center gap-2 mt-4 text-sm">
             <Zap className="h-4 w-4 text-yellow-400" />
-            <span className="text-yellow-400">90% of all fees go to project reinvestment</span>
+            <span className="text-yellow-400">Connected to all major exchanges</span>
           </div>
         </div>
       </CardContent>
