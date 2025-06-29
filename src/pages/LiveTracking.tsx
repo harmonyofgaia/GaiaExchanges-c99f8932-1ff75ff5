@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge'
 import { Activity, BarChart3, Shield, FileText, TrendingUp } from 'lucide-react'
 
 const LiveTracking = () => {
-  console.log("LiveTracking component loaded successfully");
+  console.log("🚀 LiveTracking page loaded successfully - All systems operational!");
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10">

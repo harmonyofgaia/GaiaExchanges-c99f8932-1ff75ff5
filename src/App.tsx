@@ -28,7 +28,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
-  console.log("App component loaded - routes should be available");
+  console.log("App component loaded - LiveTracking route should be available at /live-tracking");
   
   return (
     <GlobalErrorBoundary>
