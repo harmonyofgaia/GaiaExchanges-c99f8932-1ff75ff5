@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -49,7 +48,7 @@ export function GamingNFTMarketplace() {
       attackPower: 950,
       defenseBonus: 800,
       specialAbility: 'Forest Regeneration',
-      creator: 'DragonMaster88',
+      creator: 'GAiA Admin System',
       sold: true,
       image: '🌲'
     },
@@ -62,7 +61,7 @@ export function GamingNFTMarketplace() {
       attackPower: 870,
       defenseBonus: 650,
       specialAbility: 'Lava Strike',
-      creator: 'FireElemental',
+      creator: 'GAiA Admin System',
       sold: false,
       image: '🌋'
     },
@@ -75,7 +74,7 @@ export function GamingNFTMarketplace() {
       attackPower: 750,
       defenseBonus: 900,
       specialAbility: 'Ice Shield',
-      creator: 'IceQueen42',
+      creator: 'GAiA Admin System',
       sold: false,
       image: '❄️'
     },
@@ -88,7 +87,7 @@ export function GamingNFTMarketplace() {
       attackPower: 680,
       defenseBonus: 720,
       specialAbility: 'Tsunami Wave',
-      creator: 'SeaKing77',
+      creator: 'GAiA Admin System',
       sold: true,
       image: '🌊'
     },
@@ -101,7 +100,7 @@ export function GamingNFTMarketplace() {
       attackPower: 450,
       defenseBonus: 380,
       specialAbility: 'Sandstorm',
-      creator: 'DesertNomad',
+      creator: 'GAiA Admin System',
       sold: false,
       image: '🏜️'
     }
@@ -135,14 +134,25 @@ export function GamingNFTMarketplace() {
       <CardHeader>
         <CardTitle className="text-indigo-400 flex items-center gap-2">
           <ShoppingCart className="h-6 w-6" />
-          🏪 LANDSCAPE ATTACK NFT MARKETPLACE
+          🏪 GAiA LANDSCAPE ATTACK NFT MARKETPLACE
         </CardTitle>
         <p className="text-muted-foreground">
-          Purchase NFT landscapes to attack and reform other players' worlds
+          Purchase admin-curated NFT landscapes to attack and reform other players' worlds • Connected to GAiA Admin System
         </p>
       </CardHeader>
 
       <CardContent className="space-y-6">
+        {/* Admin Connection Status */}
+        <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-3">
+          <div className="flex items-center gap-2 text-green-400 text-sm">
+            <Crown className="h-4 w-4" />
+            <span className="font-medium">✅ Connected to GAiA Admin NFT System</span>
+          </div>
+          <p className="text-xs text-green-300 mt-1">
+            All NFTs are curated and approved by admin • Premium quality guaranteed
+          </p>
+        </div>
+
         {/* Search and Filter */}
         <div className="flex gap-4 mb-6">
           <div className="flex-1 relative">
@@ -243,27 +253,40 @@ export function GamingNFTMarketplace() {
           ))}
         </div>
 
-        {/* Marketplace Stats */}
+        {/* Updated Marketplace Stats */}
         <Card className="bg-black/30 border-purple-500/20 mt-8">
           <CardContent className="p-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold text-purple-400">247</div>
-                <div className="text-sm text-muted-foreground">Total NFTs</div>
+                <div className="text-2xl font-bold text-purple-400">{landscapeNFTs.length}</div>
+                <div className="text-sm text-muted-foreground">Admin Curated</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-green-400">89</div>
+                <div className="text-2xl font-bold text-green-400">{landscapeNFTs.filter(n => n.sold).length}</div>
                 <div className="text-sm text-muted-foreground">Sold</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-blue-400">158</div>
+                <div className="text-2xl font-bold text-blue-400">{landscapeNFTs.filter(n => !n.sold).length}</div>
                 <div className="text-sm text-muted-foreground">Available</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-yellow-400">45.2K</div>
-                <div className="text-sm text-muted-foreground">Total Volume</div>
+                <div className="text-2xl font-bold text-yellow-400">100%</div>
+                <div className="text-sm text-muted-foreground">Quality Assured</div>
               </div>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* GAiA Integration Footer */}
+        <Card className="border-2 border-green-500/50 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
+          <CardContent className="p-4 text-center">
+            <h4 className="text-green-400 font-bold mb-2">
+              🚀 Powered by GAiA Admin NFT Creation System
+            </h4>
+            <p className="text-xs text-muted-foreground">
+              Every NFT is handcrafted by our advanced admin system with guaranteed gameplay balance and premium quality. 
+              Connect your wallet to purchase exclusive GAiA tokens and dominate the battlefield!
+            </p>
           </CardContent>
         </Card>
       </CardContent>

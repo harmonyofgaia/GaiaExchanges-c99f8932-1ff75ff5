@@ -9,11 +9,14 @@ import { MasterArtworkGenerator } from '@/components/admin/MasterArtworkGenerato
 import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
 import { WormsGameArena } from '@/components/WormsGameArena'
 import { GameDevelopmentCloud } from '@/components/admin/GameDevelopmentCloud'
+
 import { UserManagementSystemRefactored } from '@/components/admin/UserManagementSystemRefactored'
 import { SecureConnectionManager } from '@/components/admin/SecureConnectionManager'
 import { QuantumBlockchainCore } from '@/components/quantum/QuantumBlockchainCore'
 import { LiveBlockchainViewer } from '@/components/admin/LiveBlockchainViewer'
 import { GlobalMarketingEngine } from '@/components/marketing/GlobalMarketingEngine'
+import { AdminNFTMarketplace } from '@/components/admin/AdminNFTMarketplace'
+import { GamingAssetsManager } from '@/components/admin/GamingAssetsManager'
 
 const Admin = () => {
   return (
@@ -36,6 +39,12 @@ const Admin = () => {
             <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
               <TabsTrigger value="user-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                 👥 User Control
+              </TabsTrigger>
+              <TabsTrigger value="nft-marketplace" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                🎮 NFT Market
+              </TabsTrigger>
+              <TabsTrigger value="gaming-assets" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+                🛡️ Game Assets
               </TabsTrigger>
               <TabsTrigger value="live-blockchain" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
                 ⚡ Live Blockchain
@@ -71,6 +80,14 @@ const Admin = () => {
             
             <TabsContent value="user-management" className="space-y-6 mt-6">
               <UserManagementSystemRefactored />
+            </TabsContent>
+            
+            <TabsContent value="nft-marketplace" className="space-y-6 mt-6">
+              <AdminNFTMarketplace />
+            </TabsContent>
+            
+            <TabsContent value="gaming-assets" className="space-y-6 mt-6">
+              <GamingAssetsManager />
             </TabsContent>
             
             <TabsContent value="live-blockchain" className="space-y-6 mt-6">
