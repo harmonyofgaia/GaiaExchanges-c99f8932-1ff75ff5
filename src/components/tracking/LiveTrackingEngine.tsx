@@ -22,7 +22,7 @@ interface GaiaTrackingMetrics {
 interface LiveGaiaEvent {
   id: string
   timestamp: Date
-  type: 'GAIA_TRANSACTION' | 'GAIA_TRADE' | 'HOLDER_ACTION' | 'GAIA_UPDATE' | 'SECURITY_EVENT'
+  type: 'GAiA_TRANSACTION' | 'GAiA_TRADE' | 'HOLDER_ACTION' | 'GAiA_UPDATE' | 'SECURITY_EVENT'
   description: string
   value: number
   location: string
@@ -50,7 +50,7 @@ export function LiveTrackingEngine() {
 
   useEffect(() => {
     const performLiveGaiaTracking = () => {
-      const eventTypes = ['GAIA_TRANSACTION', 'GAIA_TRADE', 'HOLDER_ACTION', 'GAIA_UPDATE', 'SECURITY_EVENT'] as const
+      const eventTypes = ['GAiA_TRANSACTION', 'GAiA_TRADE', 'HOLDER_ACTION', 'GAiA_UPDATE', 'SECURITY_EVENT'] as const
       const locations = ['New York', 'London', 'Tokyo', 'Singapore', 'Frankfurt', 'Sydney', 'Dubai']
       
       const newEvent: LiveGaiaEvent = {
@@ -79,7 +79,7 @@ export function LiveTrackingEngine() {
         userEngagement: Math.min(99.9, prev.userEngagement + (Math.random() - 0.5) * 0.5)
       }))
 
-      console.log('🌍 GAIA ECOSYSTEM - Live tracking update:', newEvent)
+      console.log('🌍 GAiA ECOSYSTEM - Live tracking update:', newEvent)
     }
 
     const generateGaiaEventDescription = () => {
@@ -176,7 +176,7 @@ export function LiveTrackingEngine() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Shield className="h-5 w-5" />
-            GAIA ECOSYSTEM DOMINANCE - Love & Joy Protocol Active
+            GAiA ECOSYSTEM DOMINANCE - Love & Joy Protocol Active
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -246,7 +246,7 @@ export function LiveTrackingEngine() {
       <Card className="border-yellow-500/30 bg-gradient-to-r from-yellow-900/20 to-orange-900/20">
         <CardContent className="pt-6">
           <div className="text-center space-y-4">
-            <h3 className="text-2xl font-bold text-yellow-400">🌍 GAIA ECOSYSTEM WORLD DOMINATION</h3>
+            <h3 className="text-2xl font-bold text-yellow-400">🌍 GAiA ECOSYSTEM WORLD DOMINATION</h3>
             <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
               Our GAiA system operates at <span className="text-green-400 font-bold">{metrics.performanceMultiplier.toFixed(1)}x faster</span> speeds 
               than any existing platform, with <span className="text-blue-400 font-bold">100% security</span> and 
@@ -276,10 +276,10 @@ export function LiveTrackingEngine() {
 
   function getEventBadgeColor(type: string) {
     switch (type) {
-      case 'GAIA_TRANSACTION': return 'bg-green-600 text-white'
-      case 'GAIA_TRADE': return 'bg-blue-600 text-white'
+      case 'GAiA_TRANSACTION': return 'bg-green-600 text-white'
+      case 'GAiA_TRADE': return 'bg-blue-600 text-white'
       case 'HOLDER_ACTION': return 'bg-purple-600 text-white'
-      case 'GAIA_UPDATE': return 'bg-yellow-600 text-white'
+      case 'GAiA_UPDATE': return 'bg-yellow-600 text-white'
       case 'SECURITY_EVENT': return 'bg-red-600 text-white'
       default: return 'bg-gray-600 text-white'
     }

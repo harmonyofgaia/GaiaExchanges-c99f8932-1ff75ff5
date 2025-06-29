@@ -95,7 +95,7 @@ export function LiveChartsGrid() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-muted-foreground">GAIA Price</p>
+                <p className="text-xs text-muted-foreground">GAiA Price</p>
                 <p className="text-lg font-bold text-green-400">{formatCurrency(currentGaiaMetrics.price)}</p>
                 <Badge className={`text-xs ${currentGaiaMetrics.change24h >= 0 ? 'bg-green-600' : 'bg-red-600'} text-white`}>
                   {currentGaiaMetrics.change24h >= 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
