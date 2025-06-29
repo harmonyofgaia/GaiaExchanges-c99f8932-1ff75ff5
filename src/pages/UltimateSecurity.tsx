@@ -6,6 +6,7 @@ import { CloudRecoverySystem } from '@/components/security/CloudRecoverySystem'
 import { AdminRecoveryPortal } from '@/components/security/AdminRecoveryPortal'
 import { WiFiNetworkProtection } from '@/components/security/WiFiNetworkProtection'
 import { AdvancedIPProtection } from '@/components/security/AdvancedIPProtection'
+import { UltimateSecurityOrchestrator } from '@/components/security/UltimateSecurityOrchestrator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const UltimateSecurity = () => {
@@ -20,12 +21,15 @@ const UltimateSecurity = () => {
             Exotically Dangerous Hard Defensive System - Always 2 Steps Ahead
           </p>
           <p className="text-sm text-red-400 mt-2">
-            🔒 Waterclosed • Counter-Attack Ready • IP Banning • System Lockdown • Quantum-Resistant • WiFi Protected • IP Quantum Secured
+            🔒 Waterclosed • Counter-Attack Ready • IP Banning • System Lockdown • Quantum-Resistant • WiFi Protected • IP Quantum Secured • Millisecond Evolution
           </p>
         </div>
 
-        <Tabs defaultValue="fortress" className="w-full">
-          <TabsList className="grid w-full grid-cols-7 bg-black/50 backdrop-blur-md border border-red-500/20">
+        <Tabs defaultValue="orchestrator" className="w-full">
+          <TabsList className="grid w-full grid-cols-8 bg-black/50 backdrop-blur-md border border-red-500/20">
+            <TabsTrigger value="orchestrator" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+              👑 Master Control
+            </TabsTrigger>
             <TabsTrigger value="fortress" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
               🛡️ Security Wall
             </TabsTrigger>
@@ -48,6 +52,10 @@ const UltimateSecurity = () => {
               🔑 Admin Recovery
             </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="orchestrator" className="space-y-6 mt-6">
+            <UltimateSecurityOrchestrator />
+          </TabsContent>
           
           <TabsContent value="fortress" className="space-y-6 mt-6">
             <UltimateSecurityWall />

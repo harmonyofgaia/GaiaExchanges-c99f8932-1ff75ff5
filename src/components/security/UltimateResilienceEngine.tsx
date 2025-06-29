@@ -257,165 +257,77 @@ export function UltimateResilienceEngine() {
             </div>
 
             <div className="p-6 rounded-lg bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/30 text-center">
-              <Activity className="h-8 w-8 mx-auto text-green-400 animate-pulse mb-2" />
-              <div className="text-2xl font-bold text-green-400">{systemMetrics.stabilityScore}%</div>
-              <div className="text-sm text-muted-foreground">Stability Score</div>
-              <Badge className="mt-2 bg-green-600 text-white">ROCK SOLID</Badge>
+              <Brain className="h-8 w-8 mx-auto text-green-400 animate-pulse mb-2" />
+              <div className="text-2xl font-bold text-green-400">{systemMetrics.adaptabilityScore}%</div>
+              <div className="text-sm text-muted-foreground">AI Learning</div>
+              <Badge className="mt-2 bg-green-600 text-white">EVOLVING</Badge>
             </div>
 
-            <div className="p-6 rounded-lg bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/30 text-center">
-              <Brain className="h-8 w-8 mx-auto text-orange-400 animate-pulse mb-2" />
-              <div className="text-2xl font-bold text-orange-400">{systemMetrics.adaptabilityScore}%</div>
-              <div className="text-sm text-muted-foreground">AI Adaptability</div>
-              <Badge className="mt-2 bg-orange-600 text-white">EVOLVING</Badge>
-            </div>
-          </div>
-
-          {/* Quantum Evolution Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center p-6 rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30">
-              <Zap className="h-12 w-12 mx-auto text-cyan-400 animate-pulse mb-4" />
-              <div className="text-3xl font-bold text-cyan-400">{dailyEvolution}</div>
-              <div className="text-sm text-muted-foreground">Daily Evolutions</div>
-              <div className="text-xs text-cyan-300 mt-2">Continuous Improvement</div>
-            </div>
-
-            <div className="text-center p-6 rounded-lg bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/30">
-              <Database className="h-12 w-12 mx-auto text-purple-400 animate-pulse mb-4" />
-              <div className="text-3xl font-bold text-purple-400">{quantumUpgrades}</div>
-              <div className="text-sm text-muted-foreground">Quantum Upgrades</div>
-              <div className="text-xs text-purple-300 mt-2">Self-Enhancement</div>
-            </div>
-
-            <div className="text-center p-6 rounded-lg bg-gradient-to-br from-green-500/20 to-teal-500/20 border border-green-500/30">
-              <Cpu className="h-12 w-12 mx-auto text-green-400 animate-pulse mb-4" />
-              <div className="text-3xl font-bold text-green-400">{cpuOptimization}%</div>
+            <div className="p-6 rounded-lg bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 text-center">
+              <Cpu className="h-8 w-8 mx-auto text-yellow-400 animate-pulse mb-2" />
+              <div className="text-2xl font-bold text-yellow-400">{cpuOptimization}%</div>
               <div className="text-sm text-muted-foreground">CPU Optimization</div>
-              <div className="text-xs text-green-300 mt-2">Pro Mode Active</div>
+              <Badge className="mt-2 bg-yellow-600 text-white">OPTIMIZED</Badge>
             </div>
           </div>
 
-          {/* Resilience Progress */}
+          {/* Evolution Progress */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h4 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                🌌 Ultimate Resilience Level
-              </h4>
-              <span className="text-2xl font-bold text-blue-400">{resilienceLevel}%</span>
+              <h4 className="text-xl font-bold text-blue-400">🌌 Quantum Evolution Progress</h4>
+              <span className="text-lg font-bold text-blue-400">{dailyEvolution} upgrades today</span>
             </div>
-            <Progress value={Math.min(100, resilienceLevel)} className="h-6 bg-gradient-to-r" />
-            <p className="text-center text-sm text-muted-foreground">
-              🧠 Quantum AI Learning • 🛡️ Zero Trace Protocol • ⚡ CPU Optimized
-            </p>
+            <Progress value={Math.min(100, (dailyEvolution / 100) * 100)} className="h-4" />
+            <div className="text-center text-sm text-muted-foreground">
+              🚀 {quantumUpgrades} total quantum upgrades • 🧠 Self-learning AI active • ⚡ Millisecond improvements
+            </div>
           </div>
 
           {/* Ultimate Activation Button */}
           <Button 
             onClick={activateUltimateMode}
-            className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white font-bold text-xl py-8"
+            className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white font-bold text-2xl py-10"
           >
-            <Zap className="h-8 w-8 mr-3 animate-pulse" />
-            🌌 ACTIVATE ULTIMATE QUANTUM MODE
+            <Zap className="h-10 w-10 mr-4 animate-pulse" />
+            🌌 ACTIVATE ULTIMATE QUANTUM MODE - INVINCIBLE SECURITY
           </Button>
 
-          {/* Security Features */}
+          {/* System Status Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
-              <h5 className="font-bold text-blue-400">🛡️ QUANTUM SECURITY FEATURES:</h5>
+              <h5 className="font-bold text-blue-400">🛡️ ULTIMATE FEATURES:</h5>
               <ul className="text-sm space-y-1 text-blue-200">
                 <li className="flex items-center gap-2">
-                  <Eye className="h-4 w-4" /> Zero Information Leakage
+                  <Shield className="h-4 w-4" /> Quantum Evolution Every Millisecond
                 </li>
                 <li className="flex items-center gap-2">
-                  <Lock className="h-4 w-4" /> Admin-Only Access Fortress
+                  <Brain className="h-4 w-4" /> Self-Learning AI Protection
                 </li>
                 <li className="flex items-center gap-2">
-                  <Shield className="h-4 w-4" /> Quantum Encryption Barriers
+                  <Eye className="h-4 w-4" /> Zero Trace Protocol Active
                 </li>
                 <li className="flex items-center gap-2">
-                  <Zap className="h-4 w-4" /> Real-time Threat Neutralization
+                  <Cpu className="h-4 w-4" /> Intelligent CPU Optimization
                 </li>
               </ul>
             </div>
 
             <div className="space-y-3">
-              <h5 className="font-bold text-purple-400">⚡ PERFORMANCE FEATURES:</h5>
+              <h5 className="font-bold text-purple-400">🌌 QUANTUM GUARANTEES:</h5>
               <ul className="text-sm space-y-1 text-purple-200">
                 <li className="flex items-center gap-2">
-                  <Cpu className="h-4 w-4" /> Intelligent CPU Management
+                  <Globe className="h-4 w-4" /> Always Ahead of Future Threats
                 </li>
                 <li className="flex items-center gap-2">
-                  <Server className="h-4 w-4" /> Auto-scaling Architecture
+                  <Database className="h-4 w-4" /> Unbreakable Security Wall
                 </li>
                 <li className="flex items-center gap-2">
-                  <HardDrive className="h-4 w-4" /> Smart Memory Optimization
+                  <Activity className="h-4 w-4" /> Continuous Background Protection
                 </li>
                 <li className="flex items-center gap-2">
-                  <Wifi className="h-4 w-4" /> Network Traffic Balancing
+                  <HardDrive className="h-4 w-4" /> Lifelong Evolution Guarantee
                 </li>
               </ul>
-            </div>
-          </div>
-
-          {/* Quantum Metrics Display */}
-          <div className="bg-gradient-to-r from-indigo-900/40 to-purple-900/40 rounded-lg p-6 border border-indigo-500/30">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-              <div>
-                <div className="text-2xl font-bold text-indigo-400">{quantumSecurity.metrics.threatsBlocked}</div>
-                <div className="text-xs text-muted-foreground">Threats Blocked</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-purple-400">{quantumSecurity.metrics.walletsProtected}</div>
-                <div className="text-xs text-muted-foreground">Wallets Protected</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-pink-400">{quantumSecurity.metrics.attacksNeutralized}</div>
-                <div className="text-xs text-muted-foreground">Attacks Neutralized</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-cyan-400">{quantumSecurity.metrics.quantumSecurityScore}%</div>
-                <div className="text-xs text-muted-foreground">Quantum Score</div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Quantum Promise */}
-      <Card className="bg-gradient-to-r from-red-900/20 to-purple-900/20 border border-red-500/20">
-        <CardContent className="p-6 text-center">
-          <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-purple-400 mb-6">
-            🌌 QUANTUM RESILIENCE PROMISE 🌌
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="space-y-2">
-              <div className="text-6xl">🛡️</div>
-              <div className="font-bold text-blue-400">STRONGEST SECURITY</div>
-              <div className="text-sm text-muted-foreground">
-                Quantum-enhanced protection that evolves every millisecond
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-6xl">👻</div>
-              <div className="font-bold text-purple-400">ZERO TRACE PROTOCOL</div>
-              <div className="text-sm text-muted-foreground">
-                No information ever leaves our secure network
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-6xl">⚡</div>
-              <div className="font-bold text-green-400">UNLIMITED PERFORMANCE</div>
-              <div className="text-sm text-muted-foreground">
-                Intelligent CPU optimization for any traffic load
-              </div>
-            </div>
-          </div>
-          <div className="mt-8 p-4 bg-gradient-to-r from-blue-900/20 to-purple-900/20 rounded-lg">
-            <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-              🎯 ADMIN-ONLY FORTRESS - FOREVER INVINCIBLE 🎯
-            </div>
-            <div className="text-sm text-muted-foreground mt-2">
-              Self-improving quantum system that stays ahead of all threats, always
             </div>
           </div>
         </CardContent>
