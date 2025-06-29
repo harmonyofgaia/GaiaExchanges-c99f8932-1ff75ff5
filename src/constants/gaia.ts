@@ -1,4 +1,5 @@
 
+
 export const GAIA_TOKEN = {
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
@@ -18,7 +19,14 @@ export const GAIA_METRICS = {
   REINVEST_RATE: 4.2,
   SECURITY_LEVEL: 98.7,
   DRAGON_POWER: 150,
-  ENVIRONMENTAL_IMPACT: 97.8
+  ENVIRONMENTAL_IMPACT: 97.8,
+  INITIAL_VOLUME: 8750000,
+  INITIAL_HOLDERS: 12450,
+  INITIAL_TRANSACTIONS: 45780,
+  INITIAL_MARKET_CAP: 278687500,
+  SECURITY_SCORE: 98.7,
+  ECOSYSTEM_HEALTH: 96.8,
+  NETWORK_SPEED: 2500
 }
 
 export const formatGaiaPrice = (price: number): string => {
@@ -36,3 +44,4 @@ export const formatGaiaNumber = (number: number): string => {
     maximumFractionDigits: 2
   }).format(number)
 }
+
