@@ -1,3 +1,4 @@
+
 import { Badge } from '@/components/ui/badge'
 import { 
   Sparkles, 
@@ -21,7 +22,7 @@ export const HeroSection = () => {
       <div className="mb-8 relative z-10">
         {/* Custom Gothic Style Title */}
         <h1 className="mb-6 relative flex flex-col items-center">
-          {/* Main Gothic Title with Custom Styling */}
+          {/* Main Gothic Title with Creative Multi-Color Styling */}
           <div className="relative mb-4">
             {/* Shadow/Glow Effect */}
             <div className="absolute inset-0 scale-110 opacity-30">
@@ -30,87 +31,76 @@ export const HeroSection = () => {
                 style={{
                   fontFamily: "'Uncial Antiqua', 'Cinzel Decorative', serif",
                   letterSpacing: '0.15em',
-                  textShadow: '0 0 20px rgba(139, 92, 246, 0.8), 0 0 40px rgba(139, 92, 246, 0.6)'
+                  textShadow: '0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(220, 20, 60, 0.6)'
                 }}
               >
                 ℌ𝔞𝔯𝔪𝔬𝔫𝔶
               </div>
             </div>
             
-            {/* Main Title with Gothic Styling */}
+            {/* Main Title with Creative Multi-Color Gothic Styling */}
             <div 
-              className="relative text-8xl font-bold bg-gradient-to-r from-purple-200 via-white to-purple-200 bg-clip-text text-transparent"
+              className="relative text-8xl font-bold"
               style={{
                 fontFamily: "'Uncial Antiqua', 'Cinzel Decorative', serif",
                 letterSpacing: '0.15em',
                 textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
-                filter: 'drop-shadow(0 0 10px rgba(139, 92, 246, 0.5))'
+                filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.5))',
+                background: 'linear-gradient(45deg, #ff6b6b 0%, #ffd93d 25%, #6bcf7f 50%, #4ecdc4 75%, #45b7d1 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
               }}
             >
               ℌ𝔞𝔯𝔪𝔬𝔫𝔶
             </div>
             
             {/* Gothic Decorative Elements */}
-            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-4xl text-purple-400 opacity-80">
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-4xl text-yellow-400 opacity-80">
               ✠ ⚜ ✠
             </div>
-            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-4xl text-purple-400 opacity-80">
+            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-4xl text-red-400 opacity-80">
               ❦ ⚜ ❦
             </div>
           </div>
 
-          {/* "OF" with smaller gothic styling */}
+          {/* "OF" with enhanced styling */}
           <div className="relative mb-2">
             <span 
-              className="text-4xl font-bold text-purple-300"
+              className="text-4xl font-bold"
               style={{
                 fontFamily: "'Uncial Antiqua', 'Cinzel Decorative', serif",
                 letterSpacing: '0.2em',
-                textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
+                textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
+                background: 'linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
               }}
             >
               𝔬𝔣
             </span>
           </div>
 
-          {/* GAiA with NEW CUSTOM LETTER STYLE and Logo Integration */}
+          {/* GAiA with Logo Integration (NO TEXT UNDER LOGOS) */}
           <div className="relative flex items-center justify-center gap-8">
-            {/* Left Logo with Enhanced Fade Effect and "Harmony of GAiA" text */}
+            {/* Left Logo with Enhanced Fade Effect (NO TEXT) */}
             <div className="relative flex flex-col items-center">
-              <div className="relative w-24 h-24 mb-2">
+              <div className="relative w-24 h-24">
                 <img 
                   src="/lovable-uploads/32992cdc-cfdf-4b28-805d-7e30bac68456.png"
                   alt="Gaia of Harmony Logo Left"
                   className="w-24 h-24 object-contain animate-pulse"
                   style={{
                     filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))',
-                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.2) 80%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.2) 80%, rgba(0,0,0,0) 100%)'
+                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)'
                   }}
                 />
-                {/* Additional fade overlay for smoother transition */}
-                <div 
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: 'radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0.9) 100%)'
-                  }}
-                />
-              </div>
-              {/* "Harmony of GAiA" text under left logo */}
-              <div className="text-center">
-                <div 
-                  className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-green-300"
-                  style={{
-                    fontFamily: "'Cinzel', serif",
-                    letterSpacing: '0.1em'
-                  }}
-                >
-                  Harmony of GAiA
-                </div>
               </div>
             </div>
 
-            {/* NEW CUSTOM GAiA STYLING */}
+            {/* GAiA STYLING */}
             <div className="relative">
               {/* Glow Effect Background */}
               <div className="absolute inset-0 scale-125 opacity-50">
@@ -126,7 +116,7 @@ export const HeroSection = () => {
                 </div>
               </div>
               
-              {/* Main GAiA Title with NEW Custom Styling */}
+              {/* Main GAiA Title */}
               <div 
                 className="relative text-8xl font-bold bg-gradient-to-r from-emerald-200 via-green-100 to-teal-200 bg-clip-text text-transparent animate-pulse"
                 style={{
@@ -153,38 +143,19 @@ export const HeroSection = () => {
               </div>
             </div>
 
-            {/* Right Logo with Enhanced Fade Effect (Mirrored) and "Harmony of GAiA" text */}
+            {/* Right Logo with Enhanced Fade Effect (Mirrored, NO TEXT) */}
             <div className="relative flex flex-col items-center">
-              <div className="relative w-24 h-24 mb-2">
+              <div className="relative w-24 h-24">
                 <img 
                   src="/lovable-uploads/32992cdc-cfdf-4b28-805d-7e30bac68456.png"
                   alt="Gaia of Harmony Logo Right"
                   className="w-24 h-24 object-contain animate-pulse transform scale-x-[-1]"
                   style={{
                     filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))',
-                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.2) 80%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.2) 80%, rgba(0,0,0,0) 100%)'
+                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)'
                   }}
                 />
-                {/* Additional fade overlay for smoother transition */}
-                <div 
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: 'radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0.9) 100%)'
-                  }}
-                />
-              </div>
-              {/* "Harmony of GAiA" text under right logo (mirrored) */}
-              <div className="text-center">
-                <div 
-                  className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-purple-300"
-                  style={{
-                    fontFamily: "'Cinzel', serif",
-                    letterSpacing: '0.1em'
-                  }}
-                >
-                  Harmony of GAiA
-                </div>
               </div>
             </div>
           </div>

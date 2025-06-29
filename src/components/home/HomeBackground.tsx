@@ -1,9 +1,13 @@
 
 import { AbstractArtOverlay } from '@/components/ui/abstract-art-overlay'
+import { MatrixHarmonyBackground } from '@/components/ui/matrix-harmony-background'
 
 export const HomeBackground = () => {
   return (
     <>
+      {/* Matrix Harmony Background - New Addition */}
+      <MatrixHarmonyBackground />
+
       {/* Abstract Art Background Layers */}
       <div className="fixed inset-0 z-0">
         {/* Primary abstract background */}
