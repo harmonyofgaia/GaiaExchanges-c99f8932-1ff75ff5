@@ -1,12 +1,10 @@
-
 import { useState } from 'react'
 import { AdminLogin } from './AdminLogin'
 import { AdminMFA } from './AdminMFA'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Shield, LogOut, RefreshCw, AlertCircle } from 'lucide-react'
-import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Shield, LogOut, RefreshCw } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function SecureAdminLogin() {
@@ -174,16 +172,6 @@ export function SecureAdminLogin() {
             {showRecovery ? 'Admin Recovery System • 4-Step Verification' : 'Secure Admin Login'}
           </p>
         </div>
-
-        {/* Quantum Key Info */}
-        {!showRecovery && (
-          <Alert className="mb-6 border-blue-500/30 bg-blue-900/20">
-            <AlertCircle className="h-4 w-4 text-blue-400" />
-            <AlertDescription className="text-blue-300">
-              <strong>Quantum Admin Key:</strong> This is your master security key: <code className="bg-black/30 px-1 rounded">HARMONY_QUANTUM_VAULT_ACCESS</code>
-            </AlertDescription>
-          </Alert>
-        )}
 
         {!showRecovery ? (
           <>
