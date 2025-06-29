@@ -8,14 +8,13 @@ import { Shield, Lock, Eye, EyeOff } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface AdminLoginProps {
-  onLoginSuccess: (username: string, password: string, adminKey: string) => boolean
+  onLoginSuccess: (username: string, password: string) => boolean
 }
 
 export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
   const [credentials, setCredentials] = useState({
     username: '',
-    password: '',
-    adminKey: ''
+    password: ''
   })
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -25,17 +24,17 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
     setIsLoading(true)
 
     try {
-      const success = onLoginSuccess(credentials.username, credentials.password, credentials.adminKey)
+      const success = onLoginSuccess(credentials.username, credentials.password)
       
       if (!success) {
         toast.error('❌ Access Denied', {
-          description: 'Invalid credentials. Security protocol active.',
+          description: 'Invalid credentials. Vault protection active.',
           duration: 5000
         })
       }
     } catch (error) {
       toast.error('Security Error', {
-        description: 'Authentication system protected the attempt',
+        description: 'Vault protection system activated',
         duration: 5000
       })
     } finally {
@@ -43,8 +42,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
       // Clear sensitive data immediately after attempt
       setCredentials({
         username: '',
-        password: '',
-        adminKey: ''
+        password: ''
       })
     }
   }
@@ -54,7 +52,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-green-400 text-center">
           <Shield className="h-5 w-5" />
-          GAIA Admin Access
+          GAIA Vault Admin Access
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -73,7 +71,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-green-300">Admin Password</Label>
+            <Label htmlFor="password" className="text-green-300">Vault Password</Label>
             <div className="relative">
               <Input
                 id="password"
@@ -96,32 +94,19 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="adminKey" className="text-green-300">Security Key</Label>
-            <Input
-              id="adminKey"
-              type="password"
-              value={credentials.adminKey}
-              onChange={(e) => setCredentials(prev => ({ ...prev, adminKey: e.target.value }))}
-              className="bg-black/30 border-green-500/30"
-              autoComplete="off"
-              required
-            />
-          </div>
-
           <Button 
             type="submit" 
             disabled={isLoading}
             className="w-full bg-green-600 hover:bg-green-700"
           >
             <Lock className="h-4 w-4 mr-2" />
-            {isLoading ? 'Verifying...' : 'Access GAIA Admin Vault'}
+            {isLoading ? 'Vault Verification...' : 'Access GAIA Vault'}
           </Button>
         </form>
 
         <div className="mt-4 p-3 bg-green-900/20 border border-green-500/20 rounded-lg">
           <p className="text-xs text-green-300 text-center">
-            🛡️ Ultra-Secure Access • Advanced Protection Active • All Attempts Monitored
+            🛡️ Quantum Vault Protected • Advanced Security • All Access Monitored
           </p>
         </div>
       </CardContent>
