@@ -5,7 +5,8 @@ import { AdminMFA } from './AdminMFA'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Shield, LogOut, RefreshCw } from 'lucide-react'
+import { Shield, LogOut, RefreshCw, AlertCircle } from 'lucide-react'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 import { toast } from 'sonner'
 
 export function SecureAdminLogin() {
@@ -164,27 +165,36 @@ export function SecureAdminLogin() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 p-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-md mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-green-400 mb-2">
             🌍 GAIA ADMIN ACCESS
           </h1>
           <p className="text-green-300">
-            {showRecovery ? 'Admin Recovery System • 4-Step Verification' : 'Secure Admin Login • Direct Access'}
+            {showRecovery ? 'Admin Recovery System • 4-Step Verification' : 'Secure Admin Login'}
           </p>
         </div>
+
+        {/* Quantum Key Info */}
+        {!showRecovery && (
+          <Alert className="mb-6 border-blue-500/30 bg-blue-900/20">
+            <AlertCircle className="h-4 w-4 text-blue-400" />
+            <AlertDescription className="text-blue-300">
+              <strong>Quantum Admin Key:</strong> This is your master security key: <code className="bg-black/30 px-1 rounded">HARMONY_QUANTUM_VAULT_ACCESS</code>
+            </AlertDescription>
+          </Alert>
+        )}
 
         {!showRecovery ? (
           <>
             <AdminLogin onLoginSuccess={handleDirectLogin} />
-            <div className="mt-4 text-center">
+            <div className="mt-6 text-center">
               <Button 
                 onClick={handleRecoveryLogin}
-                variant="outline" 
-                className="border-blue-500/30 text-blue-400"
+                variant="ghost" 
+                className="text-xs text-muted-foreground hover:text-blue-400"
               >
-                <RefreshCw className="h-4 w-4 mr-2" />
-                Need Recovery Access?
+                Need 4-Step Recovery Access?
               </Button>
             </div>
           </>
@@ -201,10 +211,10 @@ export function SecureAdminLogin() {
             <div className="mt-4 text-center">
               <Button 
                 onClick={() => setShowRecovery(false)}
-                variant="outline" 
-                className="border-gray-500/30"
+                variant="ghost" 
+                className="text-xs text-muted-foreground"
               >
-                Back to Direct Login
+                Back to Simple Login
               </Button>
             </div>
           </>
