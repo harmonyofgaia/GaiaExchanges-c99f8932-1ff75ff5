@@ -10,6 +10,7 @@ import { MissingFeaturesChecker } from '@/components/admin/MissingFeaturesChecke
 import { MasterArtworkGenerator } from '@/components/admin/MasterArtworkGenerator'
 import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
 import { WormsGameArena } from '@/components/WormsGameArena'
+import { GameDevelopmentCloud } from '@/components/admin/GameDevelopmentCloud'
 
 const Admin = () => {
   return (
@@ -28,8 +29,11 @@ const Admin = () => {
         </div>
 
         <AdminProtectedRoute>
-          <Tabs defaultValue="neural-art" className="w-full">
-            <TabsList className="grid w-full grid-cols-8 bg-black/50 backdrop-blur-md border border-green-500/20">
+          <Tabs defaultValue="game-cloud" className="w-full">
+            <TabsList className="grid w-full grid-cols-9 bg-black/50 backdrop-blur-md border border-green-500/20">
+              <TabsTrigger value="game-cloud" className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400">
+                🎮 Game Cloud
+              </TabsTrigger>
               <TabsTrigger value="neural-art" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
                 🧠 Neural Art
               </TabsTrigger>
@@ -55,6 +59,10 @@ const Admin = () => {
                 🎨 Artwork Cloud
               </TabsTrigger>
             </TabsList>
+            
+            <TabsContent value="game-cloud" className="space-y-6 mt-6">
+              <GameDevelopmentCloud />
+            </TabsContent>
             
             <TabsContent value="neural-art" className="space-y-6 mt-6">
               <MasterArtworkGenerator />
