@@ -24,7 +24,7 @@ function App() {
             <div className="flex-1 flex flex-col">
               <header className="h-12 flex items-center border-b px-4">
                 <SidebarTrigger />
-                <h1 className="ml-4 text-lg font-semibold text-green-400">GAiA Harmony Exchange</h1>
+                <h1 className="ml-4 text-lg font-semibold text-green-400">Gaia's Exchanges</h1>
               </header>
               <main className="flex-1 p-6">
                 <Routes>

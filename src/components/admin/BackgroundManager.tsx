@@ -1,10 +1,10 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Badge } from '@/components/ui/badge'
 import { Palette, Sparkles, Zap, Crown, Globe, Heart } from 'lucide-react'
+import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 
 interface CollectedImage {
   id: string
@@ -14,7 +14,7 @@ interface CollectedImage {
   inspiration: string
 }
 
-export function BackgroundManager() {
+function BackgroundManagerContent() {
   const [currentBackground, setCurrentBackground] = useState('neural-electric')
   const [reverseButtonVisible, setReverseButtonVisible] = useState(true)
   const [dailyInspiration, setDailyInspiration] = useState('')
@@ -106,7 +106,7 @@ export function BackgroundManager() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-purple-400">
             <Palette className="h-6 w-6" />
-            Background Design Studio
+            Background Design Studio - Admin Only
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -182,5 +182,13 @@ export function BackgroundManager() {
         </CardContent>
       </Card>
     </div>
+  )
+}
+
+export function BackgroundManager() {
+  return (
+    <AdminProtectedRoute>
+      <BackgroundManagerContent />
+    </AdminProtectedRoute>
   )
 }

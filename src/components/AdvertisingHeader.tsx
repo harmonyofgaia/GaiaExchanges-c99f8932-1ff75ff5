@@ -9,7 +9,7 @@ interface AdvertisingHeaderProps {
 }
 
 export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
-  title = "GAiA's Exchanges",
+  title = "Gaia's Exchanges",
   subtitle = "Harmony of Gaia - Together We Make The World A Better Place",
   className = ""
 }) => {

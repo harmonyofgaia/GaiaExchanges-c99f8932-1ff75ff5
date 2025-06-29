@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -8,8 +7,9 @@ import { Badge } from '@/components/ui/badge'
 import { Switch } from '@/components/ui/switch'
 import { Settings, Shield, Lock, Eye, AlertTriangle, Activity, Globe, DollarSign } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 
-export function EnhancedAdminControls() {
+function EnhancedAdminControlsContent() {
   const [securityLevel, setSecurityLevel] = useState('maximum')
   const [autoSecurityUpdates, setAutoSecurityUpdates] = useState(true)
   const [realTimeMonitoring, setRealTimeMonitoring] = useState(true)
@@ -56,7 +56,7 @@ export function EnhancedAdminControls() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-purple-400">
             <Shield className="h-5 w-5" />
-            Enhanced Admin Control System - Harmony of Gaia
+            Enhanced Admin Control System - Gaia's Exchanges
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -343,7 +343,7 @@ export function EnhancedAdminControls() {
                     ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7
                   </div>
                   <p className="text-xs text-blue-300 mt-2">
-                    This wallet has full administrative privileges over the Harmony of Gaia exchange
+                    This wallet has full administrative privileges over Gaia's Exchanges
                   </p>
                 </div>
 
@@ -382,5 +382,13 @@ export function EnhancedAdminControls() {
         </TabsContent>
       </Tabs>
     </div>
+  )
+}
+
+export function EnhancedAdminControls() {
+  return (
+    <AdminProtectedRoute>
+      <EnhancedAdminControlsContent />
+    </AdminProtectedRoute>
   )
 }
