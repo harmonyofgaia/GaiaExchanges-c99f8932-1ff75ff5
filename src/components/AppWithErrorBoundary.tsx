@@ -24,6 +24,7 @@ import Downloads from '@/pages/Downloads'
 import Marketing from '@/pages/Marketing'
 import Reinvestments from '@/pages/Reinvestments'
 import Transparency from '@/pages/Transparency'
+import LiveTracking from '@/pages/LiveTracking'
 import NotFound from '@/pages/NotFound'
 
 const queryClient = new QueryClient()
@@ -37,6 +38,9 @@ const AppContent = () => {
         <Routes>
           {/* Admin route - no sidebar, special handling */}
           <Route path="/admin" element={<Admin />} />
+          
+          {/* LiveTracking route - no sidebar, special handling */}
+          <Route path="/live-tracking" element={<LiveTracking />} />
           
           {/* All other routes with sidebar */}
           <Route path="/*" element={
