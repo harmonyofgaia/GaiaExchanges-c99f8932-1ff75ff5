@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
@@ -6,13 +5,11 @@ import { SystemControlCenter } from '@/components/admin/SystemControlCenter'
 import { QuantumAdminDashboard } from '@/components/admin/QuantumAdminDashboard'
 import { WebsiteHostingManager } from '@/components/WebsiteHostingManager'
 import { EnhancedArtworkCloud } from '@/components/creative/EnhancedArtworkCloud'
-import { FeatureStatusChecker } from '@/components/admin/FeatureStatusChecker'
-import { MissingFeaturesChecker } from '@/components/admin/MissingFeaturesChecker'
 import { MasterArtworkGenerator } from '@/components/admin/MasterArtworkGenerator'
 import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
 import { WormsGameArena } from '@/components/WormsGameArena'
 import { GameDevelopmentCloud } from '@/components/admin/GameDevelopmentCloud'
-import { UserManagementSystem } from '@/components/admin/UserManagementSystem'
+import { UserManagementSystemRefactored } from '@/components/admin/UserManagementSystemRefactored'
 import { SecureConnectionManager } from '@/components/admin/SecureConnectionManager'
 import { QuantumBlockchainCore } from '@/components/quantum/QuantumBlockchainCore'
 import { LiveBlockchainViewer } from '@/components/admin/LiveBlockchainViewer'
@@ -61,9 +58,6 @@ const Admin = () => {
               <TabsTrigger value="gaming" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
                 🎮 Gaming NFTs
               </TabsTrigger>
-              <TabsTrigger value="audit" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-                🔍 Feature Audit
-              </TabsTrigger>
               <TabsTrigger value="system" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
                 🛡️ System
               </TabsTrigger>
@@ -76,7 +70,7 @@ const Admin = () => {
             </TabsList>
             
             <TabsContent value="user-management" className="space-y-6 mt-6">
-              <UserManagementSystem />
+              <UserManagementSystemRefactored />
             </TabsContent>
             
             <TabsContent value="live-blockchain" className="space-y-6 mt-6">
@@ -106,10 +100,6 @@ const Admin = () => {
             <TabsContent value="gaming" className="space-y-6 mt-6">
               <GamingNFTMarketplace />
               <WormsGameArena />
-            </TabsContent>
-            
-            <TabsContent value="audit" className="space-y-6 mt-6">
-              <MissingFeaturesChecker />
             </TabsContent>
             
             <TabsContent value="system" className="space-y-6 mt-6">
