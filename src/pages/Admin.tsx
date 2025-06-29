@@ -15,6 +15,8 @@ import { GameDevelopmentCloud } from '@/components/admin/GameDevelopmentCloud'
 import { UserManagementSystem } from '@/components/admin/UserManagementSystem'
 import { SecureConnectionManager } from '@/components/admin/SecureConnectionManager'
 import { QuantumBlockchainCore } from '@/components/quantum/QuantumBlockchainCore'
+import { LiveBlockchainViewer } from '@/components/admin/LiveBlockchainViewer'
+import { GlobalMarketingEngine } from '@/components/marketing/GlobalMarketingEngine'
 
 const Admin = () => {
   return (
@@ -34,15 +36,21 @@ const Admin = () => {
 
         <AdminProtectedRoute>
           <Tabs defaultValue="user-management" className="w-full">
-            <TabsList className="grid w-full grid-cols-10 bg-black/50 backdrop-blur-md border border-green-500/20">
+            <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
               <TabsTrigger value="user-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                 👥 User Control
+              </TabsTrigger>
+              <TabsTrigger value="live-blockchain" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+                ⚡ Live Blockchain
               </TabsTrigger>
               <TabsTrigger value="architek-blockchain" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
                 🔗 Architek Network
               </TabsTrigger>
               <TabsTrigger value="secure-connections" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
                 🛡️ Secure Matrix
+              </TabsTrigger>
+              <TabsTrigger value="marketing-engine" className="data-[state=active]:bg-gold-500/20 data-[state=active]:text-gold-400">
+                🚀 Marketing Engine
               </TabsTrigger>
               <TabsTrigger value="game-cloud" className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400">
                 🎮 Game Cloud
@@ -71,12 +79,20 @@ const Admin = () => {
               <UserManagementSystem />
             </TabsContent>
             
+            <TabsContent value="live-blockchain" className="space-y-6 mt-6">
+              <LiveBlockchainViewer />
+            </TabsContent>
+            
             <TabsContent value="architek-blockchain" className="space-y-6 mt-6">
               <QuantumBlockchainCore />
             </TabsContent>
             
             <TabsContent value="secure-connections" className="space-y-6 mt-6">
               <SecureConnectionManager />
+            </TabsContent>
+            
+            <TabsContent value="marketing-engine" className="space-y-6 mt-6">
+              <GlobalMarketingEngine />
             </TabsContent>
             
             <TabsContent value="game-cloud" className="space-y-6 mt-6">
