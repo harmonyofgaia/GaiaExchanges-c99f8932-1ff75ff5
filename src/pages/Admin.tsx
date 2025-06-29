@@ -8,6 +8,7 @@ import { WebsiteHostingManager } from '@/components/WebsiteHostingManager'
 import { EnhancedArtworkCloud } from '@/components/creative/EnhancedArtworkCloud'
 import { FeatureStatusChecker } from '@/components/admin/FeatureStatusChecker'
 import { MissingFeaturesChecker } from '@/components/admin/MissingFeaturesChecker'
+import { MasterArtworkGenerator } from '@/components/admin/MasterArtworkGenerator'
 
 const Admin = () => {
   return (
@@ -26,8 +27,11 @@ const Admin = () => {
         </div>
 
         <AdminProtectedRoute>
-          <Tabs defaultValue="audit" className="w-full">
-            <TabsList className="grid w-full grid-cols-6 bg-black/50 backdrop-blur-md border border-green-500/20">
+          <Tabs defaultValue="neural-art" className="w-full">
+            <TabsList className="grid w-full grid-cols-7 bg-black/50 backdrop-blur-md border border-green-500/20">
+              <TabsTrigger value="neural-art" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
+                🧠 Neural Art
+              </TabsTrigger>
               <TabsTrigger value="audit" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                 🔍 Feature Audit
               </TabsTrigger>
@@ -47,6 +51,10 @@ const Admin = () => {
                 🎨 Artwork Cloud
               </TabsTrigger>
             </TabsList>
+            
+            <TabsContent value="neural-art" className="space-y-6 mt-6">
+              <MasterArtworkGenerator />
+            </TabsContent>
             
             <TabsContent value="audit" className="space-y-6 mt-6">
               <MissingFeaturesChecker />
