@@ -21,7 +21,6 @@ import {
 import { Link } from 'react-router-dom'
 import { EternalDragonDisplay } from '@/components/security/EternalDragonDisplay'
 import { RobotAdvertisement } from '@/components/advertising/RobotAdvertisement'
-import { UnifiedDragonSecurity } from '@/components/security/UnifiedDragonSecurity'
 import { UnifiedServiceOrchestrator } from '@/components/UnifiedServiceOrchestrator'
 import { GAIA_TOKEN } from '@/constants/gaia'
 
@@ -176,47 +175,10 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Eternal Dragon Display */}
+        {/* ETERNAL DRAGON - Now prominently displayed */}
         <div className="mb-12">
           <EternalDragonDisplay />
         </div>
-
-        {/* Unified Security Preview */}
-        <Card className="mb-12 border-4 border-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-gradient-to-br from-red-900/20 to-purple-900/20">
-          <CardHeader>
-            <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-purple-400">
-              🛡️ UNIFIED DRAGON SECURITY PREVIEW
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              <div>
-                <div className="text-3xl font-bold text-red-400">∞</div>
-                <div className="text-sm text-muted-foreground">Security Power</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-purple-400">{unifiedServices.activeServices}</div>
-                <div className="text-sm text-muted-foreground">Active Services</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-blue-400">100%</div>
-                <div className="text-sm text-muted-foreground">Invisibility Level</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-green-400">24/7</div>
-                <div className="text-sm text-muted-foreground">Dragon Protection</div>
-              </div>
-            </div>
-            <div className="mt-6 text-center">
-              <Link to="/ultimate-security">
-                <Button className="bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 hover:opacity-80 text-white text-lg px-12 py-4">
-                  <Shield className="h-6 w-6 mr-2" />
-                  Enter Dragon Security Fortress
-                </Button>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
@@ -278,7 +240,7 @@ const Home = () => {
         </Card>
 
         {/* Call to Action */}
-        <Card className="border-4 border-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-gradient-to-r from-purple-900/30 via-pink-900/30 to-red-900/30">
+        <Card className="border-4 border-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-gradient-to-r from-purple-900/30 via-pink-900/30 to-red-900/30 mb-8">
           <CardContent className="pt-12 pb-12 text-center">
             <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 mb-6">
               🚀 JOIN THE ETERNAL REVOLUTION
@@ -303,6 +265,43 @@ const Home = () => {
                 <Button className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-xl px-12 py-4">
                   <Music className="h-6 w-6 mr-2" />
                   Artist Streaming
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Dragon Security Preview - Moved to bottom with smaller context */}
+        <Card className="border-2 border-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-gradient-to-br from-red-900/10 to-purple-900/10">
+          <CardHeader>
+            <CardTitle className="text-center text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-purple-400">
+              🛡️ UNIFIED DRAGON SECURITY STATS
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
+              <div>
+                <div className="text-xl font-bold text-red-400">∞</div>
+                <div className="text-xs text-muted-foreground">Security Power</div>
+              </div>
+              <div>
+                <div className="text-xl font-bold text-purple-400">{unifiedServices.activeServices}</div>
+                <div className="text-xs text-muted-foreground">Active Services</div>
+              </div>
+              <div>
+                <div className="text-xl font-bold text-blue-400">100%</div>
+                <div className="text-xs text-muted-foreground">Invisibility Level</div>
+              </div>
+              <div>
+                <div className="text-xl font-bold text-green-400">24/7</div>
+                <div className="text-xs text-muted-foreground">Dragon Protection</div>
+              </div>
+            </div>
+            <div className="mt-4 text-center">
+              <Link to="/ultimate-security">
+                <Button size="sm" className="bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 hover:opacity-80 text-white px-6 py-2">
+                  <Shield className="h-4 w-4 mr-2" />
+                  Enter Security Fortress
                 </Button>
               </Link>
             </div>

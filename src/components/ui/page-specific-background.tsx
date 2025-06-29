@@ -11,22 +11,25 @@ interface PageBackgroundConfig {
 }
 
 const pageBackgrounds: Record<string, PageBackgroundConfig> = {
-  '/': { style: 'classic', intensity: 'medium' },
-  '/about': { style: 'galaxy', intensity: 'high' },
-  '/wallet': { style: 'matrix', intensity: 'medium' },
-  '/markets': { style: 'fire', intensity: 'high' },
-  '/smart-contracts': { style: 'plasma', intensity: 'medium' },
+  '/': { style: 'classic', intensity: 'high' },
+  '/gaming': { style: 'fire', intensity: 'high' },
+  '/gaias-exchange': { style: 'matrix', intensity: 'medium' },
+  '/markets': { style: 'plasma', intensity: 'high' },
+  '/artist-streaming': { style: 'rainbow', intensity: 'medium' },
+  '/virtual-world': { style: 'galaxy', intensity: 'high' },
+  '/wallet': { style: 'ice', intensity: 'medium' },
   '/ultimate-security': { style: 'void', intensity: 'high', useQuantum: true },
-  '/system-status': { style: 'ice', intensity: 'medium' },
-  '/comprehensive-status': { style: 'rainbow', intensity: 'high' },
+  '/system-status': { style: 'ocean', intensity: 'low' },
+  '/comprehensive-status': { style: 'forest', intensity: 'medium' },
   '/downloads': { style: 'forest', intensity: 'low' },
   '/marketing': { style: 'ocean', intensity: 'medium' },
-  '/reinvestments': { style: 'plasma', intensity: 'high' },
   '/transparency': { style: 'galaxy', intensity: 'low' },
   '/admin': { style: 'void', intensity: 'high', useQuantum: true },
-  '/gaming': { style: 'fire', intensity: 'high' },
-  '/gaia-fighter-game': { style: 'plasma', intensity: 'high' },
-  '/live-tracking': { style: 'matrix', intensity: 'low', disableMouseInteraction: true }
+  '/gaia-fighter-game': { style: 'fire', intensity: 'high' },
+  '/live-tracking': { style: 'matrix', intensity: 'low', disableMouseInteraction: true },
+  '/profile': { style: 'plasma', intensity: 'medium' },
+  '/contact': { style: 'ocean', intensity: 'medium' },
+  '/docs': { style: 'ice', intensity: 'low' }
 }
 
 export function PageSpecificBackground() {
@@ -47,10 +50,20 @@ export function PageSpecificBackground() {
         />
       )}
       
-      {/* Enhanced visual layers - reduced opacity for live-tracking */}
+      {/* Enhanced visual layers with art textures */}
       <div className={`absolute inset-0 bg-gradient-to-br from-transparent via-black/10 to-black/30 ${
         config.disableMouseInteraction ? 'opacity-30' : ''
       }`} />
+      
+      {/* Nature art overlay with uploaded images */}
+      <div className={`absolute inset-0 bg-[url('/lovable-uploads/0ca4bd04-3680-4cfa-acd8-d61ae9a40101.png')] bg-cover bg-center opacity-5 mix-blend-soft-light ${
+        config.disableMouseInteraction ? 'opacity-3' : ''
+      }`} />
+      <div className={`absolute inset-0 bg-[url('/lovable-uploads/ab19f9f8-2069-4211-955c-dab937602141.png')] bg-cover bg-center opacity-3 mix-blend-overlay ${
+        config.disableMouseInteraction ? 'opacity-2' : ''
+      }`} />
+      
+      {/* Dynamic color gradients based on page style */}
       <div className={`absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.1)_0%,transparent_50%)] ${
         config.disableMouseInteraction ? 'opacity-20' : ''
       }`} />

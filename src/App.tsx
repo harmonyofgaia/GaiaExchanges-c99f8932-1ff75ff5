@@ -31,6 +31,7 @@ import { EnhancedAdminControls } from '@/components/EnhancedAdminControls'
 import { ConnectionTracker } from '@/components/security/ConnectionTracker'
 import { Navbar } from '@/components/Navbar'
 import { AuthProvider } from '@/components/auth/AuthProvider'
+import { PageSpecificBackground } from '@/components/ui/page-specific-background'
 
 const queryClient = new QueryClient()
 
@@ -42,6 +43,7 @@ function App() {
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <PageSpecificBackground />
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
