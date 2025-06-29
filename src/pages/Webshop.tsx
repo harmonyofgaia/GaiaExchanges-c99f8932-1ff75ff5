@@ -1,5 +1,6 @@
 
 import { CoralReefNFTMarketplace } from '@/components/CoralReefNFTMarketplace'
+import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
 
 const Webshop = () => {
   return (
@@ -10,9 +11,15 @@ const Webshop = () => {
             🌊 HARMONY OF GAIA MARKETPLACE
           </h1>
           <p className="text-muted-foreground text-lg mt-2">
-            Purchase NFTs that make a real difference in the world
+            Purchase NFTs that make a real difference in the world • Powered by GAiA Token
+          </p>
+          <p className="text-green-400 mt-1">
+            Visit www.gaiaexchange.net for complete trading experience
           </p>
         </div>
+        
+        {/* GAiA Landscape NFT Marketplace */}
+        <GamingNFTMarketplace />
         
         {/* Coral Reef NFT Marketplace */}
         <CoralReefNFTMarketplace />

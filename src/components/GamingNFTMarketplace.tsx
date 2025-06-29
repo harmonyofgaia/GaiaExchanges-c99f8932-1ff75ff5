@@ -16,9 +16,11 @@ import {
   TreePine,
   Mountain,
   Waves,
-  Flame
+  Flame,
+  ExternalLink
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { GAIA_TOKEN } from '@/constants/gaia'
 
 interface LandscapeNFT {
   id: string
@@ -48,8 +50,8 @@ export function GamingNFTMarketplace() {
       attackPower: 950,
       defenseBonus: 800,
       specialAbility: 'Forest Regeneration',
-      creator: 'GAiA Admin System',
-      sold: true,
+      creator: 'GAiA Harmony System',
+      sold: false,
       image: '🌲'
     },
     {
@@ -61,7 +63,7 @@ export function GamingNFTMarketplace() {
       attackPower: 870,
       defenseBonus: 650,
       specialAbility: 'Lava Strike',
-      creator: 'GAiA Admin System',
+      creator: 'GAiA Harmony System',
       sold: false,
       image: '🌋'
     },
@@ -74,7 +76,7 @@ export function GamingNFTMarketplace() {
       attackPower: 750,
       defenseBonus: 900,
       specialAbility: 'Ice Shield',
-      creator: 'GAiA Admin System',
+      creator: 'GAiA Harmony System',
       sold: false,
       image: '❄️'
     },
@@ -87,8 +89,8 @@ export function GamingNFTMarketplace() {
       attackPower: 680,
       defenseBonus: 720,
       specialAbility: 'Tsunami Wave',
-      creator: 'GAiA Admin System',
-      sold: true,
+      creator: 'GAiA Harmony System',
+      sold: false,
       image: '🌊'
     },
     {
@@ -100,7 +102,7 @@ export function GamingNFTMarketplace() {
       attackPower: 450,
       defenseBonus: 380,
       specialAbility: 'Sandstorm',
-      creator: 'GAiA Admin System',
+      creator: 'GAiA Harmony System',
       sold: false,
       image: '🏜️'
     }
@@ -118,7 +120,7 @@ export function GamingNFTMarketplace() {
 
   const buyNFT = (nft: LandscapeNFT) => {
     toast.success(`🎮 Purchased ${nft.name}!`, {
-      description: `Attack Power: ${nft.attackPower} | Defense: ${nft.defenseBonus} | Ability: ${nft.specialAbility}`,
+      description: `Paid ${nft.price} GAiA tokens | Attack Power: ${nft.attackPower} | Defense: ${nft.defenseBonus}`,
       duration: 5000
     })
   }
@@ -137,20 +139,32 @@ export function GamingNFTMarketplace() {
           🏪 GAiA LANDSCAPE ATTACK NFT MARKETPLACE
         </CardTitle>
         <p className="text-muted-foreground">
-          Purchase admin-curated NFT landscapes to attack and reform other players' worlds • Connected to GAiA Admin System
+          Purchase NFT landscapes powered by Harmony of Gaia token • Buy, sell, and trade on our secure platform
         </p>
       </CardHeader>
 
       <CardContent className="space-y-6">
-        {/* Admin Connection Status */}
+        {/* GAiA Connection Status */}
         <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-3">
-          <div className="flex items-center gap-2 text-green-400 text-sm">
-            <Crown className="h-4 w-4" />
-            <span className="font-medium">✅ Connected to GAiA Admin NFT System</span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-green-400 text-sm">
+              <Crown className="h-4 w-4" />
+              <span className="font-medium">✅ Connected to Harmony of Gaia Network</span>
+            </div>
+            <Button 
+              size="sm" 
+              variant="outline" 
+              onClick={() => window.open('https://www.gaiaexchange.net', '_blank')}
+              className="text-xs"
+            >
+              <ExternalLink className="h-3 w-3 mr-1" />
+              Visit GAiA Exchange
+            </Button>
           </div>
-          <p className="text-xs text-green-300 mt-1">
-            All NFTs are curated and approved by admin • Premium quality guaranteed
-          </p>
+          <div className="mt-2 text-xs text-green-300 space-y-1">
+            <p>Token: {GAIA_TOKEN.SYMBOL} | Contract: {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...</p>
+            <p>Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}... | All transactions secured on Solana network</p>
+          </div>
         </div>
 
         {/* Search and Filter */}
@@ -238,6 +252,7 @@ export function GamingNFTMarketplace() {
                 <div className="space-y-3">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-green-400">{nft.price} GAIA</div>
+                    <div className="text-xs text-muted-foreground">Harmony of Gaia Token</div>
                   </div>
                   <Button 
                     onClick={() => buyNFT(nft)}
@@ -245,7 +260,7 @@ export function GamingNFTMarketplace() {
                     className={`w-full bg-gradient-to-r ${getRarityColor(nft.rarity)} hover:opacity-90 disabled:opacity-50`}
                   >
                     <ShoppingCart className="h-4 w-4 mr-2" />
-                    {nft.sold ? 'SOLD OUT' : 'BUY LANDSCAPE NFT'}
+                    {nft.sold ? 'SOLD OUT' : 'BUY WITH GAIA'}
                   </Button>
                 </div>
               </CardContent>
@@ -253,13 +268,13 @@ export function GamingNFTMarketplace() {
           ))}
         </div>
 
-        {/* Updated Marketplace Stats */}
+        {/* Marketplace Stats */}
         <Card className="bg-black/30 border-purple-500/20 mt-8">
           <CardContent className="p-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div>
                 <div className="text-2xl font-bold text-purple-400">{landscapeNFTs.length}</div>
-                <div className="text-sm text-muted-foreground">Admin Curated</div>
+                <div className="text-sm text-muted-foreground">Total NFTs</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-green-400">{landscapeNFTs.filter(n => n.sold).length}</div>
@@ -271,7 +286,7 @@ export function GamingNFTMarketplace() {
               </div>
               <div>
                 <div className="text-2xl font-bold text-yellow-400">100%</div>
-                <div className="text-sm text-muted-foreground">Quality Assured</div>
+                <div className="text-sm text-muted-foreground">GAiA Powered</div>
               </div>
             </div>
           </CardContent>
@@ -281,12 +296,18 @@ export function GamingNFTMarketplace() {
         <Card className="border-2 border-green-500/50 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
           <CardContent className="p-4 text-center">
             <h4 className="text-green-400 font-bold mb-2">
-              🚀 Powered by GAiA Admin NFT Creation System
+              🚀 Powered by Harmony of Gaia Token Network
             </h4>
-            <p className="text-xs text-muted-foreground">
-              Every NFT is handcrafted by our advanced admin system with guaranteed gameplay balance and premium quality. 
-              Connect your wallet to purchase exclusive GAiA tokens and dominate the battlefield!
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-muted-foreground">
+              <div>
+                <p><span className="text-green-400">Contract:</span> {GAIA_TOKEN.CONTRACT_ADDRESS}</p>
+                <p><span className="text-green-400">Network:</span> {GAIA_TOKEN.NETWORK}</p>
+              </div>
+              <div>
+                <p><span className="text-green-400">Wallet:</span> {GAIA_TOKEN.WALLET_ADDRESS}</p>
+                <p><span className="text-green-400">Website:</span> www.gaiaexchange.net</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </CardContent>
