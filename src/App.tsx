@@ -63,6 +63,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/secure-admin" element={<SecureAdmin />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/about" element={<About />} />
               <Route path="/coin-crafter" element={<CoinCrafter />} />
