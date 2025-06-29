@@ -157,7 +157,7 @@ export function UltimateWalletProtection() {
                 <Badge className="mt-1 bg-purple-600 text-white">PERFECT</Badge>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-orange-400 animate-pulse">{masterOrchestrator.threatIntel.neutralizedAttacks}</div>
+                <div className="text-2xl font-bold text-orange-400 animate-pulse">{masterOrchestrator.threatIntel.blockedAttacks}</div>
                 <div className="text-muted-foreground">Attacks Defeated</div>
                 <Badge className="mt-1 bg-orange-600 text-white">UNBEATABLE</Badge>
               </div>
