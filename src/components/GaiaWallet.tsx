@@ -11,8 +11,8 @@ import { toast } from 'sonner'
 
 export function GaiaWallet() {
   const { wallets, loading } = useWallets()
-  const [realTimeBalance, setRealTimeBalance] = useState(2847.50)
-  const [currentPrice, setCurrentPrice] = useState(GAIA_TOKEN.INITIAL_PRICE)
+  const [realTimeBalance, setRealTimeBalance] = useState<number>(2847.50)
+  const [currentPrice, setCurrentPrice] = useState<number>(GAIA_TOKEN.INITIAL_PRICE)
 
   useEffect(() => {
     const interval = setInterval(() => {

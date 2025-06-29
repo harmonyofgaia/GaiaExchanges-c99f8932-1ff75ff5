@@ -1,5 +1,5 @@
 
-import { Calendar, Home, Inbox, Search, Settings, Shield, Activity, Download, BarChart3, Flame, Gamepad2, TreePine, Wrench } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings, Shield, Activity, Download, BarChart3, Flame, Gamepad2, TreePine, Wrench, Wallet, Globe } from "lucide-react"
 
 import {
   Sidebar,
@@ -19,6 +19,16 @@ const items = [
     title: "Home",
     url: "/",
     icon: Home,
+  },
+  {
+    title: "💰 GAiA Wallet",
+    url: "/wallet",
+    icon: Wallet,
+  },
+  {
+    title: "🌍 Virtual World", 
+    url: "/virtual-world",
+    icon: Globe,
   },
   {
     title: "System Status", 
@@ -67,7 +77,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>GAIA Ecosystem</SidebarGroupLabel>
+          <SidebarGroupLabel>🌍 GAIA Ecosystem - Token Burning Paradise</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
