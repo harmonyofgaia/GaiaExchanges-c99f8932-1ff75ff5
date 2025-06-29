@@ -80,7 +80,7 @@ export function MainNav({ items }: MainNavProps) {
                             <ListItem
                               key={item.title}
                               title={item.title}
-                              href={item.href}
+                              to={item.href}
                             >
                               {item.description}
                             </ListItem>
