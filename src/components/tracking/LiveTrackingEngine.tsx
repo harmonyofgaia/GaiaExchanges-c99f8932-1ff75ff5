@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -16,6 +15,7 @@ interface GaiaTrackingMetrics {
   globalReach: number
   gaiaPrice: number
   gaiaMarketCap: number
+  userEngagement: number
 }
 
 interface LiveGaiaEvent {
@@ -39,7 +39,8 @@ export function LiveTrackingEngine() {
     ecosystemHealth: 99.9,
     globalReach: 195,
     gaiaPrice: 0.0001,
-    gaiaMarketCap: 1500000000
+    gaiaMarketCap: 1500000000,
+    userEngagement: 95.5
   })
 
   const [liveEvents, setLiveEvents] = useState<LiveGaiaEvent[]>([])
@@ -73,7 +74,8 @@ export function LiveTrackingEngine() {
         ecosystemHealth: Math.min(99.9, prev.ecosystemHealth + (Math.random() * 0.1)),
         globalReach: Math.min(195, prev.globalReach + Math.floor(Math.random() * 2)),
         gaiaPrice: Math.max(0.00001, prev.gaiaPrice + (Math.random() - 0.5) * 0.000005),
-        gaiaMarketCap: Math.max(1000000, prev.gaiaMarketCap + (Math.random() - 0.5) * 10000000)
+        gaiaMarketCap: Math.max(1000000, prev.gaiaMarketCap + (Math.random() - 0.5) * 10000000),
+        userEngagement: Math.min(99.9, prev.userEngagement + (Math.random() - 0.5) * 0.5)
       }))
 
       console.log('🌍 GAIA ECOSYSTEM - Live tracking update:', newEvent)
