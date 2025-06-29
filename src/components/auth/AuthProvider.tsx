@@ -7,16 +7,16 @@ import { toast } from 'sonner'
 interface AuthContextType {
   user: User | null
   loading: boolean
-  signIn: (email: string, password: string) => Promise<void>
-  signUp: (email: string, password: string) => Promise<void>
+  signIn: (email: string, password: string) => Promise<{ error: any }>
+  signUp: (email: string, password: string) => Promise<{ error: any }>
   signOut: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
-  signIn: async () => {},
-  signUp: async () => {},
+  signIn: async () => ({ error: null }),
+  signUp: async () => ({ error: null }),
   signOut: async () => {}
 })
 
@@ -37,7 +37,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Get initial session
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        console.log('Auth state changed:', event, session?.user?.email)
+        setUser(session?.user ?? null)
+        setLoading(false)
+      }
+    )
+
+    // THEN get initial session
     const getInitialSession = async () => {
       try {
         const { data: { session }, error } = await supabase.auth.getSession()
@@ -55,15 +64,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     getInitialSession()
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        console.log('Auth state changed:', event, session?.user?.email)
-        setUser(session?.user ?? null)
-        setLoading(false)
-      }
-    )
-
     return () => {
       subscription.unsubscribe()
     }
@@ -75,12 +75,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
         email,
         password
       })
-      if (error) throw error
+      if (error) {
+        console.error('Sign in error:', error)
+        toast.error('Failed to sign in')
+        return { error }
+      }
       toast.success('Successfully signed in!')
+      return { error: null }
     } catch (error) {
       console.error('Sign in error:', error)
       toast.error('Failed to sign in')
-      throw error
+      return { error }
     }
   }
 
@@ -90,24 +95,32 @@ export function AuthProvider({ children }: AuthProviderProps) {
         email,
         password
       })
-      if (error) throw error
+      if (error) {
+        console.error('Sign up error:', error)
+        toast.error('Failed to sign up')
+        return { error }
+      }
       toast.success('Check your email for confirmation!')
+      return { error: null }
     } catch (error) {
       console.error('Sign up error:', error)
       toast.error('Failed to sign up')
-      throw error
+      return { error }
     }
   }
 
   const signOut = async () => {
     try {
       const { error } = await supabase.auth.signOut()
-      if (error) throw error
-      toast.success('Successfully signed out!')
+      if (error) {
+        console.error('Sign out error:', error)
+        toast.error('Failed to sign out')
+      } else {
+        toast.success('Successfully signed out!')
+      }
     } catch (error) {
       console.error('Sign out error:', error)
       toast.error('Failed to sign out')
-      throw error
     }
   }
 

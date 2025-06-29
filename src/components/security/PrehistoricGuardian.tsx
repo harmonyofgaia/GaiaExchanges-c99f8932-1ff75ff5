@@ -33,7 +33,7 @@ interface GuardianStats {
 interface SystemProblem {
   id: string
   type: 'error' | 'warning' | 'performance' | 'security'
-  severity: 'low' | 'medium' | 'high' | 'critical'
+  severity: 'low' | 'medium' | 'high' | 'maximum'
   description: string
   location: string
   timestamp: Date
@@ -138,7 +138,7 @@ export function PrehistoricGuardian() {
           detectedProblems.push({
             id: `auth-${Date.now()}`,
             type: 'security',
-            severity: 'critical',
+            severity: 'maximum',
             description: 'Unauthorized access attempt to admin area',
             location: 'Authentication System',
             timestamp: new Date(),
@@ -199,19 +199,23 @@ export function PrehistoricGuardian() {
           return true
 
         case 'security':
-          // Log security event
-          await supabase.from('security_events').insert({
-            event_type: 'AUTO_SECURITY_FIX',
-            event_description: `Guardian resolved: ${problem.description}`,
-            severity: problem.severity,
-            ip_address: '127.0.0.1',
-            resolved: true
-          })
-          toast.success('🛡️ Guardian neutralized security threat!', {
-            description: 'Threat logged and system secured',
-            duration: 3000
-          })
-          return true
+          // Log security event with correct column names and severity values
+          try {
+            await supabase.from('security_events').insert({
+              event_description: `Guardian resolved: ${problem.description}`,
+              severity: problem.severity as 'low' | 'medium' | 'high' | 'maximum',
+              ip_address: '127.0.0.1',
+              resolved: true
+            })
+            toast.success('🛡️ Guardian neutralized security threat!', {
+              description: 'Threat logged and system secured',
+              duration: 3000
+            })
+            return true
+          } catch (dbError) {
+            console.error('Failed to log security event:', dbError)
+            return false
+          }
 
         default:
           return false
@@ -246,7 +250,7 @@ export function PrehistoricGuardian() {
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'critical': return 'text-red-400 bg-red-900/20'
+      case 'maximum': return 'text-red-400 bg-red-900/20'
       case 'high': return 'text-orange-400 bg-orange-900/20'
       case 'medium': return 'text-yellow-400 bg-yellow-900/20'
       case 'low': return 'text-green-400 bg-green-900/20'

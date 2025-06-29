@@ -27,7 +27,7 @@ export function AuthPage() {
     const { error } = await signIn(email, password)
     
     if (error) {
-      setError(error.message)
+      setError(error.message || 'Failed to sign in')
     }
     
     setIsLoading(false)
@@ -42,16 +42,11 @@ export function AuthPage() {
     const formData = new FormData(e.currentTarget)
     const email = formData.get('email') as string
     const password = formData.get('password') as string
-    const fullName = formData.get('fullName') as string
-    const username = formData.get('username') as string
 
-    const { error } = await signUp(email, password, {
-      full_name: fullName,
-      username: username
-    })
+    const { error } = await signUp(email, password)
     
     if (error) {
-      setError(error.message)
+      setError(error.message || 'Failed to sign up')
     } else {
       setSuccess('Account created successfully! Please check your email to verify your account.')
     }

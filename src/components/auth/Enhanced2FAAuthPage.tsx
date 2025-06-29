@@ -30,7 +30,7 @@ export function Enhanced2FAAuthPage() {
     const { error } = await signIn(email, password)
     
     if (error) {
-      setError(error.message)
+      setError(error.message || 'Failed to sign in')
     }
     
     setIsLoading(false)
@@ -45,18 +45,13 @@ export function Enhanced2FAAuthPage() {
     const formData = new FormData(e.currentTarget)
     const email = formData.get('email') as string
     const password = formData.get('password') as string
-    const fullName = formData.get('fullName') as string
-    const username = formData.get('username') as string
 
     setUserEmail(email)
 
-    const { error } = await signUp(email, password, {
-      full_name: fullName,
-      username: username
-    })
+    const { error } = await signUp(email, password)
     
     if (error) {
-      setError(error.message)
+      setError(error.message || 'Failed to sign up')
     } else {
       setSuccess('Account created successfully! Please set up 2FA for maximum security.')
       setShow2FASetup(true)
