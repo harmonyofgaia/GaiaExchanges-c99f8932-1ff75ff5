@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
+import { AdminOverview } from '@/components/admin/AdminOverview'
 import { SystemControlCenter } from '@/components/admin/SystemControlCenter'
 import { QuantumAdminDashboard } from '@/components/admin/QuantumAdminDashboard'
 import { WebsiteHostingManager } from '@/components/WebsiteHostingManager'
@@ -37,8 +38,11 @@ const Admin = () => {
         </div>
 
         <AdminProtectedRoute>
-          <Tabs defaultValue="creative-nft" className="w-full">
+          <Tabs defaultValue="overview" className="w-full">
             <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
+              <TabsTrigger value="overview" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+                🌍 Overview
+              </TabsTrigger>
               <TabsTrigger value="creative-nft" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
                 🎨 Creative NFTs
               </TabsTrigger>
@@ -69,19 +73,14 @@ const Admin = () => {
               <TabsTrigger value="neural-art" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
                 🧠 Neural Art
               </TabsTrigger>
-              <TabsTrigger value="gaming" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-                🚀 Space Gaming
-              </TabsTrigger>
               <TabsTrigger value="system" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
                 🛡️ System
               </TabsTrigger>
-              <TabsTrigger value="quantum" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-                ⚡ Quantum
-              </TabsTrigger>
-              <TabsTrigger value="hosting" className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-400">
-                🌐 Hosting
-              </TabsTrigger>
             </TabsList>
+            
+            <TabsContent value="overview" className="space-y-6 mt-6">
+              <AdminOverview />
+            </TabsContent>
             
             <TabsContent value="creative-nft" className="space-y-6 mt-6">
               <CreativeNFTGenerator />
@@ -123,21 +122,8 @@ const Admin = () => {
               <MasterArtworkGenerator />
             </TabsContent>
             
-            <TabsContent value="gaming" className="space-y-6 mt-6">
-              <GamingNFTMarketplace />
-              <EnhancedWormsArena />
-            </TabsContent>
-            
             <TabsContent value="system" className="space-y-6 mt-6">
               <SystemControlCenter />
-            </TabsContent>
-            
-            <TabsContent value="quantum" className="space-y-6 mt-6">
-              <QuantumAdminDashboard />
-            </TabsContent>
-            
-            <TabsContent value="hosting" className="space-y-6 mt-6">
-              <WebsiteHostingManager />
             </TabsContent>
           </Tabs>
         </AdminProtectedRoute>
