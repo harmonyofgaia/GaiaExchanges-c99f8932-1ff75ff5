@@ -67,9 +67,9 @@ class GaiaTokenService {
         }
       }
 
-      // Fallback to simulated live data with the correct token addresses
-      console.log(`📊 Using simulated GAiA data with contract: ${this.contractAddress}`)
-      console.log(`📊 Connected to wallet: ${this.walletAddress}`)
+      // Fallback to simulated live data with the CORRECT token addresses
+      console.log(`📊 Using simulated GAiA data with CORRECT contract: ${this.contractAddress}`)
+      console.log(`📊 Connected to CORRECT wallet: ${this.walletAddress}`)
       return this.generateSimulatedData()
       
     } catch (error) {

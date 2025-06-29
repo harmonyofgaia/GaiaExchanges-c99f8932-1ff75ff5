@@ -1,12 +1,12 @@
 
 export const GAIA_TOKEN = {
-  CONTRACT_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-  WALLET_ADDRESS: 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7',
+  CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
+  WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
   SYMBOL: 'GAiA',
   NAME: 'GAiA Token - Powered by Harmony of Gaia',
   DECIMALS: 18,
   INITIAL_PRICE: 0.0001,
-  PUMP_FUN_URL: 'https://pump.fun/5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+  PUMP_FUN_URL: 'https://pump.fun/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   NETWORK: 'Solana',
   
   // BRAND CLARIFICATION - WE ARE NOT GAIA EVERWORLD

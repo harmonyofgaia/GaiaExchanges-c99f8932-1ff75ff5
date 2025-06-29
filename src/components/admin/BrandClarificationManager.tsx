@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -85,13 +84,13 @@ Project Authority: Harmony of Gaia Admin
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="text-center p-4 bg-green-900/40 rounded-lg border border-green-500/30">
               <CheckCircle className="h-8 w-8 mx-auto text-green-400 mb-2" />
-              <div className="text-lg font-bold text-green-400">OUR CONTRACT</div>
-              <code className="text-xs text-green-300 break-all">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+              <div className="text-lg font-bold text-green-400">CORRECT WALLET</div>
+              <code className="text-xs text-green-300 break-all">{GAIA_TOKEN.WALLET_ADDRESS}</code>
             </div>
             <div className="text-center p-4 bg-blue-900/40 rounded-lg border border-blue-500/30">
               <CheckCircle className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-lg font-bold text-blue-400">OUR WALLET</div>
-              <code className="text-xs text-blue-300 break-all">{GAIA_TOKEN.WALLET_ADDRESS}</code>
+              <div className="text-lg font-bold text-blue-400">CORRECT CONTRACT</div>
+              <code className="text-xs text-blue-300 break-all">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
             </div>
           </div>
 

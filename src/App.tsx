@@ -4,6 +4,9 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AdminOnlySecurityBarrier } from "@/components/admin/AdminOnlySecurityBarrier"
+import { addressMigration } from "@/utils/addressMigration"
+import { addressValidationService } from "@/services/addressValidationService"
+import { useEffect } from "react"
 import Home from "./pages/Home"
 import Admin from "./pages/Admin"
 import Wallet from "./pages/Wallet"
@@ -26,6 +29,30 @@ import "./App.css"
 const queryClient = new QueryClient()
 
 function App() {
+  useEffect(() => {
+    // Run address migration and validation on startup
+    const initializeAddresses = async () => {
+      console.log('🔧 Initializing GAiA Token address validation...')
+      
+      // Perform full address migration
+      await addressMigration.performFullSystemMigration()
+      
+      // Log correct addresses
+      addressValidationService.logCorrectAddresses()
+      
+      // Validate all addresses
+      const validation = addressValidationService.validateAllAddresses()
+      if (!validation.isValid) {
+        console.error('🚨 ADDRESS VALIDATION FAILED:')
+        validation.errors.forEach(error => console.error(error))
+      } else {
+        console.log('✅ All addresses validated successfully!')
+      }
+    }
+
+    initializeAddresses()
+  }, [])
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
