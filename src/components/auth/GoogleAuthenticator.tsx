@@ -7,9 +7,19 @@ import { Label } from '@/components/ui/label'
 import { Shield, User, Mail, Lock } from 'lucide-react'
 import { toast } from 'sonner'
 
-export function GoogleAuthenticator() {
+interface GoogleAuthenticatorProps {
+  onSetupComplete?: (secret?: string) => void
+  onVerificationSuccess?: () => void
+  userEmail?: string
+}
+
+export function GoogleAuthenticator({ 
+  onSetupComplete, 
+  onVerificationSuccess, 
+  userEmail = '' 
+}: GoogleAuthenticatorProps) {
   const [isRegistering, setIsRegistering] = useState(false)
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(userEmail)
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
@@ -18,6 +28,12 @@ export function GoogleAuthenticator() {
       description: 'Secure 2FA protection for GAiA Token access',
       duration: 5000
     })
+    
+    // Call the setup complete callback if provided
+    if (onSetupComplete) {
+      const secret = btoa(Date.now().toString())
+      onSetupComplete(secret)
+    }
   }
 
   const handleEmailAuth = () => {
@@ -30,6 +46,11 @@ export function GoogleAuthenticator() {
       description: 'Welcome to the GAiA Token ecosystem',
       duration: 5000
     })
+    
+    // Call the verification success callback if provided
+    if (onVerificationSuccess) {
+      onVerificationSuccess()
+    }
   }
 
   return (
