@@ -1,102 +1,125 @@
 
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Card } from '@/components/ui/card'
+import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { 
   Home, 
+  Hammer, 
+  Activity, 
   Shield, 
   Wallet, 
-  Info, 
-  Coins, 
-  Activity, 
-  Lock, 
-  BarChart3, 
+  TrendingUp, 
   Gamepad2,
+  Settings,
+  Users,
+  Info,
+  Phone,
+  ShoppingCart,
+  BarChart3,
   Globe,
-  Mail,
-  DollarSign,
-  ArrowLeftRight,
-  Mountain,
-  Building,
-  TrendingUp,
-  Users
+  Crown,
+  Radio,
+  Menu,
+  X
 } from 'lucide-react'
-
-const menuItems = [
-  { name: 'Home', path: '/', icon: Home },
-  { name: '👑 Admin Control', path: '/admin', icon: Shield },
-  { name: '🔐 Secure Admin', path: '/secure-admin', icon: Lock },
-  { name: 'Wallet', path: '/wallet', icon: Wallet },
-  { name: 'About', path: '/about', icon: Info },
-  { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
-  { name: 'GAiA Coin Crafter', path: '/gaia-coin-crafter', icon: Coins },
-  { name: 'Live Tracking', path: '/live-tracking', icon: Activity },
-  { name: 'Immortal Security', path: '/immortal-security', icon: Lock },
-  { name: 'System Status', path: '/system-status', icon: BarChart3 },
-  { name: 'Comprehensive Status', path: '/comprehensive-status', icon: BarChart3 },
-  { name: 'Gaming', path: '/gaming', icon: Gamepad2 },
-  { name: 'GAIA Fighter Game', path: '/game', icon: Gamepad2 },
-  { name: 'Landscape Builder', path: '/landscape-builder', icon: Mountain },
-  { name: 'Virtual World', path: '/virtual-world', icon: Building },
-  { name: 'Contact', path: '/contact', icon: Mail },
-  { name: 'Pricing', path: '/pricing', icon: DollarSign },
-  { name: 'Exchange', path: '/exchange', icon: ArrowLeftRight },
-  { name: 'Markets', path: '/markets', icon: TrendingUp },
-  { name: 'Marketing Hub', path: '/marketing-hub', icon: Users },
-  { name: 'Global Marketing', path: '/global-marketing', icon: Globe },
-  { name: 'Webshop', path: '/webshop', icon: Building }
-]
+import { GaiaLogo } from './GaiaLogo'
 
 export function HoverSidebar() {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+  const location = useLocation()
+
+  const navItems = [
+    { path: '/', label: 'Home', icon: Home },
+    { path: '/coin-crafter', label: 'Coin Crafter', icon: Hammer },
+    { path: '/live-tracking', label: 'Live Tracking', icon: Activity },
+    { path: '/immortal-security', label: 'Security', icon: Shield },
+    { path: '/wallet', label: 'Wallet', icon: Wallet },
+    { path: '/exchange', label: 'Exchange', icon: TrendingUp },
+    { path: '/gaming', label: 'Gaming', icon: Gamepad2 },
+    { path: '/artist-streaming', label: 'Artist Streaming', icon: Radio },
+    { path: '/about', label: 'About', icon: Info },
+    { path: '/contact', label: 'Contact', icon: Phone },
+    { path: '/webshop', label: 'Webshop', icon: ShoppingCart },
+    { path: '/markets', label: 'Markets', icon: BarChart3 },
+    { path: '/global-marketing', label: 'Global Marketing', icon: Globe },
+    { path: '/admin', label: 'Universe Control', icon: Crown },
+  ]
+
+  const isActive = (path: string) => location.pathname === path
+
+  const shouldShow = isOpen || isHovered
 
   return (
     <>
-      {/* Hover trigger area */}
-      <div 
-        className="fixed left-0 top-0 w-8 h-full z-40 cursor-pointer"
-        onMouseEnter={() => setIsVisible(true)}
-        onMouseLeave={() => setIsVisible(false)}
-      />
-      
-      {/* Sidebar */}
-      <div 
-        className={`fixed left-0 top-0 h-full w-80 bg-gradient-to-b from-black/95 via-gray-900/95 to-green-900/95 backdrop-blur-md border-r border-green-500/30 transform transition-transform duration-300 z-50 ${
-          isVisible ? 'translate-x-0' : '-translate-x-full'
-        }`}
-        onMouseEnter={() => setIsVisible(true)}
-        onMouseLeave={() => setIsVisible(false)}
+      {/* Mobile Toggle Button */}
+      <Button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed top-4 left-4 z-50 md:hidden bg-black/80 border-green-500/30"
+        size="sm"
       >
-        <div className="p-6">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-              🌍 HARMONY OF GAIA
-            </h2>
-            <p className="text-sm text-green-300 mt-2">Parabolic Universe • GAiA Token • Admin Control</p>
-          </div>
-          
-          <div className="space-y-2 max-h-[calc(100vh-200px)] overflow-y-auto scrollbar-thin scrollbar-thumb-green-500/20">
-            {menuItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-500/20 transition-all duration-200 group"
-              >
-                <item.icon className="h-5 w-5 text-green-400 group-hover:text-green-300 transition-colors" />
-                <span className="text-white group-hover:text-green-300 text-sm font-medium transition-colors">
-                  {item.name}
-                </span>
-              </Link>
-            ))}
-          </div>
-          
-          <div className="mt-8 p-4 bg-green-900/30 rounded-lg border border-green-500/30">
-            <p className="text-xs text-green-300 text-center">
-              🛡️ Admin Parabolic Access • Invisible Operations • Quantum Protected
-            </p>
+        {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+      </Button>
+
+      {/* Sidebar */}
+      <div
+        className={`fixed left-0 top-0 h-full z-40 transition-all duration-300 ease-in-out ${
+          shouldShow ? 'w-64' : 'w-12'
+        } bg-black/95 backdrop-blur-sm border-r border-green-500/20`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Header */}
+        <div className="p-4 border-b border-green-500/20">
+          <div className="flex items-center gap-3">
+            <GaiaLogo size="sm" variant="colorful" />
+            {shouldShow && (
+              <div>
+                <h2 className="text-lg font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                  Harmony of Gaia
+                </h2>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* Navigation */}
+        <nav className="p-2 space-y-1">
+          {navItems.map((item) => {
+            const Icon = item.icon
+            return (
+              <Link key={item.path} to={item.path}>
+                <Button
+                  variant={isActive(item.path) ? "default" : "ghost"}
+                  size="sm"
+                  className={`w-full justify-start gap-3 ${
+                    isActive(item.path) 
+                      ? 'bg-gradient-to-r from-green-600 to-blue-600 text-white' 
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+                  } ${!shouldShow ? 'px-2' : ''}`}
+                >
+                  <Icon className="h-4 w-4 flex-shrink-0" />
+                  {shouldShow && <span className="truncate">{item.label}</span>}
+                </Button>
+              </Link>
+            )
+          })}
+        </nav>
+
+        {/* Footer */}
+        {shouldShow && (
+          <div className="absolute bottom-4 left-4 right-4">
+            <Badge className="w-full justify-center bg-gradient-to-r from-green-600 to-blue-600 text-white">
+              <Crown className="h-3 w-3 mr-1" />
+              Culture of Harmony
+            </Badge>
+          </div>
+        )}
       </div>
+
+      {/* Content Spacer */}
+      <div className={`transition-all duration-300 ${shouldShow ? 'ml-64' : 'ml-12'} hidden md:block`} />
     </>
   )
 }

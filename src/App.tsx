@@ -29,6 +29,7 @@ import Markets from "./pages/Markets"
 import MarketingHub from "./pages/MarketingHub"
 import GlobalMarketingDashboard from "./pages/GlobalMarketingDashboard"
 import Webshop from "./pages/Webshop"
+import ArtistStreaming from "./pages/ArtistStreaming"
 import "./App.css"
 import { InvisibleSecurityCore } from "@/components/security/InvisibleSecurityCore"
 import { UniquenessProtector } from "@/components/security/UniquenessProtector"
@@ -98,6 +99,7 @@ function App() {
               <Route path="/marketing-hub" element={<MarketingHub />} />
               <Route path="/global-marketing" element={<GlobalMarketingDashboard />} />
               <Route path="/webshop" element={<Webshop />} />
+              <Route path="/artist-streaming" element={<ArtistStreaming />} />
             </Routes>
           </div>
         </BrowserRouter>
