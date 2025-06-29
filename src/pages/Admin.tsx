@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
@@ -7,8 +8,9 @@ import { WebsiteHostingManager } from '@/components/WebsiteHostingManager'
 import { EnhancedArtworkCloud } from '@/components/creative/EnhancedArtworkCloud'
 import { MasterArtworkGenerator } from '@/components/admin/MasterArtworkGenerator'
 import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
-import { WormsGameArena } from '@/components/WormsGameArena'
+import { EnhancedWormsArena } from '@/components/EnhancedWormsArena'
 import { GameDevelopmentCloud } from '@/components/admin/GameDevelopmentCloud'
+import { CreativeNFTGenerator } from '@/components/admin/CreativeNFTGenerator'
 
 import { UserManagementSystemRefactored } from '@/components/admin/UserManagementSystemRefactored'
 import { SecureConnectionManager } from '@/components/admin/SecureConnectionManager'
@@ -35,8 +37,11 @@ const Admin = () => {
         </div>
 
         <AdminProtectedRoute>
-          <Tabs defaultValue="user-management" className="w-full">
+          <Tabs defaultValue="creative-nft" className="w-full">
             <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
+              <TabsTrigger value="creative-nft" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                🎨 Creative NFTs
+              </TabsTrigger>
               <TabsTrigger value="user-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                 👥 User Control
               </TabsTrigger>
@@ -65,7 +70,7 @@ const Admin = () => {
                 🧠 Neural Art
               </TabsTrigger>
               <TabsTrigger value="gaming" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-                🎮 Gaming NFTs
+                🚀 Space Gaming
               </TabsTrigger>
               <TabsTrigger value="system" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
                 🛡️ System
@@ -77,6 +82,10 @@ const Admin = () => {
                 🌐 Hosting
               </TabsTrigger>
             </TabsList>
+            
+            <TabsContent value="creative-nft" className="space-y-6 mt-6">
+              <CreativeNFTGenerator />
+            </TabsContent>
             
             <TabsContent value="user-management" className="space-y-6 mt-6">
               <UserManagementSystemRefactored />
@@ -116,7 +125,7 @@ const Admin = () => {
             
             <TabsContent value="gaming" className="space-y-6 mt-6">
               <GamingNFTMarketplace />
-              <WormsGameArena />
+              <EnhancedWormsArena />
             </TabsContent>
             
             <TabsContent value="system" className="space-y-6 mt-6">

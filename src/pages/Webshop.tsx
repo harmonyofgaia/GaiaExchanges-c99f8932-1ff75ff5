@@ -1,6 +1,8 @@
 
 import { CoralReefNFTMarketplace } from '@/components/CoralReefNFTMarketplace'
 import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
+import { EnhancedDownloadLinks } from '@/components/downloads/EnhancedDownloadLinks'
+import { EnhancedWormsArena } from '@/components/EnhancedWormsArena'
 
 const Webshop = () => {
   return (
@@ -18,8 +20,14 @@ const Webshop = () => {
           </p>
         </div>
         
+        {/* Enhanced Download Links */}
+        <EnhancedDownloadLinks />
+        
         {/* GAiA Landscape NFT Marketplace */}
         <GamingNFTMarketplace />
+        
+        {/* Enhanced Space Worms Game */}
+        <EnhancedWormsArena />
         
         {/* Coral Reef NFT Marketplace */}
         <CoralReefNFTMarketplace />
