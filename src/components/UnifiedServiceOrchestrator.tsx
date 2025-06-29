@@ -66,10 +66,12 @@ export function UnifiedServiceOrchestrator() {
         // 4. SERVICE STATISTICS LOGGING
         if (Math.random() < 0.02) {
           const stats = {
-            quantum_threats_blocked: quantumCore.metrics.threatsBlocked,
-            master_security_efficiency: masterSecurity.threatIntel.networkSecurity,
-            total_threats_neutralized: quantumEngine.metrics.threatsBlocked,
-            investor_leads: securityOrchestrator.investorLeads.length,
+            quantum_security_level: quantumCore.metrics.quantumProcessingEfficiency,
+            master_protection_active: masterSecurity.masterProtectionActive,
+            quantum_engine_threats_blocked: quantumEngine.metrics.threatsBlocked,
+            security_orchestrator_leads: securityOrchestrator.investorLeads.length,
+            quantum_keys_active: quantumCore.quantumKeysActive,
+            quantum_states_active: quantumCore.quantumStatesActive,
             all_services_active: services.every(s => s.active)
           }
 
