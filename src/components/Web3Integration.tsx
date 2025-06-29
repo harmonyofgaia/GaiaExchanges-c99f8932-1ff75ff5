@@ -63,10 +63,13 @@ const Web3Integration: React.FC<Web3Props> = ({
   useEffect(() => {
     if (isConnected && account) {
       toast({
-        title: 'New GAiA Wallet Connected!',
+        title: 'Official GAiA Wallet Connected!',
         description: `Connected to Official GAiA: ${GAIA_TOKEN.WALLET_ADDRESS}`,
         className: 'bg-green-500 text-white'
       })
+      console.log('🌍 Connected to Official GAiA Token:')
+      console.log('📍 Wallet:', GAIA_TOKEN.WALLET_ADDRESS)
+      console.log('📍 Contract:', GAIA_TOKEN.CONTRACT_ADDRESS)
     }
   }, [isConnected, account, toast])
 
@@ -94,11 +97,15 @@ const Web3Integration: React.FC<Web3Props> = ({
 
   const handleBurn = () => {
     setIsBurning(true)
+    console.log('🔥 Initiating GAiA Token Burn via Official Addresses:')
+    console.log('🔥 Wallet:', GAIA_TOKEN.WALLET_ADDRESS)
+    console.log('🔥 Contract:', GAIA_TOKEN.CONTRACT_ADDRESS)
+    
     setTimeout(() => {
       setIsBurning(false)
       toast({
-        title: 'GAiA Token Burn Initiated!',
-        description: 'Burning via official token address - 97% for Environmental Projects + 3% for Coral Reef Restoration',
+        title: 'Official GAiA Token Burn Initiated!',
+        description: 'Burning via official token addresses - 97% Environmental Projects + 3% Coral Reef Restoration',
         className: 'bg-orange-500 text-white'
       })
     }, 2000)
@@ -106,11 +113,15 @@ const Web3Integration: React.FC<Web3Props> = ({
 
   const handleReinvest = () => {
     setIsReinvesting(true)
+    console.log('💰 Initiating GAiA Token Reinvestment via Official Addresses:')
+    console.log('💰 Wallet:', GAIA_TOKEN.WALLET_ADDRESS)
+    console.log('💰 Contract:', GAIA_TOKEN.CONTRACT_ADDRESS)
+    
     setTimeout(() => {
       setIsReinvesting(false)
       toast({
-        title: 'GAiA Token Reinvestment Initiated!',
-        description: 'Reinvesting via official token address in Enhanced Environmental Projects',
+        title: 'Official GAiA Token Reinvestment Initiated!',
+        description: 'Reinvesting via official token addresses in Enhanced Environmental Projects',
         className: 'bg-blue-500 text-white'
       })
     }, 2000)

@@ -177,15 +177,27 @@ export function TokenManagement() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Infinity className="h-5 w-5" />
-            GAiA Token Maximum Supply Protocol
+            GAiA Token Maximum Supply Protocol - Updated Addresses
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-            <h4 className="font-medium text-green-400 mb-2">Quantum-Scale Supply Expansion</h4>
-            <p className="text-sm text-green-300 mb-3">
-              Advanced blockchain protocols to achieve maximum possible token supply with universal platform compatibility.
-            </p>
+            <h4 className="font-medium text-green-400 mb-2">Official GAiA Token Addresses - Updated</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div className="bg-blue-900/20 p-3 rounded-lg">
+                <div className="text-xs text-blue-300">Official Wallet Address</div>
+                <div className="text-sm font-mono text-blue-400 break-all">
+                  5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
+                </div>
+              </div>
+              <div className="bg-purple-900/20 p-3 rounded-lg">
+                <div className="text-xs text-purple-300">Contract Address</div>
+                <div className="text-sm font-mono text-purple-400 break-all">
+                  t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump
+                </div>
+              </div>
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div className="bg-green-900/20 p-3 rounded-lg">
                 <div className="text-xs text-green-300">Current Total Supply</div>
@@ -200,6 +212,7 @@ export function TokenManagement() {
                 </div>
               </div>
             </div>
+            
             <Button 
               onClick={maximizeGaiaSupply} 
               className="bg-green-600 hover:bg-green-700 w-full"
