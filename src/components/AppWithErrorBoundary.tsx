@@ -39,10 +39,7 @@ const AppContent = () => {
           {/* Admin route - no sidebar, special handling */}
           <Route path="/admin" element={<Admin />} />
           
-          {/* LiveTracking route - no sidebar, special handling */}
-          <Route path="/live-tracking" element={<LiveTracking />} />
-          
-          {/* All other routes with sidebar */}
+          {/* All other routes with sidebar (including LiveTracking) */}
           <Route path="/*" element={
             <>
               <AppSidebar />
@@ -106,6 +103,11 @@ const AppContent = () => {
                   <Route path="/transparency" element={
                     <ProtectedRoute>
                       <Transparency />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/live-tracking" element={
+                    <ProtectedRoute>
+                      <LiveTracking />
                     </ProtectedRoute>
                   } />
                   <Route path="*" element={<NotFound />} />
