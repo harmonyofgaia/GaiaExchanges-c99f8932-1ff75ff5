@@ -24,12 +24,13 @@ export function LogoProtectionSystem() {
       // Add watermark protection to logo usage
       const logoElements = document.querySelectorAll('img[alt*="Gaia"]')
       logoElements.forEach(img => {
-        if (!img.getAttribute('data-protected')) {
-          img.setAttribute('data-protected', 'true')
-          img.style.userSelect = 'none'
-          img.style.pointerEvents = 'none'
-          img.addEventListener('contextmenu', (e) => e.preventDefault())
-          img.addEventListener('dragstart', (e) => e.preventDefault())
+        const htmlImg = img as HTMLImageElement
+        if (!htmlImg.getAttribute('data-protected')) {
+          htmlImg.setAttribute('data-protected', 'true')
+          htmlImg.style.userSelect = 'none'
+          htmlImg.style.pointerEvents = 'none'
+          htmlImg.addEventListener('contextmenu', (e) => e.preventDefault())
+          htmlImg.addEventListener('dragstart', (e) => e.preventDefault())
         }
       })
 
