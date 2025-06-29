@@ -49,7 +49,7 @@ export const ArtisticTitle = () => {
           <div 
             className="text-8xl font-bold text-green-200 blur-3xl"
             style={{
-              fontFamily: "'Playfair Display', 'Times New Roman', serif",
+              fontFamily: "'Playfair Display', serif",
               letterSpacing: '0.15em',
               textShadow: `
                 0 0 60px rgba(34, 197, 94, 0.8),
@@ -64,11 +64,11 @@ export const ArtisticTitle = () => {
           </div>
         </div>
 
-        {/* Multi-Layer Typography with new font */}
+        {/* Multi-Layer Typography with Playfair Display font */}
         <div 
           className="relative text-8xl font-bold"
           style={{
-            fontFamily: "'Playfair Display', 'Times New Roman', serif",
+            fontFamily: "'Playfair Display', serif",
             letterSpacing: '0.15em',
             fontWeight: '900',
             textTransform: 'uppercase'
