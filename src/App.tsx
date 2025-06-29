@@ -18,7 +18,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <SidebarProvider collapsedWidth={56}>
+        <SidebarProvider>
           <div className="min-h-screen flex w-full bg-background">
             <AppSidebar />
             <div className="flex-1 flex flex-col">
