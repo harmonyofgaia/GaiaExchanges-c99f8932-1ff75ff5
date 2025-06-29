@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '@/pages/Home'
 import Docs from '@/pages/Docs'
@@ -32,8 +31,7 @@ import { ConnectionTracker } from '@/components/security/ConnectionTracker'
 import { Navbar } from '@/components/Navbar'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { PageSpecificBackground } from '@/components/ui/page-specific-background'
-
-const queryClient = new QueryClient()
+import CompleteSystemHub from '@/pages/CompleteSystemHub'
 
 function App() {
   return (
@@ -70,6 +68,7 @@ function App() {
               <Route path="/coin-crafter" element={<CoinCrafter />} />
               <Route path="/transparency" element={<Transparency />} />
               <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+              <Route path="/complete-system-hub" element={<CompleteSystemHub />} />
             </Routes>
           </BrowserRouter>
           <ConnectionTracker />

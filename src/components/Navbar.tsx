@@ -1,117 +1,109 @@
+import * as React from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
-import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { siteConfig } from '@/config/site'
+import { cn } from '@/lib/utils'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { 
-  Wallet, 
-  TrendingUp, 
-  BarChart3, 
-  User, 
-  Mail, 
-  Download,
-  Shield,
-  Menu,
-  X,
-  Leaf,
-  Target,
-  Wrench,
-  Gamepad2,
-  Building
-} from 'lucide-react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Icons } from '@/components/icons'
+import { MainNavItem } from '@/types'
+import { ModeToggle } from '@/components/mode-toggle'
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle
+} from '@/components/ui/navigation-menu'
 
-export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const location = useLocation()
+interface MainNavProps {
+  items?: MainNavItem[]
+}
 
-  const navigation = [
-    { name: 'Home', href: '/', icon: Leaf },
-    { name: 'Wallet', href: '/wallet', icon: Wallet },
-    { name: 'Exchange', href: '/gaias-exchange', icon: TrendingUp },
-    { name: 'Gaming', href: '/gaia-fighter-game', icon: Gamepad2 },
-    { name: 'Markets', href: '/markets', icon: BarChart3 },
-    { name: 'Security', href: '/ultimate-security', icon: Shield },
-    { name: 'Marketing', href: '/marketing', icon: Target },
-    { name: 'Tech Support', href: '/techno-soul-solutions', icon: Wrench },
-    { name: 'Downloads', href: '/downloads', icon: Download },
-    { name: 'Profile', href: '/profile', icon: User },
-    { name: 'Contact', href: '/contact', icon: Mail },
-  ]
-
-  const isActive = (path: string) => location.pathname === path
+export function MainNav({ items }: MainNavProps) {
+  const pathname = usePathname()
 
   return (
-    <nav className="bg-black/95 backdrop-blur-md border-b border-green-500/20 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <Leaf className="h-8 w-8 text-green-400" />
-              <span className="text-xl font-bold text-white">Harmony of Gaia</span>
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navigation.map((item) => {
-                const Icon = item.icon
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                      isActive(item.href)
-                        ? 'bg-green-500/20 text-green-400'
-                        : 'text-gray-300 hover:bg-green-500/10 hover:text-green-400'
-                    }`}
-                  >
-                    <Icon className="h-4 w-4" />
-                    <span>{item.name}</span>
-                  </Link>
+    <div className="flex gap-6 md:gap-10">
+      <Link href="/" className="flex items-center space-x-2">
+        <Icons.logo className="h-6 w-6" />
+        <span className="hidden font-bold sm:inline-block">
+          {siteConfig.name}
+        </span>
+      </Link>
+      {items?.length ? (
+        <NavigationMenu>
+          <NavigationMenuList>
+            {items?.map(
+              (item, i) =>
+                item.href ? (
+                  <NavigationMenuItem key={i}>
+                    <Link href={item.href} legacyBehavior passHref>
+                      <NavigationMenuLink
+                        className={cn(
+                          navigationMenuTriggerStyle(),
+                          'data-[active]:text-foreground data-[active]:no-underline',
+                          pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
+                        )}
+                      >
+                        {item.title}
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                ) : (
+                  item.items && (
+                    <NavigationMenuItem key={i}>
+                      <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                          <li className="row-span-3">
+                            <NavigationMenuLink asChild>
+                              <Link
+                                className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                                href="/"
+                              >
+                                <div className="mb-2 mt-4 text-lg font-medium">
+                                  {siteConfig.name}
+                                </div>
+                                <p className="text-sm leading-tight text-muted-foreground">
+                                  {siteConfig.description}
+                                </p>
+                              </Link>
+                            </NavigationMenuLink>
+                          </li>
+                          {item.items.map((item) => (
+                            <ListItem
+                              key={item.title}
+                              title={item.title}
+                              href={item.href}
+                            >
+                              {item.description}
+                            </ListItem>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                  )
                 )
-              })}
-            </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-green-400"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/98 border-t border-green-500/20">
-            {navigation.map((item) => {
-              const Icon = item.icon
-              return (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                    isActive(item.href)
-                      ? 'bg-green-500/20 text-green-400'
-                      : 'text-gray-300 hover:bg-green-500/10 hover:text-green-400'
-                  }`}
-                >
-                  <Icon className="h-5 w-5" />
-                  <span>{item.name}</span>
-                </Link>
-              )
-            })}
-          </div>
-        </div>
-      )}
-    </nav>
+            )}
+          </NavigationMenuList>
+        </NavigationMenu>
+      ) : null}
+    </div>
   )
 }
+
+const ListItem = React.forwardRef<
+  React.ElementRef<'a'>,
+  React.ComponentPropsWithoutProp
