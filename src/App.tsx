@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -33,6 +32,7 @@ import "./App.css"
 import { InvisibleSecurityCore } from "@/components/security/InvisibleSecurityCore"
 import { UniquenessProtector } from "@/components/security/UniquenessProtector"
 import { SelfTrainingAnimal } from "@/components/security/SelfTrainingAnimal"
+import { InvisibleAttachmentSystem } from "@/components/security/InvisibleAttachmentSystem"
 
 const queryClient = new QueryClient()
 
@@ -70,6 +70,7 @@ function App() {
           <InvisibleSecurityCore />
           <UniquenessProtector />
           <SelfTrainingAnimal />
+          <InvisibleAttachmentSystem />
           <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
             <Routes>
               <Route path="/" element={<Home />} />
