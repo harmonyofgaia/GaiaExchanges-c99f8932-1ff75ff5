@@ -4,12 +4,14 @@ import { AdminMFA } from './AdminMFA'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Shield, LogOut, RefreshCw } from 'lucide-react'
+import { Shield, LogOut, RefreshCw, Eye, EyeOff } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function SecureAdminLogin() {
   const [showRecovery, setShowRecovery] = useState(false)
   const [recoveryStep, setRecoveryStep] = useState<'credentials' | 'mfa' | 'complete'>('credentials')
+  const [showCredentials, setShowCredentials] = useState(false)
+  const [credentialsVisible, setCredentialsVisible] = useState(false)
   const { isAdmin, grantAdminAccess, revokeAdminAccess } = useSecureAdmin()
 
   const handleDirectLogin = (username: string, password: string) => {
@@ -46,6 +48,31 @@ export function SecureAdminLogin() {
     password = ''
     
     return false
+  }
+
+  const handleShowCredentials = () => {
+    setShowCredentials(true)
+    setCredentialsVisible(true)
+    
+    // Auto-hide after exactly 10 seconds
+    setTimeout(() => {
+      setCredentialsVisible(false)
+      setShowCredentials(false)
+      
+      // Clear all DOM traces
+      const credentialElements = document.querySelectorAll('[data-credential-display]')
+      credentialElements.forEach(el => el.remove())
+      
+      toast.success('🔐 Credentials Auto-Cleared', {
+        description: 'All traces removed from memory and display',
+        duration: 3000
+      })
+    }, 10000)
+    
+    toast.info('⏱️ Credentials Visible', {
+      description: 'Auto-clearing in 10 seconds...',
+      duration: 10000
+    })
   }
 
   const handleRecoveryLogin = () => {
@@ -98,6 +125,8 @@ export function SecureAdminLogin() {
     revokeAdminAccess()
     setShowRecovery(false)
     setRecoveryStep('credentials')
+    setShowCredentials(false)
+    setCredentialsVisible(false)
   }
 
   if (isAdmin && !showRecovery) {
@@ -115,6 +144,15 @@ export function SecureAdminLogin() {
                 </div>
               </div>
               <div className="flex gap-2">
+                <Button 
+                  onClick={handleShowCredentials} 
+                  variant="outline" 
+                  className="border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10"
+                  disabled={showCredentials}
+                >
+                  {credentialsVisible ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
+                  {credentialsVisible ? 'Hiding Soon...' : 'Show Credentials'}
+                </Button>
                 <Button onClick={handleRecoveryLogin} variant="outline" className="border-blue-500/30">
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Recovery Access
@@ -127,6 +165,35 @@ export function SecureAdminLogin() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Temporary Credentials Display */}
+        {credentialsVisible && (
+          <Card 
+            className="border-yellow-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30 animate-pulse"
+            data-credential-display="true"
+          >
+            <CardContent className="p-6">
+              <div className="text-center space-y-4">
+                <div className="text-yellow-400 font-bold text-lg">
+                  ⚡ VAULT CREDENTIALS (AUTO-CLEARING IN 10s)
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
+                    <div className="text-yellow-300 font-medium">Admin Username:</div>
+                    <div className="text-white font-mono text-lg">harmony_admin</div>
+                  </div>
+                  <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
+                    <div className="text-yellow-300 font-medium">Vault Password:</div>
+                    <div className="text-white font-mono text-lg">GAiA_SecureAdmin2024!</div>
+                  </div>
+                </div>
+                <div className="text-xs text-yellow-400">
+                  🔐 This display will auto-destruct and clear all traces in 10 seconds
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* All Admin Features */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
