@@ -76,7 +76,7 @@ export const HeroSection = () => {
 
           {/* GAiA with NEW CUSTOM LETTER STYLE and Logo Integration */}
           <div className="relative flex items-center justify-center gap-8">
-            {/* Left Logo with Fade Effect */}
+            {/* Left Logo with Enhanced Fade Effect */}
             <div className="relative">
               <div className="relative w-24 h-24">
                 <img 
@@ -85,15 +85,15 @@ export const HeroSection = () => {
                   className="w-24 h-24 object-contain animate-pulse"
                   style={{
                     filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))',
-                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)'
+                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0) 100%)'
                   }}
                 />
                 {/* Additional fade overlay for smoother transition */}
                 <div 
                   className="absolute inset-0 rounded-full"
                   style={{
-                    background: 'radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0.8) 100%)'
+                    background: 'radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0.9) 100%)'
                   }}
                 />
               </div>
@@ -142,7 +142,7 @@ export const HeroSection = () => {
               </div>
             </div>
 
-            {/* Right Logo with Fade Effect (Mirrored) */}
+            {/* Right Logo with Enhanced Fade Effect (Mirrored) */}
             <div className="relative">
               <div className="relative w-24 h-24">
                 <img 
@@ -151,15 +151,15 @@ export const HeroSection = () => {
                   className="w-24 h-24 object-contain animate-pulse transform scale-x-[-1]"
                   style={{
                     filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))',
-                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)'
+                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0) 100%)'
                   }}
                 />
                 {/* Additional fade overlay for smoother transition */}
                 <div 
                   className="absolute inset-0 rounded-full"
                   style={{
-                    background: 'radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0.8) 100%)'
+                    background: 'radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0.9) 100%)'
                   }}
                 />
               </div>
