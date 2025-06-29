@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -15,9 +16,18 @@ interface GaiaChartData {
   engagement: number
 }
 
+interface CurrentGaiaMetrics {
+  price: number
+  volume: number
+  holders: number
+  transactions: number
+  marketCap: number
+  change24h: number
+}
+
 export function LiveChartsGrid() {
   const [chartData, setChartData] = useState<GaiaChartData[]>([])
-  const [currentGaiaMetrics, setCurrentGaiaMetrics] = useState({
+  const [currentGaiaMetrics, setCurrentGaiaMetrics] = useState<CurrentGaiaMetrics>({
     price: GAIA_TOKEN.INITIAL_PRICE,
     volume: GAIA_METRICS.INITIAL_VOLUME,
     holders: GAIA_METRICS.INITIAL_HOLDERS,
