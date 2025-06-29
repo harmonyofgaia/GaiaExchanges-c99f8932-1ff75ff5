@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -10,6 +9,7 @@ import { useEffect } from "react"
 import Home from "./pages/Home"
 import Admin from "./pages/Admin"
 import SecureAdmin from "./pages/SecureAdmin"
+import SecureVault from "./pages/SecureVault"
 import Wallet from "./pages/Wallet"
 import About from "./pages/About" 
 import CoinCrafter from "./pages/CoinCrafter"
@@ -78,6 +78,7 @@ function App() {
             <HoverSidebar />
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/secure-vault" element={<SecureVault />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/secure-admin" element={<SecureAdmin />} />
               <Route path="/wallet" element={<Wallet />} />

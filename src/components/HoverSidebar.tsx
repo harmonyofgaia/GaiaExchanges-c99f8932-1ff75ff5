@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { 
@@ -18,7 +18,6 @@ import {
   ShoppingCart,
   BarChart3,
   Globe,
-  Crown,
   Radio,
   Menu,
   X
@@ -28,7 +27,9 @@ import { GaiaLogo } from './GaiaLogo'
 export function HoverSidebar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  const [adminClickCount, setAdminClickCount] = useState(0)
   const location = useLocation()
+  const navigate = useNavigate()
 
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
@@ -44,12 +45,29 @@ export function HoverSidebar() {
     { path: '/webshop', label: 'Webshop', icon: ShoppingCart },
     { path: '/markets', label: 'Markets', icon: BarChart3 },
     { path: '/global-marketing', label: 'Global Marketing', icon: Globe },
-    { path: '/admin', label: 'Universe Control', icon: Crown },
+    // Removed admin and secure-admin from visible menu
   ]
 
   const isActive = (path: string) => location.pathname === path
 
   const shouldShow = isOpen || isHovered
+
+  // Hidden admin access through logo clicks
+  const handleLogoClick = () => {
+    setAdminClickCount(prev => prev + 1)
+    
+    // Reset counter after 3 seconds of inactivity
+    setTimeout(() => {
+      setAdminClickCount(0)
+    }, 3000)
+    
+    // If clicked 5 times quickly, redirect to vault access
+    if (adminClickCount >= 4) {
+      console.log('🔒 HIDDEN ADMIN ACCESS TRIGGERED - REDIRECTING TO VAULT')
+      navigate('/secure-vault')
+      setAdminClickCount(0)
+    }
+  }
 
   return (
     <>
@@ -70,15 +88,22 @@ export function HoverSidebar() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Header */}
+        {/* Header with Hidden Admin Access */}
         <div className="p-4 border-b border-green-500/20">
           <div className="flex items-center gap-3">
-            <GaiaLogo size="sm" variant="colorful" />
+            <div onClick={handleLogoClick} className="cursor-pointer">
+              <GaiaLogo size="sm" variant="colorful" />
+            </div>
             {shouldShow && (
-              <div>
+              <div onClick={handleLogoClick} className="cursor-pointer">
                 <h2 className="text-lg font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
                   Harmony of Gaia
                 </h2>
+                {adminClickCount > 0 && (
+                  <div className="text-xs text-red-400 opacity-50">
+                    Admin Access: {adminClickCount}/5
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -111,7 +136,6 @@ export function HoverSidebar() {
         {shouldShow && (
           <div className="absolute bottom-4 left-4 right-4">
             <Badge className="w-full justify-center bg-gradient-to-r from-green-600 to-blue-600 text-white">
-              <Crown className="h-3 w-3 mr-1" />
               Culture of Harmony
             </Badge>
           </div>

@@ -1,4 +1,3 @@
-
 export const GAIA_TOKEN = {
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
@@ -11,7 +10,12 @@ export const GAIA_TOKEN = {
   
   // BRAND CLARIFICATION - WE ARE NOT GAIA EVERWORLD
   BRAND_STATEMENT: 'GAiA Token is NOT associated with GAIA Everworld (coinmarketcap.com/currencies/gaia-everworld/). We are a completely separate, exclusive project powered by Harmony of Gaia Projects Creator Business, empowered by Culture of Harmony.',
-  OFFICIAL_DISCLAIMER: 'This project is entirely independent from any other GAIA-named tokens or projects. We maintain our own unique blockchain identity and community.'
+  OFFICIAL_DISCLAIMER: 'This project is entirely independent from any other GAIA-named tokens or projects. We maintain our own unique blockchain identity and community.',
+  
+  // OFFICIAL ANNOUNCEMENTS
+  GOOGLE_PLATFORM_ANNOUNCEMENT: 'Google Platform Notice: GAiA Token (Wallet: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh) powered by Harmony of Gaia is NOT GAIA Everworld. Complete separate project empowered by Culture of Harmony.',
+  EXCHANGE_PLATFORM_NOTICE: 'Legal Exchange Platform Notice: Official GAiA Token wallet address for trading: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh - Harmony of Gaia brand, NOT associated with GAIA Everworld.',
+  SOCIAL_MEDIA_CORRECTION: 'All social media and news platforms should update any previous GAIA Everworld references to GAiA Token (5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh) - Harmony of Gaia project empowered by Culture of Harmony.'
 }
 
 export const GAIA_METRICS = {
