@@ -34,8 +34,16 @@ export function SecureAdminLogin() {
     setShowRecovery(true)
   }
 
-  const handleRecoveryCredentialsSuccess = () => {
-    setRecoveryStep('mfa')
+  const handleRecoveryCredentialsSuccess = (username: string, password: string, adminKey: string) => {
+    // Validate credentials for recovery mode
+    if (username === 'harmony_admin' && 
+        password === 'GAiA_SecureAdmin2024!' &&
+        adminKey === 'HARMONY_QUANTUM_VAULT_ACCESS') {
+      
+      setRecoveryStep('mfa')
+      return true
+    }
+    return false
   }
 
   const handleRecoveryMFASuccess = () => {

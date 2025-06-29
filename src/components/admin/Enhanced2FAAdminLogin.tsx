@@ -15,9 +15,17 @@ export function Enhanced2FAAdminLogin({ onLoginSuccess }: Enhanced2FAAdminLoginP
   const [loginStep, setLoginStep] = useState<'credentials' | 'sms-mfa' | 'google-2fa' | 'success'>('credentials')
   const [selectedMFAMethod, setSelectedMFAMethod] = useState<'sms' | 'google'>('sms')
 
-  const handleCredentialsSuccess = () => {
-    // After successful credential validation, show MFA options
-    setLoginStep(selectedMFAMethod === 'sms' ? 'sms-mfa' : 'google-2fa')
+  const handleCredentialsSuccess = (username: string, password: string, adminKey: string) => {
+    // Validate credentials first
+    if (username === 'harmony_admin' && 
+        password === 'GAiA_SecureAdmin2024!' &&
+        adminKey === 'HARMONY_QUANTUM_VAULT_ACCESS') {
+      
+      // After successful credential validation, show MFA options
+      setLoginStep(selectedMFAMethod === 'sms' ? 'sms-mfa' : 'google-2fa')
+      return true
+    }
+    return false
   }
 
   const handleMFASuccess = () => {
