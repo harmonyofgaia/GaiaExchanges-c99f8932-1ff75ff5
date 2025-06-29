@@ -24,6 +24,7 @@ import { MasterArtworkGenerator } from '@/components/admin/MasterArtworkGenerato
 import { SystemStatusChecker } from '@/components/admin/SystemStatusChecker'
 import { SecureConnectionManager } from '@/components/admin/SecureConnectionManager'
 import { GitHubRollbackManager } from '@/components/github/GitHubRollbackManager'
+import { CloudArtworkManager } from '@/components/admin/CloudArtworkManager'
 
 const Admin = () => {
   const navigate = useNavigate()
@@ -123,8 +124,11 @@ const Admin = () => {
           </div>
         </div>
 
-        <Tabs defaultValue="user-management" className="w-full">
-          <TabsList className="grid w-full grid-cols-7 bg-black/50 backdrop-blur-md border border-green-500/20">
+        <Tabs defaultValue="cloud-artwork" className="w-full">
+          <TabsList className="grid w-full grid-cols-8 bg-black/50 backdrop-blur-md border border-green-500/20">
+            <TabsTrigger value="cloud-artwork" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+              ☁️ Cloud Artwork
+            </TabsTrigger>
             <TabsTrigger value="user-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
               👥 User Management
             </TabsTrigger>
@@ -147,6 +151,20 @@ const Admin = () => {
               📋 Project Management
             </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="cloud-artwork" className="space-y-6 mt-6">
+            <Card className="border-2 border-blue-500/50 bg-gradient-to-br from-blue-900/20 to-purple-900/20">
+              <CardHeader>
+                <CardTitle className="text-blue-400 flex items-center gap-2">
+                  <Shield className="h-5 w-5" />
+                  🎨 Secure Cloud Artwork Collection (ADMIN ONLY)
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CloudArtworkManager />
+              </CardContent>
+            </Card>
+          </TabsContent>
           
           <TabsContent value="user-management" className="space-y-6 mt-6">
             <UserManagementSystem />

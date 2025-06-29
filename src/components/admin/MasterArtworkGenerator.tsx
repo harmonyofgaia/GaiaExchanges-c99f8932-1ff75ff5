@@ -15,7 +15,8 @@ import {
   Zap,
   Crown,
   Star,
-  RefreshCw
+  RefreshCw,
+  Shield
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { ArtworkUploadProcessor } from './ArtworkUploadProcessor'
@@ -173,7 +174,7 @@ export function MasterArtworkGenerator() {
         setArtworks(prev => [newArtwork, ...prev])
         setTotalGenerated(prev => prev + 1)
 
-        // Save to cloud storage and send email
+        // Automatically save to secure cloud storage (admin only)
         try {
           const cloudResponse = await fetch('/functions/v1/save-artwork-to-cloud', {
             method: 'POST',
@@ -191,8 +192,8 @@ export function MasterArtworkGenerator() {
           const cloudResult = await cloudResponse.json()
           
           if (cloudResult.success) {
-            toast.success('🎨 Artwork Created & Saved!', {
-              description: `Generated artwork inspired by your uploaded references and saved to cloud`,
+            toast.success('🎨 Artwork Created & Secured!', {
+              description: `Generated artwork saved to admin-only cloud storage`,
               duration: 6000
             })
           }
@@ -259,13 +260,25 @@ export function MasterArtworkGenerator() {
                 Master Artwork Generator
               </div>
               <div className="text-sm font-normal text-purple-400">
-                AI-Powered Art Creation - Inspired by Your Uploaded References
+                AI-Powered Art Creation - Automatically Saved to Secure Cloud Storage
               </div>
             </div>
             <Sparkles className="h-6 w-6 text-pink-400 animate-bounce" />
           </CardTitle>
         </CardHeader>
         <CardContent>
+          {/* Security Notice */}
+          <div className="mb-6 p-4 bg-gradient-to-r from-blue-900/20 to-purple-900/20 rounded-lg border border-blue-500/30">
+            <h3 className="text-lg font-bold text-blue-400 mb-2 flex items-center gap-2">
+              <Shield className="h-5 w-5" />
+              🔒 Admin-Only Secure Storage
+            </h3>
+            <p className="text-xs text-blue-300">
+              ✨ All generated artworks are automatically saved to secure cloud storage accessible only by admin users. 
+              Your creations are protected with military-grade security and RLS policies.
+            </p>
+          </div>
+
           {/* Reference Images Showcase */}
           <div className="mb-6 p-4 bg-gradient-to-r from-green-900/20 to-blue-900/20 rounded-lg border border-green-500/30">
             <h3 className="text-lg font-bold text-green-400 mb-3 flex items-center gap-2">

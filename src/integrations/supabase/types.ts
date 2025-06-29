@@ -266,6 +266,57 @@ export type Database = {
         }
         Relationships: []
       }
+      generated_artwork: {
+        Row: {
+          artwork_type: string
+          cloud_path: string | null
+          cloud_url: string | null
+          created_at: string | null
+          downloads: number | null
+          file_size: number | null
+          generated_at: string | null
+          id: string
+          image_data: string
+          nft_ready: boolean | null
+          prompt: string
+          storage_metadata: Json | null
+          style: string
+          updated_at: string | null
+        }
+        Insert: {
+          artwork_type: string
+          cloud_path?: string | null
+          cloud_url?: string | null
+          created_at?: string | null
+          downloads?: number | null
+          file_size?: number | null
+          generated_at?: string | null
+          id?: string
+          image_data: string
+          nft_ready?: boolean | null
+          prompt: string
+          storage_metadata?: Json | null
+          style: string
+          updated_at?: string | null
+        }
+        Update: {
+          artwork_type?: string
+          cloud_path?: string | null
+          cloud_url?: string | null
+          created_at?: string | null
+          downloads?: number | null
+          file_size?: number | null
+          generated_at?: string | null
+          id?: string
+          image_data?: string
+          nft_ready?: boolean | null
+          prompt?: string
+          storage_metadata?: Json | null
+          style?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       notifications: {
         Row: {
           action_url: string | null
