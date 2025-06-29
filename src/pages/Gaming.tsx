@@ -20,22 +20,27 @@ import {
   MessageCircle,
   Globe,
   Puzzle,
-  Apple
+  Apple,
+  ShoppingCart,
+  Package,
+  Fish,
+  Gem
 } from 'lucide-react'
-import { Link } from 'react-router-dom'
 import { EnhancedGamingLayout } from '@/components/EnhancedGamingLayout'
 import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
 import { VirtualWorldCanvas } from '@/components/virtualworld/VirtualWorldCanvas'
 import { GameChatSystem } from '@/components/virtualworld/GameChatSystem'
 import { LandscapeMarketplace } from '@/components/virtualworld/LandscapeMarketplace'
+import { PlayerInventory } from '@/components/virtualworld/PlayerInventory'
 import { WormsGameArena } from '@/components/WormsGameArena'
 import { QuantumEvolutionMonitor } from '@/components/security/QuantumEvolutionMonitor'
 import { SnakeGame } from '@/components/SnakeGame'
 import { TetrisGame } from '@/components/TetrisGame'
-import { GAIA_TOKEN } from '@/constants/gaia'
-import { toast } from 'sonner'
 import { GaiaCloudSystem } from '@/components/GaiaCloudSystem'
 import { SnakeWormsIntegration } from '@/components/SnakeWormsIntegration'
+import { LiveAnimalNFTs } from '@/components/LiveAnimalNFTs'
+import { GAIA_TOKEN } from '@/constants/gaia'
+import { toast } from 'sonner'
 
 const Gaming = () => {
   const [activeTab, setActiveTab] = useState<string>('games-hub')
@@ -50,19 +55,21 @@ const Gaming = () => {
     battlesWon: 156,
     battlesTotal: 203,
     tokensEarned: 15420,
-    environmentalImpact: 847
+    environmentalImpact: 847,
+    nftsOwned: 23,
+    animalsHelped: 567
   })
 
   const handleQuickBattle = () => {
     toast.success('🥊 Battle Started!', {
-      description: 'Entering quick battle arena with GAIA power boost',
+      description: 'Entering quick battle arena with GAiA power boost',
       duration: 3000
     })
   }
 
   const handleJoinTournament = () => {
     toast.success('🏆 Tournament Registration', {
-      description: 'You have been registered for the next GAIA tournament',
+      description: 'You have been registered for the next GAiA tournament',
       duration: 3000
     })
   }
@@ -83,7 +90,20 @@ const Gaming = () => {
       environmentalImpact: prev.environmentalImpact + 25
     }))
     toast.success('🛒 Landscape Purchased!', {
-      description: `${landscape} added to your collection!`,
+      description: `${landscape} added to your collection! GAiA tokens burned for environmental impact!`,
+      duration: 3000
+    })
+  }
+
+  const handleNFTPurchase = (nftName: string, price: number) => {
+    setPlayerStats(prev => ({
+      ...prev,
+      nftsOwned: prev.nftsOwned + 1,
+      tokensEarned: prev.tokensEarned - price,
+      environmentalImpact: prev.environmentalImpact + 10
+    }))
+    toast.success('🎮 NFT Purchased!', {
+      description: `${nftName} added to your collection! GAiA tokens burned!`,
       duration: 3000
     })
   }
@@ -92,14 +112,16 @@ const Gaming = () => {
     { id: 'games-hub', label: '🎮 Games Hub', icon: <Gamepad2 className="h-4 w-4" /> },
     { id: 'cloud-system', label: '☁️ Cloud System', icon: <Globe className="h-4 w-4" /> },
     { id: 'snake-worms', label: '🐍⚔️ Snake vs Worms', icon: <Target className="h-4 w-4" /> },
-    { id: 'snake', label: '🐍 Snake', icon: <Apple className="h-4 w-4" /> },
+    { id: 'snake', label: '🐍 Snake Classic', icon: <Apple className="h-4 w-4" /> },
     { id: 'tetris', label: '🧩 Tetris', icon: <Puzzle className="h-4 w-4" /> },
     { id: 'worms-arena', label: '🪱 Worms Arena', icon: <Target className="h-4 w-4" /> },
     { id: 'virtual-world', label: '🌍 Virtual World', icon: <Globe className="h-4 w-4" /> },
-    { id: 'landscapes', label: '🏔️ Landscapes', icon: <Mountain className="h-4 w-4" /> },
+    { id: 'landscapes', label: '🏔️ Landscape Market', icon: <Mountain className="h-4 w-4" /> },
     { id: 'nft-marketplace', label: '💎 NFT Market', icon: <Star className="h-4 w-4" /> },
+    { id: 'animal-nfts', label: '🦋 Live Animal NFTs', icon: <Fish className="h-4 w-4" /> },
+    { id: 'inventory', label: '🎒 Player Inventory', icon: <Package className="h-4 w-4" /> },
     { id: 'chat-system', label: '💬 Social Hub', icon: <MessageCircle className="h-4 w-4" /> },
-    { id: 'enhanced-gaming', label: '⚔️ Battle Arena', icon: <Sword className="h-4 w-4" /> }
+    { id: 'battle-arena', label: '⚔️ Battle Arena', icon: <Sword className="h-4 w-4" /> }
   ]
 
   return (
@@ -108,17 +130,20 @@ const Gaming = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-green-400 bg-clip-text text-transparent mb-4">
-            🎮 GAIA GAMING METAVERSE
+            🎮 GAiA GAMING METAVERSE
           </h1>
           <p className="text-xl text-muted-foreground mb-4">
-            Epic gaming experiences with dragon-powered security, virtual worlds, and GAIA token rewards
+            Epic gaming experiences with dragon-powered security, virtual worlds, live animal NFTs, and GAiA token rewards
           </p>
           <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 max-w-2xl mx-auto mb-6">
             <div className="text-sm text-green-400">
-              <strong>Powered by GAIA:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+              <strong>Powered by GAiA:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
             </div>
             <div className="text-sm text-blue-400 mt-1">
               <strong>Wallet:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.WALLET_ADDRESS}</code>
+            </div>
+            <div className="text-sm text-purple-400 mt-1">
+              <strong>Token:</strong> {GAIA_TOKEN.NAME} ({GAIA_TOKEN.SYMBOL})
             </div>
           </div>
           <div className="flex justify-center gap-4 flex-wrap">
@@ -136,12 +161,12 @@ const Gaming = () => {
             </Badge>
             <Badge className="bg-orange-600 text-white">
               <Globe className="h-3 w-3 mr-1" />
-              Virtual Worlds
+              Virtual Worlds + Live NFTs
             </Badge>
           </div>
         </div>
 
-        {/* Player Stats Dashboard */}
+        {/* Enhanced Player Stats Dashboard */}
         <Card className="mb-8 border-green-500/30 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
           <CardHeader>
             <CardTitle className="text-green-400 flex items-center gap-2">
@@ -150,14 +175,14 @@ const Gaming = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-6">
               <div className="text-center">
                 <div className="text-2xl font-bold text-purple-400">{playerStats.level}</div>
                 <div className="text-sm text-muted-foreground">Level</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-green-400">{playerStats.gaiaPower}</div>
-                <div className="text-sm text-muted-foreground">GAIA Power</div>
+                <div className="text-sm text-muted-foreground">GAiA Power</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-400">{playerStats.landscapesOwned}</div>
@@ -165,11 +190,15 @@ const Gaming = () => {
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-yellow-400">{playerStats.tokensEarned}</div>
-                <div className="text-sm text-muted-foreground">Tokens Earned</div>
+                <div className="text-sm text-muted-foreground">GAiA Earned</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-orange-400">{Math.round((playerStats.battlesWon / playerStats.battlesTotal) * 100)}%</div>
-                <div className="text-sm text-muted-foreground">Win Rate</div>
+                <div className="text-2xl font-bold text-pink-400">{playerStats.nftsOwned}</div>
+                <div className="text-sm text-muted-foreground">NFTs Owned</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-cyan-400">{playerStats.animalsHelped}</div>
+                <div className="text-sm text-muted-foreground">Animals Helped</div>
               </div>
             </div>
             
@@ -209,7 +238,7 @@ const Gaming = () => {
             <div className="space-y-6">
               <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
                 <CardHeader>
-                  <CardTitle className="text-purple-400 text-center">🎮 GAIA GAMES HUB</CardTitle>
+                  <CardTitle className="text-purple-400 text-center">🎮 GAiA GAMES HUB - All Your Creations</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -217,31 +246,55 @@ const Gaming = () => {
                       <Globe className="h-12 w-12 text-cyan-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold text-cyan-400 mb-2">☁️ Cloud System</h3>
                       <p className="text-muted-foreground">Make clouds visible and interactive</p>
+                      <Badge className="mt-2 bg-green-600">GAiA Rewards</Badge>
                     </div>
                     <div className="p-6 bg-orange-900/30 rounded-lg border border-orange-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('snake-worms')}>
                       <Target className="h-12 w-12 text-orange-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold text-orange-400 mb-2">🐍⚔️ Snake vs Worms</h3>
                       <p className="text-muted-foreground">Epic live battle integration</p>
+                      <Badge className="mt-2 bg-green-600">Token Burning</Badge>
                     </div>
                     <div className="p-6 bg-green-900/30 rounded-lg border border-green-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('snake')}>
                       <Apple className="h-12 w-12 text-green-400 mx-auto mb-4" />
-                      <h3 className="text-xl font-bold text-green-400 mb-2">🐍 Snake Game</h3>
-                      <p className="text-muted-foreground">Classic snake with GAIA rewards</p>
+                      <h3 className="text-xl font-bold text-green-400 mb-2">🐍 Snake Classic</h3>
+                      <p className="text-muted-foreground">Classic snake with GAiA rewards</p>
+                      <Badge className="mt-2 bg-green-600">Environmental Impact</Badge>
                     </div>
                     <div className="p-6 bg-blue-900/30 rounded-lg border border-blue-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('tetris')}>
                       <Puzzle className="h-12 w-12 text-blue-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold text-blue-400 mb-2">🧩 Tetris</h3>
                       <p className="text-muted-foreground">Block puzzle with token rewards</p>
+                      <Badge className="mt-2 bg-green-600">GAiA Burning</Badge>
                     </div>
                     <div className="p-6 bg-red-900/30 rounded-lg border border-red-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('worms-arena')}>
                       <Target className="h-12 w-12 text-red-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold text-red-400 mb-2">🪱 Worms Arena</h3>
                       <p className="text-muted-foreground">Strategic battle game</p>
+                      <Badge className="mt-2 bg-green-600">Live Combat</Badge>
                     </div>
                     <div className="p-6 bg-teal-900/30 rounded-lg border border-teal-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('virtual-world')}>
                       <Globe className="h-12 w-12 text-teal-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold text-teal-400 mb-2">🌍 Virtual World</h3>
                       <p className="text-muted-foreground">Explore infinite metaverse</p>
+                      <Badge className="mt-2 bg-green-600">Animal Walking</Badge>
+                    </div>
+                    <div className="p-6 bg-pink-900/30 rounded-lg border border-pink-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('animal-nfts')}>
+                      <Fish className="h-12 w-12 text-pink-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-pink-400 mb-2">🦋 Live Animal NFTs</h3>
+                      <p className="text-muted-foreground">Real animals with live connections</p>
+                      <Badge className="mt-2 bg-green-600">Environmental Aid</Badge>
+                    </div>
+                    <div className="p-6 bg-violet-900/30 rounded-lg border border-violet-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('nft-marketplace')}>
+                      <Star className="h-12 w-12 text-violet-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-violet-400 mb-2">💎 NFT Marketplace</h3>
+                      <p className="text-muted-foreground">Trade gaming NFTs</p>
+                      <Badge className="mt-2 bg-green-600">Token Rewards</Badge>
+                    </div>
+                    <div className="p-6 bg-indigo-900/30 rounded-lg border border-indigo-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('inventory')}>
+                      <Package className="h-12 w-12 text-indigo-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-indigo-400 mb-2">🎒 Player Inventory</h3>
+                      <p className="text-muted-foreground">Manage your items and achievements</p>
+                      <Badge className="mt-2 bg-green-600">Progress Tracking</Badge>
                     </div>
                   </div>
                 </CardContent>
@@ -254,7 +307,7 @@ const Gaming = () => {
                     <div className="text-center">
                       <Trophy className="h-12 w-12 text-green-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold text-green-400 mb-4">Quick Battle</h3>
-                      <p className="text-muted-foreground mb-4">Jump into instant action with other players</p>
+                      <p className="text-muted-foreground mb-4">Jump into instant action with other players and earn GAiA</p>
                       <Button onClick={handleQuickBattle} className="bg-green-600 hover:bg-green-700">
                         <Flame className="h-4 w-4 mr-2" />
                         Start Battle
@@ -268,7 +321,7 @@ const Gaming = () => {
                     <div className="text-center">
                       <Crown className="h-12 w-12 text-blue-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold text-blue-400 mb-4">Tournament</h3>
-                      <p className="text-muted-foreground mb-4">Compete for GAIA token prizes</p>
+                      <p className="text-muted-foreground mb-4">Compete for GAiA token prizes and environmental impact</p>
                       <Button onClick={handleJoinTournament} className="bg-blue-600 hover:bg-blue-700">
                         <Star className="h-4 w-4 mr-2" />
                         Join Tournament
@@ -295,9 +348,37 @@ const Gaming = () => {
             <LandscapeMarketplace onPurchase={handleLandscapePurchase} />
           )}
           {activeTab === 'nft-marketplace' && <GamingNFTMarketplace />}
+          {activeTab === 'animal-nfts' && <LiveAnimalNFTs />}
+          {activeTab === 'inventory' && <PlayerInventory />}
           {activeTab === 'chat-system' && <GameChatSystem activeUsers={activeUsers} />}
-          {activeTab === 'enhanced-gaming' && <EnhancedGamingLayout />}
+          {activeTab === 'battle-arena' && <EnhancedGamingLayout />}
         </div>
+
+        {/* GAiA Token Integration Footer */}
+        <Card className="mt-8 border-2 border-green-500/50 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
+          <CardHeader>
+            <CardTitle className="text-green-400 text-center">
+              🚀 Powered by GAiA Token - Harmony of Gaia
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-center space-y-2">
+              <div className="text-sm text-green-400">
+                <strong>Contract:</strong> <code className="font-mono text-xs bg-black/20 px-2 py-1 rounded">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+              </div>
+              <div className="text-sm text-blue-400">
+                <strong>Wallet:</strong> <code className="font-mono text-xs bg-black/20 px-2 py-1 rounded">{GAIA_TOKEN.WALLET_ADDRESS}</code>
+              </div>
+              <div className="text-sm text-purple-400">
+                <strong>Token Name:</strong> {GAIA_TOKEN.NAME} ({GAIA_TOKEN.SYMBOL})
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">
+                Every gaming interaction burns GAiA tokens for real environmental impact, wildlife conservation, and landscape restoration.
+                Join the harmony revolution through gaming!
+              </p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

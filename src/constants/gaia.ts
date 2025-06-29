@@ -1,13 +1,12 @@
 
-
 export const GAIA_TOKEN = {
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-  SYMBOL: 'GAIA',
+  SYMBOL: 'GAiA',
   NAME: 'Harmony of Gaia',
   DECIMALS: 9,
   NETWORK: 'Solana',
-  DESCRIPTION: 'The revolutionary token powering the Harmony of Gaia ecosystem',
+  DESCRIPTION: 'The revolutionary token powering the Harmony of Gaia ecosystem with real environmental impact',
   INITIAL_PRICE: 0.000125,
   PUMP_FUN_URL: `https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump`
 }
@@ -44,4 +43,3 @@ export const formatGaiaNumber = (number: number): string => {
     maximumFractionDigits: 2
   }).format(number)
 }
-
