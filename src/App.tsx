@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -26,6 +25,7 @@ import Contact from "./pages/Contact"
 import Pricing from "./pages/Pricing"
 import Exchange from "./pages/Exchange"
 import "./App.css"
+import { PageSpecificBackground } from "@/components/ui/page-specific-background"
 
 const queryClient = new QueryClient()
 
@@ -59,6 +59,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <AdminOnlySecurityBarrier />
+        <PageSpecificBackground />
         <BrowserRouter>
           <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
             <Routes>

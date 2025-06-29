@@ -1,32 +1,32 @@
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-interface NeuralParticle {
-  x: number
-  y: number
-  vx: number
-  vy: number
-  energy: number
-  connections: number[]
-  pulsing: boolean
-  size: number
-}
-
-interface ElectricShock {
+interface NeuralConnection {
+  id: string
   startX: number
   startY: number
   endX: number
   endY: number
   intensity: number
-  lifetime: number
   color: string
+  pulseSpeed: number
+}
+
+interface NeuralNode {
+  id: string
+  x: number
+  y: number
+  radius: number
+  pulseIntensity: number
+  color: string
+  connections: string[]
 }
 
 export function NeuralElectricMatrix() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const particlesRef = useRef<NeuralParticle[]>([])
-  const shocksRef = useRef<ElectricShock[]>([])
-  const animationRef = useRef<number>()
+  const [nodes, setNodes] = useState<NeuralNode[]>([])
+  const [connections, setConnections] = useState<NeuralConnection[]>([])
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -43,199 +43,165 @@ export function NeuralElectricMatrix() {
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
 
-    // Initialize neural particles
-    const particleCount = 120
-    for (let i = 0; i < particleCount; i++) {
-      particlesRef.current.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: (Math.random() - 0.5) * 0.8,
-        energy: Math.random() * 100,
-        connections: [],
-        pulsing: Math.random() > 0.7,
-        size: 2 + Math.random() * 4
-      })
-    }
+    // Initialize neural network
+    const initializeNetwork = () => {
+      const newNodes: NeuralNode[] = []
+      const newConnections: NeuralConnection[] = []
 
-    // Generate electric shocks
-    const generateElectricShock = () => {
-      const particles = particlesRef.current
-      if (particles.length < 2) return
-
-      const start = particles[Math.floor(Math.random() * particles.length)]
-      const end = particles[Math.floor(Math.random() * particles.length)]
-      
-      if (start !== end) {
-        const colors = ['#00ffff', '#ff00ff', '#ffff00', '#00ff80', '#ff0080']
-        shocksRef.current.push({
-          startX: start.x,
-          startY: start.y,
-          endX: end.x,
-          endY: end.y,
-          intensity: 0.5 + Math.random() * 0.5,
-          lifetime: 30 + Math.random() * 20,
-          color: colors[Math.floor(Math.random() * colors.length)]
-        })
+      // Create nodes
+      for (let i = 0; i < 25; i++) {
+        const node: NeuralNode = {
+          id: `node-${i}`,
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 4 + 2,
+          pulseIntensity: Math.random() * 0.8 + 0.2,
+          color: ['#00ffff', '#ff00ff', '#ffff00', '#00ff00', '#ff0080'][Math.floor(Math.random() * 5)],
+          connections: []
+        }
+        newNodes.push(node)
       }
+
+      // Create connections between nearby nodes
+      newNodes.forEach((node, index) => {
+        newNodes.slice(index + 1).forEach((otherNode) => {
+          const distance = Math.sqrt(
+            Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2)
+          )
+
+          if (distance < 200 && Math.random() < 0.3) {
+            const connection: NeuralConnection = {
+              id: `conn-${node.id}-${otherNode.id}`,
+              startX: node.x,
+              startY: node.y,
+              endX: otherNode.x,
+              endY: otherNode.y,
+              intensity: Math.random() * 0.8 + 0.2,
+              color: node.color,
+              pulseSpeed: Math.random() * 2 + 1
+            }
+            newConnections.push(connection)
+            node.connections.push(otherNode.id)
+          }
+        })
+      })
+
+      setNodes(newNodes)
+      setConnections(newConnections)
     }
+
+    initializeNetwork()
+
+    // Animation loop
+    let animationId: number
+    let time = 0
 
     const animate = () => {
-      // Semi-transparent background for trail effect
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.03)'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      time += 0.016
 
-      // Update and draw neural particles
-      particlesRef.current.forEach((particle, index) => {
-        // Update position
-        particle.x += particle.vx
-        particle.y += particle.vy
-        particle.energy += Math.sin(Date.now() * 0.001 + index) * 0.5
+      // Draw connections with electrical pulses
+      connections.forEach((connection) => {
+        const pulse = Math.sin(time * connection.pulseSpeed) * 0.5 + 0.5
+        const alpha = connection.intensity * pulse * 0.6
 
-        // Boundary wrapping
-        if (particle.x < 0) particle.x = canvas.width
-        if (particle.x > canvas.width) particle.x = 0
-        if (particle.y < 0) particle.y = canvas.height
-        if (particle.y > canvas.height) particle.y = 0
+        // Main connection line
+        ctx.strokeStyle = `rgba(${connection.color === '#00ffff' ? '0,255,255' : 
+          connection.color === '#ff00ff' ? '255,0,255' :
+          connection.color === '#ffff00' ? '255,255,0' :
+          connection.color === '#00ff00' ? '0,255,0' : '255,0,128'}, ${alpha})`
+        ctx.lineWidth = 2
+        ctx.beginPath()
+        ctx.moveTo(connection.startX, connection.startY)
+        ctx.lineTo(connection.endX, connection.endY)
+        ctx.stroke()
 
-        // Draw particle with neural glow
-        const glowSize = particle.pulsing ? 
-          particle.size + Math.sin(Date.now() * 0.005 + index) * 2 : 
-          particle.size
+        // Electrical spark effect
+        if (pulse > 0.8) {
+          ctx.strokeStyle = `rgba(255,255,255,${alpha * 2})`
+          ctx.lineWidth = 1
+          ctx.stroke()
+        }
+      })
 
-        ctx.save()
-        ctx.globalAlpha = 0.8
-        
+      // Draw nodes with pulsing effect
+      nodes.forEach((node) => {
+        const pulse = Math.sin(time * 2 + node.x * 0.01) * 0.3 + 0.7
+        const radius = node.radius * pulse
+
         // Outer glow
-        const gradient = ctx.createRadialGradient(
-          particle.x, particle.y, 0,
-          particle.x, particle.y, glowSize * 3
-        )
-        gradient.addColorStop(0, `hsla(${(particle.energy * 3.6) % 360}, 80%, 60%, 0.8)`)
-        gradient.addColorStop(0.5, `hsla(${(particle.energy * 3.6) % 360}, 80%, 60%, 0.3)`)
-        gradient.addColorStop(1, 'transparent')
-        
+        const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius * 3)
+        gradient.addColorStop(0, `rgba(${node.color === '#00ffff' ? '0,255,255' : 
+          node.color === '#ff00ff' ? '255,0,255' :
+          node.color === '#ffff00' ? '255,255,0' :
+          node.color === '#00ff00' ? '0,255,0' : '255,0,128'}, ${node.pulseIntensity * 0.3})`)
+        gradient.addColorStop(1, 'rgba(0,0,0,0)')
+
         ctx.fillStyle = gradient
         ctx.beginPath()
-        ctx.arc(particle.x, particle.y, glowSize * 3, 0, Math.PI * 2)
+        ctx.arc(node.x, node.y, radius * 3, 0, Math.PI * 2)
         ctx.fill()
 
-        // Core particle
-        ctx.fillStyle = `hsla(${(particle.energy * 3.6) % 360}, 90%, 70%, 1)`
+        // Core node
+        ctx.fillStyle = node.color
         ctx.beginPath()
-        ctx.arc(particle.x, particle.y, glowSize, 0, Math.PI * 2)
+        ctx.arc(node.x, node.y, radius, 0, Math.PI * 2)
         ctx.fill()
-        ctx.restore()
+
+        // Electric spark at core
+        if (pulse > 0.9) {
+          ctx.fillStyle = 'rgba(255,255,255,0.8)'
+          ctx.beginPath()
+          ctx.arc(node.x, node.y, radius * 0.5, 0, Math.PI * 2)
+          ctx.fill()
+        }
       })
 
-      // Draw neural connections
-      ctx.globalAlpha = 0.15
-      ctx.strokeStyle = '#00ffaa'
-      ctx.lineWidth = 1
-      
-      for (let i = 0; i < particlesRef.current.length; i++) {
-        for (let j = i + 1; j < particlesRef.current.length; j++) {
-          const p1 = particlesRef.current[i]
-          const p2 = particlesRef.current[j]
-          const distance = Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2)
-          
-          if (distance < 120) {
-            const opacity = 1 - (distance / 120)
-            ctx.globalAlpha = opacity * 0.3
-            
-            ctx.beginPath()
-            ctx.moveTo(p1.x, p1.y)
-            ctx.lineTo(p2.x, p2.y)
-            ctx.stroke()
-          }
-        }
-      }
-
-      // Update and draw electric shocks
-      shocksRef.current = shocksRef.current.filter(shock => {
-        shock.lifetime--
-        
-        if (shock.lifetime <= 0) return false
-
-        // Draw electric shock with branching effect
-        const segments = 8
-        const points = []
-        
-        for (let i = 0; i <= segments; i++) {
-          const t = i / segments
-          const x = shock.startX + (shock.endX - shock.startX) * t
-          const y = shock.startY + (shock.endY - shock.startY) * t
-          
-          // Add random deviation for electric effect
-          const deviation = (Math.random() - 0.5) * 20 * shock.intensity
-          points.push({
-            x: x + deviation,
-            y: y + deviation
-          })
-        }
-
-        ctx.save()
-        ctx.globalAlpha = (shock.lifetime / 50) * shock.intensity
-        ctx.strokeStyle = shock.color
-        ctx.lineWidth = 2 + shock.intensity * 2
-        ctx.lineCap = 'round'
-        
-        // Main shock
-        ctx.beginPath()
-        ctx.moveTo(points[0].x, points[0].y)
-        for (let i = 1; i < points.length; i++) {
-          ctx.lineTo(points[i].x, points[i].y)
-        }
-        ctx.stroke()
-
-        // Glow effect
-        ctx.globalAlpha = (shock.lifetime / 50) * shock.intensity * 0.5
-        ctx.lineWidth = 6 + shock.intensity * 4
-        ctx.stroke()
-
-        ctx.restore()
-        return true
-      })
-
-      // Randomly generate electric shocks
-      if (Math.random() < 0.08) {
-        generateElectricShock()
-      }
-
-      // Add GAiA symbols floating through
-      if (Math.random() < 0.02) {
-        const gaiaSymbols = ['🌍', '🌿', '⚡', '💎', '🔮']
-        const symbol = gaiaSymbols[Math.floor(Math.random() * gaiaSymbols.length)]
-        
-        ctx.save()
-        ctx.font = `${20 + Math.random() * 10}px Arial`
-        ctx.fillStyle = `hsla(${Math.random() * 360}, 70%, 60%, 0.6)`
-        ctx.fillText(
-          symbol,
-          Math.random() * canvas.width,
-          Math.random() * canvas.height
+      // Mouse interaction effect
+      const mouseDistance = 150
+      nodes.forEach((node) => {
+        const distance = Math.sqrt(
+          Math.pow(node.x - mousePos.x, 2) + Math.pow(node.y - mousePos.y, 2)
         )
-        ctx.restore()
-      }
 
-      animationRef.current = requestAnimationFrame(animate)
+        if (distance < mouseDistance) {
+          const influence = 1 - distance / mouseDistance
+          const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 30)
+          gradient.addColorStop(0, `rgba(255,255,255,${influence * 0.5})`)
+          gradient.addColorStop(1, 'rgba(255,255,255,0)')
+
+          ctx.fillStyle = gradient
+          ctx.beginPath()
+          ctx.arc(node.x, node.y, 30, 0, Math.PI * 2)
+          ctx.fill()
+        }
+      })
+
+      animationId = requestAnimationFrame(animate)
     }
 
     animate()
 
     return () => {
       window.removeEventListener('resize', resizeCanvas)
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
+      cancelAnimationFrame(animationId)
     }
+  }, [mousePos])
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.4 }}
+      className="fixed inset-0 pointer-events-none"
+      style={{ zIndex: -1 }}
     />
   )
 }
