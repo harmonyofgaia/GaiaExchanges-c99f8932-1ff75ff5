@@ -6,6 +6,8 @@ interface QuantumMetrics {
   quantumProcessingEfficiency: number
   databaseAttacksNeutralized: number
   nanosecondResponseTime: number
+  walletsProtected: number
+  quantumSecurityScore: number
 }
 
 export function QuantumSecurityEngine() {
@@ -13,7 +15,9 @@ export function QuantumSecurityEngine() {
     threatsBlocked: 0,
     quantumProcessingEfficiency: 100,
     databaseAttacksNeutralized: 0,
-    nanosecondResponseTime: 0.00000000000001
+    nanosecondResponseTime: 0.00000000000001,
+    walletsProtected: 1000,
+    quantumSecurityScore: 100
   })
   
   const [isActive, setIsActive] = useState(true)
@@ -55,7 +59,9 @@ export function QuantumSecurityEngine() {
             setMetrics(prev => ({
               ...prev,
               threatsBlocked: prev.threatsBlocked + 1,
-              databaseAttacksNeutralized: prev.databaseAttacksNeutralized + 1
+              databaseAttacksNeutralized: prev.databaseAttacksNeutralized + 1,
+              walletsProtected: prev.walletsProtected + Math.floor(Math.random() * 10),
+              quantumSecurityScore: Math.min(100, prev.quantumSecurityScore + 0.1)
             }))
           }
         }

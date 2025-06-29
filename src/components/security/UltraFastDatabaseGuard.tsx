@@ -140,12 +140,12 @@ export function UltraFastDatabaseGuard() {
             }, i * 0.0001) // Nanosecond timing
           }
           
-          // Log to database
+          // Log to database with correct severity and field names
           try {
             await supabase.from('security_events').insert({
               event_type: 'WATERSOLID_PLAN_DEPLOYED',
               event_description: `Database attacker ${attacker.ip} eliminated with watersolid plan - ${attacker.attackType}`,
-              severity: 'critical',
+              severity: 'maximum',
               ip_address: attacker.ip,
               resolved: true
             })
