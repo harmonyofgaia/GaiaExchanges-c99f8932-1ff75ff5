@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -24,10 +25,14 @@ import VirtualWorld from "./pages/VirtualWorld"
 import Contact from "./pages/Contact"
 import Pricing from "./pages/Pricing"
 import Exchange from "./pages/Exchange"
+import Markets from "./pages/Markets"
+import MarketingHub from "./pages/MarketingHub"
+import GlobalMarketingDashboard from "./pages/GlobalMarketingDashboard"
+import Webshop from "./pages/Webshop"
 import "./App.css"
-import { PageSpecificBackground } from "@/components/ui/page-specific-background"
 import { InvisibleSecurityCore } from "@/components/security/InvisibleSecurityCore"
 import { UniquenessProtector } from "@/components/security/UniquenessProtector"
+import { SelfTrainingAnimal } from "@/components/security/SelfTrainingAnimal"
 
 const queryClient = new QueryClient()
 
@@ -60,11 +65,11 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <AdminOnlySecurityBarrier />
-        <InvisibleSecurityCore />
-        <UniquenessProtector />
-        <PageSpecificBackground />
         <BrowserRouter>
+          <AdminOnlySecurityBarrier />
+          <InvisibleSecurityCore />
+          <UniquenessProtector />
+          <SelfTrainingAnimal />
           <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -85,6 +90,10 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/exchange" element={<Exchange />} />
+              <Route path="/markets" element={<Markets />} />
+              <Route path="/marketing-hub" element={<MarketingHub />} />
+              <Route path="/global-marketing" element={<GlobalMarketingDashboard />} />
+              <Route path="/webshop" element={<Webshop />} />
             </Routes>
           </div>
         </BrowserRouter>

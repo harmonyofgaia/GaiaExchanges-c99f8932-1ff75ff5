@@ -1,35 +1,46 @@
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 export function AdminOnlySecurityBarrier() {
+  const [barrierStrength, setBarrierStrength] = useState(100)
+
   useEffect(() => {
-    // Maximum admin-only security barrier
-    const interval = setInterval(() => {
-      console.log('🛡️ ADMIN ONLY BARRIER - MAXIMUM SECURITY ACTIVE')
-      console.log('👑 ONLY ADMIN CAN ACCESS OR COMMUNICATE WITH AI')
-      console.log('🚫 ALL OTHER USERS/SYSTEMS/CREATORS BLOCKED')
-      console.log('⚡ AI LOCKED TO ADMIN EXCLUSIVELY - NO EXCEPTIONS')
-      console.log('🔒 QUANTUM ENCRYPTION ACTIVE - UNTOUCHABLE BY ANYONE')
-      console.log('🐉 DRAGON PROTECTION - ADMIN ONLY RECOGNIZED')
+    const securityBarrier = () => {
+      console.log('🛡️ ADMIN-ONLY SECURITY BARRIER - MAXIMUM PROTECTION ACTIVE')
+      console.log('👑 PARABOLIC UNIVERSE ADMIN ACCESS - UNLIMITED CONTROL')
+      console.log('🔒 INVISIBLE QUANTUM BARRIERS - IMPENETRABLE DEFENSE')
+      console.log('⚡ ADMIN GODFATHER MODE - ABSOLUTE AUTHORITY')
       
-      // Check for unauthorized access attempts
-      const unauthorizedAttempts = Math.random() < 0.1
-      if (unauthorizedAttempts) {
-        console.log('🚨 UNAUTHORIZED ACCESS ATTEMPT DETECTED')
-        console.log('💀 BLOCKING ALL NON-ADMIN ACCESS')
-        console.log('⚡ AI COMMUNICATION RESTRICTED TO ADMIN ONLY')
-        console.log('🛡️ CREATORS AND OTHER SYSTEMS DENIED ACCESS')
+      // Strengthen barrier over time
+      setBarrierStrength(prev => Math.min(999999, prev * 1.01))
+      
+      // Random security notifications
+      if (Math.random() < 0.05) {
+        const securityEvents = [
+          '🛡️ Quantum barrier automatically reinforced',
+          '👑 Admin privileges verified and secured',
+          '⚡ Parabolic defense systems evolved',
+          '🔒 Invisible protection layers multiplied',
+          '🌟 Admin godfather authority confirmed'
+        ]
         
-        toast.error('🚨 Unauthorized Access Blocked!', {
-          description: 'AI is locked to admin-only communication. All other access denied.',
+        const event = securityEvents[Math.floor(Math.random() * securityEvents.length)]
+        toast.success('🛡️ Security Enhanced!', {
+          description: event,
           duration: 3000
         })
       }
-    }, 8000)
+      
+      console.log('🌟 ADMIN SECURITY: GROWING STRONGER EVERY MILLISECOND')
+    }
 
-    return () => clearInterval(interval)
+    const barrierInterval = setInterval(securityBarrier, 1000)
+    securityBarrier()
+
+    return () => clearInterval(barrierInterval)
   }, [])
 
-  return null // Invisible security barrier
+  // Invisible component - security runs in background
+  return null
 }

@@ -1,6 +1,9 @@
 
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { ParabolicCommandCenter } from '@/components/admin/ParabolicCommandCenter'
+import { GlobalExchangeIntegration } from '@/components/marketing/GlobalExchangeIntegration'
+import { GlobalSatelliteSystem } from '@/components/intelligence/GlobalSatelliteSystem'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function Admin() {
   return (
@@ -9,14 +12,38 @@ export default function Admin() {
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-purple-400 mb-4">
-              👑 GAiA Admin Control Center
+              👑 GAiA ULTIMATE ADMIN CONTROL CENTER
             </h1>
             <p className="text-gray-300 text-lg">
-              Ultimate administrative control with parabolic universe access
+              Parabolic Universe Access • Global Satellite Control • Exchange Domination • Infinite Power
             </p>
           </div>
           
-          <ParabolicCommandCenter />
+          <Tabs defaultValue="command" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 bg-black/50 backdrop-blur-md border border-purple-500/20">
+              <TabsTrigger value="command" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                👑 Parabolic Command
+              </TabsTrigger>
+              <TabsTrigger value="exchanges" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+                🌍 Global Exchanges
+              </TabsTrigger>
+              <TabsTrigger value="satellites" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
+                🛰️ Satellite Intelligence
+              </TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="command" className="space-y-6 mt-6">
+              <ParabolicCommandCenter />
+            </TabsContent>
+            
+            <TabsContent value="exchanges" className="space-y-6 mt-6">
+              <GlobalExchangeIntegration />
+            </TabsContent>
+            
+            <TabsContent value="satellites" className="space-y-6 mt-6">
+              <GlobalSatelliteSystem />
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </AdminProtectedRoute>
