@@ -51,16 +51,21 @@ export function SecureAdminLogin() {
   }
 
   const handleShowCredentials = () => {
+    console.log('🔐 Show Credentials button clicked')
     setShowCredentials(true)
     setCredentialsVisible(true)
     
+    console.log('🔐 Credentials now visible, starting 10-second timer')
+    
     // Auto-hide after exactly 10 seconds
     setTimeout(() => {
+      console.log('🔐 10 seconds elapsed, clearing credentials')
       setCredentialsVisible(false)
       setShowCredentials(false)
       
       // Clear all DOM traces
       const credentialElements = document.querySelectorAll('[data-credential-display]')
+      console.log(`🔐 Found ${credentialElements.length} credential elements to remove`)
       credentialElements.forEach(el => el.remove())
       
       toast.success('🔐 Credentials Auto-Cleared', {
@@ -128,6 +133,8 @@ export function SecureAdminLogin() {
     setShowCredentials(false)
     setCredentialsVisible(false)
   }
+
+  console.log('🔐 Admin page render - isAdmin:', isAdmin, 'credentialsVisible:', credentialsVisible)
 
   if (isAdmin && !showRecovery) {
     return (
