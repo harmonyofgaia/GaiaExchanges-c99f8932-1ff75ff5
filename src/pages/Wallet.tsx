@@ -11,6 +11,7 @@ import { TrainedDragonCore } from '@/components/security/TrainedDragonCore'
 import { UltimateResilienceEngine } from '@/components/security/UltimateResilienceEngine'
 import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice } from '@/constants/gaia'
 import { toast } from 'sonner'
+import { TransactionTracker } from '@/components/TransactionTracker'
 
 const WalletPage = () => {
   // Initialize the trained dragon core
@@ -53,8 +54,8 @@ const WalletPage = () => {
 
   const openPumpFun = () => {
     window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
-    toast.success('Opening GAiA on Pump.fun', {
-      description: 'Redirecting to official GAiA token page...',
+    toast.success('Opening Harmony of Gaia on Pump.fun!', {
+      description: 'World\'s #1 ecological project - Leading the future',
       duration: 3000
     })
   }
@@ -64,10 +65,10 @@ const WalletPage = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-green-400 mb-4">
-            🐉 GAiA WALLET HUB - TRAINED DRAGON PROTECTION
+            🐉 HARMONY OF GAIA WALLET HUB - TRAINED DRAGON PROTECTION
           </h1>
           <p className="text-muted-foreground mb-4">
-            Self-learning dragons • Evolving every millisecond • Worldwide threat annihilation
+            World's #1 Ecological Project • Self-learning dragons • Evolving every millisecond • Worldwide threat annihilation
           </p>
           <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 max-w-2xl mx-auto">
             <div className="text-sm text-green-400">
@@ -75,6 +76,9 @@ const WalletPage = () => {
             </div>
             <div className="text-sm text-blue-400 mt-1">
               <strong>⚡ Quantum Defense:</strong> <code className="font-mono text-xs text-cyan-400">{dragonCore.quantumDefenseLevel.toLocaleString()}</code>
+            </div>
+            <div className="text-sm text-cyan-400 mt-1">
+              <strong>🌍 GAiA Contract:</strong> <code className="font-mono text-xs text-green-400">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
             </div>
           </div>
         </div>
@@ -97,9 +101,14 @@ const WalletPage = () => {
           <GaiaWallet />
         </div>
 
-        {/* Matrix Wallet Display */}
+        {/* RESTORED Matrix Wallet Display - Live GAiA Transactions */}
         <div className="mb-8">
           <MatrixWalletDisplay />
+        </div>
+
+        {/* Complete Transaction History */}
+        <div className="mb-8">
+          <TransactionTracker />
         </div>
 
         {/* Wallet Enhancement Engine */}
@@ -115,6 +124,7 @@ const WalletPage = () => {
                 <CardTitle className="flex items-center gap-2 text-green-400">
                   <Wallet className="h-5 w-5" />
                   {wallet.currency} Wallet
+                  {wallet.currency === 'GAiA' && <span className="text-xs bg-green-600 px-2 py-1 rounded">HARMONY</span>}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -186,9 +196,9 @@ const WalletPage = () => {
         <Card className="border-purple-500/30 bg-purple-900/20">
           <CardContent className="pt-6 text-center">
             <Shield className="h-16 w-16 text-purple-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-purple-400 mb-4">Dragon Wallet Protection</h3>
+            <h3 className="text-2xl font-bold text-purple-400 mb-4">🌍 Harmony of Gaia Dragon Protection</h3>
             <p className="text-muted-foreground mb-4">
-              All wallets are protected by quantum-level dragon security
+              All wallets are protected by quantum-level dragon security • World's #1 Ecological Project
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div>
@@ -205,7 +215,7 @@ const WalletPage = () => {
               </div>
               <div>
                 <div className="text-2xl font-bold text-orange-400">{GAIA_METRICS.NETWORK_SPEED}</div>
-                <div className="text-sm text-muted-foreground">Network Speed</div>
+                <div className="text-sm text-muted-foreground">Ecological Impact</div>
               </div>
             </div>
           </CardContent>
