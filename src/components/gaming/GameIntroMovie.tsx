@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { Play, SkipForward, Volume2 } from 'lucide-react'
+import { Play, SkipForward, Volume2, Pause } from 'lucide-react'
 
 interface GameIntroMovieProps {
   onComplete: () => void
@@ -43,17 +43,17 @@ export function GameIntroMovie({ onComplete, onSkip }: GameIntroMovieProps) {
   useEffect(() => {
     if (!isPlaying) return
 
-    // Show logo after 5 seconds
+    // Show logo after 2 seconds instead of 5
     const logoTimer = setTimeout(() => {
       setShowLogo(true)
-    }, 5000)
+    }, 2000)
 
     // Handle scene transitions
     const sceneTimer = setTimeout(() => {
       if (currentScene < scenes.length - 1) {
         setCurrentScene(prev => prev + 1)
       } else {
-        // Movie complete
+        // Movie complete - auto advance after 2 seconds
         setTimeout(onComplete, 2000)
       }
     }, scenes[currentScene].duration)
@@ -62,9 +62,22 @@ export function GameIntroMovie({ onComplete, onSkip }: GameIntroMovieProps) {
       clearTimeout(logoTimer)
       clearTimeout(sceneTimer)
     }
-  }, [currentScene, isPlaying, onComplete])
+  }, [currentScene, isPlaying, onComplete, scenes])
 
-  if (!isPlaying) return null
+  const togglePlayback = () => {
+    setIsPlaying(!isPlaying)
+  }
+
+  if (!isPlaying && currentScene === 0) {
+    return (
+      <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+        <Button onClick={togglePlayback} className="bg-green-600 hover:bg-green-700">
+          <Play className="h-6 w-6 mr-2" />
+          Start Game Intro
+        </Button>
+      </div>
+    )
+  }
 
   return (
     <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
@@ -99,7 +112,7 @@ export function GameIntroMovie({ onComplete, onSkip }: GameIntroMovieProps) {
 
       {/* Main Content */}
       <div className="relative z-10 text-center space-y-8 max-w-4xl px-8">
-        {/* Logo (appears after 5 seconds and fades away) */}
+        {/* Logo */}
         {showLogo && (
           <div className={`
             transition-all duration-2000 ease-in-out
@@ -147,11 +160,11 @@ export function GameIntroMovie({ onComplete, onSkip }: GameIntroMovieProps) {
         <Button
           variant="outline"
           size="lg"
-          onClick={() => setIsPlaying(false)}
+          onClick={togglePlayback}
           className="bg-black/50 border-white/30 text-white hover:bg-black/70"
         >
-          <Play className="h-5 w-5 mr-2" />
-          Pause
+          {isPlaying ? <Pause className="h-5 w-5 mr-2" /> : <Play className="h-5 w-5 mr-2" />}
+          {isPlaying ? 'Pause' : 'Play'}
         </Button>
         <Button
           variant="outline"

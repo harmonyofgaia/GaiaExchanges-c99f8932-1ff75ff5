@@ -22,7 +22,9 @@ const pageBackgrounds: Record<string, PageBackgroundConfig> = {
   '/marketing': { style: 'ocean', intensity: 'medium' },
   '/reinvestments': { style: 'plasma', intensity: 'high' },
   '/transparency': { style: 'galaxy', intensity: 'low' },
-  '/admin': { style: 'void', intensity: 'high', useQuantum: true }
+  '/admin': { style: 'void', intensity: 'high', useQuantum: true },
+  '/gaming': { style: 'fire', intensity: 'high' },
+  '/gaia-fighter-game': { style: 'plasma', intensity: 'high' }
 }
 
 export function PageSpecificBackground() {
