@@ -1,23 +1,19 @@
 
-import { AbstractArtOverlay } from '@/components/ui/abstract-art-overlay'
 import { NeuralElectricMatrix } from '@/components/ui/neural-electric-matrix'
 
 export const HomeBackground = () => {
   return (
     <>
-      {/* New Neural Electric Matrix Background */}
+      {/* Neural Electric Matrix Background - the matrix neurologix shocking pathways */}
       <NeuralElectricMatrix />
 
-      {/* Enhanced Abstract Art Background Layers */}
+      {/* Enhanced Background Layers */}
       <div className="fixed inset-0 z-0">
-        {/* Primary abstract background with neural inspiration */}
+        {/* Primary background with neural inspiration */}
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-black to-purple-900/30" />
-        
-        {/* Enhanced abstract art overlay */}
-        <AbstractArtOverlay intensity="medium" artType="quantum" />
       </div>
 
-      {/* Enhanced Floating Abstract Elements with Neural touch */}
+      {/* Enhanced Floating Neural Elements */}
       <div className="fixed inset-0 pointer-events-none z-5">
         {/* Floating Neural-inspired elements */}
         {Array.from({ length: 20 }).map((_, i) => (
