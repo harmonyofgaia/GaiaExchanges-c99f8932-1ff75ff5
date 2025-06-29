@@ -19,7 +19,9 @@ import {
   Mountain,
   Waves,
   MessageCircle,
-  Globe
+  Globe,
+  Puzzle,
+  Apple
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { EnhancedGamingLayout } from '@/components/EnhancedGamingLayout'
@@ -29,11 +31,13 @@ import { GameChatSystem } from '@/components/virtualworld/GameChatSystem'
 import { LandscapeMarketplace } from '@/components/virtualworld/LandscapeMarketplace'
 import { WormsGameArena } from '@/components/WormsGameArena'
 import { QuantumEvolutionMonitor } from '@/components/security/QuantumEvolutionMonitor'
+import { SnakeGame } from '@/components/SnakeGame'
+import { TetrisGame } from '@/components/TetrisGame'
 import { GAIA_TOKEN } from '@/constants/gaia'
 import { toast } from 'sonner'
 
 const Gaming = () => {
-  const [activeTab, setActiveTab] = useState<string>('arena')
+  const [activeTab, setActiveTab] = useState<string>('games-hub')
   const [currentLandscape, setCurrentLandscape] = useState<string>('🌊 Ocean Paradise')
   const [activeUsers] = useState<number>(1847)
   const [playerStats, setPlayerStats] = useState({
@@ -82,6 +86,18 @@ const Gaming = () => {
       duration: 3000
     })
   }
+
+  const gameCategories = [
+    { id: 'games-hub', label: '🎮 Games Hub', icon: <Gamepad2 className="h-4 w-4" /> },
+    { id: 'snake', label: '🐍 Snake', icon: <Apple className="h-4 w-4" /> },
+    { id: 'tetris', label: '🧩 Tetris', icon: <Puzzle className="h-4 w-4" /> },
+    { id: 'worms-arena', label: '🪱 Worms Arena', icon: <Target className="h-4 w-4" /> },
+    { id: 'virtual-world', label: '🌍 Virtual World', icon: <Globe className="h-4 w-4" /> },
+    { id: 'landscapes', label: '🏔️ Landscapes', icon: <Mountain className="h-4 w-4" /> },
+    { id: 'nft-marketplace', label: '💎 NFT Market', icon: <Star className="h-4 w-4" /> },
+    { id: 'chat-system', label: '💬 Social Hub', icon: <MessageCircle className="h-4 w-4" /> },
+    { id: 'enhanced-gaming', label: '⚔️ Battle Arena', icon: <Sword className="h-4 w-4" /> }
+  ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
@@ -170,262 +186,113 @@ const Gaming = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          <Button
-            variant={activeTab === 'arena' ? 'default' : 'outline'}
-            onClick={() => setActiveTab('arena')}
-            className={activeTab === 'arena' ? 'bg-purple-600' : ''}
-          >
-            <Gamepad2 className="h-4 w-4 mr-2" />
-            Gaming Arena
-          </Button>
-          <Button
-            variant={activeTab === 'virtualworld' ? 'default' : 'outline'}
-            onClick={() => setActiveTab('virtualworld')}
-            className={activeTab === 'virtualworld' ? 'bg-green-600' : ''}
-          >
-            <Globe className="h-4 w-4 mr-2" />
-            Virtual World
-          </Button>
-          <Button
-            variant={activeTab === 'chat' ? 'default' : 'outline'}
-            onClick={() => setActiveTab('chat')}
-            className={activeTab === 'chat' ? 'bg-blue-600' : ''}
-          >
-            <MessageCircle className="h-4 w-4 mr-2" />
-            Live Chat
-          </Button>
-          <Button
-            variant={activeTab === 'games' ? 'default' : 'outline'}
-            onClick={() => setActiveTab('games')}
-            className={activeTab === 'games' ? 'bg-red-600' : ''}
-          >
-            <Target className="h-4 w-4 mr-2" />
-            Classic Games
-          </Button>
-          <Button
-            variant={activeTab === 'marketplace' ? 'default' : 'outline'}
-            onClick={() => setActiveTab('marketplace')}
-            className={activeTab === 'marketplace' ? 'bg-orange-600' : ''}
-          >
-            <Star className="h-4 w-4 mr-2" />
-            NFT Marketplace
-          </Button>
+        <div className="flex flex-wrap gap-2 mb-8 justify-center">
+          {gameCategories.map((category) => (
+            <Button
+              key={category.id}
+              variant={activeTab === category.id ? "default" : "outline"}
+              className={`${activeTab === category.id ? 'bg-purple-600' : ''}`}
+              onClick={() => setActiveTab(category.id)}
+            >
+              {category.icon}
+              <span className="ml-2">{category.label}</span>
+            </Button>
+          ))}
         </div>
 
-        {/* Content Based on Active Tab */}
-        {activeTab === 'arena' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="border-purple-500/30 bg-purple-900/20 hover:scale-105 transition-transform">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-purple-400">
-                  <Gamepad2 className="h-6 w-6" />
-                  🥊 Gaia Fighter
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Epic fighting game with environmental warriors and GAIA rewards
-                </p>
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span>Reward Pool:</span>
-                    <span className="text-green-400">500-2000 GAIA</span>
+        {/* Game Content */}
+        <div className="space-y-8">
+          {activeTab === 'games-hub' && (
+            <div className="space-y-6">
+              <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
+                <CardHeader>
+                  <CardTitle className="text-purple-400 text-center">🎮 GAIA GAMES HUB</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="p-6 bg-green-900/30 rounded-lg border border-green-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('snake')}>
+                      <Apple className="h-12 w-12 text-green-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-green-400 mb-2">🐍 Snake Game</h3>
+                      <p className="text-muted-foreground">Classic snake with GAIA rewards</p>
+                    </div>
+                    <div className="p-6 bg-blue-900/30 rounded-lg border border-blue-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('tetris')}>
+                      <Puzzle className="h-12 w-12 text-blue-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-blue-400 mb-2">🧩 Tetris</h3>
+                      <p className="text-muted-foreground">Block puzzle with token rewards</p>
+                    </div>
+                    <div className="p-6 bg-orange-900/30 rounded-lg border border-orange-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('worms-arena')}>
+                      <Target className="h-12 w-12 text-orange-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-orange-400 mb-2">🪱 Worms Arena</h3>
+                      <p className="text-muted-foreground">Strategic battle game</p>
+                    </div>
+                    <div className="p-6 bg-cyan-900/30 rounded-lg border border-cyan-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('virtual-world')}>
+                      <Globe className="h-12 w-12 text-cyan-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-cyan-400 mb-2">🌍 Virtual World</h3>
+                      <p className="text-muted-foreground">Explore infinite metaverse</p>
+                    </div>
+                    <div className="p-6 bg-pink-900/30 rounded-lg border border-pink-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('landscapes')}>
+                      <Mountain className="h-12 w-12 text-pink-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-pink-400 mb-2">🏔️ Landscapes</h3>
+                      <p className="text-muted-foreground">Buy and explore worlds</p>
+                    </div>
+                    <div className="p-6 bg-yellow-900/30 rounded-lg border border-yellow-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('enhanced-gaming')}>
+                      <Sword className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-yellow-400 mb-2">⚔️ Battle Arena</h3>
+                      <p className="text-muted-foreground">Epic PvP battles</p>
+                    </div>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Players Online:</span>
-                    <span className="text-blue-400">1,247</span>
-                  </div>
-                </div>
-                <Link to="/gaia-fighter-game">
-                  <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                    Play Now
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
 
-            <Card className="border-blue-500/30 bg-blue-900/20 hover:scale-105 transition-transform">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-400">
-                  <Trophy className="h-6 w-6" />
-                  🏆 Tournament Mode
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Compete in global tournaments for massive GAIA rewards
-                </p>
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span>Next Tournament:</span>
-                    <span className="text-yellow-400">2 hours</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Prize Pool:</span>
-                    <span className="text-green-400">50,000 GAIA</span>
-                  </div>
-                </div>
-                <Button onClick={handleJoinTournament} className="w-full bg-blue-600 hover:bg-blue-700">
-                  Join Tournament
-                </Button>
-              </CardContent>
-            </Card>
+              {/* Quick Actions */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="border-green-500/30 bg-green-900/20">
+                  <CardContent className="pt-6">
+                    <div className="text-center">
+                      <Trophy className="h-12 w-12 text-green-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-green-400 mb-4">Quick Battle</h3>
+                      <p className="text-muted-foreground mb-4">Jump into instant action with other players</p>
+                      <Button onClick={handleQuickBattle} className="bg-green-600 hover:bg-green-700">
+                        <Flame className="h-4 w-4 mr-2" />
+                        Start Battle
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            <Card className="border-green-500/30 bg-green-900/20 hover:scale-105 transition-transform">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-green-400">
-                  <Target className="h-6 w-6" />
-                  ⚡ Quick Battle
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Jump into instant battles with other players
-                </p>
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span>Avg Battle Time:</span>
-                    <span className="text-blue-400">3-5 min</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Win Rewards:</span>
-                    <span className="text-green-400">50-200 GAIA</span>
-                  </div>
-                </div>
-                <Button onClick={handleQuickBattle} className="w-full bg-green-600 hover:bg-green-700">
-                  Quick Battle
-                </Button>
-              </CardContent>
-            </Card>
+                <Card className="border-blue-500/30 bg-blue-900/20">
+                  <CardContent className="pt-6">
+                    <div className="text-center">
+                      <Crown className="h-12 w-12 text-blue-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-blue-400 mb-4">Tournament</h3>
+                      <p className="text-muted-foreground mb-4">Compete for GAIA token prizes</p>
+                      <Button onClick={handleJoinTournament} className="bg-blue-600 hover:bg-blue-700">
+                        <Star className="h-4 w-4 mr-2" />
+                        Join Tournament
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          )}
 
-            <Card className="border-orange-500/30 bg-orange-900/20 hover:scale-105 transition-transform">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-orange-400">
-                  <TreePine className="h-6 w-6" />
-                  🏗️ Landscape Builder
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Create custom landscapes for battles and exploration
-                </p>
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span>Your Landscapes:</span>
-                    <span className="text-purple-400">{playerStats.landscapesOwned}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Building Tools:</span>
-                    <span className="text-cyan-400">7 Available</span>
-                  </div>
-                </div>
-                <Link to="/landscape-builder">
-                  <Button className="w-full bg-orange-600 hover:bg-orange-700">
-                    Build Landscape
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="border-red-500/30 bg-red-900/20 hover:scale-105 transition-transform">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-red-400">
-                  <Flame className="h-6 w-6" />
-                  🐉 Virtual World
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Explore immersive virtual environments with live chat
-                </p>
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span>Online Users:</span>
-                    <span className="text-blue-400">{activeUsers}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Current World:</span>
-                    <span className="text-green-400">{currentLandscape}</span>
-                  </div>
-                </div>
-                <Button onClick={() => setActiveTab('virtualworld')} className="w-full bg-red-600 hover:bg-red-700">
-                  Enter Virtual World
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-cyan-500/30 bg-cyan-900/20 hover:scale-105 transition-transform">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-cyan-400">
-                  <Sword className="h-6 w-6" />
-                  🎯 Enhanced Gaming
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Advanced gaming features with blockchain integration
-                </p>
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span>NFT Rewards:</span>
-                    <span className="text-purple-400">Available</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Blockchain:</span>
-                    <span className="text-green-400">Integrated</span>
-                  </div>
-                </div>
-                <Button onClick={() => setActiveTab('marketplace')} className="w-full bg-cyan-600 hover:bg-cyan-700">
-                  Explore Features
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
-        {activeTab === 'virtualworld' && (
-          <div className="space-y-6">
+          {activeTab === 'snake' && <SnakeGame />}
+          {activeTab === 'tetris' && <TetrisGame />}
+          {activeTab === 'worms-arena' && <WormsGameArena />}
+          {activeTab === 'virtual-world' && (
             <VirtualWorldCanvas 
               currentLandscape={currentLandscape}
               onLandscapeChange={handleLandscapeChange}
             />
+          )}
+          {activeTab === 'landscapes' && (
             <LandscapeMarketplace onPurchase={handleLandscapePurchase} />
-          </div>
-        )}
-
-        {activeTab === 'chat' && (
-          <GameChatSystem activeUsers={activeUsers} />
-        )}
-
-        {activeTab === 'games' && (
-          <div className="space-y-6">
-            <WormsGameArena />
-            
-            {/* Snake Game Placeholder */}
-            <Card className="border-green-500/30 bg-green-900/20">
-              <CardHeader>
-                <CardTitle className="text-green-400 flex items-center gap-2">
-                  <Zap className="h-6 w-6" />
-                  🐍 GAIA Snake Game - Coming Soon
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-8">
-                  <div className="text-6xl mb-4">🐍</div>
-                  <p className="text-muted-foreground mb-4">
-                    Classic Snake game with GAIA token rewards and environmental themes
-                  </p>
-                  <Button disabled className="bg-green-600 opacity-50">
-                    Coming Soon
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
-        {activeTab === 'marketplace' && <GamingNFTMarketplace />}
+          )}
+          {activeTab === 'nft-marketplace' && <GamingNFTMarketplace />}
+          {activeTab === 'chat-system' && <GameChatSystem activeUsers={activeUsers} />}
+          {activeTab === 'enhanced-gaming' && <EnhancedGamingLayout />}
+        </div>
       </div>
     </div>
   )
