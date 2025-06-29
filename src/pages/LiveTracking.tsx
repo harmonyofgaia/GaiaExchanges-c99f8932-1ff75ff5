@@ -1,28 +1,28 @@
 
-import { MatrixHarmonyBackground } from '@/components/ui/matrix-harmony-background'
-import { EnhancedCoinCrafter } from '@/components/EnhancedCoinCrafter'
+import { NeuralElectricMatrix } from '@/components/ui/neural-electric-matrix'
+import { OptimizedCoinCrafter } from '@/components/OptimizedCoinCrafter'
 import { ComprehensiveTokenTracker } from '@/components/tracking/ComprehensiveTokenTracker'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Activity, TrendingUp, Eye, Zap } from 'lucide-react'
 
 const LiveTracking = () => {
   return (
     <div className="min-h-screen relative">
-      {/* Enhanced Matrix Background */}
-      <MatrixHarmonyBackground />
+      {/* New Neural Electric Matrix Background */}
+      <NeuralElectricMatrix />
       
       <div className="relative z-10 container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
             📡 ENHANCED LIVE TRACKING SYSTEM
           </h1>
           <p className="text-xl text-muted-foreground mb-4">
-            Real-time dragon-powered tracking with matrix neural networks
+            Real-time neural-electric tracking with optimized automation
           </p>
           <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <div className="text-green-400"><strong>🌍 Matrix Network:</strong> Active with neural pathways</div>
+                <div className="text-green-400"><strong>🧠 Neural Network:</strong> Active with electric pathways</div>
                 <div className="text-blue-400"><strong>⚡ Processing Speed:</strong> Quantum-level real-time updates</div>
               </div>
               <div>
@@ -39,7 +39,7 @@ const LiveTracking = () => {
             <CardContent className="pt-6 text-center">
               <Activity className="h-8 w-8 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">ACTIVE</div>
-              <div className="text-sm text-muted-foreground">Matrix Network</div>
+              <div className="text-sm text-muted-foreground">Neural Network</div>
             </CardContent>
           </Card>
           
@@ -63,14 +63,14 @@ const LiveTracking = () => {
             <CardContent className="pt-6 text-center">
               <Zap className="h-8 w-8 text-orange-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-orange-400">POWERED</div>
-              <div className="text-sm text-muted-foreground">Dragon Energy</div>
+              <div className="text-sm text-muted-foreground">Electric Energy</div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Enhanced Coin Crafter */}
+        {/* Optimized Coin Crafter */}
         <div className="mb-8">
-          <EnhancedCoinCrafter />
+          <OptimizedCoinCrafter />
         </div>
 
         {/* Comprehensive Token Tracker */}
