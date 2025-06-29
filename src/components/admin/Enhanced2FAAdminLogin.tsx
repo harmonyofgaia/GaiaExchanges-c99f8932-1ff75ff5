@@ -21,9 +21,9 @@ export function Enhanced2FAAdminLogin({ onLoginSuccess }: Enhanced2FAAdminLoginP
     
     // Enhanced security validation with vault-connected credentials
     const validCredentials = {
-      user: atob('aGFybW9ueV9hZG1pbg=='), // harmony_admin
-      pass: atob('R0FpQV9TZWN1cmVBZG1pbjIwMjQh'), // GAiA_SecureAdmin2024!
-      vault: vaultKey // New vault access key
+      user: 'Synatic', // Updated username
+      pass: 'harmonyquantumvaultaccess', // Updated password
+      vault: vaultKey
     }
     
     if (username === validCredentials.user && 

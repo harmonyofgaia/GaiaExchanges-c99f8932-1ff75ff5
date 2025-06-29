@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { AdminLogin } from './AdminLogin'
 import { AdminMFA } from './AdminMFA'
@@ -20,9 +21,9 @@ export function SecureAdminLogin() {
     
     // Enhanced security validation with vault-connected credentials
     const validCredentials = {
-      user: atob('aGFybW9ueV9hZG1pbg=='), // harmony_admin
-      pass: atob('R0FpQV9TZWN1cmVBZG1pbjIwMjQh'), // GAiA_SecureAdmin2024!
-      vault: vaultKey // New vault access key
+      user: 'Synatic', // Updated username
+      pass: 'harmonyquantumvaultaccess', // Updated password
+      vault: vaultKey
     }
     
     if (username === validCredentials.user && 
@@ -90,8 +91,8 @@ export function SecureAdminLogin() {
     const vaultKey = btoa('harmony quantum vault access').replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
     
     const validCredentials = {
-      user: atob('aGFybW9ueV9hZG1pbg=='),
-      pass: atob('R0FpQV9TZWN1cmVBZG1pbjIwMjQh'),
+      user: 'Synatic', // Updated username
+      pass: 'harmonyquantumvaultaccess', // Updated password
       vault: vaultKey
     }
     
@@ -187,11 +188,11 @@ export function SecureAdminLogin() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                   <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
                     <div className="text-yellow-300 font-medium">Admin Username:</div>
-                    <div className="text-white font-mono text-lg">harmony_admin</div>
+                    <div className="text-white font-mono text-lg">Synatic</div>
                   </div>
                   <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
                     <div className="text-yellow-300 font-medium">Vault Password:</div>
-                    <div className="text-white font-mono text-lg">GAiA_SecureAdmin2024!</div>
+                    <div className="text-white font-mono text-lg">harmonyquantumvaultaccess</div>
                   </div>
                 </div>
                 <div className="text-xs text-yellow-400">
