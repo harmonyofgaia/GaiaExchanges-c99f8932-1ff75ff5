@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Settings, Activity, Database, Users, FileText, Leaf, RotateCcw, CloudLightning, Server, Github, UserCog } from 'lucide-react'
+import { Shield, Settings, Activity, Database, Users, FileText, Leaf, RotateCcw, CloudLightning, Server, Github, UserCog, Globe } from 'lucide-react'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin'
 import { AdminMFA } from '@/components/admin/AdminMFA'
@@ -25,6 +25,7 @@ import { SystemStatusChecker } from '@/components/admin/SystemStatusChecker'
 import { SecureConnectionManager } from '@/components/admin/SecureConnectionManager'
 import { GitHubRollbackManager } from '@/components/github/GitHubRollbackManager'
 import { CloudArtworkManager } from '@/components/admin/CloudArtworkManager'
+import { WebsiteHostingManager } from '@/components/WebsiteHostingManager'
 
 const Admin = () => {
   const navigate = useNavigate()
@@ -124,8 +125,11 @@ const Admin = () => {
           </div>
         </div>
 
-        <Tabs defaultValue="cloud-artwork" className="w-full">
+        <Tabs defaultValue="website-hosting" className="w-full">
           <TabsList className="grid w-full grid-cols-8 bg-black/50 backdrop-blur-md border border-green-500/20">
+            <TabsTrigger value="website-hosting" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+              🌐 Website Hosting
+            </TabsTrigger>
             <TabsTrigger value="cloud-artwork" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
               ☁️ Cloud Artwork
             </TabsTrigger>
@@ -147,10 +151,21 @@ const Admin = () => {
             <TabsTrigger value="security-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
               🛡️ Security Management
             </TabsTrigger>
-            <TabsTrigger value="project-management" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-              📋 Project Management
-            </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="website-hosting" className="space-y-6 mt-6">
+            <Card className="border-2 border-green-500/50 bg-gradient-to-br from-green-900/20 to-emerald-900/20">
+              <CardHeader>
+                <CardTitle className="text-green-400 flex items-center gap-2">
+                  <Globe className="h-5 w-5" />
+                  🌐 www.gaiaexchange.net - Full Website Control
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <WebsiteHostingManager />
+              </CardContent>
+            </Card>
+          </TabsContent>
           
           <TabsContent value="cloud-artwork" className="space-y-6 mt-6">
             <Card className="border-2 border-blue-500/50 bg-gradient-to-br from-blue-900/20 to-purple-900/20">
