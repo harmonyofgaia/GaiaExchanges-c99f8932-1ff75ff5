@@ -7,6 +7,7 @@ import { WalletEnhancementEngine } from '@/components/WalletEnhancementEngine'
 import { GaiaWallet } from '@/components/GaiaWallet'
 import { MatrixWalletDisplay } from '@/components/MatrixWalletDisplay'
 import { PhantomWalletConnector } from '@/components/PhantomWalletConnector'
+import { UltraSecureWalletProtection } from '@/components/security/UltraSecureWalletProtection'
 import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice } from '@/constants/gaia'
 import { toast } from 'sonner'
 
@@ -59,10 +60,10 @@ const WalletPage = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-green-400 mb-4">
-            💎 GAiA WALLET HUB
+            💎 GAiA WALLET HUB - ULTRA SECURE
           </h1>
           <p className="text-muted-foreground mb-4">
-            Secure multi-currency wallet with dragon protection
+            Bank-level+ encryption with global threat protection every 10 seconds
           </p>
           <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 max-w-2xl mx-auto">
             <div className="text-sm text-green-400">
@@ -72,6 +73,11 @@ const WalletPage = () => {
               <strong>Official GAiA Wallet:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.WALLET_ADDRESS}</code>
             </div>
           </div>
+        </div>
+
+        {/* ULTRA-SECURE WALLET PROTECTION - TOP PRIORITY */}
+        <div className="mb-8">
+          <UltraSecureWalletProtection />
         </div>
 
         {/* Phantom Wallet Integration */}

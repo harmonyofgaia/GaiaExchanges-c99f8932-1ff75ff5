@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react'
 
 interface NeuralNode {
@@ -146,7 +145,7 @@ export function NeuralElectricBackground({
           connections: [],
           energy: Math.random(),
           pulsePhase: Math.random() * Math.PI * 2,
-          speed: 0.02 + Math.random() * 0.03
+          speed: 0.008 + Math.random() * 0.012 // SLOWER SPEED - reduced from 0.02 + 0.03
         })
       }
 
@@ -178,7 +177,7 @@ export function NeuralElectricBackground({
       }
       setMousePos(newMousePos)
 
-      // Update node targets to follow mouse
+      // Update node targets to follow mouse - SLOWER MOVEMENT
       setNodes(prev => prev.map(node => {
         const distanceToMouse = Math.sqrt(
           Math.pow(newMousePos.x - node.x, 2) +
@@ -187,40 +186,40 @@ export function NeuralElectricBackground({
         
         if (distanceToMouse < mouseInfluenceRadius) {
           const influence = 1 - (distanceToMouse / mouseInfluenceRadius)
-          const pullStrength = influence * 30
+          const pullStrength = influence * 15 // REDUCED from 30 to 15 for slower movement
           const angle = Math.atan2(newMousePos.y - node.y, newMousePos.x - node.x)
           
           return {
             ...node,
-            targetX: node.x + Math.cos(angle) * pullStrength * influence,
-            targetY: node.y + Math.sin(angle) * pullStrength * influence
+            targetX: node.x + Math.cos(angle) * pullStrength * influence * 0.5, // SLOWER
+            targetY: node.y + Math.sin(angle) * pullStrength * influence * 0.5  // SLOWER
           }
         }
         
-        // Return to original position when mouse is far
+        // Return to original position when mouse is far - SLOWER
         return {
           ...node,
-          targetX: node.x + (Math.random() - 0.5) * 2,
-          targetY: node.y + (Math.random() - 0.5) * 2
+          targetX: node.x + (Math.random() - 0.5) * 1, // REDUCED from 2 to 1
+          targetY: node.y + (Math.random() - 0.5) * 1  // REDUCED from 2 to 1
         }
       }))
 
-      // Add mouse following particles
+      // Add mouse following particles - SLOWER GENERATION
       setMouseParticles(prev => {
         const newParticles = [...prev]
         
-        if (Math.random() < 0.4) {
+        if (Math.random() < 0.2) { // REDUCED from 0.4 to 0.2 for slower particle generation
           newParticles.push({
-            x: newMousePos.x + (Math.random() - 0.5) * 30,
-            y: newMousePos.y + (Math.random() - 0.5) * 30,
-            vx: (Math.random() - 0.5) * 3,
-            vy: (Math.random() - 0.5) * 3,
+            x: newMousePos.x + (Math.random() - 0.5) * 20, // REDUCED spread
+            y: newMousePos.y + (Math.random() - 0.5) * 20,
+            vx: (Math.random() - 0.5) * 1.5, // SLOWER velocity - reduced from 3
+            vy: (Math.random() - 0.5) * 1.5,
             life: 0,
-            maxLife: 80
+            maxLife: 120 // LONGER life for smoother effect
           })
         }
 
-        return newParticles.slice(-100)
+        return newParticles.slice(-60) // REDUCED from 100 to 60
       })
     }
 
@@ -258,7 +257,7 @@ export function NeuralElectricBackground({
         }, i * 50)
       }
 
-      // Create shock waves affecting nearby nodes
+      // Create shock waves affecting nearby nodes - GENTLER EFFECT
       setNodes(prev => prev.map(node => {
         const distance = Math.sqrt(
           Math.pow(clickX - node.x, 2) +
@@ -266,14 +265,14 @@ export function NeuralElectricBackground({
         )
         
         if (distance < 200) {
-          const force = (1 - distance / 200) * 50
+          const force = (1 - distance / 200) * 25 // REDUCED from 50 to 25
           const angle = Math.atan2(node.y - clickY, node.x - clickX)
           
           return {
             ...node,
-            targetX: node.x + Math.cos(angle) * force,
-            targetY: node.y + Math.sin(angle) * force,
-            energy: Math.min(1, node.energy + 0.5)
+            targetX: node.x + Math.cos(angle) * force * 0.5, // GENTLER
+            targetY: node.y + Math.sin(angle) * force * 0.5,
+            energy: Math.min(1, node.energy + 0.3) // REDUCED from 0.5 to 0.3
           }
         }
         
@@ -284,18 +283,18 @@ export function NeuralElectricBackground({
     const animate = () => {
       if (!ctx || !canvas) return
 
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.03)'
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)' // SLIGHTLY SLOWER FADE
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       const colors = getStyleColors(style)
       const intensityMult = getIntensityMultiplier(intensity)
 
-      // Update node positions (smooth following)
+      // Update node positions (SLOWER smooth following)
       setNodes(prev => prev.map(node => ({
         ...node,
-        x: node.x + (node.targetX - node.x) * node.speed,
-        y: node.y + (node.targetY - node.y) * node.speed,
-        energy: node.energy * 0.98 // Gradually reduce energy
+        x: node.x + (node.targetX - node.x) * node.speed * 0.6, // SLOWER movement
+        y: node.y + (node.targetY - node.y) * node.speed * 0.6,
+        energy: node.energy * 0.985 // SLIGHTLY SLOWER energy reduction
       })))
 
       // Draw neural connections with enhanced mouse interaction
