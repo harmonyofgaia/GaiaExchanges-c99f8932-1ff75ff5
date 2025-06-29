@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -35,6 +34,8 @@ import { SnakeGame } from '@/components/SnakeGame'
 import { TetrisGame } from '@/components/TetrisGame'
 import { GAIA_TOKEN } from '@/constants/gaia'
 import { toast } from 'sonner'
+import { GaiaCloudSystem } from '@/components/GaiaCloudSystem'
+import { SnakeWormsIntegration } from '@/components/SnakeWormsIntegration'
 
 const Gaming = () => {
   const [activeTab, setActiveTab] = useState<string>('games-hub')
@@ -89,6 +90,8 @@ const Gaming = () => {
 
   const gameCategories = [
     { id: 'games-hub', label: '🎮 Games Hub', icon: <Gamepad2 className="h-4 w-4" /> },
+    { id: 'cloud-system', label: '☁️ Cloud System', icon: <Globe className="h-4 w-4" /> },
+    { id: 'snake-worms', label: '🐍⚔️ Snake vs Worms', icon: <Target className="h-4 w-4" /> },
     { id: 'snake', label: '🐍 Snake', icon: <Apple className="h-4 w-4" /> },
     { id: 'tetris', label: '🧩 Tetris', icon: <Puzzle className="h-4 w-4" /> },
     { id: 'worms-arena', label: '🪱 Worms Arena', icon: <Target className="h-4 w-4" /> },
@@ -210,6 +213,16 @@ const Gaming = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="p-6 bg-cyan-900/30 rounded-lg border border-cyan-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('cloud-system')}>
+                      <Globe className="h-12 w-12 text-cyan-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-cyan-400 mb-2">☁️ Cloud System</h3>
+                      <p className="text-muted-foreground">Make clouds visible and interactive</p>
+                    </div>
+                    <div className="p-6 bg-orange-900/30 rounded-lg border border-orange-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('snake-worms')}>
+                      <Target className="h-12 w-12 text-orange-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-orange-400 mb-2">🐍⚔️ Snake vs Worms</h3>
+                      <p className="text-muted-foreground">Epic live battle integration</p>
+                    </div>
                     <div className="p-6 bg-green-900/30 rounded-lg border border-green-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('snake')}>
                       <Apple className="h-12 w-12 text-green-400 mx-auto mb-4" />
                       <h3 className="text-xl font-bold text-green-400 mb-2">🐍 Snake Game</h3>
@@ -220,25 +233,15 @@ const Gaming = () => {
                       <h3 className="text-xl font-bold text-blue-400 mb-2">🧩 Tetris</h3>
                       <p className="text-muted-foreground">Block puzzle with token rewards</p>
                     </div>
-                    <div className="p-6 bg-orange-900/30 rounded-lg border border-orange-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('worms-arena')}>
-                      <Target className="h-12 w-12 text-orange-400 mx-auto mb-4" />
-                      <h3 className="text-xl font-bold text-orange-400 mb-2">🪱 Worms Arena</h3>
+                    <div className="p-6 bg-red-900/30 rounded-lg border border-red-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('worms-arena')}>
+                      <Target className="h-12 w-12 text-red-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-red-400 mb-2">🪱 Worms Arena</h3>
                       <p className="text-muted-foreground">Strategic battle game</p>
                     </div>
-                    <div className="p-6 bg-cyan-900/30 rounded-lg border border-cyan-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('virtual-world')}>
-                      <Globe className="h-12 w-12 text-cyan-400 mx-auto mb-4" />
-                      <h3 className="text-xl font-bold text-cyan-400 mb-2">🌍 Virtual World</h3>
+                    <div className="p-6 bg-teal-900/30 rounded-lg border border-teal-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('virtual-world')}>
+                      <Globe className="h-12 w-12 text-teal-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold text-teal-400 mb-2">🌍 Virtual World</h3>
                       <p className="text-muted-foreground">Explore infinite metaverse</p>
-                    </div>
-                    <div className="p-6 bg-pink-900/30 rounded-lg border border-pink-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('landscapes')}>
-                      <Mountain className="h-12 w-12 text-pink-400 mx-auto mb-4" />
-                      <h3 className="text-xl font-bold text-pink-400 mb-2">🏔️ Landscapes</h3>
-                      <p className="text-muted-foreground">Buy and explore worlds</p>
-                    </div>
-                    <div className="p-6 bg-yellow-900/30 rounded-lg border border-yellow-500/20 text-center hover:scale-105 transition-transform cursor-pointer" onClick={() => setActiveTab('enhanced-gaming')}>
-                      <Sword className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
-                      <h3 className="text-xl font-bold text-yellow-400 mb-2">⚔️ Battle Arena</h3>
-                      <p className="text-muted-foreground">Epic PvP battles</p>
                     </div>
                   </div>
                 </CardContent>
@@ -277,6 +280,8 @@ const Gaming = () => {
             </div>
           )}
 
+          {activeTab === 'cloud-system' && <GaiaCloudSystem />}
+          {activeTab === 'snake-worms' && <SnakeWormsIntegration />}
           {activeTab === 'snake' && <SnakeGame />}
           {activeTab === 'tetris' && <TetrisGame />}
           {activeTab === 'worms-arena' && <WormsGameArena />}
