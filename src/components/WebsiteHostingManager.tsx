@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Progress } from '@/components/ui/progress'
-import { Globe, Server, Shield, Zap, CheckCircle, AlertCircle, ExternalLink, Firefox } from 'lucide-react'
+import { Globe, Server, Shield, Zap, CheckCircle, AlertCircle, ExternalLink, Monitor } from 'lucide-react'
 import { toast } from 'sonner'
 import { GAIA_TOKEN } from '@/constants/gaia'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
@@ -257,7 +257,7 @@ export function WebsiteHostingManager() {
           
           {isFirefoxAdmin && (
             <Badge className="bg-orange-600 text-white">
-              <Firefox className="h-3 w-3 mr-1" />
+              <Monitor className="h-3 w-3 mr-1" />
               Firefox Admin Access
             </Badge>
           )}
@@ -427,7 +427,7 @@ export function WebsiteHostingManager() {
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-green-400">
               🛡️ Security & Auto-Operation
-              {isFirefoxAdmin && <Firefox className="inline h-4 w-4 ml-2 text-orange-400" />}
+              {isFirefoxAdmin && <Monitor className="inline h-4 w-4 ml-2 text-orange-400" />}
             </h3>
             <div className="space-y-2">
               <Button 
