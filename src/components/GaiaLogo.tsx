@@ -2,9 +2,10 @@
 interface GaiaLogoProps {
   size?: 'sm' | 'md' | 'lg'
   variant?: 'default' | 'white-fade' | 'colorful'
+  className?: string
 }
 
-export function GaiaLogo({ size = 'md', variant = 'default' }: GaiaLogoProps) {
+export function GaiaLogo({ size = 'md', variant = 'default', className = '' }: GaiaLogoProps) {
   const sizeClasses = {
     sm: 'w-8 h-8 text-2xl',
     md: 'w-12 h-12 text-4xl',
@@ -18,7 +19,7 @@ export function GaiaLogo({ size = 'md', variant = 'default' }: GaiaLogoProps) {
   }
 
   return (
-    <div className={`${sizeClasses[size]} ${variantClasses[variant]} flex items-center justify-center`}>
+    <div className={`${sizeClasses[size]} ${variantClasses[variant]} ${className} flex items-center justify-center`}>
       <span className="font-bold">🌍</span>
     </div>
   )

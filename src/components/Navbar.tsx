@@ -9,7 +9,7 @@ import {
   Shield, 
   Wallet, 
   TrendingUp, 
-  GameController2,
+  Gamepad2,
   Menu,
   X
 } from 'lucide-react'
@@ -26,7 +26,7 @@ export function Navbar() {
     { path: '/immortal-security', label: 'Security', icon: Shield },
     { path: '/wallet', label: 'Wallet', icon: Wallet },
     { path: '/exchange', label: 'Exchange', icon: TrendingUp },
-    { path: '/gaming', label: 'Gaming', icon: GameController2 },
+    { path: '/gaming', label: 'Gaming', icon: Gamepad2 },
   ]
 
   const isActive = (path: string) => location.pathname === path

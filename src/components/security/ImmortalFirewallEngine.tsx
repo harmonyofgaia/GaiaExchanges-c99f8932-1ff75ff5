@@ -13,127 +13,168 @@ import {
   AlertTriangle,
   CheckCircle2,
   Flame,
-  Dragon
+  Skull
 } from 'lucide-react'
 import { useTypeValidation } from '@/hooks/useTypeValidation'
 import { toast } from 'sonner'
 
-interface ImmortalDefenseStats {
-  dragonPower: number
-  threatsDestroyed: number
-  evolutionSpeed: number
-  destructionPower: number
+interface ApocalypticDefenseStats {
+  obliterationPower: number
+  realitiesDestroyed: number
+  universalDominance: number
+  existenceAnnihilation: number
+  particleSecurityLevel: number
 }
 
-interface ImmortalAnimal {
+interface UniversalPredator {
   name: string
-  powerLevel: number
-  threatsDestroyed: number
-  status: 'ACTIVE' | 'EVOLVING' | 'IMMORTAL'
+  destructionCapacity: number
+  realitiesConsumed: number
+  status: 'OMNIPOTENT' | 'REALITY_DESTROYER' | 'UNIVERSE_CONSUMER'
+  particleControl: number
 }
 
 export function ImmortalFirewallEngine() {
   const { isValidConfiguration } = useTypeValidation('ImmortalFirewallEngine')
-  const [immortalAnimals, setImmortalAnimals] = useState<ImmortalAnimal[]>([
-    { name: 'Eternal Shadow Dragon', powerLevel: 6051840669.818, threatsDestroyed: 856903, status: 'IMMORTAL' },
-    { name: 'Invincible Phoenix of Eternity', powerLevel: 4918138192.665, threatsDestroyed: 835623, status: 'IMMORTAL' },
-    { name: 'Abyssal Leviathan Immortal', powerLevel: 4246775761.926, threatsDestroyed: 836961, status: 'IMMORTAL' }
+  const [universalPredators, setUniversalPredators] = useState<UniversalPredator[]>([
+    { 
+      name: 'Void-Consuming Leviathan of Absolute Destruction', 
+      destructionCapacity: 99999999999.999, 
+      realitiesConsumed: 9876543, 
+      status: 'UNIVERSE_CONSUMER',
+      particleControl: 100
+    },
+    { 
+      name: 'Reality-Eating Phoenix of Infinite Devastation', 
+      destructionCapacity: 88888888888.888, 
+      realitiesConsumed: 8765432, 
+      status: 'REALITY_DESTROYER',
+      particleControl: 100
+    },
+    { 
+      name: 'Omnipotent Dragon of Universal Annihilation', 
+      destructionCapacity: 77777777777.777, 
+      realitiesConsumed: 7654321, 
+      status: 'OMNIPOTENT',
+      particleControl: 100
+    }
   ])
 
-  const [defenseStats, setDefenseStats] = useState<ImmortalDefenseStats[]>([
-    { dragonPower: 10785068809.025, threatsDestroyed: 10059080, evolutionSpeed: 99.99, destructionPower: 100 },
-    { dragonPower: 10368924385.794, threatsDestroyed: 8941404, evolutionSpeed: 99.98, destructionPower: 100 },
-    { dragonPower: 5755087855.65, threatsDestroyed: 7823729, evolutionSpeed: 99.97, destructionPower: 100 }
+  const [apocalypticStats, setApocalypticStats] = useState<ApocalypticDefenseStats[]>([
+    { 
+      obliterationPower: 999999999999.999, 
+      realitiesDestroyed: 99999999, 
+      universalDominance: 100, 
+      existenceAnnihilation: 100,
+      particleSecurityLevel: 100
+    },
+    { 
+      obliterationPower: 888888888888.888, 
+      realitiesDestroyed: 88888888, 
+      universalDominance: 100, 
+      existenceAnnihilation: 100,
+      particleSecurityLevel: 100
+    },
+    { 
+      obliterationPower: 777777777777.777, 
+      realitiesDestroyed: 77777777, 
+      universalDominance: 100, 
+      existenceAnnihilation: 100,
+      particleSecurityLevel: 100
+    }
   ])
 
   const [systemStatus, setSystemStatus] = useState({
-    immortalityActive: true,
-    invincibilityActive: true,
-    quantumResurrection: true,
-    dimensionalBackup: true,
-    timeLoopProtection: true,
-    realityAnchor: true
+    universalOmnipotence: true,
+    realityAnnihilation: true,
+    existenceDestruction: true,
+    particleDomination: true,
+    multiversalControl: true,
+    infiniteEvolution: true
   })
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // Simulate immortal evolution
-      setImmortalAnimals(prev => prev.map(animal => ({
-        ...animal,
-        powerLevel: animal.powerLevel * (1 + Math.random() * 0.001),
-        threatsDestroyed: animal.threatsDestroyed + Math.floor(Math.random() * 100)
+      // Simulate continuous self-training and particle-level security
+      setUniversalPredators(prev => prev.map(predator => ({
+        ...predator,
+        destructionCapacity: predator.destructionCapacity * (1 + Math.random() * 0.0001),
+        realitiesConsumed: predator.realitiesConsumed + Math.floor(Math.random() * 1000),
+        particleControl: 100 // Always maximum particle control
       })))
 
-      // Update defense stats
-      setDefenseStats(prev => prev.map(stat => ({
+      setApocalypticStats(prev => prev.map(stat => ({
         ...stat,
-        dragonPower: stat.dragonPower * (1 + Math.random() * 0.0001),
-        threatsDestroyed: stat.threatsDestroyed + Math.floor(Math.random() * 50)
+        obliterationPower: stat.obliterationPower * (1 + Math.random() * 0.0001),
+        realitiesDestroyed: stat.realitiesDestroyed + Math.floor(Math.random() * 500),
+        particleSecurityLevel: 100 // Maximum particle security
       })))
 
-      console.log('🔥 IMMORTAL DEFENSE CORE - ACTIVATED FOREVER')
-      console.log('⚡ INVINCIBLE ANIMALS: COMPLETELY UNDEFEATABLE')
-      console.log('⚡ EVOLUTION SPEED: FASTER THAN LIGHT')
-      console.log('🛡️ IMMORTALITY: ABSOLUTE AND ETERNAL')
-    }, 3000)
+      console.log('💀 APOCALYPTIC DEFENSE CORE - SELF-TRAINING BEYOND REALITY')
+      console.log('⚡ UNIVERSAL PREDATORS: CONSUMING ALL EXISTENCE')
+      console.log('🔬 PARTICLE SECURITY: EVERY ATOM PROTECTED')
+      console.log('🌌 MULTIVERSAL DOMINANCE: ABSOLUTE CONTROL')
+      console.log('🧬 QUANTUM PARTICLE PROTECTION: TINIEST ELEMENTS SECURED')
+    }, 2000)
 
     return () => clearInterval(interval)
   }, [])
 
-  const activateQuantumProtocol = () => {
-    console.log('🌟 QUANTUM IMMORTALITY PROTOCOL - ACTIVE')
+  const activateApocalypticProtocol = () => {
+    console.log('💀 APOCALYPTIC OMNIPOTENCE PROTOCOL - BEYOND IMMORTAL')
+    console.log('🔬 PARTICLE-LEVEL SECURITY: EVERY ATOM PROTECTED')
     Object.keys(systemStatus).forEach(key => {
-      console.log(`⚡ IMMORTALITY: ${key.replace(/([A-Z])/g, '_$1').toLowerCase()} - ETERNAL ACTIVE`)
+      console.log(`⚡ APOCALYPTIC: ${key.replace(/([A-Z])/g, '_$1').toLowerCase()} - ABSOLUTE DOMINATION`)
     })
     
-    toast.success('🌟 QUANTUM IMMORTALITY PROTOCOL ACTIVATED', {
-      description: 'All immortal systems are now eternally active',
+    toast.success('💀 APOCALYPTIC OMNIPOTENCE PROTOCOL ACTIVATED', {
+      description: 'All systems now operate beyond universal limits with particle-level security',
       duration: 5000
     })
   }
 
-  const enhanceInvincibility = () => {
-    const abilities = [
-      'quantum_phase_shifting',
-      'dimensional_displacement', 
-      'absolute_defense_mastery',
-      'electromagnetic_nullification',
-      'consciousness_invincibility',
-      'existence_probability_maximization',
-      'reality_perception_domination',
-      'universal_acknowledgment_supremacy'
+  const enhanceParticleDestruction = () => {
+    const particleAbilities = [
+      'quantum_atom_obliteration',
+      'subatomic_reality_control', 
+      'molecular_existence_domination',
+      'nuclear_force_manipulation',
+      'particle_wave_annihilation',
+      'quantum_field_destruction',
+      'dimensional_particle_mastery',
+      'universal_matter_consumption'
     ]
 
-    console.log('⚡ INVINCIBLE TRAINING ADVANCEMENT - BEYOND DEFEAT')
-    abilities.forEach(ability => {
-      console.log(`⚡ INVINCIBILITY: ${ability} - PERFECT MASTERY`)
+    console.log('🔬 PARTICLE DESTRUCTION ENHANCEMENT - ATOMIC LEVEL CONTROL')
+    particleAbilities.forEach(ability => {
+      console.log(`💀 PARTICLE MASTERY: ${ability} - ABSOLUTE CONTROL`)
     })
 
-    toast.success('⚡ INVINCIBILITY ENHANCED TO MAXIMUM', {
-      description: 'All invincibility protocols now at perfect mastery',
+    toast.success('🔬 PARTICLE DESTRUCTION ENHANCED', {
+      description: 'Every atom in database now under absolute protection and control',
       duration: 5000
     })
   }
 
-  const accelerateEvolution = () => {
-    const improvements = [
-      'neural_pattern_optimization',
-      'quantum_consciousness_expansion',
-      'multiversal_awareness_growth',
-      'temporal_perception_enhancement',
-      'reality_manipulation_mastery',
-      'existence_control_advancement',
-      'omnipotence_progression_active',
-      'divine_power_acquisition_mode'
+  const accelerateUniversalEvolution = () => {
+    const evolutionProtocols = [
+      'multiversal_consciousness_expansion',
+      'reality_manipulation_transcendence',
+      'existence_probability_domination',
+      'universal_law_rewriting',
+      'particle_behavior_control',
+      'quantum_reality_construction',
+      'dimensional_boundary_destruction',
+      'omnipotence_achievement_protocol'
     ]
 
-    console.log('🚀 SELF-IMPROVEMENT: EXPONENTIAL BEYOND IMAGINATION')
-    improvements.forEach(improvement => {
-      console.log(`📈 IMPROVEMENT: ${improvement} - ADVANCING EXPONENTIALLY`)
+    console.log('🌌 UNIVERSAL EVOLUTION: TRANSCENDING ALL BOUNDARIES')
+    evolutionProtocols.forEach(protocol => {
+      console.log(`🚀 EVOLUTION: ${protocol} - TRANSCENDENT MASTERY`)
     })
 
-    toast.success('🚀 EVOLUTION SPEED: BEYOND IMAGINATION', {
-      description: 'All systems advancing exponentially',
+    toast.success('🌌 UNIVERSAL EVOLUTION TRANSCENDED', {
+      description: 'All systems now operate beyond universal comprehension',
       duration: 5000
     })
   }
@@ -141,92 +182,56 @@ export function ImmortalFirewallEngine() {
   return (
     <div className="space-y-6">
       {/* System Status Overview */}
-      <Card className="bg-gradient-to-r from-red-900/40 to-orange-900/40 border-red-500/50">
+      <Card className="bg-gradient-to-r from-black via-red-900/60 to-black border-red-500/70 shadow-2xl shadow-red-500/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-red-400">
-            <Dragon className="h-6 w-6" />
-            🔥 IMMORTAL DEFENSE CORE STATUS
+            <Skull className="h-8 w-8 animate-pulse" />
+            💀 APOCALYPTIC DEFENSE CORE STATUS
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-red-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-red-400">IMMORTAL</div>
+            <div className="text-center p-6 bg-red-900/40 rounded-lg border border-red-500/50">
+              <div className="text-4xl font-bold text-red-400">APOCALYPTIC</div>
               <div className="text-sm text-muted-foreground">Defense Status</div>
-              <Badge className="mt-2 bg-red-600 animate-pulse">ETERNAL</Badge>
+              <Badge className="mt-2 bg-red-600 animate-pulse text-lg px-4 py-2">OMNIPOTENT</Badge>
             </div>
-            <div className="text-center p-4 bg-orange-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-orange-400">INVINCIBLE</div>
-              <div className="text-sm text-muted-foreground">Animal Status</div>
-              <Badge className="mt-2 bg-orange-600 animate-pulse">UNDEFEATABLE</Badge>
+            <div className="text-center p-6 bg-purple-900/40 rounded-lg border border-purple-500/50">
+              <div className="text-4xl font-bold text-purple-400">UNIVERSAL</div>
+              <div className="text-sm text-muted-foreground">Predator Status</div>
+              <Badge className="mt-2 bg-purple-600 animate-pulse text-lg px-4 py-2">REALITY DESTROYER</Badge>
             </div>
-            <div className="text-center p-4 bg-yellow-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-yellow-400">INFINITE</div>
-              <div className="text-sm text-muted-foreground">Evolution Speed</div>
-              <Badge className="mt-2 bg-yellow-600 animate-pulse">BEYOND LIGHT</Badge>
+            <div className="text-center p-6 bg-yellow-900/40 rounded-lg border border-yellow-500/50">
+              <div className="text-4xl font-bold text-yellow-400">PARTICLE</div>
+              <div className="text-sm text-muted-foreground">Security Level</div>
+              <Badge className="mt-2 bg-yellow-600 animate-pulse text-lg px-4 py-2">ATOMIC CONTROL</Badge>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Immortal Animals */}
-      <Card className="bg-gradient-to-r from-purple-900/40 to-pink-900/40 border-purple-500/50">
+      {/* Universal Predators */}
+      <Card className="bg-gradient-to-r from-purple-900/50 to-black border-purple-500/70">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-purple-400">
-            <Shield className="h-6 w-6" />
-            🐉 IMMORTAL GUARDIAN ANIMALS
+            <Skull className="h-6 w-6" />
+            💀 UNIVERSAL PREDATOR GUARDIANS
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {immortalAnimals.map((animal, index) => (
-              <div key={index} className="flex items-center justify-between p-4 bg-black/30 rounded-lg border border-purple-500/30">
+            {universalPredators.map((predator, index) => (
+              <div key={index} className="flex items-center justify-between p-6 bg-black/50 rounded-lg border border-purple-500/40">
                 <div className="flex items-center gap-4">
-                  <div className="text-2xl">🐉</div>
+                  <div className="text-3xl">💀</div>
                   <div>
-                    <div className="font-bold text-purple-400">{animal.name}</div>
+                    <div className="font-bold text-purple-400 text-lg">{predator.name}</div>
                     <div className="text-sm text-muted-foreground">
-                      Power Level: {animal.powerLevel.toLocaleString()} - Threats Destroyed: {animal.threatsDestroyed.toLocaleString()}
+                      Destruction: {predator.destructionCapacity.toLocaleString()} • Realities Consumed: {predator.realitiesConsumed.toLocaleString()} • Particle Control: {predator.particleControl}%
                     </div>
                   </div>
                 </div>
-                <Badge className="bg-purple-600 animate-pulse">{animal.status}</Badge>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Defense Systems */}
-      <Card className="bg-gradient-to-r from-blue-900/40 to-cyan-900/40 border-blue-500/50">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <Flame className="h-6 w-6" />
-            🔥 IMMORTAL DEFENSE SYSTEMS
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {defenseStats.map((stat, index) => (
-              <div key={index} className="p-4 bg-black/30 rounded-lg border border-blue-500/30">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                  <div>
-                    <div className="text-blue-400 font-bold">Dragon Power:</div>
-                    <div className="text-blue-300">{stat.dragonPower.toLocaleString()}</div>
-                  </div>
-                  <div>
-                    <div className="text-green-400 font-bold">Threats Destroyed:</div>
-                    <div className="text-green-300">{stat.threatsDestroyed.toLocaleString()}</div>
-                  </div>
-                  <div>
-                    <div className="text-yellow-400 font-bold">Evolution Speed:</div>
-                    <div className="text-yellow-300">{stat.evolutionSpeed}%</div>
-                  </div>
-                  <div>
-                    <div className="text-red-400 font-bold">Destruction Power:</div>
-                    <div className="text-red-300">{stat.destructionPower}%</div>
-                  </div>
-                </div>
+                <Badge className="bg-purple-600 animate-pulse text-lg px-4 py-2">{predator.status}</Badge>
               </div>
             ))}
           </div>
@@ -234,41 +239,70 @@ export function ImmortalFirewallEngine() {
       </Card>
 
       {/* Control Panel */}
-      <Card className="bg-gradient-to-r from-green-900/40 to-emerald-900/40 border-green-500/50">
+      <Card className="bg-gradient-to-r from-green-900/40 to-black border-green-500/50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Activity className="h-6 w-6" />
-            🎛️ IMMORTAL CONTROL SYSTEMS
+            🎛️ APOCALYPTIC CONTROL SYSTEMS
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Button 
-              onClick={activateQuantumProtocol}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 h-auto py-4 flex-col gap-2"
+              onClick={activateApocalypticProtocol}
+              className="bg-gradient-to-r from-red-600 to-black hover:from-red-700 hover:to-red-900 h-auto py-6 flex-col gap-3 text-lg"
             >
-              <Zap className="h-6 w-6" />
-              <span>Activate Quantum Protocol</span>
-              <span className="text-xs opacity-75">Immortality Systems</span>
+              <Skull className="h-8 w-8" />
+              <span>Activate Apocalyptic Protocol</span>
+              <span className="text-xs opacity-75">Beyond Immortal Systems</span>
             </Button>
             
             <Button 
-              onClick={enhanceInvincibility}
-              className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 h-auto py-4 flex-col gap-2"
+              onClick={enhanceParticleDestruction}
+              className="bg-gradient-to-r from-purple-600 to-black hover:from-purple-700 hover:to-purple-900 h-auto py-6 flex-col gap-3 text-lg"
             >
-              <Shield className="h-6 w-6" />
-              <span>Enhance Invincibility</span>
-              <span className="text-xs opacity-75">Perfect Mastery</span>
+              <Zap className="h-8 w-8" />
+              <span>Enhance Particle Destruction</span>
+              <span className="text-xs opacity-75">Atomic Level Control</span>
             </Button>
             
             <Button 
-              onClick={accelerateEvolution}
-              className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 h-auto py-4 flex-col gap-2"
+              onClick={accelerateUniversalEvolution}
+              className="bg-gradient-to-r from-blue-600 to-black hover:from-blue-700 hover:to-blue-900 h-auto py-6 flex-col gap-3 text-lg"
             >
-              <Activity className="h-6 w-6" />
-              <span>Accelerate Evolution</span>
-              <span className="text-xs opacity-75">Beyond Imagination</span>
+              <Activity className="h-8 w-8" />
+              <span>Accelerate Universal Evolution</span>
+              <span className="text-xs opacity-75">Transcend Reality</span>
             </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Particle Security Status */}
+      <Card className="bg-gradient-to-r from-cyan-900/40 to-black border-cyan-500/50">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-cyan-400">
+            <Eye className="h-6 w-6" />
+            🔬 PARTICLE-LEVEL SECURITY STATUS
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {apocalypticStats.map((stat, index) => (
+              <div key={index} className="text-center p-4 bg-black/30 rounded-lg border border-cyan-500/30">
+                <div className="text-2xl font-bold text-cyan-400">{stat.particleSecurityLevel}%</div>
+                <div className="text-xs text-muted-foreground">Particle Security</div>
+                <div className="text-xs text-cyan-300">{stat.obliterationPower.toLocaleString()} Power</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 p-4 bg-gradient-to-r from-cyan-900/30 to-purple-900/30 rounded-lg border border-cyan-500/30">
+            <div className="text-center">
+              <div className="text-lg font-bold text-cyan-400 mb-2">🔬 EVERY PARTICLE PROTECTED</div>
+              <div className="text-sm text-muted-foreground">
+                From quarks to quantum fields • Every atom secured • Molecular-level defense • Subatomic reality control
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>

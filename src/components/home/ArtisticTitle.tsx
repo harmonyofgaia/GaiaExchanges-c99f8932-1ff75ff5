@@ -7,185 +7,206 @@ export const ArtisticTitle = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setGlowIntensity(prev => prev === 1 ? 1.5 : 1)
-    }, 2000)
+    }, 3000)
     return () => clearInterval(interval)
   }, [])
 
   return (
-    <div className="relative mb-8 flex flex-col items-center">
-      {/* Revolutionary New Artistic Style Background */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-8">
+    <div className="relative mb-12 flex flex-col items-center">
+      {/* Tree-Inspired Background Pattern */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-10">
         <div 
-          className="text-[12rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 blur-3xl animate-pulse"
+          className="text-[16rem] font-bold text-transparent bg-clip-text bg-gradient-to-b from-green-600 via-green-400 to-green-200"
           style={{
             fontFamily: "'Cinzel Decorative', 'Uncial Antiqua', serif",
-            transform: 'rotate(-3deg) scale(1.3)',
-            animation: 'gradient-shift 10s ease infinite'
+            transform: 'rotate(-2deg) scale(1.2)',
+            filter: 'blur(8px)'
           }}
         >
-          ℌ𝔞𝔯𝔪𝔬𝔫𝔶 𝔬𝔣 𝔊𝔞𝔦𝔞
+          🌳
         </div>
       </div>
 
-      {/* Main Revolutionary Title with New Artistic Design */}
+      {/* Main Tree-Style Title */}
       <div className="relative z-10">
-        {/* Enhanced Shadow Layers for Depth */}
-        <div className="absolute inset-0 scale-110 opacity-60">
+        {/* Tree Crown Effect */}
+        <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 flex justify-center">
+          <div className="text-6xl animate-pulse opacity-80">🌿</div>
+        </div>
+
+        {/* Branch-like decorative elements */}
+        <div className="absolute -top-8 left-0 transform -translate-x-full flex gap-4 text-3xl opacity-70">
+          <span className="text-green-400 animate-bounce" style={{animationDelay: '0s'}}>🍃</span>
+          <span className="text-emerald-400 animate-bounce" style={{animationDelay: '0.5s'}}>🌱</span>
+        </div>
+        
+        <div className="absolute -top-8 right-0 transform translate-x-full flex gap-4 text-3xl opacity-70">
+          <span className="text-green-400 animate-bounce" style={{animationDelay: '0.3s'}}>🌱</span>
+          <span className="text-emerald-400 animate-bounce" style={{animationDelay: '0.8s'}}>🍃</span>
+        </div>
+
+        {/* Enhanced Shadow Layers for Organic Depth */}
+        <div className="absolute inset-0 scale-110 opacity-50">
           <div 
-            className="text-8xl font-bold text-white blur-2xl"
+            className="text-8xl font-bold text-green-200 blur-3xl"
             style={{
-              fontFamily: "'Orbitron', 'Exo 2', monospace",
-              letterSpacing: '0.3em',
+              fontFamily: "'Cinzel Decorative', 'Uncial Antiqua', serif",
+              letterSpacing: '0.2em',
               textShadow: `
-                0 0 50px rgba(255, 255, 255, 0.8),
-                0 0 100px rgba(147, 51, 234, 0.6),
-                0 0 150px rgba(59, 130, 246, 0.4)
+                0 0 60px rgba(34, 197, 94, 0.8),
+                0 0 120px rgba(22, 163, 74, 0.6),
+                0 0 180px rgba(21, 128, 61, 0.4)
               `,
               transform: `scale(${glowIntensity})`,
-              transition: 'transform 2s ease-in-out'
+              transition: 'transform 3s ease-in-out'
             }}
           >
             HARMONY OF GAIA
           </div>
         </div>
 
-        {/* Revolutionary Multi-Layer Typography */}
+        {/* Tree-Inspired Multi-Layer Typography */}
         <div 
           className="relative text-8xl font-bold"
           style={{
-            fontFamily: "'Orbitron', 'Exo 2', 'Rajdhani', monospace",
-            letterSpacing: '0.3em',
-            fontWeight: '900',
+            fontFamily: "'Cinzel Decorative', 'Uncial Antiqua', 'Merriweather', serif",
+            letterSpacing: '0.2em',
+            fontWeight: '800',
             textTransform: 'uppercase'
           }}
         >
-          {/* Layer 1: Base Gradient */}
+          {/* Layer 1: Organic Gradient (Tree Colors) */}
           <div 
             className="absolute inset-0"
             style={{
               background: `
-                linear-gradient(45deg, 
-                  #ff0080 0%, 
-                  #ff8c00 15%, 
-                  #ffd700 30%, 
-                  #00ff80 45%, 
-                  #00bfff 60%, 
-                  #8a2be2 75%, 
-                  #ff1493 90%, 
-                  #ff0080 100%
+                linear-gradient(135deg, 
+                  #065f46 0%,     /* Deep forest green */
+                  #059669 15%,    /* Emerald */
+                  #10b981 30%,    /* Green */
+                  #34d399 45%,    /* Light green */
+                  #6ee7b7 60%,    /* Mint */
+                  #a7f3d0 75%,    /* Light mint */
+                  #d1fae5 90%,    /* Very light green */
+                  #065f46 100%    /* Back to deep forest */
                 )
               `,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              backgroundSize: '400% 400%',
-              animation: 'gradient-shift 8s ease infinite'
+              backgroundSize: '300% 300%',
+              animation: 'organic-flow 12s ease infinite'
             }}
           >
             HARMONY OF GAIA
           </div>
 
-          {/* Layer 2: Electric Outline */}
+          {/* Layer 2: Tree Bark Texture Effect */}
           <div 
             className="absolute inset-0"
             style={{
-              WebkitTextStroke: '2px transparent',
+              WebkitTextStroke: '3px transparent',
               background: `
                 linear-gradient(90deg, 
-                  #00ffff 0%,
-                  #ff00ff 25%,
-                  #ffff00 50%,
-                  #00ff00 75%,
-                  #00ffff 100%
+                  #92400e 0%,     /* Brown bark */
+                  #a3a3a3 20%,    /* Gray bark */
+                  #065f46 40%,    /* Deep green */
+                  #059669 60%,    /* Emerald */
+                  #92400e 80%,    /* Brown bark */
+                  #a3a3a3 100%    /* Gray bark */
                 )
               `,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
               backgroundSize: '200% 200%',
-              animation: 'gradient-shift 6s ease infinite reverse',
-              filter: `brightness(${glowIntensity * 1.2})`
+              animation: 'bark-texture 10s ease infinite reverse',
+              filter: `brightness(${glowIntensity * 1.3})`
             }}
           >
             HARMONY OF GAIA
           </div>
 
-          {/* Layer 3: Main Text with Dynamic Glow */}
+          {/* Layer 3: Main Tree-Style Text with Organic Glow */}
           <div 
             className="relative"
             style={{
               textShadow: `
-                3px 3px 6px rgba(0,0,0,0.9),
-                0 0 30px rgba(255, 0, 128, ${0.6 * glowIntensity}),
-                0 0 60px rgba(0, 191, 255, ${0.5 * glowIntensity}),
-                0 0 90px rgba(138, 43, 234, ${0.4 * glowIntensity}),
-                0 0 120px rgba(255, 215, 0, ${0.3 * glowIntensity})
+                4px 4px 8px rgba(0,0,0,0.8),
+                0 0 40px rgba(34, 197, 94, ${0.7 * glowIntensity}),
+                0 0 80px rgba(22, 163, 74, ${0.6 * glowIntensity}),
+                0 0 120px rgba(21, 128, 61, ${0.5 * glowIntensity}),
+                0 0 160px rgba(5, 150, 105, ${0.4 * glowIntensity})
               `,
               background: `
-                linear-gradient(135deg, 
-                  rgba(255, 255, 255, 0.9) 0%,
-                  rgba(255, 255, 255, 0.7) 50%,
-                  rgba(255, 255, 255, 0.9) 100%
+                linear-gradient(145deg, 
+                  rgba(255, 255, 255, 0.95) 0%,
+                  rgba(240, 253, 244, 0.8) 30%,
+                  rgba(220, 252, 231, 0.9) 70%,
+                  rgba(255, 255, 255, 0.95) 100%
                 )
               `,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              filter: `drop-shadow(0 0 20px rgba(255, 255, 255, ${0.5 * glowIntensity}))`
+              filter: `drop-shadow(0 0 30px rgba(34, 197, 94, ${0.6 * glowIntensity}))`
             }}
           >
             HARMONY OF GAIA
           </div>
         </div>
 
-        {/* Enhanced Decorative Elements */}
-        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 flex gap-8 text-4xl opacity-90">
-          <span className="text-yellow-400 animate-bounce" style={{animationDelay: '0s'}}>⚡</span>
-          <span className="text-cyan-400 animate-bounce" style={{animationDelay: '0.3s'}}>⚡</span>
-          <span className="text-pink-400 animate-bounce" style={{animationDelay: '0.6s'}}>⚡</span>
-        </div>
-        
-        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-12 text-3xl opacity-80">
-          <span className="text-emerald-400 animate-pulse" style={{animationDelay: '0s'}}>🌿</span>
-          <span className="text-blue-400 animate-pulse" style={{animationDelay: '0.5s'}}>💎</span>
-          <span className="text-purple-400 animate-pulse" style={{animationDelay: '1s'}}>🌿</span>
+        {/* Tree Roots Effect (Bottom decoration) */}
+        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-16 text-4xl opacity-80">
+          <span className="text-amber-600 animate-pulse" style={{animationDelay: '0s'}}>🌰</span>
+          <span className="text-green-600 animate-pulse" style={{animationDelay: '0.7s'}}>🌿</span>
+          <span className="text-emerald-600 animate-pulse" style={{animationDelay: '1.4s'}}>🌰</span>
         </div>
 
-        {/* Orbiting Energy Particles */}
+        {/* Floating Tree Elements (Leaves, Seeds, etc.) */}
         <div className="absolute inset-0 pointer-events-none">
-          {Array.from({ length: 6 }).map((_, i) => (
+          {Array.from({ length: 8 }).map((_, i) => (
             <div
-              key={`orbit-${i}`}
-              className="absolute w-3 h-3 rounded-full"
+              key={`tree-element-${i}`}
+              className="absolute w-4 h-4 rounded-full"
               style={{
                 background: `linear-gradient(45deg, 
-                  ${i % 3 === 0 ? '#ff0080' : i % 3 === 1 ? '#00bfff' : '#ffd700'} 0%,
-                  ${i % 3 === 0 ? '#ff8c00' : i % 3 === 1 ? '#8a2be2' : '#00ff80'} 100%
+                  ${i % 4 === 0 ? '#22c55e' : i % 4 === 1 ? '#16a34a' : i % 4 === 2 ? '#15803d' : '#166534'} 0%,
+                  ${i % 4 === 0 ? '#16a34a' : i % 4 === 1 ? '#15803d' : i % 4 === 2 ? '#166534' : '#14532d'} 100%
                 )`,
-                boxShadow: `0 0 15px ${i % 3 === 0 ? '#ff0080' : i % 3 === 1 ? '#00bfff' : '#ffd700'}`,
-                animation: `particle-orbit ${8 + i}s linear infinite`,
-                animationDelay: `${i * 0.5}s`,
+                boxShadow: `0 0 20px ${i % 4 === 0 ? '#22c55e' : i % 4 === 1 ? '#16a34a' : i % 4 === 2 ? '#15803d' : '#166534'}`,
+                animation: `tree-float ${10 + i * 2}s linear infinite`,
+                animationDelay: `${i * 0.7}s`,
                 left: '50%',
                 top: '50%',
-                transformOrigin: `${60 + i * 20}px 0px`
+                transformOrigin: `${80 + i * 25}px 0px`
               }}
             />
           ))}
         </div>
       </div>
 
-      {/* Revolutionary Subtitle */}
-      <div className="relative mt-8 z-10">
+      {/* Tree-Inspired Subtitle */}
+      <div className="relative mt-12 z-10">
         <p 
-          className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-300"
+          className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-300 to-green-500"
           style={{
-            fontFamily: "'Cinzel', serif",
-            letterSpacing: '0.2em',
-            textShadow: '0 0 20px rgba(147, 51, 234, 0.5)'
+            fontFamily: "'Cinzel', 'Merriweather', serif",
+            letterSpacing: '0.15em',
+            textShadow: '0 0 30px rgba(34, 197, 94, 0.6)'
           }}
         >
-          ⚔️ Where Digital Dragons Guard Eternal Realms ⚔️
+          🌳 Where Nature's Wisdom Guards Digital Realms 🌳
         </p>
+        <div className="mt-4 flex justify-center gap-6 text-2xl opacity-90">
+          <span className="animate-pulse" style={{animationDelay: '0s'}}>🌱</span>
+          <span className="animate-pulse" style={{animationDelay: '0.5s'}}>🍃</span>
+          <span className="animate-pulse" style={{animationDelay: '1s'}}>🌿</span>
+          <span className="animate-pulse" style={{animationDelay: '1.5s'}}>🌳</span>
+          <span className="animate-pulse" style={{animationDelay: '2s'}}>🌿</span>
+          <span className="animate-pulse" style={{animationDelay: '2.5s'}}>🍃</span>
+          <span className="animate-pulse" style={{animationDelay: '3s'}}>🌱</span>
+        </div>
       </div>
     </div>
   )
