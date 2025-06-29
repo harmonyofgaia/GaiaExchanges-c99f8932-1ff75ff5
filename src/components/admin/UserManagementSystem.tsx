@@ -188,14 +188,14 @@ export function UserManagementSystem() {
     })
   }
 
-  const handleIPAction = (ip: string, action: 'approve' | 'block' | 'pending') => {
+  const handleIPAction = (ip: string, action: 'approved' | 'blocked' | 'pending') => {
     setIpAddresses(prev => prev.map(ipAddr => 
       ipAddr.ip === ip 
         ? { ...ipAddr, status: action }
         : ipAddr
     ))
     
-    const actionText = action === 'approve' ? 'approved' : action === 'block' ? 'blocked' : 'marked as pending'
+    const actionText = action === 'approved' ? 'approved' : action === 'blocked' ? 'blocked' : 'marked as pending'
     toast.success(`🌐 IP Address ${actionText}!`, {
       description: `${ip} has been ${actionText} in the system.`,
       duration: 3000
@@ -349,7 +349,7 @@ export function UserManagementSystem() {
                         <Button 
                           size="sm" 
                           className="bg-green-600 hover:bg-green-700"
-                          onClick={() => handleIPAction(ip.ip, 'approve')}
+                          onClick={() => handleIPAction(ip.ip, 'approved')}
                         >
                           ✅ Approve
                         </Button>
@@ -363,7 +363,7 @@ export function UserManagementSystem() {
                         <Button 
                           size="sm" 
                           variant="destructive"
-                          onClick={() => handleIPAction(ip.ip, 'block')}
+                          onClick={() => handleIPAction(ip.ip, 'blocked')}
                         >
                           🚫 Block
                         </Button>
