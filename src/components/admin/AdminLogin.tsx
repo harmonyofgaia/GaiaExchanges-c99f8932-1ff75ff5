@@ -28,8 +28,8 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
       const success = onLoginSuccess(credentials.username, credentials.password, credentials.adminKey)
       
       if (!success) {
-        toast.error('❌ Invalid Admin Credentials', {
-          description: 'Access denied. Security incident logged.',
+        toast.error('❌ Access Denied', {
+          description: 'Invalid credentials. Security protocol active.',
           duration: 5000
         })
       }
@@ -40,6 +40,12 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
       })
     } finally {
       setIsLoading(false)
+      // Clear sensitive data immediately after attempt
+      setCredentials({
+        username: '',
+        password: '',
+        adminKey: ''
+      })
     }
   }
 
@@ -48,7 +54,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-green-400 text-center">
           <Shield className="h-5 w-5" />
-          GAIA Admin Login
+          GAIA Admin Access
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -61,6 +67,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
               value={credentials.username}
               onChange={(e) => setCredentials(prev => ({ ...prev, username: e.target.value }))}
               className="bg-black/30 border-green-500/30"
+              autoComplete="off"
               required
             />
           </div>
@@ -74,6 +81,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
                 value={credentials.password}
                 onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
                 className="bg-black/30 border-green-500/30 pr-10"
+                autoComplete="off"
                 required
               />
               <Button
@@ -89,13 +97,14 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="adminKey" className="text-green-300">Quantum Admin Key</Label>
+            <Label htmlFor="adminKey" className="text-green-300">Security Key</Label>
             <Input
               id="adminKey"
               type="password"
               value={credentials.adminKey}
               onChange={(e) => setCredentials(prev => ({ ...prev, adminKey: e.target.value }))}
               className="bg-black/30 border-green-500/30"
+              autoComplete="off"
               required
             />
           </div>
@@ -112,7 +121,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
 
         <div className="mt-4 p-3 bg-green-900/20 border border-green-500/20 rounded-lg">
           <p className="text-xs text-green-300 text-center">
-            🛡️ Direct Admin Access • Dragon Protection Active • All Attempts Logged
+            🛡️ Ultra-Secure Access • Advanced Protection Active • All Attempts Monitored
           </p>
         </div>
       </CardContent>
