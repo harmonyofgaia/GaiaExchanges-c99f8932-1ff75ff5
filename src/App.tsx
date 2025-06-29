@@ -6,6 +6,7 @@ import { Toaster as Sonner } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
+import { HoverSidebar } from '@/components/HoverSidebar'
 import Home from '@/pages/Home'
 import About from '@/pages/About'
 import Contact from '@/pages/Contact'
@@ -15,6 +16,7 @@ import Admin from '@/pages/Admin'
 import SecureAdmin from '@/pages/SecureAdmin'
 import UltimateSecurity from '@/pages/UltimateSecurity'
 import SecureVault from '@/pages/SecureVault'
+import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
 import { SystemMonitor } from '@/components/SystemMonitor'
 import { SystemVerification } from '@/components/SystemVerification'
 
@@ -35,6 +37,9 @@ function App() {
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            {/* Hover Sidebar - Always Present */}
+            <HoverSidebar />
+            
             {/* Background Security Systems - Always Running */}
             <SystemMonitor />
             
@@ -44,6 +49,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/auth" element={<AuthPage />} />
+              <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
               
               <Route path="/admin" element={
                 <ProtectedRoute isAdminRoute={true}>

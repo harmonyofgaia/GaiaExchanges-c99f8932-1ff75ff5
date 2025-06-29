@@ -1,4 +1,3 @@
-
 import { Badge } from '@/components/ui/badge'
 import { 
   Sparkles, 
@@ -85,8 +84,8 @@ export const HeroSection = () => {
                   className="w-24 h-24 object-contain animate-pulse"
                   style={{
                     filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))',
-                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0) 100%)'
+                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.2) 80%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.2) 80%, rgba(0,0,0,0) 100%)'
                   }}
                 />
                 {/* Additional fade overlay for smoother transition */}
@@ -163,8 +162,8 @@ export const HeroSection = () => {
                   className="w-24 h-24 object-contain animate-pulse transform scale-x-[-1]"
                   style={{
                     filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))',
-                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0) 100%)'
+                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.2) 80%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.2) 80%, rgba(0,0,0,0) 100%)'
                   }}
                 />
                 {/* Additional fade overlay for smoother transition */}
