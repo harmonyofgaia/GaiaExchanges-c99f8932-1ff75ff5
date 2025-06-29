@@ -18,60 +18,69 @@ import SecureVault from '@/pages/SecureVault'
 import { SystemMonitor } from '@/components/SystemMonitor'
 import { SystemVerification } from '@/components/SystemVerification'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 3,
+      refetchOnWindowFocus: false,
+    },
+  },
+})
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          {/* Background Security Systems - Always Running */}
-          <SystemMonitor />
-          
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/auth" element={<AuthPage />} />
+        <AuthProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            {/* Background Security Systems - Always Running */}
+            <SystemMonitor />
             
-            <Route path="/admin" element={
-              <ProtectedRoute isAdminRoute={true}>
-                <Admin />
-              </ProtectedRoute>
-            } />
-            
-            <Route path="/secureadmin" element={
-              <ProtectedRoute isAdminRoute={true}>
-                <SecureAdmin />
-              </ProtectedRoute>
-            } />
-            
-            <Route path="/ultimatesecurity" element={
-              <ProtectedRoute isAdminRoute={true}>
-                <UltimateSecurity />
-              </ProtectedRoute>
-            } />
-            
-            <Route path="/securevault" element={
-              <ProtectedRoute isAdminRoute={true}>
-                <SecureVault />
-              </ProtectedRoute>
-            } />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/auth" element={<AuthPage />} />
+              
+              <Route path="/admin" element={
+                <ProtectedRoute isAdminRoute={true}>
+                  <Admin />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/secureadmin" element={
+                <ProtectedRoute isAdminRoute={true}>
+                  <SecureAdmin />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/ultimatesecurity" element={
+                <ProtectedRoute isAdminRoute={true}>
+                  <UltimateSecurity />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/securevault" element={
+                <ProtectedRoute isAdminRoute={true}>
+                  <SecureVault />
+                </ProtectedRoute>
+              } />
 
-            <Route path="/system-verification" element={
-              <ProtectedRoute isAdminRoute={true}>
-                <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-cyan-900 p-6">
-                  <div className="container mx-auto">
-                    <SystemVerification />
+              <Route path="/system-verification" element={
+                <ProtectedRoute isAdminRoute={true}>
+                  <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-cyan-900 p-6">
+                    <div className="container mx-auto">
+                      <SystemVerification />
+                    </div>
                   </div>
-                </div>
-              </ProtectedRoute>
-            } />
-          </Routes>
-        </BrowserRouter>
+                </ProtectedRoute>
+              } />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   )

@@ -9,31 +9,34 @@ export function useSecureAdmin() {
   useEffect(() => {
     // Check for existing admin session
     const checkAdminStatus = () => {
-      const adminSession = localStorage.getItem('gaia_admin_session')
-      const sessionExpiry = localStorage.getItem('gaia_admin_expiry')
-      
-      if (adminSession && sessionExpiry) {
-        const expiryTime = parseInt(sessionExpiry)
-        const currentTime = Date.now()
+      try {
+        const adminSession = localStorage.getItem('gaia_admin_session')
+        const sessionExpiry = localStorage.getItem('gaia_admin_expiry')
         
-        if (currentTime < expiryTime) {
-          // Valid admin session exists
-          setIsAdmin(true)
-          toast.success('🌍 GAIA Admin Session Active', {
-            description: 'Welcome back to the secure admin vault',
-            duration: 3000
-          })
+        if (adminSession && sessionExpiry) {
+          const expiryTime = parseInt(sessionExpiry)
+          const currentTime = Date.now()
+          
+          if (currentTime < expiryTime) {
+            // Valid admin session exists
+            setIsAdmin(true)
+            console.log('🌍 Valid GAIA Admin Session Found')
+          } else {
+            // Session expired
+            localStorage.removeItem('gaia_admin_session')
+            localStorage.removeItem('gaia_admin_expiry')
+            setIsAdmin(false)
+            console.log('🔒 Admin Session Expired')
+          }
         } else {
-          // Session expired
-          localStorage.removeItem('gaia_admin_session')
-          localStorage.removeItem('gaia_admin_expiry')
           setIsAdmin(false)
         }
-      } else {
+      } catch (error) {
+        console.error('Error checking admin status:', error)
         setIsAdmin(false)
+      } finally {
+        setIsValidating(false)
       }
-      
-      setIsValidating(false)
     }
 
     checkAdminStatus()
@@ -45,29 +48,38 @@ export function useSecureAdmin() {
   }, [])
 
   const grantAdminAccess = () => {
-    const sessionToken = `gaia_admin_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-    const expiryTime = Date.now() + (24 * 60 * 60 * 1000) // 24 hours
-    
-    localStorage.setItem('gaia_admin_session', sessionToken)
-    localStorage.setItem('gaia_admin_expiry', expiryTime.toString())
-    
-    setIsAdmin(true)
-    
-    toast.success('🔐 GAIA Admin Access Granted!', {
-      description: 'Full vault access activated for 24 hours',
-      duration: 5000
-    })
+    try {
+      const sessionToken = `gaia_admin_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+      const expiryTime = Date.now() + (24 * 60 * 60 * 1000) // 24 hours
+      
+      localStorage.setItem('gaia_admin_session', sessionToken)
+      localStorage.setItem('gaia_admin_expiry', expiryTime.toString())
+      
+      setIsAdmin(true)
+      
+      toast.success('🔐 GAIA Admin Access Granted!', {
+        description: 'Full vault access activated for 24 hours',
+        duration: 5000
+      })
+    } catch (error) {
+      console.error('Error granting admin access:', error)
+      toast.error('Failed to grant admin access')
+    }
   }
 
   const revokeAdminAccess = () => {
-    localStorage.removeItem('gaia_admin_session')
-    localStorage.removeItem('gaia_admin_expiry')
-    setIsAdmin(false)
-    
-    toast.success('🔒 Admin Session Ended', {
-      description: 'Secure logout completed',
-      duration: 3000
-    })
+    try {
+      localStorage.removeItem('gaia_admin_session')
+      localStorage.removeItem('gaia_admin_expiry')
+      setIsAdmin(false)
+      
+      toast.success('🔒 Admin Session Ended', {
+        description: 'Secure logout completed',
+        duration: 3000
+      })
+    } catch (error) {
+      console.error('Error revoking admin access:', error)
+    }
   }
 
   return {
