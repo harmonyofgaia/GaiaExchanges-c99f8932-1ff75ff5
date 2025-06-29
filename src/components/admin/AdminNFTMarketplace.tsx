@@ -44,17 +44,17 @@ interface GAiANFT {
 }
 
 export function AdminNFTMarketplace() {
-  const { isAdminAuthenticated } = useSecureAdmin()
+  const { isAdmin } = useSecureAdmin()
   const [nfts, setNfts] = useState<GAiANFT[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [newNFT, setNewNFT] = useState<Partial<GAiANFT>>({})
   const [isCreating, setIsCreating] = useState(false)
 
   useEffect(() => {
-    if (isAdminAuthenticated) {
+    if (isAdmin) {
       loadAdminNFTs()
     }
-  }, [isAdminAuthenticated])
+  }, [isAdmin])
 
   const loadAdminNFTs = () => {
     // Load NFTs from secure admin vault
@@ -192,7 +192,7 @@ export function AdminNFTMarketplace() {
     selectedCategory === 'all' || nft.category === selectedCategory
   )
 
-  if (!isAdminAuthenticated) {
+  if (!isAdmin) {
     return (
       <Card className="border-2 border-red-500/50">
         <CardContent className="p-8 text-center">
