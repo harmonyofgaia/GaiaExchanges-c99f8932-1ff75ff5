@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PrehistoricCreaturesManager } from './PrehistoricCreaturesManager'
 import { EnhancedSnakeGame } from './EnhancedSnakeGame'
+import { EnhancedNFTSystem } from './EnhancedNFTSystem'
 import { AdminDashboard } from '@/components/tracking/AdminDashboard'
 import { Badge } from '@/components/ui/badge'
 import { 
@@ -14,7 +15,8 @@ import {
   Zap,
   Users,
   Trophy,
-  Target
+  Target,
+  Star
 } from 'lucide-react'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 
@@ -125,9 +127,12 @@ export function AdminOverview() {
 
       {/* Admin Overview Tabs */}
       <Tabs defaultValue="creatures" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 bg-black/50 backdrop-blur-md border border-green-500/20">
+        <TabsList className="grid w-full grid-cols-4 bg-black/50 backdrop-blur-md border border-green-500/20">
           <TabsTrigger value="creatures" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
             🦖 Prehistoric Army
+          </TabsTrigger>
+          <TabsTrigger value="enhanced-nfts" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+            🎴 Enhanced NFTs
           </TabsTrigger>
           <TabsTrigger value="snake-game" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
             🐍 Enhanced Snake Game
@@ -139,6 +144,10 @@ export function AdminOverview() {
 
         <TabsContent value="creatures" className="space-y-6 mt-6">
           <PrehistoricCreaturesManager />
+        </TabsContent>
+
+        <TabsContent value="enhanced-nfts" className="space-y-6 mt-6">
+          <EnhancedNFTSystem />
         </TabsContent>
 
         <TabsContent value="snake-game" className="space-y-6 mt-6">
