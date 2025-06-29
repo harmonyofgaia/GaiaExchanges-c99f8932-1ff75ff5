@@ -64,31 +64,31 @@ const Web3Integration: React.FC<Web3Props> = ({
     if (isConnected && account) {
       toast({
         title: 'New GAiA Wallet Connected!',
-        description: `Connected to New Official GAiA: ${GAIA_TOKEN.WALLET_ADDRESS}`,
+        description: `Connected to Official GAiA: ${GAIA_TOKEN.WALLET_ADDRESS}`,
         className: 'bg-green-500 text-white'
       })
     }
   }, [isConnected, account, toast])
 
-  const copyNewWalletAddress = () => {
+  const copyWalletAddress = () => {
     navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
     toast({
-      title: 'New GAiA Wallet Address Copied!',
-      description: 'New official GAiA wallet address copied to clipboard',
+      title: 'GAiA Wallet Address Copied!',
+      description: 'Official GAiA wallet address copied to clipboard',
       className: 'bg-blue-500 text-white'
     })
   }
 
-  const copyNewContractAddress = () => {
+  const copyContractAddress = () => {
     navigator.clipboard.writeText(GAIA_TOKEN.CONTRACT_ADDRESS)
     toast({
-      title: 'New GAiA Contract Address Copied!',
-      description: 'New official GAiA contract address copied to clipboard',
+      title: 'GAiA Contract Address Copied!',
+      description: 'Official GAiA contract address copied to clipboard',
       className: 'bg-purple-500 text-white'
     })
   }
 
-  const openNewPumpFun = () => {
+  const openPumpFun = () => {
     window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
   }
 
@@ -97,8 +97,8 @@ const Web3Integration: React.FC<Web3Props> = ({
     setTimeout(() => {
       setIsBurning(false)
       toast({
-        title: 'New GAiA Token Burn Initiated!',
-        description: 'Burning via new token address - 97% for Environmental Projects + 3% for Coral Reef Restoration',
+        title: 'GAiA Token Burn Initiated!',
+        description: 'Burning via official token address - 97% for Environmental Projects + 3% for Coral Reef Restoration',
         className: 'bg-orange-500 text-white'
       })
     }, 2000)
@@ -109,8 +109,8 @@ const Web3Integration: React.FC<Web3Props> = ({
     setTimeout(() => {
       setIsReinvesting(false)
       toast({
-        title: 'New GAiA Token Reinvestment Initiated!',
-        description: 'Reinvesting via new token address in Enhanced Environmental Projects',
+        title: 'GAiA Token Reinvestment Initiated!',
+        description: 'Reinvesting via official token address in Enhanced Environmental Projects',
         className: 'bg-blue-500 text-white'
       })
     }, 2000)
@@ -131,36 +131,36 @@ const Web3Integration: React.FC<Web3Props> = ({
         <CardHeader>
           <CardTitle className="text-green-400 flex items-center gap-2">
             <Wallet className="w-5 h-5" />
-            🌍 New Official GAiA Web3 Integration
+            🌍 Official GAiA Web3 Integration
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* New Official GAiA Wallet Info */}
+          {/* Official GAiA Wallet Info */}
           <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
-            <h3 className="text-blue-400 font-bold mb-2">New Official GAiA Wallet:</h3>
+            <h3 className="text-blue-400 font-bold mb-2">Official GAiA Wallet:</h3>
             <div className="flex items-center justify-between">
               <code className="text-blue-300 font-mono text-sm break-all bg-blue-900/10 p-2 rounded flex-1 mr-2">
                 {GAIA_TOKEN.WALLET_ADDRESS}
               </code>
               <div className="flex gap-2">
-                <Button onClick={copyNewWalletAddress} variant="outline" size="sm" className="border-blue-500/30 text-blue-400">
+                <Button onClick={copyWalletAddress} variant="outline" size="sm" className="border-blue-500/30 text-blue-400">
                   <Copy className="w-3 h-3" />
                 </Button>
-                <Button onClick={openNewPumpFun} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+                <Button onClick={openPumpFun} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
                   <BarChart3 className="w-3 h-3" />
                 </Button>
               </div>
             </div>
           </div>
 
-          {/* New GAiA Contract Info */}
+          {/* GAiA Contract Info */}
           <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
-            <h3 className="text-purple-400 font-bold mb-2">New GAiA Contract:</h3>
+            <h3 className="text-purple-400 font-bold mb-2">GAiA Contract:</h3>
             <div className="flex items-center justify-between">
               <code className="text-purple-300 font-mono text-sm break-all bg-purple-900/10 p-2 rounded flex-1 mr-2">
                 {GAIA_TOKEN.CONTRACT_ADDRESS}
               </code>
-              <Button onClick={copyNewContractAddress} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+              <Button onClick={copyContractAddress} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
                 <Copy className="w-3 h-3" />
               </Button>
             </div>
@@ -169,17 +169,17 @@ const Web3Integration: React.FC<Web3Props> = ({
           {isConnected ? (
             <>
               <div className="text-white">
-                New GAiA Balance: <span className="font-bold">{formatGaiaPrice(balance)}</span>
+                GAiA Balance: <span className="font-bold">{formatGaiaPrice(balance)}</span>
               </div>
               <Button variant="destructive" onClick={disconnectWallet}>
                 <Zap className="w-4 h-4 mr-2" />
-                Disconnect New GAiA Wallet
+                Disconnect GAiA Wallet
               </Button>
             </>
           ) : (
             <Button onClick={connectWallet} className="bg-green-600 hover:bg-green-700">
               <Wallet className="w-4 h-4 mr-2" />
-              Connect to New Official GAiA
+              Connect to Official GAiA
             </Button>
           )}
         </CardContent>
@@ -189,16 +189,16 @@ const Web3Integration: React.FC<Web3Props> = ({
         <CardHeader>
           <CardTitle className="text-purple-400 flex items-center gap-2">
             <Shield className="w-5 h-5" />
-            New GAiA Tokenomics & Enhanced Security
+            GAiA Tokenomics & Enhanced Security
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between text-white">
-            New GAiA Burn Rate: <span className="font-bold">{burnRate + 2}%</span>
+            GAiA Burn Rate: <span className="font-bold">{burnRate + 2}%</span>
             <Progress value={burnRate + 2} className="w-1/2 h-2" />
           </div>
           <div className="flex items-center justify-between text-white">
-            New GAiA Reinvest Rate: <span className="font-bold">{reinvestRate + 3}%</span>
+            GAiA Reinvest Rate: <span className="font-bold">{reinvestRate + 3}%</span>
             <Progress value={reinvestRate + 3} className="w-1/2 h-2" />
           </div>
           <div className="flex items-center justify-between">
@@ -213,14 +213,14 @@ const Web3Integration: React.FC<Web3Props> = ({
               disabled={isBurning}
               className="bg-orange-500 hover:bg-orange-700 text-white flex-1"
             >
-              {isBurning ? 'Burning...' : 'Burn New GAiA Tokens'}
+              {isBurning ? 'Burning...' : 'Burn GAiA Tokens'}
             </Button>
             <Button
               onClick={handleReinvest}
               disabled={isReinvesting}
               className="bg-blue-500 hover:bg-blue-700 text-white flex-1"
             >
-              {isReinvesting ? 'Reinvesting...' : 'Reinvest New GAiA Tokens'}
+              {isReinvesting ? 'Reinvesting...' : 'Reinvest GAiA Tokens'}
             </Button>
           </div>
         </CardContent>
@@ -230,37 +230,37 @@ const Web3Integration: React.FC<Web3Props> = ({
         <CardHeader>
           <CardTitle className="text-cyan-400 flex items-center gap-2">
             <Coins className="w-5 h-5" />
-            New GAiA Gaming & Enhanced NFT Assets
+            GAiA Gaming & Enhanced NFT Assets
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="text-white">
-            New GAiA Gaming Power: <span className="font-bold">{gamingPower + 150}</span>
+            GAiA Gaming Power: <span className="font-bold">{gamingPower + 150}</span>
           </div>
           <div className="text-white">
-            New GAiA Landscape NFTs: <span className="font-bold">{landscapeNFTs + 8}</span>
+            GAiA Landscape NFTs: <span className="font-bold">{landscapeNFTs + 8}</span>
           </div>
           <div className="text-white">
-            New GAiA Weapon NFTs: <span className="font-bold">{weaponNFTs + 5}</span>
+            GAiA Weapon NFTs: <span className="font-bold">{weaponNFTs + 5}</span>
           </div>
           <div className="text-white">
-            New GAiA Armor NFTs: <span className="font-bold">{armorNFTs + 3}</span>
+            GAiA Armor NFTs: <span className="font-bold">{armorNFTs + 3}</span>
           </div>
           <div className="text-white">
-            New GAiA Unknown Secrets: <span className="font-bold">{unknownSecrets + 12}</span>
+            GAiA Unknown Secrets: <span className="font-bold">{unknownSecrets + 12}</span>
           </div>
           <div className="flex justify-around">
             <Badge className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-3 py-1">
               <Sword className="w-4 h-4 mr-2" />
-              Equip New GAiA Weapon
+              Equip GAiA Weapon
             </Badge>
             <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1">
               <Map className="w-4 h-4 mr-2" />
-              Explore New GAiA Landscape
+              Explore GAiA Landscape
             </Badge>
             <Badge className="bg-gradient-to-r from-cyan-600 to-teal-600 text-white px-3 py-1">
               <Gem className="w-4 h-4 mr-2" />
-              Unlock New GAiA Secret
+              Unlock GAiA Secret
             </Badge>
           </div>
         </CardContent>

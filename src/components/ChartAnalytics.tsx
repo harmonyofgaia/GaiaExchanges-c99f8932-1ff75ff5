@@ -183,7 +183,8 @@ export function ChartAnalytics() {
               <div><strong>Wallet:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.WALLET_ADDRESS}</code></div>
               <div><strong>Pump.fun:</strong> <a href={GAIA_TOKEN.PUMP_FUN_URL} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Trade Now</a></div>
             </div>
-          </CardHeader>
+          </div>
+        </CardHeader>
         <CardContent>
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1 flex gap-2">
