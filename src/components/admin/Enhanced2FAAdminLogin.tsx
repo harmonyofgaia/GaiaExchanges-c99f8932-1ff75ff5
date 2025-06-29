@@ -61,10 +61,7 @@ export function Enhanced2FAAdminLogin({ onLoginSuccess }: Enhanced2FAAdminLoginP
           </Card>
 
           {/* Admin Login Form */}
-          <AdminLogin
-            onLoginSuccess={handleCredentialsSuccess}
-            onMFARequired={handleCredentialsSuccess}
-          />
+          <AdminLogin onLoginSuccess={handleCredentialsSuccess} />
         </div>
       )}
 
