@@ -76,7 +76,11 @@ export function SecureConnectionManager() {
 
     // Calculate threat statistics
     const stats = storedConnections.reduce((acc, conn) => {
-      acc[conn.threat_level.toLowerCase() as keyof typeof acc]++
+      const level = conn.threat_level.toLowerCase()
+      if (level === 'low') acc.low++
+      else if (level === 'medium') acc.medium++
+      else if (level === 'high') acc.high++
+      else if (level === 'critical') acc.critical++
       return acc
     }, { low: 0, medium: 0, high: 0, critical: 0 })
     

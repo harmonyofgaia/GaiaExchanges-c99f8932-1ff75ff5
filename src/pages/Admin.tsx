@@ -23,6 +23,7 @@ import { GitHubAdminIntegration } from '@/components/github/GitHubAdminIntegrati
 import { MasterArtworkGenerator } from '@/components/admin/MasterArtworkGenerator'
 import { SystemStatusChecker } from '@/components/admin/SystemStatusChecker'
 import { SecureConnectionManager } from '@/components/admin/SecureConnectionManager'
+import { GitHubRollbackManager } from '@/components/github/GitHubRollbackManager'
 
 const Admin = () => {
   const navigate = useNavigate()
@@ -123,12 +124,15 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="user-management" className="w-full">
-          <TabsList className="grid w-full grid-cols-6 bg-black/50 backdrop-blur-md border border-green-500/20">
+          <TabsList className="grid w-full grid-cols-7 bg-black/50 backdrop-blur-md border border-green-500/20">
             <TabsTrigger value="user-management" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
               👥 User Management
             </TabsTrigger>
             <TabsTrigger value="connection-tracking" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
               🐉 Connection Tracking
+            </TabsTrigger>
+            <TabsTrigger value="github-rollback" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+              🔄 GitHub Rollback
             </TabsTrigger>
             <TabsTrigger value="completed-systems" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
               ✅ Completed Systems
@@ -150,6 +154,10 @@ const Admin = () => {
           
           <TabsContent value="connection-tracking" className="space-y-6 mt-6">
             <SecureConnectionManager />
+          </TabsContent>
+          
+          <TabsContent value="github-rollback" className="space-y-6 mt-6">
+            <GitHubRollbackManager />
           </TabsContent>
           
           <TabsContent value="completed-systems" className="space-y-6 mt-6">

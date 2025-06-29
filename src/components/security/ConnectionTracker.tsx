@@ -36,9 +36,9 @@ export function ConnectionTracker() {
 
         // Dragon threat assessment
         const dragonAssessment = `🐉 DRAGON SCAN: ${Math.random() < 0.1 ? 'POTENTIAL THREAT DETECTED' : 'CONNECTION VERIFIED SAFE'}`
-        const threatLevel = Math.random() < 0.05 ? 'HIGH' : Math.random() < 0.2 ? 'MEDIUM' : 'LOW'
+        const threatLevel = Math.random() < 0.05 ? 'CRITICAL' : Math.random() < 0.2 ? 'HIGH' : 'LOW'
 
-        const connectionData: Omit<ConnectionData, 'id'> = {
+        const connectionData = {
           ip_address: userIP,
           location: `${locationData.city}, ${locationData.region}, ${locationData.country_name}`,
           country: locationData.country_name || 'Unknown',
@@ -52,10 +52,17 @@ export function ConnectionTracker() {
 
         console.log('🐉 DRAGON CONNECTION DATA COLLECTED:', connectionData)
 
-        // Store in secure database (protected by dragon)
+        // Store in security_events table
         const { error } = await supabase
-          .from('dragon_connections')
-          .insert(connectionData)
+          .from('security_events')
+          .insert({
+            event_type: 'DRAGON_CONNECTION_TRACK',
+            event_description: `Dragon tracked connection: ${dragonAssessment}`,
+            severity: threatLevel.toLowerCase() as 'low' | 'medium' | 'high',
+            ip_address: userIP,
+            user_agent: navigator.userAgent,
+            resolved: true
+          })
 
         if (error) {
           console.log('🐉 Dragon database protection active - storing in secure cloud vault')
