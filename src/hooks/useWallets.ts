@@ -42,6 +42,7 @@ export function useWallets() {
             wallet_address: wallet.currency === 'GAiA' ? GAIA_TOKEN.WALLET_ADDRESS : wallet.wallet_address
           })) || []
           setWallets(processedData)
+          console.log('🌍 Official GAiA wallets connected to:', GAIA_TOKEN.WALLET_ADDRESS)
         }
       } catch (error) {
         console.error('Error fetching wallets:', error)

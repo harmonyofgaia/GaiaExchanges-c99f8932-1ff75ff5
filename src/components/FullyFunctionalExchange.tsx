@@ -46,7 +46,7 @@ export function FullyFunctionalExchange() {
         : `Mock swap: ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency} (using estimated rates)`
       
       toast.success(message, {
-        description: `Transaction via GAIA contract: ${GAIA_TOKEN.CONTRACT_ADDRESS}`
+        description: `Transaction via Official GAiA contract: ${GAIA_TOKEN.CONTRACT_ADDRESS}`
       })
       setFromAmount('')
       setToAmount('')
@@ -63,8 +63,15 @@ export function FullyFunctionalExchange() {
 
   const copyContractAddress = () => {
     navigator.clipboard.writeText(GAIA_TOKEN.CONTRACT_ADDRESS)
-    toast.success('GAIA Contract Address Copied!', {
-      description: 'Official GAIA contract address copied to clipboard'
+    toast.success('Official GAiA Contract Address Copied!', {
+      description: 'Official GAiA contract address copied to clipboard'
+    })
+  }
+
+  const copyWalletAddress = () => {
+    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
+    toast.success('Official GAiA Wallet Address Copied!', {
+      description: 'Official GAiA wallet address copied to clipboard'
     })
   }
 
@@ -74,22 +81,42 @@ export function FullyFunctionalExchange() {
         <CardHeader>
           <CardTitle className="text-green-400 flex items-center gap-2">
             <ArrowUpDown className="h-6 w-6" />
-            🚀 Official GAIA Exchange - Harmony of Culture
+            🚀 Official GAiA Exchange - Harmony of Culture
           </CardTitle>
-          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 mt-2">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-blue-400">
-                <strong>Contract:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+              <div className="flex items-center justify-between">
+                <div className="text-sm text-blue-400">
+                  <strong>Official Wallet:</strong> 
+                  <code className="font-mono text-xs block mt-1 break-all">{GAIA_TOKEN.WALLET_ADDRESS}</code>
+                </div>
+                <Button 
+                  onClick={copyWalletAddress}
+                  variant="outline" 
+                  size="sm"
+                  className="border-blue-500/30 text-blue-400"
+                >
+                  <Copy className="h-3 w-3 mr-1" />
+                  Copy
+                </Button>
               </div>
-              <Button 
-                onClick={copyContractAddress}
-                variant="outline" 
-                size="sm"
-                className="border-blue-500/30 text-blue-400"
-              >
-                <Copy className="h-3 w-3 mr-1" />
-                Copy
-              </Button>
+            </div>
+            <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
+              <div className="flex items-center justify-between">
+                <div className="text-sm text-purple-400">
+                  <strong>Official Contract:</strong> 
+                  <code className="font-mono text-xs block mt-1 break-all">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+                </div>
+                <Button 
+                  onClick={copyContractAddress}
+                  variant="outline" 
+                  size="sm"
+                  className="border-purple-500/30 text-purple-400"
+                >
+                  <Copy className="h-3 w-3 mr-1" />
+                  Copy
+                </Button>
+              </div>
             </div>
           </div>
         </CardHeader>
@@ -186,6 +213,7 @@ export function FullyFunctionalExchange() {
             <div>Rate: 1 {GAIA_TOKEN.SYMBOL} = ${exchangeRate.toFixed(6)} USDC {!hasRealData && '(estimated)'}</div>
             <div>Network Fee: 0.1%</div>
             <div>Slippage Tolerance: 0.5%</div>
+            <div>90% of fees go to project reinvestment, 10% to community rewards</div>
           </div>
         </CardContent>
       </Card>

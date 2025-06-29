@@ -16,20 +16,38 @@ import {
   ArrowUpRight,
   Leaf,
   Users,
-  Network
+  Network,
+  Copy
 } from 'lucide-react'
+import { GAIA_TOKEN } from '@/constants/gaia'
+import { toast } from 'sonner'
 
 const Reinvestments = () => {
-  // Mock reinvestment data - Updated for correct allocation
+  // Updated reinvestment data - 90% project reinvestment, 10% community rewards
   const reinvestmentData = {
-    totalReinvested: 1247523.67, // Updated to reflect increased funding
+    totalReinvested: 1247523.67,
     totalTokensBurned: 1250000,
     environmentalProjects: 13,
     partnersOnboarded: 156,
     exchangesConnected: 8,
     weeklyGrowth: 18.2,
     coralReefAllocation: 5, // 5% to coral reef
-    otherProjectsAllocation: 95 // 95% to other projects
+    projectReinvestmentAllocation: 90, // 90% to project reinvestment
+    communityRewardsAllocation: 10 // 10% to community rewards
+  }
+
+  const copyOfficialWalletAddress = () => {
+    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
+    toast.success('Official GAiA Wallet Address Copied!', {
+      description: 'Official GAiA wallet address copied to clipboard'
+    })
+  }
+
+  const copyOfficialContractAddress = () => {
+    navigator.clipboard.writeText(GAIA_TOKEN.CONTRACT_ADDRESS)
+    toast.success('Official GAiA Contract Address Copied!', {
+      description: 'Official GAiA contract address copied to clipboard'
+    })
   }
 
   const reinvestmentProjects = [
@@ -43,52 +61,62 @@ const Reinvestments = () => {
       description: "Personal project: Restoring coral reefs with balanced underwater audio signals to attract marine life and recover ecosystems",
       burnContribution: 5, // 5% of all burns go here
       category: "Marine Conservation",
-      walletAddress: "ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7"
+      walletAddress: GAIA_TOKEN.WALLET_ADDRESS
     },
     {
       id: 2,
       name: "Ocean Cleanup Initiative",
-      allocation: 237500, // Part of 95% allocation
+      allocation: 281250, // Increased from 90% allocation
       progress: 78,
       status: "Active",
       impact: "2.3M plastic bottles removed",
-      burnContribution: 19
+      burnContribution: 22.5
     },
     {
       id: 3,
       name: "Solar Energy Expansion",
-      allocation: 300000, // Part of 95% allocation
+      allocation: 337500, // Increased from 90% allocation
       progress: 92,
       status: "Completed",
       impact: "500 solar panels installed",
-      burnContribution: 25
+      burnContribution: 27
     },
     {
       id: 4,
       name: "Forest Restoration Brazil",
-      allocation: 200000, // Part of 95% allocation
+      allocation: 225000, // Increased from 90% allocation
       progress: 45,
       status: "In Progress",
       impact: "15,000 trees planted",
-      burnContribution: 16
+      burnContribution: 18
     },
     {
       id: 5,
       name: "Clean Water Access Global",
-      allocation: 187500, // Part of 95% allocation
+      allocation: 168750, // Adjusted from 90% allocation
       progress: 63,
       status: "Active",
       impact: "8 communities served",
-      burnContribution: 15
+      burnContribution: 13.5
     },
     {
       id: 6,
       name: "Carbon Capture Technology",
-      allocation: 250000, // Part of 95% allocation
+      allocation: 225000, // Adjusted from 90% allocation
       progress: 35,
       status: "Active",
       impact: "750 tons CO2 captured",
-      burnContribution: 20
+      burnContribution: 18
+    },
+    {
+      id: 7,
+      name: "Community Rewards Program",
+      allocation: 125000, // 10% of total allocation
+      progress: 55,
+      status: "Active",
+      impact: "Direct rewards to GAiA holders",
+      burnContribution: 10,
+      category: "Community"
     }
   ]
 
@@ -114,12 +142,51 @@ const Reinvestments = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-green-400">Harmony of Gaia - Reinvestments Overview</h1>
-          <p className="text-muted-foreground">Complete transparency: 5% coral reef restoration, 95% other green projects</p>
+          <p className="text-muted-foreground">Complete transparency: 5% coral reef restoration, 90% project reinvestment, 10% community rewards</p>
         </div>
         <Badge className="bg-green-600 text-white px-4 py-2">
           Live Data • Updates Every 5s
         </Badge>
       </div>
+
+      {/* Official GAiA Token Info */}
+      <Card className="border-2 border-green-500/50 bg-gradient-to-r from-green-900/20 to-blue-900/20">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-green-400">
+            <Coins className="h-6 w-6" />
+            🌍 Official GAiA Token Information - Connected to Live Addresses
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-blue-400 font-bold">Official GAiA Wallet:</span>
+                <Button onClick={copyOfficialWalletAddress} variant="outline" size="sm" className="border-blue-500/30 text-blue-400">
+                  <Copy className="h-3 w-3 mr-1" />
+                  Copy
+                </Button>
+              </div>
+              <code className="text-blue-300 font-mono text-xs break-all block bg-blue-900/10 p-2 rounded">
+                {GAIA_TOKEN.WALLET_ADDRESS}
+              </code>
+            </div>
+
+            <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-purple-400 font-bold">Official GAiA Contract:</span>
+                <Button onClick={copyOfficialContractAddress} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+                  <Copy className="h-3 w-3 mr-1" />
+                  Copy
+                </Button>
+              </div>
+              <code className="text-purple-300 font-mono text-xs break-all block bg-purple-900/10 p-2 rounded">
+                {GAIA_TOKEN.CONTRACT_ADDRESS}
+              </code>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Featured Coral Reef Project */}
       <Card className="border-2 border-cyan-500/50 bg-gradient-to-br from-cyan-900/30 to-blue-900/30">
@@ -158,37 +225,16 @@ const Reinvestments = () => {
           </div>
           
           <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-4">
-            <h4 className="font-bold text-cyan-400 mb-2">🎵 Personal Wallet Address:</h4>
+            <h4 className="font-bold text-cyan-400 mb-2">🎵 Connected to Official GAiA Wallet:</h4>
             <div className="font-mono text-sm bg-black/30 p-2 rounded break-all text-cyan-300 mb-2">
-              ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7
+              {GAIA_TOKEN.WALLET_ADDRESS}
             </div>
             <p className="text-sm text-cyan-300">
               This is where 5% of ALL GAiA token burns are automatically sent to fund real-world coral reef restoration through Sound Riffs Re Grau dio technology.
             </p>
           </div>
           
-          <div className="bg-muted/30 p-4 rounded-lg">
-            <h4 className="font-bold text-cyan-400 mb-2">🎵 How Sound Riffs Re Grau dio Works:</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-              <div className="space-y-1">
-                <div>🔊 Balanced underwater audio signals</div>
-                <div>🐟 Attracts fish and marine life</div>
-                <div>🪸 Stimulates coral growth</div>
-              </div>
-              <div className="space-y-1">
-                <div>🌊 Restores natural ecosystem balance</div>
-                <div>🔬 Scientifically proven methods</div>
-                <div>📈 Measurable recovery results</div>
-              </div>
-            </div>
-          </div>
-          
           <Progress value={12} className="h-3 bg-cyan-900/30" />
-          <div className="text-center">
-            <p className="text-sm text-cyan-400">
-              🚀 Personal commitment: Every GAiA token burn contributes 5% directly to coral reef restoration!
-            </p>
-          </div>
         </CardContent>
       </Card>
 
@@ -231,24 +277,22 @@ const Reinvestments = () => {
                 <Leaf className="h-6 w-6 text-green-400" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-green-400">95%</div>
-                <div className="text-sm text-muted-foreground">Other Green Projects</div>
+                <div className="text-2xl font-bold text-green-400">90%</div>
+                <div className="text-sm text-muted-foreground">Project Reinvestment</div>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-orange-900/30 to-yellow-900/30 border-orange-500/30">
+        <Card className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 border-blue-500/30">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-orange-500/20 rounded-lg">
-                <TrendingUp className="h-6 w-6 text-orange-400" />
+              <div className="p-3 bg-blue-500/20 rounded-lg">
+                <Users className="h-6 w-6 text-blue-400" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-orange-400">
-                  +{reinvestmentData.weeklyGrowth}%
-                </div>
-                <div className="text-sm text-muted-foreground">Weekly Growth</div>
+                <div className="text-2xl font-bold text-blue-400">10%</div>
+                <div className="text-sm text-muted-foreference">Community Rewards</div>
               </div>
             </div>
           </CardContent>
@@ -310,17 +354,19 @@ const Reinvestments = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Target className="h-5 w-5" />
-            Environmental Reinvestment Projects - Corrected Allocation (5% / 95%)
+            Environmental Reinvestment Projects - Updated Allocation (5% Coral / 90% Project / 10% Community)
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {reinvestmentProjects.map((project) => (
-              <Card key={project.id} className={`${project.id === 1 ? 'bg-cyan-900/20 border-cyan-500/30' : 'bg-muted/20 border-border/30'}`}>
+              <Card key={project.id} className={`${project.id === 1 ? 'bg-cyan-900/20 border-cyan-500/30' : project.category === 'Community' ? 'bg-blue-900/20 border-blue-500/30' : 'bg-muted/20 border-border/30'}`}>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className={`font-semibold ${project.id === 1 ? 'text-cyan-400' : ''}`}>
-                      {project.id === 1 && '🪸 '}{project.name}
+                    <h3 className={`font-semibold ${project.id === 1 ? 'text-cyan-400' : project.category === 'Community' ? 'text-blue-400' : ''}`}>
+                      {project.id === 1 && '🪸 '}
+                      {project.category === 'Community' && '👥 '}
+                      {project.name}
                     </h3>
                     <div className="flex items-center gap-2">
                       <Badge 
@@ -328,13 +374,13 @@ const Reinvestments = () => {
                           project.status === 'Completed' 
                             ? 'bg-green-600' 
                             : project.status === 'Active'
-                            ? project.id === 1 ? 'bg-cyan-600' : 'bg-blue-600'
+                            ? project.id === 1 ? 'bg-cyan-600' : project.category === 'Community' ? 'bg-blue-600' : 'bg-blue-600'
                             : 'bg-yellow-600'
                         }
                       >
                         {project.status}
                       </Badge>
-                      <Badge className={project.id === 1 ? 'bg-cyan-600 text-white' : 'bg-green-600 text-white'}>
+                      <Badge className={project.id === 1 ? 'bg-cyan-600 text-white' : project.category === 'Community' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'}>
                         {project.burnContribution}% Burn Share
                       </Badge>
                     </div>
@@ -342,7 +388,7 @@ const Reinvestments = () => {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
                     <div>
                       <div className="text-sm text-muted-foreground">Allocation</div>
-                      <div className={`font-semibold ${project.id === 1 ? 'text-cyan-400' : 'text-green-400'}`}>
+                      <div className={`font-semibold ${project.id === 1 ? 'text-cyan-400' : project.category === 'Community' ? 'text-blue-400' : 'text-green-400'}`}>
                         {formatMoney(project.allocation)}
                       </div>
                     </div>
@@ -352,7 +398,7 @@ const Reinvestments = () => {
                     </div>
                     <div>
                       <div className="text-sm text-muted-foreground">Impact</div>
-                      <div className={`font-semibold ${project.id === 1 ? 'text-cyan-400' : 'text-primary'}`}>
+                      <div className={`font-semibold ${project.id === 1 ? 'text-cyan-400' : project.category === 'Community' ? 'text-blue-400' : 'text-primary'}`}>
                         {project.impact}
                       </div>
                     </div>
@@ -366,7 +412,7 @@ const Reinvestments = () => {
                         </p>
                       </div>
                       <div className="bg-black/30 p-2 rounded">
-                        <div className="text-xs text-cyan-400 mb-1">Personal Wallet:</div>
+                        <div className="text-xs text-cyan-400 mb-1">Connected to Official Wallet:</div>
                         <div className="font-mono text-xs text-cyan-300 break-all">
                           {project.walletAddress}
                         </div>
@@ -389,7 +435,7 @@ const Reinvestments = () => {
           <div className="text-center space-y-4">
             <h3 className="text-xl font-semibold text-primary">Expand Harmony of Gaia Network</h3>
             <p className="text-muted-foreground">
-              Join the movement to create the world's most trusted and environmentally conscious crypto exchange
+              Join the movement to create the world's most trusted and environmentally conscious crypto exchange with 90% project reinvestment
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-green-600 hover:bg-green-700 flex items-center gap-2">
@@ -415,10 +461,13 @@ const Reinvestments = () => {
           <div className="flex items-center gap-3 text-center justify-center">
             <Shield className="h-6 w-6 text-green-400" />
             <div>
-              <h4 className="font-semibold text-green-400">🌍 Harmony of Gaia Trust Network</h4>
+              <h4 className="font-semibold text-green-400">🌍 Harmony of Gaia Trust Network - Official Addresses Connected</h4>
               <p className="text-sm text-muted-foreground">
-                Every token verified • Every transaction transparent • Every reinvestment tracked • Building the future of sustainable finance
+                Every token verified • Every transaction transparent • Every reinvestment tracked • 90% project reinvestment • Building the future of sustainable finance
               </p>
+              <div className="mt-2 text-xs text-green-400">
+                Official Wallet: {GAIA_TOKEN.WALLET_ADDRESS} | Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}
+              </div>
             </div>
           </div>
         </CardContent>
