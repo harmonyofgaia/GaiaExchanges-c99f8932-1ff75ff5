@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react'
 import { supabase } from '@/integrations/supabase/client'
-import { useAuth } from '@/components/auth/AuthProvider'
 
 interface UserProfile {
   id: string
@@ -17,9 +16,33 @@ interface UserProfile {
 }
 
 export function useUserProfile() {
-  const { user } = useAuth()
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState<any>(null)
+
+  useEffect(() => {
+    // Get current user
+    const getCurrentUser = async () => {
+      try {
+        const { data: { user: currentUser } } = await supabase.auth.getUser()
+        setUser(currentUser)
+      } catch (error) {
+        console.log('Auth check protected:', error)
+        setUser(null)
+      }
+    }
+
+    getCurrentUser()
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setUser(session?.user ?? null)
+      }
+    )
+
+    return () => subscription.unsubscribe()
+  }, [])
 
   useEffect(() => {
     if (!user) {
@@ -36,9 +59,9 @@ export function useUserProfile() {
           .eq('id', user.id)
           .single()
 
-        if (error) {
+        if (error && error.code !== 'PGRST116') {
           console.error('Error fetching profile:', error)
-        } else {
+        } else if (data) {
           setProfile(data)
         }
       } catch (error) {
@@ -73,6 +96,7 @@ export function useUserProfile() {
   return {
     profile,
     loading,
-    updateProfile
+    updateProfile,
+    user
   }
 }
