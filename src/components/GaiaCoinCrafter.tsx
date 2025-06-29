@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -141,7 +142,7 @@ export function GaiaCoinCrafter() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-purple-400">
             <Factory className="h-6 w-6" />
-            🏭 AUTOMATED GAIA COIN CRAFTER
+            🏭 AUTOMATED GAiA COIN CRAFTER
           </CardTitle>
           <p className="text-muted-foreground">
             Automatically fills market supply every month through advanced burning algorithms

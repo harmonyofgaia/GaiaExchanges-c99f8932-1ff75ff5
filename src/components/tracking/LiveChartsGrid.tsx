@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -6,7 +5,7 @@ import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, X
 import { TrendingUp, TrendingDown, Activity, Users, DollarSign, Zap } from 'lucide-react'
 import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
 
-interface GaiaChartData {
+interface GAiAChartData {
   time: string
   price: number
   volume: number
@@ -16,7 +15,7 @@ interface GaiaChartData {
   engagement: number
 }
 
-interface CurrentGaiaMetrics {
+interface CurrentGAiAMetrics {
   price: number
   volume: number
   holders: number
@@ -26,8 +25,8 @@ interface CurrentGaiaMetrics {
 }
 
 export function LiveChartsGrid() {
-  const [chartData, setChartData] = useState<GaiaChartData[]>([])
-  const [currentGaiaMetrics, setCurrentGaiaMetrics] = useState<CurrentGaiaMetrics>({
+  const [chartData, setChartData] = useState<GAiAChartData[]>([])
+  const [currentGAiAMetrics, setCurrentGAiAMetrics] = useState<CurrentGAiAMetrics>({
     price: GAIA_TOKEN.INITIAL_PRICE,
     volume: GAIA_METRICS.INITIAL_VOLUME,
     holders: GAIA_METRICS.INITIAL_HOLDERS,
@@ -38,7 +37,7 @@ export function LiveChartsGrid() {
 
   // Generate live GAiA data every 2 seconds
   useEffect(() => {
-    const generateGaiaData = () => {
+    const generateGAiAData = () => {
       const now = new Date()
       const timeStr = now.toLocaleTimeString('en-US', { 
         hour12: false, 
@@ -47,20 +46,20 @@ export function LiveChartsGrid() {
         second: '2-digit' 
       })
       
-      const newDataPoint: GaiaChartData = {
+      const newDataPoint: GAiAChartData = {
         time: timeStr,
-        price: Math.max(0.00001, currentGaiaMetrics.price * (1 + (Math.random() - 0.4) * 0.02)),
-        volume: currentGaiaMetrics.volume * (1 + (Math.random() - 0.5) * 0.1),
-        holders: currentGaiaMetrics.holders + Math.floor(Math.random() * 50),
-        transactions: currentGaiaMetrics.transactions + Math.floor(Math.random() * 100),
-        marketCap: Math.max(1000000, currentGaiaMetrics.marketCap * (1 + (Math.random() - 0.5) * 0.02)),
+        price: Math.max(0.00001, currentGAiAMetrics.price * (1 + (Math.random() - 0.4) * 0.02)),
+        volume: currentGAiAMetrics.volume * (1 + (Math.random() - 0.5) * 0.1),
+        holders: currentGAiAMetrics.holders + Math.floor(Math.random() * 50),
+        transactions: currentGAiAMetrics.transactions + Math.floor(Math.random() * 100),
+        marketCap: Math.max(1000000, currentGAiAMetrics.marketCap * (1 + (Math.random() - 0.5) * 0.02)),
         engagement: 85 + Math.random() * 15
       }
 
       setChartData(prev => [...prev.slice(-19), newDataPoint])
       
       // Update current GAiA metrics
-      setCurrentGaiaMetrics(prev => ({
+      setCurrentGAiAMetrics(prev => ({
         ...prev,
         price: newDataPoint.price,
         volume: newDataPoint.volume,
@@ -71,10 +70,10 @@ export function LiveChartsGrid() {
       }))
     }
 
-    generateGaiaData() // Initial data
-    const interval = setInterval(generateGaiaData, 2000)
+    generateGAiAData() // Initial data
+    const interval = setInterval(generateGAiAData, 2000)
     return () => clearInterval(interval)
-  }, [currentGaiaMetrics.price, currentGaiaMetrics.volume, currentGaiaMetrics.holders, currentGaiaMetrics.transactions, currentGaiaMetrics.marketCap])
+  }, [currentGAiAMetrics.price, currentGAiAMetrics.volume, currentGAiAMetrics.holders, currentGAiAMetrics.transactions, currentGAiAMetrics.marketCap])
 
   const formatCurrency = (value: number) => {
     return formatGaiaPrice(value)
@@ -96,10 +95,10 @@ export function LiveChartsGrid() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-muted-foreground">GAiA Price</p>
-                <p className="text-lg font-bold text-green-400">{formatCurrency(currentGaiaMetrics.price)}</p>
-                <Badge className={`text-xs ${currentGaiaMetrics.change24h >= 0 ? 'bg-green-600' : 'bg-red-600'} text-white`}>
-                  {currentGaiaMetrics.change24h >= 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
-                  {currentGaiaMetrics.change24h.toFixed(2)}%
+                <p className="text-lg font-bold text-green-400">{formatCurrency(currentGAiAMetrics.price)}</p>
+                <Badge className={`text-xs ${currentGAiAMetrics.change24h >= 0 ? 'bg-green-600' : 'bg-red-600'} text-white`}>
+                  {currentGAiAMetrics.change24h >= 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
+                  {currentGAiAMetrics.change24h.toFixed(2)}%
                 </Badge>
               </div>
               <DollarSign className="h-6 w-6 text-green-400" />
@@ -112,7 +111,7 @@ export function LiveChartsGrid() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-muted-foreground">GAiA Volume 24h</p>
-                <p className="text-lg font-bold text-blue-400">{formatCurrency(currentGaiaMetrics.volume)}</p>
+                <p className="text-lg font-bold text-blue-400">{formatCurrency(currentGAiAMetrics.volume)}</p>
                 <Badge className="text-xs bg-blue-600 text-white">Live</Badge>
               </div>
               <Activity className="h-6 w-6 text-blue-400" />
@@ -125,7 +124,7 @@ export function LiveChartsGrid() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-muted-foreground">GAiA Holders</p>
-                <p className="text-lg font-bold text-purple-400">{currentGaiaMetrics.holders.toLocaleString()}</p>
+                <p className="text-lg font-bold text-purple-400">{currentGAiAMetrics.holders.toLocaleString()}</p>
                 <Badge className="text-xs bg-purple-600 text-white">Growing</Badge>
               </div>
               <Users className="h-6 w-6 text-purple-400" />
@@ -138,7 +137,7 @@ export function LiveChartsGrid() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-muted-foreground">GAiA Transactions</p>
-                <p className="text-lg font-bold text-yellow-400">{currentGaiaMetrics.transactions.toLocaleString()}</p>
+                <p className="text-lg font-bold text-yellow-400">{currentGAiAMetrics.transactions.toLocaleString()}</p>
                 <Badge className="text-xs bg-yellow-600 text-white">Real-time</Badge>
               </div>
               <Zap className="h-6 w-6 text-yellow-400" />
@@ -151,7 +150,7 @@ export function LiveChartsGrid() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-muted-foreground">GAiA Market Cap</p>
-                <p className="text-lg font-bold text-emerald-400">{formatCurrency(currentGaiaMetrics.marketCap)}</p>
+                <p className="text-lg font-bold text-emerald-400">{formatCurrency(currentGAiAMetrics.marketCap)}</p>
                 <Badge className="text-xs bg-emerald-600 text-white">Live</Badge>
               </div>
               <TrendingUp className="h-6 w-6 text-emerald-400" />

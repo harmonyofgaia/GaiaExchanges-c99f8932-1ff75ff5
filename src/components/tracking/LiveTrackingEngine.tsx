@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -5,7 +6,7 @@ import { Progress } from '@/components/ui/progress'
 import { Activity, TrendingUp, Zap, Globe, Shield, Database } from 'lucide-react'
 import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice } from '@/constants/gaia'
 
-interface GaiaTrackingMetrics {
+interface GAiATrackingMetrics {
   realTimeTransactions: number
   gaiaMarketVolume: number
   gaiaHolders: number
@@ -19,7 +20,7 @@ interface GaiaTrackingMetrics {
   userEngagement: number
 }
 
-interface LiveGaiaEvent {
+interface LiveGAiAEvent {
   id: string
   timestamp: Date
   type: 'GAiA_TRANSACTION' | 'GAiA_TRADE' | 'HOLDER_ACTION' | 'GAiA_UPDATE' | 'SECURITY_EVENT'
@@ -30,7 +31,7 @@ interface LiveGaiaEvent {
 }
 
 export function LiveTrackingEngine() {
-  const [metrics, setMetrics] = useState<GaiaTrackingMetrics>({
+  const [metrics, setMetrics] = useState<GAiATrackingMetrics>({
     realTimeTransactions: 0,
     gaiaMarketVolume: GAIA_METRICS.INITIAL_VOLUME,
     gaiaHolders: GAIA_METRICS.INITIAL_HOLDERS,
@@ -44,20 +45,20 @@ export function LiveTrackingEngine() {
     userEngagement: 95.5
   })
 
-  const [liveEvents, setLiveEvents] = useState<LiveGaiaEvent[]>([])
+  const [liveEvents, setLiveEvents] = useState<LiveGAiAEvent[]>([])
   const trackingInterval = useRef<NodeJS.Timeout>()
   const eventCounter = useRef(0)
 
   useEffect(() => {
-    const performLiveGaiaTracking = () => {
+    const performLiveGAiATracking = () => {
       const eventTypes = ['GAiA_TRANSACTION', 'GAiA_TRADE', 'HOLDER_ACTION', 'GAiA_UPDATE', 'SECURITY_EVENT'] as const
       const locations = ['New York', 'London', 'Tokyo', 'Singapore', 'Frankfurt', 'Sydney', 'Dubai']
       
-      const newEvent: LiveGaiaEvent = {
+      const newEvent: LiveGAiAEvent = {
         id: `gaia-track-${Date.now()}-${eventCounter.current++}`,
         timestamp: new Date(),
         type: eventTypes[Math.floor(Math.random() * eventTypes.length)],
-        description: generateGaiaEventDescription(),
+        description: generateGAiAEventDescription(),
         value: Math.random() * 100000,
         location: locations[Math.floor(Math.random() * locations.length)],
         performanceBoost: 10 + Math.random() * 5
@@ -82,7 +83,7 @@ export function LiveTrackingEngine() {
       console.log('🌍 GAiA ECOSYSTEM - Live tracking update:', newEvent)
     }
 
-    const generateGaiaEventDescription = () => {
+    const generateGAiAEventDescription = () => {
       const descriptions = [
         'GAiA Token transaction processed with 10x speed optimization',
         'GAiA market volume increased - outperforming all competitors',
@@ -96,8 +97,8 @@ export function LiveTrackingEngine() {
       return descriptions[Math.floor(Math.random() * descriptions.length)]
     }
 
-    trackingInterval.current = setInterval(performLiveGaiaTracking, 100)
-    performLiveGaiaTracking()
+    trackingInterval.current = setInterval(performLiveGAiATracking, 100)
+    performLiveGAiATracking()
 
     return () => {
       if (trackingInterval.current) clearInterval(trackingInterval.current)
