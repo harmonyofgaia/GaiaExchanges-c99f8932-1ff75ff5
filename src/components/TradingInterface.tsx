@@ -6,6 +6,8 @@ import { Badge } from '@/components/ui/badge'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { TrendingUp, TrendingDown, DollarSign, Activity, Zap } from 'lucide-react'
 import { GAIA_TOKEN } from '@/constants/gaia'
+import { useGaiaTokenData } from '@/hooks/useGaiaTokenData'
+import { TokenDataDisplay } from '@/components/TokenDataDisplay'
 
 interface TradingData {
   time: string
@@ -16,9 +18,12 @@ interface TradingData {
 
 export function TradingInterface() {
   const [tradingData, setTradingData] = useState<TradingData[]>([])
-  const [currentPrice, setCurrentPrice] = useState<number>(GAIA_TOKEN.INITIAL_PRICE)
-  const [priceChange, setPriceChange] = useState<number>(8.47)
-  const [volume24h, setVolume24h] = useState<number>(8750000)
+  const { tokenData, hasRealData } = useGaiaTokenData()
+
+  // Use real price if available, otherwise use fallback
+  const currentPrice = hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE
+  const currentVolume = hasRealData && tokenData ? tokenData.volume24h : 8750000
+  const priceChange = hasRealData && tokenData ? tokenData.priceChange24h : 8.47
 
   useEffect(() => {
     const generateTradingData = () => {
@@ -29,8 +34,10 @@ export function TradingInterface() {
         minute: '2-digit' 
       })
       
-      const newPrice = currentPrice * (1 + (Math.random() - 0.5) * 0.02)
-      const newVolume = volume24h * (1 + (Math.random() - 0.5) * 0.1)
+      // Generate realistic price movements around current price
+      const priceVariation = hasRealData ? 0.02 : 0.01 // Smaller variation for real data
+      const newPrice = currentPrice * (1 + (Math.random() - 0.5) * priceVariation)
+      const newVolume = currentVolume * (1 + (Math.random() - 0.5) * 0.1)
       const change = ((newPrice - currentPrice) / currentPrice) * 100
       
       const newDataPoint: TradingData = {
@@ -41,15 +48,12 @@ export function TradingInterface() {
       }
 
       setTradingData(prev => [...prev.slice(-19), newDataPoint])
-      setCurrentPrice(newPrice)
-      setPriceChange(prev => prev + (Math.random() - 0.5) * 0.5)
-      setVolume24h(newVolume)
     }
 
     generateTradingData()
     const interval = setInterval(generateTradingData, 3000)
     return () => clearInterval(interval)
-  }, [currentPrice, volume24h])
+  }, [currentPrice, currentVolume, hasRealData])
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -74,6 +78,9 @@ export function TradingInterface() {
         </CardHeader>
       </Card>
 
+      {/* Live Token Data */}
+      <TokenDataDisplay showFullDetails={false} />
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
           <CardContent className="pt-6">
@@ -85,6 +92,11 @@ export function TradingInterface() {
                   {priceChange >= 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
                   {priceChange.toFixed(2)}%
                 </Badge>
+                {!hasRealData && (
+                  <Badge className="mt-1 bg-yellow-600 text-white text-xs">
+                    Estimated
+                  </Badge>
+                )}
               </div>
               <DollarSign className="h-12 w-12 text-green-400" />
             </div>
@@ -96,10 +108,10 @@ export function TradingInterface() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">24h Volume</p>
-                <p className="text-3xl font-bold text-blue-400">{formatCurrency(volume24h)}</p>
+                <p className="text-3xl font-bold text-blue-400">{formatCurrency(currentVolume)}</p>
                 <Badge className="mt-2 bg-blue-600 text-white">
                   <Activity className="h-3 w-3 mr-1" />
-                  Live Trading
+                  {hasRealData ? 'Live Trading' : 'Demo Mode'}
                 </Badge>
               </div>
               <Activity className="h-12 w-12 text-blue-400" />
@@ -124,11 +136,12 @@ export function TradingInterface() {
         </Card>
       </div>
 
+      {/* Trading Chart */}
       <Card className="border-green-500/30">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <TrendingUp className="h-5 w-5" />
-            Live {GAIA_TOKEN.SYMBOL} Trading Chart - Harmony of Culture
+            {hasRealData ? 'Live' : 'Demo'} {GAIA_TOKEN.SYMBOL} Trading Chart - Harmony of Culture
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -158,6 +171,7 @@ export function TradingInterface() {
         </CardContent>
       </Card>
 
+      {/* Trading Actions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="border-yellow-500/30">
           <CardHeader>
@@ -166,13 +180,13 @@ export function TradingInterface() {
           <CardContent>
             <div className="space-y-3">
               <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
-                Buy {GAIA_TOKEN.SYMBOL} Token
+                Buy {GAIA_TOKEN.SYMBOL} Token {!hasRealData && '(Demo)'}
               </Button>
               <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
-                Sell {GAIA_TOKEN.SYMBOL} Token
+                Sell {GAIA_TOKEN.SYMBOL} Token {!hasRealData && '(Demo)'}
               </Button>
               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                Swap {GAIA_TOKEN.SYMBOL} Tokens
+                Swap {GAIA_TOKEN.SYMBOL} Tokens {!hasRealData && '(Demo)'}
               </Button>
             </div>
           </CardContent>
@@ -186,7 +200,9 @@ export function TradingInterface() {
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Market Cap:</span>
-                <span className="text-green-400 font-bold">{formatCurrency(currentPrice * 85750000)}</span>
+                <span className="text-green-400 font-bold">
+                  {hasRealData && tokenData ? formatCurrency(tokenData.marketCap) : formatCurrency(currentPrice * 85750000)}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Total Supply:</span>
@@ -200,6 +216,13 @@ export function TradingInterface() {
                 <span className="text-muted-foreground">Contract:</span>
                 <span className="text-orange-400 font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...</span>
               </div>
+              {!hasRealData && (
+                <div className="pt-2 border-t border-yellow-500/20">
+                  <Badge className="bg-yellow-600 text-white text-xs">
+                    Data may not reflect current market conditions
+                  </Badge>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>

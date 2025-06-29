@@ -6,38 +6,31 @@ import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { ArrowUpDown, TrendingUp, DollarSign, Activity, Zap, Copy } from 'lucide-react'
 import { toast } from 'sonner'
-import { GAIA_TOKEN, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
+import { GAIA_TOKEN } from '@/constants/gaia'
+import { useGaiaTokenData } from '@/hooks/useGaiaTokenData'
+import { TokenDataDisplay } from '@/components/TokenDataDisplay'
 
 export function FullyFunctionalExchange() {
   const [fromAmount, setFromAmount] = useState<string>('')
   const [toAmount, setToAmount] = useState<string>('')
   const [fromCurrency, setFromCurrency] = useState<string>(GAIA_TOKEN.SYMBOL)
   const [toCurrency, setToCurrency] = useState<string>('USDC')
-  const [gaiaPrice, setGaiaPrice] = useState<number>(GAIA_TOKEN.INITIAL_PRICE)
-  const [priceChange, setPriceChange] = useState<number>(8.47)
   const [isSwapping, setIsSwapping] = useState<boolean>(false)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setGaiaPrice(prevPrice => {
-        const change = (Math.random() - 0.5) * 0.000005
-        return Math.max(0.00001, prevPrice + change)
-      })
-      setPriceChange(prev => prev + (Math.random() - 0.5) * 0.5)
-    }, 3000)
+  const { tokenData, hasRealData } = useGaiaTokenData()
 
-    return () => clearInterval(interval)
-  }, [])
+  // Calculate exchange rate based on real or fallback data
+  const exchangeRate = hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE
 
   useEffect(() => {
     if (fromAmount && !isNaN(Number(fromAmount))) {
       if (fromCurrency === GAIA_TOKEN.SYMBOL && toCurrency === 'USDC') {
-        setToAmount((Number(fromAmount) * gaiaPrice).toFixed(6))
+        setToAmount((Number(fromAmount) * exchangeRate).toFixed(6))
       } else if (fromCurrency === 'USDC' && toCurrency === GAIA_TOKEN.SYMBOL) {
-        setToAmount((Number(fromAmount) / gaiaPrice).toFixed(2))
+        setToAmount((Number(fromAmount) / exchangeRate).toFixed(2))
       }
     }
-  }, [fromAmount, fromCurrency, toCurrency, gaiaPrice])
+  }, [fromAmount, fromCurrency, toCurrency, exchangeRate])
 
   const handleSwap = () => {
     if (!fromAmount || Number(fromAmount) <= 0) {
@@ -48,8 +41,12 @@ export function FullyFunctionalExchange() {
     setIsSwapping(true)
     
     setTimeout(() => {
-      toast.success(`Swapped ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency}`, {
-        description: `Transaction completed via official GAIA contract: ${GAIA_TOKEN.CONTRACT_ADDRESS}`
+      const message = hasRealData 
+        ? `Swapped ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency}`
+        : `Mock swap: ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency} (using estimated rates)`
+      
+      toast.success(message, {
+        description: `Transaction via GAIA contract: ${GAIA_TOKEN.CONTRACT_ADDRESS}`
       })
       setFromAmount('')
       setToAmount('')
@@ -98,47 +95,18 @@ export function FullyFunctionalExchange() {
         </CardHeader>
       </Card>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="border-green-500/20 bg-green-900/20">
-          <CardContent className="pt-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">GAIA Price</p>
-                <p className="text-xl font-bold text-green-400">{formatGaiaPrice(gaiaPrice)}</p>
-              </div>
-              <DollarSign className="h-6 w-6 text-green-400" />
-            </div>
-          </CardContent>
-        </Card>
+      {/* Live Token Data Display */}
+      <TokenDataDisplay showFullDetails={true} />
 
-        <Card className="border-blue-500/20 bg-blue-900/20">
-          <CardContent className="pt-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">24h Change</p>
-                <p className="text-xl font-bold text-blue-400">+{priceChange.toFixed(2)}%</p>
-              </div>
-              <TrendingUp className="h-6 w-6 text-blue-400" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-purple-500/20 bg-purple-900/20">
-          <CardContent className="pt-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Volume</p>
-                <p className="text-xl font-bold text-purple-400">{formatGaiaNumber(8750000)}</p>
-              </div>
-              <Activity className="h-6 w-6 text-purple-400" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
+      {/* Trading Interface */}
       <Card className="border-border/50">
         <CardHeader>
           <CardTitle>Swap Tokens</CardTitle>
+          {!hasRealData && (
+            <p className="text-sm text-yellow-400">
+              ⚠️ Using estimated rates - real data not available
+            </p>
+          )}
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
@@ -209,13 +177,13 @@ export function FullyFunctionalExchange() {
             ) : (
               <>
                 <ArrowUpDown className="h-4 w-4 mr-2" />
-                Swap Tokens
+                {hasRealData ? 'Swap Tokens' : 'Mock Swap (Demo)'}
               </>
             )}
           </Button>
 
           <div className="text-xs text-muted-foreground space-y-1">
-            <div>Rate: 1 {GAIA_TOKEN.SYMBOL} = {formatGaiaPrice(gaiaPrice)} USDC</div>
+            <div>Rate: 1 {GAIA_TOKEN.SYMBOL} = ${exchangeRate.toFixed(6)} USDC {!hasRealData && '(estimated)'}</div>
             <div>Network Fee: 0.1%</div>
             <div>Slippage Tolerance: 0.5%</div>
           </div>
