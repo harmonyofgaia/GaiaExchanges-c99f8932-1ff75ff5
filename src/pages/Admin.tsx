@@ -12,6 +12,7 @@ import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
 import { EnhancedWormsArena } from '@/components/EnhancedWormsArena'
 import { GameDevelopmentCloud } from '@/components/admin/GameDevelopmentCloud'
 import { CreativeNFTGenerator } from '@/components/admin/CreativeNFTGenerator'
+import { PrehistoricGuardian } from '@/components/security/PrehistoricGuardian'
 
 import { UserManagementSystemRefactored } from '@/components/admin/UserManagementSystemRefactored'
 import { SecureConnectionManager } from '@/components/admin/SecureConnectionManager'
@@ -43,6 +44,9 @@ const Admin = () => {
               <TabsTrigger value="overview" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
                 🌍 Overview
               </TabsTrigger>
+              <TabsTrigger value="guardian" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                🦕 Guardian
+              </TabsTrigger>
               <TabsTrigger value="creative-nft" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
                 🎨 Creative NFTs
               </TabsTrigger>
@@ -70,9 +74,6 @@ const Admin = () => {
               <TabsTrigger value="game-cloud" className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400">
                 🎮 Game Cloud
               </TabsTrigger>
-              <TabsTrigger value="neural-art" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
-                🧠 Neural Art
-              </TabsTrigger>
               <TabsTrigger value="system" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
                 🛡️ System
               </TabsTrigger>
@@ -80,6 +81,10 @@ const Admin = () => {
             
             <TabsContent value="overview" className="space-y-6 mt-6">
               <AdminOverview />
+            </TabsContent>
+            
+            <TabsContent value="guardian" className="space-y-6 mt-6">
+              <PrehistoricGuardian />
             </TabsContent>
             
             <TabsContent value="creative-nft" className="space-y-6 mt-6">
@@ -116,10 +121,6 @@ const Admin = () => {
             
             <TabsContent value="game-cloud" className="space-y-6 mt-6">
               <GameDevelopmentCloud />
-            </TabsContent>
-            
-            <TabsContent value="neural-art" className="space-y-6 mt-6">
-              <MasterArtworkGenerator />
             </TabsContent>
             
             <TabsContent value="system" className="space-y-6 mt-6">
