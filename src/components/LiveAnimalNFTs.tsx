@@ -16,10 +16,15 @@ import {
   Star,
   Crown,
   Zap,
-  Globe
+  Globe,
+  MapPin,
+  Camera,
+  Home,
+  Sparkles
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { GAIA_TOKEN } from '@/constants/gaia'
+import { gaiaTokenService } from '@/services/gaiaTokenService'
 
 interface AnimalNFT {
   id: string
@@ -33,7 +38,12 @@ interface AnimalNFT {
   healthStatus: number
   location: string
   liveFeed: boolean
+  currentHabitat: string
+  needsRelocation: boolean
+  targetAmount: number
+  raisedAmount: number
   ownedBy?: string
+  virtualExploration: boolean
 }
 
 export function LiveAnimalNFTs() {
@@ -49,7 +59,12 @@ export function LiveAnimalNFTs() {
       tokensForConservation: 200,
       healthStatus: 95,
       location: 'Pacific Ocean Sanctuary',
-      liveFeed: true
+      liveFeed: true,
+      currentHabitat: 'Deep Ocean Trench',
+      needsRelocation: false,
+      targetAmount: 1000,
+      raisedAmount: 850,
+      virtualExploration: true
     },
     {
       id: '2',
@@ -62,7 +77,12 @@ export function LiveAnimalNFTs() {
       tokensForConservation: 50,
       healthStatus: 88,
       location: 'Mexican Mountain Reserve',
-      liveFeed: true
+      liveFeed: true,
+      currentHabitat: 'Polluted Valley',
+      needsRelocation: true,
+      targetAmount: 400,
+      raisedAmount: 180,
+      virtualExploration: true
     },
     {
       id: '3',
@@ -75,7 +95,12 @@ export function LiveAnimalNFTs() {
       tokensForConservation: 85,
       healthStatus: 92,
       location: 'Rocky Mountain Heights',
-      liveFeed: true
+      liveFeed: true,
+      currentHabitat: 'Mountain Peak',
+      needsRelocation: false,
+      targetAmount: 600,
+      raisedAmount: 450,
+      virtualExploration: true
     },
     {
       id: '4',
@@ -88,7 +113,12 @@ export function LiveAnimalNFTs() {
       tokensForConservation: 150,
       healthStatus: 90,
       location: 'Siberian Wildlife Reserve',
-      liveFeed: true
+      liveFeed: true,
+      currentHabitat: 'Deforested Area',
+      needsRelocation: true,
+      targetAmount: 1200,
+      raisedAmount: 350,
+      virtualExploration: true
     },
     {
       id: '5',
@@ -101,7 +131,12 @@ export function LiveAnimalNFTs() {
       tokensForConservation: 120,
       healthStatus: 87,
       location: 'Chinese Bamboo Mountains',
-      liveFeed: true
+      liveFeed: true,
+      currentHabitat: 'Bamboo Grove',
+      needsRelocation: false,
+      targetAmount: 800,
+      raisedAmount: 650,
+      virtualExploration: true
     },
     {
       id: '6',
@@ -114,13 +149,19 @@ export function LiveAnimalNFTs() {
       tokensForConservation: 75,
       healthStatus: 94,
       location: 'Arabian Desert Reserve',
-      liveFeed: true
+      liveFeed: true,
+      currentHabitat: 'Desert Oasis',
+      needsRelocation: false,
+      targetAmount: 500,
+      raisedAmount: 400,
+      virtualExploration: true
     }
   ])
 
   const [myNFTs, setMyNFTs] = useState<AnimalNFT[]>([])
   const [totalConservationImpact, setTotalConservationImpact] = useState(0)
   const [liveFeeds, setLiveFeeds] = useState<{[key: string]: string}>({})
+  const [exploreMode, setExploreMode] = useState<string | null>(null)
 
   useEffect(() => {
     // Simulate live feed updates
@@ -132,7 +173,10 @@ export function LiveAnimalNFTs() {
         'Exploring new territory',
         'Healthy and active',
         'Interacting with researchers',
-        'Enjoying environmental enrichment'
+        'Enjoying environmental enrichment',
+        'Searching for better habitat',
+        'Receiving medical care',
+        'Teaching young ones'
       ]
       
       const newFeeds: {[key: string]: string} = {}
@@ -157,14 +201,47 @@ export function LiveAnimalNFTs() {
     }
   }
 
-  const purchaseAnimalNFT = (nft: AnimalNFT) => {
-    setMyNFTs(prev => [...prev, nft])
-    setTotalConservationImpact(prev => prev + nft.tokensForConservation)
-    
-    toast.success(`🦋 ${nft.name} Adopted!`, {
-      description: `${nft.conservationImpact} | ${nft.tokensForConservation} GAiA tokens burned for conservation!`,
-      duration: 5000
+  const purchaseAnimalNFT = async (nft: AnimalNFT) => {
+    try {
+      // Burn tokens for conservation
+      const burnSuccess = await gaiaTokenService.burnTokens(nft.tokensForConservation, `Conservation for ${nft.name}`)
+      
+      if (burnSuccess) {
+        setMyNFTs(prev => [...prev, nft])
+        setTotalConservationImpact(prev => prev + nft.tokensForConservation)
+        
+        toast.success(`🦋 ${nft.name} Adopted!`, {
+          description: `${nft.conservationImpact} | ${nft.tokensForConservation} GAiA tokens burned for conservation!`,
+          duration: 5000
+        })
+      }
+    } catch (error) {
+      toast.error('Adoption failed - please try again')
+    }
+  }
+
+  const exploreHabitat = (nft: AnimalNFT) => {
+    setExploreMode(nft.id)
+    toast.success(`🌍 Virtual Habitat Exploration Started!`, {
+      description: `Exploring ${nft.currentHabitat} with ${nft.name}`,
+      duration: 3000
     })
+  }
+
+  const fundRelocation = async (nft: AnimalNFT) => {
+    const donationAmount = 50
+    try {
+      const burnSuccess = await gaiaTokenService.burnTokens(donationAmount, `Relocation fund for ${nft.name}`)
+      
+      if (burnSuccess) {
+        toast.success(`💚 Relocation Fund Donation!`, {
+          description: `${donationAmount} GAiA tokens burned to help ${nft.name} find a better home!`,
+          duration: 4000
+        })
+      }
+    } catch (error) {
+      toast.error('Donation failed - please try again')
+    }
   }
 
   return (
@@ -209,7 +286,9 @@ export function LiveAnimalNFTs() {
             {availableNFTs.map((nft) => (
               <Card 
                 key={nft.id}
-                className={`bg-gradient-to-br ${getRarityColor(nft.rarity)}/20 border-2 hover:scale-105 transition-all duration-300`}
+                className={`bg-gradient-to-br ${getRarityColor(nft.rarity)}/20 border-2 hover:scale-105 transition-all duration-300 ${
+                  exploreMode === nft.id ? 'ring-4 ring-cyan-400 animate-pulse' : ''
+                }`}
               >
                 <CardContent className="p-4 space-y-4">
                   {/* Animal Display */}
@@ -228,13 +307,28 @@ export function LiveAnimalNFTs() {
                         </div>
                       </div>
                     )}
+                    {nft.needsRelocation && (
+                      <div className="absolute bottom-2 left-2">
+                        <Badge className="bg-orange-600 text-white text-xs">
+                          <Home className="h-2 w-2 mr-1" />
+                          Needs New Home
+                        </Badge>
+                      </div>
+                    )}
                   </div>
 
                   {/* Animal Info */}
                   <div>
                     <h3 className="font-bold text-lg text-white mb-1">{nft.name}</h3>
                     <p className="text-sm text-muted-foreground">{nft.species}</p>
-                    <p className="text-xs text-blue-400">{nft.location}</p>
+                    <div className="flex items-center gap-1 text-xs text-blue-400">
+                      <MapPin className="h-3 w-3" />
+                      {nft.location}
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-green-400">
+                      <TreePine className="h-3 w-3" />
+                      Current: {nft.currentHabitat}
+                    </div>
                   </div>
 
                   {/* Health Status */}
@@ -245,6 +339,27 @@ export function LiveAnimalNFTs() {
                     </div>
                     <Progress value={nft.healthStatus} className="h-2" />
                   </div>
+
+                  {/* Relocation Progress */}
+                  {nft.needsRelocation && (
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span>Relocation Fund:</span>
+                        <span className="text-yellow-400 font-bold">
+                          {nft.raisedAmount}/{nft.targetAmount} GAiA
+                        </span>
+                      </div>
+                      <Progress value={(nft.raisedAmount / nft.targetAmount) * 100} className="h-2" />
+                      <Button
+                        onClick={() => fundRelocation(nft)}
+                        size="sm"
+                        className="w-full bg-orange-600 hover:bg-orange-700"
+                      >
+                        <Heart className="h-3 w-3 mr-1" />
+                        Fund Relocation (50 GAiA)
+                      </Button>
+                    </div>
+                  )}
 
                   {/* Live Feed */}
                   {liveFeeds[nft.id] && (
@@ -265,6 +380,28 @@ export function LiveAnimalNFTs() {
                         <span className="text-orange-400 font-bold">{nft.tokensForConservation}</span>
                       </div>
                     </div>
+                  </div>
+
+                  {/* Virtual Exploration */}
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={() => exploreHabitat(nft)}
+                      size="sm"
+                      variant="outline"
+                      className="flex-1"
+                    >
+                      <Camera className="h-3 w-3 mr-1" />
+                      Explore Habitat
+                    </Button>
+                    <Button
+                      onClick={() => setExploreMode(null)}
+                      size="sm"
+                      variant="outline"
+                      className="flex-1"
+                    >
+                      <Globe className="h-3 w-3 mr-1" />
+                      View World
+                    </Button>
                   </div>
 
                   {/* Price and Purchase */}
@@ -303,6 +440,16 @@ export function LiveAnimalNFTs() {
                     <h4 className="font-bold text-green-400">{nft.name}</h4>
                     <p className="text-sm text-muted-foreground">{nft.species}</p>
                     <Badge className="mt-2 bg-green-600">Helping Conservation</Badge>
+                    <div className="mt-2 flex gap-2">
+                      <Button size="sm" variant="outline" className="flex-1">
+                        <Camera className="h-3 w-3 mr-1" />
+                        Visit
+                      </Button>
+                      <Button size="sm" variant="outline" className="flex-1">
+                        <Sparkles className="h-3 w-3 mr-1" />
+                        Care
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
