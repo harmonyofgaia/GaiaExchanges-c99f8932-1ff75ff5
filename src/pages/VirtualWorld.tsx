@@ -26,7 +26,7 @@ import {
   Bird,
   Rabbit,
   Turtle,
-  Butterfly
+  Flower2
 } from 'lucide-react'
 import { GAIA_TOKEN } from '@/constants/gaia'
 
@@ -44,7 +44,7 @@ const VirtualWorld = () => {
       <div className="fixed inset-0 pointer-events-none">
         {/* Floating Animals */}
         {Array.from({ length: 20 }).map((_, i) => {
-          const animals = [Bird, Fish, Butterfly, Rabbit, Turtle]
+          const animals = [Bird, Fish, Flower2, Rabbit, Turtle]
           const Animal = animals[i % animals.length]
           return (
             <div
@@ -149,9 +149,9 @@ const VirtualWorld = () => {
                 <div className="text-xs text-muted-foreground">Ocean Animals Saved</div>
               </div>
               <div className="p-4 bg-yellow-900/30 rounded border border-yellow-500/20">
-                <Butterfly className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
+                <Flower2 className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
                 <div className="text-lg font-bold text-yellow-400">25,680</div>
-                <div className="text-xs text-muted-foreground">Insects Protected</div>
+                <div className="text-xs text-muted-foreground">Flowers Protected</div>
               </div>
               <div className="p-4 bg-purple-900/30 rounded border border-purple-500/20">
                 <Coins className="h-8 w-8 text-purple-400 mx-auto mb-2" />
@@ -225,8 +225,8 @@ const VirtualWorld = () => {
                     className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700"
                     onClick={() => setTokensBurned(prev => prev + 3)}
                   >
-                    <Butterfly className="h-4 w-4 mr-2" />
-                    Protect Butterfly Garden (Burns 3 GAiA)
+                    <Flower2 className="h-4 w-4 mr-2" />
+                    Protect Flower Garden (Burns 3 GAiA)
                   </Button>
                   <Button 
                     className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
