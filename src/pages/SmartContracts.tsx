@@ -12,7 +12,7 @@ const SmartContracts = () => {
         <div className="relative container mx-auto px-4 py-12">
           <div className="text-center space-y-6">
             <div className="flex items-center justify-center gap-4">
-              <GaiaLogo size="lg" variant="full-color" />
+              <GaiaLogo size="lg" variant="colorful" />
             </div>
             <div>
               <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
