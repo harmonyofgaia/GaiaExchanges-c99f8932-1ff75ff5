@@ -76,16 +76,27 @@ export const HeroSection = () => {
 
           {/* GAiA with NEW CUSTOM LETTER STYLE and Logo Integration */}
           <div className="relative flex items-center justify-center gap-8">
-            {/* Left Logo (Original) */}
+            {/* Left Logo with Fade Effect */}
             <div className="relative">
-              <img 
-                src="/lovable-uploads/32992cdc-cfdf-4b28-805d-7e30bac68456.png"
-                alt="Gaia of Harmony Logo Left"
-                className="w-24 h-24 object-contain animate-pulse drop-shadow-2xl"
-                style={{
-                  filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))'
-                }}
-              />
+              <div className="relative w-24 h-24">
+                <img 
+                  src="/lovable-uploads/32992cdc-cfdf-4b28-805d-7e30bac68456.png"
+                  alt="Gaia of Harmony Logo Left"
+                  className="w-24 h-24 object-contain animate-pulse"
+                  style={{
+                    filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))',
+                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)'
+                  }}
+                />
+                {/* Additional fade overlay for smoother transition */}
+                <div 
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: 'radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0.8) 100%)'
+                  }}
+                />
+              </div>
             </div>
 
             {/* NEW CUSTOM GAiA STYLING */}
@@ -131,16 +142,27 @@ export const HeroSection = () => {
               </div>
             </div>
 
-            {/* Right Logo (Mirrored) */}
+            {/* Right Logo with Fade Effect (Mirrored) */}
             <div className="relative">
-              <img 
-                src="/lovable-uploads/32992cdc-cfdf-4b28-805d-7e30bac68456.png"
-                alt="Gaia of Harmony Logo Right"
-                className="w-24 h-24 object-contain animate-pulse drop-shadow-2xl transform scale-x-[-1]"
-                style={{
-                  filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))'
-                }}
-              />
+              <div className="relative w-24 h-24">
+                <img 
+                  src="/lovable-uploads/32992cdc-cfdf-4b28-805d-7e30bac68456.png"
+                  alt="Gaia of Harmony Logo Right"
+                  className="w-24 h-24 object-contain animate-pulse transform scale-x-[-1]"
+                  style={{
+                    filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 40px rgba(34, 197, 94, 0.4))',
+                    maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 100%)'
+                  }}
+                />
+                {/* Additional fade overlay for smoother transition */}
+                <div 
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: 'radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0.8) 100%)'
+                  }}
+                />
+              </div>
             </div>
           </div>
         </h1>
