@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 import { useAuth } from '@/components/auth/AuthProvider'
+import { GAIA_TOKEN } from '@/constants/gaia'
 
 interface Wallet {
   id: string
@@ -35,10 +36,10 @@ export function useWallets() {
         if (error) {
           console.error('Error fetching wallets:', error)
         } else {
-          // Set default GAiA wallet address for all GAiA wallets
+          // Set official GAiA wallet address for all GAiA wallets
           const processedData = data?.map(wallet => ({
             ...wallet,
-            wallet_address: wallet.currency === 'GAiA' ? '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh' : wallet.wallet_address
+            wallet_address: wallet.currency === 'GAiA' ? GAIA_TOKEN.WALLET_ADDRESS : wallet.wallet_address
           })) || []
           setWallets(processedData)
         }

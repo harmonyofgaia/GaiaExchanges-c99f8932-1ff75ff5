@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -12,8 +11,12 @@ import {
   Calendar,
   Zap,
   Target,
-  Recycle
+  Recycle,
+  Copy,
+  ExternalLink
 } from 'lucide-react'
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
+import { toast } from 'sonner'
 
 export function GaiaCoinCrafter() {
   const [monthlyProgress, setMonthlyProgress] = useState(67)
@@ -32,8 +35,98 @@ export function GaiaCoinCrafter() {
     return () => clearInterval(interval)
   }, [])
 
+  const copyWalletAddress = () => {
+    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
+    toast.success('GAiA Wallet Address Copied!', {
+      description: 'Official GAiA wallet address copied to clipboard',
+      duration: 3000
+    })
+  }
+
+  const copyContractAddress = () => {
+    navigator.clipboard.writeText(GAIA_TOKEN.CONTRACT_ADDRESS)
+    toast.success('GAiA Contract Address Copied!', {
+      description: 'Official GAiA contract address copied to clipboard',
+      duration: 3000
+    })
+  }
+
+  const openPumpFun = () => {
+    window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
+    toast.info('🚀 Opening GAiA on Pump.fun', {
+      description: 'Redirecting to official GAiA token page...',
+      duration: 3000
+    })
+  }
+
   return (
     <div className="space-y-6">
+      {/* Official GAiA Token Info */}
+      <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-500/30">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-green-400">
+            <Coins className="h-6 w-6" />
+            🌍 Official GAiA Token - Coin Crafter
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Wallet Address */}
+            <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-blue-400 font-bold">GAiA Wallet:</span>
+                <div className="flex gap-2">
+                  <Button onClick={copyWalletAddress} variant="outline" size="sm" className="border-blue-500/30 text-blue-400">
+                    <Copy className="h-3 w-3 mr-1" />
+                    Copy
+                  </Button>
+                  <Button onClick={openPumpFun} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+                    <ExternalLink className="h-3 w-3 mr-1" />
+                    Pump.fun
+                  </Button>
+                </div>
+              </div>
+              <code className="text-blue-300 font-mono text-xs break-all block bg-blue-900/10 p-2 rounded">
+                {GAIA_TOKEN.WALLET_ADDRESS}
+              </code>
+            </div>
+
+            {/* Contract Address */}
+            <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-purple-400 font-bold">GAiA Contract:</span>
+                <Button onClick={copyContractAddress} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+                  <Copy className="h-3 w-3 mr-1" />
+                  Copy
+                </Button>
+              </div>
+              <code className="text-purple-300 font-mono text-xs break-all block bg-purple-900/10 p-2 rounded">
+                {GAIA_TOKEN.CONTRACT_ADDRESS}
+              </code>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <div className="text-center p-3 bg-green-900/20 rounded border border-green-500/20">
+              <div className="text-lg font-bold text-green-400">{formatGaiaPrice(GAIA_TOKEN.INITIAL_PRICE)}</div>
+              <div className="text-muted-foreground">GAiA Price</div>
+            </div>
+            <div className="text-center p-3 bg-blue-900/20 rounded border border-blue-500/20">
+              <div className="text-lg font-bold text-blue-400">{formatGaiaNumber(GAIA_METRICS.INITIAL_HOLDERS)}</div>
+              <div className="text-muted-foreground">Holders</div>
+            </div>
+            <div className="text-center p-3 bg-purple-900/20 rounded border border-purple-500/20">
+              <div className="text-lg font-bold text-purple-400">{formatGaiaPrice(GAIA_METRICS.INITIAL_MARKET_CAP)}</div>
+              <div className="text-muted-foreground">Market Cap</div>
+            </div>
+            <div className="text-center p-3 bg-yellow-900/20 rounded border border-yellow-500/20">
+              <div className="text-lg font-bold text-yellow-400">{formatGaiaPrice(GAIA_METRICS.INITIAL_VOLUME)}</div>
+              <div className="text-muted-foreground">Volume 24h</div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Main Crafting System */}
       <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/30 relative overflow-hidden">
         {/* Background decoration */}

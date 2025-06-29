@@ -17,9 +17,12 @@ import {
   Lock,
   Unlock,
   Eye,
-  TrendingUp 
+  TrendingUp,
+  Copy,
+  ExternalLink
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
 
 interface Web3Props {
   isConnected: boolean
@@ -55,17 +58,38 @@ const Web3Integration: React.FC<Web3Props> = ({
   const { toast } = useToast()
   const [isBurning, setIsBurning] = useState(false)
   const [isReinvesting, setIsReinvesting] = useState(false)
-  const connectedWalletAddress = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
 
   useEffect(() => {
     if (isConnected && account) {
       toast({
         title: 'GAiA Wallet Connected!',
-        description: `Connected to Harmony of Gaia: ${connectedWalletAddress}`,
+        description: `Connected to Official GAiA: ${GAIA_TOKEN.WALLET_ADDRESS}`,
         className: 'bg-green-500 text-white'
       })
     }
   }, [isConnected, account, toast])
+
+  const copyWalletAddress = () => {
+    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
+    toast({
+      title: 'GAiA Wallet Address Copied!',
+      description: 'Official GAiA wallet address copied to clipboard',
+      className: 'bg-blue-500 text-white'
+    })
+  }
+
+  const copyContractAddress = () => {
+    navigator.clipboard.writeText(GAIA_TOKEN.CONTRACT_ADDRESS)
+    toast({
+      title: 'GAiA Contract Address Copied!',
+      description: 'Official GAiA contract address copied to clipboard',
+      className: 'bg-purple-500 text-white'
+    })
+  }
+
+  const openPumpFun = () => {
+    window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
+  }
 
   const handleBurn = () => {
     setIsBurning(true)
@@ -106,17 +130,45 @@ const Web3Integration: React.FC<Web3Props> = ({
         <CardHeader>
           <CardTitle className="text-green-400 flex items-center gap-2">
             <Wallet className="w-5 h-5" />
-            GAiA Web3 Wallet Integration
+            🌍 Official GAiA Web3 Integration
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          {/* Official GAiA Wallet Info */}
+          <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+            <h3 className="text-blue-400 font-bold mb-2">Official GAiA Wallet:</h3>
+            <div className="flex items-center justify-between">
+              <code className="text-blue-300 font-mono text-sm break-all bg-blue-900/10 p-2 rounded flex-1 mr-2">
+                {GAIA_TOKEN.WALLET_ADDRESS}
+              </code>
+              <div className="flex gap-2">
+                <Button onClick={copyWalletAddress} variant="outline" size="sm" className="border-blue-500/30 text-blue-400">
+                  <Copy className="w-3 h-3" />
+                </Button>
+                <Button onClick={openPumpFun} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+                  <ExternalLink className="w-3 h-3" />
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* GAiA Contract Info */}
+          <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+            <h3 className="text-purple-400 font-bold mb-2">GAiA Contract:</h3>
+            <div className="flex items-center justify-between">
+              <code className="text-purple-300 font-mono text-sm break-all bg-purple-900/10 p-2 rounded flex-1 mr-2">
+                {GAIA_TOKEN.CONTRACT_ADDRESS}
+              </code>
+              <Button onClick={copyContractAddress} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+                <Copy className="w-3 h-3" />
+              </Button>
+            </div>
+          </div>
+
           {isConnected ? (
             <>
               <div className="text-white">
-                Connected GAiA Wallet: <span className="font-bold font-mono text-green-400">{connectedWalletAddress}</span>
-              </div>
-              <div className="text-white">
-                GAiA Balance: <span className="font-bold">${balance.toFixed(2)}</span>
+                GAiA Balance: <span className="font-bold">{formatGaiaPrice(balance)}</span>
               </div>
               <Button variant="destructive" onClick={disconnectWallet}>
                 <Zap className="w-4 h-4 mr-2" />
@@ -126,7 +178,7 @@ const Web3Integration: React.FC<Web3Props> = ({
           ) : (
             <Button onClick={connectWallet} className="bg-green-600 hover:bg-green-700">
               <Wallet className="w-4 h-4 mr-2" />
-              Connect GAiA Wallet
+              Connect to Official GAiA
             </Button>
           )}
         </CardContent>

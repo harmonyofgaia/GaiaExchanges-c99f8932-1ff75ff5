@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -18,15 +17,12 @@ import {
   ExternalLink
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
 
 export function PhantomWalletConnector() {
   const [isConnected, setIsConnected] = useState(false)
-  const [walletAddress, setWalletAddress] = useState('')
   const [walletBalance, setWalletBalance] = useState(0)
   const [matrixEffect, setMatrixEffect] = useState<Array<{id: number, char: string, x: number, y: number}>>([])
-
-  // Phantom wallet address (example)
-  const phantomAddress = "2vQf7x8H9nRk4L5pM3wE6yF4qT8dG1sB7jK9mN3xC2aR"
 
   // Matrix rain effect for the wallet display
   useEffect(() => {
@@ -59,39 +55,46 @@ export function PhantomWalletConnector() {
   }, [isConnected])
 
   const connectPhantomWallet = () => {
-    // Simulate wallet connection
+    // Simulate wallet connection to official GAiA
     setIsConnected(true)
-    setWalletAddress(phantomAddress)
     setWalletBalance(12847.50)
     
-    toast.success('🦅 Phantom Wallet Connected!', {
-      description: 'Matrix-style wallet integration successful! Ready for animal NFT trading!',
+    toast.success('🦅 Phantom Connected to Official GAiA!', {
+      description: `Connected to GAiA wallet: ${GAIA_TOKEN.WALLET_ADDRESS}`,
       duration: 5000
     })
   }
 
   const disconnectWallet = () => {
     setIsConnected(false)
-    setWalletAddress('')
     setWalletBalance(0)
     
-    toast.info('👋 Wallet Disconnected', {
-      description: 'Phantom wallet has been safely disconnected.',
+    toast.info('👋 GAiA Wallet Disconnected', {
+      description: 'Official GAiA wallet has been safely disconnected.',
       duration: 3000
     })
   }
 
   const copyWalletAddress = () => {
-    navigator.clipboard.writeText(walletAddress)
-    toast.success('📋 Address Copied!', {
-      description: 'Wallet address copied to clipboard',
+    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
+    toast.success('📋 Official GAiA Address Copied!', {
+      description: 'GAiA wallet address copied to clipboard',
       duration: 2000
     })
   }
 
-  const openPhantomWallet = () => {
-    toast.info('🔗 Opening Phantom Wallet', {
-      description: 'Redirecting to Phantom wallet application...',
+  const copyContractAddress = () => {
+    navigator.clipboard.writeText(GAIA_TOKEN.CONTRACT_ADDRESS)
+    toast.success('📋 GAiA Contract Copied!', {
+      description: 'GAiA contract address copied to clipboard',
+      duration: 2000
+    })
+  }
+
+  const openPumpFun = () => {
+    window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
+    toast.info('🚀 Opening GAiA on Pump.fun', {
+      description: 'Redirecting to official GAiA token page...',
       duration: 3000
     })
   }
@@ -119,7 +122,7 @@ export function PhantomWalletConnector() {
       <CardHeader className="relative z-10">
         <CardTitle className="flex items-center gap-2 text-purple-400 text-center justify-center">
           <Wallet className="h-6 w-6" />
-          👻 PHANTOM WALLET - MATRIX INTEGRATION
+          👻 PHANTOM WALLET - OFFICIAL GAiA INTEGRATION
         </CardTitle>
       </CardHeader>
       
@@ -128,11 +131,30 @@ export function PhantomWalletConnector() {
         {!isConnected ? (
           /* Connection Interface */
           <div className="text-center space-y-6">
+            {/* Official GAiA Token Info */}
+            <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+              <h3 className="text-green-400 font-bold mb-2">🌍 Connecting to Official GAiA Token</h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Symbol:</span>
+                  <span className="text-green-400 font-bold">{GAIA_TOKEN.SYMBOL}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Initial Price:</span>
+                  <span className="text-blue-400 font-bold">{formatGaiaPrice(GAIA_TOKEN.INITIAL_PRICE)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Market Cap:</span>
+                  <span className="text-purple-400 font-bold">{formatGaiaPrice(GAIA_METRICS.INITIAL_MARKET_CAP)}</span>
+                </div>
+              </div>
+            </div>
+
             <div className="p-8 bg-gradient-to-br from-purple-900/40 to-pink-900/40 rounded-lg border border-purple-500/30">
               <Sparkles className="h-16 w-16 text-purple-400 mx-auto mb-4 animate-pulse" />
-              <h3 className="text-2xl font-bold text-purple-400 mb-4">Connect Your Phantom Wallet</h3>
+              <h3 className="text-2xl font-bold text-purple-400 mb-4">Connect to Official GAiA</h3>
               <p className="text-muted-foreground mb-6">
-                Integrate your Phantom wallet for seamless NFT trading and animal investments
+                Connect your Phantom wallet to the official GAiA token for seamless trading
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -158,7 +180,7 @@ export function PhantomWalletConnector() {
                 className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-700 hover:via-pink-700 hover:to-purple-700 text-white font-bold py-4 px-8 text-lg animate-pulse"
               >
                 <Wallet className="h-6 w-6 mr-2" />
-                🚀 CONNECT PHANTOM WALLET
+                🚀 CONNECT TO OFFICIAL GAiA
               </Button>
             </div>
           </div>
@@ -173,18 +195,18 @@ export function PhantomWalletConnector() {
                   <Wallet className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-green-400">Phantom Wallet Connected</h3>
+                  <h3 className="font-bold text-green-400">Connected to Official GAiA</h3>
                   <Badge className="bg-green-600 text-white mt-1">ACTIVE</Badge>
                 </div>
               </div>
               <div className="flex gap-2">
                 <Button 
-                  onClick={openPhantomWallet}
+                  onClick={openPumpFun}
                   variant="outline" 
                   className="border-purple-500/30 text-purple-400"
                 >
                   <ExternalLink className="h-4 w-4 mr-2" />
-                  Open Phantom
+                  View on Pump.fun
                 </Button>
                 <Button 
                   onClick={disconnectWallet}
@@ -211,9 +233,9 @@ export function PhantomWalletConnector() {
               <div className="relative z-10 text-center">
                 <Crown className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
                 <h3 className="text-3xl font-bold text-yellow-400 mb-2">
-                  ${walletBalance.toFixed(2)}
+                  {formatGaiaPrice(walletBalance)}
                 </h3>
-                <p className="text-muted-foreground mb-4">Total Wallet Balance</p>
+                <p className="text-muted-foreground mb-4">Total GAiA Balance</p>
                 
                 <div className="grid grid-cols-3 gap-4">
                   <div className="p-3 bg-green-900/30 rounded border border-green-500/20">
@@ -235,26 +257,39 @@ export function PhantomWalletConnector() {
               </div>
             </div>
 
-            {/* Wallet Address */}
-            <div className="p-4 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 rounded-lg border border-cyan-500/20">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="font-bold text-cyan-400 mb-2">Wallet Address</h4>
-                  <div className="flex items-center gap-2">
-                    <code className="text-sm text-muted-foreground font-mono bg-black/20 px-2 py-1 rounded">
-                      {walletAddress.slice(0, 8)}...{walletAddress.slice(-8)}
+            {/* Official GAiA Addresses */}
+            <div className="space-y-4">
+              <div className="p-4 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 rounded-lg border border-cyan-500/20">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="font-bold text-cyan-400 mb-2">Official GAiA Wallet</h4>
+                    <code className="text-sm text-muted-foreground font-mono bg-black/20 px-2 py-1 rounded block">
+                      {GAIA_TOKEN.WALLET_ADDRESS}
                     </code>
-                    <Button 
-                      onClick={copyWalletAddress}
-                      variant="outline" 
-                      size="sm"
-                      className="border-cyan-500/30 text-cyan-400"
-                    >
+                  </div>
+                  <div className="flex gap-2">
+                    <Button onClick={copyWalletAddress} variant="outline" size="sm" className="border-cyan-500/30 text-cyan-400">
                       <Copy className="h-3 w-3" />
+                    </Button>
+                    <Button onClick={openPumpFun} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+                      <ExternalLink className="h-3 w-3" />
                     </Button>
                   </div>
                 </div>
-                <Badge className="bg-cyan-600 text-white">VERIFIED</Badge>
+              </div>
+
+              <div className="p-4 bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg border border-purple-500/20">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="font-bold text-purple-400 mb-2">GAiA Contract Address</h4>
+                    <code className="text-sm text-muted-foreground font-mono bg-black/20 px-2 py-1 rounded block">
+                      {GAIA_TOKEN.CONTRACT_ADDRESS}
+                    </code>
+                  </div>
+                  <Button onClick={copyContractAddress} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+                    <Copy className="h-3 w-3" />
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -282,10 +317,10 @@ export function PhantomWalletConnector() {
 
         {/* Matrix Integration Info */}
         <div className="text-center p-4 bg-gradient-to-r from-green-900/20 to-purple-900/20 rounded-lg border border-green-500/20">
-          <h4 className="font-bold text-green-400 mb-2">🌐 MATRIX WALLET INTEGRATION</h4>
+          <h4 className="font-bold text-green-400 mb-2">🌐 OFFICIAL GAiA INTEGRATION</h4>
           <p className="text-sm text-muted-foreground">
-            Experience the most advanced wallet integration with real-time matrix-style visualizations, 
-            seamless NFT trading, and instant animal investment capabilities.
+            Connected to the official GAiA token on Pump.fun with real-time matrix-style visualizations, 
+            seamless trading, and instant environmental impact tracking.
           </p>
         </div>
       </CardContent>
