@@ -5,9 +5,9 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { Activity, TrendingUp, Zap, Globe, Shield, DollarSign, Users, ExternalLink } from 'lucide-react'
-
-const GAIA_CONTRACT_ADDRESS = "t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump"
-const GAIA_WALLET_ADDRESS = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
+import { LiveTrackingEngine } from '@/components/tracking/LiveTrackingEngine'
+import { LiveChartsGrid } from '@/components/tracking/LiveChartsGrid'
 
 interface LiveGaiaData {
   price: number
@@ -24,20 +24,20 @@ const LiveTracking = () => {
   const [mounted, setMounted] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
   const [gaiaData, setGaiaData] = useState<LiveGaiaData>({
-    price: 0.0001,
-    volume: 15000000,
+    price: GAIA_TOKEN.INITIAL_PRICE,
+    volume: GAIA_METRICS.INITIAL_VOLUME,
     users: 125000,
-    transactions: 2750000,
-    health: 99.9,
+    transactions: GAIA_METRICS.INITIAL_TRANSACTIONS,
+    health: GAIA_METRICS.ECOSYSTEM_HEALTH,
     change: 125.47,
-    marketCap: 1500000000,
-    holders: 48750
+    marketCap: GAIA_METRICS.INITIAL_MARKET_CAP,
+    holders: GAIA_METRICS.INITIAL_HOLDERS
   })
 
   useEffect(() => {
     console.log('🌍 LiveTracking: Component mounting...')
-    console.log('🔗 Connected GAiA Wallet Address:', GAIA_WALLET_ADDRESS)
-    console.log('📄 GAiA Contract Address:', GAIA_CONTRACT_ADDRESS)
+    console.log('🔗 Connected GAiA Wallet Address:', GAIA_TOKEN.WALLET_ADDRESS)
+    console.log('📄 GAiA Contract Address:', GAIA_TOKEN.CONTRACT_ADDRESS)
     setMounted(true)
     
     // Time update
@@ -67,22 +67,6 @@ const LiveTracking = () => {
       console.log('🔄 LiveTracking: Cleanup completed')
     }
   }, [])
-
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: value < 0.001 ? 6 : 2,
-      maximumFractionDigits: value < 0.001 ? 6 : 2
-    }).format(value)
-  }
-
-  const formatNumber = (value: number) => {
-    return new Intl.NumberFormat('en-US', { 
-      notation: 'compact',
-      maximumFractionDigits: 1
-    }).format(value)
-  }
 
   if (!mounted) {
     return (
@@ -118,7 +102,7 @@ const LiveTracking = () => {
               <div className="flex items-center justify-between mb-2">
                 <span className="text-blue-400 font-bold">GAiA Wallet Address:</span>
                 <Button 
-                  onClick={() => navigator.clipboard.writeText(GAIA_WALLET_ADDRESS)}
+                  onClick={() => navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)}
                   variant="outline" 
                   size="sm"
                   className="border-blue-500/30 text-blue-400"
@@ -127,7 +111,7 @@ const LiveTracking = () => {
                 </Button>
               </div>
               <code className="text-blue-300 font-mono text-sm break-all block bg-blue-900/10 p-2 rounded">
-                {GAIA_WALLET_ADDRESS}
+                {GAIA_TOKEN.WALLET_ADDRESS}
               </code>
             </div>
 
@@ -136,7 +120,7 @@ const LiveTracking = () => {
               <div className="flex items-center justify-between mb-2">
                 <span className="text-purple-400 font-bold">GAiA Contract Address:</span>
                 <Button 
-                  onClick={() => navigator.clipboard.writeText(GAIA_CONTRACT_ADDRESS)}
+                  onClick={() => navigator.clipboard.writeText(GAIA_TOKEN.CONTRACT_ADDRESS)}
                   variant="outline" 
                   size="sm"
                   className="border-purple-500/30 text-purple-400"
@@ -145,7 +129,7 @@ const LiveTracking = () => {
                 </Button>
               </div>
               <code className="text-purple-300 font-mono text-sm break-all block bg-purple-900/10 p-2 rounded">
-                {GAIA_CONTRACT_ADDRESS}
+                {GAIA_TOKEN.CONTRACT_ADDRESS}
               </code>
             </div>
           </div>
@@ -162,7 +146,7 @@ const LiveTracking = () => {
           <Button 
             variant="outline" 
             size="sm"
-            onClick={() => window.open(`https://pump.fun/coin/${GAIA_CONTRACT_ADDRESS}`, '_blank')}
+            onClick={() => window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')}
             className="border-purple-500/30 text-purple-400"
           >
             <ExternalLink className="h-3 w-3 mr-1" />
@@ -178,7 +162,7 @@ const LiveTracking = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">GAiA Price</p>
-                <p className="text-2xl font-bold text-green-400">{formatCurrency(gaiaData.price)}</p>
+                <p className="text-2xl font-bold text-green-400">{formatGaiaPrice(gaiaData.price)}</p>
                 <Badge className={`mt-2 ${gaiaData.change >= 0 ? 'bg-green-600' : 'bg-red-600'} text-white text-xs`}>
                   {gaiaData.change >= 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingUp className="h-3 w-3 mr-1" />}
                   {gaiaData.change.toFixed(2)}%
@@ -194,7 +178,7 @@ const LiveTracking = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">GAiA Volume 24h</p>
-                <p className="text-2xl font-bold text-blue-400">{formatCurrency(gaiaData.volume)}</p>
+                <p className="text-2xl font-bold text-blue-400">{formatGaiaPrice(gaiaData.volume)}</p>
                 <Badge className="mt-2 bg-blue-600 text-white text-xs">Real GAiA Trading</Badge>
               </div>
               <Activity className="h-8 w-8 text-blue-400" />
@@ -207,7 +191,7 @@ const LiveTracking = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">GAiA Holders</p>
-                <p className="text-2xl font-bold text-purple-400">{formatNumber(gaiaData.holders)}</p>
+                <p className="text-2xl font-bold text-purple-400">{formatGaiaNumber(gaiaData.holders)}</p>
                 <Badge className="mt-2 bg-purple-600 text-white text-xs">Growing Community</Badge>
               </div>
               <Users className="h-8 w-8 text-purple-400" />
@@ -220,7 +204,7 @@ const LiveTracking = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400">GAiA Transactions</p>
-                <p className="text-2xl font-bold text-yellow-400">{formatNumber(gaiaData.transactions)}</p>
+                <p className="text-2xl font-bold text-yellow-400">{formatGaiaNumber(gaiaData.transactions)}</p>
                 <Badge className="mt-2 bg-yellow-600 text-white text-xs">Live Network</Badge>
               </div>
               <Zap className="h-8 w-8 text-yellow-400" />
@@ -228,6 +212,12 @@ const LiveTracking = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Live Tracking Engine */}
+      <LiveTrackingEngine />
+
+      {/* Live Charts Grid */}
+      <LiveChartsGrid />
 
       {/* GAiA System Status */}
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20 backdrop-blur-sm mb-8">
@@ -243,7 +233,7 @@ const LiveTracking = () => {
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
               GAiA ecosystem running at <span className="text-green-400 font-bold">peak performance</span>. 
               Network speed is <span className="text-blue-400 font-bold">10x faster</span> with 
-              <span className="text-purple-400 font-bold"> 100% uptime</span>. Market cap: <span className="text-yellow-400 font-bold">{formatCurrency(gaiaData.marketCap)}</span>
+              <span className="text-purple-400 font-bold"> 100% uptime</span>. Market cap: <span className="text-yellow-400 font-bold">{formatGaiaPrice(gaiaData.marketCap)}</span>
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-6">
               <Badge className="bg-green-600 text-white text-sm py-2 px-4">
@@ -256,7 +246,7 @@ const LiveTracking = () => {
                 🚀 Performance: ENHANCED
               </Badge>
               <Badge className="bg-purple-600 text-white text-sm py-2 px-4">
-                🌍 Global: {gaiaData.holders} HOLDERS
+                🌍 Global: {formatGaiaNumber(gaiaData.holders)} HOLDERS
               </Badge>
             </div>
           </div>

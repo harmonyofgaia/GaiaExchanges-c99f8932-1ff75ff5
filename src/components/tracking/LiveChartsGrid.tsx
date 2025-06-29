@@ -1,9 +1,9 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { TrendingUp, TrendingDown, Activity, Users, DollarSign, Zap } from 'lucide-react'
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
 
 interface GaiaChartData {
   time: string
@@ -18,11 +18,11 @@ interface GaiaChartData {
 export function LiveChartsGrid() {
   const [chartData, setChartData] = useState<GaiaChartData[]>([])
   const [currentGaiaMetrics, setCurrentGaiaMetrics] = useState({
-    price: 0.0001,
-    volume: 15000000,
-    holders: 48750,
-    transactions: 2750000,
-    marketCap: 1500000000,
+    price: GAIA_TOKEN.INITIAL_PRICE,
+    volume: GAIA_METRICS.INITIAL_VOLUME,
+    holders: GAIA_METRICS.INITIAL_HOLDERS,
+    transactions: GAIA_METRICS.INITIAL_TRANSACTIONS,
+    marketCap: GAIA_METRICS.INITIAL_MARKET_CAP,
     change24h: 125.47
   })
 
@@ -67,13 +67,7 @@ export function LiveChartsGrid() {
   }, [currentGaiaMetrics.price, currentGaiaMetrics.volume, currentGaiaMetrics.holders, currentGaiaMetrics.transactions, currentGaiaMetrics.marketCap])
 
   const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      notation: 'compact',
-      minimumFractionDigits: value < 0.001 ? 6 : 2,
-      maximumFractionDigits: value < 0.001 ? 6 : 2
-    }).format(value)
+    return formatGaiaPrice(value)
   }
 
   const pieData = [

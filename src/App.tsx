@@ -10,6 +10,10 @@ import SystemStatus from '@/pages/SystemStatus'
 import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
 import UltimateSecurity from '@/pages/UltimateSecurity'
 import LiveTracking from '@/pages/LiveTracking'
+import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
+import Transparency from '@/pages/Transparency'
+import Gaming from '@/pages/Gaming'
+import LandscapeBuilder from '@/pages/LandscapeBuilder'
 import './App.css'
 
 function App() {
@@ -33,6 +37,10 @@ function App() {
                   <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
                   <Route path="/ultimate-security" element={<UltimateSecurity />} />
                   <Route path="/live-tracking" element={<LiveTracking />} />
+                  <Route path="/coin-crafter" element={<GaiaCoinCrafter />} />
+                  <Route path="/transparency" element={<Transparency />} />
+                  <Route path="/gaming" element={<Gaming />} />
+                  <Route path="/landscape-builder" element={<LandscapeBuilder />} />
                 </Routes>
               </main>
             </div>

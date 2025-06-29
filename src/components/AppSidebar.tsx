@@ -1,5 +1,5 @@
 
-import { Calendar, Home, Inbox, Search, Settings, Shield, Activity, Download, BarChart3 } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings, Shield, Activity, Download, BarChart3, Flame, Gamepad2, TreePine, Wrench } from "lucide-react"
 
 import {
   Sidebar,
@@ -39,6 +39,26 @@ const items = [
     title: "Live Tracking",
     url: "/live-tracking",
     icon: Activity,
+  },
+  {
+    title: "🔥 Coin Crafter",
+    url: "/coin-crafter",
+    icon: Flame,
+  },
+  {
+    title: "🔥 Transparency Center",
+    url: "/transparency",
+    icon: Download,
+  },
+  {
+    title: "🎮 Gaming Arena",
+    url: "/gaming",
+    icon: Gamepad2,
+  },
+  {
+    title: "🏗️ Landscape Builder",
+    url: "/landscape-builder",
+    icon: TreePine,
   }
 ]
 

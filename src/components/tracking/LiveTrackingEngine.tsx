@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Activity, TrendingUp, Zap, Globe, Shield, Database } from 'lucide-react'
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice } from '@/constants/gaia'
 
 interface GaiaTrackingMetrics {
   realTimeTransactions: number
@@ -31,15 +32,15 @@ interface LiveGaiaEvent {
 export function LiveTrackingEngine() {
   const [metrics, setMetrics] = useState<GaiaTrackingMetrics>({
     realTimeTransactions: 0,
-    gaiaMarketVolume: 15000000,
-    gaiaHolders: 48750,
-    networkSpeed: 1000,
-    securityScore: 100,
+    gaiaMarketVolume: GAIA_METRICS.INITIAL_VOLUME,
+    gaiaHolders: GAIA_METRICS.INITIAL_HOLDERS,
+    networkSpeed: GAIA_METRICS.NETWORK_SPEED,
+    securityScore: GAIA_METRICS.SECURITY_SCORE,
     performanceMultiplier: 10,
-    ecosystemHealth: 99.9,
+    ecosystemHealth: GAIA_METRICS.ECOSYSTEM_HEALTH,
     globalReach: 195,
-    gaiaPrice: 0.0001,
-    gaiaMarketCap: 1500000000,
+    gaiaPrice: GAIA_TOKEN.INITIAL_PRICE,
+    gaiaMarketCap: GAIA_METRICS.INITIAL_MARKET_CAP,
     userEngagement: 95.5
   })
 
@@ -68,10 +69,10 @@ export function LiveTrackingEngine() {
         realTimeTransactions: prev.realTimeTransactions + Math.floor(Math.random() * 50),
         gaiaMarketVolume: prev.gaiaMarketVolume + (Math.random() * 500000),
         gaiaHolders: prev.gaiaHolders + Math.floor(Math.random() * 10),
-        networkSpeed: 1000 + Math.floor(Math.random() * 500),
-        securityScore: 100,
+        networkSpeed: GAIA_METRICS.NETWORK_SPEED + Math.floor(Math.random() * 500),
+        securityScore: GAIA_METRICS.SECURITY_SCORE,
         performanceMultiplier: 10 + Math.random() * 2,
-        ecosystemHealth: Math.min(99.9, prev.ecosystemHealth + (Math.random() * 0.1)),
+        ecosystemHealth: Math.min(GAIA_METRICS.ECOSYSTEM_HEALTH, prev.ecosystemHealth + (Math.random() * 0.1)),
         globalReach: Math.min(195, prev.globalReach + Math.floor(Math.random() * 2)),
         gaiaPrice: Math.max(0.00001, prev.gaiaPrice + (Math.random() - 0.5) * 0.000005),
         gaiaMarketCap: Math.max(1000000, prev.gaiaMarketCap + (Math.random() - 0.5) * 10000000),
@@ -104,13 +105,7 @@ export function LiveTrackingEngine() {
   }, [])
 
   const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      notation: 'compact',
-      minimumFractionDigits: value < 0.001 ? 6 : 2,
-      maximumFractionDigits: value < 0.001 ? 6 : 2
-    }).format(value)
+    return formatGaiaPrice(value)
   }
 
   return (
