@@ -117,7 +117,7 @@ const SystemStatus = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-purple-300">Dragon Response Time:</span>
-                  <Badge className="bg-green-600">< 1ms</Badge>
+                  <Badge className="bg-green-600">{"< 1ms"}</Badge>
                 </div>
               </div>
             </CardContent>
