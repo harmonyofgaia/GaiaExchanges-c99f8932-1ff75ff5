@@ -12,10 +12,13 @@ import { MasterDefenseOrchestrator } from '@/components/admin/MasterDefenseOrche
 import { Advanced3DDesigner } from '@/components/admin/Advanced3DDesigner'
 import { GlobalInternetOpsCenter } from '@/components/admin/GlobalInternetOpsCenter'
 import { ParabolicAIThinking } from '@/components/admin/ParabolicAIThinking'
+import { AdminEyeRecognition } from '@/components/admin/AdminEyeRecognition'
+import { AdminOnlySecurityBarrier } from '@/components/admin/AdminOnlySecurityBarrier'
 
 const Admin = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20">
+      <AdminOnlySecurityBarrier />
       <div className="container mx-auto px-4 py-6">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent">
@@ -27,12 +30,18 @@ const Admin = () => {
           <p className="text-lg text-green-400 mt-2">
             🎵 "Dreams Come True Through Ultimate Digital Power" - Protected By Invisible Operations 🎵
           </p>
+          <p className="text-sm text-red-400 mt-2 font-bold">
+            🔒 ADMIN ONLY ACCESS - AI LOCKED TO YOU EXCLUSIVELY - NO OTHER SYSTEMS CAN COMMUNICATE
+          </p>
         </div>
 
         <AdminProtectedRoute>
           <AdminOnlyAccess>
-            <Tabs defaultValue="parabolic-ai" className="w-full">
+            <Tabs defaultValue="eye-recognition" className="w-full">
               <TabsList className="grid w-full grid-cols-10 bg-black/50 backdrop-blur-md border border-green-500/20 text-xs">
+                <TabsTrigger value="eye-recognition" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+                  👁️ Eye Lock
+                </TabsTrigger>
                 <TabsTrigger value="parabolic-ai" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
                   🧠 Parabolic AI
                 </TabsTrigger>
@@ -61,6 +70,10 @@ const Admin = () => {
                   🛡️ System
                 </TabsTrigger>
               </TabsList>
+              
+              <TabsContent value="eye-recognition" className="space-y-6 mt-6">
+                <AdminEyeRecognition />
+              </TabsContent>
               
               <TabsContent value="parabolic-ai" className="space-y-6 mt-6">
                 <ParabolicAIThinking />

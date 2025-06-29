@@ -8,6 +8,7 @@ import { CallToAction } from '@/components/home/CallToAction'
 import { SecurityPreview } from '@/components/home/SecurityPreview'
 import { HomeBackground } from '@/components/home/HomeBackground'
 import { UniversalStyleController } from '@/components/admin/UniversalStyleController'
+import { HoverSidebar } from '@/components/HoverSidebar'
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <HomeBackground />
       <RobotAdvertisement />
       <UniversalStyleController />
+      <HoverSidebar />
       
       <div className="container mx-auto px-4 py-8 relative z-20">
         <HeroSection />
