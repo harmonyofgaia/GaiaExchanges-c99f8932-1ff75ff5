@@ -15,8 +15,8 @@ import {
   Globe,
   Mail,
   DollarSign,
-  ArrowExchange,
-  Landscape,
+  ArrowLeftRight,
+  Mountain,
   Building
 } from 'lucide-react'
 
@@ -33,11 +33,11 @@ const menuItems = [
   { name: 'Comprehensive Status', path: '/comprehensive-status', icon: BarChart3 },
   { name: 'Gaming', path: '/gaming', icon: Gamepad2 },
   { name: 'GAIA Fighter Game', path: '/game', icon: Gamepad2 },
-  { name: 'Landscape Builder', path: '/landscape-builder', icon: Landscape },
+  { name: 'Landscape Builder', path: '/landscape-builder', icon: Mountain },
   { name: 'Virtual World', path: '/virtual-world', icon: Building },
   { name: 'Contact', path: '/contact', icon: Mail },
   { name: 'Pricing', path: '/pricing', icon: DollarSign },
-  { name: 'Exchange', path: '/exchange', icon: ArrowExchange }
+  { name: 'Exchange', path: '/exchange', icon: ArrowLeftRight }
 ]
 
 export function HoverSidebar() {
