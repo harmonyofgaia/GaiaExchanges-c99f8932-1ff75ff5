@@ -17,16 +17,25 @@ import {
   Flame,
   TreePine,
   Mountain,
-  Waves
+  Waves,
+  MessageCircle,
+  Globe
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { EnhancedGamingLayout } from '@/components/EnhancedGamingLayout'
 import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
+import { VirtualWorldCanvas } from '@/components/virtualworld/VirtualWorldCanvas'
+import { GameChatSystem } from '@/components/virtualworld/GameChatSystem'
+import { LandscapeMarketplace } from '@/components/virtualworld/LandscapeMarketplace'
+import { WormsGameArena } from '@/components/WormsGameArena'
+import { QuantumEvolutionMonitor } from '@/components/security/QuantumEvolutionMonitor'
 import { GAIA_TOKEN } from '@/constants/gaia'
 import { toast } from 'sonner'
 
 const Gaming = () => {
   const [activeTab, setActiveTab] = useState<string>('arena')
+  const [currentLandscape, setCurrentLandscape] = useState<string>('🌊 Ocean Paradise')
+  const [activeUsers] = useState<number>(1847)
   const [playerStats, setPlayerStats] = useState({
     level: 47,
     experience: 2847,
@@ -34,7 +43,9 @@ const Gaming = () => {
     gaiaPower: 1250,
     landscapesOwned: 8,
     battlesWon: 156,
-    battlesTotal: 203
+    battlesTotal: 203,
+    tokensEarned: 15420,
+    environmentalImpact: 847
   })
 
   const handleQuickBattle = () => {
@@ -51,20 +62,44 @@ const Gaming = () => {
     })
   }
 
+  const handleLandscapeChange = (landscape: string) => {
+    setCurrentLandscape(landscape)
+    toast.success('🌍 Landscape Changed!', {
+      description: `Now exploring: ${landscape}`,
+      duration: 2000
+    })
+  }
+
+  const handleLandscapePurchase = (landscape: string) => {
+    setPlayerStats(prev => ({
+      ...prev,
+      landscapesOwned: prev.landscapesOwned + 1,
+      tokensEarned: prev.tokensEarned - 50,
+      environmentalImpact: prev.environmentalImpact + 25
+    }))
+    toast.success('🛒 Landscape Purchased!', {
+      description: `${landscape} added to your collection!`,
+      duration: 3000
+    })
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-green-400 bg-clip-text text-transparent mb-4">
-            🎮 GAIA GAMING ARENA
+            🎮 GAIA GAMING METAVERSE
           </h1>
           <p className="text-xl text-muted-foreground mb-4">
-            Epic gaming experiences with dragon-powered security and GAIA token rewards
+            Epic gaming experiences with dragon-powered security, virtual worlds, and GAIA token rewards
           </p>
           <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 max-w-2xl mx-auto mb-6">
             <div className="text-sm text-green-400">
               <strong>Powered by GAIA:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+            </div>
+            <div className="text-sm text-blue-400 mt-1">
+              <strong>Wallet:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.WALLET_ADDRESS}</code>
             </div>
           </div>
           <div className="flex justify-center gap-4 flex-wrap">
@@ -78,7 +113,11 @@ const Gaming = () => {
             </Badge>
             <Badge className="bg-green-600 text-white">
               <Users className="h-3 w-3 mr-1" />
-              Multiplayer Ready
+              {activeUsers} Players Online
+            </Badge>
+            <Badge className="bg-orange-600 text-white">
+              <Globe className="h-3 w-3 mr-1" />
+              Virtual Worlds
             </Badge>
           </div>
         </div>
@@ -92,7 +131,7 @@ const Gaming = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
               <div className="text-center">
                 <div className="text-2xl font-bold text-purple-400">{playerStats.level}</div>
                 <div className="text-sm text-muted-foreground">Level</div>
@@ -106,7 +145,11 @@ const Gaming = () => {
                 <div className="text-sm text-muted-foreground">Landscapes</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-yellow-400">{Math.round((playerStats.battlesWon / playerStats.battlesTotal) * 100)}%</div>
+                <div className="text-2xl font-bold text-yellow-400">{playerStats.tokensEarned}</div>
+                <div className="text-sm text-muted-foreground">Tokens Earned</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-orange-400">{Math.round((playerStats.battlesWon / playerStats.battlesTotal) * 100)}%</div>
                 <div className="text-sm text-muted-foreground">Win Rate</div>
               </div>
             </div>
@@ -121,6 +164,11 @@ const Gaming = () => {
           </CardContent>
         </Card>
 
+        {/* Dragon Evolution Monitor */}
+        <div className="mb-8">
+          <QuantumEvolutionMonitor />
+        </div>
+
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 mb-8">
           <Button
@@ -132,29 +180,41 @@ const Gaming = () => {
             Gaming Arena
           </Button>
           <Button
+            variant={activeTab === 'virtualworld' ? 'default' : 'outline'}
+            onClick={() => setActiveTab('virtualworld')}
+            className={activeTab === 'virtualworld' ? 'bg-green-600' : ''}
+          >
+            <Globe className="h-4 w-4 mr-2" />
+            Virtual World
+          </Button>
+          <Button
+            variant={activeTab === 'chat' ? 'default' : 'outline'}
+            onClick={() => setActiveTab('chat')}
+            className={activeTab === 'chat' ? 'bg-blue-600' : ''}
+          >
+            <MessageCircle className="h-4 w-4 mr-2" />
+            Live Chat
+          </Button>
+          <Button
+            variant={activeTab === 'games' ? 'default' : 'outline'}
+            onClick={() => setActiveTab('games')}
+            className={activeTab === 'games' ? 'bg-red-600' : ''}
+          >
+            <Target className="h-4 w-4 mr-2" />
+            Classic Games
+          </Button>
+          <Button
             variant={activeTab === 'marketplace' ? 'default' : 'outline'}
             onClick={() => setActiveTab('marketplace')}
-            className={activeTab === 'marketplace' ? 'bg-blue-600' : ''}
+            className={activeTab === 'marketplace' ? 'bg-orange-600' : ''}
           >
             <Star className="h-4 w-4 mr-2" />
             NFT Marketplace
           </Button>
-          <Button
-            variant={activeTab === 'battles' ? 'default' : 'outline'}
-            onClick={() => setActiveTab('battles')}
-            className={activeTab === 'battles' ? 'bg-green-600' : ''}
-          >
-            <Sword className="h-4 w-4 mr-2" />
-            Quick Actions
-          </Button>
         </div>
 
         {/* Content Based on Active Tab */}
-        {activeTab === 'arena' && <EnhancedGamingLayout />}
-        
-        {activeTab === 'marketplace' && <GamingNFTMarketplace />}
-        
-        {activeTab === 'battles' && (
+        {activeTab === 'arena' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card className="border-purple-500/30 bg-purple-900/20 hover:scale-105 transition-transform">
               <CardHeader>
@@ -272,25 +332,25 @@ const Gaming = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-red-400">
                   <Flame className="h-6 w-6" />
-                  🐉 Dragon Training
+                  🐉 Virtual World
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
-                  Train your dragon companion for enhanced battle power
+                  Explore immersive virtual environments with live chat
                 </p>
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-sm">
-                    <span>Dragon Level:</span>
-                    <span className="text-red-400">23</span>
+                    <span>Online Users:</span>
+                    <span className="text-blue-400">{activeUsers}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Training Cost:</span>
-                    <span className="text-yellow-400">100 GAIA</span>
+                    <span>Current World:</span>
+                    <span className="text-green-400">{currentLandscape}</span>
                   </div>
                 </div>
-                <Button className="w-full bg-red-600 hover:bg-red-700">
-                  Train Dragon
+                <Button onClick={() => setActiveTab('virtualworld')} className="w-full bg-red-600 hover:bg-red-700">
+                  Enter Virtual World
                 </Button>
               </CardContent>
             </Card>
@@ -298,63 +358,74 @@ const Gaming = () => {
             <Card className="border-cyan-500/30 bg-cyan-900/20 hover:scale-105 transition-transform">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-cyan-400">
-                  <Mountain className="h-6 w-6" />
-                  🏔️ Epic Quests
+                  <Sword className="h-6 w-6" />
+                  🎯 Enhanced Gaming
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
-                  Embark on mystical quests for rare rewards and experience
+                  Advanced gaming features with blockchain integration
                 </p>
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-sm">
-                    <span>Active Quests:</span>
-                    <span className="text-green-400">3/5</span>
+                    <span>NFT Rewards:</span>
+                    <span className="text-purple-400">Available</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Completion Rate:</span>
-                    <span className="text-blue-400">87%</span>
+                    <span>Blockchain:</span>
+                    <span className="text-green-400">Integrated</span>
                   </div>
                 </div>
-                <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
-                  View Quests
+                <Button onClick={() => setActiveTab('marketplace')} className="w-full bg-cyan-600 hover:bg-cyan-700">
+                  Explore Features
                 </Button>
               </CardContent>
             </Card>
           </div>
         )}
 
-        {/* Dragon Gaming Protection Card */}
-        <Card className="mt-8 border-yellow-500/30 bg-gradient-to-r from-yellow-900/20 to-orange-900/20">
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <h3 className="text-2xl font-bold text-yellow-400 mb-4">
-                🐉 Dragon Gaming Protection Active
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                All gaming sessions are protected by quantum-level security ensuring fair play, secure transactions, and GAIA token rewards.
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="text-center">
-                  <Shield className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                  <div className="text-sm font-medium">Quantum Security</div>
+        {activeTab === 'virtualworld' && (
+          <div className="space-y-6">
+            <VirtualWorldCanvas 
+              currentLandscape={currentLandscape}
+              onLandscapeChange={handleLandscapeChange}
+            />
+            <LandscapeMarketplace onPurchase={handleLandscapePurchase} />
+          </div>
+        )}
+
+        {activeTab === 'chat' && (
+          <GameChatSystem activeUsers={activeUsers} />
+        )}
+
+        {activeTab === 'games' && (
+          <div className="space-y-6">
+            <WormsGameArena />
+            
+            {/* Snake Game Placeholder */}
+            <Card className="border-green-500/30 bg-green-900/20">
+              <CardHeader>
+                <CardTitle className="text-green-400 flex items-center gap-2">
+                  <Zap className="h-6 w-6" />
+                  🐍 GAIA Snake Game - Coming Soon
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-8">
+                  <div className="text-6xl mb-4">🐍</div>
+                  <p className="text-muted-foreground mb-4">
+                    Classic Snake game with GAIA token rewards and environmental themes
+                  </p>
+                  <Button disabled className="bg-green-600 opacity-50">
+                    Coming Soon
+                  </Button>
                 </div>
-                <div className="text-center">
-                  <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                  <div className="text-sm font-medium">Real-time Processing</div>
-                </div>
-                <div className="text-center">
-                  <Star className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                  <div className="text-sm font-medium">GAIA Rewards</div>
-                </div>
-                <div className="text-center">
-                  <Crown className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
-                  <div className="text-sm font-medium">Elite Status</div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {activeTab === 'marketplace' && <GamingNFTMarketplace />}
       </div>
     </div>
   )
