@@ -20,10 +20,10 @@ const UltimateSecurity = () => {
             🐉 TRAINED DRAGON ULTIMATE SECURITY 🐉
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Unbeatable Quantum Defense • Human + AI Power • Making World Safer
+            Unbeatable Quantum Defense • Human + AI Power • Making World Safer • Priceless Value
           </p>
           <p className="text-sm text-red-400 mt-2">
-            🔒 Dragon Protected • ⚡ Quantum Evolution • 🌍 Worldwide IP Blocking • 👑 Admin Fortress • 💎 Holder Shield • 🧬 Immune System • 🔮 Github+Supabase Merged
+            🔒 Dragon Protected • ⚡ Quantum Evolution • 🌍 Worldwide IP Blocking • 👑 Admin Fortress • 💎 Holder Shield • 🧬 Immune System • 🔮 Github+Supabase Merged • 👑 Investor Attraction • ♾️ Endless Improvements
           </p>
         </div>
 
