@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -28,8 +29,8 @@ interface CoinInfo {
 }
 
 export function ChartAnalytics() {
-  const [searchCoin, setSearchCoin] = useState(GAIA_TOKEN.SYMBOL)
-  const [timeframe, setTimeframe] = useState('1H')
+  const [searchCoin, setSearchCoin] = useState<string>(GAIA_TOKEN.SYMBOL)
+  const [timeframe, setTimeframe] = useState<string>('1H')
   const [chartData, setChartData] = useState<ChartData[]>([])
   const [coinInfo, setCoinInfo] = useState<CoinInfo>({
     symbol: GAIA_TOKEN.SYMBOL,
@@ -41,20 +42,20 @@ export function ChartAnalytics() {
     contractAddress: GAIA_TOKEN.CONTRACT_ADDRESS,
     walletAddress: GAIA_TOKEN.WALLET_ADDRESS
   })
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date())
 
   // Generate realistic chart data
   const generateChartData = (timeframe: string) => {
     const now = new Date()
     const data: ChartData[] = []
-    let intervals = 24 // Default to 24 hours
-    let stepMinutes = 60 // 1 hour steps
+    let intervals = 24
+    let stepMinutes = 60
 
     switch (timeframe) {
       case '5S':
         intervals = 60
-        stepMinutes = 0.08333 // 5 seconds
+        stepMinutes = 0.08333
         break
       case '1M':
         intervals = 60
@@ -66,22 +67,22 @@ export function ChartAnalytics() {
         break
       case '1D':
         intervals = 30
-        stepMinutes = 1440 // 1 day
+        stepMinutes = 1440
         break
       case '1W':
         intervals = 52
-        stepMinutes = 10080 // 1 week
+        stepMinutes = 10080
         break
       case '1Y':
         intervals = 12
-        stepMinutes = 43800 // 1 month
+        stepMinutes = 43800
         break
     }
 
     let basePrice = coinInfo.price
     for (let i = intervals; i >= 0; i--) {
       const time = new Date(now.getTime() - i * stepMinutes * 60000)
-      const priceChange = (Math.random() - 0.5) * 0.1 // ±5% random change
+      const priceChange = (Math.random() - 0.5) * 0.1
       basePrice *= (1 + priceChange)
       
       data.push({
@@ -100,12 +101,11 @@ export function ChartAnalytics() {
   useEffect(() => {
     const updateData = () => {
       if (timeframe === '5S') {
-        // For 5-second updates, add new data point and remove oldest
         setChartData(prevData => {
           const newData = [...prevData]
           const now = new Date()
           const lastPrice = newData[newData.length - 1]?.price || coinInfo.price
-          const priceChange = (Math.random() - 0.5) * 0.02 // ±1% change
+          const priceChange = (Math.random() - 0.5) * 0.02
           
           newData.push({
             time: now.toLocaleTimeString(),
@@ -113,7 +113,6 @@ export function ChartAnalytics() {
             volume: Math.floor(Math.random() * 1000000 + 500000)
           })
           
-          // Keep only last 60 data points for 5-second chart
           return newData.slice(-60)
         })
         
@@ -121,7 +120,7 @@ export function ChartAnalytics() {
       }
     }
 
-    const interval = timeframe === '5S' ? 5000 : 60000 // 5 seconds or 1 minute
+    const interval = timeframe === '5S' ? 5000 : 60000
     const timer = setInterval(updateData, interval)
 
     return () => clearInterval(timer)
@@ -144,7 +143,6 @@ export function ChartAnalytics() {
     
     setIsLoading(true)
     
-    // Updated mock coins data with correct GAiA information
     setTimeout(() => {
       const mockCoins: { [key: string]: CoinInfo } = {
         [GAIA_TOKEN.SYMBOL]: { 
@@ -170,7 +168,6 @@ export function ChartAnalytics() {
 
   return (
     <div className="space-y-6">
-      {/* Updated Search and Controls */}
       <Card className="border-blue-500/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -220,7 +217,6 @@ export function ChartAnalytics() {
         </CardContent>
       </Card>
 
-      {/* Updated Coin Information */}
       <Card className="border-green-500/20 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">

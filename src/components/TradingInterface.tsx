@@ -16,9 +16,9 @@ interface TradingData {
 
 export function TradingInterface() {
   const [tradingData, setTradingData] = useState<TradingData[]>([])
-  const [currentPrice, setCurrentPrice] = useState(GAIA_TOKEN.INITIAL_PRICE)
-  const [priceChange, setPriceChange] = useState(8.47)
-  const [volume24h, setVolume24h] = useState(8750000)
+  const [currentPrice, setCurrentPrice] = useState<number>(GAIA_TOKEN.INITIAL_PRICE)
+  const [priceChange, setPriceChange] = useState<number>(8.47)
+  const [volume24h, setVolume24h] = useState<number>(8750000)
 
   useEffect(() => {
     const generateTradingData = () => {
@@ -61,7 +61,6 @@ export function TradingInterface() {
 
   return (
     <div className="space-y-6">
-      {/* Updated Header with GAiA Contract Info */}
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
         <CardHeader>
           <CardTitle className="text-green-400">{GAIA_TOKEN.NAME} Trading Interface - Harmony of Culture</CardTitle>

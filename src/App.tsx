@@ -29,6 +29,7 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { EnhancedAdminControls } from '@/components/EnhancedAdminControls'
 import { ConnectionTracker } from '@/components/security/ConnectionTracker'
 import { Navbar } from '@/components/Navbar'
+import { AuthProvider } from '@/components/auth/AuthProvider'
 
 const queryClient = new QueryClient()
 
@@ -36,37 +37,39 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/docs" element={<Docs />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/auth-test" element={<AuthTest />} />
-            <Route path="/system-status" element={<SystemStatus />} />
-            <Route path="/ultimate-security" element={<UltimateSecurity />} />
-            <Route path="/enhanced-admin" element={<EnhancedAdminControls />} />
-            <Route path="/markets" element={<Markets />} />
-            <Route path="/gaias-exchange" element={<GaiasExchange />} />
-            <Route path="/gaming" element={<Gaming />} />
-            <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
-            <Route path="/wallet" element={<Wallet />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/marketing" element={<Marketing />} />
-            <Route path="/techno-soul-solutions" element={<TechnoSoulSolutions />} />
-            <Route path="/downloads" element={<Downloads />} />
-            <Route path="/virtual-world" element={<VirtualWorld />} />
-            <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
-            <Route path="/live-tracking" element={<LiveTracking />} />
-            <Route path="/coin-crafter" element={<CoinCrafter />} />
-            <Route path="/transparency" element={<Transparency />} />
-            <Route path="/landscape-builder" element={<LandscapeBuilder />} />
-          </Routes>
-        </BrowserRouter>
-        <ConnectionTracker />
+        <AuthProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/docs" element={<Docs />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/auth-test" element={<AuthTest />} />
+              <Route path="/system-status" element={<SystemStatus />} />
+              <Route path="/ultimate-security" element={<UltimateSecurity />} />
+              <Route path="/enhanced-admin" element={<EnhancedAdminControls />} />
+              <Route path="/markets" element={<Markets />} />
+              <Route path="/gaias-exchange" element={<GaiasExchange />} />
+              <Route path="/gaming" element={<Gaming />} />
+              <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/marketing" element={<Marketing />} />
+              <Route path="/techno-soul-solutions" element={<TechnoSoulSolutions />} />
+              <Route path="/downloads" element={<Downloads />} />
+              <Route path="/virtual-world" element={<VirtualWorld />} />
+              <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+              <Route path="/live-tracking" element={<LiveTracking />} />
+              <Route path="/coin-crafter" element={<CoinCrafter />} />
+              <Route path="/transparency" element={<Transparency />} />
+              <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+            </Routes>
+          </BrowserRouter>
+          <ConnectionTracker />
+        </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   )
