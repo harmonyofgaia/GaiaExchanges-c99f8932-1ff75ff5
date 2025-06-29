@@ -5,304 +5,296 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Switch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
 import { 
   Shield, 
   Lock, 
   Eye, 
-  AlertTriangle,
+  AlertTriangle, 
   CheckCircle,
-  UserCheck,
-  Camera,
-  Mic,
-  FileText,
-  Download,
-  Crown
+  Zap,
+  Globe,
+  Users
 } from 'lucide-react'
-import { toast } from 'sonner'
-import { ExoticDefenseSystem } from '@/components/security/ExoticDefenseSystem'
-
-interface SecurityThreat {
-  id: string
-  type: string
-  severity: 'low' | 'medium' | 'high' | 'critical'
-  timestamp: Date
-  blocked: boolean
-}
 
 export function GameSecurityPanel() {
-  const [securityLevel, setSecurityLevel] = useState(95)
-  const [adminVerified, setAdminVerified] = useState(false)
-  const [screenshotProtection, setScreenshotProtection] = useState(true)
-  const [voiceMonitoring, setVoiceMonitoring] = useState(true)
-  const [chatEncryption, setChatEncryption] = useState(true)
-  
-  const [threats, setThreats] = useState<SecurityThreat[]>([
+  const [securityLevel, setSecurityLevel] = useState(98)
+  const [activePlayers, setActivePlayers] = useState(2847)
+  const [securitySettings, setSecuritySettings] = useState({
+    antiCheat: true,
+    dataProtection: true,
+    realTimeMonitoring: true,
+    encryptedCommunication: true,
+    ddosProtection: true,
+    behaviorAnalysis: true
+  })
+
+  const securityFeatures = [
     {
-      id: '1',
-      type: 'Unauthorized chat access attempt',
-      severity: 'high',
-      timestamp: new Date(Date.now() - 5 * 60000),
-      blocked: true
+      name: 'Anti-Cheat Engine',
+      status: 'Active',
+      description: 'Advanced detection of cheating attempts',
+      icon: Shield,
+      color: 'text-green-400'
     },
     {
-      id: '2',
-      type: 'Screenshot malware detected',
-      severity: 'critical',
-      timestamp: new Date(Date.now() - 15 * 60000),
-      blocked: true
+      name: 'Data Encryption',
+      status: 'Active',
+      description: 'End-to-end encryption for all communications',
+      icon: Lock,
+      color: 'text-blue-400'
     },
     {
-      id: '3',
-      type: 'VR connection tampering',
-      severity: 'medium',
-      timestamp: new Date(Date.now() - 30 * 60000),
-      blocked: true
+      name: 'DDoS Protection',
+      status: 'Active',
+      description: 'Protection against distributed attacks',
+      icon: Zap,
+      color: 'text-yellow-400'
+    },
+    {
+      name: 'Behavior Analysis',
+      status: 'Active',
+      description: 'AI-powered suspicious activity detection',
+      icon: Eye,
+      color: 'text-purple-400'
     }
-  ])
+  ]
 
-  const initiateAdminVerification = () => {
-    toast.info('🔐 Initiating Admin Verification...', {
-      description: 'Please complete all security steps to access admin features',
-      duration: 4000
-    })
-    
-    // Simulate verification process
-    setTimeout(() => {
-      setAdminVerified(true)
-      toast.success('✅ Admin Verification Complete!', {
-        description: 'Full admin access granted with highest security clearance',
-        duration: 5000
-      })
-    }, 3000)
-  }
-
-  const downloadGAIAPolicies = () => {
-    if (!adminVerified) {
-      toast.error('🚫 Admin Verification Required', {
-        description: 'You must be verified as admin to download GAIA policies',
-        duration: 4000
-      })
-      return
+  const recentSecurityEvents = [
+    {
+      timestamp: new Date(Date.now() - 300000),
+      type: 'blocked',
+      description: 'Suspicious login attempt blocked',
+      severity: 'medium'
+    },
+    {
+      timestamp: new Date(Date.now() - 600000),
+      type: 'success',
+      description: 'Security scan completed successfully',
+      severity: 'low'
+    },
+    {
+      timestamp: new Date(Date.now() - 900000),
+      type: 'blocked',
+      description: 'Potential exploit attempt prevented',
+      severity: 'high'
     }
+  ]
 
-    toast.success('📄 Downloading GAIA Policies...', {
-      description: 'Official GAIA policy document will be downloaded',
-      duration: 3000
-    })
-    
-    // In a real implementation, this would trigger a PDF download
-    console.log('Downloading GAIA Policies PDF...')
-  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSecurityLevel(prev => Math.min(100, prev + (Math.random() - 0.5) * 2))
+      setActivePlayers(prev => prev + Math.floor((Math.random() - 0.5) * 20))
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'critical': return 'text-red-400 bg-red-600'
-      case 'high': return 'text-orange-400 bg-orange-600'
-      case 'medium': return 'text-yellow-400 bg-yellow-600'
-      default: return 'text-blue-400 bg-blue-600'
+      case 'high': return 'text-red-400'
+      case 'medium': return 'text-yellow-400'
+      case 'low': return 'text-green-400'
+      default: return 'text-muted-foreground'
     }
   }
 
   return (
     <div className="space-y-6">
-      
-      {/* Security Status Overview */}
-      <Card className="bg-gradient-to-r from-red-900/30 to-orange-900/30 border-red-500/30">
+      {/* Security Status Header */}
+      <Card className="border-2 border-red-500/50 bg-gradient-to-br from-red-900/30 to-orange-900/30">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-red-400">
             <Shield className="h-6 w-6" />
-            🛡️ GAIA Security Command Center - Exotic Defense Active
+            🛡️ Gaming Security Command Center
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            {/* Security Level */}
-            <div className="text-center">
-              <div className="text-4xl font-bold text-green-400 mb-2">{securityLevel}%</div>
-              <div className="text-sm text-muted-foreground mb-3">Security Level</div>
-              <Progress value={securityLevel} className="h-3" />
-              <Badge className="mt-2 bg-green-600">
-                <CheckCircle className="h-3 w-3 mr-1" />
-                MAXIMUM PROTECTION
-              </Badge>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="text-center p-4 bg-green-900/30 rounded border border-green-500/20">
+              <div className="text-3xl font-bold text-green-400">{securityLevel.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">Security Level</div>
+              <Progress value={securityLevel} className="mt-2" />
             </div>
-
-            {/* Admin Status */}
-            <div className="text-center">
-              <div className={`text-4xl mb-2 ${adminVerified ? 'text-green-400' : 'text-yellow-400'}`}>
-                {adminVerified ? '👑' : '🔒'}
-              </div>
-              <div className="text-sm text-muted-foreground mb-3">Admin Status</div>
-              {adminVerified ? (
-                <Badge className="bg-green-600">
-                  <Crown className="h-3 w-3 mr-1" />
-                  VERIFIED ADMIN
-                </Badge>
-              ) : (
-                <Button
-                  size="sm"
-                  onClick={initiateAdminVerification}
-                  className="bg-yellow-600 hover:bg-yellow-700"
-                >
-                  <UserCheck className="h-3 w-3 mr-1" />
-                  Verify Admin
-                </Button>
-              )}
+            <div className="text-center p-4 bg-blue-900/30 rounded border border-blue-500/20">
+              <div className="text-3xl font-bold text-blue-400">{activePlayers.toLocaleString()}</div>
+              <div className="text-sm text-muted-foreground">Protected Players</div>
             </div>
-
-            {/* Threat Status */}
-            <div className="text-center">
-              <div className="text-4xl font-bold text-red-400 mb-2">{threats.length}</div>
-              <div className="text-sm text-muted-foreground mb-3">Threats Blocked</div>
-              <Badge className="bg-red-600">
-                <AlertTriangle className="h-3 w-3 mr-1" />
-                ALL NEUTRALIZED
-              </Badge>
+            <div className="text-center p-4 bg-purple-900/30 rounded border border-purple-500/20">
+              <div className="text-3xl font-bold text-purple-400">24/7</div>
+              <div className="text-sm text-muted-foreground">Active Monitoring</div>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Security Features */}
-      <Card className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 border-purple-500/30">
+      {/* Security Features Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {securityFeatures.map((feature, index) => {
+          const Icon = feature.icon
+          return (
+            <Card key={index} className="border-green-500/30 bg-green-900/10">
+              <CardContent className="pt-4">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <Icon className={`h-8 w-8 ${feature.color}`} />
+                    <div>
+                      <h4 className="font-bold">{feature.name}</h4>
+                      <p className="text-sm text-muted-foreground">{feature.description}</p>
+                    </div>
+                  </div>
+                  <Badge className="bg-green-600 text-white">
+                    <CheckCircle className="h-3 w-3 mr-1" />
+                    {feature.status}
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
+          )
+        })}
+      </div>
+
+      {/* Security Settings */}
+      <Card className="border-blue-500/30">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-purple-400">
+          <CardTitle className="flex items-center gap-2 text-blue-400">
             <Lock className="h-5 w-5" />
-            Active Security Features
+            🔧 Security Configuration
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          
-          {/* Security Toggles */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 rounded-lg bg-green-500/10">
-                <div className="flex items-center gap-2">
-                  <Camera className="h-4 w-4 text-green-400" />
-                  <Label>Screenshot Protection</Label>
+              <div className="flex items-center justify-between">
+                <div>
+                  <label className="text-sm font-medium">Anti-Cheat Protection</label>
+                  <p className="text-xs text-muted-foreground">Real-time cheat detection</p>
                 </div>
-                <Switch
-                  checked={screenshotProtection}
-                  onCheckedChange={setScreenshotProtection}
+                <Switch 
+                  checked={securitySettings.antiCheat}
+                  onCheckedChange={(checked) => setSecuritySettings(prev => ({...prev, antiCheat: checked}))}
                 />
               </div>
               
-              <div className="flex items-center justify-between p-3 rounded-lg bg-blue-500/10">
-                <div className="flex items-center gap-2">
-                  <Mic className="h-4 w-4 text-blue-400" />
-                  <Label>Voice Monitoring</Label>
+              <div className="flex items-center justify-between">
+                <div>
+                  <label className="text-sm font-medium">Data Protection</label>
+                  <p className="text-xs text-muted-foreground">Enhanced data encryption</p>
                 </div>
-                <Switch
-                  checked={voiceMonitoring}
-                  onCheckedChange={setVoiceMonitoring}
+                <Switch 
+                  checked={securitySettings.dataProtection}
+                  onCheckedChange={(checked) => setSecuritySettings(prev => ({...prev, dataProtection: checked}))}
+                />
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <div>
+                  <label className="text-sm font-medium">Real-Time Monitoring</label>
+                  <p className="text-xs text-muted-foreground">24/7 security surveillance</p>
+                </div>
+                <Switch 
+                  checked={securitySettings.realTimeMonitoring}
+                  onCheckedChange={(checked) => setSecuritySettings(prev => ({...prev, realTimeMonitoring: checked}))}
                 />
               </div>
             </div>
-
+            
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 rounded-lg bg-purple-500/10">
-                <div className="flex items-center gap-2">
-                  <Lock className="h-4 w-4 text-purple-400" />
-                  <Label>Chat Encryption</Label>
+              <div className="flex items-center justify-between">
+                <div>
+                  <label className="text-sm font-medium">Encrypted Communication</label>
+                  <p className="text-xs text-muted-foreground">Secure chat and voice</p>
                 </div>
-                <Switch
-                  checked={chatEncryption}
-                  onCheckedChange={setChatEncryption}
+                <Switch 
+                  checked={securitySettings.encryptedCommunication}
+                  onCheckedChange={(checked) => setSecuritySettings(prev => ({...prev, encryptedCommunication: checked}))}
                 />
               </div>
               
-              <div className="flex items-center justify-between p-3 rounded-lg bg-yellow-500/10">
-                <div className="flex items-center gap-2">
-                  <Eye className="h-4 w-4 text-yellow-400" />
-                  <Label>Activity Monitoring</Label>
+              <div className="flex items-center justify-between">
+                <div>
+                  <label className="text-sm font-medium">DDoS Protection</label>
+                  <p className="text-xs text-muted-foreground">Attack prevention system</p>
                 </div>
-                <Switch
-                  checked={true}
-                  disabled={true}
+                <Switch 
+                  checked={securitySettings.ddosProtection}
+                  onCheckedChange={(checked) => setSecuritySettings(prev => ({...prev, ddosProtection: checked}))}
+                />
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <div>
+                  <label className="text-sm font-medium">Behavior Analysis</label>
+                  <p className="text-xs text-muted-foreground">AI-powered threat detection</p>
+                </div>
+                <Switch 
+                  checked={securitySettings.behaviorAnalysis}
+                  onCheckedChange={(checked) => setSecuritySettings(prev => ({...prev, behaviorAnalysis: checked}))}
                 />
               </div>
             </div>
-          </div>
-
-          {/* GAIA Policies Section */}
-          <div className="p-4 bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border border-cyan-500/30 rounded-lg">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <FileText className="h-5 w-5 text-cyan-400" />
-                <h4 className="font-bold text-cyan-400">GAIA Official Policies</h4>
-              </div>
-              {adminVerified && (
-                <Badge className="bg-green-600">
-                  <CheckCircle className="h-3 w-3 mr-1" />
-                  Admin Access
-                </Badge>
-              )}
-            </div>
-            
-            <p className="text-sm text-cyan-200 mb-4">
-              Official GAIA policies and guidelines for the virtual world platform. 
-              Contains security protocols, user conduct rules, and administrative procedures.
-            </p>
-            
-            <Button
-              onClick={downloadGAIAPolicies}
-              disabled={!adminVerified}
-              className="bg-cyan-600 hover:bg-cyan-700 disabled:opacity-50"
-            >
-              <Download className="h-4 w-4 mr-2" />
-              Download GAIA Policies PDF
-            </Button>
-            
-            {!adminVerified && (
-              <p className="text-xs text-yellow-400 mt-2">
-                ⚠️ Admin verification required to access policy documents
-              </p>
-            )}
           </div>
         </CardContent>
       </Card>
 
       {/* Recent Security Events */}
-      <Card className="bg-gradient-to-r from-orange-900/30 to-red-900/30 border-orange-500/30">
+      <Card className="border-yellow-500/30">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-orange-400">
+          <CardTitle className="flex items-center gap-2 text-yellow-400">
             <AlertTriangle className="h-5 w-5" />
-            Recent Security Events
+            📊 Recent Security Events
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {threats.map((threat) => (
-              <div key={threat.id} className="flex items-center justify-between p-3 rounded-lg bg-black/30">
+            {recentSecurityEvents.map((event, index) => (
+              <div key={index} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg border">
                 <div className="flex items-center gap-3">
-                  <div className={`w-3 h-3 rounded-full ${threat.blocked ? 'bg-green-400' : 'bg-red-400'}`} />
+                  {event.type === 'blocked' ? (
+                    <Shield className="h-5 w-5 text-red-400" />
+                  ) : (
+                    <CheckCircle className="h-5 w-5 text-green-400" />
+                  )}
                   <div>
-                    <div className="font-medium text-sm">{threat.type}</div>
-                    <div className="text-xs text-muted-foreground">
-                      {threat.timestamp.toLocaleString()}
-                    </div>
+                    <p className="text-sm font-medium">{event.description}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {event.timestamp.toLocaleString()}
+                    </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Badge className={getSeverityColor(threat.severity)}>
-                    {threat.severity.toUpperCase()}
-                  </Badge>
-                  {threat.blocked && (
-                    <Badge className="bg-green-600">
-                      BLOCKED
-                    </Badge>
-                  )}
-                </div>
+                <Badge className={`${getSeverityColor(event.severity)} border-current`} variant="outline">
+                  {event.severity.toUpperCase()}
+                </Badge>
               </div>
             ))}
           </div>
         </CardContent>
       </Card>
 
-      {/* Exotic Defense System */}
-      <ExoticDefenseSystem />
+      {/* Emergency Actions */}
+      <Card className="border-red-500/30 bg-red-900/10">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-red-400">
+            <AlertTriangle className="h-5 w-5" />
+            🚨 Emergency Security Actions
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Button variant="destructive" className="h-16">
+              <Shield className="h-5 w-5 mr-2" />
+              Lock Down System
+            </Button>
+            <Button variant="outline" className="h-16 border-yellow-500 text-yellow-400">
+              <Eye className="h-5 w-5 mr-2" />
+              Force Security Scan
+            </Button>
+            <Button variant="outline" className="h-16 border-blue-500 text-blue-400">
+              <Users className="h-5 w-5 mr-2" />
+              Review Active Sessions
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
