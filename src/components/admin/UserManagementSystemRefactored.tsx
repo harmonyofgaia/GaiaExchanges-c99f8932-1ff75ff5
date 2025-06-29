@@ -8,6 +8,7 @@ import { IPControlCenter } from './IPControlCenter'
 import { QuickActionsPanel } from './QuickActionsPanel'
 import { ChatSecurityPanel } from './ChatSecurityPanel'
 import { EnhancedUserAnalytics } from './EnhancedUserAnalytics'
+import { EncryptedSecurityReports } from './EncryptedSecurityReports'
 
 export function UserManagementSystemRefactored() {
   return (
@@ -21,12 +22,13 @@ export function UserManagementSystemRefactored() {
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="analytics" className="w-full">
-            <TabsList className="grid w-full grid-cols-5">
+            <TabsList className="grid w-full grid-cols-6">
               <TabsTrigger value="analytics">Enhanced Analytics</TabsTrigger>
               <TabsTrigger value="users">User Management</TabsTrigger>
               <TabsTrigger value="ip-control">IP Control Center</TabsTrigger>
               <TabsTrigger value="actions">Quick Actions</TabsTrigger>
               <TabsTrigger value="chat-security">Chat Security</TabsTrigger>
+              <TabsTrigger value="reports">Encrypted Reports</TabsTrigger>
             </TabsList>
 
             <TabsContent value="analytics" className="space-y-4">
@@ -47,6 +49,10 @@ export function UserManagementSystemRefactored() {
 
             <TabsContent value="chat-security" className="space-y-4">
               <ChatSecurityPanel />
+            </TabsContent>
+
+            <TabsContent value="reports" className="space-y-4">
+              <EncryptedSecurityReports />
             </TabsContent>
           </Tabs>
         </CardContent>
