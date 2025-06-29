@@ -23,23 +23,23 @@ export function GaiaWallet() {
     return () => clearInterval(interval)
   }, [])
 
-  const copyWalletAddress = () => {
+  const copyOfficialWalletAddress = () => {
     navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
-    toast.success('GAiA Wallet Address Copied!', {
+    toast.success('Official GAiA Wallet Address Copied!', {
       description: 'Official GAiA wallet address copied to clipboard',
       duration: 3000
     })
   }
 
-  const copyContractAddress = () => {
+  const copyOfficialContractAddress = () => {
     navigator.clipboard.writeText(GAIA_TOKEN.CONTRACT_ADDRESS)
-    toast.success('GAiA Contract Address Copied!', {
+    toast.success('Official GAiA Contract Address Copied!', {
       description: 'Official GAiA contract address copied to clipboard',
       duration: 3000
     })
   }
 
-  const openPumpFun = () => {
+  const openOfficialPumpFun = () => {
     window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
   }
 
@@ -65,13 +65,13 @@ export function GaiaWallet() {
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Wallet Address Display */}
+          {/* Official Wallet Address Display */}
           <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
               <span className="text-blue-400 font-bold">Official GAiA Wallet Address:</span>
               <div className="flex gap-2">
                 <Button 
-                  onClick={copyWalletAddress}
+                  onClick={copyOfficialWalletAddress}
                   variant="outline" 
                   size="sm"
                   className="border-blue-500/30 text-blue-400"
@@ -80,7 +80,7 @@ export function GaiaWallet() {
                   Copy
                 </Button>
                 <Button 
-                  onClick={openPumpFun}
+                  onClick={openOfficialPumpFun}
                   variant="outline" 
                   size="sm"
                   className="border-purple-500/30 text-purple-400"
@@ -95,12 +95,12 @@ export function GaiaWallet() {
             </code>
           </div>
 
-          {/* Contract Address Display */}
+          {/* Official Contract Address Display */}
           <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-purple-400 font-bold">GAiA Contract Address:</span>
+              <span className="text-purple-400 font-bold">Official GAiA Contract Address:</span>
               <Button 
-                onClick={copyContractAddress}
+                onClick={copyOfficialContractAddress}
                 variant="outline" 
                 size="sm"
                 className="border-purple-500/30 text-purple-400"
@@ -120,7 +120,7 @@ export function GaiaWallet() {
               <CardContent className="pt-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">GAiA Balance</p>
+                    <p className="text-sm text-muted-foreground">Official GAiA Balance</p>
                     <p className="text-xl font-bold text-green-400">{formatGaiaNumber(realTimeBalance)}</p>
                   </div>
                   <DollarSign className="h-6 w-6 text-green-400" />
@@ -132,7 +132,7 @@ export function GaiaWallet() {
               <CardContent className="pt-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">GAiA Price</p>
+                    <p className="text-sm text-muted-foreground">Official GAiA Price</p>
                     <p className="text-xl font-bold text-blue-400">{formatGaiaPrice(currentPrice)}</p>
                   </div>
                   <TrendingUp className="h-6 w-6 text-blue-400" />
@@ -144,7 +144,7 @@ export function GaiaWallet() {
               <CardContent className="pt-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">USD Value</p>
+                    <p className="text-sm text-muted-foreground">Official USD Value</p>
                     <p className="text-xl font-bold text-purple-400">{formatGaiaPrice(realTimeBalance * currentPrice)}</p>
                   </div>
                   <Zap className="h-6 w-6 text-purple-400" />

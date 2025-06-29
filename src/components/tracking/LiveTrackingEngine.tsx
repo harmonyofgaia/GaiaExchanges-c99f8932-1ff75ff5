@@ -23,7 +23,7 @@ interface GAiATrackingMetrics {
 interface LiveGAiAEvent {
   id: string
   timestamp: Date
-  type: 'NEW_GAiA_TRANSACTION' | 'NEW_GAiA_TRADE' | 'NEW_HOLDER_ACTION' | 'NEW_GAiA_UPDATE' | 'NEW_SECURITY_EVENT'
+  type: 'OFFICIAL_GAiA_TRANSACTION' | 'OFFICIAL_GAiA_TRADE' | 'OFFICIAL_HOLDER_ACTION' | 'OFFICIAL_GAiA_UPDATE' | 'OFFICIAL_SECURITY_EVENT'
   description: string
   value: number
   location: string
@@ -50,18 +50,18 @@ export function LiveTrackingEngine() {
   const eventCounter = useRef(0)
 
   useEffect(() => {
-    console.log('🌍 New GAiA Tracking Engine: Connected to wallet:', GAIA_TOKEN.WALLET_ADDRESS)
-    console.log('📄 New GAiA Contract:', GAIA_TOKEN.CONTRACT_ADDRESS)
+    console.log('🌍 Official GAiA Tracking Engine: Connected to wallet:', GAIA_TOKEN.WALLET_ADDRESS)
+    console.log('📄 Official GAiA Contract:', GAIA_TOKEN.CONTRACT_ADDRESS)
     
     const performLiveGAiATracking = () => {
-      const eventTypes = ['NEW_GAiA_TRANSACTION', 'NEW_GAiA_TRADE', 'NEW_HOLDER_ACTION', 'NEW_GAiA_UPDATE', 'NEW_SECURITY_EVENT'] as const
+      const eventTypes = ['OFFICIAL_GAiA_TRANSACTION', 'OFFICIAL_GAiA_TRADE', 'OFFICIAL_HOLDER_ACTION', 'OFFICIAL_GAiA_UPDATE', 'OFFICIAL_SECURITY_EVENT'] as const
       const locations = ['New York', 'London', 'Tokyo', 'Singapore', 'Frankfurt', 'Sydney', 'Dubai', 'Miami', 'Berlin']
       
       const newEvent: LiveGAiAEvent = {
-        id: `new-gaia-track-${Date.now()}-${eventCounter.current++}`,
+        id: `official-gaia-track-${Date.now()}-${eventCounter.current++}`,
         timestamp: new Date(),
         type: eventTypes[Math.floor(Math.random() * eventTypes.length)],
-        description: generateNewGAiAEventDescription(),
+        description: generateOfficialGAiAEventDescription(),
         value: Math.random() * 150000,
         location: locations[Math.floor(Math.random() * locations.length)],
         performanceBoost: 15 + Math.random() * 8
@@ -83,19 +83,19 @@ export function LiveTrackingEngine() {
         userEngagement: Math.min(99.9, prev.userEngagement + (Math.random() - 0.5) * 0.8)
       }))
 
-      console.log('🌍 NEW GAiA ECOSYSTEM - Live tracking update:', newEvent)
+      console.log('🌍 OFFICIAL GAiA ECOSYSTEM - Live tracking update:', newEvent)
     }
 
-    const generateNewGAiAEventDescription = () => {
+    const generateOfficialGAiAEventDescription = () => {
       const descriptions = [
-        `New GAiA Token transaction processed via ${GAIA_TOKEN.WALLET_ADDRESS}`,
-        `New GAiA market volume increased - connected to ${GAIA_TOKEN.CONTRACT_ADDRESS}`,
-        'New GAiA holder joined through enhanced Love & Joy protocol',
-        'New GAiA security scan completed - 100% threat-free environment',
-        'New GAiA global network expansion - enhanced country connection',
-        'New GAiA performance enhancement applied - 15x faster than competitors',
-        'New GAiA ecosystem health improved - sustainable growth metrics',
-        'New GAiA real-time analytics updated - predictive AI enhanced'
+        `Official GAiA Token transaction processed via ${GAIA_TOKEN.WALLET_ADDRESS}`,
+        `Official GAiA market volume increased - connected to ${GAIA_TOKEN.CONTRACT_ADDRESS}`,
+        'Official GAiA holder joined through enhanced Love & Joy protocol',
+        'Official GAiA security scan completed - 100% threat-free environment',
+        'Official GAiA global network expansion - enhanced country connection',
+        'Official GAiA performance enhancement applied - 15x faster than competitors',
+        'Official GAiA ecosystem health improved - sustainable growth metrics',
+        'Official GAiA real-time analytics updated - predictive AI enhanced'
       ]
       return descriptions[Math.floor(Math.random() * descriptions.length)]
     }
@@ -119,7 +119,7 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">New GAiA Transactions</p>
+                <p className="text-sm text-muted-foreground">Official GAiA Transactions</p>
                 <p className="text-2xl font-bold text-green-400">{metrics.realTimeTransactions.toLocaleString()}</p>
                 <Badge className="mt-1 bg-green-600 text-white text-xs">
                   {metrics.performanceMultiplier.toFixed(1)}x FASTER
@@ -134,10 +134,10 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">New GAiA Market Volume</p>
+                <p className="text-sm text-muted-foreground">Official GAiA Market Volume</p>
                 <p className="text-2xl font-bold text-blue-400">{formatCurrency(metrics.gaiaMarketVolume)}</p>
                 <Badge className="mt-1 bg-blue-600 text-white text-xs">
-                  CONNECTED TO NEW TOKEN
+                  CONNECTED TO OFFICIAL TOKEN
                 </Badge>
               </div>
               <TrendingUp className="h-8 w-8 text-blue-400" />
@@ -149,10 +149,10 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">New GAiA Price</p>
+                <p className="text-sm text-muted-foreground">Official GAiA Price</p>
                 <p className="text-2xl font-bold text-purple-400">{formatCurrency(metrics.gaiaPrice)}</p>
                 <Badge className="mt-1 bg-purple-600 text-white text-xs">
-                  LIVE PRICE
+                  OFFICIAL LIVE PRICE
                 </Badge>
               </div>
               <Zap className="h-8 w-8 text-purple-400" />
@@ -164,10 +164,10 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">New GAiA Holders</p>
+                <p className="text-sm text-muted-foreground">Official GAiA Holders</p>
                 <p className="text-2xl font-bold text-yellow-400">{metrics.gaiaHolders.toLocaleString()}</p>
                 <Badge className="mt-1 bg-yellow-600 text-white text-xs">
-                  ENHANCED COMMUNITY
+                  OFFICIAL COMMUNITY
                 </Badge>
               </div>
               <Globe className="h-8 w-8 text-yellow-400" />
@@ -180,7 +180,7 @@ export function LiveTrackingEngine() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Shield className="h-5 w-5" />
-            GAiA ECOSYSTEM DOMINANCE - Love & Joy Protocol Active
+            OFFICIAL GAiA ECOSYSTEM DOMINANCE - Love & Joy Protocol Active
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -214,7 +214,7 @@ export function LiveTrackingEngine() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-cyan-400">
             <Database className="h-5 w-5" />
-            Live New GAiA Events Stream - Connected to New Token
+            Live Official GAiA Events Stream - Connected to Official Token
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -250,16 +250,16 @@ export function LiveTrackingEngine() {
       <Card className="border-yellow-500/30 bg-gradient-to-r from-yellow-900/20 to-orange-900/20">
         <CardContent className="pt-6">
           <div className="text-center space-y-4">
-            <h3 className="text-2xl font-bold text-yellow-400">🌍 NEW GAiA ECOSYSTEM WORLD DOMINATION</h3>
+            <h3 className="text-2xl font-bold text-yellow-400">🌍 OFFICIAL GAiA ECOSYSTEM WORLD DOMINATION</h3>
             <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
-              Our new GAiA system operates at <span className="text-green-400 font-bold">{metrics.performanceMultiplier.toFixed(1)}x faster</span> speeds 
+              Our official GAiA system operates at <span className="text-green-400 font-bold">{metrics.performanceMultiplier.toFixed(1)}x faster</span> speeds 
               than any existing platform, with <span className="text-blue-400 font-bold">100% security</span> and 
               <span className="text-purple-400 font-bold"> zero downtime</span>. 
-              Connected to wallet: <span className="text-green-400 font-bold text-xs">{GAIA_TOKEN.WALLET_ADDRESS}</span>
+              Connected to official wallet: <span className="text-green-400 font-bold text-xs">{GAIA_TOKEN.WALLET_ADDRESS}</span>
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-4">
               <Badge className="bg-green-600 text-white text-sm py-2 px-4">
-                💚 New GAiA Love Protocol Active
+                💚 Official GAiA Love Protocol Active
               </Badge>
               <Badge className="bg-yellow-600 text-white text-sm py-2 px-4">
                 😊 Enhanced Joy Network
@@ -268,7 +268,7 @@ export function LiveTrackingEngine() {
                 🚀 15x Performance Guaranteed
               </Badge>
               <Badge className="bg-purple-600 text-white text-sm py-2 px-4">
-                🌍 New Global GAiA Leader
+                🌍 Official Global GAiA Leader
               </Badge>
             </div>
           </div>
@@ -279,11 +279,11 @@ export function LiveTrackingEngine() {
 
   function getEventBadgeColor(type: string) {
     switch (type) {
-      case 'NEW_GAiA_TRANSACTION': return 'bg-green-600 text-white'
-      case 'NEW_GAiA_TRADE': return 'bg-blue-600 text-white'
-      case 'NEW_HOLDER_ACTION': return 'bg-purple-600 text-white'
-      case 'NEW_GAiA_UPDATE': return 'bg-yellow-600 text-white'
-      case 'NEW_SECURITY_EVENT': return 'bg-red-600 text-white'
+      case 'OFFICIAL_GAiA_TRANSACTION': return 'bg-green-600 text-white'
+      case 'OFFICIAL_GAiA_TRADE': return 'bg-blue-600 text-white'
+      case 'OFFICIAL_HOLDER_ACTION': return 'bg-purple-600 text-white'
+      case 'OFFICIAL_GAiA_UPDATE': return 'bg-yellow-600 text-white'
+      case 'OFFICIAL_SECURITY_EVENT': return 'bg-red-600 text-white'
       default: return 'bg-gray-600 text-white'
     }
   }
