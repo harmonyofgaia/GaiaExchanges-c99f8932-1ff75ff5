@@ -23,6 +23,7 @@ import Admin from "./pages/Admin";
 import Gaming from "./pages/Gaming";
 import GaiaFighterGame from "./pages/GaiaFighterGame";
 import LiveTracking from "./pages/LiveTracking";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => (
               <Route path="/gaming" element={<Gaming />} />
               <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
               <Route path="/live-tracking" element={<LiveTracking />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
         </AuthProvider>
