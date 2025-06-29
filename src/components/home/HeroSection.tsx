@@ -76,9 +76,9 @@ export const HeroSection = () => {
 
           {/* GAiA with NEW CUSTOM LETTER STYLE and Logo Integration */}
           <div className="relative flex items-center justify-center gap-8">
-            {/* Left Logo with Enhanced Fade Effect */}
-            <div className="relative">
-              <div className="relative w-24 h-24">
+            {/* Left Logo with Enhanced Fade Effect and "Harmony of GAiA" text */}
+            <div className="relative flex flex-col items-center">
+              <div className="relative w-24 h-24 mb-2">
                 <img 
                   src="/lovable-uploads/32992cdc-cfdf-4b28-805d-7e30bac68456.png"
                   alt="Gaia of Harmony Logo Left"
@@ -96,6 +96,18 @@ export const HeroSection = () => {
                     background: 'radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0.9) 100%)'
                   }}
                 />
+              </div>
+              {/* "Harmony of GAiA" text under left logo */}
+              <div className="text-center">
+                <div 
+                  className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-green-300"
+                  style={{
+                    fontFamily: "'Cinzel', serif",
+                    letterSpacing: '0.1em'
+                  }}
+                >
+                  Harmony of GAiA
+                </div>
               </div>
             </div>
 
@@ -142,9 +154,9 @@ export const HeroSection = () => {
               </div>
             </div>
 
-            {/* Right Logo with Enhanced Fade Effect (Mirrored) */}
-            <div className="relative">
-              <div className="relative w-24 h-24">
+            {/* Right Logo with Enhanced Fade Effect (Mirrored) and "Harmony of GAiA" text */}
+            <div className="relative flex flex-col items-center">
+              <div className="relative w-24 h-24 mb-2">
                 <img 
                   src="/lovable-uploads/32992cdc-cfdf-4b28-805d-7e30bac68456.png"
                   alt="Gaia of Harmony Logo Right"
@@ -162,6 +174,18 @@ export const HeroSection = () => {
                     background: 'radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0.9) 100%)'
                   }}
                 />
+              </div>
+              {/* "Harmony of GAiA" text under right logo (mirrored) */}
+              <div className="text-center">
+                <div 
+                  className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-purple-300"
+                  style={{
+                    fontFamily: "'Cinzel', serif",
+                    letterSpacing: '0.1em'
+                  }}
+                >
+                  Harmony of GAiA
+                </div>
               </div>
             </div>
           </div>
