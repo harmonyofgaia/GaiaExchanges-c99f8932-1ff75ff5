@@ -22,6 +22,7 @@ const menuItems = [
   { title: "System Status", url: "/system-status", icon: Settings },
   { title: "Comprehensive Status", url: "/comprehensive-status", icon: BarChart3 },
   { title: "Ultimate Security", url: "/ultimate-security", icon: Shield },
+  { title: "🔥 Immortal Security", url: "/immortal-security", icon: Flame },
   { title: "Live Tracking", url: "/live-tracking", icon: Activity },
   { title: "🔥 Coin Crafter", url: "/coin-crafter", icon: Flame },
   { title: "🔥 Transparency Center", url: "/transparency", icon: Download },

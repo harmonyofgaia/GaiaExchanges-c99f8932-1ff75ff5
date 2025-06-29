@@ -17,6 +17,7 @@ import SecureAdmin from '@/pages/SecureAdmin'
 import UltimateSecurity from '@/pages/UltimateSecurity'
 import SecureVault from '@/pages/SecureVault'
 import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
+import ImmortalSecurity from '@/pages/ImmortalSecurity'
 import { SystemMonitor } from '@/components/SystemMonitor'
 import { SystemVerification } from '@/components/SystemVerification'
 
@@ -50,6 +51,7 @@ function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+              <Route path="/immortal-security" element={<ImmortalSecurity />} />
               
               <Route path="/admin" element={
                 <ProtectedRoute isAdminRoute={true}>
