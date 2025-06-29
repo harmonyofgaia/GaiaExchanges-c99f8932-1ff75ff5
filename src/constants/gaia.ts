@@ -3,11 +3,15 @@ export const GAIA_TOKEN = {
   CONTRACT_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
   WALLET_ADDRESS: 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7',
   SYMBOL: 'GAiA',
-  NAME: 'Harmony of Gaia Token',
+  NAME: 'GAiA Token - Powered by Harmony of Gaia',
   DECIMALS: 18,
   INITIAL_PRICE: 0.0001,
   PUMP_FUN_URL: 'https://pump.fun/5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-  NETWORK: 'Solana'
+  NETWORK: 'Solana',
+  
+  // BRAND CLARIFICATION - WE ARE NOT GAIA EVERWORLD
+  BRAND_STATEMENT: 'GAiA Token is NOT associated with GAIA Everworld (coinmarketcap.com/currencies/gaia-everworld/). We are a completely separate, exclusive project powered by Harmony of Gaia Projects Creator Business, empowered by Culture of Harmony.',
+  OFFICIAL_DISCLAIMER: 'This project is entirely independent from any other GAIA-named tokens or projects. We maintain our own unique blockchain identity and community.'
 }
 
 export const GAIA_METRICS = {

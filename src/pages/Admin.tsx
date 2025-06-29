@@ -24,6 +24,8 @@ import { GlobalMarketingEngine } from '@/components/marketing/GlobalMarketingEng
 import { AdminNFTMarketplace } from '@/components/admin/AdminNFTMarketplace'
 import { GamingAssetsManager } from '@/components/admin/GamingAssetsManager'
 import { GlobalTechIntelligence } from '@/components/security/GlobalTechIntelligence'
+import { BrandClarificationManager } from '@/components/admin/BrandClarificationManager'
+import { CompletionTaskManager } from '@/components/admin/CompletionTaskManager'
 
 const Admin = () => {
   return (
@@ -34,7 +36,7 @@ const Admin = () => {
             🌍 HARMONY OF GAIA ADMIN CONTROL CENTER
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Master Defense Orchestrator • Invisible Avatar System • Global Network Control • Quantum Security
+            GAiA Token (NOT GAIA Everworld) • Culture of Harmony • Exclusive Community • Quantum Security
           </p>
           <p className="text-lg text-green-400 mt-2">
             🎵 "Seeds Will Form Into Music" - Protected By Ultimate Defense + Invisible Operations 🎵
@@ -43,8 +45,14 @@ const Admin = () => {
 
         <AdminProtectedRoute>
           <AdminOnlyAccess>
-            <Tabs defaultValue="master-defense" className="w-full">
+            <Tabs defaultValue="brand-clarification" className="w-full">
               <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-green-500/20">
+                <TabsTrigger value="brand-clarification" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+                  🚨 Brand Clarity
+                </TabsTrigger>
+                <TabsTrigger value="completion-tasks" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                  📋 Task Manager  
+                </TabsTrigger>
                 <TabsTrigger value="master-defense" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
                   👑 Master Defense
                 </TabsTrigger>
@@ -72,25 +80,18 @@ const Admin = () => {
                 <TabsTrigger value="gaming-assets" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
                   🛡️ Game Assets
                 </TabsTrigger>
-                <TabsTrigger value="live-blockchain" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-                  ⚡ Live Blockchain
-                </TabsTrigger>
-                <TabsTrigger value="architek-blockchain" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-                  🔗 Architek Network
-                </TabsTrigger>
-                <TabsTrigger value="secure-connections" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-                  🛡️ Secure Matrix
-                </TabsTrigger>
-                <TabsTrigger value="marketing-engine" className="data-[state=active]:bg-gold-500/20 data-[state=active]:text-gold-400">
-                  🚀 Marketing Engine
-                </TabsTrigger>
-                <TabsTrigger value="game-cloud" className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400">
-                  🎮 Game Cloud
-                </TabsTrigger>
                 <TabsTrigger value="system" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
                   🛡️ System
                 </TabsTrigger>
               </TabsList>
+              
+              <TabsContent value="brand-clarification" className="space-y-6 mt-6">
+                <BrandClarificationManager />
+              </TabsContent>
+              
+              <TabsContent value="completion-tasks" className="space-y-6 mt-6">
+                <CompletionTaskManager />
+              </TabsContent>
               
               <TabsContent value="master-defense" className="space-y-6 mt-6">
                 <MasterDefenseOrchestrator />
@@ -126,26 +127,6 @@ const Admin = () => {
               
               <TabsContent value="gaming-assets" className="space-y-6 mt-6">
                 <GamingAssetsManager />
-              </TabsContent>
-              
-              <TabsContent value="live-blockchain" className="space-y-6 mt-6">
-                <LiveBlockchainViewer />
-              </TabsContent>
-              
-              <TabsContent value="architek-blockchain" className="space-y-6 mt-6">
-                <QuantumBlockchainCore />
-              </TabsContent>
-              
-              <TabsContent value="secure-connections" className="space-y-6 mt-6">
-                <SecureConnectionManager />
-              </TabsContent>
-              
-              <TabsContent value="marketing-engine" className="space-y-6 mt-6">
-                <GlobalMarketingEngine />
-              </TabsContent>
-              
-              <TabsContent value="game-cloud" className="space-y-6 mt-6">
-                <GameDevelopmentCloud />
               </TabsContent>
               
               <TabsContent value="system" className="space-y-6 mt-6">
