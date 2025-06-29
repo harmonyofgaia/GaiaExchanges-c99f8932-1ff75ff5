@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -22,7 +23,8 @@ const LiveTracking = () => {
 
   useEffect(() => {
     console.log('🌍 LiveTracking: Component mounting...')
-    console.log('🔗 Connected Wallet Address:', GAIA_WALLET_ADDRESS)
+    console.log('🔗 Connected GAiA Wallet Address:', GAIA_WALLET_ADDRESS)
+    console.log('📄 GAiA Contract Address:', GAIA_CONTRACT_ADDRESS)
     setMounted(true)
     
     // Time update
@@ -89,37 +91,49 @@ const LiveTracking = () => {
           Real-Time Performance Monitor
         </p>
         
-        {/* Updated Connected Wallet & Contract Display */}
-        <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-green-400 font-bold">Connected GAiA Wallet:</span>
-            <Button 
-              onClick={() => navigator.clipboard.writeText(GAIA_WALLET_ADDRESS)}
-              variant="outline" 
-              size="sm"
-              className="border-green-500/30 text-green-400"
-            >
-              Copy Address
-            </Button>
+        {/* GAiA Wallet & Contract Display */}
+        <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 space-y-4">
+          <div className="text-center">
+            <h2 className="text-xl font-bold text-green-400 mb-4">🌊 Official GAiA Token Information</h2>
           </div>
-          <code className="text-green-300 font-mono text-sm break-all block">
-            {GAIA_WALLET_ADDRESS}
-          </code>
           
-          <div className="flex items-center justify-between mt-3">
-            <span className="text-blue-400 font-bold">GAiA Contract Address:</span>
-            <Button 
-              onClick={() => navigator.clipboard.writeText(GAIA_CONTRACT_ADDRESS)}
-              variant="outline" 
-              size="sm"
-              className="border-blue-500/30 text-blue-400"
-            >
-              Copy Contract
-            </Button>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Wallet Address */}
+            <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-blue-400 font-bold">GAiA Wallet Address:</span>
+                <Button 
+                  onClick={() => navigator.clipboard.writeText(GAIA_WALLET_ADDRESS)}
+                  variant="outline" 
+                  size="sm"
+                  className="border-blue-500/30 text-blue-400"
+                >
+                  Copy Address
+                </Button>
+              </div>
+              <code className="text-blue-300 font-mono text-sm break-all block bg-blue-900/10 p-2 rounded">
+                {GAIA_WALLET_ADDRESS}
+              </code>
+            </div>
+
+            {/* Contract Address */}
+            <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-purple-400 font-bold">GAiA Contract Address:</span>
+                <Button 
+                  onClick={() => navigator.clipboard.writeText(GAIA_CONTRACT_ADDRESS)}
+                  variant="outline" 
+                  size="sm"
+                  className="border-purple-500/30 text-purple-400"
+                >
+                  Copy Contract
+                </Button>
+              </div>
+              <code className="text-purple-300 font-mono text-sm break-all block bg-purple-900/10 p-2 rounded">
+                {GAIA_CONTRACT_ADDRESS}
+              </code>
+            </div>
           </div>
-          <code className="text-blue-300 font-mono text-sm break-all block">
-            {GAIA_CONTRACT_ADDRESS}
-          </code>
         </div>
         
         <div className="flex justify-center items-center gap-4 flex-wrap">
