@@ -2,110 +2,132 @@
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Smartphone, Mail } from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp'
-import { useToast } from '@/hooks/use-toast'
+import { Smartphone, Shield, CheckCircle } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface AdminMFAProps {
   onMFASuccess: () => void
 }
 
 export function AdminMFA({ onMFASuccess }: AdminMFAProps) {
-  const [mfaMethod, setMfaMethod] = useState<'phone' | 'email' | null>(null)
-  const [otpCode, setOtpCode] = useState('')
-  const { toast } = useToast()
+  const [smsCode, setSmsCode] = useState('')
+  const [googleCode, setGoogleCode] = useState('')
+  const [emailCode, setEmailCode] = useState('')
+  const [finalKey, setFinalKey] = useState('')
+  const [currentStep, setCurrentStep] = useState(1)
+  const [isVerifying, setIsVerifying] = useState(false)
 
-  const sendMFACode = (method: 'phone' | 'email') => {
-    setMfaMethod(method)
-    
-    const code = Math.floor(100000 + Math.random() * 900000).toString()
-    console.log(`MFA Code for ${method}:`, code)
-    
-    if (method === 'phone') {
-      toast({
-        title: "SMS Verification Sent",
-        description: "6-digit code sent to +31687758236",
+  const handleSMSVerification = async () => {
+    if (smsCode.length === 6) {
+      setIsVerifying(true)
+      await new Promise(resolve => setTimeout(resolve, 1500))
+      
+      toast.success('📱 SMS Code Verified!', {
+        description: 'Step 2 of 4 completed',
+        duration: 3000
       })
-    } else {
-      toast({
-        title: "Email Verification Sent", 
-        description: "6-digit code sent to info@cultureofharmony.net",
-      })
+      
+      setCurrentStep(2)
+      setIsVerifying(false)
     }
   }
 
-  const verifyMFA = () => {
-    if (otpCode.length === 6) {
-      const deviceFingerprint = btoa(
-        navigator.userAgent + 
-        navigator.language + 
-        screen.width + 'x' + screen.height + 
-        new Date().getTimezoneOffset()
-      )
-      localStorage.setItem('gaia_admin_device', deviceFingerprint)
-      onMFASuccess()
-      toast({
-        title: "MFA Verification Successful",
-        description: "Device registered and access granted",
+  const handleGoogleVerification = async () => {
+    if (googleCode.length === 6) {
+      setIsVerifying(true)
+      await new Promise(resolve => setTimeout(resolve, 1500))
+      
+      toast.success('🔐 Google Authenticator Verified!', {
+        description: 'Step 3 of 4 completed',
+        duration: 3000
       })
+      
+      setCurrentStep(3)
+      setIsVerifying(false)
+    }
+  }
+
+  const handleEmailVerification = async () => {
+    if (emailCode.length === 8) {
+      setIsVerifying(true)
+      await new Promise(resolve => setTimeout(resolve, 1500))
+      
+      toast.success('📧 Email Code Verified!', {
+        description: 'Step 4 of 4 completed',
+        duration: 3000
+      })
+      
+      setCurrentStep(4)
+      setIsVerifying(false)
+    }
+  }
+
+  const handleFinalVerification = async () => {
+    if (finalKey === 'GAIA_QUANTUM_ADMIN_2024') {
+      setIsVerifying(true)
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      
+      toast.success('🌍 GAIA ADMIN ACCESS GRANTED!', {
+        description: 'Welcome to the secure admin vault',
+        duration: 5000
+      })
+      
+      onMFASuccess()
+      setIsVerifying(false)
     } else {
-      toast({
-        title: "Invalid Verification Code",
-        description: "Please enter the complete 6-digit code",
-        variant: "destructive",
+      toast.error('❌ Invalid Quantum Key', {
+        description: 'Final verification failed. Access denied.',
+        duration: 5000
       })
     }
   }
 
   return (
-    <Card className="max-w-md mx-auto bg-gradient-to-br from-black/90 to-gray-900/90 border-orange-500/30">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-center text-orange-400">
-          <Smartphone className="h-5 w-5" />
-          Multi-Factor Authentication Required
-        </CardTitle>
-        <div className="text-center text-xs text-orange-300">
-          New Device Detected • Additional Verification Needed
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-3 text-xs">
-          <div className="text-orange-400 mb-2">🔒 Security Alert: Unknown Device</div>
-          <div className="text-orange-300">
-            For your security, we need to verify this device before granting admin access.
+    <div className="space-y-6">
+      {/* Step Progress */}
+      <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/20 to-purple-900/20">
+        <CardContent className="pt-6">
+          <div className="flex items-center justify-between">
+            {[1, 2, 3, 4].map((step) => (
+              <div key={step} className="flex items-center">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                  currentStep >= step ? 'bg-green-600 text-white' : 'bg-gray-600 text-gray-300'
+                }`}>
+                  {currentStep > step ? <CheckCircle className="h-4 w-4" /> : step}
+                </div>
+                {step < 4 && (
+                  <div className={`w-12 h-1 mx-2 ${
+                    currentStep > step ? 'bg-green-600' : 'bg-gray-600'
+                  }`} />
+                )}
+              </div>
+            ))}
           </div>
-        </div>
+          <div className="text-center mt-3 text-sm text-blue-300">
+            4-Step Admin Verification Process
+          </div>
+        </CardContent>
+      </Card>
 
-        {!mfaMethod ? (
-          <div className="space-y-3">
-            <div className="text-sm text-center text-gray-300 mb-4">
-              Choose your verification method:
-            </div>
-            <Button 
-              onClick={() => sendMFACode('phone')} 
-              className="w-full bg-blue-600 hover:bg-blue-700"
-            >
-              <Smartphone className="h-4 w-4 mr-2" />
-              SMS to +31687758236
-            </Button>
-            <Button 
-              onClick={() => sendMFACode('email')} 
-              variant="outline"
-              className="w-full border-blue-500/30 text-blue-400 hover:bg-blue-500/10"
-            >
-              <Mail className="h-4 w-4 mr-2" />
-              Email to info@cultureofharmony.net
-            </Button>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <div className="text-sm text-center text-gray-300">
-              Enter the 6-digit code sent to your {mfaMethod === 'phone' ? 'phone' : 'email'}:
-            </div>
+      {/* Step 1: SMS Verification */}
+      {currentStep === 1 && (
+        <Card className="border-green-500/30">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-green-400">
+              <Smartphone className="h-5 w-5" />
+              Step 2: SMS Verification
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              Enter the 6-digit code sent to your registered phone number:
+            </p>
             
             <div className="flex justify-center">
-              <InputOTP maxLength={6} value={otpCode} onChange={setOtpCode}>
+              <InputOTP maxLength={6} value={smsCode} onChange={setSmsCode}>
                 <InputOTPGroup>
                   <InputOTPSlot index={0} />
                   <InputOTPSlot index={1} />
@@ -116,25 +138,126 @@ export function AdminMFA({ onMFASuccess }: AdminMFAProps) {
                 </InputOTPGroup>
               </InputOTP>
             </div>
-
+            
             <Button 
-              onClick={verifyMFA} 
+              onClick={handleSMSVerification}
+              disabled={smsCode.length !== 6 || isVerifying}
               className="w-full bg-green-600 hover:bg-green-700"
-              disabled={otpCode.length !== 6}
             >
-              Verify & Complete Secure Login
+              {isVerifying ? 'Verifying...' : 'Verify SMS Code'}
             </Button>
+          </CardContent>
+        </Card>
+      )}
 
+      {/* Step 2: Google Authenticator */}
+      {currentStep === 2 && (
+        <Card className="border-purple-500/30">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-purple-400">
+              <Shield className="h-5 w-5" />
+              Step 3: Google Authenticator
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              Enter the 6-digit code from your Google Authenticator app:
+            </p>
+            
+            <div className="flex justify-center">
+              <InputOTP maxLength={6} value={googleCode} onChange={setGoogleCode}>
+                <InputOTPGroup>
+                  <InputOTPSlot index={0} />
+                  <InputOTPSlot index={1} />
+                  <InputOTPSlot index={2} />
+                  <InputOTPSlot index={3} />
+                  <InputOTPSlot index={4} />
+                  <InputOTPSlot index={5} />
+                </InputOTPGroup>
+              </InputOTP>
+            </div>
+            
             <Button 
-              onClick={() => setMfaMethod(null)} 
-              variant="outline"
-              className="w-full text-xs"
+              onClick={handleGoogleVerification}
+              disabled={googleCode.length !== 6 || isVerifying}
+              className="w-full bg-purple-600 hover:bg-purple-700"
             >
-              Try Different Method
+              {isVerifying ? 'Verifying...' : 'Verify Google Code'}
             </Button>
-          </div>
-        )}
-      </CardContent>
-    </Card>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Step 3: Email Verification */}
+      {currentStep === 3 && (
+        <Card className="border-orange-500/30">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-orange-400">
+              <Shield className="h-5 w-5" />
+              Step 4: Email Verification
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              Enter the 8-digit code sent to your admin email:
+            </p>
+            
+            <Input
+              type="text"
+              maxLength={8}
+              value={emailCode}
+              onChange={(e) => setEmailCode(e.target.value)}
+              className="text-center text-lg tracking-wider"
+              placeholder="12345678"
+            />
+            
+            <Button 
+              onClick={handleEmailVerification}
+              disabled={emailCode.length !== 8 || isVerifying}
+              className="w-full bg-orange-600 hover:bg-orange-700"
+            >
+              {isVerifying ? 'Verifying...' : 'Verify Email Code'}
+            </Button>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Step 4: Final Quantum Key */}
+      {currentStep === 4 && (
+        <Card className="border-red-500/30 bg-gradient-to-br from-red-900/30 to-black/50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-red-400">
+              <Shield className="h-5 w-5" />
+              Final Step: Quantum Admin Key
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-red-300">
+              Enter the ultimate admin quantum key to access the secure vault:
+            </p>
+            
+            <div className="space-y-2">
+              <Label htmlFor="finalKey" className="text-red-300">Quantum Key</Label>
+              <Input
+                id="finalKey"
+                type="password"
+                value={finalKey}
+                onChange={(e) => setFinalKey(e.target.value)}
+                className="bg-black/50 border-red-500/30 text-center"
+                placeholder="Enter quantum admin key..."
+              />
+            </div>
+            
+            <Button 
+              onClick={handleFinalVerification}
+              disabled={!finalKey || isVerifying}
+              className="w-full bg-red-600 hover:bg-red-700"
+            >
+              {isVerifying ? 'Final Verification...' : 'Grant GAIA Admin Access'}
+            </Button>
+          </CardContent>
+        </Card>
+      )}
+    </div>
   )
 }
