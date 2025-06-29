@@ -9,7 +9,7 @@ import { GAIA_TOKEN } from '@/constants/gaia'
 export function AnimatedCoinCrafting() {
   const [hammerStrikes, setHammerStrikes] = useState(0)
   const [isCrafting, setIsCrafting] = useState(false)
-  const [coinsBeing Crafted, setCoinsBeing Crafted] = useState(0)
+  const [coinsBeingCrafted, setCoinsBeingCrafted] = useState(0)
   const [totalCrafted, setTotalCrafted] = useState(125847)
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export function AnimatedCoinCrafting() {
       console.log('🔨 Starting coin crafting cycle')
       setIsCrafting(true)
       setHammerStrikes(0)
-      setCoinsBeing Crafted(Math.floor(Math.random() * 15) + 5)
+      setCoinsBeingCrafted(Math.floor(Math.random() * 15) + 5)
       
       // Hammer strikes (5 strikes per cycle)
       const strikeInterval = setInterval(() => {
@@ -30,7 +30,7 @@ export function AnimatedCoinCrafting() {
           if (newStrike >= 5) {
             clearInterval(strikeInterval)
             setTimeout(() => {
-              setTotalCrafted(prev => prev + coinsBeing Crafted)
+              setTotalCrafted(prev => prev + coinsBeingCrafted)
               setIsCrafting(false)
               setHammerStrikes(0)
               console.log('✅ Coin crafting cycle complete')
@@ -49,7 +49,7 @@ export function AnimatedCoinCrafting() {
     return () => {
       clearInterval(craftingInterval)
     }
-  }, [coinsBeing Crafted, isCrafting])
+  }, [coinsBeingCrafted, isCrafting])
 
   const hammerProgress = (hammerStrikes / 5) * 100
 
@@ -106,7 +106,7 @@ export function AnimatedCoinCrafting() {
               }`}
             >
               {isCrafting 
-                ? `🔨 Crafting ${coinsBeing Crafted} GAiA Coins...` 
+                ? `🔨 Crafting ${coinsBeingCrafted} GAiA Coins...` 
                 : '✅ Ready for Next Craft'
               }
             </Badge>
@@ -120,7 +120,7 @@ export function AnimatedCoinCrafting() {
             <div className="text-sm text-muted-foreground">Total GAiA Crafted</div>
           </div>
           <div className="text-center p-4 bg-orange-900/20 rounded-lg border border-orange-500/20">
-            <div className="text-2xl font-bold text-orange-400">{coinsBeing Crafted}</div>
+            <div className="text-2xl font-bold text-orange-400">{coinsBeingCrafted}</div>
             <div className="text-sm text-muted-foreground">Current Batch</div>
           </div>
           <div className="text-center p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
