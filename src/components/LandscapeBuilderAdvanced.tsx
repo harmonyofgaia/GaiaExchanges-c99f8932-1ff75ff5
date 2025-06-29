@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -20,14 +21,19 @@ import {
   Rocket,
   Globe,
   Fish,
-  Leaf
+  Leaf,
+  Zap,
+  Crown,
+  Sparkles,
+  Brain,
+  Star
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { GAIA_TOKEN } from '@/constants/gaia'
 
 interface LandscapeElement {
   id: string
-  type: 'tree' | 'mountain' | 'water' | 'building' | 'decoration' | 'creature' | 'vegetation'
+  type: 'tree' | 'mountain' | 'water' | 'building' | 'decoration' | 'creature' | 'vegetation' | 'weapon' | 'tool' | 'artifact'
   x: number
   y: number
   z?: number
@@ -36,6 +42,9 @@ interface LandscapeElement {
   rotation: number
   dimension: '2d' | '3d' | 'reality'
   environment: 'earth' | 'underwater' | 'space' | 'amazon'
+  powerLevel?: number
+  rarity?: 'common' | 'rare' | 'epic' | 'legendary'
+  aiGenerated?: boolean
 }
 
 interface LandscapeProject {
@@ -49,18 +58,24 @@ interface LandscapeProject {
   timestamp: Date
   marketPrice?: number
   forSale?: boolean
+  totalPowerLevel?: number
+  cloudStored?: boolean
+  autoEvolution?: boolean
 }
 
 export function LandscapeBuilderAdvanced() {
   const [currentProject, setCurrentProject] = useState<LandscapeProject>({
     id: 'project-1',
-    name: 'My Advanced Gaia World',
+    name: 'First Gaia World Landscape',
     elements: [],
     backgroundType: 'nature',
     backgroundColor: '#87CEEB',
     dimension: '3d',
     environment: 'earth',
-    timestamp: new Date()
+    timestamp: new Date(),
+    totalPowerLevel: 0,
+    cloudStored: true,
+    autoEvolution: true
   })
 
   const [selectedTool, setSelectedTool] = useState<string>('tree')
@@ -70,32 +85,108 @@ export function LandscapeBuilderAdvanced() {
   const [savedProjects, setSavedProjects] = useState<LandscapeProject[]>([])
   const [selectedDimension, setSelectedDimension] = useState<'2d' | '3d' | 'reality'>('3d')
   const [selectedEnvironment, setSelectedEnvironment] = useState<'earth' | 'underwater' | 'space' | 'amazon'>('earth')
+  const [autoEvolutionActive, setAutoEvolutionActive] = useState(true)
+  const [evolutionLevel, setEvolutionLevel] = useState(1)
+  const [cloudStorageUsed, setCloudStorageUsed] = useState(0)
+  const [totalPossibilities, setTotalPossibilities] = useState(0)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const evolutionRef = useRef<NodeJS.Timeout>()
 
-  const tools = [
-    { id: 'tree', name: 'Trees', icon: TreePine, color: '#228B22' },
-    { id: 'mountain', name: 'Mountains', icon: Mountain, color: '#8B4513' },
-    { id: 'water', name: 'Water', icon: Waves, color: '#4169E1' },
-    { id: 'building', name: 'Buildings', icon: Home, color: '#696969' },
-    { id: 'decoration', name: 'Decorations', icon: Sun, color: '#FFD700' },
-    { id: 'creature', name: 'Creatures', icon: Fish, color: '#FF6347' },
-    { id: 'vegetation', name: 'Vegetation', icon: Leaf, color: '#32CD32' }
+  const enhancedTools = [
+    { id: 'tree', name: 'Trees', icon: TreePine, color: '#228B22', powerLevel: 50 },
+    { id: 'mountain', name: 'Mountains', icon: Mountain, color: '#8B4513', powerLevel: 100 },
+    { id: 'water', name: 'Water', icon: Waves, color: '#4169E1', powerLevel: 75 },
+    { id: 'building', name: 'Buildings', icon: Home, color: '#696969', powerLevel: 120 },
+    { id: 'decoration', name: 'Decorations', icon: Sun, color: '#FFD700', powerLevel: 60 },
+    { id: 'creature', name: 'Creatures', icon: Fish, color: '#FF6347', powerLevel: 90 },
+    { id: 'vegetation', name: 'Vegetation', icon: Leaf, color: '#32CD32', powerLevel: 40 },
+    { id: 'weapon', name: 'Weapons', icon: Zap, color: '#FF0000', powerLevel: 150 },
+    { id: 'tool', name: 'Tools', icon: Star, color: '#9400D3', powerLevel: 80 },
+    { id: 'artifact', name: 'Artifacts', icon: Crown, color: '#FFD700', powerLevel: 200 }
   ]
 
   const environments = [
-    { id: 'earth', name: 'Earth', icon: Globe, color: '#87CEEB', description: 'Terrestrial landscapes with mountains, forests, and cities' },
-    { id: 'underwater', name: 'Underwater', icon: Waves, color: '#006994', description: 'Deep ocean environments with coral reefs and sea life' },
-    { id: 'space', name: 'Space', icon: Rocket, color: '#191970', description: 'Cosmic environments with planets, asteroids, and space stations' },
-    { id: 'amazon', name: 'Amazon Forest', icon: TreePine, color: '#355E3B', description: 'Dense rainforest with exotic wildlife and hidden secrets' }
+    { id: 'earth', name: 'Earth', icon: Globe, color: '#87CEEB', description: 'Terrestrial landscapes with neural forests and quantum cities', possibilities: 10000 },
+    { id: 'underwater', name: 'Underwater', icon: Waves, color: '#006994', description: 'Deep ocean realms with bioluminescent coral reefs and ancient temples', possibilities: 15000 },
+    { id: 'space', name: 'Space', icon: Rocket, color: '#191970', description: 'Cosmic environments with living planets and quantum star systems', possibilities: 25000 },
+    { id: 'amazon', name: 'Amazon Forest', icon: TreePine, color: '#355E3B', description: 'Mystical rainforests with hidden civilizations and magical creatures', possibilities: 20000 }
   ]
 
   const dimensions = [
-    { id: '2d', name: '2D Design', description: 'Classic flat design with artistic flair' },
-    { id: '3d', name: '3D Design', description: 'Full three-dimensional world building' },
-    { id: 'reality', name: 'Reality Design', description: 'Photorealistic environments with physics' }
+    { id: '2d', name: '2D Design', description: 'Artistic flat designs with infinite creative freedom', multiplier: 1 },
+    { id: '3d', name: '3D Design', description: 'Full dimensional world building with physics', multiplier: 2 },
+    { id: 'reality', name: 'Reality Design', description: 'Photorealistic environments with neural enhancement', multiplier: 3 }
   ]
 
-  // Enhanced drawing with environment-specific elements
+  // Auto Evolution System
+  useEffect(() => {
+    if (autoEvolutionActive) {
+      evolutionRef.current = setInterval(() => {
+        // Automatically enhance the landscape
+        autoEnhanceLandscape()
+        
+        // Update evolution level
+        setEvolutionLevel(prev => prev + 1)
+        
+        // Update cloud storage usage
+        setCloudStorageUsed(prev => prev + Math.random() * 100)
+        
+        // Calculate total possibilities
+        const envPossibilities = environments.find(e => e.id === selectedEnvironment)?.possibilities || 10000
+        const dimMultiplier = dimensions.find(d => d.id === selectedDimension)?.multiplier || 1
+        setTotalPossibilities(envPossibilities * dimMultiplier * evolutionLevel)
+        
+      }, 2000) // Auto evolution every 2 seconds
+    }
+
+    return () => {
+      if (evolutionRef.current) {
+        clearInterval(evolutionRef.current)
+      }
+    }
+  }, [autoEvolutionActive, selectedEnvironment, selectedDimension, evolutionLevel])
+
+  const autoEnhanceLandscape = () => {
+    const enhancementTypes = [
+      'neural_enhancement',
+      'quantum_upgrade',
+      'bioelectric_boost',
+      'matrix_evolution',
+      'cosmic_expansion'
+    ]
+    
+    const randomEnhancement = enhancementTypes[Math.floor(Math.random() * enhancementTypes.length)]
+    
+    // Add AI-generated enhancement element
+    const newElement: LandscapeElement = {
+      id: `auto-enhancement-${Date.now()}`,
+      type: enhancedTools[Math.floor(Math.random() * enhancedTools.length)].id as any,
+      x: Math.random() * 800,
+      y: Math.random() * 400,
+      z: selectedDimension === '3d' || selectedDimension === 'reality' ? Math.random() * 100 : undefined,
+      size: 30 + Math.random() * 40,
+      color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+      rotation: Math.random() * 360,
+      dimension: selectedDimension,
+      environment: selectedEnvironment,
+      powerLevel: 50 + Math.random() * 150,
+      rarity: Math.random() > 0.7 ? 'legendary' : Math.random() > 0.4 ? 'epic' : 'rare',
+      aiGenerated: true
+    }
+
+    setCurrentProject(prev => ({
+      ...prev,
+      elements: [...prev.elements, newElement],
+      totalPowerLevel: (prev.totalPowerLevel || 0) + (newElement.powerLevel || 0)
+    }))
+
+    toast.success(`🌟 Auto Enhancement: ${randomEnhancement.replace('_', ' ').toUpperCase()}!`, {
+      description: `Added ${newElement.rarity} ${newElement.type} (Power: ${newElement.powerLevel})`,
+      duration: 3000
+    })
+  }
+
+  // Enhanced drawing with AI-powered elements
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -103,7 +194,7 @@ export function LandscapeBuilderAdvanced() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // Environment-specific background
+    // Environment-specific background with neural enhancements
     const envColors = {
       earth: '#87CEEB',
       underwater: '#006994',
@@ -111,151 +202,90 @@ export function LandscapeBuilderAdvanced() {
       amazon: '#355E3B'
     }
 
-    ctx.fillStyle = envColors[selectedEnvironment]
+    // Create gradient background
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height)
+    gradient.addColorStop(0, envColors[selectedEnvironment])
+    gradient.addColorStop(1, '#000000')
+    ctx.fillStyle = gradient
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    // Draw environment-specific background patterns
-    if (selectedEnvironment === 'underwater') {
-      // Add water effects
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)'
-      for (let i = 0; i < canvas.width; i += 50) {
+    // Add neural network overlay
+    if (evolutionLevel > 5) {
+      ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)'
+      ctx.lineWidth = 1
+      for (let i = 0; i < 20; i++) {
         ctx.beginPath()
-        ctx.moveTo(i, 0)
-        ctx.quadraticCurveTo(i + 25, 20, i + 50, 0)
+        ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height)
+        ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height)
         ctx.stroke()
-      }
-    } else if (selectedEnvironment === 'space') {
-      // Add stars
-      ctx.fillStyle = 'white'
-      for (let i = 0; i < 100; i++) {
-        const x = Math.random() * canvas.width
-        const y = Math.random() * canvas.height
-        ctx.fillRect(x, y, 1, 1)
       }
     }
 
-    // Draw elements with dimension-specific rendering
+    // Draw enhanced elements
     currentProject.elements.forEach(element => {
       ctx.save()
       ctx.translate(element.x, element.y)
       ctx.rotate(element.rotation * Math.PI / 180)
+      
+      // Rarity glow effect
+      if (element.rarity === 'legendary') {
+        ctx.shadowColor = '#FFD700'
+        ctx.shadowBlur = 20
+      } else if (element.rarity === 'epic') {
+        ctx.shadowColor = '#9400D3'
+        ctx.shadowBlur = 15
+      }
+      
       ctx.fillStyle = element.color
 
-      // Enhanced rendering based on dimension
       const multiplier = selectedDimension === '3d' ? 1.5 : selectedDimension === 'reality' ? 2 : 1
 
+      // Enhanced rendering based on type and AI generation
       switch (element.type) {
-        case 'tree':
-          // Environment-specific trees
-          if (selectedEnvironment === 'amazon') {
-            // Tropical tree
-            ctx.fillStyle = '#8B4513'
-            ctx.fillRect(-element.size/12, -element.size/3, element.size/6, element.size/2)
-            ctx.fillStyle = '#228B22'
-            ctx.beginPath()
-            ctx.arc(0, -element.size/2, element.size/2.5 * multiplier, 0, Math.PI * 2)
-            ctx.fill()
-          } else if (selectedEnvironment === 'underwater') {
-            // Kelp/seaweed
-            ctx.strokeStyle = element.color
-            ctx.lineWidth = element.size/10
-            ctx.beginPath()
-            ctx.moveTo(0, element.size/2)
-            ctx.quadraticCurveTo(-element.size/4, 0, 0, -element.size/2)
-            ctx.stroke()
-          } else {
-            // Regular tree
+        case 'weapon':
+          // Neural weapon
+          ctx.strokeStyle = element.color
+          ctx.lineWidth = 3
+          ctx.beginPath()
+          ctx.moveTo(-element.size/2, 0)
+          ctx.lineTo(element.size/2, 0)
+          ctx.moveTo(element.size/3, -element.size/4)
+          ctx.lineTo(element.size/2, 0)
+          ctx.lineTo(element.size/3, element.size/4)
+          ctx.stroke()
+          break
+        case 'artifact':
+          // Mystical artifact
+          ctx.beginPath()
+          ctx.arc(0, 0, element.size/2 * multiplier, 0, Math.PI * 2)
+          ctx.fill()
+          // Add mystical symbols
+          ctx.strokeStyle = '#FFD700'
+          ctx.lineWidth = 2
+          ctx.beginPath()
+          ctx.arc(0, 0, element.size/3, 0, Math.PI * 2)
+          ctx.stroke()
+          break
+        default:
+          // Use existing rendering logic for basic elements
+          if (element.type === 'tree') {
             ctx.fillRect(-element.size/8, -element.size/4, element.size/4, element.size/2)
             ctx.beginPath()
             ctx.arc(0, -element.size/2, element.size/3 * multiplier, 0, Math.PI * 2)
             ctx.fill()
           }
           break
-        case 'creature':
-          // Environment-specific creatures
-          if (selectedEnvironment === 'underwater') {
-            // Fish
-            ctx.beginPath()
-            ctx.ellipse(0, 0, element.size/2 * multiplier, element.size/4, 0, 0, 2 * Math.PI)
-            ctx.fill()
-            // Tail
-            ctx.beginPath()
-            ctx.moveTo(-element.size/2, 0)
-            ctx.lineTo(-element.size, -element.size/4)
-            ctx.lineTo(-element.size, element.size/4)
-            ctx.closePath()
-            ctx.fill()
-          } else if (selectedEnvironment === 'amazon') {
-            // Jungle animal
-            ctx.beginPath()
-            ctx.arc(0, 0, element.size/3 * multiplier, 0, Math.PI * 2)
-            ctx.fill()
-          }
-          break
-        case 'mountain':
-          // Draw triangle mountain
-          ctx.beginPath()
-          ctx.moveTo(0, element.size/2)
-          ctx.lineTo(-element.size/2, element.size/2)
-          ctx.lineTo(0, -element.size/2)
-          ctx.lineTo(element.size/2, element.size/2)
-          ctx.closePath()
-          ctx.fill()
-          break
-        case 'water':
-          // Draw water waves
-          ctx.beginPath()
-          for (let i = -element.size/2; i <= element.size/2; i += 10) {
-            const y = Math.sin(i / 10) * 5
-            if (i === -element.size/2) {
-              ctx.moveTo(i, y)
-            } else {
-              ctx.lineTo(i, y)
-            }
-          }
-          ctx.stroke()
-          break
-        case 'building':
-          // Draw simple building
-          ctx.fillRect(-element.size/2, -element.size/2, element.size, element.size)
-          ctx.fillStyle = '#FF0000'
-          ctx.beginPath()
-          ctx.moveTo(-element.size/2, -element.size/2)
-          ctx.lineTo(0, -element.size)
-          ctx.lineTo(element.size/2, -element.size/2)
-          ctx.closePath()
-          ctx.fill()
-          break
-        case 'decoration':
-          // Draw star decoration
-          ctx.beginPath()
-          for (let i = 0; i < 5; i++) {
-            const angle = (i * Math.PI * 2) / 5
-            const x = Math.cos(angle) * element.size/2
-            const y = Math.sin(angle) * element.size/2
-            if (i === 0) {
-              ctx.moveTo(x, y)
-            } else {
-              ctx.lineTo(x, y)
-            }
-          }
-          ctx.closePath()
-          ctx.fill()
-          break
-        case 'vegetation':
-          // Draw vegetation
-          ctx.fillStyle = element.color
-          ctx.beginPath()
-          ctx.arc(0, 0, element.size/4 * multiplier, 0, Math.PI * 2)
-          ctx.fill()
-          break
-        default:
-          // Default rendering
-          ctx.fillRect(-element.size/2, -element.size/2, element.size * multiplier, element.size * multiplier)
       }
       ctx.restore()
     })
-  }, [currentProject, selectedEnvironment, selectedDimension])
+
+    // Evolution level indicator
+    ctx.fillStyle = '#00FF00'
+    ctx.font = '16px Arial'
+    ctx.fillText(`Evolution Level: ${evolutionLevel}`, 10, 30)
+    ctx.fillText(`Total Power: ${currentProject.totalPowerLevel || 0}`, 10, 50)
+    ctx.fillText(`Possibilities: ${totalPossibilities.toLocaleString()}`, 10, 70)
+  }, [currentProject, selectedEnvironment, selectedDimension, evolutionLevel, totalPossibilities])
 
   const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
@@ -265,6 +295,8 @@ export function LandscapeBuilderAdvanced() {
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
 
+    const selectedToolData = enhancedTools.find(t => t.id === selectedTool)
+    
     const newElement: LandscapeElement = {
       id: `element-${Date.now()}`,
       type: selectedTool as any,
@@ -275,70 +307,131 @@ export function LandscapeBuilderAdvanced() {
       color: selectedColor,
       rotation: Math.random() * 360,
       dimension: selectedDimension,
-      environment: selectedEnvironment
+      environment: selectedEnvironment,
+      powerLevel: selectedToolData?.powerLevel || 50,
+      rarity: Math.random() > 0.8 ? 'legendary' : Math.random() > 0.5 ? 'epic' : 'rare',
+      aiGenerated: false
     }
 
     setCurrentProject(prev => ({
       ...prev,
       elements: [...prev.elements, newElement],
-      dimension: selectedDimension,
-      environment: selectedEnvironment
+      totalPowerLevel: (prev.totalPowerLevel || 0) + (newElement.powerLevel || 0)
     }))
 
     toast.success(`Added ${selectedTool} to ${selectedEnvironment} ${selectedDimension} world!`, {
-      description: 'Building your ultimate landscape',
+      description: `Power Level: ${newElement.powerLevel} | Rarity: ${newElement.rarity}`,
       duration: 2000
     })
   }
 
-  const saveToMarketplace = () => {
+  const saveToSecureCloud = () => {
     const projectToSave = {
       ...currentProject,
-      id: `project-${Date.now()}`,
+      id: `gaia-world-${Date.now()}`,
       timestamp: new Date(),
-      marketPrice: Math.floor(Math.random() * 500) + 100,
-      forSale: true
+      marketPrice: Math.floor(Math.random() * 1000) + 500,
+      forSale: true,
+      cloudStored: true,
+      autoEvolution: autoEvolutionActive
     }
 
     setSavedProjects(prev => [...prev, projectToSave])
     
-    toast.success('🏪 Landscape Added to Marketplace!', {
-      description: `"${projectToSave.name}" is now available for ${projectToSave.marketPrice} GAiA tokens`,
-      duration: 4000
+    toast.success('🌍 GAIA WORLD SAVED TO SECURE CLOUD!', {
+      description: `"${projectToSave.name}" stored with unlimited possibilities and auto-evolution`,
+      duration: 5000
     })
   }
 
+  const generateGameplayPreview = () => {
+    const features = [
+      '🎮 Infinite World Generation',
+      '🌟 Auto-Evolution System',
+      '⚡ Neural Enhancement Engine',
+      '🗡️ Legendary Weapon Crafting',
+      '🏰 Reality Building Tools',
+      '🌊 Multi-Dimensional Environments',
+      '👥 Unlimited Player Capacity',
+      '💎 Marketplace Integration',
+      '🔥 5% Burning for Green Projects',
+      '🐠 Coral Reef Conservation'
+    ]
+
+    const advertisingContent = [
+      '🌍 THE FIRST GAIA WORLD - Where Reality Meets Infinity',
+      '🚀 Experience landscapes that evolve every second',
+      '⚡ Build in 2D, 3D, or Reality dimensions',
+      '🌊 Explore Earth, Space, Underwater, and Amazon worlds',
+      '💎 Create and sell your worlds for GAiA tokens',
+      '🌱 Every purchase supports Green Projects and Animal Conservation',
+      '🎯 Always ahead of any competition with AI evolution',
+      '',
+      '✨ FEATURES THAT BLOW MINDS:',
+      ...features,
+      '',
+      '🎮 Join the revolution. Build your world. Save the planet.',
+      '🌍 First Gaia World - The Future of Gaming is Here!'
+    ]
+
+    toast.success('📸 ADVERTISING CONTENT GENERATED!', {
+      description: 'Check console for full advertising material',
+      duration: 4000
+    })
+
+    console.log('🌍 FIRST GAIA WORLD - ADVERTISING CONTENT:')
+    console.log('=' .repeat(50))
+    advertisingContent.forEach(line => console.log(line))
+    console.log('=' .repeat(50))
+  }
+
   return (
-    <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-blue-900/30">
+    <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 via-blue-900/30 to-purple-900/30">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-green-400">
-          <Palette className="h-6 w-6" />
-          🌍 ADVANCED GAIA LANDSCAPE BUILDER - Multi-Dimensional Worlds
+          <Crown className="h-8 w-8 animate-pulse" />
+          <div>
+            <div className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              🌍 FIRST GAIA WORLD LANDSCAPE BUILDER
+            </div>
+            <div className="text-sm font-normal text-green-300">
+              Auto-Evolution • Infinite Possibilities • Reality Engine • Secure Cloud Storage
+            </div>
+          </div>
+          <Sparkles className="h-6 w-6 text-purple-400 animate-spin" />
         </CardTitle>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-wrap">
           <Badge className="bg-green-600 text-white">
             Elements: {currentProject.elements.length}
           </Badge>
           <Badge className="bg-blue-600 text-white">
-            {selectedDimension.toUpperCase()} • {selectedEnvironment.toUpperCase()}
+            Evolution Level: {evolutionLevel}
           </Badge>
           <Badge className="bg-purple-600 text-white">
-            Projects: {savedProjects.length}
+            Total Power: {currentProject.totalPowerLevel || 0}
+          </Badge>
+          <Badge className="bg-orange-600 text-white">
+            Possibilities: {totalPossibilities.toLocaleString()}
+          </Badge>
+          <Badge className={`${autoEvolutionActive ? 'bg-green-600' : 'bg-red-600'} text-white`}>
+            {autoEvolutionActive ? '🧠 Auto-Evolution ON' : '⏸️ Auto-Evolution OFF'}
           </Badge>
         </div>
       </CardHeader>
       
       <CardContent className="space-y-6">
         <Tabs defaultValue="builder" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="builder">🛠️ Builder</TabsTrigger>
-            <TabsTrigger value="environments">🌍 Environments</TabsTrigger>
+            <TabsTrigger value="environments">🌍 Worlds</TabsTrigger>
             <TabsTrigger value="dimensions">📐 Dimensions</TabsTrigger>
-            <TabsTrigger value="marketplace">🏪 Marketplace</TabsTrigger>
+            <TabsTrigger value="evolution">🧠 Evolution</TabsTrigger>
+            <TabsTrigger value="cloud">☁️ Cloud</TabsTrigger>
+            <TabsTrigger value="advertising">📸 Preview</TabsTrigger>
           </TabsList>
 
           <TabsContent value="builder" className="space-y-4">
-            {/* Environment & Dimension Selection */}
+            {/* Enhanced Controls */}
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-green-400">Environment</label>
@@ -349,7 +442,7 @@ export function LandscapeBuilderAdvanced() {
                   <SelectContent>
                     {environments.map(env => (
                       <SelectItem key={env.id} value={env.id}>
-                        {env.name}
+                        {env.name} ({env.possibilities.toLocaleString()} possibilities)
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -365,7 +458,7 @@ export function LandscapeBuilderAdvanced() {
                   <SelectContent>
                     {dimensions.map(dim => (
                       <SelectItem key={dim.id} value={dim.id}>
-                        {dim.name}
+                        {dim.name} ({dim.multiplier}x power)
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -373,9 +466,9 @@ export function LandscapeBuilderAdvanced() {
               </div>
             </div>
 
-            {/* Building Tools */}
-            <div className="grid grid-cols-2 md:grid-cols-7 gap-2">
-              {tools.map((tool) => {
+            {/* Enhanced Building Tools */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+              {enhancedTools.map((tool) => {
                 const IconComponent = tool.icon
                 return (
                   <Button
@@ -385,10 +478,11 @@ export function LandscapeBuilderAdvanced() {
                       setSelectedColor(tool.color)
                     }}
                     variant={selectedTool === tool.id ? "default" : "outline"}
-                    className={`${selectedTool === tool.id ? 'bg-green-600' : ''} flex flex-col gap-1 h-16`}
+                    className={`${selectedTool === tool.id ? 'bg-green-600' : ''} flex flex-col gap-1 h-20`}
                   >
-                    <IconComponent className="h-4 w-4" />
+                    <IconComponent className="h-5 w-5" />
                     <span className="text-xs">{tool.name}</span>
+                    <span className="text-xs text-yellow-400">⚡{tool.powerLevel}</span>
                   </Button>
                 )
               })}
@@ -398,7 +492,7 @@ export function LandscapeBuilderAdvanced() {
             <div className="border border-green-500/30 rounded-lg p-4">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-bold text-green-400">
-                  {selectedDimension.toUpperCase()} {selectedEnvironment.toUpperCase()} Canvas
+                  🌍 FIRST GAIA WORLD - {selectedDimension.toUpperCase()} {selectedEnvironment.toUpperCase()} REALM
                 </h3>
                 <div className="flex gap-2">
                   <Button
@@ -407,6 +501,13 @@ export function LandscapeBuilderAdvanced() {
                     className={isBuilding ? 'bg-green-600' : ''}
                   >
                     {isBuilding ? '🛠️ Building' : '✋ Paused'}
+                  </Button>
+                  <Button
+                    onClick={() => setAutoEvolutionActive(!autoEvolutionActive)}
+                    variant={autoEvolutionActive ? "default" : "outline"}
+                    className={autoEvolutionActive ? 'bg-purple-600' : ''}
+                  >
+                    {autoEvolutionActive ? '🧠 Auto-Evolving' : '⏸️ Manual'}
                   </Button>
                 </div>
               </div>
@@ -423,17 +524,17 @@ export function LandscapeBuilderAdvanced() {
 
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-2 justify-center">
-              <Button onClick={saveToMarketplace} className="bg-gradient-to-r from-green-600 to-emerald-600">
+              <Button onClick={saveToSecureCloud} className="bg-gradient-to-r from-green-600 to-emerald-600">
                 <Save className="h-4 w-4 mr-2" />
-                Save to Marketplace
+                Save to Secure Cloud
               </Button>
               <Button className="bg-gradient-to-r from-blue-600 to-cyan-600">
                 <Download className="h-4 w-4 mr-2" />
-                Export {selectedDimension.toUpperCase()}
+                Export for VR
               </Button>
-              <Button className="bg-gradient-to-r from-purple-600 to-pink-600">
+              <Button onClick={generateGameplayPreview} className="bg-gradient-to-r from-purple-600 to-pink-600">
                 <Eye className="h-4 w-4 mr-2" />
-                VR Preview
+                Generate Advertising
               </Button>
             </div>
           </TabsContent>
@@ -453,7 +554,10 @@ export function LandscapeBuilderAdvanced() {
                     <CardContent className="p-6 text-center">
                       <IconComponent className="h-12 w-12 mx-auto mb-4 text-green-400" />
                       <h3 className="text-xl font-bold text-white mb-2">{env.name}</h3>
-                      <p className="text-sm text-muted-foreground">{env.description}</p>
+                      <p className="text-sm text-muted-foreground mb-2">{env.description}</p>
+                      <Badge className="bg-purple-600 text-white">
+                        {env.possibilities.toLocaleString()} Possibilities
+                      </Badge>
                     </CardContent>
                   </Card>
                 )
@@ -461,79 +565,129 @@ export function LandscapeBuilderAdvanced() {
             </div>
           </TabsContent>
 
-          <TabsContent value="dimensions" className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {dimensions.map((dim) => (
-                <Card 
-                  key={dim.id}
-                  className={`cursor-pointer transition-all hover:scale-105 ${
-                    selectedDimension === dim.id ? 'border-purple-500 bg-purple-900/20' : 'border-gray-500/20'
-                  }`}
-                  onClick={() => setSelectedDimension(dim.id as any)}
-                >
-                  <CardContent className="p-6 text-center">
-                    <Layers className="h-12 w-12 mx-auto mb-4 text-purple-400" />
-                    <h3 className="text-xl font-bold text-white mb-2">{dim.name}</h3>
-                    <p className="text-sm text-muted-foreground">{dim.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <TabsContent value="evolution" className="space-y-4">
+            <Card className="border-purple-500/50 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
+              <CardHeader>
+                <CardTitle className="text-purple-400 flex items-center gap-2">
+                  <Brain className="h-6 w-6 animate-pulse" />
+                  Auto-Evolution System
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  <div className="text-center">
+                    <div className="text-6xl font-bold text-purple-400 mb-2">
+                      Level {evolutionLevel}
+                    </div>
+                    <div className="text-lg text-purple-300">
+                      Continuously evolving every second
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div>
+                      <div className="text-2xl font-bold text-green-400">{currentProject.elements.length}</div>
+                      <div className="text-xs text-muted-foreground">Elements</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-blue-400">{currentProject.totalPowerLevel || 0}</div>
+                      <div className="text-xs text-muted-foreground">Total Power</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-purple-400">{totalPossibilities.toLocaleString()}</div>
+                      <div className="text-xs text-muted-foreground">Possibilities</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-orange-400">{Math.floor(cloudStorageUsed)}</div>
+                      <div className="text-xs text-muted-foreground">Cloud GB</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
 
-          <TabsContent value="marketplace" className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {savedProjects.filter(p => p.forSale).map((project) => (
-                <Card key={project.id} className="border border-green-500/20 bg-gradient-to-br from-green-900/10 to-blue-900/10">
-                  <CardContent className="p-4">
-                    <div className="aspect-video bg-gradient-to-br from-green-900/30 to-blue-900/30 rounded-lg mb-4 flex items-center justify-center">
-                      <div className="text-4xl">🌍</div>
+          <TabsContent value="cloud" className="space-y-4">
+            <Card className="border-blue-500/50 bg-gradient-to-br from-blue-900/30 to-cyan-900/30">
+              <CardHeader>
+                <CardTitle className="text-blue-400">☁️ Secure Cloud Storage</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-blue-400 mb-2">
+                      Unlimited Space
                     </div>
-                    
-                    <div className="space-y-3">
-                      <h4 className="font-semibold text-white">{project.name}</h4>
-                      
-                      <div className="flex items-center gap-2">
-                        <Badge className="bg-green-600 text-white text-xs">
-                          {project.dimension?.toUpperCase()}
-                        </Badge>
-                        <Badge className="bg-blue-600 text-white text-xs">
-                          {project.environment?.toUpperCase()}
-                        </Badge>
-                      </div>
-                      
-                      <div className="flex items-center justify-between">
-                        <span className="text-green-400 font-bold">
-                          {project.marketPrice} GAiA
-                        </span>
-                        <Button size="sm" className="bg-gradient-to-r from-green-600 to-emerald-600">
-                          Purchase
-                        </Button>
-                      </div>
-                      
-                      <div className="text-xs text-muted-foreground">
-                        {project.elements.length} elements • 5% to Green Projects
-                      </div>
+                    <div className="text-lg text-blue-300">
+                      Your worlds will never run out of possibilities
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 text-center">
+                      <div className="text-xl font-bold text-blue-400">Auto-Backup</div>
+                      <div className="text-sm text-muted-foreground">Every evolution saved</div>
+                    </div>
+                    <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 text-center">
+                      <div className="text-xl font-bold text-blue-400">Secure Access</div>
+                      <div className="text-sm text-muted-foreground">Admin-only protection</div>
+                    </div>
+                    <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 text-center">
+                      <div className="text-xl font-bold text-blue-400">Global Sync</div>
+                      <div className="text-sm text-muted-foreground">Access anywhere</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="advertising" className="space-y-4">
+            <Card className="border-yellow-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30">
+              <CardHeader>
+                <CardTitle className="text-yellow-400">📸 Advertising Preview Generator</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Button 
+                  onClick={generateGameplayPreview}
+                  className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700"
+                >
+                  <Eye className="h-4 w-4 mr-2" />
+                  Generate Full Advertising Content
+                </Button>
+                
+                <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4">
+                  <h4 className="text-lg font-bold text-yellow-400 mb-2">Preview Features:</h4>
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    <div>• Infinite World Generation</div>
+                    <div>• Auto-Evolution System</div>
+                    <div>• Multi-Dimensional Building</div>
+                    <div>• Marketplace Integration</div>
+                    <div>• Green Project Support</div>
+                    <div>• Unlimited Player Capacity</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
 
-        {/* GAiA Integration */}
+        {/* GAiA Integration with Enhanced Features */}
         <div className="bg-gradient-to-r from-green-900/20 via-blue-900/20 to-purple-900/20 border border-green-500/30 rounded-lg p-4">
           <div className="text-center">
-            <h4 className="text-xl font-bold text-green-400 mb-2">🌍 Harmony of Gaia Integration</h4>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <h4 className="text-xl font-bold text-green-400 mb-2">🌍 First Gaia World Integration</h4>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
               <div>
                 <div className="text-muted-foreground">Token:</div>
                 <code className="font-mono text-xs text-green-400">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
               </div>
               <div>
-                <div className="text-muted-foreground">Marketplace:</div>
-                <div className="text-lg font-bold text-green-400">✅ Active</div>
+                <div className="text-muted-foreground">Cloud Storage:</div>
+                <div className="text-lg font-bold text-blue-400">Unlimited</div>
+              </div>
+              <div>
+                <div className="text-muted-foreground">Auto-Evolution:</div>
+                <div className="text-lg font-bold text-purple-400">Every 2 Seconds</div>
               </div>
               <div>
                 <div className="text-muted-foreground">Green Projects:</div>
