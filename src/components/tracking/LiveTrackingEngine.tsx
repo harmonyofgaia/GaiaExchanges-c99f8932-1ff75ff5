@@ -31,11 +31,11 @@ export function LiveTrackingEngine() {
     realTimeTransactions: 0,
     marketVolume: 1250000000,
     userEngagement: 98.7,
-    networkSpeed: 1000, // 10x faster than competitors
+    networkSpeed: 1000,
     securityScore: 100,
     performanceMultiplier: 10,
     ecosystemHealth: 99.9,
-    globalReach: 195 // Countries
+    globalReach: 195
   })
 
   const [liveEvents, setLiveEvents] = useState<LiveEvent[]>([])
@@ -44,7 +44,6 @@ export function LiveTrackingEngine() {
 
   useEffect(() => {
     const performLiveTracking = () => {
-      // Generate live events every 100ms for ultra-fast tracking
       const eventTypes = ['TRANSACTION', 'TRADE', 'USER_ACTION', 'MARKET_UPDATE', 'SECURITY_EVENT'] as const
       const locations = ['New York', 'London', 'Tokyo', 'Singapore', 'Frankfurt', 'Sydney', 'Dubai']
       
@@ -55,19 +54,18 @@ export function LiveTrackingEngine() {
         description: generateEventDescription(),
         value: Math.random() * 1000000,
         location: locations[Math.floor(Math.random() * locations.length)],
-        performanceBoost: 10 + Math.random() * 5 // 10-15x performance boost
+        performanceBoost: 10 + Math.random() * 5
       }
 
-      setLiveEvents(prev => [newEvent, ...prev.slice(0, 49)]) // Keep last 50 events
+      setLiveEvents(prev => [newEvent, ...prev.slice(0, 49)])
 
-      // Update metrics with 10x performance improvements
       setMetrics(prev => ({
         realTimeTransactions: prev.realTimeTransactions + Math.floor(Math.random() * 100),
         marketVolume: prev.marketVolume + (Math.random() * 1000000),
         userEngagement: Math.min(99.9, prev.userEngagement + (Math.random() * 0.1)),
-        networkSpeed: 1000 + Math.floor(Math.random() * 500), // Always 10x+ faster
-        securityScore: 100, // Always perfect security
-        performanceMultiplier: 10 + Math.random() * 2, // 10-12x multiplier
+        networkSpeed: 1000 + Math.floor(Math.random() * 500),
+        securityScore: 100,
+        performanceMultiplier: 10 + Math.random() * 2,
         ecosystemHealth: Math.min(99.9, prev.ecosystemHealth + (Math.random() * 0.1)),
         globalReach: Math.min(195, prev.globalReach + Math.floor(Math.random() * 2))
       }))
@@ -89,7 +87,6 @@ export function LiveTrackingEngine() {
       return descriptions[Math.floor(Math.random() * descriptions.length)]
     }
 
-    // Ultra-fast tracking every 100ms
     trackingInterval.current = setInterval(performLiveTracking, 100)
     performLiveTracking()
 
@@ -108,7 +105,6 @@ export function LiveTrackingEngine() {
 
   return (
     <div className="space-y-6">
-      {/* Live Performance Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
           <CardContent className="pt-6">
@@ -171,7 +167,6 @@ export function LiveTrackingEngine() {
         </Card>
       </div>
 
-      {/* Ecosystem Health Dashboard */}
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
@@ -206,7 +201,6 @@ export function LiveTrackingEngine() {
         </CardContent>
       </Card>
 
-      {/* Live Events Stream */}
       <Card className="border-cyan-500/30 bg-gradient-to-br from-cyan-900/20 to-blue-900/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-cyan-400">
@@ -244,7 +238,6 @@ export function LiveTrackingEngine() {
         </CardContent>
       </Card>
 
-      {/* Competitive Advantage Statement */}
       <Card className="border-yellow-500/30 bg-gradient-to-r from-yellow-900/20 to-orange-900/20">
         <CardContent className="pt-6">
           <div className="text-center space-y-4">
