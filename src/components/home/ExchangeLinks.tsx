@@ -20,20 +20,26 @@ const exchangeLinks: Exchange[] = [
   },
   {
     name: 'Binance',
-    url: 'https://binance.com',
-    description: 'World\'s largest exchange - Coming Soon',
+    url: '#',
+    description: 'World\'s largest exchange - Legal docs submitted',
+    status: 'PENDING'
+  },
+  {
+    name: 'Revolut',
+    url: '#',
+    description: 'European trading platform - Documentation complete',
     status: 'PENDING'
   },
   {
     name: 'Coinbase',
-    url: 'https://coinbase.com',
-    description: 'Most trusted US exchange - Integration Pending',
+    url: '#',
+    description: 'Most trusted US exchange - Compliance ready',
     status: 'PENDING'
   },
   {
     name: 'Kraken',
-    url: 'https://kraken.com',
-    description: 'Advanced trading features - Coming Soon',
+    url: '#',
+    description: 'Advanced trading features - Ready for listing',
     status: 'PENDING'
   }
 ]
@@ -52,7 +58,7 @@ export function ExchangeLinks() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {exchangeLinks.map((exchange, index) => (
               <div key={index} className="relative group">
                 <div className="bg-gradient-to-br from-gray-900/50 to-blue-900/50 border border-blue-500/30 rounded-lg p-6 text-center hover:scale-105 transition-all duration-300">
@@ -61,10 +67,6 @@ export function ExchangeLinks() {
                       src="/lovable-uploads/4a9da668-4d21-4c1f-8585-bcdbfcd6700c.png" 
                       alt="Gaia of Harmony Logo" 
                       className="w-12 h-12 object-contain adaptive-logo-bg"
-                      style={{
-                        filter: 'brightness(0) saturate(100%) invert(100%)',
-                        mixBlendMode: 'difference'
-                      }}
                     />
                   </div>
                   
@@ -78,7 +80,7 @@ export function ExchangeLinks() {
                       </span>
                     ) : (
                       <span className="bg-yellow-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                        ⏳ COMING SOON
+                        📋 DOCS SUBMITTED
                       </span>
                     )}
                   </div>
@@ -100,15 +102,6 @@ export function ExchangeLinks() {
                 </div>
               </div>
             ))}
-          </div>
-          
-          <div className="mt-8 text-center">
-            <div className="text-green-400 font-bold text-lg mb-2">
-              🔐 VERIFIED TOKEN CONTRACT: {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...
-            </div>
-            <p className="text-muted-foreground text-sm">
-              Always verify the correct contract address before trading • Culture of Harmony Protected
-            </p>
           </div>
         </CardContent>
       </Card>

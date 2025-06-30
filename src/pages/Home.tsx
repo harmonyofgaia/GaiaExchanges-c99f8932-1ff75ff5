@@ -1,3 +1,4 @@
+
 import { RobotAdvertisement } from '@/components/advertising/RobotAdvertisement'
 import { HeroSection } from '@/components/home/HeroSection'
 import { FeatureGrid } from '@/components/home/FeatureGrid'
@@ -14,11 +15,8 @@ import { AdminLayoutEditor } from '@/components/admin/AdminLayoutEditor'
 import { InvisibleSecurityCore } from '@/components/security/InvisibleSecurityCore'
 import { InvisibleAdminProtection } from '@/components/security/InvisibleAdminProtection'
 import { InvisibleAttachmentSystem } from '@/components/security/InvisibleAttachmentSystem'
+import { ExchangeComplianceDocuments } from '@/components/legal/ExchangeComplianceDocuments'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { ExternalLink } from 'lucide-react'
-import { GAIA_TOKEN } from '@/constants/gaia'
 import { ExchangeLinks } from '@/components/home/ExchangeLinks'
 
 const Home = () => {
@@ -45,6 +43,7 @@ const Home = () => {
         <CallToAction />
         <SecurityPreview />
         <ExchangeLinks />
+        {isAdmin && <ExchangeComplianceDocuments />}
       </div>
     </div>
   )
