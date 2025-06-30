@@ -1,8 +1,7 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Wallet, Send, Receive, History, Shield } from 'lucide-react'
+import { Wallet, Send, Download, History, Shield } from 'lucide-react'
 import HoverSidebar from '@/components/HoverSidebar'
 import { GAIA_TOKEN } from '@/constants/gaia'
 
@@ -62,7 +61,7 @@ const WalletPage = () => {
                     Send GAiA
                   </Button>
                   <Button className="w-full bg-green-600 hover:bg-green-700">
-                    <Receive className="h-4 w-4 mr-2" />
+                    <Download className="h-4 w-4 mr-2" />
                     Receive GAiA
                   </Button>
                   <Button className="w-full bg-purple-600 hover:bg-purple-700">
