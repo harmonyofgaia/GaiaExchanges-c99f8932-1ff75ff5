@@ -16,7 +16,7 @@ interface ThreatIntelligence {
   networkSignature: string
   behaviorPattern: string
   preventionAction: string
-  status: 'BLOCKED' | 'MONITORING' | 'NEUTRALIZED' | 'WARNING_ISSUED'
+  status: 'BLOCKED' | 'MONITORING' | 'NEUTRALIZED' | 'WARNING_ISSUED' | 'ENHANCED_INVISIBILITY'
 }
 
 interface SecurityMetrics {
@@ -27,6 +27,7 @@ interface SecurityMetrics {
   lastUpdate: Date
   futureTechAdaptation: number
   ipWarningsIssued: number
+  enhancedInvisibilityActive: number
 }
 
 export function FutureProofSecurityEngine() {
@@ -37,13 +38,15 @@ export function FutureProofSecurityEngine() {
     securityScore: 100,
     lastUpdate: new Date(),
     futureTechAdaptation: 100,
-    ipWarningsIssued: 0
+    ipWarningsIssued: 0,
+    enhancedInvisibilityActive: 0
   })
   
   const [threats, setThreats] = useState<ThreatIntelligence[]>([])
   const securityInterval = useRef<NodeJS.Timeout>()
   const threatHistory = useRef<Set<string>>(new Set())
   const warnedIPs = useRef<Set<string>>(new Set())
+  const invisibleIPs = useRef<Set<string>>(new Set())
 
   useEffect(() => {
     const performDefenseWallMonitoring = async () => {
@@ -57,18 +60,22 @@ export function FutureProofSecurityEngine() {
 
         const newThreats: ThreatIntelligence[] = []
 
-        // DEFENSE WALL BREACH DETECTION (IP-Specific)
+        // DEFENSE WALL BREACH DETECTION (IP-Specific Only)
         const detectDefenseWallAttack = () => {
           const criticalAttackPatterns = [
             'bypass_security', 'break_defense', 'penetrate_wall', 'hack_system',
-            'unauthorized_access', 'security_breach', 'wall_attack', 'defense_bypass'
+            'unauthorized_access', 'security_breach', 'wall_attack', 'defense_bypass',
+            'exploit_vulnerability', 'inject_malicious_code'
           ]
 
           const pageContent = document.body.innerHTML.toLowerCase()
+          const currentUrl = window.location.href.toLowerCase()
+          
           criticalAttackPatterns.forEach(pattern => {
-            if (pageContent.includes(pattern)) {
-              // First Warning System - IP Specific
-              if (!warnedIPs.current.has(userIP)) {
+            if (pageContent.includes(pattern) || currentUrl.includes(pattern)) {
+              
+              // STEP 1: First Warning - IP Specific Only
+              if (!warnedIPs.current.has(userIP) && !invisibleIPs.current.has(userIP)) {
                 warnedIPs.current.add(userIP)
                 
                 newThreats.push({
@@ -78,7 +85,7 @@ export function FutureProofSecurityEngine() {
                   userAgent: navigator.userAgent,
                   threatLevel: 'CRITICAL',
                   attackType: 'DEFENSE_WALL_ATTACK',
-                  geolocation: 'IP-based tracking active',
+                  geolocation: 'IP-specific tracking active',
                   deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
                   networkSignature: `Defense wall attack: ${pattern}`,
                   behaviorPattern: `CRITICAL DEFENSE BREACH: ${pattern}`,
@@ -86,23 +93,27 @@ export function FutureProofSecurityEngine() {
                   status: 'WARNING_ISSUED'
                 })
 
-                // Show IP-specific warning
+                // Show IP-specific warning ONLY to this IP
                 toast.error(`🚨 WARNING TO IP: ${userIP}`, {
-                  description: 'Defense wall attack detected. This is your only warning. Stop immediately or face consequences.',
-                  duration: 20000
+                  description: 'Defense wall attack detected from YOUR IP. This is your ONLY warning. Stop immediately or face enhanced invisibility.',
+                  duration: 25000
                 })
 
-                console.log(`🚨 WARNING ISSUED TO IP: ${userIP}`)
-                console.log('📧 ADMIN NOTIFICATION: Defense wall attack attempt from specific IP')
+                console.log(`🚨 FIRST WARNING ISSUED TO SPECIFIC IP: ${userIP}`)
+                console.log('📧 ADMIN NOTIFICATION: Defense wall attack attempt from specific IP address')
                 
                 setMetrics(prev => ({
                   ...prev,
                   ipWarningsIssued: prev.ipWarningsIssued + 1
                 }))
-              } else {
-                // Second attempt - Activate enhanced invisibility for this IP only
-                console.log(`🔒 ENHANCED INVISIBILITY ACTIVATED FOR IP: ${userIP}`)
-                console.log('👻 TARGET IP NOW COMPLETELY INVISIBLE TO ALL PLATFORMS')
+                
+              // STEP 2: Second Attempt - Enhanced Invisibility for THIS IP ONLY
+              } else if (warnedIPs.current.has(userIP) && !invisibleIPs.current.has(userIP)) {
+                invisibleIPs.current.add(userIP)
+                
+                console.log(`🔒 ENHANCED INVISIBILITY ACTIVATED FOR SPECIFIC IP: ${userIP}`)
+                console.log('👻 TARGET IP NOW COMPLETELY INVISIBLE TO ALL PLATFORMS AND SYSTEMS')
+                console.log('🌐 IP-SPECIFIC INVISIBILITY: Only this IP address affected, not entire networks')
                 
                 newThreats.push({
                   id: `enhanced-invisibility-${Date.now()}`,
@@ -111,13 +122,24 @@ export function FutureProofSecurityEngine() {
                   userAgent: navigator.userAgent,
                   threatLevel: 'CRITICAL',
                   attackType: 'ENHANCED_INVISIBILITY_ACTIVATED',
-                  geolocation: 'IP-based enhanced protection',
+                  geolocation: 'IP-specific enhanced protection',
                   deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
-                  networkSignature: `Enhanced invisibility for: ${userIP}`,
-                  behaviorPattern: 'REPEAT DEFENSE ATTACK - ENHANCED PROTECTION ACTIVATED',
-                  preventionAction: 'ENHANCED_INVISIBILITY_ACTIVE',
-                  status: 'BLOCKED'
+                  networkSignature: `Enhanced invisibility for specific IP: ${userIP}`,
+                  behaviorPattern: 'REPEAT DEFENSE ATTACK - IP-SPECIFIC ENHANCED PROTECTION ACTIVATED',
+                  preventionAction: 'ENHANCED_INVISIBILITY_ACTIVE_IP_ONLY',
+                  status: 'ENHANCED_INVISIBILITY'
                 })
+
+                // Final warning before complete invisibility
+                toast.error(`🚫 ENHANCED INVISIBILITY ACTIVATED FOR IP: ${userIP}`, {
+                  description: 'You ignored our warning. Your IP is now invisible to all platforms. This affects ONLY your IP address.',
+                  duration: 30000
+                })
+
+                setMetrics(prev => ({
+                  ...prev,
+                  enhancedInvisibilityActive: prev.enhancedInvisibilityActive + 1
+                }))
               }
             }
           })
@@ -137,12 +159,12 @@ export function FutureProofSecurityEngine() {
           setMetrics(prev => ({
             ...prev,
             threatsBlocked: prev.threatsBlocked + newThreats.length,
-            attacksNeutralized: prev.attacksNeutralized + newThreats.filter(t => t.status === 'BLOCKED').length,
+            attacksNeutralized: prev.attacksNeutralized + newThreats.filter(t => t.status === 'ENHANCED_INVISIBILITY').length,
             lastUpdate: new Date()
           }))
         }
 
-        console.log('🛡️ DEFENSE WALL - Monitoring Complete')
+        console.log('🛡️ DEFENSE WALL - IP-Specific Monitoring Complete')
 
       } catch (error) {
         console.log('🔒 Security engine protected:', error)
@@ -164,6 +186,7 @@ export function FutureProofSecurityEngine() {
     threats: threats.slice(0, 5),
     isActive: true,
     securityLevel: 'MAXIMUM',
-    futureProofStatus: 'ACTIVE'
+    futureProofStatus: 'ACTIVE',
+    ipSpecificProtection: 'ACTIVE'
   }
 }

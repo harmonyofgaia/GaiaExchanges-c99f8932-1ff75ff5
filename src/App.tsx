@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
 import Home from './pages/Home'
 import VaultSystem from './pages/VaultSystem'
+import PrivateBlockchain from './pages/PrivateBlockchain'
 
 const queryClient = new QueryClient()
 
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/vault" element={<VaultSystem />} />
+            <Route path="/blockchain" element={<PrivateBlockchain />} />
           </Routes>
           <Toaster 
             position="top-right" 
