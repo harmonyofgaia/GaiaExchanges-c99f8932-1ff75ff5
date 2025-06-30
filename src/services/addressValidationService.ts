@@ -3,7 +3,7 @@ import { GAIA_TOKEN } from '@/constants/gaia'
 
 class AddressValidationService {
   private readonly CORRECT_WALLET = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
-  private readonly CORRECT_CONTRACT = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
+  private readonly CORRECT_CONTRACT = 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump'
 
   validateWalletAddress(address: string): boolean {
     if (address !== this.CORRECT_WALLET) {
@@ -54,6 +54,7 @@ class AddressValidationService {
     console.log(`📍 Contract: ${this.CORRECT_CONTRACT}`)
     console.log('🌍 Network: Solana (Pump.fun)')
     console.log('🚫 NOT GAIA Everworld - We are GAiA Token by Harmony of Gaia')
+    console.log('🌐 Official Website: https://www.gaiaexchanges.net')
   }
 }
 

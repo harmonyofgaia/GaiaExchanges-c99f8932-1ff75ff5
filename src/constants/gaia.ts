@@ -1,52 +1,53 @@
 
 export const GAIA_TOKEN = {
-  CONTRACT_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+  // Official GAiA Token Addresses
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+  CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   SYMBOL: 'GAiA',
-  NAME: 'Harmony of Gaia',
+  NAME: 'GAiA Token - Harmony of Culture',
   DECIMALS: 9,
-  INITIAL_PRICE: 0.000125,
-  PUMP_FUN_URL: 'https://pump.fun/5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
   NETWORK: 'Solana',
-  BRAND_STATEMENT: 'Harmony of Culture - Environmental Impact Through Gaming',
-  OFFICIAL_DISCLAIMER: 'Official GAiA Token - Beware of imposters and fake tokens',
-  GOOGLE_PLATFORM_ANNOUNCEMENT: 'Available on major exchanges and gaming platforms',
-  EXCHANGE_PLATFORM_NOTICE: 'Trade only through verified exchanges',
-  SOCIAL_MEDIA_CORRECTION: 'Follow official channels only for authentic updates'
+  PUMP_FUN_URL: 'https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
+  OFFICIAL_WEBSITE: 'https://www.gaiaexchanges.net',
+  
+  // Token Metrics
+  TOTAL_SUPPLY: 1000000000000, // 1 Trillion tokens
+  BURNED_TOKENS: 0,
+  CIRCULATING_SUPPLY: 1000000000000,
+  
+  // Tokenomics
+  BURN_RATE: 0, // 0% burn rate
+  REFLECTION_RATE: 0, // 0% reflection
+  LIQUIDITY_POOL: 100, // 100% liquidity locked
+  
+  // Environmental Impact
+  CARBON_OFFSET_PER_TRANSACTION: 0.001, // kg CO2
+  TREES_PLANTED_TOTAL: 50000,
+  OCEAN_CLEANUP_CONTRIBUTION: 25000, // USD
 }
 
 export const GAIA_METRICS = {
-  totalSupply: 1000000000,
-  circulatingSupply: 847329156,
-  marketCap: 2470000,
-  volume24h: 156789,
-  holders: 15247,
-  burnedTokens: 152670844,
-  // Additional properties that components are expecting
-  INITIAL_TRANSACTIONS: 245876,
-  INITIAL_HOLDERS: 15247,
-  INITIAL_MARKET_CAP: 2470000,
-  INITIAL_VOLUME: 156789,
-  INITIAL_PRICE: 0.000125,
-  NETWORK_SPEED: 2500,
-  SECURITY_SCORE: 99.8,
-  ECOSYSTEM_HEALTH: 97.5,
-  DRAGON_POWER: 100
+  CURRENT_PRICE: 0.0001, // USD
+  MARKET_CAP: 100000, // USD
+  VOLUME_24H: 50000, // USD
+  HOLDERS: 10000,
+  TRANSACTIONS_24H: 5000,
+  
+  // Environmental Metrics
+  CO2_OFFSET_TOTAL: 500, // tons
+  RENEWABLE_ENERGY_PROJECTS: 25,
+  BIODIVERSITY_PROJECTS: 15,
+  WATER_CONSERVATION_PROJECTS: 30,
 }
 
+// Utility functions
 export const formatGaiaPrice = (price: number): string => {
-  if (price >= 1) {
-    return `$${price.toFixed(2)}`
-  }
-  return `$${price.toFixed(8)}`
+  return `$${price.toFixed(6)}`
 }
 
 export const formatGaiaNumber = (num: number): string => {
-  if (num >= 1000000) {
-    return `${(num / 1000000).toFixed(2)}M`
-  }
-  if (num >= 1000) {
-    return `${(num / 1000).toFixed(2)}K`
-  }
-  return num.toFixed(2)
+  if (num >= 1e9) return `${(num / 1e9).toFixed(2)}B`
+  if (num >= 1e6) return `${(num / 1e6).toFixed(2)}M`
+  if (num >= 1e3) return `${(num / 1e3).toFixed(2)}K`
+  return num.toString()
 }

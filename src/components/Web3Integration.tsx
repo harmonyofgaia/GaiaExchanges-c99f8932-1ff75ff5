@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -70,6 +69,7 @@ const Web3Integration: React.FC<Web3Props> = ({
       console.log('🌍 Connected to Official GAiA Token:')
       console.log('📍 Wallet:', GAIA_TOKEN.WALLET_ADDRESS)
       console.log('📍 Contract:', GAIA_TOKEN.CONTRACT_ADDRESS)
+      console.log('🌐 Website:', GAIA_TOKEN.OFFICIAL_WEBSITE)
     }
   }, [isConnected, account, toast])
 
@@ -93,6 +93,10 @@ const Web3Integration: React.FC<Web3Props> = ({
 
   const openPumpFun = () => {
     window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
+  }
+
+  const openOfficialWebsite = () => {
+    window.open(GAIA_TOKEN.OFFICIAL_WEBSITE, '_blank')
   }
 
   const handleBurn = () => {
@@ -157,8 +161,8 @@ const Web3Integration: React.FC<Web3Props> = ({
                 <Button onClick={copyWalletAddress} variant="outline" size="sm" className="border-blue-500/30 text-blue-400">
                   <Copy className="w-3 h-3" />
                 </Button>
-                <Button onClick={openPumpFun} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
-                  <BarChart3 className="w-3 h-3" />
+                <Button onClick={openOfficialWebsite} variant="outline" size="sm" className="border-green-500/30 text-green-400">
+                  <ExternalLink className="w-3 h-3" />
                 </Button>
               </div>
             </div>
@@ -166,15 +170,29 @@ const Web3Integration: React.FC<Web3Props> = ({
 
           {/* GAiA Contract Info */}
           <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
-            <h3 className="text-purple-400 font-bold mb-2">GAiA Contract:</h3>
+            <h3 className="text-purple-400 font-bold mb-2">GAiA Contract (Pump.fun):</h3>
             <div className="flex items-center justify-between">
               <code className="text-purple-300 font-mono text-sm break-all bg-purple-900/10 p-2 rounded flex-1 mr-2">
                 {GAIA_TOKEN.CONTRACT_ADDRESS}
               </code>
-              <Button onClick={copyContractAddress} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
-                <Copy className="w-3 h-3" />
-              </Button>
+              <div className="flex gap-2">
+                <Button onClick={copyContractAddress} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+                  <Copy className="w-3 h-3" />
+                </Button>
+                <Button onClick={openPumpFun} variant="outline" size="sm" className="border-orange-500/30 text-orange-400">
+                  <BarChart3 className="w-3 h-3" />
+                </Button>
+              </div>
             </div>
+          </div>
+
+          {/* Official Website Link */}
+          <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 text-center">
+            <h3 className="text-green-400 font-bold mb-2">🌐 Official GAiA Website:</h3>
+            <Button onClick={openOfficialWebsite} className="bg-green-600 hover:bg-green-700">
+              <Globe className="w-4 h-4 mr-2" />
+              Visit www.gaiaexchanges.net
+            </Button>
           </div>
 
           {isConnected ? (
