@@ -13,9 +13,19 @@ interface DragonPower {
   holderProtectionScore: number
 }
 
+interface DragonThreat {
+  id: string
+  threatType: string
+  ip: string
+  dragonResponse: string
+  severity: string
+  linkedIPs: string[]
+  timestamp: Date
+}
+
 interface DragonCoreData {
   dragonPower: DragonPower
-  activeThrears: number
+  activeThrears: DragonThreat[]
 }
 
 export function TrainedDragonCore(): DragonCoreData {
@@ -31,8 +41,11 @@ export function TrainedDragonCore(): DragonCoreData {
     holderProtectionScore: 100
   })
 
+  // Dragon has eliminated all threats - empty array
+  const activeThrears = useRef<DragonThreat[]>([])
+
   return {
     dragonPower: dragonPower.current,
-    activeThrears: 0
+    activeThrears: activeThrears.current
   }
 }
