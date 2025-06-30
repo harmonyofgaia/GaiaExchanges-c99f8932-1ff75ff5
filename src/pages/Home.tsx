@@ -1,4 +1,3 @@
-
 import { RobotAdvertisement } from '@/components/advertising/RobotAdvertisement'
 import { HeroSection } from '@/components/home/HeroSection'
 import { FeatureGrid } from '@/components/home/FeatureGrid'
@@ -12,7 +11,15 @@ import { UniversalStyleController } from '@/components/admin/UniversalStyleContr
 import { HoverSidebar } from '@/components/HoverSidebar'
 import { WorldRankingDashboard } from '@/components/home/WorldRankingDashboard'
 import { AdminLayoutEditor } from '@/components/admin/AdminLayoutEditor'
+import { InvisibleSecurityCore } from '@/components/security/InvisibleSecurityCore'
+import { InvisibleAdminProtection } from '@/components/security/InvisibleAdminProtection'
+import { InvisibleAttachmentSystem } from '@/components/security/InvisibleAttachmentSystem'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { ExternalLink } from 'lucide-react'
+import { GAIA_TOKEN } from '@/constants/gaia'
+import { ExchangeLinks } from '@/components/home/ExchangeLinks'
 
 const Home = () => {
   const { isAdmin } = useSecureAdmin()
@@ -24,6 +31,9 @@ const Home = () => {
       <RobotAdvertisement />
       <UniversalStyleController />
       <HoverSidebar />
+      <InvisibleSecurityCore />
+      <InvisibleAdminProtection />
+      <InvisibleAttachmentSystem />
       {isAdmin && <AdminLayoutEditor />}
       
       <div className="container mx-auto px-4 py-8 relative z-20">
@@ -34,6 +44,7 @@ const Home = () => {
         <GameUpdatePreview />
         <CallToAction />
         <SecurityPreview />
+        <ExchangeLinks />
       </div>
     </div>
   )

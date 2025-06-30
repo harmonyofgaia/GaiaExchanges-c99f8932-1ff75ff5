@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Cinzel:wght@400;500;600;700;800;900&family=Merriweather:wght@300;400;700;900&display=swap');
 @tailwind base;
 @tailwind components;
@@ -140,4 +139,31 @@
 .admin-selected {
   outline: 3px solid rgba(34, 197, 94, 1) !important;
   box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}
+
+/* Adaptive Logo Background */
+.adaptive-logo-bg {
+  transition: all 0.3s ease;
+}
+
+/* Auto-detect background and adapt logo */
+@media (prefers-color-scheme: dark) {
+  .adaptive-logo-bg {
+    filter: brightness(0) saturate(100%) invert(100%) !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .adaptive-logo-bg {
+    filter: brightness(0) saturate(100%) invert(0%) !important;
+  }
+}
+
+/* Dynamic background adaptation */
+.adaptive-logo-bg[data-bg="dark"] {
+  filter: brightness(0) saturate(100%) invert(100%) !important;
+}
+
+.adaptive-logo-bg[data-bg="light"] {
+  filter: brightness(0) saturate(100%) invert(0%) !important;
 }
