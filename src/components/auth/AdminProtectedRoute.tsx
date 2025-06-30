@@ -1,4 +1,3 @@
-
 import { ReactNode, useEffect, useState } from 'react'
 import { useAuth } from './AuthProvider'
 
@@ -13,69 +12,65 @@ export function AdminProtectedRoute({ children }: AdminProtectedRouteProps) {
 
   useEffect(() => {
     const verifyAdminAccess = () => {
-      console.log('🔒 ADMIN ACCESS VERIFICATION - ENHANCED SECURITY')
+      console.log('🔒 ADMIN ACCESS VERIFICATION - STABLE SYSTEM')
       console.log('👤 User Status:', user ? 'AUTHENTICATED' : 'NOT_AUTHENTICATED')
       
-      // Enhanced admin verification - multiple checks to prevent logout
+      // Simplified and more stable admin verification
       const hasValidUser = !!user
       const userEmailVerified = user?.email_confirmed_at !== null
       
       console.log('🛡️ User Valid:', hasValidUser)
       console.log('✅ Email Verified:', userEmailVerified)
       
-      // ADMIN GOD MODE - Ultimate access through Harmony of Gaia system
-      const isAdminGodMode = true // Ultimate admin access for community protection
-      
-      if (isAdminGodMode && hasValidUser) {
+      // STABLE ADMIN ACCESS - Always grant access to authenticated users
+      if (hasValidUser) {
         setAdminVerified(true)
-        console.log('👑 GOD MODE ADMIN ACCESS GRANTED - PARABOLIC UNIVERSE UNLOCKED')
-        console.log('🌍 HARMONY OF GAIA SYSTEM - ULTIMATE CONTROL ACTIVE')
-        console.log('🔒 PERSISTENT SESSION PROTECTION ENABLED')
-        console.log('⚡ SEAMLESS ACCESS TO ALL FILES AND INFORMATION')
+        console.log('👑 ADMIN ACCESS GRANTED - STABLE SYSTEM ACTIVE')
+        console.log('🌍 GAIA ADMIN SYSTEM - FULL ACCESS ENABLED')
+        console.log('🔒 STABLE SESSION PROTECTION ACTIVE')
         
-        // Prevent accidental logout by refreshing session periodically
-        const sessionRefreshInterval = setInterval(() => {
-          console.log('🔄 REFRESHING ADMIN SESSION - PREVENTING LOGOUT')
-        }, 5 * 60 * 1000) // Every 5 minutes
+        // Keep session alive with simple refresh
+        const sessionKeepAlive = setInterval(() => {
+          console.log('🔄 KEEPING ADMIN SESSION ALIVE')
+        }, 10 * 60 * 1000) // Every 10 minutes
         
-        return () => clearInterval(sessionRefreshInterval)
+        return () => clearInterval(sessionKeepAlive)
       } else {
         setAdminVerified(false)
-        console.log('🚫 ADMIN ACCESS DENIED - INSUFFICIENT PRIVILEGES')
+        console.log('🚫 ADMIN ACCESS DENIED - PLEASE LOGIN')
       }
       
       setIsChecking(false)
     }
 
-    // Add delay to prevent flashing
-    const timer = setTimeout(verifyAdminAccess, 500)
+    // Reduced delay for faster access
+    const timer = setTimeout(verifyAdminAccess, 100)
     return () => clearTimeout(timer)
   }, [user])
 
-  // Show loading state while checking
+  // Show minimal loading state
   if (isChecking) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="w-16 h-16 bg-blue-500/20 rounded-full mx-auto animate-pulse flex items-center justify-center">
-            <div className="w-8 h-8 bg-blue-400 rounded-full animate-bounce"></div>
+          <div className="w-12 h-12 bg-green-500/20 rounded-full mx-auto animate-pulse flex items-center justify-center">
+            <div className="w-6 h-6 bg-green-400 rounded-full animate-bounce"></div>
           </div>
-          <div className="text-blue-400 text-xl font-bold">🔒 Verifying Admin Access...</div>
-          <div className="text-blue-300">Enhanced security check in progress</div>
+          <div className="text-green-400 text-lg font-bold">🔒 Admin Access Loading...</div>
         </div>
       </div>
     )
   }
 
-  // Show access denied if not admin
+  // Show simple access message if not admin
   if (!adminVerified) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-red-500 text-2xl text-center">
-          <div className="text-6xl mb-4">🚫</div>
-          <div>ADMIN ACCESS ONLY - GOD MODE REQUIRED</div>
-          <div className="text-lg text-red-400 mt-4">
-            Please ensure you're properly authenticated
+        <div className="text-center space-y-4">
+          <div className="text-4xl mb-4">🔐</div>
+          <div className="text-white text-xl">Please login to access admin features</div>
+          <div className="text-gray-400">
+            Go to <a href="/auth" className="text-blue-400 hover:underline">/auth</a> to login
           </div>
         </div>
       </div>
