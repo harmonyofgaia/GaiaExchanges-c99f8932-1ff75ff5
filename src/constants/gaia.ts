@@ -21,7 +21,17 @@ export const GAIA_METRICS = {
   marketCap: 2470000,
   volume24h: 156789,
   holders: 15247,
-  burnedTokens: 152670844
+  burnedTokens: 152670844,
+  // Additional properties that components are expecting
+  INITIAL_TRANSACTIONS: 245876,
+  INITIAL_HOLDERS: 15247,
+  INITIAL_MARKET_CAP: 2470000,
+  INITIAL_VOLUME: 156789,
+  INITIAL_PRICE: 0.000125,
+  NETWORK_SPEED: 2500,
+  SECURITY_SCORE: 99.8,
+  ECOSYSTEM_HEALTH: 97.5,
+  DRAGON_POWER: 100
 }
 
 export const formatGaiaPrice = (price: number): string => {
