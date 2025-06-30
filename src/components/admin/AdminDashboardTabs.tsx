@@ -5,15 +5,17 @@ import { AdminDashboard } from './AdminDashboard'
 import { AdvancedSecurityCenter } from './AdvancedSecurityCenter'
 import { UltimateSecuritySuite } from './UltimateSecuritySuite'
 import { FutureReadingMachine } from './FutureReadingMachine'
+import { QuantumPartnershipEngine } from './QuantumPartnershipEngine'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="dashboard" className="w-full">
-      <TabsList className="grid w-full grid-cols-5 mb-6">
+      <TabsList className="grid w-full grid-cols-6 mb-6">
         <TabsTrigger value="dashboard">System Dashboard</TabsTrigger>
         <TabsTrigger value="security">Advanced Security</TabsTrigger>
         <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
         <TabsTrigger value="future">Future Reading</TabsTrigger>
+        <TabsTrigger value="partnerships">Partnership Engine</TabsTrigger>
         <TabsTrigger value="analytics">Deep Analytics</TabsTrigger>
       </TabsList>
       
@@ -31,6 +33,10 @@ export function AdminDashboardTabs() {
       
       <TabsContent value="future">
         <FutureReadingMachine />
+      </TabsContent>
+      
+      <TabsContent value="partnerships">
+        <QuantumPartnershipEngine />
       </TabsContent>
       
       <TabsContent value="analytics">
