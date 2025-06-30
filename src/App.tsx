@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
@@ -12,6 +11,7 @@ import SecureAdmin from './pages/SecureAdmin'
 import SecureVault from './pages/SecureVault'
 import { UserOnlyProtectedRoute } from './components/auth/UserOnlyProtectedRoute'
 import { GlobalSEOOptimizer } from './components/seo/GlobalSEOOptimizer'
+import AdminLogin from './pages/AdminLogin'
 
 function App() {
   return (
@@ -54,8 +54,10 @@ function App() {
             </UserOnlyProtectedRoute>
           } />
           
-          {/* Both admin routes point to the same secure vault system */}
-          <Route path="/admin" element={<SecureVault />} />
+          {/* Admin Portal - Dual Access System */}
+          <Route path="/admin" element={<AdminLogin />} />
+          
+          {/* Legacy vault routes for backward compatibility */}
           <Route path="/secure-admin" element={<SecureAdmin />} />
           <Route path="/secure-vault" element={<SecureVault />} />
         </Routes>
