@@ -17,11 +17,13 @@ import { MasterDefenseOrchestrator } from './MasterDefenseOrchestrator'
 import { AdminAnalyticsDashboard } from './AdminAnalyticsDashboard'
 import { AutonomousMastermind } from './AutonomousMastermind'
 import { WalletConnectionManager } from './WalletConnectionManager'
+import { CommunityRecoveryDashboard } from './CommunityRecoveryDashboard'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="transparency" className="w-full">
-      <TabsList className="grid w-full grid-cols-13 mb-6">
+    <Tabs defaultValue="community-recovery" className="w-full">
+      <TabsList className="grid w-full grid-cols-14 mb-6">
+        <TabsTrigger value="community-recovery">🌍 Community Recovery</TabsTrigger>
         <TabsTrigger value="transparency">🔍 Transparency</TabsTrigger>
         <TabsTrigger value="wallets">💰 Wallet Control</TabsTrigger>
         <TabsTrigger value="master-defense">🧠 Master Defense</TabsTrigger>
@@ -39,6 +41,10 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="transaction-reversal">💰 Transaction Control</TabsTrigger>
       </TabsList>
       
+      <TabsContent value="community-recovery">
+        <CommunityRecoveryDashboard />
+      </TabsContent>
+
       <TabsContent value="transparency">
         <EnhancedSuspiciousTransactions />
       </TabsContent>

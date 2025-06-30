@@ -4,9 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Shield, Lock, Eye, EyeOff, Download } from 'lucide-react'
+import { Shield, Lock, Eye, EyeOff } from 'lucide-react'
 import { toast } from 'sonner'
 import { AdminDashboardTabs } from './AdminDashboardTabs'
+import { PersistentAdminSession } from './PersistentAdminSession'
 
 export function SecureVaultLogin() {
   const [credentials, setCredentials] = useState({
@@ -16,20 +17,29 @@ export function SecureVaultLogin() {
   const [showPassword, setShowPassword] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [securityAlerts, setSecurityAlerts] = useState<any[]>([])
 
-  // Monitor for security attempts (simplified and safe)
+  // Check for existing persistent session on load
   useEffect(() => {
-    const monitorSecurity = () => {
-      const attempts = JSON.parse(localStorage.getItem('admin-hack-attempts') || '[]')
-      if (attempts.length > 0) {
-        setSecurityAlerts(attempts)
-        console.log('🚨 SECURITY ALERT: Unauthorized access attempts detected')
+    const checkPersistentSession = () => {
+      const session = localStorage.getItem('gaia-admin-session')
+      const adminActive = sessionStorage.getItem('admin-active')
+      
+      if (session && adminActive === 'true') {
+        const sessionData = JSON.parse(session)
+        const isValid = sessionData.persistent && sessionData.timestamp
+        
+        if (isValid) {
+          setIsAuthenticated(true)
+          console.log('🔄 PERSISTENT ADMIN SESSION RESTORED')
+          toast.success('🛡️ Admin Session Restored', {
+            description: 'Welcome back to GAIA Control Center',
+            duration: 3000
+          })
+        }
       }
     }
 
-    const interval = setInterval(monitorSecurity, 10000)
-    return () => clearInterval(interval)
+    checkPersistentSession()
   }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -37,49 +47,36 @@ export function SecureVaultLogin() {
     setIsLoading(true)
 
     try {
-      // Ultra-secure admin credentials
-      const validCredentials = {
-        username: 'Synatic',
-        password: 'Freedom!oul19922323'
-      }
-
-      if (credentials.username === validCredentials.username && 
-          credentials.password === validCredentials.password) {
+      // Stable admin credentials
+      if (credentials.username === 'Synatic' && credentials.password === 'Freedom!oul19922323') {
         
-        console.log('🛡️ ADMIN ACCESS GRANTED')
-        console.log('👑 Welcome Admin Synatic - Full System Control Active')
+        console.log('🛡️ ADMIN ACCESS GRANTED - UNLIMITED SESSION')
+        
+        // Create persistent session
+        localStorage.setItem('gaia-admin-session', JSON.stringify({
+          username: credentials.username,
+          timestamp: Date.now(),
+          persistent: true,
+          unlimitedAccess: true
+        }))
+        
+        sessionStorage.setItem('admin-active', 'true')
         
         setIsAuthenticated(true)
         toast.success('🌌 ADMIN VAULT UNLOCKED!', {
-          description: 'Welcome to the Universal Control Center, Synatic.',
+          description: 'Persistent session activated - No timeout',
           duration: 5000
         })
       } else {
-        // Log unauthorized attempt
-        const attempt = {
-          timestamp: new Date().toISOString(),
-          username: credentials.username,
-          password: credentials.password,
-          ip: 'Unknown',
-          userAgent: navigator.userAgent,
-          blocked: true
-        }
-        
-        const attempts = JSON.parse(localStorage.getItem('admin-hack-attempts') || '[]')
-        attempts.push(attempt)
-        localStorage.setItem('admin-hack-attempts', JSON.stringify(attempts))
-        
-        console.log('🚨 UNAUTHORIZED ACCESS ATTEMPT BLOCKED')
-        
         toast.error('🚨 ACCESS DENIED', {
-          description: 'Invalid credentials. Attempt logged.',
-          duration: 5000
+          description: 'Invalid credentials',
+          duration: 3000
         })
       }
     } catch (error) {
       toast.error('Security Error', {
-        description: 'Maximum protection activated',
-        duration: 5000
+        description: 'Please try again',
+        duration: 3000
       })
     } finally {
       setIsLoading(false)
@@ -88,6 +85,8 @@ export function SecureVaultLogin() {
   }
 
   const handleLogout = () => {
+    localStorage.removeItem('gaia-admin-session')
+    sessionStorage.removeItem('admin-active')
     setIsAuthenticated(false)
     toast.success('Logged out successfully')
   }
@@ -95,6 +94,7 @@ export function SecureVaultLogin() {
   if (isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10">
+        <PersistentAdminSession />
         <div className="container mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-8">
             <div>
@@ -102,7 +102,7 @@ export function SecureVaultLogin() {
                 🌍 GAIA Admin Dashboard
               </h1>
               <p className="text-xl text-muted-foreground mt-2">
-                Complete System Control • Secure Access • Global Management
+                Persistent Session Active • Community Protection • Global Management
               </p>
             </div>
             <Button onClick={handleLogout} variant="outline" className="border-red-500/30">
@@ -127,7 +127,7 @@ export function SecureVaultLogin() {
               🛡️ GAIA Secure Admin
             </CardTitle>
             <p className="text-green-300 text-sm mt-2">
-              Universal Admin Access • Quantum Protected • Stable System
+              Persistent Session • No Timeout • Community Protection
             </p>
           </div>
         </CardHeader>
@@ -178,23 +178,16 @@ export function SecureVaultLogin() {
               className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3"
             >
               <Lock className="h-5 w-5 mr-2" />
-              {isLoading ? 'Authenticating...' : 'LOGIN TO ADMIN CONTROL'}
+              {isLoading ? 'Authenticating...' : 'ACTIVATE PERSISTENT SESSION'}
             </Button>
           </form>
 
-          {securityAlerts.length > 0 && (
-            <div className="mt-4 p-3 bg-red-900/30 border border-red-500/30 rounded">
-              <div className="text-red-400 text-sm font-bold">🚨 SECURITY ALERTS</div>
-              <div className="text-red-300 text-xs">{securityAlerts.length} unauthorized attempts blocked</div>
-            </div>
-          )}
-
           <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/20 rounded-lg">
             <p className="text-xs text-green-300 text-center">
-              🛡️ STABLE ADMIN SYSTEM • MAXIMUM SECURITY • RELIABLE ACCESS
+              🛡️ PERSISTENT ADMIN SYSTEM • NO TIMEOUT • COMMUNITY PROTECTION
             </p>
             <p className="text-xs text-blue-300 text-center mt-1">
-              Admin Control • Global Management • Secure Authentication
+              Unlimited Session Time • Maximum Security • Global Management
             </p>
           </div>
         </CardContent>
