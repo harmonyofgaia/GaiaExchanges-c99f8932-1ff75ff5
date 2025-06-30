@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -19,7 +20,8 @@ import {
   TrendingUp,
   Copy,
   ExternalLink,
-  BarChart3
+  BarChart3,
+  Globe
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'

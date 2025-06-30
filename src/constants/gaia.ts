@@ -14,6 +14,7 @@ export const GAIA_TOKEN = {
   TOTAL_SUPPLY: 1000000000000, // 1 Trillion tokens
   BURNED_TOKENS: 0,
   CIRCULATING_SUPPLY: 1000000000000,
+  INITIAL_PRICE: 0.0001, // Added back for compatibility
   
   // Tokenomics
   BURN_RATE: 0, // 0% burn rate
@@ -32,6 +33,16 @@ export const GAIA_METRICS = {
   VOLUME_24H: 50000, // USD
   HOLDERS: 10000,
   TRANSACTIONS_24H: 5000,
+  
+  // Added back for compatibility
+  INITIAL_PRICE: 0.0001,
+  INITIAL_HOLDERS: 10000,
+  INITIAL_MARKET_CAP: 100000,
+  INITIAL_VOLUME: 50000,
+  INITIAL_TRANSACTIONS: 5000,
+  NETWORK_SPEED: 2500,
+  SECURITY_SCORE: 95,
+  ECOSYSTEM_HEALTH: 98,
   
   // Environmental Metrics
   CO2_OFFSET_TOTAL: 500, // tons
