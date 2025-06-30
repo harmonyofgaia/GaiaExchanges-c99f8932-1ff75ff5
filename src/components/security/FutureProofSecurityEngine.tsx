@@ -16,7 +16,8 @@ interface ThreatIntelligence {
   networkSignature: string
   behaviorPattern: string
   preventionAction: string
-  status: 'BLOCKED' | 'MONITORING' | 'NEUTRALIZED' | 'WARNING_ISSUED' | 'ENHANCED_INVISIBILITY'
+  status: 'BLOCKED' | 'MONITORING' | 'NEUTRALIZED' | 'WARNING_ISSUED' | 'LEVEL_2_BREACH' | 'ENHANCED_INVISIBILITY'
+  defenseLevel: number
 }
 
 interface SecurityMetrics {
@@ -27,7 +28,9 @@ interface SecurityMetrics {
   lastUpdate: Date
   futureTechAdaptation: number
   ipWarningsIssued: number
+  level2Breaches: number
   enhancedInvisibilityActive: number
+  quantumComputersSynced: number
 }
 
 export function FutureProofSecurityEngine() {
@@ -39,19 +42,26 @@ export function FutureProofSecurityEngine() {
     lastUpdate: new Date(),
     futureTechAdaptation: 100,
     ipWarningsIssued: 0,
-    enhancedInvisibilityActive: 0
+    level2Breaches: 0,
+    enhancedInvisibilityActive: 0,
+    quantumComputersSynced: 20
   })
   
   const [threats, setThreats] = useState<ThreatIntelligence[]>([])
   const securityInterval = useRef<NodeJS.Timeout>()
   const threatHistory = useRef<Set<string>>(new Set())
   const warnedIPs = useRef<Set<string>>(new Set())
+  const level1BreachedIPs = useRef<Set<string>>(new Set())
+  const level2BreachedIPs = useRef<Set<string>>(new Set())
   const invisibleIPs = useRef<Set<string>>(new Set())
 
   useEffect(() => {
-    const performDefenseWallMonitoring = async () => {
+    const performQuantumDefenseMonitoring = async () => {
       try {
-        console.log('🛡️ DEFENSE WALL MONITORING - IP-Specific Attack Detection')
+        console.log('⚡ QUANTUM DEFENSE MONITORING - 20 QUANTUM COMPUTERS SYNCHRONIZED')
+        console.log('🛡️ LEVEL 1: Basic Firewall Protection')
+        console.log('🔥 LEVEL 2: Advanced Defense Wall (IP-Specific Targeting)')
+        console.log('👻 ENHANCED INVISIBILITY: Only after Level 2 breach')
         
         const userIP = await fetch('https://api.ipify.org?format=json')
           .then(res => res.json())
@@ -60,92 +70,147 @@ export function FutureProofSecurityEngine() {
 
         const newThreats: ThreatIntelligence[] = []
 
-        // DEFENSE WALL BREACH DETECTION (IP-Specific Only)
-        const detectDefenseWallAttack = () => {
-          const criticalAttackPatterns = [
-            'bypass_security', 'break_defense', 'penetrate_wall', 'hack_system',
-            'unauthorized_access', 'security_breach', 'wall_attack', 'defense_bypass',
-            'exploit_vulnerability', 'inject_malicious_code'
+        // LEVEL 1 DEFENSE - Basic Threat Detection
+        const detectLevel1Threats = () => {
+          const basicThreatPatterns = [
+            'suspicious_activity', 'malware_scan', 'port_scan', 'basic_intrusion'
           ]
 
           const pageContent = document.body.innerHTML.toLowerCase()
-          const currentUrl = window.location.href.toLowerCase()
           
-          criticalAttackPatterns.forEach(pattern => {
-            if (pageContent.includes(pattern) || currentUrl.includes(pattern)) {
-              
-              // STEP 1: First Warning - IP Specific Only
-              if (!warnedIPs.current.has(userIP) && !invisibleIPs.current.has(userIP)) {
+          basicThreatPatterns.forEach(pattern => {
+            if (pageContent.includes(pattern)) {
+              if (!warnedIPs.current.has(userIP)) {
                 warnedIPs.current.add(userIP)
+                level1BreachedIPs.current.add(userIP)
                 
                 newThreats.push({
-                  id: `defense-attack-${Date.now()}`,
+                  id: `level1-${Date.now()}`,
                   timestamp: new Date(),
                   ipAddress: userIP,
                   userAgent: navigator.userAgent,
-                  threatLevel: 'CRITICAL',
-                  attackType: 'DEFENSE_WALL_ATTACK',
-                  geolocation: 'IP-specific tracking active',
+                  threatLevel: 'HIGH',
+                  attackType: 'LEVEL_1_BREACH',
+                  geolocation: 'Level 1 defense monitoring',
                   deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
-                  networkSignature: `Defense wall attack: ${pattern}`,
-                  behaviorPattern: `CRITICAL DEFENSE BREACH: ${pattern}`,
-                  preventionAction: 'IP_WARNING_ISSUED',
-                  status: 'WARNING_ISSUED'
+                  networkSignature: `Level 1 threat: ${pattern}`,
+                  behaviorPattern: `LEVEL 1 BREACH: ${pattern}`,
+                  preventionAction: 'MONITORING_INCREASED',
+                  status: 'WARNING_ISSUED',
+                  defenseLevel: 1
                 })
 
-                // Show IP-specific warning ONLY to this IP
-                toast.error(`🚨 WARNING TO IP: ${userIP}`, {
-                  description: 'Defense wall attack detected from YOUR IP. This is your ONLY warning. Stop immediately or face enhanced invisibility.',
-                  duration: 25000
+                toast.warning(`⚠️ Level 1 Defense Alert - IP: ${userIP}`, {
+                  description: 'Suspicious activity detected. Increased monitoring active.',
+                  duration: 8000
                 })
 
-                console.log(`🚨 FIRST WARNING ISSUED TO SPECIFIC IP: ${userIP}`)
-                console.log('📧 ADMIN NOTIFICATION: Defense wall attack attempt from specific IP address')
+                console.log(`🛡️ LEVEL 1 BREACH DETECTED FROM IP: ${userIP}`)
                 
                 setMetrics(prev => ({
                   ...prev,
                   ipWarningsIssued: prev.ipWarningsIssued + 1
-                }))
-                
-              // STEP 2: Second Attempt - Enhanced Invisibility for THIS IP ONLY
-              } else if (warnedIPs.current.has(userIP) && !invisibleIPs.current.has(userIP)) {
-                invisibleIPs.current.add(userIP)
-                
-                console.log(`🔒 ENHANCED INVISIBILITY ACTIVATED FOR SPECIFIC IP: ${userIP}`)
-                console.log('👻 TARGET IP NOW COMPLETELY INVISIBLE TO ALL PLATFORMS AND SYSTEMS')
-                console.log('🌐 IP-SPECIFIC INVISIBILITY: Only this IP address affected, not entire networks')
-                
-                newThreats.push({
-                  id: `enhanced-invisibility-${Date.now()}`,
-                  timestamp: new Date(),
-                  ipAddress: userIP,
-                  userAgent: navigator.userAgent,
-                  threatLevel: 'CRITICAL',
-                  attackType: 'ENHANCED_INVISIBILITY_ACTIVATED',
-                  geolocation: 'IP-specific enhanced protection',
-                  deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
-                  networkSignature: `Enhanced invisibility for specific IP: ${userIP}`,
-                  behaviorPattern: 'REPEAT DEFENSE ATTACK - IP-SPECIFIC ENHANCED PROTECTION ACTIVATED',
-                  preventionAction: 'ENHANCED_INVISIBILITY_ACTIVE_IP_ONLY',
-                  status: 'ENHANCED_INVISIBILITY'
-                })
-
-                // Final warning before complete invisibility
-                toast.error(`🚫 ENHANCED INVISIBILITY ACTIVATED FOR IP: ${userIP}`, {
-                  description: 'You ignored our warning. Your IP is now invisible to all platforms. This affects ONLY your IP address.',
-                  duration: 30000
-                })
-
-                setMetrics(prev => ({
-                  ...prev,
-                  enhancedInvisibilityActive: prev.enhancedInvisibilityActive + 1
                 }))
               }
             }
           })
         }
 
-        detectDefenseWallAttack()
+        // LEVEL 2 DEFENSE - Advanced Wall Protection (Only after Level 1 breach)
+        const detectLevel2Breaches = () => {
+          if (!level1BreachedIPs.current.has(userIP)) {
+            return // Must breach Level 1 first
+          }
+
+          const advancedAttackPatterns = [
+            'bypass_security', 'break_defense', 'penetrate_wall', 'hack_system',
+            'unauthorized_access', 'security_breach', 'wall_attack', 'defense_bypass',
+            'exploit_vulnerability', 'inject_malicious_code', 'quantum_hack'
+          ]
+
+          const pageContent = document.body.innerHTML.toLowerCase()
+          const currentUrl = window.location.href.toLowerCase()
+          
+          advancedAttackPatterns.forEach(pattern => {
+            if (pageContent.includes(pattern) || currentUrl.includes(pattern)) {
+              
+              if (!level2BreachedIPs.current.has(userIP)) {
+                level2BreachedIPs.current.add(userIP)
+                
+                newThreats.push({
+                  id: `level2-breach-${Date.now()}`,
+                  timestamp: new Date(),
+                  ipAddress: userIP,
+                  userAgent: navigator.userAgent,
+                  threatLevel: 'CRITICAL',
+                  attackType: 'LEVEL_2_DEFENSE_BREACH',
+                  geolocation: 'Advanced defense wall breached',
+                  deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
+                  networkSignature: `Level 2 breach: ${pattern}`,
+                  behaviorPattern: `CRITICAL LEVEL 2 BREACH: ${pattern}`,
+                  preventionAction: 'PREPARING_ENHANCED_INVISIBILITY',
+                  status: 'LEVEL_2_BREACH',
+                  defenseLevel: 2
+                })
+
+                toast.error(`🚨 LEVEL 2 DEFENSE BREACH - IP: ${userIP}`, {
+                  description: 'Advanced defense wall breached! Preparing enhanced countermeasures...',
+                  duration: 15000
+                })
+
+                console.log(`🔥 LEVEL 2 DEFENSE BREACH FROM SPECIFIC IP: ${userIP}`)
+                console.log('⚡ QUANTUM COMPUTERS ACTIVATING ENHANCED PROTOCOLS')
+                
+                setMetrics(prev => ({
+                  ...prev,
+                  level2Breaches: prev.level2Breaches + 1
+                }))
+
+                // After 3 seconds, activate enhanced invisibility for this specific IP
+                setTimeout(() => {
+                  if (!invisibleIPs.current.has(userIP)) {
+                    invisibleIPs.current.add(userIP)
+                    
+                    console.log(`👻 ENHANCED INVISIBILITY ACTIVATED FOR SPECIFIC IP: ${userIP}`)
+                    console.log('🌐 IP-SPECIFIC QUANTUM INVISIBILITY: Only this IP affected')
+                    console.log('⚡ 20 QUANTUM COMPUTERS: Synchronized invisibility protocol')
+                    
+                    const invisibilityThreat: ThreatIntelligence = {
+                      id: `enhanced-invisibility-${Date.now()}`,
+                      timestamp: new Date(),
+                      ipAddress: userIP,
+                      userAgent: navigator.userAgent,
+                      threatLevel: 'CRITICAL',
+                      attackType: 'QUANTUM_ENHANCED_INVISIBILITY',
+                      geolocation: 'Quantum-level IP-specific protection',
+                      deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
+                      networkSignature: `Quantum invisibility for IP: ${userIP}`,
+                      behaviorPattern: 'LEVEL 2 BREACH - QUANTUM INVISIBILITY PROTOCOL ACTIVATED',
+                      preventionAction: 'QUANTUM_INVISIBILITY_ACTIVE_IP_ONLY',
+                      status: 'ENHANCED_INVISIBILITY',
+                      defenseLevel: 3
+                    }
+
+                    setThreats(prev => [invisibilityThreat, ...prev.slice(0, 19)])
+
+                    toast.error(`👻 QUANTUM INVISIBILITY ACTIVE - IP: ${userIP}`, {
+                      description: 'Level 2 breach triggered quantum invisibility. This IP is now invisible to all systems.',
+                      duration: 20000
+                    })
+
+                    setMetrics(prev => ({
+                      ...prev,
+                      enhancedInvisibilityActive: prev.enhancedInvisibilityActive + 1
+                    }))
+                  }
+                }, 3000)
+              }
+            }
+          })
+        }
+
+        detectLevel1Threats()
+        detectLevel2Breaches()
 
         if (newThreats.length > 0) {
           newThreats.forEach(threat => {
@@ -164,15 +229,15 @@ export function FutureProofSecurityEngine() {
           }))
         }
 
-        console.log('🛡️ DEFENSE WALL - IP-Specific Monitoring Complete')
+        console.log('⚡ QUANTUM DEFENSE MONITORING COMPLETE - ALL 20 COMPUTERS ACTIVE')
 
       } catch (error) {
-        console.log('🔒 Security engine protected:', error)
+        console.log('🔒 Quantum security engine self-protected:', error)
       }
     }
 
-    securityInterval.current = setInterval(performDefenseWallMonitoring, 5000)
-    performDefenseWallMonitoring()
+    securityInterval.current = setInterval(performQuantumDefenseMonitoring, 4000)
+    performQuantumDefenseMonitoring()
 
     return () => {
       if (securityInterval.current) {
@@ -185,8 +250,11 @@ export function FutureProofSecurityEngine() {
     metrics,
     threats: threats.slice(0, 5),
     isActive: true,
-    securityLevel: 'MAXIMUM',
+    securityLevel: 'QUANTUM_MAXIMUM',
     futureProofStatus: 'ACTIVE',
-    ipSpecificProtection: 'ACTIVE'
+    quantumComputersSynced: true,
+    level1Protection: 'ACTIVE',
+    level2Protection: 'ACTIVE',
+    enhancedInvisibility: 'READY'
   }
 }

@@ -18,6 +18,8 @@ import { InvisibleAttachmentSystem } from '@/components/security/InvisibleAttach
 import { ExchangeComplianceDocuments } from '@/components/legal/ExchangeComplianceDocuments'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { ExchangeLinks } from '@/components/home/ExchangeLinks'
+import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 const Home = () => {
   const { isAdmin } = useSecureAdmin()
