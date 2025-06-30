@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/components/auth/AuthProvider'
 import { toast } from 'sonner'
@@ -32,7 +33,7 @@ export function PersistentAdminSession() {
         if ('indexedDB' in window) {
           const request = indexedDB.open('GaiaAdminDB', 1)
           request.onsuccess = (event) => {
-            const db = event.target.result
+            const db = (event.target as IDBRequest).result
             const transaction = db.transaction(['adminSessions'], 'readwrite')
             const store = transaction.objectStore('adminSessions')
             store.put(sessionData, 'current-session')

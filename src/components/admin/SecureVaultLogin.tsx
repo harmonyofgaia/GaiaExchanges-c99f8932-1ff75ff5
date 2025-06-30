@@ -96,13 +96,13 @@ export function SecureVaultLogin() {
         if ('indexedDB' in window) {
           const request = indexedDB.open('GaiaAdminDB', 1)
           request.onupgradeneeded = (event) => {
-            const db = event.target.result
+            const db = (event.target as IDBRequest).result
             if (!db.objectStoreNames.contains('adminSessions')) {
               db.createObjectStore('adminSessions')
             }
           }
           request.onsuccess = (event) => {
-            const db = event.target.result
+            const db = (event.target as IDBRequest).result
             const transaction = db.transaction(['adminSessions'], 'readwrite')
             const store = transaction.objectStore('adminSessions')
             store.put(sessionData, 'current-session')
@@ -144,7 +144,7 @@ export function SecureVaultLogin() {
     if ('indexedDB' in window) {
       const request = indexedDB.open('GaiaAdminDB', 1)
       request.onsuccess = (event) => {
-        const db = event.target.result
+        const db = (event.target as IDBRequest).result
         const transaction = db.transaction(['adminSessions'], 'readwrite')
         const store = transaction.objectStore('adminSessions')
         store.delete('current-session')
@@ -190,7 +190,8 @@ export function SecureVaultLogin() {
     const hideAdminElements = () => {
       const adminElements = document.querySelectorAll('[data-admin="true"]')
       adminElements.forEach(el => {
-        el.style.display = 'none'
+        const htmlEl = el as HTMLElement
+        htmlEl.style.display = 'none'
       })
     }
     

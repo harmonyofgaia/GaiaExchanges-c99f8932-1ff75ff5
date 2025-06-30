@@ -33,8 +33,9 @@ export function AdminRouteProtector() {
         // Remove admin indicators from DOM
         const adminElements = document.querySelectorAll('[data-admin="true"]')
         adminElements.forEach(el => {
-          el.style.visibility = 'hidden'
-          el.setAttribute('data-cloaked', 'true')
+          const htmlEl = el as HTMLElement
+          htmlEl.style.visibility = 'hidden'
+          htmlEl.setAttribute('data-cloaked', 'true')
         })
         
         // Anti-detection measures
