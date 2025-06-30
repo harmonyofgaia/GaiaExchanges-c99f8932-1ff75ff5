@@ -111,7 +111,7 @@ export function AdminTycoonControls({ playerData, setPlayerData, buildings, setB
       y: 100
     }
 
-    setBuildings(prev => [...prev, megaBuilding])
+    setBuildings([...buildings, megaBuilding])
     toast.success('👑 Mega Structure Built!', {
       description: 'Admin-only mega hotel generating 1000 coins/5s',
       duration: 3000
