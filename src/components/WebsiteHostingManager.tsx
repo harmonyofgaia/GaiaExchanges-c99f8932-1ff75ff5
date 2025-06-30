@@ -42,7 +42,7 @@ export function WebsiteHostingManager() {
   const { isAdmin } = useSecureAdmin()
   
   const [hostingStatus, setHostingStatus] = useState<HostingStatus>({
-    domain: 'www.gaiaexchange.net',
+    domain: 'www.gaiaexchanges.net',
     status: 'active',
     uptime: 99.9,
     visitors: 15420,
@@ -105,10 +105,9 @@ export function WebsiteHostingManager() {
   const currentBrowser = getCurrentBrowser()
   const isFirefoxAdmin = isAdmin && currentBrowser === 'firefox'
 
-  // Enhanced browser compatibility check
   const testBrowserCompatibility = async () => {
     toast.info('🌐 Testing Cross-Browser Compatibility...', {
-      description: 'Checking www.gaiaexchange.net across all browsers',
+      description: 'Checking www.gaiaexchanges.net across all browsers',
       duration: 3000
     })
 
@@ -156,7 +155,7 @@ export function WebsiteHostingManager() {
     setHostingStatus(prev => ({ ...prev, status: 'deploying' }))
 
     toast.info('🚀 Deploying Website...', {
-      description: 'Setting up www.gaiaexchange.net with quantum security',
+      description: 'Setting up www.gaiaexchanges.net with quantum security',
       duration: 3000
     })
 
@@ -170,7 +169,7 @@ export function WebsiteHostingManager() {
       setIsDeploying(false)
 
       toast.success('🌍 Website Deployed Successfully!', {
-        description: 'www.gaiaexchange.net is now live with maximum security',
+        description: 'www.gaiaexchanges.net is now live with maximum security',
         duration: 5000
       })
     }, 3000)
@@ -241,7 +240,7 @@ export function WebsiteHostingManager() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-blue-400">
           <Globe className="h-6 w-6" />
-          🌐 GAIA WEBSITE HOSTING - Cross-Browser Compatible
+          🌐 GAIA WEBSITE HOSTING - Global Access Ready
         </CardTitle>
         <div className="flex flex-wrap gap-2">
           <Badge className={`${getStatusColor(hostingStatus.status)} text-white`}>
@@ -269,12 +268,12 @@ export function WebsiteHostingManager() {
       </CardHeader>
       
       <CardContent className="space-y-6">
-        {/* Admin Firefox Control Warning */}
+        {/* Admin Firefox Control Info */}
         {isAdmin && currentBrowser !== 'firefox' && (
           <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-4">
-            <h4 className="text-orange-400 font-bold mb-2">⚠️ Admin Access Restriction</h4>
+            <h4 className="text-orange-400 font-bold mb-2">⚠️ Admin Access Info</h4>
             <p className="text-sm text-orange-300">
-              Full admin controls are only available through Firefox browser for security reasons.
+              Full admin controls are optimized for Firefox browser.
               Current browser: <span className="font-mono">{currentBrowser}</span>
             </p>
           </div>
@@ -282,7 +281,7 @@ export function WebsiteHostingManager() {
 
         {/* Browser Compatibility Status */}
         <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
-          <h4 className="text-lg font-bold text-green-400 mb-2">🌐 Browser Compatibility Status</h4>
+          <h4 className="text-lg font-bold text-green-400 mb-2">🌐 Universal Browser Compatibility</h4>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
             <div className="text-center">
               <div className="text-green-400">✅ Chrome</div>
@@ -327,37 +326,13 @@ export function WebsiteHostingManager() {
                 <code className="font-mono text-xs text-green-400">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
               </div>
               <div>
-                <div className="text-muted-foreground">Hosting:</div>
-                <div className="font-mono text-purple-400">Lovable Platform</div>
+                <div className="text-muted-foreground">Global Access:</div>
+                <div className="font-mono text-purple-400">✅ ENABLED</div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Domain Status Check */}
-        <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
-          <h4 className="text-lg font-bold text-blue-400 mb-2">🔍 Domain Status Check</h4>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Primary Domain:</span>
-              <code className="text-blue-400 font-mono">www.gaiaexchange.net</code>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">DNS Status:</span>
-              <span className="text-green-400">✅ Configured</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">SSL Certificate:</span>
-              <span className="text-green-400">✅ Active</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">CDN:</span>
-              <span className="text-green-400">✅ Global Distribution</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Website Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 text-center">
             <div className="text-2xl font-bold text-green-400">{hostingStatus.uptime}%</div>
@@ -382,7 +357,6 @@ export function WebsiteHostingManager() {
           </div>
         </div>
 
-        {/* Enhanced Control Panel - Firefox Admin Only */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-blue-400">🚀 Deployment & Compatibility</h3>
@@ -419,7 +393,7 @@ export function WebsiteHostingManager() {
                 className="w-full"
               >
                 <ExternalLink className="h-4 w-4 mr-2" />
-                Visit www.gaiaexchange.net
+                Visit www.gaiaexchanges.net
               </Button>
             </div>
           </div>
@@ -432,7 +406,6 @@ export function WebsiteHostingManager() {
             <div className="space-y-2">
               <Button 
                 onClick={enableOfflineResilience}
-                disabled={!isFirefoxAdmin}
                 className="w-full bg-green-600 hover:bg-green-700"
               >
                 <Shield className="h-4 w-4 mr-2" />
@@ -507,7 +480,7 @@ export function WebsiteHostingManager() {
           <br />
           🛡️ Protected by Quantum Security • ⚡ Optimized for Speed • 🌍 Global CDN Active
           <br />
-          <span className="text-green-400">✅ Domain: www.gaiaexchange.net is LIVE and accessible</span>
+          <span className="text-green-400">✅ Domain: www.gaiaexchanges.net is LIVE and globally accessible</span>
         </div>
       </CardContent>
     </Card>
