@@ -13,12 +13,14 @@ import { InvisibleVPNDisruptor } from './InvisibleVPNDisruptor'
 import { UniversalSatelliteTracker } from './UniversalSatelliteTracker'
 import { EnhancedSuspiciousTransactions } from './EnhancedSuspiciousTransactions'
 import { TransactionReversalSystem } from './TransactionReversalSystem'
+import { MasterDefenseOrchestrator } from './MasterDefenseOrchestrator'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="transparency" className="w-full">
-      <TabsList className="grid w-full grid-cols-11 mb-6">
+      <TabsList className="grid w-full grid-cols-12 mb-6">
         <TabsTrigger value="transparency">🔍 Transparency</TabsTrigger>
+        <TabsTrigger value="master-defense">🧠 Master Defense</TabsTrigger>
         <TabsTrigger value="dashboard">System Dashboard</TabsTrigger>
         <TabsTrigger value="security">Advanced Security</TabsTrigger>
         <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
@@ -33,6 +35,10 @@ export function AdminDashboardTabs() {
       
       <TabsContent value="transparency">
         <EnhancedSuspiciousTransactions />
+      </TabsContent>
+
+      <TabsContent value="master-defense">
+        <MasterDefenseOrchestrator />
       </TabsContent>
       
       <TabsContent value="dashboard">
