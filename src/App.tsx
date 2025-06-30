@@ -1,85 +1,68 @@
 
-import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
-import Home from './pages/Home'
-import AuraLandScrapyard from './pages/AuraLandScrapyard'
-import CoinCrafter from './pages/CoinCrafter'
-import NFTGreenAnimalPlatform from './pages/NFTGreenAnimalPlatform'
-import Swap from './pages/Swap'
-import Wallet from './pages/Wallet'
-import SecureAdmin from './pages/SecureAdmin'
-import SecureVault from './pages/SecureVault'
-import GaiasProjects from './pages/GaiasProjects'
-import TransparentWallet from './pages/TransparentWallet'
-import { UserOnlyProtectedRoute } from './components/auth/UserOnlyProtectedRoute'
-import { GlobalSEOOptimizer } from './components/seo/GlobalSEOOptimizer'
-import AdminLogin from './pages/AdminLogin'
+import './App.css'
+
+import { Navbar } from '@/components/Navbar'
+import { AppSidebar } from '@/components/AppSidebar'
+import { SidebarProvider } from '@/components/ui/sidebar'
+import { AuthProvider } from '@/components/auth/AuthProvider'
+import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'
+import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
+
+// Pages
+import Index from '@/pages/Index'
+import Exchange from '@/pages/Exchange'
+import Gaming from '@/pages/Gaming'
+import NFTs from '@/pages/NFTs'
+import Analytics from '@/pages/Analytics'
+import Swap from '@/pages/Swap'
+import Security from '@/pages/Security'
+import Admin from '@/pages/Admin'
+import SecureAdmin from '@/pages/SecureAdmin'
+import GaiasProjects from '@/pages/GaiasProjects'
+import TransparentWallet from '@/pages/TransparentWallet'
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-        <Routes>
-          <Route path="/" element={
-            <UserOnlyProtectedRoute>
-              <Home />
-            </UserOnlyProtectedRoute>
-          } />
-          
-          <Route path="/aura-land-scrapyard" element={
-            <UserOnlyProtectedRoute>
-              <AuraLandScrapyard />
-            </UserOnlyProtectedRoute>
-          } />
-          
-          <Route path="/coin-crafter" element={
-            <UserOnlyProtectedRoute>
-              <CoinCrafter />
-            </UserOnlyProtectedRoute>
-          } />
-          
-          <Route path="/nft-green-animal-platform" element={
-            <UserOnlyProtectedRoute>
-              <NFTGreenAnimalPlatform />
-            </UserOnlyProtectedRoute>
-          } />
-          
-          <Route path="/swap" element={
-            <UserOnlyProtectedRoute>
-              <Swap />
-            </UserOnlyProtectedRoute>
-          } />
-
-          <Route path="/wallet" element={
-            <UserOnlyProtectedRoute>
-              <Wallet />
-            </UserOnlyProtectedRoute>
-          } />
-
-          <Route path="/gaias-projects" element={
-            <UserOnlyProtectedRoute>
-              <GaiasProjects />
-            </UserOnlyProtectedRoute>
-          } />
-
-          <Route path="/transparent-wallet" element={
-            <UserOnlyProtectedRoute>
-              <TransparentWallet />
-            </UserOnlyProtectedRoute>
-          } />
-          
-          {/* Admin Portal - Dual Access System */}
-          <Route path="/admin" element={<AdminLogin />} />
-          
-          {/* Legacy vault routes for backward compatibility */}
-          <Route path="/secure-admin" element={<SecureAdmin />} />
-          <Route path="/secure-vault" element={<SecureVault />} />
-        </Routes>
-        <Toaster />
-        <GlobalSEOOptimizer />
-      </div>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Router>
+          <SidebarProvider>
+            <div className="min-h-screen bg-background text-foreground">
+              {/* Background Media Engine */}
+              <BackgroundMediaEngine />
+              
+              <div className="flex">
+                <AppSidebar />
+                <div className="flex-1">
+                  <Navbar />
+                  <main className="container mx-auto px-4 py-6">
+                    <Routes>
+                      <Route path="/" element={<Index />} />
+                      <Route path="/exchange" element={<Exchange />} />
+                      <Route path="/gaming" element={<Gaming />} />
+                      <Route path="/nfts" element={<NFTs />} />
+                      <Route path="/analytics" element={<Analytics />} />
+                      <Route path="/swap" element={<Swap />} />
+                      <Route path="/security" element={<Security />} />
+                      <Route path="/admin" element={<Admin />} />
+                      <Route path="/secure-admin" element={<SecureAdmin />} />
+                      <Route path="/gaias-projects" element={<GaiasProjects />} />
+                      <Route path="/transparent-wallet" element={<TransparentWallet />} />
+                    </Routes>
+                  </main>
+                </div>
+              </div>
+            </div>
+            <Toaster position="top-right" />
+          </SidebarProvider>
+        </Router>
+      </AuthProvider>
+    </QueryClientProvider>
   )
 }
 
