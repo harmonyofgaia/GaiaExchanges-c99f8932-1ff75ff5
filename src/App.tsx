@@ -20,6 +20,13 @@ import ImmortalSecurity from '@/pages/ImmortalSecurity'
 import About from '@/pages/About'
 import Contact from '@/pages/Contact'
 import Pricing from '@/pages/Pricing'
+import Exchange from '@/pages/Exchange'
+import NFTs from '@/pages/NFTs'
+import Analytics from '@/pages/Analytics'
+import Swap from '@/pages/Swap'
+import GaiasProjects from '@/pages/GaiasProjects'
+import TransparentWallet from '@/pages/TransparentWallet'
+import Security from '@/pages/Security'
 import { PersistentAdminSession } from '@/components/admin/PersistentAdminSession'
 import { AdminRouteProtector } from '@/components/admin/AdminRouteProtector'
 import { PageStabilityMonitor } from '@/components/admin/PageStabilityMonitor'
@@ -56,6 +63,13 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/exchange" element={<Exchange />} />
+            <Route path="/nfts" element={<NFTs />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/swap" element={<Swap />} />
+            <Route path="/gaias-projects" element={<GaiasProjects />} />
+            <Route path="/transparent-wallet" element={<TransparentWallet />} />
+            <Route path="/security" element={<Security />} />
           </Routes>
         </AppLayout>
         <Toaster />

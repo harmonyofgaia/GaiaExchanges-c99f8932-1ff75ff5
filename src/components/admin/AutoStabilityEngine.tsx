@@ -7,6 +7,7 @@ export function AutoStabilityEngine() {
   const location = useLocation()
   const stabilityChecks = useRef<NodeJS.Timeout>()
   const routeValidation = useRef<NodeJS.Timeout>()
+  const preventReloadLoop = useRef<boolean>(false)
 
   useEffect(() => {
     console.log('🛠️ AUTO-STABILITY ENGINE ACTIVATED')
@@ -29,15 +30,11 @@ export function AutoStabilityEngine() {
       navigationLinks.forEach(link => {
         if (!link.hasAttribute('data-stability-checked')) {
           link.setAttribute('data-stability-checked', 'true')
-          // Ensure React Router Link behavior
+          // Ensure React Router Link behavior - DO NOT RELOAD PAGE
           if (link.getAttribute('href')?.startsWith('/')) {
             link.addEventListener('click', (e) => {
-              e.preventDefault()
-              const href = link.getAttribute('href')
-              if (href) {
-                window.history.pushState({}, '', href)
-                window.dispatchEvent(new PopStateEvent('popstate'))
-              }
+              // Let React Router handle navigation - prevent page reload
+              console.log('🛣️ NAVIGATION HANDLED BY REACT ROUTER')
             })
           }
         }
@@ -52,36 +49,34 @@ export function AutoStabilityEngine() {
         }
       }
 
-      // Performance optimization
-      const performanceNow = performance.now()
-      if (performanceNow > 10000) { // If page has been running for more than 10 seconds
-        // Optimize animations
-        const animations = document.querySelectorAll('[class*="animate-"]')
-        animations.forEach(element => {
-          if (Math.random() > 0.7) { // Randomly optimize some animations
-            element.classList.add('will-change-transform')
-          }
-        })
-      }
-
       console.log('✅ STABILITY CHECKS COMPLETED')
     }
 
     const validateRoute = () => {
       console.log('🛣️ VALIDATING CURRENT ROUTE')
       
+      // PREVENT RELOAD LOOP - Check if we've already processed this route
+      if (preventReloadLoop.current) {
+        console.log('🛑 RELOAD LOOP PREVENTION ACTIVE')
+        return
+      }
+      
       // Ensure page content is properly loaded
       const mainContent = document.querySelector('main')
       if (mainContent && mainContent.children.length === 0) {
-        console.log('⚠️ EMPTY PAGE DETECTED - TRIGGERING RELOAD')
-        window.location.reload()
+        console.log('⚠️ EMPTY PAGE DETECTED - BUT PREVENTING RELOAD LOOP')
+        // DO NOT RELOAD - Let React Router handle it
+        preventReloadLoop.current = true
+        setTimeout(() => {
+          preventReloadLoop.current = false
+        }, 5000) // Reset after 5 seconds
         return
       }
 
-      // Check for React hydration issues
+      // Check for React hydration issues (but don't reload)
       const reactRoots = document.querySelectorAll('[data-reactroot]')
       if (reactRoots.length === 0) {
-        console.log('⚠️ REACT HYDRATION ISSUE DETECTED')
+        console.log('⚠️ REACT HYDRATION ISSUE DETECTED - MONITORING')
       }
 
       // Validate sidebar functionality
@@ -90,7 +85,7 @@ export function AutoStabilityEngine() {
         console.log('⚠️ SIDEBAR NOT FOUND - CHECKING LAYOUT')
       }
 
-      console.log('✅ ROUTE VALIDATION COMPLETED')
+      console.log('✅ ROUTE VALIDATION COMPLETED - NO RELOAD NEEDED')
     }
 
     // Run checks immediately
@@ -98,12 +93,12 @@ export function AutoStabilityEngine() {
     validateRoute()
 
     // Set up intervals for continuous monitoring
-    stabilityChecks.current = setInterval(runStabilityChecks, 5000) // Every 5 seconds
-    routeValidation.current = setInterval(validateRoute, 10000) // Every 10 seconds
+    stabilityChecks.current = setInterval(runStabilityChecks, 10000) // Every 10 seconds (less frequent)
+    routeValidation.current = setInterval(validateRoute, 15000) // Every 15 seconds (less frequent)
 
     // Show success notification
     toast.success('🛠️ Auto-Stability Engine Active', {
-      description: 'Monitoring system stability and preventing issues',
+      description: 'Monitoring system stability and preventing reload loops',
       duration: 3000
     })
 
@@ -112,7 +107,7 @@ export function AutoStabilityEngine() {
       if (routeValidation.current) clearInterval(routeValidation.current)
       console.log('🛠️ AUTO-STABILITY ENGINE DEACTIVATED')
     }
-  }, [location])
+  }, [location.pathname]) // Only re-run when pathname changes
 
   // This component runs invisibly in the background
   return null
