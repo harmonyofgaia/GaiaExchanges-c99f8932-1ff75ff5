@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 export function useSecureAdmin() {
   const [isAdmin, setIsAdmin] = useState(false)
+  const [isValidating, setIsValidating] = useState(true)
 
   useEffect(() => {
     const checkAdminStatus = () => {
@@ -12,6 +13,7 @@ export function useSecureAdmin() {
       
       const adminStatus = isFirefoxBrowser && hasAdminSession && isAdminLoggedIn
       setIsAdmin(adminStatus)
+      setIsValidating(false)
       
       if (adminStatus) {
         console.log('👑 ADMIN ACCESS CONFIRMED - ALL FEATURES UNLOCKED')
@@ -46,6 +48,7 @@ export function useSecureAdmin() {
 
   return {
     isAdmin,
+    isValidating,
     grantAdminAccess,
     revokeAdminAccess
   }

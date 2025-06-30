@@ -38,7 +38,7 @@ export const FeatureGrid = () => {
     },
     {
       icon: Crown,
-      title: 'Invincible',
+      title: 'Forever Invincible',
       description: 'Completely invincible defense system - 100x stronger than any technology that will ever be created.',
       gradient: 'from-purple-600 via-pink-500 to-rose-500',
       bgGradient: 'from-purple-900/20 to-pink-900/20',
@@ -96,33 +96,19 @@ export const FeatureGrid = () => {
             <div key={index} className="relative group h-full">
               {/* Animated graffiti background */}
               <div 
-                className="absolute inset-0 rounded-lg opacity-30 blur-sm"
+                className="absolute inset-0 rounded-lg opacity-30 blur-sm graffiti-bg"
                 style={{
-                  background: `
-                    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                    linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%)
-                  `,
-                  animation: `graffiti-flow ${8 + index}s ease-in-out infinite`,
-                  transform: 'rotate(-2deg) scale(1.02)'
+                  animationDelay: `${index * 0.5}s`,
+                  animationDuration: `${8 + index}s`
                 }}
               />
               
               {/* Fading animated overlay */}
               <div 
-                className="absolute inset-0 rounded-lg"
+                className="absolute inset-0 rounded-lg fade-sweep-bg"
                 style={{
-                  background: `
-                    linear-gradient(45deg, 
-                      transparent 0%, 
-                      rgba(255,255,255,0.03) 25%,
-                      transparent 50%,
-                      rgba(255,255,255,0.03) 75%,
-                      transparent 100%
-                    )
-                  `,
-                  backgroundSize: '200% 200%',
-                  animation: `fade-sweep ${10 + index * 2}s linear infinite`
+                  animationDelay: `${index * 0.3}s`,
+                  animationDuration: `${10 + index * 2}s`
                 }}
               />
               
@@ -144,15 +130,7 @@ export const FeatureGrid = () => {
               >
                 {/* Graffiti texture overlay */}
                 <div 
-                  className="absolute inset-0 opacity-10"
-                  style={{
-                    backgroundImage: `
-                      radial-gradient(circle at 30% 20%, rgba(255,255,255,0.8) 1px, transparent 1px),
-                      radial-gradient(circle at 70% 60%, rgba(255,255,255,0.6) 1px, transparent 1px),
-                      radial-gradient(circle at 20% 80%, rgba(255,255,255,0.4) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '40px 40px, 60px 60px, 80px 80px'
-                  }}
+                  className="absolute inset-0 opacity-10 graffiti-texture"
                 />
                 
                 <CardContent className="p-6 h-full flex flex-col justify-between relative z-10">
@@ -186,38 +164,6 @@ export const FeatureGrid = () => {
           )
         })}
       </div>
-      
-      <style jsx>{`
-        @keyframes graffiti-flow {
-          0%, 100% { 
-            transform: rotate(-2deg) scale(1.02) translateX(0px); 
-            opacity: 0.3;
-          }
-          33% { 
-            transform: rotate(1deg) scale(1.05) translateX(5px); 
-            opacity: 0.5;
-          }
-          66% { 
-            transform: rotate(-1deg) scale(1.03) translateX(-3px); 
-            opacity: 0.4;
-          }
-        }
-        
-        @keyframes fade-sweep {
-          0% { 
-            background-position: -200% -200%; 
-            opacity: 0.2;
-          }
-          50% { 
-            background-position: 200% 200%; 
-            opacity: 0.8;
-          }
-          100% { 
-            background-position: -200% -200%; 
-            opacity: 0.2;
-          }
-        }
-      `}</style>
     </div>
   )
 }
