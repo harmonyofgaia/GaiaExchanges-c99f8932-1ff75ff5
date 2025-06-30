@@ -8,6 +8,8 @@ import { TransactionReversalSystem } from './TransactionReversalSystem'
 import { GlobalTrackingSystem } from './GlobalTrackingSystem'
 import { CrossPlatformCompatibility } from '../CrossPlatformCompatibility'
 import { PrivateBlockchainNetwork } from './PrivateBlockchainNetwork'
+import { QuantumTechnologicalMastermind } from './QuantumTechnologicalMastermind'
+import { MasterUpgradePlan } from './MasterUpgradePlan'
 
 export function AdminDashboard() {
   return (
@@ -24,8 +26,10 @@ export function AdminDashboard() {
         </div>
 
         <Tabs defaultValue="quantum" className="w-full">
-          <TabsList className="grid w-full grid-cols-8">
+          <TabsList className="grid w-full grid-cols-10">
             <TabsTrigger value="quantum">🧠 Quantum Mind</TabsTrigger>
+            <TabsTrigger value="mastermind">🤖 Tech Mastermind</TabsTrigger>
+            <TabsTrigger value="upgrades">🚀 Master Plan</TabsTrigger>
             <TabsTrigger value="defense">🛡️ Master Defense</TabsTrigger>
             <TabsTrigger value="security">👑 Security Suite</TabsTrigger>
             <TabsTrigger value="isolation">🔒 User Control</TabsTrigger>
@@ -37,6 +41,14 @@ export function AdminDashboard() {
 
           <TabsContent value="quantum" className="space-y-6">
             <QuantumAdminDashboard />
+          </TabsContent>
+
+          <TabsContent value="mastermind" className="space-y-6">
+            <QuantumTechnologicalMastermind />
+          </TabsContent>
+
+          <TabsContent value="upgrades" className="space-y-6">
+            <MasterUpgradePlan />
           </TabsContent>
 
           <TabsContent value="defense" className="space-y-6">

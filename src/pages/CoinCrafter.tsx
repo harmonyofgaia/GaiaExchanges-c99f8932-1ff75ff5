@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label'
 import { Hammer, Zap, Coins, Settings } from 'lucide-react'
 import { useState } from 'react'
 import HoverSidebar from '@/components/HoverSidebar'
+import { CoinCrafterIllustration } from '@/components/CoinCrafterIllustration'
 
 const CoinCrafter = () => {
   const [tokenName, setTokenName] = useState('')
@@ -18,16 +19,7 @@ const CoinCrafter = () => {
       
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">
-          <Card className="mb-8 border-orange-500/30 bg-gradient-to-r from-orange-900/30 to-red-900/30">
-            <CardHeader>
-              <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
-                🔥 GAiA Coin Crafter
-              </CardTitle>
-              <p className="text-center text-xl text-muted-foreground">
-                Forge Your Own Tokens with Environmental Impact
-              </p>
-            </CardHeader>
-          </Card>
+          <CoinCrafterIllustration />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <Card className="border-orange-500/30 bg-orange-900/20">
@@ -72,7 +64,7 @@ const CoinCrafter = () => {
                   />
                 </div>
 
-                <Button className="w-full bg-orange-600 hover:bg-orange-700 h-12">
+                <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700">
                   <Hammer className="h-4 w-4 mr-2" />
                   Craft Token
                 </Button>
@@ -83,34 +75,29 @@ const CoinCrafter = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-red-400">
                   <Zap className="h-6 w-6" />
-                  Token Features
+                  Crafting Configuration
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 p-3 bg-red-900/30 rounded">
-                    <Coins className="h-5 w-5 text-yellow-400" />
-                    <div>
-                      <h4 className="font-bold text-yellow-400">Environmental Yield</h4>
-                      <p className="text-sm text-muted-foreground">Automatic rewards for eco-friendly actions</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3 p-3 bg-red-900/30 rounded">
-                    <Settings className="h-5 w-5 text-blue-400" />
-                    <div>
-                      <h4 className="font-bold text-blue-400">Smart Governance</h4>
-                      <p className="text-sm text-muted-foreground">Community-driven decision making</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3 p-3 bg-red-900/30 rounded">
-                    <Zap className="h-5 w-5 text-green-400" />
-                    <div>
-                      <h4 className="font-bold text-green-400">Instant Deployment</h4>
-                      <p className="text-sm text-muted-foreground">Deploy on Solana network instantly</p>
-                    </div>
-                  </div>
+              <CardContent className="space-y-4">
+                <div className="text-center">
+                  <div className="text-6xl mb-4">⚡</div>
+                  <h3 className="text-xl font-bold text-red-400 mb-2">Advanced Features</h3>
+                  <p className="text-muted-foreground">Configure advanced token properties</p>
+                </div>
+                
+                <div className="space-y-3">
+                  <Button variant="outline" className="w-full border-red-500/30">
+                    <Settings className="h-4 w-4 mr-2" />
+                    Token Economics
+                  </Button>
+                  <Button variant="outline" className="w-full border-red-500/30">
+                    <Coins className="h-4 w-4 mr-2" />
+                    Supply Management
+                  </Button>
+                  <Button variant="outline" className="w-full border-red-500/30">
+                    <Zap className="h-4 w-4 mr-2" />
+                    Advanced Settings
+                  </Button>
                 </div>
               </CardContent>
             </Card>

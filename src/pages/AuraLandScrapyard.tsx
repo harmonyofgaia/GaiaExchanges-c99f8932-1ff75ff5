@@ -1,8 +1,9 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Mountain, Volcano, Moon, Globe, TreePine, Skull, Sparkles, Hammer } from 'lucide-react'
+import { Mountain, Flame, Moon, Globe, TreePine, Skull, Sparkles, Hammer } from 'lucide-react'
 import HoverSidebar from '@/components/HoverSidebar'
 import { VirtualLandscapeCreator } from '@/components/landscapes/VirtualLandscapeCreator'
 import { LandscapeToolbox } from '@/components/landscapes/LandscapeToolbox'
@@ -49,7 +50,7 @@ const AuraLandScrapyard = () => {
             <TabsContent value="types" className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
-                  { name: 'Vulcan Lands', icon: <Volcano className="h-8 w-8" />, color: 'from-red-600 to-orange-600', description: 'Molten lava flows, volcanic peaks, fire-based ecosystems' },
+                  { name: 'Vulcan Lands', icon: <Flame className="h-8 w-8" />, color: 'from-red-600 to-orange-600', description: 'Molten lava flows, volcanic peaks, fire-based ecosystems' },
                   { name: 'Moon Lands', icon: <Moon className="h-8 w-8" />, color: 'from-gray-400 to-blue-400', description: 'Lunar surfaces, crater formations, zero-gravity environments' },
                   { name: 'Dark Web Lands', icon: <Skull className="h-8 w-8" />, color: 'from-purple-600 to-black', description: 'Digital underworld, cyber landscapes, matrix environments' },
                   { name: 'Forest Lands', icon: <TreePine className="h-8 w-8" />, color: 'from-green-600 to-emerald-600', description: 'Ancient forests, mystical trees, nature sanctuaries' },

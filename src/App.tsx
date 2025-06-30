@@ -1,9 +1,11 @@
+
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AuthProvider } from "@/components/auth/AuthProvider"
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute"
+import { UserOnlyProtectedRoute } from "@/components/auth/UserOnlyProtectedRoute"
 import { AdminOnlySecurityBarrier } from "@/components/admin/AdminOnlySecurityBarrier"
 import { PageSpecificBackground } from "@/components/ui/page-specific-background"
 import Home from "./pages/Home"
@@ -39,24 +41,102 @@ function App() {
           <BrowserRouter>
             <PageSpecificBackground />
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/downloads" element={<Downloads />} />
-              <Route path="/wallet" element={<Wallet />} />
-              <Route path="/gaming" element={<Gaming />} />
-              <Route path="/coin-crafter" element={<CoinCrafter />} />
-              <Route path="/live-tracking" element={<LiveTracking />} />
-              <Route path="/exchange" element={<Exchange />} />
-              <Route path="/virtual-world" element={<VirtualWorld />} />
-              <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
-              <Route path="/nft-green-animal-platform" element={<NFTGreenAnimalPlatform />} />
-              <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
-              <Route path="/system-status" element={<SystemStatus />} />
-              <Route path="/security" element={<UltimateSecurity />} />
-              <Route path="/immortal-security" element={<ImmortalSecurity />} />
-              <Route path="/ultimate-security" element={<UltimateSecurity />} />
+              {/* Public auth page - only visible if not logged in */}
+              <Route path="/auth" element={<Home />} />
+              
+              {/* All other routes require user authentication */}
+              <Route path="/" element={
+                <UserOnlyProtectedRoute>
+                  <Home />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/about" element={
+                <UserOnlyProtectedRoute>
+                  <About />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/contact" element={
+                <UserOnlyProtectedRoute>
+                  <Contact />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/pricing" element={
+                <UserOnlyProtectedRoute>
+                  <Pricing />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/downloads" element={
+                <UserOnlyProtectedRoute>
+                  <Downloads />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/wallet" element={
+                <UserOnlyProtectedRoute>
+                  <Wallet />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/gaming" element={
+                <UserOnlyProtectedRoute>
+                  <Gaming />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/coin-crafter" element={
+                <UserOnlyProtectedRoute>
+                  <CoinCrafter />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/live-tracking" element={
+                <UserOnlyProtectedRoute>
+                  <LiveTracking />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/exchange" element={
+                <UserOnlyProtectedRoute>
+                  <Exchange />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/virtual-world" element={
+                <UserOnlyProtectedRoute>
+                  <VirtualWorld />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/aura-land-scrapyard" element={
+                <UserOnlyProtectedRoute>
+                  <AuraLandScrapyard />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/nft-green-animal-platform" element={
+                <UserOnlyProtectedRoute>
+                  <NFTGreenAnimalPlatform />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/comprehensive-status" element={
+                <UserOnlyProtectedRoute>
+                  <ComprehensiveStatus />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/system-status" element={
+                <UserOnlyProtectedRoute>
+                  <SystemStatus />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/security" element={
+                <UserOnlyProtectedRoute>
+                  <UltimateSecurity />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/immortal-security" element={
+                <UserOnlyProtectedRoute>
+                  <ImmortalSecurity />
+                </UserOnlyProtectedRoute>
+              } />
+              <Route path="/ultimate-security" element={
+                <UserOnlyProtectedRoute>
+                  <UltimateSecurity />
+                </UserOnlyProtectedRoute>
+              } />
+              
+              {/* Admin routes require special admin authentication */}
               <Route 
                 path="/admin" 
                 element={
