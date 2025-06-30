@@ -1,9 +1,11 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Shield, Skull, Eye, Zap, Crown } from 'lucide-react'
+import { toast } from 'sonner'
 import { InvisibleAvatarTrainer } from '@/components/security/InvisibleAvatarTrainer'
 import { NetworkCableTracer } from '@/components/security/NetworkCableTracer'
 import { TrainedDragonCore } from '@/components/security/TrainedDragonCore'

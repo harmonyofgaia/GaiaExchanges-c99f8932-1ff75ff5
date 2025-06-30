@@ -1,8 +1,7 @@
-
 import { useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Skull, Fire, Zap } from 'lucide-react'
+import { Shield, Skull, Flame, Zap } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function ImmortalFirewallEngine() {
@@ -69,7 +68,7 @@ export function ImmortalFirewallEngine() {
     <Card className="bg-gradient-to-r from-red-900/30 to-black border-red-500/30">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-red-400">
-          <Fire className="h-6 w-6 animate-pulse" />
+          <Flame className="h-6 w-6 animate-pulse" />
           🔥 IMMORTAL FIREWALL ENGINE - DESTROYER MODE
         </CardTitle>
         <div className="flex gap-2">
@@ -84,7 +83,7 @@ export function ImmortalFirewallEngine() {
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center p-3 bg-red-900/40 rounded border border-red-500/30">
-            <Fire className="h-6 w-6 mx-auto text-red-400 mb-2" />
+            <Flame className="h-6 w-6 mx-auto text-red-400 mb-2" />
             <div className="text-lg font-bold text-red-400">IMMORTAL</div>
             <div className="text-xs text-muted-foreground">Firewall Status</div>
           </div>
