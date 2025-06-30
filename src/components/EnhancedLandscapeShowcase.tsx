@@ -80,7 +80,7 @@ export function EnhancedLandscapeShowcase() {
       setSelectedLandscape(landscapeData[0])
     }
 
-    initializeLandscape()
+    initializeLandscapes()
   }, [])
 
   const getTypeIcon = (type: string) => {
