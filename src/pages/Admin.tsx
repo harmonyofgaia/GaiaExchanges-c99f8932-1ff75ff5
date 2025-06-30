@@ -1,4 +1,3 @@
-
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { ParabolicCommandCenter } from '@/components/admin/ParabolicCommandCenter'
 import { GlobalExchangeIntegration } from '@/components/marketing/GlobalExchangeIntegration'
@@ -8,6 +7,8 @@ import { Advanced3DDesigner } from '@/components/admin/Advanced3DDesigner'
 import { MasterplanEngine } from '@/components/admin/MasterplanEngine'
 import { QuantumGlobalSearchEngine } from '@/components/admin/QuantumGlobalSearchEngine'
 import { BlockchainRollbackManager } from '@/components/admin/BlockchainRollbackManager'
+import { QuantumGlobalCommandCenter } from '@/components/admin/QuantumGlobalCommandCenter'
+import { UltimateAdminControls } from '@/components/admin/UltimateAdminControls'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function Admin() {
@@ -17,17 +18,23 @@ export default function Admin() {
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-purple-400 mb-4">
-              👑 GAiA ULTIMATE QUANTUM ADMIN CENTER
+              👑 GAiA ULTIMATE QUANTUM ADMIN CENTER - GODFATHER MODE
             </h1>
             <p className="text-gray-300 text-lg">
-              20 Quantum Computers • Global Search Engine • Blockchain Rollback • Infinite Power
+              20 Quantum Computers • Global Search Engine • Ultimate Control • Infinite Power
             </p>
           </div>
           
-          <Tabs defaultValue="command" className="w-full">
-            <TabsList className="grid w-full grid-cols-8 bg-black/50 backdrop-blur-md border border-purple-500/20">
+          <Tabs defaultValue="quantum-command" className="w-full">
+            <TabsList className="grid w-full grid-cols-10 bg-black/50 backdrop-blur-md border border-purple-500/20">
+              <TabsTrigger value="quantum-command" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+                👑 Quantum Command
+              </TabsTrigger>
+              <TabsTrigger value="ultimate-controls" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+                ⚡ Ultimate Controls
+              </TabsTrigger>
               <TabsTrigger value="command" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-                👑 Command
+                💻 Command Center
               </TabsTrigger>
               <TabsTrigger value="quantum-search" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
                 🔍 Quantum Search
@@ -51,6 +58,14 @@ export default function Admin() {
                 🧠 Masterplan
               </TabsTrigger>
             </TabsList>
+            
+            <TabsContent value="quantum-command" className="space-y-6 mt-6">
+              <QuantumGlobalCommandCenter />
+            </TabsContent>
+            
+            <TabsContent value="ultimate-controls" className="space-y-6 mt-6">
+              <UltimateAdminControls />
+            </TabsContent>
             
             <TabsContent value="command" className="space-y-6 mt-6">
               <ParabolicCommandCenter />

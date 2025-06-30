@@ -1,4 +1,3 @@
-
 import { RobotAdvertisement } from '@/components/advertising/RobotAdvertisement'
 import { HeroSection } from '@/components/home/HeroSection'
 import { FeatureGrid } from '@/components/home/FeatureGrid'
@@ -15,6 +14,7 @@ import { AdminLayoutEditor } from '@/components/admin/AdminLayoutEditor'
 import { InvisibleSecurityCore } from '@/components/security/InvisibleSecurityCore'
 import { InvisibleAdminProtection } from '@/components/security/InvisibleAdminProtection'
 import { InvisibleAttachmentSystem } from '@/components/security/InvisibleAttachmentSystem'
+import { EnhancedLevel2Defense } from '@/components/security/EnhancedLevel2Defense'
 import { ExchangeComplianceDocuments } from '@/components/legal/ExchangeComplianceDocuments'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { ExchangeLinks } from '@/components/home/ExchangeLinks'
@@ -34,6 +34,7 @@ const Home = () => {
       <InvisibleSecurityCore />
       <InvisibleAdminProtection />
       <InvisibleAttachmentSystem />
+      <EnhancedLevel2Defense />
       {isAdmin && <AdminLayoutEditor />}
       
       <div className="container mx-auto px-4 py-8 relative z-20">
