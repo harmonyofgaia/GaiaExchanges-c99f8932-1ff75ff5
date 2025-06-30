@@ -9,11 +9,13 @@ import { QuantumPartnershipEngine } from './QuantumPartnershipEngine'
 import { GitHubAdminIntegration } from '../github/GitHubAdminIntegration'
 import { EnhancedFutureReadingMachine } from './EnhancedFutureReadingMachine'
 import { MediaLibraryManager } from './MediaLibraryManager'
+import { InvisibleVPNDisruptor } from './InvisibleVPNDisruptor'
+import { UniversalSatelliteTracker } from './UniversalSatelliteTracker'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="dashboard" className="w-full">
-      <TabsList className="grid w-full grid-cols-9 mb-6">
+      <TabsList className="grid w-full grid-cols-10 mb-6">
         <TabsTrigger value="dashboard">System Dashboard</TabsTrigger>
         <TabsTrigger value="security">Advanced Security</TabsTrigger>
         <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
@@ -21,7 +23,8 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="partnerships">Partnership Engine</TabsTrigger>
         <TabsTrigger value="github">GitHub Control</TabsTrigger>
         <TabsTrigger value="media">Media Library</TabsTrigger>
-        <TabsTrigger value="analytics">Deep Analytics</TabsTrigger>
+        <TabsTrigger value="vpn-disruptor">👻 VPN Disruptor</TabsTrigger>
+        <TabsTrigger value="satellite">🛰️ Satellite</TabsTrigger>
         <TabsTrigger value="quantum">Quantum Future</TabsTrigger>
       </TabsList>
       
@@ -52,14 +55,15 @@ export function AdminDashboardTabs() {
       <TabsContent value="media">
         <MediaLibraryManager />
       </TabsContent>
-      
-      <TabsContent value="analytics">
-        <Card className="p-6">
-          <h3 className="text-2xl font-bold text-green-400 mb-4">🔍 Deep System Analytics</h3>
-          <p className="text-muted-foreground">Advanced analytics dashboard with enhanced AI predictions...</p>
-        </Card>
+
+      <TabsContent value="vpn-disruptor">
+        <InvisibleVPNDisruptor />
       </TabsContent>
 
+      <TabsContent value="satellite">
+        <UniversalSatelliteTracker />
+      </TabsContent>
+      
       <TabsContent value="quantum">
         <EnhancedFutureReadingMachine />
       </TabsContent>

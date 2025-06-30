@@ -273,7 +273,7 @@ const Gaming = () => {
       </div>
 
       {/* CSS for custom animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes matrix-fall {
           to {
             transform: translateY(100vh);
