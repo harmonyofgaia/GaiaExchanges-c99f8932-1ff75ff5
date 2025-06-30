@@ -3,7 +3,7 @@ import { GAIA_TOKEN } from '@/constants/gaia'
 
 class AddressValidationService {
   private readonly CORRECT_WALLET = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
-  private readonly CORRECT_CONTRACT = 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump'
+  private readonly CORRECT_CONTRACT = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
 
   validateWalletAddress(address: string): boolean {
     if (address !== this.CORRECT_WALLET) {

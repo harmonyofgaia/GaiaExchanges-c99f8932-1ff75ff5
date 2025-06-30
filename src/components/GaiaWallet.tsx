@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -26,7 +25,7 @@ export function GaiaWallet() {
   const copyOfficialWalletAddress = () => {
     navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
     toast.success('Official GAiA Wallet Address Copied!', {
-      description: 'Official GAiA wallet address copied to clipboard',
+      description: `Official GAiA wallet address ${GAIA_TOKEN.WALLET_ADDRESS.slice(0, 8)}... copied to clipboard`,
       duration: 3000
     })
   }
@@ -34,7 +33,7 @@ export function GaiaWallet() {
   const copyOfficialContractAddress = () => {
     navigator.clipboard.writeText(GAIA_TOKEN.CONTRACT_ADDRESS)
     toast.success('Official GAiA Contract Address Copied!', {
-      description: 'Official GAiA contract address copied to clipboard',
+      description: `Official GAiA contract address ${GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 8)}... copied to clipboard`,
       duration: 3000
     })
   }

@@ -54,7 +54,7 @@ export function PhantomWalletIntegration() {
   const [adminMode, setAdminMode] = useState(true) // Default to admin mode for unrestricted access
 
   // Your imported wallet address
-  const IMPORTED_WALLET = '9EnbaVoFqvh4vjz5GWzoo5ZSQp2soxp3n4wNjmKSqepA'
+  const IMPORTED_WALLET = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
 
   useEffect(() => {
     checkPhantomConnection()
@@ -82,8 +82,8 @@ export function PhantomWalletIntegration() {
       setWalletAddress(response.publicKey.toString())
       await fetchAllAccounts()
       
-      toast.success('🎉 Phantom Wallet Connected with Admin Access!', {
-        description: 'All wallets connected including imported wallet - Full withdrawal access enabled',
+      toast.success('🎉 Official GAiA Phantom Wallet Connected!', {
+        description: 'Connected to official GAiA wallet with full access enabled',
         duration: 5000
       })
       
@@ -97,12 +97,12 @@ export function PhantomWalletIntegration() {
 
   const fetchAllAccounts = async () => {
     try {
-      // Include your imported wallet with high Solana balance
+      // Updated to use the correct GAiA wallet address
       const mockAccounts: WalletAccount[] = [
         {
-          address: walletAddress || GAIA_TOKEN.WALLET_ADDRESS,
+          address: GAIA_TOKEN.WALLET_ADDRESS,
           balance: 2847.50,
-          name: 'Main Phantom Account',
+          name: 'Official GAiA Wallet',
           tokens: [
             { symbol: 'SOL', balance: 15.67, mint: 'So11111111111111111111111111111111111111112', decimals: 9 },
             { symbol: 'GAiA', balance: 2847.50, mint: GAIA_TOKEN.CONTRACT_ADDRESS, decimals: 9 },
@@ -113,7 +113,7 @@ export function PhantomWalletIntegration() {
         {
           address: IMPORTED_WALLET,
           balance: 847.92,
-          name: 'Imported Wallet (ADMIN ACCESS)',
+          name: 'Official GAiA Imported Wallet',
           isImported: true,
           tokens: [
             { symbol: 'SOL', balance: 847.92, mint: 'So11111111111111111111111111111111111111112', decimals: 9 },
@@ -135,8 +135,8 @@ export function PhantomWalletIntegration() {
       ]
       
       setAccounts(mockAccounts)
-      console.log('🔗 ALL WALLETS CONNECTED:', mockAccounts.length)
-      console.log('👑 IMPORTED WALLET READY FOR WITHDRAWAL:', IMPORTED_WALLET)
+      console.log('🔗 OFFICIAL GAiA WALLETS CONNECTED:', mockAccounts.length)
+      console.log('👑 OFFICIAL GAiA WALLET READY:', GAIA_TOKEN.WALLET_ADDRESS)
       
     } catch (error) {
       console.error('Failed to fetch accounts:', error)
