@@ -1,158 +1,143 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
 import { 
-  Crown, 
   Shield, 
-  Users, 
-  Globe, 
-  Settings,
-  Eye,
-  Zap,
-  Database,
-  BarChart3
+  Search, 
+  Eye, 
+  Zap, 
+  Lock, 
+  AlertTriangle,
+  Target,
+  Skull,
+  Crown,
+  Globe
 } from 'lucide-react'
-import { AdminControlSystem } from './AdminControlSystem'
-import { ParabolicCommandCenter } from './ParabolicCommandCenter'
-import { PhantomRecoveryEngine } from './PhantomRecoveryEngine'
-import { AutoIssueResolver } from '../AutoIssueResolver'
-import { UltimateSecuritySuite } from './UltimateSecuritySuite'
+import { toast } from 'sonner'
+import { AdvancedThreatTracker } from './AdvancedThreatTracker'
+import { QuantumSecurityCore } from '../quantum/QuantumSecurityCore'
+import { LegalProtectionSystem } from './LegalProtectionSystem'
+import { CommunityRecoveryEngine } from './CommunityRecoveryEngine'
+import { InvisibleDefenseMatrix } from '../security/InvisibleDefenseMatrix'
+import { UserIsolationSystem } from './UserIsolationSystem'
+import { CreativeGameEngine } from '../games/CreativeGameEngine'
+import { Invisible4StepVerification } from '../security/Invisible4StepVerification'
 
 export function AdminDashboard() {
-  const [totalUsers, setTotalUsers] = useState(15247)
-  const [walletsRecovered, setWalletsRecovered] = useState(1542)
-  const [threatsNeutralized, setThreatsNeutralized] = useState(8934)
-
-  useEffect(() => {
-    // Real-time admin metrics
-    const interval = setInterval(() => {
-      setTotalUsers(prev => prev + Math.floor(Math.random() * 5))
-      setWalletsRecovered(prev => prev + Math.floor(Math.random() * 2))
-      setThreatsNeutralized(prev => prev + Math.floor(Math.random() * 10))
-    }, 30000)
-
-    return () => clearInterval(interval)
-  }, [])
+  const [activeTab, setActiveTab] = useState('overview')
+  const [securityLevel, setSecurityLevel] = useState(100)
+  const [threatsNeutralized, setThreatsNeutralized] = useState(99999)
+  const [ipAddressesBlocked, setIpAddressesBlocked] = useState(50000)
+  const [quantumShieldActive, setQuantumShieldActive] = useState(true)
+  const [globalDominanceLevel, setGlobalDominanceLevel] = useState(99.99)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-green-900/20 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 p-6">
+      <Invisible4StepVerification />
+      
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* Admin Header */}
-        <Card className="bg-gradient-to-r from-purple-900/50 to-green-900/50 border-purple-500/50">
+        {/* Admin Dashboard Header */}
+        <Card className="bg-gradient-to-r from-red-900/50 to-black border-red-500/50">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-purple-400">
+            <CardTitle className="flex items-center gap-2 text-red-400">
               <Crown className="h-8 w-8 animate-pulse" />
-              👑 GAIA ADMIN COMMAND CENTER - ULTIMATE SECURITY SUITE
+              👑 GAIA ADMIN DASHBOARD - SUPREME CONTROL CENTER
             </CardTitle>
             <div className="flex gap-4 text-sm">
-              <Badge className="bg-green-600">
-                👥 Total Users: {totalUsers.toLocaleString()}
-              </Badge>
-              <Badge className="bg-blue-600">
-                🛡️ Wallets Recovered: {walletsRecovered.toLocaleString()}
-              </Badge>
-              <Badge className="bg-red-600">
-                🚨 Threats Stopped: {threatsNeutralized.toLocaleString()}
+              <Badge className="bg-red-600 animate-pulse">
+                💀 THREATS NEUTRALIZED: {threatsNeutralized.toLocaleString()}
               </Badge>
               <Badge className="bg-purple-600 animate-pulse">
-                ⚡ ULTIMATE MODE: ACTIVE
+                🚫 IPs BLOCKED: {ipAddressesBlocked.toLocaleString()}
+              </Badge>
+              <Badge className="bg-blue-600 animate-pulse">
+                🌍 GLOBAL DOMINATION: {globalDominanceLevel.toFixed(2)}%
+              </Badge>
+              <Badge className="bg-green-600 animate-pulse">
+                ⚡ QUANTUM MONOPOLY: ACTIVE
               </Badge>
             </div>
           </CardHeader>
         </Card>
 
-        {/* Main Admin Tabs */}
-        <Tabs defaultValue="ultimate" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
-            <TabsTrigger value="ultimate">🚀 Ultimate Suite</TabsTrigger>
-            <TabsTrigger value="recovery">🛡️ Recovery Engine</TabsTrigger>
-            <TabsTrigger value="control">⚙️ System Control</TabsTrigger>
-            <TabsTrigger value="parabolic">👑 Command Center</TabsTrigger>
-            <TabsTrigger value="monitoring">📊 Live Monitor</TabsTrigger>
-            <TabsTrigger value="analytics">📈 Analytics</TabsTrigger>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-7">
+            <TabsTrigger value="overview">🏠 Overview</TabsTrigger>
+            <TabsTrigger value="security">🛡️ Security</TabsTrigger>
+            <TabsTrigger value="users">👥 Users</TabsTrigger>
+            <TabsTrigger value="isolation">🔒 Isolation</TabsTrigger>
+            <TabsTrigger value="engine">🎮 Engine</TabsTrigger>
+            <TabsTrigger value="analytics">📊 Analytics</TabsTrigger>
+            <TabsTrigger value="settings">⚙️ Settings</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="ultimate" className="space-y-6">
-            <UltimateSecuritySuite />
+          <TabsContent value="overview" className="space-y-6">
+            <Card className="bg-black/30 border-green-500/30">
+              <CardHeader>
+                <CardTitle className="text-green-400">🏠 System Overview</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Welcome to the GAIA Admin Dashboard. Monitor and control all aspects of the system.
+                </p>
+              </CardContent>
+            </Card>
           </TabsContent>
 
-          <TabsContent value="recovery" className="space-y-6">
-            <PhantomRecoveryEngine />
+          <TabsContent value="security" className="space-y-6">
+            <AdvancedThreatTracker />
           </TabsContent>
 
-          <TabsContent value="control" className="space-y-6">
-            <AdminControlSystem />
+          <TabsContent value="users" className="space-y-6">
+            <Card className="bg-black/30 border-blue-500/30">
+              <CardHeader>
+                <CardTitle className="text-blue-400">👥 User Management</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Manage user accounts and permissions.
+                </p>
+              </CardContent>
+            </Card>
           </TabsContent>
 
-          <TabsContent value="parabolic" className="space-y-6">
-            <ParabolicCommandCenter />
+          <TabsContent value="isolation" className="space-y-6">
+            <UserIsolationSystem />
           </TabsContent>
 
-          <TabsContent value="monitoring" className="space-y-6">
-            <AutoIssueResolver />
+          <TabsContent value="engine" className="space-y-6">
+            <CreativeGameEngine />
           </TabsContent>
 
           <TabsContent value="analytics" className="space-y-6">
-            <Card className="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border-cyan-500/30">
+            <Card className="bg-black/30 border-purple-500/30">
               <CardHeader>
-                <CardTitle className="text-cyan-400">📈 GAiA Community Analytics</CardTitle>
+                <CardTitle className="text-purple-400">📊 Analytics Dashboard</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div className="text-center p-4 bg-green-900/30 rounded-lg">
-                    <Globe className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-green-400">{totalUsers.toLocaleString()}</div>
-                    <div className="text-sm text-muted-foreground">Community Members</div>
-                  </div>
-                  <div className="text-center p-4 bg-blue-900/30 rounded-lg">
-                    <Shield className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-blue-400">{walletsRecovered.toLocaleString()}</div>
-                    <div className="text-sm text-muted-foreground">Wallets Secured</div>
-                  </div>
-                  <div className="text-center p-4 bg-red-900/30 rounded-lg">
-                    <Zap className="h-8 w-8 text-red-400 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-red-400">{threatsNeutralized.toLocaleString()}</div>
-                    <div className="text-sm text-muted-foreground">Threats Neutralized</div>
-                  </div>
-                  <div className="text-center p-4 bg-purple-900/30 rounded-lg">
-                    <Users className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-purple-400">100%</div>
-                    <div className="text-sm text-muted-foreground">Success Rate</div>
-                  </div>
-                </div>
+                <p className="text-muted-foreground">
+                  Track system performance and user behavior.
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="settings" className="space-y-6">
+            <Card className="bg-black/30 border-orange-500/30">
+              <CardHeader>
+                <CardTitle className="text-orange-400">⚙️ System Settings</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Configure system settings and preferences.
+                </p>
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
-
-        {/* Emergency Admin Actions */}
-        <Card className="bg-gradient-to-r from-red-900/30 to-black border-red-500/50">
-          <CardHeader>
-            <CardTitle className="text-red-400">🚨 ULTIMATE EMERGENCY ACTIONS</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <Button className="bg-red-600 hover:bg-red-700 h-16">
-                <Shield className="h-6 w-6 mr-2" />
-                🛡️ GLOBAL PROTECTION
-              </Button>
-              <Button className="bg-orange-600 hover:bg-orange-700 h-16">
-                <Zap className="h-6 w-6 mr-2" />
-                ⚡ QUANTUM LOCKDOWN
-              </Button>
-              <Button className="bg-purple-600 hover:bg-purple-700 h-16">
-                <Crown className="h-6 w-6 mr-2" />
-                👑 WORLD TAKEOVER
-              </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700 h-16">
-                <Eye className="h-6 w-6 mr-2" />
-                👻 INVISIBLE MODE
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   )
