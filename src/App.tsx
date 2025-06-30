@@ -11,9 +11,19 @@ import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
 import LandscapeBuilder from '@/pages/LandscapeBuilder'
 import GaiaFighterGame from '@/pages/GaiaFighterGame'
 import Game from '@/pages/Game'
+import VirtualWorld from '@/pages/VirtualWorld'
+import Wallet from '@/pages/Wallet'
+import LiveTracking from '@/pages/LiveTracking'
+import SystemStatus from '@/pages/SystemStatus'
+import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
+import ImmortalSecurity from '@/pages/ImmortalSecurity'
+import About from '@/pages/About'
+import Contact from '@/pages/Contact'
+import Pricing from '@/pages/Pricing'
 import { PersistentAdminSession } from '@/components/admin/PersistentAdminSession'
 import { AdminRouteProtector } from '@/components/admin/AdminRouteProtector'
 import { PageStabilityMonitor } from '@/components/admin/PageStabilityMonitor'
+import { AutoStabilityEngine } from '@/components/admin/AutoStabilityEngine'
 
 const queryClient = new QueryClient()
 
@@ -24,6 +34,7 @@ function App() {
         <PersistentAdminSession />
         <AdminRouteProtector />
         <PageStabilityMonitor />
+        <AutoStabilityEngine />
         <AppLayout>
           <Routes>
             <Route path="/" element={<Index />} />
@@ -36,6 +47,15 @@ function App() {
             <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
             <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
             <Route path="/game" element={<Game />} />
+            <Route path="/virtual-world" element={<VirtualWorld />} />
+            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/live-tracking" element={<LiveTracking />} />
+            <Route path="/system-status" element={<SystemStatus />} />
+            <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+            <Route path="/immortal-security" element={<ImmortalSecurity />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/pricing" element={<Pricing />} />
           </Routes>
         </AppLayout>
         <Toaster />

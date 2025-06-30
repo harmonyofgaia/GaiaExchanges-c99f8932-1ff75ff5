@@ -1,71 +1,55 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { BarChart3, Activity, Shield, Globe } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { BarChart3, Shield, Activity, Globe } from 'lucide-react'
 
 const ComprehensiveStatus = () => {
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
-      <div className="container mx-auto max-w-6xl">
-        <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-blue-900/30">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-purple-400 text-3xl">
-              <BarChart3 className="h-8 w-8" />
-              📊 Comprehensive System Status
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-blue-400">System Health</h3>
-                <div className="space-y-3">
-                  <div>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-sm">CPU Usage</span>
-                      <span className="text-sm text-green-400">15%</span>
-                    </div>
-                    <Progress value={15} className="h-2" />
-                  </div>
-                  <div>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-sm">Memory Usage</span>
-                      <span className="text-sm text-blue-400">32%</span>
-                    </div>
-                    <Progress value={32} className="h-2" />
-                  </div>
-                  <div>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-sm">Storage Usage</span>
-                      <span className="text-sm text-purple-400">67%</span>
-                    </div>
-                    <Progress value={67} className="h-2" />
-                  </div>
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-green-400">Service Status</h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span>Web Server</span>
-                    <Badge className="bg-green-600">✅ Online</Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Database</span>
-                    <Badge className="bg-green-600">✅ Online</Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>API Gateway</span>
-                    <Badge className="bg-green-600">✅ Online</Badge>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Quantum Security</span>
-                    <Badge className="bg-green-600">✅ Active</Badge>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div className="container mx-auto px-4 py-8">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+          📈 Comprehensive Status Dashboard
+        </h1>
+        <p className="text-xl text-muted-foreground mt-4">
+          Complete system overview • Performance metrics • Security status
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <Card className="border-green-500/30 bg-green-900/20">
+          <CardContent className="pt-6 text-center">
+            <BarChart3 className="h-12 w-12 text-green-400 mx-auto mb-4" />
+            <div className="text-2xl font-bold text-green-400">98.7%</div>
+            <div className="text-sm text-muted-foreground">System Uptime</div>
+            <Progress value={98.7} className="mt-2" />
+          </CardContent>
+        </Card>
+
+        <Card className="border-blue-500/30 bg-blue-900/20">
+          <CardContent className="pt-6 text-center">
+            <Shield className="h-12 w-12 text-blue-400 mx-auto mb-4" />
+            <div className="text-2xl font-bold text-blue-400">100%</div>
+            <div className="text-sm text-muted-foreground">Security Score</div>
+            <Progress value={100} className="mt-2" />
+          </CardContent>
+        </Card>
+
+        <Card className="border-purple-500/30 bg-purple-900/20">
+          <CardContent className="pt-6 text-center">
+            <Activity className="h-12 w-12 text-purple-400 mx-auto mb-4" />
+            <div className="text-2xl font-bold text-purple-400">1.2ms</div>
+            <div className="text-sm text-muted-foreground">Response Time</div>
+            <Badge className="bg-green-600 mt-2">Excellent</Badge>
+          </CardContent>
+        </Card>
+
+        <Card className="border-cyan-500/30 bg-cyan-900/20">
+          <CardContent className="pt-6 text-center">
+            <Globe className="h-12 w-12 text-cyan-400 mx-auto mb-4" />
+            <div className="text-2xl font-bold text-cyan-400">47</div>
+            <div className="text-sm text-muted-foreground">Global Nodes</div>
+            <Badge className="bg-cyan-600 mt-2">Active</Badge>
           </CardContent>
         </Card>
       </div>

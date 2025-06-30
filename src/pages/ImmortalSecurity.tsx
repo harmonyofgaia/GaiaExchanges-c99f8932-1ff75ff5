@@ -1,138 +1,92 @@
 
-import { EternalDragonDisplay } from '@/components/security/EternalDragonDisplay'
-import { SecurityCenter } from '@/components/SecurityCenter'
-import { SystemHealthMonitor } from '@/components/SystemHealthMonitor'
-import { EnhancedAnimatedBackground } from '@/components/ui/enhanced-animated-background'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Shield, Crown, Zap, Eye, Activity, CheckCircle } from 'lucide-react'
-import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Shield, Lock, Eye, Zap } from 'lucide-react'
 
 const ImmortalSecurity = () => {
-  const [notifications] = useState<string[]>([
-    "🛡️ Dragon Protection System: ACTIVE",
-    "⚡ Quantum Security Barriers: DEPLOYED", 
-    "🔒 Immortal Firewall: MAXIMUM STRENGTH",
-    "👁️ Invisible Defense Network: OPERATIONAL"
-  ])
-
-  // Use SystemHealthMonitor as a hook
-  const healthData = SystemHealthMonitor()
-
   return (
-    <div className="min-h-screen relative">
-      <EnhancedAnimatedBackground />
-      
-      <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-red-400 mb-4">
-            🛡️ IMMORTAL SECURITY CENTER
-          </h1>
-          <p className="text-gray-300 text-lg mb-6">
-            Dragon-Level Protection • Invisible Barriers • Quantum Defense
-          </p>
-          <div className="flex justify-center gap-4 flex-wrap">
-            <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-4 py-2">
+    <div className="container mx-auto px-4 py-8">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-red-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+          🔒 Immortal Security Suite
+        </h1>
+        <p className="text-xl text-muted-foreground mt-4">
+          Ultimate protection • Multi-layer defense • Quantum-resistant security
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card className="border-red-500/30 bg-red-900/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-red-400">
+              <Shield className="h-6 w-6" />
+              Defense Matrix
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground mb-4">
+              Advanced threat detection with AI-powered defense systems protecting all assets.
+            </p>
+            <Button className="w-full bg-red-600 hover:bg-red-700">
               <Shield className="h-4 w-4 mr-2" />
-              Immortal Protection
-            </Badge>
-            <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2">
-              <Crown className="h-4 w-4 mr-2" />
-              God Mode Security
-            </Badge>
-            <Badge className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-2">
-              <Zap className="h-4 w-4 mr-2" />
-              Quantum Barriers
-            </Badge>
-            <Badge className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2">
+              Activate Defense
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="border-purple-500/30 bg-purple-900/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-purple-400">
+              <Lock className="h-6 w-6" />
+              Quantum Encryption
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground mb-4">
+              Quantum-resistant encryption algorithms protecting sensitive data and transactions.
+            </p>
+            <Button className="w-full bg-purple-600 hover:bg-purple-700">
+              <Lock className="h-4 w-4 mr-2" />
+              Enable Encryption
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="border-blue-500/30 bg-blue-900/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-blue-400">
+              <Eye className="h-6 w-6" />
+              Surveillance Network
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground mb-4">
+              24/7 monitoring with global threat intelligence and real-time response systems.
+            </p>
+            <Button className="w-full bg-blue-600 hover:bg-blue-700">
               <Eye className="h-4 w-4 mr-2" />
-              Invisible Defense
-            </Badge>
-          </div>
-        </div>
+              Monitor Systems
+            </Button>
+          </CardContent>
+        </Card>
 
-        {/* ETERNAL DRAGON with artistic enhancement */}
-        <div className="mb-12 relative">
-          <Card className="border-2 border-red-500/50 bg-gradient-to-br from-red-900/20 to-orange-900/20">
-            <CardHeader>
-              <CardTitle className="text-red-400 text-center">
-                🐲 ETERNAL DRAGON GUARDIAN - IMMORTAL PROTECTION
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-purple-500/10 to-blue-500/10 rounded-xl blur-xl" />
-              <div className="relative">
-                <EternalDragonDisplay />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <SecurityCenter notifications={notifications} />
-          
-          {/* System Health Display Component */}
-          <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <Activity className="h-6 w-6" />
-                System Health Monitor
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-400">
-                      {healthData.systemHealth.performance_score}%
-                    </div>
-                    <div className="text-sm text-muted-foreground">Performance</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-400">
-                      {healthData.systemHealth.uptime}%
-                    </div>
-                    <div className="text-sm text-muted-foreground">Uptime</div>
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm">Overall Status</span>
-                    <Badge className={`${
-                      healthData.systemHealth.overall_status === 'optimal' 
-                        ? 'bg-green-600' 
-                        : 'bg-yellow-600'
-                    } text-white`}>
-                      {healthData.systemHealth.overall_status.toUpperCase()}
-                    </Badge>
-                  </div>
-                  
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm">Quantum Protection</span>
-                    <Badge className="bg-purple-600 text-white">
-                      {healthData.quantumProtected ? 'ACTIVE' : 'STANDBY'}
-                    </Badge>
-                  </div>
-                  
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm">Threats Blocked</span>
-                    <span className="text-green-400 font-bold">
-                      {healthData.systemHealth.threats_blocked.toLocaleString()}
-                    </span>
-                  </div>
-                </div>
-
-                {healthData.isHealthy && (
-                  <div className="flex items-center gap-2 p-2 rounded bg-green-500/10 border border-green-500/20">
-                    <CheckCircle className="h-4 w-4 text-green-400" />
-                    <span className="text-sm text-green-300">All systems operational</span>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <Card className="border-yellow-500/30 bg-yellow-900/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-yellow-400">
+              <Zap className="h-6 w-6" />
+              Instant Response
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground mb-4">
+              Lightning-fast automated response to security threats with zero-tolerance policy.
+            </p>
+            <Button className="w-full bg-yellow-600 hover:bg-yellow-700">
+              <Zap className="h-4 w-4 mr-2" />
+              Emergency Protocol
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )
