@@ -11,11 +11,14 @@ import { EnhancedFutureReadingMachine } from './EnhancedFutureReadingMachine'
 import { MediaLibraryManager } from './MediaLibraryManager'
 import { InvisibleVPNDisruptor } from './InvisibleVPNDisruptor'
 import { UniversalSatelliteTracker } from './UniversalSatelliteTracker'
+import { EnhancedSuspiciousTransactions } from './EnhancedSuspiciousTransactions'
+import { TransactionReversalSystem } from './TransactionReversalSystem'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="dashboard" className="w-full">
-      <TabsList className="grid w-full grid-cols-10 mb-6">
+    <Tabs defaultValue="transparency" className="w-full">
+      <TabsList className="grid w-full grid-cols-11 mb-6">
+        <TabsTrigger value="transparency">🔍 Transparency</TabsTrigger>
         <TabsTrigger value="dashboard">System Dashboard</TabsTrigger>
         <TabsTrigger value="security">Advanced Security</TabsTrigger>
         <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
@@ -25,8 +28,12 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="media">Media Library</TabsTrigger>
         <TabsTrigger value="vpn-disruptor">👻 VPN Disruptor</TabsTrigger>
         <TabsTrigger value="satellite">🛰️ Satellite</TabsTrigger>
-        <TabsTrigger value="quantum">Quantum Future</TabsTrigger>
+        <TabsTrigger value="transaction-reversal">💰 Transaction Control</TabsTrigger>
       </TabsList>
+      
+      <TabsContent value="transparency">
+        <EnhancedSuspiciousTransactions />
+      </TabsContent>
       
       <TabsContent value="dashboard">
         <AdminDashboard />
@@ -64,8 +71,8 @@ export function AdminDashboardTabs() {
         <UniversalSatelliteTracker />
       </TabsContent>
       
-      <TabsContent value="quantum">
-        <EnhancedFutureReadingMachine />
+      <TabsContent value="transaction-reversal">
+        <TransactionReversalSystem />
       </TabsContent>
     </Tabs>
   )
