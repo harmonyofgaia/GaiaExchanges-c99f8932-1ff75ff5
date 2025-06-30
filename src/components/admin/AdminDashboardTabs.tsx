@@ -18,11 +18,17 @@ import { AdminAnalyticsDashboard } from './AdminAnalyticsDashboard'
 import { AutonomousMastermind } from './AutonomousMastermind'
 import { WalletConnectionManager } from './WalletConnectionManager'
 import { CommunityRecoveryDashboard } from './CommunityRecoveryDashboard'
+import { QuantumGlobalSearchEngine } from './QuantumGlobalSearchEngine'
+import { QuantumGlobalCommandCenter } from './QuantumGlobalCommandCenter'
+import { PhantomRecoveryEngine } from './PhantomRecoveryEngine'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="community-recovery" className="w-full">
-      <TabsList className="grid w-full grid-cols-14 mb-6">
+    <Tabs defaultValue="quantum-search" className="w-full">
+      <TabsList className="grid w-full grid-cols-12 mb-6">
+        <TabsTrigger value="quantum-search">🔍 Quantum Search</TabsTrigger>
+        <TabsTrigger value="quantum-command">👑 Command Center</TabsTrigger>
+        <TabsTrigger value="phantom-recovery">🛡️ Phantom Recovery</TabsTrigger>
         <TabsTrigger value="community-recovery">🌍 Community Recovery</TabsTrigger>
         <TabsTrigger value="transparency">🔍 Transparency</TabsTrigger>
         <TabsTrigger value="wallets">💰 Wallet Control</TabsTrigger>
@@ -32,14 +38,19 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="dashboard">System Dashboard</TabsTrigger>
         <TabsTrigger value="security">Advanced Security</TabsTrigger>
         <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
-        <TabsTrigger value="future">Enhanced Future</TabsTrigger>
-        <TabsTrigger value="partnerships">Partnership Engine</TabsTrigger>
-        <TabsTrigger value="github">GitHub Control</TabsTrigger>
-        <TabsTrigger value="media">Media Library</TabsTrigger>
-        <TabsTrigger value="vpn-disruptor">👻 VPN Disruptor</TabsTrigger>
-        <TabsTrigger value="satellite">🛰️ Satellite</TabsTrigger>
-        <TabsTrigger value="transaction-reversal">💰 Transaction Control</TabsTrigger>
       </TabsList>
+      
+      <TabsContent value="quantum-search">
+        <QuantumGlobalSearchEngine />
+      </TabsContent>
+
+      <TabsContent value="quantum-command">
+        <QuantumGlobalCommandCenter />
+      </TabsContent>
+
+      <TabsContent value="phantom-recovery">
+        <PhantomRecoveryEngine />
+      </TabsContent>
       
       <TabsContent value="community-recovery">
         <CommunityRecoveryDashboard />
@@ -75,34 +86,6 @@ export function AdminDashboardTabs() {
       
       <TabsContent value="ultimate">
         <UltimateSecuritySuite />
-      </TabsContent>
-      
-      <TabsContent value="future">
-        <FutureReadingMachine />
-      </TabsContent>
-      
-      <TabsContent value="partnerships">
-        <QuantumPartnershipEngine />
-      </TabsContent>
-
-      <TabsContent value="github">
-        <GitHubAdminIntegration />
-      </TabsContent>
-
-      <TabsContent value="media">
-        <MediaLibraryManager />
-      </TabsContent>
-
-      <TabsContent value="vpn-disruptor">
-        <InvisibleVPNDisruptor />
-      </TabsContent>
-
-      <TabsContent value="satellite">
-        <UniversalSatelliteTracker />
-      </TabsContent>
-      
-      <TabsContent value="transaction-reversal">
-        <TransactionReversalSystem />
       </TabsContent>
     </Tabs>
   )
