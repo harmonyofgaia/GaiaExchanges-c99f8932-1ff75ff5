@@ -4,7 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Vault, Shield, Lock, Zap, Eye, Users, DollarSign } from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Vault, Shield, Lock, Zap, Eye, Users, DollarSign, Key } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function SecureVaultSystem() {
@@ -12,6 +14,8 @@ export function SecureVaultSystem() {
   const [activeInvestors, setActiveInvestors] = useState(1247)
   const [securityLevel, setSecurityLevel] = useState(99.8)
   const [vaultDepth, setVaultDepth] = useState(2847) // meters underground
+  const [showVaultAccess, setShowVaultAccess] = useState(false)
+  const [vaultPassword, setVaultPassword] = useState('')
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,6 +31,23 @@ export function SecureVaultSystem() {
       description: 'Your investment has been secured 2847 meters underground with quantum encryption',
       duration: 5000
     })
+  }
+
+  const handleVaultAccess = () => {
+    if (vaultPassword === 'harmonyquantumvaultaccess') {
+      toast.success('🔓 COMMUNITY VAULT ACCESS GRANTED!', {
+        description: 'Welcome to the Harmony Quantum Vault - Fees can now be directed here',
+        duration: 5000
+      })
+      setShowVaultAccess(false)
+      setVaultPassword('')
+    } else {
+      toast.error('🚫 VAULT ACCESS DENIED', {
+        description: 'Invalid vault password - Quantum protection active',
+        duration: 5000
+      })
+      setVaultPassword('')
+    }
   }
 
   return (
@@ -112,6 +133,47 @@ export function SecureVaultSystem() {
             </Card>
           </div>
 
+          {/* Community Vault Access */}
+          {showVaultAccess && (
+            <Card className="border-2 border-yellow-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30">
+              <CardContent className="p-4 space-y-4">
+                <div className="text-center">
+                  <Key className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
+                  <h3 className="text-lg font-bold text-yellow-400">Community Vault Access</h3>
+                  <p className="text-sm text-yellow-300">Enter vault password to direct fees to community vault</p>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="vaultPassword" className="text-yellow-300">Vault Password</Label>
+                  <Input
+                    id="vaultPassword"
+                    type="password"
+                    value={vaultPassword}
+                    onChange={(e) => setVaultPassword(e.target.value)}
+                    className="bg-black/40 border-yellow-500/30 text-yellow-400"
+                    placeholder="Enter vault password..."
+                    autoComplete="off"
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <Button onClick={handleVaultAccess} className="flex-1 bg-yellow-600 hover:bg-yellow-700">
+                    <Key className="h-4 w-4 mr-2" />
+                    Access Vault
+                  </Button>
+                  <Button 
+                    onClick={() => {
+                      setShowVaultAccess(false)
+                      setVaultPassword('')
+                    }} 
+                    variant="outline" 
+                    className="border-yellow-500/30"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           {/* Deposit Controls */}
           <div className="flex gap-4 justify-center">
             <Button onClick={depositToVault} className="bg-green-600 hover:bg-green-700">
@@ -121,6 +183,13 @@ export function SecureVaultSystem() {
             <Button className="bg-blue-600 hover:bg-blue-700">
               <Eye className="h-4 w-4 mr-2" />
               VIEW TRANSPARENCY
+            </Button>
+            <Button 
+              onClick={() => setShowVaultAccess(true)}
+              className="bg-yellow-600 hover:bg-yellow-700"
+            >
+              <Key className="h-4 w-4 mr-2" />
+              COMMUNITY VAULT ACCESS
             </Button>
             <Button className="bg-purple-600 hover:bg-purple-700">
               <Zap className="h-4 w-4 mr-2" />
@@ -136,9 +205,12 @@ export function SecureVaultSystem() {
           <h4 className="text-2xl font-bold text-yellow-400 mb-2">
             🛡️ MAXIMUM SECURITY - UNDERGROUND VAULT 🛡️
           </h4>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground mb-2">
             Your investments are secured 2847 meters underground with quantum encryption.
             Full transparency with live monitoring and instant access when needed.
+          </p>
+          <p className="text-xs text-yellow-300">
+            🔐 Community Vault Password: Users can direct their fees to the community vault for global pricing benefits
           </p>
         </CardContent>
       </Card>

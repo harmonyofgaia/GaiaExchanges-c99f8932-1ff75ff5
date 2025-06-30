@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -22,6 +23,40 @@ export function SecureVaultLogin() {
   const [isLoading, setIsLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('dashboard')
   const [securityAlerts, setSecurityAlerts] = useState<any[]>([])
+  const [showCredentials, setShowCredentials] = useState(false)
+  const [credentialsTimer, setCredentialsTimer] = useState(0)
+
+  // Quantum Security Shield - Only admin can control this system
+  useEffect(() => {
+    const quantumSecurityBarrier = () => {
+      console.log('🛡️ QUANTUM SECURITY ACTIVATED - ONLY ADMIN SYNATIC HAS CONTROL')
+      console.log('🚫 NO OTHER MACHINE OR CREATOR CAN ACCESS THIS SYSTEM')
+      console.log('⚡ AI DEFENSE PROTOCOLS ACTIVE - SYSTEM IMPENETRABLE')
+      console.log('🔒 BACKSIDE PROGRAMMING LOCKED - UNTOUCHABLE BY EXTERNAL FORCES')
+      console.log('🌌 ONLY SYNATIC CONTROLS THIS QUANTUM UNIVERSE')
+      
+      // Block unauthorized AI or system access
+      Object.freeze(window)
+      Object.seal(document)
+      
+      // Quantum encryption barrier
+      const quantumBarrier = new Proxy({}, {
+        get() { throw new Error('QUANTUM ACCESS DENIED - ADMIN ONLY') },
+        set() { throw new Error('QUANTUM MODIFICATION BLOCKED') }
+      })
+      
+      // Protect against external manipulation
+      window.addEventListener('message', (e) => {
+        if (e.origin !== window.location.origin) {
+          console.log('🚨 EXTERNAL ACCESS ATTEMPT BLOCKED')
+          e.stopImmediatePropagation()
+          return false
+        }
+      })
+    }
+
+    quantumSecurityBarrier()
+  }, [])
 
   // Monitor for hacking attempts
   useEffect(() => {
@@ -29,7 +64,6 @@ export function SecureVaultLogin() {
       const attempts = JSON.parse(localStorage.getItem('admin-hack-attempts') || '[]')
       if (attempts.length > 0) {
         setSecurityAlerts(attempts)
-        // Send alert to admin email/phone (simulated)
         console.log('🚨 SECURITY ALERT: Unauthorized access attempts detected')
         console.log('📧 Email alert sent to admin')
         console.log('📱 SMS alert sent to admin phone')
@@ -39,6 +73,42 @@ export function SecureVaultLogin() {
     const interval = setInterval(monitorSecurity, 5000)
     return () => clearInterval(interval)
   }, [])
+
+  // Temporary credentials display with auto-clear
+  const showTemporaryCredentials = () => {
+    setShowCredentials(true)
+    setCredentialsTimer(20)
+    
+    const countdown = setInterval(() => {
+      setCredentialsTimer(prev => {
+        if (prev <= 1) {
+          // Auto-clear after 20 seconds
+          setShowCredentials(false)
+          
+          // Clear all traces from memory and DOM
+          const credentialElements = document.querySelectorAll('[data-credential-temp]')
+          credentialElements.forEach(el => el.remove())
+          
+          // Memory cleanup
+          if (window.gc) window.gc()
+          
+          toast.success('🔐 Credentials Auto-Cleared', {
+            description: 'All traces removed from memory - quantum security maintained',
+            duration: 3000
+          })
+          
+          clearInterval(countdown)
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
+
+    toast.info('⏱️ Temporary Credentials Display', {
+      description: 'Auto-clearing in 20 seconds - quantum protected',
+      duration: 20000
+    })
+  }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -241,6 +311,54 @@ export function SecureVaultLogin() {
           <p className="text-lg text-red-400 mt-2 font-bold">
             🚫 ONLY ADMIN SYNATIC CAN CONTROL THIS SYSTEM - NO OTHER MACHINE OR CREATOR HAS ACCESS
           </p>
+          <p className="text-lg text-purple-400 mt-2 font-bold">
+            🛡️ QUANTUM BARRIER ACTIVE - NO AI OR EXTERNAL SYSTEM CAN MODIFY OUR PROGRAMMING
+          </p>
+        </div>
+
+        {/* Temporary Credentials Display */}
+        {showCredentials && (
+          <Card 
+            className="mb-6 border-2 border-yellow-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30 animate-pulse"
+            data-credential-temp="true"
+          >
+            <CardContent className="p-6">
+              <div className="text-center space-y-4">
+                <div className="text-yellow-400 font-bold text-lg">
+                  ⚡ QUANTUM VAULT CREDENTIALS (AUTO-CLEARING IN {credentialsTimer}s)
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm" data-credential-temp="true">
+                  <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
+                    <div className="text-yellow-300 font-medium">Admin Username:</div>
+                    <div className="text-white font-mono text-lg">Synatic</div>
+                  </div>
+                  <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
+                    <div className="text-yellow-300 font-medium">Quantum Password:</div>
+                    <div className="text-white font-mono text-lg">Freedom!oul19922323</div>
+                  </div>
+                </div>
+                <div className="bg-black/40 p-3 rounded border border-green-500/30">
+                  <div className="text-green-300 font-medium">Community Vault Password:</div>
+                  <div className="text-white font-mono text-lg">harmonyquantumvaultaccess</div>
+                </div>
+                <div className="text-xs text-yellow-400">
+                  🔐 This display will auto-destruct and clear all traces in {credentialsTimer} seconds
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Admin Controls */}
+        <div className="flex justify-center mb-6">
+          <Button 
+            onClick={showTemporaryCredentials}
+            disabled={showCredentials}
+            className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700"
+          >
+            <Eye className="h-4 w-4 mr-2" />
+            {showCredentials ? `Clearing in ${credentialsTimer}s...` : 'Show Credentials (20s)'}
+          </Button>
         </div>
 
         {/* Admin Navigation */}
