@@ -31,6 +31,7 @@ const HoverSidebar = () => {
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter' },
     { icon: Activity, label: 'Live Tracking', path: '/live-tracking' },
     { icon: BarChart3, label: 'System Status', path: '/comprehensive-status' },
+    { icon: Shield, label: 'Security', path: '/security' },
     { icon: Info, label: 'About', path: '/about' },
     { icon: Mail, label: 'Contact', path: '/contact' },
     { icon: DollarSign, label: 'Pricing', path: '/pricing' },

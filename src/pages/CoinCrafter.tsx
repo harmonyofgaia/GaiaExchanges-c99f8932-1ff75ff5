@@ -1,47 +1,121 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Hammer, Coins, Zap, TrendingUp } from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Hammer, Zap, Coins, Settings } from 'lucide-react'
+import { useState } from 'react'
+import HoverSidebar from '@/components/HoverSidebar'
 
 const CoinCrafter = () => {
+  const [tokenName, setTokenName] = useState('')
+  const [tokenSymbol, setTokenSymbol] = useState('')
+  const [totalSupply, setTotalSupply] = useState('')
+
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-br from-orange-900/20 to-yellow-900/20">
-      <div className="container mx-auto max-w-4xl">
-        <Card className="border-orange-500/30 bg-gradient-to-br from-orange-900/30 to-yellow-900/30">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-orange-400 text-3xl">
-              <Hammer className="h-8 w-8" />
-              🔨 GAiA Coin Crafter
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="text-center">
-              <div className="text-6xl mb-4">🔨💰</div>
-              <h2 className="text-2xl font-bold text-orange-400 mb-2">
-                Create Your Own Tokens
-              </h2>
-              <p className="text-muted-foreground">
-                Forge custom cryptocurrencies with quantum-powered blockchain technology
+    <div className="min-h-screen bg-gradient-to-br from-orange-900/20 via-red-900/20 to-yellow-900/20">
+      <HoverSidebar />
+      
+      <div className="ml-16 min-h-screen">
+        <div className="container mx-auto px-6 py-8">
+          <Card className="mb-8 border-orange-500/30 bg-gradient-to-r from-orange-900/30 to-red-900/30">
+            <CardHeader>
+              <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
+                🔥 GAiA Coin Crafter
+              </CardTitle>
+              <p className="text-center text-xl text-muted-foreground">
+                Forge Your Own Tokens with Environmental Impact
               </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-orange-900/20 rounded border border-orange-500/20">
-                <Coins className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
-                <div className="font-bold text-yellow-400">Token Creation</div>
-              </div>
-              <div className="text-center p-4 bg-yellow-900/20 rounded border border-yellow-500/20">
-                <Zap className="h-8 w-8 mx-auto text-orange-400 mb-2" />
-                <div className="font-bold text-orange-400">Smart Contracts</div>
-              </div>
-              <div className="text-center p-4 bg-red-900/20 rounded border border-red-500/20">
-                <TrendingUp className="h-8 w-8 mx-auto text-red-400 mb-2" />
-                <div className="font-bold text-red-400">Market Launch</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardHeader>
+          </Card>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <Card className="border-orange-500/30 bg-orange-900/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-orange-400">
+                  <Hammer className="h-6 w-6" />
+                  Token Creator
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <Label htmlFor="tokenName">Token Name</Label>
+                  <Input
+                    id="tokenName"
+                    value={tokenName}
+                    onChange={(e) => setTokenName(e.target.value)}
+                    placeholder="My Environmental Token"
+                    className="bg-black/30 border-orange-500/30"
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="tokenSymbol">Token Symbol</Label>
+                  <Input
+                    id="tokenSymbol"
+                    value={tokenSymbol}
+                    onChange={(e) => setTokenSymbol(e.target.value)}
+                    placeholder="MET"
+                    className="bg-black/30 border-orange-500/30"
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="totalSupply">Total Supply</Label>
+                  <Input
+                    id="totalSupply"
+                    value={totalSupply}
+                    onChange={(e) => setTotalSupply(e.target.value)}
+                    placeholder="1000000"
+                    type="number"
+                    className="bg-black/30 border-orange-500/30"
+                  />
+                </div>
+
+                <Button className="w-full bg-orange-600 hover:bg-orange-700 h-12">
+                  <Hammer className="h-4 w-4 mr-2" />
+                  Craft Token
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-red-500/30 bg-red-900/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-red-400">
+                  <Zap className="h-6 w-6" />
+                  Token Features
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 p-3 bg-red-900/30 rounded">
+                    <Coins className="h-5 w-5 text-yellow-400" />
+                    <div>
+                      <h4 className="font-bold text-yellow-400">Environmental Yield</h4>
+                      <p className="text-sm text-muted-foreground">Automatic rewards for eco-friendly actions</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3 p-3 bg-red-900/30 rounded">
+                    <Settings className="h-5 w-5 text-blue-400" />
+                    <div>
+                      <h4 className="font-bold text-blue-400">Smart Governance</h4>
+                      <p className="text-sm text-muted-foreground">Community-driven decision making</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3 p-3 bg-red-900/30 rounded">
+                    <Zap className="h-5 w-5 text-green-400" />
+                    <div>
+                      <h4 className="font-bold text-green-400">Instant Deployment</h4>
+                      <p className="text-sm text-muted-foreground">Deploy on Solana network instantly</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   )

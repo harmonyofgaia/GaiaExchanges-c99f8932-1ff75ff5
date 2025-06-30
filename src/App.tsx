@@ -46,6 +46,10 @@ function App() {
               <Route path="/live-tracking" element={<LiveTracking />} />
               <Route path="/exchange" element={<Exchange />} />
               <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+              <Route path="/security" element={<UltimateSecurity />} />
+              <Route path="/immortal-security" element={<ImmortalSecurity />} />
+              <Route path="/ultimate-security" element={<UltimateSecurity />} />
+              <Route path="/system-status" element={<SystemStatus />} />
               <Route 
                 path="/admin" 
                 element={
@@ -59,30 +63,6 @@ function App() {
                 element={
                   <ProtectedRoute isAdminRoute>
                     <SecureAdmin />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/immortal-security" 
-                element={
-                  <ProtectedRoute>
-                    <ImmortalSecurity />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/ultimate-security" 
-                element={
-                  <ProtectedRoute>
-                    <UltimateSecurity />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/system-status" 
-                element={
-                  <ProtectedRoute isAdminRoute>
-                    <SystemStatus />
                   </ProtectedRoute>
                 } 
               />
