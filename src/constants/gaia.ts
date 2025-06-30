@@ -21,6 +21,12 @@ export const GAIA_TOKEN = {
   POWERED_BY: 'Culture of Harmony',
   OFFICIAL_WEBSITE: 'https://www.gaiaexchanges.net',
   
+  // Trading Links
+  PUMP_FUN_URL: 'https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
+  
+  // Brand Statement
+  BRAND_STATEMENT: 'The most pure ecological token tribe in the universe - Culture of Harmony powered',
+  
   // IMPORTANT DISCLAIMER
   DISCLAIMER: 'GAiA Token is NOT associated with GAIA Everworld. We are a completely separate and independent project.',
   

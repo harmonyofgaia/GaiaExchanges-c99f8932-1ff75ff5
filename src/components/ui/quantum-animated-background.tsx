@@ -1,155 +1,126 @@
 
-import { useState, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
-interface QuantumParticle {
-  id: string
-  x: number
-  y: number
-  size: number
-  speed: number
-  angle: number
-  color: string
-  opacity: number
+interface QuantumAnimatedBackgroundProps {
+  primaryColor?: string
+  secondaryColor?: string
+  accentColor?: string
 }
 
-export function QuantumAnimatedBackground() {
-  const [particles, setParticles] = useState<QuantumParticle[]>([])
-  const [electricShocks, setElectricShocks] = useState<Array<{id: string, x1: number, y1: number, x2: number, y2: number}>>([])
+export function QuantumAnimatedBackground({ 
+  primaryColor = '#00ff00',
+  secondaryColor = '#00ffff', 
+  accentColor = '#ff00ff'
+}: QuantumAnimatedBackgroundProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    // Create quantum particles
-    const createParticle = (index: number): QuantumParticle => ({
-      id: `particle-${index}`,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 3 + 1,
-      speed: Math.random() * 2 + 0.5,
-      angle: Math.random() * Math.PI * 2,
-      color: ['#00ffff', '#ff00ff', '#ffff00', '#00ff00', '#ff6600'][Math.floor(Math.random() * 5)],
-      opacity: Math.random() * 0.8 + 0.2
-    })
+    const canvas = canvasRef.current
+    if (!canvas) return
 
-    const newParticles = Array.from({ length: 80 }, (_, i) => createParticle(i))
-    setParticles(newParticles)
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
 
-    // Animate particles
-    const animationInterval = setInterval(() => {
-      setParticles(prev => prev.map(particle => ({
-        ...particle,
-        x: (particle.x + Math.cos(particle.angle) * particle.speed) % 100,
-        y: (particle.y + Math.sin(particle.angle) * particle.speed) % 100,
-        angle: particle.angle + 0.05,
-        opacity: Math.random() * 0.8 + 0.2
-      })))
-    }, 100)
+    // Set canvas size
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+    resizeCanvas()
+    window.addEventListener('resize', resizeCanvas)
 
-    // Electric shock effects
-    const shockInterval = setInterval(() => {
-      const shocks = Array.from({ length: 3 }, (_, i) => ({
-        id: `shock-${i}`,
-        x1: Math.random() * 100,
-        y1: Math.random() * 100,
-        x2: Math.random() * 100,
-        y2: Math.random() * 100
-      }))
-      setElectricShocks(shocks)
-      
-      setTimeout(() => setElectricShocks([]), 150)
-    }, 3000)
+    // Quantum particles
+    const particles: Array<{
+      x: number
+      y: number
+      vx: number
+      vy: number
+      size: number
+      color: string
+      phase: number
+      quantum: number
+    }> = []
+
+    // Initialize particles
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 2,
+        vy: (Math.random() - 0.5) * 2,
+        size: Math.random() * 3 + 1,
+        color: [primaryColor, secondaryColor, accentColor][Math.floor(Math.random() * 3)],
+        phase: Math.random() * Math.PI * 2,
+        quantum: Math.random()
+      })
+    }
+
+    let animationId: number
+
+    const animate = () => {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      particles.forEach((particle) => {
+        // Quantum behavior - particles can teleport
+        if (Math.random() < 0.001) {
+          particle.x = Math.random() * canvas.width
+          particle.y = Math.random() * canvas.height
+        }
+
+        // Update position
+        particle.x += particle.vx
+        particle.y += particle.vy
+        particle.phase += 0.05
+
+        // Wrap around edges
+        if (particle.x < 0) particle.x = canvas.width
+        if (particle.x > canvas.width) particle.x = 0
+        if (particle.y < 0) particle.y = canvas.height
+        if (particle.y > canvas.height) particle.y = 0
+
+        // Draw quantum particle with wave interference
+        const alpha = 0.2 + Math.sin(particle.phase) * 0.1
+        const size = particle.size + Math.sin(particle.phase * 2) * 0.5
+
+        ctx.beginPath()
+        ctx.arc(particle.x, particle.y, size, 0, Math.PI * 2)
+        ctx.fillStyle = particle.color.replace(')', `, ${alpha})`)
+        ctx.fill()
+
+        // Quantum entanglement lines
+        particles.forEach((otherParticle) => {
+          const dx = otherParticle.x - particle.x
+          const dy = otherParticle.y - particle.y
+          const distance = Math.sqrt(dx * dx + dy * dy)
+
+          if (distance < 100 && particle.quantum > 0.8) {
+            ctx.beginPath()
+            ctx.moveTo(particle.x, particle.y)
+            ctx.lineTo(otherParticle.x, otherParticle.y)
+            ctx.strokeStyle = particle.color.replace(')', `, 0.1)`)
+            ctx.lineWidth = 0.5
+            ctx.stroke()
+          }
+        })
+      })
+
+      animationId = requestAnimationFrame(animate)
+    }
+
+    animate()
 
     return () => {
-      clearInterval(animationInterval)
-      clearInterval(shockInterval)
+      window.removeEventListener('resize', resizeCanvas)
+      cancelAnimationFrame(animationId)
     }
-  }, [])
+  }, [primaryColor, secondaryColor, accentColor])
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Quantum field background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/20 to-black/40" />
-      
-      {/* Animated quantum particles */}
-      {particles.map((particle) => (
-        <div
-          key={particle.id}
-          className="absolute rounded-full animate-pulse"
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            backgroundColor: particle.color,
-            opacity: particle.opacity,
-            boxShadow: `0 0 ${particle.size * 3}px ${particle.color}`,
-            transform: `translate(-50%, -50%)`
-          }}
-        />
-      ))}
-
-      {/* Electric shock effects */}
-      <svg className="absolute inset-0 w-full h-full">
-        <defs>
-          <filter id="quantumGlow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge> 
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/> 
-            </feMerge>
-          </filter>
-        </defs>
-        
-        {electricShocks.map(shock => (
-          <line
-            key={shock.id}
-            x1={`${shock.x1}%`}
-            y1={`${shock.y1}%`}
-            x2={`${shock.x2}%`}
-            y2={`${shock.y2}%`}
-            stroke="#ffffff"
-            strokeWidth="2"
-            opacity="0.8"
-            filter="url(#quantumGlow)"
-            className="animate-ping"
-          />
-        ))}
-        
-        {/* Quantum connection lines */}
-        {particles.slice(0, 20).map((particle, index) => {
-          const nextParticle = particles[(index + 1) % 20]
-          return (
-            <line
-              key={`connection-${index}`}
-              x1={`${particle.x}%`}
-              y1={`${particle.y}%`}
-              x2={`${nextParticle.x}%`}
-              y2={`${nextParticle.y}%`}
-              stroke={particle.color}
-              strokeWidth="0.5"
-              opacity="0.3"
-              filter="url(#quantumGlow)"
-            />
-          )
-        })}
-      </svg>
-
-      {/* Quantum wave effects */}
-      <div className="absolute inset-0">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <div
-            key={`wave-${i}`}
-            className="absolute border border-cyan-400/20 rounded-full animate-ping"
-            style={{
-              left: '50%',
-              top: '50%',
-              width: `${200 + i * 100}px`,
-              height: `${200 + i * 100}px`,
-              transform: 'translate(-50%, -50%)',
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: '4s'
-            }}
-          />
-        ))}
-      </div>
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 pointer-events-none"
+      style={{ mixBlendMode: 'screen', opacity: 0.3 }}
+    />
   )
 }
