@@ -11,6 +11,7 @@ import { PrivateBlockchainNetwork } from './PrivateBlockchainNetwork'
 import { QuantumTechnologicalMastermind } from './QuantumTechnologicalMastermind'
 import { MasterUpgradePlan } from './MasterUpgradePlan'
 import { AlienJusticeProtocol } from './AlienJusticeProtocol'
+import { IntergalacticIdeasVault } from './IntergalacticIdeasVault'
 
 export function AdminDashboard() {
   return (
@@ -26,8 +27,9 @@ export function AdminDashboard() {
           </p>
         </div>
 
-        <Tabs defaultValue="alien" className="w-full">
-          <TabsList className="grid w-full grid-cols-11">
+        <Tabs defaultValue="ideas" className="w-full">
+          <TabsList className="grid w-full grid-cols-12">
+            <TabsTrigger value="ideas">🌌 Intergalactic Ideas</TabsTrigger>
             <TabsTrigger value="alien">👽 Alien Justice</TabsTrigger>
             <TabsTrigger value="quantum">🧠 Quantum Mind</TabsTrigger>
             <TabsTrigger value="mastermind">🤖 Tech Mastermind</TabsTrigger>
@@ -40,6 +42,10 @@ export function AdminDashboard() {
             <TabsTrigger value="platform">📱 Platform Support</TabsTrigger>
             <TabsTrigger value="blockchain">🔗 Private Blockchain</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="ideas" className="space-y-6">
+            <IntergalacticIdeasVault />
+          </TabsContent>
 
           <TabsContent value="alien" className="space-y-6">
             <AlienJusticeProtocol />
