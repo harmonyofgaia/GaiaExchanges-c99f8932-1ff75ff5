@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -10,6 +9,7 @@ import { toast } from 'sonner'
 import { AdminDashboard } from '@/components/admin/AdminDashboard'
 import { SecureVaultSystem } from '@/components/SecureVaultSystem'
 import { AdvancedSecurityCenter } from '@/components/admin/AdvancedSecurityCenter'
+import { UltimateSecuritySuite } from '@/components/admin/UltimateSecuritySuite'
 
 export default function AdminLogin() {
   const [credentials, setCredentials] = useState({
@@ -132,9 +132,10 @@ export default function AdminLogin() {
           </div>
           
           <Tabs defaultValue="dashboard" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsList className="grid w-full grid-cols-4 mb-6">
               <TabsTrigger value="dashboard">System Dashboard</TabsTrigger>
               <TabsTrigger value="security">Advanced Security</TabsTrigger>
+              <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
               <TabsTrigger value="analytics">Deep Analytics</TabsTrigger>
             </TabsList>
             
@@ -144,6 +145,10 @@ export default function AdminLogin() {
             
             <TabsContent value="security">
               <AdvancedSecurityCenter />
+            </TabsContent>
+            
+            <TabsContent value="ultimate">
+              <UltimateSecuritySuite />
             </TabsContent>
             
             <TabsContent value="analytics">

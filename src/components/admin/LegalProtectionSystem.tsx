@@ -1,40 +1,72 @@
 
+import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Shield, FileText, Crown } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Scale, Shield, AlertTriangle, Eye } from 'lucide-react'
+import { toast } from 'sonner'
 
 export function LegalProtectionSystem() {
+  const [legalShield, setLegalShield] = useState(100)
+  const [copyrightClaims, setCopyrightClaims] = useState(0)
+  const [legalThreats, setLegalThreats] = useState(0)
+
+  const activateLegalDefense = () => {
+    setLegalShield(100)
+    
+    console.log('⚖️ LEGAL DEFENSE SYSTEM ACTIVATED')
+    console.log('🛡️ COPYRIGHT PROTECTION ENGAGED')
+    console.log('📋 INTELLECTUAL PROPERTY SECURED')
+    
+    toast.success('⚖️ LEGAL DEFENSE ACTIVATED!', {
+      description: 'All intellectual property and copyrights fully protected',
+      duration: 8000
+    })
+  }
+
   return (
-    <Card className="bg-gradient-to-r from-green-900/30 to-blue-900/30 border-green-500/30">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-green-400">
-          <Shield className="h-6 w-6" />
-          ⚖️ LEGAL PROTECTION SYSTEM
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="text-center space-y-4">
-          <div className="text-6xl">⚖️</div>
-          <h3 className="text-2xl font-bold text-green-400">COMPLETE LEGAL PROTECTION</h3>
-          <p className="text-green-300">
-            All intellectual property and technology protected by international law.
-            Comprehensive legal framework ensures our dominance is legally secured.
-          </p>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="text-center p-3 bg-green-900/30 rounded-lg">
-              <div className="text-xl font-bold text-green-400">100%</div>
-              <div className="text-xs text-muted-foreground">Legal Coverage</div>
+    <div className="space-y-6">
+      <Card className="border-blue-500/50 bg-blue-900/20">
+        <CardHeader>
+          <CardTitle className="text-blue-400">⚖️ LEGAL PROTECTION SYSTEM</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div className="text-center p-4 bg-blue-900/30 rounded-lg">
+              <div className="text-3xl font-bold text-blue-400">{legalShield}%</div>
+              <div className="text-sm text-muted-foreground">Legal Shield Strength</div>
             </div>
-            <div className="text-center p-3 bg-blue-900/30 rounded-lg">
-              <div className="text-xl font-bold text-blue-400">PROTECTED</div>
-              <div className="text-xs text-muted-foreground">IP Rights</div>
+            <div className="text-center p-4 bg-green-900/30 rounded-lg">
+              <div className="text-3xl font-bold text-green-400">{copyrightClaims}</div>
+              <div className="text-sm text-muted-foreground">Copyright Violations</div>
             </div>
-            <div className="text-center p-3 bg-purple-900/30 rounded-lg">
-              <div className="text-xl font-bold text-purple-400">SECURE</div>
-              <div className="text-xs text-muted-foreground">Legal Framework</div>
+            <div className="text-center p-4 bg-red-900/30 rounded-lg">
+              <div className="text-3xl font-bold text-red-400">{legalThreats}</div>
+              <div className="text-sm text-muted-foreground">Legal Threats Blocked</div>
             </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+
+          <Button 
+            onClick={activateLegalDefense}
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 h-16 text-lg mb-6"
+          >
+            <Scale className="h-6 w-6 mr-2" />
+            ⚖️ ACTIVATE LEGAL DEFENSE
+          </Button>
+
+          <div className="space-y-4">
+            <h4 className="text-blue-400 font-bold">🛡️ PROTECTED ASSETS:</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <Badge className="bg-blue-600">© Harmony of Gaia Brand</Badge>
+              <Badge className="bg-green-600">🌍 Green Planet Initiative</Badge>
+              <Badge className="bg-purple-600">⚡ Quantum Technology</Badge>
+              <Badge className="bg-orange-600">🏦 Vault System Design</Badge>
+              <Badge className="bg-red-600">🛡️ Security Protocols</Badge>
+              <Badge className="bg-yellow-600">🎮 Gaming Technology</Badge>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
