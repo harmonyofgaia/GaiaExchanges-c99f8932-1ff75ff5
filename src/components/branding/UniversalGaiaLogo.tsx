@@ -1,129 +1,96 @@
 
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface UniversalGaiaLogoProps {
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'responsive'
-  variant?: 'default' | 'white' | 'dark' | 'colorful' | 'exchange'
-  position?: 'left' | 'center' | 'right'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   animated?: boolean
   showText?: boolean
-  className?: string
   onClick?: () => void
+  className?: string
+  position?: 'top-left' | 'top-center' | 'top-right' | 'center' | 'floating'
 }
 
 export function UniversalGaiaLogo({ 
   size = 'md', 
-  variant = 'default', 
-  position = 'left',
-  animated = true,
-  showText = true,
+  animated = true, 
+  showText = false,
+  onClick,
   className = '',
-  onClick
+  position = 'top-left'
 }: UniversalGaiaLogoProps) {
-  const [currentAnimation, setCurrentAnimation] = useState(0)
+  const [pulse, setPulse] = useState(false)
+
+  useEffect(() => {
+    if (animated) {
+      const interval = setInterval(() => {
+        setPulse(true)
+        setTimeout(() => setPulse(false), 1000)
+      }, 3000)
+      return () => clearInterval(interval)
+    }
+  }, [animated])
 
   const sizeClasses = {
-    xs: 'w-8 h-8',
-    sm: 'w-12 h-12', 
-    md: 'w-16 h-16',
-    lg: 'w-24 h-24',
-    xl: 'w-32 h-32',
-    responsive: 'w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20'
-  }
-
-  const textSizeClasses = {
-    xs: 'text-xs',
-    sm: 'text-sm',
-    md: 'text-lg',
-    lg: 'text-2xl', 
-    xl: 'text-4xl',
-    responsive: 'text-sm md:text-lg lg:text-2xl'
+    xs: 'w-6 h-6 text-lg',
+    sm: 'w-8 h-8 text-xl',
+    md: 'w-12 h-12 text-3xl',
+    lg: 'w-16 h-16 text-4xl',
+    xl: 'w-24 h-24 text-6xl'
   }
 
   const positionClasses = {
-    left: 'justify-start',
-    center: 'justify-center',
-    right: 'justify-end'
-  }
-
-  const variantStyles = {
-    default: 'filter-none',
-    white: 'brightness-0 invert',
-    dark: 'brightness-0',
-    colorful: 'hue-rotate-180 saturate-150',
-    exchange: 'opacity-90 hover:opacity-100'
-  }
-
-  useEffect(() => {
-    if (!animated) return
-    
-    const interval = setInterval(() => {
-      setCurrentAnimation(prev => (prev + 1) % 3)
-    }, 4000)
-    
-    return () => clearInterval(interval)
-  }, [animated])
-
-  const getAnimationClass = () => {
-    if (!animated) return ''
-    
-    switch (currentAnimation) {
-      case 0: return 'animate-pulse'
-      case 1: return 'animate-bounce'
-      case 2: return 'hover:scale-110 transition-transform duration-500'
-      default: return ''
-    }
+    'top-left': 'fixed top-4 left-4 z-50',
+    'top-center': 'fixed top-4 left-1/2 transform -translate-x-1/2 z-50',
+    'top-right': 'fixed top-4 right-4 z-50',
+    'center': 'flex items-center justify-center',
+    'floating': 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50'
   }
 
   return (
-    <div className={`flex items-center gap-3 ${positionClasses[position]} ${className}`}>
-      {/* Animated Background Effect */}
-      {animated && (
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse rounded-full blur-xl" />
-          <div className="absolute w-full h-full bg-gradient-to-l from-green-500/10 via-transparent to-blue-500/10 animate-pulse rounded-full" />
+    <div className={`${positionClasses[position]} ${className}`}>
+      <div 
+        className={`
+          ${sizeClasses[size]} 
+          bg-black/20 backdrop-blur-sm rounded-full 
+          flex items-center justify-center cursor-pointer
+          transition-all duration-300 hover:scale-110
+          ${pulse ? 'animate-pulse shadow-lg shadow-green-400/50' : ''}
+          ${animated ? 'hover:shadow-xl hover:shadow-cyan-400/30' : ''}
+        `}
+        onClick={onClick}
+        style={{
+          background: 'radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%)',
+          border: '2px solid rgba(255,255,255,0.1)',
+          backdropFilter: 'blur(10px)'
+        }}
+      >
+        <span 
+          className="font-bold text-transparent bg-clip-text bg-gradient-to-br from-green-400 via-blue-400 to-purple-400"
+          style={{
+            filter: 'drop-shadow(0 0 10px rgba(0,255,255,0.5))',
+            textShadow: '0 0 20px rgba(0,255,255,0.3)'
+          }}
+        >
+          🌍
+        </span>
+      </div>
+      
+      {showText && (
+        <div className="ml-3 flex flex-col">
+          <span className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">
+            GAiA
+          </span>
+          <span className="text-xs text-green-300/80">
+            Harmony of Culture
+          </span>
         </div>
       )}
       
-      {/* Logo Container */}
-      <div 
-        className={`relative ${sizeClasses[size]} ${getAnimationClass()} cursor-pointer`}
-        onClick={onClick}
-      >
-        {/* Glow Effect */}
-        {animated && (
-          <div className="absolute inset-0 bg-green-400/20 rounded-full blur-lg animate-pulse" />
-        )}
-        
-        {/* Main Logo */}
-        <div className="relative z-10">
-          <img 
-            src="/lovable-uploads/750edd5b-a20e-4927-8066-c66fb065c0bb.png"
-            alt="Gaia of Harmony Logo"
-            className={`w-full h-full object-contain ${variantStyles[variant]} transition-all duration-300`}
-          />
-        </div>
-        
-        {/* Overlay Effects */}
-        {animated && (
-          <>
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-green-400/10 to-transparent rounded-full animate-spin" style={{ animationDuration: '8s' }} />
-            <div className="absolute inset-0 bg-gradient-to-tl from-transparent via-blue-400/10 to-transparent rounded-full animate-spin" style={{ animationDuration: '12s', animationDirection: 'reverse' }} />
-          </>
-        )}
-      </div>
-
-      {/* Company Text */}
-      {showText && (
-        <div className="relative z-10">
-          <div className={`font-bold bg-gradient-to-r from-green-400 via-emerald-300 to-green-500 bg-clip-text text-transparent ${textSizeClasses[size]}`}>
-            Gaia of Harmony
-          </div>
-          {size !== 'xs' && size !== 'sm' && (
-            <div className={`text-muted-foreground ${size === 'responsive' ? 'text-xs md:text-sm' : 'text-xs'} opacity-80`}>
-              Culture of Harmony
-            </div>
-          )}
+      {animated && (
+        <div className="absolute inset-0 rounded-full">
+          {/* Electric ring animation */}
+          <div className="absolute inset-0 rounded-full border-2 border-cyan-400/30 animate-ping" />
+          <div className="absolute inset-0 rounded-full border border-green-400/20 animate-pulse" />
         </div>
       )}
     </div>
