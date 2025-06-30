@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -6,6 +5,7 @@ import { Shield, Eye, EyeOff, RefreshCw, LogOut } from 'lucide-react'
 import { AdminLogin } from './AdminLogin'
 import { AdminMFA } from './AdminMFA'
 import { AdminRecoverySystem } from './AdminRecoverySystem'
+import { AdminDashboard } from './AdminDashboard'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { toast } from 'sonner'
 
@@ -65,15 +65,10 @@ export function SecureVaultLogin() {
       return false
     }
     
-    const vaultKey = btoa('harmony quantum vault access').replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
-    
     const isValidUser = username === 'Synatic'
     const isValidPass = password === 'harmonyquantumvaultaccess'
     
     if (isValidUser && isValidPass) {
-      username = ''
-      password = ''
-      
       grantAdminAccess()
       setIsInvisibleMode(false)
       
@@ -88,8 +83,6 @@ export function SecureVaultLogin() {
       return true
     }
     
-    username = ''
-    password = ''
     return false
   }
 
@@ -135,78 +128,9 @@ export function SecureVaultLogin() {
     )
   }
 
+  // Show full admin dashboard when logged in
   if (isAdmin && !showRecovery) {
-    return (
-      <div className="space-y-6">
-        <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Shield className="h-8 w-8 text-green-400" />
-                <div>
-                  <h2 className="text-2xl font-bold text-green-400">🛡️ GAIA VAULT - GOD MODE ACTIVE</h2>
-                  <p className="text-green-300">Invisible Admin Access • Full File Control • Parabolic Universe Power</p>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <Button 
-                  onClick={handleShowCredentials} 
-                  variant="outline" 
-                  className="border-yellow-500/30 text-yellow-400"
-                  disabled={showCredentials}
-                >
-                  {credentialsVisible ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
-                  {credentialsVisible ? 'Hiding Soon...' : 'Show Credentials'}
-                </Button>
-                <Button onClick={() => setShowRecovery(true)} variant="outline" className="border-blue-500/30">
-                  <RefreshCw className="h-4 w-4 mr-2" />
-                  4-Step Recovery
-                </Button>
-                <Button onClick={revokeAdminAccess} variant="outline" className="border-red-500/30">
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Secure Logout
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {credentialsVisible && (
-          <Card 
-            className="border-yellow-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30 animate-pulse"
-            data-credential-display="true"
-          >
-            <CardContent className="p-6">
-              <div className="text-center space-y-4">
-                <div className="text-yellow-400 font-bold text-lg">
-                  ⚡ ADMIN GOD MODE CREDENTIALS (AUTO-CLEARING)
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                  <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
-                    <div className="text-yellow-300 font-medium">Admin Username:</div>
-                    <div className="text-white font-mono text-lg">Synatic</div>
-                  </div>
-                  <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
-                    <div className="text-yellow-300 font-medium">Vault Password:</div>
-                    <div className="text-white font-mono text-lg">harmonyquantumvaultaccess</div>
-                  </div>
-                </div>
-                <div className="bg-green-500/10 border border-green-500/20 rounded p-3">
-                  <div className="text-green-400 font-bold text-sm">🛡️ INVISIBLE ADMIN POWERS:</div>
-                  <ul className="text-xs text-green-300 mt-2 space-y-1">
-                    <li>• Access to ALL files (encrypted/unencrypted)</li>
-                    <li>• Complete invisibility from hackers</li>
-                    <li>• Block unauthorized typing/messaging</li>
-                    <li>• Parabolic universe full control</li>
-                    <li>• God mode admin privileges</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-      </div>
-    )
+    return <AdminDashboard />
   }
 
   return (

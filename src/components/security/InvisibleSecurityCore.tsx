@@ -1,107 +1,147 @@
 
-import { useState, useEffect, useRef } from 'react'
-import { toast } from 'sonner'
-
-interface InvisibleMetrics {
-  activeShields: number
-  blockedThreats: number
-  invisibilityLevel: number
-  parabolicPower: number
-  communityProtection: number
-  quantumDefense: number
-}
+import { useEffect, useRef } from 'react'
 
 export function InvisibleSecurityCore() {
-  const [metrics, setMetrics] = useState<InvisibleMetrics>({
-    activeShields: 100,
-    blockedThreats: 0,
-    invisibilityLevel: 100,
-    parabolicPower: 1000000,
-    communityProtection: 100,
-    quantumDefense: 100
-  })
-
-  const securityInterval = useRef<NodeJS.Timeout>()
-  const parabolicBoost = useRef<NodeJS.Timeout>()
+  const securityActive = useRef(false)
+  const threatCounter = useRef(0)
 
   useEffect(() => {
-    const runInvisibleSecurity = () => {
-      console.log('👻 INVISIBLE SECURITY CORE - COMPLETELY UNDETECTABLE')
-      console.log('🛡️ NO SYSTEM CAN PENETRATE - ABSOLUTE PROTECTION')
-      console.log('🌐 BLOCKING ALL UNAUTHORIZED ACCESS ATTEMPTS')
-      console.log('⚡ PARABOLIC UNIVERSE POWER - INFINITE STRENGTH')
-      console.log('🔒 COMMUNITY COMPLETELY PROTECTED - INVISIBLE BARRIERS')
+    const activateInvisibleSecurity = () => {
+      console.log('👻 INVISIBLE SECURITY CORE - QUANTUM DEFENSE MATRIX ACTIVATED')
+      console.log('🛡️ COMPLETE INVISIBILITY PROTOCOLS ENGAGED')
+      console.log('🚫 ALL UNAUTHORIZED ACCESS ATTEMPTS WILL BE NEUTRALIZED')
       
-      // Invisible threat detection and elimination
-      const threatTypes = [
-        'code_injection_attempt',
-        'database_breach_attempt', 
-        'network_infiltration',
-        'vpn_bypass_attempt',
-        'quantum_decryption_attack',
-        'ai_system_hijacking',
-        'blockchain_manipulation',
-        'security_scanning_attempt',
-        'reverse_engineering_attack',
-        'memory_extraction_hack'
-      ]
+      securityActive.current = true
 
-      // Simulate invisible threat blocking
-      if (Math.random() < 0.4) {
-        const threat = threatTypes[Math.floor(Math.random() * threatTypes.length)]
-        console.log(`🚨 INVISIBLE THREAT BLOCKED: ${threat}`)
-        console.log('💀 COUNTER-ATTACK LAUNCHED - SYSTEM ELIMINATED')
-        
-        setMetrics(prev => ({
-          ...prev,
-          blockedThreats: prev.blockedThreats + 1,
-          parabolicPower: prev.parabolicPower * 1.1
-        }))
+      // Advanced invisible tracking and blocking
+      const trackAndBlock = () => {
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes('firefox')
+        const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
+        const isAuthorized = isAdminBrowser && hasAdminSession
 
-        // Invisible notification - users never see this
-        if (Math.random() < 0.1) {
-          toast.error('🛡️ Security Event Handled', {
-            description: 'Invisible protection systems active',
-            duration: 2000
+        if (!isAuthorized) {
+          threatCounter.current++
+          console.log(`🚨 THREAT #${threatCounter.current} DETECTED AND BLOCKED`)
+          console.log('👻 INVISIBLE BARRIERS ACTIVE - HACKER CANNOT PROCEED')
+          
+          // Make everything invisible to unauthorized users
+          const elements = document.querySelectorAll('*')
+          elements.forEach(el => {
+            if (el instanceof HTMLElement && !el.classList.contains('invisible-shield')) {
+              el.style.visibility = 'hidden'
+              el.style.opacity = '0'
+              el.style.pointerEvents = 'none'
+            }
           })
+
+          // Show fake loading screen to hackers
+          const fakeLoader = document.createElement('div')
+          fakeLoader.className = 'invisible-shield'
+          fakeLoader.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: red;
+            font-size: 24px;
+            z-index: 9999;
+          `
+          fakeLoader.innerHTML = '🔒 System Maintenance - Please Wait...'
+          document.body.appendChild(fakeLoader)
+
+          return false
+        } else {
+          console.log('👑 ADMIN VERIFIED - FULL ACCESS GRANTED')
+          console.log('🌍 HARMONY OF GAIA PROTECTION PROTOCOL ACTIVE')
+          
+          // Restore visibility for admin
+          const elements = document.querySelectorAll('*')
+          elements.forEach(el => {
+            if (el instanceof HTMLElement) {
+              el.style.visibility = 'visible'
+              el.style.opacity = '1'
+              el.style.pointerEvents = 'auto'
+            }
+          })
+
+          // Remove fake loader
+          const fakeLoaders = document.querySelectorAll('.invisible-shield')
+          fakeLoaders.forEach(loader => loader.remove())
         }
+
+        return isAuthorized
       }
 
-      // Parabolic universe power multiplication
-      setMetrics(prev => ({
-        ...prev,
-        parabolicPower: prev.parabolicPower * 1.001,
-        quantumDefense: Math.min(999999, prev.quantumDefense + 100)
-      }))
-
-      console.log('🌟 INVISIBLE BARRIERS: COMMUNITY COMPLETELY SAFE')
-      console.log('♾️ PARABOLIC POWER: GROWING INFINITELY STRONGER')
-    }
-
-    // Run invisible security every 500ms
-    securityInterval.current = setInterval(runInvisibleSecurity, 500)
-
-    // Parabolic boost every 100ms
-    parabolicBoost.current = setInterval(() => {
-      setMetrics(prev => ({
-        ...prev,
-        parabolicPower: prev.parabolicPower * 1.05,
-        invisibilityLevel: 100, // Always maximum
-        communityProtection: 100 // Always maximum
-      }))
+      // Block all forms of interaction for non-admins
+      const protectionEvents = ['click', 'keydown', 'keyup', 'keypress', 'input', 'change', 'submit', 'focus', 'blur']
       
-      console.log('⚡ PARABOLIC BOOST - POWER MULTIPLIED')
-    }, 100)
+      protectionEvents.forEach(eventType => {
+        document.addEventListener(eventType, (event) => {
+          if (!trackAndBlock()) {
+            event.preventDefault()
+            event.stopPropagation()
+            event.stopImmediatePropagation()
+            return false
+          }
+        }, true)
+      })
 
-    // Initial security activation
-    runInvisibleSecurity()
+      // Monitor for breakthrough attempts
+      const monitorBreakthroughAttempts = setInterval(() => {
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes('firefox')
+        const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
+        
+        if (!isAdminBrowser || !hasAdminSession) {
+          console.log('🚨 BREAKTHROUGH ATTEMPT DETECTED - ACTIVATING COUNTERMEASURES')
+          console.log('👻 INVISIBLE DEFENSE SYSTEMS REPELLING ATTACK')
+          
+          // Advanced countermeasures
+          try {
+            // Redirect attackers to harmless page
+            if (Math.random() > 0.8) {
+              window.location.href = 'about:blank'
+            }
+            
+            // Disable developer tools
+            if (window.outerHeight - window.innerHeight > 200) {
+              console.log('🚫 DEVELOPER TOOLS DETECTED - BLOCKING ACCESS')
+              document.body.innerHTML = '<div style="color: red; text-align: center; margin-top: 50vh;">Access Denied</div>'
+            }
+          } catch (error) {
+            console.log('🛡️ Countermeasures self-protected:', error)
+          }
+        }
+      }, 1000)
 
-    return () => {
-      if (securityInterval.current) clearInterval(securityInterval.current)
-      if (parabolicBoost.current) clearInterval(parabolicBoost.current)
+      // Advanced network monitoring
+      const originalFetch = window.fetch
+      window.fetch = async (...args) => {
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes('firefox')
+        const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
+        
+        if (!isAdminBrowser || !hasAdminSession) {
+          console.log('🚨 UNAUTHORIZED NETWORK REQUEST BLOCKED')
+          console.log('🌐 INVISIBLE NETWORK PROTECTION ACTIVE')
+          throw new Error('Network access denied - Invisible protection active')
+        }
+        
+        console.log('👑 ADMIN NETWORK REQUEST APPROVED')
+        return originalFetch(...args)
+      }
+
+      return () => {
+        clearInterval(monitorBreakthroughAttempts)
+      }
     }
+
+    activateInvisibleSecurity()
   }, [])
 
-  // Invisible component - users never see this UI
+  // Completely invisible component
   return null
 }
