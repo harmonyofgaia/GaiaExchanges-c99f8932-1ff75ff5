@@ -1,4 +1,3 @@
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card } from '@/components/ui/card'
 import { AdminDashboard } from './AdminDashboard'
@@ -14,6 +13,8 @@ import { UniversalSatelliteTracker } from './UniversalSatelliteTracker'
 import { EnhancedSuspiciousTransactions } from './EnhancedSuspiciousTransactions'
 import { TransactionReversalSystem } from './TransactionReversalSystem'
 import { MasterDefenseOrchestrator } from './MasterDefenseOrchestrator'
+import { AdminAnalyticsDashboard } from './AdminAnalyticsDashboard'
+import { AutonomousMastermind } from './AutonomousMastermind'
 
 export function AdminDashboardTabs() {
   return (
@@ -21,6 +22,8 @@ export function AdminDashboardTabs() {
       <TabsList className="grid w-full grid-cols-12 mb-6">
         <TabsTrigger value="transparency">🔍 Transparency</TabsTrigger>
         <TabsTrigger value="master-defense">🧠 Master Defense</TabsTrigger>
+        <TabsTrigger value="analytics">📊 Analytics</TabsTrigger>
+        <TabsTrigger value="mastermind">🤖 Mastermind</TabsTrigger>
         <TabsTrigger value="dashboard">System Dashboard</TabsTrigger>
         <TabsTrigger value="security">Advanced Security</TabsTrigger>
         <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
@@ -39,6 +42,14 @@ export function AdminDashboardTabs() {
 
       <TabsContent value="master-defense">
         <MasterDefenseOrchestrator />
+      </TabsContent>
+
+      <TabsContent value="analytics">
+        <AdminAnalyticsDashboard />
+      </TabsContent>
+
+      <TabsContent value="mastermind">
+        <AutonomousMastermind />
       </TabsContent>
       
       <TabsContent value="dashboard">

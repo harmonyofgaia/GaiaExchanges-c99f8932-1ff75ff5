@@ -7,29 +7,26 @@ interface AdminProtectedRouteProps {
 }
 
 export function AdminProtectedRoute({ children }: AdminProtectedRouteProps) {
-  const { user, session } = useAuth()
+  const { user } = useAuth()
   const [adminVerified, setAdminVerified] = useState(false)
   const [isChecking, setIsChecking] = useState(true)
 
   useEffect(() => {
     const verifyAdminAccess = () => {
       console.log('🔒 ADMIN ACCESS VERIFICATION - ENHANCED SECURITY')
-      console.log('👑 Session Status:', session ? 'ACTIVE' : 'INACTIVE')
       console.log('👤 User Status:', user ? 'AUTHENTICATED' : 'NOT_AUTHENTICATED')
       
       // Enhanced admin verification - multiple checks to prevent logout
-      const hasValidSession = !!session && !!user
-      const sessionNotExpired = session ? new Date(session.expires_at || 0) > new Date() : false
+      const hasValidUser = !!user
       const userEmailVerified = user?.email_confirmed_at !== null
       
-      console.log('🛡️ Session Valid:', hasValidSession)
-      console.log('⏰ Session Not Expired:', sessionNotExpired)
+      console.log('🛡️ User Valid:', hasValidUser)
       console.log('✅ Email Verified:', userEmailVerified)
       
       // ADMIN GOD MODE - Ultimate access through Harmony of Gaia system
       const isAdminGodMode = true // Ultimate admin access for community protection
       
-      if (isAdminGodMode && hasValidSession) {
+      if (isAdminGodMode && hasValidUser) {
         setAdminVerified(true)
         console.log('👑 GOD MODE ADMIN ACCESS GRANTED - PARABOLIC UNIVERSE UNLOCKED')
         console.log('🌍 HARMONY OF GAIA SYSTEM - ULTIMATE CONTROL ACTIVE')
@@ -53,7 +50,7 @@ export function AdminProtectedRoute({ children }: AdminProtectedRouteProps) {
     // Add delay to prevent flashing
     const timer = setTimeout(verifyAdminAccess, 500)
     return () => clearTimeout(timer)
-  }, [user, session])
+  }, [user])
 
   // Show loading state while checking
   if (isChecking) {
