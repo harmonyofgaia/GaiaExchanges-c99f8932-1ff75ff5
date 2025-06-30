@@ -1,3 +1,4 @@
+
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { ParabolicCommandCenter } from '@/components/admin/ParabolicCommandCenter'
 import { GlobalExchangeIntegration } from '@/components/marketing/GlobalExchangeIntegration'
@@ -9,6 +10,8 @@ import { QuantumGlobalSearchEngine } from '@/components/admin/QuantumGlobalSearc
 import { BlockchainRollbackManager } from '@/components/admin/BlockchainRollbackManager'
 import { QuantumGlobalCommandCenter } from '@/components/admin/QuantumGlobalCommandCenter'
 import { UltimateAdminControls } from '@/components/admin/UltimateAdminControls'
+import { QuantumGameInventory } from '@/components/admin/QuantumGameInventory'
+import { IntellectualPropertyProtection } from '@/components/legal/IntellectualPropertyProtection'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function Admin() {
@@ -21,17 +24,20 @@ export default function Admin() {
               👑 GAiA ULTIMATE QUANTUM ADMIN CENTER - GODFATHER MODE
             </h1>
             <p className="text-gray-300 text-lg">
-              20 Quantum Computers • Global Search Engine • Ultimate Control • Infinite Power
+              20 Quantum Computers • Global Search Engine • Ultimate Control • Infinite Power • Gaming Universe
             </p>
           </div>
           
           <Tabs defaultValue="quantum-command" className="w-full">
-            <TabsList className="grid w-full grid-cols-10 bg-black/50 backdrop-blur-md border border-purple-500/20">
+            <TabsList className="grid w-full grid-cols-11 bg-black/50 backdrop-blur-md border border-purple-500/20 text-xs">
               <TabsTrigger value="quantum-command" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                 👑 Quantum Command
               </TabsTrigger>
               <TabsTrigger value="ultimate-controls" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
                 ⚡ Ultimate Controls
+              </TabsTrigger>
+              <TabsTrigger value="game-inventory" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+                🎮 Game Inventory
               </TabsTrigger>
               <TabsTrigger value="command" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
                 💻 Command Center
@@ -54,8 +60,8 @@ export default function Admin() {
               <TabsTrigger value="3d-designer" className="data-[state=active]:bg-pink-500/20 data-[state=active]:text-pink-400">
                 🎨 3D Designer
               </TabsTrigger>
-              <TabsTrigger value="masterplan" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-                🧠 Masterplan
+              <TabsTrigger value="legal-protection" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
+                🛡️ Legal Protection
               </TabsTrigger>
             </TabsList>
             
@@ -65,6 +71,10 @@ export default function Admin() {
             
             <TabsContent value="ultimate-controls" className="space-y-6 mt-6">
               <UltimateAdminControls />
+            </TabsContent>
+            
+            <TabsContent value="game-inventory" className="space-y-6 mt-6">
+              <QuantumGameInventory />
             </TabsContent>
             
             <TabsContent value="command" className="space-y-6 mt-6">
@@ -95,8 +105,8 @@ export default function Admin() {
               <Advanced3DDesigner />
             </TabsContent>
             
-            <TabsContent value="masterplan" className="space-y-6 mt-6">
-              <MasterplanEngine />
+            <TabsContent value="legal-protection" className="space-y-6 mt-6">
+              <IntellectualPropertyProtection />
             </TabsContent>
           </Tabs>
         </div>

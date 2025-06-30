@@ -3,6 +3,9 @@ import { CoralReefNFTMarketplace } from '@/components/CoralReefNFTMarketplace'
 import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
 import { EnhancedDownloadLinks } from '@/components/downloads/EnhancedDownloadLinks'
 import { EnhancedWormsArena } from '@/components/EnhancedWormsArena'
+import { EnhancedLandscapeShowcase } from '@/components/EnhancedLandscapeShowcase'
+import { SnakeGame } from '@/components/SnakeGame'
+import { ExclusiveNFTShowcase } from '@/components/ExclusiveNFTShowcase'
 
 const Webshop = () => {
   return (
@@ -16,18 +19,27 @@ const Webshop = () => {
             Purchase NFTs that make a real difference in the world • Powered by GAiA Token
           </p>
           <p className="text-green-400 mt-1">
-            Visit www.gaiaexchange.net for complete trading experience
+            Visit www.gaiaexchanges.net for complete trading experience
           </p>
         </div>
         
         {/* Enhanced Download Links */}
         <EnhancedDownloadLinks />
         
+        {/* Ultra-High Quality Landscape Showcase */}
+        <EnhancedLandscapeShowcase />
+        
+        {/* Exclusive NFT Collection */}
+        <ExclusiveNFTShowcase />
+        
         {/* GAiA Landscape NFT Marketplace */}
         <GamingNFTMarketplace />
         
         {/* Enhanced Space Worms Game */}
         <EnhancedWormsArena />
+        
+        {/* Snake Game */}
+        <SnakeGame />
         
         {/* Coral Reef NFT Marketplace */}
         <CoralReefNFTMarketplace />
