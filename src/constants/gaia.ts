@@ -35,6 +35,7 @@ export const GAIA_TOKEN = {
   // Token Economics
   DECIMALS: 9,
   TOTAL_SUPPLY: 1000000000, // 1 Billion
+  INITIAL_PRICE: 0.00012345,
   
   // Features
   FEATURES: [
@@ -47,6 +48,36 @@ export const GAIA_TOKEN = {
     'Reforestation Projects'
   ]
 } as const
+
+// GAIA METRICS - Initial values for the system
+export const GAIA_METRICS = {
+  INITIAL_PRICE: 0.00012345,
+  INITIAL_HOLDERS: 1247,
+  INITIAL_MARKET_CAP: 123450,
+  INITIAL_VOLUME: 847000,
+  INITIAL_TRANSACTIONS: 2847,
+  NETWORK_SPEED: 99.7,
+  SECURITY_SCORE: 100,
+  ECOSYSTEM_HEALTH: 98.9,
+  DRAGON_POWER: 99.9
+} as const
+
+// Helper functions for formatting
+export const formatGaiaPrice = (price: number): string => {
+  if (typeof price !== 'number' || isNaN(price)) {
+    console.warn('⚠️ Invalid price value provided to formatGaiaPrice:', price)
+    return '$0.00000000'
+  }
+  return `$${price.toFixed(8)}`
+}
+
+export const formatGaiaNumber = (number: number): string => {
+  if (typeof number !== 'number' || isNaN(number)) {
+    console.warn('⚠️ Invalid number value provided to formatGaiaNumber:', number)
+    return '0'
+  }
+  return number.toLocaleString()
+}
 
 // BRAND VERIFICATION - ENSURE NO CONFUSION
 export const BRAND_CLARIFICATION = {
