@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
@@ -9,6 +10,7 @@ import Swap from './pages/Swap'
 import Wallet from './pages/Wallet'
 import SecureAdmin from './pages/SecureAdmin'
 import SecureVault from './pages/SecureVault'
+import GaiasProjects from './pages/GaiasProjects'
 import { UserOnlyProtectedRoute } from './components/auth/UserOnlyProtectedRoute'
 import { GlobalSEOOptimizer } from './components/seo/GlobalSEOOptimizer'
 import AdminLogin from './pages/AdminLogin'
@@ -51,6 +53,12 @@ function App() {
           <Route path="/wallet" element={
             <UserOnlyProtectedRoute>
               <Wallet />
+            </UserOnlyProtectedRoute>
+          } />
+
+          <Route path="/gaias-projects" element={
+            <UserOnlyProtectedRoute>
+              <GaiasProjects />
             </UserOnlyProtectedRoute>
           } />
           
