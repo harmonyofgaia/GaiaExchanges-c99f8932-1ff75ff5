@@ -1,123 +1,113 @@
 
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Link, useLocation } from 'react-router-dom'
 import { 
   Home, 
-  Shield, 
-  Crown,
-  Settings,
-  Activity,
-  Lock,
-  Eye,
-  ChevronRight,
-  Globe,
-  Wallet,
-  Gamepad2,
+  Wallet, 
+  Gamepad2, 
+  TrendingUp, 
+  Settings, 
+  Info, 
+  Mail, 
+  DollarSign, 
+  Download,
   Hammer,
-  TrendingUp,
+  Activity,
   BarChart3,
-  Users,
-  Phone,
-  DollarSign,
-  Download
+  Shield,
+  User,
+  ChevronRight
 } from 'lucide-react'
 
-export function HoverSidebar() {
+const HoverSidebar = () => {
   const [isHovered, setIsHovered] = useState(false)
+  const location = useLocation()
 
-  const navigationItems = [
-    { path: '/', icon: Home, label: 'Home', description: 'Main Dashboard' },
-    { path: '/wallet', icon: Wallet, label: 'GAiA Wallet', description: 'Crypto Wallet' },
-    { path: '/gaming', icon: Gamepad2, label: 'Gaming Hub', description: 'Play Games' },
-    { path: '/coin-crafter', icon: Hammer, label: 'Coin Crafter', description: 'Create Tokens' },
-    { path: '/live-tracking', icon: Activity, label: 'Live Tracking', description: 'Real-time Data' },
-    { path: '/exchange', icon: TrendingUp, label: 'Exchange', description: 'Trade Crypto' },
-    { path: '/system-status', icon: Settings, label: 'System Status', description: 'Health & Performance', badge: 'NEW' },
-    { path: '/comprehensive-status', icon: BarChart3, label: 'Full Status', description: 'Complete Analytics' },
-    { path: '/ultimate-security', icon: Shield, label: 'Ultimate Security', description: 'Quantum Protection' },
-    { path: '/immortal-security', icon: Lock, label: 'Immortal Security', description: 'Dragon Defense' },
-    { path: '/about', icon: Users, label: 'About Us', description: 'Our Story' },
-    { path: '/contact', icon: Phone, label: 'Contact', description: 'Get in Touch' },
-    { path: '/pricing', icon: DollarSign, label: 'Pricing', description: 'Plans & Pricing' },
-    { path: '/downloads', icon: Download, label: 'Downloads', description: 'Apps & Files' },
-    { path: '/admin', icon: Crown, label: 'Admin Panel', description: 'God Mode Control' },
-    { path: '/secure-admin', icon: Eye, label: 'Secure Vault', description: 'Admin Access' }
+  const menuItems = [
+    { icon: Home, label: 'Home', path: '/' },
+    { icon: Wallet, label: 'Wallet', path: '/wallet' },
+    { icon: Gamepad2, label: 'Gaming', path: '/gaming' },
+    { icon: TrendingUp, label: 'Exchange', path: '/exchange' },
+    { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter' },
+    { icon: Activity, label: 'Live Tracking', path: '/live-tracking' },
+    { icon: BarChart3, label: 'System Status', path: '/comprehensive-status' },
+    { icon: Info, label: 'About', path: '/about' },
+    { icon: Mail, label: 'Contact', path: '/contact' },
+    { icon: DollarSign, label: 'Pricing', path: '/pricing' },
+    { icon: Download, label: 'Downloads', path: '/downloads' },
+    { icon: Shield, label: 'Admin', path: '/admin' },
+    { icon: User, label: 'Secure Admin', path: '/secure-admin' }
   ]
 
   return (
-    <>
-      {/* Hover trigger area */}
-      <div 
-        className="fixed left-0 top-0 w-4 h-full z-40 bg-transparent"
-        onMouseEnter={() => setIsHovered(true)}
-      />
-      
-      {/* Sidebar */}
-      <div 
-        className={`fixed left-0 top-0 h-full z-50 transition-transform duration-300 ${
-          isHovered ? 'translate-x-0' : '-translate-x-full'
-        }`}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <Card className="h-full w-80 rounded-none border-r-2 border-green-500/30 bg-gradient-to-b from-black/95 via-gray-900/95 to-green-900/95 backdrop-blur-md">
-          <CardContent className="p-6 h-full flex flex-col">
-            {/* Header */}
-            <div className="text-center mb-8">
-              <div className="text-4xl mb-2">🌍</div>
-              <h2 className="text-xl font-bold text-green-400">Harmony of Gaia</h2>
-              <p className="text-sm text-muted-foreground">Navigation Hub</p>
-            </div>
+    <div 
+      className={`fixed left-0 top-0 h-full bg-gradient-to-b from-purple-900/95 to-blue-900/95 backdrop-blur-md border-r border-purple-500/30 transition-all duration-300 z-50 ${
+        isHovered ? 'w-64' : 'w-16'
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="flex flex-col h-full">
+        {/* Logo/Brand */}
+        <div className="p-4 border-b border-purple-500/30">
+          <div className="flex items-center gap-3">
+            <div className="text-2xl">🌍</div>
+            {isHovered && (
+              <div>
+                <h2 className="text-purple-400 font-bold text-lg">GAiA</h2>
+                <p className="text-xs text-muted-foreground">Harmony of Culture</p>
+              </div>
+            )}
+          </div>
+        </div>
 
-            {/* Navigation Items */}
-            <div className="space-y-3 flex-1 overflow-y-auto">
-              {navigationItems.map((item) => {
-                const IconComponent = item.icon
-                return (
-                  <Link key={item.path} to={item.path}>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start h-auto p-4 hover:bg-green-500/10 hover:border-green-500/30 border border-transparent transition-all duration-200"
-                    >
-                      <div className="flex items-center gap-3 w-full">
-                        <IconComponent className="h-5 w-5 text-green-400 flex-shrink-0" />
-                        <div className="flex-1 text-left">
-                          <div className="flex items-center gap-2">
-                            <span className="font-medium text-white">{item.label}</span>
-                            {item.badge && (
-                              <Badge className="bg-green-600 text-white text-xs px-2 py-0">
-                                {item.badge}
-                              </Badge>
-                            )}
-                          </div>
-                          <div className="text-sm text-muted-foreground">{item.description}</div>
-                        </div>
-                        <ChevronRight className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                      </div>
-                    </Button>
+        {/* Navigation Menu */}
+        <nav className="flex-1 py-4">
+          <ul className="space-y-2">
+            {menuItems.map((item) => {
+              const Icon = item.icon
+              const isActive = location.pathname === item.path
+              
+              return (
+                <li key={item.path}>
+                  <Link
+                    to={item.path}
+                    className={`flex items-center gap-3 px-4 py-3 mx-2 rounded-lg transition-all duration-200 ${
+                      isActive
+                        ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
+                        : 'text-gray-300 hover:bg-purple-500/10 hover:text-purple-400'
+                    }`}
+                  >
+                    <Icon className="h-5 w-5 flex-shrink-0" />
+                    {isHovered && (
+                      <>
+                        <span className="font-medium">{item.label}</span>
+                        {isActive && <ChevronRight className="h-4 w-4 ml-auto" />}
+                      </>
+                    )}
                   </Link>
-                )
-              })}
-            </div>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
 
-            {/* Status Footer */}
-            <div className="mt-6 p-4 bg-green-900/20 rounded-lg border border-green-500/30">
-              <div className="flex items-center gap-2 mb-2">
-                <Shield className="h-4 w-4 text-green-400" />
-                <span className="text-sm font-medium text-green-400">System Status</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <Badge className="bg-green-600 text-white text-xs">
-                  ALL SYSTEMS OPERATIONAL
-                </Badge>
-                <Globe className="h-4 w-4 text-green-400" />
-              </div>
+        {/* Footer */}
+        <div className="p-4 border-t border-purple-500/30">
+          {isHovered && (
+            <div className="text-center">
+              <p className="text-xs text-muted-foreground">
+                GAiA Platform v2.0
+              </p>
+              <p className="text-xs text-purple-400">
+                Harmony of Culture
+              </p>
             </div>
-          </CardContent>
-        </Card>
+          )}
+        </div>
       </div>
-    </>
+    </div>
   )
 }
+
+export default HoverSidebar
