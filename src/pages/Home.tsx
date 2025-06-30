@@ -10,8 +10,13 @@ import { HomeBackground } from '@/components/home/HomeBackground'
 import { MatrixBackground } from '@/components/ui/matrix-background'
 import { UniversalStyleController } from '@/components/admin/UniversalStyleController'
 import { HoverSidebar } from '@/components/HoverSidebar'
+import { WorldRankingDashboard } from '@/components/home/WorldRankingDashboard'
+import { AdminLayoutEditor } from '@/components/admin/AdminLayoutEditor'
+import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 
 const Home = () => {
+  const { isAdmin } = useSecureAdmin()
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       <HomeBackground />
@@ -19,9 +24,11 @@ const Home = () => {
       <RobotAdvertisement />
       <UniversalStyleController />
       <HoverSidebar />
+      {isAdmin && <AdminLayoutEditor />}
       
       <div className="container mx-auto px-4 py-8 relative z-20">
         <HeroSection />
+        <WorldRankingDashboard />
         <FeatureGrid />
         <CommunityStats />
         <GameUpdatePreview />

@@ -3,49 +3,49 @@ import { useState, useEffect } from 'react'
 
 export function useSecureAdmin() {
   const [isAdmin, setIsAdmin] = useState(false)
-  const [isValidating, setIsValidating] = useState(true)
 
   useEffect(() => {
-    // Check for admin status from localStorage or session
-    const adminStatus = localStorage.getItem('harmony-admin-authenticated')
-    const sessionValid = sessionStorage.getItem('admin-session-active')
-    
-    // Simple admin check - in production this would be more secure
-    if (adminStatus === 'true' && sessionValid === 'true') {
-      setIsAdmin(true)
-    } else {
-      // Auto-authenticate for demo purposes
-      // In production, this would require proper authentication
-      setIsAdmin(true)
-      localStorage.setItem('harmony-admin-authenticated', 'true')
-      sessionStorage.setItem('admin-session-active', 'true')
+    const checkAdminStatus = () => {
+      const isFirefoxBrowser = navigator.userAgent.toLowerCase().includes('firefox')
+      const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
+      const isAdminLoggedIn = localStorage.getItem('admin-logged-in') === 'true'
+      
+      const adminStatus = isFirefoxBrowser && hasAdminSession && isAdminLoggedIn
+      setIsAdmin(adminStatus)
+      
+      if (adminStatus) {
+        console.log('👑 ADMIN ACCESS CONFIRMED - ALL FEATURES UNLOCKED')
+      }
     }
+
+    checkAdminStatus()
     
-    setIsValidating(false)
+    // Check admin status every 5 seconds
+    const interval = setInterval(checkAdminStatus, 5000)
+    
+    return () => clearInterval(interval)
   }, [])
 
-  const logout = () => {
-    setIsAdmin(false)
-    localStorage.removeItem('harmony-admin-authenticated')
-    sessionStorage.removeItem('admin-session-active')
-  }
-
   const grantAdminAccess = () => {
-    setIsAdmin(true)
-    localStorage.setItem('harmony-admin-authenticated', 'true')
-    sessionStorage.setItem('admin-session-active', 'true')
+    const isFirefoxBrowser = navigator.userAgent.toLowerCase().includes('firefox')
+    
+    if (isFirefoxBrowser) {
+      sessionStorage.setItem('admin-session-active', 'true')
+      localStorage.setItem('admin-logged-in', 'true')
+      setIsAdmin(true)
+      console.log('👑 ADMIN ACCESS GRANTED - GOD MODE ACTIVATED')
+    }
   }
 
   const revokeAdminAccess = () => {
-    setIsAdmin(false)
-    localStorage.removeItem('harmony-admin-authenticated')
     sessionStorage.removeItem('admin-session-active')
+    localStorage.removeItem('admin-logged-in')
+    setIsAdmin(false)
+    console.log('🚪 ADMIN ACCESS REVOKED')
   }
 
   return {
     isAdmin,
-    isValidating,
-    logout,
     grantAdminAccess,
     revokeAdminAccess
   }
