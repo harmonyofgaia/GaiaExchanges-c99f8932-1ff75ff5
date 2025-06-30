@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -6,7 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Brain, Users, Globe, Zap, TrendingUp, Gift, Recycle, Headphones, Video, User, Eye } from 'lucide-react'
+import { Brain, Users, Globe, Zap, TrendingUp, Gift, Recycle, Headphones, Video, User, Eye, Sun, Battery, Leaf } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface BusinessMeeting {
@@ -39,6 +38,8 @@ interface FutureGiveaway {
   eligibilityTokens: number
   launchDate: string
   greenImpact: string
+  solarFeatures?: string[]
+  techSpecs?: string[]
 }
 
 export function QuantumPartnershipEngine() {
@@ -118,27 +119,77 @@ export function QuantumPartnershipEngine() {
   const [futureGiveaways, setFutureGiveaways] = useState<FutureGiveaway[]>([
     {
       id: 1,
-      item: 'GAiA Green Bicycle',
-      description: 'Premium electric bicycle made from recycled materials, powered by green energy',
+      item: '🚴‍♂️ GAiA Solar-Powered Bicycle',
+      description: 'Revolutionary electric bicycle with integrated solar panels, regenerative braking, and quantum battery technology',
       eligibilityTokens: 5000,
       launchDate: '2024-Q2',
-      greenImpact: 'Carbon-neutral transportation solution'
+      greenImpact: 'Zero-emission transportation with energy generation capability',
+      solarFeatures: [
+        'Integrated flexible solar panels on frame',
+        'Solar charging while riding or parked',
+        'Backup solar power bank included',
+        'Weather-resistant quantum cells'
+      ],
+      techSpecs: [
+        '50km range on single charge',
+        'Solar panel output: 200W peak',
+        'Regenerative braking system',
+        'Smart IoT connectivity'
+      ]
     },
     {
       id: 2,
-      item: 'GAiA Eco Smartphone',
-      description: 'Sustainable smartphone with biodegradable case and solar charging capability',
+      item: '📱 GAiA Quantum Eco Smartphone',
+      description: 'Revolutionary smartphone with solar charging, biodegradable case, and GAiA token integration',
       eligibilityTokens: 10000,
       launchDate: '2024-Q3',
-      greenImpact: 'Reduces electronic waste by 80%'
+      greenImpact: 'Reduces electronic waste by 90% with solar-powered operation',
+      solarFeatures: [
+        'Back-panel solar charging system',
+        'Never needs wall charging',
+        'Solar power sharing capability',
+        'Emergency solar power mode'
+      ],
+      techSpecs: [
+        'Built-in GAiA wallet',
+        'Biodegradable materials',
+        'Solar efficiency: 25%',
+        '7-day solar power reserve'
+      ]
     },
     {
       id: 3,
-      item: 'Global Green Shopping Cards',
-      description: 'Gift cards accepted at eco-friendly shops worldwide, funded by burned GAiA tokens',
+      item: '💳 Global Green Shopping Cards',
+      description: 'Premium gift cards for eco-friendly shops worldwide, powered by burned GAiA tokens',
       eligibilityTokens: 2500,
       launchDate: '2024-Q1',
-      greenImpact: 'Supports sustainable businesses globally'
+      greenImpact: 'Supports 10,000+ sustainable businesses globally',
+      techSpecs: [
+        'Valid at 50,000+ green shops',
+        'Automatic carbon offset tracking',
+        'Digital and physical cards',
+        'Real-time impact dashboard'
+      ]
+    },
+    {
+      id: 4,
+      item: '🏡 GAiA Solar Home Kit',
+      description: 'Complete home solar system with GAiA token rewards for energy production',
+      eligibilityTokens: 25000,
+      launchDate: '2024-Q4',
+      greenImpact: 'Powers entire home with surplus energy for community',
+      solarFeatures: [
+        'Complete solar panel system',
+        'Smart energy management',
+        'Earn GAiA tokens for surplus',
+        'Community energy sharing'
+      ],
+      techSpecs: [
+        '5kW solar panel array',
+        'Tesla Powerwall integration',
+        'Smart grid connectivity',
+        'AI energy optimization'
+      ]
     }
   ])
 
@@ -217,7 +268,7 @@ export function QuantumPartnershipEngine() {
 
   return (
     <div className="space-y-6">
-      {/* Main Control Panel */}
+      {/* Enhanced Main Control Panel */}
       <Card className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 border-blue-500/50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-blue-400">
@@ -234,10 +285,13 @@ export function QuantumPartnershipEngine() {
             <Badge className="bg-purple-600 animate-pulse">
               🌱 GREEN PROJECTS: {greenProjectsFunded}
             </Badge>
+            <Badge className="bg-orange-600 animate-pulse">
+              ☀️ SOLAR GIVEAWAYS: 4
+            </Badge>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
               <div className="text-3xl font-bold text-blue-400">{aiProcessing.toFixed(1)}%</div>
               <div className="text-sm text-muted-foreground">AI Analysis Power</div>
@@ -253,6 +307,11 @@ export function QuantumPartnershipEngine() {
             <div className="text-center p-4 bg-orange-900/30 rounded-lg">
               <div className="text-3xl font-bold text-orange-400">{meetings.length}</div>
               <div className="text-sm text-muted-foreground">Active Meetings</div>
+            </div>
+            <div className="text-center p-4 bg-yellow-900/30 rounded-lg">
+              <Sun className="h-8 w-8 text-yellow-400 mx-auto mb-1" />
+              <div className="text-2xl font-bold text-yellow-400">SOLAR</div>
+              <div className="text-sm text-muted-foreground">Powered Giveaways</div>
             </div>
           </div>
 
@@ -376,22 +435,61 @@ export function QuantumPartnershipEngine() {
         </CardContent>
       </Card>
 
-      {/* Future Giveaways */}
-      <Card className="border-yellow-500/30 bg-yellow-900/20">
+      {/* Enhanced Solar-Powered Future Giveaways */}
+      <Card className="border-yellow-500/30 bg-gradient-to-br from-yellow-900/20 to-orange-900/20">
         <CardHeader>
-          <CardTitle className="text-yellow-400">🎁 FUTURE COMMUNITY GIVEAWAYS</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-yellow-400">
+            <Gift className="h-6 w-6" />
+            🎁 FUTURE SOLAR GIVEAWAYS - GREEN TECHNOLOGY REVOLUTION
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {futureGiveaways.map(giveaway => (
               <Card key={giveaway.id} className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 border-yellow-500/20">
-                <CardContent className="p-4">
+                <CardContent className="p-6">
                   <div className="text-center mb-4">
-                    <Gift className="h-12 w-12 text-yellow-400 mx-auto mb-2" />
-                    <h3 className="text-lg font-bold text-yellow-400">{giveaway.item}</h3>
+                    <div className="flex items-center justify-center gap-2 mb-3">
+                      <Gift className="h-8 w-8 text-yellow-400" />
+                      {giveaway.solarFeatures && <Sun className="h-6 w-6 text-orange-400" />}
+                    </div>
+                    <h3 className="text-xl font-bold text-yellow-400">{giveaway.item}</h3>
                   </div>
                   
-                  <p className="text-sm text-muted-foreground mb-3">{giveaway.description}</p>
+                  <p className="text-sm text-muted-foreground mb-4">{giveaway.description}</p>
+                  
+                  {/* Solar Features Section */}
+                  {giveaway.solarFeatures && (
+                    <div className="mb-4">
+                      <h4 className="text-lg font-bold text-orange-400 mb-2 flex items-center gap-2">
+                        <Sun className="h-4 w-4" />
+                        Solar Features
+                      </h4>
+                      <ul className="space-y-1">
+                        {giveaway.solarFeatures.map((feature, index) => (
+                          <li key={index} className="text-xs text-green-300 flex items-center gap-2">
+                            <Battery className="h-3 w-3" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Tech Specs Section */}
+                  {giveaway.techSpecs && (
+                    <div className="mb-4">
+                      <h4 className="text-lg font-bold text-blue-400 mb-2">🔧 Tech Specifications</h4>
+                      <ul className="space-y-1">
+                        {giveaway.techSpecs.map((spec, index) => (
+                          <li key={index} className="text-xs text-blue-300 flex items-center gap-2">
+                            <Zap className="h-3 w-3" />
+                            {spec}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   
                   <div className="space-y-2">
                     <div className="flex justify-between">
@@ -402,8 +500,11 @@ export function QuantumPartnershipEngine() {
                       <span className="text-xs text-muted-foreground">Launch:</span>
                       <span className="text-xs text-blue-400">{giveaway.launchDate}</span>
                     </div>
-                    <div className="mt-3 p-2 bg-green-900/30 rounded">
-                      <div className="text-xs text-green-300">🌱 {giveaway.greenImpact}</div>
+                    <div className="mt-3 p-3 bg-green-900/30 rounded">
+                      <div className="text-xs text-green-300 flex items-center gap-2">
+                        <Leaf className="h-3 w-3" />
+                        {giveaway.greenImpact}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -413,38 +514,87 @@ export function QuantumPartnershipEngine() {
         </CardContent>
       </Card>
 
-      {/* Token Burning Mechanism */}
+      {/* Enhanced Token Burning Mechanism */}
       <Card className="border-red-500/30 bg-red-900/20">
         <CardHeader>
-          <CardTitle className="text-red-400">🔥 GAiA TOKEN BURNING MECHANISM</CardTitle>
+          <CardTitle className="text-red-400">🔥 GAiA TOKEN BURNING MECHANISM - SOLAR REINVESTMENT</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-lg font-bold text-white mb-3">Burning Statistics</h4>
+              <h4 className="text-lg font-bold text-white mb-3">Enhanced Burning Statistics</h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span>Total Tokens Burned:</span>
                   <span className="text-red-400 font-bold">{tokensBurned.toLocaleString()} GAiA</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Green Projects Funded:</span>
+                  <span>Solar Projects Funded:</span>
+                  <span className="text-yellow-400 font-bold">25+</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Green Projects Total:</span>
                   <span className="text-green-400 font-bold">{greenProjectsFunded}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Environmental Impact:</span>
-                  <span className="text-blue-400 font-bold">500+ tons CO2 offset</span>
+                  <span>Solar Energy Generated:</span>
+                  <span className="text-orange-400 font-bold">500MWh+</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>CO2 Offset:</span>
+                  <span className="text-blue-400 font-bold">2,500+ tons</span>
                 </div>
               </div>
             </div>
             
             <div>
-              <h4 className="text-lg font-bold text-white mb-3">Reinvestment Areas</h4>
+              <h4 className="text-lg font-bold text-white mb-3">Solar Reinvestment Areas</h4>
               <div className="space-y-2">
-                <Badge className="bg-green-600 w-full justify-center">🌱 Renewable Energy Projects</Badge>
-                <Badge className="bg-blue-600 w-full justify-center">🌊 Ocean Cleanup Initiatives</Badge>
-                <Badge className="bg-purple-600 w-full justify-center">🌳 Reforestation Programs</Badge>
-                <Badge className="bg-orange-600 w-full justify-center">♻️ Waste Reduction Technology</Badge>
+                <Badge className="bg-yellow-600 w-full justify-center py-2">
+                  <Sun className="h-3 w-3 mr-1" />
+                  Solar Bicycle Production
+                </Badge>
+                <Badge className="bg-orange-600 w-full justify-center py-2">
+                  <Battery className="h-3 w-3 mr-1" />
+                  Solar Phone Manufacturing
+                </Badge>
+                <Badge className="bg-green-600 w-full justify-center py-2">
+                  🌱 Solar Panel Installations
+                </Badge>
+                <Badge className="bg-blue-600 w-full justify-center py-2">
+                  🌊 Solar-Powered Ocean Cleanup
+                </Badge>
+                <Badge className="bg-purple-600 w-full justify-center py-2">
+                  🌳 Solar Forest Monitoring
+                </Badge>
+                <Badge className="bg-pink-600 w-full justify-center py-2">
+                  ♻️ Solar Recycling Centers
+                </Badge>
+              </div>
+            </div>
+          </div>
+
+          {/* Solar Impact Showcase */}
+          <div className="mt-6 p-4 bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-lg border border-yellow-500/20">
+            <h4 className="text-center text-xl font-bold text-yellow-400 mb-4">
+              ☀️ SOLAR REVOLUTION IMPACT
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+              <div>
+                <div className="text-3xl font-bold text-yellow-400">500+</div>
+                <div className="text-sm text-muted-foreground">Solar Bicycles Pre-Ordered</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-orange-400">1000+</div>
+                <div className="text-sm text-muted-foreground">Solar Phones Reserved</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-green-400">50+</div>
+                <div className="text-sm text-muted-foreground">Solar Homes Powered</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-blue-400">24/7</div>
+                <div className="text-sm text-muted-foreground">Solar Generation</div>
               </div>
             </div>
           </div>
