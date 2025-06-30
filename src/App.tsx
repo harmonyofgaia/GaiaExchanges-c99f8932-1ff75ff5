@@ -23,6 +23,11 @@ import SecureAdmin from '@/pages/SecureAdmin'
 import GaiasProjects from '@/pages/GaiasProjects'
 import TransparentWallet from '@/pages/TransparentWallet'
 
+// Import missing pages
+import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
+import LandscapeBuilder from '@/pages/LandscapeBuilder'
+import GaiaFighterGame from '@/pages/GaiaFighterGame'
+
 const queryClient = new QueryClient()
 
 function App() {
@@ -50,8 +55,12 @@ function App() {
                       <Route path="/security" element={<Security />} />
                       <Route path="/admin" element={<AdminLogin />} />
                       <Route path="/secure-admin" element={<SecureAdmin />} />
+                      <Route path="/secure-vault" element={<SecureAdmin />} />
                       <Route path="/gaias-projects" element={<GaiasProjects />} />
                       <Route path="/transparent-wallet" element={<TransparentWallet />} />
+                      <Route path="/coin-crafter" element={<GaiaCoinCrafter />} />
+                      <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+                      <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
                     </Routes>
                   </main>
                 </div>

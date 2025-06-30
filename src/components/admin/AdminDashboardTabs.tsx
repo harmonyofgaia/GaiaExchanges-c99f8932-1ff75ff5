@@ -1,6 +1,5 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Card } from '@/components/ui/card'
 import { AdminDashboard } from './AdminDashboard'
 import { AdvancedSecurityCenter } from './AdvancedSecurityCenter'
 import { UltimateSecuritySuite } from './UltimateSecuritySuite'
@@ -21,11 +20,13 @@ import { CommunityRecoveryDashboard } from './CommunityRecoveryDashboard'
 import { QuantumGlobalSearchEngine } from './QuantumGlobalSearchEngine'
 import { QuantumGlobalCommandCenter } from './QuantumGlobalCommandCenter'
 import { PhantomRecoveryEngine } from './PhantomRecoveryEngine'
+import { SelfTrainingKoalaAI } from './SelfTrainingKoalaAI'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="quantum-search" className="w-full">
-      <TabsList className="grid w-full grid-cols-12 mb-6">
+    <Tabs defaultValue="koala-ai" className="w-full">
+      <TabsList className="grid w-full grid-cols-13 mb-6">
+        <TabsTrigger value="koala-ai">🐨 Koala AI</TabsTrigger>
         <TabsTrigger value="quantum-search">🔍 Quantum Search</TabsTrigger>
         <TabsTrigger value="quantum-command">👑 Command Center</TabsTrigger>
         <TabsTrigger value="phantom-recovery">🛡️ Phantom Recovery</TabsTrigger>
@@ -40,6 +41,10 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
       </TabsList>
       
+      <TabsContent value="koala-ai">
+        <SelfTrainingKoalaAI />
+      </TabsContent>
+
       <TabsContent value="quantum-search">
         <QuantumGlobalSearchEngine />
       </TabsContent>
