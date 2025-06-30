@@ -7,11 +7,16 @@ import { AuthProvider } from "@/components/auth/AuthProvider"
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute"
 import { AdminOnlySecurityBarrier } from "@/components/admin/AdminOnlySecurityBarrier"
 import Home from "./pages/Home"
+import About from "./pages/About"
+import Contact from "./pages/Contact"
+import Pricing from "./pages/Pricing"
+import Downloads from "./pages/Downloads"
 import Admin from "./pages/Admin"
 import SecureAdmin from "./pages/SecureAdmin"
 import ImmortalSecurity from "./pages/ImmortalSecurity"
 import UltimateSecurity from "./pages/UltimateSecurity"
 import SystemStatus from "./pages/SystemStatus"
+import NotFound from "./pages/NotFound"
 
 const queryClient = new QueryClient()
 
@@ -25,6 +30,10 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/downloads" element={<Downloads />} />
               <Route 
                 path="/admin" 
                 element={
@@ -65,6 +74,7 @@ function App() {
                   </ProtectedRoute>
                 } 
               />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
         </AuthProvider>

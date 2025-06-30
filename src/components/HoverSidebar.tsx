@@ -13,7 +13,16 @@ import {
   Lock,
   Eye,
   ChevronRight,
-  Globe
+  Globe,
+  Wallet,
+  Gamepad2,
+  Hammer,
+  TrendingUp,
+  BarChart3,
+  Users,
+  Phone,
+  DollarSign,
+  Download
 } from 'lucide-react'
 
 export function HoverSidebar() {
@@ -21,9 +30,19 @@ export function HoverSidebar() {
 
   const navigationItems = [
     { path: '/', icon: Home, label: 'Home', description: 'Main Dashboard' },
-    { path: '/system-status', icon: Activity, label: 'System Status', description: 'Health & Performance', badge: 'NEW' },
+    { path: '/wallet', icon: Wallet, label: 'GAiA Wallet', description: 'Crypto Wallet' },
+    { path: '/gaming', icon: Gamepad2, label: 'Gaming Hub', description: 'Play Games' },
+    { path: '/coin-crafter', icon: Hammer, label: 'Coin Crafter', description: 'Create Tokens' },
+    { path: '/live-tracking', icon: Activity, label: 'Live Tracking', description: 'Real-time Data' },
+    { path: '/exchange', icon: TrendingUp, label: 'Exchange', description: 'Trade Crypto' },
+    { path: '/system-status', icon: Settings, label: 'System Status', description: 'Health & Performance', badge: 'NEW' },
+    { path: '/comprehensive-status', icon: BarChart3, label: 'Full Status', description: 'Complete Analytics' },
     { path: '/ultimate-security', icon: Shield, label: 'Ultimate Security', description: 'Quantum Protection' },
     { path: '/immortal-security', icon: Lock, label: 'Immortal Security', description: 'Dragon Defense' },
+    { path: '/about', icon: Users, label: 'About Us', description: 'Our Story' },
+    { path: '/contact', icon: Phone, label: 'Contact', description: 'Get in Touch' },
+    { path: '/pricing', icon: DollarSign, label: 'Pricing', description: 'Plans & Pricing' },
+    { path: '/downloads', icon: Download, label: 'Downloads', description: 'Apps & Files' },
     { path: '/admin', icon: Crown, label: 'Admin Panel', description: 'God Mode Control' },
     { path: '/secure-admin', icon: Eye, label: 'Secure Vault', description: 'Admin Access' }
   ]
@@ -53,7 +72,7 @@ export function HoverSidebar() {
             </div>
 
             {/* Navigation Items */}
-            <div className="space-y-3 flex-1">
+            <div className="space-y-3 flex-1 overflow-y-auto">
               {navigationItems.map((item) => {
                 const IconComponent = item.icon
                 return (
