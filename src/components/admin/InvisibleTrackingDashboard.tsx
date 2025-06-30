@@ -44,6 +44,15 @@ interface SecurityEvent {
   blocked: boolean
 }
 
+// Extend Navigator interface for optional properties
+interface ExtendedNavigator extends Navigator {
+  deviceMemory?: number
+  connection?: {
+    effectiveType?: string
+    downlink?: number
+  }
+}
+
 export function InvisibleTrackingDashboard() {
   const [trackedUsers, setTrackedUsers] = useState<TrackedUser[]>([])
   const [securityEvents, setSecurityEvents] = useState<SecurityEvent[]>([])
@@ -65,14 +74,15 @@ export function InvisibleTrackingDashboard() {
         const locationResponse = await fetch(`https://ipapi.co/${userIP}/json/`)
         const locationData = await locationResponse.json()
 
-        // Create comprehensive device fingerprint
+        // Create comprehensive device fingerprint with safe property access
+        const extendedNavigator = navigator as ExtendedNavigator
         const deviceFingerprint = btoa(
           navigator.userAgent + 
           screen.width + 'x' + screen.height +
           navigator.language +
           Intl.DateTimeFormat().resolvedOptions().timeZone +
-          navigator.hardwareConcurrency +
-          navigator.deviceMemory +
+          (navigator.hardwareConcurrency || 0) +
+          (extendedNavigator.deviceMemory || 0) +
           Date.now()
         )
 
@@ -103,8 +113,8 @@ export function InvisibleTrackingDashboard() {
             cookiesEnabled: navigator.cookieEnabled
           },
           networkData: {
-            connectionType: (navigator as any).connection?.effectiveType || 'Unknown',
-            downloadSpeed: (navigator as any).connection?.downlink || 0,
+            connectionType: extendedNavigator.connection?.effectiveType || 'Unknown',
+            downloadSpeed: extendedNavigator.connection?.downlink || 0,
             isp: locationData.org || 'Unknown'
           }
         }
