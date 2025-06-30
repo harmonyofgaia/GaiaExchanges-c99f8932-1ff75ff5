@@ -1,131 +1,91 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { Mail, MessageCircle, Phone, MapPin, Send } from 'lucide-react'
-import { useState } from 'react'
+import { Mail, MessageSquare, Phone, MapPin, Send } from 'lucide-react'
 import HoverSidebar from '@/components/HoverSidebar'
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Contact form submitted:', formData)
-    // Handle form submission here
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-900/20 via-blue-900/20 to-purple-900/20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20">
       <HoverSidebar />
       
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">
-          <Card className="mb-8 border-teal-500/30 bg-gradient-to-r from-teal-900/30 to-blue-900/30">
+          <Card className="mb-8 border-blue-500/30 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
             <CardHeader>
-              <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-400">
+              <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
                 📞 Contact GAiA
               </CardTitle>
               <p className="text-center text-xl text-muted-foreground">
-                Get in touch with our community team
+                Get in touch with our team
               </p>
             </CardHeader>
           </Card>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Contact Form */}
-            <Card className="border-blue-500/30 bg-blue-900/20">
+            <Card className="border-green-500/30 bg-green-900/20">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-400">
-                  <MessageCircle className="h-6 w-6" />
-                  Send us a message
-                </CardTitle>
+                <CardTitle className="text-green-400">💌 Send us a Message</CardTitle>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                      placeholder="Your name"
-                      className="bg-black/30 border-blue-500/30"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                      placeholder="your.email@example.com"
-                      className="bg-black/30 border-blue-500/30"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input
-                      id="subject"
-                      value={formData.subject}
-                      onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
-                      placeholder="How can we help?"
-                      className="bg-black/30 border-blue-500/30"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                      placeholder="Tell us more about your inquiry..."
-                      rows={6}
-                      className="bg-black/30 border-blue-500/30"
-                    />
-                  </div>
-
-                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 h-12">
-                    <Send className="h-4 w-4 mr-2" />
-                    Send Message
-                  </Button>
-                </form>
+              <CardContent className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Name</label>
+                  <Input placeholder="Your name" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Email</label>
+                  <Input type="email" placeholder="your@email.com" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Subject</label>
+                  <Input placeholder="What's this about?" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Message</label>
+                  <Textarea placeholder="Tell us how we can help..." rows={6} />
+                </div>
+                <Button className="w-full bg-green-600 hover:bg-green-700">
+                  <Send className="h-4 w-4 mr-2" />
+                  Send Message
+                </Button>
               </CardContent>
             </Card>
 
-            {/* Contact Information */}
             <div className="space-y-6">
-              <Card className="border-green-500/30 bg-green-900/20">
+              <Card className="border-blue-500/30 bg-blue-900/20">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-green-400">
-                    <Mail className="h-6 w-6" />
-                    Email Support
-                  </CardTitle>
+                  <CardTitle className="text-blue-400">📬 Contact Information</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
+                <CardContent className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <Mail className="h-5 w-5 text-blue-400" />
                     <div>
-                      <div className="font-bold text-green-300">General Support</div>
-                      <div className="text-muted-foreground">support@gaia-harmony.com</div>
+                      <div className="font-medium">Email</div>
+                      <div className="text-muted-foreground">contact@gaia-harmony.com</div>
                     </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MessageSquare className="h-5 w-5 text-green-400" />
                     <div>
-                      <div className="font-bold text-green-300">Partnership Inquiries</div>
-                      <div className="text-muted-foreground">partnerships@gaia-harmony.com</div>
+                      <div className="font-medium">Discord</div>
+                      <div className="text-muted-foreground">Join our community server</div>
                     </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Phone className="h-5 w-5 text-purple-400" />
                     <div>
-                      <div className="font-bold text-green-300">Technical Support</div>
-                      <div className="text-muted-foreground">tech@gaia-harmony.com</div>
+                      <div className="font-medium">Support</div>
+                      <div className="text-muted-foreground">24/7 community support</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="h-5 w-5 text-orange-400" />
+                    <div>
+                      <div className="font-medium">Global</div>
+                      <div className="text-muted-foreground">Worldwide community</div>
                     </div>
                   </div>
                 </CardContent>
@@ -133,82 +93,27 @@ const Contact = () => {
 
               <Card className="border-purple-500/30 bg-purple-900/20">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-purple-400">
-                    <MessageCircle className="h-6 w-6" />
-                    Community Channels
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <Button className="w-full bg-indigo-600 hover:bg-indigo-700 justify-start">
-                      Join Discord Community
-                    </Button>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700 justify-start">
-                      Follow on Twitter
-                    </Button>
-                    <Button className="w-full bg-red-600 hover:bg-red-700 justify-start">
-                      Subscribe on YouTube
-                    </Button>
-                    <Button className="w-full bg-orange-600 hover:bg-orange-700 justify-start">
-                      Join Telegram
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-orange-500/30 bg-orange-900/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-orange-400">
-                    <Phone className="h-6 w-6" />
-                    Response Times
-                  </CardTitle>
+                  <CardTitle className="text-purple-400">🕒 Response Times</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span>General Inquiries:</span>
-                      <span className="text-orange-300">24-48 hours</span>
+                      <span>General Inquiries</span>
+                      <Badge className="bg-green-600">24-48 hours</Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span>Technical Support:</span>
-                      <span className="text-orange-300">12-24 hours</span>
+                      <span>Technical Support</span>
+                      <Badge className="bg-blue-600">2-6 hours</Badge>
                     </div>
                     <div className="flex justify-between">
-                      <span>Urgent Issues:</span>
-                      <span className="text-orange-300">2-6 hours</span>
+                      <span>Partnership</span>
+                      <Badge className="bg-purple-600">1-3 days</Badge>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </div>
           </div>
-
-          {/* FAQ Section */}
-          <Card className="mt-8 border-cyan-500/30 bg-cyan-900/20">
-            <CardHeader>
-              <CardTitle className="text-cyan-400">Frequently Asked Questions</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="font-bold text-cyan-300 mb-2">How do I get started with GAiA?</h4>
-                  <p className="text-muted-foreground mb-4">Create a free account and start exploring our gaming ecosystem. No prior blockchain experience needed!</p>
-                </div>
-                <div>
-                  <h4 className="font-bold text-cyan-300 mb-2">Is GAiA available on mobile?</h4>
-                  <p className="text-muted-foreground mb-4">Yes! Download our mobile app from the App Store or Google Play for the full GAiA experience.</p>
-                </div>
-                <div>
-                  <h4 className="font-bold text-cyan-300 mb-2">How does GAiA help the environment?</h4>
-                  <p className="text-muted-foreground mb-4">A portion of all transactions goes directly to verified environmental restoration projects worldwide.</p>
-                </div>
-                <div>
-                  <h4 className="font-bold text-cyan-300 mb-2">Can I earn real money playing games?</h4>
-                  <p className="text-muted-foreground mb-4">Yes! Earn GAiA tokens through gameplay which can be traded or used within our ecosystem.</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>

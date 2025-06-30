@@ -16,7 +16,8 @@ import {
   BarChart3,
   Shield,
   User,
-  ChevronRight
+  ChevronRight,
+  Globe
 } from 'lucide-react'
 
 const HoverSidebar = () => {
@@ -26,18 +27,18 @@ const HoverSidebar = () => {
   const menuItems = [
     { icon: Home, label: 'Home', path: '/' },
     { icon: Wallet, label: 'Wallet', path: '/wallet' },
+    { icon: Globe, label: 'Virtual World', path: '/virtual-world' },
     { icon: Gamepad2, label: 'Gaming', path: '/gaming' },
     { icon: TrendingUp, label: 'Exchange', path: '/exchange' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter' },
     { icon: Activity, label: 'Live Tracking', path: '/live-tracking' },
-    { icon: BarChart3, label: 'System Status', path: '/comprehensive-status' },
-    { icon: Shield, label: 'Security', path: '/security' },
+    { icon: BarChart3, label: 'System Status', path: '/system-status' },
+    { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status' },
+    { icon: Shield, label: 'Immortal Security', path: '/immortal-security' },
     { icon: Info, label: 'About', path: '/about' },
     { icon: Mail, label: 'Contact', path: '/contact' },
     { icon: DollarSign, label: 'Pricing', path: '/pricing' },
-    { icon: Download, label: 'Downloads', path: '/downloads' },
-    { icon: Shield, label: 'Admin', path: '/admin' },
-    { icon: User, label: 'Secure Admin', path: '/secure-admin' }
+    { icon: Download, label: 'Downloads', path: '/downloads' }
   ]
 
   return (

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AuthProvider } from "@/components/auth/AuthProvider"
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute"
 import { AdminOnlySecurityBarrier } from "@/components/admin/AdminOnlySecurityBarrier"
+import { PageSpecificBackground } from "@/components/ui/page-specific-background"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
@@ -17,11 +18,12 @@ import CoinCrafter from "./pages/CoinCrafter"
 import LiveTracking from "./pages/LiveTracking"
 import Exchange from "./pages/Exchange"
 import ComprehensiveStatus from "./pages/ComprehensiveStatus"
+import SystemStatus from "./pages/SystemStatus"
+import VirtualWorld from "./pages/VirtualWorld"
 import Admin from "./pages/Admin"
 import SecureAdmin from "./pages/SecureAdmin"
 import ImmortalSecurity from "./pages/ImmortalSecurity"
 import UltimateSecurity from "./pages/UltimateSecurity"
-import SystemStatus from "./pages/SystemStatus"
 import NotFound from "./pages/NotFound"
 
 const queryClient = new QueryClient()
@@ -34,6 +36,7 @@ function App() {
           <AdminOnlySecurityBarrier />
           <Toaster />
           <BrowserRouter>
+            <PageSpecificBackground />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -45,11 +48,12 @@ function App() {
               <Route path="/coin-crafter" element={<CoinCrafter />} />
               <Route path="/live-tracking" element={<LiveTracking />} />
               <Route path="/exchange" element={<Exchange />} />
+              <Route path="/virtual-world" element={<VirtualWorld />} />
               <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+              <Route path="/system-status" element={<SystemStatus />} />
               <Route path="/security" element={<UltimateSecurity />} />
               <Route path="/immortal-security" element={<ImmortalSecurity />} />
               <Route path="/ultimate-security" element={<UltimateSecurity />} />
-              <Route path="/system-status" element={<SystemStatus />} />
               <Route 
                 path="/admin" 
                 element={
