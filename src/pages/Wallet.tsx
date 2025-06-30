@@ -3,8 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Wallet, Send, Receive, TrendingUp, Shield, Eye, Zap } from 'lucide-react'
-import { GAIA_TOKEN } from '@/constants/gaia'
+import { Wallet, Send, ArrowDown, TrendingUp, Shield, Eye, Zap } from 'lucide-react'
+import { GAIA_TOKEN, GAIA_METRICS } from '@/constants/gaia'
 
 const WalletPage = () => {
   const walletBalance = 50000.75
@@ -78,7 +78,7 @@ const WalletPage = () => {
                 Send GAiA
               </Button>
               <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                <Receive className="h-4 w-4 mr-2" />
+                <ArrowDown className="h-4 w-4 mr-2" />
                 Receive GAiA
               </Button>
             </CardContent>
@@ -103,7 +103,7 @@ const WalletPage = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Total Supply:</span>
-                  <span className="text-blue-400 font-mono">{GAIA_TOKEN.TOTAL_SUPPLY.toLocaleString()}</span>
+                  <span className="text-blue-400 font-mono">{GAIA_METRICS.totalSupply.toLocaleString()}</span>
                 </div>
               </div>
               <div className="space-y-3">
