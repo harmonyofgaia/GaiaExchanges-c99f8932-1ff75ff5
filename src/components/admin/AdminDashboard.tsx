@@ -10,6 +10,7 @@ import { CrossPlatformCompatibility } from '../CrossPlatformCompatibility'
 import { PrivateBlockchainNetwork } from './PrivateBlockchainNetwork'
 import { QuantumTechnologicalMastermind } from './QuantumTechnologicalMastermind'
 import { MasterUpgradePlan } from './MasterUpgradePlan'
+import { AlienJusticeProtocol } from './AlienJusticeProtocol'
 
 export function AdminDashboard() {
   return (
@@ -21,12 +22,13 @@ export function AdminDashboard() {
             HARMONY OF GAIA ADMIN DASHBOARD
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Ultimate Control Center • Dragon Protected • Quantum Secured • Unbreakable
+            Ultimate Control Center • Dragon Protected • Quantum Secured • Alien-Level Justice • Unbreakable
           </p>
         </div>
 
-        <Tabs defaultValue="quantum" className="w-full">
-          <TabsList className="grid w-full grid-cols-10">
+        <Tabs defaultValue="alien" className="w-full">
+          <TabsList className="grid w-full grid-cols-11">
+            <TabsTrigger value="alien">👽 Alien Justice</TabsTrigger>
             <TabsTrigger value="quantum">🧠 Quantum Mind</TabsTrigger>
             <TabsTrigger value="mastermind">🤖 Tech Mastermind</TabsTrigger>
             <TabsTrigger value="upgrades">🚀 Master Plan</TabsTrigger>
@@ -38,6 +40,10 @@ export function AdminDashboard() {
             <TabsTrigger value="platform">📱 Platform Support</TabsTrigger>
             <TabsTrigger value="blockchain">🔗 Private Blockchain</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="alien" className="space-y-6">
+            <AlienJusticeProtocol />
+          </TabsContent>
 
           <TabsContent value="quantum" className="space-y-6">
             <QuantumAdminDashboard />

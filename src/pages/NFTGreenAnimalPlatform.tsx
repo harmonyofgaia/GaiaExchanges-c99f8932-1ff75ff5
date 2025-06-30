@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import HoverSidebar from '@/components/HoverSidebar'
@@ -5,6 +6,8 @@ import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
 import { RealTimeAnimalTracker } from '@/components/RealTimeAnimalTracker'
 import { AnimalNFTCreator } from '@/components/nft/AnimalNFTCreator'
 import { AnimalConservationHub } from '@/components/nft/AnimalConservationHub'
+import { LiveAnimalNFTs } from '@/components/LiveAnimalNFTs'
+import { GlobalInvestorMagnet } from '@/components/investor/GlobalInvestorMagnet'
 
 const NFTGreenAnimalPlatform = () => {
   return (
@@ -23,19 +26,25 @@ const NFTGreenAnimalPlatform = () => {
               </p>
               <div className="text-center mt-4 space-y-2">
                 <div className="text-lg text-green-400 font-bold">
-                  🌍 Protecting Wildlife Through Blockchain • GAiA Powered • Quantum Secured
+                  🌍 Protecting Wildlife Through Blockchain • GAiA Powered • Quantum Secured • Investor Ready
                 </div>
               </div>
             </CardHeader>
           </Card>
 
-          <Tabs defaultValue="marketplace" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
+          <Tabs defaultValue="living-animals" className="w-full">
+            <TabsList className="grid w-full grid-cols-6">
+              <TabsTrigger value="living-animals">🦋 All Living Animals</TabsTrigger>
               <TabsTrigger value="marketplace">🏪 NFT Marketplace</TabsTrigger>
               <TabsTrigger value="tracking">📡 Live Animal Tracking</TabsTrigger>
               <TabsTrigger value="creator">🎨 Create Animal NFTs</TabsTrigger>
               <TabsTrigger value="conservation">🌱 Conservation Hub</TabsTrigger>
+              <TabsTrigger value="investors">💰 Global Investors</TabsTrigger>
             </TabsList>
+
+            <TabsContent value="living-animals" className="space-y-6">
+              <LiveAnimalNFTs />
+            </TabsContent>
 
             <TabsContent value="marketplace" className="space-y-6">
               <GamingNFTMarketplace />
@@ -51,6 +60,10 @@ const NFTGreenAnimalPlatform = () => {
 
             <TabsContent value="conservation" className="space-y-6">
               <AnimalConservationHub />
+            </TabsContent>
+
+            <TabsContent value="investors" className="space-y-6">
+              <GlobalInvestorMagnet />
             </TabsContent>
           </Tabs>
         </div>
