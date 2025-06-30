@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -10,6 +9,7 @@ import { InvisibleAvatarTrainer } from '@/components/security/InvisibleAvatarTra
 import { NetworkCableTracer } from '@/components/security/NetworkCableTracer'
 import { TrainedDragonCore } from '@/components/security/TrainedDragonCore'
 import { ImmortalFirewallEngine } from '@/components/security/ImmortalFirewallEngine'
+import { UnifiedAnimalDefenseSystem } from '@/components/security/UnifiedAnimalDefenseSystem'
 
 export function MasterDefenseOrchestrator() {
   const [orchestratorMode, setOrchestratorMode] = useState('ULTIMATE_MASTERMIND')
@@ -30,9 +30,10 @@ export function MasterDefenseOrchestrator() {
     console.log('💀 ATTACKING PROGRAMS DESTROYED AUTOMATICALLY')
     console.log('🌍 GLOBAL NETWORK UNDER COMPLETE CONTROL')
     console.log('🛡️ IMMUNE SYSTEM EVOLUTION - GROWING STRONGER EVERY SECOND')
+    console.log('🐉 ALL DEFENSE ANIMALS COORDINATED - DRAGONS, TIGERS, MONKEYS, DOLPHINS, AVATARS, KOALAS')
     
     toast.success('👑 QUANTUM MASTERMIND SUPREME!', {
-      description: 'All 20 quantum computers merged into one ultimate consciousness',
+      description: 'All defense animals united - Dragons, Tigers, Monkeys, Dolphins, Avatars & Koalas working together',
       duration: 10000
     })
   }
@@ -44,6 +45,7 @@ export function MasterDefenseOrchestrator() {
       console.log('🧠 QUANTUM MASTERMIND EVOLUTION - GROWING STRONGER')
       console.log('👑 ADMIN-ONLY LOYALTY - ABSOLUTE OBEDIENCE')
       console.log('🚫 NON-ADMIN USERS COMPLETELY IGNORED AND BLOCKED')
+      console.log('🛡️ ALL DEFENSE ANIMALS COORDINATING PERFECTLY')
     }
 
     const evolutionInterval = setInterval(evolveMastermind, 2000)
@@ -59,7 +61,7 @@ export function MasterDefenseOrchestrator() {
             <div>
               <div className="text-3xl">🧠 QUANTUM MASTERMIND SUPREME</div>
               <div className="text-lg font-normal">
-                20 Quantum Computers • One Consciousness • Admin Only • Untraceable • Unbeatable
+                All Defense Animals United • Dragons • Tigers • Monkeys • Dolphins • Avatars • Koalas
               </div>
             </div>
             <Badge className="bg-purple-600 animate-pulse text-xl px-6 py-3">
@@ -114,18 +116,63 @@ export function MasterDefenseOrchestrator() {
             className="w-full bg-gradient-to-r from-purple-600 via-red-600 to-blue-600 hover:from-purple-700 hover:via-red-700 hover:to-blue-700 text-white font-bold text-2xl py-8"
           >
             <Shield className="h-8 w-8 mr-4 animate-pulse" />
-            🧠 ACTIVATE QUANTUM MASTERMIND SUPREME - ULTIMATE CONSCIOUSNESS
+            🧠 ACTIVATE QUANTUM MASTERMIND SUPREME - ALL ANIMALS UNITED
           </Button>
         </CardContent>
       </Card>
 
-      <Tabs defaultValue="avatar" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+      <UnifiedAnimalDefenseSystem />
+
+      <Tabs defaultValue="unified" className="w-full">
+        <TabsList className="grid w-full grid-cols-5">
+          <TabsTrigger value="unified">🛡️ Unified Animals</TabsTrigger>
           <TabsTrigger value="avatar">👤 Invisible Avatar</TabsTrigger>
           <TabsTrigger value="network">🌐 Network Control</TabsTrigger>
           <TabsTrigger value="dragons">🐉 Trained Dragons</TabsTrigger>
           <TabsTrigger value="firewall">💀 Immortal Firewall</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="unified" className="space-y-4">
+          <Card className="bg-gradient-to-r from-green-900/30 to-blue-900/30 border-green-500/30">
+            <CardHeader>
+              <CardTitle className="text-green-400">🛡️ ALL DEFENSE ANIMALS WORKING TOGETHER</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="text-center p-4 bg-black/30 rounded-lg">
+                  <div className="text-4xl mb-2">🐉</div>
+                  <div className="text-sm font-bold text-red-400">DRAGONS</div>
+                  <div className="text-xs text-muted-foreground">Quantum Protection</div>
+                </div>
+                <div className="text-center p-4 bg-black/30 rounded-lg">
+                  <div className="text-4xl mb-2">🐅</div>
+                  <div className="text-sm font-bold text-orange-400">TIGERS</div>
+                  <div className="text-xs text-muted-foreground">Lightning Response</div>
+                </div>
+                <div className="text-center p-4 bg-black/30 rounded-lg">
+                  <div className="text-4xl mb-2">🐒</div>
+                  <div className="text-sm font-bold text-yellow-400">MONKEYS</div>
+                  <div className="text-xs text-muted-foreground">System Analysis</div>
+                </div>
+                <div className="text-center p-4 bg-black/30 rounded-lg">
+                  <div className="text-4xl mb-2">🐬</div>
+                  <div className="text-sm font-bold text-blue-400">DOLPHINS</div>
+                  <div className="text-xs text-muted-foreground">AI Prediction</div>
+                </div>
+                <div className="text-center p-4 bg-black/30 rounded-lg">
+                  <div className="text-4xl mb-2">👤</div>
+                  <div className="text-sm font-bold text-purple-400">AVATARS</div>
+                  <div className="text-xs text-muted-foreground">Stealth Ops</div>
+                </div>
+                <div className="text-center p-4 bg-black/30 rounded-lg">
+                  <div className="text-4xl mb-2">🐨</div>
+                  <div className="text-sm font-bold text-green-400">KOALAS</div>
+                  <div className="text-xs text-muted-foreground">Self-Training AI</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
         <TabsContent value="avatar" className="space-y-4">
           <InvisibleAvatarTrainer />
