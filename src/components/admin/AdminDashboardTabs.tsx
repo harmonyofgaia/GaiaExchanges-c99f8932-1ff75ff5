@@ -1,3 +1,4 @@
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card } from '@/components/ui/card'
 import { AdminDashboard } from './AdminDashboard'
@@ -15,12 +16,14 @@ import { TransactionReversalSystem } from './TransactionReversalSystem'
 import { MasterDefenseOrchestrator } from './MasterDefenseOrchestrator'
 import { AdminAnalyticsDashboard } from './AdminAnalyticsDashboard'
 import { AutonomousMastermind } from './AutonomousMastermind'
+import { WalletConnectionManager } from './WalletConnectionManager'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="transparency" className="w-full">
-      <TabsList className="grid w-full grid-cols-12 mb-6">
+      <TabsList className="grid w-full grid-cols-13 mb-6">
         <TabsTrigger value="transparency">🔍 Transparency</TabsTrigger>
+        <TabsTrigger value="wallets">💰 Wallet Control</TabsTrigger>
         <TabsTrigger value="master-defense">🧠 Master Defense</TabsTrigger>
         <TabsTrigger value="analytics">📊 Analytics</TabsTrigger>
         <TabsTrigger value="mastermind">🤖 Mastermind</TabsTrigger>
@@ -38,6 +41,10 @@ export function AdminDashboardTabs() {
       
       <TabsContent value="transparency">
         <EnhancedSuspiciousTransactions />
+      </TabsContent>
+
+      <TabsContent value="wallets">
+        <WalletConnectionManager />
       </TabsContent>
 
       <TabsContent value="master-defense">
