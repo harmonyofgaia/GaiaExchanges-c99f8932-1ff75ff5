@@ -1,115 +1,23 @@
+
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Lock, Eye, EyeOff, Crown, Vault } from 'lucide-react'
-import { toast } from 'sonner'
-import { AdminDashboard } from '@/components/admin/AdminDashboard'
+import { Shield, Lock, Crown, Vault } from 'lucide-react'
+import { AdminCredentialsForm } from '@/components/admin/AdminCredentialsForm'
+import { AdminDashboardTabs } from '@/components/admin/AdminDashboardTabs'
 import { SecureVaultSystem } from '@/components/SecureVaultSystem'
-import { AdvancedSecurityCenter } from '@/components/admin/AdvancedSecurityCenter'
-import { UltimateSecuritySuite } from '@/components/admin/UltimateSecuritySuite'
 
 export default function AdminLogin() {
-  const [credentials, setCredentials] = useState({
-    username: '',
-    password: ''
-  })
-  const [showPassword, setShowPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const [adminAccess, setAdminAccess] = useState<'none' | 'system' | 'vault'>('none')
   const [activeTab, setActiveTab] = useState('system')
 
-  const handleSystemLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-
-    try {
-      // System Admin credentials - Ultra Secure
-      const validCredentials = {
-        username: 'Synatic',
-        password: 'Freedom!oul19922323'
-      }
-
-      if (credentials.username === validCredentials.username && 
-          credentials.password === validCredentials.password) {
-        
-        console.log('🛡️ SYSTEM ADMIN ACCESS GRANTED - QUANTUM CONTROL ACTIVE')
-        console.log('👑 ADMIN SYNATIC - SUPREME SYSTEM CONTROLLER')
-        console.log('🚫 NO OTHER MACHINE OR CREATOR CAN ACCESS THIS SYSTEM')
-        console.log('⚡ ULTIMATE PROTECTION PROTOCOLS ACTIVATED')
-        
-        setAdminAccess('system')
-        toast.success('👑 SUPREME ADMIN ACCESS GRANTED!', {
-          description: 'Quantum system control activated - Ultimate admin powers unlocked',
-          duration: 5000
-        })
-      } else {
-        toast.error('🚫 SYSTEM ACCESS DENIED', {
-          description: 'Invalid system admin credentials - Quantum protection active',
-          duration: 5000
-        })
-      }
-    } catch (error) {
-      toast.error('Security Error', {
-        description: 'System protection activated - All attempts logged',
-        duration: 5000
-      })
-    } finally {
-      setIsLoading(false)
-      // Secure credential cleanup - no traces left
-      setCredentials({ username: '', password: '' })
-    }
-  }
-
-  const handleVaultLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-
-    try {
-      // Vault Admin credentials
-      const validCredentials = {
-        username: 'Synatic',
-        password: 'dolphin1992'
-      }
-
-      if (credentials.username === validCredentials.username && 
-          credentials.password === validCredentials.password) {
-        
-        console.log('🏦 VAULT ADMIN ACCESS GRANTED - INVESTMENT CONTROL ACTIVE')
-        console.log('💰 ADMIN SYNATIC - COMMUNITY VAULT CONTROLLER')
-        
-        setAdminAccess('vault')
-        toast.success('🏦 VAULT ADMIN ACCESS GRANTED!', {
-          description: 'Community vault control activated - Investment oversight unlocked',
-          duration: 5000
-        })
-      } else {
-        toast.error('🚫 VAULT ACCESS DENIED', {
-          description: 'Invalid vault admin credentials - Protection active',
-          duration: 5000
-        })
-      }
-    } catch (error) {
-      toast.error('Security Error', {
-        description: 'Vault protection activated - All attempts monitored',
-        duration: 5000
-      })
-    } finally {
-      setIsLoading(false)
-      // Secure credential cleanup
-      setCredentials({ username: '', password: '' })
-    }
-  }
+  const handleSystemLogin = () => setAdminAccess('system')
+  const handleVaultLogin = () => setAdminAccess('vault')
 
   const handleLogout = () => {
     setAdminAccess('none')
-    setCredentials({ username: '', password: '' })
-    toast.success('🔐 Secure Logout Complete', {
-      description: 'Admin session terminated securely - All traces cleared',
-      duration: 3000
-    })
+    // Secure session cleanup and logging would go here
   }
 
   if (adminAccess === 'system') {
@@ -131,33 +39,7 @@ export default function AdminLogin() {
             </Button>
           </div>
           
-          <Tabs defaultValue="dashboard" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-6">
-              <TabsTrigger value="dashboard">System Dashboard</TabsTrigger>
-              <TabsTrigger value="security">Advanced Security</TabsTrigger>
-              <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
-              <TabsTrigger value="analytics">Deep Analytics</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="dashboard">
-              <AdminDashboard />
-            </TabsContent>
-            
-            <TabsContent value="security">
-              <AdvancedSecurityCenter />
-            </TabsContent>
-            
-            <TabsContent value="ultimate">
-              <UltimateSecuritySuite />
-            </TabsContent>
-            
-            <TabsContent value="analytics">
-              <Card className="p-6">
-                <h3 className="text-2xl font-bold text-green-400 mb-4">🔍 Deep System Analytics</h3>
-                <p className="text-muted-foreground">Advanced analytics dashboard coming soon...</p>
-              </Card>
-            </TabsContent>
-          </Tabs>
+          <AdminDashboardTabs />
         </div>
       </div>
     )
@@ -215,121 +97,11 @@ export default function AdminLogin() {
             </TabsList>
 
             <TabsContent value="system">
-              <div className="space-y-4">
-                <div className="text-center mb-4">
-                  <h3 className="text-xl font-bold text-blue-400">Supreme System Control</h3>
-                  <p className="text-sm text-blue-300">Ultimate admin control • All features • Maximum authority</p>
-                </div>
-                
-                <form onSubmit={handleSystemLogin} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="system-username" className="text-green-300">System Admin Username</Label>
-                    <Input
-                      id="system-username"
-                      type="text"
-                      value={credentials.username}
-                      onChange={(e) => setCredentials(prev => ({ ...prev, username: e.target.value }))}
-                      className="bg-black/40 border-green-500/30 text-green-400"
-                      placeholder="Enter system admin username..."
-                      autoComplete="off"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="system-password" className="text-green-300">Quantum Password</Label>
-                    <div className="relative">
-                      <Input
-                        id="system-password"
-                        type={showPassword ? 'text' : 'password'}
-                        value={credentials.password}
-                        onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
-                        className="bg-black/40 border-green-500/30 text-green-400 pr-10"
-                        placeholder="Enter quantum password..."
-                        autoComplete="off"
-                        required
-                      />
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        className="absolute right-1 top-1 h-8 w-8 p-0 text-green-400"
-                        onClick={() => setShowPassword(!showPassword)}
-                      >
-                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                      </Button>
-                    </div>
-                  </div>
-
-                  <Button 
-                    type="submit" 
-                    disabled={isLoading}
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3"
-                  >
-                    <Shield className="h-5 w-5 mr-2" />
-                    {isLoading ? 'Quantum Verification...' : 'ACCESS SUPREME CONTROL'}
-                  </Button>
-                </form>
-              </div>
+              <AdminCredentialsForm loginType="system" onLoginSuccess={handleSystemLogin} />
             </TabsContent>
 
             <TabsContent value="vault">
-              <div className="space-y-4">
-                <div className="text-center mb-4">
-                  <h3 className="text-xl font-bold text-emerald-400">Vault Control Access</h3>
-                  <p className="text-sm text-emerald-300">Investment oversight • Vault management • Community funds</p>
-                </div>
-                
-                <form onSubmit={handleVaultLogin} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="vault-username" className="text-green-300">Vault Admin Username</Label>
-                    <Input
-                      id="vault-username"
-                      type="text"
-                      value={credentials.username}
-                      onChange={(e) => setCredentials(prev => ({ ...prev, username: e.target.value }))}
-                      className="bg-black/40 border-green-500/30 text-green-400"
-                      placeholder="Enter vault admin username..."
-                      autoComplete="off"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="vault-password" className="text-green-300">Vault Password</Label>
-                    <div className="relative">
-                      <Input
-                        id="vault-password"
-                        type={showPassword ? 'text' : 'password'}
-                        value={credentials.password}
-                        onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
-                        className="bg-black/40 border-green-500/30 text-green-400 pr-10"
-                        placeholder="Enter vault password..."
-                        autoComplete="off"
-                        required
-                      />
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        className="absolute right-1 top-1 h-8 w-8 p-0 text-green-400"
-                        onClick={() => setShowPassword(!showPassword)}
-                      >
-                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                      </Button>
-                    </div>
-                  </div>
-
-                  <Button 
-                    type="submit" 
-                    disabled={isLoading}
-                    className="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-bold py-3"
-                  >
-                    <Vault className="h-5 w-5 mr-2" />
-                    {isLoading ? 'Vault Verification...' : 'ACCESS VAULT CONTROL'}
-                  </Button>
-                </form>
-              </div>
+              <AdminCredentialsForm loginType="vault" onLoginSuccess={handleVaultLogin} />
             </TabsContent>
           </Tabs>
 
