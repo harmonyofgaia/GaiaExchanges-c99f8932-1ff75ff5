@@ -54,7 +54,9 @@ function App() {
             </UserOnlyProtectedRoute>
           } />
           
-          <Route path="/admin" element={<SecureAdmin />} />
+          {/* Both admin routes point to the same secure vault system */}
+          <Route path="/admin" element={<SecureVault />} />
+          <Route path="/secure-admin" element={<SecureAdmin />} />
           <Route path="/secure-vault" element={<SecureVault />} />
         </Routes>
         <Toaster />
