@@ -1,4 +1,4 @@
-
+import { RealTimeCoinCrafter } from '@/components/RealTimeCoinCrafter'
 import { GaiaCoinCrafter } from '@/components/GaiaCoinCrafter'
 import { AnimatedCoinCrafting } from '@/components/AnimatedCoinCrafting'
 import { MatrixWalletDisplay } from '@/components/MatrixWalletDisplay'
@@ -15,7 +15,7 @@ const GaiaCoinCrafterPage = () => {
             🔥 OFFICIAL GAiA COIN CRAFTER
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Connected to Official GAiA Token - Coin Crafting System & Market Supply Management
+            Connected to Official GAiA Token - Real-Time Coin Crafting System & Market Supply Management
           </p>
           <div className="mt-4 text-sm text-green-400">
             Official Wallet: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
@@ -26,6 +26,7 @@ const GaiaCoinCrafterPage = () => {
         </div>
         
         <div className="space-y-8">
+          <RealTimeCoinCrafter />
           <MatrixWalletDisplay />
           <AnimatedCoinCrafting />
           <GaiaCoinCrafter />
