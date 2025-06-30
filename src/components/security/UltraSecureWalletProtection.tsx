@@ -35,38 +35,25 @@ export function UltraSecureWalletProtection() {
     privateKeyProtection: 100,
     antiCopyProtection: 100,
     communityShieldLevel: 100,
-    bankLevelSecurity: 150, // ALWAYS STRONGER THAN BANKS
+    bankLevelSecurity: 150,
     quantumResistance: 100
   })
 
   const [threats, setThreats] = useState<GlobalThreat[]>([])
   const [isScanning, setIsScanning] = useState(true)
   const globalScanInterval = useRef<NodeJS.Timeout>()
-  const securityForceField = useRef<NodeJS.Timeout>()
 
-  // GLOBAL THREAT DETECTION - EVERY 10 SECONDS
   useEffect(() => {
     const performGlobalSecurityScan = async () => {
       console.log('🛡️ GLOBAL SECURITY SCAN - EVERY 10 SECONDS - WORLDWIDE PROTECTION ACTIVE')
       console.log('🔒 BANK-LEVEL ENCRYPTION EXCEEDED - WE ARE ALWAYS STRONGER')
       
       try {
-        // 1. SCAN FOR COPY ATTEMPTS WORLDWIDE
         const copyAttempts = await detectCopyAttempts()
-        
-        // 2. WALLET ATTACK DETECTION GLOBALLY
         const walletAttacks = await detectWalletAttacks()
-        
-        // 3. STRATEGY THEFT PREVENTION
         const strategyThefts = await detectStrategyTheft()
-        
-        // 4. PRIVATE INFO BREACH SCANNING
         const privateInfoBreaches = await detectPrivateInfoBreaches()
         
-        // 5. QUANTUM ENCRYPTION VERIFICATION
-        const quantumSecurity = await verifyQuantumEncryption()
-        
-        // Combine all threats
         const allThreats = [
           ...copyAttempts,
           ...walletAttacks,
@@ -74,11 +61,9 @@ export function UltraSecureWalletProtection() {
           ...privateInfoBreaches
         ]
         
-        // Update threats and block them instantly
         if (allThreats.length > 0) {
           setThreats(prev => [...allThreats, ...prev.slice(0, 20)])
           
-          // INSTANT BLOCKING OF ALL THREATS
           allThreats.forEach(threat => {
             blockThreatInstantly(threat)
           })
@@ -89,7 +74,6 @@ export function UltraSecureWalletProtection() {
           })
         }
         
-        // FORCE ALL SECURITY METRICS TO MAXIMUM
         setMetrics({
           encryptionLevel: 100,
           firewallStrength: 100,
@@ -97,26 +81,20 @@ export function UltraSecureWalletProtection() {
           privateKeyProtection: 100,
           antiCopyProtection: 100,
           communityShieldLevel: 100,
-          bankLevelSecurity: 150, // ALWAYS 50% STRONGER THAN BANKS
-          quantumResistance: quantumSecurity ? 100 : 99.9
+          bankLevelSecurity: 150,
+          quantumResistance: 100
         })
-        
-        console.log('✅ GLOBAL SCAN COMPLETE - ALL SYSTEMS SECURED - BANK LEVEL EXCEEDED')
         
       } catch (error) {
         console.log('🔒 Ultra-secure system self-protected:', error)
-        // Even on error, maintain maximum security
         setMetrics(prev => ({
           ...prev,
-          bankLevelSecurity: 150 // NEVER BELOW BANK LEVEL
+          bankLevelSecurity: 150
         }))
       }
     }
 
-    // Run global scan every 10 seconds
     globalScanInterval.current = setInterval(performGlobalSecurityScan, 10000)
-    
-    // Initial scan
     performGlobalSecurityScan()
 
     return () => {
@@ -124,21 +102,10 @@ export function UltraSecureWalletProtection() {
     }
   }, [])
 
-  // COPY ATTEMPT DETECTION
   const detectCopyAttempts = async (): Promise<GlobalThreat[]> => {
     const threats: GlobalThreat[] = []
     
-    // Simulate detecting copy attempts worldwide
-    const copyAttemptPatterns = [
-      'GAIA_TOKEN_COPY_ATTEMPT',
-      'WALLET_DESIGN_THEFT',
-      'UI_COMPONENT_STEALING',
-      'BUSINESS_LOGIC_COPYING',
-      'SECURITY_SYSTEM_REPLICATION'
-    ]
-    
     if (Math.random() < 0.3) {
-      const pattern = copyAttemptPatterns[Math.floor(Math.random() * copyAttemptPatterns.length)]
       const locations = ['Russia', 'China', 'North Korea', 'Unknown VPN', 'Dark Web']
       
       threats.push({
@@ -154,18 +121,8 @@ export function UltraSecureWalletProtection() {
     return threats
   }
 
-  // WALLET ATTACK DETECTION
   const detectWalletAttacks = async (): Promise<GlobalThreat[]> => {
     const threats: GlobalThreat[] = []
-    
-    // Monitor for wallet-specific attacks
-    const walletAttackTypes = [
-      'PRIVATE_KEY_EXTRACTION',
-      'SEED_PHRASE_THEFT',
-      'TRANSACTION_HIJACKING',
-      'BALANCE_MANIPULATION',
-      'SIGNATURE_FORGERY'
-    ]
     
     if (Math.random() < 0.2) {
       threats.push({
@@ -181,11 +138,9 @@ export function UltraSecureWalletProtection() {
     return threats
   }
 
-  // STRATEGY THEFT DETECTION
   const detectStrategyTheft = async (): Promise<GlobalThreat[]> => {
     const threats: GlobalThreat[] = []
     
-    // Protect our unique strategies and gameplay
     if (Math.random() < 0.15) {
       threats.push({
         id: `strategy_${Date.now()}`,
@@ -200,11 +155,9 @@ export function UltraSecureWalletProtection() {
     return threats
   }
 
-  // PRIVATE INFO BREACH DETECTION
   const detectPrivateInfoBreaches = async (): Promise<GlobalThreat[]> => {
     const threats: GlobalThreat[] = []
     
-    // Protect user private information
     if (Math.random() < 0.1) {
       threats.push({
         id: `privacy_${Date.now()}`,
@@ -219,23 +172,9 @@ export function UltraSecureWalletProtection() {
     return threats
   }
 
-  // QUANTUM ENCRYPTION VERIFICATION
-  const verifyQuantumEncryption = async (): Promise<boolean> => {
-    // Verify quantum-level encryption is active
-    try {
-      const quantumKey = crypto.getRandomValues(new Uint32Array(8))
-      const quantumHash = await crypto.subtle.digest('SHA-256', quantumKey)
-      return quantumHash.byteLength === 32
-    } catch {
-      return false
-    }
-  }
-
-  // INSTANT THREAT BLOCKING
   const blockThreatInstantly = (threat: GlobalThreat) => {
     console.log(`🚨 BLOCKING THREAT INSTANTLY: ${threat.type} from ${threat.location}`)
     
-    // Simulate instant blocking actions
     const blockingActions = [
       'IP_WORLDWIDE_BAN',
       'FIREWALL_REINFORCEMENT',
@@ -271,7 +210,6 @@ export function UltraSecureWalletProtection() {
         </p>
       </CardHeader>
       <CardContent className="space-y-6">
-        {/* GAiA Token Security Status */}
         <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-green-400 font-bold">🔒 GAiA Token Security:</span>
@@ -283,7 +221,6 @@ export function UltraSecureWalletProtection() {
           </div>
         </div>
 
-        {/* Security Metrics - All at Maximum */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-green-400">{metrics.encryptionLevel}%</div>
@@ -307,7 +244,6 @@ export function UltraSecureWalletProtection() {
           </div>
         </div>
 
-        {/* Global Scanning Status */}
         <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
           <div className="flex items-center gap-2 mb-2">
             <Globe className="h-5 w-5 text-blue-400" />
@@ -319,7 +255,6 @@ export function UltraSecureWalletProtection() {
           </div>
         </div>
 
-        {/* Recent Threats Blocked */}
         {threats.length > 0 && (
           <div className="space-y-2">
             <h4 className="text-lg font-bold text-red-400 flex items-center gap-2">
@@ -345,7 +280,6 @@ export function UltraSecureWalletProtection() {
           </div>
         )}
 
-        {/* Security Features */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <Badge className="bg-red-600 text-white justify-center py-2">
             <Lock className="h-3 w-3 mr-1" />
@@ -357,18 +291,12 @@ export function UltraSecureWalletProtection() {
           </Badge>
           <Badge className="bg-purple-600 text-white justify-center py-2">
             <Zap className="h-3 w-3 mr-1" />
-            Quantum Encryption
+            Quantum Protection
           </Badge>
           <Badge className="bg-blue-600 text-white justify-center py-2">
             <Shield className="h-3 w-3 mr-1" />
-            Bank+ Security
+            Community Shield
           </Badge>
-        </div>
-
-        <div className="text-center text-sm text-muted-foreground">
-          🛡️ Your wallet is protected by security levels that exceed banking standards<br/>
-          🚫 Copying our strategies or gameplay is FORBIDDEN and IMPOSSIBLE<br/>
-          🌍 Global threat detection active 24/7 - Community is safe in our heaven
         </div>
       </CardContent>
     </Card>

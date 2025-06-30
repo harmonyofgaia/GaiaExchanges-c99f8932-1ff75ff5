@@ -6,6 +6,8 @@ interface QuantumMetrics {
   quantumEntanglementSecurity: number
   quantumTunnelEncryption: number
   quantumResistanceLevel: number
+  quantumKeysActive: boolean
+  isQuantumSecure: boolean
 }
 
 export function QuantumSecurityCore() {
@@ -13,7 +15,9 @@ export function QuantumSecurityCore() {
     quantumKeyDistribution: 100,
     quantumEntanglementSecurity: 100,
     quantumTunnelEncryption: 100,
-    quantumResistanceLevel: 100
+    quantumResistanceLevel: 100,
+    quantumKeysActive: true,
+    isQuantumSecure: true
   })
 
   useEffect(() => {
