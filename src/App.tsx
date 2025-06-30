@@ -7,6 +7,7 @@ import AuraLandScrapyard from './pages/AuraLandScrapyard'
 import CoinCrafter from './pages/CoinCrafter'
 import NFTGreenAnimalPlatform from './pages/NFTGreenAnimalPlatform'
 import Swap from './pages/Swap'
+import Wallet from './pages/Wallet'
 import SecureAdmin from './pages/SecureAdmin'
 import SecureVault from './pages/SecureVault'
 import { UserOnlyProtectedRoute } from './components/auth/UserOnlyProtectedRoute'
@@ -44,6 +45,12 @@ function App() {
           <Route path="/swap" element={
             <UserOnlyProtectedRoute>
               <Swap />
+            </UserOnlyProtectedRoute>
+          } />
+
+          <Route path="/wallet" element={
+            <UserOnlyProtectedRoute>
+              <Wallet />
             </UserOnlyProtectedRoute>
           } />
           

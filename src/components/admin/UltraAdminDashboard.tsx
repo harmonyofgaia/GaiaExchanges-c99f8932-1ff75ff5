@@ -216,31 +216,22 @@ export function UltraAdminDashboard() {
               </CardContent>
             </Card>
 
-            <Card className="border-purple-500/20">
+            <Card className="border-green-500/20">
               <CardHeader>
-                <CardTitle className="text-purple-400">Growth Tracking</CardTitle>
+                <CardTitle className="text-green-400">Security Analytics</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-sm">Daily Active Users</span>
-                    <span className="text-sm text-green-400">+23.4%</span>
-                  </div>
-                  <Progress value={89} className="h-2" />
+                <div className="flex items-center justify-between">
+                  <span className="text-sm">Threat Detection</span>
+                  <CheckCircle className="h-5 w-5 text-green-400" />
                 </div>
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-sm">Revenue Growth</span>
-                    <span className="text-sm text-green-400">+156.7%</span>
-                  </div>
-                  <Progress value={75} className="h-2" />
+                <div className="flex items-center justify-between">
+                  <span className="text-sm">Firewall Status</span>
+                  <CheckCircle className="h-5 w-5 text-green-400" />
                 </div>
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-sm">Market Penetration</span>
-                    <span className="text-sm text-blue-400">+45.2%</span>
-                  </div>
-                  <Progress value={67} className="h-2" />
+                <div className="flex items-center justify-between">
+                  <span className="text-sm">Encryption Level</span>
+                  <Badge className="bg-green-600">QUANTUM</Badge>
                 </div>
               </CardContent>
             </Card>
@@ -248,26 +239,25 @@ export function UltraAdminDashboard() {
         </TabsContent>
 
         <TabsContent value="community" className="space-y-4">
-          <Card className="border-green-500/20">
+          <Card className="border-purple-500/20">
             <CardHeader>
-              <CardTitle className="text-green-400">Community Health Monitor</CardTitle>
+              <CardTitle className="text-purple-400">Community Health</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-green-900/20 rounded-lg">
-                  <CheckCircle className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-green-400">94.2%</div>
-                  <div className="text-sm text-muted-foreground">Satisfaction Rate</div>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-sm">User Satisfaction</span>
+                    <span className="text-sm text-green-400">96.8%</span>
+                  </div>
+                  <Progress value={96.8} className="h-2" />
                 </div>
-                <div className="text-center p-4 bg-blue-900/20 rounded-lg">
-                  <Users className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-blue-400">5,847</div>
-                  <div className="text-sm text-muted-foreground">Active Members</div>
-                </div>
-                <div className="text-center p-4 bg-purple-900/20 rounded-lg">
-                  <Activity className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-purple-400">2,341</div>
-                  <div className="text-sm text-muted-foreground">Daily Interactions</div>
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-sm">Community Growth</span>
+                    <span className="text-sm text-blue-400">+247%</span>
+                  </div>
+                  <Progress value={85} className="h-2" />
                 </div>
               </div>
             </CardContent>
@@ -275,27 +265,27 @@ export function UltraAdminDashboard() {
         </TabsContent>
 
         <TabsContent value="global" className="space-y-4">
-          <Card className="border-cyan-500/20">
+          <Card className="border-orange-500/20">
             <CardHeader>
-              <CardTitle className="text-cyan-400">Global Expansion Status</CardTitle>
+              <CardTitle className="text-orange-400">Global Operations</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-muted/20 rounded-lg">
-                  <span className="font-semibold">North America</span>
-                  <Badge className="bg-green-600">DOMINATED</Badge>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="text-center">
+                  <div className="text-lg font-bold text-blue-400">47</div>
+                  <div className="text-xs text-muted-foreground">Countries</div>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-muted/20 rounded-lg">
-                  <span className="font-semibold">Europe</span>
-                  <Badge className="bg-blue-600">EXPANDING</Badge>
+                <div className="text-center">
+                  <div className="text-lg font-bold text-green-400">24/7</div>
+                  <div className="text-xs text-muted-foreground">Support</div>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-muted/20 rounded-lg">
-                  <span className="font-semibold">Asia Pacific</span>
-                  <Badge className="bg-yellow-600">IN PROGRESS</Badge>
+                <div className="text-center">
+                  <div className="text-lg font-bold text-purple-400">12</div>
+                  <div className="text-xs text-muted-foreground">Languages</div>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-muted/20 rounded-lg">
-                  <span className="font-semibold">Global South</span>
-                  <Badge className="bg-purple-600">TARGETING</Badge>
+                <div className="text-center">
+                  <div className="text-lg font-bold text-orange-400">∞</div>
+                  <div className="text-xs text-muted-foreground">Scalability</div>
                 </div>
               </div>
             </CardContent>

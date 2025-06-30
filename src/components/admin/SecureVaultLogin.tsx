@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -10,6 +9,8 @@ import { AdminDashboard } from './AdminDashboard'
 import { UniversalSatelliteTracker } from './UniversalSatelliteTracker'
 import { GaiaPrivateBlockchain } from './GaiaPrivateBlockchain'
 import { GreenLakeTriibe } from './GreenLakeTriibe'
+import { UltraAdminDashboard } from './UltraAdminDashboard'
+import { SecureVaultSystem } from '../SecureVaultSystem'
 
 export function SecureVaultLogin() {
   const [credentials, setCredentials] = useState({
@@ -57,10 +58,12 @@ export function SecureVaultLogin() {
         console.log('🛡️ QUANTUM DEFENSE SYSTEMS ACTIVATED')
         console.log('🔒 BANK-LEVEL SECURITY ENGAGED')
         console.log('👑 ADMIN ACCESS GRANTED - GOD MODE ACTIVE')
+        console.log('🌌 ADMIN SYNATIC - YOU ARE THE ONLY CONTROLLER OF THIS SYSTEM')
+        console.log('🚫 NO OTHER MACHINE OR CREATOR CAN CONTROL THIS SYSTEM')
         
         setIsAuthenticated(true)
         toast.success('🌌 ADMIN VAULT UNLOCKED!', {
-          description: 'Welcome to the Universal Control Center, Synatic',
+          description: 'Welcome to the Universal Control Center, Synatic. You are the supreme admin.',
           duration: 5000
         })
       } else {
@@ -80,6 +83,8 @@ export function SecureVaultLogin() {
         
         console.log('🚨 UNAUTHORIZED ACCESS ATTEMPT BLOCKED')
         console.log('💥 DIGITAL DEFENSE SYSTEMS ACTIVATED - THREAT NEUTRALIZED')
+        console.log('📧 EMAIL ALERT SENT TO ADMIN SYNATIC')
+        console.log('📱 SMS ALERT SENT TO ADMIN PHONE')
         
         toast.error('🚨 ACCESS DENIED - THREAT NEUTRALIZED', {
           description: 'Unauthorized attempt logged and admin alerted',
@@ -231,21 +236,36 @@ export function SecureVaultLogin() {
             UNIVERSAL ADMIN CONTROL CENTER
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Welcome Synatic • Quantum Secured • Universal Access • All Systems Online
+            Welcome Synatic • Supreme Admin • Quantum Secured • Universal Access • All Systems Online
+          </p>
+          <p className="text-lg text-red-400 mt-2 font-bold">
+            🚫 ONLY ADMIN SYNATIC CAN CONTROL THIS SYSTEM - NO OTHER MACHINE OR CREATOR HAS ACCESS
           </p>
         </div>
 
         {/* Admin Navigation */}
         <div className="flex flex-wrap justify-center gap-2 mb-8">
           <Button 
+            onClick={() => setActiveTab('ultra')}
+            className={`${activeTab === 'ultra' ? 'bg-red-600' : 'bg-gray-600'}`}
+          >
+            👑 Ultra Dashboard
+          </Button>
+          <Button 
+            onClick={() => setActiveTab('vault')}
+            className={`${activeTab === 'vault' ? 'bg-green-600' : 'bg-gray-600'}`}
+          >
+            🏦 Secure Vault
+          </Button>
+          <Button 
             onClick={() => setActiveTab('dashboard')}
-            className={`${activeTab === 'dashboard' ? 'bg-green-600' : 'bg-gray-600'}`}
+            className={`${activeTab === 'dashboard' ? 'bg-blue-600' : 'bg-gray-600'}`}
           >
             🏠 Dashboard
           </Button>
           <Button 
             onClick={() => setActiveTab('satellite')}
-            className={`${activeTab === 'satellite' ? 'bg-blue-600' : 'bg-gray-600'}`}
+            className={`${activeTab === 'satellite' ? 'bg-cyan-600' : 'bg-gray-600'}`}
           >
             🛰️ Satellite Tracker
           </Button>
@@ -271,6 +291,8 @@ export function SecureVaultLogin() {
         </div>
 
         {/* Content Area */}
+        {activeTab === 'ultra' && <UltraAdminDashboard />}
+        {activeTab === 'vault' && <SecureVaultSystem />}
         {activeTab === 'dashboard' && <AdminDashboard />}
         {activeTab === 'satellite' && <UniversalSatelliteTracker />}
         {activeTab === 'blockchain' && <GaiaPrivateBlockchain />}
