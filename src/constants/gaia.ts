@@ -1,4 +1,5 @@
 
+
 export const GAIA_TOKEN = {
   // Official GAiA Token Addresses
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
@@ -25,6 +26,10 @@ export const GAIA_TOKEN = {
   CARBON_OFFSET_PER_TRANSACTION: 0.001, // kg CO2
   TREES_PLANTED_TOTAL: 50000,
   OCEAN_CLEANUP_CONTRIBUTION: 25000, // USD
+  
+  // Brand messaging
+  BRAND_STATEMENT: 'We Are a Strong Creative Open Minded Circuit To Happiness - Seeds Will form in to Music',
+  OFFICIAL_DISCLAIMER: 'This is the ONLY official GAiA Token. Verify contract address before trading.',
 }
 
 export const GAIA_METRICS = {
@@ -43,6 +48,7 @@ export const GAIA_METRICS = {
   NETWORK_SPEED: 2500,
   SECURITY_SCORE: 95,
   ECOSYSTEM_HEALTH: 98,
+  DRAGON_POWER: 99,
   
   // Environmental Metrics
   CO2_OFFSET_TOTAL: 500, // tons
@@ -62,3 +68,4 @@ export const formatGaiaNumber = (num: number): string => {
   if (num >= 1e3) return `${(num / 1e3).toFixed(2)}K`
   return num.toString()
 }
+
