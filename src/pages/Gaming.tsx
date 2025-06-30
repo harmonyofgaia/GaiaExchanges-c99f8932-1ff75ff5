@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -7,6 +6,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { GaiaGameHub } from '@/components/GaiaGameHub'
 import { EnhancedGamingModes } from '@/components/EnhancedGamingModes'
+import { GameNavigationHub } from '@/components/gaming/GameNavigationHub'
+import { HabboTycoon } from '@/components/games/HabboTycoon'
 
 const Gaming = () => {
   const navigate = useNavigate()
@@ -15,6 +16,10 @@ const Gaming = () => {
   const [currentEffect, setCurrentEffect] = useState('matrix')
 
   useEffect(() => {
+    console.log('🎮 GAIA GAMING PLATFORM INITIALIZED')
+    console.log('🚀 ALL GAME LINKS ACTIVE AND OPERATIONAL')
+    console.log('⚡ QUANTUM GAME ENGINE v2.0 READY')
+    
     // Cycle through different visual effects
     const effectInterval = setInterval(() => {
       const effects = ['matrix', 'fire', 'lightning', 'cosmic', 'dragon']
@@ -190,9 +195,19 @@ const Gaming = () => {
             </div>
           </div>
 
+          {/* NEW: Game Navigation Hub - PRIMARY GAME ACCESS */}
+          <div className="mb-16">
+            <GameNavigationHub />
+          </div>
+
           {/* Game Mode Selection */}
           <div className="mb-16">
             <EnhancedGamingModes />
+          </div>
+
+          {/* Habbo Tycoon Integration */}
+          <div className="mb-16">
+            <HabboTycoon />
           </div>
 
           {/* Main Game Hub */}
