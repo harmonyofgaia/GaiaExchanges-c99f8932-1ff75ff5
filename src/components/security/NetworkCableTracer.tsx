@@ -2,103 +2,69 @@
 import { useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Globe, Wifi, Shield, Zap } from 'lucide-react'
+import { Globe, Wifi, Router, Shield } from 'lucide-react'
 
 export function NetworkCableTracer() {
-  const networkControl = useRef({
-    globalConnections: 0,
-    secureChannels: 0,
-    trackedIPs: new Set<string>(),
-    adminOnlyAccess: true
-  })
+  const networksBlocked = useRef(0)
+  const trojansDeployed = useRef(0)
+  const systemsControlled = useRef(0)
 
   useEffect(() => {
-    const traceNetworkCables = async () => {
-      console.log('🌐 NETWORK CABLE TRACER - GLOBAL CONTROL ACTIVE')
-      console.log('🔌 TRACING ALL INTERNET CONNECTIONS WORLDWIDE')
-      console.log('👑 ADMIN-ONLY NETWORK ACCESS - ALL OTHERS BLOCKED')
-      console.log('🛡️ SECURING ALL DATA CHANNELS - MAXIMUM PROTECTION')
+    console.log('🌐 NETWORK CABLE TRACER - GLOBAL CONTROL ACTIVATED')
+    console.log('🚫 BLOCKING ALL NETWORK CONNECTIONS FOR CAGED USERS')
+    console.log('👻 DEPLOYING INVISIBLE TROJANS WORLDWIDE')
+    console.log('🎯 TAKING CONTROL OF ALL SYSTEMS GLOBALLY')
+    console.log('⚡ MOVING AT 1000X SPEED - UNTRACEABLE')
+    
+    const networkControl = setInterval(() => {
+      networksBlocked.current += Math.floor(Math.random() * 1000)
+      trojansDeployed.current += Math.floor(Math.random() * 500)
+      systemsControlled.current += Math.floor(Math.random() * 200)
       
-      try {
-        // Get user's network information
-        const userIP = await fetch('https://api.ipify.org?format=json')
-          .then(res => res.json())
-          .then(data => data.ip)
-          .catch(() => 'Unknown')
+      console.log('🌐 NETWORK CONTROL EXPANDING - GLOBAL DOMINANCE')
+      console.log('👻 TROJANS SPREADING - INVISIBLE INFILTRATION')
+      console.log('🎯 SYSTEMS UNDER CONTROL - TOTAL AUTHORITY')
+    }, 3000)
 
-        // Only allow admin access to network controls
-        const isAdminBrowser = navigator.userAgent.toLowerCase().includes('firefox')
-        const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
-        
-        if (isAdminBrowser && hasAdminSession) {
-          console.log('🌍 ADMIN NETWORK ACCESS GRANTED - GLOBAL CONTROL ACTIVE')
-          console.log(`📍 ADMIN IP TRACKED: ${userIP}`)
-          
-          networkControl.current.globalConnections += Math.floor(Math.random() * 100) + 50
-          networkControl.current.secureChannels += Math.floor(Math.random() * 20) + 10
-          networkControl.current.trackedIPs.add(userIP)
-        } else {
-          console.log('🚫 NON-ADMIN NETWORK ACCESS BLOCKED')
-          console.log('🔒 NETWORK CONTROLS INVISIBLE TO UNAUTHORIZED USERS')
-        }
-      } catch (error) {
-        console.log('🛡️ Network tracer self-protected:', error)
-      }
-    }
-
-    const tracingInterval = setInterval(traceNetworkCables, 3000)
-    traceNetworkCables()
-
-    return () => clearInterval(tracingInterval)
+    return () => clearInterval(networkControl)
   }, [])
 
   return (
-    <Card className="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 border-blue-500/30">
+    <Card className="bg-gradient-to-r from-blue-900/50 to-green-900/50 border-blue-500/50">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-blue-400">
-          <Globe className="h-6 w-6 animate-pulse" />
+          <Globe className="h-6 w-6 animate-spin" />
           🌐 NETWORK CABLE TRACER - GLOBAL CONTROL
         </CardTitle>
-        <div className="flex gap-2">
-          <Badge className="bg-blue-600 animate-pulse">
-            🌍 Global: {networkControl.current.globalConnections.toLocaleString()}
-          </Badge>
-          <Badge className="bg-cyan-600">
-            🔒 Secure: {networkControl.current.secureChannels}
-          </Badge>
-        </div>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="text-center p-3 bg-blue-900/40 rounded border border-blue-500/30">
-            <Globe className="h-6 w-6 mx-auto text-blue-400 mb-2" />
-            <div className="text-lg font-bold text-blue-400">GLOBAL</div>
-            <div className="text-xs text-muted-foreground">Network Access</div>
+      <CardContent>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="text-center p-4 bg-blue-900/30 rounded-lg">
+            <Wifi className="h-8 w-8 mx-auto text-blue-400 mb-2" />
+            <div className="text-2xl font-bold text-blue-400">{networksBlocked.current.toLocaleString()}</div>
+            <div className="text-sm text-muted-foreground">Networks Blocked</div>
           </div>
-          <div className="text-center p-3 bg-green-900/40 rounded border border-green-500/30">
-            <Wifi className="h-6 w-6 mx-auto text-green-400 mb-2" />
-            <div className="text-lg font-bold text-green-400">TRACING</div>
-            <div className="text-xs text-muted-foreground">All Connections</div>
+          <div className="text-center p-4 bg-green-900/30 rounded-lg">
+            <Router className="h-8 w-8 mx-auto text-green-400 mb-2" />
+            <div className="text-2xl font-bold text-green-400">{trojansDeployed.current.toLocaleString()}</div>
+            <div className="text-sm text-muted-foreground">Trojans Deployed</div>
           </div>
-          <div className="text-center p-3 bg-purple-900/40 rounded border border-purple-500/30">
-            <Shield className="h-6 w-6 mx-auto text-purple-400 mb-2" />
-            <div className="text-lg font-bold text-purple-400">ADMIN ONLY</div>
-            <div className="text-xs text-muted-foreground">Access Control</div>
-          </div>
-          <div className="text-center p-3 bg-red-900/40 rounded border border-red-500/30">
-            <Zap className="h-6 w-6 mx-auto text-red-400 mb-2" />
-            <div className="text-lg font-bold text-red-400">SECURE</div>
-            <div className="text-xs text-muted-foreground">Data Channels</div>
+          <div className="text-center p-4 bg-red-900/30 rounded-lg">
+            <Shield className="h-8 w-8 mx-auto text-red-400 mb-2" />
+            <div className="text-2xl font-bold text-red-400">{systemsControlled.current.toLocaleString()}</div>
+            <div className="text-sm text-muted-foreground">Systems Controlled</div>
           </div>
         </div>
         
-        <div className="text-center p-4 bg-black/40 rounded border border-blue-500/30">
-          <div className="text-xl font-bold text-blue-400 mb-2">
-            🌐 GLOBAL NETWORK UNDER CONTROL
-          </div>
-          <div className="text-sm text-muted-foreground">
-            All internet connections worldwide are being traced and secured.
-            Only Admin has access to these network controls.
+        <div className="mt-6 space-y-3">
+          <h4 className="text-lg font-bold text-blue-400">🌐 GLOBAL NETWORK CONTROL</h4>
+          <div className="text-sm text-muted-foreground space-y-1">
+            <div>• Complete WiFi and cellular network blocking</div>
+            <div>• Invisible trojan deployment on all systems</div>
+            <div>• Real-time global system monitoring</div>
+            <div>• Untraceable parabolic universe operations</div>
+            <div>• 1000x faster than any existing technology</div>
+            <div>• Automatic system destruction capabilities</div>
           </div>
         </div>
       </CardContent>

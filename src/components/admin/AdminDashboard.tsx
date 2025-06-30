@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -25,6 +26,10 @@ import { InvisibleDefenseMatrix } from '../security/InvisibleDefenseMatrix'
 import { UserIsolationSystem } from './UserIsolationSystem'
 import { CreativeGameEngine } from '../games/CreativeGameEngine'
 import { Invisible4StepVerification } from '../security/Invisible4StepVerification'
+import { MasterDefenseOrchestrator } from './MasterDefenseOrchestrator'
+import { UltimateSecuritySuite } from './UltimateSecuritySuite'
+import { QuantumAdminDashboard } from './QuantumAdminDashboard'
+import { UniversalBackupSystem } from '../security/UniversalBackupSystem'
 
 export function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -64,14 +69,15 @@ export function AdminDashboard() {
         </Card>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-7">
+          <TabsList className="grid w-full grid-cols-8">
             <TabsTrigger value="overview">🏠 Overview</TabsTrigger>
             <TabsTrigger value="security">🛡️ Security</TabsTrigger>
             <TabsTrigger value="users">👥 Users</TabsTrigger>
-            <TabsTrigger value="isolation">🔒 Isolation</TabsTrigger>
+            <TabsTrigger value="isolation">🔒 Dragon Cages</TabsTrigger>
             <TabsTrigger value="engine">🎮 Engine</TabsTrigger>
-            <TabsTrigger value="analytics">📊 Analytics</TabsTrigger>
-            <TabsTrigger value="settings">⚙️ Settings</TabsTrigger>
+            <TabsTrigger value="defense">🧠 Mastermind</TabsTrigger>
+            <TabsTrigger value="quantum">⚡ Quantum</TabsTrigger>
+            <TabsTrigger value="backup">☁️ Backup</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -88,7 +94,7 @@ export function AdminDashboard() {
           </TabsContent>
 
           <TabsContent value="security" className="space-y-6">
-            <AdvancedThreatTracker />
+            <UltimateSecuritySuite />
           </TabsContent>
 
           <TabsContent value="users" className="space-y-6">
@@ -112,30 +118,16 @@ export function AdminDashboard() {
             <CreativeGameEngine />
           </TabsContent>
 
-          <TabsContent value="analytics" className="space-y-6">
-            <Card className="bg-black/30 border-purple-500/30">
-              <CardHeader>
-                <CardTitle className="text-purple-400">📊 Analytics Dashboard</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Track system performance and user behavior.
-                </p>
-              </CardContent>
-            </Card>
+          <TabsContent value="defense" className="space-y-6">
+            <MasterDefenseOrchestrator />
           </TabsContent>
 
-          <TabsContent value="settings" className="space-y-6">
-            <Card className="bg-black/30 border-orange-500/30">
-              <CardHeader>
-                <CardTitle className="text-orange-400">⚙️ System Settings</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Configure system settings and preferences.
-                </p>
-              </CardContent>
-            </Card>
+          <TabsContent value="quantum" className="space-y-6">
+            <QuantumAdminDashboard />
+          </TabsContent>
+
+          <TabsContent value="backup" className="space-y-6">
+            <UniversalBackupSystem />
           </TabsContent>
         </Tabs>
       </div>

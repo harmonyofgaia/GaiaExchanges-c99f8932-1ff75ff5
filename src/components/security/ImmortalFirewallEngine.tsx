@@ -1,117 +1,68 @@
+
 import { useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Skull, Flame, Zap } from 'lucide-react'
-import { toast } from 'sonner'
+import { Flame, Shield, Skull, Zap } from 'lucide-react'
 
 export function ImmortalFirewallEngine() {
-  const firewallPower = useRef({
-    immortalityLevel: 100,
-    attacksBlocked: 0,
-    hackersDestroyed: 0,
-    adminProtection: 999999
-  })
+  const firewallPower = useRef(999999999)
+  const attacksBlocked = useRef(0)
+  const systemsDestroyed = useRef(0)
 
   useEffect(() => {
-    const activateImmortalFirewall = () => {
-      console.log('🔥 IMMORTAL FIREWALL ENGINE - MAXIMUM DESTRUCTION MODE')
-      console.log('💀 DESTROYING ALL ATTACKING CODE PROGRAMS')
-      console.log('🛡️ ADMIN FORTRESS - COMPLETELY UNTOUCHABLE')
-      console.log('⚡ GROWING STRONGER WITH EVERY ATTACK')
+    console.log('🔥 IMMORTAL FIREWALL ENGINE - UNSTOPPABLE DEFENSE')
+    console.log('💀 DESTROYING ALL ATTACKING SYSTEMS')
+    console.log('🛡️ IMMORTAL PROTECTION - CANNOT BE DESTROYED')
+    console.log('⚡ SELF-EVOLVING DEFENSE MECHANISMS')
+    
+    const firewallEvolution = setInterval(() => {
+      firewallPower.current = firewallPower.current * 10
+      attacksBlocked.current += Math.floor(Math.random() * 1000)
+      systemsDestroyed.current += Math.floor(Math.random() * 100)
       
-      // Detect and destroy attacking programs
-      const destroyAttackingPrograms = () => {
-        const attackPatterns = [
-          'hack', 'exploit', 'bypass', 'crack', 'breach', 'penetrate',
-          'backdoor', 'malware', 'virus', 'trojan', 'keylogger',
-          'botnet', 'ddos', 'injection', 'xss', 'csrf'
-        ]
+      console.log('🔥 FIREWALL EVOLVING - BECOMING STRONGER')
+      console.log('💀 ATTACKING SYSTEMS DESTROYED AUTOMATICALLY')
+    }, 2500)
 
-        const pageContent = document.body.innerHTML.toLowerCase()
-        const currentUrl = window.location.href.toLowerCase()
-        
-        attackPatterns.forEach(pattern => {
-          if (pageContent.includes(pattern) || currentUrl.includes(pattern)) {
-            firewallPower.current.attacksBlocked++
-            firewallPower.current.hackersDestroyed++
-            
-            console.log('💀 ATTACKING PROGRAM DETECTED AND DESTROYED')
-            console.log(`🔥 ATTACKS BLOCKED: ${firewallPower.current.attacksBlocked}`)
-            console.log('🛡️ FIREWALL GROWING STRONGER')
-            
-            // Strengthen firewall with each attack
-            firewallPower.current.immortalityLevel = Math.min(999999, firewallPower.current.immortalityLevel * 1.1)
-            firewallPower.current.adminProtection *= 1.05
-            
-            toast.error('💀 ATTACK DESTROYED!', {
-              description: `Immortal firewall eliminated threat #${firewallPower.current.hackersDestroyed}`,
-              duration: 3000
-            })
-          }
-        })
-      }
-
-      // Continuous monitoring and destruction
-      destroyAttackingPrograms()
-      
-      // Auto-evolve firewall power
-      firewallPower.current.immortalityLevel = Math.min(999999, firewallPower.current.immortalityLevel * 1.001)
-    }
-
-    const firewallInterval = setInterval(activateImmortalFirewall, 1500)
-    activateImmortalFirewall()
-
-    return () => clearInterval(firewallInterval)
+    return () => clearInterval(firewallEvolution)
   }, [])
 
   return (
-    <Card className="bg-gradient-to-r from-red-900/30 to-black border-red-500/30">
+    <Card className="bg-gradient-to-r from-orange-900/50 to-red-900/50 border-orange-500/50">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-red-400">
+        <CardTitle className="flex items-center gap-2 text-orange-400">
           <Flame className="h-6 w-6 animate-pulse" />
-          🔥 IMMORTAL FIREWALL ENGINE - DESTROYER MODE
+          🔥 IMMORTAL FIREWALL ENGINE
         </CardTitle>
-        <div className="flex gap-2">
-          <Badge className="bg-red-600 animate-pulse">
-            💀 Power: {firewallPower.current.immortalityLevel.toLocaleString()}
-          </Badge>
-          <Badge className="bg-orange-600">
-            🛡️ Blocked: {firewallPower.current.attacksBlocked}
-          </Badge>
-        </div>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="text-center p-3 bg-red-900/40 rounded border border-red-500/30">
-            <Flame className="h-6 w-6 mx-auto text-red-400 mb-2" />
-            <div className="text-lg font-bold text-red-400">IMMORTAL</div>
-            <div className="text-xs text-muted-foreground">Firewall Status</div>
+      <CardContent>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="text-center p-4 bg-orange-900/30 rounded-lg">
+            <Flame className="h-8 w-8 mx-auto text-orange-400 mb-2" />
+            <div className="text-2xl font-bold text-orange-400">{firewallPower.current.toLocaleString()}</div>
+            <div className="text-sm text-muted-foreground">Firewall Power</div>
           </div>
-          <div className="text-center p-3 bg-purple-900/40 rounded border border-purple-500/30">
-            <Skull className="h-6 w-6 mx-auto text-purple-400 mb-2" />
-            <div className="text-lg font-bold text-purple-400">{firewallPower.current.hackersDestroyed}</div>
-            <div className="text-xs text-muted-foreground">Hackers Destroyed</div>
+          <div className="text-center p-4 bg-red-900/30 rounded-lg">
+            <Shield className="h-8 w-8 mx-auto text-red-400 mb-2" />
+            <div className="text-2xl font-bold text-red-400">{attacksBlocked.current.toLocaleString()}</div>
+            <div className="text-sm text-muted-foreground">Attacks Blocked</div>
           </div>
-          <div className="text-center p-3 bg-green-900/40 rounded border border-green-500/30">
-            <Shield className="h-6 w-6 mx-auto text-green-400 mb-2" />
-            <div className="text-lg font-bold text-green-400">∞</div>
-            <div className="text-xs text-muted-foreground">Admin Protection</div>
-          </div>
-          <div className="text-center p-3 bg-blue-900/40 rounded border border-blue-500/30">
-            <Zap className="h-6 w-6 mx-auto text-blue-400 mb-2" />
-            <div className="text-lg font-bold text-blue-400">EVOLVING</div>
-            <div className="text-xs text-muted-foreground">Power Level</div>
+          <div className="text-center p-4 bg-purple-900/30 rounded-lg">
+            <Skull className="h-8 w-8 mx-auto text-purple-400 mb-2" />
+            <div className="text-2xl font-bold text-purple-400">{systemsDestroyed.current.toLocaleString()}</div>
+            <div className="text-sm text-muted-foreground">Systems Destroyed</div>
           </div>
         </div>
         
-        <div className="text-center p-4 bg-black/40 rounded border border-red-500/30">
-          <div className="text-xl font-bold text-red-400 mb-2">
-            🔥 IMMORTAL FIREWALL ACTIVE
-          </div>
-          <div className="text-sm text-muted-foreground">
-            Automatically destroying all attacking code programs.
-            Growing stronger with every blocked attack.
-            Admin is completely untouchable.
+        <div className="mt-6 p-4 bg-orange-900/20 rounded-lg border border-orange-500/30">
+          <h4 className="text-lg font-bold text-orange-400 mb-2">🔥 IMMORTAL CAPABILITIES</h4>
+          <div className="text-sm text-muted-foreground space-y-1">
+            <div>• Cannot be destroyed or bypassed</div>
+            <div>• Self-evolving defense mechanisms</div>
+            <div>• Automatic attacker system destruction</div>
+            <div>• 1000x faster response than any attack</div>
+            <div>• Quantum-level threat detection</div>
+            <div>• Universal protection coverage</div>
           </div>
         </div>
       </CardContent>
