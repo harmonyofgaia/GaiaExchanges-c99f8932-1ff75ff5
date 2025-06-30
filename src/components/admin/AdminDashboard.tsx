@@ -7,6 +7,7 @@ import { QuantumAdminDashboard } from './QuantumAdminDashboard'
 import { TransactionReversalSystem } from './TransactionReversalSystem'
 import { GlobalTrackingSystem } from './GlobalTrackingSystem'
 import { CrossPlatformCompatibility } from '../CrossPlatformCompatibility'
+import { PrivateBlockchainNetwork } from './PrivateBlockchainNetwork'
 
 export function AdminDashboard() {
   return (
@@ -23,7 +24,7 @@ export function AdminDashboard() {
         </div>
 
         <Tabs defaultValue="quantum" className="w-full">
-          <TabsList className="grid w-full grid-cols-7">
+          <TabsList className="grid w-full grid-cols-8">
             <TabsTrigger value="quantum">🧠 Quantum Mind</TabsTrigger>
             <TabsTrigger value="defense">🛡️ Master Defense</TabsTrigger>
             <TabsTrigger value="security">👑 Security Suite</TabsTrigger>
@@ -31,6 +32,7 @@ export function AdminDashboard() {
             <TabsTrigger value="transactions">💰 Fund Protection</TabsTrigger>
             <TabsTrigger value="tracking">🛰️ Global Tracking</TabsTrigger>
             <TabsTrigger value="platform">📱 Platform Support</TabsTrigger>
+            <TabsTrigger value="blockchain">🔗 Private Blockchain</TabsTrigger>
           </TabsList>
 
           <TabsContent value="quantum" className="space-y-6">
@@ -59,6 +61,10 @@ export function AdminDashboard() {
 
           <TabsContent value="platform" className="space-y-6">
             <CrossPlatformCompatibility />
+          </TabsContent>
+
+          <TabsContent value="blockchain" className="space-y-6">
+            <PrivateBlockchainNetwork />
           </TabsContent>
         </Tabs>
       </div>

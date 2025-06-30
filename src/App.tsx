@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -25,6 +24,8 @@ import SecureAdmin from "./pages/SecureAdmin"
 import ImmortalSecurity from "./pages/ImmortalSecurity"
 import UltimateSecurity from "./pages/UltimateSecurity"
 import NotFound from "./pages/NotFound"
+import AuraLandScrapyard from "./pages/AuraLandScrapyard"
+import NFTGreenAnimalPlatform from "./pages/NFTGreenAnimalPlatform"
 
 const queryClient = new QueryClient()
 
@@ -49,6 +50,8 @@ function App() {
               <Route path="/live-tracking" element={<LiveTracking />} />
               <Route path="/exchange" element={<Exchange />} />
               <Route path="/virtual-world" element={<VirtualWorld />} />
+              <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
+              <Route path="/nft-green-animal-platform" element={<NFTGreenAnimalPlatform />} />
               <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
               <Route path="/system-status" element={<SystemStatus />} />
               <Route path="/security" element={<UltimateSecurity />} />

@@ -5,7 +5,8 @@ import { Progress } from '@/components/ui/progress'
 import { Activity, TrendingUp, Users, Zap } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import HoverSidebar from '@/components/HoverSidebar'
-import { GAIA_METRICS } from '@/constants/gaia'
+import { LiveTrackingEngine } from '@/components/tracking/LiveTrackingEngine'
+import { GAIA_METRICS, GAIA_TOKEN } from '@/constants/gaia'
 
 const LiveTracking = () => {
   const [liveData, setLiveData] = useState({
@@ -42,10 +43,20 @@ const LiveTracking = () => {
               <p className="text-center text-xl text-muted-foreground">
                 Real-time monitoring of the GAiA ecosystem
               </p>
+              <div className="text-center mt-4 space-y-2">
+                <div className="text-sm text-green-400">
+                  Connected to Official GAiA Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}
+                </div>
+                <div className="text-sm text-blue-400">
+                  Official Wallet: {GAIA_TOKEN.WALLET_ADDRESS}
+                </div>
+              </div>
             </CardHeader>
           </Card>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <LiveTrackingEngine />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 mt-8">
             <Card className="border-green-500/30 bg-green-900/20">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
@@ -159,13 +170,8 @@ const LiveTracking = () => {
                   </div>
                   
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Ecosystem Health</span>
-                    <Badge className="bg-purple-600">{GAIA_METRICS.ECOSYSTEM_HEALTH}%</Badge>
-                  </div>
-                  
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm">Dragon Power</span>
-                    <Badge className="bg-orange-600">{GAIA_METRICS.DRAGON_POWER}%</Badge>
+                    <span className="text-sm">Uptime</span>
+                    <Badge className="bg-purple-600">99.99%</Badge>
                   </div>
                 </div>
               </CardContent>
