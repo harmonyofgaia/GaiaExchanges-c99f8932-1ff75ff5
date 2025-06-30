@@ -9,7 +9,6 @@ import { AppSidebar } from '@/components/AppSidebar'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'
-import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 
 // Pages
 import Index from '@/pages/Index'
@@ -19,7 +18,7 @@ import NFTs from '@/pages/NFTs'
 import Analytics from '@/pages/Analytics'
 import Swap from '@/pages/Swap'
 import Security from '@/pages/Security'
-import Admin from '@/pages/Admin'
+import AdminLogin from '@/pages/AdminLogin'
 import SecureAdmin from '@/pages/SecureAdmin'
 import GaiasProjects from '@/pages/GaiasProjects'
 import TransparentWallet from '@/pages/TransparentWallet'
@@ -49,7 +48,7 @@ function App() {
                       <Route path="/analytics" element={<Analytics />} />
                       <Route path="/swap" element={<Swap />} />
                       <Route path="/security" element={<Security />} />
-                      <Route path="/admin" element={<Admin />} />
+                      <Route path="/admin" element={<AdminLogin />} />
                       <Route path="/secure-admin" element={<SecureAdmin />} />
                       <Route path="/gaias-projects" element={<GaiasProjects />} />
                       <Route path="/transparent-wallet" element={<TransparentWallet />} />

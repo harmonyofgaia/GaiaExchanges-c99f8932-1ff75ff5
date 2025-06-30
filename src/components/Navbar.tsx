@@ -62,19 +62,14 @@ export function Navbar() {
                   <Button
                     variant={isActive ? "default" : "ghost"}
                     size="sm"
-                    className={`h-9 px-2 lg:px-3 ${
+                    className={`${
                       isActive 
-                        ? "bg-primary text-primary-foreground shadow-sm" 
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                    }`}
+                        ? "bg-green-600 text-white hover:bg-green-700" 
+                        : "hover:bg-muted"
+                    } transition-colors`}
                   >
-                    <Icon className="h-4 w-4 lg:mr-2" />
-                    <span className="hidden lg:inline font-medium">{item.label}</span>
-                    {item.label === 'Admin' && (
-                      <Badge variant="destructive" className="ml-1 px-1 py-0 text-xs">
-                        ADMIN
-                      </Badge>
-                    )}
+                    <Icon className="h-4 w-4" />
+                    <span className="hidden sm:inline ml-2">{item.label}</span>
                   </Button>
                 </Link>
               )
@@ -82,9 +77,9 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center gap-2">
           <Badge variant="outline" className="text-green-400 border-green-400">
-            🌍 GAiA Network
+            GAIA Platform
           </Badge>
         </div>
       </div>
