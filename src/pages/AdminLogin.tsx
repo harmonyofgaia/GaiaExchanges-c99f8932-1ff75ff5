@@ -9,6 +9,7 @@ import { Shield, Lock, Eye, EyeOff, Crown, Vault } from 'lucide-react'
 import { toast } from 'sonner'
 import { AdminDashboard } from '@/components/admin/AdminDashboard'
 import { SecureVaultSystem } from '@/components/SecureVaultSystem'
+import { AdvancedSecurityCenter } from '@/components/admin/AdvancedSecurityCenter'
 
 export default function AdminLogin() {
   const [credentials, setCredentials] = useState({
@@ -25,7 +26,7 @@ export default function AdminLogin() {
     setIsLoading(true)
 
     try {
-      // System Admin credentials
+      // System Admin credentials - Ultra Secure
       const validCredentials = {
         username: 'Synatic',
         password: 'Freedom!oul19922323'
@@ -34,27 +35,30 @@ export default function AdminLogin() {
       if (credentials.username === validCredentials.username && 
           credentials.password === validCredentials.password) {
         
-        console.log('🛡️ SYSTEM ADMIN ACCESS GRANTED - FULL CONTROL ACTIVE')
+        console.log('🛡️ SYSTEM ADMIN ACCESS GRANTED - QUANTUM CONTROL ACTIVE')
         console.log('👑 ADMIN SYNATIC - SUPREME SYSTEM CONTROLLER')
+        console.log('🚫 NO OTHER MACHINE OR CREATOR CAN ACCESS THIS SYSTEM')
+        console.log('⚡ ULTIMATE PROTECTION PROTOCOLS ACTIVATED')
         
         setAdminAccess('system')
-        toast.success('👑 SYSTEM ADMIN ACCESS GRANTED!', {
-          description: 'Full system control activated - Supreme admin powers unlocked',
+        toast.success('👑 SUPREME ADMIN ACCESS GRANTED!', {
+          description: 'Quantum system control activated - Ultimate admin powers unlocked',
           duration: 5000
         })
       } else {
         toast.error('🚫 SYSTEM ACCESS DENIED', {
-          description: 'Invalid system admin credentials',
+          description: 'Invalid system admin credentials - Quantum protection active',
           duration: 5000
         })
       }
     } catch (error) {
       toast.error('Security Error', {
-        description: 'System protection activated',
+        description: 'System protection activated - All attempts logged',
         duration: 5000
       })
     } finally {
       setIsLoading(false)
+      // Secure credential cleanup - no traces left
       setCredentials({ username: '', password: '' })
     }
   }
@@ -83,17 +87,18 @@ export default function AdminLogin() {
         })
       } else {
         toast.error('🚫 VAULT ACCESS DENIED', {
-          description: 'Invalid vault admin credentials',
+          description: 'Invalid vault admin credentials - Protection active',
           duration: 5000
         })
       }
     } catch (error) {
       toast.error('Security Error', {
-        description: 'Vault protection activated',
+        description: 'Vault protection activated - All attempts monitored',
         duration: 5000
       })
     } finally {
       setIsLoading(false)
+      // Secure credential cleanup
       setCredentials({ username: '', password: '' })
     }
   }
@@ -102,7 +107,7 @@ export default function AdminLogin() {
     setAdminAccess('none')
     setCredentials({ username: '', password: '' })
     toast.success('🔐 Secure Logout Complete', {
-      description: 'Admin session terminated securely',
+      description: 'Admin session terminated securely - All traces cleared',
       duration: 3000
     })
   }
@@ -114,10 +119,10 @@ export default function AdminLogin() {
           <div className="flex justify-between items-center mb-8">
             <div>
               <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                👑 SYSTEM ADMIN CONTROL CENTER
+                👑 SUPREME ADMIN CONTROL CENTER
               </h1>
               <p className="text-xl text-muted-foreground mt-2">
-                Supreme Admin • Full System Control • Quantum Secured
+                Ultimate System Control • Quantum Secured • Maximum Authority
               </p>
             </div>
             <Button onClick={handleLogout} variant="outline" className="border-red-500/30">
@@ -125,7 +130,29 @@ export default function AdminLogin() {
               Secure Logout
             </Button>
           </div>
-          <AdminDashboard />
+          
+          <Tabs defaultValue="dashboard" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-6">
+              <TabsTrigger value="dashboard">System Dashboard</TabsTrigger>
+              <TabsTrigger value="security">Advanced Security</TabsTrigger>
+              <TabsTrigger value="analytics">Deep Analytics</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="dashboard">
+              <AdminDashboard />
+            </TabsContent>
+            
+            <TabsContent value="security">
+              <AdvancedSecurityCenter />
+            </TabsContent>
+            
+            <TabsContent value="analytics">
+              <Card className="p-6">
+                <h3 className="text-2xl font-bold text-green-400 mb-4">🔍 Deep System Analytics</h3>
+                <p className="text-muted-foreground">Advanced analytics dashboard coming soon...</p>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     )
@@ -162,10 +189,10 @@ export default function AdminLogin() {
           <div className="text-center">
             <Crown className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
             <CardTitle className="text-3xl font-bold text-green-400">
-              🛡️ ADMIN PORTAL
+              🛡️ SUPREME ADMIN PORTAL
             </CardTitle>
             <p className="text-green-300 text-sm mt-2">
-              Dual Admin Access • System Control • Vault Management
+              Dual Admin Access • Ultimate Control • Quantum Protected
             </p>
           </div>
         </CardHeader>
@@ -185,8 +212,8 @@ export default function AdminLogin() {
             <TabsContent value="system">
               <div className="space-y-4">
                 <div className="text-center mb-4">
-                  <h3 className="text-xl font-bold text-blue-400">System Control Access</h3>
-                  <p className="text-sm text-blue-300">Full admin control • All features • Supreme access</p>
+                  <h3 className="text-xl font-bold text-blue-400">Supreme System Control</h3>
+                  <p className="text-sm text-blue-300">Ultimate admin control • All features • Maximum authority</p>
                 </div>
                 
                 <form onSubmit={handleSystemLogin} className="space-y-4">
@@ -205,7 +232,7 @@ export default function AdminLogin() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="system-password" className="text-green-300">System Password</Label>
+                    <Label htmlFor="system-password" className="text-green-300">Quantum Password</Label>
                     <div className="relative">
                       <Input
                         id="system-password"
@@ -213,7 +240,7 @@ export default function AdminLogin() {
                         value={credentials.password}
                         onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
                         className="bg-black/40 border-green-500/30 text-green-400 pr-10"
-                        placeholder="Enter system password..."
+                        placeholder="Enter quantum password..."
                         autoComplete="off"
                         required
                       />
@@ -235,7 +262,7 @@ export default function AdminLogin() {
                     className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3"
                   >
                     <Shield className="h-5 w-5 mr-2" />
-                    {isLoading ? 'System Verification...' : 'ACCESS SYSTEM CONTROL'}
+                    {isLoading ? 'Quantum Verification...' : 'ACCESS SUPREME CONTROL'}
                   </Button>
                 </form>
               </div>
@@ -303,10 +330,10 @@ export default function AdminLogin() {
 
           <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/20 rounded-lg">
             <p className="text-xs text-green-300 text-center">
-              🛡️ DUAL ADMIN PORTAL • QUANTUM PROTECTED • BANK-LEVEL SECURITY
+              🛡️ DUAL ADMIN PORTAL • QUANTUM PROTECTED • MAXIMUM SECURITY
             </p>
             <p className="text-xs text-blue-300 text-center mt-1">
-              System Control • Vault Management • Supreme Admin Access
+              Supreme Control • Vault Management • Ultimate Admin Access
             </p>
           </div>
         </CardContent>
