@@ -1,13 +1,11 @@
 
-import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Mail, MessageSquare, Phone, MapPin, Send } from 'lucide-react'
-import { toast } from 'sonner'
+import { Textarea } from '@/components/ui/textarea'
+import { Mail, MessageCircle, Phone, MapPin, Send } from 'lucide-react'
+import { useState } from 'react'
 import HoverSidebar from '@/components/HoverSidebar'
 
 const Contact = () => {
@@ -15,152 +13,96 @@ const Contact = () => {
     name: '',
     email: '',
     subject: '',
-    contactType: '',
     message: ''
   })
-  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!formData.name || !formData.email || !formData.message) {
-      toast.error('Please fill in all required fields')
-      return
-    }
-
-    setLoading(true)
-    try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      toast.success('Message sent successfully!', {
-        description: 'We\'ll get back to you within 24 hours.',
-        duration: 5000
-      })
-      
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        contactType: '',
-        message: ''
-      })
-    } catch (error) {
-      toast.error('Failed to send message. Please try again.')
-    } finally {
-      setLoading(false)
-    }
+    console.log('Contact form submitted:', formData)
+    // Handle form submission here
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20">
+    <div className="min-h-screen bg-gradient-to-br from-teal-900/20 via-blue-900/20 to-purple-900/20">
       <HoverSidebar />
       
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">
-          {/* Header */}
-          <Card className="mb-8 border-blue-500/30 bg-gradient-to-r from-blue-900/30 to-cyan-900/30">
+          <Card className="mb-8 border-teal-500/30 bg-gradient-to-r from-teal-900/30 to-blue-900/30">
             <CardHeader>
-              <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-                📧 Contact Us
+              <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-400">
+                📞 Contact GAiA
               </CardTitle>
               <p className="text-center text-xl text-muted-foreground">
-                Get in touch with the Harmony of Gaia community
+                Get in touch with our community team
               </p>
             </CardHeader>
           </Card>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Contact Form */}
-            <div className="lg:col-span-2">
-              <Card className="border-purple-500/30 bg-purple-900/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-purple-400">
-                    <MessageSquare className="h-6 w-6" />
-                    Send us a Message
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="name">Name *</Label>
-                        <Input
-                          id="name"
-                          value={formData.name}
-                          onChange={(e) => setFormData({...formData, name: e.target.value})}
-                          placeholder="Your full name"
-                          className="bg-black/30 border-purple-500/30"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="email">Email *</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => setFormData({...formData, email: e.target.value})}
-                          placeholder="your.email@example.com"
-                          className="bg-black/30 border-purple-500/30"
-                        />
-                      </div>
-                    </div>
+            <Card className="border-blue-500/30 bg-blue-900/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-blue-400">
+                  <MessageCircle className="h-6 w-6" />
+                  Send us a message
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <Label htmlFor="name">Name</Label>
+                    <Input
+                      id="name"
+                      value={formData.name}
+                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                      placeholder="Your name"
+                      className="bg-black/30 border-blue-500/30"
+                    />
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                      placeholder="your.email@example.com"
+                      className="bg-black/30 border-blue-500/30"
+                    />
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="subject">Subject</Label>
+                    <Input
+                      id="subject"
+                      value={formData.subject}
+                      onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
+                      placeholder="How can we help?"
+                      className="bg-black/30 border-blue-500/30"
+                    />
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+                      placeholder="Tell us more about your inquiry..."
+                      rows={6}
+                      className="bg-black/30 border-blue-500/30"
+                    />
+                  </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="subject">Subject</Label>
-                        <Input
-                          id="subject"
-                          value={formData.subject}
-                          onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                          placeholder="Brief subject line"
-                          className="bg-black/30 border-purple-500/30"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="contactType">Contact Type</Label>
-                        <Select value={formData.contactType} onValueChange={(value) => setFormData({...formData, contactType: value})}>
-                          <SelectTrigger className="bg-black/30 border-purple-500/30">
-                            <SelectValue placeholder="Select type" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="general">General Inquiry</SelectItem>
-                            <SelectItem value="technical">Technical Support</SelectItem>
-                            <SelectItem value="partnership">Partnership</SelectItem>
-                            <SelectItem value="feedback">Feedback</SelectItem>
-                            <SelectItem value="bug-report">Bug Report</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="message">Message *</Label>
-                      <Textarea
-                        id="message"
-                        value={formData.message}
-                        onChange={(e) => setFormData({...formData, message: e.target.value})}
-                        placeholder="Tell us how we can help you..."
-                        rows={6}
-                        className="bg-black/30 border-purple-500/30"
-                      />
-                    </div>
-
-                    <Button 
-                      type="submit" 
-                      disabled={loading}
-                      className="w-full bg-purple-600 hover:bg-purple-700 h-12"
-                    >
-                      {loading ? 'Sending...' : (
-                        <>
-                          <Send className="h-4 w-4 mr-2" />
-                          Send Message
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
+                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 h-12">
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
 
             {/* Contact Information */}
             <div className="space-y-6">
@@ -168,61 +110,105 @@ const Contact = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-green-400">
                     <Mail className="h-6 w-6" />
-                    Get in Touch
+                    Email Support
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <Mail className="h-5 w-5 text-green-400" />
+                <CardContent>
+                  <div className="space-y-3">
                     <div>
-                      <p className="font-medium">Email</p>
-                      <p className="text-sm text-muted-foreground">contact@harmonyofgaia.com</p>
+                      <div className="font-bold text-green-300">General Support</div>
+                      <div className="text-muted-foreground">support@gaia-harmony.com</div>
                     </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <MessageSquare className="h-5 w-5 text-blue-400" />
                     <div>
-                      <p className="font-medium">Discord</p>
-                      <p className="text-sm text-muted-foreground">Join our community</p>
+                      <div className="font-bold text-green-300">Partnership Inquiries</div>
+                      <div className="text-muted-foreground">partnerships@gaia-harmony.com</div>
                     </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <MapPin className="h-5 w-5 text-purple-400" />
                     <div>
-                      <p className="font-medium">Global Community</p>
-                      <p className="text-sm text-muted-foreground">Worldwide presence</p>
+                      <div className="font-bold text-green-300">Technical Support</div>
+                      <div className="text-muted-foreground">tech@gaia-harmony.com</div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-cyan-500/30 bg-cyan-900/20">
+              <Card className="border-purple-500/30 bg-purple-900/20">
                 <CardHeader>
-                  <CardTitle className="text-cyan-400">Response Times</CardTitle>
+                  <CardTitle className="flex items-center gap-2 text-purple-400">
+                    <MessageCircle className="h-6 w-6" />
+                    Community Channels
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-sm">General Inquiries</span>
-                    <span className="text-sm text-cyan-400">24-48 hours</span>
+                <CardContent>
+                  <div className="space-y-3">
+                    <Button className="w-full bg-indigo-600 hover:bg-indigo-700 justify-start">
+                      Join Discord Community
+                    </Button>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700 justify-start">
+                      Follow on Twitter
+                    </Button>
+                    <Button className="w-full bg-red-600 hover:bg-red-700 justify-start">
+                      Subscribe on YouTube
+                    </Button>
+                    <Button className="w-full bg-orange-600 hover:bg-orange-700 justify-start">
+                      Join Telegram
+                    </Button>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm">Technical Support</span>
-                    <span className="text-sm text-green-400">12-24 hours</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm">Bug Reports</span>
-                    <span className="text-sm text-orange-400">4-12 hours</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm">Partnership</span>
-                    <span className="text-sm text-purple-400">2-5 days</span>
+                </CardContent>
+              </Card>
+
+              <Card className="border-orange-500/30 bg-orange-900/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-orange-400">
+                    <Phone className="h-6 w-6" />
+                    Response Times
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span>General Inquiries:</span>
+                      <span className="text-orange-300">24-48 hours</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Technical Support:</span>
+                      <span className="text-orange-300">12-24 hours</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Urgent Issues:</span>
+                      <span className="text-orange-300">2-6 hours</span>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
             </div>
           </div>
+
+          {/* FAQ Section */}
+          <Card className="mt-8 border-cyan-500/30 bg-cyan-900/20">
+            <CardHeader>
+              <CardTitle className="text-cyan-400">Frequently Asked Questions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-bold text-cyan-300 mb-2">How do I get started with GAiA?</h4>
+                  <p className="text-muted-foreground mb-4">Create a free account and start exploring our gaming ecosystem. No prior blockchain experience needed!</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-cyan-300 mb-2">Is GAiA available on mobile?</h4>
+                  <p className="text-muted-foreground mb-4">Yes! Download our mobile app from the App Store or Google Play for the full GAiA experience.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-cyan-300 mb-2">How does GAiA help the environment?</h4>
+                  <p className="text-muted-foreground mb-4">A portion of all transactions goes directly to verified environmental restoration projects worldwide.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-cyan-300 mb-2">Can I earn real money playing games?</h4>
+                  <p className="text-muted-foreground mb-4">Yes! Earn GAiA tokens through gameplay which can be traded or used within our ecosystem.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
