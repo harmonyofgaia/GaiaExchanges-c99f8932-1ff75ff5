@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -19,6 +18,7 @@ import { AdminControlSystem } from './AdminControlSystem'
 import { ParabolicCommandCenter } from './ParabolicCommandCenter'
 import { PhantomRecoveryEngine } from './PhantomRecoveryEngine'
 import { AutoIssueResolver } from '../AutoIssueResolver'
+import { UltimateSecuritySuite } from './UltimateSecuritySuite'
 
 export function AdminDashboard() {
   const [totalUsers, setTotalUsers] = useState(15247)
@@ -44,7 +44,7 @@ export function AdminDashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-purple-400">
               <Crown className="h-8 w-8 animate-pulse" />
-              👑 GAIA ADMIN COMMAND CENTER - COMMUNITY PROTECTION HQ
+              👑 GAIA ADMIN COMMAND CENTER - ULTIMATE SECURITY SUITE
             </CardTitle>
             <div className="flex gap-4 text-sm">
               <Badge className="bg-green-600">
@@ -57,21 +57,26 @@ export function AdminDashboard() {
                 🚨 Threats Stopped: {threatsNeutralized.toLocaleString()}
               </Badge>
               <Badge className="bg-purple-600 animate-pulse">
-                ⚡ GOD MODE: ACTIVE
+                ⚡ ULTIMATE MODE: ACTIVE
               </Badge>
             </div>
           </CardHeader>
         </Card>
 
         {/* Main Admin Tabs */}
-        <Tabs defaultValue="recovery" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+        <Tabs defaultValue="ultimate" className="w-full">
+          <TabsList className="grid w-full grid-cols-6">
+            <TabsTrigger value="ultimate">🚀 Ultimate Suite</TabsTrigger>
             <TabsTrigger value="recovery">🛡️ Recovery Engine</TabsTrigger>
             <TabsTrigger value="control">⚙️ System Control</TabsTrigger>
             <TabsTrigger value="parabolic">👑 Command Center</TabsTrigger>
             <TabsTrigger value="monitoring">📊 Live Monitor</TabsTrigger>
             <TabsTrigger value="analytics">📈 Analytics</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="ultimate" className="space-y-6">
+            <UltimateSecuritySuite />
+          </TabsContent>
 
           <TabsContent value="recovery" className="space-y-6">
             <PhantomRecoveryEngine />
@@ -125,21 +130,25 @@ export function AdminDashboard() {
         {/* Emergency Admin Actions */}
         <Card className="bg-gradient-to-r from-red-900/30 to-black border-red-500/50">
           <CardHeader>
-            <CardTitle className="text-red-400">🚨 EMERGENCY ADMIN ACTIONS</CardTitle>
+            <CardTitle className="text-red-400">🚨 ULTIMATE EMERGENCY ACTIONS</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <Button className="bg-red-600 hover:bg-red-700 h-16">
                 <Shield className="h-6 w-6 mr-2" />
-                🛡️ ACTIVATE GLOBAL PROTECTION
+                🛡️ GLOBAL PROTECTION
               </Button>
               <Button className="bg-orange-600 hover:bg-orange-700 h-16">
                 <Zap className="h-6 w-6 mr-2" />
-                ⚡ EMERGENCY WALLET LOCKDOWN
+                ⚡ QUANTUM LOCKDOWN
               </Button>
               <Button className="bg-purple-600 hover:bg-purple-700 h-16">
                 <Crown className="h-6 w-6 mr-2" />
-                👑 PARABOLIC UNIVERSE ACCESS
+                👑 WORLD TAKEOVER
+              </Button>
+              <Button className="bg-blue-600 hover:bg-blue-700 h-16">
+                <Eye className="h-6 w-6 mr-2" />
+                👻 INVISIBLE MODE
               </Button>
             </div>
           </CardContent>
