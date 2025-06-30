@@ -1,26 +1,71 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { BarChart3, Shield, Activity } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { BarChart3, Activity, Shield, Globe } from 'lucide-react'
 
 const ComprehensiveStatus = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-green-900/20 to-purple-900/20">
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-blue-400 mb-4">
-            📊 COMPREHENSIVE STATUS
-          </h1>
-          <p className="text-muted-foreground">
-            Complete system overview and analytics
-          </p>
-        </div>
-        <Card className="border-blue-500/30 bg-blue-900/20">
-          <CardContent className="pt-6 text-center">
-            <BarChart3 className="h-16 w-16 text-blue-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-blue-400 mb-4">All Systems Operational</h3>
-            <p className="text-muted-foreground">
-              Comprehensive monitoring dashboard with dragon protection metrics
-            </p>
+    <div className="min-h-screen p-6 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
+      <div className="container mx-auto max-w-6xl">
+        <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-blue-900/30">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-purple-400 text-3xl">
+              <BarChart3 className="h-8 w-8" />
+              📊 Comprehensive System Status
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-blue-400">System Health</h3>
+                <div className="space-y-3">
+                  <div>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-sm">CPU Usage</span>
+                      <span className="text-sm text-green-400">15%</span>
+                    </div>
+                    <Progress value={15} className="h-2" />
+                  </div>
+                  <div>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-sm">Memory Usage</span>
+                      <span className="text-sm text-blue-400">32%</span>
+                    </div>
+                    <Progress value={32} className="h-2" />
+                  </div>
+                  <div>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-sm">Storage Usage</span>
+                      <span className="text-sm text-purple-400">67%</span>
+                    </div>
+                    <Progress value={67} className="h-2" />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-green-400">Service Status</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span>Web Server</span>
+                    <Badge className="bg-green-600">✅ Online</Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Database</span>
+                    <Badge className="bg-green-600">✅ Online</Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>API Gateway</span>
+                    <Badge className="bg-green-600">✅ Online</Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Quantum Security</span>
+                    <Badge className="bg-green-600">✅ Active</Badge>
+                  </div>
+                </div>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>

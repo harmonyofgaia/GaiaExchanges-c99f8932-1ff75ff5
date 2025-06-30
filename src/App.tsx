@@ -11,6 +11,12 @@ import About from "./pages/About"
 import Contact from "./pages/Contact"
 import Pricing from "./pages/Pricing"
 import Downloads from "./pages/Downloads"
+import Wallet from "./pages/Wallet"
+import Gaming from "./pages/Gaming"
+import CoinCrafter from "./pages/CoinCrafter"
+import LiveTracking from "./pages/LiveTracking"
+import Exchange from "./pages/Exchange"
+import ComprehensiveStatus from "./pages/ComprehensiveStatus"
 import Admin from "./pages/Admin"
 import SecureAdmin from "./pages/SecureAdmin"
 import ImmortalSecurity from "./pages/ImmortalSecurity"
@@ -34,6 +40,12 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/downloads" element={<Downloads />} />
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/gaming" element={<Gaming />} />
+              <Route path="/coin-crafter" element={<CoinCrafter />} />
+              <Route path="/live-tracking" element={<LiveTracking />} />
+              <Route path="/exchange" element={<Exchange />} />
+              <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
               <Route 
                 path="/admin" 
                 element={

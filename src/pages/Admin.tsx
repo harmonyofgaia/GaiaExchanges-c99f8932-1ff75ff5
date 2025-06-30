@@ -11,6 +11,8 @@ import { BlockchainRollbackManager } from '@/components/admin/BlockchainRollback
 import { QuantumGlobalCommandCenter } from '@/components/admin/QuantumGlobalCommandCenter'
 import { UltimateAdminControls } from '@/components/admin/UltimateAdminControls'
 import { QuantumGameInventory } from '@/components/admin/QuantumGameInventory'
+import { EnhancedInventoryManager } from '@/components/admin/EnhancedInventoryManager'
+import { GamingAssetsManager } from '@/components/admin/GamingAssetsManager'
 import { IntellectualPropertyProtection } from '@/components/legal/IntellectualPropertyProtection'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
@@ -24,20 +26,26 @@ export default function Admin() {
               👑 GAiA ULTIMATE QUANTUM ADMIN CENTER - GODFATHER MODE
             </h1>
             <p className="text-gray-300 text-lg">
-              20 Quantum Computers • Global Search Engine • Ultimate Control • Infinite Power • Gaming Universe
+              20 Quantum Computers • Global Search Engine • Ultimate Control • Infinite Power • Gaming Universe • Premium Inventory
             </p>
           </div>
           
           <Tabs defaultValue="quantum-command" className="w-full">
-            <TabsList className="grid w-full grid-cols-11 bg-black/50 backdrop-blur-md border border-purple-500/20 text-xs">
+            <TabsList className="grid w-full grid-cols-12 bg-black/50 backdrop-blur-md border border-purple-500/20 text-xs">
               <TabsTrigger value="quantum-command" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                 👑 Quantum Command
               </TabsTrigger>
               <TabsTrigger value="ultimate-controls" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
                 ⚡ Ultimate Controls
               </TabsTrigger>
+              <TabsTrigger value="enhanced-inventory" className="data-[state=active]:bg-gold-500/20 data-[state=active]:text-gold-400">
+                💰 Premium Inventory
+              </TabsTrigger>
               <TabsTrigger value="game-inventory" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
                 🎮 Game Inventory
+              </TabsTrigger>
+              <TabsTrigger value="gaming-assets" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
+                🎨 Gaming Assets
               </TabsTrigger>
               <TabsTrigger value="command" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
                 💻 Command Center
@@ -57,9 +65,6 @@ export default function Admin() {
               <TabsTrigger value="training" className="data-[state=active]:bg-gold-500/20 data-[state=active]:text-gold-400">
                 🦁 Training
               </TabsTrigger>
-              <TabsTrigger value="3d-designer" className="data-[state=active]:bg-pink-500/20 data-[state=active]:text-pink-400">
-                🎨 3D Designer
-              </TabsTrigger>
               <TabsTrigger value="legal-protection" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
                 🛡️ Legal Protection
               </TabsTrigger>
@@ -73,8 +78,16 @@ export default function Admin() {
               <UltimateAdminControls />
             </TabsContent>
             
+            <TabsContent value="enhanced-inventory" className="space-y-6 mt-6">
+              <EnhancedInventoryManager />
+            </TabsContent>
+            
             <TabsContent value="game-inventory" className="space-y-6 mt-6">
               <QuantumGameInventory />
+            </TabsContent>
+            
+            <TabsContent value="gaming-assets" className="space-y-6 mt-6">
+              <GamingAssetsManager />
             </TabsContent>
             
             <TabsContent value="command" className="space-y-6 mt-6">
@@ -99,10 +112,6 @@ export default function Admin() {
             
             <TabsContent value="training" className="space-y-6 mt-6">
               <SelfTrainingAnimal />
-            </TabsContent>
-            
-            <TabsContent value="3d-designer" className="space-y-6 mt-6">
-              <Advanced3DDesigner />
             </TabsContent>
             
             <TabsContent value="legal-protection" className="space-y-6 mt-6">

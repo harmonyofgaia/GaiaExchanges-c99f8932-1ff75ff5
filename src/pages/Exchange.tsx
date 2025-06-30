@@ -1,22 +1,44 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { TrendingUp } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { TrendingUp, DollarSign, BarChart3, Zap } from 'lucide-react'
 
 const Exchange = () => {
   return (
-    <div className="min-h-screen relative bg-gradient-to-br from-gray-900 via-black to-gray-900">
-      <div className="container mx-auto px-4 py-8">
-        <Card className="bg-gradient-to-r from-green-900/40 to-blue-900/40 border-green-500/50">
+    <div className="min-h-screen p-6 bg-gradient-to-br from-blue-900/20 to-green-900/20">
+      <div className="container mx-auto max-w-6xl">
+        <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-green-900/30">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-green-400">
-              <TrendingUp className="h-6 w-6" />
-              Gaia Exchange
+            <CardTitle className="flex items-center gap-2 text-blue-400 text-3xl">
+              <TrendingUp className="h-8 w-8" />
+              💱 GAiA Exchange
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">
-              Advanced trading platform coming soon...
-            </p>
+          <CardContent className="space-y-6">
+            <div className="text-center">
+              <div className="text-6xl mb-4">💱</div>
+              <h2 className="text-2xl font-bold text-blue-400 mb-2">
+                Trade GAiA Tokens
+              </h2>
+              <p className="text-muted-foreground">
+                High-speed quantum trading with zero fees
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="text-center p-4 bg-blue-900/20 rounded border border-blue-500/20">
+                <DollarSign className="h-8 w-8 mx-auto text-green-400 mb-2" />
+                <div className="font-bold text-green-400">Zero Fees</div>
+              </div>
+              <div className="text-center p-4 bg-green-900/20 rounded border border-green-500/20">
+                <Zap className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
+                <div className="font-bold text-yellow-400">Instant Trading</div>
+              </div>
+              <div className="text-center p-4 bg-purple-900/20 rounded border border-purple-500/20">
+                <BarChart3 className="h-8 w-8 mx-auto text-purple-400 mb-2" />
+                <div className="font-bold text-purple-400">Advanced Charts</div>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
