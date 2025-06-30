@@ -11,6 +11,7 @@ import Wallet from './pages/Wallet'
 import SecureAdmin from './pages/SecureAdmin'
 import SecureVault from './pages/SecureVault'
 import GaiasProjects from './pages/GaiasProjects'
+import TransparentWallet from './pages/TransparentWallet'
 import { UserOnlyProtectedRoute } from './components/auth/UserOnlyProtectedRoute'
 import { GlobalSEOOptimizer } from './components/seo/GlobalSEOOptimizer'
 import AdminLogin from './pages/AdminLogin'
@@ -59,6 +60,12 @@ function App() {
           <Route path="/gaias-projects" element={
             <UserOnlyProtectedRoute>
               <GaiasProjects />
+            </UserOnlyProtectedRoute>
+          } />
+
+          <Route path="/transparent-wallet" element={
+            <UserOnlyProtectedRoute>
+              <TransparentWallet />
             </UserOnlyProtectedRoute>
           } />
           

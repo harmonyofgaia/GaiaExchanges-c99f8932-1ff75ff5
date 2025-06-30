@@ -42,6 +42,14 @@ export function Navbar() {
             </Button>
 
             <Button
+              variant={isActivePath('/transparent-wallet') ? 'default' : 'ghost'}
+              asChild
+              className={isActivePath('/transparent-wallet') ? 'bg-cyan-600 text-white' : 'text-gray-300 hover:text-white hover:bg-cyan-700/50'}
+            >
+              <Link to="/transparent-wallet">👁️ Transparent Wallet</Link>
+            </Button>
+
+            <Button
               variant={isActivePath('/swap') ? 'default' : 'ghost'}
               asChild
               className={isActivePath('/swap') ? 'bg-blue-600 text-white' : 'text-gray-300 hover:text-white hover:bg-blue-700/50'}
@@ -109,6 +117,15 @@ export function Navbar() {
               className={isActivePath('/gaias-projects') ? 'bg-green-600 text-white justify-start' : 'text-gray-300 hover:text-white hover:bg-green-700/50 justify-start'}
             >
               <Link to="/gaias-projects">🌍 GAiA's Projects</Link>
+            </Button>
+
+            <Button
+              variant={isActivePath('/transparent-wallet') ? 'default' : 'ghost'}
+              asChild
+              size="sm"
+              className={isActivePath('/transparent-wallet') ? 'bg-cyan-600 text-white justify-start' : 'text-gray-300 hover:text-white hover:bg-cyan-700/50 justify-start'}
+            >
+              <Link to="/transparent-wallet">👁️ Transparent Wallet</Link>
             </Button>
 
             <Button
