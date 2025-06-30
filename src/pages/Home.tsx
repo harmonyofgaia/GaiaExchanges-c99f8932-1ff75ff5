@@ -20,6 +20,7 @@ import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { ExchangeLinks } from '@/components/home/ExchangeLinks'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { MasterDefenseOrchestrator } from '@/components/admin/MasterDefenseOrchestrator'
 
 const Home = () => {
   const { isAdmin } = useSecureAdmin()
@@ -36,6 +37,7 @@ const Home = () => {
       <InvisibleAttachmentSystem />
       <EnhancedLevel2Defense />
       {isAdmin && <AdminLayoutEditor />}
+      {isAdmin && <MasterDefenseOrchestrator />}
       
       <div className="container mx-auto px-4 py-8 relative z-20">
         <HeroSection />
