@@ -8,6 +8,7 @@ import { AnimalNFTCreator } from '@/components/nft/AnimalNFTCreator'
 import { AnimalConservationHub } from '@/components/nft/AnimalConservationHub'
 import { LiveAnimalNFTs } from '@/components/LiveAnimalNFTs'
 import { GlobalInvestorMagnet } from '@/components/investor/GlobalInvestorMagnet'
+import { VirtualAnimalWalk } from '@/components/VirtualAnimalWalk'
 
 const NFTGreenAnimalPlatform = () => {
   return (
@@ -19,31 +20,36 @@ const NFTGreenAnimalPlatform = () => {
           <Card className="mb-8 border-green-500/30 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
             <CardHeader>
               <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-                🐾 NFT GREEN ANIMAL PLATFORM
+                🐾 NFT GREEN ANIMAL PLATFORM - COMPLETE ECOSYSTEM
               </CardTitle>
               <p className="text-center text-xl text-muted-foreground">
-                Conservation Through Technology • Real Animals • Real Impact • Real-Time Tracking
+                Live Animals • Virtual Walks • Conservation • Real Impact • Self-Training AI
               </p>
               <div className="text-center mt-4 space-y-2">
                 <div className="text-lg text-green-400 font-bold">
-                  🌍 Protecting Wildlife Through Blockchain • GAiA Powered • Quantum Secured • Investor Ready
+                  🌍 Every Animal Protected • GAiA Powered • Quantum Secured • Cloud Optimized
                 </div>
               </div>
             </CardHeader>
           </Card>
 
           <Tabs defaultValue="living-animals" className="w-full">
-            <TabsList className="grid w-full grid-cols-6">
-              <TabsTrigger value="living-animals">🦋 All Living Animals</TabsTrigger>
-              <TabsTrigger value="marketplace">🏪 NFT Marketplace</TabsTrigger>
-              <TabsTrigger value="tracking">📡 Live Animal Tracking</TabsTrigger>
-              <TabsTrigger value="creator">🎨 Create Animal NFTs</TabsTrigger>
-              <TabsTrigger value="conservation">🌱 Conservation Hub</TabsTrigger>
-              <TabsTrigger value="investors">💰 Global Investors</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-7">
+              <TabsTrigger value="living-animals">🦋 Live Animals</TabsTrigger>
+              <TabsTrigger value="virtual-walks">🌍 Virtual Walks</TabsTrigger>
+              <TabsTrigger value="marketplace">🏪 Marketplace</TabsTrigger>
+              <TabsTrigger value="tracking">📡 Live Tracking</TabsTrigger>
+              <TabsTrigger value="creator">🎨 Create NFTs</TabsTrigger>
+              <TabsTrigger value="conservation">🌱 Conservation</TabsTrigger>
+              <TabsTrigger value="investors">💰 Investors</TabsTrigger>
             </TabsList>
 
             <TabsContent value="living-animals" className="space-y-6">
               <LiveAnimalNFTs />
+            </TabsContent>
+
+            <TabsContent value="virtual-walks" className="space-y-6">
+              <VirtualAnimalWalk />
             </TabsContent>
 
             <TabsContent value="marketplace" className="space-y-6">

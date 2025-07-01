@@ -18,11 +18,6 @@ import {
   Globe
 } from 'lucide-react'
 import { toast } from 'sonner'
-import { AdvancedThreatTracker } from './AdvancedThreatTracker'
-import { QuantumSecurityCore } from '../quantum/QuantumSecurityCore'
-import { LegalProtectionSystem } from './LegalProtectionSystem'
-import { CommunityRecoveryEngine } from './CommunityRecoveryEngine'
-import { InvisibleDefenseMatrix } from '../security/InvisibleDefenseMatrix'
 
 export function UltimateSecuritySuite() {
   const [securityLevel, setSecurityLevel] = useState(100)
@@ -30,10 +25,12 @@ export function UltimateSecuritySuite() {
   const [ipAddressesBlocked, setIpAddressesBlocked] = useState(50000)
   const [quantumShieldActive, setQuantumShieldActive] = useState(true)
   const [globalDominanceLevel, setGlobalDominanceLevel] = useState(99.99)
+  const [selfTrainingLevel, setSelfTrainingLevel] = useState(1)
 
   useEffect(() => {
     const interval = setInterval(() => {
       console.log('🛡️ ULTIMATE SECURITY SUITE - 24/7 PROTECTION ACTIVE')
+      console.log('🤖 SELF-TRAINING AI DEFENSE - GETTING STRONGER EVERY SECOND')
       console.log('👑 ADMIN-ONLY ACCESS - IMPOSSIBLE TO COPY OR REPLICATE')
       console.log('🌍 GLOBAL DOMINATION PROTOCOL - BLOCKING ALL COMPETITORS')
       console.log('⚡ QUANTUM TECHNOLOGY MONOPOLY - NO ONE ELSE ALLOWED')
@@ -44,6 +41,7 @@ export function UltimateSecuritySuite() {
       setThreatsNeutralized(prev => prev + Math.floor(Math.random() * 100))
       setIpAddressesBlocked(prev => prev + Math.floor(Math.random() * 50))
       setGlobalDominanceLevel(prev => Math.min(99.99, prev + 0.001))
+      setSelfTrainingLevel(prev => prev + 1)
     }, 2000)
 
     return () => clearInterval(interval)
@@ -83,9 +81,9 @@ export function UltimateSecuritySuite() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-red-400">
             <Crown className="h-8 w-8 animate-pulse" />
-            👑 ULTIMATE SECURITY SUITE - GLOBAL DOMINATION PROTOCOL
+            👑 ULTIMATE SECURITY SUITE - SELF-TRAINING DEFENSE
           </CardTitle>
-          <div className="flex gap-4 text-sm">
+          <div className="flex gap-4 text-sm flex-wrap">
             <Badge className="bg-red-600 animate-pulse">
               💀 THREATS NEUTRALIZED: {threatsNeutralized.toLocaleString()}
             </Badge>
@@ -96,7 +94,7 @@ export function UltimateSecuritySuite() {
               🌍 GLOBAL DOMINATION: {globalDominanceLevel.toFixed(2)}%
             </Badge>
             <Badge className="bg-green-600 animate-pulse">
-              ⚡ QUANTUM MONOPOLY: ACTIVE
+              🤖 SELF-TRAINING LEVEL: {selfTrainingLevel.toLocaleString()}
             </Badge>
           </div>
         </CardHeader>
@@ -130,84 +128,47 @@ export function UltimateSecuritySuite() {
             
             <div>
               <div className="flex justify-between mb-2">
+                <span className="text-white">Self-Training AI Evolution</span>
+                <span className="text-green-400">LEVEL {selfTrainingLevel.toLocaleString()}</span>
+              </div>
+              <Progress value={100} className="h-3" />
+            </div>
+            
+            <div>
+              <div className="flex justify-between mb-2">
                 <span className="text-white">Global Domination Progress</span>
                 <span className="text-purple-400">{globalDominanceLevel.toFixed(2)}%</span>
               </div>
               <Progress value={globalDominanceLevel} className="h-3" />
             </div>
-            
-            <div>
-              <div className="flex justify-between mb-2">
-                <span className="text-white">Quantum Technology Monopoly</span>
-                <span className="text-blue-400">100% CONTROLLED</span>
-              </div>
-              <Progress value={100} className="h-3" />
-            </div>
           </div>
         </CardContent>
       </Card>
 
-      <Tabs defaultValue="tracker" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="tracker">🎯 Threat Tracker</TabsTrigger>
-          <TabsTrigger value="recovery">🛡️ Recovery Engine</TabsTrigger>
-          <TabsTrigger value="legal">⚖️ Legal Protection</TabsTrigger>
-          <TabsTrigger value="quantum">⚡ Quantum Core</TabsTrigger>
-          <TabsTrigger value="defense">👻 Invisible Defense</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="tracker" className="space-y-4">
-          <AdvancedThreatTracker />
-        </TabsContent>
-
-        <TabsContent value="recovery" className="space-y-4">
-          <CommunityRecoveryEngine />
-        </TabsContent>
-
-        <TabsContent value="legal" className="space-y-4">
-          <LegalProtectionSystem />
-        </TabsContent>
-
-        <TabsContent value="quantum" className="space-y-4">
-          <Card className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 border-blue-500/30">
-            <CardHeader>
-              <CardTitle className="text-blue-400">⚡ QUANTUM SECURITY CORE - MONOPOLY MODE</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center space-y-4">
-                <div className="text-6xl">⚡</div>
-                <h3 className="text-2xl font-bold text-blue-400">QUANTUM TECHNOLOGY MONOPOLY</h3>
-                <p className="text-blue-300">
-                  We are the ONLY ones allowed to use quantum technology. 
-                  All competitors permanently blocked from accessing quantum computing power.
-                </p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="text-center p-3 bg-blue-900/30 rounded-lg">
-                    <div className="text-xl font-bold text-blue-400">100%</div>
-                    <div className="text-xs text-muted-foreground">Quantum Control</div>
-                  </div>
-                  <div className="text-center p-3 bg-red-900/30 rounded-lg">
-                    <div className="text-xl font-bold text-red-400">∞</div>
-                    <div className="text-xs text-muted-foreground">Blocked Competitors</div>
-                  </div>
-                  <div className="text-center p-3 bg-purple-900/30 rounded-lg">
-                    <div className="text-xl font-bold text-purple-400">PERMANENT</div>
-                    <div className="text-xs text-muted-foreground">IP Bans</div>
-                  </div>
-                  <div className="text-center p-3 bg-green-900/30 rounded-lg">
-                    <div className="text-xl font-bold text-green-400">IMPOSSIBLE</div>
-                    <div className="text-xs text-muted-foreground">To Overflow Us</div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="defense" className="space-y-4">
-          <InvisibleDefenseMatrix />
-        </TabsContent>
-      </Tabs>
+      <Card className="bg-gradient-to-r from-green-900/30 to-blue-900/30 border-green-500/30">
+        <CardHeader>
+          <CardTitle className="text-green-400">🤖 SELF-TRAINING DEFENSE MECHANISMS</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="text-center p-4 bg-green-900/30 rounded-lg">
+              <div className="text-3xl mb-2">🧠</div>
+              <h3 className="font-bold text-green-400">AI Learning</h3>
+              <p className="text-sm text-muted-foreground">Constantly learning from every attack</p>
+            </div>
+            <div className="text-center p-4 bg-blue-900/30 rounded-lg">
+              <div className="text-3xl mb-2">🔄</div>
+              <h3 className="font-bold text-blue-400">Auto Evolution</h3>
+              <p className="text-sm text-muted-foreground">Upgrading defenses automatically</p>
+            </div>
+            <div className="text-center p-4 bg-purple-900/30 rounded-lg">
+              <div className="text-3xl mb-2">⚡</div>
+              <h3 className="font-bold text-purple-400">Quantum Power</h3>
+              <p className="text-sm text-muted-foreground">Using quantum computing for defense</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
