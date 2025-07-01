@@ -95,11 +95,11 @@ export function UniversalGaiaLogo({
           <div className="absolute inset-0 bg-green-400/20 rounded-full blur-lg animate-pulse" />
         )}
         
-        {/* Main Logo */}
+        {/* Main Logo - Updated to use new Harmony of Gaia logo */}
         <div className="relative z-10">
           <img 
-            src="/lovable-uploads/750edd5b-a20e-4927-8066-c66fb065c0bb.png"
-            alt="Gaia of Harmony Logo"
+            src="/lovable-uploads/92accea3-19a3-48db-bd65-888252fd27e7.png"
+            alt="Harmony of Gaia Logo"
             className={`w-full h-full object-contain ${variantStyles[variant]} transition-all duration-300`}
           />
         </div>
@@ -117,7 +117,7 @@ export function UniversalGaiaLogo({
       {showText && (
         <div className="relative z-10">
           <div className={`font-bold bg-gradient-to-r from-green-400 via-emerald-300 to-green-500 bg-clip-text text-transparent ${textSizeClasses[size]}`}>
-            Gaia of Harmony
+            Harmony of Gaia
           </div>
           {size !== 'xs' && size !== 'sm' && (
             <div className={`text-muted-foreground ${size === 'responsive' ? 'text-xs md:text-sm' : 'text-xs'} opacity-80`}>

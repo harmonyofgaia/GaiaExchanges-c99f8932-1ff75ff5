@@ -21,7 +21,7 @@ export default function Security() {
             🛡️ Security Center
           </CardTitle>
           <p className="text-center text-xl text-muted-foreground">
-            Advanced security protocols protecting the GAiA Network
+            Advanced security protocols protecting the Harmony of Gaia Network
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -62,8 +62,13 @@ export default function Security() {
           <div className="text-center mt-8">
             <h3 className="text-2xl font-bold text-red-400 mb-2">Ultimate Protection</h3>
             <p className="text-muted-foreground">
-              Our security infrastructure ensures the highest level of protection for all GAiA Network operations.
+              Our security infrastructure ensures the highest level of protection for all Harmony of Gaia Network operations.
             </p>
+            <div className="mt-4 p-4 bg-black/30 rounded-lg">
+              <p className="text-sm text-muted-foreground italic">
+                🔒 Advanced security details are accessible only to authorized administrators
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>

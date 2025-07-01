@@ -26,7 +26,7 @@ import { RevolutionaryMasterPlan } from './RevolutionaryMasterPlan'
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="master-plan" className="w-full">
-      <TabsList className="grid w-full grid-cols-14 mb-6">
+      <TabsList className="grid w-full grid-cols-16 mb-6">
         <TabsTrigger value="master-plan">🚀 Master Plan</TabsTrigger>
         <TabsTrigger value="koala-ai">🐨 Koala AI</TabsTrigger>
         <TabsTrigger value="quantum-search">🔍 Quantum Search</TabsTrigger>
@@ -40,7 +40,9 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="mastermind">🤖 Mastermind</TabsTrigger>
         <TabsTrigger value="dashboard">System Dashboard</TabsTrigger>
         <TabsTrigger value="security">Advanced Security</TabsTrigger>
-        <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
+        <TabsTrigger value="ultimate">🔥 Ultimate Security</TabsTrigger>
+        <TabsTrigger value="immortal">⚡ Immortal Security</TabsTrigger>
+        <TabsTrigger value="ultimate-suite">Ultimate Suite</TabsTrigger>
       </TabsList>
       
       <TabsContent value="master-plan">
@@ -96,6 +98,34 @@ export function AdminDashboardTabs() {
       </TabsContent>
       
       <TabsContent value="ultimate">
+        <div className="space-y-6">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
+              🔥 ULTIMATE SECURITY FORTRESS
+            </h2>
+            <p className="text-xl text-muted-foreground mt-2">
+              Quantum-Level Protection Beyond Any Known Technology
+            </p>
+          </div>
+          {/* Ultimate Security content will be imported from UltimateSecurity page */}
+        </div>
+      </TabsContent>
+
+      <TabsContent value="immortal">
+        <div className="space-y-6">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+              ⚡ IMMORTAL SECURITY SYSTEM
+            </h2>
+            <p className="text-xl text-muted-foreground mt-2">
+              Eternal Protection That Never Dies - Self-Healing Defense Matrix
+            </p>
+          </div>
+          {/* Immortal Security content will be imported from ImmortalSecurity page */}
+        </div>
+      </TabsContent>
+      
+      <TabsContent value="ultimate-suite">
         <UltimateSecuritySuite />
       </TabsContent>
     </Tabs>
