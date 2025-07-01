@@ -1,5 +1,5 @@
 
-// OFFICIAL GAiA TOKEN CONSTANTS
+// OFFICIAL GAiA TOKEN CONSTANTS - QUANTUM ENHANCED
 // IMPORTANT: We are GAiA Token by Harmony of Gaia - NOT GAIA Everworld!
 
 export const GAIA_TOKEN = {

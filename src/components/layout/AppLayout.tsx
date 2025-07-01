@@ -5,6 +5,7 @@ import { Navbar } from '@/components/Navbar'
 import { PageSpecificNeuralBackground } from '@/components/ui/page-specific-neural-background'
 import { PageSpecificBackground } from '@/components/ui/page-specific-background'
 import { CloudRAMEngine } from '@/components/admin/CloudRAMEngine'
+import { UniversalQuantumDefenseCore } from '@/components/quantum/UniversalQuantumDefenseCore'
 
 interface AppLayoutProps {
   children: React.ReactNode
@@ -17,6 +18,11 @@ export function AppLayout({ children }: AppLayoutProps) {
         {/* Enhanced multi-layer background system */}
         <PageSpecificNeuralBackground />
         <PageSpecificBackground />
+        
+        {/* Universal Quantum Defense Core - Always Active */}
+        <div className="fixed top-4 left-4 z-50 w-96 hidden xl:block">
+          <UniversalQuantumDefenseCore />
+        </div>
         
         {/* Cloud RAM Engine for performance monitoring */}
         <div className="fixed top-4 right-4 z-50 w-80 hidden xl:block">
