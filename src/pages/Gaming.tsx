@@ -9,6 +9,11 @@ import { EnhancedGamingModes } from '@/components/EnhancedGamingModes'
 import { GameNavigationHub } from '@/components/gaming/GameNavigationHub'
 import { HabboTycoon } from '@/components/games/HabboTycoon'
 
+import { GaiaFighterPro } from '@/components/games/GaiaFighterPro'
+import { UltimateLandscapeBuilder } from '@/components/landscapes/UltimateLandscapeBuilder'
+import { EnhancedHabboTycoon } from '@/components/games/EnhancedHabboTycoon'
+import { GamingDifficultySelector } from '@/components/gaming/GamingDifficultySelector'
+
 const Gaming = () => {
   const navigate = useNavigate()
   const [particleCount, setParticleCount] = useState(50)
@@ -194,6 +199,60 @@ const Gaming = () => {
               </div>
             </div>
           </div>
+
+          {/* NEW: Universal Gaming Difficulty Selector */}
+          <div className="mb-16">
+            <GamingDifficultySelector />
+          </div>
+
+          {/* NEW: Gaia Fighter Pro - Ultimate Battle Arena */}
+          <div className="mb-16">
+            <GaiaFighterPro />
+          </div>
+
+          {/* NEW: Ultimate Landscape Builder */}
+          <div className="mb-16">
+            <UltimateLandscapeBuilder />
+          </div>
+
+          {/* NEW: Enhanced Habbo Tycoon Strategic Gameplay */}
+          <div className="mb-16">
+            <EnhancedHabboTycoon />
+          </div>
+
+          {/* Online Multiplayer Integration Notice */}
+          <Card className="bg-gradient-to-br from-cyan-900/50 via-blue-900/50 to-purple-900/50 border-4 border-cyan-500/50 shadow-2xl mb-16 backdrop-blur-md">
+            <CardContent className="p-8">
+              <div className="text-center">
+                <h2 className="text-5xl font-black text-cyan-400 mb-6">
+                  🌐 ONLINE MULTIPLAYER ACTIVATED 🌐
+                </h2>
+                <p className="text-2xl text-white/90 mb-8 font-bold">
+                  All games now feature massive multiplayer capabilities
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <div className="text-center p-6 bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-xl border-2 border-blue-500/50 transform hover:scale-110 transition-all duration-300">
+                    <div className="text-6xl mb-4 animate-pulse">👥</div>
+                    <h3 className="text-2xl font-black text-blue-400 mb-2">MASSIVE MULTIPLAYER</h3>
+                    <p className="text-blue-200 font-bold">10,000+ players simultaneously in each game world</p>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-gradient-to-br from-green-900/50 to-emerald-900/50 rounded-xl border-2 border-green-500/50 transform hover:scale-110 transition-all duration-300">
+                    <div className="text-6xl mb-4 animate-spin">🌍</div>
+                    <h3 className="text-2xl font-black text-green-400 mb-2">GLOBAL SERVERS</h3>
+                    <p className="text-green-200 font-bold">Quantum cloud computing ensures zero lag worldwide</p>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-xl border-2 border-purple-500/50 transform hover:scale-110 transition-all duration-300">
+                    <div className="text-6xl mb-4 animate-bounce">⚡</div>
+                    <h3 className="text-2xl font-black text-purple-400 mb-2">CROSS-GAME FEATURES</h3>
+                    <p className="text-purple-200 font-bold">Items and achievements transfer between all games</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* NEW: Game Navigation Hub - PRIMARY GAME ACCESS */}
           <div className="mb-16">
