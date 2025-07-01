@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -21,6 +20,7 @@ import {
   Coins,
   Mountain,
   Palette,
+  Lock,
   Crown,
   Star,
   Book
@@ -42,8 +42,10 @@ const AppSidebar = () => {
     { icon: Activity, label: 'Live Tracking', path: '/live-tracking', category: 'monitoring' },
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
-    { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
+    { icon: Shield, label: 'Ultimate Security', path: '/ultimate-security', category: 'security' },
+    { icon: Lock, label: 'Immortal Security', path: '/immortal-security', category: 'security' },
     { icon: Crown, label: 'Secure Vault', path: '/secure-vault', category: 'admin' },
+    { icon: User, label: 'Admin Portal', path: '/admin', category: 'admin' },
     { icon: Star, label: 'Ultimate Features', path: '/ultimate-features', category: 'special' },
     { icon: Download, label: 'Enhanced Downloads', path: '/enhanced-downloads', category: 'resources' },
     { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
