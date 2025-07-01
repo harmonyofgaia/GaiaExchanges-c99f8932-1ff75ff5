@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
@@ -26,11 +25,10 @@ import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
 import LandscapeBuilder from '@/pages/LandscapeBuilder'
 import GaiaFighterGame from '@/pages/GaiaFighterGame'
 
-// Add all missing advanced pages
+// Add all missing advanced pages (removed Ultimate Security and Immortal Security standalone pages)
 import UltimateFeatureHub from '@/pages/UltimateFeatureHub'
 import NFTGreenAnimalPlatform from '@/pages/NFTGreenAnimalPlatform'
 import SecureVault from '@/pages/SecureVault'
-import UltimateSecurity from '@/pages/UltimateSecurity'
 import EnhancedDownloads from '@/pages/EnhancedDownloads'
 import AuraLandScrapyard from '@/pages/AuraLandScrapyard'
 import CoinCrafter from '@/pages/CoinCrafter'
@@ -38,7 +36,6 @@ import VirtualWorld from '@/pages/VirtualWorld'
 import LiveTracking from '@/pages/LiveTracking'
 import SystemStatus from '@/pages/SystemStatus'
 import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
-import ImmortalSecurity from '@/pages/ImmortalSecurity'
 import About from '@/pages/About'
 import Contact from '@/pages/Contact'
 import Pricing from '@/pages/Pricing'
@@ -79,17 +76,15 @@ function App() {
                       <Route path="/landscape-builder" element={<LandscapeBuilder />} />
                       <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
                       
-                      {/* Add all advanced feature routes */}
+                      {/* Add all advanced feature routes (removed Ultimate/Immortal Security standalone routes) */}
                       <Route path="/ultimate-features" element={<UltimateFeatureHub />} />
                       <Route path="/nft-green-animals" element={<NFTGreenAnimalPlatform />} />
-                      <Route path="/ultimate-security" element={<UltimateSecurity />} />
                       <Route path="/enhanced-downloads" element={<EnhancedDownloads />} />
                       <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
                       <Route path="/virtual-world" element={<VirtualWorld />} />
                       <Route path="/live-tracking" element={<LiveTracking />} />
                       <Route path="/system-status" element={<SystemStatus />} />
                       <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
-                      <Route path="/immortal-security" element={<ImmortalSecurity />} />
                       <Route path="/about" element={<About />} />
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/pricing" element={<Pricing />} />
