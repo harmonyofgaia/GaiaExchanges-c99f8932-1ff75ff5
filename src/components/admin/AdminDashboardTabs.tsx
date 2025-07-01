@@ -22,13 +22,11 @@ import { QuantumGlobalCommandCenter } from './QuantumGlobalCommandCenter'
 import { PhantomRecoveryEngine } from './PhantomRecoveryEngine'
 import { SelfTrainingKoalaAI } from './SelfTrainingKoalaAI'
 import { RevolutionaryMasterPlan } from './RevolutionaryMasterPlan'
-import { MastermindFeaturesList } from './MastermindFeaturesList'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="mastermind-features" className="w-full">
-      <TabsList className="grid w-full grid-cols-15 mb-6">
-        <TabsTrigger value="mastermind-features">🧠 Mastermind Features</TabsTrigger>
+    <Tabs defaultValue="master-plan" className="w-full">
+      <TabsList className="grid w-full grid-cols-14 mb-6">
         <TabsTrigger value="master-plan">🚀 Master Plan</TabsTrigger>
         <TabsTrigger value="koala-ai">🐨 Koala AI</TabsTrigger>
         <TabsTrigger value="quantum-search">🔍 Quantum Search</TabsTrigger>
@@ -45,10 +43,6 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
       </TabsList>
       
-      <TabsContent value="mastermind-features">
-        <MastermindFeaturesList />
-      </TabsContent>
-
       <TabsContent value="master-plan">
         <RevolutionaryMasterPlan />
       </TabsContent>
