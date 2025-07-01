@@ -1,115 +1,87 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Heart, Globe, Users, Shield, Zap, Star } from 'lucide-react'
-import HoverSidebar from '@/components/HoverSidebar'
+import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
+import { Heart, Globe, Shield, Zap } from 'lucide-react'
 
 const About = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
-      <HoverSidebar />
-      
-      <div className="ml-16 min-h-screen">
-        <div className="container mx-auto px-6 py-8">
-          <Card className="mb-8 border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30">
-            <CardHeader>
-              <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
-                🌍 About GAiA
-              </CardTitle>
-              <p className="text-center text-xl text-muted-foreground">
-                Harmony of Culture - Building a Better World Together
-              </p>
-            </CardHeader>
-          </Card>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <Card className="border-green-500/30 bg-green-900/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-green-400">
-                  <Heart className="h-6 w-6" />
-                  Our Mission
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  We believe in the power of technology to create positive environmental impact. 
-                  GAiA combines gaming, blockchain, and environmental restoration to build a 
-                  sustainable future for our planet.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-blue-500/30 bg-blue-900/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-400">
-                  <Globe className="h-6 w-6" />
-                  Our Vision
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  To create a global community where every action in our digital ecosystem 
-                  contributes to real-world environmental restoration and cultural harmony.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          <Card className="border-purple-500/30 bg-purple-900/20 mb-8">
-            <CardHeader>
-              <CardTitle className="text-purple-400">🌟 Core Values</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <Users className="h-12 w-12 text-cyan-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-bold text-cyan-400 mb-2">Community</h3>
-                  <p className="text-muted-foreground">
-                    Building connections across cultures and continents
-                  </p>
-                </div>
-                <div className="text-center">
-                  <Shield className="h-12 w-12 text-green-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-bold text-green-400 mb-2">Sustainability</h3>
-                  <p className="text-muted-foreground">
-                    Every action contributes to environmental restoration
-                  </p>
-                </div>
-                <div className="text-center">
-                  <Zap className="h-12 w-12 text-purple-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-bold text-purple-400 mb-2">Innovation</h3>
-                  <p className="text-muted-foreground">
-                    Pushing boundaries with cutting-edge technology
-                  </p>
-                </div>
+      <div className="container mx-auto px-6 py-8">
+        <div className="flex items-center justify-center mb-8">
+          <UniversalGaiaLogo 
+            size="xl" 
+            animated={true}
+            showText={true}
+            className="hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        
+        <Card className="mb-8 border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30">
+          <CardHeader>
+            <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
+              🌍 About GAiA - Harmony of Culture
+            </CardTitle>
+            <p className="text-center text-xl text-muted-foreground">
+              A Plan That Humanity Will Never Forget!
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="text-center space-y-6">
+              <div className="text-6xl animate-bounce">🌍💚🦋</div>
+              <div className="text-lg text-muted-foreground max-w-4xl mx-auto">
+                We Are a Strong Creative Open Minded Circuit To Happiness. A Lot of Grooves and Styles and Businesses And idea's Are involved in This Green And Alive Story. We Will not make you only be surprised but we show you true Souls, True Life, True Smiles A More Impressive way on Doing Things.
               </div>
+              <div className="text-xl font-bold text-green-400">
+                "Seeds Will form in to Music" 🎵
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="border-green-500/30 bg-green-900/20">
+            <CardContent className="p-6 text-center">
+              <Heart className="h-12 w-12 mx-auto text-green-400 animate-pulse mb-4" />
+              <div className="text-xl font-bold text-green-400">True Souls</div>
+              <div className="text-sm text-muted-foreground">Authentic connections and genuine experiences</div>
             </CardContent>
           </Card>
 
-          <Card className="border-orange-500/30 bg-orange-900/20">
-            <CardHeader>
-              <CardTitle className="text-orange-400">🚀 Join Our Journey</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-6">
-                Be part of the movement that's changing how we think about gaming, 
-                cryptocurrency, and environmental responsibility. Together, we can create 
-                a more sustainable and harmonious world.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button className="bg-green-600 hover:bg-green-700">
-                  <Heart className="h-4 w-4 mr-2" />
-                  Get Started
-                </Button>
-                <Button variant="outline" className="border-blue-500/30 text-blue-400">
-                  <Globe className="h-4 w-4 mr-2" />
-                  Learn More
-                </Button>
-              </div>
+          <Card className="border-blue-500/30 bg-blue-900/20">
+            <CardContent className="p-6 text-center">
+              <Globe className="h-12 w-12 mx-auto text-blue-400 animate-pulse mb-4" />
+              <div className="text-xl font-bold text-blue-400">Global Impact</div>
+              <div className="text-sm text-muted-foreground">Environmental conservation through technology</div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-purple-500/30 bg-purple-900/20">
+            <CardContent className="p-6 text-center">
+              <Shield className="h-12 w-12 mx-auto text-purple-400 animate-pulse mb-4" />
+              <div className="text-xl font-bold text-purple-400">Quantum Security</div>
+              <div className="text-sm text-muted-foreground">Unbreakable protection for our community</div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-yellow-500/30 bg-yellow-900/20">
+            <CardContent className="p-6 text-center">
+              <Zap className="h-12 w-12 mx-auto text-yellow-400 animate-pulse mb-4" />
+              <div className="text-xl font-bold text-yellow-400">Innovation</div>
+              <div className="text-sm text-muted-foreground">Cutting-edge technology for positive change</div>
             </CardContent>
           </Card>
         </div>
+
+        <Card className="mt-8 border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
+          <CardContent className="p-8 text-center">
+            <div className="text-2xl font-bold text-purple-400 mb-4">
+              "Doesn't matter if You're Black Or White" 🌈
+            </div>
+            <div className="text-lg text-muted-foreground">
+              Our goal is To Bring A Smile to every Soul
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )
