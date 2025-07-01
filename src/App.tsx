@@ -2,7 +2,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from '@/components/ui/sonner'
-import { AppLayout } from '@/components/layout/AppLayout'
 import Index from '@/pages/Index'
 import Gaming from '@/pages/Gaming'
 import Admin from '@/pages/Admin'
@@ -24,20 +23,18 @@ function App() {
         <PersistentAdminSession />
         <AdminRouteProtector />
         <PageStabilityMonitor />
-        <AppLayout>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/gaming" element={<Gaming />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/ultimate-security" element={<UltimateSecurity />} />
-            <Route path="/coin-crafter" element={<GaiaCoinCrafter />} />
-            <Route path="/gaia-coin-crafter" element={<GaiaCoinCrafter />} />
-            <Route path="/landscape-builder" element={<LandscapeBuilder />} />
-            <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
-            <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
-            <Route path="/game" element={<Game />} />
-          </Routes>
-        </AppLayout>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/gaming" element={<Gaming />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/ultimate-security" element={<UltimateSecurity />} />
+          <Route path="/coin-crafter" element={<GaiaCoinCrafter />} />
+          <Route path="/gaia-coin-crafter" element={<GaiaCoinCrafter />} />
+          <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+          <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
+          <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
+          <Route path="/game" element={<Game />} />
+        </Routes>
         <Toaster />
       </Router>
     </QueryClientProvider>
