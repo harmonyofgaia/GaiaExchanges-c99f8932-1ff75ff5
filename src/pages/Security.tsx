@@ -15,10 +15,10 @@ export default function Security() {
         />
       </div>
       
-      <Card className="border-red-500/30 bg-gradient-to-r from-red-900/20 to-orange-900/20">
+      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
         <CardHeader>
-          <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
-            🛡️ Security Center
+          <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
+            🛡️ Security Overview
           </CardTitle>
           <p className="text-center text-xl text-muted-foreground">
             Advanced security protocols protecting the Harmony of Gaia Network
@@ -60,13 +60,14 @@ export default function Security() {
           </div>
           
           <div className="text-center mt-8">
-            <h3 className="text-2xl font-bold text-red-400 mb-2">Ultimate Protection</h3>
+            <h3 className="text-2xl font-bold text-green-400 mb-2">Comprehensive Protection</h3>
             <p className="text-muted-foreground">
               Our security infrastructure ensures the highest level of protection for all Harmony of Gaia Network operations.
+              We maintain industry-leading security standards while providing seamless user experiences.
             </p>
             <div className="mt-4 p-4 bg-black/30 rounded-lg">
               <p className="text-sm text-muted-foreground italic">
-                🔒 Advanced security details are accessible only to authorized administrators
+                🔒 Advanced security features are managed through our comprehensive protection systems
               </p>
             </div>
           </div>
