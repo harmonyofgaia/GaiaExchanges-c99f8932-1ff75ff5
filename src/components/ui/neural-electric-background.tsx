@@ -1,128 +1,169 @@
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
+
+interface Synapse {
+  id: number
+  x: number
+  y: number
+  targetX: number
+  targetY: number
+  intensity: number
+  speed: number
+}
 
 interface NeuralElectricBackgroundProps {
-  style?: 'bioelectric' | 'quantum' | 'matrix'
-  intensity?: 'low' | 'medium' | 'high' | 'extreme'
+  style?: string
+  intensity?: 'low' | 'medium' | 'high'
 }
 
 export function NeuralElectricBackground({ 
-  style = 'bioelectric', 
+  style = 'neural', 
   intensity = 'medium' 
 }: NeuralElectricBackgroundProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [synapses, setSynapses] = useState<Synapse[]>([])
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
+
+  const synapseCount = intensity === 'low' ? 8 : intensity === 'medium' ? 15 : 25
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const newSynapses = Array.from({ length: synapseCount }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      targetX: Math.random() * 100,
+      targetY: Math.random() * 100,
+      intensity: Math.random() * 0.8 + 0.2,
+      speed: Math.random() * 0.5 + 0.2
+    }))
+    setSynapses(newSynapses)
+  }, [synapseCount])
 
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    // Set canvas size
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
-
-    // Electric nodes and connections
-    const nodes: Array<{
-      x: number
-      y: number
-      vx: number
-      vy: number
-      charge: number
-      pulse: number
-    }> = []
-
-    const nodeCount = intensity === 'extreme' ? 50 : intensity === 'high' ? 30 : 20
-
-    // Initialize nodes
-    for (let i = 0; i < nodeCount; i++) {
-      nodes.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        charge: Math.random(),
-        pulse: Math.random() * Math.PI * 2
-      })
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth) * 100
+      const y = (e.clientY / window.innerHeight) * 100
+      setMousePos({ x, y })
     }
 
-    let animationId: number
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
 
-    const animate = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSynapses(prev => prev.map(synapse => ({
+        ...synapse,
+        x: synapse.x + (synapse.targetX - synapse.x) * synapse.speed * 0.01,
+        y: synapse.y + (synapse.targetY - synapse.y) * synapse.speed * 0.01,
+        targetX: synapse.targetX + (Math.random() - 0.5) * 2,
+        targetY: synapse.targetY + (Math.random() - 0.5) * 2,
+        intensity: Math.max(0.1, Math.min(1, synapse.intensity + (Math.random() - 0.5) * 0.1))
+      })))
+    }, 100)
 
-      // Update and draw nodes
-      nodes.forEach((node, i) => {
-        // Update position
-        node.x += node.vx
-        node.y += node.vy
-        node.pulse += 0.1
+    return () => clearInterval(interval)
+  }, [])
 
-        // Boundary collision
-        if (node.x < 0 || node.x > canvas.width) node.vx *= -1
-        if (node.y < 0 || node.y > canvas.height) node.vy *= -1
-
-        // Draw electric node
-        const alpha = 0.3 + Math.sin(node.pulse) * 0.2
-        const size = 2 + Math.sin(node.pulse) * 1
-        
-        ctx.beginPath()
-        ctx.arc(node.x, node.y, size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(0, 255, 255, ${alpha})`
-        ctx.fill()
-
-        // Electric connections
-        nodes.forEach((otherNode, j) => {
-          if (i !== j) {
-            const dx = otherNode.x - node.x
-            const dy = otherNode.y - node.y
-            const distance = Math.sqrt(dx * dx + dy * dy)
-
-            if (distance < 150) {
-              const opacity = (1 - distance / 150) * 0.3
-              ctx.beginPath()
-              ctx.moveTo(node.x, node.y)
-              ctx.lineTo(otherNode.x, otherNode.y)
-              ctx.strokeStyle = `rgba(0, 255, 255, ${opacity})`
-              ctx.lineWidth = 0.5
-              ctx.stroke()
-
-              // Electric sparks
-              if (Math.random() < 0.01) {
-                ctx.beginPath()
-                ctx.moveTo(node.x, node.y)
-                ctx.lineTo(otherNode.x, otherNode.y)
-                ctx.strokeStyle = `rgba(255, 255, 0, ${opacity * 2})`
-                ctx.lineWidth = 2
-                ctx.stroke()
-              }
-            }
-          }
-        })
-      })
-
-      animationId = requestAnimationFrame(animate)
+  const getBackgroundImage = () => {
+    switch (style) {
+      case 'synaptic':
+        return '/lovable-uploads/42ec85dc-42df-4958-96d8-7919a192f629.png'
+      case 'bioelectric':
+        return '/lovable-uploads/3ce518f5-75b0-493f-897a-45119793a33d.png'
+      case 'neural':
+        return '/lovable-uploads/1087f396-900a-4e0b-be62-7b049d0294ff.png'
+      default:
+        return '/lovable-uploads/1ed369eb-ecda-422a-af60-8f511aa9aa8e.png'
     }
-
-    animate()
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas)
-      cancelAnimationFrame(animationId)
-    }
-  }, [style, intensity])
+  }
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 pointer-events-none"
-      style={{ mixBlendMode: 'screen' }}
-    />
+    <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -2 }}>
+      {/* Base neural background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black" />
+      
+      {/* Neural imagery overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-screen"
+        style={{ 
+          backgroundImage: `url('${getBackgroundImage()}')`,
+          filter: 'hue-rotate(120deg) saturate(1.5)'
+        }}
+      />
+      
+      {/* Secondary neural layer */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-8 mix-blend-soft-light"
+        style={{ 
+          backgroundImage: `url('/lovable-uploads/2ab2dcf8-008f-4f94-9341-9b6fcb25cefb.png')`,
+          filter: 'hue-rotate(180deg) saturate(0.8)'
+        }}
+      />
+      
+      {/* Interactive synapses */}
+      <svg className="absolute inset-0 w-full h-full">
+        {/* Electrical connections */}
+        {synapses.map((synapse, index) => {
+          const nextSynapse = synapses[(index + 1) % synapses.length]
+          const distance = Math.sqrt(
+            Math.pow(synapse.x - mousePos.x, 2) + 
+            Math.pow(synapse.y - mousePos.y, 2)
+          )
+          const mouseInfluence = Math.max(0, 1 - distance / 30)
+          
+          return (
+            <g key={synapse.id}>
+              {/* Connection line */}
+              <line
+                x1={`${synapse.x}%`}
+                y1={`${synapse.y}%`}
+                x2={`${nextSynapse.x}%`}
+                y2={`${nextSynapse.y}%`}
+                stroke={`rgba(0, 255, 255, ${synapse.intensity * 0.6})`}
+                strokeWidth={1 + mouseInfluence}
+                className="animate-pulse"
+              />
+              
+              {/* Synapse node */}
+              <circle
+                cx={`${synapse.x}%`}
+                cy={`${synapse.y}%`}
+                r={2 + mouseInfluence * 3}
+                fill={`rgba(255, 100, 200, ${synapse.intensity})`}
+                className="animate-pulse"
+              />
+              
+              {/* Electrical spark */}
+              <circle
+                cx={`${synapse.x}%`}
+                cy={`${synapse.y}%`}
+                r={4 + mouseInfluence * 6}
+                fill="none"
+                stroke={`rgba(255, 255, 255, ${synapse.intensity * 0.4})`}
+                strokeWidth="1"
+                opacity={mouseInfluence}
+              />
+            </g>
+          )
+        })}
+      </svg>
+      
+      {/* Floating neural particles */}
+      <div className="absolute inset-0">
+        {Array.from({ length: 15 }).map((_, i) => (
+          <div
+            key={`neural-particle-${i}`}
+            className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${i * 0.3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`,
+              boxShadow: '0 0 8px currentColor'
+            }}
+          />
+        ))}
+      </div>
+    </div>
   )
 }

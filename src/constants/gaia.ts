@@ -1,96 +1,71 @@
 
-// OFFICIAL GAiA TOKEN CONSTANTS - QUANTUM ENHANCED
-// IMPORTANT: We are GAiA Token by Harmony of Gaia - NOT GAIA Everworld!
 
 export const GAIA_TOKEN = {
-  // Official GAiA Token Information
-  NAME: 'GAiA Token',
-  SYMBOL: 'GAiA',
-  FULL_NAME: 'GAiA Token - Harmony of Gaia',
-  
-  // Official Addresses - VERIFIED AND CORRECT
+  // Official GAiA Token Addresses
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
-  
-  // Network Information
+  SYMBOL: 'GAiA',
+  NAME: 'GAiA Token - Harmony of Culture',
+  DECIMALS: 9,
   NETWORK: 'Solana',
-  PLATFORM: 'Pump.fun',
-  
-  // Project Information
-  PROJECT_NAME: 'Harmony of Gaia',
-  POWERED_BY: 'Culture of Harmony',
+  PUMP_FUN_URL: 'https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   OFFICIAL_WEBSITE: 'https://www.gaiaexchanges.net',
   
-  // Trading Links
-  PUMP_FUN_URL: 'https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
+  // Token Metrics
+  TOTAL_SUPPLY: 1000000000000, // 1 Trillion tokens
+  BURNED_TOKENS: 0,
+  CIRCULATING_SUPPLY: 1000000000000,
+  INITIAL_PRICE: 0.0001, // Added back for compatibility
   
-  // Brand Statement
-  BRAND_STATEMENT: 'The most pure ecological token tribe in the universe - Culture of Harmony powered',
+  // Tokenomics
+  BURN_RATE: 0, // 0% burn rate
+  REFLECTION_RATE: 0, // 0% reflection
+  LIQUIDITY_POOL: 100, // 100% liquidity locked
   
-  // IMPORTANT DISCLAIMER
-  DISCLAIMER: 'GAiA Token is NOT associated with GAIA Everworld. We are a completely separate and independent project.',
+  // Environmental Impact
+  CARBON_OFFSET_PER_TRANSACTION: 0.001, // kg CO2
+  TREES_PLANTED_TOTAL: 50000,
+  OCEAN_CLEANUP_CONTRIBUTION: 25000, // USD
   
-  // Brand Identity
-  BRAND_COLORS: {
-    PRIMARY: '#10b981', // Green
-    SECONDARY: '#3b82f6', // Blue  
-    ACCENT: '#8b5cf6', // Purple
-    WARNING: '#f59e0b', // Orange
-  },
-  
-  // Token Economics
-  DECIMALS: 9,
-  TOTAL_SUPPLY: 1000000000, // 1 Billion
-  INITIAL_PRICE: 0.00012345,
-  
-  // Features
-  FEATURES: [
-    'Environmental Impact',
-    'Community Driven',
-    'Transparent Operations',
-    'Global Conservation',
-    'Wildlife Protection',
-    'Ocean Cleanup',
-    'Reforestation Projects'
-  ]
-} as const
+  // Brand messaging
+  BRAND_STATEMENT: 'We Are a Strong Creative Open Minded Circuit To Happiness - Seeds Will form in to Music',
+  OFFICIAL_DISCLAIMER: 'This is the ONLY official GAiA Token. Verify contract address before trading.',
+}
 
-// GAIA METRICS - Initial values for the system
 export const GAIA_METRICS = {
-  INITIAL_PRICE: 0.00012345,
-  INITIAL_HOLDERS: 1247,
-  INITIAL_MARKET_CAP: 123450,
-  INITIAL_VOLUME: 847000,
-  INITIAL_TRANSACTIONS: 2847,
-  NETWORK_SPEED: 99.7,
-  SECURITY_SCORE: 100,
-  ECOSYSTEM_HEALTH: 98.9,
-  DRAGON_POWER: 99.9
-} as const
+  CURRENT_PRICE: 0.0001, // USD
+  MARKET_CAP: 100000, // USD
+  VOLUME_24H: 50000, // USD
+  HOLDERS: 10000,
+  TRANSACTIONS_24H: 5000,
+  
+  // Added back for compatibility
+  INITIAL_PRICE: 0.0001,
+  INITIAL_HOLDERS: 10000,
+  INITIAL_MARKET_CAP: 100000,
+  INITIAL_VOLUME: 50000,
+  INITIAL_TRANSACTIONS: 5000,
+  NETWORK_SPEED: 2500,
+  SECURITY_SCORE: 95,
+  ECOSYSTEM_HEALTH: 98,
+  DRAGON_POWER: 99,
+  
+  // Environmental Metrics
+  CO2_OFFSET_TOTAL: 500, // tons
+  RENEWABLE_ENERGY_PROJECTS: 25,
+  BIODIVERSITY_PROJECTS: 15,
+  WATER_CONSERVATION_PROJECTS: 30,
+}
 
-// Helper functions for formatting
+// Utility functions
 export const formatGaiaPrice = (price: number): string => {
-  if (typeof price !== 'number' || isNaN(price)) {
-    console.warn('⚠️ Invalid price value provided to formatGaiaPrice:', price)
-    return '$0.00000000'
-  }
-  return `$${price.toFixed(8)}`
+  return `$${price.toFixed(6)}`
 }
 
-export const formatGaiaNumber = (number: number): string => {
-  if (typeof number !== 'number' || isNaN(number)) {
-    console.warn('⚠️ Invalid number value provided to formatGaiaNumber:', number)
-    return '0'
-  }
-  return number.toLocaleString()
+export const formatGaiaNumber = (num: number): string => {
+  if (num >= 1e9) return `${(num / 1e9).toFixed(2)}B`
+  if (num >= 1e6) return `${(num / 1e6).toFixed(2)}M`
+  if (num >= 1e3) return `${(num / 1e3).toFixed(2)}K`
+  return num.toString()
 }
 
-// BRAND VERIFICATION - ENSURE NO CONFUSION
-export const BRAND_CLARIFICATION = {
-  WE_ARE: 'GAiA Token - Harmony of Gaia Projects - Culture of Harmony',
-  WE_ARE_NOT: 'GAIA Everworld (coinmarketcap.com/currencies/gaia-everworld/)',
-  OUR_WALLET: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-  OUR_CONTRACT: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
-  VERIFICATION_DATE: '2024-12-30',
-  OFFICIAL_STATEMENT: 'GAiA Token operates independently and has no affiliation with any other GAIA-named projects.'
-} as const

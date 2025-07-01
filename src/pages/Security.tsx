@@ -1,140 +1,72 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Shield, Lock, Eye, Zap, CheckCircle } from 'lucide-react'
+import { Shield, Lock, Eye, AlertTriangle } from 'lucide-react'
+import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 
-const Security = () => {
+export default function Security() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
-          🛡️ GAiA Security Center
-        </h1>
-        <p className="text-xl text-muted-foreground mt-4">
-          Multi-layer protection • Real-time monitoring • Community security
-        </p>
+      <div className="flex items-center justify-center mb-8">
+        <UniversalGaiaLogo 
+          size="lg" 
+          animated={true}
+          showText={true}
+          className="hover:scale-105 transition-transform duration-300"
+        />
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border-red-500/30 bg-red-900/20">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-red-400">
-              <Shield className="h-6 w-6" />
-              Defense Systems
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span className="text-green-400">DDoS Protection Active</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span className="text-green-400">Firewall Systems Online</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span className="text-green-400">Intrusion Detection Active</span>
-              </div>
-              <Badge className="bg-red-600">Maximum Protection</Badge>
-              <Button className="w-full bg-red-600 hover:bg-red-700">
-                <Shield className="h-4 w-4 mr-2" />
-                Security Dashboard
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-blue-500/30 bg-blue-900/20">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-blue-400">
-              <Lock className="h-6 w-6" />
-              Encryption & Privacy
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span className="text-green-400">AES-256 Encryption</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span className="text-green-400">Zero-Knowledge Architecture</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span className="text-green-400">End-to-End Encryption</span>
-              </div>
-              <Badge className="bg-blue-600">Privacy First</Badge>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                <Lock className="h-4 w-4 mr-2" />
-                Privacy Settings
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-purple-500/30 bg-purple-900/20">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-purple-400">
-              <Eye className="h-6 w-6" />
-              Monitoring Systems
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="text-2xl font-bold text-purple-400">24/7</div>
-              <div className="text-sm text-muted-foreground">Continuous Monitoring</div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span className="text-green-400">Real-time Threat Detection</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span className="text-green-400">Automated Response Systems</span>
-              </div>
-              <Badge className="bg-purple-600">Always Watching</Badge>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                <Eye className="h-4 w-4 mr-2" />
-                View Monitoring
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-orange-500/30 bg-orange-900/20">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-orange-400">
-              <Zap className="h-6 w-6" />
-              Rapid Response
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="text-2xl font-bold text-orange-400">&lt; 1ms</div>
-              <div className="text-sm text-muted-foreground">Response Time</div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span className="text-green-400">Instant Threat Mitigation</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span className="text-green-400">Auto-Recovery Systems</span>
-              </div>
-              <Badge className="bg-orange-600">Lightning Fast</Badge>
-              <Button className="w-full bg-orange-600 hover:bg-orange-700">
-                <Zap className="h-4 w-4 mr-2" />
-                Emergency Protocols
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      
+      <Card className="border-red-500/30 bg-gradient-to-r from-red-900/20 to-orange-900/20">
+        <CardHeader>
+          <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
+            🛡️ Security Center
+          </CardTitle>
+          <p className="text-center text-xl text-muted-foreground">
+            Advanced security protocols protecting the GAiA Network
+          </p>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Card className="bg-muted/20 border-green-500/20">
+              <CardContent className="p-4 text-center">
+                <Shield className="h-12 w-12 text-green-400 mx-auto mb-2" />
+                <h3 className="font-bold text-green-400">Network Protection</h3>
+                <p className="text-sm text-muted-foreground">Advanced firewall systems</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-muted/20 border-blue-500/20">
+              <CardContent className="p-4 text-center">
+                <Lock className="h-12 w-12 text-blue-400 mx-auto mb-2" />
+                <h3 className="font-bold text-blue-400">Encryption</h3>
+                <p className="text-sm text-muted-foreground">End-to-end security</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-muted/20 border-purple-500/20">
+              <CardContent className="p-4 text-center">
+                <Eye className="h-12 w-12 text-purple-400 mx-auto mb-2" />
+                <h3 className="font-bold text-purple-400">Monitoring</h3>
+                <p className="text-sm text-muted-foreground">24/7 threat detection</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-muted/20 border-yellow-500/20">
+              <CardContent className="p-4 text-center">
+                <AlertTriangle className="h-12 w-12 text-yellow-400 mx-auto mb-2" />
+                <h3 className="font-bold text-yellow-400">Alerts</h3>
+                <p className="text-sm text-muted-foreground">Real-time notifications</p>
+              </CardContent>
+            </Card>
+          </div>
+          
+          <div className="text-center mt-8">
+            <h3 className="text-2xl font-bold text-red-400 mb-2">Ultimate Protection</h3>
+            <p className="text-muted-foreground">
+              Our security infrastructure ensures the highest level of protection for all GAiA Network operations.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
-
-export default Security

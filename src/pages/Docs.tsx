@@ -8,10 +8,10 @@ const Docs = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-blue-400 mb-4">
-            📚 COMPLETE SYSTEM DOCUMENTATION
+            🐉 DRAGON DOCUMENTATION 🐉
           </h1>
           <p className="text-blue-300">
-            Master Guide to the Ultimate GAiA Ecosystem
+            Complete guide to the Dragon-Protected Ecosystem
           </p>
         </div>
 
@@ -20,20 +20,20 @@ const Docs = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-blue-400">
                 <Shield className="h-5 w-5" />
-                Quantum Defense System
+                Dragon Security System
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-blue-300">
-                Unbeatable quantum defense with self-training capabilities:
+                The Trained Dragon provides unbeatable quantum defense with:
               </p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>🛡️ Universal Quantum Protection</li>
-                <li>⚡ Self-Evolution Protocols</li>
-                <li>🌍 Galaxy-wide Satellite Network</li>
-                <li>🔐 Unbreakable Encryption</li>
+                <li>🛡️ Full Body Armor Protection</li>
+                <li>⚡ Quantum Computing Power</li>
+                <li>🌍 Worldwide IP Blocking</li>
+                <li>🔐 GitHub & Supabase Protection</li>
                 <li>👑 Admin Fortress Security</li>
-                <li>💎 Permanent IP Protection</li>
+                <li>💎 Holder Shield Network</li>
               </ul>
             </CardContent>
           </Card>
@@ -42,20 +42,20 @@ const Docs = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-green-400">
                 <Code className="h-5 w-5" />
-                Live Animal Platform
+                System Architecture
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-green-300">
-                Revolutionary animal conservation through blockchain:
+                Built on cutting-edge technology stack:
               </p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>🐾 Real Animal NFT Ownership</li>
-                <li>🌍 Virtual Animal Walks</li>
-                <li>📡 Live Animal Tracking</li>
-                <li>🌱 Conservation Impact</li>
-                <li>💰 Real-world Protection Funding</li>
-                <li>🎨 Custom Animal NFT Creation</li>
+                <li>🔮 Quantum Security Core</li>
+                <li>🐉 Trained Dragon AI</li>
+                <li>☁️ Dragon Cloud Protection</li>
+                <li>🔒 Google Authenticator 2FA</li>
+                <li>📊 Real-time Monitoring</li>
+                <li>🌐 Cross-platform Support</li>
               </ul>
             </CardContent>
           </Card>
@@ -64,20 +64,20 @@ const Docs = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-purple-400">
                 <Book className="h-5 w-5" />
-                Gaming Ecosystem
+                User Guide
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-purple-300">
-                Complete gaming platform with environmental impact:
+                How to use the Dragon-Protected System:
               </p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>🎮 Gaia Fighter Game Pro</li>
-                <li>🏢 Habbo Tycoon Business Sim</li>
-                <li>🌐 VR World Integration</li>
-                <li>🏆 Tournament Competitions</li>
-                <li>💰 GAiA Token Rewards</li>
-                <li>🎯 Achievement Systems</li>
+                <li>📱 Setup Google Authenticator</li>
+                <li>🔐 Secure Account Registration</li>
+                <li>💰 Access Protected Exchange</li>
+                <li>🛡️ Enable Dragon Protection</li>
+                <li>📊 Monitor Security Status</li>
+                <li>⚡ Activate Quantum Defense</li>
               </ul>
             </CardContent>
           </Card>
@@ -86,20 +86,20 @@ const Docs = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-red-400">
                 <Zap className="h-5 w-5" />
-                Admin God Powers
+                Dragon Capabilities
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-red-300">
-                Ultimate admin control capabilities:
+                What the Trained Dragon can do:
               </p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>👑 Universal System Control</li>
-                <li>🌌 Reality Manipulation</li>
-                <li>⏰ Time Control Features</li>
-                <li>🚀 Quantum Computing Access</li>
-                <li>🛡️ Omnipotent Protection</li>
-                <li>🌟 Interdimensional Access</li>
+                <li>🔥 Destroy malicious systems</li>
+                <li>🌐 Block worldwide IP addresses</li>
+                <li>🦠 Deploy protective viruses</li>
+                <li>📡 Jam hostile signals</li>
+                <li>🛡️ Evolve defense strategies</li>
+                <li>⚡ Quantum power multiplication</li>
               </ul>
             </CardContent>
           </Card>
@@ -108,15 +108,14 @@ const Docs = () => {
         <Card className="mt-8 border-yellow-500/30 bg-yellow-900/20">
           <CardContent className="p-8 text-center">
             <h3 className="text-2xl font-bold text-yellow-400 mb-4">
-              🚨 ULTIMATE STATEMENT 🚨
+              🚨 SECURITY WARNING 🚨
             </h3>
             <p className="text-yellow-300 mb-4">
-              This platform represents the convergence of every innovative idea into one 
-              unbreakable system that will revolutionize how humanity interacts with 
-              technology, the environment, and the digital universe.
+              The Dragon Security System is extremely powerful and will automatically protect all assets.
+              Any attempt to breach the system will result in immediate and permanent consequences.
             </p>
-            <p className="text-gold-400 font-bold text-xl">
-              🌟 "A PLAN THAT HUMANITY WILL NEVER FORGET" 🌟
+            <p className="text-red-400 font-bold">
+              🐉 THE DRAGON NEVER SLEEPS - FULL PROTECTION ACTIVE 24/7 🐉
             </p>
           </CardContent>
         </Card>

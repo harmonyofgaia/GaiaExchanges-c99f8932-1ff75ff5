@@ -1,3 +1,4 @@
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AdminDashboard } from './AdminDashboard'
 import { AdvancedSecurityCenter } from './AdvancedSecurityCenter'
@@ -22,13 +23,11 @@ import { PhantomRecoveryEngine } from './PhantomRecoveryEngine'
 import { SelfTrainingKoalaAI } from './SelfTrainingKoalaAI'
 import { RevolutionaryMasterPlan } from './RevolutionaryMasterPlan'
 import { MastermindFeaturesList } from './MastermindFeaturesList'
-import { SystemValidationEngine } from './SystemValidationEngine'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="system-validation" className="w-full">
-      <TabsList className="grid w-full grid-cols-16 mb-6">
-        <TabsTrigger value="system-validation">🔍 System Check</TabsTrigger>
+    <Tabs defaultValue="mastermind-features" className="w-full">
+      <TabsList className="grid w-full grid-cols-15 mb-6">
         <TabsTrigger value="mastermind-features">🧠 Mastermind Features</TabsTrigger>
         <TabsTrigger value="master-plan">🚀 Master Plan</TabsTrigger>
         <TabsTrigger value="koala-ai">🐨 Koala AI</TabsTrigger>
@@ -46,10 +45,6 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="ultimate">Ultimate Suite</TabsTrigger>
       </TabsList>
       
-      <TabsContent value="system-validation">
-        <SystemValidationEngine />
-      </TabsContent>
-
       <TabsContent value="mastermind-features">
         <MastermindFeaturesList />
       </TabsContent>

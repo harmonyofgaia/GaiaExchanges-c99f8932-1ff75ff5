@@ -1,148 +1,97 @@
 
 import { useLocation } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
+import { NeuralElectricMatrix } from './neural-electric-matrix'
+import { NeuralElectricBackground } from './neural-electric-background'
+
+interface PageStyle {
+  backgroundType: 'matrix' | 'neural' | 'hybrid'
+  intensity: 'low' | 'medium' | 'high'
+  colorScheme: 'cyan' | 'purple' | 'green' | 'rainbow' | 'fire'
+  flowDirection: 'horizontal' | 'vertical' | 'radial' | 'spiral'
+}
+
+const pageStyles: Record<string, PageStyle> = {
+  '/': { 
+    backgroundType: 'hybrid', 
+    intensity: 'medium', 
+    colorScheme: 'rainbow',
+    flowDirection: 'radial'
+  },
+  '/admin': { 
+    backgroundType: 'matrix', 
+    intensity: 'high', 
+    colorScheme: 'purple',
+    flowDirection: 'spiral'
+  },
+  '/wallet': { 
+    backgroundType: 'neural', 
+    intensity: 'medium', 
+    colorScheme: 'green',
+    flowDirection: 'horizontal'
+  },
+  '/gaming': { 
+    backgroundType: 'matrix', 
+    intensity: 'high', 
+    colorScheme: 'fire',
+    flowDirection: 'vertical'
+  },
+  '/live-tracking': { 
+    backgroundType: 'neural', 
+    intensity: 'low', 
+    colorScheme: 'cyan',
+    flowDirection: 'horizontal'
+  }
+}
 
 export function PageSpecificNeuralBackground() {
   const location = useLocation()
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    // Set canvas size
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
-
-    // Page-specific colors based on route
-    const getPageColors = (pathname: string) => {
-      switch (pathname) {
-        case '/gaming':
-          return { primary: '#ff4500', secondary: '#ff6600', accent: '#ffff00' }
-        case '/admin':
-          return { primary: '#8b5cf6', secondary: '#a855f7', accent: '#c084fc' }
-        case '/analytics':
-          return { primary: '#06b6d4', secondary: '#0891b2', accent: '#0e7490' }
-        case '/nfts':
-          return { primary: '#ec4899', secondary: '#db2777', accent: '#be185d' }
-        case '/exchange':
-          return { primary: '#10b981', secondary: '#059669', accent: '#048773' }
-        default:
-          return { primary: '#00ff00', secondary: '#00ffff', accent: '#ff00ff' }
-      }
-    }
-
-    const colors = getPageColors(location.pathname)
-
-    // Neural network nodes
-    const nodes: Array<{
-      x: number
-      y: number
-      connections: number[]
-      pulse: number
-      activity: number
-    }> = []
-
-    // Create neural network structure
-    const gridSize = 8
-    for (let i = 0; i < gridSize; i++) {
-      for (let j = 0; j < gridSize; j++) {
-        nodes.push({
-          x: (canvas.width / gridSize) * i + (canvas.width / gridSize) / 2,
-          y: (canvas.height / gridSize) * j + (canvas.height / gridSize) / 2,
-          connections: [],
-          pulse: Math.random() * Math.PI * 2,
-          activity: Math.random()
-        })
-      }
-    }
-
-    // Connect neurons
-    nodes.forEach((node, index) => {
-      const connections = Math.floor(Math.random() * 4) + 2
-      for (let i = 0; i < connections; i++) {
-        const targetIndex = Math.floor(Math.random() * nodes.length)
-        if (targetIndex !== index && !node.connections.includes(targetIndex)) {
-          node.connections.push(targetIndex)
-        }
-      }
-    })
-
-    let animationId: number
-
-    const animate = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      // Update neural activity
-      nodes.forEach((node) => {
-        node.pulse += 0.02
-        node.activity = 0.3 + Math.sin(node.pulse) * 0.3
-      })
-
-      // Draw neural connections
-      nodes.forEach((node, index) => {
-        node.connections.forEach((connectionIndex) => {
-          const target = nodes[connectionIndex]
-          if (target) {
-            const activity = (node.activity + target.activity) / 2
-            ctx.beginPath()
-            ctx.moveTo(node.x, node.y)
-            ctx.lineTo(target.x, target.y)
-            ctx.strokeStyle = `${colors.primary}${Math.floor(activity * 100).toString(16).padStart(2, '0')}`
-            ctx.lineWidth = activity * 2
-            ctx.stroke()
-
-            // Neural impulses
-            if (Math.random() < 0.01) {
-              const midX = (node.x + target.x) / 2
-              const midY = (node.y + target.y) / 2
-              ctx.beginPath()
-              ctx.arc(midX, midY, activity * 3, 0, Math.PI * 2)
-              ctx.fillStyle = colors.accent
-              ctx.fill()
-            }
-          }
-        })
-      })
-
-      // Draw neural nodes
-      nodes.forEach((node) => {
-        ctx.beginPath()
-        ctx.arc(node.x, node.y, 2 + node.activity * 3, 0, Math.PI * 2)
-        ctx.fillStyle = `${colors.secondary}${Math.floor(node.activity * 255).toString(16).padStart(2, '0')}`
-        ctx.fill()
-
-        // Neural glow
-        ctx.beginPath()
-        ctx.arc(node.x, node.y, 8 + node.activity * 5, 0, Math.PI * 2)
-        ctx.fillStyle = `${colors.primary}10`
-        ctx.fill()
-      })
-
-      animationId = requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas)
-      cancelAnimationFrame(animationId)
-    }
-  }, [location.pathname])
+  const style = pageStyles[location.pathname] || pageStyles['/']
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ mixBlendMode: 'screen', opacity: 0.4 }}
-    />
+    <div className="fixed inset-0 pointer-events-none" style={{ zIndex: -2 }}>
+      {/* Base neural background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black" />
+      
+      {/* Matrix overlay for matrix or hybrid types */}
+      {(style.backgroundType === 'matrix' || style.backgroundType === 'hybrid') && (
+        <NeuralElectricMatrix />
+      )}
+      
+      {/* Neural pathways for neural or hybrid types */}
+      {(style.backgroundType === 'neural' || style.backgroundType === 'hybrid') && (
+        <NeuralElectricBackground 
+          style={style.colorScheme} 
+          intensity={style.intensity}
+        />
+      )}
+      
+      {/* Flowing electrical currents */}
+      <div className="absolute inset-0 overflow-hidden">
+        {Array.from({ length: style.intensity === 'high' ? 8 : style.intensity === 'medium' ? 5 : 3 }).map((_, i) => (
+          <div
+            key={`flow-${i}`}
+            className={`absolute w-px h-full bg-gradient-to-b opacity-30 animate-pulse`}
+            style={{
+              left: `${20 + i * 15}%`,
+              background: `linear-gradient(to bottom, 
+                transparent 0%, 
+                ${style.colorScheme === 'cyan' ? '#00ffff' :
+                  style.colorScheme === 'purple' ? '#ff00ff' :
+                  style.colorScheme === 'green' ? '#00ff00' :
+                  style.colorScheme === 'fire' ? '#ff4500' : '#ffffff'} 50%, 
+                transparent 100%)`,
+              animationDelay: `${i * 0.5}s`,
+              animationDuration: `${3 + i * 0.5}s`
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* Corner electric effects */}
+      <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-cyan-500/20 to-transparent animate-pulse" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-purple-500/20 to-transparent animate-pulse" />
+      <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-green-500/20 to-transparent animate-pulse" />
+      <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-pink-500/20 to-transparent animate-pulse" />
+    </div>
   )
 }
