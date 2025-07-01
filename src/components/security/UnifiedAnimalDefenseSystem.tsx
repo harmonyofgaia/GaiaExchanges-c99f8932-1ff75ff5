@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Dragon, Monkey, Tiger, Fish, Shield, Brain, Crown, Zap } from 'lucide-react'
+import { Flame, Brain, Zap, Fish, Shield, Eye, Crown, Star } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface DefenseAnimal {
@@ -174,12 +174,12 @@ export function UnifiedAnimalDefenseSystem() {
 
   const getAnimalIcon = (species: string) => {
     switch (species) {
-      case 'dragon': return Dragon
-      case 'monkey': return Monkey
-      case 'tiger': return Tiger
+      case 'dragon': return Flame
+      case 'monkey': return Brain
+      case 'tiger': return Zap
       case 'dolphin': return Fish
       case 'avatar': return Shield
-      case 'koala': return Brain
+      case 'koala': return Eye
       default: return Crown
     }
   }
