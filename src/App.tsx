@@ -1,10 +1,11 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
 import './App.css'
 
 import { Navbar } from '@/components/Navbar'
-import { AppSidebar } from '@/components/AppSidebar'
+import AppSidebar from '@/components/AppSidebar'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'

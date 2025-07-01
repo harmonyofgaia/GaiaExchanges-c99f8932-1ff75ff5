@@ -1,7 +1,6 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Activity, Globe, Zap, Crown, Dragon } from 'lucide-react'
+import { Shield, Activity, Globe, Zap, Crown, Flame } from 'lucide-react'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 
 const ComprehensiveStatus = () => {
