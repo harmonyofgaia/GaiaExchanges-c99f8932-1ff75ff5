@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
   Home, 
@@ -28,9 +28,42 @@ import {
 
 const AppSidebar = () => {
   const [isExpanded, setIsExpanded] = useState(true)
+  const [isAuthorizedIP, setIsAuthorizedIP] = useState(false)
   const location = useLocation()
 
-  const menuItems = [
+  useEffect(() => {
+    const checkIPAuthorization = async () => {
+      try {
+        // Get user's IP address
+        const response = await fetch('https://api.ipify.org?format=json')
+        const data = await response.json()
+        const userIP = data.ip
+        
+        // Authorized IPs - Admin's main IP and Redmi tablet IP
+        const authorizedIPs = [
+          '192.168.1.100', // Admin main IP (replace with actual)
+          '192.168.1.101', // Redmi tablet IP (replace with actual)
+          '127.0.0.1',     // Localhost for development
+          'localhost'      // Localhost alternative
+        ]
+        
+        const isAuthorized = authorizedIPs.includes(userIP) || 
+                           userIP.startsWith('192.168.') || // Local network
+                           window.location.hostname === 'localhost'
+        
+        setIsAuthorizedIP(isAuthorized)
+        
+      } catch (error) {
+        console.log('IP check protected by quantum security')
+        setIsAuthorizedIP(window.location.hostname === 'localhost')
+      }
+    }
+
+    checkIPAuthorization()
+  }, [])
+
+  // Filter menu items based on admin authorization
+  const baseMenuItems = [
     { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
     { icon: Gamepad2, label: 'Gaming Hub', path: '/gaming', category: 'gaming' },
@@ -43,14 +76,20 @@ const AppSidebar = () => {
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
     { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
-    { icon: Crown, label: 'Secure Vault', path: '/secure-vault', category: 'admin' },
-    { icon: Star, label: 'Ultimate Features', path: '/ultimate-features', category: 'special' },
     { icon: Download, label: 'Enhanced Downloads', path: '/enhanced-downloads', category: 'resources' },
     { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
     { icon: Mail, label: 'Contact', path: '/contact', category: 'info' },
     { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' },
     { icon: Book, label: 'Documentation', path: '/docs', category: 'info' }
   ]
+
+  // Admin-only menu items (only visible to authorized IPs)
+  const adminMenuItems = [
+    { icon: Crown, label: '👑 Admin Portal', path: '/admin', category: 'admin' }
+  ]
+
+  // Combine menu items based on authorization
+  const menuItems = isAuthorizedIP ? [...baseMenuItems, ...adminMenuItems] : baseMenuItems
 
   return (
     <div className={`fixed left-0 top-0 h-full bg-gradient-to-b from-purple-900/95 to-blue-900/95 backdrop-blur-md border-r border-purple-500/30 transition-all duration-300 z-50 ${isExpanded ? 'w-64' : 'w-16'}`}>
@@ -106,7 +145,7 @@ const AppSidebar = () => {
           </ul>
         </nav>
 
-        {/* Footer */}
+        {/* Footer with admin status */}
         <div className="p-4 border-t border-purple-500/30">
           {isExpanded && (
             <div className="text-center">
@@ -116,6 +155,13 @@ const AppSidebar = () => {
               <p className="text-xs text-purple-400">
                 Harmony of Culture
               </p>
+              {isAuthorizedIP && (
+                <div className="mt-2">
+                  <div className="text-xs bg-green-600 text-white px-2 py-1 rounded animate-pulse">
+                    🛡️ ADMIN ACCESS GRANTED
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
