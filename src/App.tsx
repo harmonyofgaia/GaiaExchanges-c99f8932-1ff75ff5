@@ -19,16 +19,21 @@ import Swap from '@/pages/Swap'
 import Security from '@/pages/Security'
 import AdminLogin from '@/pages/AdminLogin'
 import SecureAdmin from '@/pages/SecureAdmin'
+import SecureVault from '@/pages/SecureVault'
 import GaiasProjects from '@/pages/GaiasProjects'
 import TransparentWallet from '@/pages/TransparentWallet'
 import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
 import LandscapeBuilder from '@/pages/LandscapeBuilder'
 import GaiaFighterGame from '@/pages/GaiaFighterGame'
 
+// Game Pages
+import GaiaFantasyMMORPG from '@/pages/games/GaiaFantasyMMORPG'
+import SnakeArenaGame from '@/pages/games/SnakeArenaGame'
+import Game from '@/pages/Game'
+
 // Advanced pages
 import UltimateFeatureHub from '@/pages/UltimateFeatureHub'
 import NFTGreenAnimalPlatform from '@/pages/NFTGreenAnimalPlatform'
-import SecureVault from '@/pages/SecureVault'
 import AuraLandScrapyard from '@/pages/AuraLandScrapyard'
 import CoinCrafter from '@/pages/CoinCrafter'
 import VirtualWorld from '@/pages/VirtualWorld'
@@ -74,6 +79,12 @@ function App() {
                     <Route path="/coin-crafter" element={<GaiaCoinCrafter />} />
                     <Route path="/landscape-builder" element={<LandscapeBuilder />} />
                     <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
+                    <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
+                    
+                    {/* New Game Pages */}
+                    <Route path="/game/gaia-fantasy-mmorpg" element={<GaiaFantasyMMORPG />} />
+                    <Route path="/game/snake-arena" element={<SnakeArenaGame />} />
+                    <Route path="/game" element={<Game />} />
                     
                     {/* Advanced feature routes */}
                     <Route path="/ultimate-features" element={<UltimateFeatureHub />} />

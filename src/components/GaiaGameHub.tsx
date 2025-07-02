@@ -22,12 +22,22 @@ export function GaiaGameHub() {
       difficulty: 'Expert'
     },
     {
+      id: 'gaia-fantasy-mmorpg',
+      name: 'GAiA Fantasy MMORPG',
+      description: 'Epic environmental adventure with real impact',
+      status: 'active',
+      players: 28934,
+      route: '/game/gaia-fantasy-mmorpg',
+      icon: '🌍',
+      difficulty: 'Medium'
+    },
+    {
       id: 'snake-arena',
       name: 'Snake Arena',
       description: 'Classic snake game with multiplayer battles',
       status: 'active',
       players: 8934,
-      route: '/game',
+      route: '/game/snake-arena',
       icon: '🐍',
       difficulty: 'Medium'
     },

@@ -1,3 +1,4 @@
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AdminDashboard } from './AdminDashboard'
@@ -30,6 +31,8 @@ import { QuantumThunderstormDefense } from './QuantumThunderstormDefense'
 import { UniversalMatrixEngine } from './UniversalMatrixEngine'
 import { AnonymousTrackerPro } from './AnonymousTrackerPro'
 import { QuantumGameEngine } from './QuantumGameEngine'
+import { PDFGenerationSystem } from './PDFGenerationSystem'
+import { MobileAppDeployment } from './MobileAppDeployment'
 
 // Import the Enhanced Downloads and Documentation components
 import EnhancedDownloads from '@/pages/EnhancedDownloads'
@@ -45,7 +48,7 @@ export function AdminDashboardTabs() {
             🌍 GAIA QUANTUM ADMIN CONTROL CENTER - MASTER UNIVERSE
           </CardTitle>
           <p className="text-center text-lg text-muted-foreground">
-            Quantum-Powered • Self-Training • Universal Matrix • Untraceable Defense • Enhanced Downloads • Documentation
+            Quantum-Powered • Self-Training • Universal Matrix • Untraceable Defense • Revolutionary Features
           </p>
         </CardHeader>
         <CardContent>
@@ -264,11 +267,12 @@ export function AdminDashboardTabs() {
 
         <TabsContent value="quantum-tools">
           <Tabs defaultValue="partnership-engine" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-4">
+            <TabsList className="grid w-full grid-cols-5 mb-4">
               <TabsTrigger value="partnership-engine">🤝 Partnership Engine</TabsTrigger>
               <TabsTrigger value="media-library">📚 Media Library</TabsTrigger>
               <TabsTrigger value="transaction-reversal">🔄 Transaction Reversal</TabsTrigger>
               <TabsTrigger value="game-engine">🎮 Game Engine</TabsTrigger>
+              <TabsTrigger value="mobile-deployment">📱 Mobile Apps</TabsTrigger>
             </TabsList>
             
             <TabsContent value="partnership-engine">
@@ -283,15 +287,19 @@ export function AdminDashboardTabs() {
             <TabsContent value="game-engine">
               <QuantumGameEngine />
             </TabsContent>
+            <TabsContent value="mobile-deployment">
+              <MobileAppDeployment />
+            </TabsContent>
           </Tabs>
         </TabsContent>
 
-        {/* NEW: Downloads & Documentation Section */}
+        {/* Downloads & Documentation Section */}
         <TabsContent value="downloads-docs">
           <Tabs defaultValue="enhanced-downloads" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-4">
+            <TabsList className="grid w-full grid-cols-3 mb-4">
               <TabsTrigger value="enhanced-downloads">📥 Enhanced Downloads</TabsTrigger>
               <TabsTrigger value="documentation">📚 Documentation</TabsTrigger>
+              <TabsTrigger value="pdf-generation">📄 PDF System</TabsTrigger>
             </TabsList>
             
             <TabsContent value="enhanced-downloads">
@@ -299,6 +307,9 @@ export function AdminDashboardTabs() {
             </TabsContent>
             <TabsContent value="documentation">
               <Docs />
+            </TabsContent>
+            <TabsContent value="pdf-generation">
+              <PDFGenerationSystem />
             </TabsContent>
           </Tabs>
         </TabsContent>
