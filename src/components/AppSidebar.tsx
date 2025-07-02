@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -22,8 +21,7 @@ import {
   Mountain,
   Palette,
   Crown,
-  Star,
-  Book
+  Star
 } from 'lucide-react'
 
 const AppSidebar = () => {
@@ -62,7 +60,7 @@ const AppSidebar = () => {
     checkIPAuthorization()
   }, [])
 
-  // Filter menu items based on admin authorization
+  // Filter menu items based on admin authorization - removed Enhanced Downloads and Documentation
   const baseMenuItems = [
     { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
@@ -76,11 +74,9 @@ const AppSidebar = () => {
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
     { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
-    { icon: Download, label: 'Enhanced Downloads', path: '/enhanced-downloads', category: 'resources' },
     { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
     { icon: Mail, label: 'Contact', path: '/contact', category: 'info' },
-    { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' },
-    { icon: Book, label: 'Documentation', path: '/docs', category: 'info' }
+    { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' }
   ]
 
   // Admin-only menu items (only visible to authorized IPs)

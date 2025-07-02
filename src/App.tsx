@@ -9,7 +9,7 @@ import { SidebarProvider } from '@/components/ui/sidebar'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'
 
-// Pages - Keep all existing pages
+// Pages - Keep all existing pages except removed ones
 import Index from '@/pages/Index'
 import Exchange from '@/pages/Exchange'
 import Gaming from '@/pages/Gaming'
@@ -25,11 +25,10 @@ import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
 import LandscapeBuilder from '@/pages/LandscapeBuilder'
 import GaiaFighterGame from '@/pages/GaiaFighterGame'
 
-// Add all missing advanced pages (removed Ultimate Security and Immortal Security standalone pages)
+// Keep existing advanced pages (removed Enhanced Downloads and Docs from routes)
 import UltimateFeatureHub from '@/pages/UltimateFeatureHub'
 import NFTGreenAnimalPlatform from '@/pages/NFTGreenAnimalPlatform'
 import SecureVault from '@/pages/SecureVault'
-import EnhancedDownloads from '@/pages/EnhancedDownloads'
 import AuraLandScrapyard from '@/pages/AuraLandScrapyard'
 import CoinCrafter from '@/pages/CoinCrafter'
 import VirtualWorld from '@/pages/VirtualWorld'
@@ -39,7 +38,6 @@ import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
 import About from '@/pages/About'
 import Contact from '@/pages/Contact'
 import Pricing from '@/pages/Pricing'
-import Docs from '@/pages/Docs'
 
 const queryClient = new QueryClient()
 
@@ -59,7 +57,7 @@ function App() {
                   <Navbar />
                   <main className="container mx-auto px-4 py-6">
                     <Routes>
-                      {/* Keep all existing routes */}
+                      {/* Keep all existing routes except removed ones */}
                       <Route path="/" element={<Index />} />
                       <Route path="/exchange" element={<Exchange />} />
                       <Route path="/gaming" element={<Gaming />} />
@@ -76,10 +74,9 @@ function App() {
                       <Route path="/landscape-builder" element={<LandscapeBuilder />} />
                       <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
                       
-                      {/* Add all advanced feature routes (removed Ultimate/Immortal Security standalone routes) */}
+                      {/* Keep advanced feature routes (removed individual Ultimate/Immortal Security and Enhanced Downloads/Docs routes) */}
                       <Route path="/ultimate-features" element={<UltimateFeatureHub />} />
                       <Route path="/nft-green-animals" element={<NFTGreenAnimalPlatform />} />
-                      <Route path="/enhanced-downloads" element={<EnhancedDownloads />} />
                       <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
                       <Route path="/virtual-world" element={<VirtualWorld />} />
                       <Route path="/live-tracking" element={<LiveTracking />} />
@@ -88,7 +85,6 @@ function App() {
                       <Route path="/about" element={<About />} />
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/pricing" element={<Pricing />} />
-                      <Route path="/docs" element={<Docs />} />
                     </Routes>
                   </main>
                 </div>

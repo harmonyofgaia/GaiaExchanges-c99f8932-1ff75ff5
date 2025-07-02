@@ -29,7 +29,7 @@ const Pricing = () => {
           </CardHeader>
         </Card>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card className="border-green-500/30 bg-green-900/20">
             <CardHeader>
               <CardTitle className="text-green-400 text-center">
@@ -45,6 +45,7 @@ const Pricing = () => {
                 <li>✅ Animal Tracking</li>
                 <li>✅ Community Features</li>
                 <li>✅ Environmental Impact</li>
+                <li>✅ Basic Security</li>
               </ul>
               <Button className="w-full bg-green-600 hover:bg-green-700">
                 Join Free
@@ -67,6 +68,7 @@ const Pricing = () => {
                 <li>✅ Premium Animals</li>
                 <li>✅ NFT Creation</li>
                 <li>✅ Enhanced Security</li>
+                <li>✅ Trading Features</li>
               </ul>
               <Button className="w-full bg-blue-600 hover:bg-blue-700">
                 Upgrade Now
@@ -74,7 +76,7 @@ const Pricing = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-purple-500/30 bg-purple-900/20">
+          <Card className="border-purple-500/30 bg-purple-900/20 border-2">
             <CardHeader>
               <CardTitle className="text-purple-400 text-center">
                 <Shield className="h-8 w-8 mx-auto mb-2" />
@@ -84,38 +86,43 @@ const Pricing = () => {
             <CardContent className="text-center space-y-4">
               <div className="text-3xl font-bold text-purple-400">$29.99</div>
               <div className="text-sm text-muted-foreground">per month</div>
+              <Badge className="bg-purple-600">Guardian Protection</Badge>
               <ul className="space-y-2 text-sm">
-                <li>✅ Quantum Defense Access</li>
-                <li>✅ Dragon Protection</li>
-                <li>✅ Advanced Trading</li>
+                <li>✅ Guardian Defense Shield</li>
+                <li>✅ Advanced Animal Protection</li>
+                <li>✅ Premium Trading</li>
                 <li>✅ Priority Support</li>
+                <li>✅ Enhanced Environmental Tools</li>
+                <li>✅ Community Leadership Access</li>
               </ul>
               <Button className="w-full bg-purple-600 hover:bg-purple-700">
                 Become Guardian
               </Button>
+              <p className="text-xs text-purple-300">
+                *Guardian Defense: Specialized protection system for community guardians
+              </p>
             </CardContent>
           </Card>
+        </div>
 
-          <Card className="border-yellow-500/30 bg-yellow-900/20 border-2">
-            <CardHeader>
-              <CardTitle className="text-yellow-400 text-center">
-                <Crown className="h-8 w-8 mx-auto mb-2" />
-                God Mode
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="text-center space-y-4">
-              <div className="text-3xl font-bold text-yellow-400">$99.99</div>
-              <div className="text-sm text-muted-foreground">per month</div>
-              <Badge className="bg-yellow-600">Ultimate Power</Badge>
-              <ul className="space-y-2 text-sm">
-                <li>✅ Admin-Level Powers</li>
-                <li>✅ Galaxy Control</li>
-                <li>✅ Quantum Authority</li>
-                <li>✅ Unlimited Everything</li>
-              </ul>
-              <Button className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700">
-                Ascend to Godhood
-              </Button>
+        <div className="mt-8 text-center">
+          <Card className="border-yellow-500/30 bg-yellow-900/20">
+            <CardContent className="pt-6">
+              <h3 className="text-xl font-bold text-yellow-400 mb-4">🌟 Special Features</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <h4 className="font-bold text-green-400">Environmental Impact</h4>
+                  <p className="text-muted-foreground">Track and contribute to real environmental projects</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-blue-400">NFT Integration</h4>
+                  <p className="text-muted-foreground">Create and trade animal protection NFTs</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-purple-400">Community Power</h4>
+                  <p className="text-muted-foreground">Join forces with guardians worldwide</p>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
