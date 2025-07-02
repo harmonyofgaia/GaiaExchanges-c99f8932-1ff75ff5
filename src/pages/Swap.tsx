@@ -1,117 +1,189 @@
 
-import { Navbar } from '@/components/Navbar'
-import { PureInvestmentExchange } from '@/components/exchange/PureInvestmentExchange'
-import { EnhancedSwapSystem } from '@/components/EnhancedSwapSystem'
-import { LiveTradingCharts } from '@/components/LiveTradingCharts'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Heart, TrendingUp, BarChart3 } from 'lucide-react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { ArrowUpDown, TrendingUp, Zap, DollarSign } from 'lucide-react'
+import { useState } from 'react'
+import { toast } from 'sonner'
 
 export default function Swap() {
+  const [fromAmount, setFromAmount] = useState('')
+  const [toAmount, setToAmount] = useState('')
+  const [fromCurrency, setFromCurrency] = useState('GAiA')
+  const [toCurrency, setToCurrency] = useState('ETH')
+  const [feeOption, setFeeOption] = useState('standard')
+
+  const handleSwap = () => {
+    if (!fromAmount || parseFloat(fromAmount) <= 0) {
+      toast.error('Please enter a valid amount')
+      return
+    }
+    
+    toast.success(`🔄 Swapping ${fromAmount} ${fromCurrency} to ${toCurrency}`)
+  }
+
+  const swapCurrencies = () => {
+    setFromCurrency(toCurrency)
+    setToCurrency(fromCurrency)
+    setFromAmount(toAmount)
+    setToAmount(fromAmount)
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      <Navbar />
-      
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-blue-400 mb-4">
-            🌱 Pure Investment Exchange
-          </h1>
-          <p className="text-muted-foreground mb-6">
-            For believers, not traders • Stability over speculation • Community first
-          </p>
-          <div className="flex justify-center gap-4 flex-wrap">
-            <Badge className="bg-green-600 text-white">
-              <Shield className="h-3 w-3 mr-1" />
-              No Staking
-            </Badge>
-            <Badge className="bg-blue-600 text-white">
-              <Heart className="h-3 w-3 mr-1" />
-              Community First
-            </Badge>
-            <Badge className="bg-purple-600 text-white">
-              <TrendingUp className="h-3 w-3 mr-1" />
-              Long-term Focus
-            </Badge>
-            <Badge className="bg-orange-600 text-white">
-              <BarChart3 className="h-3 w-3 mr-1" />
-              Live Charts
-            </Badge>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20 p-6">
+      <div className="container mx-auto max-w-4xl space-y-6">
+        <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
+          <CardHeader>
+            <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
+              🔄 GAiA Token Swap Exchange
+            </CardTitle>
+            <p className="text-center text-xl text-muted-foreground">
+              Zero Fees Available • Instant Swaps • Multi-Chain Support
+            </p>
+          </CardHeader>
+        </Card>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Swap Interface */}
+          <Card className="border-green-500/30 bg-green-900/20">
+            <CardHeader>
+              <CardTitle className="text-green-400">💱 Token Swap</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* From Currency */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-white">From</label>
+                <div className="flex gap-2">
+                  <Input
+                    type="number"
+                    placeholder="0.0"
+                    value={fromAmount}
+                    onChange={(e) => setFromAmount(e.target.value)}
+                    className="flex-1 bg-black/30 border-green-500/30"
+                  />
+                  <Select value={fromCurrency} onValueChange={setFromCurrency}>
+                    <SelectTrigger className="w-32 bg-black/30 border-green-500/30">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="GAiA">GAiA</SelectItem>
+                      <SelectItem value="ETH">ETH</SelectItem>
+                      <SelectItem value="BTC">BTC</SelectItem>
+                      <SelectItem value="SOL">SOL</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              {/* Swap Button */}
+              <div className="flex justify-center">
+                <Button 
+                  onClick={swapCurrencies}
+                  variant="outline" 
+                  size="sm"
+                  className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10"
+                >
+                  <ArrowUpDown className="h-4 w-4" />
+                </Button>
+              </div>
+
+              {/* To Currency */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-white">To</label>
+                <div className="flex gap-2">
+                  <Input
+                    type="number"
+                    placeholder="0.0"
+                    value={toAmount}
+                    onChange={(e) => setToAmount(e.target.value)}
+                    className="flex-1 bg-black/30 border-green-500/30"
+                  />
+                  <Select value={toCurrency} onValueChange={setToCurrency}>
+                    <SelectTrigger className="w-32 bg-black/30 border-green-500/30">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="ETH">ETH</SelectItem>
+                      <SelectItem value="BTC">BTC</SelectItem>
+                      <SelectItem value="GAiA">GAiA</SelectItem>
+                      <SelectItem value="SOL">SOL</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              {/* Fee Options */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-white">Fee Option</label>
+                <Select value={feeOption} onValueChange={setFeeOption}>
+                  <SelectTrigger className="bg-black/30 border-green-500/30">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="zero">🎁 Zero Fees (Premium)</SelectItem>
+                    <SelectItem value="standard">⚡ Standard (0.1%)</SelectItem>
+                    <SelectItem value="community">🌍 Community Vault (0.05%)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <Button 
+                onClick={handleSwap}
+                className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+              >
+                <Zap className="h-4 w-4 mr-2" />
+                Execute Swap
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Market Data */}
+          <Card className="border-blue-500/30 bg-blue-900/20">
+            <CardHeader>
+              <CardTitle className="text-blue-400">📊 Market Data</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center p-3 bg-green-900/20 rounded-lg">
+                  <div className="text-lg font-bold text-green-400">$0.000125</div>
+                  <div className="text-xs text-muted-foreground">GAiA Price</div>
+                </div>
+                <div className="text-center p-3 bg-blue-900/20 rounded-lg">
+                  <div className="text-lg font-bold text-blue-400">+12.5%</div>
+                  <div className="text-xs text-muted-foreground">24h Change</div>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <h4 className="font-bold text-white">📈 Trading Pairs</h4>
+                <div className="space-y-1">
+                  <div className="flex justify-between text-sm">
+                    <span>GAiA/ETH</span>
+                    <span className="text-green-400">+5.2%</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span>GAiA/BTC</span>
+                    <span className="text-green-400">+3.8%</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span>GAiA/SOL</span>
+                    <span className="text-green-400">+7.1%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
+                <h4 className="font-bold text-purple-400 mb-2">🎯 Contract Info</h4>
+                <div className="text-xs text-muted-foreground space-y-1">
+                  <div>Contract: t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump</div>
+                  <div>Wallet: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
-
-        <Tabs defaultValue="pure-investment" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-6">
-            <TabsTrigger value="pure-investment">🌱 Pure Investment Portal</TabsTrigger>
-            <TabsTrigger value="live-charts">📈 Live Trading Charts</TabsTrigger>
-            <TabsTrigger value="enhanced-swap">⚙️ Advanced Swap Settings</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="pure-investment" className="space-y-6">
-            <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
-              <CardHeader>
-                <CardTitle className="text-green-400 text-center">
-                  🛡️ NO STAKING = NO GAMBLING = STABLE FOREVER
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-green-300 mb-4">
-                  We removed all staking features to prevent gambling and ensure long-term stability.
-                  GAiA is for believers who want to change the world, not make quick profits.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 bg-green-900/20 rounded-lg">
-                    <h4 className="text-green-400 font-bold">✅ Pure Investment Focus</h4>
-                    <p className="text-green-300 text-sm">Long-term growth, environmental impact, community building</p>
-                  </div>
-                  <div className="p-4 bg-red-900/20 rounded-lg">
-                    <h4 className="text-red-400 font-bold">❌ No Daily Trading</h4>
-                    <p className="text-red-300 text-sm">No staking, no gambling, no quick profits, no speculation</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <PureInvestmentExchange />
-          </TabsContent>
-
-          <TabsContent value="live-charts" className="space-y-6">
-            <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/20 to-purple-900/20">
-              <CardHeader>
-                <CardTitle className="text-blue-400 text-center flex items-center justify-center gap-2">
-                  <BarChart3 className="h-6 w-6" />
-                  📈 GAiA Superior Cloud Trading Engine
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <p className="text-blue-300 mb-4">
-                  Real-time market data from 15+ exchanges • CoinGecko integration • Binance network compatibility
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="p-4 bg-blue-900/20 rounded-lg">
-                    <h4 className="text-blue-400 font-bold">☁️ Cloud Processing</h4>
-                    <p className="text-blue-300 text-sm">Multi-region data aggregation for optimal performance</p>
-                  </div>
-                  <div className="p-4 bg-green-900/20 rounded-lg">
-                    <h4 className="text-green-400 font-bold">⚡ Real-time Updates</h4>
-                    <p className="text-green-300 text-sm">Live WebSocket connections to all major exchanges</p>
-                  </div>
-                  <div className="p-4 bg-purple-900/20 rounded-lg">
-                    <h4 className="text-purple-400 font-bold">📊 Advanced Analytics</h4>
-                    <p className="text-purple-300 text-sm">1000+ tokens tracked with superior algorithms</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <LiveTradingCharts />
-          </TabsContent>
-
-          <TabsContent value="enhanced-swap" className="space-y-6">
-            <EnhancedSwapSystem />
-          </TabsContent>
-        </Tabs>
       </div>
     </div>
   )
