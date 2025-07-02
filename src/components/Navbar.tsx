@@ -1,6 +1,5 @@
 
 import { Link, useLocation } from 'react-router-dom'
-import { SidebarTrigger } from '@/components/ui/sidebar'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { 
@@ -20,26 +19,23 @@ import { useEffect, useState } from 'react'
 export function Navbar() {
   const location = useLocation()
   const [isAuthorizedIP, setIsAuthorizedIP] = useState(false)
-  const [attackDetected, setAttackDetected] = useState(false)
 
   useEffect(() => {
     const checkIPAuthorization = async () => {
       try {
-        // Get user's IP address
         const response = await fetch('https://api.ipify.org?format=json')
         const data = await response.json()
         const userIP = data.ip
         
-        // Authorized IPs - Admin's main IP and Redmi tablet IP
         const authorizedIPs = [
-          '192.168.1.100', // Your main IP (replace with actual)
-          '192.168.1.101', // Your Redmi tablet IP (replace with actual)
-          '127.0.0.1',     // Localhost for development
-          'localhost'      // Localhost alternative
+          '192.168.1.100',
+          '192.168.1.101',
+          '127.0.0.1',
+          'localhost'
         ]
         
         const isAuthorized = authorizedIPs.includes(userIP) || 
-                           userIP.startsWith('192.168.') || // Local network
+                           userIP.startsWith('192.168.') || 
                            window.location.hostname === 'localhost'
         
         setIsAuthorizedIP(isAuthorized)
@@ -69,23 +65,11 @@ export function Navbar() {
     window.open('https://sites.google.com/view/culture-of-harmony/harmony-of-gaia', '_blank')
   }
 
-  if (attackDetected) {
-    return (
-      <div className="min-h-screen bg-gradient-to-r from-red-600 via-orange-500 to-red-600 flex items-center justify-center">
-        <div className="text-center text-white animate-pulse">
-          <h1 className="text-6xl font-bold mb-4">🔥 DEFENSE SYSTEM ACTIVE 🔥</h1>
-          <p className="text-2xl">UNAUTHORIZED ACCESS - FIRESTORM PROTOCOL ENGAGED</p>
-          <p className="text-lg mt-4">Stop attacking or face continuous defense!</p>
-        </div>
-      </div>
-    )
-  }
-
   return (
-    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-      <div className="flex h-16 items-center px-4">
+    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
+      <div className="flex h-16 items-center px-4 ml-16">
+        {/* Logo - offset for menu button */}
         <div className="flex items-center gap-4">
-          <SidebarTrigger />
           <UniversalGaiaLogo 
             size="sm" 
             animated={true}
