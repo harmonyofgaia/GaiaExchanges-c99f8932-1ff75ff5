@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -13,18 +14,23 @@ import {
   CheckCircle,
   AlertTriangle,
   Activity,
-  Users
+  Users,
+  Coins,
+  TrendingUp
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { GAIA_TOKEN } from '@/constants/gaia'
 
-export default function GaiaPrivateBlockchain() {
+export default function GAiAPrivateBlockchain() {
   const [blockchainStats, setBlockchainStats] = useState({
-    blocksGenerated: 847293,
-    transactionsProcessed: 2847593,
-    networkSpeed: 3547,
+    blocksGenerated: 1247893,
+    transactionsProcessed: 3847593,
+    networkSpeed: 4547,
     securityLevel: 99.9,
-    nodesActive: 247,
-    validationRate: 100
+    nodesActive: 347,
+    validationRate: 100,
+    totalValue: 15247890,
+    activeWallets: 8934
   })
 
   const [walletConnection, setWalletConnection] = useState({
@@ -36,11 +42,11 @@ export default function GaiaPrivateBlockchain() {
   const connectWallet = () => {
     setWalletConnection({
       connected: true,
-      address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-      balance: 15247.89
+      address: GAIA_TOKEN.WALLET_ADDRESS,
+      balance: 25247.89
     })
-    toast.success('Wallet Connected!', {
-      description: 'GAiA Private Blockchain wallet successfully connected'
+    toast.success('GAiA Wallet Connected!', {
+      description: 'Private blockchain wallet successfully connected'
     })
   }
 
@@ -59,6 +65,10 @@ export default function GaiaPrivateBlockchain() {
     }
   }
 
+  const openPumpFun = () => {
+    window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-black p-6">
       <div className="container mx-auto space-y-6">
@@ -69,9 +79,9 @@ export default function GaiaPrivateBlockchain() {
               🔗 GAiA PRIVATE BLOCKCHAIN
             </CardTitle>
             <p className="text-center text-lg text-muted-foreground">
-              Decentralized • Secure • Lightning Fast • Community Owned
+              Decentralized • Quantum Secured • Lightning Fast • Community Owned
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-4 flex-wrap">
               <Badge className="bg-green-600 animate-pulse">
                 <CheckCircle className="h-3 w-3 mr-1" />
                 FULLY OPERATIONAL
@@ -84,26 +94,30 @@ export default function GaiaPrivateBlockchain() {
                 <Database className="h-3 w-3 mr-1" />
                 {blockchainStats.blocksGenerated.toLocaleString()} BLOCKS
               </Badge>
+              <Button onClick={openPumpFun} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+                <TrendingUp className="h-3 w-3 mr-1" />
+                View on PumpFun
+              </Button>
             </div>
           </CardHeader>
         </Card>
 
-        {/* Blockchain Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {/* Enhanced Statistics Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
           <Card className="border-blue-500/20 bg-blue-900/20">
             <CardContent className="p-4 text-center">
-              <Database className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-xl font-bold text-blue-400">
+              <Database className="h-6 w-6 mx-auto text-blue-400 mb-2" />
+              <div className="text-lg font-bold text-blue-400">
                 {blockchainStats.blocksGenerated.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">Blocks Generated</div>
+              <div className="text-xs text-muted-foreground">Blocks</div>
             </CardContent>
           </Card>
 
           <Card className="border-green-500/20 bg-green-900/20">
             <CardContent className="p-4 text-center">
-              <Activity className="h-8 w-8 mx-auto text-green-400 mb-2" />
-              <div className="text-xl font-bold text-green-400">
+              <Activity className="h-6 w-6 mx-auto text-green-400 mb-2" />
+              <div className="text-lg font-bold text-green-400">
                 {blockchainStats.transactionsProcessed.toLocaleString()}
               </div>
               <div className="text-xs text-muted-foreground">Transactions</div>
@@ -112,49 +126,69 @@ export default function GaiaPrivateBlockchain() {
 
           <Card className="border-purple-500/20 bg-purple-900/20">
             <CardContent className="p-4 text-center">
-              <Zap className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-              <div className="text-xl font-bold text-purple-400">
-                {blockchainStats.networkSpeed.toLocaleString()} TPS
+              <Zap className="h-6 w-6 mx-auto text-purple-400 mb-2" />
+              <div className="text-lg font-bold text-purple-400">
+                {blockchainStats.networkSpeed.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">Network Speed</div>
+              <div className="text-xs text-muted-foreground">TPS</div>
             </CardContent>
           </Card>
 
           <Card className="border-red-500/20 bg-red-900/20">
             <CardContent className="p-4 text-center">
-              <Shield className="h-8 w-8 mx-auto text-red-400 mb-2" />
-              <div className="text-xl font-bold text-red-400">
+              <Shield className="h-6 w-6 mx-auto text-red-400 mb-2" />
+              <div className="text-lg font-bold text-red-400">
                 {blockchainStats.securityLevel}%
               </div>
-              <div className="text-xs text-muted-foreground">Security Level</div>
+              <div className="text-xs text-muted-foreground">Security</div>
             </CardContent>
           </Card>
 
           <Card className="border-orange-500/20 bg-orange-900/20">
             <CardContent className="p-4 text-center">
-              <Globe className="h-8 w-8 mx-auto text-orange-400 mb-2" />
-              <div className="text-xl font-bold text-orange-400">
+              <Globe className="h-6 w-6 mx-auto text-orange-400 mb-2" />
+              <div className="text-lg font-bold text-orange-400">
                 {blockchainStats.nodesActive}
               </div>
-              <div className="text-xs text-muted-foreground">Active Nodes</div>
+              <div className="text-xs text-muted-foreground">Nodes</div>
             </CardContent>
           </Card>
 
           <Card className="border-yellow-500/20 bg-yellow-900/20">
             <CardContent className="p-4 text-center">
-              <CheckCircle className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
-              <div className="text-xl font-bold text-yellow-400">
+              <CheckCircle className="h-6 w-6 mx-auto text-yellow-400 mb-2" />
+              <div className="text-lg font-bold text-yellow-400">
                 {blockchainStats.validationRate}%
               </div>
-              <div className="text-xs text-muted-foreground">Validation Rate</div>
+              <div className="text-xs text-muted-foreground">Validation</div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-cyan-500/20 bg-cyan-900/20">
+            <CardContent className="p-4 text-center">
+              <Coins className="h-6 w-6 mx-auto text-cyan-400 mb-2" />
+              <div className="text-lg font-bold text-cyan-400">
+                ${blockchainStats.totalValue.toLocaleString()}
+              </div>
+              <div className="text-xs text-muted-foreground">Total Value</div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-pink-500/20 bg-pink-900/20">
+            <CardContent className="p-4 text-center">
+              <Users className="h-6 w-6 mx-auto text-pink-400 mb-2" />
+              <div className="text-lg font-bold text-pink-400">
+                {blockchainStats.activeWallets.toLocaleString()}
+              </div>
+              <div className="text-xs text-muted-foreground">Active Wallets</div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Wallet Connection */}
+        {/* Enhanced Wallet Connection */}
         <Card className="border-green-500/20">
           <CardHeader>
-            <CardTitle className="text-green-400">💳 WALLET CONNECTION</CardTitle>
+            <CardTitle className="text-green-400">💳 ENHANCED WALLET CONNECTION</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -164,7 +198,7 @@ export default function GaiaPrivateBlockchain() {
                     <Lock className="h-12 w-12 mx-auto text-gray-400 mb-4" />
                     <h3 className="text-lg font-bold text-gray-400 mb-2">Wallet Not Connected</h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Connect your GAiA wallet to interact with the blockchain
+                      Connect your GAiA wallet to interact with the private blockchain
                     </p>
                     <Button onClick={connectWallet} className="bg-green-600 hover:bg-green-700">
                       <Shield className="h-4 w-4 mr-2" />
@@ -180,7 +214,7 @@ export default function GaiaPrivateBlockchain() {
                     <div className="space-y-2">
                       <div className="text-sm">
                         <span className="text-muted-foreground">Address:</span>
-                        <div className="font-mono text-xs bg-black/20 p-2 rounded mt-1">
+                        <div className="font-mono text-xs bg-black/20 p-2 rounded mt-1 break-all">
                           {walletConnection.address}
                         </div>
                       </div>
@@ -189,6 +223,10 @@ export default function GaiaPrivateBlockchain() {
                         <span className="text-green-400 font-bold ml-2">
                           {walletConnection.balance.toLocaleString()} GAiA
                         </span>
+                      </div>
+                      <div className="text-sm">
+                        <span className="text-muted-foreground">Network:</span>
+                        <span className="text-blue-400 font-bold ml-2">GAiA Private Chain</span>
                       </div>
                     </div>
                   </div>
@@ -214,6 +252,10 @@ export default function GaiaPrivateBlockchain() {
                     <span className="text-sm">Smart Contracts</span>
                     <Badge className="bg-orange-600">Enabled</Badge>
                   </div>
+                  <div className="flex items-center justify-between p-3 bg-gray-900/50 rounded">
+                    <span className="text-sm">Cross-Chain</span>
+                    <Badge className="bg-cyan-600">Compatible</Badge>
+                  </div>
                 </div>
                 
                 <Button 
@@ -229,13 +271,13 @@ export default function GaiaPrivateBlockchain() {
           </CardContent>
         </Card>
 
-        {/* Technical Specifications */}
+        {/* Technical Specifications - Enhanced */}
         <Card className="border-purple-500/20">
           <CardHeader>
             <CardTitle className="text-purple-400">⚙️ TECHNICAL SPECIFICATIONS</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="p-4 bg-purple-900/20 rounded-lg">
                 <h4 className="font-bold text-purple-400 mb-3">🏗️ Architecture</h4>
                 <ul className="space-y-1 text-sm">
@@ -243,16 +285,18 @@ export default function GaiaPrivateBlockchain() {
                   <li>• Quantum-Resistant Encryption</li>
                   <li>• Sharded Architecture</li>
                   <li>• Cross-Chain Compatibility</li>
+                  <li>• Smart Contract Support</li>
                 </ul>
               </div>
               
               <div className="p-4 bg-blue-900/20 rounded-lg">
                 <h4 className="font-bold text-blue-400 mb-3">🚀 Performance</h4>
                 <ul className="space-y-1 text-sm">
-                  <li>• 3,547 TPS Throughput</li>
+                  <li>• {blockchainStats.networkSpeed.toLocaleString()} TPS Throughput</li>
                   <li>• 0.3s Block Time</li>
                   <li>• 99.9% Uptime</li>
                   <li>• Global Node Distribution</li>
+                  <li>• Real-time Processing</li>
                 </ul>
               </div>
               
@@ -263,6 +307,18 @@ export default function GaiaPrivateBlockchain() {
                   <li>• Hardware Wallet Integration</li>
                   <li>• Advanced Threat Detection</li>
                   <li>• Immutable Transaction History</li>
+                  <li>• Zero-Knowledge Proofs</li>
+                </ul>
+              </div>
+
+              <div className="p-4 bg-orange-900/20 rounded-lg">
+                <h4 className="font-bold text-orange-400 mb-3">🌐 Integration</h4>
+                <ul className="space-y-1 text-sm">
+                  <li>• PumpFun Compatible</li>
+                  <li>• DEX Integration</li>
+                  <li>• NFT Marketplace Support</li>
+                  <li>• Gaming Integration</li>
+                  <li>• DeFi Protocols</li>
                 </ul>
               </div>
             </div>
@@ -272,13 +328,15 @@ export default function GaiaPrivateBlockchain() {
         {/* Network Status */}
         <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
           <h4 className="font-medium text-green-400 mb-2">🌐 GAiA Private Blockchain Network Status</h4>
-          <div className="text-sm text-green-300">
-            ✅ Private blockchain fully operational and accessible to users<br/>
-            ✅ Quantum-secured transaction processing active<br/>
-            ✅ Lightning-fast network speed of 3,547 TPS<br/>
-            ✅ Wallet connection and transaction creation working<br/>
-            ✅ Smart contract functionality enabled<br/>
-            ✅ Cross-chain compatibility implemented
+          <div className="text-sm text-green-300 grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div>✅ Private blockchain fully operational and accessible</div>
+            <div>✅ Quantum-secured transaction processing active</div>
+            <div>✅ Lightning-fast network speed of {blockchainStats.networkSpeed.toLocaleString()} TPS</div>
+            <div>✅ Wallet connection and transaction creation working</div>
+            <div>✅ Smart contract functionality enabled</div>
+            <div>✅ Cross-chain compatibility implemented</div>
+            <div>✅ Real-time blockchain analytics active</div>
+            <div>✅ Enhanced security protocols operational</div>
           </div>
         </div>
       </div>

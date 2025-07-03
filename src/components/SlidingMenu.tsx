@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -20,7 +21,10 @@ import {
   Menu,
   X,
   Crown,
-  Star
+  Star,
+  Vault,
+  Eye,
+  ShoppingCart
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -77,10 +81,13 @@ const SlidingMenu = () => {
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
     { icon: Gamepad2, label: 'Gaming Hub', path: '/gaming', category: 'gaming' },
     { icon: TrendingUp, label: 'Exchange', path: '/exchange', category: 'trading' },
+    { icon: ShoppingCart, label: 'NFT Marketplace', path: '/nft-marketplace', category: 'marketplace' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
-    { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
+    { icon: Mountain, label: 'Landscape Builder', path: '/advanced-landscape-builder', category: 'tools' },
     { icon: Palette, label: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', category: 'tools' },
+    { icon: Vault, label: 'Community Vault', path: '/community-vault', category: 'community' },
+    { icon: Eye, label: 'Transparent Wallets', path: '/transparent-wallets', category: 'transparency' },
     { icon: Activity, label: 'Live Tracking', path: '/live-tracking', category: 'monitoring' },
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
@@ -167,7 +174,7 @@ const SlidingMenu = () => {
           <div className="p-4 border-t border-purple-500/30">
             <div className="text-center">
               <p className="text-xs text-muted-foreground">
-                GAiA Platform v2.0
+                GAiA Platform v3.0
               </p>
               <p className="text-xs text-purple-400">
                 Harmony of Culture
