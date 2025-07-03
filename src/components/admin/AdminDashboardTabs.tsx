@@ -13,7 +13,8 @@ import {
   Coins,
   Zap,
   Target,
-  Settings
+  Settings,
+  Wallet
 } from 'lucide-react'
 
 // Import all admin components
@@ -26,12 +27,14 @@ import { AutonomousContentGeneration } from './AutonomousContentGeneration'
 import { FourStepVerification } from './FourStepVerification'
 import { AdminTransparencyCenter } from './AdminTransparencyCenter'
 import { ConsolidatedSecuritySystem } from './ConsolidatedSecuritySystem'
+import { WalletEnhancementEngine } from '../WalletEnhancementEngine'
 
 export function AdminDashboardTabs() {
   const [activeTab, setActiveTab] = useState('overview')
 
   const tabs = [
     { id: 'overview', label: 'System Overview', icon: Activity },
+    { id: 'wallet-engine', label: 'Wallet Engine', icon: Wallet },
     { id: 'security', label: 'Consolidated Security', icon: Shield },
     { id: 'verification', label: '4-Step Verification', icon: Lock },
     { id: 'transparency', label: 'Transparency Center', icon: Eye },
@@ -65,7 +68,7 @@ export function AdminDashboardTabs() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3 lg:grid-cols-5 xl:grid-cols-9 bg-black/20">
+        <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 xl:grid-cols-10 bg-black/20">
           {tabs.map((tab) => {
             const Icon = tab.icon
             return (
@@ -83,6 +86,10 @@ export function AdminDashboardTabs() {
 
         <TabsContent value="overview" className="mt-6">
           <LiveTrackingEngine />
+        </TabsContent>
+
+        <TabsContent value="wallet-engine" className="mt-6">
+          <WalletEnhancementEngine />
         </TabsContent>
 
         <TabsContent value="security" className="mt-6">

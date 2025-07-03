@@ -1,159 +1,141 @@
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { ArrowUpDown, Zap, Heart } from 'lucide-react'
-import { toast } from 'sonner'
+import { Badge } from '@/components/ui/badge'
+import { ArrowUpDown, TrendingUp, ExternalLink, Shield } from 'lucide-react'
 import { GAIA_TOKEN } from '@/constants/gaia'
-import { useGaiaTokenData } from '@/hooks/useGaiaTokenData'
+import { toast } from 'sonner'
 
 interface SwapInterfaceProps {
   title?: string
-  showHeader?: boolean
 }
 
-export function SwapInterface({ title = "Investment Portal", showHeader = true }: SwapInterfaceProps) {
-  const [fromAmount, setFromAmount] = useState<string>('')
-  const [toAmount, setToAmount] = useState<string>('')
-  const [fromCurrency, setFromCurrency] = useState<string>(GAIA_TOKEN.SYMBOL)
-  const [toCurrency, setToCurrency] = useState<string>('USDC')
-  const [isSwapping, setIsSwapping] = useState<boolean>(false)
-
-  const { tokenData, hasRealData } = useGaiaTokenData()
-  const exchangeRate = hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE
-
-  useEffect(() => {
-    if (fromAmount && !isNaN(Number(fromAmount))) {
-      if (fromCurrency === GAIA_TOKEN.SYMBOL && toCurrency === 'USDC') {
-        setToAmount((Number(fromAmount) * exchangeRate).toFixed(6))
-      } else if (fromCurrency === 'USDC' && toCurrency === GAIA_TOKEN.SYMBOL) {
-        setToAmount((Number(fromAmount) / exchangeRate).toFixed(2))
-      }
-    }
-  }, [fromAmount, fromCurrency, toCurrency, exchangeRate])
+export function SwapInterface({ title = "GAiA Token Swap" }: SwapInterfaceProps) {
+  const [fromAmount, setFromAmount] = useState('')
+  const [toAmount, setToAmount] = useState('')
+  const [fromCurrency, setFromCurrency] = useState('USDT')
+  const [toCurrency, setToCurrency] = useState('GAiA')
 
   const handleSwap = () => {
-    if (!fromAmount || Number(fromAmount) <= 0) {
-      toast.error('Please enter a valid amount')
+    if (!fromAmount) {
+      toast.error('Please enter an amount to swap')
       return
     }
-
-    setIsSwapping(true)
     
-    setTimeout(() => {
-      const message = hasRealData 
-        ? `Long-term investment: ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency}`
-        : `Investment transaction: ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency} (using estimated rates)`
-      
-      toast.success('🌱 Investment Confirmed - Fees Sent to Community Wallet!', {
-        description: `${message} • All fees transparently sent to: ${GAIA_TOKEN.WALLET_ADDRESS}`
-      })
-      setFromAmount('')
-      setToAmount('')
-      setIsSwapping(false)
-    }, 2000)
+    // Calculate swap amount (simplified for demo)
+    const swapRate = 8000 // 1 USDT = 8000 GAiA tokens
+    const calculatedAmount = parseFloat(fromAmount) * swapRate
+    setToAmount(calculatedAmount.toString())
+    
+    toast.success('Instant Swap Executed!', {
+      description: `Swapping ${fromAmount} ${fromCurrency} for ${calculatedAmount.toLocaleString()} ${toCurrency}`,
+      duration: 3000
+    })
   }
 
-  const switchCurrencies = () => {
+  const reverseSwap = () => {
     setFromCurrency(toCurrency)
     setToCurrency(fromCurrency)
     setFromAmount(toAmount)
     setToAmount(fromAmount)
   }
 
+  const openPumpFun = () => {
+    window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
+  }
+
   return (
-    <Card className="border-border/50">
-      {showHeader && (
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-          {!hasRealData && (
-            <p className="text-sm text-yellow-400">
-              ⚠️ Using estimated rates - real data not available
-            </p>
-          )}
-        </CardHeader>
-      )}
-      <CardContent className="space-y-6">
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium">From</label>
+    <Card className="bg-gradient-to-br from-green-900/30 to-blue-900/30 border-green-500/30">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-green-400">
+          <ArrowUpDown className="h-6 w-6" />
+          {title}
+        </CardTitle>
+        <div className="flex items-center gap-2 flex-wrap">
+          <Button onClick={openPumpFun} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
+            <ExternalLink className="h-3 w-3 mr-1" />
+            Trade on PumpFun
+          </Button>
+          <Badge className="bg-green-600">
+            <Shield className="h-3 w-3 mr-1" />
+            Instant Swap Only
+          </Badge>
+          <Badge className="bg-red-600">
+            NO LIMIT ORDERS
+          </Badge>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-6">
+          {/* From Section */}
+          <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
+            <label className="text-sm text-blue-300 mb-2 block">From</label>
             <div className="flex gap-2">
               <Input
                 type="number"
-                placeholder="0.00"
                 value={fromAmount}
                 onChange={(e) => setFromAmount(e.target.value)}
-                className="flex-1"
+                placeholder="0.00"
+                className="flex-1 bg-black/30 border-blue-500/30 text-blue-300"
               />
-              <select
+              <select 
                 value={fromCurrency}
                 onChange={(e) => setFromCurrency(e.target.value)}
-                className="px-4 py-2 bg-muted border border-border rounded-md min-w-[100px]"
+                className="bg-black/30 border border-blue-500/30 rounded px-3 text-blue-300"
               >
-                <option value={GAIA_TOKEN.SYMBOL}>{GAIA_TOKEN.SYMBOL}</option>
-                <option value="USDC">USDC</option>
+                <option value="USDT">USDT</option>
+                <option value="SOL">SOL</option>
+                <option value="BTC">BTC</option>
+                <option value="ETH">ETH</option>
               </select>
             </div>
           </div>
 
+          {/* Swap Button */}
           <div className="flex justify-center">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={switchCurrencies}
-              className="rounded-full w-10 h-10 p-0"
-            >
+            <Button onClick={reverseSwap} variant="outline" size="icon" className="border-green-500/30 text-green-400">
               <ArrowUpDown className="h-4 w-4" />
             </Button>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium">To</label>
+          {/* To Section */}
+          <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/30">
+            <label className="text-sm text-green-300 mb-2 block">To</label>
             <div className="flex gap-2">
               <Input
                 type="number"
-                placeholder="0.00"
                 value={toAmount}
+                onChange={(e) => setToAmount(e.target.value)}
+                placeholder="0.00"
+                className="flex-1 bg-black/30 border-green-500/30 text-green-300"
                 readOnly
-                className="flex-1 bg-muted"
               />
-              <select
+              <select 
                 value={toCurrency}
                 onChange={(e) => setToCurrency(e.target.value)}
-                className="px-4 py-2 bg-muted border border-border rounded-md min-w-[100px]"
+                className="bg-black/30 border border-green-500/30 rounded px-3 text-green-300"
               >
-                <option value="USDC">USDC</option>
-                <option value={GAIA_TOKEN.SYMBOL}>{GAIA_TOKEN.SYMBOL}</option>
+                <option value="GAiA">GAiA</option>
+                <option value="USDT">USDT</option>
+                <option value="SOL">SOL</option>
+                <option value="BTC">BTC</option>
+                <option value="ETH">ETH</option>
               </select>
             </div>
           </div>
-        </div>
 
-        <Button 
-          onClick={handleSwap}
-          disabled={!fromAmount || Number(fromAmount) <= 0 || isSwapping}
-          className="w-full bg-green-600 hover:bg-green-700 text-white"
-        >
-          {isSwapping ? (
-            <>
-              <Zap className="h-4 w-4 mr-2 animate-spin" />
-              Processing Investment...
-            </>
-          ) : (
-            <>
-              <Heart className="h-4 w-4 mr-2" />
-              {hasRealData ? 'Make Long-term Investment' : 'Demo Investment'}
-            </>
-          )}
-        </Button>
+          {/* Swap Execute Button */}
+          <Button onClick={handleSwap} className="w-full bg-green-600 hover:bg-green-700 text-white h-12">
+            <TrendingUp className="h-5 w-5 mr-2" />
+            EXECUTE INSTANT SWAP
+          </Button>
 
-        <div className="text-xs text-muted-foreground space-y-1">
-          <div>Rate: 1 {GAIA_TOKEN.SYMBOL} = ${exchangeRate.toFixed(6)} USDC {!hasRealData && '(estimated)'}</div>
-          <div>Investment Fee: 0.1% (transparently sent to community wallet)</div>
-          <div>📍 Community Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...</div>
-          <div>🌱 100% of fees reinvested in environmental projects</div>
-          <div>🛡️ No staking = No gambling = Stable forever</div>
+          {/* Info */}
+          <div className="text-xs text-muted-foreground text-center">
+            ⚡ Instant execution only • No limit orders • Connected to PumpFun
+          </div>
         </div>
       </CardContent>
     </Card>
