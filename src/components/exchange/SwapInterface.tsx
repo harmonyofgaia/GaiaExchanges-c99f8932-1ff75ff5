@@ -29,7 +29,7 @@ export function SwapInterface({ title = "GAiA Token Swap" }: SwapInterfaceProps)
     const calculatedAmount = parseFloat(fromAmount) * swapRate
     setToAmount(calculatedAmount.toString())
     
-    toast.success('Instant Swap Executed!', {
+    toast.success('Swap Executed!', {
       description: `Swapping ${fromAmount} ${fromCurrency} for ${calculatedAmount.toLocaleString()} ${toCurrency}`,
       duration: 3000
     })
@@ -53,7 +53,7 @@ export function SwapInterface({ title = "GAiA Token Swap" }: SwapInterfaceProps)
           <ArrowUpDown className="h-6 w-6" />
           {title}
         </CardTitle>
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2">
           <Button onClick={openPumpFun} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
             <ExternalLink className="h-3 w-3 mr-1" />
             Trade on PumpFun
@@ -61,9 +61,6 @@ export function SwapInterface({ title = "GAiA Token Swap" }: SwapInterfaceProps)
           <Badge className="bg-green-600">
             <Shield className="h-3 w-3 mr-1" />
             Instant Swap Only
-          </Badge>
-          <Badge className="bg-red-600">
-            NO LIMIT ORDERS
           </Badge>
         </div>
       </CardHeader>
@@ -134,7 +131,7 @@ export function SwapInterface({ title = "GAiA Token Swap" }: SwapInterfaceProps)
 
           {/* Info */}
           <div className="text-xs text-muted-foreground text-center">
-            ⚡ Instant execution only • No limit orders • Connected to PumpFun
+            No limit orders • Instant execution only • Connected to PumpFun
           </div>
         </div>
       </CardContent>

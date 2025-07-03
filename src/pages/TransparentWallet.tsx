@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { TransactionTracker } from '@/components/TransactionTracker'
+import { WalletEnhancementEngine } from '@/components/WalletEnhancementEngine'
 import { Eye, Shield, Copy, ExternalLink, Heart, Leaf } from 'lucide-react'
 import { GAIA_TOKEN } from '@/constants/gaia'
 import { toast } from 'sonner'
@@ -170,6 +171,11 @@ export default function TransparentWallet() {
             </Card>
           </CardContent>
         </Card>
+
+        {/* Wallet Enhancement Engine */}
+        <div className="mb-8">
+          <WalletEnhancementEngine />
+        </div>
 
         {/* Complete Transaction History */}
         <TransactionTracker />

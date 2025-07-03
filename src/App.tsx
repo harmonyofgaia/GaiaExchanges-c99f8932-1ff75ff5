@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
@@ -7,11 +6,11 @@ import Admin from '@/pages/Admin'
 import Exchange from '@/pages/Exchange'
 import Staking from '@/pages/Staking'
 import Governance from '@/pages/Governance'
+import NFTMarketplace from '@/pages/NFTMarketplace'
 import Contact from '@/pages/Contact'
 import AboutUs from '@/pages/AboutUs'
 import Ecosystem from '@/pages/Ecosystem'
 import LandscapeBuilder from '@/pages/LandscapeBuilder'
-import TransparentWallet from '@/pages/TransparentWallet'
 
 function App() {
   return (
@@ -24,11 +23,11 @@ function App() {
           <Route path="/exchange" element={<Exchange />} />
           <Route path="/staking" element={<Staking />} />
           <Route path="/governance" element={<Governance />} />
+          <Route path="/nft-marketplace" element={<NFTMarketplace />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/ecosystem" element={<Ecosystem />} />
           <Route path="/landscape-builder" element={<LandscapeBuilder />} />
-          <Route path="/transparent-wallet" element={<TransparentWallet />} />
         </Routes>
       </div>
     </Router>
