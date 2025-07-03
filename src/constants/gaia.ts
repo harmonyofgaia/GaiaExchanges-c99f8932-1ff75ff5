@@ -1,13 +1,15 @@
 
-
 export const GAIA_TOKEN = {
   // Official GAiA Token Addresses
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
+  FEE_COLLECTION_WALLET: 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7',
+  COMMUNITY_VAULT_WALLET: '6DAj3dhtwBDv3HY3UYw1ykjHGRLTU7yMKQmCn8bNoTpW',
   SYMBOL: 'GAiA',
   NAME: 'GAiA Token - Harmony of Culture',
   DECIMALS: 9,
   NETWORK: 'Solana',
+  PLATFORM: 'Pump.fun',
   PUMP_FUN_URL: 'https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   OFFICIAL_WEBSITE: 'https://www.gaiaexchanges.net',
   
@@ -15,7 +17,7 @@ export const GAIA_TOKEN = {
   TOTAL_SUPPLY: 1000000000000, // 1 Trillion tokens
   BURNED_TOKENS: 0,
   CIRCULATING_SUPPLY: 1000000000000,
-  INITIAL_PRICE: 0.0001, // Added back for compatibility
+  INITIAL_PRICE: 0.0001, 
   
   // Tokenomics
   BURN_RATE: 0, // 0% burn rate
@@ -29,7 +31,7 @@ export const GAIA_TOKEN = {
   
   // Brand messaging
   BRAND_STATEMENT: 'We Are a Strong Creative Open Minded Circuit To Happiness - Seeds Will form in to Music',
-  OFFICIAL_DISCLAIMER: 'This is the ONLY official GAiA Token. Verify contract address before trading.',
+  DISCLAIMER: 'This is the ONLY official GAiA Token. Verify contract address before trading.',
 }
 
 export const GAIA_METRICS = {
@@ -39,7 +41,7 @@ export const GAIA_METRICS = {
   HOLDERS: 10000,
   TRANSACTIONS_24H: 5000,
   
-  // Added back for compatibility
+  // Added for compatibility
   INITIAL_PRICE: 0.0001,
   INITIAL_HOLDERS: 10000,
   INITIAL_MARKET_CAP: 100000,
@@ -68,4 +70,3 @@ export const formatGaiaNumber = (num: number): string => {
   if (num >= 1e3) return `${(num / 1e3).toFixed(2)}K`
   return num.toString()
 }
-
