@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -88,7 +87,8 @@ const SlidingMenu = () => {
     { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
     { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
     { icon: Mail, label: 'Contact', path: '/contact', category: 'info' },
-    { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' }
+    { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' },
+    { icon: Globe, label: 'GAiA Private Blockchain', path: '/gaia-private-blockchain', category: 'blockchain' }
   ]
 
   const adminMenuItems = [
