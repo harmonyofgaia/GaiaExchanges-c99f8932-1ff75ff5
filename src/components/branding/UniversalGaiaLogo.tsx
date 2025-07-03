@@ -75,6 +75,15 @@ export function UniversalGaiaLogo({
     }
   }
 
+  const handleLogoClick = () => {
+    if (onClick) {
+      onClick()
+    } else {
+      // Connect to Culture of Harmony website
+      window.open('https://www.cultureofharmony.net', '_blank')
+    }
+  }
+
   return (
     <div className={`flex items-center gap-3 ${positionClasses[position]} ${className}`}>
       {/* Animated Background Effect */}
@@ -88,14 +97,14 @@ export function UniversalGaiaLogo({
       {/* Logo Container */}
       <div 
         className={`relative ${sizeClasses[size]} ${getAnimationClass()} cursor-pointer`}
-        onClick={onClick}
+        onClick={handleLogoClick}
       >
         {/* Glow Effect */}
         {animated && (
           <div className="absolute inset-0 bg-green-400/20 rounded-full blur-lg animate-pulse" />
         )}
         
-        {/* Main Logo - Updated to use new Harmony of Gaia logo */}
+        {/* Main Logo */}
         <div className="relative z-10">
           <img 
             src="/lovable-uploads/92accea3-19a3-48db-bd65-888252fd27e7.png"
