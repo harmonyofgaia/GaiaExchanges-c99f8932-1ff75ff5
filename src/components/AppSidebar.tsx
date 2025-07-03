@@ -1,10 +1,10 @@
-
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
   Home, 
   Wallet, 
   Gamepad2, 
+  TrendingUp, 
   Settings, 
   Info, 
   Mail, 
@@ -60,15 +60,15 @@ const AppSidebar = () => {
     checkIPAuthorization()
   }, [])
 
-  // Filter menu items based on admin authorization - removed Exchange
+  // Filter menu items based on admin authorization - removed Enhanced Downloads and Documentation
   const baseMenuItems = [
     { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
-    { icon: Wallet, label: 'Transparent Wallet', path: '/transparent-wallet', category: 'wallet' },
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
     { icon: Gamepad2, label: 'Gaming Hub', path: '/gaming', category: 'gaming' },
-    { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
+    { icon: TrendingUp, label: 'Exchange', path: '/exchange', category: 'trading' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
+    { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
     { icon: Palette, label: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', category: 'tools' },
     { icon: Activity, label: 'Live Tracking', path: '/live-tracking', category: 'monitoring' },
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
