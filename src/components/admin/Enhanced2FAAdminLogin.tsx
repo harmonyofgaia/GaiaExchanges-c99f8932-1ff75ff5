@@ -5,25 +5,23 @@ import { AdminLogin } from './AdminLogin'
 import { AdminMFA } from './AdminMFA'
 import { GoogleAuthenticator } from '../auth/GoogleAuthenticator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Smartphone, QrCode } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Shield, Smartphone, QrCode, AlertTriangle } from 'lucide-react'
 
 interface Enhanced2FAAdminLoginProps {
   onLoginSuccess: () => void
+  onShowRecovery?: () => void
 }
 
-export function Enhanced2FAAdminLogin({ onLoginSuccess }: Enhanced2FAAdminLoginProps) {
+export function Enhanced2FAAdminLogin({ onLoginSuccess, onShowRecovery }: Enhanced2FAAdminLoginProps) {
   const [loginStep, setLoginStep] = useState<'credentials' | 'sms-mfa' | 'google-2fa' | 'success'>('credentials')
   const [selectedMFAMethod, setSelectedMFAMethod] = useState<'sms' | 'google'>('sms')
 
   const handleCredentialsSuccess = (username: string, password: string) => {
-    // Generate vault access key with quantum protection
-    const vaultKey = btoa('harmony quantum vault access').replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
-    
-    // Enhanced security validation with vault-connected credentials
+    // Original admin credentials restored
     const validCredentials = {
-      user: 'Synatic', // Updated username
-      pass: 'harmonyquantumvaultaccess', // Updated password
-      vault: vaultKey
+      user: 'Synatic',
+      pass: 'Freedom!oul19922323'
     }
     
     if (username === validCredentials.user && 
@@ -34,7 +32,6 @@ export function Enhanced2FAAdminLogin({ onLoginSuccess }: Enhanced2FAAdminLoginP
       password = ''
       validCredentials.user = ''
       validCredentials.pass = ''
-      validCredentials.vault = ''
       
       // After successful credential validation, show MFA options
       setLoginStep(selectedMFAMethod === 'sms' ? 'sms-mfa' : 'google-2fa')
@@ -65,7 +62,7 @@ export function Enhanced2FAAdminLogin({ onLoginSuccess }: Enhanced2FAAdminLoginP
         <div className="text-center space-y-2">
           <Shield className="h-12 w-12 text-green-400 mx-auto" />
           <h1 className="text-2xl font-bold text-green-400">GAIA Admin Security Center</h1>
-          <p className="text-sm text-green-300">Multi-Factor Authentication Required</p>
+          <p className="text-sm text-green-300">Original System Restored • Enhanced Wall of Defense</p>
         </div>
       </Card>
 
@@ -90,6 +87,24 @@ export function Enhanced2FAAdminLogin({ onLoginSuccess }: Enhanced2FAAdminLoginP
 
           {/* Admin Login Form */}
           <AdminLogin onLoginSuccess={handleCredentialsSuccess} />
+
+          {/* Recovery Access Button */}
+          {onShowRecovery && (
+            <Card className="border-red-500/30 bg-red-900/20 p-4">
+              <div className="text-center space-y-3">
+                <AlertTriangle className="h-8 w-8 text-red-400 mx-auto" />
+                <h3 className="text-red-400 font-medium">Account Recovery</h3>
+                <p className="text-xs text-red-300">Use only if primary login fails</p>
+                <Button 
+                  onClick={onShowRecovery}
+                  variant="outline"
+                  className="border-red-500/30 text-red-400 hover:bg-red-900/30"
+                >
+                  Access 4-Step Recovery System
+                </Button>
+              </div>
+            </Card>
+          )}
         </div>
       )}
 
@@ -101,7 +116,7 @@ export function Enhanced2FAAdminLogin({ onLoginSuccess }: Enhanced2FAAdminLoginP
         <GoogleAuthenticator
           onSetupComplete={handleGoogleAuthSetup}
           onVerificationSuccess={handleMFASuccess}
-          userEmail="admin@cultureofharmony.net"
+          userEmail="michelzuidwijk@gmail.com"
         />
       )}
 
@@ -109,9 +124,9 @@ export function Enhanced2FAAdminLogin({ onLoginSuccess }: Enhanced2FAAdminLoginP
         <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-emerald-900/20 p-6">
           <div className="text-center space-y-4">
             <div className="text-6xl">🎉</div>
-            <h2 className="text-2xl font-bold text-green-400">Security Verification Complete!</h2>
+            <h2 className="text-2xl font-bold text-green-400">Original System Restored!</h2>
             <p className="text-green-300">
-              Welcome to GAIA Admin Dashboard - Maximum security active across all platforms
+              Welcome back to GAIA Admin Dashboard - Enhanced wall of defense active
             </p>
           </div>
         </Card>
