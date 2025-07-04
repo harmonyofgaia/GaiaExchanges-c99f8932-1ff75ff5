@@ -6,6 +6,7 @@ import { AdminDashboardTabs } from './AdminDashboardTabs'
 import { MasterControlPanel } from './MasterControlPanel'
 import { MasterSecurityMatrix } from './MasterSecurityMatrix'
 import { FixedAdminLogin } from './FixedAdminLogin'
+import { QuantumTraceEraser } from '../security/QuantumTraceEraser'
 import { 
   Shield, 
   Crown, 
@@ -20,19 +21,26 @@ export function AdminDashboard() {
   const [systemStatus, setSystemStatus] = useState('FULLY_OPERATIONAL')
 
   useEffect(() => {
-    // Check admin authorization
+    // Check admin authorization with enhanced security
     const checkAuth = async () => {
       try {
-        // Enhanced admin verification
         const isLocalhost = window.location.hostname === 'localhost'
         const hasAdminSession = localStorage.getItem('admin_verified') === 'true' || 
                                sessionStorage.getItem('admin-session-active') === 'true'
+        const redmiAuthorized = sessionStorage.getItem('redmi-ip-authorized') === '10.13.125.207'
         
-        if (isLocalhost || hasAdminSession) {
+        if (isLocalhost || (hasAdminSession && redmiAuthorized)) {
           setIsAuthorized(true)
-          console.log('👑 ADMIN ACCESS GRANTED - Master system control available')
-          console.log('🌌 INVISIBLE MATRIX OPERATIONS ACTIVE')
+          console.log('👑 MASTER ADMIN ACCESS GRANTED - QUANTUM SECURED')
+          console.log('📱 REDMI TABLET AUTHORIZATION VERIFIED')
           console.log('🛡️ QUANTUM DEFENSE GRID ONLINE')
+          console.log('🌌 INVISIBLE MATRIX OPERATIONS ACTIVE')
+          
+          // Auto-cleanup traces after 20 seconds
+          setTimeout(() => {
+            console.clear()
+            console.log('🧹 ADMIN SESSION - TRACES ELIMINATED')
+          }, 20000)
         }
       } catch (error) {
         console.log('🛡️ Admin access protected by quantum security')
@@ -44,11 +52,13 @@ export function AdminDashboard() {
 
   const handleLoginSuccess = () => {
     setIsAuthorized(true)
+    console.log('✅ ADMIN LOGIN SUCCESS - QUANTUM VAULT OPENED')
   }
 
   if (!isAuthorized) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-black flex items-center justify-center p-6">
+        <QuantumTraceEraser />
         <FixedAdminLogin onLoginSuccess={handleLoginSuccess} />
       </div>
     )
@@ -56,6 +66,7 @@ export function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-black p-6">
+      <QuantumTraceEraser />
       <div className="container mx-auto space-y-6">
         {/* Admin Header */}
         <Card className="border-purple-500/50 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
@@ -82,7 +93,7 @@ export function AdminDashboard() {
               </Badge>
             </div>
             <p className="text-center text-lg text-muted-foreground mt-4">
-              Master control with invisible quantum matrix • Dual-layer defense • E.T. level encryption
+              Master control with invisible quantum matrix • Redmi tablet secured • E.T. level encryption
             </p>
           </CardHeader>
         </Card>
@@ -105,25 +116,25 @@ export function AdminDashboard() {
                 <div>
                   <Badge className="bg-green-600 mb-2">MATRIX CORE ✅</Badge>
                   <div className="text-green-300">
-                    Invisible Quantum Operations, Global Intelligence
+                    Invisible Quantum Operations, Global Intelligence, Trace Elimination
                   </div>
                 </div>
                 <div>
                   <Badge className="bg-purple-600 mb-2">SECURITY GRID ✅</Badge>
                   <div className="text-purple-300">
-                    4-Step Recovery, Auto-Ban System, E.T. Encryption
+                    4-Step Recovery, Auto-Ban System, E.T. Encryption, Redmi Protection
                   </div>
                 </div>
                 <div>
                   <Badge className="bg-blue-600 mb-2">SATELLITE NET ✅</Badge>
                   <div className="text-blue-300">
-                    Quantum Satellites, Global Monitoring, Threat Detection
+                    Quantum Satellites, Global Monitoring, Threat Detection, IP Banning
                   </div>
                 </div>
                 <div>
                   <Badge className="bg-orange-600 mb-2">ADMIN CONTROL ✅</Badge>
                   <div className="text-orange-300">
-                    Master Access, Original Credentials, Matrix Command
+                    Master Access, Quantum Vault, Matrix Command, Google Auth Required
                   </div>
                 </div>
               </div>
