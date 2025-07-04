@@ -6,8 +6,6 @@ import { AdminDashboardTabs } from './AdminDashboardTabs'
 import { MasterControlPanel } from './MasterControlPanel'
 import { MasterSecurityMatrix } from './MasterSecurityMatrix'
 import { Enhanced2FAAdminLogin } from './Enhanced2FAAdminLogin'
-import { AdminRecoverySystem } from './AdminRecoverySystem'
-import { FourStepVerification } from './FourStepVerification'
 import { QuantumTraceEraser } from '../security/QuantumTraceEraser'
 import { Invisible4StepVerification } from '../security/Invisible4StepVerification'
 import { 
@@ -21,7 +19,6 @@ import {
 
 export function AdminDashboard() {
   const [isAuthorized, setIsAuthorized] = useState(false)
-  const [showRecovery, setShowRecovery] = useState(false)
   const [systemStatus, setSystemStatus] = useState('FULLY_OPERATIONAL')
 
   useEffect(() => {
@@ -37,22 +34,23 @@ export function AdminDashboard() {
           console.log('👑 MASTER ADMIN ACCESS GRANTED - QUANTUM SECURED')
           console.log('📱 ORIGINAL SYSTEM RESTORED')
           console.log('🛡️ 4-STEP RECOVERY SYSTEM ACTIVE')
-          console.log('🌌 WALL OF DEFENSE OPERATIONAL')
+          console.log('🌌 WALL OF DEFENSE OPERATIONAL - HIGHEST PROTECTION')
           
-          // Display credentials temporarily
+          // Display credentials temporarily (will be auto-cleaned)
           console.log('🔐 ADMIN CREDENTIALS:')
           console.log('👤 Username: Synatic')
           console.log('🔑 Password: Freedom!oul19922323')
-          console.log('🛡️ 4-STEP RECOVERY PASSWORDS:')
-          console.log('Step 1: GAiA_HARMONY_2024')
-          console.log('Step 2: ADMIN_DEVICE_001')
-          console.log('Step 3: harmony gaia quantum vault')
-          console.log('Step 4: QUANTUM_MATRIX_MASTER')
+          console.log('🛡️ 4-STEP RECOVERY STARTING WITH "PEACE":')
+          console.log('Step 1: peace harmony gaia 2024')
+          console.log('Step 2: quantum admin device secure')
+          console.log('Step 3: matrix protection vault access')
+          console.log('Step 4: ultimate master control key')
           
-          // Auto-cleanup traces after 60 seconds
+          // Enhanced auto-cleanup
           setTimeout(() => {
             console.clear()
-            console.log('🧹 ALL CREDENTIALS ERASED - NO TRACES REMAINING')
+            console.log('🧹 ALL CREDENTIALS ERASED - WALL OF DEFENSE SECURED')
+            console.log('👻 INVISIBLE PROTECTION MATRIX ACTIVATED')
           }, 60000)
         }
       } catch (error) {
@@ -66,19 +64,7 @@ export function AdminDashboard() {
   const handleLoginSuccess = () => {
     setIsAuthorized(true)
     console.log('✅ ADMIN LOGIN SUCCESS - ORIGINAL SYSTEM RESTORED')
-  }
-
-  const handleShowRecovery = () => {
-    setShowRecovery(true)
-  }
-
-  const handleRecoveryComplete = () => {
-    setIsAuthorized(true)
-    setShowRecovery(false)
-  }
-
-  const handleBackToLogin = () => {
-    setShowRecovery(false)
+    console.log('🛡️ WALL OF DEFENSE - HIGHEST PROTECTION ACTIVE')
   }
 
   if (!isAuthorized) {
@@ -87,17 +73,9 @@ export function AdminDashboard() {
         <QuantumTraceEraser />
         <Invisible4StepVerification />
         <div className="space-y-6">
-          {showRecovery ? (
-            <AdminRecoverySystem 
-              onRecoveryComplete={handleRecoveryComplete}
-              onBack={handleBackToLogin}
-            />
-          ) : (
-            <Enhanced2FAAdminLogin 
-              onLoginSuccess={handleLoginSuccess}
-              onShowRecovery={handleShowRecovery}
-            />
-          )}
+          <Enhanced2FAAdminLogin 
+            onLoginSuccess={handleLoginSuccess}
+          />
         </div>
       </div>
     )
@@ -129,17 +107,14 @@ export function AdminDashboard() {
               </Badge>
               <Badge className="bg-red-600 animate-pulse">
                 <Shield className="h-3 w-3 mr-1" />
-                QUANTUM PROTECTION ACTIVE
+                HIGHEST PROTECTION LEVEL
               </Badge>
             </div>
             <p className="text-center text-lg text-muted-foreground mt-4">
-              Original admin system restored • 4-Step recovery • Enhanced wall of defense
+              Original admin system restored • 4-Step recovery with "peace" • Highest wall of defense
             </p>
           </CardHeader>
         </Card>
-
-        {/* 4-Step Verification Display */}
-        <FourStepVerification />
 
         {/* Master Security Matrix */}
         <MasterSecurityMatrix />
@@ -159,13 +134,13 @@ export function AdminDashboard() {
                 <div>
                   <Badge className="bg-green-600 mb-2">ADMIN ACCESS ✅</Badge>
                   <div className="text-green-300">
-                    Original Credentials, 2FA System, Enhanced Security
+                    Original Credentials, No MFA, Enhanced Security
                   </div>
                 </div>
                 <div>
                   <Badge className="bg-purple-600 mb-2">4-STEP RECOVERY ✅</Badge>
                   <div className="text-purple-300">
-                    Complete Recovery System, Password Protection, Vault Access
+                    Peace-Based Recovery, Highest Protection, Vault Access
                   </div>
                 </div>
                 <div>

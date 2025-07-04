@@ -31,12 +31,12 @@ export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecover
     recoveryPhrase: ''
   })
 
-  // Original 4-step recovery passwords
+  // Original 4-step recovery passwords starting with "peace"
   const recoveryPasswords = {
-    step1: 'GAiA_HARMONY_2024',
-    step2: 'ADMIN_DEVICE_001', 
-    step3: 'harmony gaia quantum vault',
-    step4: 'QUANTUM_MATRIX_MASTER'
+    step1: 'peace harmony gaia 2024',
+    step2: 'quantum admin device secure', 
+    step3: 'matrix protection vault access',
+    step4: 'ultimate master control key'
   }
 
   const handleStepComplete = (step: number) => {
@@ -66,6 +66,12 @@ export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecover
       description: 'All recovery steps verified - Original system access restored',
       duration: 6000
     })
+
+    // Auto-cleanup after 10 seconds
+    setTimeout(() => {
+      console.clear()
+      console.log('🧹 ALL RECOVERY TRACES ELIMINATED')
+    }, 10000)
   }
 
   const handleStepVerification = (step: number) => {
@@ -73,15 +79,15 @@ export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecover
       case 1:
         if (verificationData.password === recoveryPasswords.step1) {
           handleStepComplete(1)
-          toast.success('Step 1 Verified!', { description: 'Password authentication successful' })
+          toast.success('Step 1 Verified!', { description: 'Peace harmony confirmed' })
         } else {
-          toast.error('Invalid Password', { description: 'Access denied by wall of defense' })
+          toast.error('Invalid Recovery Phrase', { description: 'Access denied by wall of defense' })
         }
         break
       case 2:
         if (verificationData.deviceCode === recoveryPasswords.step2) {
           handleStepComplete(2)
-          toast.success('Step 2 Verified!', { description: 'Device authorization confirmed' })
+          toast.success('Step 2 Verified!', { description: 'Quantum device authorization confirmed' })
         } else {
           toast.error('Invalid Device Code', { description: 'Device not authorized' })
         }
@@ -89,7 +95,7 @@ export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecover
       case 3:
         if (verificationData.recoveryPhrase === recoveryPasswords.step3) {
           handleStepComplete(3)
-          toast.success('Step 3 Verified!', { description: 'Recovery phrase confirmed' })
+          toast.success('Step 3 Verified!', { description: 'Matrix protection confirmed' })
         } else {
           toast.error('Invalid Recovery Phrase', { description: 'Phrase verification failed' })
         }
@@ -132,16 +138,16 @@ export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecover
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Step 1: Password */}
+            {/* Step 1: Peace Harmony */}
             <Card className={`${currentStep >= 1 ? 'border-green-500/50 bg-green-900/20' : 'border-gray-500/30'}`}>
               <CardContent className="p-4 text-center">
                 <Lock className={`h-8 w-8 mx-auto mb-3 ${completedSteps.has(1) ? 'text-green-400' : currentStep === 1 ? 'text-blue-400' : 'text-gray-400'}`} />
-                <h3 className="font-bold mb-2">Step 1: Password</h3>
+                <h3 className="font-bold mb-2">Step 1: Peace</h3>
                 {currentStep === 1 ? (
                   <div className="space-y-2">
                     <Input
                       type="password"
-                      placeholder="Recovery Password"
+                      placeholder="Peace Recovery Phrase"
                       value={verificationData.password}
                       onChange={(e) => setVerificationData(prev => ({ ...prev, password: e.target.value }))}
                     />
@@ -161,15 +167,15 @@ export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecover
               </CardContent>
             </Card>
 
-            {/* Step 2: Device Code */}
+            {/* Step 2: Quantum Device */}
             <Card className={`${currentStep >= 2 ? 'border-green-500/50 bg-green-900/20' : 'border-gray-500/30'}`}>
               <CardContent className="p-4 text-center">
                 <Shield className={`h-8 w-8 mx-auto mb-3 ${completedSteps.has(2) ? 'text-green-400' : currentStep === 2 ? 'text-blue-400' : 'text-gray-400'}`} />
-                <h3 className="font-bold mb-2">Step 2: Device</h3>
+                <h3 className="font-bold mb-2">Step 2: Quantum</h3>
                 {currentStep === 2 ? (
                   <div className="space-y-2">
                     <Input
-                      placeholder="Device Code"
+                      placeholder="Quantum Device Code"
                       value={verificationData.deviceCode}
                       onChange={(e) => setVerificationData(prev => ({ ...prev, deviceCode: e.target.value }))}
                     />
@@ -189,15 +195,15 @@ export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecover
               </CardContent>
             </Card>
 
-            {/* Step 3: Recovery Phrase */}
+            {/* Step 3: Matrix Protection */}
             <Card className={`${currentStep >= 3 ? 'border-green-500/50 bg-green-900/20' : 'border-gray-500/30'}`}>
               <CardContent className="p-4 text-center">
                 <Key className={`h-8 w-8 mx-auto mb-3 ${completedSteps.has(3) ? 'text-green-400' : currentStep === 3 ? 'text-blue-400' : 'text-gray-400'}`} />
-                <h3 className="font-bold mb-2">Step 3: Phrase</h3>
+                <h3 className="font-bold mb-2">Step 3: Matrix</h3>
                 {currentStep === 3 ? (
                   <div className="space-y-2">
                     <Input
-                      placeholder="Recovery Phrase"
+                      placeholder="Matrix Protection Code"
                       value={verificationData.recoveryPhrase}
                       onChange={(e) => setVerificationData(prev => ({ ...prev, recoveryPhrase: e.target.value }))}
                     />
@@ -217,16 +223,16 @@ export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecover
               </CardContent>
             </Card>
 
-            {/* Step 4: Master Key */}
+            {/* Step 4: Ultimate Master */}
             <Card className={`${currentStep >= 4 ? 'border-green-500/50 bg-green-900/20' : 'border-gray-500/30'}`}>
               <CardContent className="p-4 text-center">
                 <Eye className={`h-8 w-8 mx-auto mb-3 ${completedSteps.has(4) ? 'text-green-400' : currentStep === 4 ? 'text-blue-400' : 'text-gray-400'}`} />
-                <h3 className="font-bold mb-2">Step 4: Master</h3>
+                <h3 className="font-bold mb-2">Step 4: Ultimate</h3>
                 {currentStep === 4 ? (
                   <div className="space-y-2">
                     <Input
                       type="password"
-                      placeholder="Master Key"
+                      placeholder="Ultimate Master Key"
                       value={verificationData.password}
                       onChange={(e) => setVerificationData(prev => ({ ...prev, password: e.target.value }))}
                     />
@@ -261,7 +267,7 @@ export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecover
                 🔐 ORIGINAL 4-STEP RECOVERY • ENHANCED WALL OF DEFENSE
               </p>
               <p className="text-xs text-orange-300 text-center mt-1">
-                Complete all steps to restore full admin access
+                Complete all steps starting with "peace" to restore full admin access
               </p>
             </div>
           </div>
