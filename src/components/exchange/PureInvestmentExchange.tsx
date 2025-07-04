@@ -1,83 +1,80 @@
 
-import { SwapInterface } from './SwapInterface'
+import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Heart, TrendingUp, Copy } from 'lucide-react'
-import { toast } from 'sonner'
-import { GAIA_TOKEN } from '@/constants/gaia'
-import { TokenDataDisplay } from '@/components/TokenDataDisplay'
+import { SwapInterface } from './SwapInterface'
+import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 
 export function PureInvestmentExchange() {
-  const copyWalletAddress = () => {
-    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
-    toast.success('Community Wallet Address Copied!', {
-      description: 'This is where all fees go - completely transparent'
-    })
-  }
-
   return (
-    <div className="space-y-6">
-      <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
-        <CardHeader>
-          <CardTitle className="text-green-400 flex items-center gap-2">
-            <Heart className="h-6 w-6" />
-            🌱 Pure Investment Exchange - For Believers, Not Traders
-          </CardTitle>
-          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-            <h3 className="text-blue-400 font-bold mb-2">🏦 All Fees Go to Community Wallet:</h3>
-            <div className="flex items-center justify-between">
-              <code className="text-blue-300 font-mono text-sm break-all bg-blue-900/10 p-2 rounded flex-1 mr-2">
-                {GAIA_TOKEN.WALLET_ADDRESS}
-              </code>
-              <Button 
-                onClick={copyWalletAddress}
-                variant="outline" 
-                size="sm"
-                className="border-blue-500/30 text-blue-400"
-              >
-                <Copy className="h-3 w-3 mr-1" />
-                Copy
-              </Button>
-            </div>
+    <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20 p-6">
+      <div className="container mx-auto space-y-6">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <UniversalGaiaLogo 
+            size="lg" 
+            animated={true}
+            showText={true}
+            className="mx-auto mb-6"
+          />
+          <h1 className="text-4xl font-bold text-green-400 mb-4">
+            💎 GAiA PURE INVESTMENT EXCHANGE
+          </h1>
+          <div className="flex justify-center gap-4 flex-wrap">
+            <Badge className="bg-green-600">INVESTMENT FOCUSED</Badge>
+            <Badge className="bg-blue-600">ENVIRONMENTAL IMPACT</Badge>
+            <Badge className="bg-purple-600">LONG-TERM STRATEGY</Badge>
           </div>
-        </CardHeader>
-      </Card>
+        </div>
 
-      <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
-        <CardContent className="pt-6">
-          <h3 className="text-purple-400 font-bold text-xl mb-4 text-center">
-            🛡️ STABLE FOREVER - NO STAKING, NO GAMBLING
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <h4 className="text-green-400 font-bold">✅ We Welcome:</h4>
-              <ul className="text-green-300 text-sm space-y-1">
-                <li>• Long-term believers</li>
-                <li>• Environmental advocates</li>
-                <li>• Community builders</li>
-                <li>• Stable investors</li>
-              </ul>
-            </div>
-            <div className="space-y-2">
-              <h4 className="text-red-400 font-bold">❌ Not Welcome:</h4>
-              <ul className="text-red-300 text-sm space-y-1">
-                <li>• Daily traders</li>
-                <li>• Quick profit seekers</li>
-                <li>• Speculators</li>
-                <li>• Stakers/Gamblers</li>
-              </ul>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+        {/* Main Exchange Interface */}
+        <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30">
+          <CardHeader>
+            <CardTitle className="text-center text-2xl text-green-400">
+              🌍 Pure Investment Trading
+            </CardTitle>
+            <p className="text-center text-muted-foreground">
+              Investment-focused trading without speculation mechanisms. Built for environmental impact and long-term growth.
+            </p>
+          </CardHeader>
+          <CardContent>
+            <SwapInterface title="Pure Investment Exchange" />
+          </CardContent>
+        </Card>
 
-      <TokenDataDisplay showFullDetails={true} />
-
-      <SwapInterface 
-        title="Long-term Investment Portal" 
-        showHeader={true}
-      />
+        {/* Investment Philosophy */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="bg-green-900/20 border border-green-500/30">
+            <CardContent className="p-6 text-center">
+              <div className="text-4xl mb-4">🌱</div>
+              <h3 className="text-green-400 font-bold text-xl mb-2">Environmental First</h3>
+              <p className="text-green-300 text-sm">
+                Every transaction directly funds environmental restoration projects
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-blue-900/20 border border-blue-500/30">
+            <CardContent className="p-6 text-center">
+              <div className="text-4xl mb-4">💎</div>
+              <h3 className="text-blue-400 font-bold text-xl mb-2">Long-Term Value</h3>
+              <p className="text-blue-300 text-sm">
+                Built for investors who believe in sustainable growth
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-purple-900/20 border border-purple-500/30">
+            <CardContent className="p-6 text-center">
+              <div className="text-4xl mb-4">🤝</div>
+              <h3 className="text-purple-400 font-bold text-xl mb-2">Community Driven</h3>
+              <p className="text-purple-300 text-sm">
+                Community consensus guides all major platform decisions
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }

@@ -14,7 +14,8 @@ import {
   Zap,
   Target,
   Settings,
-  Wallet
+  Wallet,
+  Satellite
 } from 'lucide-react'
 
 // Import all admin components
@@ -24,19 +25,19 @@ import { LiveTrackingEngine } from '../tracking/LiveTrackingEngine'
 import { NeuralNetworkGameAI } from './NeuralNetworkGameAI'
 import { BlockchainVirtualEconomy } from './BlockchainVirtualEconomy'
 import { AutonomousContentGeneration } from './AutonomousContentGeneration'
-import { FourStepVerification } from './FourStepVerification'
 import { AdminTransparencyCenter } from './AdminTransparencyCenter'
 import { ConsolidatedSecuritySystem } from './ConsolidatedSecuritySystem'
 import { WalletEnhancementEngine } from '../WalletEnhancementEngine'
+import { MasterSecurityMatrix } from './MasterSecurityMatrix'
 
 export function AdminDashboardTabs() {
   const [activeTab, setActiveTab] = useState('overview')
 
   const tabs = [
     { id: 'overview', label: 'System Overview', icon: Activity },
+    { id: 'master-matrix', label: 'Master Matrix', icon: Satellite },
     { id: 'wallet-engine', label: 'Wallet Engine', icon: Wallet },
     { id: 'security', label: 'Consolidated Security', icon: Shield },
-    { id: 'verification', label: '4-Step Verification', icon: Lock },
     { id: 'transparency', label: 'Transparency Center', icon: Eye },
     { id: 'neural-ai', label: 'Neural Network AI', icon: Brain },
     { id: 'blockchain', label: 'Virtual Economy', icon: Coins },
@@ -49,7 +50,7 @@ export function AdminDashboardTabs() {
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 border border-purple-500/30 rounded-lg p-6">
         <h2 className="text-2xl font-bold text-center text-purple-400 mb-4">
-          👑 ADMIN CONTROL CENTER - HARMONY OF GAIA
+          👑 ADMIN CONTROL CENTER - MASTER QUANTUM MATRIX
         </h2>
         <div className="flex justify-center gap-4 flex-wrap">
           <Badge className="bg-green-600 animate-pulse">
@@ -61,8 +62,12 @@ export function AdminDashboardTabs() {
             ADMIN AUTHENTICATED
           </Badge>
           <Badge className="bg-purple-600">
-            <Settings className="h-3 w-3 mr-1" />
-            QUANTUM PROTOCOLS ACTIVE
+            <Satellite className="h-3 w-3 mr-1" />
+            INVISIBLE MATRIX ACTIVE
+          </Badge>
+          <Badge className="bg-red-600 animate-pulse">
+            <Shield className="h-3 w-3 mr-1" />
+            QUANTUM DEFENSE ONLINE
           </Badge>
         </div>
       </div>
@@ -88,16 +93,16 @@ export function AdminDashboardTabs() {
           <LiveTrackingEngine />
         </TabsContent>
 
+        <TabsContent value="master-matrix" className="mt-6">
+          <MasterSecurityMatrix />
+        </TabsContent>
+
         <TabsContent value="wallet-engine" className="mt-6">
           <WalletEnhancementEngine />
         </TabsContent>
 
         <TabsContent value="security" className="mt-6">
           <ConsolidatedSecuritySystem />
-        </TabsContent>
-
-        <TabsContent value="verification" className="mt-6">
-          <FourStepVerification />
         </TabsContent>
 
         <TabsContent value="transparency" className="mt-6">
