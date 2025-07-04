@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import HomePage from '@/pages/HomePage'
 import Admin from '@/pages/Admin'
+import MatrixAdmin from '@/pages/MatrixAdmin'
 import Exchange from '@/pages/Exchange'
 import Staking from '@/pages/Staking'
 import Governance from '@/pages/Governance'
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/matrix-admin" element={<MatrixAdmin />} />
           <Route path="/exchange" element={<Exchange />} />
           <Route path="/staking" element={<Staking />} />
           <Route path="/governance" element={<Governance />} />

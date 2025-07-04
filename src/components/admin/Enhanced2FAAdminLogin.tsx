@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { AdminLogin } from './AdminLogin'
-import { AdminRecoverySystem } from './AdminRecoverySystem'
+import { CompactRecoverySystem } from './CompactRecoverySystem'
 import { Button } from '@/components/ui/button'
 import { Shield, AlertTriangle } from 'lucide-react'
 
@@ -63,7 +63,7 @@ export function Enhanced2FAAdminLogin({ onLoginSuccess, onShowRecovery }: Enhanc
       </Card>
 
       {showRecovery ? (
-        <AdminRecoverySystem 
+        <CompactRecoverySystem 
           onRecoveryComplete={handleRecoveryComplete}
           onBack={() => setShowRecovery(false)}
         />
