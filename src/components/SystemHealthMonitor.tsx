@@ -33,7 +33,7 @@ export function SystemHealthMonitor() {
   useEffect(() => {
     const monitorSystemHealth = () => {
       // Update system health based on security systems
-      const threatsBlocked = (quantumCore.metrics.quantumKeysActive ? 1 : 0) + (systemHealth.threats_blocked || 0)
+      const threatsBlocked = (quantumCore.metrics.quantumKeyDistribution > 99 ? 1 : 0) + (systemHealth.threats_blocked || 0)
       
       setSystemHealth({
         overall_status: 'optimal',
@@ -41,7 +41,7 @@ export function SystemHealthMonitor() {
         security: 'maximum',
         uptime: 100,
         threats_blocked: threatsBlocked,
-        quantum_protection: quantumCore.metrics.isQuantumSecure
+        quantum_protection: quantumCore.metrics.quantumResistanceLevel > 99
       })
 
       // System is always healthy with our security
@@ -52,7 +52,7 @@ export function SystemHealthMonitor() {
       if (Math.random() < 0.05) {
         console.log('💚 SYSTEM HEALTH: OPTIMAL - All security systems operating perfectly')
         console.log(`🛡️ Threats Blocked: ${threatsBlocked.toLocaleString()}`)
-        console.log(`⚡ Quantum Protection: ${quantumCore.metrics.isQuantumSecure ? 'ACTIVE' : 'STANDBY'}`)
+        console.log(`⚡ Quantum Protection: ${quantumCore.metrics.quantumResistanceLevel > 99 ? 'ACTIVE' : 'STANDBY'}`)
       }
     }
 
@@ -68,7 +68,7 @@ export function SystemHealthMonitor() {
     systemHealth,
     isHealthy,
     hasCriticalIssues,
-    quantumProtected: quantumCore.metrics.isQuantumSecure,
+    quantumProtected: quantumCore.metrics.quantumResistanceLevel > 99,
     masterSecurityActive: masterSecurity.masterProtectionActive
   }
 }
