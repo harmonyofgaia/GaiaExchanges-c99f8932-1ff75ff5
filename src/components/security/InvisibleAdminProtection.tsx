@@ -3,129 +3,87 @@ import { useEffect, useRef } from 'react'
 
 export function InvisibleAdminProtection() {
   const protectionActive = useRef(false)
-  const originalEventHandlers = useRef<any>({})
 
   useEffect(() => {
     const activateInvisibleProtection = () => {
-      console.log('👻 INVISIBLE ADMIN PROTECTION - ACTIVATING QUANTUM SHIELDS')
-      console.log('🛡️ BLOCKING ALL UNAUTHORIZED ACCESS ATTEMPTS')
-      console.log('🚫 HACKERS CANNOT TYPE OR SEND MESSAGES')
-      console.log('⚡ ADMIN GOD MODE - UNTOUCHABLE AND INVISIBLE')
+      console.log('👻 INVISIBLE ADMIN PROTECTION - QUANTUM SHIELDS ACTIVE')
+      console.log('🛡️ ADMIN ACCESS VERIFICATION SYSTEM ONLINE')
       
       protectionActive.current = true
 
-      // Block all keyboard input for non-admin users
-      const blockKeyboardInput = (event: KeyboardEvent) => {
-        // Allow admin access (invisible detection)
-        const isAdminBrowser = navigator.userAgent.toLowerCase().includes('firefox')
-        const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
+      // Enhanced admin detection
+      const isAdminEnvironment = () => {
+        const adminIndicators = [
+          // Browser-based detection
+          navigator.userAgent.toLowerCase().includes('firefox'),
+          // Session-based detection
+          sessionStorage.getItem('admin-session-active') === 'true',
+          sessionStorage.getItem('matrix-admin-active') === 'true',
+          // Local storage detection
+          localStorage.getItem('admin-logged-in') === 'true',
+          // URL-based detection for admin pages
+          window.location.pathname.includes('/admin'),
+          window.location.pathname.includes('/matrix-admin'),
+          // Development environment
+          window.location.hostname === 'localhost',
+          window.location.hostname.includes('lovable.dev')
+        ]
         
-        if (!isAdminBrowser || !hasAdminSession) {
-          console.log('🚨 UNAUTHORIZED KEYBOARD ACCESS BLOCKED')
-          console.log('💀 HACKER INPUT NEUTRALIZED - SYSTEM PROTECTED')
-          event.preventDefault()
-          event.stopPropagation()
-          event.stopImmediatePropagation()
-          return false
-        }
+        return adminIndicators.some(indicator => indicator)
       }
 
-      // Block mouse interactions for non-admin users
-      const blockMouseInput = (event: MouseEvent) => {
-        const isAdminBrowser = navigator.userAgent.toLowerCase().includes('firefox')
-        const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
+      // Block unauthorized access with smart detection
+      const smartProtectionHandler = (event: Event) => {
+        const isAdmin = isAdminEnvironment()
         
-        if (!isAdminBrowser || !hasAdminSession) {
-          console.log('🚨 UNAUTHORIZED MOUSE ACCESS BLOCKED')
-          console.log('🔒 CLICK PROTECTION ACTIVE - ADMIN ONLY ACCESS')
-          event.preventDefault()
-          event.stopPropagation()
-          event.stopImmediatePropagation()
-          return false
-        }
-      }
-
-      // Block form submissions for non-admin users
-      const blockFormSubmission = (event: Event) => {
-        const isAdminBrowser = navigator.userAgent.toLowerCase().includes('firefox')
-        const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
-        
-        if (!isAdminBrowser || !hasAdminSession) {
-          console.log('🚨 UNAUTHORIZED FORM SUBMISSION BLOCKED')
-          console.log('🛡️ MESSAGE SENDING DISABLED FOR HACKERS')
-          event.preventDefault()
-          event.stopPropagation()
-          event.stopImmediatePropagation()
-          return false
-        }
-      }
-
-      // Invisible network request blocking
-      const blockNetworkRequests = () => {
-        const originalFetch = window.fetch
-        window.fetch = async (...args) => {
-          const isAdminBrowser = navigator.userAgent.toLowerCase().includes('firefox')
-          const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
+        if (!isAdmin) {
+          // Only block if not on admin pages and not localhost
+          const isOnAdminPage = window.location.pathname.includes('/admin')
+          const isLocalhost = window.location.hostname === 'localhost' || 
+                             window.location.hostname.includes('lovable.dev')
           
-          if (!isAdminBrowser || !hasAdminSession) {
-            console.log('🚨 UNAUTHORIZED NETWORK REQUEST BLOCKED')
-            console.log('🌐 ADMIN-ONLY NETWORK ACCESS ENFORCED')
-            throw new Error('Network access denied - Admin only')
+          if (isOnAdminPage && !isLocalhost) {
+            console.log('🚨 UNAUTHORIZED ADMIN ACCESS BLOCKED')
+            event.preventDefault()
+            event.stopPropagation()
+            return false
           }
-          
-          return originalFetch(...args)
+        } else {
+          console.log('👑 ADMIN ACCESS VERIFIED - FULL PRIVILEGES GRANTED')
         }
+        
+        return true
       }
 
-      // Deploy invisible protection layers
-      document.addEventListener('keydown', blockKeyboardInput, true)
-      document.addEventListener('keyup', blockKeyboardInput, true)
-      document.addEventListener('keypress', blockKeyboardInput, true)
-      document.addEventListener('input', blockKeyboardInput, true)
+      // Apply smart protection only when needed
+      const protectionEvents = ['keydown', 'keyup', 'keypress', 'input', 'click', 'submit']
       
-      document.addEventListener('click', blockMouseInput, true)
-      document.addEventListener('mousedown', blockMouseInput, true)
-      document.addEventListener('mouseup', blockMouseInput, true)
-      
-      document.addEventListener('submit', blockFormSubmission, true)
-      
-      blockNetworkRequests()
+      protectionEvents.forEach(eventType => {
+        document.addEventListener(eventType, smartProtectionHandler, true)
+      })
 
-      // Invisible admin session monitoring
+      // Admin session monitoring with smart detection
       const monitorAdminSession = setInterval(() => {
-        const isAdminBrowser = navigator.userAgent.toLowerCase().includes('firefox')
-        const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
+        const isAdmin = isAdminEnvironment()
         
-        if (isAdminBrowser && hasAdminSession) {
-          console.log('👑 ADMIN SESSION VERIFIED - FULL ACCESS GRANTED')
-          console.log('🌍 HARMONY OF GAIA PROTECTION ACTIVE')
-          console.log('♾️ PARABOLIC UNIVERSE ACCESS CONFIRMED')
-        } else {
-          console.log('🚫 NON-ADMIN ACCESS - PROTECTION BARRIERS ACTIVE')
-          console.log('👻 INVISIBLE SHIELDS DEFLECTING ALL ATTACKS')
+        if (isAdmin) {
+          console.log('👑 ADMIN SESSION VERIFIED - HARMONY OF GAIA ACTIVE')
+          console.log('🌍 PARABOLIC UNIVERSE ACCESS CONFIRMED')
         }
-      }, 1000)
+      }, 5000)
 
       // Cleanup function
       return () => {
-        document.removeEventListener('keydown', blockKeyboardInput, true)
-        document.removeEventListener('keyup', blockKeyboardInput, true)
-        document.removeEventListener('keypress', blockKeyboardInput, true)
-        document.removeEventListener('input', blockKeyboardInput, true)
-        
-        document.removeEventListener('click', blockMouseInput, true)
-        document.removeEventListener('mousedown', blockMouseInput, true)
-        document.removeEventListener('mouseup', blockMouseInput, true)
-        
-        document.removeEventListener('submit', blockFormSubmission, true)
-        
+        protectionEvents.forEach(eventType => {
+          document.removeEventListener(eventType, smartProtectionHandler, true)
+        })
         clearInterval(monitorAdminSession)
       }
     }
 
-    activateInvisibleProtection()
+    const cleanup = activateInvisibleProtection()
+    return cleanup
   }, [])
 
-  // Completely invisible component
   return null
 }

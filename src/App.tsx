@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
@@ -6,7 +5,7 @@ import { AuthProvider } from '@/components/auth/AuthProvider'
 import { QuantumTraceEraser } from '@/components/security/QuantumTraceEraser'
 import { Invisible4StepVerification } from '@/components/security/Invisible4StepVerification'
 import { InvisibleAdminProtection } from '@/components/security/InvisibleAdminProtection'
-import AppSidebar from '@/components/AppSidebar'
+import { AnimatedSlidingMenu } from '@/components/navigation/AnimatedSlidingMenu'
 import HomePage from '@/pages/HomePage'
 import Admin from '@/pages/Admin'
 import MatrixAdmin from '@/pages/MatrixAdmin'
@@ -29,8 +28,8 @@ function App() {
           <QuantumTraceEraser />
           <Invisible4StepVerification />
           <InvisibleAdminProtection />
-          <AppSidebar />
-          <div className="ml-16 min-h-screen">
+          <AnimatedSlidingMenu />
+          <div className="min-h-screen">
             <Toaster position="top-right" />
             <Routes>
               <Route path="/" element={<HomePage />} />

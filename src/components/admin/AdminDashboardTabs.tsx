@@ -11,14 +11,16 @@ import { ImmortalDefenseCore } from '@/components/security/ImmortalDefenseCore'
 import { UltimateWalletProtection } from '@/components/security/UltimateWalletProtection'
 import { AdminDashboard as TrackingDashboard } from '@/components/tracking/AdminDashboard'
 import { UserManagementSystemRefactored } from './UserManagementSystemRefactored'
+import { SystemConnectionChecker } from './SystemConnectionChecker'
 
 export function AdminDashboardTabs() {
   const immortalDefense = ImmortalDefenseCore()
 
   return (
     <Tabs defaultValue="overview" className="w-full">
-      <TabsList className="grid w-full grid-cols-10 text-xs">
+      <TabsList className="grid w-full grid-cols-11 text-xs">
         <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="connections">System Status</TabsTrigger>
         <TabsTrigger value="search">Search & Track</TabsTrigger>
         <TabsTrigger value="vault">Community Vault</TabsTrigger>
         <TabsTrigger value="security">Ultimate Security</TabsTrigger>
@@ -33,6 +35,10 @@ export function AdminDashboardTabs() {
       <TabsContent value="overview" className="space-y-6">
         <TrackingDashboard />
         <QuantumAdminDashboard />
+      </TabsContent>
+
+      <TabsContent value="connections" className="space-y-6">
+        <SystemConnectionChecker />
       </TabsContent>
 
       <TabsContent value="search" className="space-y-6">

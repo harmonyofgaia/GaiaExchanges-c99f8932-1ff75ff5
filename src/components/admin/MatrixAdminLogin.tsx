@@ -18,32 +18,12 @@ export function MatrixAdminLogin({ onLoginSuccess }: MatrixAdminLoginProps) {
   })
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [showCredentials, setShowCredentials] = useState(true)
 
-  // Display credentials for 30 seconds then remove all traces
   useEffect(() => {
-    console.log('🔐 MATRIX ADMIN CREDENTIALS (30 seconds only):')
+    console.log('🔐 MATRIX ADMIN LOGIN SYSTEM ACTIVE')
     console.log('👤 Username: Synatic')
     console.log('🔑 Password: Freedom!oul19922323')
     console.log('🛡️ Matrix System Access - Highest Security Level')
-    
-    const timer = setTimeout(() => {
-      console.clear()
-      console.log('🧹 ALL CREDENTIALS ERASED - MATRIX SECURED')
-      console.log('👻 NO TRACES REMAIN - INVISIBLE PROTECTION ACTIVE')
-      setShowCredentials(false)
-      
-      // Clear all possible storage traces
-      sessionStorage.clear()
-      localStorage.removeItem('matrix-credentials')
-      localStorage.removeItem('admin-temp-access')
-      
-      // Overwrite memory
-      let clearData = new Array(1000).fill('🔥ERASED🔥')
-      clearData = null
-    }, 30000)
-
-    return () => clearTimeout(timer)
   }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -51,21 +31,23 @@ export function MatrixAdminLogin({ onLoginSuccess }: MatrixAdminLoginProps) {
     setIsLoading(true)
 
     try {
-      // Matrix admin verification
+      // Matrix admin verification - WORKING CREDENTIALS
       if (credentials.username === 'Synatic' && 
           credentials.password === 'Freedom!oul19922323') {
         
         console.log('👑 MATRIX ADMIN ACCESS GRANTED')
         console.log('🌌 QUANTUM MATRIX CONTROL ACTIVATED')
         
+        // Set all admin session markers
+        sessionStorage.setItem('admin-session-active', 'true')
+        sessionStorage.setItem('matrix-admin-active', 'true')
+        sessionStorage.setItem('matrix-quantum-verified', 'true')
+        localStorage.setItem('admin-logged-in', 'true')
+        
         toast.success('👑 MATRIX ACCESS GRANTED!', {
           description: 'Welcome to the Quantum Matrix Control System',
           duration: 3000
         })
-        
-        // Set secure matrix session
-        sessionStorage.setItem('matrix-admin-active', 'true')
-        sessionStorage.setItem('matrix-quantum-verified', 'true')
         
         onLoginSuccess()
       } else {
@@ -81,7 +63,6 @@ export function MatrixAdminLogin({ onLoginSuccess }: MatrixAdminLoginProps) {
       })
     } finally {
       setIsLoading(false)
-      // Immediate credential cleanup
       setCredentials({ username: '', password: '' })
     }
   }
@@ -98,6 +79,11 @@ export function MatrixAdminLogin({ onLoginSuccess }: MatrixAdminLoginProps) {
             <p className="text-purple-300 text-sm mt-2">
               ADMIN EXCLUSIVE • HIGHEST SECURITY LEVEL
             </p>
+            <div className="mt-4 p-3 bg-green-900/30 rounded-lg border border-green-500/30">
+              <p className="text-xs text-green-300">
+                🔐 Ready to Login - Credentials Active
+              </p>
+            </div>
           </div>
         </CardHeader>
         <CardContent>
