@@ -28,18 +28,13 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
       
       if (!success) {
         toast.error('❌ Access Denied', {
-          description: 'Invalid credentials. Original system protection active.',
+          description: 'Invalid credentials. Vault protection active.',
           duration: 5000
-        })
-      } else {
-        toast.success('✅ CREDENTIALS VERIFIED!', {
-          description: 'Original admin access restored - Proceeding to 2FA',
-          duration: 3000
         })
       }
     } catch (error) {
       toast.error('Security Error', {
-        description: 'Wall of defense protection system activated',
+        description: 'Vault protection system activated',
         duration: 5000
       })
     } finally {
@@ -57,11 +52,8 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-green-400 text-center">
           <Shield className="h-5 w-5" />
-          GAIA Original Admin Access
+          GAIA Vault Admin Access
         </CardTitle>
-        <p className="text-center text-sm text-green-300">
-          Restored System • Enhanced Security
-        </p>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -73,14 +65,13 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
               value={credentials.username}
               onChange={(e) => setCredentials(prev => ({ ...prev, username: e.target.value }))}
               className="bg-black/30 border-green-500/30"
-              placeholder="Enter original username..."
               autoComplete="off"
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-green-300">Original Password</Label>
+            <Label htmlFor="password" className="text-green-300">Vault Password</Label>
             <div className="relative">
               <Input
                 id="password"
@@ -88,7 +79,6 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
                 value={credentials.password}
                 onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
                 className="bg-black/30 border-green-500/30 pr-10"
-                placeholder="Enter original password..."
                 autoComplete="off"
                 required
               />
@@ -110,13 +100,13 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
             className="w-full bg-green-600 hover:bg-green-700"
           >
             <Lock className="h-4 w-4 mr-2" />
-            {isLoading ? 'Verifying Original Credentials...' : 'Access Original System'}
+            {isLoading ? 'Vault Verification...' : 'Access GAIA Vault'}
           </Button>
         </form>
 
         <div className="mt-4 p-3 bg-green-900/20 border border-green-500/20 rounded-lg">
           <p className="text-xs text-green-300 text-center">
-            🛡️ Original System Restored • Wall of Defense • All Access Monitored
+            🛡️ Quantum Vault Protected • Advanced Security • All Access Monitored
           </p>
         </div>
       </CardContent>

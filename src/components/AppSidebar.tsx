@@ -1,10 +1,10 @@
-
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
   Home, 
   Wallet, 
   Gamepad2, 
+  TrendingUp, 
   Settings, 
   Info, 
   Mail, 
@@ -21,9 +21,7 @@ import {
   Mountain,
   Palette,
   Crown,
-  Star,
-  Search,
-  Eye
+  Star
 } from 'lucide-react'
 
 const AppSidebar = () => {
@@ -53,13 +51,8 @@ const AppSidebar = () => {
         
         setIsAuthorizedIP(isAuthorized)
         
-        if (isAuthorized) {
-          console.log('👑 ADMIN IP VERIFIED - FULL ACCESS GRANTED')
-          console.log('🛡️ QUANTUM SECURITY MATRIX RECOGNIZES ADMIN')
-        }
-        
       } catch (error) {
-        console.log('🛡️ IP check protected by quantum security')
+        console.log('IP check protected by quantum security')
         setIsAuthorizedIP(window.location.hostname === 'localhost')
       }
     }
@@ -67,22 +60,20 @@ const AppSidebar = () => {
     checkIPAuthorization()
   }, [])
 
-  // Base menu items available to all users
+  // Filter menu items based on admin authorization - removed Enhanced Downloads and Documentation
   const baseMenuItems = [
     { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
-    { icon: Wallet, label: 'Transparent Wallet', path: '/transparent-wallet', category: 'wallet' },
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
     { icon: Gamepad2, label: 'Gaming Hub', path: '/gaming', category: 'gaming' },
-    { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
+    { icon: TrendingUp, label: 'Exchange', path: '/exchange', category: 'trading' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
+    { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
     { icon: Palette, label: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', category: 'tools' },
-    { icon: Search, label: 'Search & Track', path: '/search-track', category: 'monitoring' },
     { icon: Activity, label: 'Live Tracking', path: '/live-tracking', category: 'monitoring' },
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
     { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
-    { icon: Eye, label: 'Vault System', path: '/vault-system', category: 'security' },
     { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
     { icon: Mail, label: 'Contact', path: '/contact', category: 'info' },
     { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' }
@@ -90,8 +81,7 @@ const AppSidebar = () => {
 
   // Admin-only menu items (only visible to authorized IPs)
   const adminMenuItems = [
-    { icon: Crown, label: '👑 Admin Portal', path: '/admin', category: 'admin' },
-    { icon: Crown, label: '🌌 Matrix Admin', path: '/matrix-admin', category: 'admin' }
+    { icon: Crown, label: '👑 Admin Portal', path: '/admin', category: 'admin' }
   ]
 
   // Combine menu items based on authorization
@@ -135,7 +125,7 @@ const AppSidebar = () => {
                       isActive
                         ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
                         : 'text-gray-300 hover:bg-purple-500/10 hover:text-purple-400'
-                    } ${item.category === 'admin' ? 'border border-red-500/30 bg-red-900/20' : ''}`}
+                    }`}
                   >
                     <Icon className="h-5 w-5 flex-shrink-0" />
                     {isExpanded && (
@@ -162,12 +152,9 @@ const AppSidebar = () => {
                 Harmony of Culture
               </p>
               {isAuthorizedIP && (
-                <div className="mt-2 space-y-1">
+                <div className="mt-2">
                   <div className="text-xs bg-green-600 text-white px-2 py-1 rounded animate-pulse">
                     🛡️ ADMIN ACCESS GRANTED
-                  </div>
-                  <div className="text-xs bg-red-600 text-white px-2 py-1 rounded">
-                    👑 MATRIX CONTROL ACTIVE
                   </div>
                 </div>
               )}

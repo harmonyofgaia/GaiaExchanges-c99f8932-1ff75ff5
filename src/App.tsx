@@ -1,75 +1,126 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
+import './App.css'
+
+import { Navbar } from '@/components/Navbar'
+import SlidingMenu from '@/components/SlidingMenu'
+import { SidebarProvider } from '@/components/ui/sidebar'
 import { AuthProvider } from '@/components/auth/AuthProvider'
-import { QuantumTraceEraser } from '@/components/security/QuantumTraceEraser'
-import { Invisible4StepVerification } from '@/components/security/Invisible4StepVerification'
-import { InvisibleAdminProtection } from '@/components/security/InvisibleAdminProtection'
-import { AnimatedSlidingMenu } from '@/components/navigation/AnimatedSlidingMenu'
-import HomePage from '@/pages/HomePage'
-import Admin from '@/pages/Admin'
-import MatrixAdmin from '@/pages/MatrixAdmin'
-import Security from '@/pages/Security'
+import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'
+
+// Pages - Keep all existing pages
+import Index from '@/pages/Index'
 import Exchange from '@/pages/Exchange'
-import Staking from '@/pages/Staking'
-import Governance from '@/pages/Governance'
-import Contact from '@/pages/Contact'
-import AboutUs from '@/pages/AboutUs'
-import Ecosystem from '@/pages/Ecosystem'
-import LandscapeBuilder from '@/pages/LandscapeBuilder'
+import Gaming from '@/pages/Gaming'
+import NFTs from '@/pages/NFTs'
+import Analytics from '@/pages/Analytics'
+import Swap from '@/pages/Swap'
+import Security from '@/pages/Security'
+import AdminLogin from '@/pages/AdminLogin'
+import SecureAdmin from '@/pages/SecureAdmin'
+import SecureVault from '@/pages/SecureVault'
+import GaiasProjects from '@/pages/GaiasProjects'
 import TransparentWallet from '@/pages/TransparentWallet'
-import VaultSystem from '@/pages/VaultSystem'
+import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
+import LandscapeBuilder from '@/pages/LandscapeBuilder'
+import GaiaFighterGame from '@/pages/GaiaFighterGame'
+
+// Game Pages
+import GaiaFantasyMMORPG from '@/pages/games/GaiaFantasyMMORPG'
+import SnakeArenaGame from '@/pages/games/SnakeArenaGame'
+import Game from '@/pages/Game'
+
+// Advanced pages
+import UltimateFeatureHub from '@/pages/UltimateFeatureHub'
+import NFTGreenAnimalPlatform from '@/pages/NFTGreenAnimalPlatform'
+import AuraLandScrapyard from '@/pages/AuraLandScrapyard'
+import CoinCrafter from '@/pages/CoinCrafter'
+import VirtualWorld from '@/pages/VirtualWorld'
+import LiveTracking from '@/pages/LiveTracking'
+import SystemStatus from '@/pages/SystemStatus'
+import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
+import About from '@/pages/About'
+import Contact from '@/pages/Contact'
+import Pricing from '@/pages/Pricing'
+
+// New Pages - All routing fixes and new features
+import CommunityVault from '@/pages/CommunityVault'
+import TransparentWallets from '@/pages/TransparentWallets'
+import NFTMarketplace from '@/pages/NFTMarketplace'
+import AdvancedLandscapeBuilder from '@/pages/AdvancedLandscapeBuilder'
+import GaiaPrivateBlockchain from '@/pages/GaiaPrivateBlockchain'
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
-          <QuantumTraceEraser />
-          <Invisible4StepVerification />
-          <InvisibleAdminProtection />
-          <AnimatedSlidingMenu />
-          <div className="min-h-screen">
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Router>
+          <SidebarProvider>
+            <div className="min-h-screen bg-background text-foreground">
+              {/* Background Media Engine */}
+              <BackgroundMediaEngine />
+              
+              {/* Sliding Menu */}
+              <SlidingMenu />
+              
+              {/* Main Content Area */}
+              <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-1 container mx-auto px-4 py-6">
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/exchange" element={<Exchange />} />
+                    <Route path="/gaming" element={<Gaming />} />
+                    <Route path="/nfts" element={<NFTs />} />
+                    <Route path="/analytics" element={<Analytics />} />
+                    <Route path="/swap" element={<Swap />} />
+                    <Route path="/security" element={<Security />} />
+                    <Route path="/admin" element={<AdminLogin />} />
+                    <Route path="/secure-admin" element={<SecureAdmin />} />
+                    <Route path="/secure-vault" element={<SecureVault />} />
+                    <Route path="/gaias-projects" element={<GaiasProjects />} />
+                    <Route path="/transparent-wallet" element={<TransparentWallet />} />
+                    <Route path="/coin-crafter" element={<GaiaCoinCrafter />} />
+                    <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+                    <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
+                    <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
+                    
+                    {/* New Game Pages */}
+                    <Route path="/game/gaia-fantasy-mmorpg" element={<GaiaFantasyMMORPG />} />
+                    <Route path="/game/snake-arena" element={<SnakeArenaGame />} />
+                    <Route path="/game" element={<Game />} />
+                    
+                    {/* Advanced feature routes */}
+                    <Route path="/ultimate-features" element={<UltimateFeatureHub />} />
+                    <Route path="/nft-green-animals" element={<NFTGreenAnimalPlatform />} />
+                    <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
+                    <Route path="/virtual-world" element={<VirtualWorld />} />
+                    <Route path="/live-tracking" element={<LiveTracking />} />
+                    <Route path="/system-status" element={<SystemStatus />} />
+                    <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/pricing" element={<Pricing />} />
+
+                    {/* NEW ROUTES - All requested features */}
+                    <Route path="/community-vault" element={<CommunityVault />} />
+                    <Route path="/transparent-wallets" element={<TransparentWallets />} />
+                    <Route path="/nft-marketplace" element={<NFTMarketplace />} />
+                    <Route path="/advanced-landscape-builder" element={<AdvancedLandscapeBuilder />} />
+                    <Route path="/gaia-private-blockchain" element={<GaiaPrivateBlockchain />} />
+                  </Routes>
+                </main>
+              </div>
+            </div>
             <Toaster position="top-right" />
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/matrix-admin" element={<MatrixAdmin />} />
-              <Route path="/security" element={<Security />} />
-              <Route path="/exchange" element={<Exchange />} />
-              <Route path="/staking" element={<Staking />} />
-              <Route path="/governance" element={<Governance />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/ecosystem" element={<Ecosystem />} />
-              <Route path="/landscape-builder" element={<LandscapeBuilder />} />
-              <Route path="/transparent-wallet" element={<TransparentWallet />} />
-              <Route path="/vault-system" element={<VaultSystem />} />
-              
-              {/* Search & Track Routes */}
-              <Route path="/search-track" element={<Security />} />
-              <Route path="/live-tracking" element={<Security />} />
-              <Route path="/system-status" element={<Security />} />
-              <Route path="/comprehensive-status" element={<Security />} />
-              
-              {/* Creative Platform Routes */}
-              <Route path="/virtual-world" element={<HomePage />} />
-              <Route path="/gaming" element={<HomePage />} />
-              <Route path="/nft-green-animals" element={<HomePage />} />
-              <Route path="/coin-crafter" element={<HomePage />} />
-              <Route path="/aura-land-scrapyard" element={<HomePage />} />
-              
-              {/* Additional Routes */}
-              <Route path="/pricing" element={<Contact />} />
-              
-              {/* Catch-all route for any missing pages */}
-              <Route path="*" element={<HomePage />} />
-            </Routes>
-          </div>
-        </div>
-      </Router>
-    </AuthProvider>
+          </SidebarProvider>
+        </Router>
+      </AuthProvider>
+    </QueryClientProvider>
   )
 }
 

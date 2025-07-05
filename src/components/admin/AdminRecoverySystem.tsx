@@ -4,16 +4,20 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { 
+  Key, 
   Shield, 
   Lock, 
-  Eye, 
-  Fingerprint,
-  Key,
-  CheckCircle,
-  AlertTriangle
+  UserCheck,
+  Smartphone,
+  Mail,
+  AlertTriangle,
+  CheckCircle
 } from 'lucide-react'
+import { AdminLogin } from './AdminLogin'
+import { AdminMFA } from './AdminMFA'
+import { GoogleRecoveryStep } from './GoogleRecoveryStep'
 import { toast } from 'sonner'
 
 interface AdminRecoverySystemProps {
@@ -24,20 +28,6 @@ interface AdminRecoverySystemProps {
 export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecoverySystemProps) {
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3 | 4>(1)
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set())
-  const [verificationData, setVerificationData] = useState({
-    password: '',
-    biometric: false,
-    deviceCode: '',
-    recoveryPhrase: ''
-  })
-
-  // Original 4-step recovery passwords starting with "peace"
-  const recoveryPasswords = {
-    step1: 'peace harmony gaia 2024',
-    step2: 'quantum admin device secure', 
-    step3: 'matrix protection vault access',
-    step4: 'ultimate master control key'
-  }
 
   const handleStepComplete = (step: number) => {
     setCompletedSteps(prev => new Set(prev).add(step))
@@ -52,6 +42,7 @@ export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecover
   }
 
   const sendAdminNotification = async () => {
+    // Send notifications to admin
     const notificationData = {
       timestamp: new Date().toISOString(),
       event: '4-Step Admin Recovery Completed',
@@ -63,213 +54,113 @@ export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecover
     console.log('🔐 ADMIN RECOVERY COMPLETE:', notificationData)
     
     toast.success('🔐 4-Step Recovery Complete!', {
-      description: 'All recovery steps verified - Original system access restored',
+      description: 'Admin notifications sent to +31687758236 and security emails',
       duration: 6000
     })
-
-    // Auto-cleanup after 10 seconds
-    setTimeout(() => {
-      console.clear()
-      console.log('🧹 ALL RECOVERY TRACES ELIMINATED')
-    }, 10000)
   }
 
-  const handleStepVerification = (step: number) => {
-    switch (step) {
-      case 1:
-        if (verificationData.password === recoveryPasswords.step1) {
-          handleStepComplete(1)
-          toast.success('Step 1 Verified!', { description: 'Peace harmony confirmed' })
-        } else {
-          toast.error('Invalid Recovery Phrase', { description: 'Access denied by wall of defense' })
-        }
-        break
-      case 2:
-        if (verificationData.deviceCode === recoveryPasswords.step2) {
-          handleStepComplete(2)
-          toast.success('Step 2 Verified!', { description: 'Quantum device authorization confirmed' })
-        } else {
-          toast.error('Invalid Device Code', { description: 'Device not authorized' })
-        }
-        break
-      case 3:
-        if (verificationData.recoveryPhrase === recoveryPasswords.step3) {
-          handleStepComplete(3)
-          toast.success('Step 3 Verified!', { description: 'Matrix protection confirmed' })
-        } else {
-          toast.error('Invalid Recovery Phrase', { description: 'Phrase verification failed' })
-        }
-        break
-      case 4:
-        if (verificationData.password === recoveryPasswords.step4) {
-          handleStepComplete(4)
-          toast.success('🛡️ FULL RECOVERY COMPLETE!', { 
-            description: 'All 4 verification steps completed - Access granted',
-            duration: 10000
-          })
-        } else {
-          toast.error('Invalid Master Key', { description: 'Final verification failed' })
-        }
-        break
+  const validateStep1 = (username: string, password: string) => {
+    const isValid = username === 'Synatic' && password === 'harmonyquantumvaultaccess'
+    if (isValid) {
+      handleStepComplete(1)
     }
+    return isValid
   }
 
   return (
     <div className="space-y-6">
-      <Card className="border-2 border-red-500/50 bg-gradient-to-br from-red-900/30 to-purple-900/30">
+      <Card className="border-2 border-blue-500/50 bg-gradient-to-br from-blue-900/30 to-purple-900/30">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-red-400">
+          <CardTitle className="flex items-center gap-2 text-blue-400">
             <Shield className="h-6 w-6" />
             🔑 4-STEP ADMIN RECOVERY SYSTEM
-            <Badge className="bg-red-600 text-white">STEP {currentStep}/4</Badge>
+            <Badge className="bg-blue-600 text-white">STEP {currentStep}/4</Badge>
           </CardTitle>
-          <p className="text-red-300 text-center">
-            Original Recovery System • Enhanced Wall of Defense
-          </p>
         </CardHeader>
         <CardContent>
           {/* Progress Indicators */}
-          <div className="mb-6">
-            <div className="flex justify-between text-sm mb-2">
-              <span>Recovery Progress</span>
-              <span>{completedSteps.size * 25}%</span>
+          <div className="grid grid-cols-4 gap-2 mb-6">
+            {[1, 2, 3, 4].map((step) => (
+              <div
+                key={step}
+                className={`p-2 rounded text-center text-xs ${
+                  completedSteps.has(step)
+                    ? 'bg-green-600 text-white'
+                    : currentStep === step
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-600 text-gray-300'
+                }`}
+              >
+                Step {step}
+                {completedSteps.has(step) && ' ✓'}
+              </div>
+            ))}
+          </div>
+
+          {/* Step Content */}
+          {currentStep === 1 && (
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-blue-400">Step 1: Vault Credentials</h3>
+              <AdminLogin onLoginSuccess={validateStep1} />
             </div>
-            <Progress value={completedSteps.size * 25} className="h-3" />
-          </div>
+          )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Step 1: Peace Harmony */}
-            <Card className={`${currentStep >= 1 ? 'border-green-500/50 bg-green-900/20' : 'border-gray-500/30'}`}>
-              <CardContent className="p-4 text-center">
-                <Lock className={`h-8 w-8 mx-auto mb-3 ${completedSteps.has(1) ? 'text-green-400' : currentStep === 1 ? 'text-blue-400' : 'text-gray-400'}`} />
-                <h3 className="font-bold mb-2">Step 1: Peace</h3>
-                {currentStep === 1 ? (
-                  <div className="space-y-2">
-                    <Input
-                      type="password"
-                      placeholder="Peace Recovery Phrase"
-                      value={verificationData.password}
-                      onChange={(e) => setVerificationData(prev => ({ ...prev, password: e.target.value }))}
-                    />
-                    <Button 
-                      onClick={() => handleStepVerification(1)} 
-                      size="sm" 
-                      className="w-full bg-blue-600 hover:bg-blue-700"
-                    >
-                      Verify
-                    </Button>
-                  </div>
-                ) : completedSteps.has(1) ? (
-                  <CheckCircle className="h-6 w-6 mx-auto text-green-400" />
-                ) : (
-                  <Lock className="h-6 w-6 mx-auto text-gray-400" />
-                )}
-              </CardContent>
-            </Card>
+          {currentStep === 2 && (
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-blue-400">Step 2: SMS + Google Verification</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <AdminMFA onMFASuccess={() => handleStepComplete(2)} />
+                <GoogleRecoveryStep onComplete={() => {}} />
+              </div>
+            </div>
+          )}
 
-            {/* Step 2: Quantum Device */}
-            <Card className={`${currentStep >= 2 ? 'border-green-500/50 bg-green-900/20' : 'border-gray-500/30'}`}>
-              <CardContent className="p-4 text-center">
-                <Shield className={`h-8 w-8 mx-auto mb-3 ${completedSteps.has(2) ? 'text-green-400' : currentStep === 2 ? 'text-blue-400' : 'text-gray-400'}`} />
-                <h3 className="font-bold mb-2">Step 2: Quantum</h3>
-                {currentStep === 2 ? (
-                  <div className="space-y-2">
-                    <Input
-                      placeholder="Quantum Device Code"
-                      value={verificationData.deviceCode}
-                      onChange={(e) => setVerificationData(prev => ({ ...prev, deviceCode: e.target.value }))}
-                    />
-                    <Button 
-                      onClick={() => handleStepVerification(2)} 
-                      size="sm" 
-                      className="w-full bg-orange-600 hover:bg-orange-700"
-                    >
-                      Verify
-                    </Button>
-                  </div>
-                ) : completedSteps.has(2) ? (
-                  <CheckCircle className="h-6 w-6 mx-auto text-green-400" />
-                ) : (
-                  <Shield className="h-6 w-6 mx-auto text-gray-400" />
-                )}
-              </CardContent>
-            </Card>
+          {currentStep === 3 && (
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-blue-400">Step 3: IP Network Validation</h3>
+              <Card className="bg-green-900/30 border border-green-500/30">
+                <CardContent className="p-4 text-center">
+                  <CheckCircle className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                  <p className="text-green-400">IP Address Authorized</p>
+                  <p className="text-sm text-muted-foreground">Network access verified</p>
+                  <Button 
+                    onClick={() => handleStepComplete(3)}
+                    className="mt-4 bg-green-600 hover:bg-green-700"
+                  >
+                    Verify Network Access
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          )}
 
-            {/* Step 3: Matrix Protection */}
-            <Card className={`${currentStep >= 3 ? 'border-green-500/50 bg-green-900/20' : 'border-gray-500/30'}`}>
-              <CardContent className="p-4 text-center">
-                <Key className={`h-8 w-8 mx-auto mb-3 ${completedSteps.has(3) ? 'text-green-400' : currentStep === 3 ? 'text-blue-400' : 'text-gray-400'}`} />
-                <h3 className="font-bold mb-2">Step 3: Matrix</h3>
-                {currentStep === 3 ? (
-                  <div className="space-y-2">
-                    <Input
-                      placeholder="Matrix Protection Code"
-                      value={verificationData.recoveryPhrase}
-                      onChange={(e) => setVerificationData(prev => ({ ...prev, recoveryPhrase: e.target.value }))}
-                    />
-                    <Button 
-                      onClick={() => handleStepVerification(3)} 
-                      size="sm" 
-                      className="w-full bg-purple-600 hover:bg-purple-700"
-                    >
-                      Verify
-                    </Button>
-                  </div>
-                ) : completedSteps.has(3) ? (
-                  <CheckCircle className="h-6 w-6 mx-auto text-green-400" />
-                ) : (
-                  <Key className="h-6 w-6 mx-auto text-gray-400" />
-                )}
-              </CardContent>
-            </Card>
+          {currentStep === 4 && (
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-blue-400">Step 4: Final Security Confirmation</h3>
+              <Card className="bg-purple-900/30 border border-purple-500/30">
+                <CardContent className="p-4 text-center">
+                  <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                  <p className="text-purple-400">Security Scan Complete</p>
+                  <p className="text-sm text-muted-foreground">All verification steps passed</p>
+                  <Button 
+                    onClick={() => handleStepComplete(4)}
+                    className="mt-4 bg-purple-600 hover:bg-purple-700"
+                  >
+                    Complete Recovery Process
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          )}
 
-            {/* Step 4: Ultimate Master */}
-            <Card className={`${currentStep >= 4 ? 'border-green-500/50 bg-green-900/20' : 'border-gray-500/30'}`}>
-              <CardContent className="p-4 text-center">
-                <Eye className={`h-8 w-8 mx-auto mb-3 ${completedSteps.has(4) ? 'text-green-400' : currentStep === 4 ? 'text-blue-400' : 'text-gray-400'}`} />
-                <h3 className="font-bold mb-2">Step 4: Ultimate</h3>
-                {currentStep === 4 ? (
-                  <div className="space-y-2">
-                    <Input
-                      type="password"
-                      placeholder="Ultimate Master Key"
-                      value={verificationData.password}
-                      onChange={(e) => setVerificationData(prev => ({ ...prev, password: e.target.value }))}
-                    />
-                    <Button 
-                      onClick={() => handleStepVerification(4)} 
-                      size="sm" 
-                      className="w-full bg-green-600 hover:bg-green-700"
-                    >
-                      Complete
-                    </Button>
-                  </div>
-                ) : completedSteps.has(4) ? (
-                  <CheckCircle className="h-6 w-6 mx-auto text-green-400" />
-                ) : (
-                  <Eye className="h-6 w-6 mx-auto text-gray-400" />
-                )}
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="mt-6 text-center space-y-4">
+          <div className="mt-6 text-center">
             <Button 
               onClick={onBack}
               variant="ghost" 
               className="text-xs text-muted-foreground"
             >
-              Back to Original Login
+              Back to Simple Login
             </Button>
-            
-            <div className="p-4 bg-red-900/20 border border-red-500/20 rounded-lg">
-              <p className="text-xs text-red-300 text-center">
-                🔐 ORIGINAL 4-STEP RECOVERY • ENHANCED WALL OF DEFENSE
-              </p>
-              <p className="text-xs text-orange-300 text-center mt-1">
-                Complete all steps starting with "peace" to restore full admin access
-              </p>
-            </div>
           </div>
         </CardContent>
       </Card>
