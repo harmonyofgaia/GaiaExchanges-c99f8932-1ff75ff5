@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
@@ -44,13 +43,6 @@ import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
 import About from '@/pages/About'
 import Contact from '@/pages/Contact'
 import Pricing from '@/pages/Pricing'
-
-// New Pages - All routing fixes and new features
-import CommunityVault from '@/pages/CommunityVault'
-import TransparentWallets from '@/pages/TransparentWallets'
-import NFTMarketplace from '@/pages/NFTMarketplace'
-import AdvancedLandscapeBuilder from '@/pages/AdvancedLandscapeBuilder'
-import GaiaPrivateBlockchain from '@/pages/GaiaPrivateBlockchain'
 
 const queryClient = new QueryClient()
 
@@ -105,13 +97,6 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/pricing" element={<Pricing />} />
-
-                    {/* NEW ROUTES - All requested features */}
-                    <Route path="/community-vault" element={<CommunityVault />} />
-                    <Route path="/transparent-wallets" element={<TransparentWallets />} />
-                    <Route path="/nft-marketplace" element={<NFTMarketplace />} />
-                    <Route path="/advanced-landscape-builder" element={<AdvancedLandscapeBuilder />} />
-                    <Route path="/gaia-private-blockchain" element={<GaiaPrivateBlockchain />} />
                   </Routes>
                 </main>
               </div>

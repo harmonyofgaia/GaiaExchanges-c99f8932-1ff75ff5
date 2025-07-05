@@ -77,7 +77,7 @@ export function GaiaGameHub() {
       description: 'Build environmental landscapes in Minecraft style',
       status: 'active',
       players: 18654,
-      route: '/advanced-landscape-builder',
+      route: '/landscape-builder',
       icon: '🏔️',
       difficulty: 'Creative'
     }
