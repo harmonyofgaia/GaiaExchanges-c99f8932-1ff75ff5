@@ -1,202 +1,209 @@
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { 
-  Shield, 
-  Search, 
-  Activity, 
-  AlertTriangle, 
-  CheckCircle, 
-  Eye, 
-  Lock,
-  Zap,
-  Database,
-  Server,
-  Network
-} from 'lucide-react'
-import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
-import { SystemHealthChecker } from '@/components/admin/SystemHealthChecker'
-import { SecureVaultSystem } from '@/components/SecureVaultSystem'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Shield, Search, Activity, Eye, Lock, Zap } from 'lucide-react'
+import { AdvancedSearchSystem } from '@/components/search/AdvancedSearchSystem'
+import { CommunityVaultSystem } from '@/components/vault/CommunityVaultSystem'
+import { UltimateWalletProtection } from '@/components/security/UltimateWalletProtection'
+import { SelfTrainingAnimal } from '@/components/security/SelfTrainingAnimal'
+import { EternalDragonDisplay } from '@/components/security/EternalDragonDisplay'
+import { InvisibleAvatarTrainer } from '@/components/security/InvisibleAvatarTrainer'
+import { SystemHealthMonitor } from '@/components/SystemHealthMonitor'
 
-interface SecurityMetrics {
-  threatLevel: number
-  activeProtection: number
-  systemIntegrity: number
-  dataEncryption: number
-}
-
-export default function Security() {
-  const [metrics, setMetrics] = useState<SecurityMetrics>({
-    threatLevel: 0,
-    activeProtection: 100,
-    systemIntegrity: 98.7,
-    dataEncryption: 100
-  })
-  
-  const [isScanning, setIsScanning] = useState(false)
-  const [scanResults, setScanResults] = useState<string[]>([])
-
-  useEffect(() => {
-    console.log('🛡️ SECURITY CENTER INITIALIZED - HIGHEST PROTECTION ACTIVE')
-    console.log('👁️ INVISIBLE MONITORING PROTOCOLS ENGAGED')
-    console.log('🔒 QUANTUM ENCRYPTION LAYERS ACTIVATED')
-  }, [])
-
-  const runSecurityScan = () => {
-    setIsScanning(true)
-    setScanResults([])
-    
-    setTimeout(() => {
-      const results = [
-        '✅ Admin Authentication System: FULLY OPERATIONAL',
-        '✅ 4-Step Recovery Protocol: ACTIVE & SECURED',
-        '✅ Matrix Admin Portal: QUANTUM PROTECTED',
-        '✅ Vault System: COMMUNITY ACCESS RESTORED',
-        '✅ Google Integration: ENHANCED SECURITY',
-        '✅ API Credentials: INVISIBLE PROTECTION ACTIVE',
-        '✅ Trace Cleanup: ALL SENSITIVE DATA ERASED',
-        '✅ Wall of Defense: MAXIMUM LEVEL ENGAGED',
-        '✅ Search & Track Tools: FULLY INTEGRATED',
-        '✅ Payment Gateway: SECURE & OPERATIONAL'
-      ]
-      setScanResults(results)
-      setIsScanning(false)
-      
-      console.log('🔍 DEEP SECURITY SCAN COMPLETE')
-      console.log('🛡️ ALL SYSTEMS: MAXIMUM PROTECTION LEVEL')
-    }, 4000)
-  }
+const Security = () => {
+  const systemHealth = SystemHealthMonitor()
 
   return (
-    <AdminProtectedRoute>
-      <div className="min-h-screen bg-gradient-to-br from-black via-blue-900/20 to-purple-900/20 p-6">
-        <div className="container mx-auto space-y-6">
-          {/* Security Header */}
-          <Card className="border-2 border-red-500/50 bg-gradient-to-r from-red-900/30 to-purple-900/30">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-red-400 text-3xl">
-                <Shield className="h-8 w-8" />
-                🛡️ HARMONY OF GAIA - SECURITY COMMAND CENTER
-              </CardTitle>
-              <p className="text-red-300 text-lg">
-                Maximum Protection • Invisible Defense • Quantum Security Matrix
-              </p>
-            </CardHeader>
-          </Card>
+    <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20 p-6">
+      <div className="container mx-auto space-y-6">
+        {/* Security Header */}
+        <Card className="border-purple-500/50 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
+          <CardHeader>
+            <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
+              🛡️ GAiA SECURITY & SEARCH CENTER
+            </CardTitle>
+            <div className="flex justify-center gap-4 flex-wrap">
+              <Badge className="bg-green-600 animate-pulse">
+                <Shield className="h-3 w-3 mr-1" />
+                ALL SYSTEMS SECURE
+              </Badge>
+              <Badge className="bg-blue-600">
+                <Search className="h-3 w-3 mr-1" />
+                SEARCH & TRACK ACTIVE
+              </Badge>
+              <Badge className="bg-purple-600">
+                <Activity className="h-3 w-3 mr-1" />
+                LIVE MONITORING
+              </Badge>
+              <Badge className="bg-red-600 animate-pulse">
+                <Lock className="h-3 w-3 mr-1" />
+                MAXIMUM PROTECTION
+              </Badge>
+            </div>
+            <p className="text-center text-lg text-muted-foreground mt-4">
+              Advanced security monitoring • Real-time tracking • Community vault access
+            </p>
+          </CardHeader>
+        </Card>
 
-          {/* Security Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card className="border-green-500/30 bg-green-900/20">
-              <CardContent className="p-4 text-center">
-                <Shield className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-green-400">{metrics.activeProtection}%</div>
-                <div className="text-sm text-green-300">Active Protection</div>
-              </CardContent>
-            </Card>
+        {/* System Health Overview */}
+        <Card className="border-green-500/30 bg-green-900/20">
+          <CardHeader>
+            <CardTitle className="text-green-400 flex items-center gap-2">
+              <Activity className="h-5 w-5" />
+              🖥️ System Health Overview
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-400">
+                  {systemHealth.isHealthy ? '✅' : '⚠️'}
+                </div>
+                <div className="text-sm">System Health</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-400">
+                  {systemHealth.quantumProtected ? '🛡️' : '⚠️'}
+                </div>
+                <div className="text-sm">Quantum Protected</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-purple-400">
+                  {systemHealth.systemHealth.threats_blocked.toLocaleString()}
+                </div>
+                <div className="text-sm">Threats Blocked</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-orange-400">
+                  {systemHealth.systemHealth.uptime}%
+                </div>
+                <div className="text-sm">System Uptime</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-yellow-400">
+                  {systemHealth.masterSecurityActive ? '🔥' : '⚠️'}
+                </div>
+                <div className="text-sm">Master Security</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
+        {/* Main Security Tabs */}
+        <Tabs defaultValue="search" className="w-full">
+          <TabsList className="grid w-full grid-cols-7">
+            <TabsTrigger value="search">Search & Track</TabsTrigger>
+            <TabsTrigger value="vault">Community Vault</TabsTrigger>
+            <TabsTrigger value="protection">Ultimate Protection</TabsTrigger>
+            <TabsTrigger value="animals">Self-Training</TabsTrigger>
+            <TabsTrigger value="dragon">Eternal Dragon</TabsTrigger>
+            <TabsTrigger value="avatars">Invisible Avatars</TabsTrigger>
+            <TabsTrigger value="monitoring">Live Monitoring</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="search" className="space-y-6">
+            <AdvancedSearchSystem />
+          </TabsContent>
+
+          <TabsContent value="vault" className="space-y-6">
+            <CommunityVaultSystem />
+          </TabsContent>
+
+          <TabsContent value="protection" className="space-y-6">
+            <UltimateWalletProtection />
+          </TabsContent>
+
+          <TabsContent value="animals" className="space-y-6">
+            <SelfTrainingAnimal />
+          </TabsContent>
+
+          <TabsContent value="dragon" className="space-y-6">
+            <EternalDragonDisplay />
+          </TabsContent>
+
+          <TabsContent value="avatars" className="space-y-6">
+            <InvisibleAvatarTrainer />
+          </TabsContent>
+
+          <TabsContent value="monitoring" className="space-y-6">
             <Card className="border-blue-500/30 bg-blue-900/20">
-              <CardContent className="p-4 text-center">
-                <Database className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-blue-400">{metrics.systemIntegrity}%</div>
-                <div className="text-sm text-blue-300">System Integrity</div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-purple-500/30 bg-purple-900/20">
-              <CardContent className="p-4 text-center">
-                <Lock className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-purple-400">{metrics.dataEncryption}%</div>
-                <div className="text-sm text-purple-300">Data Encryption</div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-red-500/30 bg-red-900/20">
-              <CardContent className="p-4 text-center">
-                <AlertTriangle className="h-8 w-8 text-red-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-red-400">{metrics.threatLevel}</div>
-                <div className="text-sm text-red-300">Active Threats</div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* System Health Checker */}
-          <SystemHealthChecker />
-
-          {/* Security Scan */}
-          <Card className="border-orange-500/30 bg-orange-900/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-orange-400">
-                <Search className="h-6 w-6" />
-                🔍 DEEP SYSTEM SECURITY SCAN
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Button 
-                onClick={runSecurityScan}
-                disabled={isScanning}
-                className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-4"
-              >
-                <Search className="h-5 w-5 mr-2" />
-                {isScanning ? 'SCANNING ALL SYSTEMS...' : 'RUN COMPREHENSIVE SECURITY SCAN'}
-              </Button>
-
-              {isScanning && (
-                <div className="text-center py-4">
-                  <div className="animate-spin h-8 w-8 border-4 border-orange-400 border-t-transparent rounded-full mx-auto mb-2"></div>
-                  <p className="text-orange-400">Deep scanning all security protocols...</p>
+              <CardHeader>
+                <CardTitle className="text-blue-400 flex items-center gap-2">
+                  <Eye className="h-5 w-5" />
+                  🔍 Live System Monitoring
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="text-center p-4 bg-green-900/30 rounded-lg">
+                    <Zap className="h-12 w-12 text-green-400 mx-auto mb-2 animate-pulse" />
+                    <h3 className="font-bold text-green-400 mb-2">REAL-TIME TRACKING</h3>
+                    <p className="text-sm text-muted-foreground">
+                      All transactions and system activities are monitored in real-time
+                    </p>
+                  </div>
+                  
+                  <div className="text-center p-4 bg-blue-900/30 rounded-lg">
+                    <Shield className="h-12 w-12 text-blue-400 mx-auto mb-2 animate-pulse" />
+                    <h3 className="font-bold text-blue-400 mb-2">THREAT DETECTION</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Advanced AI algorithms detect and neutralize threats instantly
+                    </p>
+                  </div>
+                  
+                  <div className="text-center p-4 bg-purple-900/30 rounded-lg">
+                    <Lock className="h-12 w-12 text-purple-400 mx-auto mb-2 animate-pulse" />
+                    <h3 className="font-bold text-purple-400 mb-2">QUANTUM ENCRYPTION</h3>
+                    <p className="text-sm text-muted-foreground">
+                      All data is protected with quantum-level encryption
+                    </p>
+                  </div>
                 </div>
-              )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
 
-              {scanResults.length > 0 && (
-                <div className="space-y-2">
-                  <h4 className="font-bold text-orange-400">Scan Results:</h4>
-                  {scanResults.map((result, index) => (
-                    <div key={index} className="flex items-center gap-2 p-2 rounded bg-card/50 border border-border/50">
-                      <CheckCircle className="h-4 w-4 text-green-400" />
-                      <span className="text-sm">{result}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Secure Vault System */}
-          <SecureVaultSystem />
-
-          {/* Security Status */}
-          <Card className="border-2 border-green-500/50 bg-gradient-to-r from-green-900/30 to-blue-900/30">
-            <CardContent className="p-6 text-center">
-              <h3 className="text-3xl font-bold text-green-400 mb-4">
-                🌟 ALL SYSTEMS FULLY OPERATIONAL 🌟
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        {/* Security Status Footer */}
+        <Card className="border-green-500/30 bg-green-900/20">
+          <CardContent className="p-4">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-green-400 mb-2">🌟 ALL SECURITY SYSTEMS OPERATIONAL</h3>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
                 <div>
-                  <Badge className="bg-green-600 mb-2">ADMIN SECURITY ✅</Badge>
+                  <Badge className="bg-green-600 mb-2">SEARCH & TRACK ✅</Badge>
                   <div className="text-green-300">
-                    Matrix Login, 4-Step Recovery, Invisible Protection
+                    Advanced search algorithms, real-time tracking, comprehensive monitoring
                   </div>
                 </div>
                 <div>
-                  <Badge className="bg-blue-600 mb-2">VAULT SYSTEM ✅</Badge>
+                  <Badge className="bg-blue-600 mb-2">COMMUNITY VAULT ✅</Badge>
                   <div className="text-blue-300">
-                    Community Fees, Underground Security, Quantum Encryption
+                    Underground secure vault, community fee deposits, quantum protection
                   </div>
                 </div>
                 <div>
-                  <Badge className="bg-purple-600 mb-2">GOOGLE INTEGRATION ✅</Badge>
+                  <Badge className="bg-purple-600 mb-2">AI PROTECTION ✅</Badge>
                   <div className="text-purple-300">
-                    Enhanced Auth, 2FA Ready, Secure Connection
+                    Self-training animals, eternal dragons, invisible avatars
+                  </div>
+                </div>
+                <div>
+                  <Badge className="bg-orange-600 mb-2">QUANTUM SECURITY ✅</Badge>
+                  <div className="text-orange-300">
+                    Ultimate wallet protection, trace cleanup, maximum encryption
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-    </AdminProtectedRoute>
+    </div>
   )
 }
+
+export default Security

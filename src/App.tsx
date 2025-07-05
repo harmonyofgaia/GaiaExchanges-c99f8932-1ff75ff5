@@ -31,7 +31,7 @@ function App() {
           <InvisibleAdminProtection />
           <AppSidebar />
           <div className="ml-16 min-h-screen">
-            <Toaster />
+            <Toaster position="top-right" />
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/admin" element={<Admin />} />
@@ -47,16 +47,25 @@ function App() {
               <Route path="/landscape-builder" element={<LandscapeBuilder />} />
               <Route path="/transparent-wallet" element={<TransparentWallet />} />
               <Route path="/vault-system" element={<VaultSystem />} />
+              
+              {/* Search & Track Routes */}
               <Route path="/search-track" element={<Security />} />
               <Route path="/live-tracking" element={<Security />} />
               <Route path="/system-status" element={<Security />} />
               <Route path="/comprehensive-status" element={<Security />} />
+              
+              {/* Creative Platform Routes */}
               <Route path="/virtual-world" element={<HomePage />} />
               <Route path="/gaming" element={<HomePage />} />
               <Route path="/nft-green-animals" element={<HomePage />} />
               <Route path="/coin-crafter" element={<HomePage />} />
               <Route path="/aura-land-scrapyard" element={<HomePage />} />
+              
+              {/* Additional Routes */}
               <Route path="/pricing" element={<Contact />} />
+              
+              {/* Catch-all route for any missing pages */}
+              <Route path="*" element={<HomePage />} />
             </Routes>
           </div>
         </div>
