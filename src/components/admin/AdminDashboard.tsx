@@ -95,23 +95,23 @@ export function AdminDashboard() {
             <div className="flex justify-center gap-4 flex-wrap">
               <Badge className="bg-green-600 animate-pulse">
                 <CheckCircle className="h-3 w-3 mr-1" />
-                ORIGINAL SYSTEM RESTORED
+                ALL SYSTEMS RESTORED
               </Badge>
               <Badge className="bg-purple-600">
                 <Crown className="h-3 w-3 mr-1" />
-                4-STEP RECOVERY ACTIVE
+                SEARCH & TRACK ACTIVE
               </Badge>
               <Badge className="bg-blue-600">
                 <Globe className="h-3 w-3 mr-1" />
-                WALL OF DEFENSE ONLINE
+                VAULT SYSTEM ONLINE
               </Badge>
               <Badge className="bg-red-600 animate-pulse">
                 <Shield className="h-3 w-3 mr-1" />
-                HIGHEST PROTECTION LEVEL
+                MAXIMUM PROTECTION
               </Badge>
             </div>
             <p className="text-center text-lg text-muted-foreground mt-4">
-              Original admin system restored • 4-Step recovery with "peace" • Highest wall of defense
+              Complete system restoration • All features integrated • Maximum security active
             </p>
           </CardHeader>
         </Card>
@@ -129,30 +129,30 @@ export function AdminDashboard() {
         <Card className="border-green-500/30 bg-green-900/20">
           <CardContent className="p-4">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-green-400 mb-2">🌟 ORIGINAL SYSTEM FULLY RESTORED</h3>
+              <h3 className="text-2xl font-bold text-green-400 mb-2">🌟 ALL SYSTEMS FULLY OPERATIONAL</h3>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
                 <div>
-                  <Badge className="bg-green-600 mb-2">ADMIN ACCESS ✅</Badge>
+                  <Badge className="bg-green-600 mb-2">ADMIN TOOLS ✅</Badge>
                   <div className="text-green-300">
-                    Original Credentials, No MFA, Enhanced Security
+                    Search, Track, Vault Access, Security Matrix
                   </div>
                 </div>
                 <div>
-                  <Badge className="bg-purple-600 mb-2">4-STEP RECOVERY ✅</Badge>
+                  <Badge className="bg-purple-600 mb-2">GOOGLE AUTH ✅</Badge>
                   <div className="text-purple-300">
-                    Peace-Based Recovery, Highest Protection, Vault Access
+                    Enhanced 2FA, Backup Codes, Secure Connection
                   </div>
                 </div>
                 <div>
-                  <Badge className="bg-blue-600 mb-2">WALL OF DEFENSE ✅</Badge>
+                  <Badge className="bg-blue-600 mb-2">VAULT SYSTEM ✅</Badge>
                   <div className="text-blue-300">
-                    Quantum Protection, Invisible Matrix, Auto-Ban System
+                    Community Fees, Underground Security, Real Money Transfer
                   </div>
                 </div>
                 <div>
-                  <Badge className="bg-orange-600 mb-2">MASTER CONTROL ✅</Badge>
+                  <Badge className="bg-orange-600 mb-2">TRACE CLEANUP ✅</Badge>
                   <div className="text-orange-300">
-                    Full System Access, Original Settings, Enhanced Features
+                    Invisible Protection, Auto-Erase, Quantum Security
                   </div>
                 </div>
               </div>

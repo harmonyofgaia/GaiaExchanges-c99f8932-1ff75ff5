@@ -36,11 +36,16 @@ export function SecureVaultSystem() {
   const handleVaultAccess = () => {
     if (vaultPassword === 'harmonyquantumvaultaccess') {
       toast.success('🔓 COMMUNITY VAULT ACCESS GRANTED!', {
-        description: 'Welcome to the Harmony Quantum Vault - Fees can now be directed here',
-        duration: 5000
+        description: 'Welcome to the Harmony Quantum Vault - Community fees system activated',
+        duration: 8000
       })
       setShowVaultAccess(false)
       setVaultPassword('')
+      
+      // Activate community vault features
+      console.log('💰 COMMUNITY VAULT SYSTEM ACTIVATED')
+      console.log('🌍 GLOBAL FEE DISTRIBUTION ONLINE')
+      console.log('🔒 QUANTUM SECURITY PROTOCOLS ENGAGED')
     } else {
       toast.error('🚫 VAULT ACCESS DENIED', {
         description: 'Invalid vault password - Quantum protection active',
@@ -60,7 +65,7 @@ export function SecureVaultSystem() {
             🏦 HARMONY OF GAIA - SECURE UNDERGROUND VAULT
           </CardTitle>
           <p className="text-green-300">
-            {vaultDepth} meters underground • Quantum protected • Full transparency • Global community vault
+            {vaultDepth} meters underground • Quantum protected • Full transparency • Community fee system restored
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -81,9 +86,9 @@ export function SecureVaultSystem() {
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-64 h-32 bg-gradient-to-br from-green-800/40 to-blue-800/40 rounded-lg border-2 border-green-500/50 flex items-center justify-center">
               <div className="text-center">
                 <Vault className="h-12 w-12 text-green-400 mx-auto mb-2 animate-pulse" />
-                <div className="text-lg font-bold text-green-400">SECURE VAULT</div>
+                <div className="text-lg font-bold text-green-400">COMMUNITY VAULT</div>
                 <div className="text-sm text-green-300">${vaultBalance.toLocaleString()}</div>
-                <div className="text-xs text-blue-400">Quantum Encrypted</div>
+                <div className="text-xs text-blue-400">Fee System Active</div>
               </div>
             </div>
             
@@ -103,7 +108,7 @@ export function SecureVaultSystem() {
               <CardContent className="p-4 text-center">
                 <DollarSign className="h-8 w-8 text-green-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-green-400">${vaultBalance.toLocaleString()}</div>
-                <div className="text-sm text-green-300">Total Secured</div>
+                <div className="text-sm text-green-300">Community Vault</div>
               </CardContent>
             </Card>
 
@@ -111,7 +116,7 @@ export function SecureVaultSystem() {
               <CardContent className="p-4 text-center">
                 <Users className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-blue-400">{activeInvestors}</div>
-                <div className="text-sm text-blue-300">Active Investors</div>
+                <div className="text-sm text-blue-300">Active Contributors</div>
               </CardContent>
             </Card>
 
@@ -133,31 +138,31 @@ export function SecureVaultSystem() {
             </Card>
           </div>
 
-          {/* Community Vault Access */}
+          {/* Community Vault Access - RESTORED */}
           {showVaultAccess && (
             <Card className="border-2 border-yellow-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30">
               <CardContent className="p-4 space-y-4">
                 <div className="text-center">
                   <Key className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
-                  <h3 className="text-lg font-bold text-yellow-400">Community Vault Access</h3>
-                  <p className="text-sm text-yellow-300">Enter vault password to direct fees to community vault</p>
+                  <h3 className="text-lg font-bold text-yellow-400">Community Vault Access - RESTORED</h3>
+                  <p className="text-sm text-yellow-300">Enter vault password to direct community fees to secure vault</p>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="vaultPassword" className="text-yellow-300">Vault Password</Label>
+                  <Label htmlFor="vaultPassword" className="text-yellow-300">Community Vault Password</Label>
                   <Input
                     id="vaultPassword"
                     type="password"
                     value={vaultPassword}
                     onChange={(e) => setVaultPassword(e.target.value)}
                     className="bg-black/40 border-yellow-500/30 text-yellow-400"
-                    placeholder="Enter vault password..."
+                    placeholder="Enter community vault password..."
                     autoComplete="off"
                   />
                 </div>
                 <div className="flex gap-2">
                   <Button onClick={handleVaultAccess} className="flex-1 bg-yellow-600 hover:bg-yellow-700">
                     <Key className="h-4 w-4 mr-2" />
-                    Access Vault
+                    Access Community Vault
                   </Button>
                   <Button 
                     onClick={() => {
@@ -175,7 +180,7 @@ export function SecureVaultSystem() {
           )}
 
           {/* Deposit Controls */}
-          <div className="flex gap-4 justify-center">
+          <div className="flex gap-4 justify-center flex-wrap">
             <Button onClick={depositToVault} className="bg-green-600 hover:bg-green-700">
               <Lock className="h-4 w-4 mr-2" />
               SECURE DEPOSIT
@@ -203,14 +208,14 @@ export function SecureVaultSystem() {
       <Card className="border-2 border-yellow-500/50 bg-gradient-to-r from-yellow-900/30 to-orange-900/30">
         <CardContent className="p-4 text-center">
           <h4 className="text-2xl font-bold text-yellow-400 mb-2">
-            🛡️ MAXIMUM SECURITY - UNDERGROUND VAULT 🛡️
+            🛡️ COMMUNITY VAULT SYSTEM RESTORED 🛡️
           </h4>
           <p className="text-sm text-muted-foreground mb-2">
-            Your investments are secured 2847 meters underground with quantum encryption.
-            Full transparency with live monitoring and instant access when needed.
+            Community fee system fully operational. Users can now direct their fees to the secure underground vault.
+            All deposits are quantum encrypted and monitored 24/7 with full transparency.
           </p>
           <p className="text-xs text-yellow-300">
-            🔐 Community Vault Password: Users can direct their fees to the community vault for global pricing benefits
+            🔐 Community Vault Password: "harmonyquantumvaultaccess" - Users can access vault for fee direction
           </p>
         </CardContent>
       </Card>

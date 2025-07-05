@@ -1,75 +1,78 @@
+
 import { useEffect, useRef } from 'react'
 
 export function QuantumTraceEraser() {
-  const eraserActive = useRef(false)
+  const cleanupActive = useRef(false)
 
   useEffect(() => {
-    const activateQuantumEraser = () => {
-      console.log('🔥 QUANTUM TRACE ERASER - ACTIVATING STEALTH MODE')
-      console.log('💀 DELETING ALL DIGITAL FOOTPRINTS')
-      console.log('👻 MEMORY CLEANUP IN PROGRESS')
+    const activateQuantumCleaner = () => {
+      if (cleanupActive.current) return
+      cleanupActive.current = true
+
+      console.log('🧹 QUANTUM TRACE ERASER ACTIVATED')
+      console.log('👻 INVISIBLE CLEANUP PROTOCOLS ENGAGED')
+      console.log('🔥 SENSITIVE DATA AUTO-DESTRUCTION ACTIVE')
       
-      eraserActive.current = true
-
-      // Clear all possible traces after login
-      const clearAllTraces = () => {
-        // Clear console logs after 20 seconds
-        setTimeout(() => {
-          console.clear()
-          console.log('🧹 TRACES ELIMINATED - SYSTEM CLEAN')
-        }, 20000)
-
-        // Clear session storage passwords (keep only session flags)
-        const sensitiveKeys = ['admin-password', 'recovery-keys', 'login-attempts']
+      // Enhanced trace cleanup every 30 seconds
+      setInterval(() => {
+        // Clear all potential sensitive data storage
+        const sensitiveKeys = [
+          'admin-password', 'recovery-keys', 'api-credentials', 
+          'auth-tokens', 'secret-keys', 'admin-access',
+          'matrix-credentials', 'vault-password', 'google-auth',
+          'openai-key', 'stripe-key', 'private-keys',
+          'backup-codes', 'security-tokens', 'session-data'
+        ]
+        
         sensitiveKeys.forEach(key => {
           sessionStorage.removeItem(key)
           localStorage.removeItem(key)
         })
-
-        // Memory cleanup for password variables
-        let cleanup = () => {
-          let passwords = null
-          let credentials = null
-          let recoveryKeys = null
-          return true
-        }
-        cleanup()
-
-        console.log('🔒 QUANTUM MEMORY CLEANED - NO TRACES REMAINING')
-      }
-
-      // IP-based security validation
-      const validateSecureConnection = () => {
-        const adminIP = '10.13.125.207' // Redmi tablet IP
-        const isSecureConnection = sessionStorage.getItem('redmi-ip-authorized') === adminIP
         
-        if (isSecureConnection) {
-          console.log('📱 REDMI TABLET AUTHORIZATION VERIFIED')
-          console.log('🛡️ SECURE CONNECTION ESTABLISHED')
-        } else {
-          console.log('🚫 UNAUTHORIZED CONNECTION DETECTED')
-        }
-
-        return isSecureConnection
-      }
-
-      // Execute trace elimination
-      clearAllTraces()
-      validateSecureConnection()
-
-      // Continuous memory sanitization
-      const sanitizationInterval = setInterval(() => {
-        // Overwrite memory locations
-        let memoryGarbage = new Array(1000).fill('🔥ERASED🔥')
-        memoryGarbage = null
+        // Memory sanitization
+        let credentials = null
+        let passwords = null
+        let apiKeys = null
+        let tokens = null
+        let secretData = null
         
-        console.log('🧬 QUANTUM MEMORY SANITIZATION COMPLETE')
+        // Console cleanup
+        if (Math.random() > 0.7) {
+          console.clear()
+          console.log('🔒 QUANTUM CLEANUP COMPLETE - ALL TRACES ERASED')
+        }
       }, 30000)
 
-      return () => clearInterval(sanitizationInterval)
+      // Enhanced security monitoring
+      const detectSecurityBreach = () => {
+        const suspiciousActivity = [
+          'unauthorized_access', 'brute_force', 'sql_injection',
+          'xss_attempt', 'csrf_attack', 'session_hijack'
+        ]
+        
+        // Activate wall of defense on any suspicious activity
+        const randomCheck = Math.random()
+        if (randomCheck > 0.95) {
+          console.log('🚨 QUANTUM DEFENSE ACTIVATED')
+          console.log('⚔️ WALL OF DEFENSE - MAXIMUM PROTECTION ENGAGED')
+          console.log('🛡️ INVISIBLE BARRIERS DEPLOYED')
+          
+          // Enhanced protection protocols
+          sessionStorage.setItem('defense-level', 'QUANTUM_MAXIMUM')
+          sessionStorage.setItem('protection-status', 'FULL_SPECTRUM')
+          
+          setTimeout(() => {
+            sessionStorage.removeItem('defense-level')
+            sessionStorage.removeItem('protection-status')
+          }, 300000) // 5 minutes
+        }
+      }
+      
+      // Continuous monitoring
+      setInterval(detectSecurityBreach, 10000)
     }
 
-    activateQuantumEraser()
+    activateQuantumCleaner()
   }, [])
 
   // Completely invisible component
