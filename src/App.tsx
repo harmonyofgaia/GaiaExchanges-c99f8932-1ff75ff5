@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
@@ -14,7 +15,6 @@ import { MasterSystemOrchestrator } from '@/components/system/MasterSystemOrches
 import Index from '@/pages/Index'
 import Exchange from '@/pages/Exchange'
 import Gaming from '@/pages/Gaming'
-import NFTs from '@/pages/NFTs'
 import Analytics from '@/pages/Analytics'
 import Swap from '@/pages/Swap'
 import Security from '@/pages/Security'
@@ -45,6 +45,10 @@ import About from '@/pages/About'
 import Contact from '@/pages/Contact'
 import Pricing from '@/pages/Pricing'
 
+// New Admin and Marketplace Pages
+import AdminCraftedTools from '@/pages/AdminCraftedTools'
+import Marketplace from '@/pages/Marketplace'
+
 const queryClient = new QueryClient()
 
 function App() {
@@ -71,7 +75,7 @@ function App() {
                     <Route path="/" element={<Index />} />
                     <Route path="/exchange" element={<Exchange />} />
                     <Route path="/gaming" element={<Gaming />} />
-                    <Route path="/nfts" element={<NFTs />} />
+                    <Route path="/marketplace" element={<Marketplace />} />
                     <Route path="/analytics" element={<Analytics />} />
                     <Route path="/swap" element={<Swap />} />
                     <Route path="/security" element={<Security />} />
@@ -101,6 +105,9 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/pricing" element={<Pricing />} />
+                    
+                    {/* Admin Tools */}
+                    <Route path="/admin-crafted-tools" element={<AdminCraftedTools />} />
                   </Routes>
                 </main>
               </div>
