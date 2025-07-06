@@ -8,6 +8,7 @@ import SlidingMenu from '@/components/SlidingMenu'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'
+import { MasterSystemOrchestrator } from '@/components/system/MasterSystemOrchestrator'
 
 // Pages - Keep all existing pages
 import Index from '@/pages/Index'
@@ -53,6 +54,9 @@ function App() {
         <Router>
           <SidebarProvider>
             <div className="min-h-screen bg-background text-foreground">
+              {/* Master System Orchestrator - Ensures all systems keep growing */}
+              <MasterSystemOrchestrator />
+              
               {/* Background Media Engine */}
               <BackgroundMediaEngine />
               
