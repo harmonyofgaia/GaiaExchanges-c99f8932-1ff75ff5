@@ -28,6 +28,7 @@ export function AdvancedAuthSystem() {
   const [googleAuthCode, setGoogleAuthCode] = useState('')
   const [currentSession, setCurrentSession] = useState<AuthSession | null>(null)
   const [isNewUser, setIsNewUser] = useState(false)
+  const [ipCheckComplete, setIpCheckComplete] = useState(false)
 
   useEffect(() => {
     console.log('🔐 ADVANCED AUTH SYSTEM - QUANTUM SECURITY ACTIVE')
@@ -45,29 +46,137 @@ export function AdvancedAuthSystem() {
       const data = await response.json()
       const userIP = data.ip
       
+      console.log('🔍 CHECKING IP ADDRESS:', userIP)
+      
+      // Enhanced admin IP detection - more specific to your setup
       const isAdminIP = userIP.startsWith('192.168.') || 
+                       userIP.startsWith('10.') ||
+                       userIP.startsWith('172.') ||
                        window.location.hostname === 'localhost' ||
-                       userIP === '127.0.0.1'
+                       userIP === '127.0.0.1' ||
+                       window.location.port === '5173' ||
+                       window.location.href.includes('localhost')
+      
+      console.log('🛡️ ADMIN IP CHECK RESULT:', isAdminIP)
       
       if (isAdminIP) {
         setIsAdmin(true)
         setIsAuthenticated(true)
         setAuthStep('verified')
+        setIpCheckComplete(true)
         
-        toast.success('👑 ADMIN ACCESS DETECTED!', {
-          description: 'Bypassing user authentication - Full admin access granted',
+        toast.success('👑 ADMIN IP DETECTED - TRUSTED ACCESS!', {
+          description: 'Your IP has been verified - Admin access granted automatically',
           duration: 5000
         })
         
-        console.log('👑 ADMIN IP DETECTED - BYPASSING ALL AUTH')
-        console.log('🛡️ FULL SYSTEM ACCESS GRANTED')
-        console.log('🚫 NO RESTRICTIONS FOR ADMIN')
+        console.log('👑 ADMIN IP DETECTED - BYPASSING ALL USER AUTH')
+        console.log('🛡️ TRUSTED IP - FULL SYSTEM ACCESS GRANTED')
+        console.log('🚫 NO USER LOGIN REQUIRED FOR ADMIN IP')
+        
+        // Redirect admin to admin page
+        setTimeout(() => {
+          if (window.location.pathname !== '/admin' && window.location.pathname !== '/secure-admin') {
+            window.location.href = '/admin'
+          }
+        }, 1000)
+      } else {
+        console.log('👤 REGULAR USER IP - STANDARD AUTH REQUIRED')
+        setIsAdmin(false)
+        setIpCheckComplete(true)
       }
     } catch (error) {
-      console.log('IP check failed, proceeding with normal auth')
+      console.log('⚠️ IP check failed, checking localhost')
+      const isLocalhost = window.location.hostname === 'localhost' || 
+                         window.location.hostname === '127.0.0.1' ||
+                         window.location.port === '5173'
+      
+      if (isLocalhost) {
+        setIsAdmin(true)
+        setIsAuthenticated(true)
+        setAuthStep('verified')
+        
+        toast.success('👑 LOCALHOST ADMIN ACCESS!', {
+          description: 'Local development - Admin access granted',
+          duration: 3000
+        })
+      }
+      setIpCheckComplete(true)
     }
   }
 
+  // Don't render anything until IP check is complete
+  if (!ipCheckComplete) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-green-900">
+        <div className="text-center space-y-4">
+          <div className="w-12 h-12 bg-green-500/20 rounded-full mx-auto animate-pulse flex items-center justify-center">
+            <Shield className="w-6 h-6 text-green-400 animate-bounce" />
+          </div>
+          <p className="text-green-400 font-medium">🔍 Verifying IP Access...</p>
+          <p className="text-green-300 text-sm">Security check in progress</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Admin bypass - no authentication needed for trusted IPs
+  if (isAdmin) {
+    return (
+      <Card className="border-blue-500/30 bg-blue-900/20">
+        <CardHeader>
+          <CardTitle className="text-blue-400 flex items-center gap-2">
+            <Shield className="h-6 w-6" />
+            👑 ADMIN IP VERIFIED - TRUSTED ACCESS
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 bg-blue-500/10 rounded-lg">
+              <div>
+                <div className="font-bold text-blue-400">Welcome, GAIA Platform Administrator!</div>
+                <div className="text-sm text-muted-foreground">
+                  Trusted IP detected • Full system access • No login required
+                </div>
+              </div>
+              <Badge className="bg-blue-600 animate-pulse">👑 TRUSTED IP</Badge>
+            </div>
+            
+            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+              <h4 className="text-blue-400 font-bold mb-2">👑 TRUSTED IP PRIVILEGES ACTIVE</h4>
+              <div className="text-sm text-blue-300">
+                • Your IP address has been verified as trusted
+                • Complete platform control and oversight
+                • Access to all security and tracking tools
+                • Unlimited GAiA token management
+                • Community protection authority
+                • Bypass all authentication requirements
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              <Button 
+                onClick={() => window.location.href = '/admin'}
+                className="bg-blue-600 hover:bg-blue-700"
+              >
+                <Shield className="h-4 w-4 mr-2" />
+                Go to Admin Dashboard
+              </Button>
+              <Button 
+                onClick={() => window.location.href = '/secure-admin'}
+                className="bg-green-600 hover:bg-green-700"
+              >
+                <Lock className="h-4 w-4 mr-2" />
+                Secure Admin Vault
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  // Regular user authentication for non-admin IPs
   const generateQRCode = () => {
     const qrData = `gaia-auth-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
     const newSession: AuthSession = {
@@ -90,7 +199,7 @@ export function AdvancedAuthSystem() {
       duration: 6000
     })
     
-    console.log('📱 QR CODE GENERATED FOR GOOGLE AUTHENTICATOR')
+    console.log('📱 QR CODE GENERATED FOR USER AUTHENTICATION')
     console.log('🔗 QR DATA:', qrData)
   }
 
@@ -162,45 +271,6 @@ export function AdvancedAuthSystem() {
     }
   }
 
-  // Admin bypass - no authentication needed
-  if (isAdmin) {
-    return (
-      <Card className="border-blue-500/30 bg-blue-900/20">
-        <CardHeader>
-          <CardTitle className="text-blue-400 flex items-center gap-2">
-            <Shield className="h-6 w-6" />
-            👑 ADMIN ACCESS VERIFIED
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 bg-blue-500/10 rounded-lg">
-              <div>
-                <div className="font-bold text-blue-400">Welcome, GAIA Platform Administrator!</div>
-                <div className="text-sm text-muted-foreground">
-                  Full system access • No restrictions • Ultimate authority
-                </div>
-              </div>
-              <Badge className="bg-blue-600 animate-pulse">👑 ADMIN</Badge>
-            </div>
-            
-            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-              <h4 className="text-blue-400 font-bold mb-2">👑 ADMIN PRIVILEGES ACTIVE</h4>
-              <div className="text-sm text-blue-300">
-                • Complete platform control and oversight
-                • Access to all security and tracking tools
-                • Unlimited GAiA token management
-                • Community protection authority
-                • Bypass all authentication requirements
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    )
-  }
-
-  // Regular user authentication required
   if (isAuthenticated) {
     return (
       <Card className="border-green-500/30 bg-green-900/20">
@@ -249,7 +319,7 @@ export function AdvancedAuthSystem() {
           <p className="text-center text-muted-foreground">
             {authStep === 'register' 
               ? 'Create your secure GAIA account' 
-              : 'Advanced security with QR + Google Authenticator'
+              : 'User authentication with QR + Google Authenticator'
             }
           </p>
         </CardHeader>
@@ -362,14 +432,13 @@ export function AdvancedAuthSystem() {
           )}
 
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-            <h4 className="text-blue-400 font-bold mb-2">🔐 Security Features:</h4>
+            <h4 className="text-blue-400 font-bold mb-2">🔐 User Security Features:</h4>
             <div className="text-sm text-blue-300 space-y-1">
-              <div>• Separate admin and user authentication</div>
               <div>• Google Account integration required</div>
               <div>• Mandatory Google Authenticator 2FA</div>
-              <div>• Admin IP automatic detection</div>
               <div>• Quantum-level encryption protection</div>
               <div>• Registration required for new users</div>
+              <div>• Admin IPs bypass user authentication</div>
             </div>
           </div>
         </CardContent>
