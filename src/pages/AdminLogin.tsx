@@ -22,11 +22,11 @@ export default function AdminLogin() {
     setIsLoading(true)
 
     try {
-      // Simple, stable admin credentials check
+      // Simple admin credentials - same as before
       if (credentials.username === 'Synatic' && credentials.password === 'Freedom!oul19922323') {
         setIsAuthenticated(true)
-        toast.success('🌍 Admin Access Granted!', {
-          description: 'Welcome to GAIA Admin Dashboard',
+        toast.success('🛡️ Admin Access Granted!', {
+          description: 'Welcome back to GAIA Admin Control Center',
           duration: 3000
         })
       } else {
@@ -51,6 +51,7 @@ export default function AdminLogin() {
     toast.success('Logged out successfully')
   }
 
+  // Show admin dashboard if authenticated
   if (isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10">
@@ -58,10 +59,10 @@ export default function AdminLogin() {
           <div className="flex justify-between items-center mb-8">
             <div>
               <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                🌍 GAIA Admin Dashboard
+                🛡️ GAIA Admin Control Center
               </h1>
               <p className="text-xl text-muted-foreground mt-2">
-                Complete System Control • Secure Access • Global Management
+                Complete Platform Control • Security Overview • System Management
               </p>
             </div>
             <Button onClick={handleLogout} variant="outline" className="border-red-500/30">
@@ -76,6 +77,7 @@ export default function AdminLogin() {
     )
   }
 
+  // Show clean admin login form
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-green-900/20 flex items-center justify-center p-6">
       <Card className="max-w-md mx-auto border-2 border-green-500/50 bg-gradient-to-br from-green-900/30 to-black/80 backdrop-blur-sm">
@@ -83,10 +85,10 @@ export default function AdminLogin() {
           <div className="text-center">
             <Shield className="h-12 w-12 text-green-400 mx-auto mb-4" />
             <CardTitle className="text-2xl font-bold text-green-400">
-              🌍 GAIA Admin Login
+              🛡️ GAIA Admin Login
             </CardTitle>
             <p className="text-green-300 text-sm mt-2">
-              Secure Admin Access • Stable System
+              Platform Control Center • Complete Access
             </p>
           </div>
         </CardHeader>
@@ -137,13 +139,13 @@ export default function AdminLogin() {
               className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3"
             >
               <Lock className="h-5 w-5 mr-2" />
-              {isLoading ? 'Authenticating...' : 'Login to Admin Dashboard'}
+              {isLoading ? 'Authenticating...' : 'Access Admin Control Center'}
             </Button>
           </form>
 
           <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/20 rounded-lg">
             <p className="text-xs text-green-300 text-center">
-              🛡️ Secure Admin Portal • Stable System • Protected Access
+              🛡️ Secure Admin Portal • Complete Platform Control • All Features Integrated
             </p>
           </div>
         </CardContent>
