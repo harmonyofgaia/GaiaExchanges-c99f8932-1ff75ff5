@@ -22,6 +22,10 @@ class GaiaTokenService {
   
   async fetchLiveTokenData(): Promise<TokenData> {
     try {
+      console.log('🚀 FETCHING OFFICIAL GAiA TOKEN DATA')
+      console.log('📍 Contract Address:', this.contractAddress)
+      console.log('💰 Wallet Address:', this.walletAddress)
+      
       // Try multiple endpoints for real data
       const endpoints = [
         `${this.baseUrl}/search?q=${this.contractAddress}`,
@@ -35,7 +39,7 @@ class GaiaTokenService {
             method: 'GET',
             headers: {
               'Accept': 'application/json',
-              'User-Agent': 'GAiA-Harmony-App/1.0'
+              'User-Agent': 'GAiA-Platform/1.0'
             }
           })
 
@@ -49,15 +53,15 @@ class GaiaTokenService {
               return {
                 price: tokenInfo.priceUsd || tokenInfo.price || 0.000125,
                 volume24h: tokenInfo.volume?.h24 || tokenInfo.volume24h || 8750000,
-                marketCap: tokenInfo.marketCap || tokenInfo.market_cap || 278687500,
+                marketCap: tokenInfo.marketCap || tokenInfo.market_cap || 125000,
                 priceChange24h: tokenInfo.priceChange?.h24 || tokenInfo.price_change_24h || 12.5,
                 holders: tokenInfo.holders || 12450,
                 transactions24h: tokenInfo.transactions?.h24 || tokenInfo.txns24h || 45780,
                 lastUpdated: new Date(),
                 isLive: true,
-                burnRate: 3.5,
-                totalBurned: 14250000,
-                circulatingSupply: 85750000
+                burnRate: 0,
+                totalBurned: 0,
+                circulatingSupply: 1000000000000
               }
             }
           }
@@ -67,9 +71,9 @@ class GaiaTokenService {
         }
       }
 
-      // Fallback to simulated live data with the CORRECT token addresses
-      console.log(`📊 Using simulated GAiA data with CORRECT contract: ${this.contractAddress}`)
-      console.log(`📊 Connected to CORRECT wallet: ${this.walletAddress}`)
+      // Fallback to simulated live data with CORRECT token addresses
+      console.log(`📊 Using simulated GAiA data - Contract: ${this.contractAddress}`)
+      console.log(`📊 Connected to wallet: ${this.walletAddress}`)
       return this.generateSimulatedData()
       
     } catch (error) {
@@ -89,31 +93,15 @@ class GaiaTokenService {
     return {
       price: currentPrice,
       volume24h: 8750000 + (Math.random() - 0.5) * 1000000,
-      marketCap: Math.floor(currentPrice * 100000000),
+      marketCap: Math.floor(currentPrice * 1000000000000),
       priceChange24h: (Math.random() - 0.5) * 20,
       holders: 12450 + Math.floor(Math.random() * 100),
       transactions24h: 45780 + Math.floor(Math.random() * 1000),
       lastUpdated: new Date(),
       isLive: false,
-      burnRate: 3.5 + (Math.random() - 0.5) * 0.5,
-      totalBurned: 14250000 + Math.floor(Math.random() * 50000),
-      circulatingSupply: 85750000 - Math.floor(Math.random() * 10000)
-    }
-  }
-
-  async burnTokens(amount: number, purpose: string): Promise<boolean> {
-    try {
-      console.log(`🔥 Burning ${amount} GAiA tokens for: ${purpose}`)
-      console.log(`🔥 Contract: ${this.contractAddress}`)
-      console.log(`🔥 Wallet: ${this.walletAddress}`)
-      
-      // Simulate token burning process
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      return true
-    } catch (error) {
-      console.error('❌ Token burning failed:', error)
-      return false
+      burnRate: 0,
+      totalBurned: 0,
+      circulatingSupply: 1000000000000
     }
   }
 
@@ -127,7 +115,6 @@ class GaiaTokenService {
 
   async fetchPriceHistory(days: number = 7): Promise<Array<{timestamp: Date, price: number}>> {
     try {
-      // Simulate price history for GAiA token
       const history = []
       const now = new Date()
       const basePrice = 0.000125
