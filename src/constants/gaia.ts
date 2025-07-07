@@ -1,7 +1,7 @@
 
 
 export const GAIA_TOKEN = {
-  // Official GAiA Token Addresses - CORRECTED
+  // Official GAiA Token Addresses
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   SYMBOL: 'GAiA',
@@ -11,11 +11,11 @@ export const GAIA_TOKEN = {
   PUMP_FUN_URL: 'https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   OFFICIAL_WEBSITE: 'https://www.gaiaexchanges.net',
   
-  // Token Metrics - UPDATED
+  // Token Metrics
   TOTAL_SUPPLY: 1000000000000, // 1 Trillion tokens
   BURNED_TOKENS: 0,
   CIRCULATING_SUPPLY: 1000000000000,
-  INITIAL_PRICE: 0.000125, // Corrected price
+  INITIAL_PRICE: 0.0001, // Added back for compatibility
   
   // Tokenomics
   BURN_RATE: 0, // 0% burn rate
@@ -27,19 +27,24 @@ export const GAIA_TOKEN = {
   TREES_PLANTED_TOTAL: 50000,
   OCEAN_CLEANUP_CONTRIBUTION: 25000, // USD
   
-  // Brand messaging - CORRECTED
+  // Brand messaging
   BRAND_STATEMENT: 'We Are a Strong Creative Open Minded Circuit To Happiness - Seeds Will form in to Music',
-  OFFICIAL_DISCLAIMER: 'This is the ONLY official GAiA Token. Contract: t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
+  OFFICIAL_DISCLAIMER: 'This is the ONLY official GAiA Token. Verify contract address before trading.',
 }
 
 export const GAIA_METRICS = {
-  CURRENT_PRICE: 0.000125, // USD - CORRECTED
-  MARKET_CAP: 125000, // USD - CORRECTED
-  VOLUME_24H: 8750000, // USD
-  HOLDERS: 12450, // CORRECTED
-  TRANSACTIONS_24H: 45780,
+  CURRENT_PRICE: 0.0001, // USD
+  MARKET_CAP: 100000, // USD
+  VOLUME_24H: 50000, // USD
+  HOLDERS: 10000,
+  TRANSACTIONS_24H: 5000,
   
-  // System metrics
+  // Added back for compatibility
+  INITIAL_PRICE: 0.0001,
+  INITIAL_HOLDERS: 10000,
+  INITIAL_MARKET_CAP: 100000,
+  INITIAL_VOLUME: 50000,
+  INITIAL_TRANSACTIONS: 5000,
   NETWORK_SPEED: 2500,
   SECURITY_SCORE: 95,
   ECOSYSTEM_HEALTH: 98,
@@ -50,12 +55,6 @@ export const GAIA_METRICS = {
   RENEWABLE_ENERGY_PROJECTS: 25,
   BIODIVERSITY_PROJECTS: 15,
   WATER_CONSERVATION_PROJECTS: 30,
-  
-  // Missing Initial Values - Added for compatibility
-  INITIAL_TRANSACTIONS: 45780,
-  INITIAL_HOLDERS: 12450,
-  INITIAL_MARKET_CAP: 125000,
-  INITIAL_VOLUME: 8750000,
 }
 
 // Utility functions

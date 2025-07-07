@@ -1,17 +1,16 @@
-
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { 
   Home, 
+  Gamepad2, 
   BarChart3, 
   Shield,
   Leaf,
   Eye,
   DollarSign,
   ArrowUpDown,
-  ShoppingCart,
-  Settings
+  ShoppingCart
 } from 'lucide-react'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 import { useEffect, useState } from 'react'
@@ -51,17 +50,16 @@ export function Navbar() {
 
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
+    { path: '/gaming', label: 'Gaming', icon: Gamepad2 },
     { path: '/analytics', label: 'Analytics', icon: BarChart3 },
     { path: '/gaias-projects', label: 'Gaia\'s Projects', icon: Leaf },
     { path: '/transparent-wallet', label: 'Transparency', icon: Eye },
-    { path: '/landscape-builder', label: 'Landscape Builder', icon: Settings },
     { path: '/security', label: 'Security', icon: Shield }
   ]
 
   const topMenuItems = [
     { path: '/exchange', label: 'Exchange', icon: DollarSign, hasSubmenu: true },
-    { path: '/marketplace', label: 'Marketplace', icon: ShoppingCart },
-    { path: '/live-artist-platform', label: 'Live Artists', icon: Eye }
+    { path: '/marketplace', label: 'Marketplace', icon: ShoppingCart }
   ]
 
   const handleLogoClick = () => {
