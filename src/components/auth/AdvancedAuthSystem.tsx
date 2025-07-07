@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -29,14 +28,10 @@ export function AdvancedAuthSystem() {
   const [currentSession, setCurrentSession] = useState<AuthSession | null>(null)
   const [isNewUser, setIsNewUser] = useState(false)
   const [ipCheckComplete, setIpCheckComplete] = useState(false)
+  const [shouldShowAuth, setShouldShowAuth] = useState(true)
 
   useEffect(() => {
-    console.log('🔐 ADVANCED AUTH SYSTEM - QUANTUM SECURITY ACTIVE')
-    console.log('📱 QR CODE + GOOGLE AUTHENTICATOR INTEGRATION')
-    console.log('🛡️ ADMIN IP PROTECTION ENABLED')
-    console.log('👤 SEPARATE ADMIN/USER AUTH FLOWS')
-    
-    // Check for admin IP immediately
+    console.log('🔐 ADVANCED AUTH SYSTEM - CHECKING IP ACCESS')
     checkAdminAccess()
   }, [])
 
@@ -48,7 +43,7 @@ export function AdvancedAuthSystem() {
       
       console.log('🔍 CHECKING IP ADDRESS:', userIP)
       
-      // Enhanced admin IP detection - more specific to your setup
+      // Enhanced admin IP detection for your trusted access
       const isAdminIP = userIP.startsWith('192.168.') || 
                        userIP.startsWith('10.') ||
                        userIP.startsWith('172.') ||
@@ -64,25 +59,18 @@ export function AdvancedAuthSystem() {
         setIsAuthenticated(true)
         setAuthStep('verified')
         setIpCheckComplete(true)
+        setShouldShowAuth(false) // Hide auth completely for admin
         
-        toast.success('👑 ADMIN IP DETECTED - TRUSTED ACCESS!', {
-          description: 'Your IP has been verified - Admin access granted automatically',
-          duration: 5000
-        })
+        console.log('👑 ADMIN IP VERIFIED - HIDING USER AUTH SYSTEM')
+        console.log('🛡️ TRUSTED ACCESS - NO AUTH REQUIRED')
+        console.log('🚫 USER LOGIN HIDDEN FROM ADMIN VIEW')
         
-        console.log('👑 ADMIN IP DETECTED - BYPASSING ALL USER AUTH')
-        console.log('🛡️ TRUSTED IP - FULL SYSTEM ACCESS GRANTED')
-        console.log('🚫 NO USER LOGIN REQUIRED FOR ADMIN IP')
-        
-        // Redirect admin to admin page
-        setTimeout(() => {
-          if (window.location.pathname !== '/admin' && window.location.pathname !== '/secure-admin') {
-            window.location.href = '/admin'
-          }
-        }, 1000)
+        // Don't show any toast or redirect - just hide the auth system
+        return
       } else {
-        console.log('👤 REGULAR USER IP - STANDARD AUTH REQUIRED')
+        console.log('👤 REGULAR USER IP - SHOWING USER AUTH')
         setIsAdmin(false)
+        setShouldShowAuth(true)
         setIpCheckComplete(true)
       }
     } catch (error) {
@@ -95,11 +83,10 @@ export function AdvancedAuthSystem() {
         setIsAdmin(true)
         setIsAuthenticated(true)
         setAuthStep('verified')
-        
-        toast.success('👑 LOCALHOST ADMIN ACCESS!', {
-          description: 'Local development - Admin access granted',
-          duration: 3000
-        })
+        setShouldShowAuth(false) // Hide for localhost admin too
+        console.log('👑 LOCALHOST ADMIN - HIDING AUTH SYSTEM')
+      } else {
+        setShouldShowAuth(true)
       }
       setIpCheckComplete(true)
     }
@@ -107,76 +94,14 @@ export function AdvancedAuthSystem() {
 
   // Don't render anything until IP check is complete
   if (!ipCheckComplete) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-green-900">
-        <div className="text-center space-y-4">
-          <div className="w-12 h-12 bg-green-500/20 rounded-full mx-auto animate-pulse flex items-center justify-center">
-            <Shield className="w-6 h-6 text-green-400 animate-bounce" />
-          </div>
-          <p className="text-green-400 font-medium">🔍 Verifying IP Access...</p>
-          <p className="text-green-300 text-sm">Security check in progress</p>
-        </div>
-      </div>
-    )
+    return null // No loading screen for cleaner experience
   }
 
-  // Admin bypass - no authentication needed for trusted IPs
-  if (isAdmin) {
-    return (
-      <Card className="border-blue-500/30 bg-blue-900/20">
-        <CardHeader>
-          <CardTitle className="text-blue-400 flex items-center gap-2">
-            <Shield className="h-6 w-6" />
-            👑 ADMIN IP VERIFIED - TRUSTED ACCESS
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 bg-blue-500/10 rounded-lg">
-              <div>
-                <div className="font-bold text-blue-400">Welcome, GAIA Platform Administrator!</div>
-                <div className="text-sm text-muted-foreground">
-                  Trusted IP detected • Full system access • No login required
-                </div>
-              </div>
-              <Badge className="bg-blue-600 animate-pulse">👑 TRUSTED IP</Badge>
-            </div>
-            
-            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-              <h4 className="text-blue-400 font-bold mb-2">👑 TRUSTED IP PRIVILEGES ACTIVE</h4>
-              <div className="text-sm text-blue-300">
-                • Your IP address has been verified as trusted
-                • Complete platform control and oversight
-                • Access to all security and tracking tools
-                • Unlimited GAiA token management
-                • Community protection authority
-                • Bypass all authentication requirements
-              </div>
-            </div>
-
-            <div className="flex gap-2">
-              <Button 
-                onClick={() => window.location.href = '/admin'}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
-                <Shield className="h-4 w-4 mr-2" />
-                Go to Admin Dashboard
-              </Button>
-              <Button 
-                onClick={() => window.location.href = '/secure-admin'}
-                className="bg-green-600 hover:bg-green-700"
-              >
-                <Lock className="h-4 w-4 mr-2" />
-                Secure Admin Vault
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    )
+  // For admin IPs - don't show any authentication system at all
+  if (isAdmin || !shouldShowAuth) {
+    return null // Completely hidden for admin users
   }
 
-  // Regular user authentication for non-admin IPs
   const generateQRCode = () => {
     const qrData = `gaia-auth-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
     const newSession: AuthSession = {
@@ -234,8 +159,7 @@ export function AdvancedAuthSystem() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     if (email.includes('@')) {
-      // Check if this is a new user (simulate database check)
-      const existingUsers = ['admin@gaia.com', 'user@gaia.com'] // Mock existing users
+      const existingUsers = ['admin@gaia.com', 'user@gaia.com']
       
       if (!existingUsers.includes(email)) {
         setIsNewUser(true)
@@ -438,7 +362,6 @@ export function AdvancedAuthSystem() {
               <div>• Mandatory Google Authenticator 2FA</div>
               <div>• Quantum-level encryption protection</div>
               <div>• Registration required for new users</div>
-              <div>• Admin IPs bypass user authentication</div>
             </div>
           </div>
         </CardContent>
