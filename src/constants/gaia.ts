@@ -1,4 +1,5 @@
 
+
 export const GAIA_TOKEN = {
   // Official GAiA Token Addresses - CORRECTED
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
@@ -49,6 +50,12 @@ export const GAIA_METRICS = {
   RENEWABLE_ENERGY_PROJECTS: 25,
   BIODIVERSITY_PROJECTS: 15,
   WATER_CONSERVATION_PROJECTS: 30,
+  
+  // Missing Initial Values - Added for compatibility
+  INITIAL_TRANSACTIONS: 45780,
+  INITIAL_HOLDERS: 12450,
+  INITIAL_MARKET_CAP: 125000,
+  INITIAL_VOLUME: 8750000,
 }
 
 // Utility functions
@@ -62,3 +69,4 @@ export const formatGaiaNumber = (num: number): string => {
   if (num >= 1e3) return `${(num / 1e3).toFixed(2)}K`
   return num.toString()
 }
+
