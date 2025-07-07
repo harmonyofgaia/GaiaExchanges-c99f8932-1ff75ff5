@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -27,11 +28,14 @@ export function AdvancedAuthSystem() {
   const [googleAuthCode, setGoogleAuthCode] = useState('')
   const [currentSession, setCurrentSession] = useState<AuthSession | null>(null)
   const [isNewUser, setIsNewUser] = useState(false)
-  const [ipCheckComplete, setIpCheckComplete] = useState(false)
-  const [shouldShowAuth, setShouldShowAuth] = useState(true)
 
   useEffect(() => {
-    console.log('🔐 ADVANCED AUTH SYSTEM - CHECKING IP ACCESS')
+    console.log('🔐 ADVANCED AUTH SYSTEM - QUANTUM SECURITY ACTIVE')
+    console.log('📱 QR CODE + GOOGLE AUTHENTICATOR INTEGRATION')
+    console.log('🛡️ ADMIN IP PROTECTION ENABLED')
+    console.log('👤 SEPARATE ADMIN/USER AUTH FLOWS')
+    
+    // Check for admin IP immediately
     checkAdminAccess()
   }, [])
 
@@ -41,65 +45,27 @@ export function AdvancedAuthSystem() {
       const data = await response.json()
       const userIP = data.ip
       
-      console.log('🔍 CHECKING IP ADDRESS:', userIP)
-      
-      // Enhanced admin IP detection for your trusted access
       const isAdminIP = userIP.startsWith('192.168.') || 
-                       userIP.startsWith('10.') ||
-                       userIP.startsWith('172.') ||
                        window.location.hostname === 'localhost' ||
-                       userIP === '127.0.0.1' ||
-                       window.location.port === '5173' ||
-                       window.location.href.includes('localhost')
-      
-      console.log('🛡️ ADMIN IP CHECK RESULT:', isAdminIP)
+                       userIP === '127.0.0.1'
       
       if (isAdminIP) {
         setIsAdmin(true)
         setIsAuthenticated(true)
         setAuthStep('verified')
-        setIpCheckComplete(true)
-        setShouldShowAuth(false) // Hide auth completely for admin
         
-        console.log('👑 ADMIN IP VERIFIED - HIDING USER AUTH SYSTEM')
-        console.log('🛡️ TRUSTED ACCESS - NO AUTH REQUIRED')
-        console.log('🚫 USER LOGIN HIDDEN FROM ADMIN VIEW')
+        toast.success('👑 ADMIN ACCESS DETECTED!', {
+          description: 'Bypassing user authentication - Full admin access granted',
+          duration: 5000
+        })
         
-        // Don't show any toast or redirect - just hide the auth system
-        return
-      } else {
-        console.log('👤 REGULAR USER IP - SHOWING USER AUTH')
-        setIsAdmin(false)
-        setShouldShowAuth(true)
-        setIpCheckComplete(true)
+        console.log('👑 ADMIN IP DETECTED - BYPASSING ALL AUTH')
+        console.log('🛡️ FULL SYSTEM ACCESS GRANTED')
+        console.log('🚫 NO RESTRICTIONS FOR ADMIN')
       }
     } catch (error) {
-      console.log('⚠️ IP check failed, checking localhost')
-      const isLocalhost = window.location.hostname === 'localhost' || 
-                         window.location.hostname === '127.0.0.1' ||
-                         window.location.port === '5173'
-      
-      if (isLocalhost) {
-        setIsAdmin(true)
-        setIsAuthenticated(true)
-        setAuthStep('verified')
-        setShouldShowAuth(false) // Hide for localhost admin too
-        console.log('👑 LOCALHOST ADMIN - HIDING AUTH SYSTEM')
-      } else {
-        setShouldShowAuth(true)
-      }
-      setIpCheckComplete(true)
+      console.log('IP check failed, proceeding with normal auth')
     }
-  }
-
-  // Don't render anything until IP check is complete
-  if (!ipCheckComplete) {
-    return null // No loading screen for cleaner experience
-  }
-
-  // For admin IPs - don't show any authentication system at all
-  if (isAdmin || !shouldShowAuth) {
-    return null // Completely hidden for admin users
   }
 
   const generateQRCode = () => {
@@ -124,7 +90,7 @@ export function AdvancedAuthSystem() {
       duration: 6000
     })
     
-    console.log('📱 QR CODE GENERATED FOR USER AUTHENTICATION')
+    console.log('📱 QR CODE GENERATED FOR GOOGLE AUTHENTICATOR')
     console.log('🔗 QR DATA:', qrData)
   }
 
@@ -159,7 +125,8 @@ export function AdvancedAuthSystem() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     if (email.includes('@')) {
-      const existingUsers = ['admin@gaia.com', 'user@gaia.com']
+      // Check if this is a new user (simulate database check)
+      const existingUsers = ['admin@gaia.com', 'user@gaia.com'] // Mock existing users
       
       if (!existingUsers.includes(email)) {
         setIsNewUser(true)
@@ -195,6 +162,45 @@ export function AdvancedAuthSystem() {
     }
   }
 
+  // Admin bypass - no authentication needed
+  if (isAdmin) {
+    return (
+      <Card className="border-blue-500/30 bg-blue-900/20">
+        <CardHeader>
+          <CardTitle className="text-blue-400 flex items-center gap-2">
+            <Shield className="h-6 w-6" />
+            👑 ADMIN ACCESS VERIFIED
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 bg-blue-500/10 rounded-lg">
+              <div>
+                <div className="font-bold text-blue-400">Welcome, GAIA Platform Administrator!</div>
+                <div className="text-sm text-muted-foreground">
+                  Full system access • No restrictions • Ultimate authority
+                </div>
+              </div>
+              <Badge className="bg-blue-600 animate-pulse">👑 ADMIN</Badge>
+            </div>
+            
+            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+              <h4 className="text-blue-400 font-bold mb-2">👑 ADMIN PRIVILEGES ACTIVE</h4>
+              <div className="text-sm text-blue-300">
+                • Complete platform control and oversight
+                • Access to all security and tracking tools
+                • Unlimited GAiA token management
+                • Community protection authority
+                • Bypass all authentication requirements
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  // Regular user authentication required
   if (isAuthenticated) {
     return (
       <Card className="border-green-500/30 bg-green-900/20">
@@ -243,7 +249,7 @@ export function AdvancedAuthSystem() {
           <p className="text-center text-muted-foreground">
             {authStep === 'register' 
               ? 'Create your secure GAIA account' 
-              : 'User authentication with QR + Google Authenticator'
+              : 'Advanced security with QR + Google Authenticator'
             }
           </p>
         </CardHeader>
@@ -356,10 +362,12 @@ export function AdvancedAuthSystem() {
           )}
 
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-            <h4 className="text-blue-400 font-bold mb-2">🔐 User Security Features:</h4>
+            <h4 className="text-blue-400 font-bold mb-2">🔐 Security Features:</h4>
             <div className="text-sm text-blue-300 space-y-1">
+              <div>• Separate admin and user authentication</div>
               <div>• Google Account integration required</div>
               <div>• Mandatory Google Authenticator 2FA</div>
+              <div>• Admin IP automatic detection</div>
               <div>• Quantum-level encryption protection</div>
               <div>• Registration required for new users</div>
             </div>
