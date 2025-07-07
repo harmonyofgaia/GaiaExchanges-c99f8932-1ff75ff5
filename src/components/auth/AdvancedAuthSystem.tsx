@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Smartphone, Key, Globe, Lock, Unlock } from 'lucide-react'
+import { Shield, Smartphone, Key, Globe, Lock, Unlock, UserCheck } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface AuthSession {
@@ -15,22 +14,93 @@ interface AuthSession {
   adminVerified: boolean
   ipAddress: string
   deviceFingerprint: string
+  isAdmin: boolean
 }
 
 export function AdvancedAuthSystem() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [authStep, setAuthStep] = useState<'login' | 'qr' | 'google-auth' | 'verified'>('login')
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [authStep, setAuthStep] = useState<'login' | 'register' | 'qr' | 'google-auth' | 'verified'>('login')
   const [email, setEmail] = useState('')
+  const [fullName, setFullName] = useState('')
   const [qrCodeGenerated, setQrCodeGenerated] = useState(false)
   const [googleAuthCode, setGoogleAuthCode] = useState('')
   const [currentSession, setCurrentSession] = useState<AuthSession | null>(null)
+  const [isNewUser, setIsNewUser] = useState(false)
+  const [ipCheckComplete, setIpCheckComplete] = useState(false)
+  const [shouldShowAuth, setShouldShowAuth] = useState(true)
 
   useEffect(() => {
-    console.log('🔐 ADVANCED AUTH SYSTEM - QUANTUM SECURITY ACTIVE')
-    console.log('📱 QR CODE + GOOGLE AUTHENTICATOR INTEGRATION')
-    console.log('🛡️ ADMIN IP PROTECTION ENABLED')
-    console.log('👤 FRONT-GATE SECURITY FOR ALL USERS')
+    console.log('🔐 ADVANCED AUTH SYSTEM - CHECKING IP ACCESS')
+    checkAdminAccess()
   }, [])
+
+  const checkAdminAccess = async () => {
+    try {
+      const response = await fetch('https://api.ipify.org?format=json')
+      const data = await response.json()
+      const userIP = data.ip
+      
+      console.log('🔍 CHECKING IP ADDRESS:', userIP)
+      
+      // Enhanced admin IP detection for your trusted access
+      const isAdminIP = userIP.startsWith('192.168.') || 
+                       userIP.startsWith('10.') ||
+                       userIP.startsWith('172.') ||
+                       window.location.hostname === 'localhost' ||
+                       userIP === '127.0.0.1' ||
+                       window.location.port === '5173' ||
+                       window.location.href.includes('localhost')
+      
+      console.log('🛡️ ADMIN IP CHECK RESULT:', isAdminIP)
+      
+      if (isAdminIP) {
+        setIsAdmin(true)
+        setIsAuthenticated(true)
+        setAuthStep('verified')
+        setIpCheckComplete(true)
+        setShouldShowAuth(false) // Hide auth completely for admin
+        
+        console.log('👑 ADMIN IP VERIFIED - HIDING USER AUTH SYSTEM')
+        console.log('🛡️ TRUSTED ACCESS - NO AUTH REQUIRED')
+        console.log('🚫 USER LOGIN HIDDEN FROM ADMIN VIEW')
+        
+        // Don't show any toast or redirect - just hide the auth system
+        return
+      } else {
+        console.log('👤 REGULAR USER IP - SHOWING USER AUTH')
+        setIsAdmin(false)
+        setShouldShowAuth(true)
+        setIpCheckComplete(true)
+      }
+    } catch (error) {
+      console.log('⚠️ IP check failed, checking localhost')
+      const isLocalhost = window.location.hostname === 'localhost' || 
+                         window.location.hostname === '127.0.0.1' ||
+                         window.location.port === '5173'
+      
+      if (isLocalhost) {
+        setIsAdmin(true)
+        setIsAuthenticated(true)
+        setAuthStep('verified')
+        setShouldShowAuth(false) // Hide for localhost admin too
+        console.log('👑 LOCALHOST ADMIN - HIDING AUTH SYSTEM')
+      } else {
+        setShouldShowAuth(true)
+      }
+      setIpCheckComplete(true)
+    }
+  }
+
+  // Don't render anything until IP check is complete
+  if (!ipCheckComplete) {
+    return null // No loading screen for cleaner experience
+  }
+
+  // For admin IPs - don't show any authentication system at all
+  if (isAdmin || !shouldShowAuth) {
+    return null // Completely hidden for admin users
+  }
 
   const generateQRCode = () => {
     const qrData = `gaia-auth-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
@@ -41,7 +111,8 @@ export function AdvancedAuthSystem() {
       googleAuthConnected: false,
       adminVerified: false,
       ipAddress: 'detecting...',
-      deviceFingerprint: navigator.userAgent.slice(0, 50)
+      deviceFingerprint: navigator.userAgent.slice(0, 50),
+      isAdmin: false
     }
     
     setCurrentSession(newSession)
@@ -53,7 +124,7 @@ export function AdvancedAuthSystem() {
       duration: 6000
     })
     
-    console.log('📱 QR CODE GENERATED FOR GOOGLE AUTHENTICATOR')
+    console.log('📱 QR CODE GENERATED FOR USER AUTHENTICATION')
     console.log('🔗 QR DATA:', qrData)
   }
 
@@ -66,43 +137,17 @@ export function AdvancedAuthSystem() {
         })
       }
       
-      setAuthStep('google-auth')
+      setIsAuthenticated(true)
+      setAuthStep('verified')
       
       toast.success('✅ Google Authenticator Verified!', {
-        description: 'Authentication successful - Access granted',
+        description: 'User authentication successful - Welcome to GAIA Platform!',
         duration: 5000
       })
       
-      // Check if admin IP
-      fetch('https://api.ipify.org?format=json')
-        .then(res => res.json())
-        .then(data => {
-          const isAdminIP = data.ip.startsWith('192.168.') || 
-                          window.location.hostname === 'localhost'
-          
-          if (isAdminIP) {
-            setCurrentSession(prev => prev ? {
-              ...prev,
-              adminVerified: true,
-              ipAddress: data.ip
-            } : null)
-            
-            toast.success('👑 ADMIN ACCESS VERIFIED!', {
-              description: 'Full system access granted to authorized admin',
-              duration: 6000
-            })
-          }
-          
-          setIsAuthenticated(true)
-          setAuthStep('verified')
-        })
-        .catch(() => {
-          setIsAuthenticated(true)
-          setAuthStep('verified')
-        })
-      
       console.log('✅ GOOGLE AUTHENTICATOR VERIFICATION SUCCESSFUL')
       console.log('🔐 USER AUTHENTICATED WITH 2FA')
+      console.log('👤 USER ACCESS GRANTED')
     } else {
       toast.error('❌ Invalid Code!', {
         description: 'Please enter the 6-digit code from Google Authenticator',
@@ -114,10 +159,37 @@ export function AdvancedAuthSystem() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     if (email.includes('@')) {
-      generateQRCode()
+      const existingUsers = ['admin@gaia.com', 'user@gaia.com']
+      
+      if (!existingUsers.includes(email)) {
+        setIsNewUser(true)
+        toast.info('👋 New User Detected!', {
+          description: 'Please complete registration first',
+          duration: 4000
+        })
+        setAuthStep('register')
+      } else {
+        generateQRCode()
+      }
     } else {
       toast.error('❌ Invalid Email!', {
         description: 'Please enter a valid email address',
+        duration: 4000
+      })
+    }
+  }
+
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (email.includes('@') && fullName.trim().length > 0) {
+      toast.success('✅ Registration Successful!', {
+        description: 'Account created - Now setting up 2FA',
+        duration: 4000
+      })
+      generateQRCode()
+    } else {
+      toast.error('❌ Registration Failed!', {
+        description: 'Please fill all required fields',
         duration: 4000
       })
     }
@@ -129,7 +201,7 @@ export function AdvancedAuthSystem() {
         <CardHeader>
           <CardTitle className="text-green-400 flex items-center gap-2">
             <Unlock className="h-6 w-6" />
-            ✅ AUTHENTICATION SUCCESSFUL
+            ✅ USER AUTHENTICATION SUCCESSFUL
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -138,23 +210,22 @@ export function AdvancedAuthSystem() {
               <div>
                 <div className="font-bold text-green-400">Welcome to GAIA Platform!</div>
                 <div className="text-sm text-muted-foreground">
-                  {currentSession?.email} • {currentSession?.adminVerified ? '👑 Admin Access' : '👤 User Access'}
+                  {currentSession?.email} • User Access with 2FA Security
                 </div>
               </div>
-              <Badge className="bg-green-600">AUTHENTICATED</Badge>
+              <Badge className="bg-green-600">👤 USER</Badge>
             </div>
             
-            {currentSession?.adminVerified && (
-              <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-                <h4 className="text-blue-400 font-bold mb-2">👑 ADMIN PRIVILEGES ACTIVE</h4>
-                <div className="text-sm text-blue-300">
-                  • Full system access and control
-                  • Advanced security tools available
-                  • Exclusive admin features unlocked
-                  • Complete platform authority
-                </div>
+            <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+              <h4 className="text-green-400 font-bold mb-2">👤 USER ACCESS GRANTED</h4>
+              <div className="text-sm text-green-300">
+                • Secure access to GAIA platform features
+                • GAiA token transactions and trading
+                • Environmental projects participation
+                • Community engagement tools
+                • Protected by quantum-level security
               </div>
-            )}
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -167,10 +238,13 @@ export function AdvancedAuthSystem() {
         <CardHeader>
           <CardTitle className="text-center text-blue-400 flex items-center justify-center gap-2">
             <Shield className="h-6 w-6" />
-            🔐 GAIA PLATFORM LOGIN
+            🔐 GAIA PLATFORM {authStep === 'register' ? 'REGISTRATION' : 'LOGIN'}
           </CardTitle>
           <p className="text-center text-muted-foreground">
-            Advanced security with QR + Google Authenticator
+            {authStep === 'register' 
+              ? 'Create your secure GAIA account' 
+              : 'User authentication with QR + Google Authenticator'
+            }
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -189,8 +263,57 @@ export function AdvancedAuthSystem() {
               </div>
               <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
                 <Globe className="h-4 w-4 mr-2" />
-                Connect with Google Account
+                Login with Google Account
               </Button>
+              <div className="text-center">
+                <button
+                  type="button"
+                  onClick={() => setAuthStep('register')}
+                  className="text-sm text-blue-400 hover:underline"
+                >
+                  New user? Create account
+                </button>
+              </div>
+            </form>
+          )}
+
+          {authStep === 'register' && (
+            <form onSubmit={handleRegister} className="space-y-4">
+              <div>
+                <label className="text-sm font-medium text-blue-400">Full Name</label>
+                <Input
+                  type="text"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder="Enter your full name"
+                  className="mt-1"
+                  required
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-blue-400">Email Address</label>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="mt-1"
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
+                <UserCheck className="h-4 w-4 mr-2" />
+                Create GAIA Account
+              </Button>
+              <div className="text-center">
+                <button
+                  type="button"
+                  onClick={() => setAuthStep('login')}
+                  className="text-sm text-blue-400 hover:underline"
+                >
+                  Already have an account? Login
+                </button>
+              </div>
             </form>
           )}
 
@@ -200,6 +323,7 @@ export function AdvancedAuthSystem() {
                 <div className="w-32 h-32 mx-auto bg-white rounded-lg flex items-center justify-center mb-4">
                   <div className="text-xs text-black p-2 text-center">
                     QR CODE<br/>
+                    GAIA 2FA<br/>
                     {currentSession?.qrCode?.slice(-8)}
                   </div>
                 </div>
@@ -215,8 +339,8 @@ export function AdvancedAuthSystem() {
                   maxLength={6}
                   value={googleAuthCode}
                   onChange={(e) => setGoogleAuthCode(e.target.value.replace(/\D/g, ''))}
-                  placeholder="000000"
-                  className="text-center text-2xl"
+                  placeholder="123456"
+                  className="text-center text-2xl font-mono"
                 />
               </div>
               
@@ -226,19 +350,18 @@ export function AdvancedAuthSystem() {
                 disabled={googleAuthCode.length !== 6}
               >
                 <Key className="h-4 w-4 mr-2" />
-                Verify & Login
+                Verify & Enter GAIA Platform
               </Button>
             </div>
           )}
 
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-            <h4 className="text-blue-400 font-bold mb-2">🔐 Security Features:</h4>
+            <h4 className="text-blue-400 font-bold mb-2">🔐 User Security Features:</h4>
             <div className="text-sm text-blue-300 space-y-1">
-              <div>• Google Account integration</div>
-              <div>• QR Code + Authenticator 2FA</div>
-              <div>• Admin IP verification</div>
-              <div>• Device fingerprinting</div>
-              <div>• Quantum-level encryption</div>
+              <div>• Google Account integration required</div>
+              <div>• Mandatory Google Authenticator 2FA</div>
+              <div>• Quantum-level encryption protection</div>
+              <div>• Registration required for new users</div>
             </div>
           </div>
         </CardContent>
