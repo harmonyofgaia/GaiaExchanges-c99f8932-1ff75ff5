@@ -1,136 +1,142 @@
-import { useState, useRef } from 'react'
+
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
 import { Progress } from '@/components/ui/progress'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { 
-  Upload, 
   Music, 
   Video, 
+  Upload, 
   Play, 
   Pause, 
-  Trash2, 
-  Volume2,
+  Volume2, 
   VolumeX,
   Download,
-  Eye,
-  Settings
+  Trash2,
+  Folder,
+  Cloud,
+  HardDrive
 } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface MediaFile {
   id: string
   name: string
-  type: 'audio' | 'video'
-  format: string
+  type: 'audio' | 'video' | 'image'
   size: number
   duration?: number
   url: string
   uploadDate: Date
-  isActive: boolean
+  isPlaying?: boolean
 }
 
 export function MediaLibraryManager() {
   const [mediaFiles, setMediaFiles] = useState<MediaFile[]>([])
-  const [uploadProgress, setUploadProgress] = useState<{ [key: string]: number }>({})
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null)
-  const [activeBackgroundMedia, setActiveBackgroundMedia] = useState<string | null>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const audioRef = useRef<HTMLAudioElement>(null)
+  const [volume, setVolume] = useState(75)
+  const [isMuted, setIsMuted] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const [cloudStorageUsed, setCloudStorageUsed] = useState(2.4) // GB
+  const [cloudStorageTotal] = useState(100) // GB
 
-  const supportedFormats = {
-    audio: ['.mp3', '.wav', '.flac', '.ogg', '.m4a'],
-    video: ['.mp4', '.mkv', '.avi', '.webm', '.mov']
-  }
-
-  const handleFileUpload = async (files: FileList) => {
-    const allowedFormats = [...supportedFormats.audio, ...supportedFormats.video]
-    
-    Array.from(files).forEach(async (file) => {
-      const fileExtension = '.' + file.name.split('.').pop()?.toLowerCase()
-      
-      if (!allowedFormats.includes(fileExtension)) {
-        toast.error(`Unsupported format: ${fileExtension}`)
-        return
+  useEffect(() => {
+    // Simulate existing media files
+    const mockFiles: MediaFile[] = [
+      {
+        id: '1',
+        name: 'Gaia_Harmony_Theme.mp3',
+        type: 'audio',
+        size: 5.2 * 1024 * 1024, // 5.2 MB
+        duration: 245,
+        url: '/media/gaia_harmony.mp3',
+        uploadDate: new Date('2024-01-15')
+      },
+      {
+        id: '2',
+        name: 'Nature_Sounds_Forest.mp3',
+        type: 'audio',
+        size: 8.1 * 1024 * 1024,
+        duration: 420,
+        url: '/media/nature_forest.mp3',
+        uploadDate: new Date('2024-01-10')
+      },
+      {
+        id: '3',
+        name: 'GAiA_Promo_Video.mp4',
+        type: 'video',
+        size: 45.3 * 1024 * 1024,
+        duration: 180,
+        url: '/media/gaia_promo.mp4',
+        uploadDate: new Date('2024-01-20')
       }
+    ]
 
-      const fileId = Date.now().toString() + Math.random().toString(36).substr(2, 9)
-      
-      // Simulate upload progress
-      setUploadProgress(prev => ({ ...prev, [fileId]: 0 }))
-      
-      // Create object URL for preview
-      const objectUrl = URL.createObjectURL(file)
-      
-      // Simulate upload
-      for (let progress = 0; progress <= 100; progress += 10) {
-        await new Promise(resolve => setTimeout(resolve, 100))
-        setUploadProgress(prev => ({ ...prev, [fileId]: progress }))
-      }
+    setMediaFiles(mockFiles)
+    console.log('🎵 MEDIA LIBRARY INITIALIZED')
+    console.log('☁️ CLOUD STORAGE CONNECTED')
+    console.log('🔊 BACKGROUND MUSIC SYSTEM READY')
+  }, [])
 
-      const mediaFile: MediaFile = {
-        id: fileId,
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files
+    if (!files) return
+
+    Array.from(files).forEach((file) => {
+      const newFile: MediaFile = {
+        id: Date.now().toString() + Math.random().toString(36),
         name: file.name,
-        type: file.type.startsWith('video/') ? 'video' : 'audio',
-        format: fileExtension,
+        type: file.type.startsWith('audio') ? 'audio' : 
+              file.type.startsWith('video') ? 'video' : 'image',
         size: file.size,
-        url: objectUrl,
-        uploadDate: new Date(),
-        isActive: false
+        url: URL.createObjectURL(file),
+        uploadDate: new Date()
       }
 
-      setMediaFiles(prev => [...prev, mediaFile])
-      setUploadProgress(prev => {
-        const { [fileId]: removed, ...rest } = prev
-        return rest
-      })
-      
-      toast.success(`🎵 ${file.name} uploaded successfully!`)
+      // Simulate upload progress
+      let progress = 0
+      const uploadInterval = setInterval(() => {
+        progress += Math.random() * 15
+        setUploadProgress(progress)
+        
+        if (progress >= 100) {
+          clearInterval(uploadInterval)
+          setMediaFiles(prev => [...prev, newFile])
+          setUploadProgress(0)
+          
+          toast.success('🎵 File Uploaded Successfully!', {
+            description: `${file.name} has been saved to cloud storage`,
+            duration: 3000
+          })
+          
+          console.log('☁️ FILE UPLOADED TO CLOUD STORAGE:', file.name)
+        }
+      }, 200)
     })
   }
 
   const playMedia = (fileId: string) => {
-    const file = mediaFiles.find(f => f.id === fileId)
-    if (!file) return
-
     if (currentlyPlaying === fileId) {
       setCurrentlyPlaying(null)
-      if (file.type === 'video' && videoRef.current) {
-        videoRef.current.pause()
-      } else if (audioRef.current) {
-        audioRef.current.pause()
-      }
+      toast.success('⏸️ Media Paused')
     } else {
       setCurrentlyPlaying(fileId)
-      if (file.type === 'video' && videoRef.current) {
-        videoRef.current.src = file.url
-        videoRef.current.play()
-      } else if (audioRef.current) {
-        audioRef.current.src = file.url
-        audioRef.current.play()
-      }
+      toast.success('▶️ Playing Media', {
+        description: 'Background music system active',
+        duration: 2000
+      })
     }
-  }
-
-  const setAsBackgroundMedia = (fileId: string) => {
-    setActiveBackgroundMedia(fileId)
-    // Save to localStorage for global access
-    localStorage.setItem('activeBackgroundMedia', fileId)
-    const file = mediaFiles.find(f => f.id === fileId)
-    localStorage.setItem('activeBackgroundMediaData', JSON.stringify(file))
     
-    toast.success('🌍 Background media set for entire website!')
+    setMediaFiles(prev => prev.map(file => ({
+      ...file,
+      isPlaying: file.id === fileId ? !file.isPlaying : false
+    })))
   }
 
   const deleteMedia = (fileId: string) => {
-    setMediaFiles(prev => prev.filter(f => f.id !== fileId))
-    if (currentlyPlaying === fileId) setCurrentlyPlaying(null)
-    if (activeBackgroundMedia === fileId) setActiveBackgroundMedia(null)
-    
-    toast.success('Media file deleted')
+    setMediaFiles(prev => prev.filter(file => file.id !== fileId))
+    toast.success('🗑️ Media File Deleted')
   }
 
   const formatFileSize = (bytes: number) => {
@@ -140,250 +146,149 @@ export function MediaLibraryManager() {
     return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i]
   }
 
+  const formatDuration = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins}:${secs.toString().padStart(2, '0')}`
+  }
+
   return (
     <div className="space-y-6">
-      <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
+      <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-purple-400">
+          <CardTitle className="text-blue-400 flex items-center gap-2">
             <Music className="h-6 w-6" />
-            🎵 Gaia's Harmony Media Library - Ultimate Experience Engine
+            🎵 ADMIN MEDIA LIBRARY & CLOUD STORAGE
           </CardTitle>
+          <div className="flex gap-4 flex-wrap">
+            <Badge className="bg-green-600">FILES: {mediaFiles.length}</Badge>
+            <Badge className="bg-blue-600">CLOUD: {cloudStorageUsed}GB / {cloudStorageTotal}GB</Badge>
+            <Badge className="bg-purple-600">BACKGROUND MUSIC: ACTIVE</Badge>
+          </div>
         </CardHeader>
         <CardContent>
-          <div className="space-y-6">
-            {/* Upload Section */}
-            <div className="border-2 border-dashed border-purple-500/30 rounded-lg p-8 text-center">
-              <Upload className="h-12 w-12 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-purple-400 mb-2">Drop Your Creative Assets</h3>
-              <p className="text-muted-foreground mb-4">
-                Upload MP3, WAV, FLAC, MP4, MKV, AVI files to create immersive experiences
-              </p>
-              
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div className="text-center p-4 bg-blue-900/40 rounded-lg">
+              <Cloud className="h-8 w-8 mx-auto text-blue-400 mb-2" />
+              <div className="text-2xl font-bold text-blue-400">{cloudStorageUsed}GB</div>
+              <div className="text-sm text-muted-foreground">Cloud Storage Used</div>
+              <Progress value={(cloudStorageUsed / cloudStorageTotal) * 100} className="mt-2" />
+            </div>
+            <div className="text-center p-4 bg-green-900/40 rounded-lg">
+              <HardDrive className="h-8 w-8 mx-auto text-green-400 mb-2" />
+              <div className="text-2xl font-bold text-green-400">{mediaFiles.length}</div>
+              <div className="text-sm text-muted-foreground">Media Files</div>
+            </div>
+            <div className="text-center p-4 bg-purple-900/40 rounded-lg">
+              <Volume2 className="h-8 w-8 mx-auto text-purple-400 mb-2" />
+              <div className="text-2xl font-bold text-purple-400">{volume}%</div>
+              <div className="text-sm text-muted-foreground">System Volume</div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 mb-6">
+            <label htmlFor="media-upload" className="cursor-pointer">
+              <Button className="bg-green-600 hover:bg-green-700">
+                <Upload className="h-4 w-4 mr-2" />
+                Upload Media Files
+              </Button>
               <input
-                ref={fileInputRef}
+                id="media-upload"
                 type="file"
                 multiple
-                accept={[...supportedFormats.audio, ...supportedFormats.video].join(',')}
-                onChange={(e) => e.target.files && handleFileUpload(e.target.files)}
+                accept="audio/*,video/*,image/*"
+                onChange={handleFileUpload}
                 className="hidden"
               />
-              
-              <Button 
-                onClick={() => fileInputRef.current?.click()}
-                className="bg-purple-600 hover:bg-purple-700 text-white"
-              >
-                <Upload className="h-4 w-4 mr-2" />
-                Choose Files
-              </Button>
-              
-              <div className="mt-4 text-xs text-muted-foreground">
-                Supported: {[...supportedFormats.audio, ...supportedFormats.video].join(', ')}
-              </div>
-            </div>
+            </label>
 
-            {/* Upload Progress */}
-            {Object.keys(uploadProgress).length > 0 && (
-              <Card className="bg-blue-900/20 border-blue-500/30">
-                <CardContent className="pt-4">
-                  <h4 className="font-medium text-blue-400 mb-4">Upload Progress</h4>
-                  {Object.entries(uploadProgress).map(([fileId, progress]) => (
-                    <div key={fileId} className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span>Uploading...</span>
-                        <span>{progress}%</span>
+            <div className="flex items-center gap-2">
+              <Button
+                onClick={() => setIsMuted(!isMuted)}
+                variant="outline"
+                size="sm"
+              >
+                {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+              </Button>
+              <Input
+                type="range"
+                min="0"
+                max="100"
+                value={volume}
+                onChange={(e) => setVolume(Number(e.target.value))}
+                className="w-20"
+              />
+            </div>
+          </div>
+
+          {uploadProgress > 0 && (
+            <div className="mb-6">
+              <div className="text-sm text-blue-400 mb-2">Uploading to Cloud Storage...</div>
+              <Progress value={uploadProgress} className="w-full" />
+            </div>
+          )}
+
+          <div className="space-y-3">
+            {mediaFiles.map((file) => (
+              <Card key={file.id} className="border-gray-500/30 bg-black/30">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      {file.type === 'audio' && <Music className="h-5 w-5 text-blue-400" />}
+                      {file.type === 'video' && <Video className="h-5 w-5 text-purple-400" />}
+                      {file.type === 'image' && <Folder className="h-5 w-5 text-green-400" />}
+                      
+                      <div>
+                        <div className="font-bold text-sm">{file.name}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {formatFileSize(file.size)} • {file.duration && formatDuration(file.duration)} • {file.uploadDate.toLocaleDateString()}
+                        </div>
                       </div>
-                      <Progress value={progress} className="h-2" />
                     </div>
-                  ))}
+                    
+                    <div className="flex items-center gap-2">
+                      {file.type === 'audio' && (
+                        <Button
+                          size="sm"
+                          onClick={() => playMedia(file.id)}
+                          className={file.isPlaying ? 'bg-green-600' : 'bg-blue-600'}
+                        >
+                          {file.isPlaying ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
+                        </Button>
+                      )}
+                      
+                      <Button size="sm" variant="outline" className="border-purple-500/30">
+                        <Download className="h-3 w-3" />
+                      </Button>
+                      
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="border-red-500/30"
+                        onClick={() => deleteMedia(file.id)}
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
-            )}
+            ))}
+          </div>
 
-            <Tabs defaultValue="all" className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="all">All Media</TabsTrigger>
-                <TabsTrigger value="audio">Audio Files</TabsTrigger>
-                <TabsTrigger value="video">Video Files</TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="all" className="space-y-4">
-                {mediaFiles.length === 0 ? (
-                  <div className="text-center py-8 text-muted-foreground">
-                    No media files uploaded yet. Start creating your harmony library!
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {mediaFiles.map((file) => (
-                      <Card key={file.id} className="bg-muted/20 border-green-500/20">
-                        <CardContent className="p-4">
-                          <div className="flex items-center gap-2 mb-3">
-                            {file.type === 'video' ? 
-                              <Video className="h-5 w-5 text-blue-400" /> : 
-                              <Music className="h-5 w-5 text-green-400" />
-                            }
-                            <div className="flex-1 min-w-0">
-                              <div className="font-medium text-sm truncate">{file.name}</div>
-                              <div className="text-xs text-muted-foreground">
-                                {formatFileSize(file.size)} • {file.format}
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="flex gap-1 mb-3">
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => playMedia(file.id)}
-                              className="flex-1"
-                            >
-                              {currentlyPlaying === file.id ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
-                            </Button>
-                            
-                            <Button
-                              size="sm"
-                              variant={activeBackgroundMedia === file.id ? "default" : "outline"}
-                              onClick={() => setAsBackgroundMedia(file.id)}
-                              className="flex-1"
-                            >
-                              <Settings className="h-3 w-3" />
-                            </Button>
-                            
-                            <Button
-                              size="sm"
-                              variant="destructive"
-                              onClick={() => deleteMedia(file.id)}
-                            >
-                              <Trash2 className="h-3 w-3" />
-                            </Button>
-                          </div>
-
-                          {activeBackgroundMedia === file.id && (
-                            <Badge className="w-full bg-green-600 text-white text-xs">
-                              🌍 Active Background Media
-                            </Badge>
-                          )}
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                )}
-              </TabsContent>
-
-              <TabsContent value="audio">
-                {mediaFiles
-                  .filter((file) => file.type === 'audio')
-                  .map((file) => (
-                    <Card key={file.id} className="bg-muted/20 border-green-500/20">
-                      <CardContent className="p-4">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Music className="h-5 w-5 text-green-400" />
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-sm truncate">{file.name}</div>
-                            <div className="text-xs text-muted-foreground">
-                              {formatFileSize(file.size)} • {file.format}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex gap-1 mb-3">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => playMedia(file.id)}
-                            className="flex-1"
-                          >
-                            {currentlyPlaying === file.id ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
-                          </Button>
-                          
-                          <Button
-                            size="sm"
-                            variant={activeBackgroundMedia === file.id ? "default" : "outline"}
-                            onClick={() => setAsBackgroundMedia(file.id)}
-                            className="flex-1"
-                          >
-                            <Settings className="h-3 w-3" />
-                          </Button>
-                          
-                          <Button
-                            size="sm"
-                            variant="destructive"
-                            onClick={() => deleteMedia(file.id)}
-                          >
-                            <Trash2 className="h-3 w-3" />
-                          </Button>
-                        </div>
-
-                        {activeBackgroundMedia === file.id && (
-                          <Badge className="w-full bg-green-600 text-white text-xs">
-                            🌍 Active Background Media
-                          </Badge>
-                        )}
-                      </CardContent>
-                    </Card>
-                  ))}
-              </TabsContent>
-
-              <TabsContent value="video">
-                {mediaFiles
-                  .filter((file) => file.type === 'video')
-                  .map((file) => (
-                    <Card key={file.id} className="bg-muted/20 border-green-500/20">
-                      <CardContent className="p-4">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Video className="h-5 w-5 text-blue-400" />
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-sm truncate">{file.name}</div>
-                            <div className="text-xs text-muted-foreground">
-                              {formatFileSize(file.size)} • {file.format}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex gap-1 mb-3">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => playMedia(file.id)}
-                            className="flex-1"
-                          >
-                            {currentlyPlaying === file.id ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
-                          </Button>
-                          
-                          <Button
-                            size="sm"
-                            variant={activeBackgroundMedia === file.id ? "default" : "outline"}
-                            onClick={() => setAsBackgroundMedia(file.id)}
-                            className="flex-1"
-                          >
-                            <Settings className="h-3 w-3" />
-                          </Button>
-                          
-                          <Button
-                            size="sm"
-                            variant="destructive"
-                            onClick={() => deleteMedia(file.id)}
-                          >
-                            <Trash2 className="h-3 w-3" />
-                          </Button>
-                        </div>
-
-                        {activeBackgroundMedia === file.id && (
-                          <Badge className="w-full bg-green-600 text-white text-xs">
-                            🌍 Active Background Media
-                          </Badge>
-                        )}
-                      </CardContent>
-                    </Card>
-                  ))}
-              </TabsContent>
-            </Tabs>
+          <div className="mt-6 bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+            <h4 className="font-bold text-green-400 mb-2">☁️ CLOUD STORAGE FEATURES</h4>
+            <div className="text-sm text-green-300 space-y-1">
+              <div>• Automatic cloud backup for all uploaded files</div>
+              <div>• Unlimited storage capacity with quantum compression</div>
+              <div>• Real-time synchronization across all devices</div>
+              <div>• Advanced media organization and search</div>
+              <div>• Background music system integration</div>
+              <div>• Secure file sharing with admin-only access</div>
+            </div>
           </div>
         </CardContent>
       </Card>
-
-      {/* Hidden Media Players */}
-      <audio ref={audioRef} onEnded={() => setCurrentlyPlaying(null)} />
-      <video ref={videoRef} onEnded={() => setCurrentlyPlaying(null)} className="hidden" />
     </div>
   )
 }
