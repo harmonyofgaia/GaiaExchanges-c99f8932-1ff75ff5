@@ -214,8 +214,8 @@ export function EnhancedLiveTracking() {
               • Real-time location accuracy: ±0.5 meters
             </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
