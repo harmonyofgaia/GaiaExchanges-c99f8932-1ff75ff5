@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { TrendingUp, ArrowUpDown, DollarSign, BarChart3, Zap, Gamepad2, ShoppingCart } from 'lucide-react'
+import { TrendingUp, ArrowUpDown, DollarSign, BarChart3 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import HoverSidebar from '@/components/HoverSidebar'
 
@@ -19,7 +19,7 @@ const Exchange = () => {
                 💱 GAiA Exchange Hub
               </CardTitle>
               <p className="text-center text-xl text-muted-foreground">
-                Complete trading ecosystem • Multiple platforms • Enhanced security
+                Professional trading platform • Enhanced security • Real-time analytics
               </p>
             </CardHeader>
           </Card>
@@ -84,66 +84,6 @@ const Exchange = () => {
                 </Link>
               </CardContent>
             </Card>
-
-            <Card className="border-orange-500/30 bg-orange-900/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-orange-400">
-                  <ShoppingCart className="h-6 w-6" />
-                  Marketplace
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Trade NFTs, digital assets, and exclusive GAiA items.
-                </p>
-                <Link to="/marketplace">
-                  <Button className="w-full bg-orange-600 hover:bg-orange-700">
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    Enter Marketplace
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="border-cyan-500/30 bg-cyan-900/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-cyan-400">
-                  <Gamepad2 className="h-6 w-6" />
-                  Gaming Exchange
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Game assets, rewards, and gaming-focused trading.
-                </p>
-                <Link to="/gaming">
-                  <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
-                    <Gamepad2 className="h-4 w-4 mr-2" />
-                    Gaming Hub
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="border-yellow-500/30 bg-yellow-900/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-yellow-400">
-                  <Zap className="h-6 w-6" />
-                  Quick Trade
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Instant trading with optimized execution and low fees.
-                </p>
-                <Link to="/swap">
-                  <Button className="w-full bg-yellow-600 hover:bg-yellow-700">
-                    <Zap className="h-4 w-4 mr-2" />
-                    Quick Trade Now
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
           </div>
 
           <Card className="mt-8 border-emerald-500/30 bg-emerald-900/20">
@@ -165,7 +105,7 @@ const Exchange = () => {
                   <Badge className="mt-2 bg-blue-600">Active</Badge>
                 </div>
                 <div className="text-center p-4 bg-purple-900/20 rounded-lg">
-                  <Zap className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                  <BarChart3 className="h-8 w-8 text-purple-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-purple-400">1B</div>
                   <div className="text-sm text-muted-foreground">Total Supply</div>
                   <Badge className="mt-2 bg-purple-600">Fixed</Badge>

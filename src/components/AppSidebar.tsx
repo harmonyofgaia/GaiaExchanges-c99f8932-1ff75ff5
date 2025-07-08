@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
-  Wallet, 
   Gamepad2, 
   TrendingUp, 
   Settings, 
@@ -15,7 +14,6 @@ import {
   ChevronRight,
   Globe,
   Coins,
-  Palette,
   Crown,
   ShoppingCart,
   Music
@@ -57,7 +55,7 @@ const AppSidebar = () => {
   const baseMenuItems = [
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'main' },
     { icon: Gamepad2, label: 'Gaming Hub', path: '/gaming', category: 'gaming' },
-    { icon: TrendingUp, label: 'Exchange', path: '/exchange', category: 'trading' },
+    { icon: TrendingUp, label: 'Markets', path: '/markets', category: 'trading' },
     { icon: ShoppingCart, label: 'Marketplace', path: '/marketplace', category: 'trading' },
     { icon: Music, label: 'Live Artist Platform', path: '/live-artist-platform', category: 'media' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },

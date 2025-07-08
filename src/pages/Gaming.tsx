@@ -15,7 +15,13 @@ import {
   Star,
   Flame,
   Globe,
-  ChevronRight
+  ChevronRight,
+  Heart,
+  Smile,
+  Music,
+  Paintbrush,
+  Rocket,
+  Mountain
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { toast } from 'sonner'
@@ -78,6 +84,60 @@ export default function Gaming() {
       color: 'bg-yellow-600',
       players: 6754,
       features: ['Resource management', 'Environmental hazards', 'Team cooperation']
+    },
+    {
+      id: 'emo',
+      name: 'Emo Mode',
+      description: 'Express emotions through gameplay',
+      icon: Heart,
+      color: 'bg-pink-600',
+      players: 4523,
+      features: ['Emotional storytelling', 'Dark aesthetics', 'Music integration']
+    },
+    {
+      id: 'party',
+      name: 'Party Mode',
+      description: 'Fun multiplayer mini-games',
+      icon: Smile,
+      color: 'bg-cyan-600',
+      players: 7832,
+      features: ['Mini-games', 'Party challenges', 'Social interaction']
+    },
+    {
+      id: 'rhythm',
+      name: 'Rhythm Mode',
+      description: 'Music-based gameplay challenges',
+      icon: Music,
+      color: 'bg-indigo-600',
+      players: 5647,
+      features: ['Beat matching', 'Music creation', 'Audio challenges']
+    },
+    {
+      id: 'artistic',
+      name: 'Artistic Mode',
+      description: 'Create digital art and masterpieces',
+      icon: Paintbrush,
+      color: 'bg-emerald-600',
+      players: 3421,
+      features: ['Digital painting', 'Art galleries', 'Creative tools']
+    },
+    {
+      id: 'space',
+      name: 'Space Explorer',
+      description: 'Explore the cosmos and beyond',
+      icon: Rocket,
+      color: 'bg-violet-600',
+      players: 8765,
+      features: ['Galaxy exploration', 'Alien encounters', 'Space battles']
+    },
+    {
+      id: 'zen',
+      name: 'Zen Mode',
+      description: 'Peaceful meditation and relaxation',
+      icon: Mountain,
+      color: 'bg-teal-600',
+      players: 2134,
+      features: ['Meditation games', 'Peaceful environments', 'Stress relief']
     }
   ]
 
@@ -107,12 +167,36 @@ export default function Gaming() {
       status: 'live'
     },
     {
+      id: 'emo-journey',
+      name: 'Emo Journey',
+      path: '/game/emo-journey',
+      description: 'Emotional storytelling adventure game',
+      image: '🖤',
+      status: 'live'
+    },
+    {
+      id: 'party-games',
+      name: 'GAiA Party Games',
+      path: '/game/party-games',
+      description: 'Multiplayer party games collection',
+      image: '🎉',
+      status: 'live'
+    },
+    {
+      id: 'rhythm-master',
+      name: 'Rhythm Master',
+      path: '/game/rhythm-master',
+      description: 'Music and beat-based challenges',
+      image: '🎵',
+      status: 'live'
+    },
+    {
       id: 'space-explorer',
       name: 'Space Explorer',
       path: '/game/space-explorer',
       description: 'Explore the cosmos and discover new worlds',
       image: '🚀',
-      status: 'coming-soon'
+      status: 'live'
     },
     {
       id: 'dragon-master',
@@ -128,6 +212,14 @@ export default function Gaming() {
       path: '/game/eco-guardian',
       description: 'Save the environment in this action RPG',
       image: '🌱',
+      status: 'coming-soon'
+    },
+    {
+      id: 'zen-garden',
+      name: 'Zen Garden',
+      path: '/game/zen-garden',
+      description: 'Peaceful meditation and garden building',
+      image: '🧘',
       status: 'coming-soon'
     }
   ]
@@ -158,15 +250,16 @@ export default function Gaming() {
               🎮 GAiA Gaming Hub
             </CardTitle>
             <p className="text-center text-xl text-muted-foreground">
-              Multiple game modes • Competitive tournaments • Virtual worlds
+              12 unique game modes • Competitive tournaments • Virtual worlds • Emotional gameplay
             </p>
             <div className="flex justify-center gap-4 flex-wrap mt-4">
               <Badge className="bg-purple-600">
                 <Users className="h-4 w-4 mr-2" />
                 {playersOnline.toLocaleString()} Online
               </Badge>
-              <Badge className="bg-blue-600">6 Game Modes</Badge>
+              <Badge className="bg-blue-600">12 Game Modes</Badge>
               <Badge className="bg-green-600">Live Tournaments</Badge>
+              <Badge className="bg-pink-600">Emo Mode Active</Badge>
             </div>
           </CardHeader>
         </Card>
@@ -174,10 +267,10 @@ export default function Gaming() {
         {/* Game Mode Selection */}
         <Card className="mb-8 border-green-500/30 bg-green-900/20">
           <CardHeader>
-            <CardTitle className="text-green-400">🎯 Choose Your Gaming Mode</CardTitle>
+            <CardTitle className="text-green-400">🎯 Choose Your Gaming Experience</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {gameModes.map((mode) => {
                 const IconComponent = mode.icon
                 const isActive = activeMode === mode.id
@@ -192,13 +285,13 @@ export default function Gaming() {
                     }`}
                     onClick={() => selectMode(mode.id)}
                   >
-                    <CardContent className="p-6 text-center">
-                      <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${mode.color} flex items-center justify-center`}>
-                        <IconComponent className="h-8 w-8 text-white" />
+                    <CardContent className="p-4 text-center">
+                      <div className={`w-12 h-12 mx-auto mb-3 rounded-full ${mode.color} flex items-center justify-center`}>
+                        <IconComponent className="h-6 w-6 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold text-white mb-2">{mode.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-4">{mode.description}</p>
-                      <Badge className="bg-blue-600 mb-3">
+                      <h3 className="text-lg font-bold text-white mb-2">{mode.name}</h3>
+                      <p className="text-sm text-muted-foreground mb-3">{mode.description}</p>
+                      <Badge className="bg-blue-600 mb-2">
                         {mode.players.toLocaleString()} players
                       </Badge>
                       <div className="space-y-1">
