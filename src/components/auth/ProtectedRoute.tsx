@@ -22,6 +22,8 @@ export function ProtectedRoute({ children, isAdminRoute = false }: ProtectedRout
         const data = await response.json()
         const userIP = data.ip
         
+        console.log('🔒 ProtectedRoute - Checking IP:', userIP)
+        
         // Quantum-encrypted trusted IP addresses
         const trustedIPs = [
           atob('MTkyLjE2OC4xLjEyMQ=='), // 192.168.1.121 (encoded)
@@ -33,11 +35,17 @@ export function ProtectedRoute({ children, isAdminRoute = false }: ProtectedRout
                          window.location.hostname === 'localhost'
         
         setIsTrustedIP(isTrusted)
-        console.log('🔒 NAVIGATION CHECK:', isTrusted ? 'TRUSTED ADMIN - BYPASS AUTH' : 'REGULAR USER - REQUIRE AUTH')
+        
+        if (isTrusted) {
+          console.log('✅ TRUSTED IP DETECTED - BYPASSING ALL AUTHENTICATION FOR NAVIGATION')
+        } else {
+          console.log('🔒 REGULAR IP - STANDARD AUTHENTICATION REQUIRED')
+        }
         
       } catch (error) {
-        console.log('🔐 IP Protection Active')
-        setIsTrustedIP(window.location.hostname === 'localhost')
+        console.log('🔐 IP Protection Active - Using localhost fallback')
+        const isLocalhost = window.location.hostname === 'localhost'
+        setIsTrustedIP(isLocalhost)
       } finally {
         setIsCheckingIP(false)
       }
@@ -67,7 +75,7 @@ export function ProtectedRoute({ children, isAdminRoute = false }: ProtectedRout
 
   // For trusted IPs - ALWAYS allow access without authentication requirements
   if (isTrustedIP) {
-    console.log('👑 TRUSTED IP DETECTED - BYPASSING ALL AUTHENTICATION')
+    console.log('👑 TRUSTED IP DETECTED - BYPASSING ALL AUTHENTICATION - FULL ACCESS GRANTED')
     return <>{children}</>
   }
 

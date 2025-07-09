@@ -9,12 +9,10 @@ import {
   DollarSign, 
   Hammer,
   BarChart3,
-  Shield,
   ChevronRight,
   Coins,
   Crown,
-  Music,
-  ShoppingCart
+  Music
 } from 'lucide-react'
 
 const AppSidebar = () => {
@@ -50,11 +48,11 @@ const AppSidebar = () => {
     checkIPAuthorization()
   }, [])
 
+  // CLEANED UP MENU - Only working pages
   const baseMenuItems = [
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'main' },
     { icon: Music, label: 'Live Artist Platform', path: '/live-artist-platform', category: 'media' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
-    { icon: ShoppingCart, label: 'Marketplace', path: '/marketplace', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },

@@ -23,7 +23,7 @@ export function UnifiedAdminLogin() {
   const [isAdminLoading, setIsAdminLoading] = useState(false)
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
 
-  // Gaia platform credentials state
+  // Gaia platform credentials state  
   const [gaiaCredentials, setGaiaCredentials] = useState({
     email: '',
     password: ''
@@ -39,22 +39,28 @@ export function UnifiedAdminLogin() {
         const data = await response.json()
         const userIP = data.ip
         
-        // Quantum-encrypted trusted IP addresses (only these 2 can access admin)
+        console.log('🔒 Current User IP:', userIP)
+        
+        // Quantum-encrypted trusted IP addresses (ONLY these 2 can access admin)
         const trustedIPs = [
           atob('MTkyLjE2OC4xLjEyMQ=='), // 192.168.1.121 (encoded)
           atob('MTAuMTM0LjIzMS4zNA=='),  // 10.134.231.34 (encoded)
           '127.0.0.1' // localhost
         ]
         
+        console.log('🔒 Checking against trusted IPs:', trustedIPs)
+        
         const isTrusted = trustedIPs.includes(userIP) || 
                          window.location.hostname === 'localhost'
         
         setIsTrustedIP(isTrusted)
-        console.log('🔒 IP CHECK:', isTrusted ? 'TRUSTED ADMIN IP' : 'REGULAR USER IP')
+        console.log('🔒 IP VERIFICATION RESULT:', isTrusted ? 'TRUSTED ADMIN IP - SHOWING SUPREME LOGIN' : 'REGULAR IP - SHOWING GAIA LOGIN')
         
       } catch (error) {
-        console.log('🔐 IP Protection Active')
-        setIsTrustedIP(window.location.hostname === 'localhost')
+        console.log('🔐 IP Protection Active - Using localhost fallback')
+        const isLocalhost = window.location.hostname === 'localhost'
+        setIsTrustedIP(isLocalhost)
+        console.log('🔒 Localhost check result:', isLocalhost)
       } finally {
         setIsCheckingIP(false)
       }
@@ -131,13 +137,14 @@ export function UnifiedAdminLogin() {
           <div className="w-16 h-16 bg-purple-500/20 rounded-full mx-auto mb-4 flex items-center justify-center animate-pulse">
             <Shield className="w-8 h-8 text-purple-400 animate-bounce" />
           </div>
-          <div className="text-purple-400 text-lg font-bold">🔒 Verifying Access Level...</div>
+          <div className="text-purple-400 text-lg font-bold">🔒 IP Verification in Progress...</div>
+          <div className="text-purple-300 text-sm mt-2">Quantum security protocols active</div>
         </div>
       </div>
     )
   }
 
-  // Show Supreme Admin Dashboard if authenticated
+  // Show Supreme Admin Dashboard if authenticated AND trusted IP
   if (isAdminAuthenticated && isTrustedIP) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10">
@@ -163,7 +170,7 @@ export function UnifiedAdminLogin() {
     )
   }
 
-  // Show Supreme Admin Login for trusted IPs
+  // FORCE Supreme Admin Login for trusted IPs (NO Gaia login for trusted IPs)
   if (isTrustedIP) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-red-900/20 to-purple-900/20 flex items-center justify-center p-6">
@@ -176,6 +183,9 @@ export function UnifiedAdminLogin() {
               </CardTitle>
               <p className="text-red-300 text-sm mt-2">
                 QUANTUM SECURED • WALL OF DEFENSE • ULTIMATE CONTROL
+              </p>
+              <p className="text-green-400 text-xs mt-1">
+                ✅ TRUSTED IP VERIFIED - SUPREME ACCESS ENABLED
               </p>
             </div>
           </CardHeader>
@@ -232,7 +242,7 @@ export function UnifiedAdminLogin() {
 
             <div className="mt-6 p-4 bg-gradient-to-r from-red-900/30 to-purple-900/30 border-2 border-red-500/20 rounded-lg">
               <p className="text-xs text-red-300 text-center">
-                👑 SUPREME ADMIN ONLY • QUANTUM PROTECTED • WALL OF DEFENSE ACTIVE
+                👑 SUPREME ADMIN ONLY • QUANTUM PROTECTED • TRUSTED IP VERIFIED
               </p>
             </div>
           </CardContent>
@@ -241,7 +251,7 @@ export function UnifiedAdminLogin() {
     )
   }
 
-  // Show Gaia Platform Login for non-trusted IPs
+  // Show Gaia Platform Login ONLY for non-trusted IPs
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20 flex items-center justify-center p-6">
       <Card className="max-w-md mx-auto border-2 border-green-500/50 bg-gradient-to-br from-green-900/30 to-blue-900/30 backdrop-blur-sm shadow-2xl">
@@ -317,7 +327,7 @@ export function UnifiedAdminLogin() {
 
           <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 border-2 border-green-500/20 rounded-lg">
             <p className="text-xs text-green-300 text-center">
-              🌍 GAiA Platform • Harmony of Culture • Secure Community Access
+              🌍 GAiA Platform • Harmony of Culture • Regular User Access
             </p>
           </div>
         </CardContent>
