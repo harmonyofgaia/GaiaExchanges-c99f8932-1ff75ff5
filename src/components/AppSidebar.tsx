@@ -2,8 +2,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
-  Gamepad2, 
-  TrendingUp, 
+  Globe, 
   Settings, 
   Info, 
   Mail, 
@@ -12,10 +11,8 @@ import {
   BarChart3,
   Shield,
   ChevronRight,
-  Globe,
   Coins,
   Crown,
-  ShoppingCart,
   Music
 } from 'lucide-react'
 
@@ -54,9 +51,6 @@ const AppSidebar = () => {
 
   const baseMenuItems = [
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'main' },
-    { icon: Gamepad2, label: 'Gaming Hub', path: '/gaming', category: 'gaming' },
-    { icon: TrendingUp, label: 'Markets', path: '/markets', category: 'trading' },
-    { icon: ShoppingCart, label: 'Marketplace', path: '/marketplace', category: 'trading' },
     { icon: Music, label: 'Live Artist Platform', path: '/live-artist-platform', category: 'media' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
@@ -138,7 +132,7 @@ const AppSidebar = () => {
               {isAuthorizedIP && (
                 <div className="mt-2">
                   <div className="text-xs bg-green-600 text-white px-2 py-1 rounded animate-pulse">
-                    🛡️ ADMIN ACCESS GRANTED
+                    🛡️ QUANTUM ADMIN ACCESS
                   </div>
                 </div>
               )}
