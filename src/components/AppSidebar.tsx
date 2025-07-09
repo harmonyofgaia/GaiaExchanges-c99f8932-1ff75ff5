@@ -13,7 +13,8 @@ import {
   ChevronRight,
   Coins,
   Crown,
-  Music
+  Music,
+  ShoppingCart
 } from 'lucide-react'
 
 const AppSidebar = () => {
@@ -53,10 +54,10 @@ const AppSidebar = () => {
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'main' },
     { icon: Music, label: 'Live Artist Platform', path: '/live-artist-platform', category: 'media' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
+    { icon: ShoppingCart, label: 'Marketplace', path: '/marketplace', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
-    { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
     { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
     { icon: Mail, label: 'Contact', path: '/contact', category: 'info' },
     { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' }

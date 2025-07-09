@@ -8,6 +8,7 @@ import HoverSidebar from '@/components/HoverSidebar'
 import { GAIA_TOKEN } from '@/constants/gaia'
 import { WalletConnectionModal } from '@/components/wallet/WalletConnectionModal'
 import { SitePreviewModal } from '@/components/ui/SitePreviewModal'
+import { MusicPlayer } from '@/components/MusicPlayer'
 
 const Home = () => {
   const [showWalletModal, setShowWalletModal] = useState(false)
@@ -156,6 +157,8 @@ const Home = () => {
         isOpen={showPreviewModal} 
         onClose={() => setShowPreviewModal(false)} 
       />
+
+      <MusicPlayer />
     </div>
   )
 }

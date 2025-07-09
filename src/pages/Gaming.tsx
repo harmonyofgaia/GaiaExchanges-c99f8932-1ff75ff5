@@ -1,379 +1,346 @@
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { 
   Gamepad2, 
   Trophy, 
-  Users, 
+  Star, 
   Zap, 
   Target, 
-  Crown, 
-  Sword,
-  Shield,
-  Star,
-  Flame,
-  Globe,
-  ChevronRight,
+  Sword, 
+  Shield, 
+  Crown,
   Heart,
-  Smile,
   Music,
-  Paintbrush,
+  Palette,
   Rocket,
-  Mountain
+  TreePine,
+  Wind,
+  Sparkles,
+  Brain,
+  Users,
+  MapPin,
+  Timer
 } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { toast } from 'sonner'
+import { Navbar } from '@/components/Navbar'
 
 export default function Gaming() {
-  const [activeMode, setActiveMode] = useState('casual')
-  const [playersOnline, setPlayersOnline] = useState(47523)
+  const [selectedTab, setSelectedTab] = useState('arcade')
 
-  const gameModes = [
-    {
-      id: 'casual',
-      name: 'Casual Mode',
-      description: 'Relaxed gaming experience for fun',
-      icon: Star,
-      color: 'bg-green-600',
-      players: 12847,
-      features: ['No pressure', 'Learn at your pace', 'Friendly community']
-    },
-    {
-      id: 'competitive',
-      name: 'Competitive Mode',
-      description: 'Ranked matches and tournaments',
-      icon: Trophy,
-      color: 'bg-orange-600',
-      players: 8934,
-      features: ['Ranked system', 'Tournaments', 'Leaderboards']
-    },
-    {
-      id: 'adventure',
-      name: 'Adventure Mode',
-      description: 'Epic quests and exploration',
-      icon: Globe,
-      color: 'bg-blue-600',
-      players: 15672,
-      features: ['Story campaigns', 'World exploration', 'Epic rewards']
-    },
-    {
-      id: 'battle',
-      name: 'Battle Royale',
-      description: 'Last player standing wins',
-      icon: Sword,
-      color: 'bg-red-600',
-      players: 23456,
-      features: ['100 players', 'Shrinking map', 'Intense combat']
-    },
-    {
-      id: 'creative',
-      name: 'Creative Mode',
-      description: 'Build and create your own worlds',
-      icon: Flame,
-      color: 'bg-purple-600',
-      players: 9821,
-      features: ['Unlimited resources', 'World builder', 'Share creations']
-    },
-    {
-      id: 'survival',
-      name: 'Survival Mode',
-      description: 'Survive against all odds',
-      icon: Shield,
-      color: 'bg-yellow-600',
-      players: 6754,
-      features: ['Resource management', 'Environmental hazards', 'Team cooperation']
-    },
+  const classicGameModes = [
     {
       id: 'emo',
-      name: 'Emo Mode',
-      description: 'Express emotions through gameplay',
+      name: '😔 Emo Mode',
+      description: 'Express deep emotions through dark, atmospheric gameplay',
       icon: Heart,
-      color: 'bg-pink-600',
-      players: 4523,
-      features: ['Emotional storytelling', 'Dark aesthetics', 'Music integration']
+      difficulty: 'Medium',
+      players: '1-4',
+      color: 'bg-gray-600'
     },
     {
       id: 'party',
-      name: 'Party Mode',
-      description: 'Fun multiplayer mini-games',
-      icon: Smile,
-      color: 'bg-cyan-600',
-      players: 7832,
-      features: ['Mini-games', 'Party challenges', 'Social interaction']
+      name: '🎉 Party Mode',
+      description: 'Chaotic multiplayer fun with mini-games and challenges',
+      icon: Sparkles,
+      difficulty: 'Easy',
+      players: '4-8',
+      color: 'bg-pink-600'
     },
     {
       id: 'rhythm',
-      name: 'Rhythm Mode',
-      description: 'Music-based gameplay challenges',
+      name: '🎵 Rhythm Mode',
+      description: 'Musical gameplay synchronized with GAiA soundtracks',
       icon: Music,
-      color: 'bg-indigo-600',
-      players: 5647,
-      features: ['Beat matching', 'Music creation', 'Audio challenges']
+      difficulty: 'Hard',
+      players: '1-2',
+      color: 'bg-purple-600'
     },
     {
       id: 'artistic',
-      name: 'Artistic Mode',
-      description: 'Create digital art and masterpieces',
-      icon: Paintbrush,
-      color: 'bg-emerald-600',
-      players: 3421,
-      features: ['Digital painting', 'Art galleries', 'Creative tools']
+      name: '🎨 Artistic Mode', 
+      description: 'Creative expression through digital art and design',
+      icon: Palette,
+      difficulty: 'Easy',
+      players: '1+',
+      color: 'bg-orange-600'
     },
     {
       id: 'space',
-      name: 'Space Explorer',
-      description: 'Explore the cosmos and beyond',
+      name: '🚀 Space Adventure',
+      description: 'Explore the cosmos in epic space exploration missions',
       icon: Rocket,
-      color: 'bg-violet-600',
-      players: 8765,
-      features: ['Galaxy exploration', 'Alien encounters', 'Space battles']
+      difficulty: 'Hard',
+      players: '1-6',
+      color: 'bg-blue-600'
     },
     {
       id: 'zen',
-      name: 'Zen Mode',
-      description: 'Peaceful meditation and relaxation',
-      icon: Mountain,
-      color: 'bg-teal-600',
-      players: 2134,
-      features: ['Meditation games', 'Peaceful environments', 'Stress relief']
+      name: '🧘 Zen Mode',
+      description: 'Peaceful, meditative gameplay for relaxation',
+      icon: Wind,
+      difficulty: 'Easy',
+      players: '1',
+      color: 'bg-green-600'
     }
   ]
 
-  const availableGames = [
+  const arcadeGames = [
     {
-      id: 'gaia-fantasy-mmorpg',
-      name: 'GAiA Fantasy MMORPG',
-      path: '/game/gaia-fantasy-mmorpg',
-      description: 'Massive fantasy world with magic and adventure',
-      image: '🏰',
-      status: 'live'
+      name: 'GAiA Defender',
+      description: 'Defend the planet from environmental threats',
+      icon: Shield,
+      players: '1-2',
+      highScore: '125,420'
     },
     {
-      id: 'snake-arena',
-      name: 'Snake Arena',
-      path: '/game/snake-arena',
-      description: 'Classic snake game with multiplayer battles',
-      image: '🐍',
-      status: 'live'
+      name: 'Eco Warriors',
+      description: 'Team up to restore damaged ecosystems',
+      icon: TreePine,
+      players: '2-4',
+      highScore: '98,750'
     },
     {
-      id: 'gaia-fighter',
-      name: 'GAiA Fighter',
-      path: '/gaia-fighter-game',
-      description: 'Epic fighting game with GAiA warriors',
-      image: '⚔️',
-      status: 'live'
+      name: 'Quantum Puzzler',
+      description: 'Solve mind-bending quantum physics puzzles',
+      icon: Brain,
+      players: '1',
+      highScore: '87,340'
     },
     {
-      id: 'emo-journey',
-      name: 'Emo Journey',
-      path: '/game/emo-journey',
-      description: 'Emotional storytelling adventure game',
-      image: '🖤',
-      status: 'live'
-    },
-    {
-      id: 'party-games',
-      name: 'GAiA Party Games',
-      path: '/game/party-games',
-      description: 'Multiplayer party games collection',
-      image: '🎉',
-      status: 'live'
-    },
-    {
-      id: 'rhythm-master',
-      name: 'Rhythm Master',
-      path: '/game/rhythm-master',
-      description: 'Music and beat-based challenges',
-      image: '🎵',
-      status: 'live'
-    },
-    {
-      id: 'space-explorer',
-      name: 'Space Explorer',
-      path: '/game/space-explorer',
-      description: 'Explore the cosmos and discover new worlds',
-      image: '🚀',
-      status: 'live'
-    },
-    {
-      id: 'dragon-master',
-      name: 'Dragon Master',
-      path: '/game/dragon-master',
-      description: 'Train and battle with legendary dragons',
-      image: '🐉',
-      status: 'coming-soon'
-    },
-    {
-      id: 'eco-guardian',
-      name: 'Eco Guardian',
-      path: '/game/eco-guardian',
-      description: 'Save the environment in this action RPG',
-      image: '🌱',
-      status: 'coming-soon'
-    },
-    {
-      id: 'zen-garden',
-      name: 'Zen Garden',
-      path: '/game/zen-garden',
-      description: 'Peaceful meditation and garden building',
-      image: '🧘',
-      status: 'coming-soon'
+      name: 'Harmony Racer',
+      description: 'Race through musical landscapes',
+      icon: Zap,
+      players: '1-8',
+      highScore: '156,890'
     }
   ]
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPlayersOnline(prev => prev + Math.floor(Math.random() * 100 - 50))
-    }, 5000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  const selectMode = (modeId: string) => {
-    setActiveMode(modeId)
-    const mode = gameModes.find(m => m.id === modeId)
-    toast.success(`🎮 ${mode?.name} Selected!`, {
-      description: `Ready to play in ${mode?.name.toLowerCase()}`,
-      duration: 3000
-    })
-  }
+  const tournamentData = [
+    {
+      name: 'Weekly Emo Championship',
+      prize: '50,000 GAIA',
+      participants: 247,
+      timeLeft: '2d 14h',
+      status: 'Active'
+    },
+    {
+      name: 'Monthly Party Royale',
+      prize: '100,000 GAIA',
+      participants: 1,249,
+      timeLeft: '18d 7h',
+      status: 'Registration Open'
+    },
+    {
+      name: 'Rhythm Master Series',
+      prize: '25,000 GAIA',
+      participants: 89,
+      timeLeft: '5d 22h',
+      status: 'Active'
+    }
+  ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
+      <Navbar />
+      
       <div className="container mx-auto px-4 py-8">
-        <Card className="mb-8 border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
+        <Card className="mb-8 border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-green-900/30">
           <CardHeader>
-            <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-              🎮 GAiA Gaming Hub
+            <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-green-400">
+              🎮 GAiA Gaming Universe
             </CardTitle>
             <p className="text-center text-xl text-muted-foreground">
-              12 unique game modes • Competitive tournaments • Virtual worlds • Emotional gameplay
+              Experience all classic game modes • Compete in tournaments • Earn GAiA tokens
             </p>
-            <div className="flex justify-center gap-4 flex-wrap mt-4">
-              <Badge className="bg-purple-600">
-                <Users className="h-4 w-4 mr-2" />
-                {playersOnline.toLocaleString()} Online
-              </Badge>
-              <Badge className="bg-blue-600">12 Game Modes</Badge>
-              <Badge className="bg-green-600">Live Tournaments</Badge>
-              <Badge className="bg-pink-600">Emo Mode Active</Badge>
-            </div>
           </CardHeader>
         </Card>
 
-        {/* Game Mode Selection */}
-        <Card className="mb-8 border-green-500/30 bg-green-900/20">
-          <CardHeader>
-            <CardTitle className="text-green-400">🎯 Choose Your Gaming Experience</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {gameModes.map((mode) => {
-                const IconComponent = mode.icon
-                const isActive = activeMode === mode.id
+        <Tabs value={selectedTab} onValueChange={setSelectedTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="arcade">🕹️ Arcade Games</TabsTrigger>
+            <TabsTrigger value="classic">🎭 Classic Modes</TabsTrigger>
+            <TabsTrigger value="tournaments">🏆 Tournaments</TabsTrigger>
+            <TabsTrigger value="leaderboard">📊 Leaderboard</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="classic" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {classicGameModes.map((mode) => {
+                const Icon = mode.icon
                 
                 return (
-                  <Card 
-                    key={mode.id} 
-                    className={`cursor-pointer transition-all duration-300 ${
-                      isActive 
-                        ? 'border-yellow-400 bg-yellow-900/20 scale-105' 
-                        : 'border-gray-500/30 bg-gray-900/20 hover:border-yellow-400/50'
-                    }`}
-                    onClick={() => selectMode(mode.id)}
-                  >
-                    <CardContent className="p-4 text-center">
-                      <div className={`w-12 h-12 mx-auto mb-3 rounded-full ${mode.color} flex items-center justify-center`}>
-                        <IconComponent className="h-6 w-6 text-white" />
+                  <Card key={mode.id} className="border-purple-500/30 bg-purple-900/20 hover:bg-purple-900/30 transition-all">
+                    <CardHeader>
+                      <div className={`w-16 h-16 rounded-full ${mode.color} flex items-center justify-center mx-auto mb-4`}>
+                        <Icon className="h-8 w-8 text-white" />
                       </div>
-                      <h3 className="text-lg font-bold text-white mb-2">{mode.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-3">{mode.description}</p>
-                      <Badge className="bg-blue-600 mb-2">
-                        {mode.players.toLocaleString()} players
-                      </Badge>
-                      <div className="space-y-1">
-                        {mode.features.map((feature, index) => (
-                          <div key={index} className="text-xs text-green-400">
-                            ✓ {feature}
-                          </div>
-                        ))}
+                      <CardTitle className="text-center text-purple-400">{mode.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground text-center mb-4">
+                        {mode.description}
+                      </p>
+                      
+                      <div className="flex justify-between items-center mb-4">
+                        <Badge className="bg-blue-600">{mode.difficulty}</Badge>
+                        <Badge className="bg-green-600">{mode.players} Players</Badge>
                       </div>
+                      
+                      <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+                        <Gamepad2 className="h-4 w-4 mr-2" />
+                        Play {mode.name}
+                      </Button>
                     </CardContent>
                   </Card>
                 )
               })}
             </div>
-          </CardContent>
-        </Card>
+          </TabsContent>
 
-        {/* Available Games */}
-        <Card className="border-blue-500/30 bg-blue-900/20">
-          <CardHeader>
-            <CardTitle className="text-blue-400">🎲 Available Games</CardTitle>
-          </CardHeader>
-          <CardContent>
+          <TabsContent value="arcade" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {arcadeGames.map((game, index) => {
+                const Icon = game.icon
+                
+                return (
+                  <Card key={index} className="border-green-500/30 bg-green-900/20">
+                    <CardHeader>
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
+                          <Icon className="h-6 w-6 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <CardTitle className="text-green-400">{game.name}</CardTitle>
+                          <p className="text-sm text-muted-foreground">{game.description}</p>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex justify-between items-center mb-4">
+                        <div className="text-sm">
+                          <span className="text-muted-foreground">Players: </span>
+                          <span className="text-white">{game.players}</span>
+                        </div>
+                        <div className="text-sm">
+                          <span className="text-muted-foreground">High Score: </span>
+                          <span className="text-yellow-400">{game.highScore}</span>
+                        </div>
+                      </div>
+                      <Button className="w-full bg-green-600 hover:bg-green-700">
+                        <Target className="h-4 w-4 mr-2" />
+                        Play Now
+                      </Button>
+                    </CardContent>
+                  </Card>
+                )
+              })}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="tournaments" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {availableGames.map((game) => (
-                <Card key={game.id} className="border-purple-500/30 bg-purple-900/20">
-                  <CardContent className="p-6 text-center">
-                    <div className="text-6xl mb-4">{game.image}</div>
-                    <h3 className="text-xl font-bold text-purple-400 mb-2">{game.name}</h3>
-                    <p className="text-sm text-muted-foreground mb-4">{game.description}</p>
-                    <Badge className={game.status === 'live' ? 'bg-green-600' : 'bg-yellow-600'}>
-                      {game.status === 'live' ? 'Live Now' : 'Coming Soon'}
-                    </Badge>
-                    {game.status === 'live' && (
-                      <Link to={game.path}>
-                        <Button className="w-full mt-4 bg-purple-600 hover:bg-purple-700">
-                          <Gamepad2 className="h-4 w-4 mr-2" />
-                          Play Now
-                          <ChevronRight className="h-4 w-4 ml-2" />
-                        </Button>
-                      </Link>
-                    )}
+              {tournamentData.map((tournament, index) => (
+                <Card key={index} className="border-yellow-500/30 bg-yellow-900/20">
+                  <CardHeader>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Trophy className="h-6 w-6 text-yellow-400" />
+                      <CardTitle className="text-yellow-400">{tournament.name}</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Prize Pool:</span>
+                        <span className="text-green-400 font-bold">{tournament.prize}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Participants:</span>
+                        <span className="text-blue-400">{tournament.participants.toLocaleString()}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Time Left:</span>
+                        <span className="text-orange-400">{tournament.timeLeft}</span>
+                      </div>
+                      <Badge className={tournament.status === 'Active' ? 'bg-green-600' : 'bg-blue-600'}>
+                        {tournament.status}
+                      </Badge>
+                    </div>
+                    <Button className="w-full mt-4 bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700">
+                      <Crown className="h-4 w-4 mr-2" />
+                      {tournament.status === 'Active' ? 'Join Tournament' : 'Register Now'}
+                    </Button>
                   </CardContent>
                 </Card>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          </TabsContent>
 
-        {/* Gaming Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
-          <Card className="border-green-500/30 bg-green-900/20">
-            <CardContent className="p-6 text-center">
-              <Trophy className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">1,247</div>
-              <div className="text-sm text-muted-foreground">Active Tournaments</div>
-            </CardContent>
-          </Card>
-          
-          <Card className="border-blue-500/30 bg-blue-900/20">
-            <CardContent className="p-6 text-center">
-              <Users className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">{playersOnline.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Players Online</div>
-            </CardContent>
-          </Card>
-          
-          <Card className="border-purple-500/30 bg-purple-900/20">
-            <CardContent className="p-6 text-center">
-              <Crown className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-purple-400">892</div>
-              <div className="text-sm text-muted-foreground">Champions</div>
-            </CardContent>
-          </Card>
-          
-          <Card className="border-orange-500/30 bg-orange-900/20">
-            <CardContent className="p-6 text-center">
-              <Zap className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-orange-400">∞</div>
-              <div className="text-sm text-muted-foreground">Possibilities</div>
-            </CardContent>
-          </Card>
+          <TabsContent value="leaderboard" className="space-y-6">
+            <Card className="border-cyan-500/30 bg-cyan-900/20">
+              <CardHeader>
+                <CardTitle className="text-cyan-400 flex items-center gap-2">
+                  <Star className="h-6 w-6" />
+                  Global Leaderboard - Top Players
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { rank: 1, name: 'EcoMaster2024', score: '2,547,890', mode: 'Emo Mode', badge: '👑' },
+                    { rank: 2, name: 'GreenWarrior', score: '2,234,567', mode: 'Party Mode', badge: '🥈' },
+                    { rank: 3, name: 'RhythmKing', score: '1,987,543', mode: 'Rhythm Mode', badge: '🥉' },
+                    { rank: 4, name: 'ArtisticSoul', score: '1,876,432', mode: 'Artistic Mode', badge: '⭐' },
+                    { rank: 5, name: 'SpaceExplorer', score: '1,654,321', mode: 'Space Adventure', badge: '🌟' }
+                  ].map((player) => (
+                    <div key={player.rank} className="flex items-center justify-between p-4 bg-black/20 rounded-lg">
+                      <div className="flex items-center gap-4">
+                        <div className="text-2xl">{player.badge}</div>
+                        <div>
+                          <div className="font-bold text-cyan-400">#{player.rank} {player.name}</div>
+                          <div className="text-sm text-muted-foreground">Best in: {player.mode}</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xl font-bold text-green-400">{player.score}</div>
+                        <div className="text-sm text-muted-foreground">Total Score</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+
+        <div className="mt-8 bg-gradient-to-r from-purple-500/10 to-green-500/10 border border-purple-500/20 rounded-lg p-6">
+          <h3 className="text-2xl font-bold text-purple-400 mb-4">🎮 Gaming Features</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <h4 className="font-bold text-green-400">🏆 Classic Game Modes</h4>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Emo Mode - Express deep emotions</li>
+                <li>• Party Mode - Chaotic multiplayer fun</li>
+                <li>• Rhythm Mode - Musical gameplay</li>
+                <li>• Artistic Mode - Creative expression</li>
+                <li>• Space Adventure - Cosmic exploration</li>
+                <li>• Zen Mode - Peaceful relaxation</li>
+              </ul>
+            </div>
+            <div className="space-y-2">
+              <h4 className="font-bold text-blue-400">🎯 Gaming Rewards</h4>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Earn GAiA tokens for gameplay</li>
+                <li>• Tournament prize pools</li>
+                <li>• Achievement rewards</li>
+                <li>• Leaderboard bonuses</li>
+                <li>• Special event prizes</li>
+                <li>• NFT gaming rewards</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
