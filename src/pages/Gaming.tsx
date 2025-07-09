@@ -23,7 +23,11 @@ import {
   Brain,
   Users,
   MapPin,
-  Timer
+  Timer,
+  Skull,
+  Baby,
+  Flame,
+  Moon
 } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 
@@ -84,6 +88,60 @@ export default function Gaming() {
       difficulty: 'Easy',
       players: '1',
       color: 'bg-green-600'
+    },
+    {
+      id: 'daemon',
+      name: '👹 Daemon Mode',
+      description: 'Unleash dark powers and conquer with shadow abilities',
+      icon: Flame,
+      difficulty: 'EXTREME',
+      players: '1-2',
+      color: 'bg-red-800'
+    },
+    {
+      id: 'god',
+      name: '👑 God Mode',
+      description: 'Divine powers to create and destroy worlds',
+      icon: Crown,
+      difficulty: 'LEGENDARY',
+      players: '1',
+      color: 'bg-yellow-600'
+    },
+    {
+      id: 'child',
+      name: '👶 Child Mode',
+      description: 'Pure innocence with unlimited curiosity and wonder',
+      icon: Baby,
+      difficulty: 'BEGINNER',
+      players: '1+',
+      color: 'bg-pink-400'
+    },
+    {
+      id: 'adult',
+      name: '👤 Adult Mode',
+      description: 'Balanced wisdom and strength for responsible power',
+      icon: Users,
+      difficulty: 'MEDIUM',
+      players: '1-4',
+      color: 'bg-blue-600'
+    },
+    {
+      id: 'devil',
+      name: '💀 Devil Mode',
+      description: 'Manipulate reality with cunning and temptation',
+      icon: Skull,
+      difficulty: 'NIGHTMARE',
+      players: '1-2',
+      color: 'bg-purple-800'
+    },
+    {
+      id: 'highemo',
+      name: '🌙 High Emo Mode',
+      description: 'Transcendent emotional state with ethereal abilities',
+      icon: Moon,
+      difficulty: 'ULTRA',
+      players: '1',
+      color: 'bg-indigo-800'
     }
   ]
 
@@ -129,7 +187,7 @@ export default function Gaming() {
     {
       name: 'Monthly Party Royale',
       prize: '100,000 GAIA',
-      participants: 1,249,
+      participants: 1249,
       timeLeft: '18d 7h',
       status: 'Registration Open'
     },
@@ -327,6 +385,12 @@ export default function Gaming() {
                 <li>• Artistic Mode - Creative expression</li>
                 <li>• Space Adventure - Cosmic exploration</li>
                 <li>• Zen Mode - Peaceful relaxation</li>
+                <li>• Daemon Mode - Dark shadow powers</li>
+                <li>• God Mode - Divine abilities</li>
+                <li>• Child Mode - Innocent wonder</li>
+                <li>• Adult Mode - Balanced wisdom</li>
+                <li>• Devil Mode - Cunning manipulation</li>
+                <li>• High Emo Mode - Transcendent state</li>
               </ul>
             </div>
             <div className="space-y-2">
