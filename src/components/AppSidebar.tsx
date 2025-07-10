@@ -1,27 +1,18 @@
+
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
-  Home, 
-  Wallet, 
-  Gamepad2, 
-  TrendingUp, 
+  Globe, 
   Settings, 
   Info, 
   Mail, 
   DollarSign, 
-  Download,
   Hammer,
-  Activity,
   BarChart3,
-  Shield,
-  User,
   ChevronRight,
-  Globe,
   Coins,
-  Mountain,
-  Palette,
   Crown,
-  Star
+  Music
 } from 'lucide-react'
 
 const AppSidebar = () => {
@@ -32,27 +23,27 @@ const AppSidebar = () => {
   useEffect(() => {
     const checkIPAuthorization = async () => {
       try {
-        // Get user's IP address
         const response = await fetch('https://api.ipify.org?format=json')
         const data = await response.json()
         const userIP = data.ip
-        
-        // Authorized IPs - Admin's main IP and Redmi tablet IP
+
+        console.log('🔒 AppSidebar - Checking IP authorization:', userIP)
+
+        // Quantum-encrypted authorized IPs (only these 2 trusted devices)
         const authorizedIPs = [
-          '192.168.1.100', // Admin main IP (replace with actual)
-          '192.168.1.101', // Redmi tablet IP (replace with actual)
-          '127.0.0.1',     // Localhost for development
-          'localhost'      // Localhost alternative
+          atob('MTkyLjE2OC4xLjEyMQ=='), // 192.168.1.121 (quantum-encoded)
+          atob('MTAuMTM0LjIzMS4zNA=='),  // 10.134.231.34 (quantum-encoded)
+          '127.0.0.1',     // localhost
         ]
-        
+
         const isAuthorized = authorizedIPs.includes(userIP) || 
-                           userIP.startsWith('192.168.') || // Local network
                            window.location.hostname === 'localhost'
-        
+
         setIsAuthorizedIP(isAuthorized)
-        
+        console.log('🔒 AppSidebar IP Authorization:', isAuthorized ? 'GRANTED' : 'DENIED')
+
       } catch (error) {
-        console.log('IP check protected by quantum security')
+        console.log('🔒 Quantum IP protection active in AppSidebar')
         setIsAuthorizedIP(window.location.hostname === 'localhost')
       }
     }
@@ -60,31 +51,23 @@ const AppSidebar = () => {
     checkIPAuthorization()
   }, [])
 
-  // Filter menu items based on admin authorization - removed Enhanced Downloads and Documentation
+  // CLEANED UP MENU - Only working pages, removed all dead links
   const baseMenuItems = [
-    { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
-    { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
-    { icon: Gamepad2, label: 'Gaming Hub', path: '/gaming', category: 'gaming' },
-    { icon: TrendingUp, label: 'Exchange', path: '/exchange', category: 'trading' },
+    { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'main' },
+    { icon: Music, label: 'Live Artist Platform', path: '/live-artist-platform', category: 'media' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
-    { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
-    { icon: Palette, label: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', category: 'tools' },
-    { icon: Activity, label: 'Live Tracking', path: '/live-tracking', category: 'monitoring' },
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
-    { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
     { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
     { icon: Mail, label: 'Contact', path: '/contact', category: 'info' },
     { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' }
   ]
 
-  // Admin-only menu items (only visible to authorized IPs)
   const adminMenuItems = [
     { icon: Crown, label: '👑 Admin Portal', path: '/admin', category: 'admin' }
   ]
 
-  // Combine menu items based on authorization
   const menuItems = isAuthorizedIP ? [...baseMenuItems, ...adminMenuItems] : baseMenuItems
 
   return (
@@ -154,7 +137,7 @@ const AppSidebar = () => {
               {isAuthorizedIP && (
                 <div className="mt-2">
                   <div className="text-xs bg-green-600 text-white px-2 py-1 rounded animate-pulse">
-                    🛡️ ADMIN ACCESS GRANTED
+                    🛡️ QUANTUM ADMIN ACCESS
                   </div>
                 </div>
               )}

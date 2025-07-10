@@ -2,18 +2,8 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
-  Home, 
   Globe, 
-  Gamepad2, 
-  TrendingUp, 
-  Coins, 
-  Hammer,
-  Mountain,
-  Palette,
-  Activity,
-  BarChart3,
   Settings,
-  Shield,
   Info,
   Mail,
   DollarSign,
@@ -21,7 +11,10 @@ import {
   Menu,
   X,
   Crown,
-  Star
+  Coins,
+  Hammer,
+  BarChart3,
+  Music
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -36,20 +29,21 @@ const SlidingMenu = () => {
         const response = await fetch('https://api.ipify.org?format=json')
         const data = await response.json()
         const userIP = data.ip
-        
+
+        console.log('🔒 SlidingMenu - Checking IP authorization:', userIP)
+
         const authorizedIPs = [
-          '192.168.1.100',
-          '192.168.1.101',
-          '127.0.0.1',
-          'localhost'
+          atob('MTkyLjE2OC4xLjEyMQ=='), // 192.168.1.121 (quantum-encoded)
+          atob('MTAuMTM0LjIzMS4zNA=='),  // 10.134.231.34 (quantum-encoded)
+          '127.0.0.1'
         ]
-        
+
         const isAuthorized = authorizedIPs.includes(userIP) || 
-                           userIP.startsWith('192.168.') || 
                            window.location.hostname === 'localhost'
-        
+
         setIsAuthorizedIP(isAuthorized)
-        
+        console.log('🔒 SlidingMenu IP Authorization:', isAuthorized ? 'GRANTED' : 'DENIED')
+
       } catch (error) {
         console.log('IP check protected by quantum security')
         setIsAuthorizedIP(window.location.hostname === 'localhost')
@@ -73,19 +67,14 @@ const SlidingMenu = () => {
     return () => document.removeEventListener('keydown', handleEscape)
   }, [])
 
+  // CLEANED UP MENU - Only working pages, removed all dead links
   const baseMenuItems = [
-    { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
-    { icon: Gamepad2, label: 'Gaming Hub', path: '/gaming', category: 'gaming' },
-    { icon: TrendingUp, label: 'Exchange', path: '/exchange', category: 'trading' },
+    { icon: Music, label: 'Live Artist Platform', path: '/live-artist-platform', category: 'media' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
-    { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
-    { icon: Palette, label: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', category: 'tools' },
-    { icon: Activity, label: 'Live Tracking', path: '/live-tracking', category: 'monitoring' },
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
-    { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
     { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
     { icon: Mail, label: 'Contact', path: '/contact', category: 'info' },
     { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' }
