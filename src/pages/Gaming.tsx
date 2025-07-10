@@ -1,284 +1,159 @@
 
-import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { 
-  Gamepad2, 
-  Trophy, 
-  Users, 
-  Zap, 
-  Target, 
-  Crown, 
-  Sword,
-  Shield,
-  Star,
-  Flame,
-  Globe,
-  ChevronRight
-} from 'lucide-react'
+import HoverSidebar from '@/components/HoverSidebar'
 import { Link } from 'react-router-dom'
-import { toast } from 'sonner'
+import { Gamepad2, Zap, Crown, Sword, Users, Star } from 'lucide-react'
 
-export default function Gaming() {
-  const [activeMode, setActiveMode] = useState('casual')
-  const [playersOnline, setPlayersOnline] = useState(47523)
-
-  const gameModes = [
+const Gaming = () => {
+  const games = [
     {
-      id: 'casual',
-      name: 'Casual Mode',
-      description: 'Relaxed gaming experience for fun',
-      icon: Star,
-      color: 'bg-green-600',
-      players: 12847,
-      features: ['No pressure', 'Learn at your pace', 'Friendly community']
+      title: "🌍 GAIA Fantasy MMORPG",
+      path: "/game/gaia-fantasy-mmorpg",
+      description: "Massive multiplayer environmental adventure",
+      icon: <Crown className="h-6 w-6" />,
+      color: "from-green-600 to-blue-600",
+      featured: true
     },
     {
-      id: 'competitive',
-      name: 'Competitive Mode',
-      description: 'Ranked matches and tournaments',
-      icon: Trophy,
-      color: 'bg-orange-600',
-      players: 8934,
-      features: ['Ranked system', 'Tournaments', 'Leaderboards']
+      title: "🐍 Snake Arena",
+      path: "/game/snake-arena",
+      description: "Competitive snake battles",
+      icon: <Zap className="h-6 w-6" />,
+      color: "from-purple-600 to-pink-600"
     },
     {
-      id: 'adventure',
-      name: 'Adventure Mode',
-      description: 'Epic quests and exploration',
-      icon: Globe,
-      color: 'bg-blue-600',
-      players: 15672,
-      features: ['Story campaigns', 'World exploration', 'Epic rewards']
+      title: "🥊 Gaia Fighter",
+      path: "/gaia-fighter-game",
+      description: "Environmental warrior combat",
+      icon: <Sword className="h-6 w-6" />,
+      color: "from-red-600 to-orange-600"
     },
     {
-      id: 'battle',
-      name: 'Battle Royale',
-      description: 'Last player standing wins',
-      icon: Sword,
-      color: 'bg-red-600',
-      players: 23456,
-      features: ['100 players', 'Shrinking map', 'Intense combat']
-    },
-    {
-      id: 'creative',
-      name: 'Creative Mode',
-      description: 'Build and create your own worlds',
-      icon: Flame,
-      color: 'bg-purple-600',
-      players: 9821,
-      features: ['Unlimited resources', 'World builder', 'Share creations']
-    },
-    {
-      id: 'survival',
-      name: 'Survival Mode',
-      description: 'Survive against all odds',
-      icon: Shield,
-      color: 'bg-yellow-600',
-      players: 6754,
-      features: ['Resource management', 'Environmental hazards', 'Team cooperation']
+      title: "🎮 Game Hub",
+      path: "/game",
+      description: "Access all games",
+      icon: <Gamepad2 className="h-6 w-6" />,
+      color: "from-blue-600 to-cyan-600"
     }
   ]
-
-  const availableGames = [
-    {
-      id: 'gaia-fantasy-mmorpg',
-      name: 'GAiA Fantasy MMORPG',
-      path: '/game/gaia-fantasy-mmorpg',
-      description: 'Massive fantasy world with magic and adventure',
-      image: '🏰',
-      status: 'live'
-    },
-    {
-      id: 'snake-arena',
-      name: 'Snake Arena',
-      path: '/game/snake-arena',
-      description: 'Classic snake game with multiplayer battles',
-      image: '🐍',
-      status: 'live'
-    },
-    {
-      id: 'gaia-fighter',
-      name: 'GAiA Fighter',
-      path: '/gaia-fighter-game',
-      description: 'Epic fighting game with GAiA warriors',
-      image: '⚔️',
-      status: 'live'
-    },
-    {
-      id: 'space-explorer',
-      name: 'Space Explorer',
-      path: '/game/space-explorer',
-      description: 'Explore the cosmos and discover new worlds',
-      image: '🚀',
-      status: 'coming-soon'
-    },
-    {
-      id: 'dragon-master',
-      name: 'Dragon Master',
-      path: '/game/dragon-master',
-      description: 'Train and battle with legendary dragons',
-      image: '🐉',
-      status: 'coming-soon'
-    },
-    {
-      id: 'eco-guardian',
-      name: 'Eco Guardian',
-      path: '/game/eco-guardian',
-      description: 'Save the environment in this action RPG',
-      image: '🌱',
-      status: 'coming-soon'
-    }
-  ]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPlayersOnline(prev => prev + Math.floor(Math.random() * 100 - 50))
-    }, 5000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  const selectMode = (modeId: string) => {
-    setActiveMode(modeId)
-    const mode = gameModes.find(m => m.id === modeId)
-    toast.success(`🎮 ${mode?.name} Selected!`, {
-      description: `Ready to play in ${mode?.name.toLowerCase()}`,
-      duration: 3000
-    })
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
-      <div className="container mx-auto px-4 py-8">
-        <Card className="mb-8 border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
-          <CardHeader>
-            <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-              🎮 GAiA Gaming Hub
-            </CardTitle>
-            <p className="text-center text-xl text-muted-foreground">
-              Multiple game modes • Competitive tournaments • Virtual worlds
-            </p>
-            <div className="flex justify-center gap-4 flex-wrap mt-4">
-              <Badge className="bg-purple-600">
-                <Users className="h-4 w-4 mr-2" />
-                {playersOnline.toLocaleString()} Online
-              </Badge>
-              <Badge className="bg-blue-600">6 Game Modes</Badge>
-              <Badge className="bg-green-600">Live Tournaments</Badge>
-            </div>
-          </CardHeader>
-        </Card>
+      <HoverSidebar />
+      
+      <div className="ml-16 min-h-screen">
+        <div className="container mx-auto px-6 py-8">
+          <Card className="mb-8 border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
+            <CardHeader>
+              <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
+                🎮 GAIA Gaming Universe
+              </CardTitle>
+              <p className="text-center text-xl text-muted-foreground">
+                Immersive environmental gaming experiences
+              </p>
+            </CardHeader>
+          </Card>
 
-        {/* Game Mode Selection */}
-        <Card className="mb-8 border-green-500/30 bg-green-900/20">
-          <CardHeader>
-            <CardTitle className="text-green-400">🎯 Choose Your Gaming Mode</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {gameModes.map((mode) => {
-                const IconComponent = mode.icon
-                const isActive = activeMode === mode.id
-                
-                return (
-                  <Card 
-                    key={mode.id} 
-                    className={`cursor-pointer transition-all duration-300 ${
-                      isActive 
-                        ? 'border-yellow-400 bg-yellow-900/20 scale-105' 
-                        : 'border-gray-500/30 bg-gray-900/20 hover:border-yellow-400/50'
-                    }`}
-                    onClick={() => selectMode(mode.id)}
-                  >
-                    <CardContent className="p-6 text-center">
-                      <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${mode.color} flex items-center justify-center`}>
-                        <IconComponent className="h-8 w-8 text-white" />
-                      </div>
-                      <h3 className="text-xl font-bold text-white mb-2">{mode.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-4">{mode.description}</p>
-                      <Badge className="bg-blue-600 mb-3">
-                        {mode.players.toLocaleString()} players
-                      </Badge>
-                      <div className="space-y-1">
-                        {mode.features.map((feature, index) => (
-                          <div key={index} className="text-xs text-green-400">
-                            ✓ {feature}
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )
-              })}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Available Games */}
-        <Card className="border-blue-500/30 bg-blue-900/20">
-          <CardHeader>
-            <CardTitle className="text-blue-400">🎲 Available Games</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {availableGames.map((game) => (
-                <Card key={game.id} className="border-purple-500/30 bg-purple-900/20">
-                  <CardContent className="p-6 text-center">
-                    <div className="text-6xl mb-4">{game.image}</div>
-                    <h3 className="text-xl font-bold text-purple-400 mb-2">{game.name}</h3>
-                    <p className="text-sm text-muted-foreground mb-4">{game.description}</p>
-                    <Badge className={game.status === 'live' ? 'bg-green-600' : 'bg-yellow-600'}>
-                      {game.status === 'live' ? 'Live Now' : 'Coming Soon'}
-                    </Badge>
-                    {game.status === 'live' && (
-                      <Link to={game.path}>
-                        <Button className="w-full mt-4 bg-purple-600 hover:bg-purple-700">
-                          <Gamepad2 className="h-4 w-4 mr-2" />
-                          Play Now
-                          <ChevronRight className="h-4 w-4 ml-2" />
-                        </Button>
-                      </Link>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Gaming Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
-          <Card className="border-green-500/30 bg-green-900/20">
-            <CardContent className="p-6 text-center">
-              <Trophy className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">1,247</div>
-              <div className="text-sm text-muted-foreground">Active Tournaments</div>
+          {/* Featured Game */}
+          <Card className="mb-8 border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30">
+            <CardHeader>
+              <CardTitle className="text-center text-2xl font-bold text-green-400 flex items-center justify-center gap-2">
+                <Star className="h-6 w-6 animate-pulse" />
+                🌟 FEATURED: GAIA Fantasy MMORPG
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-lg text-muted-foreground mb-6">
+                The ultimate environmental fantasy adventure - Build, explore, and save virtual worlds while making real environmental impact!
+              </p>
+              <Link to="/game/gaia-fantasy-mmorpg">
+                <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3 px-8">
+                  <Crown className="h-5 w-5 mr-2" />
+                  🌍 PLAY GAIA MMORPG
+                </Button>
+              </Link>
             </CardContent>
           </Card>
-          
-          <Card className="border-blue-500/30 bg-blue-900/20">
-            <CardContent className="p-6 text-center">
-              <Users className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">{playersOnline.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Players Online</div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {games.map((game, index) => (
+              <Card key={index} className="border-purple-500/30 bg-purple-900/20 hover:bg-purple-900/30 transition-colors">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-purple-400">
+                    {game.icon}
+                    {game.title}
+                  </CardTitle>
+                  {game.featured && (
+                    <div className="flex gap-2">
+                      <span className="bg-yellow-600 text-white px-2 py-1 rounded text-xs font-bold animate-pulse">
+                        ⭐ FEATURED
+                      </span>
+                    </div>
+                  )}
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">
+                    {game.description}
+                  </p>
+                  <Link to={game.path}>
+                    <Button className={`w-full bg-gradient-to-r ${game.color} hover:opacity-90 text-white font-bold`}>
+                      <Gamepad2 className="h-4 w-4 mr-2" />
+                      Play Now
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Gaming Stats */}
+          <Card className="mt-8 border-blue-500/30 bg-blue-900/20">
+            <CardHeader>
+              <CardTitle className="text-blue-400">🏆 Gaming Statistics</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="text-center p-4 bg-green-900/20 rounded-lg">
+                  <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-green-400">15,247</div>
+                  <div className="text-sm text-muted-foreground">Active Players</div>
+                </div>
+                <div className="text-center p-4 bg-blue-900/20 rounded-lg">
+                  <Gamepad2 className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-blue-400">4</div>
+                  <div className="text-sm text-muted-foreground">Available Games</div>
+                </div>
+                <div className="text-center p-4 bg-purple-900/20 rounded-lg">
+                  <Star className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-purple-400">892,561</div>
+                  <div className="text-sm text-muted-foreground">High Scores</div>
+                </div>
+                <div className="text-center p-4 bg-orange-900/20 rounded-lg">
+                  <Crown className="h-8 w-8 text-orange-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-orange-400">1,247</div>
+                  <div className="text-sm text-muted-foreground">Tournaments</div>
+                </div>
+              </div>
             </CardContent>
           </Card>
-          
-          <Card className="border-purple-500/30 bg-purple-900/20">
-            <CardContent className="p-6 text-center">
-              <Crown className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-purple-400">892</div>
-              <div className="text-sm text-muted-foreground">Champions</div>
-            </CardContent>
-          </Card>
-          
-          <Card className="border-orange-500/30 bg-orange-900/20">
-            <CardContent className="p-6 text-center">
-              <Zap className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-orange-400">∞</div>
-              <div className="text-sm text-muted-foreground">Possibilities</div>
+
+          {/* Environmental Impact */}
+          <Card className="mt-8 border-green-500/30 bg-green-900/20">
+            <CardHeader>
+              <CardTitle className="text-green-400">🌍 Environmental Gaming Impact</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+                <h4 className="font-bold text-green-400 mb-2">🌱 Real-World Impact Through Gaming:</h4>
+                <div className="text-sm text-green-300 space-y-1">
+                  <div>• Every game session contributes to real environmental projects</div>
+                  <div>• GAIA MMORPG: 15,000 real trees planted through gameplay</div>
+                  <div>• Snake Arena: 2,500 square meters of coral reef restored</div>
+                  <div>• Gaia Fighter: 500 tons of ocean plastic removed</div>
+                  <div>• Gaming achievements unlock real-world conservation efforts</div>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -286,3 +161,5 @@ export default function Gaming() {
     </div>
   )
 }
+
+export default Gaming

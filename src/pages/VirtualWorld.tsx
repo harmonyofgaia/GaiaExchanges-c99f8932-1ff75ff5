@@ -1,28 +1,11 @@
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  Globe, 
-  Users, 
-  Gamepad2, 
-  Zap, 
-  Crown, 
-  Star, 
-  Rocket, 
-  Cpu,
-  Hammer,
-  Palette,
-  Recycle,
-  Mountain,
-  Trees,
-  Waves
-} from 'lucide-react'
+import { Globe, Users, Gamepad2, Zap, Crown, Star, Rocket, Cpu } from 'lucide-react'
 import { toast } from 'sonner'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
-import { LandscapeBuilderRestored } from '@/components/LandscapeBuilderRestored'
 
 export default function VirtualWorld() {
   const [worldState, setWorldState] = useState({
@@ -35,7 +18,6 @@ export default function VirtualWorld() {
   })
 
   const [selectedLandscape, setSelectedLandscape] = useState('underground-winter')
-  const [scrapyardMode, setScrapyardMode] = useState(false)
 
   const premadeLandscapes = [
     {
@@ -133,20 +115,11 @@ export default function VirtualWorld() {
               🌍 HARMONY VIRTUAL UNIVERSE
             </CardTitle>
             <div className="text-center text-2xl text-cyan-300 font-bold">
-              8K Ultra Graphics • Unlimited Creation • Multiplayer Sandbox • Integrated Builder
+              8K Ultra Graphics • Unlimited Creation • Multiplayer Sandbox
             </div>
           </CardHeader>
-        </Card>
-
-        <Tabs defaultValue="world" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="world">🌍 Virtual World</TabsTrigger>
-            <TabsTrigger value="builder">🏔️ Landscape Builder</TabsTrigger>
-            <TabsTrigger value="scrapyard">♻️ Aura Scrapyard</TabsTrigger>
-            <TabsTrigger value="explorer">🚀 World Explorer</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="world" className="space-y-6">
+          <CardContent className="space-y-8">
+            
             {/* World Statistics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center p-4 bg-cyan-900/50 rounded-lg border-2 border-cyan-500/50">
@@ -223,6 +196,20 @@ export default function VirtualWorld() {
                     <div className="text-lg text-blue-300">
                       Engine: {worldState.gameEngine}
                     </div>
+                    <div className="grid grid-cols-3 gap-4 text-sm">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-green-400">8K</div>
+                        <div>Ultra Graphics</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-purple-400">∞</div>
+                        <div>Cloud Power</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-yellow-400">VR</div>
+                        <div>Ready</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -237,120 +224,34 @@ export default function VirtualWorld() {
                 </div>
               )}
             </div>
-          </TabsContent>
 
-          <TabsContent value="builder" className="space-y-6">
-            <LandscapeBuilderRestored />
-          </TabsContent>
+            {/* Game Engine Features */}
+            <div className="bg-black/50 rounded-lg p-6 border-2 border-cyan-500/30">
+              <h3 className="text-2xl font-bold text-cyan-400 mb-4 text-center">
+                🚀 HARMONY QUANTUM ENGINE FEATURES
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  'Ray Tracing 8K', 'Cloud Processing', 'VR/AR Ready', 'Multiplayer 10K+',
+                  'Physics Engine', 'AI Creatures', 'Dynamic Weather', 'Infinite Worlds'
+                ].map((feature, index) => (
+                  <Badge key={index} className="bg-gradient-to-r from-cyan-600 to-blue-600 p-3 text-center text-white">
+                    {feature}
+                  </Badge>
+                ))}
+              </div>
+            </div>
 
-          <TabsContent value="scrapyard" className="space-y-6">
-            <Card className="border-green-500/30 bg-green-900/20">
-              <CardHeader>
-                <CardTitle className="text-green-400 flex items-center gap-2">
-                  <Recycle className="h-6 w-6" />
-                  ♻️ INTEGRATED AURA LAND SCRAPYARD
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center space-y-6">
-                  <div className="text-6xl">♻️</div>
-                  <h3 className="text-2xl font-bold text-green-400">Recycle • Rebuild • Regenerate</h3>
-                  <p className="text-muted-foreground">
-                    Transform waste into resources for your virtual world creations
-                  </p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <Card className="border-blue-500/30 bg-blue-900/20">
-                      <CardContent className="p-6 text-center">
-                        <Hammer className="h-8 w-8 text-blue-400 mx-auto mb-4" />
-                        <h4 className="text-lg font-bold text-blue-400 mb-2">Metal Recycling</h4>
-                        <p className="text-sm text-blue-300">Convert scrap metal into building materials</p>
-                        <Badge className="mt-2 bg-blue-600">150 GAiA per ton</Badge>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card className="border-purple-500/30 bg-purple-900/20">
-                      <CardContent className="p-6 text-center">
-                        <Palette className="h-8 w-8 text-purple-400 mx-auto mb-4" />
-                        <h4 className="text-lg font-bold text-purple-400 mb-2">Plastic Transformation</h4>
-                        <p className="text-sm text-purple-300">Turn plastic waste into decorative elements</p>
-                        <Badge className="mt-2 bg-purple-600">85 GAiA per ton</Badge>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card className="border-orange-500/30 bg-orange-900/20">
-                      <CardContent className="p-6 text-center">
-                        <Zap className="h-8 w-8 text-orange-400 mx-auto mb-4" />
-                        <h4 className="text-lg font-bold text-orange-400 mb-2">Electronic Salvage</h4>
-                        <p className="text-sm text-orange-300">Extract rare materials for tech components</p>
-                        <Badge className="mt-2 bg-orange-600">320 GAiA per device</Badge>
-                      </CardContent>
-                    </Card>
-                  </div>
-                  
-                  <Button 
-                    onClick={() => setScrapyardMode(true)}
-                    className="bg-green-600 hover:bg-green-700 text-lg px-8 py-4"
-                  >
-                    <Recycle className="h-6 w-6 mr-2" />
-                    Start Recycling Process
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="explorer" className="space-y-6">
-            <Card className="border-yellow-500/30 bg-yellow-900/20">
-              <CardHeader>
-                <CardTitle className="text-yellow-400 flex items-center gap-2">
-                  <Star className="h-6 w-6" />
-                  🚀 WORLD EXPLORER MODE
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center space-y-6">
-                  <div className="text-6xl">🗺️</div>
-                  <h3 className="text-2xl font-bold text-yellow-400">Discover • Explore • Conquer</h3>
-                  <p className="text-muted-foreground">
-                    Navigate through infinite worlds with your custom-built landscapes
-                  </p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-4">
-                      <h4 className="text-lg font-bold text-cyan-400">🌍 World Features</h4>
-                      <div className="space-y-2 text-sm text-cyan-300">
-                        <div>• Infinite procedural generation</div>
-                        <div>• Multi-dimensional exploration</div>
-                        <div>• Resource discovery system</div>
-                        <div>• Hidden treasure locations</div>
-                        <div>• Mythical creature encounters</div>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      <h4 className="text-lg font-bold text-purple-400">⚡ Explorer Tools</h4>
-                      <div className="space-y-2 text-sm text-purple-300">
-                        <div>• Quantum compass navigation</div>
-                        <div>• Landscape modification tools</div>
-                        <div>• Environmental scanner</div>
-                        <div>• Portal creation system</div>
-                        <div>• Time manipulation abilities</div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <Button 
-                    className="bg-yellow-600 hover:bg-yellow-700 text-lg px-8 py-4"
-                  >
-                    <Rocket className="h-6 w-6 mr-2" />
-                    Launch Explorer Mode
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+            <div className="text-center">
+              <div className="text-4xl font-black text-cyan-400 mb-2">
+                🌌 UNLIMITED VIRTUAL REALITY 🌌
+              </div>
+              <div className="text-xl text-cyan-300">
+                Create • Explore • Conquer • Build Your Own Universe
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

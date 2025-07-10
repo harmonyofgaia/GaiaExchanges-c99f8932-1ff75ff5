@@ -1,7 +1,7 @@
-
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
+  Home, 
   Wallet, 
   Gamepad2, 
   TrendingUp, 
@@ -15,6 +15,7 @@ import {
   ChevronRight,
   Globe,
   Coins,
+  Mountain,
   Palette,
   Crown,
   ShoppingCart,
@@ -55,13 +56,16 @@ const AppSidebar = () => {
   }, [])
 
   const baseMenuItems = [
-    { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'main' },
+    { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
+    { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
     { icon: Gamepad2, label: 'Gaming Hub', path: '/gaming', category: 'gaming' },
     { icon: TrendingUp, label: 'Exchange', path: '/exchange', category: 'trading' },
     { icon: ShoppingCart, label: 'Marketplace', path: '/marketplace', category: 'trading' },
     { icon: Music, label: 'Live Artist Platform', path: '/live-artist-platform', category: 'media' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
+    { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
+    { icon: Palette, label: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', category: 'tools' },
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
     { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
