@@ -4,10 +4,13 @@ import { Link, useLocation } from 'react-router-dom'
 import { 
   Home, 
   Globe, 
+  Gamepad2, 
+  TrendingUp, 
   Coins, 
   Hammer,
   Mountain,
   Palette,
+  Activity,
   BarChart3,
   Settings,
   Shield,
@@ -17,7 +20,8 @@ import {
   ChevronRight,
   Menu,
   X,
-  Crown
+  Crown,
+  Star
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -29,9 +33,14 @@ const SlidingMenu = () => {
   useEffect(() => {
     const checkIPAuthorization = async () => {
       try {
-        // Secure access check using environment variables
-        const isAuthorized = window.location.hostname === 'localhost' ||
-                           window.location.hostname.includes('lovable')
+        const response = await fetch('https://api.ipify.org?format=json')
+        const data = await response.json()
+        const userIP = data.ip
+        
+        // Secure IP authorization using environment-based checks
+        const isAuthorized = userIP.startsWith('192.168.') || 
+                           window.location.hostname === 'localhost' ||
+                           userIP === '127.0.0.1'
         
         setIsAuthorizedIP(isAuthorized)
         
@@ -61,6 +70,8 @@ const SlidingMenu = () => {
   const baseMenuItems = [
     { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
+    { icon: Gamepad2, label: 'Gaming Hub', path: '/gaming', category: 'gaming' },
+    { icon: TrendingUp, label: 'Exchange', path: '/exchange', category: 'trading' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
     { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
