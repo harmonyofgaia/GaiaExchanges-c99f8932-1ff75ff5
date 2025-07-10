@@ -39,6 +39,7 @@ import NFTGreenAnimalPlatform from '@/pages/NFTGreenAnimalPlatform'
 import AuraLandScrapyard from '@/pages/AuraLandScrapyard'
 import CoinCrafter from '@/pages/CoinCrafter'
 import VirtualWorld from '@/pages/VirtualWorld'
+import LiveTracking from '@/pages/LiveTracking'
 import SystemStatus from '@/pages/SystemStatus'
 import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
 import About from '@/pages/About'
@@ -60,12 +61,22 @@ function App() {
         <Router>
           <SidebarProvider>
             <div className="min-h-screen bg-background text-foreground">
+              {/* Master System Orchestrator - Ensures all systems keep growing */}
               <MasterSystemOrchestrator />
+              
+              {/* Background Media Engine */}
               <BackgroundMediaEngine />
+              
+              {/* Background Media Controller */}
               <BackgroundMediaController />
+              
+              {/* Advanced Auth System - Front Gate */}
               <AdvancedAuthSystem />
+              
+              {/* Sliding Menu */}
               <SlidingMenu />
               
+              {/* Main Content Area */}
               <div className="flex flex-col min-h-screen">
                 <Navbar />
                 <main className="flex-1 container mx-auto px-4 py-6">
@@ -87,20 +98,24 @@ function App() {
                     <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
                     <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
                     
+                    {/* Game Pages - Consolidated */}
                     <Route path="/game/gaia-fantasy-mmorpg" element={<GaiaFantasyMMORPG />} />
                     <Route path="/game/snake-arena" element={<SnakeArenaGame />} />
                     <Route path="/game" element={<Game />} />
                     <Route path="/gaming" element={<Gaming />} />
                     
+                    {/* Advanced feature routes */}
                     <Route path="/ultimate-features" element={<UltimateFeatureHub />} />
                     <Route path="/nft-green-animals" element={<NFTGreenAnimalPlatform />} />
                     <Route path="/virtual-world" element={<VirtualWorld />} />
+                    <Route path="/live-tracking" element={<LiveTracking />} />
                     <Route path="/system-status" element={<SystemStatus />} />
                     <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/pricing" element={<Pricing />} />
                     
+                    {/* Admin Tools - Consolidated */}
                     <Route path="/admin-crafted-tools" element={<AdminCraftedTools />} />
                     <Route path="/admin-security-overview" element={<AdminSecurityOverview />} />
                   </Routes>
