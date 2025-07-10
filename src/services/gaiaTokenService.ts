@@ -1,5 +1,4 @@
 
-
 export interface TokenData {
   price: number
   volume24h: number
@@ -86,29 +85,6 @@ class GaiaTokenService {
     }
   }
 
-  // Added missing burnTokens method
-  async burnTokens(amount: number, reason: string): Promise<boolean> {
-    try {
-      console.log('🔥 BURNING GAiA TOKENS:', {
-        amount,
-        reason,
-        contract: this.contractAddress,
-        wallet: this.walletAddress
-      })
-      
-      // Simulate token burning process
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      console.log('✅ GAiA Tokens Burned Successfully:', amount)
-      console.log('📝 Burn Reason:', reason)
-      
-      return true
-    } catch (error) {
-      console.error('❌ Token Burn Failed:', error)
-      return false
-    }
-  }
-
   private generateSimulatedData(): TokenData {
     const basePrice = 0.000125
     const priceVariation = (Math.random() - 0.5) * 0.00002
@@ -163,4 +139,3 @@ class GaiaTokenService {
 }
 
 export const gaiaTokenService = new GaiaTokenService()
-
