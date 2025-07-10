@@ -83,8 +83,8 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/exchange" element={<Exchange />} />
+                    <Route path="/gaming" element={<Gaming />} />
                     <Route path="/marketplace" element={<Marketplace />} />
-                    <Route path="/live-artist-platform" element={<LiveArtistPlatform />} />
                     <Route path="/analytics" element={<Analytics />} />
                     <Route path="/swap" element={<Swap />} />
                     <Route path="/security" element={<Security />} />
@@ -98,15 +98,15 @@ function App() {
                     <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
                     <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
                     
-                    {/* Game Pages - Consolidated */}
+                    {/* New Game Pages */}
                     <Route path="/game/gaia-fantasy-mmorpg" element={<GaiaFantasyMMORPG />} />
                     <Route path="/game/snake-arena" element={<SnakeArenaGame />} />
                     <Route path="/game" element={<Game />} />
-                    <Route path="/gaming" element={<Gaming />} />
                     
                     {/* Advanced feature routes */}
                     <Route path="/ultimate-features" element={<UltimateFeatureHub />} />
                     <Route path="/nft-green-animals" element={<NFTGreenAnimalPlatform />} />
+                    <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
                     <Route path="/virtual-world" element={<VirtualWorld />} />
                     <Route path="/live-tracking" element={<LiveTracking />} />
                     <Route path="/system-status" element={<SystemStatus />} />
@@ -115,8 +115,11 @@ function App() {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/pricing" element={<Pricing />} />
                     
-                    {/* Admin Tools - Consolidated */}
+                    {/* Admin Tools */}
                     <Route path="/admin-crafted-tools" element={<AdminCraftedTools />} />
+                    
+                    {/* New Advanced Pages */}
+                    <Route path="/live-artist-platform" element={<LiveArtistPlatform />} />
                     <Route path="/admin-security-overview" element={<AdminSecurityOverview />} />
                   </Routes>
                 </main>
