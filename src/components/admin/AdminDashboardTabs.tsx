@@ -7,8 +7,6 @@ import { MediaLibraryManager } from './MediaLibraryManager'
 import { AIAnimalTrainingCenter } from './AIAnimalTrainingCenter'
 import { AdminPowerToolsCenter } from './AdminPowerToolsCenter'
 import { AdminTransactionControl } from './AdminTransactionControl'
-import { MatrixGaiaWallet } from '@/components/MatrixGaiaWallet'
-import { EnhancedBIOSProtection } from '@/components/security/EnhancedBIOSProtection'
 
 export function AdminDashboardTabs() {
   return (
