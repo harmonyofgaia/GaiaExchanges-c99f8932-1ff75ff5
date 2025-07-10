@@ -7,54 +7,63 @@ import { Progress } from '@/components/ui/progress'
 import { AlertTriangle, CheckCircle, Settings, Database, Zap, RefreshCw } from 'lucide-react'
 import { toast } from 'sonner'
 
+interface SystemIssue {
+  id: string
+  title: string
+  description: string
+  severity: 'critical' | 'high' | 'medium' | 'low'
+  status: 'pending' | 'in-progress' | 'completed'
+  category: string
+}
+
 export function CriticalSystemFixes() {
-  const [systemIssues, setSystemIssues] = useState([
+  const [systemIssues, setSystemIssues] = useState<SystemIssue[]>([
     {
       id: '1',
       title: 'Supabase Function Parameter Issue #1',
       description: 'Database function parameters not properly configured',
-      severity: 'critical' as const,
-      status: 'pending' as const,
+      severity: 'critical',
+      status: 'pending',
       category: 'database'
     },
     {
       id: '2', 
       title: 'Supabase Function Parameter Issue #2',
       description: 'Edge function parameter validation missing',
-      severity: 'critical' as const,
-      status: 'pending' as const,
+      severity: 'critical',
+      status: 'pending',
       category: 'database'
     },
     {
       id: '3',
       title: 'Supabase Function Parameter Issue #3', 
       description: 'RLS policy function parameters incorrect',
-      severity: 'critical' as const,
-      status: 'pending' as const,
+      severity: 'critical',
+      status: 'pending',
       category: 'database'
     },
     {
       id: '4',
       title: 'Supabase Function Parameter Issue #4',
       description: 'Trigger function parameters not set',
-      severity: 'critical' as const,
-      status: 'pending' as const,
+      severity: 'critical',
+      status: 'pending',
       category: 'database'
     },
     {
       id: '5',
       title: 'Navigation Dead Links',
       description: 'Remove all non-functional page links from navigation',
-      severity: 'medium' as const,
-      status: 'completed' as const,
+      severity: 'medium',
+      status: 'completed',
       category: 'navigation'
     },
     {
       id: '6',
       title: 'Build Error Resolution',
       description: 'Fix TypeScript compilation errors',
-      severity: 'high' as const,
-      status: 'completed' as const,
+      severity: 'high',
+      status: 'completed',
       category: 'build'
     }
   ])
@@ -75,7 +84,7 @@ export function CriticalSystemFixes() {
           setSystemIssues(prev => 
             prev.map(issue => 
               issue.status === 'pending' && Math.random() > 0.7 ?
-              { ...issue, status: 'in-progress' as const } :
+              { ...issue, status: 'in-progress' } :
               issue
             )
           )
@@ -90,7 +99,7 @@ export function CriticalSystemFixes() {
     setSystemIssues(prev =>
       prev.map(issue =>
         issue.id === issueId 
-          ? { ...issue, status: 'completed' as const }
+          ? { ...issue, status: 'completed' }
           : issue
       )
     )
