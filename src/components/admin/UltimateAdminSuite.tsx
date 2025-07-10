@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Crown, Zap, Eye, Globe, Cog, Activity, Target } from 'lucide-react'
+import { Shield, Crown, Zap, Eye, Globe, Cog, Activity, Target, Satellite } from 'lucide-react'
 import { UltimateSecurityCore } from './UltimateSecurityCore'
 import { QuantumTradingEngine } from './QuantumTradingEngine'
 import { DragonAIDefense } from './DragonAIDefense'
@@ -12,6 +12,7 @@ import { AutomationMaster } from './AutomationMaster'
 import { CreationToolsSuite } from './CreationToolsSuite'
 import { AnalyticsDashboard } from './AnalyticsDashboard'
 import { CriticalSystemFixes } from './CriticalSystemFixes'
+import { OmniscientGPSEngine } from '@/components/tracking/OmniscientGPSEngine'
 
 export function UltimateAdminSuite() {
   const [systemStatus, setSystemStatus] = useState({
@@ -104,11 +105,12 @@ export function UltimateAdminSuite() {
 
       {/* Ultimate Control Tabs */}
       <Tabs defaultValue="security" className="w-full">
-        <TabsList className="grid w-full grid-cols-8 bg-gradient-to-r from-purple-900/50 to-blue-900/50">
+        <TabsList className="grid w-full grid-cols-9 bg-gradient-to-r from-purple-900/50 to-blue-900/50">
           <TabsTrigger value="security" className="text-purple-400">🛡️ Security</TabsTrigger>
           <TabsTrigger value="trading" className="text-green-400">💰 Trading</TabsTrigger>
           <TabsTrigger value="dragon" className="text-red-400">🐉 Dragon AI</TabsTrigger>
           <TabsTrigger value="tracking" className="text-blue-400">👻 Tracking</TabsTrigger>
+          <TabsTrigger value="live-gps" className="text-cyan-400">🛰️ Live GPS</TabsTrigger>
           <TabsTrigger value="automation" className="text-yellow-400">⚡ Automation</TabsTrigger>
           <TabsTrigger value="creation" className="text-pink-400">🎨 Creation</TabsTrigger>
           <TabsTrigger value="analytics" className="text-cyan-400">📊 Analytics</TabsTrigger>
@@ -129,6 +131,20 @@ export function UltimateAdminSuite() {
 
         <TabsContent value="tracking" className="space-y-4">
           <InvisibleTrackingSystem />
+        </TabsContent>
+
+        <TabsContent value="live-gps" className="space-y-4">
+          <Card className="border-cyan-500/30 bg-gradient-to-br from-cyan-900/20 to-blue-900/20">
+            <CardHeader>
+              <CardTitle className="text-cyan-400 flex items-center gap-2">
+                <Satellite className="h-6 w-6" />
+                🛰️ Live GPS Tracking Command Center
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <OmniscientGPSEngine />
+            </CardContent>
+          </Card>
         </TabsContent>
 
         <TabsContent value="automation" className="space-y-4">

@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
@@ -26,6 +25,7 @@ import TransparentWallet from '@/pages/TransparentWallet'
 import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
 import LandscapeBuilder from '@/pages/LandscapeBuilder'
 import GaiaFighterGame from '@/pages/GaiaFighterGame'
+import Transparency from '@/pages/Transparency'
 
 // Game Pages
 import GaiaFantasyMMORPG from '@/pages/games/GaiaFantasyMMORPG'
@@ -38,7 +38,6 @@ import NFTGreenAnimalPlatform from '@/pages/NFTGreenAnimalPlatform'
 import AuraLandScrapyard from '@/pages/AuraLandScrapyard'
 import CoinCrafter from '@/pages/CoinCrafter'
 import VirtualWorld from '@/pages/VirtualWorld'
-import LiveTracking from '@/pages/LiveTracking'
 import SystemStatus from '@/pages/SystemStatus'
 import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
 import About from '@/pages/About'
@@ -84,6 +83,7 @@ function App() {
                     <Route path="/secure-vault" element={<SecureVault />} />
                     <Route path="/gaias-projects" element={<GaiasProjects />} />
                     <Route path="/transparent-wallet" element={<TransparentWallet />} />
+                    <Route path="/transparency" element={<Transparency />} />
                     <Route path="/coin-crafter" element={<GaiaCoinCrafter />} />
                     <Route path="/landscape-builder" element={<LandscapeBuilder />} />
                     <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
@@ -99,7 +99,6 @@ function App() {
                     <Route path="/nft-green-animals" element={<NFTGreenAnimalPlatform />} />
                     <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
                     <Route path="/virtual-world" element={<VirtualWorld />} />
-                    <Route path="/live-tracking" element={<LiveTracking />} />
                     <Route path="/system-status" element={<SystemStatus />} />
                     <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
                     <Route path="/about" element={<About />} />
