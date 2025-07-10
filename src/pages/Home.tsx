@@ -1,19 +1,12 @@
 
-import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Globe, Heart, Zap, Users, Shield, Gamepad2, Wallet, Eye, Image } from 'lucide-react'
+import { Globe, Heart, Zap, Users, Shield, Gamepad2 } from 'lucide-react'
 import HoverSidebar from '@/components/HoverSidebar'
 import { GAIA_TOKEN } from '@/constants/gaia'
-import { WalletConnectionModal } from '@/components/wallet/WalletConnectionModal'
-import { SitePreviewModal } from '@/components/ui/SitePreviewModal'
-import { MusicPlayer } from '@/components/MusicPlayer'
 
 const Home = () => {
-  const [showWalletModal, setShowWalletModal] = useState(false)
-  const [showPreviewModal, setShowPreviewModal] = useState(false)
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
       <HoverSidebar />
@@ -35,24 +28,14 @@ const Home = () => {
                 <Badge className="bg-green-600 text-lg px-6 py-2">
                   Official GAiA Token Platform
                 </Badge>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                  <Button 
-                    onClick={() => setShowWalletModal(true)}
-                    className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 h-12"
-                  >
-                    <Wallet className="h-5 w-5 mr-2" />
-                    Connect Wallet
-                  </Button>
-                  <Button 
-                    onClick={() => setShowPreviewModal(true)}
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 h-12"
-                  >
-                    <Image className="h-5 w-5 mr-2" />
-                    Preview Site
-                  </Button>
-                  <Button className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 h-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                  <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 h-12">
                     <Gamepad2 className="h-5 w-5 mr-2" />
                     Start Gaming
+                  </Button>
+                  <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 h-12">
+                    <Zap className="h-5 w-5 mr-2" />
+                    Access Wallet
                   </Button>
                 </div>
               </div>
@@ -93,12 +76,12 @@ const Home = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-purple-400">
                   <Shield className="h-6 w-6" />
-                  Quantum Security
+                  Secure Trading
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Advanced quantum-level security protocols protect your assets and transactions.
+                  Advanced security protocols protect your assets and transactions.
                 </p>
               </CardContent>
             </Card>
@@ -147,18 +130,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-      <WalletConnectionModal 
-        isOpen={showWalletModal} 
-        onClose={() => setShowWalletModal(false)} 
-      />
-      
-      <SitePreviewModal 
-        isOpen={showPreviewModal} 
-        onClose={() => setShowPreviewModal(false)} 
-      />
-
-      <MusicPlayer />
     </div>
   )
 }

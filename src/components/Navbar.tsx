@@ -10,7 +10,7 @@ import {
   Eye,
   DollarSign,
   ArrowUpDown,
-  Gamepad2,
+  ShoppingCart,
   Settings
 } from 'lucide-react'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
@@ -28,18 +28,20 @@ export function Navbar() {
         const userIP = data.ip
         
         const authorizedIPs = [
-          atob('MTkyLjE2OC4xLjEyMQ=='), // 192.168.1.121 (quantum-encoded)
-          atob('MTAuMTM0LjIzMS4zNA=='),  // 10.134.231.34 (quantum-encoded)
-          '127.0.0.1'
+          '192.168.1.100',
+          '192.168.1.101',
+          '127.0.0.1',
+          'localhost'
         ]
         
         const isAuthorized = authorizedIPs.includes(userIP) || 
+                           userIP.startsWith('192.168.') || 
                            window.location.hostname === 'localhost'
         
         setIsAuthorizedIP(isAuthorized)
         
       } catch (error) {
-        console.log('Quantum security protection active')
+        console.log('IP check failed, allowing local access only')
         setIsAuthorizedIP(window.location.hostname === 'localhost')
       }
     }
@@ -49,14 +51,17 @@ export function Navbar() {
 
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
+    { path: '/analytics', label: 'Analytics', icon: BarChart3 },
     { path: '/gaias-projects', label: 'Gaia\'s Projects', icon: Leaf },
     { path: '/transparent-wallet', label: 'Transparency', icon: Eye },
+    { path: '/landscape-builder', label: 'Landscape Builder', icon: Settings },
     { path: '/security', label: 'Security', icon: Shield }
   ]
 
   const topMenuItems = [
-    { path: '/gaming', label: 'Gaming Hub', icon: Gamepad2 },
-    { path: '/exchange', label: 'Exchange', icon: DollarSign, hasSubmenu: true }
+    { path: '/exchange', label: 'Exchange', icon: DollarSign, hasSubmenu: true },
+    { path: '/marketplace', label: 'Marketplace', icon: ShoppingCart },
+    { path: '/live-artist-platform', label: 'Live Artists', icon: Eye }
   ]
 
   const handleLogoClick = () => {
@@ -157,7 +162,7 @@ export function Navbar() {
             </Badge>
             {isAuthorizedIP && (
               <Badge className="bg-blue-600 text-white animate-pulse">
-                🛡️ QUANTUM ADMIN VERIFIED
+                🛡️ ADMIN IP VERIFIED
               </Badge>
             )}
           </div>

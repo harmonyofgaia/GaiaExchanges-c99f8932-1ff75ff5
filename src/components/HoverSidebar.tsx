@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
+  Home, 
   Wallet, 
   Gamepad2, 
   TrendingUp, 
@@ -11,7 +12,10 @@ import {
   DollarSign, 
   Download,
   Hammer,
+  Activity,
   BarChart3,
+  Shield,
+  User,
   ChevronRight,
   Globe
 } from 'lucide-react'
@@ -20,15 +24,17 @@ const HoverSidebar = () => {
   const [isHovered, setIsHovered] = useState(false)
   const location = useLocation()
 
-  // CLEANED UP MENU - Only working pages, removed dead links
   const menuItems = [
+    { icon: Home, label: 'Home', path: '/' },
     { icon: Wallet, label: 'Wallet', path: '/wallet' },
     { icon: Globe, label: 'Virtual World', path: '/virtual-world' },
     { icon: Gamepad2, label: 'Gaming', path: '/gaming' },
     { icon: TrendingUp, label: 'Exchange', path: '/exchange' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter' },
+    { icon: Activity, label: 'Live Tracking', path: '/live-tracking' },
     { icon: BarChart3, label: 'System Status', path: '/system-status' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status' },
+    { icon: Shield, label: 'Immortal Security', path: '/immortal-security' },
     { icon: Info, label: 'About', path: '/about' },
     { icon: Mail, label: 'Contact', path: '/contact' },
     { icon: DollarSign, label: 'Pricing', path: '/pricing' },
