@@ -33,7 +33,6 @@ import SnakeArenaGame from '@/pages/games/SnakeArenaGame'
 import Game from '@/pages/Game'
 
 // Advanced pages
-import UltimateFeatureHub from '@/pages/UltimateFeatureHub'
 import NFTGreenAnimalPlatform from '@/pages/NFTGreenAnimalPlatform'
 import AuraLandScrapyard from '@/pages/AuraLandScrapyard'
 import CoinCrafter from '@/pages/CoinCrafter'
@@ -95,7 +94,6 @@ function App() {
                     <Route path="/game" element={<Game />} />
                     
                     {/* Advanced feature routes */}
-                    <Route path="/ultimate-features" element={<UltimateFeatureHub />} />
                     <Route path="/nft-green-animals" element={<NFTGreenAnimalPlatform />} />
                     <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
                     <Route path="/virtual-world" element={<VirtualWorld />} />
