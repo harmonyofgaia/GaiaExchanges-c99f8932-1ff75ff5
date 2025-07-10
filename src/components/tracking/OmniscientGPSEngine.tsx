@@ -50,6 +50,87 @@ export function OmniscientGPSEngine() {
     return () => clearInterval(powerGrowth)
   }, [])
 
+  // Function declarations moved before usage
+  const generateRealisticLocation = (): LocationData => {
+    // Generate realistic coordinates for major cities (avoiding ocean drops)
+    const majorCities = [
+      { lat: 40.7128, lng: -74.0060, name: 'New York, USA' },
+      { lat: 51.5074, lng: -0.1278, name: 'London, UK' },
+      { lat: 35.6762, lng: 139.6503, name: 'Tokyo, Japan' },
+      { lat: 37.7749, lng: -122.4194, name: 'San Francisco, USA' },
+      { lat: 52.5200, lng: 13.4050, name: 'Berlin, Germany' },
+      { lat: -33.8688, lng: 151.2093, name: 'Sydney, Australia' },
+      { lat: 55.7558, lng: 37.6176, name: 'Moscow, Russia' },
+      { lat: 39.9042, lng: 116.4074, name: 'Beijing, China' },
+      { lat: 48.8566, lng: 2.3522, name: 'Paris, France' },
+      { lat: 41.9028, lng: 12.4964, name: 'Rome, Italy' }
+    ]
+    
+    const randomCity = majorCities[Math.floor(Math.random() * majorCities.length)]
+    
+    return {
+      latitude: randomCity.lat + (Math.random() - 0.5) * 0.1,
+      longitude: randomCity.lng + (Math.random() - 0.5) * 0.1,
+      accuracy: Math.random() * 5 + 1,
+      altitude: Math.random() * 100 + 50,
+      speed: Math.random() * 60,
+      heading: Math.random() * 360,
+      timestamp: Date.now(),
+      source: 'ADVANCED_TRACKING_SYSTEM',
+      confidence: 85 + Math.random() * 14
+    }
+  }
+
+  const generatePredictedPath = (currentLocation: LocationData): LocationData[] => {
+    const path: LocationData[] = []
+    let lat = currentLocation.latitude
+    let lng = currentLocation.longitude
+    
+    for (let i = 1; i <= 10; i++) {
+      lat += (Math.random() - 0.5) * 0.001 * i
+      lng += (Math.random() - 0.5) * 0.001 * i
+      
+      path.push({
+        latitude: lat,
+        longitude: lng,
+        accuracy: currentLocation.accuracy + i * 2,
+        timestamp: Date.now() + i * 60000,
+        source: 'PREDICTIVE_AI_ALGORITHM',
+        confidence: Math.max(50, 95 - i * 5)
+      })
+    }
+    
+    return path
+  }
+
+  const updateTargetLocation = (id: string, location: LocationData) => {
+    setTargets(prev => {
+      const existingIndex = prev.findIndex(t => t.identifier === id)
+      
+      if (existingIndex >= 0) {
+        const updated = [...prev]
+        updated[existingIndex] = {
+          ...updated[existingIndex],
+          currentLocation: location,
+          locationHistory: [...updated[existingIndex].locationHistory, location].slice(-50),
+          lastUpdate: Date.now()
+        }
+        return updated
+      } else {
+        const newTarget: TrackingTarget = {
+          id: crypto.randomUUID(),
+          identifier: id,
+          currentLocation: location,
+          locationHistory: [location],
+          predictedPath: generatePredictedPath(location),
+          trackingMethod: location.source,
+          lastUpdate: Date.now()
+        }
+        return [...prev, newTarget]
+      }
+    })
+  }
+
   const startTracking = async (identifier: string) => {
     console.log(`🎯 INITIATING OMNISCIENT TRACKING: ${identifier}`)
     setIsTracking(true)
@@ -109,86 +190,6 @@ export function OmniscientGPSEngine() {
         description: `Advanced positioning for: ${identifier}`,
         duration: 5000
       })
-    }
-
-    const generateRealisticLocation = (): LocationData => {
-      // Generate realistic coordinates for major cities (avoiding ocean drops)
-      const majorCities = [
-        { lat: 40.7128, lng: -74.0060, name: 'New York, USA' },
-        { lat: 51.5074, lng: -0.1278, name: 'London, UK' },
-        { lat: 35.6762, lng: 139.6503, name: 'Tokyo, Japan' },
-        { lat: 37.7749, lng: -122.4194, name: 'San Francisco, USA' },
-        { lat: 52.5200, lng: 13.4050, name: 'Berlin, Germany' },
-        { lat: -33.8688, lng: 151.2093, name: 'Sydney, Australia' },
-        { lat: 55.7558, lng: 37.6176, name: 'Moscow, Russia' },
-        { lat: 39.9042, lng: 116.4074, name: 'Beijing, China' },
-        { lat: 48.8566, lng: 2.3522, name: 'Paris, France' },
-        { lat: 41.9028, lng: 12.4964, name: 'Rome, Italy' }
-      ]
-      
-      const randomCity = majorCities[Math.floor(Math.random() * majorCities.length)]
-      
-      return {
-        latitude: randomCity.lat + (Math.random() - 0.5) * 0.1,
-        longitude: randomCity.lng + (Math.random() - 0.5) * 0.1,
-        accuracy: Math.random() * 5 + 1,
-        altitude: Math.random() * 100 + 50,
-        speed: Math.random() * 60,
-        heading: Math.random() * 360,
-        timestamp: Date.now(),
-        source: trackingMethods[Math.floor(Math.random() * trackingMethods.length)],
-        confidence: 85 + Math.random() * 14
-      }
-    }
-
-    const updateTargetLocation = (id: string, location: LocationData) => {
-      setTargets(prev => {
-        const existingIndex = prev.findIndex(t => t.identifier === id)
-        
-        if (existingIndex >= 0) {
-          const updated = [...prev]
-          updated[existingIndex] = {
-            ...updated[existingIndex],
-            currentLocation: location,
-            locationHistory: [...updated[existingIndex].locationHistory, location].slice(-50),
-            lastUpdate: Date.now()
-          }
-          return updated
-        } else {
-          const newTarget: TrackingTarget = {
-            id: crypto.randomUUID(),
-            identifier: id,
-            currentLocation: location,
-            locationHistory: [location],
-            predictedPath: generatePredictedPath(location),
-            trackingMethod: location.source,
-            lastUpdate: Date.now()
-          }
-          return [...prev, newTarget]
-        }
-      })
-    }
-
-    const generatePredictedPath = (currentLocation: LocationData): LocationData[] => {
-      const path: LocationData[] = []
-      let lat = currentLocation.latitude
-      let lng = currentLocation.longitude
-      
-      for (let i = 1; i <= 10; i++) {
-        lat += (Math.random() - 0.5) * 0.001 * i
-        lng += (Math.random() - 0.5) * 0.001 * i
-        
-        path.push({
-          latitude: lat,
-          longitude: lng,
-          accuracy: currentLocation.accuracy + i * 2,
-          timestamp: Date.now() + i * 60000,
-          source: 'PREDICTIVE_AI_ALGORITHM',
-          confidence: Math.max(50, 95 - i * 5)
-        })
-      }
-      
-      return path
     }
 
     setIsTracking(false)
