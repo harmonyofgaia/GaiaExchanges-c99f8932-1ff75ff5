@@ -28,18 +28,18 @@ export const CallToAction = () => {
               <span className="relative z-10">Start Epic Gaming</span>
             </Button>
           </Link>
-          <Link to="/gaias-exchange">
+          <Link to="/exchange">
             <Button variant="outline" className="border-2 border-green-500 text-green-400 hover:bg-green-500/10 text-xl px-12 py-4 shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden group">
               <span className="absolute inset-0 bg-gradient-to-r from-green-400/5 to-transparent group-hover:from-green-400/10 transition-all duration-300" />
               <TrendingUp className="h-6 w-6 mr-2 relative z-10" />
               <span className="relative z-10">Trade GAiA Tokens</span>
             </Button>
           </Link>
-          <Link to="/artist-streaming">
+          <Link to="/virtual-world">
             <Button className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-xl px-12 py-4 shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden group">
               <span className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent group-hover:from-white/20 transition-all duration-300" />
               <Music className="h-6 w-6 mr-2 relative z-10" />
-              <span className="relative z-10">Artist Streaming</span>
+              <span className="relative z-10">Virtual World</span>
             </Button>
           </Link>
         </div>
