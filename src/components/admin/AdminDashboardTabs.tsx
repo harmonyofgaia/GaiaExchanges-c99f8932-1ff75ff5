@@ -43,13 +43,10 @@ export function AdminDashboardTabs() {
 
       <TabsContent value="transactions" className="space-y-6">
         <AdminTransactionControl />
-        <div className="mt-8">
-          <MatrixGaiaWallet />
-        </div>
       </TabsContent>
 
       <TabsContent value="security" className="space-y-6">
-        <EnhancedBIOSProtection />
+        <BIOSProtection />
       </TabsContent>
     </Tabs>
   )

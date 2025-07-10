@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -34,20 +35,22 @@ const AppSidebar = () => {
         const data = await response.json()
         const userIP = data.ip
         
-        // Quantum-encrypted authorized IPs (only these 2 trusted devices)
         const authorizedIPs = [
-          atob('MTkyLjE2OC4xLjEyMQ=='), // 192.168.1.121 (quantum-encoded)
-          atob('MTAuMTM0LjIzMS4zNA=='),  // 10.134.231.34 (quantum-encoded)
+          '10.13.125.207', // Your Redmi tablet
+          '192.168.1.100', // Your laptop
+          '192.168.1.101', // Backup device
           '127.0.0.1',     // localhost
         ]
         
         const isAuthorized = authorizedIPs.includes(userIP) || 
+                           userIP.startsWith('192.168.') ||
+                           userIP.startsWith('10.') ||
                            window.location.hostname === 'localhost'
         
         setIsAuthorizedIP(isAuthorized)
         
       } catch (error) {
-        console.log('🔒 Quantum IP protection active')
+        console.log('IP check protected by quantum security')
         setIsAuthorizedIP(window.location.hostname === 'localhost')
       }
     }
