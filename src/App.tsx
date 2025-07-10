@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
@@ -8,9 +9,7 @@ import SlidingMenu from '@/components/SlidingMenu'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'
-import { BackgroundMediaController } from '@/components/media/BackgroundMediaController'
 import { MasterSystemOrchestrator } from '@/components/system/MasterSystemOrchestrator'
-import { AdvancedAuthSystem } from '@/components/auth/AdvancedAuthSystem'
 
 // Pages - Keep all existing pages
 import Index from '@/pages/Index'
@@ -46,11 +45,9 @@ import About from '@/pages/About'
 import Contact from '@/pages/Contact'
 import Pricing from '@/pages/Pricing'
 
-// New pages
+// New Admin and Marketplace Pages
 import AdminCraftedTools from '@/pages/AdminCraftedTools'
 import Marketplace from '@/pages/Marketplace'
-import LiveArtistPlatform from '@/pages/LiveArtistPlatform'
-import AdminSecurityOverview from '@/pages/AdminSecurityOverview'
 
 const queryClient = new QueryClient()
 
@@ -66,12 +63,6 @@ function App() {
               
               {/* Background Media Engine */}
               <BackgroundMediaEngine />
-              
-              {/* Background Media Controller */}
-              <BackgroundMediaController />
-              
-              {/* Advanced Auth System - Front Gate */}
-              <AdvancedAuthSystem />
               
               {/* Sliding Menu */}
               <SlidingMenu />
@@ -117,10 +108,6 @@ function App() {
                     
                     {/* Admin Tools */}
                     <Route path="/admin-crafted-tools" element={<AdminCraftedTools />} />
-                    
-                    {/* New Advanced Pages */}
-                    <Route path="/live-artist-platform" element={<LiveArtistPlatform />} />
-                    <Route path="/admin-security-overview" element={<AdminSecurityOverview />} />
                   </Routes>
                 </main>
               </div>

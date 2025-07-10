@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -37,11 +38,11 @@ export function Navbar() {
                            userIP.startsWith('192.168.') || 
                            window.location.hostname === 'localhost'
         
-        setIsAuthorizedIP(isAuthorized)
+        setIsAuthorized(isAuthorized)
         
       } catch (error) {
         console.log('IP check failed, allowing local access only')
-        setIsAuthorizedIP(window.location.hostname === 'localhost')
+        setIsAuthorized(window.location.hostname === 'localhost')
       }
     }
 
