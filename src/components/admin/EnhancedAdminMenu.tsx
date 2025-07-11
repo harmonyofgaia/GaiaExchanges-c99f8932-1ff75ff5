@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -197,22 +196,142 @@ export function EnhancedAdminMenu() {
               </div>
             </div>
           )}
-          
-          {activeSection !== 'overview' && (
-            <div className="text-center p-8">
-              <div className="text-6xl mb-4">🚧</div>
-              <h3 className="text-xl font-bold text-yellow-400 mb-2">
-                {adminSections.find(s => s.id === activeSection)?.label} Module
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                This advanced control panel is being loaded...
-              </p>
-              <Button className="bg-purple-600 hover:bg-purple-700">
-                Initialize {adminSections.find(s => s.id === activeSection)?.label}
-              </Button>
-            </div>
-          )}
-        </CardContent>
+        
+        {activeSection === 'creatures' && (
+          <div className="space-y-6">
+            <Card className="border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30">
+              <CardHeader>
+                <CardTitle className="text-red-400 text-center text-3xl">
+                  🛡️ DEFENSE CREATURE ARMY
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center p-6">
+                  <div className="text-6xl mb-4">🐉🦅🐺🦁🐒</div>
+                  <div className="text-xl font-bold text-red-400 mb-2">
+                    LEGENDARY GUARDIANS ACTIVE
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    7 Self-trained creatures protecting the system with maximum power
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {activeSection === 'search' && (
+          <div className="space-y-6">
+            <Card className="border-blue-500/50 bg-gradient-to-r from-blue-900/30 to-cyan-900/30">
+              <CardHeader>
+                <CardTitle className="text-blue-400 text-center text-3xl">
+                  🔍 SEARCH ENGINE GALAXY
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center p-6">
+                  <div className="text-6xl mb-4">🌐🔍📡🛰️</div>
+                  <div className="text-xl font-bold text-blue-400 mb-2">
+                    12 SEARCH ENGINES ACTIVE
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Global coverage • Deep web • Blockchain • AI analysis
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {activeSection === 'tracking' && (
+          <div className="space-y-6">
+            <Card className="border-purple-500/50 bg-gradient-to-r from-purple-900/30 to-pink-900/30">
+              <CardHeader>
+                <CardTitle className="text-purple-400 text-center text-3xl">
+                  📊 TRACK & TRACE COMMAND
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center p-6">
+                  <div className="text-6xl mb-4">🎯📍🛰️🔍</div>
+                  <div className="text-xl font-bold text-purple-400 mb-2">
+                    REAL-TIME TRACKING ACTIVE
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    IP tracking • Transaction monitoring • Threat elimination
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {activeSection === 'shows' && (
+          <div className="space-y-6">
+            <Card className="border-pink-500/50 bg-gradient-to-r from-pink-900/30 to-red-900/30">
+              <CardHeader>
+                <CardTitle className="text-pink-400 text-center text-3xl">
+                  🎬 ARTIST SHOWS GALAXY
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center p-6">
+                  <div className="text-6xl mb-4">🎵🎭🎪🎨</div>
+                  <div className="text-xl font-bold text-pink-400 mb-2">
+                    LIVE ENTERTAINMENT ACTIVE
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Token-based shows • Live streaming • Artist rewards
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {activeSection === 'vault' && (
+          <div className="space-y-6">
+            <Card className="border-green-500/50 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
+              <CardHeader>
+                <CardTitle className="text-green-400 text-center text-3xl">
+                  🏦 COMMUNITY VAULT CENTRAL
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center p-6">
+                  <div className="text-6xl mb-4">💰🎁🏆⭐</div>
+                  <div className="text-xl font-bold text-green-400 mb-2">
+                    2.4M GAIA VAULT BALANCE
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Weekly giveaways • Rewards distribution • Community prizes
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+        
+        {(activeSection !== 'overview' && 
+          activeSection !== 'creatures' && 
+          activeSection !== 'search' && 
+          activeSection !== 'tracking' && 
+          activeSection !== 'shows' && 
+          activeSection !== 'vault') && (
+          <div className="text-center p-8">
+            <div className="text-6xl mb-4">🚧</div>
+            <h3 className="text-xl font-bold text-yellow-400 mb-2">
+              {adminSections.find(s => s.id === activeSection)?.label} Module
+            </h3>
+            <p className="text-muted-foreground mb-4">
+              This advanced control panel is being loaded...
+            </p>
+            <Button className="bg-purple-600 hover:bg-purple-700">
+              Initialize {adminSections.find(s => s.id === activeSection)?.label}
+            </Button>
+          </div>
+        )}
+      </CardContent>
       </Card>
 
       {/* Quick Actions */}

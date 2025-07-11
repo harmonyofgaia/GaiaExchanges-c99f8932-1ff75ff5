@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -16,6 +15,9 @@ import { CriticalSystemFixes } from './CriticalSystemFixes'
 import { UserManagementSystemRefactored } from './UserManagementSystemRefactored'
 import { AllFeaturesIntegrated } from '@/components/AllFeaturesIntegrated'
 import { ComprehensiveSystemIntegration } from '@/components/ComprehensiveSystemIntegration'
+import { DefenseCreatureArmy } from './DefenseCreatureArmy'
+import { SearchTrackingSuite } from './SearchTrackingSuite'
+import { EntertainmentRewardsHub } from './EntertainmentRewardsHub'
 
 export function UltimateAdminSuite() {
   const [activeSystem, setActiveSystem] = useState('overview')
@@ -116,7 +118,7 @@ export function UltimateAdminSuite() {
         {activeSystem === 'security' && <UltimateSecurityCore />}
         {activeSystem === 'trading' && <QuantumTradingEngine />}
         {activeSystem === 'dragon-ai' && <DragonAIDefense />}
-        {activeSystem === 'tracking' && <InvisibleTrackingSystem />}
+        {activeSystem === 'tracking' && <SearchTrackingSuite />}
         {activeSystem === 'automation' && <AutomationMaster />}
         {activeSystem === 'creation' && <CreationToolsSuite />}
         {activeSystem === 'analytics' && <AnalyticsDashboard />}
