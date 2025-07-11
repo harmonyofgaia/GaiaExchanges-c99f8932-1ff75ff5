@@ -1,10 +1,11 @@
+
 import { Button } from "@/components/ui/button"
 import { Menu, User, Home, Info, Users, Gamepad2, RefreshCw } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { useState } from "react"
 import SlidingMenu from "./SlidingMenu"
 import { GaiaLogo } from "./GaiaLogo"
-import { useAuth } from "@/components/auth/AuthProvider"
+import { useAuth } from "@/contexts/AuthContext"
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -67,9 +68,9 @@ export const Navbar = () => {
             <div className="flex items-center gap-3">
               {user ? (
                 <div className="flex items-center gap-2">
-                  <Link to="/secure-admin">
+                  <Link to="/admin">
                     <Button variant="outline" size="sm" className="border-red-500/30 text-red-400 hover:bg-red-500/10">
-                      🔒 Secure Admin
+                      🔒 Admin Portal
                     </Button>
                   </Link>
                   <Link to="/profile">

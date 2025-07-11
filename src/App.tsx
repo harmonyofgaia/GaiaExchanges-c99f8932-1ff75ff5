@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { Navbar } from '@/components/Navbar'
@@ -14,7 +15,7 @@ import Transparency from '@/pages/Transparency'
 import NFTMarketplace from '@/pages/NFTMarketplace'
 import SmartContracts from '@/pages/SmartContracts'
 import Staking from '@/pages/Staking'
-import SecureAdmin from '@/pages/SecureAdmin'
+import Admin from '@/pages/Admin'
 import PrivateBlockchain from '@/pages/PrivateBlockchain'
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
             <Route path="/nft-marketplace" element={<NFTMarketplace />} />
             <Route path="/smart-contracts" element={<SmartContracts />} />
             <Route path="/staking" element={<Staking />} />
-            <Route path="/secure-admin" element={<SecureAdmin />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="/private-blockchain" element={<PrivateBlockchain />} />
           </Routes>
         </main>
