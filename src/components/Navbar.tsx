@@ -1,10 +1,11 @@
+
 import { Button } from "@/components/ui/button"
 import { Menu, User, Home, Info, Users, Gamepad2, RefreshCw } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { useState } from "react"
-import SlidingMenu from "./SlidingMenu"
+import { SlidingMenu } from "./SlidingMenu"
 import { GaiaLogo } from "./GaiaLogo"
-import { useAuth } from "@/components/auth/AuthProvider"
+import { useAuth } from "@/contexts/AuthContext"
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
