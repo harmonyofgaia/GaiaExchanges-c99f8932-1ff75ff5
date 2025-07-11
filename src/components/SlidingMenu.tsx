@@ -21,8 +21,12 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-const SlidingMenu = () => {
-  const [isOpen, setIsOpen] = useState(false)
+interface SlidingMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const SlidingMenu = ({ isOpen, onClose }: SlidingMenuProps) => {
   const [isAuthorizedIP, setIsAuthorizedIP] = useState(false)
   const location = useLocation()
 
@@ -46,17 +50,17 @@ const SlidingMenu = () => {
 
   // Close menu when route changes
   useEffect(() => {
-    setIsOpen(false)
-  }, [location.pathname])
+    onClose()
+  }, [location.pathname, onClose])
 
   // Close menu on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsOpen(false)
+      if (e.key === 'Escape') onClose()
     }
     document.addEventListener('keydown', handleEscape)
     return () => document.removeEventListener('keydown', handleEscape)
-  }, [])
+  }, [onClose])
 
   const baseMenuItems = [
     { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
@@ -79,24 +83,13 @@ const SlidingMenu = () => {
 
   const menuItems = isAuthorizedIP ? [...baseMenuItems, ...adminMenuItems] : baseMenuItems
 
-  const toggleMenu = () => setIsOpen(!isOpen)
-
   return (
     <>
-      {/* Menu Toggle Button - Always visible */}
-      <Button
-        onClick={toggleMenu}
-        className="fixed top-4 left-4 z-50 bg-purple-600 hover:bg-purple-700 text-white p-2 rounded-lg shadow-lg transition-all duration-300"
-        size="sm"
-      >
-        {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-      </Button>
-
       {/* Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
-          onClick={() => setIsOpen(false)}
+          onClick={onClose}
         />
       )}
 
@@ -107,14 +100,24 @@ const SlidingMenu = () => {
         }`}
       >
         <div className="flex flex-col h-full">
-          {/* Header with space for toggle button */}
-          <div className="p-4 pt-16 border-b border-purple-500/30">
-            <div className="flex items-center gap-3">
-              <div className="text-3xl">🌍</div>
-              <div>
-                <h2 className="text-purple-400 font-bold text-xl">GAiA Universe</h2>
-                <p className="text-sm text-muted-foreground">Harmony of Culture</p>
+          {/* Header */}
+          <div className="p-4 pt-6 border-b border-purple-500/30">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="text-3xl">🌍</div>
+                <div>
+                  <h2 className="text-purple-400 font-bold text-xl">GAiA Universe</h2>
+                  <p className="text-sm text-muted-foreground">Harmony of Culture</p>
+                </div>
               </div>
+              <Button
+                onClick={onClose}
+                variant="ghost"
+                size="sm"
+                className="text-purple-400 hover:bg-purple-500/10"
+              >
+                <X className="h-5 w-5" />
+              </Button>
             </div>
           </div>
 
