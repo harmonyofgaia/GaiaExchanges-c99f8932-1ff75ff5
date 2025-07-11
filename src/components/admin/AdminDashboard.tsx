@@ -10,10 +10,10 @@ export function AdminDashboard() {
         <div className="container mx-auto px-4 py-6">
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-red-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-              🛡️ GAIA ADMIN CONTROL CENTER 🛡️
+              🔒 GAIA SECURE ADMIN CONTROL CENTER 🔒
             </h1>
             <p className="text-center text-muted-foreground mt-2">
-              Ultimate transparency and control for community protection
+              Ultimate system control with complete transparency and security
             </p>
           </div>
           <AdminDashboardTabs />
