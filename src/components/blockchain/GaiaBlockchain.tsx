@@ -204,7 +204,7 @@ export function GaiaBlockchain() {
                   </div>
                   <div className="text-sm space-y-1">
                     <div><span className="text-green-400">Hash:</span> <span className="font-mono text-xs">{block.hash}</span></div>
-                    <div><span className="text-purple-400">Validator:</span> {block.validator}</span></div>
+                    <div><span className="text-purple-400">Validator:</span> {block.validator}</div>
                     <div><span className="text-orange-400">Nonce:</span> {block.nonce}</div>
                     <div><span className="text-blue-400">Data:</span> {JSON.stringify(block.data)}</div>
                   </div>
