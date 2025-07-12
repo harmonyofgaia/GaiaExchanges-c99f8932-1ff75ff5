@@ -1,6 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Download, Eye, Shield } from 'lucide-react'
+import { MatrixWalletDisplay } from '@/components/MatrixWalletDisplay'
 
 const Transparency = () => {
   return (
@@ -14,6 +15,12 @@ const Transparency = () => {
             Full transparency with dragon-verified data
           </p>
         </div>
+
+        {/* Matrix Wallet Display */}
+        <div className="mb-8">
+          <MatrixWalletDisplay />
+        </div>
+
         <Card className="border-cyan-500/30 bg-cyan-900/20">
           <CardContent className="pt-6 text-center">
             <Eye className="h-16 w-16 text-cyan-400 mx-auto mb-4" />

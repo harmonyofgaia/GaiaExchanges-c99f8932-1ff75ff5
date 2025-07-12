@@ -12,11 +12,13 @@ import { UltimateCapabilitiesMatrix } from './UltimateCapabilitiesMatrix'
 import { Phase2CompletionSuite } from './Phase2CompletionSuite'
 import { Phase3CompletionSuite } from './Phase3CompletionSuite'
 import { SystemConsistencyScanner } from './SystemConsistencyScanner'
+import { GreenProjectManager } from './GreenProjectManager'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="consistency" className="w-full">
-      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-12">
+    <Tabs defaultValue="green-projects" className="w-full">
+      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-13">
+        <TabsTrigger value="green-projects">Green Projects</TabsTrigger>
         <TabsTrigger value="consistency">System Scan</TabsTrigger>
         <TabsTrigger value="phase2">Phase 2</TabsTrigger>
         <TabsTrigger value="phase3">Phase 3</TabsTrigger>
@@ -30,6 +32,10 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="tools">Admin Tools</TabsTrigger>
         <TabsTrigger value="capabilities">Capabilities</TabsTrigger>
       </TabsList>
+
+      <TabsContent value="green-projects" className="space-y-6">
+        <GreenProjectManager />
+      </TabsContent>
 
       <TabsContent value="consistency" className="space-y-6">
         <SystemConsistencyScanner />

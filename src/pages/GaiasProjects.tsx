@@ -1,21 +1,23 @@
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Textarea } from '@/components/ui/textarea'
-import { Leaf, DollarSign, Globe, Users, TrendingUp, Shield, Crown } from 'lucide-react'
-import { toast } from 'sonner'
+import { Progress } from '@/components/ui/progress'
+import { 
+  Leaf, 
+  DollarSign, 
+  Globe,
+  Users,
+  TrendingUp
+} from 'lucide-react'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 
 export default function GaiasProjects() {
-  const [isAdmin, setIsAdmin] = useState(true) // For demo purposes
   const [projects, setProjects] = useState([
     {
       id: 1,
       name: 'Coral Reef Restoration',
-      description: 'Restoring damaged coral reefs worldwide',
+      description: 'Restoring damaged coral reefs worldwide using sound technology',
       funding: 250000,
       target: 500000,
       impact: 'Ocean Protection',
@@ -29,52 +31,38 @@ export default function GaiasProjects() {
       target: 300000,
       impact: 'Climate Action',
       status: 'Active'
+    },
+    {
+      id: 3,
+      name: 'Solar Energy for Communities',
+      description: 'Solar panel installations in underserved areas',
+      funding: 320000,
+      target: 400000,
+      impact: 'Clean Energy',
+      status: 'Active'
+    },
+    {
+      id: 4,
+      name: 'Ocean Cleanup Technology',
+      description: 'Advanced systems for removing plastic from oceans',
+      funding: 150000,
+      target: 250000,
+      impact: 'Ocean Cleanup',
+      status: 'Active'
     }
   ])
 
-  const [feeSettings, setFeeSettings] = useState({
-    optionalFees: true,
-    minFeePercentage: 0,
-    maxFeePercentage: 5,
-    defaultProject: 'coral-restoration',
-    userChoice: true
-  })
+  useEffect(() => {
+    // Simulate live funding updates
+    const interval = setInterval(() => {
+      setProjects(prev => prev.map(project => ({
+        ...project,
+        funding: Math.min(project.target, project.funding + Math.floor(Math.random() * 5000))
+      })))
+    }, 10000)
 
-  const [newProject, setNewProject] = useState({
-    name: '',
-    description: '',
-    target: '',
-    impact: ''
-  })
-
-  const addProject = () => {
-    if (!isAdmin) {
-      toast.error('🔒 Admin Access Required', {
-        description: 'Only administrators can add new projects'
-      })
-      return
-    }
-
-    if (newProject.name && newProject.description && newProject.target) {
-      const project = {
-        id: projects.length + 1,
-        name: newProject.name,
-        description: newProject.description,
-        funding: 0,
-        target: parseInt(newProject.target),
-        impact: newProject.impact,
-        status: 'Active'
-      }
-      
-      setProjects([...projects, project])
-      setNewProject({ name: '', description: '', target: '', impact: '' })
-      
-      toast.success('🌱 Green Project Added!', {
-        description: `${newProject.name} has been added to the platform`,
-        duration: 4000
-      })
-    }
-  }
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-green-900/20 to-blue-900/20">
@@ -127,86 +115,6 @@ export default function GaiasProjects() {
                 <div className="text-sm text-orange-300">Contributors</div>
               </div>
             </div>
-
-            {/* Admin Project Management */}
-            {isAdmin && (
-              <Card className="border-2 border-yellow-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-2xl text-yellow-400">
-                    <Crown className="h-8 w-8" />
-                    ADMIN PROJECT MANAGEMENT
-                    <Badge className="bg-yellow-600 text-white">ADMIN ONLY</Badge>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Input
-                      placeholder="Project Name"
-                      value={newProject.name}
-                      onChange={(e) => setNewProject({...newProject, name: e.target.value})}
-                      className="bg-black/50 border-green-500/50"
-                    />
-                    <Input
-                      placeholder="Funding Target ($)"
-                      type="number"
-                      value={newProject.target}
-                      onChange={(e) => setNewProject({...newProject, target: e.target.value})}
-                      className="bg-black/50 border-green-500/50"
-                    />
-                  </div>
-                  <Textarea
-                    placeholder="Project Description"
-                    value={newProject.description}
-                    onChange={(e) => setNewProject({...newProject, description: e.target.value})}
-                    className="bg-black/50 border-green-500/50"
-                  />
-                  <Input
-                    placeholder="Environmental Impact"
-                    value={newProject.impact}
-                    onChange={(e) => setNewProject({...newProject, impact: e.target.value})}
-                    className="bg-black/50 border-green-500/50"
-                  />
-                  <Button 
-                    onClick={addProject}
-                    className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
-                  >
-                    <Leaf className="h-4 w-4 mr-2" />
-                    Add Green Project
-                  </Button>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Fee Settings (Admin Only) */}
-            {isAdmin && (
-              <Card className="border-2 border-purple-500/50 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-2xl text-purple-400">
-                    <Shield className="h-8 w-8" />
-                    TRANSACTION FEE SETTINGS
-                    <Badge className="bg-purple-600 text-white">ADMIN CONTROL</Badge>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="text-center p-4 bg-black/30 rounded-lg">
-                    <h4 className="text-xl font-bold text-purple-400 mb-2">User Choice Fee System</h4>
-                    <p className="text-muted-foreground">
-                      Users can choose to pay 0% fees or contribute any amount they want to green projects
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-3 bg-green-900/30 rounded border border-green-500/30">
-                      <div className="text-sm text-green-300">Optional Fees</div>
-                      <div className="text-xl text-green-400 font-bold">ENABLED</div>
-                    </div>
-                    <div className="text-center p-3 bg-blue-900/30 rounded border border-blue-500/30">
-                      <div className="text-sm text-blue-300">User Control</div>
-                      <div className="text-xl text-blue-400 font-bold">100%</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
 
             {/* Active Projects Display */}
             <div className="space-y-6">
