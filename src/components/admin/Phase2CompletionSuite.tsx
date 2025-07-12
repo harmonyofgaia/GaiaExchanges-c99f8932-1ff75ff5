@@ -16,7 +16,7 @@ import {
   CheckCircle,
   Sword,
   Crown,
-  Dragon
+  Flame
 } from 'lucide-react'
 import { GAIA_TOKEN } from '@/constants/gaia'
 import { toast } from 'sonner'
