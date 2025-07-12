@@ -6,7 +6,7 @@ import './App.css'
 import { Navbar } from '@/components/Navbar'
 import SlidingMenu from '@/components/SlidingMenu'
 import { SidebarProvider } from '@/components/ui/sidebar'
-import { AuthProvider from '@/components/auth/AuthProvider'
+import { AuthProvider } from '@/components/auth/AuthProvider'
 import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'
 import { MasterSystemOrchestrator } from '@/components/system/MasterSystemOrchestrator'
 
@@ -26,7 +26,6 @@ import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
 import LandscapeBuilder from '@/pages/LandscapeBuilder'
 import GaiaFighterGame from '@/pages/GaiaFighterGame'
 import Transparency from '@/pages/Transparency'
-import ArtistStreaming from '@/pages/ArtistStreaming'
 
 // Game Pages
 import GaiaFantasyMMORPG from '@/pages/games/GaiaFantasyMMORPG'
@@ -88,7 +87,6 @@ function App() {
                     <Route path="/landscape-builder" element={<LandscapeBuilder />} />
                     <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
                     <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
-                    <Route path="/artist-streaming" element={<ArtistStreaming />} />
                     
                     {/* New Game Pages */}
                     <Route path="/game/gaia-fantasy-mmorpg" element={<GaiaFantasyMMORPG />} />
