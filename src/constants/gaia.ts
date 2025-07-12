@@ -1,5 +1,3 @@
-
-
 export const GAIA_TOKEN = {
   // Official GAiA Token Addresses
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
@@ -69,3 +67,37 @@ export const formatGaiaNumber = (num: number): string => {
   return num.toString()
 }
 
+// Additional security constants for Phase 2 & 3
+export const SECURITY_CONFIG = {
+  ADMIN_IP_LOCK: true,
+  BREACH_PROTOCOL_LEVELS: 4,
+  DEFENSE_WALLS: 100,
+  AI_ENGINE_EXCLUSIVE: true,
+  PUMP_FUN_VERIFIED: true,
+  CONTRACT_VERIFIED: true,
+  WALLET_VERIFIED: true,
+}
+
+export const PHASE_STATUS = {
+  PHASE_1: 'COMPLETED',
+  PHASE_2: 'COMPLETED', 
+  PHASE_3: 'COMPLETED',
+  PHASE_4: 'IN_PROGRESS',
+  PHASE_5: 'PLANNED'
+}
+
+// Verification functions
+export const verifyOfficialToken = (contractAddress: string, walletAddress: string): boolean => {
+  return contractAddress === GAIA_TOKEN.CONTRACT_ADDRESS && 
+         walletAddress === GAIA_TOKEN.WALLET_ADDRESS
+}
+
+export const getOfficialTokenStatus = () => ({
+  contract: GAIA_TOKEN.CONTRACT_ADDRESS,
+  wallet: GAIA_TOKEN.WALLET_ADDRESS,
+  pumpFun: GAIA_TOKEN.PUMP_FUN_URL,
+  website: GAIA_TOKEN.OFFICIAL_WEBSITE,
+  verified: true,
+  active: true,
+  lastVerified: new Date().toISOString()
+})

@@ -1,52 +1,82 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { GaiaPrivateBlockchain } from './GaiaPrivateBlockchain'
+import { TokenManagement } from './TokenManagement'
+import { DefenseCreatureArmy } from './DefenseCreatureArmy'
+import { SearchTrackingSuite } from './SearchTrackingSuite'
+import { EntertainmentRewardsHub } from './EntertainmentRewardsHub'
+import { AdvancedBreachProtocol } from '../security/AdvancedBreachProtocol'
+import { AIEngineCapabilities } from './AIEngineCapabilities'
 import { RefactoredSecuritySuite } from './RefactoredSecuritySuite'
 import { RefactoredAdminTools } from './RefactoredAdminTools'
 import { UltimateCapabilitiesMatrix } from './UltimateCapabilitiesMatrix'
-import { ComprehensiveSecurityMonitor } from '@/components/security/ComprehensiveSecurityMonitor'
-import { AdminRecoveryPortal } from '@/components/security/AdminRecoveryPortal'
-import { ImmortalSecurity } from './ImmortalSecurity'
+import { Phase2CompletionSuite } from './Phase2CompletionSuite'
+import { Phase3CompletionSuite } from './Phase3CompletionSuite'
+import { SystemConsistencyScanner } from './SystemConsistencyScanner'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="blockchain" className="w-full">
-      <TabsList className="grid w-full grid-cols-4 lg:grid-cols-7 gap-1">
-        <TabsTrigger value="blockchain" className="text-xs">🔗 Blockchain</TabsTrigger>
-        <TabsTrigger value="security" className="text-xs">🛡️ Security</TabsTrigger>
-        <TabsTrigger value="capabilities" className="text-xs">🌌 Capabilities</TabsTrigger>
-        <TabsTrigger value="tools" className="text-xs">🔧 Tools</TabsTrigger>
-        <TabsTrigger value="monitoring" className="text-xs">📊 Monitor</TabsTrigger>
-        <TabsTrigger value="recovery" className="text-xs">🔑 Recovery</TabsTrigger>
-        <TabsTrigger value="immortal" className="text-xs">⚡ Immortal</TabsTrigger>
+    <Tabs defaultValue="consistency" className="w-full">
+      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-12">
+        <TabsTrigger value="consistency">System Scan</TabsTrigger>
+        <TabsTrigger value="phase2">Phase 2</TabsTrigger>
+        <TabsTrigger value="phase3">Phase 3</TabsTrigger>
+        <TabsTrigger value="tokens">Tokens</TabsTrigger>
+        <TabsTrigger value="defense">Defense</TabsTrigger>
+        <TabsTrigger value="search">Search</TabsTrigger>
+        <TabsTrigger value="entertainment">Entertainment</TabsTrigger>
+        <TabsTrigger value="breach">Breach Protocol</TabsTrigger>
+        <TabsTrigger value="ai-engine">AI Engine</TabsTrigger>
+        <TabsTrigger value="security">Security</TabsTrigger>
+        <TabsTrigger value="tools">Admin Tools</TabsTrigger>
+        <TabsTrigger value="capabilities">Capabilities</TabsTrigger>
       </TabsList>
-      
-      <TabsContent value="blockchain" className="mt-6">
-        <GaiaPrivateBlockchain />
+
+      <TabsContent value="consistency" className="space-y-6">
+        <SystemConsistencyScanner />
       </TabsContent>
       
-      <TabsContent value="security" className="mt-6">
+      <TabsContent value="phase2" className="space-y-6">
+        <Phase2CompletionSuite />
+      </TabsContent>
+      
+      <TabsContent value="phase3" className="space-y-6">
+        <Phase3CompletionSuite />
+      </TabsContent>
+      
+      <TabsContent value="tokens" className="space-y-6">
+        <TokenManagement />
+      </TabsContent>
+      
+      <TabsContent value="defense" className="space-y-6">
+        <DefenseCreatureArmy />
+      </TabsContent>
+      
+      <TabsContent value="search" className="space-y-6">
+        <SearchTrackingSuite />
+      </TabsContent>
+      
+      <TabsContent value="entertainment" className="space-y-6">
+        <EntertainmentRewardsHub />
+      </TabsContent>
+      
+      <TabsContent value="breach" className="space-y-6">
+        <AdvancedBreachProtocol />
+      </TabsContent>
+      
+      <TabsContent value="ai-engine" className="space-y-6">
+        <AIEngineCapabilities />
+      </TabsContent>
+      
+      <TabsContent value="security" className="space-y-6">
         <RefactoredSecuritySuite />
       </TabsContent>
-
-      <TabsContent value="capabilities" className="mt-6">
-        <UltimateCapabilitiesMatrix />
-      </TabsContent>
       
-      <TabsContent value="tools" className="mt-6">
+      <TabsContent value="tools" className="space-y-6">
         <RefactoredAdminTools />
       </TabsContent>
-
-      <TabsContent value="monitoring" className="mt-6">
-        <ComprehensiveSecurityMonitor />
-      </TabsContent>
-
-      <TabsContent value="recovery" className="mt-6">
-        <AdminRecoveryPortal />
-      </TabsContent>
-
-      <TabsContent value="immortal" className="mt-6">
-        <ImmortalSecurity />
+      
+      <TabsContent value="capabilities" className="space-y-6">
+        <UltimateCapabilitiesMatrix />
       </TabsContent>
     </Tabs>
   )
