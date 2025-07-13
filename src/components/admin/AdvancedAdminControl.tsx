@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -8,7 +7,7 @@ import {
   Search, 
   Plus, 
   Minus, 
-  Upgrade, 
+  ArrowUp, 
   Brain, 
   Shield,
   Zap,
@@ -118,7 +117,7 @@ export function AdvancedAdminControl() {
         <div className="space-y-4">
           <div className="flex gap-2">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Tell me what you want to do with the AI engine - no boundaries..."
                 value={searchQuery}
