@@ -4,12 +4,16 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Globe, Heart, Zap, Users, Shield, Gamepad2 } from 'lucide-react'
 import HoverSidebar from '@/components/HoverSidebar'
+import { CallToAction } from '@/components/home/CallToAction'
+import { ExchangeLinks } from '@/components/home/ExchangeLinks'
+import { BackgroundMusic } from '@/components/BackgroundMusic'
 import { GAIA_TOKEN } from '@/constants/gaia'
 
 const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
       <HoverSidebar />
+      <BackgroundMusic />
       
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">
@@ -42,8 +46,14 @@ const Home = () => {
             </CardContent>
           </Card>
 
+          {/* Exchange Links */}
+          <ExchangeLinks />
+
+          {/* Call to Action */}
+          <CallToAction />
+
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             <Card className="border-green-500/30 bg-green-900/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-green-400">
