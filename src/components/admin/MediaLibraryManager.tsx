@@ -42,8 +42,8 @@ export function MediaLibraryManager() {
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const supportedFormats = {
-    audio: ['.mp3', '.wav', '.flac', '.ogg', '.m4a'],
-    video: ['.mp4', '.mkv', '.avi', '.webm', '.mov']
+    audio: ['.mp3', '.wav', '.flac', '.ogg', '.m4a', '.aac', '.wma'],
+    video: ['.mp4', '.mkv', '.avi', '.webm', '.mov', '.wmv']
   }
 
   const handleFileUpload = async (files: FileList) => {
@@ -65,6 +65,21 @@ export function MediaLibraryManager() {
       // Create object URL for preview
       const objectUrl = URL.createObjectURL(file)
       
+      // Get audio duration if it's an audio file
+      let duration: number | undefined
+      if (file.type.startsWith('audio/')) {
+        try {
+          const audioElement = new Audio(objectUrl)
+          await new Promise((resolve) => {
+            audioElement.addEventListener('loadedmetadata', resolve)
+            audioElement.load()
+          })
+          duration = audioElement.duration
+        } catch (error) {
+          console.log('Could not get audio duration:', error)
+        }
+      }
+      
       // Simulate upload
       for (let progress = 0; progress <= 100; progress += 10) {
         await new Promise(resolve => setTimeout(resolve, 100))
@@ -79,7 +94,8 @@ export function MediaLibraryManager() {
         size: file.size,
         url: objectUrl,
         uploadDate: new Date(),
-        isActive: false
+        isActive: false,
+        duration
       }
 
       setMediaFiles(prev => [...prev, mediaFile])
@@ -117,18 +133,36 @@ export function MediaLibraryManager() {
 
   const setAsBackgroundMedia = (fileId: string) => {
     setActiveBackgroundMedia(fileId)
-    // Save to localStorage for global access
-    localStorage.setItem('activeBackgroundMedia', fileId)
     const file = mediaFiles.find(f => f.id === fileId)
-    localStorage.setItem('activeBackgroundMediaData', JSON.stringify(file))
     
-    toast.success('🌍 Background media set for entire website!')
+    if (file) {
+      // Save to localStorage for global access
+      localStorage.setItem('activeBackgroundMedia', fileId)
+      localStorage.setItem('activeBackgroundMediaData', JSON.stringify(file))
+      
+      // Dispatch custom event to notify BackgroundMusic component
+      window.dispatchEvent(new CustomEvent('backgroundMediaUpdated'))
+      
+      toast.success(`🌍 ${file.name} set as background music for entire website!`)
+    }
   }
 
   const deleteMedia = (fileId: string) => {
+    const file = mediaFiles.find(f => f.id === fileId)
     setMediaFiles(prev => prev.filter(f => f.id !== fileId))
+    
     if (currentlyPlaying === fileId) setCurrentlyPlaying(null)
-    if (activeBackgroundMedia === fileId) setActiveBackgroundMedia(null)
+    if (activeBackgroundMedia === fileId) {
+      setActiveBackgroundMedia(null)
+      localStorage.removeItem('activeBackgroundMedia')
+      localStorage.removeItem('activeBackgroundMediaData')
+      window.dispatchEvent(new CustomEvent('backgroundMediaUpdated'))
+    }
+    
+    // Cleanup object URL
+    if (file?.url) {
+      URL.revokeObjectURL(file.url)
+    }
     
     toast.success('Media file deleted')
   }
@@ -140,6 +174,13 @@ export function MediaLibraryManager() {
     return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i]
   }
 
+  const formatDuration = (duration?: number) => {
+    if (!duration) return ''
+    const minutes = Math.floor(duration / 60)
+    const seconds = Math.floor(duration % 60)
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`
+  }
+
   return (
     <div className="space-y-6">
       <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
@@ -148,6 +189,10 @@ export function MediaLibraryManager() {
             <Music className="h-6 w-6" />
             🎵 Gaia's Harmony Media Library - Ultimate Experience Engine
           </CardTitle>
+          <p className="text-sm text-muted-foreground">
+            Upload your own music and audio files to create the perfect atmospheric experience. 
+            Set any track as background music for the entire website.
+          </p>
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
@@ -156,7 +201,7 @@ export function MediaLibraryManager() {
               <Upload className="h-12 w-12 text-purple-400 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-purple-400 mb-2">Drop Your Creative Assets</h3>
               <p className="text-muted-foreground mb-4">
-                Upload MP3, WAV, FLAC, MP4, MKV, AVI files to create immersive experiences
+                Upload MP3, WAV, FLAC, OGG, M4A, AAC files for audio or MP4, MKV, AVI, WebM for video
               </p>
               
               <input
@@ -201,20 +246,22 @@ export function MediaLibraryManager() {
 
             <Tabs defaultValue="all" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="all">All Media</TabsTrigger>
-                <TabsTrigger value="audio">Audio Files</TabsTrigger>
-                <TabsTrigger value="video">Video Files</TabsTrigger>
+                <TabsTrigger value="all">All Media ({mediaFiles.length})</TabsTrigger>
+                <TabsTrigger value="audio">Audio Files ({mediaFiles.filter(f => f.type === 'audio').length})</TabsTrigger>
+                <TabsTrigger value="video">Video Files ({mediaFiles.filter(f => f.type === 'video').length})</TabsTrigger>
               </TabsList>
 
               <TabsContent value="all" className="space-y-4">
                 {mediaFiles.length === 0 ? (
                   <div className="text-center py-8 text-muted-foreground">
-                    No media files uploaded yet. Start creating your harmony library!
+                    <Music className="h-16 w-16 mx-auto mb-4 opacity-50" />
+                    <h3 className="text-lg font-medium mb-2">No media files uploaded yet</h3>
+                    <p>Start creating your harmony library by uploading your favorite tracks!</p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {mediaFiles.map((file) => (
-                      <Card key={file.id} className="bg-muted/20 border-green-500/20">
+                      <Card key={file.id} className="bg-muted/20 border-green-500/20 hover:border-green-400/40 transition-colors">
                         <CardContent className="p-4">
                           <div className="flex items-center gap-2 mb-3">
                             {file.type === 'video' ? 
@@ -222,7 +269,138 @@ export function MediaLibraryManager() {
                               <Music className="h-5 w-5 text-green-400" />
                             }
                             <div className="flex-1 min-w-0">
-                              <div className="font-medium text-sm truncate">{file.name}</div>
+                              <div className="font-medium text-sm truncate" title={file.name}>
+                                {file.name}
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                {formatFileSize(file.size)} • {file.format}
+                                {file.duration && ` • ${formatDuration(file.duration)}`}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex gap-1 mb-3">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => playMedia(file.id)}
+                              className="flex-1"
+                              title="Preview"
+                            >
+                              {currentlyPlaying === file.id ? 
+                                <Pause className="h-3 w-3" /> : 
+                                <Play className="h-3 w-3" />
+                              }
+                            </Button>
+                            
+                            <Button
+                              size="sm"
+                              variant={activeBackgroundMedia === file.id ? "default" : "outline"}
+                              onClick={() => setAsBackgroundMedia(file.id)}
+                              className="flex-1"
+                              title="Set as background music"
+                            >
+                              <Settings className="h-3 w-3" />
+                            </Button>
+                            
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              onClick={() => deleteMedia(file.id)}
+                              title="Delete file"
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+
+                          {activeBackgroundMedia === file.id && (
+                            <Badge className="w-full bg-green-600 text-white text-xs justify-center">
+                              🌍 Active Background Music
+                            </Badge>
+                          )}
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                )}
+              </TabsContent>
+
+              {/* Audio Tab Content */}
+              <TabsContent value="audio">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {mediaFiles
+                    .filter((file) => file.type === 'audio')
+                    .map((file) => (
+                      
+                      <Card key={file.id} className="bg-muted/20 border-green-500/20 hover:border-green-400/40 transition-colors">
+                        <CardContent className="p-4">
+                          <div className="flex items-center gap-2 mb-3">
+                            <Music className="h-5 w-5 text-green-400" />
+                            <div className="flex-1 min-w-0">
+                              <div className="font-medium text-sm truncate" title={file.name}>
+                                {file.name}
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                {formatFileSize(file.size)} • {file.format}
+                                {file.duration && ` • ${formatDuration(file.duration)}`}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex gap-1 mb-3">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => playMedia(file.id)}
+                              className="flex-1"
+                            >
+                              {currentlyPlaying === file.id ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
+                            </Button>
+                            
+                            <Button
+                              size="sm"
+                              variant={activeBackgroundMedia === file.id ? "default" : "outline"}
+                              onClick={() => setAsBackgroundMedia(file.id)}
+                              className="flex-1"
+                            >
+                              <Settings className="h-3 w-3" />
+                            </Button>
+                            
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              onClick={() => deleteMedia(file.id)}
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+
+                          {activeBackgroundMedia === file.id && (
+                            <Badge className="w-full bg-green-600 text-white text-xs justify-center">
+                              🌍 Active Background Music
+                            </Badge>
+                          )}
+                        </CardContent>
+                      </Card>
+                    ))}
+                </div>
+              </TabsContent>
+
+              {/* Video Tab Content */}
+              <TabsContent value="video">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {mediaFiles
+                    .filter((file) => file.type === 'video')
+                    .map((file) => (
+                      
+                      <Card key={file.id} className="bg-muted/20 border-blue-500/20 hover:border-blue-400/40 transition-colors">
+                        <CardContent className="p-4">
+                          <div className="flex items-center gap-2 mb-3">
+                            <Video className="h-5 w-5 text-blue-400" />
+                            <div className="flex-1 min-w-0">
+                              <div className="font-medium text-sm truncate" title={file.name}>
+                                {file.name}
+                              </div>
                               <div className="text-xs text-muted-foreground">
                                 {formatFileSize(file.size)} • {file.format}
                               </div>
@@ -258,123 +436,14 @@ export function MediaLibraryManager() {
                           </div>
 
                           {activeBackgroundMedia === file.id && (
-                            <Badge className="w-full bg-green-600 text-white text-xs">
+                            <Badge className="w-full bg-green-600 text-white text-xs justify-center">
                               🌍 Active Background Media
                             </Badge>
                           )}
                         </CardContent>
                       </Card>
                     ))}
-                  </div>
-                )}
-              </TabsContent>
-
-              <TabsContent value="audio">
-                {mediaFiles
-                  .filter((file) => file.type === 'audio')
-                  .map((file) => (
-                    <Card key={file.id} className="bg-muted/20 border-green-500/20">
-                      <CardContent className="p-4">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Music className="h-5 w-5 text-green-400" />
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-sm truncate">{file.name}</div>
-                            <div className="text-xs text-muted-foreground">
-                              {formatFileSize(file.size)} • {file.format}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex gap-1 mb-3">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => playMedia(file.id)}
-                            className="flex-1"
-                          >
-                            {currentlyPlaying === file.id ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
-                          </Button>
-                          
-                          <Button
-                            size="sm"
-                            variant={activeBackgroundMedia === file.id ? "default" : "outline"}
-                            onClick={() => setAsBackgroundMedia(file.id)}
-                            className="flex-1"
-                          >
-                            <Settings className="h-3 w-3" />
-                          </Button>
-                          
-                          <Button
-                            size="sm"
-                            variant="destructive"
-                            onClick={() => deleteMedia(file.id)}
-                          >
-                            <Trash2 className="h-3 w-3" />
-                          </Button>
-                        </div>
-
-                        {activeBackgroundMedia === file.id && (
-                          <Badge className="w-full bg-green-600 text-white text-xs">
-                            🌍 Active Background Media
-                          </Badge>
-                        )}
-                      </CardContent>
-                    </Card>
-                  ))}
-              </TabsContent>
-
-              <TabsContent value="video">
-                {mediaFiles
-                  .filter((file) => file.type === 'video')
-                  .map((file) => (
-                    <Card key={file.id} className="bg-muted/20 border-green-500/20">
-                      <CardContent className="p-4">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Video className="h-5 w-5 text-blue-400" />
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-sm truncate">{file.name}</div>
-                            <div className="text-xs text-muted-foreground">
-                              {formatFileSize(file.size)} • {file.format}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex gap-1 mb-3">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => playMedia(file.id)}
-                            className="flex-1"
-                          >
-                            {currentlyPlaying === file.id ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
-                          </Button>
-                          
-                          <Button
-                            size="sm"
-                            variant={activeBackgroundMedia === file.id ? "default" : "outline"}
-                            onClick={() => setAsBackgroundMedia(file.id)}
-                            className="flex-1"
-                          >
-                            <Settings className="h-3 w-3" />
-                          </Button>
-                          
-                          <Button
-                            size="sm"
-                            variant="destructive"
-                            onClick={() => deleteMedia(file.id)}
-                          >
-                            <Trash2 className="h-3 w-3" />
-                          </Button>
-                        </div>
-
-                        {activeBackgroundMedia === file.id && (
-                          <Badge className="w-full bg-green-600 text-white text-xs">
-                            🌍 Active Background Media
-                          </Badge>
-                        )}
-                      </CardContent>
-                    </Card>
-                  ))}
+                </div>
               </TabsContent>
             </Tabs>
           </div>
@@ -382,8 +451,19 @@ export function MediaLibraryManager() {
       </Card>
 
       {/* Hidden Media Players */}
-      <audio ref={audioRef} onEnded={() => setCurrentlyPlaying(null)} />
-      <video ref={videoRef} onEnded={() => setCurrentlyPlaying(null)} className="hidden" />
+      <audio 
+        ref={audioRef} 
+        onEnded={() => setCurrentlyPlaying(null)}
+        controls={false}
+        preload="metadata"
+      />
+      <video 
+        ref={videoRef} 
+        onEnded={() => setCurrentlyPlaying(null)} 
+        className="hidden"
+        controls={false}
+        preload="metadata"
+      />
     </div>
   )
 }

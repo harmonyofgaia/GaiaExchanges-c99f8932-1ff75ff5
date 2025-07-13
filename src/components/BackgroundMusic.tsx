@@ -1,88 +1,144 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
-import { Volume2, VolumeX } from 'lucide-react'
+import { Volume2, VolumeX, Music, Upload } from 'lucide-react'
+import { toast } from 'sonner'
+
+interface MediaFile {
+  id: string
+  name: string
+  type: 'audio' | 'video'
+  format: string
+  size: number
+  duration?: number
+  url: string
+  uploadDate: Date
+  isActive: boolean
+}
 
 export function BackgroundMusic() {
   const [isMuted, setIsMuted] = useState(true)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [currentTrack, setCurrentTrack] = useState<MediaFile | null>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
+  // Load active background media from localStorage
   useEffect(() => {
-    const audio = audioRef.current
-    if (audio) {
-      audio.volume = 0.3
-      audio.loop = true
+    const loadActiveMedia = () => {
+      const activeMediaId = localStorage.getItem('activeBackgroundMedia')
+      const activeMediaData = localStorage.getItem('activeBackgroundMediaData')
       
-      const handleCanPlay = () => {
-        setIsLoaded(true)
-        console.log('🎵 GAiA Background Music Loaded')
-      }
-      
-      audio.addEventListener('canplaythrough', handleCanPlay)
-      
-      // Create a synthetic audio for ambient background
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
-      const oscillator = audioContext.createOscillator()
-      const gainNode = audioContext.createGain()
-      
-      oscillator.connect(gainNode)
-      gainNode.connect(audioContext.destination)
-      
-      oscillator.frequency.setValueAtTime(110, audioContext.currentTime) // A2 note
-      gainNode.gain.setValueAtTime(0, audioContext.currentTime)
-      
-      if (!isMuted) {
-        gainNode.gain.linearRampToValueAtTime(0.05, audioContext.currentTime + 1)
-      }
-      
-      oscillator.start()
-      
-      return () => {
-        audio?.removeEventListener('canplaythrough', handleCanPlay)
+      if (activeMediaId && activeMediaData) {
         try {
-          oscillator.stop()
-          audioContext.close()
-        } catch (e) {
-          console.log('Audio context cleanup')
+          const mediaData = JSON.parse(activeMediaData) as MediaFile
+          setCurrentTrack(mediaData)
+          setIsLoaded(true)
+          console.log('🎵 Custom Background Media Loaded:', mediaData.name)
+        } catch (error) {
+          console.log('Error loading custom background media:', error)
         }
       }
     }
-  }, [isMuted])
+
+    loadActiveMedia()
+
+    // Listen for storage changes (when new media is set as background)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'activeBackgroundMedia' || e.key === 'activeBackgroundMediaData') {
+        loadActiveMedia()
+      }
+    }
+
+    window.addEventListener('storage', handleStorageChange)
+    
+    // Also listen for custom events from the same window
+    const handleCustomEvent = () => {
+      loadActiveMedia()
+    }
+    
+    window.addEventListener('backgroundMediaUpdated', handleCustomEvent)
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange)
+      window.removeEventListener('backgroundMediaUpdated', handleCustomEvent)
+    }
+  }, [])
 
   const toggleMusic = () => {
     const audio = audioRef.current
+    
+    if (!currentTrack) {
+      toast.info('🎵 Upload music files in Admin → Media Library to set background music')
+      return
+    }
+
     if (audio) {
-      if (isMuted) {
-        audio.play().catch(e => console.log('Audio play prevented by browser'))
-        setIsMuted(false)
-        console.log('🎵 GAiA Music Started')
+      if (isMuted || !isPlaying) {
+        audio.src = currentTrack.url
+        audio.play().then(() => {
+          setIsMuted(false)
+          setIsPlaying(true)
+          console.log('🎵 Playing:', currentTrack.name)
+          toast.success(`🎵 Now playing: ${currentTrack.name}`)
+        }).catch(e => {
+          console.log('Audio play prevented by browser:', e)
+          toast.error('Unable to play audio - browser restrictions')
+        })
       } else {
         audio.pause()
         setIsMuted(true)
-        console.log('🔇 GAiA Music Paused')
+        setIsPlaying(false)
+        console.log('🔇 Music Paused')
       }
     }
   }
 
+  const handleAudioEnd = () => {
+    setIsPlaying(false)
+    setIsMuted(true)
+    // Optionally restart the track for looping
+    if (audioRef.current && currentTrack) {
+      audioRef.current.currentTime = 0
+    }
+  }
+
+  const handleAudioError = () => {
+    toast.error('Error playing audio file')
+    setIsPlaying(false)
+    setIsMuted(true)
+  }
+
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+      {currentTrack && (
+        <div className="bg-background/90 backdrop-blur-sm border border-primary/20 rounded-lg p-2 max-w-48">
+          <div className="text-xs text-muted-foreground truncate">
+            🎵 {currentTrack.name}
+          </div>
+        </div>
+      )}
+      
       <Button
         onClick={toggleMusic}
-        variant={isMuted ? "outline" : "default"}
+        variant={isMuted || !isPlaying ? "outline" : "default"}
         size="sm"
         className="bg-background/80 backdrop-blur-sm border-primary/20"
+        title={currentTrack ? currentTrack.name : "No background music selected"}
       >
-        {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+        {isMuted || !isPlaying ? 
+          <VolumeX className="h-4 w-4" /> : 
+          <Volume2 className="h-4 w-4" />
+        }
       </Button>
       
       <audio
         ref={audioRef}
-        preload="auto"
-        muted={isMuted}
-      >
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+TxwmYeBytB2e/OeisEKH/N8N+PQAoUYL" type="audio/wav" />
-      </audio>
+        onEnded={handleAudioEnd}
+        onError={handleAudioError}
+        loop
+        preload="metadata"
+      />
     </div>
   )
 }
