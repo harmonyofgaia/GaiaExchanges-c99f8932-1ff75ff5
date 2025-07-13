@@ -6,7 +6,7 @@ import './App.css'
 import { Navbar } from '@/components/Navbar'
 import SlidingMenu from '@/components/SlidingMenu'
 import { SidebarProvider } from '@/components/ui/sidebar'
-import { AuthProvider from '@/components/auth/AuthProvider'
+import { AuthProvider } from '@/components/auth/AuthProvider'
 import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'
 import { MasterSystemOrchestrator } from '@/components/system/MasterSystemOrchestrator'
 
