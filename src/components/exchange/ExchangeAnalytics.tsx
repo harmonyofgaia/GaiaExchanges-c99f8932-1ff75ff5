@@ -35,9 +35,9 @@ export function ExchangeAnalytics() {
   ])
 
   const [topTradingPairs, setTopTradingPairs] = useState([
-    { pair: 'GAIA/USDT', volume: '2.4M', change: '+12.5%', price: '$0.00247' },
-    { pair: 'GAIA/BTC', volume: '1.8M', change: '+8.3%', price: '0.0000567 BTC' },
-    { pair: 'GAIA/ETH', volume: '1.2M', change: '-3.2%', price: '0.00105 ETH' }
+    { pair: 'GAiA/USDT', volume: '2.4M', change: '+12.5%', price: '$0.00247' },
+    { pair: 'GAiA/BTC', volume: '1.8M', change: '+8.3%', price: '0.0000567 BTC' },
+    { pair: 'GAiA/ETH', volume: '1.2M', change: '-3.2%', price: '0.00105 ETH' }
   ])
 
   useEffect(() => {

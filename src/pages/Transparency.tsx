@@ -91,7 +91,7 @@ const Transparency = () => {
         </Card>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .matrix-bg {
           background: 
             radial-gradient(circle at 20% 50%, cyan 1px, transparent 1px),

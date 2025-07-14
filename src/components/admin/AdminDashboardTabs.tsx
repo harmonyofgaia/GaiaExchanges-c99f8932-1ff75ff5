@@ -6,17 +6,23 @@ import { UltimateAIEngineSuite } from './UltimateAIEngineSuite'
 import { SupremeControlSuite } from './SupremeControlSuite'
 import { LiveArtistShow } from './LiveArtistShow'
 import { ParabolicAIThinking } from './ParabolicAIThinking'
+import { AudioEngineManager } from './AudioEngineManager'
+import { ThunderstormDefense } from './ThunderstormDefense'
+import { InvisibleDolphin } from './InvisibleDolphin'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="tools" className="w-full">
-      <TabsList className="grid w-full grid-cols-6">
-        <TabsTrigger value="tools">🛠️ Admin Tools</TabsTrigger>
+      <TabsList className="grid w-full grid-cols-4 lg:grid-cols-9 text-xs">
+        <TabsTrigger value="tools">🛠️ Tools</TabsTrigger>
         <TabsTrigger value="security">🛡️ Security</TabsTrigger>
-        <TabsTrigger value="ai-engine">🌌 Ultimate AI</TabsTrigger>
-        <TabsTrigger value="supreme-control">👑 Supreme Control</TabsTrigger>
-        <TabsTrigger value="live-artist">🎭 Live Artist Show</TabsTrigger>
-        <TabsTrigger value="ai-thinking">🧠 Parabolic AI</TabsTrigger>
+        <TabsTrigger value="ai-engine">🌌 AI Engine</TabsTrigger>
+        <TabsTrigger value="supreme-control">👑 Supreme</TabsTrigger>
+        <TabsTrigger value="live-artist">🎭 Artist</TabsTrigger>
+        <TabsTrigger value="ai-thinking">🧠 AI Brain</TabsTrigger>
+        <TabsTrigger value="audio-engine">🎵 Audio</TabsTrigger>
+        <TabsTrigger value="thunderstorm">⚡ Defense</TabsTrigger>
+        <TabsTrigger value="dolphin">🐬 Dolphin</TabsTrigger>
       </TabsList>
 
       <TabsContent value="tools" className="space-y-6">
@@ -41,6 +47,18 @@ export function AdminDashboardTabs() {
 
       <TabsContent value="ai-thinking" className="space-y-6">
         <ParabolicAIThinking />
+      </TabsContent>
+
+      <TabsContent value="audio-engine" className="space-y-6">
+        <AudioEngineManager />
+      </TabsContent>
+
+      <TabsContent value="thunderstorm" className="space-y-6">
+        <ThunderstormDefense />
+      </TabsContent>
+
+      <TabsContent value="dolphin" className="space-y-6">
+        <InvisibleDolphin />
       </TabsContent>
     </Tabs>
   )
