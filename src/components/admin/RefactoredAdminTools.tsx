@@ -7,6 +7,7 @@ import { EntertainmentRewardsHub } from './EntertainmentRewardsHub'
 import { AutonomousSystemTracker } from './AutonomousSystemTracker'
 import { AdvancedAdminControl } from './AdvancedAdminControl'
 import { PredictiveOptimization } from './PredictiveOptimization'
+import { SupremeSearchTracking } from './SupremeSearchTracking'
 
 export function RefactoredAdminTools() {
   return (
@@ -19,6 +20,9 @@ export function RefactoredAdminTools() {
       
       {/* Phase 4: Predictive Optimization */}
       <PredictiveOptimization />
+      
+      {/* Supreme Search & Tracking */}
+      <SupremeSearchTracking />
       
       {/* Enhanced Original Components */}
       <ParabolicAIThinking />

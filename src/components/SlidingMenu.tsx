@@ -17,7 +17,9 @@ import {
   ChevronRight,
   Menu,
   X,
-  Crown
+  Crown,
+  Music,
+  Radio
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -60,6 +62,8 @@ const SlidingMenu = () => {
 
   const baseMenuItems = [
     { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
+    { icon: Radio, label: '🎭 Live Artist Shows', path: '/artist-streaming', category: 'entertainment' },
+    { icon: Music, label: '🎵 Artist Platform', path: '/artist-streaming', category: 'entertainment' },
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
