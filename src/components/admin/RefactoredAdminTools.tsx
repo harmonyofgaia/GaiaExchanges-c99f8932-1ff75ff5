@@ -8,10 +8,26 @@ import { AutonomousSystemTracker } from './AutonomousSystemTracker'
 import { AdvancedAdminControl } from './AdvancedAdminControl'
 import { PredictiveOptimization } from './PredictiveOptimization'
 import { SupremeSearchTracking } from './SupremeSearchTracking'
+import { QuantumEncryptedCommunications } from './QuantumEncryptedCommunications'
+import { AIThreatPredictionSystem } from './AIThreatPredictionSystem'
+import { GlobalNetworkHoneypots } from './GlobalNetworkHoneypots'
+import { RealTimeCounterAttack } from './RealTimeCounterAttack'
+import { BiometricAccessControl } from './BiometricAccessControl'
+import { BlockchainSecurityLogs } from './BlockchainSecurityLogs'
+import { MultiDimensionalFirewall } from './MultiDimensionalFirewall'
 
 export function RefactoredAdminTools() {
   return (
     <div className="space-y-8">
+      {/* CRITICAL DEFENSE & SECURITY SYSTEMS */}
+      <QuantumEncryptedCommunications />
+      <AIThreatPredictionSystem />
+      <GlobalNetworkHoneypots />
+      <RealTimeCounterAttack />
+      <BiometricAccessControl />
+      <BlockchainSecurityLogs />
+      <MultiDimensionalFirewall />
+      
       {/* Phase 1: Core Autonomous Engine */}
       <AutonomousSystemTracker />
       
