@@ -9,11 +9,15 @@ import { ParabolicAIThinking } from './ParabolicAIThinking'
 import { AudioEngineManager } from './AudioEngineManager'
 import { ThunderstormDefense } from './ThunderstormDefense'
 import { InvisibleDolphin } from './InvisibleDolphin'
+import { AdminMediaLibrary } from './AdminMediaLibrary'
+import { MarketingTokenSuite } from './MarketingTokenSuite'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="tools" className="w-full">
-      <TabsList className="grid w-full grid-cols-4 lg:grid-cols-9 text-xs">
+    <Tabs defaultValue="storage" className="w-full">
+      <TabsList className="grid w-full grid-cols-5 lg:grid-cols-11 text-xs">
+        <TabsTrigger value="storage">📁 Storage</TabsTrigger>
+        <TabsTrigger value="marketing">🚀 Marketing</TabsTrigger>
         <TabsTrigger value="tools">🛠️ Tools</TabsTrigger>
         <TabsTrigger value="security">🛡️ Security</TabsTrigger>
         <TabsTrigger value="ai-engine">🌌 AI Engine</TabsTrigger>
@@ -24,6 +28,14 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="thunderstorm">⚡ Defense</TabsTrigger>
         <TabsTrigger value="dolphin">🐬 Dolphin</TabsTrigger>
       </TabsList>
+
+      <TabsContent value="storage" className="space-y-6">
+        <AdminMediaLibrary />
+      </TabsContent>
+
+      <TabsContent value="marketing" className="space-y-6">
+        <MarketingTokenSuite />
+      </TabsContent>
 
       <TabsContent value="tools" className="space-y-6">
         <RefactoredAdminTools />

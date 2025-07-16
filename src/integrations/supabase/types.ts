@@ -14,6 +14,90 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_media_library: {
+        Row: {
+          category: string
+          created_at: string
+          file_size: number
+          file_type: string
+          filename: string
+          id: string
+          is_active: boolean | null
+          is_background_music: boolean | null
+          metadata: Json | null
+          mime_type: string
+          original_name: string
+          storage_bucket: string
+          storage_path: string
+          tags: string[] | null
+          updated_at: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          file_size: number
+          file_type: string
+          filename: string
+          id?: string
+          is_active?: boolean | null
+          is_background_music?: boolean | null
+          metadata?: Json | null
+          mime_type: string
+          original_name: string
+          storage_bucket?: string
+          storage_path: string
+          tags?: string[] | null
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          file_size?: number
+          file_type?: string
+          filename?: string
+          id?: string
+          is_active?: boolean | null
+          is_background_music?: boolean | null
+          metadata?: Json | null
+          mime_type?: string
+          original_name?: string
+          storage_bucket?: string
+          storage_path?: string
+          tags?: string[] | null
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Relationships: []
+      }
+      admin_metrics: {
+        Row: {
+          id: string
+          last_updated: string
+          metadata: Json | null
+          metric_name: string
+          metric_type: string
+          metric_value: number
+        }
+        Insert: {
+          id?: string
+          last_updated?: string
+          metadata?: Json | null
+          metric_name: string
+          metric_type?: string
+          metric_value?: number
+        }
+        Update: {
+          id?: string
+          last_updated?: string
+          metadata?: Json | null
+          metric_name?: string
+          metric_type?: string
+          metric_value?: number
+        }
+        Relationships: []
+      }
       admin_sessions: {
         Row: {
           created_at: string | null
@@ -782,6 +866,14 @@ export type Database = {
       has_role: {
         Args: { _user_id: string; _role: string }
         Returns: boolean
+      }
+      update_admin_metric: {
+        Args: {
+          p_metric_name: string
+          p_new_value: number
+          p_increment?: boolean
+        }
+        Returns: undefined
       }
       validate_admin_access: {
         Args: { client_ip: unknown }
