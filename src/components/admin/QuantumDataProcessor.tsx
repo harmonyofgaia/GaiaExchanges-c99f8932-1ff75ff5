@@ -374,7 +374,7 @@ export function QuantumDataProcessor() {
         <TabsContent value="quantum-encryption">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="border-red-500/30 bg-red-900/20">
-              <CardHeader>
+              <CardHeader />
                 <CardTitle className="text-red-400">🔐 Quantum Encryption Engine</CardTitle>
               </CardTitle>
               <CardContent className="space-y-4">
