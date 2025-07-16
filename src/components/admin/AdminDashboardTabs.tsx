@@ -13,22 +13,14 @@ import { AdminMediaLibrary } from './AdminMediaLibrary'
 import { MarketingTokenSuite } from './MarketingTokenSuite'
 import { InvestorReadySystem } from './InvestorReadySystem'
 import { AdvancedTacticsHub } from './AdvancedTacticsHub'
-import { WalletEngineAdmin } from './WalletEngineAdmin'
-import { PowerAnalyticsHub } from './PowerAnalyticsHub'
-import { GlobalCommandCenter } from './GlobalCommandCenter'
-import { QuantumDataProcessor } from './QuantumDataProcessor'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="storage" className="w-full">
-      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-16 text-xs">
+      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-13 text-xs">
         <TabsTrigger value="storage">📁 Storage</TabsTrigger>
         <TabsTrigger value="marketing">🚀 Marketing</TabsTrigger>
-        <TabsTrigger value="live-artist">🎭 Artist Hub</TabsTrigger>
-        <TabsTrigger value="wallet-engine">💰 Wallet Engine</TabsTrigger>
-        <TabsTrigger value="power-analytics">📊 Power Analytics</TabsTrigger>
-        <TabsTrigger value="global-command">🌍 Global Command</TabsTrigger>
-        <TabsTrigger value="quantum-data">⚛️ Quantum Data</TabsTrigger>
+        <TabsTrigger value="live-artist">🎭 Live Artists</TabsTrigger>
         <TabsTrigger value="investor">💼 Investors</TabsTrigger>
         <TabsTrigger value="tactics">⚔️ Tactics</TabsTrigger>
         <TabsTrigger value="tools">🛠️ Tools</TabsTrigger>
@@ -51,22 +43,6 @@ export function AdminDashboardTabs() {
 
       <TabsContent value="live-artist" className="space-y-6">
         <LiveArtistHub />
-      </TabsContent>
-
-      <TabsContent value="wallet-engine" className="space-y-6">
-        <WalletEngineAdmin />
-      </TabsContent>
-
-      <TabsContent value="power-analytics" className="space-y-6">
-        <PowerAnalyticsHub />
-      </TabsContent>
-
-      <TabsContent value="global-command" className="space-y-6">
-        <GlobalCommandCenter />
-      </TabsContent>
-
-      <TabsContent value="quantum-data" className="space-y-6">
-        <QuantumDataProcessor />
       </TabsContent>
 
       <TabsContent value="investor" className="space-y-6">
