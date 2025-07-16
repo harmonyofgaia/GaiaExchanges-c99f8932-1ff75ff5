@@ -374,61 +374,61 @@ export function QuantumDataProcessor() {
         <TabsContent value="quantum-encryption">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="border-red-500/30 bg-red-900/20">
-              <Card>
-  <CardHeader>
-    <CardTitle className="text-red-400">🔐 Quantum Encryption Engine</CardTitle>
-  </CardHeader>
-  <CardContent className="space-y-4">
-    <div className="text-center mb-4">
-      <Shield className="h-16 w-16 text-red-400 mx-auto mb-2" />
-      <div className="text-2xl font-bold text-red-400">UNBREAKABLE</div>
-      <div className="text-sm text-muted-foreground">Quantum-level security active</div>
-    </div>
+              <CardHeader>
+                <CardTitle className="text-red-400">🔐 Quantum Encryption Engine</CardTitle>
+              </CardTitle>
+              <CardContent className="space-y-4">
+                <div className="text-center mb-4">
+                  <Shield className="h-16 w-16 text-red-400 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-red-400">UNBREAKABLE</div>
+                  <div className="text-sm text-muted-foreground">Quantum-level security active</div>
+                </div>
 
-    <div className="space-y-3">
-      <div className="flex justify-between">
-        <span>Encryption Level:</span>
-        <Badge className="bg-red-600">QUANTUM</Badge>
-      </div>
-      <div className="flex justify-between">
-        <span>Key Length:</span>
-        <span className="font-bold text-red-400">2048+ qubits</span>
-      </div>
-      <div className="flex justify-between">
-        <span>Break Resistance:</span>
-        <span className="font-bold text-green-400">∞ years</span>
-      </div>
-      <div className="flex justify-between">
-        <span>Entanglement:</span>
-        <span className="font-bold text-purple-400">ACTIVE</span>
-      </div>
-    </div>
-  </CardContent>
-</Card>
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span>Encryption Level:</span>
+                    <Badge className="bg-red-600">QUANTUM</Badge>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Key Length:</span>
+                    <span className="font-bold text-red-400">2048+ qubits</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Break Resistance:</span>
+                    <span className="font-bold text-green-400">∞ years</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Entanglement:</span>
+                    <span className="font-bold text-purple-400">ACTIVE</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-<Card className="border-orange-500/30 bg-orange-900/20">
-  <CardHeader>
-    <CardTitle className="text-orange-400">🛡️ Security Protocols</CardTitle>
-  </CardHeader>
-  <CardContent className="space-y-4">
-    <div className="space-y-3">
-      <div className="p-3 bg-orange-900/30 rounded border border-orange-500/20">
-        <div className="font-bold text-orange-400">Quantum Key Distribution:</div>
-        <div className="text-green-400 text-sm">100% secure key exchange</div>
-      </div>
-      <div className="p-3 bg-red-900/30 rounded border border-red-500/20">
-        <div className="font-bold text-red-400">Post-Quantum Cryptography:</div>
-        <div className="text-green-400 text-sm">Future-proof encryption</div>
-      </div>
-      <div className="p-3 bg-purple-900/30 rounded border border-purple-500/20">
-        <div className="font-bold text-purple-400">Quantum Random Generation:</div>
-        <div className="text-green-400 text-sm">True randomness achieved</div>
-      </div>
+            <Card className="border-orange-500/30 bg-orange-900/20">
+              <CardHeader>
+                <CardTitle className="text-orange-400">🛡️ Security Protocols</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="p-3 bg-orange-900/30 rounded border border-orange-500/20">
+                    <div className="font-bold text-orange-400">Quantum Key Distribution:</div>
+                    <div className="text-green-400 text-sm">100% secure key exchange</div>
+                  </div>
+                  <div className="p-3 bg-red-900/30 rounded border border-red-500/20">
+                    <div className="font-bold text-red-400">Post-Quantum Cryptography:</div>
+                    <div className="text-green-400 text-sm">Future-proof encryption</div>
+                  </div>
+                  <div className="p-3 bg-purple-900/30 rounded border border-purple-500/20">
+                    <div className="font-bold text-purple-400">Quantum Random Generation:</div>
+                    <div className="text-green-400 text-sm">True randomness achieved</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
-  </CardContent>
-</Card>
-</div>
-</TabsContent>
-</Tabs>
-</div>
+  )
 }
