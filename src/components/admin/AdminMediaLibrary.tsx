@@ -5,9 +5,23 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Upload, File, Music, Video, Image, Trash2, Download, Play, Pause } from 'lucide-react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { supabase } from '@/integrations/supabase/client'
+import { 
+  Upload, 
+  File, 
+  Music, 
+  Video, 
+  Image, 
+  FileText, 
+  Trash2, 
+  Download, 
+  Play,
+  Pause,
+  Search,
+  Filter,
+  Database
+} from 'lucide-react'
 import { toast } from 'sonner'
 
 interface MediaFile {
@@ -27,13 +41,12 @@ interface MediaFile {
 }
 
 export function AdminMediaLibrary() {
-  const [mediaFiles, setMediaFiles] = useState<MediaFile[]>([])
-  const [uploading, setUploading] = useState(false)
+  const [files, setFiles] = useState<MediaFile[]>([])
+  const [isUploading, setIsUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
-  const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
-
-  const categories = ['all', 'audio', 'video', 'image', 'document', 'background_music']
+  const [filterCategory, setFilterCategory] = useState('all')
+  const [selectedFiles, setSelectedFiles] = useState<string[]>([])
 
   useEffect(() => {
     loadMediaFiles()
@@ -47,126 +60,57 @@ export function AdminMediaLibrary() {
         .order('created_at', { ascending: false })
 
       if (error) throw error
-      setMediaFiles(data || [])
+      setFiles(data || [])
     } catch (error) {
       console.error('Error loading media files:', error)
     }
   }
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files
-    if (!files || files.length === 0) return
+    const file = event.target.files?.[0]
+    if (!file) return
 
-    setUploading(true)
+    setIsUploading(true)
     setUploadProgress(0)
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i]
-      try {
-        // Generate unique filename
-        const timestamp = Date.now()
-        const randomString = Math.random().toString(36).substring(2, 15)
-        const fileExtension = file.name.split('.').pop()
-        const filename = `${timestamp}_${randomString}.${fileExtension}`
-        const filePath = `admin/${filename}`
-
-        // Upload to Supabase Storage
-        const { error: uploadError } = await supabase.storage
-          .from('admin-media')
-          .upload(filePath, file, {
-            cacheControl: '3600',
-            upsert: false
-          })
-
-        if (uploadError) throw uploadError
-
-        // Get file category
-        const fileType = file.type.split('/')[0]
-        let category = 'document'
-        if (fileType === 'audio') category = 'audio'
-        else if (fileType === 'video') category = 'video'
-        else if (fileType === 'image') category = 'image'
-
-        // Save metadata to database
-        const { error: dbError } = await supabase
-          .from('admin_media_library')
-          .insert({
-            filename,
-            original_name: file.name,
-            file_type: fileType,
-            file_size: file.size,
-            mime_type: file.type,
-            storage_path: filePath,
-            category,
-            tags: [],
-            is_background_music: false,
-            is_active: true,
-            metadata: {
-              uploaded_at: new Date().toISOString(),
-              file_extension: fileExtension
-            }
-          })
-
-        if (dbError) throw dbError
-
-        // Update progress
-        setUploadProgress(((i + 1) / files.length) * 100)
-      } catch (error) {
-        console.error('Error uploading file:', error)
-        toast.error(`Failed to upload ${file.name}`)
-      }
-    }
-
-    setUploading(false)
-    loadMediaFiles()
-    toast.success(`Successfully uploaded ${files.length} file(s)`)
-  }
-
-  const setBackgroundMusic = async (fileId: string) => {
     try {
-      // First, unset all current background music
-      await supabase
+      // Upload to Supabase Storage
+      const fileExt = file.name.split('.').pop()
+      const fileName = `${Date.now()}.${fileExt}`
+      const filePath = `uploads/${fileName}`
+
+      const { error: uploadError } = await supabase.storage
+        .from('admin-media')
+        .upload(filePath, file)
+
+      if (uploadError) throw uploadError
+
+      // Save file metadata to database
+      const { error: dbError } = await supabase
         .from('admin_media_library')
-        .update({ is_background_music: false })
-        .eq('is_background_music', true)
+        .insert({
+          filename: fileName,
+          original_name: file.name,
+          file_type: file.type.split('/')[0],
+          file_size: file.size,
+          mime_type: file.type,
+          storage_path: filePath,
+          category: 'general',
+          tags: [],
+          is_background_music: file.type.startsWith('audio/'),
+          is_active: true
+        })
 
-      // Set the selected file as background music
-      const { error } = await supabase
-        .from('admin_media_library')
-        .update({ is_background_music: true })
-        .eq('id', fileId)
+      if (dbError) throw dbError
 
-      if (error) throw error
-
-      const selectedFile = mediaFiles.find(f => f.id === fileId)
-      if (selectedFile) {
-        // Get public URL
-        const { data: urlData } = supabase.storage
-          .from('admin-media')
-          .getPublicUrl(selectedFile.storage_path)
-
-        // Store in localStorage for the background music player
-        localStorage.setItem('activeBackgroundMedia', fileId)
-        localStorage.setItem('activeBackgroundMediaData', JSON.stringify({
-          id: fileId,
-          name: selectedFile.original_name,
-          type: 'audio',
-          format: selectedFile.file_type,
-          size: selectedFile.file_size,
-          url: urlData.publicUrl,
-          uploadDate: new Date(selectedFile.created_at),
-          isActive: true
-        }))
-
-        // Trigger custom event to update background music player
-        window.dispatchEvent(new Event('backgroundMediaUpdated'))
-      }
-
+      toast.success('File uploaded successfully!')
       loadMediaFiles()
-      toast.success('Background music updated successfully')
     } catch (error) {
-      console.error('Error setting background music:', error)
-      toast.error('Failed to set background music')
+      console.error('Upload error:', error)
+      toast.error('Failed to upload file')
+    } finally {
+      setIsUploading(false)
+      setUploadProgress(0)
     }
   }
 
@@ -187,226 +131,197 @@ export function AdminMediaLibrary() {
 
       if (dbError) throw dbError
 
+      toast.success('File deleted successfully!')
       loadMediaFiles()
-      toast.success('File deleted successfully')
     } catch (error) {
-      console.error('Error deleting file:', error)
+      console.error('Delete error:', error)
       toast.error('Failed to delete file')
     }
   }
 
-  const downloadFile = async (storagePath: string, originalName: string) => {
-    try {
-      const { data, error } = await supabase.storage
-        .from('admin-media')
-        .download(storagePath)
-
-      if (error) throw error
-
-      const url = URL.createObjectURL(data)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = originalName
-      document.body.appendChild(a)
-      a.click()
-      document.body.removeChild(a)
-      URL.revokeObjectURL(url)
-    } catch (error) {
-      console.error('Error downloading file:', error)
-      toast.error('Failed to download file')
-    }
-  }
-
-  const getFileIcon = (fileType: string) => {
+  const getFileIcon = (fileType: string, mimeType: string) => {
     switch (fileType) {
-      case 'audio': return <Music className="h-5 w-5 text-purple-400" />
-      case 'video': return <Video className="h-5 w-5 text-blue-400" />
-      case 'image': return <Image className="h-5 w-5 text-green-400" />
-      default: return <File className="h-5 w-5 text-gray-400" />
+      case 'audio': return <Music className="h-4 w-4 text-green-400" />
+      case 'video': return <Video className="h-4 w-4 text-blue-400" />
+      case 'image': return <Image className="h-4 w-4 text-purple-400" />
+      case 'text': return <FileText className="h-4 w-4 text-yellow-400" />
+      default: return <File className="h-4 w-4 text-gray-400" />
     }
   }
 
   const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes'
-    const k = 1024
     const sizes = ['Bytes', 'KB', 'MB', 'GB']
-    const i = Math.floor(Math.log(bytes) / Math.log(k))
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+    if (bytes === 0) return '0 Bytes'
+    const i = Math.floor(Math.log(bytes) / Math.log(1024))
+    return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i]
   }
 
-  const filteredFiles = mediaFiles.filter(file => {
-    const matchesCategory = selectedCategory === 'all' || 
-                           (selectedCategory === 'background_music' ? file.is_background_music : file.category === selectedCategory)
+  const filteredFiles = files.filter(file => {
     const matchesSearch = file.original_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          file.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-    return matchesCategory && matchesSearch
+    const matchesCategory = filterCategory === 'all' || file.category === filterCategory
+    return matchesSearch && matchesCategory
   })
 
   return (
-    <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-purple-400">
-          <Upload className="h-5 w-5" />
-          📁 ADMIN MEDIA LIBRARY - STORAGE CENTER
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        {/* Upload Section */}
-        <div className="border border-purple-500/30 rounded-lg p-4 bg-purple-900/10">
-          <h3 className="text-lg font-semibold text-purple-400 mb-4">📤 File Upload Center</h3>
-          <div className="space-y-4">
-            <div className="flex items-center gap-4">
-              <Input
-                type="file"
-                multiple
-                onChange={handleFileUpload}
-                disabled={uploading}
-                className="bg-purple-900/20 border-purple-500/30"
-                accept="audio/*,video/*,image/*,.pdf,.txt,.doc,.docx"
-              />
-              <Button
-                onClick={() => document.querySelector('input[type="file"]')?.click()}
-                disabled={uploading}
-                className="bg-purple-600 hover:bg-purple-700"
-              >
-                <Upload className="h-4 w-4 mr-2" />
-                Select Files
-              </Button>
-            </div>
-            {uploading && (
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span>Uploading...</span>
-                  <span>{uploadProgress.toFixed(0)}%</span>
-                </div>
-                <Progress value={uploadProgress} className="h-2" />
+    <div className="space-y-6">
+      <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
+        <CardHeader>
+          <CardTitle className="text-blue-400 flex items-center gap-2">
+            <Database className="h-6 w-6" />
+            📁 ADMIN MEDIA STORAGE CENTER
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Upload Section */}
+          <div className="border-2 border-dashed border-blue-500/30 rounded-lg p-6 text-center">
+            <Upload className="h-12 w-12 text-blue-400 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-blue-400 mb-2">Upload Files</h3>
+            <p className="text-muted-foreground mb-4">
+              Drag and drop files here or click to browse
+            </p>
+            <Input
+              type="file"
+              onChange={handleFileUpload}
+              disabled={isUploading}
+              className="max-w-xs mx-auto"
+              accept="audio/*,video/*,image/*,.pdf,.txt,.doc,.docx"
+            />
+            {isUploading && (
+              <div className="mt-4">
+                <Progress value={uploadProgress} className="w-full max-w-xs mx-auto" />
+                <p className="text-sm text-blue-400 mt-2">Uploading... {uploadProgress}%</p>
               </div>
             )}
           </div>
-        </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-4">
-          <Input
-            placeholder="🔍 Search files..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="max-w-xs bg-purple-900/20 border-purple-500/30"
-          />
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="px-3 py-2 rounded-lg bg-purple-900/20 border border-purple-500/30 text-white"
-          >
-            {categories.map(category => (
-              <option key={category} value={category}>
-                {category === 'all' ? '📂 All Files' : 
-                 category === 'background_music' ? '🎵 Background Music' :
-                 `📁 ${category.charAt(0).toUpperCase() + category.slice(1)}`}
-              </option>
-            ))}
-          </select>
-        </div>
+          {/* Search and Filter */}
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search files..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 bg-black/30 border-blue-500/30"
+                />
+              </div>
+            </div>
+            <Select value={filterCategory} onValueChange={setFilterCategory}>
+              <SelectTrigger className="w-48 bg-black/30 border-blue-500/30">
+                <Filter className="h-4 w-4 mr-2" />
+                <SelectValue placeholder="Filter by category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Categories</SelectItem>
+                <SelectItem value="general">General</SelectItem>
+                <SelectItem value="music">Music</SelectItem>
+                <SelectItem value="video">Video</SelectItem>
+                <SelectItem value="images">Images</SelectItem>
+                <SelectItem value="documents">Documents</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
-        {/* Files Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredFiles.map((file) => (
-            <Card key={file.id} className="border-gray-700 bg-gray-800/50">
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between mb-3">
-                  {getFileIcon(file.file_type)}
-                  <div className="flex gap-1">
+          {/* File Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredFiles.map((file) => (
+              <Card key={file.id} className="bg-black/30 border-gray-600/30 hover:border-blue-500/50 transition-colors">
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      {getFileIcon(file.file_type, file.mime_type)}
+                      <span className="font-medium text-white truncate flex-1">
+                        {file.original_name}
+                      </span>
+                    </div>
+                    <div className="flex gap-1">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="p-1 h-6 w-6 border-green-500/30 text-green-400"
+                        onClick={() => {
+                          const url = supabase.storage.from('admin-media').getPublicUrl(file.storage_path).data.publicUrl
+                          window.open(url, '_blank')
+                        }}
+                      >
+                        <Download className="h-3 w-3" />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="p-1 h-6 w-6 border-red-500/30 text-red-400"
+                        onClick={() => deleteFile(file.id, file.storage_path)}
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Size:</span>
+                      <span className="text-blue-400">{formatFileSize(file.file_size)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Type:</span>
+                      <Badge className="bg-purple-600 text-xs">{file.file_type.toUpperCase()}</Badge>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Category:</span>
+                      <Badge className="bg-blue-600 text-xs">{file.category}</Badge>
+                    </div>
                     {file.is_background_music && (
-                      <Badge className="bg-green-600 text-white text-xs">
-                        🎵 ACTIVE BG
+                      <Badge className="bg-green-600 text-xs w-full justify-center">
+                        Background Music
                       </Badge>
                     )}
-                    <Badge variant="outline" className="text-xs">
-                      {file.category.toUpperCase()}
-                    </Badge>
                   </div>
-                </div>
-                
-                <h4 className="font-medium text-white mb-2 truncate" title={file.original_name}>
-                  {file.original_name}
-                </h4>
-                
-                <div className="text-sm text-gray-400 space-y-1">
-                  <div>📏 {formatFileSize(file.file_size)}</div>
-                  <div>📅 {new Date(file.created_at).toLocaleDateString()}</div>
-                  <div>🏷️ {file.mime_type}</div>
-                </div>
-
-                <div className="flex gap-2 mt-4">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => downloadFile(file.storage_path, file.original_name)}
-                    className="flex-1"
-                  >
-                    <Download className="h-3 w-3" />
-                  </Button>
-                  
-                  {file.file_type === 'audio' && (
-                    <Button
-                      size="sm"
-                      onClick={() => setBackgroundMusic(file.id)}
-                      className="flex-1 bg-green-600 hover:bg-green-700"
-                      disabled={file.is_background_music}
-                    >
-                      <Music className="h-3 w-3" />
-                    </Button>
-                  )}
-                  
-                  <Button
-                    size="sm"
-                    variant="destructive"
-                    onClick={() => deleteFile(file.id, file.storage_path)}
-                  >
-                    <Trash2 className="h-3 w-3" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {filteredFiles.length === 0 && (
-          <div className="text-center py-12 text-gray-400">
-            <Upload className="h-12 w-12 mx-auto mb-4 opacity-50" />
-            <p>No files found. Upload some files to get started!</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        )}
 
-        {/* Storage Stats */}
-        <div className="bg-purple-900/10 border border-purple-500/30 rounded-lg p-4">
-          <h3 className="text-lg font-semibold text-purple-400 mb-3">📊 Storage Statistics</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div>
-              <div className="text-2xl font-bold text-green-400">{mediaFiles.length}</div>
-              <div className="text-sm text-gray-400">Total Files</div>
+          {filteredFiles.length === 0 && (
+            <div className="text-center py-12">
+              <File className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-gray-400">No files found</h3>
+              <p className="text-muted-foreground">Upload some files to get started</p>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-blue-400">
-                {mediaFiles.filter(f => f.file_type === 'audio').length}
+          )}
+
+          {/* Statistics */}
+          <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-500/30">
+            <CardContent className="pt-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-green-400">{files.length}</div>
+                  <div className="text-sm text-muted-foreground">Total Files</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-blue-400">
+                    {files.filter(f => f.file_type === 'audio').length}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Audio Files</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-purple-400">
+                    {files.filter(f => f.file_type === 'video').length}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Video Files</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-yellow-400">
+                    {formatFileSize(files.reduce((acc, f) => acc + f.file_size, 0))}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Total Size</div>
+                </div>
               </div>
-              <div className="text-sm text-gray-400">Audio Files</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-purple-400">
-                {mediaFiles.filter(f => f.file_type === 'video').length}
-              </div>
-              <div className="text-sm text-gray-400">Video Files</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-yellow-400">
-                {formatFileSize(mediaFiles.reduce((sum, f) => sum + f.file_size, 0))}
-              </div>
-              <div className="text-sm text-gray-400">Total Size</div>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+            </CardContent>
+          </Card>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

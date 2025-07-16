@@ -4,291 +4,326 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { 
   TrendingUp, 
+  DollarSign, 
   Target, 
-  Zap, 
-  Globe, 
-  Crown, 
-  Rocket,
-  DollarSign,
+  Zap,
+  Globe,
+  Building,
   Users,
   BarChart3,
-  ExternalLink
+  PieChart,
+  LineChart,
+  Activity,
+  Rocket
 } from 'lucide-react'
-import { GAIA_TOKEN, GAIA_METRICS } from '@/constants/gaia'
-import { toast } from 'sonner'
+
+interface MarketData {
+  exchange: string
+  volume: number
+  price: number
+  change_24h: number
+  market_cap: number
+  dominance: number
+  status: 'listed' | 'pending' | 'dominating'
+}
 
 export function MarketDominationSuite() {
-  const [dominationMetrics, setDominationMetrics] = useState({
-    marketShare: 2.3,
-    holderGrowth: 15.7,
-    volumeIncrease: 247.8,
-    socialReach: 89.2,
-    exchangeListings: 5,
-    marketCap: GAIA_METRICS.MARKET_CAP
-  })
-
-  const [campaigns, setCampaigns] = useState([
-    { name: 'Eco-Warrior Campaign', status: 'active', reach: '2.4M', engagement: '12.8%' },
-    { name: 'Pump.fun Viral Push', status: 'active', reach: '847K', engagement: '18.3%' },
-    { name: 'Influencer Network', status: 'pending', reach: '1.9M', engagement: '9.7%' },
-    { name: 'Environmental Partners', status: 'active', reach: '3.2M', engagement: '22.1%' }
+  const [marketData, setMarketData] = useState<MarketData[]>([
+    { exchange: 'Pump.fun', volume: 2847593, price: 0.000125, change_24h: 156.7, market_cap: 8475930, dominance: 94.2, status: 'dominating' },
+    { exchange: 'Raydium', volume: 1847293, price: 0.000124, change_24h: 87.3, market_cap: 8375920, dominance: 78.9, status: 'dominating' },
+    { exchange: 'Jupiter', volume: 1247583, price: 0.000123, change_24h: 91.4, market_cap: 8275910, dominance: 67.4, status: 'listed' },
+    { exchange: 'Orca', volume: 847293, price: 0.000122, change_24h: 73.8, market_cap: 8175900, dominance: 56.7, status: 'listed' },
+    { exchange: 'CoinGecko', volume: 3847593, price: 0.000126, change_24h: 198.5, market_cap: 8575940, dominance: 89.3, status: 'pending' },
+    { exchange: 'CoinMarketCap', volume: 4847593, price: 0.000127, change_24h: 234.7, market_cap: 8675950, dominance: 92.1, status: 'pending' }
   ])
 
+  const [dominationStats, setDominationStats] = useState({
+    totalMarketCap: 52847593,
+    dailyVolume: 15847593,
+    holderCount: 847593,
+    exchangesListed: 247,
+    marketDominance: 84.7,
+    priceTarget: 0.001,
+    burnedTokens: 18475930,
+    stakingRewards: 2847593
+  })
+
   useEffect(() => {
-    // Simulate real-time market data updates
     const interval = setInterval(() => {
-      setDominationMetrics(prev => ({
+      // Simulate real-time market domination
+      setMarketData(prev => prev.map(market => ({
+        ...market,
+        volume: market.volume + Math.floor(Math.random() * 10000),
+        price: market.price + (Math.random() - 0.5) * 0.000001,
+        change_24h: market.change_24h + (Math.random() - 0.5) * 2,
+        market_cap: market.market_cap + Math.floor(Math.random() * 50000),
+        dominance: Math.min(100, market.dominance + Math.random() * 0.5)
+      })))
+
+      setDominationStats(prev => ({
         ...prev,
-        marketShare: prev.marketShare + (Math.random() - 0.5) * 0.1,
-        holderGrowth: prev.holderGrowth + (Math.random() - 0.5) * 2,
-        volumeIncrease: prev.volumeIncrease + (Math.random() - 0.5) * 10,
-        socialReach: prev.socialReach + (Math.random() - 0.5) * 1
+        totalMarketCap: prev.totalMarketCap + Math.floor(Math.random() * 100000),
+        dailyVolume: prev.dailyVolume + Math.floor(Math.random() * 50000),
+        holderCount: prev.holderCount + Math.floor(Math.random() * 1000),
+        marketDominance: Math.min(100, prev.marketDominance + Math.random() * 0.1),
+        burnedTokens: prev.burnedTokens + Math.floor(Math.random() * 10000),
+        stakingRewards: prev.stakingRewards + Math.floor(Math.random() * 5000)
       }))
-    }, 5000)
+    }, 3000)
 
     return () => clearInterval(interval)
   }, [])
 
-  const executeDominationStrategy = (strategy: string) => {
-    toast.success(`🚀 Executing ${strategy} with Supreme Admin Rights!`, {
-      description: `Market domination protocol activated for ${GAIA_TOKEN.SYMBOL} token`
-    })
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'listed': return 'bg-blue-600'
+      case 'pending': return 'bg-yellow-600'
+      case 'dominating': return 'bg-green-600'
+      default: return 'bg-gray-600'
+    }
   }
 
-  const openPumpFun = () => {
-    window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
+  const formatCurrency = (amount: number) => {
+    if (amount >= 1e9) return `$${(amount / 1e9).toFixed(2)}B`
+    if (amount >= 1e6) return `$${(amount / 1e6).toFixed(2)}M`
+    if (amount >= 1e3) return `$${(amount / 1e3).toFixed(2)}K`
+    return `$${amount.toFixed(2)}`
+  }
+
+  const formatNumber = (num: number) => {
+    if (num >= 1e9) return `${(num / 1e9).toFixed(1)}B`
+    if (num >= 1e6) return `${(num / 1e6).toFixed(1)}M`
+    if (num >= 1e3) return `${(num / 1e3).toFixed(1)}K`
+    return num.toLocaleString()
   }
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <Card className="border-red-500/50 bg-gradient-to-r from-red-900/40 to-orange-900/40">
+      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30">
         <CardHeader>
-          <CardTitle className="text-center text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
-            👑 MARKET DOMINATION SUITE - {GAIA_TOKEN.SYMBOL} TOKEN
-          </CardTitle>
-          <div className="text-center space-y-2">
-            <div className="text-lg text-red-300">
-              Supreme Market Control • {GAIA_TOKEN.SYMBOL} Ecosystem • Pump.fun Integration
-            </div>
-            <div className="text-sm text-orange-400">
-              Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}
-            </div>
-            <div className="flex justify-center gap-2 flex-wrap">
-              <Badge className="bg-red-600 animate-pulse">MARKET DOMINANCE</Badge>
-              <Badge className="bg-orange-600 animate-pulse">VIRAL CAMPAIGNS</Badge>
-              <Badge className="bg-yellow-600 animate-pulse">ECOSYSTEM GROWTH</Badge>
-            </div>
-          </div>
-        </CardHeader>
-      </Card>
-
-      {/* Real-time Domination Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border-green-500/30 bg-green-900/20">
-          <CardHeader>
-            <CardTitle className="text-green-400 flex items-center gap-2">
-              <Target className="h-5 w-5" />
-              🎯 Market Penetration
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <div className="flex justify-between mb-2">
-                <span className="text-sm">Market Share</span>
-                <span className="font-bold text-green-400">{dominationMetrics.marketShare.toFixed(2)}%</span>
-              </div>
-              <Progress value={dominationMetrics.marketShare} className="h-2" />
-            </div>
-            
-            <div>
-              <div className="flex justify-between mb-2">
-                <span className="text-sm">Holder Growth</span>
-                <span className="font-bold text-green-400">+{dominationMetrics.holderGrowth.toFixed(1)}%</span>
-              </div>
-              <Progress value={dominationMetrics.holderGrowth} className="h-2" />
-            </div>
-            
-            <div>
-              <div className="flex justify-between mb-2">
-                <span className="text-sm">Volume Increase</span>
-                <span className="font-bold text-green-400">+{dominationMetrics.volumeIncrease.toFixed(1)}%</span>
-              </div>
-              <Progress value={Math.min(dominationMetrics.volumeIncrease, 100)} className="h-2" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-blue-500/30 bg-blue-900/20">
-          <CardHeader>
-            <CardTitle className="text-blue-400 flex items-center gap-2">
-              <Globe className="h-5 w-5" />
-              🌍 Global Reach
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400 mb-2">
-                {dominationMetrics.socialReach.toFixed(1)}M
-              </div>
-              <div className="text-sm text-muted-foreground">Social Media Reach</div>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-4 text-center">
-              <div className="p-2 bg-blue-900/30 rounded">
-                <div className="font-bold text-blue-400">{dominationMetrics.exchangeListings}</div>
-                <div className="text-xs text-muted-foreground">Exchange Listings</div>
-              </div>
-              <div className="p-2 bg-purple-900/30 rounded">
-                <div className="font-bold text-purple-400">24/7</div>
-                <div className="text-xs text-muted-foreground">Active Monitoring</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-purple-500/30 bg-purple-900/20">
-          <CardHeader>
-            <CardTitle className="text-purple-400 flex items-center gap-2">
-              <DollarSign className="h-5 w-5" />
-              💰 Financial Dominance
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400 mb-2">
-                ${(dominationMetrics.marketCap / 1000000).toFixed(2)}M
-              </div>
-              <div className="text-sm text-muted-foreground">{GAIA_TOKEN.SYMBOL} Market Cap</div>
-            </div>
-            
-            <Button onClick={openPumpFun} className="w-full bg-purple-600 hover:bg-purple-700">
-              <ExternalLink className="h-4 w-4 mr-2" />
-              View on Pump.fun
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Active Campaigns */}
-      <Card className="border-orange-500/30 bg-orange-900/20">
-        <CardHeader>
-          <CardTitle className="text-orange-400 flex items-center gap-2">
-            <Rocket className="h-5 w-5" />
-            🚀 Active Domination Campaigns
+          <CardTitle className="flex items-center gap-2 text-green-400">
+            <TrendingUp className="h-6 w-6" />
+            📈 MARKET DOMINATION CONTROL CENTER
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {campaigns.map((campaign, index) => (
-              <div key={index} className="p-4 bg-black/20 rounded-lg border border-gray-700">
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-bold text-white">{campaign.name}</h4>
-                  <Badge className={`${
-                    campaign.status === 'active' ? 'bg-green-600' : 'bg-yellow-600'
-                  } text-white`}>
-                    {campaign.status.toUpperCase()}
-                  </Badge>
-                </div>
+          <Tabs defaultValue="overview" className="w-full">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="overview">📊 Overview</TabsTrigger>
+              <TabsTrigger value="exchanges">🏛️ Exchanges</TabsTrigger>
+              <TabsTrigger value="manipulation">⚡ Manipulation</TabsTrigger>
+              <TabsTrigger value="domination">👑 Domination</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="overview" className="space-y-6">
+              {/* Master Statistics */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <Card className="bg-green-900/20 border-green-500/30">
+                  <CardContent className="pt-4 text-center">
+                    <DollarSign className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                    <div className="text-2xl font-bold text-green-400">{formatCurrency(dominationStats.totalMarketCap)}</div>
+                    <div className="text-xs text-muted-foreground">Market Cap</div>
+                  </CardContent>
+                </Card>
                 
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Reach:</span>
-                    <span className="font-bold text-orange-400">{campaign.reach}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Engagement:</span>
-                    <span className="font-bold text-green-400">{campaign.engagement}</span>
-                  </div>
-                </div>
+                <Card className="bg-blue-900/20 border-blue-500/30">
+                  <CardContent className="pt-4 text-center">
+                    <Activity className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                    <div className="text-2xl font-bold text-blue-400">{formatCurrency(dominationStats.dailyVolume)}</div>
+                    <div className="text-xs text-muted-foreground">24h Volume</div>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-purple-900/20 border-purple-500/30">
+                  <CardContent className="pt-4 text-center">
+                    <Users className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                    <div className="text-2xl font-bold text-purple-400">{formatNumber(dominationStats.holderCount)}</div>
+                    <div className="text-xs text-muted-foreground">Holders</div>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-yellow-900/20 border-yellow-500/30">
+                  <CardContent className="pt-4 text-center">
+                    <Building className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
+                    <div className="text-2xl font-bold text-yellow-400">{dominationStats.exchangesListed}</div>
+                    <div className="text-xs text-muted-foreground">Exchanges</div>
+                  </CardContent>
+                </Card>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
 
-      {/* Domination Strategies */}
-      <Card className="border-red-500/30 bg-red-900/20">
-        <CardHeader>
-          <CardTitle className="text-red-400 flex items-center gap-2">
-            <Crown className="h-5 w-5" />
-            ⚔️ Supreme Domination Strategies
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Button 
-              onClick={() => executeDominationStrategy('Viral Marketing Blitz')}
-              className="h-20 flex flex-col gap-2 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700"
-            >
-              <Zap className="h-6 w-6" />
-              <span className="text-xs font-medium">Viral Marketing</span>
-            </Button>
-            
-            <Button 
-              onClick={() => executeDominationStrategy('Exchange Assault')}
-              className="h-20 flex flex-col gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
-            >
-              <BarChart3 className="h-6 w-6" />
-              <span className="text-xs font-medium">Exchange Assault</span>
-            </Button>
-            
-            <Button 
-              onClick={() => executeDominationStrategy('Influencer Army')}
-              className="h-20 flex flex-col gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
-            >
-              <Users className="h-6 w-6" />
-              <span className="text-xs font-medium">Influencer Army</span>
-            </Button>
-            
-            <Button 
-              onClick={() => executeDominationStrategy('Price Manipulation')}
-              className="h-20 flex flex-col gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
-            >
-              <TrendingUp className="h-6 w-6" />
-              <span className="text-xs font-medium">Price Control</span>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+              {/* Market Domination Progress */}
+              <Card className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border-orange-500/30">
+                <CardContent className="pt-4">
+                  <h3 className="text-orange-400 font-bold mb-4 flex items-center gap-2">
+                    <Target className="h-5 w-5" />
+                    Market Domination Progress
+                  </h3>
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-orange-300">Overall Market Control</span>
+                        <span className="text-orange-400">{dominationStats.marketDominance.toFixed(1)}%</span>
+                      </div>
+                      <Progress value={dominationStats.marketDominance} className="h-3" />
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-orange-300">Price Target Achievement</span>
+                        <span className="text-orange-400">{((marketData[0]?.price || 0) / dominationStats.priceTarget * 100).toFixed(1)}%</span>
+                      </div>
+                      <Progress value={(marketData[0]?.price || 0) / dominationStats.priceTarget * 100} className="h-3" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-      {/* Real GAiA Token Integration */}
-      <Card className="border-green-500/30 bg-green-900/20">
-        <CardHeader>
-          <CardTitle className="text-green-400">🔗 {GAIA_TOKEN.SYMBOL} Token Integration Status</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-3">
-              <h4 className="font-semibold text-green-400">✅ Connected Services</h4>
-              <ul className="text-sm space-y-1 text-muted-foreground">
-                <li>• Pump.fun live data integration</li>
-                <li>• Real-time price monitoring</li>
-                <li>• Blockchain transaction tracking</li>
-                <li>• Market cap calculations</li>
-                <li>• Holder count monitoring</li>
-              </ul>
-            </div>
-            <div className="space-y-3">
-              <h4 className="font-semibold text-blue-400">🎯 Domination Targets</h4>
-              <ul className="text-sm space-y-1 text-muted-foreground">
-                <li>• Top 10 environmental tokens</li>
-                <li>• 100K+ holder milestone</li>
-                <li>• Major exchange listings</li>
-                <li>• Celebrity endorsements</li>
-                <li>• Global media coverage</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="mt-6 text-center">
-            <Button onClick={openPumpFun} className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
-              <ExternalLink className="h-4 w-4 mr-2" />
-              🚀 Execute Market Domination on Pump.fun
-            </Button>
-          </div>
+            <TabsContent value="exchanges" className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {marketData.map((market, index) => (
+                  <Card key={index} className="bg-black/40 border-gray-600/30">
+                    <CardContent className="pt-4">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h4 className="font-bold text-white">{market.exchange}</h4>
+                          <Badge className={`${getStatusColor(market.status)} text-white text-xs mt-1`}>
+                            {market.status.toUpperCase()}
+                          </Badge>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xl font-bold text-green-400">
+                            ${market.price.toFixed(6)}
+                          </div>
+                          <div className={`text-sm ${market.change_24h >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                            {market.change_24h >= 0 ? '+' : ''}{market.change_24h.toFixed(1)}%
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-400">Volume (24h)</span>
+                          <span className="text-blue-400">{formatCurrency(market.volume)}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-400">Market Cap</span>
+                          <span className="text-purple-400">{formatCurrency(market.market_cap)}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-400">Dominance</span>
+                          <span className="text-yellow-400">{market.dominance.toFixed(1)}%</span>
+                        </div>
+                        <div className="pt-2">
+                          <Progress value={market.dominance} className="h-2" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="manipulation" className="space-y-4">
+              <Card className="bg-gradient-to-r from-red-900/20 to-orange-900/20 border-red-500/30">
+                <CardContent className="pt-4">
+                  <h3 className="text-red-400 font-bold mb-4 flex items-center gap-2">
+                    <Zap className="h-5 w-5" />
+                    Active Market Manipulation Tools
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <Button className="bg-red-600 hover:bg-red-700 h-20 flex-col">
+                      <TrendingUp className="h-6 w-6 mb-2" />
+                      <span className="text-xs">Pump Price</span>
+                      <span className="text-xs text-green-400">+{Math.floor(Math.random() * 200)}%</span>
+                    </Button>
+                    <Button className="bg-orange-600 hover:bg-orange-700 h-20 flex-col">
+                      <Activity className="h-6 w-6 mb-2" />
+                      <span className="text-xs">Volume Boost</span>
+                      <span className="text-xs text-blue-400">+{Math.floor(Math.random() * 500)}%</span>
+                    </Button>
+                    <Button className="bg-yellow-600 hover:bg-yellow-700 h-20 flex-col">
+                      <Globe className="h-6 w-6 mb-2" />
+                      <span className="text-xs">Global Hype</span>
+                      <span className="text-xs text-purple-400">Viral Mode</span>
+                    </Button>
+                    <Button className="bg-green-600 hover:bg-green-700 h-20 flex-col">
+                      <Rocket className="h-6 w-6 mb-2" />
+                      <span className="text-xs">Moon Mission</span>
+                      <span className="text-xs text-yellow-400">To Mars!</span>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-500/30">
+                <CardContent className="pt-4">
+                  <h3 className="text-purple-400 font-bold mb-4">Manipulation Statistics</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div>
+                      <div className="text-2xl font-bold text-green-400">{formatNumber(dominationStats.burnedTokens)}</div>
+                      <div className="text-sm text-muted-foreground">Tokens Burned</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-blue-400">{formatNumber(dominationStats.stakingRewards)}</div>
+                      <div className="text-sm text-muted-foreground">Staking Rewards</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-purple-400">∞</div>
+                      <div className="text-sm text-muted-foreground">Liquidity Injected</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-yellow-400">100%</div>
+                      <div className="text-sm text-muted-foreground">Market Control</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="domination" className="space-y-4">
+              <Card className="bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border-yellow-500/30">
+                <CardContent className="pt-4">
+                  <div className="text-center mb-6">
+                    <Target className="h-16 w-16 text-yellow-400 mx-auto mb-4 animate-pulse" />
+                    <h3 className="text-3xl font-bold text-yellow-400 mb-2">
+                      MARKET DOMINATION: {dominationStats.marketDominance.toFixed(1)}%
+                    </h3>
+                    <p className="text-orange-400">
+                      📈 COMPLETE CRYPTO MARKET CONTROL IN PROGRESS
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-3">
+                      <h4 className="text-yellow-400 font-bold">Controlled Exchanges:</h4>
+                      <ul className="space-y-2 text-sm">
+                        {marketData.filter(m => m.status === 'dominating').map((market, index) => (
+                          <li key={index} className="flex justify-between">
+                            <span className="text-white">{market.exchange}</span>
+                            <span className="text-green-400">{market.dominance.toFixed(1)}% controlled</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="space-y-3">
+                      <h4 className="text-orange-400 font-bold">Next Targets:</h4>
+                      <ul className="space-y-2 text-sm">
+                        {marketData.filter(m => m.status === 'pending').map((market, index) => (
+                          <li key={index} className="flex justify-between">
+                            <span className="text-white">{market.exchange}</span>
+                            <span className="text-yellow-400">Infiltrating...</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </CardContent>
       </Card>
     </div>
