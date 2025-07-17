@@ -13,14 +13,20 @@ import { AdminMediaLibrary } from './AdminMediaLibrary'
 import { MarketingTokenSuite } from './MarketingTokenSuite'
 import { InvestorReadySystem } from './InvestorReadySystem'
 import { AdvancedTacticsHub } from './AdvancedTacticsHub'
+import { WalletEngineAdmin } from './WalletEngineAdmin'
+import { PowerAnalyticsHub } from './PowerAnalyticsHub'
+import { GlobalCommandCenter } from './GlobalCommandCenter'
+import { QuantumDataProcessor } from './QuantumDataProcessor'
+import { LiveAnimalNFTManager } from './LiveAnimalNFTManager'
+import { AITaskManagerEngine } from './AITaskManagerEngine'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="storage" className="w-full">
-      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-13 text-xs">
+      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-15 text-xs">
         <TabsTrigger value="storage">📁 Storage</TabsTrigger>
         <TabsTrigger value="marketing">🚀 Marketing</TabsTrigger>
-        <TabsTrigger value="live-artist">🎭 Live Artists</TabsTrigger>
+        <TabsTrigger value="live-artist">🎭 Live Artist Hub</TabsTrigger>
         <TabsTrigger value="investor">💼 Investors</TabsTrigger>
         <TabsTrigger value="tactics">⚔️ Tactics</TabsTrigger>
         <TabsTrigger value="tools">🛠️ Tools</TabsTrigger>
@@ -31,6 +37,8 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="audio-engine">🎵 Audio</TabsTrigger>
         <TabsTrigger value="thunderstorm">⚡ Defense</TabsTrigger>
         <TabsTrigger value="dolphin">🐬 Dolphin</TabsTrigger>
+        <TabsTrigger value="live-animals">🦋 Live Animals NFT</TabsTrigger>
+        <TabsTrigger value="ai-task-manager">🤖 AI Task Manager</TabsTrigger>
       </TabsList>
 
       <TabsContent value="storage" className="space-y-6">
@@ -83,6 +91,14 @@ export function AdminDashboardTabs() {
 
       <TabsContent value="dolphin" className="space-y-6">
         <InvisibleDolphin />
+      </TabsContent>
+
+      <TabsContent value="live-animals" className="space-y-6">
+        <LiveAnimalNFTManager />
+      </TabsContent>
+
+      <TabsContent value="ai-task-manager" className="space-y-6">
+        <AITaskManagerEngine />
       </TabsContent>
     </Tabs>
   )

@@ -26,7 +26,11 @@ import {
   Star,
   Crown,
   Gift,
-  Flame
+  Flame,
+  StreamIcon,
+  Music,
+  Video,
+  Headphones
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { ArtistStreamingPlatform } from '@/components/ArtistStreamingPlatform'
@@ -55,10 +59,10 @@ export function LiveArtistHub() {
         <CardHeader>
           <CardTitle className="text-purple-400 flex items-center gap-2">
             <Radio className="h-6 w-6" />
-            🎭 Live Artist Hub - Complete Management System
+            🎭 LIVE ARTIST HUB - COMPLETE MANAGEMENT SYSTEM
           </CardTitle>
           <p className="text-muted-foreground">
-            Integrated artist streaming platform with live shows, token burning, and earnings management
+            Unified artist platform with live streaming, artist management, and complete admin control
           </p>
         </CardHeader>
         <CardContent>
@@ -83,21 +87,22 @@ export function LiveArtistHub() {
         </CardContent>
       </Card>
 
-      <Tabs defaultValue="streaming" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="streaming">🎥 Live Streaming</TabsTrigger>
-          <TabsTrigger value="platform">🎵 Artist Platform</TabsTrigger>
+      <Tabs defaultValue="live-streaming" className="w-full">
+        <TabsList className="grid w-full grid-cols-5">
+          <TabsTrigger value="live-streaming">🎥 Live Streaming</TabsTrigger>
+          <TabsTrigger value="artist-platform">🎵 Artist Platform</TabsTrigger>
+          <TabsTrigger value="admin-controls">🛡️ Admin Controls</TabsTrigger>
           <TabsTrigger value="analytics">📊 Analytics</TabsTrigger>
           <TabsTrigger value="monetization">💰 Monetization</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="streaming">
+        <TabsContent value="live-streaming">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Stream Control Panel */}
             <div className="lg:col-span-2 space-y-4">
               <Card className="border-green-500/30 bg-green-900/20">
                 <CardHeader>
-                  <CardTitle className="text-green-400">🎛️ Stream Control Center</CardTitle>
+                  <CardTitle className="text-green-400">🎛️ Live Stream Control Center</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -202,8 +207,72 @@ export function LiveArtistHub() {
           </div>
         </TabsContent>
 
-        <TabsContent value="platform">
+        <TabsContent value="artist-platform">
           <ArtistStreamingPlatform />
+        </TabsContent>
+
+        <TabsContent value="admin-controls">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="border-red-500/30 bg-red-900/20">
+              <CardHeader>
+                <CardTitle className="text-red-400">🔥 Stream Management</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button className="w-full bg-red-600 hover:bg-red-700">
+                  <Settings className="h-4 w-4 mr-2" />
+                  Stream Quality Control
+                </Button>
+                <Button className="w-full bg-orange-600 hover:bg-orange-700">
+                  <Users className="h-4 w-4 mr-2" />
+                  Viewer Management
+                </Button>
+                <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                  <Monitor className="h-4 w-4 mr-2" />
+                  Content Moderation
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-blue-500/30 bg-blue-900/20">
+              <CardHeader>
+                <CardTitle className="text-blue-400">⚡ Performance Controls</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                  <Activity className="h-4 w-4 mr-2" />
+                  Server Performance
+                </Button>
+                <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
+                  <TrendingUp className="h-4 w-4 mr-2" />
+                  Bandwidth Control
+                </Button>
+                <Button className="w-full bg-indigo-600 hover:bg-indigo-700">
+                  <Radio className="h-4 w-4 mr-2" />
+                  Network Optimization
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-green-500/30 bg-green-900/20">
+              <CardHeader>
+                <CardTitle className="text-green-400">💎 Revenue Management</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button className="w-full bg-green-600 hover:bg-green-700">
+                  <DollarSign className="h-4 w-4 mr-2" />
+                  Payment Processing
+                </Button>
+                <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
+                  <Crown className="h-4 w-4 mr-2" />
+                  VIP Tier Management
+                </Button>
+                <Button className="w-full bg-teal-600 hover:bg-teal-700">
+                  <Gift className="h-4 w-4 mr-2" />
+                  Reward Distribution
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
 
         <TabsContent value="analytics">
