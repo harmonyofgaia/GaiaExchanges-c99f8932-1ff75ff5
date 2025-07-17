@@ -22,11 +22,11 @@ import { AITaskManagerEngine } from './AITaskManagerEngine'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="live-artist" className="w-full">
+    <Tabs defaultValue="storage" className="w-full">
       <TabsList className="grid w-full grid-cols-6 lg:grid-cols-15 text-xs">
-        <TabsTrigger value="live-artist">🎭 Live Artist</TabsTrigger>
-        <TabsTrigger value="media">🎵 Media Library</TabsTrigger>
+        <TabsTrigger value="storage">📁 Storage</TabsTrigger>
         <TabsTrigger value="marketing">🚀 Marketing</TabsTrigger>
+        <TabsTrigger value="live-artist">🎭 Live Artist Hub</TabsTrigger>
         <TabsTrigger value="investor">💼 Investors</TabsTrigger>
         <TabsTrigger value="tactics">⚔️ Tactics</TabsTrigger>
         <TabsTrigger value="tools">🛠️ Tools</TabsTrigger>
@@ -37,87 +37,67 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="audio-engine">🎵 Audio</TabsTrigger>
         <TabsTrigger value="thunderstorm">⚡ Defense</TabsTrigger>
         <TabsTrigger value="dolphin">🐬 Dolphin</TabsTrigger>
-        <TabsTrigger value="wallet-engine">💰 Wallets</TabsTrigger>
-        <TabsTrigger value="power-analytics">📊 Analytics</TabsTrigger>
-        <TabsTrigger value="global-command">🌍 Global</TabsTrigger>
-        <TabsTrigger value="quantum-data">⚛️ Quantum</TabsTrigger>
-        <TabsTrigger value="animal-nft">🦁 Animal NFT</TabsTrigger>
-        <TabsTrigger value="ai-task-manager">🤖 AI Tasks</TabsTrigger>
+        <TabsTrigger value="live-animals">🦋 Live Animals NFT</TabsTrigger>
+        <TabsTrigger value="ai-task-manager">🤖 AI Task Manager</TabsTrigger>
       </TabsList>
 
-      <TabsContent value="live-artist" className="space-y-4">
-        <LiveArtistHub />
-      </TabsContent>
-
-      <TabsContent value="media" className="space-y-4">
+      <TabsContent value="storage" className="space-y-6">
         <AdminMediaLibrary />
       </TabsContent>
 
-      <TabsContent value="marketing" className="space-y-4">
+      <TabsContent value="marketing" className="space-y-6">
         <MarketingTokenSuite />
       </TabsContent>
 
-      <TabsContent value="investor" className="space-y-4">
+      <TabsContent value="live-artist" className="space-y-6">
+        <LiveArtistHub />
+      </TabsContent>
+
+      <TabsContent value="investor" className="space-y-6">
         <InvestorReadySystem />
       </TabsContent>
 
-      <TabsContent value="tactics" className="space-y-4">
+      <TabsContent value="tactics" className="space-y-6">
         <AdvancedTacticsHub />
       </TabsContent>
 
-      <TabsContent value="tools" className="space-y-4">
+      <TabsContent value="tools" className="space-y-6">
         <RefactoredAdminTools />
       </TabsContent>
 
-      <TabsContent value="security" className="space-y-4">
+      <TabsContent value="security" className="space-y-6">
         <RefactoredSecuritySuite />
       </TabsContent>
 
-      <TabsContent value="ai-engine" className="space-y-4">
+      <TabsContent value="ai-engine" className="space-y-6">
         <UltimateAIEngineSuite />
       </TabsContent>
 
-      <TabsContent value="supreme-control" className="space-y-4">
+      <TabsContent value="supreme-control" className="space-y-6">
         <SupremeControlSuite />
       </TabsContent>
 
-      <TabsContent value="ai-thinking" className="space-y-4">
+      <TabsContent value="ai-thinking" className="space-y-6">
         <ParabolicAIThinking />
       </TabsContent>
 
-      <TabsContent value="audio-engine" className="space-y-4">
+      <TabsContent value="audio-engine" className="space-y-6">
         <AudioEngineManager />
       </TabsContent>
 
-      <TabsContent value="thunderstorm" className="space-y-4">
+      <TabsContent value="thunderstorm" className="space-y-6">
         <ThunderstormDefense />
       </TabsContent>
 
-      <TabsContent value="dolphin" className="space-y-4">
+      <TabsContent value="dolphin" className="space-y-6">
         <InvisibleDolphin />
       </TabsContent>
 
-      <TabsContent value="wallet-engine" className="space-y-4">
-        <WalletEngineAdmin />
-      </TabsContent>
-
-      <TabsContent value="power-analytics" className="space-y-4">
-        <PowerAnalyticsHub />
-      </TabsContent>
-
-      <TabsContent value="global-command" className="space-y-4">
-        <GlobalCommandCenter />
-      </TabsContent>
-
-      <TabsContent value="quantum-data" className="space-y-4">
-        <QuantumDataProcessor />
-      </TabsContent>
-
-      <TabsContent value="animal-nft" className="space-y-4">
+      <TabsContent value="live-animals" className="space-y-6">
         <LiveAnimalNFTManager />
       </TabsContent>
 
-      <TabsContent value="ai-task-manager" className="space-y-4">
+      <TabsContent value="ai-task-manager" className="space-y-6">
         <AITaskManagerEngine />
       </TabsContent>
     </Tabs>
