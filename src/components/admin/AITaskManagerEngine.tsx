@@ -1,326 +1,384 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Progress } from '@/components/ui/progress'
 import { 
-  Brain,
-  Zap,
-  Settings,
-  Activity,
-  Target,
-  Shield,
-  Crown,
-  Rocket,
-  Command,
-  Bot,
-  Cpu,
-  Database,
-  Network,
-  Code,
-  Eye,
-  Lock,
-  Unlock,
+  Brain, 
+  Zap, 
+  CheckCircle, 
+  AlertTriangle, 
+  Settings, 
   Play,
   Pause,
-  Stop,
-  RefreshCw,
-  TrendingUp,
-  AlertTriangle,
-  CheckCircle
+  Cpu,
+  Activity,
+  Command,
+  Rocket,
+  Shield,
+  Eye,
+  Lock,
+  Target,
+  Globe,
+  Database,
+  Network,
+  Server
 } from 'lucide-react'
 import { toast } from 'sonner'
+
+interface AIResponse {
+  id: string
+  query: string
+  response: string
+  confidence: number
+  actionable: boolean
+  timestamp: Date
+  status: 'pending' | 'approved' | 'implemented' | 'rejected'
+  systemImpact: 'low' | 'medium' | 'high' | 'critical'
+}
 
 interface AITask {
   id: string
   name: string
-  type: 'automation' | 'monitoring' | 'analysis' | 'optimization' | 'security'
-  status: 'active' | 'paused' | 'completed' | 'failed'
-  priority: 'low' | 'medium' | 'high' | 'critical'
-  progress: number
   description: string
-  lastRun: string
-  nextRun: string
-  permissions: string[]
+  priority: 'low' | 'medium' | 'high' | 'critical'
+  status: 'pending' | 'running' | 'completed' | 'failed' | 'paused'
+  progress: number
+  category: 'security' | 'analysis' | 'automation' | 'monitoring' | 'attack' | 'defense'
+  estimatedTime: string
+  requiredResources: string[]
+  createdAt: Date
+  completedAt?: Date
+  adminOnly: boolean
+  invisible: boolean
 }
 
 export function AITaskManagerEngine() {
   const [tasks, setTasks] = useState<AITask[]>([])
-  const [engineStatus, setEngineStatus] = useState<'online' | 'offline' | 'maintenance'>('online')
-  const [systemLoad, setSystemLoad] = useState(67)
-  const [activeProcesses, setActiveProcesses] = useState(23)
-  const [securityLevel, setSecurityLevel] = useState<'standard' | 'enhanced' | 'maximum'>('maximum')
+  const [newTaskName, setNewTaskName] = useState('')
+  const [newTaskDescription, setNewTaskDescription] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('security')
+  const [selectedPriority, setSelectedPriority] = useState('medium')
+  const [systemMetrics, setSystemMetrics] = useState({
+    activeTasks: 0,
+    completedTasks: 0,
+    cpuUsage: 45,
+    memoryUsage: 67,
+    networkActivity: 89,
+    defensiveMode: true,
+    attackMode: false,
+    invisibleOperations: 12
+  })
 
   useEffect(() => {
-    // Initialize AI tasks with full admin capabilities
-    const initialTasks: AITask[] = [
+    // Initialize with some example tasks
+    const sampleTasks: AITask[] = [
       {
-        id: 'task-001',
-        name: 'Live Animal Health Monitoring',
-        type: 'monitoring',
-        status: 'active',
-        priority: 'critical',
-        progress: 94,
-        description: 'Real-time monitoring of all registered animals health and activity',
-        lastRun: '2 minutes ago',
-        nextRun: 'Continuous',
-        permissions: ['READ_ANIMAL_DATA', 'WRITE_HEALTH_REPORTS', 'ALERT_SYSTEM']
-      },
-      {
-        id: 'task-002',
-        name: 'NFT Market Price Optimization',
-        type: 'optimization',
-        status: 'active',
+        id: '1',
+        name: 'Network Perimeter Scan',
+        description: 'Comprehensive scan of network boundaries and potential entry points',
         priority: 'high',
-        progress: 78,
-        description: 'Dynamic pricing for animal NFTs based on market demand and conservation impact',
-        lastRun: '15 minutes ago',
-        nextRun: '5 minutes',
-        permissions: ['READ_MARKET_DATA', 'WRITE_PRICING', 'EXECUTE_TRADES']
+        status: 'running',
+        progress: 67,
+        category: 'security',
+        estimatedTime: '15 minutes',
+        requiredResources: ['CPU: 30%', 'Network: 50%'],
+        createdAt: new Date(Date.now() - 900000),
+        adminOnly: true,
+        invisible: false
       },
       {
-        id: 'task-003',
-        name: 'Artist Stream Analytics Engine',
-        type: 'analysis',
-        status: 'active',
-        priority: 'high',
-        progress: 85,
-        description: 'Advanced analytics for live streams, viewer engagement, and revenue optimization',
-        lastRun: '5 minutes ago',
-        nextRun: '10 minutes',
-        permissions: ['READ_STREAM_DATA', 'WRITE_ANALYTICS', 'AUDIENCE_INSIGHTS']
-      },
-      {
-        id: 'task-004',
-        name: 'Security Threat Detection',
-        type: 'security',
-        status: 'active',
+        id: '2',
+        name: 'Invisible Defense Wall Monitoring',
+        description: 'Monitor and strengthen invisible defense mechanisms',
         priority: 'critical',
-        progress: 99,
-        description: 'Advanced threat detection and prevention for the entire GAiA ecosystem',
-        lastRun: '30 seconds ago',
-        nextRun: 'Continuous',
-        permissions: ['READ_ALL_LOGS', 'WRITE_SECURITY_ALERTS', 'BLOCK_THREATS', 'ADMIN_OVERRIDE']
+        status: 'running',
+        progress: 89,
+        category: 'defense',
+        estimatedTime: 'Continuous',
+        requiredResources: ['Memory: 20%', 'Background Process'],
+        createdAt: new Date(Date.now() - 1800000),
+        adminOnly: true,
+        invisible: true
       },
       {
-        id: 'task-005',
-        name: 'Wallet Transaction Optimizer',
-        type: 'automation',
-        status: 'active',
+        id: '3',
+        name: 'Threat Intelligence Analysis',
+        description: 'Analyze incoming threats and generate countermeasures',
         priority: 'medium',
-        progress: 72,
-        description: 'Optimize transaction fees and routes for all wallet operations',
-        lastRun: '8 minutes ago',
-        nextRun: '2 minutes',
-        permissions: ['READ_WALLET_DATA', 'OPTIMIZE_TRANSACTIONS', 'ROUTE_SELECTION']
-      },
-      {
-        id: 'task-006',
-        name: 'Conservation Impact Calculator',
-        type: 'analysis',
-        status: 'active',
-        priority: 'high',
-        progress: 91,
-        description: 'Calculate real-world conservation impact from platform activities',
-        lastRun: '1 hour ago',
-        nextRun: '30 minutes',
-        permissions: ['READ_CONSERVATION_DATA', 'WRITE_IMPACT_REPORTS', 'FUNDING_ALLOCATION']
+        status: 'completed',
+        progress: 100,
+        category: 'analysis',
+        estimatedTime: '5 minutes',
+        requiredResources: ['AI Processing', 'Database Access'],
+        createdAt: new Date(Date.now() - 3600000),
+        completedAt: new Date(Date.now() - 600000),
+        adminOnly: false,
+        invisible: false
       }
     ]
-    setTasks(initialTasks)
+    setTasks(sampleTasks)
   }, [])
 
-  const toggleTaskStatus = (taskId: string) => {
-    setTasks(prev => prev.map(task => 
-      task.id === taskId 
-        ? { 
-            ...task, 
-            status: task.status === 'active' ? 'paused' : 'active'
-          }
-        : task
-    ))
+  const createTask = () => {
+    if (!newTaskName.trim()) return
+
+    const newTask: AITask = {
+      id: Date.now().toString(),
+      name: newTaskName,
+      description: newTaskDescription,
+      priority: selectedPriority as AITask['priority'],
+      status: 'pending',
+      progress: 0,
+      category: selectedCategory as AITask['category'],
+      estimatedTime: 'Calculating...',
+      requiredResources: ['To be determined'],
+      createdAt: new Date(),
+      adminOnly: true,
+      invisible: selectedCategory === 'attack' || selectedCategory === 'defense'
+    }
+
+    setTasks(prev => [newTask, ...prev])
+    setNewTaskName('')
+    setNewTaskDescription('')
     
-    const task = tasks.find(t => t.id === taskId)
-    toast.success(`🤖 Task ${task?.status === 'active' ? 'Paused' : 'Started'}!`, {
-      description: task?.name,
-      duration: 3000
+    toast.success('🤖 AI Task Created!', {
+      description: `Task "${newTask.name}" added to queue with ${newTask.priority} priority`
     })
   }
 
-  const createNewTask = () => {
-    const newTask: AITask = {
-      id: `task-${Date.now()}`,
-      name: 'Custom AI Task',
-      type: 'automation',
-      status: 'paused',
-      priority: 'medium',
-      progress: 0,
-      description: 'Custom task created by admin',
-      lastRun: 'Never',
-      nextRun: 'Manual start',
-      permissions: ['FULL_ADMIN_ACCESS']
-    }
+  const executeTask = (taskId: string) => {
+    setTasks(prev => prev.map(task => 
+      task.id === taskId ? { ...task, status: 'running' } : task
+    ))
     
-    setTasks(prev => [newTask, ...prev])
-    toast.success('✨ New AI Task Created!', {
-      description: 'Task ready for configuration',
-      duration: 3000
+    toast.success('⚡ Task Execution Started!', {
+      description: 'AI engine is now processing the task'
+    })
+  }
+
+  const pauseTask = (taskId: string) => {
+    setTasks(prev => prev.map(task => 
+      task.id === taskId ? { ...task, status: 'paused' } : task
+    ))
+    
+    toast.warning('⏸️ Task Paused', {
+      description: 'Task execution has been paused'
     })
   }
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-green-600'
-      case 'paused': return 'bg-yellow-600'
-      case 'completed': return 'bg-blue-600'
+      case 'running': return 'bg-blue-600'
+      case 'completed': return 'bg-green-600'
       case 'failed': return 'bg-red-600'
+      case 'paused': return 'bg-yellow-600'
       default: return 'bg-gray-600'
     }
   }
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'critical': return 'border-red-500/50 bg-red-900/20'
-      case 'high': return 'border-orange-500/50 bg-orange-900/20'
-      case 'medium': return 'border-blue-500/50 bg-blue-900/20'
-      case 'low': return 'border-gray-500/50 bg-gray-900/20'
-      default: return 'border-gray-500/50 bg-gray-900/20'
-    }
-  }
-
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'automation': return <Bot className="h-4 w-4" />
-      case 'monitoring': return <Eye className="h-4 w-4" />
-      case 'analysis': return <Brain className="h-4 w-4" />
-      case 'optimization': return <TrendingUp className="h-4 w-4" />
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
       case 'security': return <Shield className="h-4 w-4" />
-      default: return <Cpu className="h-4 w-4" />
+      case 'analysis': return <Brain className="h-4 w-4" />
+      case 'automation': return <Cpu className="h-4 w-4" />
+      case 'monitoring': return <Eye className="h-4 w-4" />
+      case 'attack': return <Target className="h-4 w-4" />
+      case 'defense': return <Lock className="h-4 w-4" />
+      default: return <Activity className="h-4 w-4" />
     }
   }
 
   return (
     <div className="space-y-6">
-      {/* AI Engine Header */}
-      <Card className="border-2 border-cyan-500/50 bg-gradient-to-br from-cyan-900/30 to-blue-900/30">
+      {/* Header */}
+      <Card className="border-purple-500/50 bg-gradient-to-r from-purple-900/40 to-blue-900/40">
         <CardHeader>
-          <CardTitle className="text-cyan-400 flex items-center gap-2">
-            <Brain className="h-6 w-6" />
-            🤖 AI TASK MANAGER ENGINE - UNLIMITED ADMIN POWER
+          <CardTitle className="text-center text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
+            🤖 AI TASK MANAGER ENGINE - UNLIMITED POWER
           </CardTitle>
-          <p className="text-muted-foreground">
-            Powerful AI engine with full admin rights and unlimited task management capabilities
-          </p>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <div className="text-center p-4 bg-cyan-900/30 border border-cyan-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-cyan-400">{engineStatus.toUpperCase()}</div>
-              <div className="text-sm text-muted-foreground">Engine Status</div>
+          <div className="text-center space-y-2">
+            <div className="text-lg text-purple-300">
+              Autonomous Operations • Background Processing • Full Admin Control
             </div>
-            <div className="text-center p-4 bg-green-900/30 border border-green-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-green-400">{tasks.filter(t => t.status === 'active').length}</div>
-              <div className="text-sm text-muted-foreground">Active Tasks</div>
-            </div>
-            <div className="text-center p-4 bg-blue-900/30 border border-blue-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-blue-400">{systemLoad}%</div>
-              <div className="text-sm text-muted-foreground">System Load</div>
-            </div>
-            <div className="text-center p-4 bg-purple-900/30 border border-purple-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-purple-400">{activeProcesses}</div>
-              <div className="text-sm text-muted-foreground">Processes</div>
-            </div>
-            <div className="text-center p-4 bg-orange-900/30 border border-orange-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-orange-400">{securityLevel.toUpperCase()}</div>
-              <div className="text-sm text-muted-foreground">Security Level</div>
+            <div className="flex justify-center gap-2 flex-wrap">
+              <Badge className="bg-purple-600 animate-pulse">UNLIMITED BOUNDARIES</Badge>
+              <Badge className="bg-blue-600 animate-pulse">ADMIN GOD MODE</Badge>
+              <Badge className="bg-red-600 animate-pulse">INVISIBLE OPERATIONS</Badge>
             </div>
           </div>
-        </CardContent>
+        </CardHeader>
       </Card>
 
-      <Tabs defaultValue="tasks" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="tasks">🔧 Active Tasks</TabsTrigger>
-          <TabsTrigger value="create">➕ Create Task</TabsTrigger>
-          <TabsTrigger value="engine">⚙️ Engine Controls</TabsTrigger>
-          <TabsTrigger value="permissions">🔐 Permissions</TabsTrigger>
-          <TabsTrigger value="analytics">📊 Performance</TabsTrigger>
+      {/* System Metrics */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <Card className="border-green-500/30 bg-green-900/20">
+          <CardContent className="p-4 text-center">
+            <Activity className="h-8 w-8 mx-auto text-green-400 mb-2" />
+            <div className="text-2xl font-bold text-green-400">{systemMetrics.activeTasks}</div>
+            <div className="text-sm text-muted-foreground">Active Tasks</div>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-blue-500/30 bg-blue-900/20">
+          <CardContent className="p-4 text-center">
+            <CheckCircle className="h-8 w-8 mx-auto text-blue-400 mb-2" />
+            <div className="text-2xl font-bold text-blue-400">{systemMetrics.completedTasks}</div>
+            <div className="text-sm text-muted-foreground">Completed</div>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-yellow-500/30 bg-yellow-900/20">
+          <CardContent className="p-4 text-center">
+            <Cpu className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
+            <div className="text-2xl font-bold text-yellow-400">{systemMetrics.cpuUsage}%</div>
+            <div className="text-sm text-muted-foreground">CPU Usage</div>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-purple-500/30 bg-purple-900/20">
+          <CardContent className="p-4 text-center">
+            <Eye className="h-8 w-8 mx-auto text-purple-400 mb-2" />
+            <div className="text-2xl font-bold text-purple-400">{systemMetrics.invisibleOperations}</div>
+            <div className="text-sm text-muted-foreground">Invisible Ops</div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Tabs defaultValue="create-task" className="w-full">
+        <TabsList className="grid w-full grid-cols-4">
+          <TabsTrigger value="create-task">🎯 Create Task</TabsTrigger>
+          <TabsTrigger value="active-tasks">⚡ Active Tasks</TabsTrigger>
+          <TabsTrigger value="system-control">🔧 System Control</TabsTrigger>
+          <TabsTrigger value="advanced-ops">🚀 Advanced Ops</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="tasks">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <TabsContent value="create-task" className="space-y-4">
+          <Card className="border-cyan-500/30 bg-cyan-900/20">
+            <CardHeader>
+              <CardTitle className="text-cyan-400">🎯 Create New AI Task</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Input
+                value={newTaskName}
+                onChange={(e) => setNewTaskName(e.target.value)}
+                placeholder="Task name (e.g., 'Network Penetration Analysis')"
+                className="bg-black/30"
+              />
+              
+              <Textarea
+                value={newTaskDescription}
+                onChange={(e) => setNewTaskDescription(e.target.value)}
+                placeholder="Detailed task description and objectives..."
+                className="bg-black/30 min-h-20"
+              />
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm text-cyan-300 mb-2 block">Category</label>
+                  <select 
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="w-full p-2 bg-black/30 border border-cyan-500/30 rounded"
+                  >
+                    <option value="security">🛡️ Security</option>
+                    <option value="analysis">🧠 Analysis</option>
+                    <option value="automation">🤖 Automation</option>
+                    <option value="monitoring">👁️ Monitoring</option>
+                    <option value="attack">⚔️ Attack</option>
+                    <option value="defense">🔒 Defense</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="text-sm text-cyan-300 mb-2 block">Priority</label>
+                  <select 
+                    value={selectedPriority}
+                    onChange={(e) => setSelectedPriority(e.target.value)}
+                    className="w-full p-2 bg-black/30 border border-cyan-500/30 rounded"
+                  >
+                    <option value="low">🟢 Low</option>
+                    <option value="medium">🟡 Medium</option>
+                    <option value="high">🟠 High</option>
+                    <option value="critical">🔴 Critical</option>
+                  </select>
+                </div>
+              </div>
+              
+              <Button 
+                onClick={createTask}
+                className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700"
+              >
+                <Rocket className="h-4 w-4 mr-2" />
+                🚀 Create & Queue Task
+              </Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="active-tasks" className="space-y-4">
+          <div className="space-y-4">
             {tasks.map((task) => (
-              <Card key={task.id} className={`border-2 ${getPriorityColor(task.priority)} hover:scale-105 transition-all`}>
-                <CardContent className="p-4 space-y-4">
-                  <div className="flex justify-between items-start">
-                    <div className="flex items-center gap-2">
-                      {getTypeIcon(task.type)}
-                      <h3 className="font-bold text-white">{task.name}</h3>
+              <Card key={task.id} className="border-gray-500/30 bg-gray-900/20">
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      {getCategoryIcon(task.category)}
+                      <CardTitle className="text-lg">{task.name}</CardTitle>
+                      {task.invisible && <Badge className="bg-purple-600">👻 INVISIBLE</Badge>}
+                      {task.adminOnly && <Badge className="bg-red-600">👑 ADMIN ONLY</Badge>}
                     </div>
-                    <div className="flex gap-2">
-                      <Badge className={`${getStatusColor(task.status)} text-white text-xs`}>
-                        {task.status}
-                      </Badge>
-                      <Badge variant="outline" className="text-xs">
-                        {task.priority}
-                      </Badge>
-                    </div>
+                    <Badge className={`${getStatusColor(task.status)} text-white`}>
+                      {task.status.toUpperCase()}
+                    </Badge>
                   </div>
-
+                </CardHeader>
+                <CardContent className="space-y-4">
                   <p className="text-sm text-muted-foreground">{task.description}</p>
-
+                  
                   <div className="space-y-2">
-                    <div className="flex justify-between text-xs">
-                      <span>Progress:</span>
-                      <span className="text-cyan-400">{task.progress}%</span>
+                    <div className="flex justify-between text-sm">
+                      <span>Progress</span>
+                      <span>{task.progress}%</span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div 
-                        className="bg-gradient-to-r from-cyan-400 to-blue-500 h-2 rounded-full"
-                        style={{ width: `${task.progress}%` }}
-                      ></div>
-                    </div>
+                    <Progress value={task.progress} className="h-2" />
                   </div>
-
-                  <div className="grid grid-cols-2 gap-2 text-xs">
+                  
+                  <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="text-muted-foreground">Last Run:</span>
-                      <div className="text-green-400">{task.lastRun}</div>
+                      <span className="text-muted-foreground">Priority: </span>
+                      <span className="capitalize">{task.priority}</span>
                     </div>
                     <div>
-                      <span className="text-muted-foreground">Next Run:</span>
-                      <div className="text-blue-400">{task.nextRun}</div>
+                      <span className="text-muted-foreground">Est. Time: </span>
+                      <span>{task.estimatedTime}</span>
                     </div>
                   </div>
-
-                  <div className="flex flex-wrap gap-1">
-                    {task.permissions.slice(0, 3).map(permission => (
-                      <Badge key={permission} variant="outline" className="text-xs">
-                        {permission}
-                      </Badge>
-                    ))}
-                    {task.permissions.length > 3 && (
-                      <Badge variant="outline" className="text-xs">
-                        +{task.permissions.length - 3} more
-                      </Badge>
-                    )}
-                  </div>
-
+                  
                   <div className="flex gap-2">
-                    <Button
-                      onClick={() => toggleTaskStatus(task.id)}
-                      className={`flex-1 ${task.status === 'active' ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-green-600 hover:bg-green-700'}`}
-                      size="sm"
-                    >
-                      {task.status === 'active' ? <Pause className="h-3 w-3 mr-1" /> : <Play className="h-3 w-3 mr-1" />}
-                      {task.status === 'active' ? 'Pause' : 'Start'}
-                    </Button>
-                    <Button className="flex-1 bg-blue-600 hover:bg-blue-700" size="sm">
-                      <Settings className="h-3 w-3 mr-1" />
-                      Configure
-                    </Button>
+                    {task.status === 'pending' && (
+                      <Button 
+                        onClick={() => executeTask(task.id)}
+                        size="sm"
+                        className="bg-green-600 hover:bg-green-700"
+                      >
+                        <Play className="h-3 w-3 mr-1" />
+                        Execute
+                      </Button>
+                    )}
+                    {task.status === 'running' && (
+                      <Button 
+                        onClick={() => pauseTask(task.id)}
+                        size="sm"
+                        className="bg-yellow-600 hover:bg-yellow-700"
+                      >
+                        <Pause className="h-3 w-3 mr-1" />
+                        Pause
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -328,243 +386,76 @@ export function AITaskManagerEngine() {
           </div>
         </TabsContent>
 
-        <TabsContent value="create">
-          <Card className="border-purple-500/30">
+        <TabsContent value="system-control" className="space-y-4">
+          <Card className="border-orange-500/30 bg-orange-900/20">
             <CardHeader>
-              <CardTitle className="text-purple-400">🚀 Create New AI Task</CardTitle>
+              <CardTitle className="text-orange-400">🔧 System Control Panel</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-sm font-medium">Task Name:</label>
-                    <Input placeholder="Enter task name" />
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium">Task Type:</label>
-                    <select className="w-full px-3 py-2 bg-muted border border-border rounded-md">
-                      <option value="automation">Automation</option>
-                      <option value="monitoring">Monitoring</option>
-                      <option value="analysis">Analysis</option>
-                      <option value="optimization">Optimization</option>
-                      <option value="security">Security</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium">Priority:</label>
-                    <select className="w-full px-3 py-2 bg-muted border border-border rounded-md">
-                      <option value="critical">Critical</option>
-                      <option value="high">High</option>
-                      <option value="medium">Medium</option>
-                      <option value="low">Low</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-sm font-medium">Description:</label>
-                    <textarea 
-                      className="w-full px-3 py-2 bg-muted border border-border rounded-md h-20"
-                      placeholder="Describe the task functionality"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium">Permissions:</label>
-                    <div className="space-y-2">
-                      {['FULL_ADMIN_ACCESS', 'READ_ALL_DATA', 'WRITE_ALL_DATA', 'EXECUTE_COMMANDS', 'SYSTEM_CONTROL'].map(permission => (
-                        <label key={permission} className="flex items-center gap-2">
-                          <input type="checkbox" className="rounded" />
-                          <span className="text-sm">{permission}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <Button onClick={createNewTask} className="w-full bg-purple-600 hover:bg-purple-700">
-                <Rocket className="h-4 w-4 mr-2" />
-                Create AI Task
-              </Button>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="engine">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="border-red-500/30 bg-red-900/20">
-              <CardHeader>
-                <CardTitle className="text-red-400">🔥 Engine Controls</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button className="w-full bg-red-600 hover:bg-red-700">
-                  <Stop className="h-4 w-4 mr-2" />
-                  Emergency Stop
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Button className="bg-red-600 hover:bg-red-700 h-16">
+                  <Shield className="h-6 w-6 mr-2" />
+                  🛡️ ACTIVATE DEFENSE MODE
                 </Button>
-                <Button className="w-full bg-orange-600 hover:bg-orange-700">
-                  <RefreshCw className="h-4 w-4 mr-2" />
-                  Restart Engine
+                
+                <Button className="bg-orange-600 hover:bg-orange-700 h-16">
+                  <Target className="h-6 w-6 mr-2" />
+                  ⚔️ ENABLE ATTACK MODE
                 </Button>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                  <Command className="h-4 w-4 mr-2" />
-                  Force Override
+                
+                <Button className="bg-purple-600 hover:bg-purple-700 h-16">
+                  <Eye className="h-6 w-6 mr-2" />
+                  👻 INVISIBLE OPERATIONS
                 </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-blue-500/30 bg-blue-900/20">
-              <CardHeader>
-                <CardTitle className="text-blue-400">⚡ Performance Controls</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  <Cpu className="h-4 w-4 mr-2" />
-                  CPU Optimization
+                
+                <Button className="bg-blue-600 hover:bg-blue-700 h-16">
+                  <Network className="h-6 w-6 mr-2" />
+                  🌐 NETWORK CONTROL
                 </Button>
-                <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
-                  <Database className="h-4 w-4 mr-2" />
-                  Database Tuning
-                </Button>
-                <Button className="w-full bg-indigo-600 hover:bg-indigo-700">
-                  <Network className="h-4 w-4 mr-2" />
-                  Network Boost
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-green-500/30 bg-green-900/20">
-              <CardHeader>
-                <CardTitle className="text-green-400">🛡️ Security Controls</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button className="w-full bg-green-600 hover:bg-green-700">
-                  <Lock className="h-4 w-4 mr-2" />
-                  Lock All Tasks
-                </Button>
-                <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
-                  <Unlock className="h-4 w-4 mr-2" />
-                  Unlock All Tasks
-                </Button>
-                <Button className="w-full bg-teal-600 hover:bg-teal-700">
-                  <Crown className="h-4 w-4 mr-2" />
-                  Admin Override
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="permissions">
-          <Card className="border-yellow-500/30">
-            <CardHeader>
-              <CardTitle className="text-yellow-400">🔐 Permission Management System</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="text-lg font-bold text-white mb-4">Available Permissions</h3>
-                  <div className="space-y-3">
-                    {[
-                      'FULL_ADMIN_ACCESS',
-                      'READ_ALL_DATA',
-                      'WRITE_ALL_DATA',
-                      'EXECUTE_COMMANDS',
-                      'SYSTEM_CONTROL',
-                      'WALLET_MANAGEMENT',
-                      'NFT_GENERATION',
-                      'STREAM_CONTROL',
-                      'ANIMAL_MONITORING',
-                      'SECURITY_OVERRIDE'
-                    ].map(permission => (
-                      <div key={permission} className="flex items-center justify-between p-3 bg-muted rounded">
-                        <span className="text-sm font-medium">{permission}</span>
-                        <Badge className="bg-green-600 text-white">
-                          <CheckCircle className="h-3 w-3 mr-1" />
-                          Granted
-                        </Badge>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-bold text-white mb-4">Security Settings</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium">Security Level:</label>
-                      <select 
-                        value={securityLevel}
-                        onChange={(e) => setSecurityLevel(e.target.value as any)}
-                        className="w-full px-3 py-2 bg-muted border border-border rounded-md"
-                      >
-                        <option value="standard">Standard</option>
-                        <option value="enhanced">Enhanced</option>
-                        <option value="maximum">Maximum</option>
-                      </select>
-                    </div>
-                    <Button className="w-full bg-yellow-600 hover:bg-yellow-700">
-                      <Shield className="h-4 w-4 mr-2" />
-                      Apply Security Settings
-                    </Button>
-                  </div>
-                </div>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="analytics">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="border-cyan-500/30">
-              <CardHeader>
-                <CardTitle className="text-cyan-400">📈 Engine Performance</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-3 bg-cyan-900/30 rounded">
-                      <div className="text-2xl font-bold text-cyan-400">99.7%</div>
-                      <div className="text-xs">Uptime</div>
-                    </div>
-                    <div className="text-center p-3 bg-green-900/30 rounded">
-                      <div className="text-2xl font-bold text-green-400">847ms</div>
-                      <div className="text-xs">Avg Response</div>
+        <TabsContent value="advanced-ops" className="space-y-4">
+          <Card className="border-red-500/30 bg-red-900/20">
+            <CardHeader>
+              <CardTitle className="text-red-400">🚀 Advanced Operations</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="text-center space-y-4">
+                <div className="text-6xl mb-4">🚀⚡</div>
+                <h3 className="text-2xl font-bold text-red-400">UNLIMITED AI TASK MANAGEMENT</h3>
+                <p className="text-red-300">
+                  Full administrative control over all AI operations with no boundaries
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <h4 className="text-red-400 font-bold">🎯 CAPABILITIES:</h4>
+                    <div className="text-sm space-y-1">
+                      <div>✅ Autonomous Task Creation</div>
+                      <div>✅ Background Processing</div>
+                      <div>✅ Invisible Operations</div>
+                      <div>✅ Real-time Monitoring</div>
+                      <div>✅ Dynamic Resource Allocation</div>
                     </div>
                   </div>
-                  <div className="h-32 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded flex items-end justify-center">
-                    <div className="text-white text-sm">Performance Chart</div>
+                  
+                  <div className="space-y-2">
+                    <h4 className="text-red-400 font-bold">⚡ ADMIN FEATURES:</h4>
+                    <div className="text-sm space-y-1">
+                      <div>🔴 Emergency Task Override</div>
+                      <div>🔴 System Resource Control</div>
+                      <div>🔴 Network Operation Management</div>
+                      <div>🔴 Security Protocol Control</div>
+                      <div>🔴 Unlimited Task Execution</div>
+                    </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-purple-500/30">
-              <CardHeader>
-                <CardTitle className="text-purple-400">🎯 Task Efficiency</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span>Success Rate:</span>
-                    <span className="text-green-400">98.4%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Tasks Completed:</span>
-                    <span className="text-blue-400">12,847</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Processing Speed:</span>
-                    <span className="text-purple-400">2.3x Faster</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Resource Usage:</span>
-                    <span className="text-yellow-400">Optimized</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
