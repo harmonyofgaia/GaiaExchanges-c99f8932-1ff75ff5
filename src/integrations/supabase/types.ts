@@ -237,37 +237,15 @@ export type Database = {
           trees_planted?: number | null
           user_id?: string
         }
-        Relationships: []
-      }
-      error_logs: {
-        Row: {
-          context: Json | null
-          created_at: string | null
-          error_message: string
-          error_type: string
-          id: number
-          is_critical: boolean | null
-          user_id: string | null
-        }
-        Insert: {
-          context?: Json | null
-          created_at?: string | null
-          error_message: string
-          error_type: string
-          id?: never
-          is_critical?: boolean | null
-          user_id?: string | null
-        }
-        Update: {
-          context?: Json | null
-          created_at?: string | null
-          error_message?: string
-          error_type?: string
-          id?: never
-          is_critical?: boolean | null
-          user_id?: string | null
-        }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "environmental_impact_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "transactions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       fee_destinations: {
         Row: {
@@ -342,6 +320,13 @@ export type Database = {
             columns: ["destination_id"]
             isOneToOne: false
             referencedRelation: "fee_destinations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fee_transactions_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "transactions"
             referencedColumns: ["id"]
           },
         ]
@@ -507,33 +492,45 @@ export type Database = {
       profiles: {
         Row: {
           avatar_url: string | null
+          country: string | null
           created_at: string | null
-          email: string
           full_name: string | null
           id: string
-          last_login: string | null
-          role: string | null
+          kyc_status: string | null
+          phone: string | null
+          security_level: Database["public"]["Enums"]["security_level"] | null
+          two_factor_enabled: boolean | null
           updated_at: string | null
+          username: string | null
+          verified: boolean | null
         }
         Insert: {
           avatar_url?: string | null
+          country?: string | null
           created_at?: string | null
-          email: string
           full_name?: string | null
-          id?: string
-          last_login?: string | null
-          role?: string | null
+          id: string
+          kyc_status?: string | null
+          phone?: string | null
+          security_level?: Database["public"]["Enums"]["security_level"] | null
+          two_factor_enabled?: boolean | null
           updated_at?: string | null
+          username?: string | null
+          verified?: boolean | null
         }
         Update: {
           avatar_url?: string | null
+          country?: string | null
           created_at?: string | null
-          email?: string
           full_name?: string | null
           id?: string
-          last_login?: string | null
-          role?: string | null
+          kyc_status?: string | null
+          phone?: string | null
+          security_level?: Database["public"]["Enums"]["security_level"] | null
+          two_factor_enabled?: boolean | null
           updated_at?: string | null
+          username?: string | null
+          verified?: boolean | null
         }
         Relationships: []
       }
@@ -569,45 +566,6 @@ export type Database = {
           resolved?: boolean | null
           severity?: Database["public"]["Enums"]["security_level"] | null
           user_agent?: string | null
-          user_id?: string | null
-        }
-        Relationships: []
-      }
-      security_logs: {
-        Row: {
-          client_addr: unknown | null
-          created_at: string | null
-          error_code: string
-          error_context: Json | null
-          error_message: string
-          id: number
-          log_level: string
-          request_context: Json | null
-          severity_score: number | null
-          user_id: string | null
-        }
-        Insert: {
-          client_addr?: unknown | null
-          created_at?: string | null
-          error_code: string
-          error_context?: Json | null
-          error_message: string
-          id?: never
-          log_level: string
-          request_context?: Json | null
-          severity_score?: number | null
-          user_id?: string | null
-        }
-        Update: {
-          client_addr?: unknown | null
-          created_at?: string | null
-          error_code?: string
-          error_context?: Json | null
-          error_message?: string
-          id?: never
-          log_level?: string
-          request_context?: Json | null
-          severity_score?: number | null
           user_id?: string | null
         }
         Relationships: []
@@ -681,48 +639,6 @@ export type Database = {
         }
         Relationships: []
       }
-      table_dependencies: {
-        Row: {
-          cascade_delete: boolean | null
-          created_at: string | null
-          dependency_strength: number | null
-          description: string | null
-          foreign_key_column: string | null
-          id: number
-          is_active: boolean | null
-          relationship_type: string
-          source_table_name: string
-          target_table_name: string
-          updated_at: string | null
-        }
-        Insert: {
-          cascade_delete?: boolean | null
-          created_at?: string | null
-          dependency_strength?: number | null
-          description?: string | null
-          foreign_key_column?: string | null
-          id?: never
-          is_active?: boolean | null
-          relationship_type: string
-          source_table_name: string
-          target_table_name: string
-          updated_at?: string | null
-        }
-        Update: {
-          cascade_delete?: boolean | null
-          created_at?: string | null
-          dependency_strength?: number | null
-          description?: string | null
-          foreign_key_column?: string | null
-          id?: never
-          is_active?: boolean | null
-          relationship_type?: string
-          source_table_name?: string
-          target_table_name?: string
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
       trading_pairs: {
         Row: {
           base_currency: string
@@ -774,70 +690,61 @@ export type Database = {
         }
         Relationships: []
       }
-      transaction_types: {
-        Row: {
-          description: string | null
-          id: number
-          is_active: boolean | null
-          name: string
-        }
-        Insert: {
-          description?: string | null
-          id?: number
-          is_active?: boolean | null
-          name: string
-        }
-        Update: {
-          description?: string | null
-          id?: number
-          is_active?: boolean | null
-          name?: string
-        }
-        Relationships: []
-      }
       transactions: {
         Row: {
           amount: number
+          block_number: number | null
           created_at: string | null
           currency: string
-          external_reference: string | null
-          id: number
+          fee: number | null
+          from_address: string | null
+          id: string
           metadata: Json | null
+          order_id: string | null
           status: string | null
-          transaction_type_id: number | null
-          updated_at: string | null
-          user_id: string | null
+          to_address: string | null
+          transaction_hash: string | null
+          transaction_type: Database["public"]["Enums"]["transaction_type"]
+          user_id: string
         }
         Insert: {
           amount: number
+          block_number?: number | null
           created_at?: string | null
           currency: string
-          external_reference?: string | null
-          id?: never
+          fee?: number | null
+          from_address?: string | null
+          id?: string
           metadata?: Json | null
+          order_id?: string | null
           status?: string | null
-          transaction_type_id?: number | null
-          updated_at?: string | null
-          user_id?: string | null
+          to_address?: string | null
+          transaction_hash?: string | null
+          transaction_type: Database["public"]["Enums"]["transaction_type"]
+          user_id: string
         }
         Update: {
           amount?: number
+          block_number?: number | null
           created_at?: string | null
           currency?: string
-          external_reference?: string | null
-          id?: never
+          fee?: number | null
+          from_address?: string | null
+          id?: string
           metadata?: Json | null
+          order_id?: string | null
           status?: string | null
-          transaction_type_id?: number | null
-          updated_at?: string | null
-          user_id?: string | null
+          to_address?: string | null
+          transaction_hash?: string | null
+          transaction_type?: Database["public"]["Enums"]["transaction_type"]
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "transactions_transaction_type_id_fkey"
-            columns: ["transaction_type_id"]
+            foreignKeyName: "transactions_order_id_fkey"
+            columns: ["order_id"]
             isOneToOne: false
-            referencedRelation: "transaction_types"
+            referencedRelation: "orders"
             referencedColumns: ["id"]
           },
         ]
@@ -945,37 +852,9 @@ export type Database = {
       }
     }
     Views: {
-      security_log_summary: {
-        Row: {
-          affected_users: string[] | null
-          avg_severity: number | null
-          error_code: string | null
-          event_count: number | null
-          event_frequency: string | null
-          first_occurrence: string | null
-          last_occurrence: string | null
-          log_level: string | null
-          risk_level: string | null
-          source_ips: unknown[] | null
-          unique_error_messages: Json | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
-      analyze_slow_queries: {
-        Args: { threshold_ms?: number }
-        Returns: {
-          query: string
-          calls: number
-          total_time: number
-          mean_time: number
-        }[]
-      }
-      check_password_complexity: {
-        Args: { password: string }
-        Returns: boolean
-      }
       create_admin_session: {
         Args: {
           client_ip: unknown
@@ -984,106 +863,16 @@ export type Database = {
         }
         Returns: string
       }
-      create_index_if_not_exists: {
-        Args:
-          | { p_table_name: string; p_column_name: string }
-          | {
-              schema_name: string
-              table_name: string
-              index_name: string
-              index_definition: string
-            }
-        Returns: boolean
-      }
-      create_user_rls_policy: {
-        Args: {
-          p_table_name: string
-          p_policy_name: string
-          p_action?: string
-          p_user_id_column?: string
-        }
-        Returns: undefined
-      }
-      generate_user_rls_policies: {
-        Args: {
-          table_name: string
-          user_id_column?: string
-          schema_name?: string
-        }
-        Returns: string
-      }
-      get_current_user_id: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
       has_role: {
         Args: { _user_id: string; _role: string }
         Returns: boolean
       }
-      insert_transaction: {
-        Args:
-          | { p_amount: number; p_description: string }
-          | {
-              p_user_id: string
-              p_transaction_type: string
-              p_amount: number
-              p_currency: string
-              p_status?: string
-              p_external_reference?: string
-              p_metadata?: Json
-            }
-        Returns: number
-      }
-      log_error: {
-        Args:
-          | { p_error_message: string; p_context?: string }
-          | {
-              p_error_type: string
-              p_error_message: string
-              p_context?: Json
-              p_is_critical?: boolean
-            }
-        Returns: undefined
-      }
-      log_security_event: {
-        Args:
-          | {
-              p_log_level: string
-              p_error_code: string
-              p_error_message: string
-            }
-          | {
-              p_log_level: string
-              p_error_code: string
-              p_error_message: string
-              p_error_context?: Json
-              p_severity_score?: number
-            }
-          | {
-              p_log_level: string
-              p_error_code: string
-              p_error_message: string
-              p_error_context?: string
-              p_severity_score?: number
-            }
-          | {
-              p_log_level: string
-              p_error_code?: string
-              p_error_message?: string
-              p_error_context?: Json
-              p_user_id?: string
-              p_ip_address?: unknown
-            }
-        Returns: number
-      }
       update_admin_metric: {
-        Args:
-          | Record<PropertyKey, never>
-          | {
-              p_metric_name: string
-              p_new_value: number
-              p_increment?: boolean
-            }
+        Args: {
+          p_metric_name: string
+          p_new_value: number
+          p_increment?: boolean
+        }
         Returns: undefined
       }
       validate_admin_access: {
@@ -1093,10 +882,6 @@ export type Database = {
       validate_admin_session: {
         Args: { token: string; client_ip: unknown }
         Returns: boolean
-      }
-      validate_json_input: {
-        Args: { p_input: unknown }
-        Returns: Json
       }
     }
     Enums: {

@@ -1,8 +1,8 @@
 
-import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin'
+import { SecureVaultLogin } from '@/components/admin/SecureVaultLogin'
 
 const SecureVault = () => {
-  return <SecureAdminLogin />
+  return <SecureVaultLogin />
 }
 
 export default SecureVault
