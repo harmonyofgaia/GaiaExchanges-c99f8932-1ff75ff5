@@ -1,422 +1,282 @@
-
-import { useState, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Slider } from '@/components/ui/slider'
 import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
 import { 
-  Music, 
-  Upload, 
   Play, 
   Pause, 
   Volume2, 
-  Settings,
-  Headphones,
-  Radio,
+  VolumeX, 
+  Music, 
+  Upload,
+  Waves,
+  BarChart3,
   Mic,
-  Speaker,
-  Equalizer,
-  Zap
+  Radio,
+  Headphones
 } from 'lucide-react'
-import { toast } from 'sonner'
 
-interface AudioTrack {
+interface AudioFile {
   id: string
   name: string
-  duration: number
-  file_size: number
-  format: string
-  upload_date: Date
-  is_background: boolean
-  is_active: boolean
   url: string
-  category: string
+  duration: number
+  isPlaying: boolean
 }
 
 export function AudioEngineManager() {
-  const [audioTracks, setAudioTracks] = useState<AudioTrack[]>([])
-  const [uploading, setUploading] = useState(false)
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [backgroundMusicEnabled, setBackgroundMusicEnabled] = useState(true)
-  const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null)
+  const [audioFiles, setAudioFiles] = useState<AudioFile[]>([])
+  const [currentFile, setCurrentFile] = useState<string | null>(null)
+  const [volume, setVolume] = useState([0.5])
+  const [isRecording, setIsRecording] = useState(false)
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
-  useEffect(() => {
-    loadAudioTracks()
-  }, [])
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files
+    if (!files) return
 
-  const loadAudioTracks = () => {
-    // Load existing tracks from localStorage or simulate
-    const savedTracks = localStorage.getItem('adminAudioTracks')
-    if (savedTracks) {
-      try {
-        setAudioTracks(JSON.parse(savedTracks))
-      } catch (error) {
-        console.error('Error loading tracks:', error)
-      }
-    }
-
-    // Add some default tracks for demonstration
-    const defaultTracks: AudioTrack[] = [
-      {
-        id: '1',
-        name: 'Harmony of Gaia Theme',
-        duration: 240,
-        file_size: 5600000,
-        format: 'mp3',
-        upload_date: new Date(),
-        is_background: true,
-        is_active: true,
-        url: '/audio/gaia-theme.mp3',
-        category: 'ambient'
-      },
-      {
-        id: '2',
-        name: 'Peaceful Nature Sounds',
-        duration: 180,
-        file_size: 4200000,
-        format: 'wav',
-        upload_date: new Date(Date.now() - 86400000),
-        is_background: false,
-        is_active: false,
-        url: '/audio/nature-sounds.wav',
-        category: 'nature'
-      }
-    ]
-
-    if (!savedTracks) {
-      setAudioTracks(defaultTracks)
-      localStorage.setItem('adminAudioTracks', JSON.stringify(defaultTracks))
-    }
+    Array.from(files).forEach(file => {
+      const url = URL.createObjectURL(file)
+      const audio = new Audio(url)
+      
+      audio.addEventListener('loadedmetadata', () => {
+        const newFile: AudioFile = {
+          id: Math.random().toString(36),
+          name: file.name,
+          url,
+          duration: audio.duration,
+          isPlaying: false
+        }
+        setAudioFiles(prev => [...prev, newFile])
+      })
+    })
   }
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      if (file.type.startsWith('audio/')) {
-        setSelectedFile(file)
-        toast.success(`Audio file selected: ${file.name}`)
-      } else {
-        toast.error('Please select a valid audio file')
-      }
-    }
-  }
+  const playAudio = (fileId: string) => {
+    const file = audioFiles.find(f => f.id === fileId)
+    if (!file || !audioRef.current) return
 
-  const handleUpload = async () => {
-    if (!selectedFile) {
-      toast.error('Please select an audio file')
-      return
+    if (currentFile && currentFile !== fileId) {
+      // Stop current audio
+      audioRef.current.pause()
+      setAudioFiles(prev => prev.map(f => ({ ...f, isPlaying: false })))
     }
 
-    setUploading(true)
+    audioRef.current.src = file.url
+    audioRef.current.volume = volume[0]
+    audioRef.current.play()
     
+    setCurrentFile(fileId)
+    setAudioFiles(prev => prev.map(f => ({
+      ...f,
+      isPlaying: f.id === fileId
+    })))
+  }
+
+  const pauseAudio = (fileId: string) => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+    }
+    setAudioFiles(prev => prev.map(f => ({
+      ...f,
+      isPlaying: false
+    })))
+    setCurrentFile(null)
+  }
+
+  const handleVolumeChange = (newVolume: number[]) => {
+    setVolume(newVolume)
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume[0]
+    }
+  }
+
+  const startRecording = async () => {
     try {
-      // Simulate upload
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      const newTrack: AudioTrack = {
-        id: Date.now().toString(),
-        name: selectedFile.name.replace(/\.[^/.]+$/, ""),
-        duration: 0, // Would be determined by actual audio file
-        file_size: selectedFile.size,
-        format: selectedFile.type.split('/')[1],
-        upload_date: new Date(),
-        is_background: false,
-        is_active: false,
-        url: URL.createObjectURL(selectedFile),
-        category: 'uploaded'
-      }
-
-      const updatedTracks = [...audioTracks, newTrack]
-      setAudioTracks(updatedTracks)
-      localStorage.setItem('adminAudioTracks', JSON.stringify(updatedTracks))
-      
-      setSelectedFile(null)
-      toast.success('🎵 Audio track uploaded successfully!')
-      
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      setIsRecording(true)
+      console.log('🎤 Recording started')
+      // Implement recording logic here
     } catch (error) {
-      console.error('Upload error:', error)
-      toast.error('Upload failed. Please try again.')
-    } finally {
-      setUploading(false)
+      console.error('❌ Recording failed:', error)
     }
   }
 
-  const setAsBackgroundMusic = (trackId: string) => {
-    const updatedTracks = audioTracks.map(track => ({
-      ...track,
-      is_background: track.id === trackId,
-      is_active: track.id === trackId
-    }))
-    
-    setAudioTracks(updatedTracks)
-    localStorage.setItem('adminAudioTracks', JSON.stringify(updatedTracks))
-    
-    const selectedTrack = updatedTracks.find(track => track.id === trackId)
-    if (selectedTrack) {
-      // Update background music system
-      localStorage.setItem('activeBackgroundMedia', trackId)
-      localStorage.setItem('activeBackgroundMediaData', JSON.stringify(selectedTrack))
-      
-      // Create playlist
-      const playlist = updatedTracks.filter(track => track.category !== 'uploaded' || track.is_active)
-      localStorage.setItem('backgroundMusicPlaylist', JSON.stringify(playlist))
-      
-      // Trigger update event
-      window.dispatchEvent(new CustomEvent('backgroundMediaUpdated'))
-      
-      toast.success(`🎵 "${selectedTrack.name}" set as background music!`)
-    }
-  }
-
-  const togglePlayback = (trackId: string) => {
-    if (currentlyPlaying === trackId) {
-      setCurrentlyPlaying(null)
-      toast.info('⏸️ Playback stopped')
-    } else {
-      setCurrentlyPlaying(trackId)
-      const track = audioTracks.find(t => t.id === trackId)
-      toast.success(`▶️ Playing: ${track?.name}`)
-    }
-  }
-
-  const formatDuration = (seconds: number) => {
-    const mins = Math.floor(seconds / 60)
-    const secs = seconds % 60
-    return `${mins}:${secs.toString().padStart(2, '0')}`
-  }
-
-  const formatFileSize = (bytes: number) => {
-    const mb = bytes / (1024 * 1024)
-    return `${mb.toFixed(1)} MB`
+  const stopRecording = () => {
+    setIsRecording(false)
+    console.log('⏹️ Recording stopped')
   }
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <Card className="border-2 border-purple-500/50 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
+      <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-pink-900/30">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-purple-400">
-            <Music className="h-6 w-6 animate-pulse" />
-            🎵 AUDIO ENGINE MANAGER - FULL CONTROL
-          </CardTitle>
-          <div className="flex gap-4 text-sm">
-            <Badge className="bg-green-600 animate-pulse">
-              🎵 TRACKS: {audioTracks.length}
-            </Badge>
-            <Badge className="bg-blue-600 animate-pulse">
-              🎶 BACKGROUND: {backgroundMusicEnabled ? 'ENABLED' : 'DISABLED'}
-            </Badge>
-            <Badge className="bg-purple-600 animate-pulse">
-              🔊 ENGINE: ACTIVE
-            </Badge>
-          </div>
-        </CardHeader>
-      </Card>
-
-      {/* Upload Section */}
-      <Card className="border-blue-500/30">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <Upload className="h-5 w-5" />
-            Upload Audio Tracks
+          <CardTitle className="text-purple-400 flex items-center gap-2">
+            <Music className="h-6 w-6" />
+            🎵 Advanced Audio Engine Manager
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-2">Select Audio File</label>
-            <input
-              type="file"
-              accept="audio/*"
-              onChange={handleFileSelect}
-              className="w-full px-3 py-2 bg-background border border-input rounded-md file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
-            />
-            {selectedFile && (
-              <p className="text-sm text-muted-foreground mt-2">
-                Selected: {selectedFile.name} ({formatFileSize(selectedFile.size)})
-              </p>
-            )}
+        <CardContent className="space-y-6">
+          {/* Audio Controls */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Card className="bg-blue-900/20 border-blue-500/30">
+              <CardContent className="pt-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Volume2 className="h-5 w-5 text-blue-400" />
+                  <span className="text-blue-400 font-semibold">Volume Control</span>
+                </div>
+                <Slider
+                  value={volume}
+                  onValueChange={handleVolumeChange}
+                  max={1}
+                  step={0.1}
+                  className="w-full"
+                />
+                <div className="text-center text-sm text-muted-foreground mt-2">
+                  {Math.round(volume[0] * 100)}%
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-green-900/20 border-green-500/30">
+              <CardContent className="pt-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Mic className="h-5 w-5 text-green-400" />
+                  <span className="text-green-400 font-semibold">Recording</span>
+                </div>
+                <Button 
+                  onClick={isRecording ? stopRecording : startRecording}
+                  className={`w-full ${isRecording ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'}`}
+                >
+                  {isRecording ? '⏹️ Stop Recording' : '🎤 Start Recording'}
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-orange-900/20 border-orange-500/30">
+              <CardContent className="pt-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Upload className="h-5 w-5 text-orange-400" />
+                  <span className="text-orange-400 font-semibold">Upload Audio</span>
+                </div>
+                <Button 
+                  onClick={() => fileInputRef.current?.click()}
+                  className="w-full bg-orange-600 hover:bg-orange-700"
+                >
+                  📁 Upload Files
+                </Button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="audio/*"
+                  multiple
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+              </CardContent>
+            </Card>
           </div>
 
-          <Button
-            onClick={handleUpload}
-            disabled={uploading || !selectedFile}
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-          >
-            {uploading ? (
-              <>Uploading... 📤</>
-            ) : (
-              <>
-                <Upload className="h-4 w-4 mr-2" />
-                Upload Audio Track
-              </>
-            )}
-          </Button>
-        </CardContent>
-      </Card>
-
-      {/* Audio Engine Controls */}
-      <Card className="border-green-500/30">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-400">
-            <Settings className="h-5 w-5" />
-            Audio Engine Controls
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Button className="bg-green-600 hover:bg-green-700 h-16">
-              <Speaker className="h-6 w-6 mr-2" />
-              Master Volume
-            </Button>
-            
-            <Button className="bg-blue-600 hover:bg-blue-700 h-16">
-              <Equalizer className="h-6 w-6 mr-2" />
-              Equalizer
-            </Button>
-            
-            <Button className="bg-purple-600 hover:bg-purple-700 h-16">
-              <Radio className="h-6 w-6 mr-2" />
-              Live Streaming
-            </Button>
-            
-            <Button className="bg-red-600 hover:bg-red-700 h-16">
-              <Mic className="h-6 w-6 mr-2" />
-              Recording
-            </Button>
-          </div>
-
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="font-medium">Background Music Engine</span>
-              <Button
-                onClick={() => setBackgroundMusicEnabled(!backgroundMusicEnabled)}
-                variant={backgroundMusicEnabled ? "default" : "outline"}
-              >
-                {backgroundMusicEnabled ? 'Enabled' : 'Disabled'}
-              </Button>
-            </div>
-            
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>Audio Quality</span>
-                <span className="text-green-400">HIGH</span>
+          {/* Audio Visualizer */}
+          <Card className="bg-cyan-900/20 border-cyan-500/30">
+            <CardContent className="pt-4">
+              <div className="flex items-center gap-2 mb-4">
+                <Waves className="h-5 w-5 text-cyan-400" />
+                <span className="text-cyan-400 font-semibold">Audio Visualizer</span>
               </div>
-              <Progress value={95} className="h-2" />
-            </div>
-            
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>Engine Performance</span>
-                <span className="text-blue-400">OPTIMAL</span>
+              <div className="bg-black/40 p-4 rounded-lg">
+                <div className="flex items-end justify-center gap-1 h-20">
+                  {Array.from({ length: 32 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="bg-gradient-to-t from-cyan-500 to-blue-500 w-2 rounded-t"
+                      style={{
+                        height: `${Math.random() * 60 + 10}px`,
+                        animationDelay: `${i * 0.1}s`
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
-              <Progress value={98} className="h-2" />
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+            </CardContent>
+          </Card>
 
-      {/* Audio Tracks List */}
-      <Card className="border-yellow-500/30">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-yellow-400">
-            <Headphones className="h-5 w-5" />
-            Audio Tracks Library ({audioTracks.length} tracks)
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {audioTracks.map((track) => (
-              <div key={track.id} className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-muted">
-                <div className="flex items-center gap-4">
-                  <Button
-                    onClick={() => togglePlayback(track.id)}
-                    variant="ghost"
-                    size="sm"
-                  >
-                    {currentlyPlaying === track.id ? (
-                      <Pause className="h-4 w-4" />
-                    ) : (
-                      <Play className="h-4 w-4" />
-                    )}
-                  </Button>
-                  
-                  <div>
-                    <h4 className="font-medium">{track.name}</h4>
-                    <p className="text-xs text-muted-foreground">
-                      {formatDuration(track.duration)} • {formatFileSize(track.file_size)} • {track.format.toUpperCase()}
-                    </p>
+          {/* Audio Files Library */}
+          <Card className="bg-gray-900/20 border-gray-500/30">
+            <CardContent className="pt-4">
+              <div className="flex items-center gap-2 mb-4">
+                <Headphones className="h-5 w-5 text-gray-400" />
+                <span className="text-gray-400 font-semibold">Audio Library</span>
+              </div>
+              
+              {audioFiles.length === 0 ? (
+                <div className="text-center text-muted-foreground py-8">
+                  No audio files uploaded yet. Upload some files to get started!
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {audioFiles.map(file => (
+                    <div key={file.id} className="flex items-center justify-between p-3 bg-muted/10 rounded-lg border border-border/20">
+                      <div className="flex items-center gap-3">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => file.isPlaying ? pauseAudio(file.id) : playAudio(file.id)}
+                        >
+                          {file.isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                        </Button>
+                        <div>
+                          <div className="font-semibold text-white">{file.name}</div>
+                          <div className="text-xs text-muted-foreground">
+                            Duration: {Math.floor(file.duration / 60)}:{Math.floor(file.duration % 60).toString().padStart(2, '0')}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {file.isPlaying && (
+                          <Badge className="bg-green-600 text-white animate-pulse">
+                            Playing
+                          </Badge>
+                        )}
+                        <Badge variant="outline">Audio</Badge>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Equalizer */}
+          <Card className="bg-indigo-900/20 border-indigo-500/30">
+            <CardContent className="pt-4">
+              <div className="flex items-center gap-2 mb-4">
+                <BarChart3 className="h-5 w-5 text-indigo-400" />
+                <span className="text-indigo-400 font-semibold">Advanced Equalizer</span>
+              </div>
+              <div className="grid grid-cols-8 gap-2">
+                {['60Hz', '170Hz', '310Hz', '600Hz', '1kHz', '3kHz', '6kHz', '12kHz'].map((freq, i) => (
+                  <div key={freq} className="text-center">
+                    <div className="text-xs text-muted-foreground mb-2">{freq}</div>
+                    <Slider
+                      orientation="vertical"
+                      defaultValue={[50]}
+                      max={100}
+                      step={1}
+                      className="h-20"
+                    />
                   </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  {track.is_background && (
-                    <Badge className="bg-green-600 text-white">
-                      🎵 Background
-                    </Badge>
-                  )}
-                  
-                  <Badge variant="outline">
-                    {track.category}
-                  </Badge>
-
-                  <Button
-                    onClick={() => setAsBackgroundMusic(track.id)}
-                    variant={track.is_background ? "default" : "outline"}
-                    size="sm"
-                    disabled={track.is_background}
-                  >
-                    {track.is_background ? 'Active' : 'Set as Background'}
-                  </Button>
-                </div>
+                ))}
               </div>
-            ))}
-
-            {audioTracks.length === 0 && (
-              <div className="text-center py-8 text-muted-foreground">
-                No audio tracks uploaded yet. Upload your first track above.
-              </div>
-            )}
-          </div>
+            </CardContent>
+          </Card>
         </CardContent>
       </Card>
 
-      {/* Audio Engine Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="border-purple-500/30">
-          <CardContent className="pt-4 text-center">
-            <div className="text-2xl font-bold text-purple-400">
-              {audioTracks.length}
-            </div>
-            <div className="text-sm text-muted-foreground">Total Tracks</div>
-          </CardContent>
-        </Card>
-        
-        <Card className="border-blue-500/30">
-          <CardContent className="pt-4 text-center">
-            <div className="text-2xl font-bold text-blue-400">
-              {formatFileSize(audioTracks.reduce((sum, track) => sum + track.file_size, 0))}
-            </div>
-            <div className="text-sm text-muted-foreground">Total Size</div>
-          </CardContent>
-        </Card>
-        
-        <Card className="border-green-500/30">
-          <CardContent className="pt-4 text-center">
-            <div className="text-2xl font-bold text-green-400">
-              {audioTracks.filter(track => track.is_active).length}
-            </div>
-            <div className="text-sm text-muted-foreground">Active Tracks</div>
-          </CardContent>
-        </Card>
-        
-        <Card className="border-yellow-500/30">
-          <CardContent className="pt-4 text-center">
-            <div className="text-2xl font-bold text-yellow-400">100%</div>
-            <div className="text-sm text-muted-foreground">Engine Health</div>
-          </CardContent>
-        </Card>
-      </div>
+      <audio ref={audioRef} onEnded={() => setCurrentFile(null)} />
     </div>
   )
 }
