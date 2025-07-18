@@ -4,17 +4,16 @@ import { supabase } from '@/integrations/supabase/client'
 import { useAuth } from '@/components/auth/AuthProvider'
 
 interface Transaction {
-  id: string
-  transaction_type: string
-  currency: string
+  id: number
   amount: number
-  fee: number
-  from_address: string | null
-  to_address: string | null
-  transaction_hash: string | null
-  block_number: number | null
-  status: string
-  created_at: string
+  currency: string
+  external_reference: string | null
+  metadata: any
+  status: string | null
+  transaction_type_id: number | null
+  updated_at: string | null
+  created_at: string | null
+  user_id: string | null
 }
 
 export function useTransactions() {
