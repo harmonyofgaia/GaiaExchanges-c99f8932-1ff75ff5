@@ -70,21 +70,16 @@ export function Navbar() {
                 💳 Connect Wallet
               </Button>
 
-              {user ? (
-                <>
-                  <Link to="/admin">
-                    <Button variant="outline">
-                      <Settings className="h-4 w-4 mr-2" />
-                      Admin
-                    </Button>
-                  </Link>
-                  <Button onClick={signOut} variant="ghost">
-                    Sign Out
-                  </Button>
-                </>
-              ) : (
-                <Button variant="default">
-                  Sign In
+              <Link to="/admin">
+                <Button variant="outline">
+                  <Settings className="h-4 w-4 mr-2" />
+                  Admin
+                </Button>
+              </Link>
+
+              {user && (
+                <Button onClick={signOut} variant="ghost">
+                  Sign Out
                 </Button>
               )}
             </div>
@@ -136,21 +131,16 @@ export function Navbar() {
                   💳 Connect Wallet
                 </Button>
 
-                {user ? (
-                  <>
-                    <Link to="/admin" className="block">
-                      <Button variant="outline" className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                        <Settings className="h-4 w-4 mr-2" />
-                        Admin
-                      </Button>
-                    </Link>
-                    <Button onClick={signOut} variant="ghost" className="w-full">
-                      Sign Out
-                    </Button>
-                  </>
-                ) : (
-                  <Button variant="default" className="w-full">
-                    Sign In
+                <Link to="/admin" className="block">
+                  <Button variant="outline" className="w-full" onClick={() => setMobileMenuOpen(false)}>
+                    <Settings className="h-4 w-4 mr-2" />
+                    Admin
+                  </Button>
+                </Link>
+
+                {user && (
+                  <Button onClick={signOut} variant="ghost" className="w-full">
+                    Sign Out
                   </Button>
                 )}
               </div>

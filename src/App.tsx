@@ -7,9 +7,7 @@ import { AuthProvider } from "@/components/auth/AuthProvider"
 import { Navbar } from "@/components/Navbar"
 import { BackgroundMusic } from "@/components/BackgroundMusic"
 import Index from "./pages/Index"
-import Admin from "./pages/Admin"
-import SecureAdmin from "./pages/SecureAdmin"
-import SecureVault from "./pages/SecureVault"
+import AdminLogin from "./pages/AdminLogin"
 import ArtistStreaming from "./pages/ArtistStreaming"
 import VideoSharing from "./pages/VideoSharing"
 import { InvisibleAttachmentSystem } from '@/components/security/InvisibleAttachmentSystem'
@@ -38,9 +36,7 @@ function App() {
               <Navbar />
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/secure-admin" element={<SecureAdmin />} />
-                <Route path="/secure-vault" element={<SecureVault />} />
+                <Route path="/admin" element={<AdminLogin />} />
                 <Route path="/artist-streaming" element={<ArtistStreaming />} />
                 <Route path="/video-sharing" element={<VideoSharing />} />
               </Routes>
