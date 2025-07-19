@@ -2,201 +2,261 @@
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { VideoStreamingPlatform } from '@/components/VideoStreamingPlatform'
-import { useSecureAdmin } from '@/hooks/useSecureAdmin'
-import { AdminReverseButton } from '@/components/admin/AdminReverseButton'
+import { Input } from '@/components/ui/input'
 import { 
-  Music, 
-  Upload, 
   Play, 
+  Pause, 
+  Music, 
   Users, 
-  DollarSign,
-  Video,
-  Mic,
-  Radio,
-  Award,
-  Star
+  Calendar,
+  MapPin,
+  Search,
+  Heart,
+  Share2,
+  Volume2
 } from 'lucide-react'
-import { toast } from 'sonner'
 
-export default function ArtistStreaming() {
-  const { isAdmin } = useSecureAdmin()
-  const [artists, setArtists] = useState([
+interface LiveShow {
+  id: string
+  artist: string
+  venue: string
+  date: string
+  time: string
+  genre: string
+  viewers: number
+  isLive: boolean
+  thumbnail: string
+  description: string
+}
+
+const ArtistStreaming = () => {
+  const [liveShows] = useState<LiveShow[]>([
     {
       id: '1',
-      name: 'EcoBeats Producer',
-      genre: 'Environmental Ambient',
-      followers: 2847,
-      monthlyListeners: 12500,
-      earnings: 847.32,
+      artist: 'Queen',
+      venue: 'Wembley Stadium 1986',
+      date: '1986-07-12',
+      time: '20:00',
+      genre: 'Rock',
+      viewers: 45230,
       isLive: true,
-      avatar: '/lovable-uploads/78f81378-5535-4da5-bb6c-28f9a9866f3e.png'
+      thumbnail: '/api/placeholder/400/300',
+      description: 'Historic performance at Wembley Stadium'
     },
     {
-      id: '2', 
-      name: 'Gaia Harmony',
-      genre: 'Nature Sounds & Meditation',
-      followers: 1923,
-      monthlyListeners: 8200,
-      earnings: 623.18,
+      id: '2',
+      artist: 'Michael Jackson',
+      venue: 'Motown 25th Anniversary',
+      date: '1983-03-25',
+      time: '21:00',
+      genre: 'Pop',
+      viewers: 38750,
+      isLive: true,
+      thumbnail: '/api/placeholder/400/300',
+      description: 'Legendary moonwalk debut performance'
+    },
+    {
+      id: '3',
+      artist: 'Bob Dylan',
+      venue: 'Newport Folk Festival 1965',
+      date: '1965-07-25',
+      time: '19:30',
+      genre: 'Folk',
+      viewers: 22100,
       isLive: false,
-      avatar: '/lovable-uploads/ab19f9f8-2069-4211-955c-dab937602141.png'
+      thumbnail: '/api/placeholder/400/300',
+      description: 'The controversial electric performance'
+    },
+    {
+      id: '4',
+      artist: 'The Beatles',
+      venue: 'Shea Stadium 1965',
+      date: '1965-08-15',
+      time: '20:30',
+      genre: 'Rock',
+      viewers: 55890,
+      isLive: true,
+      thumbnail: '/api/placeholder/400/300',
+      description: 'Groundbreaking stadium concert'
+    },
+    {
+      id: '5',
+      artist: 'Jimi Hendrix',
+      venue: 'Woodstock 1969',
+      date: '1969-08-18',
+      time: '09:00',
+      genre: 'Rock',
+      viewers: 41200,
+      isLive: false,
+      thumbnail: '/api/placeholder/400/300',
+      description: 'Iconic Star-Spangled Banner performance'
+    },
+    {
+      id: '6',
+      artist: 'Pink Floyd',
+      venue: 'Live at Pompeii 1972',
+      date: '1972-10-04',
+      time: '18:00',
+      genre: 'Progressive Rock',
+      viewers: 33400,
+      isLive: true,
+      thumbnail: '/api/placeholder/400/300',
+      description: 'Surreal performance in ancient amphitheater'
     }
   ])
 
-  const [uploads, setUploads] = useState(0)
-  const [totalEarnings, setTotalEarnings] = useState(1470.50)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [selectedGenre, setSelectedGenre] = useState('all')
+
+  const genres = ['all', 'Rock', 'Pop', 'Folk', 'Progressive Rock']
+
+  const filteredShows = liveShows.filter(show => {
+    const matchesSearch = show.artist.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         show.venue.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesGenre = selectedGenre === 'all' || show.genre === selectedGenre
+    return matchesSearch && matchesGenre
+  })
 
   return (
-    <div className="container mx-auto px-4 py-6">
-      {/* Admin Reverse Button */}
-      <AdminReverseButton />
-      
-      {/* Header */}
+    <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-          🎵 GAIA ARTIST STREAMING PLATFORM
+        <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent mb-4">
+          🎵 LIVE ARTIST STREAMING - HISTORIC PERFORMANCES
         </h1>
-        <p className="text-center text-muted-foreground mt-2">
-          Create, Upload, Stream & Earn GAIA Tokens with Environmental Music
+        <p className="text-center text-muted-foreground text-lg">
+          Experience legendary performances from music history in real-time
         </p>
       </div>
 
-      {/* Platform Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <Card className="bg-gradient-to-br from-green-900/20 to-blue-900/20 border-green-500/30">
-          <CardContent className="pt-6">
-            <div className="flex items-center">
-              <Users className="h-4 w-4 mr-2 text-green-400" />
-              <div>
-                <p className="text-2xl font-bold text-green-400">{artists.length}</p>
-                <p className="text-xs text-muted-foreground">Active Artists</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/30">
-          <CardContent className="pt-6">
-            <div className="flex items-center">
-              <Music className="h-4 w-4 mr-2 text-blue-400" />
-              <div>
-                <p className="text-2xl font-bold text-blue-400">{uploads}</p>
-                <p className="text-xs text-muted-foreground">Total Uploads</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/30">
-          <CardContent className="pt-6">
-            <div className="flex items-center">
-              <DollarSign className="h-4 w-4 mr-2 text-purple-400" />
-              <div>
-                <p className="text-2xl font-bold text-purple-400">{totalEarnings}</p>
-                <p className="text-xs text-muted-foreground">GAIA Earned</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-br from-orange-900/20 to-red-900/20 border-orange-500/30">
-          <CardContent className="pt-6">
-            <div className="flex items-center">
-              <Radio className="h-4 w-4 mr-2 text-orange-400" />
-              <div>
-                <p className="text-2xl font-bold text-orange-400">
-                  {artists.filter(a => a.isLive).length}
-                </p>
-                <p className="text-xs text-muted-foreground">Live Now</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+      {/* Search and Filter */}
+      <div className="flex flex-col md:flex-row gap-4 mb-8">
+        <div className="flex-1 relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search artists or venues..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10"
+          />
+        </div>
+        <select
+          value={selectedGenre}
+          onChange={(e) => setSelectedGenre(e.target.value)}
+          className="px-4 py-2 bg-background border border-input rounded-md"
+        >
+          {genres.map(genre => (
+            <option key={genre} value={genre}>
+              {genre === 'all' ? 'All Genres' : genre}
+            </option>
+          ))}
+        </select>
       </div>
 
-      {/* Artist Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {artists.map((artist) => (
-          <Card key={artist.id} className="bg-gradient-to-br from-gray-900/40 to-gray-800/40 border-gray-500/30 hover:border-green-500/50 transition-all duration-300">
-            <CardHeader className="pb-2">
-              <div className="flex items-center gap-3">
-                <img 
-                  src={artist.avatar} 
-                  alt={artist.name}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-                <div className="flex-1">
-                  <CardTitle className="text-lg text-white">{artist.name}</CardTitle>
-                  <p className="text-sm text-muted-foreground">{artist.genre}</p>
+      {/* Live Shows Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredShows.map((show) => (
+          <Card key={show.id} className="border-purple-500/30 hover:border-purple-500/50 transition-all duration-300">
+            <div className="relative">
+              <div className="aspect-video bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-t-lg flex items-center justify-center">
+                <Music className="h-16 w-16 text-purple-400" />
+              </div>
+              {show.isLive && (
+                <Badge className="absolute top-2 left-2 bg-red-600 text-white animate-pulse">
+                  🔴 LIVE
+                </Badge>
+              )}
+              <div className="absolute top-2 right-2 flex items-center gap-1 bg-black/60 rounded px-2 py-1">
+                <Users className="h-3 w-3 text-white" />
+                <span className="text-white text-xs">{show.viewers.toLocaleString()}</span>
+              </div>
+            </div>
+            
+            <CardContent className="pt-4">
+              <h3 className="font-bold text-lg text-purple-400 mb-2">{show.artist}</h3>
+              <p className="text-sm text-muted-foreground mb-2">{show.description}</p>
+              
+              <div className="space-y-2 mb-4">
+                <div className="flex items-center gap-2 text-sm">
+                  <MapPin className="h-4 w-4 text-muted-foreground" />
+                  <span>{show.venue}</span>
                 </div>
-                {artist.isLive && (
-                  <Badge className="bg-red-600 text-white animate-pulse">
-                    🔴 LIVE
-                  </Badge>
-                )}
+                <div className="flex items-center gap-2 text-sm">
+                  <Calendar className="h-4 w-4 text-muted-foreground" />
+                  <span>{new Date(show.date).toLocaleDateString()} at {show.time}</span>
+                </div>
+                <Badge className="bg-purple-600/20 text-purple-400 border-purple-500/30">
+                  {show.genre}
+                </Badge>
               </div>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Followers:</span>
-                <span className="text-blue-400 font-semibold">{artist.followers.toLocaleString()}</span>
+
+              <div className="flex gap-2">
+                <Button 
+                  className="flex-1 bg-purple-600 hover:bg-purple-700"
+                  size="sm"
+                >
+                  {show.isLive ? (
+                    <>
+                      <Volume2 className="h-4 w-4 mr-2" />
+                      Watch Live
+                    </>
+                  ) : (
+                    <>
+                      <Play className="h-4 w-4 mr-2" />
+                      Watch Recording
+                    </>
+                  )}
+                </Button>
+                <Button size="sm" variant="outline">
+                  <Heart className="h-4 w-4" />
+                </Button>
+                <Button size="sm" variant="outline">
+                  <Share2 className="h-4 w-4" />
+                </Button>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Monthly Listeners:</span>
-                <span className="text-green-400 font-semibold">{artist.monthlyListeners.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">GAIA Earned:</span>
-                <span className="text-purple-400 font-semibold">{artist.earnings} GAIA</span>
-              </div>
-              <Button className="w-full bg-green-600 hover:bg-green-700">
-                <Play className="h-4 w-4 mr-2" />
-                Listen Now
-              </Button>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      {/* Video Streaming Platform Integration */}
-      <VideoStreamingPlatform />
-
-      {/* Upload Section for Artists */}
-      {isAdmin && (
-        <Card className="mt-8 bg-gradient-to-br from-yellow-900/20 to-orange-900/20 border-yellow-500/30">
-          <CardHeader>
-            <CardTitle className="text-yellow-400 flex items-center gap-2">
-              <Upload className="h-5 w-5" />
-              🎵 Artist Upload Center (Admin Only)
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="text-sm font-semibold text-yellow-400">Track Title</label>
-                <Input placeholder="Enter track title..." className="bg-black/20" />
-              </div>
-              <div>
-                <label className="text-sm font-semibold text-yellow-400">Artist Name</label>
-                <Input placeholder="Enter artist name..." className="bg-black/20" />
-              </div>
+      {/* Stats */}
+      <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <Card className="border-purple-500/30">
+          <CardContent className="pt-4 text-center">
+            <div className="text-2xl font-bold text-purple-400">
+              {liveShows.filter(s => s.isLive).length}
             </div>
-            <div className="flex gap-4">
-              <Button className="bg-green-600 hover:bg-green-700">
-                <Upload className="h-4 w-4 mr-2" />
-                Upload Audio
-              </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700">
-                <Video className="h-4 w-4 mr-2" />
-                Upload Video
-              </Button>
-            </div>
+            <div className="text-sm text-muted-foreground">Live Shows</div>
           </CardContent>
         </Card>
-      )}
+        
+        <Card className="border-blue-500/30">
+          <CardContent className="pt-4 text-center">
+            <div className="text-2xl font-bold text-blue-400">
+              {liveShows.reduce((sum, show) => sum + show.viewers, 0).toLocaleString()}
+            </div>
+            <div className="text-sm text-muted-foreground">Total Viewers</div>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-green-500/30">
+          <CardContent className="pt-4 text-center">
+            <div className="text-2xl font-bold text-green-400">
+              {new Set(liveShows.map(s => s.genre)).size}
+            </div>
+            <div className="text-sm text-muted-foreground">Genres</div>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-yellow-500/30">
+          <CardContent className="pt-4 text-center">
+            <div className="text-2xl font-bold text-yellow-400">24/7</div>
+            <div className="text-sm text-muted-foreground">Streaming</div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }
+
+export default ArtistStreaming
