@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -19,7 +18,9 @@ import {
   X,
   Crown,
   Music,
-  Radio
+  Radio,
+  Video,
+  RotateCcw
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -62,8 +63,9 @@ const SlidingMenu = () => {
 
   const baseMenuItems = [
     { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
-    { icon: Radio, label: '🎭 Live Artist Shows', path: '/artist-streaming', category: 'entertainment' },
-    { icon: Music, label: '🎵 Artist Platform', path: '/artist-streaming', category: 'entertainment' },
+    { icon: Radio, label: '🎭 Artist Streaming', path: '/artist-streaming', category: 'entertainment' },
+    { icon: Video, label: '🎬 Video Upload & Earn', path: '/video-upload', category: 'entertainment' },
+    { icon: Music, label: '🎵 Music Platform', path: '/artist-streaming', category: 'entertainment' },
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
@@ -78,7 +80,8 @@ const SlidingMenu = () => {
   ]
 
   const adminMenuItems = [
-    { icon: Crown, label: '👑 Admin Portal', path: '/admin', category: 'admin' }
+    { icon: Crown, label: '👑 Admin Portal', path: '/admin', category: 'admin' },
+    { icon: RotateCcw, label: '⚡ Task Reverser', path: '/task-reverser', category: 'admin' }
   ]
 
   const menuItems = isAuthorizedIP ? [...baseMenuItems, ...adminMenuItems] : baseMenuItems
@@ -153,15 +156,15 @@ const SlidingMenu = () => {
           <div className="p-4 border-t border-purple-500/30">
             <div className="text-center">
               <p className="text-xs text-muted-foreground">
-                GAiA Platform v2.0
+                GAiA Platform v3.0
               </p>
               <p className="text-xs text-purple-400">
-                Harmony of Culture
+                Harmony of Culture + AI Evolution
               </p>
               {isAuthorizedIP && (
                 <div className="mt-2">
                   <div className="text-xs bg-green-600 text-white px-2 py-1 rounded animate-pulse">
-                    🛡️ SECURE ACCESS
+                    🛡️ ADMIN ACCESS + KOALA AI
                   </div>
                 </div>
               )}

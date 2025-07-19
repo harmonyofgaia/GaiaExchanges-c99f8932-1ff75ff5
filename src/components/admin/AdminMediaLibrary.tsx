@@ -1,125 +1,169 @@
-
-import { useState, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { supabase } from '@/integrations/supabase/client'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { 
   Upload, 
-  File, 
   Music, 
-  Video, 
   Image, 
   FileText, 
   Trash2, 
-  Download, 
-  Play,
-  Pause,
-  Search,
-  Filter,
-  Database
+  Play, 
+  Pause, 
+  Volume2,
+  Download,
+  Eye,
+  Settings
 } from 'lucide-react'
+import { supabase } from '@/integrations/supabase/client'
 import { toast } from 'sonner'
-
-interface MediaFile {
-  id: string
-  filename: string
-  original_name: string
-  file_type: string
-  file_size: number
-  mime_type: string
-  storage_path: string
-  category: string
-  tags: string[]
-  is_background_music: boolean
-  is_active: boolean
-  created_at: string
-  metadata: any
-}
+import { useQuery } from '@tanstack/react-query'
 
 export function AdminMediaLibrary() {
-  const [files, setFiles] = useState<MediaFile[]>([])
-  const [isUploading, setIsUploading] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [filterCategory, setFilterCategory] = useState('all')
-  const [selectedFiles, setSelectedFiles] = useState<string[]>([])
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [category, setCategory] = useState('general')
+  const [isBackgroundMusic, setIsBackgroundMusic] = useState(false)
+  
+  // Music player state
+  const [currentTrack, setCurrentTrack] = useState<any>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [volume, setVolume] = useState(1)
+  const [currentTime, setCurrentTime] = useState(0)
+  const audioRef = useRef<HTMLAudioElement>(null)
 
-  useEffect(() => {
-    loadMediaFiles()
-  }, [])
-
-  const loadMediaFiles = async () => {
-    try {
+  // Fetch all media files
+  const { data: mediaFiles, refetch } = useQuery({
+    queryKey: ['admin-media'],
+    queryFn: async () => {
       const { data, error } = await supabase
         .from('admin_media_library')
         .select('*')
         .order('created_at', { ascending: false })
 
       if (error) throw error
-      setFiles(data || [])
-    } catch (error) {
-      console.error('Error loading media files:', error)
+      return data
+    }
+  })
+
+  // Audio player effects
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume
+    }
+  }, [volume])
+
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    const updateTime = () => setCurrentTime(audio.currentTime)
+    const handleEnded = () => {
+      setIsPlaying(false)
+      // Auto-play next track if available
+      const musicFiles = mediaFiles?.filter(file => file.is_background_music) || []
+      const currentIndex = musicFiles.findIndex(f => f.id === currentTrack?.id)
+      if (currentIndex >= 0 && currentIndex < musicFiles.length - 1) {
+        playTrack(musicFiles[currentIndex + 1])
+      }
+    }
+
+    audio.addEventListener('timeupdate', updateTime)
+    audio.addEventListener('ended', handleEnded)
+
+    return () => {
+      audio.removeEventListener('timeupdate', updateTime)
+      audio.removeEventListener('ended', handleEnded)
+    }
+  }, [currentTrack, mediaFiles])
+
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      // Check file size (50MB limit)
+      if (file.size > 52428800) {
+        toast.error('File size must be under 50MB')
+        return
+      }
+      setSelectedFile(file)
     }
   }
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (!file) return
+  const handleUpload = async () => {
+    if (!selectedFile) {
+      toast.error('Please select a file to upload')
+      return
+    }
 
-    setIsUploading(true)
+    setUploading(true)
     setUploadProgress(0)
 
     try {
-      // Upload to Supabase Storage
-      const fileExt = file.name.split('.').pop()
+      // Create unique filename
+      const fileExt = selectedFile.name.split('.').pop()
       const fileName = `${Date.now()}.${fileExt}`
-      const filePath = `uploads/${fileName}`
-
-      const { error: uploadError } = await supabase.storage
+      
+      // Upload to Supabase Storage
+      const { data: uploadData, error: uploadError } = await supabase.storage
         .from('admin-media')
-        .upload(filePath, file)
+        .upload(fileName, selectedFile, {
+          onUploadProgress: (progress) => {
+            setUploadProgress((progress.loaded / progress.total) * 100)
+          }
+        })
 
       if (uploadError) throw uploadError
 
-      // Save file metadata to database
+      // Insert metadata into database
       const { error: dbError } = await supabase
         .from('admin_media_library')
         .insert({
           filename: fileName,
-          original_name: file.name,
-          file_type: file.type.split('/')[0],
-          file_size: file.size,
-          mime_type: file.type,
-          storage_path: filePath,
-          category: 'general',
-          tags: [],
-          is_background_music: file.type.startsWith('audio/'),
-          is_active: true
+          original_name: selectedFile.name,
+          file_type: selectedFile.type.split('/')[0], // 'audio', 'video', 'image', etc.
+          file_size: selectedFile.size,
+          mime_type: selectedFile.type,
+          storage_path: uploadData.path,
+          category: category,
+          is_background_music: isBackgroundMusic && selectedFile.type.startsWith('audio/')
         })
 
       if (dbError) throw dbError
 
-      toast.success('File uploaded successfully!')
-      loadMediaFiles()
+      toast.success('🎉 File uploaded successfully!')
+      
+      // Reset form
+      setSelectedFile(null)
+      setUploadProgress(0)
+      setCategory('general')
+      setIsBackgroundMusic(false)
+      
+      // Refresh data
+      refetch()
+
     } catch (error) {
       console.error('Upload error:', error)
-      toast.error('Failed to upload file')
+      toast.error('Failed to upload file. Please try again.')
     } finally {
-      setIsUploading(false)
-      setUploadProgress(0)
+      setUploading(false)
     }
   }
 
-  const deleteFile = async (fileId: string, storagePath: string) => {
+  const deleteFile = async (file: any) => {
+    if (!confirm(`Are you sure you want to delete "${file.original_name}"?`)) {
+      return
+    }
+
     try {
       // Delete from storage
       const { error: storageError } = await supabase.storage
         .from('admin-media')
-        .remove([storagePath])
+        .remove([file.storage_path])
 
       if (storageError) throw storageError
 
@@ -127,201 +171,356 @@ export function AdminMediaLibrary() {
       const { error: dbError } = await supabase
         .from('admin_media_library')
         .delete()
-        .eq('id', fileId)
+        .eq('id', file.id)
 
       if (dbError) throw dbError
 
-      toast.success('File deleted successfully!')
-      loadMediaFiles()
+      toast.success('File deleted successfully')
+      refetch()
+
+      // Stop playing if it's the current track
+      if (currentTrack?.id === file.id) {
+        setCurrentTrack(null)
+        setIsPlaying(false)
+        if (audioRef.current) {
+          audioRef.current.pause()
+        }
+      }
+
     } catch (error) {
       console.error('Delete error:', error)
       toast.error('Failed to delete file')
     }
   }
 
-  const getFileIcon = (fileType: string, mimeType: string) => {
-    switch (fileType) {
-      case 'audio': return <Music className="h-4 w-4 text-green-400" />
-      case 'video': return <Video className="h-4 w-4 text-blue-400" />
-      case 'image': return <Image className="h-4 w-4 text-purple-400" />
-      case 'text': return <FileText className="h-4 w-4 text-yellow-400" />
-      default: return <File className="h-4 w-4 text-gray-400" />
+  const playTrack = async (file: any) => {
+    if (!file.mime_type.startsWith('audio/')) return
+
+    const audioUrl = supabase.storage.from('admin-media').getPublicUrl(file.storage_path).data.publicUrl
+
+    if (audioRef.current) {
+      setCurrentTrack(file)
+      audioRef.current.src = audioUrl
+      try {
+        await audioRef.current.play()
+        setIsPlaying(true)
+        toast.success(`🎵 Now playing: ${file.original_name}`)
+      } catch (error) {
+        console.error('Play error:', error)
+        toast.error('Failed to play audio file')
+      }
     }
   }
 
-  const formatFileSize = (bytes: number) => {
-    const sizes = ['Bytes', 'KB', 'MB', 'GB']
-    if (bytes === 0) return '0 Bytes'
-    const i = Math.floor(Math.log(bytes) / Math.log(1024))
-    return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i]
+  const togglePlayPause = async () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+        setIsPlaying(false)
+      } else {
+        try {
+          await audioRef.current.play()
+          setIsPlaying(true)
+        } catch (error) {
+          console.error('Play error:', error)
+          toast.error('Failed to play audio')
+        }
+      }
+    }
   }
 
-  const filteredFiles = files.filter(file => {
-    const matchesSearch = file.original_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         file.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-    const matchesCategory = filterCategory === 'all' || file.category === filterCategory
-    return matchesSearch && matchesCategory
-  })
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = Math.floor(seconds % 60)
+    return `${mins}:${secs.toString().padStart(2, '0')}`
+  }
+
+  const getFileIcon = (fileType: string) => {
+    switch (fileType) {
+      case 'audio': return Music
+      case 'image': return Image
+      case 'video': return Play
+      default: return FileText
+    }
+  }
+
+  const musicFiles = mediaFiles?.filter(file => file.is_background_music) || []
+  const otherFiles = mediaFiles?.filter(file => !file.is_background_music) || []
 
   return (
     <div className="space-y-6">
-      <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
-        <CardHeader>
-          <CardTitle className="text-blue-400 flex items-center gap-2">
-            <Database className="h-6 w-6" />
-            📁 ADMIN MEDIA STORAGE CENTER
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Upload Section */}
-          <div className="border-2 border-dashed border-blue-500/30 rounded-lg p-6 text-center">
-            <Upload className="h-12 w-12 text-blue-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-blue-400 mb-2">Upload Files</h3>
-            <p className="text-muted-foreground mb-4">
-              Drag and drop files here or click to browse
-            </p>
-            <Input
-              type="file"
-              onChange={handleFileUpload}
-              disabled={isUploading}
-              className="max-w-xs mx-auto"
-              accept="audio/*,video/*,image/*,.pdf,.txt,.doc,.docx"
-            />
-            {isUploading && (
-              <div className="mt-4">
-                <Progress value={uploadProgress} className="w-full max-w-xs mx-auto" />
-                <p className="text-sm text-blue-400 mt-2">Uploading... {uploadProgress}%</p>
-              </div>
-            )}
-          </div>
+      {/* Hidden audio element */}
+      <audio ref={audioRef} />
 
-          {/* Search and Filter */}
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search files..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 bg-black/30 border-blue-500/30"
+      {/* Music Player */}
+      {currentTrack && (
+        <Card className="border-purple-500/50 bg-gradient-to-r from-purple-900/30 to-pink-900/30">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-purple-400">
+              <Music className="h-6 w-6" />
+              🎵 Admin Music Player
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center gap-4">
+              <div className="flex-1">
+                <h3 className="font-medium">{currentTrack.original_name}</h3>
+                <p className="text-sm text-muted-foreground">Background Music</p>
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <Button variant="ghost" size="sm" onClick={togglePlayPause}>
+                  {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                </Button>
+                
+                <div className="flex items-center gap-2">
+                  <Volume2 className="h-4 w-4" />
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.1"
+                    value={volume}
+                    onChange={(e) => setVolume(parseFloat(e.target.value))}
+                    className="w-20"
+                  />
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <span className="text-xs">{formatTime(currentTime)}</span>
+                <Progress
+                  value={audioRef.current?.duration ? (currentTime / audioRef.current.duration) * 100 : 0}
+                  className="w-32"
                 />
+                <span className="text-xs">
+                  {audioRef.current?.duration ? formatTime(audioRef.current.duration) : '0:00'}
+                </span>
               </div>
             </div>
-            <Select value={filterCategory} onValueChange={setFilterCategory}>
-              <SelectTrigger className="w-48 bg-black/30 border-blue-500/30">
-                <Filter className="h-4 w-4 mr-2" />
-                <SelectValue placeholder="Filter by category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                <SelectItem value="general">General</SelectItem>
-                <SelectItem value="music">Music</SelectItem>
-                <SelectItem value="video">Video</SelectItem>
-                <SelectItem value="images">Images</SelectItem>
-                <SelectItem value="documents">Documents</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          </CardContent>
+        </Card>
+      )}
 
-          {/* File Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredFiles.map((file) => (
-              <Card key={file.id} className="bg-black/30 border-gray-600/30 hover:border-blue-500/50 transition-colors">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      {getFileIcon(file.file_type, file.mime_type)}
-                      <span className="font-medium text-white truncate flex-1">
-                        {file.original_name}
-                      </span>
-                    </div>
-                    <div className="flex gap-1">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="p-1 h-6 w-6 border-green-500/30 text-green-400"
-                        onClick={() => {
-                          const url = supabase.storage.from('admin-media').getPublicUrl(file.storage_path).data.publicUrl
-                          window.open(url, '_blank')
-                        }}
-                      >
-                        <Download className="h-3 w-3" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="p-1 h-6 w-6 border-red-500/30 text-red-400"
-                        onClick={() => deleteFile(file.id, file.storage_path)}
-                      >
-                        <Trash2 className="h-3 w-3" />
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Size:</span>
-                      <span className="text-blue-400">{formatFileSize(file.file_size)}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Type:</span>
-                      <Badge className="bg-purple-600 text-xs">{file.file_type.toUpperCase()}</Badge>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Category:</span>
-                      <Badge className="bg-blue-600 text-xs">{file.category}</Badge>
-                    </div>
-                    {file.is_background_music && (
-                      <Badge className="bg-green-600 text-xs w-full justify-center">
-                        Background Music
-                      </Badge>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+      <Tabs defaultValue="upload" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="upload">Upload Media</TabsTrigger>
+          <TabsTrigger value="music">Background Music</TabsTrigger>
+          <TabsTrigger value="library">Media Library</TabsTrigger>
+        </TabsList>
 
-          {filteredFiles.length === 0 && (
-            <div className="text-center py-12">
-              <File className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-400">No files found</h3>
-              <p className="text-muted-foreground">Upload some files to get started</p>
-            </div>
-          )}
-
-          {/* Statistics */}
-          <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-500/30">
-            <CardContent className="pt-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-green-400">{files.length}</div>
-                  <div className="text-sm text-muted-foreground">Total Files</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-blue-400">
-                    {files.filter(f => f.file_type === 'audio').length}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Audio Files</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-purple-400">
-                    {files.filter(f => f.file_type === 'video').length}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Video Files</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-yellow-400">
-                    {formatFileSize(files.reduce((acc, f) => acc + f.file_size, 0))}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Total Size</div>
-                </div>
+        <TabsContent value="upload">
+          <Card className="border-green-500/30 bg-green-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <Upload className="h-6 w-6" />
+                Upload New Media
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="file">Select File</Label>
+                <Input
+                  id="file"
+                  type="file"
+                  onChange={handleFileSelect}
+                  accept="audio/*,video/*,image/*,application/pdf,text/plain"
+                  className="bg-black/40 border-green-500/30"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Supported: Audio, Video, Images, PDF, Text (Max 50MB)
+                </p>
               </div>
+
+              {selectedFile && (
+                <div className="p-4 bg-green-900/30 rounded-lg">
+                  <p className="text-green-400">Selected: {selectedFile.name}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Size: {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
+                  </p>
+                </div>
+              )}
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="category">Category</Label>
+                  <select
+                    id="category"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="w-full p-2 bg-black/40 border border-green-500/30 rounded-md"
+                  >
+                    <option value="general">General</option>
+                    <option value="music">Music</option>
+                    <option value="video">Video</option>
+                    <option value="image">Image</option>
+                    <option value="document">Document</option>
+                  </select>
+                </div>
+
+                {selectedFile?.type.startsWith('audio/') && (
+                  <div className="space-y-2">
+                    <Label>Background Music</Label>
+                    <div className="flex items-center space-x-2 pt-2">
+                      <input
+                        type="checkbox"
+                        checked={isBackgroundMusic}
+                        onChange={(e) => setIsBackgroundMusic(e.target.checked)}
+                        className="rounded"
+                      />
+                      <span className="text-sm">Use as background music</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {uploading && (
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>Uploading...</span>
+                    <span>{Math.round(uploadProgress)}%</span>
+                  </div>
+                  <Progress value={uploadProgress} className="w-full" />
+                </div>
+              )}
+
+              <Button
+                onClick={handleUpload}
+                disabled={!selectedFile || uploading}
+                className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+              >
+                {uploading ? 'Uploading...' : 'Upload Media File'}
+              </Button>
             </CardContent>
           </Card>
-        </CardContent>
-      </Card>
+        </TabsContent>
+
+        <TabsContent value="music">
+          <Card className="border-purple-500/30 bg-purple-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-purple-400">
+                <Music className="h-6 w-6" />
+                Background Music Library
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {musicFiles.length > 0 ? (
+                <div className="space-y-2">
+                  {musicFiles.map((file) => (
+                    <div
+                      key={file.id}
+                      className={`flex items-center gap-4 p-3 rounded-lg cursor-pointer transition-all ${
+                        currentTrack?.id === file.id
+                          ? 'bg-purple-900/40 border border-purple-500/30'
+                          : 'bg-black/20 hover:bg-black/40'
+                      }`}
+                      onClick={() => playTrack(file)}
+                    >
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="w-8 h-8 p-0 bg-purple-600 text-white"
+                      >
+                        {currentTrack?.id === file.id && isPlaying ? (
+                          <Pause className="h-4 w-4" />
+                        ) : (
+                          <Play className="h-4 w-4" />
+                        )}
+                      </Button>
+                      
+                      <div className="flex-1">
+                        <h3 className="font-medium">{file.original_name}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          {(file.file_size / 1024 / 1024).toFixed(2)} MB
+                        </p>
+                      </div>
+                      
+                      <Badge className="bg-purple-600">Background Music</Badge>
+                      
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          deleteFile(file)
+                        }}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <Music className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground">
+                    No background music uploaded yet. Upload audio files and mark them as background music.
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="library">
+          <Card className="border-blue-500/30 bg-blue-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-400">
+                <Settings className="h-6 w-6" />
+                Complete Media Library
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {otherFiles.length > 0 ? (
+                <div className="grid gap-4">
+                  {otherFiles.map((file) => {
+                    const IconComponent = getFileIcon(file.file_type)
+                    return (
+                      <div key={file.id} className="flex items-center gap-4 p-4 bg-black/20 rounded-lg">
+                        <IconComponent className="h-8 w-8 text-blue-400" />
+                        
+                        <div className="flex-1">
+                          <h3 className="font-medium">{file.original_name}</h3>
+                          <p className="text-sm text-muted-foreground">
+                            {file.category} • {(file.file_size / 1024 / 1024).toFixed(2)} MB
+                          </p>
+                        </div>
+                        
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline">{file.file_type}</Badge>
+                          
+                          <Button variant="outline" size="sm">
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                          
+                          <Button variant="outline" size="sm">
+                            <Download className="h-4 w-4" />
+                          </Button>
+                          
+                          <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => deleteFile(file)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground">
+                    No media files uploaded yet. Use the upload tab to add files.
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }

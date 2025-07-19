@@ -1,9 +1,9 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Globe, Heart, Zap, Users, Shield, Gamepad2 } from 'lucide-react'
+import { Globe, Heart, Zap, Users, Shield, Gamepad2, Wallet } from 'lucide-react'
 import { GAIA_TOKEN } from '@/constants/gaia'
+import { WalletConnection } from '@/components/WalletConnection'
 
 const Index = () => {
   return (
@@ -42,7 +42,7 @@ const Index = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 py-8">
+      <div className="relative z-10 container mx-auto px-6 py-8 space-y-8">
         {/* Hero Section */}
         <Card className="mb-8 border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30 backdrop-blur-sm">
           <CardHeader>
@@ -71,6 +71,9 @@ const Index = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Multi-Wallet Connection */}
+        <WalletConnection />
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

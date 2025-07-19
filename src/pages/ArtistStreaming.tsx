@@ -1,262 +1,435 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
+import { Progress } from '@/components/ui/progress'
 import { 
   Play, 
   Pause, 
-  Music, 
-  Users, 
-  Calendar,
-  MapPin,
-  Search,
+  SkipForward, 
+  SkipBack, 
+  Volume2, 
+  Shuffle, 
+  Repeat,
+  Music,
+  Radio,
+  Users,
   Heart,
-  Share2,
-  Volume2
+  Share2
 } from 'lucide-react'
+import { supabase } from '@/integrations/supabase/client'
+import { toast } from 'sonner'
+import { useQuery } from '@tanstack/react-query'
 
-interface LiveShow {
+interface Track {
   id: string
+  title: string
   artist: string
-  venue: string
-  date: string
-  time: string
-  genre: string
-  viewers: number
-  isLive: boolean
-  thumbnail: string
-  description: string
+  url: string
+  duration: number
+  cover?: string
+  genre?: string
 }
 
-const ArtistStreaming = () => {
-  const [liveShows] = useState<LiveShow[]>([
+export default function ArtistStreaming() {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [volume, setVolume] = useState(1)
+  const [isShuffled, setIsShuffled] = useState(false)
+  const [isRepeating, setIsRepeating] = useState(false)
+  const [isLive, setIsLive] = useState(false)
+  const audioRef = useRef<HTMLAudioElement>(null)
+
+  // Fetch background music from admin media library
+  const { data: tracks } = useQuery({
+    queryKey: ['background-music'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('admin_media_library')
+        .select('*')
+        .eq('is_background_music', true)
+        .eq('is_active', true)
+        .order('created_at', { ascending: false })
+
+      if (error) throw error
+      
+      // Transform admin media to track format
+      return data.map(item => ({
+        id: item.id,
+        title: item.original_name.replace(/\.[^/.]+$/, ''), // Remove file extension
+        artist: 'GAIA Artist',
+        url: supabase.storage.from(item.storage_bucket).getPublicUrl(item.storage_path).data.publicUrl,
+        duration: 0, // Would need to be calculated from metadata
+        genre: item.category
+      })) as Track[]
+    }
+  })
+
+  // Sample live shows data
+  const liveShows = [
     {
       id: '1',
-      artist: 'Queen',
-      venue: 'Wembley Stadium 1986',
-      date: '1986-07-12',
-      time: '20:00',
-      genre: 'Rock',
-      viewers: 45230,
-      isLive: true,
-      thumbnail: '/api/placeholder/400/300',
-      description: 'Historic performance at Wembley Stadium'
+      title: 'GAIA Harmony Live Session',
+      artist: 'Various Artists',
+      viewers: 1247,
+      status: 'live',
+      thumbnail: '/api/placeholder/300/200'
     },
     {
       id: '2',
-      artist: 'Michael Jackson',
-      venue: 'Motown 25th Anniversary',
-      date: '1983-03-25',
-      time: '21:00',
-      genre: 'Pop',
-      viewers: 38750,
-      isLive: true,
-      thumbnail: '/api/placeholder/400/300',
-      description: 'Legendary moonwalk debut performance'
+      title: 'Eco Beats & Nature Sounds',
+      artist: 'Green Sound Collective',
+      viewers: 892,
+      status: 'live',
+      thumbnail: '/api/placeholder/300/200'
     },
     {
       id: '3',
-      artist: 'Bob Dylan',
-      venue: 'Newport Folk Festival 1965',
-      date: '1965-07-25',
-      time: '19:30',
-      genre: 'Folk',
-      viewers: 22100,
-      isLive: false,
-      thumbnail: '/api/placeholder/400/300',
-      description: 'The controversial electric performance'
-    },
-    {
-      id: '4',
-      artist: 'The Beatles',
-      venue: 'Shea Stadium 1965',
-      date: '1965-08-15',
-      time: '20:30',
-      genre: 'Rock',
-      viewers: 55890,
-      isLive: true,
-      thumbnail: '/api/placeholder/400/300',
-      description: 'Groundbreaking stadium concert'
-    },
-    {
-      id: '5',
-      artist: 'Jimi Hendrix',
-      venue: 'Woodstock 1969',
-      date: '1969-08-18',
-      time: '09:00',
-      genre: 'Rock',
-      viewers: 41200,
-      isLive: false,
-      thumbnail: '/api/placeholder/400/300',
-      description: 'Iconic Star-Spangled Banner performance'
-    },
-    {
-      id: '6',
-      artist: 'Pink Floyd',
-      venue: 'Live at Pompeii 1972',
-      date: '1972-10-04',
-      time: '18:00',
-      genre: 'Progressive Rock',
-      viewers: 33400,
-      isLive: true,
-      thumbnail: '/api/placeholder/400/300',
-      description: 'Surreal performance in ancient amphitheater'
+      title: 'Meditation & Ambient Music',
+      artist: 'Earth Harmony',
+      viewers: 654,
+      status: 'starting_soon',
+      thumbnail: '/api/placeholder/300/200'
     }
-  ])
+  ]
 
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedGenre, setSelectedGenre] = useState('all')
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume
+    }
+  }, [volume])
 
-  const genres = ['all', 'Rock', 'Pop', 'Folk', 'Progressive Rock']
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
 
-  const filteredShows = liveShows.filter(show => {
-    const matchesSearch = show.artist.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         show.venue.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesGenre = selectedGenre === 'all' || show.genre === selectedGenre
-    return matchesSearch && matchesGenre
-  })
+    const updateTime = () => setCurrentTime(audio.currentTime)
+    const handleEnded = () => {
+      if (isRepeating) {
+        audio.currentTime = 0
+        audio.play()
+      } else {
+        playNext()
+      }
+    }
+
+    audio.addEventListener('timeupdate', updateTime)
+    audio.addEventListener('ended', handleEnded)
+
+    return () => {
+      audio.removeEventListener('timeupdate', updateTime)
+      audio.removeEventListener('ended', handleEnded)
+    }
+  }, [isRepeating, tracks])
+
+  const playTrack = async (track: Track) => {
+    if (audioRef.current) {
+      setCurrentTrack(track)
+      audioRef.current.src = track.url
+      try {
+        await audioRef.current.play()
+        setIsPlaying(true)
+        toast.success(`🎵 Now playing: ${track.title}`)
+      } catch (error) {
+        console.error('Play error:', error)
+        toast.error('Failed to play track')
+      }
+    }
+  }
+
+  const togglePlayPause = async () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+        setIsPlaying(false)
+      } else {
+        try {
+          await audioRef.current.play()
+          setIsPlaying(true)
+        } catch (error) {
+          console.error('Play error:', error)
+          toast.error('Failed to play track')
+        }
+      }
+    }
+  }
+
+  const playNext = () => {
+    if (!tracks || !currentTrack) return
+    
+    const currentIndex = tracks.findIndex(t => t.id === currentTrack.id)
+    let nextIndex = currentIndex + 1
+    
+    if (isShuffled) {
+      nextIndex = Math.floor(Math.random() * tracks.length)
+    } else if (nextIndex >= tracks.length) {
+      nextIndex = 0
+    }
+    
+    playTrack(tracks[nextIndex])
+  }
+
+  const playPrevious = () => {
+    if (!tracks || !currentTrack) return
+    
+    const currentIndex = tracks.findIndex(t => t.id === currentTrack.id)
+    let prevIndex = currentIndex - 1
+    
+    if (prevIndex < 0) {
+      prevIndex = tracks.length - 1
+    }
+    
+    playTrack(tracks[prevIndex])
+  }
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = Math.floor(seconds % 60)
+    return `${mins}:${secs.toString().padStart(2, '0')}`
+  }
+
+  const seekTo = (percentage: number) => {
+    if (audioRef.current && audioRef.current.duration) {
+      const newTime = (percentage / 100) * audioRef.current.duration
+      audioRef.current.currentTime = newTime
+      setCurrentTime(newTime)
+    }
+  }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent mb-4">
-          🎵 LIVE ARTIST STREAMING - HISTORIC PERFORMANCES
-        </h1>
-        <p className="text-center text-muted-foreground text-lg">
-          Experience legendary performances from music history in real-time
-        </p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
+      <div className="container mx-auto px-4 py-8 space-y-8">
+        {/* Hidden audio element */}
+        <audio ref={audioRef} />
 
-      {/* Search and Filter */}
-      <div className="flex flex-col md:flex-row gap-4 mb-8">
-        <div className="flex-1 relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Search artists or venues..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
-          />
+        {/* Header */}
+        <div className="text-center">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
+            🎭 GAIA Artist Streaming Platform
+          </h1>
+          <p className="text-xl text-muted-foreground">
+            Live shows, music streaming, and community connection
+          </p>
         </div>
-        <select
-          value={selectedGenre}
-          onChange={(e) => setSelectedGenre(e.target.value)}
-          className="px-4 py-2 bg-background border border-input rounded-md"
-        >
-          {genres.map(genre => (
-            <option key={genre} value={genre}>
-              {genre === 'all' ? 'All Genres' : genre}
-            </option>
-          ))}
-        </select>
-      </div>
 
-      {/* Live Shows Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredShows.map((show) => (
-          <Card key={show.id} className="border-purple-500/30 hover:border-purple-500/50 transition-all duration-300">
-            <div className="relative">
-              <div className="aspect-video bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-t-lg flex items-center justify-center">
-                <Music className="h-16 w-16 text-purple-400" />
-              </div>
-              {show.isLive && (
-                <Badge className="absolute top-2 left-2 bg-red-600 text-white animate-pulse">
-                  🔴 LIVE
-                </Badge>
-              )}
-              <div className="absolute top-2 right-2 flex items-center gap-1 bg-black/60 rounded px-2 py-1">
-                <Users className="h-3 w-3 text-white" />
-                <span className="text-white text-xs">{show.viewers.toLocaleString()}</span>
-              </div>
+        {/* Live Shows Section */}
+        <Card className="border-red-500/30 bg-red-900/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-red-400">
+              <Radio className="h-6 w-6" />
+              🔴 Live Shows
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {liveShows.map((show) => (
+                <div key={show.id} className="space-y-3">
+                  <div className="aspect-video bg-black rounded-lg overflow-hidden relative">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                    <div className="absolute top-3 left-3 z-20">
+                      <Badge className={show.status === 'live' ? 'bg-red-600 animate-pulse' : 'bg-yellow-600'}>
+                        {show.status === 'live' ? '🔴 LIVE' : '⏰ Soon'}
+                      </Badge>
+                    </div>
+                    <div className="absolute bottom-3 left-3 right-3 z-20">
+                      <h3 className="font-medium text-white mb-1">{show.title}</h3>
+                      <p className="text-sm text-gray-300">{show.artist}</p>
+                      <div className="flex items-center gap-2 mt-2">
+                        <Users className="h-4 w-4 text-red-400" />
+                        <span className="text-sm text-red-400">{show.viewers} viewers</span>
+                      </div>
+                    </div>
+                    <Button
+                      className="absolute inset-0 bg-transparent hover:bg-white/10 border-0 z-30"
+                      onClick={() => {
+                        setIsLive(true)
+                        toast.success(`Joining ${show.title}...`)
+                      }}
+                    >
+                      <Play className="h-12 w-12 text-white" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
             </div>
-            
-            <CardContent className="pt-4">
-              <h3 className="font-bold text-lg text-purple-400 mb-2">{show.artist}</h3>
-              <p className="text-sm text-muted-foreground mb-2">{show.description}</p>
-              
-              <div className="space-y-2 mb-4">
-                <div className="flex items-center gap-2 text-sm">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
-                  <span>{show.venue}</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span>{new Date(show.date).toLocaleDateString()} at {show.time}</span>
-                </div>
-                <Badge className="bg-purple-600/20 text-purple-400 border-purple-500/30">
-                  {show.genre}
-                </Badge>
-              </div>
+          </CardContent>
+        </Card>
 
-              <div className="flex gap-2">
-                <Button 
-                  className="flex-1 bg-purple-600 hover:bg-purple-700"
-                  size="sm"
-                >
-                  {show.isLive ? (
-                    <>
-                      <Volume2 className="h-4 w-4 mr-2" />
-                      Watch Live
-                    </>
-                  ) : (
-                    <>
-                      <Play className="h-4 w-4 mr-2" />
-                      Watch Recording
-                    </>
-                  )}
-                </Button>
-                <Button size="sm" variant="outline">
-                  <Heart className="h-4 w-4" />
-                </Button>
-                <Button size="sm" variant="outline">
-                  <Share2 className="h-4 w-4" />
-                </Button>
+        {/* Music Player */}
+        {currentTrack && (
+          <Card className="border-purple-500/30 bg-purple-900/20 sticky bottom-4 z-40">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-4">
+                {/* Track Info */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-medium truncate">{currentTrack.title}</h3>
+                  <p className="text-sm text-muted-foreground truncate">{currentTrack.artist}</p>
+                </div>
+
+                {/* Controls */}
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setIsShuffled(!isShuffled)}
+                    className={isShuffled ? 'text-purple-400' : ''}
+                  >
+                    <Shuffle className="h-4 w-4" />
+                  </Button>
+                  
+                  <Button variant="ghost" size="sm" onClick={playPrevious}>
+                    <SkipBack className="h-4 w-4" />
+                  </Button>
+                  
+                  <Button variant="ghost" size="sm" onClick={togglePlayPause}>
+                    {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                  </Button>
+                  
+                  <Button variant="ghost" size="sm" onClick={playNext}>
+                    <SkipForward className="h-4 w-4" />
+                  </Button>
+                  
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setIsRepeating(!isRepeating)}
+                    className={isRepeating ? 'text-purple-400' : ''}
+                  >
+                    <Repeat className="h-4 w-4" />
+                  </Button>
+                </div>
+
+                {/* Progress & Volume */}
+                <div className="flex items-center gap-4 min-w-0 flex-1">
+                  <div className="flex items-center gap-2 flex-1">
+                    <span className="text-xs text-muted-foreground">
+                      {formatTime(currentTime)}
+                    </span>
+                    <Progress
+                      value={audioRef.current?.duration ? (currentTime / audioRef.current.duration) * 100 : 0}
+                      className="flex-1 cursor-pointer"
+                      onClick={(e) => {
+                        const rect = e.currentTarget.getBoundingClientRect()
+                        const percentage = ((e.clientX - rect.left) / rect.width) * 100
+                        seekTo(percentage)
+                      }}
+                    />
+                    <span className="text-xs text-muted-foreground">
+                      {audioRef.current?.duration ? formatTime(audioRef.current.duration) : '0:00'}
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2">
+                    <Volume2 className="h-4 w-4" />
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.1"
+                      value={volume}
+                      onChange={(e) => setVolume(parseFloat(e.target.value))}
+                      className="w-16"
+                    />
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
-        ))}
-      </div>
+        )}
 
-      {/* Stats */}
-      <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="border-purple-500/30">
-          <CardContent className="pt-4 text-center">
-            <div className="text-2xl font-bold text-purple-400">
-              {liveShows.filter(s => s.isLive).length}
-            </div>
-            <div className="text-sm text-muted-foreground">Live Shows</div>
+        {/* Music Library */}
+        <Card className="border-green-500/30 bg-green-900/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-green-400">
+              <Music className="h-6 w-6" />
+              GAIA Music Library
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {tracks && tracks.length > 0 ? (
+              <div className="space-y-2">
+                {tracks.map((track, index) => (
+                  <div
+                    key={track.id}
+                    className={`flex items-center gap-4 p-3 rounded-lg cursor-pointer transition-all ${
+                      currentTrack?.id === track.id
+                        ? 'bg-purple-900/40 border border-purple-500/30'
+                        : 'bg-black/20 hover:bg-black/40'
+                    }`}
+                    onClick={() => playTrack(track)}
+                  >
+                    <div className="flex items-center justify-center w-8 h-8 bg-purple-600 rounded-full text-white font-medium">
+                      {currentTrack?.id === track.id && isPlaying ? (
+                        <Pause className="h-4 w-4" />
+                      ) : (
+                        <Play className="h-4 w-4" />
+                      )}
+                    </div>
+                    
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-medium truncate">{track.title}</h3>
+                      <p className="text-sm text-muted-foreground">{track.artist}</p>
+                    </div>
+                    
+                    {track.genre && (
+                      <Badge variant="outline">{track.genre}</Badge>
+                    )}
+                    
+                    <div className="flex items-center gap-2">
+                      <Button variant="ghost" size="sm">
+                        <Heart className="h-4 w-4" />
+                      </Button>
+                      <Button variant="ghost" size="sm">
+                        <Share2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <Music className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                <p className="text-muted-foreground">
+                  No music available yet. Admin can upload tracks to the media library.
+                </p>
+              </div>
+            )}
           </CardContent>
         </Card>
-        
-        <Card className="border-blue-500/30">
-          <CardContent className="pt-4 text-center">
-            <div className="text-2xl font-bold text-blue-400">
-              {liveShows.reduce((sum, show) => sum + show.viewers, 0).toLocaleString()}
-            </div>
-            <div className="text-sm text-muted-foreground">Total Viewers</div>
-          </CardContent>
-        </Card>
-        
-        <Card className="border-green-500/30">
-          <CardContent className="pt-4 text-center">
-            <div className="text-2xl font-bold text-green-400">
-              {new Set(liveShows.map(s => s.genre)).size}
-            </div>
-            <div className="text-sm text-muted-foreground">Genres</div>
-          </CardContent>
-        </Card>
-        
-        <Card className="border-yellow-500/30">
-          <CardContent className="pt-4 text-center">
-            <div className="text-2xl font-bold text-yellow-400">24/7</div>
-            <div className="text-sm text-muted-foreground">Streaming</div>
-          </CardContent>
-        </Card>
+
+        {/* Artist Features */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="border-blue-500/30 bg-blue-900/20">
+            <CardHeader>
+              <CardTitle className="text-blue-400">🎤 Become an Artist</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                Join our platform as a verified artist and share your music with the GAIA community.
+              </p>
+              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                Apply as Artist
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="border-yellow-500/30 bg-yellow-900/20">
+            <CardHeader>
+              <CardTitle className="text-yellow-400">💰 Earn GAIA Tokens</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                Artists earn GAIA tokens from streams, live shows, and community engagement.
+              </p>
+              <Button className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700">
+                Learn More
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   )
 }
-
-export default ArtistStreaming
