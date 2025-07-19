@@ -1,56 +1,120 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from 'sonner'
+import './App.css'
 
-import { Toaster } from "@/components/ui/sonner"
-import { TooltipProvider } from "@/components/ui/tooltip"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { AuthProvider } from "@/components/auth/AuthProvider"
-import { Navbar } from "@/components/Navbar"
-import { BackgroundMusic } from "@/components/BackgroundMusic"
-import Index from "./pages/Index"
-import AdminLogin from "./pages/AdminLogin"
-import Admin from "./pages/Admin"
-import SecureAdmin from "./pages/SecureAdmin"
-import SecureVault from "./pages/SecureVault"
-import ArtistStreaming from "./pages/ArtistStreaming"
-import VideoSharing from "./pages/VideoSharing"
-import { InvisibleAttachmentSystem } from '@/components/security/InvisibleAttachmentSystem'
-import { InvisibleAdminProtection } from '@/components/security/InvisibleAdminProtection'
-import { InvisibleSecurityCore } from '@/components/security/InvisibleSecurityCore'
-import { Invisible4StepVerification } from '@/components/security/Invisible4StepVerification'
-import { QuantumEvolutionMonitor } from '@/components/security/QuantumEvolutionMonitor'
+import { Navbar } from '@/components/Navbar'
+import SlidingMenu from '@/components/SlidingMenu'
+import { SidebarProvider } from '@/components/ui/sidebar'
+import { AuthProvider } from '@/components/auth/AuthProvider'
+import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'
+import { MasterSystemOrchestrator } from '@/components/system/MasterSystemOrchestrator'
+
+// Pages - Keep all existing pages
+import Index from '@/pages/Index'
+import Exchange from '@/pages/Exchange'
+import Gaming from '@/pages/Gaming'
+import Analytics from '@/pages/Analytics'
+import Swap from '@/pages/Swap'
+import Security from '@/pages/Security'
+import AdminLogin from '@/pages/AdminLogin'
+import SecureAdmin from '@/pages/SecureAdmin'
+import SecureVault from '@/pages/SecureVault'
+import GaiasProjects from '@/pages/GaiasProjects'
+import TransparentWallet from '@/pages/TransparentWallet'
+import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
+import LandscapeBuilder from '@/pages/LandscapeBuilder'
+import GaiaFighterGame from '@/pages/GaiaFighterGame'
+import Transparency from '@/pages/Transparency'
+import ArtistStreaming from '@/pages/ArtistStreaming'
+
+// Game Pages
+import GaiaFantasyMMORPG from '@/pages/games/GaiaFantasyMMORPG'
+import SnakeArenaGame from '@/pages/games/SnakeArenaGame'
+import Game from '@/pages/Game'
+
+// Advanced pages
+import NFTGreenAnimalPlatform from '@/pages/NFTGreenAnimalPlatform'
+import AuraLandScrapyard from '@/pages/AuraLandScrapyard'
+import CoinCrafter from '@/pages/CoinCrafter'
+import VirtualWorld from '@/pages/VirtualWorld'
+import SystemStatus from '@/pages/SystemStatus'
+import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
+import About from '@/pages/About'
+import Contact from '@/pages/Contact'
+import Pricing from '@/pages/Pricing'
+
+// New Admin and Marketplace Pages
+import AdminCraftedTools from '@/pages/AdminCraftedTools'
+import Marketplace from '@/pages/Marketplace'
 
 const queryClient = new QueryClient()
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <BrowserRouter>
-          <AuthProvider>
-            {/* Invisible Security Systems - Running in Background */}
-            <InvisibleAttachmentSystem />
-            <InvisibleAdminProtection />
-            <InvisibleSecurityCore />
-            <Invisible4StepVerification />
-            <QuantumEvolutionMonitor />
-            
-            <div className="min-h-screen bg-background">
-              <Navbar />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/admin" element={<AdminLogin />} />
-                <Route path="/admin-dashboard" element={<Admin />} />
-                <Route path="/secure-admin" element={<SecureAdmin />} />
-                <Route path="/secure-vault" element={<SecureVault />} />
-                <Route path="/artist-streaming" element={<ArtistStreaming />} />
-                <Route path="/video-sharing" element={<VideoSharing />} />
-              </Routes>
-              <BackgroundMusic />
+      <AuthProvider>
+        <Router>
+          <SidebarProvider>
+            <div className="min-h-screen bg-background text-foreground">
+              {/* Master System Orchestrator - Ensures all systems keep growing */}
+              <MasterSystemOrchestrator />
+              
+              {/* Background Media Engine */}
+              <BackgroundMediaEngine />
+              
+              {/* Sliding Menu */}
+              <SlidingMenu />
+              
+              {/* Main Content Area */}
+              <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-1 container mx-auto px-4 py-6">
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/exchange" element={<Exchange />} />
+                    <Route path="/gaming" element={<Gaming />} />
+                    <Route path="/marketplace" element={<Marketplace />} />
+                    <Route path="/analytics" element={<Analytics />} />
+                    <Route path="/swap" element={<Swap />} />
+                    <Route path="/security" element={<Security />} />
+                    <Route path="/admin" element={<AdminLogin />} />
+                    <Route path="/secure-admin" element={<SecureAdmin />} />
+                    <Route path="/secure-vault" element={<SecureVault />} />
+                    <Route path="/gaias-projects" element={<GaiasProjects />} />
+                    <Route path="/transparent-wallet" element={<TransparentWallet />} />
+                    <Route path="/transparency" element={<Transparency />} />
+                    <Route path="/coin-crafter" element={<GaiaCoinCrafter />} />
+                    <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+                    <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
+                    <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
+                    <Route path="/artist-streaming" element={<ArtistStreaming />} />
+                    
+                    {/* New Game Pages */}
+                    <Route path="/game/gaia-fantasy-mmorpg" element={<GaiaFantasyMMORPG />} />
+                    <Route path="/game/snake-arena" element={<SnakeArenaGame />} />
+                    <Route path="/game" element={<Game />} />
+                    
+                    {/* Advanced feature routes */}
+                    <Route path="/nft-green-animals" element={<NFTGreenAnimalPlatform />} />
+                    <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
+                    <Route path="/virtual-world" element={<VirtualWorld />} />
+                    <Route path="/system-status" element={<SystemStatus />} />
+                    <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/pricing" element={<Pricing />} />
+                    
+                    {/* Admin Tools */}
+                    <Route path="/admin-crafted-tools" element={<AdminCraftedTools />} />
+                  </Routes>
+                </main>
+              </div>
             </div>
-          </AuthProvider>
-        </BrowserRouter>
-      </TooltipProvider>
+            <Toaster position="top-right" />
+          </SidebarProvider>
+        </Router>
+      </AuthProvider>
     </QueryClientProvider>
   )
 }
