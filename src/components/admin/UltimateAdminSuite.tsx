@@ -1,10 +1,9 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Crown, Zap, Globe, Shield, Star, Flame, Settings, Users, BarChart3, Lock, Activity, Hammer, Palette, Mountain, Coins, Brain, Cpu } from 'lucide-react'
+import { Crown, Zap, Globe, Shield, Star, Flame, Settings, Users, BarChart3, Lock, Activity, Hammer, Palette, Mountain, Coins, Brain, Cpu, Rocket } from 'lucide-react'
 import { UltimateSecurityCore } from './UltimateSecurityCore'
 import { QuantumTradingEngine } from './QuantumTradingEngine'
 import { DragonAIDefense } from './DragonAIDefense'
@@ -24,12 +23,19 @@ import { AutonomousMastermind } from './AutonomousMastermind'
 import { UltimateAdminControls } from './UltimateAdminControls'
 import { SelfTrainingKoalaAI } from './SelfTrainingKoalaAI'
 import { PersistentAdminSession } from './PersistentAdminSession'
+import { SmartNotificationManager } from '../system/SmartNotificationManager'
+import { GitHubIntegration } from '../system/GitHubIntegration'
+import { NotificationSettings } from '../system/NotificationSettings'
+import { AdvancedSystemUpgrades } from '../system/AdvancedSystemUpgrades'
 
 export function UltimateAdminSuite() {
   const [activeSystem, setActiveSystem] = useState('overview')
 
   const adminSystems = [
     { id: 'overview', label: '🌟 Ultimate Features', icon: Star },
+    { id: 'upgrades', label: '🚀 System Upgrades', icon: Rocket },
+    { id: 'github', label: '🐙 GitHub Integration', icon: Activity },
+    { id: 'notifications', label: '🔔 Smart Notifications', icon: Settings },
     { id: 'ai-thinking', label: '🧠 Parabolic AI', icon: Brain },
     { id: 'mastermind', label: '🤖 Autonomous AI', icon: Cpu },
     { id: 'godfather', label: '👑 Ultimate Control', icon: Crown },
@@ -47,6 +53,9 @@ export function UltimateAdminSuite() {
 
   return (
     <div className="space-y-6">
+      {/* Smart Notification Manager (invisible service) */}
+      <SmartNotificationManager />
+      
       {/* Persistent Admin Session Component */}
       <PersistentAdminSession />
       
@@ -129,6 +138,9 @@ export function UltimateAdminSuite() {
           </div>
         )}
 
+        {activeSystem === 'upgrades' && <AdvancedSystemUpgrades />}
+        {activeSystem === 'github' && <GitHubIntegration />}
+        {activeSystem === 'notifications' && <NotificationSettings />}
         {activeSystem === 'ai-thinking' && <ParabolicAIThinking />}
         {activeSystem === 'mastermind' && <AutonomousMastermind />}
         {activeSystem === 'godfather' && <UltimateAdminControls />}

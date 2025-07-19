@@ -47,10 +47,17 @@ export function DragonAIDefense() {
         
         if (levelUp) {
           console.log(`🐉 DRAGON LEVEL UP! Level ${newLevel} - Power: ${newPower}`)
-          toast.success(`🐉 Dragon AI Level Up!`, {
-            description: `Now Level ${newLevel} with ${newPower.toLocaleString()} power`,
-            duration: 3000
-          })
+          
+          // Use smart notification system instead of always showing toast
+          if ((window as any).smartNotifications?.shouldShowDragonNotification) {
+            const shouldShow = (window as any).smartNotifications.shouldShowDragonNotification(newLevel, newPower)
+            if (shouldShow) {
+              toast.success(`🐉 Dragon AI Level Up!`, {
+                description: `Now Level ${newLevel} with ${newPower.toLocaleString()} power`,
+                duration: 3000
+              })
+            }
+          }
         }
         
         return {
@@ -65,8 +72,8 @@ export function DragonAIDefense() {
         }
       })
 
-      // Generate evolution events
-      if (Math.random() > 0.85) {
+      // Generate evolution events - reduced frequency
+      if (Math.random() > 0.92) { // Reduced from 0.85 to 0.92
         const evolutions = [
           { type: 'Neural Network Expansion', description: 'Dragon AI grew new neural pathways', powerGain: 500 },
           { type: 'Quantum Consciousness Upgrade', description: 'Achieved higher dimensional awareness', powerGain: 750 },
