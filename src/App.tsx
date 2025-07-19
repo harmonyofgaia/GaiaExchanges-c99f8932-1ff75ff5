@@ -27,6 +27,8 @@ import LandscapeBuilder from '@/pages/LandscapeBuilder'
 import GaiaFighterGame from '@/pages/GaiaFighterGame'
 import Transparency from '@/pages/Transparency'
 import ArtistStreaming from '@/pages/ArtistStreaming'
+import VideoUpload from '@/pages/VideoUpload'
+import TaskReverser from '@/pages/TaskReverser'
 
 // Game Pages
 import GaiaFantasyMMORPG from '@/pages/games/GaiaFantasyMMORPG'
@@ -89,6 +91,8 @@ function App() {
                     <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
                     <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
                     <Route path="/artist-streaming" element={<ArtistStreaming />} />
+                    <Route path="/video-upload" element={<VideoUpload />} />
+                    <Route path="/task-reverser" element={<TaskReverser />} />
                     
                     {/* New Game Pages */}
                     <Route path="/game/gaia-fantasy-mmorpg" element={<GaiaFantasyMMORPG />} />

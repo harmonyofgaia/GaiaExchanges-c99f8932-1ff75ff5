@@ -1,177 +1,262 @@
-
+import { useState, useEffect } from 'react'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Globe, Heart, Zap, Users, Shield, Gamepad2 } from 'lucide-react'
-import { GAIA_TOKEN } from '@/constants/gaia'
+import { Progress } from '@/components/ui/progress'
+import { Link } from 'react-router-dom'
+import { BackgroundMusic } from '@/components/BackgroundMusic'
+import { WalletConnection } from '@/components/WalletConnection'
+import { AdminReverseButton } from '@/components/admin/AdminReverseButton'
+import Web3Integration from '@/components/Web3Integration'
+import { GitHubIntegration } from '@/components/GitHubIntegration'
+import { 
+  Leaf, 
+  DollarSign, 
+  Gamepad2, 
+  ShoppingCart, 
+  Music,
+  Video,
+  BarChart3,
+  Shield,
+  Eye,
+  Wallet,
+  ExternalLink,
+  Star,
+  TrendingUp,
+  Users,
+  Globe
+} from 'lucide-react'
 
-const Index = () => {
+export default function Index() {
+  const [gaiaMetrics, setGaiaMetrics] = useState({
+    totalUsers: 12847,
+    activeProjects: 23,
+    tokensBurned: 847392,
+    environmentalImpact: 97.3
+  })
+
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Simulate loading
+    const timer = setTimeout(() => setIsLoading(false), 1000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  const quickActions = [
+    { 
+      title: 'Exchange', 
+      description: 'Trade GAIA tokens', 
+      icon: DollarSign, 
+      path: '/exchange',
+      color: 'from-green-500 to-emerald-500'
+    },
+    { 
+      title: 'Gaming', 
+      description: 'Play & earn rewards', 
+      icon: Gamepad2, 
+      path: '/gaming',
+      color: 'from-blue-500 to-cyan-500'
+    },
+    { 
+      title: 'Marketplace', 
+      description: 'Buy & sell NFTs', 
+      icon: ShoppingCart, 
+      path: '/marketplace',
+      color: 'from-purple-500 to-pink-500'
+    },
+    { 
+      title: 'Artist Hub', 
+      description: 'Upload & stream music', 
+      icon: Music, 
+      path: '/artist-streaming',
+      color: 'from-orange-500 to-red-500'
+    },
+    { 
+      title: 'Video Platform', 
+      description: 'Share & earn from videos', 
+      icon: Video, 
+      path: '/video-upload',
+      color: 'from-indigo-500 to-purple-500'
+    },
+    { 
+      title: 'Analytics', 
+      description: 'Track your progress', 
+      icon: BarChart3, 
+      path: '/analytics',
+      color: 'from-teal-500 to-green-500'
+    }
+  ]
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin h-12 w-12 border-4 border-green-400 border-t-transparent rounded-full mx-auto mb-4" />
+          <h2 className="text-2xl font-semibold text-green-400">Loading GAIA Platform...</h2>
+          <p className="text-muted-foreground">Preparing your environmental journey</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Moving Background */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20" />
-        
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          {Array.from({ length: 50 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute opacity-20"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
-                animationDelay: `${Math.random() * 5}s`
-              }}
-            >
-              <div className={`w-2 h-2 rounded-full ${
-                i % 4 === 0 ? 'bg-green-400' : 
-                i % 4 === 1 ? 'bg-blue-400' : 
-                i % 4 === 2 ? 'bg-purple-400' : 
-                'bg-cyan-400'
-              } blur-sm animate-pulse`} />
-            </div>
-          ))}
+    <div className="min-h-screen">
+      <AdminReverseButton />
+      <BackgroundMusic />
+      
+      {/* Hero Section */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            🌍 HARMONY OF GAIA
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            The ultimate environmental blockchain platform where creativity meets sustainability. 
+            Upload music, create content, trade tokens, and make a real impact on our planet.
+          </p>
+          
+          {/* Platform Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <Card className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border-green-500/30">
+              <CardContent className="pt-6 text-center">
+                <div className="text-2xl font-bold text-green-400">{gaiaMetrics.totalUsers.toLocaleString()}</div>
+                <div className="text-sm text-muted-foreground">Community Members</div>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/30">
+              <CardContent className="pt-6 text-center">
+                <div className="text-2xl font-bold text-blue-400">{gaiaMetrics.activeProjects}</div>
+                <div className="text-sm text-muted-foreground">Active Projects</div>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/30">
+              <CardContent className="pt-6 text-center">
+                <div className="text-2xl font-bold text-purple-400">{gaiaMetrics.tokensBurned.toLocaleString()}</div>
+                <div className="text-sm text-muted-foreground">GAIA Tokens Burned</div>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-gradient-to-br from-orange-900/20 to-red-900/20 border-orange-500/30">
+              <CardContent className="pt-6 text-center">
+                <div className="text-2xl font-bold text-orange-400">{gaiaMetrics.environmentalImpact}%</div>
+                <div className="text-sm text-muted-foreground">Environmental Impact</div>
+              </CardContent>
+            </Card>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/gaias-projects">
+              <Button size="lg" className="bg-green-600 hover:bg-green-700">
+                <Leaf className="mr-2 h-5 w-5" />
+                Explore Projects
+              </Button>
+            </Link>
+            <Link to="/exchange">
+              <Button size="lg" variant="outline">
+                <DollarSign className="mr-2 h-5 w-5" />
+                Start Trading
+              </Button>
+            </Link>
+          </div>
         </div>
+      </section>
 
-        {/* Moving Gradient Orbs */}
-        <div className="absolute top-10 left-10 w-72 h-72 bg-green-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 py-8">
-        {/* Hero Section */}
-        <Card className="mb-8 border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30 backdrop-blur-sm">
-          <CardHeader>
-            <CardTitle className="text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">
-              🌍 Welcome to GAiA
-            </CardTitle>
-            <p className="text-center text-2xl text-muted-foreground">
-              {GAIA_TOKEN.BRAND_STATEMENT}
-            </p>
-          </CardHeader>
-          <CardContent>
-            <div className="text-center space-y-4">
-              <Badge className="bg-green-600 text-lg px-6 py-2">
-                Official GAiA Token Platform
-              </Badge>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 h-12">
-                  <Gamepad2 className="h-5 w-5 mr-2" />
-                  Start Gaming
-                </Button>
-                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 h-12">
-                  <Zap className="h-5 w-5 mr-2" />
-                  Access Wallet
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card className="border-green-500/30 bg-green-900/20 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <Globe className="h-6 w-6" />
-                Environmental Impact
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Every transaction contributes to real-world environmental restoration projects.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-500/30 bg-blue-900/20 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-400">
-                <Gamepad2 className="h-6 w-6" />
-                Gaming Ecosystem
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Play games, earn tokens, and compete in tournaments while helping the planet.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-purple-500/30 bg-purple-900/20 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-purple-400">
-                <Shield className="h-6 w-6" />
-                Secure Trading
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Advanced security protocols protect your assets and transactions.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-orange-500/30 bg-orange-900/20 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-orange-400">
-                <Heart className="h-6 w-6" />
-                Community Driven
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Join a global community united in environmental restoration.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-cyan-500/30 bg-cyan-900/20 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-cyan-400">
-                <Zap className="h-6 w-6" />
-                Instant Rewards
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Earn GAiA tokens instantly through various platform activities.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-pink-500/30 bg-pink-900/20 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-pink-400">
-                <Users className="h-6 w-6" />
-                Global Network
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Connect with like-minded individuals from around the world.
-              </p>
-            </CardContent>
-          </Card>
+      {/* Wallet Connection Section */}
+      <section className="py-8 px-4">
+        <div className="container mx-auto">
+          <WalletConnection />
         </div>
-      </div>
+      </section>
 
-      {/* CSS Animation */}
-      <style>
-        {`
-          @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-10px) rotate(120deg); }
-            66% { transform: translateY(5px) rotate(240deg); }
-          }
-        `}
-      </style>
+      {/* Quick Actions Grid */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12 text-white">
+            🚀 Platform Features
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {quickActions.map((action, index) => {
+              const Icon = action.icon
+              return (
+                <Link key={index} to={action.path}>
+                  <Card className="h-full hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-gray-900/40 to-gray-800/40 border-gray-500/30 hover:border-primary/50">
+                    <CardContent className="p-6">
+                      <div className={`inline-flex p-3 rounded-lg bg-gradient-to-r ${action.color} mb-4`}>
+                        <Icon className="h-6 w-6 text-white" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-2 text-white">{action.title}</h3>
+                      <p className="text-muted-foreground">{action.description}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Web3 Integration */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto">
+          <Web3Integration 
+            isConnected={false}
+            account={null}
+            connectWallet={async () => {}}
+            disconnectWallet={() => {}}
+            balance={0}
+            burnRate={5}
+            reinvestRate={15}
+            securityLevel="advanced"
+            gamingPower={250}
+            landscapeNFTs={12}
+            weaponNFTs={8}
+            armorNFTs={5}
+            unknownSecrets={3}
+          />
+        </div>
+      </section>
+
+      {/* GitHub Integration */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto">
+          <GitHubIntegration />
+        </div>
+      </section>
+
+      {/* Culture of Harmony Message */}
+      <section className="py-16 px-4 bg-gradient-to-r from-green-900/20 via-blue-900/20 to-purple-900/20">
+        <div className="container mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+            🎵 Culture of Harmony
+          </h2>
+          <blockquote className="text-2xl italic text-muted-foreground mb-8 max-w-4xl mx-auto">
+            "We Are a Strong Creative Open Minded Circuit To Happiness. Seeds Will Form Into Music. 
+            We Create a New Cult till the End Of the World. Our Goal is To Bring A Smile to Every Soul."
+          </blockquote>
+          <p className="text-xl text-green-400 font-semibold mb-8">
+            "Doesn't matter if You're Black Or White" - Building Global Unity
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-4">
+            <Badge className="bg-green-600 text-white px-4 py-2 text-sm">
+              🌱 Always Growing
+            </Badge>
+            <Badge className="bg-blue-600 text-white px-4 py-2 text-sm">
+              🎨 Creative Freedom
+            </Badge>
+            <Badge className="bg-purple-600 text-white px-4 py-2 text-sm">
+              🤝 Global Unity
+            </Badge>
+            <Badge className="bg-orange-600 text-white px-4 py-2 text-sm">
+              😊 Smiles for All
+            </Badge>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
-
-export default Index

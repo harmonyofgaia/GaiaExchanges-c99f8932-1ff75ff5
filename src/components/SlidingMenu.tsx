@@ -1,170 +1,159 @@
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { 
-  Home, 
-  Globe, 
-  Coins, 
-  Hammer,
-  Mountain,
-  Palette,
-  BarChart3,
-  Settings,
-  Shield,
-  Info,
-  Mail,
-  DollarSign,
-  ChevronRight,
-  Menu,
-  X,
-  Crown,
-  Music,
-  Radio
-} from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { useSecureAdmin } from '@/hooks/useSecureAdmin'
+import { 
+  Menu, 
+  X, 
+  Home, 
+  Leaf, 
+  Eye, 
+  Shield, 
+  Gamepad2, 
+  DollarSign, 
+  ShoppingCart,
+  Music,
+  Video,
+  RotateCcw,
+  Settings,
+  Users,
+  Upload,
+  Wallet,
+  BarChart3
+} from 'lucide-react'
 
-const SlidingMenu = () => {
+export default function SlidingMenu() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isAuthorizedIP, setIsAuthorizedIP] = useState(false)
   const location = useLocation()
-
-  useEffect(() => {
-    const checkIPAuthorization = async () => {
-      try {
-        // Secure access check using environment variables
-        const isAuthorized = window.location.hostname === 'localhost' ||
-                           window.location.hostname.includes('lovable')
-        
-        setIsAuthorizedIP(isAuthorized)
-        
-      } catch (error) {
-        console.log('Secure access check active')
-        setIsAuthorizedIP(window.location.hostname === 'localhost')
-      }
-    }
-
-    checkIPAuthorization()
-  }, [])
-
-  // Close menu when route changes
-  useEffect(() => {
-    setIsOpen(false)
-  }, [location.pathname])
-
-  // Close menu on escape key
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsOpen(false)
-    }
-    document.addEventListener('keydown', handleEscape)
-    return () => document.removeEventListener('keydown', handleEscape)
-  }, [])
-
-  const baseMenuItems = [
-    { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
-    { icon: Radio, label: '🎭 Live Artist Shows', path: '/artist-streaming', category: 'entertainment' },
-    { icon: Music, label: '🎵 Artist Platform', path: '/artist-streaming', category: 'entertainment' },
-    { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
-    { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
-    { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
-    { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
-    { icon: Palette, label: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', category: 'tools' },
-    { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
-    { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
-    { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
-    { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
-    { icon: Mail, label: 'Contact', path: '/contact', category: 'info' },
-    { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' }
-  ]
-
-  const adminMenuItems = [
-    { icon: Crown, label: '👑 Admin Portal', path: '/admin', category: 'admin' }
-  ]
-
-  const menuItems = isAuthorizedIP ? [...baseMenuItems, ...adminMenuItems] : baseMenuItems
+  const { isAdmin } = useSecureAdmin()
 
   const toggleMenu = () => setIsOpen(!isOpen)
 
+  const menuItems = [
+    { path: '/', label: 'Home', icon: Home, category: 'main' },
+    { path: '/gaias-projects', label: "Gaia's Projects", icon: Leaf, category: 'main' },
+    { path: '/transparency', label: 'Transparency', icon: Eye, category: 'main' },
+    { path: '/security', label: 'Security', icon: Shield, category: 'main' },
+    { path: '/gaming', label: 'Gaming', icon: Gamepad2, category: 'platform' },
+    { path: '/exchange', label: 'Exchange', icon: DollarSign, category: 'platform' },
+    { path: '/marketplace', label: 'Marketplace', icon: ShoppingCart, category: 'platform' },
+    { path: '/artist-streaming', label: 'Artist Streaming', icon: Music, category: 'content' },
+    { path: '/video-upload', label: 'Video Upload', icon: Video, category: 'content' },
+    { path: '/analytics', label: 'Analytics', icon: BarChart3, category: 'tools' }
+  ]
+
+  const adminItems = [
+    { path: '/admin', label: 'Admin Login', icon: Shield, category: 'admin' },
+    { path: '/secure-admin', label: 'Admin Dashboard', icon: Settings, category: 'admin' },
+    { path: '/task-reverser', label: 'Task Reverser', icon: RotateCcw, category: 'admin' },
+    { path: '/admin-crafted-tools', label: 'Admin Tools', icon: Settings, category: 'admin' }
+  ]
+
+  const isActive = (path: string) => location.pathname === path
+
+  const categories = [
+    { id: 'main', title: '🌍 Main Platform', items: menuItems.filter(item => item.category === 'main') },
+    { id: 'platform', title: '🚀 Platform', items: menuItems.filter(item => item.category === 'platform') },
+    { id: 'content', title: '🎵 Content & Media', items: menuItems.filter(item => item.category === 'content') },
+    { id: 'tools', title: '🔧 Tools', items: menuItems.filter(item => item.category === 'tools') }
+  ]
+
+  if (isAdmin) {
+    categories.push({ id: 'admin', title: '👑 Admin Control', items: adminItems })
+  }
+
   return (
     <>
-      {/* Menu Toggle Button - Always visible */}
+      {/* Menu Toggle Button */}
       <Button
         onClick={toggleMenu}
-        className="fixed top-4 left-4 z-50 bg-purple-600 hover:bg-purple-700 text-white p-2 rounded-lg shadow-lg transition-all duration-300"
+        className="fixed top-4 left-4 z-50 bg-green-600 hover:bg-green-700 shadow-lg"
         size="sm"
       >
-        {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
       </Button>
 
       {/* Overlay */}
       {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
-          onClick={() => setIsOpen(false)}
+        <div 
+          className="fixed inset-0 bg-black/50 z-40"
+          onClick={toggleMenu}
         />
       )}
 
       {/* Sliding Menu */}
-      <div
-        className={`fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-purple-900/95 to-blue-900/95 backdrop-blur-md border-r border-purple-500/30 z-50 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-      >
-        <div className="flex flex-col h-full">
-          {/* Header with space for toggle button */}
-          <div className="p-4 pt-16 border-b border-purple-500/30">
-            <div className="flex items-center gap-3">
-              <div className="text-3xl">🌍</div>
-              <div>
-                <h2 className="text-purple-400 font-bold text-xl">GAiA Universe</h2>
-                <p className="text-sm text-muted-foreground">Harmony of Culture</p>
-              </div>
-            </div>
+      <div className={`
+        fixed top-0 left-0 h-full w-80 bg-background/95 backdrop-blur-sm border-r 
+        transform transition-transform duration-300 ease-in-out z-40
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        <div className="p-6 pt-16">
+          {/* Header */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+              🌍 GAIA Platform
+            </h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Culture of Harmony Navigation
+            </p>
+            {isAdmin && (
+              <Badge className="bg-red-600 text-white mt-2">
+                👑 ADMIN ACCESS
+              </Badge>
+            )}
           </div>
 
-          {/* Navigation Menu */}
-          <nav className="flex-1 overflow-y-auto py-4">
-            <ul className="space-y-1">
-              {menuItems.map((item) => {
-                const Icon = item.icon
-                const isActive = location.pathname === item.path
-
-                return (
-                  <li key={item.path}>
-                    <Link
-                      to={item.path}
-                      className={`flex items-center gap-3 px-6 py-4 mx-2 rounded-lg transition-all duration-200 ${
-                        isActive
-                          ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-lg'
-                          : 'text-gray-300 hover:bg-purple-500/10 hover:text-purple-400'
-                      }`}
-                    >
-                      <Icon className="h-5 w-5 flex-shrink-0" />
-                      <span className="font-medium text-sm">{item.label}</span>
-                      {isActive && <ChevronRight className="h-4 w-4 ml-auto" />}
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </nav>
+          {/* Navigation Categories */}
+          <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
+            {categories.map((category) => (
+              <div key={category.id}>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-3 px-2">
+                  {category.title}
+                </h3>
+                <div className="space-y-1">
+                  {category.items.map((item) => {
+                    const Icon = item.icon
+                    const active = isActive(item.path)
+                    
+                    return (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        onClick={toggleMenu}
+                        className={`
+                          flex items-center gap-3 px-3 py-2 rounded-lg transition-colors text-sm
+                          ${active 
+                            ? 'bg-green-600 text-white' 
+                            : 'hover:bg-muted text-muted-foreground hover:text-foreground'
+                          }
+                        `}
+                      >
+                        <Icon className="h-4 w-4" />
+                        {item.label}
+                        {active && (
+                          <Badge className="ml-auto bg-white/20 text-white text-xs">
+                            Active
+                          </Badge>
+                        )}
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
 
           {/* Footer */}
-          <div className="p-4 border-t border-purple-500/30">
+          <div className="absolute bottom-4 left-4 right-4">
             <div className="text-center">
               <p className="text-xs text-muted-foreground">
-                GAiA Platform v2.0
+                🎵 "Seeds Will Form Into Music"
               </p>
-              <p className="text-xs text-purple-400">
-                Harmony of Culture
+              <p className="text-xs text-green-400 mt-1">
+                Culture of Harmony © 2024
               </p>
-              {isAuthorizedIP && (
-                <div className="mt-2">
-                  <div className="text-xs bg-green-600 text-white px-2 py-1 rounded animate-pulse">
-                    🛡️ SECURE ACCESS
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -172,5 +161,3 @@ const SlidingMenu = () => {
     </>
   )
 }
-
-export default SlidingMenu
