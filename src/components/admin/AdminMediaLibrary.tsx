@@ -108,14 +108,24 @@ export function AdminMediaLibrary() {
       const fileExt = selectedFile.name.split('.').pop()
       const fileName = `${Date.now()}.${fileExt}`
       
+      // Simulate upload progress
+      const progressInterval = setInterval(() => {
+        setUploadProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(progressInterval)
+            return prev
+          }
+          return prev + 10
+        })
+      }, 200)
+      
       // Upload to Supabase Storage
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('admin-media')
-        .upload(fileName, selectedFile, {
-          onUploadProgress: (progress) => {
-            setUploadProgress((progress.loaded / progress.total) * 100)
-          }
-        })
+        .upload(fileName, selectedFile)
+
+      clearInterval(progressInterval)
+      setUploadProgress(100)
 
       if (uploadError) throw uploadError
 

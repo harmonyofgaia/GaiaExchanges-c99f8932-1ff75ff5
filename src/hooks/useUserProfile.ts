@@ -4,15 +4,13 @@ import { supabase } from '@/integrations/supabase/client'
 
 interface UserProfile {
   id: string
-  username: string | null
+  email: string
   full_name: string | null
   avatar_url: string | null
-  phone: string | null
-  country: string | null
-  verified: boolean
-  kyc_status: string
-  security_level: 'low' | 'medium' | 'high' | 'maximum'
-  two_factor_enabled: boolean
+  role: string | null
+  created_at: string | null
+  updated_at: string | null
+  last_login: string | null
 }
 
 export function useUserProfile() {

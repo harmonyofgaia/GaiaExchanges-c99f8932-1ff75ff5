@@ -89,14 +89,24 @@ export default function VideoUpload() {
       const fileExt = selectedVideo.name.split('.').pop()
       const fileName = `${user.id}/${Date.now()}.${fileExt}`
       
+      // Simulate upload progress
+      const progressInterval = setInterval(() => {
+        setUploadProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(progressInterval)
+            return prev
+          }
+          return prev + 10
+        })
+      }, 300)
+      
       // Upload to Supabase Storage
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('user-videos')
-        .upload(fileName, selectedVideo, {
-          onUploadProgress: (progress) => {
-            setUploadProgress((progress.loaded / progress.total) * 100)
-          }
-        })
+        .upload(fileName, selectedVideo)
+
+      clearInterval(progressInterval)
+      setUploadProgress(100)
 
       if (uploadError) throw uploadError
 
