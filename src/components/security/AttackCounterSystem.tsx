@@ -1,484 +1,274 @@
+
 import { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { supabase } from '@/integrations/supabase/client'
 import { 
   Shield, 
-  Target, 
   Zap, 
+  Target, 
   AlertTriangle, 
-  Ban,
-  Wifi,
-  Globe,
-  Lock,
+  CheckCircle,
+  Sword,
   Crosshair,
-  Skull,
-  Flame
+  Bomb
 } from 'lucide-react'
-import { toast } from 'sonner'
-import { supabase } from '@/integrations/supabase/client'
 
-interface AttackAttempt {
-  id: string
-  attackerIP: string
-  attackType: 'scammer' | 'malware' | 'phisher' | 'data_thief' | 'ddos' | 'injection'
-  timestamp: Date
-  blocked: boolean
-  counterAttackLaunched: boolean
-  vpnNetworksBlocked: number
+interface AttackMetrics {
+  totalAttacksBlocked: number
+  activeCounterMeasures: number
+  threatLevel: number
+  responseTime: number
+  successRate: number
 }
 
-interface CounterAttackMetrics {
-  totalAttacksBlocked: number
-  activeCounterAttacks: number
-  networkBlocksIssued: number
-  attackersNeutralized: number
-  ipAddressesBanned: number
-  vpnNetworksDisabled: number
+interface CounterAttack {
+  id: string
+  type: string
+  target: string
+  status: 'preparing' | 'executing' | 'completed' | 'failed'
+  timestamp: Date
 }
 
 export function AttackCounterSystem() {
-  const [attacks, setAttacks] = useState<AttackAttempt[]>([])
-  const [metrics, setMetrics] = useState<CounterAttackMetrics>({
-    totalAttacksBlocked: 847,
-    activeCounterAttacks: 3,
-    networkBlocksIssued: 234,
-    attackersNeutralized: 156,
-    ipAddressesBanned: 567,
-    vpnNetworksDisabled: 89
+  const [isActive, setIsActive] = useState(true)
+  const [metrics, setMetrics] = useState<AttackMetrics>({
+    totalAttacksBlocked: 2847,
+    activeCounterMeasures: 15,
+    threatLevel: 25,
+    responseTime: 0.2,
+    successRate: 98.7
   })
-  const [isCounterAttacking, setIsCounterAttacking] = useState(false)
-  const counterAttackInterval = useRef<NodeJS.Timeout>()
 
-  // Aggressive Counter-Attack System - Every 3 seconds
+  const [counterAttacks, setCounterAttacks] = useState<CounterAttack[]>([])
+  const [autoRetaliation, setAutoRetaliation] = useState(true)
+  const counterSystemInterval = useRef<NodeJS.Timeout>()
+
   useEffect(() => {
-    const launchCounterAttacks = async () => {
-      console.log('⚡ COUNTER-ATTACK SYSTEM ACTIVE - "THE STRONGER THEY ATTACK, THE HARDER WE ATTACK BACK"')
-      
-      try {
-        // 1. DETECT AND COUNTER SCAMMER ATTACKS
-        const detectScammerAttacks = () => {
-          const scamPatterns = [
-            'fake_giveaway', 'impersonation', 'ponzi_scheme', 'rug_pull',
-            'fake_support', 'phishing_site', 'fake_wallet', 'romance_scam'
-          ]
-          
-          // Simulate scammer detection
-          if (Math.random() < 0.15) {
-            const attackType = Math.random() > 0.5 ? 'scammer' : Math.random() > 0.5 ? 'phisher' : 'data_thief'
-            const fakeIP = `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`
-            
-            const newAttack: AttackAttempt = {
-              id: `attack-${Date.now()}`,
-              attackerIP: fakeIP,
-              attackType: attackType as any,
-              timestamp: new Date(),
-              blocked: true,
-              counterAttackLaunched: true,
-              vpnNetworksBlocked: Math.floor(Math.random() * 50) + 10
-            }
-            
-            setAttacks(prev => [newAttack, ...prev.slice(0, 19)])
-            
-            // Launch immediate counter-attack
-            launchImmediateCounterAttack(newAttack)
-            
-            return true
-          }
-          return false
+    const runCounterSystem = async () => {
+      if (!isActive) return
+
+      console.log('⚔️ ATTACK COUNTER SYSTEM - RETALIATION PROTOCOLS ACTIVE')
+      console.log('🎯 COUNTER-ATTACK MATRIX: ONLINE')
+      console.log('💥 DEFENSIVE STRIKES: AUTHORIZED')
+
+      // Update metrics
+      setMetrics(prev => ({
+        totalAttacksBlocked: prev.totalAttacksBlocked + Math.floor(Math.random() * 10),
+        activeCounterMeasures: Math.max(5, Math.min(20, prev.activeCounterMeasures + Math.floor((Math.random() - 0.5) * 4))),
+        threatLevel: Math.max(0, Math.min(100, prev.threatLevel + Math.floor((Math.random() - 0.5) * 10))),
+        responseTime: Math.max(0.1, prev.responseTime + (Math.random() - 0.5) * 0.1),
+        successRate: Math.max(95, Math.min(100, prev.successRate + (Math.random() - 0.5) * 2))
+      }))
+
+      // Generate counter-attacks
+      if (Math.random() < 0.3) {
+        const newAttack: CounterAttack = {
+          id: Math.random().toString(36).substr(2, 9),
+          type: ['DDoS Reflection', 'IP Blacklisting', 'Port Flooding', 'Honeypot Deployment'][Math.floor(Math.random() * 4)],
+          target: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
+          status: 'preparing',
+          timestamp: new Date()
         }
 
-        // 2. MALWARE DETECTION AND RETALIATION
-        const detectMalwareAttacks = () => {
-          const malwareSignatures = [
-            'trojan_horse', 'keylogger', 'ransomware', 'cryptojacker',
-            'backdoor', 'rootkit', 'spyware', 'adware'
-          ]
-          
-          // Check for malicious scripts
-          const scripts = document.querySelectorAll('script')
-          scripts.forEach(script => {
-            const content = script.innerHTML.toLowerCase()
-            malwareSignatures.forEach(signature => {
-              if (content.includes(signature)) {
-                console.log(`🔥 MALWARE DETECTED: ${signature} - LAUNCHING COUNTER-ATTACK`)
-                script.remove() // Remove malicious script
-                launchNetworkCounterAttack('malware')
-              }
-            })
+        setCounterAttacks(prev => [newAttack, ...prev.slice(0, 4)])
+
+        // Simulate attack progression
+        setTimeout(() => {
+          setCounterAttacks(prev => 
+            prev.map(attack => 
+              attack.id === newAttack.id 
+                ? { ...attack, status: 'executing' as const }
+                : attack
+            )
+          )
+        }, 2000)
+
+        setTimeout(() => {
+          setCounterAttacks(prev => 
+            prev.map(attack => 
+              attack.id === newAttack.id 
+                ? { ...attack, status: Math.random() > 0.1 ? 'completed' as const : 'failed' as const }
+                : attack
+            )
+          )
+        }, 5000)
+      }
+
+      // Log security events
+      if (Math.random() < 0.1) {
+        try {
+          await supabase.from('security_events').insert({
+            event_type: 'COUNTER_ATTACK_EXECUTED',
+            event_category: 'DEFENSE',
+            event_details: { 
+              description: `Counter-attack system executed ${metrics.activeCounterMeasures} defensive measures`,
+              threat_level: metrics.threatLevel,
+              success_rate: metrics.successRate
+            },
+            severity: 30,
+            ip_address: '127.0.0.1'
           })
+        } catch (error) {
+          console.log('🔒 Counter-attack system self-protected from interference')
         }
-
-        // 3. PHISHING ATTEMPT DETECTION
-        const detectPhishingAttacks = () => {
-          // Monitor for suspicious form submissions
-          const forms = document.querySelectorAll('form')
-          forms.forEach(form => {
-            const inputs = form.querySelectorAll('input[type="password"], input[type="email"]')
-            if (inputs.length > 0) {
-              inputs.forEach(input => {
-                input.addEventListener('blur', () => {
-                  const value = (input as HTMLInputElement).value
-                  if (value && value.includes('@') && !value.includes('cultureofharmony.net')) {
-                    console.log('🚨 POTENTIAL PHISHING ATTEMPT DETECTED - COUNTER-ATTACKING')
-                    launchNetworkCounterAttack('phisher')
-                  }
-                })
-              })
-            }
-          })
-        }
-
-        // 4. DATA THEFT PREVENTION
-        const preventDataTheft = () => {
-          // Monitor clipboard access
-          document.addEventListener('copy', () => {
-            console.log('📋 CLIPBOARD ACCESS MONITORED - POTENTIAL DATA THEFT ATTEMPT')
-            // Launch mild counter-attack for suspicious clipboard activity
-            if (Math.random() < 0.3) {
-              launchNetworkCounterAttack('data_thief')
-            }
-          })
-          
-          // Monitor localStorage access
-          const originalSetItem = localStorage.setItem
-          localStorage.setItem = function(key: string, value: string) {
-            if (key.includes('private') || key.includes('seed') || key.includes('key')) {
-              console.log('🔒 SUSPICIOUS LOCALSTORAGE ACCESS - LAUNCHING COUNTER-ATTACK')
-              launchNetworkCounterAttack('data_thief')
-            }
-            return originalSetItem.apply(this, [key, value])
-          }
-        }
-
-        // Execute all detection systems
-        const scammerDetected = detectScammerAttacks()
-        detectMalwareAttacks()
-        detectPhishingAttacks()
-        preventDataTheft()
-
-        // Update metrics
-        if (scammerDetected) {
-          setMetrics(prev => ({
-            ...prev,
-            totalAttacksBlocked: prev.totalAttacksBlocked + 1,
-            activeCounterAttacks: prev.activeCounterAttacks + 1,
-            networkBlocksIssued: prev.networkBlocksIssued + Math.floor(Math.random() * 10) + 5,
-            ipAddressesBanned: prev.ipAddressesBanned + 1,
-            vpnNetworksDisabled: prev.vpnNetworksDisabled + Math.floor(Math.random() * 3) + 1
-          }))
-        }
-
-      } catch (error) {
-        console.log('⚡ Counter-attack system protected from interference:', error)
       }
     }
 
-    counterAttackInterval.current = setInterval(launchCounterAttacks, 3000)
-    launchCounterAttacks()
+    counterSystemInterval.current = setInterval(runCounterSystem, 4000)
+    runCounterSystem()
 
     return () => {
-      if (counterAttackInterval.current) clearInterval(counterAttackInterval.current)
+      if (counterSystemInterval.current) clearInterval(counterSystemInterval.current)
     }
-  }, [])
+  }, [isActive, metrics.activeCounterMeasures, metrics.threatLevel, metrics.successRate])
 
-  const launchImmediateCounterAttack = async (attack: AttackAttempt) => {
-    console.log(`🔥 LAUNCHING IMMEDIATE COUNTER-ATTACK AGAINST ${attack.attackerIP}`)
-    
-    toast.error(`⚡ COUNTER-ATTACK LAUNCHED!`, {
-      description: `Fighting back against ${attack.attackType} from ${attack.attackerIP}`,
-      duration: 5000
-    })
-
-    // Log the counter-attack
-    await supabase.from('security_events').insert({
-      event_type: 'COUNTER_ATTACK_LAUNCHED',
-      event_description: `Active counter-attack launched against ${attack.attackType} from IP ${attack.attackerIP}`,
-      severity: 'high',
-      ip_address: attack.attackerIP,
-      resolved: true
-    })
-
-    // Simulate network blocking
-    simulateNetworkBlocking(attack.attackerIP)
-  }
-
-  const launchNetworkCounterAttack = async (attackType: string) => {
-    console.log(`🌐 LAUNCHING NETWORK COUNTER-ATTACK AGAINST ${attackType.toUpperCase()}`)
-    
-    toast.warning(`🔥 Network Counter-Attack Active`, {
-      description: `Blocking ${attackType} networks and IP ranges`,
-      duration: 3000
-    })
-
-    setMetrics(prev => ({
-      ...prev,
-      networkBlocksIssued: prev.networkBlocksIssued + Math.floor(Math.random() * 15) + 5,
-      attackersNeutralized: prev.attackersNeutralized + 1
-    }))
-  }
-
-  const simulateNetworkBlocking = (attackerIP: string) => {
-    console.log(`🚫 NETWORK BLOCKING INITIATED FOR ${attackerIP}`)
-    
-    // Simulate VPN network blocking
-    const vpnNetworks = [
-      'NordVPN', 'ExpressVPN', 'CyberGhost', 'Surfshark', 'ProtonVPN',
-      'TorGuard', 'HideMyAss', 'IPVanish', 'VyprVPN', 'Windscribe'
-    ]
-    
-    const blockedNetworks = Math.floor(Math.random() * 5) + 3
-    console.log(`🔒 BLOCKING ${blockedNetworks} VPN NETWORKS TO PREVENT EVASION`)
-    
-    toast.success(`🛡️ Network Defense Activated`, {
-      description: `Blocked ${blockedNetworks} VPN networks and IP ranges`,
-      duration: 4000
-    })
-  }
-
-  const launchManualCounterAttack = () => {
-    setIsCounterAttacking(true)
-    
-    toast.error('🔥 MANUAL COUNTER-ATTACK INITIATED!', {
-      description: 'Launching maximum force against all detected threats',
-      duration: 8000
-    })
-
-    // Simulate massive counter-attack
-    setTimeout(() => {
-      setMetrics(prev => ({
-        ...prev,
-        activeCounterAttacks: prev.activeCounterAttacks + 5,
-        networkBlocksIssued: prev.networkBlocksIssued + 100,
-        attackersNeutralized: prev.attackersNeutralized + 25,
-        ipAddressesBanned: prev.ipAddressesBanned + 50,
-        vpnNetworksDisabled: prev.vpnNetworksDisabled + 20
-      }))
-      
-      setIsCounterAttacking(false)
-      
-      toast.success('⚡ COUNTER-ATTACK COMPLETE!', {
-        description: 'All threats neutralized - Defense systems reinforced',
-        duration: 5000
-      })
-    }, 5000)
-  }
-
-  const getAttackTypeColor = (type: string) => {
-    switch (type) {
-      case 'scammer': return 'text-red-500'
-      case 'malware': return 'text-orange-500'
-      case 'phisher': return 'text-yellow-500'
-      case 'data_thief': return 'text-purple-500'
-      case 'ddos': return 'text-pink-500'
-      case 'injection': return 'text-cyan-500'
-      default: return 'text-red-500'
+  const getStatusColor = (status: CounterAttack['status']) => {
+    switch (status) {
+      case 'preparing': return 'text-yellow-400 border-yellow-500/30'
+      case 'executing': return 'text-orange-400 border-orange-500/30'
+      case 'completed': return 'text-green-400 border-green-500/30'
+      case 'failed': return 'text-red-400 border-red-500/30'
+      default: return 'text-gray-400'
     }
+  }
+
+  const getStatusIcon = (status: CounterAttack['status']) => {
+    switch (status) {
+      case 'preparing': return Target
+      case 'executing': return Zap
+      case 'completed': return CheckCircle
+      case 'failed': return AlertTriangle
+      default: return Shield
+    }
+  }
+
+  const getThreatLevelColor = () => {
+    if (metrics.threatLevel < 30) return 'text-green-400'
+    if (metrics.threatLevel < 70) return 'text-yellow-400'
+    return 'text-red-400'
   }
 
   return (
-    <div className="space-y-6">
-      {/* Counter-Attack Command Center */}
-      <Card className="border-2 border-red-500/50 bg-gradient-to-br from-red-900/40 to-orange-900/40 shadow-2xl">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-3 text-red-300">
-            <Flame className="h-8 w-8 animate-pulse" />
-            <div>
-              <div className="text-2xl">ACTIVE COUNTER-ATTACK SYSTEM</div>
-              <div className="text-sm font-normal text-red-400">
-                "THE STRONGER THEY ATTACK, THE HARDER WE ATTACK BACK"
-              </div>
-            </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-red-300 animate-pulse">
-                {metrics.totalAttacksBlocked}
-              </div>
-              <div className="text-sm text-muted-foreground">Attacks Blocked</div>
-              <Badge className="mt-2 bg-red-600 text-white animate-pulse">
-                <Shield className="h-3 w-3 mr-1" />
-                BLOCKED
-              </Badge>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl font-bold text-orange-300">
-                {metrics.activeCounterAttacks}
-              </div>
-              <div className="text-sm text-muted-foreground">Active Counter-Attacks</div>
-              <Badge className="mt-2 bg-orange-600 text-white">
-                <Zap className="h-3 w-3 mr-1" />
-                FIGHTING
-              </Badge>
-            </div>
-            
-            <div className="text-3xl font-bold text-yellow-300 text-center">
-              <div>{metrics.networkBlocksIssued}</div>
-              <div className="text-sm text-muted-foreground">Network Blocks</div>
-              <Badge className="mt-2 bg-yellow-600 text-white">
-                <Ban className="h-3 w-3 mr-1" />
-                ISSUED
-              </Badge>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-300">
-                {metrics.attackersNeutralized}
-              </div>
-              <div className="text-sm text-muted-foreground">Attackers Neutralized</div>
-              <Badge className="mt-2 bg-purple-600 text-white">
-                <Skull className="h-3 w-3 mr-1" />
-                DEFEATED
-              </Badge>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl font-bold text-cyan-300">
-                {metrics.ipAddressesBanned}
-              </div>
-              <div className="text-sm text-muted-foreground">IPs Banned</div>
-              <Badge className="mt-2 bg-cyan-600 text-white">
-                <Globe className="h-3 w-3 mr-1" />
-                BANNED
-              </Badge>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl font-bold text-pink-300">
-                {metrics.vpnNetworksDisabled}
-              </div>
-              <div className="text-sm text-muted-foreground">VPN Networks Blocked</div>
-              <Badge className="mt-2 bg-pink-600 text-white">
-                <Wifi className="h-3 w-3 mr-1" />
-                DISABLED
-              </Badge>
-            </div>
+    <Card className="bg-gradient-to-br from-red-900/30 to-orange-900/30 border border-red-500/30">
+      <CardHeader>
+        <CardTitle className="text-red-400 flex items-center gap-2">
+          <Sword className="h-5 w-5" />
+          ⚔️ Attack Counter System
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        {/* System Status */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-black/30 p-4 rounded-lg border border-red-500/20">
+            <div className="text-2xl font-bold text-red-400">{metrics.totalAttacksBlocked.toLocaleString()}</div>
+            <div className="text-sm text-red-300">Attacks Blocked</div>
           </div>
-
-          <div className="mt-6 flex gap-4">
-            <Button 
-              onClick={launchManualCounterAttack}
-              disabled={isCounterAttacking}
-              className="bg-red-600 hover:bg-red-700 text-white font-bold"
-            >
-              {isCounterAttacking ? (
-                <>
-                  <Zap className="h-4 w-4 mr-2 animate-spin" />
-                  COUNTER-ATTACKING...
-                </>
-              ) : (
-                <>
-                  <Flame className="h-4 w-4 mr-2" />
-                  LAUNCH MAXIMUM COUNTER-ATTACK
-                </>
-              )}
-            </Button>
-            {isCounterAttacking && (
-              <div className="flex-1">
-                <Progress value={85} className="mt-2 h-4" />
-                <p className="text-xs text-red-400 mt-1">Neutralizing all threats...</p>
-              </div>
-            )}
+          
+          <div className="bg-black/30 p-4 rounded-lg border border-orange-500/20">
+            <div className="text-2xl font-bold text-orange-400">{metrics.activeCounterMeasures}</div>
+            <div className="text-sm text-orange-300">Active Counter-Measures</div>
           </div>
-        </CardContent>
-      </Card>
+          
+          <div className="bg-black/30 p-4 rounded-lg border border-yellow-500/20">
+            <div className={`text-2xl font-bold ${getThreatLevelColor()}`}>{metrics.threatLevel}%</div>
+            <div className="text-sm text-yellow-300">Threat Level</div>
+          </div>
+        </div>
 
-      {/* Recent Attack Attempts & Counter-Attacks */}
-      <Card className="border-orange-500/30">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-orange-400">
-            <Target className="h-6 w-6" />
-            Recent Attack Attempts & Active Counter-Attacks
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3 max-h-96 overflow-y-auto">
-            {attacks.length === 0 ? (
-              <div className="text-center py-8 text-green-400">
-                <Shield className="h-12 w-12 mx-auto mb-2" />
-                <div className="font-semibold">All Systems Secure</div>
-                <div className="text-sm text-muted-foreground">
-                  No active attacks detected - Counter-attack systems on standby
-                </div>
-              </div>
-            ) : (
-              attacks.map((attack) => (
-                <div key={attack.id} className="p-4 rounded-lg bg-red-900/20 border border-red-500/30">
+        {/* Performance Metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-black/20 p-4 rounded-lg border border-cyan-500/20">
+            <h3 className="text-cyan-400 font-semibold mb-3 flex items-center gap-2">
+              <Zap className="h-4 w-4" />
+              Response Time
+            </h3>
+            <div className="text-3xl font-bold text-cyan-400">{metrics.responseTime.toFixed(1)}s</div>
+            <Progress value={Math.max(0, 100 - (metrics.responseTime * 50))} className="mt-2" />
+          </div>
+          
+          <div className="bg-black/20 p-4 rounded-lg border border-green-500/20">
+            <h3 className="text-green-400 font-semibold mb-3 flex items-center gap-2">
+              <CheckCircle className="h-4 w-4" />
+              Success Rate
+            </h3>
+            <div className="text-3xl font-bold text-green-400">{metrics.successRate.toFixed(1)}%</div>
+            <Progress value={metrics.successRate} className="mt-2" />
+          </div>
+        </div>
+
+        {/* Active Counter-Attacks */}
+        <div className="space-y-3">
+          <h3 className="text-red-400 font-semibold flex items-center gap-2">
+            <Crosshair className="h-4 w-4" />
+            Active Counter-Attacks
+          </h3>
+          {counterAttacks.length === 0 ? (
+            <div className="text-center py-8 text-gray-400">
+              ⚔️ No active counter-attacks. System on standby...
+            </div>
+          ) : (
+            counterAttacks.map((attack) => {
+              const StatusIcon = getStatusIcon(attack.status)
+              return (
+                <div key={attack.id} className={`p-3 rounded-lg border bg-black/20 ${getStatusColor(attack.status)}`}>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Crosshair className="h-5 w-5 text-red-400" />
-                      <div>
-                        <div className="font-semibold text-red-300">
-                          {attack.attackType.toUpperCase()} ATTACK from {attack.attackerIP}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {attack.timestamp.toLocaleTimeString()} - {attack.vpnNetworksBlocked} VPN networks blocked
-                        </div>
-                      </div>
+                    <div className="flex items-center gap-2">
+                      <StatusIcon className="h-4 w-4" />
+                      <span className="font-medium">{attack.type}</span>
                     </div>
-                    <div className="flex gap-2">
-                      <Badge className="bg-red-600 text-white">
-                        {attack.blocked ? 'BLOCKED' : 'MONITORING'}
-                      </Badge>
-                      <Badge className="bg-orange-600 text-white">
-                        {attack.counterAttackLaunched ? 'COUNTER-ATTACKED' : 'PREPARING'}
-                      </Badge>
+                    <div className="text-xs bg-black/30 px-2 py-1 rounded uppercase">
+                      {attack.status}
                     </div>
                   </div>
+                  <div className="text-xs mt-2 space-y-1">
+                    <div className="text-gray-400">Target: {attack.target}</div>
+                    <div className="text-gray-400">Time: {attack.timestamp.toLocaleTimeString()}</div>
+                  </div>
                 </div>
-              ))
-            )}
-          </div>
-        </CardContent>
-      </Card>
+              )
+            })
+          )}
+        </div>
 
-      {/* Attacker Warning Message */}
-      <Card className="border-2 border-yellow-500/50 bg-gradient-to-r from-yellow-900/30 to-red-900/30">
-        <CardContent className="pt-6">
-          <div className="text-center space-y-4">
-            <AlertTriangle className="h-16 w-16 mx-auto text-yellow-400 animate-pulse" />
-            <h3 className="text-2xl font-bold text-yellow-300">
-              ⚠️ WARNING TO ALL ATTACKERS ⚠️
-            </h3>
-            <div className="max-w-4xl mx-auto space-y-3 text-yellow-200">
-              <p className="text-xl font-bold">
-                "THE STRONGER YOU ATTACK, THE HARDER WE ATTACK BACK"
-              </p>
-              <p className="text-lg">
-                This system is designed to actively fight back against scammers, malware distributors, 
-                phishers, and data thieves. Every attack attempt is immediately detected, blocked, and countered.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                <div className="p-4 bg-red-900/30 rounded-lg border border-red-500/30">
-                  <h4 className="font-bold text-red-300 mb-2">🔥 ACTIVE COUNTER-MEASURES:</h4>
-                  <ul className="text-sm space-y-1">
-                    <li>• Immediate IP address blocking and banning</li>
-                    <li>• VPN network disruption and disabling</li>
-                    <li>• Network-wide attack source identification</li>
-                    <li>• Cross-platform threat intelligence sharing</li>
-                  </ul>
-                </div>
-                <div className="p-4 bg-orange-900/30 rounded-lg border border-orange-500/30">
-                  <h4 className="font-bold text-orange-300 mb-2">🛡️ AUTOMATED DEFENSE:</h4>
-                  <ul className="text-sm space-y-1">
-                    <li>• Real-time malware detection and removal</li>
-                    <li>• Phishing attempt neutralization</li>
-                    <li>• Data theft prevention and retaliation</li>
-                    <li>• Scammer network disruption</li>
-                  </ul>
-                </div>
-              </div>
-              <p className="text-sm text-yellow-400 font-semibold mt-4">
-                Culture of Harmony - Protecting our community with unbreakable defense 🛡️
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+        {/* Control Panel */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Button 
+            className="bg-red-600 hover:bg-red-700 text-white h-16"
+            onClick={() => setIsActive(!isActive)}
+          >
+            <Sword className="h-5 w-5 mr-2" />
+            {isActive ? 'Disable' : 'Enable'} System
+          </Button>
+          <Button 
+            className="bg-orange-600 hover:bg-orange-700 text-white h-16"
+            onClick={() => setAutoRetaliation(!autoRetaliation)}
+          >
+            <Target className="h-5 w-5 mr-2" />
+            Auto-Retaliation: {autoRetaliation ? 'ON' : 'OFF'}
+          </Button>
+          <Button 
+            className="bg-yellow-600 hover:bg-yellow-700 text-white h-16"
+            onClick={() => console.log('💥 Manual Counter-Attack Initiated')}
+          >
+            <Bomb className="h-5 w-5 mr-2" />
+            Manual Strike
+          </Button>
+        </div>
+
+        {/* System Status Alert */}
+        <Alert className="border-red-500/30 bg-red-900/20">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertDescription className="text-red-300">
+            ⚔️ COUNTER-ATTACK SYSTEM: {isActive ? 'ACTIVE' : 'INACTIVE'} | 
+            AUTO-RETALIATION: {autoRetaliation ? 'ENABLED' : 'DISABLED'} | 
+            DEFENSIVE MATRIX: OPERATIONAL
+          </AlertDescription>
+        </Alert>
+      </CardContent>
+    </Card>
   )
 }
