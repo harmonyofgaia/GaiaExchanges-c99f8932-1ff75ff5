@@ -36,7 +36,7 @@ interface BikeSession {
 interface FoodPlace {
   id: string
   name: string
-  location: string
+  location_data: any
   food_types: string[]
   owner_id: string
   verified: boolean
@@ -61,12 +61,17 @@ const GaiaBikeEcosystem = () => {
 
   const fetchUserStats = async () => {
     try {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('bike_sessions')
         .select('tokens_earned')
         .eq('user_id', user?.id)
 
-      const total = data?.reduce((sum, session) => sum + session.tokens_earned, 0) || 0
+      if (error) {
+        console.error('Error fetching stats:', error)
+        return
+      }
+
+      const total = data?.reduce((sum, session) => sum + Number(session.tokens_earned), 0) || 0
       setTotalTokens(total)
     } catch (error) {
       console.error('Error fetching stats:', error)
@@ -74,28 +79,42 @@ const GaiaBikeEcosystem = () => {
   }
 
   const fetchNearbyFoodPlaces = async () => {
-    // Mock data for now - in production would use geolocation
-    const mockPlaces: FoodPlace[] = [
-      {
-        id: '1',
-        name: 'Green Valley Farm Stand',
-        location: '2.3 km from you',
-        food_types: ['Organic Vegetables', 'Fresh Fruits'],
-        owner_id: 'owner1',
-        verified: true,
-        forest_layer: 3
-      },
-      {
-        id: '2',
-        name: 'Cycle Path Orchard',
-        location: '5.1 km from you',
-        food_types: ['Apples', 'Berries', 'Herbs'],
-        owner_id: 'owner2',
-        verified: true,
-        forest_layer: 5
+    try {
+      const { data, error } = await supabase
+        .from('food_places')
+        .select('*')
+        .eq('is_active', true)
+        .limit(10)
+
+      if (error) {
+        console.error('Error fetching food places:', error)
+        // Use mock data as fallback
+        setFoodPlaces([
+          {
+            id: '1',
+            name: 'Green Valley Farm Stand',
+            location_data: { distance: '2.3 km from you' },
+            food_types: ['Organic Vegetables', 'Fresh Fruits'],
+            owner_id: 'owner1',
+            verified: true,
+            forest_layer: 3
+          },
+          {
+            id: '2',
+            name: 'Cycle Path Orchard',
+            location_data: { distance: '5.1 km from you' },
+            food_types: ['Apples', 'Berries', 'Herbs'],
+            owner_id: 'owner2',
+            verified: true,
+            forest_layer: 5
+          }
+        ])
+      } else {
+        setFoodPlaces(data || [])
       }
-    ]
-    setFoodPlaces(mockPlaces)
+    } catch (error) {
+      console.error('Error fetching food places:', error)
+    }
   }
 
   const startTracking = async () => {
@@ -153,6 +172,9 @@ const GaiaBikeEcosystem = () => {
       if (!error) {
         setTotalTokens(prev => prev + tokensEarned)
         toast.success(`🎉 Session Complete! Earned ${tokensEarned} GAiA tokens!`)
+      } else {
+        console.error('Error saving session:', error)
+        toast.error('Failed to save session')
       }
 
       setIsTracking(false)
@@ -168,6 +190,13 @@ const GaiaBikeEcosystem = () => {
       'bg-green-500', 'bg-green-600', 'bg-green-700', 'bg-green-800'
     ]
     return colors[layer - 1] || 'bg-green-500'
+  }
+
+  const getLocationText = (locationData: any) => {
+    if (typeof locationData === 'object' && locationData.distance) {
+      return locationData.distance
+    }
+    return '0.0 km from you'
   }
 
   return (
@@ -274,7 +303,7 @@ const GaiaBikeEcosystem = () => {
                         </h3>
                         <p className="text-sm text-muted-foreground flex items-center gap-1">
                           <MapPin className="h-4 w-4" />
-                          {place.location}
+                          {getLocationText(place.location_data)}
                         </p>
                       </div>
                       <div className="flex flex-col items-center">

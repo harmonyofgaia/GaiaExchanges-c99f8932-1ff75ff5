@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_audit_logs: {
+        Row: {
+          action: string
+          admin_id: string | null
+          created_at: string
+          details: Json | null
+          id: number
+          ip_address: unknown | null
+        }
+        Insert: {
+          action: string
+          admin_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: never
+          ip_address?: unknown | null
+        }
+        Update: {
+          action?: string
+          admin_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: never
+          ip_address?: unknown | null
+        }
+        Relationships: []
+      }
       admin_media_library: {
         Row: {
           category: string
@@ -98,6 +125,48 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_role_permissions: {
+        Row: {
+          id: number
+          permission: Database["public"]["Enums"]["admin_permission"]
+          role: Database["public"]["Enums"]["admin_role_type"]
+        }
+        Insert: {
+          id?: never
+          permission: Database["public"]["Enums"]["admin_permission"]
+          role: Database["public"]["Enums"]["admin_role_type"]
+        }
+        Update: {
+          id?: never
+          permission?: Database["public"]["Enums"]["admin_permission"]
+          role?: Database["public"]["Enums"]["admin_role_type"]
+        }
+        Relationships: []
+      }
+      admin_roles: {
+        Row: {
+          created_at: string
+          is_active: boolean
+          role: Database["public"]["Enums"]["admin_role_type"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          is_active?: boolean
+          role: Database["public"]["Enums"]["admin_role_type"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          is_active?: boolean
+          role?: Database["public"]["Enums"]["admin_role_type"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       admin_sessions: {
         Row: {
           created_at: string | null
@@ -125,6 +194,24 @@ export type Database = {
           ip_address?: unknown
           session_token?: string
           user_agent?: string | null
+        }
+        Relationships: []
+      }
+      admin_users: {
+        Row: {
+          created_at: string | null
+          is_active: boolean | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          is_active?: boolean | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          is_active?: boolean | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -164,6 +251,78 @@ export type Database = {
           step_2_verified?: boolean | null
           step_3_verified?: boolean | null
           step_4_verified?: boolean | null
+        }
+        Relationships: []
+      }
+      bike_sessions: {
+        Row: {
+          bike_type: string
+          created_at: string
+          distance: number
+          end_time: string | null
+          id: string
+          route_data: Json | null
+          start_time: string
+          tokens_earned: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bike_type: string
+          created_at?: string
+          distance?: number
+          end_time?: string | null
+          id?: string
+          route_data?: Json | null
+          start_time: string
+          tokens_earned?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bike_type?: string
+          created_at?: string
+          distance?: number
+          end_time?: string | null
+          id?: string
+          route_data?: Json | null
+          start_time?: string
+          tokens_earned?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      configuration_management: {
+        Row: {
+          config_name: string
+          config_value: Json
+          created_at: string | null
+          created_by: string | null
+          description: string | null
+          id: string
+          is_active: boolean | null
+          updated_at: string | null
+        }
+        Insert: {
+          config_name: string
+          config_value: Json
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          updated_at?: string | null
+        }
+        Update: {
+          config_name?: string
+          config_value?: Json
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -406,6 +565,51 @@ export type Database = {
         }
         Relationships: []
       }
+      food_places: {
+        Row: {
+          created_at: string
+          description: string | null
+          food_types: string[] | null
+          forest_layer: number | null
+          id: string
+          is_active: boolean | null
+          location_data: Json
+          name: string
+          owner_id: string
+          tokens_accepted: boolean | null
+          updated_at: string
+          verified: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          food_types?: string[] | null
+          forest_layer?: number | null
+          id?: string
+          is_active?: boolean | null
+          location_data?: Json
+          name: string
+          owner_id: string
+          tokens_accepted?: boolean | null
+          updated_at?: string
+          verified?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          food_types?: string[] | null
+          forest_layer?: number | null
+          id?: string
+          is_active?: boolean | null
+          location_data?: Json
+          name?: string
+          owner_id?: string
+          tokens_accepted?: boolean | null
+          updated_at?: string
+          verified?: boolean | null
+        }
+        Relationships: []
+      }
       gaia_earning_activities: {
         Row: {
           activity_description: string | null
@@ -496,6 +700,39 @@ export type Database = {
         }
         Relationships: []
       }
+      high_severity_alerts: {
+        Row: {
+          created_at: string | null
+          event_id: string
+          event_type: string
+          id: string
+          notification_sent: boolean | null
+          resolution_notes: string | null
+          resolved_at: string | null
+          severity_level: number
+        }
+        Insert: {
+          created_at?: string | null
+          event_id: string
+          event_type: string
+          id?: string
+          notification_sent?: boolean | null
+          resolution_notes?: string | null
+          resolved_at?: string | null
+          severity_level: number
+        }
+        Update: {
+          created_at?: string | null
+          event_id?: string
+          event_type?: string
+          id?: string
+          notification_sent?: boolean | null
+          resolution_notes?: string | null
+          resolved_at?: string | null
+          severity_level?: number
+        }
+        Relationships: []
+      }
       notifications: {
         Row: {
           action_url: string | null
@@ -528,6 +765,47 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      order_items: {
+        Row: {
+          created_at: string | null
+          id: string
+          order_id: string
+          product_id: string
+          quantity: number
+          total_price: number | null
+          unit_price: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          order_id: string
+          product_id: string
+          quantity?: number
+          total_price?: number | null
+          unit_price: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          order_id?: string
+          product_id?: string
+          quantity?: number
+          total_price?: number | null
+          unit_price?: number
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       orders: {
         Row: {
@@ -612,38 +890,65 @@ export type Database = {
         }
         Relationships: []
       }
+      security_alerts: {
+        Row: {
+          alert_type: string
+          created_at: string | null
+          details: Json
+          id: string
+          resolved_at: string | null
+          severity: number
+          status: string | null
+        }
+        Insert: {
+          alert_type: string
+          created_at?: string | null
+          details: Json
+          id?: string
+          resolved_at?: string | null
+          severity: number
+          status?: string | null
+        }
+        Update: {
+          alert_type?: string
+          created_at?: string | null
+          details?: Json
+          id?: string
+          resolved_at?: string | null
+          severity?: number
+          status?: string | null
+        }
+        Relationships: []
+      }
       security_events: {
         Row: {
           created_at: string | null
-          event_description: string
+          event_category: string
+          event_details: Json | null
           event_type: string
           id: string
           ip_address: unknown | null
-          resolved: boolean | null
-          severity: Database["public"]["Enums"]["security_level"] | null
-          user_agent: string | null
+          severity: number
           user_id: string | null
         }
         Insert: {
           created_at?: string | null
-          event_description: string
+          event_category?: string
+          event_details?: Json | null
           event_type: string
           id?: string
           ip_address?: unknown | null
-          resolved?: boolean | null
-          severity?: Database["public"]["Enums"]["security_level"] | null
-          user_agent?: string | null
+          severity?: number
           user_id?: string | null
         }
         Update: {
           created_at?: string | null
-          event_description?: string
+          event_category?: string
+          event_details?: Json | null
           event_type?: string
           id?: string
           ip_address?: unknown | null
-          resolved?: boolean | null
-          severity?: Database["public"]["Enums"]["security_level"] | null
-          user_agent?: string | null
+          severity?: number
           user_id?: string | null
         }
         Relationships: []
@@ -1192,24 +1497,52 @@ export type Database = {
       }
     }
     Views: {
+      order_items_view: {
+        Row: {
+          created_at: string | null
+          id: string | null
+          order_id: string | null
+          order_status: Database["public"]["Enums"]["order_status"] | null
+          product_id: string | null
+          quantity: number | null
+          total_price: number | null
+          unit_price: number | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       security_log_summary: {
         Row: {
-          affected_users: string[] | null
-          avg_severity: number | null
-          error_code: string | null
           event_count: number | null
-          event_frequency: string | null
-          first_occurrence: string | null
-          last_occurrence: string | null
-          log_level: string | null
-          risk_level: string | null
-          source_ips: unknown[] | null
-          unique_error_messages: Json | null
+          event_type: string | null
+          latest_event: string | null
         }
         Relationships: []
       }
     }
     Functions: {
+      add_admin_role: {
+        Args:
+          | {
+              p_role: Database["public"]["Enums"]["admin_role_type"]
+              p_user_id?: string
+            }
+          | { p_user_id?: string }
+        Returns: boolean
+      }
+      add_admin_user: {
+        Args: { p_user_id: string }
+        Returns: undefined
+      }
       analyze_slow_queries: {
         Args: { threshold_ms?: number }
         Returns: {
@@ -1219,9 +1552,25 @@ export type Database = {
           mean_time: number
         }[]
       }
+      assign_admin_role: {
+        Args:
+          | { target_user_email: string; admin_user_email: string }
+          | { target_user_uuid: string; admin_user_uuid: string }
+        Returns: boolean
+      }
       check_password_complexity: {
         Args: { password: string }
         Returns: boolean
+      }
+      configure_function_search_paths: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          schema_name: string
+          function_name: string
+          function_arguments: string
+          status: string
+          error_details: string
+        }[]
       }
       create_admin_session: {
         Args: {
@@ -1242,6 +1591,14 @@ export type Database = {
             }
         Returns: boolean
       }
+      create_security_alert: {
+        Args: {
+          p_alert_type: string
+          p_description: string
+          p_severity?: string
+        }
+        Returns: number
+      }
       create_user_rls_policy: {
         Args: {
           p_table_name: string
@@ -1251,6 +1608,54 @@ export type Database = {
         }
         Returns: undefined
       }
+      diagnose_auth_issues: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          check_name: string
+          check_result: string
+          additional_info: string
+        }[]
+      }
+      diagnose_function_issues: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          schema_name: string
+          function_name: string
+          function_arguments: string
+          prokind: string
+          prosecdef: boolean
+          provolatile: string
+        }[]
+      }
+      enable_admin_two_factor: {
+        Args: { admin_email: string }
+        Returns: boolean
+      }
+      enforce_security_policy: {
+        Args: { p_user_id: string; p_action: string; p_context?: Json }
+        Returns: {
+          policy_compliant: boolean
+          violation_details: Json
+        }[]
+      }
+      example_login_attempt: {
+        Args: { p_username: string; p_success: boolean }
+        Returns: boolean
+      }
+      generate_security_alert: {
+        Args: { p_alert_type: string; p_severity: number; p_details: Json }
+        Returns: string
+      }
+      generate_security_report: {
+        Args: { p_start_date?: string; p_end_date?: string }
+        Returns: {
+          total_events: number
+          successful_logins: number
+          failed_logins: number
+          lockouts: number
+          high_severity_events: number
+        }[]
+      }
       generate_user_rls_policies: {
         Args: {
           table_name: string
@@ -1259,13 +1664,48 @@ export type Database = {
         }
         Returns: string
       }
+      get_admin_user_id: {
+        Args: { role_or_user_id: string }
+        Returns: string
+      }
+      get_current_user_details: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          user_id: string
+          email: string
+          created_at: string
+        }[]
+      }
       get_current_user_id: {
         Args: Record<PropertyKey, never>
+        Returns: string
+      }
+      get_security_insights: {
+        Args: { p_start_date?: string; p_end_date?: string }
+        Returns: {
+          day: string
+          event_type: string
+          severity: string
+          event_count: number
+          unique_users: number
+          unique_ips: number
+        }[]
+      }
+      get_user_uuid_by_email: {
+        Args: { user_email: string }
         Returns: string
       }
       has_role: {
         Args: { _user_id: string; _role: string }
         Returns: boolean
+      }
+      initialize_first_admin: {
+        Args: { p_user_id: string }
+        Returns: boolean
+      }
+      insert_sample_security_events: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
       }
       insert_transaction: {
         Args:
@@ -1278,6 +1718,52 @@ export type Database = {
               p_status?: string
               p_external_reference?: string
               p_metadata?: Json
+            }
+        Returns: number
+      }
+      is_admin: {
+        Args: { check_user_uuid?: string }
+        Returns: boolean
+      }
+      list_active_admins: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          user_id: string
+          email: string
+          created_at: string
+        }[]
+      }
+      list_admin_users: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          user_uuid: string
+          user_email: string
+          user_name: string
+          admin_created_at: string
+        }[]
+      }
+      log_comprehensive_security_event: {
+        Args:
+          | {
+              p_event_category: string
+              p_event_type: string
+              p_user_id?: string
+              p_ip_address?: unknown
+              p_severity_level?: number
+              p_event_details?: Json
+            }
+          | {
+              p_event_type: string
+              p_severity?: string
+              p_user_id?: string
+              p_ip_address?: unknown
+              p_request_path?: string
+              p_http_method?: string
+              p_response_status?: number
+              p_event_details?: Json
+              p_error_message?: string
+              p_source?: string
+              p_additional_context?: Json
             }
         Returns: number
       }
@@ -1294,6 +1780,39 @@ export type Database = {
       }
       log_security_event: {
         Args:
+          | { event_type: string; description: string }
+          | {
+              event_type: string
+              event_category?: string
+              user_id?: string
+              ip_address?: unknown
+              severity?: number
+              event_details?: Json
+            }
+          | {
+              p_category: string
+              p_type: string
+              p_details: Json
+              p_risk_score?: number
+            }
+          | {
+              p_category: string
+              p_type: string
+              p_details?: Json
+              p_risk_score?: number
+              p_user_id?: string
+              p_ip_address?: unknown
+              p_user_agent?: string
+            }
+          | {
+              p_event_type: string
+              p_severity?: string
+              p_user_id?: string
+              p_ip_address?: unknown
+              p_event_details?: Json
+              p_source?: string
+              p_additional_context?: Json
+            }
           | {
               p_log_level: string
               p_error_code: string
@@ -1323,6 +1842,86 @@ export type Database = {
             }
         Returns: number
       }
+      log_security_event_named: {
+        Args: {
+          category: string
+          type: string
+          details?: Json
+          risk_score?: number
+          user_id?: string
+          ip_address?: unknown
+          user_agent?: string
+        }
+        Returns: string
+      }
+      manage_admin_user: {
+        Args: { p_user_id: string; p_action?: string }
+        Returns: boolean
+      }
+      manage_role_permissions: {
+        Args:
+          | {
+              p_role: Database["public"]["Enums"]["admin_role_type"]
+              p_permissions: Database["public"]["Enums"]["admin_permission"][]
+              p_action?: string
+            }
+          | { p_role: string; p_permissions: string[]; p_action?: string }
+        Returns: {
+          status: boolean
+          message: string
+        }[]
+      }
+      remove_admin_role: {
+        Args: { p_user_id?: string }
+        Returns: boolean
+      }
+      revoke_admin_role: {
+        Args:
+          | { target_user_email: string; admin_user_email: string }
+          | { target_user_uuid: string; admin_user_uuid: string }
+        Returns: boolean
+      }
+      safe_uuid_convert: {
+        Args: { input_string: string }
+        Returns: string
+      }
+      secure_function_search_paths: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          function_schema: string
+          function_name_result: string
+          search_path_status: string
+        }[]
+      }
+      secure_login: {
+        Args: {
+          p_email: string
+          p_password: string
+          p_ip_address?: unknown
+          p_user_agent?: string
+        }
+        Returns: {
+          login_successful: boolean
+          user_id: string
+          error_message: string
+        }[]
+      }
+      set_secure_search_paths: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          schema_name: string
+          function_name: string
+          status: string
+        }[]
+      }
+      setup_first_admin: {
+        Args: { first_admin_email: string }
+        Returns: boolean
+      }
+      unlock_account: {
+        Args: { p_email: string; p_admin_user_id: string }
+        Returns: boolean
+      }
       update_admin_metric: {
         Args:
           | Record<PropertyKey, never>
@@ -1332,6 +1931,14 @@ export type Database = {
               p_increment?: boolean
             }
         Returns: undefined
+      }
+      update_function_search_paths: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          schema_name: string
+          function_name: string
+          update_status: string
+        }[]
       }
       validate_admin_access: {
         Args: { client_ip: unknown }
@@ -1347,6 +1954,21 @@ export type Database = {
       }
     }
     Enums: {
+      admin_permission:
+        | "users_read"
+        | "users_write"
+        | "role_management"
+        | "role_permission_management"
+        | "content_management"
+        | "billing_view"
+        | "billing_edit"
+        | "system_config"
+      admin_role_type:
+        | "super_admin"
+        | "readonly_admin"
+        | "content_admin"
+        | "user_management_admin"
+        | "billing_admin"
       order_status: "pending" | "completed" | "cancelled" | "partial"
       security_level: "low" | "medium" | "high" | "maximum"
       trading_pair_status: "active" | "inactive" | "maintenance"
@@ -1486,6 +2108,23 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      admin_permission: [
+        "users_read",
+        "users_write",
+        "role_management",
+        "role_permission_management",
+        "content_management",
+        "billing_view",
+        "billing_edit",
+        "system_config",
+      ],
+      admin_role_type: [
+        "super_admin",
+        "readonly_admin",
+        "content_admin",
+        "user_management_admin",
+        "billing_admin",
+      ],
       order_status: ["pending", "completed", "cancelled", "partial"],
       security_level: ["low", "medium", "high", "maximum"],
       trading_pair_status: ["active", "inactive", "maintenance"],
