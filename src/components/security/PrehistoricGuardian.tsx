@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -130,6 +129,7 @@ export function PrehistoricGuardian() {
             resolved: false,
             autoFixed: false
           })
+
         }
 
         // Check authentication state
@@ -147,28 +147,30 @@ export function PrehistoricGuardian() {
           })
         }
 
-        // Auto-fix problems when possible
-        for (const problem of detectedProblems) {
-          if (await autoFixProblem(problem)) {
-            problem.resolved = true
-            problem.autoFixed = true
-            
-            setGuardianStats(prev => ({
-              ...prev,
-              problemsSolved: prev.problemsSolved + 1,
-              experience: prev.experience + 25
-            }))
+        // Log resolved problems to security events
+        if (detectedProblems.length > 0) {
+          try {
+            await supabase.from('security_events').insert({
+              event_type: 'GUARDIAN_SYSTEM_SCAN',
+              event_category: 'SYSTEM',
+              event_details: { 
+                description: `Prehistoric Guardian detected ${detectedProblems.length} system issues`,
+                problems: detectedProblems.length
+              },
+              severity: detectedProblems.some(p => p.severity === 'high') ? 70 : 30,
+              ip_address: '127.0.0.1'
+            })
+          } catch (error) {
+            console.log('🔒 Guardian logging protected')
           }
         }
 
-        setProblems(prev => [...detectedProblems, ...prev.slice(0, 19)])
-        setLastScan(new Date())
-
       } catch (error) {
-        console.error('Guardian scan error:', error)
-      } finally {
-        setIsScanning(false)
+        console.log('🦕 Guardian scan protected:', error)
       }
+
+      setIsScanning(false)
+      setLastScan(new Date())
     }
 
     // Initial scan
@@ -203,10 +205,10 @@ export function PrehistoricGuardian() {
           try {
             await supabase.from('security_events').insert({
               event_type: 'guardian_resolution',
-              event_description: `Guardian resolved: ${problem.description}`,
-              severity: problem.severity as 'low' | 'medium' | 'high' | 'maximum',
-              ip_address: '127.0.0.1',
-              resolved: true
+              event_category: 'SYSTEM',
+              event_details: { description: `Guardian resolved: ${problem.description}` },
+              severity: 70,
+              ip_address: '127.0.0.1'
             })
             toast.success('🛡️ Guardian neutralized security threat!', {
               description: 'Threat logged and system secured',

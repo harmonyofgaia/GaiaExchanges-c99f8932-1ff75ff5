@@ -57,11 +57,11 @@ export function ConnectionTracker() {
           .from('security_events')
           .insert({
             event_type: 'DRAGON_CONNECTION_TRACK',
-            event_description: `Dragon tracked connection: ${dragonAssessment}`,
-            severity: threatLevel.toLowerCase() as 'low' | 'medium' | 'high',
+            event_category: 'SECURITY',
+            event_details: { description: `Dragon tracked connection: ${dragonAssessment}` },
+            severity: threatLevel === 'CRITICAL' ? 90 : threatLevel === 'HIGH' ? 70 : 30,
             ip_address: userIP,
-            user_agent: navigator.userAgent,
-            resolved: true
+            user_id: null
           })
 
         if (error) {

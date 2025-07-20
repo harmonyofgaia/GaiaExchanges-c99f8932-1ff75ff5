@@ -48,10 +48,10 @@ export function QuantumSecurityEngine() {
       try {
         await supabase.from('security_events').insert({
           event_type: 'QUANTUM_SECURITY_SCAN',
-          event_description: `Quantum Security Engine: ${metrics.threatsBlocked} threats blocked, system integrity 100%`,
-          severity: 'low',
-          ip_address: '127.0.0.1', // Fixed: Use valid IP address format
-          resolved: true
+          event_category: 'SECURITY',
+          event_details: { description: `Quantum Security Engine: ${metrics.threatsBlocked} threats blocked, system integrity 100%` },
+          severity: 10,
+          ip_address: '127.0.0.1'
         })
       } catch (error) {
         // Engine is self-protected, continues regardless

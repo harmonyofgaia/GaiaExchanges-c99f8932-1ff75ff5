@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -130,10 +129,10 @@ export function WiFiNetworkProtection() {
             try {
               await supabase.from('security_events').insert({
                 event_type: 'WIFI_NETWORK_THREAT',
-                event_description: threat.description,
-                severity: threat.type === 'CRITICAL' ? 'maximum' : 'high',
-                ip_address: 'WiFi-Protection-System',
-                resolved: threat.blocked
+                event_category: 'SECURITY',
+                event_details: { description: threat.description },
+                severity: threat.type === 'CRITICAL' ? 90 : 70,
+                ip_address: 'WiFi-Protection-System'
               })
             } catch (error) {
               console.log('🔒 WiFi security logging protected')

@@ -20,31 +20,14 @@ export function DatabaseErrorFixer() {
           console.log('✅ Database cleanup completed successfully')
         }
         
-        // Create a proper logging function that handles IP validation
-        const logSecurityEvent = async (eventType: string, description: string, severity: 'low' | 'medium' | 'high' | 'maximum' = 'low') => {
-          try {
-            // Get real IP address
-            const response = await fetch('https://api.ipify.org?format=json')
-            const { ip } = await response.json()
-            
-            await supabase.from('security_events').insert({
-              event_type: eventType,
-              event_description: description,
-              severity: severity,
-              ip_address: ip,
-              resolved: true
-            })
-          } catch (error) {
-            console.log('Security event logging protected')
-          }
-        }
-        
         // Log the database fix
-        await logSecurityEvent(
-          'DATABASE_ERROR_FIXED',
-          'Fixed invalid IP address entries in security events table',
-          'low'
-        )
+        await supabase.from('security_events').insert({
+          event_type: 'DATABASE_ERROR_FIXED',
+          event_category: 'SYSTEM',
+          event_details: { description: 'Fixed invalid IP address entries in security events table' },
+          severity: 20,
+          ip_address: '127.0.0.1'
+        })
         
       } catch (error) {
         console.log('Database error fixer self-protected:', error)

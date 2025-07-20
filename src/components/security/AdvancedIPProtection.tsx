@@ -189,10 +189,10 @@ export function AdvancedIPProtection() {
             try {
               await supabase.from('security_events').insert({
                 event_type: 'IP_PROTECTION_THREAT',
-                event_description: threat.description,
-                severity: threat.type === 'CRITICAL' ? 'maximum' : 'high',
-                ip_address: 'GAIA-QUANTUM-PROTECTED',
-                resolved: threat.blocked
+                event_category: 'SECURITY',
+                event_details: { description: threat.description },
+                severity: threat.type === 'CRITICAL' ? 90 : 60,
+                ip_address: 'GAIA-QUANTUM-PROTECTED'
               })
             } catch (error) {
               console.log('🔒 Security logging quantum protected')

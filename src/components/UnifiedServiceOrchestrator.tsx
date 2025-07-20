@@ -45,10 +45,10 @@ export function UnifiedServiceOrchestrator() {
         try {
           await supabase.from('security_events').insert({
             event_type: 'SERVICE_COORDINATION',
-            event_description: `Service Orchestrator: ${activeCount}/${services.length} services active`,
-            severity: 'low',
-            ip_address: '127.0.0.1', // Fixed: Use valid IP address format
-            resolved: true
+            event_category: 'SYSTEM',
+            event_details: { description: `Service Orchestrator: ${activeCount}/${services.length} services active` },
+            severity: 10,
+            ip_address: '127.0.0.1'
           })
         } catch (error) {
           console.log('🔒 Service orchestrator self-protected from interference')

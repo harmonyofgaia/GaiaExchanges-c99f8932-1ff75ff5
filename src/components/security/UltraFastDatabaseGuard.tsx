@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -144,10 +143,10 @@ export function UltraFastDatabaseGuard() {
           try {
             await supabase.from('security_events').insert({
               event_type: 'WATERSOLID_PLAN_DEPLOYED',
-              event_description: `Database attacker ${attacker.ip} eliminated with watersolid plan - ${attacker.attackType}`,
-              severity: 'maximum',
-              ip_address: attacker.ip,
-              resolved: true
+              event_category: 'SECURITY',
+              event_details: { description: `Database attacker eliminated with watersolid plan` },
+              severity: 90,
+              ip_address: '127.0.0.1'
             })
           } catch (error) {
             console.log('Database logging protected')
