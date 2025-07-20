@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -17,7 +16,8 @@ import {
   Shield,
   User,
   ChevronRight,
-  Globe
+  Globe,
+  Bike
 } from 'lucide-react'
 
 const HoverSidebar = () => {
@@ -35,6 +35,7 @@ const HoverSidebar = () => {
     { icon: BarChart3, label: 'System Status', path: '/system-status' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status' },
     { icon: Shield, label: 'Immortal Security', path: '/immortal-security' },
+    { icon: Bike, label: 'GAiA Bike Ecosystem', path: '/gaia-bike-ecosystem' },
     { icon: Info, label: 'About', path: '/about' },
     { icon: Mail, label: 'Contact', path: '/contact' },
     { icon: DollarSign, label: 'Pricing', path: '/pricing' },

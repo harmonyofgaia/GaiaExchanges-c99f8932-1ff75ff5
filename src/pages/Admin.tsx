@@ -10,6 +10,8 @@ import { WalletEngineAdmin } from '@/components/admin/WalletEngineAdmin'
 import { TokenBurnController } from '@/components/admin/TokenBurnController'
 import { GitHubIntegrationSuite } from '@/components/system/GitHubIntegrationSuite'
 import { NotificationController } from '@/components/admin/NotificationController'
+import { PsychohistoricalEngine } from '@/components/admin/PsychohistoricalEngine'
+import { PhoenixGuardian } from '@/components/admin/PhoenixGuardian'
 
 export default function Admin() {
   return (
@@ -24,16 +26,19 @@ export default function Admin() {
       </div>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-4 lg:grid-cols-9">
-          <TabsTrigger value="overview">🏠 Overview</TabsTrigger>
-          <TabsTrigger value="notifications">🔔 Notifications</TabsTrigger>
-          <TabsTrigger value="github">📱 GitHub</TabsTrigger>
-          <TabsTrigger value="tokens">🔥 Token Burn</TabsTrigger>
-          <TabsTrigger value="wallets">💰 Wallets</TabsTrigger>
-          <TabsTrigger value="media">📸 Media</TabsTrigger>
-          <TabsTrigger value="intelligence">🧠 Intelligence</TabsTrigger>
-          <TabsTrigger value="koala">🐨 Koala AI</TabsTrigger>
-          <TabsTrigger value="dragon">🐉 Dragon AI</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 xl:grid-cols-12 gap-1 h-auto p-1">
+          <TabsTrigger value="overview" className="text-xs p-2">🏠 Overview</TabsTrigger>
+          <TabsTrigger value="notifications" className="text-xs p-2">🔔 Notifications</TabsTrigger>
+          <TabsTrigger value="github" className="text-xs p-2">📱 GitHub</TabsTrigger>
+          <TabsTrigger value="tokens" className="text-xs p-2">🔥 Token Burn</TabsTrigger>
+          <TabsTrigger value="wallets" className="text-xs p-2">💰 Wallets</TabsTrigger>
+          <TabsTrigger value="media" className="text-xs p-2">📸 Media</TabsTrigger>
+          <TabsTrigger value="intelligence" className="text-xs p-2">🧠 Intelligence</TabsTrigger>
+          <TabsTrigger value="koala" className="text-xs p-2">🐨 Koala AI</TabsTrigger>
+          <TabsTrigger value="dragon" className="text-xs p-2">🐉 Dragon AI</TabsTrigger>
+          <TabsTrigger value="phoenix" className="text-xs p-2">🦅 Phoenix Guardian</TabsTrigger>
+          <TabsTrigger value="psycho" className="text-xs p-2">🔮 Psychohistory</TabsTrigger>
+          <TabsTrigger value="videos" className="text-xs p-2">📹 Video Control</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview">
@@ -70,6 +75,24 @@ export default function Admin() {
 
         <TabsContent value="dragon">
           <DragonAIDefense />
+        </TabsContent>
+
+        <TabsContent value="phoenix">
+          <PhoenixGuardian />
+        </TabsContent>
+
+        <TabsContent value="psycho">
+          <PsychohistoricalEngine />
+        </TabsContent>
+
+        <TabsContent value="videos">
+          <div className="text-center p-8">
+            <h3 className="text-2xl font-bold text-blue-400 mb-4">📹 Video Upload Control Center</h3>
+            <p className="text-muted-foreground">
+              All video submissions are now controlled through the admin panel. 
+              Only administrators can approve, reject, and manage video content.
+            </p>
+          </div>
         </TabsContent>
       </Tabs>
     </div>

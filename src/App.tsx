@@ -49,6 +49,7 @@ import Pricing from '@/pages/Pricing'
 // New Admin and Marketplace Pages
 import AdminCraftedTools from '@/pages/AdminCraftedTools'
 import Marketplace from '@/pages/Marketplace'
+import GaiaBikeEcosystem from '@/pages/GaiaBikeEcosystem'
 
 const queryClient = new QueryClient()
 
@@ -113,6 +114,7 @@ function App() {
                     
                     {/* Admin Tools */}
                     <Route path="/admin-crafted-tools" element={<AdminCraftedTools />} />
+                    <Route path="/gaia-bike-ecosystem" element={<GaiaBikeEcosystem />} />
                   </Routes>
                 </main>
               </div>

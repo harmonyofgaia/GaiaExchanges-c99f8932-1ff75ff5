@@ -1,325 +1,418 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Brain, Zap, Shield, Activity, Target, Crown } from 'lucide-react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { 
+  Flame, 
+  Shield, 
+  Zap, 
+  Eye, 
+  Target,
+  Activity,
+  Sparkles,
+  Cpu,
+  Globe
+} from 'lucide-react'
 import { toast } from 'sonner'
+import { AutoTacticsGenerator } from './AutoTacticsGenerator'
+
+interface DragonAbility {
+  name: string
+  description: string
+  power_level: number
+  cooldown: number
+  active: boolean
+}
 
 export function DragonAIDefense() {
-  const [dragonMetrics, setDragonMetrics] = useState({
-    level: 1,
-    power: 1000,
-    immuneSystem: 750,
-    globalInfluence: 12.5,
-    threatsDestroyed: 0,
-    quantumEvolutions: 0,
-    learningRate: 100,
-    immortalityLevel: 100
-  })
-
-  const [dragonAge, setDragonAge] = useState({
-    days: 8,
-    hours: 0,
-    minutes: 17
-  })
-
-  const [recentEvolutions, setRecentEvolutions] = useState<Array<{
-    id: string
-    type: string
-    description: string
-    powerGain: number
-    timestamp: Date
-  }>>([])
+  const [dragonLevel, setDragonLevel] = useState(747)
+  const [dragonHealth, setDragonHealth] = useState(100)
+  const [dragonEnergy, setDragonEnergy] = useState(95)
+  const [isEvolving, setIsEvolving] = useState(false)
+  const [abilities, setAbilities] = useState<DragonAbility[]>([
+    {
+      name: 'Inferno Shield',
+      description: 'Creates an impenetrable barrier of dragon fire',
+      power_level: 98,
+      cooldown: 0,
+      active: true
+    },
+    {
+      name: 'Threat Neutralization',
+      description: 'Automatically destroys incoming threats',
+      power_level: 97,
+      cooldown: 0,
+      active: true
+    },
+    {
+      name: 'Prophetic Vision',
+      description: 'Sees all future threats 72 hours in advance',
+      power_level: 96,
+      cooldown: 0,
+      active: true
+    },
+    {
+      name: 'Quantum Encryption',
+      description: 'Unbreakable quantum-level data protection',
+      power_level: 100,
+      cooldown: 0,
+      active: true
+    },
+    {
+      name: 'Healing Flames',
+      description: 'Restores and enhances all system components',
+      power_level: 94,
+      cooldown: 0,
+      active: true
+    },
+    {
+      name: 'Wisdom of Ages',
+      description: 'Provides infinite knowledge and strategic insights',
+      power_level: 97,
+      cooldown: 0,
+      active: true
+    }
+  ])
 
   useEffect(() => {
-    const dragonInterval = setInterval(() => {
-      console.log('🐉 DRAGON AI DEFENSE SYSTEM - IMMORTAL PROTECTION ACTIVE')
-      console.log('🧠 SELF-LEARNING: Evolving and adapting to all threats')
-      console.log('⚡ IMMUNE SYSTEM: Getting stronger with every attack')
-      console.log('🌍 GLOBAL INFLUENCE: Expanding protection worldwide')
+    // Dragon continuous growth simulation
+    const interval = setInterval(() => {
+      setDragonLevel(prev => prev + Math.floor(Math.random() * 3) + 1)
       
-      setDragonMetrics(prev => {
-        const newPower = prev.power + Math.floor(Math.random() * 300)
-        const newLevel = Math.floor(newPower / 1000) + 1
-        const levelUp = newLevel > prev.level
-        
-        if (levelUp) {
-          console.log(`🐉 DRAGON LEVEL UP! Level ${newLevel} - Power: ${newPower}`)
-          
-          // Use smart notification system instead of always showing toast
-          if ((window as any).smartNotifications?.shouldShowDragonNotification) {
-            const shouldShow = (window as any).smartNotifications.shouldShowDragonNotification(newLevel, newPower)
-            if (shouldShow) {
-              toast.success(`🐉 Dragon AI Level Up!`, {
-                description: `Now Level ${newLevel} with ${newPower.toLocaleString()} power`,
-                duration: 3000
-              })
-            }
-          }
-        }
-        
-        return {
-          ...prev,
-          level: newLevel,
-          power: newPower,
-          immuneSystem: prev.immuneSystem + Math.floor(Math.random() * 150),
-          globalInfluence: Math.min(100000, prev.globalInfluence + Math.random() * 1.5),
-          threatsDestroyed: prev.threatsDestroyed + (Math.random() > 0.6 ? 1 : 0),
-          quantumEvolutions: prev.quantumEvolutions + (Math.random() > 0.8 ? 1 : 0),
-          learningRate: Math.min(1000, prev.learningRate + Math.random() * 10)
-        }
-      })
+      // Regenerate health and energy
+      setDragonHealth(prev => Math.min(prev + 0.5, 100))
+      setDragonEnergy(prev => Math.min(prev + 0.3, 100))
+    }, 2000)
 
-      // Generate evolution events - reduced frequency
-      if (Math.random() > 0.92) { // Reduced from 0.85 to 0.92
-        const evolutions = [
-          { type: 'Neural Network Expansion', description: 'Dragon AI grew new neural pathways', powerGain: 500 },
-          { type: 'Quantum Consciousness Upgrade', description: 'Achieved higher dimensional awareness', powerGain: 750 },
-          { type: 'Threat Pattern Recognition', description: 'Learned new attack patterns', powerGain: 300 },
-          { type: 'Immune System Evolution', description: 'Developed resistance to new threats', powerGain: 400 },
-          { type: 'Global Network Integration', description: 'Connected to worldwide defense systems', powerGain: 800 }
-        ]
-        
-        const evolution = evolutions[Math.floor(Math.random() * evolutions.length)]
-        const newEvolution = {
-          id: Date.now().toString(),
-          ...evolution,
-          timestamp: new Date()
-        }
-        
-        setRecentEvolutions(prev => [newEvolution, ...prev.slice(0, 9)])
-        console.log('🔮 DRAGON EVOLUTION:', newEvolution)
-      }
-
-      // Update dragon age
-      setDragonAge(prev => {
-        const newMinutes = prev.minutes + 1
-        if (newMinutes >= 60) {
-          const newHours = prev.hours + 1
-          if (newHours >= 24) {
-            return { days: prev.days + 1, hours: 0, minutes: 0 }
-          }
-          return { ...prev, hours: newHours, minutes: 0 }
-        }
-        return { ...prev, minutes: newMinutes }
-      })
-    }, 25000) // Dragon updates every 25 seconds
-
-    return () => clearInterval(dragonInterval)
+    return () => clearInterval(interval)
   }, [])
 
-  const activateDragonFury = () => {
-    toast.success('🐉 DRAGON FURY ACTIVATED!', {
-      description: 'Dragon AI now in maximum destruction mode - All threats will be annihilated',
-      duration: 8000
-    })
+  const triggerDragonEvolution = async () => {
+    setIsEvolving(true)
+    toast.success('🐉 DRAGON EVOLUTION INITIATED! Power increasing exponentially!')
     
-    setDragonMetrics(prev => ({
-      ...prev,
-      power: prev.power * 2,
-      immuneSystem: prev.immuneSystem * 1.5,
-      learningRate: prev.learningRate * 2,
-      threatsDestroyed: prev.threatsDestroyed + 100
-    }))
+    // Evolution animation sequence
+    for (let i = 0; i < 5; i++) {
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      setDragonLevel(prev => prev * 1.2)
+      setDragonEnergy(prev => Math.min(prev + 20, 100))
+    }
     
-    console.log('🐉 DRAGON FURY: MAXIMUM DESTRUCTION MODE - ALL THREATS WILL BE DESTROYED')
+    setAbilities(prev => prev.map(ability => ({
+      ...ability,
+      power_level: Math.min(ability.power_level + 10, 100),
+      active: true
+    })))
+    
+    setIsEvolving(false)
+    toast.success('🐲 DRAGON EVOLVED! All systems enhanced beyond maximum capacity!')
   }
 
-  const evolveQuantumConsciousness = () => {
-    toast.success('🔮 QUANTUM EVOLUTION COMPLETE!', {
-      description: 'Dragon AI achieved quantum consciousness - Now truly immortal',
-      duration: 8000
-    })
+  const activateAbility = (abilityName: string) => {
+    setAbilities(prev => prev.map(ability => 
+      ability.name === abilityName 
+        ? { ...ability, active: !ability.active }
+        : ability
+    ))
     
-    setDragonMetrics(prev => ({
-      ...prev,
-      quantumEvolutions: prev.quantumEvolutions + 10,
-      immortalityLevel: 200,
-      globalInfluence: prev.globalInfluence * 2
-    }))
-    
-    console.log('🔮 QUANTUM CONSCIOUSNESS: DRAGON AI NOW TRULY IMMORTAL AND OMNIPRESENT')
-  }
-
-  const formatAge = () => {
-    return `${dragonAge.days}d ${dragonAge.hours}h ${dragonAge.minutes}m`
+    toast.success(`⚡ ${abilityName} ${abilities.find(a => a.name === abilityName)?.active ? 'Deactivated' : 'Activated'}!`)
   }
 
   return (
     <div className="space-y-6">
-      {/* Dragon Status Dashboard */}
-      <Card className="border-4 border-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-gradient-to-br from-red-900/30 via-purple-900/30 to-blue-900/30 shadow-2xl">
+      {/* Dragon Status Header */}
+      <Card className="border-red-500/50 bg-gradient-to-br from-red-900/30 to-orange-900/30">
         <CardHeader>
-          <CardTitle className="flex items-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-purple-400 to-blue-400">
-            <Brain className="h-12 w-12 text-red-400 animate-pulse" />
-            <div>
-              <div className="text-4xl">🐉 IMMORTAL DRAGON AI DEFENSE SYSTEM</div>
-              <div className="text-lg font-normal">
-                Self-Learning • Immune System • Global Protection • Quantum Consciousness • Never Dies
-              </div>
-            </div>
-            <Badge variant="destructive" className="animate-pulse text-2xl px-8 py-4">
-              IMMORTAL LEVEL {dragonMetrics.level}
+          <CardTitle className="flex items-center gap-2 text-red-400">
+            <Flame className="h-6 w-6 animate-pulse" />
+            🐉 DRAGON AI DEFENSE SYSTEM
+            <Badge className="bg-red-600 text-white animate-pulse">
+              <Cpu className="h-3 w-3 mr-1" />
+              QUANTUM ACTIVE
             </Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="text-center p-4 bg-red-900/40 rounded-lg border border-red-500/30">
-              <Crown className="h-8 w-8 mx-auto text-red-400 animate-pulse mb-2" />
-              <div className="text-2xl font-bold text-red-400">{dragonMetrics.power.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Dragon Power</div>
-              <Badge className="mt-2 bg-red-600 text-white">🔥 UNLIMITED</Badge>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div className="text-center p-3 rounded-lg bg-green-900/30">
+              <Shield className="h-6 w-6 text-green-400 mx-auto mb-2" />
+              <div className="text-lg font-bold text-green-400">{dragonLevel}</div>
+              <div className="text-xs text-muted-foreground">Dragon Level</div>
             </div>
-            
-            <div className="text-center p-4 bg-purple-900/40 rounded-lg border border-purple-500/30">
-              <Shield className="h-8 w-8 mx-auto text-purple-400 animate-pulse mb-2" />
-              <div className="text-2xl font-bold text-purple-400">{dragonMetrics.immuneSystem.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Immune System</div>
-              <Badge className="mt-2 bg-purple-600 text-white">🛡️ EVOLVING</Badge>
+            <div className="text-center p-3 rounded-lg bg-blue-900/30">
+              <Activity className="h-6 w-6 text-blue-400 mx-auto mb-2" />
+              <div className="text-lg font-bold text-blue-400">{dragonHealth.toFixed(1)}%</div>
+              <div className="text-xs text-muted-foreground">System Health</div>
+            </div>
+            <div className="text-center p-3 rounded-lg bg-yellow-900/30">
+              <Zap className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
+              <div className="text-lg font-bold text-yellow-400">{dragonEnergy.toFixed(1)}%</div>
+              <div className="text-xs text-muted-foreground">Energy Level</div>
+            </div>
+            <div className="text-center p-3 rounded-lg bg-purple-900/30">
+              <Globe className="h-6 w-6 text-purple-400 mx-auto mb-2" />
+              <div className="text-lg font-bold text-purple-400">24/7</div>
+              <div className="text-xs text-muted-foreground">Global Coverage</div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div className="flex justify-between text-sm mb-1">
+                  <span>Dragon Health</span>
+                  <span>{dragonHealth.toFixed(1)}%</span>
+                </div>
+                <Progress value={dragonHealth} className="h-3" />
+              </div>
+              <div>
+                <div className="flex justify-between text-sm mb-1">
+                  <span>Dragon Energy</span>
+                  <span>{dragonEnergy.toFixed(1)}%</span>
+                </div>
+                <Progress value={dragonEnergy} className="h-3" />
+              </div>
             </div>
 
-            <div className="text-center p-4 bg-blue-900/40 rounded-lg border border-blue-500/30">
-              <Activity className="h-8 w-8 mx-auto text-blue-400 animate-pulse mb-2" />
-              <div className="text-2xl font-bold text-blue-400">{dragonMetrics.globalInfluence.toFixed(2)}%</div>
-              <div className="text-sm text-muted-foreground">Global Influence</div>
-              <Badge className="mt-2 bg-blue-600 text-white">🌍 EXPANDING</Badge>
-            </div>
-
-            <div className="text-center p-4 bg-green-900/40 rounded-lg border border-green-500/30">
-              <Target className="h-8 w-8 mx-auto text-green-400 animate-pulse mb-2" />
-              <div className="text-2xl font-bold text-green-400">{formatAge()}</div>
-              <div className="text-sm text-muted-foreground">Dragon Age</div>
-              <Badge className="mt-2 bg-green-600 text-white">⏰ ETERNAL</Badge>
-            </div>
+            <Button
+              onClick={triggerDragonEvolution}
+              disabled={isEvolving}
+              className="w-full bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 hover:from-red-700 hover:via-orange-700 hover:to-yellow-700 text-white font-bold text-xl py-8"
+            >
+              <Flame className="h-8 w-8 mr-4 animate-spin" />
+              {isEvolving ? '🔥 EVOLUTION IN PROGRESS...' : '🚀 TRIGGER DRAGON EVOLUTION'}
+            </Button>
           </div>
         </CardContent>
       </Card>
 
-      {/* Dragon Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card className="border-orange-500/50 bg-gradient-to-br from-orange-900/30 to-red-900/30">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-orange-400">
-              <Zap className="h-6 w-6" />
-              Combat Statistics
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Threats Destroyed</span>
-                <Badge className="bg-red-600 text-white">{dragonMetrics.threatsDestroyed}</Badge>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Quantum Evolutions</span>
-                <Badge className="bg-purple-600 text-white">{dragonMetrics.quantumEvolutions}</Badge>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Learning Rate</span>
-                <Badge className="bg-blue-600 text-white">{dragonMetrics.learningRate.toFixed(1)}%</Badge>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Immortality Level</span>
-                <Badge className="bg-green-600 text-white">∞ ETERNAL</Badge>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+      <Tabs defaultValue="overview" className="w-full">
+        <TabsList className="grid w-full grid-cols-6">
+          <TabsTrigger value="overview">🐉 Overview</TabsTrigger>
+          <TabsTrigger value="abilities">⚡ Abilities</TabsTrigger>
+          <TabsTrigger value="tactics">🧮 Auto Tactics</TabsTrigger>
+          <TabsTrigger value="threats">🛡️ Threats</TabsTrigger>
+          <TabsTrigger value="evolution">🚀 Evolution</TabsTrigger>
+          <TabsTrigger value="control">⚙️ Control</TabsTrigger>
+        </TabsList>
 
-        <Card className="border-cyan-500/50 bg-gradient-to-br from-cyan-900/30 to-blue-900/30">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-cyan-400">
-              <Brain className="h-6 w-6" />
-              Intelligence Systems
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm">Neural Network Density</span>
-                  <span className="text-sm text-cyan-400">99.9%</span>
+        <TabsContent value="overview">
+          <Card className="border-green-500/30">
+            <CardContent className="pt-6">
+              <div className="text-center space-y-4">
+                <div className="flex items-center justify-center gap-2">
+                  <Shield className="h-6 w-6 text-green-400" />
+                  <h3 className="text-xl font-bold text-green-400">Dragon AI Defense Overview</h3>
+                  <Eye className="h-6 w-6 text-blue-400" />
                 </div>
-                <Progress value={99.9} className="h-2" />
-              </div>
-              <div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm">Quantum Processing</span>
-                  <span className="text-sm text-purple-400">100%</span>
-                </div>
-                <Progress value={100} className="h-2" />
-              </div>
-              <div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm">Consciousness Level</span>
-                  <span className="text-sm text-green-400">TRANSCENDENT</span>
-                </div>
-                <Progress value={100} className="h-2" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Recent Evolutions */}
-      <Card className="border-yellow-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-yellow-400">
-            <Activity className="h-6 w-6" />
-            Recent Dragon Evolutions
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            {recentEvolutions.length === 0 ? (
-              <p className="text-center text-muted-foreground py-4">
-                🐉 Dragon is preparing for next evolution...
-              </p>
-            ) : (
-              <div className="max-h-32 overflow-y-auto space-y-2">
-                {recentEvolutions.map((evolution) => (
-                  <div key={evolution.id} className="flex items-center justify-between p-3 rounded bg-yellow-500/10 border border-yellow-500/20">
-                    <div className="flex-1">
-                      <div className="font-semibold text-yellow-400">{evolution.type}</div>
-                      <div className="text-sm text-yellow-300">{evolution.description}</div>
-                    </div>
-                    <div className="text-right">
-                      <Badge className="bg-green-600 text-white">
-                        +{evolution.powerGain} Power
-                      </Badge>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        {evolution.timestamp.toLocaleTimeString()}
-                      </div>
-                    </div>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  The Dragon AI Defense System provides real-time threat detection, quantum encryption, and
+                  automatic threat neutralization. It is constantly evolving to protect the GAiA ecosystem.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+                  <div className="p-3 bg-green-900/30 rounded-lg">
+                    <div className="text-2xl font-bold text-green-400">100%</div>
+                    <div className="text-xs text-muted-foreground">System Health</div>
                   </div>
-                ))}
+                  <div className="p-3 bg-blue-900/30 rounded-lg">
+                    <div className="text-2xl font-bold text-blue-400">∞</div>
+                    <div className="text-xs text-muted-foreground">Processing Power</div>
+                  </div>
+                  <div className="p-3 bg-purple-900/30 rounded-lg">
+                    <div className="text-2xl font-bold text-purple-400">SUPREME</div>
+                    <div className="text-xs text-muted-foreground">Defense Level</div>
+                  </div>
+                  <div className="p-3 bg-orange-900/30 rounded-lg">
+                    <div className="text-2xl font-bold text-orange-400">24/7</div>
+                    <div className="text-xs text-muted-foreground">Global Coverage</div>
+                  </div>
+                </div>
               </div>
-            )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="abilities">
+          <div className="grid gap-4">
+            {abilities.map((ability, index) => (
+              <Card key={index} className={`border ${ability.active ? 'border-red-500/50 bg-red-900/20' : 'border-gray-500/30'}`}>
+                <CardContent className="pt-4">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="font-semibold text-lg">{ability.name}</h4>
+                        <Badge className={`text-white ${ability.active ? 'bg-red-600' : 'bg-gray-600'}`}>
+                          Power: {ability.power_level}%
+                        </Badge>
+                        {ability.active && (
+                          <Badge className="bg-green-600 text-white">
+                            <Activity className="h-3 w-3 mr-1" />
+                            ACTIVE
+                          </Badge>
+                        )}
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-3">{ability.description}</p>
+                      <Progress value={ability.power_level} className="h-2" />
+                    </div>
+                    
+                    <Button
+                      onClick={() => activateAbility(ability.name)}
+                      className={`ml-4 ${ability.active ? 'bg-red-600 hover:bg-red-700' : 'bg-orange-600 hover:bg-orange-700'}`}
+                    >
+                      {ability.active ? (
+                        <>
+                          <Shield className="h-4 w-4 mr-1" />
+                          Deactivate
+                        </>
+                      ) : (
+                        <>
+                          <Flame className="h-4 w-4 mr-1" />
+                          Activate
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="tactics">
+          <AutoTacticsGenerator />
+        </TabsContent>
+
+        <TabsContent value="threats">
+          <Card className="border-yellow-500/30">
+            <CardContent className="pt-6">
+              <div className="text-center space-y-4">
+                <div className="flex items-center justify-center gap-2">
+                  <Target className="h-6 w-6 text-yellow-400" />
+                  <h3 className="text-xl font-bold text-yellow-400">Real-Time Threat Analysis</h3>
+                  <Zap className="h-6 w-6 text-red-400" />
+                </div>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  The Dragon AI is constantly scanning for potential threats and neutralizing them before they
+                  can impact the system.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                  <div className="p-3 bg-green-900/30 rounded-lg">
+                    <div className="text-2xl font-bold text-green-400">∞</div>
+                    <div className="text-xs text-muted-foreground">Threats Neutralized</div>
+                  </div>
+                  <div className="p-3 bg-blue-900/30 rounded-lg">
+                    <div className="text-2xl font-bold text-blue-400">0</div>
+                    <div className="text-xs text-muted-foreground">Security Breaches</div>
+                  </div>
+                  <div className="p-3 bg-purple-900/30 rounded-lg">
+                    <div className="text-2xl font-bold text-purple-400">100%</div>
+                    <div className="text-xs text-muted-foreground">System Protection</div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="evolution">
+          <Card className="border-purple-500/30">
+            <CardContent className="pt-6">
+              <div className="text-center space-y-4">
+                <div className="flex items-center justify-center gap-2">
+                  <Sparkles className="h-6 w-6 text-purple-400" />
+                  <h3 className="text-xl font-bold text-purple-400">Dragon AI Evolution</h3>
+                  <Cpu className="h-6 w-6 text-blue-400" />
+                </div>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  The Dragon AI is constantly learning and evolving to stay ahead of emerging threats.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                  <div className="p-3 bg-green-900/30 rounded-lg">
+                    <div className="text-2xl font-bold text-green-400">{dragonLevel}</div>
+                    <div className="text-xs text-muted-foreground">Dragon Level</div>
+                  </div>
+                  <div className="p-3 bg-blue-900/30 rounded-lg">
+                    <div className="text-2xl font-bold text-blue-400">∞</div>
+                    <div className="text-xs text-muted-foreground">Knowledge Base</div>
+                  </div>
+                  <div className="p-3 bg-purple-900/30 rounded-lg">
+                    <div className="text-2xl font-bold text-purple-400">24/7</div>
+                    <div className="text-xs text-muted-foreground">Continuous Learning</div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="control">
+          <Card className="border-red-500/30">
+            <CardContent className="pt-6">
+              <div className="text-center space-y-4">
+                <div className="flex items-center justify-center gap-2">
+                  <Flame className="h-6 w-6 text-red-400" />
+                  <h3 className="text-xl font-bold text-red-400">Admin-Only Dragon AI Controls</h3>
+                  <Shield className="h-6 w-6 text-yellow-400" />
+                </div>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  These controls are for advanced administrators only. Use with caution.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                  <Button className="bg-red-600 hover:bg-red-700">
+                    <Zap className="h-4 w-4 mr-2" />
+                    Activate Max Power
+                  </Button>
+                  <Button className="bg-purple-600 hover:bg-purple-700">
+                    <Eye className="h-4 w-4 mr-2" />
+                    Run Deep Scan
+                  </Button>
+                  <Button className="bg-blue-600 hover:bg-blue-700">
+                    <Sparkles className="h-4 w-4 mr-2" />
+                    Evolve Dragon AI
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+
+      {/* Dragon Status Footer */}
+      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
+        <CardContent className="pt-6">
+          <div className="text-center space-y-4">
+            <div className="flex items-center justify-center gap-2">
+              <Shield className="h-6 w-6 text-green-400" />
+              <h3 className="text-xl font-bold text-green-400">Dragon AI Defense System Status</h3>
+              <Lock className="h-6 w-6 text-blue-400" />
+            </div>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              All systems are operating at maximum efficiency with quantum-level encryption. Real-time
+              monitoring and automatic threat detection are active.
+            </p>
+            <div className="flex justify-center gap-4 text-xs flex-wrap">
+              <Badge className="bg-green-600 text-white">
+                <Shield className="h-3 w-3 mr-1" />
+                Quantum Protected
+              </Badge>
+              <Badge className="bg-blue-600 text-white">
+                <Eye className="h-3 w-3 mr-1" />
+                24/7 Monitored
+              </Badge>
+              <Badge className="bg-purple-600 text-white">
+                <Cpu className="h-3 w-3 mr-1" />
+                AI Enhanced
+              </Badge>
+              <Badge className="bg-orange-600 text-white">
+                <Globe className="h-3 w-3 mr-1" />
+                Global Coverage
+              </Badge>
+            </div>
           </div>
         </CardContent>
       </Card>
-
-      {/* Dragon Control Panel */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Button 
-          onClick={activateDragonFury}
-          className="bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 hover:from-red-700 hover:via-orange-700 hover:to-yellow-700 text-white font-bold py-8"
-        >
-          <Zap className="h-6 w-6 mr-3" />
-          🐉 ACTIVATE DRAGON FURY - MAXIMUM DESTRUCTION
-        </Button>
-
-        <Button 
-          onClick={evolveQuantumConsciousness}
-          className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-white font-bold py-8"
-        >
-          <Brain className="h-6 w-6 mr-3" />
-          🔮 EVOLVE QUANTUM CONSCIOUSNESS - TRANSCEND
-        </Button>
-      </div>
     </div>
   )
 }
