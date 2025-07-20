@@ -1,317 +1,285 @@
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Input } from '@/components/ui/input'
-import { Progress } from '@/components/ui/progress'
-import { 
-  Wallet, 
-  TrendingUp, 
-  Shield, 
-  Activity, 
-  DollarSign,
-  Settings,
-  Users,
-  Globe,
-  Zap,
-  Lock,
-  Eye,
-  Database
-} from 'lucide-react'
+import { Wallet, Send, Receive, Settings, Shield, TrendingUp } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function WalletEngineAdmin() {
-  const [walletStats, setWalletStats] = useState({
-    totalConnected: 1247,
-    activeTransactions: 89,
-    totalVolume: 2847293.45,
-    securityLevel: 98.7,
-    networkHealth: 99.2
-  })
+  const [selectedWallet, setSelectedWallet] = useState('main')
+  const [transferAmount, setTransferAmount] = useState('')
+  const [recipientAddress, setRecipientAddress] = useState('')
 
-  const [selectedNetwork, setSelectedNetwork] = useState('solana')
+  const wallets = [
+    {
+      id: 'main',
+      name: 'Main Treasury',
+      balance: '15,847,293.45',
+      currency: 'GAIA',
+      address: '0x742d35Cc6A4C3e2f...',
+      status: 'active'
+    },
+    {
+      id: 'rewards',
+      name: 'Rewards Pool',
+      balance: '8,432,156.78',
+      currency: 'GAIA',
+      address: '0x8e4f9c1A2B3d5E7F...',
+      status: 'active'
+    },
+    {
+      id: 'burn',
+      name: 'Burn Wallet',
+      balance: '2,847,536.12',
+      currency: 'GAIA',
+      address: '0x1a2b3c4d5e6f7890...',
+      status: 'locked'
+    },
+    {
+      id: 'dev',
+      name: 'Development Fund',
+      balance: '3,245,789.33',
+      currency: 'GAIA',
+      address: '0x9f8e7d6c5b4a3928...',
+      status: 'active'
+    }
+  ]
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setWalletStats(prev => ({
-        ...prev,
-        totalConnected: prev.totalConnected + Math.floor(Math.random() * 5),
-        activeTransactions: Math.floor(Math.random() * 150),
-        totalVolume: prev.totalVolume + Math.random() * 1000,
-        securityLevel: Math.min(100, prev.securityLevel + Math.random() * 0.1),
-        networkHealth: Math.min(100, prev.networkHealth + Math.random() * 0.1)
-      }))
-    }, 3000)
+  const executeTransfer = () => {
+    if (!transferAmount || !recipientAddress) {
+      toast.error('Please fill in all transfer details')
+      return
+    }
 
-    return () => clearInterval(interval)
-  }, [])
+    toast.info(`Initiating transfer of ${transferAmount} GAIA...`)
+    
+    setTimeout(() => {
+      toast.success('Transfer completed successfully!', {
+        description: `${transferAmount} GAIA sent to ${recipientAddress.slice(0, 10)}...`
+      })
+      setTransferAmount('')
+      setRecipientAddress('')
+    }, 2000)
+  }
 
   return (
     <div className="space-y-6">
-      <Card className="border-green-500/50 bg-gradient-to-r from-green-900/40 to-emerald-900/40">
+      <Card className="border-green-500/30 bg-green-900/20">
         <CardHeader>
-          <CardTitle className="text-center text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-            💰 WALLET ENGINE ADMIN CONTROL
+          <CardTitle className="text-green-400 flex items-center gap-2">
+            <Wallet className="h-6 w-6" />
+            💰 Wallet Engine Administration
+            <Badge className="bg-green-600 text-white">SECURE</Badge>
           </CardTitle>
-          <div className="text-center space-y-2">
-            <div className="text-lg text-green-300">
-              Multi-Network • Real-Time Trading • Full Admin Control
-            </div>
-            <div className="flex justify-center gap-2 flex-wrap">
-              <Badge className="bg-green-600 animate-pulse">ADMIN ACCESS</Badge>
-              <Badge className="bg-blue-600 animate-pulse">MULTI-NETWORK</Badge>
-              <Badge className="bg-purple-600 animate-pulse">SECURE VAULT</Badge>
-            </div>
-          </div>
         </CardHeader>
-      </Card>
+        <CardContent>
+          <Tabs defaultValue="overview" className="w-full">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="transfer">Transfer</TabsTrigger>
+              <TabsTrigger value="monitor">Monitor</TabsTrigger>
+              <TabsTrigger value="settings">Settings</TabsTrigger>
+            </TabsList>
 
-      {/* Stats Overview */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <Card className="border-green-500/30 bg-green-900/20">
-          <CardContent className="p-4 text-center">
-            <Users className="h-8 w-8 mx-auto text-green-400 mb-2" />
-            <div className="text-2xl font-bold text-green-400">{walletStats.totalConnected.toLocaleString()}</div>
-            <div className="text-sm text-muted-foreground">Connected Wallets</div>
-          </CardContent>
-        </Card>
-        
-        <Card className="border-blue-500/30 bg-blue-900/20">
-          <CardContent className="p-4 text-center">
-            <Activity className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-            <div className="text-2xl font-bold text-blue-400">{walletStats.activeTransactions}</div>
-            <div className="text-sm text-muted-foreground">Active Transactions</div>
-          </CardContent>
-        </Card>
-        
-        <Card className="border-yellow-500/30 bg-yellow-900/20">
-          <CardContent className="p-4 text-center">
-            <DollarSign className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
-            <div className="text-2xl font-bold text-yellow-400">${walletStats.totalVolume.toLocaleString()}</div>
-            <div className="text-sm text-muted-foreground">Total Volume</div>
-          </CardContent>
-        </Card>
-        
-        <Card className="border-purple-500/30 bg-purple-900/20">
-          <CardContent className="p-4 text-center">
-            <Shield className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-            <div className="text-2xl font-bold text-purple-400">{walletStats.securityLevel.toFixed(1)}%</div>
-            <div className="text-sm text-muted-foreground">Security Level</div>
-          </CardContent>
-        </Card>
-        
-        <Card className="border-cyan-500/30 bg-cyan-900/20">
-          <CardContent className="p-4 text-center">
-            <Globe className="h-8 w-8 mx-auto text-cyan-400 mb-2" />
-            <div className="text-2xl font-bold text-cyan-400">{walletStats.networkHealth.toFixed(1)}%</div>
-            <div className="text-sm text-muted-foreground">Network Health</div>
-          </CardContent>
-        </Card>
-      </div>
+            <TabsContent value="overview" className="space-y-6">
+              {/* Total Balance */}
+              <Card className="border-blue-500/30 bg-blue-900/10">
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-blue-400 mb-2">
+                      30,372,775.68 GAIA
+                    </div>
+                    <div className="text-lg text-muted-foreground">Total Treasury Balance</div>
+                    <Badge className="mt-2 bg-green-600">+2.3% (24h)</Badge>
+                  </div>
+                </CardContent>
+              </Card>
 
-      <Tabs defaultValue="network-control" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="network-control">🌐 Network Control</TabsTrigger>
-          <TabsTrigger value="security-vault">🔒 Security Vault</TabsTrigger>
-          <TabsTrigger value="transaction-monitor">📊 Transactions</TabsTrigger>
-          <TabsTrigger value="admin-settings">⚙️ Admin Settings</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="network-control" className="space-y-4">
-          <Card className="border-blue-500/30 bg-blue-900/20">
-            <CardHeader>
-              <CardTitle className="text-blue-400">🌐 Multi-Network Control</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Button 
-                  onClick={() => setSelectedNetwork('solana')}
-                  className={`h-16 ${selectedNetwork === 'solana' ? 'bg-purple-600' : 'bg-gray-600'}`}
-                >
-                  <Globe className="h-6 w-6 mr-2" />
-                  Solana
-                </Button>
-                
-                <Button 
-                  onClick={() => setSelectedNetwork('ethereum')}
-                  className={`h-16 ${selectedNetwork === 'ethereum' ? 'bg-blue-600' : 'bg-gray-600'}`}
-                >
-                  <Globe className="h-6 w-6 mr-2" />
-                  Ethereum
-                </Button>
-                
-                <Button 
-                  onClick={() => setSelectedNetwork('bsc')}
-                  className={`h-16 ${selectedNetwork === 'bsc' ? 'bg-yellow-600' : 'bg-gray-600'}`}
-                >
-                  <Globe className="h-6 w-6 mr-2" />
-                  BSC
-                </Button>
-                
-                <Button 
-                  onClick={() => setSelectedNetwork('polygon')}
-                  className={`h-16 ${selectedNetwork === 'polygon' ? 'bg-indigo-600' : 'bg-gray-600'}`}
-                >
-                  <Globe className="h-6 w-6 mr-2" />
-                  Polygon
-                </Button>
+              {/* Wallet Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {wallets.map((wallet) => (
+                  <Card key={wallet.id} className="border-gray-700/50 hover:border-green-500/50 transition-colors">
+                    <CardContent className="pt-4">
+                      <div className="flex justify-between items-start mb-3">
+                        <div>
+                          <h3 className="font-semibold text-lg">{wallet.name}</h3>
+                          <p className="text-sm text-muted-foreground">{wallet.address}</p>
+                        </div>
+                        <Badge className={`${
+                          wallet.status === 'active' ? 'bg-green-600' : 
+                          wallet.status === 'locked' ? 'bg-red-600' : 'bg-yellow-600'
+                        }`}>
+                          {wallet.status}
+                        </Badge>
+                      </div>
+                      <div className="text-2xl font-bold text-green-400">
+                        {wallet.balance} {wallet.currency}
+                      </div>
+                      <div className="flex gap-2 mt-3">
+                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                          <Send className="h-3 w-3 mr-1" />
+                          Send
+                        </Button>
+                        <Button size="sm" variant="outline">
+                          <Receive className="h-3 w-3 mr-1" />
+                          Receive
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
+            </TabsContent>
 
-              <div className="mt-6 p-4 bg-black/30 rounded-lg">
-                <h4 className="text-blue-400 font-bold mb-3">🎯 Network Status: {selectedNetwork.toUpperCase()}</h4>
-                <div className="grid grid-cols-2 gap-4">
+            <TabsContent value="transfer" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-orange-400">Transfer Tokens</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
                   <div>
-                    <div className="text-sm text-muted-foreground">Connection Status</div>
-                    <div className="text-green-400 font-bold">ACTIVE</div>
+                    <label className="text-sm font-medium">From Wallet</label>
+                    <select className="w-full mt-1 p-2 bg-gray-900 border border-gray-700 rounded-md">
+                      {wallets.filter(w => w.status === 'active').map(wallet => (
+                        <option key={wallet.id} value={wallet.id}>
+                          {wallet.name} - {wallet.balance} GAIA
+                        </option>
+                      ))}
+                    </select>
                   </div>
+                  
                   <div>
-                    <div className="text-sm text-muted-foreground">Gas Price</div>
-                    <div className="text-yellow-400 font-bold">Optimal</div>
+                    <label className="text-sm font-medium">Recipient Address</label>
+                    <Input
+                      placeholder="0x..."
+                      value={recipientAddress}
+                      onChange={(e) => setRecipientAddress(e.target.value)}
+                    />
                   </div>
+
                   <div>
+                    <label className="text-sm font-medium">Amount</label>
+                    <Input
+                      type="number"
+                      placeholder="0.00"
+                      value={transferAmount}
+                      onChange={(e) => setTransferAmount(e.target.value)}
+                    />
+                  </div>
+
+                  <Button 
+                    onClick={executeTransfer}
+                    className="w-full bg-green-600 hover:bg-green-700"
+                  >
+                    <Send className="h-4 w-4 mr-2" />
+                    Execute Transfer
+                  </Button>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="monitor" className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Card>
+                  <CardContent className="pt-4 text-center">
+                    <TrendingUp className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                    <div className="text-2xl font-bold text-green-400">47</div>
+                    <div className="text-sm text-muted-foreground">Today's Transactions</div>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="pt-4 text-center">
+                    <Shield className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                    <div className="text-2xl font-bold text-blue-400">100%</div>
+                    <div className="text-sm text-muted-foreground">Security Score</div>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="pt-4 text-center">
+                    <Wallet className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                    <div className="text-2xl font-bold text-purple-400">4</div>
                     <div className="text-sm text-muted-foreground">Active Wallets</div>
-                    <div className="text-blue-400 font-bold">342</div>
-                  </div>
-                  <div>
-                    <div className="text-sm text-muted-foreground">Security Level</div>
-                    <div className="text-purple-400 font-bold">MAXIMUM</div>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
 
-        <TabsContent value="security-vault" className="space-y-4">
-          <Card className="border-red-500/30 bg-red-900/20">
-            <CardHeader>
-              <CardTitle className="text-red-400">🔒 Admin Security Vault</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center space-y-4">
-                <div className="text-6xl mb-4">🔒⚡</div>
-                <h3 className="text-2xl font-bold text-red-400">QUANTUM SECURE VAULT</h3>
-                <p className="text-red-300">
-                  Ultimate protection for admin wallet operations
-                </p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Button className="bg-red-600 hover:bg-red-700 h-16">
-                    <Shield className="h-6 w-6 mr-2" />
-                    🛡️ ACTIVATE VAULT SHIELDS
-                  </Button>
-                  
-                  <Button className="bg-purple-600 hover:bg-purple-700 h-16">
-                    <Lock className="h-6 w-6 mr-2" />
-                    🔐 QUANTUM ENCRYPTION
-                  </Button>
-                  
-                  <Button className="bg-orange-600 hover:bg-orange-700 h-16">
-                    <Eye className="h-6 w-6 mr-2" />
-                    👁️ INVISIBILITY MODE
-                  </Button>
-                  
-                  <Button className="bg-green-600 hover:bg-green-700 h-16">
-                    <Zap className="h-6 w-6 mr-2" />
-                    ⚡ EMERGENCY PROTOCOLS
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+              {/* Recent Transactions */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-gray-400">Recent Transactions</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {[
+                      { type: 'send', amount: '1,000', to: '0x1234...', time: '2 min ago' },
+                      { type: 'receive', amount: '5,500', from: '0x5678...', time: '15 min ago' },
+                      { type: 'send', amount: '750', to: '0x9abc...', time: '1 hour ago' },
+                      { type: 'receive', amount: '12,000', from: '0xdef0...', time: '3 hours ago' }
+                    ].map((tx, index) => (
+                      <div key={index} className="flex justify-between items-center p-3 bg-gray-900/30 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          {tx.type === 'send' ? (
+                            <Send className="h-4 w-4 text-red-400" />
+                          ) : (
+                            <Receive className="h-4 w-4 text-green-400" />
+                          )}
+                          <div>
+                            <div className="font-medium">
+                              {tx.type === 'send' ? 'Sent' : 'Received'} {tx.amount} GAIA
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              {tx.type === 'send' ? 'To' : 'From'}: {tx.type === 'send' ? tx.to : tx.from}
+                            </div>
+                          </div>
+                        </div>
+                        <span className="text-sm text-muted-foreground">{tx.time}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-        <TabsContent value="transaction-monitor" className="space-y-4">
-          <Card className="border-green-500/30 bg-green-900/20">
-            <CardHeader>
-              <CardTitle className="text-green-400">📊 Real-Time Transaction Monitor</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-3">
-                <div className="flex justify-between items-center p-3 bg-black/30 rounded">
-                  <div className="flex items-center gap-3">
-                    <TrendingUp className="h-5 w-5 text-green-400" />
-                    <span>GAIA/SOL Trade</span>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-green-400 font-bold">+$2,847</div>
-                    <div className="text-xs text-muted-foreground">2 mins ago</div>
-                  </div>
-                </div>
-                
-                <div className="flex justify-between items-center p-3 bg-black/30 rounded">
-                  <div className="flex items-center gap-3">
-                    <Activity className="h-5 w-5 text-blue-400" />
-                    <span>ETH Staking Reward</span>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-blue-400 font-bold">+$156</div>
-                    <div className="text-xs text-muted-foreground">5 mins ago</div>
-                  </div>
-                </div>
-                
-                <div className="flex justify-between items-center p-3 bg-black/30 rounded">
-                  <div className="flex items-center gap-3">
-                    <DollarSign className="h-5 w-5 text-yellow-400" />
-                    <span>BTC Withdrawal</span>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-yellow-400 font-bold">-$5,230</div>
-                    <div className="text-xs text-muted-foreground">8 mins ago</div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="admin-settings" className="space-y-4">
-          <Card className="border-purple-500/30 bg-purple-900/20">
-            <CardHeader>
-              <CardTitle className="text-purple-400">⚙️ Admin Wallet Settings</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-4">
-                <div>
-                  <label className="text-sm text-purple-300 mb-2 block">Admin Wallet Address</label>
-                  <Input 
-                    value="5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
-                    readOnly
-                    className="bg-black/30 font-mono text-xs"
-                  />
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm text-purple-300 mb-2 block">Transaction Fee</label>
-                    <Input 
-                      type="number"
-                      defaultValue="0.001"
-                      className="bg-black/30"
-                    />
+            <TabsContent value="settings" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-yellow-400">Wallet Security Settings</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex justify-between items-center p-3 bg-gray-900/30 rounded-lg">
+                    <div>
+                      <h3 className="font-medium">Multi-Signature Required</h3>
+                      <p className="text-sm text-muted-foreground">Require multiple signatures for large transfers</p>
+                    </div>
+                    <Badge className="bg-green-600">ENABLED</Badge>
                   </div>
                   
-                  <div>
-                    <label className="text-sm text-purple-300 mb-2 block">Max Daily Volume</label>
-                    <Input 
-                      type="number"
-                      defaultValue="1000000"
-                      className="bg-black/30"
-                    />
+                  <div className="flex justify-between items-center p-3 bg-gray-900/30 rounded-lg">
+                    <div>
+                      <h3 className="font-medium">Auto-Lock Feature</h3>
+                      <p className="text-sm text-muted-foreground">Automatically lock wallets after inactivity</p>
+                    </div>
+                    <Badge className="bg-green-600">ENABLED</Badge>
                   </div>
-                </div>
-
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                  <Settings className="h-4 w-4 mr-2" />
-                  💾 Save Admin Settings
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+                  
+                  <div className="flex justify-between items-center p-3 bg-gray-900/30 rounded-lg">
+                    <div>
+                      <h3 className="font-medium">Transaction Limits</h3>
+                      <p className="text-sm text-muted-foreground">Daily transfer limits are active</p>
+                    </div>
+                    <Badge className="bg-blue-600">CONFIGURED</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+      </Card>
     </div>
   )
 }

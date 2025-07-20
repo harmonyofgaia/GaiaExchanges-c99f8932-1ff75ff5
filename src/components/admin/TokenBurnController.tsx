@@ -4,188 +4,182 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Flame, Shield, AlertTriangle, Lock } from 'lucide-react'
-import { useAuth } from '@/components/auth/AuthProvider'
+import { Progress } from '@/components/ui/progress'
+import { Flame, Shield, AlertTriangle, TrendingDown } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function TokenBurnController() {
-  const { user } = useAuth()
   const [burnAmount, setBurnAmount] = useState('')
-  const [confirmationCode, setConfirmationCode] = useState('')
-  const [isConfirming, setIsConfirming] = useState(false)
-  const [burnHistory] = useState([
-    { amount: 500000, date: '2024-07-15', reason: 'Ocean Cleanup Initiative', txHash: '0x1234...5678' },
-    { amount: 250000, date: '2024-07-10', reason: 'Deflationary Mechanism', txHash: '0xabcd...efgh' },
-    { amount: 1000000, date: '2024-07-05', reason: 'Community Vote Burn', txHash: '0x9876...5432' }
-  ])
+  const [totalBurned, setTotalBurned] = useState(2847536)
+  const [burnRate, setBurnRate] = useState(1.2)
+  const [isBurning, setIsBurning] = useState(false)
+  const [deflationRate, setDeflationRate] = useState(3.7)
 
-  // Check if user is admin (this should be replaced with proper role checking)
-  const isAdmin = true // This should check user roles from database
-
-  const handleBurnRequest = () => {
-    if (!isAdmin) {
-      toast.error('🚫 Access Denied - Admin Only Feature')
-      return
-    }
-
+  const executeBurn = async () => {
     if (!burnAmount || parseFloat(burnAmount) <= 0) {
       toast.error('Please enter a valid burn amount')
       return
     }
 
-    setIsConfirming(true)
-    toast.warning('⚠️ Token Burn Initiated - Confirmation Required')
+    setIsBurning(true)
+    toast.info(`🔥 Initiating burn of ${burnAmount} GAIA tokens...`)
+
+    // Simulate burn process
+    setTimeout(() => {
+      const burnValue = parseFloat(burnAmount)
+      setTotalBurned(prev => prev + burnValue)
+      setBurnRate(prev => prev + 0.1)
+      setDeflationRate(prev => prev + 0.2)
+      setBurnAmount('')
+      setIsBurning(false)
+      
+      toast.success(`🔥 Successfully burned ${burnAmount} GAIA tokens!`, {
+        description: 'Token supply has been permanently reduced'
+      })
+    }, 3000)
   }
 
-  const executeBurn = () => {
-    if (confirmationCode !== 'BURN-GAiA-FOREVER') {
-      toast.error('Invalid confirmation code')
-      return
-    }
-
-    // Simulate burn transaction
-    toast.success(`🔥 Successfully burned ${burnAmount} GAiA tokens!`, {
-      description: 'Tokens have been permanently removed from circulation'
+  const emergencyBurn = () => {
+    toast.warning('⚠️ Emergency burn protocol activated!', {
+      description: 'This will burn 1% of total supply'
     })
     
-    setBurnAmount('')
-    setConfirmationCode('')
-    setIsConfirming(false)
-  }
-
-  if (!isAdmin) {
-    return (
-      <Card className="border-red-500/30 bg-red-900/20">
-        <CardContent className="pt-6">
-          <div className="text-center space-y-4">
-            <Lock className="h-16 w-16 text-red-400 mx-auto" />
-            <h3 className="text-2xl font-bold text-red-400">🚫 ADMIN ACCESS REQUIRED</h3>
-            <p className="text-red-300">
-              Token burning is restricted to administrators only for security purposes.
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-    )
+    setIsBurning(true)
+    setTimeout(() => {
+      setTotalBurned(prev => prev + 100000)
+      setBurnRate(prev => prev + 0.5)
+      setIsBurning(false)
+      toast.success('Emergency burn completed successfully')
+    }, 5000)
   }
 
   return (
     <div className="space-y-6">
-      <Card className="border-red-500/30 bg-gradient-to-br from-red-900/30 to-orange-900/30">
+      <Card className="border-red-500/30 bg-red-900/20">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-red-400">
+          <CardTitle className="text-red-400 flex items-center gap-2">
             <Flame className="h-6 w-6" />
-            🔥 ADMIN TOKEN BURN CONTROLLER
+            🔥 Token Burn Control Center
+            <Badge className="bg-red-600 text-white animate-pulse">ADMIN ONLY</Badge>
           </CardTitle>
-          <div className="flex items-center gap-2">
-            <Badge className="bg-red-600 text-white">ADMIN ONLY</Badge>
-            <Badge className="bg-orange-600 text-white">PERMANENT ACTION</Badge>
-            <Badge className="bg-yellow-600 text-white">IRREVERSIBLE</Badge>
-          </div>
         </CardHeader>
-        
         <CardContent className="space-y-6">
-          <Alert className="border-red-500/30 bg-red-900/20">
-            <AlertTriangle className="h-4 w-4" />
-            <AlertDescription className="text-red-300">
-              <strong>WARNING:</strong> Token burning is permanent and irreversible. 
-              Only burn tokens for legitimate deflationary purposes or community initiatives.
-            </AlertDescription>
-          </Alert>
+          {/* Burn Statistics */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="p-4 bg-orange-900/20 rounded-lg text-center">
+              <Flame className="h-6 w-6 text-orange-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-orange-400">
+                {totalBurned.toLocaleString()}
+              </div>
+              <div className="text-sm text-muted-foreground">Total Burned</div>
+            </div>
+            <div className="p-4 bg-red-900/20 rounded-lg text-center">
+              <TrendingDown className="h-6 w-6 text-red-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-red-400">{burnRate}%</div>
+              <div className="text-sm text-muted-foreground">Burn Rate</div>
+            </div>
+            <div className="p-4 bg-purple-900/20 rounded-lg text-center">
+              <Shield className="h-6 w-6 text-purple-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-purple-400">{deflationRate}%</div>
+              <div className="text-sm text-muted-foreground">Deflation Rate</div>
+            </div>
+            <div className="p-4 bg-yellow-900/20 rounded-lg text-center">
+              <AlertTriangle className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-yellow-400">97.3M</div>
+              <div className="text-sm text-muted-foreground">Remaining Supply</div>
+            </div>
+          </div>
 
-          {!isConfirming ? (
-            <div className="space-y-4">
-              <div>
-                <label className="text-red-300 text-sm font-medium mb-2 block">
-                  Burn Amount (GAiA Tokens)
-                </label>
+          {/* Burn Progress */}
+          <div className="space-y-4">
+            <div className="flex justify-between text-sm">
+              <span>Monthly Burn Target</span>
+              <span>68.4% Complete</span>
+            </div>
+            <Progress value={68.4} className="h-3" />
+          </div>
+
+          {/* Manual Burn Controls */}
+          <Card className="border-orange-500/30 bg-orange-900/10">
+            <CardHeader>
+              <CardTitle className="text-orange-400 text-lg">Manual Token Burn</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex gap-4">
                 <Input
                   type="number"
+                  placeholder="Enter burn amount"
                   value={burnAmount}
                   onChange={(e) => setBurnAmount(e.target.value)}
-                  placeholder="Enter amount to burn..."
-                  className="bg-black/40 border-red-500/30 text-white"
+                  className="flex-1"
+                  disabled={isBurning}
                 />
-              </div>
-
-              <Button
-                onClick={handleBurnRequest}
-                className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700"
-                disabled={!burnAmount}
-              >
-                <Flame className="h-4 w-4 mr-2" />
-                🔥 INITIATE TOKEN BURN
-              </Button>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              <Alert className="border-yellow-500/30 bg-yellow-900/20">
-                <Shield className="h-4 w-4" />
-                <AlertDescription className="text-yellow-300">
-                  <strong>CONFIRMATION REQUIRED:</strong> You are about to permanently burn {burnAmount} GAiA tokens.
-                  Type "BURN-GAiA-FOREVER" to confirm this irreversible action.
-                </AlertDescription>
-              </Alert>
-
-              <div>
-                <label className="text-yellow-300 text-sm font-medium mb-2 block">
-                  Confirmation Code
-                </label>
-                <Input
-                  type="text"
-                  value={confirmationCode}
-                  onChange={(e) => setConfirmationCode(e.target.value)}
-                  placeholder="Type: BURN-GAiA-FOREVER"
-                  className="bg-black/40 border-yellow-500/30 text-white font-mono"
-                />
-              </div>
-
-              <div className="flex gap-3">
                 <Button
                   onClick={executeBurn}
-                  className="flex-1 bg-red-600 hover:bg-red-700"
-                  disabled={confirmationCode !== 'BURN-GAiA-FOREVER'}
+                  disabled={isBurning || !burnAmount}
+                  className="bg-red-600 hover:bg-red-700 min-w-[120px]"
                 >
                   <Flame className="h-4 w-4 mr-2" />
-                  EXECUTE BURN
-                </Button>
-                <Button
-                  onClick={() => setIsConfirming(false)}
-                  variant="outline"
-                  className="border-gray-500/30"
-                >
-                  Cancel
+                  {isBurning ? 'Burning...' : 'Execute Burn'}
                 </Button>
               </div>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+              
+              <div className="text-sm text-muted-foreground">
+                ⚠️ Warning: Token burns are permanent and irreversible
+              </div>
+            </CardContent>
+          </Card>
 
-      {/* Burn History */}
-      <Card className="border-orange-500/30 bg-orange-900/20">
-        <CardHeader>
-          <CardTitle className="text-orange-400">🔥 Recent Burn History</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {burnHistory.map((burn, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-black/40 rounded border border-orange-500/20">
-                <div>
-                  <div className="font-bold text-orange-400">
-                    {burn.amount.toLocaleString()} GAiA
+          {/* Emergency Controls */}
+          <Card className="border-red-600/50 bg-red-900/20">
+            <CardHeader>
+              <CardTitle className="text-red-400 text-lg flex items-center gap-2">
+                <AlertTriangle className="h-5 w-5" />
+                Emergency Burn Protocol
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                Emergency burn will immediately burn 1% of total token supply to combat inflation or market manipulation.
+              </p>
+              <Button
+                onClick={emergencyBurn}
+                disabled={isBurning}
+                className="bg-red-700 hover:bg-red-800 w-full"
+              >
+                <AlertTriangle className="h-4 w-4 mr-2" />
+                {isBurning ? 'Emergency Burn in Progress...' : 'Activate Emergency Burn'}
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Burn History */}
+          <Card className="border-gray-700/50">
+            <CardHeader>
+              <CardTitle className="text-gray-400 text-lg">Recent Burn History</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {[
+                  { amount: '50,000', date: '2 hours ago', type: 'Manual' },
+                  { amount: '25,000', date: '1 day ago', type: 'Automated' },
+                  { amount: '100,000', date: '3 days ago', type: 'Emergency' },
+                  { amount: '75,000', date: '1 week ago', type: 'Manual' }
+                ].map((burn, index) => (
+                  <div key={index} className="flex justify-between items-center p-3 bg-gray-900/30 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <Flame className="h-4 w-4 text-orange-400" />
+                      <span className="font-medium">{burn.amount} GAIA</span>
+                      <Badge variant="outline" className="text-xs">
+                        {burn.type}
+                      </Badge>
+                    </div>
+                    <span className="text-sm text-muted-foreground">{burn.date}</span>
                   </div>
-                  <div className="text-sm text-orange-300">{burn.reason}</div>
-                  <div className="text-xs text-gray-400">{burn.date}</div>
-                </div>
-                <div className="text-right">
-                  <div className="text-xs text-gray-400">TX Hash</div>
-                  <div className="text-xs font-mono text-blue-300">{burn.txHash}</div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </CardContent>
+          </Card>
         </CardContent>
       </Card>
     </div>

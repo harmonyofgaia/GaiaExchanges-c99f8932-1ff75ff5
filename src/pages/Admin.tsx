@@ -149,10 +149,27 @@ export default function Admin() {
           <TabsContent value="videos" className="mt-0">
             <div className="text-center p-8">
               <h3 className="text-2xl font-bold text-blue-400 mb-4">📹 Video Upload Control Center</h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground mb-4">
                 All video submissions are now controlled through the admin panel. 
                 Only administrators can approve, reject, and manage video content.
               </p>
+              <div className="bg-blue-900/20 p-4 rounded-lg border border-blue-500/30">
+                <h4 className="font-semibold text-blue-400 mb-2">Current Status</h4>
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-green-400">23</div>
+                    <div className="text-sm text-muted-foreground">Pending Review</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-blue-400">187</div>
+                    <div className="text-sm text-muted-foreground">Approved</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-red-400">12</div>
+                    <div className="text-sm text-muted-foreground">Rejected</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </TabsContent>
         </div>
