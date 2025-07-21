@@ -1,0 +1,176 @@
+# DEX Configuration
+# Trading engine and market making parameters
+
+trading_engine:
+  # Engine type: "hybrid", "amm_only", "orderbook_only"
+  mode: "hybrid"
+  
+  # Order matching frequency
+  matching_frequency: "100ms"
+  
+  # Maximum orders per user
+  max_orders_per_user: 100
+  
+  # Minimum order values
+  min_order_value_usd: 1.0
+  
+amm:
+  # Automated Market Maker settings
+  fee_tiers:
+    - tier: 1
+      fee_percentage: 0.05
+      tick_spacing: 1
+    - tier: 2
+      fee_percentage: 0.30
+      tick_spacing: 60
+    - tier: 3
+      fee_percentage: 1.00
+      tick_spacing: 200
+  
+  # Liquidity incentives
+  liquidity_mining:
+    enabled: true
+    reward_token: "GAIA"
+    daily_rewards: "10000"
+    min_liquidity_threshold: "1000"
+  
+  # Price oracle settings
+  price_oracle:
+    enabled: true
+    update_frequency: "30s"
+    deviation_threshold: 0.02  # 2%
+    sources: ["chainlink", "band", "pyth"]
+
+order_book:
+  # Order book depth
+  max_price_levels: 1000
+  
+  # Order types supported
+  supported_order_types:
+    - "market"
+    - "limit"
+    - "stop"
+    - "stop_limit"
+    - "iceberg"
+  
+  # Time in force options
+  time_in_force:
+    - "GTC"  # Good Till Cancelled
+    - "IOC"  # Immediate Or Cancel
+    - "FOK"  # Fill Or Kill
+  
+  # Matching algorithm
+  matching_algorithm: "price_time_priority"
+  
+  # Anti-manipulation
+  self_trade_prevention: true
+  wash_trade_detection: true
+
+market_making:
+  # Automated market making
+  enabled: true
+  
+  # Market maker incentives
+  fee_rebates:
+    tier_1: 0.01  # 1 basis point rebate
+    tier_2: 0.02  # 2 basis point rebate
+    tier_3: 0.03  # 3 basis point rebate
+  
+  # Volume requirements for tiers
+  volume_tiers:
+    tier_1: "100000"    # $100k monthly volume
+    tier_2: "1000000"   # $1M monthly volume
+    tier_3: "10000000"  # $10M monthly volume
+
+risk_management:
+  # Position limits
+  max_position_size_usd: "1000000"  # $1M max position
+  
+  # Leverage limits
+  max_leverage: 10
+  
+  # Liquidation parameters
+  liquidation_threshold: 0.85  # 85% of maintenance margin
+  liquidation_fee: 0.005       # 0.5% liquidation fee
+  
+  # Circuit breakers
+  price_deviation_halt: 0.15   # 15% price movement halt
+  volume_spike_threshold: 5.0   # 5x normal volume threshold
+
+fees:
+  # Trading fees
+  maker_fee: 0.001  # 0.1%
+  taker_fee: 0.002  # 0.2%
+  
+  # Withdrawal fees
+  withdrawal_fee_percentage: 0.001  # 0.1%
+  min_withdrawal_fee: "1.0"
+  
+  # Gas fees (for on-chain operations)
+  gas_price_gwei: 20
+  gas_limit_multiplier: 1.2
+
+supported_assets:
+  base_currencies:
+    - symbol: "GAIA"
+      name: "Gaia Token"
+      decimals: 18
+      contract_address: "0x..."
+    - symbol: "ETH"
+      name: "Ethereum"
+      decimals: 18
+      contract_address: "0x..."
+    - symbol: "USDC"
+      name: "USD Coin"
+      decimals: 6
+      contract_address: "0x..."
+  
+  trading_pairs:
+    - base: "GAIA"
+      quote: "USDC"
+      min_trade_size: "1.0"
+      max_trade_size: "1000000.0"
+      price_precision: 6
+      quantity_precision: 4
+    - base: "ETH"
+      quote: "USDC"
+      min_trade_size: "0.001"
+      max_trade_size: "1000.0"
+      price_precision: 2
+      quantity_precision: 6
+
+cross_chain:
+  # Supported networks
+  supported_networks:
+    - name: "ethereum"
+      rpc_url: "https://mainnet.infura.io/v3/YOUR_KEY"
+      chain_id: 1
+      block_confirmations: 12
+    - name: "polygon"
+      rpc_url: "https://polygon-rpc.com"
+      chain_id: 137
+      block_confirmations: 20
+    - name: "bsc"
+      rpc_url: "https://bsc-dataseed.binance.org"
+      chain_id: 56
+      block_confirmations: 15
+  
+  # Bridge settings
+  bridge_fee: 0.003  # 0.3%
+  min_bridge_amount: "10.0"
+  max_bridge_amount: "100000.0"
+  bridge_timeout: "3600"  # 1 hour
+
+security:
+  # Rate limiting
+  api_rate_limit: "1000/hour"
+  trading_rate_limit: "100/minute"
+  
+  # Authentication
+  session_timeout: 3600  # 1 hour
+  max_failed_attempts: 5
+  
+  # Withdrawal security
+  withdrawal_whitelist_required: true
+  withdrawal_confirmation_time: 1800  # 30 minutes
+  large_withdrawal_manual_review: "10000"  # $10k threshold
