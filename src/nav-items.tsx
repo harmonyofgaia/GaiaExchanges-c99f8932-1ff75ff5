@@ -65,6 +65,11 @@ const VirtualWorld = lazy(() => import("./pages/VirtualWorld"));
 const Wallet = lazy(() => import("./pages/Wallet"));
 const Webshop = lazy(() => import("./pages/Webshop"));
 
+// Master Plan v7 Features
+const GreenImpactDashboard = lazy(() => import("./pages/GreenImpactDashboard"));
+const DecentralizedProjectFundingPools = lazy(() => import("./pages/DecentralizedProjectFundingPools"));
+const EcoAvatarGaiaSoulSystem = lazy(() => import("./pages/EcoAvatarGaiaSoulSystem"));
+
 export const navItems = [
   {
     title: "Home",
@@ -375,6 +380,22 @@ export const navItems = [
     title: "Webshop",
     to: "/webshop",
     page: <Webshop />,
+  },
+  // Master Plan v7 Features
+  {
+    title: "Green Impact Dashboard",
+    to: "/green-impact-dashboard",
+    page: <GreenImpactDashboard />,
+  },
+  {
+    title: "Decentralized Funding Pools",
+    to: "/decentralized-funding-pools",
+    page: <DecentralizedProjectFundingPools />,
+  },
+  {
+    title: "Eco-Avatar & GaiaSoul",
+    to: "/eco-avatar-gaia-soul",
+    page: <EcoAvatarGaiaSoulSystem />,
   },
   // Catch-all route for 404
   {
