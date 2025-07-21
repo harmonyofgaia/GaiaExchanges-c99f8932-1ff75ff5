@@ -23,74 +23,74 @@ import {
 export const navItems = [
   {
     to: "/",
-    page: React.createElement(Index)
+    page: () => React.createElement(Index)
   },
   {
     to: "/about",
-    page: React.createElement(About)
+    page: () => React.createElement(About)
   },
   {
     to: "/wallet",
-    page: React.createElement(Wallet)
+    page: () => React.createElement(Wallet)
   },
   {
     to: "/markets",
-    page: React.createElement(Markets)
+    page: () => React.createElement(Markets)
   },
   {
     to: "/smart-contracts",
-    page: React.createElement(SmartContracts)
+    page: () => React.createElement(SmartContracts)
   },
   {
     to: "/system-status",
-    page: React.createElement(SystemStatus)
+    page: () => React.createElement(SystemStatus)
   },
   {
     to: "/comprehensive-status",
-    page: React.createElement(ComprehensiveStatus)
+    page: () => React.createElement(ComprehensiveStatus)
   },
   {
     to: "/downloads",
-    page: React.createElement(Downloads)
+    page: () => React.createElement(Downloads)
   },
   {
     to: "/marketing",
-    page: React.createElement(Marketing)
+    page: () => React.createElement(Marketing)
   },
   {
     to: "/reinvestments",
-    page: React.createElement(Reinvestments)
+    page: () => React.createElement(Reinvestments)
   },
   {
     to: "/transparency",
-    page: React.createElement(Transparency)
+    page: () => React.createElement(Transparency)
   },
   {
     to: "/admin",
-    page: React.createElement(Admin)
+    page: () => React.createElement(Admin)
   },
   {
     to: "/gaming",
-    page: React.createElement(Gaming)
+    page: () => React.createElement(Gaming)
   },
   {
     to: "/gaia-fighter-game",
-    page: React.createElement(GaiaFighterGame)
+    page: () => React.createElement(GaiaFighterGame)
   },
   {
     to: "/live-tracking",
-    page: React.createElement(LiveTracking)
+    page: () => React.createElement(LiveTracking)
   },
   {
     to: "/gaia-coin-crafter",
-    page: React.createElement(GaiaCoinCrafter)
+    page: () => React.createElement(GaiaCoinCrafter)
   },
   {
     to: "/landscape-builder",
-    page: React.createElement(LandscapeBuilder)
+    page: () => React.createElement(LandscapeBuilder)
   },
   {
     to: "*",
-    page: React.createElement(NotFound)
+    page: () => React.createElement(NotFound)
   }
 ]
