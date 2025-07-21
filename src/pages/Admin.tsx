@@ -1,8 +1,6 @@
 
 import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { UltimateAdminSuite } from '@/components/admin/UltimateAdminSuite'
 import { DragonAIDefense } from '@/components/admin/DragonAIDefense'
 import { KoalaAIEngine } from '@/components/admin/KoalaAIEngine'
@@ -19,119 +17,163 @@ import { GaiaTokenEarningHub } from '@/components/admin/GaiaTokenEarningHub'
 import { ComprehensiveTaskManager } from '@/components/admin/ComprehensiveTaskManager'
 
 export default function Admin() {
-  const [activeSection, setActiveSection] = useState('overview')
-
-  const adminSections = [
-    { id: 'overview', label: 'Control Center', icon: '🏠' },
-    { id: 'tasks', label: 'Task Manager', icon: '📋' },
-    { id: 'earning', label: 'Token Earning', icon: '🌍' },
-    { id: 'defense', label: 'Defense Systems', icon: '🛡️' },
-    { id: 'intelligence', label: 'Intelligence Hub', icon: '🧠' },
-    { id: 'media', label: 'Media Library', icon: '📸' },
-    { id: 'wallets', label: 'Wallet Engine', icon: '💰' },
-    { id: 'tokens', label: 'Token Control', icon: '🔥' },
-    { id: 'notifications', label: 'Notifications', icon: '🔔' },
-    { id: 'github', label: 'GitHub Suite', icon: '📱' },
-    { id: 'psycho', label: 'Psychohistory', icon: '🔮' },
-    { id: 'phoenix', label: 'Phoenix Guardian', icon: '🦅' },
-    { id: 'koala', label: 'Koala AI', icon: '🐨' },
-    { id: 'dragon', label: 'Dragon AI', icon: '🐉' }
-  ]
-
-  const renderActiveSection = () => {
-    switch (activeSection) {
-      case 'overview': return <UltimateAdminSuite />
-      case 'tasks': return <ComprehensiveTaskManager />
-      case 'earning': return <GaiaTokenEarningHub />
-      case 'defense': return <InvisibleDefenseSystem />
-      case 'intelligence': return <UltimateIntelligenceHub />
-      case 'media': return <AdminMediaLibrary />
-      case 'wallets': return <WalletEngineAdmin />
-      case 'tokens': return <TokenBurnController />
-      case 'notifications': return <NotificationController />
-      case 'github': return <GitHubIntegrationSuite />
-      case 'psycho': return <PsychohistoricalEngine />
-      case 'phoenix': return <PhoenixGuardian />
-      case 'koala': return <KoalaAIEngine />
-      case 'dragon': return <DragonAIDefense />
-      default: return <UltimateAdminSuite />
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900/10 via-blue-900/10 to-black">
-      <div className="container mx-auto p-4 space-y-6 max-w-full overflow-x-hidden">
-        {/* Header */}
-        <Card className="bg-gradient-to-r from-purple-900/40 via-blue-900/40 to-green-900/40 border-2 border-purple-500/50">
-          <CardHeader className="text-center">
-            <CardTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-green-400">
-              🚀 GAiA ADMIN CONTROL CENTER
-            </CardTitle>
-            <div className="flex justify-center gap-2 flex-wrap mt-4">
-              <Badge className="bg-red-600 animate-pulse">MAXIMUM SECURITY</Badge>
-              <Badge className="bg-blue-600 animate-pulse">QUANTUM ACTIVE</Badge>
-              <Badge className="bg-green-600 animate-pulse">DRAGON PROTECTION</Badge>
-              <Badge className="bg-purple-600 animate-pulse">AI ENGINE SUPREME</Badge>
-            </div>
-          </CardHeader>
-        </Card>
-
-        {/* Streamlined Navigation */}
-        <Card className="border-blue-500/30 bg-blue-900/20">
-          <CardContent className="p-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 xl:grid-cols-14 gap-2">
-              {adminSections.map((section) => (
-                <Button
-                  key={section.id}
-                  onClick={() => setActiveSection(section.id)}
-                  variant={activeSection === section.id ? "default" : "outline"}
-                  className={`h-16 flex flex-col gap-1 text-xs transition-all ${
-                    activeSection === section.id
-                      ? 'bg-purple-600 text-white border-purple-400'
-                      : 'bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 border-gray-600/30'
-                  }`}
-                >
-                  <span className="text-lg">{section.icon}</span>
-                  <span className="font-medium leading-tight">{section.label}</span>
-                </Button>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Active Section Content */}
-        <div className="space-y-6">
-          {renderActiveSection()}
-        </div>
-
-        {/* System Status Footer */}
-        <Card className="border-green-500/30 bg-green-900/20">
-          <CardContent className="pt-6">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
-              <div className="p-3 bg-green-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-green-400">100%</div>
-                <div className="text-xs text-muted-foreground">System Health</div>
-              </div>
-              <div className="p-3 bg-blue-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-blue-400">∞</div>
-                <div className="text-xs text-muted-foreground">Processing Power</div>
-              </div>
-              <div className="p-3 bg-purple-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-purple-400">SUPREME</div>
-                <div className="text-xs text-muted-foreground">Defense Level</div>
-              </div>
-              <div className="p-3 bg-yellow-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-yellow-400">GALAXY</div>
-                <div className="text-xs text-muted-foreground">Coverage Active</div>
-              </div>
-              <div className="p-3 bg-pink-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-pink-400">GODFATHER</div>
-                <div className="text-xs text-muted-foreground">AI Engine Mode</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+    <div className="container mx-auto p-4 space-y-4 max-w-full overflow-x-hidden">
+      <div className="text-center mb-6">
+        <h1 className="text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-4">
+          🚀 GAiA ADMIN CONTROL CENTER
+        </h1>
+        <p className="text-lg lg:text-xl text-muted-foreground">
+          Ultimate administrative suite for GAiA ecosystem management
+        </p>
       </div>
+
+      <Tabs defaultValue="overview" className="w-full">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-14 gap-1 h-auto p-1 text-xs">
+          <TabsTrigger value="overview" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🏠</span>
+              <span className="hidden sm:inline">Overview</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="tasks" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>📋</span>
+              <span className="hidden sm:inline">Tasks</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="earning" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🌍</span>
+              <span className="hidden sm:inline">Token Earning</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="invisible" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>👻</span>
+              <span className="hidden sm:inline">Invisible Defense</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="notifications" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🔔</span>
+              <span className="hidden sm:inline">Notifications</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="github" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>📱</span>
+              <span className="hidden sm:inline">GitHub</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="tokens" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🔥</span>
+              <span className="hidden sm:inline">Token Burn</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="wallets" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>💰</span>
+              <span className="hidden sm:inline">Wallets</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="media" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>📸</span>
+              <span className="hidden sm:inline">Media</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="intelligence" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🧠</span>
+              <span className="hidden sm:inline">Intelligence</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="koala" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🐨</span>
+              <span className="hidden sm:inline">Koala AI</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="dragon" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🐉</span>
+              <span className="hidden sm:inline">Dragon AI</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="phoenix" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🦅</span>
+              <span className="hidden sm:inline">Phoenix</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="psycho" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🔮</span>
+              <span className="hidden sm:inline">Psychohistory</span>
+            </div>
+          </TabsTrigger>
+        </TabsList>
+
+        <div className="mt-4">
+          <TabsContent value="overview" className="mt-0">
+            <UltimateAdminSuite />
+          </TabsContent>
+
+          <TabsContent value="tasks" className="mt-0">
+            <ComprehensiveTaskManager />
+          </TabsContent>
+
+          <TabsContent value="earning" className="mt-0">
+            <GaiaTokenEarningHub />
+          </TabsContent>
+
+          <TabsContent value="invisible" className="mt-0">
+            <InvisibleDefenseSystem />
+          </TabsContent>
+
+          <TabsContent value="notifications" className="mt-0">
+            <NotificationController />
+          </TabsContent>
+
+          <TabsContent value="github" className="mt-0">
+            <GitHubIntegrationSuite />
+          </TabsContent>
+
+          <TabsContent value="tokens" className="mt-0">
+            <TokenBurnController />
+          </TabsContent>
+
+          <TabsContent value="wallets" className="mt-0">
+            <WalletEngineAdmin />
+          </TabsContent>
+
+          <TabsContent value="media" className="mt-0">
+            <AdminMediaLibrary />
+          </TabsContent>
+
+          <TabsContent value="intelligence" className="mt-0">
+            <UltimateIntelligenceHub />
+          </TabsContent>
+
+          <TabsContent value="koala" className="mt-0">
+            <KoalaAIEngine />
+          </TabsContent>
+
+          <TabsContent value="dragon" className="mt-0">
+            <DragonAIDefense />
+          </TabsContent>
+
+          <TabsContent value="phoenix" className="mt-0">
+            <PhoenixGuardian />
+          </TabsContent>
+
+          <TabsContent value="psycho" className="mt-0">
+            <PsychohistoricalEngine />
+          </TabsContent>
+        </div>
+      </Tabs>
     </div>
   )
 }
