@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
-import { Volume2, VolumeX, Music, Upload, SkipBack, SkipForward, Play, Pause } from 'lucide-react'
+import { Volume2, VolumeX, Music, Upload } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface MediaFile {
@@ -17,12 +17,10 @@ interface MediaFile {
 }
 
 export function BackgroundMusic() {
-  const [isMuted, setIsMuted] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
   const [isLoaded, setIsLoaded] = useState(false)
   const [currentTrack, setCurrentTrack] = useState<MediaFile | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(0)
   const audioRef = useRef<HTMLAudioElement>(null)
 
   // Load active background media from localStorage
@@ -67,33 +65,6 @@ export function BackgroundMusic() {
     }
   }, [])
 
-  // Update time and duration
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    const updateTime = () => setCurrentTime(audio.currentTime)
-    const updateDuration = () => setDuration(audio.duration)
-    const handleEnded = () => {
-      setIsPlaying(false)
-      // Auto-loop
-      if (currentTrack) {
-        audio.currentTime = 0
-        audio.play().then(() => setIsPlaying(true)).catch(() => {})
-      }
-    }
-
-    audio.addEventListener('timeupdate', updateTime)
-    audio.addEventListener('loadedmetadata', updateDuration)
-    audio.addEventListener('ended', handleEnded)
-
-    return () => {
-      audio.removeEventListener('timeupdate', updateTime)
-      audio.removeEventListener('loadedmetadata', updateDuration)
-      audio.removeEventListener('ended', handleEnded)
-    }
-  }, [currentTrack])
-
   const toggleMusic = () => {
     const audio = audioRef.current
     
@@ -103,7 +74,7 @@ export function BackgroundMusic() {
     }
 
     if (audio) {
-      if (!isPlaying) {
+      if (isMuted || !isPlaying) {
         audio.src = currentTrack.url
         audio.play().then(() => {
           setIsMuted(false)
@@ -116,133 +87,56 @@ export function BackgroundMusic() {
         })
       } else {
         audio.pause()
+        setIsMuted(true)
         setIsPlaying(false)
-        console.log('⏸️ Music Paused')
+        console.log('🔇 Music Paused')
       }
     }
   }
 
-  const toggleMute = () => {
-    const audio = audioRef.current
-    if (audio) {
-      audio.muted = !audio.muted
-      setIsMuted(audio.muted)
-    }
-  }
-
-  const skipBackward = () => {
-    const audio = audioRef.current
-    if (audio) {
-      audio.currentTime = Math.max(0, audio.currentTime - 10)
-    }
-  }
-
-  const skipForward = () => {
-    const audio = audioRef.current
-    if (audio) {
-      audio.currentTime = Math.min(duration, audio.currentTime + 10)
-    }
-  }
-
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60)
-    const seconds = Math.floor(time % 60)
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`
-  }
-
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const audio = audioRef.current
-    if (audio) {
-      const newTime = Number(e.target.value)
-      audio.currentTime = newTime
-      setCurrentTime(newTime)
+  const handleAudioEnd = () => {
+    setIsPlaying(false)
+    setIsMuted(true)
+    // Optionally restart the track for looping
+    if (audioRef.current && currentTrack) {
+      audioRef.current.currentTime = 0
     }
   }
 
   const handleAudioError = () => {
     toast.error('Error playing audio file')
     setIsPlaying(false)
+    setIsMuted(true)
   }
 
   return (
     <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
       {currentTrack && (
-        <div className="bg-background/95 backdrop-blur-sm border border-primary/20 rounded-lg p-3 max-w-64">
-          <div className="text-xs text-muted-foreground truncate mb-2">
+        <div className="bg-background/90 backdrop-blur-sm border border-primary/20 rounded-lg p-2 max-w-48">
+          <div className="text-xs text-muted-foreground truncate">
             🎵 {currentTrack.name}
-          </div>
-          
-          {/* Time and Progress */}
-          <div className="space-y-2">
-            <input
-              type="range"
-              min="0"
-              max={duration || 0}
-              value={currentTime}
-              onChange={handleSeek}
-              className="w-full h-1 bg-gray-300 rounded-lg appearance-none cursor-pointer"
-            />
-            <div className="flex justify-between text-xs text-muted-foreground">
-              <span>{formatTime(currentTime)}</span>
-              <span>{formatTime(duration)}</span>
-            </div>
-          </div>
-
-          {/* Controls */}
-          <div className="flex items-center justify-center gap-2 mt-2">
-            <Button
-              onClick={skipBackward}
-              size="sm"
-              variant="ghost"
-              className="h-8 w-8 p-0"
-            >
-              <SkipBack className="h-3 w-3" />
-            </Button>
-            
-            <Button
-              onClick={toggleMusic}
-              size="sm"
-              className="h-8 w-8 p-0"
-            >
-              {isPlaying ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
-            </Button>
-            
-            <Button
-              onClick={skipForward}
-              size="sm"
-              variant="ghost"
-              className="h-8 w-8 p-0"
-            >
-              <SkipForward className="h-3 w-3" />
-            </Button>
-            
-            <Button
-              onClick={toggleMute}
-              size="sm"
-              variant="ghost"
-              className="h-8 w-8 p-0"
-            >
-              {isMuted ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
-            </Button>
           </div>
         </div>
       )}
       
-      {!currentTrack && (
-        <Button
-          onClick={toggleMusic}
-          variant="outline"
-          size="sm"
-          className="bg-background/80 backdrop-blur-sm border-primary/20"
-          title="No background music selected - Upload in Admin → Media Library"
-        >
-          <Music className="h-4 w-4" />
-        </Button>
-      )}
+      <Button
+        onClick={toggleMusic}
+        variant={isMuted || !isPlaying ? "outline" : "default"}
+        size="sm"
+        className="bg-background/80 backdrop-blur-sm border-primary/20"
+        title={currentTrack ? currentTrack.name : "No background music selected"}
+      >
+        {isMuted || !isPlaying ? 
+          <VolumeX className="h-4 w-4" /> : 
+          <Volume2 className="h-4 w-4" />
+        }
+      </Button>
       
       <audio
         ref={audioRef}
+        onEnded={handleAudioEnd}
         onError={handleAudioError}
+        loop
         preload="metadata"
       />
     </div>
