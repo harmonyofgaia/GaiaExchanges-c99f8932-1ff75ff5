@@ -13,7 +13,7 @@ import {
   Lock,
   Skull,
   Ghost,
-  Crosshair,
+  Crosshairs,
   Radar
 } from 'lucide-react'
 import { toast } from 'sonner'
