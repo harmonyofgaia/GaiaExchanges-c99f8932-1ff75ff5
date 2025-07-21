@@ -69,6 +69,8 @@ const Webshop = lazy(() => import("./pages/Webshop"));
 const GreenImpactDashboard = lazy(() => import("./pages/GreenImpactDashboard"));
 const DecentralizedProjectFundingPools = lazy(() => import("./pages/DecentralizedProjectFundingPools"));
 const EcoAvatarGaiaSoulSystem = lazy(() => import("./pages/EcoAvatarGaiaSoulSystem"));
+const NFTCardGame = lazy(() => import("./pages/NFTCardGame"));
+const PlanetCleaningRewardsSystem = lazy(() => import("./pages/PlanetCleaningRewardsSystem"));
 
 export const navItems = [
   {
@@ -396,6 +398,16 @@ export const navItems = [
     title: "Eco-Avatar & GaiaSoul",
     to: "/eco-avatar-gaia-soul",
     page: <EcoAvatarGaiaSoulSystem />,
+  },
+  {
+    title: "NFT Card Game",
+    to: "/nft-card-game",
+    page: <NFTCardGame />,
+  },
+  {
+    title: "Planet Cleaning Rewards",
+    to: "/planet-cleaning-rewards",
+    page: <PlanetCleaningRewardsSystem />,
   },
   // Catch-all route for 404
   {
