@@ -71,6 +71,7 @@ const DecentralizedProjectFundingPools = lazy(() => import("./pages/Decentralize
 const EcoAvatarGaiaSoulSystem = lazy(() => import("./pages/EcoAvatarGaiaSoulSystem"));
 const NFTCardGame = lazy(() => import("./pages/NFTCardGame"));
 const PlanetCleaningRewardsSystem = lazy(() => import("./pages/PlanetCleaningRewardsSystem"));
+const EcoMissionGenerator = lazy(() => import("./pages/EcoMissionGenerator"));
 
 export const navItems = [
   {
@@ -408,6 +409,11 @@ export const navItems = [
     title: "Planet Cleaning Rewards",
     to: "/planet-cleaning-rewards",
     page: <PlanetCleaningRewardsSystem />,
+  },
+  {
+    title: "Eco-Mission Generator",
+    to: "/eco-mission-generator",
+    page: <EcoMissionGenerator />,
   },
   // Catch-all route for 404
   {
