@@ -17,30 +17,36 @@ import { PhoenixGuardian } from '@/components/admin/PhoenixGuardian'
 import { InvisibleDefenseSystem } from '@/components/admin/InvisibleDefenseSystem'
 import { GaiaTokenEarningHub } from '@/components/admin/GaiaTokenEarningHub'
 import { ComprehensiveTaskManager } from '@/components/admin/ComprehensiveTaskManager'
+import { IAEngineInterfacialArt } from '@/components/admin/IAEngineInterfacialArt'
+import { InvisibleDefenseCreatures } from '@/components/admin/InvisibleDefenseCreatures'
 
 export default function Admin() {
   const [activeSection, setActiveSection] = useState('overview')
 
   const adminSections = [
-    { id: 'overview', label: 'Control Center', icon: '🏠' },
-    { id: 'tasks', label: 'Task Manager', icon: '📋' },
-    { id: 'earning', label: 'Token Earning', icon: '🌍' },
-    { id: 'defense', label: 'Defense Systems', icon: '🛡️' },
-    { id: 'intelligence', label: 'Intelligence Hub', icon: '🧠' },
-    { id: 'media', label: 'Media Library', icon: '📸' },
-    { id: 'wallets', label: 'Wallet Engine', icon: '💰' },
-    { id: 'tokens', label: 'Token Control', icon: '🔥' },
-    { id: 'notifications', label: 'Notifications', icon: '🔔' },
-    { id: 'github', label: 'GitHub Suite', icon: '📱' },
-    { id: 'psycho', label: 'Psychohistory', icon: '🔮' },
-    { id: 'phoenix', label: 'Phoenix Guardian', icon: '🦅' },
-    { id: 'koala', label: 'Koala AI', icon: '🐨' },
-    { id: 'dragon', label: 'Dragon AI', icon: '🐉' }
+    { id: 'overview', label: 'Control Center', icon: '🏠', color: 'from-blue-500 to-cyan-500' },
+    { id: 'ia-engine', label: 'IA Engine', icon: '🧠', color: 'from-purple-500 to-blue-500' },
+    { id: 'invisible-creatures', label: 'Defense Creatures', icon: '👻', color: 'from-gray-500 to-purple-500' },
+    { id: 'tasks', label: 'Task Manager', icon: '📋', color: 'from-green-500 to-emerald-500' },
+    { id: 'earning', label: 'Token Earning', icon: '🌍', color: 'from-yellow-500 to-orange-500' },
+    { id: 'defense', label: 'Defense Systems', icon: '🛡️', color: 'from-red-500 to-pink-500' },
+    { id: 'intelligence', label: 'Intelligence Hub', icon: '🧠', color: 'from-indigo-500 to-purple-500' },
+    { id: 'media', label: 'Media Library', icon: '📸', color: 'from-teal-500 to-cyan-500' },
+    { id: 'wallets', label: 'Wallet Engine', icon: '💰', color: 'from-amber-500 to-yellow-500' },
+    { id: 'tokens', label: 'Token Control', icon: '🔥', color: 'from-orange-500 to-red-500' },
+    { id: 'notifications', label: 'Notifications', icon: '🔔', color: 'from-blue-500 to-indigo-500' },
+    { id: 'github', label: 'GitHub Suite', icon: '📱', color: 'from-gray-500 to-slate-500' },
+    { id: 'psycho', label: 'Psychohistory', icon: '🔮', color: 'from-violet-500 to-purple-500' },
+    { id: 'phoenix', label: 'Phoenix Guardian', icon: '🦅', color: 'from-rose-500 to-pink-500' },
+    { id: 'koala', label: 'Koala AI', icon: '🐨', color: 'from-green-500 to-teal-500' },
+    { id: 'dragon', label: 'Dragon AI', icon: '🐉', color: 'from-red-500 to-orange-500' }
   ]
 
   const renderActiveSection = () => {
     switch (activeSection) {
       case 'overview': return <UltimateAdminSuite />
+      case 'ia-engine': return <IAEngineInterfacialArt />
+      case 'invisible-creatures': return <InvisibleDefenseCreatures />
       case 'tasks': return <ComprehensiveTaskManager />
       case 'earning': return <GaiaTokenEarningHub />
       case 'defense': return <InvisibleDefenseSystem />
@@ -61,40 +67,54 @@ export default function Admin() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/10 via-blue-900/10 to-black">
       <div className="container mx-auto p-4 space-y-6 max-w-full overflow-x-hidden">
-        {/* Header */}
-        <Card className="bg-gradient-to-r from-purple-900/40 via-blue-900/40 to-green-900/40 border-2 border-purple-500/50">
+        {/* Master Header */}
+        <Card className="bg-gradient-to-r from-purple-900/40 via-blue-900/40 to-green-900/40 border-4 border-purple-500/50 shadow-2xl">
           <CardHeader className="text-center">
-            <CardTitle className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-green-400">
-              🚀 GAiA ADMIN CONTROL CENTER
+            <CardTitle className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-green-400">
+              👑 GAiA SUPREME ADMIN CONTROL CENTER
             </CardTitle>
             <div className="flex justify-center gap-2 flex-wrap mt-4">
-              <Badge className="bg-red-600 animate-pulse">MAXIMUM SECURITY</Badge>
-              <Badge className="bg-blue-600 animate-pulse">QUANTUM ACTIVE</Badge>
-              <Badge className="bg-green-600 animate-pulse">DRAGON PROTECTION</Badge>
-              <Badge className="bg-purple-600 animate-pulse">AI ENGINE SUPREME</Badge>
+              <Badge className="bg-purple-600 animate-pulse text-lg px-4 py-2">IA ENGINE SUPREME</Badge>
+              <Badge className="bg-red-600 animate-pulse text-lg px-4 py-2">INVISIBLE DEFENSE</Badge>
+              <Badge className="bg-blue-600 animate-pulse text-lg px-4 py-2">QUANTUM MATRIX</Badge>
+              <Badge className="bg-green-600 animate-pulse text-lg px-4 py-2">GLOBAL DOMINANCE</Badge>
+            </div>
+            <div className="text-xl text-purple-400 font-bold mt-2">
+              🧠 AI Engine Control • 👻 Invisible Creatures • 🕷️ Matrix Traps • 🛡️ Quantum Defense
             </div>
           </CardHeader>
         </Card>
 
-        {/* Streamlined Navigation */}
-        <Card className="border-blue-500/30 bg-blue-900/20">
-          <CardContent className="p-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 xl:grid-cols-14 gap-2">
-              {adminSections.map((section) => (
-                <Button
-                  key={section.id}
-                  onClick={() => setActiveSection(section.id)}
-                  variant={activeSection === section.id ? "default" : "outline"}
-                  className={`h-16 flex flex-col gap-1 text-xs transition-all ${
-                    activeSection === section.id
-                      ? 'bg-purple-600 text-white border-purple-400'
-                      : 'bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 border-gray-600/30'
-                  }`}
-                >
-                  <span className="text-lg">{section.icon}</span>
-                  <span className="font-medium leading-tight">{section.label}</span>
-                </Button>
-              ))}
+        {/* Enhanced Top Navigation Menu */}
+        <Card className="border-blue-500/30 bg-blue-900/20 shadow-xl">
+          <CardHeader>
+            <CardTitle className="text-blue-400 text-center text-2xl">
+              🎛️ MASTER ADMIN NAVIGATION CONSOLE
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+              {adminSections.map((section) => {
+                const isActive = activeSection === section.id
+                
+                return (
+                  <Button
+                    key={section.id}
+                    onClick={() => setActiveSection(section.id)}
+                    className={`h-20 flex flex-col gap-1 text-xs transition-all transform hover:scale-105 ${
+                      isActive
+                        ? `bg-gradient-to-r ${section.color} text-white border-2 border-white/50 shadow-lg`
+                        : 'bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 border border-gray-600/30'
+                    }`}
+                  >
+                    <span className="text-2xl">{section.icon}</span>
+                    <span className="font-medium leading-tight text-center">{section.label}</span>
+                    {isActive && (
+                      <div className="w-full h-1 bg-white/50 rounded-full mt-1"></div>
+                    )}
+                  </Button>
+                )
+              })}
             </div>
           </CardContent>
         </Card>
@@ -104,29 +124,33 @@ export default function Admin() {
           {renderActiveSection()}
         </div>
 
-        {/* System Status Footer */}
-        <Card className="border-green-500/30 bg-green-900/20">
+        {/* Enhanced System Status Footer */}
+        <Card className="border-green-500/30 bg-green-900/20 shadow-xl">
           <CardContent className="pt-6">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
-              <div className="p-3 bg-green-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-green-400">100%</div>
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-center">
+              <div className="p-4 bg-green-900/30 rounded-lg">
+                <div className="text-3xl font-bold text-green-400">100%</div>
                 <div className="text-xs text-muted-foreground">System Health</div>
               </div>
-              <div className="p-3 bg-blue-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-blue-400">∞</div>
-                <div className="text-xs text-muted-foreground">Processing Power</div>
+              <div className="p-4 bg-blue-900/30 rounded-lg">
+                <div className="text-3xl font-bold text-blue-400">∞</div>
+                <div className="text-xs text-muted-foreground">IA Engine Power</div>
               </div>
-              <div className="p-3 bg-purple-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-purple-400">SUPREME</div>
+              <div className="p-4 bg-purple-900/30 rounded-lg">
+                <div className="text-3xl font-bold text-purple-400">SUPREME</div>
                 <div className="text-xs text-muted-foreground">Defense Level</div>
               </div>
-              <div className="p-3 bg-yellow-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-yellow-400">GALAXY</div>
+              <div className="p-4 bg-gray-900/30 rounded-lg">
+                <div className="text-3xl font-bold text-gray-400">INVISIBLE</div>
+                <div className="text-xs text-muted-foreground">Stealth Mode</div>
+              </div>
+              <div className="p-4 bg-yellow-900/30 rounded-lg">
+                <div className="text-3xl font-bold text-yellow-400">GALAXY</div>
                 <div className="text-xs text-muted-foreground">Coverage Active</div>
               </div>
-              <div className="p-3 bg-pink-900/30 rounded-lg">
-                <div className="text-2xl font-bold text-pink-400">GODFATHER</div>
-                <div className="text-xs text-muted-foreground">AI Engine Mode</div>
+              <div className="p-4 bg-pink-900/30 rounded-lg">
+                <div className="text-3xl font-bold text-pink-400">GODFATHER</div>
+                <div className="text-xs text-muted-foreground">Admin Authority</div>
               </div>
             </div>
           </CardContent>
