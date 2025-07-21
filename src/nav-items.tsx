@@ -4,7 +4,6 @@ import { Home, Globe, Coins, Hammer, Mountain, Palette, Video, Bike, BarChart3, 
 // Import all page components
 import Index from './pages/Index'
 import VirtualWorld from './pages/VirtualWorld'
-import NFTGreenAnimals from './pages/NFTGreenAnimals'
 import CoinCrafter from './pages/CoinCrafter'
 import LandscapeBuilder from './pages/LandscapeBuilder'
 import AuraLandScrapyard from './pages/AuraLandScrapyard'
@@ -30,12 +29,6 @@ export const navItems = [
     to: "/virtual-world",
     icon: Globe,
     page: <VirtualWorld />,
-  },
-  {
-    title: "NFT Green Animals",
-    to: "/nft-green-animals",
-    icon: Coins,
-    page: <NFTGreenAnimals />,
   },
   {
     title: "Video Upload & Earn",
