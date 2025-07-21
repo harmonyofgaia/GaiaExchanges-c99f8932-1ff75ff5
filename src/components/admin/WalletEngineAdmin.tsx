@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Wallet, Send, Receive, Settings, Shield, TrendingUp } from 'lucide-react'
+import { Wallet, Send, Download, Settings, Shield, TrendingUp } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function WalletEngineAdmin() {
@@ -124,7 +124,7 @@ export function WalletEngineAdmin() {
                           Send
                         </Button>
                         <Button size="sm" variant="outline">
-                          <Receive className="h-3 w-3 mr-1" />
+                          <Download className="h-3 w-3 mr-1" />
                           Receive
                         </Button>
                       </div>
@@ -226,7 +226,7 @@ export function WalletEngineAdmin() {
                           {tx.type === 'send' ? (
                             <Send className="h-4 w-4 text-red-400" />
                           ) : (
-                            <Receive className="h-4 w-4 text-green-400" />
+                            <Download className="h-4 w-4 text-green-400" />
                           )}
                           <div>
                             <div className="font-medium">
