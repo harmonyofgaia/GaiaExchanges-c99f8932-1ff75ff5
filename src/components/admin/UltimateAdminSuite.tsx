@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -27,12 +28,15 @@ import { SmartNotificationManager } from '../system/SmartNotificationManager'
 import { GitHubIntegration } from '../system/GitHubIntegration'
 import { NotificationSettings } from '../system/NotificationSettings'
 import { AdvancedSystemUpgrades } from '../system/AdvancedSystemUpgrades'
+import { IAEngineInterfacialArt } from './IAEngineInterfacialArt'
 
 export function UltimateAdminSuite() {
   const [activeSystem, setActiveSystem] = useState('overview')
 
   const adminSystems = [
     { id: 'overview', label: '🌟 Ultimate Features', icon: Star },
+    { id: 'ia-engine', label: '🧠 IA Engine', icon: Brain },
+    { id: 'creature-army', label: '🛡️ Creature Army', icon: Shield },
     { id: 'upgrades', label: '🚀 System Upgrades', icon: Rocket },
     { id: 'github', label: '🐙 GitHub Integration', icon: Activity },
     { id: 'notifications', label: '🔔 Smart Notifications', icon: Settings },
@@ -67,13 +71,13 @@ export function UltimateAdminSuite() {
           </CardTitle>
           <div className="text-center space-y-2">
             <div className="text-xl text-purple-400 font-bold">
-              🛡️ QUANTUM DEFENSE • 🐉 DRAGON AI • ⚡ INFINITE POWER • 🧠 EXCLUSIVE AI ENGINE
+              🛡️ QUANTUM DEFENSE • 🐉 DRAGON AI • ⚡ INFINITE POWER • 🧠 IA ENGINE SUPREME
             </div>
             <div className="flex justify-center gap-2 flex-wrap">
               <Badge className="bg-red-600 animate-pulse">MAXIMUM SECURITY</Badge>
               <Badge className="bg-blue-600 animate-pulse">QUANTUM ACTIVE</Badge>
               <Badge className="bg-green-600 animate-pulse">DRAGON PROTECTION</Badge>
-              <Badge className="bg-purple-600 animate-pulse">AI ENGINE SUPREME</Badge>
+              <Badge className="bg-purple-600 animate-pulse">IA ENGINE SUPREME</Badge>
               <Badge className="bg-pink-600 animate-pulse">ADMIN GODFATHER</Badge>
             </div>
           </div>
@@ -138,6 +142,8 @@ export function UltimateAdminSuite() {
           </div>
         )}
 
+        {activeSystem === 'ia-engine' && <IAEngineInterfacialArt />}
+        {activeSystem === 'creature-army' && <DefenseCreatureArmy />}
         {activeSystem === 'upgrades' && <AdvancedSystemUpgrades />}
         {activeSystem === 'github' && <GitHubIntegration />}
         {activeSystem === 'notifications' && <NotificationSettings />}
@@ -159,7 +165,7 @@ export function UltimateAdminSuite() {
       {/* System Status Footer */}
       <Card className="border-green-500/30 bg-green-900/20">
         <CardContent className="pt-6">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-center">
             <div className="p-3 bg-green-900/30 rounded-lg">
               <div className="text-2xl font-bold text-green-400">100%</div>
               <div className="text-xs text-muted-foreground">System Health</div>
@@ -177,8 +183,12 @@ export function UltimateAdminSuite() {
               <div className="text-xs text-muted-foreground">Coverage Active</div>
             </div>
             <div className="p-3 bg-pink-900/30 rounded-lg">
-              <div className="text-2xl font-bold text-pink-400">GODFATHER</div>
-              <div className="text-xs text-muted-foreground">AI Engine Mode</div>
+              <div className="text-2xl font-bold text-pink-400">IA ENGINE</div>
+              <div className="text-xs text-muted-foreground">Supreme AI</div>
+            </div>
+            <div className="p-3 bg-red-900/30 rounded-lg">
+              <div className="text-2xl font-bold text-red-400">GODFATHER</div>
+              <div className="text-xs text-muted-foreground">Admin Mode</div>
             </div>
           </div>
         </CardContent>
