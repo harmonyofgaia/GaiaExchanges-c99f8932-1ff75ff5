@@ -12,9 +12,6 @@ import { GitHubIntegrationSuite } from '@/components/system/GitHubIntegrationSui
 import { NotificationController } from '@/components/admin/NotificationController'
 import { PsychohistoricalEngine } from '@/components/admin/PsychohistoricalEngine'
 import { PhoenixGuardian } from '@/components/admin/PhoenixGuardian'
-import { InvisibleDefenseSystem } from '@/components/admin/InvisibleDefenseSystem'
-import { GaiaTokenEarningHub } from '@/components/admin/GaiaTokenEarningHub'
-import { ComprehensiveTaskManager } from '@/components/admin/ComprehensiveTaskManager'
 
 export default function Admin() {
   return (
@@ -29,29 +26,11 @@ export default function Admin() {
       </div>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-14 gap-1 h-auto p-1 text-xs">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-12 gap-1 h-auto p-1 text-xs">
           <TabsTrigger value="overview" className="p-2 text-center">
             <div className="flex flex-col items-center">
               <span>🏠</span>
               <span className="hidden sm:inline">Overview</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="tasks" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <span>📋</span>
-              <span className="hidden sm:inline">Tasks</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="earning" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <span>🌍</span>
-              <span className="hidden sm:inline">Token Earning</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="invisible" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <span>👻</span>
-              <span className="hidden sm:inline">Invisible Defense</span>
             </div>
           </TabsTrigger>
           <TabsTrigger value="notifications" className="p-2 text-center">
@@ -114,23 +93,17 @@ export default function Admin() {
               <span className="hidden sm:inline">Psychohistory</span>
             </div>
           </TabsTrigger>
+          <TabsTrigger value="videos" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>📹</span>
+              <span className="hidden sm:inline">Video Control</span>
+            </div>
+          </TabsTrigger>
         </TabsList>
 
         <div className="mt-4">
           <TabsContent value="overview" className="mt-0">
             <UltimateAdminSuite />
-          </TabsContent>
-
-          <TabsContent value="tasks" className="mt-0">
-            <ComprehensiveTaskManager />
-          </TabsContent>
-
-          <TabsContent value="earning" className="mt-0">
-            <GaiaTokenEarningHub />
-          </TabsContent>
-
-          <TabsContent value="invisible" className="mt-0">
-            <InvisibleDefenseSystem />
           </TabsContent>
 
           <TabsContent value="notifications" className="mt-0">
@@ -171,6 +144,33 @@ export default function Admin() {
 
           <TabsContent value="psycho" className="mt-0">
             <PsychohistoricalEngine />
+          </TabsContent>
+
+          <TabsContent value="videos" className="mt-0">
+            <div className="text-center p-8">
+              <h3 className="text-2xl font-bold text-blue-400 mb-4">📹 Video Upload Control Center</h3>
+              <p className="text-muted-foreground mb-4">
+                All video submissions are now controlled through the admin panel. 
+                Only administrators can approve, reject, and manage video content.
+              </p>
+              <div className="bg-blue-900/20 p-4 rounded-lg border border-blue-500/30">
+                <h4 className="font-semibold text-blue-400 mb-2">Current Status</h4>
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-green-400">23</div>
+                    <div className="text-sm text-muted-foreground">Pending Review</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-blue-400">187</div>
+                    <div className="text-sm text-muted-foreground">Approved</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-red-400">12</div>
+                    <div className="text-sm text-muted-foreground">Rejected</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </TabsContent>
         </div>
       </Tabs>
