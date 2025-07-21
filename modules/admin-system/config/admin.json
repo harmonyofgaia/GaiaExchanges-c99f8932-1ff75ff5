@@ -1,0 +1,95 @@
+{
+  "authentication": {
+    "sessionTimeout": 3600000,
+    "mfaRequired": true,
+    "maxLoginAttempts": 5,
+    "lockoutDuration": 900000,
+    "passwordPolicy": {
+      "minLength": 12,
+      "requireUppercase": true,
+      "requireLowercase": true,
+      "requireNumbers": true,
+      "requireSpecialChars": true,
+      "prohibitCommonPasswords": true
+    }
+  },
+  "security": {
+    "encryptionAlgorithm": "AES-256-GCM",
+    "hashAlgorithm": "bcrypt",
+    "saltRounds": 12,
+    "jwtSecret": "gaia_admin_secret_key",
+    "rateLimiting": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowMs": 900000
+    }
+  },
+  "monitoring": {
+    "healthCheckInterval": 30000,
+    "alertThresholds": {
+      "cpuUsage": 80,
+      "memoryUsage": 85,
+      "errorRate": 5,
+      "responseTime": 5000
+    },
+    "retentionPeriod": {
+      "auditLogs": 2592000000,
+      "performanceMetrics": 604800000,
+      "systemLogs": 1209600000
+    }
+  },
+  "permissions": {
+    "roles": {
+      "superAdmin": [
+        "user_management",
+        "system_control",
+        "financial_oversight",
+        "emergency_access",
+        "audit_access",
+        "module_management",
+        "security_management"
+      ],
+      "systemAdmin": [
+        "user_management",
+        "system_control",
+        "module_management",
+        "audit_access"
+      ],
+      "auditor": [
+        "audit_access",
+        "financial_oversight"
+      ],
+      "support": [
+        "user_management"
+      ]
+    }
+  },
+  "emergency": {
+    "controls": [
+      {
+        "id": "emergency_shutdown",
+        "name": "Emergency Shutdown",
+        "description": "Immediately shutdown all system components",
+        "type": "shutdown",
+        "requiredPermissions": ["emergency_access"],
+        "confirmationRequired": true
+      },
+      {
+        "id": "trading_halt",
+        "name": "Trading Halt",
+        "description": "Temporarily halt all trading activities",
+        "type": "lockdown",
+        "requiredPermissions": ["financial_oversight", "emergency_access"],
+        "confirmationRequired": true
+      },
+      {
+        "id": "user_lockdown",
+        "name": "User Account Lockdown",
+        "description": "Lock all user accounts except admins",
+        "type": "lockdown",
+        "requiredPermissions": ["user_management", "emergency_access"],
+        "confirmationRequired": true
+      }
+    ]
+  }
+}

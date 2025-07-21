@@ -1,5 +1,6 @@
-import { HomeIcon, InfoIcon, WalletIcon, TrendingUpIcon, CodeIcon, ActivityIcon, DownloadIcon, ShareIcon, DollarSignIcon, EyeIcon, UserIcon, GamepadIcon, ZapIcon, MapIcon } from "lucide-react";
+import { HomeIcon, InfoIcon, WalletIcon, TrendingUpIcon, CodeIcon, ActivityIcon, DownloadIcon, ShareIcon, DollarSignIcon, EyeIcon, UserIcon, GamepadIcon, ZapIcon, MapIcon, SettingsIcon } from "lucide-react";
 import { Index, About, Wallet, Markets, SmartContracts, SystemStatus, ComprehensiveStatus, Downloads, Marketing, Reinvestments, Transparency, Admin, Gaming, GaiaFighterGame, LiveTracking, GaiaCoinCrafter, LandscapeBuilder, NotFound } from "@/pages";
+import ModuleSystemHub from "@/pages/ModuleSystemHub";
 
 export interface NavItem {
   title: string;
@@ -110,6 +111,12 @@ export const navItems: NavItem[] = [
     to: "/landscape-builder",
     icon: MapIcon,
     page: <LandscapeBuilder />,
+  },
+  {
+    title: "Module System Hub",
+    to: "/module-system-hub",
+    icon: SettingsIcon,
+    page: <ModuleSystemHub />,
   },
   {
     title: "404",

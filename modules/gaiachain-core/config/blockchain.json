@@ -1,0 +1,35 @@
+{
+  "blockchain": {
+    "name": "GaiaChain",
+    "version": "1.0.0",
+    "network": {
+      "id": "gaiachain-mainnet",
+      "rpcUrl": "https://rpc.gaiachain.org",
+      "wsUrl": "wss://ws.gaiachain.org",
+      "explorerUrl": "https://explorer.gaiachain.org"
+    },
+    "consensus": {
+      "algorithm": "Proof of Harmony",
+      "blockTime": 3000,
+      "blockSize": 1048576,
+      "validatorCount": 21
+    },
+    "security": {
+      "encryptionAlgorithm": "AES-256-GCM",
+      "hashingAlgorithm": "SHA3-256",
+      "signatureScheme": "Ed25519"
+    },
+    "performance": {
+      "maxTps": 10000,
+      "cacheSize": "256MB",
+      "pruningEnabled": true,
+      "compressionEnabled": true
+    }
+  },
+  "integration": {
+    "solanaCompatibility": true,
+    "ethereumBridge": true,
+    "ipfsIntegration": true,
+    "supabaseIntegration": true
+  }
+}
