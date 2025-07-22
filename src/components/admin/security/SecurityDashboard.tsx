@@ -22,10 +22,19 @@ import {
 import { supabase } from '@/integrations/supabase/client'
 import { toast } from 'sonner'
 
+interface SecurityScanResults {
+  rls_policies?: { issues: number; status: string }
+  function_security?: { issues: number; status: string }
+  database_indexes?: { issues: number; status: string }
+  auth_configuration?: { issues: number; status: string }
+  api_endpoints?: { issues: number; status: string }
+  [key: string]: { issues: number; status: string } | undefined
+}
+
 interface SecurityScan {
   id: string
   scan_type: string
-  scan_results: any
+  scan_results: SecurityScanResults
   issues_found: number
   critical_issues: number
   high_issues: number
@@ -37,14 +46,28 @@ interface SecurityScan {
   created_by: string
 }
 
+interface ThreatData {
+  description?: string
+  source?: string
+  indicators?: string[]
+  [key: string]: unknown
+}
+
+interface Geolocation {
+  country?: string
+  city?: string
+  region?: string
+  [key: string]: unknown
+}
+
 interface ThreatIntelligence {
   id: string
   threat_type: string
-  threat_data: any
+  threat_data: ThreatData
   severity_level: string
   ip_address: string
   user_agent: string
-  geolocation: any
+  geolocation: Geolocation
   detected_at: string
   resolved_at: string | null
   status: string
