@@ -60,7 +60,13 @@ export function useUserProfile() {
         if (error && error.code !== 'PGRST116') {
           console.error('Error fetching profile:', error)
         } else if (data) {
-          setProfile(data)
+          // Transform data to match UserProfile interface with missing properties
+          const profileData: UserProfile = {
+            ...data,
+            avatar_url: (data as any).avatar_url || null,
+            last_login: (data as any).last_login || null
+          }
+          setProfile(profileData)
         }
       } catch (error) {
         console.error('Error fetching profile:', error)
