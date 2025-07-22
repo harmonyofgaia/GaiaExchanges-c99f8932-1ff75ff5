@@ -31,7 +31,7 @@ interface ImpactMetrics {
 }
 
 const GreenImpactDashboard = () => {
-  const [impactMetrics, setImpactMetrics] = useState<ImpactMetrics>({
+  const [impactMetrics] = useState<ImpactMetrics>({
     carbonFootprintReduced: 2547.8,
     treesPlanted: 1234,
     wasteRecycled: 876.5,
