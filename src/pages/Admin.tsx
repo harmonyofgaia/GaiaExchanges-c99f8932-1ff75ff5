@@ -13,6 +13,7 @@ import { GitHubIntegrationSuite } from '@/components/system/GitHubIntegrationSui
 import { NotificationController } from '@/components/admin/NotificationController'
 import { PsychohistoricalEngine } from '@/components/admin/PsychohistoricalEngine'
 import { PhoenixGuardian } from '@/components/admin/PhoenixGuardian'
+import { GaiaIATool } from '@/components/admin/GaiaIATool'
 import { Navbar } from '@/components/Navbar'
 
 export default function Admin() {
@@ -29,8 +30,14 @@ export default function Admin() {
         </p>
       </div>
 
-      <Tabs defaultValue="master-control" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-13 gap-1 h-auto p-1 text-xs">
+      <Tabs defaultValue="gaia-ia" className="w-full">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-14 gap-1 h-auto p-1 text-xs">
+          <TabsTrigger value="gaia-ia" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🧠</span>
+              <span className="hidden sm:inline">GAIA IA</span>
+            </div>
+          </TabsTrigger>
           <TabsTrigger value="master-control" className="p-2 text-center">
             <div className="flex flex-col items-center">
               <span>👑</span>
@@ -112,6 +119,10 @@ export default function Admin() {
         </TabsList>
 
         <div className="mt-4">
+          <TabsContent value="gaia-ia" className="mt-0">
+            <GaiaIATool />
+          </TabsContent>
+
           <TabsContent value="master-control" className="mt-0">
             <MasterAdminControlCenter />
           </TabsContent>
