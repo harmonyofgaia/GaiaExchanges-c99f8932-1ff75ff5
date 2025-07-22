@@ -177,7 +177,7 @@ Wildlife and Biodiversity (15%)
 ```
 
 #### Smart Contract Architecture
-```solidity
+```text
 // Pseudocode for reinvestment logic
 contract GreenReinvestmentEngine {
     mapping(address => Project) verifiedProjects;
