@@ -16,7 +16,7 @@ export function useSecureAdmin() {
 
   useEffect(() => {
     const checkAdminStatus = () => {
-      const isFirefoxBrowser = navigator.userAgent.toLowerCase().includes('firefox')
+      // Remove Firefox browser requirement for admin access
       const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
       const isAdminLoggedIn = localStorage.getItem('admin-logged-in') === 'true'
       const adminSessionId = localStorage.getItem('gaia-admin-session-id')
@@ -29,7 +29,7 @@ export function useSecureAdmin() {
       // Verify this is the same admin session
       const isValidSession = adminSessionId && adminIP && currentIP === adminIP
       
-      const adminStatus = isFirefoxBrowser && hasAdminSession && isAdminLoggedIn && isValidSession
+      const adminStatus = hasAdminSession && isAdminLoggedIn && isValidSession
       setIsAdmin(adminStatus)
       setIsValidating(false)
       
@@ -65,39 +65,33 @@ export function useSecureAdmin() {
   }, [])
 
   const grantAdminAccess = () => {
-    const isFirefoxBrowser = navigator.userAgent.toLowerCase().includes('firefox')
+    // Remove Firefox restriction for admin access to work on any browser
+    const currentIP = getClientIP()
+    const sessionId = generateSecureSessionId()
     
-    if (isFirefoxBrowser) {
-      const currentIP = getClientIP()
-      const sessionId = generateSecureSessionId()
-      
-      // Check if another admin is already logged in
-      const existingAdminIP = localStorage.getItem('gaia-admin-ip')
-      if (existingAdminIP && existingAdminIP !== currentIP) {
-        console.error('🚫 GAIA SECURITY: Another admin is already connected')
-        console.error('🛡️ One-admin exclusivity enforced - Access denied')
-        return false
-      }
-      
-      sessionStorage.setItem('admin-session-active', 'true')
-      localStorage.setItem('admin-logged-in', 'true')
-      localStorage.setItem('gaia-admin-session-id', sessionId)
-      localStorage.setItem('gaia-admin-ip', currentIP)
-      localStorage.setItem('gaia-admin-timestamp', new Date().toISOString())
-      
-      setIsAdmin(true)
-      console.log('👑 GAIA ADMIN ACCESS GRANTED - EXCLUSIVE CONTROL ACTIVATED')
-      console.log('🔒 Session secured with IP verification and exclusive access')
-      console.log('🧠 GAIA IA Tool: You now have single point of control')
-      
-      // Initialize all background services
-      initializeGaiaServices()
-      
-      return true
+    // Check if another admin is already logged in
+    const existingAdminIP = localStorage.getItem('gaia-admin-ip')
+    if (existingAdminIP && existingAdminIP !== currentIP) {
+      console.error('🚫 GAIA SECURITY: Another admin is already connected')
+      console.error('🛡️ One-admin exclusivity enforced - Access denied')
+      return false
     }
     
-    console.error('🚫 GAIA SECURITY: Admin access requires Firefox browser')
-    return false
+    sessionStorage.setItem('admin-session-active', 'true')
+    localStorage.setItem('admin-logged-in', 'true')
+    localStorage.setItem('gaia-admin-session-id', sessionId)
+    localStorage.setItem('gaia-admin-ip', currentIP)
+    localStorage.setItem('gaia-admin-timestamp', new Date().toISOString())
+    
+    setIsAdmin(true)
+    console.log('👑 GAIA ADMIN ACCESS GRANTED - EXCLUSIVE CONTROL ACTIVATED')
+    console.log('🔒 Session secured with IP verification and exclusive access')
+    console.log('🧠 GAIA IA Tool: You now have single point of control')
+    
+    // Initialize all background services
+    initializeGaiaServices()
+    
+    return true
   }
 
   const revokeAdminAccess = () => {
@@ -114,9 +108,14 @@ export function useSecureAdmin() {
   }
 
   const getClientIP = (): string => {
-    // In a real implementation, this would get the actual client IP
-    // For demo purposes, we'll generate a consistent identifier
-    return `192.168.1.${Math.floor(Math.random() * 255)}`
+    // For development and demo purposes, use a consistent IP based on session
+    // In production, this would get the actual client IP from the request
+    let devIP = localStorage.getItem('dev-client-ip')
+    if (!devIP) {
+      devIP = `192.168.1.${Math.floor(Math.random() * 255)}`
+      localStorage.setItem('dev-client-ip', devIP)
+    }
+    return devIP
   }
 
   const generateSecureSessionId = (): string => {

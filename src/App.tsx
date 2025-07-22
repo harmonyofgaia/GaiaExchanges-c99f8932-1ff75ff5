@@ -14,6 +14,7 @@ const Dashboard = React.lazy(() => import('./pages/Dashboard'))
 const Exchange = React.lazy(() => import('./pages/Exchange'))
 const GaiasProjects = React.lazy(() => import('./pages/GaiasProjects'))
 const Auth = React.lazy(() => import('./pages/Auth'))
+const AdminLogin = React.lazy(() => import('./pages/AdminLogin'))
 const Admin = React.lazy(() => import('./pages/Admin'))
 const Security = React.lazy(() => import('./pages/Security'))
 const GreenImpactDashboard = React.lazy(() => import('./pages/GreenImpactDashboard'))
@@ -115,6 +116,7 @@ function App() {
                     </ProtectedRoute>
                   } />
                   <Route path="/auth" element={<Auth />} />
+                  <Route path="/admin-login" element={<AdminLogin />} />
                   <Route path="/admin" element={
                     <ProtectedRoute isAdminRoute={true}>
                       <Admin />
