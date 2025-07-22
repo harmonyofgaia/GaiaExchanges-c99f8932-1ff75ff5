@@ -75,3 +75,6 @@ export const navigationItems = [
     variant: "ghost" as const,
   },
 ];
+
+// Default export for compatibility with './nav-items' import pattern
+export default navigationItems;
