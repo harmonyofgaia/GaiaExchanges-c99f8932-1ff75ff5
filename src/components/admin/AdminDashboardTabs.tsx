@@ -21,13 +21,15 @@ import { LiveAnimalNFTManager } from './LiveAnimalNFTManager'
 import { AITaskManagerEngine } from './AITaskManagerEngine'
 import { SearchAllData } from '@/components/search/SearchAllData'
 import { AIDefenseAnimals } from './AIDefenseAnimals'
+import { TokenAssetManager } from './TokenAssetManager'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="search-data" className="w-full">
-      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-17 text-xs">
+      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-18 text-xs">
         <TabsTrigger value="search-data">🔍 Search All</TabsTrigger>
         <TabsTrigger value="ai-defense">🐉 AI Defense</TabsTrigger>
+        <TabsTrigger value="token-manager">🪙 Tokens</TabsTrigger>
         <TabsTrigger value="storage">📁 Storage</TabsTrigger>
         <TabsTrigger value="marketing">🚀 Marketing</TabsTrigger>
         <TabsTrigger value="live-artist">🎭 Live Artist Hub</TabsTrigger>
@@ -51,6 +53,10 @@ export function AdminDashboardTabs() {
 
       <TabsContent value="ai-defense" className="space-y-6">
         <AIDefenseAnimals />
+      </TabsContent>
+
+      <TabsContent value="token-manager" className="space-y-6">
+        <TokenAssetManager />
       </TabsContent>
 
       <TabsContent value="storage" className="space-y-6">

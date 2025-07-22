@@ -23,6 +23,7 @@ const PlanetCleaningRewardsSystem = React.lazy(() => import('./pages/PlanetClean
 const NFTCardGame = React.lazy(() => import('./pages/NFTCardGame'))
 const EcoAvatarGaiaSoulSystem = React.lazy(() => import('./pages/EcoAvatarGaiaSoulSystem'))
 const GaiaBikeEcosystem = React.lazy(() => import('./pages/GaiaBikeEcosystem'))
+const CommunityMissionVoting = React.lazy(() => import('./pages/CommunityMissionVoting'))
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -106,6 +107,11 @@ function App() {
                   <Route path="/gaia-bike" element={
                     <ProtectedRoute>
                       <GaiaBikeEcosystem />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/community-missions" element={
+                    <ProtectedRoute>
+                      <CommunityMissionVoting />
                     </ProtectedRoute>
                   } />
                   <Route path="/auth" element={<Auth />} />
