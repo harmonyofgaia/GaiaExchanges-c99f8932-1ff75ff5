@@ -62,11 +62,58 @@ export class FunctionMonitor {
     ]
 
     for (const functionName of criticalFunctions) {
-      // This would normally query pg_proc to check search_path settings
-      // For now, we'll assume they're properly configured due to our migration
-      console.log(`✅ Function ${functionName} security verified`)
-    }
+      try {
+        // Query pg_proc to check the search_path for the function
+        const { data, error } = await this.supabase
+          .from('pg_proc')
+          .select('proname, proconfig')
+          .eq('proname', functionName)
 
+        if (error) {
+          console.error(`Error querying function ${functionName}:`, error)
+          events.push({
+            type: 'FUNCTION_SECURITY_ERROR',
+            severity: 'high',
+            description: `Failed to verify security for function ${functionName}: ${error.message}`,
+            source: 'FunctionMonitor',
+            timestamp: new Date().toISOString()
+          })
+          continue
+        }
+
+        if (data && data.length > 0) {
+          const functionConfig = data[0].proconfig
+          if (!functionConfig || !functionConfig.includes('search_path')) {
+            events.push({
+              type: 'INSECURE_FUNCTION',
+              severity: 'high',
+              description: `Function ${functionName} does not have a fixed search_path`,
+              source: 'FunctionMonitor',
+              timestamp: new Date().toISOString()
+            })
+          } else {
+            console.log(`✅ Function ${functionName} security verified`)
+          }
+        } else {
+          events.push({
+            type: 'MISSING_FUNCTION',
+           severity: 'medium',
+           description: `Function ${functionName} not found in the database`,
+           source: 'FunctionMonitor',
+           timestamp: new Date().toISOString()
+         })
+       }
+     } catch (error) {
+       console.error(`Error processing function ${functionName}:`, error)
+       events.push({
+         type: 'FUNCTION_SECURITY_ERROR',
+         severity: 'high',
+         description: `Unexpected error while verifying function ${functionName}: ${error.message}`,
+         source: 'FunctionMonitor',
+         timestamp: new Date().toISOString()
+       })
+     }
+   }
     return events
   }
 
