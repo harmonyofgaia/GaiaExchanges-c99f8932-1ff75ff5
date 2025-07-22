@@ -607,9 +607,22 @@ export class AlertManager {
   }
 
   private async getUnacknowledgedAlerts(): Promise<any[]> {
-    // In production, would check for unacknowledged alerts
-    // Mock implementation for now
-    return []
+    try {
+      const { data: alerts, error } = await this.supabase
+        .from('alerts')
+        .select('*')
+        .eq('acknowledged', false);
+
+      if (error) {
+        console.error('Error fetching unacknowledged alerts:', error);
+        return [];
+      }
+
+      return alerts || [];
+    } catch (error) {
+      console.error('Unexpected error fetching unacknowledged alerts:', error);
+      return [];
+    }
   }
 
   private async escalateAlert(alert: any): Promise<any | null> {
