@@ -66,36 +66,38 @@ interface CustomizationItem {
   unlocked: boolean;
 }
 
+const ECO_AVATAR_MOCK: EcoAvatar = {
+  id: 'user-001',
+  name: 'EcoWarrior',
+  level: 15,
+  soulPoints: 2847,
+  experience: 7500,
+  nextLevelExp: 10000,
+  bodyType: 'athletic',
+  skinTone: 'medium',
+  hairStyle: 'flowing',
+  hairColor: 'green',
+  eyeColor: 'emerald',
+  outfit: 'nature-guardian',
+  accessories: ['leaf-crown', 'crystal-pendant'],
+  aura: 'forest-glow',
+  evolutionStage: 'guardian'
+};
+
+const GAIA_SOUL_MOCK: GaiaSoulProfile = {
+  alignment: 'Nature Guardian',
+  consciousness: 85,
+  harmony: 92,
+  wisdom: 78,
+  compassion: 88,
+  environmentalActions: 234,
+  communityContributions: 56,
+  spiritualGrowth: 73
+};
+
 const EcoAvatarGaiaSoulSystem = () => {
-  const [avatar, setAvatar] = useState<EcoAvatar>({
-    id: 'user-001',
-    name: 'EcoWarrior',
-    level: 15,
-    soulPoints: 2847,
-    experience: 7500,
-    nextLevelExp: 10000,
-    bodyType: 'athletic',
-    skinTone: 'medium',
-    hairStyle: 'flowing',
-    hairColor: 'green',
-    eyeColor: 'emerald',
-    outfit: 'nature-guardian',
-    accessories: ['leaf-crown', 'crystal-pendant'],
-    aura: 'forest-glow',
-    evolutionStage: 'guardian'
-  });
-
-  const [gaiaSoul, setGaiaSoul] = useState<GaiaSoulProfile>({
-    alignment: 'Nature Guardian',
-    consciousness: 85,
-    harmony: 92,
-    wisdom: 78,
-    compassion: 88,
-    environmentalActions: 234,
-    communityContributions: 56,
-    spiritualGrowth: 73
-  });
-
+  const [avatar, setAvatar] = useState<EcoAvatar>(ECO_AVATAR_MOCK);
+  const [gaiaSoul, setGaiaSoul] = useState<GaiaSoulProfile>(GAIA_SOUL_MOCK);
   const [customizationItems] = useState<CustomizationItem[]>([
     {
       id: 'eco-warrior-outfit',
