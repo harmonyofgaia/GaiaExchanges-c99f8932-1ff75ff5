@@ -130,26 +130,35 @@ class WeeklyReportGenerator {
   private async generatePerformanceSummary(weekStart: Date, weekEnd: Date) {
     try {
       // Get performance metrics
-      const { data: queryStats } = await this.supabase.rpc(`
-        SELECT 
+      const { data: queryStats, error: queryStatsError } = await this.supabase
+        .from('pg_stat_statements')
+        .select(`
           avg(mean_exec_time) as avg_query_time,
           count(*) filter (where mean_exec_time > 1000) as slow_queries_count
-        FROM pg_stat_statements 
-        WHERE last_exec >= $1 AND last_exec <= $2
-      `, [weekStart.toISOString(), weekEnd.toISOString()]);
+        `)
+        .gte('last_exec', weekStart.toISOString())
+        .lte('last_exec', weekEnd.toISOString());
+      if (queryStatsError) {
+        throw queryStatsError;
+      }
 
       // Get index usage stats
-      const { data: indexStats } = await this.supabase.rpc(`
-        SELECT 
+      const { data: indexStats, error: indexStatsError } = await this.supabase
+        .from('pg_stat_user_tables')
+        .select(`
           avg(idx_scan::float / GREATEST(seq_scan + idx_scan, 1)) * 100 as index_efficiency
-        FROM pg_stat_user_tables 
-        WHERE schemaname = 'public'
-      `);
+        `)
+        .eq('schemaname', 'public');
+      if (indexStatsError) {
+        throw indexStatsError;
+      }
 
       // Get storage growth
-      const { data: storageStats } = await this.supabase.rpc(`
-        SELECT pg_total_relation_size('public') as current_size
-      `);
+      const { data: storageStats, error: storageStatsError } = await this.supabase
+        .rpc('get_storage_size', { schema_name: 'public' });
+      if (storageStatsError) {
+        throw storageStatsError;
+      }
 
       const previousSize = await this.getPreviousStorageSize(weekStart);
       const storageGrowth = storageStats?.[0]?.current_size 
