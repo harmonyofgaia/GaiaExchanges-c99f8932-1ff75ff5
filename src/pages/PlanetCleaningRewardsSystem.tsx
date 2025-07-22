@@ -187,7 +187,20 @@ const PlanetCleaningRewardsSystem = () => {
   };
 
   const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(event.target.files || []);
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    const maxFileSize = 5 * 1024 * 1024; // 5 MB
+
+    const files = Array.from(event.target.files || []).filter(file => {
+      if (!allowedTypes.includes(file.type)) {
+        alert(`File type not allowed: ${file.name}`);
+        return false;
+      }
+      if (file.size > maxFileSize) {
+        alert(`File is too large (max 5 MB): ${file.name}`);
+        return false;
+      }
+      return true;
+    });
     setNewActivity(prev => ({ ...prev, photos: [...prev.photos, ...files] }));
   };
 
