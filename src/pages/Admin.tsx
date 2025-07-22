@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { UltimateAdminSuite } from '@/components/admin/UltimateAdminSuite'
+import { MasterAdminControlCenter } from '@/components/admin/MasterAdminControlCenter'
 import { DragonAIDefense } from '@/components/admin/DragonAIDefense'
 import { KoalaAIEngine } from '@/components/admin/KoalaAIEngine'
 import { UltimateIntelligenceHub } from '@/components/admin/UltimateIntelligenceHub'
@@ -25,8 +26,14 @@ export default function Admin() {
         </p>
       </div>
 
-      <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-12 gap-1 h-auto p-1 text-xs">
+      <Tabs defaultValue="master-control" className="w-full">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-13 gap-1 h-auto p-1 text-xs">
+          <TabsTrigger value="master-control" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>👑</span>
+              <span className="hidden sm:inline">Master Control</span>
+            </div>
+          </TabsTrigger>
           <TabsTrigger value="overview" className="p-2 text-center">
             <div className="flex flex-col items-center">
               <span>🏠</span>
@@ -102,6 +109,10 @@ export default function Admin() {
         </TabsList>
 
         <div className="mt-4">
+          <TabsContent value="master-control" className="mt-0">
+            <MasterAdminControlCenter />
+          </TabsContent>
+
           <TabsContent value="overview" className="mt-0">
             <UltimateAdminSuite />
           </TabsContent>

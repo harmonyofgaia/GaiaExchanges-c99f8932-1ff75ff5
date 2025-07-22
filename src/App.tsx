@@ -8,6 +8,7 @@ import SlidingMenu from '@/components/SlidingMenu'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AuthProvider } from '@/components/auth/AuthProvider'
 import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'
+import { PersistentMusicPlayer } from '@/components/music/PersistentMusicPlayer'
 import { MasterSystemOrchestrator } from '@/components/system/MasterSystemOrchestrator'
 
 // Pages - Keep all existing pages
@@ -65,6 +66,9 @@ function App() {
               
               {/* Background Media Engine */}
               <BackgroundMediaEngine />
+              
+              {/* Persistent Music Player */}
+              <PersistentMusicPlayer />
               
               {/* Sliding Menu */}
               <SlidingMenu />
