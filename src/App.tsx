@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/components/auth/AuthProvider"
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute"
+import { useGlobalBackgroundServices } from "@/hooks/useGlobalBackgroundServices"
+import { InvisibleEcoIndicator } from "@/components/eco/InvisibleEcoIndicator"
 
 // Lazy load all page components for better performance
 const Index = React.lazy(() => import('./pages/Index'))
@@ -33,12 +35,23 @@ const LoadingFallback = () => (
 
 const queryClient = new QueryClient()
 
+// Global background services component
+function GlobalBackgroundServices() {
+  const backgroundState = useGlobalBackgroundServices()
+  
+  // This component runs all background services invisibly
+  // It has no UI impact - all upgrades are completely invisible to users
+  return null
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <TooltipProvider>
           <Toaster />
+          <GlobalBackgroundServices />
+          <InvisibleEcoIndicator />
           <div className="min-h-screen bg-background">
             <Router>
               <Suspense fallback={<LoadingFallback />}>
