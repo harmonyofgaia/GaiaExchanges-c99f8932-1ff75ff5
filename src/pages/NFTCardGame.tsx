@@ -196,7 +196,7 @@ const NFTCardGame = () => {
     }
   ]);
 
-  const getElementIcon = (element: string) => {
+  const getElementIcon = (element: string): React.ComponentType => {
     switch (element) {
       case 'earth': return TreePine;
       case 'water': return Droplets;
