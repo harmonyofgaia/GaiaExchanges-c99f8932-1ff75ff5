@@ -325,7 +325,7 @@ export function EnvironmentalImpactGamification() {
                   <div className="text-lg font-bold text-green-400">+{communityChallenge.participantReward} GAiA</div>
                   <div className="text-sm text-green-200">Participation Reward</div>
                 </div>
-                <div className="text-center p-3 bg-gold-900/20 rounded-lg border border-yellow-500/30">
+                <div className="text-center p-3 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
                   <div className="text-lg font-bold text-yellow-400">+{communityChallenge.globalReward} GAiA</div>
                   <div className="text-sm text-yellow-200">Completion Bonus</div>
                 </div>
