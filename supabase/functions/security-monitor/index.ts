@@ -285,14 +285,14 @@ class SecurityMonitor {
       const { data: usersWithoutMFA } = await this.supabase
         .from('auth.users')
         .select('id')
-        .is('phone', null)
+        .or('phone.is.null,authenticator_app.is.null,email.is.null')
         .limit(1);
 
       if (usersWithoutMFA && usersWithoutMFA.length > 0) {
         issues.push({
           table_name: 'auth',
           issue_type: 'weak_mfa_enforcement',
-          issue_description: 'Users exist without MFA setup',
+          issue_description: 'Users exist without any form of MFA setup (e.g., phone, authenticator app, email)',
           severity: 'medium',
           auto_fixable: false
         });
