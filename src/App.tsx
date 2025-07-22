@@ -1,132 +1,49 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Toaster } from 'sonner'
-import './App.css'
-
-import { Navbar } from '@/components/Navbar'
-import SlidingMenu from '@/components/SlidingMenu'
-import { SidebarProvider } from '@/components/ui/sidebar'
-import { AuthProvider } from '@/components/auth/AuthProvider'
-import { BackgroundMediaEngine } from '@/components/media/BackgroundMediaEngine'
-import { PersistentMusicPlayer } from '@/components/music/PersistentMusicPlayer'
-import { MasterSystemOrchestrator } from '@/components/system/MasterSystemOrchestrator'
-
-// Pages - Keep all existing pages
-import Index from '@/pages/Index'
-import Exchange from '@/pages/Exchange'
-import Gaming from '@/pages/Gaming'
-import Analytics from '@/pages/Analytics'
-import Swap from '@/pages/Swap'
-import Security from '@/pages/Security'
-import AdminLogin from '@/pages/AdminLogin'
-import SecureAdmin from '@/pages/SecureAdmin'
-import SecureVault from '@/pages/SecureVault'
-import GaiasProjects from '@/pages/GaiasProjects'
-import TransparentWallet from '@/pages/TransparentWallet'
-import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
-import LandscapeBuilder from '@/pages/LandscapeBuilder'
-import GaiaFighterGame from '@/pages/GaiaFighterGame'
-import Transparency from '@/pages/Transparency'
-import ArtistStreaming from '@/pages/ArtistStreaming'
-import VideoUpload from '@/pages/VideoUpload'
-import TaskReverser from '@/pages/TaskReverser'
-
-// Game Pages
-import GaiaFantasyMMORPG from '@/pages/games/GaiaFantasyMMORPG'
-import SnakeArenaGame from '@/pages/games/SnakeArenaGame'
-import Game from '@/pages/Game'
-
-// Advanced pages
-import NFTGreenAnimalPlatform from '@/pages/NFTGreenAnimalPlatform'
-import AuraLandScrapyard from '@/pages/AuraLandScrapyard'
-import CoinCrafter from '@/pages/CoinCrafter'
-import VirtualWorld from '@/pages/VirtualWorld'
-import SystemStatus from '@/pages/SystemStatus'
-import ComprehensiveStatus from '@/pages/ComprehensiveStatus'
-import About from '@/pages/About'
-import Contact from '@/pages/Contact'
-import Pricing from '@/pages/Pricing'
-
-// New Admin and Marketplace Pages
-import AdminCraftedTools from '@/pages/AdminCraftedTools'
-import Marketplace from '@/pages/Marketplace'
-import GaiaBikeEcosystem from '@/pages/GaiaBikeEcosystem'
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { Toaster } from "@/components/ui/toaster"
+import Index from './pages/Index'
+import Dashboard from './pages/Dashboard'
+import Exchange from './pages/Exchange'
+import GaiasProjects from './pages/GaiasProjects'
+import Auth from './pages/Auth'
+import Admin from './pages/Admin'
+import Security from './pages/Security'
+import GreenImpactDashboard from './pages/GreenImpactDashboard'
+import DecentralizedProjectFundingPools from './pages/DecentralizedProjectFundingPools'
+import EcoMissionGenerator from './pages/EcoMissionGenerator'
+import PlanetCleaningRewardsSystem from './pages/PlanetCleaningRewardsSystem'
+import NFTCardGame from './pages/NFTCardGame'
+import EcoAvatarGaiaSoulSystem from './pages/EcoAvatarGaiaSoulSystem'
 
 const queryClient = new QueryClient()
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Router>
-          <SidebarProvider>
-            <div className="min-h-screen bg-background text-foreground">
-              {/* Master System Orchestrator - Ensures all systems keep growing */}
-              <MasterSystemOrchestrator />
-              
-              {/* Background Media Engine */}
-              <BackgroundMediaEngine />
-              
-              {/* Persistent Music Player */}
-              <PersistentMusicPlayer />
-              
-              {/* Sliding Menu */}
-              <SlidingMenu />
-              
-              {/* Main Content Area */}
-              <div className="flex flex-col min-h-screen">
-                <Navbar />
-                <main className="flex-1 container mx-auto px-4 py-6">
-                  <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/exchange" element={<Exchange />} />
-                    <Route path="/gaming" element={<Gaming />} />
-                    <Route path="/marketplace" element={<Marketplace />} />
-                    <Route path="/analytics" element={<Analytics />} />
-                    <Route path="/swap" element={<Swap />} />
-                    <Route path="/security" element={<Security />} />
-                    <Route path="/admin" element={<AdminLogin />} />
-                    <Route path="/secure-admin" element={<SecureAdmin />} />
-                    <Route path="/secure-vault" element={<SecureVault />} />
-                    <Route path="/gaias-projects" element={<GaiasProjects />} />
-                    <Route path="/transparent-wallet" element={<TransparentWallet />} />
-                    <Route path="/transparency" element={<Transparency />} />
-                    <Route path="/coin-crafter" element={<GaiaCoinCrafter />} />
-                    <Route path="/landscape-builder" element={<LandscapeBuilder />} />
-                    <Route path="/gaia-fighter" element={<GaiaFighterGame />} />
-                    <Route path="/gaia-fighter-game" element={<GaiaFighterGame />} />
-                    
-                    {/* New Feature Routes */}
-                    <Route path="/artist-streaming" element={<ArtistStreaming />} />
-                    <Route path="/video-upload" element={<VideoUpload />} />
-                    <Route path="/task-reverser" element={<TaskReverser />} />
-                    
-                    {/* New Game Pages */}
-                    <Route path="/game/gaia-fantasy-mmorpg" element={<GaiaFantasyMMORPG />} />
-                    <Route path="/game/snake-arena" element={<SnakeArenaGame />} />
-                    <Route path="/game" element={<Game />} />
-                    
-                    {/* Advanced feature routes */}
-                    <Route path="/nft-green-animals" element={<NFTGreenAnimalPlatform />} />
-                    <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
-                    <Route path="/virtual-world" element={<VirtualWorld />} />
-                    <Route path="/system-status" element={<SystemStatus />} />
-                    <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/pricing" element={<Pricing />} />
-                    
-                    {/* Admin Tools */}
-                    <Route path="/admin-crafted-tools" element={<AdminCraftedTools />} />
-                    <Route path="/gaia-bike-ecosystem" element={<GaiaBikeEcosystem />} />
-                  </Routes>
-                </main>
-              </div>
-            </div>
-            <Toaster position="top-right" />
-          </SidebarProvider>
-        </Router>
-      </AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <div className="min-h-screen bg-background">
+          <Router>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/exchange" element={<Exchange />} />
+              <Route path="/gaias-projects" element={<GaiasProjects />} />
+              <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
+              <Route path="/project-funding" element={<DecentralizedProjectFundingPools />} />
+              <Route path="/eco-missions" element={<EcoMissionGenerator />} />
+              <Route path="/planet-cleaning" element={<PlanetCleaningRewardsSystem />} />
+              <Route path="/nft-cards" element={<NFTCardGame />} />
+              <Route path="/eco-avatar" element={<EcoAvatarGaiaSoulSystem />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/security" element={<Security />} />
+            </Routes>
+          </Router>
+        </div>
+      </TooltipProvider>
     </QueryClientProvider>
   )
 }

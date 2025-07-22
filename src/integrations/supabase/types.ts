@@ -14,6 +14,41 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_activity_logs: {
+        Row: {
+          action: string
+          created_at: string | null
+          details: Json | null
+          id: number
+          ip_address: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string | null
+          details?: Json | null
+          id?: never
+          ip_address?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string | null
+          details?: Json | null
+          id?: never
+          ip_address?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_activity_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       admin_audit_logs: {
         Row: {
           action: string
@@ -39,7 +74,15 @@ export type Database = {
           id?: never
           ip_address?: unknown | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "admin_audit_logs_admin_id_fkey"
+            columns: ["admin_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       admin_media_library: {
         Row: {
@@ -96,7 +139,15 @@ export type Database = {
           updated_at?: string
           uploaded_by?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "admin_media_library_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       admin_metrics: {
         Row: {
@@ -124,6 +175,41 @@ export type Database = {
           metric_value?: number
         }
         Relationships: []
+      }
+      admin_profiles: {
+        Row: {
+          created_at: string | null
+          id: string
+          permissions: string[] | null
+          role: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          permissions?: string[] | null
+          role?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          permissions?: string[] | null
+          role?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_profiles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       admin_role_permissions: {
         Row: {
@@ -165,7 +251,15 @@ export type Database = {
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "admin_roles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       admin_sessions: {
         Row: {
@@ -213,7 +307,15 @@ export type Database = {
           is_active?: boolean | null
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "admin_users_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       admin_vault_access: {
         Row: {
@@ -251,6 +353,76 @@ export type Database = {
           step_2_verified?: boolean | null
           step_3_verified?: boolean | null
           step_4_verified?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_vault_access_admin_user_id_fkey"
+            columns: ["admin_user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      audit_logs: {
+        Row: {
+          action_type: string
+          changed_fields: string[] | null
+          client_ip: unknown | null
+          created_at: string | null
+          id: number
+          new_values: Json | null
+          old_values: Json | null
+          record_id: number | null
+          table_name: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action_type: string
+          changed_fields?: string[] | null
+          client_ip?: unknown | null
+          created_at?: string | null
+          id?: never
+          new_values?: Json | null
+          old_values?: Json | null
+          record_id?: number | null
+          table_name: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action_type?: string
+          changed_fields?: string[] | null
+          client_ip?: unknown | null
+          created_at?: string | null
+          id?: never
+          new_values?: Json | null
+          old_values?: Json | null
+          record_id?: number | null
+          table_name?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      bad_example: {
+        Row: {
+          logged_at: string | null
+        }
+        Insert: {
+          logged_at?: string | null
+        }
+        Update: {
+          logged_at?: string | null
         }
         Relationships: []
       }
@@ -291,7 +463,15 @@ export type Database = {
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "bike_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       configuration_management: {
         Row: {
@@ -362,6 +542,59 @@ export type Database = {
         }
         Relationships: []
       }
+      eco_missions: {
+        Row: {
+          carbon_impact: number | null
+          completed_at: string | null
+          completion_data: Json | null
+          created_at: string | null
+          description: string
+          difficulty_level: number | null
+          id: string
+          mission_type: string
+          status: string | null
+          title: string
+          tokens_reward: number | null
+          user_id: string | null
+        }
+        Insert: {
+          carbon_impact?: number | null
+          completed_at?: string | null
+          completion_data?: Json | null
+          created_at?: string | null
+          description: string
+          difficulty_level?: number | null
+          id?: string
+          mission_type: string
+          status?: string | null
+          title: string
+          tokens_reward?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          carbon_impact?: number | null
+          completed_at?: string | null
+          completion_data?: Json | null
+          created_at?: string | null
+          description?: string
+          difficulty_level?: number | null
+          id?: string
+          mission_type?: string
+          status?: string | null
+          title?: string
+          tokens_reward?: number | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "eco_missions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       environmental_impact: {
         Row: {
           action_type: string
@@ -396,6 +629,41 @@ export type Database = {
           trees_planted?: number | null
           user_id?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "environmental_impact_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      error_log: {
+        Row: {
+          error_context: string | null
+          error_message: string | null
+          error_type: string | null
+          id: number
+          occurred_at: string | null
+          resolved: boolean | null
+        }
+        Insert: {
+          error_context?: string | null
+          error_message?: string | null
+          error_type?: string | null
+          id?: never
+          occurred_at?: string | null
+          resolved?: boolean | null
+        }
+        Update: {
+          error_context?: string | null
+          error_message?: string | null
+          error_type?: string | null
+          id?: never
+          occurred_at?: string | null
+          resolved?: boolean | null
+        }
         Relationships: []
       }
       error_logs: {
@@ -425,6 +693,86 @@ export type Database = {
           id?: never
           is_critical?: boolean | null
           user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "error_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      error_notification_secrets: {
+        Row: {
+          created_at: string | null
+          service_name: string
+          updated_at: string | null
+          user_id: string | null
+          webhook_url: string
+        }
+        Insert: {
+          created_at?: string | null
+          service_name: string
+          updated_at?: string | null
+          user_id?: string | null
+          webhook_url: string
+        }
+        Update: {
+          created_at?: string | null
+          service_name?: string
+          updated_at?: string | null
+          user_id?: string | null
+          webhook_url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "error_notification_secrets_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "fk_user_id"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      error_tracking: {
+        Row: {
+          error_context: Json | null
+          error_message: string
+          error_type: string
+          id: string
+          occurred_at: string | null
+          resolved: boolean | null
+          severity_level: string | null
+          stack_trace: string | null
+        }
+        Insert: {
+          error_context?: Json | null
+          error_message: string
+          error_type: string
+          id?: string
+          occurred_at?: string | null
+          resolved?: boolean | null
+          severity_level?: string | null
+          stack_trace?: string | null
+        }
+        Update: {
+          error_context?: Json | null
+          error_message?: string
+          error_type?: string
+          id?: string
+          occurred_at?: string | null
+          resolved?: boolean | null
+          severity_level?: string | null
+          stack_trace?: string | null
         }
         Relationships: []
       }
@@ -462,7 +810,15 @@ export type Database = {
           is_enabled?: boolean | null
           updated_at?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "feature_toggles_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       fee_destinations: {
         Row: {
@@ -539,6 +895,13 @@ export type Database = {
             referencedRelation: "fee_destinations"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "fee_transactions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
         ]
       }
       fee_vault: {
@@ -608,7 +971,15 @@ export type Database = {
           updated_at?: string
           verified?: boolean | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "food_places_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       gaia_earning_activities: {
         Row: {
@@ -647,7 +1018,15 @@ export type Database = {
           tokens_earned?: number
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "gaia_earning_activities_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       generated_artwork: {
         Row: {
@@ -700,6 +1079,62 @@ export type Database = {
         }
         Relationships: []
       }
+      green_projects: {
+        Row: {
+          biodiversity_score: number | null
+          carbon_impact_target: number | null
+          category: string
+          created_at: string | null
+          created_by: string | null
+          description: string
+          funding_goal: number
+          funding_raised: number
+          id: string
+          project_data: Json | null
+          title: string
+          updated_at: string | null
+          verification_status: string | null
+        }
+        Insert: {
+          biodiversity_score?: number | null
+          carbon_impact_target?: number | null
+          category: string
+          created_at?: string | null
+          created_by?: string | null
+          description: string
+          funding_goal?: number
+          funding_raised?: number
+          id?: string
+          project_data?: Json | null
+          title: string
+          updated_at?: string | null
+          verification_status?: string | null
+        }
+        Update: {
+          biodiversity_score?: number | null
+          carbon_impact_target?: number | null
+          category?: string
+          created_at?: string | null
+          created_by?: string | null
+          description?: string
+          funding_goal?: number
+          funding_raised?: number
+          id?: string
+          project_data?: Json | null
+          title?: string
+          updated_at?: string | null
+          verification_status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "green_projects_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       high_severity_alerts: {
         Row: {
           created_at: string | null
@@ -733,6 +1168,53 @@ export type Database = {
         }
         Relationships: []
       }
+      nft_card_collection: {
+        Row: {
+          biodiversity_category: string | null
+          card_metadata: Json | null
+          card_name: string
+          card_type: string
+          id: string
+          is_tradeable: boolean | null
+          minted_at: string | null
+          power_level: number | null
+          rarity: string
+          user_id: string | null
+        }
+        Insert: {
+          biodiversity_category?: string | null
+          card_metadata?: Json | null
+          card_name: string
+          card_type: string
+          id?: string
+          is_tradeable?: boolean | null
+          minted_at?: string | null
+          power_level?: number | null
+          rarity: string
+          user_id?: string | null
+        }
+        Update: {
+          biodiversity_category?: string | null
+          card_metadata?: Json | null
+          card_name?: string
+          card_type?: string
+          id?: string
+          is_tradeable?: boolean | null
+          minted_at?: string | null
+          power_level?: number | null
+          rarity?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nft_card_collection_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       notifications: {
         Row: {
           action_url: string | null
@@ -763,6 +1245,35 @@ export type Database = {
           title?: string
           type?: string | null
           user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      order: {
+        Row: {
+          id: number
+          status: string | null
+          timestamp: string | null
+          user: string | null
+        }
+        Insert: {
+          id?: never
+          status?: string | null
+          timestamp?: string | null
+          user?: string | null
+        }
+        Update: {
+          id?: never
+          status?: string | null
+          timestamp?: string | null
+          user?: string | null
         }
         Relationships: []
       }
@@ -855,38 +1366,392 @@ export type Database = {
             referencedRelation: "trading_pairs"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "orders_trading_pair_id_fkey"
+            columns: ["trading_pair_id"]
+            isOneToOne: false
+            referencedRelation: "v_active_trading_pairs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_trading_pair_id_fkey"
+            columns: ["trading_pair_id"]
+            isOneToOne: false
+            referencedRelation: "v_trading_pairs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      planet_cleaning_rewards: {
+        Row: {
+          activity_type: string
+          created_at: string | null
+          environmental_impact: Json | null
+          id: string
+          location_data: Json | null
+          tokens_earned: number | null
+          user_id: string | null
+          verification_method: string
+          verified_at: string | null
+        }
+        Insert: {
+          activity_type: string
+          created_at?: string | null
+          environmental_impact?: Json | null
+          id?: string
+          location_data?: Json | null
+          tokens_earned?: number | null
+          user_id?: string | null
+          verification_method: string
+          verified_at?: string | null
+        }
+        Update: {
+          activity_type?: string
+          created_at?: string | null
+          environmental_impact?: Json | null
+          id?: string
+          location_data?: Json | null
+          tokens_earned?: number | null
+          user_id?: string | null
+          verification_method?: string
+          verified_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "planet_cleaning_rewards_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
         ]
       }
       profiles: {
         Row: {
-          avatar_url: string | null
           created_at: string | null
           email: string
           full_name: string | null
           id: string
-          last_login: string | null
-          role: string | null
+          role: string
           updated_at: string | null
         }
         Insert: {
-          avatar_url?: string | null
           created_at?: string | null
           email: string
           full_name?: string | null
-          id?: string
-          last_login?: string | null
-          role?: string | null
+          id: string
+          role?: string
           updated_at?: string | null
         }
         Update: {
-          avatar_url?: string | null
           created_at?: string | null
           email?: string
           full_name?: string | null
           id?: string
-          last_login?: string | null
-          role?: string | null
+          role?: string
           updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      quantum_conversation_participants: {
+        Row: {
+          can_invite: boolean | null
+          can_moderate: boolean | null
+          conversation_id: string | null
+          id: string
+          is_active: boolean | null
+          joined_at: string | null
+          last_read_at: string | null
+          participation_score: number | null
+          role: string | null
+          sustainability_points: number | null
+          user_id: string | null
+        }
+        Insert: {
+          can_invite?: boolean | null
+          can_moderate?: boolean | null
+          conversation_id?: string | null
+          id?: string
+          is_active?: boolean | null
+          joined_at?: string | null
+          last_read_at?: string | null
+          participation_score?: number | null
+          role?: string | null
+          sustainability_points?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          can_invite?: boolean | null
+          can_moderate?: boolean | null
+          conversation_id?: string | null
+          id?: string
+          is_active?: boolean | null
+          joined_at?: string | null
+          last_read_at?: string | null
+          participation_score?: number | null
+          role?: string | null
+          sustainability_points?: number | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quantum_conversation_participants_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "quantum_conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quantum_conversation_participants_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      quantum_conversations: {
+        Row: {
+          blockchain_verified: boolean | null
+          carbon_offset_score: number | null
+          created_at: string | null
+          created_by: string | null
+          id: string
+          is_archived: boolean | null
+          is_muted: boolean | null
+          last_message_at: string | null
+          metadata: Json | null
+          privacy_rating: number | null
+          renewable_energy_contribution: number | null
+          title: string | null
+          tree_credits: number | null
+          type: string
+        }
+        Insert: {
+          blockchain_verified?: boolean | null
+          carbon_offset_score?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          is_archived?: boolean | null
+          is_muted?: boolean | null
+          last_message_at?: string | null
+          metadata?: Json | null
+          privacy_rating?: number | null
+          renewable_energy_contribution?: number | null
+          title?: string | null
+          tree_credits?: number | null
+          type?: string
+        }
+        Update: {
+          blockchain_verified?: boolean | null
+          carbon_offset_score?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          is_archived?: boolean | null
+          is_muted?: boolean | null
+          last_message_at?: string | null
+          metadata?: Json | null
+          privacy_rating?: number | null
+          renewable_energy_contribution?: number | null
+          title?: string | null
+          tree_credits?: number | null
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quantum_conversations_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      quantum_messages: {
+        Row: {
+          ai_sentiment_score: number | null
+          ai_toxicity_score: number | null
+          ai_translation_available: boolean | null
+          blockchain_hash: string | null
+          carbon_footprint: number | null
+          content: string
+          content_type: string | null
+          conversation_id: string | null
+          created_at: string | null
+          id: string
+          impact_score: number | null
+          is_blockchain_verified: boolean | null
+          is_deleted: boolean | null
+          is_edited: boolean | null
+          likes_count: number | null
+          metadata: Json | null
+          renewable_energy_used: number | null
+          reply_to_message_id: string | null
+          sender_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          ai_sentiment_score?: number | null
+          ai_toxicity_score?: number | null
+          ai_translation_available?: boolean | null
+          blockchain_hash?: string | null
+          carbon_footprint?: number | null
+          content: string
+          content_type?: string | null
+          conversation_id?: string | null
+          created_at?: string | null
+          id?: string
+          impact_score?: number | null
+          is_blockchain_verified?: boolean | null
+          is_deleted?: boolean | null
+          is_edited?: boolean | null
+          likes_count?: number | null
+          metadata?: Json | null
+          renewable_energy_used?: number | null
+          reply_to_message_id?: string | null
+          sender_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          ai_sentiment_score?: number | null
+          ai_toxicity_score?: number | null
+          ai_translation_available?: boolean | null
+          blockchain_hash?: string | null
+          carbon_footprint?: number | null
+          content?: string
+          content_type?: string | null
+          conversation_id?: string | null
+          created_at?: string | null
+          id?: string
+          impact_score?: number | null
+          is_blockchain_verified?: boolean | null
+          is_deleted?: boolean | null
+          is_edited?: boolean | null
+          likes_count?: number | null
+          metadata?: Json | null
+          renewable_energy_used?: number | null
+          reply_to_message_id?: string | null
+          sender_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quantum_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "quantum_conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quantum_messages_reply_to_message_id_fkey"
+            columns: ["reply_to_message_id"]
+            isOneToOne: false
+            referencedRelation: "quantum_messages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quantum_messages_sender_id_fkey"
+            columns: ["sender_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      robust_data: {
+        Row: {
+          access_level: number | null
+          created_at: string | null
+          data: Json
+          id: number
+          is_active: boolean | null
+          owner_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          access_level?: number | null
+          created_at?: string | null
+          data: Json
+          id?: never
+          is_active?: boolean | null
+          owner_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          access_level?: number | null
+          created_at?: string | null
+          data?: Json
+          id?: never
+          is_active?: boolean | null
+          owner_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "robust_data_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      search_path_security_log: {
+        Row: {
+          check_timestamp: string | null
+          id: number
+          log_error_details: Json | null
+          log_function_name: string
+          log_language: string
+          log_original_definition: string
+          log_remediation_action: string | null
+          log_remediation_status: string | null
+          log_schema_name: string
+          log_security_type: string
+          log_warning_level: string
+        }
+        Insert: {
+          check_timestamp?: string | null
+          id?: never
+          log_error_details?: Json | null
+          log_function_name: string
+          log_language: string
+          log_original_definition: string
+          log_remediation_action?: string | null
+          log_remediation_status?: string | null
+          log_schema_name: string
+          log_security_type: string
+          log_warning_level: string
+        }
+        Update: {
+          check_timestamp?: string | null
+          id?: never
+          log_error_details?: Json | null
+          log_function_name?: string
+          log_language?: string
+          log_original_definition?: string
+          log_remediation_action?: string | null
+          log_remediation_status?: string | null
+          log_schema_name?: string
+          log_security_type?: string
+          log_warning_level?: string
         }
         Relationships: []
       }
@@ -917,6 +1782,33 @@ export type Database = {
           resolved_at?: string | null
           severity?: number
           status?: string | null
+        }
+        Relationships: []
+      }
+      security_event_log: {
+        Row: {
+          created_at: string | null
+          error_context: string | null
+          event_details: Json | null
+          event_type: string
+          id: number
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          error_context?: string | null
+          event_details?: Json | null
+          event_type: string
+          id?: never
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          error_context?: string | null
+          event_details?: Json | null
+          event_type?: string
+          id?: never
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -953,6 +1845,33 @@ export type Database = {
         }
         Relationships: []
       }
+      security_function_audit: {
+        Row: {
+          audit_timestamp: string | null
+          details: Json | null
+          function_name: string
+          id: number
+          risk_level: string | null
+          schema_name: string
+        }
+        Insert: {
+          audit_timestamp?: string | null
+          details?: Json | null
+          function_name: string
+          id?: never
+          risk_level?: string | null
+          schema_name: string
+        }
+        Update: {
+          audit_timestamp?: string | null
+          details?: Json | null
+          function_name?: string
+          id?: never
+          risk_level?: string | null
+          schema_name?: string
+        }
+        Relationships: []
+      }
       security_log: {
         Row: {
           additional_details: Json | null
@@ -981,7 +1900,15 @@ export type Database = {
           user_agent?: string | null
           user_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "security_log_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       security_logs: {
         Row: {
@@ -1021,6 +1948,132 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
+      }
+      security_remediation_logs: {
+        Row: {
+          created_at: string | null
+          error_message: string | null
+          id: string
+          issue_type: string
+          remediation_action: string
+          scan_id: string | null
+          success: boolean | null
+        }
+        Insert: {
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          issue_type: string
+          remediation_action: string
+          scan_id?: string | null
+          success?: boolean | null
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          issue_type?: string
+          remediation_action?: string
+          scan_id?: string | null
+          success?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "security_remediation_logs_scan_id_fkey"
+            columns: ["scan_id"]
+            isOneToOne: false
+            referencedRelation: "security_scans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      security_risk_assessments: {
+        Row: {
+          anomalies: string[] | null
+          assessment_details: Json | null
+          created_at: string | null
+          id: number
+          risk_score: number
+          user_id: string | null
+        }
+        Insert: {
+          anomalies?: string[] | null
+          assessment_details?: Json | null
+          created_at?: string | null
+          id?: never
+          risk_score: number
+          user_id?: string | null
+        }
+        Update: {
+          anomalies?: string[] | null
+          assessment_details?: Json | null
+          created_at?: string | null
+          id?: never
+          risk_score?: number
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "security_risk_assessments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      security_scans: {
+        Row: {
+          compliance_score: number | null
+          created_at: string | null
+          created_by: string | null
+          critical_issues: number | null
+          high_issues: number | null
+          id: string
+          issues_found: number | null
+          low_issues: number | null
+          medium_issues: number | null
+          scan_duration_ms: number | null
+          scan_results: Json
+          scan_type: string
+        }
+        Insert: {
+          compliance_score?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          critical_issues?: number | null
+          high_issues?: number | null
+          id?: string
+          issues_found?: number | null
+          low_issues?: number | null
+          medium_issues?: number | null
+          scan_duration_ms?: number | null
+          scan_results?: Json
+          scan_type: string
+        }
+        Update: {
+          compliance_score?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          critical_issues?: number | null
+          high_issues?: number | null
+          id?: string
+          issues_found?: number | null
+          low_issues?: number | null
+          medium_issues?: number | null
+          scan_duration_ms?: number | null
+          scan_results?: Json
+          scan_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "security_scans_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       staking_pools: {
         Row: {
@@ -1089,6 +2142,41 @@ export type Database = {
           user_id?: string
           zero_fee_enabled?: boolean | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "swap_configurations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      system_health_log: {
+        Row: {
+          detected_at: string | null
+          id: number
+          issue_description: string | null
+          issue_type: string
+          resolved: boolean | null
+          severity: number
+        }
+        Insert: {
+          detected_at?: string | null
+          id?: never
+          issue_description?: string | null
+          issue_type: string
+          resolved?: boolean | null
+          severity: number
+        }
+        Update: {
+          detected_at?: string | null
+          id?: never
+          issue_description?: string | null
+          issue_type?: string
+          resolved?: boolean | null
+          severity?: number
+        }
         Relationships: []
       }
       table_dependencies: {
@@ -1130,6 +2218,45 @@ export type Database = {
           source_table_name?: string
           target_table_name?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      threat_intelligence: {
+        Row: {
+          detected_at: string | null
+          geolocation: Json | null
+          id: string
+          ip_address: unknown | null
+          resolved_at: string | null
+          severity_level: string
+          status: string | null
+          threat_data: Json
+          threat_type: string
+          user_agent: string | null
+        }
+        Insert: {
+          detected_at?: string | null
+          geolocation?: Json | null
+          id?: string
+          ip_address?: unknown | null
+          resolved_at?: string | null
+          severity_level?: string
+          status?: string | null
+          threat_data?: Json
+          threat_type: string
+          user_agent?: string | null
+        }
+        Update: {
+          detected_at?: string | null
+          geolocation?: Json | null
+          id?: string
+          ip_address?: unknown | null
+          resolved_at?: string | null
+          severity_level?: string
+          status?: string | null
+          threat_data?: Json
+          threat_type?: string
+          user_agent?: string | null
         }
         Relationships: []
       }
@@ -1250,7 +2377,32 @@ export type Database = {
             referencedRelation: "transaction_types"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "transactions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
         ]
+      }
+      user_logs: {
+        Row: {
+          created_at: string | null
+          id: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: never
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: never
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {
@@ -1274,7 +2426,22 @@ export type Database = {
           role?: Database["public"]["Enums"]["user_role"]
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "user_roles_granted_by_fkey"
+            columns: ["granted_by"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "user_roles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       user_stakes: {
         Row: {
@@ -1315,6 +2482,51 @@ export type Database = {
             referencedRelation: "staking_pools"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "user_stakes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          is_active: boolean | null
+          last_login: string | null
+          role: string | null
+          username: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id: string
+          is_active?: boolean | null
+          last_login?: string | null
+          role?: string | null
+          username: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          is_active?: boolean | null
+          last_login?: string | null
+          role?: string | null
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "users_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
         ]
       }
       video_likes: {
@@ -1337,6 +2549,13 @@ export type Database = {
           video_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "video_likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
           {
             foreignKeyName: "video_likes_video_id_fkey"
             columns: ["video_id"]
@@ -1419,7 +2638,22 @@ export type Database = {
           user_id?: string
           views?: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "video_submissions_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "video_submissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       video_views: {
         Row: {
@@ -1450,6 +2684,13 @@ export type Database = {
           watched_duration_seconds?: number | null
         }
         Relationships: [
+          {
+            foreignKeyName: "video_views_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
           {
             foreignKeyName: "video_views_video_id_fkey"
             columns: ["video_id"]
@@ -1493,22 +2734,58 @@ export type Database = {
           user_id?: string
           wallet_address?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "wallets_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
     }
     Views: {
+      auth_comprehensive_debug_view: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          last_sign_in_at: string | null
+          role: string | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
       order_items_view: {
         Row: {
           created_at: string | null
           id: string | null
           order_id: string | null
-          order_status: Database["public"]["Enums"]["order_status"] | null
           product_id: string | null
           quantity: number | null
           total_price: number | null
           unit_price: number | null
           updated_at: string | null
-          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string | null
+          order_id?: string | null
+          product_id?: string | null
+          quantity?: number | null
+          total_price?: number | null
+          unit_price?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string | null
+          order_id?: string | null
+          product_id?: string | null
+          quantity?: number | null
+          total_price?: number | null
+          unit_price?: number | null
+          updated_at?: string | null
         }
         Relationships: [
           {
@@ -1520,11 +2797,182 @@ export type Database = {
           },
         ]
       }
+      robust_data_view: {
+        Row: {
+          access_level: number | null
+          created_at: string | null
+          data: Json | null
+          id: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          access_level?: number | null
+          created_at?: string | null
+          data?: Json | null
+          id?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          access_level?: number | null
+          created_at?: string | null
+          data?: Json | null
+          id?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       security_log_summary: {
         Row: {
           event_count: number | null
           event_type: string | null
           latest_event: string | null
+        }
+        Relationships: []
+      }
+      unresolved_errors: {
+        Row: {
+          context: Json | null
+          created_at: string | null
+          error_message: string | null
+          error_type: string | null
+          id: number | null
+          is_critical: boolean | null
+          user_id: string | null
+        }
+        Insert: {
+          context?: Json | null
+          created_at?: string | null
+          error_message?: string | null
+          error_type?: string | null
+          id?: number | null
+          is_critical?: boolean | null
+          user_id?: string | null
+        }
+        Update: {
+          context?: Json | null
+          created_at?: string | null
+          error_message?: string | null
+          error_type?: string | null
+          id?: number | null
+          is_critical?: boolean | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "error_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      user_uuid_diagnostics: {
+        Row: {
+          email: string | null
+          full_name: string | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
+      v_active_trading_pairs: {
+        Row: {
+          base_currency: string | null
+          current_price: number | null
+          id: string | null
+          quote_currency: string | null
+          symbol: string | null
+        }
+        Insert: {
+          base_currency?: string | null
+          current_price?: number | null
+          id?: string | null
+          quote_currency?: string | null
+          symbol?: string | null
+        }
+        Update: {
+          base_currency?: string | null
+          current_price?: number | null
+          id?: string | null
+          quote_currency?: string | null
+          symbol?: string | null
+        }
+        Relationships: []
+      }
+      v_function_security_issues: {
+        Row: {
+          created_at: string | null
+          error_type: string | null
+          id: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          error_type?: string | null
+          id?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          error_type?: string | null
+          id?: number | null
+        }
+        Relationships: []
+      }
+      v_trading_pairs: {
+        Row: {
+          base_currency: string | null
+          created_at: string | null
+          current_price: number | null
+          id: string | null
+          market_cap: number | null
+          max_trade_amount: number | null
+          min_trade_amount: number | null
+          price_change_24h: number | null
+          quote_currency: string | null
+          status: Database["public"]["Enums"]["trading_pair_status"] | null
+          symbol: string | null
+          trading_fee_percentage: number | null
+          updated_at: string | null
+          volume_24h: number | null
+        }
+        Insert: {
+          base_currency?: string | null
+          created_at?: string | null
+          current_price?: number | null
+          id?: string | null
+          market_cap?: number | null
+          max_trade_amount?: number | null
+          min_trade_amount?: number | null
+          price_change_24h?: number | null
+          quote_currency?: string | null
+          status?: Database["public"]["Enums"]["trading_pair_status"] | null
+          symbol?: string | null
+          trading_fee_percentage?: number | null
+          updated_at?: string | null
+          volume_24h?: number | null
+        }
+        Update: {
+          base_currency?: string | null
+          created_at?: string | null
+          current_price?: number | null
+          id?: string | null
+          market_cap?: number | null
+          max_trade_amount?: number | null
+          min_trade_amount?: number | null
+          price_change_24h?: number | null
+          quote_currency?: string | null
+          status?: Database["public"]["Enums"]["trading_pair_status"] | null
+          symbol?: string | null
+          trading_fee_percentage?: number | null
+          updated_at?: string | null
+          volume_24h?: number | null
+        }
+        Relationships: []
+      }
+      v_unsafe_functions: {
+        Row: {
+          routine_name: unknown | null
+          routine_schema: unknown | null
+          routine_type: string | null
         }
         Relationships: []
       }
@@ -1540,8 +2988,59 @@ export type Database = {
         Returns: boolean
       }
       add_admin_user: {
-        Args: { p_user_id: string }
+        Args:
+          | { p_user_id: string }
+          | { p_user_id: string; p_role: string }
+          | { user_email: string; user_role?: string }
+        Returns: string
+      }
+      add_missing_indexes: {
+        Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      admin_insert_robust_data: {
+        Args:
+          | { p_data: Json; p_owner_id: string; p_access_level?: number }
+          | { p_data: Json; p_owner_id: string; p_access_level?: number }
+        Returns: number
+      }
+      advanced_error_handler: {
+        Args: {
+          p_error_type: string
+          p_error_message: string
+          p_severity_level?: string
+          p_error_context?: Json
+          p_notify?: boolean
+        }
+        Returns: string
+      }
+      aggregate_errors: {
+        Args: { p_time_window?: unknown; p_severity_threshold?: string }
+        Returns: {
+          error_type: string
+          total_count: number
+          first_occurrence: string
+          last_occurrence: string
+          severity_levels: string[]
+        }[]
+      }
+      analyze_dependencies: {
+        Args: { target_table: unknown }
+        Returns: Record<string, unknown>[]
+      }
+      analyze_error_trends: {
+        Args: { p_days?: number }
+        Returns: {
+          error_trend: Json
+        }[]
+      }
+      analyze_function_security: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          total_high_issues: number
+          total_medium_issues: number
+          total_issues: number
+        }[]
       }
       analyze_slow_queries: {
         Args: { threshold_ms?: number }
@@ -1558,9 +3057,25 @@ export type Database = {
           | { target_user_uuid: string; admin_user_uuid: string }
         Returns: boolean
       }
+      auto_resolve_errors: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       check_password_complexity: {
         Args: { password: string }
         Returns: boolean
+      }
+      cleanup_indexes: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      comprehensive_error_test: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          test_scenario: string
+          error_id: string
+          status: boolean
+        }[]
       }
       configure_function_search_paths: {
         Args: Record<PropertyKey, never>
@@ -1570,6 +3085,16 @@ export type Database = {
           function_arguments: string
           status: string
           error_details: string
+        }[]
+      }
+      configure_secure_search_path: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      correlate_errors: {
+        Args: { p_time_window?: unknown }
+        Returns: {
+          correlated_errors: Json
         }[]
       }
       create_admin_session: {
@@ -1599,6 +3124,10 @@ export type Database = {
         }
         Returns: number
       }
+      create_super_admin: {
+        Args: { p_email: string; p_password: string; p_full_name?: string }
+        Returns: string
+      }
       create_user_rls_policy: {
         Args: {
           p_table_name: string
@@ -1607,6 +3136,36 @@ export type Database = {
           p_user_id_column?: string
         }
         Returns: undefined
+      }
+      database_health_check: {
+        Args: Record<PropertyKey, never>
+        Returns: Record<string, unknown>
+      }
+      debug_auth_context: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          current_user_id: string
+          current_user_role: string
+          current_user_email: string
+          current_app_metadata: Json
+          current_user_metadata: Json
+          is_authenticated: boolean
+        }[]
+      }
+      demonstrate_robust_data_insertion: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          method: string
+          inserted_id: number
+        }[]
+      }
+      demonstrate_robust_insertion_scenarios: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          scenario: string
+          inserted_id: number
+          owner_used: string
+        }[]
       }
       diagnose_auth_issues: {
         Args: Record<PropertyKey, never>
@@ -1638,9 +3197,53 @@ export type Database = {
           violation_details: Json
         }[]
       }
+      enhanced_error_correlation: {
+        Args: { p_time_window?: unknown; p_min_correlation_threshold?: number }
+        Returns: {
+          primary_error_type: string
+          correlated_errors: Json
+          correlation_strength: number
+        }[]
+      }
+      example_func: {
+        Args: { user_id: number; username: string; is_active: boolean }
+        Returns: string
+      }
+      example_function: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
       example_login_attempt: {
         Args: { p_username: string; p_success: boolean }
         Returns: boolean
+      }
+      find_unsafe_functions: {
+        Args: { p_secure_path?: string }
+        Returns: {
+          schema_name: string
+          function_name: string
+          arguments: string
+          return_type: string
+          language: string
+          security_type: string
+          function_body: string
+        }[]
+      }
+      generate_basic_rls_policies: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          table_schema: string
+          table_name: string
+          policy_statements: string[]
+        }[]
+      }
+      generate_function_remediation_scripts: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          script_schema_name: string
+          script_function_name: string
+          remediation_script: string
+        }[]
       }
       generate_security_alert: {
         Args: { p_alert_type: string; p_severity: number; p_details: Json }
@@ -1668,6 +3271,15 @@ export type Database = {
         Args: { role_or_user_id: string }
         Returns: string
       }
+      get_current_auth_context: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          user_id: string
+          user_role: string
+          is_authenticated: boolean
+          email: string
+        }[]
+      }
       get_current_user_details: {
         Args: Record<PropertyKey, never>
         Returns: {
@@ -1677,6 +3289,19 @@ export type Database = {
         }[]
       }
       get_current_user_id: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
+      get_rls_policies: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          table_name: string
+          policy_name: string
+          cmd: string
+          permissive: string
+        }[]
+      }
+      get_sample_user_uuid: {
         Args: Record<PropertyKey, never>
         Returns: string
       }
@@ -1691,6 +3316,15 @@ export type Database = {
           unique_ips: number
         }[]
       }
+      get_table_dependencies: {
+        Args: { target_table: unknown }
+        Returns: {
+          dependent_schema: string
+          dependent_object: string
+          dependency_type: string
+          object_type: string
+        }[]
+      }
       get_user_uuid_by_email: {
         Args: { user_email: string }
         Returns: string
@@ -1702,6 +3336,12 @@ export type Database = {
       initialize_first_admin: {
         Args: { p_user_id: string }
         Returns: boolean
+      }
+      insert_robust_data: {
+        Args:
+          | { p_data: Json; p_access_level?: number; p_owner_id?: string }
+          | { p_input: unknown; p_access_level?: number; p_owner_id?: string }
+        Returns: number
       }
       insert_sample_security_events: {
         Args: Record<PropertyKey, never>
@@ -1720,6 +3360,19 @@ export type Database = {
               p_metadata?: Json
             }
         Returns: number
+      }
+      inspect_function_details: {
+        Args: { p_function_name: string }
+        Returns: {
+          schema_name: string
+          function_name: string
+          function_signature: string
+          function_definition: string
+        }[]
+      }
+      install_extension: {
+        Args: { extension_name: string }
+        Returns: boolean
       }
       is_admin: {
         Args: { check_user_uuid?: string }
@@ -1741,6 +3394,27 @@ export type Database = {
           user_name: string
           admin_created_at: string
         }[]
+      }
+      list_available_extensions: {
+        Args: Record<PropertyKey, never>
+        Returns: string[]
+      }
+      list_robust_data_function_signatures: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          function_name: string
+          argument_types: string
+        }[]
+      }
+      log_audit_event: {
+        Args: {
+          p_admin_id?: string
+          p_action?: string
+          p_details?: Json
+          p_ip_address?: unknown
+          p_user_agent?: string
+        }
+        Returns: undefined
       }
       log_comprehensive_security_event: {
         Args:
@@ -1789,6 +3463,7 @@ export type Database = {
               severity?: number
               event_details?: Json
             }
+          | { event_type: string; event_details?: Json }
           | {
               p_category: string
               p_type: string
@@ -1854,6 +3529,10 @@ export type Database = {
         }
         Returns: string
       }
+      log_unsafe_functions: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       manage_admin_user: {
         Args: { p_user_id: string; p_action?: string }
         Returns: boolean
@@ -1871,15 +3550,69 @@ export type Database = {
           message: string
         }[]
       }
+      modify_function_parameters: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      monitor_system_health: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          issue_type: string
+          issue_description: string
+          severity: number
+        }[]
+      }
+      optimize_database: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      optimize_database_objects: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      optimize_rls_policies: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      prepare_error_prediction_dataset: {
+        Args: { p_days?: number }
+        Returns: {
+          error_type: string
+          severity_level: string
+          error_count: number
+          avg_time_between_errors: unknown
+          prediction_features: Json
+        }[]
+      }
       remove_admin_role: {
         Args: { p_user_id?: string }
         Returns: boolean
+      }
+      resolve_error: {
+        Args: { p_error_id: string }
+        Returns: boolean
+      }
+      resolve_timestamp_error: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          connection_time: string
+          ip_address: unknown
+          connection_details: string
+        }[]
       }
       revoke_admin_role: {
         Args:
           | { target_user_email: string; admin_user_email: string }
           | { target_user_uuid: string; admin_user_uuid: string }
         Returns: boolean
+      }
+      risky_database_operation: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      safe_execute: {
+        Args: { p_function_name: string; p_params?: Json } | { p_query: string }
+        Returns: Record<string, unknown>
       }
       safe_uuid_convert: {
         Args: { input_string: string }
@@ -1892,6 +3625,10 @@ export type Database = {
           function_name_result: string
           search_path_status: string
         }[]
+      }
+      secure_function_template: {
+        Args: { p_input: number } | { p_input: string } | { p_input: string }
+        Returns: Json
       }
       secure_login: {
         Args: {
@@ -1906,6 +3643,18 @@ export type Database = {
           error_message: string
         }[]
       }
+      send_external_error_notification: {
+        Args: { p_error_id: string; p_notification_type?: string }
+        Returns: boolean
+      }
+      send_security_alert: {
+        Args: { p_message: string; p_severity?: string }
+        Returns: undefined
+      }
+      set_secure_search_path: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       set_secure_search_paths: {
         Args: Record<PropertyKey, never>
         Returns: {
@@ -1917,6 +3666,44 @@ export type Database = {
       setup_first_admin: {
         Args: { first_admin_email: string }
         Returns: boolean
+      }
+      setup_table_rls: {
+        Args: {
+          table_name: string
+          schema_name?: string
+          is_admin_only?: boolean
+        }
+        Returns: undefined
+      }
+      simple_table_dependencies: {
+        Args: { target_table: unknown }
+        Returns: {
+          dependency_type: string
+          object_schema: string
+          object_name: string
+          object_type: string
+          details: Json
+        }[]
+      }
+      test_error_management: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      track_error: {
+        Args:
+          | { p_error_type: string; p_error_message: string }
+          | {
+              p_error_type: string
+              p_error_message: string
+              p_severity_level: string
+            }
+          | {
+              p_error_type: string
+              p_error_message: string
+              p_severity_level: string
+              p_error_context: Json
+            }
+        Returns: string
       }
       unlock_account: {
         Args: { p_email: string; p_admin_user_id: string }
@@ -1952,6 +3739,30 @@ export type Database = {
         Args: { p_input: unknown }
         Returns: Json
       }
+      validate_robust_view_data: {
+        Args: {
+          p_column1: string
+          p_column2: number
+          p_nullable_column: string
+        }
+        Returns: boolean
+      }
+      validate_type_parameters: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          schema_name: string
+          object_name: string
+          issue_type: string
+          details: string
+        }[]
+      }
+      your_function_name: {
+        Args: { param1: string; param2: number; param3?: string }
+        Returns: {
+          result_column1: string
+          result_column2: number
+        }[]
+      }
     }
     Enums: {
       admin_permission:
@@ -1970,6 +3781,14 @@ export type Database = {
         | "user_management_admin"
         | "billing_admin"
       order_status: "pending" | "completed" | "cancelled" | "partial"
+      quantum_security_config_type:
+        | "authentication"
+        | "authorization"
+        | "encryption"
+        | "network"
+        | "compliance"
+        | "mobile_integration"
+        | "quantum_layer"
       security_level: "low" | "medium" | "high" | "maximum"
       trading_pair_status: "active" | "inactive" | "maintenance"
       transaction_type:
@@ -2126,6 +3945,15 @@ export const Constants = {
         "billing_admin",
       ],
       order_status: ["pending", "completed", "cancelled", "partial"],
+      quantum_security_config_type: [
+        "authentication",
+        "authorization",
+        "encryption",
+        "network",
+        "compliance",
+        "mobile_integration",
+        "quantum_layer",
+      ],
       security_level: ["low", "medium", "high", "maximum"],
       trading_pair_status: ["active", "inactive", "maintenance"],
       transaction_type: [
