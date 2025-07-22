@@ -19,11 +19,21 @@ import { GlobalCommandCenter } from './GlobalCommandCenter'
 import { QuantumDataProcessor } from './QuantumDataProcessor'
 import { LiveAnimalNFTManager } from './LiveAnimalNFTManager'
 import { AITaskManagerEngine } from './AITaskManagerEngine'
+import { SearchAllData } from '@/components/search/SearchAllData'
+import { AIDefenseAnimals } from './AIDefenseAnimals'
+import { TokenAssetManager } from './TokenAssetManager'
+import { CustomAutomationBuilder } from './CustomAutomationBuilder'
+import { PrivacyWatchdog } from './PrivacyWatchdog'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="storage" className="w-full">
-      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-15 text-xs">
+    <Tabs defaultValue="search-data" className="w-full">
+      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-20 text-xs">
+        <TabsTrigger value="search-data">🔍 Search All</TabsTrigger>
+        <TabsTrigger value="ai-defense">🐉 AI Defense</TabsTrigger>
+        <TabsTrigger value="token-manager">🪙 Tokens</TabsTrigger>
+        <TabsTrigger value="automation">🤖 Automation</TabsTrigger>
+        <TabsTrigger value="privacy">🛡️ Privacy</TabsTrigger>
         <TabsTrigger value="storage">📁 Storage</TabsTrigger>
         <TabsTrigger value="marketing">🚀 Marketing</TabsTrigger>
         <TabsTrigger value="live-artist">🎭 Live Artist Hub</TabsTrigger>
@@ -40,6 +50,26 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="live-animals">🦋 Live Animals NFT</TabsTrigger>
         <TabsTrigger value="ai-task-manager">🤖 AI Task Manager</TabsTrigger>
       </TabsList>
+
+      <TabsContent value="search-data" className="space-y-6">
+        <SearchAllData />
+      </TabsContent>
+
+      <TabsContent value="ai-defense" className="space-y-6">
+        <AIDefenseAnimals />
+      </TabsContent>
+
+      <TabsContent value="token-manager" className="space-y-6">
+        <TokenAssetManager />
+      </TabsContent>
+
+      <TabsContent value="automation" className="space-y-6">
+        <CustomAutomationBuilder />
+      </TabsContent>
+
+      <TabsContent value="privacy" className="space-y-6">
+        <PrivacyWatchdog />
+      </TabsContent>
 
       <TabsContent value="storage" className="space-y-6">
         <AdminMediaLibrary />
