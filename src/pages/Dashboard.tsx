@@ -9,10 +9,12 @@ import {
   Globe,
   Zap
 } from 'lucide-react'
+import { Navbar } from '@/components/Navbar'
 
 const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-green-900/20 to-blue-900/20">
+      <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-green-400 mb-2">

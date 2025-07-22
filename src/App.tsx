@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/toaster"
+import { AuthProvider } from "@/components/auth/AuthProvider"
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute"
 
 // Lazy load all page components for better performance
 const Index = React.lazy(() => import('./pages/Index'))
@@ -34,30 +36,76 @@ const queryClient = new QueryClient()
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <div className="min-h-screen bg-background">
-          <Router>
-            <Suspense fallback={<LoadingFallback />}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/exchange" element={<Exchange />} />
-                <Route path="/gaias-projects" element={<GaiasProjects />} />
-                <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
-                <Route path="/project-funding" element={<DecentralizedProjectFundingPools />} />
-                <Route path="/eco-missions" element={<EcoMissionGenerator />} />
-                <Route path="/planet-cleaning" element={<PlanetCleaningRewardsSystem />} />
-                <Route path="/nft-cards" element={<NFTCardGame />} />
-                <Route path="/eco-avatar" element={<EcoAvatarGaiaSoulSystem />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/security" element={<Security />} />
-              </Routes>
-            </Suspense>
-          </Router>
-        </div>
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <div className="min-h-screen bg-background">
+            <Router>
+              <Suspense fallback={<LoadingFallback />}>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/dashboard" element={
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/exchange" element={
+                    <ProtectedRoute>
+                      <Exchange />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/gaias-projects" element={
+                    <ProtectedRoute>
+                      <GaiasProjects />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/green-impact-dashboard" element={
+                    <ProtectedRoute>
+                      <GreenImpactDashboard />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/project-funding" element={
+                    <ProtectedRoute>
+                      <DecentralizedProjectFundingPools />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/eco-missions" element={
+                    <ProtectedRoute>
+                      <EcoMissionGenerator />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/planet-cleaning" element={
+                    <ProtectedRoute>
+                      <PlanetCleaningRewardsSystem />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/nft-cards" element={
+                    <ProtectedRoute>
+                      <NFTCardGame />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/eco-avatar" element={
+                    <ProtectedRoute>
+                      <EcoAvatarGaiaSoulSystem />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/admin" element={
+                    <ProtectedRoute isAdminRoute={true}>
+                      <Admin />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/security" element={
+                    <ProtectedRoute isAdminRoute={true}>
+                      <Security />
+                    </ProtectedRoute>
+                  } />
+                </Routes>
+              </Suspense>
+            </Router>
+          </div>
+        </TooltipProvider>
+      </AuthProvider>
     </QueryClientProvider>
   )
 }
