@@ -241,8 +241,8 @@ export class AutoPatcher {
 
       if (error) throw error
 
-      // In production, implement actual IP blocking here
-      // await this.firewall.blockIP(ipAddress)
+      // Call the firewall to block the IP address
+      await this.firewall.blockIP(ipAddress)
 
       return {
         success: true,
