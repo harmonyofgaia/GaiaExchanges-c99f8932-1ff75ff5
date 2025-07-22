@@ -22,14 +22,18 @@ import { AITaskManagerEngine } from './AITaskManagerEngine'
 import { SearchAllData } from '@/components/search/SearchAllData'
 import { AIDefenseAnimals } from './AIDefenseAnimals'
 import { TokenAssetManager } from './TokenAssetManager'
+import { CustomAutomationBuilder } from './CustomAutomationBuilder'
+import { PrivacyWatchdog } from './PrivacyWatchdog'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="search-data" className="w-full">
-      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-18 text-xs">
+      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-20 text-xs">
         <TabsTrigger value="search-data">🔍 Search All</TabsTrigger>
         <TabsTrigger value="ai-defense">🐉 AI Defense</TabsTrigger>
         <TabsTrigger value="token-manager">🪙 Tokens</TabsTrigger>
+        <TabsTrigger value="automation">🤖 Automation</TabsTrigger>
+        <TabsTrigger value="privacy">🛡️ Privacy</TabsTrigger>
         <TabsTrigger value="storage">📁 Storage</TabsTrigger>
         <TabsTrigger value="marketing">🚀 Marketing</TabsTrigger>
         <TabsTrigger value="live-artist">🎭 Live Artist Hub</TabsTrigger>
@@ -57,6 +61,14 @@ export function AdminDashboardTabs() {
 
       <TabsContent value="token-manager" className="space-y-6">
         <TokenAssetManager />
+      </TabsContent>
+
+      <TabsContent value="automation" className="space-y-6">
+        <CustomAutomationBuilder />
+      </TabsContent>
+
+      <TabsContent value="privacy" className="space-y-6">
+        <PrivacyWatchdog />
       </TabsContent>
 
       <TabsContent value="storage" className="space-y-6">
