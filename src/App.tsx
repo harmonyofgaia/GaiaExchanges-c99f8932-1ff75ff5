@@ -16,6 +16,13 @@ import EcoMissionGenerator from './pages/EcoMissionGenerator'
 import PlanetCleaningRewardsSystem from './pages/PlanetCleaningRewardsSystem'
 import NFTCardGame from './pages/NFTCardGame'
 import EcoAvatarGaiaSoulSystem from './pages/EcoAvatarGaiaSoulSystem'
+import EnvironmentalHub from './pages/EnvironmentalHub'
+import Wallet from './pages/Wallet'
+import Markets from './pages/Markets'
+import Gaming from './pages/Gaming'
+import LiveTracking from './pages/LiveTracking'
+import VideoUpload from './pages/VideoUpload'
+import CompleteSystemHub from './pages/CompleteSystemHub'
 
 const queryClient = new QueryClient()
 
@@ -30,13 +37,20 @@ function App() {
               <Route path="/" element={<Index />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/exchange" element={<Exchange />} />
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/markets" element={<Markets />} />
               <Route path="/gaias-projects" element={<GaiasProjects />} />
+              <Route path="/environmental-hub" element={<EnvironmentalHub />} />
               <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
               <Route path="/project-funding" element={<DecentralizedProjectFundingPools />} />
               <Route path="/eco-missions" element={<EcoMissionGenerator />} />
               <Route path="/planet-cleaning" element={<PlanetCleaningRewardsSystem />} />
               <Route path="/nft-cards" element={<NFTCardGame />} />
               <Route path="/eco-avatar" element={<EcoAvatarGaiaSoulSystem />} />
+              <Route path="/gaming" element={<Gaming />} />
+              <Route path="/live-tracking" element={<LiveTracking />} />
+              <Route path="/video-upload" element={<VideoUpload />} />
+              <Route path="/complete-system-hub" element={<CompleteSystemHub />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/security" element={<Security />} />

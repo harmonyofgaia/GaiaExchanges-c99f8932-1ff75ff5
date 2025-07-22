@@ -13,37 +13,39 @@ export function WalletEngineAdmin() {
   const [transferAmount, setTransferAmount] = useState('')
   const [recipientAddress, setRecipientAddress] = useState('')
 
+  // ENFORCED: Only GAiA token supported as per requirements
+  // Address: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
   const wallets = [
     {
       id: 'main',
-      name: 'Main Treasury',
+      name: 'Main GAiA Treasury',
       balance: '15,847,293.45',
-      currency: 'GAIA',
-      address: '0x742d35Cc6A4C3e2f...',
+      currency: 'GAiA',
+      address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
       status: 'active'
     },
     {
       id: 'rewards',
-      name: 'Rewards Pool',
+      name: 'GAiA Rewards Pool',
       balance: '8,432,156.78',
-      currency: 'GAIA',
-      address: '0x8e4f9c1A2B3d5E7F...',
+      currency: 'GAiA',
+      address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
       status: 'active'
     },
     {
       id: 'burn',
-      name: 'Burn Wallet',
+      name: 'GAiA Burn Wallet',
       balance: '2,847,536.12',
-      currency: 'GAIA',
-      address: '0x1a2b3c4d5e6f7890...',
+      currency: 'GAiA',
+      address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
       status: 'locked'
     },
     {
       id: 'dev',
-      name: 'Development Fund',
+      name: 'GAiA Development Fund',
       balance: '3,245,789.33',
-      currency: 'GAIA',
-      address: '0x9f8e7d6c5b4a3928...',
+      currency: 'GAiA',
+      address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
       status: 'active'
     }
   ]
