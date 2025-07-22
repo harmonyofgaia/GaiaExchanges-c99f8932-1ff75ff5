@@ -488,35 +488,8 @@ class SecurityScheduler {
   }
 }
 
-// Create system_config table if it doesn't exist
-const initializeSystemConfig = async (supabase: any) => {
-  try {
-    await supabase.rpc(`
-      CREATE TABLE IF NOT EXISTS public.system_config (
-        id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-        config_key TEXT UNIQUE NOT NULL,
-        config_value TEXT NOT NULL,
-        created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-        updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-      )
-    `);
-
-    // Enable RLS
-    await supabase.rpc(`
-      ALTER TABLE public.system_config ENABLE ROW LEVEL SECURITY
-    `);
-
-    // Create policy for admin access
-    await supabase.rpc(`
-      CREATE POLICY IF NOT EXISTS "Admin can manage system config" ON public.system_config
-        FOR ALL USING (public.has_role_secure(public.get_current_user_id(), 'admin'))
-    `);
-
-  } catch (error) {
-    console.error('Error initializing system config:', error);
-  }
-};
-
+// The system_config table and its associated policies should be created via database migrations.
+// Ensure that the table exists before deploying this function.
 // Main Edge Function handler
 serve(async (req) => {
   try {
