@@ -38,7 +38,7 @@ export function InvestorScoutingSystem() {
       id: '1',
       name: 'CryptoWhale_2024',
       email: 'whale@cryptoinvest.com',
-      tokenHoldings: ['BTC', 'ETH', 'SOL', 'ADA'],
+      tokenHoldings: ['GAiA', 'Environmental Tokens', 'Green Crypto'],
       investmentRange: '$50K - $500K',
       contactStatus: 'pending',
       lastContact: '',
@@ -251,7 +251,7 @@ Culture of Harmony Investment Team
             <div className="space-y-4">
               <h4 className="font-semibold text-blue-400">🎯 Active Targeting:</h4>
               <ul className="text-sm space-y-1">
-                <li>✅ Large-cap crypto holders (BTC, ETH, SOL)</li>
+                <li>✅ Environmental crypto holders (GAiA, Green Tokens)</li>
                 <li>✅ Environmental/sustainable token investors</li>
                 <li>✅ DeFi protocol participants</li>
                 <li>✅ Institutional crypto funds</li>

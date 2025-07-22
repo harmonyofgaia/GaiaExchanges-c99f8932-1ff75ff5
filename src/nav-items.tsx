@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Coins, Gamepad2, Video, MapPin, Zap } from "lucide-react";
 
 export const navigationItems = [
   {
@@ -21,14 +21,26 @@ export const navigationItems = [
     variant: "ghost" as const,
   },
   {
+    title: "Wallet",
+    to: "/wallet",
+    icon: Coins,
+    variant: "ghost" as const,
+  },
+  {
+    title: "Markets",
+    to: "/markets",
+    icon: BarChart3,
+    variant: "ghost" as const,
+  },
+  {
     title: "Gaia's Projects",
     to: "/gaias-projects",
     icon: TreePine,
     variant: "ghost" as const,
   },
   {
-    title: "Green Impact",
-    to: "/green-impact-dashboard",
+    title: "Environmental Hub",
+    to: "/environmental-hub",
     icon: Leaf,
     variant: "ghost" as const,
   },
@@ -60,6 +72,30 @@ export const navigationItems = [
     title: "Eco Avatar",
     to: "/eco-avatar",
     icon: Users,
+    variant: "ghost" as const,
+  },
+  {
+    title: "Gaming",
+    to: "/gaming",
+    icon: Gamepad2,
+    variant: "ghost" as const,
+  },
+  {
+    title: "Live Tracking",
+    to: "/live-tracking",
+    icon: MapPin,
+    variant: "ghost" as const,
+  },
+  {
+    title: "Videos",
+    to: "/video-upload",
+    icon: Video,
+    variant: "ghost" as const,
+  },
+  {
+    title: "Automation",
+    to: "/complete-system-hub",
+    icon: Zap,
     variant: "ghost" as const,
   },
   {

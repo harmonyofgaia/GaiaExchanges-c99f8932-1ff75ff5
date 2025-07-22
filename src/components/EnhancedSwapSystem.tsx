@@ -51,7 +51,7 @@ export function EnhancedSwapSystem() {
 
   const [swapData, setSwapData] = useState({
     fromCurrency: 'GAiA',
-    toCurrency: 'BTC',
+    toCurrency: 'GAIA', // Default to legacy migration
     fromAmount: 0,
     toAmount: 0
   })
@@ -59,7 +59,9 @@ export function EnhancedSwapSystem() {
   const [loading, setLoading] = useState(false)
   const connectedWalletAddress = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
 
-  const currencies = ['GAiA', 'BTC', 'ETH', 'USDC', 'USDT', 'GAIA'] // GAiA first, GAIA last for legacy swapping
+  // ENFORCED: Only GAiA token supported as per requirements
+  // Address: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
+  const currencies = ['GAiA', 'GAIA'] // GAiA primary, GAIA for legacy migration only
   const feeDestinations = [
     { id: 'vault', name: '🏦 GAiA Community Vault', description: 'Admin humanitarian surprises' },
     { id: 'burning', name: '🔥 GAiA Token Burning', description: 'Increase GAiA token value' },
@@ -95,14 +97,11 @@ export function EnhancedSwapSystem() {
   }
 
   const calculateSwapAmount = () => {
-    // Mock exchange rates - in production, this would fetch real rates
+    // ENFORCED: Only GAiA token supported as per requirements
+    // Address: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
     const exchangeRates: { [key: string]: number } = {
       'GAiA': 1,
-      'BTC': 0.000023,
-      'ETH': 0.00034,
-      'USDC': 1.2,
-      'USDT': 1.19,
-      'GAIA': 0.98 // Legacy token at slightly lower rate
+      'GAIA': 1 // 1:1 migration rate for legacy token
     }
 
     const rate = exchangeRates[swapData.toCurrency] / exchangeRates[swapData.fromCurrency]

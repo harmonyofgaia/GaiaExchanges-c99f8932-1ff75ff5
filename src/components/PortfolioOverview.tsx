@@ -2,15 +2,14 @@
 import { Wallet, TrendingUp, DollarSign, PieChart } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
+// ENFORCED: Only GAiA token portfolio as per requirements
+// Address: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
 const portfolioData = {
   totalValue: 125432.67,
   totalChange: 3456.78,
   totalChangePercent: 2.84,
   holdings: [
-    { symbol: 'BTC', name: 'Bitcoin', amount: 2.5634, value: 110873.21, change: 2.34 },
-    { symbol: 'ETH', name: 'Ethereum', amount: 45.67, value: 116121.43, change: -1.87 },
-    { symbol: 'ADA', name: 'Cardano', amount: 12500, value: 5292.50, change: 4.56 },
-    { symbol: 'SOL', name: 'Solana', amount: 98.3, value: 9712.11, change: -3.21 }
+    { symbol: 'GAiA', name: 'Harmony of Gaia', amount: 2856340.5, value: 125432.67, change: 2.84, address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh' }
   ]
 }
 

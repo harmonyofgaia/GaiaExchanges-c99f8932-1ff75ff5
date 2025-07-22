@@ -7,16 +7,11 @@ import { Badge } from '@/components/ui/badge'
 import { ArrowUpDown, Zap, DollarSign, Shield, Sparkles } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
+// ENFORCED: Only GAiA token supported as per requirements
+// Address: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
 const supportedTokens = [
   { name: 'Harmony of Gaia', symbol: 'GAiA', icon: '🌍', fee: 0, address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh' },
-  { name: 'Bitcoin', symbol: 'BTC', icon: '₿', fee: 0.0001, address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' },
-  { name: 'Ethereum', symbol: 'ETH', icon: 'Ξ', fee: 0.001, address: '0x0000000000000000000000000000000000000000' },
-  { name: 'Solana', symbol: 'SOL', icon: '◎', fee: 0.00005, address: 'So11111111111111111111111111111111111111112' },
-  { name: 'Cardano', symbol: 'ADA', icon: '₳', fee: 0.17, address: 'addr1...' },
-  { name: 'Polkadot', symbol: 'DOT', icon: '●', fee: 0.01, address: '1...' },
-  { name: 'Chainlink', symbol: 'LINK', icon: '🔗', fee: 0.1, address: '0x514910771AF9Ca656af840dff83E8264EcF986CA' },
-  { name: 'Binance Coin', symbol: 'BNB', icon: '🟡', fee: 0.0005, address: '0xB8c77482e45F1F44dE1745F52C74426C631bDD52' },
-  { name: 'Legacy GAIA (Old Token)', symbol: 'GAIA', icon: '🌿', fee: 0.001, address: 'legacy_gaia_address_for_swapping_only' }
+  { name: 'Legacy GAIA (Migration Only)', symbol: 'GAIA', icon: '🌿', fee: 0, address: 'legacy_gaia_address_for_migration_only' }
 ]
 
 export function SwapSystem() {
