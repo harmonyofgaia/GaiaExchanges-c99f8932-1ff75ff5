@@ -27,7 +27,7 @@ export class GaiaTokenDatabaseEnforcement {
     if (!this.supabase) return
 
     try {
-      // This would be a database policy in production
+      // Execute the database policy and trigger creation
       const enforcementRules = `
         -- Row Level Security Policy for transactions table
         CREATE POLICY "gaia_token_only_transactions" ON transactions
