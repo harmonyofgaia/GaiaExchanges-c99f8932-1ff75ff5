@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -11,6 +12,7 @@ import { AdminDashboardTabs } from '@/components/admin/AdminDashboardTabs'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 
 export default function AdminLogin() {
+  const navigate = useNavigate()
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
@@ -70,6 +72,10 @@ export default function AdminLogin() {
             description: `Welcome to GAIA Admin Dashboard - IP: ${clientIP}`,
             duration: 3000
           })
+          // Redirect to admin dashboard after successful login
+          setTimeout(() => {
+            navigate('/admin')
+          }, 2000)
         } else {
           toast.error('🚫 Admin Access Blocked', {
             description: 'Another admin session is active',
@@ -229,7 +235,7 @@ export default function AdminLogin() {
             <div className="text-xs text-gray-400 space-y-1">
               <div>• Only one admin can be logged in at a time</div>
               <div>• IP address verification required</div>
-              <div>• Firefox browser recommended for security</div>
+              <div>• Cross-browser compatibility enabled</div>
             </div>
           </div>
         </CardContent>
