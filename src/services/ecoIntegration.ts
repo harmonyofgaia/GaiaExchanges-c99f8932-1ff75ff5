@@ -385,17 +385,19 @@ class EcoIntegrationService {
       let earned = false
       
       switch (badge.id) {
-        case 'tree-hugger':
+        case 'tree-hugger': {
           const treeMissions = this.availableMissions.filter(m => 
             m.type === 'tree_planting' && m.status === 'completed'
           ).length
           earned = treeMissions >= 10
           break
+        }
           
-        case 'distance-rider':
+        case 'distance-rider': {
           const totalDistance = this.userProfile.bikeActivities.reduce((sum, a) => sum + a.distance, 0)
           earned = totalDistance >= 100
           break
+        }
       }
       
       if (earned) {
