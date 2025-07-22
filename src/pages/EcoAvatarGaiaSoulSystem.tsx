@@ -147,7 +147,7 @@ const EcoAvatarGaiaSoulSystem = () => {
     }
   };
 
-  const getEvolutionStages = () => [
+  const EVOLUTION_STAGES = [
     { name: 'Seedling', level: '1-5', icon: '🌱' },
     { name: 'Sprout', level: '6-10', icon: '🌿' },
     { name: 'Guardian', level: '11-20', icon: '🛡️', current: true },
