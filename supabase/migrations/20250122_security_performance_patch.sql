@@ -136,16 +136,14 @@ DROP POLICY IF EXISTS "Users can update their own bike sessions" ON public.bike_
 
 CREATE POLICY "Secure bike sessions access" ON public.bike_sessions
   FOR ALL USING (
-    public.get_current_user_id() = user_id AND
-    public.get_current_user_id() != '00000000-0000-0000-0000-000000000000'::UUID
+    public.is_valid_user(user_id)
   );
 
 -- Food places policies
 DROP POLICY IF EXISTS "Owners can manage their food places" ON public.food_places;
 CREATE POLICY "Secure food places management" ON public.food_places
   FOR ALL USING (
-    public.get_current_user_id() = owner_id AND
-    public.get_current_user_id() != '00000000-0000-0000-0000-000000000000'::UUID
+    public.is_valid_user(owner_id)
   );
 
 -- User profiles policies
