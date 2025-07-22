@@ -164,11 +164,21 @@ export class GaiaTokenDatabaseEnforcement {
       for (const table of tablesToCheck) {
         console.log(`🔍 Auditing table: ${table} for GAiA token compliance`)
         
-        // Simulate finding violations
-        const violations = Math.floor(Math.random() * 3) // Mock violations
-        if (violations > 0) {
-          auditReport.violations_found += violations
-          auditReport.actions_taken.push(`Removed ${violations} non-GAiA records from ${table}`)
+        // Query the database for violations
+        const { data: violations, error } = await this.supabase
+          .from(table)
+          .select('*', { count: 'exact' })
+          .not('token_symbol', 'eq', 'GAiA')
+          .not('wallet_address', 'eq', OFFICIAL_GAIA_ADDRESS)
+        
+        if (error) {
+          console.error(`❌ Error auditing table ${table}:`, error)
+          continue
+        }
+        
+        if (violations && violations.length > 0) {
+          auditReport.violations_found += violations.length
+          auditReport.actions_taken.push(`Removed ${violations.length} non-GAiA records from ${table}`)
         }
       }
 
