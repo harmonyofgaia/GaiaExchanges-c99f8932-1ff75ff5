@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -12,24 +13,46 @@ import {
   LogIn,
   UserPlus
 } from 'lucide-react'
+import { useAuth } from '@/components/auth/AuthProvider'
+import { toast } from 'sonner'
 
 const Auth = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const { signIn, signUp } = useAuth()
+  const navigate = useNavigate()
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    // Authentication logic would go here
-    setTimeout(() => setIsLoading(false), 1000)
+    
+    try {
+      const { error } = await signIn(email, password)
+      if (!error) {
+        navigate('/')
+      }
+    } catch (error) {
+      console.error('Sign in failed:', error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    // Registration logic would go here
-    setTimeout(() => setIsLoading(false), 1000)
+    
+    try {
+      const { error } = await signUp(email, password)
+      if (!error) {
+        toast.success('Please check your email for confirmation link!')
+      }
+    } catch (error) {
+      console.error('Sign up failed:', error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
