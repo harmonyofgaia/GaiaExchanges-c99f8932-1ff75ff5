@@ -43,7 +43,7 @@ const GreenImpactDashboard = () => {
   });
 
   const [personalGoals, setPersonalGoals] = useState([
-    { id: 1, title: "Plant 10 Trees", progress: 75, target: 10, current: 7.5 },
+    { id: 1, title: "Plant 10 Trees", progress: 80, target: 10, current: 8 },
     { id: 2, title: "Reduce Carbon by 100kg", progress: 45, target: 100, current: 45 },
     { id: 3, title: "Fund 5 Projects", progress: 60, target: 5, current: 3 }
   ]);
