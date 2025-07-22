@@ -165,7 +165,9 @@ export function RealTimeEnvironmentalData() {
       })))
 
       // Simulate GAiA price changes based on environmental improvements
-      const avgGaiaImpact = environmentalData.reduce((sum, data) => sum + data.gaiaImpact, 0) / environmentalData.length
+      const avgGaiaImpact = environmentalData.length > 0 
+        ? environmentalData.reduce((sum, data) => sum + data.gaiaImpact, 0) / environmentalData.length 
+        : 0;
       const priceMultiplier = 1 + (avgGaiaImpact - 40) * 0.001
       setGaiaPrice(prev => Math.max(0.001, prev * priceMultiplier))
       setPriceChange((priceMultiplier - 1) * 100)
