@@ -87,7 +87,12 @@ export function SecurityDashboard() {
       if (threatError) throw threatError
 
       setScans(scanData || [])
-      setThreats(threatData || [])
+      // Transform threatData to match ThreatIntelligence interface
+      const transformedThreats = (threatData || []).map(threat => ({
+        ...threat,
+        ip_address: String(threat.ip_address || '')
+      }))
+      setThreats(transformedThreats)
       
       // Calculate system status
       const latestScan = scanData?.[0]
