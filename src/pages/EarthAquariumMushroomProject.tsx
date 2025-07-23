@@ -195,32 +195,33 @@ export default function EarthAquariumMushroomProject() {
     }
   ]);
 
+  const updateCultivation = useCallback(() => {
+    if (currentCultivation.progress < 100) {
+      setCultivation(prev => ({
+        ...prev,
+        progress: Math.min(prev.progress + 2, 100),
+        mushroomsGrowing: Math.min(prev.mushroomsGrowing + 1, prev.target)
+      }));
+    } else {
+      // Complete the cultivation cycle
+      setMushroomTokens(prev => prev + 25);
+      setTotalMushroomsGrown(prev => prev + currentCultivation.target);
+      setCultivation({
+        progress: 0,
+        mushroomsGrowing: 0,
+        target: 25,
+        timeRemaining: '8 hours',
+        strain: 'Harmony Healing Shiitake'
+      });
+      synergyService.addHarmonyPoints(60, 1.6);
+    }
+  }, [currentCultivation.progress, currentCultivation.target, synergyService]);
+
   useEffect(() => {
     // Simulate ongoing cultivation process
-    const interval = setInterval(() => {
-      if (currentCultivation.progress < 100) {
-        setCultivation(prev => ({
-          ...prev,
-          progress: Math.min(prev.progress + 2, 100),
-          mushroomsGrowing: Math.min(prev.mushroomsGrowing + 1, prev.target)
-        }));
-      } else {
-        // Complete the cultivation cycle
-        setMushroomTokens(prev => prev + 25);
-        setTotalMushroomsGrown(prev => prev + currentCultivation.target);
-        setCultivation({
-          progress: 0,
-          mushroomsGrowing: 0,
-          target: 25,
-          timeRemaining: '8 hours',
-          strain: 'Harmony Healing Shiitake'
-        });
-        synergyService.addHarmonyPoints(60, 1.6);
-      }
-    }, 5000);
-
+    const interval = setInterval(updateCultivation, 5000);
     return () => clearInterval(interval);
-  }, [currentCultivation.progress]);
+  }, [updateCultivation]);
 
   const startCultivation = (cultivation: MushroomCultivation) => {
     setCultivation({
