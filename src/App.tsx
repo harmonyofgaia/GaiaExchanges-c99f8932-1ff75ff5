@@ -23,6 +23,7 @@ import EcoMissions from "./pages/EcoMissions";
 import PlanetCleaning from "./pages/PlanetCleaning";
 import NFTCards from "./pages/NFTCards";
 import EcoAvatar from "./pages/EcoAvatar";
+import LovableDeploymentTool from "./pages/LovableDeploymentTool";
 import Security from "./pages/Security";
 import ArtistStreaming from "./pages/ArtistStreaming";
 import VideoUpload from "./pages/VideoUpload";
@@ -57,6 +58,7 @@ const App = () => (
             <Route path="/planet-cleaning" element={<PlanetCleaning />} />
             <Route path="/nft-cards" element={<NFTCards />} />
             <Route path="/eco-avatar" element={<EcoAvatar />} />
+            <Route path="/lovable-deployment-tool" element={<LovableDeploymentTool />} />
             
             {/* Entertainment Routes */}
             <Route path="/artist-streaming" element={<ArtistStreaming />} />

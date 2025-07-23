@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Rocket } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -140,6 +140,25 @@ export const navigationItems: NavigationItem[] = [
       "Environmental Bonding"
     ],
     description: "Master Plan v7: Deep spiritual connection with nature through avatars",
+    lazyLoaded: true,
+  },
+  {
+    title: "Deployment Tool",
+    to: "/lovable-deployment-tool",
+    icon: Rocket,
+    variant: "ghost" as const,
+    masterPlanVersion: "v3",
+    features: [
+      "Additive-Only Deployment",
+      "Multi-Platform Sync",
+      "Community Approval Workflow",
+      "AI-Powered Risk Assessment",
+      "Supabase Auto-Fix Engine",
+      "Soulbound Reputation",
+      "Environmental Impact Tracking",
+      "Demo Environments"
+    ],
+    description: "Master Plan v3: Revolutionary deployment tool with community governance",
     lazyLoaded: true,
   },
   {
