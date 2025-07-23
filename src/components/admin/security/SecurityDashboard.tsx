@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -113,7 +112,8 @@ export function SecurityDashboard() {
         const typedThreats = threatData.map(threat => ({
           ...threat,
           threat_data: (threat.threat_data as any) || {},
-          ip_address: threat.ip_address as string | null,
+          ip_address: (threat.ip_address as string) || null,
+          user_agent: (threat.user_agent as string) || null,
           geolocation: threat.geolocation as any
         })) as ThreatIntelligence[]
         setThreats(typedThreats)
