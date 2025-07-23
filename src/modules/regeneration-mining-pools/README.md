@@ -3,10 +3,13 @@
 ## Overview
 Revolutionary mining concept that transforms traditional cryptocurrency mining into active environmental regeneration through proof-of-impact consensus mechanisms. This module creates mining pools where computational power and rewards are directly tied to verified environmental restoration projects.
 
+## What is PoEI?
+**Proof-of-Environmental-Impact (PoEI)** is a novel consensus mechanism that links mining rewards to verified environmental restoration projects. It ensures that computational power contributes directly to measurable ecological benefits, verified through satellite data, IoT sensors, and third-party audits.
+
 ## Features
 
 ### Core Mining Concept
-- **Proof-of-Environmental-Impact (PoEI)**: New consensus mechanism linking mining rewards to environmental restoration
+- **Proof-of-Environmental-Impact (PoEI)**: See [What is PoEI?](#what-is-poei) for details on this consensus mechanism linking mining rewards to environmental restoration
 - **Verified Impact Metrics**: Satellite verification, IoT sensors, and third-party audits ensure legitimate impact
 - **Dynamic Reward Scaling**: Mining rewards adjust based on environmental urgency and measured impact
 
