@@ -240,13 +240,151 @@ jobs:
 
 #### Required Secrets
 Configure in GitHub Repository Settings > Secrets:
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_ANON_KEY`
-- `VERCEL_TOKEN` (for Vercel deployment)
-- `ORG_ID` (Vercel organization ID)
-- `PROJECT_ID` (Vercel project ID)
 
-## Error Handling
+**Core Application Secrets:**
+- `VITE_SUPABASE_URL` - Supabase project URL
+- `VITE_SUPABASE_ANON_KEY` - Supabase anonymous key
+
+**Deployment Secrets:**
+- `VERCEL_TOKEN` - Vercel deployment token
+- `VERCEL_ORG_ID` - Vercel organization ID  
+- `VERCEL_PROJECT_ID` - Vercel project ID
+
+**Notification Secrets (for failure alerts):**
+- `SLACK_WEBHOOK_URL` - Slack incoming webhook URL for deployment notifications
+- `DISCORD_WEBHOOK_URL` - Discord webhook URL for deployment alerts
+- `EMAIL_USERNAME` - SMTP email username (e.g., Gmail address)
+- `EMAIL_PASSWORD` - SMTP email password or app-specific password
+- `NOTIFICATION_EMAIL` - Email address to receive deployment failure notifications
+
+**Admin Control Secrets:**
+- `ADMIN_EMAILS` - Comma-separated list of admin email addresses
+- `ADMIN_USER_IDS` - Comma-separated list of admin user IDs
+- `ADMIN_ROLES` - Comma-separated list of admin role names (default: admin,super_admin)
+- `REQUIRE_TWO_FACTOR` - Set to 'true' to require 2FA for admin access
+
+## Notification Systems and Operational Routines
+
+### Automated Notification Setup
+
+The deployment workflow includes automated failure notifications through multiple channels:
+
+#### Slack Notifications
+Configure Slack webhook for team notifications:
+1. Go to your Slack workspace settings
+2. Create a new incoming webhook
+3. Set `SLACK_WEBHOOK_URL` secret in GitHub repository
+4. Notifications will include deployment status and failure details
+
+#### Discord Notifications  
+Set up Discord webhook for community alerts:
+1. Go to Discord channel settings
+2. Create webhook URL
+3. Set `DISCORD_WEBHOOK_URL` secret in GitHub repository
+4. Failed deployments trigger immediate Discord alerts
+
+#### Email Notifications
+Configure SMTP email for critical alerts:
+1. Use Gmail with app-specific password (recommended)
+2. Set `EMAIL_USERNAME`, `EMAIL_PASSWORD`, and `NOTIFICATION_EMAIL` secrets
+3. Email includes detailed failure information and GitHub Actions links
+
+### Health Monitoring and API Endpoints
+
+#### Health Check Endpoint
+- **URL**: `/api/health`
+- **Method**: GET
+- **Response**: JSON with system status, database connectivity, and environment info
+- **Automated**: Runs after each deployment to verify system health
+
+#### Admin API Endpoints
+- **URL**: `/api/admin/check`
+- **Method**: GET
+- **Auth**: Requires admin privileges
+- **Purpose**: Verify admin access and permissions
+
+### Operational Routines
+
+#### Daily Operations
+1. **Morning Health Check**: Automated via cron job or external monitoring
+2. **Performance Review**: Check Core Web Vitals and response times
+3. **Error Monitoring**: Review Sentry/logging dashboards for issues
+4. **Security Scan**: Automated dependency vulnerability scanning
+
+#### Weekly Operations
+1. **Admin Access Review**: Verify admin user list and permissions
+2. **Secret Rotation**: Rotate API keys and tokens (quarterly schedule)
+3. **Deployment Analysis**: Review deployment success rates and timing
+4. **Backup Verification**: Ensure database backups are functioning
+
+#### Monthly Operations
+1. **Security Audit**: Complete security review of admin controls
+2. **Performance Optimization**: Analyze and optimize bundle sizes
+3. **Documentation Update**: Keep deployment docs current
+4. **Disaster Recovery Test**: Test rollback procedures
+
+### Admin Control Configuration
+
+#### Environment Variables for Admin Controls
+```bash
+# Admin user configuration
+ADMIN_EMAILS=admin@example.com,superadmin@example.com
+ADMIN_USER_IDS=user-id-1,user-id-2
+ADMIN_ROLES=admin,super_admin
+REQUIRE_TWO_FACTOR=true
+```
+
+#### Admin Middleware Usage
+```typescript
+import { withAdminOnly } from '../middleware/adminOnly';
+
+// Protect API endpoints
+export default withAdminOnly(async (req, res) => {
+  // Admin-only functionality here
+});
+```
+
+#### Client-side Admin Checking
+```typescript
+import { useAdminAuth } from '../middleware/adminOnly';
+
+const { checkAdminStatus } = useAdminAuth();
+const { isAdmin } = await checkAdminStatus(userToken);
+```
+
+### Incident Response Procedures
+
+#### Deployment Failure Response
+1. **Immediate**: Automated notifications sent to all channels
+2. **5 minutes**: Admin team reviews GitHub Actions logs
+3. **15 minutes**: Rollback decision made if issue not resolved
+4. **30 minutes**: Post-mortem scheduled if rollback performed
+
+#### Security Incident Response
+1. **Detection**: Admin middleware blocks unauthorized access
+2. **Logging**: All admin access attempts logged and monitored
+3. **Response**: Immediate secret rotation if compromise suspected
+4. **Recovery**: Admin access audit and permission review
+
+#### System Health Degradation
+1. **Health Check Failure**: Automated retry after 30 seconds
+2. **Persistent Issues**: Escalation to admin notification channels
+3. **Critical Failure**: Manual intervention and rollback procedures
+4. **Recovery**: Health verification and incident documentation
+
+### Monitoring and Alerting Configuration
+
+#### Recommended External Monitoring
+- **Uptime**: Pingdom, StatusPage, or UptimeRobot
+- **Performance**: Google PageSpeed, GTmetrix
+- **Security**: Snyk, GitHub Security Advisories
+- **Logs**: Vercel Analytics, Supabase Dashboard
+
+#### Alert Thresholds
+- **Response Time**: >3 seconds for 95th percentile
+- **Error Rate**: >1% of requests failing
+- **Availability**: <99.9% uptime over 24 hours
+- **Security**: Any unauthorized admin access attempts
 
 ### Common Build Errors
 

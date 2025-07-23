@@ -16,6 +16,7 @@ import { PhoenixGuardian } from '@/components/admin/PhoenixGuardian'
 import { GaiaIATool } from '@/components/admin/GaiaIATool'
 import { SecurityDashboard } from '@/components/admin/security/SecurityDashboard'
 import { UserManagementSystemRefactored } from '@/components/admin/UserManagementSystemRefactored'
+import { AdminDashboard as DeploymentDashboard } from '@/components/AdminDashboard'
 import { AdminDashboard } from '@/components/admin/AdminDashboard'
 import { Navbar } from '@/components/Navbar'
 
@@ -33,8 +34,14 @@ export default function Admin() {
           </p>
         </div>
 
-        <Tabs defaultValue="dashboard" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-16 gap-1 h-auto p-1 text-xs">
+        <Tabs defaultValue="deployment" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-17 gap-1 h-auto p-1 text-xs">
+            <TabsTrigger value="deployment" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🚀</span>
+                <span className="hidden sm:inline">Deployment</span>
+              </div>
+            </TabsTrigger>
             <TabsTrigger value="dashboard" className="p-2 text-center">
               <div className="flex flex-col items-center">
                 <span>🏠</span>
@@ -134,6 +141,10 @@ export default function Admin() {
           </TabsList>
 
           <div className="mt-4">
+            <TabsContent value="deployment" className="mt-0">
+              <DeploymentDashboard />
+            </TabsContent>
+
             <TabsContent value="dashboard" className="mt-0">
               <AdminDashboard />
             </TabsContent>
