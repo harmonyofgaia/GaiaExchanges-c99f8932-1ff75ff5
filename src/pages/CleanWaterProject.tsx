@@ -169,7 +169,7 @@ export default function CleanWaterProject() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [currentPurification.progress]);
+  }, [currentProgress]);
 
   const startPurificationTask = (task: WaterPurificationTask) => {
     setCurrentPurification({
