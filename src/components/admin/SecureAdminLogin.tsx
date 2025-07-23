@@ -20,22 +20,21 @@ export function SecureAdminLogin() {
     const vaultKey = btoa('harmony quantum vault access').replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
     
     // Enhanced security validation with vault-connected credentials
-    const validCredentials = {
+    let validCredentials = {
       user: 'Synatic', // Updated username
       pass: 'harmonyquantumvaultaccess', // Updated password
       vault: vaultKey
     }
     
-    if (username === validCredentials.user && 
-        password === validCredentials.pass) {
-      
-      // Immediate secure cleanup
-      username = ''
-      password = ''
-      validCredentials.user = ''
-      validCredentials.pass = ''
-      validCredentials.vault = ''
-      
+    const isAuthenticated = username === validCredentials.user && 
+                            password === validCredentials.pass
+    
+    // Immediate secure cleanup
+    username = null
+    password = null
+    validCredentials = null
+    
+    if (isAuthenticated) {
       grantAdminAccess()
       toast.success('🌍 GAIA Vault Access Granted!', {
         description: 'Quantum vault security verified - all systems operational',
