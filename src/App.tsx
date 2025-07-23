@@ -15,8 +15,10 @@ import EnhancedDownloads from "./pages/EnhancedDownloads";
 import SecureVault from "./pages/SecureVault";
 import SecureAdmin from "./pages/SecureAdmin";
 import Game from "./pages/Game";
+import Gaming from "./pages/Gaming";
 import GaiasProjects from "./pages/GaiasProjects";
 import Exchange from "./pages/Exchange";
+import CoinCrafter from "./pages/CoinCrafter";
 import GreenImpactDashboard from "./pages/GreenImpactDashboard";
 import ProjectFunding from "./pages/ProjectFunding";
 import EcoMissions from "./pages/EcoMissions";
@@ -27,6 +29,9 @@ import Security from "./pages/Security";
 import ArtistStreaming from "./pages/ArtistStreaming";
 import VideoUpload from "./pages/VideoUpload";
 import MusicPlatform from "./pages/MusicPlatform";
+import GaiaFantasyMMORPG from "./pages/games/GaiaFantasyMMORPG";
+import SnakeArenaGame from "./pages/games/SnakeArenaGame";
+import HabboTycoon from "./pages/games/HabboTycoon";
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
 import SlidingMenu from '@/components/SlidingMenu';
 
@@ -49,6 +54,7 @@ const App = () => (
             {/* Main Platform Routes */}
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/exchange" element={<Exchange />} />
+            <Route path="/coin-crafter" element={<CoinCrafter />} />
             <Route path="/gaias-projects" element={<GaiasProjects />} />
             <Route path="/projects" element={<GaiasProjects />} />
             <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
@@ -65,7 +71,11 @@ const App = () => (
             
             {/* Gaming Routes */}
             <Route path="/game" element={<Game />} />
-            <Route path="/gaming" element={<Game />} />
+            <Route path="/gaming" element={<Gaming />} />
+            <Route path="/game/gaia-fantasy-mmorpg" element={<GaiaFantasyMMORPG />} />
+            <Route path="/game/snake-arena" element={<SnakeArenaGame />} />
+            <Route path="/game/habbo-tycoon" element={<HabboTycoon />} />
+            <Route path="/gaia-fighter-game" element={<Game />} />
             
             {/* Admin Routes */}
             <Route path="/admin-login" element={<AdminLogin />} />
