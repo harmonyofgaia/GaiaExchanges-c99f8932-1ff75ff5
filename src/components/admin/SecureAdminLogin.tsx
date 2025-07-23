@@ -20,21 +20,22 @@ export function SecureAdminLogin() {
     const vaultKey = btoa('harmony quantum vault access').replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
     
     // Enhanced security validation with vault-connected credentials
-    let validCredentials = {
+    const validCredentials = {
       user: 'Synatic', // Updated username
       pass: 'harmonyquantumvaultaccess', // Updated password
       vault: vaultKey
     }
     
-    const isAuthenticated = username === validCredentials.user && 
-                            password === validCredentials.pass
-    
-    // Immediate secure cleanup
-    username = null
-    password = null
-    validCredentials = null
-    
-    if (isAuthenticated) {
+    if (username === validCredentials.user && 
+        password === validCredentials.pass) {
+      
+      // Immediate secure cleanup
+      username = ''
+      password = ''
+      validCredentials.user = ''
+      validCredentials.pass = ''
+      validCredentials.vault = ''
+      
       grantAdminAccess()
       toast.success('🌍 GAIA Vault Access Granted!', {
         description: 'Quantum vault security verified - all systems operational',
@@ -187,23 +188,11 @@ export function SecureAdminLogin() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                   <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
                     <div className="text-yellow-300 font-medium">Admin Username:</div>
-                    <Button 
-                      onClick={() => handleCopyToClipboard('Synatic')} 
-                      variant="outline" 
-                      className="text-yellow-400 hover:bg-yellow-500/10"
-                    >
-                      Copy Username
-                    </Button>
+                    <div className="text-white font-mono text-lg">Synatic</div>
                   </div>
                   <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
                     <div className="text-yellow-300 font-medium">Vault Password:</div>
-                    <Button 
-                      onClick={() => handleCopyToClipboard('harmonyquantumvaultaccess')} 
-                      variant="outline" 
-                      className="text-yellow-400 hover:bg-yellow-500/10"
-                    >
-                      Copy Password
-                    </Button>
+                    <div className="text-white font-mono text-lg">harmonyquantumvaultaccess</div>
                   </div>
                 </div>
                 <div className="text-xs text-yellow-400">
