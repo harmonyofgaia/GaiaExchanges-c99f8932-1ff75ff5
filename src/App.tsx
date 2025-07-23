@@ -28,6 +28,11 @@ import Security from "./pages/Security";
 import ArtistStreaming from "./pages/ArtistStreaming";
 import VideoUpload from "./pages/VideoUpload";
 import MusicPlatform from "./pages/MusicPlatform";
+import UnifiedCrossProjectDashboard from "./pages/UnifiedCrossProjectDashboard";
+import SeedSplitterProject from "./pages/SeedSplitterProject";
+import CleanWaterProject from "./pages/CleanWaterProject";
+import CoralReefRestorationProject from "./pages/CoralReefRestorationProject";
+import EarthAquariumMushroomProject from "./pages/EarthAquariumMushroomProject";
 import GlobalLeaderboard from "./pages/GlobalLeaderboard";
 import AIPoweredMissionGenerator from "./pages/AIPoweredMissionGenerator";
 import NFTAnimalRescue from "./pages/NFTAnimalRescue";
@@ -63,6 +68,13 @@ const App = () => (
             <Route path="/nft-cards" element={<NFTCards />} />
             <Route path="/eco-avatar" element={<EcoAvatar />} />
             <Route path="/lovable-deployment-tool" element={<LovableDeploymentTool />} />
+            
+            {/* Cross-Project Synergy Routes */}
+            <Route path="/unified-cross-project-dashboard" element={<UnifiedCrossProjectDashboard />} />
+            <Route path="/seed-splitter" element={<SeedSplitterProject />} />
+            <Route path="/clean-water" element={<CleanWaterProject />} />
+            <Route path="/coral-reef-restoration" element={<CoralReefRestorationProject />} />
+            <Route path="/earth-aquarium-shrooms" element={<EarthAquariumMushroomProject />} />
             
             {/* Entertainment Routes */}
             <Route path="/artist-streaming" element={<ArtistStreaming />} />

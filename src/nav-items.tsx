@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Rocket, Trophy, Brain, Camera, Activity } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Rocket, Droplets, Crown, ArrowRightLeft, Waves, Mountain, Trophy, Brain, Camera, Activity } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -143,6 +143,40 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
+    title: "Coral Restoration",
+    to: "/coral-reef-restoration",
+    icon: Waves,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Ocean Protection",
+      "Sonic Healing Technology",
+      "Mushroom Tour Unlocks",
+      "Marine Biodiversity",
+      "Symbiotic Restoration",
+      "Deep Sea Integration"
+    ],
+    description: "Master Plan v7: Advanced coral restoration with mushroom wellness synergy",
+    lazyLoaded: true,
+  },
+  {
+    title: "Earth Aquarium",
+    to: "/earth-aquarium-shrooms",
+    icon: Mountain,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Underground Cultivation",
+      "Coral Wisdom Integration",
+      "Wellness Tours",
+      "Healing Networks",
+      "Mycelium Networks",
+      "Spiritual Enhancement"
+    ],
+    description: "Master Plan v7: Underground mushroom cultivation with coral tour benefits",
+    lazyLoaded: true,
+  },
+  {
     title: "Global Leaderboard",
     to: "/global-leaderboard",
     icon: Trophy,
@@ -206,6 +240,7 @@ export const navigationItems: NavigationItem[] = [
     description: "Master Plan v7: Comprehensive platform health monitoring and diagnostics",
     lazyLoaded: true,
   },
+  {
     title: "Lovable Deployment Tool",
     to: "/lovable-deployment-tool",
     icon: Rocket,
@@ -222,6 +257,57 @@ export const navigationItems: NavigationItem[] = [
       "Demo Environments"
     ],
     description: "Master Plan v3: Revolutionary deployment tool with community governance",
+    lazyLoaded: true,
+  },
+  {
+    title: "Unified Dashboard",
+    to: "/unified-cross-project-dashboard",
+    icon: Crown,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Cross-Project Synergy",
+      "Harmony Points System",
+      "Token Multipliers",
+      "Skill Transfer Quests",
+      "Universal Recognition",
+      "Impact Investment Tracking"
+    ],
+    description: "Master Plan v7: Unified dashboard with complete cross-project integration",
+    lazyLoaded: true,
+  },
+  {
+    title: "Seed Splitter",
+    to: "/seed-splitter",
+    icon: TreePine,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Growth & Evolution",
+      "Clean Water Token Exchange",
+      "Enhanced Germination",
+      "Cross-Project Seed Packs",
+      "Symbiotic Plant Networks",
+      "Ecosystem Restoration"
+    ],
+    description: "Master Plan v7: Advanced seed multiplication with water synergy",
+    lazyLoaded: true,
+  },
+  {
+    title: "Clean Water",
+    to: "/clean-water",
+    icon: Droplets,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Water Purification",
+      "Seed Pack Rewards",
+      "Cross-Project Benefits",
+      "Quality Metrics",
+      "Ecosystem Integration",
+      "Marine Protection"
+    ],
+    description: "Master Plan v7: Water purification with seed project synergy",
     lazyLoaded: true,
   },
   {
