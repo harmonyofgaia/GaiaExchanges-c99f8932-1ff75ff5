@@ -50,8 +50,8 @@ const App = () => (
         <Toaster />
         <Sonner />
         <DatabaseErrorFixer />
-        <AdminSessionManager />
         <BrowserRouter>
+          <AdminSessionManager />
           <SlidingMenu />
           <Routes>
             {/* Public Routes */}
