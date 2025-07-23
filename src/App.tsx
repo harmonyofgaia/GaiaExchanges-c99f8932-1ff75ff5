@@ -31,6 +31,8 @@ import MusicPlatform from "./pages/MusicPlatform";
 import UnifiedCrossProjectDashboard from "./pages/UnifiedCrossProjectDashboard";
 import SeedSplitterProject from "./pages/SeedSplitterProject";
 import CleanWaterProject from "./pages/CleanWaterProject";
+import CoralReefRestorationProject from "./pages/CoralReefRestorationProject";
+import EarthAquariumMushroomProject from "./pages/EarthAquariumMushroomProject";
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
 import SlidingMenu from '@/components/SlidingMenu';
 
@@ -67,6 +69,8 @@ const App = () => (
             <Route path="/unified-cross-project-dashboard" element={<UnifiedCrossProjectDashboard />} />
             <Route path="/seed-splitter" element={<SeedSplitterProject />} />
             <Route path="/clean-water" element={<CleanWaterProject />} />
+            <Route path="/coral-reef-restoration" element={<CoralReefRestorationProject />} />
+            <Route path="/earth-aquarium-shrooms" element={<EarthAquariumMushroomProject />} />
             
             {/* Entertainment Routes */}
             <Route path="/artist-streaming" element={<ArtistStreaming />} />

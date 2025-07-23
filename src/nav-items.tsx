@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Rocket, Droplets, Crown, ArrowRightLeft } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Rocket, Droplets, Crown, ArrowRightLeft, Waves, Mountain } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -143,7 +143,58 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
+    title: "Coral Restoration",
+    to: "/coral-reef-restoration",
+    icon: Waves,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Ocean Protection",
+      "Sonic Healing Technology",
+      "Mushroom Tour Unlocks",
+      "Marine Biodiversity",
+      "Symbiotic Restoration",
+      "Deep Sea Integration"
+    ],
+    description: "Master Plan v7: Advanced coral restoration with mushroom wellness synergy",
+    lazyLoaded: true,
+  },
+  {
+    title: "Earth Aquarium",
+    to: "/earth-aquarium-shrooms",
+    icon: Mountain,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Underground Cultivation",
+      "Coral Wisdom Integration",
+      "Wellness Tours",
+      "Healing Networks",
+      "Mycelium Networks",
+      "Spiritual Enhancement"
+    ],
+    description: "Master Plan v7: Underground mushroom cultivation with coral tour benefits",
+    lazyLoaded: true,
+  },
+  {
     title: "Deployment Tool",
+    to: "/lovable-deployment-tool",
+    icon: Rocket,
+    variant: "ghost" as const,
+    masterPlanVersion: "v3",
+    features: [
+      "Additive-Only Deployment",
+      "Multi-Platform Sync",
+      "Community Approval Workflow",
+      "AI-Powered Risk Assessment",
+      "Supabase Auto-Fix Engine",
+      "Soulbound Reputation",
+      "Environmental Impact Tracking",
+      "Demo Environments"
+    ],
+    description: "Master Plan v3: Revolutionary deployment tool with community governance",
+    lazyLoaded: true,
+  },
     to: "/lovable-deployment-tool",
     icon: Rocket,
     variant: "ghost" as const,
