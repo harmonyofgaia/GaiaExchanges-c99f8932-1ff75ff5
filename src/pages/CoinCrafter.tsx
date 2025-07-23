@@ -7,6 +7,9 @@ import { Hammer, Zap, Coins, Settings } from 'lucide-react'
 import { useState } from 'react'
 import HoverSidebar from '@/components/HoverSidebar'
 import { CoinCrafterIllustration } from '@/components/CoinCrafterIllustration'
+import { LiveCoinRateAgreements } from '@/components/LiveCoinRateAgreements'
+import { HistoricalRateAgreements } from '@/components/HistoricalRateAgreements'
+import { NFTArtworkModules } from '@/components/NFTArtworkModules'
 
 const CoinCrafter = () => {
   const [tokenName, setTokenName] = useState('')
@@ -18,9 +21,17 @@ const CoinCrafter = () => {
       <HoverSidebar />
       
       <div className="ml-16 min-h-screen">
-        <div className="container mx-auto px-6 py-8">
+        <div className="container mx-auto px-6 py-8 space-y-8">
+          {/* Official Illustration as Centerpiece */}
           <CoinCrafterIllustration />
 
+          {/* Live Coin Rate Agreements */}
+          <LiveCoinRateAgreements />
+
+          {/* Historical Rate Agreements */}
+          <HistoricalRateAgreements />
+
+          {/* Original Token Creation Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <Card className="border-orange-500/30 bg-orange-900/20">
               <CardHeader>
@@ -102,6 +113,9 @@ const CoinCrafter = () => {
               </CardContent>
             </Card>
           </div>
+
+          {/* NFT Artwork Integration Modules */}
+          <NFTArtworkModules />
         </div>
       </div>
     </div>
