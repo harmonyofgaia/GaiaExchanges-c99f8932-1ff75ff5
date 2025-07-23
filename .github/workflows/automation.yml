@@ -1,0 +1,133 @@
+name: PR Automation
+
+on:
+  # Run on schedule (daily at 9 AM UTC)
+  schedule:
+    - cron: '0 9 * * *'
+  
+  # Allow manual triggering
+  workflow_dispatch:
+    inputs:
+      pr_range_start:
+        description: 'Starting PR number'
+        required: false
+        default: '22'
+        type: string
+      pr_range_end:
+        description: 'Ending PR number'
+        required: false
+        default: '34'
+        type: string
+      dry_run:
+        description: 'Dry run mode (no actual merging)'
+        required: false
+        default: true
+        type: boolean
+      enable_auto_merge:
+        description: 'Enable automatic merging'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  pr-automation:
+    runs-on: ubuntu-latest
+    name: Automated PR Processing
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+        
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Verify GitHub token
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        if [ -z "$GITHUB_TOKEN" ]; then
+          echo "❌ GITHUB_TOKEN secret is not set"
+          exit 1
+        fi
+        echo "✅ GitHub token is configured"
+        
+    - name: Test GitHub connection
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+      run: |
+        echo "Testing GitHub API connection..."
+        python github_client.py
+        
+    - name: Run PR automation
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        PR_RANGE_START: ${{ inputs.pr_range_start || '22' }}
+        PR_RANGE_END: ${{ inputs.pr_range_end || '34' }}
+        DRY_RUN: ${{ inputs.dry_run || 'true' }}
+        ENABLE_AUTO_MERGE: ${{ inputs.enable_auto_merge || 'false' }}
+        ENABLE_NOTIFICATIONS: 'true'
+        MIN_REVIEWS: '1'
+        REQUIRE_STATUS_CHECKS: 'true'
+        REQUIRED_LABELS: 'ready-to-merge,approved'
+        NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      run: |
+        echo "🚀 Starting PR automation with the following configuration:"
+        echo "   - Repository: $GITHUB_REPOSITORY"
+        echo "   - PR Range: #$PR_RANGE_START-#$PR_RANGE_END"
+        echo "   - Dry Run: $DRY_RUN"
+        echo "   - Auto Merge: $ENABLE_AUTO_MERGE"
+        echo "   - Required Labels: $REQUIRED_LABELS"
+        echo ""
+        
+        python automation.py
+        
+    - name: Upload automation logs
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: automation-logs-${{ github.run_id }}
+        path: |
+          *.log
+          automation_results.json
+        retention-days: 30
+        
+  notify-completion:
+    runs-on: ubuntu-latest
+    needs: pr-automation
+    if: always()
+    
+    steps:
+    - name: Notify automation completion
+      if: always()
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ needs.pr-automation.result }}
+        text: |
+          🤖 **PR Automation Complete** 🤖
+          
+          **Results:**
+          • Status: ${{ needs.pr-automation.result }}
+          • Repository: ${{ github.repository }}
+          • Triggered by: ${{ github.actor }}
+          • Workflow: ${{ github.workflow }}
+          
+          **Configuration:**
+          • PR Range: #${{ inputs.pr_range_start || '22' }}-#${{ inputs.pr_range_end || '34' }}
+          • Dry Run: ${{ inputs.dry_run || 'true' }}
+          • Auto Merge: ${{ inputs.enable_auto_merge || 'false' }}
+          
+          **Details:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      continue-on-error: true
