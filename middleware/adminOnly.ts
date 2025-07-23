@@ -145,7 +145,7 @@ export async function adminOnlyMiddleware(
     }
 
     // Add user context to request for downstream handlers
-    (req as any).adminUser = user;
+    (req as AdminRequest).adminUser = user;
 
     // Call next middleware if provided
     if (next) {
