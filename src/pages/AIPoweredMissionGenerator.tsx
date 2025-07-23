@@ -134,7 +134,7 @@ const AIPoweredMissionGenerator: React.FC = () => {
     setIsGenerating(true);
     
     // Simulate AI generation
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, AI_GENERATION_DELAY_MS));
     
     const newMission = {
       ...sampleMissions[Math.floor(Math.random() * sampleMissions.length)],
