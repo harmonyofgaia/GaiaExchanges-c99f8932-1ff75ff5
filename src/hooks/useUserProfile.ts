@@ -61,7 +61,7 @@ export function useUserProfile() {
         if (error && error.code !== 'PGRST116') {
           console.error('Error fetching profile:', error)
         } else if (data) {
-          // Transform data to match UserProfile interface with missing properties
+          // Transform data to match UserProfile interface with safe fallbacks
           const profileData: UserProfile = {
             id: data.id,
             email: data.email,
