@@ -425,7 +425,7 @@ export default function CoralReefRestorationProject() {
                   <CardHeader>
                     <CardTitle className="flex items-center justify-between">
                       <span className={getDifficultyColor(mission.difficulty).split(' ')[0]}>{mission.name}</span>
-                      <Badge className={`${getDifficultyColor(mission.difficulty).split(' ')[1].replace('border-', 'bg-').replace('/50', '')}`}>
+                      <Badge className={getBackgroundColorClass(mission.difficulty)}>
                         {mission.difficulty}
                       </Badge>
                     </CardTitle>
