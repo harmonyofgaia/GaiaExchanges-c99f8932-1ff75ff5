@@ -134,8 +134,8 @@ def demo_pr_range():
         
         # Simulate PR processing
         total_prs = end - start + 1
-        merged = total_prs // 3
-        skipped = total_prs // 2
+        merged = total_prs // MERGE_RATIO
+        skipped = total_prs // SKIP_RATIO
         errors = total_prs - merged - skipped
         
         print(f"   • Total PRs in range: {total_prs}")
