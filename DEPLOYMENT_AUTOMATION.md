@@ -252,8 +252,8 @@ Configure in GitHub Repository Settings > Secrets:
 
 #### TypeScript Errors
 ```bash
-# Current project has many TypeScript linting errors
-# Non-blocking for deployment but should be addressed
+# TypeScript linting errors may occur during development
+# These errors are non-blocking for deployment but should be addressed
 
 # Quick fix for deployment
 npm run build --ignore-warnings
