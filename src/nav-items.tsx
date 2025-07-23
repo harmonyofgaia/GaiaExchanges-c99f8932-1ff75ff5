@@ -206,6 +206,7 @@ export const navigationItems: NavigationItem[] = [
     description: "Master Plan v7: Comprehensive platform health monitoring and diagnostics",
     lazyLoaded: true,
   },
+    title: "Lovable Deployment Tool",
     to: "/lovable-deployment-tool",
     icon: Rocket,
     variant: "ghost" as const,
