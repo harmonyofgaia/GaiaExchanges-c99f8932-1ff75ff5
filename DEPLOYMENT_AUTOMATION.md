@@ -460,7 +460,7 @@ npm run build -- --analyze
 
 #### Environment Variable Issues
 ```bash
-# Debug environment loading
+# Debug environment loading (for development only; do not use in production)
 console.log('Environment:', import.meta.env);
 
 # Verify variable naming (must start with VITE_)
