@@ -381,10 +381,10 @@ export default function UnifiedCrossProjectDashboard() {
           <TabsContent value="recognition" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {globalBadges.map((badge) => (
-                <Card key={badge.badgeId} className={`border-2 ${badge.earned ? 'border-gold-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30' : 'border-gray-500/50 bg-gradient-to-br from-gray-900/30 to-gray-800/30'}`}>
+                <Card key={badge.badgeId} className={getBadgeClassNames(badge).card}>
                   <CardContent className="p-6 text-center">
-                    <Trophy className={`h-12 w-12 mx-auto mb-4 ${badge.earned ? 'text-yellow-400' : 'text-gray-400'}`} />
-                    <h4 className={`text-lg font-bold mb-2 ${badge.earned ? 'text-yellow-400' : 'text-gray-400'}`}>
+                    <Trophy className={getBadgeClassNames(badge).trophy} />
+                    <h4 className={getBadgeClassNames(badge).title}>
                       {badge.name}
                     </h4>
                     <p className="text-sm text-gray-300 mb-4">{badge.description}</p>
