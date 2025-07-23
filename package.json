@@ -8,7 +8,10 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "verify-secrets": "bash scripts/verify-secrets.sh",
+    "verify-deployment": "bash scripts/verify-deployment.sh",
+    "deployment-dashboard": "bash scripts/deployment-dashboard.sh"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.0",
