@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,6 +8,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { navigationItems } from "./nav-items";
 import Index from "./pages/Index";
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
+import EnhancedDownloads from "./pages/EnhancedDownloads";
+import SecureVault from "./pages/SecureVault";
+import SecureAdmin from "./pages/SecureAdmin";
+import Game from "./pages/Game";
 
 const queryClient = new QueryClient();
 

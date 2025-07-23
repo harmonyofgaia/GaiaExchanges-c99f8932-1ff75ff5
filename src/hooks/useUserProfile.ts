@@ -69,8 +69,8 @@ export function useUserProfile() {
             role: data.role || null,
             created_at: data.created_at || null,
             updated_at: data.updated_at || null,
-            avatar_url: data.avatar_url || null,
-            last_login: data.last_login || null
+            avatar_url: (data as any).avatar_url || null,
+            last_login: (data as any).last_login || null
           }
           setProfile(profileData)
         }
