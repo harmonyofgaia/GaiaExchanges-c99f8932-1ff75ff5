@@ -22,7 +22,7 @@ function getAdminConfig(): AdminConfig {
     adminEmails: process.env.ADMIN_EMAILS?.split(',').map(email => email.trim()) || DEFAULT_ADMIN_CONFIG.adminEmails,
     adminUserIds: process.env.ADMIN_USER_IDS?.split(',').map(id => id.trim()) || DEFAULT_ADMIN_CONFIG.adminUserIds,
     adminRoles: process.env.ADMIN_ROLES?.split(',').map(role => role.trim()) || DEFAULT_ADMIN_CONFIG.adminRoles,
-    requireTwoFactor: process.env.REQUIRE_TWO_FACTOR === 'true' || DEFAULT_ADMIN_CONFIG.requireTwoFactor
+    requireTwoFactor: process.env.REQUIRE_TWO_FACTOR !== undefined ? process.env.REQUIRE_TWO_FACTOR === 'true' : DEFAULT_ADMIN_CONFIG.requireTwoFactor
   };
 }
 
