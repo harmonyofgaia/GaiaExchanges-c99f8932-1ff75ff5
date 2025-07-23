@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -5,8 +6,13 @@ import { Globe, Heart, Zap, Users, Shield, Gamepad2, Wallet } from 'lucide-react
 import { GAIA_TOKEN } from '@/constants/gaia'
 import { WalletConnection } from '@/components/WalletConnection'
 import { Navbar } from '@/components/Navbar'
+import { setHomepageVisited } from '@/utils/authAccessControl'
 
 const Index = () => {
+  // Track homepage visit for auth access control
+  useEffect(() => {
+    setHomepageVisited()
+  }, [])
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Navigation */}
