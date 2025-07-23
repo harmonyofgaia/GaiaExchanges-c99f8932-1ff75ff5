@@ -145,8 +145,11 @@ class PRChecker:
             issues.append("PR is a draft")
 
         # Check mergeable state
-        if pr.mergeable_state not in ["clean", "unstable"]:
-            issues.append(f"PR mergeable state is {pr.mergeable_state}")
+        if pr.mergeable_state != "clean":
+            if pr.mergeable_state == "unstable":
+                issues.append("PR mergeable state is unstable and requires manual intervention")
+            else:
+                issues.append(f"PR mergeable state is {pr.mergeable_state}")
 
         return len(issues) == 0, issues
 
