@@ -16,10 +16,10 @@ declare global {
       isPhantom?: boolean
       connect: () => Promise<{ publicKey: { toString: () => string } }>
       disconnect: () => Promise<void>
-      signAndSendTransaction: (transaction: any) => Promise<{ signature: string }>
+      signAndSendTransaction: (transaction: unknown) => Promise<{ signature: string }>
       publicKey?: { toString: () => string }
       isConnected: boolean
-      request: (options: any) => Promise<any>
+      request: (options: Record<string, unknown>) => Promise<unknown>
     }
   }
 }

@@ -81,7 +81,7 @@ export function EnhancedMultiExchangeSystem() {
           
           return {
             ...exchange,
-            status: newStatus as any,
+            status: newStatus as 'listed' | 'pending' | 'documenting' | 'contacting' | 'reviewing',
             lastUpdate: new Date(),
             autoApplyStatus: newStatus === 'pending' ? 'completed' : 'in-progress'
           }
