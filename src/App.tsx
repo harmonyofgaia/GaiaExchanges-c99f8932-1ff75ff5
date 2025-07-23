@@ -12,6 +12,7 @@ import EnhancedDownloads from "./pages/EnhancedDownloads";
 import SecureVault from "./pages/SecureVault";
 import SecureAdmin from "./pages/SecureAdmin";
 import Game from "./pages/Game";
+import GaiasProjects from "./pages/GaiasProjects";
 
 const queryClient = new QueryClient();
 
@@ -24,33 +25,13 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          {navigationItems.map((item) => (
-            <Route 
-              key={item.to} 
-              path={item.to} 
-              element={
-                <div>
-                  {React.createElement(
-                    React.lazy(() => 
-                      import(`./pages${item.to === '/' ? '/Index' : item.to.split('/').map(segment => 
-                        segment.split('-').map(word => 
-                          word.charAt(0).toUpperCase() + word.slice(1)
-                        ).join('')
-                      ).join('/')}`).catch(() => 
-                        import('./pages/Index')
-                      )
-                    )
-                  )}
-                </div>
-              } 
-            />
-          ))}
-          {/* Additional routes from PRs */}
           <Route path="/enhanced-downloads" element={<EnhancedDownloads />} />
           <Route path="/secure-vault" element={<SecureVault />} />
           <Route path="/secure-admin" element={<SecureAdmin />} />
           <Route path="/game" element={<Game />} />
           <Route path="/gaming" element={<Game />} />
+          <Route path="/gaias-projects" element={<GaiasProjects />} />
+          <Route path="/projects" element={<GaiasProjects />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
