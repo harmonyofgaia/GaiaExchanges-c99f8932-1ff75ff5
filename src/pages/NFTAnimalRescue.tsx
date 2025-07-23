@@ -157,7 +157,7 @@ const NFTAnimalRescue: React.FC = () => {
 
   const scanAnimal = async () => {
     setScanning(true);
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, SCAN_DELAY_MS));
     
     // Simulate AI identification
     const aiResult = {
