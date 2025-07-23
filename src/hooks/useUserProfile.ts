@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 import type { User } from '@supabase/supabase-js'
@@ -69,8 +68,8 @@ export function useUserProfile() {
             role: data.role || null,
             created_at: data.created_at || null,
             updated_at: data.updated_at || null,
-            avatar_url: (data as any).avatar_url || null,
-            last_login: (data as any).last_login || null
+            avatar_url: null, // Set default value since it's not in the database
+            last_login: null  // Set default value since it's not in the database
           }
           setProfile(profileData)
         }

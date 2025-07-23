@@ -112,7 +112,9 @@ export function SecurityDashboard() {
       if (!threatError && threatData) {
         const typedThreats = threatData.map(threat => ({
           ...threat,
-          threat_data: (threat.threat_data as any) || {}
+          threat_data: (threat.threat_data as any) || {},
+          ip_address: threat.ip_address as string | null,
+          geolocation: threat.geolocation as any
         })) as ThreatIntelligence[]
         setThreats(typedThreats)
       }
