@@ -132,25 +132,32 @@ export function HabboTycoonGame() {
   const [gameTime, setGameTime] = useState(0)
 
   useEffect(() => {
-    // Simulate real-time game updates
-    const gameInterval = setInterval(() => {
-      setGameTime(prev => prev + 1)
-      
-      // Update hotel stats periodically
-      if (gameTime % 10 === 0) {
+    const startTime = Date.now();
+
+    const updateGame = () => {
+      const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+      setGameTime(elapsedSeconds);
+
+      // Update hotel stats every 10 seconds
+      if (elapsedSeconds % 10 === 0) {
         setHotelStats(prev => ({
           ...prev,
           guests: Math.max(0, prev.guests + Math.floor(Math.random() * 6) - 2),
           satisfaction: Math.min(100, Math.max(0, prev.satisfaction + Math.floor(Math.random() * 4) - 1)),
           revenue: prev.revenue + Math.floor(Math.random() * 100),
           experience: prev.experience + 5
-        }))
+        }));
       }
-    }, 1000)
 
-    return () => clearInterval(gameInterval)
-  }, [gameTime])
+      requestAnimationFrame(updateGame);
+    };
 
+    requestAnimationFrame(updateGame);
+
+    return () => {
+      // Cleanup logic if needed
+    };
+  }, []);
   const upgradeRoom = (roomId: string) => {
     setRooms(prev => prev.map(room => 
       room.id === roomId 
