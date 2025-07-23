@@ -28,9 +28,10 @@ export default function AdminLogin() {
     // Get client IP information
     const getClientInfo = async () => {
       try {
-        // Simulate getting client IP (in production, this would be from a service)
-        const ip = `192.168.1.${Math.floor(Math.random() * 255)}`
-        setClientIP(ip)
+        // Fetch the actual client IP from a trusted service
+        const response = await fetch('https://api.ipify.org?format=json')
+        const data = await response.json()
+        setClientIP(data.ip)
         
         // Check for existing admin sessions
         const existingAdminIP = localStorage.getItem('gaia-admin-ip')
