@@ -108,7 +108,7 @@ class PRChecker:
 
             failing_checks = []
             for status in combined_status.statuses:
-                if status.state not in ["success", "pending"]:
+                if status.state != "success":
                     failing_checks.append(f"{status.context}: {status.state}")
 
             # Check if overall state is success
