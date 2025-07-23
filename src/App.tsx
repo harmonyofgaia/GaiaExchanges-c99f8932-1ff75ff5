@@ -4,13 +4,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./components/auth/AuthProvider";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
-import Admin from "./pages/Admin";
-import AdminLogin from "./pages/AdminLogin";
 import EnhancedDownloads from "./pages/EnhancedDownloads";
 import SecureVault from "./pages/SecureVault";
 import SecureAdmin from "./pages/SecureAdmin";
@@ -77,9 +75,9 @@ const App = () => (
             <Route path="/game/habbo-tycoon" element={<HabboTycoon />} />
             <Route path="/gaia-fighter-game" element={<Game />} />
             
-            {/* Admin Routes */}
-            <Route path="/admin-login" element={<AdminLogin />} />
-            <Route path="/admin" element={<Admin />} />
+            {/* Admin Routes - Redirect legacy routes to SecureAdmin */}
+            <Route path="/admin-login" element={<Navigate to="/secure-admin" replace />} />
+            <Route path="/admin" element={<Navigate to="/secure-admin" replace />} />
             <Route path="/secure-admin" element={<SecureAdmin />} />
             <Route path="/secure-vault" element={<SecureVault />} />
             
