@@ -256,7 +256,7 @@ Configure in GitHub Repository Settings > Secrets:
 # These errors are non-blocking for deployment but should be addressed
 
 # Quick fix for deployment
-npm run build --ignore-warnings
+NODE_ENV=production npm run build
 
 # Proper fix
 npm run lint --fix
