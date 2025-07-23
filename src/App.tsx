@@ -25,6 +25,11 @@ const NFTCardGame = React.lazy(() => import('./pages/NFTCardGame'))
 const EcoAvatarGaiaSoulSystem = React.lazy(() => import('./pages/EcoAvatarGaiaSoulSystem'))
 const GaiaBikeEcosystem = React.lazy(() => import('./pages/GaiaBikeEcosystem'))
 const CommunityMissionVoting = React.lazy(() => import('./pages/CommunityMissionVoting'))
+const Gaming = React.lazy(() => import('./pages/Gaming'))
+const GaiaFantasyMMORPG = React.lazy(() => import('./pages/games/GaiaFantasyMMORPG'))
+const SnakeArenaGame = React.lazy(() => import('./pages/games/SnakeArenaGame'))
+const Game = React.lazy(() => import('./pages/Game'))
+const GaiaFighterGame = React.lazy(() => import('./pages/GaiaFighterGame'))
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -113,6 +118,31 @@ function App() {
                   <Route path="/community-missions" element={
                     <ProtectedRoute>
                       <CommunityMissionVoting />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/gaming" element={
+                    <ProtectedRoute>
+                      <Gaming />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/game" element={
+                    <ProtectedRoute>
+                      <Game />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/game/gaia-fantasy-mmorpg" element={
+                    <ProtectedRoute>
+                      <GaiaFantasyMMORPG />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/game/snake-arena" element={
+                    <ProtectedRoute>
+                      <SnakeArenaGame />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/gaia-fighter-game" element={
+                    <ProtectedRoute>
+                      <GaiaFighterGame />
                     </ProtectedRoute>
                   } />
                   <Route path="/auth" element={<Auth />} />
