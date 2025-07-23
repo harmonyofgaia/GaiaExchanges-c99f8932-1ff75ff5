@@ -33,6 +33,10 @@ import SeedSplitterProject from "./pages/SeedSplitterProject";
 import CleanWaterProject from "./pages/CleanWaterProject";
 import CoralReefRestorationProject from "./pages/CoralReefRestorationProject";
 import EarthAquariumMushroomProject from "./pages/EarthAquariumMushroomProject";
+import GlobalLeaderboard from "./pages/GlobalLeaderboard";
+import AIPoweredMissionGenerator from "./pages/AIPoweredMissionGenerator";
+import NFTAnimalRescue from "./pages/NFTAnimalRescue";
+import PlatformHealth from "./pages/PlatformHealth";
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
 import SlidingMenu from '@/components/SlidingMenu';
 
@@ -76,6 +80,12 @@ const App = () => (
             <Route path="/artist-streaming" element={<ArtistStreaming />} />
             <Route path="/video-upload" element={<VideoUpload />} />
             <Route path="/music-platform" element={<MusicPlatform />} />
+            
+            {/* New Platform Features */}
+            <Route path="/global-leaderboard" element={<GlobalLeaderboard />} />
+            <Route path="/ai-mission-generator" element={<AIPoweredMissionGenerator />} />
+            <Route path="/nft-animal-rescue" element={<NFTAnimalRescue />} />
+            <Route path="/platform-health" element={<PlatformHealth />} />
             
             {/* Gaming Routes */}
             <Route path="/game" element={<Game />} />

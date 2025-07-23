@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Rocket, Droplets, Crown, ArrowRightLeft, Waves, Mountain } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Rocket, Droplets, Crown, ArrowRightLeft, Waves, Mountain, Trophy, Brain, Camera, Activity } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -177,24 +177,71 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
-    title: "Deployment Tool",
-    to: "/lovable-deployment-tool",
-    icon: Rocket,
+    title: "Global Leaderboard",
+    to: "/global-leaderboard",
+    icon: Trophy,
     variant: "ghost" as const,
-    masterPlanVersion: "v3",
+    masterPlanVersion: "v7",
     features: [
-      "Additive-Only Deployment",
-      "Multi-Platform Sync",
-      "Community Approval Workflow",
-      "AI-Powered Risk Assessment",
-      "Supabase Auto-Fix Engine",
-      "Soulbound Reputation",
-      "Environmental Impact Tracking",
-      "Demo Environments"
+      "Global Rankings System",
+      "Multi-Category Leaderboards",
+      "Achievement Tracking",
+      "Contributor Profiles",
+      "Impact Visualization"
     ],
-    description: "Master Plan v3: Revolutionary deployment tool with community governance",
+    description: "Master Plan v7: Global leaderboard for environmental contributions",
     lazyLoaded: true,
   },
+  {
+    title: "AI Mission Generator",
+    to: "/ai-mission-generator",
+    icon: Brain,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "AI-Powered Mission Creation",
+      "Personalization Engine",
+      "Real-time Data Integration",
+      "Impact Optimization",
+      "Community Challenges"
+    ],
+    description: "Master Plan v7: Advanced AI system for generating personalized eco missions",
+    lazyLoaded: true,
+  },
+  {
+    title: "NFT Animal Rescue",
+    to: "/nft-animal-rescue",
+    icon: Camera,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "AI Animal Identification",
+      "Rescue Mission System",
+      "NFT Collection Platform",
+      "Conservation Tracking",
+      "Community Coordination"
+    ],
+    description: "Master Plan v7: Global NFT animal rescue system with AI scanning",
+    lazyLoaded: true,
+  },
+  {
+    title: "Platform Health",
+    to: "/platform-health",
+    icon: Activity,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Real-time Monitoring",
+      "Supabase Diagnostics",
+      "Performance Metrics",
+      "Health Checks",
+      "Incident Tracking"
+    ],
+    description: "Master Plan v7: Comprehensive platform health monitoring and diagnostics",
+    lazyLoaded: true,
+  },
+  {
+    title: "Lovable Deployment Tool",
     to: "/lovable-deployment-tool",
     icon: Rocket,
     variant: "ghost" as const,
