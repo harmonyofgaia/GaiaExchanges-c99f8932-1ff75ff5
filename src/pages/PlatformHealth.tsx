@@ -31,13 +31,15 @@ import {
   Lock
 } from 'lucide-react';
 
+const REFRESH_DELAY_MS = 2000;
+
 const PlatformHealth: React.FC = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(new Date());
 
   const refreshData = async () => {
     setIsRefreshing(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, REFRESH_DELAY_MS));
     setLastUpdate(new Date());
     setIsRefreshing(false);
   };
