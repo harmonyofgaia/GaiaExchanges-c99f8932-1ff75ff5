@@ -1,170 +1,171 @@
-import React, { Suspense } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { TooltipProvider } from "@/components/ui/tooltip"
-import { Toaster } from "@/components/ui/toaster"
-import { AuthProvider } from "@/components/auth/AuthProvider"
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute"
-import { useGlobalBackgroundServices } from "@/hooks/useGlobalBackgroundServices"
-import { InvisibleEcoIndicator } from "@/components/eco/InvisibleEcoIndicator"
 
-// Lazy load all page components for better performance
-const Index = React.lazy(() => import('./pages/Index'))
-const Dashboard = React.lazy(() => import('./pages/Dashboard'))
-const Exchange = React.lazy(() => import('./pages/Exchange'))
-const GaiasProjects = React.lazy(() => import('./pages/GaiasProjects'))
-const Auth = React.lazy(() => import('./pages/Auth'))
-const AdminLogin = React.lazy(() => import('./pages/AdminLogin'))
-const Admin = React.lazy(() => import('./pages/Admin'))
-const Security = React.lazy(() => import('./pages/Security'))
-const GreenImpactDashboard = React.lazy(() => import('./pages/GreenImpactDashboard'))
-const DecentralizedProjectFundingPools = React.lazy(() => import('./pages/DecentralizedProjectFundingPools'))
-const EcoMissionGenerator = React.lazy(() => import('./pages/EcoMissionGenerator'))
-const PlanetCleaningRewardsSystem = React.lazy(() => import('./pages/PlanetCleaningRewardsSystem'))
-const NFTCardGame = React.lazy(() => import('./pages/NFTCardGame'))
-const EcoAvatarGaiaSoulSystem = React.lazy(() => import('./pages/EcoAvatarGaiaSoulSystem'))
-const GaiaBikeEcosystem = React.lazy(() => import('./pages/GaiaBikeEcosystem'))
-const CommunityMissionVoting = React.lazy(() => import('./pages/CommunityMissionVoting'))
-const Gaming = React.lazy(() => import('./pages/Gaming'))
-const GaiaFantasyMMORPG = React.lazy(() => import('./pages/games/GaiaFantasyMMORPG'))
-const SnakeArenaGame = React.lazy(() => import('./pages/games/SnakeArenaGame'))
-const Game = React.lazy(() => import('./pages/Game'))
-const GaiaFighterGame = React.lazy(() => import('./pages/GaiaFighterGame'))
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/components/auth/AuthProvider";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { AdminRouteProtector } from "@/components/admin/AdminRouteProtector";
+import Index from "./pages/Index";
 
-// Loading fallback component
-const LoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center bg-background">
-    <div className="flex flex-col items-center space-y-4">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-400"></div>
-      <p className="text-muted-foreground">Loading...</p>
+// Lazy load pages for better performance
+import { lazy, Suspense } from "react";
+
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Exchange = lazy(() => import("./pages/Exchange"));
+const Admin = lazy(() => import("./pages/Admin"));
+const Security = lazy(() => import("./pages/Security"));
+const SecureAdmin = lazy(() => import("./pages/SecureAdmin"));
+const SecureVault = lazy(() => import("./pages/SecureVault"));
+const GaiasProjects = lazy(() => import("./pages/GaiasProjects"));
+
+// Master Plan v7 pages
+const GreenImpactDashboard = lazy(() => import("./pages/GreenImpactDashboard"));
+const DecentralizedProjectFundingPools = lazy(() => import("./pages/DecentralizedProjectFundingPools"));
+const EcoMissionGenerator = lazy(() => import("./pages/EcoMissionGenerator"));
+const PlanetCleaningRewardsSystem = lazy(() => import("./pages/PlanetCleaningRewardsSystem"));
+const NFTCardGame = lazy(() => import("./pages/NFTCardGame"));
+const EcoAvatarGaiaSoulSystem = lazy(() => import("./pages/EcoAvatarGaiaSoulSystem"));
+
+const queryClient = new QueryClient();
+
+const LoadingSpinner = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-green-900">
+    <div className="text-center space-y-4">
+      <div className="w-16 h-16 bg-green-500/20 rounded-full mx-auto animate-pulse flex items-center justify-center">
+        <div className="w-8 h-8 bg-green-400 rounded-full animate-bounce"></div>
+      </div>
+      <p className="text-green-400 font-medium">Loading Harmony of Gaia...</p>
     </div>
   </div>
-)
+);
 
-const queryClient = new QueryClient()
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AdminRouteProtector />
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/exchange"
+                element={
+                  <ProtectedRoute>
+                    <Exchange />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/gaias-projects"
+                element={
+                  <ProtectedRoute>
+                    <GaiasProjects />
+                  </ProtectedRoute>
+                }
+              />
+              
+              {/* Master Plan v7 Routes */}
+              <Route
+                path="/green-impact-dashboard"
+                element={
+                  <ProtectedRoute>
+                    <GreenImpactDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/project-funding"
+                element={
+                  <ProtectedRoute>
+                    <DecentralizedProjectFundingPools />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/eco-missions"
+                element={
+                  <ProtectedRoute>
+                    <EcoMissionGenerator />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/planet-cleaning"
+                element={
+                  <ProtectedRoute>
+                    <PlanetCleaningRewardsSystem />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/nft-cards"
+                element={
+                  <ProtectedRoute>
+                    <NFTCardGame />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/eco-avatar"
+                element={
+                  <ProtectedRoute>
+                    <EcoAvatarGaiaSoulSystem />
+                  </ProtectedRoute>
+                }
+              />
+              
+              {/* Admin Routes */}
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute isAdminRoute={true}>
+                    <Admin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/secure-admin"
+                element={
+                  <ProtectedRoute isAdminRoute={true}>
+                    <SecureAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/secure-vault"
+                element={
+                  <ProtectedRoute isAdminRoute={true}>
+                    <SecureVault />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/security"
+                element={
+                  <ProtectedRoute>
+                    <Security />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </TooltipProvider>
+    </AuthProvider>
+  </QueryClientProvider>
+);
 
-// Global background services component
-function GlobalBackgroundServices() {
-  const backgroundState = useGlobalBackgroundServices()
-  
-  // This component runs all background services invisibly
-  // It has no UI impact - all upgrades are completely invisible to users
-  return null
-}
-
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <GlobalBackgroundServices />
-          <InvisibleEcoIndicator />
-          <div className="min-h-screen bg-background">
-            <Router>
-              <Suspense fallback={<LoadingFallback />}>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/dashboard" element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/exchange" element={
-                    <ProtectedRoute>
-                      <Exchange />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/gaias-projects" element={
-                    <ProtectedRoute>
-                      <GaiasProjects />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/green-impact-dashboard" element={
-                    <ProtectedRoute>
-                      <GreenImpactDashboard />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/project-funding" element={
-                    <ProtectedRoute>
-                      <DecentralizedProjectFundingPools />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/eco-missions" element={
-                    <ProtectedRoute>
-                      <EcoMissionGenerator />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/planet-cleaning" element={
-                    <ProtectedRoute>
-                      <PlanetCleaningRewardsSystem />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/nft-cards" element={
-                    <ProtectedRoute>
-                      <NFTCardGame />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/eco-avatar" element={
-                    <ProtectedRoute>
-                      <EcoAvatarGaiaSoulSystem />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/gaia-bike" element={
-                    <ProtectedRoute>
-                      <GaiaBikeEcosystem />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/community-missions" element={
-                    <ProtectedRoute>
-                      <CommunityMissionVoting />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/gaming" element={
-                    <ProtectedRoute>
-                      <Gaming />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/game" element={
-                    <ProtectedRoute>
-                      <Game />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/game/gaia-fantasy-mmorpg" element={
-                    <ProtectedRoute>
-                      <GaiaFantasyMMORPG />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/game/snake-arena" element={
-                    <ProtectedRoute>
-                      <SnakeArenaGame />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/gaia-fighter-game" element={
-                    <ProtectedRoute>
-                      <GaiaFighterGame />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/auth" element={<Auth />} />
-                  <Route path="/admin-login" element={<AdminLogin />} />
-                  <Route path="/admin" element={
-                    <ProtectedRoute isAdminRoute={true}>
-                      <Admin />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/security" element={
-                    <ProtectedRoute isAdminRoute={true}>
-                      <Security />
-                    </ProtectedRoute>
-                  } />
-                </Routes>
-              </Suspense>
-            </Router>
-          </div>
-        </TooltipProvider>
-      </AuthProvider>
-    </QueryClientProvider>
-  )
-}
-
-export default App
+export default App;
