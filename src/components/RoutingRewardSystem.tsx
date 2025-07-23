@@ -162,16 +162,21 @@ export default function RoutingRewardSystem() {
         // Keep only last 50 visits
         return updated.slice(-50);
       });
-
-      // Update daily progress
-      const today = new Date().toDateString();
-      const todayVisits = visitHistory.filter(v => v.timestamp.toDateString() === today).length;
-      setDailyProgress(Math.min((todayVisits / 5) * 100, 100));
-
-      // Check and update rewards
-      checkRewardProgress(newVisit);
     }
   }, [location.pathname]);
+
+  useEffect(() => {
+    // Update daily progress
+    const today = new Date().toDateString();
+    const todayVisits = visitHistory.filter(v => v.timestamp.toDateString() === today).length;
+    setDailyProgress(Math.min((todayVisits / 5) * 100, 100));
+
+    // Check and update rewards
+    if (visitHistory.length > 0) {
+      const latestVisit = visitHistory[visitHistory.length - 1];
+      checkRewardProgress(latestVisit);
+    }
+  }, [visitHistory]);
 
   const checkRewardProgress = (newVisit: RouteVisit) => {
     setRoutingRewards(prev => prev.map(reward => {
