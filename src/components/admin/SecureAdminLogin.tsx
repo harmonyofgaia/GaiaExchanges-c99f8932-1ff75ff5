@@ -188,11 +188,23 @@ export function SecureAdminLogin() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                   <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
                     <div className="text-yellow-300 font-medium">Admin Username:</div>
-                    <div className="text-white font-mono text-lg">Synatic</div>
+                    <Button 
+                      onClick={() => handleCopyToClipboard('Synatic')} 
+                      variant="outline" 
+                      className="text-yellow-400 hover:bg-yellow-500/10"
+                    >
+                      Copy Username
+                    </Button>
                   </div>
                   <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
                     <div className="text-yellow-300 font-medium">Vault Password:</div>
-                    <div className="text-white font-mono text-lg">harmonyquantumvaultaccess</div>
+                    <Button 
+                      onClick={() => handleCopyToClipboard('harmonyquantumvaultaccess')} 
+                      variant="outline" 
+                      className="text-yellow-400 hover:bg-yellow-500/10"
+                    >
+                      Copy Password
+                    </Button>
                   </div>
                 </div>
                 <div className="text-xs text-yellow-400">
