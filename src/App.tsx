@@ -1,51 +1,44 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { TooltipProvider } from "@/components/ui/tooltip"
-import { Toaster } from "@/components/ui/toaster"
-import Index from './pages/Index'
-import Dashboard from './pages/Dashboard'
-import Exchange from './pages/Exchange'
-import GaiasProjects from './pages/GaiasProjects'
-import Auth from './pages/Auth'
-import Admin from './pages/Admin'
-import Security from './pages/Security'
-import GreenImpactDashboard from './pages/GreenImpactDashboard'
-import DecentralizedProjectFundingPools from './pages/DecentralizedProjectFundingPools'
-import EcoMissionGenerator from './pages/EcoMissionGenerator'
-import PlanetCleaningRewardsSystem from './pages/PlanetCleaningRewardsSystem'
-import NFTCardGame from './pages/NFTCardGame'
-import EcoAvatarGaiaSoulSystem from './pages/EcoAvatarGaiaSoulSystem'
 
-const queryClient = new QueryClient()
+import React from 'react';
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Index from "./pages/Index";
+import Dashboard from "./pages/Dashboard";
+import Auth from "./pages/Auth";
+import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
+import EnhancedDownloads from "./pages/EnhancedDownloads";
+import SecureVault from "./pages/SecureVault";
+import SecureAdmin from "./pages/SecureAdmin";
+import Game from "./pages/Game";
+import GaiasProjects from "./pages/GaiasProjects";
 
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <div className="min-h-screen bg-background">
-          <Router>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/exchange" element={<Exchange />} />
-              <Route path="/gaias-projects" element={<GaiasProjects />} />
-              <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
-              <Route path="/project-funding" element={<DecentralizedProjectFundingPools />} />
-              <Route path="/eco-missions" element={<EcoMissionGenerator />} />
-              <Route path="/planet-cleaning" element={<PlanetCleaningRewardsSystem />} />
-              <Route path="/nft-cards" element={<NFTCardGame />} />
-              <Route path="/eco-avatar" element={<EcoAvatarGaiaSoulSystem />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/security" element={<Security />} />
-            </Routes>
-          </Router>
-        </div>
-      </TooltipProvider>
-    </QueryClientProvider>
-  )
-}
+const queryClient = new QueryClient();
 
-export default App
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <DatabaseErrorFixer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/enhanced-downloads" element={<EnhancedDownloads />} />
+          <Route path="/secure-vault" element={<SecureVault />} />
+          <Route path="/secure-admin" element={<SecureAdmin />} />
+          <Route path="/game" element={<Game />} />
+          <Route path="/gaming" element={<Game />} />
+          <Route path="/gaias-projects" element={<GaiasProjects />} />
+          <Route path="/projects" element={<GaiasProjects />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+export default App;
