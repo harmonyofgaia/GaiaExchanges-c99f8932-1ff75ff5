@@ -11,20 +11,14 @@ import {
   Eye,
   DollarSign,
   ArrowUpDown,
-  ShoppingCart,
-  LogIn,
-  LogOut,
-  User,
-  Settings
+  ShoppingCart
 } from 'lucide-react'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 import { useEffect, useState } from 'react'
-import { useAuth } from '@/components/auth/AuthProvider'
 
 export function Navbar() {
   const location = useLocation()
   const [isAuthorizedIP, setIsAuthorizedIP] = useState(false)
-  const { user, signOut } = useAuth()
 
   useEffect(() => {
     const checkIPAuthorization = async () => {
@@ -157,38 +151,6 @@ export function Navbar() {
               <Badge className="bg-blue-600 text-white animate-pulse">
                 🛡️ SECURE ACCESS
               </Badge>
-            )}
-            
-            {/* Authentication Controls */}
-            {user ? (
-              <div className="flex items-center gap-2">
-                <Badge variant="outline" className="text-blue-400 border-blue-400">
-                  <User className="h-3 w-3 mr-1" />
-                  {user.email}
-                </Badge>
-                <Link to="/admin">
-                  <Button variant="outline" size="sm" className="border-purple-400 text-purple-400 hover:bg-purple-400/10">
-                    <Settings className="h-4 w-4 mr-1" />
-                    Admin
-                  </Button>
-                </Link>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={signOut}
-                  className="border-red-400 text-red-400 hover:bg-red-400/10"
-                >
-                  <LogOut className="h-4 w-4 mr-1" />
-                  Sign Out
-                </Button>
-              </div>
-            ) : (
-              <Link to="/auth">
-                <Button variant="outline" size="sm" className="border-green-400 text-green-400 hover:bg-green-400/10">
-                  <LogIn className="h-4 w-4 mr-1" />
-                  Sign In
-                </Button>
-              </Link>
             )}
           </div>
         </div>

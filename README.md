@@ -64,12 +64,6 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/8dfae018-363f-4770-8e5c-27c14bec8426) and click on Share -> Publish.
 
-## Build Status
-
-✅ **Build fixes and route adjustments are automatically deployed and implemented inside the connected project in Lovable via Vercel.**
-
-All build errors have been resolved and the project builds successfully. Changes made to fix TypeScript compilation errors are automatically reflected in the Lovable environment.
-
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!

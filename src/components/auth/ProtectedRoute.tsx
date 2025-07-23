@@ -2,7 +2,6 @@
 import { useAuth } from './AuthProvider'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { AuthPage } from './AuthPage'
-import { Navigate } from 'react-router-dom'
 
 interface ProtectedRouteProps {
   children: React.ReactNode
@@ -39,8 +38,13 @@ export function ProtectedRoute({ children, isAdminRoute = false }: ProtectedRout
       return <>{children}</>
     }
     
-    // For admin routes, redirect to admin login instead of general auth
-    return <Navigate to="/admin-login" replace />
+    // If not admin but has regular user session, still allow (SecureVaultLogin will handle auth)
+    if (user) {
+      return <>{children}</>
+    }
+    
+    // No user session at all, show auth page
+    return <AuthPage />
   }
 
   // For regular routes, check user authentication

@@ -18,15 +18,7 @@ import {
   Globe,
   TreePine,
   Droplets,
-  Leaf,
-  Brain,
-  Camera,
-  Network,
-  ArrowUpDown,
-  Coins,
-  Trophy,
-  Eye,
-  Gamepad2
+  Leaf
 } from 'lucide-react'
 import { supabase } from '@/integrations/supabase/client'
 import { useAuth } from '@/components/auth/AuthProvider'
@@ -43,37 +35,6 @@ interface NFTCard {
   card_metadata: any
   minted_at: string
   is_tradeable: boolean
-  ecosystem_interactions?: string[]
-  conservation_partner?: string
-  real_world_impact?: number
-  evolution_stage?: number
-  max_evolution?: number
-  trading_history?: any[]
-  market_value?: number
-}
-
-interface EcosystemInteraction {
-  card1_id: string
-  card2_id: string
-  interaction_type: string
-  bonus_multiplier: number
-  environmental_benefit: string
-}
-
-interface ConservationPartnership {
-  organization: string
-  project_name: string
-  impact_contribution: number
-  verification_status: string
-  location: string
-}
-
-interface MarketplaceData {
-  totalVolume: number
-  activeTraders: number
-  topCollections: any[]
-  recentSales: any[]
-  conservationFunding: number
 }
 
 export default function NFTCardGame() {
@@ -82,80 +43,6 @@ export default function NFTCardGame() {
   const [loading, setLoading] = useState(true)
   const [minting, setMinting] = useState(false)
   const [selectedCard, setSelectedCard] = useState<NFTCard | null>(null)
-  const [ecosystemInteractions, setEcosystemInteractions] = useState<EcosystemInteraction[]>([])
-  const [conservationPartnerships, setConservationPartnerships] = useState<ConservationPartnership[]>([])
-  const [marketplaceData, setMarketplaceData] = useState<MarketplaceData>({
-    totalVolume: 2847592,
-    activeTraders: 8934,
-    topCollections: [],
-    recentSales: [],
-    conservationFunding: 456789
-  })
-
-  useEffect(() => {
-    if (user) {
-      loadCollection()
-      loadEcosystemInteractions()
-      loadConservationPartnerships()
-      loadMarketplaceData()
-    }
-  }, [user])
-
-  const loadEcosystemInteractions = async () => {
-    // Mock ecosystem interactions for Master Plan v7
-    const interactions = [
-      {
-        card1_id: 'forest_wolf',
-        card2_id: 'ancient_oak',
-        interaction_type: 'symbiotic',
-        bonus_multiplier: 1.5,
-        environmental_benefit: 'Enhanced forest health and biodiversity'
-      },
-      {
-        card1_id: 'ocean_dolphin',
-        card2_id: 'coral_reef',
-        interaction_type: 'protective',
-        bonus_multiplier: 2.0,
-        environmental_benefit: 'Ocean ecosystem preservation'
-      }
-    ]
-    setEcosystemInteractions(interactions)
-  }
-
-  const loadConservationPartnerships = async () => {
-    // Mock conservation partnerships
-    const partnerships = [
-      {
-        organization: 'World Wildlife Fund',
-        project_name: 'Amazon Rainforest Protection',
-        impact_contribution: 1250,
-        verification_status: 'verified',
-        location: 'Amazon Basin, Brazil'
-      },
-      {
-        organization: 'Ocean Conservancy',
-        project_name: 'Great Barrier Reef Restoration',
-        impact_contribution: 890,
-        verification_status: 'verified',
-        location: 'Queensland, Australia'
-      }
-    ]
-    setConservationPartnerships(partnerships)
-  }
-
-  const loadMarketplaceData = async () => {
-    // Simulate real-time marketplace updates
-    const interval = setInterval(() => {
-      setMarketplaceData(prev => ({
-        ...prev,
-        totalVolume: prev.totalVolume + Math.floor(Math.random() * 1000),
-        activeTraders: prev.activeTraders + Math.floor(Math.random() * 10) - 5,
-        conservationFunding: prev.conservationFunding + Math.floor(Math.random() * 500)
-      }))
-    }, 8000)
-
-    return () => clearInterval(interval)
-  }
 
   useEffect(() => {
     if (user) {
@@ -350,27 +237,23 @@ export default function NFTCardGame() {
     <div className="container mx-auto p-4 space-y-6">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">
-          🎴 Biodiversity NFT Cards v7
+          🎴 Biodiversity NFT Cards
         </h1>
         <p className="text-xl text-muted-foreground">
-          Advanced ecosystem interactions, conservation partnerships, and dynamic marketplace
+          Collect, trade, and battle with biodiversity-themed NFT cards
         </p>
-        <Badge className="mt-2 bg-purple-600 text-white">
-          <Network className="h-3 w-3 mr-1" />
-          Master Plan v7 Enabled
-        </Badge>
       </div>
 
-      {/* Enhanced Collection Stats with Marketplace Data */}
+      {/* Collection Stats */}
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Award className="h-6 w-6" />
-            Advanced Collection Analytics
+            Collection Overview
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center">
               <div className="text-3xl font-bold text-green-400">{collection.length}</div>
               <div className="text-sm text-muted-foreground">Total Cards</div>
@@ -389,113 +272,31 @@ export default function NFTCardGame() {
               </div>
               <div className="text-sm text-muted-foreground">Tradeable Cards</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-cyan-400">{marketplaceData.totalVolume.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Market Volume</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-pink-400">{marketplaceData.conservationFunding.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Conservation Fund</div>
-            </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Ecosystem Interactions */}
-      <Card className="border-purple-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-purple-400">
-            <Network className="h-5 w-5" />
-            Ecosystem Interactions
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <p className="text-muted-foreground text-sm">
-              Combine cards to create powerful ecosystem synergies and unlock environmental bonuses.
-            </p>
-            {ecosystemInteractions.map((interaction, index) => (
-              <div key={index} className="p-4 rounded-lg border border-purple-500/20 bg-purple-900/10">
-                <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-medium text-purple-400 capitalize">
-                    {interaction.interaction_type} Relationship
-                  </h4>
-                  <Badge className="bg-green-600">
-                    {interaction.bonus_multiplier}x Bonus
-                  </Badge>
-                </div>
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="px-2 py-1 bg-blue-600/20 rounded text-xs text-blue-400">
-                    {interaction.card1_id.replace('_', ' ')}
-                  </div>
-                  <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
-                  <div className="px-2 py-1 bg-green-600/20 rounded text-xs text-green-400">
-                    {interaction.card2_id.replace('_', ' ')}
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground">{interaction.environmental_benefit}</p>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Conservation Partnerships */}
-      <Card className="border-blue-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <Heart className="h-5 w-5" />
-            Conservation Partnerships
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <p className="text-muted-foreground text-sm">
-              Your NFT collection contributes to real-world conservation projects through verified partnerships.
-            </p>
-            {conservationPartnerships.map((partnership, index) => (
-              <div key={index} className="p-4 rounded-lg border border-blue-500/20 bg-blue-900/10">
-                <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-medium text-blue-400">{partnership.organization}</h4>
-                  <Badge variant="outline" className="text-green-400">
-                    {partnership.verification_status}
-                  </Badge>
-                </div>
-                <h5 className="text-sm font-medium text-blue-300 mb-1">{partnership.project_name}</h5>
-                <p className="text-sm text-muted-foreground mb-2">{partnership.location}</p>
-                <div className="flex items-center gap-2">
-                  <Badge className="bg-green-600">
-                    {partnership.impact_contribution} Carbon Credits
-                  </Badge>
-                  <span className="text-xs text-muted-foreground">contributed by your collection</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Enhanced Minting Section */}
+      {/* Minting Section */}
       <Card className="border-blue-500/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-blue-400">
             <Sparkles className="h-5 w-5" />
-            Advanced Card Minting v7
+            Mint New Cards
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center space-y-4">
             <p className="text-muted-foreground">
-              Mint biodiversity cards with real-world conservation impact and ecosystem interactions
+              Mint random biodiversity cards to expand your collection
             </p>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-sm">
               <div>
                 <div className="text-gray-400">Common</div>
-                <div className="font-bold">45%</div>
+                <div className="font-bold">50%</div>
               </div>
               <div>
                 <div className="text-green-400">Uncommon</div>
-                <div className="font-bold">30%</div>
+                <div className="font-bold">25%</div>
               </div>
               <div>
                 <div className="text-blue-400">Rare</div>
@@ -510,63 +311,12 @@ export default function NFTCardGame() {
                 <div className="font-bold">2%</div>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Button
-                onClick={mintRandomCard}
-                disabled={minting}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
-                {minting ? 'Minting...' : 'Mint Standard Card (100 GAiA)'}
-              </Button>
-              <Button
-                onClick={mintRandomCard}
-                disabled={minting}
-                className="bg-purple-600 hover:bg-purple-700"
-              >
-                {minting ? 'Minting...' : 'Mint Premium Card (250 GAiA)'}
-              </Button>
-            </div>
-            <div className="text-xs text-muted-foreground">
-              <div className="flex items-center justify-center gap-2">
-                <Heart className="h-3 w-3 text-green-400" />
-                50% of minting fees support conservation projects
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Dynamic Marketplace */}
-      <Card className="border-yellow-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-yellow-400">
-            <Coins className="h-5 w-5" />
-            Dynamic Marketplace
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400">{marketplaceData.totalVolume.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Total Volume (GAiA)</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">{marketplaceData.activeTraders}</div>
-              <div className="text-sm text-muted-foreground">Active Traders</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">{marketplaceData.conservationFunding.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Conservation Funding</div>
-            </div>
-          </div>
-          <div className="mt-4 flex gap-2">
-            <Button className="flex-1 bg-yellow-600 hover:bg-yellow-700">
-              <Eye className="h-4 w-4 mr-2" />
-              Browse Marketplace
-            </Button>
-            <Button className="flex-1 bg-green-600 hover:bg-green-700">
-              <ArrowUpDown className="h-4 w-4 mr-2" />
-              Trade Cards
+            <Button
+              onClick={mintRandomCard}
+              disabled={minting}
+              className="bg-blue-600 hover:bg-blue-700"
+            >
+              {minting ? 'Minting...' : 'Mint Random Card (100 GAiA)'}
             </Button>
           </div>
         </CardContent>
