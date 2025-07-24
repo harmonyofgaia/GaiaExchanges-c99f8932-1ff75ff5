@@ -40,6 +40,19 @@ export function VideoExchangeDashboard() {
     totalTokens: 234567
   })
 
+  const tabs = [
+    { value: "overview", label: "Overview", icon: <Video className="h-4 w-4 mb-1" /> },
+    { value: "channels", label: "Channels", icon: <Users className="h-4 w-4 mb-1" /> },
+    { value: "upload", label: "Upload", icon: <Upload className="h-4 w-4 mb-1" /> },
+    { value: "player", label: "Player", icon: <Video className="h-4 w-4 mb-1" /> },
+    { value: "chat", label: "Chat", icon: <MessageCircle className="h-4 w-4 mb-1" /> },
+    { value: "subscriptions", label: "Subscribe", icon: <Bell className="h-4 w-4 mb-1" /> },
+    { value: "tokens", label: "Tokens", icon: <Coins className="h-4 w-4 mb-1" /> },
+    { value: "leaderboards", label: "Leaderboards", icon: <Trophy className="h-4 w-4 mb-1" /> },
+    { value: "events", label: "Events", icon: <Calendar className="h-4 w-4 mb-1" /> },
+    { value: "admin", label: "Admin", icon: <Shield className="h-4 w-4 mb-1" /> }
+  ]
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -130,11 +143,6 @@ export function VideoExchangeDashboard() {
             gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))`,
           }}
         >
-          className={`grid w-full gap-1 h-auto p-1 text-xs`}
-          style={{
-            gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))`,
-          }}
-        >
           {tabs.map((tab) => (
             <TabsTrigger key={tab.value} value={tab.value} className="p-2 text-center">
               <div className="flex flex-col items-center">
@@ -143,65 +151,6 @@ export function VideoExchangeDashboard() {
               </div>
             </TabsTrigger>
           ))}
-            <div className="flex flex-col items-center">
-              <Video className="h-4 w-4 mb-1" />
-              <span className="hidden sm:inline">Overview</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="channels" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <Users className="h-4 w-4 mb-1" />
-              <span className="hidden sm:inline">Channels</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="upload" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <Upload className="h-4 w-4 mb-1" />
-              <span className="hidden sm:inline">Upload</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="player" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <Video className="h-4 w-4 mb-1" />
-              <span className="hidden sm:inline">Player</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="chat" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <MessageCircle className="h-4 w-4 mb-1" />
-              <span className="hidden sm:inline">Chat</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="subscriptions" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <Bell className="h-4 w-4 mb-1" />
-              <span className="hidden sm:inline">Subscribe</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="tokens" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <Coins className="h-4 w-4 mb-1" />
-              <span className="hidden sm:inline">Tokens</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="leaderboards" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <Trophy className="h-4 w-4 mb-1" />
-              <span className="hidden sm:inline">Leaderboards</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="events" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <Calendar className="h-4 w-4 mb-1" />
-              <span className="hidden sm:inline">Events</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="admin" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <Shield className="h-4 w-4 mb-1" />
-              <span className="hidden sm:inline">Admin</span>
-            </div>
-          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
