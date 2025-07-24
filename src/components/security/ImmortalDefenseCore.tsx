@@ -298,15 +298,110 @@ export function ImmortalDefenseCore() {
     }
   }, [immortalAnimals])
 
-  return {
-    immortalAnimals,
-    defenseMetrics,
-    isImmortalActive: true,
-    quantumEvolutionActive: true,
-    systemInvulnerable: true,
-    cannotBeDestroyed: true,
-    evolutionBeyondImagination: true,
-    invincibilityPerfect: true,
-    immortalityEternal: true
-  }
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="text-center p-4 bg-purple-900/50 rounded-lg border-2 border-purple-500/50">
+          <div className="text-3xl mb-2">♾️</div>
+          <div className="text-2xl font-bold text-purple-400">{defenseMetrics.totalAnimals}</div>
+          <div className="text-sm text-purple-300">Immortal Guardians</div>
+        </div>
+        
+        <div className="text-center p-4 bg-red-900/50 rounded-lg border-2 border-red-500/50">
+          <div className="text-3xl mb-2">⚡</div>
+          <div className="text-2xl font-bold text-red-400">{defenseMetrics.combinedPowerLevel.toLocaleString()}</div>
+          <div className="text-sm text-red-300">Combined Power</div>
+        </div>
+        
+        <div className="text-center p-4 bg-green-900/50 rounded-lg border-2 border-green-500/50">
+          <div className="text-3xl mb-2">🔄</div>
+          <div className="text-2xl font-bold text-green-400">{defenseMetrics.evolutionRate.toLocaleString()}</div>
+          <div className="text-sm text-green-300">Evolution Rate</div>
+        </div>
+        
+        <div className="text-center p-4 bg-yellow-900/50 rounded-lg border-2 border-yellow-500/50">
+          <div className="text-3xl mb-2">🏆</div>
+          <div className="text-2xl font-bold text-yellow-400">{defenseMetrics.threatsDestroyed}</div>
+          <div className="text-sm text-yellow-300">Threats Destroyed</div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {immortalAnimals.map((animal) => (
+          <div key={animal.id} className="p-4 bg-black/30 rounded-lg border border-purple-500/30">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-bold text-purple-400">{animal.name}</h3>
+              <div className="text-2xl">
+                {animal.species === 'dragon' && '🐉'}
+                {animal.species === 'phoenix' && '🦅'}
+                {animal.species === 'leviathan' && '🌊'}
+                {animal.species === 'cyber_koala' && '🐨'}
+                {animal.species === 'quantum_phoenix' && '🔥🦅'}
+                {animal.species === 'king_lion' && '👑🦁'}
+                {animal.species === 'sky_eagle' && '🌤️🦅'}
+                {animal.species === 'ai_dolphin' && '🐬'}
+              </div>
+            </div>
+            
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span>Power Level:</span>
+                <span className="text-red-400 font-bold">{animal.powerLevel.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Invincibility:</span>
+                <span className="text-green-400 font-bold">{animal.invincibilityStrength}%</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Immortality:</span>
+                <span className="text-purple-400 font-bold">{animal.immortalityIndex}%</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Evolution Speed:</span>
+                <span className="text-blue-400 font-bold">{animal.evolutionSpeed.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Threats Neutralized:</span>
+                <span className="text-orange-400 font-bold">{animal.threatsNeutralized}</span>
+              </div>
+            </div>
+            
+            <div className="mt-3 pt-3 border-t border-purple-500/20">
+              <div className="text-xs text-muted-foreground mb-2">Special Abilities:</div>
+              <div className="flex flex-wrap gap-1">
+                {animal.specialAbilities.map((ability, index) => (
+                  <span key={index} className="px-2 py-1 bg-purple-700/30 rounded text-xs text-purple-300">
+                    {ability}
+                  </span>
+                ))}
+              </div>
+            </div>
+            
+            <div className="mt-3 text-xs text-center text-yellow-400 font-mono">
+              {animal.quantumSignature}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="text-center p-6 bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-lg border border-purple-500/30">
+        <div className="text-4xl mb-4">♾️</div>
+        <h3 className="text-2xl font-bold text-purple-400 mb-4">IMMORTAL DEFENSE STATUS</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div>
+            <div className="text-green-400 font-bold">✅ IMMORTALITY: ETERNAL</div>
+            <div className="text-green-300">Cannot be destroyed or defeated</div>
+          </div>
+          <div>
+            <div className="text-blue-400 font-bold">⚡ EVOLUTION: EXPONENTIAL</div>
+            <div className="text-blue-300">Growing stronger every moment</div>
+          </div>
+          <div>
+            <div className="text-purple-400 font-bold">🛡️ INVINCIBILITY: PERFECT</div>
+            <div className="text-purple-300">Absolute defense against all threats</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
