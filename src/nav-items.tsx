@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -172,6 +172,38 @@ export const navigationItems: NavigationItem[] = [
       "Performance Analytics"
     ],
     description: "Real-time wildfire defense monitoring and control dashboard",
+    lazyLoaded: true,
+  },
+  {
+    title: "Forest Tokens",
+    to: "/forest-token-system",
+    icon: Coins,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Multi-tier Token System",
+      "Staking & Rewards",
+      "DAO Governance",
+      "Impact Verification",
+      "Blockchain Integration"
+    ],
+    description: "Multi-tier blockchain token system for forest defense funding and governance",
+    lazyLoaded: true,
+  },
+  {
+    title: "Community Hub",
+    to: "/community-engagement-hub",
+    icon: Users,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Training Programs",
+      "Community Coordination",
+      "Achievement System",
+      "Challenge Participation",
+      "Global Leaderboards"
+    ],
+    description: "Community training, coordination, and engagement platform",
     lazyLoaded: true,
   },
   {

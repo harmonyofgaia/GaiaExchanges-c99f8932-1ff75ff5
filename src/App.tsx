@@ -34,6 +34,8 @@ import DeploymentCenter from "./pages/DeploymentCenter";
 import QuantumSecurity from "./pages/QuantumSecurity";
 import ForestShieldMasterPlan from "./pages/ForestShieldMasterPlan";
 import WildfireDefenseDashboard from "./pages/WildfireDefenseDashboard";
+import ForestTokenSystem from "./pages/ForestTokenSystem";
+import CommunityEngagementHub from "./pages/CommunityEngagementHub";
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
 import SlidingMenu from '@/components/SlidingMenu';
 
@@ -66,6 +68,8 @@ const App = () => (
             <Route path="/eco-avatar" element={<EcoAvatar />} />
             <Route path="/forest-shield-master-plan" element={<ForestShieldMasterPlan />} />
             <Route path="/wildfire-defense-dashboard" element={<WildfireDefenseDashboard />} />
+            <Route path="/forest-token-system" element={<ForestTokenSystem />} />
+            <Route path="/community-engagement-hub" element={<CommunityEngagementHub />} />
             
             {/* New Features from PRs #22-#41 */}
             <Route path="/environmental-games" element={<EnvironmentalGames />} />

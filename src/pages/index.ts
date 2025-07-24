@@ -18,4 +18,6 @@ export { default as GaiaCoinCrafter } from './GaiaCoinCrafter';
 export { default as LandscapeBuilder } from './LandscapeBuilder';
 export { default as ForestShieldMasterPlan } from './ForestShieldMasterPlan';
 export { default as WildfireDefenseDashboard } from './WildfireDefenseDashboard';
+export { default as ForestTokenSystem } from './ForestTokenSystem';
+export { default as CommunityEngagementHub } from './CommunityEngagementHub';
 export { default as NotFound } from './NotFound';
