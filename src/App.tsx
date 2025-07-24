@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./components/auth/AuthProvider";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
+import { UnauthenticatedOnlyRoute } from "./components/auth/UnauthenticatedOnlyRoute";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
@@ -47,47 +49,153 @@ const App = () => (
         <BrowserRouter>
           <SlidingMenu />
           <Routes>
-            {/* Public Routes */}
+            {/* Public Routes - accessible to everyone */}
             <Route path="/" element={<Index />} />
-            <Route path="/auth" element={<Auth />} />
             
-            {/* Main Platform Routes */}
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/exchange" element={<Exchange />} />
-            <Route path="/gaias-projects" element={<GaiasProjects />} />
-            <Route path="/projects" element={<GaiasProjects />} />
-            <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
-            <Route path="/project-funding" element={<ProjectFunding />} />
-            <Route path="/eco-missions" element={<EcoMissions />} />
-            <Route path="/planet-cleaning" element={<PlanetCleaning />} />
-            <Route path="/nft-cards" element={<NFTCards />} />
-            <Route path="/eco-avatar" element={<EcoAvatar />} />
+            {/* Unauthenticated Only Routes - only for non-logged-in users */}
+            <Route path="/auth" element={
+              <UnauthenticatedOnlyRoute>
+                <Auth />
+              </UnauthenticatedOnlyRoute>
+            } />
             
-            {/* New Features from PRs #22-#41 */}
-            <Route path="/environmental-games" element={<EnvironmentalGames />} />
-            <Route path="/global-leaderboard" element={<GlobalLeaderboardPage />} />
-            <Route path="/animal-rescue" element={<AnimalRescue />} />
+            {/* Protected User Routes - only for authenticated users */}
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/exchange" element={
+              <ProtectedRoute>
+                <Exchange />
+              </ProtectedRoute>
+            } />
+            <Route path="/gaias-projects" element={
+              <ProtectedRoute>
+                <GaiasProjects />
+              </ProtectedRoute>
+            } />
+            <Route path="/projects" element={
+              <ProtectedRoute>
+                <GaiasProjects />
+              </ProtectedRoute>
+            } />
+            <Route path="/green-impact-dashboard" element={
+              <ProtectedRoute>
+                <GreenImpactDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/project-funding" element={
+              <ProtectedRoute>
+                <ProjectFunding />
+              </ProtectedRoute>
+            } />
+            <Route path="/eco-missions" element={
+              <ProtectedRoute>
+                <EcoMissions />
+              </ProtectedRoute>
+            } />
+            <Route path="/planet-cleaning" element={
+              <ProtectedRoute>
+                <PlanetCleaning />
+              </ProtectedRoute>
+            } />
+            <Route path="/nft-cards" element={
+              <ProtectedRoute>
+                <NFTCards />
+              </ProtectedRoute>
+            } />
+            <Route path="/eco-avatar" element={
+              <ProtectedRoute>
+                <EcoAvatar />
+              </ProtectedRoute>
+            } />
             
-            {/* Entertainment Routes */}
-            <Route path="/artist-streaming" element={<ArtistStreaming />} />
-            <Route path="/video-upload" element={<VideoUpload />} />
-            <Route path="/music-platform" element={<MusicPlatform />} />
+            {/* New Features from PRs #22-#41 - Protected */}
+            <Route path="/environmental-games" element={
+              <ProtectedRoute>
+                <EnvironmentalGames />
+              </ProtectedRoute>
+            } />
+            <Route path="/global-leaderboard" element={
+              <ProtectedRoute>
+                <GlobalLeaderboardPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/animal-rescue" element={
+              <ProtectedRoute>
+                <AnimalRescue />
+              </ProtectedRoute>
+            } />
             
-            {/* Gaming Routes */}
-            <Route path="/game" element={<Game />} />
-            <Route path="/gaming" element={<Game />} />
+            {/* Entertainment Routes - Protected */}
+            <Route path="/artist-streaming" element={
+              <ProtectedRoute>
+                <ArtistStreaming />
+              </ProtectedRoute>
+            } />
+            <Route path="/video-upload" element={
+              <ProtectedRoute>
+                <VideoUpload />
+              </ProtectedRoute>
+            } />
+            <Route path="/music-platform" element={
+              <ProtectedRoute>
+                <MusicPlatform />
+              </ProtectedRoute>
+            } />
             
-            {/* Admin Routes */}
+            {/* Gaming Routes - Protected */}
+            <Route path="/game" element={
+              <ProtectedRoute>
+                <Game />
+              </ProtectedRoute>
+            } />
+            <Route path="/gaming" element={
+              <ProtectedRoute>
+                <Game />
+              </ProtectedRoute>
+            } />
+            
+            {/* Admin Routes - Special admin authentication */}
             <Route path="/admin-login" element={<AdminLogin />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/secure-admin" element={<SecureAdmin />} />
-            <Route path="/secure-vault" element={<SecureVault />} />
-            <Route path="/deployment-center" element={<DeploymentCenter />} />
-            <Route path="/quantum-security" element={<QuantumSecurity />} />
+            <Route path="/admin" element={
+              <ProtectedRoute isAdminRoute={true}>
+                <Admin />
+              </ProtectedRoute>
+            } />
+            <Route path="/secure-admin" element={
+              <ProtectedRoute isAdminRoute={true}>
+                <SecureAdmin />
+              </ProtectedRoute>
+            } />
+            <Route path="/secure-vault" element={
+              <ProtectedRoute isAdminRoute={true}>
+                <SecureVault />
+              </ProtectedRoute>
+            } />
+            <Route path="/deployment-center" element={
+              <ProtectedRoute isAdminRoute={true}>
+                <DeploymentCenter />
+              </ProtectedRoute>
+            } />
+            <Route path="/quantum-security" element={
+              <ProtectedRoute isAdminRoute={true}>
+                <QuantumSecurity />
+              </ProtectedRoute>
+            } />
             
-            {/* Security and Downloads */}
-            <Route path="/security" element={<Security />} />
-            <Route path="/enhanced-downloads" element={<EnhancedDownloads />} />
+            {/* Security and Downloads - Protected */}
+            <Route path="/security" element={
+              <ProtectedRoute>
+                <Security />
+              </ProtectedRoute>
+            } />
+            <Route path="/enhanced-downloads" element={
+              <ProtectedRoute>
+                <EnhancedDownloads />
+              </ProtectedRoute>
+            } />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
