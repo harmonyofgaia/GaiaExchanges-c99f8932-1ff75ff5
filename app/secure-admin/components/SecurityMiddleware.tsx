@@ -31,6 +31,9 @@ export function SecurityMiddleware({ systemTime, isAuthenticated }: SecurityMidd
   const [mfaValidations, setMfaValidations] = useState(0)
 
   useEffect(() => {
+    // Only run on client side to avoid SSR issues
+    if (typeof window === 'undefined') return
+
     if (isAuthenticated) {
       // Initialize security logging
       const initialEvents: SecurityEvent[] = [

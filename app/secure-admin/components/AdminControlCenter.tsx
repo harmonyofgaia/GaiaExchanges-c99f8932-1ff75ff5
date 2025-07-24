@@ -46,9 +46,12 @@ export function AdminControlCenter({ systemTime, securityLayers }: AdminControlC
 
   const router = useRouter()
   const handleLogout = () => {
-    // Clear admin session
-    localStorage.removeItem('gaia-admin-session')
-    localStorage.removeItem('gaia-admin-ip')
+    // Only access localStorage on client side
+    if (typeof window !== 'undefined') {
+      // Clear admin session
+      localStorage.removeItem('gaia-admin-session')
+      localStorage.removeItem('gaia-admin-ip')
+    }
     
     // Redirect using Next.js router
     router.push('/secure-admin')

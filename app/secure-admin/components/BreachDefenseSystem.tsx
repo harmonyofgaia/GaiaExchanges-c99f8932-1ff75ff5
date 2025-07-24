@@ -58,10 +58,13 @@ export function BreachDefenseSystem({ layers, onLayerActivation, authenticated =
   }, [authenticated, onLayerActivation])
 
   useEffect(() => {
+    // Only run on client side to avoid SSR issues
+    if (typeof window === 'undefined') return
+
     // Monitor session integrity and detect potential hijack attempts
     const monitorSession = () => {
       const userAgent = navigator.userAgent
-      const serverIp = (typeof window !== 'undefined' && (window as unknown as Record<string, unknown>).serverIp) || 'UNKNOWN'
+      const serverIp = (window as unknown as Record<string, unknown>).serverIp || 'UNKNOWN'
 
       const sessionData = {
         timestamp: Date.now(),
@@ -70,20 +73,20 @@ export function BreachDefenseSystem({ layers, onLayerActivation, authenticated =
       }
       
       // Anti-hijack mechanism - validate session consistency
-      const storedSession = localStorage.getItem('gaia-admin-session')
-      if (storedSession && authenticated) {
-        try {
+      try {
+        const storedSession = localStorage.getItem('gaia-admin-session')
+        if (storedSession && authenticated) {
           const parsed = JSON.parse(storedSession)
           if (parsed.userAgent !== userAgent) {
             setSessionIntegrity(false)
             setThreatLevel('HIGH')
             console.warn('[SECURITY] Potential session hijack detected - User agent mismatch')
           }
-        } catch (error) {
-          console.error('[SECURITY] Session validation error:', error)
+        } else if (authenticated) {
+          localStorage.setItem('gaia-admin-session', JSON.stringify(sessionData))
         }
-      } else if (authenticated) {
-        localStorage.setItem('gaia-admin-session', JSON.stringify(sessionData))
+      } catch (error) {
+        console.error('[SECURITY] Session validation error:', error)
       }
     }
 

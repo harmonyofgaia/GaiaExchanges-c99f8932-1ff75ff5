@@ -3,9 +3,7 @@
 import { useState, useEffect } from 'react'
 import { SecureVaultLogin } from '@/components/admin/SecureVaultLogin'
 import { AdminControlCenter } from './components/AdminControlCenter'
-import { BreachDefenseSystem } from './components/BreachDefenseSystem'
-import { TimeSync } from './components/TimeSync'
-import { SecurityMiddleware } from './components/SecurityMiddleware'
+import { DynamicBreachDefenseSystem, DynamicSecurityMiddleware, DynamicTimeSync } from './components/DynamicSecurityComponent'
 
 // Set system time to 11:14, 24-07-2025 for all secure-admin processes
 const SYSTEM_TIME = {
@@ -22,8 +20,12 @@ export default function SecureAdminPage() {
     mfa: false,
     intrusion: false
   })
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    // Only initialize on client side
+    setIsClient(true)
+    
     // Initialize system time synchronization
     const initTimeSync = () => {
       console.log(`[SECURE-ADMIN] System time synchronized to ${SYSTEM_TIME.hour}:${SYSTEM_TIME.minute}, ${SYSTEM_TIME.date}`)
@@ -43,15 +45,20 @@ export default function SecureAdminPage() {
     setSecurityLayers(prev => ({ ...prev, [layer]: true }))
   }
 
+  // Don't render security components during SSR
+  if (!isClient) {
+    return <SecureVaultLogin onAuthentication={handleAuthentication} />
+  }
+
   if (!isAuthenticated) {
     return (
       <>
-        <TimeSync systemTime={SYSTEM_TIME} />
-        <BreachDefenseSystem 
+        <DynamicTimeSync systemTime={SYSTEM_TIME} />
+        <DynamicBreachDefenseSystem 
           layers={securityLayers}
           onLayerActivation={handleSecurityLayerActivation}
         />
-        <SecurityMiddleware systemTime={SYSTEM_TIME} isAuthenticated={false} />
+        <DynamicSecurityMiddleware systemTime={SYSTEM_TIME} isAuthenticated={false} />
         <SecureVaultLogin onAuthentication={handleAuthentication} />
       </>
     )
@@ -59,13 +66,13 @@ export default function SecureAdminPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10">
-      <TimeSync systemTime={SYSTEM_TIME} />
-      <BreachDefenseSystem 
+      <DynamicTimeSync systemTime={SYSTEM_TIME} />
+      <DynamicBreachDefenseSystem 
         layers={securityLayers}
         onLayerActivation={handleSecurityLayerActivation}
         authenticated={true}
       />
-      <SecurityMiddleware systemTime={SYSTEM_TIME} isAuthenticated={true} />
+      <DynamicSecurityMiddleware systemTime={SYSTEM_TIME} isAuthenticated={true} />
       <AdminControlCenter 
         systemTime={SYSTEM_TIME}
         securityLayers={securityLayers}

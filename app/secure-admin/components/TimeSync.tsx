@@ -16,6 +16,9 @@ export function TimeSync({ systemTime }: TimeSyncProps) {
   const [currentTime, setCurrentTime] = useState('')
 
   useEffect(() => {
+    // Only run on client side to avoid SSR issues
+    if (typeof window === 'undefined') return
+
     // Set and maintain system time for all secure-admin processes
     const updateTime = () => {
       const timeString = `${systemTime.hour.toString().padStart(2, '0')}:${systemTime.minute.toString().padStart(2, '0')}`
