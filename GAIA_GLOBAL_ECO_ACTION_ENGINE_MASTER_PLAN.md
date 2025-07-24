@@ -373,7 +373,7 @@ The GAIA Global Eco-Action Engine Master Plan consolidates all environmental tec
 
 ### Technical Risk Mitigation
 - [ ] **Modular Architecture**: Independent system components
-- [ ] **Comprehensive Testing**: 95%+ code coverage requirement
+- [ ] **Comprehensive Testing**: 95%+ code coverage requirement, including unit, integration, and end-to-end tests. Exclude generated code, configuration files, and non-executable documentation from coverage calculations.
 - [ ] **Security Auditing**: Quarterly security assessments
 - [ ] **Performance Monitoring**: Real-time system health tracking
 - [ ] **Disaster Recovery**: Automated backup and recovery systems
