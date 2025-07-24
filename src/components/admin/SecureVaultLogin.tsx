@@ -12,7 +12,7 @@ interface SecureVaultLoginProps {
   onAuthentication?: (authenticated: boolean) => void
 }
 
-export function SecureVaultLogin({ onAuthentication }: SecureVaultLoginProps = {}) {
+export function SecureVaultLogin({ onAuthentication }: SecureVaultLoginProps) {
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
