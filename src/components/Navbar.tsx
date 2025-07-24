@@ -1,198 +1,159 @@
 
-import { Link, useLocation } from 'react-router-dom'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { 
+  Menu, 
+  X, 
   Home, 
-  Gamepad2, 
   BarChart3, 
-  Shield,
-  Leaf,
-  Eye,
-  DollarSign,
-  ArrowUpDown,
-  ShoppingCart,
-  LogIn,
-  LogOut,
-  User,
-  Settings
+  Gamepad2, 
+  Shield, 
+  Download,
+  Coins,
+  TreePine,
+  Trophy,
+  Heart,
+  Rocket,
+  Brain
 } from 'lucide-react'
-import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
-import { useEffect, useState } from 'react'
-import { useAuth } from '@/components/auth/AuthProvider'
+import { Link, useLocation } from 'react-router-dom'
+import { GAIA_TOKEN } from '@/constants/gaia'
 
 export function Navbar() {
+  const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
-  const [isAuthorizedIP, setIsAuthorizedIP] = useState(false)
-  const { user, signOut } = useAuth()
-
-  useEffect(() => {
-    const checkIPAuthorization = async () => {
-      try {
-        // Secure access check using environment variables
-        const isAuthorized = window.location.hostname === 'localhost' ||
-                           window.location.hostname.includes('lovable')
-        
-        setIsAuthorizedIP(isAuthorized)
-        
-      } catch (error) {
-        console.log('IP check failed, allowing local access only')
-        setIsAuthorizedIP(window.location.hostname === 'localhost')
-      }
-    }
-
-    checkIPAuthorization()
-  }, [location.pathname])
+  
+  const isActive = (path: string) => location.pathname === path
 
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
-    { path: '/gaias-projects', label: 'Gaia\'s Projects', icon: Leaf },
-    { path: '/transparency', label: 'Transparency', icon: Eye },
-    { path: '/security', label: 'Security', icon: Shield }
+    { path: '/dashboard', label: 'Dashboard', icon: BarChart3 },
+    { path: '/exchange', label: 'Exchange', icon: Coins },
+    { path: '/environmental-games', label: 'Games Hub', icon: Gamepad2, badge: 'New' },
+    { path: '/global-leaderboard', label: 'Leaderboard', icon: Trophy, badge: 'Live' },
+    { path: '/animal-rescue', label: 'Animal Rescue', icon: Heart, badge: 'NFT' },
+    { path: '/gaias-projects', label: 'Green Projects', icon: TreePine },
+    { path: '/secure-admin', label: 'Admin', icon: Shield },
   ]
-
-  const topMenuItems = [
-    { path: '/gaming', label: 'Gaming', icon: Gamepad2 },
-    { path: '/exchange', label: 'Exchange', icon: DollarSign, hasSubmenu: true },
-    { path: '/marketplace', label: 'Marketplace', icon: ShoppingCart }
-  ]
-
-  const handleLogoClick = () => {
-    window.open('https://sites.google.com/view/culture-of-harmony/harmony-of-gaia', '_blank')
-  }
 
   return (
-    <>
-      {/* Top Menu Bar */}
-      <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="flex h-12 items-center px-4 ml-16">
-          <div className="flex-1 flex items-center justify-center">
-            <div className="flex items-center space-x-4">
-              {topMenuItems.map((item) => {
-                const Icon = item.icon
-                const isActive = location.pathname === item.path || 
-                  (item.hasSubmenu && location.pathname === '/swap')
-                
-                return (
-                  <div key={item.path} className="relative group">
-                    <Link to={item.path}>
-                      <Button
-                        variant={isActive ? "default" : "ghost"}
-                        size="sm"
-                        className={`${
-                          isActive 
-                            ? "bg-blue-600 text-white hover:bg-blue-700" 
-                            : "hover:bg-muted"
-                        } transition-colors`}
-                      >
-                        <Icon className="h-4 w-4" />
-                        <span className="ml-2">{item.label}</span>
-                      </Button>
-                    </Link>
-                    
-                    {/* Submenu for Exchange */}
-                    {item.hasSubmenu && (
-                      <div className="absolute top-full left-0 mt-1 w-48 bg-background border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                        <Link to="/swap" className="block px-4 py-2 hover:bg-muted">
-                          <div className="flex items-center gap-2">
-                            <ArrowUpDown className="h-4 w-4" />
-                            Swap
-                          </div>
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
+    <nav className="bg-black/90 backdrop-blur-sm border-b border-green-500/30 sticky top-0 z-50">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex items-center justify-center">
+              <span className="text-black font-bold text-sm">G</span>
             </div>
-          </div>
-        </div>
-      </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+              GAIA Exchanges
+            </span>
+          </Link>
 
-      {/* Main Navigation */}
-      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40">
-        <div className="flex h-16 items-center px-4 ml-16">
-          {/* Logo - offset for menu button */}
-          <div className="flex items-center gap-4">
-            <UniversalGaiaLogo 
-              size="sm" 
-              animated={true}
-              showText={true}
-              onClick={handleLogoClick}
-              className="hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-
-          <div className="flex-1 flex items-center justify-center">
-            <div className="flex items-center space-x-1 lg:space-x-2">
-              {navItems.map((item) => {
-                const Icon = item.icon
-                const isActive = location.pathname === item.path
-                
-                return (
-                  <Link key={item.path} to={item.path}>
-                    <Button
-                      variant={isActive ? "default" : "ghost"}
-                      size="sm"
-                      className={`${
-                        isActive 
-                          ? "bg-green-600 text-white hover:bg-green-700" 
-                          : "hover:bg-muted"
-                      } transition-colors`}
-                    >
-                      <Icon className="h-4 w-4" />
-                      <span className="hidden sm:inline ml-2">{item.label}</span>
-                    </Button>
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-green-400 border-green-400">
-              GAIA Platform
-            </Badge>
-            {isAuthorizedIP && (
-              <Badge className="bg-blue-600 text-white animate-pulse">
-                🛡️ SECURE ACCESS
-              </Badge>
-            )}
-            
-            {/* Authentication Controls */}
-            {user ? (
-              <div className="flex items-center gap-2">
-                <Badge variant="outline" className="text-blue-400 border-blue-400">
-                  <User className="h-3 w-3 mr-1" />
-                  {user.email}
-                </Badge>
-                <Link to="/admin">
-                  <Button variant="outline" size="sm" className="border-purple-400 text-purple-400 hover:bg-purple-400/10">
-                    <Settings className="h-4 w-4 mr-1" />
-                    Admin
-                  </Button>
-                </Link>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={signOut}
-                  className="border-red-400 text-red-400 hover:bg-red-400/10"
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <Link key={item.path} to={item.path}>
+                <Button
+                  variant={isActive(item.path) ? "default" : "ghost"}
+                  className={`relative ${
+                    isActive(item.path) 
+                      ? 'bg-green-600 text-white' 
+                      : 'text-gray-300 hover:text-green-400 hover:bg-green-900/20'
+                  }`}
                 >
-                  <LogOut className="h-4 w-4 mr-1" />
-                  Sign Out
-                </Button>
-              </div>
-            ) : (
-              <Link to="/auth">
-                <Button variant="outline" size="sm" className="border-green-400 text-green-400 hover:bg-green-400/10">
-                  <LogIn className="h-4 w-4 mr-1" />
-                  Sign In
+                  <item.icon className="h-4 w-4 mr-2" />
+                  {item.label}
+                  {item.badge && (
+                    <Badge className="ml-2 bg-red-500 text-white text-xs px-1 py-0">
+                      {item.badge}
+                    </Badge>
+                  )}
                 </Button>
               </Link>
-            )}
+            ))}
           </div>
+
+          {/* Official GAiA Token Info */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <div className="text-right">
+              <div className="text-xs text-green-300">Official GAiA Token</div>
+              <div className="text-xs font-mono text-green-400">
+                {GAIA_TOKEN.WALLET_ADDRESS.substring(0, 8)}...
+              </div>
+            </div>
+            <a 
+              href={GAIA_TOKEN.PUMP_FUN_URL}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-sm hover:from-purple-700 hover:to-pink-700 transition-all"
+            >
+              Trade on PumpFun
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="md:hidden text-green-400"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
         </div>
-      </nav>
-    </>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="md:hidden py-4 border-t border-green-500/30">
+            <div className="flex flex-col space-y-2">
+              {navItems.map((item) => (
+                <Link 
+                  key={item.path} 
+                  to={item.path}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Button
+                    variant={isActive(item.path) ? "default" : "ghost"}
+                    className={`w-full justify-start ${
+                      isActive(item.path) 
+                        ? 'bg-green-600 text-white' 
+                        : 'text-gray-300 hover:text-green-400 hover:bg-green-900/20'
+                    }`}
+                  >
+                    <item.icon className="h-4 w-4 mr-2" />
+                    {item.label}
+                    {item.badge && (
+                      <Badge className="ml-2 bg-red-500 text-white text-xs">
+                        {item.badge}
+                      </Badge>
+                    )}
+                  </Button>
+                </Link>
+              ))}
+              
+              {/* Mobile GAiA Token Info */}
+              <div className="pt-4 border-t border-green-500/30">
+                <div className="text-center">
+                  <div className="text-xs text-green-300 mb-1">Official GAiA Token</div>
+                  <div className="text-xs font-mono text-green-400 mb-2">
+                    {GAIA_TOKEN.WALLET_ADDRESS}
+                  </div>
+                  <a 
+                    href={GAIA_TOKEN.PUMP_FUN_URL}
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-full text-sm hover:from-purple-700 hover:to-pink-700 transition-all"
+                  >
+                    Trade on PumpFun
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
   )
 }

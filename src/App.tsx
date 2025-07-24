@@ -27,6 +27,11 @@ import Security from "./pages/Security";
 import ArtistStreaming from "./pages/ArtistStreaming";
 import VideoUpload from "./pages/VideoUpload";
 import MusicPlatform from "./pages/MusicPlatform";
+import EnvironmentalGames from "./pages/EnvironmentalGames";
+import GlobalLeaderboardPage from "./pages/GlobalLeaderboard";
+import AnimalRescue from "./pages/AnimalRescue";
+import DeploymentCenter from "./pages/DeploymentCenter";
+import QuantumSecurity from "./pages/QuantumSecurity";
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
 import SlidingMenu from '@/components/SlidingMenu';
 
@@ -58,6 +63,11 @@ const App = () => (
             <Route path="/nft-cards" element={<NFTCards />} />
             <Route path="/eco-avatar" element={<EcoAvatar />} />
             
+            {/* New Features from PRs #22-#41 */}
+            <Route path="/environmental-games" element={<EnvironmentalGames />} />
+            <Route path="/global-leaderboard" element={<GlobalLeaderboardPage />} />
+            <Route path="/animal-rescue" element={<AnimalRescue />} />
+            
             {/* Entertainment Routes */}
             <Route path="/artist-streaming" element={<ArtistStreaming />} />
             <Route path="/video-upload" element={<VideoUpload />} />
@@ -72,6 +82,8 @@ const App = () => (
             <Route path="/admin" element={<Admin />} />
             <Route path="/secure-admin" element={<SecureAdmin />} />
             <Route path="/secure-vault" element={<SecureVault />} />
+            <Route path="/deployment-center" element={<DeploymentCenter />} />
+            <Route path="/quantum-security" element={<QuantumSecurity />} />
             
             {/* Security and Downloads */}
             <Route path="/security" element={<Security />} />
