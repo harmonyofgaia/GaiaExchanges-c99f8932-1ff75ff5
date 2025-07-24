@@ -93,7 +93,7 @@ export function InteractiveVideoPlayer() {
   const [chatMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      user: { name: 'EcoWarrrior_Mike', avatar: '/api/placeholder/32/32', badge: '🌱' },
+      user: { name: 'EcoWarrior_Mike', avatar: '/api/placeholder/32/32', badge: '🌱' },
       message: 'This is exactly what our community needs! Thanks for sharing these practical tips.',
       timestamp: '2 minutes ago',
       type: 'message'
