@@ -198,7 +198,14 @@ export function VideoSubscriptionSystem() {
   ])
 
   const toggleSubscription = (creatorId: string) => {
-    console.log(`Toggling subscription for creator ${creatorId}`)
+    setSubscriptions((prevSubscriptions) =>
+      prevSubscriptions.map((subscription) =>
+        subscription.creatorId === creatorId
+          ? { ...subscription, isSubscribed: !subscription.isSubscribed }
+          : subscription
+      )
+    );
+    console.log(`Toggled subscription for creator ${creatorId}`);
   }
 
   const toggleNotifications = (creatorId: string) => {
