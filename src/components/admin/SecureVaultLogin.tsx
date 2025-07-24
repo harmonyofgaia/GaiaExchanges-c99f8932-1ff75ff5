@@ -26,11 +26,17 @@ export function SecureVaultLogin({ onAuthentication }: SecureVaultLoginProps) {
     setIsLoading(true)
 
     try {
-      // Original admin credentials from 2 days ago - preserved without modification
-      const isValidAdmin = credentials.username === 'Synatic' && 
-                          credentials.password === 'Freedom!oul19922323'
+      // Send credentials to the server for validation
+      const response = await fetch('/api/authenticate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      });
+      const result = await response.json();
       
-      if (isValidAdmin) {
+      if (response.ok && result.isAuthenticated) {
         setIsAuthenticated(true)
         
         // Store session for security monitoring
