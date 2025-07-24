@@ -52,10 +52,6 @@
     "embla-carousel-react": "^8.3.0",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
-<<<<<<< HEAD
-=======
-    "next": "^14.2.30",
->>>>>>> e238f479039f043c08a74cbf54364985862dce84
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
