@@ -69,9 +69,14 @@ export default function AdminLogin() {
     setIsAuthenticated(isAdmin)
 
     // Continuous GAIA token verification every 10 seconds
-    const tokenVerificationInterval = setInterval(verifyGaiaToken, 10000)
+    const intervalRef = useRef<NodeJS.Timeout | null>(null)
+    intervalRef.current = setInterval(verifyGaiaToken, 10000)
     
-    return () => clearInterval(tokenVerificationInterval)
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }
   }, [isAdmin])
 
   const handleLogin = async (e: React.FormEvent) => {
