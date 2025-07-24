@@ -312,12 +312,14 @@ const PartnershipManagement = () => {
     }
   };
 
-  const filteredPartners = partners.filter(partner => {
-    const matchesType = filterType === 'all' || partner.type === filterType;
-    const matchesSearch = partner.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         partner.region.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesType && matchesSearch;
-  });
+  const filteredPartners = useMemo(() => {
+    return partners.filter(partner => {
+      const matchesType = filterType === 'all' || partner.type === filterType;
+      const matchesSearch = partner.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           partner.region.toLowerCase().includes(searchTerm.toLowerCase());
+      return matchesType && matchesSearch;
+    });
+  }, [partners, filterType, searchTerm]);
 
   const totalContractValue = partners.reduce((sum, partner) => sum + partner.contract_value, 0);
   const activePartners = partners.filter(p => p.status === 'active').length;
