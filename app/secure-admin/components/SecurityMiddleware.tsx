@@ -127,56 +127,6 @@ export function SecurityMiddleware({ systemTime, isAuthenticated }: SecurityMidd
 
   if (!isAuthenticated) return null
 
-  return (
-    <div className="fixed bottom-4 right-4 z-40 w-96">
-      <Card className="border-purple-500/30 bg-black/90 backdrop-blur-sm">
-        <CardHeader className="pb-3">
-          <CardTitle className="text-sm text-purple-400 flex items-center gap-2">
-            <AlertTriangle className="h-4 w-4" />
-            Intrusion Detection & Security Monitoring
-          </CardTitle>
-          <div className="flex gap-2 text-xs">
-            <Badge variant="outline" className="border-green-500/50 text-green-400">
-              Sessions: {activeSessions}
-            </Badge>
-            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
-              MFA: {mfaValidations}
-            </Badge>
-            <Badge variant="outline" className="border-red-500/50 text-red-400">
-              Intrusions: {intrusionAttempts}
-            </Badge>
-          </div>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <div className="space-y-2 max-h-40 overflow-y-auto">
-            {securityEvents.map((event) => (
-              <div 
-                key={event.id} 
-                className="flex items-start gap-3 p-2 bg-gray-900/50 rounded text-xs"
-              >
-                <div className={`mt-0.5 ${getSeverityColor(event.severity)}`}>
-                  {getTypeIcon(event.type)}
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-300 font-mono">{event.timestamp}</span>
-                    <Badge 
-                      variant="outline" 
-                      className={`text-xs px-1 py-0 ${getSeverityColor(event.severity)}`}
-                    >
-                      {event.type}
-                    </Badge>
-                  </div>
-                  <div className="text-gray-400 mt-1">{event.message}</div>
-                  {event.ip && (
-                    <div className="text-gray-500 mt-1">IP: {event.ip}</div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  )
+  // Security monitoring runs in background - no visible UI elements  
+  return null
 }

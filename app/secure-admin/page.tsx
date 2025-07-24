@@ -45,7 +45,7 @@ export default function SecureAdminPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-green-900/20">
+      <>
         <TimeSync systemTime={SYSTEM_TIME} />
         <BreachDefenseSystem 
           layers={securityLayers}
@@ -53,7 +53,7 @@ export default function SecureAdminPage() {
         />
         <SecurityMiddleware systemTime={SYSTEM_TIME} isAuthenticated={false} />
         <SecureVaultLogin onAuthentication={handleAuthentication} />
-      </div>
+      </>
     )
   }
 

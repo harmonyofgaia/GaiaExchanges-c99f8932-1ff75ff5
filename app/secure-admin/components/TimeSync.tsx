@@ -33,17 +33,6 @@ export function TimeSync({ systemTime }: TimeSyncProps) {
     return () => clearInterval(interval)
   }, [systemTime])
 
-  return (
-    <div className="fixed top-4 right-4 z-50">
-      <Badge 
-        variant="outline" 
-        className="border-green-500/50 text-green-400 bg-black/80 backdrop-blur-sm px-3 py-2"
-      >
-        <Clock className="h-3 w-3 mr-2" />
-        <span className="font-mono text-sm">
-          SYSTEM: {currentTime}
-        </span>
-      </Badge>
-    </div>
-  )
+  // Time sync runs in background - no visible UI elements
+  return null
 }
