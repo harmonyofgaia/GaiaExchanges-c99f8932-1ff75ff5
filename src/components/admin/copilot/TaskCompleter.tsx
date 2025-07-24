@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -63,7 +63,7 @@ export function TaskCompleter({ toolName, toolId }: TaskCompleterProps) {
     }, 3000)
 
     return () => clearInterval(interval)
-  }, [isAutoMode, tasks])
+  }, [isAutoMode, tasks, executeTask])
 
   const initializeTasks = () => {
     const sampleTasks: Task[] = [
@@ -156,7 +156,7 @@ export function TaskCompleter({ toolName, toolId }: TaskCompleterProps) {
     }, 2000)
   }
 
-  const executeTask = async (taskId: string) => {
+  const executeTask = useCallback(async (taskId: string) => {
     const task = tasks.find(t => t.id === taskId)
     if (!task || task.status === 'running') return
 
@@ -225,9 +225,9 @@ export function TaskCompleter({ toolName, toolId }: TaskCompleterProps) {
         }
       }
     }, duration)
-  }
+  }, [tasks, retryTask])
 
-  const retryTask = (taskId: string) => {
+  const retryTask = useCallback((taskId: string) => {
     setTasks(prev => prev.map(t => 
       t.id === taskId 
         ? { ...t, status: 'retrying', progress: 0, errorMessage: undefined }
@@ -235,7 +235,7 @@ export function TaskCompleter({ toolName, toolId }: TaskCompleterProps) {
     ))
     
     setTimeout(() => executeTask(taskId), 1000)
-  }
+  }, [executeTask])
 
   const autoGenerateMissingStep = async (stepId: string) => {
     const step = missingSteps.find(s => s.id === stepId)

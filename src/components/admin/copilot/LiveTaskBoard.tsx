@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -81,14 +81,14 @@ export function LiveTaskBoard() {
 
   useEffect(() => {
     updateMetrics()
-  }, [tasks])
+  }, [updateMetrics])
 
   useEffect(() => {
     if (isAutoMode) {
       const interval = setInterval(autoProcessTasks, 5000)
       return () => clearInterval(interval)
     }
-  }, [isAutoMode, tasks])
+  }, [isAutoMode, autoProcessTasks])
 
   const initializeTasks = () => {
     const mockTasks: LiveTask[] = [
@@ -258,7 +258,7 @@ export function LiveTaskBoard() {
     }))
   }
 
-  const updateMetrics = () => {
+  const updateMetrics = useCallback(() => {
     const totalTasks = tasks.length
     const runningTasks = tasks.filter(t => t.status === 'running').length
     const completedTasks = tasks.filter(t => t.status === 'completed').length
@@ -281,9 +281,9 @@ export function LiveTaskBoard() {
       averageExecutionTime,
       totalExecutionTime
     })
-  }
+  }, [tasks])
 
-  const autoProcessTasks = () => {
+  const autoProcessTasks = useCallback(() => {
     // Auto-start pending tasks that have no unfulfilled dependencies
     const pendingTasks = tasks.filter(t => t.status === 'pending')
     
@@ -313,9 +313,9 @@ export function LiveTaskBoard() {
         applySuggestion(suggestion.id)
       }
     }
-  }
+  }, [tasks, suggestions, startTask, applySuggestion])
 
-  const startTask = (taskId: string) => {
+  const startTask = useCallback((taskId: string) => {
     setTasks(prev => prev.map(task => 
       task.id === taskId 
         ? { 
@@ -337,7 +337,7 @@ export function LiveTaskBoard() {
     if (task) {
       toast.info(`🚀 Starting task: ${task.name}`)
     }
-  }
+  }, [tasks])
 
   const pauseTask = (taskId: string) => {
     setTasks(prev => prev.map(task => 
@@ -377,7 +377,7 @@ export function LiveTaskBoard() {
     toast.info('▶️ Task resumed')
   }
 
-  const retryTask = (taskId: string) => {
+  const retryTask = useCallback((taskId: string) => {
     setTasks(prev => prev.map(task => 
       task.id === taskId 
         ? { 
@@ -399,7 +399,7 @@ export function LiveTaskBoard() {
     ))
     
     toast.info('🔄 Retrying task...')
-  }
+  }, [])
 
   const cancelTask = (taskId: string) => {
     setTasks(prev => prev.map(task => 
@@ -421,7 +421,7 @@ export function LiveTaskBoard() {
     toast.warning('❌ Task cancelled')
   }
 
-  const applySuggestion = (suggestionId: string) => {
+  const applySuggestion = useCallback((suggestionId: string) => {
     const suggestion = suggestions.find(s => s.id === suggestionId)
     if (!suggestion) return
 
@@ -437,7 +437,7 @@ export function LiveTaskBoard() {
       
       toast.success('✨ Suggestion applied successfully')
     }, 1000)
-  }
+  }, [suggestions, retryTask])
 
   const addCustomTask = (name: string, description: string, category: LiveTask['category']) => {
     const newTask: LiveTask = {

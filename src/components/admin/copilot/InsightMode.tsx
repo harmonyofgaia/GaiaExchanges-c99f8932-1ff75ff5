@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -48,9 +48,9 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
     }, 2000)
 
     return () => clearInterval(interval)
-  }, [insightActive, isAutoRefresh])
+  }, [insightActive, isAutoRefresh, updateRealTimeData])
 
-  const updateRealTimeData = () => {
+  const updateRealTimeData = useCallback(() => {
     // Simulate real-time stats
     const mockStats: StatMetric[] = [
       {
@@ -89,7 +89,7 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
         status: 'good'
       }
     ]
-    setRealTimeStats(newStats)
+    setRealTimeStats(mockStats)
 
     // Add new log entry
     const logLevels: ('info' | 'warn' | 'error' | 'debug')[] = ['info', 'warn', 'error', 'debug']
@@ -106,7 +106,7 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
     if (newLog.level === 'error') {
       setErrors(prev => [newLog, ...prev].slice(0, 20))
     }
-  }
+  }, [toolName, toolId])
 
   const toggleInsightMode = () => {
     setInsightActive(!insightActive)
