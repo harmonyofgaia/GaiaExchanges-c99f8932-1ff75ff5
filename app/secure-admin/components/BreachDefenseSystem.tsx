@@ -64,16 +64,9 @@ export function BreachDefenseSystem({ layers, onLayerActivation, authenticated =
       const [ip, setIp] = useState<string | null>(null)
 
       useEffect(() => {
-        const fetchIp = async () => {
-          try {
-            const response = await fetch('https://api.ipify.org?format=json')
-            const data = await response.json()
-            setIp(data.ip)
-          } catch (error) {
-            console.error('[SECURITY] Failed to fetch IP address:', error)
-          }
-        }
-        fetchIp()
+        // Use server-provided IP address
+        const serverIp = (window as any).serverIp || 'UNKNOWN'
+        setIp(serverIp)
       }, [])
 
       const sessionData = {
