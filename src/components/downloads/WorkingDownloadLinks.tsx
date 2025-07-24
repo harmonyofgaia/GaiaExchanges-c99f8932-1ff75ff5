@@ -142,7 +142,7 @@ export function WorkingDownloadLinks() {
       }, 300)
 
       // Try primary URL first
-      let urlToOpen = download.primaryUrl
+      const urlToOpen = download.primaryUrl
       let urlWorked = false
 
       // For web app, open directly

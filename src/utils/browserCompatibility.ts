@@ -10,7 +10,7 @@ export function detectBrowser(): BrowserInfo {
   const userAgent = navigator.userAgent
   let browserName = 'Unknown'
   let version = 'Unknown'
-  let isSupported = true
+  const isSupported = true
   let adminAccess = false
 
   if (userAgent.includes('Firefox')) {
