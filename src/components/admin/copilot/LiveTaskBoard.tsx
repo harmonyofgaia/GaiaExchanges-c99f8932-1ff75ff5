@@ -281,31 +281,6 @@ export function LiveTaskBoard() {
     }))
   }
 
-  const updateMetrics = useCallback(() => {
-    const totalTasks = tasks.length
-    const runningTasks = tasks.filter(t => t.status === 'running').length
-    const completedTasks = tasks.filter(t => t.status === 'completed').length
-    const failedTasks = tasks.filter(t => t.status === 'failed').length
-    
-    const completedWithDuration = tasks.filter(t => t.status === 'completed' && t.actualDuration)
-    const averageExecutionTime = completedWithDuration.length > 0
-      ? completedWithDuration.reduce((sum, t) => sum + (t.actualDuration || 0), 0) / completedWithDuration.length
-      : 0
-
-    const totalExecutionTime = tasks.reduce((sum, t) => sum + (t.actualDuration || 0), 0)
-    const averageSuccessRate = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0
-
-    setMetrics({
-      totalTasks,
-      runningTasks,
-      completedTasks,
-      failedTasks,
-      averageSuccessRate,
-      averageExecutionTime,
-      totalExecutionTime
-    })
-  }, [tasks])
-
   const autoProcessTasks = useCallback(() => {
     // Auto-start pending tasks that have no unfulfilled dependencies
     const pendingTasks = tasks.filter(t => t.status === 'pending')
