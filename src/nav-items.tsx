@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Brain } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -140,6 +140,23 @@ export const navigationItems: NavigationItem[] = [
       "Environmental Bonding"
     ],
     description: "Master Plan v7: Deep spiritual connection with nature through avatars",
+    lazyLoaded: true,
+  },
+  {
+    title: "Sea Green Psychohistorical",
+    to: "/sea-green-psychohistorical",
+    icon: Brain,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Psychohistorical AI Engine",
+      "Global Data Analysis",
+      "Future Prediction Models",
+      "Secure Admin Dashboard",
+      "Token Governance Integration",
+      "Auto-Documentation System"
+    ],
+    description: "Master Plan v7: Advanced AI-powered environmental future prediction and idea generation",
     lazyLoaded: true,
   },
   {
