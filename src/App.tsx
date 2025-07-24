@@ -38,6 +38,7 @@ import AIPoweredMissionGenerator from "./pages/AIPoweredMissionGenerator";
 import NFTAnimalRescue from "./pages/NFTAnimalRescue";
 import PlatformHealth from "./pages/PlatformHealth";
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
+import { AdminSessionManager } from '@/components/admin/AdminSessionManager';
 import SlidingMenu from '@/components/SlidingMenu';
 
 const queryClient = new QueryClient();
@@ -50,6 +51,7 @@ const App = () => (
         <Sonner />
         <DatabaseErrorFixer />
         <BrowserRouter>
+          <AdminSessionManager />
           <SlidingMenu />
           <Routes>
             {/* Public Routes */}
