@@ -124,8 +124,25 @@ export function VideoExchangeDashboard() {
 
       {/* Main Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-1 h-auto p-1 text-xs">
-          <TabsTrigger value="overview" className="p-2 text-center">
+        <TabsList
+          className={`grid w-full gap-1 h-auto p-1 text-xs`}
+          style={{
+            gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))`,
+          }}
+        >
+          className={`grid w-full gap-1 h-auto p-1 text-xs`}
+          style={{
+            gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))`,
+          }}
+        >
+          {tabs.map((tab) => (
+            <TabsTrigger key={tab.value} value={tab.value} className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                {tab.icon}
+                <span className="hidden sm:inline">{tab.label}</span>
+              </div>
+            </TabsTrigger>
+          ))}
             <div className="flex flex-col items-center">
               <Video className="h-4 w-4 mb-1" />
               <span className="hidden sm:inline">Overview</span>
