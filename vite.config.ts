@@ -26,10 +26,12 @@ export default defineConfig(({ mode }) => ({
           vendor: ['react', 'react-dom'],
           ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-tabs'],
           charts: ['recharts'],
-          utils: ['date-fns', 'clsx', 'class-variance-authority']
+          utils: ['date-fns', 'clsx', 'class-variance-authority'],
+          router: ['react-router-dom'],
+          lucide: ['lucide-react']
         }
       }
     },
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1200
   }
 }));
