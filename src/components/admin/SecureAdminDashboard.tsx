@@ -28,6 +28,7 @@ import { DeploymentAutomation } from '@/components/deployment/DeploymentAutomati
 import { EnhancedAdminMenu } from '@/components/admin/EnhancedAdminMenu'
 import { AdvancedSecurityCenter } from '@/components/admin/AdvancedSecurityCenter'
 import { GlobalCommandCenter } from '@/components/admin/GlobalCommandCenter'
+import { VideoExchangeDashboard } from '@/components/admin/VideoExchangeDashboard'
 
 export function SecureAdminDashboard() {
   return (
@@ -48,7 +49,7 @@ export function SecureAdminDashboard() {
         </div>
 
         <Tabs defaultValue="dashboard" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-1 h-auto p-1 text-xs">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-1 h-auto p-1 text-xs">
             <TabsTrigger value="dashboard" className="p-2 text-center">
               <div className="flex flex-col items-center">
                 <span>🏠</span>
@@ -95,6 +96,12 @@ export function SecureAdminDashboard() {
               <div className="flex flex-col items-center">
                 <span>❤️</span>
                 <span className="hidden sm:inline">Health</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="video-exchange" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🎬</span>
+                <span className="hidden sm:inline">Video</span>
               </div>
             </TabsTrigger>
             <TabsTrigger value="users" className="p-2 text-center">
@@ -290,6 +297,10 @@ export function SecureAdminDashboard() {
 
             <TabsContent value="psycho" className="mt-0">
               <PsychohistoricalEngine />
+            </TabsContent>
+
+            <TabsContent value="video-exchange" className="mt-0">
+              <VideoExchangeDashboard />
             </TabsContent>
           </div>
         </Tabs>
