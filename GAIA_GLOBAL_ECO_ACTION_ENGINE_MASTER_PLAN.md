@@ -426,7 +426,7 @@ The GAIA Global Eco-Action Engine Master Plan consolidates all environmental tec
 - [ ] **Code Quality**: 95%+ automated testing coverage
 - [ ] **Documentation**: Comprehensive API and user documentation
 - [ ] **Security**: Automated security scanning and auditing
-- [ ] **Performance**: Sub-second response time requirements
+- [ ] **Performance**: Ensure sub-second response times for critical operations, including API calls, database queries, and page loads, with performance measured at the 95th percentile.
 - [ ] **Accessibility**: WCAG 2.1 AA compliance
 
 ### Environmental Standards
