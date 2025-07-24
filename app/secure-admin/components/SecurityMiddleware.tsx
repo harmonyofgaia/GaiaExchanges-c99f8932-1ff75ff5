@@ -71,25 +71,39 @@ export function SecurityMiddleware({ systemTime, isAuthenticated }: SecurityMidd
       setSecurityEvents(initialEvents)
       setMfaValidations(1)
 
-      // Simulate real-time security monitoring
-      const monitoringInterval = setInterval(() => {
-        // Random security events for demonstration
-        const eventTypes = ['SESSION', 'ACCESS', 'AUTH'] as const
-        const randomType = eventTypes[Math.floor(Math.random() * eventTypes.length)]
-        
-        const newEvent: SecurityEvent = {
-          id: Date.now().toString(),
-          timestamp: `${systemTime.hour}:${systemTime.minute}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
-          type: randomType,
-          severity: 'LOW',
-          message: `${randomType} validation completed successfully`,
-          ip: '192.168.1.100'
-        }
+      if (process.env.NODE_ENV === 'production') {
+        // Connect to real security monitoring system
+        const monitoringInterval = setInterval(async () => {
+          try {
+            const response = await fetch('/api/security-events'); // Replace with actual API endpoint
+            const newEvent: SecurityEvent = await response.json();
+            setSecurityEvents(prev => [newEvent, ...prev.slice(0, 9)]); // Keep last 10 events
+          } catch (error) {
+            console.error('Failed to fetch security events:', error);
+          }
+        }, 10000);
 
-        setSecurityEvents(prev => [newEvent, ...prev.slice(0, 9)]) // Keep last 10 events
-      }, 10000)
+        return () => clearInterval(monitoringInterval);
+      } else {
+        // Simulate real-time security monitoring for development
+        const monitoringInterval = setInterval(() => {
+          const eventTypes = ['SESSION', 'ACCESS', 'AUTH'] as const;
+          const randomType = eventTypes[Math.floor(Math.random() * eventTypes.length)];
 
-      return () => clearInterval(monitoringInterval)
+          const newEvent: SecurityEvent = {
+            id: Date.now().toString(),
+            timestamp: `${systemTime.hour}:${systemTime.minute}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
+            type: randomType,
+            severity: 'LOW',
+            message: `${randomType} validation completed successfully`,
+            ip: '192.168.1.100'
+          };
+
+          setSecurityEvents(prev => [newEvent, ...prev.slice(0, 9)]); // Keep last 10 events
+        }, 10000);
+
+        return () => clearInterval(monitoringInterval);
+      }
     }
   }, [isAuthenticated, systemTime])
 
