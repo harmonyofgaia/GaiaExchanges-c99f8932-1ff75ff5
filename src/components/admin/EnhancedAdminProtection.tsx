@@ -76,7 +76,7 @@ export function EnhancedAdminProtection({ children }: EnhancedAdminProtectionPro
       }
     }
 
-    const protectionInterval = setInterval(enforceExclusiveAdminAccess, 1000)
+    const protectionInterval = setInterval(enforceExclusiveAdminAccess, 5000)
     enforceExclusiveAdminAccess()
     
     return () => clearInterval(protectionInterval)
