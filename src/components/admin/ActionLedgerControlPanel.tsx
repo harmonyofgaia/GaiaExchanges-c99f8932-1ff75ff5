@@ -103,7 +103,7 @@ export function ActionLedgerControlPanel() {
           impact: 'low'
         }
         setActionLogs(prev => [newAction, ...prev.slice(0, 19)]) // Keep last 20 logs
-      }, 30000) // Every 30 seconds
+      }, REAL_TIME_INTERVAL_MS)
 
       return () => clearInterval(interval)
     }
