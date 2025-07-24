@@ -102,7 +102,7 @@ export function VideoUploadSystem() {
 
   const handleFileUpload = (files: File[]) => {
     const newUploads = files.map(file => ({
-      id: Math.random().toString(36).substr(2, 9),
+      id: crypto.randomUUID(),
       file,
       name: file.name,
       size: file.size,
