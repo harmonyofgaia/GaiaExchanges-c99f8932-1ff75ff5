@@ -236,10 +236,17 @@ const ForestTokenSystem = () => {
     }
   };
 
-  const totalPortfolioValue = tokenBalances.reduce((sum, token) => sum + token.value, 0);
-  const totalStaked = tokenBalances.reduce((sum, token) => sum + (token.staked * (token.value / token.balance)), 0);
-  const totalRewards = tokenBalances.reduce((sum, token) => sum + token.rewards, 0);
+  const totalPortfolioValue = useMemo(() => {
+    return tokenBalances.reduce((sum, token) => sum + token.value, 0);
+  }, [tokenBalances]);
 
+  const totalStaked = useMemo(() => {
+    return tokenBalances.reduce((sum, token) => sum + (token.staked * (token.value / token.balance)), 0);
+  }, [tokenBalances]);
+
+  const totalRewards = useMemo(() => {
+    return tokenBalances.reduce((sum, token) => sum + token.rewards, 0);
+  }, [tokenBalances]);
   useEffect(() => {
     const governanceTokens = tokenBalances.find(t => t.type === 'governance');
     if (governanceTokens) {
