@@ -52,39 +52,39 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
 
   const updateRealTimeData = () => {
     // Simulate real-time stats
-    const newStats: StatMetric[] = [
+    const mockStats: StatMetric[] = [
       {
         name: 'Active Sessions',
-        value: Math.floor(Math.random() * 100) + 50,
-        change: Math.floor(Math.random() * 20) - 10,
-        trend: Math.random() > 0.5 ? 'up' : 'down',
+        value: 120,
+        change: 5,
+        trend: 'up',
         status: 'good'
       },
       {
         name: 'CPU Usage',
-        value: `${Math.floor(Math.random() * 30) + 20}%`,
-        change: Math.floor(Math.random() * 10) - 5,
-        trend: Math.random() > 0.5 ? 'up' : 'down',
-        status: Math.random() > 0.7 ? 'warning' : 'good'
+        value: '25%',
+        change: -3,
+        trend: 'down',
+        status: 'good'
       },
       {
         name: 'Memory Usage',
-        value: `${Math.floor(Math.random() * 40) + 30}%`,
-        change: Math.floor(Math.random() * 8) - 4,
-        trend: Math.random() > 0.5 ? 'up' : 'down',
+        value: '35%',
+        change: 2,
+        trend: 'up',
         status: 'good'
       },
       {
         name: 'Response Time',
-        value: `${Math.floor(Math.random() * 100) + 50}ms`,
-        change: Math.floor(Math.random() * 20) - 10,
-        trend: Math.random() > 0.5 ? 'up' : 'down',
-        status: Math.random() > 0.8 ? 'error' : 'good'
+        value: '75ms',
+        change: -5,
+        trend: 'down',
+        status: 'good'
       },
       {
         name: 'Database Queries',
-        value: Math.floor(Math.random() * 500) + 200,
-        change: Math.floor(Math.random() * 50) - 25,
+        value: 300,
+        change: 15,
         trend: 'up',
         status: 'good'
       }
