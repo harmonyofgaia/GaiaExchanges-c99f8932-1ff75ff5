@@ -43,13 +43,14 @@ export function AdminControlCenter({ systemTime, securityLayers }: AdminControlC
   const [clientIP] = useState(`192.168.1.${Math.floor(Math.random() * 255)}`)
   const [sessionId] = useState(`sess_${Date.now().toString(36)}`)
 
+  const router = useRouter()
   const handleLogout = () => {
     // Clear admin session
     localStorage.removeItem('gaia-admin-session')
     localStorage.removeItem('gaia-admin-ip')
     
-    // In a real Next.js app, you would redirect using router.push or redirect()
-    window.location.href = '/secure-admin'
+    // Redirect using Next.js router
+    router.push('/secure-admin')
   }
 
   const allLayersActive = Object.values(securityLayers).every(layer => layer)
