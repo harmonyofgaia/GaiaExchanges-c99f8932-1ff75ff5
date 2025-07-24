@@ -16,6 +16,13 @@ interface RevenueAgreement {
   bonusPercentage: number
 }
 
+interface RevenuePreset {
+  name: string
+  foundation: number
+  artist: number
+  tokens: number
+}
+
 export function FlexibleRevenueAgreements() {
   const [agreement, setAgreement] = useState<RevenueAgreement>({
     foundationPercentage: 50,
@@ -26,7 +33,7 @@ export function FlexibleRevenueAgreements() {
     bonusPercentage: 5
   })
 
-  const [customAgreements, setCustomAgreements] = useState([
+  const [customAgreements, setCustomAgreements] = useState<RevenuePreset[]>([
     { name: "Eco-Priority", foundation: 60, artist: 40, tokens: 1.2 },
     { name: "Artist-Focus", foundation: 35, artist: 65, tokens: 0.8 },
     { name: "Balanced Growth", foundation: 50, artist: 50, tokens: 1.0 },
@@ -50,7 +57,7 @@ export function FlexibleRevenueAgreements() {
     })
   }
 
-  const applyPreset = (preset: any) => {
+  const applyPreset = (preset: RevenuePreset) => {
     setAgreement({
       ...agreement,
       foundationPercentage: preset.foundation,

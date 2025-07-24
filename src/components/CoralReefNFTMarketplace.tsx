@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tool, Landscape } from '@/types/ui-types'
 import { 
   Coins, 
   Heart, 
@@ -172,14 +173,14 @@ export function CoralReefNFTMarketplace() {
     })
   }
 
-  const buyTool = (tool: any) => {
+  const buyTool = (tool: Tool) => {
     toast.success(`🔨 ${tool.name} Purchased!`, {
       description: `Cost: ${tool.price} GAiA tokens. New tools added to your inventory!`,
       duration: 4000
     })
   }
 
-  const buyLandscape = (landscape: any) => {
+  const buyLandscape = (landscape: Landscape) => {
     toast.success(`🏞️ ${landscape.name} Purchased!`, {
       description: `Cost: ${landscape.price} GAiA tokens. Landscape added to your collection!`,
       duration: 4000
