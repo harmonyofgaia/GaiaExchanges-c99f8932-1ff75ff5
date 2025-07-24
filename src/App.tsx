@@ -32,6 +32,8 @@ import GlobalLeaderboardPage from "./pages/GlobalLeaderboard";
 import AnimalRescue from "./pages/AnimalRescue";
 import DeploymentCenter from "./pages/DeploymentCenter";
 import QuantumSecurity from "./pages/QuantumSecurity";
+import ForestShieldMasterPlan from "./pages/ForestShieldMasterPlan";
+import WildfireDefenseDashboard from "./pages/WildfireDefenseDashboard";
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
 import SlidingMenu from '@/components/SlidingMenu';
 
@@ -62,6 +64,8 @@ const App = () => (
             <Route path="/planet-cleaning" element={<PlanetCleaning />} />
             <Route path="/nft-cards" element={<NFTCards />} />
             <Route path="/eco-avatar" element={<EcoAvatar />} />
+            <Route path="/forest-shield-master-plan" element={<ForestShieldMasterPlan />} />
+            <Route path="/wildfire-defense-dashboard" element={<WildfireDefenseDashboard />} />
             
             {/* New Features from PRs #22-#41 */}
             <Route path="/environmental-games" element={<EnvironmentalGames />} />
