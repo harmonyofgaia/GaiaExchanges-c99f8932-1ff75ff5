@@ -67,17 +67,20 @@ export function DatabaseInspector() {
   }, [])
 
   const loadInitialData = () => {
+    // Initialize seeded random number generator
+    const seededRandom = createSeededRandom(42); // Use a fixed seed for reproducibility
+
     // Load mock database stats
     const mockStats: DatabaseStats = {
       totalTables: 42,
       totalRecords: 1250000,
-      orphanedRecords: Math.floor(Math.random() * 1000) + 50,
-      missingIndexes: Math.floor(Math.random() * 5) + 1,
-      brokenRelations: Math.floor(Math.random() * 3),
-      queryPerformance: Math.floor(Math.random() * 30) + 70,
+      orphanedRecords: Math.floor(seededRandom() * 1000) + 50,
+      missingIndexes: Math.floor(seededRandom() * 5) + 1,
+      brokenRelations: Math.floor(seededRandom() * 3),
+      queryPerformance: Math.floor(seededRandom() * 30) + 70,
       storageUsed: '2.4 GB',
-      lastOptimized: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
-      healthScore: Math.floor(Math.random() * 20) + 75
+      lastOptimized: new Date(Date.now() - seededRandom() * 7 * 24 * 60 * 60 * 1000),
+      healthScore: Math.floor(seededRandom() * 20) + 75
     }
     setStats(mockStats)
 
