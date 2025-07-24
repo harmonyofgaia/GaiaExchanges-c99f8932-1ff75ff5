@@ -66,6 +66,14 @@ export function DatabaseInspector() {
     loadInitialData()
   }, [])
 
+  // Function to create a seeded random number generator
+  const createSeededRandom = (seed: number) => {
+    let value = seed;
+    return () => {
+      value = (value * 16807) % 2147483647;
+      return (value - 1) / 2147483646;
+    };
+  };
   const loadInitialData = () => {
     // Initialize seeded random number generator
     const seededRandom = createSeededRandom(42); // Use a fixed seed for reproducibility
