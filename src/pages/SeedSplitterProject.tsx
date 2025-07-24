@@ -19,7 +19,8 @@ import {
   TreePine,
   Sun,
   Cloud,
-  Leaf
+  Leaf,
+  Mountain
 } from 'lucide-react';
 import CrossProjectSynergyService from '@/services/CrossProjectSynergyService';
 import RoutingRewardSystem from '@/components/RoutingRewardSystem';

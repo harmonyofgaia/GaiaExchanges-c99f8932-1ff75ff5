@@ -3,7 +3,8 @@
  * Advanced AI system for generating personalized environmental missions
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'
+import { AI_GENERATION_DELAY_MS } from '@/constants/delays'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
