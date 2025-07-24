@@ -61,18 +61,12 @@ export function BreachDefenseSystem({ layers, onLayerActivation, authenticated =
     // Monitor session integrity and detect potential hijack attempts
     const monitorSession = () => {
       const userAgent = navigator.userAgent
-      const [ip, setIp] = useState<string | null>(null)
-
-      useEffect(() => {
-        // Use server-provided IP address
-        const serverIp = (window as any).serverIp || 'UNKNOWN'
-        setIp(serverIp)
-      }, [])
+      const serverIp = (typeof window !== 'undefined' && (window as unknown as Record<string, unknown>).serverIp) || 'UNKNOWN'
 
       const sessionData = {
         timestamp: Date.now(),
         userAgent,
-        ip: ip || 'UNKNOWN', // Fallback to 'UNKNOWN' if IP is not available
+        ip: serverIp,
       }
       
       // Anti-hijack mechanism - validate session consistency
