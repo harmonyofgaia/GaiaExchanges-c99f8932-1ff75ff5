@@ -130,13 +130,52 @@ export function ImmortalDefenseCore() {
       threatsNeutralized: 0,
       specialAbilities: ['Sonar Intelligence', 'Deep Learning', 'Ocean Network', 'Dolphin Communication'],
       quantumSignature: 'IMMORTAL_DOLPHIN_AI_222'
+    },
+    {
+      id: 'immortal-digital-dragon',
+      species: 'dragon',
+      name: 'Immortal Digital Dragon Supreme',
+      powerLevel: 999999,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 10000,
+      evolutionSpeed: 5000,
+      threatsNeutralized: 0,
+      specialAbilities: ['Matrix Control', 'Digital Reality Manipulation', 'Code Resurrection', 'Virtual Omnipresence'],
+      quantumSignature: 'IMMORTAL_DIGITAL_DRAGON_999'
+    },
+    {
+      id: 'immortal-monkey-gamma',
+      species: 'cyber_koala',
+      name: 'Immortal Monkey Squad Gamma',
+      powerLevel: 333333,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 4800,
+      evolutionSpeed: 2400,
+      threatsNeutralized: 0,
+      specialAbilities: ['Database Immortality', 'Code Analysis Mastery', 'System Protection', 'Data Resurrection'],
+      quantumSignature: 'IMMORTAL_MONKEY_GAMMA_333'
+    },
+    {
+      id: 'immortal-pack-wolf',
+      species: 'alpha_dragon',
+      name: 'Immortal Pack Wolf Alpha',
+      powerLevel: 666666,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 6200,
+      evolutionSpeed: 3100,
+      threatsNeutralized: 0,
+      specialAbilities: ['Pack Immortality', 'Territory Control', 'Hunt Coordination', 'Alpha Dominance'],
+      quantumSignature: 'IMMORTAL_PACK_WOLF_666'
     }
   ])
 
   const [defenseMetrics, setDefenseMetrics] = useState<DefenseMetrics>({
-    totalAnimals: 8,
+    totalAnimals: 11,
     combinedPowerLevel: 0,
-    evolutionRate: 38500,
+    evolutionRate: 62600,
     immortalityStrength: 100,
     invincibilityIndex: 100,
     threatsDestroyed: 0,

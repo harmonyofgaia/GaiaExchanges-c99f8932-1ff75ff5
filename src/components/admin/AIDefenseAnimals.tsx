@@ -173,6 +173,30 @@ export function AIDefenseAnimals() {
       activityLevel: 96,
       threatsRepelled: 5673,
       emoji: '🔥🦅'
+    },
+    {
+      id: 13,
+      name: 'Digital Dragon',
+      description: 'Matrix-controlling dragon with digital domain mastery',
+      effectiveness: 97,
+      status: 'Active',
+      location: 'Digital Matrix',
+      contributors: 4200,
+      activityLevel: 98,
+      threatsRepelled: 7892,
+      emoji: '🐲'
+    },
+    {
+      id: 14,
+      name: 'Monkey Squad Gamma',
+      description: 'Elite monkey unit specialized in database protection',
+      effectiveness: 79,
+      status: 'Active',
+      location: 'Tech Center Gamma',
+      contributors: 1050,
+      activityLevel: 86,
+      threatsRepelled: 1456,
+      emoji: '🐒'
     }
   ])
 
