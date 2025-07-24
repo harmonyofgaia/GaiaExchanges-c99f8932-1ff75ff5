@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -63,6 +63,33 @@ interface LandscapeProject {
   autoEvolution?: boolean
 }
 
+// Static data moved outside component for stability
+const enhancedTools = [
+  { id: 'tree', name: 'Trees', icon: TreePine, color: '#228B22', powerLevel: 50 },
+  { id: 'mountain', name: 'Mountains', icon: Mountain, color: '#8B4513', powerLevel: 100 },
+  { id: 'water', name: 'Water', icon: Waves, color: '#4169E1', powerLevel: 75 },
+  { id: 'building', name: 'Buildings', icon: Home, color: '#696969', powerLevel: 120 },
+  { id: 'decoration', name: 'Decorations', icon: Sun, color: '#FFD700', powerLevel: 60 },
+  { id: 'creature', name: 'Creatures', icon: Fish, color: '#FF6347', powerLevel: 90 },
+  { id: 'vegetation', name: 'Vegetation', icon: Leaf, color: '#32CD32', powerLevel: 40 },
+  { id: 'weapon', name: 'Weapons', icon: Zap, color: '#FF0000', powerLevel: 150 },
+  { id: 'tool', name: 'Tools', icon: Star, color: '#9400D3', powerLevel: 80 },
+  { id: 'artifact', name: 'Artifacts', icon: Crown, color: '#FFD700', powerLevel: 200 }
+]
+
+const environments = [
+  { id: 'earth', name: 'Earth', icon: Globe, color: '#87CEEB', description: 'Terrestrial landscapes with neural forests and quantum cities', possibilities: 10000 },
+  { id: 'underwater', name: 'Underwater', icon: Waves, color: '#006994', description: 'Deep ocean realms with bioluminescent coral reefs and ancient temples', possibilities: 15000 },
+  { id: 'space', name: 'Space', icon: Rocket, color: '#191970', description: 'Cosmic environments with living planets and quantum star systems', possibilities: 25000 },
+  { id: 'amazon', name: 'Amazon Forest', icon: TreePine, color: '#355E3B', description: 'Mystical rainforests with hidden civilizations and magical creatures', possibilities: 20000 }
+]
+
+const dimensions = [
+  { id: '2d', name: '2D Design', description: 'Artistic flat designs with infinite creative freedom', multiplier: 1 },
+  { id: '3d', name: '3D Design', description: 'Full dimensional world building with physics', multiplier: 2 },
+  { id: 'reality', name: 'Reality Design', description: 'Photorealistic environments with neural enhancement', multiplier: 3 }
+]
+
 export function LandscapeBuilderAdvanced() {
   const [currentProject, setCurrentProject] = useState<LandscapeProject>({
     id: 'project-1',
@@ -92,32 +119,6 @@ export function LandscapeBuilderAdvanced() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const evolutionRef = useRef<NodeJS.Timeout>()
 
-  const enhancedTools = [
-    { id: 'tree', name: 'Trees', icon: TreePine, color: '#228B22', powerLevel: 50 },
-    { id: 'mountain', name: 'Mountains', icon: Mountain, color: '#8B4513', powerLevel: 100 },
-    { id: 'water', name: 'Water', icon: Waves, color: '#4169E1', powerLevel: 75 },
-    { id: 'building', name: 'Buildings', icon: Home, color: '#696969', powerLevel: 120 },
-    { id: 'decoration', name: 'Decorations', icon: Sun, color: '#FFD700', powerLevel: 60 },
-    { id: 'creature', name: 'Creatures', icon: Fish, color: '#FF6347', powerLevel: 90 },
-    { id: 'vegetation', name: 'Vegetation', icon: Leaf, color: '#32CD32', powerLevel: 40 },
-    { id: 'weapon', name: 'Weapons', icon: Zap, color: '#FF0000', powerLevel: 150 },
-    { id: 'tool', name: 'Tools', icon: Star, color: '#9400D3', powerLevel: 80 },
-    { id: 'artifact', name: 'Artifacts', icon: Crown, color: '#FFD700', powerLevel: 200 }
-  ]
-
-  const environments = [
-    { id: 'earth', name: 'Earth', icon: Globe, color: '#87CEEB', description: 'Terrestrial landscapes with neural forests and quantum cities', possibilities: 10000 },
-    { id: 'underwater', name: 'Underwater', icon: Waves, color: '#006994', description: 'Deep ocean realms with bioluminescent coral reefs and ancient temples', possibilities: 15000 },
-    { id: 'space', name: 'Space', icon: Rocket, color: '#191970', description: 'Cosmic environments with living planets and quantum star systems', possibilities: 25000 },
-    { id: 'amazon', name: 'Amazon Forest', icon: TreePine, color: '#355E3B', description: 'Mystical rainforests with hidden civilizations and magical creatures', possibilities: 20000 }
-  ]
-
-  const dimensions = [
-    { id: '2d', name: '2D Design', description: 'Artistic flat designs with infinite creative freedom', multiplier: 1 },
-    { id: '3d', name: '3D Design', description: 'Full dimensional world building with physics', multiplier: 2 },
-    { id: 'reality', name: 'Reality Design', description: 'Photorealistic environments with neural enhancement', multiplier: 3 }
-  ]
-
   // Auto Evolution System
   useEffect(() => {
     if (autoEvolutionActive) {
@@ -144,9 +145,9 @@ export function LandscapeBuilderAdvanced() {
         clearInterval(evolutionRef.current)
       }
     }
-  }, [autoEvolutionActive, selectedEnvironment, selectedDimension, evolutionLevel])
+  }, [autoEvolutionActive, selectedEnvironment, selectedDimension, evolutionLevel, autoEnhanceLandscape])
 
-  const autoEnhanceLandscape = () => {
+  const autoEnhanceLandscape = useCallback(() => {
     const enhancementTypes = [
       'neural_enhancement',
       'quantum_upgrade',
@@ -160,7 +161,7 @@ export function LandscapeBuilderAdvanced() {
     // Add AI-generated enhancement element
     const newElement: LandscapeElement = {
       id: `auto-enhancement-${Date.now()}`,
-      type: enhancedTools[Math.floor(Math.random() * enhancedTools.length)].id as any,
+      type: enhancedTools[Math.floor(Math.random() * enhancedTools.length)].id as 'tree' | 'mountain' | 'water' | 'building' | 'decoration' | 'creature' | 'vegetation' | 'weapon' | 'tool' | 'artifact',
       x: Math.random() * 800,
       y: Math.random() * 400,
       z: selectedDimension === '3d' || selectedDimension === 'reality' ? Math.random() * 100 : undefined,
@@ -184,7 +185,7 @@ export function LandscapeBuilderAdvanced() {
       description: `Added ${newElement.rarity} ${newElement.type} (Power: ${newElement.powerLevel})`,
       duration: 3000
     })
-  }
+  }, [selectedDimension, selectedEnvironment])
 
   // Enhanced drawing with AI-powered elements
   useEffect(() => {
@@ -299,7 +300,7 @@ export function LandscapeBuilderAdvanced() {
     
     const newElement: LandscapeElement = {
       id: `element-${Date.now()}`,
-      type: selectedTool as any,
+      type: selectedTool as 'tree' | 'mountain' | 'water' | 'building' | 'decoration' | 'creature' | 'vegetation' | 'weapon' | 'tool' | 'artifact',
       x,
       y,
       z: selectedDimension === '3d' || selectedDimension === 'reality' ? Math.random() * 100 : undefined,
@@ -435,7 +436,7 @@ export function LandscapeBuilderAdvanced() {
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-green-400">Environment</label>
-                <Select value={selectedEnvironment} onValueChange={(value: any) => setSelectedEnvironment(value)}>
+                <Select value={selectedEnvironment} onValueChange={(value: 'earth' | 'underwater' | 'space' | 'amazon') => setSelectedEnvironment(value)}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -451,7 +452,7 @@ export function LandscapeBuilderAdvanced() {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-green-400">Dimension</label>
-                <Select value={selectedDimension} onValueChange={(value: any) => setSelectedDimension(value)}>
+                <Select value={selectedDimension} onValueChange={(value: '2d' | '3d' | 'reality') => setSelectedDimension(value)}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -549,7 +550,7 @@ export function LandscapeBuilderAdvanced() {
                     className={`cursor-pointer transition-all hover:scale-105 ${
                       selectedEnvironment === env.id ? 'border-green-500 bg-green-900/20' : 'border-gray-500/20'
                     }`}
-                    onClick={() => setSelectedEnvironment(env.id as any)}
+                    onClick={() => setSelectedEnvironment(env.id as 'earth' | 'underwater' | 'space' | 'amazon')}
                   >
                     <CardContent className="p-6 text-center">
                       <IconComponent className="h-12 w-12 mx-auto mb-4 text-green-400" />
