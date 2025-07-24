@@ -334,9 +334,18 @@ const ImpactMeasurementSystem = () => {
     setRefreshing(false);
   };
 
-  const totalCarbonCredits = carbonCredits.reduce((sum, credit) => sum + credit.credits_issued, 0);
-  const totalCreditValue = carbonCredits.reduce((sum, credit) => sum + (credit.credits_issued * credit.price_per_credit), 0);
-  const avgVerificationConfidence = verificationRecords.reduce((sum, record) => sum + record.confidence_level, 0) / verificationRecords.length;
+  const totalCarbonCredits = useMemo(() => 
+    carbonCredits.reduce((sum, credit) => sum + credit.credits_issued, 0), 
+    [carbonCredits]
+  );
+  const totalCreditValue = useMemo(() => 
+    carbonCredits.reduce((sum, credit) => sum + (credit.credits_issued * credit.price_per_credit), 0), 
+    [carbonCredits]
+  );
+  const avgVerificationConfidence = useMemo(() => 
+    verificationRecords.reduce((sum, record) => sum + record.confidence_level, 0) / verificationRecords.length, 
+    [verificationRecords]
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
