@@ -107,8 +107,9 @@ export function ComprehensiveDefenseOverview() {
   return (
     <div className="space-y-6">
       {/* Main Overview Card */}
-      <Card className="border-gradient-to-r from-purple-500/30 to-blue-500/30 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
-        <CardHeader>
+      <div className="p-[2px] bg-gradient-to-r from-purple-500/30 to-blue-500/30 rounded-lg">
+        <Card className="bg-gradient-to-r from-purple-900/30 to-blue-900/30">
+          <CardHeader>
           <CardTitle className="text-purple-400 flex items-center gap-2 text-2xl">
             <Shield className="h-8 w-8 animate-pulse" />
             🛡️ COMPREHENSIVE DEFENSE OVERVIEW - GAIA PROTECTION MATRIX
