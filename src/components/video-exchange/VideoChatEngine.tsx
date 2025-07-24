@@ -206,7 +206,14 @@ export function VideoChatEngine() {
 
   const sendMessage = () => {
     if (newMessage.trim()) {
-      // Add message sending logic here
+      const newChatMessage = {
+        id: Date.now().toString(), // Generate a unique ID
+        content: newMessage,
+        sender: 'current_user', // Replace with actual sender info
+        timestamp: new Date().toISOString(),
+        replyingTo: replyingTo ? replyingTo.id : null,
+      }
+      setChatMessages((prevMessages) => [...prevMessages, newChatMessage])
       console.log('Sending message:', newMessage)
       if (replyingTo) {
         console.log('Replying to:', replyingTo)
