@@ -7,7 +7,7 @@ import { QuantumTaskEngine } from './QuantumTaskEngine'
 import { UniversalSystemController } from './UniversalSystemController'
 import { GodModeAdminInterface } from './GodModeAdminInterface'
 import { TranscendentIntelligenceCore } from './TranscendentIntelligenceCore'
-import { Crown, Atom, Globe, Infinity, Zap, Brain, Eye, Shield } from 'lucide-react'
+import { Crown, Atom, Globe, Infinity as InfinityIcon, Zap, Brain, Eye, Shield } from 'lucide-react'
 
 export function UltimateAIEngineSuite() {
   const [activePhase, setActivePhase] = useState('phase1')
@@ -50,7 +50,7 @@ export function UltimateAIEngineSuite() {
             Phase 3: God Mode
           </TabsTrigger>
           <TabsTrigger value="phase4" className="flex items-center gap-2">
-            <Infinity className="h-4 w-4" />
+            <InfinityIcon className="h-4 w-4" />
             Phase 4: Transcendent
           </TabsTrigger>
         </TabsList>
@@ -161,7 +161,7 @@ export function UltimateAIEngineSuite() {
           <Card className="border-green-500/30 bg-green-900/20">
             <CardHeader>
               <CardTitle className="text-green-400 flex items-center gap-2">
-                <Infinity className="h-6 w-6" />
+                <InfinityIcon className="h-6 w-6" />
                 ♾️ PHASE 4: TRANSCENDENT INTELLIGENCE
               </CardTitle>
             </CardHeader>
@@ -212,7 +212,7 @@ export function UltimateAIEngineSuite() {
               <div className="text-xs text-muted-foreground">Phase 3</div>
             </div>
             <div className="p-3 bg-green-900/30 rounded-lg">
-              <Infinity className="h-6 w-6 text-green-400 mx-auto mb-2" />
+              <InfinityIcon className="h-6 w-6 text-green-400 mx-auto mb-2" />
               <div className="text-lg font-bold text-green-400">INFINITE</div>
               <div className="text-xs text-muted-foreground">Phase 4</div>
             </div>
