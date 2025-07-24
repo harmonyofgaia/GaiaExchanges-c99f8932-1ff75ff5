@@ -8,7 +8,11 @@ import { Shield, Lock, Eye, EyeOff, Crown } from 'lucide-react'
 import { toast } from 'sonner'
 import { AdminDashboard } from './AdminDashboard'
 
-export function SecureVaultLogin() {
+interface SecureVaultLoginProps {
+  onAuthentication?: (authenticated: boolean) => void
+}
+
+export function SecureVaultLogin({ onAuthentication }: SecureVaultLoginProps) {
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
@@ -22,16 +26,37 @@ export function SecureVaultLogin() {
     setIsLoading(true)
 
     try {
-      // Original admin credentials from 2 days ago
-      const isValidAdmin = credentials.username === 'Synatic' && 
-                          credentials.password === 'Freedom!oul19922323'
+      // Send credentials to the server for validation
+      const response = await fetch('/api/authenticate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      });
+      const result = await response.json();
       
-      if (isValidAdmin) {
+      if (response.ok && result.isAuthenticated) {
         setIsAuthenticated(true)
+        
+        // Store session for security monitoring
+        const sessionData = {
+          username: credentials.username,
+          timestamp: Date.now(),
+          userAgent: navigator.userAgent,
+          systemTime: '11:14, 24-07-2025' // Set system time as specified
+        }
+        localStorage.setItem('gaia-admin-session', JSON.stringify(sessionData))
+        
         toast.success('🌍 GAIA VAULT ACCESS GRANTED!', {
           description: 'Welcome to the Ultimate Control Center',
           duration: 5000
         })
+        
+        // Notify parent component of successful authentication
+        if (onAuthentication) {
+          onAuthentication(true)
+        }
       } else {
         toast.error('🚫 VAULT ACCESS DENIED', {
           description: 'Invalid admin credentials - Quantum protection active',
@@ -51,10 +76,16 @@ export function SecureVaultLogin() {
 
   const handleLogout = () => {
     setIsAuthenticated(false)
+    localStorage.removeItem('gaia-admin-session')
     toast.success('🚪 Vault session terminated - System secured', {
       description: 'All administrative controls have been disabled',
       duration: 3000
     })
+    
+    // Notify parent component of logout
+    if (onAuthentication) {
+      onAuthentication(false)
+    }
   }
 
   if (isAuthenticated) {
