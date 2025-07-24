@@ -1,9 +1,0 @@
-# GitHub Automation Dependencies
-PyGithub==2.1.1
-python-dotenv==1.0.0
-requests==2.32.4
-
-# Development dependencies
-black==24.3.0
-flake8==7.0.0
-pytest==7.4.4

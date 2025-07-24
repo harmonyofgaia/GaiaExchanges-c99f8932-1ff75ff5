@@ -16,5 +16,4 @@ export { default as GaiaFighterGame } from './GaiaFighterGame';
 export { default as LiveTracking } from './LiveTracking';
 export { default as GaiaCoinCrafter } from './GaiaCoinCrafter';
 export { default as LandscapeBuilder } from './LandscapeBuilder';
-export { default as LovableDeploymentTool } from './LovableDeploymentTool';
 export { default as NotFound } from './NotFound';

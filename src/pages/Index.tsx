@@ -1,185 +1,190 @@
-
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ArrowRight, Globe, Shield, Coins, ExternalLink, Wallet } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
+import { Globe, Heart, Zap, Users, Shield, Gamepad2, Wallet } from 'lucide-react'
 import { GAIA_TOKEN } from '@/constants/gaia'
+import { WalletConnection } from '@/components/WalletConnection'
 import { Navbar } from '@/components/Navbar'
+import { setHomepageVisited } from '@/utils/authAccessControl'
 
-export default function Index() {
+const Index = () => {
+  // Track homepage visit for auth access control
+  useEffect(() => {
+    setHomepageVisited()
+  }, [])
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Navigation */}
       <Navbar />
       
-      <div className="container mx-auto px-4 py-16">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="mb-8">
-            <Badge className="bg-green-600 text-white mb-4 px-6 py-2 text-lg">
-              <Shield className="h-4 w-4 mr-2" />
-              Official GAIA Token Platform
-            </Badge>
-          </div>
-          
-          <h1 className="text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-6">
-            GAIA Token
-          </h1>
-          
-          <h2 className="text-3xl font-semibold text-white mb-4">
-            Harmony of Culture
-          </h2>
-          
-          <p className="text-xl text-green-300 mb-8 max-w-3xl mx-auto">
-            {GAIA_TOKEN.BRAND_STATEMENT}
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Link to="/exchange">
-              <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-4 text-lg">
-                <Coins className="h-5 w-5 mr-2" />
-                Start Trading
-                <ArrowRight className="h-5 w-5 ml-2" />
-              </Button>
-            </Link>
-            
-            <a
-              href={GAIA_TOKEN.PUMP_FUN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+      {/* Moving Background */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20" />
+        
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          {Array.from({ length: 50 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute opacity-20"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
+                animationDelay: `${Math.random() * 5}s`
+              }}
             >
-              <Button variant="outline" size="lg" className="border-green-500 text-green-400 hover:bg-green-500/10 px-8 py-4 text-lg">
-                <ExternalLink className="h-5 w-5 mr-2" />
-                Trade on Pump.fun
-              </Button>
-            </a>
-          </div>
+              <div className={`w-2 h-2 rounded-full ${
+                i % 4 === 0 ? 'bg-green-400' : 
+                i % 4 === 1 ? 'bg-blue-400' : 
+                i % 4 === 2 ? 'bg-purple-400' : 
+                'bg-cyan-400'
+              } blur-sm animate-pulse`} />
+            </div>
+          ))}
         </div>
 
-        {/* Official Token Information */}
-        <Card className="mb-12 border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
-          <CardHeader>
-            <CardTitle className="text-green-400 text-2xl flex items-center gap-2">
-              <Wallet className="h-6 w-6" />
-              Official GAIA Token Information
-            </CardTitle>
-            <CardDescription className="text-green-300">
-              Verified addresses for the official GAIA Token by Harmony of Culture
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="p-4 bg-black/30 rounded-lg">
-                <h4 className="text-green-400 font-semibold mb-2">Official Wallet Address</h4>
-                <p className="text-green-300 text-sm font-mono break-all">
-                  {GAIA_TOKEN.WALLET_ADDRESS}
-                </p>
-              </div>
-              <div className="p-4 bg-black/30 rounded-lg">
-                <h4 className="text-blue-400 font-semibold mb-2">Contract Address</h4>
-                <p className="text-blue-300 text-sm font-mono break-all">
-                  {GAIA_TOKEN.CONTRACT_ADDRESS}
-                </p>
-              </div>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-4 mt-6">
-              <div className="text-center p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
-                <h4 className="text-green-400 font-semibold">Network</h4>
-                <p className="text-white text-lg">{GAIA_TOKEN.NETWORK}</p>
-              </div>
-              <div className="text-center p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
-                <h4 className="text-blue-400 font-semibold">Symbol</h4>
-                <p className="text-white text-lg">{GAIA_TOKEN.SYMBOL}</p>
-              </div>
-              <div className="text-center p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
-                <h4 className="text-purple-400 font-semibold">Total Supply</h4>
-                <p className="text-white text-lg">1T Tokens</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Platform Features */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <Card className="border-green-500/30 bg-green-900/20 hover:bg-green-900/30 transition-all duration-300">
-            <CardHeader>
-              <CardTitle className="text-green-400 flex items-center gap-2">
-                <Globe className="h-5 w-5" />
-                Transparent Exchange
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-green-300 mb-4">
-                Trade GAIA tokens with complete transparency and zero hidden fees.
-              </p>
-              <Link to="/exchange">
-                <Button className="w-full bg-green-600 hover:bg-green-700">
-                  Access Exchange
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-500/30 bg-blue-900/20 hover:bg-blue-900/30 transition-all duration-300">
-            <CardHeader>
-              <CardTitle className="text-blue-400 flex items-center gap-2">
-                <Wallet className="h-5 w-5" />
-                Transparent Wallet
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-blue-300 mb-4">
-                View all wallet activities and transactions in real-time with full transparency.
-              </p>
-              <Link to="/wallet">
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  View Wallet
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card className="border-purple-500/30 bg-purple-900/20 hover:bg-purple-900/30 transition-all duration-300">
-            <CardHeader>
-              <CardTitle className="text-purple-400 flex items-center gap-2">
-                <Shield className="h-5 w-5" />
-                Security First
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-purple-300 mb-4">
-                Bank-level security with quantum protection for all transactions and data.
-              </p>
-              <Link to="/security">
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                  Security Info
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Warning Section */}
-        <Card className="border-yellow-500/30 bg-yellow-900/20">
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <h3 className="text-yellow-400 font-bold text-lg mb-2">
-                ⚠️ Official Token Verification
-              </h3>
-              <p className="text-yellow-300 mb-4">
-                {GAIA_TOKEN.OFFICIAL_DISCLAIMER}
-              </p>
-              <p className="text-sm text-yellow-200">
-                Always verify the wallet address: <span className="font-mono">{GAIA_TOKEN.WALLET_ADDRESS}</span>
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Moving Gradient Orbs */}
+        <div className="absolute top-10 left-10 w-72 h-72 bg-green-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
       </div>
+
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-6 py-8 space-y-8">
+        {/* Hero Section */}
+        <Card className="mb-8 border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30 backdrop-blur-sm">
+          <CardHeader>
+            <CardTitle className="text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">
+              🌍 Welcome to GAiA
+            </CardTitle>
+            <p className="text-center text-2xl text-muted-foreground">
+              {GAIA_TOKEN.BRAND_STATEMENT}
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="text-center space-y-4">
+              <Badge className="bg-green-600 text-lg px-6 py-2">
+                Official GAiA Token Platform
+              </Badge>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 h-12">
+                  <Gamepad2 className="h-5 w-5 mr-2" />
+                  Start Gaming
+                </Button>
+                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 h-12">
+                  <Zap className="h-5 w-5 mr-2" />
+                  Access Wallet
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Multi-Wallet Connection */}
+        <WalletConnection />
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card className="border-green-500/30 bg-green-900/20 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <Globe className="h-6 w-6" />
+                Environmental Impact
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Every transaction contributes to real-world environmental restoration projects.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-blue-500/30 bg-blue-900/20 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-400">
+                <Gamepad2 className="h-6 w-6" />
+                Gaming Ecosystem
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Play games, earn tokens, and compete in tournaments while helping the planet.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-purple-500/30 bg-purple-900/20 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-purple-400">
+                <Shield className="h-6 w-6" />
+                Secure Trading
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Advanced security protocols protect your assets and transactions.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-orange-500/30 bg-orange-900/20 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-orange-400">
+                <Heart className="h-6 w-6" />
+                Community Driven
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Join a global community united in environmental restoration.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-cyan-500/30 bg-cyan-900/20 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-cyan-400">
+                <Zap className="h-6 w-6" />
+                Instant Rewards
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Earn GAiA tokens instantly through various platform activities.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-pink-500/30 bg-pink-900/20 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-pink-400">
+                <Users className="h-6 w-6" />
+                Global Network
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Connect with like-minded individuals from around the world.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* CSS Animation */}
+      <style>
+        {`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(120deg); }
+            66% { transform: translateY(5px) rotate(240deg); }
+          }
+        `}
+      </style>
     </div>
   )
 }
+
+export default Index

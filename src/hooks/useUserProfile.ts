@@ -59,7 +59,7 @@ export function useUserProfile() {
           role: roleData?.role || 'user',
           created_at: profileData.created_at,
           updated_at: profileData.updated_at,
-          avatar_url: null, // Set to null since this field doesn't exist in the current schema
+          avatar_url: profileData.avatar_url || null,
           last_login: user.last_sign_in_at || null
         }
 
@@ -84,7 +84,7 @@ export function useUserProfile() {
       // Only update fields that exist in the profiles table
       const profileUpdates: any = {}
       if (updates.full_name !== undefined) profileUpdates.full_name = updates.full_name
-      // Note: avatar_url is not included since it doesn't exist in the current schema
+      if (updates.avatar_url !== undefined) profileUpdates.avatar_url = updates.avatar_url
 
       if (Object.keys(profileUpdates).length > 0) {
         const { error } = await supabase
@@ -142,7 +142,7 @@ export function useUserProfile() {
         role: roleData?.role || 'user',
         created_at: profileData.created_at,
         updated_at: profileData.updated_at,
-        avatar_url: null, // Set to null since this field doesn't exist in the current schema
+        avatar_url: profileData.avatar_url || null,
         last_login: user.last_sign_in_at || null
       }
 

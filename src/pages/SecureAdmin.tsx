@@ -1,13 +1,8 @@
 
-import { EnhancedAdminProtection } from '@/components/admin/EnhancedAdminProtection'
-import { UnifiedAdminDashboard } from '@/components/admin/UnifiedAdminDashboard'
+import { SecureVaultLogin } from '@/components/admin/SecureVaultLogin'
 
 const SecureAdmin = () => {
-  return (
-    <EnhancedAdminProtection>
-      <UnifiedAdminDashboard />
-    </EnhancedAdminProtection>
-  )
+  return <SecureVaultLogin />
 }
 
 export default SecureAdmin
