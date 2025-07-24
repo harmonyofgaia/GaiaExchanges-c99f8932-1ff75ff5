@@ -20,4 +20,6 @@ export { default as ForestShieldMasterPlan } from './ForestShieldMasterPlan';
 export { default as WildfireDefenseDashboard } from './WildfireDefenseDashboard';
 export { default as ForestTokenSystem } from './ForestTokenSystem';
 export { default as CommunityEngagementHub } from './CommunityEngagementHub';
+export { default as PartnershipManagement } from './PartnershipManagement';
+export { default as ImpactMeasurementSystem } from './ImpactMeasurementSystem';
 export { default as NotFound } from './NotFound';

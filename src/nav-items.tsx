@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -204,6 +204,38 @@ export const navigationItems: NavigationItem[] = [
       "Global Leaderboards"
     ],
     description: "Community training, coordination, and engagement platform",
+    lazyLoaded: true,
+  },
+  {
+    title: "Partnerships",
+    to: "/partnership-management",
+    icon: Handshake,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Partner Directory",
+      "Collaboration Management",
+      "Partnership Analytics",
+      "Initiative Tracking",
+      "Performance Monitoring"
+    ],
+    description: "NGO, agency, and tech firm partnership coordination platform",
+    lazyLoaded: true,
+  },
+  {
+    title: "Impact Metrics",
+    to: "/impact-measurement-system",
+    icon: BarChart3,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Real-time Impact Tracking",
+      "Blockchain Verification",
+      "Carbon Credit Management",
+      "SDG Alignment Monitoring",
+      "Transparent Reporting"
+    ],
+    description: "Environmental impact tracking and verification system",
     lazyLoaded: true,
   },
   {

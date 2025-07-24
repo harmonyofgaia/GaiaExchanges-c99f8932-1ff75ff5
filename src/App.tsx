@@ -36,6 +36,8 @@ import ForestShieldMasterPlan from "./pages/ForestShieldMasterPlan";
 import WildfireDefenseDashboard from "./pages/WildfireDefenseDashboard";
 import ForestTokenSystem from "./pages/ForestTokenSystem";
 import CommunityEngagementHub from "./pages/CommunityEngagementHub";
+import PartnershipManagement from "./pages/PartnershipManagement";
+import ImpactMeasurementSystem from "./pages/ImpactMeasurementSystem";
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
 import SlidingMenu from '@/components/SlidingMenu';
 
@@ -70,6 +72,8 @@ const App = () => (
             <Route path="/wildfire-defense-dashboard" element={<WildfireDefenseDashboard />} />
             <Route path="/forest-token-system" element={<ForestTokenSystem />} />
             <Route path="/community-engagement-hub" element={<CommunityEngagementHub />} />
+            <Route path="/partnership-management" element={<PartnershipManagement />} />
+            <Route path="/impact-measurement-system" element={<ImpactMeasurementSystem />} />
             
             {/* New Features from PRs #22-#41 */}
             <Route path="/environmental-games" element={<EnvironmentalGames />} />
