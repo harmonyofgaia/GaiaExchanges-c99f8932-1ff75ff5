@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -10,16 +10,29 @@ import { Wallet, ArrowUpDown, Shield, Zap, CheckCircle, AlertTriangle, Users, Re
 import { toast } from 'sonner'
 import { GAIA_TOKEN } from '@/constants/gaia'
 
+interface PhantomTransaction {
+  [key: string]: unknown
+}
+
+interface PhantomRequestOptions {
+  method: string
+  params?: unknown[]
+}
+
+interface PhantomRequestResponse {
+  [key: string]: unknown
+}
+
 declare global {
   interface Window {
     solana?: {
       isPhantom?: boolean
       connect: () => Promise<{ publicKey: { toString: () => string } }>
       disconnect: () => Promise<void>
-      signAndSendTransaction: (transaction: any) => Promise<{ signature: string }>
+      signAndSendTransaction: (transaction: PhantomTransaction) => Promise<{ signature: string }>
       publicKey?: { toString: () => string }
       isConnected: boolean
-      request: (options: any) => Promise<any>
+      request: (options: PhantomRequestOptions) => Promise<PhantomRequestResponse>
     }
   }
 }
@@ -56,17 +69,17 @@ export function PhantomWalletIntegration() {
   // Your imported wallet address
   const IMPORTED_WALLET = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
 
-  useEffect(() => {
-    checkPhantomConnection()
-  }, [])
-
-  const checkPhantomConnection = async () => {
+  const checkPhantomConnection = useCallback(async () => {
     if (window.solana?.isPhantom && window.solana.isConnected && window.solana.publicKey) {
       setConnected(true)
       setWalletAddress(window.solana.publicKey.toString())
       await fetchAllAccounts()
     }
-  }
+  }, [fetchAllAccounts])
+
+  useEffect(() => {
+    checkPhantomConnection()
+  }, [checkPhantomConnection])
 
   const connectPhantom = async () => {
     try {
@@ -95,7 +108,7 @@ export function PhantomWalletIntegration() {
     }
   }
 
-  const fetchAllAccounts = async () => {
+  const fetchAllAccounts = useCallback(async () => {
     try {
       // Updated to use the correct GAiA wallet address
       const mockAccounts: WalletAccount[] = [
@@ -141,7 +154,7 @@ export function PhantomWalletIntegration() {
     } catch (error) {
       console.error('Failed to fetch accounts:', error)
     }
-  }
+  }, [])
 
   const executeWithdrawal = async () => {
     if (!connected || !withdrawAmount || !withdrawAddress) {

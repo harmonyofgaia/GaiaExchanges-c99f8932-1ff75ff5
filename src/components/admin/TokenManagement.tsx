@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Plus, Trash2, Shield, Zap, Infinity, Globe } from 'lucide-react'
+import { Plus, Trash2, Shield, Zap, Infinity as InfinityIcon, Globe } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { toast } from 'sonner'
 
@@ -176,7 +176,7 @@ export function TokenManagement() {
       <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-500/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
-            <Infinity className="h-5 w-5" />
+            <InfinityIcon className="h-5 w-5" />
             GAiA Token Maximum Supply Protocol - Updated Addresses
           </CardTitle>
         </CardHeader>
@@ -225,7 +225,7 @@ export function TokenManagement() {
                 </>
               ) : (
                 <>
-                  <Infinity className="h-4 w-4 mr-2" />
+                  <InfinityIcon className="h-4 w-4 mr-2" />
                   Activate Maximum Supply Protocol
                 </>
               )}

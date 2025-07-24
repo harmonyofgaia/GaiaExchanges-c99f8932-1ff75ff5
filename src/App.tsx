@@ -32,6 +32,7 @@ import GlobalLeaderboardPage from "./pages/GlobalLeaderboard";
 import AnimalRescue from "./pages/AnimalRescue";
 import DeploymentCenter from "./pages/DeploymentCenter";
 import QuantumSecurity from "./pages/QuantumSecurity";
+import SeaGreenPsychohistoricalProject from "./pages/SeaGreenPsychohistoricalProject";
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
 import SlidingMenu from '@/components/SlidingMenu';
 
@@ -62,6 +63,7 @@ const App = () => (
             <Route path="/planet-cleaning" element={<PlanetCleaning />} />
             <Route path="/nft-cards" element={<NFTCards />} />
             <Route path="/eco-avatar" element={<EcoAvatar />} />
+            <Route path="/sea-green-psychohistorical" element={<SeaGreenPsychohistoricalProject />} />
             
             {/* New Features from PRs #22-#41 */}
             <Route path="/environmental-games" element={<EnvironmentalGames />} />

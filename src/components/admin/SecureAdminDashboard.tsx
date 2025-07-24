@@ -30,6 +30,12 @@ import { EnhancedAdminMenu } from '@/components/admin/EnhancedAdminMenu'
 import { AdvancedSecurityCenter } from '@/components/admin/AdvancedSecurityCenter'
 import { GlobalCommandCenter } from '@/components/admin/GlobalCommandCenter'
 import { VideoExchangeDashboard } from '@/components/admin/VideoExchangeDashboard'
+import { ActionLedgerControlPanel } from '@/components/admin/ActionLedgerControlPanel'
+import { AIDefenseAnimals } from '@/components/admin/AIDefenseAnimals'
+import { DefenseCreatureArmy } from '@/components/admin/DefenseCreatureArmy'
+import { ImmortalDefenseCore } from '@/components/security/ImmortalDefenseCore'
+import { UltimateDefensiveBarrier } from '@/components/security/UltimateDefensiveBarrier'
+import { ComprehensiveDefenseOverview } from '@/components/admin/ComprehensiveDefenseOverview'
 
 export function SecureAdminDashboard() {
   return (
@@ -245,42 +251,15 @@ export function SecureAdminDashboard() {
             </TabsContent>
 
             <TabsContent value="defense-overview" className="mt-0">
-              <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-cyan-900/30">
-                <CardHeader>
-                  <CardTitle className="text-blue-400 flex items-center gap-2">
-                    🛡️ Comprehensive Defense Overview
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">Defense overview component would go here</p>
-                </CardContent>
-              </Card>
+              <ComprehensiveDefenseOverview />
             </TabsContent>
 
             <TabsContent value="defense-animals" className="mt-0">
-              <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
-                <CardHeader>
-                  <CardTitle className="text-green-400 flex items-center gap-2">
-                    🛡️ AI Defense Animals
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">AI Defense Animals component would go here</p>
-                </CardContent>
-              </Card>
+              <AIDefenseAnimals />
             </TabsContent>
 
             <TabsContent value="creature-army" className="mt-0">
-              <Card className="border-red-500/30 bg-gradient-to-br from-red-900/30 to-orange-900/30">
-                <CardHeader>
-                  <CardTitle className="text-red-400 flex items-center gap-2">
-                    ⚔️ Defense Creature Army
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">Defense Creature Army component would go here</p>
-                </CardContent>
-              </Card>
+              <DefenseCreatureArmy />
             </TabsContent>
 
             <TabsContent value="immortal-core" className="mt-0">
@@ -292,23 +271,14 @@ export function SecureAdminDashboard() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <UltimateSecurityCore />
+                    <ImmortalDefenseCore />
                   </CardContent>
                 </Card>
               </div>
             </TabsContent>
 
             <TabsContent value="defense-barrier" className="mt-0">
-              <Card className="border-cyan-500/30 bg-gradient-to-br from-cyan-900/30 to-blue-900/30">
-                <CardHeader>
-                  <CardTitle className="text-cyan-400 flex items-center gap-2">
-                    🔮 Ultimate Defensive Barrier
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">Ultimate Defensive Barrier component would go here</p>
-                </CardContent>
-              </Card>
+              <UltimateDefensiveBarrier />
             </TabsContent>
 
             <TabsContent value="security" className="mt-0">
@@ -408,16 +378,7 @@ export function SecureAdminDashboard() {
             </TabsContent>
 
             <TabsContent value="action-ledger" className="mt-0">
-              <Card className="border-yellow-500/30 bg-gradient-to-br from-yellow-900/30 to-amber-900/30">
-                <CardHeader>
-                  <CardTitle className="text-yellow-400 flex items-center gap-2">
-                    📋 Action Ledger Control Panel
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">Action Ledger Control Panel component would go here</p>
-                </CardContent>
-              </Card>
+              <ActionLedgerControlPanel />
             </TabsContent>
           </div>
         </Tabs>

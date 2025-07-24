@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 
 interface ImmortalAnimal {
   id: string
-  species: 'dragon' | 'phoenix' | 'griffin' | 'leviathan' | 'kraken' | 'basilisk'
+  species: 'dragon' | 'phoenix' | 'griffin' | 'leviathan' | 'kraken' | 'basilisk' | 'cyber_koala' | 'alpha_dragon' | 'quantum_phoenix' | 'king_lion' | 'sky_eagle' | 'ai_dolphin'
   name: string
   powerLevel: number
   invincibilityStrength: number
@@ -65,13 +65,117 @@ export function ImmortalDefenseCore() {
       threatsNeutralized: 0,
       specialAbilities: ['Ocean Control', 'Pressure Crush', 'Tsunami Generation', 'Deep Sea Invincibility'],
       quantumSignature: 'IMMORTAL_LEVIATHAN_ABYSS_777'
+    },
+    {
+      id: 'immortal-cyber-koala',
+      species: 'cyber_koala',
+      name: 'Eternal Cyber Koala Mastermind',
+      powerLevel: 666666,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 6500,
+      evolutionSpeed: 3200,
+      threatsNeutralized: 0,
+      specialAbilities: ['Eucalyptus Matrix', 'Cyber Defense Web', 'Algorithm Mastery', 'Digital Camouflage'],
+      quantumSignature: 'IMMORTAL_KOALA_CYBER_666'
+    },
+    {
+      id: 'immortal-quantum-phoenix',
+      species: 'quantum_phoenix',
+      name: 'Quantum Phoenix Supreme',
+      powerLevel: 555555,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 6000,
+      evolutionSpeed: 3000,
+      threatsNeutralized: 0,
+      specialAbilities: ['Quantum Resurrection', 'Probability Manipulation', 'Timeline Reset', 'Dimensional Flight'],
+      quantumSignature: 'IMMORTAL_QUANTUM_PHOENIX_555'
+    },
+    {
+      id: 'immortal-king-lion',
+      species: 'king_lion',
+      name: 'Immortal King Lion Emperor',
+      powerLevel: 444444,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 5500,
+      evolutionSpeed: 2800,
+      threatsNeutralized: 0,
+      specialAbilities: ['Royal Command', 'Paralyzing Roar', 'Kingdom Defense', 'Pride Coordination'],
+      quantumSignature: 'IMMORTAL_LION_KING_444'
+    },
+    {
+      id: 'immortal-sky-eagle',
+      species: 'sky_eagle',
+      name: 'Celestial Sky Eagle Eternal',
+      powerLevel: 333333,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 5000,
+      evolutionSpeed: 2500,
+      threatsNeutralized: 0,
+      specialAbilities: ['Aerial Supremacy', 'Eagle Eye Vision', 'Wind Control', 'Sky Domain'],
+      quantumSignature: 'IMMORTAL_EAGLE_SKY_333'
+    },
+    {
+      id: 'immortal-ai-dolphin',
+      species: 'ai_dolphin',
+      name: 'Infinite AI Dolphin Oracle',
+      powerLevel: 222222,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 4500,
+      evolutionSpeed: 2200,
+      threatsNeutralized: 0,
+      specialAbilities: ['Sonar Intelligence', 'Deep Learning', 'Ocean Network', 'Dolphin Communication'],
+      quantumSignature: 'IMMORTAL_DOLPHIN_AI_222'
+    },
+    {
+      id: 'immortal-digital-dragon',
+      species: 'dragon',
+      name: 'Immortal Digital Dragon Supreme',
+      powerLevel: 999999,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 10000,
+      evolutionSpeed: 5000,
+      threatsNeutralized: 0,
+      specialAbilities: ['Matrix Control', 'Digital Reality Manipulation', 'Code Resurrection', 'Virtual Omnipresence'],
+      quantumSignature: 'IMMORTAL_DIGITAL_DRAGON_999'
+    },
+    {
+      id: 'immortal-monkey-gamma',
+      species: 'cyber_koala',
+      name: 'Immortal Monkey Squad Gamma',
+      powerLevel: 333333,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 4800,
+      evolutionSpeed: 2400,
+      threatsNeutralized: 0,
+      specialAbilities: ['Database Immortality', 'Code Analysis Mastery', 'System Protection', 'Data Resurrection'],
+      quantumSignature: 'IMMORTAL_MONKEY_GAMMA_333'
+    },
+    {
+      id: 'immortal-pack-wolf',
+      species: 'alpha_dragon',
+      name: 'Immortal Pack Wolf Alpha',
+      powerLevel: 666666,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 6200,
+      evolutionSpeed: 3100,
+      threatsNeutralized: 0,
+      specialAbilities: ['Pack Immortality', 'Territory Control', 'Hunt Coordination', 'Alpha Dominance'],
+      quantumSignature: 'IMMORTAL_PACK_WOLF_666'
     }
   ])
 
   const [defenseMetrics, setDefenseMetrics] = useState<DefenseMetrics>({
-    totalAnimals: 3,
+    totalAnimals: immortalAnimals.length,
     combinedPowerLevel: 0,
-    evolutionRate: 18500,
+    evolutionRate: 62600,
     immortalityStrength: 100,
     invincibilityIndex: 100,
     threatsDestroyed: 0,
@@ -233,15 +337,110 @@ export function ImmortalDefenseCore() {
     }
   }, [immortalAnimals])
 
-  return {
-    immortalAnimals,
-    defenseMetrics,
-    isImmortalActive: true,
-    quantumEvolutionActive: true,
-    systemInvulnerable: true,
-    cannotBeDestroyed: true,
-    evolutionBeyondImagination: true,
-    invincibilityPerfect: true,
-    immortalityEternal: true
-  }
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="text-center p-4 bg-purple-900/50 rounded-lg border-2 border-purple-500/50">
+          <div className="text-3xl mb-2">♾️</div>
+          <div className="text-2xl font-bold text-purple-400">{defenseMetrics.totalAnimals}</div>
+          <div className="text-sm text-purple-300">Immortal Guardians</div>
+        </div>
+        
+        <div className="text-center p-4 bg-red-900/50 rounded-lg border-2 border-red-500/50">
+          <div className="text-3xl mb-2">⚡</div>
+          <div className="text-2xl font-bold text-red-400">{defenseMetrics.combinedPowerLevel.toLocaleString()}</div>
+          <div className="text-sm text-red-300">Combined Power</div>
+        </div>
+        
+        <div className="text-center p-4 bg-green-900/50 rounded-lg border-2 border-green-500/50">
+          <div className="text-3xl mb-2">🔄</div>
+          <div className="text-2xl font-bold text-green-400">{defenseMetrics.evolutionRate.toLocaleString()}</div>
+          <div className="text-sm text-green-300">Evolution Rate</div>
+        </div>
+        
+        <div className="text-center p-4 bg-yellow-900/50 rounded-lg border-2 border-yellow-500/50">
+          <div className="text-3xl mb-2">🏆</div>
+          <div className="text-2xl font-bold text-yellow-400">{defenseMetrics.threatsDestroyed}</div>
+          <div className="text-sm text-yellow-300">Threats Destroyed</div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {immortalAnimals.map((animal) => (
+          <div key={animal.id} className="p-4 bg-black/30 rounded-lg border border-purple-500/30">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-bold text-purple-400">{animal.name}</h3>
+              <div className="text-2xl">
+                {animal.species === 'dragon' && '🐉'}
+                {animal.species === 'phoenix' && '🦅'}
+                {animal.species === 'leviathan' && '🌊'}
+                {animal.species === 'cyber_koala' && '🐨'}
+                {animal.species === 'quantum_phoenix' && '🔥🦅'}
+                {animal.species === 'king_lion' && '👑🦁'}
+                {animal.species === 'sky_eagle' && '🌤️🦅'}
+                {animal.species === 'ai_dolphin' && '🐬'}
+              </div>
+            </div>
+            
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span>Power Level:</span>
+                <span className="text-red-400 font-bold">{animal.powerLevel.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Invincibility:</span>
+                <span className="text-green-400 font-bold">{animal.invincibilityStrength}%</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Immortality:</span>
+                <span className="text-purple-400 font-bold">{animal.immortalityIndex}%</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Evolution Speed:</span>
+                <span className="text-blue-400 font-bold">{animal.evolutionSpeed.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Threats Neutralized:</span>
+                <span className="text-orange-400 font-bold">{animal.threatsNeutralized}</span>
+              </div>
+            </div>
+            
+            <div className="mt-3 pt-3 border-t border-purple-500/20">
+              <div className="text-xs text-muted-foreground mb-2">Special Abilities:</div>
+              <div className="flex flex-wrap gap-1">
+                {animal.specialAbilities.map((ability, index) => (
+                  <span key={index} className="px-2 py-1 bg-purple-700/30 rounded text-xs text-purple-300">
+                    {ability}
+                  </span>
+                ))}
+              </div>
+            </div>
+            
+            <div className="mt-3 text-xs text-center text-yellow-400 font-mono">
+              {animal.quantumSignature}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="text-center p-6 bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-lg border border-purple-500/30">
+        <div className="text-4xl mb-4">♾️</div>
+        <h3 className="text-2xl font-bold text-purple-400 mb-4">IMMORTAL DEFENSE STATUS</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div>
+            <div className="text-green-400 font-bold">✅ IMMORTALITY: ETERNAL</div>
+            <div className="text-green-300">Cannot be destroyed or defeated</div>
+          </div>
+          <div>
+            <div className="text-blue-400 font-bold">⚡ EVOLUTION: EXPONENTIAL</div>
+            <div className="text-blue-300">Growing stronger every moment</div>
+          </div>
+          <div>
+            <div className="text-purple-400 font-bold">🛡️ INVINCIBILITY: PERFECT</div>
+            <div className="text-purple-300">Absolute defense against all threats</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }

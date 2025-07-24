@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { Brain, Zap, Shield, Eye, Crown, Globe, Atom, Infinity } from 'lucide-react'
+import { Brain, Zap, Shield, Eye, Crown, Globe, Atom, Infinity as InfinityIcon } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 export function AlienJusticeProtocol() {
@@ -44,7 +44,7 @@ export function AlienJusticeProtocol() {
 
           <Card className="border-cyan-500/20 bg-cyan-900/20">
             <CardContent className="p-4 text-center">
-              <Infinity className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
+              <InfinityIcon className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-cyan-400">{alienConnections}</div>
               <div className="text-sm text-cyan-300">Active Alien Civilizations</div>
               <Badge className="mt-2 bg-cyan-600">CONNECTED</Badge>
