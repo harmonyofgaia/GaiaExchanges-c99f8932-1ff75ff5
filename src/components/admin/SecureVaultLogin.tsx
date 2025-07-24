@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Shield, Lock, Eye, EyeOff, Crown } from 'lucide-react'
 import { toast } from 'sonner'
-import { AdminDashboard } from './AdminDashboard'
+import { SecureAdminDashboard } from './SecureAdminDashboard'
 
 export function SecureVaultLogin() {
   const [credentials, setCredentials] = useState({
@@ -67,8 +67,8 @@ export function SecureVaultLogin() {
               <div className="flex items-center gap-3">
                 <Shield className="h-8 w-8 text-green-400" />
                 <div>
-                  <h2 className="text-2xl font-bold text-green-400">🛡️ GAIA VAULT CONTROL CENTER</h2>
-                  <p className="text-green-300">Quantum Vault Security • Full System Control • Global Management</p>
+                  <h2 className="text-2xl font-bold text-green-400">🛡️ SECURE GAIA ADMIN CONTROL CENTER V4</h2>
+                  <p className="text-green-300">All admin features, controls, and dashboards integrated under secure authentication • V4 Master Plan</p>
                 </div>
               </div>
               <Button onClick={handleLogout} variant="outline" className="border-red-500/30">
@@ -79,8 +79,8 @@ export function SecureVaultLogin() {
           </CardContent>
         </Card>
 
-        {/* Admin Dashboard */}
-        <AdminDashboard />
+        {/* Secure Admin Dashboard - Complete Suite */}
+        <SecureAdminDashboard />
       </div>
     )
   }
@@ -92,10 +92,10 @@ export function SecureVaultLogin() {
           <div className="text-center">
             <Crown className="h-12 w-12 text-green-400 mx-auto mb-4" />
             <CardTitle className="text-2xl font-bold text-green-400">
-              🌍 GAIA VAULT ACCESS
+              🌍 SECURE GAIA ADMIN ACCESS V4
             </CardTitle>
             <p className="text-green-300 text-sm mt-2">
-              Quantum Vault Security Portal • Ultimate Admin Control
+              Unified Admin Portal • All Features Secured • V4 Master Plan Integration
             </p>
           </div>
         </CardHeader>
