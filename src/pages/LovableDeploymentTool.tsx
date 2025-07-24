@@ -127,7 +127,10 @@ const LovableDeploymentTool: React.FC = () => {
         </TabsContent>
 
         <TabsContent value="diagnostics" className="space-y-6">
-          <SupabaseDiagnosticsWidget />
+          <SupabaseDiagnosticsWidget 
+            supabaseUrl="https://slheudxfcqqppyphyobq.supabase.co"
+            supabaseApiKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNsaGV1ZHhmY3FxcHB5cGh5b2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwMjIyNjIsImV4cCI6MjA2NjU5ODI2Mn0.qPQ339weTKXapr6JgF_iLHSMtB-KOYi503WQf-QxUCE"
+          />
         </TabsContent>
 
         <TabsContent value="settings" className="space-y-6">

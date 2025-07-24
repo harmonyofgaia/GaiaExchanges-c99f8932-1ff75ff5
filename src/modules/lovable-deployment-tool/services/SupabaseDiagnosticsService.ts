@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client'
 
 export type DiagnosticArea = 'authentication' | 'database' | 'storage' | 'api'
@@ -91,8 +92,8 @@ export class SupabaseDiagnosticsService {
       } else {
         return {
           area: 'authentication',
-          status: 'error',
-          message: 'No user session found.'
+          status: 'success',
+          message: 'No user session found, but authentication system is working.'
         }
       }
     } catch (error: any) {
@@ -106,7 +107,8 @@ export class SupabaseDiagnosticsService {
 
   private async checkDatabaseConnection(): Promise<DiagnosticResult> {
     try {
-      const { data, error } = await supabase.from('projects').select('*').limit(1)
+      // Use an existing table from the schema - admin_users exists in the current schema
+      const { data, error } = await supabase.from('admin_users').select('user_id').limit(1)
 
       if (error) {
         return {
@@ -117,19 +119,11 @@ export class SupabaseDiagnosticsService {
         }
       }
 
-      if (data && data.length > 0) {
-        return {
-          area: 'database',
-          status: 'success',
-          message: 'Database connection successful. Retrieved sample data.',
-          details: data[0]
-        }
-      } else {
-        return {
-          area: 'database',
-          status: 'error',
-          message: 'Could not retrieve data from the database.'
-        }
+      return {
+        area: 'database',
+        status: 'success',
+        message: 'Database connection successful.',
+        details: { recordsFound: data ? data.length : 0 }
       }
     } catch (error: any) {
       return {
@@ -163,8 +157,8 @@ export class SupabaseDiagnosticsService {
       } else {
         return {
           area: 'storage',
-          status: 'error',
-          message: 'No storage buckets found or access denied.'
+          status: 'success',
+          message: 'Storage accessible but no buckets found.'
         }
       }
     } catch (error: any) {
