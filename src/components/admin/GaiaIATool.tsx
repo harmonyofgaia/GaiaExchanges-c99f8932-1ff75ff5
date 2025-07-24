@@ -141,7 +141,7 @@ export function GaiaIATool() {
           impact: 'low'
         }
         setActionLogs(prev => [newAction, ...prev.slice(0, 19)]) // Keep last 20 logs
-      }, 45000) // Every 45 seconds
+      }, REAL_TIME_MONITOR_INTERVAL_MS) // Every 45 seconds
       
       return () => {
         clearInterval(metricsInterval)
