@@ -315,30 +315,6 @@ export function LiveTaskBoard() {
     }
   }, [tasks, suggestions, startTask, applySuggestion])
 
-  const startTask = useCallback((taskId: string) => {
-    setTasks(prev => prev.map(task => 
-      task.id === taskId 
-        ? { 
-            ...task, 
-            status: 'running', 
-            progress: 0, 
-            startTime: new Date(),
-            logs: [...task.logs, {
-              id: Date.now().toString(),
-              timestamp: new Date(),
-              level: 'info',
-              message: `Task started: ${task.name}`
-            }]
-          }
-        : task
-    ))
-    
-    const task = tasks.find(t => t.id === taskId)
-    if (task) {
-      toast.info(`🚀 Starting task: ${task.name}`)
-    }
-  }, [tasks])
-
   const pauseTask = (taskId: string) => {
     setTasks(prev => prev.map(task => 
       task.id === taskId && task.status === 'running'
