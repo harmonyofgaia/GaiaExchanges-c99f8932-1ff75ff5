@@ -17,13 +17,11 @@ import {
   Users,
   BarChart3,
   Wallet,
-  FileText,
-  Globe
+  FileText
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { GAIA_TOKEN } from '@/constants/gaia'
-import { UnifiedAdminDashboard } from '@/components/admin/UnifiedAdminDashboard'
-import { WalletEngineAdmin } from '@/components/admin/WalletEngineAdmin'
+import { AdminDashboard } from '@/components/admin/AdminDashboard'
 
 export default function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -39,14 +37,14 @@ export default function Admin() {
     setIsLoading(true)
 
     try {
-      // Admin credentials verification
+      // Admin credentials verification - Updated credentials
       const isValidAdmin = credentials.username === 'Synatic' && 
                           credentials.password === 'harmonyquantumvaultaccess'
       
       if (isValidAdmin) {
         setIsLoggedIn(true)
-        toast.success('👑 GOD MODE ADMIN ACCESS GRANTED!', {
-          description: 'Welcome to the Ultimate Control Center',
+        toast.success('👑 GAIA ADMIN ACCESS GRANTED!', {
+          description: 'Welcome to the GAIA Control Center',
           duration: 5000
         })
       } else {
@@ -73,7 +71,7 @@ export default function Admin() {
     })
   }
 
-  // Login Screen
+  // Login Screen - Only show if not logged in
   if (!isLoggedIn) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-green-900/20 flex items-center justify-center p-6">
@@ -83,14 +81,14 @@ export default function Admin() {
               <Crown className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
               <CardTitle className="flex items-center justify-center gap-2 text-green-400 text-2xl">
                 <Shield className="h-6 w-6" />
-                GAIA ADMIN CONTROL CENTER
+                GAIA ADMIN CENTER
               </CardTitle>
               <p className="text-green-300 text-sm mt-2">
-                GOD MODE • QUANTUM VAULT • ULTIMATE CONTROL
+                Exclusive Access • Quantum Protected • Ultimate Control
               </p>
               <div className="mt-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
                 <p className="text-xs text-blue-300">
-                  🌍 Protected Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...
+                  🌍 Official Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...
                 </p>
                 <p className="text-xs text-purple-300">
                   📋 Contract: {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...
@@ -108,7 +106,7 @@ export default function Admin() {
                   value={credentials.username}
                   onChange={(e) => setCredentials(prev => ({ ...prev, username: e.target.value }))}
                   className="bg-black/30 border-green-500/30 text-green-400"
-                  placeholder="Admin username..."
+                  placeholder="Enter admin username..."
                   autoComplete="off"
                   required
                 />
@@ -123,7 +121,7 @@ export default function Admin() {
                     value={credentials.password}
                     onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
                     className="bg-black/30 border-green-500/30 text-green-400 pr-10"
-                    placeholder="Quantum vault password..."
+                    placeholder="Enter quantum password..."
                     autoComplete="off"
                     required
                   />
@@ -145,16 +143,16 @@ export default function Admin() {
                 className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3"
               >
                 <Lock className="h-5 w-5 mr-2" />
-                {isLoading ? 'Verifying GOD MODE...' : 'ENTER ADMIN VAULT'}
+                {isLoading ? 'Verifying Access...' : 'ENTER GAIA ADMIN'}
               </Button>
             </form>
 
             <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/20 rounded-lg">
               <p className="text-xs text-green-300 text-center">
-                👑 ADMIN ONLY • QUANTUM PROTECTED • BANK-LEVEL SECURITY
+                👑 ADMIN ONLY • QUANTUM PROTECTED • SECURE ACCESS
               </p>
               <p className="text-xs text-blue-300 text-center mt-1">
-                Ultimate Control • Global Management • Parabolic Universe Access
+                Official GAIA Token Control • Harmony of Culture Platform
               </p>
             </div>
           </CardContent>
@@ -163,7 +161,7 @@ export default function Admin() {
     )
   }
 
-  // Admin Dashboard
+  // Admin Dashboard - Show when logged in
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-green-900/20 p-6">
       <div className="container mx-auto">
@@ -178,7 +176,7 @@ export default function Admin() {
                     🌍 GAIA ADMIN CONTROL CENTER
                   </CardTitle>
                   <p className="text-green-300">
-                    Ultimate Management • Quantum Protected • GOD MODE ACTIVE
+                    Official Token Management • Quantum Protected • Full Control
                   </p>
                 </div>
               </div>
@@ -196,122 +194,8 @@ export default function Admin() {
           </CardHeader>
         </Card>
 
-        {/* Admin Tabs */}
-        <Tabs defaultValue="dashboard" className="w-full">
-          <TabsList className="grid w-full grid-cols-6 mb-6">
-            <TabsTrigger value="dashboard">
-              <BarChart3 className="h-4 w-4 mr-2" />
-              Dashboard
-            </TabsTrigger>
-            <TabsTrigger value="users">
-              <Users className="h-4 w-4 mr-2" />
-              Users
-            </TabsTrigger>
-            <TabsTrigger value="wallet">
-              <Wallet className="h-4 w-4 mr-2" />
-              Wallet Engine
-            </TabsTrigger>
-            <TabsTrigger value="database">
-              <Database className="h-4 w-4 mr-2" />
-              Database
-            </TabsTrigger>
-            <TabsTrigger value="reports">
-              <FileText className="h-4 w-4 mr-2" />
-              Reports
-            </TabsTrigger>
-            <TabsTrigger value="settings">
-              <Settings className="h-4 w-4 mr-2" />
-              Settings
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="dashboard">
-            <UnifiedAdminDashboard />
-          </TabsContent>
-
-          <TabsContent value="users">
-            <Card className="border-blue-500/30 bg-blue-900/20">
-              <CardHeader>
-                <CardTitle className="text-blue-400">👥 User Management</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Manage all platform users and their GAiA token activities.
-                </p>
-                <div className="text-center py-8">
-                  <Users className="h-12 w-12 text-blue-400 mx-auto mb-4" />
-                  <p className="text-lg font-semibold">User Management Panel</p>
-                  <p className="text-sm text-muted-foreground">Advanced user controls coming soon</p>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="wallet">
-            <WalletEngineAdmin />
-          </TabsContent>
-
-          <TabsContent value="database">
-            <Card className="border-purple-500/30 bg-purple-900/20">
-              <CardHeader>
-                <CardTitle className="text-purple-400">🗄️ Database Management</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Monitor and manage all GAiA token related database operations.
-                </p>
-                <div className="text-center py-8">
-                  <Database className="h-12 w-12 text-purple-400 mx-auto mb-4" />
-                  <p className="text-lg font-semibold">Database Control Panel</p>
-                  <p className="text-sm text-muted-foreground">Database management tools coming soon</p>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="reports">
-            <Card className="border-orange-500/30 bg-orange-900/20">
-              <CardHeader>
-                <CardTitle className="text-orange-400">📊 Reports & Analytics</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Generate comprehensive reports on GAiA token performance and user engagement.
-                </p>
-                <div className="text-center py-8">
-                  <FileText className="h-12 w-12 text-orange-400 mx-auto mb-4" />
-                  <p className="text-lg font-semibold">Analytics Dashboard</p>
-                  <p className="text-sm text-muted-foreground">Advanced reporting tools coming soon</p>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="settings">
-            <Card className="border-gray-500/30 bg-gray-900/20">
-              <CardHeader>
-                <CardTitle className="text-gray-400">⚙️ System Settings</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
-                    <h4 className="font-bold text-green-400 mb-2">🌍 GAIA Token Configuration</h4>
-                    <div className="space-y-2 text-sm">
-                      <div><span className="text-muted-foreground">Official Wallet:</span> <code className="text-green-300">{GAIA_TOKEN.WALLET_ADDRESS}</code></div>
-                      <div><span className="text-muted-foreground">Contract Address:</span> <code className="text-purple-300">{GAIA_TOKEN.CONTRACT_ADDRESS}</code></div>
-                      <div><span className="text-muted-foreground">Network:</span> <span className="text-blue-300">{GAIA_TOKEN.NETWORK}</span></div>
-                      <div><span className="text-muted-foreground">Symbol:</span> <span className="text-yellow-300">{GAIA_TOKEN.SYMBOL}</span></div>
-                    </div>
-                  </div>
-                  <div className="text-center py-4">
-                    <Settings className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-muted-foreground">Additional system settings will be added here</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+        {/* Use the existing AdminDashboard component */}
+        <AdminDashboard />
 
         {/* Footer Info */}
         <Card className="mt-6 border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
@@ -321,7 +205,7 @@ export default function Admin() {
                 🛡️ QUANTUM ADMIN PROTECTION ACTIVE
               </p>
               <p className="text-sm text-muted-foreground">
-                All operations secured with military-grade encryption • GAIA token verified • Exclusive admin access
+                Official GAIA Token: {GAIA_TOKEN.WALLET_ADDRESS} • Harmony of Culture • Exclusive Access
               </p>
             </div>
           </CardContent>

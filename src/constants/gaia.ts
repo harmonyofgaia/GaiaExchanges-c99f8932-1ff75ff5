@@ -1,10 +1,10 @@
 
 export const GAIA_TOKEN = {
-  // Official GAiA Token Addresses - VERIFIED & CORRECT
+  // Official GAIA Token Addresses - VERIFIED & CORRECT
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
-  SYMBOL: 'GAiA',
-  NAME: 'GAiA Token - Harmony of Culture',
+  SYMBOL: 'GAIA',
+  NAME: 'GAIA Token - Harmony of Culture',
   DECIMALS: 9,
   NETWORK: 'Solana',
   PUMP_FUN_URL: 'https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
@@ -28,10 +28,10 @@ export const GAIA_TOKEN = {
   
   // Brand messaging - Harmony of Culture
   BRAND_STATEMENT: 'We Are a Strong Creative Open Minded Circuit To Happiness - Seeds Will Form into Music',
-  OFFICIAL_DISCLAIMER: 'This is the ONLY official GAiA Token by Harmony of Culture. Verify addresses before trading.',
+  OFFICIAL_DISCLAIMER: 'This is the ONLY official GAIA Token by Harmony of Culture. Verify addresses before trading.',
   
-  // Security & Verification
-  OFFICIAL_VERIFICATION: 'This is GAiA Token by Harmony of Culture, NOT GAIA Everworld or any other variant',
+  // Security & Verification - NO LEGACY TOKEN REFERENCES
+  OFFICIAL_VERIFICATION: 'This is GAIA Token by Harmony of Culture - Official Token Only',
   SECURITY_LEVEL: 'QUANTUM_PROTECTED',
   ADMIN_WALLET_VERIFIED: true,
 }
@@ -108,14 +108,13 @@ export const getOfficialTokenStatus = () => ({
   verified: true,
   active: true,
   isOfficialGaiaToken: true,
-  notGaiaEverworld: true,
   harmonyOfCulture: true,
   lastVerified: new Date().toISOString()
 })
 
-// Anti-legacy protection
-export const LEGACY_TOKEN_WARNING = {
-  message: '🚨 WARNING: This is GAiA Token by Harmony of Culture, NOT GAIA Everworld',
+// Official Token Protection - NO LEGACY REFERENCES
+export const OFFICIAL_TOKEN_WARNING = {
+  message: '🌍 OFFICIAL: This is GAIA Token by Harmony of Culture',
   officialOnly: 'Only trust transactions with our verified addresses',
   contractVerification: GAIA_TOKEN.CONTRACT_ADDRESS,
   walletVerification: GAIA_TOKEN.WALLET_ADDRESS
