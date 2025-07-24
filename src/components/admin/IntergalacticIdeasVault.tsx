@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { Sparkles, Rocket, Brain, Gamepad2, Atom, Infinity } from 'lucide-react'
+import { Sparkles, Rocket, Brain, Gamepad2, Atom, Infinity as InfinityIcon } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function IntergalacticIdeasVault() {
@@ -266,7 +266,7 @@ export function IntergalacticIdeasVault() {
             showing our true power to the cosmos.
           </p>
           <Button className="bg-gradient-to-r from-gold-600 via-blue-600 to-purple-600 hover:opacity-90 text-white font-bold px-8 py-4 text-lg">
-            <Infinity className="h-6 w-6 mr-2" />
+            <InfinityIcon className="h-6 w-6 mr-2" />
             ACTIVATE GALACTIC BEAM
           </Button>
         </CardContent>
