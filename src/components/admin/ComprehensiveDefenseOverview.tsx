@@ -347,6 +347,5 @@ export function ComprehensiveDefenseOverview() {
         </CardContent>
       </Card>
     </div>
-  </div>
   )
 }
