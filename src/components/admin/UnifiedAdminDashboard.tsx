@@ -328,12 +328,12 @@ export function UnifiedAdminDashboard() {
         <Card className="border-2 border-blue-500/50">
           <CardContent className="p-6">
             <Tabs defaultValue="breach-protocol" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 md:grid-cols-6 lg:grid-cols-9 gap-1 h-auto p-1 text-xs">
+              <TabsList className="flex w-full overflow-x-auto flex-nowrap gap-2 h-auto p-2 text-xs">
                 {sortedTabs.slice(0, 18).map((tab) => (
                   <TabsTrigger 
                     key={tab.id} 
                     value={tab.id} 
-                    className={`p-2 text-center ${getCategoryColor(tab.category)}`}
+                    className={`flex-shrink-0 p-2 text-center ${getCategoryColor(tab.category)}`}
                   >
                     <div className="flex flex-col items-center">
                       {tab.icon}
