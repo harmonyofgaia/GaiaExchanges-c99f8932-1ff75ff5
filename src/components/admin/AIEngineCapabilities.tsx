@@ -13,7 +13,7 @@ import {
   Eye,
   Shield,
   Target,
-  Infinity,
+  Infinity as InfinityIcon,
   Sparkles,
   Activity
 } from 'lucide-react'
@@ -63,7 +63,7 @@ export function AIEngineCapabilities() {
       description: 'Processes infinite calculations simultaneously',
       powerLevel: 100,
       status: 'maximum',
-      icon: <Infinity className="h-5 w-5" />
+      icon: <InfinityIcon className="h-5 w-5" />
     },
     {
       category: 'Quantum Computing',
@@ -265,7 +265,7 @@ export function AIEngineCapabilities() {
             onClick={activateMaximumPower}
             className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white font-bold text-2xl py-12 mt-8"
           >
-            <Infinity className="h-12 w-12 mr-4 animate-spin" />
+            <InfinityIcon className="h-12 w-12 mr-4 animate-spin" />
             ⚡ ACTIVATE MAXIMUM AI POWER - UNLIMITED CAPABILITIES
           </Button>
         </CardContent>

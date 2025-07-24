@@ -1,4 +1,6 @@
 
+import { GAIA_TOKEN } from '../constants/gaia'
+
 interface DatabaseRecord {
   id: string
   wallet_address?: string
@@ -52,7 +54,7 @@ export class AddressMigrationUtility {
     }
   }
 
-  private fixAddressesInObject(obj: any): boolean {
+  private fixAddressesInObject(obj: Record<string, unknown>): boolean {
     let modified = false
     
     if (typeof obj === 'object' && obj !== null) {
@@ -97,7 +99,7 @@ export class AddressMigrationUtility {
     let isValid = true
 
     // Check constants
-    const { WALLET_ADDRESS, CONTRACT_ADDRESS } = require('../constants/gaia').GAIA_TOKEN
+    const { WALLET_ADDRESS, CONTRACT_ADDRESS } = GAIA_TOKEN
     
     if (WALLET_ADDRESS !== this.CORRECT_WALLET) {
       report.push(`❌ WALLET ADDRESS INCORRECT: ${WALLET_ADDRESS} should be ${this.CORRECT_WALLET}`)

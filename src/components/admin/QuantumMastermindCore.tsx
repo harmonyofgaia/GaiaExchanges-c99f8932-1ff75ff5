@@ -15,7 +15,7 @@ import {
   Globe,
   Rocket,
   Star,
-  Infinity
+  Infinity as InfinityIcon
 } from 'lucide-react'
 import { toast } from 'sonner'
 

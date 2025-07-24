@@ -30,12 +30,12 @@ import { EnhancedAdminMenu } from '@/components/admin/EnhancedAdminMenu'
 import { AdvancedSecurityCenter } from '@/components/admin/AdvancedSecurityCenter'
 import { GlobalCommandCenter } from '@/components/admin/GlobalCommandCenter'
 import { EinsteinCopilotDashboard } from '@/components/admin/copilot/EinsteinCopilotDashboard'
-import { ComprehensiveDefenseOverview } from '@/components/admin/ComprehensiveDefenseOverview'
+import { ActionLedgerControlPanel } from '@/components/admin/ActionLedgerControlPanel'
 import { AIDefenseAnimals } from '@/components/admin/AIDefenseAnimals'
 import { DefenseCreatureArmy } from '@/components/admin/DefenseCreatureArmy'
-import { ImmortalDefenseCore } from '@/components/admin/ImmortalDefenseCore'
-import { UltimateDefensiveBarrier } from '@/components/admin/UltimateDefensiveBarrier'
-import { ActionLedgerControlPanel } from '@/components/admin/ActionLedgerControlPanel'
+import { ImmortalDefenseCore } from '@/components/security/ImmortalDefenseCore'
+import { UltimateDefensiveBarrier } from '@/components/security/UltimateDefensiveBarrier'
+import { ComprehensiveDefenseOverview } from '@/components/admin/ComprehensiveDefenseOverview'
 
 export function SecureAdminDashboard() {
   return (
