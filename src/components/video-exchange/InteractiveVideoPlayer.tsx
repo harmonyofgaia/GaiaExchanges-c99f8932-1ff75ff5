@@ -122,7 +122,7 @@ export function InteractiveVideoPlayer() {
   ])
 
   const [liveUsers] = useState<LiveUser[]>([
-    { id: '1', name: 'EcoWarrrior_Mike', avatar: '/api/placeholder/32/32', status: 'watching' },
+    { id: '1', name: 'EcoWarrior_Mike', avatar: '/api/placeholder/32/32', status: 'watching' },
     { id: '2', name: 'GreenThumb_Lisa', avatar: '/api/placeholder/32/32', status: 'typing' },
     { id: '3', name: 'ClimateAction_Tom', avatar: '/api/placeholder/32/32', status: 'watching' },
     { id: '4', name: 'SustainableSue', avatar: '/api/placeholder/32/32', status: 'reacting' }
