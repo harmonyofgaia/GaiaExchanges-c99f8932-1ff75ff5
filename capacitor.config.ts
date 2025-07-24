@@ -1,5 +1,5 @@
 
-import type { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from '@capacitor/core';
 
 const config: CapacitorConfig = {
   appId: 'app.lovable.8dfae018363f47708e5c27c14bec8426',
