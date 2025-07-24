@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -40,7 +40,12 @@ interface NFTCard {
   rarity: string
   power_level: number
   biodiversity_category: string
-  card_metadata: any
+  card_metadata: {
+    image_url: string
+    description: string
+    traits: Array<{ trait_type: string; value: string }>
+    conservation_info?: string
+  }
   minted_at: string
   is_tradeable: boolean
   ecosystem_interactions?: string[]
@@ -48,7 +53,13 @@ interface NFTCard {
   real_world_impact?: number
   evolution_stage?: number
   max_evolution?: number
-  trading_history?: any[]
+  trading_history?: Array<{
+    transaction_id: string
+    from_user: string
+    to_user: string
+    price: number
+    timestamp: string
+  }>
   market_value?: number
 }
 
@@ -71,8 +82,17 @@ interface ConservationPartnership {
 interface MarketplaceData {
   totalVolume: number
   activeTraders: number
-  topCollections: any[]
-  recentSales: any[]
+  topCollections: Array<{
+    name: string
+    volume: number
+    floor_price: number
+  }>
+  recentSales: Array<{
+    card_name: string
+    price: number
+    buyer: string
+    timestamp: string
+  }>
   conservationFunding: number
 }
 
@@ -99,7 +119,7 @@ export default function NFTCardGame() {
       loadConservationPartnerships()
       loadMarketplaceData()
     }
-  }, [user])
+  }, [user, loadCollection])
 
   const loadEcosystemInteractions = async () => {
     // Mock ecosystem interactions for Master Plan v7
@@ -161,9 +181,9 @@ export default function NFTCardGame() {
     if (user) {
       loadCollection()
     }
-  }, [user])
+  }, [user, loadCollection])
 
-  const loadCollection = async () => {
+  const loadCollection = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('nft_card_collection')
@@ -179,7 +199,7 @@ export default function NFTCardGame() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [user])
 
   const mintRandomCard = async () => {
     if (!user) {
