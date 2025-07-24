@@ -564,12 +564,12 @@ export function AIDefenseAnimals() {
                 <Button 
                   onClick={() => {
                     addNewAnimal({
-                      name: name || 'New Guardian',
-                      emoji: emoji || '🛡️',
-                      location: location || 'New Location',
-                      contributors: contributors || 1000,
-                      effectiveness: effectiveness || 75,
-                      status: status || 'Active',
+                      name: name,
+                      emoji: emoji,
+                      location: location,
+                      contributors: contributors,
+                      effectiveness: effectiveness,
+                      status: status,
                       description: description || 'New AI defense animal',
                     });
                   }}
