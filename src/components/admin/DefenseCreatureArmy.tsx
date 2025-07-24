@@ -168,6 +168,28 @@ export function DefenseCreatureArmy() {
       specialAbility: 'Quantum Resurrection - Multidimensional rebirth',
       threatsEliminated: 3892,
       emoji: '⚛️🦅'
+    },
+    {
+      id: '13',
+      name: 'Digital Cyber Koala Prime',
+      type: 'dragon',
+      level: 90,
+      power: 85000,
+      status: 'active',
+      specialAbility: 'Advanced Eucalyptus Matrix - Ultimate cyber protection',
+      threatsEliminated: 3156,
+      emoji: '🐨⚡'
+    },
+    {
+      id: '14',
+      name: 'Ultimate Sky Eagle Commander',
+      type: 'eagle',
+      level: 87,
+      power: 62000,
+      status: 'defending',
+      specialAbility: 'Stratosphere Command - Global aerial surveillance',
+      threatsEliminated: 2678,
+      emoji: '🌤️🦅'
     }
   ])
 

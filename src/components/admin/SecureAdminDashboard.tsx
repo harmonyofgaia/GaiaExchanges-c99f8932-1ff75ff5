@@ -33,6 +33,7 @@ import { AIDefenseAnimals } from '@/components/admin/AIDefenseAnimals'
 import { DefenseCreatureArmy } from '@/components/admin/DefenseCreatureArmy'
 import { ImmortalDefenseCore } from '@/components/security/ImmortalDefenseCore'
 import { UltimateDefensiveBarrier } from '@/components/security/UltimateDefensiveBarrier'
+import { ComprehensiveDefenseOverview } from '@/components/admin/ComprehensiveDefenseOverview'
 
 export function SecureAdminDashboard() {
   return (
@@ -53,11 +54,17 @@ export function SecureAdminDashboard() {
         </div>
 
         <Tabs defaultValue="dashboard" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-1 h-auto p-1 text-xs">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-1 h-auto p-1 text-xs">
             <TabsTrigger value="dashboard" className="p-2 text-center">
               <div className="flex flex-col items-center">
                 <span>🏠</span>
                 <span className="hidden sm:inline">Dashboard</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="defense-overview" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🛡️</span>
+                <span className="hidden sm:inline">Overview</span>
               </div>
             </TabsTrigger>
             <TabsTrigger value="defense-animals" className="p-2 text-center">
@@ -227,6 +234,10 @@ export function SecureAdminDashboard() {
           <div className="mt-4">
             <TabsContent value="dashboard" className="mt-0">
               <AdminDashboard />
+            </TabsContent>
+
+            <TabsContent value="defense-overview" className="mt-0">
+              <ComprehensiveDefenseOverview />
             </TabsContent>
 
             <TabsContent value="defense-animals" className="mt-0">

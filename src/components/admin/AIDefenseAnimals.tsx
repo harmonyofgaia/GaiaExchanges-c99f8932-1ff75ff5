@@ -520,28 +520,28 @@ export function AIDefenseAnimals() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Name</Label>
-                  <Input placeholder="Enter animal name..." />
+                  <Input id="animal-name" placeholder="Enter animal name..." />
                 </div>
                 <div>
                   <Label>Emoji</Label>
-                  <Input placeholder="🐾" />
+                  <Input id="animal-emoji" placeholder="🐾" />
                 </div>
                 <div>
                   <Label>Location</Label>
-                  <Input placeholder="Global location..." />
+                  <Input id="animal-location" placeholder="Global location..." />
                 </div>
                 <div>
                   <Label>Contributors</Label>
-                  <Input type="number" placeholder="1000" />
+                  <Input id="animal-contributors" type="number" placeholder="1000" />
                 </div>
                 <div>
                   <Label>Effectiveness (%)</Label>
-                  <Input type="number" min="0" max="100" placeholder="75" />
+                  <Input id="animal-effectiveness" type="number" min="0" max="100" placeholder="75" />
                 </div>
                 <div>
                   <Label>Status</Label>
                   <Select defaultValue="Active">
-                    <SelectTrigger>
+                    <SelectTrigger id="animal-status">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -554,20 +554,28 @@ export function AIDefenseAnimals() {
               </div>
               <div>
                 <Label>Description</Label>
-                <Input placeholder="Describe the animal's capabilities..." />
+                <Input id="animal-description" placeholder="Describe the animal's capabilities..." />
               </div>
               <div className="flex gap-2">
                 <Button 
                   onClick={() => {
-                    // For demo, adding a sample animal
+                    // Get values from form inputs
+                    const name = (document.getElementById('animal-name') as HTMLInputElement)?.value || 'New Guardian'
+                    const emoji = (document.getElementById('animal-emoji') as HTMLInputElement)?.value || '🛡️'
+                    const location = (document.getElementById('animal-location') as HTMLInputElement)?.value || 'New Location'
+                    const contributors = parseInt((document.getElementById('animal-contributors') as HTMLInputElement)?.value || '1000')
+                    const effectiveness = parseInt((document.getElementById('animal-effectiveness') as HTMLInputElement)?.value || '75')
+                    const description = (document.getElementById('animal-description') as HTMLInputElement)?.value || 'New AI defense animal'
+                    const status = (document.getElementById('animal-status') as HTMLSelectElement)?.value || 'Active'
+
                     addNewAnimal({
-                      name: 'New Guardian',
-                      emoji: '🛡️',
-                      description: 'New AI defense animal',
-                      effectiveness: 75,
-                      status: 'Active',
-                      location: 'New Location',
-                      contributors: 1000
+                      name,
+                      emoji,
+                      description,
+                      effectiveness,
+                      status,
+                      location,
+                      contributors
                     })
                   }}
                   className="bg-blue-600 hover:bg-blue-700"
