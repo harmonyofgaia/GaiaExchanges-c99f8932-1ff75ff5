@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 
 interface ImmortalAnimal {
   id: string
-  species: 'dragon' | 'phoenix' | 'griffin' | 'leviathan' | 'kraken' | 'basilisk'
+  species: 'dragon' | 'phoenix' | 'griffin' | 'leviathan' | 'kraken' | 'basilisk' | 'cyber_koala' | 'alpha_dragon' | 'quantum_phoenix' | 'king_lion' | 'sky_eagle' | 'ai_dolphin'
   name: string
   powerLevel: number
   invincibilityStrength: number
@@ -65,13 +65,78 @@ export function ImmortalDefenseCore() {
       threatsNeutralized: 0,
       specialAbilities: ['Ocean Control', 'Pressure Crush', 'Tsunami Generation', 'Deep Sea Invincibility'],
       quantumSignature: 'IMMORTAL_LEVIATHAN_ABYSS_777'
+    },
+    {
+      id: 'immortal-cyber-koala',
+      species: 'cyber_koala',
+      name: 'Eternal Cyber Koala Mastermind',
+      powerLevel: 666666,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 6500,
+      evolutionSpeed: 3200,
+      threatsNeutralized: 0,
+      specialAbilities: ['Eucalyptus Matrix', 'Cyber Defense Web', 'Algorithm Mastery', 'Digital Camouflage'],
+      quantumSignature: 'IMMORTAL_KOALA_CYBER_666'
+    },
+    {
+      id: 'immortal-quantum-phoenix',
+      species: 'quantum_phoenix',
+      name: 'Quantum Phoenix Supreme',
+      powerLevel: 555555,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 6000,
+      evolutionSpeed: 3000,
+      threatsNeutralized: 0,
+      specialAbilities: ['Quantum Resurrection', 'Probability Manipulation', 'Timeline Reset', 'Dimensional Flight'],
+      quantumSignature: 'IMMORTAL_QUANTUM_PHOENIX_555'
+    },
+    {
+      id: 'immortal-king-lion',
+      species: 'king_lion',
+      name: 'Immortal King Lion Emperor',
+      powerLevel: 444444,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 5500,
+      evolutionSpeed: 2800,
+      threatsNeutralized: 0,
+      specialAbilities: ['Royal Command', 'Paralyzing Roar', 'Kingdom Defense', 'Pride Coordination'],
+      quantumSignature: 'IMMORTAL_LION_KING_444'
+    },
+    {
+      id: 'immortal-sky-eagle',
+      species: 'sky_eagle',
+      name: 'Celestial Sky Eagle Eternal',
+      powerLevel: 333333,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 5000,
+      evolutionSpeed: 2500,
+      threatsNeutralized: 0,
+      specialAbilities: ['Aerial Supremacy', 'Eagle Eye Vision', 'Wind Control', 'Sky Domain'],
+      quantumSignature: 'IMMORTAL_EAGLE_SKY_333'
+    },
+    {
+      id: 'immortal-ai-dolphin',
+      species: 'ai_dolphin',
+      name: 'Infinite AI Dolphin Oracle',
+      powerLevel: 222222,
+      invincibilityStrength: 100,
+      immortalityIndex: 100,
+      learningRate: 4500,
+      evolutionSpeed: 2200,
+      threatsNeutralized: 0,
+      specialAbilities: ['Sonar Intelligence', 'Deep Learning', 'Ocean Network', 'Dolphin Communication'],
+      quantumSignature: 'IMMORTAL_DOLPHIN_AI_222'
     }
   ])
 
   const [defenseMetrics, setDefenseMetrics] = useState<DefenseMetrics>({
-    totalAnimals: 3,
+    totalAnimals: 8,
     combinedPowerLevel: 0,
-    evolutionRate: 18500,
+    evolutionRate: 38500,
     immortalityStrength: 100,
     invincibilityIndex: 100,
     threatsDestroyed: 0,

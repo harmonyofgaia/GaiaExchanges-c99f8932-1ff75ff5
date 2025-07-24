@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
+import { Switch } from '@/components/ui/switch'
 import { 
   Shield, 
   Zap, 
@@ -12,7 +13,13 @@ import {
   Crown,
   Flame,
   Sword,
-  Activity
+  Activity,
+  PlayCircle,
+  PauseCircle,
+  RotateCcw,
+  Edit,
+  Trash2,
+  Plus
 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -106,8 +113,91 @@ export function DefenseCreatureArmy() {
       specialAbility: 'Database Protection - Guards all data entries',
       threatsEliminated: 1087,
       emoji: '🐒'
+    },
+    {
+      id: '8',
+      name: 'Cyber Koala Guardian',
+      type: 'dragon',
+      level: 88,
+      power: 75000,
+      status: 'active',
+      specialAbility: 'Cyber Defense Matrix - Eucalyptus-powered security',
+      threatsEliminated: 2847,
+      emoji: '🐨'
+    },
+    {
+      id: '9',
+      name: 'Phoenix Guardian Immortal',
+      type: 'dragon',
+      level: 95,
+      power: 120000,
+      status: 'defending',
+      specialAbility: 'Resurrection Protocol - Cannot be destroyed',
+      threatsEliminated: 4156,
+      emoji: '🔥🦅'
+    },
+    {
+      id: '10',
+      name: 'AI Dolphin Intelligence',
+      type: 'dragon',
+      level: 83,
+      power: 55000,
+      status: 'active',
+      specialAbility: 'Sonar Threat Detection - Deep web scanning',
+      threatsEliminated: 2341,
+      emoji: '🐬'
+    },
+    {
+      id: '11',
+      name: 'Digital Dragon Prime',
+      type: 'dragon',
+      level: 98,
+      power: 180000,
+      status: 'defending',
+      specialAbility: 'Digital Domain Control - Matrix manipulation',
+      threatsEliminated: 6789,
+      emoji: '🐲'
+    },
+    {
+      id: '12',
+      name: 'Quantum Phoenix Elite',
+      type: 'dragon',
+      level: 91,
+      power: 95000,
+      status: 'active',
+      specialAbility: 'Quantum Resurrection - Multidimensional rebirth',
+      threatsEliminated: 3892,
+      emoji: '⚛️🦅'
     }
   ])
+
+  const toggleCreatureStatus = (id: string) => {
+    setCreatures(prev => prev.map(creature => 
+      creature.id === id 
+        ? { ...creature, status: creature.status === 'active' ? 'training' : 'active' }
+        : creature
+    ))
+    toast.success('Creature status updated!')
+  }
+
+  const batchActivateCreatures = () => {
+    setCreatures(prev => prev.map(creature => ({ ...creature, status: 'active' })))
+    toast.success('All creatures activated!')
+  }
+
+  const batchDeployCreatures = () => {
+    setCreatures(prev => prev.map(creature => ({ ...creature, status: 'defending' })))
+    toast.success('All creatures deployed for defense!')
+  }
+
+  const resetCreatureStats = (id: string) => {
+    setCreatures(prev => prev.map(creature => 
+      creature.id === id 
+        ? { ...creature, threatsEliminated: 0, level: 1, power: 1000 }
+        : creature
+    ))
+    toast.success('Creature stats reset!')
+  }
 
   const [armyStats, setArmyStats] = useState({
     totalPower: 0,
@@ -191,6 +281,20 @@ export function DefenseCreatureArmy() {
             <Shield className="h-6 w-6" />
             🛡️ DEFENSE CREATURE ARMY - LEGENDARY GUARDIANS
           </CardTitle>
+          <div className="flex gap-2 flex-wrap">
+            <Button onClick={batchActivateCreatures} size="sm" className="bg-green-600 hover:bg-green-700">
+              <PlayCircle className="h-4 w-4 mr-1" />
+              Activate All
+            </Button>
+            <Button onClick={batchDeployCreatures} size="sm" className="bg-red-600 hover:bg-red-700">
+              <Sword className="h-4 w-4 mr-1" />
+              Deploy All
+            </Button>
+            <Button onClick={deployAllCreatures} className="bg-purple-600 hover:bg-purple-700">
+              <Sword className="h-5 w-5 mr-2" />
+              🛡️ MAXIMUM DEFENSE MODE
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -221,7 +325,7 @@ export function DefenseCreatureArmy() {
 
           <Button onClick={deployAllCreatures} className="w-full bg-red-600 hover:bg-red-700 py-4 text-lg">
             <Sword className="h-5 w-5 mr-2" />
-            🛡️ DEPLOY ALL CREATURES - MAXIMUM DEFENSE
+            🛡️ EMERGENCY DEPLOY - MAXIMUM DEFENSE
           </Button>
         </CardContent>
       </Card>
@@ -266,6 +370,22 @@ export function DefenseCreatureArmy() {
               <div className="flex justify-between items-center pt-2 border-t border-orange-500/20">
                 <span className="text-xs text-muted-foreground">Eliminated:</span>
                 <Badge className="bg-green-600 text-white">{creature.threatsEliminated}</Badge>
+              </div>
+
+              <div className="flex gap-1 pt-2">
+                <Switch 
+                  checked={creature.status === 'active' || creature.status === 'defending'}
+                  onCheckedChange={() => toggleCreatureStatus(creature.id)}
+                />
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={() => resetCreatureStats(creature.id)}
+                  className="flex-1 text-xs"
+                >
+                  <RotateCcw className="h-3 w-3 mr-1" />
+                  Reset
+                </Button>
               </div>
             </CardContent>
           </Card>
