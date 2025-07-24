@@ -48,7 +48,7 @@ export function SecureAdminDashboard() {
         </div>
 
         <Tabs defaultValue="dashboard" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-20 gap-1 h-auto p-1 text-xs">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-1 h-auto p-1 text-xs">
             <TabsTrigger value="dashboard" className="p-2 text-center">
               <div className="flex flex-col items-center">
                 <span>🏠</span>
