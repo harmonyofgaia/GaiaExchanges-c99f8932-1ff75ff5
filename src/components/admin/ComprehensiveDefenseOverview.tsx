@@ -37,7 +37,7 @@ export function ComprehensiveDefenseOverview() {
   const { metrics: securityMetrics, getDefenseAnimals, getRecentThreats, emergencyLockdown } = useInvisibleSecurity()
   
   const [overviewStats, setOverviewStats] = useState<DefenseOverviewStats>({
-    totalAnimals: 39, // 14 + 12 + 13
+    totalAnimals: 0, // Will be dynamically computed
     activeAnimals: 35,
     immortalCreatures: 11,
     totalThreatsRepelled: 0,
