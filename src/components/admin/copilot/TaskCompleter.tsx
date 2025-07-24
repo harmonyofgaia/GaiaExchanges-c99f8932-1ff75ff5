@@ -225,7 +225,7 @@ export function TaskCompleter({ toolName, toolId }: TaskCompleterProps) {
         }
       }
     }, duration)
-  }, [tasks, retryTask])
+  }, [tasks])
 
   const retryTask = useCallback((taskId: string) => {
     setTasks(prev => prev.map(t => 
