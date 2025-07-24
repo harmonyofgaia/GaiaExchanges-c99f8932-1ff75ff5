@@ -554,29 +554,24 @@ export function AIDefenseAnimals() {
               </div>
               <div>
                 <Label>Description</Label>
-                <Input id="animal-description" placeholder="Describe the animal's capabilities..." />
+                <Input 
+                  value={description} 
+                  onChange={(e) => setDescription(e.target.value)} 
+                  placeholder="Describe the animal's capabilities..." 
+                />
               </div>
               <div className="flex gap-2">
                 <Button 
                   onClick={() => {
-                    // Get values from form inputs
-                    const name = (document.getElementById('animal-name') as HTMLInputElement)?.value || 'New Guardian'
-                    const emoji = (document.getElementById('animal-emoji') as HTMLInputElement)?.value || '🛡️'
-                    const location = (document.getElementById('animal-location') as HTMLInputElement)?.value || 'New Location'
-                    const contributors = parseInt((document.getElementById('animal-contributors') as HTMLInputElement)?.value || '1000')
-                    const effectiveness = parseInt((document.getElementById('animal-effectiveness') as HTMLInputElement)?.value || '75')
-                    const description = (document.getElementById('animal-description') as HTMLInputElement)?.value || 'New AI defense animal'
-                    const status = (document.getElementById('animal-status') as HTMLSelectElement)?.value || 'Active'
-
                     addNewAnimal({
-                      name,
-                      emoji,
-                      description,
-                      effectiveness,
-                      status,
-                      location,
-                      contributors
-                    })
+                      name: name || 'New Guardian',
+                      emoji: emoji || '🛡️',
+                      location: location || 'New Location',
+                      contributors: contributors || 1000,
+                      effectiveness: effectiveness || 75,
+                      status: status || 'Active',
+                      description: description || 'New AI defense animal',
+                    });
                   }}
                   className="bg-blue-600 hover:bg-blue-700"
                 >
