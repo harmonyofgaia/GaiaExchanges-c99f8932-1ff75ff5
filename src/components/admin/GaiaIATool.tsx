@@ -36,6 +36,14 @@ import { githubScanner } from '@/services/githubScanner'
 import type { ScanResult } from '@/services/githubScanner'
 import { toast } from 'sonner'
 
+interface SearchResult {
+  id: string
+  type: string
+  title: string
+  status: string
+  timestamp: string
+}
+
 interface SystemMetrics {
   realTimeConnections: number
   dataPoints: number
@@ -59,7 +67,7 @@ interface ActionLog {
 export function GaiaIATool() {
   const [scanResult, setScanResult] = useState<ScanResult | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState<any[]>([])
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
   const [isScanning, setIsScanning] = useState(false)
   const [systemMetrics, setSystemMetrics] = useState<SystemMetrics>({
     realTimeConnections: 1247,
