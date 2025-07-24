@@ -173,7 +173,7 @@ export function ImmortalDefenseCore() {
   ])
 
   const [defenseMetrics, setDefenseMetrics] = useState<DefenseMetrics>({
-    totalAnimals: 11,
+    totalAnimals: immortalAnimals.length,
     combinedPowerLevel: 0,
     evolutionRate: 62600,
     immortalityStrength: 100,
