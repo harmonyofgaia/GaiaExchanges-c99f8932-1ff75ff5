@@ -160,7 +160,7 @@ export const navigationItems: NavigationItem[] = [
   },
   {
     title: "Video Exchange",
-    to: "/secure-admin",
+    to: "/secure-admin/video-exchange",
     icon: Video,
     variant: "ghost" as const,
     masterPlanVersion: "v7",
