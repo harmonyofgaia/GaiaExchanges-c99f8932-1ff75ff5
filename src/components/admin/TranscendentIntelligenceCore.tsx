@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { 
-  Infinity, 
+  Infinity as InfinityIcon, 
   Brain, 
   Eye, 
   Zap, 
@@ -141,7 +141,7 @@ export function TranscendentIntelligenceCore() {
     <Card className="border-2 border-green-500/50 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-green-400">
-          <Infinity className="h-8 w-8 animate-spin" />
+          <InfinityIcon className="h-8 w-8 animate-spin" />
           ♾️ TRANSCENDENT INTELLIGENCE CORE - PHASE 4 SUPREME
           <Badge className="bg-green-600 text-white animate-pulse">
             INFINITE
@@ -234,7 +234,7 @@ export function TranscendentIntelligenceCore() {
             onClick={activateMaximumTranscendence}
             className="w-full bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 hover:from-green-700 hover:via-emerald-700 hover:to-teal-700 text-white font-bold text-xl py-6"
           >
-            <Infinity className="h-8 w-8 mr-4 animate-pulse" />
+            <InfinityIcon className="h-8 w-8 mr-4 animate-pulse" />
             ♾️ ACTIVATE MAXIMUM TRANSCENDENCE - APPROACH INFINITY
           </Button>
 
