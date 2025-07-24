@@ -5,6 +5,7 @@ import { SecureVaultLogin } from '@/components/admin/SecureVaultLogin'
 import { AdminControlCenter } from './components/AdminControlCenter'
 import { BreachDefenseSystem } from './components/BreachDefenseSystem'
 import { TimeSync } from './components/TimeSync'
+import { SecurityMiddleware } from './components/SecurityMiddleware'
 
 // Set system time to 11:14, 24-07-2025 for all secure-admin processes
 const SYSTEM_TIME = {
@@ -50,6 +51,7 @@ export default function SecureAdminPage() {
           layers={securityLayers}
           onLayerActivation={handleSecurityLayerActivation}
         />
+        <SecurityMiddleware systemTime={SYSTEM_TIME} isAuthenticated={false} />
         <SecureVaultLogin onAuthentication={handleAuthentication} />
       </div>
     )
@@ -63,6 +65,7 @@ export default function SecureAdminPage() {
         onLayerActivation={handleSecurityLayerActivation}
         authenticated={true}
       />
+      <SecurityMiddleware systemTime={SYSTEM_TIME} isAuthenticated={true} />
       <AdminControlCenter 
         systemTime={SYSTEM_TIME}
         securityLayers={securityLayers}

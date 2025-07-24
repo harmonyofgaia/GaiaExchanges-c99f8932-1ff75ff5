@@ -7,6 +7,24 @@ import { Badge } from '@/components/ui/badge'
 import { Shield, Crown, LogOut, Globe, Users, Settings, Database, Activity } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
+// Import all admin components from the legacy system
+import { UltimateAdminSuite } from '@/components/admin/UltimateAdminSuite'
+import { MasterAdminControlCenter } from '@/components/admin/MasterAdminControlCenter'
+import { DragonAIDefense } from '@/components/admin/DragonAIDefense'
+import { KoalaAIEngine } from '@/components/admin/KoalaAIEngine'
+import { UltimateIntelligenceHub } from '@/components/admin/UltimateIntelligenceHub'
+import { AdminMediaLibrary } from '@/components/admin/AdminMediaLibrary'
+import { WalletEngineAdmin } from '@/components/admin/WalletEngineAdmin'
+import { TokenBurnController } from '@/components/admin/TokenBurnController'
+import { GitHubIntegrationSuite } from '@/components/system/GitHubIntegrationSuite'
+import { NotificationController } from '@/components/admin/NotificationController'
+import { PsychohistoricalEngine } from '@/components/admin/PsychohistoricalEngine'
+import { PhoenixGuardian } from '@/components/admin/PhoenixGuardian'
+import { GaiaIATool } from '@/components/admin/GaiaIATool'
+import { SecurityDashboard } from '@/components/admin/security/SecurityDashboard'
+import { UserManagementSystemRefactored } from '@/components/admin/UserManagementSystemRefactored'
+import { AdminDashboard } from '@/components/admin/AdminDashboard'
+
 interface AdminControlCenterProps {
   systemTime: {
     hour: number
@@ -20,116 +38,6 @@ interface AdminControlCenterProps {
     intrusion: boolean
   }
 }
-
-// Simple admin dashboard components
-const MainDashboard = () => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-black/80">
-      <CardHeader>
-        <CardTitle className="text-green-400 flex items-center gap-2">
-          <Activity className="h-5 w-5" />
-          System Status
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <span className="text-gray-300">Server Health</span>
-            <Badge variant="outline" className="border-green-500/50 text-green-400">OPTIMAL</Badge>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-300">Database</span>
-            <Badge variant="outline" className="border-green-500/50 text-green-400">ONLINE</Badge>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-300">Security</span>
-            <Badge variant="outline" className="border-green-500/50 text-green-400">ACTIVE</Badge>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-
-    <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-black/80">
-      <CardHeader>
-        <CardTitle className="text-blue-400 flex items-center gap-2">
-          <Database className="h-5 w-5" />
-          Database Metrics
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <span className="text-gray-300">Total Users</span>
-            <span className="text-blue-400">12,547</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-300">Active Sessions</span>
-            <span className="text-blue-400">1,247</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-300">Transactions</span>
-            <span className="text-blue-400">89,342</span>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-
-    <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-black/80">
-      <CardHeader>
-        <CardTitle className="text-purple-400 flex items-center gap-2">
-          <Settings className="h-5 w-5" />
-          Admin Tools
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
-          <Button variant="outline" className="w-full border-purple-500/30 text-purple-400">
-            User Management
-          </Button>
-          <Button variant="outline" className="w-full border-purple-500/30 text-purple-400">
-            System Logs
-          </Button>
-          <Button variant="outline" className="w-full border-purple-500/30 text-purple-400">
-            Configuration
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
-  </div>
-)
-
-const SecurityCenter = () => (
-  <div className="space-y-6">
-    <Card className="border-red-500/30 bg-gradient-to-br from-red-900/20 to-black/80">
-      <CardHeader>
-        <CardTitle className="text-red-400 flex items-center gap-2">
-          <Shield className="h-5 w-5" />
-          Security Overview
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <span className="text-gray-300">Failed Login Attempts</span>
-            <div className="text-2xl font-bold text-red-400">0</div>
-          </div>
-          <div className="space-y-2">
-            <span className="text-gray-300">Blocked IPs</span>
-            <div className="text-2xl font-bold text-red-400">3</div>
-          </div>
-          <div className="space-y-2">
-            <span className="text-gray-300">Active Threats</span>
-            <div className="text-2xl font-bold text-green-400">0</div>
-          </div>
-          <div className="space-y-2">
-            <span className="text-gray-300">System Integrity</span>
-            <div className="text-2xl font-bold text-green-400">100%</div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  </div>
-)
 
 export function AdminControlCenter({ systemTime, securityLayers }: AdminControlCenterProps) {
   const [clientIP] = useState(`192.168.1.${Math.floor(Math.random() * 255)}`)
@@ -197,9 +105,9 @@ export function AdminControlCenter({ systemTime, securityLayers }: AdminControlC
         </CardContent>
       </Card>
 
-      {/* Main Admin Interface */}
+      {/* Main Admin Interface - Comprehensive Tabs from Legacy Admin */}
       <Tabs defaultValue="dashboard" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-1 h-auto p-1 text-xs">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-16 gap-1 h-auto p-1 text-xs">
           <TabsTrigger value="dashboard" className="p-2 text-center">
             <div className="flex flex-col items-center">
               <span>🏠</span>
@@ -218,53 +126,163 @@ export function AdminControlCenter({ systemTime, securityLayers }: AdminControlC
               <span className="hidden sm:inline">Users</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="system" className="p-2 text-center">
+          <TabsTrigger value="gaia-ia" className="p-2 text-center">
             <div className="flex flex-col items-center">
-              <span>⚙️</span>
-              <span className="hidden sm:inline">System</span>
+              <span>🧠</span>
+              <span className="hidden sm:inline">GAIA IA</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="logs" className="p-2 text-center">
+          <TabsTrigger value="master-control" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>👑</span>
+              <span className="hidden sm:inline">Master Control</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="overview" className="p-2 text-center">
             <div className="flex flex-col items-center">
               <span>📊</span>
-              <span className="hidden sm:inline">Logs</span>
+              <span className="hidden sm:inline">Overview</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="settings" className="p-2 text-center">
+          <TabsTrigger value="notifications" className="p-2 text-center">
             <div className="flex flex-col items-center">
-              <span>🔧</span>
-              <span className="hidden sm:inline">Settings</span>
+              <span>🔔</span>
+              <span className="hidden sm:inline">Notifications</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="github" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>📱</span>
+              <span className="hidden sm:inline">GitHub</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="tokens" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🔥</span>
+              <span className="hidden sm:inline">Token Burn</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="wallets" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>💰</span>
+              <span className="hidden sm:inline">Wallets</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="media" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>📸</span>
+              <span className="hidden sm:inline">Media</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="intelligence" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🧠</span>
+              <span className="hidden sm:inline">Intelligence</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="koala" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🐨</span>
+              <span className="hidden sm:inline">Koala AI</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="dragon" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🐉</span>
+              <span className="hidden sm:inline">Dragon AI</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="phoenix" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🦅</span>
+              <span className="hidden sm:inline">Phoenix</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="psycho" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🔮</span>
+              <span className="hidden sm:inline">Psychohistory</span>
             </div>
           </TabsTrigger>
         </TabsList>
 
         <div className="mt-4">
           <TabsContent value="dashboard" className="mt-0">
-            <MainDashboard />
+            <AdminDashboard />
           </TabsContent>
 
           <TabsContent value="security" className="mt-0">
-            <SecurityCenter />
+            <SecurityDashboard />
           </TabsContent>
 
           <TabsContent value="users" className="mt-0">
-            <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-black/80">
-              <CardHeader>
-                <CardTitle className="text-blue-400">User Management</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300">User management interface will be implemented here.</p>
-              </CardContent>
-            </Card>
+            <UserManagementSystemRefactored />
           </TabsContent>
 
+          <TabsContent value="gaia-ia" className="mt-0">
+            <GaiaIATool />
+          </TabsContent>
+
+          <TabsContent value="master-control" className="mt-0">
+            <MasterAdminControlCenter />
+          </TabsContent>
+
+          <TabsContent value="overview" className="mt-0">
+            <UltimateAdminSuite />
+          </TabsContent>
+
+          <TabsContent value="notifications" className="mt-0">
+            <NotificationController />
+          </TabsContent>
+
+          <TabsContent value="github" className="mt-0">
+            <GitHubIntegrationSuite />
+          </TabsContent>
+
+          <TabsContent value="tokens" className="mt-0">
+            <TokenBurnController />
+          </TabsContent>
+
+          <TabsContent value="wallets" className="mt-0">
+            <WalletEngineAdmin />
+          </TabsContent>
+
+          <TabsContent value="media" className="mt-0">
+            <AdminMediaLibrary />
+          </TabsContent>
+
+          <TabsContent value="intelligence" className="mt-0">
+            <UltimateIntelligenceHub />
+          </TabsContent>
+
+          <TabsContent value="koala" className="mt-0">
+            <KoalaAIEngine />
+          </TabsContent>
+
+          <TabsContent value="dragon" className="mt-0">
+            <DragonAIDefense />
+          </TabsContent>
+
+          <TabsContent value="phoenix" className="mt-0">
+            <PhoenixGuardian />
+          </TabsContent>
+
+          <TabsContent value="psycho" className="mt-0">
+            <PsychohistoricalEngine />
+          </TabsContent>
+
+          {/* Additional system tabs */}
           <TabsContent value="system" className="mt-0">
             <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-black/80">
               <CardHeader>
                 <CardTitle className="text-purple-400">System Configuration</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300">System configuration panel will be implemented here.</p>
+                <div className="space-y-2">
+                  <div className="text-gray-300">System time: {systemTime.hour}:{systemTime.minute}, {systemTime.date}</div>
+                  <div className="text-gray-300">4-Step Defense System: {Object.values(securityLayers).filter(Boolean).length}/4 Active</div>
+                  <div className="text-gray-300">Session integrity: Monitored</div>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
@@ -280,6 +298,8 @@ export function AdminControlCenter({ systemTime, securityLayers }: AdminControlC
                   <div className="text-blue-400">[{systemTime.hour}:{systemTime.minute}] 4-Step Defense System activated</div>
                   <div className="text-purple-400">[{systemTime.hour}:{systemTime.minute}] System time synchronized to {systemTime.date}</div>
                   <div className="text-green-400">[{systemTime.hour}:{systemTime.minute}] All security layers operational</div>
+                  <div className="text-cyan-400">[{systemTime.hour}:{systemTime.minute}] GAiA ADMIN CONTROL CENTER accessed</div>
+                  <div className="text-orange-400">[{systemTime.hour}:{systemTime.minute}] GAIA Admin Dashboard - Exclusive Control activated</div>
                 </div>
               </CardContent>
             </Card>
@@ -291,7 +311,12 @@ export function AdminControlCenter({ systemTime, securityLayers }: AdminControlC
                 <CardTitle className="text-cyan-400">Global Settings</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300">Global system settings will be implemented here.</p>
+                <div className="space-y-4">
+                  <div className="text-gray-300">Time synchronization: {systemTime.hour}:{systemTime.minute.toString().padStart(2, '0')}, {systemTime.date}</div>
+                  <div className="text-gray-300">Security level: Maximum</div>
+                  <div className="text-gray-300">Admin privileges: Full access</div>
+                  <div className="text-gray-300">Session monitoring: Active</div>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
