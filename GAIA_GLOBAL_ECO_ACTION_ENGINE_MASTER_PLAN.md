@@ -337,11 +337,21 @@ The GAIA Global Eco-Action Engine Master Plan consolidates all environmental tec
 ## 📊 Success Metrics & KPIs
 
 ### Environmental Impact Metrics
-- [ ] **Carbon Impact**: 1M+ tons CO2 sequestered annually
-- [ ] **Water Conservation**: 100M+ gallons saved/recycled
-- [ ] **Biodiversity**: 10,000+ species protected/restored
-- [ ] **Ecosystem Health**: 1M+ acres restored/protected
-- [ ] **Waste Reduction**: 100M+ pounds waste diverted
+- [ ] **Carbon Impact**: 1M+ tons CO2 sequestered annually  
+      - Current baseline: 500,000 tons CO2 sequestered annually  
+      - Target to be achieved by Q4 2026  
+- [ ] **Water Conservation**: 100M+ gallons saved/recycled  
+      - Current baseline: 50M gallons saved/recycled annually  
+      - Target to be achieved by Q4 2026  
+- [ ] **Biodiversity**: 10,000+ species protected/restored  
+      - Current baseline: 5,000 species protected/restored  
+      - Target to be achieved by Q4 2026  
+- [ ] **Ecosystem Health**: 1M+ acres restored/protected  
+      - Current baseline: 500,000 acres restored/protected  
+      - Target to be achieved by Q4 2026  
+- [ ] **Waste Reduction**: 100M+ pounds waste diverted  
+      - Current baseline: 50M pounds waste diverted annually  
+      - Target to be achieved by Q4 2026  
 
 ### Platform Performance Metrics
 - [ ] **User Engagement**: 1M+ monthly active users
