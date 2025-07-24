@@ -79,6 +79,29 @@ export function LiveTaskBoard() {
     return () => clearInterval(interval)
   }, [])
 
+  const updateMetrics = useCallback(() => {
+    if (tasks.length > 0) {
+      const totalTasks = tasks.length
+      const runningTasks = tasks.filter(task => task.status === 'running').length
+      const completedTasks = tasks.filter(task => task.status === 'completed').length
+      const failedTasks = tasks.filter(task => task.status === 'failed').length
+      const averageSuccessRate = (completedTasks / totalTasks) * 100 || 0
+      const averageExecutionTime = tasks.reduce((sum, task) => sum + (task.actualDuration || 0), 0) / completedTasks || 0
+      const totalExecutionTime = tasks.reduce((sum, task) => sum + (task.actualDuration || 0), 0)
+
+      setMetrics({
+        totalTasks,
+        runningTasks,
+        completedTasks,
+        failedTasks,
+        averageSuccessRate,
+        averageExecutionTime,
+        totalExecutionTime
+      })
+    } else {
+      setMetrics(null)
+    }
+  }, [tasks])
   useEffect(() => {
     updateMetrics()
   }, [updateMetrics])
