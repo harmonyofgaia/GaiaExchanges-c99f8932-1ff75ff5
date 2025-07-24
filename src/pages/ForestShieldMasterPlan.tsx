@@ -23,12 +23,10 @@ import {
 } from "lucide-react";
 
 const ForestShieldMasterPlan = () => {
-  const phaseProgress = {
-    phase1: 25,
-    phase2: 0,
-    phase3: 0,
-    phase4: 0
-  };
+  const phaseProgress = roadmapPhases.reduce((acc, phase) => {
+    acc[phase.id] = phase.progress;
+    return acc;
+  }, {});
 
   const keyMetrics = [
     { label: "Forests Protected", value: "0", target: "10M hectares", icon: TreePine },
