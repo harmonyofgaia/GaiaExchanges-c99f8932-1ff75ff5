@@ -32,7 +32,14 @@ export interface Landscape {
 }
 
 // Exchange status types
-export type ExchangeStatus = 'active' | 'inactive' | 'pending' | 'completed' | 'error' | 'maintenance'
+export enum ExchangeStatus {
+  Active = 'active',
+  Inactive = 'inactive',
+  Pending = 'pending',
+  Completed = 'completed',
+  Error = 'error',
+  Maintenance = 'maintenance',
+}
 
 // Auto apply status types  
 export type AutoApplyStatus = 'completed' | 'in-progress' | 'pending' | 'failed'
