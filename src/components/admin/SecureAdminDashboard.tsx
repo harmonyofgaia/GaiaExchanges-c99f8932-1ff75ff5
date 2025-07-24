@@ -30,6 +30,7 @@ import { EnhancedAdminMenu } from '@/components/admin/EnhancedAdminMenu'
 import { AdvancedSecurityCenter } from '@/components/admin/AdvancedSecurityCenter'
 import { GlobalCommandCenter } from '@/components/admin/GlobalCommandCenter'
 import { VideoExchangeDashboard } from '@/components/admin/VideoExchangeDashboard'
+import { EinsteinCopilotDashboard } from '@/components/admin/copilot/EinsteinCopilotDashboard'
 import { ActionLedgerControlPanel } from '@/components/admin/ActionLedgerControlPanel'
 import { AIDefenseAnimals } from '@/components/admin/AIDefenseAnimals'
 import { DefenseCreatureArmy } from '@/components/admin/DefenseCreatureArmy'
@@ -43,20 +44,26 @@ export function SecureAdminDashboard() {
       <div className="container mx-auto p-4 space-y-4 max-w-full overflow-x-hidden">
         <div className="text-center mb-6">
           <h1 className="text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 mb-4">
-            🛡️ SECURE GAIA ADMIN CONTROL CENTER V4 🛡️
+            🛡️ SECURE GAIA ADMIN CONTROL CENTER V4 + 🧠 EINSTEIN COPILOT + 🎬 VIDEO EXCHANGE 🛡️
           </h1>
           <p className="text-lg lg:text-xl text-muted-foreground">
-            Unified secure administrative suite for complete GAiA ecosystem management
+            Unified secure administrative suite with AI-powered deep control, video community platform & environmental impact focus
           </p>
-          <div className="mt-2 p-2 bg-gradient-to-r from-green-900/20 to-blue-900/20 border border-green-500/30 rounded-lg">
-            <p className="text-sm text-green-400">
-              🔒 All admin features, controls, and dashboards integrated under secure authentication
+          <div className="mt-2 p-2 bg-gradient-to-r from-green-900/20 to-purple-900/20 border border-purple-500/30 rounded-lg">
+            <p className="text-sm text-purple-400">
+              🧠 Enhanced with Einstein Copilot Deep Control & 🎬 GAiA Community Video Exchange - Advanced AI insights, task automation & outstanding experience platform
             </p>
           </div>
         </div>
 
         <Tabs defaultValue="dashboard" className="w-full">
           <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-1 h-auto p-1 text-xs">
+            <TabsTrigger value="copilot" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🧠</span>
+                <span className="hidden sm:inline">Einstein</span>
+              </div>
+            </TabsTrigger>
             <TabsTrigger value="dashboard" className="p-2 text-center">
               <div className="flex flex-col items-center">
                 <span>🏠</span>
@@ -243,9 +250,19 @@ export function SecureAdminDashboard() {
                 <span className="hidden sm:inline">Action Ledger</span>
               </div>
             </TabsTrigger>
+            <TabsTrigger value="copilot" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🧠</span>
+                <span className="hidden sm:inline">Einstein AI</span>
+              </div>
+            </TabsTrigger>
           </TabsList>
 
           <div className="mt-4">
+            <TabsContent value="copilot" className="mt-0">
+              <EinsteinCopilotDashboard />
+            </TabsContent>
+
             <TabsContent value="dashboard" className="mt-0">
               <AdminDashboard />
             </TabsContent>
