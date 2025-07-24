@@ -97,34 +97,43 @@ export function Enhanced4StepBreachSystem() {
   const [systemStatus, setSystemStatus] = useState<'secure' | 'alert' | 'critical'>('secure')
 
   useEffect(() => {
-    const monitoringInterval = setInterval(() => {
-      console.log('🛡️ ENHANCED 4-STEP BREACH PROTOCOL - MAXIMUM SECURITY ACTIVE')
-      console.log('👻 100 INVISIBLE DEFENSE WALLS - QUANTUM PROTECTED')
-      console.log('🧠 AI ENGINE MONITORING - BACKGROUND SURVEILLANCE')
-      console.log('⚡ DEFENSIVE ACTIONS READY - INSTANT RESPONSE SYSTEM')
-      console.log(`🌍 GAIA TOKEN PROTECTION: ${GAIA_TOKEN.WALLET_ADDRESS}`)
+    let lastUpdateTime = performance.now();
+    let animationFrameId: number;
 
-      // Simulate security monitoring and occasional threat detection
-      if (Math.random() < 0.05) { // 5% chance of security event
-        simulateSecurityEvent()
+    const update = (currentTime: number) => {
+      if (currentTime - lastUpdateTime >= 3000) {
+        console.log('🛡️ ENHANCED 4-STEP BREACH PROTOCOL - MAXIMUM SECURITY ACTIVE');
+        console.log('👻 100 INVISIBLE DEFENSE WALLS - QUANTUM PROTECTED');
+        console.log('🧠 AI ENGINE MONITORING - BACKGROUND SURVEILLANCE');
+        console.log('⚡ DEFENSIVE ACTIONS READY - INSTANT RESPONSE SYSTEM');
+        console.log(`🌍 GAIA TOKEN PROTECTION: ${GAIA_TOKEN.WALLET_ADDRESS}`);
+
+        // Simulate security monitoring and occasional threat detection
+        if (Math.random() < 0.05) { // 5% chance of security event
+          simulateSecurityEvent();
+        }
+
+        // Continuously strengthen defenses
+        setBreachSteps(prev => prev.map(step => ({
+          ...step,
+          defenseStrength: Math.min(100, step.defenseStrength + (Math.random() * 0.5))
+        })));
+
+        // Strengthen defensive actions
+        setDefensiveActions(prev => prev.map(action => ({
+          ...action,
+          strength: Math.min(100, action.strength + (Math.random() * 0.3))
+        })));
+
+        lastUpdateTime = currentTime;
       }
+      animationFrameId = requestAnimationFrame(update);
+    };
 
-      // Continuously strengthen defenses
-      setBreachSteps(prev => prev.map(step => ({
-        ...step,
-        defenseStrength: Math.min(100, step.defenseStrength + (Math.random() * 0.5))
-      })))
+    animationFrameId = requestAnimationFrame(update);
 
-      // Strengthen defensive actions
-      setDefensiveActions(prev => prev.map(action => ({
-        ...action,
-        strength: Math.min(100, action.strength + (Math.random() * 0.3))
-      })))
-    }, 3000)
-
-    return () => clearInterval(monitoringInterval)
-  }, [])
-
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
   const simulateSecurityEvent = () => {
     const eventTypes = [
       { type: 'Suspicious IP detected and blocked', severity: 'low' },
