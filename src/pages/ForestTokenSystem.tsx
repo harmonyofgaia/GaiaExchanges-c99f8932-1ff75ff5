@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -70,7 +70,7 @@ const ForestTokenSystem = () => {
   const [stakingAmount, setStakingAmount] = useState("");
   const [votingPower, setVotingPower] = useState(0);
 
-  const tokenBalances: TokenBalance[] = [
+  const tokenBalances: TokenBalance[] = useMemo(() => [
     {
       type: 'impact',
       symbol: 'IMPACT',
@@ -116,7 +116,7 @@ const ForestTokenSystem = () => {
       staked: 0,
       rewards: 0
     }
-  ];
+  ], []);
 
   const stakingPools: StakingPool[] = [
     {
@@ -252,7 +252,7 @@ const ForestTokenSystem = () => {
     if (governanceTokens) {
       setVotingPower(governanceTokens.balance + governanceTokens.staked);
     }
-  }, []);
+  }, [tokenBalances]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -95,7 +95,7 @@ const PartnershipManagement = () => {
   const [filterType, setFilterType] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const partners: Partner[] = [
+  const partners: Partner[] = useMemo(() => [
     {
       id: 'usfs-001',
       name: 'US Forest Service',
@@ -201,7 +201,7 @@ const PartnershipManagement = () => {
       current_projects: [],
       performance_score: 0
     }
-  ];
+  ], []);
 
   const partnerships: Partnership[] = [
     {

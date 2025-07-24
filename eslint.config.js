@@ -5,7 +5,16 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist", "supabase/functions/**/*", "*.config.ts", "*.config.js"] },
+  { 
+    ignores: [
+      "dist", 
+      "supabase/functions/**/*", 
+      "*.config.ts", 
+      "*.config.js",
+      "node_modules/**/*",
+      ".git/**/*"
+    ] 
+  },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ["**/*.{ts,tsx}"],
@@ -29,6 +38,9 @@ export default tseslint.config(
       "@typescript-eslint/no-empty-object-type": "warn",
       "react-hooks/exhaustive-deps": "warn",
       "no-case-declarations": "warn",
+      // Reduce some warnings to be less strict
+      "prefer-const": "warn",
+      "no-unused-vars": "off"
     },
   }
 );

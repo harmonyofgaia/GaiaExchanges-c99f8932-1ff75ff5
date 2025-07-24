@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -167,7 +167,7 @@ const ImpactMeasurementSystem = () => {
     }
   ];
 
-  const carbonCredits: CarbonCredit[] = [
+  const carbonCredits: CarbonCredit[] = useMemo(() => [
     {
       id: 'cc-001',
       project_name: 'California Redwood Protection',
@@ -204,9 +204,9 @@ const ImpactMeasurementSystem = () => {
       price_per_credit: 0,
       buyer: 'Pending'
     }
-  ];
+  ], []);
 
-  const verificationRecords: VerificationRecord[] = [
+  const verificationRecords: VerificationRecord[] = useMemo(() => [
     {
       id: 'vr-001',
       metric: 'Forest Area Protected',
@@ -240,7 +240,7 @@ const ImpactMeasurementSystem = () => {
       evidence_links: ['community-survey-results.pdf', 'field-assessment.docx'],
       blockchain_hash: '0x3c4d5e6f7890ab12567890abcdef1234567890abcd'
     }
-  ];
+  ], []);
 
   const sdgAlignments: SDGAlignment[] = [
     {

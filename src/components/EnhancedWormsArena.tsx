@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -58,7 +58,7 @@ interface WeaponItem {
   name: string
   damage: number
   cost: number
-  icon: any
+  icon: React.ComponentType<{ className?: string; size?: number | string }>
   description: string
   special: string
 }
