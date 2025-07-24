@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useSecureAdmin } from '@/hooks/useSecureAdmin'
@@ -9,11 +10,26 @@ import { toast } from 'sonner'
  * Ensures exclusive admin access and GAIA token verification
  */
 export function AdminSessionManager() {
-  const navigate = useNavigate()
-  const location = useLocation()
+  // Add router context check
+  let navigate, location
+  
+  try {
+    navigate = useNavigate()
+    location = useLocation()
+  } catch (error) {
+    console.log('🔄 AdminSessionManager: Router context not ready, skipping navigation hooks')
+    return null
+  }
+
   const { isAdmin, adminSession } = useSecureAdmin()
 
   useEffect(() => {
+    // Only proceed if we have both navigate and location
+    if (!navigate || !location) {
+      console.log('🔄 AdminSessionManager: Navigation hooks not available')
+      return
+    }
+
     const enforceAdminExclusivity = () => {
       const currentPath = location.pathname
       const isAdminPath = currentPath.startsWith('/admin') || currentPath.startsWith('/secure-')
@@ -65,7 +81,7 @@ export function AdminSessionManager() {
     enforceAdminExclusivity()
 
     return () => clearInterval(sessionMonitoringInterval)
-  }, [location.pathname, isAdmin, adminSession, navigate])
+  }, [location?.pathname, isAdmin, adminSession, navigate])
 
   // Component is invisible - just manages session security
   return null
