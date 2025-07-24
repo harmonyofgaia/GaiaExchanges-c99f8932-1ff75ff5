@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { UltimateAdminSuite } from '@/components/admin/UltimateAdminSuite'
 import { MasterAdminControlCenter } from '@/components/admin/MasterAdminControlCenter'
 import { DragonAIDefense } from '@/components/admin/DragonAIDefense'
@@ -29,6 +30,12 @@ import { EnhancedAdminMenu } from '@/components/admin/EnhancedAdminMenu'
 import { AdvancedSecurityCenter } from '@/components/admin/AdvancedSecurityCenter'
 import { GlobalCommandCenter } from '@/components/admin/GlobalCommandCenter'
 import { EinsteinCopilotDashboard } from '@/components/admin/copilot/EinsteinCopilotDashboard'
+import { ComprehensiveDefenseOverview } from '@/components/admin/ComprehensiveDefenseOverview'
+import { AIDefenseAnimals } from '@/components/admin/AIDefenseAnimals'
+import { DefenseCreatureArmy } from '@/components/admin/DefenseCreatureArmy'
+import { ImmortalDefenseCore } from '@/components/admin/ImmortalDefenseCore'
+import { UltimateDefensiveBarrier } from '@/components/admin/UltimateDefensiveBarrier'
+import { ActionLedgerControlPanel } from '@/components/admin/ActionLedgerControlPanel'
 
 export function SecureAdminDashboard() {
   return (
@@ -49,7 +56,7 @@ export function SecureAdminDashboard() {
         </div>
 
         <Tabs defaultValue="copilot" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-1 h-auto p-1 text-xs">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-1 h-auto p-1 text-xs">
             <TabsTrigger value="copilot" className="p-2 text-center">
               <div className="flex flex-col items-center">
                 <span>🧠</span>
@@ -62,9 +69,39 @@ export function SecureAdminDashboard() {
                 <span className="hidden sm:inline">Dashboard</span>
               </div>
             </TabsTrigger>
-            <TabsTrigger value="security" className="p-2 text-center">
+            <TabsTrigger value="defense-overview" className="p-2 text-center">
               <div className="flex flex-col items-center">
                 <span>🛡️</span>
+                <span className="hidden sm:inline">Overview</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="defense-animals" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🛡️</span>
+                <span className="hidden sm:inline">AI Animals</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="creature-army" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>⚔️</span>
+                <span className="hidden sm:inline">Army</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="immortal-core" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>♾️</span>
+                <span className="hidden sm:inline">Immortal</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="defense-barrier" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🔮</span>
+                <span className="hidden sm:inline">Barrier</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="security" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🔒</span>
                 <span className="hidden sm:inline">Security</span>
               </div>
             </TabsTrigger>
@@ -200,6 +237,12 @@ export function SecureAdminDashboard() {
                 <span className="hidden sm:inline">Psycho</span>
               </div>
             </TabsTrigger>
+            <TabsTrigger value="action-ledger" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>📋</span>
+                <span className="hidden sm:inline">Action Ledger</span>
+              </div>
+            </TabsTrigger>
           </TabsList>
 
           <div className="mt-4">
@@ -209,6 +252,37 @@ export function SecureAdminDashboard() {
 
             <TabsContent value="dashboard" className="mt-0">
               <AdminDashboard />
+            </TabsContent>
+
+            <TabsContent value="defense-overview" className="mt-0">
+              <ComprehensiveDefenseOverview />
+            </TabsContent>
+
+            <TabsContent value="defense-animals" className="mt-0">
+              <AIDefenseAnimals />
+            </TabsContent>
+
+            <TabsContent value="creature-army" className="mt-0">
+              <DefenseCreatureArmy />
+            </TabsContent>
+
+            <TabsContent value="immortal-core" className="mt-0">
+              <div className="space-y-6">
+                <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-indigo-900/30">
+                  <CardHeader>
+                    <CardTitle className="text-purple-400 flex items-center gap-2">
+                      ♾️ Immortal Defense Core - Management Interface
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ImmortalDefenseCore />
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="defense-barrier" className="mt-0">
+              <UltimateDefensiveBarrier />
             </TabsContent>
 
             <TabsContent value="security" className="mt-0">
@@ -301,6 +375,10 @@ export function SecureAdminDashboard() {
 
             <TabsContent value="psycho" className="mt-0">
               <PsychohistoricalEngine />
+            </TabsContent>
+
+            <TabsContent value="action-ledger" className="mt-0">
+              <ActionLedgerControlPanel />
             </TabsContent>
           </div>
         </Tabs>
