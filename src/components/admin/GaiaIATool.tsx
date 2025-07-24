@@ -882,7 +882,7 @@ export function GaiaIATool() {
       </Alert>
 
       <Tabs defaultValue="analytics" className="w-full">
-        <TabsList className="grid w-full grid-cols-7">
+        <TabsList className="grid w-full sm:grid-cols-7 grid-cols-2 gap-2 flex-wrap">
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="search">Global Search</TabsTrigger>
           <TabsTrigger value="tokens">Tokens</TabsTrigger>
