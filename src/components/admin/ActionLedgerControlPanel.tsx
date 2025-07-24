@@ -160,7 +160,7 @@ export function ActionLedgerControlPanel() {
     setActionLogs(prev => 
       prev.map(log => {
         const actionTime = new Date(log.timestamp).getTime()
-        const oneHourAgo = Date.now() - 3600000
+        const oneHourAgo = Date.now() - ONE_HOUR_IN_MS
         return actionTime > oneHourAgo && log.reversible
           ? { ...log, status: 'reversed' as const }
           : log
