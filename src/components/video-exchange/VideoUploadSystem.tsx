@@ -86,14 +86,16 @@ export function VideoUploadSystem() {
     e.preventDefault()
     setIsDragOver(false)
     const files = Array.from(e.dataTransfer.files).filter(file => 
-      file.type.startsWith('video/')
+      isValidVideoFile(file)
     )
     handleFileUpload(files)
   }
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const files = Array.from(e.target.files)
+      const files = Array.from(e.target.files).filter(file => 
+        isValidVideoFile(file)
+      )
       handleFileUpload(files)
     }
   }
