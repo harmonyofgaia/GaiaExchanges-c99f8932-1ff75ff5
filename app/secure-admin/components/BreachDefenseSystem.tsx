@@ -61,10 +61,25 @@ export function BreachDefenseSystem({ layers, onLayerActivation, authenticated =
     // Monitor session integrity and detect potential hijack attempts
     const monitorSession = () => {
       const userAgent = navigator.userAgent
+      const [ip, setIp] = useState<string | null>(null)
+
+      useEffect(() => {
+        const fetchIp = async () => {
+          try {
+            const response = await fetch('https://api.ipify.org?format=json')
+            const data = await response.json()
+            setIp(data.ip)
+          } catch (error) {
+            console.error('[SECURITY] Failed to fetch IP address:', error)
+          }
+        }
+        fetchIp()
+      }, [])
+
       const sessionData = {
         timestamp: Date.now(),
         userAgent,
-        ip: 'PROTECTED', // In production, this would be the actual IP
+        ip: ip || 'UNKNOWN', // Fallback to 'UNKNOWN' if IP is not available
       }
       
       // Anti-hijack mechanism - validate session consistency
