@@ -28,6 +28,7 @@ import { DeploymentAutomation } from '@/components/deployment/DeploymentAutomati
 import { EnhancedAdminMenu } from '@/components/admin/EnhancedAdminMenu'
 import { AdvancedSecurityCenter } from '@/components/admin/AdvancedSecurityCenter'
 import { GlobalCommandCenter } from '@/components/admin/GlobalCommandCenter'
+import { ActionLedgerControlPanel } from '@/components/admin/ActionLedgerControlPanel'
 
 export function SecureAdminDashboard() {
   return (
@@ -193,6 +194,12 @@ export function SecureAdminDashboard() {
                 <span className="hidden sm:inline">Psycho</span>
               </div>
             </TabsTrigger>
+            <TabsTrigger value="action-ledger" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>📋</span>
+                <span className="hidden sm:inline">Action Ledger</span>
+              </div>
+            </TabsTrigger>
           </TabsList>
 
           <div className="mt-4">
@@ -290,6 +297,10 @@ export function SecureAdminDashboard() {
 
             <TabsContent value="psycho" className="mt-0">
               <PsychohistoricalEngine />
+            </TabsContent>
+
+            <TabsContent value="action-ledger" className="mt-0">
+              <ActionLedgerControlPanel />
             </TabsContent>
           </div>
         </Tabs>
