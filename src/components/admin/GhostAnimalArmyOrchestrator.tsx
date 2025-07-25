@@ -100,44 +100,8 @@ export function GhostAnimalArmyOrchestrator() {
     setGhostAnimals(initialAnimals)
   }, [])
 
-  // Real-time threat monitoring simulation
-  useEffect(() => {
-    if (!isActive) return
-
-    const monitorThreats = setInterval(() => {
-      // Simulate threat detection (5% chance per interval)
-      if (Math.random() < 0.05) {
-        const newThreat: ThreatData = {
-          id: `threat-${Date.now()}`,
-          timestamp: Date.now(),
-          severity: Math.floor(Math.random() * 10) + 1,
-          type: ['SQL Injection', 'DDoS Attack', 'Malware Injection', 'Data Corruption', 'System Intrusion'][Math.floor(Math.random() * 5)],
-          location: ['Database Server', 'API Gateway', 'File System', 'Network Layer', 'User Interface'][Math.floor(Math.random() * 5)],
-          description: 'Automated threat detection triggered',
-          systemsAffected: ['Authentication', 'Data Storage', 'Network Security'][Math.floor(Math.random() * 3)],
-          attackVectors: ['Network', 'Application', 'Database'][Math.floor(Math.random() * 3)],
-          confidence: 85 + Math.random() * 15,
-          status: 'detected'
-        }
-        
-        setThreats(prev => [newThreat, ...prev.slice(0, 9)])
-        
-        // Automatically deploy ghost animals
-        if (newThreat.severity >= 3) {
-          deployGhostAnimals(newThreat)
-        }
-      }
-      
-      // Update system metrics
-      setSystemIntegrity(prev => Math.max(95, prev + (Math.random() - 0.5) * 0.5))
-      setAverageResponseTime(prev => Math.max(0.1, prev + (Math.random() - 0.5) * 0.1))
-    }, 3000)
-
-    return () => clearInterval(monitorThreats)
-  }, [isActive])
-
-  const selectGhostAnimals = useCallback((threat: ThreatData): GhostAnimal[] => {
-    const availableAnimals = ghostAnimals.filter(animal => animal.status === 'available')
+  const selectGhostAnimals = useCallback((threat: ThreatData, currentAnimals: GhostAnimal[]): GhostAnimal[] => {
+    const availableAnimals = currentAnimals.filter(animal => animal.status === 'available')
     const selectedAnimals: GhostAnimal[] = []
 
     // Select primary defender based on threat level
@@ -164,78 +128,117 @@ export function GhostAnimalArmyOrchestrator() {
     }
 
     return selectedAnimals
-  }, [ghostAnimals])
+  }, [])
 
   const deployGhostAnimals = useCallback((threat: ThreatData) => {
-    const selectedAnimals = selectGhostAnimals(threat)
-    
-    if (selectedAnimals.length === 0) {
-      toast.error('No ghost animals available for deployment!')
-      return
-    }
-
-    const deploymentTime = Math.random() * 500 + 100 // 100-600ms
-
-    // Update animal status to deployed
-    setGhostAnimals(prev => prev.map(animal => 
-      selectedAnimals.some(selected => selected.id === animal.id)
-        ? { ...animal, status: 'deployed' as const, deploymentCount: animal.deploymentCount + 1 }
-        : animal
-    ))
-
-    // Update threat status
-    setThreats(prev => prev.map(t => 
-      t.id === threat.id ? { ...t, status: 'deploying' as const } : t
-    ))
-
-    // Log deployment
-    const deploymentLog: DeploymentLog = {
-      id: `deploy-${Date.now()}`,
-      timestamp: Date.now(),
-      threatId: threat.id,
-      animalsDeployed: selectedAnimals.map(a => a.name),
-      deploymentTime,
-      status: 'ongoing',
-      threatsNeutralized: 0,
-      systemsProtected: threat.systemsAffected
-    }
-
-    setDeploymentLogs(prev => [deploymentLog, ...prev.slice(0, 19)])
-    setActiveDeployments(prev => prev + 1)
-
-    toast.success(`Deployed ${selectedAnimals.length} ghost animals in ${deploymentTime.toFixed(0)}ms`)
-
-    // Simulate threat neutralization
-    setTimeout(() => {
-      const success = Math.random() > 0.05 // 95% success rate
-
-      setThreats(prev => prev.map(t => 
-        t.id === threat.id ? { ...t, status: success ? 'resolved' : 'analyzing' } : t
-      ))
-
-      setGhostAnimals(prev => prev.map(animal => 
-        selectedAnimals.some(selected => selected.id === animal.id)
-          ? { ...animal, status: 'available' as const, successRate: success ? animal.successRate + 0.1 : animal.successRate - 0.5 }
-          : animal
-      ))
-
-      setDeploymentLogs(prev => prev.map(log => 
-        log.id === deploymentLog.id 
-          ? { ...log, status: success ? 'successful' : 'failed', threatsNeutralized: success ? 1 : 0 }
-          : log
-      ))
-
-      setActiveDeployments(prev => prev - 1)
-      if (success) {
-        setThreatsNeutralized(prev => prev + 1)
+    setGhostAnimals(currentAnimals => {
+      const selectedAnimals = selectGhostAnimals(threat, currentAnimals)
+      
+      if (selectedAnimals.length === 0) {
+        toast.error('No ghost animals available for deployment!')
+        return currentAnimals
       }
 
-      toast[success ? 'success' : 'error'](
-        success ? 'Threat successfully neutralized!' : 'Threat neutralization failed - escalating response'
-      )
-    }, deploymentTime + 2000)
+      const deploymentTime = Math.random() * 500 + 100 // 100-600ms
 
+      // Update animal status to deployed
+      const updatedAnimals = currentAnimals.map(animal => 
+        selectedAnimals.some(selected => selected.id === animal.id)
+          ? { ...animal, status: 'deployed' as const, deploymentCount: animal.deploymentCount + 1 }
+          : animal
+      )
+
+      // Update threat status
+      setThreats(prev => prev.map(t => 
+        t.id === threat.id ? { ...t, status: 'deploying' as const } : t
+      ))
+
+      // Log deployment
+      const deploymentLog: DeploymentLog = {
+        id: `deploy-${Date.now()}`,
+        timestamp: Date.now(),
+        threatId: threat.id,
+        animalsDeployed: selectedAnimals.map(a => a.name),
+        deploymentTime,
+        status: 'ongoing',
+        threatsNeutralized: 0,
+        systemsProtected: threat.systemsAffected
+      }
+
+      setDeploymentLogs(prev => [deploymentLog, ...prev.slice(0, 19)])
+      setActiveDeployments(prev => prev + 1)
+
+      toast.success(`Deployed ${selectedAnimals.length} ghost animals in ${deploymentTime.toFixed(0)}ms`)
+
+      // Simulate threat neutralization
+      setTimeout(() => {
+        const success = Math.random() > 0.05 // 95% success rate
+
+        setThreats(prev => prev.map(t => 
+          t.id === threat.id ? { ...t, status: success ? 'resolved' : 'analyzing' } : t
+        ))
+
+        setGhostAnimals(prev => prev.map(animal => 
+          selectedAnimals.some(selected => selected.id === animal.id)
+            ? { ...animal, status: 'available' as const, successRate: success ? animal.successRate + 0.1 : animal.successRate - 0.5 }
+            : animal
+        ))
+
+        setDeploymentLogs(prev => prev.map(log => 
+          log.id === deploymentLog.id 
+            ? { ...log, status: success ? 'successful' : 'failed', threatsNeutralized: success ? 1 : 0 }
+            : log
+        ))
+
+        setActiveDeployments(prev => prev - 1)
+        if (success) {
+          setThreatsNeutralized(prev => prev + 1)
+        }
+
+        toast[success ? 'success' : 'error'](
+          success ? 'Threat successfully neutralized!' : 'Threat neutralization failed - escalating response'
+        )
+      }, deploymentTime + 2000)
+
+      return updatedAnimals
+    })
   }, [selectGhostAnimals])
+
+  // Real-time threat monitoring simulation
+  useEffect(() => {
+    if (!isActive) return
+
+    const monitorThreats = setInterval(() => {
+      // Simulate threat detection (5% chance per interval)
+      if (Math.random() < 0.05) {
+        const newThreat: ThreatData = {
+          id: `threat-${Date.now()}`,
+          timestamp: Date.now(),
+          severity: Math.floor(Math.random() * 10) + 1,
+          type: ['SQL Injection', 'DDoS Attack', 'Malware Injection', 'Data Corruption', 'System Intrusion'][Math.floor(Math.random() * 5)],
+          location: ['Database Server', 'API Gateway', 'File System', 'Network Layer', 'User Interface'][Math.floor(Math.random() * 5)],
+          description: 'Automated threat detection triggered',
+          systemsAffected: [['Authentication', 'Data Storage', 'Network Security'][Math.floor(Math.random() * 3)]],
+          attackVectors: [['Network', 'Application', 'Database'][Math.floor(Math.random() * 3)]],
+          confidence: 85 + Math.random() * 15,
+          status: 'detected'
+        }
+        
+        setThreats(prev => [newThreat, ...prev.slice(0, 9)])
+        
+        // Automatically deploy ghost animals
+        if (newThreat.severity >= 3) {
+          deployGhostAnimals(newThreat)
+        }
+      }
+      
+      // Update system metrics
+      setSystemIntegrity(prev => Math.max(95, prev + (Math.random() - 0.5) * 0.5))
+      setAverageResponseTime(prev => Math.max(0.1, prev + (Math.random() - 0.5) * 0.1))
+    }, 3000)
+
+    return () => clearInterval(monitorThreats)
+  }, [isActive, deployGhostAnimals])
 
   const manualDeploy = (animalId: string) => {
     const animal = ghostAnimals.find(a => a.id === animalId)

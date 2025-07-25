@@ -165,19 +165,23 @@ export function ThreatDetectionEngine() {
       })
 
       // Update overall health
-      const healthyCount = systemMetrics.filter(m => m.status === 'healthy').length
-      const warningCount = systemMetrics.filter(m => m.status === 'warning').length
-      const criticalCount = systemMetrics.filter(m => m.status === 'critical').length
-      
-      const healthScore = (healthyCount * 100 + warningCount * 70 + criticalCount * 30) / (systemMetrics.length * 100) * 100
-      setOverallHealth(healthScore)
+      setSystemMetrics(current => {
+        const healthyCount = current.filter(m => m.status === 'healthy').length
+        const warningCount = current.filter(m => m.status === 'warning').length
+        const criticalCount = current.filter(m => m.status === 'critical').length
+        
+        const healthScore = (healthyCount * 100 + warningCount * 70 + criticalCount * 30) / (current.length * 100) * 100
+        setOverallHealth(healthScore)
+        
+        return current
+      })
 
       // Update active scans
       setActiveScans(prev => Math.max(8, Math.min(20, prev + (Math.random() - 0.5) * 3)))
     }, 2000)
 
     return () => clearInterval(monitoringInterval)
-  }, [monitoringActive, systemMetrics.length])
+  }, [monitoringActive])
 
   const getStatusColor = (status: string) => {
     switch (status) {
