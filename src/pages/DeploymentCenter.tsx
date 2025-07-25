@@ -95,7 +95,7 @@ export default function DeploymentCenter() {
                     <Badge className="bg-purple-600">Deep Learning Active</Badge>
                   </div>
                   <Button 
-                    onClick={() => toast.success('🤖 Einstein Copilot activated for deployment assistance!')}
+                    onClick={activateDeploymentAssistant}
                     className="bg-purple-600 hover:bg-purple-700"
                   >
                     <Brain className="h-4 w-4 mr-2" />
