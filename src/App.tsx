@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./components/auth/AuthProvider";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { UnauthenticatedOnlyRoute } from "./components/auth/UnauthenticatedOnlyRoute";
+import { AdminProtectedRoute } from "./components/auth/AdminProtectedRoute";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
