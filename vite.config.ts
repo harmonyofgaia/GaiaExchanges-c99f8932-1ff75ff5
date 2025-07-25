@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   define: {
-    __WS_TOKEN__: JSON.stringify(process.env.VITE_WS_TOKEN || 'default-ws-token')
+    __WS_TOKEN__: JSON.stringify(process.env.VITE_WS_TOKEN || 'default-ws-token'),
   },
   build: {
     rollupOptions: {
@@ -32,12 +32,12 @@ export default defineConfig(({ mode }) => ({
           router: ['react-router-dom'],
           supabase: ['@supabase/supabase-js'],
           query: ['@tanstack/react-query'],
-          charts: ['recharts']
-        }
-      }
+          charts: ['recharts'],
+        },
+      },
     },
     chunkSizeWarningLimit: 1000,
     target: 'esnext',
-    minify: 'esbuild'
-  }
+    minify: 'esbuild',
+  },
 }));
