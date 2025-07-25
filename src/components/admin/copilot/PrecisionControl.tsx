@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -39,7 +40,12 @@ interface ActionHistoryItem {
   error?: string;
 }
 
-export function PrecisionControl() {
+interface PrecisionControlProps {
+  actionName?: string;
+  actionId?: string;
+}
+
+export function PrecisionControl({ actionName, actionId }: PrecisionControlProps) {
   const [inputField, setInputField] = useState('');
   const [sliderValue, setSliderValue] = useState([50]);
   const [enableFeature, setEnableFeature] = useState(false);
@@ -49,14 +55,14 @@ export function PrecisionControl() {
   const [selectedDate, setSelectedDate] = React.useState<Date>();
 
   const executeAction = useCallback(async (parameters: ActionParameters) => {
-    const actionId = Date.now().toString();
+    const actionIdToUse = actionId || Date.now().toString();
     
     setActionHistory(prev => [...prev, {
-      id: actionId,
+      id: actionIdToUse,
       timestamp: new Date(),
       parameters,
       status: 'success' as const,
-      result: 'Action executed successfully'
+      result: `Action executed successfully${actionName ? ` for ${actionName}` : ''}`
     }]);
 
     try {
@@ -64,13 +70,13 @@ export function PrecisionControl() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       setActionHistory(prev => prev.map(action => 
-        action.id === actionId 
+        action.id === actionIdToUse 
           ? { ...action, status: 'success' as const, result: 'Action completed' }
           : action
       ));
     } catch (error) {
       setActionHistory(prev => prev.map(action => 
-        action.id === actionId 
+        action.id === actionIdToUse 
           ? { 
               ...action, 
               status: 'error' as const, 
@@ -79,7 +85,7 @@ export function PrecisionControl() {
           : action
       ));
     }
-  }, []);
+  }, [actionName, actionId]);
 
   const handleSubmit = () => {
     const parameters: ActionParameters = {
@@ -93,10 +99,21 @@ export function PrecisionControl() {
     executeAction(parameters);
   };
 
+  const handleOptionAChange = (checked: boolean | "indeterminate") => {
+    setOptionA(checked === true);
+  };
+
+  const handleOptionBChange = (checked: boolean | "indeterminate") => {
+    setOptionB(checked === true);
+  };
+
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Precision Control Panel</CardTitle>
+        <CardTitle>
+          Precision Control Panel
+          {actionName && <span className="text-sm text-muted-foreground ml-2">({actionName})</span>}
+        </CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
         <div className="grid gap-2">
@@ -123,11 +140,11 @@ export function PrecisionControl() {
           <Label htmlFor="enable">Enable Feature</Label>
         </div>
         <div className="flex items-center space-x-2">
-          <Checkbox id="optionA" checked={optionA} onCheckedChange={setOptionA} />
+          <Checkbox id="optionA" checked={optionA} onCheckedChange={handleOptionAChange} />
           <Label htmlFor="optionA">Option A</Label>
         </div>
         <div className="flex items-center space-x-2">
-          <Checkbox id="optionB" checked={optionB} onCheckedChange={setOptionB} />
+          <Checkbox id="optionB" checked={optionB} onCheckedChange={handleOptionBChange} />
           <Label htmlFor="optionB">Option B</Label>
         </div>
         <div className="grid gap-2">

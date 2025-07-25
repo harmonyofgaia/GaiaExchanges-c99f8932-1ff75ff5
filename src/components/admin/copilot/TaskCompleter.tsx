@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -17,17 +18,19 @@ interface Task {
 
 interface TaskCompleterProps {
   selectedTask: Task | null;
+  toolName?: string;
+  toolId?: string;
 }
 
-export function TaskCompleter({ selectedTask }: TaskCompleterProps) {
+export function TaskCompleter({ selectedTask, toolName, toolId }: TaskCompleterProps) {
   const [taskStatus, setTaskStatus] = useState(selectedTask?.status || 'pending');
   const [completionResult, setCompletionResult] = useState<string | null>(null);
   const [failureReason, setFailureReason] = useState<string | null>(null);
 
   const executeTask = useCallback(async (taskId: string) => {
-    console.log(`Executing task ${taskId}`);
+    console.log(`Executing task ${taskId}${toolName ? ` for ${toolName}` : ''}`);
     // Task execution logic here
-  }, []);
+  }, [toolName]);
 
   useEffect(() => {
     // Use executeTask in effect
@@ -60,6 +63,11 @@ export function TaskCompleter({ selectedTask }: TaskCompleterProps) {
                 <p className="text-xl font-bold text-white">
                   {selectedTask.description}
                 </p>
+                {toolName && (
+                  <p className="text-sm text-gray-500">
+                    Tool: {toolName} {toolId && `(${toolId})`}
+                  </p>
+                )}
               </div>
               <Badge className="bg-blue-600 text-white">
                 {taskStatus === 'pending' && (
