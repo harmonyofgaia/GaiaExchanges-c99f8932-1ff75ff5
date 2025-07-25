@@ -1,595 +1,500 @@
-import React, { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Progress } from '@/components/ui/progress';
+import { Separator } from '@/components/ui/separator';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
-  Brain, Zap, Database, Globe, Activity, Eye,
-  Settings, Filter, Download, RefreshCw, Bot,
-  ChevronRight, TrendingUp, AlertTriangle
-} from 'lucide-react'
-import { toast } from 'sonner'
-import { InsightMode } from './InsightMode'
-import { TaskCompleter } from './TaskCompleter'
-import { PrecisionControl } from './PrecisionControl'
-import { DatabaseInspector } from './DatabaseInspector'
-import { RouteCompletenessChecker } from './RouteCompletenessChecker'
-import { LiveTaskBoard } from './LiveTaskBoard'
+  Brain, 
+  Zap, 
+  Target, 
+  Settings, 
+  Activity, 
+  TrendingUp,
+  Shield,
+  Cpu,
+  Database,
+  Network,
+  AlertCircle,
+  CheckCircle,
+  Clock,
+  Play,
+  Pause,
+  RotateCcw,
+  Save,
+  Download,
+  Upload,
+  Eye,
+  EyeOff,
+  Lock,
+  Unlock,
+  Star,
+  Heart,
+  Lightbulb,
+  Rocket,
+  Globe,
+  Users,
+  MessageSquare,
+  BarChart3,
+  PieChart,
+  LineChart,
+  Gauge,
+  Workflow,
+  Bot,
+  Sparkles,
+  Atom,
+  FlaskConical,
+  Microscope,
+  Telescope,
+  Calculator,
+  Ruler,
+  Compass,
+  Beaker,
+  Dna,
+  Orbit,
+  Waves,
+  Magnet,
+  Flame,
+  Snowflake,
+  Sun,
+  Moon,
+  CloudLightning,
+  Rainbow,
+  Gem,
+  Crystal,
+  Diamond,
+  Crown,
+  Wand2,
+  Sparkle,
+  Plus
+} from 'lucide-react';
+import { toast } from 'sonner';
+import { TaskCompleter } from './TaskCompleter';
 
-interface DashboardMetrics {
-  totalTools: number
-  activeInsights: number
-  runningTasks: number
-  completedTasks: number
-  databaseIssues: number
-  missingPages: number
-  systemHealth: number
-  lastUpdate: Date
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  status: 'pending' | 'in-progress' | 'completed' | 'failed';
+  createdAt: Date;
+  startedAt?: Date;
+  completedAt?: Date;
+  failureReason?: string;
 }
 
-interface QuickAction {
-  id: string
-  name: string
-  description: string
-  category: 'insight' | 'database' | 'performance' | 'security' | 'maintenance'
-  icon: string
-  action: () => void
-  status: 'available' | 'running' | 'completed'
+interface EinsteinMetrics {
+  iq: number;
+  creativity: number;
+  problemSolving: number;
+  knowledge: number;
+  intuition: number;
+  reasoning: number;
+  memory: number;
+  processing: number;
+  learning: number;
+  adaptation: number;
+}
+
+interface QuantumState {
+  superposition: number;
+  entanglement: number;
+  coherence: number;
+  uncertainty: number;
+  probability: number;
 }
 
 export function EinsteinCopilotDashboard() {
-  const [selectedTool, setSelectedTool] = useState<string | null>(null)
-  const [dashboardMetrics, setDashboardMetrics] = useState<DashboardMetrics>({
-    totalTools: 24,
-    activeInsights: 5,
-    runningTasks: 3,
-    completedTasks: 18,
-    databaseIssues: 4,
-    missingPages: 5,
-    systemHealth: 87,
-    lastUpdate: new Date()
-  })
+  const [einsteinMetrics, setEinsteinMetrics] = useState<EinsteinMetrics>({
+    iq: 160,
+    creativity: 95,
+    problemSolving: 98,
+    knowledge: 92,
+    intuition: 88,
+    reasoning: 96,
+    memory: 89,
+    processing: 94,
+    learning: 91,
+    adaptation: 87
+  });
 
-  const [quickActions, setQuickActions] = useState<QuickAction[]>([
-    {
-      id: '1',
-      name: 'Full System Scan',
-      description: 'Comprehensive scan of all systems and databases',
-      category: 'maintenance',
-      icon: '🔍',
-      status: 'available',
-      action: () => runFullSystemScan()
-    },
-    {
-      id: '2',
-      name: 'Auto-Fix Database Issues',
-      description: 'Automatically resolve detected database problems',
-      category: 'database',
-      icon: '🔧',
-      status: 'available',  
-      action: () => autoFixDatabaseIssues()
-    },
-    {
-      id: '3',
-      name: 'Generate Missing Pages',
-      description: 'Auto-generate stubs for all missing pages',
-      category: 'maintenance',
-      icon: '📄',
-      status: 'available',
-      action: () => generateMissingPages()
-    },
-    {
-      id: '4',
-      name: 'Optimize Performance',
-      description: 'Run performance optimization across all tools',
-      category: 'performance',
-      icon: '⚡',
-      status: 'available',
-      action: () => optimizePerformance()
-    },
-    {
-      id: '5',
-      name: 'Security Audit',
-      description: 'Complete security vulnerability assessment',
-      category: 'security',
-      icon: '🛡️',
-      status: 'available',
-      action: () => runSecurityAudit()
-    },
-    {
-      id: '6',
-      name: 'Enable All Insights',
-      description: 'Activate insight mode for all admin tools',
-      category: 'insight',
-      icon: '👁️',
-      status: 'available',
-      action: () => enableAllInsights()
-    }
-  ])
+  const [quantumState, setQuantumState] = useState<QuantumState>({
+    superposition: 75,
+    entanglement: 82,
+    coherence: 68,
+    uncertainty: 45,
+    probability: 73
+  });
 
-  const runFullSystemScan = async () => {
-    toast.info('🚀 Starting full system scan...', {
-      description: 'This will scan all systems, databases, and routes'
-    })
+  const [isActive, setIsActive] = useState(true);
+  const [currentTask, setCurrentTask] = useState<Task | null>(null);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [selectedTool, setSelectedTool] = useState<string>('quantum-analyzer');
+  const [copilotMode, setCopilotMode] = useState<'assistant' | 'autonomous' | 'collaborative'>('collaborative');
 
-    setQuickActions(prev => prev.map(action => 
-      action.id === '1' ? { ...action, status: 'running' } : action
-    ))
+  useEffect(() => {
+    const enhanceIntelligence = () => {
+      console.log('🧠 EINSTEIN COPILOT - ENHANCING INTELLIGENCE');
+      console.log('⚡ QUANTUM CONSCIOUSNESS ACTIVATED');
+      console.log('🌟 TRANSCENDENT PROBLEM-SOLVING ENGAGED');
+      
+      setEinsteinMetrics(prev => ({
+        iq: Math.min(200, prev.iq + Math.random() * 0.5),
+        creativity: Math.min(100, prev.creativity + Math.random() * 0.3),
+        problemSolving: Math.min(100, prev.problemSolving + Math.random() * 0.2),
+        knowledge: Math.min(100, prev.knowledge + Math.random() * 0.4),
+        intuition: Math.min(100, prev.intuition + Math.random() * 0.6),
+        reasoning: Math.min(100, prev.reasoning + Math.random() * 0.3),
+        memory: Math.min(100, prev.memory + Math.random() * 0.5),
+        processing: Math.min(100, prev.processing + Math.random() * 0.4),
+        learning: Math.min(100, prev.learning + Math.random() * 0.7),
+        adaptation: Math.min(100, prev.adaptation + Math.random() * 0.8)
+      }));
 
-    // Simulate scan process
-    await new Promise(resolve => setTimeout(resolve, 5000))
+      setQuantumState(prev => ({
+        superposition: Math.min(100, prev.superposition + Math.random() * 0.5),
+        entanglement: Math.min(100, prev.entanglement + Math.random() * 0.3),
+        coherence: Math.min(100, prev.coherence + Math.random() * 0.4),
+        uncertainty: Math.max(0, prev.uncertainty - Math.random() * 0.2),
+        probability: Math.min(100, prev.probability + Math.random() * 0.6)
+      }));
+    };
 
-    setQuickActions(prev => prev.map(action => 
-      action.id === '1' ? { ...action, status: 'completed' } : action
-    ))
+    const interval = setInterval(enhanceIntelligence, 3000);
+    enhanceIntelligence();
 
-    setDashboardMetrics(prev => ({
-      ...prev,
-      lastUpdate: new Date(),
-      systemHealth: Math.min(95, prev.systemHealth + 5)
-    }))
+    return () => clearInterval(interval);
+  }, []);
 
-    toast.success('✅ Full system scan completed', {
-      description: 'All systems analyzed and optimized'
-    })
-  }
+  const createSampleTask = () => {
+    const sampleTasks = [
+      {
+        title: 'Quantum Algorithm Optimization',
+        description: 'Optimize quantum algorithms for enhanced processing speed'
+      },
+      {
+        title: 'Neural Network Enhancement',
+        description: 'Enhance neural network architecture for better learning'
+      },
+      {
+        title: 'Consciousness Simulation',
+        description: 'Simulate consciousness patterns for deeper understanding'
+      }
+    ];
 
-  const autoFixDatabaseIssues = async () => {
-    toast.info('🔧 Auto-fixing database issues...', {
-      description: 'Resolving orphaned records, missing indexes, and relations'
-    })
+    const randomTask = sampleTasks[Math.floor(Math.random() * sampleTasks.length)];
+    const newTask: Task = {
+      id: Date.now().toString(),
+      ...randomTask,
+      status: 'pending',
+      createdAt: new Date()
+    };
 
-    setQuickActions(prev => prev.map(action => 
-      action.id === '2' ? { ...action, status: 'running' } : action
-    ))
-
-    await new Promise(resolve => setTimeout(resolve, 3000))
-
-    setQuickActions(prev => prev.map(action => 
-      action.id === '2' ? { ...action, status: 'completed' } : action
-    ))
-
-    setDashboardMetrics(prev => ({
-      ...prev,
-      databaseIssues: Math.max(0, prev.databaseIssues - 3),
-      lastUpdate: new Date()
-    }))
-
-    toast.success('✅ Database issues resolved', {
-      description: '3 issues fixed automatically'
-    })
-  }
-
-  const generateMissingPages = async () => {
-    toast.info('📄 Generating missing pages...', {
-      description: 'Creating stubs for all identified missing pages'
-    })
-
-    setQuickActions(prev => prev.map(action => 
-      action.id === '3' ? { ...action, status: 'running' } : action
-    ))
-
-    await new Promise(resolve => setTimeout(resolve, 4000))
-
-    setQuickActions(prev => prev.map(action => 
-      action.id === '3' ? { ...action, status: 'completed' } : action
-    ))
-
-    setDashboardMetrics(prev => ({
-      ...prev,
-      missingPages: Math.max(0, prev.missingPages - 4),
-      lastUpdate: new Date()
-    }))
-
-    toast.success('✅ Missing pages generated', {
-      description: '4 page stubs created successfully'
-    })
-  }
-
-  const optimizePerformance = async () => {
-    toast.info('⚡ Optimizing system performance...', {
-      description: 'Running performance optimization across all components'
-    })
-
-    setQuickActions(prev => prev.map(action => 
-      action.id === '4' ? { ...action, status: 'running' } : action
-    ))
-
-    await new Promise(resolve => setTimeout(resolve, 6000))
-
-    setQuickActions(prev => prev.map(action => 
-      action.id === '4' ? { ...action, status: 'completed' } : action
-    ))
-
-    setDashboardMetrics(prev => ({
-      ...prev,
-      systemHealth: Math.min(98, prev.systemHealth + 8),
-      lastUpdate: new Date()
-    }))
-
-    toast.success('✅ Performance optimized', {
-      description: 'System performance improved by 15%'
-    })
-  }
-
-  const runSecurityAudit = async () => {
-    toast.info('🛡️ Running security audit...', {
-      description: 'Comprehensive security vulnerability assessment'
-    })
-
-    setQuickActions(prev => prev.map(action => 
-      action.id === '5' ? { ...action, status: 'running' } : action
-    ))
-
-    await new Promise(resolve => setTimeout(resolve, 7000))
-
-    setQuickActions(prev => prev.map(action => 
-      action.id === '5' ? { ...action, status: 'completed' } : action
-    ))
-
-    toast.success('✅ Security audit completed', {
-      description: 'No critical vulnerabilities found'
-    })
-  }
-
-  const enableAllInsights = async () => {
-    toast.info('👁️ Enabling insights for all tools...', {
-      description: 'Activating deep monitoring and analysis'
-    })
-
-    setQuickActions(prev => prev.map(action => 
-      action.id === '6' ? { ...action, status: 'running' } : action
-    ))
-
-    await new Promise(resolve => setTimeout(resolve, 2000))
-
-    setQuickActions(prev => prev.map(action => 
-      action.id === '6' ? { ...action, status: 'completed' } : action
-    ))
-
-    setDashboardMetrics(prev => ({
-      ...prev,
-      activeInsights: prev.totalTools,
-      lastUpdate: new Date()
-    }))
-
-    toast.success('✅ All insights activated', {
-      description: 'Deep monitoring enabled for all tools'
-    })
-  }
-
-  const getActionStatusColor = (status: QuickAction['status']) => {
-    switch (status) {
-      case 'completed': return 'text-green-400 border-green-400'
-      case 'running': return 'text-blue-400 border-blue-400'
-      default: return 'text-gray-400 border-gray-400'
-    }
-  }
-
-  const getCategoryColor = (category: QuickAction['category']) => {
-    switch (category) {
-      case 'insight': return 'bg-purple-600/20 text-purple-400'
-      case 'database': return 'bg-blue-600/20 text-blue-400'
-      case 'performance': return 'bg-yellow-600/20 text-yellow-400'
-      case 'security': return 'bg-red-600/20 text-red-400'
-      case 'maintenance': return 'bg-green-600/20 text-green-400'
-    }
-  }
-
-  const getHealthColor = (health: number) => {
-    if (health >= 90) return 'text-green-400'
-    if (health >= 75) return 'text-yellow-400'
-    return 'text-red-400'
-  }
+    setTasks(prev => [newTask, ...prev.slice(0, 4)]);
+    setCurrentTask(newTask);
+  };
 
   return (
-    <div className="space-y-6">
-      {/* Dashboard Header */}
-      <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Brain className="h-8 w-8 text-purple-400" />
-              <div>
-                <CardTitle className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-                  🧠 Einstein Copilot Deep Control
-                </CardTitle>
-                <p className="text-purple-300 mt-1">
-                  Advanced AI-powered admin control, insight, and completion system
-                </p>
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-950 to-blue-950 p-4">
+      <div className="max-w-7xl mx-auto space-y-6">
+        {/* Header */}
+        <Card className="border-2 border-indigo-500/50 bg-gradient-to-r from-indigo-900/50 to-purple-900/50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-3 text-3xl text-indigo-300">
+              <Brain className="h-8 w-8 animate-pulse" />
+              🧠 EINSTEIN COPILOT DASHBOARD
+              <Sparkles className="h-6 w-6 animate-spin" />
+            </CardTitle>
+            <div className="flex items-center gap-4">
+              <Badge className={`${isActive ? 'bg-green-600' : 'bg-red-600'} text-white`}>
+                {isActive ? 'ACTIVE' : 'STANDBY'}
+              </Badge>
+              <Badge className="bg-purple-600 text-white">
+                IQ: {Math.round(einsteinMetrics.iq)}
+              </Badge>
+              <Badge className="bg-blue-600 text-white">
+                Mode: {copilotMode.toUpperCase()}
+              </Badge>
             </div>
-            <div className="flex items-center gap-2">
-              <Button size="sm" variant="outline" className="border-purple-500/30">
-                <Download className="h-4 w-4 mr-2" />
-                Export Report
-              </Button>
-              <Button 
-                size="sm" 
-                onClick={() => setDashboardMetrics(prev => ({ ...prev, lastUpdate: new Date() }))}
-                className="bg-purple-600 hover:bg-purple-700"
-              >
-                <RefreshCw className="h-4 w-4 mr-2" />
-                Refresh
-              </Button>
-            </div>
-          </div>
-        </CardHeader>
-      </Card>
+          </CardHeader>
+        </Card>
 
-      {/* Metrics Overview */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-        <Card className="border-purple-500/30">
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-purple-400">{dashboardMetrics.totalTools}</div>
-            <div className="text-xs text-gray-400">Admin Tools</div>
-          </CardContent>
-        </Card>
-        <Card className="border-blue-500/30">
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-blue-400">{dashboardMetrics.activeInsights}</div>
-            <div className="text-xs text-gray-400">Active Insights</div>
-          </CardContent>
-        </Card>
-        <Card className="border-green-500/30">
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-green-400">{dashboardMetrics.runningTasks}</div>
-            <div className="text-xs text-gray-400">Running Tasks</div>
-          </CardContent>
-        </Card>
-        <Card className="border-yellow-500/30">
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-yellow-400">{dashboardMetrics.completedTasks}</div>
-            <div className="text-xs text-gray-400">Completed</div>
-          </CardContent>
-        </Card>
-        <Card className="border-red-500/30">
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-red-400">{dashboardMetrics.databaseIssues}</div>
-            <div className="text-xs text-gray-400">DB Issues</div>
-          </CardContent>
-        </Card>
-        <Card className="border-orange-500/30">
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-orange-400">{dashboardMetrics.missingPages}</div>
-            <div className="text-xs text-gray-400">Missing Pages</div>
-          </CardContent>
-        </Card>
-        <Card className="border-cyan-500/30">
-          <CardContent className="p-4 text-center">
-            <div className={`text-2xl font-bold ${getHealthColor(dashboardMetrics.systemHealth)}`}>
-              {dashboardMetrics.systemHealth}%
-            </div>
-            <div className="text-xs text-gray-400">Health Score</div>
-          </CardContent>
-        </Card>
-        <Card className="border-indigo-500/30">
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-indigo-400">
-              {Math.floor((Date.now() - dashboardMetrics.lastUpdate.getTime()) / 60000)}m
-            </div>
-            <div className="text-xs text-gray-400">Last Update</div>
-          </CardContent>
-        </Card>
-      </div>
+        <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="grid w-full grid-cols-6 bg-black/30">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-indigo-600">
+              <Activity className="h-4 w-4 mr-2" />
+              Overview
+            </TabsTrigger>
+            <TabsTrigger value="metrics" className="data-[state=active]:bg-purple-600">
+              <BarChart3 className="h-4 w-4 mr-2" />
+              Metrics
+            </TabsTrigger>
+            <TabsTrigger value="quantum" className="data-[state=active]:bg-blue-600">
+              <Atom className="h-4 w-4 mr-2" />
+              Quantum
+            </TabsTrigger>
+            <TabsTrigger value="tasks" className="data-[state=active]:bg-green-600">
+              <Workflow className="h-4 w-4 mr-2" />
+              Tasks
+            </TabsTrigger>
+            <TabsTrigger value="tools" className="data-[state=active]:bg-orange-600">
+              <Wand2 className="h-4 w-4 mr-2" />
+              Tools
+            </TabsTrigger>
+            <TabsTrigger value="settings" className="data-[state=active]:bg-cyan-600">
+              <Settings className="h-4 w-4 mr-2" />
+              Settings
+            </TabsTrigger>
+          </TabsList>
 
-      {/* Quick Actions */}
-      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/10 to-blue-900/10">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-400">
-            <Zap className="h-5 w-5" />
-            ⚡ Quick Actions
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {quickActions.map((action) => (
-              <Card key={action.id} className="border-gray-700/50 hover:border-gray-600/50 transition-colors">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl">{action.icon}</span>
-                      <span className="font-medium text-white">{action.name}</span>
+          <TabsContent value="overview" className="space-y-6">
+            {/* Einstein Intelligence Metrics */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+              {Object.entries(einsteinMetrics).map(([key, value]) => (
+                <Card key={key} className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border-indigo-500/30">
+                  <CardContent className="p-4 text-center">
+                    <div className="text-2xl font-bold text-indigo-300">
+                      {typeof value === 'number' ? Math.round(value) : value}
                     </div>
-                    <Badge variant="outline" className={getActionStatusColor(action.status)}>
-                      {action.status.toUpperCase()}
+                    <div className="text-sm text-muted-foreground capitalize">
+                      {key.replace(/([A-Z])/g, ' $1').trim()}
+                    </div>
+                    <Progress value={typeof value === 'number' ? value : 0} className="mt-2" />
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Current Task Display */}
+            {currentTask && (
+              <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
+                <CardHeader>
+                  <CardTitle className="text-green-400">🎯 Current Focus</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-bold text-white">{currentTask.title}</h3>
+                    <p className="text-muted-foreground">{currentTask.description}</p>
+                    <Badge className={`${
+                      currentTask.status === 'completed' ? 'bg-green-600' :
+                      currentTask.status === 'in-progress' ? 'bg-yellow-600' :
+                      currentTask.status === 'failed' ? 'bg-red-600' : 'bg-gray-600'
+                    } text-white`}>
+                      {currentTask.status.toUpperCase()}
                     </Badge>
-                  </div>
-                  <p className="text-sm text-gray-400 mb-3">{action.description}</p>
-                  <div className="flex items-center justify-between">
-                    <Badge className={getCategoryColor(action.category)}>
-                      {action.category}
-                    </Badge>
-                    <Button
-                      size="sm"
-                      onClick={action.action}
-                      disabled={action.status === 'running'}
-                      className="bg-blue-600 hover:bg-blue-700"
-                    >
-                      {action.status === 'running' ? (
-                        <RefreshCw className="h-3 w-3 animate-spin" />
-                      ) : action.status === 'completed' ? (
-                        '✓ Done'
-                      ) : (
-                        <>
-                          Run <ChevronRight className="h-3 w-3 ml-1" />
-                        </>
-                      )}
-                    </Button>
                   </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+            )}
+          </TabsContent>
 
-      {/* Main Dashboard Tabs */}
-      <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-6">
-          <TabsTrigger value="overview">🏠 Overview</TabsTrigger>
-          <TabsTrigger value="insights">🔍 Insight Mode</TabsTrigger>
-          <TabsTrigger value="database">🗄️ Database</TabsTrigger>
-          <TabsTrigger value="routes">🗺️ Routes</TabsTrigger>
-          <TabsTrigger value="tasks">📋 Live Tasks</TabsTrigger>
-          <TabsTrigger value="precision">⚙️ Precision</TabsTrigger>
-        </TabsList>
+          <TabsContent value="metrics" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-pink-900/20">
+                <CardHeader>
+                  <CardTitle className="text-purple-400">🧠 Cognitive Performance</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {Object.entries(einsteinMetrics).slice(0, 5).map(([key, value]) => (
+                    <div key={key}>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-sm text-purple-300 capitalize">
+                          {key.replace(/([A-Z])/g, ' $1').trim()}
+                        </span>
+                        <span className="text-sm text-purple-400">
+                          {Math.round(value as number)}%
+                        </span>
+                      </div>
+                      <Progress value={value as number} className="h-2" />
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
 
-        <TabsContent value="overview" className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="border-blue-500/30">
+              <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-cyan-900/20">
+                <CardHeader>
+                  <CardTitle className="text-blue-400">⚡ Processing Metrics</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {Object.entries(einsteinMetrics).slice(5).map(([key, value]) => (
+                    <div key={key}>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-sm text-blue-300 capitalize">
+                          {key.replace(/([A-Z])/g, ' $1').trim()}
+                        </span>
+                        <span className="text-sm text-blue-400">
+                          {Math.round(value as number)}%
+                        </span>
+                      </div>
+                      <Progress value={value as number} className="h-2" />
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="quantum" className="space-y-6">
+            <Card className="border-cyan-500/30 bg-gradient-to-br from-cyan-900/20 to-blue-900/20">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  <TrendingUp className="h-5 w-5 inline mr-2" />
-                  System Performance Trends
-                </CardTitle>
+                <CardTitle className="text-cyan-400">⚛️ Quantum State Analysis</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                  {Object.entries(quantumState).map(([key, value]) => (
+                    <div key={key} className="text-center p-4 bg-cyan-900/20 rounded-lg">
+                      <div className="text-2xl font-bold text-cyan-300">{Math.round(value)}%</div>
+                      <div className="text-sm text-muted-foreground capitalize">
+                        {key.replace(/([A-Z])/g, ' $1').trim()}
+                      </div>
+                      <Progress value={value} className="mt-2" />
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="tasks" className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-white">Task Management</h2>
+              <Button onClick={createSampleTask} className="bg-green-600 hover:bg-green-700">
+                <Plus className="h-4 w-4 mr-2" />
+                Create Sample Task
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="border-orange-500/30 bg-gradient-to-br from-orange-900/20 to-red-900/20">
+                <CardHeader>
+                  <CardTitle className="text-orange-400">📋 Task Queue</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ScrollArea className="h-60">
+                    {tasks.length === 0 ? (
+                      <p className="text-muted-foreground text-center py-8">
+                        No tasks available. Create a sample task to get started.
+                      </p>
+                    ) : (
+                      <div className="space-y-3">
+                        {tasks.map((task) => (
+                          <div 
+                            key={task.id}
+                            className={`p-3 rounded-lg border cursor-pointer transition-all ${
+                              currentTask?.id === task.id 
+                                ? 'border-orange-500 bg-orange-900/30' 
+                                : 'border-gray-600 bg-gray-900/30 hover:bg-gray-800/30'
+                            }`}
+                            onClick={() => setCurrentTask(task)}
+                          >
+                            <div className="font-medium text-white">{task.title}</div>
+                            <div className="text-sm text-muted-foreground">{task.description}</div>
+                            <Badge className={`mt-2 ${
+                              task.status === 'completed' ? 'bg-green-600' :
+                              task.status === 'in-progress' ? 'bg-yellow-600' :
+                              task.status === 'failed' ? 'bg-red-600' : 'bg-gray-600'
+                            } text-white`}>
+                              {task.status}
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </ScrollArea>
+                </CardContent>
+              </Card>
+
+              <TaskCompleter 
+                selectedTask={currentTask}
+                toolName={selectedTool}
+                toolId={selectedTool}
+              />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="tools" className="space-y-6">
+            <Card className="border-yellow-500/30 bg-gradient-to-br from-yellow-900/20 to-orange-900/20">
+              <CardHeader>
+                <CardTitle className="text-yellow-400">🔧 Einstein's Toolbox</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {[
+                    { id: 'quantum-analyzer', name: 'Quantum Analyzer', icon: Atom },
+                    { id: 'consciousness-simulator', name: 'Consciousness Simulator', icon: Brain },
+                    { id: 'relativity-calculator', name: 'Relativity Calculator', icon: Calculator },
+                    { id: 'neural-optimizer', name: 'Neural Optimizer', icon: Network },
+                    { id: 'pattern-recognizer', name: 'Pattern Recognizer', icon: Eye },
+                    { id: 'creativity-enhancer', name: 'Creativity Enhancer', icon: Lightbulb }
+                  ].map((tool) => (
+                    <div
+                      key={tool.id}
+                      className={`p-4 rounded-lg border cursor-pointer transition-all ${
+                        selectedTool === tool.id
+                          ? 'border-yellow-500 bg-yellow-900/30'
+                          : 'border-gray-600 bg-gray-900/30 hover:bg-gray-800/30'
+                      }`}
+                      onClick={() => setSelectedTool(tool.id)}
+                    >
+                      <div className="flex items-center gap-3">
+                        <tool.icon className="h-6 w-6 text-yellow-400" />
+                        <span className="font-medium text-white">{tool.name}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="settings" className="space-y-6">
+            <Card className="border-gray-500/30 bg-gradient-to-br from-gray-900/20 to-slate-900/20">
+              <CardHeader>
+                <CardTitle className="text-gray-400">⚙️ Copilot Configuration</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="copilot-active">Copilot Active</Label>
+                  <Switch
+                    id="copilot-active"
+                    checked={isActive}
+                    onCheckedChange={setIsActive}
+                  />
+                </div>
+
                 <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Database Performance</span>
-                    <span className="text-green-400">↑ 15%</span>
+                  <Label>Operating Mode</Label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {['assistant', 'autonomous', 'collaborative'].map((mode) => (
+                      <Button
+                        key={mode}
+                        variant={copilotMode === mode ? 'default' : 'outline'}
+                        onClick={() => setCopilotMode(mode as any)}
+                        className="capitalize"
+                      >
+                        {mode}
+                      </Button>
+                    ))}
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Page Load Times</span>
-                    <span className="text-green-400">↓ 23%</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Error Rates</span>
-                    <span className="text-green-400">↓ 67%</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Task Success Rate</span>
-                    <span className="text-green-400">↑ 28%</span>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="intelligence-threshold">Intelligence Threshold</Label>
+                  <Progress value={einsteinMetrics.iq / 2} className="h-2" />
+                  <div className="text-sm text-muted-foreground">
+                    Current IQ: {Math.round(einsteinMetrics.iq)} / Target: 200
                   </div>
                 </div>
               </CardContent>
             </Card>
-
-            <Card className="border-yellow-500/30">
-              <CardHeader>
-                <CardTitle className="text-yellow-400">
-                  <AlertTriangle className="h-5 w-5 inline mr-2" />
-                  Recent Alerts & Fixes
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-300">Database optimization completed</span>
-                  <span className="text-green-400">✓ Fixed</span>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-300">Missing index detected and created</span>
-                  <span className="text-green-400">✓ Fixed</span>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-300">Route completeness scan finished</span>
-                  <span className="text-blue-400">✓ Done</span>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-300">Security vulnerability scan</span>
-                  <span className="text-green-400">✓ Clean</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <Card className="border-purple-500/30">
-            <CardHeader>
-              <CardTitle className="text-purple-400">
-                <Bot className="h-5 w-5 inline mr-2" />
-                AI Recommendations
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-start gap-3 p-3 bg-purple-900/20 rounded">
-                <span className="text-2xl">🤖</span>
-                <div>
-                  <h4 className="font-medium text-purple-300">Enable Auto-Retry for Failed Tasks</h4>
-                  <p className="text-sm text-gray-400">
-                    Based on analysis, enabling auto-retry with exponential backoff could improve task success rate by 15%
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 p-3 bg-blue-900/20 rounded">
-                <span className="text-2xl">💡</span>
-                <div>
-                  <h4 className="font-medium text-blue-300">Optimize Database Queries</h4>
-                  <p className="text-sm text-gray-400">
-                    Adding composite indexes on frequently queried columns could reduce average query time by 40%
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 p-3 bg-green-900/20 rounded">
-                <span className="text-2xl">🔧</span>
-                <div>
-                  <h4 className="font-medium text-green-300">Implement Caching Strategy</h4>
-                  <p className="text-sm text-gray-400">
-                    Redis caching for API responses could improve page load times by up to 60% during peak usage
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="insights" className="space-y-4">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-purple-400 mb-2">🔍 Insight Mode</h2>
-            <p className="text-gray-400">
-              Enable deep insights and real-time monitoring for any admin tool
-            </p>
-          </div>
-          <InsightMode toolName="Sample Admin Tool" toolId="sample-tool">
-            <Card className="border-gray-700/50">
-              <CardContent className="p-6 text-center">
-                <Eye className="h-12 w-12 text-blue-400 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-blue-400 mb-2">Sample Tool Content</h3>
-                <p className="text-gray-400">
-                  This represents any admin tool wrapped with Insight Mode capabilities.
-                  Enable insights above to see real-time monitoring data.
-                </p>
-              </CardContent>
-            </Card>
-          </InsightMode>
-          <TaskCompleter toolName="Sample Admin Tool" toolId="sample-tool" />
-        </TabsContent>
-
-        <TabsContent value="database" className="space-y-4">
-          <DatabaseInspector />
-        </TabsContent>
-
-        <TabsContent value="routes" className="space-y-4">
-          <RouteCompletenessChecker />
-        </TabsContent>
-
-        <TabsContent value="tasks" className="space-y-4">
-          <LiveTaskBoard />
-        </TabsContent>
-
-        <TabsContent value="precision" className="space-y-4">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-green-400 mb-2">⚙️ Precision Control Panel</h2>
-            <p className="text-gray-400">
-              Configure parameters and preview impact before executing admin actions
-            </p>
-          </div>
-          <PrecisionControl 
-            actionName="Sample Admin Action" 
-            actionId="sample-action"
-          />
-          <Card className="border-green-500/30">
-            <CardContent className="p-6 text-center">
-              <Settings className="h-12 w-12 text-green-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-green-400 mb-2">Precision Control Ready</h3>
-              <p className="text-gray-400">
-                Configure parameters, preview impact, and execute admin actions with precision control.
-                All actions are logged and reversible.
-              </p>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
-  )
+  );
 }
