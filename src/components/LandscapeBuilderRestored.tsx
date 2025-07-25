@@ -45,7 +45,7 @@ export function LandscapeBuilderRestored() {
   const [savedProjects, setSavedProjects] = useState<LandscapeProject[]>([])
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  const tools = [
+  const tools: { id: LandscapeElement['type']; name: string; icon: any; color: string }[] = [
     { id: 'tree', name: 'Trees', icon: TreePine, color: '#228B22' },
     { id: 'mountain', name: 'Mountains', icon: Mountain, color: '#8B4513' },
     { id: 'water', name: 'Water', icon: Waves, color: '#4169E1' },
