@@ -157,7 +157,7 @@ export function SystemVerification() {
       await new Promise(resolve => setTimeout(resolve, 800)) // Simulate check time
       
       let status: SystemCheck['status'] = 'online'
-      let responseTime = Math.floor(Math.random() * 200) + 50
+      const responseTime = Math.floor(Math.random() * 200) + 50
       let details = ''
 
       try {
