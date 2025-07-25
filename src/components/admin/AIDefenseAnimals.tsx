@@ -203,6 +203,15 @@ export function AIDefenseAnimals() {
   const [selectedAnimals, setSelectedAnimals] = useState<number[]>([])
   const [editingAnimal, setEditingAnimal] = useState<any>(null)
   const [isCreatingNew, setIsCreatingNew] = useState(false)
+  
+  // New animal form state
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [emoji, setEmoji] = useState('')
+  const [location, setLocation] = useState('')
+  const [contributors, setContributors] = useState(0)
+  const [effectiveness, setEffectiveness] = useState(0)
+  const [status, setStatus] = useState('Active')
 
   // Real-time updates
   useEffect(() => {
@@ -520,28 +529,52 @@ export function AIDefenseAnimals() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Name</Label>
-                  <Input id="animal-name" placeholder="Enter animal name..." />
+                  <Input 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter animal name..." 
+                  />
                 </div>
                 <div>
                   <Label>Emoji</Label>
-                  <Input id="animal-emoji" placeholder="🐾" />
+                  <Input 
+                    value={emoji}
+                    onChange={(e) => setEmoji(e.target.value)}
+                    placeholder="🐾" 
+                  />
                 </div>
                 <div>
                   <Label>Location</Label>
-                  <Input id="animal-location" placeholder="Global location..." />
+                  <Input 
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder="Global location..." 
+                  />
                 </div>
                 <div>
                   <Label>Contributors</Label>
-                  <Input id="animal-contributors" type="number" placeholder="1000" />
+                  <Input 
+                    value={contributors}
+                    onChange={(e) => setContributors(parseInt(e.target.value) || 0)}
+                    type="number" 
+                    placeholder="1000" 
+                  />
                 </div>
                 <div>
                   <Label>Effectiveness (%)</Label>
-                  <Input id="animal-effectiveness" type="number" min="0" max="100" placeholder="75" />
+                  <Input 
+                    value={effectiveness}
+                    onChange={(e) => setEffectiveness(parseInt(e.target.value) || 0)}
+                    type="number" 
+                    min="0" 
+                    max="100" 
+                    placeholder="75" 
+                  />
                 </div>
                 <div>
                   <Label>Status</Label>
-                  <Select defaultValue="Active">
-                    <SelectTrigger id="animal-status">
+                  <Select value={status} onValueChange={setStatus}>
+                    <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>

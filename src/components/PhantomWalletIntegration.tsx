@@ -53,6 +53,9 @@ interface TokenBalance {
 }
 
 export function PhantomWalletIntegration() {
+  // Your imported wallet address
+  const IMPORTED_WALLET = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
+
   const [connected, setConnected] = useState(false)
   const [walletAddress, setWalletAddress] = useState<string>('')
   const [accounts, setAccounts] = useState<WalletAccount[]>([])
@@ -65,9 +68,6 @@ export function PhantomWalletIntegration() {
   const [withdrawAddress, setWithdrawAddress] = useState('')
   const [loading, setLoading] = useState(false)
   const [adminMode, setAdminMode] = useState(true) // Default to admin mode for unrestricted access
-
-  // Your imported wallet address
-  const IMPORTED_WALLET = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
 
   const checkPhantomConnection = useCallback(async () => {
     if (window.solana?.isPhantom && window.solana.isConnected && window.solana.publicKey) {

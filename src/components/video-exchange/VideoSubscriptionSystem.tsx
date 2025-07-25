@@ -158,7 +158,7 @@ export function VideoSubscriptionSystem() {
     }
   ])
 
-  const [subscriptions] = useState<Subscription[]>([
+  const [subscriptions, setSubscriptions] = useState<Subscription[]>([
     {
       id: '1',
       creatorId: '1',
