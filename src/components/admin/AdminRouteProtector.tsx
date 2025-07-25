@@ -13,7 +13,14 @@ export function AdminRouteProtector() {
       const isAdminRoute = adminRoutes.some(route => location.pathname.includes(route))
       
       if (isAdminRoute) {
-        // Check for valid admin session
+        // Allow access to secure-admin for login, but protect other admin routes
+        if (location.pathname === '/secure-admin') {
+          // Allow access to the login page
+          console.log('🔓 SECURE ADMIN LOGIN ACCESS ALLOWED')
+          return
+        }
+        
+        // Check for valid admin session for other admin routes
         const adminSession = localStorage.getItem('gaia-admin-session')
         const adminActive = sessionStorage.getItem('admin-active')
         
