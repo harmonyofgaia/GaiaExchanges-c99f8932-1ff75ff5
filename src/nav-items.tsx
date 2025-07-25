@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Video, Brain } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -140,6 +140,102 @@ export const navigationItems: NavigationItem[] = [
       "Environmental Bonding"
     ],
     description: "Master Plan v7: Deep spiritual connection with nature through avatars",
+    lazyLoaded: true,
+  },
+  {
+    title: "Forest Shield",
+    to: "/forest-shield-master-plan",
+    icon: TreePine,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Sand Cannon Defense Network",
+      "AI Wildfire Detection",
+      "Blockchain Token System",
+      "Community Engagement Hub",
+      "Global Partnership Network"
+    ],
+    description: "Forest Shield Sand Cannon Wildfire Defense Master Plan",
+    lazyLoaded: true,
+  },
+  {
+    title: "Wildfire Defense",
+    to: "/wildfire-defense-dashboard",
+    icon: Flame,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Real-time Monitoring",
+      "Sand Cannon Control",
+      "IoT Sensor Network",
+      "Emergency Response",
+      "Performance Analytics"
+    ],
+    description: "Real-time wildfire defense monitoring and control dashboard",
+    lazyLoaded: true,
+  },
+  {
+    title: "Forest Tokens",
+    to: "/forest-token-system",
+    icon: Coins,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Multi-tier Token System",
+      "Staking & Rewards",
+      "DAO Governance",
+      "Impact Verification",
+      "Blockchain Integration"
+    ],
+    description: "Multi-tier blockchain token system for forest defense funding and governance",
+    lazyLoaded: true,
+  },
+  {
+    title: "Community Hub",
+    to: "/community-engagement-hub",
+    icon: Users,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Training Programs",
+      "Community Coordination",
+      "Achievement System",
+      "Challenge Participation",
+      "Global Leaderboards"
+    ],
+    description: "Community training, coordination, and engagement platform",
+    lazyLoaded: true,
+  },
+  {
+    title: "Partnerships",
+    to: "/partnership-management",
+    icon: Handshake,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Partner Directory",
+      "Collaboration Management",
+      "Partnership Analytics",
+      "Initiative Tracking",
+      "Performance Monitoring"
+    ],
+    description: "NGO, agency, and tech firm partnership coordination platform",
+    lazyLoaded: true,
+  },
+  {
+    title: "Impact Metrics",
+    to: "/impact-measurement-system",
+    icon: BarChart3,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Real-time Impact Tracking",
+      "Blockchain Verification",
+      "Carbon Credit Management",
+      "SDG Alignment Monitoring",
+      "Transparent Reporting"
+    ],
+    description: "Environmental impact tracking and verification system",
     lazyLoaded: true,
   },
   {
