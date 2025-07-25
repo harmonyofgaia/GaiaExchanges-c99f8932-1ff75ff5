@@ -18,7 +18,7 @@ interface AgeGroup {
   name: string
   ageRange: string
   description: string
-  icon: React.ComponentType<any>
+  icon: React.ComponentType<object>
   color: string
   features: string[]
   restrictions: string[]

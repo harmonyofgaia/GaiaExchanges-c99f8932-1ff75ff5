@@ -163,7 +163,7 @@ export function SystemVerification() {
       try {
         // Perform actual checks based on type
         switch (check.id) {
-          case 'supabase-db':
+          case 'supabase-db': {
             const { data, error } = await supabase.from('profiles').select('count').limit(1)
             if (error) {
               status = 'warning'
@@ -173,12 +173,14 @@ export function SystemVerification() {
               details = 'Database connection successful'
             }
             break
+          }
             
-          case 'supabase-auth':
+          case 'supabase-auth': {
             const { data: session } = await supabase.auth.getSession()
             status = 'online'
             details = 'Authentication system operational'
             break
+          }
             
           case 'main-website':
           case 'lovable-hosting':

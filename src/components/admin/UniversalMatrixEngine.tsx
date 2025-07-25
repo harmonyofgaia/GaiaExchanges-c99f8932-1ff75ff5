@@ -15,7 +15,7 @@ import {
   Eye,
   Crown,
   Atom,
-  Infinity
+  Infinity as InfinityIcon
 } from 'lucide-react'
 import { toast } from 'sonner'
 

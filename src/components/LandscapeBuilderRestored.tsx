@@ -38,7 +38,7 @@ export function LandscapeBuilderRestored() {
     timestamp: new Date()
   })
 
-  const [selectedTool, setSelectedTool] = useState<string>('tree')
+  const [selectedTool, setSelectedTool] = useState<LandscapeElement['type']>('tree')
   const [brushSize, setBrushSize] = useState([50])
   const [selectedColor, setSelectedColor] = useState('#228B22')
   const [isBuilding, setIsBuilding] = useState(false)
@@ -153,7 +153,7 @@ export function LandscapeBuilderRestored() {
 
     const newElement: LandscapeElement = {
       id: `element-${Date.now()}`,
-      type: selectedTool as any,
+      type: selectedTool,
       x,
       y,
       size: brushSize[0],

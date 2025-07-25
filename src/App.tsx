@@ -170,6 +170,11 @@ const App = () => (
                 <SecureAdmin />
               </AdminProtectedRoute>
             } />
+            <Route path="/secure-admin/video-exchange" element={
+              <AdminProtectedRoute>
+                <SecureAdmin />
+              </AdminProtectedRoute>
+            } />
             <Route path="/secure-vault" element={
               <AdminProtectedRoute>
                 <SecureVault />

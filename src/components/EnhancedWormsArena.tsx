@@ -58,7 +58,7 @@ interface WeaponItem {
   name: string
   damage: number
   cost: number
-  icon: any
+  icon: string
   description: string
   special: string
 }

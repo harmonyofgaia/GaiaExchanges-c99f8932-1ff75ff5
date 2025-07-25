@@ -11,7 +11,7 @@ import {
   Shield, 
   Target, 
   Command,
-  Infinity,
+  Infinity as InfinityIcon,
   Eye,
   Crown,
   Atom,
@@ -261,7 +261,7 @@ export function QuantumTaskEngine() {
                 disabled={isProcessing}
                 className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
               >
-                <Infinity className="h-4 w-4 mr-2" />
+                <InfinityIcon className="h-4 w-4 mr-2" />
                 Phase 4: Transcend
               </Button>
             </div>
