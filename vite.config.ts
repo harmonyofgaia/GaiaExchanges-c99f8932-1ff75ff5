@@ -1,3 +1,4 @@
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -20,6 +21,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
   define: {
-    __WS_TOKEN__: JSON.stringify(process.env.VITE_WS_TOKEN || 'default-ws-token'),
+    __WS_TOKEN__: JSON.stringify(process.env.VITE_WS_TOKEN || 'lovable-default-token'),
   },
 }));
