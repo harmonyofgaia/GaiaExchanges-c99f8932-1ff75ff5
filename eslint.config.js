@@ -41,7 +41,8 @@ export default tseslint.config(
       "no-case-declarations": "warn",
       // Reduce some warnings to be less strict
       "prefer-const": "warn",
-      "no-unused-vars": "off"
+      "no-unused-vars": "off",
+      "no-unused-expressions": "off"
     },
   }
 );

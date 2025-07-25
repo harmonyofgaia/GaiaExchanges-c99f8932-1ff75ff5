@@ -25,6 +25,10 @@ import {
 } from 'lucide-react'
 import { toast } from 'sonner'
 
+// Constants
+const REAL_TIME_INTERVAL_MS = 5000 // 5 seconds
+const ONE_HOUR_IN_MS = 60 * 60 * 1000 // 1 hour in milliseconds
+
 interface ActionLog {
   id: string
   timestamp: string

@@ -72,7 +72,7 @@ export class AddressMigrationUtility {
 
       // Recursively check nested objects
       Object.keys(obj).forEach(key => {
-        if (this.fixAddressesInObject(obj[key])) {
+        if (typeof obj[key] === 'object' && obj[key] !== null && this.fixAddressesInObject(obj[key] as Record<string, unknown>)) {
           modified = true
         }
       })
