@@ -39,17 +39,7 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
   const [errors, setErrors] = useState<LogEntry[]>([])
   const [isAutoRefresh, setIsAutoRefresh] = useState(true)
 
-  // Simulate real-time data updates
-  useEffect(() => {
-    if (!insightActive || !isAutoRefresh) return
-
-    const interval = setInterval(() => {
-      updateRealTimeData()
-    }, 2000)
-
-    return () => clearInterval(interval)
-  }, [insightActive, isAutoRefresh, updateRealTimeData])
-
+  // Define updateRealTimeData using useCallback to ensure it's defined before use
   const updateRealTimeData = useCallback(() => {
     // Simulate real-time stats
     const mockStats: StatMetric[] = [
@@ -107,6 +97,17 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
       setErrors(prev => [newLog, ...prev].slice(0, 20))
     }
   }, [toolName, toolId])
+
+  // Simulate real-time data updates
+  useEffect(() => {
+    if (!insightActive || !isAutoRefresh) return
+
+    const interval = setInterval(() => {
+      updateRealTimeData()
+    }, 2000)
+
+    return () => clearInterval(interval)
+  }, [insightActive, isAutoRefresh, updateRealTimeData])
 
   const toggleInsightMode = () => {
     setInsightActive(!insightActive)
