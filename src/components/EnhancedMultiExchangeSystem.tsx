@@ -71,7 +71,7 @@ export function EnhancedMultiExchangeSystem() {
     const updateListingProgress = () => {
       setExchanges(prev => prev.map(exchange => {
         if (exchange.autoApplyStatus === 'in-progress' && Math.random() < 0.3) {
-          const newStatus = Math.random() < 0.7 ? 'reviewing' : 'pending'
+          const newStatus: 'reviewing' | 'pending' = Math.random() < 0.7 ? 'reviewing' : 'pending'
           
           if (newStatus === 'pending' && exchange.status !== 'pending') {
             toast.success(`🚀 Progress Update: ${exchange.name}`, {
@@ -82,9 +82,9 @@ export function EnhancedMultiExchangeSystem() {
           
           return {
             ...exchange,
-            status: newStatus as ExchangeStatus,
+            status: newStatus,
             lastUpdate: new Date(),
-            autoApplyStatus: newStatus === 'pending' ? 'completed' : 'in-progress'
+            autoApplyStatus: newStatus === 'pending' ? ('completed' as AutoApplyStatus) : ('in-progress' as AutoApplyStatus)
           }
         }
         return exchange
@@ -115,7 +115,7 @@ export function EnhancedMultiExchangeSystem() {
     // Update all queued applications to in-progress
     setExchanges(prev => prev.map(exchange => ({
       ...exchange,
-      autoApplyStatus: exchange.autoApplyStatus === 'queued' ? 'in-progress' : exchange.autoApplyStatus,
+      autoApplyStatus: exchange.autoApplyStatus === 'queued' ? ('in-progress' as AutoApplyStatus) : exchange.autoApplyStatus,
       lastUpdate: new Date()
     })))
   }

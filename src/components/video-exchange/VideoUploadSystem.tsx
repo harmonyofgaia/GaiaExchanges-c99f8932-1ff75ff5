@@ -73,6 +73,12 @@ export function VideoUploadSystem() {
     'Renewable Energy', 'Education', 'Community Building', 'Wildlife Protection'
   ]
 
+  const isValidVideoFile = (file: File): boolean => {
+    const validTypes = ['video/mp4', 'video/webm', 'video/ogg', 'video/avi', 'video/mov']
+    const maxSize = 100 * 1024 * 1024 // 100MB
+    return validTypes.includes(file.type) && file.size <= maxSize
+  }
+
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault()
     setIsDragOver(true)

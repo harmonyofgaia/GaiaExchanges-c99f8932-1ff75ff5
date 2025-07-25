@@ -36,6 +36,9 @@ import { githubScanner } from '@/services/githubScanner'
 import type { ScanResult } from '@/services/githubScanner'
 import { toast } from 'sonner'
 
+// Constants
+const REAL_TIME_MONITOR_INTERVAL_MS = 45000 // 45 seconds
+
 interface SearchResult {
   id: string
   type: string
