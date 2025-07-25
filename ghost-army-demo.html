@@ -264,12 +264,19 @@
                     <div style="margin-top: 10px;">
                         <span class="status-${animal.status}">${animal.status.toUpperCase()}</span>
                     </div>
-                    <button class="deploy-button" onclick="deployAnimal(${index})" 
-                            ${animal.status !== 'available' ? 'disabled' : ''}>
+                    <button class="deploy-button" 
+                            ${animal.status !== 'available' ? 'disabled' : ''} data-index="${index}">
                         ${animal.status === 'available' ? 'Deploy' : animal.status.toUpperCase()}
                     </button>
                 </div>
             `).join('');
+
+            // Add event listeners to deploy buttons
+            const buttons = container.querySelectorAll('.deploy-button');
+            buttons.forEach(button => {
+                const index = button.getAttribute('data-index');
+                button.addEventListener('click', () => deployAnimal(Number(index)));
+            });
         }
 
         function deployAnimal(index) {
