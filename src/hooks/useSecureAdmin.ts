@@ -16,26 +16,26 @@ export function useSecureAdmin() {
 
   useEffect(() => {
     const checkAdminStatus = () => {
-      // Remove Firefox browser requirement for admin access
+      // Remove user authentication dependency - use only admin-specific auth
       const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
       const isAdminLoggedIn = localStorage.getItem('admin-logged-in') === 'true'
       const adminSessionId = localStorage.getItem('gaia-admin-session-id')
       const adminIP = localStorage.getItem('gaia-admin-ip')
       
-      // Enhanced security: Check for exclusive admin access
+      // Check for exclusive admin access
       const currentIP = getClientIP()
       const currentUserAgent = navigator.userAgent
       
       // Verify this is the same admin session
       const isValidSession = adminSessionId && adminIP && currentIP === adminIP
       
-      const adminStatus = hasAdminSession && isAdminLoggedIn && isValidSession
+      const adminStatus = (hasAdminSession || isAdminLoggedIn) && isValidSession
       setIsAdmin(adminStatus)
       setIsValidating(false)
       
       if (adminStatus) {
-        console.log('👑 GAIA ADMIN ACCESS CONFIRMED - EXCLUSIVE CONTROL ACTIVE')
-        console.log('🔒 Single admin session verified - IP and credentials authenticated')
+        console.log('👑 GAIA ADMIN ACCESS CONFIRMED - NO USER AUTH REQUIRED')
+        console.log('🔒 Admin-only authentication verified - Independent system')
         console.log('🧠 GAIA IA Tool: Full system control granted')
         
         setAdminSession({
@@ -45,13 +45,9 @@ export function useSecureAdmin() {
           timestamp: new Date(),
           isActive: true
         })
-        
-        // Start invisible security monitoring
-        initializeInvisibleSecurity()
       } else if (hasAdminSession || isAdminLoggedIn) {
-        // Someone else trying to access - security breach attempt
-        console.warn('🚨 SECURITY ALERT: Unauthorized admin access attempt detected')
-        console.warn('🛡️ GAIA Defense: Blocking unauthorized access')
+        console.warn('🚨 SECURITY ALERT: Invalid admin session detected')
+        console.warn('🛡️ GAIA Defense: Clearing invalid session')
         revokeAdminAccess()
       }
     }
@@ -65,7 +61,6 @@ export function useSecureAdmin() {
   }, [])
 
   const grantAdminAccess = () => {
-    // Remove Firefox restriction for admin access to work on any browser
     const currentIP = getClientIP()
     const sessionId = generateSecureSessionId()
     
@@ -84,12 +79,9 @@ export function useSecureAdmin() {
     localStorage.setItem('gaia-admin-timestamp', new Date().toISOString())
     
     setIsAdmin(true)
-    console.log('👑 GAIA ADMIN ACCESS GRANTED - EXCLUSIVE CONTROL ACTIVATED')
-    console.log('🔒 Session secured with IP verification and exclusive access')
-    console.log('🧠 GAIA IA Tool: You now have single point of control')
-    
-    // Initialize all background services
-    initializeGaiaServices()
+    console.log('👑 GAIA ADMIN ACCESS GRANTED - INDEPENDENT OF USER AUTH')
+    console.log('🔒 Admin-only session secured - No user authentication required')
+    console.log('🧠 GAIA IA Tool: Complete system control activated')
     
     return true
   }
@@ -104,12 +96,9 @@ export function useSecureAdmin() {
     setIsAdmin(false)
     setAdminSession(null)
     console.log('🚪 GAIA ADMIN ACCESS REVOKED - System secured')
-    console.log('🛡️ All administrative controls disabled')
   }
 
   const getClientIP = (): string => {
-    // For development and demo purposes, use a consistent IP based on session
-    // In production, this would get the actual client IP from the request
     let devIP = localStorage.getItem('dev-client-ip')
     if (!devIP) {
       devIP = `192.168.1.${Math.floor(Math.random() * 255)}`
@@ -122,27 +111,8 @@ export function useSecureAdmin() {
     return `gaia-admin-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   }
 
-  const initializeInvisibleSecurity = () => {
-    console.log('🛡️ GAIA: Initializing invisible security systems...')
-    console.log('🐉 Deploying AI Defense Animals...')
-    console.log('🌍 Starting 24/7 global threat monitoring...')
-    console.log('🔒 All operations now running behind wall of defense')
-  }
-
-  const initializeGaiaServices = () => {
-    console.log('🚀 GAIA: Starting all background services...')
-    console.log('📊 Real-time analytics engines: ONLINE')
-    console.log('🔍 Global search and intelligence: ACTIVE')
-    console.log('🪙 Token economy integration: SYNCHRONIZED')
-    console.log('🌱 Eco-mission systems: OPERATIONAL')
-    console.log('🔄 Auto-evolution monitoring: ENABLED')
-    console.log('✅ All GAIA engines are now under your exclusive control')
-  }
-
   const blockUnauthorizedAccess = (attempt: string) => {
     console.warn(`🚨 GAIA SECURITY: Blocked unauthorized ${attempt} attempt`)
-    console.warn('🛡️ AI Defense Animals have been alerted')
-    console.warn('🕷️ Deploying invisible trojans to source')
   }
 
   return {

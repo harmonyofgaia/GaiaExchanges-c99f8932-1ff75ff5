@@ -1,49 +1,36 @@
 
 import { useState, useEffect } from 'react'
-import { useAuth } from '@/components/auth/AuthProvider'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Lock, Eye } from 'lucide-react'
-import { toast } from 'sonner'
+import { Shield, Lock } from 'lucide-react'
 
 export function AdminOnlyAccess({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth()
   const [isValidAdmin, setIsValidAdmin] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const verifyAdminAccess = async () => {
-      console.log('🔒 ADMIN ACCESS VERIFICATION - STABLE SYSTEM')
+      console.log('🔒 SIMPLIFIED ADMIN ACCESS - NO AUTH MODULE REQUIRED')
       
-      // Simplified admin verification for stability
-      const adminVerification = {
-        hasValidUser: !!user,
-        emailVerified: user?.email_confirmed_at !== null || !!user, // More lenient
-        userEmail: user?.email,
-        timestamp: new Date()
-      }
+      // Check if admin is logged in via admin-specific authentication
+      const adminLoggedIn = localStorage.getItem('admin-logged-in') === 'true'
+      const adminSessionActive = sessionStorage.getItem('admin-session-active') === 'true'
+      
+      console.log('👑 Admin Status:', { adminLoggedIn, adminSessionActive })
 
-      console.log('🛡️ ADMIN VERIFICATION:', adminVerification)
-
-      // Grant admin access to any authenticated user for stability
-      const isLegitimateAdmin = adminVerification.hasValidUser
-
-      if (isLegitimateAdmin) {
+      if (adminLoggedIn || adminSessionActive) {
         setIsValidAdmin(true)
-        toast.success('🔒 ADMIN ACCESS GRANTED', {
-          description: 'Welcome to the GAIA admin control center',
-          duration: 3000
-        })
+        console.log('✅ ADMIN ACCESS GRANTED - No user auth required')
       } else {
         setIsValidAdmin(false)
-        console.log('🚨 ADMIN ACCESS DENIED - Please login first')
+        console.log('🚫 ADMIN ACCESS DENIED - Please login via admin portal')
       }
 
       setLoading(false)
     }
 
     verifyAdminAccess()
-  }, [user])
+  }, [])
 
   // Minimal loading state
   if (loading) {
@@ -72,15 +59,15 @@ export function AdminOnlyAccess({ children }: { children: React.ReactNode }) {
           <CardContent className="space-y-4">
             <div className="text-center">
               <Lock className="h-12 w-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-blue-400 mb-2">🔐 Login Required</h3>
+              <h3 className="text-xl font-bold text-blue-400 mb-2">🔐 Admin Login Required</h3>
               <p className="text-muted-foreground mb-4">
-                Please login to access the admin control center.
+                Please use the admin portal to access the control center.
               </p>
               <a 
-                href="/auth" 
+                href="/secure-admin" 
                 className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Go to Login
+                Go to Admin Portal
               </a>
             </div>
           </CardContent>
