@@ -1,28 +1,38 @@
 
-import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Toaster } from '@/components/ui/sonner'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AuthProvider } from '@/components/auth/AuthProvider'
+import Index from '@/pages/Index'
+import Admin from '@/pages/Admin'
+import AdminLogin from '@/pages/AdminLogin'
+import SecureAdmin from '@/pages/SecureAdmin'
+import SecureVault from '@/pages/SecureVault'
+import Security from '@/pages/Security'
+import QuantumSecurity from '@/pages/QuantumSecurity'
+import './App.css'
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center">
-      <div className="text-center p-8">
-        <h1 className="text-4xl font-bold text-emerald-800 mb-4">
-          Welcome to Gaia's Exchanges
-        </h1>
-        <p className="text-emerald-600 text-lg mb-6">
-          A Strong Creative Open Minded Circuit To Happiness
-        </p>
-        <div className="bg-white rounded-lg p-6 shadow-lg max-w-md">
-          <p className="text-gray-700 mb-4">
-            Seeds Will form into Music 🎵
-          </p>
-          <p className="text-gray-600">
-            Enjoy this massive Good Vibration ✨
-          </p>
-        </div>
-      </div>
-    </div>
-  );
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/secure-admin" element={<SecureAdmin />} />
+            <Route path="/secure-vault" element={<SecureVault />} />
+            <Route path="/security" element={<Security />} />
+            <Route path="/quantum-security" element={<QuantumSecurity />} />
+          </Routes>
+          <Toaster />
+        </Router>
+      </AuthProvider>
+    </QueryClientProvider>
+  )
 }
 
-export default App;
+export default App
