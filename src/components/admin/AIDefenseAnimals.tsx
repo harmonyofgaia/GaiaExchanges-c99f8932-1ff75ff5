@@ -210,6 +210,102 @@ export function AIDefenseAnimals() {
       activityLevel: 86,
       threatsRepelled: 1456,
       emoji: '🐒'
+    },
+    {
+      id: 15,
+      name: 'Bear Guardian',
+      description: 'Mighty bear protector with unstoppable strength and forest wisdom',
+      effectiveness: 94,
+      status: 'Active',
+      location: 'Ancient Forest Sanctuary',
+      contributors: 3500,
+      activityLevel: 97,
+      threatsRepelled: 6234,
+      emoji: '🐻'
+    },
+    {
+      id: 16,
+      name: 'Shadow Serpent',
+      description: 'Stealthy snake guardian that hunts threats in darkness',
+      effectiveness: 89,
+      status: 'Hunting',
+      location: 'Shadow Realm',
+      contributors: 2800,
+      activityLevel: 94,
+      threatsRepelled: 4567,
+      emoji: '🐍'
+    },
+    {
+      id: 17,
+      name: 'Thunderstorm Griffin',
+      description: 'Legendary griffin with lightning speed and storm power',
+      effectiveness: 96,
+      status: 'Active',
+      location: 'Storm Peak Citadel',
+      contributors: 4200,
+      activityLevel: 99,
+      threatsRepelled: 7821,
+      emoji: '🦅⚡'
+    },
+    {
+      id: 18,
+      name: 'AI Bat Swarm',
+      description: 'Intelligent bat swarm with echolocation threat detection',
+      effectiveness: 87,
+      status: 'Active',
+      location: 'Digital Cave Network',
+      contributors: 2100,
+      activityLevel: 92,
+      threatsRepelled: 3845,
+      emoji: '🦇'
+    },
+    {
+      id: 19,
+      name: 'Tiger Sentinel',
+      description: 'Fierce tiger guardian with razor-sharp instincts',
+      effectiveness: 91,
+      status: 'Active',
+      location: 'Jungle Command Post',
+      contributors: 3200,
+      activityLevel: 95,
+      threatsRepelled: 5432,
+      emoji: '🐅'
+    },
+    {
+      id: 20,
+      name: 'Swarm of Bees',
+      description: 'Coordinated bee swarm with hive-mind intelligence',
+      effectiveness: 83,
+      status: 'Active',
+      location: 'Quantum Hive Matrix',
+      contributors: 1800,
+      activityLevel: 89,
+      threatsRepelled: 2976,
+      emoji: '🐝'
+    },
+    {
+      id: 21,
+      name: 'Quantum Ant Army',
+      description: 'Massive ant colony with quantum coordination abilities',
+      effectiveness: 92,
+      status: 'Active',
+      location: 'Underground Network',
+      contributors: 5200,
+      activityLevel: 98,
+      threatsRepelled: 8765,
+      emoji: '🐜'
+    },
+    {
+      id: 22,
+      name: 'Zombie Horde',
+      description: 'Undead army that overwhelms attackers with sheer numbers',
+      effectiveness: 85,
+      status: 'Training',
+      location: 'Apocalypse Zone',
+      contributors: 2600,
+      activityLevel: 90,
+      threatsRepelled: 3214,
+      emoji: '🧟'
     }
   ])
 

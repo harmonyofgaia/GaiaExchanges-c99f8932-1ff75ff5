@@ -190,6 +190,94 @@ export function DefenseCreatureArmy() {
       specialAbility: 'Stratosphere Command - Global aerial surveillance',
       threatsEliminated: 2678,
       emoji: '🌤️🦅'
+    },
+    {
+      id: '15',
+      name: 'Ancient Bear Guardian',
+      type: 'dragon',
+      level: 89,
+      power: 78000,
+      status: 'defending',
+      specialAbility: 'Forest Rage - Unstoppable strength and nature\'s wrath',
+      threatsEliminated: 4156,
+      emoji: '🐻'
+    },
+    {
+      id: '16',
+      name: 'Shadow Serpent Prime',
+      type: 'dragon',
+      level: 84,
+      power: 56000,
+      status: 'hunting',
+      specialAbility: 'Shadow Strike - Invisible assassination attacks',
+      threatsEliminated: 3245,
+      emoji: '🐍'
+    },
+    {
+      id: '17',
+      name: 'Thunderstorm Griffin Elite',
+      type: 'eagle',
+      level: 93,
+      power: 98000,
+      status: 'active',
+      specialAbility: 'Lightning Storm - Devastating electrical attacks',
+      threatsEliminated: 5678,
+      emoji: '🦅⚡'
+    },
+    {
+      id: '18',
+      name: 'AI Bat Swarm Commander',
+      type: 'dragon',
+      level: 81,
+      power: 48000,
+      status: 'active',
+      specialAbility: 'Echolocation Matrix - Advanced threat detection',
+      threatsEliminated: 2987,
+      emoji: '🦇'
+    },
+    {
+      id: '19',
+      name: 'Tiger Sentinel Alpha',
+      type: 'lion',
+      level: 86,
+      power: 67000,
+      status: 'defending',
+      specialAbility: 'Predator Instinct - Razor-sharp threat elimination',
+      threatsEliminated: 3876,
+      emoji: '🐅'
+    },
+    {
+      id: '20',
+      name: 'Queen Bee Swarm Master',
+      type: 'dragon',
+      level: 79,
+      power: 42000,
+      status: 'active',
+      specialAbility: 'Hive Mind Control - Coordinated swarm attacks',
+      threatsEliminated: 2534,
+      emoji: '🐝'
+    },
+    {
+      id: '21',
+      name: 'Quantum Ant Army General',
+      type: 'dragon',
+      level: 88,
+      power: 72000,
+      status: 'defending',
+      specialAbility: 'Colony Coordination - Massive synchronized strikes',
+      threatsEliminated: 4765,
+      emoji: '🐜'
+    },
+    {
+      id: '22',
+      name: 'Zombie Horde Overlord',
+      type: 'dragon',
+      level: 80,
+      power: 45000,
+      status: 'training',
+      specialAbility: 'Undead Swarm - Overwhelming numbers attack',
+      threatsEliminated: 2198,
+      emoji: '🧟'
     }
   ])
 
