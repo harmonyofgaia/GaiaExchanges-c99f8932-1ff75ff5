@@ -5,6 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./components/auth/AuthProvider";
+import { ThemeProvider } from "./contexts/ThemeProvider";
 import { MasterSystemOrchestrator } from '@/components/system/MasterSystemOrchestrator'
 import { AdminRouteProtector } from '@/components/admin/AdminRouteProtector'
 import Index from "./pages/Index";
@@ -71,16 +72,17 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
       <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Router>
-            <AuthProvider>
-              <AdminRouteProtector />
-              <MasterSystemOrchestrator />
-              <Toaster />
-              <Sonner />
-              <DatabaseErrorFixer />
-              <SlidingMenu />
-              <Routes>
+        <ThemeProvider>
+          <TooltipProvider>
+            <Router>
+              <AuthProvider>
+                <AdminRouteProtector />
+                <MasterSystemOrchestrator />
+                <Toaster />
+                <Sonner />
+                <DatabaseErrorFixer />
+                <SlidingMenu />
+                <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<Index />} />
                 
@@ -187,7 +189,8 @@ function App() {
             </AuthProvider>
           </Router>
         </TooltipProvider>
-      </QueryClientProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
     </div>
   );
 }

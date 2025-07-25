@@ -48,6 +48,50 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 142.4 71.8% 29.2%;
   }
+
+  .matrix {
+    --background: 0 0% 0%;
+    --foreground: 120 100% 50%;
+    --card: 120 100% 5%;
+    --card-foreground: 120 100% 50%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 120 100% 50%;
+    --primary: 120 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 120 50% 10%;
+    --secondary-foreground: 120 100% 50%;
+    --muted: 120 50% 10%;
+    --muted-foreground: 120 50% 70%;
+    --accent: 120 100% 15%;
+    --accent-foreground: 120 100% 50%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 120 50% 20%;
+    --input: 120 50% 10%;
+    --ring: 120 100% 50%;
+  }
+
+  .old {
+    --background: 45 20% 92%;
+    --foreground: 25 25% 15%;
+    --card: 45 20% 95%;
+    --card-foreground: 25 25% 15%;
+    --popover: 45 20% 95%;
+    --popover-foreground: 25 25% 15%;
+    --primary: 30 80% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 45 15% 85%;
+    --secondary-foreground: 25 25% 15%;
+    --muted: 45 15% 85%;
+    --muted-foreground: 25 15% 45%;
+    --accent: 30 60% 80%;
+    --accent-foreground: 25 25% 15%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 45 15% 80%;
+    --input: 45 15% 85%;
+    --ring: 30 80% 45%;
+  }
 }
 
 @layer base {
@@ -57,4 +101,36 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Matrix theme specific styling */
+.matrix {
+  background: linear-gradient(45deg, #000000 0%, #001100 50%, #000000 100%);
+}
+
+.matrix::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.matrix * {
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+}
+
+/* Old theme specific styling */
+.old {
+  background: linear-gradient(135deg, #f5f5dc 0%, #faebd7 50%, #f0e68c 100%);
+}
+
+.old * {
+  font-family: 'Georgia', 'Times New Roman', serif;
 }

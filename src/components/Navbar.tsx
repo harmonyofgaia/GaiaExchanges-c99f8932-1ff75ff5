@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 import { 
   Menu,
   X,
@@ -102,6 +103,11 @@ export function Navbar() {
                 )
               })}
             </div>
+
+            {/* Theme Switcher */}
+            <div className="border-l border-gray-700 ml-2 pl-2">
+              <ThemeSwitcher />
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -137,6 +143,11 @@ export function Navbar() {
                   </Link>
                 )
               })}
+              
+              {/* Mobile Theme Switcher */}
+              <div className="flex justify-center pt-2 border-t border-gray-700/20">
+                <ThemeSwitcher />
+              </div>
             </div>
           </div>
         )}
