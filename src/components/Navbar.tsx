@@ -50,9 +50,9 @@ export function Navbar() {
     <nav className="bg-black/20 backdrop-blur-sm border-b border-gray-700/20 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          {/* Logo with Jumping Animation */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="text-2xl animate-pulse">🌍</div>
+            <div className="text-2xl animate-bounce">🌍</div>
             <span className="font-bold text-xl bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
               GAIA
             </span>
