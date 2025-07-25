@@ -244,7 +244,7 @@ const RegenerationMiningPools: React.FC = () => {
     const stake = userStakes[poolId];
     if (!pool || !stake) return 0;
     
-    return (stake * pool.apy) / 100 / 365; // Daily rewards
+    return (stake * pool.apy) / PERCENTAGE_DIVISOR / DAYS_PER_YEAR; // Daily rewards
   };
 
   return (
