@@ -122,7 +122,19 @@
   z-index: -1;
 }
 
-.matrix * {
+.matrix p, 
+.matrix span, 
+.matrix h1, 
+.matrix h2, 
+.matrix h3, 
+.matrix h4, 
+.matrix h5, 
+.matrix h6, 
+.matrix a, 
+.matrix strong, 
+.matrix em, 
+.matrix blockquote, 
+.matrix li {
   text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
 }
 
