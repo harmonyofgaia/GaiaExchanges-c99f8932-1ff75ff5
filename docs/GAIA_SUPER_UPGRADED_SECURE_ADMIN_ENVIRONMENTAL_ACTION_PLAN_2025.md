@@ -50,7 +50,7 @@ The GAIA Super-Upgraded Secure Admin & Environmental Action Plan (2025 Edition) 
   - [ ] Build contributor count and activity level monitoring
   - [ ] Implement batch controls (Activate All, Deactivate All)
   - [ ] Create CRUD operations for animal management
-  - **Animals**: Cyber Koala, Dragon AI, Phoenix Guardian, Lion Security, Alpha Dragon, Sky Eagle, Pack Wolf, King Lion Protector, Monkey Squad (Alpha/Beta/Gamma), AI Dolphin, Quantum Phoenix, Digital Dragon
+  - **Animals**: Cyber Koala, Dragon AI, Phoenix Guardian, Lion Security, Alpha Dragon, Sky Eagle, Pack Wolf, King Lion Protector, Monkey Squad (Alpha/Beta/Gamma), AI Dolphin, Quantum Phoenix, Digital Dragon, Stealth Panther
   - **Edge Cases**: Animal failure recovery, overlapping territory conflicts, resource allocation conflicts
 
 - [ ] **Defense Creature Army System**
