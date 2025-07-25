@@ -37,6 +37,8 @@ import { DefenseCreatureArmy } from '@/components/admin/DefenseCreatureArmy'
 import { ImmortalDefenseCore } from '@/components/security/ImmortalDefenseCore'
 import { UltimateDefensiveBarrier } from '@/components/security/UltimateDefensiveBarrier'
 import { ComprehensiveDefenseOverview } from '@/components/admin/ComprehensiveDefenseOverview'
+import { GhostAnimalArmyOrchestrator } from '@/components/admin/GhostAnimalArmyOrchestrator'
+import { ThreatDetectionEngine } from '@/components/admin/ThreatDetectionEngine'
 
 export function SecureAdminDashboard() {
   return (
@@ -57,7 +59,7 @@ export function SecureAdminDashboard() {
         </div>
 
         <Tabs defaultValue="dashboard" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-1 h-auto p-1 text-xs">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-10 gap-1 h-auto p-1 text-xs">
             <TabsTrigger value="copilot" className="p-2 text-center">
               <div className="flex flex-col items-center">
                 <span>🧠</span>
@@ -86,6 +88,18 @@ export function SecureAdminDashboard() {
               <div className="flex flex-col items-center">
                 <span>⚔️</span>
                 <span className="hidden sm:inline">Army</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="ghost-army" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>👻</span>
+                <span className="hidden sm:inline">Ghost Army</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="threat-detection" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🎯</span>
+                <span className="hidden sm:inline">Threats</span>
               </div>
             </TabsTrigger>
             <TabsTrigger value="immortal-core" className="p-2 text-center">
@@ -277,6 +291,36 @@ export function SecureAdminDashboard() {
 
             <TabsContent value="creature-army" className="mt-0">
               <DefenseCreatureArmy />
+            </TabsContent>
+
+            <TabsContent value="ghost-army" className="mt-0">
+              <div className="space-y-6">
+                <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-indigo-900/30">
+                  <CardHeader>
+                    <CardTitle className="text-purple-400 flex items-center gap-2">
+                      👻 GAIA Ghost Animal Army - Autonomous Infrastructure Protection
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <GhostAnimalArmyOrchestrator />
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="threat-detection" className="mt-0">
+              <div className="space-y-6">
+                <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-cyan-900/30">
+                  <CardHeader>
+                    <CardTitle className="text-blue-400 flex items-center gap-2">
+                      🎯 Real-Time Threat Detection Engine
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ThreatDetectionEngine />
+                  </CardContent>
+                </Card>
+              </div>
             </TabsContent>
 
             <TabsContent value="immortal-core" className="mt-0">
