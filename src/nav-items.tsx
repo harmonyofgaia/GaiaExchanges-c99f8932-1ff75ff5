@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -261,6 +261,25 @@ export const navigationItems: NavigationItem[] = [
     icon: Settings,
     variant: "ghost" as const,
     description: "Platform administration and management",
+    lazyLoaded: true,
+  },
+  {
+    title: "Deployment Center",
+    to: "/deployment-center",
+    icon: Rocket,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "V2+ Master Plan Validation",
+      "Einstein Copilot Integration",
+      "Advanced Deployment Automation",
+      "Real-time System Monitoring",
+      "Comprehensive Security Checks",
+      "Zero-Downtime Deployment",
+      "AI-Assisted Live Support",
+      "Quantum Security Protocols"
+    ],
+    description: "Master Plan v7: V2+ Deployment Center with Einstein Copilot assistance",
     lazyLoaded: true,
   },
   {
