@@ -19,9 +19,6 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  define: {
-    __WS_TOKEN__: JSON.stringify(process.env.VITE_WS_TOKEN || 'default-ws-token'),
-  },
   build: {
     rollupOptions: {
       output: {
@@ -67,6 +64,6 @@ export default defineConfig(({ mode }) => ({
     },
     chunkSizeWarningLimit: 1400,
     target: 'esnext',
-    minify: 'esbuild'
-  }
+    minify: 'esbuild',
+  },
 }));

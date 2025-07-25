@@ -45,6 +45,7 @@ import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin';
 import LegacySecureAdmin from '@/legacy-pages/SecureAdmin';
 import LegacySecureVault from '@/legacy-pages/SecureVault';
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute';
+import './App.css'
 
 const queryClient = new QueryClient();
 
