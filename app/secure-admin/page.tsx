@@ -1,8 +1,8 @@
+
 'use client'
 
 import { useState, useEffect } from 'react'
 import { SecureVaultLogin } from '@/components/admin/SecureVaultLogin'
-import { AdminControlCenter } from './components/AdminControlCenter'
 import { DynamicBreachDefenseSystem, DynamicSecurityMiddleware, DynamicTimeSync } from './components/DynamicSecurityComponent'
 
 // Set system time to 11:14, 24-07-2025 for all secure-admin processes
@@ -64,6 +64,7 @@ export default function SecureAdminPage() {
     )
   }
 
+  // When authenticated, show only security components without dashboard
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10">
       <DynamicTimeSync systemTime={SYSTEM_TIME} />
@@ -73,10 +74,18 @@ export default function SecureAdminPage() {
         authenticated={true}
       />
       <DynamicSecurityMiddleware systemTime={SYSTEM_TIME} isAuthenticated={true} />
-      <AdminControlCenter 
-        systemTime={SYSTEM_TIME}
-        securityLayers={securityLayers}
-      />
+      
+      {/* Simple authenticated state indicator */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-green-400 mb-4">
+            🛡️ SECURE ADMIN ACCESS GRANTED
+          </h1>
+          <p className="text-green-300">
+            Quantum security protocols active • System time: {SYSTEM_TIME.hour}:{SYSTEM_TIME.minute}, {SYSTEM_TIME.date}
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
