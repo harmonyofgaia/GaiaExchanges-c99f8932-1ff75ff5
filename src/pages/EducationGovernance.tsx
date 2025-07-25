@@ -866,7 +866,7 @@ const EducationGovernance: React.FC = () => {
                     <p className="text-gray-400 mb-4">
                       Start your learning journey by enrolling in environmental courses.
                     </p>
-                    <Button onClick={() => document.querySelector('[value="courses"]')?.click()}>
+                    <Button onClick={() => setActiveTab("courses")}>
                       Browse Courses
                     </Button>
                   </CardContent>
