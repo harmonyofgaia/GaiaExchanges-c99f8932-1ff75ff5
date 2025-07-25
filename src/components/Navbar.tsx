@@ -17,7 +17,8 @@ import {
   Brain,
   Video,
   Settings,
-  Shield
+  Shield,
+  Gamepad2
 } from 'lucide-react'
 
 export function Navbar() {
@@ -37,6 +38,7 @@ export function Navbar() {
     { title: "Planet Cleaning", to: "/planet-cleaning", icon: Globe },
     { title: "NFT Cards", to: "/nft-cards", icon: Sparkles },
     { title: "Eco Avatar", to: "/eco-avatar", icon: Users },
+    { title: "Gaming", to: "/gaming", icon: Gamepad2 },
     { title: "Sea Green AI", to: "/sea-green-psychohistorical", icon: Brain },
     { title: "Video Exchange", to: "/secure-admin/video-exchange", icon: Video },
   ]

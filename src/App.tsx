@@ -58,7 +58,6 @@ import GaiaCoinCrafter from '@/pages/GaiaCoinCrafter'
 import LandscapeBuilder from '@/pages/LandscapeBuilder'
 import NotFound from '@/pages/NotFound'
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
-import SlidingMenu from '@/components/SlidingMenu';
 import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin';
 import LegacySecureAdmin from '@/legacy-pages/SecureAdmin';
 import LegacySecureVault from '@/legacy-pages/SecureVault';
@@ -79,7 +78,6 @@ function App() {
               <Toaster />
               <Sonner />
               <DatabaseErrorFixer />
-              <SlidingMenu />
               <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<Index />} />

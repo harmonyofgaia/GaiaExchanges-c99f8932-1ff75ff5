@@ -3,7 +3,7 @@ import { Navbar } from '@/components/Navbar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { GameNavigationHub } from '@/components/gaming/GameNavigationHub'
+import { Link } from 'react-router-dom'
 import { 
   Leaf, 
   Heart, 
@@ -14,7 +14,8 @@ import {
   TreePine,
   Sparkles,
   Target,
-  Video
+  Video,
+  Gamepad2
 } from 'lucide-react'
 
 export default function Index() {
@@ -55,10 +56,10 @@ export default function Index() {
       color: "from-yellow-600 to-orange-600"
     },
     {
-      title: "📹 Video Exchange",
-      description: "Share environmental content and earn rewards",
-      icon: <Video className="h-8 w-8 text-cyan-400" />,
-      path: "/secure-admin/video-exchange",
+      title: "🎮 Gaming Hub",
+      description: "Environmental education through immersive gaming",
+      icon: <Gamepad2 className="h-8 w-8 text-cyan-400" />,
+      path: "/gaming",
       color: "from-cyan-600 to-teal-600"
     }
   ]
@@ -95,54 +96,47 @@ export default function Index() {
           </div>
           
           <div className="flex flex-wrap justify-center gap-4">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold px-8 py-4 text-lg"
-            >
-              <TreePine className="h-5 w-5 mr-2" />
-              Start Your Journey
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="border-white/20 text-white hover:bg-white/10 px-8 py-4 text-lg"
-            >
-              Learn More
-            </Button>
+            <Link to="/dashboard">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold px-8 py-4 text-lg"
+              >
+                <TreePine className="h-5 w-5 mr-2" />
+                Start Your Journey
+              </Button>
+            </Link>
+            <Link to="/about">
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="border-white/20 text-white hover:bg-white/10 px-8 py-4 text-lg"
+              >
+                Learn More
+              </Button>
+            </Link>
           </div>
         </div>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {features.map((feature, index) => (
-            <Card key={index} className="bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20 hover:scale-105 transition-all duration-300 cursor-pointer">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-white">
-                  {feature.icon}
-                  {feature.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">{feature.description}</p>
-                <Button className={`w-full bg-gradient-to-r ${feature.color} hover:opacity-90`}>
-                  Explore Feature
-                </Button>
-              </CardContent>
-            </Card>
+            <Link key={index} to={feature.path}>
+              <Card className="bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20 hover:scale-105 transition-all duration-300 cursor-pointer h-full">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3 text-white">
+                    {feature.icon}
+                    {feature.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">{feature.description}</p>
+                  <Button className={`w-full bg-gradient-to-r ${feature.color} hover:opacity-90`}>
+                    Explore Feature
+                  </Button>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
-        </div>
-
-        {/* Gaming Hub */}
-        <div className="mb-16">
-          <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent mb-4">
-              🎮 GAIA Gaming Universe
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Experience environmental education through immersive gaming
-            </p>
-          </div>
-          <GameNavigationHub />
         </div>
 
         {/* Statistics */}
@@ -182,13 +176,15 @@ export default function Index() {
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Join thousands of eco-warriors building a sustainable future through blockchain technology
             </p>
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold px-12 py-6 text-xl"
-            >
-              <Heart className="h-6 w-6 mr-3" />
-              Join the Movement
-            </Button>
+            <Link to="/user-auth">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold px-12 py-6 text-xl"
+              >
+                <Heart className="h-6 w-6 mr-3" />
+                Join the Movement
+              </Button>
+            </Link>
           </CardContent>
         </Card>
       </div>
