@@ -160,27 +160,27 @@ const App = () => (
             {/* Admin Routes - Special admin authentication */}
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin" element={
-              <ProtectedRoute isAdminRoute={true}>
+              <ProtectedRoute isAdminRoute>
                 <Admin />
               </ProtectedRoute>
             } />
             <Route path="/secure-admin" element={
-              <ProtectedRoute isAdminRoute={true}>
+              <ProtectedRoute isAdminRoute>
                 <SecureAdmin />
               </ProtectedRoute>
             } />
             <Route path="/secure-vault" element={
-              <ProtectedRoute isAdminRoute={true}>
+              <ProtectedRoute isAdminRoute>
                 <SecureVault />
               </ProtectedRoute>
             } />
             <Route path="/deployment-center" element={
-              <ProtectedRoute isAdminRoute={true}>
+              <ProtectedRoute isAdminRoute>
                 <DeploymentCenter />
               </ProtectedRoute>
             } />
             <Route path="/quantum-security" element={
-              <ProtectedRoute isAdminRoute={true}>
+              <ProtectedRoute isAdminRoute>
                 <QuantumSecurity />
               </ProtectedRoute>
             } />
