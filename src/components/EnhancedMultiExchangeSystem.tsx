@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Exchange, ExchangeStatus, AutoApplyStatus } from '@/types/ui-types'
 import { 
   Globe, 
   Shield, 
@@ -81,7 +82,7 @@ export function EnhancedMultiExchangeSystem() {
           
           return {
             ...exchange,
-            status: newStatus as any,
+            status: newStatus as ExchangeStatus,
             lastUpdate: new Date(),
             autoApplyStatus: newStatus === 'pending' ? 'completed' : 'in-progress'
           }

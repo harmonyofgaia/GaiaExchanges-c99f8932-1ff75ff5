@@ -38,6 +38,7 @@ import ForestTokenSystem from "./pages/ForestTokenSystem";
 import CommunityEngagementHub from "./pages/CommunityEngagementHub";
 import PartnershipManagement from "./pages/PartnershipManagement";
 import ImpactMeasurementSystem from "./pages/ImpactMeasurementSystem";
+import SeaGreenPsychohistoricalProject from "./pages/SeaGreenPsychohistoricalProject";
 import { DatabaseErrorFixer } from '@/components/security/DatabaseErrorFixer';
 import SlidingMenu from '@/components/SlidingMenu';
 
@@ -74,6 +75,7 @@ const App = () => (
             <Route path="/community-engagement-hub" element={<CommunityEngagementHub />} />
             <Route path="/partnership-management" element={<PartnershipManagement />} />
             <Route path="/impact-measurement-system" element={<ImpactMeasurementSystem />} />
+            <Route path="/sea-green-psychohistorical" element={<SeaGreenPsychohistoricalProject />} />
             
             {/* New Features from PRs #22-#41 */}
             <Route path="/environmental-games" element={<EnvironmentalGames />} />

@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -239,6 +239,23 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
+    title: "Sea Green Psychohistorical",
+    to: "/sea-green-psychohistorical",
+    icon: Brain,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Psychohistorical AI Engine",
+      "Global Data Analysis",
+      "Future Prediction Models",
+      "Secure Admin Dashboard",
+      "Token Governance Integration",
+      "Auto-Documentation System"
+    ],
+    description: "Master Plan v7: Advanced AI-powered environmental future prediction and idea generation",
+    lazyLoaded: true,
+  },
+  {
     title: "Admin",
     to: "/admin",
     icon: Settings,
@@ -252,6 +269,27 @@ export const navigationItems: NavigationItem[] = [
     icon: Shield,
     variant: "ghost" as const,
     description: "Security monitoring and threat detection",
+    lazyLoaded: true,
+  },
+  {
+    title: "Video Exchange",
+    to: "/secure-admin/video-exchange",
+    icon: Video,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Personal Channels (Little Heaven)",
+      "Seamless Video Upload",
+      "Interactive Video Player",
+      "Chat Engine & Social Features",
+      "Subscribe & Notification System",
+      "Points, Tokens & Gift System",
+      "Leaderboards & Badges",
+      "Challenges & Events",
+      "Deep Admin Control & Audit",
+      "Security, Privacy & Compliance"
+    ],
+    description: "Master Plan v7: GAiA Community Video Exchange Outstanding Experience",
     lazyLoaded: true,
   },
 ];
