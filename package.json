@@ -10,7 +10,9 @@
     "build:vercel": "vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "install:legacy": "npm install --legacy-peer-deps",
+    "postinstall": "echo 'Note: If you encounter peer dependency conflicts, run: npm run install:legacy'"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.0",
@@ -86,6 +88,6 @@
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^7.0.6"
   }
 }

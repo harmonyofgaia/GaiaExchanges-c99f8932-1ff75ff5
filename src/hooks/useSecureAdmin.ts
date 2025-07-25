@@ -3,124 +3,102 @@ import { useState, useEffect } from 'react'
 
 interface AdminSession {
   id: string
-  ip: string
-  userAgent: string
-  timestamp: Date
-  isActive: boolean
+  timestamp: number
+  ip?: string
 }
 
 export function useSecureAdmin() {
   const [isAdmin, setIsAdmin] = useState(false)
-  const [isValidating, setIsValidating] = useState(true)
   const [adminSession, setAdminSession] = useState<AdminSession | null>(null)
+  const [isValidating, setIsValidating] = useState(true)
 
   useEffect(() => {
-    const checkAdminStatus = () => {
-      // Remove user authentication dependency - use only admin-specific auth
-      const hasAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
-      const isAdminLoggedIn = localStorage.getItem('admin-logged-in') === 'true'
-      const adminSessionId = localStorage.getItem('gaia-admin-session-id')
-      const adminIP = localStorage.getItem('gaia-admin-ip')
-      
-      // Check for exclusive admin access
-      const currentIP = getClientIP()
-      const currentUserAgent = navigator.userAgent
-      
-      // Verify this is the same admin session
-      const isValidSession = adminSessionId && adminIP && currentIP === adminIP
-      
-      const adminStatus = (hasAdminSession || isAdminLoggedIn) && isValidSession
-      setIsAdmin(adminStatus)
-      setIsValidating(false)
-      
-      if (adminStatus) {
-        console.log('👑 GAIA ADMIN ACCESS CONFIRMED - NO USER AUTH REQUIRED')
-        console.log('🔒 Admin-only authentication verified - Independent system')
-        console.log('🧠 GAIA IA Tool: Full system control granted')
-        
-        setAdminSession({
-          id: adminSessionId!,
-          ip: adminIP!,
-          userAgent: currentUserAgent,
-          timestamp: new Date(),
-          isActive: true
-        })
-      } else if (hasAdminSession || isAdminLoggedIn) {
-        console.warn('🚨 SECURITY ALERT: Invalid admin session detected')
-        console.warn('🛡️ GAIA Defense: Clearing invalid session')
-        revokeAdminAccess()
-      }
-    }
-
-    checkAdminStatus()
-    
-    // Check admin status every 3 seconds for enhanced security
-    const interval = setInterval(checkAdminStatus, 3000)
-    
-    return () => clearInterval(interval)
+    validateAdminSession()
   }, [])
 
-  const grantAdminAccess = () => {
-    const currentIP = getClientIP()
-    const sessionId = generateSecureSessionId()
-    
-    // Check if another admin is already logged in
-    const existingAdminIP = localStorage.getItem('gaia-admin-ip')
-    if (existingAdminIP && existingAdminIP !== currentIP) {
-      console.error('🚫 GAIA SECURITY: Another admin is already connected')
-      console.error('🛡️ One-admin exclusivity enforced - Access denied')
+  const validateAdminSession = () => {
+    try {
+      const sessionId = localStorage.getItem('gaia-admin-session')
+      const sessionExpiry = localStorage.getItem('gaia-admin-expiry')
+      const adminActive = sessionStorage.getItem('admin-active')
+      
+      if (sessionId && sessionExpiry && adminActive === 'true') {
+        const now = Date.now()
+        const expiry = parseInt(sessionExpiry)
+        
+        if (now < expiry) {
+          setIsAdmin(true)
+          setAdminSession({
+            id: sessionId,
+            timestamp: now
+          })
+        } else {
+          // Session expired
+          revokeAdminAccess()
+        }
+      }
+    } catch (error) {
+      console.error('Error validating admin session:', error)
+      revokeAdminAccess()
+    } finally {
+      setIsValidating(false)
+    }
+  }
+
+  const grantAdminAccess = (): boolean => {
+    try {
+      // Check if another admin session exists
+      const existingSession = localStorage.getItem('gaia-admin-session')
+      if (existingSession) {
+        const sessionExpiry = localStorage.getItem('gaia-admin-expiry')
+        if (sessionExpiry && Date.now() < parseInt(sessionExpiry)) {
+          return false // Another admin already logged in
+        }
+      }
+
+      // Create new admin session
+      const sessionId = `admin-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+      const expiryTime = Date.now() + (24 * 60 * 60 * 1000) // 24 hours
+      
+      localStorage.setItem('gaia-admin-session', sessionId)
+      localStorage.setItem('gaia-admin-expiry', expiryTime.toString())
+      sessionStorage.setItem('admin-active', 'true')
+      
+      setIsAdmin(true)
+      setAdminSession({
+        id: sessionId,
+        timestamp: Date.now()
+      })
+      
+      return true
+    } catch (error) {
+      console.error('Error granting admin access:', error)
       return false
     }
-    
-    sessionStorage.setItem('admin-session-active', 'true')
-    localStorage.setItem('admin-logged-in', 'true')
-    localStorage.setItem('gaia-admin-session-id', sessionId)
-    localStorage.setItem('gaia-admin-ip', currentIP)
-    localStorage.setItem('gaia-admin-timestamp', new Date().toISOString())
-    
-    setIsAdmin(true)
-    console.log('👑 GAIA ADMIN ACCESS GRANTED - INDEPENDENT OF USER AUTH')
-    console.log('🔒 Admin-only session secured - No user authentication required')
-    console.log('🧠 GAIA IA Tool: Complete system control activated')
-    
-    return true
   }
 
   const revokeAdminAccess = () => {
-    sessionStorage.removeItem('admin-session-active')
-    localStorage.removeItem('admin-logged-in')
-    localStorage.removeItem('gaia-admin-session-id')
-    localStorage.removeItem('gaia-admin-ip')
-    localStorage.removeItem('gaia-admin-timestamp')
-    
+    localStorage.removeItem('gaia-admin-session')
+    localStorage.removeItem('gaia-admin-expiry')
+    sessionStorage.removeItem('admin-active')
     setIsAdmin(false)
     setAdminSession(null)
-    console.log('🚪 GAIA ADMIN ACCESS REVOKED - System secured')
   }
 
-  const getClientIP = (): string => {
-    let devIP = localStorage.getItem('dev-client-ip')
-    if (!devIP) {
-      devIP = `192.168.1.${Math.floor(Math.random() * 255)}`
-      localStorage.setItem('dev-client-ip', devIP)
+  const extendSession = () => {
+    if (isAdmin && adminSession) {
+      const newExpiryTime = Date.now() + (24 * 60 * 60 * 1000)
+      localStorage.setItem('gaia-admin-expiry', newExpiryTime.toString())
     }
-    return devIP
-  }
-
-  const generateSecureSessionId = (): string => {
-    return `gaia-admin-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-  }
-
-  const blockUnauthorizedAccess = (attempt: string) => {
-    console.warn(`🚨 GAIA SECURITY: Blocked unauthorized ${attempt} attempt`)
   }
 
   return {
     isAdmin,
-    isValidating,
     adminSession,
+    isValidating,
     grantAdminAccess,
     revokeAdminAccess,
-    blockUnauthorizedAccess
+    extendSession,
+    validateAdminSession
   }
 }

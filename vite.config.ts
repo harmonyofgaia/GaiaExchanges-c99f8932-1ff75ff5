@@ -19,6 +19,9 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  define: {
+    __WS_TOKEN__: JSON.stringify(process.env.VITE_WS_TOKEN || 'default-ws-token'),
+  },
   build: {
     rollupOptions: {
       output: {
@@ -39,6 +42,15 @@ export default defineConfig(({ mode }) => ({
             if (id.includes('react-router')) {
               return 'router';
             }
+            if (id.includes('@supabase/supabase-js')) {
+              return 'supabase';
+            }
+            if (id.includes('@tanstack/react-query')) {
+              return 'query';
+            }
+            if (id.includes('clsx') || id.includes('class-variance-authority') || id.includes('tailwind-merge')) {
+              return 'utils';
+            }
             return 'vendor-misc';
           }
           if (id.includes('src/pages/Forest') || id.includes('src/pages/Wildfire') || id.includes('src/pages/Community') || id.includes('src/pages/Partnership') || id.includes('src/pages/Impact')) {
@@ -53,6 +65,8 @@ export default defineConfig(({ mode }) => ({
         }
       }
     },
-    chunkSizeWarningLimit: 1400
+    chunkSizeWarningLimit: 1400,
+    target: 'esnext',
+    minify: 'esbuild'
   }
 }));
