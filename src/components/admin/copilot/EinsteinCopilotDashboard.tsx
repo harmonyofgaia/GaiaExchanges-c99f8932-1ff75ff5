@@ -29,7 +29,6 @@ import {
   Atom,
   Sparkles,
   Flame,
-  Lightning,
   Radio,
   Radar,
   Satellite,
