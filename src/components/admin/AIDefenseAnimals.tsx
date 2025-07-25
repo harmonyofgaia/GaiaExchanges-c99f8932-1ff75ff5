@@ -211,7 +211,7 @@ export function AIDefenseAnimals() {
   const [location, setLocation] = useState('')
   const [contributors, setContributors] = useState(0)
   const [effectiveness, setEffectiveness] = useState(0)
-  const [status, setStatus] = useState(Status.Active)
+  const [status, setStatus] = useState('Active')
 
   // Real-time updates
   useEffect(() => {
