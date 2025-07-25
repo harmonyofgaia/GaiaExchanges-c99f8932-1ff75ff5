@@ -1,69 +1,135 @@
 
-import { Navbar } from '@/components/Navbar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { ArrowLeftRight, TrendingUp, Shield } from 'lucide-react'
+import { ArrowUpDown, TrendingUp, Coins, Shield } from 'lucide-react'
+import { Navbar } from '@/components/Navbar'
 
 export default function Exchange() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent mb-4">
-            🔄 GAIA Token Exchange
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            💱 GAIA Exchange
           </h1>
-          <p className="text-xl text-muted-foreground">
-            Multi-chain token exchange with zero fees
+          <p className="text-xl text-muted-foreground mt-2">
+            Multi-chain Token Exchange & Trading Platform
           </p>
+          <div className="flex gap-4 mt-4">
+            <Badge variant="outline" className="border-green-500/50 text-green-400">
+              <Coins className="h-3 w-3 mr-1" />
+              Zero Fees
+            </Badge>
+            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
+              <Shield className="h-3 w-3 mr-1" />
+              Secure Trading
+            </Badge>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="border-green-500/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <ArrowLeftRight className="h-5 w-5" />
-                Token Exchange
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                <h3 className="font-medium text-green-400 mb-2">Exchange Features</h3>
-                <ul className="text-sm space-y-1 text-green-300">
-                  <li>• Zero trading fees</li>
-                  <li>• Multi-chain support</li>
-                  <li>• Instant transactions</li>
-                  <li>• Full transparency</li>
-                </ul>
-              </div>
-              <Button className="w-full bg-green-600 hover:bg-green-700">
-                Start Trading
-              </Button>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
+              <CardHeader>
+                <CardTitle className="text-green-400 flex items-center gap-2">
+                  <ArrowUpDown className="h-5 w-5" />
+                  Token Exchange
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  <div className="p-4 bg-black/30 rounded-lg border border-green-500/20">
+                    <div className="text-sm text-muted-foreground mb-2">From</div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-2xl font-bold text-white">0.00</div>
+                      <Button variant="outline" className="border-green-500/30 text-green-400">
+                        GAiA
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-center">
+                    <Button variant="outline" size="icon" className="border-blue-500/30 text-blue-400">
+                      <ArrowUpDown className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  
+                  <div className="p-4 bg-black/30 rounded-lg border border-blue-500/20">
+                    <div className="text-sm text-muted-foreground mb-2">To</div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-2xl font-bold text-white">0.00</div>
+                      <Button variant="outline" className="border-blue-500/30 text-blue-400">
+                        Select Token
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
+                    Connect Wallet to Trade
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-          <Card className="border-blue-500/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-400">
-                <TrendingUp className="h-5 w-5" />
-                Market Analytics
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-                <h3 className="font-medium text-blue-400 mb-2">Live Market Data</h3>
-                <ul className="text-sm space-y-1 text-blue-300">
-                  <li>• Real-time price feeds</li>
-                  <li>• Trading volume analytics</li>
-                  <li>• Market depth charts</li>
-                  <li>• Performance metrics</li>
-                </ul>
-              </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                View Analytics
-              </Button>
-            </CardContent>
-          </Card>
+          <div className="space-y-6">
+            <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
+              <CardHeader>
+                <CardTitle className="text-blue-400 flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5" />
+                  Market Stats
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">GAiA Price</span>
+                    <span className="text-green-400 font-bold">$0.0024</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">24h Volume</span>
+                    <span className="text-white font-bold">$247K</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Market Cap</span>
+                    <span className="text-white font-bold">$12.4M</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Trading Fees</span>
+                    <span className="text-green-400 font-bold">0.00%</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-purple-900/20 to-black/50 border-purple-500/20">
+              <CardHeader>
+                <CardTitle className="text-purple-400">Supported Tokens</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between p-2 bg-black/20 rounded">
+                    <span className="text-white">GAiA</span>
+                    <Badge className="bg-green-600">Native</Badge>
+                  </div>
+                  <div className="flex items-center justify-between p-2 bg-black/20 rounded">
+                    <span className="text-white">ETH</span>
+                    <Badge className="bg-blue-600">ERC-20</Badge>
+                  </div>
+                  <div className="flex items-center justify-between p-2 bg-black/20 rounded">
+                    <span className="text-white">USDT</span>
+                    <Badge className="bg-green-600">Stable</Badge>
+                  </div>
+                  <div className="flex items-center justify-between p-2 bg-black/20 rounded">
+                    <span className="text-white">BTC</span>
+                    <Badge className="bg-orange-600">Bitcoin</Badge>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

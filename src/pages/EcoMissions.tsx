@@ -1,111 +1,141 @@
 
-import { Navbar } from '@/components/Navbar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Target, MapPin, Award, Clock } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Target, MapPin, Trophy, Zap, Users } from 'lucide-react'
+import { Navbar } from '@/components/Navbar'
 
 export default function EcoMissions() {
+  const missions = [
+    {
+      id: 1,
+      title: "Plant 100 Trees",
+      description: "Join local tree planting initiatives in your area",
+      reward: "50 GAiA",
+      difficulty: "Medium",
+      participants: 1247,
+      timeLeft: "5 days",
+      type: "Community"
+    },
+    {
+      id: 2,
+      title: "Beach Cleanup Challenge",
+      description: "Remove plastic waste from coastal areas",
+      reward: "75 GAiA",
+      difficulty: "Easy",
+      participants: 892,
+      timeLeft: "12 hours",
+      type: "Individual"
+    },
+    {
+      id: 3,
+      title: "Solar Panel Installation",
+      description: "Help install renewable energy systems",
+      reward: "200 GAiA",
+      difficulty: "Hard",
+      participants: 156,
+      timeLeft: "2 weeks",
+      type: "Expert"
+    }
+  ]
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent mb-4">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
             🎯 Eco Missions
           </h1>
-          <p className="text-xl text-muted-foreground">
-            AI-powered missions for environmental impact
+          <p className="text-xl text-muted-foreground mt-2">
+            Master Plan v7: AI-Powered Mission Generation and Tracking
           </p>
+          <div className="flex gap-4 mt-4">
+            <Badge variant="outline" className="border-green-500/50 text-green-400">
+              <Target className="h-3 w-3 mr-1" />
+              AI Generated
+            </Badge>
+            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
+              <MapPin className="h-3 w-3 mr-1" />
+              Geolocation
+            </Badge>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
+            <CardContent className="p-6 text-center">
+              <Trophy className="h-8 w-8 text-green-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-white">247</div>
+              <div className="text-muted-foreground">Missions Completed</div>
+            </CardContent>
+          </Card>
+          <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
+            <CardContent className="p-6 text-center">
+              <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-white">1,847</div>
+              <div className="text-muted-foreground">GAiA Earned</div>
+            </CardContent>
+          </Card>
+          <Card className="bg-gradient-to-br from-purple-900/20 to-black/50 border-purple-500/20">
+            <CardContent className="p-6 text-center">
+              <Users className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-white">12,456</div>
+              <div className="text-muted-foreground">Active Participants</div>
+            </CardContent>
+          </Card>
+          <Card className="bg-gradient-to-br from-orange-900/20 to-black/50 border-orange-500/20">
+            <CardContent className="p-6 text-center">
+              <MapPin className="h-8 w-8 text-orange-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-white">89</div>
+              <div className="text-muted-foreground">Countries Active</div>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card className="border-green-500/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <Target className="h-5 w-5" />
-                Beach Cleanup
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex gap-2">
-                <Badge variant="outline" className="border-green-500/30 text-green-400">Easy</Badge>
-                <Badge variant="outline" className="border-blue-500/30 text-blue-400">50 GAIA</Badge>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Collect plastic waste from your local beach and document your impact
-              </p>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4" />
-                <span>Any coastal area</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Clock className="h-4 w-4" />
-                <span>2-3 hours</span>
-              </div>
-              <Button className="w-full bg-green-600 hover:bg-green-700">
-                Start Mission
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-500/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-400">
-                <Award className="h-5 w-5" />
-                Tree Planting
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex gap-2">
-                <Badge variant="outline" className="border-orange-500/30 text-orange-400">Medium</Badge>
-                <Badge variant="outline" className="border-blue-500/30 text-blue-400">100 GAIA</Badge>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Plant native trees in designated areas and track their growth
-              </p>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4" />
-                <span>Forest reserves</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Clock className="h-4 w-4" />
-                <span>4-6 hours</span>
-              </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                Start Mission
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="border-purple-500/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-purple-400">
-                <Target className="h-5 w-5" />
-                Solar Installation
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex gap-2">
-                <Badge variant="outline" className="border-red-500/30 text-red-400">Hard</Badge>
-                <Badge variant="outline" className="border-blue-500/30 text-blue-400">200 GAIA</Badge>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Help install solar panels in community centers
-              </p>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4" />
-                <span>Community centers</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Clock className="h-4 w-4" />
-                <span>Full day</span>
-              </div>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                Start Mission
-              </Button>
-            </CardContent>
-          </Card>
+          {missions.map((mission) => (
+            <Card key={mission.id} className="bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20 hover:scale-105 transition-all duration-300">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-white">
+                  <Target className="h-5 w-5 text-green-400" />
+                  {mission.title}
+                </CardTitle>
+                <div className="flex gap-2">
+                  <Badge className={`${
+                    mission.difficulty === 'Easy' ? 'bg-green-600' :
+                    mission.difficulty === 'Medium' ? 'bg-yellow-600' : 'bg-red-600'
+                  }`}>
+                    {mission.difficulty}
+                  </Badge>
+                  <Badge className="bg-blue-600">{mission.type}</Badge>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">{mission.description}</p>
+                
+                <div className="space-y-3">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Reward</span>
+                    <span className="text-green-400 font-bold">{mission.reward}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Participants</span>
+                    <span className="text-white font-bold">{mission.participants.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Time Left</span>
+                    <span className="text-orange-400 font-bold">{mission.timeLeft}</span>
+                  </div>
+                </div>
+                
+                <Button className="w-full mt-6 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
+                  <Target className="h-4 w-4 mr-2" />
+                  Join Mission
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </div>
