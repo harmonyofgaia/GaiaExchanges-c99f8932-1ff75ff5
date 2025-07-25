@@ -1,206 +1,144 @@
-
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { 
-  Baby, 
-  Users, 
-  GraduationCap, 
-  Trophy,
-  Shield,
-  Star,
-  Zap
-} from 'lucide-react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Slider } from '@/components/ui/slider'
+import { TreePine, Mountain, Waves, Building, Sparkles, Clock } from 'lucide-react'
 
-interface AgeGroup {
-  id: string
-  name: string
-  ageRange: string
-  description: string
-  icon: React.ComponentType<object>
-  color: string
-  features: string[]
-  restrictions: string[]
+interface LandscapeItem {
+  id: number
+  type: 'tree' | 'building' | 'mountain' | 'water' | 'decoration'
+  x: number
+  y: number
+  age: number
 }
 
-export function AgeLandscapeSelector({ onAgeGroupSelect }: { onAgeGroupSelect: (ageGroup: string) => void }) {
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState<string>('')
+const initialItems: LandscapeItem[] = [
+  { id: 1, type: 'tree', x: 50, y: 150, age: 100 },
+  { id: 2, type: 'mountain', x: 200, y: 250, age: 2000 },
+  { id: 3, type: 'water', x: 400, y: 350, age: 500 },
+]
 
-  const ageGroups: AgeGroup[] = [
-    {
-      id: 'children',
-      name: 'Children Paradise',
-      ageRange: '0-12 years',
-      description: 'Safe, colorful worlds designed for young explorers',
-      icon: Baby,
-      color: 'bg-gradient-to-r from-pink-500 to-purple-500',
-      features: [
-        'Bright, friendly animal companions',
-        'Simple building tools',
-        'Educational content',
-        'Parental controls',
-        'No complex interactions'
-      ],
-      restrictions: [
-        'No trading features',
-        'Limited chat functionality',
-        'Supervised environment only'
-      ]
-    },
-    {
-      id: 'teens',
-      name: 'Teen Adventure Zone',
-      ageRange: '13-16 years',
-      description: 'Adventure-focused landscapes with social features',
-      icon: Users,
-      color: 'bg-gradient-to-r from-blue-500 to-cyan-500',
-      features: [
-        'Adventure quests',
-        'Team building activities',
-        'Basic trading systems',
-        'Social interaction',
-        'Creative challenges'
-      ],
-      restrictions: [
-        'Limited investment features',
-        'Moderated chat',
-        'Spending limits'
-      ]
-    },
-    {
-      id: 'young_adults',
-      name: 'Young Adult Campus',
-      ageRange: '17-22 years',
-      description: 'Learning-focused environments with advanced features',
-      icon: GraduationCap,
-      color: 'bg-gradient-to-r from-green-500 to-teal-500',
-      features: [
-        'Advanced building tools',
-        'Investment education',
-        'Career simulation',
-        'Full social features',
-        'Mentorship programs'
-      ],
-      restrictions: [
-        'Investment guidance required',
-        'Risk warnings enabled'
-      ]
-    },
-    {
-      id: 'adults',
-      name: 'Professional Arena',
-      ageRange: '23+ years',
-      description: 'Full-featured platform for serious investors and creators',
-      icon: Trophy,
-      color: 'bg-gradient-to-r from-yellow-500 to-orange-500',
-      features: [
-        'Unlimited building capabilities',
-        'Full investment access',
-        'Professional networking',
-        'Advanced analytics',
-        'Leadership opportunities',
-        'Real money transactions'
-      ],
-      restrictions: [
-        'Identity verification required',
-        'Full responsibility for actions'
-      ]
-    }
-  ]
+const AgeSlider = ({ value, onValueChange }: { value: number[]; onValueChange: (value: number[]) => void }) => (
+  <Slider
+    value={value}
+    onValueChange={onValueChange}
+    max={5000}
+    min={0}
+    step={100}
+    className="w-full"
+  />
+)
 
-  const handleSelectAgeGroup = (ageGroupId: string) => {
-    setSelectedAgeGroup(ageGroupId)
-    onAgeGroupSelect(ageGroupId)
+export function AgeLandscapeSelector() {
+  const [ageRange, setAgeRange] = useState([1000, 3000])
+  const [landscapeType, setLandscapeType] = useState('all')
+  const [items, setItems] = useState(initialItems)
+
+  const handleAgeChange = (value: number[]) => {
+    setAgeRange(value)
   }
 
+  const handleLandscapeTypeChange = (type: string) => {
+    setLandscapeType(type)
+  }
+
+  const filteredItems = items.filter(item => {
+    const isInAgeRange = item.age >= ageRange[0] && item.age <= ageRange[1]
+    const isCorrectType = landscapeType === 'all' || item.type === landscapeType
+    return isInAgeRange && isCorrectType
+  })
+
   return (
-    <Card className="border-2 border-purple-500/50 bg-gradient-to-r from-purple-900/30 to-blue-900/30 mb-8">
+    <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-blue-900/20">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-purple-400 text-center justify-center">
-          <Shield className="h-6 w-6" />
-          🎯 SELECT YOUR AGE GROUP LANDSCAPE
+        <CardTitle className="flex items-center gap-2 text-green-400">
+          <Clock className="h-6 w-6" />
+          Age & Landscape Selector
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {ageGroups.map((group) => {
-            const IconComponent = group.icon
-            return (
-              <div
-                key={group.id}
-                className={`p-6 rounded-xl border-2 transition-all duration-300 cursor-pointer ${
-                  selectedAgeGroup === group.id
-                    ? 'border-yellow-400 scale-105 shadow-lg shadow-yellow-400/20'
-                    : 'border-gray-600 hover:border-gray-400'
-                } bg-gradient-to-br from-gray-900/40 to-gray-800/40`}
-                onClick={() => handleSelectAgeGroup(group.id)}
-              >
-                <div className="text-center mb-4">
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${group.color} mb-3`}>
-                    <IconComponent className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-1">{group.name}</h3>
-                  <Badge className="bg-blue-600 text-white">{group.ageRange}</Badge>
-                </div>
-
-                <p className="text-sm text-gray-300 mb-4 text-center">{group.description}</p>
-
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="font-semibold text-green-400 mb-2 flex items-center gap-2">
-                      <Star className="h-4 w-4" />
-                      Features
-                    </h4>
-                    <ul className="text-xs text-gray-400 space-y-1">
-                      {group.features.slice(0, 3).map((feature, index) => (
-                        <li key={index}>• {feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-yellow-400 mb-2 flex items-center gap-2">
-                      <Zap className="h-4 w-4" />
-                      Guidelines
-                    </h4>
-                    <ul className="text-xs text-gray-400 space-y-1">
-                      {group.restrictions.slice(0, 2).map((restriction, index) => (
-                        <li key={index}>• {restriction}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <Button
-                  className={`w-full mt-4 ${
-                    selectedAgeGroup === group.id
-                      ? 'bg-yellow-600 hover:bg-yellow-700'
-                      : 'bg-gray-600 hover:bg-gray-700'
-                  }`}
-                >
-                  {selectedAgeGroup === group.id ? 'Selected' : 'Enter Zone'}
-                </Button>
-              </div>
-            )
-          })}
+      
+      <CardContent className="space-y-6">
+        {/* Age Controls */}
+        <div className="space-y-2">
+          <h4 className="text-sm font-bold text-green-400">Filter by Age</h4>
+          <div className="flex items-center gap-4">
+            <Badge variant="outline">
+              Min Age: {ageRange[0]}
+            </Badge>
+            <Badge variant="outline">
+              Max Age: {ageRange[1]}
+            </Badge>
+          </div>
+          <AgeSlider value={ageRange} onValueChange={handleAgeChange} />
         </div>
 
-        {selectedAgeGroup && (
-          <div className="mt-8 p-6 bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded-lg border border-green-500/30">
-            <h3 className="text-2xl font-bold text-green-400 mb-4 text-center">
-              🌟 Welcome to {ageGroups.find(g => g.id === selectedAgeGroup)?.name}!
-            </h3>
-            <p className="text-center text-gray-300 mb-4">
-              You've entered a specially designed environment for your age group. Enjoy building and creating!
-            </p>
-            <div className="flex justify-center">
-              <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
-                Start Building Your Landscape
-              </Button>
-            </div>
+        {/* Landscape Type */}
+        <div>
+          <h4 className="text-sm font-bold text-blue-400">Landscape Type</h4>
+          <Select onValueChange={handleLandscapeTypeChange}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="All Types" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="tree">
+                <TreePine className="mr-2 h-4 w-4 inline-block" />
+                Trees
+              </SelectItem>
+              <SelectItem value="mountain">
+                <Mountain className="mr-2 h-4 w-4 inline-block" />
+                Mountains
+              </SelectItem>
+              <SelectItem value="water">
+                <Waves className="mr-2 h-4 w-4 inline-block" />
+                Water
+              </SelectItem>
+              <SelectItem value="building">
+                <Building className="mr-2 h-4 w-4 inline-block" />
+                Buildings
+              </SelectItem>
+              <SelectItem value="decoration">
+                <Sparkles className="mr-2 h-4 w-4 inline-block" />
+                Decorations
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Advanced Filters */}
+        <div className="space-y-2">
+          <h4 className="text-sm font-bold text-purple-400">Advanced Filters</h4>
+          <p className="text-muted-foreground text-sm">
+            Additional filters and customization options can be added here.
+          </p>
+        </div>
+
+        {/* Landscape Grid */}
+        <div className="border border-gray-500/30 rounded-lg p-4">
+          <h4 className="text-sm font-bold text-gray-400 mb-2">Landscape Preview</h4>
+          <div className="relative w-full h-64 bg-black/20 rounded-md overflow-hidden">
+            {filteredItems.map(item => (
+              <div
+                key={item.id}
+                className={`absolute ${item.type}`}
+                style={{
+                  left: `${item.x}px`,
+                  top: `${item.y}px`,
+                  color: 'white',
+                  fontSize: '16px',
+                }}
+              >
+                {item.type === 'tree' && <TreePine className="h-5 w-5 text-green-500" />}
+                {item.type === 'mountain' && <Mountain className="h-5 w-5 text-gray-500" />}
+                {item.type === 'water' && <Waves className="h-5 w-5 text-blue-500" />}
+                {item.type === 'building' && <Building className="h-5 w-5 text-yellow-500" />}
+                {item.type === 'decoration' && <Sparkles className="h-5 w-5 text-purple-500" />}
+              </div>
+            ))}
           </div>
-        )}
+        </div>
       </CardContent>
     </Card>
   )
