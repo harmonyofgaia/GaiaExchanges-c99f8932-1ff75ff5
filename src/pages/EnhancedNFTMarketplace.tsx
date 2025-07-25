@@ -453,9 +453,10 @@ const EnhancedNFTMarketplace: React.FC = () => {
     switch (sortBy) {
       case 'price_low': return a.price - b.price;
       case 'price_high': return b.price - a.price;
-      case 'rarity': 
+      case 'rarity': {
         const rarityOrder = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythic'];
         return rarityOrder.indexOf(b.rarity) - rarityOrder.indexOf(a.rarity);
+      }
       case 'newest': return new Date(b.minted).getTime() - new Date(a.minted).getTime();
       default: return 0;
     }
