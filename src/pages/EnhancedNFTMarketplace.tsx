@@ -861,7 +861,7 @@ const EnhancedNFTMarketplace: React.FC = () => {
                     <p className="text-gray-400 mb-4">
                       Start your collection by purchasing environmental NFTs that make a real impact.
                     </p>
-                    <Button onClick={() => document.querySelector('[value="marketplace"]')?.click()}>
+                    <Button onClick={() => setActiveTab("marketplace")}>
                       Browse Marketplace
                     </Button>
                   </CardContent>
