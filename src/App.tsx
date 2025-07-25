@@ -41,6 +41,11 @@ import CommunityEngagementHub from "./pages/CommunityEngagementHub";
 import PartnershipManagement from "./pages/PartnershipManagement";
 import ImpactMeasurementSystem from "./pages/ImpactMeasurementSystem";
 import SeaGreenPsychohistoricalProject from "./pages/SeaGreenPsychohistoricalProject";
+import GaiaBikeEcosystem from "./pages/GaiaBikeEcosystem";
+import RegenerationMiningPools from "./pages/RegenerationMiningPools";
+import PartyEventDiscount from "./pages/PartyEventDiscount";
+import AnimalWelfare from "./pages/AnimalWelfare";
+import EducationGovernance from "./pages/EducationGovernance";
 import About from '@/pages/About'
 import Wallet from '@/pages/Wallet'
 import Markets from '@/pages/Markets'
@@ -130,6 +135,28 @@ function App() {
                 <Route path="/environmental-games" element={<EnvironmentalGames />} />
                 <Route path="/global-leaderboard" element={<GlobalLeaderboardPage />} />
                 <Route path="/animal-rescue" element={<AnimalRescue />} />
+                
+                {/* Gaia Bike Ecosystem - Missing Route Added */}
+                <Route path="/gaia-bike" element={<GaiaBikeEcosystem />} />
+                <Route path="/gaia-bike-ecosystem" element={<GaiaBikeEcosystem />} />
+                
+                {/* Regeneration Mining Pools - New Feature */}
+                <Route path="/mining-pools" element={<RegenerationMiningPools />} />
+                <Route path="/regeneration-mining" element={<RegenerationMiningPools />} />
+                
+                {/* Party/Event/Discount System - New Feature */}
+                <Route path="/events" element={<PartyEventDiscount />} />
+                <Route path="/parties" element={<PartyEventDiscount />} />
+                <Route path="/discounts" element={<PartyEventDiscount />} />
+                
+                {/* Animal Welfare Module - New Feature */}
+                <Route path="/animal-welfare" element={<AnimalWelfare />} />
+                <Route path="/animal-protection" element={<AnimalWelfare />} />
+                
+                {/* Education & Governance Module - New Feature */}
+                <Route path="/education" element={<EducationGovernance />} />
+                <Route path="/governance" element={<EducationGovernance />} />
+                <Route path="/learning" element={<EducationGovernance />} />
                 
                 {/* Entertainment Routes */}
                 <Route path="/artist-streaming" element={<ArtistStreaming />} />

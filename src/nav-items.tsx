@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Pickaxe, PartyPopper, BookOpen } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -253,6 +253,91 @@ export const navigationItems: NavigationItem[] = [
       "Auto-Documentation System"
     ],
     description: "Master Plan v7: Advanced AI-powered environmental future prediction and idea generation",
+    lazyLoaded: true,
+  },
+  {
+    title: "Gaia Bike Ecosystem",
+    to: "/gaia-bike",
+    icon: Users,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Eco-Friendly Transportation",
+      "Carbon Offset Tracking",
+      "Community Challenges",
+      "Reward System",
+      "Route Optimization",
+      "Health & Fitness Integration"
+    ],
+    description: "Master Plan v7: Sustainable transportation ecosystem with environmental impact tracking",
+    lazyLoaded: true,
+  },
+  {
+    title: "Mining Pools",
+    to: "/mining-pools",
+    icon: Pickaxe,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Regeneration Staking",
+      "Environmental Projects",
+      "Yield Farming",
+      "Impact Verification",
+      "Community Governance",
+      "Token Rewards"
+    ],
+    description: "Master Plan v7: Regeneration mining pools for environmental funding and rewards",
+    lazyLoaded: true,
+  },
+  {
+    title: "Events & Parties",
+    to: "/events",
+    icon: PartyPopper,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Environmental Celebrations",
+      "Community Gatherings",
+      "Educational Workshops",
+      "Discount System",
+      "Impact Tracking",
+      "Reward Integration"
+    ],
+    description: "Master Plan v7: Community events, parties, and discount system for engagement",
+    lazyLoaded: true,
+  },
+  {
+    title: "Animal Welfare",
+    to: "/animal-welfare",
+    icon: Heart,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Emergency Rescues",
+      "Wildlife Sanctuaries",
+      "Conservation Programs",
+      "Donation Tracking",
+      "Impact Metrics",
+      "Global Network"
+    ],
+    description: "Master Plan v7: Comprehensive animal welfare and protection platform",
+    lazyLoaded: true,
+  },
+  {
+    title: "Education & Governance",
+    to: "/education",
+    icon: BookOpen,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Environmental Courses",
+      "Expert Instructors",
+      "Community Governance",
+      "Proposal Voting",
+      "Certification System",
+      "Token Rewards"
+    ],
+    description: "Master Plan v7: Educational platform with community governance integration",
     lazyLoaded: true,
   },
   {
