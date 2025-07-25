@@ -18,12 +18,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     // Get theme from localStorage or default to 'dark'
     const savedTheme = localStorage.getItem('gaia-theme') as Theme
-    if (savedTheme && themes.includes(savedTheme)) {
-      setCurrentTheme(savedTheme)
-    }
+    const themeToApply = savedTheme && themes.includes(savedTheme) ? savedTheme : 'dark'
     
     // Apply theme to document
-    applyTheme(currentTheme)
+    applyTheme(themeToApply)
+    
+    // Update state with the applied theme
+    setCurrentTheme(themeToApply)
   }, [])
 
   const applyTheme = (theme: Theme) => {
