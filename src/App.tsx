@@ -56,7 +56,6 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/exchange" element={<Exchange />} />
             <Route path="/gaias-projects" element={<GaiasProjects />} />
-            <Route path="/projects" element={<GaiasProjects />} />
             <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
             <Route path="/project-funding" element={<ProjectFunding />} />
             <Route path="/eco-missions" element={<EcoMissions />} />
@@ -77,13 +76,11 @@ const App = () => (
             
             {/* Gaming Routes */}
             <Route path="/game" element={<Game />} />
-            <Route path="/gaming" element={<Game />} />
             
             {/* Admin Routes */}
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/secure-admin" element={<SecureAdmin />} />
-            <Route path="/secure-admin/video-exchange" element={<SecureAdmin />} />
             <Route path="/secure-vault" element={<SecureVault />} />
             <Route path="/deployment-center" element={<DeploymentCenter />} />
             <Route path="/quantum-security" element={<QuantumSecurity />} />
