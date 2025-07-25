@@ -457,7 +457,7 @@ const DefenseAttackMechanisms: React.FC = () => {
               ...s, 
               effectiveness: Math.min(99.9, s.effectiveness + 2.5),
               upgrade_available: false,
-              threat_level: Math.min(5, s.threat_level + 1)
+              threat_level: Math.min(MAX_THREAT_LEVEL, s.threat_level + 1)
             }
           : s
       ));
