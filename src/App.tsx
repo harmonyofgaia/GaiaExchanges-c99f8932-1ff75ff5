@@ -1,44 +1,28 @@
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Toaster } from '@/components/ui/sonner'
-import { AuthProvider } from '@/components/auth/AuthProvider'
-import Index from '@/pages/Index'
-import UserAuth from '@/pages/UserAuth'
-import EnvironmentalGames from '@/pages/EnvironmentalGames'
-import { SecureAdminLogin } from '@/components/admin/SecureAdminLogin'
-import SecureAdmin from '@/pages/SecureAdmin'
-import SecureVault from '@/pages/SecureVault'
-import AdminLogin from '@/legacy-pages/AdminLogin'
-import LegacySecureAdmin from '@/legacy-pages/SecureAdmin'
-import LegacySecureVault from '@/legacy-pages/SecureVault'
+import React from 'react';
+import './App.css';
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <Toaster />
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<Index />} />
-          <Route path="/environmental-games" element={<EnvironmentalGames />} />
-          
-          {/* User Authentication - Only when users want to register/login */}
-          <Route path="/user-auth" element={<UserAuth />} />
-          <Route path="/auth" element={<UserAuth />} />
-
-          {/* Admin Routes - Independent admin authentication */}
-          <Route path="/admin-login" element={<SecureAdminLogin />} />
-          <Route path="/secure-admin" element={<SecureAdmin />} />
-          <Route path="/secure-vault" element={<SecureVault />} />
-          <Route path="/admin" element={<AdminLogin />} />
-
-          {/* Legacy Admin Routes */}
-          <Route path="/legacy-admin" element={<LegacySecureAdmin />} />
-          <Route path="/legacy-vault" element={<LegacySecureVault />} />
-        </Routes>
-      </AuthProvider>
-    </Router>
-  )
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center">
+      <div className="text-center p-8">
+        <h1 className="text-4xl font-bold text-emerald-800 mb-4">
+          Welcome to Gaia's Exchanges
+        </h1>
+        <p className="text-emerald-600 text-lg mb-6">
+          A Strong Creative Open Minded Circuit To Happiness
+        </p>
+        <div className="bg-white rounded-lg p-6 shadow-lg max-w-md">
+          <p className="text-gray-700 mb-4">
+            Seeds Will form into Music 🎵
+          </p>
+          <p className="text-gray-600">
+            Enjoy this massive Good Vibration ✨
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
