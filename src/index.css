@@ -143,6 +143,6 @@
   background: linear-gradient(135deg, #f5f5dc 0%, #faebd7 50%, #f0e68c 100%);
 }
 
-.old * {
+.old {
   font-family: 'Georgia', 'Times New Roman', serif;
 }
