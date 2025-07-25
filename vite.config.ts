@@ -20,6 +20,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
   define: {
-    "__WS_TOKEN__": JSON.stringify(process.env.VITE_WS_TOKEN || 'lovable-default-token'),
+    'import.meta.env.VITE_WS_TOKEN': JSON.stringify(process.env.VITE_WS_TOKEN || 'lovable-default-token'),
   },
 }));
