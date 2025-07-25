@@ -615,7 +615,7 @@ const PartyEventDiscount: React.FC = () => {
                     <p className="text-gray-400 mb-4">
                       Join environmental events to earn rewards and make a positive impact on the planet.
                     </p>
-                    <Button onClick={() => document.querySelector('[value="upcoming-events"]')?.click()}>
+                    <Button onClick={() => setActiveTab("upcoming-events")}>
                       Browse Events
                     </Button>
                   </CardContent>
