@@ -341,6 +341,40 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
+    title: "Defense Systems",
+    to: "/defense-systems",
+    icon: Shield,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "AI-Powered Defense",
+      "Quantum Protection",
+      "Real-time Monitoring",
+      "Threat Analysis",
+      "Autonomous Systems",
+      "Advanced Security"
+    ],
+    description: "Master Plan v7: Advanced defense and attack mechanism systems",
+    lazyLoaded: true,
+  },
+  {
+    title: "Enhanced NFTs",
+    to: "/nft-marketplace",
+    icon: Sparkles,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Environmental NFTs",
+      "Impact Verification",
+      "Conservation Focus",
+      "Utility Integration",
+      "Rarity Systems",
+      "Marketplace Trading"
+    ],
+    description: "Master Plan v7: Enhanced NFT marketplace with environmental impact tracking",
+    lazyLoaded: true,
+  },
+  {
     title: "Admin",
     to: "/admin",
     icon: Settings,

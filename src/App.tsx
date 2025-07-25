@@ -46,6 +46,8 @@ import RegenerationMiningPools from "./pages/RegenerationMiningPools";
 import PartyEventDiscount from "./pages/PartyEventDiscount";
 import AnimalWelfare from "./pages/AnimalWelfare";
 import EducationGovernance from "./pages/EducationGovernance";
+import DefenseAttackMechanisms from "./pages/DefenseAttackMechanisms";
+import EnhancedNFTMarketplace from "./pages/EnhancedNFTMarketplace";
 import About from '@/pages/About'
 import Wallet from '@/pages/Wallet'
 import Markets from '@/pages/Markets'
@@ -157,6 +159,14 @@ function App() {
                 <Route path="/education" element={<EducationGovernance />} />
                 <Route path="/governance" element={<EducationGovernance />} />
                 <Route path="/learning" element={<EducationGovernance />} />
+                
+                {/* Defense & Attack Mechanisms - Enhanced Feature */}
+                <Route path="/defense-systems" element={<DefenseAttackMechanisms />} />
+                <Route path="/attack-defense" element={<DefenseAttackMechanisms />} />
+                
+                {/* Enhanced NFT Marketplace - Upgraded Feature */}
+                <Route path="/nft-marketplace" element={<EnhancedNFTMarketplace />} />
+                <Route path="/enhanced-nfts" element={<EnhancedNFTMarketplace />} />
                 
                 {/* Entertainment Routes */}
                 <Route path="/artist-streaming" element={<ArtistStreaming />} />
