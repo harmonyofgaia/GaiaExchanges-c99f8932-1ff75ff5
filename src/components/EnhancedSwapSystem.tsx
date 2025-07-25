@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -71,9 +71,9 @@ export function EnhancedSwapSystem() {
     if (user) {
       fetchUserConfig()
     }
-  }, [user])
+  }, [user, fetchUserConfig])
 
-  const fetchUserConfig = async () => {
+  const fetchUserConfig = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('swap_configurations')
@@ -92,7 +92,7 @@ export function EnhancedSwapSystem() {
     } catch (error) {
       console.error('Error fetching swap config:', error)
     }
-  }
+  }, [user?.id])
 
   const calculateSwapAmount = () => {
     // Mock exchange rates - in production, this would fetch real rates

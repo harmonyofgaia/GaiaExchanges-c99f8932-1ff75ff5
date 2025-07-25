@@ -22,16 +22,37 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-tabs'],
-          charts: ['recharts'],
-          utils: ['date-fns', 'clsx', 'class-variance-authority'],
-          router: ['react-router-dom'],
-          lucide: ['lucide-react']
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor';
+            }
+            if (id.includes('@radix-ui')) {
+              return 'ui';
+            }
+            if (id.includes('recharts')) {
+              return 'charts';
+            }
+            if (id.includes('lucide-react')) {
+              return 'lucide';
+            }
+            if (id.includes('react-router')) {
+              return 'router';
+            }
+            return 'vendor-misc';
+          }
+          if (id.includes('src/pages/Forest') || id.includes('src/pages/Wildfire') || id.includes('src/pages/Community') || id.includes('src/pages/Partnership') || id.includes('src/pages/Impact')) {
+            return 'forest-shield';
+          }
+          if (id.includes('src/components/admin/') || id.includes('src/pages/Admin')) {
+            return 'admin';
+          }
+          if (id.includes('TetrisGame') || id.includes('SnakeWormsIntegration') || id.includes('MinecraftLandscapeBuilder')) {
+            return 'games';
+          }
         }
       }
     },
-    chunkSizeWarningLimit: 1200
+    chunkSizeWarningLimit: 1400
   }
 }));
