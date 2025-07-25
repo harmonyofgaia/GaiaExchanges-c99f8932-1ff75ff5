@@ -146,7 +146,7 @@ export function LandscapeBuilderAdvanced() {
     }
   }, [autoEvolutionActive, selectedEnvironment, selectedDimension, evolutionLevel, autoEnhanceLandscape, environments, dimensions])
 
-  const autoEnhanceLandscape = useCallback((dimension: string, environment: string, tools: { id: string }[]) => {
+  const autoEnhanceLandscape = useCallback(() => {
     const enhancementTypes = [
       'neural_enhancement',
       'quantum_upgrade',

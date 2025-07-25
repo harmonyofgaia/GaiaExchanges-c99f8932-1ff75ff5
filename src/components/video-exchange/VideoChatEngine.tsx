@@ -95,7 +95,7 @@ export function VideoChatEngine() {
     }
   ])
 
-  const [chatMessages] = useState<ChatMessage[]>([
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     {
       id: '1',
       user: {
