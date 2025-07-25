@@ -36,7 +36,7 @@ import EcoMissions from '@/pages/EcoMissions'
 import PlanetCleaning from '@/pages/PlanetCleaning'
 import NFTCards from '@/pages/NFTCards'
 import EcoAvatar from '@/pages/EcoAvatar'
-import SeaGreenPsychohistorical from '@/pages/SeaGreenPsychohistorical'
+import SeaGreenPsychohistorical from '@/pages/SeaGreenPsychohistoricalProject'
 import NotFound from '@/pages/NotFound'
 import './App.css'
 
