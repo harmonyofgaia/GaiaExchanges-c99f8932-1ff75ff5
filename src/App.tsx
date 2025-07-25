@@ -83,6 +83,7 @@ const App = () => (
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/secure-admin" element={<SecureAdmin />} />
+            <Route path="/secure-admin/video-exchange" element={<SecureAdmin />} />
             <Route path="/secure-vault" element={<SecureVault />} />
             <Route path="/deployment-center" element={<DeploymentCenter />} />
             <Route path="/quantum-security" element={<QuantumSecurity />} />

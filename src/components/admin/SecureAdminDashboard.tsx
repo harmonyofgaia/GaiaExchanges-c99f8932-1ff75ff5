@@ -29,6 +29,7 @@ import { DeploymentAutomation } from '@/components/deployment/DeploymentAutomati
 import { EnhancedAdminMenu } from '@/components/admin/EnhancedAdminMenu'
 import { AdvancedSecurityCenter } from '@/components/admin/AdvancedSecurityCenter'
 import { GlobalCommandCenter } from '@/components/admin/GlobalCommandCenter'
+import { VideoExchangeDashboard } from '@/components/admin/VideoExchangeDashboard'
 import { EinsteinCopilotDashboard } from '@/components/admin/copilot/EinsteinCopilotDashboard'
 import { ActionLedgerControlPanel } from '@/components/admin/ActionLedgerControlPanel'
 import { AIDefenseAnimals } from '@/components/admin/AIDefenseAnimals'
@@ -43,19 +44,19 @@ export function SecureAdminDashboard() {
       <div className="container mx-auto p-4 space-y-4 max-w-full overflow-x-hidden">
         <div className="text-center mb-6">
           <h1 className="text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 mb-4">
-            🛡️ SECURE GAIA ADMIN CONTROL CENTER V4 + 🧠 EINSTEIN COPILOT 🛡️
+            🛡️ SECURE GAIA ADMIN CONTROL CENTER V4 + 🧠 EINSTEIN COPILOT + 🎬 VIDEO EXCHANGE 🛡️
           </h1>
           <p className="text-lg lg:text-xl text-muted-foreground">
-            Unified secure administrative suite with AI-powered deep control, insight & completion
+            Unified secure administrative suite with AI-powered deep control, video community platform & environmental impact focus
           </p>
           <div className="mt-2 p-2 bg-gradient-to-r from-green-900/20 to-purple-900/20 border border-purple-500/30 rounded-lg">
             <p className="text-sm text-purple-400">
-              🧠 Enhanced with Einstein Copilot Deep Control - Advanced AI insights, task automation & precision control
+              🧠 Enhanced with Einstein Copilot Deep Control & 🎬 GAiA Community Video Exchange - Advanced AI insights, task automation & outstanding experience platform
             </p>
           </div>
         </div>
 
-        <Tabs defaultValue="copilot" className="w-full">
+        <Tabs defaultValue="dashboard" className="w-full">
           <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-1 h-auto p-1 text-xs">
             <TabsTrigger value="copilot" className="p-2 text-center">
               <div className="flex flex-col items-center">
@@ -139,6 +140,12 @@ export function SecureAdminDashboard() {
               <div className="flex flex-col items-center">
                 <span>❤️</span>
                 <span className="hidden sm:inline">Health</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="video-exchange" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🎬</span>
+                <span className="hidden sm:inline">Video</span>
               </div>
             </TabsTrigger>
             <TabsTrigger value="users" className="p-2 text-center">
@@ -241,6 +248,12 @@ export function SecureAdminDashboard() {
               <div className="flex flex-col items-center">
                 <span>📋</span>
                 <span className="hidden sm:inline">Action Ledger</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="copilot" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🧠</span>
+                <span className="hidden sm:inline">Einstein AI</span>
               </div>
             </TabsTrigger>
           </TabsList>
@@ -375,6 +388,10 @@ export function SecureAdminDashboard() {
 
             <TabsContent value="psycho" className="mt-0">
               <PsychohistoricalEngine />
+            </TabsContent>
+
+            <TabsContent value="video-exchange" className="mt-0">
+              <VideoExchangeDashboard />
             </TabsContent>
 
             <TabsContent value="action-ledger" className="mt-0">
