@@ -67,49 +67,9 @@ export function PhantomWalletIntegration() {
   const [withdrawAmount, setWithdrawAmount] = useState('')
   const [withdrawAddress, setWithdrawAddress] = useState('')
   const [loading, setLoading] = useState(false)
-  const [adminMode, setAdminMode] = useState(true) // Default to admin mode for unrestricted access
 
   // Your imported wallet address
   const IMPORTED_WALLET = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
-
-  useEffect(() => {
-    checkPhantomConnection()
-  }, [checkPhantomConnection])
-
-  const checkPhantomConnection = useCallback(async () => {
-    if (window.solana?.isPhantom && window.solana.isConnected && window.solana.publicKey) {
-      setConnected(true)
-      setWalletAddress(window.solana.publicKey.toString())
-      await fetchAllAccounts()
-    }
-  }, [fetchAllAccounts])
-
-  const connectPhantom = async () => {
-    try {
-      if (!window.solana?.isPhantom) {
-        toast.error('Phantom wallet not found! Please install Phantom wallet extension.')
-        window.open('https://phantom.app/', '_blank')
-        return
-      }
-
-      setLoading(true)
-      const response = await window.solana.connect()
-      setConnected(true)
-      setWalletAddress(response.publicKey.toString())
-      await fetchAllAccounts()
-      
-      toast.success('🎉 Official GAiA Phantom Wallet Connected!', {
-        description: 'Connected to official GAiA wallet with full access enabled',
-        duration: 5000
-      })
-      
-    } catch (error) {
-      console.error('Failed to connect to Phantom:', error)
-      toast.error('Failed to connect to Phantom wallet')
-    } finally {
-      setLoading(false)
-    }
-  }
 
   const fetchAllAccounts = useCallback(async () => {
     try {
@@ -158,6 +118,45 @@ export function PhantomWalletIntegration() {
       console.error('Failed to fetch accounts:', error)
     }
   }, [])
+
+  const checkPhantomConnection = useCallback(async () => {
+    if (window.solana?.isPhantom && window.solana.isConnected && window.solana.publicKey) {
+      setConnected(true)
+      setWalletAddress(window.solana.publicKey.toString())
+      await fetchAllAccounts()
+    }
+  }, [fetchAllAccounts])
+
+  useEffect(() => {
+    checkPhantomConnection()
+  }, [checkPhantomConnection])
+
+  const connectPhantom = async () => {
+    try {
+      if (!window.solana?.isPhantom) {
+        toast.error('Phantom wallet not found! Please install Phantom wallet extension.')
+        window.open('https://phantom.app/', '_blank')
+        return
+      }
+
+      setLoading(true)
+      const response = await window.solana.connect()
+      setConnected(true)
+      setWalletAddress(response.publicKey.toString())
+      await fetchAllAccounts()
+      
+      toast.success('🎉 Official GAiA Phantom Wallet Connected!', {
+        description: 'Connected to official GAiA wallet with full access enabled',
+        duration: 5000
+      })
+      
+    } catch (error) {
+      console.error('Failed to connect to Phantom:', error)
+      toast.error('Failed to connect to Phantom wallet')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const executeWithdrawal = async () => {
     if (!connected || !withdrawAmount || !withdrawAddress) {
