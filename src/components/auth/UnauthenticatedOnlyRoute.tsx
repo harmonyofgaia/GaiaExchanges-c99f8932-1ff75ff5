@@ -16,12 +16,11 @@ export function UnauthenticatedOnlyRoute({ children }: UnauthenticatedOnlyRouteP
           <div className="w-16 h-16 bg-green-500/20 rounded-full mx-auto animate-pulse flex items-center justify-center">
             <div className="w-8 h-8 bg-green-400 rounded-full animate-bounce"></div>
           </div>
-          <p className="text-green-400 font-medium">Loading Harmony of Gaia...</p>
+          <p className="text-green-400 font-medium">Loading {APP_NAME}...</p>
           <p className="text-green-300 text-sm">Checking authentication status</p>
         </div>
       </div>
     )
-  }
 
   // If user is authenticated, redirect to dashboard
   if (user) {
