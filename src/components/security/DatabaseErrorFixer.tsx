@@ -2,10 +2,15 @@
 import { useEffect } from 'react'
 import { supabase } from '@/integrations/supabase/client'
 
+// Reduced logging for better user experience
+const DEBUG_MODE = false;
+
 export function DatabaseErrorFixer() {
   useEffect(() => {
     const fixDatabaseLogging = async () => {
-      console.log('🔧 DATABASE ERROR FIXER - Cleaning up invalid entries')
+      if (DEBUG_MODE) {
+        console.log('🔧 DATABASE ERROR FIXER - Cleaning up invalid entries')
+      }
       
       try {
         // Clean up invalid IP entries in security_events table
@@ -15,9 +20,13 @@ export function DatabaseErrorFixer() {
           .or('ip_address.is.null,ip_address.eq.Service-Orchestrator,ip_address.eq.Quantum-Core')
         
         if (cleanupError) {
-          console.log('Database cleanup protected by security')
+          if (DEBUG_MODE) {
+            console.log('Database cleanup protected by security')
+          }
         } else {
-          console.log('✅ Database cleanup completed successfully')
+          if (DEBUG_MODE) {
+            console.log('✅ Database cleanup completed successfully')
+          }
         }
         
         // Log the database fix
@@ -30,7 +39,9 @@ export function DatabaseErrorFixer() {
         })
         
       } catch (error) {
-        console.log('Database error fixer self-protected:', error)
+        if (DEBUG_MODE) {
+          console.log('Database error fixer self-protected:', error)
+        }
       }
     }
     

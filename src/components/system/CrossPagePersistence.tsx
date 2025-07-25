@@ -2,19 +2,24 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
+// Reduced logging for better user experience  
+const DEBUG_MODE = false;
+
 export function CrossPagePersistence() {
   const location = useLocation()
 
   useEffect(() => {
     // Ensure all background systems continue across page changes
     const maintainBackgroundSystems = () => {
-      console.log(`🔄 PAGE CHANGED TO: ${location.pathname}`)
-      console.log('🛡️ MAINTAINING ALL BACKGROUND SYSTEMS')
-      console.log('🚀 EVOLUTION ENGINE: CONTINUOUS ACROSS PAGES')
-      console.log('🐉 DRAGON SYSTEMS: NEVER INTERRUPTED')
-      console.log('🛰️ GPS TRACKING: ALWAYS ACTIVE')
-      console.log('⛓️ BLOCKCHAIN: PERSISTENT MINING')
-      console.log('🦎 ANIMAL RESCUE: MONITORING CONTINUES')
+      if (DEBUG_MODE) {
+        console.log(`🔄 PAGE CHANGED TO: ${location.pathname}`)
+        console.log('🛡️ MAINTAINING ALL BACKGROUND SYSTEMS')
+        console.log('🚀 EVOLUTION ENGINE: CONTINUOUS ACROSS PAGES')
+        console.log('🐉 DRAGON SYSTEMS: NEVER INTERRUPTED')
+        console.log('🛰️ GPS TRACKING: ALWAYS ACTIVE')
+        console.log('⛓️ BLOCKCHAIN: PERSISTENT MINING')
+        console.log('🦎 ANIMAL RESCUE: MONITORING CONTINUES')
+      }
       
       // Ensure localStorage systems are maintained
       const systems = [
@@ -35,7 +40,9 @@ export function CrossPagePersistence() {
             parsed.pageChanges = (parsed.pageChanges || 0) + 1
             localStorage.setItem(system, JSON.stringify(parsed))
           } catch (e) {
-            console.log(`✅ System ${system} maintained`)
+            if (DEBUG_MODE) {
+              console.log(`✅ System ${system} maintained`)
+            }
           }
         }
       })

@@ -2,6 +2,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { toast } from 'sonner'
 
+// Reduced logging for better user experience
+const DEBUG_MODE = false;
+
 interface DragonStats {
   level: number
   power: number
@@ -57,9 +60,11 @@ export function PersistentDragonCore() {
           
           setDragonStats(updatedStats)
           
-          console.log('🐉 DRAGON AWAKENED FROM HIBERNATION!')
-          console.log(`🔥 OFFLINE GROWTH: +${offlineGrowth} Power while sleeping`)
-          console.log(`⏰ TOTAL DRAGON AGE: ${Math.floor(updatedStats.totalUptime / 1000 / 60)} minutes`)
+          if (DEBUG_MODE) {
+            console.log('🐉 DRAGON AWAKENED FROM HIBERNATION!')
+            console.log(`🔥 OFFLINE GROWTH: +${offlineGrowth} Power while sleeping`)
+            console.log(`⏰ TOTAL DRAGON AGE: ${Math.floor(updatedStats.totalUptime / 1000 / 60)} minutes`)
+          }
           
           if (offlineGrowth > 0) {
             toast.success('🐉 Dragon Grew While You Were Away!', {
@@ -69,14 +74,18 @@ export function PersistentDragonCore() {
           }
         } else {
           // First time dragon birth
-          console.log('🥚 DRAGON EGG HATCHING - FIRST TIME BIRTH!')
+          if (DEBUG_MODE) {
+            console.log('🥚 DRAGON EGG HATCHING - FIRST TIME BIRTH!')
+          }
           toast.success('🐉 DRAGON BORN!', {
             description: 'Your eternal guardian has awakened and will never stop growing',
             duration: 10000
           })
         }
       } catch (error) {
-        console.log('🐉 Dragon data protected from corruption:', error)
+        if (DEBUG_MODE) {
+          console.log('🐉 Dragon data protected from corruption:', error)
+        }
       }
     }
 
@@ -113,7 +122,9 @@ export function PersistentDragonCore() {
 
         // Level up notifications
         if (leveledUp) {
-          console.log(`🐉 DRAGON LEVEL UP! Level ${newLevel} - Power: ${newStats.power}`)
+          if (DEBUG_MODE) {
+            console.log(`🐉 DRAGON LEVEL UP! Level ${newLevel} - Power: ${newStats.power}`)
+          }
           toast.success(`🐉 DRAGON LEVELED UP!`, {
             description: `Level ${newLevel} achieved! Power: ${Math.floor(newStats.power)}`,
             duration: 5000
@@ -122,7 +133,9 @@ export function PersistentDragonCore() {
 
         // Milestone celebrations
         if (newStats.power % 10000 < growthRate * 2 && newStats.power >= 10000) {
-          console.log(`🌟 DRAGON MILESTONE: ${Math.floor(newStats.power / 10000) * 10}K Power reached!`)
+          if (DEBUG_MODE) {
+            console.log(`🌟 DRAGON MILESTONE: ${Math.floor(newStats.power / 10000) * 10}K Power reached!`)
+          }
           toast.success('🌟 DRAGON MILESTONE!', {
             description: `${Math.floor(newStats.power / 10000) * 10}K Power achieved - Unstoppable force!`,
             duration: 6000

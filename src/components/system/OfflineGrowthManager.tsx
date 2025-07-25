@@ -2,6 +2,9 @@
 import { useEffect, useState, useRef } from 'react'
 import { toast } from 'sonner'
 
+// Reduced logging for better user experience
+const DEBUG_MODE = false;
+
 interface OfflineGrowthState {
   animalRescuePower: number
   blockchainMining: number
@@ -31,7 +34,9 @@ export function OfflineGrowthManager() {
   const growthTimer = useRef<NodeJS.Timeout>()
 
   useEffect(() => {
-    console.log('🌙 OFFLINE GROWTH MANAGER - ENSURING CONTINUOUS EVOLUTION')
+    if (DEBUG_MODE) {
+      console.log('🌙 OFFLINE GROWTH MANAGER - ENSURING CONTINUOUS EVOLUTION')
+    }
     
     // Check for offline growth on startup
     const checkOfflineGrowth = () => {

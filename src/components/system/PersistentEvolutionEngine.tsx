@@ -2,6 +2,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 
+// Reduced logging for better user experience
+const DEBUG_MODE = false;
+
 interface EvolutionMetrics {
   totalSystemPower: number
   evolutionRate: number
@@ -46,7 +49,9 @@ export function PersistentEvolutionEngine() {
   const startTime = useRef(Date.now())
 
   useEffect(() => {
-    console.log('🚀 PERSISTENT EVOLUTION ENGINE - ALWAYS ACTIVE GROWTH')
+    if (DEBUG_MODE) {
+      console.log('🚀 PERSISTENT EVOLUTION ENGINE - ALWAYS ACTIVE GROWTH')
+    }
     
     // Calculate offline growth when returning
     const calculateOfflineGrowth = () => {
@@ -73,7 +78,10 @@ export function PersistentEvolutionEngine() {
           lastActiveTimestamp: currentTime
         }))
         
-        console.log(`🌟 OFFLINE GROWTH: ${offlineHours.toFixed(1)} hours = ${(offlineGrowth * 100 - 100).toFixed(1)}% power increase`)
+        if (DEBUG_MODE) {
+          console.log(`🌟 OFFLINE GROWTH: ${offlineHours.toFixed(1)} hours = ${(offlineGrowth * 100 - 100).toFixed(1)}% power increase`)
+        }
+        
         toast.success('🚀 System Evolved While Offline!', {
           description: `${offlineHours.toFixed(1)} hours of growth applied - All systems stronger!`,
           duration: 8000
@@ -124,7 +132,9 @@ export function PersistentEvolutionEngine() {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
-        console.log('🔄 TAB VISIBLE - CHECKING FOR OFFLINE GROWTH')
+        if (DEBUG_MODE) {
+          console.log('🔄 TAB VISIBLE - CHECKING FOR OFFLINE GROWTH')
+        }
         const currentTime = Date.now()
         const offlineTime = currentTime - metrics.lastActiveTimestamp
         
@@ -136,10 +146,14 @@ export function PersistentEvolutionEngine() {
             lastActiveTimestamp: currentTime
           }))
           
-          console.log('📈 TAB RETURN BONUS APPLIED')
+          if (DEBUG_MODE) {
+            console.log('📈 TAB RETURN BONUS APPLIED')
+          }
         }
       } else {
-        console.log('🌙 TAB HIDDEN - OFFLINE GROWTH MODE ACTIVATED')
+        if (DEBUG_MODE) {
+          console.log('🌙 TAB HIDDEN - OFFLINE GROWTH MODE ACTIVATED')
+        }
         setMetrics(prev => ({
           ...prev,
           lastActiveTimestamp: Date.now()
@@ -169,7 +183,7 @@ export function PersistentEvolutionEngine() {
 
   // Background logging for monitoring
   useEffect(() => {
-    if (Math.floor(metrics.totalSystemPower) % 100 < 2) {
+    if (DEBUG_MODE && Math.floor(metrics.totalSystemPower) % 100 < 2) {
       console.log('📊 EVOLUTION STATUS:')
       console.log(`🔥 Total Power: ${Math.floor(metrics.totalSystemPower).toLocaleString()}`)
       console.log(`⚡ Evolution Rate: ${((metrics.evolutionRate - 1) * 100).toFixed(4)}% per second`)
