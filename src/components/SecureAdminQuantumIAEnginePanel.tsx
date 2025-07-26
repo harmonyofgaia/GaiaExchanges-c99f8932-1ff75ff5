@@ -138,8 +138,10 @@ export function SecureAdminQuantumIAEnginePanel() {
     } else if (authStage > 5) {
       authTimeoutRef.current = setTimeout(() => {
         setIsAuthenticated(true)
-        // Simulate creator-level access detection
-        setIsCreatorMode(true)
+        // Verify user permissions before enabling creator mode
+        if (hasCreatorPermissions()) {
+          setIsCreatorMode(true)
+        }
         authTimeoutRef.current = undefined
       }, 800)
       return () => {
