@@ -97,10 +97,10 @@ export default function EarningActivitiesDashboard() {
   const inProgressAchievements = achievements.filter(a => !a.completed)
 
   // Filter activities by type for analytics
-  const userWaterActions = activities.filter(a => a.type === 'water_saving')
-  const userFoodActions = activities.filter(a => a.type === 'home_grown_food')
-  const userBeeActions = activities.filter(a => a.type === 'bee_hotel')
-  const userCarbonActions = activities.filter(a => a.type === 'carbon_credit')
+  const userWaterActions = activities.filter(a => a.type === EarningActivityType.WATER_SAVING)
+  const userFoodActions = activities.filter(a => a.type === EarningActivityType.HOME_GROWN_FOOD)
+  const userBeeActions = activities.filter(a => a.type === EarningActivityType.BEE_HOTEL)
+  const userCarbonActions = activities.filter(a => a.type === EarningActivityType.CARBON_CREDIT)
 
   // Calculate activity stats
   const activityStats = Object.values(EarningActivityType).map(type => ({
