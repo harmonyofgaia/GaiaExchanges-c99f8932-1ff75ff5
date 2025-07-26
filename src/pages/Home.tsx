@@ -396,7 +396,7 @@ export default function Home() {
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <Badge variant="secondary" className="bg-purple-900/50 text-purple-300 border-purple-500/50">
-                    Q3 2024
+                    {getCurrentQuarterAndYear()}
                   </Badge>
                 </div>
               </CardContent>
