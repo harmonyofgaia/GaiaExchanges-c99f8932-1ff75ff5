@@ -46,7 +46,7 @@ export function ensureCrossBrowserCompatibility(): boolean {
     canvas: !!document.createElement('canvas').getContext,
     localStorage: typeof Storage !== 'undefined',
     webSockets: typeof WebSocket !== 'undefined',
-    audioContext: !!(window.AudioContext || (window as any).webkitAudioContext),
+    audioContext: !!(window.AudioContext || (window as unknown as { webkitAudioContext?: AudioContext }).webkitAudioContext),
     deviceOrientation: 'DeviceOrientationEvent' in window,
     geolocation: 'geolocation' in navigator,
     webRTC: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)

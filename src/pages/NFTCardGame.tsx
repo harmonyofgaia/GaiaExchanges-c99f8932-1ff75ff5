@@ -1,771 +1,473 @@
-
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Input } from '@/components/ui/input'
 import { 
   Sparkles, 
-  Zap, 
-  Award, 
-  Users, 
-  TrendingUp, 
-  Heart,
-  Shield,
-  Target,
-  Star,
-  Globe,
-  TreePine,
-  Droplets,
+  Plus, 
+  Trophy, 
+  Shuffle, 
+  Crown, 
   Leaf,
-  Brain,
-  Camera,
-  Network,
-  ArrowUpDown,
-  Coins,
-  Trophy,
-  Eye,
-  Gamepad2
+  Fish,
+  Mountain,
+  TreePine,
+  Flower2
 } from 'lucide-react'
 import { supabase } from '@/integrations/supabase/client'
-import { useAuth } from '@/components/auth/AuthProvider'
 import { toast } from 'sonner'
-
-interface NFTCard {
-  id: string
-  user_id: string
-  card_type: string
-  card_name: string
-  rarity: string
-  power_level: number
-  biodiversity_category: string
-  card_metadata: any
-  minted_at: string
-  is_tradeable: boolean
-  ecosystem_interactions?: string[]
-  conservation_partner?: string
-  real_world_impact?: number
-  evolution_stage?: number
-  max_evolution?: number
-  trading_history?: any[]
-  market_value?: number
-}
-
-interface EcosystemInteraction {
-  card1_id: string
-  card2_id: string
-  interaction_type: string
-  bonus_multiplier: number
-  environmental_benefit: string
-}
-
-interface ConservationPartnership {
-  organization: string
-  project_name: string
-  impact_contribution: number
-  verification_status: string
-  location: string
-}
-
-interface MarketplaceData {
-  totalVolume: number
-  activeTraders: number
-  topCollections: any[]
-  recentSales: any[]
-  conservationFunding: number
-}
+import { NFTCard } from '@/types/ui-types'
+import { parseJsonField } from '@/types/ui-types'
 
 export default function NFTCardGame() {
-  const { user } = useAuth()
   const [collection, setCollection] = useState<NFTCard[]>([])
-  const [loading, setLoading] = useState(true)
-  const [minting, setMinting] = useState(false)
   const [selectedCard, setSelectedCard] = useState<NFTCard | null>(null)
-  const [ecosystemInteractions, setEcosystemInteractions] = useState<EcosystemInteraction[]>([])
-  const [conservationPartnerships, setConservationPartnerships] = useState<ConservationPartnership[]>([])
-  const [marketplaceData, setMarketplaceData] = useState<MarketplaceData>({
-    totalVolume: 2847592,
-    activeTraders: 8934,
-    topCollections: [],
-    recentSales: [],
-    conservationFunding: 456789
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [generationProgress, setGenerationProgress] = useState(0)
+  const [userStats, setUserStats] = useState({
+    totalCards: 0,
+    rareCards: 0,
+    powerLevel: 0,
+    tradingScore: 0
   })
-
-  useEffect(() => {
-    if (user) {
-      loadCollection()
-      loadEcosystemInteractions()
-      loadConservationPartnerships()
-      loadMarketplaceData()
-    }
-  }, [user])
-
-  const loadEcosystemInteractions = async () => {
-    // Mock ecosystem interactions for Master Plan v7
-    const interactions = [
-      {
-        card1_id: 'forest_wolf',
-        card2_id: 'ancient_oak',
-        interaction_type: 'symbiotic',
-        bonus_multiplier: 1.5,
-        environmental_benefit: 'Enhanced forest health and biodiversity'
-      },
-      {
-        card1_id: 'ocean_dolphin',
-        card2_id: 'coral_reef',
-        interaction_type: 'protective',
-        bonus_multiplier: 2.0,
-        environmental_benefit: 'Ocean ecosystem preservation'
-      }
-    ]
-    setEcosystemInteractions(interactions)
-  }
-
-  const loadConservationPartnerships = async () => {
-    // Mock conservation partnerships
-    const partnerships = [
-      {
-        organization: 'World Wildlife Fund',
-        project_name: 'Amazon Rainforest Protection',
-        impact_contribution: 1250,
-        verification_status: 'verified',
-        location: 'Amazon Basin, Brazil'
-      },
-      {
-        organization: 'Ocean Conservancy',
-        project_name: 'Great Barrier Reef Restoration',
-        impact_contribution: 890,
-        verification_status: 'verified',
-        location: 'Queensland, Australia'
-      }
-    ]
-    setConservationPartnerships(partnerships)
-  }
-
-  const loadMarketplaceData = async () => {
-    // Simulate real-time marketplace updates
-    const interval = setInterval(() => {
-      setMarketplaceData(prev => ({
-        ...prev,
-        totalVolume: prev.totalVolume + Math.floor(Math.random() * 1000),
-        activeTraders: prev.activeTraders + Math.floor(Math.random() * 10) - 5,
-        conservationFunding: prev.conservationFunding + Math.floor(Math.random() * 500)
-      }))
-    }, 8000)
-
-    return () => clearInterval(interval)
-  }
-
-  useEffect(() => {
-    if (user) {
-      loadCollection()
-    }
-  }, [user])
 
   const loadCollection = async () => {
     try {
+      const { data: user } = await supabase.auth.getUser()
+      if (!user.user) return
+
       const { data, error } = await supabase
         .from('nft_card_collection')
         .select('*')
-        .eq('user_id', user!.id)
+        .eq('user_id', user.user.id)
         .order('minted_at', { ascending: false })
 
       if (error) throw error
-      setCollection(data || [])
+
+      if (data) {
+        // Map database data to NFTCard interface
+        const mappedCards: NFTCard[] = data.map(dbCard => ({
+          id: dbCard.id,
+          card_name: dbCard.card_name,
+          card_type: dbCard.card_type,
+          rarity: dbCard.rarity,
+          power_level: dbCard.power_level,
+          biodiversity_category: dbCard.biodiversity_category || '',
+          user_id: dbCard.user_id,
+          minted_at: dbCard.minted_at,
+          is_tradeable: dbCard.is_tradeable,
+          card_metadata: parseJsonField(dbCard.card_metadata, {
+            image_url: '',
+            description: '',
+            traits: [],
+            conservation_info: '',
+            abilities: []
+          })
+        }))
+
+        setCollection(mappedCards)
+        
+        // Update user stats
+        const totalCards = mappedCards.length
+        const rareCards = mappedCards.filter(card => ['rare', 'epic', 'legendary'].includes(card.rarity)).length
+        const powerLevel = mappedCards.reduce((sum, card) => sum + card.power_level, 0)
+        
+        setUserStats({
+          totalCards,
+          rareCards,
+          powerLevel,
+          tradingScore: Math.floor(powerLevel / 10)
+        })
+      }
     } catch (error) {
       console.error('Error loading collection:', error)
-      toast.error('Failed to load card collection')
-    } finally {
-      setLoading(false)
+      toast.error('Failed to load your collection')
     }
   }
 
-  const mintRandomCard = async () => {
-    if (!user) {
-      toast.error('Please log in to mint cards')
-      return
-    }
+  useEffect(() => {
+    loadCollection()
+  }, [])
 
-    setMinting(true)
+  const generateNewCard = async () => {
     try {
-      const cardTypes = ['animal', 'plant', 'ecosystem', 'guardian', 'artifact']
-      const rarities = ['common', 'uncommon', 'rare', 'epic', 'legendary']
-      const categories = ['forest', 'ocean', 'grassland', 'desert', 'arctic', 'tropical']
-      
-      const animalNames = ['Forest Wolf', 'Ocean Dolphin', 'Mountain Eagle', 'Desert Fox', 'Arctic Seal', 'Tropical Parrot']
-      const plantNames = ['Ancient Oak', 'Coral Reef', 'Bamboo Grove', 'Cactus Garden', 'Pine Forest', 'Rainforest Canopy']
-      const ecosystemNames = ['Pristine Wetland', 'Coral Ecosystem', 'Alpine Meadow', 'Oasis Haven', 'Tundra Expanse', 'Jungle Paradise']
-      const guardianNames = ['Earth Guardian', 'Water Keeper', 'Sky Protector', 'Fire Warden', 'Life Bringer', 'Nature\'s Voice']
-      const artifactNames = ['Seed of Life', 'Crystal of Purity', 'Wind Chimes', 'Solar Prism', 'Moon Stone', 'Rainbow Bridge']
+      setIsGenerating(true)
+      setGenerationProgress(0)
 
-      const randomType = cardTypes[Math.floor(Math.random() * cardTypes.length)]
-      const randomRarity = rarities[Math.floor(Math.random() * rarities.length)]
-      const randomCategory = categories[Math.floor(Math.random() * categories.length)]
-      
-      let cardName = ''
-      switch (randomType) {
-        case 'animal':
-          cardName = animalNames[Math.floor(Math.random() * animalNames.length)]
-          break
-        case 'plant':
-          cardName = plantNames[Math.floor(Math.random() * plantNames.length)]
-          break
-        case 'ecosystem':
-          cardName = ecosystemNames[Math.floor(Math.random() * ecosystemNames.length)]
-          break
-        case 'guardian':
-          cardName = guardianNames[Math.floor(Math.random() * guardianNames.length)]
-          break
-        case 'artifact':
-          cardName = artifactNames[Math.floor(Math.random() * artifactNames.length)]
-          break
-        default:
-          cardName = 'Mystery Card'
+      const { data: user } = await supabase.auth.getUser()
+      if (!user.user) {
+        toast.error('Please log in to generate cards')
+        return
       }
 
-      const powerLevel = Math.floor(Math.random() * 100) + 1
-      const rarityMultiplier = {
-        'common': 1,
-        'uncommon': 1.5,
-        'rare': 2,
-        'epic': 3,
-        'legendary': 5
-      }[randomRarity] || 1
+      // Simulate generation progress
+      const progressSteps = [
+        'Scanning global biodiversity data...',
+        'Analyzing ecosystem health...',
+        'Generating unique card attributes...',
+        'Creating conservation metadata...',
+        'Minting NFT card...'
+      ]
 
-      const finalPowerLevel = Math.floor(powerLevel * rarityMultiplier)
+      for (let i = 0; i < progressSteps.length; i++) {
+        toast.info(progressSteps[i])
+        setGenerationProgress(((i + 1) / progressSteps.length) * 100)
+        await new Promise(resolve => setTimeout(resolve, 1500))
+      }
+
+      // Generate random card attributes
+      const cardTypes = ['creature', 'habitat', 'conservation', 'ecosystem', 'climate']
+      const rarities = ['common', 'rare', 'epic', 'legendary', 'mythical']
+      const rarityWeights = [50, 30, 15, 4, 1] // Percentage chances
+      const biodiversityCategories = ['marine', 'forest', 'grassland', 'wetland', 'tundra', 'desert']
+
+      // Weighted rarity selection
+      const randomValue = Math.random() * 100
+      let cumulativeWeight = 0
+      let selectedRarity = 'common'
+      
+      for (let i = 0; i < rarities.length; i++) {
+        cumulativeWeight += rarityWeights[i]
+        if (randomValue <= cumulativeWeight) {
+          selectedRarity = rarities[i]
+          break
+        }
+      }
+
+      const cardType = cardTypes[Math.floor(Math.random() * cardTypes.length)]
+      const biodiversityCategory = biodiversityCategories[Math.floor(Math.random() * biodiversityCategories.length)]
+      const powerLevel = Math.floor(Math.random() * 100) + (selectedRarity === 'legendary' ? 80 : selectedRarity === 'epic' ? 60 : selectedRarity === 'rare' ? 40 : 20)
+
+      const cardNames = {
+        creature: ['Azure Whale', 'Golden Eagle', 'Red Panda', 'Arctic Fox', 'Monarch Butterfly'],
+        habitat: ['Coral Reef Paradise', 'Ancient Forest', 'Mountain Peak', 'Desert Oasis', 'Wetland Sanctuary'],
+        conservation: ['Wildlife Protector', 'Ocean Guardian', 'Forest Keeper', 'Climate Champion', 'Species Savior'],
+        ecosystem: ['Symbiotic Network', 'Carbon Cycle', 'Pollination Hub', 'Nutrient Flow', 'Biodiversity Web'],
+        climate: ['Solar Harmony', 'Rain Cycle', 'Wind Patterns', 'Temperature Balance', 'Seasonal Rhythm']
+      }
+
+      const cardName = cardNames[cardType as keyof typeof cardNames][Math.floor(Math.random() * cardNames[cardType as keyof typeof cardNames].length)]
+
+      const newCardData = {
+        user_id: user.user.id,
+        card_name: cardName,
+        card_type: cardType,
+        rarity: selectedRarity,
+        power_level: powerLevel,
+        biodiversity_category: biodiversityCategory,
+        is_tradeable: true,
+        card_metadata: {
+          image_url: `https://images.unsplash.com/400x600/?${cardType},${biodiversityCategory}`,
+          description: `A ${selectedRarity} ${cardType} card representing the ${biodiversityCategory} ecosystem. This card embodies the spirit of ${cardName} with ${powerLevel} power level.`,
+          traits: [
+            { trait_type: 'Ecosystem', value: biodiversityCategory },
+            { trait_type: 'Type', value: cardType },
+            { trait_type: 'Rarity', value: selectedRarity },
+            { trait_type: 'Power Level', value: powerLevel.toString() }
+          ],
+          conservation_info: `This card supports conservation efforts in ${biodiversityCategory} ecosystems and helps raise awareness about ${cardName}.`,
+          abilities: selectedRarity === 'legendary' ? ['Ultimate Power', 'Ecosystem Dominance'] : 
+                    selectedRarity === 'epic' ? ['Enhanced Abilities', 'Rare Traits'] :
+                    selectedRarity === 'rare' ? ['Special Skills'] : []
+        }
+      }
 
       const { data, error } = await supabase
         .from('nft_card_collection')
-        .insert([
-          {
-            user_id: user.id,
-            card_type: randomType,
-            card_name: cardName,
-            rarity: randomRarity,
-            power_level: finalPowerLevel,
-            biodiversity_category: randomCategory,
-            card_metadata: {
-              description: `A ${randomRarity} ${randomType} from the ${randomCategory} biome`,
-              abilities: generateRandomAbilities(randomType, randomRarity),
-              artwork_url: `/api/placeholder/200/300?text=${encodeURIComponent(cardName)}`
-            }
-          }
-        ])
+        .insert(newCardData)
         .select()
+        .single()
 
       if (error) throw error
-      
-      toast.success(`New ${randomRarity} card minted: ${cardName}!`)
-      loadCollection()
+
+      toast.success(`New ${selectedRarity} card generated: ${cardName}!`)
+      loadCollection() // Reload collection
     } catch (error) {
-      console.error('Error minting card:', error)
-      toast.error('Failed to mint card')
+      console.error('Error generating card:', error)
+      toast.error('Failed to generate new card')
     } finally {
-      setMinting(false)
+      setIsGenerating(false)
+      setGenerationProgress(0)
     }
-  }
-
-  const generateRandomAbilities = (type: string, rarity: string) => {
-    const abilities = {
-      animal: ['Swift Movement', 'Pack Leader', 'Camouflage', 'Keen Senses', 'Territorial'],
-      plant: ['Photosynthesis', 'Root Network', 'Oxygen Production', 'Soil Enrichment', 'Seed Dispersal'],
-      ecosystem: ['Biodiversity Boost', 'Climate Regulation', 'Water Cycle', 'Nutrient Cycling', 'Habitat Creation'],
-      guardian: ['Nature\'s Shield', 'Healing Aura', 'Elemental Control', 'Wisdom of Ages', 'Life Force'],
-      artifact: ['Ancient Power', 'Mystical Energy', 'Harmony Resonance', 'Time Dilation', 'Reality Shift']
-    }
-
-    const typeAbilities = abilities[type as keyof typeof abilities] || abilities.animal
-    const numAbilities = rarity === 'legendary' ? 3 : rarity === 'epic' ? 2 : 1
-    
-    return typeAbilities.slice(0, numAbilities)
   }
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
-      case 'common': return 'text-gray-400'
-      case 'uncommon': return 'text-green-400'
-      case 'rare': return 'text-blue-400'
-      case 'epic': return 'text-purple-400'
-      case 'legendary': return 'text-yellow-400'
-      default: return 'text-gray-400'
+      case 'mythical': return 'from-purple-500 to-pink-500'
+      case 'legendary': return 'from-yellow-400 to-orange-500'
+      case 'epic': return 'from-purple-400 to-blue-500'
+      case 'rare': return 'from-blue-400 to-green-500'
+      default: return 'from-gray-400 to-gray-600'
     }
   }
 
-  const getRarityBorder = (rarity: string) => {
-    switch (rarity) {
-      case 'common': return 'border-gray-500/50'
-      case 'uncommon': return 'border-green-500/50'
-      case 'rare': return 'border-blue-500/50'
-      case 'epic': return 'border-purple-500/50'
-      case 'legendary': return 'border-yellow-500/50'
-      default: return 'border-gray-500/50'
+  const getCardIcon = (cardType: string) => {
+    switch (cardType) {
+      case 'creature': return <Fish className="h-5 w-5" />
+      case 'habitat': return <TreePine className="h-5 w-5" />
+      case 'conservation': return <Crown className="h-5 w-5" />
+      case 'ecosystem': return <Leaf className="h-5 w-5" />
+      case 'climate': return <Mountain className="h-5 w-5" />
+      default: return <Flower2 className="h-5 w-5" />
     }
-  }
-
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'animal': return Heart
-      case 'plant': return TreePine
-      case 'ecosystem': return Globe
-      case 'guardian': return Shield
-      case 'artifact': return Sparkles
-      default: return Leaf
-    }
-  }
-
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case 'forest': return TreePine
-      case 'ocean': return Droplets
-      case 'grassland': return Leaf
-      case 'desert': return Target
-      case 'arctic': return Star
-      case 'tropical': return Globe
-      default: return Globe
-    }
-  }
-
-  const rarityDistribution = {
-    common: collection.filter(c => c.rarity === 'common').length,
-    uncommon: collection.filter(c => c.rarity === 'uncommon').length,
-    rare: collection.filter(c => c.rarity === 'rare').length,
-    epic: collection.filter(c => c.rarity === 'epic').length,
-    legendary: collection.filter(c => c.rarity === 'legendary').length
-  }
-
-  const totalPowerLevel = collection.reduce((sum, card) => sum + card.power_level, 0)
-
-  if (loading) {
-    return (
-      <div className="container mx-auto p-4">
-        <div className="flex items-center justify-center min-h-96">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-400"></div>
-        </div>
-      </div>
-    )
   }
 
   return (
-    <div className="container mx-auto p-4 space-y-6">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">
-          🎴 Biodiversity NFT Cards v7
-        </h1>
-        <p className="text-xl text-muted-foreground">
-          Advanced ecosystem interactions, conservation partnerships, and dynamic marketplace
-        </p>
-        <Badge className="mt-2 bg-purple-600 text-white">
-          <Network className="h-3 w-3 mr-1" />
-          Master Plan v7 Enabled
-        </Badge>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-green-900 p-6">
+      <div className="max-w-7xl mx-auto space-y-6">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-white mb-2">
+            ✨ NFT Biodiversity Card Game
+          </h1>
+          <p className="text-xl text-purple-300">Collect, Trade & Protect Nature's Wonders</p>
+        </div>
 
-      {/* Enhanced Collection Stats with Marketplace Data */}
-      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-400">
-            <Award className="h-6 w-6" />
-            Advanced Collection Analytics
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">{collection.length}</div>
-              <div className="text-sm text-muted-foreground">Total Cards</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400">{totalPowerLevel}</div>
-              <div className="text-sm text-muted-foreground">Total Power</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400">{rarityDistribution.legendary}</div>
-              <div className="text-sm text-muted-foreground">Legendary Cards</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">
-                {collection.filter(c => c.is_tradeable).length}
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <Card className="bg-blue-900/30 border-blue-500/30">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-blue-300 text-sm">Total Cards</p>
+                  <p className="text-2xl font-bold text-white">{userStats.totalCards}</p>
+                </div>
+                <Sparkles className="h-8 w-8 text-blue-400" />
               </div>
-              <div className="text-sm text-muted-foreground">Tradeable Cards</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-cyan-400">{marketplaceData.totalVolume.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Market Volume</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-pink-400">{marketplaceData.conservationFunding.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Conservation Fund</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+            </CardContent>
+          </Card>
 
-      {/* Ecosystem Interactions */}
-      <Card className="border-purple-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-purple-400">
-            <Network className="h-5 w-5" />
-            Ecosystem Interactions
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <p className="text-muted-foreground text-sm">
-              Combine cards to create powerful ecosystem synergies and unlock environmental bonuses.
+          <Card className="bg-purple-900/30 border-purple-500/30">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-purple-300 text-sm">Rare Cards</p>
+                  <p className="text-2xl font-bold text-white">{userStats.rareCards}</p>
+                </div>
+                <Crown className="h-8 w-8 text-purple-400" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-green-900/30 border-green-500/30">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-green-300 text-sm">Power Level</p>
+                  <p className="text-2xl font-bold text-white">{userStats.powerLevel}</p>
+                </div>
+                <Trophy className="h-8 w-8 text-green-400" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-amber-900/30 border-amber-500/30">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-amber-300 text-sm">Trading Score</p>
+                  <p className="text-2xl font-bold text-white">{userStats.tradingScore}</p>
+                </div>
+                <Shuffle className="h-8 w-8 text-amber-400" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Generate Card Section */}
+        <Card className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 border-purple-500/30">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-purple-400">
+              <Plus className="h-6 w-6" />
+              Generate New Card
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground mb-4">
+              Use AI to generate unique biodiversity cards with real conservation data and stunning visuals.
             </p>
-            {ecosystemInteractions.map((interaction, index) => (
-              <div key={index} className="p-4 rounded-lg border border-purple-500/20 bg-purple-900/10">
-                <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-medium text-purple-400 capitalize">
-                    {interaction.interaction_type} Relationship
-                  </h4>
-                  <Badge className="bg-green-600">
-                    {interaction.bonus_multiplier}x Bonus
-                  </Badge>
+            
+            {isGenerating && (
+              <div className="mb-4">
+                <div className="flex justify-between text-sm mb-2">
+                  <span>Generating your unique card...</span>
+                  <span>{Math.round(generationProgress)}%</span>
                 </div>
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="px-2 py-1 bg-blue-600/20 rounded text-xs text-blue-400">
-                    {interaction.card1_id.replace('_', ' ')}
-                  </div>
-                  <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
-                  <div className="px-2 py-1 bg-green-600/20 rounded text-xs text-green-400">
-                    {interaction.card2_id.replace('_', ' ')}
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground">{interaction.environmental_benefit}</p>
+                <Progress value={generationProgress} className="h-2" />
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+            )}
 
-      {/* Conservation Partnerships */}
-      <Card className="border-blue-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <Heart className="h-5 w-5" />
-            Conservation Partnerships
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <p className="text-muted-foreground text-sm">
-              Your NFT collection contributes to real-world conservation projects through verified partnerships.
-            </p>
-            {conservationPartnerships.map((partnership, index) => (
-              <div key={index} className="p-4 rounded-lg border border-blue-500/20 bg-blue-900/10">
-                <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-medium text-blue-400">{partnership.organization}</h4>
-                  <Badge variant="outline" className="text-green-400">
-                    {partnership.verification_status}
-                  </Badge>
-                </div>
-                <h5 className="text-sm font-medium text-blue-300 mb-1">{partnership.project_name}</h5>
-                <p className="text-sm text-muted-foreground mb-2">{partnership.location}</p>
-                <div className="flex items-center gap-2">
-                  <Badge className="bg-green-600">
-                    {partnership.impact_contribution} Carbon Credits
-                  </Badge>
-                  <span className="text-xs text-muted-foreground">contributed by your collection</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Enhanced Minting Section */}
-      <Card className="border-blue-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <Sparkles className="h-5 w-5" />
-            Advanced Card Minting v7
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center space-y-4">
-            <p className="text-muted-foreground">
-              Mint biodiversity cards with real-world conservation impact and ecosystem interactions
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-sm">
-              <div>
-                <div className="text-gray-400">Common</div>
-                <div className="font-bold">45%</div>
-              </div>
-              <div>
-                <div className="text-green-400">Uncommon</div>
-                <div className="font-bold">30%</div>
-              </div>
-              <div>
-                <div className="text-blue-400">Rare</div>
-                <div className="font-bold">15%</div>
-              </div>
-              <div>
-                <div className="text-purple-400">Epic</div>
-                <div className="font-bold">8%</div>
-              </div>
-              <div>
-                <div className="text-yellow-400">Legendary</div>
-                <div className="font-bold">2%</div>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Button
-                onClick={mintRandomCard}
-                disabled={minting}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
-                {minting ? 'Minting...' : 'Mint Standard Card (100 GAiA)'}
-              </Button>
-              <Button
-                onClick={mintRandomCard}
-                disabled={minting}
-                className="bg-purple-600 hover:bg-purple-700"
-              >
-                {minting ? 'Minting...' : 'Mint Premium Card (250 GAiA)'}
-              </Button>
-            </div>
-            <div className="text-xs text-muted-foreground">
-              <div className="flex items-center justify-center gap-2">
-                <Heart className="h-3 w-3 text-green-400" />
-                50% of minting fees support conservation projects
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Dynamic Marketplace */}
-      <Card className="border-yellow-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-yellow-400">
-            <Coins className="h-5 w-5" />
-            Dynamic Marketplace
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400">{marketplaceData.totalVolume.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Total Volume (GAiA)</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">{marketplaceData.activeTraders}</div>
-              <div className="text-sm text-muted-foreground">Active Traders</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">{marketplaceData.conservationFunding.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Conservation Funding</div>
-            </div>
-          </div>
-          <div className="mt-4 flex gap-2">
-            <Button className="flex-1 bg-yellow-600 hover:bg-yellow-700">
-              <Eye className="h-4 w-4 mr-2" />
-              Browse Marketplace
+            <Button 
+              onClick={generateNewCard} 
+              disabled={isGenerating}
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+            >
+              {isGenerating ? 'Generating...' : 'Generate New Card'}
             </Button>
-            <Button className="flex-1 bg-green-600 hover:bg-green-700">
-              <ArrowUpDown className="h-4 w-4 mr-2" />
-              Trade Cards
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
 
-      {/* Card Collection */}
-      <Tabs defaultValue="all" className="w-full">
-        <TabsList className="grid w-full grid-cols-6">
-          <TabsTrigger value="all">All ({collection.length})</TabsTrigger>
-          <TabsTrigger value="animal">Animals ({collection.filter(c => c.card_type === 'animal').length})</TabsTrigger>
-          <TabsTrigger value="plant">Plants ({collection.filter(c => c.card_type === 'plant').length})</TabsTrigger>
-          <TabsTrigger value="ecosystem">Ecosystems ({collection.filter(c => c.card_type === 'ecosystem').length})</TabsTrigger>
-          <TabsTrigger value="guardian">Guardians ({collection.filter(c => c.card_type === 'guardian').length})</TabsTrigger>
-          <TabsTrigger value="artifact">Artifacts ({collection.filter(c => c.card_type === 'artifact').length})</TabsTrigger>
-        </TabsList>
+        {/* Card Collection */}
+        <Tabs defaultValue="collection" className="space-y-4">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="collection">My Collection</TabsTrigger>
+            <TabsTrigger value="marketplace">Marketplace</TabsTrigger>
+            <TabsTrigger value="battles">Card Battles</TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="all" className="space-y-4">
-          {collection.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">🎴</div>
-              <h3 className="text-xl font-semibold text-muted-foreground mb-2">
-                No cards in collection
-              </h3>
-              <p className="text-muted-foreground">
-                Mint your first card to start building your biodiversity collection!
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {collection.map((card) => {
-                const TypeIcon = getTypeIcon(card.card_type)
-                const CategoryIcon = getCategoryIcon(card.biodiversity_category)
-                const rarityColor = getRarityColor(card.rarity)
-                const rarityBorder = getRarityBorder(card.rarity)
-                
-                return (
-                  <Card key={card.id} className={`${rarityBorder} hover:scale-105 transition-transform cursor-pointer`}>
-                    <CardHeader className="pb-2">
-                      <div className="flex items-center justify-between">
-                        <Badge className={`${rarityColor} capitalize`}>
-                          {card.rarity}
-                        </Badge>
-                        <Badge variant="outline">
-                          <TypeIcon className="h-3 w-3 mr-1" />
-                          {card.card_type}
-                        </Badge>
-                      </div>
-                      <CardTitle className="text-lg">{card.card_name}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="aspect-square bg-gradient-to-br from-green-900/20 to-blue-900/20 rounded-lg flex items-center justify-center">
-                        <TypeIcon className="h-16 w-16 text-muted-foreground" />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-muted-foreground">Power Level</span>
-                          <span className="font-bold text-green-400">{card.power_level}</span>
-                        </div>
-                        
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-muted-foreground">Biome</span>
-                          <div className="flex items-center gap-1">
-                            <CategoryIcon className="h-3 w-3 text-muted-foreground" />
-                            <span className="text-sm capitalize">{card.biodiversity_category}</span>
-                          </div>
-                        </div>
-                        
-                        <Progress value={(card.power_level / 500) * 100} className="h-2" />
-                      </div>
-
-                      {card.card_metadata?.abilities && (
-                        <div>
-                          <div className="text-sm font-medium mb-1">Abilities:</div>
-                          <div className="flex flex-wrap gap-1">
-                            {card.card_metadata.abilities.map((ability: string, index: number) => (
-                              <Badge key={index} variant="secondary" className="text-xs">
-                                {ability}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span>
-                          Minted: {new Date(card.minted_at).toLocaleDateString()}
-                        </span>
-                        {card.is_tradeable && (
-                          <Badge variant="outline" className="text-xs">
-                            Tradeable
+          <TabsContent value="collection">
+            <Card>
+              <CardHeader>
+                <CardTitle>Your NFT Card Collection</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {collection.map((card) => (
+                    <Card 
+                      key={card.id} 
+                      className={`bg-gradient-to-br ${getRarityColor(card.rarity)} p-1 cursor-pointer transform transition-transform hover:scale-105`}
+                      onClick={() => setSelectedCard(card)}
+                    >
+                      <div className="bg-gray-900 rounded-lg p-4 h-full">
+                        <div className="flex items-center justify-between mb-2">
+                          <Badge className={`bg-gradient-to-r ${getRarityColor(card.rarity)}`}>
+                            {card.rarity.toUpperCase()}
                           </Badge>
+                          {getCardIcon(card.card_type)}
+                        </div>
+                        
+                        <div className="mb-3">
+                          <img 
+                            src={card.card_metadata.image_url} 
+                            alt={card.card_name}
+                            className="w-full h-32 object-cover rounded-lg"
+                          />
+                        </div>
+                        
+                        <h3 className="font-bold text-white mb-1">{card.card_name}</h3>
+                        <p className="text-xs text-muted-foreground mb-2">{card.card_metadata.description}</p>
+                        
+                        <div className="flex justify-between items-center">
+                          <div className="text-sm">
+                            <span className="text-purple-300">Power:</span>
+                            <span className="text-white font-bold ml-1">{card.power_level}</span>
+                          </div>
+                          <Badge variant="outline" className="text-xs">
+                            {card.biodiversity_category}
+                          </Badge>
+                        </div>
+                        
+                        {card.card_metadata.abilities && card.card_metadata.abilities.length > 0 && (
+                          <div className="mt-2">
+                            <p className="text-xs text-green-400">
+                              Abilities: {card.card_metadata.abilities.join(', ')}
+                            </p>
+                          </div>
                         )}
                       </div>
-                    </CardContent>
-                  </Card>
-                )
-              })}
-            </div>
-          )}
-        </TabsContent>
-
-        {/* Filter tabs for each card type */}
-        {['animal', 'plant', 'ecosystem', 'guardian', 'artifact'].map((type) => (
-          <TabsContent key={type} value={type} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {collection.filter(card => card.card_type === type).map((card) => {
-                const TypeIcon = getTypeIcon(card.card_type)
-                const CategoryIcon = getCategoryIcon(card.biodiversity_category)
-                const rarityColor = getRarityColor(card.rarity)
-                const rarityBorder = getRarityBorder(card.rarity)
-                
-                return (
-                  <Card key={card.id} className={`${rarityBorder} hover:scale-105 transition-transform cursor-pointer`}>
-                    <CardHeader className="pb-2">
-                      <div className="flex items-center justify-between">
-                        <Badge className={`${rarityColor} capitalize`}>
-                          {card.rarity}
-                        </Badge>
-                        <Badge variant="outline">
-                          <TypeIcon className="h-3 w-3 mr-1" />
-                          {card.card_type}
-                        </Badge>
-                      </div>
-                      <CardTitle className="text-lg">{card.card_name}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="aspect-square bg-gradient-to-br from-green-900/20 to-blue-900/20 rounded-lg flex items-center justify-center">
-                        <TypeIcon className="h-16 w-16 text-muted-foreground" />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-muted-foreground">Power Level</span>
-                          <span className="font-bold text-green-400">{card.power_level}</span>
-                        </div>
-                        
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-muted-foreground">Biome</span>
-                          <div className="flex items-center gap-1">
-                            <CategoryIcon className="h-3 w-3 text-muted-foreground" />
-                            <span className="text-sm capitalize">{card.biodiversity_category}</span>
-                          </div>
-                        </div>
-                        
-                        <Progress value={(card.power_level / 500) * 100} className="h-2" />
-                      </div>
-
-                      {card.card_metadata?.abilities && (
-                        <div>
-                          <div className="text-sm font-medium mb-1">Abilities:</div>
-                          <div className="flex flex-wrap gap-1">
-                            {card.card_metadata.abilities.map((ability: string, index: number) => (
-                              <Badge key={index} variant="secondary" className="text-xs">
-                                {ability}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span>
-                          Minted: {new Date(card.minted_at).toLocaleDateString()}
-                        </span>
-                        {card.is_tradeable && (
-                          <Badge variant="outline" className="text-xs">
-                            Tradeable
-                          </Badge>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )
-              })}
-            </div>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
-        ))}
-      </Tabs>
 
-      {/* Rarity Distribution */}
-      <Card className="border-purple-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-purple-400">
-            <TrendingUp className="h-5 w-5" />
-            Collection Statistics
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            {Object.entries(rarityDistribution).map(([rarity, count]) => (
-              <div key={rarity} className="text-center">
-                <div className={`text-2xl font-bold ${getRarityColor(rarity)}`}>{count}</div>
-                <div className="text-sm text-muted-foreground capitalize">{rarity}</div>
+          <TabsContent value="marketplace">
+            <Card>
+              <CardHeader>
+                <CardTitle>NFT Marketplace</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-center py-8">
+                  Marketplace coming soon! Trade your cards with other collectors.
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="battles">
+            <Card>
+              <CardHeader>
+                <CardTitle>Card Battles</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-center py-8">
+                  Battle system coming soon! Use your cards to compete and earn rewards.
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+
+        {/* Card Detail Modal */}
+        {selectedCard && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+            <Card className={`bg-gradient-to-br ${getRarityColor(selectedCard.rarity)} p-1 max-w-md w-full`}>
+              <div className="bg-gray-900 rounded-lg p-6">
+                <div className="flex justify-between items-start mb-4">
+                  <h2 className="text-2xl font-bold text-white">{selectedCard.card_name}</h2>
+                  <Button 
+                    variant="ghost" 
+                    onClick={() => setSelectedCard(null)}
+                    className="text-white hover:bg-white/10"
+                  >
+                    ×
+                  </Button>
+                </div>
+                
+                <img 
+                  src={selectedCard.card_metadata.image_url} 
+                  alt={selectedCard.card_name}
+                  className="w-full h-48 object-cover rounded-lg mb-4"
+                />
+                
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <Badge className={`bg-gradient-to-r ${getRarityColor(selectedCard.rarity)}`}>
+                      {selectedCard.rarity.toUpperCase()}
+                    </Badge>
+                    <Badge variant="outline">{selectedCard.card_type}</Badge>
+                  </div>
+                  
+                  <p className="text-muted-foreground text-sm">{selectedCard.card_metadata.description}</p>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-purple-300">Power Level</p>
+                      <p className="text-xl font-bold text-white">{selectedCard.power_level}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-green-300">Ecosystem</p>
+                      <p className="text-sm text-white">{selectedCard.biodiversity_category}</p>
+                    </div>
+                  </div>
+                  
+                  {selectedCard.card_metadata.abilities && selectedCard.card_metadata.abilities.length > 0 && (
+                    <div>
+                      <p className="text-sm text-amber-300">Special Abilities</p>
+                      <p className="text-sm text-white">{selectedCard.card_metadata.abilities.join(', ')}</p>
+                    </div>
+                  )}
+                  
+                  <div>
+                    <p className="text-sm text-blue-300">Conservation Info</p>
+                    <p className="text-sm text-white">{selectedCard.card_metadata.conservation_info}</p>
+                  </div>
+                  
+                  <div className="pt-4 border-t border-gray-700">
+                    <p className="text-xs text-muted-foreground">
+                      Minted: {new Date(selectedCard.minted_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
               </div>
-            ))}
+            </Card>
           </div>
-        </CardContent>
-      </Card>
+        )}
+      </div>
     </div>
   )
 }

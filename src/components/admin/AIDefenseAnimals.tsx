@@ -28,6 +28,19 @@ import {
 } from 'lucide-react'
 import { toast } from 'sonner'
 
+interface AnimalDefense {
+  id: number;
+  name: string;
+  description: string;
+  effectiveness: number;
+  status: string;
+  location: string;
+  contributors: number;
+  activityLevel: number;
+  threatsRepelled: number;
+  emoji: string;
+}
+
 export function AIDefenseAnimals() {
   const [animalDefenses, setAnimalDefenses] = useState([
     {
@@ -201,7 +214,7 @@ export function AIDefenseAnimals() {
   ])
 
   const [selectedAnimals, setSelectedAnimals] = useState<number[]>([])
-  const [editingAnimal, setEditingAnimal] = useState<any>(null)
+  const [editingAnimal, setEditingAnimal] = useState<AnimalDefense | null>(null)
   const [isCreatingNew, setIsCreatingNew] = useState(false)
   
   // New animal form state

@@ -53,35 +53,37 @@ export interface GaiaTokenConfig {
 }
 
 // Type guards for runtime validation
-export const isValidTokenData = (data: any): data is TokenData => {
+export const isValidTokenData = (data: unknown): data is TokenData => {
   return (
     typeof data === 'object' &&
-    typeof data.price === 'number' &&
-    typeof data.volume24h === 'number' &&
-    typeof data.marketCap === 'number' &&
-    typeof data.priceChange24h === 'number' &&
-    typeof data.holders === 'number' &&
-    typeof data.transactions24h === 'number' &&
-    data.lastUpdated instanceof Date &&
-    typeof data.isLive === 'boolean' &&
-    typeof data.burnRate === 'number' &&
-    typeof data.totalBurned === 'number' &&
-    typeof data.circulatingSupply === 'number'
+    data !== null &&
+    typeof (data as any).price === 'number' &&
+    typeof (data as any).volume24h === 'number' &&
+    typeof (data as any).marketCap === 'number' &&
+    typeof (data as any).priceChange24h === 'number' &&
+    typeof (data as any).holders === 'number' &&
+    typeof (data as any).transactions24h === 'number' &&
+    (data as any).lastUpdated instanceof Date &&
+    typeof (data as any).isLive === 'boolean' &&
+    typeof (data as any).burnRate === 'number' &&
+    typeof (data as any).totalBurned === 'number' &&
+    typeof (data as any).circulatingSupply === 'number'
   )
 }
 
-export const isValidMetricsData = (data: any): data is MetricsData => {
+export const isValidMetricsData = (data: unknown): data is MetricsData => {
   return (
     typeof data === 'object' &&
-    typeof data.INITIAL_PRICE === 'number' &&
-    typeof data.INITIAL_HOLDERS === 'number' &&
-    typeof data.INITIAL_MARKET_CAP === 'number' &&
-    typeof data.INITIAL_VOLUME === 'number' &&
-    typeof data.INITIAL_TRANSACTIONS === 'number' &&
-    typeof data.NETWORK_SPEED === 'number' &&
-    typeof data.SECURITY_SCORE === 'number' &&
-    typeof data.ECOSYSTEM_HEALTH === 'number' &&
-    typeof data.DRAGON_POWER === 'number'
+    data !== null &&
+    typeof (data as any).INITIAL_PRICE === 'number' &&
+    typeof (data as any).INITIAL_HOLDERS === 'number' &&
+    typeof (data as any).INITIAL_MARKET_CAP === 'number' &&
+    typeof (data as any).INITIAL_VOLUME === 'number' &&
+    typeof (data as any).INITIAL_TRANSACTIONS === 'number' &&
+    typeof (data as any).NETWORK_SPEED === 'number' &&
+    typeof (data as any).SECURITY_SCORE === 'number' &&
+    typeof (data as any).ECOSYSTEM_HEALTH === 'number' &&
+    typeof (data as any).DRAGON_POWER === 'number'
   )
 }
 

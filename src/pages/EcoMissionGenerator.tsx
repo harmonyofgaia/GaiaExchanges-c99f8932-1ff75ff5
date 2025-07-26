@@ -1,780 +1,338 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  Target, 
-  Zap, 
-  Clock, 
-  Award, 
-  MapPin, 
-  Users, 
-  Brain,
-  Leaf,
-  TreePine,
-  Droplets,
-  Recycle,
-  Globe,
-  Satellite,
-  Smartphone,
-  TrendingUp,
-  Star,
-  Camera,
-  CheckCircle
-} from 'lucide-react'
+import { Target, Brain, Zap, Globe, Users, Award, MapPin } from 'lucide-react'
+import { Navbar } from '@/components/Navbar'
+import { EcoMission, AIInsight, parseJsonField } from '@/types/ui-types'
 import { supabase } from '@/integrations/supabase/client'
-import { useAuth } from '@/components/auth/AuthProvider'
-import { toast } from 'sonner'
-
-interface EcoMission {
-  id: string
-  user_id: string
-  mission_type: string
-  title: string
-  description: string
-  difficulty_level: number
-  tokens_reward: number
-  carbon_impact: number
-  status: string
-  completion_data: any
-  created_at: string
-  completed_at: string | null
-  ai_generated?: boolean
-  geolocation_required?: boolean
-  verification_method?: string
-  community_challenge?: boolean
-  predicted_completion_time?: number
-  optimal_conditions?: string[]
-}
-
-interface AIGenerationParams {
-  userLocation: string
-  environmentalData: any
-  userPreferences: string[]
-  seasonality: string
-  communityNeeds: string[]
-}
-
-interface MissionMetrics {
-  totalGenerated: number
-  completionRate: number
-  avgRewardPerMission: number
-  communityParticipation: number
-  aiAccuracy: number
-  optimalWeather: boolean
-}
 
 export default function EcoMissionGenerator() {
-  const { user } = useAuth()
   const [missions, setMissions] = useState<EcoMission[]>([])
+  const [aiInsights, setAiInsights] = useState<AIInsight[]>([])
   const [loading, setLoading] = useState(true)
   const [generating, setGenerating] = useState(false)
-  const [selectedDifficulty, setSelectedDifficulty] = useState('all')
-  const [userLocation, setUserLocation] = useState<string>('Unknown')
-  const [missionMetrics, setMissionMetrics] = useState<MissionMetrics>({
-    totalGenerated: 847,
-    completionRate: 87.3,
-    avgRewardPerMission: 156,
-    communityParticipation: 92.1,
-    aiAccuracy: 94.7,
-    optimalWeather: true
-  })
-  const [aiInsights, setAiInsights] = useState<any[]>([])
 
-  useEffect(() => {
-    if (user) {
-      loadMissions()
-      loadUserLocation()
-      loadAIInsights()
-      loadMissionMetrics()
-    }
-  }, [user])
-
-  const loadUserLocation = async () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords
-          setUserLocation(`${latitude.toFixed(2)}, ${longitude.toFixed(2)}`)
-        },
-        () => {
-          setUserLocation('Location unavailable')
-        }
-      )
-    }
-  }
-
-  const loadAIInsights = async () => {
-    // Mock AI insights for mission optimization
-    const insights = [
-      {
-        type: 'weather',
-        message: 'Optimal tree planting conditions detected for the next 72 hours',
-        confidence: 94,
-        action: 'Generate tree planting missions'
-      },
-      {
-        type: 'community',
-        message: 'High community activity in beach cleanup missions this week',
-        confidence: 87,
-        action: 'Boost ocean cleanup missions'
-      },
-      {
-        type: 'seasonal',
-        message: 'Wildlife migration season - biodiversity missions recommended',
-        confidence: 91,
-        action: 'Create wildlife monitoring tasks'
-      }
-    ]
-    setAiInsights(insights)
-  }
-
-  const loadMissionMetrics = async () => {
-    // Simulate real-time metrics updates
-    const interval = setInterval(() => {
-      setMissionMetrics(prev => ({
-        ...prev,
-        totalGenerated: prev.totalGenerated + Math.floor(Math.random() * 3),
-        completionRate: Math.min(100, prev.completionRate + (Math.random() - 0.5) * 0.1),
-        communityParticipation: Math.min(100, prev.communityParticipation + (Math.random() - 0.5) * 0.2)
-      }))
-    }, 10000)
-
-    return () => clearInterval(interval)
-  }
-
-  useEffect(() => {
-    if (user) {
-      loadMissions()
-    }
-  }, [user])
-
+  // Define functions before using them
   const loadMissions = async () => {
     try {
       const { data, error } = await supabase
         .from('eco_missions')
         .select('*')
-        .eq('user_id', user!.id)
         .order('created_at', { ascending: false })
+        .limit(10)
 
-      if (error) throw error
-      setMissions(data || [])
+      if (error) {
+        console.error('Error loading missions:', error)
+        return
+      }
+
+      const typedMissions: EcoMission[] = data?.map(mission => ({
+        id: mission.id,
+        title: mission.title,
+        description: mission.description,
+        mission_type: mission.mission_type,
+        difficulty_level: mission.difficulty_level,
+        tokens_reward: mission.tokens_reward,
+        carbon_impact: mission.carbon_impact,
+        status: mission.status,
+        user_id: mission.user_id,
+        created_at: mission.created_at,
+        completed_at: mission.completed_at,
+        completion_data: parseJsonField(mission.completion_data, {
+          evidence_photos: [],
+          location_verified: false,
+          impact_measured: 0,
+          peer_verified: false,
+          notes: ''
+        })
+      })) || []
+
+      setMissions(typedMissions)
     } catch (error) {
-      console.error('Error loading missions:', error)
-      toast.error('Failed to load missions')
+      console.error('Error in loadMissions:', error)
     } finally {
       setLoading(false)
     }
   }
 
-  const generateAIMission = async () => {
-    if (!user) {
-      toast.error('Please log in to generate missions')
-      return
-    }
+  const generateAIInsights = async () => {
+    // Mock AI insights generation
+    const insights: AIInsight[] = [
+      {
+        type: 'carbon_reduction',
+        message: 'Tree planting missions show 23% higher completion rates in urban areas',
+        confidence: 87,
+        actionable: true,
+        action: 'Focus on urban tree planting initiatives'
+      },
+      {
+        type: 'community_engagement',
+        message: 'Group missions generate 3x more community participation',
+        confidence: 92,
+        actionable: true,
+        action: 'Create more collaborative eco-missions'
+      },
+      {
+        type: 'seasonal_optimization',
+        message: 'Beach cleanup missions peak during summer months',
+        confidence: 78,
+        actionable: true,
+        action: 'Schedule more coastal missions in summer'
+      }
+    ]
 
+    setAiInsights(insights)
+  }
+
+  useEffect(() => {
+    loadMissions()
+    generateAIInsights()
+  }, [])
+
+  const mockMissions: EcoMission[] = [
+    {
+      id: 'tree-planting-1',
+      title: 'Urban Forest Expansion',
+      description: 'Plant native trees in designated urban areas to improve air quality',
+      mission_type: 'tree_planting',
+      difficulty_level: 3,
+      tokens_reward: 150,
+      carbon_impact: 25.5,
+      status: 'active',
+      user_id: 'user-1',
+      created_at: new Date().toISOString(),
+      completed_at: null,
+      completion_data: {
+        evidence_photos: [],
+        location_verified: false,
+        impact_measured: 0,
+        peer_verified: false,
+        notes: ''
+      }
+    },
+    {
+      id: 'ocean-cleanup-1',
+      title: 'Coastal Debris Removal',
+      description: 'Remove plastic waste and debris from beach and coastal areas',
+      mission_type: 'ocean_cleanup',
+      difficulty_level: 2,
+      tokens_reward: 100,
+      carbon_impact: 15.0,
+      status: 'available',
+      user_id: 'user-1',
+      created_at: new Date().toISOString(),
+      completed_at: null,
+      completion_data: {
+        evidence_photos: [],
+        location_verified: false,
+        impact_measured: 0,
+        peer_verified: false,
+        notes: ''
+      }
+    }
+  ]
+
+  const displayMissions = missions.length > 0 ? missions : mockMissions
+
+  const generateNewMission = async () => {
     setGenerating(true)
-    try {
-      // Enhanced AI-powered mission generation with v7 features
-      const advancedMissionTemplates = [
-        {
-          type: 'ai_tree_planting',
-          title: 'AI-Optimized Tree Planting: {count} Native Species',
-          description: 'Plant {count} trees using AI-selected native species optimal for your location and current climate conditions. GPS verification required.',
-          difficulty: Math.floor(Math.random() * 3) + 1,
-          tokens: 75,
-          carbon_impact: 35,
-          icon: TreePine,
-          ai_generated: true,
-          geolocation_required: true,
-          verification_method: 'gps_photo',
-          optimal_conditions: ['sunny', 'moderate_humidity', 'soil_moisture_optimal']
-        },
-        {
-          type: 'smart_waste_cleanup',
-          title: 'Smart Cleanup Mission: {amount}kg Waste Analysis',
-          description: 'AI-identified waste hotspot cleanup with automatic categorization. Use app to scan and categorize waste types for maximum environmental impact.',
-          difficulty: Math.floor(Math.random() * 3) + 1,
-          tokens: 50,
-          carbon_impact: 20,
-          icon: Recycle,
-          ai_generated: true,
-          geolocation_required: true,
-          verification_method: 'ai_image_recognition'
-        },
-        {
-          type: 'predictive_conservation',
-          title: 'Predictive Wildlife Monitoring',
-          description: 'Monitor and document wildlife in AI-predicted migration corridors. Critical for biodiversity mapping and conservation planning.',
-          difficulty: 3,
-          tokens: 120,
-          carbon_impact: 50,
-          icon: Globe,
-          ai_generated: true,
-          geolocation_required: true,
-          verification_method: 'community_validation',
-          community_challenge: true
-        },
-        {
-          type: 'renewable_transition',
-          title: 'Community Energy Transition Advocacy',
-          description: 'Help {count} households transition to renewable energy through education and resource sharing. Track adoption rates.',
-          difficulty: 3,
-          tokens: 150,
-          carbon_impact: 80,
-          icon: Zap,
-          ai_generated: true,
-          verification_method: 'multi_party_confirmation'
-        },
-        {
-          type: 'ecosystem_restoration',
-          title: 'Ecosystem Health Assessment: {area} Hectares',
-          description: 'Comprehensive ecosystem health assessment using IoT sensors and community observations. Data feeds into global climate models.',
-          difficulty: 2,
-          tokens: 90,
-          carbon_impact: 45,
-          icon: Globe,
-          ai_generated: true,
-          geolocation_required: true,
-          verification_method: 'sensor_data_iot'
+    
+    // Simulate AI mission generation
+    setTimeout(() => {
+      const newMission: EcoMission = {
+        id: `ai-generated-${Date.now()}`,
+        title: 'AI-Generated Carbon Offset Mission',
+        description: 'Advanced AI has identified optimal locations for carbon sequestration activities',
+        mission_type: 'ai_generated',
+        difficulty_level: Math.floor(Math.random() * 5) + 1,
+        tokens_reward: Math.floor(Math.random() * 200) + 50,
+        carbon_impact: Math.random() * 50 + 10,
+        status: 'available',
+        user_id: 'ai-system',
+        created_at: new Date().toISOString(),
+        completed_at: null,
+        completion_data: {
+          evidence_photos: [],
+          location_verified: false,
+          impact_measured: 0,
+          peer_verified: false,
+          notes: 'AI-generated mission based on environmental data analysis'
         }
-      ]
-
-      const template = advancedMissionTemplates[Math.floor(Math.random() * advancedMissionTemplates.length)]
-      const variations = {
-        '{count}': Math.floor(Math.random() * 15) + 5,
-        '{amount}': Math.floor(Math.random() * 25) + 10,
-        '{area}': Math.floor(Math.random() * 5) + 1
       }
-
-      let title = template.title
-      let description = template.description
       
-      Object.entries(variations).forEach(([key, value]) => {
-        title = title.replace(key, value.toString())
-        description = description.replace(key, value.toString())
-      })
-
-      // Enhanced mission data with v7 features
-      const missionData = {
-        user_id: user.id,
-        mission_type: template.type,
-        title,
-        description,
-        difficulty_level: template.difficulty,
-        tokens_reward: template.tokens * template.difficulty,
-        carbon_impact: template.carbon_impact * template.difficulty,
-        status: 'active',
-        ai_generated: template.ai_generated,
-        geolocation_required: template.geolocation_required,
-        verification_method: template.verification_method,
-        community_challenge: template.community_challenge,
-        predicted_completion_time: Math.floor(Math.random() * 168) + 24, // 1-7 days in hours
-        optimal_conditions: template.optimal_conditions || []
-      }
-
-      const { data, error } = await supabase
-        .from('eco_missions')
-        .insert([missionData])
-        .select()
-
-      if (error) throw error
-      
-      toast.success(`AI-generated mission created: ${title}!`)
-      loadMissions()
-    } catch (error) {
-      console.error('Error generating mission:', error)
-      toast.error('Failed to generate AI mission')
-    } finally {
+      setMissions(prev => [newMission, ...prev])
       setGenerating(false)
-    }
-  }
-
-  const acceptMission = async (missionId: string) => {
-    try {
-      const { error } = await supabase
-        .from('eco_missions')
-        .update({ status: 'in_progress' })
-        .eq('id', missionId)
-
-      if (error) throw error
-      
-      toast.success('Mission accepted! Start working on it.')
-      loadMissions()
-    } catch (error) {
-      console.error('Error accepting mission:', error)
-      toast.error('Failed to accept mission')
-    }
-  }
-
-  const completeMission = async (missionId: string) => {
-    try {
-      const { error } = await supabase
-        .from('eco_missions')
-        .update({ 
-          status: 'completed',
-          completed_at: new Date().toISOString()
-        })
-        .eq('id', missionId)
-
-      if (error) throw error
-      
-      toast.success('Mission completed! Tokens have been awarded.')
-      loadMissions()
-    } catch (error) {
-      console.error('Error completing mission:', error)
-      toast.error('Failed to complete mission')
-    }
-  }
-
-  const getDifficultyColor = (level: number) => {
-    switch (level) {
-      case 1: return 'text-green-400'
-      case 2: return 'text-yellow-400'
-      case 3: return 'text-red-400'
-      default: return 'text-gray-400'
-    }
-  }
-
-  const getDifficultyName = (level: number) => {
-    switch (level) {
-      case 1: return 'Easy'
-      case 2: return 'Medium'
-      case 3: return 'Hard'
-      default: return 'Unknown'
-    }
-  }
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'active': return 'bg-blue-600'
-      case 'in_progress': return 'bg-yellow-600'
-      case 'completed': return 'bg-green-600'
-      default: return 'bg-gray-600'
-    }
+    }, 2000)
   }
 
   const getMissionIcon = (type: string) => {
     switch (type) {
-      case 'tree_planting': return TreePine
-      case 'waste_cleanup': return Recycle
-      case 'water_conservation': return Droplets
-      case 'renewable_energy': return Zap
-      case 'biodiversity': return Globe
-      default: return Leaf
+      case 'tree_planting':
+        return '🌳'
+      case 'ocean_cleanup':
+        return '🌊'
+      case 'recycling':
+        return '♻️'
+      case 'energy_conservation':
+        return '⚡'
+      case 'ai_generated':
+        return '🤖'
+      default:
+        return '🎯'
     }
   }
 
-  const activeMissions = missions.filter(m => m.status === 'active')
-  const inProgressMissions = missions.filter(m => m.status === 'in_progress')
-  const completedMissions = missions.filter(m => m.status === 'completed')
+  const getDifficultyColor = (level: number) => {
+    if (level <= 2) return 'bg-green-600'
+    if (level <= 3) return 'bg-yellow-600'
+    return 'bg-red-600'
+  }
+
+  const getDifficultyText = (level: number) => {
+    if (level <= 2) return 'Easy'
+    if (level <= 3) return 'Medium'
+    return 'Hard'
+  }
 
   if (loading) {
     return (
-      <div className="container mx-auto p-4">
-        <div className="flex items-center justify-center min-h-96">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-400"></div>
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
+        <Navbar />
+        <div className="container mx-auto px-4 py-8">
+          <div className="text-center">
+            <div className="text-2xl text-green-400">Loading AI mission generator...</div>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="container mx-auto p-4 space-y-6">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">
-          🎯 AI Eco-Mission Generator v7
-        </h1>
-        <p className="text-xl text-muted-foreground">
-          Advanced AI-powered missions with geolocation, IoT integration, and community challenges
-        </p>
-        <Badge className="mt-2 bg-purple-600 text-white">
-          <Brain className="h-3 w-3 mr-1" />
-          Master Plan v7 Enabled
-        </Badge>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            🤖 AI Eco Mission Generator
+          </h1>
+          <p className="text-xl text-muted-foreground mt-2">
+            Advanced AI generates personalized environmental missions based on your location and impact potential
+          </p>
+        </div>
 
-      {/* Enhanced Mission Stats */}
-      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-400">
-            <Target className="h-6 w-6" />
-            Advanced Mission Analytics
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400">{activeMissions.length}</div>
-              <div className="text-sm text-muted-foreground">Available</div>
+        {/* AI Insights Panel */}
+        <Card className="mb-6 bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-blue-400">
+              <Brain className="h-6 w-6" />
+              AI Environmental Insights
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {aiInsights.map((insight, index) => (
+                <div key={index} className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
+                  <div className="text-sm font-medium text-blue-400 mb-2">{insight.type}</div>
+                  <div className="text-xs text-muted-foreground mb-2">{insight.message}</div>
+                  <div className="flex justify-between items-center">
+                    <Badge className="bg-blue-600 text-xs">
+                      {insight.confidence}% confidence
+                    </Badge>
+                    {insight.actionable && insight.action && (
+                      <Button size="sm" variant="outline" className="text-xs">
+                        Apply
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">{inProgressMissions.length}</div>
-              <div className="text-sm text-muted-foreground">In Progress</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">{completedMissions.length}</div>
-              <div className="text-sm text-muted-foreground">Completed</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400">
-                {completedMissions.reduce((sum, m) => sum + m.tokens_reward, 0)}
-              </div>
-              <div className="text-sm text-muted-foreground">Tokens Earned</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-cyan-400">{missionMetrics.aiAccuracy.toFixed(1)}%</div>
-              <div className="text-sm text-muted-foreground">AI Accuracy</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-pink-400">{missionMetrics.communityParticipation.toFixed(1)}%</div>
-              <div className="text-sm text-muted-foreground">Community Rate</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
 
-      {/* AI Insights and Optimization */}
-      <Card className="border-purple-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-purple-400">
-            <Brain className="h-5 w-5" />
-            AI Mission Insights
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {aiInsights.map((insight, index) => (
-              <div key={index} className="p-4 rounded-lg border border-purple-500/20 bg-purple-900/10">
-                <div className="flex items-center gap-2 mb-2">
-                  <Satellite className="h-4 w-4 text-purple-400" />
-                  <span className="text-sm font-medium text-purple-400 capitalize">{insight.type}</span>
-                  <Badge variant="outline" className="text-green-400">
-                    {insight.confidence}% confidence
+        {/* Mission Generation */}
+        <div className="flex justify-center mb-6">
+          <Button
+            onClick={generateNewMission}
+            disabled={generating}
+            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-8 py-3"
+          >
+            {generating ? (
+              <>
+                <Zap className="h-4 w-4 mr-2 animate-spin" />
+                Generating AI Mission...
+              </>
+            ) : (
+              <>
+                <Brain className="h-4 w-4 mr-2" />
+                Generate New AI Mission
+              </>
+            )}
+          </Button>
+        </div>
+
+        {/* Missions Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayMissions.map((mission) => (
+            <Card key={mission.id} className="bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20 hover:scale-105 transition-all duration-300">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-white">
+                  <span className="text-2xl">{getMissionIcon(mission.mission_type)}</span>
+                  {mission.title}
+                </CardTitle>
+                <div className="flex gap-2">
+                  <Badge className={getDifficultyColor(mission.difficulty_level)}>
+                    {getDifficultyText(mission.difficulty_level)}
+                  </Badge>
+                  <Badge className="bg-green-600">
+                    {mission.tokens_reward} GAiA
                   </Badge>
                 </div>
-                <p className="text-sm text-muted-foreground mb-2">{insight.message}</p>
-                <p className="text-xs text-purple-300 font-medium">{insight.action}</p>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">{mission.description}</p>
+                
+                <div className="space-y-3">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Carbon Impact</span>
+                    <span className="text-green-400 font-bold">
+                      {mission.carbon_impact.toFixed(1)} kg CO₂
+                    </span>
+                  </div>
+                  
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Status</span>
+                    <Badge className={mission.status === 'active' ? 'bg-green-600' : 'bg-gray-600'}>
+                      {mission.status}
+                    </Badge>
+                  </div>
 
-      {/* Enhanced Location and Environmental Data */}
-      <Card className="border-blue-500/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <MapPin className="h-5 w-5" />
-            Location-Based Mission Generation
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="font-semibold text-blue-400 mb-2">Your Location</h4>
-              <div className="flex items-center gap-2 mb-2">
-                <Smartphone className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm font-mono">{userLocation}</span>
-              </div>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Weather Conditions:</span>
-                  <span className="font-medium text-green-400">
-                    {missionMetrics.optimalWeather ? 'Optimal' : 'Moderate'}
-                  </span>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Difficulty</span>
+                    <div className="flex">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <span 
+                          key={star} 
+                          className={star <= mission.difficulty_level ? 'text-yellow-400' : 'text-gray-600'}
+                        >
+                          ⭐
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Community Activity:</span>
-                  <span className="font-medium text-blue-400">High</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Environmental Priority:</span>
-                  <span className="font-medium text-yellow-400">Tree Planting</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-semibold text-blue-400 mb-2">AI Mission Generator v7</h4>
-              <p className="text-muted-foreground text-sm mb-4">
-                Advanced AI analyzes your location, weather patterns, community needs, and environmental data to generate personalized eco-missions with maximum impact potential.
-              </p>
-              <Button
-                onClick={generateAIMission}
-                disabled={generating}
-                className="w-full bg-blue-600 hover:bg-blue-700"
-              >
-                {generating ? (
-                  <>
-                    <Brain className="h-4 w-4 mr-2 animate-spin" />
-                    AI Generating Mission...
-                  </>
-                ) : (
-                  <>
-                    <Zap className="h-4 w-4 mr-2" />
-                    Generate AI-Optimized Mission
-                  </>
-                )}
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Mission Tabs */}
-      <Tabs defaultValue="available" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="available">Available ({activeMissions.length})</TabsTrigger>
-          <TabsTrigger value="progress">In Progress ({inProgressMissions.length})</TabsTrigger>
-          <TabsTrigger value="completed">Completed ({completedMissions.length})</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="available" className="space-y-4">
-          {activeMissions.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">🎯</div>
-              <h3 className="text-xl font-semibold text-muted-foreground mb-2">
-                No missions available
-              </h3>
-              <p className="text-muted-foreground">
-                Generate your first AI-powered eco-mission above!
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {activeMissions.map((mission) => {
-                const MissionIcon = getMissionIcon(mission.mission_type)
-                return (
-                  <Card key={mission.id} className="border-blue-500/20">
-                    <CardHeader>
-                      <div className="flex items-center justify-between">
-                        <div className="flex gap-2">
-                          <Badge className={getStatusColor(mission.status)}>
-                            {mission.status.replace('_', ' ')}
-                          </Badge>
-                          {mission.ai_generated && (
-                            <Badge variant="outline" className="text-purple-400">
-                              <Brain className="h-3 w-3 mr-1" />
-                              AI Generated
-                            </Badge>
-                          )}
-                          {mission.geolocation_required && (
-                            <Badge variant="outline" className="text-blue-400">
-                              <MapPin className="h-3 w-3 mr-1" />
-                              GPS Required
-                            </Badge>
-                          )}
-                        </div>
-                        <Badge variant="outline" className={getDifficultyColor(mission.difficulty_level)}>
-                          {getDifficultyName(mission.difficulty_level)}
-                        </Badge>
-                      </div>
-                      <CardTitle className="text-lg text-blue-400 flex items-center gap-2">
-                        <MissionIcon className="h-5 w-5" />
-                        {mission.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <p className="text-sm text-muted-foreground">
-                        {mission.description}
-                      </p>
-                      
-                      <div className="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                          <div className="text-muted-foreground">Reward</div>
-                          <div className="font-medium text-green-400">
-                            {mission.tokens_reward} GAiA
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-muted-foreground">Carbon Impact</div>
-                          <div className="font-medium text-blue-400">
-                            {mission.carbon_impact} kg CO₂
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Enhanced v7 features */}
-                      {(mission.verification_method || mission.predicted_completion_time) && (
-                        <div className="grid grid-cols-2 gap-4 text-sm">
-                          {mission.verification_method && (
-                            <div>
-                              <div className="text-muted-foreground">Verification</div>
-                              <div className="font-medium text-purple-400 capitalize">
-                                {mission.verification_method.replace('_', ' ')}
-                              </div>
-                            </div>
-                          )}
-                          {mission.predicted_completion_time && (
-                            <div>
-                              <div className="text-muted-foreground">Est. Time</div>
-                              <div className="font-medium text-cyan-400">
-                                {Math.floor(mission.predicted_completion_time / 24)}d {mission.predicted_completion_time % 24}h
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {mission.optimal_conditions && mission.optimal_conditions.length > 0 && (
-                        <div>
-                          <div className="text-sm text-muted-foreground mb-2">Optimal Conditions:</div>
-                          <div className="flex flex-wrap gap-1">
-                            {mission.optimal_conditions.map((condition, index) => (
-                              <Badge key={index} variant="secondary" className="text-xs">
-                                {condition.replace('_', ' ')}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      <Button
-                        onClick={() => acceptMission(mission.id)}
-                        className="w-full bg-blue-600 hover:bg-blue-700"
-                      >
-                        Accept Mission
-                      </Button>
-                    </CardContent>
-                  </Card>
-                )
-              })}
-            </div>
-          )}
-        </TabsContent>
-
-        <TabsContent value="progress" className="space-y-4">
-          {inProgressMissions.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">⏳</div>
-              <h3 className="text-xl font-semibold text-muted-foreground mb-2">
-                No missions in progress
-              </h3>
-              <p className="text-muted-foreground">
-                Accept an available mission to start making an impact!
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {inProgressMissions.map((mission) => {
-                const MissionIcon = getMissionIcon(mission.mission_type)
-                return (
-                  <Card key={mission.id} className="border-yellow-500/20">
-                    <CardHeader>
-                      <div className="flex items-center justify-between">
-                        <Badge className={getStatusColor(mission.status)}>
-                          {mission.status.replace('_', ' ')}
-                        </Badge>
-                        <Badge variant="outline" className={getDifficultyColor(mission.difficulty_level)}>
-                          {getDifficultyName(mission.difficulty_level)}
-                        </Badge>
-                      </div>
-                      <CardTitle className="text-lg text-yellow-400 flex items-center gap-2">
-                        <MissionIcon className="h-5 w-5" />
-                        {mission.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <p className="text-sm text-muted-foreground">
-                        {mission.description}
-                      </p>
-                      
-                      <div className="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                          <div className="text-muted-foreground">Reward</div>
-                          <div className="font-medium text-green-400">
-                            {mission.tokens_reward} GAiA
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-muted-foreground">Carbon Impact</div>
-                          <div className="font-medium text-blue-400">
-                            {mission.carbon_impact} kg CO₂
-                          </div>
-                        </div>
-                      </div>
-
-                      <Button
-                        onClick={() => completeMission(mission.id)}
-                        className="w-full bg-green-600 hover:bg-green-700"
-                      >
-                        Mark as Complete
-                      </Button>
-                    </CardContent>
-                  </Card>
-                )
-              })}
-            </div>
-          )}
-        </TabsContent>
-
-        <TabsContent value="completed" className="space-y-4">
-          {completedMissions.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">🏆</div>
-              <h3 className="text-xl font-semibold text-muted-foreground mb-2">
-                No completed missions yet
-              </h3>
-              <p className="text-muted-foreground">
-                Complete your first mission to see it here!
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {completedMissions.map((mission) => {
-                const MissionIcon = getMissionIcon(mission.mission_type)
-                return (
-                  <Card key={mission.id} className="border-green-500/20">
-                    <CardHeader>
-                      <div className="flex items-center justify-between">
-                        <Badge className={getStatusColor(mission.status)}>
-                          <Award className="h-3 w-3 mr-1" />
-                          Completed
-                        </Badge>
-                        <Badge variant="outline" className={getDifficultyColor(mission.difficulty_level)}>
-                          {getDifficultyName(mission.difficulty_level)}
-                        </Badge>
-                      </div>
-                      <CardTitle className="text-lg text-green-400 flex items-center gap-2">
-                        <MissionIcon className="h-5 w-5" />
-                        {mission.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <p className="text-sm text-muted-foreground">
-                        {mission.description}
-                      </p>
-                      
-                      <div className="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                          <div className="text-muted-foreground">Tokens Earned</div>
-                          <div className="font-medium text-green-400">
-                            {mission.tokens_reward} GAiA
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-muted-foreground">Carbon Impact</div>
-                          <div className="font-medium text-blue-400">
-                            {mission.carbon_impact} kg CO₂
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="text-xs text-muted-foreground">
-                        <Clock className="h-3 w-3 inline mr-1" />
-                        Completed: {new Date(mission.completed_at!).toLocaleDateString()}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )
-              })}
-            </div>
-          )}
-        </TabsContent>
-      </Tabs>
+                
+                <Button className="w-full mt-6 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
+                  <Target className="h-4 w-4 mr-2" />
+                  {mission.status === 'available' ? 'Start Mission' : 'View Progress'}
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

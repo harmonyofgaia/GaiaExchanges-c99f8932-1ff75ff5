@@ -1,7 +1,7 @@
 
 // Type validation utility for GAiA system
 export class TypeValidator {
-  static validateTokenConfig(config: any): string[] {
+  static validateTokenConfig(config: Record<string, unknown>): string[] {
     const errors: string[] = []
     
     if (!config.CONTRACT_ADDRESS || typeof config.CONTRACT_ADDRESS !== 'string') {
@@ -27,7 +27,7 @@ export class TypeValidator {
     return errors
   }
   
-  static validateMetrics(metrics: any): string[] {
+  static validateMetrics(metrics: Record<string, unknown>): string[] {
     const errors: string[] = []
     
     const requiredNumbers = [

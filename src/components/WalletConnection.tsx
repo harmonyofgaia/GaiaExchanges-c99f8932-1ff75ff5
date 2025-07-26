@@ -1,288 +1,208 @@
 
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Wallet, CheckCircle, AlertCircle, ExternalLink } from 'lucide-react'
+import { Wallet, Check, AlertCircle, Copy } from 'lucide-react'
 import { toast } from 'sonner'
-
-interface WalletInfo {
-  name: string
-  id: string
-  icon: string
-  installed: boolean
-  connected: boolean
-  address?: string
-  balance?: string
-}
+import { SolanaProvider, WindowWithProviders } from '@/types/ui-types'
+import { GAIA_TOKEN } from '@/constants/gaia'
 
 export function WalletConnection() {
-  const [wallets, setWallets] = useState<WalletInfo[]>([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isConnected, setIsConnected] = useState(false)
+  const [walletAddress, setWalletAddress] = useState<string>('')
+  const [isConnecting, setIsConnecting] = useState(false)
+  const [provider, setProvider] = useState<SolanaProvider | null>(null)
 
   useEffect(() => {
-    checkWallets()
+    console.log('💰 WALLET CONNECTION - Multi-Wallet Support Active')
+    console.log('🔗 GAiA Token Integration:', GAIA_TOKEN.CONTRACT_ADDRESS)
+    
+    // Check for existing connection
+    checkWalletConnection()
   }, [])
 
-  const checkWallets = () => {
-    const walletList: WalletInfo[] = [
-      {
-        name: 'MetaMask',
-        id: 'metamask',
-        icon: '🦊',
-        installed: !!(window as any).ethereum?.isMetaMask,
-        connected: false
-      },
-      {
-        name: 'WalletConnect',
-        id: 'walletconnect',
-        icon: '🔗',
-        installed: true, // WalletConnect is always available
-        connected: false
-      },
-      {
-        name: 'Coinbase Wallet',
-        id: 'coinbase',
-        icon: '🔵',
-        installed: !!(window as any).ethereum?.isCoinbaseWallet,
-        connected: false
-      },
-      {
-        name: 'Trust Wallet',
-        id: 'trust',
-        icon: '🛡️',
-        installed: !!(window as any).ethereum?.isTrust,
-        connected: false
-      },
-      {
-        name: 'Phantom',
-        id: 'phantom',
-        icon: '👻',
-        installed: !!(window as any).solana?.isPhantom,
-        connected: false
-      },
-      {
-        name: 'Solflare',
-        id: 'solflare',
-        icon: '☀️',
-        installed: !!(window as any).solflare,
-        connected: false
-      }
-    ]
-
-    setWallets(walletList)
-  }
-
-  const connectWallet = async (wallet: WalletInfo) => {
-    if (!wallet.installed && wallet.id !== 'walletconnect') {
-      toast.error(`${wallet.name} is not installed. Please install it first.`)
-      return
-    }
-
-    setIsLoading(true)
-
+  const checkWalletConnection = async () => {
     try {
-      let address = ''
-      let balance = ''
-
-      switch (wallet.id) {
-        case 'metamask':
-          if ((window as any).ethereum) {
-            const accounts = await (window as any).ethereum.request({
-              method: 'eth_requestAccounts'
-            })
-            address = accounts[0]
-            
-            const balanceWei = await (window as any).ethereum.request({
-              method: 'eth_getBalance',
-              params: [address, 'latest']
-            })
-            balance = (parseInt(balanceWei, 16) / 10**18).toFixed(4) + ' ETH'
-          }
-          break
-
-        case 'coinbase':
-          if ((window as any).ethereum?.isCoinbaseWallet) {
-            const accounts = await (window as any).ethereum.request({
-              method: 'eth_requestAccounts'
-            })
-            address = accounts[0]
-            balance = '--- ETH'
-          }
-          break
-
-        case 'phantom':
-          if ((window as any).solana?.isPhantom) {
-            const response = await (window as any).solana.connect()
-            address = response.publicKey.toString()
-            balance = '--- SOL'
-          }
-          break
-
-        case 'walletconnect':
-          // For demo purposes - in real app you'd use WalletConnect SDK
-          toast.info('WalletConnect integration would be implemented here with QR code scanner')
-          return
-
-        default:
-          toast.info(`${wallet.name} connection logic would be implemented here`)
-          return
+      const windowWithProviders = window as WindowWithProviders
+      
+      if (windowWithProviders.solana) {
+        const solanaProvider = windowWithProviders.solana
+        setProvider(solanaProvider)
+        
+        if (solanaProvider.isConnected && solanaProvider.publicKey) {
+          setIsConnected(true)
+          setWalletAddress(solanaProvider.publicKey.toString())
+          console.log('✅ Wallet already connected:', solanaProvider.publicKey.toString())
+        }
       }
-
-      // Update wallet state
-      setWallets(prev => prev.map(w => 
-        w.id === wallet.id 
-          ? { ...w, connected: true, address, balance }
-          : { ...w, connected: false } // Disconnect others for demo
-      ))
-
-      toast.success(`🎉 Connected to ${wallet.name}!`, {
-        description: `Address: ${address.substring(0, 6)}...${address.substring(address.length - 4)}`
-      })
-
     } catch (error) {
-      console.error('Wallet connection error:', error)
-      toast.error(`Failed to connect to ${wallet.name}`)
-    } finally {
-      setIsLoading(false)
+      console.log('ℹ️ No wallet found or connection check failed')
     }
   }
 
-  const disconnectWallet = (wallet: WalletInfo) => {
-    setWallets(prev => prev.map(w => 
-      w.id === wallet.id 
-        ? { ...w, connected: false, address: undefined, balance: undefined }
-        : w
-    ))
-    toast.success(`Disconnected from ${wallet.name}`)
+  const connectWallet = async () => {
+    setIsConnecting(true)
+    
+    try {
+      const windowWithProviders = window as WindowWithProviders
+      
+      if (!windowWithProviders.solana) {
+        toast.error('Please install Phantom wallet or another Solana wallet')
+        setIsConnecting(false)
+        return
+      }
+
+      const solanaProvider = windowWithProviders.solana
+      const response = await solanaProvider.connect()
+      
+      if (response.publicKey) {
+        setProvider(solanaProvider)
+        setIsConnected(true)
+        setWalletAddress(response.publicKey.toString())
+        
+        toast.success('🎉 Wallet Connected Successfully!', {
+          description: `Connected to ${response.publicKey.toString().slice(0, 8)}...${response.publicKey.toString().slice(-8)}`,
+          duration: 5000
+        })
+        
+        console.log('✅ Wallet connected:', response.publicKey.toString())
+      }
+    } catch (error) {
+      console.error('❌ Wallet connection failed:', error)
+      toast.error('Failed to connect wallet. Please try again.')
+    } finally {
+      setIsConnecting(false)
+    }
   }
 
-  const connectedWallet = wallets.find(w => w.connected)
+  const disconnectWallet = async () => {
+    try {
+      if (provider && provider.disconnect) {
+        await provider.disconnect()
+      }
+      
+      setIsConnected(false)
+      setWalletAddress('')
+      setProvider(null)
+      
+      toast.success('Wallet disconnected successfully')
+      console.log('🔌 Wallet disconnected')
+    } catch (error) {
+      console.error('❌ Wallet disconnect failed:', error)
+      toast.error('Failed to disconnect wallet')
+    }
+  }
+
+  const copyAddress = () => {
+    if (walletAddress) {
+      navigator.clipboard.writeText(walletAddress)
+      toast.success('Address copied to clipboard!')
+    }
+  }
 
   return (
-    <Card className="border-blue-500/30 bg-blue-900/20">
+    <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-blue-400">
-          <Wallet className="h-6 w-6" />
-          Multi-Wallet Connection
+        <CardTitle className="flex items-center gap-2 text-purple-400">
+          <Wallet className="h-5 w-5" />
+          💰 Wallet Connection - GAiA Network
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {connectedWallet ? (
-          <div className="p-4 bg-green-900/30 border border-green-500/30 rounded-lg">
+      <CardContent>
+        {!isConnected ? (
+          <div className="text-center space-y-4">
+            <div className="text-4xl mb-4">🔗</div>
+            <p className="text-muted-foreground">
+              Connect your wallet to access GAiA token features and earn rewards
+            </p>
+            <Button
+              onClick={connectWallet}
+              disabled={isConnecting}
+              className="bg-purple-600 hover:bg-purple-700"
+            >
+              {isConnecting ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2" />
+                  Connecting...
+                </>
+              ) : (
+                <>
+                  <Wallet className="h-4 w-4 mr-2" />
+                  Connect Wallet
+                </>
+              )}
+            </Button>
+          </div>
+        ) : (
+          <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-2xl">{connectedWallet.icon}</span>
-                  <span className="font-medium text-green-400">{connectedWallet.name}</span>
-                  <Badge className="bg-green-600">Connected</Badge>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {connectedWallet.address?.substring(0, 6)}...
-                  {connectedWallet.address?.substring(connectedWallet.address.length - 4)}
-                </p>
-                {connectedWallet.balance && (
-                  <p className="text-sm font-medium">{connectedWallet.balance}</p>
-                )}
+              <div className="flex items-center gap-2">
+                <Check className="h-5 w-5 text-green-400" />
+                <span className="text-green-400 font-medium">Connected</span>
               </div>
-              <Button
+              <Badge className="bg-green-600">Active</Badge>
+            </div>
+            
+            <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/20">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <div className="text-sm text-muted-foreground">Wallet Address</div>
+                  <div className="font-mono text-sm text-green-400">
+                    {`${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`}
+                  </div>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={copyAddress}
+                  className="border-green-500/30 text-green-400"
+                >
+                  <Copy className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="text-center p-3 bg-blue-900/20 rounded border border-blue-500/20">
+                <div className="text-lg font-bold text-blue-400">0.00</div>
+                <div className="text-sm text-muted-foreground">SOL Balance</div>
+              </div>
+              <div className="text-center p-3 bg-green-900/20 rounded border border-green-500/20">
+                <div className="text-lg font-bold text-green-400">0</div>
+                <div className="text-sm text-muted-foreground">GAiA Tokens</div>
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              <Button 
+                onClick={disconnectWallet}
                 variant="outline"
-                size="sm"
-                onClick={() => disconnectWallet(connectedWallet)}
+                className="flex-1 border-red-500/30 text-red-400"
               >
                 Disconnect
               </Button>
+              <Button 
+                className="flex-1 bg-green-600 hover:bg-green-700"
+                onClick={() => window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')}
+              >
+                View GAiA Token
+              </Button>
             </div>
-          </div>
-        ) : (
-          <div className="p-4 bg-yellow-900/30 border border-yellow-500/30 rounded-lg">
-            <p className="text-yellow-400 font-medium">No wallet connected</p>
-            <p className="text-sm text-muted-foreground">
-              Connect your wallet to access GAIA token features
-            </p>
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {wallets.map((wallet) => (
-            <div
-              key={wallet.id}
-              className={`p-4 rounded-lg border ${
-                wallet.connected
-                  ? 'border-green-500/50 bg-green-900/20'
-                  : wallet.installed
-                  ? 'border-blue-500/30 bg-blue-900/10'
-                  : 'border-gray-500/30 bg-gray-900/10'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">{wallet.icon}</span>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium">{wallet.name}</span>
-                      {wallet.connected && <CheckCircle className="h-4 w-4 text-green-400" />}
-                      {!wallet.installed && wallet.id !== 'walletconnect' && (
-                        <AlertCircle className="h-4 w-4 text-yellow-400" />
-                      )}
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      {wallet.connected
-                        ? 'Connected'
-                        : wallet.installed || wallet.id === 'walletconnect'
-                        ? 'Available'
-                        : 'Not Installed'
-                      }
-                    </p>
-                  </div>
-                </div>
-                
-                {wallet.connected ? (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => disconnectWallet(wallet)}
-                  >
-                    Disconnect
-                  </Button>
-                ) : wallet.installed || wallet.id === 'walletconnect' ? (
-                  <Button
-                    size="sm"
-                    onClick={() => connectWallet(wallet)}
-                    disabled={isLoading}
-                    className="bg-blue-600 hover:bg-blue-700"
-                  >
-                    Connect
-                  </Button>
-                ) : (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      const urls: Record<string, string> = {
-                        metamask: 'https://metamask.io/download/',
-                        coinbase: 'https://www.coinbase.com/wallet',
-                        trust: 'https://trustwallet.com/download',
-                        phantom: 'https://phantom.app/download'
-                      }
-                      window.open(urls[wallet.id], '_blank')
-                    }}
-                  >
-                    <ExternalLink className="h-4 w-4 mr-1" />
-                    Install
-                  </Button>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="p-4 bg-purple-900/30 border border-purple-500/30 rounded-lg">
-          <h4 className="font-medium text-purple-400 mb-2">🌍 GAIA Token Integration</h4>
-          <p className="text-sm text-muted-foreground">
-            Once connected, your wallet will integrate with GAIA token earning system, 
-            fuel discount rewards, and all ecosystem features.
-          </p>
+        {/* Wallet Features */}
+        <div className="mt-6 p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
+          <h4 className="font-bold text-purple-400 mb-2">🔮 Wallet Features</h4>
+          <div className="text-sm text-muted-foreground space-y-1">
+            <div>• GAiA token trading and rewards</div>
+            <div>• NFT marketplace access</div>
+            <div>• Green project funding participation</div>
+            <div>• Gaming rewards and tournaments</div>
+            <div>• Staking and yield farming</div>
+            <div>• Cross-chain bridge access</div>
+          </div>
         </div>
       </CardContent>
     </Card>
