@@ -280,7 +280,7 @@ class EarningService {
   }
 
   private convertPointsToTokens(points: number): number {
-    return Math.floor(points * this.POINTS_TO_TOKEN_RATE * 1000) / 1000
+    return parseFloat((points * this.POINTS_TO_TOKEN_RATE).toFixed(3))
   }
 
   private generateId(): string {
