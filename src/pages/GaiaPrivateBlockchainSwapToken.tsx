@@ -56,7 +56,12 @@ export default function GaiaPrivateBlockchainSwapToken() {
       setNetworkNodes(prev => prev + Math.floor(Math.random() * 5))
       
       // Update swap rate
-      setSwapRate(prev => prev + (Math.random() - 0.5) * 0.01)
+      setSwapRate(prev => {
+        const newRate = prev + (Math.random() - 0.5) * 0.01;
+        const MIN_RATE = 0.1;
+        const MAX_RATE = 10.0;
+        return Math.max(MIN_RATE, Math.min(MAX_RATE, newRate));
+      });
     }, 3000)
 
     return () => clearInterval(interval)
