@@ -27,16 +27,6 @@ import {
 } from 'lucide-react'
 import { toast } from 'sonner'
 
-interface Tool {
-  name: string
-  price: number
-}
-
-interface Landscape {
-  name: string
-  price: number
-}
-
 export function CoralReefNFTMarketplace() {
   const [availableNFTs, setAvailableNFTs] = useState(1000000)
   const [soldNFTs, setSoldNFTs] = useState(0)

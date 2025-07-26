@@ -1,4 +1,6 @@
 
+import { GAIA_TOKEN } from '../constants/gaia'
+
 interface DatabaseRecord {
   id: string
   wallet_address?: string
@@ -92,13 +94,12 @@ export class AddressMigrationUtility {
     return null
   }
 
-  async validateSystemAddresses(): Promise<{ isValid: boolean; report: string[] }> {
+  validateSystemAddresses(): { isValid: boolean; report: string[] } {
     const report: string[] = []
     let isValid = true
 
     // Check constants
-    const gaiaConstants = await import('../constants/gaia')
-    const { WALLET_ADDRESS, CONTRACT_ADDRESS } = gaiaConstants.GAIA_TOKEN
+    const { WALLET_ADDRESS, CONTRACT_ADDRESS } = GAIA_TOKEN
     
     if (WALLET_ADDRESS !== this.CORRECT_WALLET) {
       report.push(`❌ WALLET ADDRESS INCORRECT: ${WALLET_ADDRESS} should be ${this.CORRECT_WALLET}`)
