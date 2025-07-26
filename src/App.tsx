@@ -36,7 +36,7 @@ import EcoMissions from '@/pages/EcoMissions'
 import PlanetCleaning from '@/pages/PlanetCleaning'
 import NFTCards from '@/pages/NFTCards'
 import EcoAvatar from '@/pages/EcoAvatar'
-import SeaGreenPsychohistorical from '@/pages/SeaGreenPsychohistorical'
+import SeaGreenPsychohistoricalProject from '@/pages/SeaGreenPsychohistoricalProject'
 import NotFound from '@/pages/NotFound'
 import './App.css'
 
@@ -61,7 +61,7 @@ function App() {
               <Route path="/planet-cleaning" element={<PlanetCleaning />} />
               <Route path="/nft-cards" element={<NFTCards />} />
               <Route path="/eco-avatar" element={<EcoAvatar />} />
-              <Route path="/sea-green-psychohistorical" element={<SeaGreenPsychohistorical />} />
+              <Route path="/sea-green-psychohistorical" element={<SeaGreenPsychohistoricalProject />} />
               <Route path="/about" element={<About />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/markets" element={<Markets />} />
