@@ -442,24 +442,24 @@ export function UserManagementAdmin() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium">Auto-ban suspicious accounts</h3>
+                    <h3 id="auto-ban" className="font-medium">Auto-ban suspicious accounts</h3>
                     <p className="text-sm text-muted-foreground">Automatically ban accounts showing suspicious activity</p>
                   </div>
-                  <input type="checkbox" className="toggle" defaultChecked />
+                  <input type="checkbox" className="toggle" defaultChecked aria-labelledby="auto-ban" />
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium">Email verification required</h3>
+                    <h3 id="email-verification" className="font-medium">Email verification required</h3>
                     <p className="text-sm text-muted-foreground">Require email verification for new accounts</p>
                   </div>
-                  <input type="checkbox" className="toggle" defaultChecked />
+                  <input type="checkbox" className="toggle" defaultChecked aria-labelledby="email-verification" />
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium">Two-factor authentication</h3>
+                    <h3 id="two-factor-auth" className="font-medium">Two-factor authentication</h3>
                     <p className="text-sm text-muted-foreground">Enable 2FA for admin accounts</p>
                   </div>
-                  <input type="checkbox" className="toggle" defaultChecked />
+                  <input type="checkbox" className="toggle" defaultChecked aria-labelledby="two-factor-auth" />
                 </div>
               </div>
               <Button>Save Settings</Button>
