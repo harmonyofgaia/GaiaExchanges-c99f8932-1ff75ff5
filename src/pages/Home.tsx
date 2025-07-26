@@ -7,10 +7,26 @@ import { Badge } from '@/components/ui/badge'
 import { ThemeSelector } from '@/components/ThemeSelector'
 import { VisualControlMenu } from '@/components/visual/VisualControlMenu'
 import { FeeRoutingButton } from '@/components/routing/FeeRoutingButton'
+import { TinyHamburgerMenu } from '@/components/home/TinyHamburgerMenu'
 import { GAIA_BRANDING } from '@/constants/branding'
 import { GAIA_TOKEN, GAIA_METRICS } from '@/constants/gaia'
 import { ArrowRight, TrendingUp, Leaf, Zap, Shield, Globe } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+
+// Helper functions for upcoming features section
+function getCurrentQuarterAndYear() {
+  const now = new Date()
+  const quarter = Math.ceil((now.getMonth() + 1) / 3)
+  return `Q${quarter} ${now.getFullYear()}`
+}
+
+function getNextQuarter() {
+  const now = new Date()
+  const currentQuarter = Math.ceil((now.getMonth() + 1) / 3)
+  const nextQuarter = currentQuarter === 4 ? 1 : currentQuarter + 1
+  const year = currentQuarter === 4 ? now.getFullYear() + 1 : now.getFullYear()
+  return `Q${nextQuarter} ${year}`
+}
 
 export default function Home() {
   const navigate = useNavigate()
@@ -59,6 +75,11 @@ export default function Home() {
             <FeeRoutingButton />
             
             <VisualControlMenu />
+          </div>
+
+          {/* Tiny Hamburger Menu positioned above the main button */}
+          <div className="flex justify-center mb-4">
+            <TinyHamburgerMenu />
           </div>
         </div>
 

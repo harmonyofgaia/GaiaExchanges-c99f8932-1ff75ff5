@@ -9,11 +9,19 @@ import { HolisticAnalysis } from './HolisticAnalysis'
 import { AnimalWelfareControlPanel } from './AnimalWelfareControlPanel'
 import { AdminVisualControls } from './AdminVisualControls'
 import { SecureAdminQuantumIAEnginePanel } from '@/components/SecureAdminQuantumIAEnginePanel'
+import { HuntingHackersSection } from './HuntingHackersSection'
+import { SystemDiagnosticsModule } from './SystemDiagnosticsModule'
 
 export function AdminDashboardTabs() {
   return (
-    <Tabs defaultValue="control" className="w-full">
-      <TabsList className="grid w-full grid-cols-9">
+    <Tabs defaultValue="hunting-hackers" className="w-full">
+      <TabsList className="grid w-full grid-cols-11">
+        <TabsTrigger value="hunting-hackers" className="bg-gradient-to-r from-red-600/20 to-purple-600/20 border border-red-500/30">
+          🎯 Hunting Hackers
+        </TabsTrigger>
+        <TabsTrigger value="diagnostics" className="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30">
+          🔍 Diagnostics
+        </TabsTrigger>
         <TabsTrigger value="control">Control Center</TabsTrigger>
         <TabsTrigger value="visual">🎨 Visual Controls</TabsTrigger>
         <TabsTrigger value="animal-welfare">🐾 Animal Welfare</TabsTrigger>
@@ -26,6 +34,14 @@ export function AdminDashboardTabs() {
           👑 Quantum IA
         </TabsTrigger>
       </TabsList>
+
+      <TabsContent value="hunting-hackers" className="space-y-6">
+        <HuntingHackersSection />
+      </TabsContent>
+
+      <TabsContent value="diagnostics" className="space-y-6">
+        <SystemDiagnosticsModule />
+      </TabsContent>
 
       <TabsContent value="control" className="space-y-6">
         <AdminControlSystem />
