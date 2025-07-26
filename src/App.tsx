@@ -22,6 +22,13 @@ const Admin = lazy(() => import('./pages/Admin'))
 const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
 const DeploymentStatus = lazy(() => import('./pages/DeploymentStatus'))
 
+// New Eco Features
+const BeeHotel = lazy(() => import('./pages/BeeHotel'))
+const HomeGrownFood = lazy(() => import('./pages/HomeGrownFood'))
+const WaterStorage = lazy(() => import('./pages/WaterStorage'))
+const BadgeSystem = lazy(() => import('./pages/BadgeSystem'))
+const Scholarship = lazy(() => import('./pages/Scholarship'))
+
 function App() {
   useGlobalBackgroundServices()
 
@@ -54,6 +61,13 @@ function App() {
               <Route path="/admin" element={<Admin />} />
               <Route path="/secure-admin" element={<SecureAdmin />} />
               <Route path="/deployment-status" element={<DeploymentStatus />} />
+              
+              {/* New Eco Features */}
+              <Route path="/bee-hotel" element={<BeeHotel />} />
+              <Route path="/home-grown-food" element={<HomeGrownFood />} />
+              <Route path="/water-storage" element={<WaterStorage />} />
+              <Route path="/badge-system" element={<BadgeSystem />} />
+              <Route path="/scholarship" element={<Scholarship />} />
             </Routes>
           </Suspense>
         </main>
