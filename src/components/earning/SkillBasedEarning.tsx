@@ -143,7 +143,7 @@ export function SkillBasedEarning() {
     const satisfactionBonus = Math.floor(formData.clientSatisfaction * 30)
     const ecoBonus = formData.ecoImpact ? Math.floor(basePoints * 0.5) : 0
     
-    const total = Math.floor((basePoints + difficultyBonus + qualityBonus + satisfactionBonus + ecoBonus) * 1.0)
+    const total = Math.floor(basePoints + difficultyBonus + qualityBonus + satisfactionBonus + ecoBonus)
     
     return {
       points: total,
