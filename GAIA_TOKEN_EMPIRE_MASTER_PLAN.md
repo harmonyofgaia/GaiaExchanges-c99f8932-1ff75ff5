@@ -105,6 +105,13 @@ const REWARD_MULTIPLIER_CONFIG = [
 class DynamicRewardSystem {
   calculateRewardMultiplier(vaultHealth: VaultHealthMetrics): number {
     const baseMultiplier = 1.0;
+    
+    // Input validation
+    if (!vaultHealth || typeof vaultHealth.healthScore !== 'number' || vaultHealth.healthScore < 0 || vaultHealth.healthScore > 100) {
+      console.error("Invalid vaultHealth input:", vaultHealth);
+      return baseMultiplier * 0.4; // Default to minimum guaranteed multiplier
+    }
+    
     const healthScore = vaultHealth.healthScore;
     
     for (const config of REWARD_MULTIPLIER_CONFIG) {
