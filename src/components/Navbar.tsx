@@ -91,7 +91,7 @@ export function Navbar() {
                       size="sm"
                       className={`flex items-center space-x-1 ${
                         isActive(item.to)
-                          ? 'bg-teal-600 text-white'
+                          ? 'bg-blue-600 text-white'
                           : 'text-gray-300 hover:text-white hover:bg-white/10'
                       }`}
                     >
