@@ -60,7 +60,7 @@ class EarningService {
       pointsEarned: points,
       tokensEarned: tokens,
       timestamp: new Date(),
-      userId: 'current-user', // TODO: Get from auth context
+      userId: userId,
       verified: action.verified,
       location: action.location ? { latitude: 0, longitude: 0, address: action.location } : undefined,
       metadata: { waterSavingAction: newAction }
