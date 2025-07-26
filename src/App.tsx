@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import SlidingMenu from '@/components/SlidingMenu'
 import { GaiaLogo } from '@/components/GaiaLogo'
+import { ProtectedRoute } from '@/components/ProtectedRoute'
 import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
 
 // Lazy load pages for better performance
@@ -25,6 +26,14 @@ const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
 const DeploymentStatus = lazy(() => import('./pages/DeploymentStatus'))
 const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'))
 const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'))
+const Community = lazy(() => import('./pages/Community'))
+const NFTs = lazy(() => import('./pages/NFTs'))
+const Analytics = lazy(() => import('./pages/Analytics'))
+const Contact = lazy(() => import('./pages/Contact'))
+const About = lazy(() => import('./pages/About'))
+const Docs = lazy(() => import('./pages/Docs'))
+const Profile = lazy(() => import('./pages/Profile'))
+const Security = lazy(() => import('./pages/Security'))
 
 function App() {
   useGlobalBackgroundServices()
@@ -57,11 +66,28 @@ function App() {
               <Route path="/gaias-projects" element={<GaiasProjects />} />
               <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/secure-admin" element={<SecureAdmin />} />
+              <Route path="/admin" element={
+                <ProtectedRoute requireAdmin={true}>
+                  <Admin />
+                </ProtectedRoute>
+              } />
+              <Route path="/secure-admin" element={
+                <ProtectedRoute requireAdmin={true}>
+                  <SecureAdmin />
+                </ProtectedRoute>
+              } />
               <Route path="/deployment-status" element={<DeploymentStatus />} />
               <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
               <Route path="/enhanced-leaderboard" element={<EnhancedLeaderboard />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/nfts" element={<NFTs />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/docs" element={<Docs />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/security" element={<Security />} />
+              <Route path="/settings" element={<Profile />} />
             </Routes>
           </Suspense>
         </main>

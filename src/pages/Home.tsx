@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { ThemeSelector } from '@/components/ThemeSelector'
 import { VisualControlMenu } from '@/components/visual/VisualControlMenu'
 import { FeeRoutingButton } from '@/components/routing/FeeRoutingButton'
+import { TinyHamburgerMenu } from '@/components/TinyHamburgerMenu'
 import { GAIA_BRANDING } from '@/constants/branding'
 import { GAIA_TOKEN, GAIA_METRICS } from '@/constants/gaia'
 import { ArrowRight, TrendingUp, Leaf, Zap, Shield, Globe } from 'lucide-react'
@@ -60,6 +61,9 @@ export default function Home() {
             
             <VisualControlMenu />
           </div>
+
+          {/* Tiny Hamburger Menu positioned above the main button */}
+          <TinyHamburgerMenu />
         </div>
 
         {/* Our Mission Section */}
