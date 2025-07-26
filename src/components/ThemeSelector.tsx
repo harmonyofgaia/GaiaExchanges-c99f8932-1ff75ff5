@@ -86,7 +86,7 @@ export function ThemeSelector() {
             </div>
           </DropdownMenuItem>
           
-          <DropdownMenuSeparator className="bg-green-500/30" />
+          <DropdownMenuSeparator className="bg-[var(--separator-color)]" />
           
           <DropdownMenuLabel className="text-gray-400 text-sm">
             Available Themes
