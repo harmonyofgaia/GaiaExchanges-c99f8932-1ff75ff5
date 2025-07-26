@@ -84,6 +84,40 @@ export default function GaiaPrivateBlockchainSwapToken() {
     setFromAmount(toAmount)
   }
 
+  // Swap validation function
+  const validateSwap = (fromAmount: string, toAmount: string, swapRate: number) => {
+    const parsedFromAmount = parseFloat(fromAmount)
+    const parsedToAmount = parseFloat(toAmount)
+    
+    // Basic validation checks
+    if (isNaN(parsedFromAmount) || parsedFromAmount <= 0) {
+      return { success: false, error: 'Invalid from amount' }
+    }
+    
+    if (isNaN(parsedToAmount) || parsedToAmount <= 0) {
+      return { success: false, error: 'Invalid to amount' }
+    }
+    
+    // Rate validation (allow 1% tolerance for floating point precision)
+    const expectedToAmount = parsedFromAmount * swapRate
+    const tolerance = expectedToAmount * 0.01
+    if (Math.abs(parsedToAmount - expectedToAmount) > tolerance) {
+      return { success: false, error: 'Invalid swap rate calculation' }
+    }
+    
+    // Check if tokens are different
+    if (fromToken.symbol === toToken.symbol) {
+      return { success: false, error: 'Cannot swap identical tokens' }
+    }
+    
+    // Minimum swap amount check
+    if (parsedFromAmount < 0.000001) {
+      return { success: false, error: 'Amount too small for swap' }
+    }
+    
+    return { success: true, error: null }
+  }
+
   const executeSwap = async () => {
     if (!fromAmount || !toAmount) {
       toast.error('Please enter swap amounts')
