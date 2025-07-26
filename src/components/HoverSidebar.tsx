@@ -31,7 +31,6 @@ const HoverSidebar = () => {
     { icon: Gamepad2, label: 'Gaming', path: '/gaming' },
     { icon: TrendingUp, label: 'Exchange', path: '/exchange' },
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter' },
-    { icon: Activity, label: 'Live Tracking', path: '/live-tracking' },
     { icon: BarChart3, label: 'System Status', path: '/system-status' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status' },
     { icon: Shield, label: 'Immortal Security', path: '/immortal-security' },

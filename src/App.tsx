@@ -7,7 +7,6 @@ import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
-const LiveTracking = lazy(() => import('./pages/LiveTracking'))
 const Gaming = lazy(() => import('./pages/Gaming'))
 const Wallet = lazy(() => import('./pages/Wallet'))
 const Markets = lazy(() => import('./pages/Markets'))
@@ -38,7 +37,6 @@ function App() {
           }>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/live-tracking" element={<LiveTracking />} />
               <Route path="/gaming" element={<Gaming />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/markets" element={<Markets />} />

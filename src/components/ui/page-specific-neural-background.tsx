@@ -34,12 +34,6 @@ const pageStyles: Record<string, PageStyle> = {
     intensity: 'high', 
     colorScheme: 'fire',
     flowDirection: 'vertical'
-  },
-  '/live-tracking': { 
-    backgroundType: 'neural', 
-    intensity: 'low', 
-    colorScheme: 'cyan',
-    flowDirection: 'horizontal'
   }
 }
 

@@ -88,7 +88,6 @@ const SlidingMenu = () => {
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
     { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
     { icon: Palette, label: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', category: 'tools' },
-    { icon: Activity, label: 'Live Tracking', path: '/live-tracking', category: 'monitoring' },
     { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
     { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },

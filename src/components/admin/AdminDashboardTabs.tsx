@@ -6,12 +6,14 @@ import { UltimateSecurity } from './UltimateSecurity'
 import { AdminRecoveryPortal } from '@/components/security/AdminRecoveryPortal'
 import { PlanRecoverySystem } from './PlanRecoverySystem'
 import { HolisticAnalysis } from './HolisticAnalysis'
+import { AdminLiveTracking } from './AdminLiveTracking'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="control" className="w-full">
-      <TabsList className="grid w-full grid-cols-6">
+      <TabsList className="grid w-full grid-cols-7">
         <TabsTrigger value="control">Control Center</TabsTrigger>
+        <TabsTrigger value="tracking">Live Tracking</TabsTrigger>
         <TabsTrigger value="security">Security Suite</TabsTrigger>
         <TabsTrigger value="tools">Admin Tools</TabsTrigger>
         <TabsTrigger value="recovery">Recovery Portal</TabsTrigger>
@@ -21,6 +23,10 @@ export function AdminDashboardTabs() {
 
       <TabsContent value="control" className="space-y-6">
         <AdminControlSystem />
+      </TabsContent>
+
+      <TabsContent value="tracking" className="space-y-6">
+        <AdminLiveTracking />
       </TabsContent>
 
       <TabsContent value="security" className="space-y-6">

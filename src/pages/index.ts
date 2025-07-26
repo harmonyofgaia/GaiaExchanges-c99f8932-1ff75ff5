@@ -13,7 +13,6 @@ export { default as Transparency } from './Transparency';
 export { default as Admin } from './Admin';
 export { default as Gaming } from './Gaming';
 export { default as GaiaFighterGame } from './GaiaFighterGame';
-export { default as LiveTracking } from './LiveTracking';
 export { default as GaiaCoinCrafter } from './GaiaCoinCrafter';
 export { default as LandscapeBuilder } from './LandscapeBuilder';
 export { default as ForestShieldMasterPlan } from './ForestShieldMasterPlan';

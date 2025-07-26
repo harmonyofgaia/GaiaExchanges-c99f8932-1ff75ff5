@@ -37,7 +37,6 @@ export function Navbar() {
 
   const navItems = [
     { name: 'Home', path: '/', icon: Home },
-    { name: 'Live Tracking', path: '/live-tracking', icon: TrendingUp },
     { name: 'Gaming', path: '/gaming', icon: Gamepad2 },
     { name: 'Wallet', path: '/wallet', icon: Wallet },
     { name: 'Markets', path: '/markets', icon: BarChart3 },

@@ -27,7 +27,6 @@ const pageBackgrounds: Record<string, PageBackgroundConfig> = {
   '/transparency': { style: 'galaxy', intensity: 'low' },
   '/admin': { style: 'void', intensity: 'medium', useQuantum: true },
   '/gaia-fighter-game': { style: 'bioelectric', intensity: 'high', useNeural: true },
-  '/live-tracking': { style: 'synaptic', intensity: 'low', disableMouseInteraction: true, useNeural: true },
   '/profile': { style: 'neural', intensity: 'low', useNeural: true },
   '/contact': { style: 'ocean', intensity: 'low' },
   '/docs': { style: 'ice', intensity: 'low' }
