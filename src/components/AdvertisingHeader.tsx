@@ -29,7 +29,7 @@ export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
           <div className="mb-4 cursor-pointer" onClick={handleLogoClick}>
             <GaiaLogo 
               size="lg" 
-              variant="white-fade" 
+              variant="glow" 
               className="mx-auto"
             />
           </div>

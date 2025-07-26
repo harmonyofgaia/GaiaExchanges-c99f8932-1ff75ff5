@@ -65,7 +65,7 @@ export function LogoProtectionSystem() {
       <CardHeader>
         <CardTitle className="flex items-center gap-3 text-2xl text-pink-400">
           <div className="flex items-center gap-4">
-            <GaiaLogo size="lg" variant="colorful" />
+            <GaiaLogo size="lg" variant="glow" />
             <div>
               <div className="text-3xl">🎨 GAIA LOGO PROTECTION SYSTEM</div>
               <div className="text-lg font-normal">
@@ -110,7 +110,7 @@ export function LogoProtectionSystem() {
             <GaiaLogo size="sm" />
             <GaiaLogo size="md" />
             <GaiaLogo size="lg" />
-            <GaiaLogo size="lg" variant="colorful" />
+            <GaiaLogo size="lg" variant="glow" />
           </div>
           <p className="text-sm text-muted-foreground">
             ©️ Official Logo Protected by Advanced Digital Rights Management
