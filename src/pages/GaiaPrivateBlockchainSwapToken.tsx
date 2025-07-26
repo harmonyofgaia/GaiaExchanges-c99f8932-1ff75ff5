@@ -100,7 +100,7 @@ export default function GaiaPrivateBlockchainSwapToken() {
     
     // Rate validation (allow 1% tolerance for floating point precision)
     const expectedToAmount = parsedFromAmount * swapRate
-    const tolerance = expectedToAmount * 0.01
+    const tolerance = expectedToAmount * TOLERANCE_PERCENTAGE
     if (Math.abs(parsedToAmount - expectedToAmount) > tolerance) {
       return { success: false, error: 'Invalid swap rate calculation' }
     }
