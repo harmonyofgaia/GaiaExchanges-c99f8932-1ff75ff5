@@ -8,19 +8,26 @@ interface ProtectedRouteProps {
 
 export function ProtectedRoute({ children, requireAdmin = false }: ProtectedRouteProps) {
   const isProduction = import.meta.env.PROD
-  const hasAdminAccess = sessionStorage.getItem('admin-active') === 'true'
-  const adminSession = localStorage.getItem('gaia-admin-session')
-  const adminExpiry = localStorage.getItem('gaia-admin-expiry')
-  
-  // Check if admin session is valid
-  const isValidAdminSession = adminSession && adminExpiry && 
-    parseInt(adminExpiry) > Date.now()
+  const [isAdmin, setIsAdmin] = React.useState<boolean | null>(null)
 
-  // In production, admin routes require valid admin session
-  if (requireAdmin && isProduction && (!hasAdminAccess || !isValidAdminSession)) {
+  React.useEffect(() => {
+    if (requireAdmin && isProduction) {
+      fetch('/api/validate-admin', { credentials: 'include' })
+        .then(response => response.json())
+        .then(data => setIsAdmin(data.isAdmin))
+        .catch(() => setIsAdmin(false))
+    } else {
+      setIsAdmin(true)
+    }
+  }, [requireAdmin, isProduction])
+
+  if (isAdmin === false) {
     return <Navigate to="/" replace />
   }
 
+  if (isAdmin === null) {
+    return <div>Loading...</div>
+  }
   // In development, always allow access
   if (!isProduction) {
     return <>{children}</>
