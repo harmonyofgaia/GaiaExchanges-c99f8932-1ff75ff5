@@ -10,6 +10,7 @@ import {
   Bot,
   DollarSign,
   Eye,
+  EyeOff,
   Shield,
   Activity,
   MapPin,
@@ -79,7 +80,7 @@ interface CommunityVaultStats {
   communityEngagement: number
 }
 
-export function AnimalWelfareControlPanel() {
+function AnimalWelfareControlPanel() {
   const [searchedAnimals, setSearchedAnimals] = useState<AISearchedAnimal[]>([])
   const [fundingMetrics, setFundingMetrics] = useState<FundingMetrics>({
     vaultFunding: { totalAllocated: 2450000, activeRescues: 42, pendingReleases: 12 },
@@ -717,3 +718,5 @@ export function AnimalWelfareControlPanel() {
     </div>
   )
 }
+
+export default AnimalWelfareControlPanel

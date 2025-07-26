@@ -17,7 +17,7 @@ import {
 } from 'lucide-react'
 import { toast } from 'sonner'
 
-export function AdminRecoveryPortal() {
+function AdminRecoveryPortal() {
   const [recoveryStep, setRecoveryStep] = useState<'selection' | 'verification' | 'complete'>('selection')
   const [selectedMethod, setSelectedMethod] = useState<string>('')
   const [verificationCode, setVerificationCode] = useState('')
@@ -247,3 +247,5 @@ export function AdminRecoveryPortal() {
     </div>
   )
 }
+
+export default AdminRecoveryPortal

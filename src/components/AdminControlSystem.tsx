@@ -6,7 +6,7 @@ import { Settings, Shield, DollarSign, Eye } from 'lucide-react'
 import { TokenManagement } from './admin/TokenManagement'
 import { DailyAdvertising } from './admin/DailyAdvertising'
 
-export function AdminControlSystem() {
+function AdminControlSystem() {
   return (
     <div className="space-y-6">
       <Card className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border-blue-500/20">
@@ -122,3 +122,5 @@ export function AdminControlSystem() {
     </div>
   )
 }
+
+export default AdminControlSystem

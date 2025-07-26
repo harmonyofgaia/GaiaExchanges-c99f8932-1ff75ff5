@@ -28,9 +28,9 @@ import {
   Grid3X3
 } from 'lucide-react'
 import { toast } from 'sonner'
-import { VisualControlMenu } from '../visual/VisualControlMenu'
+import { VisualControlMenu } from '@/components/visual/VisualControlMenu'
 
-export function AdminVisualControls() {
+function AdminVisualControls() {
   const [isLocked, setIsLocked] = useState(false)
   const [activeTab, setActiveTab] = useState('overview')
 
@@ -427,3 +427,5 @@ export function AdminVisualControls() {
     </div>
   )
 }
+
+export default AdminVisualControls

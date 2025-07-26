@@ -16,7 +16,7 @@ import { BiometricAccessControl } from './BiometricAccessControl'
 import { BlockchainSecurityLogs } from './BlockchainSecurityLogs'
 import { MultiDimensionalFirewall } from './MultiDimensionalFirewall'
 
-export function RefactoredAdminTools() {
+function RefactoredAdminTools() {
   return (
     <div className="space-y-8">
       {/* CRITICAL DEFENSE & SECURITY SYSTEMS */}
@@ -49,3 +49,5 @@ export function RefactoredAdminTools() {
     </div>
   )
 }
+
+export default RefactoredAdminTools
