@@ -29,7 +29,10 @@ import {
   Heart,
   Leaf,
   CreditCard,
-  User
+  User,
+  Wallet,
+  Bike,
+  Pickaxe
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -71,38 +74,25 @@ const SlidingMenu = () => {
   }, [])
 
   const baseMenuItems = [
-    { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
-    { icon: Globe, label: 'Dashboard', path: '/dashboard', category: 'main' },
-    { icon: Radio, label: '🎭 Artist Streaming', path: '/artist-streaming', category: 'entertainment' },
-    { icon: Video, label: '🎬 Video Upload & Earn', path: '/video-upload', category: 'entertainment' },
-    { icon: Music, label: '🎵 Music Platform', path: '/music-platform', category: 'entertainment' },
-    { icon: Gamepad2, label: 'Gaming Hub', path: '/game', category: 'gaming' },
-    { icon: TrendingUp, label: 'Exchange', path: '/exchange', category: 'trading' },
-    { icon: Globe, label: "Gaia's Projects", path: '/gaias-projects', category: 'projects' },
-    { icon: BarChart3, label: 'Green Impact Dashboard', path: '/green-impact-dashboard', category: 'projects' },
-    { icon: DollarSign, label: 'Project Funding', path: '/project-funding', category: 'projects' },
-    { icon: TreePine, label: 'Eco Missions', path: '/eco-missions', category: 'projects' },
-    { icon: Heart, label: 'Planet Cleaning', path: '/planet-cleaning', category: 'projects' },
-    { icon: Coins, label: 'NFT Cards', path: '/nft-cards', category: 'nft' },
-    { icon: User, label: 'Eco Avatar', path: '/eco-avatar', category: 'profile' },
-    { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
-    { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
-    { icon: Palette, label: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', category: 'tools' },
-    { icon: Activity, label: 'Live Tracking', path: '/live-tracking', category: 'monitoring' },
-    { icon: BarChart3, label: 'System Status', path: '/system-status', category: 'monitoring' },
-    { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
-    { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
-    { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
-    { icon: Mail, label: 'Contact', path: '/contact', category: 'info' },
-    { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' }
+    { icon: Home, label: 'Home', path: '/', category: 'main' },
+    { icon: TrendingUp, label: 'Live Tracking', path: '/live-tracking', category: 'main' },
+    { icon: Gamepad2, label: 'Gaming', path: '/gaming', category: 'main' },
+    { icon: Wallet, label: 'Wallet', path: '/wallet', category: 'main' },
+    { icon: BarChart3, label: 'Markets', path: '/markets', category: 'main' },
+    { icon: Video, label: 'Video Exchange', path: '/video-exchange', category: 'entertainment' },
+    { icon: Bike, label: 'Bike Ecosystem', path: '/gaia-bike-ecosystem', category: 'tools' },
+    { icon: Pickaxe, label: 'Token Mining', path: '/token-mining', category: 'tools' },
+    { icon: Leaf, label: 'Green Investments', path: '/green-investments', category: 'projects' },
+    { icon: Coins, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
+    { icon: Shield, label: 'Private Blockchain', path: '/private-blockchain', category: 'security' },
+    { icon: Settings, label: 'Secure Admin', path: '/secure-admin', category: 'admin' }
   ]
 
   const adminMenuItems = [
-    { icon: Crown, label: '👑 Admin Portal', path: '/admin', category: 'admin' },
-    { icon: RotateCcw, label: '⚡ Task Reverser', path: '/task-reverser', category: 'admin' }
+    { icon: Crown, label: '👑 Admin Portal', path: '/admin', category: 'admin' }
   ]
 
-  const menuItems = isAuthorizedIP ? [...baseMenuItems, ...adminMenuItems] : baseMenuItems
+  const menuItems = [...baseMenuItems, ...adminMenuItems]
 
   const toggleMenu = () => setIsOpen(!isOpen)
 

@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
-import { Navbar } from '@/components/Navbar'
+import SlidingMenu from '@/components/SlidingMenu'
 import { GaiaLogo } from '@/components/GaiaLogo'
 import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
 
@@ -26,7 +26,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-background text-foreground">
-        <Navbar />
+        <SlidingMenu />
         <main className="flex-1">
           <Suspense fallback={
             <div className="min-h-screen bg-background flex items-center justify-center">
