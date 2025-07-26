@@ -80,15 +80,14 @@ export function AdminDashboardTabs() {
               </div>
               <div className="grid grid-cols-2 gap-1">
                 {tabs.map((tab) => (
-                  <DropdownMenuItem key={tab.value} asChild>
-                    <Button
-                      variant={activeTab === tab.value ? "default" : "ghost"}
-                      size="sm"
-                      onClick={() => setActiveTab(tab.value)}
-                      className="justify-start text-xs h-8 w-full"
-                    >
-                      {tab.label}
-                    </Button>
+                  <DropdownMenuItem
+                    key={tab.value}
+                    onSelect={() => setActiveTab(tab.value)}
+                    className={`justify-start text-xs h-8 w-full ${
+                      activeTab === tab.value ? "bg-primary text-white" : "hover:bg-primary/10 text-primary"
+                    }`}
+                  >
+                    {tab.label}
                   </DropdownMenuItem>
                 ))}
               </div>
