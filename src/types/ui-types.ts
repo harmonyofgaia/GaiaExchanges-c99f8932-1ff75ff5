@@ -126,6 +126,26 @@ export interface EcoMission {
   }
 }
 
+// NFT Card Game Types
+export interface NFTCard {
+  id: string
+  card_name: string
+  card_type: string
+  rarity: string
+  power_level: number
+  biodiversity_category: string
+  user_id: string
+  minted_at: string
+  is_tradeable: boolean
+  card_metadata: {
+    image_url: string
+    description: string
+    traits: { trait_type: string; value: string }[]
+    conservation_info?: string
+    abilities?: string[]
+  }
+}
+
 // AI Insight Types
 export interface AIInsight {
   type: string
@@ -310,4 +330,17 @@ export interface PartyEvent {
   participants: number
   maxParticipants: number
   requirements: string[]
+}
+
+// Utility functions for type conversion from Supabase Json
+export const parseJsonField = <T>(jsonValue: any, fallback: T): T => {
+  if (!jsonValue) return fallback
+  if (typeof jsonValue === 'string') {
+    try {
+      return JSON.parse(jsonValue) as T
+    } catch {
+      return fallback
+    }
+  }
+  return jsonValue as T
 }
