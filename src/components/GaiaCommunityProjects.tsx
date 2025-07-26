@@ -21,7 +21,7 @@ const processPayment = async (walletAddress: string, amount: number) => {
   
   return {
     success,
-    transactionId: success ? `tx_${Math.random().toString(36).substr(2, 9)}` : null,
+    transactionId: success ? `tx_${Math.random().toString(36).substring(2, 11)}` : null,
     error: success ? null : 'Network timeout'
   }
 }
