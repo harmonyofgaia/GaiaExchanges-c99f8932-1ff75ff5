@@ -19,6 +19,10 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  define: {
+    // Ensure environment variables are properly replaced at build time
+    __DEV__: mode === 'development',
+  },
   build: {
     rollupOptions: {
       output: {

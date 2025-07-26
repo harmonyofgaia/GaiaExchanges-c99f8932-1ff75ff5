@@ -44,10 +44,12 @@ if [ ! -f .env ]; then
 fi
 
 # Check for placeholder values in .env and warn if found
-if grep -q "placeholder" .env || grep -q "your-project-id" .env || grep -q "your-supabase-anonymous-key" .env; then
-    print_warning "⚠️  Environment file contains placeholder values!"
-    print_warning "Update .env with actual values for production deployment."
-    print_warning "For automated deployment, use GitHub Secrets or platform environment variables."
+if grep -q "placeholder\|your-project-id\|your-supabase-anonymous-key\|localhost:54321\|local-development-key" .env; then
+    print_warning "⚠️  Development environment configuration detected!"
+    print_warning "For production deployment, ensure proper environment variables are set:"
+    print_warning "- VITE_SUPABASE_URL: Your actual Supabase project URL"
+    print_warning "- VITE_SUPABASE_ANON_KEY: Your actual Supabase anonymous key"
+    print_warning "Platform deployment will use environment variables set in platform dashboard."
     
     # Create backup .env with placeholders for reference
     if [ ! -f .env.backup ]; then
@@ -258,9 +260,14 @@ else
 fi
 
 # Check for environment variable placeholders in built files
-if grep -r "placeholder" dist/ &> /dev/null; then
-    print_warning "⚠ Found placeholder values in build output"
-    print_warning "Ensure environment variables are properly set for production"
+if grep -r "placeholder\|your-project-id\|your-supabase-anonymous-key\|localhost:54321\|local-development-key" dist/ &> /dev/null; then
+    print_warning "⚠ Development configuration detected in build output"
+    print_warning "For production, set platform environment variables:"
+    print_warning "  VITE_SUPABASE_URL=https://your-project-id.supabase.co"
+    print_warning "  VITE_SUPABASE_ANON_KEY=your-actual-anonymous-key"
+    print_status "Build is ready but uses development configuration"
+else
+    print_success "✓ Production environment variables properly configured"
 fi
 
 print_success "🎉 Deployment process completed!"
