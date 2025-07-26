@@ -62,7 +62,7 @@ export function ThemeSelector() {
         <DropdownMenuContent 
           align="end" 
           side="top"
-          className="w-72 bg-black/95 border-green-500/30 backdrop-blur-sm"
+          className="w-72 bg-background/95 border-primary/30 backdrop-blur-sm"
         >
           <DropdownMenuLabel className="text-green-400 font-semibold">
             🎨 Theme Settings
