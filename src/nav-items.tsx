@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket, Zap } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -309,6 +309,56 @@ export const navigationItems: NavigationItem[] = [
       "Security, Privacy & Compliance"
     ],
     description: "Master Plan v7: GAiA Community Video Exchange Outstanding Experience",
+    lazyLoaded: true,
+  },
+  {
+    title: "Animal NFT Community",
+    to: "/animal-nft-community",
+    icon: Heart,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Living Animal NFTs",
+      "Real-time Emotions & Memories",
+      "Individual Blockchain Wallets",
+      "Investment & Rescue Progress",
+      "Global Impact Tracking",
+      "Community Engagement"
+    ],
+    description: "Master Plan v7: Living Animal NFT Community with Real Emotions",
+    lazyLoaded: true,
+  },
+  {
+    title: "Animal Rescue",
+    to: "/animal-rescue",
+    icon: Shield,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Caged Animal AI Search",
+      "Individual NFT Card Creation",
+      "Blockchain Wallet Assignment",
+      "Rescue Progress Tracking",
+      "Dual Funding Mechanisms"
+    ],
+    description: "Master Plan v7: AI-Powered Animal Rescue with Blockchain Integration",
+    lazyLoaded: true,
+  },
+  {
+    title: "NFT Green Animal Platform",
+    to: "/nft-green-animal-platform",
+    icon: Sparkles,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Comprehensive Animal Management",
+      "Vault-Driven Support",
+      "Direct NFT Marketplace",
+      "Conservation Hub",
+      "Live Tracking System",
+      "Global Investor Network"
+    ],
+    description: "Master Plan v7: Complete Animal Welfare Platform with Dual Mechanisms",
     lazyLoaded: true,
   },
 ];

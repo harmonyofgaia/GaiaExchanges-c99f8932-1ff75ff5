@@ -19,6 +19,9 @@ const CoinCrafter = lazy(() => import('./pages/CoinCrafter'))
 const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
 const Admin = lazy(() => import('./pages/Admin'))
 const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
+const AnimalNFTCommunity = lazy(() => import('./pages/AnimalNFTCommunity'))
+const AnimalRescue = lazy(() => import('./pages/AnimalRescue'))
+const NFTGreenAnimalPlatform = lazy(() => import('./pages/NFTGreenAnimalPlatform'))
 
 function App() {
   useGlobalBackgroundServices()
@@ -50,6 +53,9 @@ function App() {
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/secure-admin" element={<SecureAdmin />} />
+              <Route path="/animal-nft-community" element={<AnimalNFTCommunity />} />
+              <Route path="/animal-rescue" element={<AnimalRescue />} />
+              <Route path="/nft-green-animal-platform" element={<NFTGreenAnimalPlatform />} />
             </Routes>
           </Suspense>
         </main>

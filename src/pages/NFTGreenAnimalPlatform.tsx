@@ -8,6 +8,10 @@ import { AnimalNFTCreator } from '@/components/nft/AnimalNFTCreator'
 import { AnimalConservationHub } from '@/components/nft/AnimalConservationHub'
 import { LiveAnimalNFTs } from '@/components/LiveAnimalNFTs'
 import { GlobalInvestorMagnet } from '@/components/investor/GlobalInvestorMagnet'
+import { AIAnimalSearch } from '@/components/animal-welfare/AIAnimalSearch'
+import { DualFundingMechanisms } from '@/components/animal-welfare/DualFundingMechanisms'
+import { CommunityVaultSystem } from '@/components/animal-welfare/CommunityVaultSystem'
+import { LiveProgressDashboard } from '@/components/animal-welfare/LiveProgressDashboard'
 
 const NFTGreenAnimalPlatform = () => {
   return (
@@ -19,31 +23,50 @@ const NFTGreenAnimalPlatform = () => {
           <Card className="mb-8 border-green-500/30 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
             <CardHeader>
               <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-                🐾 NFT GREEN ANIMAL PLATFORM
+                🐾 NFT GREEN ANIMAL PLATFORM - EXPANDED
               </CardTitle>
               <p className="text-center text-xl text-muted-foreground">
                 Conservation Through Technology • Real Animals • Real Impact • Real-Time Tracking
               </p>
               <div className="text-center mt-4 space-y-2">
                 <div className="text-lg text-green-400 font-bold">
-                  🌍 Protecting Wildlife Through Blockchain • GAiA Powered • Quantum Secured • Investor Ready
+                  🌍 Dual Funding Mechanisms • 🤖 AI Search • 🎁 Community Vault • 📊 Live Transparency
                 </div>
               </div>
             </CardHeader>
           </Card>
 
           <Tabs defaultValue="living-animals" className="w-full">
-            <TabsList className="grid w-full grid-cols-6">
-              <TabsTrigger value="living-animals">🦋 All Living Animals</TabsTrigger>
-              <TabsTrigger value="marketplace">🏪 NFT Marketplace</TabsTrigger>
-              <TabsTrigger value="tracking">📡 Live Animal Tracking</TabsTrigger>
-              <TabsTrigger value="creator">🎨 Create Animal NFTs</TabsTrigger>
-              <TabsTrigger value="conservation">🌱 Conservation Hub</TabsTrigger>
-              <TabsTrigger value="investors">💰 Global Investors</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-9">
+              <TabsTrigger value="living-animals">🦋 Living Animals</TabsTrigger>
+              <TabsTrigger value="ai-search">🤖 AI Search</TabsTrigger>
+              <TabsTrigger value="dual-funding">🔄 Dual Funding</TabsTrigger>
+              <TabsTrigger value="community-vault">🎁 Vault System</TabsTrigger>
+              <TabsTrigger value="live-dashboard">📊 Live Dashboard</TabsTrigger>
+              <TabsTrigger value="marketplace">🏪 Marketplace</TabsTrigger>
+              <TabsTrigger value="tracking">📡 Live Tracking</TabsTrigger>
+              <TabsTrigger value="creator">🎨 Creator</TabsTrigger>
+              <TabsTrigger value="conservation">🌱 Conservation</TabsTrigger>
             </TabsList>
 
             <TabsContent value="living-animals" className="space-y-6">
               <LiveAnimalNFTs />
+            </TabsContent>
+
+            <TabsContent value="ai-search" className="space-y-6">
+              <AIAnimalSearch />
+            </TabsContent>
+
+            <TabsContent value="dual-funding" className="space-y-6">
+              <DualFundingMechanisms />
+            </TabsContent>
+
+            <TabsContent value="community-vault" className="space-y-6">
+              <CommunityVaultSystem />
+            </TabsContent>
+
+            <TabsContent value="live-dashboard" className="space-y-6">
+              <LiveProgressDashboard />
             </TabsContent>
 
             <TabsContent value="marketplace" className="space-y-6">
@@ -60,10 +83,6 @@ const NFTGreenAnimalPlatform = () => {
 
             <TabsContent value="conservation" className="space-y-6">
               <AnimalConservationHub />
-            </TabsContent>
-
-            <TabsContent value="investors" className="space-y-6">
-              <GlobalInvestorMagnet />
             </TabsContent>
           </Tabs>
         </div>
