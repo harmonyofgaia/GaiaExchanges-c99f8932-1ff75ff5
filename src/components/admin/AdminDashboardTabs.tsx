@@ -11,16 +11,20 @@ import { AdminVisualControls } from './AdminVisualControls'
 import { SecureAdminQuantumIAEnginePanel } from '@/components/SecureAdminQuantumIAEnginePanel'
 import { HuntingHackersSection } from './HuntingHackersSection'
 import { SystemDiagnosticsModule } from './SystemDiagnosticsModule'
+import { AdvancedControlDashboard } from './AdvancedControlDashboard'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="hunting-hackers" className="w-full">
-      <TabsList className="grid w-full grid-cols-11">
+      <TabsList className="grid w-full grid-cols-12">
         <TabsTrigger value="hunting-hackers" className="bg-gradient-to-r from-red-600/20 to-purple-600/20 border border-red-500/30">
           🎯 Hunting Hackers
         </TabsTrigger>
         <TabsTrigger value="diagnostics" className="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30">
           🔍 Diagnostics
+        </TabsTrigger>
+        <TabsTrigger value="advanced-control" className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30">
+          🚀 Advanced Control
         </TabsTrigger>
         <TabsTrigger value="control">Control Center</TabsTrigger>
         <TabsTrigger value="visual">🎨 Visual Controls</TabsTrigger>
@@ -41,6 +45,10 @@ export function AdminDashboardTabs() {
 
       <TabsContent value="diagnostics" className="space-y-6">
         <SystemDiagnosticsModule />
+      </TabsContent>
+
+      <TabsContent value="advanced-control" className="space-y-6">
+        <AdvancedControlDashboard />
       </TabsContent>
 
       <TabsContent value="control" className="space-y-6">

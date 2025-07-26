@@ -17,7 +17,7 @@ import {
   Scan,
   Sparkles,
   Atom,
-  Infinity,
+  Infinity as InfinityIcon,
   Crown,
   Star,
   Layers,
