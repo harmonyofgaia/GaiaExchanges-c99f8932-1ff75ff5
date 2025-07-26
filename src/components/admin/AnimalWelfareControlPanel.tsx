@@ -122,7 +122,7 @@ export function AnimalWelfareControlPanel() {
         name: 'Sunny',
         species: 'Golden Eagle',
         location: 'Mountain Range, Colorado',
-        walletAddress: '0x9f8e7d6c5b4a3210fed',
+        walletAddress: '0x0000000000000000000000000000000000000000',
         urgencyLevel: 7,
         emotionalState: { sadness: 60, hope: 55, fear: 45, trust: 40 },
         rescueProgress: 72,
