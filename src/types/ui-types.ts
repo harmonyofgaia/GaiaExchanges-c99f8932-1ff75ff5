@@ -19,29 +19,10 @@ export interface Tool {
   description: string
   icon?: string
   category?: string
-}
-
-export interface ToolItem {
-  id: string
-  name: string
-  price: number
-  description: string
-  icon?: string
-  category?: string
   rarity?: 'common' | 'rare' | 'epic' | 'legendary'
 }
 
 export interface Landscape {
-  id: string
-  name: string
-  price: number
-  description: string
-  image?: string
-  category?: string
-  biome?: string
-}
-
-export interface LandscapeItem {
   id: string
   name: string
   price: number
@@ -142,26 +123,6 @@ export interface EcoMission {
     impact_measured?: number
     peer_verified?: boolean
     notes?: string
-  }
-}
-
-// NFT Card Game Types
-export interface NFTCard {
-  id: string
-  card_name: string
-  card_type: string
-  rarity: string
-  power_level: number
-  biodiversity_category: string
-  user_id: string
-  minted_at: string
-  is_tradeable: boolean
-  card_metadata: {
-    image_url: string
-    description: string
-    traits: { trait_type: string; value: string }[]
-    conservation_info?: string
-    abilities?: string[]
   }
 }
 
@@ -349,17 +310,4 @@ export interface PartyEvent {
   participants: number
   maxParticipants: number
   requirements: string[]
-}
-
-// Utility functions for type conversion from Supabase Json
-export const parseJsonField = <T>(jsonValue: any, fallback: T): T => {
-  if (!jsonValue) return fallback
-  if (typeof jsonValue === 'string') {
-    try {
-      return JSON.parse(jsonValue) as T
-    } catch {
-      return fallback
-    }
-  }
-  return jsonValue as T
 }
