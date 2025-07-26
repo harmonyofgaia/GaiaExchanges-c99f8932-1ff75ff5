@@ -111,7 +111,7 @@ export function ThemeSelector() {
                   </div>
                 </div>
                 {currentTheme === key && (
-                  <Check className="h-4 w-4 text-green-400" />
+                  <Check className="h-4 w-4 text-primary" />
                 )}
               </div>
             </DropdownMenuItem>
