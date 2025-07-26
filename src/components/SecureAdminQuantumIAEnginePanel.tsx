@@ -118,24 +118,36 @@ export function SecureAdminQuantumIAEnginePanel() {
 
   const [isCreatorMode, setIsCreatorMode] = useState(false)
   const [einsteinUpgradeProgress, setEinsteinUpgradeProgress] = useState(0)
-  const authTimeoutRef = useRef<NodeJS.Timeout>()
+  const authTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
 
   // Simulated biometric authentication sequence
   useEffect(() => {
     if (authStage > 0 && authStage <= 5) {
-      const timer = setTimeout(() => {
+      authTimeoutRef.current = setTimeout(() => {
         const authKeys = Object.keys(biometricAuth) as (keyof BiometricAuthState)[]
         const currentKey = authKeys[authStage - 1]
         setBiometricAuth(prev => ({ ...prev, [currentKey]: true }))
         setAuthStage(prev => prev + 1)
       }, 1200)
-      return () => clearTimeout(timer)
+      return () => {
+        if (authTimeoutRef.current) {
+          clearTimeout(authTimeoutRef.current)
+          authTimeoutRef.current = undefined
+        }
+      }
     } else if (authStage > 5) {
-      setTimeout(() => {
+      authTimeoutRef.current = setTimeout(() => {
         setIsAuthenticated(true)
         // Simulate creator-level access detection
         setIsCreatorMode(true)
+        authTimeoutRef.current = undefined
       }, 800)
+      return () => {
+        if (authTimeoutRef.current) {
+          clearTimeout(authTimeoutRef.current)
+          authTimeoutRef.current = undefined
+        }
+      }
     }
   }, [authStage, biometricAuth])
 
