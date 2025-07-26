@@ -33,6 +33,10 @@ const supportedTokens = [
   { name: 'Polkadot', symbol: 'DOT', icon: '●', fee: 0.01, address: '1...' },
 ]
 
+// Swap validation constants
+const TOLERANCE_PERCENTAGE = 0.01 // 1% tolerance for floating point precision
+const MINIMUM_SWAP_AMOUNT = 0.000001 // Minimum swap amount
+
 export default function GaiaPrivateBlockchainSwapToken() {
   // Blockchain metrics state (preserved from original)
   const [blockchainHealth, setBlockchainHealth] = useState(98.7)
