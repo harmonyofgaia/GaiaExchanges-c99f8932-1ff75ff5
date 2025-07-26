@@ -87,8 +87,14 @@ export default function GaiaPrivateBlockchainSwapToken() {
     setIsSwapping(true)
     toast.info('Initiating secure blockchain swap...')
 
-    // Simulate blockchain swap process
+    // Simulate blockchain swap process with validation
     setTimeout(() => {
+      const swapValidation = validateSwap(fromAmount, toAmount, swapRate)
+      if (!swapValidation.success) {
+        toast.error(`Swap failed: ${swapValidation.error}`)
+        setIsSwapping(false)
+        return
+      }
       toast.success(`Successfully swapped ${fromAmount} ${fromToken.symbol} for ${toAmount} ${toToken.symbol}`)
       setIsSwapping(false)
       setFromAmount('')
