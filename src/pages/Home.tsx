@@ -363,7 +363,7 @@ export default function Home() {
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <Badge variant="secondary" className="bg-cyan-900/50 text-cyan-300 border-cyan-500/50">
-                    Q2 2024
+                    {getCurrentQuarterAndYear()}
                   </Badge>
                 </div>
               </CardContent>
