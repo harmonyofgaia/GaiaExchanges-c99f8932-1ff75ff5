@@ -32,6 +32,8 @@ import { HomeGrownFoodActions } from '@/components/earning/HomeGrownFoodActions'
 import { BeeHotelActions } from '@/components/earning/BeeHotelActions'
 import { EnvironmentalEducationActions } from '@/components/earning/EnvironmentalEducationActions'
 import { ReferralSystem } from '@/components/earning/ReferralSystem'
+import { CarbonCreditActions } from '@/components/earning/CarbonCreditActions'
+import { SkillBasedEarning } from '@/components/earning/SkillBasedEarning'
 import { useEarningActivities, useUserProfile, useBadges, useAchievements } from '@/hooks/useEarningSystem'
 import { EarningActivityType } from '@/types/gaia-types'
 
@@ -93,6 +95,12 @@ export default function EarningActivitiesDashboard() {
   const recentActivities = activities.slice(0, 10)
   const completedAchievements = achievements.filter(a => a.completed)
   const inProgressAchievements = achievements.filter(a => !a.completed)
+
+  // Filter activities by type for analytics
+  const userWaterActions = activities.filter(a => a.type === 'water_saving')
+  const userFoodActions = activities.filter(a => a.type === 'home_grown_food')
+  const userBeeActions = activities.filter(a => a.type === 'bee_hotel')
+  const userCarbonActions = activities.filter(a => a.type === 'carbon_credit')
 
   // Calculate activity stats
   const activityStats = Object.values(EarningActivityType).map(type => ({
@@ -172,15 +180,21 @@ export default function EarningActivitiesDashboard() {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-8 bg-gray-800/50 overflow-x-auto">
+          <TabsList className="grid w-full grid-cols-4 md:grid-cols-8 gap-1 bg-gray-800/50 overflow-x-auto">
             <TabsTrigger value="overview" className="text-xs">Overview</TabsTrigger>
             <TabsTrigger value="water" className="text-xs">Water</TabsTrigger>
             <TabsTrigger value="food" className="text-xs">Food</TabsTrigger>
             <TabsTrigger value="bees" className="text-xs">Bees</TabsTrigger>
             <TabsTrigger value="education" className="text-xs">Education</TabsTrigger>
+            <TabsTrigger value="skills" className="text-xs">Skills</TabsTrigger>
+            <TabsTrigger value="carbon" className="text-xs">Carbon</TabsTrigger>
             <TabsTrigger value="referrals" className="text-xs">Referrals</TabsTrigger>
+          </TabsList>
+          
+          <TabsList className="grid w-full grid-cols-3 bg-gray-800/50 mt-2">
             <TabsTrigger value="achievements" className="text-xs">Achievements</TabsTrigger>
             <TabsTrigger value="badges" className="text-xs">Badges</TabsTrigger>
+            <TabsTrigger value="analytics" className="text-xs">Analytics</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -276,6 +290,14 @@ export default function EarningActivitiesDashboard() {
 
           <TabsContent value="referrals">
             <ReferralSystem />
+          </TabsContent>
+
+          <TabsContent value="skills">
+            <SkillBasedEarning />
+          </TabsContent>
+
+          <TabsContent value="carbon">
+            <CarbonCreditActions />
           </TabsContent>
 
           <TabsContent value="achievements" className="space-y-6">
@@ -414,17 +436,110 @@ export default function EarningActivitiesDashboard() {
           </TabsContent>
 
           <TabsContent value="analytics" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <BarChart3 className="h-5 w-5" />
+                    <span>Activity Breakdown</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {activityStats.slice(0, 5).map((activity) => {
+                      const IconComponent = activity.icon
+                      const percentage = totalPoints > 0 ? (activity.points / totalPoints) * 100 : 0
+                      return (
+                        <div key={activity.type} className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                              <IconComponent className="h-4 w-4 text-green-400" />
+                              <span className="text-sm font-medium">{activity.name}</span>
+                            </div>
+                            <span className="text-sm text-muted-foreground">
+                              {activity.points} pts ({percentage.toFixed(1)}%)
+                            </span>
+                          </div>
+                          <Progress value={percentage} className="h-2" />
+                        </div>
+                      )
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <TrendingUp className="h-5 w-5" />
+                    <span>Performance Metrics</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="text-center p-3 border rounded-lg">
+                        <p className="text-2xl font-bold text-green-400">{activities.length}</p>
+                        <p className="text-sm text-muted-foreground">Total Activities</p>
+                      </div>
+                      <div className="text-center p-3 border rounded-lg">
+                        <p className="text-2xl font-bold text-blue-400">{currentLevel}</p>
+                        <p className="text-sm text-muted-foreground">Current Level</p>
+                      </div>
+                      <div className="text-center p-3 border rounded-lg">
+                        <p className="text-2xl font-bold text-purple-400">{badges.length}</p>
+                        <p className="text-sm text-muted-foreground">Badges Earned</p>
+                      </div>
+                      <div className="text-center p-3 border rounded-lg">
+                        <p className="text-2xl font-bold text-yellow-400">{completedAchievements.length}</p>
+                        <p className="text-sm text-muted-foreground">Achievements</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
             <Card>
               <CardHeader>
-                <CardTitle>Coming Soon: Advanced Analytics</CardTitle>
+                <CardTitle>Environmental Impact Summary</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8">
-                  <BarChart3 className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-lg font-medium">Advanced Analytics Dashboard</p>
-                  <p className="text-muted-foreground">
-                    Detailed charts, trends, and insights about your environmental impact coming soon!
-                  </p>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+                  <div className="p-4 border rounded-lg">
+                    <div className="text-2xl mb-2">💧</div>
+                    <p className="text-xl font-bold text-blue-400">
+                      {userWaterActions?.reduce((sum, action) => 
+                        sum + (action.metadata?.waterSavingAction?.waterSavedLiters || 0), 0
+                      )?.toLocaleString() || 0}L
+                    </p>
+                    <p className="text-sm text-muted-foreground">Water Saved</p>
+                  </div>
+                  <div className="p-4 border rounded-lg">
+                    <div className="text-2xl mb-2">🌱</div>
+                    <p className="text-xl font-bold text-green-400">
+                      {userFoodActions?.reduce((sum, action) => 
+                        sum + (action.metadata?.homeGrownFoodAction?.quantity || 0), 0
+                      ) || 0}
+                    </p>
+                    <p className="text-sm text-muted-foreground">Crops Grown</p>
+                  </div>
+                  <div className="p-4 border rounded-lg">
+                    <div className="text-2xl mb-2">🐝</div>
+                    <p className="text-xl font-bold text-yellow-400">
+                      {userBeeActions?.length || 0}
+                    </p>
+                    <p className="text-sm text-muted-foreground">Bee Hotels</p>
+                  </div>
+                  <div className="p-4 border rounded-lg">
+                    <div className="text-2xl mb-2">🌿</div>
+                    <p className="text-xl font-bold text-purple-400">
+                      {userCarbonActions?.reduce((sum, action) => 
+                        sum + (action.metadata?.carbonCreditAction?.carbonOffset || 0), 0
+                      )?.toLocaleString() || 0} kg
+                    </p>
+                    <p className="text-sm text-muted-foreground">CO2 Offset</p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
