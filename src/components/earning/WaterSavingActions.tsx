@@ -99,9 +99,10 @@ export function WaterSavingActions() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!formData.location || formData.waterSavedLiters <= 0) {
-      toast.error('Please fill in all required fields')
-      return
+    const validTypes = waterSavingTypes.map(t => t.value);
+    if (!formData.location || formData.waterSavedLiters <= 0 || formData.duration <= 0 || !validTypes.includes(formData.type)) {
+      toast.error('Please fill in all required fields with valid values');
+      return;
     }
 
     setSubmitting(true)
