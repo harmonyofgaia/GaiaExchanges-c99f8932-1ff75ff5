@@ -178,12 +178,13 @@ export default function GaiaPrivateBlockchainSwapToken() {
                   <div className="max-w-md mx-auto space-y-6">
                     {/* From Token */}
                     <div className="space-y-2">
-                      <label className="text-sm text-muted-foreground">From</label>
+                      <label id="from-token-label" className="text-sm text-muted-foreground">From</label>
                       <div className="flex gap-2">
                         <select 
                           className="flex h-10 w-32 rounded-md border border-input bg-background px-3 py-2 text-sm"
                           value={fromToken.symbol}
                           onChange={(e) => setFromToken(supportedTokens.find(t => t.symbol === e.target.value) || supportedTokens[0])}
+                          aria-labelledby="from-token-label"
                         >
                           {supportedTokens.map(token => (
                             <option key={token.symbol} value={token.symbol}>
