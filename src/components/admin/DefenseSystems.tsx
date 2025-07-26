@@ -38,7 +38,7 @@ export function DefenseSystems() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-400">15</div>
+              <div className="text-2xl font-bold text-red-400">{defenseLayerCount}</div>
               <p className="text-sm text-muted-foreground">Defense Layers</p>
             </div>
             <div className="text-center">
