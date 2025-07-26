@@ -119,7 +119,7 @@ class DynamicRewardSystem {
         return baseMultiplier * config.multiplier;
       }
     }
-    return Math.max(baseMultiplier * 0.4, 0.1); // Minimum guaranteed
+    return Math.max(baseMultiplier * DynamicRewardSystem.MINIMUM_MULTIPLIER_RATIO, DynamicRewardSystem.ABSOLUTE_MINIMUM_MULTIPLIER); // Minimum guaranteed
   }
 }
 ```
