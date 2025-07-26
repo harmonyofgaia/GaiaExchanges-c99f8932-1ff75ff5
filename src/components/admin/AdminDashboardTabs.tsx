@@ -98,7 +98,7 @@ export function AdminDashboardTabs() {
         
         {mobileMenuOpen && (
           <div className="border-b border-primary/30 bg-background/95 backdrop-blur-sm">
-            <div className="grid grid-cols-2 gap-1 p-4">
+            <div className="grid grid-cols-1 gap-1 p-4 overflow-y-auto max-h-96">
               {tabs.map((tab) => (
                 <Button
                   key={tab.value}
