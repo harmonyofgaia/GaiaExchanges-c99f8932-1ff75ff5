@@ -64,7 +64,7 @@ export function ThemeSelector() {
           side="top"
           className="w-72 bg-background/95 border-primary/30 backdrop-blur-sm"
         >
-          <DropdownMenuLabel className="text-green-400 font-semibold">
+          <DropdownMenuLabel className="text-primary font-semibold">
             🎨 Theme Settings
           </DropdownMenuLabel>
           
