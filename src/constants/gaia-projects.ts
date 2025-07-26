@@ -40,7 +40,7 @@ export const GAIA_COMMUNITY_PROJECTS: GAiAProject[] = [
     icon: BrainCircuit,
     minDonation: 500,
     suggestedDonations: [1000, 2500, 5000, 10000],
-    impactDescription: '🧠🍄 Pioneering neural recovery through plant and fungal regeneration research with 24/7 laboratory operations, real-time progress tracking, and continuous scientific updates exploring every possible bio-inspired pathway.',
+    impactDescription: '🧠🍄 Advancing neural recovery through innovative plant and fungal regeneration research, bridging nature\'s wisdom with medical innovation.',
     verified: true
   },
   {
