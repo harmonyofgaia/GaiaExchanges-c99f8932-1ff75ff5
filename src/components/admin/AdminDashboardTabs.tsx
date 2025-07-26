@@ -9,18 +9,20 @@ import { HolisticAnalysis } from './HolisticAnalysis'
 import { VideoExchangeDashboard } from './VideoExchangeDashboard'
 import { UserManagementSystem } from './UserManagementSystem'
 import { PsychohistoricalEngine } from './PsychohistoricalEngine'
-import { KoalaAIEngine } from './KoalaAIEngine'
 import { AdminMediaLibrary } from './AdminMediaLibrary'
 import { SystemHealthDashboard } from './SystemHealthDashboard'
+import { AIHub } from './AIHub'
+import { DefenseSystems } from './DefenseSystems'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="control" className="w-full">
-      <TabsList className="grid w-full grid-cols-4 lg:grid-cols-6 xl:grid-cols-12 gap-1">
+      <TabsList className="grid w-full grid-cols-4 lg:grid-cols-6 xl:grid-cols-13 gap-1">
         <TabsTrigger value="control" className="text-xs">Control Center</TabsTrigger>
         <TabsTrigger value="video" className="text-xs">Video Exchange</TabsTrigger>
         <TabsTrigger value="users" className="text-xs">User Management</TabsTrigger>
-        <TabsTrigger value="ai" className="text-xs">AI Engines</TabsTrigger>
+        <TabsTrigger value="ai" className="text-xs">AI Hub</TabsTrigger>
+        <TabsTrigger value="defense" className="text-xs">Defense Systems</TabsTrigger>
         <TabsTrigger value="psycho" className="text-xs">Psychohistorical</TabsTrigger>
         <TabsTrigger value="media" className="text-xs">Media Library</TabsTrigger>
         <TabsTrigger value="health" className="text-xs">System Health</TabsTrigger>
@@ -44,7 +46,11 @@ export function AdminDashboardTabs() {
       </TabsContent>
 
       <TabsContent value="ai" className="space-y-6">
-        <KoalaAIEngine />
+        <AIHub />
+      </TabsContent>
+
+      <TabsContent value="defense" className="space-y-6">
+        <DefenseSystems />
       </TabsContent>
 
       <TabsContent value="psycho" className="space-y-6">
