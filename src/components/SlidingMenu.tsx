@@ -84,7 +84,7 @@ const SlidingMenu = () => {
     { icon: Pickaxe, label: 'Token Mining', path: '/token-mining', category: 'tools' },
     { icon: Leaf, label: 'Green Investments', path: '/green-investments', category: 'projects' },
     { icon: Coins, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
-    { icon: Shield, label: 'Private Blockchain', path: '/private-blockchain', category: 'security' },
+    { icon: Shield, label: 'Gaia Private Blockchain Swap Token', path: '/gaia-private-blockchain-swap-token', category: 'security' },
     { icon: Settings, label: 'Secure Admin', path: '/secure-admin', category: 'admin' }
   ]
 
