@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -12,6 +12,7 @@ import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 export function SessionSettingsPanel() {
   const { adminSession, sessionTimeout, updateSessionTimeout, extendSession } = useSecureAdmin()
   const [newTimeout, setNewTimeout] = useState(sessionTimeout)
+  const [timeRemaining, setTimeRemaining] = useState('Calculating...')
 
   const handleTimeoutChange = (value: number[]) => {
     setNewTimeout(value[0])
@@ -31,6 +32,10 @@ export function SessionSettingsPanel() {
       description: `Session extended by ${sessionTimeout} minutes`,
       duration: 3000
     })
+  }
+
+  const getTimeRemaining = () => {
+    return timeRemaining
   }
 
   useEffect(() => {
@@ -61,6 +66,12 @@ export function SessionSettingsPanel() {
     const interval = setInterval(updateRemainingTime, 1000)
     return () => clearInterval(interval)
   }, [adminSession])
+
+  // Update newTimeout when sessionTimeout changes
+  useEffect(() => {
+    setNewTimeout(sessionTimeout)
+  }, [sessionTimeout])
+
   return (
     <div className="space-y-6">
       <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-indigo-900/30">
