@@ -1,147 +1,225 @@
 
+import { MatrixRainBackground } from '@/components/ui/matrix-rain-background'
+import { GaiaLogo } from '@/components/GaiaLogo'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Globe, Heart, Zap, Users, Shield, Gamepad2 } from 'lucide-react'
-import HoverSidebar from '@/components/HoverSidebar'
-import { CallToAction } from '@/components/home/CallToAction'
-import { ExchangeLinks } from '@/components/home/ExchangeLinks'
-import { BackgroundMusic } from '@/components/BackgroundMusic'
-import { GAIA_TOKEN } from '@/constants/gaia'
+import { Badge } from '@/components/ui/badge'
+import { GAIA_BRANDING } from '@/constants/branding'
+import { GAIA_TOKEN, GAIA_METRICS } from '@/constants/gaia'
+import { ArrowRight, TrendingUp, Leaf, Zap, Shield, Globe } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
-const Home = () => {
+export default function Home() {
+  const navigate = useNavigate()
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
-      <HoverSidebar />
-      <BackgroundMusic />
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      <MatrixRainBackground intensity="medium" color="#00ff00" speed={1.2} />
       
-      <div className="ml-16 min-h-screen">
-        <div className="container mx-auto px-6 py-8">
-          {/* Hero Section */}
-          <Card className="mb-8 border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30">
-            <CardHeader>
-              <CardTitle className="text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">
-                🌍 Welcome to GAiA
+      <div className="relative z-10 container mx-auto px-4 py-8">
+        {/* Hero Section */}
+        <div className="text-center py-20">
+          <GaiaLogo size="xl" variant="glow" className="mx-auto mb-8" />
+          
+          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 via-emerald-400 to-green-500 bg-clip-text text-transparent">
+            {GAIA_BRANDING.NAME}
+          </h1>
+          
+          <p className="text-2xl text-green-300 mb-8 max-w-3xl mx-auto">
+            {GAIA_BRANDING.TAGLINE}
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <Badge variant="secondary" className="bg-green-900/50 text-green-300 border-green-500/50 px-6 py-2 text-lg">
+              🌍 Carbon Negative
+            </Badge>
+            <Badge variant="secondary" className="bg-blue-900/50 text-blue-300 border-blue-500/50 px-6 py-2 text-lg">
+              ⚡ Quantum Security
+            </Badge>
+            <Badge variant="secondary" className="bg-purple-900/50 text-purple-300 border-purple-500/50 px-6 py-2 text-lg">
+              🚀 Web3 Native
+            </Badge>
+          </div>
+
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-4 text-xl"
+            onClick={() => navigate('/live-tracking')}
+          >
+            Launch Exchange <ArrowRight className="ml-2 h-6 w-6" />
+          </Button>
+        </div>
+
+        {/* GAiA Token Metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+          <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-500/50 backdrop-blur-sm">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-green-400 flex items-center gap-2">
+                <TrendingUp className="h-5 w-5" />
+                Current Price
               </CardTitle>
-              <p className="text-center text-2xl text-muted-foreground">
-                {GAIA_TOKEN.BRAND_STATEMENT}
-              </p>
             </CardHeader>
             <CardContent>
-              <div className="text-center space-y-4">
-                <Badge className="bg-green-600 text-lg px-6 py-2">
-                  Official GAiA Token Platform
-                </Badge>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                  <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 h-12">
-                    <Gamepad2 className="h-5 w-5 mr-2" />
-                    Start Gaming
-                  </Button>
-                  <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 h-12">
-                    <Zap className="h-5 w-5 mr-2" />
-                    Access Wallet
-                  </Button>
-                </div>
+              <div className="text-2xl font-bold text-white">
+                ${GAIA_METRICS.CURRENT_PRICE.toFixed(6)}
               </div>
+              <div className="text-green-400 text-sm">+{((Math.random() * 20) - 10).toFixed(2)}%</div>
             </CardContent>
           </Card>
 
-          {/* Exchange Links */}
-          <ExchangeLinks />
+          <Card className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-blue-500/50 backdrop-blur-sm">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-blue-400 flex items-center gap-2">
+                <Globe className="h-5 w-5" />
+                Market Cap
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">
+                ${(GAIA_METRICS.MARKET_CAP / 1000000).toFixed(1)}M
+              </div>
+              <div className="text-blue-400 text-sm">GAiA Token</div>
+            </CardContent>
+          </Card>
 
-          {/* Call to Action */}
-          <CallToAction />
+          <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-purple-500/50 backdrop-blur-sm">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-purple-400 flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                Total Holders
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">
+                {GAIA_METRICS.HOLDERS.toLocaleString()}
+              </div>
+              <div className="text-purple-400 text-sm">Growing Daily</div>
+            </CardContent>
+          </Card>
 
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            <Card className="border-green-500/30 bg-green-900/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-green-400">
-                  <Globe className="h-6 w-6" />
-                  Environmental Impact
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Every transaction contributes to real-world environmental restoration projects.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-blue-500/30 bg-blue-900/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-400">
-                  <Gamepad2 className="h-6 w-6" />
-                  Gaming Ecosystem
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Play games, earn tokens, and compete in tournaments while helping the planet.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-purple-500/30 bg-purple-900/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-purple-400">
-                  <Shield className="h-6 w-6" />
-                  Secure Trading
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Advanced security protocols protect your assets and transactions.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-orange-500/30 bg-orange-900/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-orange-400">
-                  <Heart className="h-6 w-6" />
-                  Community Driven
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Join a global community united in environmental restoration.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-cyan-500/30 bg-cyan-900/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-cyan-400">
-                  <Zap className="h-6 w-6" />
-                  Instant Rewards
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Earn GAiA tokens instantly through various platform activities.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-pink-500/30 bg-pink-900/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-pink-400">
-                  <Users className="h-6 w-6" />
-                  Global Network
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Connect with like-minded individuals from around the world.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+          <Card className="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 border-yellow-500/50 backdrop-blur-sm">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-yellow-400 flex items-center gap-2">
+                <Leaf className="h-5 w-5" />
+                CO2 Offset
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">
+                {GAIA_METRICS.CO2_OFFSET_TOTAL}T
+              </div>
+              <div className="text-yellow-400 text-sm">Carbon Negative</div>
+            </CardContent>
+          </Card>
         </div>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <Card className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border-green-500/30 backdrop-blur-sm hover:border-green-400/50 transition-colors">
+            <CardHeader>
+              <CardTitle className="text-green-400 flex items-center gap-2">
+                <Zap className="h-6 w-6" />
+                Private Blockchain
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-300 mb-4">
+                Our proprietary Gaia blockchain with quantum-resistant security and carbon-negative consensus.
+              </p>
+              <Button 
+                variant="outline" 
+                className="border-green-500/50 text-green-400 hover:bg-green-500/20"
+                onClick={() => navigate('/private-blockchain')}
+              >
+                Explore Network
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/30 backdrop-blur-sm hover:border-blue-400/50 transition-colors">
+            <CardHeader>
+              <CardTitle className="text-blue-400 flex items-center gap-2">
+                <Globe className="h-6 w-6" />
+                Green Projects
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-300 mb-4">
+                Invest in verified environmental projects and earn sustainable returns through our platform.
+              </p>
+              <Button 
+                variant="outline" 
+                className="border-blue-500/50 text-blue-400 hover:bg-blue-500/20"
+                onClick={() => navigate('/green-investments')}
+              >
+                View Projects
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/30 backdrop-blur-sm hover:border-purple-400/50 transition-colors">
+            <CardHeader>
+              <CardTitle className="text-purple-400 flex items-center gap-2">
+                <Shield className="h-6 w-6" />
+                Secure Admin
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-300 mb-4">
+                Advanced administrative controls with quantum-level security protocols and multi-factor authentication.
+              </p>
+              <Button 
+                variant="outline" 
+                className="border-purple-500/50 text-purple-400 hover:bg-purple-500/20"
+                onClick={() => navigate('/secure-admin')}
+              >
+                Admin Portal
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Token Information */}
+        <Card className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-green-500/50 backdrop-blur-sm">
+          <CardHeader>
+            <CardTitle className="text-2xl text-green-400 text-center">
+              {GAIA_TOKEN.NAME} ({GAIA_TOKEN.SYMBOL})
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="text-center">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <div className="text-3xl font-bold text-white mb-2">
+                  {(GAIA_TOKEN.TOTAL_SUPPLY / 1000000000000).toFixed(0)}T
+                </div>
+                <div className="text-green-400">Total Supply</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white mb-2">
+                  {GAIA_TOKEN.NETWORK}
+                </div>
+                <div className="text-green-400">Network</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white mb-2">
+                  100%
+                </div>
+                <div className="text-green-400">Liquidity Locked</div>
+              </div>
+            </div>
+            
+            <div className="mt-8">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
+                onClick={() => window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')}
+              >
+                Trade {GAIA_TOKEN.SYMBOL} Now
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )
 }
-
-export default Home
