@@ -159,6 +159,10 @@ interface PayoutCaps {
 
 class AntiDrainProtection {
   validatePayout(amount: number, userId: string, vaultHealth: VaultHealthMetrics): boolean {
+    // Input validation
+    if (typeof amount !== 'number' || !isFinite(amount) || amount <= 0) return false;
+    if (typeof userId !== 'string' || userId.trim() === '') return false;
+    
     const userDailyTotal = this.getUserDailyTotal(userId);
     const systemHourlyTotal = this.getSystemHourlyTotal();
     
