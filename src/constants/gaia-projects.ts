@@ -1,4 +1,4 @@
-import { Heart, Sprout, Zap, Snowflake, Waves, Coffee, Wrench, Droplets, Gamepad2, Music, Users } from 'lucide-react'
+import { Heart, Sprout, Zap, Snowflake, Waves, Coffee, Wrench, Droplets, Gamepad2, Music, Users, BrainCircuit } from 'lucide-react'
 
 export interface GAiAProject {
   id: string
@@ -26,6 +26,21 @@ export const GAIA_COMMUNITY_PROJECTS: GAiAProject[] = [
     minDonation: 100,
     suggestedDonations: [500, 1000, 2500, 5000],
     impactDescription: 'Supporting global environmental awareness and community building initiatives.',
+    verified: true
+  },
+  {
+    id: 'green-neuroregeneration-initiative',
+    name: '🌟 Green Neuroregeneration Initiative',
+    summary: 'Groundbreaking bio-inspired research leveraging plant root growth mechanisms and mushroom mycelium networks for human neural pathway regeneration.',
+    methodology: 'Our perpetual 24/7 research program focuses on post-stroke recovery, utilizing regenerative properties of plant root systems and fungal mycelium to develop treatments for neural healing. Advanced laboratory facilities enable continuous research across every possible pathway.',
+    goals: 'Ensure transparency through active research tracking and continuous updates, bridging nature\'s wisdom with medical innovation.',
+    category: 'Research & Restoration',
+    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh2',
+    website: 'https://www.gaiaexchanges.net/neuroregeneration',
+    icon: BrainCircuit,
+    minDonation: 500,
+    suggestedDonations: [1000, 2500, 5000, 10000],
+    impactDescription: '🧠🍄 Advancing neural recovery through innovative plant and fungal regeneration research, bridging nature\'s wisdom with medical innovation.',
     verified: true
   },
   {
