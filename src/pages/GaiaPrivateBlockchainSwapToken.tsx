@@ -111,7 +111,7 @@ export default function GaiaPrivateBlockchainSwapToken() {
     }
     
     // Minimum swap amount check
-    if (parsedFromAmount < 0.000001) {
+    if (parsedFromAmount < MINIMUM_SWAP_AMOUNT) {
       return { success: false, error: 'Amount too small for swap' }
     }
     
