@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { GameNavigationHub } from '@/components/gaming/GameNavigationHub'
+import { VisualDesignControls } from '@/components/VisualDesignControls'
 import { 
   Leaf, 
   Heart, 
@@ -64,7 +65,7 @@ export default function Index() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
+    <div>
       <Navbar />
       
       {/* Hero Section */}
@@ -110,6 +111,19 @@ export default function Index() {
               Learn More
             </Button>
           </div>
+        </div>
+
+        {/* Visual Design Controls Section */}
+        <div className="mb-16">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
+              🎨 Visual Design Controls
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Customize your GAIA experience with persistent visual design settings
+            </p>
+          </div>
+          <VisualDesignControls />
         </div>
 
         {/* Features Grid */}

@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./components/auth/AuthProvider";
 import { MasterSystemOrchestrator } from '@/components/system/MasterSystemOrchestrator'
 import { AdminRouteProtector } from '@/components/admin/AdminRouteProtector'
+import { ThemeProvider, useTheme } from '@/contexts/ThemeContext'
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
@@ -67,9 +68,11 @@ import './App.css'
 
 const queryClient = new QueryClient();
 
-function App() {
+function AppContent() {
+  const { getThemeClasses } = useTheme();
+  
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
+    <div className={getThemeClasses()}>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Router>
@@ -189,6 +192,14 @@ function App() {
         </TooltipProvider>
       </QueryClientProvider>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 
