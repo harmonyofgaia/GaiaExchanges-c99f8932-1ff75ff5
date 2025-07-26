@@ -31,14 +31,14 @@ export const GAIA_COMMUNITY_PROJECTS: GAiAProject[] = [
   {
     id: 'green-neuroregeneration-initiative',
     name: '🌟 Green Neuroregeneration Initiative',
-    description: 'Groundbreaking bio-inspired research workflow leveraging plant root growth mechanisms for human neural pathway regeneration. Our perpetual research program focuses on post-stroke recovery, utilizing the incredible regenerative properties found in plant root systems to develop revolutionary treatments for neural healing. Active research tracking and continuous updates ensure transparency in our mission to bridge nature\'s wisdom with medical innovation.',
+    description: 'Groundbreaking bio-inspired research workflow leveraging plant root growth mechanisms and mushroom mycelium networks for human neural pathway regeneration. Our perpetual 24/7 research program focuses on post-stroke recovery, utilizing the incredible regenerative properties found in both plant root systems and fast-growing fungal mycelium to develop revolutionary treatments for neural healing. Advanced laboratory facilities enable continuous research across every possible pathway, with active research tracking and continuous updates ensuring transparency in our mission to bridge nature\'s wisdom with medical innovation.',
     category: 'Research & Restoration',
     walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh2',
     website: 'https://www.gaiaexchanges.net/neuroregeneration',
     icon: BrainCircuit,
     minDonation: 500,
     suggestedDonations: [1000, 2500, 5000, 10000],
-    impactDescription: '🧠 Pioneering neural recovery through plant-inspired regeneration research with real-time progress tracking and continuous scientific updates.',
+    impactDescription: '🧠🍄 Pioneering neural recovery through plant and fungal regeneration research with 24/7 laboratory operations, real-time progress tracking, and continuous scientific updates exploring every possible bio-inspired pathway.',
     verified: true
   },
   {
