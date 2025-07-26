@@ -157,7 +157,7 @@ export function EnhancedBackgroundManager({
       case 'animated':
         // Cycle through different backgrounds
         const animatedTypes: EnhancedBackgroundType[] = ['matrix', 'liquid', 'water', 'neuro']
-        const currentType = animatedTypes[Math.floor(Date.now() / 10000) % animatedTypes.length]
+        const currentType = animatedTypes[Math.floor(Date.now() / ANIMATION_CYCLE_DURATION) % animatedTypes.length]
         return renderBackgroundByType(currentType, activeConfig)
       default:
         return (
