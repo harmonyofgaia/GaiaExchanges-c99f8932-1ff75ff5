@@ -6,6 +6,7 @@ export { default as Markets } from './Markets';
 export { default as SmartContracts } from './SmartContracts';
 export { default as SystemStatus } from './SystemStatus';
 export { default as ComprehensiveStatus } from './ComprehensiveStatus';
+export { default as GaiaConsistencyStatus } from './GaiaConsistencyStatus';
 export { default as Downloads } from './Downloads';
 export { default as Marketing } from './Marketing';
 export { default as Reinvestments } from './Reinvestments';

@@ -264,6 +264,21 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
+    title: "GAiA Token Status",
+    to: "/gaia-consistency-status",
+    icon: Shield,
+    variant: "ghost" as const,
+    description: "GAiA token integration consistency monitoring and system verification",
+    features: [
+      "Real-time Consistency Scanning",
+      "Component Integration Status",
+      "Official Token Verification",
+      "System Health Monitoring",
+      "Issue Detection & Recommendations"
+    ],
+    lazyLoaded: true,
+  },
+  {
     title: "Deployment Center",
     to: "/deployment-center",
     icon: Rocket,

@@ -3,13 +3,24 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Slider } from '@/components/ui/slider'
-import { Play, Pause, SkipForward, SkipBack, Volume2, Heart, Shuffle, Repeat, Music, Headphones } from 'lucide-react'
+import { Play, Pause, SkipForward, SkipBack, Volume2, Heart, Shuffle, Repeat, Music, Headphones, Coins } from 'lucide-react'
 import { useState } from 'react'
+import { GAIA_TOKEN } from '@/constants/gaia'
+import { toast } from 'sonner'
 
 export default function MusicPlatform() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [volume, setVolume] = useState([75])
   const [progress, setProgress] = useState([32])
+  const [userTokens, setUserTokens] = useState(850)
+
+  const earnTokensForListening = () => {
+    const tokensEarned = Math.floor(Math.random() * 10) + 5
+    setUserTokens(prev => prev + tokensEarned)
+    toast.success(`🎵 Earned ${tokensEarned} ${GAIA_TOKEN.SYMBOL} tokens for listening!`, {
+      description: 'Keep supporting eco-conscious music to earn more'
+    })
+  }
 
   const playlists = [
     { id: 1, name: "Eco Chill", songs: 24, duration: "1h 45m", category: "ambient" },
@@ -33,11 +44,33 @@ export default function MusicPlatform() {
             🎵 Music Platform
           </h1>
           <p className="text-xl text-muted-foreground">
-            Discover and stream eco-conscious music
+            Discover and stream eco-conscious music • Earn {GAIA_TOKEN.SYMBOL} tokens for listening
+            <br />
+            <span className="text-sm">Connected to Official {GAIA_TOKEN.NAME}</span>
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Token Balance Display */}
+          <div className="lg:col-span-3 mb-6">
+            <Card className="border-green-500/30 bg-green-900/20">
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Coins className="h-6 w-6 text-green-400" />
+                    <div>
+                      <div className="text-2xl font-bold text-green-400">{userTokens}</div>
+                      <div className="text-sm text-muted-foreground">{GAIA_TOKEN.SYMBOL} Tokens Earned</div>
+                    </div>
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Contract: {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 16)}...
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
           {/* Player */}
           <div className="lg:col-span-2">
             <Card className="border-purple-500/30 mb-6">
@@ -83,7 +116,12 @@ export default function MusicPlatform() {
                     <SkipBack className="h-5 w-5" />
                   </Button>
                   <Button 
-                    onClick={() => setIsPlaying(!isPlaying)}
+                    onClick={() => {
+                      setIsPlaying(!isPlaying)
+                      if (!isPlaying) {
+                        earnTokensForListening()
+                      }
+                    }}
                     className="bg-purple-600 hover:bg-purple-700 rounded-full w-12 h-12"
                   >
                     {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}

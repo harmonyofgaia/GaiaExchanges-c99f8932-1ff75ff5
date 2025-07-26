@@ -1,4 +1,6 @@
 
+import { GAIA_TOKEN } from '@/constants/gaia'
+
 export interface TokenData {
   price: number
   volume24h: number
@@ -17,8 +19,8 @@ export interface TokenData {
 class GaiaTokenService {
   private baseUrl = 'https://api.dexscreener.com/latest/dex'
   private pumpFunUrl = 'https://pump.fun/api'
-  private contractAddress = 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump'
-  private walletAddress = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
+  private contractAddress = GAIA_TOKEN.CONTRACT_ADDRESS
+  private walletAddress = GAIA_TOKEN.WALLET_ADDRESS
   
   async fetchLiveTokenData(): Promise<TokenData> {
     try {
