@@ -223,10 +223,18 @@ export function SecureAdminQuantumIAEnginePanel() {
 
   if (!isAuthenticated) {
     return (
-      <div className="fixed inset-0 bg-black/95 backdrop-blur-xl z-[9999] flex items-center justify-center">
+      <div 
+        className="fixed inset-0 bg-black/95 backdrop-blur-xl z-[9999] flex items-center justify-center"
+        role="dialog" 
+        aria-modal="true" 
+        aria-labelledby="auth-modal-title"
+      >
         <Card className="w-full max-w-md bg-gradient-to-br from-purple-950/90 to-blue-950/90 border-2 border-purple-500/30 shadow-2xl shadow-purple-500/20">
           <CardHeader className="text-center">
-            <CardTitle className="flex items-center justify-center gap-2 text-2xl text-purple-300">
+            <CardTitle 
+              id="auth-modal-title" 
+              className="flex items-center justify-center gap-2 text-2xl text-purple-300"
+            >
               <Atom className="h-8 w-8 animate-spin" />
               Quantum IA Engine Access
             </CardTitle>
