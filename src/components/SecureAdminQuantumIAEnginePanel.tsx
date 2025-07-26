@@ -205,7 +205,7 @@ export function SecureAdminQuantumIAEnginePanel() {
   }
 
   // Hide panel from non-admin users (creator access only)
-  if (!isCreatorMode && !isAuthenticated) {
+  if (!isCreatorMode || !isAuthenticated) {
     return null // Invisible to regular users
   }
 
