@@ -291,29 +291,7 @@ export function AdminDashboardTabs() {
         </div>
 
         {/* Fallback for unknown tabs */}
-        <TabsContent value="" className="space-y-6">
-          <Card className="border-yellow-500/20 bg-yellow-900/10">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-yellow-400">
-                <AlertTriangle className="h-5 w-5" />
-                Tab Not Found
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                The requested tab is not available. Please select a valid tab from the list above.
-              </p>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleTabChange('control')}
-                className="mt-4"
-              >
-                Go to Control Center
-              </Button>
-            </CardContent>
-          </Card>
-        </TabsContent>
+        {/* Removed unreachable fallback TabsContent block */}
       </Tabs>
     </div>
   )
