@@ -52,7 +52,7 @@ export class AddressMigrationUtility {
     }
   }
 
-  private fixAddressesInObject(obj: any): boolean {
+  private fixAddressesInObject(obj: Record<string, unknown>): boolean {
     let modified = false
     
     if (typeof obj === 'object' && obj !== null) {
@@ -72,7 +72,7 @@ export class AddressMigrationUtility {
 
       // Recursively check nested objects
       Object.keys(obj).forEach(key => {
-        if (this.fixAddressesInObject(obj[key])) {
+        if (typeof obj[key] === 'object' && obj[key] !== null && this.fixAddressesInObject(obj[key] as Record<string, unknown>)) {
           modified = true
         }
       })
@@ -92,12 +92,13 @@ export class AddressMigrationUtility {
     return null
   }
 
-  validateSystemAddresses(): { isValid: boolean; report: string[] } {
+  async validateSystemAddresses(): Promise<{ isValid: boolean; report: string[] }> {
     const report: string[] = []
     let isValid = true
 
     // Check constants
-    const { WALLET_ADDRESS, CONTRACT_ADDRESS } = require('../constants/gaia').GAIA_TOKEN
+    const gaiaConstants = await import('../constants/gaia')
+    const { WALLET_ADDRESS, CONTRACT_ADDRESS } = gaiaConstants.GAIA_TOKEN
     
     if (WALLET_ADDRESS !== this.CORRECT_WALLET) {
       report.push(`❌ WALLET ADDRESS INCORRECT: ${WALLET_ADDRESS} should be ${this.CORRECT_WALLET}`)

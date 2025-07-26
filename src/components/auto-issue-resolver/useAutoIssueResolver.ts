@@ -66,7 +66,7 @@ export function useAutoIssueResolver() {
         const checkFileIntegrity = () => {
           // Monitor for file tampering
           const criticalFiles = ['main.js', 'index.html', 'manifest.json']
-          let integrityScore = 100
+          const integrityScore = 100
           
           // Check for unauthorized modifications
           const metaTags = document.querySelectorAll('meta[name="security"]')

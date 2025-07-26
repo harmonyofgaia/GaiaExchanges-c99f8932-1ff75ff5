@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -58,7 +58,7 @@ interface WeaponItem {
   name: string
   damage: number
   cost: number
-  icon: any
+  icon: React.ComponentType<{ className?: string; size?: number | string }>
   description: string
   special: string
 }
@@ -183,7 +183,7 @@ export function EnhancedWormsArena() {
       name: 'Plasma Bazooka', 
       damage: 55, 
       cost: 0, 
-      icon: <Bomb className="h-4 w-4" />,
+      icon: "💥",
       description: 'Standard plasma-powered rocket launcher',
       special: 'Area explosion'
     },
@@ -192,7 +192,7 @@ export function EnhancedWormsArena() {
       name: 'Quantum Grenade', 
       damage: 40, 
       cost: 8, 
-      icon: <Zap className="h-4 w-4" />,
+      icon: "⚡",
       description: 'Grenade that phases through terrain',
       special: 'Ignores cover'
     },
@@ -201,7 +201,7 @@ export function EnhancedWormsArena() {
       name: 'Laser Shotgun', 
       damage: 35, 
       cost: 5, 
-      icon: <Target className="h-4 w-4" />,
+      icon: "🎯",
       description: 'Multi-beam laser weapon',
       special: 'Multiple projectiles'
     },
@@ -210,7 +210,7 @@ export function EnhancedWormsArena() {
       name: 'Meteor Strike', 
       damage: 80, 
       cost: 20, 
-      icon: <Flame className="h-4 w-4" />,
+      icon: "☄️",
       description: 'Calls down a meteor from space',
       special: 'Massive area damage'
     },
@@ -219,7 +219,7 @@ export function EnhancedWormsArena() {
       name: 'Gravity Bomb', 
       damage: 60, 
       cost: 15, 
-      icon: <Target className="h-4 w-4" />,
+      icon: "🌌",
       description: 'Creates a gravity well that pulls enemies',
       special: 'Pulls enemies together'
     },
@@ -228,7 +228,7 @@ export function EnhancedWormsArena() {
       name: 'Teleport Strike', 
       damage: 45, 
       cost: 12, 
-      icon: <Zap className="h-4 w-4" />,
+      icon: "🌀",
       description: 'Teleports behind enemy before attacking',
       special: 'Bypasses defenses'
     }
@@ -572,7 +572,11 @@ export function EnhancedWormsArena() {
                           : 'border-cyan-500/30'
                       }`}
                     >
-                      {weapon.icon}
+                      {typeof weapon.icon === 'string' ? (
+                        <span className="text-2xl">{weapon.icon}</span>
+                      ) : (
+                        weapon.icon
+                      )}
                       <div className="text-xs text-center">
                         <div>{weapon.name}</div>
                         <div className="text-red-400">{weapon.damage} DMG</div>

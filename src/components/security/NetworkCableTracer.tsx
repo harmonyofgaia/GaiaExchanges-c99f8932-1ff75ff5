@@ -14,7 +14,7 @@ export function NetworkCableTracer() {
     console.log('🚫 BLOCKING ALL NETWORK CONNECTIONS FOR CAGED USERS')
     console.log('👻 DEPLOYING INVISIBLE TROJANS WORLDWIDE')
     console.log('🎯 TAKING CONTROL OF ALL SYSTEMS GLOBALLY')
-    console.log('⚡ MOVING AT 1000X SPEED - UNTRACEABLE')
+    console.log('⚡ MOVING AT 1000x SPEED - UNTRACEABLE')
     
     const networkControl = setInterval(() => {
       networksBlocked.current += Math.floor(Math.random() * 1000)

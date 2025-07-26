@@ -17,7 +17,7 @@ export function QuantumPerformanceEngine() {
   })
 
   useEffect(() => {
-    console.log('🚀 QUANTUM PERFORMANCE ENGINE - 1000X FASTER')
+    console.log('🚀 QUANTUM PERFORMANCE ENGINE - 1000x FASTER')
     console.log('📈 EVOLUTION RATE - MAXIMUM IMPROVEMENT')
     console.log('👑 DOMINANCE LEVEL - WORLD CONTROL')
     console.log('🛡️ UNTOUCHABLE STATUS - IMPOSSIBLE TO DEFEAT')

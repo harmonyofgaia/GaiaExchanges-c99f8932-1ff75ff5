@@ -1,320 +1,437 @@
-
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  Globe, 
-  Shield, 
-  Zap, 
-  CheckCircle, 
-  Clock, 
-  AlertTriangle,
-  TrendingUp,
-  Users,
-  DollarSign,
-  Target
-} from 'lucide-react'
+import { ArrowUpRight, Clock, CheckCircle, AlertCircle, Zap, Shield } from 'lucide-react'
 import { toast } from 'sonner'
-
-interface ExchangeListing {
-  id: string
-  name: string
-  tier: 'Tier 1' | 'Tier 2' | 'Tier 3' | 'DeFi' | 'DEX'
-  status: 'listed' | 'pending' | 'documenting' | 'contacting' | 'reviewing'
-  volume24h: string
-  users: string
-  listingFee: string
-  requirements: string[]
-  contactInfo: string
-  lastUpdate: Date
-  priority: 'critical' | 'high' | 'medium' | 'low'
-  autoApplyStatus: 'completed' | 'in-progress' | 'queued'
-}
+import { ExchangeListing, AutoApplyStatus } from '@/types/ui-types'
 
 export function EnhancedMultiExchangeSystem() {
   const [exchanges, setExchanges] = useState<ExchangeListing[]>([
-    // Tier 1 - Major Centralized Exchanges
-    { id: 'binance', name: 'Binance', tier: 'Tier 1', status: 'documenting', volume24h: '$14.5B', users: '150M+', listingFee: '$100K-500K', requirements: ['Legal compliance', 'Audit report', 'Community verification'], contactInfo: 'listings@binance.com', lastUpdate: new Date(), priority: 'critical', autoApplyStatus: 'in-progress' },
-    { id: 'coinbase', name: 'Coinbase', tier: 'Tier 1', status: 'documenting', volume24h: '$3.2B', users: '100M+', listingFee: '$250K+', requirements: ['Regulatory compliance', 'Technical review', 'Asset security'], contactInfo: 'asset-listing@coinbase.com', lastUpdate: new Date(), priority: 'critical', autoApplyStatus: 'in-progress' },
-    { id: 'kraken', name: 'Kraken', tier: 'Tier 1', status: 'contacting', volume24h: '$800M', users: '10M+', listingFee: '$50K-150K', requirements: ['Compliance review', 'Technical integration'], contactInfo: 'listings@kraken.com', lastUpdate: new Date(), priority: 'high', autoApplyStatus: 'queued' },
-    
-    // Tier 2 - Popular Exchanges
-    { id: 'kucoin', name: 'KuCoin', tier: 'Tier 2', status: 'pending', volume24h: '$600M', users: '25M+', listingFee: '$50K-100K', requirements: ['Project documentation', 'Smart contract audit'], contactInfo: 'listing@kucoin.com', lastUpdate: new Date(), priority: 'high', autoApplyStatus: 'completed' },
-    { id: 'gate', name: 'Gate.io', tier: 'Tier 2', status: 'reviewing', volume24h: '$400M', users: '13M+', listingFee: '$30K-80K', requirements: ['Technical review', 'Community support'], contactInfo: 'listing@gate.io', lastUpdate: new Date(), priority: 'high', autoApplyStatus: 'completed' },
-    { id: 'huobi', name: 'Huobi Global', tier: 'Tier 2', status: 'contacting', volume24h: '$350M', users: '20M+', listingFee: '$40K-120K', requirements: ['Compliance check', 'Project evaluation'], contactInfo: 'listing@huobi.com', lastUpdate: new Date(), priority: 'medium', autoApplyStatus: 'queued' },
-    
-    // Decentralized Exchanges
-    { id: 'uniswap', name: 'Uniswap V3', tier: 'DEX', status: 'listed', volume24h: '$1.2B', users: '4M+', listingFee: 'Free', requirements: ['Token contract deployment', 'Liquidity provision'], contactInfo: 'community@uniswap.org', lastUpdate: new Date(), priority: 'high', autoApplyStatus: 'completed' },
-    { id: 'pancakeswap', name: 'PancakeSwap', tier: 'DEX', status: 'listed', volume24h: '$180M', users: '3M+', listingFee: 'Free', requirements: ['BSC token deployment', 'LP tokens'], contactInfo: 'hello@pancakeswap.finance', lastUpdate: new Date(), priority: 'medium', autoApplyStatus: 'completed' },
-    { id: 'sushiswap', name: 'SushiSwap', tier: 'DEX', status: 'pending', volume24h: '$95M', users: '800K+', listingFee: 'Free', requirements: ['Multi-chain support', 'Community vote'], contactInfo: 'partnerships@sushi.com', lastUpdate: new Date(), priority: 'medium', autoApplyStatus: 'in-progress' },
-    
-    // Wallet-based Exchanges
-    { id: 'solflare', name: 'Solflare Wallet Exchange', tier: 'Tier 3', status: 'contacting', volume24h: '$45M', users: '2M+', listingFee: '$5K-15K', requirements: ['Solana network integration', 'Wallet compatibility'], contactInfo: 'support@solflare.com', lastUpdate: new Date(), priority: 'high', autoApplyStatus: 'queued' },
-    { id: 'zengo', name: 'ZenGo Wallet Exchange', tier: 'Tier 3', status: 'documenting', volume24h: '$25M', users: '1M+', listingFee: '$3K-10K', requirements: ['Multi-chain support', 'Security audit'], contactInfo: 'partnerships@zengo.com', lastUpdate: new Date(), priority: 'high', autoApplyStatus: 'in-progress' },
-    
-    // Additional Major Exchanges
-    { id: 'bybit', name: 'Bybit', tier: 'Tier 1', status: 'contacting', volume24h: '$2.1B', users: '15M+', listingFee: '$100K+', requirements: ['Derivatives support', 'High liquidity'], contactInfo: 'listing@bybit.com', lastUpdate: new Date(), priority: 'critical', autoApplyStatus: 'queued' },
-    { id: 'okx', name: 'OKX', tier: 'Tier 1', status: 'documenting', volume24h: '$1.8B', users: '50M+', listingFee: '$80K-200K', requirements: ['Global compliance', 'Technical integration'], contactInfo: 'listing@okx.com', lastUpdate: new Date(), priority: 'critical', autoApplyStatus: 'in-progress' },
-    { id: 'mexc', name: 'MEXC Global', tier: 'Tier 2', status: 'reviewing', volume24h: '$320M', users: '10M+', listingFee: '$20K-50K', requirements: ['Fast listing process', 'Community voting'], contactInfo: 'listing@mexc.com', lastUpdate: new Date(), priority: 'high', autoApplyStatus: 'completed' }
+    {
+      id: 'PUMPFUN',
+      name: 'PumpFun',
+      tier: 'Tier 1',
+      status: 'listed',
+      autoApplyStatus: 'completed',
+      lastUpdate: new Date(),
+      progress: 100,
+      estimatedTime: 'N/A',
+      priority: 'critical',
+      description: 'Fastest listing available'
+    },
+    {
+      id: 'UNISWAP',
+      name: 'Uniswap',
+      tier: 'Tier 2',
+      status: 'pending',
+      autoApplyStatus: 'queued',
+      lastUpdate: new Date(),
+      progress: 5,
+      estimatedTime: '3-5 days',
+      priority: 'high',
+      description: 'Decentralized exchange with high volume'
+    },
+    {
+      id: 'COINBASE',
+      name: 'Coinbase',
+      tier: 'Tier 3',
+      status: 'documenting',
+      autoApplyStatus: 'pending',
+      lastUpdate: new Date(),
+      progress: 20,
+      estimatedTime: '1-2 weeks',
+      priority: 'medium',
+      description: 'Centralized exchange with high security'
+    },
+    {
+      id: 'REVOLUT',
+      name: 'Revolut',
+      tier: 'DeFi',
+      status: 'contacting',
+      autoApplyStatus: 'pending',
+      lastUpdate: new Date(),
+      progress: 10,
+      estimatedTime: '5-7 days',
+      priority: 'low',
+      description: 'Global fintech platform'
+    },
+    {
+      id: 'ZENGO',
+      name: 'ZENGO',
+      tier: 'DEX',
+      status: 'reviewing',
+      autoApplyStatus: 'pending',
+      lastUpdate: new Date(),
+      progress: 50,
+      estimatedTime: '2-3 days',
+      priority: 'high',
+      description: 'Mobile-first crypto wallet'
+    }
   ])
 
-  const [globalProgress, setGlobalProgress] = useState(0)
-  const [activeListings, setActiveListings] = useState(0)
-  const progressInterval = useRef<NodeJS.Timeout>()
+  const [autoApplyEnabled, setAutoApplyEnabled] = useState(true)
 
-  // Auto-update system every 30 seconds
-  useEffect(() => {
-    const updateListingProgress = () => {
-      setExchanges(prev => prev.map(exchange => {
-        if (exchange.autoApplyStatus === 'in-progress' && Math.random() < 0.3) {
-          const newStatus = Math.random() < 0.7 ? 'reviewing' : 'pending'
-          
-          if (newStatus === 'pending' && exchange.status !== 'pending') {
-            toast.success(`🚀 Progress Update: ${exchange.name}`, {
-              description: `Application moved to ${newStatus} status - Getting closer to listing!`,
-              duration: 4000
-            })
-          }
-          
-          return {
-            ...exchange,
-            status: newStatus as any,
-            lastUpdate: new Date(),
-            autoApplyStatus: newStatus === 'pending' ? 'completed' : 'in-progress'
-          }
+  const applyToExchange = (exchangeId: string) => {
+    setExchanges(prev => prev.map(exchange => {
+      if (exchange.id === exchangeId) {
+        const updatedStatus: AutoApplyStatus = 'in-progress'
+        return {
+          ...exchange,
+          status: 'pending' as const,
+          lastUpdate: new Date(),
+          autoApplyStatus: updatedStatus,
+          progress: 10
         }
-        return exchange
-      }))
-    }
+      }
+      return exchange
+    }))
 
-    const interval = setInterval(updateListingProgress, 30000)
-    return () => clearInterval(interval)
-  }, [])
+    toast.success(`🚀 Application submitted to ${exchanges.find(e => e.id === exchangeId)?.name}`)
+  }
 
-  // Calculate real-time metrics
+  const simulateProgress = () => {
+    setExchanges(prev => prev.map(exchange => {
+      if (exchange.autoApplyStatus === 'in-progress') {
+        const newProgress = Math.min(exchange.progress + Math.random() * 20, 100)
+        const newStatus: AutoApplyStatus = newProgress >= 100 ? 'completed' : 'in-progress'
+        
+        return {
+          ...exchange,
+          autoApplyStatus: newStatus,
+          lastUpdate: new Date(),
+          progress: newProgress
+        }
+      }
+      return exchange
+    }))
+  }
+
   useEffect(() => {
-    const listed = exchanges.filter(e => e.status === 'listed').length
-    const pending = exchanges.filter(e => e.status === 'pending' || e.status === 'reviewing').length
-    const total = exchanges.length
-    
-    const progress = ((listed + pending * 0.5) / total) * 100
-    setGlobalProgress(progress)
-    setActiveListings(listed + pending)
-  }, [exchanges])
+    if (autoApplyEnabled) {
+      const interval = setInterval(simulateProgress, 5000)
+      return () => clearInterval(interval)
+    }
+  }, [autoApplyEnabled])
 
-  const initiateGlobalListingCampaign = () => {
-    toast.success('🌍 Global Listing Campaign Initiated!', {
-      description: 'Auto-applying to all major exchanges with priority focus on Tier 1 platforms',
-      duration: 8000
-    })
-    
-    // Update all queued applications to in-progress
-    setExchanges(prev => prev.map(exchange => ({
-      ...exchange,
-      autoApplyStatus: exchange.autoApplyStatus === 'queued' ? 'in-progress' : exchange.autoApplyStatus,
-      lastUpdate: new Date()
-    })))
+  const toggleAutoApply = () => {
+    setAutoApplyEnabled(!autoApplyEnabled)
+    toast.info(`🤖 Auto-apply ${autoApplyEnabled ? 'disabled' : 'enabled'}`)
   }
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'listed': return 'bg-green-600'
-      case 'pending': return 'bg-blue-600'
-      case 'reviewing': return 'bg-purple-600'
-      case 'documenting': return 'bg-yellow-600'
-      case 'contacting': return 'bg-orange-600'
-      default: return 'bg-gray-600'
-    }
-  }
-
-  const getTierColor = (tier: string) => {
-    switch (tier) {
-      case 'Tier 1': return 'text-red-400'
-      case 'Tier 2': return 'text-blue-400'
-      case 'Tier 3': return 'text-green-400'
-      case 'DEX': return 'text-purple-400'
-      case 'DeFi': return 'text-cyan-400'
+      case 'listed': return 'text-green-400'
+      case 'pending': return 'text-blue-400'
+      case 'documenting': return 'text-yellow-400'
+      case 'contacting': return 'text-purple-400'
+      case 'reviewing': return 'text-orange-400'
       default: return 'text-gray-400'
     }
   }
 
-  const exchangesByTier = {
-    'Tier 1': exchanges.filter(e => e.tier === 'Tier 1'),
-    'Tier 2': exchanges.filter(e => e.tier === 'Tier 2'),
-    'Tier 3': exchanges.filter(e => e.tier === 'Tier 3'),
-    'DEX': exchanges.filter(e => e.tier === 'DEX'),
-    'DeFi': exchanges.filter(e => e.tier === 'DeFi')
+  const getAutoApplyStatusColor = (status: AutoApplyStatus) => {
+    switch (status) {
+      case 'completed': return 'text-green-400'
+      case 'in-progress': return 'text-blue-400'
+      case 'pending': return 'text-yellow-400'
+      case 'failed': return 'text-red-400'
+      case 'queued': return 'text-purple-400'
+      default: return 'text-gray-400'
+    }
   }
 
   return (
-    <div className="space-y-6">
-      {/* Global Progress Overview */}
-      <Card className="border-2 border-green-500/50 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-400">
-            <Globe className="h-6 w-6" />
-            Global Exchange Listing Progress
-            <Badge className="bg-green-600 text-white animate-pulse">ACTIVE CAMPAIGN</Badge>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">{globalProgress.toFixed(1)}%</div>
-              <div className="text-sm text-muted-foreground">Overall Progress</div>
-              <Progress value={globalProgress} className="mt-2 h-3" />
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400">{activeListings}</div>
-              <div className="text-sm text-muted-foreground">Active Listings</div>
-              <Badge className="mt-2 bg-blue-600 text-white">GROWING</Badge>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400">{exchanges.length}</div>
-              <div className="text-sm text-muted-foreground">Target Exchanges</div>
-              <Badge className="mt-2 bg-purple-600 text-white">MAXIMUM REACH</Badge>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">∞</div>
-              <div className="text-sm text-muted-foreground">Potential Volume</div>
-              <Badge className="mt-2 bg-yellow-600 text-white">UNLIMITED</Badge>
+    <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-purple-900/20">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-blue-400">
+          <ArrowUpRight className="h-6 w-6" />
+          📈 Enhanced Multi-Exchange System
+        </CardTitle>
+        <p className="text-muted-foreground">
+          Automated listing and tracking across multiple exchanges
+        </p>
+      </CardHeader>
+      
+      <CardContent className="space-y-6">
+        {/* Auto Apply Toggle */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Shield className={`h-5 w-5 ${autoApplyEnabled ? 'text-green-400' : 'text-gray-400'}`} />
+            <div>
+              <h3 className="font-semibold text-blue-400">🤖 Auto-Apply</h3>
+              <p className="text-sm text-gray-400">
+                {autoApplyEnabled ? 'Automated application active' : 'Click to enable auto-apply'}
+              </p>
             </div>
           </div>
-
-          <Button 
-            onClick={initiateGlobalListingCampaign}
-            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold"
-          >
-            <Zap className="h-4 w-4 mr-2" />
-            ACCELERATE GLOBAL LISTING CAMPAIGN
+          <Button size="sm" onClick={toggleAutoApply} className={autoApplyEnabled ? 'bg-red-600 hover:bg-red-700' : 'bg-blue-600 hover:bg-blue-700'}>
+            {autoApplyEnabled ? 'Disable Auto-Apply' : 'Enable Auto-Apply'}
           </Button>
-        </CardContent>
-      </Card>
+        </div>
 
-      {/* Exchange Listings by Tier */}
-      <Tabs defaultValue="Tier 1" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="Tier 1" className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-400">
-            Tier 1 ({exchangesByTier['Tier 1'].length})
-          </TabsTrigger>
-          <TabsTrigger value="Tier 2" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
-            Tier 2 ({exchangesByTier['Tier 2'].length})
-          </TabsTrigger>
-          <TabsTrigger value="Tier 3" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
-            Tier 3 ({exchangesByTier['Tier 3'].length})
-          </TabsTrigger>
-          <TabsTrigger value="DEX" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-            DEX ({exchangesByTier['DEX'].length})
-          </TabsTrigger>
-          <TabsTrigger value="DeFi" className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
-            DeFi ({exchangesByTier['DeFi'].length})
-          </TabsTrigger>
-        </TabsList>
-
-        {Object.entries(exchangesByTier).map(([tier, tierExchanges]) => (
-          <TabsContent key={tier} value={tier} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {tierExchanges.map((exchange) => (
-                <Card key={exchange.id} className="border-green-500/20 hover:border-green-500/40 transition-colors">
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="text-sm font-semibold">{exchange.name}</CardTitle>
-                      <Badge className={`text-xs ${getTierColor(exchange.tier)}`}>
-                        {exchange.tier}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <Badge className={`text-xs text-white ${getStatusColor(exchange.status)}`}>
-                        {exchange.status.toUpperCase()}
-                      </Badge>
-                      <div className="text-xs text-muted-foreground">
-                        {exchange.lastUpdate.toLocaleTimeString()}
-                      </div>
-                    </div>
-
-                    <div className="space-y-2 text-xs">
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">24h Volume:</span>
-                        <span className="text-green-400 font-semibold">{exchange.volume24h}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Users:</span>
-                        <span className="text-blue-400 font-semibold">{exchange.users}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Listing Fee:</span>
-                        <span className="text-yellow-400 font-semibold">{exchange.listingFee}</span>
-                      </div>
-                    </div>
-
+        {/* Exchange Listings */}
+        <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="overview">📊 Overview</TabsTrigger>
+            <TabsTrigger value="tier1">🥇 Tier 1</TabsTrigger>
+            <TabsTrigger value="tier2">🥈 Tier 2</TabsTrigger>
+            <TabsTrigger value="tier3">🥉 Tier 3</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="overview" className="space-y-4">
+            {exchanges.map((exchange) => (
+              <Card key={exchange.id} className="border-blue-500/20">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between mb-2">
                     <div className="space-y-1">
-                      <div className="text-xs text-muted-foreground">Auto-Apply Status:</div>
-                      <div className="flex items-center gap-2">
-                        {exchange.autoApplyStatus === 'completed' && <CheckCircle className="h-3 w-3 text-green-400" />}
-                        {exchange.autoApplyStatus === 'in-progress' && <Clock className="h-3 w-3 text-yellow-400" />}
-                        {exchange.autoApplyStatus === 'queued' && <AlertTriangle className="h-3 w-3 text-blue-400" />}
-                        <span className="text-xs capitalize">{exchange.autoApplyStatus.replace('-', ' ')}</span>
-                      </div>
+                      <h4 className="font-semibold text-blue-400">{exchange.name}</h4>
+                      <p className="text-sm text-muted-foreground">{exchange.description}</p>
                     </div>
+                    <Badge variant="secondary">{exchange.tier}</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <Clock className="h-4 w-4" />
+                      <span>Last Update: {exchange.lastUpdate.toLocaleTimeString()}</span>
+                    </div>
+                    <span className={`${getStatusColor(exchange.status)} font-bold`}>
+                      {exchange.status.toUpperCase()}
+                    </span>
+                  </div>
+                  <div className="mt-4">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm text-gray-400">Progress</span>
+                      <span className={`${getAutoApplyStatusColor(exchange.autoApplyStatus)} font-bold`}>
+                        {exchange.autoApplyStatus.toUpperCase()}
+                      </span>
+                    </div>
+                    <Progress value={exchange.progress} />
+                  </div>
+                  <div className="flex items-center justify-between mt-4">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => applyToExchange(exchange.id)}
+                      disabled={exchange.status === 'listed' || exchange.autoApplyStatus === 'in-progress'}
+                      className="border-blue-500/30 text-blue-400"
+                    >
+                      {exchange.status === 'listed' ? (
+                        <>
+                          <CheckCircle className="h-4 w-4 mr-2 text-green-400" />
+                          Listed
+                        </>
+                      ) : exchange.autoApplyStatus === 'in-progress' ? (
+                        <>
+                          <Zap className="h-4 w-4 mr-2 animate-pulse text-blue-400" />
+                          Applying...
+                        </>
+                      ) : (
+                        <>
+                          <ArrowUpRight className="h-4 w-4 mr-2" />
+                          Apply Now
+                        </>
+                      )}
+                    </Button>
+                    <span className="text-xs text-gray-400">Est. Time: {exchange.estimatedTime}</span>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </TabsContent>
 
-                    <div className="pt-2 border-t border-border/50">
-                      <div className="text-xs text-muted-foreground">Priority: 
-                        <span className={`ml-1 font-semibold ${
-                          exchange.priority === 'critical' ? 'text-red-400' :
-                          exchange.priority === 'high' ? 'text-orange-400' :
-                          exchange.priority === 'medium' ? 'text-yellow-400' : 'text-green-400'
-                        }`}>
-                          {exchange.priority.toUpperCase()}
+          <TabsContent value="tier1" className="space-y-4">
+            {exchanges
+              .filter((exchange) => exchange.tier === 'Tier 1')
+              .map((exchange) => (
+                <Card key={exchange.id} className="border-blue-500/20">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="space-y-1">
+                        <h4 className="font-semibold text-blue-400">{exchange.name}</h4>
+                        <p className="text-sm text-muted-foreground">{exchange.description}</p>
+                      </div>
+                      <Badge variant="secondary">{exchange.tier}</Badge>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4" />
+                        <span>Last Update: {exchange.lastUpdate.toLocaleTimeString()}</span>
+                      </div>
+                      <span className={`${getStatusColor(exchange.status)} font-bold`}>
+                        {exchange.status.toUpperCase()}
+                      </span>
+                    </div>
+                    <div className="mt-4">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-sm text-gray-400">Progress</span>
+                        <span className={`${getAutoApplyStatusColor(exchange.autoApplyStatus)} font-bold`}>
+                          {exchange.autoApplyStatus.toUpperCase()}
                         </span>
                       </div>
+                      <Progress value={exchange.progress} />
+                    </div>
+                    <div className="flex items-center justify-between mt-4">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => applyToExchange(exchange.id)}
+                        disabled={exchange.status === 'listed' || exchange.autoApplyStatus === 'in-progress'}
+                        className="border-blue-500/30 text-blue-400"
+                      >
+                        {exchange.status === 'listed' ? (
+                          <>
+                            <CheckCircle className="h-4 w-4 mr-2 text-green-400" />
+                            Listed
+                          </>
+                        ) : exchange.autoApplyStatus === 'in-progress' ? (
+                          <>
+                            <Zap className="h-4 w-4 mr-2 animate-pulse text-blue-400" />
+                            Applying...
+                          </>
+                        ) : (
+                          <>
+                            <ArrowUpRight className="h-4 w-4 mr-2" />
+                            Apply Now
+                          </>
+                        )}
+                      </Button>
+                      <span className="text-xs text-gray-400">Est. Time: {exchange.estimatedTime}</span>
                     </div>
                   </CardContent>
                 </Card>
               ))}
-            </div>
           </TabsContent>
-        ))}
-      </Tabs>
 
-      {/* Success Metrics */}
-      <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-900/20 to-blue-900/20">
-        <CardContent className="pt-6">
-          <div className="text-center space-y-4">
-            <h3 className="text-xl font-bold text-cyan-400">🚀 BREAKING ALL BARRIERS FOR GAIA TOKEN</h3>
-            <p className="text-sm text-muted-foreground max-w-4xl mx-auto">
-              Our advanced multi-exchange integration system is working 24/7 to get GAiA listed on every major trading platform. 
-              With automated applications, legal document generation, and priority processing, we're ensuring maximum accessibility 
-              for our community while maintaining the highest security standards.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4">
-              <div className="text-center">
-                <TrendingUp className="h-6 w-6 text-green-400 mx-auto mb-2" />
-                <div className="text-sm text-green-400">Maximum Liquidity</div>
-              </div>
-              <div className="text-center">
-                <Users className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-                <div className="text-sm text-blue-400">Global Accessibility</div>
-              </div>
-              <div className="text-center">
-                <DollarSign className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
-                <div className="text-sm text-yellow-400">Price Stability</div>
-              </div>
-              <div className="text-center">
-                <Target className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-                <div className="text-sm text-purple-400">Market Dominance</div>
-              </div>
-            </div>
-            <p className="text-xs text-green-400 mt-4 font-bold">
-              🎵 "Seeds Will Form Into Music" - Every exchange listing amplifies our symphony of success 🎵
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+          <TabsContent value="tier2" className="space-y-4">
+            {exchanges
+              .filter((exchange) => exchange.tier === 'Tier 2')
+              .map((exchange) => (
+                <Card key={exchange.id} className="border-blue-500/20">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="space-y-1">
+                        <h4 className="font-semibold text-blue-400">{exchange.name}</h4>
+                        <p className="text-sm text-muted-foreground">{exchange.description}</p>
+                      </div>
+                      <Badge variant="secondary">{exchange.tier}</Badge>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4" />
+                        <span>Last Update: {exchange.lastUpdate.toLocaleTimeString()}</span>
+                      </div>
+                      <span className={`${getStatusColor(exchange.status)} font-bold`}>
+                        {exchange.status.toUpperCase()}
+                      </span>
+                    </div>
+                    <div className="mt-4">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-sm text-gray-400">Progress</span>
+                        <span className={`${getAutoApplyStatusColor(exchange.autoApplyStatus)} font-bold`}>
+                          {exchange.autoApplyStatus.toUpperCase()}
+                        </span>
+                      </div>
+                      <Progress value={exchange.progress} />
+                    </div>
+                    <div className="flex items-center justify-between mt-4">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => applyToExchange(exchange.id)}
+                        disabled={exchange.status === 'listed' || exchange.autoApplyStatus === 'in-progress'}
+                        className="border-blue-500/30 text-blue-400"
+                      >
+                        {exchange.status === 'listed' ? (
+                          <>
+                            <CheckCircle className="h-4 w-4 mr-2 text-green-400" />
+                            Listed
+                          </>
+                        ) : exchange.autoApplyStatus === 'in-progress' ? (
+                          <>
+                            <Zap className="h-4 w-4 mr-2 animate-pulse text-blue-400" />
+                            Applying...
+                          </>
+                        ) : (
+                          <>
+                            <ArrowUpRight className="h-4 w-4 mr-2" />
+                            Apply Now
+                          </>
+                        )}
+                      </Button>
+                      <span className="text-xs text-gray-400">Est. Time: {exchange.estimatedTime}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+          </TabsContent>
+
+          <TabsContent value="tier3" className="space-y-4">
+            {exchanges
+              .filter((exchange) => exchange.tier === 'Tier 3')
+              .map((exchange) => (
+                <Card key={exchange.id} className="border-blue-500/20">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="space-y-1">
+                        <h4 className="font-semibold text-blue-400">{exchange.name}</h4>
+                        <p className="text-sm text-muted-foreground">{exchange.description}</p>
+                      </div>
+                      <Badge variant="secondary">{exchange.tier}</Badge>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4" />
+                        <span>Last Update: {exchange.lastUpdate.toLocaleTimeString()}</span>
+                      </div>
+                      <span className={`${getStatusColor(exchange.status)} font-bold`}>
+                        {exchange.status.toUpperCase()}
+                      </span>
+                    </div>
+                    <div className="mt-4">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-sm text-gray-400">Progress</span>
+                        <span className={`${getAutoApplyStatusColor(exchange.autoApplyStatus)} font-bold`}>
+                          {exchange.autoApplyStatus.toUpperCase()}
+                        </span>
+                      </div>
+                      <Progress value={exchange.progress} />
+                    </div>
+                    <div className="flex items-center justify-between mt-4">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => applyToExchange(exchange.id)}
+                        disabled={exchange.status === 'listed' || exchange.autoApplyStatus === 'in-progress'}
+                        className="border-blue-500/30 text-blue-400"
+                      >
+                        {exchange.status === 'listed' ? (
+                          <>
+                            <CheckCircle className="h-4 w-4 mr-2 text-green-400" />
+                            Listed
+                          </>
+                        ) : exchange.autoApplyStatus === 'in-progress' ? (
+                          <>
+                            <Zap className="h-4 w-4 mr-2 animate-pulse text-blue-400" />
+                            Applying...
+                          </>
+                        ) : (
+                          <>
+                            <ArrowUpRight className="h-4 w-4 mr-2" />
+                            Apply Now
+                          </>
+                        )}
+                      </Button>
+                      <span className="text-xs text-gray-400">Est. Time: {exchange.estimatedTime}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+          </TabsContent>
+        </Tabs>
+      </CardContent>
+    </Card>
   )
 }

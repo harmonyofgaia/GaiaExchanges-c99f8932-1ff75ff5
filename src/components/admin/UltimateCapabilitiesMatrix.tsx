@@ -13,7 +13,7 @@ import {
   Lock,
   Eye,
   Target,
-  Infinity,
+  Infinity as InfinityIcon,
   Cpu,
   Activity
 } from 'lucide-react'
@@ -131,7 +131,7 @@ export function UltimateCapabilitiesMatrix() {
                   <CardHeader>
                     <CardTitle className="text-purple-400 flex items-center gap-2">
                       {category === 'Neural Processing' && <Brain className="h-6 w-6" />}
-                      {category === 'Quantum Systems' && <Infinity className="h-6 w-6" />}
+                      {category === 'Quantum Systems' && <InfinityIcon className="h-6 w-6" />}
                       {category === 'Security Arsenal' && <Shield className="h-6 w-6" />}
                       {category === 'Data Mastery' && <Database className="h-6 w-6" />}
                       {category === 'Automation Control' && <Cpu className="h-6 w-6" />}
