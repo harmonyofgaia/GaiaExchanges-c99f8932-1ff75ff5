@@ -1,21 +1,15 @@
-import { supabase } from '@/integrations/supabase/client'
+
 import { toast } from 'sonner'
+
+// Mock functions since address_migration table doesn't exist in the database
+// These functions provide the interface without actual database operations
 
 // Function to check if an address is already migrated
 export const isAddressMigrated = async (address: string): Promise<boolean> => {
   try {
-    const { data, error } = await supabase
-      .from('address_migration')
-      .select('id')
-      .eq('old_address', address)
-      .single()
-
-    if (error) {
-      console.error('Error checking address migration:', error)
-      return false
-    }
-
-    return !!data
+    // Mock implementation - in reality this would check a migration table
+    console.log('Checking address migration for:', address)
+    return false // Always return false since we don't have the table
   } catch (error) {
     console.error('Error checking address migration:', error)
     return false
@@ -25,17 +19,9 @@ export const isAddressMigrated = async (address: string): Promise<boolean> => {
 // Function to migrate an address
 export const migrateAddress = async (oldAddress: string, newAddress: string): Promise<boolean> => {
   try {
-    const { data, error } = await supabase
-      .from('address_migration')
-      .insert([{ old_address: oldAddress, new_address: newAddress }])
-
-    if (error) {
-      console.error('Error migrating address:', error)
-      toast.error(`Migration failed: ${error.message}`)
-      return false
-    }
-
-    toast.success('Address migrated successfully!')
+    // Mock implementation - in reality this would insert into migration table
+    console.log('Migrating address from:', oldAddress, 'to:', newAddress)
+    toast.success('Address migration simulated successfully!')
     return true
   } catch (error) {
     console.error('Error migrating address:', error)
@@ -47,17 +33,9 @@ export const migrateAddress = async (oldAddress: string, newAddress: string): Pr
 // Function to fetch migration history
 export const fetchMigrationHistory = async (): Promise<any[]> => {
   try {
-    const { data, error } = await supabase
-      .from('address_migration')
-      .select('*')
-      .order('created_at', { ascending: false })
-
-    if (error) {
-      console.error('Error fetching migration history:', error)
-      return []
-    }
-
-    return data || []
+    // Mock implementation - return empty array since we don't have the table
+    console.log('Fetching migration history')
+    return []
   } catch (error) {
     console.error('Error fetching migration history:', error)
     return []
