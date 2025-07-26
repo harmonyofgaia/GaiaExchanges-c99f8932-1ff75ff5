@@ -466,9 +466,9 @@ export function PsychohistoricalAdmin() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-medium">Analysis Depth Level</label>
-                  <select className="w-full px-3 py-2 border rounded-md mt-1">
+                  <select className="w-full px-3 py-2 border rounded-md mt-1" defaultValue="moderate">
                     <option value="surface">Surface Level</option>
-                    <option value="moderate" selected>Moderate Depth</option>
+                    <option value="moderate">Moderate Depth</option>
                     <option value="deep">Deep Analysis</option>
                     <option value="comprehensive">Comprehensive</option>
                   </select>
