@@ -306,6 +306,22 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
+    title: "Gaia Private Blockchain Swap Token",
+    to: "/gaia-private-blockchain-swap-token",
+    icon: Shield,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Quantum-Resistant Security",
+      "Multi-Token Swap Support",
+      "Real-time Rate Updates",
+      "Advanced Validation",
+      "Dragon-Level Protection"
+    ],
+    description: "Master Plan v7: Enhanced private blockchain with secure token swapping",
+    lazyLoaded: true,
+  },
+  {
     title: "Video Exchange",
     to: "/secure-admin/video-exchange",
     icon: Video,

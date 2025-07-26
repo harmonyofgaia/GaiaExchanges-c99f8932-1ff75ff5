@@ -33,6 +33,10 @@ const supportedTokens = [
   { name: 'Polkadot', symbol: 'DOT', icon: '●', fee: 0.01, address: '1...' },
 ]
 
+// Swap validation constants
+const TOLERANCE_PERCENTAGE = 0.01 // 1% tolerance for floating point precision
+const MINIMUM_SWAP_AMOUNT = 0.000001 // Minimum swap amount
+
 export default function GaiaPrivateBlockchainSwapToken() {
   // Blockchain metrics state (preserved from original)
   const [blockchainHealth, setBlockchainHealth] = useState(98.7)
@@ -82,6 +86,40 @@ export default function GaiaPrivateBlockchainSwapToken() {
     setFromToken(toToken)
     setToToken(temp)
     setFromAmount(toAmount)
+  }
+
+  // Swap validation function
+  const validateSwap = (fromAmount: string, toAmount: string, swapRate: number) => {
+    const parsedFromAmount = parseFloat(fromAmount)
+    const parsedToAmount = parseFloat(toAmount)
+    
+    // Basic validation checks
+    if (isNaN(parsedFromAmount) || parsedFromAmount <= 0) {
+      return { success: false, error: 'Invalid from amount' }
+    }
+    
+    if (isNaN(parsedToAmount) || parsedToAmount <= 0) {
+      return { success: false, error: 'Invalid to amount' }
+    }
+    
+    // Rate validation (allow 1% tolerance for floating point precision)
+    const expectedToAmount = parsedFromAmount * swapRate
+    const tolerance = expectedToAmount * TOLERANCE_PERCENTAGE
+    if (Math.abs(parsedToAmount - expectedToAmount) > tolerance) {
+      return { success: false, error: 'Invalid swap rate calculation' }
+    }
+    
+    // Check if tokens are different
+    if (fromToken.symbol === toToken.symbol) {
+      return { success: false, error: 'Cannot swap identical tokens' }
+    }
+    
+    // Minimum swap amount check
+    if (parsedFromAmount < MINIMUM_SWAP_AMOUNT) {
+      return { success: false, error: 'Amount too small for swap' }
+    }
+    
+    return { success: true, error: null }
   }
 
   const executeSwap = async () => {
