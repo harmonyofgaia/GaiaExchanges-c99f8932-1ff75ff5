@@ -137,7 +137,9 @@ export default function SandProtect() {
     }
   ])
 
-  const fundingPercentage = (stats.totalFunding / stats.fundingGoal) * 100
+  const fundingPercentage = stats.fundingGoal === 0 
+    ? 0 
+    : (stats.totalFunding / stats.fundingGoal) * 100
 
   const getStatusColor = (status: string) => {
     switch (status) {
