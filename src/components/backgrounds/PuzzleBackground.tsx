@@ -63,28 +63,28 @@ export function PuzzleBackground({
       ctx.lineTo(size/2, -size/2)
       
       // Top knob
-      if (Math.random() > 0.5) {
+      if (piece.hasTopKnob) {
         ctx.arc(0, -size/2, size/8, 0, Math.PI, false)
       }
       
       ctx.lineTo(size/2, size/2)
       
       // Right knob
-      if (Math.random() > 0.5) {
+      if (piece.hasRightKnob) {
         ctx.arc(size/2, 0, size/8, -Math.PI/2, Math.PI/2, false)
       }
       
       ctx.lineTo(-size/2, size/2)
       
       // Bottom knob
-      if (Math.random() > 0.5) {
+      if (piece.hasBottomKnob) {
         ctx.arc(0, size/2, size/8, Math.PI, 0, false)
       }
       
       ctx.lineTo(-size/2, -size/2)
       
       // Left knob
-      if (Math.random() > 0.5) {
+      if (piece.hasLeftKnob) {
         ctx.arc(-size/2, 0, size/8, Math.PI/2, -Math.PI/2, false)
       }
       
