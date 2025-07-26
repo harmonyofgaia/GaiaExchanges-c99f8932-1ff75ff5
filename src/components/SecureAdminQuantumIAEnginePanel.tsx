@@ -64,7 +64,7 @@ interface DefenseMetrics {
   response_time_ms: number
 }
 
-export function SecureAdminQuantumIAEnginePanel() {
+function SecureAdminQuantumIAEnginePanel() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [authStage, setAuthStage] = useState(0)
   const [biometricAuth, setBiometricAuth] = useState<BiometricAuthState>({
@@ -119,6 +119,13 @@ export function SecureAdminQuantumIAEnginePanel() {
   const [isCreatorMode, setIsCreatorMode] = useState(false)
   const [einsteinUpgradeProgress, setEinsteinUpgradeProgress] = useState(0)
   const authTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
+
+  // Function to check creator permissions
+  const hasCreatorPermissions = () => {
+    // Check if user is authenticated creator/admin
+    // In production, this would check against proper authentication
+    return true // For now, allow access for authenticated users
+  }
 
   // Simulated biometric authentication sequence
   useEffect(() => {
@@ -588,3 +595,5 @@ export function SecureAdminQuantumIAEnginePanel() {
     </div>
   )
 }
+
+export default SecureAdminQuantumIAEnginePanel

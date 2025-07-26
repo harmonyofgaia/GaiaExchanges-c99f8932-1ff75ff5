@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { UltimateSecuritySuite } from './UltimateSecuritySuite'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 
-export function UltimateSecurity() {
+function UltimateSecurity() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-900/20 via-purple-900/20 to-black">
       <div className="container mx-auto px-6 py-8">
@@ -32,3 +32,5 @@ export function UltimateSecurity() {
     </div>
   )
 }
+
+export default UltimateSecurity

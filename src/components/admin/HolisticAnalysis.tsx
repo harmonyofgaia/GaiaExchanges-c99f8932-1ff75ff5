@@ -41,7 +41,7 @@ interface ConversationInsight {
   context: string
 }
 
-export function HolisticAnalysis() {
+function HolisticAnalysis() {
   const [missingFeatures, setMissingFeatures] = useState<MissingFeature[]>([])
   const [improvements, setImprovements] = useState<ImprovementSuggestion[]>([])
   const [conversationInsights, setConversationInsights] = useState<ConversationInsight[]>([])
@@ -406,3 +406,5 @@ export function HolisticAnalysis() {
     </div>
   )
 }
+
+export default HolisticAnalysis
