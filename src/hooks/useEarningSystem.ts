@@ -27,7 +27,7 @@ export function useEarningActivities() {
     }
   }
 
-  const recordWaterSaving = async (action: any) => {
+  const recordWaterSaving = async (action: Omit<WaterSavingAction, 'id' | 'pointsEarned' | 'tokensEarned'>) => {
     try {
       const result = await earningService.recordWaterSavingAction(action)
       // Refresh activities
