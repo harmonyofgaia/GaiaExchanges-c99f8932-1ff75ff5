@@ -159,7 +159,7 @@ export function SynaticIAEngine() {
     setIsProcessing(true)
     
     try {
-      // Simulate processing time for advanced AI analysis
+      // Simulate processing time for demonstration purposes. Replace with real AI analysis logic in production.
       await new Promise(resolve => setTimeout(resolve, 3000 + Math.random() * 2000))
       
       const analysis = performSystemAnalysis(currentMessage)
