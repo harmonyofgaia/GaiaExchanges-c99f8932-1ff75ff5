@@ -1,10 +1,12 @@
 
-import { MatrixRainBackground } from '@/components/ui/matrix-rain-background'
+import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
 import { GaiaLogo } from '@/components/GaiaLogo'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ThemeSelector } from '@/components/ThemeSelector'
+import { VisualControlMenu } from '@/components/visual/VisualControlMenu'
+import { FeeRoutingButton } from '@/components/routing/FeeRoutingButton'
 import { GAIA_BRANDING } from '@/constants/branding'
 import { GAIA_TOKEN, GAIA_METRICS } from '@/constants/gaia'
 import { ArrowRight, TrendingUp, Leaf, Zap, Shield, Globe } from 'lucide-react'
@@ -15,7 +17,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      <MatrixRainBackground intensity="medium" color="#00ff00" speed={1.2} />
+      <EnhancedBackgroundManager />
       
       {/* Theme Selector */}
       <ThemeSelector />
@@ -45,13 +47,19 @@ export default function Home() {
             </Badge>
           </div>
 
-          <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-4 text-xl"
-            onClick={() => navigate('/live-tracking')}
-          >
-            Launch Exchange <ArrowRight className="ml-2 h-6 w-6" />
-          </Button>
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-4 text-xl"
+              onClick={() => navigate('/live-tracking')}
+            >
+              Launch Exchange <ArrowRight className="ml-2 h-6 w-6" />
+            </Button>
+            
+            <FeeRoutingButton />
+            
+            <VisualControlMenu />
+          </div>
         </div>
 
         {/* GAiA Token Metrics */}
