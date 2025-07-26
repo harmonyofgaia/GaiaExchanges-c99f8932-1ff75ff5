@@ -119,7 +119,8 @@ const SlidingMenu = () => {
       <div
         className={`fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-purple-900/95 to-blue-900/95 backdrop-blur-md border-r border-purple-500/30 z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        } ${!isOpen ? 'pointer-events-none' : ''}`}
+        aria-hidden={!isOpen}
       >
         <div className="flex flex-col h-full">
           {/* Header with space for toggle button */}
@@ -144,6 +145,7 @@ const SlidingMenu = () => {
                   <li key={item.path}>
                     <Link
                       to={item.path}
+                      tabIndex={isOpen ? 0 : -1}
                       className={`flex items-center gap-3 px-6 py-4 mx-2 rounded-lg transition-all duration-200 ${
                         isActive
                           ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-lg'
