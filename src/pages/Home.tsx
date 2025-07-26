@@ -4,6 +4,7 @@ import { GaiaLogo } from '@/components/GaiaLogo'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { ThemeSelector } from '@/components/ThemeSelector'
 import { GAIA_BRANDING } from '@/constants/branding'
 import { GAIA_TOKEN, GAIA_METRICS } from '@/constants/gaia'
 import { ArrowRight, TrendingUp, Leaf, Zap, Shield, Globe } from 'lucide-react'
@@ -13,8 +14,11 @@ export default function Home() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       <MatrixRainBackground intensity="medium" color="#00ff00" speed={1.2} />
+      
+      {/* Theme Selector */}
+      <ThemeSelector />
       
       <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Hero Section */}

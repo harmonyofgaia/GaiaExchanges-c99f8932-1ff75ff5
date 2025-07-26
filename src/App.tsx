@@ -25,14 +25,14 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-background text-foreground">
         <Navbar />
         <main className="flex-1">
           <Suspense fallback={
-            <div className="min-h-screen bg-black flex items-center justify-center">
+            <div className="min-h-screen bg-background flex items-center justify-center">
               <div className="text-center">
                 <GaiaLogo size="xl" variant="matrix" />
-                <div className="mt-4 text-green-400 animate-pulse">Loading Gaia Exchanges...</div>
+                <div className="mt-4 text-primary animate-pulse">Loading Gaia Exchanges...</div>
               </div>
             </div>
           }>
