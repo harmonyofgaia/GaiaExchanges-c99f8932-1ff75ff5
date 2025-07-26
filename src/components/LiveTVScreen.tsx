@@ -115,7 +115,7 @@ export function LiveTVScreen() {
     }, 3000)
 
     return () => clearInterval(interval)
-  }, [upcomingShows.length])
+  }, [])
 
   const handlePayForShow = (show: LiveShow) => {
     const burnAmount = Math.floor(paymentAmount * 0.2) // 20% of payment gets burned
