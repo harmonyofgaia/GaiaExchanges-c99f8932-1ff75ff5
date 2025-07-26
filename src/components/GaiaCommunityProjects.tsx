@@ -11,6 +11,21 @@ import { toast } from 'sonner'
 import { GAIA_COMMUNITY_PROJECTS, CULTURE_OF_HARMONY_URL, type GAiAProject } from '@/constants/gaia-projects'
 import { GAIA_TOKEN } from '@/constants/gaia'
 
+// Simulate payment processing for demo purposes
+const processPayment = async (walletAddress: string, amount: number) => {
+  // Simulate API call delay
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  
+  // Simulate success/failure (95% success rate)
+  const success = Math.random() > 0.05
+  
+  return {
+    success,
+    transactionId: success ? `tx_${Math.random().toString(36).substr(2, 9)}` : null,
+    error: success ? null : 'Network timeout'
+  }
+}
+
 interface GaiaCommunityProjectsProps {
   onDonate?: (projectId: string, amount: number) => void
 }
@@ -262,7 +277,7 @@ export function GaiaCommunityProjects({ onDonate }: GaiaCommunityProjectsProps) 
                   <Button
                     className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                     onClick={() => {
-                      const finalAmount = parseFloat(customAmount) ?? donationAmount
+                      const finalAmount = parseFloat(customAmount) || donationAmount
                       handleDonate(selectedProject, finalAmount)
                     }}
                     disabled={!donationAmount && !customAmount}
