@@ -8,11 +8,12 @@ import { PlanRecoverySystem } from './PlanRecoverySystem'
 import { HolisticAnalysis } from './HolisticAnalysis'
 import { AnimalWelfareControlPanel } from './AnimalWelfareControlPanel'
 import { AdminVisualControls } from './AdminVisualControls'
+import { SecureAdminQuantumIAEnginePanel } from '@/components/SecureAdminQuantumIAEnginePanel'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="control" className="w-full">
-      <TabsList className="grid w-full grid-cols-8">
+      <TabsList className="grid w-full grid-cols-9">
         <TabsTrigger value="control">Control Center</TabsTrigger>
         <TabsTrigger value="visual">🎨 Visual Controls</TabsTrigger>
         <TabsTrigger value="animal-welfare">🐾 Animal Welfare</TabsTrigger>
@@ -21,6 +22,9 @@ export function AdminDashboardTabs() {
         <TabsTrigger value="recovery">Recovery Portal</TabsTrigger>
         <TabsTrigger value="plans">Plan Recovery</TabsTrigger>
         <TabsTrigger value="analysis">Deep Analysis</TabsTrigger>
+        <TabsTrigger value="quantum-ia" className="bg-gradient-to-r from-purple-600/20 to-gold/20 border border-purple-500/30">
+          👑 Quantum IA
+        </TabsTrigger>
       </TabsList>
 
       <TabsContent value="control" className="space-y-6">
@@ -53,6 +57,10 @@ export function AdminDashboardTabs() {
 
       <TabsContent value="analysis" className="space-y-6">
         <HolisticAnalysis />
+      </TabsContent>
+
+      <TabsContent value="quantum-ia" className="space-y-6">
+        <SecureAdminQuantumIAEnginePanel />
       </TabsContent>
     </Tabs>
   )
