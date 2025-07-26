@@ -30,8 +30,6 @@ import {
 import { toast } from 'sonner'
 import { supabase } from '@/integrations/supabase/client'
 import { useAuth } from '@/components/auth/AuthProvider'
-import { Navbar } from '@/components/Navbar'
-
 interface BikeSession {
   id: string
   distance: number
@@ -397,8 +395,7 @@ const GaiaBikeEcosystem = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
-      <div className="container mx-auto p-4 space-y-6">
+<div className="container mx-auto p-4 space-y-6">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">

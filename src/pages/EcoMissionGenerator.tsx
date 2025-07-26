@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Target, Brain, Zap, Globe, Users, Award, MapPin } from 'lucide-react'
-import { Navbar } from '@/components/Navbar'
 import { EcoMission, AIInsight, parseJsonField } from '@/types/ui-types'
 import { supabase } from '@/integrations/supabase/client'
 
@@ -199,8 +198,7 @@ export default function EcoMissionGenerator() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
-        <Navbar />
-        <div className="container mx-auto px-4 py-8">
+<div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <div className="text-2xl text-green-400">Loading AI mission generator...</div>
           </div>
@@ -211,8 +209,7 @@ export default function EcoMissionGenerator() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
-      <Navbar />
-      <div className="container mx-auto px-4 py-8">
+<div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
             🤖 AI Eco Mission Generator

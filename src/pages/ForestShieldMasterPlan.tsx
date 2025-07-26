@@ -5,8 +5,6 @@ import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { Shield, TreePine, Users, Target, Brain, Zap } from 'lucide-react'
-import { Navbar } from '@/components/Navbar'
-
 interface RoadmapPhase {
   id: string
   phase: number
@@ -78,8 +76,7 @@ export default function ForestShieldMasterPlan() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
-      <Navbar />
-      <div className="container mx-auto px-4 py-8">
+<div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
             🛡️ Forest Shield Master Plan

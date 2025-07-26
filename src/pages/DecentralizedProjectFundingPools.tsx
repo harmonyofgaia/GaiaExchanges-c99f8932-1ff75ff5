@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { TreePine, Droplets, Wind, Shield, Users, Target } from 'lucide-react'
-import { Navbar } from '@/components/Navbar'
 import { GreenProject, parseJsonField } from '@/types/ui-types'
 import { supabase } from '@/integrations/supabase/client'
 
@@ -144,8 +143,7 @@ export default function DecentralizedProjectFundingPools() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
-        <Navbar />
-        <div className="container mx-auto px-4 py-8">
+<div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <div className="text-2xl text-green-400">Loading projects...</div>
           </div>
@@ -156,8 +154,7 @@ export default function DecentralizedProjectFundingPools() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
-      <Navbar />
-      <div className="container mx-auto px-4 py-8">
+<div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
             🌍 Decentralized Project Funding Pools

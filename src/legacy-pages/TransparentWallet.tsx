@@ -1,6 +1,5 @@
 
 import React from 'react'
-import { Navbar } from '@/components/Navbar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -28,9 +27,7 @@ export default function TransparentWallet() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900">
-      <Navbar />
-      
-      <div className="container mx-auto px-4 py-8">
+<div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-6xl font-bold text-green-400 mb-4 animate-pulse">

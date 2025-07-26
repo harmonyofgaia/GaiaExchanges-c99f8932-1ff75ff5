@@ -3,8 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Target, MapPin, Trophy, Zap, Users } from 'lucide-react'
-import { Navbar } from '@/components/Navbar'
-
 export default function EcoMissions() {
   const missions = [
     {
@@ -41,8 +39,7 @@ export default function EcoMissions() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
-      <Navbar />
-      <div className="container mx-auto px-4 py-8">
+<div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
             🎯 Eco Missions

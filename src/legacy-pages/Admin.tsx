@@ -17,13 +17,10 @@ import { GaiaIATool } from '@/components/admin/GaiaIATool'
 import { SecurityDashboard } from '@/components/admin/security/SecurityDashboard'
 import { UserManagementSystemRefactored } from '@/components/admin/UserManagementSystemRefactored'
 import { AdminDashboard } from '@/components/admin/AdminDashboard'
-import { Navbar } from '@/components/Navbar'
-
 export default function Admin() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
-      <div className="container mx-auto p-4 space-y-4 max-w-full overflow-x-hidden">
+<div className="container mx-auto p-4 space-y-4 max-w-full overflow-x-hidden">
         <div className="text-center mb-6">
           <h1 className="text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-4">
             🚀 GAiA ADMIN CONTROL CENTER

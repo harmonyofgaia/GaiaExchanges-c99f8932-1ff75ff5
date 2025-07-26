@@ -1,5 +1,4 @@
 
-import { Navbar } from '@/components/Navbar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowLeftRight, TrendingUp, Shield } from 'lucide-react'
@@ -7,8 +6,7 @@ import { ArrowLeftRight, TrendingUp, Shield } from 'lucide-react'
 export default function Exchange() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
-      <Navbar />
-      <div className="container mx-auto px-4 py-8">
+<div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent mb-4">
             🔄 GAIA Token Exchange
