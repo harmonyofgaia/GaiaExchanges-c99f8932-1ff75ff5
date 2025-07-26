@@ -14,6 +14,8 @@ import { ArrowRight, TrendingUp, Leaf, Zap, Shield, Globe } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
 // Helper functions for upcoming features section
+// These functions are currently unused but are intended for future use in the "upcoming features" section.
+// They calculate the current and next calendar quarter, which might be displayed in future UI components.
 function getCurrentQuarterAndYear() {
   const now = new Date()
   const quarter = Math.ceil((now.getMonth() + 1) / 3)
