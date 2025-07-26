@@ -10,7 +10,7 @@ export function detectBrowser(): BrowserInfo {
   const userAgent = navigator.userAgent
   let browserName = 'Unknown'
   let version = 'Unknown'
-  const isSupported = true
+  let isSupported = true
   let adminAccess = false
 
   if (userAgent.includes('Firefox')) {
@@ -46,7 +46,7 @@ export function ensureCrossBrowserCompatibility(): boolean {
     canvas: !!document.createElement('canvas').getContext,
     localStorage: typeof Storage !== 'undefined',
     webSockets: typeof WebSocket !== 'undefined',
-    audioContext: !!(window.AudioContext || (window as unknown as { webkitAudioContext?: AudioContext }).webkitAudioContext),
+    audioContext: !!(window.AudioContext || (window as any).webkitAudioContext),
     deviceOrientation: 'DeviceOrientationEvent' in window,
     geolocation: 'geolocation' in navigator,
     webRTC: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)

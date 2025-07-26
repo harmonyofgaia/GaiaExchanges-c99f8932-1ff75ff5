@@ -31,7 +31,7 @@ export function UltimateDefensiveBarrier() {
     cloudPower: 100000,
     parabolicMultiplier: 100,
     activeBreeches: 0,
-    defendersActive: 8,
+    defendersActive: 4,
     totalBlocked: 0
   })
   
@@ -76,7 +76,7 @@ export function UltimateDefensiveBarrier() {
         setMetrics(prev => ({
           ...prev,
           cloudPower: prev.cloudPower + 1000,
-          defendersActive: Math.min(15, prev.defendersActive + 1)
+          defendersActive: Math.min(10, prev.defendersActive + 1)
         }))
       }
     }
@@ -113,7 +113,7 @@ export function UltimateDefensiveBarrier() {
       wallIntegrity: 100,
       cloudPower: 1000000,
       parabolicMultiplier: 1000,
-      defendersActive: 15
+      defendersActive: 10
     }))
     
     toast.error('🚨 EMERGENCY DEFENSE ACTIVATED!', {
@@ -226,42 +226,6 @@ export function UltimateDefensiveBarrier() {
                   <div>
                     <div className="font-bold text-yellow-400">Digital Lion</div>
                     <div className="text-xs text-muted-foreground">Community Protector</div>
-                  </div>
-                </div>
-              </div>
-              <div className="p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">🐒</span>
-                  <div>
-                    <div className="font-bold text-purple-400">Monkey Squad Gamma</div>
-                    <div className="text-xs text-muted-foreground">Database Guardian</div>
-                  </div>
-                </div>
-              </div>
-              <div className="p-3 bg-cyan-900/20 rounded-lg border border-cyan-500/30">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">🐲</span>
-                  <div>
-                    <div className="font-bold text-cyan-400">Digital Dragon Prime</div>
-                    <div className="text-xs text-muted-foreground">Matrix Controller</div>
-                  </div>
-                </div>
-              </div>
-              <div className="p-3 bg-green-900/20 rounded-lg border border-green-500/30">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">🐨</span>
-                  <div>
-                    <div className="font-bold text-green-400">Cyber Koala Elite</div>
-                    <div className="text-xs text-muted-foreground">Algorithm Master</div>
-                  </div>
-                </div>
-              </div>
-              <div className="p-3 bg-pink-900/20 rounded-lg border border-pink-500/30">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">🐬</span>
-                  <div>
-                    <div className="font-bold text-pink-400">AI Dolphin Oracle</div>
-                    <div className="text-xs text-muted-foreground">Deep Intelligence</div>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -143,119 +143,6 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
-    title: "Forest Shield",
-    to: "/forest-shield-master-plan",
-    icon: TreePine,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Sand Cannon Defense Network",
-      "AI Wildfire Detection",
-      "Blockchain Token System",
-      "Community Engagement Hub",
-      "Global Partnership Network"
-    ],
-    description: "Forest Shield Sand Cannon Wildfire Defense Master Plan",
-    lazyLoaded: true,
-  },
-  {
-    title: "Wildfire Defense",
-    to: "/wildfire-defense-dashboard",
-    icon: Flame,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Real-time Monitoring",
-      "Sand Cannon Control",
-      "IoT Sensor Network",
-      "Emergency Response",
-      "Performance Analytics"
-    ],
-    description: "Real-time wildfire defense monitoring and control dashboard",
-    lazyLoaded: true,
-  },
-  {
-    title: "Forest Tokens",
-    to: "/forest-token-system",
-    icon: Coins,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Multi-tier Token System",
-      "Staking & Rewards",
-      "DAO Governance",
-      "Impact Verification",
-      "Blockchain Integration"
-    ],
-    description: "Multi-tier blockchain token system for forest defense funding and governance",
-    lazyLoaded: true,
-  },
-  {
-    title: "Community Hub",
-    to: "/community-engagement-hub",
-    icon: Users,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Training Programs",
-      "Community Coordination",
-      "Achievement System",
-      "Challenge Participation",
-      "Global Leaderboards"
-    ],
-    description: "Community training, coordination, and engagement platform",
-    lazyLoaded: true,
-  },
-  {
-    title: "Partnerships",
-    to: "/partnership-management",
-    icon: Handshake,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Partner Directory",
-      "Collaboration Management",
-      "Partnership Analytics",
-      "Initiative Tracking",
-      "Performance Monitoring"
-    ],
-    description: "NGO, agency, and tech firm partnership coordination platform",
-    lazyLoaded: true,
-  },
-  {
-    title: "Impact Metrics",
-    to: "/impact-measurement-system",
-    icon: BarChart3,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Real-time Impact Tracking",
-      "Blockchain Verification",
-      "Carbon Credit Management",
-      "SDG Alignment Monitoring",
-      "Transparent Reporting"
-    ],
-    description: "Environmental impact tracking and verification system",
-    lazyLoaded: true,
-  },
-  {
-    title: "Sea Green Psychohistorical",
-    to: "/sea-green-psychohistorical",
-    icon: Brain,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Psychohistorical AI Engine",
-      "Global Data Analysis",
-      "Future Prediction Models",
-      "Secure Admin Dashboard",
-      "Token Governance Integration",
-      "Auto-Documentation System"
-    ],
-    description: "Master Plan v7: Advanced AI-powered environmental future prediction and idea generation",
-    lazyLoaded: true,
-  },
-  {
     title: "Admin",
     to: "/admin",
     icon: Settings,
@@ -264,51 +151,11 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
-    title: "Deployment Center",
-    to: "/deployment-center",
-    icon: Rocket,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "V2+ Master Plan Validation",
-      "Einstein Copilot Integration",
-      "Advanced Deployment Automation",
-      "Real-time System Monitoring",
-      "Comprehensive Security Checks",
-      "Zero-Downtime Deployment",
-      "AI-Assisted Live Support",
-      "Quantum Security Protocols"
-    ],
-    description: "Master Plan v7: V2+ Deployment Center with Einstein Copilot assistance",
-    lazyLoaded: true,
-  },
-  {
     title: "Security",
     to: "/security",
     icon: Shield,
     variant: "ghost" as const,
     description: "Security monitoring and threat detection",
-    lazyLoaded: true,
-  },
-  {
-    title: "Video Exchange",
-    to: "/secure-admin/video-exchange",
-    icon: Video,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Personal Channels (Little Heaven)",
-      "Seamless Video Upload",
-      "Interactive Video Player",
-      "Chat Engine & Social Features",
-      "Subscribe & Notification System",
-      "Points, Tokens & Gift System",
-      "Leaderboards & Badges",
-      "Challenges & Events",
-      "Deep Admin Control & Audit",
-      "Security, Privacy & Compliance"
-    ],
-    description: "Master Plan v7: GAiA Community Video Exchange Outstanding Experience",
     lazyLoaded: true,
   },
 ];

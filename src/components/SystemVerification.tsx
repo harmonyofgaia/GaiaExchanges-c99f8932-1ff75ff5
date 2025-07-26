@@ -157,13 +157,13 @@ export function SystemVerification() {
       await new Promise(resolve => setTimeout(resolve, 800)) // Simulate check time
       
       let status: SystemCheck['status'] = 'online'
-      const responseTime = Math.floor(Math.random() * 200) + 50
+      let responseTime = Math.floor(Math.random() * 200) + 50
       let details = ''
 
       try {
         // Perform actual checks based on type
         switch (check.id) {
-          case 'supabase-db': {
+          case 'supabase-db':
             const { data, error } = await supabase.from('profiles').select('count').limit(1)
             if (error) {
               status = 'warning'
@@ -173,14 +173,12 @@ export function SystemVerification() {
               details = 'Database connection successful'
             }
             break
-          }
             
-          case 'supabase-auth': {
+          case 'supabase-auth':
             const { data: session } = await supabase.auth.getSession()
             status = 'online'
             details = 'Authentication system operational'
             break
-          }
             
           case 'main-website':
           case 'lovable-hosting':

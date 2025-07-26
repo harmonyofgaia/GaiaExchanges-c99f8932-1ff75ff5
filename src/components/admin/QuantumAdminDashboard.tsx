@@ -110,7 +110,7 @@ export function QuantumAdminDashboard() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-orange-400">
             <TrendingUp className="h-6 w-6" />
-            QUANTUM PERFORMANCE ENGINE - 1000x FASTER
+            QUANTUM PERFORMANCE ENGINE - 1000X FASTER
           </CardTitle>
         </CardHeader>
         <CardContent>

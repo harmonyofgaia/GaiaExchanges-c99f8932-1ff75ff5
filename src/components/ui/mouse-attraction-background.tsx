@@ -256,7 +256,7 @@ export function MouseAttractionBackground() {
               ctx.fill()
               break
 
-            case 'glow': {
+            case 'glow':
               // Pulsing glow
               const glowRadius = finalSize * (1 + Math.sin(time * 4 + particle.id) * 0.3)
               const glowGradient = ctx.createRadialGradient(
@@ -270,7 +270,6 @@ export function MouseAttractionBackground() {
               ctx.arc(particle.x, particle.y, glowRadius * 2, 0, Math.PI * 2)
               ctx.fill()
               break
-            }
 
             case 'trail':
               // Trailing particle with motion blur

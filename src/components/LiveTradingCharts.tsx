@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -85,7 +85,7 @@ export function LiveTradingCharts() {
   }
 
   // Fetch comprehensive token data from multiple sources
-  const fetchTokenData = useCallback(async () => {
+  const fetchTokenData = async () => {
     try {
       console.log('📊 FETCHING COMPREHENSIVE TOKEN DATA')
       
@@ -168,7 +168,7 @@ export function LiveTradingCharts() {
       console.error('Error fetching token data:', error)
       toast.error('Data fetch error - Cloud engine compensating')
     }
-  }, [selectedToken])
+  }
 
   // Real-time updates every 5 seconds
   useEffect(() => {
@@ -180,12 +180,12 @@ export function LiveTradingCharts() {
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [isLiveMode, selectedToken, fetchTokenData])
+  }, [isLiveMode, selectedToken])
 
   useEffect(() => {
     initializeCloudEngine()
     fetchTokenData()
-  }, [selectedToken, fetchTokenData])
+  }, [selectedToken])
 
   const filteredTokens = tokens.filter(token => 
     token.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

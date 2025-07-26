@@ -38,14 +38,14 @@ export function LandscapeBuilderRestored() {
     timestamp: new Date()
   })
 
-  const [selectedTool, setSelectedTool] = useState<LandscapeElement['type']>('tree')
+  const [selectedTool, setSelectedTool] = useState<string>('tree')
   const [brushSize, setBrushSize] = useState([50])
   const [selectedColor, setSelectedColor] = useState('#228B22')
   const [isBuilding, setIsBuilding] = useState(false)
   const [savedProjects, setSavedProjects] = useState<LandscapeProject[]>([])
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  const tools: { id: LandscapeElement['type']; name: string; icon: any; color: string }[] = [
+  const tools = [
     { id: 'tree', name: 'Trees', icon: TreePine, color: '#228B22' },
     { id: 'mountain', name: 'Mountains', icon: Mountain, color: '#8B4513' },
     { id: 'water', name: 'Water', icon: Waves, color: '#4169E1' },
@@ -153,7 +153,7 @@ export function LandscapeBuilderRestored() {
 
     const newElement: LandscapeElement = {
       id: `element-${Date.now()}`,
-      type: selectedTool,
+      type: selectedTool as any,
       x,
       y,
       size: brushSize[0],

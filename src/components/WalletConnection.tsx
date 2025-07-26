@@ -6,25 +6,6 @@ import { Badge } from '@/components/ui/badge'
 import { Wallet, CheckCircle, AlertCircle, ExternalLink } from 'lucide-react'
 import { toast } from 'sonner'
 
-// Wallet provider interfaces
-interface EthereumProvider {
-  isMetaMask?: boolean;
-  isCoinbaseWallet?: boolean;
-  isTrust?: boolean;
-  request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
-}
-
-interface SolanaProvider {
-  isPhantom?: boolean;
-  connect: () => Promise<{ publicKey: { toString: () => string } }>;
-}
-
-interface WindowWithProviders extends Window {
-  ethereum?: EthereumProvider;
-  solana?: SolanaProvider;
-  solflare?: unknown;
-}
-
 interface WalletInfo {
   name: string
   id: string
@@ -49,7 +30,7 @@ export function WalletConnection() {
         name: 'MetaMask',
         id: 'metamask',
         icon: '🦊',
-        installed: !!(window as WindowWithProviders).ethereum?.isMetaMask,
+        installed: !!(window as any).ethereum?.isMetaMask,
         connected: false
       },
       {
@@ -63,28 +44,28 @@ export function WalletConnection() {
         name: 'Coinbase Wallet',
         id: 'coinbase',
         icon: '🔵',
-        installed: !!(window as WindowWithProviders).ethereum?.isCoinbaseWallet,
+        installed: !!(window as any).ethereum?.isCoinbaseWallet,
         connected: false
       },
       {
         name: 'Trust Wallet',
         id: 'trust',
         icon: '🛡️',
-        installed: !!(window as WindowWithProviders).ethereum?.isTrust,
+        installed: !!(window as any).ethereum?.isTrust,
         connected: false
       },
       {
         name: 'Phantom',
         id: 'phantom',
         icon: '👻',
-        installed: !!(window as WindowWithProviders).solana?.isPhantom,
+        installed: !!(window as any).solana?.isPhantom,
         connected: false
       },
       {
         name: 'Solflare',
         id: 'solflare',
         icon: '☀️',
-        installed: !!(window as WindowWithProviders).solflare,
+        installed: !!(window as any).solflare,
         connected: false
       }
     ]
@@ -106,33 +87,33 @@ export function WalletConnection() {
 
       switch (wallet.id) {
         case 'metamask':
-          if ((window as WindowWithProviders).ethereum) {
-            const accounts = await (window as WindowWithProviders).ethereum!.request({
+          if ((window as any).ethereum) {
+            const accounts = await (window as any).ethereum.request({
               method: 'eth_requestAccounts'
-            }) as string[]
+            })
             address = accounts[0]
             
-            const balanceWei = await (window as WindowWithProviders).ethereum!.request({
+            const balanceWei = await (window as any).ethereum.request({
               method: 'eth_getBalance',
               params: [address, 'latest']
-            }) as string
+            })
             balance = (parseInt(balanceWei, 16) / 10**18).toFixed(4) + ' ETH'
           }
           break
 
         case 'coinbase':
-          if ((window as WindowWithProviders).ethereum?.isCoinbaseWallet) {
-            const accounts = await (window as WindowWithProviders).ethereum!.request({
+          if ((window as any).ethereum?.isCoinbaseWallet) {
+            const accounts = await (window as any).ethereum.request({
               method: 'eth_requestAccounts'
-            }) as string[]
+            })
             address = accounts[0]
             balance = '--- ETH'
           }
           break
 
         case 'phantom':
-          if ((window as WindowWithProviders).solana?.isPhantom) {
-            const response = await (window as WindowWithProviders).solana!.connect()
+          if ((window as any).solana?.isPhantom) {
+            const response = await (window as any).solana.connect()
             address = response.publicKey.toString()
             balance = '--- SOL'
           }

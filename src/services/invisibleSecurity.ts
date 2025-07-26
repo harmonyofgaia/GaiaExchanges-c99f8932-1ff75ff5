@@ -12,12 +12,10 @@ interface SecurityThreat {
 
 interface DefenseAnimal {
   id: string
-  type: 'digital_dragon' | 'cyber_koala' | 'quantum_phoenix' | 'ai_dolphin' | 'alpha_dragon' | 'sky_eagle' | 'pack_wolf' | 'king_lion' | 'monkey_alpha' | 'monkey_beta' | 'monkey_gamma' | 'digital_dragon_prime' | 'phoenix_guardian'
-  status: 'active' | 'hunting' | 'defending' | 'sleeping' | 'training'
+  type: 'digital_dragon' | 'cyber_koala' | 'quantum_phoenix' | 'ai_dolphin'
+  status: 'active' | 'hunting' | 'defending' | 'sleeping'
   threatsRepelled: number
   location: string
-  effectiveness: number
-  contributors: number
 }
 
 interface SecurityMetrics {
@@ -37,7 +35,7 @@ class InvisibleSecurityService {
     threatsBlocked: 0,
     attackersNeutralized: 0,
     systemIntegrity: 100,
-    defenseAnimalsActive: 13,
+    defenseAnimalsActive: 4,
     globalScanningActive: true,
     lastThreatDetected: null
   }
@@ -84,117 +82,28 @@ class InvisibleSecurityService {
         type: 'digital_dragon',
         status: 'active',
         threatsRepelled: 0,
-        location: 'Main Gateway',
-        effectiveness: 95,
-        contributors: 2500
+        location: 'Main Gateway'
       },
       {
         id: 'koala-beta',
         type: 'cyber_koala',
         status: 'active',
         threatsRepelled: 0,
-        location: 'Data Servers',
-        effectiveness: 85,
-        contributors: 1800
+        location: 'Data Servers'
       },
       {
         id: 'phoenix-gamma',
         type: 'quantum_phoenix',
         status: 'active',
         threatsRepelled: 0,
-        location: 'API Endpoints',
-        effectiveness: 90,
-        contributors: 2200
+        location: 'API Endpoints'
       },
       {
         id: 'dolphin-delta',
         type: 'ai_dolphin',
         status: 'active',
         threatsRepelled: 0,
-        location: 'Network Perimeter',
-        effectiveness: 88,
-        contributors: 1900
-      },
-      {
-        id: 'alpha-dragon-supreme',
-        type: 'alpha_dragon',
-        status: 'active',
-        threatsRepelled: 0,
-        location: 'Global Command Center',
-        effectiveness: 99,
-        contributors: 5000
-      },
-      {
-        id: 'sky-eagle-sentinel',
-        type: 'sky_eagle',
-        status: 'active',
-        threatsRepelled: 0,
-        location: 'Stratosphere Zone',
-        effectiveness: 92,
-        contributors: 2800
-      },
-      {
-        id: 'pack-wolf-leader',
-        type: 'pack_wolf',
-        status: 'hunting',
-        threatsRepelled: 0,
-        location: 'Northern Territory',
-        effectiveness: 87,
-        contributors: 2100
-      },
-      {
-        id: 'king-lion-protector',
-        type: 'king_lion',
-        status: 'defending',
-        threatsRepelled: 0,
-        location: 'Central Command',
-        effectiveness: 93,
-        contributors: 3200
-      },
-      {
-        id: 'monkey-alpha-squad',
-        type: 'monkey_alpha',
-        status: 'training',
-        threatsRepelled: 0,
-        location: 'Tech Center Alpha',
-        effectiveness: 82,
-        contributors: 1200
-      },
-      {
-        id: 'monkey-beta-squad',
-        type: 'monkey_beta',
-        status: 'active',
-        threatsRepelled: 0,
-        location: 'Tech Center Beta',
-        effectiveness: 85,
-        contributors: 1350
-      },
-      {
-        id: 'monkey-gamma-squad',
-        type: 'monkey_gamma',
-        status: 'active',
-        threatsRepelled: 0,
-        location: 'Tech Center Gamma',
-        effectiveness: 79,
-        contributors: 1050
-      },
-      {
-        id: 'digital-dragon-prime',
-        type: 'digital_dragon_prime',
-        status: 'defending',
-        threatsRepelled: 0,
-        location: 'Digital Matrix',
-        effectiveness: 97,
-        contributors: 4200
-      },
-      {
-        id: 'phoenix-guardian-elite',
-        type: 'phoenix_guardian',
-        status: 'active',
-        threatsRepelled: 0,
-        location: 'Guardian Sanctum',
-        effectiveness: 94,
-        contributors: 3500
+        location: 'Network Perimeter'
       }
     ]
   }
@@ -397,7 +306,7 @@ export function useInvisibleSecurity() {
     threatsBlocked: 0,
     attackersNeutralized: 0,
     systemIntegrity: 100,
-    defenseAnimalsActive: 13,
+    defenseAnimalsActive: 4,
     globalScanningActive: true,
     lastThreatDetected: null
   })

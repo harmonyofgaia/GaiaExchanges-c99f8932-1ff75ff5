@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Tool, Landscape } from '@/types/ui-types'
 import { 
   Coins, 
   Heart, 
@@ -27,16 +26,6 @@ import {
 } from 'lucide-react'
 import { toast } from 'sonner'
 
-interface Tool {
-  name: string
-  price: number
-}
-
-interface Landscape {
-  name: string
-  price: number
-}
-
 export function CoralReefNFTMarketplace() {
   const [availableNFTs, setAvailableNFTs] = useState(1000000)
   const [soldNFTs, setSoldNFTs] = useState(0)
@@ -48,7 +37,7 @@ export function CoralReefNFTMarketplace() {
   // Featured User Landscapes
   const [userLandscapes] = useState([
     {
-      id: "1",
+      id: 1,
       name: "Mystic Ocean Paradise",
       creator: "OceanLover_42",
       biome: "Underwater",
@@ -62,7 +51,7 @@ export function CoralReefNFTMarketplace() {
       ageGroup: "adults"
     },
     {
-      id: "2",
+      id: 2,
       name: "Enchanted Forest Sanctuary",
       creator: "NatureBuilder_77",
       biome: "Forest",
@@ -76,7 +65,7 @@ export function CoralReefNFTMarketplace() {
       ageGroup: "teens"
     },
     {
-      id: "3",
+      id: 3,
       name: "Crystal Cave Adventure",
       creator: "CrystalMaster_23",
       biome: "Cave",
@@ -90,7 +79,7 @@ export function CoralReefNFTMarketplace() {
       ageGroup: "young_adults"
     },
     {
-      id: "4",
+      id: 4,
       name: "Rainbow Playground World",
       creator: "KidsCreator_99",
       biome: "Fantasy",
@@ -108,7 +97,7 @@ export function CoralReefNFTMarketplace() {
   // Tool Marketplace
   const [buildingTools] = useState([
     {
-      id: "1",
+      id: 1,
       name: "Master Builder Toolkit",
       description: "Complete set of advanced building tools for landscape creation",
       price: 25,
@@ -117,7 +106,7 @@ export function CoralReefNFTMarketplace() {
       features: ["Advanced Terrain Shaping", "Custom Block Creation", "Multi-layer Building"]
     },
     {
-      id: "2",
+      id: 2,
       name: "Nature Expansion Pack",
       description: "Rare plants, trees, and natural elements for realistic landscapes",
       price: 15,
@@ -126,7 +115,7 @@ export function CoralReefNFTMarketplace() {
       features: ["50+ New Plants", "Weather Effects", "Seasonal Changes"]
     },
     {
-      id: "3",
+      id: 3,
       name: "Ocean Life Collection",
       description: "Marine animals and underwater decorations",
       price: 20,
@@ -135,7 +124,7 @@ export function CoralReefNFTMarketplace() {
       features: ["25 Sea Creatures", "Coral Varieties", "Underwater Sounds"]
     },
     {
-      id: "4",
+      id: 4,
       name: "Fantasy Realm Kit",
       description: "Magical elements and mythical creatures",
       price: 30,
@@ -183,14 +172,14 @@ export function CoralReefNFTMarketplace() {
     })
   }
 
-  const buyTool = (tool: Tool) => {
+  const buyTool = (tool: any) => {
     toast.success(`🔨 ${tool.name} Purchased!`, {
       description: `Cost: ${tool.price} GAiA tokens. New tools added to your inventory!`,
       duration: 4000
     })
   }
 
-  const buyLandscape = (landscape: Landscape) => {
+  const buyLandscape = (landscape: any) => {
     toast.success(`🏞️ ${landscape.name} Purchased!`, {
       description: `Cost: ${landscape.price} GAiA tokens. Landscape added to your collection!`,
       duration: 4000

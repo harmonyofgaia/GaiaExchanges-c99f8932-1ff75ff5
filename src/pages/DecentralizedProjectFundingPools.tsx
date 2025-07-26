@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -38,14 +38,7 @@ interface GreenProject {
   carbon_impact_target: number
   biodiversity_score: number
   verification_status: string
-  project_data: {
-    location?: string
-    area_covered?: number
-    species_count?: number
-    timeline?: string
-    technical_specs?: Record<string, unknown>
-    environmental_metrics?: Record<string, number>
-  }
+  project_data: any
   created_at: string
   created_by: string
   governance_score?: number
@@ -69,18 +62,8 @@ interface GovernanceProposal {
 
 interface VerificationData {
   satellite_images: string[]
-  iot_readings: Array<{
-    sensor_id: string
-    timestamp: string
-    value: number
-    unit: string
-  }>
-  third_party_audits: Array<{
-    auditor_name: string
-    audit_date: string
-    score: number
-    report_url: string
-  }>
+  iot_readings: any[]
+  third_party_audits: any[]
   community_reports: number
 }
 
@@ -104,9 +87,9 @@ export default function DecentralizedProjectFundingPools() {
     loadProjects()
     loadGovernanceProposals()
     loadPoolStatistics()
-  }, [selectedCategory, loadProjects])
+  }, [selectedCategory])
 
-  const loadProjects = useCallback(async () => {
+  const loadProjects = async () => {
     try {
       let query = supabase
         .from('green_projects')
@@ -139,7 +122,7 @@ export default function DecentralizedProjectFundingPools() {
     } finally {
       setLoading(false)
     }
-  }, [selectedCategory])
+  }
 
   const loadGovernanceProposals = async () => {
     // Mock governance proposals for Master Plan v7

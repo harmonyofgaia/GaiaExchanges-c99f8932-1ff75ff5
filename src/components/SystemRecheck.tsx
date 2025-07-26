@@ -128,7 +128,7 @@ export function SystemRecheck() {
           
           return {
             ...check,
-            status: randomOutcome as SystemCheck['status'],
+            status: randomOutcome as any,
             lastChecked: new Date()
           }
         }

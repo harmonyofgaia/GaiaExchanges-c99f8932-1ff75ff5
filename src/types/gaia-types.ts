@@ -53,7 +53,7 @@ export interface GaiaTokenConfig {
 }
 
 // Type guards for runtime validation
-export const isValidTokenData = (data: unknown): data is TokenData => {
+export const isValidTokenData = (data: any): data is TokenData => {
   return (
     typeof data === 'object' &&
     typeof data.price === 'number' &&
@@ -70,7 +70,7 @@ export const isValidTokenData = (data: unknown): data is TokenData => {
   )
 }
 
-export const isValidMetricsData = (data: unknown): data is MetricsData => {
+export const isValidMetricsData = (data: any): data is MetricsData => {
   return (
     typeof data === 'object' &&
     typeof data.INITIAL_PRICE === 'number' &&

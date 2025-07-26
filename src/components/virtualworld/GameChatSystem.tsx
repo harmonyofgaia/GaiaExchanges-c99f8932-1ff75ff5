@@ -114,7 +114,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
       
       let randomMessage = ''
       switch (randomType) {
-        case 'action': {
+        case 'action':
           const actions = [
             'burned tokens to save ocean animals',
             'planted virtual forest for real environmental impact',
@@ -125,8 +125,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
           ]
           randomMessage = `Just ${actions[Math.floor(Math.random() * actions.length)]} 🌍`
           break
-        }
-        case 'message': {
+        case 'message':
           const messages = [
             'Anyone want to team up for the next tournament?',
             'Check out my new landscape design!',
@@ -137,8 +136,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
           ]
           randomMessage = messages[Math.floor(Math.random() * messages.length)]
           break
-        }
-        case 'emote': {
+        case 'emote':
           const emotes = [
             '*dances with joy*',
             '*waves to everyone*',
@@ -149,8 +147,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
           ]
           randomMessage = emotes[Math.floor(Math.random() * emotes.length)]
           break
-        }
-        case 'trade': {
+        case 'trade':
           const trades = [
             'WTS: Epic Mountain Landscape - 200 GAIA',
             'WTB: Dragon Evolution Crystals - paying well!',
@@ -160,7 +157,6 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
           ]
           randomMessage = trades[Math.floor(Math.random() * trades.length)]
           break
-        }
       }
       
       setMessages(prev => [...prev, {

@@ -13,13 +13,7 @@ interface RevenueAgreement {
   gaiaTokensPerViewer: number
   minimumViewers: number
   bonusThreshold: number
-}
-
-interface AgreementPreset {
-  name: string
-  foundation: number
-  artist: number
-  tokens: number
+  bonusPercentage: number
 }
 
 export function FlexibleRevenueAgreements() {
@@ -32,7 +26,7 @@ export function FlexibleRevenueAgreements() {
     bonusPercentage: 5
   })
 
-  const [customAgreements, setCustomAgreements] = useState<AgreementPreset[]>([
+  const [customAgreements, setCustomAgreements] = useState([
     { name: "Eco-Priority", foundation: 60, artist: 40, tokens: 1.2 },
     { name: "Artist-Focus", foundation: 35, artist: 65, tokens: 0.8 },
     { name: "Balanced Growth", foundation: 50, artist: 50, tokens: 1.0 },
@@ -56,7 +50,7 @@ export function FlexibleRevenueAgreements() {
     })
   }
 
-  const applyPreset = (preset: AgreementPreset) => {
+  const applyPreset = (preset: any) => {
     setAgreement({
       ...agreement,
       foundationPercentage: preset.foundation,

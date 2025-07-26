@@ -15,7 +15,7 @@ import {
   Mountain,
   Heart,
   Star,
-  Infinity as InfinityIcon
+  Infinity
 } from 'lucide-react'
 import { toast } from 'sonner'
 

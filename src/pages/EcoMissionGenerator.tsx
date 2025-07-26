@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -39,13 +39,7 @@ interface EcoMission {
   tokens_reward: number
   carbon_impact: number
   status: string
-  completion_data: {
-    evidence_photos?: string[]
-    location_verified?: boolean
-    impact_measured?: number
-    peer_verified?: boolean
-    notes?: string
-  }
+  completion_data: any
   created_at: string
   completed_at: string | null
   ai_generated?: boolean
@@ -58,12 +52,7 @@ interface EcoMission {
 
 interface AIGenerationParams {
   userLocation: string
-  environmentalData: {
-    temperature: number
-    humidity: number
-    airQuality: number
-    localEcosystem: string
-  }
+  environmentalData: any
   userPreferences: string[]
   seasonality: string
   communityNeeds: string[]
@@ -93,12 +82,7 @@ export default function EcoMissionGenerator() {
     aiAccuracy: 94.7,
     optimalWeather: true
   })
-  const [aiInsights, setAiInsights] = useState<Array<{
-    type: string
-    message: string
-    confidence: number
-    actionable: boolean
-  }>>([])  
+  const [aiInsights, setAiInsights] = useState<any[]>([])
 
   useEffect(() => {
     if (user) {
@@ -107,7 +91,7 @@ export default function EcoMissionGenerator() {
       loadAIInsights()
       loadMissionMetrics()
     }
-  }, [user, loadMissions])
+  }, [user])
 
   const loadUserLocation = async () => {
     if (navigator.geolocation) {
@@ -166,9 +150,9 @@ export default function EcoMissionGenerator() {
     if (user) {
       loadMissions()
     }
-  }, [user, loadMissions])
+  }, [user])
 
-  const loadMissions = useCallback(async () => {
+  const loadMissions = async () => {
     try {
       const { data, error } = await supabase
         .from('eco_missions')
@@ -184,7 +168,7 @@ export default function EcoMissionGenerator() {
     } finally {
       setLoading(false)
     }
-  }, [user])
+  }
 
   const generateAIMission = async () => {
     if (!user) {
