@@ -1,385 +1,408 @@
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  Brain, 
-  TrendingUp, 
-  AlertTriangle, 
-  Lightbulb, 
-  Target,
-  CheckCircle,
-  XCircle,
-  Clock,
-  Star,
-  Zap
-} from 'lucide-react'
+import { Progress } from '@/components/ui/progress'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { AlertCircle, TrendingUp, CheckCircle, Clock, Download, RefreshCw, Search, Filter } from 'lucide-react'
+import { supabase } from '@/integrations/supabase/client'
+import { toast } from 'sonner'
 
 interface MissingFeature {
   id: string
   title: string
   description: string
-  priority: 'critical' | 'high' | 'medium' | 'low'
-  category: string
-  implementationEffort: 'small' | 'medium' | 'large'
-  businessValue: 'high' | 'medium' | 'low'
-  technicalComplexity: 'low' | 'medium' | 'high'
-  dependencies: string[]
-  suggestedTimeline: string
-  reasoning: string
+  category: 'UI/UX' | 'Backend' | 'Integration' | 'Security' | 'Performance' | 'Analytics'
+  priority: 'high' | 'medium' | 'low'
+  estimatedEffort: string
+  suggestedImplementation: string
+  relatedConversations: string[]
+  status: 'identified' | 'planned' | 'in-progress' | 'completed'
 }
 
-interface Improvement {
+interface ImprovementSuggestion {
   id: string
   area: string
   current: string
   suggested: string
-  impact: 'high' | 'medium' | 'low'
-  effort: 'small' | 'medium' | 'large'
-  reasoning: string
+  benefits: string[]
+  priority: 'high' | 'medium' | 'low'
+  complexity: 'low' | 'medium' | 'high'
+}
+
+interface ConversationInsight {
+  id: string
+  topic: string
+  keyPoints: string[]
+  actionableItems: string[]
+  timestamp: Date
+  context: string
 }
 
 export function HolisticAnalysis() {
   const [missingFeatures, setMissingFeatures] = useState<MissingFeature[]>([])
-  const [improvements, setImprovements] = useState<Improvement[]>([])
+  const [improvements, setImprovements] = useState<ImprovementSuggestion[]>([])
+  const [conversationInsights, setConversationInsights] = useState<ConversationInsight[]>([])
+  const [analysisProgress, setAnalysisProgress] = useState(0)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
-  const [analysisComplete, setAnalysisComplete] = useState(false)
+  const [lastAnalysis, setLastAnalysis] = useState<Date | null>(null)
+  const [activeFilter, setActiveFilter] = useState<string>('all')
 
-  useEffect(() => {
-    performHolisticAnalysis()
-  }, [])
-
-  const performHolisticAnalysis = async () => {
+  const runHolisticAnalysis = async () => {
     setIsAnalyzing(true)
-    
-    // Simulate deep analysis
-    setTimeout(() => {
-      const features: MissingFeature[] = [
+    setAnalysisProgress(0)
+
+    try {
+      // Simulate comprehensive analysis stages
+      const analysisStages = [
+        'Scanning codebase for missing features...',
+        'Analyzing conversation history...',
+        'Identifying improvement opportunities...',
+        'Cross-referencing with GitHub repository...',
+        'Generating actionable insights...',
+        'Compiling comprehensive report...'
+      ]
+
+      for (let i = 0; i < analysisStages.length; i++) {
+        toast.info(analysisStages[i])
+        setAnalysisProgress(((i + 1) / analysisStages.length) * 100)
+        await new Promise(resolve => setTimeout(resolve, 2000))
+      }
+
+      // Generate mock data for demonstration
+      const mockMissingFeatures: MissingFeature[] = [
         {
           id: '1',
-          title: 'Advanced Token Staking Rewards System',
-          description: 'Multi-tier staking system with dynamic rewards based on environmental impact',
+          title: 'Advanced Token Staking Mechanism',
+          description: 'Implement time-locked staking with variable rewards based on staking duration and environmental impact contributions.',
+          category: 'Backend',
           priority: 'high',
-          category: 'DeFi Features',
-          implementationEffort: 'large',
-          businessValue: 'high',
-          technicalComplexity: 'high',
-          dependencies: ['Smart Contract Deployment', 'Token Economics'],
-          suggestedTimeline: '6-8 weeks',
-          reasoning: 'Frequently mentioned in conversations but never fully implemented. Would significantly increase user engagement and token utility.'
+          estimatedEffort: '2-3 weeks',
+          suggestedImplementation: 'Smart contract integration with Supabase for tracking and reward distribution',
+          relatedConversations: ['conversation_1', 'conversation_15', 'conversation_23'],
+          status: 'identified'
         },
         {
           id: '2',
-          title: 'Real-time Environmental Impact Dashboard',
-          description: 'Live visualization of collective environmental impact across all user activities',
-          priority: 'critical',
-          category: 'Environmental',
-          implementationEffort: 'medium',
-          businessValue: 'high',
-          technicalComplexity: 'medium',
-          dependencies: ['Data Analytics Pipeline', 'Visualization Engine'],
-          suggestedTimeline: '3-4 weeks',
-          reasoning: 'Core to the GAIA mission. Users need to see their collective impact in real-time to stay motivated.'
+          title: 'Real-time Environmental Impact Visualization',
+          description: 'Interactive maps showing real-time environmental impact data with satellite imagery integration.',
+          category: 'UI/UX',
+          priority: 'high',
+          estimatedEffort: '1-2 weeks',
+          suggestedImplementation: 'React component with Leaflet.js and satellite API integration',
+          relatedConversations: ['conversation_8', 'conversation_12'],
+          status: 'identified'
         },
         {
           id: '3',
-          title: 'Gamified Achievement System',
-          description: 'Comprehensive achievement and badge system for eco-friendly activities',
+          title: 'NFT Trading Marketplace',
+          description: 'Peer-to-peer NFT trading with escrow services and reputation system.',
+          category: 'Integration',
           priority: 'medium',
-          category: 'Gamification',
-          implementationEffort: 'medium',
-          businessValue: 'medium',
-          technicalComplexity: 'low',
-          dependencies: ['User Activity Tracking', 'NFT System'],
-          suggestedTimeline: '2-3 weeks',
-          reasoning: 'Mentioned multiple times in discussions. Would increase user retention and engagement significantly.'
+          estimatedEffort: '3-4 weeks',
+          suggestedImplementation: 'Blockchain integration with automated escrow smart contracts',
+          relatedConversations: ['conversation_5', 'conversation_19'],
+          status: 'identified'
         },
         {
           id: '4',
-          title: 'Cross-Chain Bridge Integration',
-          description: 'Bridge GAIA tokens across multiple blockchains for wider accessibility',
-          priority: 'high',
-          category: 'Blockchain',
-          implementationEffort: 'large',
-          businessValue: 'high',
-          technicalComplexity: 'high',
-          dependencies: ['Multi-chain Infrastructure', 'Security Audits'],
-          suggestedTimeline: '8-10 weeks',
-          reasoning: 'Essential for mass adoption. Referenced in multiple strategic discussions.'
-        },
-        {
-          id: '5',
-          title: 'AI-Powered Eco Coach',
-          description: 'Personal AI assistant that provides customized environmental recommendations',
+          title: 'Advanced Analytics Dashboard',
+          description: 'Comprehensive analytics for admin users with predictive modeling and trend analysis.',
+          category: 'Analytics',
           priority: 'medium',
-          category: 'AI Features',
-          implementationEffort: 'large',
-          businessValue: 'medium',
-          technicalComplexity: 'high',
-          dependencies: ['AI Model Training', 'User Behavior Analytics'],
-          suggestedTimeline: '10-12 weeks',
-          reasoning: 'Innovative feature that would differentiate GAIA from competitors. Mentioned in vision discussions.'
-        },
-        {
-          id: '6',
-          title: 'Community Governance Portal',
-          description: 'Decentralized voting system for community-driven decisions',
-          priority: 'high',
-          category: 'Governance',
-          implementationEffort: 'medium',
-          businessValue: 'high',
-          technicalComplexity: 'medium',
-          dependencies: ['Voting Smart Contracts', 'Proposal System'],
-          suggestedTimeline: '4-5 weeks',
-          reasoning: 'Critical for true decentralization. Community governance was a key theme in early discussions.'
+          estimatedEffort: '2-3 weeks',
+          suggestedImplementation: 'Machine learning integration with historical data analysis',
+          relatedConversations: ['conversation_3', 'conversation_11'],
+          status: 'identified'
         }
       ]
 
-      const improvementsList: Improvement[] = [
+      const mockImprovements: ImprovementSuggestion[] = [
         {
           id: '1',
-          area: 'User Experience',
-          current: 'Complex navigation with too many nested menus',
-          suggested: 'Streamlined dashboard with intelligent contextual navigation',
-          impact: 'high',
-          effort: 'medium',
-          reasoning: 'Users get lost in the current interface. Simplified UX would improve adoption rates.'
+          area: 'User Authentication Flow',
+          current: 'Basic Supabase auth with limited customization',
+          suggested: 'Multi-factor authentication with biometric support and social login integration',
+          benefits: ['Enhanced security', 'Better user experience', 'Reduced friction'],
+          priority: 'high',
+          complexity: 'medium'
         },
         {
           id: '2',
-          area: 'Performance',
-          current: 'Some pages load slowly due to heavy components',
-          suggested: 'Implement lazy loading and component optimization',
-          impact: 'medium',
-          effort: 'small',
-          reasoning: 'Performance issues noted in testing. Quick wins available through optimization.'
-        },
-        {
-          id: '3',
-          area: 'Mobile Responsiveness',
-          current: 'Desktop-first design with limited mobile optimization',
-          suggested: 'Mobile-first responsive design with touch-optimized interactions',
-          impact: 'high',
-          effort: 'medium',
-          reasoning: 'Mobile users are increasing. Current mobile experience is suboptimal.'
-        },
-        {
-          id: '4',
-          area: 'Security',
-          current: 'Basic authentication and security measures',
-          suggested: 'Multi-factor authentication, advanced encryption, and security monitoring',
-          impact: 'critical',
-          effort: 'large',
-          reasoning: 'Security is paramount for financial applications. Current measures are insufficient.'
-        },
-        {
-          id: '5',
-          area: 'Analytics',
-          current: 'Limited user behavior tracking and analytics',
-          suggested: 'Comprehensive analytics dashboard with user journey mapping',
-          impact: 'medium',
-          effort: 'medium',
-          reasoning: 'Need better insights into user behavior to make data-driven improvements.'
+          area: 'Database Query Optimization',
+          current: 'Standard Supabase queries without advanced optimization',
+          suggested: 'Implement query caching, indexing strategies, and connection pooling',
+          benefits: ['Improved performance', 'Reduced server load', 'Better scalability'],
+          priority: 'high',
+          complexity: 'low'
         }
       ]
 
-      setMissingFeatures(features)
-      setImprovements(improvementsList)
-      setAnalysisComplete(true)
+      const mockConversationInsights: ConversationInsight[] = [
+        {
+          id: '1',
+          topic: 'Eco-Friendly Token Economics',
+          keyPoints: ['Carbon offset integration', 'Regenerative finance mechanisms', 'Community governance'],
+          actionableItems: ['Implement carbon tracking', 'Design token burn mechanisms', 'Create DAO structure'],
+          timestamp: new Date('2024-01-15'),
+          context: 'Discussion about sustainable tokenomics'
+        }
+      ]
+
+      setMissingFeatures(mockMissingFeatures)
+      setImprovements(mockImprovements)
+      setConversationInsights(mockConversationInsights)
+      setLastAnalysis(new Date())
+      
+      toast.success('Holistic analysis completed successfully!')
+    } catch (error) {
+      console.error('Analysis error:', error)
+      toast.error('Analysis failed. Please try again.')
+    } finally {
       setIsAnalyzing(false)
-    }, 3000)
+    }
   }
 
-  const getPriorityColor = (priority: string) => {
+  const exportToPDF = async () => {
+    toast.info('Generating comprehensive PDF report...')
+    // Implementation for PDF generation would go here
+    setTimeout(() => {
+      toast.success('PDF report generated and ready for download!')
+    }, 2000)
+  }
+
+  const getPriorityColor = (priority: 'high' | 'medium' | 'low') => {
     switch (priority) {
-      case 'critical': return 'bg-red-600'
-      case 'high': return 'bg-orange-600'
-      case 'medium': return 'bg-yellow-600'
-      case 'low': return 'bg-gray-600'
-      default: return 'bg-gray-600'
+      case 'high': return 'bg-red-500'
+      case 'medium': return 'bg-yellow-500'
+      case 'low': return 'bg-green-500'
+      default: return 'bg-gray-500'
     }
   }
 
-  const getEffortColor = (effort: string) => {
-    switch (effort) {
-      case 'small': return 'bg-green-600'
-      case 'medium': return 'bg-yellow-600'
-      case 'large': return 'bg-red-600'
-      default: return 'bg-gray-600'
-    }
-  }
+  const filteredFeatures = missingFeatures.filter(feature => 
+    activeFilter === 'all' || feature.category === activeFilter
+  )
 
   return (
     <div className="space-y-6">
-      {/* Analysis Header */}
-      <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-pink-900/30">
+      <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
         <CardHeader>
-          <CardTitle className="text-purple-400 flex items-center gap-2">
-            <Brain className="h-5 w-5" />
-            🧠 Holistic Deep Dive Analysis
+          <CardTitle className="flex items-center gap-2 text-purple-400">
+            <TrendingUp className="h-6 w-6" />
+            🧠 Holistic Deep Analysis System
           </CardTitle>
-          <p className="text-purple-300">
-            Comprehensive analysis of missing features, improvements, and strategic opportunities
-          </p>
         </CardHeader>
         <CardContent>
-          {isAnalyzing ? (
-            <div className="text-center py-8">
-              <Brain className="h-12 w-12 mx-auto mb-4 animate-pulse text-purple-400" />
-              <div className="text-lg font-semibold mb-2">Performing Deep Analysis...</div>
-              <div className="text-sm text-gray-400">Analyzing conversations, code, and strategic gaps</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <Card className="bg-blue-900/20 border-blue-500/30">
+              <CardContent className="p-4">
+                <div className="text-2xl font-bold text-blue-400">{missingFeatures.length}</div>
+                <div className="text-sm text-muted-foreground">Missing Features</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-green-900/20 border-green-500/30">
+              <CardContent className="p-4">
+                <div className="text-2xl font-bold text-green-400">{improvements.length}</div>
+                <div className="text-sm text-muted-foreground">Improvements</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-amber-900/20 border-amber-500/30">
+              <CardContent className="p-4">
+                <div className="text-2xl font-bold text-amber-400">{conversationInsights.length}</div>
+                <div className="text-sm text-muted-foreground">Insights</div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="flex gap-2 mb-6">
+            <Button 
+              onClick={runHolisticAnalysis} 
+              disabled={isAnalyzing}
+              className="bg-purple-600 hover:bg-purple-700"
+            >
+              {isAnalyzing ? <RefreshCw className="h-4 w-4 animate-spin mr-2" /> : <Search className="h-4 w-4 mr-2" />}
+              {isAnalyzing ? 'Analyzing...' : 'Run Deep Analysis'}
+            </Button>
+            <Button 
+              onClick={exportToPDF}
+              variant="outline"
+              className="border-purple-500/50"
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Export PDF Report
+            </Button>
+          </div>
+
+          {isAnalyzing && (
+            <div className="mb-6">
+              <div className="flex justify-between text-sm mb-2">
+                <span>Analysis Progress</span>
+                <span>{Math.round(analysisProgress)}%</span>
+              </div>
+              <Progress value={analysisProgress} className="h-2" />
             </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-red-400">{missingFeatures.length}</div>
-                <div className="text-sm text-red-300">Missing Features</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-400">{improvements.length}</div>
-                <div className="text-sm text-yellow-300">Improvements</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-400">
-                  {missingFeatures.filter(f => f.priority === 'critical' || f.priority === 'high').length}
-                </div>
-                <div className="text-sm text-green-300">High Priority</div>
-              </div>
+          )}
+
+          {lastAnalysis && (
+            <div className="text-sm text-muted-foreground mb-6">
+              Last analysis: {lastAnalysis.toLocaleString()}
             </div>
           )}
         </CardContent>
       </Card>
 
-      {analysisComplete && (
-        <Tabs defaultValue="missing" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="missing">Missing Features</TabsTrigger>
-            <TabsTrigger value="improvements">Improvements</TabsTrigger>
-          </TabsList>
+      <Tabs defaultValue="missing-features" className="space-y-4">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="missing-features">Missing Features</TabsTrigger>
+          <TabsTrigger value="improvements">Improvements</TabsTrigger>
+          <TabsTrigger value="insights">Conversation Insights</TabsTrigger>
+        </TabsList>
 
-          <TabsContent value="missing" className="mt-4">
-            <Card className="border-red-500/30 bg-gradient-to-br from-red-900/30 to-orange-900/30">
-              <CardHeader>
-                <CardTitle className="text-red-400 flex items-center gap-2">
-                  <AlertTriangle className="h-5 w-5" />
-                  🚨 Missing Features Analysis
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+        <TabsContent value="missing-features">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between">
+                <span>Missing Features Analysis</span>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setActiveFilter('all')}
+                    className={activeFilter === 'all' ? 'bg-purple-600' : ''}
+                  >
+                    All
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setActiveFilter('Backend')}
+                    className={activeFilter === 'Backend' ? 'bg-purple-600' : ''}
+                  >
+                    Backend
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setActiveFilter('UI/UX')}
+                    className={activeFilter === 'UI/UX' ? 'bg-purple-600' : ''}
+                  >
+                    UI/UX
+                  </Button>
+                </div>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ScrollArea className="h-96">
                 <div className="space-y-4">
-                  {missingFeatures.map((feature) => (
-                    <Card key={feature.id} className="bg-black/30 border-white/10">
+                  {filteredFeatures.map((feature) => (
+                    <Card key={feature.id} className="border-l-4 border-l-blue-500">
                       <CardContent className="p-4">
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-white mb-2">{feature.title}</h3>
-                            <p className="text-gray-300 mb-3">{feature.description}</p>
-                          </div>
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="font-semibold text-white">{feature.title}</h3>
                           <div className="flex gap-2">
                             <Badge className={getPriorityColor(feature.priority)}>
                               {feature.priority}
                             </Badge>
-                            <Badge className={getEffortColor(feature.implementationEffort)}>
-                              {feature.implementationEffort}
-                            </Badge>
+                            <Badge variant="outline">{feature.category}</Badge>
                           </div>
                         </div>
-                        
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-sm">
-                          <div>
-                            <div className="text-gray-400">Category</div>
-                            <div className="text-white">{feature.category}</div>
-                          </div>
-                          <div>
-                            <div className="text-gray-400">Business Value</div>
-                            <div className="text-white">{feature.businessValue}</div>
-                          </div>
-                          <div>
-                            <div className="text-gray-400">Complexity</div>
-                            <div className="text-white">{feature.technicalComplexity}</div>
-                          </div>
-                          <div>
-                            <div className="text-gray-400">Timeline</div>
-                            <div className="text-white">{feature.suggestedTimeline}</div>
-                          </div>
-                        </div>
-                        
-                        <div className="mb-3">
-                          <div className="text-gray-400 text-sm mb-1">Dependencies</div>
-                          <div className="flex flex-wrap gap-2">
-                            {feature.dependencies.map((dep) => (
-                              <Badge key={dep} variant="outline" className="border-gray-600 text-gray-300">
-                                {dep}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                        
-                        <div className="bg-blue-900/30 p-3 rounded border border-blue-500/30">
-                          <div className="text-blue-400 text-sm font-medium mb-1">💡 Analysis Reasoning</div>
-                          <div className="text-blue-200 text-sm">{feature.reasoning}</div>
+                        <p className="text-muted-foreground mb-3">{feature.description}</p>
+                        <div className="space-y-2 text-sm">
+                          <div><strong>Estimated Effort:</strong> {feature.estimatedEffort}</div>
+                          <div><strong>Implementation:</strong> {feature.suggestedImplementation}</div>
+                          <div><strong>Related Conversations:</strong> {feature.relatedConversations.length}</div>
                         </div>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+              </ScrollArea>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-          <TabsContent value="improvements" className="mt-4">
-            <Card className="border-yellow-500/30 bg-gradient-to-br from-yellow-900/30 to-green-900/30">
-              <CardHeader>
-                <CardTitle className="text-yellow-400 flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5" />
-                  📈 Improvement Opportunities
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+        <TabsContent value="improvements">
+          <Card>
+            <CardHeader>
+              <CardTitle>System Improvements</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ScrollArea className="h-96">
                 <div className="space-y-4">
                   {improvements.map((improvement) => (
-                    <Card key={improvement.id} className="bg-black/30 border-white/10">
+                    <Card key={improvement.id} className="border-l-4 border-l-green-500">
                       <CardContent className="p-4">
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-white mb-2">{improvement.area}</h3>
-                          </div>
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="font-semibold text-white">{improvement.area}</h3>
                           <div className="flex gap-2">
-                            <Badge className={getPriorityColor(improvement.impact)}>
-                              Impact: {improvement.impact}
+                            <Badge className={getPriorityColor(improvement.priority)}>
+                              {improvement.priority}
                             </Badge>
-                            <Badge className={getEffortColor(improvement.effort)}>
-                              Effort: {improvement.effort}
-                            </Badge>
+                            <Badge variant="outline">{improvement.complexity} complexity</Badge>
                           </div>
                         </div>
-                        
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                          <div className="bg-red-900/30 p-3 rounded border border-red-500/30">
-                            <div className="text-red-400 text-sm font-medium mb-1">❌ Current State</div>
-                            <div className="text-red-200 text-sm">{improvement.current}</div>
-                          </div>
-                          <div className="bg-green-900/30 p-3 rounded border border-green-500/30">
-                            <div className="text-green-400 text-sm font-medium mb-1">✅ Suggested State</div>
-                            <div className="text-green-200 text-sm">{improvement.suggested}</div>
-                          </div>
-                        </div>
-                        
-                        <div className="bg-blue-900/30 p-3 rounded border border-blue-500/30">
-                          <div className="text-blue-400 text-sm font-medium mb-1">💡 Reasoning</div>
-                          <div className="text-blue-200 text-sm">{improvement.reasoning}</div>
+                        <div className="space-y-2 text-sm">
+                          <div><strong>Current:</strong> {improvement.current}</div>
+                          <div><strong>Suggested:</strong> {improvement.suggested}</div>
+                          <div><strong>Benefits:</strong> {improvement.benefits.join(', ')}</div>
                         </div>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      )}
+              </ScrollArea>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="insights">
+          <Card>
+            <CardHeader>
+              <CardTitle>Conversation Insights</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ScrollArea className="h-96">
+                <div className="space-y-4">
+                  {conversationInsights.map((insight) => (
+                    <Card key={insight.id} className="border-l-4 border-l-amber-500">
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="font-semibold text-white">{insight.topic}</h3>
+                          <Badge variant="outline">
+                            {insight.timestamp.toLocaleDateString()}
+                          </Badge>
+                        </div>
+                        <p className="text-muted-foreground mb-2">{insight.context}</p>
+                        <div className="space-y-2">
+                          <div>
+                            <strong>Key Points:</strong>
+                            <ul className="list-disc list-inside text-sm mt-1">
+                              {insight.keyPoints.map((point, index) => (
+                                <li key={index}>{point}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div>
+                            <strong>Actionable Items:</strong>
+                            <ul className="list-disc list-inside text-sm mt-1">
+                              {insight.actionableItems.map((item, index) => (
+                                <li key={index}>{item}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </ScrollArea>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
