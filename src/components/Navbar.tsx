@@ -60,51 +60,8 @@ export function Navbar() {
             <span className="font-bold text-primary text-xl">Gaia Exchanges</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navItems.slice(0, 8).map((item) => {
-              const Icon = item.icon
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
-                >
-                  <Icon className="h-4 w-4" />
-                  <span>{item.name}</span>
-                </Link>
-              )
-            })}
-            
-            {/* More menu for additional items */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
-                  <MoreHorizontal className="h-4 w-4 mr-1" />
-                  More
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
-                {navItems.slice(8).map((item) => {
-                  const Icon = item.icon
-                  return (
-                    <DropdownMenuItem key={item.path} asChild>
-                      <Link
-                        to={item.path}
-                        className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
-                      >
-                        <Icon className="h-4 w-4" />
-                        <span>{item.name}</span>
-                      </Link>
-                    </DropdownMenuItem>
-                  )
-                })}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
+          {/* Menu button - always visible */}
+          <div>
             <Button
               variant="ghost"
               size="sm"
@@ -116,9 +73,9 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Navigation Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-primary/30">
+          <div className="py-4 border-t border-primary/30">
             <div className="grid grid-cols-2 gap-2">
               {navItems.map((item) => {
                 const Icon = item.icon
