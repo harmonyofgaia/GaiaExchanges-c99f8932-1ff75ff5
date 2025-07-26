@@ -6,31 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
 import { Separator } from '@/components/ui/separator'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { 
-  Shield, 
-  Target, 
-  Flame, 
-  TreePine, 
-  Users, 
-  Vote, 
-  Coins, 
-  Trophy, 
-  Activity,
-  MapPin,
-  Zap,
-  Heart,
-  Star,
-  TrendingUp,
-  DollarSign,
-  Award,
-  Clock,
-  CheckCircle,
-  AlertTriangle,
-  Settings,
-  BarChart3,
-  Globe,
-  Wallet
-} from 'lucide-react'
+import * as LucideIcons from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 
 interface SandProtectStats {
