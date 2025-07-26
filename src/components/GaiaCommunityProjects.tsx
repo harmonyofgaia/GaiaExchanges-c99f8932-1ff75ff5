@@ -262,7 +262,7 @@ export function GaiaCommunityProjects({ onDonate }: GaiaCommunityProjectsProps) 
                   <Button
                     className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                     onClick={() => {
-                      const finalAmount = parseFloat(customAmount) || donationAmount
+                      const finalAmount = parseFloat(customAmount) ?? donationAmount
                       handleDonate(selectedProject, finalAmount)
                     }}
                     disabled={!donationAmount && !customAmount}
