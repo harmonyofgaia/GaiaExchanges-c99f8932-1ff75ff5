@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
-import { Menu, X } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { AdminControlSystem } from '@/components/AdminControlSystem'
 import { RefactoredAdminTools } from './RefactoredAdminTools'
 import { UltimateSecurity } from './UltimateSecurity'
@@ -25,7 +25,6 @@ import { DefenseSystems } from './DefenseSystems'
 
 export function AdminDashboardTabs() {
   const [activeTab, setActiveTab] = useState("control")
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const tabs = [
     { value: "control", label: "Control Center" },
@@ -49,73 +48,58 @@ export function AdminDashboardTabs() {
 
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-      {/* Desktop Navigation - Show first 6 tabs directly, rest in More menu */}
-      <div className="hidden lg:block">
-        <TabsList className="grid w-full grid-cols-7">
-          {tabs.slice(0, 6).map((tab) => (
-            <TabsTrigger key={tab.value} value={tab.value} className="text-xs">
-              {tab.label}
-            </TabsTrigger>
-          ))}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="h-10 px-4 py-2 text-xs font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
-              >
-                More
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
-              {tabs.slice(6).map((tab) => (
-                <DropdownMenuItem 
-                  key={tab.value} 
-                  onClick={() => setActiveTab(tab.value)}
-                  className={`cursor-pointer ${activeTab === tab.value ? 'bg-primary/20 text-primary' : ''}`}
-                >
-                  {tab.label}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </TabsList>
-      </div>
-
-      {/* Mobile Navigation - Hamburger Menu */}
-      <div className="lg:hidden">
-        <div className="flex items-center justify-between p-4 border-b border-primary/30">
-          <h2 className="text-lg font-semibold text-primary">{getActiveTabLabel()}</h2>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-primary hover:bg-primary/10"
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
+      {/* Admin Dashboard Header with Right-top Hamburger Menu */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-2xl font-bold text-primary">
+            {getActiveTabLabel()}
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            Navigate through all {tabs.length} admin systems
+          </p>
         </div>
         
-        {mobileMenuOpen && (
-          <div className="border-b border-primary/30 bg-background/95 backdrop-blur-sm">
-            <div className="grid grid-cols-1 gap-1 p-4 overflow-y-auto max-h-96">
-              {tabs.map((tab) => (
-                <Button
-                  key={tab.value}
-                  variant={activeTab === tab.value ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => {
-                    setActiveTab(tab.value)
-                    setMobileMenuOpen(false)
-                  }}
-                  className="justify-start text-xs"
-                >
-                  {tab.label}
-                </Button>
-              ))}
+        {/* Right-top Hamburger Menu for Admin Dashboard */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-primary hover:bg-primary/10 p-3"
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent 
+            align="end" 
+            className="bg-background/95 border-primary/30 backdrop-blur-sm w-80 max-h-96 overflow-y-auto"
+          >
+            <div className="p-3">
+              <div className="text-sm font-semibold text-primary mb-3 px-2">
+                🌍 GAIA ADMIN DASHBOARD - ALL SYSTEMS
+              </div>
+              <div className="grid grid-cols-2 gap-1">
+                {tabs.map((tab) => (
+                  <DropdownMenuItem key={tab.value} asChild>
+                    <Button
+                      variant={activeTab === tab.value ? "default" : "ghost"}
+                      size="sm"
+                      onClick={() => setActiveTab(tab.value)}
+                      className="justify-start text-xs h-8 w-full"
+                    >
+                      {tab.label}
+                    </Button>
+                  </DropdownMenuItem>
+                ))}
+              </div>
+              <div className="mt-3 p-2 bg-green-900/20 rounded-lg border border-green-500/30">
+                <div className="text-xs text-green-400 text-center">
+                  🛡️ {tabs.length} Security Systems Active
+                </div>
+              </div>
             </div>
-          </div>
-        )}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       <TabsContent value="control" className="space-y-6">

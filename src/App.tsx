@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { Navbar } from '@/components/Navbar'
 import { GaiaLogo } from '@/components/GaiaLogo'
+import { ProtectedRoute } from '@/components/ProtectedRoute'
 import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
 
 // Lazy load pages for better performance
@@ -48,8 +49,16 @@ function App() {
               <Route path="/green-investments" element={<GreenInvestments />} />
               <Route path="/coin-crafter" element={<CoinCrafter />} />
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/secure-admin" element={<SecureAdmin />} />
+              <Route path="/admin" element={
+                <ProtectedRoute requireAdmin={true}>
+                  <Admin />
+                </ProtectedRoute>
+              } />
+              <Route path="/secure-admin" element={
+                <ProtectedRoute requireAdmin={true}>
+                  <SecureAdmin />
+                </ProtectedRoute>
+              } />
             </Routes>
           </Suspense>
         </main>

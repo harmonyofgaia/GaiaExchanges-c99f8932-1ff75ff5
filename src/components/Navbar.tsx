@@ -30,10 +30,16 @@ interface NavItem {
   name: string
   path: string
   icon: any
+  adminOnly?: boolean
 }
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  // Check if user is in production and admin access
+  const isProduction = import.meta.env.PROD
+  const hasAdminAccess = sessionStorage.getItem('admin-active') === 'true'
+  const showAdminPages = !isProduction || hasAdminAccess
 
   const navItems = [
     { name: 'Home', path: '/', icon: Home },
@@ -47,8 +53,13 @@ export function Navbar() {
     { name: 'Green Investments', path: '/green-investments', icon: Leaf },
     { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
     { name: 'Private Blockchain', path: '/private-blockchain', icon: Shield },
-    { name: 'Secure Admin', path: '/secure-admin', icon: Settings }
+    { name: 'Secure Admin', path: '/secure-admin', icon: Settings, adminOnly: true }
   ]
+
+  // Filter navigation items based on admin access
+  const filteredNavItems = navItems.filter(item => 
+    !item.adminOnly || showAdminPages
+  )
 
   return (
     <nav className="bg-background/95 backdrop-blur-sm border-b border-primary/30 sticky top-0 z-50">
@@ -60,9 +71,9 @@ export function Navbar() {
             <span className="font-bold text-primary text-xl">Gaia Exchanges</span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Show first items directly */}
           <div className="hidden lg:flex items-center space-x-1">
-            {navItems.slice(0, 8).map((item) => {
+            {filteredNavItems.slice(0, 6).map((item) => {
               const Icon = item.icon
               return (
                 <Link
@@ -75,68 +86,49 @@ export function Navbar() {
                 </Link>
               )
             })}
-            
-            {/* More menu for additional items */}
+          </div>
+
+          {/* Right-top Hamburger Menu Button - Always visible */}
+          <div className="flex items-center">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
-                  <MoreHorizontal className="h-4 w-4 mr-1" />
-                  More
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-primary hover:bg-primary/10 p-2"
+                >
+                  <Menu className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
-                {navItems.slice(8).map((item) => {
-                  const Icon = item.icon
-                  return (
-                    <DropdownMenuItem key={item.path} asChild>
-                      <Link
-                        to={item.path}
-                        className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
-                      >
-                        <Icon className="h-4 w-4" />
-                        <span>{item.name}</span>
-                      </Link>
-                    </DropdownMenuItem>
-                  )
-                })}
+              <DropdownMenuContent 
+                align="end" 
+                className="bg-background/95 border-primary/30 backdrop-blur-sm w-64 max-h-96 overflow-y-auto"
+              >
+                <div className="p-2">
+                  <div className="text-sm font-semibold text-primary mb-2 px-2">
+                    🌍 GAIA EXCHANGES NAVIGATION
+                  </div>
+                  <div className="grid grid-cols-1 gap-1">
+                    {filteredNavItems.map((item) => {
+                      const Icon = item.icon
+                      return (
+                        <DropdownMenuItem key={item.path} asChild>
+                          <Link
+                            to={item.path}
+                            className="flex items-center space-x-3 px-3 py-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-md transition-colors cursor-pointer"
+                          >
+                            <Icon className="h-4 w-4" />
+                            <span>{item.name}</span>
+                          </Link>
+                        </DropdownMenuItem>
+                      )
+                    })}
+                  </div>
+                </div>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-primary hover:bg-primary/10"
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-          </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-primary/30">
-            <div className="grid grid-cols-2 gap-2">
-              {navItems.map((item) => {
-                const Icon = item.icon
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <Icon className="h-4 w-4" />
-                    <span>{item.name}</span>
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   )
