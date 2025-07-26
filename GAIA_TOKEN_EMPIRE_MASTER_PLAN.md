@@ -91,19 +91,27 @@ interface CoreReserves {
 
 #### 3.1 Vault-Based Reward Multipliers
 ```typescript
+const REWARD_MULTIPLIER_CONFIG = [
+  { minScore: 90, multiplier: 2.0 },  // Maximum rewards
+  { minScore: 80, multiplier: 1.75 }, // High rewards
+  { minScore: 70, multiplier: 1.5 },  // Above standard
+  { minScore: 60, multiplier: 1.25 }, // Standard+
+  { minScore: 50, multiplier: 1.0 },  // Standard
+  { minScore: 40, multiplier: 0.85 }, // Reduced
+  { minScore: 30, multiplier: 0.7 },  // Low
+  { minScore: 20, multiplier: 0.55 }, // Critical
+];
+
 class DynamicRewardSystem {
   calculateRewardMultiplier(vaultHealth: VaultHealthMetrics): number {
     const baseMultiplier = 1.0;
     const healthScore = vaultHealth.healthScore;
     
-    if (healthScore >= 90) return baseMultiplier * 2.0;  // Maximum rewards
-    if (healthScore >= 80) return baseMultiplier * 1.75; // High rewards
-    if (healthScore >= 70) return baseMultiplier * 1.5;  // Above standard
-    if (healthScore >= 60) return baseMultiplier * 1.25; // Standard+
-    if (healthScore >= 50) return baseMultiplier * 1.0;  // Standard
-    if (healthScore >= 40) return baseMultiplier * 0.85; // Reduced
-    if (healthScore >= 30) return baseMultiplier * 0.7;  // Low
-    if (healthScore >= 20) return baseMultiplier * 0.55; // Critical
+    for (const config of REWARD_MULTIPLIER_CONFIG) {
+      if (healthScore >= config.minScore) {
+        return baseMultiplier * config.multiplier;
+      }
+    }
     return Math.max(baseMultiplier * 0.4, 0.1); // Minimum guaranteed
   }
 }
