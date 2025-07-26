@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { GaiaCommunityProjects } from '@/components/GaiaCommunityProjects'
 import { 
   Leaf, 
   Droplet, 
@@ -15,7 +16,8 @@ import {
   DollarSign,
   Target,
   Globe,
-  Zap
+  Zap,
+  Heart
 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -40,6 +42,7 @@ export default function GreenInvestments() {
   const [totalInvested, setTotalInvested] = useState(2847592)
   const [carbonOffset, setCarbonOffset] = useState(125847)
   const [activeProjects, setActiveProjects] = useState(24)
+  const [communityDonations, setCommunityDonations] = useState(0)
 
   useEffect(() => {
     // Simulate loading green projects
@@ -129,6 +132,13 @@ export default function GreenInvestments() {
     ))
   }
 
+  const handleCommunityDonation = (projectId: string, amount: number) => {
+    setCommunityDonations(prev => prev + amount)
+    toast.success(`🌍 Community donation tracked!`, {
+      description: `${amount} GAiA donated to GAiA community project. Total community donations: ${communityDonations + amount} GAiA`
+    })
+  }
+
   const getRiskColor = (risk: string) => {
     switch (risk) {
       case 'Low': return 'bg-green-500/20 text-green-400 border-green-500/50'
@@ -190,8 +200,12 @@ export default function GreenInvestments() {
 
         {/* Project Categories */}
         <Tabs defaultValue="all" className="mb-8">
-          <TabsList className="grid w-full grid-cols-5 bg-gray-900/50 border border-green-500/30">
+          <TabsList className="grid w-full grid-cols-6 bg-gray-900/50 border border-green-500/30">
             <TabsTrigger value="all" className="data-[state=active]:bg-green-600/20 data-[state=active]:text-green-400">All Projects</TabsTrigger>
+            <TabsTrigger value="community" className="data-[state=active]:bg-green-600/20 data-[state=active]:text-green-400">
+              <Heart className="h-4 w-4 mr-1" />
+              GAiA Community
+            </TabsTrigger>
             <TabsTrigger value="reforestation" className="data-[state=active]:bg-green-600/20 data-[state=active]:text-green-400">Reforestation</TabsTrigger>
             <TabsTrigger value="renewable" className="data-[state=active]:bg-green-600/20 data-[state=active]:text-green-400">Renewable Energy</TabsTrigger>
             <TabsTrigger value="ocean" className="data-[state=active]:bg-green-600/20 data-[state=active]:text-green-400">Ocean Cleanup</TabsTrigger>
@@ -199,6 +213,19 @@ export default function GreenInvestments() {
           </TabsList>
 
           <TabsContent value="all" className="space-y-6 mt-8">
+            {/* GAiA Community Projects Section */}
+            <div className="mb-12">
+              <GaiaCommunityProjects onDonate={handleCommunityDonation} />
+            </div>
+
+            {/* Separator */}
+            <div className="text-center py-8">
+              <div className="h-px bg-gradient-to-r from-transparent via-green-500/50 to-transparent mb-4"></div>
+              <h3 className="text-2xl font-bold text-green-400 mb-2">Traditional Green Investment Projects</h3>
+              <p className="text-gray-400">Large-scale environmental investment opportunities</p>
+              <div className="h-px bg-gradient-to-r from-transparent via-green-500/50 to-transparent mt-4"></div>
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {projects.map((project) => {
                 const Icon = project.icon
@@ -288,6 +315,10 @@ export default function GreenInvestments() {
             </div>
           </TabsContent>
 
+          <TabsContent value="community" className="space-y-6 mt-8">
+            <GaiaCommunityProjects onDonate={handleCommunityDonation} />
+          </TabsContent>
+
           {/* Other tab contents would be filtered versions of the same projects */}
           <TabsContent value="reforestation">
             <div className="text-center py-12">
@@ -330,7 +361,7 @@ export default function GreenInvestments() {
             </CardTitle>
           </CardHeader>
           <CardContent className="text-center">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div>
                 <div className="text-3xl font-bold text-white mb-2">$125,847</div>
                 <div className="text-green-400">Total Invested</div>
@@ -342,6 +373,10 @@ export default function GreenInvestments() {
               <div>
                 <div className="text-3xl font-bold text-white mb-2">2,847T</div>
                 <div className="text-green-400">CO2 Impact</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-blue-400 mb-2">{communityDonations.toLocaleString()}</div>
+                <div className="text-blue-400">Community Donations</div>
               </div>
             </div>
           </CardContent>
