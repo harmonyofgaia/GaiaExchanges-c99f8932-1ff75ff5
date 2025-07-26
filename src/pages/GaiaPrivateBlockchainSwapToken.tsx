@@ -69,8 +69,9 @@ export default function GaiaPrivateBlockchainSwapToken() {
 
   // Calculate swap amount
   useEffect(() => {
-    if (fromAmount && !isNaN(parseFloat(fromAmount))) {
-      setToAmount((parseFloat(fromAmount) * swapRate).toFixed(6))
+    const parsedAmount = parseFloat(fromAmount)
+    if (fromAmount && !isNaN(parsedAmount) && parsedAmount > 0) {
+      setToAmount((parsedAmount * swapRate).toFixed(6))
     } else {
       setToAmount('')
     }
