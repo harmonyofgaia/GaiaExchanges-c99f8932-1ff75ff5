@@ -13,14 +13,19 @@ export function useSecureAdmin() {
   const [adminSession, setAdminSession] = useState<AdminSession | null>(null)
   const [isValidating, setIsValidating] = useState(true)
   const [sessionTimeout, setSessionTimeout] = useState(2) // Default 2 minutes as required
+  const [validationInterval, setValidationInterval] = useState(30000) // Default 30 seconds
 
   useEffect(() => {
     validateAdminSession()
     
-    // Set up automatic session validation every 30 seconds
-    const interval = setInterval(validateAdminSession, 30000)
+    // Dynamically calculate validation interval based on session timeout
+    const calculatedInterval = Math.max(30000, (sessionTimeout * 60 * 1000) / 10) // Minimum 30 seconds or 10% of timeout
+    setValidationInterval(calculatedInterval)
+    
+    // Set up automatic session validation
+    const interval = setInterval(validateAdminSession, calculatedInterval)
     return () => clearInterval(interval)
-  }, [])
+  }, [sessionTimeout])
 
   const validateAdminSession = () => {
     try {
