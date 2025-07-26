@@ -29,15 +29,31 @@ export function GaiaCommunityProjects({ onDonate }: GaiaCommunityProjectsProps) 
       return
     }
 
-    // Simulate payment processing
-    toast.success(`🌍 Donation Successful!`, {
-      description: `${amount} GAiA tokens donated to ${project.name}. Transaction routed to ${project.walletAddress}`,
-      duration: 5000
-    })
+    try {
+      // Simulate payment processing (replace with actual logic)
+      const paymentResult = await processPayment(project.walletAddress, amount)
 
-    // Call the parent callback if provided
-    if (onDonate) {
-      onDonate(project.id, amount)
+      if (paymentResult.success) {
+        toast.success(`🌍 Donation Successful!`, {
+          description: `${amount} GAiA tokens donated to ${project.name}. Transaction routed to ${project.walletAddress}`,
+          duration: 5000
+        })
+
+        // Call the parent callback if provided
+        if (onDonate) {
+          onDonate(project.id, amount)
+        }
+      } else {
+        toast.error(`Payment Failed`, {
+          description: `Unable to process the donation. Please try again.`,
+          duration: 5000
+        })
+      }
+    } catch (error) {
+      toast.error(`Payment Error`, {
+        description: `An error occurred while processing the donation: ${error.message}`,
+        duration: 5000
+      })
     }
 
     setIsDialogOpen(false)
