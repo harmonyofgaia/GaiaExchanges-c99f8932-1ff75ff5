@@ -40,17 +40,6 @@ export function SystemConsistencyScanner() {
     })
 
     // Verify token address consistency across all components
-    const verifyTokenConsistency = () => {
-      console.log('🔍 Verifying GAIA token address consistency across all components')
-      console.log('✅ Contract Address:', GAIA_TOKEN.CONTRACT_ADDRESS)
-      console.log('✅ Wallet Address:', GAIA_TOKEN.WALLET_ADDRESS)
-      console.log('✅ Pump.fun URL:', GAIA_TOKEN.PUMP_FUN_URL)
-      console.log('✅ Official Website:', GAIA_TOKEN.OFFICIAL_WEBSITE)
-      
-      // All components are using the constants file, so consistency is guaranteed
-      return true
-    }
-
     const isConsistent = verifyTokenConsistency()
 
     for (let i = 0; i < componentList.length; i++) {
