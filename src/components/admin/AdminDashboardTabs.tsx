@@ -17,7 +17,7 @@ import { SystemHealthAdmin } from './SystemHealthAdmin'
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="control" className="w-full">
-      <TabsList className="grid w-full grid-cols-6 lg:grid-cols-13 gap-1 h-auto p-1">
+      <TabsList className="grid w-full grid-cols-6 gap-1 h-auto p-1 lg:hidden">
         <TabsTrigger value="control" className="text-xs">Control Center</TabsTrigger>
         <TabsTrigger value="video" className="text-xs">Video Exchange</TabsTrigger>
         <TabsTrigger value="users" className="text-xs">User Management</TabsTrigger>
