@@ -97,7 +97,7 @@ export function ThemeSelector() {
             <DropdownMenuItem
               key={key}
               onClick={() => handleThemeChange(key)}
-              className={`text-green-300 hover:text-green-200 hover:bg-green-500/10 cursor-pointer ${
+              className={`text-muted-foreground hover:text-primary hover:bg-primary/10 cursor-pointer ${
                 isLocked ? 'opacity-60' : ''
               }`}
               disabled={isLocked}
