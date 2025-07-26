@@ -2,13 +2,29 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { TreePine, Leaf, Droplets, Wind, Globe, Heart } from 'lucide-react'
+import { TreePine, Leaf, Droplets, Wind, Globe, Heart, Shield, Target } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
+import { useNavigate } from 'react-router-dom'
 
 export default function GaiasProjects() {
+  const navigate = useNavigate()
+  
   const projects = [
     {
       id: 1,
+      title: "Sand Protect System",
+      description: "Community-driven wildfire prevention through advanced sand cannon technology and AI detection",
+      category: "Wildfire Prevention",
+      funded: 56.5,
+      goal: 1500000,
+      icon: <Shield className="h-6 w-6 text-orange-400" />,
+      color: "from-orange-600 to-red-600",
+      route: "/sand-protect",
+      owner: "harmonyofgaia",
+      priority: true
+    },
+    {
+      id: 2,
       title: "Amazon Rainforest Conservation",
       description: "Protecting 50,000 acres of pristine rainforest through sustainable farming partnerships",
       category: "Forest Protection",
@@ -18,7 +34,7 @@ export default function GaiasProjects() {
       color: "from-green-600 to-emerald-600"
     },
     {
-      id: 2,
+      id: 3,
       title: "Ocean Plastic Cleanup Initiative",
       description: "Advanced ocean cleanup technology removing plastic waste from marine ecosystems",
       category: "Ocean Cleanup",
@@ -28,7 +44,7 @@ export default function GaiasProjects() {
       color: "from-blue-600 to-cyan-600"
     },
     {
-      id: 3,
+      id: 4,
       title: "Renewable Energy Villages",
       description: "Installing solar and wind power systems in remote communities worldwide",
       category: "Clean Energy",
@@ -85,15 +101,27 @@ export default function GaiasProjects() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
-            <Card key={project.id} className="bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20 hover:scale-105 transition-all duration-300">
+            <Card key={project.id} className={`bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20 hover:scale-105 transition-all duration-300 ${project.priority ? 'ring-2 ring-orange-500/50' : ''}`}>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-white">
                   {project.icon}
                   {project.title}
                 </CardTitle>
-                <Badge className={`bg-gradient-to-r ${project.color} w-fit`}>
-                  {project.category}
-                </Badge>
+                <div className="flex items-center gap-2">
+                  <Badge className={`bg-gradient-to-r ${project.color} w-fit`}>
+                    {project.category}
+                  </Badge>
+                  {project.priority && (
+                    <Badge variant="outline" className="border-orange-500/50 text-orange-400 text-xs">
+                      Featured
+                    </Badge>
+                  )}
+                </div>
+                {project.owner && (
+                  <div className="text-xs text-muted-foreground">
+                    Project Owner: <span className="text-green-400">{project.owner}</span>
+                  </div>
+                )}
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">{project.description}</p>
@@ -116,9 +144,21 @@ export default function GaiasProjects() {
                   </div>
                 </div>
                 
-                <Button className={`w-full mt-6 bg-gradient-to-r ${project.color} hover:opacity-90`}>
-                  <Heart className="h-4 w-4 mr-2" />
-                  Support Project
+                <Button 
+                  className={`w-full mt-6 bg-gradient-to-r ${project.color} hover:opacity-90`}
+                  onClick={() => project.route ? navigate(project.route) : undefined}
+                >
+                  {project.route ? (
+                    <>
+                      <Target className="h-4 w-4 mr-2" />
+                      View Project
+                    </>
+                  ) : (
+                    <>
+                      <Heart className="h-4 w-4 mr-2" />
+                      Support Project
+                    </>
+                  )}
                 </Button>
               </CardContent>
             </Card>

@@ -159,6 +159,23 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
+    title: "Sand Protect",
+    to: "/sand-protect",
+    icon: Shield,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Community-Driven Wildfire Prevention",
+      "Sand Cannon Network Management",
+      "Token Reward System",
+      "Governance & Voting",
+      "Eco-Action History",
+      "Blockchain Integration"
+    ],
+    description: "Community project for wildfire prevention through sand cannon technology (Owner: harmonyofgaia)",
+    lazyLoaded: true,
+  },
+  {
     title: "Wildfire Defense",
     to: "/wildfire-defense-dashboard",
     icon: Flame,
