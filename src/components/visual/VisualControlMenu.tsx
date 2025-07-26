@@ -99,16 +99,16 @@ export function VisualControlMenu({ isAdmin = false, className = '' }: VisualCon
     }))
 
     // Trigger background update
-    window.dispatchEvent(new StorageEvent('storage', {
-      key: 'gaia-enhanced-background-config',
-      newValue: JSON.stringify({
+    const backgroundChangeEvent = new CustomEvent('backgroundChange', {
+      detail: {
         type: preset.type,
         intensity: 'medium',
         color: preset.color,
         speed: 1,
         autoGenerate: preset.type === 'daily-theme'
-      })
-    }))
+      }
+    });
+    window.dispatchEvent(backgroundChangeEvent);
 
     toast.success(`Background changed to ${preset.name}`)
   }
