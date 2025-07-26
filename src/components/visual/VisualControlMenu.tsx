@@ -1,0 +1,408 @@
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { 
+  Palette, 
+  Image, 
+  Video, 
+  Upload, 
+  Layers,
+  Monitor,
+  Settings,
+  History,
+  Lock,
+  Unlock,
+  Eye,
+  Download,
+  Trash2,
+  Plus,
+  Grid3X3,
+  Sparkles,
+  Cloud,
+  Globe,
+  Cpu
+} from 'lucide-react'
+import { toast } from 'sonner'
+import { ThemeDesigner } from '../theme/ThemeDesigner'
+import { CreativeEngine } from '../creative/CreativeEngine'
+import { WebsiteTemplateSystem } from '../template/WebsiteTemplateSystem'
+import { GaiaCloudStorage } from '../cloud/GaiaCloudStorage'
+
+interface VisualControlMenuProps {
+  isAdmin?: boolean
+  className?: string
+}
+
+export function VisualControlMenu({ isAdmin = false, className = '' }: VisualControlMenuProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isLocked, setIsLocked] = useState(false)
+  const [activeSection, setActiveSection] = useState('backgrounds')
+
+  const handleLockToggle = () => {
+    setIsLocked(!isLocked)
+    toast.success(isLocked ? 'Visual controls unlocked' : 'Visual controls locked', {
+      description: isLocked 
+        ? 'You can now modify visual settings' 
+        : 'Visual settings are now protected',
+      duration: 2000
+    })
+  }
+
+  const menuSections = [
+    {
+      id: 'backgrounds',
+      label: 'Backgrounds',
+      icon: <Layers className="h-4 w-4" />,
+      description: 'Manage page backgrounds and effects'
+    },
+    {
+      id: 'assets',
+      label: 'Assets',
+      icon: <Image className="h-4 w-4" />,
+      description: 'Upload and manage media assets'
+    },
+    {
+      id: 'layouts',
+      label: 'Layouts',
+      icon: <Grid3X3 className="h-4 w-4" />,
+      description: 'Configure page and menu layouts'
+    },
+    {
+      id: 'history',
+      label: 'History',
+      icon: <History className="h-4 w-4" />,
+      description: 'View and restore previous designs'
+    }
+  ]
+
+  const backgroundPresets = [
+    { name: 'Matrix Green', type: 'matrix', color: '#00ff00', preview: 'matrix-green' },
+    { name: 'Ocean Blue', type: 'water', color: '#0080ff', preview: 'ocean-blue' },
+    { name: 'Neural Pink', type: 'neuro', color: '#ff00ff', preview: 'neural-pink' },
+    { name: 'Liquid Gold', type: 'liquid', color: '#ffaa00', preview: 'liquid-gold' },
+    { name: 'Puzzle Purple', type: 'puzzle', color: '#8000ff', preview: 'puzzle-purple' },
+    { name: 'Daily Theme', type: 'daily-theme', color: '#ff8000', preview: 'daily-theme' }
+  ]
+
+  const handleBackgroundSelect = (preset: any) => {
+    if (isLocked) {
+      toast.error('Visual controls are locked', {
+        description: 'Unlock to change backgrounds',
+        duration: 3000
+      })
+      return
+    }
+
+    // Update background configuration
+    localStorage.setItem('gaia-enhanced-background-config', JSON.stringify({
+      type: preset.type,
+      intensity: 'medium',
+      color: preset.color,
+      speed: 1,
+      autoGenerate: preset.type === 'daily-theme'
+    }))
+
+    // Trigger background update
+    const backgroundChangeEvent = new CustomEvent('backgroundChange', {
+      detail: {
+        type: preset.type,
+        intensity: 'medium',
+        color: preset.color,
+        speed: 1,
+        autoGenerate: preset.type === 'daily-theme'
+      }
+    });
+    window.dispatchEvent(backgroundChangeEvent);
+
+    toast.success(`Background changed to ${preset.name}`)
+  }
+
+  return (
+    <>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>
+          <Button
+            size="lg"
+            className={`bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 shadow-lg ${className}`}
+          >
+            <Settings className="h-5 w-5 mr-2" />
+            Visual Control
+          </Button>
+        </DialogTrigger>
+        
+        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto bg-background/95 border-primary/30 backdrop-blur-sm">
+          <DialogHeader>
+            <div className="flex items-center justify-between">
+              <DialogTitle className="text-2xl bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent flex items-center gap-2">
+                <Monitor className="h-6 w-6 text-green-400" />
+                🎨 Visual Control Menu
+                {isAdmin && <Badge variant="outline" className="border-yellow-500/50 text-yellow-400">Admin</Badge>}
+              </DialogTitle>
+              
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLockToggle}
+                  className={isLocked ? "border-red-500/50 text-red-400" : "border-green-500/50 text-green-400"}
+                >
+                  {isLocked ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
+                  {isLocked ? 'Locked' : 'Unlocked'}
+                </Button>
+              </div>
+            </div>
+          </DialogHeader>
+
+          <Tabs value={activeSection} onValueChange={setActiveSection} className="w-full">
+            <TabsList className="grid w-full grid-cols-6">
+              <TabsTrigger value="backgrounds" className="flex items-center gap-2">
+                <Layers className="h-4 w-4" />
+                Backgrounds
+              </TabsTrigger>
+              <TabsTrigger value="templates" className="flex items-center gap-2">
+                <Globe className="h-4 w-4" />
+                Templates  
+              </TabsTrigger>
+              <TabsTrigger value="creative" className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4" />
+                Creative Engine
+              </TabsTrigger>
+              <TabsTrigger value="cloud" className="flex items-center gap-2">
+                <Cloud className="h-4 w-4" />
+                Cloud Storage
+              </TabsTrigger>
+              <TabsTrigger value="designer" className="flex items-center gap-2">
+                <Palette className="h-4 w-4" />
+                Theme Designer
+              </TabsTrigger>
+              <TabsTrigger value="settings" className="flex items-center gap-2">
+                <Settings className="h-4 w-4" />
+                Settings
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="backgrounds" className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-green-400 flex items-center gap-2">
+                      <Layers className="h-5 w-5" />
+                      Enhanced Background Presets
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 gap-3">
+                      {backgroundPresets.map((preset) => (
+                        <div
+                          key={preset.name}
+                          className="group cursor-pointer rounded-lg border border-primary/20 p-3 hover:border-primary/50 transition-colors"
+                          onClick={() => handleBackgroundSelect(preset)}
+                        >
+                          <div
+                            className="w-full h-20 rounded-lg mb-2 relative overflow-hidden"
+                            style={{ 
+                              background: `linear-gradient(45deg, ${preset.color}20, ${preset.color}40)`,
+                              border: `1px solid ${preset.color}60`
+                            }}
+                          >
+                            <div className="absolute inset-0 flex items-center justify-center text-xs text-white/80">
+                              {preset.type}
+                            </div>
+                          </div>
+                          <div className="text-sm font-medium">{preset.name}</div>
+                          <div className="text-xs text-muted-foreground">{preset.type}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-blue-400 flex items-center gap-2">
+                      <Monitor className="h-5 w-5" />
+                      Current Design Status
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
+                        <h4 className="font-medium text-blue-400 mb-2">Preserved Designs</h4>
+                        <p className="text-sm text-gray-300">
+                          All current visual designs are automatically preserved and can be restored at any time.
+                        </p>
+                        <Button size="sm" className="mt-2" variant="outline">
+                          <Eye className="w-4 h-4 mr-2" />
+                          View Saved Designs
+                        </Button>
+                      </div>
+                      <div className="grid grid-cols-3 gap-2 text-sm">
+                        <div className="bg-gray-800/50 p-2 rounded text-center">
+                          <Monitor className="w-4 h-4 mx-auto mb-1 text-gray-400" />
+                          Homepage
+                        </div>
+                        <div className="bg-gray-800/50 p-2 rounded text-center">
+                          <Settings className="w-4 h-4 mx-auto mb-1 text-gray-400" />
+                          Admin
+                        </div>
+                        <div className="bg-gray-800/50 p-2 rounded text-center">
+                          <Grid3X3 className="w-4 h-4 mx-auto mb-1 text-gray-400" />
+                          Sidebar
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="templates" className="space-y-6">
+              <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mb-4">
+                <h3 className="text-lg font-semibold text-blue-400 mb-2">🌐 Website Template System</h3>
+                <p className="text-gray-300 text-sm">
+                  Save complete website templates including all pages, backgrounds, colors, and layouts. 
+                  Your current designs are preserved and can be turned into reusable templates.
+                </p>
+              </div>
+              <WebsiteTemplateSystem 
+                onTemplateApplied={(template) => {
+                  toast.success(`Applied template: ${template.name}`)
+                  // Trigger page refresh or state update
+                  window.location.reload()
+                }}
+              />
+            </TabsContent>
+
+            <TabsContent value="creative" className="space-y-6">
+              <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4 mb-4">
+                <h3 className="text-lg font-semibold text-purple-400 mb-2">✨ Creative Processing Engine</h3>
+                <p className="text-gray-300 text-sm">
+                  Upload images and videos to create living animations, abstract art, and neural-inspired designs. 
+                  The lightweight cloud engine processes your media into stunning visual elements.
+                </p>
+              </div>
+              <CreativeEngine 
+                onAssetGenerated={(asset) => {
+                  toast.success(`Generated creative asset: ${asset.name}`)
+                }}
+                onTemplateCreated={(template) => {
+                  toast.success(`Created design template: ${template.name}`)
+                }}
+              />
+            </TabsContent>
+
+            <TabsContent value="cloud" className="space-y-6">
+              <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-4 mb-4">
+                <h3 className="text-lg font-semibold text-cyan-400 mb-2">☁️ GAIA Cloud Storage</h3>
+                <p className="text-gray-300 text-sm">
+                  Secure cloud storage with automatic processing engines. Upload any media and let our AI-powered 
+                  systems generate optimized variants, living animations, and creative designs.
+                </p>
+              </div>
+              <GaiaCloudStorage 
+                onAssetSelected={(asset) => {
+                  toast.success(`Selected cloud asset: ${asset.name}`)
+                }}
+              />
+            </TabsContent>
+
+            <TabsContent value="designer" className="space-y-6">
+              <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 mb-4">
+                <h3 className="text-lg font-semibold text-green-400 mb-2">🎨 Enhanced Theme Designer</h3>
+                <p className="text-gray-300 text-sm">
+                  Advanced theme customization with neural network patterns, organic designs, and creative variations. 
+                  Create stunning backgrounds with comprehensive design tools.
+                </p>
+              </div>
+              <ThemeDesigner 
+                isLocked={isLocked} 
+                onLockToggle={handleLockToggle}
+              />
+            </TabsContent>
+
+            <TabsContent value="settings" className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-yellow-400 flex items-center gap-2">
+                      <Settings className="h-5 w-5" />
+                      System Settings
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="font-medium text-gray-200">Auto-Save Templates</h4>
+                        <p className="text-sm text-gray-400">
+                          Automatically save design changes as templates
+                        </p>
+                      </div>
+                      <Button variant="outline" size="sm">
+                        <Settings className="w-4 h-4" />
+                      </Button>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="font-medium text-gray-200">Cloud Processing</h4>
+                        <p className="text-sm text-gray-400">
+                          Enable automatic cloud processing for uploads
+                        </p>
+                      </div>
+                      <Button variant="outline" size="sm">
+                        <Cpu className="w-4 h-4" />
+                      </Button>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="font-medium text-gray-200">Neural Enhancement</h4>
+                        <p className="text-sm text-gray-400">
+                          Advanced neural network background patterns
+                        </p>
+                      </div>
+                      <Button variant="outline" size="sm">
+                        <Sparkles className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-orange-400 flex items-center gap-2">
+                      <History className="h-5 w-5" />
+                      Design History
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-3">
+                      <h4 className="font-medium text-orange-400 mb-2">Design Preservation</h4>
+                      <p className="text-sm text-gray-300 mb-3">
+                        All your current designs are preserved and can be restored. The system maintains 
+                        a complete history of your visual configurations.
+                      </p>
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="outline">
+                          <Eye className="w-4 h-4 mr-2" />
+                          View History
+                        </Button>
+                        <Button size="sm" variant="outline">
+                          <Download className="w-4 h-4 mr-2" />
+                          Export All
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </DialogContent>
+      </Dialog>
+    </>
+  )
+}

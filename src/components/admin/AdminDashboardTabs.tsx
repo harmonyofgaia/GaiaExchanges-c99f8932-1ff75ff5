@@ -7,12 +7,14 @@ import { AdminRecoveryPortal } from '@/components/security/AdminRecoveryPortal'
 import { PlanRecoverySystem } from './PlanRecoverySystem'
 import { HolisticAnalysis } from './HolisticAnalysis'
 import { AnimalWelfareControlPanel } from './AnimalWelfareControlPanel'
+import { AdminVisualControls } from './AdminVisualControls'
 
 export function AdminDashboardTabs() {
   return (
     <Tabs defaultValue="control" className="w-full">
-      <TabsList className="grid w-full grid-cols-7">
+      <TabsList className="grid w-full grid-cols-8">
         <TabsTrigger value="control">Control Center</TabsTrigger>
+        <TabsTrigger value="visual">🎨 Visual Controls</TabsTrigger>
         <TabsTrigger value="animal-welfare">🐾 Animal Welfare</TabsTrigger>
         <TabsTrigger value="security">Security Suite</TabsTrigger>
         <TabsTrigger value="tools">Admin Tools</TabsTrigger>
@@ -23,6 +25,10 @@ export function AdminDashboardTabs() {
 
       <TabsContent value="control" className="space-y-6">
         <AdminControlSystem />
+      </TabsContent>
+
+      <TabsContent value="visual" className="space-y-6">
+        <AdminVisualControls />
       </TabsContent>
 
       <TabsContent value="animal-welfare" className="space-y-6">
