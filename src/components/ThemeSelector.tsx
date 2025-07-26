@@ -68,7 +68,7 @@ export function ThemeSelector() {
             🎨 Theme Settings
           </DropdownMenuLabel>
           
-          <DropdownMenuSeparator className="bg-green-500/30" />
+          <DropdownMenuSeparator className="bg-primary/30" />
           
           {/* Lock Toggle */}
           <DropdownMenuItem 
