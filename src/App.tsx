@@ -26,6 +26,7 @@ const About = lazy(() => import('./pages/About'))
 const Docs = lazy(() => import('./pages/Docs'))
 const Admin = lazy(() => import('./pages/Admin'))
 const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
+const DeploymentStatus = lazy(() => import('./pages/DeploymentStatus'))
 
 function App() {
   useGlobalBackgroundServices()
@@ -71,6 +72,7 @@ function App() {
                   <SecureAdmin />
                 </ProtectedRoute>
               } />
+              <Route path="/deployment-status" element={<DeploymentStatus />} />
             </Routes>
           </Suspense>
         </main>
