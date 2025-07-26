@@ -50,25 +50,46 @@ export function NeuroBackground({
       })
     }
     
-    // Create connections between nearby nodes
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i].x - nodes[j].x
-        const dy = nodes[i].y - nodes[j].y
-        const distance = Math.sqrt(dx * dx + dy * dy)
-        
-        if (distance < 150 && Math.random() > 0.7) {
-          connections.push({
-            from: i,
-            to: j,
-            strength: Math.random(),
-            pulse: 0,
-            pulseSpeed: 0.05 + Math.random() * 0.1
-          })
-        }
+    // Create a quadtree for spatial partitioning
+    class Quadtree {
+      constructor(boundary, capacity) {
+        this.boundary = boundary
+        this.capacity = capacity
+        this.points = []
+        this.divided = false
       }
+      insert(point) { /* Implementation of quadtree insertion */ }
+      query(range, found) { /* Implementation of quadtree range query */ }
+      subdivide() { /* Implementation of quadtree subdivision */ }
     }
 
+    const quadtree = new Quadtree(
+      { x: 0, y: 0, width: canvas.width, height: canvas.height },
+      4
+    )
+    nodes.forEach((node, index) => quadtree.insert({ ...node, index }))
+
+    // Create connections using quadtree
+    nodes.forEach((node, i) => {
+      const range = { x: node.x - 150, y: node.y - 150, width: 300, height: 300 }
+      const nearbyNodes = quadtree.query(range, [])
+      nearbyNodes.forEach((other) => {
+        if (other.index !== i) {
+          const dx = node.x - other.x
+          const dy = node.y - other.y
+          const distance = Math.sqrt(dx * dx + dy * dy)
+          if (distance < 150 && Math.random() > 0.7) {
+            connections.push({
+              from: i,
+              to: other.index,
+              strength: Math.random(),
+              pulse: 0,
+              pulseSpeed: 0.05 + Math.random() * 0.1
+            })
+          }
+        }
+      })
+    })
     let time = 0
 
     const animate = () => {
