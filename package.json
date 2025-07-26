@@ -12,7 +12,13 @@
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "install:legacy": "npm install --legacy-peer-deps",
-    "postinstall": "echo 'Note: If you encounter peer dependency conflicts, run: npm run install:legacy'"
+    "postinstall": "echo 'Note: If you encounter peer dependency conflicts, run: npm run install:legacy'",
+    "deploy": "./scripts/deploy.sh",
+    "deploy:vercel": "./scripts/deploy.sh vercel",
+    "deploy:netlify": "./scripts/deploy.sh netlify",
+    "deploy:github-pages": "./scripts/deploy.sh github-pages",
+    "pre-deploy": "npm run lint && npm run build",
+    "post-deploy": "echo 'Deployment completed! Please verify your application is working correctly.'"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.0",
