@@ -182,7 +182,7 @@ jobs:
   notify-admin:
     needs: [deploy-primary, deploy-fallback-netlify, deploy-fallback-github-pages]
     runs-on: ubuntu-latest
-    if: always() && (needs.deploy-primary.outputs.deployment_result == 'failure')
+    if: always() && (needs.deploy-primary.outputs.deployment_result == 'failure' && needs.deploy-primary.result != 'success')
     
     steps:
     - name: Determine deployment status
