@@ -20,7 +20,7 @@ export const GAIA_COMMUNITY_PROJECTS: GAiAProject[] = [
     name: 'The Heart Of Gaia',
     description: 'Core community project fostering global environmental consciousness and sustainable living practices.',
     category: 'Community Foundation',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh1',
     website: 'https://www.gaiaexchanges.net',
     icon: Heart,
     minDonation: 100,
