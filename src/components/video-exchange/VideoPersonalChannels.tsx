@@ -1,461 +1,194 @@
+
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  Users, Settings, Edit3, Heart, Play, Eye, MessageCircle, 
-  Share2, BarChart3, Calendar, Globe, Star, Leaf 
-} from 'lucide-react'
-
-interface Channel {
-  id: string
-  username: string
-  displayName: string
-  avatar: string
-  banner: string
-  description: string
-  subscribers: number
-  totalViews: number
-  totalVideos: number
-  joinDate: string
-  socialLinks: {
-    twitter?: string
-    instagram?: string
-    website?: string
-  }
-  greenImpactScore: number
-  badges: string[]
-}
-
-interface ChannelVideo {
-  id: string
-  title: string
-  thumbnail: string
-  views: number
-  likes: number
-  duration: string
-  uploadDate: string
-  visibility: 'public' | 'unlisted' | 'private'
-  greenImpact: number
-}
+import { Play, Plus, Settings, Eye, Heart, MessageCircle } from 'lucide-react'
 
 export function VideoPersonalChannels() {
-  const [selectedChannel, setSelectedChannel] = useState<Channel | null>(null)
-  const [isEditing, setIsEditing] = useState(false)
-  
-  const [sampleChannels] = useState<Channel[]>([
+  const [channels] = useState([
     {
-      id: '1',
-      username: 'eco_warrior_sarah',
-      displayName: 'Sarah\'s Little Heaven',
-      avatar: '/api/placeholder/64/64',
-      banner: '/api/placeholder/800/200',
-      description: 'Dedicated to sharing sustainable living tips and beautiful nature content. Every view helps plant trees! 🌱',
+      id: 1,
+      name: "EcoWarrior Sarah",
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616c96f40b3?w=64&h=64&fit=crop&crop=face",
       subscribers: 15420,
-      totalViews: 234567,
-      totalVideos: 127,
-      joinDate: '2023-01-15',
-      socialLinks: {
-        twitter: '@eco_sarah',
-        instagram: '@sustainable_sarah',
-        website: 'https://sarahsgreenliving.com'
-      },
-      greenImpactScore: 8750,
-      badges: ['🌱 Eco Champion', '💚 Green Heart', '🏆 Top Creator', '⭐ Verified']
+      videos: 89,
+      category: "Climate Action",
+      verified: true,
+      description: "Sharing sustainable living tips and climate action strategies"
     },
     {
-      id: '2',
-      username: 'ocean_guardian_mike',
-      displayName: 'Ocean Conservation Hub',
-      avatar: '/api/placeholder/64/64',
-      banner: '/api/placeholder/800/200',
-      description: 'Marine biologist sharing underwater adventures and conservation efforts. Protecting our oceans one video at a time! 🌊',
-      subscribers: 28934,
-      totalViews: 567890,
-      totalVideos: 89,
-      joinDate: '2022-08-22',
-      socialLinks: {
-        twitter: '@ocean_mike',
-        website: 'https://oceanconservation.org'
-      },
-      greenImpactScore: 12340,
-      badges: ['🌊 Ocean Protector', '🐋 Marine Expert', '🏆 Top Creator', '⭐ Verified']
+      id: 2,
+      name: "Green Tech Mike",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=face",
+      subscribers: 8932,
+      videos: 67,
+      category: "Technology",
+      verified: false,
+      description: "Exploring renewable energy and green technology solutions"
+    },
+    {
+      id: 3,
+      name: "Nature Lover Emma",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&fit=crop&crop=face",
+      subscribers: 12156,
+      videos: 134,
+      category: "Conservation",
+      verified: true,
+      description: "Wildlife conservation and biodiversity protection content"
     }
   ])
 
-  const [sampleVideos] = useState<ChannelVideo[]>([
+  const [userVideos] = useState([
     {
-      id: '1',
-      title: '10 Simple Ways to Reduce Plastic Waste',
-      thumbnail: '/api/placeholder/320/180',
-      views: 45678,
-      likes: 3421,
-      duration: '12:34',
-      uploadDate: '2024-01-15',
-      visibility: 'public',
-      greenImpact: 850
+      id: 1,
+      title: "10 Ways to Reduce Your Carbon Footprint",
+      thumbnail: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e5?w=300&h=200&fit=crop",
+      views: 2543,
+      likes: 189,
+      comments: 34,
+      duration: "8:45",
+      uploadDate: "2 days ago"
     },
     {
-      id: '2',
-      title: 'My Zero-Waste Kitchen Tour',
-      thumbnail: '/api/placeholder/320/180',
-      views: 23456,
-      likes: 1890,
-      duration: '8:45',
-      uploadDate: '2024-01-10',
-      visibility: 'public',
-      greenImpact: 620
+      id: 2,
+      title: "Solar Panel Installation Guide",
+      thumbnail: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=300&h=200&fit=crop",
+      views: 1876,
+      likes: 145,
+      comments: 28,
+      duration: "12:30",
+      uploadDate: "5 days ago"
     },
     {
-      id: '3',
-      title: 'DIY Eco-Friendly Cleaning Products',
-      thumbnail: '/api/placeholder/320/180',
-      views: 12345,
-      likes: 876,
-      duration: '15:22',
-      uploadDate: '2024-01-05',
-      visibility: 'unlisted',
-      greenImpact: 430
+      id: 3,
+      title: "Composting for Beginners",
+      thumbnail: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=200&fit=crop",
+      views: 3421,
+      likes: 267,
+      comments: 52,
+      duration: "6:15",
+      uploadDate: "1 week ago"
     }
   ])
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+      {/* Channel Creation */}
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
-        <CardContent className="p-6">
-          <div className="flex items-center gap-3">
-            <Users className="h-8 w-8 text-green-400" />
-            <div>
-              <h2 className="text-2xl font-bold text-green-400">Personal Channels - "Little Heaven"</h2>
-              <p className="text-green-300">Customizable channel pages with environmental impact tracking</p>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-green-400">
+            <Plus className="h-5 w-5" />
+            Create Your Channel
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center gap-4">
+            <Avatar className="w-16 h-16">
+              <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=face" />
+              <AvatarFallback>YC</AvatarFallback>
+            </Avatar>
+            <div className="flex-1">
+              <h3 className="font-semibold">Your Eco Channel</h3>
+              <p className="text-sm text-muted-foreground">Share your environmental journey with the community</p>
             </div>
+            <Button className="bg-green-600 hover:bg-green-700">
+              <Settings className="h-4 w-4 mr-2" />
+              Customize Channel
+            </Button>
           </div>
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Channel List */}
-        <div className="lg:col-span-1">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5" />
-                Active Channels
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {sampleChannels.map((channel) => (
-                <Card 
-                  key={channel.id} 
-                  className={`cursor-pointer transition-all hover:border-green-500/50 ${
-                    selectedChannel?.id === channel.id ? 'border-green-500/70 bg-green-900/10' : ''
-                  }`}
-                  onClick={() => setSelectedChannel(channel)}
-                >
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-3">
-                      <Avatar>
-                        <AvatarImage src={channel.avatar} />
-                        <AvatarFallback>{channel.username[0].toUpperCase()}</AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold truncate">{channel.displayName}</h4>
-                        <p className="text-sm text-muted-foreground">@{channel.username}</p>
-                        <div className="flex items-center gap-2 mt-1">
-                          <Badge variant="secondary" className="text-xs">
-                            {channel.subscribers.toLocaleString()} subs
-                          </Badge>
-                          <Badge variant="outline" className="text-xs text-green-400">
-                            <Leaf className="h-3 w-3 mr-1" />
-                            {channel.greenImpactScore}
-                          </Badge>
-                        </div>
-                      </div>
+      {/* Popular Channels */}
+      <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/20 to-purple-900/20">
+        <CardHeader>
+          <CardTitle className="text-blue-400">Featured Eco Channels</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {channels.map((channel) => (
+              <div key={channel.id} className="p-4 bg-muted rounded-lg">
+                <div className="flex items-center gap-3 mb-3">
+                  <Avatar>
+                    <AvatarImage src={channel.avatar} />
+                    <AvatarFallback>{channel.name.slice(0, 2)}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-semibold">{channel.name}</h3>
+                      {channel.verified && (
+                        <Badge variant="secondary" className="text-xs">✓</Badge>
+                      )}
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-              
-              <Button className="w-full" variant="outline">
-                <Users className="h-4 w-4 mr-2" />
-                Create New Channel
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Channel Details */}
-        <div className="lg:col-span-2">
-          {selectedChannel ? (
-            <div className="space-y-6">
-              {/* Channel Banner & Info */}
-              <Card>
-                <div 
-                  className="h-48 bg-cover bg-center rounded-t-lg relative"
-                  style={{ backgroundImage: `url(${selectedChannel.banner})` }}
-                >
-                  <div className="absolute inset-0 bg-black/50 rounded-t-lg" />
-                  <div className="absolute top-4 right-4">
-                    <Button 
-                      size="sm" 
-                      variant="secondary"
-                      onClick={() => setIsEditing(!isEditing)}
-                    >
-                      <Edit3 className="h-4 w-4 mr-2" />
-                      {isEditing ? 'Save' : 'Edit'}
-                    </Button>
+                    <p className="text-xs text-muted-foreground">{channel.category}</p>
                   </div>
                 </div>
                 
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Avatar className="h-20 w-20">
-                      <AvatarImage src={selectedChannel.avatar} />
-                      <AvatarFallback className="text-2xl">
-                        {selectedChannel.username[0].toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    
-                    <div className="flex-1">
-                      {isEditing ? (
-                        <div className="space-y-3">
-                          <Input 
-                            defaultValue={selectedChannel.displayName}
-                            placeholder="Channel display name"
-                          />
-                          <Textarea 
-                            defaultValue={selectedChannel.description}
-                            placeholder="Channel description"
-                            rows={3}
-                          />
-                        </div>
-                      ) : (
-                        <div>
-                          <div className="flex items-center gap-2 mb-2">
-                            <h3 className="text-2xl font-bold">{selectedChannel.displayName}</h3>
-                            {selectedChannel.badges.map((badge, index) => (
-                              <Badge key={index} variant="secondary" className="text-xs">
-                                {badge}
-                              </Badge>
-                            ))}
-                          </div>
-                          <p className="text-muted-foreground mb-4">{selectedChannel.description}</p>
-                        </div>
-                      )}
-                      
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-blue-400">
-                            {selectedChannel.subscribers.toLocaleString()}
-                          </div>
-                          <div className="text-xs text-muted-foreground">Subscribers</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-purple-400">
-                            {selectedChannel.totalViews.toLocaleString()}
-                          </div>
-                          <div className="text-xs text-muted-foreground">Total Views</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-orange-400">
-                            {selectedChannel.totalVideos}
-                          </div>
-                          <div className="text-xs text-muted-foreground">Videos</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-green-400">
-                            {selectedChannel.greenImpactScore.toLocaleString()}
-                          </div>
-                          <div className="text-xs text-muted-foreground">Green Impact</div>
-                        </div>
-                      </div>
-                    </div>
+                <p className="text-sm text-muted-foreground mb-3">{channel.description}</p>
+                
+                <div className="flex items-center justify-between text-sm">
+                  <div className="flex gap-4">
+                    <span className="text-muted-foreground">{channel.subscribers.toLocaleString()} subscribers</span>
+                    <span className="text-muted-foreground">{channel.videos} videos</span>
                   </div>
-                </CardContent>
-              </Card>
+                  <Button size="sm" variant="outline">
+                    Subscribe
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
-              {/* Channel Content Tabs */}
-              <Tabs defaultValue="videos" className="w-full">
-                <TabsList>
-                  <TabsTrigger value="videos">Videos</TabsTrigger>
-                  <TabsTrigger value="playlists">Playlists</TabsTrigger>
-                  <TabsTrigger value="analytics">Analytics</TabsTrigger>
-                  <TabsTrigger value="social">Social Links</TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="videos" className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {sampleVideos.map((video) => (
-                      <Card key={video.id} className="hover:border-green-500/50 transition-colors">
-                        <div className="relative">
-                          <img 
-                            src={video.thumbnail} 
-                            alt={video.title}
-                            className="w-full h-32 object-cover rounded-t-lg"
-                          />
-                          <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
-                            {video.duration}
-                          </div>
-                          <Badge 
-                            className={`absolute top-2 left-2 text-xs ${
-                              video.visibility === 'public' ? 'bg-green-600' :
-                              video.visibility === 'unlisted' ? 'bg-orange-600' : 'bg-red-600'
-                            }`}
-                          >
-                            {video.visibility}
-                          </Badge>
-                        </div>
-                        <CardContent className="p-4">
-                          <h4 className="font-semibold mb-2 line-clamp-2">{video.title}</h4>
-                          <div className="flex items-center justify-between text-sm text-muted-foreground">
-                            <div className="flex items-center gap-4">
-                              <span className="flex items-center gap-1">
-                                <Eye className="h-3 w-3" />
-                                {video.views.toLocaleString()}
-                              </span>
-                              <span className="flex items-center gap-1">
-                                <Heart className="h-3 w-3" />
-                                {video.likes.toLocaleString()}
-                              </span>
-                            </div>
-                            <Badge variant="outline" className="text-xs text-green-400">
-                              <Leaf className="h-3 w-3 mr-1" />
-                              +{video.greenImpact}
-                            </Badge>
-                          </div>
-                          <div className="text-xs text-muted-foreground mt-2">{video.uploadDate}</div>
-                        </CardContent>
-                      </Card>
-                    ))}
+      {/* Your Videos */}
+      <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
+        <CardHeader>
+          <CardTitle className="text-purple-400">Your Videos</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {userVideos.map((video) => (
+              <div key={video.id} className="group cursor-pointer">
+                <div className="relative overflow-hidden rounded-lg mb-3">
+                  <img 
+                    src={video.thumbnail} 
+                    alt={video.title}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-200" />
+                  <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
+                    {video.duration}
                   </div>
-                </TabsContent>
-
-                <TabsContent value="playlists">
-                  <Card>
-                    <CardContent className="p-6 text-center">
-                      <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                      <h3 className="text-lg font-semibold mb-2">Create Your First Playlist</h3>
-                      <p className="text-muted-foreground mb-4">
-                        Organize your videos into themed collections for better discovery
-                      </p>
-                      <Button>
-                        <Calendar className="h-4 w-4 mr-2" />
-                        Create Playlist
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-
-                <TabsContent value="analytics">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <BarChart3 className="h-5 w-5" />
-                        Channel Analytics
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <Card className="border-blue-500/30">
-                          <CardContent className="p-4 text-center">
-                            <Eye className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                            <div className="text-2xl font-bold text-blue-400">47.2K</div>
-                            <div className="text-xs text-muted-foreground">Views (30 days)</div>
-                            <div className="text-xs text-green-400 mt-1">↗ +23%</div>
-                          </CardContent>
-                        </Card>
-                        
-                        <Card className="border-purple-500/30">
-                          <CardContent className="p-4 text-center">
-                            <Users className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                            <div className="text-2xl font-bold text-purple-400">1.2K</div>
-                            <div className="text-xs text-muted-foreground">New Subscribers</div>
-                            <div className="text-xs text-green-400 mt-1">↗ +18%</div>
-                          </CardContent>
-                        </Card>
-                        
-                        <Card className="border-green-500/30">
-                          <CardContent className="p-4 text-center">
-                            <Leaf className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                            <div className="text-2xl font-bold text-green-400">2,847</div>
-                            <div className="text-xs text-muted-foreground">Green Impact Points</div>
-                            <div className="text-xs text-green-400 mt-1">↗ +31%</div>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-
-                <TabsContent value="social">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Share2 className="h-5 w-5" />
-                        Social Links
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      {isEditing ? (
-                        <div className="space-y-3">
-                          <Input 
-                            placeholder="Twitter @username"
-                            defaultValue={selectedChannel.socialLinks.twitter}
-                          />
-                          <Input 
-                            placeholder="Instagram @username"
-                            defaultValue={selectedChannel.socialLinks.instagram}
-                          />
-                          <Input 
-                            placeholder="Website URL"
-                            defaultValue={selectedChannel.socialLinks.website}
-                          />
-                        </div>
-                      ) : (
-                        <div className="space-y-2">
-                          {selectedChannel.socialLinks.twitter && (
-                            <div className="flex items-center gap-2">
-                              <Badge variant="outline">Twitter</Badge>
-                              <span className="text-blue-400">{selectedChannel.socialLinks.twitter}</span>
-                            </div>
-                          )}
-                          {selectedChannel.socialLinks.instagram && (
-                            <div className="flex items-center gap-2">
-                              <Badge variant="outline">Instagram</Badge>
-                              <span className="text-pink-400">{selectedChannel.socialLinks.instagram}</span>
-                            </div>
-                          )}
-                          {selectedChannel.socialLinks.website && (
-                            <div className="flex items-center gap-2">
-                              <Badge variant="outline">Website</Badge>
-                              <span className="text-blue-400">{selectedChannel.socialLinks.website}</span>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-              </Tabs>
-            </div>
-          ) : (
-            <Card>
-              <CardContent className="p-12 text-center">
-                <Users className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Select a Channel</h3>
-                <p className="text-muted-foreground">
-                  Choose a channel from the list to view and manage its content
-                </p>
-              </CardContent>
-            </Card>
-          )}
-        </div>
-      </div>
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <Play className="h-12 w-12 text-white" />
+                  </div>
+                </div>
+                
+                <h3 className="font-semibold mb-1 line-clamp-2">{video.title}</h3>
+                <p className="text-xs text-muted-foreground mb-2">{video.uploadDate}</p>
+                
+                <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1">
+                    <Eye className="h-3 w-3" />
+                    {video.views.toLocaleString()}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Heart className="h-3 w-3" />
+                    {video.likes}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <MessageCircle className="h-3 w-3" />
+                    {video.comments}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
