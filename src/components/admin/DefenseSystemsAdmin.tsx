@@ -436,9 +436,9 @@ export function DefenseSystemsAdmin() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-medium">Threat Response Sensitivity</label>
-                  <select className="w-full px-3 py-2 border rounded-md mt-1">
+                  <select className="w-full px-3 py-2 border rounded-md mt-1" defaultValue="medium">
                     <option value="high">High (Aggressive)</option>
-                    <option value="medium" selected>Medium (Balanced)</option>
+                    <option value="medium">Medium (Balanced)</option>
                     <option value="low">Low (Conservative)</option>
                   </select>
                 </div>
