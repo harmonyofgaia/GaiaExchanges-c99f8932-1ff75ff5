@@ -17,6 +17,7 @@ import {
   Activity
 } from 'lucide-react'
 import { toast } from 'sonner'
+import HoverSidebar from '@/components/HoverSidebar'
 
 interface DeploymentStatus {
   stage: string
@@ -121,7 +122,9 @@ export function DeploymentCenter() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20">
-      <div className="min-h-screen">
+      <HoverSidebar />
+      
+      <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">
           <Card className="mb-8 border-blue-500/30 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
             <CardHeader>
