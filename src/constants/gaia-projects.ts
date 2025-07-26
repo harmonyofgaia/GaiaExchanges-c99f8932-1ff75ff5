@@ -7,7 +7,7 @@ export interface GAiAProject {
   category: string
   walletAddress: string
   website?: string
-  icon: any
+  icon: React.ComponentType
   minDonation: number
   suggestedDonations: number[]
   impactDescription: string
