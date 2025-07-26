@@ -29,3 +29,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Deployment files
+gaiaexchanges-*.zip
+deployment-*.zip
+*.deployment.zip
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+.temp/

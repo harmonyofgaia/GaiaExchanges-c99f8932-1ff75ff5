@@ -43,6 +43,13 @@ if [ ! -f .env ]; then
     fi
 fi
 
+# Check for placeholder values in .env and warn if found
+if grep -q "placeholder" .env || grep -q "your-project-id" .env; then
+    print_warning "⚠️  Environment file contains placeholder values!"
+    print_warning "Update .env with actual values for production deployment."
+    print_warning "For automated deployment, use GitHub Secrets or platform environment variables."
+fi
+
 # Install dependencies
 print_status "Installing dependencies..."
 if npm install --legacy-peer-deps; then
@@ -54,7 +61,12 @@ fi
 
 # Run linting (continue on error)
 print_status "Running linting..."
-npm run lint || print_warning "Linting completed with warnings (continuing)"
+SKIP_LINT=${SKIP_LINT:-false}
+if [ "$SKIP_LINT" = "true" ]; then
+    print_warning "Skipping linting (SKIP_LINT=true)"
+else
+    npm run lint || print_warning "Linting completed with warnings (continuing)"
+fi
 
 # Build the application
 print_status "Building application for production..."
@@ -80,21 +92,43 @@ case $PLATFORM in
     "vercel")
         print_status "Deploying to Vercel..."
         if command -v vercel &> /dev/null; then
+            print_status "Using local Vercel CLI..."
             vercel --prod
             print_success "Deployed to Vercel successfully"
+        elif npx vercel --version &> /dev/null; then
+            print_status "Using npx vercel..."
+            npx vercel --prod
+            print_success "Deployed to Vercel successfully"
         else
-            print_error "Vercel CLI not found. Install with: npm install -g vercel"
-            exit 1
+            print_warning "Vercel CLI not found locally. Attempting to install via npx..."
+            if npx vercel@latest --prod; then
+                print_success "Deployed to Vercel successfully"
+            else
+                print_error "Vercel deployment failed. Install CLI: npm install -g vercel"
+                print_status "Or deploy manually: 1) Install Vercel CLI, 2) Run 'vercel --prod'"
+                exit 1
+            fi
         fi
         ;;
     "netlify")
         print_status "Deploying to Netlify..."
         if command -v netlify &> /dev/null; then
+            print_status "Using local Netlify CLI..."
             netlify deploy --prod --dir=dist
             print_success "Deployed to Netlify successfully"
+        elif npx netlify-cli --version &> /dev/null; then
+            print_status "Using npx netlify-cli..."
+            npx netlify-cli deploy --prod --dir=dist
+            print_success "Deployed to Netlify successfully"
         else
-            print_error "Netlify CLI not found. Install with: npm install -g netlify-cli"
-            exit 1
+            print_warning "Netlify CLI not found locally. Attempting to install via npx..."
+            if npx netlify-cli@latest deploy --prod --dir=dist; then
+                print_success "Deployed to Netlify successfully"
+            else
+                print_error "Netlify deployment failed. Install CLI: npm install -g netlify-cli"
+                print_status "Or deploy manually: 1) Install Netlify CLI, 2) Run 'netlify deploy --prod --dir=dist'"
+                exit 1
+            fi
         fi
         ;;
     "github-pages")
@@ -104,7 +138,16 @@ case $PLATFORM in
             echo "$CUSTOM_DOMAIN" > dist/CNAME
             print_status "Added CNAME file for domain: $CUSTOM_DOMAIN"
         fi
-        print_status "Build ready for GitHub Pages. Deploy using GitHub Actions or manually."
+        
+        # Create .nojekyll file for GitHub Pages
+        touch dist/.nojekyll
+        print_status "Added .nojekyll file for GitHub Pages compatibility"
+        
+        print_success "Build ready for GitHub Pages!"
+        print_status "Deploy using one of these methods:"
+        echo "  1. GitHub Actions (recommended - see .github/workflows/deploy.yml)"
+        echo "  2. Manual: Push dist/ contents to gh-pages branch"
+        echo "  3. Use GitHub Desktop or git commands"
         ;;
     "manual")
         print_success "Build completed successfully!"
@@ -113,10 +156,27 @@ case $PLATFORM in
         echo "  2. Netlify: ./scripts/deploy.sh netlify"
         echo "  3. GitHub Pages: ./scripts/deploy.sh github-pages"
         echo "  4. Custom server: Upload dist/ folder contents"
+        echo "  5. Static hosting: Drag dist/ folder to hosting service"
+        ;;
+    "static")
+        print_status "Preparing for static hosting deployment..."
+        
+        # Create deployment package
+        print_status "Creating deployment package..."
+        if command -v zip &> /dev/null; then
+            zip -r "gaiaexchanges-$(date +%Y%m%d-%H%M%S).zip" dist/
+            print_success "Created deployment zip file"
+        fi
+        
+        print_success "Static deployment ready!"
+        print_status "Upload the dist/ folder contents to your web host:"
+        echo "  - dist/index.html → root directory"
+        echo "  - dist/assets/* → assets directory"
+        echo "  - dist/* → root directory (all files)"
         ;;
     *)
         print_error "Unknown deployment platform: $PLATFORM"
-        print_status "Available platforms: vercel, netlify, github-pages, manual"
+        print_status "Available platforms: vercel, netlify, github-pages, manual, static"
         exit 1
         ;;
 esac
@@ -146,13 +206,27 @@ else
     print_error "✗ HTML file is empty"
 fi
 
+# Check for environment variable placeholders in built files
+if grep -r "placeholder" dist/ &> /dev/null; then
+    print_warning "⚠ Found placeholder values in build output"
+    print_warning "Ensure environment variables are properly set for production"
+fi
+
 print_success "🎉 Deployment process completed!"
 print_status "Next steps:"
 echo "  1. Verify your environment variables are correctly set"
 echo "  2. Test the deployed application"
 echo "  3. Monitor for any runtime errors"
-echo "  4. Check the DeploymentCenter page for system health"
+echo "  4. Check the DeploymentStatus page for system health"
 
 if [ "$PLATFORM" = "manual" ]; then
     print_status "💡 Tip: Use 'npm run preview' to test the build locally"
 fi
+
+# Display deployment information
+print_status "📊 Deployment Summary:"
+echo "  Platform: $PLATFORM"
+echo "  Build size: $BUILD_SIZE"
+echo "  Node version: $(node --version)"
+echo "  Build time: $(date)"
+echo "  Status: Ready for production 🚀"

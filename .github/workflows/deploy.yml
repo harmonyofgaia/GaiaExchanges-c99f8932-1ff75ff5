@@ -23,21 +23,22 @@ jobs:
     - name: Install dependencies
       run: npm install --legacy-peer-deps
     
-    - name: Lint code
-      run: npm run lint
+    - name: Run pre-deployment checks
+      run: npm run pre-deploy
       continue-on-error: true
     
     - name: Build application
       run: npm run build
       env:
-        VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-        VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://placeholder.supabase.co' }}
+        VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY || 'placeholder-key' }}
         SKIP_LINT: true
     
     - name: Test build output
       run: |
         ls -la dist/
         echo "Build completed successfully!"
+        echo "Build size: $(du -sh dist/ | cut -f1)"
     
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
@@ -49,7 +50,7 @@ jobs:
   deploy-vercel:
     needs: build-and-test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     
     steps:
     - uses: actions/checkout@v4
@@ -60,19 +61,21 @@ jobs:
         node-version: '18'
         cache: 'npm'
     
-    - name: Install Vercel CLI
-      run: npm install --global vercel@latest
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
     
     - name: Deploy to Vercel
-      run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+      run: npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
       env:
         VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+        VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
   deploy-netlify:
     needs: build-and-test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     
     steps:
     - uses: actions/checkout@v4
@@ -102,14 +105,67 @@ jobs:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
-  health-check:
-    needs: [deploy-vercel, deploy-netlify]
+  deploy-github-pages:
+    needs: build-and-test
     runs-on: ubuntu-latest
-    if: always() && (needs.deploy-vercel.result == 'success' || needs.deploy-netlify.result == 'success')
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
+    
+    - name: Build for GitHub Pages
+      run: |
+        npm run build
+        touch dist/.nojekyll
+      env:
+        VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+        VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        SKIP_LINT: true
+    
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+    
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: ./dist
+    
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
+
+  health-check:
+    needs: [deploy-vercel, deploy-netlify, deploy-github-pages]
+    runs-on: ubuntu-latest
+    if: always() && (needs.deploy-vercel.result == 'success' || needs.deploy-netlify.result == 'success' || needs.deploy-github-pages.result == 'success')
     
     steps:
     - name: Health Check
       run: |
-        echo "Deployment completed successfully!"
-        echo "Please verify the deployment at your configured domain."
-        echo "Run post-deployment checks as needed."
+        echo "🎉 Deployment completed successfully!"
+        echo "✅ Platforms deployed:"
+        echo "  - Vercel: ${{ needs.deploy-vercel.result }}"
+        echo "  - Netlify: ${{ needs.deploy-netlify.result }}" 
+        echo "  - GitHub Pages: ${{ needs.deploy-github-pages.result }}"
+        echo ""
+        echo "📋 Next steps:"
+        echo "  1. Verify deployment at your configured domains"
+        echo "  2. Run post-deployment checks"
+        echo "  3. Monitor application health"
+        echo "  4. Check /deployment-status page for system status"

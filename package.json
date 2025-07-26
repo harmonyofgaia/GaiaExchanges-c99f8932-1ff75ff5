@@ -17,8 +17,10 @@
     "deploy:vercel": "./scripts/deploy.sh vercel",
     "deploy:netlify": "./scripts/deploy.sh netlify",
     "deploy:github-pages": "./scripts/deploy.sh github-pages",
-    "pre-deploy": "npm run lint && npm run build",
-    "post-deploy": "echo 'Deployment completed! Please verify your application is working correctly.'"
+    "deploy:static": "./scripts/deploy.sh static",
+    "pre-deploy": "./scripts/pre-deploy-check.sh",
+    "post-deploy": "echo 'Deployment completed! Please verify your application is working correctly.'",
+    "deploy:auto": "./scripts/pre-deploy-check.sh && ./scripts/deploy.sh"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.0",
