@@ -18,6 +18,12 @@ const TokenMining = lazy(() => import('./pages/TokenMining'))
 const GreenInvestments = lazy(() => import('./pages/GreenInvestments'))
 const CoinCrafter = lazy(() => import('./pages/CoinCrafter'))
 const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
+const Community = lazy(() => import('./pages/Community'))
+const NFTs = lazy(() => import('./pages/NFTs'))
+const Analytics = lazy(() => import('./pages/Analytics'))
+const Contact = lazy(() => import('./pages/Contact'))
+const About = lazy(() => import('./pages/About'))
+const Docs = lazy(() => import('./pages/Docs'))
 const Admin = lazy(() => import('./pages/Admin'))
 const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
 
@@ -49,6 +55,12 @@ function App() {
               <Route path="/green-investments" element={<GreenInvestments />} />
               <Route path="/coin-crafter" element={<CoinCrafter />} />
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/nfts" element={<NFTs />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/docs" element={<Docs />} />
               <Route path="/admin" element={
                 <ProtectedRoute requireAdmin={true}>
                   <Admin />
