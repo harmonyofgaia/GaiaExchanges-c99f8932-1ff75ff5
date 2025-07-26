@@ -18,6 +18,7 @@ import {
   Target
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { GAIA_TOKEN } from '@/constants/gaia'
 
 interface CoinDesign {
   id: string
@@ -129,7 +130,9 @@ export default function CoinCrafter() {
             🪙 COIN CRAFTER
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Craft unique digital coins with GAIA tokens and build your collection
+            Craft unique digital coins with {GAIA_TOKEN.SYMBOL} tokens and build your collection
+            <br />
+            <span className="text-sm">Connected to: {GAIA_TOKEN.CONTRACT_ADDRESS}</span>
           </p>
         </div>
 
@@ -140,7 +143,7 @@ export default function CoinCrafter() {
               <div className="text-center">
                 <Wallet className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-yellow-400">{userTokens}</div>
-                <div className="text-sm text-muted-foreground">GAIA Tokens</div>
+                <div className="text-sm text-muted-foreground">{GAIA_TOKEN.SYMBOL} Tokens</div>
               </div>
               <div className="text-center">
                 <Coins className="h-8 w-8 text-blue-400 mx-auto mb-2" />
@@ -207,8 +210,9 @@ export default function CoinCrafter() {
                     {isCrafting ? '⚡' : '🪙'}
                   </div>
                   <div className="text-center">
-                    <p className="text-green-300 font-medium">Crafting Cost: 100 GAIA Tokens</p>
+                    <p className="text-green-300 font-medium">Crafting Cost: 100 {GAIA_TOKEN.SYMBOL} Tokens</p>
                     <p className="text-sm text-muted-foreground mt-1">Random rarity and design assigned</p>
+                    <p className="text-xs text-muted-foreground mt-1">Official GAiA Token: {GAIA_TOKEN.NAME}</p>
                   </div>
                 </div>
 

@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ArrowUpDown, TrendingUp, Coins, Shield } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
+import { GAIA_TOKEN } from '@/constants/gaia'
 
 export default function Exchange() {
   return (
@@ -12,10 +13,12 @@ export default function Exchange() {
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            💱 GAIA Exchange
+            💱 {GAIA_TOKEN.SYMBOL} Exchange
           </h1>
           <p className="text-xl text-muted-foreground mt-2">
             Multi-chain Token Exchange & Trading Platform
+            <br />
+            <span className="text-sm">Official {GAIA_TOKEN.NAME} - {GAIA_TOKEN.CONTRACT_ADDRESS}</span>
           </p>
           <div className="flex gap-4 mt-4">
             <Badge variant="outline" className="border-green-500/50 text-green-400">
@@ -45,7 +48,7 @@ export default function Exchange() {
                     <div className="flex items-center justify-between">
                       <div className="text-2xl font-bold text-white">0.00</div>
                       <Button variant="outline" className="border-green-500/30 text-green-400">
-                        GAiA
+                        {GAIA_TOKEN.SYMBOL}
                       </Button>
                     </div>
                   </div>

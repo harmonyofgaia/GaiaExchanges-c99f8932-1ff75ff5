@@ -21,6 +21,7 @@ import {
 import { toast } from 'sonner'
 import { supabase } from '@/integrations/supabase/client'
 import { useAuth } from '@/components/auth/AuthProvider'
+import { GAIA_TOKEN } from '@/constants/gaia'
 import { FeeDestinationManager } from '@/components/vault/FeeDestinationManager'
 import { AdminVaultAccess } from '@/components/vault/AdminVaultAccess'
 import { LiveVaultStats } from '@/components/vault/LiveVaultStats'
@@ -64,7 +65,7 @@ const FeeVault = () => {
       const { data: vaultData, error: vaultError } = await supabase
         .from('fee_vault')
         .select('*')
-        .eq('currency', 'GAIA')
+        .eq('currency', GAIA_TOKEN.SYMBOL)
         .single()
 
       if (vaultError) {
@@ -145,10 +146,12 @@ const FeeVault = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-blue-400">
             <Vault className="h-6 w-6" />
-            🏦 GAIA Community Vault - Live Quantum Protected
+            🏦 {GAIA_TOKEN.SYMBOL} Community Vault - Live Quantum Protected
           </CardTitle>
           <p className="text-muted-foreground">
             Secure vault for collecting transaction fees to fund humanitarian projects and system improvements
+            <br />
+            <span className="text-xs">Official {GAIA_TOKEN.NAME} - Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}</span>
           </p>
         </CardHeader>
         <CardContent>
@@ -157,7 +160,7 @@ const FeeVault = () => {
               <div className="text-2xl font-bold text-blue-400">
                 {vaultBalance ? vaultBalance.total_balance.toLocaleString() : '0'}
               </div>
-              <div className="text-xs text-muted-foreground">Total GAIA in Vault</div>
+              <div className="text-xs text-muted-foreground">Total {GAIA_TOKEN.SYMBOL} in Vault</div>
             </div>
             <div className="p-4 rounded-lg bg-green-900/30 border border-green-500/20 text-center">
               <div className="text-2xl font-bold text-green-400">

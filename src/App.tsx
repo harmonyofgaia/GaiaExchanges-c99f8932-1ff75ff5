@@ -20,6 +20,7 @@ const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlo
 const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
 const Admin = lazy(() => import('./pages/Admin'))
 const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
+const DeploymentStatus = lazy(() => import('./pages/DeploymentStatus'))
 
 function App() {
   useGlobalBackgroundServices()
@@ -52,6 +53,7 @@ function App() {
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/secure-admin" element={<SecureAdmin />} />
+              <Route path="/deployment-status" element={<DeploymentStatus />} />
             </Routes>
           </Suspense>
         </main>
