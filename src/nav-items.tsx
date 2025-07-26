@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket, Zap } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket, Zap, Trophy } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -72,6 +72,27 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
+    title: "Enhanced Leaderboard",
+    to: "/enhanced-leaderboard",
+    icon: Trophy,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Global Rankings System",
+      "Category-specific Leaderboards",
+      "Real-time Updates",
+      "Achievement Tracking",
+      "Streak Monitoring",
+      "Weekly/Monthly/All-time Views",
+      "Badge Display System",
+      "Country-based Rankings",
+      "Trend Analysis",
+      "Performance Analytics"
+    ],
+    description: "Master Plan v7: Comprehensive leaderboard system with global and category rankings",
+    lazyLoaded: true,
+  },
+  {
     title: "Green Impact",
     to: "/green-impact-dashboard",
     icon: Leaf,
@@ -101,22 +122,6 @@ export const navigationItems: NavigationItem[] = [
       "Community Voting"
     ],
     description: "Master Plan v7: Advanced decentralized funding with governance",
-    lazyLoaded: true,
-  },
-  {
-    title: "Eco Missions",
-    to: "/eco-missions",
-    icon: Target,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "AI Mission Generation",
-      "Geolocation Integration",
-      "Community Challenges",
-      "Progress Tracking",
-      "Reward Optimization"
-    ],
-    description: "Master Plan v7: AI-powered mission generation and tracking",
     lazyLoaded: true,
   },
   {

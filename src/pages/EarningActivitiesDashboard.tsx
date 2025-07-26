@@ -30,6 +30,8 @@ import { Navbar } from '@/components/Navbar'
 import { WaterSavingActions } from '@/components/earning/WaterSavingActions'
 import { HomeGrownFoodActions } from '@/components/earning/HomeGrownFoodActions'
 import { BeeHotelActions } from '@/components/earning/BeeHotelActions'
+import { EnvironmentalEducationActions } from '@/components/earning/EnvironmentalEducationActions'
+import { ReferralSystem } from '@/components/earning/ReferralSystem'
 import { useEarningActivities, useUserProfile, useBadges, useAchievements } from '@/hooks/useEarningSystem'
 import { EarningActivityType } from '@/types/gaia-types'
 
@@ -170,14 +172,15 @@ export default function EarningActivitiesDashboard() {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7 bg-gray-800/50">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="water">Water Saving</TabsTrigger>
-            <TabsTrigger value="food">Home Grown Food</TabsTrigger>
-            <TabsTrigger value="bees">Bee Hotels</TabsTrigger>
-            <TabsTrigger value="achievements">Achievements</TabsTrigger>
-            <TabsTrigger value="badges">Badges</TabsTrigger>
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-8 bg-gray-800/50 overflow-x-auto">
+            <TabsTrigger value="overview" className="text-xs">Overview</TabsTrigger>
+            <TabsTrigger value="water" className="text-xs">Water</TabsTrigger>
+            <TabsTrigger value="food" className="text-xs">Food</TabsTrigger>
+            <TabsTrigger value="bees" className="text-xs">Bees</TabsTrigger>
+            <TabsTrigger value="education" className="text-xs">Education</TabsTrigger>
+            <TabsTrigger value="referrals" className="text-xs">Referrals</TabsTrigger>
+            <TabsTrigger value="achievements" className="text-xs">Achievements</TabsTrigger>
+            <TabsTrigger value="badges" className="text-xs">Badges</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -265,6 +268,14 @@ export default function EarningActivitiesDashboard() {
 
           <TabsContent value="bees">
             <BeeHotelActions />
+          </TabsContent>
+
+          <TabsContent value="education">
+            <EnvironmentalEducationActions />
+          </TabsContent>
+
+          <TabsContent value="referrals">
+            <ReferralSystem />
           </TabsContent>
 
           <TabsContent value="achievements" className="space-y-6">
