@@ -244,9 +244,9 @@ export default function SandProtect() {
                 <CardContent className="space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-muted-foreground">Progress</span>
-                    <span className="text-green-400 font-bold">{fundingPercentage.toFixed(1)}%</span>
+                    <span className="text-green-400 font-bold">{(fundingPercentage ?? 0).toFixed(1)}%</span>
                   </div>
-                  <Progress value={fundingPercentage} className="h-3" />
+                  <Progress value={fundingPercentage ?? 0} className="h-3" />
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Raised: ${stats.totalFunding.toLocaleString()}</span>
                     <span className="text-muted-foreground">Goal: ${stats.fundingGoal.toLocaleString()}</span>
