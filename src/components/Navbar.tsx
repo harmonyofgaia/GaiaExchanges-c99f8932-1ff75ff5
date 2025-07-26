@@ -51,13 +51,13 @@ export function Navbar() {
   ]
 
   return (
-    <nav className="bg-black/95 backdrop-blur-sm border-b border-green-500/30 sticky top-0 z-50">
+    <nav className="bg-background/95 backdrop-blur-sm border-b border-primary/30 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <GaiaLogo size="sm" variant="matrix" showText={false} />
-            <span className="font-bold text-green-400 text-xl">Gaia Exchanges</span>
+            <span className="font-bold text-primary text-xl">Gaia Exchanges</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -68,7 +68,7 @@ export function Navbar() {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-green-300 hover:text-green-400 hover:bg-green-500/10 transition-colors"
+                  className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
                 >
                   <Icon className="h-4 w-4" />
                   <span>{item.name}</span>
@@ -79,19 +79,19 @@ export function Navbar() {
             {/* More menu for additional items */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-green-300 hover:text-green-400 hover:bg-green-500/10">
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
                   <MoreHorizontal className="h-4 w-4 mr-1" />
                   More
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-black/95 border-green-500/30 backdrop-blur-sm">
+              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
                 {navItems.slice(8).map((item) => {
                   const Icon = item.icon
                   return (
                     <DropdownMenuItem key={item.path} asChild>
                       <Link
                         to={item.path}
-                        className="flex items-center space-x-2 text-green-300 hover:text-green-400"
+                        className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
                       >
                         <Icon className="h-4 w-4" />
                         <span>{item.name}</span>
@@ -109,7 +109,7 @@ export function Navbar() {
               variant="ghost"
               size="sm"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-green-400 hover:bg-green-500/10"
+              className="text-primary hover:bg-primary/10"
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -118,7 +118,7 @@ export function Navbar() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-green-500/30">
+          <div className="lg:hidden py-4 border-t border-primary/30">
             <div className="grid grid-cols-2 gap-2">
               {navItems.map((item) => {
                 const Icon = item.icon
@@ -126,7 +126,7 @@ export function Navbar() {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm text-green-300 hover:text-green-400 hover:bg-green-500/10 transition-colors"
+                    className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <Icon className="h-4 w-4" />
