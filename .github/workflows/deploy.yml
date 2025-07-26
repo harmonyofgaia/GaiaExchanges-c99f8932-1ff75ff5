@@ -3,8 +3,6 @@ name: Deploy to Production
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -47,10 +45,14 @@ jobs:
         path: dist/
         retention-days: 30
 
-  deploy-vercel:
+  deploy-primary:
     needs: build-and-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    outputs:
+      deployment_result: ${{ steps.deploy_vercel.outcome }}
+      platform_used: ${{ steps.set_platform.outputs.platform }}
+      deployment_url: ${{ steps.deploy_vercel.outputs.url }}
     
     steps:
     - uses: actions/checkout@v4
@@ -64,18 +66,32 @@ jobs:
     - name: Install dependencies
       run: npm install --legacy-peer-deps
     
-    - name: Deploy to Vercel
-      run: npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+    - name: Set platform
+      id: set_platform
+      run: echo "platform=vercel" >> $GITHUB_OUTPUT
+    
+    - name: Deploy to Vercel (Primary)
+      id: deploy_vercel
+      continue-on-error: true
+      run: |
+        echo "🚀 Attempting deployment to Vercel (Primary Platform)..."
+        DEPLOYMENT_URL=$(npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }} | tail -n 1)
+        echo "url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+        echo "✅ Vercel deployment successful: $DEPLOYMENT_URL"
       env:
         VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
         VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
         VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
-  deploy-netlify:
-    needs: build-and-test
+  deploy-fallback-netlify:
+    needs: [build-and-test, deploy-primary]
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: needs.deploy-primary.outputs.deployment_result == 'failure'
+    outputs:
+      deployment_result: ${{ steps.deploy_netlify.outcome }}
+      platform_used: netlify
+      deployment_url: ${{ steps.deploy_netlify.outputs.url }}
     
     steps:
     - uses: actions/checkout@v4
@@ -96,7 +112,12 @@ jobs:
         VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         SKIP_LINT: true
     
-    - name: Deploy to Netlify
+    - name: Notify fallback deployment
+      run: |
+        echo "⚠️ Primary Vercel deployment failed, attempting Netlify fallback..."
+    
+    - name: Deploy to Netlify (Fallback)
+      id: deploy_netlify
       uses: netlify/actions/deploy@master
       with:
         publish-dir: ./dist
@@ -105,10 +126,10 @@ jobs:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
-  deploy-github-pages:
-    needs: build-and-test
+  deploy-fallback-github-pages:
+    needs: [build-and-test, deploy-primary, deploy-fallback-netlify]
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: needs.deploy-primary.outputs.deployment_result == 'failure' && needs.deploy-fallback-netlify.outputs.deployment_result == 'failure'
     permissions:
       contents: read
       pages: write
@@ -116,6 +137,10 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      deployment_result: ${{ steps.deployment.outcome }}
+      platform_used: github-pages
+      deployment_url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
     - uses: actions/checkout@v4
@@ -138,6 +163,10 @@ jobs:
         VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         SKIP_LINT: true
     
+    - name: Notify final fallback deployment
+      run: |
+        echo "⚠️ Both Vercel and Netlify deployments failed, attempting GitHub Pages fallback..."
+    
     - name: Setup Pages
       uses: actions/configure-pages@v3
     
@@ -146,26 +175,128 @@ jobs:
       with:
         path: ./dist
     
-    - name: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages (Final Fallback)
       id: deployment
       uses: actions/deploy-pages@v2
 
-  health-check:
-    needs: [deploy-vercel, deploy-netlify, deploy-github-pages]
+  notify-admin:
+    needs: [deploy-primary, deploy-fallback-netlify, deploy-fallback-github-pages]
     runs-on: ubuntu-latest
-    if: always() && (needs.deploy-vercel.result == 'success' || needs.deploy-netlify.result == 'success' || needs.deploy-github-pages.result == 'success')
+    if: always() && (needs.deploy-primary.outputs.deployment_result == 'failure' && needs.deploy-primary.result != 'success')
     
     steps:
-    - name: Health Check
+    - name: Determine deployment status
+      id: status
       run: |
-        echo "🎉 Deployment completed successfully!"
-        echo "✅ Platforms deployed:"
-        echo "  - Vercel: ${{ needs.deploy-vercel.result }}"
-        echo "  - Netlify: ${{ needs.deploy-netlify.result }}" 
-        echo "  - GitHub Pages: ${{ needs.deploy-github-pages.result }}"
+        VERCEL_STATUS="${{ needs.deploy-primary.outputs.deployment_result }}"
+        NETLIFY_STATUS="${{ needs.deploy-fallback-netlify.result }}"
+        GITHUB_PAGES_STATUS="${{ needs.deploy-fallback-github-pages.result }}"
+        
+        if [ "$VERCEL_STATUS" = "success" ]; then
+          echo "platform=vercel" >> $GITHUB_OUTPUT
+          echo "status=success" >> $GITHUB_OUTPUT
+          echo "url=${{ needs.deploy-primary.outputs.deployment_url }}" >> $GITHUB_OUTPUT
+        elif [ "$NETLIFY_STATUS" = "success" ]; then
+          echo "platform=netlify" >> $GITHUB_OUTPUT
+          echo "status=fallback" >> $GITHUB_OUTPUT
+          echo "url=${{ needs.deploy-fallback-netlify.outputs.deployment_url }}" >> $GITHUB_OUTPUT
+        elif [ "$GITHUB_PAGES_STATUS" = "success" ]; then
+          echo "platform=github-pages" >> $GITHUB_OUTPUT
+          echo "status=fallback" >> $GITHUB_OUTPUT
+          echo "url=${{ needs.deploy-fallback-github-pages.outputs.deployment_url }}" >> $GITHUB_OUTPUT
+        else
+          echo "platform=none" >> $GITHUB_OUTPUT
+          echo "status=failed" >> $GITHUB_OUTPUT
+          echo "url=none" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Send admin notification
+      run: |
+        STATUS="${{ steps.status.outputs.status }}"
+        PLATFORM="${{ steps.status.outputs.platform }}"
+        URL="${{ steps.status.outputs.url }}"
+        
+        echo "🚨 DEPLOYMENT NOTIFICATION 🚨"
+        echo "================================"
+        echo "Repository: ${{ github.repository }}"
+        echo "Commit: ${{ github.sha }}"
+        echo "Branch: ${{ github.ref_name }}"
+        echo "Author: ${{ github.actor }}"
+        echo "Time: $(date -u)"
         echo ""
-        echo "📋 Next steps:"
-        echo "  1. Verify deployment at your configured domains"
-        echo "  2. Run post-deployment checks"
-        echo "  3. Monitor application health"
-        echo "  4. Check /deployment-status page for system status"
+        
+        if [ "$STATUS" = "failed" ]; then
+          echo "❌ ALL DEPLOYMENT PLATFORMS FAILED"
+          echo "- Vercel (Primary): FAILED"
+          echo "- Netlify (Fallback): FAILED"
+          echo "- GitHub Pages (Final Fallback): FAILED"
+          echo ""
+          echo "🔧 ACTION REQUIRED:"
+          echo "1. Check repository secrets and tokens"
+          echo "2. Verify platform configurations"
+          echo "3. Review deployment logs for errors"
+          echo "4. Consider manual deployment"
+          exit 1
+        elif [ "$STATUS" = "fallback" ]; then
+          echo "⚠️ FALLBACK DEPLOYMENT SUCCESSFUL"
+          echo "- Vercel (Primary): FAILED"
+          echo "- $PLATFORM (Fallback): SUCCESS"
+          echo "- Deployment URL: $URL"
+          echo ""
+          echo "🔍 INVESTIGATION NEEDED:"
+          echo "1. Check why Vercel deployment failed"
+          echo "2. Verify Vercel tokens and configuration"
+          echo "3. Monitor primary platform health"
+          echo "4. Consider fixing Vercel issues for future deployments"
+        fi
+
+  deployment-summary:
+    needs: [deploy-primary, deploy-fallback-netlify, deploy-fallback-github-pages]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Generate deployment summary
+      run: |
+        echo "🎯 DEPLOYMENT SUMMARY"
+        echo "===================="
+        echo "Repository: ${{ github.repository }}"
+        echo "Commit: ${{ github.sha }}"
+        echo "Triggered by: ${{ github.actor }}"
+        echo "Time: $(date -u)"
+        echo ""
+        
+        VERCEL_STATUS="${{ needs.deploy-primary.outputs.deployment_result }}"
+        NETLIFY_STATUS="${{ needs.deploy-fallback-netlify.result }}"
+        GITHUB_PAGES_STATUS="${{ needs.deploy-fallback-github-pages.result }}"
+        
+        echo "📊 Platform Results:"
+        echo "- Vercel (Primary): $VERCEL_STATUS"
+        echo "- Netlify (Fallback): $NETLIFY_STATUS"
+        echo "- GitHub Pages (Final): $GITHUB_PAGES_STATUS"
+        echo ""
+        
+        if [ "$VERCEL_STATUS" = "success" ]; then
+          echo "✅ PRIMARY DEPLOYMENT SUCCESSFUL"
+          echo "Platform: Vercel"
+          echo "URL: ${{ needs.deploy-primary.outputs.deployment_url }}"
+        elif [ "$NETLIFY_STATUS" = "success" ]; then
+          echo "⚠️ FALLBACK DEPLOYMENT SUCCESSFUL"
+          echo "Platform: Netlify"
+          echo "URL: ${{ needs.deploy-fallback-netlify.outputs.deployment_url }}"
+        elif [ "$GITHUB_PAGES_STATUS" = "success" ]; then
+          echo "⚠️ FINAL FALLBACK DEPLOYMENT SUCCESSFUL"
+          echo "Platform: GitHub Pages"
+          echo "URL: ${{ needs.deploy-fallback-github-pages.outputs.deployment_url }}"
+        else
+          echo "❌ ALL DEPLOYMENT ATTEMPTS FAILED"
+          echo ""
+          echo "🔧 Manual intervention required!"
+          echo "Check logs and platform configurations."
+        fi
+        echo ""
+        echo "📋 Next Steps:"
+        echo "1. Verify application is accessible"
+        echo "2. Run post-deployment health checks"
+        echo "3. Monitor application performance"
+        echo "4. Review any fallback notifications"
