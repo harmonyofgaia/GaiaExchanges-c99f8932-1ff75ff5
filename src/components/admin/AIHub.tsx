@@ -25,7 +25,7 @@ export function AIHub() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400">3</div>
+              <div className="text-2xl font-bold text-purple-400">{activeAIEngines}</div>
               <p className="text-sm text-muted-foreground">AI Engines Active</p>
             </div>
             <div className="text-center">
