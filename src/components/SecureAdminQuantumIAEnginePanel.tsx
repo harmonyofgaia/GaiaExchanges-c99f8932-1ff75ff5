@@ -121,10 +121,10 @@ function SecureAdminQuantumIAEnginePanel() {
   const authTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
 
   // Function to check creator permissions
-  const hasCreatorPermissions = () => {
-    // Check if user is authenticated creator/admin
-    // In production, this would check against proper authentication
-    return true // For now, allow access for authenticated users
+  const hasCreatorPermissions = (userRole: string) => {
+    // Check if user has the required role for creator access
+    const allowedRoles = ['creator', 'admin']; // Define roles with creator permissions
+    return allowedRoles.includes(userRole); // Grant access only if the user's role is allowed
   }
 
   // Simulated biometric authentication sequence
