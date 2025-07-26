@@ -1,459 +1,428 @@
 
-import React, { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useState } from 'react'
+import { Navbar } from '@/components/Navbar'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
-import { 
-  Bike, 
-  Leaf, 
-  Zap, 
-  MapPin, 
-  Trophy,
-  Battery,
-  Route,
-  Timer,
-  Target,
-  Award,
-  Play,
-  Square
-} from 'lucide-react'
-import { toast } from 'sonner'
-import { supabase } from '@/integrations/supabase/client'
-import { BikeSession } from '@/types/ui-types'
-import { useEcoIntegration } from '@/services/ecoIntegration'
+import { Bike, MapPin, Leaf, Trophy, Users, Zap, Globe, Star, Target, Award } from 'lucide-react'
+
+interface BikeStation {
+  id: string
+  name: string
+  location: string
+  availableBikes: number
+  totalSlots: number
+  energyGenerated: number
+  carbonOffset: number
+  status: 'active' | 'maintenance' | 'offline'
+}
+
+interface UserStats {
+  totalRides: number
+  distanceTraveled: number
+  energyGenerated: number
+  carbonSaved: number
+  tokensEarned: number
+  level: number
+  achievements: string[]
+}
 
 export default function GaiaBikeEcosystem() {
-  const [isRiding, setIsRiding] = useState(false)
-  const [currentSession, setCurrentSession] = useState<BikeSession | null>(null)
-  const [totalDistance, setTotalDistance] = useState(127.5)
-  const [totalTokens, setTotalTokens] = useState(3840)
-  const [carbonSaved, setCarbonSaved] = useState(23.8)
-  const [batteryLevel, setBatteryLevel] = useState(85)
-  const [bikeSessions, setBikeSessions] = useState<BikeSession[]>([])
-  
-  const { userProfile, recordBikeActivity } = useEcoIntegration()
+  const [selectedStation, setSelectedStation] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState('overview')
 
-  useEffect(() => {
-    console.log('🚴 GAIA BIKE ECOSYSTEM - SUSTAINABLE TRANSPORT REVOLUTION')
-    console.log('🌱 ECO-FRIENDLY MOBILITY: UNLIMITED ENVIRONMENTAL IMPACT')
-    
-    // Load bike sessions
-    loadBikeSessions()
-    
-    // Simulate battery and stats updates
-    const updateInterval = setInterval(() => {
-      if (isRiding) {
-        setTotalDistance(prev => prev + 0.1)
-        setTotalTokens(prev => prev + Math.floor(Math.random() * 5))
-        setCarbonSaved(prev => prev + 0.02)
-        setBatteryLevel(prev => Math.max(20, prev - 0.5))
-      }
-    }, 3000)
+  const bikeStations: BikeStation[] = [
+    {
+      id: '1',
+      name: 'Green Plaza Hub',
+      location: 'Downtown Environmental District',
+      availableBikes: 8,
+      totalSlots: 12,
+      energyGenerated: 245.7,
+      carbonOffset: 89.3,
+      status: 'active'
+    },
+    {
+      id: '2',
+      name: 'Eco Park Station',
+      location: 'Central Park North',
+      availableBikes: 15,
+      totalSlots: 20,
+      energyGenerated: 412.8,
+      carbonOffset: 156.4,
+      status: 'active'
+    },
+    {
+      id: '3',
+      name: 'Solar Bridge Point',
+      location: 'University Campus',
+      availableBikes: 3,
+      totalSlots: 16,
+      energyGenerated: 678.2,
+      carbonOffset: 234.1,
+      status: 'maintenance'
+    },
+    {
+      id: '4',
+      name: 'Wind Valley Terminal',
+      location: 'Renewable Energy Park',
+      availableBikes: 22,
+      totalSlots: 25,
+      energyGenerated: 891.5,
+      carbonOffset: 312.7,
+      status: 'active'
+    }
+  ]
 
-    return () => clearInterval(updateInterval)
-  }, [isRiding])
+  const userStats: UserStats = {
+    totalRides: 89,
+    distanceTraveled: 234.7,
+    energyGenerated: 156.3,
+    carbonSaved: 78.9,
+    tokensEarned: 1247,
+    level: 7,
+    achievements: ['Eco Warrior', 'Green Commuter', 'Energy Producer', 'Carbon Saver']
+  }
 
-  const loadBikeSessions = async () => {
-    try {
-      const { data: sessions, error } = await supabase
-        .from('bike_sessions')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(10)
-
-      if (error) throw error
-
-      if (sessions && sessions.length > 0) {
-        // Transform the database data to match BikeSession interface
-        const transformedSessions: BikeSession[] = sessions.map(session => ({
-          id: session.id,
-          user_id: session.user_id,
-          bike_type: (session.bike_type === 'gaia_bike' || session.bike_type === 'regular_bike') 
-            ? session.bike_type 
-            : 'gaia_bike' as const,
-          start_time: session.start_time,
-          end_time: session.end_time,
-          distance: session.distance,
-          tokens_earned: session.tokens_earned,
-          start_location: session.route_data ? 
-            (typeof session.route_data === 'object' && session.route_data !== null && 'lat' in session.route_data && 'lng' in session.route_data ? 
-              { lat: (session.route_data as any).lat, lng: (session.route_data as any).lng } : 
-              { lat: 0, lng: 0 }) : 
-            { lat: 0, lng: 0 },
-          route_data: session.route_data,
-          status: 'completed',
-          eco_impact: 2.3
-        }))
-
-        setBikeSessions(transformedSessions)
-        
-        // Set current session if there's an active one
-        const activeSession = transformedSessions.find(session => session.status === 'active')
-        if (activeSession) {
-          setCurrentSession(activeSession)
-          setIsRiding(true)
-        }
-      }
-    } catch (error) {
-      console.error('Error loading bike sessions:', error)
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active': return 'text-green-400'
+      case 'maintenance': return 'text-yellow-400'
+      case 'offline': return 'text-red-400'
+      default: return 'text-gray-400'
     }
   }
 
-  const startRide = async () => {
-    try {
-      setIsRiding(true)
-      
-      // Create new session with proper typing
-      const newSession: BikeSession = {
-        id: `session-${Date.now()}`,
-        user_id: 'current-user',
-        bike_type: 'gaia_bike' as const,
-        start_time: new Date().toISOString(),
-        end_time: null,
-        distance: 0,
-        tokens_earned: 0,
-        start_location: { lat: 40.7128, lng: -74.0060 },
-        route_data: {
-          start_location: { lat: 40.7128, lng: -74.0060 }
-        },
-        status: 'active',
-        eco_impact: 0
-      }
-
-      setCurrentSession(newSession)
-      
-      toast.success('🚴 Ride Started!', {
-        description: 'GAIA Bike activated - earning eco-tokens and saving carbon!',
-        duration: 4000
-      })
-    } catch (error) {
-      console.error('Error starting ride:', error)
-      toast.error('Failed to start ride')
-    }
-  }
-
-  const endRide = async () => {
-    if (!currentSession) return
-
-    try {
-      setIsRiding(false)
-      
-      const rideDistance = Math.random() * 15 + 5 // 5-20km
-      const rideTokens = Math.floor(rideDistance * 15)
-      const rideCarbonSaved = rideDistance * 0.184
-
-      // Update session with proper typing
-      const completedSession: BikeSession = {
-        ...currentSession,
-        end_time: new Date().toISOString(),
-        distance: rideDistance,
-        tokens_earned: rideTokens,
-        status: 'completed',
-        eco_impact: rideCarbonSaved
-      }
-
-      setCurrentSession(completedSession)
-      setBikeSessions(prev => [completedSession, ...prev])
-      
-      // Update totals
-      setTotalDistance(prev => prev + rideDistance)
-      setTotalTokens(prev => prev + rideTokens)
-      setCarbonSaved(prev => prev + rideCarbonSaved)
-      
-      // Record in eco integration system
-      recordBikeActivity(rideDistance, 45) // Assume 45 minutes average
-      
-      toast.success('🎉 Ride Completed!', {
-        description: `Earned ${rideTokens} GAIA tokens and saved ${rideCarbonSaved.toFixed(2)}kg CO2!`,
-        duration: 6000
-      })
-    } catch (error) {
-      console.error('Error ending ride:', error)
-      toast.error('Failed to end ride')
+  const getStatusBadgeVariant = (status: string) => {
+    switch (status) {
+      case 'active': return 'default'
+      case 'maintenance': return 'secondary'
+      case 'offline': return 'destructive'
+      default: return 'outline'
     }
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20 mb-8">
-        <CardHeader>
-          <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
-            🚴 GAIA BIKE ECOSYSTEM
-          </CardTitle>
-          <p className="text-center text-xl text-muted-foreground">
-            Revolutionizing sustainable transport with blockchain rewards
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-blue-900">
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">
+            🚴‍♂️ GAIA Bike Ecosystem
+          </h1>
+          <p className="text-xl text-gray-300 mb-6">
+            Sustainable Transportation • Energy Generation • Carbon Offsetting
           </p>
-          <div className="flex justify-center gap-4 flex-wrap mt-4">
-            <Badge className="bg-green-600">DISTANCE: {totalDistance.toFixed(1)}km</Badge>
-            <Badge className="bg-blue-600">TOKENS: {totalTokens.toLocaleString()}</Badge>
-            <Badge className="bg-emerald-600">CO2 SAVED: {carbonSaved.toFixed(1)}kg</Badge>
-            <Badge className={`${batteryLevel > 50 ? 'bg-green-600' : 'bg-orange-600'}`}>
-              BATTERY: {batteryLevel}%
-            </Badge>
-          </div>
-        </CardHeader>
-      </Card>
+        </div>
 
-      <Tabs defaultValue="ride" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="ride">🚴 Active Ride</TabsTrigger>
-          <TabsTrigger value="stats">📊 Statistics</TabsTrigger>
-          <TabsTrigger value="history">📚 History</TabsTrigger>
-          <TabsTrigger value="rewards">🏆 Rewards</TabsTrigger>
-        </TabsList>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-4 bg-gray-800/50 border border-green-500/20">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-green-600/20">
+              <Globe className="w-4 h-4 mr-2" />
+              Overview
+            </TabsTrigger>
+            <TabsTrigger value="stations" className="data-[state=active]:bg-blue-600/20">
+              <MapPin className="w-4 h-4 mr-2" />
+              Stations
+            </TabsTrigger>
+            <TabsTrigger value="profile" className="data-[state=active]:bg-purple-600/20">
+              <Users className="w-4 h-4 mr-2" />
+              My Profile
+            </TabsTrigger>
+            <TabsTrigger value="leaderboard" className="data-[state=active]:bg-yellow-600/20">
+              <Trophy className="w-4 h-4 mr-2" />
+              Leaderboard
+            </TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="ride" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="border-green-500/30 bg-green-900/20">
+          <TabsContent value="overview" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card className="bg-gradient-to-br from-green-900/30 to-black/50 border-green-500/30">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-green-400 flex items-center gap-2">
+                    <Bike className="w-5 h-5" />
+                    Total Stations
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-white mb-2">{bikeStations.length}</div>
+                  <p className="text-green-300 text-sm">Active network nodes</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-blue-900/30 to-black/50 border-blue-500/30">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-blue-400 flex items-center gap-2">
+                    <Zap className="w-5 h-5" />
+                    Energy Generated
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-white mb-2">2,228 kWh</div>
+                  <p className="text-blue-300 text-sm">Clean energy produced</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-purple-900/30 to-black/50 border-purple-500/30">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-purple-400 flex items-center gap-2">
+                    <Leaf className="w-5 h-5" />
+                    Carbon Offset
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-white mb-2">871 kg</div>
+                  <p className="text-purple-300 text-sm">CO₂ emissions prevented</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-yellow-900/30 to-black/50 border-yellow-500/30">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-yellow-400 flex items-center gap-2">
+                    <Users className="w-5 h-5" />
+                    Active Riders
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-white mb-2">1,847</div>
+                  <p className="text-yellow-300 text-sm">Community members</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-500/30">
               <CardHeader>
-                <CardTitle className="text-green-400 flex items-center gap-2">
-                  <Bike className="h-6 w-6" />
-                  GAIA Bike Status
+                <CardTitle className="text-white flex items-center gap-2">
+                  <MapPin className="w-5 h-5 text-green-400" />
+                  Ecosystem Map & Real-time Status
                 </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span>Battery Level</span>
-                  <span className="font-bold">{batteryLevel}%</span>
-                </div>
-                <Progress value={batteryLevel} className="w-full" />
-                
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span>Status:</span>
-                    <Badge className={isRiding ? 'bg-green-600' : 'bg-gray-600'}>
-                      {isRiding ? 'RIDING' : 'PARKED'}
-                    </Badge>
-                  </div>
-                  
-                  {currentSession && (
-                    <>
-                      <div className="flex items-center justify-between">
-                        <span>Current Distance:</span>
-                        <span className="font-bold">{currentSession.distance.toFixed(1)}km</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span>Tokens Earned:</span>
-                        <span className="font-bold">{currentSession.tokens_earned}</span>
-                      </div>
-                    </>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  {!isRiding ? (
-                    <Button onClick={startRide} className="w-full bg-green-600 hover:bg-green-700">
-                      <Play className="h-4 w-4 mr-2" />
-                      START RIDE
-                    </Button>
-                  ) : (
-                    <Button onClick={endRide} className="w-full bg-red-600 hover:bg-red-700">
-                      <Square className="h-4 w-4 mr-2" />
-                      END RIDE
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-blue-500/30 bg-blue-900/20">
-              <CardHeader>
-                <CardTitle className="text-blue-400 flex items-center gap-2">
-                  <MapPin className="h-6 w-6" />
-                  Live Tracking
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-                  <div className="text-center text-blue-300">
-                    {isRiding ? (
-                      <div className="space-y-2">
-                        <div className="animate-pulse text-lg">🗺️ TRACKING ACTIVE</div>
-                        <div>Route optimization enabled</div>
-                        <div>Real-time carbon impact calculation</div>
-                      </div>
-                    ) : (
-                      <div>Start a ride to enable live tracking</div>
-                    )}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-emerald-500/30 bg-emerald-900/20">
-              <CardHeader>
-                <CardTitle className="text-emerald-400 flex items-center gap-2">
-                  <Leaf className="h-6 w-6" />
-                  Eco Impact
-                </CardTitle>
+                <CardDescription className="text-gray-400">
+                  Live view of all GAIA bike stations and their current status
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3">
-                    <div className="text-emerald-300 text-sm space-y-1">
-                      <div>🌱 Trees Equivalent: {Math.floor(carbonSaved / 0.5)}</div>
-                      <div>🏭 Carbon Offset: {carbonSaved.toFixed(1)}kg CO2</div>
-                      <div>⚡ Energy Saved: {(totalDistance * 0.15).toFixed(1)}kWh</div>
-                      <div>🏃 Calories Burned: {Math.floor(totalDistance * 45)}</div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="stats" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card className="border-green-500/30 bg-green-900/20">
-              <CardContent className="p-4 text-center">
-                <Route className="h-8 w-8 mx-auto text-green-400 mb-2" />
-                <div className="text-2xl font-bold text-green-400">{totalDistance.toFixed(0)}km</div>
-                <div className="text-sm text-muted-foreground">Total Distance</div>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-blue-500/30 bg-blue-900/20">
-              <CardContent className="p-4 text-center">
-                <Zap className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-                <div className="text-2xl font-bold text-blue-400">{totalTokens.toLocaleString()}</div>
-                <div className="text-sm text-muted-foreground">GAIA Tokens</div>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-emerald-500/30 bg-emerald-900/20">
-              <CardContent className="p-4 text-center">
-                <Leaf className="h-8 w-8 mx-auto text-emerald-400 mb-2" />
-                <div className="text-2xl font-bold text-emerald-400">{carbonSaved.toFixed(1)}</div>
-                <div className="text-sm text-muted-foreground">kg CO2 Saved</div>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-purple-500/30 bg-purple-900/20">
-              <CardContent className="p-4 text-center">
-                <Trophy className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-                <div className="text-2xl font-bold text-purple-400">{userProfile.greenLevel}</div>
-                <div className="text-sm text-muted-foreground">Eco Level</div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="history" className="space-y-6">
-          <Card className="border-blue-500/30 bg-blue-900/20">
-            <CardHeader>
-              <CardTitle className="text-blue-400">Recent Bike Sessions</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {bikeSessions.length > 0 ? (
-                <div className="space-y-4">
-                  {bikeSessions.map((session) => (
-                    <div key={session.id} className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center gap-2">
-                          <Bike className="h-4 w-4 text-blue-400" />
-                          <span className="font-semibold text-blue-300">
-                            {session.bike_type === 'gaia_bike' ? '🚴 GAIA Bike' : '🚲 Regular Bike'}
-                          </span>
-                        </div>
-                        <Badge className="bg-green-600 text-xs">
-                          {session.distance.toFixed(1)}km
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {bikeStations.map((station) => (
+                    <div 
+                      key={station.id} 
+                      className="p-4 rounded-lg bg-gray-800/30 border border-gray-600/30 hover:border-green-500/50 transition-colors cursor-pointer"
+                      onClick={() => setSelectedStation(station.id)}
+                    >
+                      <div className="flex justify-between items-start mb-3">
+                        <h3 className="font-semibold text-white">{station.name}</h3>
+                        <Badge variant={getStatusBadgeVariant(station.status)} className="text-xs">
+                          {station.status}
                         </Badge>
                       </div>
+                      <p className="text-gray-400 text-sm mb-3">{station.location}</p>
                       
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-blue-300">
-                        <div>
-                          <Timer className="h-3 w-3 inline mr-1" />
-                          {new Date(session.start_time).toLocaleDateString()}
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-300">Available Bikes</span>
+                          <span className="text-green-400 font-medium">
+                            {station.availableBikes}/{station.totalSlots}
+                          </span>
                         </div>
-                        <div>
-                          <Zap className="h-3 w-3 inline mr-1" />
-                          {session.tokens_earned} tokens
-                        </div>
-                        <div>
-                          <Leaf className="h-3 w-3 inline mr-1" />
-                          {session.eco_impact.toFixed(2)}kg CO2
-                        </div>
-                        <div>
-                          <Target className="h-3 w-3 inline mr-1" />
-                          {session.status}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center text-muted-foreground py-8">
-                  No bike sessions recorded yet. Start your first ride!
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="rewards" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="border-yellow-500/30 bg-yellow-900/20">
-              <CardHeader>
-                <CardTitle className="text-yellow-400 flex items-center gap-2">
-                  <Award className="h-6 w-6" />
-                  Daily Challenges
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-yellow-300">Ride 10km today</span>
-                    <Badge className="bg-yellow-600">500 tokens</Badge>
-                  </div>
-                  <Progress value={65} className="w-full" />
-                  <div className="text-xs text-yellow-400 mt-1">6.5km / 10km</div>
-                </div>
-                
-                <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-yellow-300">Save 2kg CO2</span>
-                    <Badge className="bg-yellow-600">300 tokens</Badge>
-                  </div>
-                  <Progress value={80} className="w-full" />
-                  <div className="text-xs text-yellow-400 mt-1">1.6kg / 2kg</div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-purple-500/30 bg-purple-900/20">
-              <CardHeader>
-                <CardTitle className="text-purple-400 flex items-center gap-2">
-                  <Trophy className="h-6 w-6" />
-                  Achievements
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {userProfile.badges.slice(0, 3).map((badge) => (
-                    <div key={badge.id} className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <span className="text-lg">{badge.iconUrl}</span>
+                        <Progress 
+                          value={(station.availableBikes / station.totalSlots) * 100} 
+                          className="h-2 bg-gray-700"
+                        />
+                        
+                        <div className="grid grid-cols-2 gap-4 mt-3 text-xs">
                           <div>
-                            <div className="font-semibold text-purple-300">{badge.name}</div>
-                            <div className="text-xs text-purple-400">{badge.description}</div>
+                            <span className="text-gray-400">Energy:</span>
+                            <span className="text-blue-400 ml-1">{station.energyGenerated} kWh</span>
+                          </div>
+                          <div>
+                            <span className="text-gray-400">Carbon:</span>
+                            <span className="text-green-400 ml-1">{station.carbonOffset} kg</span>
                           </div>
                         </div>
-                        {badge.earned && (
-                          <Badge className="bg-purple-600 text-xs">Earned</Badge>
-                        )}
                       </div>
                     </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
-          </div>
-        </TabsContent>
-      </Tabs>
+          </TabsContent>
+
+          <TabsContent value="stations" className="space-y-6">
+            <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-500/30">
+              <CardHeader>
+                <CardTitle className="text-white">Station Management</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Detailed view and control of all bike stations
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {bikeStations.map((station) => (
+                    <div 
+                      key={station.id}
+                      className="p-6 rounded-lg bg-gray-800/30 border border-gray-600/30"
+                    >
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h3 className="text-xl font-semibold text-white mb-1">{station.name}</h3>
+                          <p className="text-gray-400">{station.location}</p>
+                        </div>
+                        <div className="text-right">
+                          <Badge variant={getStatusBadgeVariant(station.status)} className="mb-2">
+                            {station.status.toUpperCase()}
+                          </Badge>
+                          <p className={`text-sm font-medium ${getStatusColor(station.status)}`}>
+                            {station.status === 'active' ? 'Operational' : 
+                             station.status === 'maintenance' ? 'Under Maintenance' : 'Offline'}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div className="text-center p-3 bg-green-900/20 rounded-lg border border-green-500/20">
+                          <div className="text-2xl font-bold text-green-400">{station.availableBikes}</div>
+                          <div className="text-xs text-green-300">Available Bikes</div>
+                        </div>
+                        <div className="text-center p-3 bg-blue-900/20 rounded-lg border border-blue-500/20">
+                          <div className="text-2xl font-bold text-blue-400">{station.totalSlots}</div>
+                          <div className="text-xs text-blue-300">Total Slots</div>
+                        </div>
+                        <div className="text-center p-3 bg-yellow-900/20 rounded-lg border border-yellow-500/20">
+                          <div className="text-2xl font-bold text-yellow-400">{station.energyGenerated}</div>
+                          <div className="text-xs text-yellow-300">kWh Generated</div>
+                        </div>
+                        <div className="text-center p-3 bg-purple-900/20 rounded-lg border border-purple-500/20">
+                          <div className="text-2xl font-bold text-purple-400">{station.carbonOffset}</div>
+                          <div className="text-xs text-purple-300">kg CO₂ Offset</div>
+                        </div>
+                      </div>
+
+                      <div className="mt-4 flex gap-2">
+                        <Button size="sm" variant="outline" className="border-green-500/30 text-green-400 hover:bg-green-500/10">
+                          <MapPin className="w-4 h-4 mr-2" />
+                          View Details
+                        </Button>
+                        <Button size="sm" variant="outline" className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10">
+                          <Zap className="w-4 h-4 mr-2" />
+                          Energy Stats
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="profile" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-500/30">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Users className="w-5 h-5 text-green-400" />
+                    Rider Profile
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-green-400 mb-2">Level {userStats.level}</div>
+                    <p className="text-gray-400">Eco Cycling Champion</p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">Total Rides</span>
+                      <span className="text-white font-semibold">{userStats.totalRides}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">Distance Traveled</span>
+                      <span className="text-blue-400 font-semibold">{userStats.distanceTraveled} km</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">Energy Generated</span>
+                      <span className="text-yellow-400 font-semibold">{userStats.energyGenerated} kWh</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">Carbon Saved</span>
+                      <span className="text-green-400 font-semibold">{userStats.carbonSaved} kg CO₂</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">GAIA Tokens Earned</span>
+                      <span className="text-purple-400 font-semibold">{userStats.tokensEarned} GAT</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-500/30">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Award className="w-5 h-5 text-gold-400" />
+                    Achievements
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-3">
+                    {userStats.achievements.map((achievement, index) => (
+                      <div key={index} className="p-3 rounded-lg bg-gray-800/30 border border-gray-600/30 text-center">
+                        <Star className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
+                        <p className="text-sm text-white font-medium">{achievement}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="leaderboard" className="space-y-6">
+            <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-500/30">
+              <CardHeader>
+                <CardTitle className="text-white flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-gold-400" />
+                  Global Leaderboard
+                </CardTitle>
+                <CardDescription className="text-gray-400">
+                  Top performers in the GAIA Bike Ecosystem
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { rank: 1, name: 'EcoRider23', distance: 1247.8, tokens: 8934, level: 12 },
+                    { rank: 2, name: 'GreenCommuter', distance: 1156.4, tokens: 8234, level: 11 },
+                    { rank: 3, name: 'BikeWarrior', distance: 1089.2, tokens: 7823, level: 10 },
+                    { rank: 4, name: 'SustainableSarah', distance: 967.5, tokens: 6945, level: 9 },
+                    { rank: 5, name: 'CarbonCrusher', distance: 834.7, tokens: 5978, level: 8 },
+                  ].map((rider) => (
+                    <div key={rider.rank} className="flex items-center justify-between p-4 rounded-lg bg-gray-800/30 border border-gray-600/30">
+                      <div className="flex items-center gap-4">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
+                          rider.rank === 1 ? 'bg-yellow-500 text-black' :
+                          rider.rank === 2 ? 'bg-gray-400 text-black' :
+                          rider.rank === 3 ? 'bg-amber-600 text-white' :
+                          'bg-gray-600 text-white'
+                        }`}>
+                          {rider.rank}
+                        </div>
+                        <div>
+                          <h3 className="text-white font-semibold">{rider.name}</h3>
+                          <p className="text-gray-400 text-sm">Level {rider.level}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-blue-400 font-semibold">{rider.distance} km</div>
+                        <div className="text-purple-400 text-sm">{rider.tokens} GAT</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   )
 }

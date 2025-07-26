@@ -9,7 +9,7 @@ import {
   NavigationMenuTrigger 
 } from '@/components/ui/navigation-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Menu, Leaf, Users, BarChart3, Target, Globe, Sparkles, TreePine, Flame, Coins, Handshake, Video, Brain, Settings, Shield, Rocket } from 'lucide-react'
+import { Menu, Leaf, Users, BarChart3, Target, Globe, TreePine, Settings, Rocket } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 
 export function Navbar() {
