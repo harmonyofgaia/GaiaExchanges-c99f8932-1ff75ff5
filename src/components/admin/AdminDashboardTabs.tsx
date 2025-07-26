@@ -55,33 +55,15 @@ import { AdminDashboardTabsErrorBoundary } from './AdminDashboardTabsErrorBounda
 import { AdminTabLoading, AdminTabInlineLoading } from './AdminTabLoading'
 
 // Lazy load all tab components for better performance
-const AdminControlSystem = React.lazy(() => 
-  import('@/components/AdminControlSystem').then(module => ({ default: module.AdminControlSystem }))
-)
-const RefactoredAdminTools = React.lazy(() => 
-  import('./RefactoredAdminTools').then(module => ({ default: module.RefactoredAdminTools }))
-)
-const UltimateSecurity = React.lazy(() => 
-  import('./UltimateSecurity').then(module => ({ default: module.UltimateSecurity }))
-)
-const AdminRecoveryPortal = React.lazy(() => 
-  import('../security/AdminRecoveryPortal').then(module => ({ default: module.AdminRecoveryPortal }))
-)
-const PlanRecoverySystem = React.lazy(() => 
-  import('./PlanRecoverySystem').then(module => ({ default: module.PlanRecoverySystem }))
-)
-const HolisticAnalysis = React.lazy(() => 
-  import('./HolisticAnalysis').then(module => ({ default: module.HolisticAnalysis }))
-)
-const AnimalWelfareControlPanel = React.lazy(() => 
-  import('./AnimalWelfareControlPanel').then(module => ({ default: module.AnimalWelfareControlPanel }))
-)
-const AdminVisualControls = React.lazy(() => 
-  import('./AdminVisualControls').then(module => ({ default: module.AdminVisualControls }))
-)
-const SecureAdminQuantumIAEnginePanel = React.lazy(() => 
-  import('../SecureAdminQuantumIAEnginePanel').then(module => ({ default: module.SecureAdminQuantumIAEnginePanel }))
-)
+const AdminControlSystem = React.lazy(() => import('@/components/AdminControlSystem'))
+const RefactoredAdminTools = React.lazy(() => import('./RefactoredAdminTools'))
+const UltimateSecurity = React.lazy(() => import('./UltimateSecurity'))
+const AdminRecoveryPortal = React.lazy(() => import('../security/AdminRecoveryPortal'))
+const PlanRecoverySystem = React.lazy(() => import('./PlanRecoverySystem'))
+const HolisticAnalysis = React.lazy(() => import('./HolisticAnalysis'))
+const AnimalWelfareControlPanel = React.lazy(() => import('./AnimalWelfareControlPanel'))
+const AdminVisualControls = React.lazy(() => import('./AdminVisualControls'))
+const SecureAdminQuantumIAEnginePanel = React.lazy(() => import('../SecureAdminQuantumIAEnginePanel'))
 
 /**
  * Tab configuration interface for type safety and maintainability
