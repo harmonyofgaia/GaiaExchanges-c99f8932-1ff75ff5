@@ -69,7 +69,7 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-black via-blue-900 to-teal-900 text-white">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Router>

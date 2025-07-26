@@ -53,7 +53,7 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="text-2xl animate-pulse">🌍</div>
-            <span className="font-bold text-xl bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="font-bold text-xl bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
               GAIA
             </span>
           </Link>
@@ -69,7 +69,7 @@ export function Navbar() {
                     size="sm"
                     className={`flex items-center space-x-1 ${
                       isActive(item.to)
-                        ? 'bg-green-600 text-white'
+                        ? 'bg-blue-600 text-white'
                         : 'text-gray-300 hover:text-white hover:bg-white/10'
                     }`}
                   >
@@ -91,7 +91,7 @@ export function Navbar() {
                       size="sm"
                       className={`flex items-center space-x-1 ${
                         isActive(item.to)
-                          ? 'bg-red-600 text-white'
+                          ? 'bg-teal-600 text-white'
                           : 'text-gray-300 hover:text-white hover:bg-white/10'
                       }`}
                     >
@@ -128,7 +128,7 @@ export function Navbar() {
                     onClick={() => setIsOpen(false)}
                     className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive(item.to)
-                        ? 'bg-green-600 text-white'
+                        ? 'bg-blue-600 text-white'
                         : 'text-gray-300 hover:text-white hover:bg-white/10'
                     }`}
                   >

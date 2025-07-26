@@ -111,7 +111,7 @@ const SlidingMenu = () => {
       {/* Menu Toggle Button - Always visible */}
       <Button
         onClick={toggleMenu}
-        className="fixed top-4 left-4 z-50 bg-purple-600 hover:bg-purple-700 text-white p-2 rounded-lg shadow-lg transition-all duration-300"
+        className="fixed top-4 left-4 z-50 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg shadow-lg transition-all duration-300"
         size="sm"
       >
         {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -127,17 +127,17 @@ const SlidingMenu = () => {
 
       {/* Sliding Menu */}
       <div
-        className={`fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-purple-900/95 to-blue-900/95 backdrop-blur-md border-r border-purple-500/30 z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-blue-900/95 to-teal-900/95 backdrop-blur-md border-r border-blue-500/30 z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="flex flex-col h-full">
           {/* Header with space for toggle button */}
-          <div className="p-4 pt-16 border-b border-purple-500/30">
+          <div className="p-4 pt-16 border-b border-blue-500/30">
             <div className="flex items-center gap-3">
               <div className="text-3xl">🌍</div>
               <div>
-                <h2 className="text-purple-400 font-bold text-xl">GAiA Universe</h2>
+                <h2 className="text-blue-400 font-bold text-xl">GAiA Universe</h2>
                 <p className="text-sm text-muted-foreground">Harmony of Culture</p>
               </div>
             </div>
@@ -156,8 +156,8 @@ const SlidingMenu = () => {
                       to={item.path}
                       className={`flex items-center gap-3 px-6 py-4 mx-2 rounded-lg transition-all duration-200 ${
                         isActive
-                          ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-lg'
-                          : 'text-gray-300 hover:bg-purple-500/10 hover:text-purple-400'
+                          ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30 shadow-lg'
+                          : 'text-gray-300 hover:bg-blue-500/10 hover:text-blue-400'
                       }`}
                     >
                       <Icon className="h-5 w-5 flex-shrink-0" />
@@ -171,12 +171,12 @@ const SlidingMenu = () => {
           </nav>
 
           {/* Footer */}
-          <div className="p-4 border-t border-purple-500/30">
+          <div className="p-4 border-t border-blue-500/30">
             <div className="text-center">
               <p className="text-xs text-muted-foreground">
                 GAiA Platform v3.0
               </p>
-              <p className="text-xs text-purple-400">
+              <p className="text-xs text-blue-400">
                 Harmony of Culture + AI Evolution
               </p>
               {isAuthorizedIP && (

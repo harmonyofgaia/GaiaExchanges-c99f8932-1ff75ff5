@@ -64,14 +64,14 @@ export default function Index() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-black via-blue-900 to-teal-900 text-white">
       <Navbar />
       
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <div className="text-8xl mb-6 animate-bounce">🌍</div>
-          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
             Harmony of Gaia
           </h1>
           <p className="text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
@@ -80,15 +80,15 @@ export default function Index() {
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Badge variant="outline" className="border-green-500/50 text-green-400 text-lg px-4 py-2">
+            <Badge variant="outline" className="border-blue-500/50 text-blue-400 text-lg px-4 py-2">
               <Leaf className="h-4 w-4 mr-2" />
               Carbon Negative
             </Badge>
-            <Badge variant="outline" className="border-blue-500/50 text-blue-400 text-lg px-4 py-2">
+            <Badge variant="outline" className="border-teal-500/50 text-teal-400 text-lg px-4 py-2">
               <Shield className="h-4 w-4 mr-2" />
               Community Governed
             </Badge>
-            <Badge variant="outline" className="border-purple-500/50 text-purple-400 text-lg px-4 py-2">
+            <Badge variant="outline" className="border-cyan-500/50 text-cyan-400 text-lg px-4 py-2">
               <Users className="h-4 w-4 mr-2" />
               125k+ Members
             </Badge>
@@ -97,7 +97,7 @@ export default function Index() {
           <div className="flex flex-wrap justify-center gap-4">
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold px-8 py-4 text-lg"
+              className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white font-bold px-8 py-4 text-lg"
             >
               <TreePine className="h-5 w-5 mr-2" />
               Start Your Journey
@@ -135,7 +135,7 @@ export default function Index() {
         {/* Gaming Hub */}
         <div className="mb-16">
           <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent mb-4">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent mb-4">
               🎮 GAIA Gaming Universe
             </h2>
             <p className="text-xl text-muted-foreground">
@@ -147,34 +147,34 @@ export default function Index() {
 
         {/* Statistics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
-          <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20 text-center">
+          <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20 text-center">
             <CardContent className="p-6">
-              <div className="text-4xl font-bold text-green-400 mb-2">12.4K</div>
+              <div className="text-4xl font-bold text-blue-400 mb-2">12.4K</div>
               <div className="text-muted-foreground">Tons CO₂ Offset</div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20 text-center">
+          <Card className="bg-gradient-to-br from-teal-900/20 to-black/50 border-teal-500/20 text-center">
             <CardContent className="p-6">
-              <div className="text-4xl font-bold text-blue-400 mb-2">247</div>
+              <div className="text-4xl font-bold text-teal-400 mb-2">247</div>
               <div className="text-muted-foreground">Active Projects</div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-purple-900/20 to-black/50 border-purple-500/20 text-center">
+          <Card className="bg-gradient-to-br from-cyan-900/20 to-black/50 border-cyan-500/20 text-center">
             <CardContent className="p-6">
-              <div className="text-4xl font-bold text-purple-400 mb-2">89K</div>
+              <div className="text-4xl font-bold text-cyan-400 mb-2">89K</div>
               <div className="text-muted-foreground">Trees Planted</div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-orange-900/20 to-black/50 border-orange-500/20 text-center">
+          <Card className="bg-gradient-to-br from-sky-900/20 to-black/50 border-sky-500/20 text-center">
             <CardContent className="p-6">
-              <div className="text-4xl font-bold text-orange-400 mb-2">$2.4M</div>
+              <div className="text-4xl font-bold text-sky-400 mb-2">$2.4M</div>
               <div className="text-muted-foreground">Funds Raised</div>
             </CardContent>
           </Card>
         </div>
 
         {/* Call to Action */}
-        <Card className="bg-gradient-to-r from-green-900/30 to-blue-900/30 border-green-500/20">
+        <Card className="bg-gradient-to-r from-blue-900/30 to-teal-900/30 border-blue-500/20">
           <CardContent className="p-12 text-center">
             <h2 className="text-3xl font-bold text-white mb-4">
               Ready to Make a Difference? 🌱
@@ -184,7 +184,7 @@ export default function Index() {
             </p>
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold px-12 py-6 text-xl"
+              className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white font-bold px-12 py-6 text-xl"
             >
               <Heart className="h-6 w-6 mr-3" />
               Join the Movement
