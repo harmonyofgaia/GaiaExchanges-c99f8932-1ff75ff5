@@ -85,6 +85,7 @@ const SlidingMenu = () => {
     { icon: Leaf, label: 'Green Investments', path: '/green-investments', category: 'projects' },
     { icon: Coins, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
     { icon: Shield, label: 'Gaia Private Blockchain Swap Token', path: '/gaia-private-blockchain-swap-token', category: 'security' },
+    { icon: Activity, label: 'Deployment Status', path: '/deployment-status', category: 'admin' },
     { icon: Settings, label: 'Secure Admin', path: '/secure-admin', category: 'admin' }
   ]
 
