@@ -44,10 +44,16 @@ if [ ! -f .env ]; then
 fi
 
 # Check for placeholder values in .env and warn if found
-if grep -q "placeholder" .env || grep -q "your-project-id" .env; then
+if grep -q "placeholder" .env || grep -q "your-project-id" .env || grep -q "your-supabase-anonymous-key" .env; then
     print_warning "⚠️  Environment file contains placeholder values!"
     print_warning "Update .env with actual values for production deployment."
     print_warning "For automated deployment, use GitHub Secrets or platform environment variables."
+    
+    # Create backup .env with placeholders for reference
+    if [ ! -f .env.backup ]; then
+        cp .env .env.backup
+        print_status "Created .env.backup with current values for reference"
+    fi
 fi
 
 # Install dependencies
@@ -55,8 +61,18 @@ print_status "Installing dependencies..."
 if npm install --legacy-peer-deps; then
     print_success "Dependencies installed successfully"
 else
-    print_error "Failed to install dependencies"
-    exit 1
+    print_warning "Standard install failed, trying alternative methods..."
+    
+    # Try different npm install approaches
+    if npm ci --legacy-peer-deps; then
+        print_success "Dependencies installed via npm ci"
+    elif npm install --force; then
+        print_success "Dependencies installed with --force flag"
+    else
+        print_error "All dependency installation methods failed"
+        print_error "Try manually: npm install --legacy-peer-deps"
+        exit 1
+    fi
 fi
 
 # Run linting (continue on error)
@@ -91,42 +107,77 @@ PLATFORM=${1:-"manual"}
 case $PLATFORM in
     "vercel")
         print_status "Deploying to Vercel..."
+        
+        # Check if project is linked to Vercel
+        if [ ! -f .vercel/project.json ]; then
+            print_status "Project not linked to Vercel. Setting up..."
+            print_status "You may need to run 'vercel link' first for team projects"
+        fi
+        
         if command -v vercel &> /dev/null; then
             print_status "Using local Vercel CLI..."
-            vercel --prod
-            print_success "Deployed to Vercel successfully"
+            if vercel --prod; then
+                print_success "Deployed to Vercel successfully"
+            else
+                print_error "Vercel deployment failed with local CLI"
+                exit 1
+            fi
         elif npx vercel --version &> /dev/null; then
             print_status "Using npx vercel..."
-            npx vercel --prod
-            print_success "Deployed to Vercel successfully"
+            if npx vercel --prod; then
+                print_success "Deployed to Vercel successfully"
+            else
+                print_error "Vercel deployment failed with npx"
+                exit 1
+            fi
         else
             print_warning "Vercel CLI not found locally. Attempting to install via npx..."
             if npx vercel@latest --prod; then
                 print_success "Deployed to Vercel successfully"
             else
-                print_error "Vercel deployment failed. Install CLI: npm install -g vercel"
-                print_status "Or deploy manually: 1) Install Vercel CLI, 2) Run 'vercel --prod'"
+                print_error "Vercel deployment failed. Please ensure:"
+                print_error "1. Install CLI: npm install -g vercel"
+                print_error "2. Login: vercel login"
+                print_error "3. Link project: vercel link"
+                print_status "Or deploy manually: Upload dist/ folder to Vercel dashboard"
                 exit 1
             fi
         fi
         ;;
     "netlify")
         print_status "Deploying to Netlify..."
+        
+        # Check if site is linked to Netlify
+        if [ ! -f .netlify/state.json ]; then
+            print_status "Site not linked to Netlify. You may need to run 'netlify link' first"
+        fi
+        
         if command -v netlify &> /dev/null; then
             print_status "Using local Netlify CLI..."
-            netlify deploy --prod --dir=dist
-            print_success "Deployed to Netlify successfully"
+            if netlify deploy --prod --dir=dist; then
+                print_success "Deployed to Netlify successfully"
+            else
+                print_error "Netlify deployment failed with local CLI"
+                exit 1
+            fi
         elif npx netlify-cli --version &> /dev/null; then
             print_status "Using npx netlify-cli..."
-            npx netlify-cli deploy --prod --dir=dist
-            print_success "Deployed to Netlify successfully"
+            if npx netlify-cli deploy --prod --dir=dist; then
+                print_success "Deployed to Netlify successfully"
+            else
+                print_error "Netlify deployment failed with npx"
+                exit 1
+            fi
         else
             print_warning "Netlify CLI not found locally. Attempting to install via npx..."
             if npx netlify-cli@latest deploy --prod --dir=dist; then
                 print_success "Deployed to Netlify successfully"
             else
-                print_error "Netlify deployment failed. Install CLI: npm install -g netlify-cli"
-                print_status "Or deploy manually: 1) Install Netlify CLI, 2) Run 'netlify deploy --prod --dir=dist'"
+                print_error "Netlify deployment failed. Please ensure:"
+                print_error "1. Install CLI: npm install -g netlify-cli"
+                print_error "2. Login: netlify login"
+                print_error "3. Link site: netlify link"
+                print_status "Or deploy manually: Drag dist/ folder to Netlify dashboard"
                 exit 1
             fi
         fi

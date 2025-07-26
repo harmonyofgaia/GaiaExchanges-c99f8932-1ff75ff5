@@ -42,11 +42,13 @@ const DeploymentStatus = () => {
   };
 
   const deploymentCommands = {
+    complete: 'npm run deploy:complete',
     vercel: 'npm run deploy:vercel',
     netlify: 'npm run deploy:netlify',
     githubPages: 'npm run deploy:github-pages',
     static: 'npm run deploy:static',
     auto: 'npm run deploy:auto',
+    doctor: 'npm run deploy:doctor',
     manual: './scripts/deploy.sh'
   };
 
@@ -255,6 +257,12 @@ const DeploymentStatus = () => {
                       <p className="text-sm text-gray-600 mt-1">Deploy to your own infrastructure</p>
                     </div>
                   </Button>
+                  <Button variant="outline" className="h-auto p-4 justify-start">
+                    <div className="text-left">
+                      <h3 className="font-semibold">Deployment Doctor</h3>
+                      <p className="text-sm text-gray-600 mt-1">Diagnose and fix deployment issues</p>
+                    </div>
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -271,11 +279,17 @@ const DeploymentStatus = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
+              <Button variant="outline" size="sm" onClick={() => copyToClipboard('npm run deploy:complete')}>
+                Complete Deploy
+              </Button>
               <Button variant="outline" size="sm" onClick={() => copyToClipboard('npm run build')}>
                 Build App
               </Button>
               <Button variant="outline" size="sm" onClick={() => copyToClipboard('npm run preview')}>
                 Preview Build
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => copyToClipboard('npm run deploy:doctor')}>
+                Run Doctor
               </Button>
               <Button variant="outline" size="sm" onClick={() => copyToClipboard('./scripts/pre-deploy-check.sh')}>
                 Run Checks

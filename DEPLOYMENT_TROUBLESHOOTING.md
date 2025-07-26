@@ -1,5 +1,14 @@
 # Deployment Troubleshooting Guide
 
+## Quick Diagnosis
+
+🩺 **Run the Deployment Doctor first for instant diagnosis:**
+```bash
+npm run deploy:doctor
+```
+
+This will automatically detect and provide solutions for most common issues.
+
 ## Common Deployment Issues and Solutions
 
 ### 1. Environment Variable Issues
@@ -27,21 +36,24 @@ VITE_SUPABASE_ANON_KEY=your-actual-anonymous-key
 
 **Solutions**:
 
-**Option 1 - Install globally**:
+**Option 1 - Use our deployment scripts (recommended)**:
+```bash
+# These scripts automatically handle CLI tool installation
+npm run deploy:vercel    # Uses npx if CLI not installed
+npm run deploy:netlify   # Uses npx if CLI not installed
+npm run deploy:auto      # Runs checks and deploys
+```
+
+**Option 2 - Install globally**:
 ```bash
 npm install -g vercel
 npm install -g netlify-cli
 ```
 
-**Option 2 - Use npx (recommended)**:
+**Option 3 - Use npx directly**:
 ```bash
 npx vercel --prod
 npx netlify-cli deploy --prod --dir=dist
-```
-
-**Option 3 - Deploy script handles this automatically**:
-```bash
-./scripts/deploy.sh vercel  # Will try npx if CLI not found
 ```
 
 ### 3. Build Failures
@@ -50,6 +62,9 @@ npx netlify-cli deploy --prod --dir=dist
 
 **Diagnosis**:
 ```bash
+# Run comprehensive diagnostic first
+npm run deploy:doctor
+
 # Run pre-deployment check
 npm run pre-deploy
 
@@ -61,6 +76,7 @@ npm run build 2>&1 | grep -i error
 - **Linting errors**: Run `npm run lint:fix` or set `SKIP_LINT=true`
 - **TypeScript errors**: Fix type issues or update tsconfig.json
 - **Memory issues**: Increase Node.js memory: `NODE_OPTIONS=--max-old-space-size=4096 npm run build`
+- **Dependency issues**: Use `npm install --legacy-peer-deps`
 
 ### 4. GitHub Actions Deployment Issues
 
@@ -203,8 +219,17 @@ npm run deploy:static
 ## Quick Commands Reference
 
 ```bash
+# Comprehensive deployment with full validation
+npm run deploy:complete
+
 # Full deployment with checks
 npm run deploy:auto
+
+# Diagnose deployment issues
+npm run deploy:doctor
+
+# Validate deployment after completion
+npm run deploy:validate
 
 # Platform-specific deployments
 npm run deploy:vercel
@@ -212,7 +237,7 @@ npm run deploy:netlify
 npm run deploy:github-pages
 npm run deploy:static
 
-# Diagnostics
+# Diagnostics and maintenance
 npm run pre-deploy
 npm run build
 npm run preview

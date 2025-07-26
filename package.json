@@ -20,7 +20,10 @@
     "deploy:static": "./scripts/deploy.sh static",
     "pre-deploy": "./scripts/pre-deploy-check.sh",
     "post-deploy": "echo 'Deployment completed! Please verify your application is working correctly.'",
-    "deploy:auto": "./scripts/pre-deploy-check.sh && ./scripts/deploy.sh"
+    "deploy:auto": "./scripts/pre-deploy-check.sh && ./scripts/deploy.sh",
+    "deploy:doctor": "./scripts/deployment-doctor.sh",
+    "deploy:validate": "./scripts/post-deploy-validate.sh",
+    "deploy:complete": "npm run deploy:doctor && npm run deploy:auto && npm run deploy:validate"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.0",
