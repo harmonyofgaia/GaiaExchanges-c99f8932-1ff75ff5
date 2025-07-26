@@ -70,70 +70,23 @@ export function SystemDiagnosticsModule() {
   const [prAnalyses, setPrAnalyses] = useState<PRAnalysis[]>([])
   const [fixedIssues, setFixedIssues] = useState(0)
 
-  // Simulate PR analysis data from recent activity
+  // Fetch PR analysis data from the API
   useEffect(() => {
-    const simulatedPRs: PRAnalysis[] = [
-      {
-        id: 17,
-        title: "GAIA IA Tool with comprehensive invisible background services",
-        status: 'merged',
-        issues: [
-          {
-            type: 'warning',
-            description: 'TypeScript any types detected in services',
-            file: 'src/services/githubScanner.ts',
-            line: 45,
-            severity: 'medium',
-            fixable: true
-          }
-        ],
-        missingFeatures: [],
-        buildStatus: 'pass',
-        conflictCount: 0,
-        author: 'Copilot',
-        date: new Date('2025-07-22T22:35:21Z')
-      },
-      {
-        id: 16,
-        title: "Comprehensive authentication system with protected routes",
-        status: 'merged',
-        issues: [
-          {
-            type: 'missing',
-            description: 'Password strength validation missing',
-            file: 'src/pages/Auth.tsx',
-            severity: 'medium',
-            fixable: true
-          }
-        ],
-        missingFeatures: ['2FA Integration', 'Password Recovery'],
-        buildStatus: 'pass',
-        conflictCount: 0,
-        author: 'Copilot',
-        date: new Date('2025-07-22T18:16:00Z')
-      },
-      {
-        id: 14,
-        title: "Lazy loading navigation and Master Plan v7 features",
-        status: 'merged',
-        issues: [
-          {
-            type: 'error',
-            description: 'Missing export in nav-items.tsx',
-            file: 'src/nav-items.tsx',
-            severity: 'high',
-            fixable: true
-          }
-        ],
-        missingFeatures: ['AI Mission Generator', 'Satellite Verification'],
-        buildStatus: 'warning',
-        conflictCount: 2,
-        author: 'Copilot',
-        date: new Date('2025-07-22T16:51:02Z')
+    async function fetchPRAnalysisData() {
+      try {
+        const response = await fetch('/api/pr-analysis') // Replace with actual API endpoint
+        if (!response.ok) {
+          throw new Error(`Error fetching PR analysis data: ${response.statusText}`)
+        }
+        const data: PRAnalysis[] = await response.json()
+        setPrAnalyses(data)
+      } catch (error) {
+        console.error(error)
+        toast.error('Failed to fetch PR analysis data. Please try again later.')
       }
-    ]
+    }
 
-    setPrAnalyses(simulatedPRs)
+    fetchPRAnalysisData()
   }, [])
 
   const performDeepScan = async () => {
