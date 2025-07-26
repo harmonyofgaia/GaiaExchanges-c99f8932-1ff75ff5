@@ -52,16 +52,16 @@ export function EnhancedSwapSystem() {
   // Get current swap pair
   const currentPair = swapPairs.find(pair => pair.from === fromToken && pair.to === toToken)
 
-  // Fetch user configuration
-  const fetchUserConfig = async () => {
-    console.log('📊 Enhanced Swap System: Fetching user configuration')
-    return userConfig
-  }
-
   useEffect(() => {
     console.log('💱 ENHANCED SWAP SYSTEM - MULTI-DEX AGGREGATION ACTIVE')
     console.log('🌐 Connected to GAiA Token:', GAIA_TOKEN.CONTRACT_ADDRESS)
     console.log('⚡ 15x Faster Swaps Than Traditional DEXs')
+    
+    // Fetch user configuration
+    const fetchUserConfig = async () => {
+      console.log('📊 Enhanced Swap System: Fetching user configuration')
+      return userConfig
+    }
     
     fetchUserConfig()
     
