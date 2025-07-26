@@ -117,7 +117,7 @@ export function ThemeSelector() {
             </DropdownMenuItem>
           ))}
           
-          <DropdownMenuSeparator className="bg-green-500/30" />
+          <DropdownMenuSeparator className="bg-theme-separator" />
           
           <div className="px-2 py-1 text-xs text-gray-500">
             Current: {AVAILABLE_THEMES[currentTheme as ThemeName]?.name || currentTheme}
