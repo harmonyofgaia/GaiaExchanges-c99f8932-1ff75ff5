@@ -5,7 +5,8 @@ export const GAIA_BRANDING = {
   DESCRIPTION: 'Best reinvestment in green projects and sustainable blockchain technology',
   LOGO_URL: '/gaia-logo.svg',
   TOKEN_SYMBOL: 'GAiA',
-  TOKEN_NAME: 'GAiA Token',
+  TOKEN_NAME: 'GAiA Token - Mother Token',
+  TOKEN_DESCRIPTION: 'The Official Mother Token of Harmony of Gaia',
   OFFICIAL_WEBSITE: 'https://www.gaiaexchanges.net',
   BRAND_COLORS: {
     primary: 'hsl(142, 76%, 36%)',

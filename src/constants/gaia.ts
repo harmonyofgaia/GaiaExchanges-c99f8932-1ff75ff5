@@ -3,7 +3,7 @@ export const GAIA_TOKEN = {
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   SYMBOL: 'GAiA',
-  NAME: 'GAiA Token - Harmony of Culture',
+  NAME: 'GAiA Token - Harmony of Culture (Mother Token)',
   DECIMALS: 9,
   NETWORK: 'Solana',
   PUMP_FUN_URL: 'https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
@@ -25,9 +25,10 @@ export const GAIA_TOKEN = {
   TREES_PLANTED_TOTAL: 50000,
   OCEAN_CLEANUP_CONTRIBUTION: 25000, // USD
   
-  // Brand messaging
-  BRAND_STATEMENT: 'We Are a Strong Creative Open Minded Circuit To Happiness - Seeds Will form in to Music',
-  OFFICIAL_DISCLAIMER: 'This is the ONLY official GAiA Token. Verify contract address before trading.',
+  // Brand messaging - Mother Token
+  BRAND_STATEMENT: 'GAiA - The Official Mother Token of Harmony of Gaia - We Are a Strong Creative Open Minded Circuit To Happiness - Seeds Will form in to Music',
+  OFFICIAL_DISCLAIMER: 'This is the ONLY official GAiA Mother Token. Verify contract address before trading.',
+  MOTHER_TOKEN_STATUS: 'GAiA is the officially branded Mother Token across the Gaia platform',
 }
 
 export const GAIA_METRICS = {

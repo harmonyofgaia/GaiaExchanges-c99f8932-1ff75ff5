@@ -8,7 +8,7 @@ import { ArrowUpDown, Zap, DollarSign, Shield, Sparkles } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 const supportedTokens = [
-  { name: 'Harmony of Gaia', symbol: 'GAiA', icon: '🌍', fee: 0, address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh' },
+  { name: 'Harmony of Gaia (Mother Token)', symbol: 'GAiA', icon: '🌍', fee: 0, address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh' },
   { name: 'Bitcoin', symbol: 'BTC', icon: '₿', fee: 0.0001, address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' },
   { name: 'Ethereum', symbol: 'ETH', icon: 'Ξ', fee: 0.001, address: '0x0000000000000000000000000000000000000000' },
   { name: 'Solana', symbol: 'SOL', icon: '◎', fee: 0.00005, address: 'So11111111111111111111111111111111111111112' },
@@ -260,7 +260,7 @@ export function SwapSystem() {
                     {token.fee === 0 ? 'Zero Fee' : `${token.fee} fee`}
                   </Badge>
                   {token.symbol === 'GAiA' && (
-                    <Badge className="bg-green-600 text-white text-xs">Primary Token</Badge>
+                    <Badge className="bg-green-600 text-white text-xs">Mother Token</Badge>
                   )}
                   {token.symbol === 'GAIA' && (
                     <Badge className="bg-orange-600 text-white text-xs">Legacy Only</Badge>

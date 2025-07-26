@@ -48,9 +48,9 @@ export default function Home() {
           <Button 
             size="lg" 
             className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-4 text-xl"
-            onClick={() => navigate('/live-tracking')}
+            onClick={() => navigate('/private-blockchain')}
           >
-            Launch Exchange <ArrowRight className="ml-2 h-6 w-6" />
+            Launch Private Blockchain Swap <ArrowRight className="ml-2 h-6 w-6" />
           </Button>
         </div>
 
@@ -189,6 +189,9 @@ export default function Home() {
             <CardTitle className="text-2xl text-green-400 text-center">
               {GAIA_TOKEN.NAME} ({GAIA_TOKEN.SYMBOL})
             </CardTitle>
+            <p className="text-center text-lg text-green-300 mt-2">
+              {GAIA_TOKEN.MOTHER_TOKEN_STATUS}
+            </p>
           </CardHeader>
           <CardContent className="text-center">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -218,7 +221,7 @@ export default function Home() {
                 className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                 onClick={() => window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')}
               >
-                Trade {GAIA_TOKEN.SYMBOL} Now
+                Trade {GAIA_TOKEN.SYMBOL} Mother Token Now
               </Button>
             </div>
           </CardContent>

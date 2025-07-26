@@ -75,7 +75,6 @@ const SlidingMenu = () => {
 
   const baseMenuItems = [
     { icon: Home, label: 'Home', path: '/', category: 'main' },
-    { icon: TrendingUp, label: 'Live Tracking', path: '/live-tracking', category: 'main' },
     { icon: Gamepad2, label: 'Gaming', path: '/gaming', category: 'main' },
     { icon: Wallet, label: 'Wallet', path: '/wallet', category: 'main' },
     { icon: BarChart3, label: 'Markets', path: '/markets', category: 'main' },
