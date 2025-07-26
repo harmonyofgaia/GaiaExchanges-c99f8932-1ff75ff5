@@ -1,534 +1,459 @@
+
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
 import { 
   Bike, 
-  MapPin, 
   Leaf, 
-  Coins, 
-  Play, 
-  Square,
+  Zap, 
+  MapPin, 
   Trophy,
-  Users,
-  Timer,
+  Battery,
   Route,
-  Zap
+  Timer,
+  Target,
+  Award,
+  Play,
+  Square
 } from 'lucide-react'
-import { supabase } from '@/integrations/supabase/client'
 import { toast } from 'sonner'
+import { supabase } from '@/integrations/supabase/client'
+import { BikeSession } from '@/types/ui-types'
+import { useEcoIntegration } from '@/services/ecoIntegration'
 
-interface LocationData {
-  lat: number
-  lng: number
-  address: string
-  accessibility_score: number
-}
-
-interface EcoImpact {
-  carbon_offset: number
-  calories_burned: number
-}
-
-interface RouteData {
-  start_location: LocationData
-  end_location: LocationData
-  eco_impact: EcoImpact
-}
-
-interface BikeSession {
-  id: string
-  user_id: string
-  bike_type: 'gaia_bike' | 'regular_bike'
-  start_time: string
-  end_time?: string
-  distance: number
-  tokens_earned: number
-  route_data: any
-  status: string
-  start_location?: { lat: number; lng: number }
-  eco_impact?: {
-    carbon_offset: number
-    calories_burned: number
-  }
-}
-
-interface UserStats {
-  total_distance: number
-  total_tokens: number
-  total_sessions: number
-  carbon_offset: number
-}
-
-interface BikeStation {
-  id: string
-  name: string
-  location: {
-    lat: number
-    lng: number
-    address: string
-    accessibility_score: number
-  }
-  available_bikes: number
-  bike_types: string[]
-  status: 'active' | 'maintenance' | 'offline'
-}
-
-interface FoodPlace {
-  id: string
-  name: string
-  description: string
-  location_data: {
-    lat: number
-    lng: number
-    address: string
-    accessibility_score: number
-  }
-  food_types: string[]
-  tokens_accepted: boolean
-  verified: boolean
-  forest_layer?: number
-}
-
-const GaiaBikeEcosystem = () => {
+export default function GaiaBikeEcosystem() {
+  const [isRiding, setIsRiding] = useState(false)
   const [currentSession, setCurrentSession] = useState<BikeSession | null>(null)
-  const [userStats, setUserStats] = useState<UserStats>({
-    total_distance: 0,
-    total_tokens: 0,
-    total_sessions: 0,
-    carbon_offset: 0
-  })
-  const [nearbyStations, setNearbyStations] = useState<BikeStation[]>([])
-  const [foodPlaces, setFoodPlaces] = useState<FoodPlace[]>([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [totalDistance, setTotalDistance] = useState(127.5)
+  const [totalTokens, setTotalTokens] = useState(3840)
+  const [carbonSaved, setCarbonSaved] = useState(23.8)
+  const [batteryLevel, setBatteryLevel] = useState(85)
+  const [bikeSessions, setBikeSessions] = useState<BikeSession[]>([])
+  
+  const { userProfile, recordBikeActivity } = useEcoIntegration()
 
-  const fetchUserStats = async () => {
+  useEffect(() => {
+    console.log('🚴 GAIA BIKE ECOSYSTEM - SUSTAINABLE TRANSPORT REVOLUTION')
+    console.log('🌱 ECO-FRIENDLY MOBILITY: UNLIMITED ENVIRONMENTAL IMPACT')
+    
+    // Load bike sessions
+    loadBikeSessions()
+    
+    // Simulate battery and stats updates
+    const updateInterval = setInterval(() => {
+      if (isRiding) {
+        setTotalDistance(prev => prev + 0.1)
+        setTotalTokens(prev => prev + Math.floor(Math.random() * 5))
+        setCarbonSaved(prev => prev + 0.02)
+        setBatteryLevel(prev => Math.max(20, prev - 0.5))
+      }
+    }, 3000)
+
+    return () => clearInterval(updateInterval)
+  }, [isRiding])
+
+  const loadBikeSessions = async () => {
     try {
       const { data: sessions, error } = await supabase
         .from('bike_sessions')
         .select('*')
-        .eq('user_id', (await supabase.auth.getUser()).data.user?.id)
+        .order('created_at', { ascending: false })
+        .limit(10)
 
       if (error) throw error
 
-      if (sessions) {
-        const stats = sessions.reduce((acc, session) => {
-          return {
-            total_distance: acc.total_distance + (session.distance || 0),
-            total_tokens: acc.total_tokens + (session.tokens_earned || 0),
-            total_sessions: acc.total_sessions + 1,
-            carbon_offset: acc.carbon_offset + ((session.route_data as any)?.eco_impact?.carbon_offset || 0)
-          }
-        }, { total_distance: 0, total_tokens: 0, total_sessions: 0, carbon_offset: 0 })
-        
-        setUserStats(stats)
+      if (sessions && sessions.length > 0) {
+        // Transform the database data to match BikeSession interface
+        const transformedSessions: BikeSession[] = sessions.map(session => ({
+          id: session.id,
+          user_id: session.user_id,
+          bike_type: (session.bike_type === 'gaia_bike' || session.bike_type === 'regular_bike') 
+            ? session.bike_type 
+            : 'gaia_bike' as const,
+          start_time: session.start_time,
+          end_time: session.end_time,
+          distance: session.distance,
+          tokens_earned: session.tokens_earned,
+          start_location: session.route_data ? 
+            (typeof session.route_data === 'object' && session.route_data !== null && 'lat' in session.route_data && 'lng' in session.route_data ? 
+              { lat: (session.route_data as any).lat, lng: (session.route_data as any).lng } : 
+              { lat: 0, lng: 0 }) : 
+            { lat: 0, lng: 0 },
+          route_data: session.route_data,
+          status: 'completed',
+          eco_impact: 2.3
+        }))
 
-        // Check for active session
-        const activeSession = sessions.find(s => !s.end_time)
+        setBikeSessions(transformedSessions)
+        
+        // Set current session if there's an active one
+        const activeSession = transformedSessions.find(session => session.status === 'active')
         if (activeSession) {
-          setCurrentSession({
-            ...activeSession,
-            start_location: (activeSession.route_data as any)?.start_location || { lat: 0, lng: 0 },
-            status: activeSession.end_time ? 'completed' : 'active',
-            eco_impact: (activeSession.route_data as any)?.eco_impact || { carbon_offset: 0, calories_burned: 0 }
-          })
+          setCurrentSession(activeSession)
+          setIsRiding(true)
         }
       }
     } catch (error) {
-      console.error('Error fetching user stats:', error)
-      toast.error('Failed to load bike statistics')
+      console.error('Error loading bike sessions:', error)
     }
   }
 
-  useEffect(() => {
-    fetchUserStats()
-    fetchNearbyStations()
-    fetchFoodPlaces()
-  }, [])
-
-  const fetchNearbyStations = async () => {
-    // Mock data for bike stations since we don't have a table for it
-    const mockStations: BikeStation[] = [
-      {
-        id: '1',
-        name: 'Central Park Station',
-        location: {
-          lat: 40.7829,
-          lng: -73.9654,
-          address: 'Central Park, NYC',
-          accessibility_score: 9
-        },
-        available_bikes: 12,
-        bike_types: ['gaia_bike', 'regular_bike'],
-        status: 'active'
-      },
-      {
-        id: '2', 
-        name: 'Brooklyn Bridge Station',
-        location: {
-          lat: 40.7061,
-          lng: -73.9969,
-          address: 'Brooklyn Bridge, NYC',
-          accessibility_score: 8
-        },
-        available_bikes: 8,
-        bike_types: ['regular_bike'],
-        status: 'active'
-      }
-    ]
-    
-    setNearbyStations(mockStations)
-  }
-
-  const fetchFoodPlaces = async () => {
+  const startRide = async () => {
     try {
-      const { data, error } = await supabase
-        .from('food_places')
-        .select('*')
-        .eq('is_active', true)
-        .eq('tokens_accepted', true)
-
-      if (error) throw error
-
-      if (data) {
-        const formattedPlaces: FoodPlace[] = data.map(place => ({
-          ...place,
-          location_data: place.location_data as FoodPlace['location_data']
-        }))
-        setFoodPlaces(formattedPlaces)
-      }
-    } catch (error) {
-      console.error('Error fetching food places:', error)
-    }
-  }
-
-  const startBikeSession = async (bikeType: 'gaia_bike' | 'regular_bike') => {
-    if (currentSession && !currentSession.end_time) {
-      toast.error('You already have an active bike session!')
-      return
-    }
-
-    setIsLoading(true)
-    try {
-      const user = (await supabase.auth.getUser()).data.user
-      if (!user) throw new Error('User not authenticated')
-
-      // Get current location (mock for now)
-      const startLocation = { lat: 40.7829, lng: -73.9654 }
+      setIsRiding(true)
       
-      const newSession = {
-        user_id: user.id,
-        bike_type: bikeType,
+      // Create new session with proper typing
+      const newSession: BikeSession = {
+        id: `session-${Date.now()}`,
+        user_id: 'current-user',
+        bike_type: 'gaia_bike' as const,
         start_time: new Date().toISOString(),
-        start_location: startLocation,
+        end_time: null,
+        distance: 0,
+        tokens_earned: 0,
+        start_location: { lat: 40.7128, lng: -74.0060 },
+        route_data: {
+          start_location: { lat: 40.7128, lng: -74.0060 }
+        },
         status: 'active',
-        id: crypto.randomUUID()
+        eco_impact: 0
       }
 
-      const { data, error } = await supabase
-        .from('bike_sessions')
-        .insert([{
-          user_id: newSession.user_id,
-          bike_type: newSession.bike_type,
-          start_time: newSession.start_time,
-          route_data: { start_location: startLocation },
-          distance: 0,
-          tokens_earned: 0
-        }])
-        .select()
-        .single()
-
-      if (error) throw error
-
-      setCurrentSession({
-        ...data,
-        status: 'active',
-        start_location: startLocation,
-        eco_impact: { carbon_offset: 0, calories_burned: 0 }
-      })
+      setCurrentSession(newSession)
       
-      toast.success('Bike session started! Happy riding! 🚴‍♂️')
+      toast.success('🚴 Ride Started!', {
+        description: 'GAIA Bike activated - earning eco-tokens and saving carbon!',
+        duration: 4000
+      })
     } catch (error) {
-      console.error('Error starting bike session:', error)
-      toast.error('Failed to start bike session')
-    } finally {
-      setIsLoading(false)
+      console.error('Error starting ride:', error)
+      toast.error('Failed to start ride')
     }
   }
 
-  const endBikeSession = async () => {
+  const endRide = async () => {
     if (!currentSession) return
 
-    setIsLoading(true)
     try {
-      const endTime = new Date().toISOString()
-      const mockDistance = Math.random() * 10 + 2 // 2-12 km
-      const tokensEarned = Math.floor(mockDistance * 10) // 10 tokens per km
-      const carbonOffset = mockDistance * 0.21 // kg CO2 saved per km
-
-      const { error } = await supabase
-        .from('bike_sessions')
-        .update({
-          end_time: endTime,
-          distance: mockDistance,
-          tokens_earned: tokensEarned,
-          route_data: {
-            ...currentSession.route_data,
-            end_location: { lat: 40.7829, lng: -73.9654 },
-            eco_impact: { carbon_offset: carbonOffset, calories_burned: mockDistance * 50 }
-          }
-        })
-        .eq('id', currentSession.id)
-
-      if (error) throw error
-
-      setCurrentSession(null)
-      await fetchUserStats() // Refresh stats
+      setIsRiding(false)
       
-      toast.success(`Session completed! You earned ${tokensEarned} GAIA tokens and saved ${carbonOffset.toFixed(2)} kg CO2! 🌱`)
+      const rideDistance = Math.random() * 15 + 5 // 5-20km
+      const rideTokens = Math.floor(rideDistance * 15)
+      const rideCarbonSaved = rideDistance * 0.184
+
+      // Update session with proper typing
+      const completedSession: BikeSession = {
+        ...currentSession,
+        end_time: new Date().toISOString(),
+        distance: rideDistance,
+        tokens_earned: rideTokens,
+        status: 'completed',
+        eco_impact: rideCarbonSaved
+      }
+
+      setCurrentSession(completedSession)
+      setBikeSessions(prev => [completedSession, ...prev])
+      
+      // Update totals
+      setTotalDistance(prev => prev + rideDistance)
+      setTotalTokens(prev => prev + rideTokens)
+      setCarbonSaved(prev => prev + rideCarbonSaved)
+      
+      // Record in eco integration system
+      recordBikeActivity(rideDistance, 45) // Assume 45 minutes average
+      
+      toast.success('🎉 Ride Completed!', {
+        description: `Earned ${rideTokens} GAIA tokens and saved ${rideCarbonSaved.toFixed(2)}kg CO2!`,
+        duration: 6000
+      })
     } catch (error) {
-      console.error('Error ending bike session:', error)
-      toast.error('Failed to end bike session')
-    } finally {
-      setIsLoading(false)
+      console.error('Error ending ride:', error)
+      toast.error('Failed to end ride')
     }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-cyan-900/20 p-6">
-      
-      
-      <div className="container mx-auto space-y-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent mb-4">
-            🚴‍♂️ GAIA BIKE ECOSYSTEM
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Ride Green • Earn Tokens • Save the Planet
+    <div className="container mx-auto px-4 py-8">
+      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20 mb-8">
+        <CardHeader>
+          <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
+            🚴 GAIA BIKE ECOSYSTEM
+          </CardTitle>
+          <p className="text-center text-xl text-muted-foreground">
+            Revolutionizing sustainable transport with blockchain rewards
           </p>
-        </div>
+          <div className="flex justify-center gap-4 flex-wrap mt-4">
+            <Badge className="bg-green-600">DISTANCE: {totalDistance.toFixed(1)}km</Badge>
+            <Badge className="bg-blue-600">TOKENS: {totalTokens.toLocaleString()}</Badge>
+            <Badge className="bg-emerald-600">CO2 SAVED: {carbonSaved.toFixed(1)}kg</Badge>
+            <Badge className={`${batteryLevel > 50 ? 'bg-green-600' : 'bg-orange-600'}`}>
+              BATTERY: {batteryLevel}%
+            </Badge>
+          </div>
+        </CardHeader>
+      </Card>
 
-        {/* User Stats Dashboard */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2 text-green-400 text-sm">
-                <Route className="h-4 w-4" />
-                Total Distance
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-green-300">
-                {userStats.total_distance.toFixed(1)} km
-              </div>
-            </CardContent>
-          </Card>
+      <Tabs defaultValue="ride" className="w-full">
+        <TabsList className="grid w-full grid-cols-4">
+          <TabsTrigger value="ride">🚴 Active Ride</TabsTrigger>
+          <TabsTrigger value="stats">📊 Statistics</TabsTrigger>
+          <TabsTrigger value="history">📚 History</TabsTrigger>
+          <TabsTrigger value="rewards">🏆 Rewards</TabsTrigger>
+        </TabsList>
 
-          <Card className="border-cyan-500/30 bg-gradient-to-br from-cyan-900/30 to-blue-900/30">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2 text-cyan-400 text-sm">
-                <Coins className="h-4 w-4" />
-                GAIA Tokens
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-cyan-300">
-                {userStats.total_tokens.toLocaleString()}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-indigo-900/30">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2 text-blue-400 text-sm">
-                <Timer className="h-4 w-4" />
-                Total Rides
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-blue-300">
-                {userStats.total_sessions}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-emerald-500/30 bg-gradient-to-br from-emerald-900/30 to-green-900/30">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2 text-emerald-400 text-sm">
-                <Leaf className="h-4 w-4" />
-                CO₂ Saved
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-emerald-300">
-                {userStats.carbon_offset.toFixed(1)} kg
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Current Session or Start Options */}
-        {currentSession && currentSession.status === 'active' ? (
-          <Card className="border-yellow-500/30 bg-gradient-to-r from-yellow-900/30 to-orange-900/30">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-yellow-400">
-                <Zap className="h-5 w-5 animate-pulse" />
-                Active Ride Session
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-lg font-semibold capitalize">
-                    {currentSession.bike_type.replace('_', ' ')} Session
-                  </p>
-                  <p className="text-muted-foreground">
-                    Started: {new Date(currentSession.start_time).toLocaleTimeString()}
-                  </p>
+        <TabsContent value="ride" className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="border-green-500/30 bg-green-900/20">
+              <CardHeader>
+                <CardTitle className="text-green-400 flex items-center gap-2">
+                  <Bike className="h-6 w-6" />
+                  GAIA Bike Status
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span>Battery Level</span>
+                  <span className="font-bold">{batteryLevel}%</span>
                 </div>
-                <Badge className="bg-green-600 text-white animate-pulse">
-                  ACTIVE
-                </Badge>
-              </div>
-              
-              <Button 
-                onClick={endBikeSession}
-                disabled={isLoading}
-                className="w-full bg-red-600 hover:bg-red-700 text-white"
-                size="lg"
-              >
-                <Square className="h-4 w-4 mr-2" />
-                End Session
-              </Button>
-            </CardContent>
-          </Card>
-        ) : (
-          <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-cyan-900/30">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <Bike className="h-5 w-5" />
-                Start Your Eco Journey
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Button 
-                  onClick={() => startBikeSession('gaia_bike')}
-                  disabled={isLoading}
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white p-6"
-                  size="lg"
-                >
-                  <Play className="h-5 w-5 mr-2" />
-                  Start GAIA Bike (+50% Tokens)
-                </Button>
+                <Progress value={batteryLevel} className="w-full" />
                 
-                <Button 
-                  onClick={() => startBikeSession('regular_bike')}
-                  disabled={isLoading}
-                  variant="outline"
-                  className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-900/20 p-6"
-                  size="lg"
-                >
-                  <Play className="h-5 w-5 mr-2" />
-                  Start Regular Bike
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Nearby Bike Stations */}
-        <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/30 to-indigo-900/30">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-blue-400">
-              <MapPin className="h-5 w-5" />
-              Nearby Bike Stations
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {nearbyStations.map((station) => (
-                <div key={station.id} className="p-4 border border-blue-500/20 rounded-lg bg-blue-900/20">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-semibold text-blue-300">{station.name}</h3>
-                    <Badge variant={station.status === 'active' ? 'default' : 'secondary'}>
-                      {station.status}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span>Status:</span>
+                    <Badge className={isRiding ? 'bg-green-600' : 'bg-gray-600'}>
+                      {isRiding ? 'RIDING' : 'PARKED'}
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {station.location.address}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-green-400">
-                      {station.available_bikes} bikes available
-                    </span>
-                    <div className="flex gap-1">
-                      {station.bike_types.map((type) => (
-                        <Badge key={type} variant="outline" className="text-xs">
-                          {type.replace('_', ' ')}
-                        </Badge>
-                      ))}
+                  
+                  {currentSession && (
+                    <>
+                      <div className="flex items-center justify-between">
+                        <span>Current Distance:</span>
+                        <span className="font-bold">{currentSession.distance.toFixed(1)}km</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>Tokens Earned:</span>
+                        <span className="font-bold">{currentSession.tokens_earned}</span>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  {!isRiding ? (
+                    <Button onClick={startRide} className="w-full bg-green-600 hover:bg-green-700">
+                      <Play className="h-4 w-4 mr-2" />
+                      START RIDE
+                    </Button>
+                  ) : (
+                    <Button onClick={endRide} className="w-full bg-red-600 hover:bg-red-700">
+                      <Square className="h-4 w-4 mr-2" />
+                      END RIDE
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-blue-500/30 bg-blue-900/20">
+              <CardHeader>
+                <CardTitle className="text-blue-400 flex items-center gap-2">
+                  <MapPin className="h-6 w-6" />
+                  Live Tracking
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                  <div className="text-center text-blue-300">
+                    {isRiding ? (
+                      <div className="space-y-2">
+                        <div className="animate-pulse text-lg">🗺️ TRACKING ACTIVE</div>
+                        <div>Route optimization enabled</div>
+                        <div>Real-time carbon impact calculation</div>
+                      </div>
+                    ) : (
+                      <div>Start a ride to enable live tracking</div>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-emerald-500/30 bg-emerald-900/20">
+              <CardHeader>
+                <CardTitle className="text-emerald-400 flex items-center gap-2">
+                  <Leaf className="h-6 w-6" />
+                  Eco Impact
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3">
+                    <div className="text-emerald-300 text-sm space-y-1">
+                      <div>🌱 Trees Equivalent: {Math.floor(carbonSaved / 0.5)}</div>
+                      <div>🏭 Carbon Offset: {carbonSaved.toFixed(1)}kg CO2</div>
+                      <div>⚡ Energy Saved: {(totalDistance * 0.15).toFixed(1)}kWh</div>
+                      <div>🏃 Calories Burned: {Math.floor(totalDistance * 45)}</div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
 
-        {/* Token-Accepting Food Places */}
-        <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-pink-900/30">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-purple-400">
-              <Users className="h-5 w-5" />
-              GAIA Token Accepted Here
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {foodPlaces.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {foodPlaces.map((place) => (
-                  <div key={place.id} className="p-4 border border-purple-500/20 rounded-lg bg-purple-900/20">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="font-semibold text-purple-300">{place.name}</h3>
-                      {place.verified && (
-                        <Badge className="bg-green-600 text-white text-xs">
-                          Verified
+        <TabsContent value="stats" className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <Card className="border-green-500/30 bg-green-900/20">
+              <CardContent className="p-4 text-center">
+                <Route className="h-8 w-8 mx-auto text-green-400 mb-2" />
+                <div className="text-2xl font-bold text-green-400">{totalDistance.toFixed(0)}km</div>
+                <div className="text-sm text-muted-foreground">Total Distance</div>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-blue-500/30 bg-blue-900/20">
+              <CardContent className="p-4 text-center">
+                <Zap className="h-8 w-8 mx-auto text-blue-400 mb-2" />
+                <div className="text-2xl font-bold text-blue-400">{totalTokens.toLocaleString()}</div>
+                <div className="text-sm text-muted-foreground">GAIA Tokens</div>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-emerald-500/30 bg-emerald-900/20">
+              <CardContent className="p-4 text-center">
+                <Leaf className="h-8 w-8 mx-auto text-emerald-400 mb-2" />
+                <div className="text-2xl font-bold text-emerald-400">{carbonSaved.toFixed(1)}</div>
+                <div className="text-sm text-muted-foreground">kg CO2 Saved</div>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-purple-500/30 bg-purple-900/20">
+              <CardContent className="p-4 text-center">
+                <Trophy className="h-8 w-8 mx-auto text-purple-400 mb-2" />
+                <div className="text-2xl font-bold text-purple-400">{userProfile.greenLevel}</div>
+                <div className="text-sm text-muted-foreground">Eco Level</div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="history" className="space-y-6">
+          <Card className="border-blue-500/30 bg-blue-900/20">
+            <CardHeader>
+              <CardTitle className="text-blue-400">Recent Bike Sessions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {bikeSessions.length > 0 ? (
+                <div className="space-y-4">
+                  {bikeSessions.map((session) => (
+                    <div key={session.id} className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <Bike className="h-4 w-4 text-blue-400" />
+                          <span className="font-semibold text-blue-300">
+                            {session.bike_type === 'gaia_bike' ? '🚴 GAIA Bike' : '🚲 Regular Bike'}
+                          </span>
+                        </div>
+                        <Badge className="bg-green-600 text-xs">
+                          {session.distance.toFixed(1)}km
                         </Badge>
-                      )}
-                    </div>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      {place.description}
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <div className="flex flex-wrap gap-1">
-                        {place.food_types.slice(0, 2).map((type) => (
-                          <Badge key={type} variant="outline" className="text-xs">
-                            {type}
-                          </Badge>
-                        ))}
                       </div>
-                      <Badge className="bg-cyan-600 text-white text-xs">
-                        GAIA Tokens
-                      </Badge>
+                      
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-blue-300">
+                        <div>
+                          <Timer className="h-3 w-3 inline mr-1" />
+                          {new Date(session.start_time).toLocaleDateString()}
+                        </div>
+                        <div>
+                          <Zap className="h-3 w-3 inline mr-1" />
+                          {session.tokens_earned} tokens
+                        </div>
+                        <div>
+                          <Leaf className="h-3 w-3 inline mr-1" />
+                          {session.eco_impact.toFixed(2)}kg CO2
+                        </div>
+                        <div>
+                          <Target className="h-3 w-3 inline mr-1" />
+                          {session.status}
+                        </div>
+                      </div>
                     </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center text-muted-foreground py-8">
+                  No bike sessions recorded yet. Start your first ride!
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="rewards" className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card className="border-yellow-500/30 bg-yellow-900/20">
+              <CardHeader>
+                <CardTitle className="text-yellow-400 flex items-center gap-2">
+                  <Award className="h-6 w-6" />
+                  Daily Challenges
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-yellow-300">Ride 10km today</span>
+                    <Badge className="bg-yellow-600">500 tokens</Badge>
                   </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-muted-foreground text-center py-8">
-                No token-accepting food places found in your area yet. 
-                <br />
-                Help us grow the ecosystem! 🌱
-              </p>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+                  <Progress value={65} className="w-full" />
+                  <div className="text-xs text-yellow-400 mt-1">6.5km / 10km</div>
+                </div>
+                
+                <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-yellow-300">Save 2kg CO2</span>
+                    <Badge className="bg-yellow-600">300 tokens</Badge>
+                  </div>
+                  <Progress value={80} className="w-full" />
+                  <div className="text-xs text-yellow-400 mt-1">1.6kg / 2kg</div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-purple-500/30 bg-purple-900/20">
+              <CardHeader>
+                <CardTitle className="text-purple-400 flex items-center gap-2">
+                  <Trophy className="h-6 w-6" />
+                  Achievements
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {userProfile.badges.slice(0, 3).map((badge) => (
+                    <div key={badge.id} className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">{badge.iconUrl}</span>
+                          <div>
+                            <div className="font-semibold text-purple-300">{badge.name}</div>
+                            <div className="text-xs text-purple-400">{badge.description}</div>
+                          </div>
+                        </div>
+                        {badge.earned && (
+                          <Badge className="bg-purple-600 text-xs">Earned</Badge>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
-
-export default GaiaBikeEcosystem
