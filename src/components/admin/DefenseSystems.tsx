@@ -68,28 +68,28 @@ export function DefenseSystems() {
       <Tabs defaultValue="overview" className="w-full">
         {/* First Row - Core Defense Systems */}
         <div className="space-y-2">
-          <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6">
-            <TabsTrigger value="overview" className="flex items-center gap-1 text-xs px-2">
+          <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6" role="tablist">
+            <TabsTrigger value="overview" className="flex items-center gap-1 text-xs px-2" role="tab" aria-selected="true" aria-controls="tab-overview">
               <Shield className="h-3 w-3" />
               Overview
             </TabsTrigger>
-            <TabsTrigger value="comprehensive" className="flex items-center gap-1 text-xs px-2">
+            <TabsTrigger value="comprehensive" className="flex items-center gap-1 text-xs px-2" role="tab" aria-selected="false" aria-controls="tab-comprehensive">
               <Brain className="h-3 w-3" />
               Master Plan
             </TabsTrigger>
-            <TabsTrigger value="orchestrator" className="flex items-center gap-1 text-xs px-2">
+            <TabsTrigger value="orchestrator" className="flex items-center gap-1 text-xs px-2" role="tab" aria-selected="false" aria-controls="tab-orchestrator">
               <Skull className="h-3 w-3" />
               Orchestrator
             </TabsTrigger>
-            <TabsTrigger value="animals" className="flex items-center gap-1 text-xs px-2">
+            <TabsTrigger value="animals" className="flex items-center gap-1 text-xs px-2" role="tab" aria-selected="false" aria-controls="tab-animals">
               <Heart className="h-3 w-3" />
               AI Animals
             </TabsTrigger>
-            <TabsTrigger value="army" className="flex items-center gap-1 text-xs px-2">
+            <TabsTrigger value="army" className="flex items-center gap-1 text-xs px-2" role="tab" aria-selected="false" aria-controls="tab-army">
               <Crown className="h-3 w-3" />
               Army
             </TabsTrigger>
-            <TabsTrigger value="ghost" className="flex items-center gap-1 text-xs px-2">
+            <TabsTrigger value="ghost" className="flex items-center gap-1 text-xs px-2" role="tab" aria-selected="false" aria-controls="tab-ghost">
               <Ghost className="h-3 w-3" />
               Ghost Army
             </TabsTrigger>
