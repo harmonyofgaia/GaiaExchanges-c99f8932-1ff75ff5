@@ -33,21 +33,34 @@ export function SessionSettingsPanel() {
     })
   }
 
-  const getTimeRemaining = () => {
-    if (!adminSession) return 'No active session'
-    
-    const sessionExpiry = localStorage.getItem('gaia-admin-expiry')
-    if (!sessionExpiry) return 'Unknown'
-    
-    const remaining = parseInt(sessionExpiry) - Date.now()
-    if (remaining <= 0) return 'Session expired'
-    
-    const minutes = Math.floor(remaining / (1000 * 60))
-    const seconds = Math.floor((remaining % (1000 * 60)) / 1000)
-    
-    return `${minutes}m ${seconds}s`
-  }
+  useEffect(() => {
+    const updateRemainingTime = () => {
+      if (!adminSession) {
+        setTimeRemaining('No active session')
+        return
+      }
 
+      const sessionExpiry = localStorage.getItem('gaia-admin-expiry')
+      if (!sessionExpiry) {
+        setTimeRemaining('Unknown')
+        return
+      }
+
+      const remaining = parseInt(sessionExpiry) - Date.now()
+      if (remaining <= 0) {
+        setTimeRemaining('Session expired')
+        return
+      }
+
+      const minutes = Math.floor(remaining / (1000 * 60))
+      const seconds = Math.floor((remaining % (1000 * 60)) / 1000)
+      setTimeRemaining(`${minutes}m ${seconds}s`)
+    }
+
+    updateRemainingTime()
+    const interval = setInterval(updateRemainingTime, 1000)
+    return () => clearInterval(interval)
+  }, [adminSession])
   return (
     <div className="space-y-6">
       <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-indigo-900/30">
