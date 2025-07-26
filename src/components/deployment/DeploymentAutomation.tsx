@@ -32,6 +32,38 @@ interface DeploymentStep {
 export function DeploymentAutomation() {
   const [deploymentSteps, setDeploymentSteps] = useState<DeploymentStep[]>([
     {
+      id: 'v2-validation',
+      name: 'V2+ Master Plan Validation',
+      status: 'success',
+      progress: 100,
+      duration: '1:23',
+      description: 'Validate all V2+ features from GAIA_SUPER_UPGRADED_SECURE_ADMIN_ENVIRONMENTAL_ACTION_PLAN_2025'
+    },
+    {
+      id: 'security-protocols',
+      name: 'Advanced Security Validation',
+      status: 'success',
+      progress: 100,
+      duration: '0:56',
+      description: 'AI Defense Animals, Quantum Security, ThunderstormDefense, UltimateSecurityDashboard'
+    },
+    {
+      id: 'environmental-systems',
+      name: 'Environmental Systems Check',
+      status: 'success',
+      progress: 100,
+      duration: '1:12',
+      description: 'Eco-Metaverse, Regeneration Mining, Rainwater Management, Impact Tracking'
+    },
+    {
+      id: 'ai-copilot',
+      name: 'Einstein Copilot Systems',
+      status: 'success',
+      progress: 100,
+      duration: '0:34',
+      description: 'AI Task Completer, Database Deep-Dive, SEA GREEN Psychohistorical Engine'
+    },
+    {
       id: 'pre-checks',
       name: 'Pre-deployment Checks',
       status: 'success',
@@ -82,11 +114,13 @@ export function DeploymentAutomation() {
   ])
 
   const [deploymentMetrics, setDeploymentMetrics] = useState({
-    totalDeployments: 47,
-    successRate: 98.5,
-    averageTime: '4:23',
-    uptime: 99.97,
-    lastDeploy: '2 hours ago'
+    totalDeployments: 52,
+    successRate: 99.2,
+    averageTime: '3:47',
+    uptime: 99.98,
+    lastDeploy: '1 hour ago',
+    v2PlusFeatures: 127,
+    masterPlanCompliance: 98.5
   })
 
   useEffect(() => {
@@ -172,7 +206,7 @@ export function DeploymentAutomation() {
       </Card>
 
       {/* Deployment Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
         <Card className="bg-gradient-to-r from-green-900/30 to-green-800/30 border-green-500/30">
           <CardContent className="p-4 text-center">
             <div className="flex items-center justify-center gap-2 mb-2">
@@ -210,6 +244,26 @@ export function DeploymentAutomation() {
               <span className="font-bold text-orange-400">Uptime</span>
             </div>
             <div className="text-2xl font-bold text-orange-400">{deploymentMetrics.uptime}%</div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-r from-cyan-900/30 to-cyan-800/30 border-cyan-500/30">
+          <CardContent className="p-4 text-center">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Zap className="h-5 w-5 text-cyan-400" />
+              <span className="font-bold text-cyan-400">V2+ Features</span>
+            </div>
+            <div className="text-2xl font-bold text-cyan-400">{deploymentMetrics.v2PlusFeatures}</div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-r from-yellow-900/30 to-yellow-800/30 border-yellow-500/30">
+          <CardContent className="p-4 text-center">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Settings className="h-5 w-5 text-yellow-400" />
+              <span className="font-bold text-yellow-400">Compliance</span>
+            </div>
+            <div className="text-2xl font-bold text-yellow-400">{deploymentMetrics.masterPlanCompliance}%</div>
           </CardContent>
         </Card>
 
