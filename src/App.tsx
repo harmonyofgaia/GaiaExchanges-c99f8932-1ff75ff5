@@ -1,8 +1,9 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
-import SlidingMenu from '@/components/SlidingMenu'
+import { Navbar } from '@/components/Navbar'
 import { GaiaLogo } from '@/components/GaiaLogo'
+import { ProtectedRoute } from '@/components/ProtectedRoute'
 import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
 
 // Lazy load pages for better performance
@@ -16,8 +17,13 @@ const GaiaBikeEcosystem = lazy(() => import('./pages/GaiaBikeEcosystem'))
 const TokenMining = lazy(() => import('./pages/TokenMining'))
 const GreenInvestments = lazy(() => import('./pages/GreenInvestments'))
 const CoinCrafter = lazy(() => import('./pages/CoinCrafter'))
-const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlockchainSwapToken'))
 const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
+const Community = lazy(() => import('./pages/Community'))
+const NFTs = lazy(() => import('./pages/NFTs'))
+const Analytics = lazy(() => import('./pages/Analytics'))
+const Contact = lazy(() => import('./pages/Contact'))
+const About = lazy(() => import('./pages/About'))
+const Docs = lazy(() => import('./pages/Docs'))
 const Admin = lazy(() => import('./pages/Admin'))
 const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
 
@@ -27,7 +33,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-background text-foreground">
-        <SlidingMenu />
+        <Navbar />
         <main className="flex-1">
           <Suspense fallback={
             <div className="min-h-screen bg-background flex items-center justify-center">
@@ -48,10 +54,23 @@ function App() {
               <Route path="/token-mining" element={<TokenMining />} />
               <Route path="/green-investments" element={<GreenInvestments />} />
               <Route path="/coin-crafter" element={<CoinCrafter />} />
-              <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/secure-admin" element={<SecureAdmin />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/nfts" element={<NFTs />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/docs" element={<Docs />} />
+              <Route path="/admin" element={
+                <ProtectedRoute requireAdmin={true}>
+                  <Admin />
+                </ProtectedRoute>
+              } />
+              <Route path="/secure-admin" element={
+                <ProtectedRoute requireAdmin={true}>
+                  <SecureAdmin />
+                </ProtectedRoute>
+              } />
             </Routes>
           </Suspense>
         </main>
