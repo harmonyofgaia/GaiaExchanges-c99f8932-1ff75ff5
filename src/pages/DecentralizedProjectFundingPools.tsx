@@ -13,7 +13,6 @@ export default function DecentralizedProjectFundingPools() {
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState('all')
 
-  // Define loadProjects before using it
   const loadProjects = async () => {
     try {
       const { data, error } = await supabase
@@ -31,16 +30,16 @@ export default function DecentralizedProjectFundingPools() {
         title: project.title,
         description: project.description,
         funding_goal: project.funding_goal,
-        current_funding: project.current_funding,
-        project_type: project.project_type,
+        current_funding: project.funding_raised || 0,
+        project_type: project.category || 'general',
         carbon_impact_target: project.carbon_impact_target,
         biodiversity_score: project.biodiversity_score,
         verification_status: project.verification_status,
-        smart_contract_address: project.smart_contract_address,
-        satellite_verified: project.satellite_verified || false,
-        governance_score: project.governance_score || 0,
-        community_votes: project.community_votes || 0,
-        verification_method: project.verification_method || 'pending',
+        smart_contract_address: null,
+        satellite_verified: false,
+        governance_score: 0,
+        community_votes: 0,
+        verification_method: 'pending',
         project_data: parseJsonField(project.project_data, {
           location: '',
           area_covered: 0,
