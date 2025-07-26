@@ -26,7 +26,7 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
     <div className={`w-full max-w-2xl mx-auto bg-gradient-to-br ${getBackgroundColor()} border border-green-500/20 rounded-lg overflow-hidden`}>
       {/* Header */}
       <div className="bg-black/50 p-6 text-center">
-        <GaiaLogo size="lg" variant="white-fade" className="mx-auto mb-4" />
+        <GaiaLogo size="lg" variant="glow" className="mx-auto mb-4" />
         <h1 className="text-2xl font-bold text-white mb-2">Harmony of Gaia</h1>
         <p className="text-green-300">GAiA Token - The Future of Environmental Cryptocurrency</p>
       </div>

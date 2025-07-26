@@ -51,7 +51,7 @@ export function GameUpdatePreview() {
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Film className="h-4 w-4" />
           All games feature intro movies with Harmony of Gaia branding
-          <GaiaLogo size="sm" variant="colorful" />
+          <GaiaLogo size="sm" variant="glow" />
         </div>
       </CardHeader>
       <CardContent className="space-y-6">

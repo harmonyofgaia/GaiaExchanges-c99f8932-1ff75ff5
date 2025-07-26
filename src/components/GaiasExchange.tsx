@@ -181,7 +181,7 @@ export function GaiasExchange() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <GaiaLogo size="lg" variant="white-fade" />
+              <GaiaLogo size="lg" variant="glow" />
               <div>
                 <h1 className="text-2xl font-bold text-primary">Gaia's Exchanges</h1>
                 <p className="text-sm text-green-400">World's Most Secure Web3 Trading Platform</p>
