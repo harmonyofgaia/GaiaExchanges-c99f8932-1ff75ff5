@@ -34,6 +34,7 @@ export function TinyHamburgerMenu() {
         size="sm"
         variant="outline"
         className="w-8 h-8 p-0 bg-green-900/20 border-green-500/30 hover:bg-green-500/20 text-green-400"
+        aria-label={isOpen ? "Close menu" : "Open menu"}
       >
         {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
       </Button>
