@@ -129,13 +129,13 @@ export default function PrivateBlockchain() {
         </Card>
         {/* Advanced Blockchain Management Tabs */}
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="mining">Mining</TabsTrigger>
-            <TabsTrigger value="validators">Validators</TabsTrigger>
-            <TabsTrigger value="network">Network</TabsTrigger>
-            <TabsTrigger value="security">Security</TabsTrigger>
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-6" role="tablist">
+            <TabsTrigger value="overview" role="tab">Overview</TabsTrigger>
+            <TabsTrigger value="mining" role="tab">Mining</TabsTrigger>
+            <TabsTrigger value="validators" role="tab">Validators</TabsTrigger>
+            <TabsTrigger value="network" role="tab">Network</TabsTrigger>
+            <TabsTrigger value="security" role="tab">Security</TabsTrigger>
+            <TabsTrigger value="analytics" role="tab">Analytics</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
