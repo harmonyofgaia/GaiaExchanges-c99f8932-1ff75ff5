@@ -4,6 +4,7 @@ import { LiquidBackground } from './LiquidBackground'
 import { PuzzleBackground } from './PuzzleBackground'
 import { WaterBackground } from './WaterBackground'
 import { NeuroBackground } from './NeuroBackground'
+import { EnhancedNeuroBackground } from './EnhancedNeuroBackground'
 
 export type EnhancedBackgroundType = 
   | 'matrix' 
@@ -20,6 +21,8 @@ export interface BackgroundConfig {
   color: string
   speed: number
   autoGenerate?: boolean
+  pattern?: string
+  neuralDensity?: number
 }
 
 interface EnhancedBackgroundManagerProps {
@@ -147,10 +150,12 @@ export function EnhancedBackgroundManager({
         )
       case 'neuro':
         return (
-          <NeuroBackground
+          <EnhancedNeuroBackground
             intensity={activeConfig.intensity}
             color={activeConfig.color}
             speed={activeConfig.speed}
+            pattern={activeConfig.pattern as any || 'creative'}
+            neuralDensity={activeConfig.neuralDensity || 60}
             className={className}
           />
         )

@@ -19,10 +19,17 @@ import {
   Download,
   Trash2,
   Plus,
-  Grid3X3
+  Grid3X3,
+  Sparkles,
+  Cloud,
+  Globe,
+  Cpu
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { ThemeDesigner } from '../theme/ThemeDesigner'
+import { CreativeEngine } from '../creative/CreativeEngine'
+import { WebsiteTemplateSystem } from '../template/WebsiteTemplateSystem'
+import { GaiaCloudStorage } from '../cloud/GaiaCloudStorage'
 
 interface VisualControlMenuProps {
   isAdmin?: boolean
@@ -150,13 +157,31 @@ export function VisualControlMenu({ isAdmin = false, className = '' }: VisualCon
           </DialogHeader>
 
           <Tabs value={activeSection} onValueChange={setActiveSection} className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
-              {menuSections.map((section) => (
-                <TabsTrigger key={section.id} value={section.id} className="flex items-center gap-2">
-                  {section.icon}
-                  {section.label}
-                </TabsTrigger>
-              ))}
+            <TabsList className="grid w-full grid-cols-6">
+              <TabsTrigger value="backgrounds" className="flex items-center gap-2">
+                <Layers className="h-4 w-4" />
+                Backgrounds
+              </TabsTrigger>
+              <TabsTrigger value="templates" className="flex items-center gap-2">
+                <Globe className="h-4 w-4" />
+                Templates  
+              </TabsTrigger>
+              <TabsTrigger value="creative" className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4" />
+                Creative Engine
+              </TabsTrigger>
+              <TabsTrigger value="cloud" className="flex items-center gap-2">
+                <Cloud className="h-4 w-4" />
+                Cloud Storage
+              </TabsTrigger>
+              <TabsTrigger value="designer" className="flex items-center gap-2">
+                <Palette className="h-4 w-4" />
+                Theme Designer
+              </TabsTrigger>
+              <TabsTrigger value="settings" className="flex items-center gap-2">
+                <Settings className="h-4 w-4" />
+                Settings
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="backgrounds" className="space-y-6">
@@ -165,7 +190,7 @@ export function VisualControlMenu({ isAdmin = false, className = '' }: VisualCon
                   <CardHeader>
                     <CardTitle className="text-green-400 flex items-center gap-2">
                       <Layers className="h-5 w-5" />
-                      Background Presets
+                      Enhanced Background Presets
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -191,6 +216,191 @@ export function VisualControlMenu({ isAdmin = false, className = '' }: VisualCon
                           <div className="text-xs text-muted-foreground">{preset.type}</div>
                         </div>
                       ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-blue-400 flex items-center gap-2">
+                      <Monitor className="h-5 w-5" />
+                      Current Design Status
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
+                        <h4 className="font-medium text-blue-400 mb-2">Preserved Designs</h4>
+                        <p className="text-sm text-gray-300">
+                          All current visual designs are automatically preserved and can be restored at any time.
+                        </p>
+                        <Button size="sm" className="mt-2" variant="outline">
+                          <Eye className="w-4 h-4 mr-2" />
+                          View Saved Designs
+                        </Button>
+                      </div>
+                      <div className="grid grid-cols-3 gap-2 text-sm">
+                        <div className="bg-gray-800/50 p-2 rounded text-center">
+                          <Monitor className="w-4 h-4 mx-auto mb-1 text-gray-400" />
+                          Homepage
+                        </div>
+                        <div className="bg-gray-800/50 p-2 rounded text-center">
+                          <Settings className="w-4 h-4 mx-auto mb-1 text-gray-400" />
+                          Admin
+                        </div>
+                        <div className="bg-gray-800/50 p-2 rounded text-center">
+                          <Grid3X3 className="w-4 h-4 mx-auto mb-1 text-gray-400" />
+                          Sidebar
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="templates" className="space-y-6">
+              <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mb-4">
+                <h3 className="text-lg font-semibold text-blue-400 mb-2">🌐 Website Template System</h3>
+                <p className="text-gray-300 text-sm">
+                  Save complete website templates including all pages, backgrounds, colors, and layouts. 
+                  Your current designs are preserved and can be turned into reusable templates.
+                </p>
+              </div>
+              <WebsiteTemplateSystem 
+                onTemplateApplied={(template) => {
+                  toast.success(`Applied template: ${template.name}`)
+                  // Trigger page refresh or state update
+                  window.location.reload()
+                }}
+              />
+            </TabsContent>
+
+            <TabsContent value="creative" className="space-y-6">
+              <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4 mb-4">
+                <h3 className="text-lg font-semibold text-purple-400 mb-2">✨ Creative Processing Engine</h3>
+                <p className="text-gray-300 text-sm">
+                  Upload images and videos to create living animations, abstract art, and neural-inspired designs. 
+                  The lightweight cloud engine processes your media into stunning visual elements.
+                </p>
+              </div>
+              <CreativeEngine 
+                onAssetGenerated={(asset) => {
+                  toast.success(`Generated creative asset: ${asset.name}`)
+                }}
+                onTemplateCreated={(template) => {
+                  toast.success(`Created design template: ${template.name}`)
+                }}
+              />
+            </TabsContent>
+
+            <TabsContent value="cloud" className="space-y-6">
+              <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-4 mb-4">
+                <h3 className="text-lg font-semibold text-cyan-400 mb-2">☁️ GAIA Cloud Storage</h3>
+                <p className="text-gray-300 text-sm">
+                  Secure cloud storage with automatic processing engines. Upload any media and let our AI-powered 
+                  systems generate optimized variants, living animations, and creative designs.
+                </p>
+              </div>
+              <GaiaCloudStorage 
+                onAssetSelected={(asset) => {
+                  toast.success(`Selected cloud asset: ${asset.name}`)
+                }}
+              />
+            </TabsContent>
+
+            <TabsContent value="designer" className="space-y-6">
+              <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 mb-4">
+                <h3 className="text-lg font-semibold text-green-400 mb-2">🎨 Enhanced Theme Designer</h3>
+                <p className="text-gray-300 text-sm">
+                  Advanced theme customization with neural network patterns, organic designs, and creative variations. 
+                  Create stunning backgrounds with comprehensive design tools.
+                </p>
+              </div>
+              <ThemeDesigner 
+                isLocked={isLocked} 
+                onLockToggle={handleLockToggle}
+              />
+            </TabsContent>
+
+            <TabsContent value="settings" className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-yellow-400 flex items-center gap-2">
+                      <Settings className="h-5 w-5" />
+                      System Settings
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="font-medium text-gray-200">Auto-Save Templates</h4>
+                        <p className="text-sm text-gray-400">
+                          Automatically save design changes as templates
+                        </p>
+                      </div>
+                      <Button variant="outline" size="sm">
+                        <Settings className="w-4 h-4" />
+                      </Button>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="font-medium text-gray-200">Cloud Processing</h4>
+                        <p className="text-sm text-gray-400">
+                          Enable automatic cloud processing for uploads
+                        </p>
+                      </div>
+                      <Button variant="outline" size="sm">
+                        <Cpu className="w-4 h-4" />
+                      </Button>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="font-medium text-gray-200">Neural Enhancement</h4>
+                        <p className="text-sm text-gray-400">
+                          Advanced neural network background patterns
+                        </p>
+                      </div>
+                      <Button variant="outline" size="sm">
+                        <Sparkles className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-orange-400 flex items-center gap-2">
+                      <History className="h-5 w-5" />
+                      Design History
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-3">
+                      <h4 className="font-medium text-orange-400 mb-2">Design Preservation</h4>
+                      <p className="text-sm text-gray-300 mb-3">
+                        All your current designs are preserved and can be restored. The system maintains 
+                        a complete history of your visual configurations.
+                      </p>
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="outline">
+                          <Eye className="w-4 h-4 mr-2" />
+                          View History
+                        </Button>
+                        <Button size="sm" variant="outline">
+                          <Download className="w-4 h-4 mr-2" />
+                          Export All
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+          </Tabs>
                     </div>
                   </CardContent>
                 </Card>

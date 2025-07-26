@@ -50,12 +50,17 @@ export function ThemeDesigner({ isLocked = false, onLockToggle }: ThemeDesignerP
 
   const [presetName, setPresetName] = useState('')
 
-  const backgroundTypes: { value: EnhancedBackgroundType, label: string, description: string }[] = [
+  const backgroundTypes: { value: EnhancedBackgroundType, label: string, description: string, patterns?: string[] }[] = [
     { value: 'matrix', label: 'Matrix', description: 'Classic digital rain effect' },
     { value: 'liquid', label: 'Liquid', description: 'Flowing liquid animations' },
     { value: 'puzzle', label: 'Puzzle', description: 'Floating puzzle pieces' },
     { value: 'water', label: 'Water', description: 'Rippling water surface' },
-    { value: 'neuro', label: 'Neural', description: 'Neural network patterns' },
+    { 
+      value: 'neuro', 
+      label: 'Enhanced Neural', 
+      description: 'Advanced neural network patterns',
+      patterns: ['creative', 'abstract', 'organic', 'geometric', 'default']
+    },
     { value: 'animated', label: 'Animated Cycle', description: 'Cycles through effects' },
     { value: 'daily-theme', label: 'Daily Theme', description: 'Auto-generated daily' }
   ]

@@ -5,13 +5,17 @@ interface NeuroBackgroundProps {
   color?: string
   speed?: number
   className?: string
+  pattern?: 'default' | 'creative' | 'abstract' | 'organic' | 'geometric'
+  neuralDensity?: number
 }
 
 export function NeuroBackground({ 
   intensity = 'medium', 
   color = '#ff00ff', 
   speed = 1,
-  className = ''
+  className = '',
+  pattern = 'creative',
+  neuralDensity = 60
 }: NeuroBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef<number>()
@@ -31,22 +35,29 @@ export function NeuroBackground({
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
 
-    // Neural network parameters
-    const nodeCount = intensity === 'low' ? 30 : intensity === 'medium' ? 60 : 100
+    // Enhanced neural network parameters based on pattern
+    const nodeCount = Math.floor((intensity === 'low' ? 30 : intensity === 'medium' ? 60 : 100) * (neuralDensity / 100))
     const nodes = []
     const connections = []
+    const synapses = []
+    const particles = []
     
-    // Create nodes
+    // Create enhanced nodes with pattern-specific properties
     for (let i = 0; i < nodeCount; i++) {
-      nodes.push({
+      const node = createPatternNode(i, nodeCount, canvas, pattern)
+      nodes.push(node)
+    }
+
+    // Create synaptic particles for living neural activity
+    for (let i = 0; i < nodeCount * 2; i++) {
+      particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 2,
-        vy: (Math.random() - 0.5) * 2,
-        radius: 3 + Math.random() * 5,
-        activity: Math.random(),
-        activitySpeed: 0.01 + Math.random() * 0.02,
-        pulse: 0
+        vx: (Math.random() - 0.5) * 4 * speed,
+        vy: (Math.random() - 0.5) * 4 * speed,
+        life: Math.random(),
+        maxLife: 0.5 + Math.random() * 1.5,
+        size: 1 + Math.random() * 3
       })
     }
     
