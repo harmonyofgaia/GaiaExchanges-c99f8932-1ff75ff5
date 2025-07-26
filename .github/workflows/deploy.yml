@@ -129,7 +129,7 @@ jobs:
   deploy-fallback-github-pages:
     needs: [build-and-test, deploy-primary, deploy-fallback-netlify]
     runs-on: ubuntu-latest
-    if: needs.deploy-primary.outputs.deployment_result == 'failure' && (needs.deploy-fallback-netlify.result == 'failure' || needs.deploy-fallback-netlify.result == 'skipped')
+    if: needs.deploy-primary.outputs.deployment_result == 'failure' && needs.deploy-fallback-netlify.outputs.deployment_result == 'failure'
     permissions:
       contents: read
       pages: write
