@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import SlidingMenu from '@/components/SlidingMenu'
 import { GaiaLogo } from '@/components/GaiaLogo'
@@ -50,7 +50,9 @@ function App() {
               <Route path="/coin-crafter" element={<CoinCrafter />} />
               <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
-              <Route path="/admin" element={<Admin />} />
+              {/* Redirects for migrated admin routes */}
+              <Route path="/admin-login" element={<Navigate to="/secure-admin" replace />} />
+              <Route path="/admin" element={<Navigate to="/secure-admin" replace />} />
               <Route path="/secure-admin" element={<SecureAdmin />} />
             </Routes>
           </Suspense>

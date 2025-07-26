@@ -5,15 +5,21 @@ interface AdminSession {
   id: string
   timestamp: number
   ip?: string
+  timeout?: number // timeout in minutes
 }
 
 export function useSecureAdmin() {
   const [isAdmin, setIsAdmin] = useState(false)
   const [adminSession, setAdminSession] = useState<AdminSession | null>(null)
   const [isValidating, setIsValidating] = useState(true)
+  const [sessionTimeout, setSessionTimeout] = useState(2) // Default 2 minutes as required
 
   useEffect(() => {
     validateAdminSession()
+    
+    // Set up automatic session validation every 30 seconds
+    const interval = setInterval(validateAdminSession, 30000)
+    return () => clearInterval(interval)
   }, [])
 
   const validateAdminSession = () => {
@@ -21,6 +27,11 @@ export function useSecureAdmin() {
       const sessionId = localStorage.getItem('gaia-admin-session')
       const sessionExpiry = localStorage.getItem('gaia-admin-expiry')
       const adminActive = sessionStorage.getItem('admin-active')
+      const storedTimeout = localStorage.getItem('gaia-admin-timeout')
+      
+      if (storedTimeout) {
+        setSessionTimeout(parseInt(storedTimeout))
+      }
       
       if (sessionId && sessionExpiry && adminActive === 'true') {
         const now = Date.now()
@@ -30,7 +41,8 @@ export function useSecureAdmin() {
           setIsAdmin(true)
           setAdminSession({
             id: sessionId,
-            timestamp: now
+            timestamp: now,
+            timeout: sessionTimeout
           })
         } else {
           // Session expired
@@ -56,18 +68,20 @@ export function useSecureAdmin() {
         }
       }
 
-      // Create new admin session
+      // Create new admin session with current timeout setting
       const sessionId = `admin-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-      const expiryTime = Date.now() + (24 * 60 * 60 * 1000) // 24 hours
+      const expiryTime = Date.now() + (sessionTimeout * 60 * 1000) // timeout in minutes converted to ms
       
       localStorage.setItem('gaia-admin-session', sessionId)
       localStorage.setItem('gaia-admin-expiry', expiryTime.toString())
+      localStorage.setItem('gaia-admin-timeout', sessionTimeout.toString())
       sessionStorage.setItem('admin-active', 'true')
       
       setIsAdmin(true)
       setAdminSession({
         id: sessionId,
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        timeout: sessionTimeout
       })
       
       return true
@@ -80,6 +94,8 @@ export function useSecureAdmin() {
   const revokeAdminAccess = () => {
     localStorage.removeItem('gaia-admin-session')
     localStorage.removeItem('gaia-admin-expiry')
+    localStorage.removeItem('gaia-admin-timeout')
+    localStorage.removeItem('gaia-admin-ip')
     sessionStorage.removeItem('admin-active')
     setIsAdmin(false)
     setAdminSession(null)
@@ -87,8 +103,23 @@ export function useSecureAdmin() {
 
   const extendSession = () => {
     if (isAdmin && adminSession) {
-      const newExpiryTime = Date.now() + (24 * 60 * 60 * 1000)
+      const newExpiryTime = Date.now() + (sessionTimeout * 60 * 1000)
       localStorage.setItem('gaia-admin-expiry', newExpiryTime.toString())
+    }
+  }
+
+  const updateSessionTimeout = (newTimeout: number) => {
+    setSessionTimeout(newTimeout)
+    localStorage.setItem('gaia-admin-timeout', newTimeout.toString())
+    
+    // Update current session expiry if admin is logged in
+    if (isAdmin && adminSession) {
+      const newExpiryTime = Date.now() + (newTimeout * 60 * 1000)
+      localStorage.setItem('gaia-admin-expiry', newExpiryTime.toString())
+      setAdminSession({
+        ...adminSession,
+        timeout: newTimeout
+      })
     }
   }
 
@@ -96,9 +127,11 @@ export function useSecureAdmin() {
     isAdmin,
     adminSession,
     isValidating,
+    sessionTimeout,
     grantAdminAccess,
     revokeAdminAccess,
     extendSession,
+    updateSessionTimeout,
     validateAdminSession
   }
 }
