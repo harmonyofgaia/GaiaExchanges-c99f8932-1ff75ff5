@@ -47,12 +47,12 @@ export default function DeploymentStatus() {
   }
 
   const getStatusBadge = (status: SystemStatus['status']) => {
-    const variants = {
+    const variants: Record<SystemStatus['status'], 'default' | 'secondary' | 'destructive' | 'outline'> = {
       operational: 'default',
       warning: 'secondary', 
       error: 'destructive',
       maintenance: 'outline'
-    } as const
+    }
 
     return (
       <Badge variant={variants[status]} className="capitalize">
