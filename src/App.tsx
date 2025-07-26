@@ -21,6 +21,7 @@ const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
 const Admin = lazy(() => import('./pages/Admin'))
 const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
 const DeploymentStatus = lazy(() => import('./pages/DeploymentStatus'))
+const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'))
 
 function App() {
   useGlobalBackgroundServices()
@@ -54,6 +55,7 @@ function App() {
               <Route path="/admin" element={<Admin />} />
               <Route path="/secure-admin" element={<SecureAdmin />} />
               <Route path="/deployment-status" element={<DeploymentStatus />} />
+              <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
             </Routes>
           </Suspense>
         </main>

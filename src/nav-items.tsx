@@ -1,5 +1,5 @@
 
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket, Zap } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -44,6 +44,31 @@ export const navigationItems: NavigationItem[] = [
     icon: TreePine,
     variant: "ghost" as const,
     description: "Environmental project showcase and participation",
+    lazyLoaded: true,
+  },
+  {
+    title: "Earning Activities",
+    to: "/earning-activities",
+    icon: Zap,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Water-saving Actions Points",
+      "Home-grown Food Rewards", 
+      "Bee Hotel Creation System",
+      "Environmental Education Points",
+      "Skill-based Earning Platform",
+      "Referral Bonus System",
+      "Mission Voting Rewards",
+      "Location-based Missions",
+      "Carbon Credit Actions",
+      "NFT/Marketplace Participation",
+      "Emergency Response Points",
+      "Long-term Commitment Bonuses",
+      "Innovation Bonus System",
+      "Accessibility Rewards"
+    ],
+    description: "Master Plan v7: Comprehensive points earning system for all environmental activities",
     lazyLoaded: true,
   },
   {
@@ -92,22 +117,6 @@ export const navigationItems: NavigationItem[] = [
       "Reward Optimization"
     ],
     description: "Master Plan v7: AI-powered mission generation and tracking",
-    lazyLoaded: true,
-  },
-  {
-    title: "Planet Cleaning",
-    to: "/planet-cleaning",
-    icon: Globe,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Satellite Verification",
-      "IoT Sensor Integration",
-      "Blockchain Rewards",
-      "Global Impact Mapping",
-      "Community Coordination"
-    ],
-    description: "Master Plan v7: Verified cleanup activities with satellite monitoring",
     lazyLoaded: true,
   },
   {
