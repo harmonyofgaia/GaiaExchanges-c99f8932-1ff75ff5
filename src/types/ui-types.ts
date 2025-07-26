@@ -12,6 +12,15 @@ export interface BaseComponentProps {
 }
 
 // Tool/Item interfaces for marketplaces and inventories
+export interface Tool {
+  id: string
+  name: string
+  price: number
+  description: string
+  icon?: string
+  category?: string
+}
+
 export interface ToolItem {
   id: string
   name: string
@@ -20,6 +29,16 @@ export interface ToolItem {
   icon?: string
   category?: string
   rarity?: 'common' | 'rare' | 'epic' | 'legendary'
+}
+
+export interface Landscape {
+  id: string
+  name: string
+  price: number
+  description: string
+  image?: string
+  category?: string
+  biome?: string
 }
 
 export interface LandscapeItem {

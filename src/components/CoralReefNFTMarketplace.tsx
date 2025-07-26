@@ -5,14 +5,14 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Waves, Fish, Crown, Gem } from 'lucide-react'
-import { Tool as ToolType, Landscape as LandscapeType } from '@/types/ui-types'
+import { Tool, Landscape } from '@/types/ui-types'
 
-interface CoralReefTool extends ToolType {
+interface CoralReefTool extends Tool {
   ecoImpact: number
   rarity: 'common' | 'rare' | 'epic' | 'legendary'
 }
 
-interface CoralReefLandscape extends LandscapeType {
+interface CoralReefLandscape extends Landscape {
   coralHealth: number
   marineLife: number
   conservationStatus: string
