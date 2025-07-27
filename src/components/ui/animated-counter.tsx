@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface AnimatedCounterProps {
   value: number
@@ -7,36 +7,35 @@ interface AnimatedCounterProps {
   className?: string
 }
 
-export const AnimatedCounter = ({ value, duration = 2000, className = '' }: AnimatedCounterProps) => {
-  const [count, setCount] = useState(0)
+export function AnimatedCounter({ value, duration = 2000, className = '' }: AnimatedCounterProps) {
+  const [displayValue, setDisplayValue] = useState(0)
 
   useEffect(() => {
-    let startTime: number | null = null
-    let animationFrame: number
+    let startTime: number
+    let startValue = displayValue
 
     const animate = (currentTime: number) => {
-      if (startTime === null) startTime = currentTime
+      if (!startTime) startTime = currentTime
       const elapsed = currentTime - startTime
       const progress = Math.min(elapsed / duration, 1)
-      
+
       // Easing function for smooth animation
       const easeOutQuart = 1 - Math.pow(1 - progress, 4)
-      
-      setCount(Math.floor(easeOutQuart * value))
-      
+      const currentValue = startValue + (value - startValue) * easeOutQuart
+
+      setDisplayValue(Math.round(currentValue))
+
       if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate)
+        requestAnimationFrame(animate)
       }
     }
 
-    animationFrame = requestAnimationFrame(animate)
+    requestAnimationFrame(animate)
+  }, [value, duration, displayValue])
 
-    return () => {
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame)
-      }
-    }
-  }, [value, duration])
-
-  return <span className={className}>{count.toLocaleString()}</span>
+  return (
+    <span className={className}>
+      {displayValue.toLocaleString()}
+    </span>
+  )
 }
