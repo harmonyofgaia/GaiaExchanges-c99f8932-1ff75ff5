@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -54,7 +53,7 @@ export function UserProfile({ isOwner = false }: UserProfileProps) {
   const recentActivity = recentActivities?.slice(0, 5).map(activity => ({
     id: activity.id,
     type: activity.type,
-    description: getActivityDescription(activity.type),
+    description: getActivityDescription(activity.type as EarningActivityType),
     points: activity.pointsEarned || 0,
     date: activity.timestamp,
     verified: activity.verified
