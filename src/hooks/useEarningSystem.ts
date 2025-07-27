@@ -1,56 +1,50 @@
 
 import { useState, useEffect } from 'react'
-import { earningService, WaterSavingAction } from '@/services/earningService'
-import { EarningActivity, UserProfile, Badge, Achievement } from '@/types/gaia-types'
 
-export function useEarningSystem(userId: string) {
-  const [earnings, setEarnings] = useState({
-    totalEarned: 0,
-    dailyEarnings: 0,
-    weeklyEarnings: 0,
-    monthlyEarnings: 0,
-    streak: 0,
-    multiplier: 1
-  })
+export interface EarningActivity {
+  id: string
+  type: string
+  amount: number
+  timestamp: Date
+  description: string
+  status: 'pending' | 'completed' | 'failed'
+}
 
-  const [isLoading, setIsLoading] = useState(false)
+export interface UserProfile {
+  id: string
+  username: string
+  totalEarnings: number
+  level: number
+  streak: number
+  joinDate: Date
+}
 
-  useEffect(() => {
-    const userEarnings = earningService.getUserEarnings(userId)
-    if (userEarnings) {
-      setEarnings({
-        totalEarned: userEarnings.totalEarned,
-        dailyEarnings: userEarnings.dailyEarnings,
-        weeklyEarnings: userEarnings.weeklyEarnings,
-        monthlyEarnings: userEarnings.monthlyEarnings,
-        streak: userEarnings.streak,
-        multiplier: userEarnings.multiplier
-      })
-    }
-  }, [userId])
+export interface Badge {
+  id: string
+  name: string
+  description: string
+  icon: string
+  earned: boolean
+  earnedDate?: Date
+}
 
-  const addWaterSavingAction = async (action: WaterSavingAction) => {
-    setIsLoading(true)
-    try {
-      const updatedEarnings = earningService.addEarning(userId, action)
-      setEarnings({
-        totalEarned: updatedEarnings.totalEarned,
-        dailyEarnings: updatedEarnings.dailyEarnings,
-        weeklyEarnings: updatedEarnings.weeklyEarnings,
-        monthlyEarnings: updatedEarnings.monthlyEarnings,
-        streak: updatedEarnings.streak,
-        multiplier: updatedEarnings.multiplier
-      })
-    } finally {
-      setIsLoading(false)
-    }
-  }
+export interface Achievement {
+  id: string
+  name: string
+  description: string
+  progress: number
+  maxProgress: number
+  reward: number
+  unlocked: boolean
+}
 
-  return {
-    earnings,
-    addWaterSavingAction,
-    isLoading
-  }
+export interface UserStats {
+  totalEarnings: number
+  weeklyEarnings: number
+  monthlyEarnings: number
+  activitiesCompleted: number
+  streak: number
+  level: number
 }
 
 export function useEarningActivities(userId: string) {
@@ -58,45 +52,93 @@ export function useEarningActivities(userId: string) {
   const [isLoading, setIsLoading] = useState(false)
 
   const addActivity = (activity: EarningActivity) => {
-    setActivities(prev => [activity, ...prev])
+    setActivities(prev => [...prev, activity])
   }
 
-  const loadActivities = (userId: string) => {
+  const loadActivities = async (userId: string) => {
     setIsLoading(true)
-    // Mock loading activities
+    // Simulate API call
     setTimeout(() => {
       setIsLoading(false)
     }, 1000)
   }
 
-  const recordWaterSaving = (userId: string) => {
-    // Mock implementation
-    console.log('Recording water saving for user:', userId)
+  const recordBeeHotel = async (data: any) => {
+    const activity: EarningActivity = {
+      id: Date.now().toString(),
+      type: 'bee_hotel',
+      amount: 25,
+      timestamp: new Date(),
+      description: `Bee hotel maintenance: ${data.hotelType}`,
+      status: 'completed'
+    }
+    addActivity(activity)
+    return activity
   }
 
-  const recordBeeHotel = (userId: string) => {
-    // Mock implementation
-    console.log('Recording bee hotel for user:', userId)
+  const recordWaterSaving = async (data: any) => {
+    const activity: EarningActivity = {
+      id: Date.now().toString(),
+      type: 'water_saving',
+      amount: data.amount * 0.1,
+      timestamp: new Date(),
+      description: `Water saved: ${data.amount}L`,
+      status: 'completed'
+    }
+    addActivity(activity)
+    return activity
   }
 
-  const recordEnvironmentalEducation = (userId: string) => {
-    // Mock implementation
-    console.log('Recording environmental education for user:', userId)
+  const recordEnvironmentalEducation = async (data: any) => {
+    const activity: EarningActivity = {
+      id: Date.now().toString(),
+      type: 'environmental_education',
+      amount: 15,
+      timestamp: new Date(),
+      description: `Environmental education: ${data.topic}`,
+      status: 'completed'
+    }
+    addActivity(activity)
+    return activity
   }
 
-  const recordHomeGrownFood = (userId: string) => {
-    // Mock implementation
-    console.log('Recording home grown food for user:', userId)
+  const recordHomeGrownFood = async (data: any) => {
+    const activity: EarningActivity = {
+      id: Date.now().toString(),
+      type: 'home_grown_food',
+      amount: 20,
+      timestamp: new Date(),
+      description: `Home grown food: ${data.foodType}`,
+      status: 'completed'
+    }
+    addActivity(activity)
+    return activity
   }
 
-  const recordSkillBasedWork = (userId: string) => {
-    // Mock implementation
-    console.log('Recording skill-based work for user:', userId)
+  const processReferral = async (data: any) => {
+    const activity: EarningActivity = {
+      id: Date.now().toString(),
+      type: 'referral',
+      amount: 50,
+      timestamp: new Date(),
+      description: `Referral bonus: ${data.referredUser}`,
+      status: 'completed'
+    }
+    addActivity(activity)
+    return activity
   }
 
-  const processReferral = (userId: string) => {
-    // Mock implementation
-    console.log('Processing referral for user:', userId)
+  const recordSkillBasedWork = async (data: any) => {
+    const activity: EarningActivity = {
+      id: Date.now().toString(),
+      type: 'skill_based_work',
+      amount: data.hoursWorked * 10,
+      timestamp: new Date(),
+      description: `Skill-based work: ${data.skillType}`,
+      status: 'completed'
+    }
+    addActivity(activity)
+    return activity
   }
 
   return {
@@ -104,56 +146,48 @@ export function useEarningActivities(userId: string) {
     addActivity,
     isLoading,
     loadActivities,
-    recordWaterSaving,
     recordBeeHotel,
+    recordWaterSaving,
     recordEnvironmentalEducation,
     recordHomeGrownFood,
-    recordSkillBasedWork,
     processReferral,
+    recordSkillBasedWork,
     loading: isLoading
   }
 }
 
 export function useUserProfile(userId: string) {
-  const [profile, setProfile] = useState<UserProfile | null>(null)
+  const [profile, setProfile] = useState<UserProfile>({
+    id: userId,
+    username: 'EcoWarrior',
+    totalEarnings: 0,
+    level: 1,
+    streak: 0,
+    joinDate: new Date()
+  })
   const [isLoading, setIsLoading] = useState(false)
 
-  const loadProfile = (userId: string) => {
+  const loadProfile = async (userId: string) => {
     setIsLoading(true)
-    // Mock loading profile
     setTimeout(() => {
-      setProfile({
-        id: userId,
-        username: 'GaiaUser',
-        email: 'user@gaia.com',
-        walletAddress: '0x123...',
-        totalPoints: 1000,
-        totalTokens: 500,
-        level: 5,
-        badges: [],
-        achievements: [],
-        earningHistory: [],
-        referralCode: 'GAIA123',
-        createdAt: new Date(),
-        lastActive: new Date()
-      })
       setIsLoading(false)
     }, 1000)
   }
 
-  useEffect(() => {
-    loadProfile(userId)
-  }, [userId])
+  const stats: UserStats = {
+    totalEarnings: profile.totalEarnings,
+    weeklyEarnings: 120,
+    monthlyEarnings: 450,
+    activitiesCompleted: 25,
+    streak: profile.streak,
+    level: profile.level
+  }
 
   return {
     profile,
     isLoading,
     loadProfile,
-    stats: {
-      totalPoints: profile?.totalPoints || 0,
-      totalTokens: profile?.totalTokens || 0,
-      level: profile?.level || 1
-    }
+    stats
   }
 }
 
@@ -161,25 +195,28 @@ export function useBadges(userId: string) {
   const [badges, setBadges] = useState<Badge[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const loadUserBadges = (userId: string) => {
+  const loadUserBadges = async (userId: string) => {
     setIsLoading(true)
-    // Mock loading badges
     setTimeout(() => {
       setIsLoading(false)
     }, 1000)
   }
 
-  const loadAvailableBadges = (userId: string) => {
-    // Mock implementation
-    console.log('Loading available badges for user:', userId)
+  const loadAvailableBadges = async (userId: string) => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
   }
+
+  const availableBadges = badges
 
   return {
     badges,
     isLoading,
     loadUserBadges,
     loadAvailableBadges,
-    availableBadges: badges
+    availableBadges
   }
 }
 
@@ -187,9 +224,8 @@ export function useAchievements(userId: string) {
   const [achievements, setAchievements] = useState<Achievement[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const loadUserAchievements = (userId: string) => {
+  const loadUserAchievements = async (userId: string) => {
     setIsLoading(true)
-    // Mock loading achievements
     setTimeout(() => {
       setIsLoading(false)
     }, 1000)

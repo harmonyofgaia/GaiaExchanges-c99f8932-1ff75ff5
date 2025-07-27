@@ -10,10 +10,10 @@ import {
   DropdownMenuLabel
 } from "@/components/ui/dropdown-menu"
 import { Badge } from '@/components/ui/badge'
-import { Settings, Brush, Lock, Unlock, Palette, LayoutDashboard } from 'lucide-react'
+import { Settings, Brush, Lock, Unlock, Palette, LayoutDashboard, Zap, Eye } from 'lucide-react'
 import { useLock } from '@/components/providers/ThemeProvider'
 import { toast } from 'sonner'
-import { VisualControlMenu } from './VisualControlMenu'
+import { EnhancedVisualControls } from './EnhancedVisualControls'
 
 export function VisualControlButton() {
   const { isLocked, toggleLock } = useLock()
@@ -108,7 +108,7 @@ export function VisualControlButton() {
             >
               <div className="flex items-center gap-2">
                 <LayoutDashboard className="h-4 w-4" />
-                <span>Menu Templates</span>
+                <span>Layout Designer</span>
               </div>
             </DropdownMenuItem>
             
@@ -124,6 +124,32 @@ export function VisualControlButton() {
                 <span>Color Palettes</span>
               </div>
             </DropdownMenuItem>
+
+            <DropdownMenuItem
+              onClick={handleOpenFullMenu}
+              className={`text-orange-300 hover:text-orange-200 hover:bg-orange-500/10 cursor-pointer ${
+                isLocked ? 'opacity-60' : ''
+              }`}
+              disabled={isLocked}
+            >
+              <div className="flex items-center gap-2">
+                <Zap className="h-4 w-4" />
+                <span>Animation Controls</span>
+              </div>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem
+              onClick={handleOpenFullMenu}
+              className={`text-pink-300 hover:text-pink-200 hover:bg-pink-500/10 cursor-pointer ${
+                isLocked ? 'opacity-60' : ''
+              }`}
+              disabled={isLocked}
+            >
+              <div className="flex items-center gap-2">
+                <Eye className="h-4 w-4" />
+                <span>Visual Effects</span>
+              </div>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -131,10 +157,10 @@ export function VisualControlButton() {
       {/* Full Visual Control Menu Modal */}
       {showFullMenu && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-background/95 backdrop-blur-sm border border-primary/30 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-background/95 backdrop-blur-sm border border-primary/30 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-primary">Visual Control Panel</h2>
+                <h2 className="text-2xl font-bold text-primary">Enhanced Visual Control Panel</h2>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -145,7 +171,7 @@ export function VisualControlButton() {
                 </Button>
               </div>
               
-              <VisualControlMenu />
+              <EnhancedVisualControls />
             </div>
           </div>
         </div>

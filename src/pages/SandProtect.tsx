@@ -1,158 +1,170 @@
+
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Waves, Fish, Anchor, Heart, Star, Zap } from 'lucide-react'
+import { Progress } from '@/components/ui/progress'
+import { Shield, Waves, Fish, Anchor, AlertTriangle, Heart } from 'lucide-react'
+import { AnimatedCounter } from '@/components/ui/animated-counter'
 
 export default function SandProtect() {
-  const [sandLevel, setSandLevel] = useState(75)
-  const [threatsDetected, setThreatsDetected] = useState(12)
-  const [protectedSpecies, setProtectedSpecies] = useState(42)
+  const [stats, setStats] = useState({
+    protectedAreas: 12,
+    marineLifeSaved: 847,
+    volunteersActive: 156,
+    fundingRaised: 28500
+  })
+
+  const [currentSection, setCurrentSection] = useState(0)
 
   useEffect(() => {
-    const sandInterval = setInterval(() => {
-      setSandLevel(prev => Math.min(100, prev + Math.random() * 2))
-      setThreatsDetected(prev => prev + Math.floor(Math.random() * 3))
-      setProtectedSpecies(prev => prev + 1)
-    }, 3000)
+    const interval = setInterval(() => {
+      setStats(prev => ({
+        protectedAreas: prev.protectedAreas + Math.floor(Math.random() * 2),
+        marineLifeSaved: prev.marineLifeSaved + Math.floor(Math.random() * 10),
+        volunteersActive: prev.volunteersActive + Math.floor(Math.random() * 3),
+        fundingRaised: prev.fundingRaised + Math.floor(Math.random() * 100)
+      }))
+    }, 5000)
 
-    return () => clearInterval(sandInterval)
+    return () => clearInterval(interval)
   }, [])
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delay: 0.3,
-        duration: 0.8
-      }
+  const sections = [
+    {
+      title: "🏖️ Beach Sand Protection",
+      content: "Protecting coastal ecosystems and preventing sand erosion"
+    },
+    {
+      title: "🌊 Marine Conservation",
+      content: "Safeguarding marine life and coral reef systems"
+    },
+    {
+      title: "🐠 Wildlife Protection",
+      content: "Preserving endangered species and their habitats"
+    },
+    {
+      title: "🔬 Research & Monitoring",
+      content: "Scientific research and environmental monitoring"
     }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        type: 'spring',
-        stiffness: 100
-      }
-    }
-  }
+  ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-cyan-900 to-teal-900 relative overflow-hidden">
-      {/* Animated background */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-blue-900 via-cyan-900 to-teal-900 opacity-30"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      />
-
-      {/* Sand particles */}
-      <div className="absolute inset-0">
-        {Array.from({ length: 50 }).map((_, index) => (
-          <motion.div
-            key={index}
-            className="absolute w-1 h-1 bg-yellow-200 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `sand-drift ${Math.random() * 5 + 5}s linear infinite`
-            }}
-            variants={itemVariants}
-            initial="hidden"
-            animate="visible"
-          />
-        ))}
-      </div>
-      
-      <div className="container mx-auto px-4 py-8 relative z-10">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-teal-900 to-green-900 p-8">
+      <div className="container mx-auto">
+        {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-4 flex items-center justify-center gap-3">
-            <Waves className="h-12 w-12 text-cyan-400" />
-            🏝️ SAND PROTECT SYSTEM
-            <Fish className="h-12 w-12 text-blue-400" />
+          <div className="inline-block animate-bounce mb-4">
+            <Shield className="h-16 w-16 text-blue-400 mx-auto" />
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-teal-400 to-green-400 bg-clip-text text-transparent mb-4">
+            SandProtect Initiative
           </h1>
-          <p className="text-xl text-gray-300">
-            Protecting our shores and marine life with advanced technology
+          <p className="text-xl text-blue-300/90 max-w-2xl mx-auto">
+            Protecting our coastal ecosystems and marine environments for future generations
           </p>
         </div>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div variants={itemVariants}>
-            <Card className="bg-blue-900/20 border-blue-500/30">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-400">
-                  <Shield className="h-5 w-5" />
-                  Sand Stability
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-white">{sandLevel}%</div>
-                <p className="text-sm text-gray-300">
-                  Current sand stability level
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
+        {/* Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+          <Card className="bg-blue-900/20 border-blue-500/30">
+            <CardContent className="p-6 text-center">
+              <Shield className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-blue-400">
+                <AnimatedCounter value={stats.protectedAreas} />
+              </div>
+              <div className="text-sm text-blue-300/80">Protected Areas</div>
+            </CardContent>
+          </Card>
 
-          <motion.div variants={itemVariants}>
-            <Card className="bg-cyan-900/20 border-cyan-500/30">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-cyan-400">
-                  <Zap className="h-5 w-5" />
-                  Threats Detected
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-white">{threatsDetected}</div>
-                <p className="text-sm text-gray-300">
-                  Potential threats to the ecosystem
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
+          <Card className="bg-teal-900/20 border-teal-500/30">
+            <CardContent className="p-6 text-center">
+              <Fish className="h-8 w-8 text-teal-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-teal-400">
+                <AnimatedCounter value={stats.marineLifeSaved} />
+              </div>
+              <div className="text-sm text-teal-300/80">Marine Life Saved</div>
+            </CardContent>
+          </Card>
 
-          <motion.div variants={itemVariants}>
-            <Card className="bg-teal-900/20 border-teal-500/30">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-teal-400">
-                  <Heart className="h-5 w-5" />
-                  Protected Species
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-white">{protectedSpecies}</div>
-                <p className="text-sm text-gray-300">
-                  Marine species under protection
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </motion.div>
+          <Card className="bg-green-900/20 border-green-500/30">
+            <CardContent className="p-6 text-center">
+              <Heart className="h-8 w-8 text-green-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-green-400">
+                <AnimatedCounter value={stats.volunteersActive} />
+              </div>
+              <div className="text-sm text-green-300/80">Active Volunteers</div>
+            </CardContent>
+          </Card>
 
-        <motion.div
-          className="mt-8 text-center"
-          variants={itemVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <Button className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-500 text-white">
-            <Anchor className="h-4 w-4 mr-2" />
-            Stabilize Sand
+          <Card className="bg-purple-900/20 border-purple-500/30">
+            <CardContent className="p-6 text-center">
+              <Anchor className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-purple-400">
+                $<AnimatedCounter value={stats.fundingRaised} />
+              </div>
+              <div className="text-sm text-purple-300/80">Funding Raised</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Content Sections */}
+        <div className="space-y-8">
+          {sections.map((section, index) => (
+            <div
+              key={index}
+              className={`transition-all duration-500 ${
+                currentSection === index ? 'opacity-100 transform-none' : 'opacity-70'
+              }`}
+            >
+              <Card className="border-blue-500/30 bg-blue-900/20">
+                <CardHeader>
+                  <CardTitle className="text-blue-400 text-2xl">
+                    {section.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-blue-300/90 text-lg mb-6">
+                    {section.content}
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="bg-blue-800/30 rounded-lg p-4">
+                      <h4 className="font-semibold text-blue-400 mb-2">Current Project</h4>
+                      <p className="text-sm text-blue-300/80">
+                        Beach restoration at Marine Park - 67% complete
+                      </p>
+                      <Progress value={67} className="mt-2" />
+                    </div>
+                    <div className="bg-teal-800/30 rounded-lg p-4">
+                      <h4 className="font-semibold text-teal-400 mb-2">Impact</h4>
+                      <p className="text-sm text-teal-300/80">
+                        2.5 km of coastline protected this month
+                      </p>
+                    </div>
+                    <div className="bg-green-800/30 rounded-lg p-4">
+                      <h4 className="font-semibold text-green-400 mb-2">Next Steps</h4>
+                      <p className="text-sm text-green-300/80">
+                        Expand to 3 additional coastal regions
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          ))}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex justify-center gap-4 mt-12">
+          <Button className="bg-blue-600 hover:bg-blue-700">
+            <Waves className="h-5 w-5 mr-2" />
+            Join Protection Efforts
           </Button>
-        </motion.div>
+          <Button variant="outline" className="border-blue-400 text-blue-400">
+            <AlertTriangle className="h-5 w-5 mr-2" />
+            Report Environmental Issue
+          </Button>
+        </div>
       </div>
     </div>
   )
