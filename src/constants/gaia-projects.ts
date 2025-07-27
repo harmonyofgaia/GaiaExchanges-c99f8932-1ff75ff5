@@ -1,180 +1,83 @@
-import { Heart, Sprout, Zap, Snowflake, Waves, Coffee, Wrench, Droplets, Gamepad2, Music, Users, BrainCircuit } from 'lucide-react'
 
 export interface GAiAProject {
   id: string
-  name: string
+  title: string
   description: string
   category: string
-  walletAddress: string
-  website?: string
-  icon: React.ComponentType
-  minDonation: number
-  suggestedDonations: number[]
-  impactDescription: string
-  verified: boolean
+  status: 'active' | 'completed' | 'planning'
+  progress: number
+  participants: number
+  reward: number
+  deadline: string
+  impact: 'Low' | 'Medium' | 'High' | 'Very High'
+  image?: string
+  tags: string[]
 }
 
-export const GAIA_COMMUNITY_PROJECTS: GAiAProject[] = [
+export const GAIA_PROJECTS: GAiAProject[] = [
   {
-    id: 'heart-of-gaia',
-    name: 'The Heart Of Gaia',
-    description: 'Core community project fostering global environmental consciousness and sustainable living practices.',
-    category: 'Community Foundation',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh1',
-    website: 'https://www.gaiaexchanges.net',
-    icon: Heart,
-    minDonation: 100,
-    suggestedDonations: [500, 1000, 2500, 5000],
-    impactDescription: 'Supporting global environmental awareness and community building initiatives.',
-    verified: true
+    id: '1',
+    title: 'Global Reforestation Initiative',
+    description: 'Plant trees worldwide to combat climate change and restore ecosystems.',
+    category: 'Environmental',
+    status: 'active',
+    progress: 67,
+    participants: 25847,
+    reward: 500,
+    deadline: '2024-12-31',
+    impact: 'Very High',
+    tags: ['trees', 'climate', 'carbon']
   },
   {
-    id: 'green-neuroregeneration-initiative',
-    name: '🌟 Green Neuroregeneration Initiative',
-    summary: 'Groundbreaking bio-inspired research leveraging plant root growth mechanisms and mushroom mycelium networks for human neural pathway regeneration.',
-    methodology: 'Our perpetual 24/7 research program focuses on post-stroke recovery, utilizing regenerative properties of plant root systems and fungal mycelium to develop treatments for neural healing. Advanced laboratory facilities enable continuous research across every possible pathway.',
-    goals: 'Ensure transparency through active research tracking and continuous updates, bridging nature\'s wisdom with medical innovation.',
-    category: 'Research & Restoration',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh2',
-    website: 'https://www.gaiaexchanges.net/neuroregeneration',
-    icon: BrainCircuit,
-    minDonation: 500,
-    suggestedDonations: [1000, 2500, 5000, 10000],
-    impactDescription: '🧠🍄 Advancing neural recovery through innovative plant and fungal regeneration research, bridging nature\'s wisdom with medical innovation.',
-    verified: true
+    id: '2',
+    title: 'Ocean Cleanup Campaign',
+    description: 'Remove plastic waste from oceans and waterways.',
+    category: 'Environmental',
+    status: 'active',
+    progress: 45,
+    participants: 15632,
+    reward: 350,
+    deadline: '2024-11-30',
+    impact: 'High',
+    tags: ['ocean', 'plastic', 'cleanup']
   },
   {
-    id: 'seed-splitter',
-    name: 'Seed Splitter',
-    description: 'Innovative seed distribution network promoting biodiversity and sustainable agriculture worldwide.',
-    category: 'Agriculture & Biodiversity',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-    icon: Sprout,
-    minDonation: 250,
-    suggestedDonations: [500, 1000, 2500, 5000],
-    impactDescription: 'Distributing native seeds to restore ecosystems and support local food security.',
-    verified: true
+    id: '3',
+    title: 'Solar Energy Expansion',
+    description: 'Install solar panels in communities worldwide.',
+    category: 'Energy',
+    status: 'active',
+    progress: 78,
+    participants: 8934,
+    reward: 750,
+    deadline: '2024-10-15',
+    impact: 'Very High',
+    tags: ['solar', 'renewable', 'energy']
   },
   {
-    id: 'railing-energy',
-    name: 'Railing Energy',
-    description: 'Revolutionary railway-based renewable energy generation system for sustainable transportation.',
-    category: 'Renewable Energy',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-    icon: Zap,
-    minDonation: 500,
-    suggestedDonations: [1000, 2500, 5000, 10000],
-    impactDescription: 'Generating clean energy from railway infrastructure to power sustainable transport.',
-    verified: true
+    id: '4',
+    title: 'Sustainable Agriculture Network',
+    description: 'Promote sustainable farming practices globally.',
+    category: 'Agriculture',
+    status: 'planning',
+    progress: 12,
+    participants: 3456,
+    reward: 400,
+    deadline: '2025-03-31',
+    impact: 'High',
+    tags: ['farming', 'sustainable', 'food']
   },
   {
-    id: 'freeze-capital',
-    name: 'Freeze Capital',
-    description: 'Arctic preservation initiative focused on protecting polar ecosystems and wildlife habitats.',
-    category: 'Conservation',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-    icon: Snowflake,
-    minDonation: 300,
-    suggestedDonations: [750, 1500, 3000, 7500],
-    impactDescription: 'Protecting Arctic environments and supporting polar wildlife conservation efforts.',
-    verified: true
-  },
-  {
-    id: 'earth-aquarium-shrooms',
-    name: 'Earth Aquarium of Shrooms',
-    description: 'Mycological research center developing sustainable fungal solutions for environmental restoration.',
-    category: 'Research & Restoration',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-    icon: Waves,
-    minDonation: 200,
-    suggestedDonations: [400, 800, 2000, 4000],
-    impactDescription: 'Using mushroom cultivation for soil restoration and environmental healing.',
-    verified: true
-  },
-  {
-    id: 'vintage-internet-cafe',
-    name: 'Vintage Internet Cafe',
-    description: 'Digital inclusion project providing sustainable internet access and environmental education.',
-    category: 'Digital Sustainability',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-    icon: Coffee,
-    minDonation: 150,
-    suggestedDonations: [300, 600, 1500, 3000],
-    impactDescription: 'Bridging digital divides while promoting environmental awareness through technology.',
-    verified: true
-  },
-  {
-    id: 'techno-soul-solutions',
-    name: 'Techno Soul Solutions',
-    description: 'Technology-driven environmental solutions combining innovation with spiritual sustainability.',
-    category: 'Green Technology',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-    icon: Wrench,
-    minDonation: 400,
-    suggestedDonations: [800, 1600, 4000, 8000],
-    impactDescription: 'Developing holistic tech solutions for environmental and social challenges.',
-    verified: true
-  },
-  {
-    id: 'natural-clean-system',
-    name: 'Natural Clean System',
-    description: 'Bio-based cleaning and water purification systems for environmental restoration.',
-    category: 'Water & Sanitation',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-    icon: Droplets,
-    minDonation: 250,
-    suggestedDonations: [500, 1000, 2500, 5000],
-    impactDescription: 'Providing natural water purification and ecosystem restoration solutions.',
-    verified: true
-  },
-  {
-    id: 'nft-gameswap-virtual',
-    name: 'NFT GameSwap Virtual',
-    description: 'Virtual gaming platform promoting environmental awareness through blockchain-based games.',
-    category: 'Environmental Gaming',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-    icon: Gamepad2,
-    minDonation: 100,
-    suggestedDonations: [200, 500, 1000, 2000],
-    impactDescription: 'Gamifying environmental action and education through virtual experiences.',
-    verified: true
-  },
-  {
-    id: 'sound-riffs-re-grau-dio',
-    name: 'Sound Riffs Re Grau dio',
-    description: 'Musical platform creating environmental awareness through collaborative sound experiences.',
-    category: 'Environmental Arts',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-    icon: Music,
-    minDonation: 100,
-    suggestedDonations: [250, 500, 1250, 2500],
-    impactDescription: 'Using music and sound to inspire environmental consciousness and action.',
-    verified: true
-  },
-  {
-    id: 'greenlake-tribe',
-    name: 'GreenLake Tribe',
-    description: 'Community-based lake and wetland restoration project supporting aquatic ecosystems.',
-    category: 'Ecosystem Restoration',
-    walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
-    icon: Users,
-    minDonation: 200,
-    suggestedDonations: [400, 800, 2000, 4000],
-    impactDescription: 'Restoring lake ecosystems and building sustainable community stewardship.',
-    verified: true
+    id: '5',
+    title: 'Wildlife Conservation Program',
+    description: 'Protect endangered species and their habitats.',
+    category: 'Wildlife',
+    status: 'active',
+    progress: 56,
+    participants: 7890,
+    reward: 600,
+    deadline: '2024-09-30',
+    impact: 'Very High',
+    tags: ['wildlife', 'conservation', 'biodiversity']
   }
 ]
-
-export const CULTURE_OF_HARMONY_URL = 'https://www.gaiaexchanges.net/heart-of-gaia-projects'
-
-export const getCommunityProjectById = (id: string): GAiAProject | undefined => {
-  return GAIA_COMMUNITY_PROJECTS.find(project => project.id === id)
-}
-
-export const getCommunityProjectsByCategory = (category: string): GAiAProject[] => {
-  return GAIA_COMMUNITY_PROJECTS.filter(project => project.category === category)
-}
-
-export const getAllCategories = (): string[] => {
-  return Array.from(new Set(GAIA_COMMUNITY_PROJECTS.map(project => project.category)))
-}

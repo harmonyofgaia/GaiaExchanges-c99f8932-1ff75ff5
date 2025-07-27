@@ -1,20 +1,17 @@
 import { useEffect, useRef } from 'react'
 
-interface PuzzleBackgroundProps {
+export interface PuzzleBackgroundProps {
   intensity?: 'low' | 'medium' | 'high'
   color?: string
   speed?: number
-  className?: string
 }
 
-export function PuzzleBackground({ 
-  intensity = 'medium', 
-  color = '#00ff00', 
-  speed = 1,
-  className = ''
+export function PuzzleBackground({
+  intensity = 'medium',
+  color = '#8b5cf6',
+  speed = 1
 }: PuzzleBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -31,124 +28,124 @@ export function PuzzleBackground({
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
 
-    // Puzzle piece parameters
-    const pieceSize = intensity === 'low' ? 120 : intensity === 'medium' ? 80 : 60
-    const pieces = []
-    
-    for (let x = 0; x < canvas.width + pieceSize; x += pieceSize) {
-      for (let y = 0; y < canvas.height + pieceSize; y += pieceSize) {
-        pieces.push({
-          x,
-          y,
-          size: pieceSize,
-          rotation: Math.random() * Math.PI * 2,
-          rotationSpeed: (Math.random() - 0.5) * 0.02 * speed,
-          alpha: 0.1 + Math.random() * 0.3,
-          phase: Math.random() * Math.PI * 2
-        })
+    // Puzzle pieces configuration
+    const pieceSize = intensity === 'low' ? 80 : intensity === 'high' ? 40 : 60
+    const cols = Math.ceil(canvas.width / pieceSize)
+    const rows = Math.ceil(canvas.height / pieceSize)
+
+    interface PuzzlePiece {
+      x: number
+      y: number
+      targetX: number
+      targetY: number
+      rotation: number
+      alpha: number
+      size: number
+    }
+
+    const pieces: PuzzlePiece[] = []
+
+    // Initialize puzzle pieces
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const piece: PuzzlePiece = {
+          x: col * pieceSize + Math.random() * 20 - 10,
+          y: row * pieceSize + Math.random() * 20 - 10,
+          targetX: col * pieceSize,
+          targetY: row * pieceSize,
+          rotation: Math.random() * 360,
+          alpha: Math.random() * 0.5 + 0.1,
+          size: pieceSize
+        }
+        pieces.push(piece)
       }
     }
 
-    let time = 0
-
-    const drawPuzzlePiece = (x: number, y: number, size: number, rotation: number, alpha: number) => {
+    const drawPuzzlePiece = (piece: PuzzlePiece) => {
       ctx.save()
-      ctx.translate(x + size/2, y + size/2)
-      ctx.rotate(rotation)
-      ctx.globalAlpha = alpha
-      
+      ctx.translate(piece.x + piece.size / 2, piece.y + piece.size / 2)
+      ctx.rotate((piece.rotation * Math.PI) / 180)
+      ctx.globalAlpha = piece.alpha
+
       // Draw puzzle piece shape
-      ctx.beginPath()
-      ctx.moveTo(-size/2, -size/2)
-      ctx.lineTo(size/2, -size/2)
-      
-      // Top knob
-      if (piece.hasTopKnob) {
-        ctx.arc(0, -size/2, size/8, 0, Math.PI, false)
-      }
-      
-      ctx.lineTo(size/2, size/2)
-      
-      // Right knob
-      if (piece.hasRightKnob) {
-        ctx.arc(size/2, 0, size/8, -Math.PI/2, Math.PI/2, false)
-      }
-      
-      ctx.lineTo(-size/2, size/2)
-      
-      // Bottom knob
-      if (piece.hasBottomKnob) {
-        ctx.arc(0, size/2, size/8, Math.PI, 0, false)
-      }
-      
-      ctx.lineTo(-size/2, -size/2)
-      
-      // Left knob
-      if (piece.hasLeftKnob) {
-        ctx.arc(-size/2, 0, size/8, Math.PI/2, -Math.PI/2, false)
-      }
-      
-      ctx.closePath()
-      
-      // Create gradient fill
-      const gradient = ctx.createLinearGradient(-size/2, -size/2, size/2, size/2)
-      gradient.addColorStop(0, `${color}60`)
-      gradient.addColorStop(0.5, `${color}40`)
-      gradient.addColorStop(1, `${color}20`)
-      
-      ctx.fillStyle = gradient
-      ctx.fill()
-      
-      // Add border
-      ctx.strokeStyle = `${color}80`
+      ctx.strokeStyle = color
+      ctx.fillStyle = color
       ctx.lineWidth = 2
-      ctx.stroke()
+
+      const size = piece.size * 0.8
+      const tabSize = size * 0.3
+
+      ctx.beginPath()
+      ctx.moveTo(-size / 2, -size / 2)
       
+      // Top edge with tab
+      ctx.lineTo(-tabSize / 2, -size / 2)
+      ctx.arc(0, -size / 2 - tabSize / 2, tabSize / 2, 0, Math.PI, false)
+      ctx.lineTo(tabSize / 2, -size / 2)
+      ctx.lineTo(size / 2, -size / 2)
+      
+      // Right edge with tab
+      ctx.lineTo(size / 2, -tabSize / 2)
+      ctx.arc(size / 2 + tabSize / 2, 0, tabSize / 2, Math.PI, 0, false)
+      ctx.lineTo(size / 2, tabSize / 2)
+      ctx.lineTo(size / 2, size / 2)
+      
+      // Bottom edge with tab
+      ctx.lineTo(tabSize / 2, size / 2)
+      ctx.arc(0, size / 2 + tabSize / 2, tabSize / 2, Math.PI, 0, false)
+      ctx.lineTo(-tabSize / 2, size / 2)
+      ctx.lineTo(-size / 2, size / 2)
+      
+      // Left edge with tab
+      ctx.lineTo(-size / 2, tabSize / 2)
+      ctx.arc(-size / 2 - tabSize / 2, 0, tabSize / 2, 0, Math.PI, false)
+      ctx.lineTo(-size / 2, -tabSize / 2)
+      ctx.closePath()
+
+      ctx.fill()
+      ctx.stroke()
       ctx.restore()
     }
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
-      // Dark background
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.95)'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      // Draw puzzle pieces
-      pieces.forEach((piece, index) => {
-        piece.rotation += piece.rotationSpeed
-        
-        // Add floating effect
-        const floatY = piece.y + Math.sin(time + piece.phase) * 10
-        
-        drawPuzzlePiece(
-          piece.x, 
-          floatY, 
-          piece.size, 
-          piece.rotation, 
-          piece.alpha + Math.sin(time * 2 + index) * 0.1
-        )
+      pieces.forEach(piece => {
+        drawPuzzlePiece(piece)
+
+        // Animate piece movement towards target
+        piece.x += (piece.targetX - piece.x) * 0.01 * speed
+        piece.y += (piece.targetY - piece.y) * 0.01 * speed
+        piece.rotation += speed * 0.5
+
+        // Randomly change target occasionally
+        if (Math.random() < 0.001) {
+          piece.targetX = piece.targetX + (Math.random() - 0.5) * 100
+          piece.targetY = piece.targetY + (Math.random() - 0.5) * 100
+        }
+
+        // Keep within bounds
+        if (piece.targetX < 0) piece.targetX = 0
+        if (piece.targetX > canvas.width - piece.size) piece.targetX = canvas.width - piece.size
+        if (piece.targetY < 0) piece.targetY = 0
+        if (piece.targetY > canvas.height - piece.size) piece.targetY = canvas.height - piece.size
       })
 
-      time += 0.01 * speed
-      animationRef.current = requestAnimationFrame(animate)
+      requestAnimationFrame(animate)
     }
 
     animate()
 
     return () => {
       window.removeEventListener('resize', resizeCanvas)
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
     }
   }, [intensity, color, speed])
 
   return (
     <canvas
       ref={canvasRef}
-      className={`fixed inset-0 pointer-events-none ${className}`}
-      style={{ zIndex: -1 }}
+      className="fixed inset-0 pointer-events-none z-0"
+      style={{ opacity: 0.3 }}
     />
   )
 }

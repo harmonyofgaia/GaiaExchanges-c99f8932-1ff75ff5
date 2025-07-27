@@ -1,60 +1,219 @@
 
 import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Shield, ArrowRight } from 'lucide-react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
+import { UltimateAdminSuite } from '@/components/admin/UltimateAdminSuite'
+import { MasterAdminControlCenter } from '@/components/admin/MasterAdminControlCenter'
+import { DragonAIDefense } from '@/components/admin/DragonAIDefense'
+import { KoalaAIEngine } from '@/components/admin/KoalaAIEngine'
+import { UltimateIntelligenceHub } from '@/components/admin/UltimateIntelligenceHub'
+import { AdminMediaLibrary } from '@/components/admin/AdminMediaLibrary'
+import { WalletEngineAdmin } from '@/components/admin/WalletEngineAdmin'
+import { TokenBurnController } from '@/components/admin/TokenBurnController'
+import { GitHubIntegrationSuite } from '@/components/system/GitHubIntegrationSuite'
+import { NotificationController } from '@/components/admin/NotificationController'
+import { PsychohistoricalEngine } from '@/components/admin/PsychohistoricalEngine'
+import { PhoenixGuardian } from '@/components/admin/PhoenixGuardian'
+import { GaiaIATool } from '@/components/admin/GaiaIATool'
+import { SecurityDashboard } from '@/components/admin/security/SecurityDashboard'
+import { UserManagementSystemRefactored } from '@/components/admin/UserManagementSystemRefactored'
+import { AdminDashboard } from '@/components/admin/AdminDashboard'
+import { OmniscientGPSEngine } from '@/components/tracking/OmniscientGPSEngine'
+import { Navbar } from '@/components/Navbar'
 
 export default function Admin() {
-  const [redirectToSecure, setRedirectToSecure] = useState(false)
-
-  if (redirectToSecure) {
-    return <Navigate to="/secure-admin" replace />
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-green-900/20 flex items-center justify-center p-6">
-      <Card className="max-w-md mx-auto border-2 border-blue-500/50 bg-gradient-to-br from-blue-900/30 to-black/80 backdrop-blur-sm">
-        <CardHeader>
-          <div className="text-center">
-            <Shield className="h-12 w-12 text-blue-400 mx-auto mb-4" />
-            <CardTitle className="text-2xl font-bold text-blue-400">
-              🔄 ADMIN ACCESS REDIRECT
-            </CardTitle>
-            <p className="text-blue-300 text-sm mt-2">
-              Admin features moved to secure portal for enhanced protection
+    <AdminOnlyAccess>
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="container mx-auto p-4 space-y-4 max-w-full overflow-x-hidden">
+          <div className="text-center mb-6">
+            <h1 className="text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-4">
+              🚀 GAiA ADMIN CONTROL CENTER
+            </h1>
+            <p className="text-lg lg:text-xl text-muted-foreground">
+              Ultimate administrative suite for GAiA ecosystem management
             </p>
           </div>
-        </CardHeader>
-        <CardContent className="text-center space-y-4">
-          <div className="p-4 bg-gradient-to-r from-blue-900/30 to-green-900/30 border border-blue-500/20 rounded-lg">
-            <h3 className="text-lg font-bold text-blue-400 mb-2">🛡️ V4 Security Enhancement</h3>
-            <p className="text-blue-300 text-sm mb-4">
-              All admin features, controls, and dashboards are now integrated under <strong>/secure-admin</strong> for maximum protection.
-            </p>
-            <div className="text-xs text-gray-400 space-y-1 mb-4">
-              <div>• Enhanced quantum-level security protocols</div>
-              <div>• Unified admin dashboard with all features</div>
-              <div>• Complete system control and monitoring</div>
-              <div>• Emergency protocols and recovery systems</div>
+
+          <Tabs defaultValue="dashboard" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-17 gap-1 h-auto p-1 text-xs">
+              <TabsTrigger value="dashboard" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>🏠</span>
+                  <span className="hidden sm:inline">Dashboard</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="live-tracking" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>🛰️</span>
+                  <span className="hidden sm:inline">Live Tracking</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="security" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>🛡️</span>
+                  <span className="hidden sm:inline">Security</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="users" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>👥</span>
+                  <span className="hidden sm:inline">Users</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="gaia-ia" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>🧠</span>
+                  <span className="hidden sm:inline">GAIA IA</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="master-control" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>👑</span>
+                  <span className="hidden sm:inline">Master Control</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="overview" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>📊</span>
+                  <span className="hidden sm:inline">Overview</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="notifications" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>🔔</span>
+                  <span className="hidden sm:inline">Notifications</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="github" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>📱</span>
+                  <span className="hidden sm:inline">GitHub</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="tokens" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>🔥</span>
+                  <span className="hidden sm:inline">Token Burn</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="wallets" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>💰</span>
+                  <span className="hidden sm:inline">Wallets</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="media" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>📸</span>
+                  <span className="hidden sm:inline">Media</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="intelligence" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>🧠</span>
+                  <span className="hidden sm:inline">Intelligence</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="koala" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>🐨</span>
+                  <span className="hidden sm:inline">Koala AI</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="dragon" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>🐉</span>
+                  <span className="hidden sm:inline">Dragon AI</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="phoenix" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>🦅</span>
+                  <span className="hidden sm:inline">Phoenix</span>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger value="psycho" className="p-2 text-center">
+                <div className="flex flex-col items-center">
+                  <span>🔮</span>
+                  <span className="hidden sm:inline">Psychohistory</span>
+                </div>
+              </TabsTrigger>
+            </TabsList>
+
+            <div className="mt-4">
+              <TabsContent value="dashboard" className="mt-0">
+                <AdminDashboard />
+              </TabsContent>
+
+              <TabsContent value="live-tracking" className="mt-0">
+                <OmniscientGPSEngine />
+              </TabsContent>
+
+              <TabsContent value="security" className="mt-0">
+                <SecurityDashboard />
+              </TabsContent>
+
+              <TabsContent value="users" className="mt-0">
+                <UserManagementSystemRefactored />
+              </TabsContent>
+
+              <TabsContent value="gaia-ia" className="mt-0">
+                <GaiaIATool />
+              </TabsContent>
+
+              <TabsContent value="master-control" className="mt-0">
+                <MasterAdminControlCenter />
+              </TabsContent>
+
+              <TabsContent value="overview" className="mt-0">
+                <UltimateAdminSuite />
+              </TabsContent>
+
+              <TabsContent value="notifications" className="mt-0">
+                <NotificationController />
+              </TabsContent>
+
+              <TabsContent value="github" className="mt-0">
+                <GitHubIntegrationSuite />
+              </TabsContent>
+
+              <TabsContent value="tokens" className="mt-0">
+                <TokenBurnController />
+              </TabsContent>
+
+              <TabsContent value="wallets" className="mt-0">
+                <WalletEngineAdmin />
+              </TabsContent>
+
+              <TabsContent value="media" className="mt-0">
+                <AdminMediaLibrary />
+              </TabsContent>
+
+              <TabsContent value="intelligence" className="mt-0">
+                <UltimateIntelligenceHub />
+              </TabsContent>
+
+              <TabsContent value="koala" className="mt-0">
+                <KoalaAIEngine />
+              </TabsContent>
+
+              <TabsContent value="dragon" className="mt-0">
+                <DragonAIDefense />
+              </TabsContent>
+
+              <TabsContent value="phoenix" className="mt-0">
+                <PhoenixGuardian />
+              </TabsContent>
+
+              <TabsContent value="psycho" className="mt-0">
+                <PsychohistoricalEngine />
+              </TabsContent>
             </div>
-          </div>
-
-          <Button 
-            onClick={() => setRedirectToSecure(true)}
-            className="w-full bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white font-bold py-3"
-          >
-            <ArrowRight className="h-5 w-5 mr-2" />
-            ACCESS SECURE ADMIN PORTAL
-          </Button>
-
-          <div className="mt-4 p-3 bg-gradient-to-r from-green-900/20 to-blue-900/20 border border-green-500/20 rounded-lg">
-            <p className="text-xs text-green-300 text-center">
-              🌍 Master Plan V4: All administrative operations secured under unified portal
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+          </Tabs>
+        </div>
+      </div>
+    </AdminOnlyAccess>
   )
 }
