@@ -29,7 +29,7 @@ export interface UserProfileProps {
 export function UserProfile({ isOwner = false }: UserProfileProps) {
   const [isEditing, setIsEditing] = useState(false)
   const { activities: recentActivities } = useEarningActivities()
-  const { profile: userProfile } = useUserProfile()
+  const { profile: userProfile, stats } = useUserProfile()
   const { badges } = useBadges()
   const { achievements } = useAchievements()
 
@@ -42,8 +42,8 @@ export function UserProfile({ isOwner = false }: UserProfileProps) {
     joinDate: '2024-01-15',
     website: 'https://gaia.earth',
     stats: {
-      totalPoints: userProfile?.totalPoints || 12450,
-      totalTokens: userProfile?.totalTokens || 245,
+      totalPoints: stats?.totalPoints || 12450,
+      totalTokens: stats?.totalTokens || 245,
       level: userProfile?.level || 12,
       completedActivities: recentActivities?.length || 0,
       badges: badges?.length || 0,
@@ -55,7 +55,7 @@ export function UserProfile({ isOwner = false }: UserProfileProps) {
     id: activity.id,
     type: activity.type,
     description: getActivityDescription(activity.type),
-    points: activity.points || 0,
+    points: activity.pointsEarned || 0,
     date: activity.timestamp,
     verified: activity.verified
   })) || []
