@@ -2,76 +2,61 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Palette, Zap, Star } from 'lucide-react'
-
-interface Template {
-  id: string
-  name: string
-  description: string
-  preview: string
-  category: string
-}
+import { Palette, Wand2 } from 'lucide-react'
 
 interface TemplateSelectorProps {
-  onTemplateApplied: (template: Template) => void
+  onTemplateApplied: (template: any) => void
 }
 
 export function TemplateSelector({ onTemplateApplied }: TemplateSelectorProps) {
-  const templates: Template[] = [
-    {
-      id: 'eco-green',
-      name: 'Eco Green',
-      description: 'Natural green theme with organic elements',
-      preview: 'linear-gradient(135deg, #10b981, #059669)',
-      category: 'Environmental'
-    },
-    {
-      id: 'ocean-blue',
-      name: 'Ocean Blue',
-      description: 'Deep blue marine theme',
-      preview: 'linear-gradient(135deg, #3b82f6, #1e40af)',
-      category: 'Aquatic'
-    },
-    {
-      id: 'sunset-orange',
-      name: 'Sunset Orange',
-      description: 'Warm sunset colors',
-      preview: 'linear-gradient(135deg, #f97316, #ea580c)',
-      category: 'Warm'
-    }
+  const templates = [
+    { id: 'ocean', name: 'Ocean Theme', colors: ['#0066cc', '#0080ff', '#00ccff'] },
+    { id: 'forest', name: 'Forest Theme', colors: ['#006600', '#00cc00', '#66ff66'] },
+    { id: 'sunset', name: 'Sunset Theme', colors: ['#ff6600', '#ff9900', '#ffcc00'] },
+    { id: 'cosmic', name: 'Cosmic Theme', colors: ['#6600cc', '#9900ff', '#cc66ff'] }
   ]
 
+  const handleApplyTemplate = (template: any) => {
+    onTemplateApplied(template)
+  }
+
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2 mb-4">
-        <Palette className="h-5 w-5 text-purple-400" />
-        <h3 className="text-lg font-semibold text-purple-400">Visual Templates</h3>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {templates.map((template) => (
-          <Card key={template.id} className="bg-gray-900/50 border-purple-500/30">
-            <CardHeader>
-              <CardTitle className="text-sm text-purple-400">{template.name}</CardTitle>
-              <Badge className="bg-purple-600 w-fit">{template.category}</Badge>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div 
-                className="h-16 rounded-lg"
-                style={{ background: template.preview }}
-              />
-              <p className="text-xs text-gray-400">{template.description}</p>
+    <Card className="border-purple-500/20 bg-purple-900/10">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-purple-400">
+          <Palette className="h-5 w-5" />
+          Visual Templates
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {templates.map((template) => (
+            <div key={template.id} className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium">{template.name}</span>
+                <Badge variant="secondary">{template.colors.length} colors</Badge>
+              </div>
+              <div className="flex gap-1">
+                {template.colors.map((color, index) => (
+                  <div 
+                    key={index}
+                    className="w-6 h-6 rounded"
+                    style={{ backgroundColor: color }}
+                  />
+                ))}
+              </div>
               <Button 
-                onClick={() => onTemplateApplied(template)}
-                className="w-full bg-purple-600 hover:bg-purple-700"
+                onClick={() => handleApplyTemplate(template)}
+                size="sm"
+                className="w-full"
               >
-                <Star className="h-4 w-4 mr-1" />
+                <Wand2 className="h-3 w-3 mr-1" />
                 Apply
               </Button>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   )
 }

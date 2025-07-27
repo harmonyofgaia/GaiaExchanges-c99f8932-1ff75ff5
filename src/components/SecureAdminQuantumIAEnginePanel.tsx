@@ -1,14 +1,11 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Brain, Zap, Activity } from 'lucide-react'
 
-interface QuantumIAEnginePanelProps {
-  // Add any props here if needed
-}
-
-export function SecureAdminQuantumIAEnginePanel() {
+export default function SecureAdminQuantumIAEnginePanel() {
   const [processingPower, setProcessingPower] = useState(95)
   const [quantumCoherence, setQuantumCoherence] = useState(98)
   const [insights, setInsights] = useState<string[]>([
