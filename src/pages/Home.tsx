@@ -15,6 +15,8 @@ import { InvisibleEcoIndicator } from '@/components/eco/InvisibleEcoIndicator'
 import { AnimatedCounter } from '@/components/ui/animated-counter'
 import { LiveEarningsDisplay } from '@/components/earnings/LiveEarningsDisplay'
 import { EcoMissionCard } from '@/components/missions/EcoMissionCard'
+import { ThemeSelector } from '@/components/ThemeSelector'
+import { VisualControlButton } from '@/components/visual/VisualControlButton'
 
 export default function Home() {
   const [stats, setStats] = useState({
@@ -66,6 +68,10 @@ export default function Home() {
       />
       
       <Navbar />
+      
+      {/* Control Buttons */}
+      <VisualControlButton />
+      <ThemeSelector />
       
       <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Hero Section */}

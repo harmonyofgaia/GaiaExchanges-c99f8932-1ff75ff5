@@ -6,9 +6,10 @@ import { Palette, Wand2 } from 'lucide-react'
 
 interface TemplateSelectorProps {
   onTemplateApplied: (template: any) => void
+  isLocked?: boolean
 }
 
-export function TemplateSelector({ onTemplateApplied }: TemplateSelectorProps) {
+export function TemplateSelector({ onTemplateApplied, isLocked = false }: TemplateSelectorProps) {
   const templates = [
     { id: 'ocean', name: 'Ocean Theme', colors: ['#0066cc', '#0080ff', '#00ccff'] },
     { id: 'forest', name: 'Forest Theme', colors: ['#006600', '#00cc00', '#66ff66'] },
@@ -17,6 +18,7 @@ export function TemplateSelector({ onTemplateApplied }: TemplateSelectorProps) {
   ]
 
   const handleApplyTemplate = (template: any) => {
+    if (isLocked) return
     onTemplateApplied(template)
   }
 
@@ -49,6 +51,7 @@ export function TemplateSelector({ onTemplateApplied }: TemplateSelectorProps) {
                 onClick={() => handleApplyTemplate(template)}
                 size="sm"
                 className="w-full"
+                disabled={isLocked}
               >
                 <Wand2 className="h-3 w-3 mr-1" />
                 Apply

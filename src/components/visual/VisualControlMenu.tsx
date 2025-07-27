@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -18,16 +19,13 @@ import {
 
 import { TemplateSelector } from './TemplateSelector'
 import { LockToggle } from './LockToggle'
+import { useLock } from '@/components/providers/ThemeProvider'
 
 export function VisualControlMenu() {
-  const [isLocked, setIsLocked] = useState(false)
+  const { isLocked, toggleLock } = useLock()
   
   const handleTemplateApplied = (template: any) => {
     console.log('Template applied:', template)
-  }
-
-  const handleLockToggle = () => {
-    setIsLocked(!isLocked)
   }
 
   return (
@@ -42,13 +40,18 @@ export function VisualControlMenu() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="site-title">Site Title</Label>
-            <Input id="site-title" defaultValue="GAiA - Harmony of Life" />
+            <Input 
+              id="site-title" 
+              defaultValue="GAiA - Harmony of Life" 
+              disabled={isLocked}
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="site-description">Site Description</Label>
             <Textarea
               id="site-description"
               defaultValue="The future of sustainable finance and entertainment"
+              disabled={isLocked}
             />
           </div>
         </CardContent>
@@ -65,21 +68,41 @@ export function VisualControlMenu() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="primary-color">Primary Color</Label>
-              <Input id="primary-color" type="color" defaultValue="#0070f3" />
+              <Input 
+                id="primary-color" 
+                type="color" 
+                defaultValue="#0070f3" 
+                disabled={isLocked}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="secondary-color">Secondary Color</Label>
-              <Input id="secondary-color" type="color" defaultValue="#6c757d" />
+              <Input 
+                id="secondary-color" 
+                type="color" 
+                defaultValue="#6c757d" 
+                disabled={isLocked}
+              />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="accent-color">Accent Color</Label>
-              <Input id="accent-color" type="color" defaultValue="#ff4581" />
+              <Input 
+                id="accent-color" 
+                type="color" 
+                defaultValue="#ff4581" 
+                disabled={isLocked}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="background-color">Background Color</Label>
-              <Input id="background-color" type="color" defaultValue="#1a202c" />
+              <Input 
+                id="background-color" 
+                type="color" 
+                defaultValue="#1a202c" 
+                disabled={isLocked}
+              />
             </div>
           </div>
         </CardContent>
@@ -95,16 +118,31 @@ export function VisualControlMenu() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="font-family">Font Family</Label>
-            <Input id="font-family" defaultValue="Inter, sans-serif" />
+            <Input 
+              id="font-family" 
+              defaultValue="Inter, sans-serif" 
+              disabled={isLocked}
+            />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="font-size">Font Size</Label>
-              <Input id="font-size" type="number" defaultValue="16" />
+              <Input 
+                id="font-size" 
+                type="number" 
+                defaultValue="16" 
+                disabled={isLocked}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="line-height">Line Height</Label>
-              <Input id="line-height" type="number" step="0.1" defaultValue="1.5" />
+              <Input 
+                id="line-height" 
+                type="number" 
+                step="0.1" 
+                defaultValue="1.5" 
+                disabled={isLocked}
+              />
             </div>
           </div>
         </CardContent>
@@ -120,16 +158,31 @@ export function VisualControlMenu() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="container-width">Container Width</Label>
-            <Input id="container-width" type="number" defaultValue="1200" />
+            <Input 
+              id="container-width" 
+              type="number" 
+              defaultValue="1200" 
+              disabled={isLocked}
+            />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="padding">Padding</Label>
-              <Input id="padding" type="number" defaultValue="16" />
+              <Input 
+                id="padding" 
+                type="number" 
+                defaultValue="16" 
+                disabled={isLocked}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="margin">Margin</Label>
-              <Input id="margin" type="number" defaultValue="24" />
+              <Input 
+                id="margin" 
+                type="number" 
+                defaultValue="24" 
+                disabled={isLocked}
+              />
             </div>
           </div>
         </CardContent>
@@ -148,15 +201,16 @@ export function VisualControlMenu() {
             <Textarea
               id="custom-css"
               placeholder="Enter your custom CSS here"
+              disabled={isLocked}
             />
           </div>
         </CardContent>
       </Card>
       
-      <TemplateSelector onTemplateApplied={handleTemplateApplied} />
+      <TemplateSelector onTemplateApplied={handleTemplateApplied} isLocked={isLocked} />
       
       <div className="flex justify-end">
-        <LockToggle isLocked={isLocked} onLockToggle={handleLockToggle} />
+        <LockToggle isLocked={isLocked} onLockToggle={toggleLock} />
       </div>
     </div>
   )
