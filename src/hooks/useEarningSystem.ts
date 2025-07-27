@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react'
 import { earningService, WaterSavingAction } from '@/services/earningService'
+import { EarningActivity, UserProfile, Badge, Achievement } from '@/types/gaia-types'
 
 export function useEarningSystem(userId: string) {
   const [earnings, setEarnings] = useState({
@@ -48,6 +49,70 @@ export function useEarningSystem(userId: string) {
   return {
     earnings,
     addWaterSavingAction,
+    isLoading
+  }
+}
+
+export function useEarningActivities(userId: string) {
+  const [activities, setActivities] = useState<EarningActivity[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  const addActivity = (activity: EarningActivity) => {
+    setActivities(prev => [activity, ...prev])
+  }
+
+  return {
+    activities,
+    addActivity,
+    isLoading
+  }
+}
+
+export function useUserProfile(userId: string) {
+  const [profile, setProfile] = useState<UserProfile | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    // Mock profile data
+    setProfile({
+      id: userId,
+      username: 'GaiaUser',
+      email: 'user@gaia.com',
+      walletAddress: '0x123...',
+      totalPoints: 1000,
+      totalTokens: 500,
+      level: 5,
+      badges: [],
+      achievements: [],
+      earningHistory: [],
+      referralCode: 'GAIA123',
+      createdAt: new Date(),
+      lastActive: new Date()
+    })
+  }, [userId])
+
+  return {
+    profile,
+    isLoading
+  }
+}
+
+export function useBadges(userId: string) {
+  const [badges, setBadges] = useState<Badge[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  return {
+    badges,
+    isLoading
+  }
+}
+
+export function useAchievements(userId: string) {
+  const [achievements, setAchievements] = useState<Achievement[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  return {
+    achievements,
     isLoading
   }
 }

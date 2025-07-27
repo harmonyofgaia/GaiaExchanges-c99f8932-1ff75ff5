@@ -1,24 +1,29 @@
 
+import { SecureAdminDashboard } from '@/components/admin/SecureAdminDashboard'
 import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
-import { SecureVaultLogin } from '@/components/admin/SecureVaultLogin'
+import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
+import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
 
-const SecureAdmin = () => {
+export default function SecureAdmin() {
   return (
-    <div className="min-h-screen relative">
-      <EnhancedBackgroundManager 
-        config={{
-          type: 'neuro',
-          intensity: 'high',
-          color: '#ff00ff',
-          speed: 1.5,
-          autoGenerate: false
-        }}
-      />
-      <div className="relative z-10">
-        <SecureVaultLogin />
-      </div>
-    </div>
+    <AdminProtectedRoute>
+      <AdminOnlyAccess>
+        <div className="relative min-h-screen">
+          <EnhancedBackgroundManager 
+            settings={{
+              type: 'neural',
+              intensity: 'high',
+              color: '#00ff00',
+              speed: 1.5,
+              autoGenerate: true
+            }}
+          />
+          
+          <div className="relative z-10">
+            <SecureAdminDashboard />
+          </div>
+        </div>
+      </AdminOnlyAccess>
+    </AdminProtectedRoute>
   )
 }
-
-export default SecureAdmin

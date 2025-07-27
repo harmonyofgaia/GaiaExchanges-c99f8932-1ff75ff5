@@ -16,6 +16,16 @@ export interface EnhancedBackgroundSettings {
   neuralDensity?: number
 }
 
+export interface BackgroundConfig {
+  type: EnhancedBackgroundType
+  intensity: 'low' | 'medium' | 'high'
+  color: string
+  speed: number
+  autoGenerate?: boolean
+  pattern?: string
+  neuralDensity?: number
+}
+
 interface EnhancedBackgroundManagerProps {
   settings: EnhancedBackgroundSettings
   className?: string
@@ -99,4 +109,9 @@ export function EnhancedBackgroundManager({
       </div>
     </div>
   )
+}
+
+export function updateBackgroundConfig(config: BackgroundConfig) {
+  // Mock function for updating background config
+  console.log('Updating background config:', config)
 }
