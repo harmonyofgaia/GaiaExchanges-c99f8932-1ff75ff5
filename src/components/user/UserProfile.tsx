@@ -19,7 +19,7 @@ import {
   Link as LinkIcon,
   Settings
 } from 'lucide-react'
-import { useEarningSystem } from '@/hooks/useEarningSystem'
+import { useEarningActivities, useUserProfile, useBadges, useAchievements } from '@/hooks/useEarningSystem'
 import { EarningActivityType } from '@/types/gaia-types'
 
 export interface UserProfileProps {
@@ -28,7 +28,10 @@ export interface UserProfileProps {
 
 export function UserProfile({ isOwner = false }: UserProfileProps) {
   const [isEditing, setIsEditing] = useState(false)
-  const { userProfile, badges, achievements, recentActivities } = useEarningSystem()
+  const { activities: recentActivities } = useEarningActivities()
+  const { profile: userProfile } = useUserProfile()
+  const { badges } = useBadges()
+  const { achievements } = useAchievements()
 
   const mockUser = {
     id: '1',
@@ -225,14 +228,14 @@ export function UserProfile({ isOwner = false }: UserProfileProps) {
                 {achievements?.map((achievement) => (
                   <div key={achievement.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                     <div className="flex items-center gap-3">
-                      <div className="text-2xl">{achievement.icon}</div>
+                      <div className="text-2xl">🏆</div>
                       <div>
                         <p className="font-medium">{achievement.name}</p>
                         <p className="text-sm text-muted-foreground">{achievement.description}</p>
                       </div>
                     </div>
                     <Badge className="bg-purple-600 text-white">
-                      {achievement.category}
+                      Achievement
                     </Badge>
                   </div>
                 ))}
