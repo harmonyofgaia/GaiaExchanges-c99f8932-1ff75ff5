@@ -395,7 +395,7 @@ export default function GreenInvestments() {
                   <CardContent className="p-6 text-center">
                     <Zap className="h-8 w-8 mx-auto text-blue-400 mb-2" />
                     <div className="text-2xl font-bold text-blue-400">
-                      {tokenData ? (tokenData.price * 100).toFixed(2) : "125.00"}%
+                      {tokenData ? (tokenData.price * 1000000).toFixed(0) : "125"}%
                     </div>
                     <div className="text-sm text-blue-300">System Efficiency</div>
                   </CardContent>

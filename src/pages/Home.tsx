@@ -26,7 +26,7 @@ export default function Home() {
   // Stats derived from real GAiA token data
   const stats = {
     totalUsers: tokenData?.holders || 12589,
-    tokensEarned: Math.floor((tokenData?.volume24h || 2456789) / (tokenData?.price > 0 ? tokenData?.price : 0.000125)),
+    tokensEarned: Math.floor((tokenData?.volume24h || 2456789) / (tokenData?.price || 0.000125)),
     carbonOffset: Math.floor((tokenData?.volume24h || 50000) * 0.003), // 0.3% of volume as carbon offset
     projectsFunded: Math.floor((tokenData?.transactions24h || 5000) / 20) // Projects funded based on transaction activity
   }

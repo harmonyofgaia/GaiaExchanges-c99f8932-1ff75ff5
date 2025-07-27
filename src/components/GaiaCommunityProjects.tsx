@@ -43,7 +43,7 @@ export function GaiaCommunityProjects() {
   useEffect(() => {
     // Update projects when tokenData changes to reflect real GAiA token activity
     if (tokenData) {
-      const activityMultiplier = tokenData.transactions24h / TRANSACTION_ACTIVITY_DIVISOR; // Use transaction activity
+      const activityMultiplier = tokenData.transactions24h / 50000 // Use transaction activity
       
       setAnimatedProjects(prev => 
         prev.map(project => ({
