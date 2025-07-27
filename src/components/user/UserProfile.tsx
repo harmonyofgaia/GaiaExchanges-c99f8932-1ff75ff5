@@ -1,119 +1,125 @@
-import { useState } from 'react'
+
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { 
-  User, 
-  Edit,
-  Trophy,
-  Coins,
-  Heart,
-  Leaf,
-  Users,
-  Calendar,
-  MapPin,
-  Link as LinkIcon,
-  Settings
-} from 'lucide-react'
-import { useEarningActivities, useUserProfile, useBadges, useAchievements } from '@/hooks/useEarningSystem'
-import { EarningActivityType } from '@/types/gaia-types'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Progress } from '@/components/ui/progress'
+import { User, Trophy, Leaf, Zap, Heart, Star, Calendar, MapPin } from 'lucide-react'
+import { UserProfile as UserProfileType } from '@/types/gaia-types'
 
-export interface UserProfileProps {
+interface UserProfileProps {
+  userId?: string
   isOwner?: boolean
 }
 
-export function UserProfile({ isOwner = false }: UserProfileProps) {
-  const [isEditing, setIsEditing] = useState(false)
-  const { activities: recentActivities } = useEarningActivities()
-  const { profile: userProfile, stats } = useUserProfile()
-  const { badges } = useBadges()
-  const { achievements } = useAchievements()
+export const UserProfile = ({ userId, isOwner = false }: UserProfileProps) => {
+  const [profile, setProfile] = useState<UserProfileType | null>(null)
+  const [activeTab, setActiveTab] = useState('overview')
 
-  const mockUser = {
-    id: '1',
-    name: 'Gaia Earth Guardian',
-    avatar: '/placeholder-avatar.jpg',
-    bio: 'Environmental advocate working towards a sustainable future 🌱',
-    location: 'Earth',
-    joinDate: '2024-01-15',
-    website: 'https://gaia.earth',
-    stats: {
-      totalPoints: stats?.totalPoints || 12450,
-      totalTokens: stats?.totalTokens || 245,
-      level: userProfile?.level || 12,
-      completedActivities: recentActivities?.length || 0,
-      badges: badges?.length || 0,
-      achievements: achievements?.length || 0
-    }
-  }
+  useEffect(() => {
+    // Mock data for now - replace with real API call
+    setProfile({
+      id: userId || 'user-123',
+      username: 'EcoWarrior2024',
+      email: 'eco@example.com',
+      walletAddress: '0x742d35Cc6634C0532925a3b8D68C6F4B4B4B4B4B',
+      totalPoints: 15420,
+      totalTokens: 2847,
+      level: 12,
+      badges: [
+        {
+          id: 'water-saver',
+          name: 'Water Saver',
+          description: 'Saved 1000L of water',
+          icon: '💧',
+          rarity: 'common',
+          requirements: ['Save 1000L water'],
+          earnedAt: new Date(),
+          pointsValue: 100
+        },
+        {
+          id: 'tree-planter',
+          name: 'Tree Planter',
+          description: 'Planted 50 trees',
+          icon: '🌳',
+          rarity: 'rare',
+          requirements: ['Plant 50 trees'],
+          earnedAt: new Date(),
+          pointsValue: 500
+        }
+      ],
+      achievements: [
+        {
+          id: 'green-streak',
+          title: 'Green Streak',
+          description: 'Complete 30 days of eco activities',
+          category: 'ENVIRONMENTAL_EDUCATION',
+          progress: 23,
+          maxProgress: 30,
+          completed: false,
+          reward: { points: 1000, tokens: 200 }
+        }
+      ],
+      earningHistory: [],
+      referralCode: 'ECO2024',
+      createdAt: new Date('2024-01-15'),
+      lastActive: new Date()
+    })
+  }, [userId])
 
-  const recentActivity = recentActivities?.slice(0, 5).map(activity => ({
-    id: activity.id,
-    type: activity.type,
-    description: getActivityDescription(activity.type as EarningActivityType),
-    points: activity.pointsEarned || 0,
-    date: activity.timestamp,
-    verified: activity.verified
-  })) || []
-
-  function getActivityDescription(type: EarningActivityType): string {
-    switch (type) {
-      case EarningActivityType.BEE_HOTEL:
-        return 'Built a bee hotel'
-      case EarningActivityType.WATER_SAVING:
-        return 'Saved water'
-      case EarningActivityType.ENVIRONMENTAL_EDUCATION:
-        return 'Completed environmental education'
-      case EarningActivityType.HOME_GROWN_FOOD:
-        return 'Grew food at home'
-      case EarningActivityType.REFERRAL:
-        return 'Referred a friend'
-      case EarningActivityType.SKILL_BASED:
-        return 'Completed skill-based work'
-      default:
-        return 'Environmental activity'
-    }
-  }
+  if (!profile) return <div className="flex items-center justify-center h-64">Loading...</div>
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Profile Header */}
-      <Card className="border-green-500/20 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
+      <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-500/30">
         <CardHeader>
-          <div className="flex items-start justify-between">
-            <div className="flex items-center gap-4">
-              <Avatar className="h-20 w-20 border-2 border-green-500/30">
-                <AvatarImage src={mockUser.avatar} alt={mockUser.name} />
-                <AvatarFallback className="bg-green-600 text-white text-xl">
-                  {mockUser.name.split(' ').map(n => n[0]).join('')}
-                </AvatarFallback>
-              </Avatar>
-              <div>
-                <h1 className="text-2xl font-bold text-green-400">{mockUser.name}</h1>
-                <p className="text-muted-foreground">{mockUser.bio}</p>
-                <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <MapPin className="h-3 w-3" />
-                    {mockUser.location}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Calendar className="h-3 w-3" />
-                    Joined {new Date(mockUser.joinDate).toLocaleDateString()}
-                  </div>
+          <div className="flex items-center gap-6">
+            <Avatar className="h-20 w-20">
+              <AvatarImage src="/placeholder-avatar.jpg" />
+              <AvatarFallback className="bg-green-600 text-white text-xl">
+                {profile.username.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+            
+            <div className="flex-1 space-y-2">
+              <div className="flex items-center gap-2">
+                <h1 className="text-3xl font-bold text-green-400">{profile.username}</h1>
+                <Badge className="bg-green-600 text-white">Level {profile.level}</Badge>
+              </div>
+              
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-1">
+                  <Calendar className="h-4 w-4" />
+                  Joined {profile.createdAt.toLocaleDateString()}
+                </div>
+                <div className="flex items-center gap-1">
+                  <MapPin className="h-4 w-4" />
+                  Global Community
+                </div>
+              </div>
+              
+              <div className="flex gap-6">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-green-400">{profile.totalPoints.toLocaleString()}</div>
+                  <div className="text-sm text-muted-foreground">Points</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-400">{profile.totalTokens.toLocaleString()}</div>
+                  <div className="text-sm text-muted-foreground">GAiA Tokens</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-purple-400">{profile.badges.length}</div>
+                  <div className="text-sm text-muted-foreground">Badges</div>
                 </div>
               </div>
             </div>
+            
             {isOwner && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsEditing(!isEditing)}
-                className="border-green-500/30 text-green-400"
-              >
-                <Edit className="h-4 w-4 mr-2" />
+              <Button className="bg-green-600 hover:bg-green-700">
+                <User className="h-4 w-4 mr-2" />
                 Edit Profile
               </Button>
             )}
@@ -121,153 +127,127 @@ export function UserProfile({ isOwner = false }: UserProfileProps) {
         </CardHeader>
       </Card>
 
-      {/* Stats Overview */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="border-blue-500/20 bg-blue-900/10">
-          <CardContent className="p-4 text-center">
-            <Coins className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-blue-400">{mockUser.stats.totalPoints}</div>
-            <div className="text-sm text-muted-foreground">Total Points</div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-green-500/20 bg-green-900/10">
-          <CardContent className="p-4 text-center">
-            <Leaf className="h-8 w-8 text-green-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-green-400">{mockUser.stats.totalTokens}</div>
-            <div className="text-sm text-muted-foreground">GAIA Tokens</div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-purple-500/20 bg-purple-900/10">
-          <CardContent className="p-4 text-center">
-            <Trophy className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-purple-400">{mockUser.stats.level}</div>
-            <div className="text-sm text-muted-foreground">Level</div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-yellow-500/20 bg-yellow-900/10">
-          <CardContent className="p-4 text-center">
-            <Heart className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-yellow-400">{mockUser.stats.completedActivities}</div>
-            <div className="text-sm text-muted-foreground">Activities</div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Detailed Profile */}
-      <Tabs defaultValue="activity" className="w-full">
+      {/* Profile Content */}
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="activity">Activity</TabsTrigger>
-          <TabsTrigger value="badges">Badges</TabsTrigger>
+          <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="achievements">Achievements</TabsTrigger>
-          <TabsTrigger value="stats">Stats</TabsTrigger>
+          <TabsTrigger value="activity">Activity</TabsTrigger>
+          <TabsTrigger value="impact">Impact</TabsTrigger>
         </TabsList>
-
-        <TabsContent value="activity" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-green-400">Recent Activity</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {recentActivity.map((activity) => (
-                  <div key={activity.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-green-400 rounded-full" />
+        
+        <TabsContent value="overview" className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Badges */}
+            <Card className="border-green-500/30">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-green-400">
+                  <Trophy className="h-5 w-5" />
+                  Badges
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4">
+                  {profile.badges.map((badge) => (
+                    <div key={badge.id} className="flex items-center gap-2 p-3 bg-green-900/20 rounded-lg">
+                      <span className="text-2xl">{badge.icon}</span>
                       <div>
-                        <p className="font-medium">{activity.description}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {new Date(activity.date).toLocaleDateString()}
-                        </p>
+                        <div className="font-semibold text-green-400">{badge.name}</div>
+                        <div className="text-xs text-muted-foreground">{badge.description}</div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Badge className="bg-green-600 text-white">
-                        +{activity.points} pts
-                      </Badge>
-                      {activity.verified && (
-                        <Badge className="bg-blue-600 text-white">Verified</Badge>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
 
-        <TabsContent value="badges" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-green-400">Earned Badges</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {badges?.map((badge) => (
-                  <div key={badge.id} className="text-center p-4 bg-muted/50 rounded-lg">
-                    <div className="text-2xl mb-2">{badge.icon}</div>
-                    <p className="font-medium">{badge.name}</p>
-                    <p className="text-sm text-muted-foreground">{badge.description}</p>
+            {/* Recent Activity */}
+            <Card className="border-blue-500/30">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-blue-400">
+                  <Zap className="h-5 w-5" />
+                  Recent Activity
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 p-2 bg-blue-900/20 rounded">
+                    <Leaf className="h-4 w-4 text-green-400" />
+                    <div className="flex-1 text-sm">Completed water saving challenge</div>
+                    <div className="text-xs text-muted-foreground">2h ago</div>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                  <div className="flex items-center gap-3 p-2 bg-blue-900/20 rounded">
+                    <Heart className="h-4 w-4 text-pink-400" />
+                    <div className="flex-1 text-sm">Donated to forest restoration</div>
+                    <div className="text-xs text-muted-foreground">1d ago</div>
+                  </div>
+                  <div className="flex items-center gap-3 p-2 bg-blue-900/20 rounded">
+                    <Star className="h-4 w-4 text-yellow-400" />
+                    <div className="flex-1 text-sm">Earned Tree Planter badge</div>
+                    <div className="text-xs text-muted-foreground">3d ago</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
-
-        <TabsContent value="achievements" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-green-400">Achievements</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {achievements?.map((achievement) => (
-                  <div key={achievement.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <div className="text-2xl">🏆</div>
-                      <div>
-                        <p className="font-medium">{achievement.name}</p>
-                        <p className="text-sm text-muted-foreground">{achievement.description}</p>
-                      </div>
-                    </div>
-                    <Badge className="bg-purple-600 text-white">
-                      Achievement
+        
+        <TabsContent value="achievements" className="space-y-6">
+          <div className="grid gap-4">
+            {profile.achievements.map((achievement) => (
+              <Card key={achievement.id} className="border-purple-500/30">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold text-purple-400">{achievement.title}</h3>
+                    <Badge variant={achievement.completed ? "default" : "secondary"}>
+                      {achievement.completed ? 'Completed' : 'In Progress'}
                     </Badge>
                   </div>
-                ))}
+                  <p className="text-sm text-muted-foreground mb-3">{achievement.description}</p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>Progress</span>
+                      <span>{achievement.progress}/{achievement.maxProgress}</span>
+                    </div>
+                    <Progress value={(achievement.progress / achievement.maxProgress) * 100} />
+                  </div>
+                  <div className="flex gap-4 mt-3 text-sm">
+                    <div className="flex items-center gap-1">
+                      <Zap className="h-3 w-3 text-green-400" />
+                      {achievement.reward.points} points
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Star className="h-3 w-3 text-blue-400" />
+                      {achievement.reward.tokens} tokens
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="activity" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Activity History</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-8 text-muted-foreground">
+                Activity history will be displayed here
               </div>
             </CardContent>
           </Card>
         </TabsContent>
-
-        <TabsContent value="stats" className="space-y-4">
+        
+        <TabsContent value="impact" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-green-400">Detailed Statistics</CardTitle>
+              <CardTitle>Environmental Impact</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-6">
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span>Level Progress</span>
-                    <span>{mockUser.stats.level}/20</span>
-                  </div>
-                  <Progress value={(mockUser.stats.level / 20) * 100} className="h-2" />
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-4 bg-muted/50 rounded-lg">
-                    <div className="text-2xl font-bold text-green-400">{mockUser.stats.badges}</div>
-                    <div className="text-sm text-muted-foreground">Badges Earned</div>
-                  </div>
-                  <div className="text-center p-4 bg-muted/50 rounded-lg">
-                    <div className="text-2xl font-bold text-purple-400">{mockUser.stats.achievements}</div>
-                    <div className="text-sm text-muted-foreground">Achievements</div>
-                  </div>
-                </div>
+              <div className="text-center py-8 text-muted-foreground">
+                Environmental impact metrics will be displayed here
               </div>
             </CardContent>
           </Card>

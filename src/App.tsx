@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import navigationItems from "./nav-items";
+import { navItems } from "./nav-items";
 import Index from "./pages/Index";
 
 // Lazy load components for better performance
@@ -42,20 +42,9 @@ const App = () => (
               <ArtistStreamingPage />
             </Suspense>
           } />
-          {navigationItems.map(({ to, title }) => {
-            const LazyComponent = lazy(() => import(`./pages${to}`));
-            return (
-              <Route 
-                key={to} 
-                path={to} 
-                element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <LazyComponent />
-                  </Suspense>
-                } 
-              />
-            );
-          })}
+          {navItems.map(({ to, page, title }) => (
+            <Route key={to} path={to} element={<page />} />
+          ))}
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

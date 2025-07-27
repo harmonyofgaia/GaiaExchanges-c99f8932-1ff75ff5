@@ -16,16 +16,14 @@ interface DonationCardProps {
     category: string
     image?: string
   }
-  onDonate?: (projectId: string, amount: number) => void
+  onDonate: (projectId: string, amount: number) => void
 }
 
 export function DonationCard({ project, onDonate }: DonationCardProps) {
   const progress = (project.raised / project.goal) * 100
 
   const handleDonate = () => {
-    if (onDonate) {
-      onDonate(project.id, 25) // Default donation amount
-    }
+    onDonate(project.id, 25) // Default donation amount
   }
 
   return (
