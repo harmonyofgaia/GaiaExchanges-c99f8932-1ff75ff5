@@ -1,4 +1,5 @@
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket, Zap, Trophy, User, MessageCircle, ShoppingBag, Music } from "lucide-react";
+
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket, Zap, Trophy } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -35,74 +36,6 @@ export const navigationItems: NavigationItem[] = [
     icon: Users,
     variant: "ghost" as const,
     description: "Multi-chain token exchange and trading platform",
-    lazyLoaded: true,
-  },
-  {
-    title: "Community Hub",
-    to: "/community-hub",
-    icon: MessageCircle,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Community Projects",
-      "Event Management",
-      "Discussion Forums",
-      "Member Profiles",
-      "Collaboration Tools",
-      "Real-time Updates"
-    ],
-    description: "Master Plan v7: Central hub for community interaction and collaboration",
-    lazyLoaded: true,
-  },
-  {
-    title: "User Profile",
-    to: "/profile",
-    icon: User,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Personal Dashboard",
-      "Achievement System",
-      "Activity History",
-      "Badge Collection",
-      "Progress Tracking",
-      "Social Features"
-    ],
-    description: "Master Plan v7: Comprehensive user profile and achievement system",
-    lazyLoaded: true,
-  },
-  {
-    title: "NFT Marketplace",
-    to: "/nft-marketplace",
-    icon: ShoppingBag,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Environmental NFTs",
-      "Carbon Credit Trading",
-      "Biodiversity Collections",
-      "Eco Art Gallery",
-      "Verified Certificates",
-      "Community Rewards"
-    ],
-    description: "Master Plan v7: Environmental NFT marketplace with impact verification",
-    lazyLoaded: true,
-  },
-  {
-    title: "Artist Streaming",
-    to: "/artist-streaming",
-    icon: Music,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "Live Streaming",
-      "Environmental Content",
-      "Interactive Chat",
-      "Creator Support",
-      "Community Channels",
-      "Real-time Engagement"
-    ],
-    description: "Master Plan v7: Environmental artist streaming platform with community features",
     lazyLoaded: true,
   },
   {
@@ -452,4 +385,5 @@ export const getLazyLoadedItems = () =>
 export const getItemFeatures = (path: string) => 
   navigationItems.find(item => item.to === path)?.features || [];
 
+// Default export for compatibility with './nav-items' import pattern
 export default navigationItems;
