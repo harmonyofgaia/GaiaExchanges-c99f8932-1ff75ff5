@@ -1,4 +1,3 @@
-
 // Comprehensive TypeScript type definitions for GAiA system
 export interface TokenData {
   price: number
@@ -108,7 +107,7 @@ export interface EarningActivity {
   tokensEarned: number
   timestamp: Date
   userId: string
-  verified: boolean
+  verified?: boolean
   location?: {
     latitude: number
     longitude: number

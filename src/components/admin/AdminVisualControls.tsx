@@ -14,7 +14,7 @@ interface AdminVisualControlsProps {
   isAdmin?: boolean
 }
 
-export function AdminVisualControls({ isAdmin = false }: AdminVisualControlsProps) {
+function AdminVisualControls({ isAdmin = false }: AdminVisualControlsProps) {
   const { isLocked, toggleLock } = useLock()
   const [backgroundIntensity, setBackgroundIntensity] = useState(50)
   const [animationSpeed, setAnimationSpeed] = useState(1)
@@ -73,3 +73,5 @@ export function AdminVisualControls({ isAdmin = false }: AdminVisualControlsProp
     </div>
   )
 }
+
+export default AdminVisualControls
