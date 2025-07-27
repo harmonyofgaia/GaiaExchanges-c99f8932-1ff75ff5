@@ -6,8 +6,6 @@ import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
 import { MapPin, Satellite, Eye, Zap, Globe, Target } from 'lucide-react'
-import { useGaiaTokenData } from '@/hooks/useGaiaTokenData'
-import { GAIA_TOKEN } from '@/constants/gaia'
 
 interface LocationData {
   latitude: number
@@ -32,16 +30,10 @@ interface TrackingTarget {
 }
 
 export function OmniscientGPSEngine() {
-  const { tokenData, isLoading, error } = useGaiaTokenData(true)
   const [targets, setTargets] = useState<TrackingTarget[]>([])
   const [trackingInput, setTrackingInput] = useState('')
   const [isTracking, setIsTracking] = useState(false)
-  
-  // System power derived from GAiA token activity
-  const systemPower = tokenData ? 
-    Math.floor(1000 + (tokenData.volume24h / 1000) + (tokenData.transactions24h * 10)) : 
-    1000
-  
+  const [systemPower, setSystemPower] = useState(1000)
   const trackingInterval = useRef<NodeJS.Timeout>()
 
   useEffect(() => {
@@ -49,12 +41,14 @@ export function OmniscientGPSEngine() {
     console.log('🌍 SATELLITE NETWORK: GLOBAL COVERAGE ACTIVE')
     console.log('👁️ QUANTUM TRACKING: IMPOSSIBLE TO HIDE')
     console.log('⚡ MULTI-DIMENSIONAL LOCATION: BEYOND PHYSICAL REALM')
-    console.log(`🔋 System Power Level: ${systemPower} (derived from GAiA token activity)`)
     
-    if (tokenData?.isLive) {
-      console.log(`📊 Live GAiA Data: Volume: $${tokenData.volume24h.toLocaleString()} | Txns: ${tokenData.transactions24h}`)
-    }
-  }, [tokenData, systemPower])
+    // Continuous system power growth
+    const powerGrowth = setInterval(() => {
+      setSystemPower(prev => prev * 1.001)
+    }, 1000)
+
+    return () => clearInterval(powerGrowth)
+  }, [])
 
   // Function declarations moved before usage
   const generateRealisticLocation = (): LocationData => {

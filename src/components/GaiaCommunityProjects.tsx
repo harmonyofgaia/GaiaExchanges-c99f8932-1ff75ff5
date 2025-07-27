@@ -5,8 +5,6 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Leaf, Users, Target, DollarSign, Clock, Award } from 'lucide-react'
-import { useGaiaTokenData } from '@/hooks/useGaiaTokenData'
-import { GAIA_PROJECTS } from '@/constants/gaia-projects'
 
 interface Project {
   id: string
@@ -21,42 +19,60 @@ interface Project {
 }
 
 export function GaiaCommunityProjects() {
-  const { tokenData, isLoading, error } = useGaiaTokenData(true)
-  
-  // Use projects from constants and derive funding from GAiA token data
-  const [projects, setProjects] = useState<Project[]>(
-    GAIA_PROJECTS.map(project => ({
-      id: project.id,
-      title: project.title,
-      description: project.description,
-      category: project.category,
-      fundingGoal: project.reward * 100, // Scale up for project funding
-      currentFunding: Math.floor((project.progress / 100) * project.reward * 100),
-      backers: project.participants,
-      daysLeft: Math.ceil((new Date(project.deadline).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)),
-      impact: `Expected to impact ${project.participants.toLocaleString()} participants`
-    }))
-  )
+  const [projects, setProjects] = useState<Project[]>([
+    {
+      id: '1',
+      title: 'Solar Village Initiative',
+      description: 'Installing solar panels in remote villages to provide clean, renewable energy access.',
+      category: 'Renewable Energy',
+      fundingGoal: 50000,
+      currentFunding: 35750,
+      backers: 234,
+      daysLeft: 18,
+      impact: 'Will provide clean energy to 500+ families'
+    },
+    {
+      id: '2',
+      title: 'Ocean Cleanup Drones',
+      description: 'Deploying autonomous drones to collect plastic waste from ocean surfaces.',
+      category: 'Ocean Conservation',
+      fundingGoal: 75000,
+      currentFunding: 42300,
+      backers: 189,
+      daysLeft: 25,
+      impact: 'Expected to remove 10 tons of plastic annually'
+    },
+    {
+      id: '3',
+      title: 'Urban Forest Expansion',
+      description: 'Creating green corridors in urban areas to improve air quality and biodiversity.',
+      category: 'Reforestation',
+      fundingGoal: 30000,
+      currentFunding: 28900,
+      backers: 456,
+      daysLeft: 5,
+      impact: 'Will plant 1,000 trees in metropolitan areas'
+    }
+  ])
 
   const [animatedProjects, setAnimatedProjects] = useState(projects)
 
   useEffect(() => {
-    // Update projects when tokenData changes to reflect real GAiA token activity
-    if (tokenData) {
-      const activityMultiplier = tokenData.transactions24h / TRANSACTION_ACTIVITY_DIVISOR; // Use transaction activity
-      
+    const interval = setInterval(() => {
       setAnimatedProjects(prev => 
         prev.map(project => ({
           ...project,
           currentFunding: Math.min(
             project.fundingGoal,
-            project.currentFunding + Math.floor(activityMultiplier * 100)
+            project.currentFunding + Math.floor(Math.random() * 500)
           ),
-          backers: project.backers + Math.floor(activityMultiplier * 2)
+          backers: project.backers + Math.floor(Math.random() * 3)
         }))
       )
-    }
-  }, [tokenData])
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className="space-y-8">
