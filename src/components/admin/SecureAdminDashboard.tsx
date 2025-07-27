@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Lock, Eye, AlertTriangle, Zap, Crown, Activity, Globe, Users, TrendingUp } from 'lucide-react'
+import { Shield, Lock, Eye, AlertTriangle, Zap, Crown, Activity, Globe, Users, TrendingUp, Brain } from 'lucide-react'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
 import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
@@ -16,6 +16,7 @@ import { UserIsolationSystem } from './UserIsolationSystem'
 import { AIEngineCapabilities } from './AIEngineCapabilities'
 import { ChatSecurityPanel } from './ChatSecurityPanel'
 import UltimateSecurity from './UltimateSecurity'
+import SecureAdminQuantumIAEnginePanel from '@/components/SecureAdminQuantumIAEnginePanel'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -45,8 +46,9 @@ export function SecureAdminDashboard() {
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-6">
+              <TabsList className="grid w-full grid-cols-7">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="ia-engine">🧠 IA Engine</TabsTrigger>
                 <TabsTrigger value="security">Security</TabsTrigger>
                 <TabsTrigger value="tools">Admin Tools</TabsTrigger>
                 <TabsTrigger value="control">Supreme Control</TabsTrigger>
@@ -56,6 +58,21 @@ export function SecureAdminDashboard() {
 
               <TabsContent value="overview" className="space-y-6">
                 <AdminDashboardTabs />
+              </TabsContent>
+
+              <TabsContent value="ia-engine" className="space-y-6">
+                <Card className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 border-purple-500/30">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-purple-400">
+                      <Brain className="h-6 w-6" />
+                      Quantum IA Engine - Fully Operational Admin Control
+                    </CardTitle>
+                    <p className="text-muted-foreground">
+                      Complete artificial intelligence engine with full admin rights and operational capabilities
+                    </p>
+                  </CardHeader>
+                </Card>
+                <SecureAdminQuantumIAEnginePanel />
               </TabsContent>
 
               <TabsContent value="security" className="space-y-6">

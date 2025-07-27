@@ -61,7 +61,7 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
       } catch (error) {
         console.error('❌ GAiA Token monitoring error:', error)
       }
-    }, 30000) // Every 30 seconds
+    }, GAIA_TOKEN_MONITORING_INTERVAL_MS) // Every 30 seconds
     
     return () => clearInterval(tokenMonitoring)
   }
