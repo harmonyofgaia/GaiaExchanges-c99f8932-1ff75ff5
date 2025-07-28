@@ -10,15 +10,17 @@ import {
   DropdownMenuLabel
 } from "@/components/ui/dropdown-menu"
 import { Badge } from '@/components/ui/badge'
-import { Settings, Brush, Lock, Unlock, Palette, LayoutDashboard, Zap, Eye } from 'lucide-react'
+import { Settings, Brush, Lock, Unlock, Palette, LayoutDashboard, Zap, Eye, Cog } from 'lucide-react'
 import { useLock } from '@/components/providers/ThemeProvider'
 import { toast } from 'sonner'
 import { EnhancedVisualControls } from './EnhancedVisualControls'
+import { ProjectManagementDialog } from '../project/ProjectManagementDialog'
 
 export function VisualControlButton() {
   const { isLocked, toggleLock } = useLock()
   const [isOpen, setIsOpen] = useState(false)
   const [showFullMenu, setShowFullMenu] = useState(false)
+  const [showProjectManagement, setShowProjectManagement] = useState(false)
 
   const handleLockToggle = () => {
     toggleLock()
@@ -39,6 +41,11 @@ export function VisualControlButton() {
       return
     }
     setShowFullMenu(true)
+    setIsOpen(false)
+  }
+
+  const handleOpenProjectManagement = () => {
+    setShowProjectManagement(true)
     setIsOpen(false)
   }
 
@@ -64,6 +71,20 @@ export function VisualControlButton() {
             <DropdownMenuLabel className="text-primary font-semibold">
               🎨 Visual Controls
             </DropdownMenuLabel>
+            
+            <DropdownMenuSeparator className="bg-primary/30" />
+            
+            {/* Project Management - NEW */}
+            <DropdownMenuItem 
+              onClick={handleOpenProjectManagement}
+              className="text-purple-300 hover:text-purple-200 hover:bg-purple-500/10 cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <Cog className="h-4 w-4" />
+                <span>🚀 Project Management</span>
+                <Badge className="bg-purple-600 text-xs">PRO</Badge>
+              </div>
+            </DropdownMenuItem>
             
             <DropdownMenuSeparator className="bg-primary/30" />
             
@@ -176,6 +197,12 @@ export function VisualControlButton() {
           </div>
         </div>
       )}
+
+      {/* Project Management Dialog */}
+      <ProjectManagementDialog 
+        isOpen={showProjectManagement} 
+        onClose={() => setShowProjectManagement(false)} 
+      />
     </>
   )
 }
