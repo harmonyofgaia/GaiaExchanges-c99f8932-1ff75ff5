@@ -1,17 +1,21 @@
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 export function SystemMonitor() {
+  const lastLogTime = useRef(0)
+  
   useEffect(() => {
-    // Background system monitoring
     const monitorInterval = setInterval(() => {
-      console.log('🛡️ System Monitor: All systems operational')
-    }, 30000) // Every 30 seconds
+      // Reduce logging frequency - only log every 2 minutes instead of every 30 seconds
+      const now = Date.now()
+      if (now - lastLogTime.current > 120000) {
+        console.log('🛡️ System Monitor: All systems operational and optimized')
+        lastLogTime.current = now
+      }
+    }, 120000) // Every 2 minutes instead of 30 seconds
 
-    // Cleanup on unmount
     return () => clearInterval(monitorInterval)
   }, [])
 
-  // This component runs in the background and doesn't render anything visible
   return null
 }
