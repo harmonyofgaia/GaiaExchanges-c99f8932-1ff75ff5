@@ -1,358 +1,228 @@
 
-import { useState } from 'react'
+import { Navbar } from '@/components/Navbar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { toast } from 'sonner'
-import { 
-  TreePine, 
-  Droplets, 
-  Users, 
-  Target, 
-  Calendar,
-  DollarSign,
-  Vote,
-  Shield,
-  Zap
-} from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { Heart, Users, Target, Coins, TreePine, Flame, Shield, Globe } from 'lucide-react'
 
-interface Project {
-  id: string
-  title: string
-  description: string
-  category: string
-  goalAmount: number
-  currentAmount: number
-  backers: number
-  daysLeft: number
-  image: string
-  verified: boolean
-  impactScore: number
-}
-
-const ProjectFunding = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all')
-  const [fundingAmount, setFundingAmount] = useState('')
-  const [newProject, setNewProject] = useState({
-    title: '',
-    description: '',
-    category: '',
-    goalAmount: ''
-  })
-
-  const projects: Project[] = [
-    {
-      id: '1',
-      title: 'Amazon Reforestation Initiative',
-      description: 'Plant 50,000 native trees in deforested areas of the Amazon rainforest to restore biodiversity and combat climate change.',
-      category: 'Reforestation',
-      goalAmount: 100000,
-      currentAmount: 75400,
-      backers: 342,
-      daysLeft: 15,
-      image: '🌳',
-      verified: true,
-      impactScore: 95
-    },
-    {
-      id: '2',
-      title: 'Ocean Plastic Cleanup Network',
-      description: 'Deploy innovative floating cleanup systems to remove plastic waste from ocean gyres and protect marine life.',
-      category: 'Ocean Cleanup',
-      goalAmount: 250000,
-      currentAmount: 180300,
-      backers: 567,
-      daysLeft: 23,
-      image: '🌊',
-      verified: true,
-      impactScore: 92
-    },
-    {
-      id: '3',
-      title: 'Solar Power for Rural Communities',
-      description: 'Install solar panel systems in remote villages to provide clean, renewable energy access to underserved populations.',
-      category: 'Renewable Energy',
-      goalAmount: 150000,
-      currentAmount: 89600,
-      backers: 278,
-      daysLeft: 31,
-      image: '☀️',
-      verified: true,
-      impactScore: 88
-    },
-    {
-      id: '4',
-      title: 'Bee Sanctuary Expansion',
-      description: 'Create protected habitats for endangered bee species and establish educational programs about pollinator conservation.',
-      category: 'Wildlife Conservation',
-      goalAmount: 75000,
-      currentAmount: 42100,
-      backers: 189,
-      daysLeft: 19,
-      image: '🐝',
-      verified: true,
-      impactScore: 85
-    }
-  ]
-
-  const handleFund = (projectId: string) => {
-    if (!fundingAmount || parseFloat(fundingAmount) <= 0) {
-      toast.error('Please enter a valid funding amount')
-      return
-    }
-    
-    toast.success(`Successfully funded project with ${fundingAmount} GAiA tokens!`)
-    setFundingAmount('')
-  }
-
-  const handleCreateProject = (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    if (!newProject.title || !newProject.description || !newProject.goalAmount) {
-      toast.error('Please fill in all required fields')
-      return
-    }
-    
-    toast.success('Project proposal submitted for community review!')
-    setNewProject({ title: '', description: '', category: '', goalAmount: '' })
-  }
-
-  const getProgressColor = (percentage: number) => {
-    if (percentage >= 80) return 'bg-green-500'
-    if (percentage >= 50) return 'bg-yellow-500'
-    return 'bg-red-500'
-  }
-
+export default function ProjectFunding() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
-      <div className="container mx-auto px-6 py-8">
-        {/* Header */}
-        <Card className="mb-8 border-2 border-green-500/50 bg-gradient-to-r from-green-900/40 to-blue-900/40">
-          <CardHeader>
-            <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
-              🌍 DECENTRALIZED PROJECT FUNDING
-            </CardTitle>
-            <p className="text-center text-xl text-green-300">
-              Fund environmental projects • Earn governance tokens • Create positive impact
-            </p>
-          </CardHeader>
-        </Card>
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent mb-4">
+            💚 Decentralized Project Funding
+          </h1>
+          <p className="text-xl text-muted-foreground">
+            Community-driven funding for environmental initiatives
+          </p>
+        </div>
 
-        {/* Stats Dashboard */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-gradient-to-r from-green-900/30 to-green-800/30 border-green-500/30">
-            <CardContent className="p-6 text-center">
-              <TreePine className="h-8 w-8 mx-auto text-green-400 mb-2" />
-              <div className="text-3xl font-bold text-green-400">47</div>
-              <div className="text-sm text-muted-foreground">Active Projects</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card className="border-green-500/20 bg-gradient-to-br from-green-900/20 to-green-800/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <Heart className="h-5 w-5" />
+                Ocean Cleanup Initiative
+              </CardTitle>
+              <Badge variant="outline" className="border-green-500/50 text-green-400 w-fit">
+                Active
+              </Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Remove plastic waste from oceans using advanced filtration systems
+              </p>
+              <Progress value={75} className="w-full" />
+              <div className="flex justify-between text-sm">
+                <span>75% funded</span>
+                <span className="text-green-400 font-semibold">$150,000 / $200,000</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Users className="h-4 w-4" />
+                <span>1,247 contributors</span>
+              </div>
+              <Button className="w-full bg-green-600 hover:bg-green-700">
+                Fund Project
+              </Button>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-r from-blue-900/30 to-blue-800/30 border-blue-500/30">
-            <CardContent className="p-6 text-center">
-              <DollarSign className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-3xl font-bold text-blue-400">2.8M</div>
-              <div className="text-sm text-muted-foreground">GAiA Tokens Raised</div>
+          <Card className="border-blue-500/20 bg-gradient-to-br from-blue-900/20 to-blue-800/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-400">
+                <TreePine className="h-5 w-5" />
+                Reforestation Program
+              </CardTitle>
+              <Badge variant="outline" className="border-blue-500/50 text-blue-400 w-fit">
+                Growing
+              </Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Plant native trees in deforested areas to restore ecosystems
+              </p>
+              <Progress value={45} className="w-full" />
+              <div className="flex justify-between text-sm">
+                <span>45% funded</span>
+                <span className="text-blue-400 font-semibold">$45,000 / $100,000</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Users className="h-4 w-4" />
+                <span>892 contributors</span>
+              </div>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                Fund Project
+              </Button>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-r from-purple-900/30 to-purple-800/30 border-purple-500/30">
-            <CardContent className="p-6 text-center">
-              <Users className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-              <div className="text-3xl font-bold text-purple-400">12.4K</div>
-              <div className="text-sm text-muted-foreground">Total Backers</div>
+          <Card className="border-orange-500/20 bg-gradient-to-br from-orange-900/20 to-orange-800/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-orange-400">
+                <Flame className="h-5 w-5" />
+                Wildfire Sand Blast Defense
+              </CardTitle>
+              <Badge variant="outline" className="border-orange-500/50 text-orange-400 w-fit">
+                Critical
+              </Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Advanced sand cannon systems for wildfire prevention and suppression
+              </p>
+              <Progress value={90} className="w-full" />
+              <div className="flex justify-between text-sm">
+                <span>90% funded</span>
+                <span className="text-orange-400 font-semibold">$135,000 / $150,000</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Users className="h-4 w-4" />
+                <span>2,156 contributors</span>
+              </div>
+              <Button className="w-full bg-orange-600 hover:bg-orange-700">
+                Fund Project
+              </Button>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-r from-yellow-900/30 to-yellow-800/30 border-yellow-500/30">
-            <CardContent className="p-6 text-center">
-              <Target className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
-              <div className="text-3xl font-bold text-yellow-400">89%</div>
-              <div className="text-sm text-muted-foreground">Success Rate</div>
+          <Card className="border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-purple-800/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-purple-400">
+                <Target className="h-5 w-5" />
+                Solar Energy Access
+              </CardTitle>
+              <Badge variant="outline" className="border-purple-500/50 text-purple-400 w-fit">
+                Nearly Complete
+              </Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Provide solar panels to remote communities for clean energy
+              </p>
+              <Progress value={95} className="w-full" />
+              <div className="flex justify-between text-sm">
+                <span>95% funded</span>
+                <span className="text-purple-400 font-semibold">$142,500 / $150,000</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Users className="h-4 w-4" />
+                <span>1,678 contributors</span>
+              </div>
+              <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                Fund Project
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="border-cyan-500/20 bg-gradient-to-br from-cyan-900/20 to-cyan-800/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-cyan-400">
+                <Shield className="h-5 w-5" />
+                Coral Reef Restoration
+              </CardTitle>
+              <Badge variant="outline" className="border-cyan-500/50 text-cyan-400 w-fit">
+                New
+              </Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Restore damaged coral reefs using innovative regeneration techniques
+              </p>
+              <Progress value={15} className="w-full" />
+              <div className="flex justify-between text-sm">
+                <span>15% funded</span>
+                <span className="text-cyan-400 font-semibold">$18,000 / $120,000</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Users className="h-4 w-4" />
+                <span>324 contributors</span>
+              </div>
+              <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
+                Fund Project
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="border-yellow-500/20 bg-gradient-to-br from-yellow-900/20 to-yellow-800/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-yellow-400">
+                <Globe className="h-5 w-5" />
+                Carbon Capture Network
+              </CardTitle>
+              <Badge variant="outline" className="border-yellow-500/50 text-yellow-400 w-fit">
+                Expanding
+              </Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Deploy global network of carbon capture and storage facilities
+              </p>
+              <Progress value={62} className="w-full" />
+              <div className="flex justify-between text-sm">
+                <span>62% funded</span>
+                <span className="text-yellow-400 font-semibold">$310,000 / $500,000</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Users className="h-4 w-4" />
+                <span>3,789 contributors</span>
+              </div>
+              <Button className="w-full bg-yellow-600 hover:bg-yellow-700">
+                Fund Project
+              </Button>
             </CardContent>
           </Card>
         </div>
 
-        {/* Category Filter */}
-        <Card className="mb-8">
+        {/* Funding Statistics */}
+        <Card className="mt-8 border-gray-500/20 bg-gradient-to-r from-gray-900/20 to-black/20">
           <CardHeader>
-            <CardTitle className="text-green-400">Project Categories</CardTitle>
+            <CardTitle className="text-center text-white">Global Funding Impact</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-wrap gap-2">
-              {['all', 'Reforestation', 'Ocean Cleanup', 'Renewable Energy', 'Wildlife Conservation'].map((category) => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? 'default' : 'outline'}
-                  onClick={() => setSelectedCategory(category)}
-                  className="capitalize"
-                >
-                  {category === 'all' ? 'All Projects' : category}
-                </Button>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+              <div>
+                <div className="text-3xl font-bold text-green-400">$2.4M</div>
+                <p className="text-sm text-muted-foreground">Total Funded</p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-blue-400">47</div>
+                <p className="text-sm text-muted-foreground">Active Projects</p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-purple-400">12.8K</div>
+                <p className="text-sm text-muted-foreground">Contributors</p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-yellow-400">156</div>
+                <p className="text-sm text-muted-foreground">Countries</p>
+              </div>
             </div>
           </CardContent>
         </Card>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Projects List */}
-          <div className="lg:col-span-2">
-            <div className="space-y-6">
-              {projects.map((project) => {
-                const progress = (project.currentAmount / project.goalAmount) * 100
-                
-                return (
-                  <Card key={project.id} className="border-green-500/30">
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="text-6xl">{project.image}</div>
-                        
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <h3 className="text-xl font-bold text-green-400">{project.title}</h3>
-                            {project.verified && (
-                              <Badge className="bg-blue-600 text-white">
-                                <Shield className="h-3 w-3 mr-1" />
-                                Verified
-                              </Badge>
-                            )}
-                            <Badge className="bg-purple-600 text-white">
-                              Impact: {project.impactScore}%
-                            </Badge>
-                          </div>
-                          
-                          <p className="text-muted-foreground mb-4">{project.description}</p>
-                          
-                          <div className="space-y-3">
-                            <div className="flex justify-between text-sm">
-                              <span>Progress: {project.currentAmount.toLocaleString()} / {project.goalAmount.toLocaleString()} GAiA</span>
-                              <span>{Math.round(progress)}% funded</span>
-                            </div>
-                            
-                            <Progress value={progress} className="h-3" />
-                            
-                            <div className="flex justify-between items-center">
-                              <div className="flex gap-4 text-sm text-muted-foreground">
-                                <span className="flex items-center gap-1">
-                                  <Users className="h-4 w-4" />
-                                  {project.backers} backers
-                                </span>
-                                <span className="flex items-center gap-1">
-                                  <Calendar className="h-4 w-4" />
-                                  {project.daysLeft} days left
-                                </span>
-                              </div>
-                              
-                              <div className="flex gap-2">
-                                <Button variant="outline" size="sm">
-                                  <Vote className="h-4 w-4 mr-1" />
-                                  Vote
-                                </Button>
-                                <Button 
-                                  onClick={() => handleFund(project.id)}
-                                  className="bg-green-600 hover:bg-green-700"
-                                  size="sm"
-                                >
-                                  Fund Project
-                                </Button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                )
-              })}
-            </div>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Quick Fund */}
-            <Card className="border-blue-500/30">
-              <CardHeader>
-                <CardTitle className="text-blue-400">Quick Fund</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Input
-                  type="number"
-                  placeholder="Amount in GAiA tokens"
-                  value={fundingAmount}
-                  onChange={(e) => setFundingAmount(e.target.value)}
-                />
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  <Zap className="h-4 w-4 mr-2" />
-                  Quick Fund
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Create Project */}
-            <Card className="border-purple-500/30">
-              <CardHeader>
-                <CardTitle className="text-purple-400">Propose New Project</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleCreateProject} className="space-y-4">
-                  <Input
-                    placeholder="Project title"
-                    value={newProject.title}
-                    onChange={(e) => setNewProject({...newProject, title: e.target.value})}
-                  />
-                  <Textarea
-                    placeholder="Project description"
-                    value={newProject.description}
-                    onChange={(e) => setNewProject({...newProject, description: e.target.value})}
-                    rows={4}
-                  />
-                  <Input
-                    type="number"
-                    placeholder="Goal amount (GAiA tokens)"
-                    value={newProject.goalAmount}
-                    onChange={(e) => setNewProject({...newProject, goalAmount: e.target.value})}
-                  />
-                  <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
-                    Submit Proposal
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-
-            {/* My Contributions */}
-            <Card className="border-green-500/30">
-              <CardHeader>
-                <CardTitle className="text-green-400">My Contributions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <span>Projects Funded:</span>
-                    <span className="font-bold">8</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Total Contributed:</span>
-                    <span className="font-bold">15,340 GAiA</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Governance Power:</span>
-                    <span className="font-bold">247 votes</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Impact Score:</span>
-                    <span className="font-bold text-green-400">92%</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
       </div>
     </div>
   )
 }
-
-export default ProjectFunding

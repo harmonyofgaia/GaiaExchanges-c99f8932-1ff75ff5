@@ -15,11 +15,18 @@ const SandProtect = lazy(() => import("./pages/SandProtect"));
 const AdminPanel = lazy(() => import("./pages/Admin"));
 const ForestShieldMasterPlan = lazy(() => import("./pages/ForestShieldMasterPlan"));
 
-// Phase 1 new pages
+// Phase 1 pages
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const GreenImpactDashboard = lazy(() => import("./pages/GreenImpactDashboard"));
 const GAiAConsistencyStatus = lazy(() => import("./pages/GaiaConsistencyStatus"));
 const Security = lazy(() => import("./pages/Security"));
+
+// Phase 2 pages
+const ProjectFunding = lazy(() => import("./pages/ProjectFunding"));
+const WildfireDefenseDashboard = lazy(() => import("./pages/WildfireDefenseDashboard"));
+const ForestTokenSystem = lazy(() => import("./pages/ForestTokenSystem"));
+const ImpactMeasurementSystem = lazy(() => import("./pages/ImpactMeasurementSystem"));
+const SeaGreenPsychohistoricalProject = lazy(() => import("./pages/SeaGreenPsychohistoricalProject"));
 
 const queryClient = new QueryClient();
 
@@ -39,11 +46,18 @@ function App() {
             <Route path="/admin-panel" element={<Suspense fallback={<div>Loading...</div>}><AdminPanel /></Suspense>} />
             <Route path="/forest-shield-master-plan" element={<Suspense fallback={<div>Loading...</div>}><ForestShieldMasterPlan /></Suspense>} />
             
-            {/* Phase 1 New Routes */}
+            {/* Phase 1 Routes */}
             <Route path="/dashboard" element={<Suspense fallback={<div>Loading...</div>}><Dashboard /></Suspense>} />
             <Route path="/green-impact-dashboard" element={<Suspense fallback={<div>Loading...</div>}><GreenImpactDashboard /></Suspense>} />
             <Route path="/gaia-consistency-status" element={<Suspense fallback={<div>Loading...</div>}><GAiAConsistencyStatus /></Suspense>} />
             <Route path="/security" element={<Suspense fallback={<div>Loading...</div>}><Security /></Suspense>} />
+
+            {/* Phase 2 Routes */}
+            <Route path="/project-funding" element={<Suspense fallback={<div>Loading...</div>}><ProjectFunding /></Suspense>} />
+            <Route path="/wildfire-defense-dashboard" element={<Suspense fallback={<div>Loading...</div>}><WildfireDefenseDashboard /></Suspense>} />
+            <Route path="/forest-token-system" element={<Suspense fallback={<div>Loading...</div>}><ForestTokenSystem /></Suspense>} />
+            <Route path="/impact-measurement-system" element={<Suspense fallback={<div>Loading...</div>}><ImpactMeasurementSystem /></Suspense>} />
+            <Route path="/sea-green-psychohistorical" element={<Suspense fallback={<div>Loading...</div>}><SeaGreenPsychohistoricalProject /></Suspense>} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

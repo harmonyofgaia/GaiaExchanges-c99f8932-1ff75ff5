@@ -1,3 +1,4 @@
+
 import { Navbar } from '@/components/Navbar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -26,10 +27,6 @@ import {
   Database,
   Activity
 } from 'lucide-react'
-import { PsychohistoricalEngine } from '@/components/psychohistorical/PsychohistoricalEngine'
-import { SecurePsychohistoricalAdmin } from '@/components/psychohistorical/SecurePsychohistoricalAdmin'
-import { PsychohistoricalIntegration } from '@/components/psychohistorical/PsychohistoricalIntegration'
-import { PsychohistoricalDocumentation } from '@/components/psychohistorical/PsychohistoricalDocumentation'
 
 export default function SeaGreenPsychohistoricalProject() {
   return (
@@ -132,7 +129,7 @@ export default function SeaGreenPsychohistoricalProject() {
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="engine" className="flex items-center gap-2">
               <Brain className="h-4 w-4" />
-              Psychohistorical Engine
+              AI Engine
             </TabsTrigger>
             <TabsTrigger value="admin" className="flex items-center gap-2">
               <Shield className="h-4 w-4" />
@@ -140,11 +137,11 @@ export default function SeaGreenPsychohistoricalProject() {
             </TabsTrigger>
             <TabsTrigger value="governance" className="flex items-center gap-2">
               <Users className="h-4 w-4" />
-              Token Governance
+              Governance
             </TabsTrigger>
             <TabsTrigger value="documentation" className="flex items-center gap-2">
               <BookOpen className="h-4 w-4" />
-              Auto-Documentation
+              Documentation
             </TabsTrigger>
           </TabsList>
 
@@ -160,7 +157,28 @@ export default function SeaGreenPsychohistoricalProject() {
                 </p>
               </CardHeader>
               <CardContent>
-                <PsychohistoricalEngine />
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="p-4 bg-green-900/20 rounded-lg">
+                      <Database className="h-6 w-6 text-green-400 mb-2" />
+                      <div className="text-sm font-semibold text-green-400">Data Processing</div>
+                      <div className="text-xs text-muted-foreground">47TB processed daily</div>
+                    </div>
+                    <div className="p-4 bg-blue-900/20 rounded-lg">
+                      <Activity className="h-6 w-6 text-blue-400 mb-2" />
+                      <div className="text-sm font-semibold text-blue-400">AI Models</div>
+                      <div className="text-xs text-muted-foreground">12 active prediction models</div>
+                    </div>
+                    <div className="p-4 bg-purple-900/20 rounded-lg">
+                      <Zap className="h-6 w-6 text-purple-400 mb-2" />
+                      <div className="text-sm font-semibold text-purple-400">Real-time Analysis</div>
+                      <div className="text-xs text-muted-foreground">0.3s response time</div>
+                    </div>
+                  </div>
+                  <Button className="w-full bg-green-600 hover:bg-green-700">
+                    Generate New Environmental Solutions
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
@@ -177,7 +195,24 @@ export default function SeaGreenPsychohistoricalProject() {
                 </p>
               </CardHeader>
               <CardContent>
-                <SecurePsychohistoricalAdmin />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Button variant="outline" className="border-blue-500/50 text-blue-400">
+                    <Settings className="h-4 w-4 mr-2" />
+                    System Configuration
+                  </Button>
+                  <Button variant="outline" className="border-red-500/50 text-red-400">
+                    <AlertTriangle className="h-4 w-4 mr-2" />
+                    Security Monitoring
+                  </Button>
+                  <Button variant="outline" className="border-green-500/50 text-green-400">
+                    <CheckCircle className="h-4 w-4 mr-2" />
+                    Idea Validation
+                  </Button>
+                  <Button variant="outline" className="border-purple-500/50 text-purple-400">
+                    <BarChart3 className="h-4 w-4 mr-2" />
+                    Performance Analytics
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
@@ -194,7 +229,25 @@ export default function SeaGreenPsychohistoricalProject() {
                 </p>
               </CardHeader>
               <CardContent>
-                <PsychohistoricalIntegration />
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div>
+                      <div className="text-2xl font-bold text-purple-400">8.7K</div>
+                      <div className="text-sm text-muted-foreground">Active Voters</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-blue-400">247</div>
+                      <div className="text-sm text-muted-foreground">Proposals</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-green-400">94.2%</div>
+                      <div className="text-sm text-muted-foreground">Success Rate</div>
+                    </div>
+                  </div>
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                    Participate in Governance
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
@@ -211,7 +264,23 @@ export default function SeaGreenPsychohistoricalProject() {
                 </p>
               </CardHeader>
               <CardContent>
-                <PsychohistoricalDocumentation />
+                <div className="space-y-4">
+                  <div className="p-4 bg-yellow-900/20 rounded-lg">
+                    <Bell className="h-6 w-6 text-yellow-400 mb-2" />
+                    <div className="text-sm font-semibold text-yellow-400">Community Alerts Active</div>
+                    <div className="text-xs text-muted-foreground">12.4K subscribers receiving real-time updates</div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <Button variant="outline" className="border-yellow-500/50 text-yellow-400">
+                      <Clock className="h-4 w-4 mr-2" />
+                      Alert History
+                    </Button>
+                    <Button variant="outline" className="border-green-500/50 text-green-400">
+                      <Target className="h-4 w-4 mr-2" />
+                      Knowledge Base
+                    </Button>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
