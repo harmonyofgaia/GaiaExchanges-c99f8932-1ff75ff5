@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -83,7 +82,7 @@ export function AdminSecurityManager() {
     try {
       // First get the user UUID by email
       const { data: userUuid, error: uuidError } = await supabase
-        .rpc('get_user_uuid_by_email', { p_email: newAdminEmail })
+        .rpc('get_user_uuid_by_email', { user_email: newAdminEmail })
       
       if (uuidError) throw uuidError
 

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -37,7 +36,7 @@ export function ErrorTrackingDashboard() {
       const { data: aggregates, error: aggError } = await supabase
         .rpc('aggregate_errors', {
           p_time_window: selectedTimeWindow,
-          p_min_severity: selectedSeverity
+          p_severity_threshold: selectedSeverity
         })
       
       if (aggError) throw aggError
