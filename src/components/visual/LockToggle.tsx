@@ -11,11 +11,21 @@ export function LockToggle({ isLocked, onLockToggle }: LockToggleProps) {
   return (
     <Button
       onClick={onLockToggle}
-      variant={isLocked ? 'destructive' : 'secondary'}
+      variant={isLocked ? "destructive" : "outline"}
+      size="sm"
       className="flex items-center gap-2"
     >
-      {isLocked ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
-      {isLocked ? 'Unlock Controls' : 'Lock Controls'}
+      {isLocked ? (
+        <>
+          <Lock className="h-4 w-4" />
+          Locked
+        </>
+      ) : (
+        <>
+          <Unlock className="h-4 w-4" />
+          Unlocked
+        </>
+      )}
     </Button>
   )
 }
