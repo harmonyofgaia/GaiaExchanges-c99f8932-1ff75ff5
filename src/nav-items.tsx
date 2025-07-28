@@ -1,5 +1,4 @@
-
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket, Zap, Trophy } from "lucide-react";
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket, Zap, Trophy, Smartphone, Building, Paw, Cpu } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -35,7 +34,7 @@ export const navigationItems: NavigationItem[] = [
     to: "/exchange",
     icon: Users,
     variant: "ghost" as const,
-    description: "Multi-chain token exchange and trading platform",
+    description: "Multi-chain token exchange with private blockchain network",
     lazyLoaded: true,
   },
   {
@@ -371,6 +370,382 @@ export const navigationItems: NavigationItem[] = [
       "Security, Privacy & Compliance"
     ],
     description: "Master Plan v7: GAiA Community Video Exchange Outstanding Experience",
+    lazyLoaded: true,
+  },
+  {
+    title: "Markets",
+    to: "/markets",
+    icon: BarChart3,
+    variant: "ghost" as const,
+    description: "Trading markets and exchange platforms",
+    lazyLoaded: true,
+  },
+  
+  // Phase 1 Integrated Pages
+  {
+    title: "App Store Submission",
+    to: "/app-store-submission",
+    icon: Smartphone,
+    variant: "ghost" as const,
+    features: [
+      "iOS App Store Preparation",
+      "Google Play Store Ready",
+      "Submission Progress Tracking",
+      "Review Process Management",
+      "Global Release Planning"
+    ],
+    description: "Phase 1: Mobile app store submission center and progress tracking",
+    lazyLoaded: true,
+  },
+  {
+    title: "Community Reinvestment",
+    to: "/community-reinvestment",
+    icon: Heart,
+    variant: "ghost" as const,
+    features: [
+      "Transparent Fund Allocation",
+      "Environmental Project Funding",
+      "Community Voting System",
+      "Impact Measurement",
+      "Global Project Tracking"
+    ],
+    description: "Phase 1: 100% transparent community reinvestment platform",
+    lazyLoaded: true,
+  },
+  {
+    title: "Animal Welfare & NFTs",
+    to: "/animal-welfare",
+    icon: Paw,
+    variant: "ghost" as const,
+    features: [
+      "Animal Rescue Statistics",
+      "NFT Collections for Funding",
+      "Adoption Success Tracking",
+      "Emergency Fund Management",
+      "Global Rescue Network"
+    ],
+    description: "Phase 1: Animal rescue NFTs and welfare tracking system",
+    lazyLoaded: true,
+  },
+  {
+    title: "Deployment Center",
+    to: "/deployment-center",
+    icon: Rocket,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "V2+ Master Plan Validation",
+      "Einstein Copilot Integration",
+      "Advanced Deployment Automation",
+      "Real-time System Monitoring",
+      "Comprehensive Security Checks",
+      "Zero-Downtime Deployment",
+      "AI-Assisted Live Support",
+      "Quantum Security Protocols"
+    ],
+    description: "Phase 1: V2+ Deployment Center with Einstein Copilot assistance",
+    lazyLoaded: true,
+  },
+
+  // Remaining Master Plan v7 Features (Phase 2 & 3)
+  {
+    title: "Earning Activities",
+    to: "/earning-activities",
+    icon: Zap,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Water-saving Actions Points",
+      "Home-grown Food Rewards", 
+      "Bee Hotel Creation System",
+      "Environmental Education Points",
+      "Skill-based Earning Platform",
+      "Referral Bonus System",
+      "Mission Voting Rewards",
+      "Location-based Missions",
+      "Carbon Credit Actions",
+      "NFT/Marketplace Participation",
+      "Emergency Response Points",
+      "Long-term Commitment Bonuses",
+      "Innovation Bonus System",
+      "Accessibility Rewards"
+    ],
+    description: "Phase 2: Master Plan v7 comprehensive points earning system",
+    lazyLoaded: true,
+  },
+  {
+    title: "Enhanced Leaderboard",
+    to: "/enhanced-leaderboard",
+    icon: Trophy,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Global Rankings System",
+      "Category-specific Leaderboards",
+      "Real-time Updates",
+      "Achievement Tracking",
+      "Streak Monitoring",
+      "Weekly/Monthly/All-time Views",
+      "Badge Display System",
+      "Country-based Rankings",
+      "Trend Analysis",
+      "Performance Analytics"
+    ],
+    description: "Phase 2: Master Plan v7 comprehensive leaderboard system",
+    lazyLoaded: true,
+  },
+  {
+    title: "Green Impact",
+    to: "/green-impact-dashboard",
+    icon: Leaf,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Advanced Impact Metrics",
+      "AI-Powered Predictions",
+      "Global Leaderboards",
+      "Achievement System",
+      "Real-time Environmental Data"
+    ],
+    description: "Phase 2: Master Plan v7 enhanced environmental impact tracking with AI insights",
+    lazyLoaded: true,
+  },
+  {
+    title: "Project Funding",
+    to: "/project-funding",
+    icon: Heart,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Decentralized Governance",
+      "Smart Contract Automation",
+      "Multi-signature Security",
+      "Impact Verification",
+      "Community Voting"
+    ],
+    description: "Phase 2: Master Plan v7 advanced decentralized funding with governance",
+    lazyLoaded: true,
+  },
+  {
+    title: "NFT Cards",
+    to: "/nft-cards",
+    icon: Sparkles,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Biodiversity Collection",
+      "Dynamic Rarity System",
+      "Ecosystem Interactions",
+      "Trading Marketplace",
+      "Conservation Partnerships"
+    ],
+    description: "Phase 2: Master Plan v7 advanced biodiversity NFT ecosystem",
+    lazyLoaded: true,
+  },
+  {
+    title: "Eco Avatar",
+    to: "/eco-avatar",
+    icon: Users,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Gaia Soul System",
+      "Elemental Meditation",
+      "Spiritual Evolution",
+      "Avatar Customization",
+      "Environmental Bonding"
+    ],
+    description: "Phase 2: Master Plan v7 deep spiritual connection with nature through avatars",
+    lazyLoaded: true,
+  },
+  {
+    title: "Forest Shield",
+    to: "/forest-shield-master-plan",
+    icon: TreePine,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Sand Cannon Defense Network",
+      "AI Wildfire Detection",
+      "Blockchain Token System",
+      "Community Engagement Hub",
+      "Global Partnership Network"
+    ],
+    description: "Phase 3: Forest Shield Sand Cannon Wildfire Defense Master Plan",
+    lazyLoaded: true,
+  },
+  {
+    title: "Sand Protect",
+    to: "/sand-protect",
+    icon: Shield,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Community-Driven Wildfire Prevention",
+      "Sand Cannon Network Management",
+      "Token Reward System",
+      "Governance & Voting",
+      "Eco-Action History",
+      "Blockchain Integration"
+    ],
+    description: "Phase 3: Community project for wildfire prevention through sand cannon technology",
+    lazyLoaded: true,
+  },
+  {
+    title: "Wildfire Defense",
+    to: "/wildfire-defense-dashboard",
+    icon: Flame,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Real-time Monitoring",
+      "Sand Cannon Control",
+      "IoT Sensor Network",
+      "Emergency Response",
+      "Performance Analytics"
+    ],
+    description: "Phase 3: Real-time wildfire defense monitoring and control dashboard",
+    lazyLoaded: true,
+  },
+  {
+    title: "Forest Tokens",
+    to: "/forest-token-system",
+    icon: Coins,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Multi-tier Token System",
+      "Staking & Rewards",
+      "DAO Governance",
+      "Impact Verification",
+      "Blockchain Integration"
+    ],
+    description: "Phase 3: Multi-tier blockchain token system for forest defense funding and governance",
+    lazyLoaded: true,
+  },
+  {
+    title: "Community Hub",
+    to: "/community-engagement-hub",
+    icon: Users,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Training Programs",
+      "Community Coordination",
+      "Achievement System",
+      "Challenge Participation",
+      "Global Leaderboards"
+    ],
+    description: "Phase 3: Community training, coordination, and engagement platform",
+    lazyLoaded: true,
+  },
+  {
+    title: "Partnerships",
+    to: "/partnership-management",
+    icon: Handshake,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Partner Directory",
+      "Collaboration Management",
+      "Partnership Analytics",
+      "Initiative Tracking",
+      "Performance Monitoring"
+    ],
+    description: "Phase 3: NGO, agency, and tech firm partnership coordination platform",
+    lazyLoaded: true,
+  },
+  {
+    title: "Impact Metrics",
+    to: "/impact-measurement-system",
+    icon: BarChart3,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Real-time Impact Tracking",
+      "Blockchain Verification",
+      "Carbon Credit Management",
+      "SDG Alignment Monitoring",
+      "Transparent Reporting"
+    ],
+    description: "Phase 3: Environmental impact tracking and verification system",
+    lazyLoaded: true,
+  },
+  {
+    title: "Sea Green Psychohistorical",
+    to: "/sea-green-psychohistorical",
+    icon: Brain,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Psychohistorical AI Engine",
+      "Global Data Analysis",
+      "Future Prediction Models",
+      "Secure Admin Dashboard",
+      "Token Governance Integration",
+      "Auto-Documentation System"
+    ],
+    description: "Phase 3: Master Plan v7 advanced AI-powered environmental future prediction and idea generation",
+    lazyLoaded: true,
+  },
+  {
+    title: "GAiA Token Status",
+    to: "/gaia-consistency-status",
+    icon: Shield,
+    variant: "ghost" as const,
+    description: "GAiA token integration consistency monitoring and system verification",
+    features: [
+      "Real-time Consistency Scanning",
+      "Component Integration Status",
+      "Official Token Verification",
+      "System Health Monitoring",
+      "Issue Detection & Recommendations"
+    ],
+    lazyLoaded: true,
+  },
+  {
+    title: "Security",
+    to: "/security",
+    icon: Shield,
+    variant: "ghost" as const,
+    description: "Security monitoring and threat detection",
+    lazyLoaded: true,
+  },
+  {
+    title: "Gaia Private Blockchain Swap Token",
+    to: "/gaia-private-blockchain-swap-token",
+    icon: Shield,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Quantum-Resistant Security",
+      "Multi-Token Swap Support",
+      "Real-time Rate Updates",
+      "Advanced Validation",
+      "Dragon-Level Protection"
+    ],
+    description: "Phase 3: Master Plan v7 enhanced private blockchain with secure token swapping",
+    lazyLoaded: true,
+  },
+  {
+    title: "Video Exchange",
+    to: "/secure-admin/video-exchange",
+    icon: Video,
+    variant: "ghost" as const,
+    masterPlanVersion: "v7",
+    features: [
+      "Personal Channels (Little Heaven)",
+      "Seamless Video Upload",
+      "Interactive Video Player",
+      "Chat Engine & Social Features",
+      "Subscribe & Notification System",
+      "Points, Tokens & Gift System",
+      "Leaderboards & Badges",
+      "Challenges & Events",
+      "Deep Admin Control & Audit",
+      "Security, Privacy & Compliance"
+    ],
+    description: "Phase 3: Master Plan v7 GAiA Community Video Exchange Outstanding Experience",
     lazyLoaded: true,
   },
 ];
