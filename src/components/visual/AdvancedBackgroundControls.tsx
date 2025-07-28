@@ -56,6 +56,25 @@ export function AdvancedBackgroundControls({ isLocked }: { isLocked: boolean }) 
 
   const [timeRemaining, setTimeRemaining] = useState(settings.changeInterval)
 
+  // Load settings from localStorage on mount
+  useEffect(() => {
+    const savedSettings = localStorage.getItem('gaia-background-settings')
+    if (savedSettings) {
+      try {
+        const parsed = JSON.parse(savedSettings)
+        setSettings(parsed)
+        setTimeRemaining(parsed.changeInterval)
+      } catch (error) {
+        console.error('Failed to load background settings:', error)
+      }
+    }
+  }, [])
+
+  // Save settings to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('gaia-background-settings', JSON.stringify(settings))
+  }, [settings])
+
   // Timer for auto-change countdown
   useEffect(() => {
     if (!settings.autoChange || settings.isLocked) return
@@ -64,7 +83,7 @@ export function AdvancedBackgroundControls({ isLocked }: { isLocked: boolean }) 
       setTimeRemaining(prev => {
         if (prev <= 1) {
           // Trigger background change
-          window.dispatchEvent(new CustomEvent('background-auto-change'))
+          applyBackgroundChange()
           return settings.changeInterval
         }
         return prev - 1
@@ -82,10 +101,44 @@ export function AdvancedBackgroundControls({ isLocked }: { isLocked: boolean }) 
     
     setSettings(prev => ({ ...prev, [key]: value }))
     
-    // Emit background setting change event
-    window.dispatchEvent(new CustomEvent('background-settings-change', {
-      detail: { [key]: value }
-    }))
+    // Apply the setting immediately
+    applySettingToDOM(key, value)
+    
+    // Reset timer if interval changed
+    if (key === 'changeInterval') {
+      setTimeRemaining(value as number)
+    }
+  }
+
+  const applySettingToDOM = (key: keyof BackgroundSettings, value: any) => {
+    const root = document.documentElement
+    
+    switch (key) {
+      case 'intensity':
+        root.style.setProperty('--background-intensity', `${value}%`)
+        break
+      case 'speed':
+        root.style.setProperty('--animation-speed', `${value}s`)
+        break
+      case 'isAnimated':
+        root.style.setProperty('--animation-play-state', value ? 'running' : 'paused')
+        break
+      case 'type':
+        root.setAttribute('data-background-type', value)
+        break
+    }
+  }
+
+  const applyBackgroundChange = () => {
+    const types: BackgroundSettings['type'][] = ['matrix', 'neural', 'particles', 'waves', 'static']
+    const randomType = types[Math.floor(Math.random() * types.length)]
+    
+    updateSetting('type', randomType)
+    
+    toast.success(`Background changed to ${randomType}`, {
+      description: 'Auto-change triggered',
+      duration: 2000
+    })
   }
 
   const toggleBackgroundLock = () => {
@@ -103,12 +156,68 @@ export function AdvancedBackgroundControls({ isLocked }: { isLocked: boolean }) 
   }
 
   const toggleLayer = (layer: keyof BackgroundSettings['layers']) => {
+    if (isLocked || settings.isLocked) return
+    
+    const newLayers = { ...settings.layers, [layer]: !settings.layers[layer] }
+    updateSetting('layers', newLayers)
+    
+    // Apply layer visibility to DOM
+    const layerElement = document.querySelector(`[data-layer="${layer}"]`)
+    if (layerElement) {
+      (layerElement as HTMLElement).style.display = newLayers[layer] ? 'block' : 'none'
+    }
+    
+    toast.success(`${layer} layer ${newLayers[layer] ? 'enabled' : 'disabled'}`)
+  }
+
+  const shuffleBackground = () => {
+    if (isLocked || settings.isLocked) return
+    
+    // Randomize multiple settings
+    const randomIntensity = Math.floor(Math.random() * 100)
+    const randomSpeed = Math.random() * 2.5 + 0.5
+    const types: BackgroundSettings['type'][] = ['matrix', 'neural', 'particles', 'waves']
+    const randomType = types[Math.floor(Math.random() * types.length)]
+    
+    updateSetting('intensity', randomIntensity)
+    updateSetting('speed', randomSpeed)
+    updateSetting('type', randomType)
+    
+    toast.success('Background shuffled!', {
+      description: `New style: ${randomType}, intensity: ${randomIntensity}%`
+    })
+  }
+
+  const resetToDefaults = () => {
     if (isLocked) return
     
-    updateSetting('layers', {
-      ...settings.layers,
-      [layer]: !settings.layers[layer]
+    const defaults: BackgroundSettings = {
+      isLocked: false,
+      isAnimated: true,
+      autoChange: true,
+      changeInterval: 30,
+      intensity: 60,
+      speed: 1,
+      type: 'neural',
+      layers: {
+        primary: true,
+        secondary: true,
+        particles: true,
+        connections: true
+      }
+    }
+    
+    setSettings(defaults)
+    setTimeRemaining(defaults.changeInterval)
+    
+    // Apply all defaults to DOM
+    Object.entries(defaults).forEach(([key, value]) => {
+      if (key !== 'layers') {
+        applySettingToDOM(key as keyof BackgroundSettings, value)
+      }
     })
+    
+    toast.success('Background settings reset to defaults')
   }
 
   const formatTime = (seconds: number) => {
@@ -159,6 +268,7 @@ export function AdvancedBackgroundControls({ isLocked }: { isLocked: boolean }) 
               variant={settings.isLocked ? 'destructive' : 'default'}
               size="sm"
               className="flex items-center gap-2"
+              disabled={isLocked}
             >
               {settings.isLocked ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
               {settings.isLocked ? 'Locked' : 'Unlock'}
@@ -183,10 +293,7 @@ export function AdvancedBackgroundControls({ isLocked }: { isLocked: boolean }) 
               <Label>Change Interval: {settings.changeInterval}s</Label>
               <Slider
                 value={[settings.changeInterval]}
-                onValueChange={([value]) => {
-                  updateSetting('changeInterval', value)
-                  setTimeRemaining(value)
-                }}
+                onValueChange={([value]) => updateSetting('changeInterval', value)}
                 min={5}
                 max={300}
                 step={5}
@@ -279,6 +386,7 @@ export function AdvancedBackgroundControls({ isLocked }: { isLocked: boolean }) 
                   size="sm"
                   onClick={() => toggleLayer(layer as keyof BackgroundSettings['layers'])}
                   disabled={isLocked || settings.isLocked}
+                  className={enabled ? 'text-green-400' : 'text-muted-foreground'}
                 >
                   {enabled ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
                 </Button>
@@ -288,15 +396,12 @@ export function AdvancedBackgroundControls({ isLocked }: { isLocked: boolean }) 
         </div>
 
         {/* Quick Actions */}
-        <div className="flex gap-2 pt-4 border-t">
+        <div className="flex flex-wrap gap-2 pt-4 border-t">
           <Button
             variant="outline"
             size="sm"
             disabled={isLocked || settings.isLocked}
-            onClick={() => {
-              window.dispatchEvent(new CustomEvent('background-shuffle'))
-              toast.success('Background shuffled!')
-            }}
+            onClick={shuffleBackground}
           >
             <Zap className="h-4 w-4 mr-2" />
             Shuffle Now
@@ -305,13 +410,20 @@ export function AdvancedBackgroundControls({ isLocked }: { isLocked: boolean }) 
           <Button
             variant="outline"
             size="sm"
-            onClick={() => {
-              updateSetting('isAnimated', !settings.isAnimated)
-            }}
+            onClick={() => updateSetting('isAnimated', !settings.isAnimated)}
             disabled={isLocked || settings.isLocked}
           >
             {settings.isAnimated ? <Pause className="h-4 w-4 mr-2" /> : <Play className="h-4 w-4 mr-2" />}
             {settings.isAnimated ? 'Pause' : 'Play'}
+          </Button>
+          
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={resetToDefaults}
+            disabled={isLocked}
+          >
+            Reset Defaults
           </Button>
         </div>
       </CardContent>
