@@ -3,6 +3,9 @@ import { GAIA_TOKEN } from '@/constants/gaia'
 import { ComponentScanner, ConsistencyIssue, ComponentIntegration } from './consistency/ComponentScanner'
 import { AddressConsistencyChecker } from './consistency/AddressConsistencyChecker'
 
+// Export the types for external use
+export type { ConsistencyIssue, ComponentIntegration } from './consistency/ComponentScanner'
+
 class GaiaConsistencyScanner {
   private componentScanner = new ComponentScanner()
   private addressChecker = new AddressConsistencyChecker()
