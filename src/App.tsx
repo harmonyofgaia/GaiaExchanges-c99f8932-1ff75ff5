@@ -1,3 +1,4 @@
+
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
@@ -14,6 +15,7 @@ const Gaming = lazy(() => import('./pages/Gaming'))
 const Wallet = lazy(() => import('./pages/Wallet'))
 const Markets = lazy(() => import('./pages/Markets'))
 const VideoExchange = lazy(() => import('./pages/VideoExchange'))
+const StreamingShows = lazy(() => import('./pages/StreamingShows'))
 const GaiaBikeEcosystem = lazy(() => import('./pages/GaiaBikeEcosystem'))
 const TokenMining = lazy(() => import('./pages/TokenMining'))
 const GreenInvestments = lazy(() => import('./pages/GreenInvestments'))
@@ -66,6 +68,7 @@ function App() {
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/markets" element={<Markets />} />
               <Route path="/video-exchange" element={<VideoExchange />} />
+              <Route path="/streaming-shows" element={<StreamingShows />} />
               <Route path="/gaia-bike-ecosystem" element={<GaiaBikeEcosystem />} />
               <Route path="/token-mining" element={<TokenMining />} />
               <Route path="/green-investments" element={<GreenInvestments />} />
