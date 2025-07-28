@@ -1,5 +1,5 @@
 
-import { AppStoreDeployment } from '@/components/AppStoreDeployment'
+import { AppStoreDeployment } from '@/components/appstore/AppStoreDeployment'
 
 export default function AppStore() {
   return (

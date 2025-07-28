@@ -1,15 +1,8 @@
 
 import { HomeIcon, Leaf, Users, Handshake, BarChart3, ShieldCheck, Gamepad2, Palette, DollarSign, Zap, Video, Store, Hammer } from "lucide-react";
 import Index from "./pages/Index.jsx";
-import Forest from "./pages/Forest.jsx";
 import Community from "./pages/Community.jsx";
-import Partnership from "./pages/Partnership.jsx";
-import Impact from "./pages/Impact.jsx";
 import Admin from "./pages/Admin.jsx";
-import Games from "./pages/Games.jsx";
-import NFT from "./pages/NFT.jsx";
-import Exchange from "./pages/Exchange.jsx";
-import Energy from "./pages/Energy.jsx";
 import VideoExchange from "./pages/VideoExchange.jsx";
 import AppStore from "./pages/AppStore";
 import MinecraftBuilder from "./pages/MinecraftBuilder";
@@ -25,7 +18,7 @@ export const navItems = [
     title: "Forest Shield",
     to: "/forest",
     icon: <Leaf className="h-4 w-4" />,
-    page: <Forest />,
+    page: <div className="p-8"><h1 className="text-2xl font-bold text-green-400">🌲 Forest Shield - Coming Soon</h1></div>,
   },
   {
     title: "Community",
@@ -37,13 +30,13 @@ export const navItems = [
     title: "Partnership",
     to: "/partnership",
     icon: <Handshake className="h-4 w-4" />,
-    page: <Partnership />,
+    page: <div className="p-8"><h1 className="text-2xl font-bold text-blue-400">🤝 Partnership - Coming Soon</h1></div>,
   },
   {
     title: "Impact",
     to: "/impact",
     icon: <BarChart3 className="h-4 w-4" />,
-    page: <Impact />,
+    page: <div className="p-8"><h1 className="text-2xl font-bold text-purple-400">📊 Impact - Coming Soon</h1></div>,
   },
   {
     title: "Admin",
@@ -55,25 +48,25 @@ export const navItems = [
     title: "Games",
     to: "/games",
     icon: <Gamepad2 className="h-4 w-4" />,
-    page: <Games />,
+    page: <div className="p-8"><h1 className="text-2xl font-bold text-red-400">🎮 Games - Coming Soon</h1></div>,
   },
   {
     title: "NFT",
     to: "/nft",
     icon: <Palette className="h-4 w-4" />,
-    page: <NFT />,
+    page: <div className="p-8"><h1 className="text-2xl font-bold text-pink-400">🎨 NFT - Coming Soon</h1></div>,
   },
   {
     title: "Exchange",
     to: "/exchange",
     icon: <DollarSign className="h-4 w-4" />,
-    page: <Exchange />,
+    page: <div className="p-8"><h1 className="text-2xl font-bold text-yellow-400">💰 Exchange - Coming Soon</h1></div>,
   },
   {
     title: "Energy",
     to: "/energy",
     icon: <Zap className="h-4 w-4" />,
-    page: <Energy />,
+    page: <div className="p-8"><h1 className="text-2xl font-bold text-orange-400">⚡ Energy - Coming Soon</h1></div>,
   },
   {
     title: "Video Exchange",
