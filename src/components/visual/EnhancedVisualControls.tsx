@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -22,10 +21,15 @@ import {
   Download,
   Upload,
   Wand2,
-  Eye
+  Eye,
+  Image,
+  Layers
 } from 'lucide-react'
 import { useLock } from '@/components/providers/ThemeProvider'
 import { toast } from 'sonner'
+import { DesignLibrary } from './DesignLibrary'
+import { AdvancedBackgroundControls } from './AdvancedBackgroundControls'
+import { ArtStudio } from './ArtStudio'
 
 export function EnhancedVisualControls() {
   const { isLocked } = useLock()
@@ -73,14 +77,28 @@ export function EnhancedVisualControls() {
 
   return (
     <div className="space-y-6">
-      <Tabs defaultValue="design" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="design">Design</TabsTrigger>
-          <TabsTrigger value="layout">Layout</TabsTrigger>
+      <Tabs defaultValue="backgrounds" className="w-full">
+        <TabsList className="grid w-full grid-cols-7">
+          <TabsTrigger value="backgrounds">Backgrounds</TabsTrigger>
+          <TabsTrigger value="library">Library</TabsTrigger>
+          <TabsTrigger value="art-studio">Art Studio</TabsTrigger>
+          <TabsTrigger value="design">Templates</TabsTrigger>
           <TabsTrigger value="colors">Colors</TabsTrigger>
           <TabsTrigger value="animation">Animation</TabsTrigger>
           <TabsTrigger value="advanced">Advanced</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="backgrounds" className="space-y-4">
+          <AdvancedBackgroundControls isLocked={isLocked} />
+        </TabsContent>
+
+        <TabsContent value="library" className="space-y-4">
+          <DesignLibrary isLocked={isLocked} />
+        </TabsContent>
+
+        <TabsContent value="art-studio" className="space-y-4">
+          <ArtStudio isLocked={isLocked} />
+        </TabsContent>
 
         <TabsContent value="design" className="space-y-4">
           <Card className="border-purple-500/20 bg-purple-900/10">
@@ -122,56 +140,6 @@ export function EnhancedVisualControls() {
                   <Download className="h-4 w-4 mr-2" />
                   Export Design
                 </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="layout" className="space-y-4">
-          <Card className="border-blue-500/20 bg-blue-900/10">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-400">
-                <Layout className="h-5 w-5" />
-                Layout Controls
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>Container Width</Label>
-                  <Slider
-                    value={[1200]}
-                    max={1600}
-                    min={800}
-                    step={50}
-                    disabled={isLocked}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label>Spacing Scale</Label>
-                  <Slider
-                    value={[spacing]}
-                    onValueChange={(value) => setSpacing(value[0])}
-                    max={32}
-                    min={8}
-                    step={2}
-                    disabled={isLocked}
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label>Layout Style</Label>
-                <Select disabled={isLocked}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select layout style" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="fluid">Fluid Grid</SelectItem>
-                    <SelectItem value="fixed">Fixed Width</SelectItem>
-                    <SelectItem value="hybrid">Hybrid Layout</SelectItem>
-                  </SelectContent>
-                </Select>
               </div>
             </CardContent>
           </Card>
