@@ -149,6 +149,40 @@ const GreenInvestments = () => {
           </div>
         </div>
 
+        {/* Green Investment Overview */}
+        <Card className="mb-8 bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-green-500/30">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-green-400">
+              <Globe className="h-6 w-6" />
+              Green Investment Ecosystem
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="text-center p-4 bg-green-800/20 rounded-lg">
+                <Leaf className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-green-400">Environmental</div>
+                <div className="text-sm text-muted-foreground">Impact Projects</div>
+              </div>
+              <div className="text-center p-4 bg-blue-800/20 rounded-lg">
+                <TrendingUp className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-blue-400">Sustainable</div>
+                <div className="text-sm text-muted-foreground">Returns</div>
+              </div>
+              <div className="text-center p-4 bg-purple-800/20 rounded-lg">
+                <Globe className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-purple-400">Global</div>
+                <div className="text-sm text-muted-foreground">Community</div>
+              </div>
+              <div className="text-center p-4 bg-orange-800/20 rounded-lg">
+                <Shield className="h-8 w-8 text-orange-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-orange-400">Protection</div>
+                <div className="text-sm text-muted-foreground">& Prevention</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Your Original Projects */}
         <div className="mb-12">
           <div className="text-center mb-8">
