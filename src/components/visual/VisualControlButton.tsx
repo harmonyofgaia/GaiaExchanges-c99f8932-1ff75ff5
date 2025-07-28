@@ -13,7 +13,7 @@ import { Badge } from '@/components/ui/badge'
 import { Settings, Brush, Lock, Unlock, Palette, LayoutDashboard, Zap, Eye } from 'lucide-react'
 import { useLock } from '@/components/providers/ThemeProvider'
 import { toast } from 'sonner'
-import { EnhancedVisualControls } from './EnhancedVisualControls'
+import { VisualControlMenu } from './VisualControlMenu'
 
 export function VisualControlButton() {
   const { isLocked, toggleLock } = useLock()
@@ -160,7 +160,7 @@ export function VisualControlButton() {
           <div className="bg-background/95 backdrop-blur-sm border border-primary/30 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-primary">Enhanced Visual Control Panel</h2>
+                <h2 className="text-2xl font-bold text-primary">Visual Control Panel</h2>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -171,7 +171,7 @@ export function VisualControlButton() {
                 </Button>
               </div>
               
-              <EnhancedVisualControls />
+              <VisualControlMenu />
             </div>
           </div>
         </div>
