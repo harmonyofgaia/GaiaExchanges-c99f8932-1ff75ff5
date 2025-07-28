@@ -14,9 +14,6 @@ import Gaming from '@/pages/Gaming'
 import Markets from '@/pages/Markets'
 import Admin from '@/pages/Admin'
 import Security from '@/pages/Security'
-import Exchange from '@/pages/Exchange'
-import VirtualWorld from '@/pages/VirtualWorld'
-import Wallet from '@/pages/Wallet'
 import { ProjectManagementProvider } from '@/components/project/ProjectManagementProvider'
 
 const queryClient = new QueryClient()
@@ -33,10 +30,7 @@ function App() {
               <main className="relative z-10">
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="/virtual-world" element={<VirtualWorld />} />
-                  <Route path="/exchange" element={<Exchange />} />
                   <Route path="/gaming" element={<Gaming />} />
-                  <Route path="/wallet" element={<Wallet />} />
                   <Route path="/markets" element={<Markets />} />
                   <Route path="/admin" element={<Admin />} />
                   <Route path="/security" element={<Security />} />
