@@ -22,15 +22,10 @@ import {
   Download,
   Upload,
   Wand2,
-  Eye,
-  Image,
-  Layers
+  Eye
 } from 'lucide-react'
 import { useLock } from '@/components/providers/ThemeProvider'
 import { toast } from 'sonner'
-import { ArtCreationStudio } from './ArtCreationStudio'
-import { DesignLibrary } from './DesignLibrary'
-import { BackgroundController } from './BackgroundController'
 
 export function EnhancedVisualControls() {
   const { isLocked } = useLock()
@@ -78,37 +73,108 @@ export function EnhancedVisualControls() {
 
   return (
     <div className="space-y-6">
-      <Tabs defaultValue="studio" className="w-full">
-        <TabsList className="grid w-full grid-cols-6">
-          <TabsTrigger value="studio">Art Studio</TabsTrigger>
-          <TabsTrigger value="library">Library</TabsTrigger>
-          <TabsTrigger value="background">Background</TabsTrigger>
+      <Tabs defaultValue="design" className="w-full">
+        <TabsList className="grid w-full grid-cols-5">
+          <TabsTrigger value="design">Design</TabsTrigger>
+          <TabsTrigger value="layout">Layout</TabsTrigger>
           <TabsTrigger value="colors">Colors</TabsTrigger>
           <TabsTrigger value="animation">Animation</TabsTrigger>
           <TabsTrigger value="advanced">Advanced</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="studio" className="space-y-4">
+        <TabsContent value="design" className="space-y-4">
           <Card className="border-purple-500/20 bg-purple-900/10">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-purple-400">
-                <Brush className="h-5 w-5" />
-                🎨 Professional Art Creation Studio
-                <Badge className="bg-purple-600">PRO</Badge>
+                <Wand2 className="h-5 w-5" />
+                Template Designer
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <ArtCreationStudio />
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {templates.map((template) => (
+                  <Card 
+                    key={template.id}
+                    className={`cursor-pointer border transition-all ${
+                      selectedTemplate === template.id 
+                        ? 'border-purple-500 bg-purple-900/20' 
+                        : 'border-border hover:border-purple-500/50'
+                    }`}
+                    onClick={() => applyTemplate(template.id)}
+                  >
+                    <CardContent className="p-4">
+                      <h4 className="font-bold text-purple-400">{template.name}</h4>
+                      <p className="text-sm text-muted-foreground">{template.description}</p>
+                      {selectedTemplate === template.id && (
+                        <Badge className="mt-2 bg-purple-600">Active</Badge>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+              
+              <div className="flex gap-2">
+                <Button onClick={generateColorPalette} disabled={isLocked}>
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Generate AI Palette
+                </Button>
+                <Button variant="outline" onClick={exportDesign}>
+                  <Download className="h-4 w-4 mr-2" />
+                  Export Design
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="library" className="space-y-4">
-          <DesignLibrary />
-        </TabsContent>
-
-        <TabsContent value="background" className="space-y-4">
-          <BackgroundController />
+        <TabsContent value="layout" className="space-y-4">
+          <Card className="border-blue-500/20 bg-blue-900/10">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-400">
+                <Layout className="h-5 w-5" />
+                Layout Controls
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Container Width</Label>
+                  <Slider
+                    value={[1200]}
+                    max={1600}
+                    min={800}
+                    step={50}
+                    disabled={isLocked}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Spacing Scale</Label>
+                  <Slider
+                    value={[spacing]}
+                    onValueChange={(value) => setSpacing(value[0])}
+                    max={32}
+                    min={8}
+                    step={2}
+                    disabled={isLocked}
+                  />
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <Label>Layout Style</Label>
+                <Select disabled={isLocked}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select layout style" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="fluid">Fluid Grid</SelectItem>
+                    <SelectItem value="fixed">Fixed Width</SelectItem>
+                    <SelectItem value="hybrid">Hybrid Layout</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         <TabsContent value="colors" className="space-y-4">
@@ -116,7 +182,7 @@ export function EnhancedVisualControls() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-green-400">
                 <Palette className="h-5 w-5" />
-                🎨 Advanced Color Studio
+                Color Palette Manager
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -138,11 +204,11 @@ export function EnhancedVisualControls() {
               </div>
               
               <div className="space-y-2">
-                <Label>AI Color Generator</Label>
+                <Label>Custom Color Generator</Label>
                 <div className="flex gap-2">
                   <Input type="color" defaultValue="#22c55e" disabled={isLocked} />
-                  <Button disabled={isLocked} onClick={generateColorPalette}>
-                    <Wand2 className="h-4 w-4 mr-2" />
+                  <Button disabled={isLocked}>
+                    <Copy className="h-4 w-4 mr-2" />
                     Generate Palette
                   </Button>
                 </div>
@@ -156,17 +222,17 @@ export function EnhancedVisualControls() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-orange-400">
                 <Zap className="h-5 w-5" />
-                ⚡ Advanced Animation Studio
+                Animation Studio
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label>Global Animation Speed: {animationSpeed}x</Label>
+                  <Label>Animation Speed</Label>
                   <Slider
                     value={[animationSpeed]}
                     onValueChange={(value) => setAnimationSpeed(value[0])}
-                    max={5}
+                    max={3}
                     min={0.1}
                     step={0.1}
                     disabled={isLocked}
@@ -174,37 +240,25 @@ export function EnhancedVisualControls() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label>Visual Intensity: {backgroundIntensity}%</Label>
+                  <Label>Background Animation</Label>
                   <Slider
                     value={[backgroundIntensity]}
                     onValueChange={(value) => setBackgroundIntensity(value[0])}
-                    max={200}
+                    max={100}
                     min={0}
                     step={5}
                     disabled={isLocked}
                   />
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex items-center space-x-2">
-                    <Switch disabled={isLocked} />
-                    <Label>Neural Effects</Label>
-                  </div>
-                  
-                  <div className="flex items-center space-x-2">
-                    <Switch disabled={isLocked} />
-                    <Label>Particle Systems</Label>
-                  </div>
-                  
-                  <div className="flex items-center space-x-2">
-                    <Switch disabled={isLocked} />
-                    <Label>Electric Sparks</Label>
-                  </div>
-                  
-                  <div className="flex items-center space-x-2">
-                    <Switch disabled={isLocked} />
-                    <Label>Quantum Fields</Label>
-                  </div>
+                <div className="flex items-center space-x-2">
+                  <Switch disabled={isLocked} />
+                  <Label>Enable Particle Effects</Label>
+                </div>
+                
+                <div className="flex items-center space-x-2">
+                  <Switch disabled={isLocked} />
+                  <Label>Smooth Transitions</Label>
                 </div>
               </div>
             </CardContent>
@@ -216,29 +270,28 @@ export function EnhancedVisualControls() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-red-400">
                 <Settings className="h-5 w-5" />
-                🔧 Advanced Controls
+                Advanced Controls
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label>Custom CSS Editor</Label>
+                <Label>Custom CSS</Label>
                 <Textarea
                   placeholder="Enter custom CSS rules here..."
                   value={customCSS}
                   onChange={(e) => setCustomCSS(e.target.value)}
                   disabled={isLocked}
-                  rows={8}
-                  className="font-mono text-sm"
+                  rows={6}
                 />
               </div>
               
               <div className="space-y-2">
-                <Label>Typography Scale: {fontSize}px</Label>
+                <Label>Typography Scale</Label>
                 <Slider
                   value={[fontSize]}
                   onValueChange={(value) => setFontSize(value[0])}
-                  max={32}
-                  min={8}
+                  max={24}
+                  min={12}
                   step={1}
                   disabled={isLocked}
                 />
@@ -249,13 +302,9 @@ export function EnhancedVisualControls() {
                   <Upload className="h-4 w-4 mr-2" />
                   Import Design
                 </Button>
-                <Button variant="outline" onClick={exportDesign}>
-                  <Download className="h-4 w-4 mr-2" />
-                  Export All
-                </Button>
                 <Button variant="outline">
                   <Eye className="h-4 w-4 mr-2" />
-                  Preview
+                  Preview Changes
                 </Button>
               </div>
             </CardContent>
