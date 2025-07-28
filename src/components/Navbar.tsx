@@ -32,7 +32,18 @@ import {
   Crown,
   Info,
   Mail,
-  DollarSign
+  DollarSign,
+  Users,
+  Shield,
+  TreePine,
+  Flame,
+  Handshake,
+  Brain,
+  Rocket,
+  Trophy,
+  Sparkles,
+  Target,
+  Zap
 } from 'lucide-react'
 
 interface NavItem {
@@ -44,28 +55,33 @@ interface NavItem {
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const navItems = [
-    { name: 'Galaxy Home', path: '/', icon: Home },
-    { name: 'Virtual World', path: '/virtual-world', icon: Globe },
-    { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
-    { name: 'Gaming Hub', path: '/gaming', icon: Gamepad2 },
+  const navItems: NavItem[] = [
+    { name: 'Home', path: '/', icon: Home },
+    { name: 'Dashboard', path: '/dashboard', icon: BarChart3 },
     { name: 'Exchange', path: '/exchange', icon: TrendingUp },
-    { name: 'NFT Animals', path: '/nft-green-animals', icon: Coins },
-    { name: 'Wallet', path: '/wallet', icon: Wallet },
-    { name: 'Markets', path: '/markets', icon: BarChart3 },
-    { name: 'Video Exchange', path: '/video-exchange', icon: Video },
-    { name: 'Streaming Shows', path: '/streaming-shows', icon: Film },
-    { name: 'Bike Ecosystem', path: '/gaia-bike-ecosystem', icon: Bike },
-    { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
-    { name: 'Green Investments', path: '/green-investments', icon: Leaf },
-    { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
-    { name: 'Landscape Builder', path: '/landscape-builder', icon: Mountain },
-    { name: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', icon: Palette },
-    { name: 'Comprehensive Status', path: '/comprehensive-status', icon: Settings },
-    { name: 'About GAiA', path: '/about', icon: Info },
+    { name: 'Green Impact', path: '/green-impact-dashboard', icon: Leaf },
+    { name: 'Gaia\'s Projects', path: '/gaias-projects', icon: TreePine },
+    { name: 'Earning Activities', path: '/earning-activities', icon: Zap },
+    { name: 'Enhanced Leaderboard', path: '/enhanced-leaderboard', icon: Trophy },
+    { name: 'Project Funding', path: '/project-funding', icon: Heart },
+    { name: 'NFT Cards', path: '/nft-cards', icon: Sparkles },
+    { name: 'Eco Avatar', path: '/eco-avatar', icon: Users },
+    { name: 'Forest Shield', path: '/forest-shield-master-plan', icon: TreePine },
+    { name: 'Sand Protect', path: '/sand-protect', icon: Shield },
+    { name: 'Wildfire Defense', path: '/wildfire-defense-dashboard', icon: Flame },
+    { name: 'Forest Tokens', path: '/forest-token-system', icon: Coins },
+    { name: 'Community Hub', path: '/community-engagement-hub', icon: Users },
+    { name: 'Partnerships', path: '/partnership-management', icon: Handshake },
+    { name: 'Impact Metrics', path: '/impact-measurement-system', icon: BarChart3 },
+    { name: 'Sea Green AI', path: '/sea-green-psychohistorical', icon: Brain },
+    { name: 'GAiA Token Status', path: '/gaia-consistency-status', icon: Shield },
+    { name: 'Deployment Center', path: '/deployment-center', icon: Rocket },
+    { name: 'Security', path: '/security', icon: Shield },
+    { name: 'Blockchain Swap', path: '/gaia-private-blockchain-swap-token', icon: Shield },
+    { name: 'Video Exchange', path: '/secure-admin/video-exchange', icon: Video },
+    { name: 'About', path: '/about', icon: Info },
     { name: 'Contact', path: '/contact', icon: Mail },
-    { name: 'Pricing', path: '/pricing', icon: DollarSign },
-    { name: '👑 Admin Portal', path: '/admin', icon: Crown }
+    { name: '👑 Admin', path: '/admin', icon: Crown }
   ]
 
   return (
@@ -102,7 +118,7 @@ export function Navbar() {
                   More
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
+              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm max-h-96 overflow-y-auto">
                 {navItems.slice(8).map((item) => {
                   const Icon = item.icon
                   return (
@@ -136,7 +152,7 @@ export function Navbar() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-primary/30">
+          <div className="lg:hidden py-4 border-t border-primary/30 max-h-96 overflow-y-auto">
             <div className="grid grid-cols-1 gap-2">
               {navItems.map((item) => {
                 const Icon = item.icon
