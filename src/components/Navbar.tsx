@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
@@ -38,7 +37,10 @@ import {
   Activity,
   Trophy,
   MessageCircle,
-  Handshake
+  Handshake,
+  Target,
+  Brain,
+  Shield
 } from 'lucide-react'
 
 interface NavItem {
@@ -60,6 +62,9 @@ export function Navbar() {
     { name: 'Enhanced Leaderboard', path: '/enhanced-leaderboard', icon: Trophy },
     { name: 'Community Hub', path: '/community-engagement-hub', icon: MessageCircle },
     { name: 'Partnership Management', path: '/partnership-management', icon: Handshake },
+    { name: 'Impact Measurement', path: '/impact-measurement-system', icon: Target },
+    { name: 'Sea Green AI', path: '/sea-green-psychohistorical', icon: Brain },
+    { name: 'Gaia Token Status', path: '/gaia-token-status', icon: Shield },
     { name: 'Virtual World', path: '/virtual-world', icon: Globe },
     { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
     { name: 'Gaming Hub', path: '/gaming', icon: Gamepad2 },
@@ -93,7 +98,7 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
-            {navItems.slice(0, 10).map((item) => {
+            {navItems.slice(0, 12).map((item) => {
               const Icon = item.icon
               return (
                 <Link
@@ -116,7 +121,7 @@ export function Navbar() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
-                {navItems.slice(10).map((item) => {
+                {navItems.slice(12).map((item) => {
                   const Icon = item.icon
                   return (
                     <DropdownMenuItem key={item.path} asChild>
