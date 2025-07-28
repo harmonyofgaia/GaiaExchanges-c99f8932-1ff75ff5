@@ -2,6 +2,7 @@
 import { Navbar } from '@/components/Navbar'
 import { GAiACommunityProjects } from '@/components/green-investments/GAiACommunityProjects'
 import { GaiaCommunityProjects } from '@/components/GaiaCommunityProjects'
+import { WildfireSandBlastProject } from '@/components/green-investments/WildfireSandBlastProject'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Leaf, Globe, TrendingUp } from 'lucide-react'
 
@@ -50,6 +51,9 @@ const GreenInvestments = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Future Wildfire Defense Project */}
+        <WildfireSandBlastProject />
 
         {/* Your Restored GAiA Community Projects */}
         <div className="mb-12">
