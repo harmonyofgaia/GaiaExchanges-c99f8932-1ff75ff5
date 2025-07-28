@@ -1,138 +1,159 @@
 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { ContactSystem } from '@/components/contact/ContactSystem'
+import { AppStorePreparation } from '@/components/appstore/AppStorePreparation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { Smartphone, Download, CheckCircle, Upload, Star, Globe } from 'lucide-react'
+import { Smartphone, Mail, Download, Shield, ExternalLink } from 'lucide-react'
 
-export default function AppStoreSubmission() {
-  const submissionSteps = [
-    { step: "App Development", status: "completed", progress: 100 },
-    { step: "Testing & QA", status: "completed", progress: 100 },
-    { step: "App Store Guidelines", status: "completed", progress: 100 },
-    { step: "Metadata Preparation", status: "in-progress", progress: 75 },
-    { step: "Store Submission", status: "pending", progress: 0 },
-    { step: "Review Process", status: "pending", progress: 0 },
-    { step: "Publication", status: "pending", progress: 0 }
-  ]
-
+const AppStoreSubmission = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20 p-6">
-      <div className="container mx-auto max-w-4xl">
-        <Card className="mb-8 border-blue-500/50 bg-gradient-to-r from-blue-900/40 to-purple-900/40">
-          <CardHeader>
-            <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-              📱 GAiA App Store Submission Center
-            </CardTitle>
-            <p className="text-center text-xl text-muted-foreground">
-              Track our mobile app submission progress across all platforms
-            </p>
-            <div className="flex justify-center gap-2 mt-4">
-              <Badge className="bg-blue-600">iOS Ready</Badge>
-              <Badge className="bg-green-600">Android Ready</Badge>
-              <Badge className="bg-purple-600">Web App Live</Badge>
-            </div>
-          </CardHeader>
-        </Card>
+    <div className="space-y-6 p-6">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+          App Store Submission Center
+        </h1>
+        <p className="text-xl text-muted-foreground mt-2">
+          Complete package for submitting Harmony of Gaia to Apple App Store and Google Play Store
+        </p>
+        <Badge className="mt-4 bg-gradient-to-r from-green-600 to-blue-600 text-white text-lg px-6 py-2">
+          Ready for Manual Submission
+        </Badge>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Card className="border-blue-500/30 bg-blue-900/20">
+      <Tabs defaultValue="app-store" className="w-full">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="app-store" className="flex items-center gap-2">
+            <Smartphone className="h-4 w-4" />
+            App Store Package
+          </TabsTrigger>
+          <TabsTrigger value="contact" className="flex items-center gap-2">
+            <Mail className="h-4 w-4" />
+            Contact System
+          </TabsTrigger>
+          <TabsTrigger value="instructions" className="flex items-center gap-2">
+            <ExternalLink className="h-4 w-4" />
+            Submission Guide
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="app-store" className="space-y-6 mt-6">
+          <AppStorePreparation />
+        </TabsContent>
+
+        <TabsContent value="contact" className="space-y-6 mt-6">
+          <ContactSystem />
+        </TabsContent>
+
+        <TabsContent value="instructions" className="space-y-6 mt-6">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-blue-400 flex items-center gap-2">
-                <Smartphone className="h-6 w-6" />
-                iOS App Store
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <Shield className="h-5 w-5" />
+                Complete Submission Guide
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center">
-                <div className="text-6xl mb-4">🍎</div>
-                <Badge className="bg-blue-600 mb-2">Preparing for Submission</Badge>
-                <Progress value={75} className="h-3 mb-2" />
-                <p className="text-sm text-muted-foreground">75% Complete</p>
-              </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                <Upload className="h-4 w-4 mr-2" />
-                Prepare iOS Submission
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="border-green-500/30 bg-green-900/20">
-            <CardHeader>
-              <CardTitle className="text-green-400 flex items-center gap-2">
-                <Smartphone className="h-6 w-6" />
-                Google Play Store
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center">
-                <div className="text-6xl mb-4">🤖</div>
-                <Badge className="bg-green-600 mb-2">Preparing for Submission</Badge>
-                <Progress value={75} className="h-3 mb-2" />
-                <p className="text-sm text-muted-foreground">75% Complete</p>
-              </div>
-              <Button className="w-full bg-green-600 hover:bg-green-700">
-                <Upload className="h-4 w-4 mr-2" />
-                Prepare Android Submission
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-
-        <Card className="border-purple-500/30 bg-purple-900/20 mb-8">
-          <CardHeader>
-            <CardTitle className="text-purple-400">📋 Submission Progress Tracker</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {submissionSteps.map((item, index) => (
-                <div key={index} className="flex items-center justify-between p-4 bg-black/20 rounded-lg border border-gray-700">
-                  <div className="flex items-center gap-3">
-                    {item.status === "completed" ? (
-                      <CheckCircle className="h-5 w-5 text-green-400" />
-                    ) : item.status === "in-progress" ? (
-                      <div className="h-5 w-5 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
-                    ) : (
-                      <div className="h-5 w-5 border-2 border-gray-500 rounded-full" />
-                    )}
-                    <span className="font-medium">{item.step}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Progress value={item.progress} className="w-24 h-2" />
-                    <span className="text-sm text-muted-foreground w-12">{item.progress}%</span>
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-blue-400">Apple App Store Submission</h3>
+                  <div className="space-y-3 text-sm">
+                    <div className="p-3 bg-blue-500/10 rounded-lg">
+                      <h4 className="font-medium mb-2">1. Prerequisites</h4>
+                      <ul className="space-y-1 text-muted-foreground">
+                        <li>• Apple Developer Account ($99/year)</li>
+                        <li>• Mac computer with Xcode</li>
+                        <li>• Valid iOS distribution certificate</li>
+                      </ul>
+                    </div>
+                    <div className="p-3 bg-green-500/10 rounded-lg">
+                      <h4 className="font-medium mb-2">2. App Store Connect</h4>
+                      <ul className="space-y-1 text-muted-foreground">
+                        <li>• Create new app in App Store Connect</li>
+                        <li>• Upload app bundle (.ipa file)</li>
+                        <li>• Add screenshots and metadata</li>
+                      </ul>
+                    </div>
+                    <div className="p-3 bg-purple-500/10 rounded-lg">
+                      <h4 className="font-medium mb-2">3. Review Process</h4>
+                      <ul className="space-y-1 text-muted-foreground">
+                        <li>• Submit for review (1-7 days)</li>
+                        <li>• Address any feedback</li>
+                        <li>• App goes live after approval</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="border-yellow-500/30 bg-yellow-900/10">
-            <CardContent className="p-6 text-center">
-              <Star className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
-              <div className="text-2xl font-bold text-yellow-400">4.9★</div>
-              <div className="text-sm text-muted-foreground">Expected Rating</div>
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-yellow-400">Google Play Store Submission</h3>
+                  <div className="space-y-3 text-sm">
+                    <div className="p-3 bg-yellow-500/10 rounded-lg">
+                      <h4 className="font-medium mb-2">1. Prerequisites</h4>
+                      <ul className="space-y-1 text-muted-foreground">
+                        <li>• Google Play Console account ($25 one-time)</li>
+                        <li>• Android app bundle (.aab file)</li>
+                        <li>• Signed release keystore</li>
+                      </ul>
+                    </div>
+                    <div className="p-3 bg-orange-500/10 rounded-lg">
+                      <h4 className="font-medium mb-2">2. Play Console</h4>
+                      <ul className="space-y-1 text-muted-foreground">
+                        <li>• Create new app in Play Console</li>
+                        <li>• Upload app bundle</li>
+                        <li>• Configure store listing</li>
+                      </ul>
+                    </div>
+                    <div className="p-3 bg-red-500/10 rounded-lg">
+                      <h4 className="font-medium mb-2">3. Review Process</h4>
+                      <ul className="space-y-1 text-muted-foreground">
+                        <li>• Submit for review (1-3 days)</li>
+                        <li>• Address policy violations</li>
+                        <li>• App published after approval</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border border-green-500/20 rounded-lg p-6">
+                <h3 className="text-xl font-semibold text-green-400 mb-4">What We've Prepared for You</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-medium text-blue-400 mb-2">📱 Complete Documentation</h4>
+                    <ul className="text-sm space-y-1 text-muted-foreground">
+                      <li>✅ Privacy Policy (GDPR & CCPA compliant)</li>
+                      <li>✅ Terms of Service (International)</li>
+                      <li>✅ App Store Descriptions</li>
+                      <li>✅ Keywords and Categories</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-purple-400 mb-2">🔧 Technical Assets</h4>
+                    <ul className="text-sm space-y-1 text-muted-foreground">
+                      <li>✅ Official Gaia Logo (App Icon ready)</li>
+                      <li>✅ Working Web Application</li>
+                      <li>✅ Contact System (info@cultureofharmony.net)</li>
+                      <li>✅ Security Documentation</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div className="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
+                  <h4 className="font-medium text-yellow-400 mb-2">⚠️ Manual Steps Required</h4>
+                  <p className="text-sm text-muted-foreground">
+                    You'll need to personally create developer accounts, build the mobile app versions, 
+                    and submit through the official app store portals. This ensures your complete control 
+                    over the submission process and maintains security of your developer credentials.
+                  </p>
+                </div>
+              </div>
             </CardContent>
           </Card>
-
-          <Card className="border-cyan-500/30 bg-cyan-900/10">
-            <CardContent className="p-6 text-center">
-              <Download className="h-8 w-8 mx-auto text-cyan-400 mb-2" />
-              <div className="text-2xl font-bold text-cyan-400">50K+</div>
-              <div className="text-sm text-muted-foreground">Expected Downloads</div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-indigo-500/30 bg-indigo-900/10">
-            <CardContent className="p-6 text-center">
-              <Globe className="h-8 w-8 mx-auto text-indigo-400 mb-2" />
-              <div className="text-2xl font-bold text-indigo-400">Global</div>
-              <div className="text-sm text-muted-foreground">Worldwide Release</div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
+
+export default AppStoreSubmission
