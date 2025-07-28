@@ -32,7 +32,8 @@ import {
   Crown,
   Info,
   Mail,
-  DollarSign
+  DollarSign,
+  ShoppingBag
 } from 'lucide-react'
 
 interface NavItem {
@@ -50,7 +51,7 @@ export function Navbar() {
     { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
     { name: 'Gaming Hub', path: '/gaming', icon: Gamepad2 },
     { name: 'Exchange', path: '/exchange', icon: TrendingUp },
-    { name: 'NFT Animals', path: '/nft-green-animals', icon: Coins },
+    { name: 'Marketplace', path: '/marketplace', icon: ShoppingBag },
     { name: 'Wallet', path: '/wallet', icon: Wallet },
     { name: 'Markets', path: '/markets', icon: BarChart3 },
     { name: 'Video Exchange', path: '/video-exchange', icon: Video },

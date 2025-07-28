@@ -14,6 +14,7 @@ const LiveTracking = lazy(() => import('./pages/LiveTracking'))
 const Gaming = lazy(() => import('./pages/Gaming'))
 const Wallet = lazy(() => import('./pages/Wallet'))
 const Markets = lazy(() => import('./pages/Markets'))
+const Marketplace = lazy(() => import('./pages/Marketplace'))
 const VideoExchange = lazy(() => import('./pages/VideoExchange'))
 const StreamingShows = lazy(() => import('./pages/StreamingShows'))
 const GaiaBikeEcosystem = lazy(() => import('./pages/GaiaBikeEcosystem'))
@@ -36,7 +37,6 @@ const Pricing = lazy(() => import('./pages/Pricing'))
 const VirtualWorld = lazy(() => import('./pages/VirtualWorld'))
 const AnimalWelfare = lazy(() => import('./pages/AnimalWelfare'))
 const Exchange = lazy(() => import('./pages/Exchange'))
-const NFTGreenAnimals = lazy(() => import('./pages/NFTGreenAnimals'))
 const AuraLandScrapyard = lazy(() => import('./pages/AuraLandScrapyard'))
 const ComprehensiveStatus = lazy(() => import('./pages/ComprehensiveStatus'))
 
@@ -64,7 +64,7 @@ function App() {
               <Route path="/animal-welfare" element={<AnimalWelfare />} />
               <Route path="/gaming" element={<Gaming />} />
               <Route path="/exchange" element={<Exchange />} />
-              <Route path="/nft-green-animals" element={<NFTGreenAnimals />} />
+              <Route path="/marketplace" element={<Marketplace />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/markets" element={<Markets />} />
               <Route path="/video-exchange" element={<VideoExchange />} />
