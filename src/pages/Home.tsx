@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { ArrowRight, Zap, Users, Globe, Leaf, Star, Trophy, Shield, Gamepad2, Trees, Droplets, Wind, Sun } from 'lucide-react'
+import { ArrowRight, Zap, Users, Globe, Leaf, Star, Trophy, Shield } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 import { GaiaLogo } from '@/components/GaiaLogo'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
@@ -74,7 +74,7 @@ export default function Home() {
       <ThemeSelector />
       
       <div className="relative z-10 container mx-auto px-4 py-8">
-        {/* Hero Section - Restored Original Design */}
+        {/* Hero Section */}
         <div className="text-center space-y-6 mb-12">
           <div className="flex items-center justify-center gap-4">
             <UniversalGaiaLogo size="lg" animated={true} />
@@ -94,7 +94,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Restored Original 2 Button Design */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
               <Zap className="h-5 w-5 mr-2" />
@@ -169,7 +168,7 @@ export default function Home() {
         {/* Community Projects */}
         <GaiaCommunityProjects />
 
-        {/* Features Section - Updated Gaming to Green Investment Examples */}
+        {/* Features Section */}
         <div className="mt-12 space-y-8">
           <h2 className="text-3xl font-bold text-center text-green-400 mb-8">
             🌍 Why Choose Harmony of Gaia?
@@ -206,33 +205,18 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            {/* Changed Gaming to Green Investment Examples */}
-            <Card className="bg-gradient-to-br from-emerald-900/30 to-green-900/30 border-emerald-500/30">
+            <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-purple-500/30">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-emerald-400">
-                  <Trees className="h-5 w-5" />
-                  Green Investment Examples
+                <CardTitle className="flex items-center gap-2 text-purple-400">
+                  <Shield className="h-5 w-5" />
+                  Secure & Transparent
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-sm">
-                    <Droplets className="h-4 w-4 text-blue-400" />
-                    <span className="text-emerald-300/80">Ocean Cleanup Projects</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <Wind className="h-4 w-4 text-cyan-400" />
-                    <span className="text-emerald-300/80">Wind Energy Farms</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <Sun className="h-4 w-4 text-yellow-400" />
-                    <span className="text-emerald-300/80">Solar Panel Installations</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <Trees className="h-4 w-4 text-green-400" />
-                    <span className="text-emerald-300/80">Reforestation Programs</span>
-                  </div>
-                </div>
+                <p className="text-purple-300/80">
+                  Built on blockchain technology with military-grade security. 
+                  Every transaction is transparent and verified by our community.
+                </p>
               </CardContent>
             </Card>
           </div>

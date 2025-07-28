@@ -13,10 +13,3 @@ export { VideoUploadSystem } from './VideoUploadSystem'
 // Export new music and subscription components
 export { VideoMusicUploadSystem } from './VideoMusicUploadSystem'
 export { VideoChannelSubscriptions } from './VideoChannelSubscriptions'
-
-// Export new live streaming component
-export { VideoLiveStreaming } from './VideoLiveStreaming'
-
-// Export Phase 1 components
-export { VideoContentModeration } from './VideoContentModeration'
-export { VideoSearchDiscovery } from './VideoSearchDiscovery'
