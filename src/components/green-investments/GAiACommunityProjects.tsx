@@ -15,14 +15,19 @@ import {
   Sun,
   Wheat,
   Heart,
-  MapPin
+  MapPin,
+  Eye,
+  ExternalLink
 } from 'lucide-react'
 import { GAIA_PROJECTS, GAiAProject } from '@/constants/gaia-projects'
 import { useState, useEffect } from 'react'
+import { ProjectDetailsModal } from './ProjectDetailsModal'
 
 export function GAiACommunityProjects() {
   const [projects, setProjects] = useState(GAIA_PROJECTS)
   const [animatedProjects, setAnimatedProjects] = useState(projects)
+  const [selectedProject, setSelectedProject] = useState<GAiAProject | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,13 +48,20 @@ export function GAiACommunityProjects() {
 
   const getCategoryIcon = (category: string) => {
     switch (category.toLowerCase()) {
+      case 'environmental gaming': return <TreePine className="h-5 w-5 text-green-400" />
       case 'environmental': return <TreePine className="h-5 w-5 text-green-400" />
       case 'energy': return <Sun className="h-5 w-5 text-yellow-400" />
+      case 'renewable energy': return <Sun className="h-5 w-5 text-yellow-400" />
       case 'agriculture': return <Wheat className="h-5 w-5 text-orange-400" />
-      case 'wildlife': return <Heart className="h-5 w-5 text-purple-400" />
-      case 'water': return <Droplets className="h-5 w-5 text-blue-400" />
-      case 'urban': return <MapPin className="h-5 w-5 text-gray-400" />
-      case 'education': return <Award className="h-5 w-5 text-indigo-400" />
+      case 'biotechnology': return <Leaf className="h-5 w-5 text-green-400" />
+      case 'mycology': return <TreePine className="h-5 w-5 text-purple-400" />
+      case 'water restoration': return <Droplets className="h-5 w-5 text-blue-400" />
+      case 'financial innovation': return <DollarSign className="h-5 w-5 text-cyan-400" />
+      case 'tech-spirituality': return <Heart className="h-5 w-5 text-purple-400" />
+      case 'environmental tech': return <TreePine className="h-5 w-5 text-green-400" />
+      case 'gaming nfts': return <Award className="h-5 w-5 text-orange-400" />
+      case 'audio environmental': return <Leaf className="h-5 w-5 text-indigo-400" />
+      case 'digital heritage': return <Award className="h-5 w-5 text-gray-400" />
       default: return <Leaf className="h-5 w-5 text-green-400" />
     }
   }
@@ -73,14 +85,30 @@ export function GAiACommunityProjects() {
     }
   }
 
+  const handleProjectClick = (project: GAiAProject) => {
+    setSelectedProject(project)
+    setIsModalOpen(true)
+  }
+
+  const handleVisitProject = (projectId: string) => {
+    const projectRoutes: { [key: string]: string } = {
+      'heart-of-gaia': '/heart-of-gaia',
+      'techno-soul-solutions': '/techno-soul-solutions',
+    }
+    
+    if (projectRoutes[projectId]) {
+      window.location.href = projectRoutes[projectId]
+    }
+  }
+
   return (
     <div className="space-y-8">
       <div className="text-center">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
-          🌱 GAiA Community Projects
+          🌱 Your Original GAiA Community Projects
         </h2>
         <p className="text-lg text-muted-foreground mb-2">
-          Real environmental projects funded by our community
+          The complete collection of your innovative environmental projects
         </p>
         <div className="text-sm text-green-400">
           ✨ Created by Culture of Harmony • Fully Transparent • Community Driven
@@ -92,7 +120,7 @@ export function GAiACommunityProjects() {
         <div className="text-center p-4 bg-green-900/30 rounded-lg border-2 border-green-500/30">
           <TreePine className="h-8 w-8 text-green-400 mx-auto mb-2" />
           <div className="text-2xl font-bold text-green-400">{projects.length}</div>
-          <div className="text-sm text-green-300">Active Projects</div>
+          <div className="text-sm text-green-300">Total Projects</div>
         </div>
         
         <div className="text-center p-4 bg-blue-900/30 rounded-lg border-2 border-blue-500/30">
@@ -126,13 +154,15 @@ export function GAiACommunityProjects() {
             ? (project.currentFunding / project.fundingGoal) * 100 
             : project.progress
           const isNearingGoal = fundingPercentage > 80
+          const hasSpecialPage = ['heart-of-gaia', 'techno-soul-solutions'].includes(project.id)
 
           return (
             <Card 
               key={project.id}
-              className={`bg-gradient-to-br from-green-900/20 to-emerald-900/20 border-green-500/30 transition-all duration-300 hover:scale-105 ${
+              className={`bg-gradient-to-br from-green-900/20 to-emerald-900/20 border-green-500/30 transition-all duration-300 hover:scale-105 cursor-pointer ${
                 isNearingGoal ? 'ring-2 ring-green-400/50' : ''
-              }`}
+              } ${hasSpecialPage ? 'border-2 border-purple-500/50' : ''}`}
+              onClick={() => handleProjectClick(project)}
             >
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
@@ -141,6 +171,11 @@ export function GAiACommunityProjects() {
                     <Badge className={`${getStatusColor(project.status)} text-white`}>
                       {project.status.toUpperCase()}
                     </Badge>
+                    {hasSpecialPage && (
+                      <Badge className="bg-purple-600 text-white">
+                        LIVE
+                      </Badge>
+                    )}
                   </div>
                   <div className="flex items-center gap-1 text-orange-400">
                     <Clock className="h-4 w-4" />
@@ -197,31 +232,37 @@ export function GAiACommunityProjects() {
                   </span>
                 </div>
 
-                {project.expectedImpact && (
-                  <div className="bg-emerald-900/20 border border-emerald-500/20 rounded-lg p-3">
-                    <div className="flex items-center gap-2 text-emerald-400 mb-1">
-                      <Target className="h-4 w-4" />
-                      <span className="font-medium text-xs">Expected Impact</span>
-                    </div>
-                    <p className="text-xs text-emerald-300/80">{project.expectedImpact}</p>
-                  </div>
-                )}
-
                 <div className="flex gap-2">
                   <Button 
                     className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white"
                     size="sm"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <DollarSign className="h-4 w-4 mr-1" />
-                    Support Project
+                    Support
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    className="border-green-400 text-green-400 hover:bg-green-900/20"
-                    size="sm"
-                  >
-                    <Leaf className="h-4 w-4" />
-                  </Button>
+                  
+                  {hasSpecialPage ? (
+                    <Button 
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleVisitProject(project.id)
+                      }}
+                      className="bg-purple-600 hover:bg-purple-700"
+                      size="sm"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </Button>
+                  ) : (
+                    <Button 
+                      onClick={(e) => e.stopPropagation()}
+                      variant="outline" 
+                      className="border-green-400 text-green-400 hover:bg-green-900/20"
+                      size="sm"
+                    >
+                      <Eye className="h-4 w-4" />
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -235,6 +276,12 @@ export function GAiACommunityProjects() {
           View All GAiA Projects
         </Button>
       </div>
+
+      <ProjectDetailsModal 
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   )
 }
