@@ -3,11 +3,11 @@ export const GAIA_TOKEN = {
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   SYMBOL: 'GAiA',
-  NAME: 'GAiA Token - Harmony of Culture',
+  NAME: 'GAiA Token - Harmony of Gaia',
   DECIMALS: 9,
   NETWORK: 'Solana',
   PUMP_FUN_URL: 'https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
-  OFFICIAL_WEBSITE: 'https://www.gaiaexchanges.net',
+  OFFICIAL_WEBSITE: 'https://www.gaiaexchanges.com',
   
   // Token Metrics
   TOTAL_SUPPLY: 1000000000000, // 1 Trillion tokens
