@@ -7,16 +7,10 @@ import { ArrowRight, Zap, Users, Globe, Leaf, Star, Trophy, Shield } from 'lucid
 import { Navbar } from '@/components/Navbar'
 import { GaiaLogo } from '@/components/GaiaLogo'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
-import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
 import { GaiaCommunityProjects } from '@/components/GaiaCommunityProjects'
-import { SystemMonitor } from '@/components/SystemMonitor'
-import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
-import { InvisibleEcoIndicator } from '@/components/eco/InvisibleEcoIndicator'
 import { AnimatedCounter } from '@/components/ui/animated-counter'
 import { LiveEarningsDisplay } from '@/components/earnings/LiveEarningsDisplay'
 import { EcoMissionCard } from '@/components/missions/EcoMissionCard'
-import { ThemeSelector } from '@/components/ThemeSelector'
-import { VisualControlButton } from '@/components/visual/VisualControlButton'
 
 export default function Home() {
   const [stats, setStats] = useState({
@@ -27,14 +21,15 @@ export default function Home() {
   })
 
   useEffect(() => {
+    // Reduced update frequency from 3s to 10s to reduce CPU usage
     const interval = setInterval(() => {
       setStats(prev => ({
-        totalUsers: prev.totalUsers + Math.floor(Math.random() * 5),
-        tokensEarned: prev.tokensEarned + Math.floor(Math.random() * 100),
-        carbonOffset: prev.carbonOffset + Math.floor(Math.random() * 10),
-        projectsFunded: prev.projectsFunded + Math.floor(Math.random() * 2)
+        totalUsers: prev.totalUsers + Math.floor(Math.random() * 3),
+        tokensEarned: prev.tokensEarned + Math.floor(Math.random() * 50),
+        carbonOffset: prev.carbonOffset + Math.floor(Math.random() * 5),
+        projectsFunded: prev.projectsFunded + Math.floor(Math.random() * 1)
       }))
-    }, 3000)
+    }, 10000)
 
     return () => clearInterval(interval)
   }, [])
@@ -53,25 +48,32 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
-      <SystemMonitor />
-      <CrossPagePersistence />
-      <InvisibleEcoIndicator />
-      
-      <EnhancedBackgroundManager 
-        settings={{
-          type: 'matrix',
-          intensity: 'low',
-          color: '#00ff00',
-          speed: 0.5,
-          autoGenerate: true
-        }}
-      />
+      {/* Simplified background - removed heavy components */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-green-900/5 via-blue-900/5 to-purple-900/5" />
+        {/* Simple floating particles - greatly reduced */}
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute opacity-10"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `float ${8 + Math.random() * 4}s ease-in-out infinite`,
+              animationDelay: `${Math.random() * 8}s`
+            }}
+          >
+            <div className={`w-1 h-1 rounded-full ${
+              i % 4 === 0 ? 'bg-green-400' : 
+              i % 4 === 1 ? 'bg-blue-400' : 
+              i % 4 === 2 ? 'bg-purple-400' : 
+              'bg-cyan-400'
+            } animate-pulse`} />
+          </div>
+        ))}
+      </div>
       
       <Navbar />
-      
-      {/* Control Buttons */}
-      <VisualControlButton />
-      <ThemeSelector />
       
       <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Hero Section */}
@@ -222,6 +224,16 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* CSS Animation */}
+      <style>
+        {`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(180deg); }
+          }
+        `}
+      </style>
     </div>
   )
 }
