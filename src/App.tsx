@@ -1,30 +1,77 @@
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Index from '@/pages/Index';
-import GreenInvestments from '@/pages/GreenInvestments';
-import EarningActivitiesDashboard from '@/pages/EarningActivitiesDashboard';
-import EarningSystemsOverview from '@/pages/EarningSystemsOverview';
-import { Toaster } from '@/components/ui/sonner';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { lazy, Suspense } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Toaster } from 'sonner'
+import SlidingMenu from '@/components/SlidingMenu'
+import { GaiaLogo } from '@/components/GaiaLogo'
+import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
+import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
 
-const queryClient = new QueryClient();
+// Lazy load pages for better performance
+const Home = lazy(() => import('./pages/Home'))
+const LiveTracking = lazy(() => import('./pages/LiveTracking'))
+const Gaming = lazy(() => import('./pages/Gaming'))
+const Wallet = lazy(() => import('./pages/Wallet'))
+const Markets = lazy(() => import('./pages/Markets'))
+const VideoExchange = lazy(() => import('./pages/VideoExchange'))
+const GaiaBikeEcosystem = lazy(() => import('./pages/GaiaBikeEcosystem'))
+const TokenMining = lazy(() => import('./pages/TokenMining'))
+const GreenInvestments = lazy(() => import('./pages/GreenInvestments'))
+const CoinCrafter = lazy(() => import('./pages/CoinCrafter'))
+const SandProtect = lazy(() => import('./pages/SandProtect'))
+const GaiasProjects = lazy(() => import('./pages/GaiasProjects'))
+const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlockchainSwapToken'))
+const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
+const Admin = lazy(() => import('./pages/Admin'))
+const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
+const DeploymentStatus = lazy(() => import('./pages/DeploymentStatus'))
+const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'))
+const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'))
 
 function App() {
+  useGlobalBackgroundServices()
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/green-investments" element={<GreenInvestments />} />
-            <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
-            <Route path="/earning-systems" element={<EarningSystemsOverview />} />
-          </Routes>
-          <Toaster />
-        </div>
-      </Router>
-    </QueryClientProvider>
-  );
+    <Router>
+      <div className="min-h-screen bg-background text-foreground" data-router="true">
+        <CrossPagePersistence />
+        <SlidingMenu />
+        <main className="flex-1">
+          <Suspense fallback={
+            <div className="min-h-screen bg-background flex items-center justify-center">
+              <div className="text-center">
+                <GaiaLogo size="xl" variant="matrix" />
+                <div className="mt-4 text-primary animate-pulse">Loading Gaia Exchanges...</div>
+              </div>
+            </div>
+          }>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/live-tracking" element={<LiveTracking />} />
+              <Route path="/gaming" element={<Gaming />} />
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/markets" element={<Markets />} />
+              <Route path="/video-exchange" element={<VideoExchange />} />
+              <Route path="/gaia-bike-ecosystem" element={<GaiaBikeEcosystem />} />
+              <Route path="/token-mining" element={<TokenMining />} />
+              <Route path="/green-investments" element={<GreenInvestments />} />
+              <Route path="/coin-crafter" element={<CoinCrafter />} />
+              <Route path="/sand-protect" element={<SandProtect />} />
+              <Route path="/gaias-projects" element={<GaiasProjects />} />
+              <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
+              <Route path="/private-blockchain" element={<PrivateBlockchain />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/secure-admin" element={<SecureAdmin />} />
+              <Route path="/deployment-status" element={<DeploymentStatus />} />
+              <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
+              <Route path="/enhanced-leaderboard" element={<EnhancedLeaderboard />} />
+            </Routes>
+          </Suspense>
+        </main>
+        <Toaster position="top-right" />
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
