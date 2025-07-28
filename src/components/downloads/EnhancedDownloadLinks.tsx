@@ -87,7 +87,7 @@ export function EnhancedDownloadLinks() {
                 
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs text-blue-400">Size: {option.size}</span>
-                  <Shield className="h-4 w-4 text-green-400" title="Secure Download" />
+                  <Shield className="h-4 w-4 text-green-400" />
                 </div>
                 
                 <Button 
