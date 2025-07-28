@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -12,7 +11,6 @@ import {
   DollarSign, 
   Download,
   Hammer,
-  Shield,
   User,
   ChevronRight,
   Globe,
@@ -20,7 +18,8 @@ import {
   Mountain,
   Palette,
   Crown,
-  Star
+  Star,
+  Heart
 } from 'lucide-react'
 
 const AppSidebar = () => {
@@ -59,10 +58,11 @@ const AppSidebar = () => {
     checkIPAuthorization()
   }, [])
 
-  // Filter menu items based on admin authorization - Removed Live Tracking
+  // Filter menu items based on admin authorization - Removed Live Tracking and Security
   const baseMenuItems = [
     { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
+    { icon: Heart, label: 'Animal Welfare', path: '/animal-welfare', category: 'welfare' },
     { icon: Gamepad2, label: 'Gaming Hub', path: '/gaming', category: 'gaming' },
     { icon: TrendingUp, label: 'Exchange', path: '/exchange', category: 'trading' },
     { icon: Coins, label: 'NFT Animals', path: '/nft-green-animals', category: 'nft' },
@@ -70,7 +70,6 @@ const AppSidebar = () => {
     { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
     { icon: Palette, label: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', category: 'tools' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
-    { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
     { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
     { icon: Mail, label: 'Contact', path: '/contact', category: 'info' },
     { icon: DollarSign, label: 'Pricing', path: '/pricing', category: 'info' }

@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { GaiaLogo } from '@/components/GaiaLogo'
@@ -19,11 +20,12 @@ import {
   Pickaxe,
   Leaf,
   Coins,
-  Shield,
   Settings,
   Menu,
   X,
-  MoreHorizontal
+  MoreHorizontal,
+  Heart,
+  Globe
 } from 'lucide-react'
 
 interface NavItem {
@@ -37,7 +39,8 @@ export function Navbar() {
 
   const navItems = [
     { name: 'Home', path: '/', icon: Home },
-    { name: 'Live Tracking', path: '/live-tracking', icon: TrendingUp },
+    { name: 'Virtual World', path: '/virtual-world', icon: Globe },
+    { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
     { name: 'Gaming', path: '/gaming', icon: Gamepad2 },
     { name: 'Wallet', path: '/wallet', icon: Wallet },
     { name: 'Markets', path: '/markets', icon: BarChart3 },
@@ -46,8 +49,7 @@ export function Navbar() {
     { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
     { name: 'Green Investments', path: '/green-investments', icon: Leaf },
     { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
-    { name: 'Private Blockchain', path: '/private-blockchain', icon: Shield },
-    { name: 'Secure Admin', path: '/secure-admin', icon: Settings }
+    { name: 'Admin', path: '/admin', icon: Settings }
   ]
 
   return (
