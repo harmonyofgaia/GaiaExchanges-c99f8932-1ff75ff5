@@ -1,4 +1,5 @@
 
+import { Navbar } from '@/components/Navbar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -8,6 +9,7 @@ import { Leaf, Globe, Zap, Crown, GamepadIcon, Coins } from 'lucide-react'
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10">
+      <Navbar />
       <div className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="text-center mb-12">
