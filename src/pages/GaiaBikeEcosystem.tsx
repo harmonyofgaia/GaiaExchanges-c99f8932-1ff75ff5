@@ -1,259 +1,428 @@
 
-import React, { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { MapPin, Battery, Zap, Leaf, Users, Trophy, TrendingUp, Clock } from 'lucide-react'
+import { useState } from 'react'
+import { Navbar } from '@/components/Navbar'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Progress } from '@/components/ui/progress'
+import { Bike, MapPin, Leaf, Trophy, Users, Zap, Globe, Star, Target, Award } from 'lucide-react'
 
-const GaiaBikeEcosystem = () => {
-  const [selectedStation, setSelectedStation] = useState(null)
+interface BikeStation {
+  id: string
+  name: string
+  location: string
+  availableBikes: number
+  totalSlots: number
+  energyGenerated: number
+  carbonOffset: number
+  status: 'active' | 'maintenance' | 'offline'
+}
 
-  const bikeStations = [
-    { id: 1, name: "Central Park Hub", location: "Downtown", bikesAvailable: 12, batteryLevel: 85, greenPoints: 2340 },
-    { id: 2, name: "University Campus", location: "Education District", bikesAvailable: 8, batteryLevel: 72, greenPoints: 1890 },
-    { id: 3, name: "Shopping Center", location: "Commercial Zone", bikesAvailable: 15, batteryLevel: 91, greenPoints: 3120 },
-    { id: 4, name: "Beach Front", location: "Coastal Area", bikesAvailable: 6, batteryLevel: 68, greenPoints: 1456 }
+interface UserStats {
+  totalRides: number
+  distanceTraveled: number
+  energyGenerated: number
+  carbonSaved: number
+  tokensEarned: number
+  level: number
+  achievements: string[]
+}
+
+export default function GaiaBikeEcosystem() {
+  const [selectedStation, setSelectedStation] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState('overview')
+
+  const bikeStations: BikeStation[] = [
+    {
+      id: '1',
+      name: 'Green Plaza Hub',
+      location: 'Downtown Environmental District',
+      availableBikes: 8,
+      totalSlots: 12,
+      energyGenerated: 245.7,
+      carbonOffset: 89.3,
+      status: 'active'
+    },
+    {
+      id: '2',
+      name: 'Eco Park Station',
+      location: 'Central Park North',
+      availableBikes: 15,
+      totalSlots: 20,
+      energyGenerated: 412.8,
+      carbonOffset: 156.4,
+      status: 'active'
+    },
+    {
+      id: '3',
+      name: 'Solar Bridge Point',
+      location: 'University Campus',
+      availableBikes: 3,
+      totalSlots: 16,
+      energyGenerated: 678.2,
+      carbonOffset: 234.1,
+      status: 'maintenance'
+    },
+    {
+      id: '4',
+      name: 'Wind Valley Terminal',
+      location: 'Renewable Energy Park',
+      availableBikes: 22,
+      totalSlots: 25,
+      energyGenerated: 891.5,
+      carbonOffset: 312.7,
+      status: 'active'
+    }
   ]
 
-  const userStats = {
-    totalRides: 127,
-    greenPointsEarned: 4560,
-    co2Saved: 23.4,
-    caloriesBurned: 12890,
-    rank: 42
+  const userStats: UserStats = {
+    totalRides: 89,
+    distanceTraveled: 234.7,
+    energyGenerated: 156.3,
+    carbonSaved: 78.9,
+    tokensEarned: 1247,
+    level: 7,
+    achievements: ['Eco Warrior', 'Green Commuter', 'Energy Producer', 'Carbon Saver']
+  }
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active': return 'text-green-400'
+      case 'maintenance': return 'text-yellow-400'
+      case 'offline': return 'text-red-400'
+      default: return 'text-gray-400'
+    }
+  }
+
+  const getStatusBadgeVariant = (status: string) => {
+    switch (status) {
+      case 'active': return 'default'
+      case 'maintenance': return 'secondary'
+      case 'offline': return 'destructive'
+      default: return 'outline'
+    }
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      {/* Header */}
-      <div className="text-center space-y-2">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-          Gaia Bike Ecosystem
-        </h1>
-        <p className="text-muted-foreground text-lg">
-          Sustainable transportation powered by renewable energy and community engagement
-        </p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-blue-900">
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">
+            🚴‍♂️ GAIA Bike Ecosystem
+          </h1>
+          <p className="text-xl text-gray-300 mb-6">
+            Sustainable Transportation • Energy Generation • Carbon Offsetting
+          </p>
+        </div>
 
-      {/* User Dashboard */}
-      <Card className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-green-200/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Trophy className="h-5 w-5 text-yellow-500" />
-            Your Eco-Cycling Stats
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">{userStats.totalRides}</div>
-              <div className="text-sm text-muted-foreground">Total Rides</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">{userStats.greenPointsEarned}</div>
-              <div className="text-sm text-muted-foreground">Green Points</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-emerald-400">{userStats.co2Saved}kg</div>
-              <div className="text-sm text-muted-foreground">CO₂ Saved</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-orange-400">{userStats.caloriesBurned}</div>
-              <div className="text-sm text-muted-foreground">Calories Burned</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400">#{userStats.rank}</div>
-              <div className="text-sm text-muted-foreground">Global Rank</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-4 bg-gray-800/50 border border-green-500/20">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-green-600/20">
+              <Globe className="w-4 h-4 mr-2" />
+              Overview
+            </TabsTrigger>
+            <TabsTrigger value="stations" className="data-[state=active]:bg-blue-600/20">
+              <MapPin className="w-4 h-4 mr-2" />
+              Stations
+            </TabsTrigger>
+            <TabsTrigger value="profile" className="data-[state=active]:bg-purple-600/20">
+              <Users className="w-4 h-4 mr-2" />
+              My Profile
+            </TabsTrigger>
+            <TabsTrigger value="leaderboard" className="data-[state=active]:bg-yellow-600/20">
+              <Trophy className="w-4 h-4 mr-2" />
+              Leaderboard
+            </TabsTrigger>
+          </TabsList>
 
-      <Tabs defaultValue="stations" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="stations">Bike Stations</TabsTrigger>
-          <TabsTrigger value="rewards">Rewards</TabsTrigger>
-          <TabsTrigger value="challenges">Challenges</TabsTrigger>
-          <TabsTrigger value="impact">Environmental Impact</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="stations" className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {bikeStations.map((station) => (
-              <Card key={station.id} className="hover:shadow-lg transition-shadow cursor-pointer"
-                    onClick={() => setSelectedStation(station)}>
+          <TabsContent value="overview" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card className="bg-gradient-to-br from-green-900/30 to-black/50 border-green-500/30">
                 <CardHeader className="pb-3">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-lg">{station.name}</CardTitle>
-                      <CardDescription className="flex items-center gap-1">
-                        <MapPin className="h-4 w-4" />
-                        {station.location}
-                      </CardDescription>
-                    </div>
-                    <Badge variant={station.bikesAvailable > 10 ? "default" : "secondary"}>
-                      {station.bikesAvailable} bikes
-                    </Badge>
-                  </div>
+                  <CardTitle className="text-green-400 flex items-center gap-2">
+                    <Bike className="w-5 h-5" />
+                    Total Stations
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <Battery className="h-4 w-4 text-green-500" />
-                    <span className="text-sm">Battery Level</span>
-                    <Progress value={station.batteryLevel} className="flex-1" />
-                    <span className="text-sm font-medium">{station.batteryLevel}%</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1">
-                      <Leaf className="h-4 w-4 text-green-500" />
-                      <span className="text-sm">Green Points: {station.greenPoints}</span>
+                <CardContent>
+                  <div className="text-3xl font-bold text-white mb-2">{bikeStations.length}</div>
+                  <p className="text-green-300 text-sm">Active network nodes</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-blue-900/30 to-black/50 border-blue-500/30">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-blue-400 flex items-center gap-2">
+                    <Zap className="w-5 h-5" />
+                    Energy Generated
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-white mb-2">2,228 kWh</div>
+                  <p className="text-blue-300 text-sm">Clean energy produced</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-purple-900/30 to-black/50 border-purple-500/30">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-purple-400 flex items-center gap-2">
+                    <Leaf className="w-5 h-5" />
+                    Carbon Offset
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-white mb-2">871 kg</div>
+                  <p className="text-purple-300 text-sm">CO₂ emissions prevented</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gradient-to-br from-yellow-900/30 to-black/50 border-yellow-500/30">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-yellow-400 flex items-center gap-2">
+                    <Users className="w-5 h-5" />
+                    Active Riders
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-white mb-2">1,847</div>
+                  <p className="text-yellow-300 text-sm">Community members</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-500/30">
+              <CardHeader>
+                <CardTitle className="text-white flex items-center gap-2">
+                  <MapPin className="w-5 h-5 text-green-400" />
+                  Ecosystem Map & Real-time Status
+                </CardTitle>
+                <CardDescription className="text-gray-400">
+                  Live view of all GAIA bike stations and their current status
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {bikeStations.map((station) => (
+                    <div 
+                      key={station.id} 
+                      className="p-4 rounded-lg bg-gray-800/30 border border-gray-600/30 hover:border-green-500/50 transition-colors cursor-pointer"
+                      onClick={() => setSelectedStation(station.id)}
+                    >
+                      <div className="flex justify-between items-start mb-3">
+                        <h3 className="font-semibold text-white">{station.name}</h3>
+                        <Badge variant={getStatusBadgeVariant(station.status)} className="text-xs">
+                          {station.status}
+                        </Badge>
+                      </div>
+                      <p className="text-gray-400 text-sm mb-3">{station.location}</p>
+                      
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-300">Available Bikes</span>
+                          <span className="text-green-400 font-medium">
+                            {station.availableBikes}/{station.totalSlots}
+                          </span>
+                        </div>
+                        <Progress 
+                          value={(station.availableBikes / station.totalSlots) * 100} 
+                          className="h-2 bg-gray-700"
+                        />
+                        
+                        <div className="grid grid-cols-2 gap-4 mt-3 text-xs">
+                          <div>
+                            <span className="text-gray-400">Energy:</span>
+                            <span className="text-blue-400 ml-1">{station.energyGenerated} kWh</span>
+                          </div>
+                          <div>
+                            <span className="text-gray-400">Carbon:</span>
+                            <span className="text-green-400 ml-1">{station.carbonOffset} kg</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <Button size="sm">
-                      <Zap className="h-4 w-4 mr-1" />
-                      Reserve Bike
-                    </Button>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="stations" className="space-y-6">
+            <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-500/30">
+              <CardHeader>
+                <CardTitle className="text-white">Station Management</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Detailed view and control of all bike stations
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {bikeStations.map((station) => (
+                    <div 
+                      key={station.id}
+                      className="p-6 rounded-lg bg-gray-800/30 border border-gray-600/30"
+                    >
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h3 className="text-xl font-semibold text-white mb-1">{station.name}</h3>
+                          <p className="text-gray-400">{station.location}</p>
+                        </div>
+                        <div className="text-right">
+                          <Badge variant={getStatusBadgeVariant(station.status)} className="mb-2">
+                            {station.status.toUpperCase()}
+                          </Badge>
+                          <p className={`text-sm font-medium ${getStatusColor(station.status)}`}>
+                            {station.status === 'active' ? 'Operational' : 
+                             station.status === 'maintenance' ? 'Under Maintenance' : 'Offline'}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div className="text-center p-3 bg-green-900/20 rounded-lg border border-green-500/20">
+                          <div className="text-2xl font-bold text-green-400">{station.availableBikes}</div>
+                          <div className="text-xs text-green-300">Available Bikes</div>
+                        </div>
+                        <div className="text-center p-3 bg-blue-900/20 rounded-lg border border-blue-500/20">
+                          <div className="text-2xl font-bold text-blue-400">{station.totalSlots}</div>
+                          <div className="text-xs text-blue-300">Total Slots</div>
+                        </div>
+                        <div className="text-center p-3 bg-yellow-900/20 rounded-lg border border-yellow-500/20">
+                          <div className="text-2xl font-bold text-yellow-400">{station.energyGenerated}</div>
+                          <div className="text-xs text-yellow-300">kWh Generated</div>
+                        </div>
+                        <div className="text-center p-3 bg-purple-900/20 rounded-lg border border-purple-500/20">
+                          <div className="text-2xl font-bold text-purple-400">{station.carbonOffset}</div>
+                          <div className="text-xs text-purple-300">kg CO₂ Offset</div>
+                        </div>
+                      </div>
+
+                      <div className="mt-4 flex gap-2">
+                        <Button size="sm" variant="outline" className="border-green-500/30 text-green-400 hover:bg-green-500/10">
+                          <MapPin className="w-4 h-4 mr-2" />
+                          View Details
+                        </Button>
+                        <Button size="sm" variant="outline" className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10">
+                          <Zap className="w-4 h-4 mr-2" />
+                          Energy Stats
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="profile" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-500/30">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Users className="w-5 h-5 text-green-400" />
+                    Rider Profile
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-green-400 mb-2">Level {userStats.level}</div>
+                    <p className="text-gray-400">Eco Cycling Champion</p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">Total Rides</span>
+                      <span className="text-white font-semibold">{userStats.totalRides}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">Distance Traveled</span>
+                      <span className="text-blue-400 font-semibold">{userStats.distanceTraveled} km</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">Energy Generated</span>
+                      <span className="text-yellow-400 font-semibold">{userStats.energyGenerated} kWh</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">Carbon Saved</span>
+                      <span className="text-green-400 font-semibold">{userStats.carbonSaved} kg CO₂</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">GAIA Tokens Earned</span>
+                      <span className="text-purple-400 font-semibold">{userStats.tokensEarned} GAT</span>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-        </TabsContent>
 
-        <TabsContent value="rewards" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Available Rewards</CardTitle>
-              <CardDescription>Exchange your green points for exciting rewards</CardDescription>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="border rounded-lg p-4 space-y-2">
-                <h3 className="font-semibold">Free Coffee</h3>
-                <p className="text-sm text-muted-foreground">Partner café discount</p>
-                <div className="flex justify-between items-center">
-                  <Badge variant="outline">500 points</Badge>
-                  <Button size="sm">Redeem</Button>
-                </div>
-              </div>
-              <div className="border rounded-lg p-4 space-y-2">
-                <h3 className="font-semibold">Tree Planting</h3>
-                <p className="text-sm text-muted-foreground">Plant a tree in your name</p>
-                <div className="flex justify-between items-center">
-                  <Badge variant="outline">1,000 points</Badge>
-                  <Button size="sm">Redeem</Button>
-                </div>
-              </div>
-              <div className="border rounded-lg p-4 space-y-2">
-                <h3 className="font-semibold">Bike Upgrade</h3>
-                <p className="text-sm text-muted-foreground">Premium bike access</p>
-                <div className="flex justify-between items-center">
-                  <Badge variant="outline">2,500 points</Badge>
-                  <Button size="sm">Redeem</Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="challenges" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Active Challenges</CardTitle>
-              <CardDescription>Complete challenges to earn bonus points</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="border rounded-lg p-4">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-semibold">Weekly Distance Challenge</h3>
-                  <Badge>50km Goal</Badge>
-                </div>
-                <p className="text-sm text-muted-foreground mb-3">Ride 50km this week for bonus points</p>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>Progress: 32.5km</span>
-                    <span>65%</span>
+              <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-500/30">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <Award className="w-5 h-5 text-gold-400" />
+                    Achievements
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-3">
+                    {userStats.achievements.map((achievement, index) => (
+                      <div key={index} className="p-3 rounded-lg bg-gray-800/30 border border-gray-600/30 text-center">
+                        <Star className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
+                        <p className="text-sm text-white font-medium">{achievement}</p>
+                      </div>
+                    ))}
                   </div>
-                  <Progress value={65} />
-                </div>
-              </div>
-              
-              <div className="border rounded-lg p-4">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-semibold">Green Route Explorer</h3>
-                  <Badge variant="secondary">Exploration</Badge>
-                </div>
-                <p className="text-sm text-muted-foreground mb-3">Visit 5 different bike stations</p>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>Progress: 3/5 stations</span>
-                    <span>60%</span>
-                  </div>
-                  <Progress value={60} />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
 
-        <TabsContent value="impact" className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card>
+          <TabsContent value="leaderboard" className="space-y-6">
+            <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-500/30">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Leaf className="h-5 w-5 text-green-500" />
-                  Personal Impact
+                <CardTitle className="text-white flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-gold-400" />
+                  Global Leaderboard
                 </CardTitle>
+                <CardDescription className="text-gray-400">
+                  Top performers in the GAIA Bike Ecosystem
+                </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-green-400">23.4kg</div>
-                    <div className="text-sm text-muted-foreground">CO₂ Saved</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-400">127</div>
-                    <div className="text-sm text-muted-foreground">Car Trips Avoided</div>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>Monthly Goal</span>
-                    <span>75%</span>
-                  </div>
-                  <Progress value={75} />
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { rank: 1, name: 'EcoRider23', distance: 1247.8, tokens: 8934, level: 12 },
+                    { rank: 2, name: 'GreenCommuter', distance: 1156.4, tokens: 8234, level: 11 },
+                    { rank: 3, name: 'BikeWarrior', distance: 1089.2, tokens: 7823, level: 10 },
+                    { rank: 4, name: 'SustainableSarah', distance: 967.5, tokens: 6945, level: 9 },
+                    { rank: 5, name: 'CarbonCrusher', distance: 834.7, tokens: 5978, level: 8 },
+                  ].map((rider) => (
+                    <div key={rider.rank} className="flex items-center justify-between p-4 rounded-lg bg-gray-800/30 border border-gray-600/30">
+                      <div className="flex items-center gap-4">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
+                          rider.rank === 1 ? 'bg-yellow-500 text-black' :
+                          rider.rank === 2 ? 'bg-gray-400 text-black' :
+                          rider.rank === 3 ? 'bg-amber-600 text-white' :
+                          'bg-gray-600 text-white'
+                        }`}>
+                          {rider.rank}
+                        </div>
+                        <div>
+                          <h3 className="text-white font-semibold">{rider.name}</h3>
+                          <p className="text-gray-400 text-sm">Level {rider.level}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-blue-400 font-semibold">{rider.distance} km</div>
+                        <div className="text-purple-400 text-sm">{rider.tokens} GAT</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Users className="h-5 w-5 text-blue-500" />
-                  Community Impact
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-400">2,340kg</div>
-                    <div className="text-sm text-muted-foreground">Total CO₂ Saved</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-yellow-400">1,267</div>
-                    <div className="text-sm text-muted-foreground">Active Riders</div>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-semibold text-green-400">🌱 23 Trees Worth of Impact!</div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-      </Tabs>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   )
 }
-
-export default GaiaBikeEcosystem
