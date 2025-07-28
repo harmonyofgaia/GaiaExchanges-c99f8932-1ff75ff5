@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
@@ -8,7 +9,7 @@ import {
   HardDrive, 
   Zap, 
   Shield, 
-  Package, 
+  Compress, 
   Infinity,
   TrendingUp,
   Database
@@ -19,7 +20,7 @@ const getUpgradeIcon = (type: string) => {
     case 'capacity': return <Database className="h-5 w-5" />
     case 'speed': return <Zap className="h-5 w-5" />
     case 'redundancy': return <Shield className="h-5 w-5" />
-    case 'compression': return <Package className="h-5 w-5" />
+    case 'compression': return <Compress className="h-5 w-5" />
     case 'quantum': return <Infinity className="h-5 w-5" />
     default: return <HardDrive className="h-5 w-5" />
   }
