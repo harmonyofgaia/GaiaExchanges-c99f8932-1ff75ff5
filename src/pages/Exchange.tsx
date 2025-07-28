@@ -1,13 +1,13 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
-import { TrendingUp, ArrowUpDown, DollarSign, BarChart3, ShoppingCart } from 'lucide-react'
+import { TrendingUp, ArrowUpDown, DollarSign, BarChart3 } from 'lucide-react'
 import { GaiasExchange } from '@/components/GaiasExchange'
 import { InvestorScoutingSystem } from '@/components/InvestorScoutingSystem'
 import { FullyFunctionalExchange } from '@/components/FullyFunctionalExchange'
 import { MultiExchangeIntegration } from '@/components/MultiExchangeIntegration'
 import { GaiaFeeManager } from '@/components/GaiaFeeManager'
-import { UniversalMarketplace } from '@/components/marketplace/UniversalMarketplace'
 import { BlockchainStatus } from '@/components/blockchain/BlockchainStatus'
 
 export default function Exchange() {
@@ -18,16 +18,15 @@ export default function Exchange() {
           <CardHeader>
             <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 flex items-center justify-center gap-3">
               <TrendingUp className="h-12 w-12 text-blue-400 animate-pulse" />
-              ⚡ GAIA Exchange & Marketplace Hub
+              ⚡ GAIA Exchange Hub
             </CardTitle>
             <p className="text-center text-xl text-muted-foreground">
-              Complete Trading & Marketplace Ecosystem - Powered by GAIA Blockchain
+              Complete Trading Ecosystem - Powered by GAIA Blockchain
             </p>
             <div className="flex justify-center gap-2 mt-4">
               <Badge className="bg-blue-600">🚀 High Performance</Badge>
               <Badge className="bg-green-600">🌱 Eco Tokens</Badge>
               <Badge className="bg-purple-600">⚡ Lightning Fast</Badge>
-              <Badge className="bg-orange-600">🛒 Marketplace</Badge>
             </div>
           </CardHeader>
         </Card>
@@ -38,9 +37,8 @@ export default function Exchange() {
         </div>
 
         <Tabs defaultValue="live-exchange" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="live-exchange">🔥 Live Exchange</TabsTrigger>
-            <TabsTrigger value="marketplace">🛒 Marketplace</TabsTrigger>
             <TabsTrigger value="fee-manager">💰 Fee Options</TabsTrigger>
             <TabsTrigger value="investors">👥 Investors</TabsTrigger>
             <TabsTrigger value="listings">📋 Listings</TabsTrigger>
@@ -92,24 +90,6 @@ export default function Exchange() {
               </Card>
             </div>
             <FullyFunctionalExchange />
-          </TabsContent>
-
-          <TabsContent value="marketplace" className="space-y-6">
-            <Card className="border-orange-500/50 bg-gradient-to-r from-orange-900/30 to-red-900/30 mb-6">
-              <CardHeader>
-                <CardTitle className="text-orange-400 flex items-center gap-2">
-                  <ShoppingCart className="h-6 w-6" />
-                  🏪 Integrated Marketplace
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Buy and sell gaming items, NFTs, and digital assets directly integrated with the exchange. 
-                  All transactions are secured by GAIA's private blockchain network.
-                </p>
-              </CardContent>
-            </Card>
-            <UniversalMarketplace />
           </TabsContent>
           
           <TabsContent value="fee-manager" className="space-y-6">
