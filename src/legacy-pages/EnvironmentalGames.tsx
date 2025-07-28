@@ -1,5 +1,5 @@
 
-import { Navbar } from '@/components/Navbar'
+import Navbar from '@/components/Navbar'
 import { EnvironmentalGamesHub } from '@/components/games/EnvironmentalGamesHub'
 
 export default function EnvironmentalGames() {

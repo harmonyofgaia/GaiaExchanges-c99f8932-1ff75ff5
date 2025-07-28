@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { UltimateAdminSuite } from '@/components/admin/UltimateAdminSuite'
@@ -17,7 +16,7 @@ import { GaiaIATool } from '@/components/admin/GaiaIATool'
 import { SecurityDashboard } from '@/components/admin/security/SecurityDashboard'
 import { UserManagementSystemRefactored } from '@/components/admin/UserManagementSystemRefactored'
 import { AdminDashboard } from '@/components/admin/AdminDashboard'
-import { Navbar } from '@/components/Navbar'
+import Navbar from '@/components/Navbar'
 
 export default function Admin() {
   return (

@@ -1,5 +1,5 @@
 
-import { Navbar } from '@/components/Navbar'
+import Navbar from '@/components/Navbar'
 import { AnimalRescueNFT } from '@/components/nft/AnimalRescueNFT'
 
 export default function AnimalRescue() {
