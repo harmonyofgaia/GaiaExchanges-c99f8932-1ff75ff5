@@ -1,9 +1,8 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Heart, Paw, Shield, Globe, Users, Coins } from 'lucide-react'
+import { Heart, Shield, Globe, Users, Coins } from 'lucide-react'
 
 export default function AnimalWelfare() {
   const rescueStats = [
@@ -50,7 +49,7 @@ export default function AnimalWelfare() {
 
           <Card className="border-green-500/30 bg-green-900/20">
             <CardContent className="p-6 text-center">
-              <Paw className="h-8 w-8 mx-auto text-green-400 mb-2" />
+              <Heart className="h-8 w-8 mx-auto text-green-400 mb-2" />
               <div className="text-2xl font-bold text-green-400">2,430</div>
               <div className="text-sm text-muted-foreground">Successfully Adopted</div>
             </CardContent>
