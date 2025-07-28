@@ -5,7 +5,6 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Trophy, Medal, Star, Users, TrendingUp, Crown, Zap, Globe } from 'lucide-react'
-import { Navbar } from '@/components/Navbar'
 
 interface LeaderboardEntry {
   rank: number
@@ -88,8 +87,6 @@ export default function EnhancedLeaderboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-yellow-900">
-      <Navbar />
-      
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent mb-4">
