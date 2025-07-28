@@ -18,7 +18,7 @@ const ForestShieldMasterPlan = lazy(() => import("./pages/ForestShieldMasterPlan
 // Phase 1 pages
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const GreenImpactDashboard = lazy(() => import("./pages/GreenImpactDashboard"));
-const GAiAConsistencyStatus = lazy(() => import("./pages/GaiaConsistencyStatus"));
+const GaiaConsistencyStatus = lazy(() => import("./pages/GaiaConsistencyStatus"));
 const Security = lazy(() => import("./pages/Security"));
 
 // Phase 2 pages
@@ -27,6 +27,10 @@ const WildfireDefenseDashboard = lazy(() => import("./pages/WildfireDefenseDashb
 const ForestTokenSystem = lazy(() => import("./pages/ForestTokenSystem"));
 const ImpactMeasurementSystem = lazy(() => import("./pages/ImpactMeasurementSystem"));
 const SeaGreenPsychohistoricalProject = lazy(() => import("./pages/SeaGreenPsychohistoricalProject"));
+
+// Phase 3 pages
+const CommunityEngagementHub = lazy(() => import("./pages/CommunityEngagementHub"));
+const PartnershipManagement = lazy(() => import("./pages/PartnershipManagement"));
 
 const queryClient = new QueryClient();
 
@@ -49,7 +53,7 @@ function App() {
             {/* Phase 1 Routes */}
             <Route path="/dashboard" element={<Suspense fallback={<div>Loading...</div>}><Dashboard /></Suspense>} />
             <Route path="/green-impact-dashboard" element={<Suspense fallback={<div>Loading...</div>}><GreenImpactDashboard /></Suspense>} />
-            <Route path="/gaia-consistency-status" element={<Suspense fallback={<div>Loading...</div>}><GAiAConsistencyStatus /></Suspense>} />
+            <Route path="/gaia-consistency-status" element={<Suspense fallback={<div>Loading...</div>}><GaiaConsistencyStatus /></Suspense>} />
             <Route path="/security" element={<Suspense fallback={<div>Loading...</div>}><Security /></Suspense>} />
 
             {/* Phase 2 Routes */}
@@ -58,6 +62,10 @@ function App() {
             <Route path="/forest-token-system" element={<Suspense fallback={<div>Loading...</div>}><ForestTokenSystem /></Suspense>} />
             <Route path="/impact-measurement-system" element={<Suspense fallback={<div>Loading...</div>}><ImpactMeasurementSystem /></Suspense>} />
             <Route path="/sea-green-psychohistorical" element={<Suspense fallback={<div>Loading...</div>}><SeaGreenPsychohistoricalProject /></Suspense>} />
+
+            {/* Phase 3 Routes */}
+            <Route path="/community-engagement-hub" element={<Suspense fallback={<div>Loading...</div>}><CommunityEngagementHub /></Suspense>} />
+            <Route path="/partnership-management" element={<Suspense fallback={<div>Loading...</div>}><PartnershipManagement /></Suspense>} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
