@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
@@ -24,7 +23,7 @@ import {
   Coins
 } from 'lucide-react'
 import { navigationItems } from '@/nav-items'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/components/auth/AuthProvider'
 import { GaiaLogo } from '@/components/GaiaLogo'
 
 export const Navbar = () => {
