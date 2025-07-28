@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -153,31 +152,31 @@ export default function EarningActivitiesDashboard() {
         </TabsContent>
 
         <TabsContent value="bee-hotel">
-          <BeeHotelActions userId={userId} />
+          <BeeHotelActions />
         </TabsContent>
 
         <TabsContent value="water-saving">
-          <WaterSavingActions userId={userId} />
+          <WaterSavingActions />
         </TabsContent>
 
         <TabsContent value="education">
-          <EnvironmentalEducationActions userId={userId} />
+          <EnvironmentalEducationActions />
         </TabsContent>
 
         <TabsContent value="carbon-credits">
-          <CarbonCreditActions userId={userId} />
+          <CarbonCreditActions />
         </TabsContent>
 
         <TabsContent value="home-grown">
-          <HomeGrownFoodActions userId={userId} />
+          <HomeGrownFoodActions />
         </TabsContent>
 
         <TabsContent value="referrals">
-          <ReferralSystem userId={userId} />
+          <ReferralSystem />
         </TabsContent>
 
         <TabsContent value="skills">
-          <SkillBasedEarning userId={userId} />
+          <SkillBasedEarning />
         </TabsContent>
       </Tabs>
     </div>
