@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -57,7 +58,7 @@ export function GaiaWallet() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Wallet className="h-6 w-6" />
-            🌍 Official GAiA Wallet - Harmony of Culture
+            🌍 Official GAiA Wallet - Harmony of Gaia
           </CardTitle>
           <p className="text-muted-foreground">
             Connected to official GAiA token on Pump.fun
