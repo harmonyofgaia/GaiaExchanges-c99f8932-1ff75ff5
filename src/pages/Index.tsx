@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { GameNavigationHub } from '@/components/gaming/GameNavigationHub'
-import { VisualControlButton } from '@/components/visual/VisualControlButton'
 import { 
   Leaf, 
   Heart, 
@@ -65,9 +64,6 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
-      {/* Visual Control Button with Enhanced Menu Control */}
-      <VisualControlButton />
-
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
