@@ -1,9 +1,11 @@
+
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import SlidingMenu from '@/components/SlidingMenu'
 import { GaiaLogo } from '@/components/GaiaLogo'
 import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
+import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
@@ -31,7 +33,8 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-screen bg-background text-foreground" data-router="true">
+        <CrossPagePersistence />
         <SlidingMenu />
         <main className="flex-1">
           <Suspense fallback={
