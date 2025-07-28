@@ -2,7 +2,7 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
-import SlidingMenu from '@/components/SlidingMenu'
+import { Navbar } from '@/components/Navbar'
 import { GaiaLogo } from '@/components/GaiaLogo'
 import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
 import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
@@ -27,6 +27,16 @@ const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
 const DeploymentStatus = lazy(() => import('./pages/DeploymentStatus'))
 const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'))
 const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'))
+const LandscapeBuilder = lazy(() => import('./pages/LandscapeBuilder'))
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Pricing = lazy(() => import('./pages/Pricing'))
+const VirtualWorld = lazy(() => import('./pages/VirtualWorld'))
+const AnimalWelfare = lazy(() => import('./pages/AnimalWelfare'))
+const Exchange = lazy(() => import('./pages/Exchange'))
+const NFTGreenAnimals = lazy(() => import('./pages/NFTGreenAnimals'))
+const AuraLandScrapyard = lazy(() => import('./pages/AuraLandScrapyard'))
+const ComprehensiveStatus = lazy(() => import('./pages/ComprehensiveStatus'))
 
 function App() {
   useGlobalBackgroundServices()
@@ -35,20 +45,23 @@ function App() {
     <Router>
       <div className="min-h-screen bg-background text-foreground" data-router="true">
         <CrossPagePersistence />
-        <SlidingMenu />
+        <Navbar />
         <main className="flex-1">
           <Suspense fallback={
             <div className="min-h-screen bg-background flex items-center justify-center">
               <div className="text-center">
                 <GaiaLogo size="xl" variant="matrix" />
-                <div className="mt-4 text-primary animate-pulse">Loading Gaia Exchanges...</div>
+                <div className="mt-4 text-primary animate-pulse">Loading GAiA Universe...</div>
               </div>
             </div>
           }>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/live-tracking" element={<LiveTracking />} />
+              <Route path="/virtual-world" element={<VirtualWorld />} />
+              <Route path="/animal-welfare" element={<AnimalWelfare />} />
               <Route path="/gaming" element={<Gaming />} />
+              <Route path="/exchange" element={<Exchange />} />
+              <Route path="/nft-green-animals" element={<NFTGreenAnimals />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/markets" element={<Markets />} />
               <Route path="/video-exchange" element={<VideoExchange />} />
@@ -56,11 +69,18 @@ function App() {
               <Route path="/token-mining" element={<TokenMining />} />
               <Route path="/green-investments" element={<GreenInvestments />} />
               <Route path="/coin-crafter" element={<CoinCrafter />} />
+              <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+              <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
+              <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/live-tracking" element={<LiveTracking />} />
               <Route path="/sand-protect" element={<SandProtect />} />
               <Route path="/gaias-projects" element={<GaiasProjects />} />
               <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
-              <Route path="/admin" element={<Admin />} />
               <Route path="/secure-admin" element={<SecureAdmin />} />
               <Route path="/deployment-status" element={<DeploymentStatus />} />
               <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />

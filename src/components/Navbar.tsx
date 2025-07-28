@@ -25,7 +25,13 @@ import {
   X,
   MoreHorizontal,
   Heart,
-  Globe
+  Globe,
+  Mountain,
+  Palette,
+  Crown,
+  Info,
+  Mail,
+  DollarSign
 } from 'lucide-react'
 
 interface NavItem {
@@ -38,10 +44,12 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navItems = [
-    { name: 'Home', path: '/', icon: Home },
+    { name: 'Galaxy Home', path: '/', icon: Home },
     { name: 'Virtual World', path: '/virtual-world', icon: Globe },
     { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
-    { name: 'Gaming', path: '/gaming', icon: Gamepad2 },
+    { name: 'Gaming Hub', path: '/gaming', icon: Gamepad2 },
+    { name: 'Exchange', path: '/exchange', icon: TrendingUp },
+    { name: 'NFT Animals', path: '/nft-green-animals', icon: Coins },
     { name: 'Wallet', path: '/wallet', icon: Wallet },
     { name: 'Markets', path: '/markets', icon: BarChart3 },
     { name: 'Video Exchange', path: '/video-exchange', icon: Video },
@@ -49,7 +57,13 @@ export function Navbar() {
     { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
     { name: 'Green Investments', path: '/green-investments', icon: Leaf },
     { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
-    { name: 'Admin', path: '/admin', icon: Settings }
+    { name: 'Landscape Builder', path: '/landscape-builder', icon: Mountain },
+    { name: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', icon: Palette },
+    { name: 'Comprehensive Status', path: '/comprehensive-status', icon: Settings },
+    { name: 'About GAiA', path: '/about', icon: Info },
+    { name: 'Contact', path: '/contact', icon: Mail },
+    { name: 'Pricing', path: '/pricing', icon: DollarSign },
+    { name: '👑 Admin Portal', path: '/admin', icon: Crown }
   ]
 
   return (
@@ -59,7 +73,7 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <GaiaLogo size="sm" variant="matrix" showText={false} />
-            <span className="font-bold text-primary text-xl">Gaia Exchanges</span>
+            <span className="font-bold text-primary text-xl">GAiA Universe</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -121,7 +135,7 @@ export function Navbar() {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="lg:hidden py-4 border-t border-primary/30">
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2">
               {navItems.map((item) => {
                 const Icon = item.icon
                 return (

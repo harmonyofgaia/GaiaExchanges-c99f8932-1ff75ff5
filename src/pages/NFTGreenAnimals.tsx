@@ -1,25 +1,25 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Heart, Shield, Users, Leaf } from 'lucide-react'
+import { Coins, Sparkles, Shield, Trophy } from 'lucide-react'
 
-export default function AnimalWelfare() {
+export default function NFTGreenAnimals() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20 p-6">
       <div className="container mx-auto">
         <Card className="mb-8 border-green-500/50 bg-gradient-to-r from-green-900/40 to-blue-900/40">
           <CardHeader>
             <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 flex items-center justify-center gap-3">
-              <Heart className="h-12 w-12 text-green-400 animate-pulse" />
-              🐾 Animal Welfare Center
+              <Coins className="h-12 w-12 text-green-400 animate-pulse" />
+              🦋 NFT Green Animals Collection
             </CardTitle>
             <p className="text-center text-xl text-muted-foreground">
-              Protecting Wildlife Through Technology and Community Action
+              Collect, Trade, and Protect Digital Wildlife
             </p>
             <div className="flex justify-center gap-2 mt-4">
               <Badge className="bg-green-600">🌱 Conservation</Badge>
-              <Badge className="bg-blue-600">🐾 Wildlife Protection</Badge>
-              <Badge className="bg-purple-600">❤️ Community Care</Badge>
+              <Badge className="bg-blue-600">💎 Rare Collections</Badge>
+              <Badge className="bg-purple-600">✨ Unique Artwork</Badge>
             </div>
           </CardHeader>
         </Card>
@@ -28,13 +28,13 @@ export default function AnimalWelfare() {
           <Card className="border-green-500/50 bg-green-900/20">
             <CardHeader>
               <CardTitle className="text-green-400 flex items-center gap-2">
-                <Shield className="h-6 w-6" />
-                Protection Programs
+                <Sparkles className="h-6 w-6" />
+                Rare Species
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Support wildlife protection initiatives and anti-poaching efforts worldwide.
+                Collect NFTs of endangered species and contribute to their conservation.
               </p>
             </CardContent>
           </Card>
@@ -42,13 +42,13 @@ export default function AnimalWelfare() {
           <Card className="border-blue-500/50 bg-blue-900/20">
             <CardHeader>
               <CardTitle className="text-blue-400 flex items-center gap-2">
-                <Users className="h-6 w-6" />
-                Rescue Network
+                <Shield className="h-6 w-6" />
+                Conservation Impact
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Connect with local rescue organizations and volunteer opportunities.
+                Each NFT purchase directly funds real-world conservation efforts.
               </p>
             </CardContent>
           </Card>
@@ -56,13 +56,13 @@ export default function AnimalWelfare() {
           <Card className="border-purple-500/50 bg-purple-900/20">
             <CardHeader>
               <CardTitle className="text-purple-400 flex items-center gap-2">
-                <Leaf className="h-6 w-6" />
-                Habitat Restoration
+                <Trophy className="h-6 w-6" />
+                Breeding System
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Fund and participate in habitat restoration projects for endangered species.
+                Breed your digital animals to create unique combinations and traits.
               </p>
             </CardContent>
           </Card>
@@ -70,13 +70,13 @@ export default function AnimalWelfare() {
           <Card className="border-yellow-500/50 bg-yellow-900/20">
             <CardHeader>
               <CardTitle className="text-yellow-400 flex items-center gap-2">
-                <Heart className="h-6 w-6" />
-                Adoption Center
+                <Coins className="h-6 w-6" />
+                Marketplace
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Find loving homes for animals in need through our digital adoption platform.
+                Trade your collection with other conservationists in our secure marketplace.
               </p>
             </CardContent>
           </Card>
