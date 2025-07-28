@@ -1,539 +1,458 @@
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
-import { Switch } from '@/components/ui/switch'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
-import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
 import { 
   Palette, 
-  Layout, 
-  Type, 
-  Zap, 
-  Brush, 
-  Settings, 
-  Sparkles,
-  Copy,
-  Download,
+  Wand2, 
+  Download, 
   Upload,
-  Wand2,
+  Save,
+  FolderOpen,
+  Shuffle,
+  RefreshCw,
+  Settings,
   Eye,
-  Image,
-  Layers
+  EyeOff,
+  Heart
 } from 'lucide-react'
-import { useLock } from '@/components/providers/ThemeProvider'
+import { LockToggle } from './LockToggle'
 import { toast } from 'sonner'
-import { DesignLibrary } from './DesignLibrary'
-import { AdvancedBackgroundControls } from './AdvancedBackgroundControls'
-import { ArtStudio } from './ArtStudio'
+
+interface ColorPalette {
+  id: string
+  name: string
+  colors: string[]
+  isFavorite?: boolean
+}
+
+interface DesignTemplate {
+  id: string
+  name: string
+  preview: string
+  colors: string[]
+}
 
 export function EnhancedVisualControls() {
-  const { isLocked } = useLock()
-  const [selectedTemplate, setSelectedTemplate] = useState('')
-  const [customCSS, setCustomCSS] = useState('')
-  const [backgroundIntensity, setBackgroundIntensity] = useState(50)
-  const [animationSpeed, setAnimationSpeed] = useState(1)
-  const [fontSize, setFontSize] = useState(16)
-  const [spacing, setSpacing] = useState(16)
-  const [particleEffects, setParticleEffects] = useState(true)
-  const [smoothTransitions, setSmoothTransitions] = useState(true)
+  const [isLocked, setIsLocked] = useState(false)
+  const [selectedPalette, setSelectedPalette] = useState<ColorPalette | null>(null)
+  const [customColors, setCustomColors] = useState(['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'])
+  const [hue, setHue] = useState(180)
+  const [saturation, setSaturation] = useState(70)
+  const [lightness, setLightness] = useState(50)
+  const [contrast, setContrast] = useState(50)
+  const [designHistory, setDesignHistory] = useState<string[]>([])
+  
+  const [colorPalettes] = useState<ColorPalette[]>([
+    { 
+      id: 'vibrant', 
+      name: 'Vibrant Energy', 
+      colors: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA726'], 
+      isFavorite: true 
+    },
+    { 
+      id: 'nature', 
+      name: 'Green Nature', 
+      colors: ['#27AE60', '#2ECC71', '#58D68D', '#85C1E9'], 
+      isFavorite: false 
+    },
+    { 
+      id: 'sunset', 
+      name: 'Sunset Glow', 
+      colors: ['#FF7043', '#FFA726', '#FFCC02', '#FF5722'], 
+      isFavorite: true 
+    },
+    { 
+      id: 'ocean', 
+      name: 'Ocean Depths', 
+      colors: ['#1976D2', '#42A5F5', '#64B5F6', '#90CAF9'], 
+      isFavorite: false 
+    }
+  ])
 
-  const colorPalettes = [
-    { name: 'Ocean Breeze', colors: ['#0369a1', '#0891b2', '#06b6d4', '#22d3ee'] },
-    { name: 'Forest Green', colors: ['#065f46', '#059669', '#10b981', '#34d399'] },
-    { name: 'Sunset Glow', colors: ['#dc2626', '#ea580c', '#f59e0b', '#eab308'] },
-    { name: 'Purple Dream', colors: ['#7c3aed', '#8b5cf6', '#a78bfa', '#c4b5fd'] },
-    { name: 'Gaia Nature', colors: ['#22c55e', '#16a34a', '#15803d', '#166534'] }
-  ]
+  const [designTemplates] = useState<DesignTemplate[]>([
+    { 
+      id: 'modern', 
+      name: 'Modern Minimalist', 
+      preview: 'Clean lines, subtle gradients',
+      colors: ['#2196F3', '#FFFFFF', '#F5F5F5', '#424242']
+    },
+    { 
+      id: 'retro', 
+      name: 'Retro Wave', 
+      preview: 'Neon colors, 80s vibes',
+      colors: ['#FF6B9D', '#4ECDC4', '#FFE66D', '#A8E6CF']
+    },
+    { 
+      id: 'earthy', 
+      name: 'Earth Tones', 
+      preview: 'Natural, warm palette',
+      colors: ['#8B4513', '#CD853F', '#DEB887', '#F5DEB3']
+    }
+  ])
 
-  const templates = [
-    { id: 'modern', name: 'Modern Minimal', description: 'Clean and professional' },
-    { id: 'nature', name: 'Nature Harmony', description: 'Earth tones and organic feel' },
-    { id: 'cosmic', name: 'Cosmic Energy', description: 'Space-inspired design' },
-    { id: 'forest', name: 'Forest Shield', description: 'Green protection theme' },
-    { id: 'ocean', name: 'Ocean Depths', description: 'Deep blue serenity' }
-  ]
-
-  const applyTemplate = (templateId: string) => {
+  const handleLockToggle = useCallback(() => {
     if (isLocked) {
-      toast.error('Visual controls are locked')
+      setIsLocked(false)
+      toast.info('🔓 Visual controls unlocked - You can now make changes')
+    } else {
+      setIsLocked(true)
+      toast.success('🔒 Visual controls locked - Settings are protected')
+    }
+    setDesignHistory(prev => [`🔒 Controls ${isLocked ? 'unlocked' : 'locked'}`, ...prev.slice(0, 4)])
+  }, [isLocked])
+
+  const applyPalette = useCallback((palette: ColorPalette) => {
+    if (isLocked) {
+      toast.error('Cannot apply palette - controls are locked')
       return
     }
-    
-    setSelectedTemplate(templateId)
-    const template = templates.find(t => t.id === templateId)
-    
-    // Apply template styles to document root
-    const root = document.documentElement
-    switch (templateId) {
-      case 'modern':
-        root.style.setProperty('--primary', '0 0% 9%')
-        root.style.setProperty('--primary-foreground', '0 0% 98%')
-        break
-      case 'nature':
-        root.style.setProperty('--primary', '142 76% 36%')
-        root.style.setProperty('--primary-foreground', '355 7% 97%')
-        break
-      case 'cosmic':
-        root.style.setProperty('--primary', '263 70% 50%')
-        root.style.setProperty('--primary-foreground', '210 20% 98%')
-        break
-      case 'forest':
-        root.style.setProperty('--primary', '120 60% 30%')
-        root.style.setProperty('--primary-foreground', '0 0% 100%')
-        break
-      case 'ocean':
-        root.style.setProperty('--primary', '200 100% 40%')
-        root.style.setProperty('--primary-foreground', '0 0% 100%')
-        break
-    }
-    
-    toast.success(`Applied ${template?.name} template`, {
-      description: 'Theme colors and styling updated'
-    })
-  }
 
-  const applyColorPalette = (palette: typeof colorPalettes[0]) => {
+    setSelectedPalette(palette)
+    setCustomColors(palette.colors)
+    setDesignHistory(prev => [`🎨 Applied palette: ${palette.name}`, ...prev.slice(0, 4)])
+    toast.success(`Applied ${palette.name} palette`)
+  }, [isLocked])
+
+  const applyTemplate = useCallback((template: DesignTemplate) => {
     if (isLocked) {
-      toast.error('Visual controls are locked')
+      toast.error('Cannot apply template - controls are locked')
       return
     }
-    
-    const root = document.documentElement
-    const [primary, secondary, accent, background] = palette.colors
-    
-    // Convert hex to HSL and apply
-    root.style.setProperty('--primary', hexToHsl(primary))
-    root.style.setProperty('--secondary', hexToHsl(secondary))
-    root.style.setProperty('--accent', hexToHsl(accent))
-    
-    toast.success(`Applied ${palette.name} color palette`)
-  }
 
-  const hexToHsl = (hex: string) => {
-    const r = parseInt(hex.slice(1, 3), 16) / 255
-    const g = parseInt(hex.slice(3, 5), 16) / 255
-    const b = parseInt(hex.slice(5, 7), 16) / 255
+    setCustomColors(template.colors)
+    setDesignHistory(prev => [`📐 Applied template: ${template.name}`, ...prev.slice(0, 4)])
+    toast.success(`Applied ${template.name} template`)
+  }, [isLocked])
 
-    const max = Math.max(r, g, b)
-    const min = Math.min(r, g, b)
-    let h = 0, s = 0, l = (max + min) / 2
-
-    if (max !== min) {
-      const d = max - min
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
-      
-      switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break
-        case g: h = (b - r) / d + 2; break
-        case b: h = (r - g) / d + 4; break
-      }
-      h /= 6
+  const generateAIPalette = useCallback(() => {
+    if (isLocked) {
+      toast.error('Cannot generate AI palette - controls are locked')
+      return
     }
 
-    return `${Math.round(h * 360)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`
-  }
-
-  const generateColorPalette = () => {
-    if (isLocked) return
+    // Simulate AI palette generation
+    const aiColors = [
+      `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`,
+      `hsl(${Math.floor(Math.random() * 360)}, 60%, 60%)`,
+      `hsl(${Math.floor(Math.random() * 360)}, 80%, 45%)`,
+      `hsl(${Math.floor(Math.random() * 360)}, 65%, 55%)`
+    ]
     
-    // Generate random HSL colors
-    const colors = []
-    for (let i = 0; i < 4; i++) {
-      const h = Math.floor(Math.random() * 360)
-      const s = Math.floor(Math.random() * 50) + 50 // 50-100%
-      const l = Math.floor(Math.random() * 40) + 30 // 30-70%
-      colors.push(`hsl(${h}, ${s}%, ${l}%)`)
-    }
-    
-    const newPalette = {
-      name: 'Generated Palette',
-      colors: colors.map(hsl => {
-        // Convert HSL back to hex for display
-        const [h, s, l] = hsl.match(/\d+/g)?.map(Number) || [0, 0, 0]
-        return hslToHex(h, s, l)
-      })
-    }
-    
-    applyColorPalette(newPalette)
-    toast.success('Generated new color palette based on current design')
-  }
+    setCustomColors(aiColors)
+    setDesignHistory(prev => [`🤖 Generated AI color palette`, ...prev.slice(0, 4)])
+    toast.success('AI palette generated successfully!')
+  }, [isLocked])
 
-  const hslToHex = (h: number, s: number, l: number) => {
-    l /= 100
-    const a = s * Math.min(l, 1 - l) / 100
-    const f = (n: number) => {
-      const k = (n + h / 30) % 12
-      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1)
-      return Math.round(255 * color).toString(16).padStart(2, '0')
+  const randomizePalette = useCallback(() => {
+    if (isLocked) {
+      toast.error('Cannot randomize palette - controls are locked')
+      return
     }
-    return `#${f(0)}${f(8)}${f(4)}`
-  }
 
-  const exportDesign = () => {
+    const randomPalette = colorPalettes[Math.floor(Math.random() * colorPalettes.length)]
+    applyPalette(randomPalette)
+  }, [isLocked, colorPalettes, applyPalette])
+
+  const saveDesign = useCallback(() => {
     const designData = {
-      template: selectedTemplate,
-      customCSS,
-      backgroundIntensity,
-      animationSpeed,
-      fontSize,
-      spacing,
-      particleEffects,
-      smoothTransitions,
+      colors: customColors,
+      hue,
+      saturation,
+      lightness,
+      contrast,
       timestamp: new Date().toISOString()
     }
     
-    const blob = new Blob([JSON.stringify(designData, null, 2)], {
-      type: 'application/json'
-    })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `gaia-design-${Date.now()}.json`
-    a.click()
-    URL.revokeObjectURL(url)
-    
-    toast.success('Design exported successfully')
-  }
+    setDesignHistory(prev => [`💾 Design saved to local storage`, ...prev.slice(0, 4)])
+    toast.success('Design saved successfully!')
+  }, [customColors, hue, saturation, lightness, contrast])
 
-  const importDesign = () => {
-    const input = document.createElement('input')
-    input.type = 'file'
-    input.accept = '.json'
-    input.onchange = (e) => {
-      const file = (e.target as HTMLInputElement).files?.[0]
-      if (!file) return
-      
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        try {
-          const designData = JSON.parse(e.target?.result as string)
-          setSelectedTemplate(designData.template || '')
-          setCustomCSS(designData.customCSS || '')
-          setBackgroundIntensity(designData.backgroundIntensity || 50)
-          setAnimationSpeed(designData.animationSpeed || 1)
-          setFontSize(designData.fontSize || 16)
-          setSpacing(designData.spacing || 16)
-          setParticleEffects(designData.particleEffects ?? true)
-          setSmoothTransitions(designData.smoothTransitions ?? true)
-          
-          toast.success('Design imported successfully')
-        } catch (error) {
-          toast.error('Failed to import design file')
-        }
+  const exportDesign = useCallback(() => {
+    const designData = {
+      colors: customColors,
+      hue,
+      saturation,
+      lightness,
+      contrast,
+      palette: selectedPalette?.name || 'Custom'
+    }
+
+    const dataStr = JSON.stringify(designData, null, 2)
+    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr)
+    
+    const exportFileDefaultName = 'visual-design.json'
+    const linkElement = document.createElement('a')
+    linkElement.setAttribute('href', dataUri)
+    linkElement.setAttribute('download', exportFileDefaultName)
+    linkElement.click()
+
+    setDesignHistory(prev => [`📤 Design exported as JSON`, ...prev.slice(0, 4)])
+    toast.success('Design exported successfully!')
+  }, [customColors, hue, saturation, lightness, contrast, selectedPalette])
+
+  const importDesign = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    if (isLocked) {
+      toast.error('Cannot import design - controls are locked')
+      return
+    }
+
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      try {
+        const designData = JSON.parse(e.target?.result as string)
+        setCustomColors(designData.colors || customColors)
+        setHue(designData.hue || hue)
+        setSaturation(designData.saturation || saturation)
+        setLightness(designData.lightness || lightness)
+        setContrast(designData.contrast || contrast)
+        
+        setDesignHistory(prev => [`📁 Design imported from file`, ...prev.slice(0, 4)])
+        toast.success('Design imported successfully!')
+      } catch (error) {
+        toast.error('Failed to import design - invalid file format')
       }
-      reader.readAsText(file)
     }
-    input.click()
-  }
-
-  const previewChanges = () => {
-    const root = document.documentElement
-    root.style.setProperty('--font-size-base', `${fontSize}px`)
-    root.style.setProperty('--spacing-base', `${spacing}px`)
-    
-    if (customCSS) {
-      let styleElement = document.getElementById('custom-preview-styles')
-      if (!styleElement) {
-        styleElement = document.createElement('style')
-        styleElement.id = 'custom-preview-styles'
-        document.head.appendChild(styleElement)
-      }
-      styleElement.textContent = customCSS
-    }
-    
-    toast.success('Changes previewed successfully', {
-      description: 'Your customizations are now visible'
-    })
-  }
-
-  const applyAnimationSettings = () => {
-    const root = document.documentElement
-    root.style.setProperty('--animation-speed', `${animationSpeed}s`)
-    root.style.setProperty('--background-intensity', `${backgroundIntensity}%`)
-    
-    // Toggle particle effects
-    const particleElements = document.querySelectorAll('.particle-effect')
-    particleElements.forEach(el => {
-      (el as HTMLElement).style.display = particleEffects ? 'block' : 'none'
-    })
-    
-    // Apply smooth transitions
-    if (smoothTransitions) {
-      root.style.setProperty('--transition-duration', '0.3s')
-    } else {
-      root.style.setProperty('--transition-duration', '0s')
-    }
-    
-    toast.success('Animation settings applied')
-  }
+    reader.readAsText(file)
+  }, [isLocked, customColors, hue, saturation, lightness, contrast])
 
   return (
     <div className="space-y-6">
-      <Tabs defaultValue="backgrounds" className="w-full">
-        <TabsList className="grid w-full grid-cols-7">
-          <TabsTrigger value="backgrounds">Backgrounds</TabsTrigger>
-          <TabsTrigger value="library">Library</TabsTrigger>
-          <TabsTrigger value="art-studio">Art Studio</TabsTrigger>
-          <TabsTrigger value="design">Templates</TabsTrigger>
-          <TabsTrigger value="colors">Colors</TabsTrigger>
-          <TabsTrigger value="animation">Animation</TabsTrigger>
-          <TabsTrigger value="advanced">Advanced</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="backgrounds" className="space-y-4">
-          <AdvancedBackgroundControls isLocked={isLocked} />
-        </TabsContent>
-
-        <TabsContent value="library" className="space-y-4">
-          <DesignLibrary isLocked={isLocked} />
-        </TabsContent>
-
-        <TabsContent value="art-studio" className="space-y-4">
-          <ArtStudio isLocked={isLocked} />
-        </TabsContent>
-
-        <TabsContent value="design" className="space-y-4">
-          <Card className="border-purple-500/20 bg-purple-900/10">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-purple-400">
-                <Wand2 className="h-5 w-5" />
-                Template Designer
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {templates.map((template) => (
-                  <Card 
-                    key={template.id}
-                    className={`cursor-pointer border transition-all ${
-                      selectedTemplate === template.id 
-                        ? 'border-purple-500 bg-purple-900/20' 
-                        : 'border-border hover:border-purple-500/50'
-                    } ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}
-                    onClick={() => !isLocked && applyTemplate(template.id)}
-                  >
-                    <CardContent className="p-4">
-                      <h4 className="font-bold text-purple-400">{template.name}</h4>
-                      <p className="text-sm text-muted-foreground">{template.description}</p>
-                      {selectedTemplate === template.id && (
-                        <Badge className="mt-2 bg-purple-600">Active</Badge>
-                      )}
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-              
-              <div className="flex gap-2">
-                <Button onClick={generateColorPalette} disabled={isLocked}>
-                  <Sparkles className="h-4 w-4 mr-2" />
-                  Generate AI Palette
-                </Button>
-                <Button variant="outline" onClick={exportDesign}>
-                  <Download className="h-4 w-4 mr-2" />
-                  Export Design
-                </Button>
-                <Button variant="outline" onClick={importDesign} disabled={isLocked}>
-                  <Upload className="h-4 w-4 mr-2" />
-                  Import Design
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="colors" className="space-y-4">
-          <Card className="border-green-500/20 bg-green-900/10">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <Palette className="h-5 w-5" />
-                Color Palette Manager
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {colorPalettes.map((palette) => (
-                  <Card 
-                    key={palette.name} 
-                    className={`p-4 cursor-pointer hover:bg-muted/50 ${
-                      isLocked ? 'opacity-60 cursor-not-allowed' : ''
-                    }`}
-                    onClick={() => !isLocked && applyColorPalette(palette)}
-                  >
-                    <h4 className="font-bold mb-2">{palette.name}</h4>
-                    <div className="flex gap-2">
+      <Card className="border-purple-500/30 bg-purple-900/20">
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between text-purple-400">
+            <div className="flex items-center gap-2">
+              <Palette className="h-5 w-5" />
+              🎨 Enhanced Visual Controls
+            </div>
+            <LockToggle isLocked={isLocked} onLockToggle={handleLockToggle} />
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Color Palette Selection */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <Label className="text-lg font-semibold">Color Palettes</Label>
+              <Button onClick={randomizePalette} size="sm" variant="outline" disabled={isLocked}>
+                <Shuffle className="h-4 w-4 mr-2" />
+                Random
+              </Button>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              {colorPalettes.map((palette) => (
+                <Card 
+                  key={palette.id} 
+                  className={`cursor-pointer transition-all border-2 ${
+                    selectedPalette?.id === palette.id ? 'border-purple-400' : 'border-muted'
+                  } ${isLocked ? 'opacity-50 cursor-not-allowed' : 'hover:border-purple-300'}`}
+                  onClick={() => !isLocked && applyPalette(palette)}
+                >
+                  <CardContent className="p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-medium">{palette.name}</span>
+                      {palette.isFavorite && <Heart className="h-4 w-4 text-red-400 fill-current" />}
+                    </div>
+                    <div className="flex gap-1">
                       {palette.colors.map((color, index) => (
                         <div
                           key={index}
-                          className="w-8 h-8 rounded-full border border-border"
+                          className="w-8 h-8 rounded border-2 border-background/20"
                           style={{ backgroundColor: color }}
                         />
                       ))}
                     </div>
-                  </Card>
-                ))}
-              </div>
-              
-              <div className="space-y-2">
-                <Label>Custom Color Generator</Label>
-                <div className="flex gap-2">
-                  <Input 
-                    type="color" 
-                    defaultValue="#22c55e" 
-                    disabled={isLocked}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Custom Color Controls */}
+          <div className="space-y-4">
+            <Label className="text-lg font-semibold">Custom Colors</Label>
+            <div className="grid grid-cols-4 gap-2">
+              {customColors.map((color, index) => (
+                <div key={index} className="space-y-2">
+                  <Input
+                    type="color"
+                    value={color}
                     onChange={(e) => {
                       if (!isLocked) {
-                        const color = e.target.value
-                        const hsl = hexToHsl(color)
-                        document.documentElement.style.setProperty('--primary', hsl)
+                        const newColors = [...customColors]
+                        newColors[index] = e.target.value
+                        setCustomColors(newColors)
                       }
                     }}
-                  />
-                  <Button onClick={generateColorPalette} disabled={isLocked}>
-                    <Copy className="h-4 w-4 mr-2" />
-                    Generate Palette
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="animation" className="space-y-4">
-          <Card className="border-orange-500/20 bg-orange-900/10">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-orange-400">
-                <Zap className="h-5 w-5" />
-                Animation Studio
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label>Animation Speed: {animationSpeed}x</Label>
-                  <Slider
-                    value={[animationSpeed]}
-                    onValueChange={(value) => {
-                      setAnimationSpeed(value[0])
-                      applyAnimationSettings()
-                    }}
-                    max={3}
-                    min={0.1}
-                    step={0.1}
                     disabled={isLocked}
+                    className="w-full h-12 rounded border-2"
                   />
+                  <div className="text-xs text-center text-muted-foreground">
+                    {color}
+                  </div>
                 </div>
-                
-                <div className="space-y-2">
-                  <Label>Background Intensity: {backgroundIntensity}%</Label>
-                  <Slider
-                    value={[backgroundIntensity]}
-                    onValueChange={(value) => {
-                      setBackgroundIntensity(value[0])
-                      applyAnimationSettings()
-                    }}
-                    max={100}
-                    min={0}
-                    step={5}
-                    disabled={isLocked}
-                  />
-                </div>
-                
-                <div className="flex items-center space-x-2">
-                  <Switch 
-                    checked={particleEffects}
-                    onCheckedChange={(checked) => {
-                      setParticleEffects(checked)
-                      applyAnimationSettings()
-                    }}
-                    disabled={isLocked} 
-                  />
-                  <Label>Enable Particle Effects</Label>
-                </div>
-                
-                <div className="flex items-center space-x-2">
-                  <Switch 
-                    checked={smoothTransitions}
-                    onCheckedChange={(checked) => {
-                      setSmoothTransitions(checked)
-                      applyAnimationSettings()
-                    }}
-                    disabled={isLocked} 
-                  />
-                  <Label>Smooth Transitions</Label>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+              ))}
+            </div>
+          </div>
 
-        <TabsContent value="advanced" className="space-y-4">
-          <Card className="border-red-500/20 bg-red-900/10">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-red-400">
-                <Settings className="h-5 w-5" />
-                Advanced Controls
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
+          <Separator />
+
+          {/* Design Templates */}
+          <div className="space-y-4">
+            <Label className="text-lg font-semibold">Design Templates</Label>
+            <div className="grid grid-cols-1 gap-3">
+              {designTemplates.map((template) => (
+                <Card key={template.id} className="border-blue-500/30 bg-blue-900/20">
+                  <CardContent className="p-3">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium text-blue-400">{template.name}</div>
+                        <div className="text-sm text-muted-foreground">{template.preview}</div>
+                      </div>
+                      <div className="flex gap-2">
+                        <div className="flex gap-1">
+                          {template.colors.map((color, index) => (
+                            <div
+                              key={index}
+                              className="w-4 h-4 rounded border border-background/20"
+                              style={{ backgroundColor: color }}
+                            />
+                          ))}
+                        </div>
+                        <Button 
+                          size="sm" 
+                          onClick={() => applyTemplate(template)}
+                          disabled={isLocked}
+                        >
+                          Apply
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Advanced Color Controls */}
+          <div className="space-y-4">
+            <Label className="text-lg font-semibold">Advanced Color Controls</Label>
+            <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Custom CSS</Label>
-                <Textarea
-                  placeholder="Enter custom CSS rules here..."
-                  value={customCSS}
-                  onChange={(e) => setCustomCSS(e.target.value)}
-                  disabled={isLocked}
-                  rows={6}
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label>Typography Scale: {fontSize}px</Label>
+                <Label>Hue: {hue}°</Label>
                 <Slider
-                  value={[fontSize]}
-                  onValueChange={(value) => setFontSize(value[0])}
-                  max={24}
-                  min={12}
+                  value={[hue]}
+                  onValueChange={(value) => !isLocked && setHue(value[0])}
+                  max={360}
+                  min={0}
                   step={1}
                   disabled={isLocked}
                 />
               </div>
-              
               <div className="space-y-2">
-                <Label>Spacing Scale: {spacing}px</Label>
+                <Label>Saturation: {saturation}%</Label>
                 <Slider
-                  value={[spacing]}
-                  onValueChange={(value) => setSpacing(value[0])}
-                  max={32}
-                  min={8}
-                  step={2}
+                  value={[saturation]}
+                  onValueChange={(value) => !isLocked && setSaturation(value[0])}
+                  max={100}
+                  min={0}
+                  step={1}
                   disabled={isLocked}
                 />
               </div>
-              
-              <div className="flex gap-2">
-                <Button variant="outline" onClick={importDesign} disabled={isLocked}>
-                  <Upload className="h-4 w-4 mr-2" />
-                  Import Design
-                </Button>
-                <Button variant="outline" onClick={previewChanges} disabled={isLocked}>
-                  <Eye className="h-4 w-4 mr-2" />
-                  Preview Changes
-                </Button>
-                <Button onClick={exportDesign}>
-                  <Download className="h-4 w-4 mr-2" />
-                  Export Current
-                </Button>
+              <div className="space-y-2">
+                <Label>Lightness: {lightness}%</Label>
+                <Slider
+                  value={[lightness]}
+                  onValueChange={(value) => !isLocked && setLightness(value[0])}
+                  max={100}
+                  min={0}
+                  step={1}
+                  disabled={isLocked}
+                />
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+              <div className="space-y-2">
+                <Label>Contrast: {contrast}%</Label>
+                <Slider
+                  value={[contrast]}
+                  onValueChange={(value) => !isLocked && setContrast(value[0])}
+                  max={100}
+                  min={0}
+                  step={1}
+                  disabled={isLocked}
+                />
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-2 justify-between">
+            <div className="flex gap-2">
+              <Button onClick={generateAIPalette} disabled={isLocked} className="bg-purple-600 hover:bg-purple-700">
+                <Wand2 className="h-4 w-4 mr-2" />
+                AI Palette
+              </Button>
+              <Button onClick={saveDesign} variant="outline">
+                <Save className="h-4 w-4 mr-2" />
+                Save Design
+              </Button>
+            </div>
+
+            <div className="flex gap-2">
+              <Button onClick={exportDesign} variant="outline">
+                <Download className="h-4 w-4 mr-2" />
+                Export
+              </Button>
+              <Button onClick={() => document.getElementById('design-import')?.click()} variant="outline" disabled={isLocked}>
+                <Upload className="h-4 w-4 mr-2" />
+                Import
+              </Button>
+              <input
+                id="design-import"
+                type="file"
+                accept=".json"
+                onChange={importDesign}
+                className="hidden"
+              />
+            </div>
+          </div>
+
+          {/* Design History */}
+          {designHistory.length > 0 && (
+            <Card className="border-green-500/30 bg-green-900/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-green-400 text-lg">
+                  <RefreshCw className="h-5 w-5" />
+                  Recent Design Actions
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-1 max-h-32 overflow-y-auto">
+                  {designHistory.map((entry, index) => (
+                    <div key={index} className="text-sm text-muted-foreground bg-background/30 p-2 rounded">
+                      {entry}
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </CardContent>
+      </Card>
     </div>
   )
 }

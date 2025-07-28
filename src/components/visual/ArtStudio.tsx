@@ -31,7 +31,7 @@ interface ArtLayer {
 }
 
 export function ArtStudio() {
-  const [fabricCanvas, setFabricCanvas] = useState<fabric.Canvas | null>(null)
+  const [fabricCanvas, setFabricCanvas] = useState<any>(null)
   const [activeTool, setActiveTool] = useState('brush')
   const [selectedColor, setSelectedColor] = useState('#000000')
   const [brushSize, setBrushSize] = useState(5)
@@ -49,7 +49,8 @@ export function ArtStudio() {
 
     try {
       // Import Canvas from fabric dynamically
-      import('fabric').then(({ Canvas, PencilBrush }) => {
+      import('fabric').then((fabricModule) => {
+        const { Canvas, PencilBrush } = fabricModule
         const canvas = new Canvas(canvasRef.current!, {
           width: 800,
           height: 600,
@@ -109,7 +110,7 @@ export function ArtStudio() {
     fabricCanvas.clear()
     fabricCanvas.backgroundColor = '#ffffff'
     setArtHistory(prev => ['🎨 Canvas cleared', ...prev.slice(0, 4)])
-    toast.warn('Canvas cleared')
+    toast.error('Canvas cleared')
   }
 
   const saveArtwork = () => {
@@ -158,13 +159,15 @@ export function ArtStudio() {
     reader.onload = (event: ProgressEvent<FileReader>) => {
       if (!event.target || typeof event.target.result !== 'string') return
 
-      fabric.Image.fromURL(event.target.result, (img) => {
-        img.scaleToWidth(fabricCanvas.width!)
-        img.scaleToHeight(fabricCanvas.height!)
-        fabricCanvas.add(img)
-        fabricCanvas.renderAll()
-        setArtHistory(prev => ['🖼️ Image imported onto canvas', ...prev.slice(0, 4)])
-        toast.success('Image imported successfully!')
+      import('fabric').then((fabricModule) => {
+        fabricModule.FabricImage.fromURL(event.target!.result as string).then((img) => {
+          img.scaleToWidth(fabricCanvas.width!)
+          img.scaleToHeight(fabricCanvas.height!)
+          fabricCanvas.add(img)
+          fabricCanvas.renderAll()
+          setArtHistory(prev => ['🖼️ Image imported onto canvas', ...prev.slice(0, 4)])
+          toast.success('Image imported successfully!')
+        })
       })
     }
 
