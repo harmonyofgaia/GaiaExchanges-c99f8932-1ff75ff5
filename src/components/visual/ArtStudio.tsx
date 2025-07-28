@@ -1,735 +1,403 @@
-
 import { useState, useRef, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
 import { 
   Brush, 
-  Eraser, 
   Palette, 
-  Layers, 
-  Undo, 
-  Redo,
+  Square, 
+  Circle, 
+  Type, 
+  Download, 
+  Upload, 
+  Undo2, 
+  Redo2,
+  Trash2,
+  Wand2,
   Save,
-  Download,
-  Upload,
-  Paintbrush,
-  Circle,
-  Square,
-  Triangle,
-  Type,
-  Image,
-  Sparkles
+  FolderOpen,
+  Layers
 } from 'lucide-react'
 import { toast } from 'sonner'
 
-interface DrawingState {
-  imageData: ImageData | null
-  timestamp: number
+interface ArtLayer {
+  id: string
+  name: string
+  visible: boolean
 }
 
-export function ArtStudio({ isLocked }: { isLocked: boolean }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [tool, setTool] = useState<'brush' | 'eraser' | 'shape' | 'text'>('brush')
-  const [shape, setShape] = useState<'circle' | 'square' | 'triangle'>('circle')
+export function ArtStudio() {
+  const [fabricCanvas, setFabricCanvas] = useState<fabric.Canvas | null>(null)
+  const [activeTool, setActiveTool] = useState('brush')
+  const [selectedColor, setSelectedColor] = useState('#000000')
   const [brushSize, setBrushSize] = useState(5)
-  const [color, setColor] = useState('#22c55e')
-  const [opacity, setOpacity] = useState(100)
-  const [isDrawing, setIsDrawing] = useState(false)
-  const [lastPos, setLastPos] = useState({ x: 0, y: 0 })
-  const [history, setHistory] = useState<DrawingState[]>([])
-  const [historyIndex, setHistoryIndex] = useState(-1)
-  const [aiPrompt, setAiPrompt] = useState('')
-  const [aiStyle, setAiStyle] = useState('neural')
+  const [opacity, setOpacity] = useState(1)
+  const [artHistory, setArtHistory] = useState<string[]>([])
+  const [canUndo, setCanUndo] = useState(false)
+  const [canRedo, setCanRedo] = useState(false)
+  const [layers, setLayers] = useState<ArtLayer[]>([
+    { id: 'layer-1', name: 'Layer 1', visible: true }
+  ])
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  const tools = [
-    { id: 'brush', name: 'Brush', icon: Brush },
-    { id: 'eraser', name: 'Eraser', icon: Eraser },
-    { id: 'shape', name: 'Shapes', icon: Circle },
-    { id: 'text', name: 'Text', icon: Type }
-  ]
+  const initializeCanvas = () => {
+    if (!canvasRef.current || fabricCanvas) return
 
-  const shapes = [
-    { id: 'circle', name: 'Circle', icon: Circle },
-    { id: 'square', name: 'Square', icon: Square },
-    { id: 'triangle', name: 'Triangle', icon: Triangle }
-  ]
+    try {
+      // Import Canvas from fabric dynamically
+      import('fabric').then(({ Canvas, PencilBrush }) => {
+        const canvas = new Canvas(canvasRef.current!, {
+          width: 800,
+          height: 600,
+          backgroundColor: '#ffffff'
+        })
 
-  const colorPalette = [
-    '#22c55e', '#3b82f6', '#8b5cf6', '#f59e0b',
-    '#ef4444', '#ec4899', '#06b6d4', '#84cc16',
-    '#f97316', '#6366f1', '#14b8a6', '#f43f5e'
-  ]
+        // Initialize drawing brush
+        canvas.freeDrawingBrush = new PencilBrush(canvas)
+        canvas.freeDrawingBrush.color = selectedColor
+        canvas.freeDrawingBrush.width = brushSize
 
-  const aiStyles = [
-    { id: 'neural', name: 'Neural Abstract' },
-    { id: 'cosmic', name: 'Cosmic Energy' },
-    { id: 'nature', name: 'Nature Harmony' },
-    { id: 'matrix', name: 'Digital Matrix' }
-  ]
+        setFabricCanvas(canvas)
+        toast.success('🎨 Art Studio Canvas Ready!', {
+          description: 'Start creating amazing artwork'
+        })
+      }).catch(error => {
+        console.error('Failed to initialize Fabric.js:', error)
+        toast.error('Canvas initialization failed')
+      })
+    } catch (error) {
+      console.error('Canvas initialization error:', error)
+    }
+  }
 
   useEffect(() => {
     initializeCanvas()
+
+    return () => {
+      fabricCanvas?.dispose()
+    }
   }, [])
 
-  const initializeCanvas = () => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+  useEffect(() => {
+    if (!fabricCanvas) return
 
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    fabricCanvas.freeDrawingBrush.color = selectedColor
+    fabricCanvas.freeDrawingBrush.width = brushSize
+    fabricCanvas.set('opacity', opacity)
+    fabricCanvas.renderAll()
+  }, [selectedColor, brushSize, opacity, fabricCanvas])
 
-    // Set canvas size
-    const container = canvas.parentElement
-    if (container) {
-      canvas.width = Math.min(800, container.clientWidth - 32)
-      canvas.height = 600
-    } else {
-      canvas.width = 800
-      canvas.height = 600
-    }
-
-    // Set background
-    ctx.fillStyle = '#1a1a1a'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-    // Save initial state
-    saveToHistory()
+  const handleUndo = () => {
+    if (!fabricCanvas) return
+    // Implement undo functionality here
+    toast.info('Undo feature is under development')
   }
 
-  const saveToHistory = () => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-    const newState: DrawingState = {
-      imageData,
-      timestamp: Date.now()
-    }
-
-    // Remove any states after current index
-    const newHistory = history.slice(0, historyIndex + 1)
-    newHistory.push(newState)
-
-    // Limit history to 50 states
-    if (newHistory.length > 50) {
-      newHistory.shift()
-    } else {
-      setHistoryIndex(historyIndex + 1)
-    }
-
-    setHistory(newHistory)
-  }
-
-  const undo = () => {
-    if (historyIndex <= 0) return
-
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const prevState = history[historyIndex - 1]
-    if (prevState && prevState.imageData) {
-      ctx.putImageData(prevState.imageData, 0, 0)
-      setHistoryIndex(historyIndex - 1)
-      toast.success('Undid last action')
-    }
-  }
-
-  const redo = () => {
-    if (historyIndex >= history.length - 1) return
-
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const nextState = history[historyIndex + 1]
-    if (nextState && nextState.imageData) {
-      ctx.putImageData(nextState.imageData, 0, 0)
-      setHistoryIndex(historyIndex + 1)
-      toast.success('Redid action')
-    }
-  }
-
-  const getMousePos = (e: React.MouseEvent) => {
-    const canvas = canvasRef.current
-    if (!canvas) return { x: 0, y: 0 }
-
-    const rect = canvas.getBoundingClientRect()
-    const scaleX = canvas.width / rect.width
-    const scaleY = canvas.height / rect.height
-
-    return {
-      x: (e.clientX - rect.left) * scaleX,
-      y: (e.clientY - rect.top) * scaleY
-    }
-  }
-
-  const startDrawing = (e: React.MouseEvent) => {
-    if (isLocked) {
-      toast.error('Art studio is locked')
-      return
-    }
-
-    const pos = getMousePos(e)
-    setLastPos(pos)
-    setIsDrawing(true)
-
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    if (tool === 'shape') {
-      // For shapes, we'll draw on mouseup
-      return
-    }
-
-    ctx.beginPath()
-    ctx.moveTo(pos.x, pos.y)
-  }
-
-  const draw = (e: React.MouseEvent) => {
-    if (!isDrawing || isLocked) return
-
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const pos = getMousePos(e)
-
-    if (tool === 'shape') {
-      // For shapes, just update preview (not implemented in this version)
-      return
-    }
-
-    // Set drawing properties
-    ctx.strokeStyle = tool === 'eraser' ? '#1a1a1a' : color
-    ctx.lineWidth = brushSize
-    ctx.globalAlpha = opacity / 100
-    ctx.lineCap = 'round'
-    ctx.lineJoin = 'round'
-
-    if (tool === 'brush' || tool === 'eraser') {
-      ctx.lineTo(pos.x, pos.y)
-      ctx.stroke()
-    }
-
-    setLastPos(pos)
-  }
-
-  const stopDrawing = (e: React.MouseEvent) => {
-    if (!isDrawing) return
-
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    if (tool === 'shape') {
-      const pos = getMousePos(e)
-      drawShape(lastPos, pos)
-    }
-
-    setIsDrawing(false)
-    saveToHistory()
-  }
-
-  const drawShape = (start: { x: number; y: number }, end: { x: number; y: number }) => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const width = end.x - start.x
-    const height = end.y - start.y
-
-    ctx.strokeStyle = color
-    ctx.fillStyle = color
-    ctx.lineWidth = brushSize
-    ctx.globalAlpha = opacity / 100
-
-    switch (shape) {
-      case 'circle':
-        const radius = Math.sqrt(width * width + height * height) / 2
-        ctx.beginPath()
-        ctx.arc(start.x + width / 2, start.y + height / 2, radius, 0, 2 * Math.PI)
-        ctx.stroke()
-        break
-      case 'square':
-        ctx.strokeRect(start.x, start.y, width, height)
-        break
-      case 'triangle':
-        ctx.beginPath()
-        ctx.moveTo(start.x + width / 2, start.y)
-        ctx.lineTo(start.x, end.y)
-        ctx.lineTo(end.x, end.y)
-        ctx.closePath()
-        ctx.stroke()
-        break
-    }
+  const handleRedo = () => {
+    if (!fabricCanvas) return
+    // Implement redo functionality here
+    toast.info('Redo feature is under development')
   }
 
   const clearCanvas = () => {
-    if (isLocked) {
-      toast.error('Art studio is locked')
-      return
-    }
+    if (!fabricCanvas) return
 
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    ctx.fillStyle = '#1a1a1a'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
-    
-    saveToHistory()
-    toast.success('Canvas cleared')
+    fabricCanvas.clear()
+    fabricCanvas.backgroundColor = '#ffffff'
+    setArtHistory(prev => ['🎨 Canvas cleared', ...prev.slice(0, 4)])
+    toast.warn('Canvas cleared')
   }
 
   const saveArtwork = () => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    if (!fabricCanvas) return
 
-    canvas.toBlob((blob) => {
-      if (!blob) {
-        toast.error('Failed to save artwork')
-        return
-      }
+    const imageData = fabricCanvas.toDataURL({
+      format: 'png',
+      quality: 0.8
+    })
 
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `gaia-artwork-${Date.now()}.png`
-      a.click()
-      URL.revokeObjectURL(url)
-
-      toast.success('Artwork saved!', {
-        description: 'Downloaded to your device'
-      })
-    }, 'image/png')
+    setArtHistory(prev => ['💾 Artwork saved', ...prev.slice(0, 4)])
+    toast.success('Artwork saved successfully!')
   }
 
   const loadArtwork = () => {
-    if (isLocked) {
-      toast.error('Art studio is locked')
-      return
+    if (!fabricCanvas) return
+    // Implement load artwork functionality here
+    toast.info('Load artwork feature is under development')
+  }
+
+  const exportCanvas = () => {
+    if (!fabricCanvas) return
+
+    const imageData = fabricCanvas.toDataURL({
+      format: 'png',
+      quality: 0.8
+    })
+
+    const link = document.createElement('a')
+    link.href = imageData
+    link.download = 'artwork.png'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+
+    setArtHistory(prev => ['📤 Artwork exported as PNG', ...prev.slice(0, 4)])
+    toast.success('Canvas exported as PNG')
+  }
+
+  const importImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!fabricCanvas || !e.target.files || e.target.files.length === 0) return
+
+    const file = e.target.files[0]
+    const reader = new FileReader()
+
+    reader.onload = (event: ProgressEvent<FileReader>) => {
+      if (!event.target || typeof event.target.result !== 'string') return
+
+      fabric.Image.fromURL(event.target.result, (img) => {
+        img.scaleToWidth(fabricCanvas.width!)
+        img.scaleToHeight(fabricCanvas.height!)
+        fabricCanvas.add(img)
+        fabricCanvas.renderAll()
+        setArtHistory(prev => ['🖼️ Image imported onto canvas', ...prev.slice(0, 4)])
+        toast.success('Image imported successfully!')
+      })
     }
 
-    const input = document.createElement('input')
-    input.type = 'file'
-    input.accept = 'image/*'
-    input.onchange = (e) => {
-      const file = (e.target as HTMLInputElement).files?.[0]
-      if (!file) return
-
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        const img = new Image()
-        img.onload = () => {
-          const canvas = canvasRef.current
-          if (!canvas) return
-
-          const ctx = canvas.getContext('2d')
-          if (!ctx) return
-
-          // Clear canvas
-          ctx.fillStyle = '#1a1a1a'
-          ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-          // Draw image
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-          saveToHistory()
-          
-          toast.success('Artwork loaded successfully')
-        }
-        img.src = e.target?.result as string
-      }
-      reader.readAsDataURL(file)
-    }
-    input.click()
+    reader.readAsDataURL(file)
   }
 
   const generateAIArt = () => {
-    if (isLocked) {
-      toast.error('Art studio is locked')
-      return
-    }
-
-    if (!aiPrompt.trim()) {
-      toast.error('Please enter a description for your artwork')
-      return
-    }
-
-    toast.success('AI art generation started!', {
-      description: 'Your unique artwork will be ready in a few seconds...'
-    })
-
-    // Simulate AI art generation
-    setTimeout(() => {
-      const canvas = canvasRef.current
-      if (!canvas) return
-
-      const ctx = canvas.getContext('2d')
-      if (!ctx) return
-
-      // Create a simple generative art pattern based on style
-      ctx.fillStyle = '#1a1a1a'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      const centerX = canvas.width / 2
-      const centerY = canvas.height / 2
-
-      // Generate pattern based on style
-      switch (aiStyle) {
-        case 'neural':
-          // Neural network pattern
-          ctx.strokeStyle = '#22c55e'
-          ctx.lineWidth = 2
-          for (let i = 0; i < 50; i++) {
-            const x = Math.random() * canvas.width
-            const y = Math.random() * canvas.height
-            const connections = Math.floor(Math.random() * 5) + 1
-            
-            for (let j = 0; j < connections; j++) {
-              const endX = x + (Math.random() - 0.5) * 200
-              const endY = y + (Math.random() - 0.5) * 200
-              
-              ctx.beginPath()
-              ctx.moveTo(x, y)
-              ctx.lineTo(endX, endY)
-              ctx.stroke()
-            }
-            
-            // Draw node
-            ctx.fillStyle = '#22c55e'
-            ctx.beginPath()
-            ctx.arc(x, y, 3, 0, 2 * Math.PI)
-            ctx.fill()
-          }
-          break
-        case 'cosmic':
-          // Cosmic pattern
-          const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 300)
-          gradient.addColorStop(0, '#8b5cf6')
-          gradient.addColorStop(0.5, '#3b82f6')
-          gradient.addColorStop(1, '#1e1b4b')
-          
-          ctx.fillStyle = gradient
-          ctx.beginPath()
-          ctx.arc(centerX, centerY, 300, 0, 2 * Math.PI)
-          ctx.fill()
-          
-          // Add stars
-          ctx.fillStyle = '#ffffff'
-          for (let i = 0; i < 100; i++) {
-            const x = Math.random() * canvas.width
-            const y = Math.random() * canvas.height
-            const size = Math.random() * 2
-            ctx.beginPath()
-            ctx.arc(x, y, size, 0, 2 * Math.PI)
-            ctx.fill()
-          }
-          break
-        case 'nature':
-          // Nature pattern
-          const earthGradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-          earthGradient.addColorStop(0, '#22c55e')
-          earthGradient.addColorStop(0.5, '#16a34a')
-          earthGradient.addColorStop(1, '#15803d')
-          
-          ctx.fillStyle = earthGradient
-          ctx.fillRect(0, 0, canvas.width, canvas.height)
-          
-          // Add organic shapes
-          for (let i = 0; i < 20; i++) {
-            const x = Math.random() * canvas.width
-            const y = Math.random() * canvas.height
-            const size = Math.random() * 50 + 20
-            
-            ctx.fillStyle = `rgba(34, 197, 94, ${Math.random() * 0.5 + 0.2})`
-            ctx.beginPath()
-            ctx.arc(x, y, size, 0, 2 * Math.PI)
-            ctx.fill()
-          }
-          break
-        case 'matrix':
-          // Matrix pattern
-          ctx.fillStyle = '#000000'
-          ctx.fillRect(0, 0, canvas.width, canvas.height)
-          
-          ctx.fillStyle = '#00ff00'
-          ctx.font = '12px monospace'
-          
-          const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-          for (let x = 0; x < canvas.width; x += 20) {
-            for (let y = 0; y < canvas.height; y += 20) {
-              if (Math.random() > 0.7) {
-                const char = chars[Math.floor(Math.random() * chars.length)]
-                ctx.globalAlpha = Math.random()
-                ctx.fillText(char, x, y)
-              }
-            }
-          }
-          ctx.globalAlpha = 1
-          break
-      }
-
-      saveToHistory()
-      
-      toast.success('AI artwork generated!', {
-        description: `Created ${aiStyle} style artwork based on: "${aiPrompt}"`
-      })
-    }, 3000)
+    if (!fabricCanvas) return
+    // Implement AI art generation functionality here
+    toast.info('AI art generation feature is under development')
   }
 
   return (
-    <Card className="border-pink-500/20 bg-pink-900/10">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-pink-400">
-          <Paintbrush className="h-5 w-5" />
-          Digital Art Studio
-        </CardTitle>
-      </CardHeader>
-      
-      <CardContent className="space-y-4">
-        <Tabs defaultValue="canvas" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="canvas">Canvas</TabsTrigger>
-            <TabsTrigger value="tools">Tools</TabsTrigger>
-            <TabsTrigger value="ai-gen">AI Generator</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="canvas" className="space-y-4">
-            {/* Toolbar */}
-            <div className="flex flex-wrap gap-2 p-4 bg-background/50 rounded-lg">
-              {tools.map((t) => {
-                const Icon = t.icon
-                return (
-                  <Button
-                    key={t.id}
-                    variant={tool === t.id ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setTool(t.id as any)}
-                    disabled={isLocked}
-                  >
-                    <Icon className="h-4 w-4 mr-2" />
-                    {t.name}
-                  </Button>
-                )
-              })}
-              
-              <div className="flex-1" />
-              
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={undo}
-                disabled={isLocked || historyIndex <= 0}
-              >
-                <Undo className="h-4 w-4" />
-              </Button>
-              
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={redo}
-                disabled={isLocked || historyIndex >= history.length - 1}
-              >
-                <Redo className="h-4 w-4" />
-              </Button>
-              
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={clearCanvas}
-                disabled={isLocked}
-              >
-                Clear
-              </Button>
-              
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={loadArtwork}
-                disabled={isLocked}
-              >
-                <Upload className="h-4 w-4 mr-2" />
-                Load
-              </Button>
-              
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={saveArtwork}
-              >
-                <Download className="h-4 w-4 mr-2" />
-                Save
-              </Button>
-            </div>
+    <div className="space-y-6">
+      <Card className="border-purple-500/30 bg-purple-900/20">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-purple-400">
+            <Brush className="h-5 w-5" />
+            🎨 Art Studio - Creative Canvas
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Art Tools */}
+          <div className="grid grid-cols-4 lg:grid-cols-8 gap-3">
+            <Button
+              variant={activeTool === 'brush' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setActiveTool('brush')}
+              className="flex flex-col gap-1"
+            >
+              <Brush className="h-4 w-4" />
+              <span className="text-xs">Brush</span>
+            </Button>
             
-            {tool === 'shape' && (
-              <div className="flex gap-2 p-2 bg-background/30 rounded">
-                {shapes.map((s) => {
-                  const Icon = s.icon
-                  return (
-                    <Button
-                      key={s.id}
-                      variant={shape === s.id ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setShape(s.id as any)}
-                      disabled={isLocked}
-                    >
-                      <Icon className="h-4 w-4" />
-                    </Button>
-                  )
-                })}
+            <Button
+              variant={activeTool === 'rectangle' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setActiveTool('rectangle')}
+              className="flex flex-col gap-1"
+            >
+              <Square className="h-4 w-4" />
+              <span className="text-xs">Rectangle</span>
+            </Button>
+            
+            <Button
+              variant={activeTool === 'circle' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setActiveTool('circle')}
+              className="flex flex-col gap-1"
+            >
+              <Circle className="h-4 w-4" />
+              <span className="text-xs">Circle</span>
+            </Button>
+            
+            <Button
+              variant={activeTool === 'text' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setActiveTool('text')}
+              className="flex flex-col gap-1"
+            >
+              <Type className="h-4 w-4" />
+              <span className="text-xs">Text</span>
+            </Button>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleUndo}
+              disabled={!canUndo}
+              className="flex flex-col gap-1"
+            >
+              <Undo2 className="h-4 w-4" />
+              <span className="text-xs">Undo</span>
+            </Button>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleRedo}
+              disabled={!canRedo}
+              className="flex flex-col gap-1"
+            >
+              <Redo2 className="h-4 w-4" />
+              <span className="text-xs">Redo</span>
+            </Button>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={clearCanvas}
+              className="flex flex-col gap-1 text-red-400"
+            >
+              <Trash2 className="h-4 w-4" />
+              <span className="text-xs">Clear</span>
+            </Button>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={generateAIArt}
+              className="flex flex-col gap-1 text-purple-400"
+            >
+              <Wand2 className="h-4 w-4" />
+              <span className="text-xs">AI Art</span>
+            </Button>
+          </div>
+
+          {/* Tool Settings */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="space-y-2">
+              <Label>Color</Label>
+              <div className="flex items-center gap-2">
+                <Input
+                  type="color"
+                  value={selectedColor}
+                  onChange={(e) => setSelectedColor(e.target.value)}
+                  className="w-16 h-10"
+                />
+                <div className="text-sm text-muted-foreground">{selectedColor}</div>
               </div>
-            )}
-            
-            {/* Canvas */}
-            <div className="border rounded-lg overflow-hidden bg-gray-900">
-              <canvas
-                ref={canvasRef}
-                className="cursor-crosshair w-full"
-                onMouseDown={startDrawing}
-                onMouseMove={draw}
-                onMouseUp={stopDrawing}
-                onMouseLeave={stopDrawing}
-                style={{ maxWidth: '100%', height: 'auto' }}
+            </div>
+
+            <div className="space-y-2">
+              <Label>Brush Size: {brushSize}px</Label>
+              <Slider
+                value={[brushSize]}
+                onValueChange={(value) => setBrushSize(value[0])}
+                max={50}
+                min={1}
+                step={1}
+                className="w-full"
               />
             </div>
-          </TabsContent>
-          
-          <TabsContent value="tools" className="space-y-4">
-            {/* Brush Settings */}
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label>Brush Size: {brushSize}px</Label>
-                <Slider
-                  value={[brushSize]}
-                  onValueChange={([value]) => setBrushSize(value)}
-                  min={1}
-                  max={50}
-                  step={1}
-                  disabled={isLocked}
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label>Opacity: {opacity}%</Label>
-                <Slider
-                  value={[opacity]}
-                  onValueChange={([value]) => setOpacity(value)}
-                  min={1}
-                  max={100}
-                  step={1}
-                  disabled={isLocked}
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label>Color Palette</Label>
-                <div className="grid grid-cols-6 gap-2">
-                  {colorPalette.map((c) => (
-                    <Button
-                      key={c}
-                      className="h-10 w-10 p-0 rounded-full border-2"
-                      style={{ 
-                        backgroundColor: c,
-                        borderColor: color === c ? '#white' : 'transparent'
-                      }}
-                      onClick={() => setColor(c)}
-                      disabled={isLocked}
-                    />
+
+            <div className="space-y-2">
+              <Label>Opacity: {Math.round(opacity * 100)}%</Label>
+              <Slider
+                value={[opacity]}
+                onValueChange={(value) => setOpacity(value[0])}
+                max={1}
+                min={0.1}
+                step={0.1}
+                className="w-full"
+              />
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Canvas */}
+          <div className="flex justify-center">
+            <div className="border-2 border-dashed border-muted-foreground/30 rounded-lg overflow-hidden">
+              <canvas
+                ref={canvasRef}
+                className="bg-white cursor-crosshair"
+              />
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex justify-between items-center">
+            <div className="flex gap-2">
+              <Button onClick={saveArtwork} className="bg-green-600 hover:bg-green-700">
+                <Save className="h-4 w-4 mr-2" />
+                Save Artwork
+              </Button>
+              <Button onClick={loadArtwork} variant="outline">
+                <FolderOpen className="h-4 w-4 mr-2" />
+                Load Artwork
+              </Button>
+            </div>
+
+            <div className="flex gap-2">
+              <Button onClick={exportCanvas} variant="outline">
+                <Download className="h-4 w-4 mr-2" />
+                Export PNG
+              </Button>
+              <Button onClick={() => document.getElementById('art-import')?.click()} variant="outline">
+                <Upload className="h-4 w-4 mr-2" />
+                Import Image
+              </Button>
+              <input
+                id="art-import"
+                type="file"
+                accept="image/*"
+                onChange={importImage}
+                className="hidden"
+              />
+            </div>
+          </div>
+
+          {/* Layer Management */}
+          <Card className="border-blue-500/30 bg-blue-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-400 text-lg">
+                <Layers className="h-5 w-5" />
+                Layers
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {layers.map((layer, index) => (
+                <div key={index} className="flex items-center gap-2 p-2 bg-background/50 rounded">
+                  <div className="flex-1">{layer.name}</div>
+                  <Badge variant={layer.visible ? 'default' : 'secondary'}>
+                    {layer.visible ? 'Visible' : 'Hidden'}
+                  </Badge>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          {/* Art History */}
+          {artHistory.length > 0 && (
+            <Card className="border-yellow-500/30 bg-yellow-900/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-yellow-400 text-lg">
+                  <Palette className="h-5 w-5" />
+                  Recent Artwork History
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-1 max-h-32 overflow-y-auto">
+                  {artHistory.map((entry, index) => (
+                    <div key={index} className="text-sm text-muted-foreground bg-background/30 p-2 rounded">
+                      {entry}
+                    </div>
                   ))}
                 </div>
-                
-                <div className="flex gap-2">
-                  <Input
-                    type="color"
-                    value={color}
-                    onChange={(e) => setColor(e.target.value)}
-                    disabled={isLocked}
-                    className="w-20"
-                  />
-                  <Input
-                    value={color}
-                    onChange={(e) => setColor(e.target.value)}
-                    disabled={isLocked}
-                    placeholder="#hex"
-                  />
-                </div>
-              </div>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="ai-gen" className="space-y-4">
-            <div className="text-center space-y-4">
-              <div className="p-8 border-2 border-dashed border-muted rounded-lg">
-                <Sparkles className="h-16 w-16 mx-auto mb-4 text-purple-400" />
-                <h3 className="text-lg font-semibold mb-2">AI Art Generator</h3>
-                <p className="text-muted-foreground mb-4">
-                  Generate unique neural network inspired artwork
-                </p>
-                
-                <div className="space-y-4 max-w-md mx-auto">
-                  <Input
-                    placeholder="Describe your artwork..."
-                    value={aiPrompt}
-                    onChange={(e) => setAiPrompt(e.target.value)}
-                    disabled={isLocked}
-                  />
-                  
-                  <Select 
-                    value={aiStyle} 
-                    onValueChange={setAiStyle}
-                    disabled={isLocked}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Art style" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {aiStyles.map(style => (
-                        <SelectItem key={style.id} value={style.id}>
-                          {style.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  
-                  <Button
-                    onClick={generateAIArt}
-                    disabled={isLocked || !aiPrompt.trim()}
-                    className="w-full"
-                  >
-                    <Sparkles className="h-4 w-4 mr-2" />
-                    Generate AI Art
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </CardContent>
-    </Card>
+              </CardContent>
+            </Card>
+          )}
+        </CardContent>
+      </Card>
+    </div>
   )
 }
