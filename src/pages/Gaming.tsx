@@ -2,7 +2,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import HoverSidebar from '@/components/HoverSidebar'
 import { GameNavigationHub } from '@/components/gaming/GameNavigationHub'
 import { GaiaGameHub } from '@/components/gaming/GaiaGameHub'
 import { EnhancedGamingModes } from '@/components/gaming/EnhancedGamingModes'
@@ -39,9 +38,7 @@ const Gaming = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
-      <HoverSidebar />
-      
-      <div className="ml-16 min-h-screen">
+      <div className="min-h-screen">
         <div className="container mx-auto px-6 py-8 space-y-8">
           {/* Main Gaming Header */}
           <Card className="mb-8 border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
