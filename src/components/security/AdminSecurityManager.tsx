@@ -18,10 +18,12 @@ interface AdminUser {
 interface SecurityEvent {
   id: string
   event_type: string
-  severity: string
+  severity: number
   created_at: string
   event_details: any
-  source_system?: string
+  event_category?: string
+  user_id?: string
+  ip_address?: unknown
 }
 
 export function AdminSecurityManager() {
@@ -60,11 +62,10 @@ export function AdminSecurityManager() {
         .limit(20)
       
       if (error) throw error
-      // Map database fields to match interface
+      // Map database fields to match interface - no source_system field exists
       const mappedEvents = (data || []).map(event => ({
         ...event,
-        source_system: event.source_system || 'system',
-        severity: event.severity?.toString() || 'INFO'
+        severity: Number(event.severity) || 0
       }))
       setSecurityEvents(mappedEvents)
     } catch (error) {
@@ -82,7 +83,7 @@ export function AdminSecurityManager() {
     try {
       // First get the user UUID by email
       const { data: userUuid, error: uuidError } = await supabase
-        .rpc('get_user_uuid_by_email', { user_email: newAdminEmail })
+        .rpc('get_user_uuid_by_email', { p_email: newAdminEmail })
       
       if (uuidError) throw uuidError
 
@@ -274,20 +275,22 @@ export function AdminSecurityManager() {
                   <div className="flex items-center justify-between">
                     <Badge
                       variant={
-                        event.severity === 'HIGH' ? 'destructive' :
-                        event.severity === 'MEDIUM' ? 'default' : 'secondary'
+                        event.severity >= 8 ? 'destructive' :
+                        event.severity >= 5 ? 'default' : 'secondary'
                       }
                     >
-                      {event.severity}
+                      {event.severity >= 8 ? 'HIGH' : event.severity >= 5 ? 'MEDIUM' : 'LOW'}
                     </Badge>
                     <span className="text-xs text-muted-foreground">
                       {new Date(event.created_at).toLocaleString()}
                     </span>
                   </div>
                   <p className="text-sm font-medium">{event.event_type}</p>
-                  <p className="text-xs text-muted-foreground">
-                    Source: {event.source_system}
-                  </p>
+                  {event.event_category && (
+                    <p className="text-xs text-muted-foreground">
+                      Category: {event.event_category}
+                    </p>
+                  )}
                 </div>
               ))}
               {securityEvents.length === 0 && (

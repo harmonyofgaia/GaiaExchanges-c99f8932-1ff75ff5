@@ -54,20 +54,25 @@ export function SystemHealthMonitor() {
       const { data, error } = await supabase.rpc('database_health_check')
       if (error) throw error
 
-      // Ensure data matches HealthMetrics interface
+      // Ensure data matches HealthMetrics interface with proper type casting
       const healthData: HealthMetrics = {
-        total_connections: data?.total_connections || 0,
-        long_queries: data?.long_queries || 0,
-        blocked_queries: data?.blocked_queries || 0,
-        tables_without_pk: data?.tables_without_pk || 0
+        total_connections: Number(data?.total_connections) || 0,
+        long_queries: Number(data?.long_queries) || 0,
+        blocked_queries: Number(data?.blocked_queries) || 0,
+        tables_without_pk: Number(data?.tables_without_pk) || 0
       }
       setCurrentHealth(healthData)
       
-      // Log the health check event
+      // Log the health check event - convert to plain object
       await supabase.rpc('log_comprehensive_security_event', {
         p_event_type: 'HEALTH_CHECK_COMPLETED',
         p_severity: 'INFO',
-        p_event_details: healthData
+        p_event_details: {
+          total_connections: healthData.total_connections,
+          long_queries: healthData.long_queries,
+          blocked_queries: healthData.blocked_queries,
+          tables_without_pk: healthData.tables_without_pk
+        }
       })
 
       toast.success('System health check completed')

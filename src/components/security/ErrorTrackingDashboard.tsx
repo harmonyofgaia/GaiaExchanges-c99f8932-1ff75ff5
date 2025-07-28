@@ -37,7 +37,7 @@ export function ErrorTrackingDashboard() {
       const { data: aggregates, error: aggError } = await supabase
         .rpc('aggregate_errors', {
           p_time_window: selectedTimeWindow,
-          p_severity_threshold: selectedSeverity
+          p_min_severity: selectedSeverity
         })
       
       if (aggError) throw aggError
