@@ -12,7 +12,6 @@ import {
   DollarSign, 
   Download,
   Hammer,
-  Activity,
   Shield,
   User,
   ChevronRight,
@@ -60,7 +59,7 @@ const AppSidebar = () => {
     checkIPAuthorization()
   }, [])
 
-  // Filter menu items based on admin authorization - Dashboard link removed
+  // Filter menu items based on admin authorization - Removed Live Tracking
   const baseMenuItems = [
     { icon: Home, label: 'Galaxy Home', path: '/', category: 'main' },
     { icon: Globe, label: 'Virtual World', path: '/virtual-world', category: 'world' },
@@ -70,7 +69,6 @@ const AppSidebar = () => {
     { icon: Hammer, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
     { icon: Mountain, label: 'Landscape Builder', path: '/landscape-builder', category: 'tools' },
     { icon: Palette, label: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', category: 'tools' },
-    { icon: Activity, label: 'Live Tracking', path: '/live-tracking', category: 'monitoring' },
     { icon: Settings, label: 'Comprehensive Status', path: '/comprehensive-status', category: 'monitoring' },
     { icon: Shield, label: 'Security Overview', path: '/security', category: 'security' },
     { icon: Info, label: 'About GAiA', path: '/about', category: 'info' },
