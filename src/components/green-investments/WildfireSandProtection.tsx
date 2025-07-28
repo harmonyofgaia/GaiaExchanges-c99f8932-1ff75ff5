@@ -14,19 +14,23 @@ import {
   DollarSign,
   AlertTriangle,
   Heart,
-  Globe
+  Globe,
+  Zap,
+  Wind
 } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function WildfireSandProtection() {
   const [projectStats, setProjectStats] = useState({
-    protectedAreas: 15,
-    wildfiresPrevented: 23,
-    sandDunesRestored: 8,
-    volunteersActive: 189,
-    fundingRaised: 145000,
-    currentFunding: 145000,
-    fundingGoal: 500000
+    sandCannonSites: 12,
+    wildfiresPrevented: 47,
+    forestsProtected: 25,
+    volunteersActive: 234,
+    fundingRaised: 275000,
+    currentFunding: 275000,
+    fundingGoal: 800000,
+    sandBlastRange: 2.5, // kilometers
+    cannonCapacity: 15000 // liters per blast
   })
 
   const [subscribed, setSubscribed] = useState(false)
@@ -36,10 +40,11 @@ export function WildfireSandProtection() {
     const interval = setInterval(() => {
       setProjectStats(prev => ({
         ...prev,
-        protectedAreas: prev.protectedAreas + Math.floor(Math.random() * 2),
-        volunteersActive: prev.volunteersActive + Math.floor(Math.random() * 5),
-        currentFunding: Math.min(prev.fundingGoal, prev.currentFunding + Math.floor(Math.random() * 1000)),
-        fundingRaised: prev.fundingRaised + Math.floor(Math.random() * 500)
+        sandCannonSites: prev.sandCannonSites + Math.floor(Math.random() * 2),
+        wildfiresPrevented: prev.wildfiresPrevented + Math.floor(Math.random() * 3),
+        volunteersActive: prev.volunteersActive + Math.floor(Math.random() * 8),
+        currentFunding: Math.min(prev.fundingGoal, prev.currentFunding + Math.floor(Math.random() * 2000)),
+        fundingRaised: prev.fundingRaised + Math.floor(Math.random() * 800)
       }))
     }, 8000)
 
@@ -48,10 +53,10 @@ export function WildfireSandProtection() {
 
   const handleSubscribe = () => {
     setSubscribed(!subscribed)
-    toast.success(subscribed ? '💔 Unsubscribed' : '🔥 Subscribed to Wildfire Protection!', {
+    toast.success(subscribed ? '💔 Unsubscribed' : '🚀 Subscribed to Sand Blast Defense!', {
       description: subscribed 
-        ? 'Stopped supporting wildfire sand protection' 
-        : 'Now supporting wildfire and sand dune protection efforts',
+        ? 'Stopped supporting sand blast wildfire protection' 
+        : 'Now supporting advanced sand blast cannon wildfire defense systems',
       duration: 4000
     })
   }
@@ -62,15 +67,15 @@ export function WildfireSandProtection() {
     <div className="space-y-6">
       <div className="text-center mb-8">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-orange-400 via-red-400 to-yellow-400 bg-clip-text text-transparent mb-4">
-          🔥 WILDFIRE SAND PROTECTION PLAN
+          🌊💥 SAND BLAST WILDFIRE DEFENSE SYSTEM
         </h2>
         <p className="text-orange-300 text-lg">
-          Advanced wildfire prevention and coastal sand dune restoration • Community Protection Initiative
+          Revolutionary Sand Blast Cannons • Forest Protection Technology • Advanced Wildfire Prevention
         </p>
         {subscribed && (
           <Badge className="mt-2 bg-orange-600 text-white">
             <Heart className="h-4 w-4 mr-1 fill-current" />
-            ACTIVE SUPPORTER
+            ACTIVE DEFENDER
           </Badge>
         )}
       </div>
@@ -82,106 +87,114 @@ export function WildfireSandProtection() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <Badge className="bg-red-600 text-white">
-              CRITICAL PRIORITY
+              🚨 BREAKTHROUGH TECHNOLOGY
             </Badge>
             <Badge className="bg-green-600 text-white">
-              ACTIVE PROJECT
+              ⚡ ACTIVE DEPLOYMENT
             </Badge>
           </div>
           <CardTitle className="text-orange-400 flex items-center gap-2">
-            <Shield className="h-6 w-6" />
-            Wildfire Sand Protection Plan
+            <Wind className="h-6 w-6" />
+            Sand Blast Wildfire Defense System
           </CardTitle>
         </CardHeader>
         
         <CardContent className="space-y-6">
-          <p className="text-orange-300/90 text-lg">
-            Comprehensive protection plan combining wildfire prevention systems with coastal sand dune restoration. 
-            Using advanced fire suppression technology and natural barrier creation to protect communities and ecosystems.
-          </p>
+          <div className="bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-500/30 rounded-lg p-4">
+            <h3 className="text-yellow-400 font-bold text-lg mb-3 flex items-center gap-2">
+              💥 Revolutionary Sand Blast Technology
+            </h3>
+            <p className="text-yellow-300/90 text-base leading-relaxed">
+              Deploy massive sand blast cannons strategically positioned around high-risk forest areas. 
+              When wildfire threats are detected, these powerful cannons fire concentrated sand blasts 
+              up to {projectStats.sandBlastRange}km away, creating instant firebreaks and smothering flames 
+              before they can spread. Each cannon holds {projectStats.cannonCapacity.toLocaleString()} liters 
+              of specialized fire-suppressing sand mixture.
+            </p>
+          </div>
 
           {/* Funding Progress */}
           <div className="space-y-3">
             <div className="flex justify-between text-sm">
-              <span className="text-orange-400">Funding Progress</span>
+              <span className="text-orange-400">Sand Blast Cannon Funding</span>
               <span className="text-orange-300">
                 ${projectStats.currentFunding.toLocaleString()} / ${projectStats.fundingGoal.toLocaleString()} GAiA
               </span>
             </div>
             <Progress value={fundingPercentage} className="h-3" />
             <div className="text-xs text-orange-300/60">
-              {fundingPercentage.toFixed(1)}% funded • {Math.round((projectStats.fundingGoal - projectStats.currentFunding) / 1000)}k remaining
+              {fundingPercentage.toFixed(1)}% funded • ${Math.round((projectStats.fundingGoal - projectStats.currentFunding) / 1000)}k needed for next cannon deployment
             </div>
           </div>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div className="text-center p-3 rounded-lg bg-red-900/30">
-              <Shield className="h-6 w-6 text-red-400 mx-auto mb-1" />
-              <div className="text-2xl font-bold text-red-400">{projectStats.protectedAreas}</div>
-              <div className="text-xs text-red-300/80">Protected Areas</div>
+            <div className="text-center p-3 rounded-lg bg-red-900/30 border border-red-500/20">
+              <Wind className="h-6 w-6 text-red-400 mx-auto mb-1" />
+              <div className="text-2xl font-bold text-red-400">{projectStats.sandCannonSites}</div>
+              <div className="text-xs text-red-300/80">Active Cannon Sites</div>
             </div>
-            <div className="text-center p-3 rounded-lg bg-orange-900/30">
+            <div className="text-center p-3 rounded-lg bg-orange-900/30 border border-orange-500/20">
               <Flame className="h-6 w-6 text-orange-400 mx-auto mb-1" />
               <div className="text-2xl font-bold text-orange-400">{projectStats.wildfiresPrevented}</div>
-              <div className="text-xs text-orange-300/80">Wildfires Prevented</div>
+              <div className="text-xs text-orange-300/80">Fires Extinguished</div>
             </div>
-            <div className="text-center p-3 rounded-lg bg-yellow-900/30">
-              <Waves className="h-6 w-6 text-yellow-400 mx-auto mb-1" />
-              <div className="text-2xl font-bold text-yellow-400">{projectStats.sandDunesRestored}</div>
-              <div className="text-xs text-yellow-300/80">Sand Dunes Restored</div>
+            <div className="text-center p-3 rounded-lg bg-green-900/30 border border-green-500/20">
+              <TreePine className="h-6 w-6 text-green-400 mx-auto mb-1" />
+              <div className="text-2xl font-bold text-green-400">{projectStats.forestsProtected}</div>
+              <div className="text-xs text-green-300/80">Forests Protected</div>
             </div>
-            <div className="text-center p-3 rounded-lg bg-green-900/30">
-              <Users className="h-6 w-6 text-green-400 mx-auto mb-1" />
-              <div className="text-2xl font-bold text-green-400">{projectStats.volunteersActive}</div>
-              <div className="text-xs text-green-300/80">Active Volunteers</div>
+            <div className="text-center p-3 rounded-lg bg-blue-900/30 border border-blue-500/20">
+              <Users className="h-6 w-6 text-blue-400 mx-auto mb-1" />
+              <div className="text-2xl font-bold text-blue-400">{projectStats.volunteersActive}</div>
+              <div className="text-xs text-blue-300/80">Defense Operators</div>
             </div>
-            <div className="text-center p-3 rounded-lg bg-blue-900/30">
-              <DollarSign className="h-6 w-6 text-blue-400 mx-auto mb-1" />
-              <div className="text-2xl font-bold text-blue-400">${(projectStats.fundingRaised / 1000).toFixed(0)}k</div>
-              <div className="text-xs text-blue-300/80">Total Raised</div>
+            <div className="text-center p-3 rounded-lg bg-purple-900/30 border border-purple-500/20">
+              <Target className="h-6 w-6 text-purple-400 mx-auto mb-1" />
+              <div className="text-2xl font-bold text-purple-400">{projectStats.sandBlastRange}km</div>
+              <div className="text-xs text-purple-300/80">Blast Range</div>
             </div>
-            <div className="text-center p-3 rounded-lg bg-purple-900/30">
-              <Globe className="h-6 w-6 text-purple-400 mx-auto mb-1" />
-              <div className="text-2xl font-bold text-purple-400">87%</div>
-              <div className="text-xs text-purple-300/80">Project Progress</div>
+            <div className="text-center p-3 rounded-lg bg-yellow-900/30 border border-yellow-500/20">
+              <Zap className="h-6 w-6 text-yellow-400 mx-auto mb-1" />
+              <div className="text-2xl font-bold text-yellow-400">{(projectStats.cannonCapacity/1000).toFixed(0)}K</div>
+              <div className="text-xs text-yellow-300/80">Liters Per Blast</div>
             </div>
           </div>
 
-          {/* Project Features */}
+          {/* Technology Features */}
           <div className="space-y-4">
             <h4 className="text-orange-400 font-bold flex items-center gap-2">
               <Target className="h-5 w-5" />
-              Key Protection Features
+              Sand Blast Defense Features
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="bg-red-900/20 border border-red-500/20 rounded-lg p-3">
                 <div className="flex items-center gap-2 text-red-400 mb-1">
-                  <Flame className="h-4 w-4" />
-                  <span className="font-medium">Wildfire Prevention</span>
+                  <Wind className="h-4 w-4" />
+                  <span className="font-medium">Mega Sand Cannons</span>
                 </div>
-                <p className="text-sm text-red-300/80">Advanced fire suppression systems and firebreaks</p>
+                <p className="text-sm text-red-300/80">High-pressure sand blast systems with 2.5km range</p>
+              </div>
+              <div className="bg-orange-900/20 border border-orange-500/20 rounded-lg p-3">
+                <div className="flex items-center gap-2 text-orange-400 mb-1">
+                  <Flame className="h-4 w-4" />
+                  <span className="font-medium">Fire Detection AI</span>
+                </div>
+                <p className="text-sm text-orange-300/80">Automated threat detection and rapid response</p>
               </div>
               <div className="bg-yellow-900/20 border border-yellow-500/20 rounded-lg p-3">
                 <div className="flex items-center gap-2 text-yellow-400 mb-1">
                   <Waves className="h-4 w-4" />
-                  <span className="font-medium">Sand Dune Restoration</span>
+                  <span className="font-medium">Special Sand Mix</span>
                 </div>
-                <p className="text-sm text-yellow-300/80">Coastal protection and erosion control</p>
+                <p className="text-sm text-yellow-300/80">Fire-suppressing sand with cooling compounds</p>
               </div>
               <div className="bg-green-900/20 border border-green-500/20 rounded-lg p-3">
                 <div className="flex items-center gap-2 text-green-400 mb-1">
-                  <TreePine className="h-4 w-4" />
-                  <span className="font-medium">Ecosystem Recovery</span>
-                </div>
-                <p className="text-sm text-green-300/80">Native vegetation restoration and habitat protection</p>
-              </div>
-              <div className="bg-blue-900/20 border border-blue-500/20 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-blue-400 mb-1">
                   <Shield className="h-4 w-4" />
-                  <span className="font-medium">Community Safety</span>
+                  <span className="font-medium">Forest Barriers</span>
                 </div>
-                <p className="text-sm text-blue-300/80">Emergency response and evacuation planning</p>
+                <p className="text-sm text-green-300/80">Instant firebreak creation and protection zones</p>
               </div>
             </div>
           </div>
@@ -197,14 +210,14 @@ export function WildfireSandProtection() {
               }`}
             >
               <Heart className={`h-4 w-4 mr-2 ${subscribed ? 'fill-current' : ''}`} />
-              {subscribed ? 'Unsubscribe' : 'Subscribe & Support'}
+              {subscribed ? 'Stop Defense Support' : 'Support Sand Defense'}
             </Button>
             <Button 
               variant="outline" 
               className="border-orange-400 text-orange-400 hover:bg-orange-900/20"
             >
-              <AlertTriangle className="h-4 w-4 mr-2" />
-              Emergency Report
+              <Wind className="h-4 w-4 mr-2" />
+              Deploy Cannon
             </Button>
           </div>
 
@@ -212,39 +225,16 @@ export function WildfireSandProtection() {
           <div className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border border-orange-500/20 rounded-lg p-4">
             <div className="flex items-center gap-2 text-orange-400 mb-2">
               <Globe className="h-5 w-5" />
-              <span className="font-medium">Expected Impact</span>
+              <span className="font-medium">Defense Network Impact</span>
             </div>
             <p className="text-sm text-orange-300/80 mb-2">
-              Protect 50+ coastal communities from wildfire threats, restore 25 km of sand dune barriers, 
-              and create sustainable firebreaks covering 10,000 hectares of high-risk areas.
+              Deploy 50+ mega sand blast cannons across high-risk forest zones, creating an automated 
+              wildfire defense network capable of instantly suppressing fires within a 2.5km radius. 
+              Protect over 100,000 hectares of critical forest habitat.
             </p>
             <p className="text-xs text-orange-400/60">
-              📍 Location: California Coast • Oregon Dunes • Mediterranean Climate Zones
+              📍 Priority Locations: California Forests • Australian Bush • Mediterranean Zones • Amazon Perimeter
             </p>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Related SandProtect Integration */}
-      <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/20 to-teal-900/20">
-        <CardContent className="pt-6">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Waves className="h-6 w-6 text-blue-400" />
-              <h3 className="text-xl font-bold text-blue-400">Integrated with SandProtect Initiative</h3>
-              <Shield className="h-6 w-6 text-teal-400" />
-            </div>
-            <p className="text-blue-300/80 mb-4">
-              This project works in coordination with our SandProtect marine conservation efforts, 
-              creating a comprehensive coastal and fire protection ecosystem.
-            </p>
-            <Button 
-              variant="outline" 
-              className="border-blue-400 text-blue-400 hover:bg-blue-900/20"
-            >
-              <Waves className="h-4 w-4 mr-2" />
-              View SandProtect Initiative
-            </Button>
           </div>
         </CardContent>
       </Card>
