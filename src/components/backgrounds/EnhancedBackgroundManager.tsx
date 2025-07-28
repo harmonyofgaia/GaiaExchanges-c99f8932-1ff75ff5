@@ -16,33 +16,70 @@ export interface EnhancedBackgroundSettings {
   neuralDensity?: number
 }
 
-export interface BackgroundConfig {
-  type: EnhancedBackgroundType
-  intensity: 'low' | 'medium' | 'high'
-  color: string
-  speed: number
-  autoGenerate?: boolean
-  pattern?: string
-  neuralDensity?: number
+interface EnhancedBackgroundManagerProps {
+  settings?: EnhancedBackgroundSettings
+  className?: string
 }
 
-interface EnhancedBackgroundManagerProps {
-  settings: EnhancedBackgroundSettings
-  className?: string
+const DEFAULT_SETTINGS: EnhancedBackgroundSettings = {
+  type: 'matrix',
+  intensity: 'medium',
+  color: '#00ff00',
+  speed: 1,
+  autoGenerate: false,
+  pattern: 'default',
+  neuralDensity: 50
 }
 
 const ANIMATION_CYCLE_DURATION = 30000 // 30 seconds
 
 export function EnhancedBackgroundManager({ 
-  settings, 
+  settings: propSettings,
   className = '' 
 }: EnhancedBackgroundManagerProps) {
-  const [currentSettings, setCurrentSettings] = useState(settings)
+  const [currentSettings, setCurrentSettings] = useState<EnhancedBackgroundSettings>(
+    propSettings || DEFAULT_SETTINGS
+  )
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isLocked, setIsLocked] = useState(false)
 
-  // Auto-generate new backgrounds
+  // Load settings from localStorage and listen for changes
   useEffect(() => {
-    if (!settings.autoGenerate) return
+    const loadSettings = () => {
+      const savedSettings = localStorage.getItem('gaia-background-settings')
+      const savedLock = localStorage.getItem('gaia-background-lock')
+      
+      if (savedSettings) {
+        try {
+          const parsed = JSON.parse(savedSettings)
+          setCurrentSettings(parsed)
+        } catch (error) {
+          console.warn('Failed to parse saved background settings')
+        }
+      }
+
+      setIsLocked(savedLock === 'true')
+    }
+
+    loadSettings()
+
+    // Listen for settings changes from visual controls
+    const handleSettingsChange = (event: CustomEvent) => {
+      if (!isLocked) {
+        setCurrentSettings(event.detail)
+      }
+    }
+
+    window.addEventListener('background-settings-changed', handleSettingsChange as EventListener)
+    
+    return () => {
+      window.removeEventListener('background-settings-changed', handleSettingsChange as EventListener)
+    }
+  }, [isLocked])
+
+  // Auto-generate new backgrounds only if enabled and not locked
+  useEffect(() => {
+    if (!currentSettings.autoGenerate || isLocked) return
 
     const interval = setInterval(() => {
       setIsTransitioning(true)
@@ -63,12 +100,14 @@ export function EnhancedBackgroundManager({
         }
         
         setCurrentSettings(newSettings)
+        // Save the auto-generated settings
+        localStorage.setItem('gaia-background-settings', JSON.stringify(newSettings))
         setIsTransitioning(false)
       }, 1000)
     }, ANIMATION_CYCLE_DURATION)
 
     return () => clearInterval(interval)
-  }, [settings.autoGenerate])
+  }, [currentSettings.autoGenerate, isLocked])
 
   const renderBackground = () => {
     const baseProps = {
@@ -107,11 +146,20 @@ export function EnhancedBackgroundManager({
       >
         {renderBackground()}
       </div>
+      
+      {/* Lock indicator */}
+      {isLocked && (
+        <div className="absolute top-4 right-4 z-10 bg-yellow-500/20 backdrop-blur-sm border border-yellow-500/30 rounded-lg px-3 py-1 text-yellow-300 text-xs font-medium">
+          🔒 Background Locked
+        </div>
+      )}
     </div>
   )
 }
 
-export function updateBackgroundConfig(config: BackgroundConfig) {
-  // Mock function for updating background config
-  console.log('Updating background config:', config)
+export function updateBackgroundConfig(config: EnhancedBackgroundSettings) {
+  // Update background config and save to localStorage
+  localStorage.setItem('gaia-background-settings', JSON.stringify(config))
+  window.dispatchEvent(new CustomEvent('background-settings-changed', { detail: config }))
+  console.log('Background config updated:', config)
 }
