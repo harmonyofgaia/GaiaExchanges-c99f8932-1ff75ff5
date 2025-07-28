@@ -1,175 +1,195 @@
 
-import React, { useState } from 'react'
+import { Navbar } from '@/components/Navbar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Users, Target, Trophy, Star, BookOpen, MessageSquare, Calendar, Award } from 'lucide-react'
-import { toast } from 'sonner'
-import HoverSidebar from '@/components/HoverSidebar'
+import { 
+  Users, 
+  MessageCircle, 
+  Calendar, 
+  Heart, 
+  Star, 
+  Target,
+  Trophy,
+  Globe,
+  Leaf
+} from 'lucide-react'
 
-export function CommunityEngagementHub() {
-  const [activeTrainings] = useState([
-    { id: 1, title: 'Forest Fire Prevention Basics', progress: 75, participants: 156 },
-    { id: 2, title: 'Sand Cannon Operation Training', progress: 45, participants: 89 },
-    { id: 3, title: 'Emergency Response Protocol', progress: 90, participants: 203 },
-  ])
+export default function CommunityEngagementHub() {
+  const communityStats = [
+    { label: 'Active Members', value: '125,847', icon: Users, color: 'text-blue-400' },
+    { label: 'Projects Funded', value: '1,247', icon: Target, color: 'text-green-400' },
+    { label: 'Environmental Impact', value: '89,234 kg CO₂', icon: Leaf, color: 'text-emerald-400' },
+    { label: 'Community Score', value: '9.8/10', icon: Star, color: 'text-yellow-400' }
+  ]
 
-  const [communityStats] = useState({
-    totalMembers: 2847,
-    activeProjects: 12,
-    completedMissions: 89,
-    globalRank: 'Bronze League'
-  })
+  const activeDiscussions = [
+    { title: 'Ocean Cleanup Initiative Progress', replies: 234, category: 'Environment', priority: 'High' },
+    { title: 'New Reforestation Project Proposal', replies: 156, category: 'Forest', priority: 'Medium' },
+    { title: 'Community Token Distribution', replies: 89, category: 'Governance', priority: 'High' },
+    { title: 'Wildlife Protection Campaign', replies: 67, category: 'Animals', priority: 'Low' }
+  ]
 
-  const joinTraining = (trainingId: number) => {
-    toast.success('🎓 Joined Training Program!', {
-      description: 'You have been enrolled in the training program',
-      duration: 4000
-    })
-    console.log(`Joined training program: ${trainingId}`)
-  }
+  const upcomingEvents = [
+    { title: 'Global Clean-up Day', date: '2024-02-15', participants: 2340 },
+    { title: 'Virtual Forest Walk', date: '2024-02-18', participants: 890 },
+    { title: 'Community Governance Vote', date: '2024-02-22', participants: 5670 },
+    { title: 'Eco-Innovation Workshop', date: '2024-02-25', participants: 1200 }
+  ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
-      <HoverSidebar />
-      
-      <div className="ml-16 min-h-screen">
-        <div className="container mx-auto px-6 py-8">
-          <Card className="mb-8 border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent mb-4">
+            🌍 Community Engagement Hub
+          </h1>
+          <p className="text-xl text-muted-foreground">
+            Connect, collaborate, and create positive environmental impact together
+          </p>
+        </div>
+
+        {/* Community Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {communityStats.map((stat, index) => {
+            const Icon = stat.icon
+            return (
+              <Card key={index} className="border-green-500/20 bg-black/20">
+                <CardContent className="p-6 text-center">
+                  <Icon className={`h-8 w-8 mx-auto mb-2 ${stat.color}`} />
+                  <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Active Discussions */}
+          <Card className="border-blue-500/20 bg-black/20">
             <CardHeader>
-              <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
-                🏘️ COMMUNITY ENGAGEMENT HUB
+              <CardTitle className="flex items-center gap-2 text-blue-400">
+                <MessageCircle className="h-5 w-5" />
+                Active Discussions
               </CardTitle>
-              <p className="text-center text-xl text-muted-foreground">
-                Training • Coordination • Achievements • Global Leaderboards
-              </p>
             </CardHeader>
+            <CardContent className="space-y-4">
+              {activeDiscussions.map((discussion, index) => (
+                <div key={index} className="flex items-center justify-between p-3 bg-gray-800/30 rounded-lg">
+                  <div className="flex-1">
+                    <h3 className="font-medium text-white mb-1">{discussion.title}</h3>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline" className="text-xs">
+                        {discussion.category}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">
+                        {discussion.replies} replies
+                      </span>
+                    </div>
+                  </div>
+                  <Badge 
+                    variant={discussion.priority === 'High' ? 'destructive' : 
+                            discussion.priority === 'Medium' ? 'default' : 'secondary'}
+                    className="text-xs"
+                  >
+                    {discussion.priority}
+                  </Badge>
+                </div>
+              ))}
+              <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                Join Discussion
+              </Button>
+            </CardContent>
           </Card>
 
-          <Tabs defaultValue="training" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="training">📚 Training</TabsTrigger>
-              <TabsTrigger value="coordination">🤝 Coordination</TabsTrigger>
-              <TabsTrigger value="achievements">🏆 Achievements</TabsTrigger>
-              <TabsTrigger value="leaderboard">📊 Leaderboard</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="training" className="space-y-6">
-              {/* Community Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <Card className="border-green-500/30">
-                  <CardContent className="p-4 text-center">
-                    <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-green-400">{communityStats.totalMembers}</div>
-                    <div className="text-sm text-muted-foreground">Total Members</div>
-                  </CardContent>
-                </Card>
-                <Card className="border-blue-500/30">
-                  <CardContent className="p-4 text-center">
-                    <Target className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-blue-400">{communityStats.activeProjects}</div>
-                    <div className="text-sm text-muted-foreground">Active Projects</div>
-                  </CardContent>
-                </Card>
-                <Card className="border-purple-500/30">
-                  <CardContent className="p-4 text-center">
-                    <Trophy className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-purple-400">{communityStats.completedMissions}</div>
-                    <div className="text-sm text-muted-foreground">Completed Missions</div>
-                  </CardContent>
-                </Card>
-                <Card className="border-yellow-500/30">
-                  <CardContent className="p-4 text-center">
-                    <Star className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-yellow-400">{communityStats.globalRank}</div>
-                    <div className="text-sm text-muted-foreground">Global Rank</div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Training Programs */}
-              <Card className="border-blue-500/30">
-                <CardHeader>
-                  <CardTitle className="text-blue-400">📚 Active Training Programs</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {activeTrainings.map((training) => (
-                    <div key={training.id} className="p-4 bg-black/20 rounded-lg border border-gray-500/20">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
-                          <BookOpen className="h-5 w-5 text-blue-400" />
-                          <span className="font-medium text-blue-400">{training.title}</span>
-                        </div>
-                        <Badge className="bg-blue-600">{training.participants} participants</Badge>
-                      </div>
-                      <div className="mb-3">
-                        <Progress value={training.progress} className="h-2" />
-                        <p className="text-sm text-muted-foreground mt-1">Progress: {training.progress}%</p>
-                      </div>
-                      <Button
-                        onClick={() => joinTraining(training.id)}
-                        className="w-full bg-blue-600 hover:bg-blue-700"
-                        size="sm"
-                      >
-                        Join Training
-                      </Button>
+          {/* Upcoming Events */}
+          <Card className="border-purple-500/20 bg-black/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-purple-400">
+                <Calendar className="h-5 w-5" />
+                Upcoming Events
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {upcomingEvents.map((event, index) => (
+                <div key={index} className="flex items-center justify-between p-3 bg-gray-800/30 rounded-lg">
+                  <div className="flex-1">
+                    <h3 className="font-medium text-white mb-1">{event.title}</h3>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-muted-foreground">{event.date}</span>
+                      <span className="text-xs text-green-400">
+                        {event.participants} participants
+                      </span>
                     </div>
-                  ))}
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="coordination" className="space-y-6">
-              <Card className="border-green-500/30">
-                <CardHeader>
-                  <CardTitle className="text-green-400">🤝 Community Coordination</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center p-8 text-muted-foreground">
-                    <MessageSquare className="h-16 w-16 mx-auto mb-4 text-green-400" />
-                    <p className="text-lg">Community coordination dashboard</p>
-                    <p className="text-sm">Manage team activities and collaborative projects</p>
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
+                  <Button size="sm" variant="outline" className="border-purple-500/50">
+                    Join
+                  </Button>
+                </div>
+              ))}
+              <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                View All Events
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
 
-            <TabsContent value="achievements" className="space-y-6">
-              <Card className="border-purple-500/30">
-                <CardHeader>
-                  <CardTitle className="text-purple-400">🏆 Achievement System</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center p-8 text-muted-foreground">
-                    <Award className="h-16 w-16 mx-auto mb-4 text-purple-400" />
-                    <p className="text-lg">Track your achievements</p>
-                    <p className="text-sm">Earn badges and recognition for your contributions</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
+        {/* Community Actions */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="border-green-500/20 bg-black/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <Heart className="h-5 w-5" />
+                Start Initiative
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                Launch your own environmental project and rally the community
+              </p>
+              <Button className="w-full bg-green-600 hover:bg-green-700">
+                Create Initiative
+              </Button>
+            </CardContent>
+          </Card>
 
-            <TabsContent value="leaderboard" className="space-y-6">
-              <Card className="border-yellow-500/30">
-                <CardHeader>
-                  <CardTitle className="text-yellow-400">📊 Global Leaderboards</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center p-8 text-muted-foreground">
-                    <Trophy className="h-16 w-16 mx-auto mb-4 text-yellow-400" />
-                    <p className="text-lg">Global community rankings</p>
-                    <p className="text-sm">See how your community ranks worldwide</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
+          <Card className="border-yellow-500/20 bg-black/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-yellow-400">
+                <Trophy className="h-5 w-5" />
+                Leaderboards
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                See top contributors and track your community impact ranking
+              </p>
+              <Button className="w-full bg-yellow-600 hover:bg-yellow-700">
+                View Rankings
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="border-cyan-500/20 bg-black/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-cyan-400">
+                <Globe className="h-5 w-5" />
+                Global Impact
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                Track real-time environmental impact across all community projects
+              </p>
+              <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
+                View Impact
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
   )
 }
-
-export default CommunityEngagementHub
