@@ -3,8 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import Navbar from "@/components/Navbar"
-import { Coins, Leaf, Recycle, TreePine, Zap, Water, Heart, Users } from "lucide-react"
+import { Navbar } from "@/components/Navbar"
+import { Coins, Leaf, Recycle, TreePine, Zap, Droplets, Heart, Users } from "lucide-react"
 
 const EarningActivities = () => {
   const activities = [
@@ -43,7 +43,7 @@ const EarningActivities = () => {
       title: "Water Conservation",
       description: "Implement water-saving measures",
       reward: "75 GAiA",
-      icon: Water,
+      icon: Droplets,
       progress: 60,
       category: "Conservation",
       difficulty: "Medium"
