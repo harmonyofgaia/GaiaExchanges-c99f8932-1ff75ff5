@@ -1,321 +1,289 @@
 
-import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { 
-  Home, 
-  User, 
-  Settings, 
-  LogOut, 
-  Wallet,
-  TreePine,
-  Car,
-  Gamepad2,
-  TrendingUp,
-  Coins,
-  Shield,
-  Menu,
-  X,
-  ChevronDown,
-  Crown,
-  Pickaxe,
-  Zap,
-  LogIn
-} from 'lucide-react'
-import { useAuth } from '@/components/auth/AuthProvider'
+import { useState, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { 
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu'
-import { toast } from 'sonner'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Badge } from '@/components/ui/badge'
+import { 
+  Menu, 
+  User, 
+  LogOut, 
+  Settings, 
+  Shield, 
+  ChevronDown,
+  Zap,
+  Coins
+} from 'lucide-react'
+import { navigationItems } from '@/nav-items'
+import { useAuth } from '@/hooks/useAuth'
+import { GaiaLogo } from '@/components/GaiaLogo'
 
-const mainNavItems = [
-  { name: 'Home', path: '/', icon: Home, public: true },
-  { name: 'Dashboard', path: '/dashboard', icon: Home, public: false },
-  { name: 'GAiA Token Wallet', path: '/wallet', icon: Wallet, public: false },
-  { name: 'Game Center', path: '/game-center', icon: Gamepad2, public: false },
-  { name: 'Bike-to-Earn', path: '/bike-to-earn', icon: Car, public: false },
-  { name: 'Eco Missions', path: '/eco-missions', icon: TreePine, public: false },
-]
-
-const tokenEconomyItems = [
-  { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
-  { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
-  { name: 'Sand Protect', path: '/sand-protect', icon: Shield },
-]
-
-export function Navbar() {
-  const { user, signOut } = useAuth()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+export const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
+  const { user, signOut } = useAuth()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleSignOut = async () => {
     try {
       await signOut()
-      toast.success('Signed out successfully')
+      navigate('/')
     } catch (error) {
-      toast.error('Failed to sign out')
+      console.error('Error signing out:', error)
     }
   }
 
-  const isActive = (path: string) => location.pathname === path
-
-  // Filter navigation items based on authentication status
-  const visibleNavItems = mainNavItems.filter(item => user || item.public)
+  const isActivePath = (path: string) => {
+    return location.pathname === path
+  }
 
   return (
-    <nav className="bg-gradient-to-r from-green-900/90 via-blue-900/90 to-purple-900/90 backdrop-blur-sm border-b border-green-500/30 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <nav className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60' 
+        : 'bg-background'
+    }`}>
+      <div className="container mx-auto px-4">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to={user ? "/dashboard" : "/"} className="flex-shrink-0 flex items-center">
-            <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-              🌍 GAiA
-            </div>
+          <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+            <GaiaLogo size="sm" variant="default" />
+            <span className="text-xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+              GAiA
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <NavigationMenu>
-              <NavigationMenuList className="flex space-x-2">
-                {/* Main Nav Items */}
-                {visibleNavItems.map((item) => (
-                  <NavigationMenuItem key={item.path}>
-                    <Link
-                      to={item.path}
-                      className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                        isActive(item.path)
-                          ? 'bg-green-600/50 text-white'
-                          : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                      }`}
-                    >
-                      <item.icon className="w-4 h-4 mr-2" />
-                      {item.name}
-                    </Link>
-                  </NavigationMenuItem>
-                ))}
+          <div className="hidden md:flex items-center space-x-1">
+            {navigationItems.slice(0, 8).map((item) => {
+              const Icon = item.icon
+              const isActive = isActivePath(item.to)
+              
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                  }`}
+                >
+                  <Icon className="h-4 w-4" />
+                  <span>{item.title}</span>
+                  {item.masterPlanVersion === "v7" && (
+                    <Badge variant="secondary" className="text-xs ml-1">
+                      v7
+                    </Badge>
+                  )}
+                </Link>
+              )
+            })}
 
-                {/* Token Economy Dropdown - Only for authenticated users */}
-                {user && (
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50">
-                      <Coins className="w-4 h-4 mr-2" />
-                      Token Economy
-                      <ChevronDown className="w-4 h-4 ml-1" />
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <div className="w-64 p-2">
-                        {tokenEconomyItems.map((item) => (
-                          <Link
-                            key={item.path}
-                            to={item.path}
-                            className="flex items-center px-3 py-2 rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
-                          >
-                            <item.icon className="w-4 h-4 mr-2" />
-                            {item.name}
-                          </Link>
-                        ))}
-                      </div>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                )}
-
-                {/* Admin Section - Only for authenticated users */}
-                {user && (
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50">
-                      <Crown className="w-4 h-4 mr-2 text-yellow-400" />
-                      Admin Portal
-                      <ChevronDown className="w-4 h-4 ml-1" />
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <div className="w-64 p-2">
-                        <Link
-                          to="/admin-security-center"
-                          className="flex items-center px-3 py-2 rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
-                        >
-                          <Shield className="w-4 h-4 mr-2" />
-                          Security Center
-                        </Link>
-                        <Link
-                          to="/secure-admin"
-                          className="flex items-center px-3 py-2 rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
-                        >
-                          <Crown className="w-4 h-4 mr-2 text-yellow-400" />
-                          Admin Dashboard
-                        </Link>
-                        <Link
-                          to="/security"
-                          className="flex items-center px-3 py-2 rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
-                        >
-                          <Zap className="w-4 h-4 mr-2" />
-                          Security Monitor
-                        </Link>
-                        <Link
-                          to="/quantum-security"
-                          className="flex items-center px-3 py-2 rounded-md text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
-                        >
-                          <Shield className="w-4 h-4 mr-2 text-red-400" />
-                          Quantum Security
-                        </Link>
-                      </div>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                )}
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
-
-          {/* User Menu or Login Button */}
-          <div className="hidden md:flex items-center space-x-4">
-            {user ? (
+            {/* More dropdown for additional items */}
+            {navigationItems.length > 8 && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center space-x-2 text-gray-300 hover:text-white">
-                    <User className="w-5 h-5" />
-                    <span className="text-sm">{user.email}</span>
-                    <ChevronDown className="w-4 h-4" />
+                  <Button variant="ghost" size="sm">
+                    More
+                    <ChevronDown className="h-4 w-4 ml-1" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
+                  {navigationItems.slice(8).map((item) => {
+                    const Icon = item.icon
+                    const isActive = isActivePath(item.to)
+                    
+                    return (
+                      <DropdownMenuItem key={item.to} asChild>
+                        <Link
+                          to={item.to}
+                          className={`flex items-center space-x-2 ${
+                            isActive ? 'bg-accent' : ''
+                          }`}
+                        >
+                          <Icon className="h-4 w-4" />
+                          <span>{item.title}</span>
+                          {item.masterPlanVersion === "v7" && (
+                            <Badge variant="secondary" className="text-xs ml-auto">
+                              v7
+                            </Badge>
+                          )}
+                        </Link>
+                      </DropdownMenuItem>
+                    )
+                  })}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+          </div>
+
+          {/* User Menu / Auth */}
+          <div className="flex items-center space-x-4">
+            {/* GAiA Token Balance (if user is logged in) */}
+            {user && (
+              <div className="hidden sm:flex items-center space-x-1 text-sm">
+                <Coins className="h-4 w-4 text-yellow-500" />
+                <span className="text-muted-foreground">GAiA:</span>
+                <span className="font-medium text-yellow-500">1,250</span>
+              </div>
+            )}
+
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={user.user_metadata?.avatar_url} alt="Avatar" />
+                      <AvatarFallback>
+                        <User className="h-4 w-4" />
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">
+                        {user.user_metadata?.full_name || 'GAiA User'}
+                      </p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        {user.email}
+                      </p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link to="/profile" className="flex items-center">
-                      <User className="w-4 h-4 mr-2" />
-                      Profile
+                    <Link to="/dashboard" className="flex items-center">
+                      <Zap className="mr-2 h-4 w-4" />
+                      <span>Dashboard</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/settings" className="flex items-center">
-                      <Settings className="w-4 h-4 mr-2" />
-                      Settings
+                    <Link to="/wallet" className="flex items-center">
+                      <Coins className="mr-2 h-4 w-4" />
+                      <span>Wallet</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/admin" className="flex items-center">
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>Settings</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/security" className="flex items-center">
+                      <Shield className="mr-2 h-4 w-4" />
+                      <span>Security</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleSignOut} className="flex items-center">
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Sign Out
+                  <DropdownMenuItem onClick={handleSignOut}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log out</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button asChild variant="default" className="bg-green-600 hover:bg-green-700">
-                <Link to="/auth" className="flex items-center">
-                  <LogIn className="w-4 h-4 mr-2" />
-                  Sign In
+              <div className="flex items-center space-x-2">
+                <Link to="/auth/signin">
+                  <Button variant="ghost" size="sm">
+                    Sign In
+                  </Button>
                 </Link>
-              </Button>
+                <Link to="/auth/signup">
+                  <Button size="sm">
+                    Get Started
+                  </Button>
+                </Link>
+              </div>
             )}
-          </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-300 hover:text-white"
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </Button>
+            {/* Mobile menu trigger */}
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="md:hidden"
+                  size="icon"
+                >
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col gap-4">
+                  <div className="flex items-center space-x-2 mb-4">
+                    <GaiaLogo size="sm" variant="default" />
+                    <span className="text-xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                      GAiA Platform
+                    </span>
+                  </div>
+                  
+                  {navigationItems.map((item) => {
+                    const Icon = item.icon
+                    const isActive = isActivePath(item.to)
+                    
+                    return (
+                      <Link
+                        key={item.to}
+                        to={item.to}
+                        onClick={() => setIsOpen(false)}
+                        className={`flex items-center space-x-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                          isActive
+                            ? 'bg-primary text-primary-foreground'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                        }`}
+                      >
+                        <Icon className="h-4 w-4" />
+                        <span>{item.title}</span>
+                        {item.masterPlanVersion === "v7" && (
+                          <Badge variant="secondary" className="text-xs ml-auto">
+                            v7
+                          </Badge>
+                        )}
+                      </Link>
+                    )
+                  })}
+                  
+                  {!user && (
+                    <div className="flex flex-col space-y-2 mt-4 pt-4 border-t">
+                      <Link to="/auth/signin" onClick={() => setIsOpen(false)}>
+                        <Button variant="outline" className="w-full">
+                          Sign In
+                        </Button>
+                      </Link>
+                      <Link to="/auth/signup" onClick={() => setIsOpen(false)}>
+                        <Button className="w-full">
+                          Get Started
+                        </Button>
+                      </Link>
+                    </div>
+                  )}
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
-
-      {/* Mobile Navigation Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-gray-900/95 backdrop-blur-sm border-t border-gray-700">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {visibleNavItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`flex items-center px-3 py-2 rounded-md text-base font-medium ${
-                  isActive(item.path)
-                    ? 'bg-green-600/50 text-white'
-                    : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <item.icon className="w-5 h-5 mr-3" />
-                {item.name}
-              </Link>
-            ))}
-            
-            {user && (
-              <>
-                <div className="border-t border-gray-700 mt-4 pt-4">
-                  <div className="text-sm font-medium text-gray-400 px-3 py-2">Token Economy</div>
-                  {tokenEconomyItems.map((item) => (
-                    <Link
-                      key={item.path}
-                      to={item.path}
-                      className="flex items-center px-6 py-2 rounded-md text-sm text-gray-300 hover:text-white hover:bg-gray-700/50"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <item.icon className="w-4 h-4 mr-3" />
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-
-                <div className="border-t border-gray-700 mt-4 pt-4">
-                  <div className="text-sm font-medium text-gray-400 px-3 py-2 flex items-center">
-                    <Crown className="w-4 h-4 mr-2 text-yellow-400" />
-                    Admin Portal
-                  </div>
-                  <Link
-                    to="/admin-security-center"
-                    className="flex items-center px-6 py-2 rounded-md text-sm text-gray-300 hover:text-white hover:bg-gray-700/50"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <Shield className="w-4 h-4 mr-3" />
-                    Security Center
-                  </Link>
-                  <Link
-                    to="/secure-admin"
-                    className="flex items-center px-6 py-2 rounded-md text-sm text-gray-300 hover:text-white hover:bg-gray-700/50"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <Crown className="w-4 h-4 mr-3 text-yellow-400" />
-                    Admin Dashboard
-                  </Link>
-                </div>
-              </>
-            )}
-            
-            <div className="border-t border-gray-700 mt-4 pt-4">
-              {user ? (
-                <button
-                  onClick={handleSignOut}
-                  className="flex items-center w-full px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700/50"
-                >
-                  <LogOut className="w-5 h-5 mr-3" />
-                  Sign Out
-                </button>
-              ) : (
-                <Link
-                  to="/auth"
-                  className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700/50"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <LogIn className="w-5 h-5 mr-3" />
-                  Sign In
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </nav>
   )
 }
