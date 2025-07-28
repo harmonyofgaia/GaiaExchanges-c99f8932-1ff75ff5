@@ -14,6 +14,7 @@ const GreenInvestments = lazy(() => import("./pages/GreenInvestments"));
 const SandProtect = lazy(() => import("./pages/SandProtect"));
 const AdminPanel = lazy(() => import("./pages/Admin"));
 const ForestShieldMasterPlan = lazy(() => import("./pages/ForestShieldMasterPlan"));
+const AuraLandScrapyard = lazy(() => import("./pages/AuraLandScrapyard"));
 
 // Phase 1 pages
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -48,8 +49,9 @@ function App() {
             <Route path="/decentralized-project-funding-pools" element={<Suspense fallback={<div>Loading...</div>}><DecentralizedProjectFundingPools /></Suspense>} />
             <Route path="/green-investments" element={<Suspense fallback={<div>Loading...</div>}><GreenInvestments /></Suspense>} />
             <Route path="/sand-protect" element={<Suspense fallback={<div>Loading...</div>}><SandProtect /></Suspense>} />
-            <Route path="/admin-panel" element={<Suspense fallback={<div>Loading...</div>}><AdminPanel /></Suspense>} />
+            <Route path="/admin" element={<Suspense fallback={<div>Loading...</div>}><AdminPanel /></Suspense>} />
             <Route path="/forest-shield-master-plan" element={<Suspense fallback={<div>Loading...</div>}><ForestShieldMasterPlan /></Suspense>} />
+            <Route path="/aura-land-scrapyard" element={<Suspense fallback={<div>Loading...</div>}><AuraLandScrapyard /></Suspense>} />
             
             {/* Phase 1 Routes */}
             <Route path="/dashboard" element={<Suspense fallback={<div>Loading...</div>}><Dashboard /></Suspense>} />
@@ -68,11 +70,45 @@ function App() {
             <Route path="/community-engagement-hub" element={<Suspense fallback={<div>Loading...</div>}><CommunityEngagementHub /></Suspense>} />
             <Route path="/partnership-management" element={<Suspense fallback={<div>Loading...</div>}><PartnershipManagement /></Suspense>} />
             <Route path="/deployment-center" element={<Suspense fallback={<div>Loading...</div>}><DeploymentCenter /></Suspense>} />
+
+            {/* New Routes for navbar items that were missing */}
+            <Route path="/virtual-world" element={<Suspense fallback={<div>Loading...</div>}><VirtualWorld /></Suspense>} />
+            <Route path="/animal-welfare" element={<Suspense fallback={<div>Loading...</div>}><AnimalWelfare /></Suspense>} />
+            <Route path="/gaming" element={<Suspense fallback={<div>Loading...</div>}><Gaming /></Suspense>} />
+            <Route path="/exchange" element={<Suspense fallback={<div>Loading...</div>}><Exchange /></Suspense>} />
+            <Route path="/nft-green-animals" element={<Suspense fallback={<div>Loading...</div>}><NFTGreenAnimals /></Suspense>} />
+            <Route path="/wallet" element={<Suspense fallback={<div>Loading...</div>}><Wallet /></Suspense>} />
+            <Route path="/markets" element={<Suspense fallback={<div>Loading...</div>}><Markets /></Suspense>} />
+            <Route path="/video-exchange" element={<Suspense fallback={<div>Loading...</div>}><VideoExchange /></Suspense>} />
+            <Route path="/streaming-shows" element={<Suspense fallback={<div>Loading...</div>}><StreamingShows /></Suspense>} />
+            <Route path="/gaia-bike-ecosystem" element={<Suspense fallback={<div>Loading...</div>}><GaiaBikeEcosystem /></Suspense>} />
+            <Route path="/token-mining" element={<Suspense fallback={<div>Loading...</div>}><TokenMining /></Suspense>} />
+            <Route path="/coin-crafter" element={<Suspense fallback={<div>Loading...</div>}><CoinCrafter /></Suspense>} />
+            <Route path="/landscape-builder" element={<Suspense fallback={<div>Loading...</div>}><LandscapeBuilder /></Suspense>} />
+            <Route path="/comprehensive-status" element={<Suspense fallback={<div>Loading...</div>}><ComprehensiveStatus /></Suspense>} />
+            <Route path="/pricing" element={<Suspense fallback={<div>Loading...</div>}><Pricing /></Suspense>} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );
 }
+
+// Create placeholder pages for the missing routes
+const VirtualWorld = lazy(() => import("./pages/VirtualWorld"));
+const AnimalWelfare = lazy(() => import("./pages/AnimalWelfare"));
+const Gaming = lazy(() => import("./pages/Gaming"));
+const Exchange = lazy(() => import("./pages/Exchange"));
+const NFTGreenAnimals = lazy(() => import("./pages/NFTGreenAnimals"));
+const Wallet = lazy(() => import("./pages/Wallet"));
+const Markets = lazy(() => import("./pages/Markets"));
+const VideoExchange = lazy(() => import("./pages/VideoExchange"));
+const StreamingShows = lazy(() => import("./pages/StreamingShows"));
+const GaiaBikeEcosystem = lazy(() => import("./pages/GaiaBikeEcosystem"));
+const TokenMining = lazy(() => import("./pages/TokenMining"));
+const CoinCrafter = lazy(() => import("./pages/CoinCrafter"));
+const LandscapeBuilder = lazy(() => import("./pages/LandscapeBuilder"));
+const ComprehensiveStatus = lazy(() => import("./pages/ComprehensiveStatus"));
+const Pricing = lazy(() => import("./pages/Pricing"));
 
 export default App;

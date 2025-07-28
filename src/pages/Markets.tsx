@@ -1,45 +1,23 @@
 
-import { GaiasExchange } from '@/components/GaiasExchange'
-import { InvestorScoutingSystem } from '@/components/InvestorScoutingSystem'
-import { FullyFunctionalExchange } from '@/components/FullyFunctionalExchange'
-import { MultiExchangeIntegration } from '@/components/MultiExchangeIntegration'
-import { GaiaFeeManager } from '@/components/GaiaFeeManager'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { BarChart3 } from 'lucide-react'
 
-const Markets = () => {
+export default function Markets() {
   return (
-    <div className="space-y-6">
-      <Tabs defaultValue="exchange" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="exchange">Live Exchange</TabsTrigger>
-          <TabsTrigger value="fee-manager">Fee Options</TabsTrigger>
-          <TabsTrigger value="investors">Investor Scouting</TabsTrigger>
-          <TabsTrigger value="listings">Exchange Listings</TabsTrigger>
-          <TabsTrigger value="platform">Full Platform</TabsTrigger>
-        </TabsList>
-        
-        <TabsContent value="exchange" className="space-y-6">
-          <FullyFunctionalExchange />
-        </TabsContent>
-        
-        <TabsContent value="fee-manager" className="space-y-6">
-          <GaiaFeeManager />
-        </TabsContent>
-        
-        <TabsContent value="investors" className="space-y-6">
-          <InvestorScoutingSystem />
-        </TabsContent>
-        
-        <TabsContent value="listings" className="space-y-6">
-          <MultiExchangeIntegration />
-        </TabsContent>
-        
-        <TabsContent value="platform" className="space-y-6">
-          <GaiasExchange />
-        </TabsContent>
-      </Tabs>
+    <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20 p-6">
+      <div className="container mx-auto">
+        <Card className="border-green-500/50 bg-gradient-to-r from-green-900/40 to-blue-900/40">
+          <CardHeader>
+            <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 flex items-center justify-center gap-3">
+              <BarChart3 className="h-12 w-12 text-green-400" />
+              📊 Markets
+            </CardTitle>
+            <p className="text-center text-xl text-muted-foreground">
+              Environmental Markets & Analytics
+            </p>
+          </CardHeader>
+        </Card>
+      </div>
     </div>
   )
 }
-
-export default Markets
