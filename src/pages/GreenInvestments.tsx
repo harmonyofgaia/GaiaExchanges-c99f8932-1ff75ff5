@@ -4,9 +4,136 @@ import { GaiaCommunityProjects } from '@/components/GaiaCommunityProjects'
 import { WildfireSandProtection } from '@/components/green-investments/WildfireSandProtection'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Leaf, Globe, TrendingUp, Shield, Flame } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { Leaf, Globe, TrendingUp, Shield, Flame, Heart, Zap, Snowflake, TreePine, Coffee, Music, Users, GamepadIcon } from 'lucide-react'
 
 const GreenInvestments = () => {
+  // Your original projects data
+  const originalProjects = [
+    {
+      id: '1',
+      title: '❤️ The Heart Of Gaia',
+      description: 'A spiritual and environmental awakening project connecting souls to Mother Earth through conscious living and sustainable practices.',
+      category: 'Spiritual Ecology',
+      fundingGoal: 100000,
+      currentFunding: 45000,
+      backers: 234,
+      icon: <Heart className="h-6 w-6" />,
+      color: 'from-pink-500 to-red-500'
+    },
+    {
+      id: '2',
+      title: '🌱 Seed Splitter (project demo)',
+      description: 'Revolutionary seed splitting technology for enhanced plant growth and agricultural sustainability.',
+      category: 'Agriculture Tech',
+      fundingGoal: 75000,
+      currentFunding: 32000,
+      backers: 156,
+      icon: <Leaf className="h-6 w-6" />,
+      color: 'from-green-500 to-emerald-500'
+    },
+    {
+      id: '3',
+      title: '⚡ Railing Energy (project demo)',
+      description: 'Innovative railway energy harvesting system converting train movement into clean electricity.',
+      category: 'Renewable Energy',
+      fundingGoal: 200000,
+      currentFunding: 89000,
+      backers: 312,
+      icon: <Zap className="h-6 w-6" />,
+      color: 'from-yellow-500 to-orange-500'
+    },
+    {
+      id: '4',
+      title: '❄️ Freeze Capital',
+      description: 'Arctic preservation and climate research initiative protecting polar ecosystems and wildlife.',
+      category: 'Climate Research',
+      fundingGoal: 150000,
+      currentFunding: 67000,
+      backers: 189,
+      icon: <Snowflake className="h-6 w-6" />,
+      color: 'from-blue-500 to-cyan-500'
+    },
+    {
+      id: '5',
+      title: '🍄 Earth Aquarium of Shrooms',
+      description: 'Mycological research and mushroom cultivation for environmental restoration and food security.',
+      category: 'Mycology',
+      fundingGoal: 85000,
+      currentFunding: 42000,
+      backers: 278,
+      icon: <TreePine className="h-6 w-6" />,
+      color: 'from-purple-500 to-indigo-500'
+    },
+    {
+      id: '6',
+      title: '☕ Vintage Internet Cafe (project demo)',
+      description: 'Nostalgic internet cafe experience promoting digital wellness and community connection.',
+      category: 'Digital Wellness',
+      fundingGoal: 50000,
+      currentFunding: 28000,
+      backers: 145,
+      icon: <Coffee className="h-6 w-6" />,
+      color: 'from-amber-500 to-yellow-500'
+    },
+    {
+      id: '7',
+      title: '🎵 Techno Soul Solutions (project demo)',
+      description: 'Music therapy and sound healing technologies for mental health and spiritual growth.',
+      category: 'Sound Healing',
+      fundingGoal: 60000,
+      currentFunding: 35000,
+      backers: 198,
+      icon: <Music className="h-6 w-6" />,
+      color: 'from-violet-500 to-purple-500'
+    },
+    {
+      id: '8',
+      title: '🌊 Natural Clean System',
+      description: 'Bio-based cleaning solutions and water purification systems for sustainable living.',
+      category: 'Water Tech',
+      fundingGoal: 90000,
+      currentFunding: 54000,
+      backers: 267,
+      icon: <Globe className="h-6 w-6" />,
+      color: 'from-teal-500 to-green-500'
+    },
+    {
+      id: '9',
+      title: '🎮 NFT GameSwap Virtual',
+      description: 'Sustainable gaming platform with eco-friendly NFTs and carbon-neutral virtual experiences.',
+      category: 'Green Gaming',
+      fundingGoal: 120000,
+      currentFunding: 78000,
+      backers: 456,
+      icon: <GamepadIcon className="h-6 w-6" />,
+      color: 'from-green-500 to-blue-500'
+    },
+    {
+      id: '10',
+      title: '🎶 Sound Riffs Re Grau dio',
+      description: 'Environmental sound art and audio landscapes for consciousness raising and nature connection.',
+      category: 'Sound Art',
+      fundingGoal: 45000,
+      currentFunding: 29000,
+      backers: 167,
+      icon: <Music className="h-6 w-6" />,
+      color: 'from-indigo-500 to-pink-500'
+    },
+    {
+      id: '11',
+      title: '🏞️ GreenLake Tribe',
+      description: 'Eco-village community project creating sustainable living spaces and regenerative ecosystems.',
+      category: 'Eco-Community',
+      fundingGoal: 300000,
+      currentFunding: 156000,
+      backers: 589,
+      icon: <Users className="h-6 w-6" />,
+      color: 'from-emerald-500 to-teal-500'
+    }
+  ]
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
       <div className="container mx-auto px-4 py-8">
@@ -55,6 +182,85 @@ const GreenInvestments = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Your Original Projects */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-green-400 mb-4">
+              🌟 Your Original GAiA Projects
+            </h2>
+            <p className="text-muted-foreground">
+              The creative projects you've built with love and dedication
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {originalProjects.map((project) => {
+              const fundingPercentage = (project.currentFunding / project.fundingGoal) * 100
+
+              return (
+                <Card 
+                  key={project.id}
+                  className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-500/30 transition-all duration-300 hover:scale-105"
+                >
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <Badge className={`bg-gradient-to-r ${project.color} text-white`}>
+                        {project.category}
+                      </Badge>
+                      <div className="text-2xl">
+                        {project.icon}
+                      </div>
+                    </div>
+                    <CardTitle className="text-green-400 text-lg leading-tight">
+                      {project.title}
+                    </CardTitle>
+                  </CardHeader>
+                  
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-green-300/80 leading-relaxed">
+                      {project.description}
+                    </p>
+                    
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-green-400">Funding Progress</span>
+                        <span className="text-green-300">
+                          ${project.currentFunding.toLocaleString()} / ${project.fundingGoal.toLocaleString()}
+                        </span>
+                      </div>
+                      <Progress value={fundingPercentage} className="h-2" />
+                      <div className="flex justify-between text-xs">
+                        <span className="text-green-300/60">
+                          {fundingPercentage.toFixed(1)}% funded
+                        </span>
+                        <span className="text-blue-400">
+                          {project.backers} backers
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <Button 
+                        className={`flex-1 bg-gradient-to-r ${project.color} hover:opacity-90`}
+                        size="sm"
+                      >
+                        💚 Invest
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        className="border-green-400 text-green-400 hover:bg-green-900/20"
+                        size="sm"
+                      >
+                        ✨ Details
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+        </div>
 
         {/* Featured Project: Wildfire Sand Protection */}
         <div className="mb-12">
