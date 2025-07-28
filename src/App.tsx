@@ -1,3 +1,4 @@
+
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
@@ -10,6 +11,7 @@ import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
 const LiveTracking = lazy(() => import('./pages/LiveTracking'))
 const Gaming = lazy(() => import('./pages/Gaming'))
 const Wallet = lazy(() => import('./pages/Wallet'))
@@ -29,6 +31,7 @@ const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
 const DeploymentStatus = lazy(() => import('./pages/DeploymentStatus'))
 const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'))
 const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'))
+const DecentralizedProjectFundingPools = lazy(() => import('./pages/DecentralizedProjectFundingPools'))
 const LandscapeBuilder = lazy(() => import('./pages/LandscapeBuilder'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
@@ -61,6 +64,7 @@ function App() {
           }>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/virtual-world" element={<VirtualWorld />} />
               <Route path="/animal-welfare" element={<AnimalWelfare />} />
               <Route path="/gaming" element={<Gaming />} />
@@ -89,6 +93,7 @@ function App() {
               <Route path="/deployment-status" element={<DeploymentStatus />} />
               <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
               <Route path="/enhanced-leaderboard" element={<EnhancedLeaderboard />} />
+              <Route path="/project-funding" element={<DecentralizedProjectFundingPools />} />
             </Routes>
           </Suspense>
         </main>
