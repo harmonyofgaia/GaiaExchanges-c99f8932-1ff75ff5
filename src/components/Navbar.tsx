@@ -59,6 +59,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { name: 'Home', path: '/', icon: Home },
   { name: 'Exchange', path: '/exchange', icon: ArrowRightLeft },
+  { name: 'Green Investments', path: '/green-investments', icon: TrendingUp },
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
   { name: 'Green Impact', path: '/green-impact-dashboard', icon: Leaf },
   { name: 'Eco Avatar', path: '/eco-avatar', icon: User },
@@ -78,7 +79,6 @@ const navItems: NavItem[] = [
   { name: 'Streaming Shows', path: '/streaming-shows', icon: Tv },
   { name: 'Gaia Bike', path: '/gaia-bike-ecosystem', icon: Bike },
   { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
-  { name: 'Green Investments', path: '/green-investments', icon: TrendingUp },
   { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
   { name: 'Sand Protect', path: '/sand-protect', icon: Shield },
   { name: 'Projects', path: '/gaias-projects', icon: Folder },
