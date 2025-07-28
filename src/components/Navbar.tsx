@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { GaiaLogo } from '@/components/GaiaLogo'
+import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -73,8 +73,8 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <GaiaLogo size="sm" variant="matrix" showText={false} />
-            <span className="font-bold text-primary text-xl">GAiA Universe</span>
+            <AnimatedEarthLogo />
+            <span className="font-bold text-primary text-xl">Gaia's Exchanges</span>
           </Link>
 
           {/* Desktop Navigation */}

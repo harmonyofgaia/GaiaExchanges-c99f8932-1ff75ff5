@@ -1,4 +1,3 @@
-
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
@@ -7,6 +6,7 @@ import { GaiaLogo } from '@/components/GaiaLogo'
 import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
 import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
 import { HoneypotRedirect } from '@/components/security/HoneypotRedirect'
+import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
@@ -52,8 +52,10 @@ function App() {
           <Suspense fallback={
             <div className="min-h-screen bg-background flex items-center justify-center">
               <div className="text-center">
-                <GaiaLogo size="xl" variant="matrix" />
-                <div className="mt-4 text-primary animate-pulse">Loading GAiA Universe...</div>
+                <div className="mb-4 flex justify-center">
+                  <AnimatedEarthLogo />
+                </div>
+                <div className="mt-4 text-primary animate-pulse">Loading Gaia's Exchanges...</div>
               </div>
             </div>
           }>

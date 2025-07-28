@@ -4,28 +4,16 @@ import { toast } from 'sonner'
 import { shouldShowNotification } from '@/lib/utils'
 
 interface NotificationPreferences {
-  dragonLevels: 'off' | 'critical' | 'major' // Reduced options
-  systemUpdates: boolean
-  tokenEarnings: boolean
-  videoApprovals: boolean
+  upgradeNotifications: boolean
+  criticalErrors: boolean
   securityAlerts: boolean
-}
-
-interface SmartNotification {
-  type: string
-  level: number
-  message: string
-  shouldShow: boolean
-  lastShown: number
 }
 
 export function SmartNotificationManager() {
   const [preferences, setPreferences] = useState<NotificationPreferences>({
-    dragonLevels: 'off', // Default to off
-    systemUpdates: false, // Reduce system update notifications
-    tokenEarnings: true,
-    videoApprovals: true,
-    securityAlerts: true
+    upgradeNotifications: true, // Only show upgrade notifications
+    criticalErrors: true, // Keep critical errors
+    securityAlerts: true // Keep security alerts
   })
 
   const [lastNotifications, setLastNotifications] = useState<Record<string, number>>({})
@@ -43,56 +31,54 @@ export function SmartNotificationManager() {
     }
   }, [])
 
-  const shouldShowDragonNotification = (level: number, power: number): boolean => {
-    const lastDragonNotification = lastNotifications.dragon || 0
-    const timeSinceLastNotification = Date.now() - lastDragonNotification
+  const showUpgradeNotification = (title: string, description: string, upgradeType: 'level' | 'feature' | 'token' | 'achievement') => {
+    if (!preferences.upgradeNotifications) return
 
-    switch (preferences.dragonLevels) {
-      case 'off':
-        return false
-      case 'critical':
-        // Only show every 10000 levels or massive power milestones
-        return (level % 10000 === 0 || power % 10000000 < 1000) && timeSinceLastNotification > 1800000 // 30 minutes
-      case 'major':
-        // Show every 1000 levels or major power milestones
-        return (level % 1000 === 0 || power % 1000000 < 1000) && timeSinceLastNotification > 600000 // 10 minutes
-      default:
-        return false
-    }
-  }
-
-  const showSmartNotification = (type: string, title: string, description: string, priority: 'low' | 'medium' | 'high' | 'critical' = 'medium') => {
-    // Check if we should show this notification based on global settings
-    if (!shouldShowNotification(priority)) {
-      return
-    }
-
-    // Check user preferences
-    const prefKey = type as keyof NotificationPreferences
-    if (prefKey in preferences && !preferences[prefKey]) {
-      return
-    }
-
-    // Implement stricter throttling
-    const lastShown = lastNotifications[type] || 0
-    const cooldownTime = priority === 'critical' ? 0 : priority === 'high' ? 300000 : 1800000 // 5 minutes for high, 30 minutes for others
+    const lastShown = lastNotifications[`upgrade_${upgradeType}`] || 0
+    const cooldownTime = 300000 // 5 minutes between upgrade notifications
     
     if (Date.now() - lastShown < cooldownTime) {
       return
     }
 
-    // Show notification only for important events
-    if (priority === 'critical' || priority === 'high') {
-      toast.success(title, {
-        description,
-        duration: priority === 'critical' ? 6000 : 3000
-      })
-
-      // Update last shown timestamp
-      const updated = { ...lastNotifications, [type]: Date.now() }
-      setLastNotifications(updated)
-      localStorage.setItem('last_notifications', JSON.stringify(updated))
+    // Show upgrade notification with appropriate styling
+    const upgradeEmojis = {
+      level: '🎉',
+      feature: '✨',
+      token: '🪙',
+      achievement: '🏆'
     }
+
+    toast.success(`${upgradeEmojis[upgradeType]} ${title}`, {
+      description,
+      duration: 4000,
+      className: 'border-l-4 border-l-green-500 bg-green-50 dark:bg-green-900/20'
+    })
+
+    // Update last shown timestamp
+    const updated = { ...lastNotifications, [`upgrade_${upgradeType}`]: Date.now() }
+    setLastNotifications(updated)
+    localStorage.setItem('last_notifications', JSON.stringify(updated))
+  }
+
+  const showCriticalNotification = (title: string, description: string) => {
+    if (!preferences.criticalErrors) return
+
+    toast.error(title, {
+      description,
+      duration: 6000,
+      className: 'border-l-4 border-l-red-500'
+    })
+  }
+
+  const showSecurityAlert = (title: string, description: string) => {
+    if (!preferences.securityAlerts) return
+
+    toast.warning(`🛡️ ${title}`, {
+      description,
+      duration: 5000,
+      className: 'border-l-4 border-l-yellow-500'
+    })
   }
 
   const updatePreferences = (newPreferences: NotificationPreferences) => {
@@ -102,9 +88,10 @@ export function SmartNotificationManager() {
 
   // Expose methods globally for other components to use
   useEffect(() => {
-    ;(window as any).smartNotifications = {
-      showSmartNotification,
-      shouldShowDragonNotification,
+    ;(window as any).gaiaNotifications = {
+      showUpgradeNotification,
+      showCriticalNotification,
+      showSecurityAlert,
       updatePreferences,
       preferences
     }

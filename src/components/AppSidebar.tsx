@@ -92,7 +92,7 @@ const AppSidebar = () => {
             <div className="text-2xl">🌍</div>
             {isExpanded && (
               <div>
-                <h2 className="text-purple-400 font-bold text-lg">GAiA Universe</h2>
+                <h2 className="text-purple-400 font-bold text-lg">Gaia's Exchanges</h2>
                 <p className="text-xs text-muted-foreground">Harmony of Culture</p>
               </div>
             )}
