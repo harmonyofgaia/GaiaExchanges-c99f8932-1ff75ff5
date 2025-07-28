@@ -1,9 +1,10 @@
 
 import { useState, useEffect } from 'react'
 import { toast } from 'sonner'
+import { shouldShowNotification } from '@/lib/utils'
 
 interface NotificationPreferences {
-  dragonLevels: 'all' | 'milestones' | 'major' | 'off'
+  dragonLevels: 'off' | 'critical' | 'major' // Reduced options
   systemUpdates: boolean
   tokenEarnings: boolean
   videoApprovals: boolean
@@ -20,8 +21,8 @@ interface SmartNotification {
 
 export function SmartNotificationManager() {
   const [preferences, setPreferences] = useState<NotificationPreferences>({
-    dragonLevels: 'milestones', // Only show every 100 levels or major milestones
-    systemUpdates: true,
+    dragonLevels: 'off', // Default to off
+    systemUpdates: false, // Reduce system update notifications
     tokenEarnings: true,
     videoApprovals: true,
     securityAlerts: true
@@ -49,43 +50,49 @@ export function SmartNotificationManager() {
     switch (preferences.dragonLevels) {
       case 'off':
         return false
+      case 'critical':
+        // Only show every 10000 levels or massive power milestones
+        return (level % 10000 === 0 || power % 10000000 < 1000) && timeSinceLastNotification > 1800000 // 30 minutes
       case 'major':
-        // Only show every 1000 levels or major power milestones
-        return (level % 1000 === 0 || power % 1000000 < 1000) && timeSinceLastNotification > 300000 // 5 minutes
-      case 'milestones':
-        // Show every 100 levels or significant milestones
-        return (level % 100 === 0 || power % 100000 < 1000) && timeSinceLastNotification > 60000 // 1 minute
-      case 'all':
+        // Show every 1000 levels or major power milestones
+        return (level % 1000 === 0 || power % 1000000 < 1000) && timeSinceLastNotification > 600000 // 10 minutes
       default:
-        return timeSinceLastNotification > 30000 // 30 seconds minimum between notifications
+        return false
     }
   }
 
-  const showSmartNotification = (type: string, title: string, description: string, priority: 'low' | 'medium' | 'high' = 'medium') => {
+  const showSmartNotification = (type: string, title: string, description: string, priority: 'low' | 'medium' | 'high' | 'critical' = 'medium') => {
+    // Check if we should show this notification based on global settings
+    if (!shouldShowNotification(priority)) {
+      return
+    }
+
     // Check user preferences
     const prefKey = type as keyof NotificationPreferences
     if (prefKey in preferences && !preferences[prefKey]) {
       return
     }
 
-    // Implement smart throttling
+    // Implement stricter throttling
     const lastShown = lastNotifications[type] || 0
-    const cooldownTime = priority === 'high' ? 0 : priority === 'medium' ? 30000 : 120000
+    const cooldownTime = priority === 'critical' ? 0 : priority === 'high' ? 300000 : 1800000 // 5 minutes for high, 30 minutes for others
     
     if (Date.now() - lastShown < cooldownTime) {
       return
     }
 
-    // Show notification
-    toast.success(title, {
-      description,
-      duration: priority === 'high' ? 8000 : priority === 'medium' ? 4000 : 3000
-    })
+    // Show notification only for important events
+    if (priority === 'critical' || priority === 'high') {
+      toast.success(title, {
+        description,
+        duration: priority === 'critical' ? 6000 : 3000
+      })
 
-    // Update last shown timestamp
-    const updated = { ...lastNotifications, [type]: Date.now() }
-    setLastNotifications(updated)
-    localStorage.setItem('last_notifications', JSON.stringify(updated))
+      // Update last shown timestamp
+      const updated = { ...lastNotifications, [type]: Date.now() }
+      setLastNotifications(updated)
+      localStorage.setItem('last_notifications', JSON.stringify(updated))
+    }
   }
 
   const updatePreferences = (newPreferences: NotificationPreferences) => {
