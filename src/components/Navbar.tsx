@@ -92,17 +92,17 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+          {/* Logo - Enhanced for better visibility */}
+          <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity min-w-fit flex-shrink-0">
             <AnimatedEarthLogo />
-            <span className="text-xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              GAiA
+            <span className="text-xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent whitespace-nowrap">
+              Gaia's Exchanges
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navItems.slice(0, 12).map((item) => {
+          <div className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
+            {navItems.slice(0, 10).map((item) => {
               const Icon = item.icon
               return (
                 <Link
@@ -130,7 +130,7 @@ export function Navbar() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
-                {navItems.slice(12).map((item) => {
+                {navItems.slice(10).map((item) => {
                   const Icon = item.icon
                   return (
                     <DropdownMenuItem key={item.path} asChild>
