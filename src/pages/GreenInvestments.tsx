@@ -4,6 +4,7 @@ import { GAiACommunityProjects } from '@/components/green-investments/GAiACommun
 import { GaiaCommunityProjects } from '@/components/GaiaCommunityProjects'
 import { WildfireSandProtection } from '@/components/green-investments/WildfireSandProtection'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { Leaf, Globe, TrendingUp, Shield, Flame } from 'lucide-react'
 
 const GreenInvestments = () => {
