@@ -46,8 +46,7 @@ import {
   MessageCircle,
   Handshake,
   Target,
-  Brain,
-  Megaphone
+  Brain
 } from 'lucide-react'
 
 interface NavItem {
@@ -61,7 +60,6 @@ const navItems: NavItem[] = [
   { name: 'Home', path: '/', icon: Home },
   { name: 'Exchange', path: '/exchange', icon: ArrowRightLeft },
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-  { name: 'Marketing Hub', path: '/marketing-hub', icon: Megaphone },
   { name: 'Green Impact', path: '/green-impact-dashboard', icon: Leaf },
   { name: 'Eco Avatar', path: '/eco-avatar', icon: User },
   { name: 'Earning Activities', path: '/earning-activities', icon: Activity },
