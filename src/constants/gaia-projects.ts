@@ -1,5 +1,26 @@
+export interface GAiAProject {
+  id: string
+  title: string
+  description: string
+  status: 'active' | 'completed' | 'planning'
+  tags: string[]
+  fundingGoal: number
+  currentFunding: number
+  participants: number
+  deadline: string
+  reward: number
+  progress: number
+  impact: 'Low' | 'Medium' | 'High' | 'Very High'
+  expectedImpact: string
+  location: string
+  category?: string
+  isFeatured?: boolean
+  researchPhases?: string[]
+  activeResearchers?: number
+  publicationsPlanned?: number
+}
 
-export const GAIA_PROJECTS = [
+export const GAIA_PROJECTS: GAiAProject[] = [
   {
     id: '1',
     title: '🌱 Solar Village Initiative',
