@@ -2,9 +2,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Gamepad2, Trophy, Users, Star, Play, Settings, Zap } from 'lucide-react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Gamepad2, Trophy, Users, Star, Play, Settings, Zap, Rocket } from 'lucide-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ArtilleryCreatorEngine } from './ArtilleryCreatorEngine'
 
 export function GaiaGameHub() {
   const navigate = useNavigate()
@@ -138,74 +140,91 @@ export function GaiaGameHub() {
         </CardContent>
       </Card>
 
-      {/* Games Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {games.map((game) => (
-          <Card key={game.id} className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-blue-900/20 hover:border-purple-400/50 transition-all">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-purple-400">
-                <span className="text-2xl">{game.icon}</span>
-                {game.name}
-              </CardTitle>
-              <div className="flex items-center gap-2">
-                <Badge className="bg-green-600">ACTIVE</Badge>
-                <Badge className={`${getDifficultyColor(game.difficulty)} text-white`}>
-                  {game.difficulty}
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-muted-foreground text-sm">{game.description}</p>
-              
-              <div className="flex items-center justify-between text-sm">
-                <div className="flex items-center gap-1">
-                  <Users className="h-4 w-4 text-blue-400" />
-                  <span className="text-blue-400">{game.players.toLocaleString()} players</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Star className="h-4 w-4 text-yellow-400" />
-                  <span className="text-yellow-400">4.8/5</span>
-                </div>
-              </div>
+      {/* Main Content Tabs */}
+      <Tabs defaultValue="games" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="games">🎮 Games</TabsTrigger>
+          <TabsTrigger value="creator">🛠️ Artillery Creator</TabsTrigger>
+          <TabsTrigger value="actions">🚀 Quick Actions</TabsTrigger>
+        </TabsList>
 
-              <Button 
-                onClick={() => handleGameLaunch(game.route, game.name)}
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-              >
-                <Play className="h-4 w-4 mr-2" />
-                Launch Game
-              </Button>
+        <TabsContent value="games" className="space-y-6">
+          {/* Games Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {games.map((game) => (
+              <Card key={game.id} className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-blue-900/20 hover:border-purple-400/50 transition-all">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-purple-400">
+                    <span className="text-2xl">{game.icon}</span>
+                    {game.name}
+                  </CardTitle>
+                  <div className="flex items-center gap-2">
+                    <Badge className="bg-green-600">ACTIVE</Badge>
+                    <Badge className={`${getDifficultyColor(game.difficulty)} text-white`}>
+                      {game.difficulty}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground text-sm">{game.description}</p>
+                  
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-1">
+                      <Users className="h-4 w-4 text-blue-400" />
+                      <span className="text-blue-400">{game.players.toLocaleString()} players</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Star className="h-4 w-4 text-yellow-400" />
+                      <span className="text-yellow-400">4.8/5</span>
+                    </div>
+                  </div>
+
+                  <Button 
+                    onClick={() => handleGameLaunch(game.route, game.name)}
+                    className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                  >
+                    <Play className="h-4 w-4 mr-2" />
+                    Launch Game
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="creator" className="space-y-6">
+          <ArtilleryCreatorEngine />
+        </TabsContent>
+
+        <TabsContent value="actions" className="space-y-6">
+          {/* Quick Actions */}
+          <Card className="border-blue-500/30 bg-blue-900/20">
+            <CardHeader>
+              <CardTitle className="text-blue-400">🚀 Quick Actions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <Button variant="outline" className="border-green-500/30 text-green-400">
+                  <Trophy className="h-4 w-4 mr-2" />
+                  Leaderboards
+                </Button>
+                <Button variant="outline" className="border-blue-500/30 text-blue-400">
+                  <Users className="h-4 w-4 mr-2" />
+                  Find Players
+                </Button>
+                <Button variant="outline" className="border-purple-500/30 text-purple-400">
+                  <Settings className="h-4 w-4 mr-2" />
+                  Game Settings
+                </Button>
+                <Button variant="outline" className="border-yellow-500/30 text-yellow-400">
+                  <Zap className="h-4 w-4 mr-2" />
+                  Power-Ups
+                </Button>
+              </div>
             </CardContent>
           </Card>
-        ))}
-      </div>
-
-      {/* Quick Actions */}
-      <Card className="border-blue-500/30 bg-blue-900/20">
-        <CardHeader>
-          <CardTitle className="text-blue-400">🚀 Quick Actions</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Button variant="outline" className="border-green-500/30 text-green-400">
-              <Trophy className="h-4 w-4 mr-2" />
-              Leaderboards
-            </Button>
-            <Button variant="outline" className="border-blue-500/30 text-blue-400">
-              <Users className="h-4 w-4 mr-2" />
-              Find Players
-            </Button>
-            <Button variant="outline" className="border-purple-500/30 text-purple-400">
-              <Settings className="h-4 w-4 mr-2" />
-              Game Settings
-            </Button>
-            <Button variant="outline" className="border-yellow-500/30 text-yellow-400">
-              <Zap className="h-4 w-4 mr-2" />
-              Power-Ups
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+        </TabsContent>
+      </Tabs>
 
       {/* System Status */}
       <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
@@ -215,7 +234,8 @@ export function GaiaGameHub() {
           ✅ Real-time multiplayer connectivity established<br/>
           ✅ Environmental impact tracking active<br/>
           ✅ Quantum-secured game state management<br/>
-          ✅ 24/7 uptime with automatic failover protection
+          ✅ 24/7 uptime with automatic failover protection<br/>
+          ✅ Artillery Creator Engine fully integrated and operational
         </div>
       </div>
     </div>
