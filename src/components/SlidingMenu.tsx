@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -40,6 +39,11 @@ const SlidingMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isAuthorizedIP, setIsAuthorizedIP] = useState(false)
   const location = useLocation()
+
+  // Don't render the sliding menu on the wallet page
+  if (location.pathname === '/wallet') {
+    return null
+  }
 
   useEffect(() => {
     const checkIPAuthorization = async () => {
