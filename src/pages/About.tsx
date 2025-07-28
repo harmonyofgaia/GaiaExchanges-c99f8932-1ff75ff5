@@ -1,169 +1,152 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Leaf, Globe, Heart, Users, Gamepad2, Shield, Zap, Star } from 'lucide-react'
+import { Heart, Globe, Leaf, Music, Smile, Users } from 'lucide-react'
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900/10 via-blue-900/10 to-purple-900/10">
+    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/10 to-green-900/10">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-center mb-8">
-          <UniversalGaiaLogo 
-            size="xl" 
-            animated={true}
-            showText={true}
-            className="hover:scale-105 transition-transform duration-300"
-          />
-        </div>
-
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
-            About Harmony of Gaia
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-green-400 to-blue-400 bg-clip-text text-transparent mb-6">
+            About GAIA
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            We Are a Strong Creative Open Minded Circuit To Happiness - Building the future of sustainable technology, 
-            gaming, and environmental consciousness through quantum-powered innovation.
+          <p className="text-xl text-muted-foreground">
+            The Story Behind Our Creative Circuit To Happiness
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-emerald-900/20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <Card className="border-purple-500/30 bg-purple-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-purple-400">
+                <Music className="h-6 w-6" />
+                Seeds Will Form Into Music
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                Our core philosophy centers around the beautiful transformation of ideas (seeds) 
+                into creative expressions (music). Every project, every innovation, every smile 
+                contributes to this living symphony of positive change.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="outline" className="border-purple-500/50 text-purple-300">
+                  Creative Expression
+                </Badge>
+                <Badge variant="outline" className="border-blue-500/50 text-blue-300">
+                  Innovation
+                </Badge>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-green-500/30 bg-green-900/20">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-green-400">
                 <Leaf className="h-6 w-6" />
-                Environmental Mission
+                Environmental Focus
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Our core mission is to create technology that not only serves humanity but actively heals our planet. 
-                Every project connects to environmental restoration and sustainability.
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                GAIA represents our commitment to environmental protection and sustainable 
+                innovation. Through green technology, conservation efforts, and community 
+                engagement, we're building a better future for our planet.
               </p>
-              <Badge className="bg-green-600">🌍 Planet First</Badge>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-cyan-900/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-400">
-                <Gamepad2 className="h-6 w-6" />
-                Gaming Innovation
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Revolutionary gaming experiences powered by quantum computing, featuring 8K graphics, 
-                neural network AI, and immersive virtual worlds that surpass all competitors.
-              </p>
-              <Badge className="bg-blue-600">🎮 Next-Gen Gaming</Badge>
-            </CardContent>
-          </Card>
-
-          <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-pink-900/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-purple-400">
-                <Zap className="h-6 w-6" />
-                Quantum Technology
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Leveraging quantum computing power for unprecedented processing capabilities, 
-                blockchain security, and AI-driven systems that evolve and learn continuously.
-              </p>
-              <Badge className="bg-purple-600">⚡ Quantum Powered</Badge>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="outline" className="border-green-500/50 text-green-300">
+                  Sustainability
+                </Badge>
+                <Badge variant="outline" className="border-emerald-500/50 text-emerald-300">
+                  Conservation
+                </Badge>
+              </div>
             </CardContent>
           </Card>
         </div>
 
-        <Card className="border-yellow-500/30 bg-gradient-to-r from-yellow-900/20 to-orange-900/20 mb-12">
+        <Card className="border-gold-500/30 bg-gradient-to-r from-yellow-900/20 to-orange-900/20 mb-8">
           <CardHeader>
-            <CardTitle className="text-center text-3xl font-bold text-yellow-400">
-              🌟 Our Core Values
+            <CardTitle className="text-center text-3xl text-yellow-400">
+              Our Mission
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="text-center">
-                <Heart className="h-12 w-12 text-red-400 mx-auto mb-2" />
-                <h3 className="text-xl font-bold text-red-400">Happiness</h3>
+          <CardContent className="space-y-6">
+            <div className="text-center space-y-4">
+              <p className="text-xl text-muted-foreground">
+                "We Create a New Cult till the End Of the World"
+              </p>
+              <p className="text-lg text-blue-300">
+                Not a cult in the traditional sense, but a movement of positive change, 
+                creativity, and environmental consciousness that spreads across the globe.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+              <div className="text-center space-y-2">
+                <Smile className="h-12 w-12 text-yellow-400 mx-auto" />
+                <h3 className="text-lg font-bold text-yellow-300">Bring Smiles</h3>
                 <p className="text-sm text-muted-foreground">
-                  Bringing smiles to every soul through creative and positive experiences
+                  "My Goal is To Bring A Smile to every Soul"
                 </p>
               </div>
-              <div className="text-center">
-                <Users className="h-12 w-12 text-blue-400 mx-auto mb-2" />
-                <h3 className="text-xl font-bold text-blue-400">Community</h3>
+
+              <div className="text-center space-y-2">
+                <Users className="h-12 w-12 text-blue-400 mx-auto" />
+                <h3 className="text-lg font-bold text-blue-300">Unity</h3>
                 <p className="text-sm text-muted-foreground">
-                  Building strong, supportive communities that grow and thrive together
+                  "Doesn't matter if You're Black Or White"
                 </p>
               </div>
-              <div className="text-center">
-                <Star className="h-12 w-12 text-purple-400 mx-auto mb-2" />
-                <h3 className="text-xl font-bold text-purple-400">Innovation</h3>
+
+              <div className="text-center space-y-2">
+                <Heart className="h-12 w-12 text-red-400 mx-auto" />
+                <h3 className="text-lg font-bold text-red-300">Authenticity</h3>
                 <p className="text-sm text-muted-foreground">
-                  Pushing boundaries with creative solutions that change the world
-                </p>
-              </div>
-              <div className="text-center">
-                <Globe className="h-12 w-12 text-green-400 mx-auto mb-2" />
-                <h3 className="text-xl font-bold text-green-400">Sustainability</h3>
-                <p className="text-sm text-muted-foreground">
-                  Every action contributes to a healthier, more sustainable planet
+                  "True Souls, True Life, True Smiles"
                 </p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
+        <Card className="border-cyan-500/30 bg-cyan-900/20">
           <CardHeader>
-            <CardTitle className="text-center text-3xl font-bold text-green-400">
-              🚀 Our Vision for the Future
+            <CardTitle className="text-center text-2xl text-cyan-400">
+              What Makes Us Different
             </CardTitle>
           </CardHeader>
-          <CardContent className="text-center space-y-6">
-            <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
-              We envision a world where technology serves both humanity and nature. Through our revolutionary gaming platforms, 
-              environmental projects, and quantum-powered innovations, we're building the foundation for a sustainable, 
-              joyful future where creativity flourishes and every being can thrive.
+          <CardContent className="space-y-4">
+            <p className="text-lg text-muted-foreground text-center">
+              "We Will not make you only be surprised but we show you true Souls, 
+              True Life, True Smiles A More Impressive way on Doing Things"
             </p>
-            
-            <div className="bg-black/30 rounded-lg p-6">
-              <h3 className="text-2xl font-bold text-blue-400 mb-4">
-                "Seeds Will Form Into Music"
-              </h3>
-              <p className="text-muted-foreground italic">
-                Every small action, every creative spark, every moment of happiness contributes to the grand symphony 
-                of positive change. We are planting seeds of innovation that will grow into harmonious solutions 
-                for generations to come.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button 
-                onClick={() => window.location.href = '/gaias-projects'}
-                className="bg-green-600 hover:bg-green-700"
-              >
-                <Leaf className="h-4 w-4 mr-2" />
-                Explore Our Projects
-              </Button>
-              <Button 
-                onClick={() => window.location.href = '/gaming'}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
-                <Gamepad2 className="h-4 w-4 mr-2" />
-                Experience Our Games
-              </Button>
-              <Button 
-                onClick={() => window.location.href = '/contact'}
-                className="bg-purple-600 hover:bg-purple-700"
-              >
-                <Users className="h-4 w-4 mr-2" />
-                Join Our Community
-              </Button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+              <div className="space-y-2">
+                <h4 className="text-lg font-bold text-cyan-300">Creative Innovation</h4>
+                <p className="text-sm text-muted-foreground">
+                  We combine technology with artistic expression to create unique experiences
+                </p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-bold text-cyan-300">Global Impact</h4>
+                <p className="text-sm text-muted-foreground">
+                  Every project contributes to environmental protection and social good
+                </p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-bold text-cyan-300">Community First</h4>
+                <p className="text-sm text-muted-foreground">
+                  Building connections and fostering creativity in every community we touch
+                </p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-lg font-bold text-cyan-300">Transparency</h4>
+                <p className="text-sm text-muted-foreground">
+                  "Full Transparency, A Open Wallet Where you can see every Step"
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
