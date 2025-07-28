@@ -33,14 +33,24 @@ export function ThemeDesigner() {
       description: 'Animated puzzle elements'
     },
     {
-      id: 'particles',
-      name: 'Particle System',
-      description: 'Floating particle effects'
+      id: 'cyberpunk',
+      name: 'CyberPunk Grid',
+      description: 'Futuristic grid and glitch effects'
     },
     {
-      id: 'waves',
-      name: 'Wave Animation',
-      description: 'Flowing wave patterns'
+      id: 'quantum',
+      name: 'Quantum Field',
+      description: 'Particle entanglement visualization'
+    },
+    {
+      id: 'bioelectric',
+      name: 'Bio-Electric',
+      description: 'Organic energy patterns'
+    },
+    {
+      id: 'holographic',
+      name: 'Holographic',
+      description: 'Hologram scan line effects'
     }
   ]
 
