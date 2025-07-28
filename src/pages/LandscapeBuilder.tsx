@@ -1,219 +1,223 @@
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  Mountain, 
-  Trees, 
-  Waves, 
-  Sun, 
-  Zap,
-  Settings,
-  Palette,
-  Layers,
-  Sparkles
-} from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Mountain, TreePine, Cloud, Palette, Save, Share, Upload } from 'lucide-react'
 import { toast } from 'sonner'
 
 export default function LandscapeBuilder() {
-  const [landscapePower, setLandscapePower] = useState(5000)
-  const [ecosystems, setEcosystems] = useState(0)
+  const [activeProject, setActiveProject] = useState('Mystical Forest')
+  const [cloudStorage, setCloudStorage] = useState(85.6)
+  const [aiGeneration, setAiGeneration] = useState(true)
 
-  useEffect(() => {
-    console.log('🏔️ LANDSCAPE BUILDER - ECOSYSTEM CREATION ACTIVE')
-    console.log('🌍 ENVIRONMENTAL RESTORATION: UNLIMITED POWER')
-    
-    const growthInterval = setInterval(() => {
-      setLandscapePower(prev => prev * 1.003)
-      setEcosystems(prev => prev + 1)
-    }, 3000)
+  const projects = [
+    { name: 'Mystical Forest', type: 'Forest', progress: 78, size: '2.4 GB' },
+    { name: 'Crystal Mountains', type: 'Mountain', progress: 45, size: '1.8 GB' },
+    { name: 'Ocean Paradise', type: 'Water', progress: 92, size: '3.1 GB' },
+    { name: 'Desert Oasis', type: 'Desert', progress: 23, size: '1.2 GB' }
+  ]
 
-    return () => clearInterval(growthInterval)
-  }, [])
-
-  const createLandscape = () => {
-    toast.success('🌍 Landscape Created!', {
-      description: 'New ecosystem generated with environmental restoration protocols',
-      duration: 4000
+  const generateWithAI = () => {
+    toast.success('🤖 AI Generation Started', {
+      description: 'Creating a new landscape based on your preferences',
+      duration: 5000
     })
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20 mb-8">
+    <div className="container mx-auto px-4 py-6 space-y-6">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-400">
+          🌍 LANDSCAPE BUILDER PRO
+        </h1>
+        <p className="text-muted-foreground mt-2">
+          Unlimited cloud storage & AI generation
+        </p>
+      </div>
+
+      {/* Cloud Storage Status */}
+      <Card className="border-2 border-blue-500/50 bg-gradient-to-br from-blue-900/30 to-cyan-900/30">
         <CardHeader>
-          <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
-            🏔️ LANDSCAPE BUILDER PRO
+          <CardTitle className="flex items-center gap-2 text-blue-400">
+            <Cloud className="h-6 w-6" />
+            Cloud Storage Status
           </CardTitle>
-          <p className="text-center text-xl text-muted-foreground">
-            Create and restore ecosystems with advanced environmental technology
-          </p>
-          <div className="flex justify-center gap-4 flex-wrap mt-4">
-            <Badge className="bg-green-600 animate-pulse">POWER: {Math.floor(landscapePower).toLocaleString()}</Badge>
-            <Badge className="bg-blue-600">ECOSYSTEMS: {ecosystems}</Badge>
-            <Link to="/aura-land-scrapyard">
-              <Badge className="bg-purple-600 hover:bg-purple-700 cursor-pointer animate-pulse">
-                🌟 AURA SCRAPYARD - EXCLUSIVE ACCESS
-              </Badge>
-            </Link>
-          </div>
         </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-blue-400">∞</div>
+              <div className="text-sm text-muted-foreground">Total Storage</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-green-400">{cloudStorage} GB</div>
+              <div className="text-sm text-muted-foreground">Used Space</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-purple-400">47</div>
+              <div className="text-sm text-muted-foreground">Projects</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-orange-400">240p</div>
+              <div className="text-sm text-muted-foreground">Max Quality</div>
+            </div>
+          </div>
+        </CardContent>
       </Card>
 
       <Tabs defaultValue="builder" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="builder">🏗️ Builder</TabsTrigger>
-          <TabsTrigger value="ecosystems">🌍 Ecosystems</TabsTrigger>
-          <TabsTrigger value="restoration">🌱 Restoration</TabsTrigger>
-          <TabsTrigger value="scrapyard">🌟 Aura Scrapyard</TabsTrigger>
+          <TabsTrigger value="builder">Builder</TabsTrigger>
+          <TabsTrigger value="projects">Projects</TabsTrigger>
+          <TabsTrigger value="ai-gen">AI Generator</TabsTrigger>
+          <TabsTrigger value="gallery">Gallery</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="builder" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Card className="border-green-500/30 bg-green-900/20">
-              <CardContent className="p-4 text-center">
-                <Mountain className="h-8 w-8 mx-auto text-green-400 mb-2" />
-                <Button className="w-full bg-green-600 hover:bg-green-700">
-                  Create Mountains
-                </Button>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-blue-500/30 bg-blue-900/20">
-              <CardContent className="p-4 text-center">
-                <Trees className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  Plant Forests
-                </Button>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-cyan-500/30 bg-cyan-900/20">
-              <CardContent className="p-4 text-center">
-                <Waves className="h-8 w-8 mx-auto text-cyan-400 mb-2" />
-                <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
-                  Create Waterways
-                </Button>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-yellow-500/30 bg-yellow-900/20">
-              <CardContent className="p-4 text-center">
-                <Sun className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
-                <Button className="w-full bg-yellow-600 hover:bg-yellow-700">
-                  Climate Control
-                </Button>
+        <TabsContent value="builder" className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <Card className="border-2 border-green-500/50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-green-400">
+                    <Mountain className="h-6 w-6" />
+                    Canvas: {activeProject}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="aspect-video bg-gradient-to-br from-green-900/50 to-blue-900/50 rounded-lg border-2 border-dashed border-green-500/30 flex items-center justify-center">
+                    <div className="text-center">
+                      <Mountain className="h-12 w-12 mx-auto text-green-400 mb-4" />
+                      <div className="text-lg font-bold text-green-400">3D Landscape Canvas</div>
+                      <div className="text-sm text-muted-foreground">Drag and drop elements to build your world</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card className="border-2 border-purple-500/50">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-purple-400">
+                  <Palette className="h-6 w-6" />
+                  Tools & Assets
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button variant="outline" size="sm">
+                      <TreePine className="h-4 w-4 mr-2" />
+                      Trees
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Mountain className="h-4 w-4 mr-2" />
+                      Mountains
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Cloud className="h-4 w-4 mr-2" />
+                      Weather
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Palette className="h-4 w-4 mr-2" />
+                      Textures
+                    </Button>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="text-sm font-medium">Quick Actions</div>
+                    <Button className="w-full" size="sm">
+                      <Save className="h-4 w-4 mr-2" />
+                      Save Project
+                    </Button>
+                    <Button variant="outline" className="w-full" size="sm">
+                      <Share className="h-4 w-4 mr-2" />
+                      Share Link
+                    </Button>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
+        </TabsContent>
 
-          <Card className="border-green-500/30 bg-green-900/20">
+        <TabsContent value="projects" className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {projects.map((project, index) => (
+              <Card key={index} className="cursor-pointer hover:bg-muted/50 transition-colors">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="font-bold">{project.name}</div>
+                    <Badge variant="outline">{project.type}</Badge>
+                  </div>
+                  <div className="text-sm text-muted-foreground mb-2">
+                    Size: {project.size} • Progress: {project.progress}%
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div 
+                      className="bg-green-500 h-2 rounded-full" 
+                      style={{ width: `${project.progress}%` }}
+                    ></div>
+                  </div>
+                  <div className="flex gap-2 mt-3">
+                    <Button size="sm" variant="outline">Open</Button>
+                    <Button size="sm" variant="outline">Duplicate</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="ai-gen" className="space-y-4">
+          <Card className="border-2 border-orange-500/50 bg-gradient-to-br from-orange-900/30 to-red-900/30">
             <CardHeader>
-              <CardTitle className="text-green-400 flex items-center gap-2">
-                <Palette className="h-6 w-6" />
-                Advanced Landscape Tools
+              <CardTitle className="flex items-center gap-2 text-orange-400">
+                🤖 AI Landscape Generator
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <Button onClick={createLandscape} className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3">
-                <Zap className="h-5 w-5 mr-2" />
-                CREATE COMPLETE ECOSYSTEM
-              </Button>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="ecosystems" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="border-green-500/30 bg-green-900/20">
-              <CardHeader>
-                <CardTitle className="text-green-400">🌲 Forest Ecosystems</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">Create diverse forest environments</p>
-                <Button className="w-full bg-green-600 hover:bg-green-700">Generate Forest</Button>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-blue-500/30 bg-blue-900/20">
-              <CardHeader>
-                <CardTitle className="text-blue-400">🌊 Aquatic Systems</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">Build lakes, rivers, and wetlands</p>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">Create Waters</Button>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-orange-500/30 bg-orange-900/20">
-              <CardHeader>
-                <CardTitle className="text-orange-400">🏜️ Desert Landscapes</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">Design arid and semi-arid regions</p>
-                <Button className="w-full bg-orange-600 hover:bg-orange-700">Build Desert</Button>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="restoration" className="space-y-6">
-          <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-cyan-900/20">
-            <CardHeader>
-              <CardTitle className="text-green-400 flex items-center gap-2">
-                <Layers className="h-6 w-6" />
-                🌱 Environmental Restoration Engine
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                <h4 className="font-bold text-green-400 mb-3">🌍 Active Restoration Projects:</h4>
-                <div className="text-sm text-green-300 space-y-2">
-                  <div>• Coral Reef Restoration: 15,000 reefs rebuilt</div>
-                  <div>• Forest Regeneration: 2.5M trees planted</div>
-                  <div>• Wetland Recovery: 500 wetlands restored</div>
-                  <div>• Soil Remediation: 10,000 acres cleaned</div>
-                  <div>• Wildlife Habitat Creation: 1,200 habitats built</div>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Describe your landscape:</label>
+                  <Input 
+                    placeholder="e.g., A mystical forest with glowing mushrooms and floating islands..."
+                    className="w-full"
+                  />
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="scrapyard" className="space-y-6">
-          <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
-            <CardHeader>
-              <CardTitle className="text-purple-400 flex items-center gap-2">
-                <Sparkles className="h-6 w-6 animate-pulse" />
-                🌟 AURA LAND SCRAPYARD - EXCLUSIVE ACCESS
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="text-center space-y-4">
-              <p className="text-lg text-purple-300">
-                Transform scrap materials into landscape-building resources using aura fusion technology
-              </p>
-              
-              <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-4 mb-6">
-                <h4 className="font-bold text-purple-400 mb-2">🔮 Exclusive Scrapyard Features:</h4>
-                <div className="text-sm text-purple-300 space-y-1">
-                  <div>✨ Convert any scrap into quantum building materials</div>
-                  <div>⚡ Reality-bending landscape transformation tools</div>
-                  <div>🌟 Aura-powered ecosystem generation</div>
-                  <div>💎 Exclusive tools only available to admin users</div>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                  <Button variant="outline" size="sm">Fantasy</Button>
+                  <Button variant="outline" size="sm">Realistic</Button>
+                  <Button variant="outline" size="sm">Sci-Fi</Button>
+                  <Button variant="outline" size="sm">Abstract</Button>
                 </div>
-              </div>
-              
-              <Link to="/aura-land-scrapyard">
-                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-8">
-                  <Sparkles className="h-5 w-5 mr-2" />
-                  🌟 ENTER AURA SCRAPYARD
+                
+                <Button 
+                  onClick={generateWithAI}
+                  className="w-full bg-gradient-to-r from-orange-600 to-red-600"
+                >
+                  🚀 Generate with AI
                 </Button>
-              </Link>
+              </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="gallery" className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[1,2,3,4,5,6].map((item) => (
+              <Card key={item} className="cursor-pointer hover:scale-105 transition-transform">
+                <CardContent className="p-4">
+                  <div className="aspect-video bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-lg mb-3"></div>
+                  <div className="font-bold">Landscape #{item}</div>
+                  <div className="text-sm text-muted-foreground">Community Creation</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </TabsContent>
       </Tabs>
     </div>

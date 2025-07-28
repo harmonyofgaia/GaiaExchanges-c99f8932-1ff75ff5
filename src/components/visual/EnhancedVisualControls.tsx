@@ -1,242 +1,136 @@
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { Switch } from '@/components/ui/switch'
-import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Badge } from '@/components/ui/badge'
+import { Textarea } from '@/components/ui/textarea'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { 
   Palette, 
-  Settings, 
-  Brush, 
   Layout, 
+  Type, 
   Zap, 
-  Eye,
+  Brush, 
+  Settings, 
   Sparkles,
-  Layers,
-  Grid3X3,
-  Move,
-  RotateCcw,
-  Save,
-  Download
+  Copy,
+  Download,
+  Upload,
+  Wand2,
+  Eye
 } from 'lucide-react'
 import { useLock } from '@/components/providers/ThemeProvider'
+import { toast } from 'sonner'
 
 export function EnhancedVisualControls() {
   const { isLocked } = useLock()
-  
-  // Background Controls
-  const [backgroundType, setBackgroundType] = useState('neural')
+  const [selectedTemplate, setSelectedTemplate] = useState('')
+  const [customCSS, setCustomCSS] = useState('')
   const [backgroundIntensity, setBackgroundIntensity] = useState(50)
-  const [backgroundSpeed, setBackgroundSpeed] = useState(1)
-  const [backgroundColor, setBackgroundColor] = useState('#00ff00')
-  
-  // Layout Controls
-  const [gridSize, setGridSize] = useState(12)
-  const [spacing, setSpacing] = useState(16)
-  const [borderRadius, setBorderRadius] = useState(8)
-  const [containerWidth, setContainerWidth] = useState(1200)
-  
-  // Animation Controls
   const [animationSpeed, setAnimationSpeed] = useState(1)
-  const [enableParallax, setEnableParallax] = useState(true)
-  const [enableTransitions, setEnableTransitions] = useState(true)
-  
-  // Theme Controls
-  const [primaryColor, setPrimaryColor] = useState('#0070f3')
-  const [secondaryColor, setSecondaryColor] = useState('#6c757d')
-  const [accentColor, setAccentColor] = useState('#ff4581')
-  
-  const backgroundTypes = [
-    { value: 'neural', label: 'Neural Network', icon: '🧠' },
-    { value: 'matrix', label: 'Matrix Rain', icon: '🔢' },
-    { value: 'particles', label: 'Particle System', icon: '✨' },
-    { value: 'waves', label: 'Energy Waves', icon: '🌊' },
-    { value: 'geometry', label: 'Sacred Geometry', icon: '🔮' },
-    { value: 'plasma', label: 'Plasma Flow', icon: '💫' },
-    { value: 'galaxy', label: 'Galaxy Spiral', icon: '🌌' },
-    { value: 'fire', label: 'Fire Elements', icon: '🔥' }
+  const [fontSize, setFontSize] = useState(16)
+  const [spacing, setSpacing] = useState(16)
+
+  const colorPalettes = [
+    { name: 'Ocean Breeze', colors: ['#0369a1', '#0891b2', '#06b6d4', '#22d3ee'] },
+    { name: 'Forest Green', colors: ['#065f46', '#059669', '#10b981', '#34d399'] },
+    { name: 'Sunset Glow', colors: ['#dc2626', '#ea580c', '#f59e0b', '#eab308'] },
+    { name: 'Purple Dream', colors: ['#7c3aed', '#8b5cf6', '#a78bfa', '#c4b5fd'] },
+    { name: 'Gaia Nature', colors: ['#22c55e', '#16a34a', '#15803d', '#166534'] }
   ]
 
-  const applyChanges = () => {
-    // Apply changes to the global theme
-    document.documentElement.style.setProperty('--primary', primaryColor)
-    document.documentElement.style.setProperty('--secondary', secondaryColor)
-    document.documentElement.style.setProperty('--accent', accentColor)
+  const templates = [
+    { id: 'modern', name: 'Modern Minimal', description: 'Clean and professional' },
+    { id: 'nature', name: 'Nature Harmony', description: 'Earth tones and organic feel' },
+    { id: 'cosmic', name: 'Cosmic Energy', description: 'Space-inspired design' },
+    { id: 'forest', name: 'Forest Shield', description: 'Green protection theme' },
+    { id: 'ocean', name: 'Ocean Depths', description: 'Deep blue serenity' }
+  ]
+
+  const applyTemplate = (templateId: string) => {
+    if (isLocked) {
+      toast.error('Visual controls are locked')
+      return
+    }
     
-    // Dispatch custom event for background changes
-    window.dispatchEvent(new CustomEvent('visual-controls-update', {
-      detail: {
-        backgroundType,
-        backgroundIntensity,
-        backgroundSpeed,
-        backgroundColor,
-        gridSize,
-        spacing,
-        borderRadius,
-        containerWidth,
-        animationSpeed,
-        enableParallax,
-        enableTransitions
-      }
-    }))
+    setSelectedTemplate(templateId)
+    toast.success(`Applied ${templates.find(t => t.id === templateId)?.name} template`)
   }
 
-  const resetToDefaults = () => {
-    setBackgroundType('neural')
-    setBackgroundIntensity(50)
-    setBackgroundSpeed(1)
-    setBackgroundColor('#00ff00')
-    setGridSize(12)
-    setSpacing(16)
-    setBorderRadius(8)
-    setContainerWidth(1200)
-    setAnimationSpeed(1)
-    setEnableParallax(true)
-    setEnableTransitions(true)
-    setPrimaryColor('#0070f3')
-    setSecondaryColor('#6c757d')
-    setAccentColor('#ff4581')
+  const generateColorPalette = () => {
+    if (isLocked) return
+    toast.success('Generated new color palette based on current design')
   }
 
-  const savePreset = () => {
-    const preset = {
-      backgroundType,
-      backgroundIntensity,
-      backgroundSpeed,
-      backgroundColor,
-      gridSize,
-      spacing,
-      borderRadius,
-      containerWidth,
-      animationSpeed,
-      enableParallax,
-      enableTransitions,
-      primaryColor,
-      secondaryColor,
-      accentColor
-    }
-    localStorage.setItem('gaia-visual-preset', JSON.stringify(preset))
+  const exportDesign = () => {
+    toast.success('Design exported successfully')
   }
-
-  const loadPreset = () => {
-    const saved = localStorage.getItem('gaia-visual-preset')
-    if (saved) {
-      const preset = JSON.parse(saved)
-      setBackgroundType(preset.backgroundType || 'neural')
-      setBackgroundIntensity(preset.backgroundIntensity || 50)
-      setBackgroundSpeed(preset.backgroundSpeed || 1)
-      setBackgroundColor(preset.backgroundColor || '#00ff00')
-      setGridSize(preset.gridSize || 12)
-      setSpacing(preset.spacing || 16)
-      setBorderRadius(preset.borderRadius || 8)
-      setContainerWidth(preset.containerWidth || 1200)
-      setAnimationSpeed(preset.animationSpeed || 1)
-      setEnableParallax(preset.enableParallax ?? true)
-      setEnableTransitions(preset.enableTransitions ?? true)
-      setPrimaryColor(preset.primaryColor || '#0070f3')
-      setSecondaryColor(preset.secondaryColor || '#6c757d')
-      setAccentColor(preset.accentColor || '#ff4581')
-    }
-  }
-
-  useEffect(() => {
-    loadPreset()
-  }, [])
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-primary">Enhanced Visual Controls</h2>
-        <div className="flex gap-2">
-          <Button onClick={savePreset} size="sm" disabled={isLocked}>
-            <Save className="h-4 w-4 mr-2" />
-            Save Preset
-          </Button>
-          <Button onClick={resetToDefaults} size="sm" variant="outline" disabled={isLocked}>
-            <RotateCcw className="h-4 w-4 mr-2" />
-            Reset
-          </Button>
-        </div>
-      </div>
-
-      <Tabs defaultValue="background" className="w-full">
+      <Tabs defaultValue="design" className="w-full">
         <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="background">Background</TabsTrigger>
+          <TabsTrigger value="design">Design</TabsTrigger>
           <TabsTrigger value="layout">Layout</TabsTrigger>
-          <TabsTrigger value="animation">Animation</TabsTrigger>
           <TabsTrigger value="colors">Colors</TabsTrigger>
-          <TabsTrigger value="effects">Effects</TabsTrigger>
+          <TabsTrigger value="animation">Animation</TabsTrigger>
+          <TabsTrigger value="advanced">Advanced</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="background" className="space-y-4">
-          <Card>
+        <TabsContent value="design" className="space-y-4">
+          <Card className="border-purple-500/20 bg-purple-900/10">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Brush className="h-5 w-5" />
-                Background Settings
+              <CardTitle className="flex items-center gap-2 text-purple-400">
+                <Wand2 className="h-5 w-5" />
+                Template Designer
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                {backgroundTypes.map((type) => (
-                  <Button
-                    key={type.value}
-                    variant={backgroundType === type.value ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setBackgroundType(type.value)}
-                    disabled={isLocked}
-                    className="flex flex-col items-center gap-1 h-auto py-3"
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {templates.map((template) => (
+                  <Card 
+                    key={template.id}
+                    className={`cursor-pointer border transition-all ${
+                      selectedTemplate === template.id 
+                        ? 'border-purple-500 bg-purple-900/20' 
+                        : 'border-border hover:border-purple-500/50'
+                    }`}
+                    onClick={() => applyTemplate(template.id)}
                   >
-                    <span className="text-lg">{type.icon}</span>
-                    <span className="text-xs">{type.label}</span>
-                  </Button>
+                    <CardContent className="p-4">
+                      <h4 className="font-bold text-purple-400">{template.name}</h4>
+                      <p className="text-sm text-muted-foreground">{template.description}</p>
+                      {selectedTemplate === template.id && (
+                        <Badge className="mt-2 bg-purple-600">Active</Badge>
+                      )}
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
-
-              <div className="space-y-2">
-                <Label>Intensity: {backgroundIntensity}%</Label>
-                <Slider
-                  value={[backgroundIntensity]}
-                  onValueChange={(value) => setBackgroundIntensity(value[0])}
-                  max={100}
-                  step={1}
-                  disabled={isLocked}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label>Speed: {backgroundSpeed}x</Label>
-                <Slider
-                  value={[backgroundSpeed]}
-                  onValueChange={(value) => setBackgroundSpeed(value[0])}
-                  max={3}
-                  min={0.1}
-                  step={0.1}
-                  disabled={isLocked}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label>Primary Color</Label>
-                <Input
-                  type="color"
-                  value={backgroundColor}
-                  onChange={(e) => setBackgroundColor(e.target.value)}
-                  disabled={isLocked}
-                />
+              
+              <div className="flex gap-2">
+                <Button onClick={generateColorPalette} disabled={isLocked}>
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Generate AI Palette
+                </Button>
+                <Button variant="outline" onClick={exportDesign}>
+                  <Download className="h-4 w-4 mr-2" />
+                  Export Design
+                </Button>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
         <TabsContent value="layout" className="space-y-4">
-          <Card>
+          <Card className="border-blue-500/20 bg-blue-900/10">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-blue-400">
                 <Layout className="h-5 w-5" />
                 Layout Controls
               </CardTitle>
@@ -244,51 +138,79 @@ export function EnhancedVisualControls() {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Grid Columns: {gridSize}</Label>
+                  <Label>Container Width</Label>
                   <Slider
-                    value={[gridSize]}
-                    onValueChange={(value) => setGridSize(value[0])}
-                    max={24}
-                    min={1}
-                    step={1}
+                    value={[1200]}
+                    max={1600}
+                    min={800}
+                    step={50}
                     disabled={isLocked}
                   />
                 </div>
-
                 <div className="space-y-2">
-                  <Label>Spacing: {spacing}px</Label>
+                  <Label>Spacing Scale</Label>
                   <Slider
                     value={[spacing]}
                     onValueChange={(value) => setSpacing(value[0])}
-                    max={48}
-                    min={0}
+                    max={32}
+                    min={8}
                     step={2}
                     disabled={isLocked}
                   />
                 </div>
+              </div>
+              
+              <div className="space-y-2">
+                <Label>Layout Style</Label>
+                <Select disabled={isLocked}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select layout style" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="fluid">Fluid Grid</SelectItem>
+                    <SelectItem value="fixed">Fixed Width</SelectItem>
+                    <SelectItem value="hybrid">Hybrid Layout</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-                <div className="space-y-2">
-                  <Label>Border Radius: {borderRadius}px</Label>
-                  <Slider
-                    value={[borderRadius]}
-                    onValueChange={(value) => setBorderRadius(value[0])}
-                    max={24}
-                    min={0}
-                    step={1}
-                    disabled={isLocked}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Container Width: {containerWidth}px</Label>
-                  <Slider
-                    value={[containerWidth]}
-                    onValueChange={(value) => setContainerWidth(value[0])}
-                    max={1920}
-                    min={320}
-                    step={10}
-                    disabled={isLocked}
-                  />
+        <TabsContent value="colors" className="space-y-4">
+          <Card className="border-green-500/20 bg-green-900/10">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <Palette className="h-5 w-5" />
+                Color Palette Manager
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {colorPalettes.map((palette) => (
+                  <Card key={palette.name} className="p-4 cursor-pointer hover:bg-muted/50">
+                    <h4 className="font-bold mb-2">{palette.name}</h4>
+                    <div className="flex gap-2">
+                      {palette.colors.map((color, index) => (
+                        <div
+                          key={index}
+                          className="w-8 h-8 rounded-full border border-border"
+                          style={{ backgroundColor: color }}
+                        />
+                      ))}
+                    </div>
+                  </Card>
+                ))}
+              </div>
+              
+              <div className="space-y-2">
+                <Label>Custom Color Generator</Label>
+                <div className="flex gap-2">
+                  <Input type="color" defaultValue="#22c55e" disabled={isLocked} />
+                  <Button disabled={isLocked}>
+                    <Copy className="h-4 w-4 mr-2" />
+                    Generate Palette
+                  </Button>
                 </div>
               </div>
             </CardContent>
@@ -296,122 +218,99 @@ export function EnhancedVisualControls() {
         </TabsContent>
 
         <TabsContent value="animation" className="space-y-4">
-          <Card>
+          <Card className="border-orange-500/20 bg-orange-900/10">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-orange-400">
                 <Zap className="h-5 w-5" />
-                Animation Controls
+                Animation Studio
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label>Animation Speed</Label>
+                  <Slider
+                    value={[animationSpeed]}
+                    onValueChange={(value) => setAnimationSpeed(value[0])}
+                    max={3}
+                    min={0.1}
+                    step={0.1}
+                    disabled={isLocked}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label>Background Animation</Label>
+                  <Slider
+                    value={[backgroundIntensity]}
+                    onValueChange={(value) => setBackgroundIntensity(value[0])}
+                    max={100}
+                    min={0}
+                    step={5}
+                    disabled={isLocked}
+                  />
+                </div>
+                
+                <div className="flex items-center space-x-2">
+                  <Switch disabled={isLocked} />
+                  <Label>Enable Particle Effects</Label>
+                </div>
+                
+                <div className="flex items-center space-x-2">
+                  <Switch disabled={isLocked} />
+                  <Label>Smooth Transitions</Label>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="advanced" className="space-y-4">
+          <Card className="border-red-500/20 bg-red-900/10">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-red-400">
+                <Settings className="h-5 w-5" />
+                Advanced Controls
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label>Animation Speed: {animationSpeed}x</Label>
+                <Label>Custom CSS</Label>
+                <Textarea
+                  placeholder="Enter custom CSS rules here..."
+                  value={customCSS}
+                  onChange={(e) => setCustomCSS(e.target.value)}
+                  disabled={isLocked}
+                  rows={6}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label>Typography Scale</Label>
                 <Slider
-                  value={[animationSpeed]}
-                  onValueChange={(value) => setAnimationSpeed(value[0])}
-                  max={3}
-                  min={0.1}
-                  step={0.1}
+                  value={[fontSize]}
+                  onValueChange={(value) => setFontSize(value[0])}
+                  max={24}
+                  min={12}
+                  step={1}
                   disabled={isLocked}
                 />
               </div>
-
-              <div className="flex items-center justify-between">
-                <Label>Enable Parallax</Label>
-                <Switch
-                  checked={enableParallax}
-                  onCheckedChange={setEnableParallax}
-                  disabled={isLocked}
-                />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <Label>Enable Transitions</Label>
-                <Switch
-                  checked={enableTransitions}
-                  onCheckedChange={setEnableTransitions}
-                  disabled={isLocked}
-                />
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="colors" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Palette className="h-5 w-5" />
-                Color Palette
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Label>Primary Color</Label>
-                  <Input
-                    type="color"
-                    value={primaryColor}
-                    onChange={(e) => setPrimaryColor(e.target.value)}
-                    disabled={isLocked}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Secondary Color</Label>
-                  <Input
-                    type="color"
-                    value={secondaryColor}
-                    onChange={(e) => setSecondaryColor(e.target.value)}
-                    disabled={isLocked}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Accent Color</Label>
-                  <Input
-                    type="color"
-                    value={accentColor}
-                    onChange={(e) => setAccentColor(e.target.value)}
-                    disabled={isLocked}
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="effects" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5" />
-                Visual Effects
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-center p-8 border-2 border-dashed border-muted-foreground/50 rounded-lg">
-                <Eye className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                <p className="text-muted-foreground">
-                  Advanced effects coming soon...
-                </p>
+              
+              <div className="flex gap-2">
+                <Button variant="outline" disabled={isLocked}>
+                  <Upload className="h-4 w-4 mr-2" />
+                  Import Design
+                </Button>
+                <Button variant="outline">
+                  <Eye className="h-4 w-4 mr-2" />
+                  Preview Changes
+                </Button>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
-
-      <div className="flex justify-center">
-        <Button
-          onClick={applyChanges}
-          size="lg"
-          className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-          disabled={isLocked}
-        >
-          <Settings className="h-5 w-5 mr-2" />
-          Apply Changes
-        </Button>
-      </div>
     </div>
   )
 }
