@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -10,9 +9,7 @@ import {
   Award, 
   Target,
   Calendar,
-  Activity,
-  Bike,
-  PartyPopper
+  Activity
 } from 'lucide-react'
 import { useEarningActivities, useUserProfile } from '@/hooks/useEarningSystem'
 import { BeeHotelActions } from '@/components/earning/BeeHotelActions'
@@ -22,8 +19,6 @@ import { CarbonCreditActions } from '@/components/earning/CarbonCreditActions'
 import { HomeGrownFoodActions } from '@/components/earning/HomeGrownFoodActions'
 import { ReferralSystem } from '@/components/earning/ReferralSystem'
 import { SkillBasedEarning } from '@/components/earning/SkillBasedEarning'
-import { GAiAEcoBikeSystem } from '@/components/earning/GAiAEcoBikeSystem'
-import { CommunityPartyEvents } from '@/components/earning/CommunityPartyEvents'
 
 export default function EarningActivitiesDashboard() {
   const [activeCategory, setActiveCategory] = useState('overview')
@@ -39,8 +34,6 @@ export default function EarningActivitiesDashboard() {
     { id: 'education', label: '📚 Education', icon: Award },
     { id: 'carbon-credits', label: '🌱 Carbon Credits', icon: Coins },
     { id: 'home-grown', label: '🌿 Home Grown Food', icon: Calendar },
-    { id: 'eco-bike', label: '🚲 GAiA Eco Bike', icon: Bike },
-    { id: 'community-events', label: '🎉 Community Events', icon: PartyPopper },
     { id: 'referrals', label: '👥 Referrals', icon: Activity },
     { id: 'skills', label: '🛠️ Skills', icon: Target }
   ]
@@ -120,7 +113,7 @@ export default function EarningActivitiesDashboard() {
 
       {/* Activity Categories */}
       <Tabs value={activeCategory} onValueChange={setActiveCategory} className="w-full">
-        <TabsList className="grid grid-cols-5 md:grid-cols-10">
+        <TabsList className="grid grid-cols-4 md:grid-cols-8">
           {categories.map((category) => (
             <TabsTrigger key={category.id} value={category.id} className="text-xs">
               {category.label.split(' ')[0]}
@@ -176,14 +169,6 @@ export default function EarningActivitiesDashboard() {
 
         <TabsContent value="home-grown">
           <HomeGrownFoodActions />
-        </TabsContent>
-
-        <TabsContent value="eco-bike">
-          <GAiAEcoBikeSystem />
-        </TabsContent>
-
-        <TabsContent value="community-events">
-          <CommunityPartyEvents />
         </TabsContent>
 
         <TabsContent value="referrals">

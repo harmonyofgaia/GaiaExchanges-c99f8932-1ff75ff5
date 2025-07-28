@@ -1,99 +1,142 @@
-
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { GaiaLogo } from '@/components/GaiaLogo'
 import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Menu, Home, BarChart3, TreePine, Activity, Award } from 'lucide-react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
+import {
+  Home,
+  TrendingUp,
+  Gamepad2,
+  Wallet,
+  BarChart3,
+  Video,
+  Bike,
+  Pickaxe,
+  Leaf,
+  Coins,
+  Shield,
+  Settings,
+  Menu,
+  X,
+  MoreHorizontal
+} from 'lucide-react'
+
+interface NavItem {
+  name: string
+  path: string
+  icon: any
+}
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const location = useLocation()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navItems = [
-    { href: '/', label: 'Home', icon: Home },
-    { href: '/token-dashboard', label: 'Token Dashboard', icon: BarChart3 },
-    { href: '/green-investments', label: 'Green Investments', icon: TreePine },
-    { href: '/earning-activities', label: 'Earning Activities', icon: Activity },
-    { href: '/earning-systems', label: 'Earning Systems', icon: Award },
+    { name: 'Home', path: '/', icon: Home },
+    { name: 'Live Tracking', path: '/live-tracking', icon: TrendingUp },
+    { name: 'Gaming', path: '/gaming', icon: Gamepad2 },
+    { name: 'Wallet', path: '/wallet', icon: Wallet },
+    { name: 'Markets', path: '/markets', icon: BarChart3 },
+    { name: 'Video Exchange', path: '/video-exchange', icon: Video },
+    { name: 'Bike Ecosystem', path: '/gaia-bike-ecosystem', icon: Bike },
+    { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
+    { name: 'Green Investments', path: '/green-investments', icon: Leaf },
+    { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
+    { name: 'Private Blockchain', path: '/private-blockchain', icon: Shield },
+    { name: 'Secure Admin', path: '/secure-admin', icon: Settings }
   ]
 
-  const isActive = (href: string) => location.pathname === href
-
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link to="/" className="mr-6 flex items-center space-x-2">
-            <TreePine className="h-6 w-6 text-green-400" />
-            <span className="hidden font-bold sm:inline-block bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-              GAiA Exchange
-            </span>
+    <nav className="bg-background/95 backdrop-blur-sm border-b border-primary/30 sticky top-0 z-50">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2">
+            <GaiaLogo size="sm" variant="matrix" showText={false} />
+            <span className="font-bold text-primary text-xl">Gaia Exchanges</span>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            {navItems.slice(1).map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                className={`transition-colors hover:text-foreground/80 flex items-center gap-2 ${
-                  isActive(item.href) ? 'text-foreground' : 'text-foreground/60'
-                }`}
-              >
-                <item.icon className="h-4 w-4" />
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-1">
+            {navItems.slice(0, 8).map((item) => {
+              const Icon = item.icon
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                >
+                  <Icon className="h-4 w-4" />
+                  <span>{item.name}</span>
+                </Link>
+              )
+            })}
+            
+            {/* More menu for additional items */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
+                  <MoreHorizontal className="h-4 w-4 mr-1" />
+                  More
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
+                {navItems.slice(8).map((item) => {
+                  const Icon = item.icon
+                  return (
+                    <DropdownMenuItem key={item.path} asChild>
+                      <Link
+                        to={item.path}
+                        className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
+                      >
+                        <Icon className="h-4 w-4" />
+                        <span>{item.name}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )
+                })}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="lg:hidden">
             <Button
               variant="ghost"
-              className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+              size="sm"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-primary hover:bg-primary/10"
             >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle Menu</span>
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="pr-0">
-            <Link
-              to="/"
-              className="flex items-center"
-              onClick={() => setIsOpen(false)}
-            >
-              <TreePine className="mr-2 h-4 w-4 text-green-400" />
-              <span className="font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-                GAiA Exchange
-              </span>
-            </Link>
-            <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
-              <div className="flex flex-col space-y-3">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-2 transition-colors hover:text-foreground/80 ${
-                      isActive(item.href) ? 'text-foreground' : 'text-foreground/60'
-                    }`}
-                  >
-                    <item.icon className="h-4 w-4" />
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </SheetContent>
-        </Sheet>
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-            <Link to="/" className="md:hidden flex items-center space-x-2">
-              <TreePine className="h-6 w-6 text-green-400" />
-              <span className="font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-                GAiA
-              </span>
-            </Link>
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden py-4 border-t border-primary/30">
+            <div className="grid grid-cols-2 gap-2">
+              {navItems.map((item) => {
+                const Icon = item.icon
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Icon className="h-4 w-4" />
+                    <span>{item.name}</span>
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   )
