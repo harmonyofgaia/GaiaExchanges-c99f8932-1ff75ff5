@@ -1,5 +1,4 @@
 
-import { Navbar } from '@/components/Navbar'
 import { GAiACommunityProjects } from '@/components/green-investments/GAiACommunityProjects'
 import { GaiaCommunityProjects } from '@/components/GaiaCommunityProjects'
 import { WildfireSandProtection } from '@/components/green-investments/WildfireSandProtection'
@@ -10,7 +9,6 @@ import { Leaf, Globe, TrendingUp, Shield, Flame } from 'lucide-react'
 const GreenInvestments = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
-      <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
