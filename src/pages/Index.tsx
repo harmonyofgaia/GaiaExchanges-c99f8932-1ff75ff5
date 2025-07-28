@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { GameNavigationHub } from '@/components/gaming/GameNavigationHub'
+import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { 
   Leaf, 
   Heart, 
@@ -18,6 +19,8 @@ import {
 } from 'lucide-react'
 
 export default function Index() {
+  const { isAdmin } = useSecureAdmin()
+
   const features = [
     {
       title: "🌍 Environmental Impact",
@@ -53,7 +56,11 @@ export default function Index() {
       icon: <Sparkles className="h-8 w-8 text-yellow-400" />,
       path: "/nft-cards",
       color: "from-yellow-600 to-orange-600"
-    },
+    }
+  ]
+
+  // Admin-only features - only shown when user is admin
+  const adminFeatures = [
     {
       title: "📹 Video Exchange",
       description: "Share environmental content and earn rewards",
@@ -62,6 +69,9 @@ export default function Index() {
       color: "from-cyan-600 to-teal-600"
     }
   ]
+
+  // Combine features based on admin status
+  const allFeatures = isAdmin ? [...features, ...adminFeatures] : features
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
@@ -114,7 +124,7 @@ export default function Index() {
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {features.map((feature, index) => (
+          {allFeatures.map((feature, index) => (
             <Card key={index} className="bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20 hover:scale-105 transition-all duration-300 cursor-pointer">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-white">
