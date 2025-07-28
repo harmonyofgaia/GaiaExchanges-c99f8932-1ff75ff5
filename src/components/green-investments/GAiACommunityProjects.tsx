@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -17,17 +16,21 @@ import {
   Heart,
   MapPin,
   Eye,
-  ExternalLink
+  ExternalLink,
+  Bell,
+  BellOff
 } from 'lucide-react'
 import { GAIA_PROJECTS, GAiAProject } from '@/constants/gaia-projects'
 import { useState, useEffect } from 'react'
 import { ProjectDetailsModal } from './ProjectDetailsModal'
+import { toast } from 'sonner'
 
 export function GAiACommunityProjects() {
   const [projects, setProjects] = useState(GAIA_PROJECTS)
   const [animatedProjects, setAnimatedProjects] = useState(projects)
   const [selectedProject, setSelectedProject] = useState<GAiAProject | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [subscriptions, setSubscriptions] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -101,6 +104,41 @@ export function GAiACommunityProjects() {
     }
   }
 
+  const handleSubscribe = (project: GAiAProject) => {
+    const isSubscribed = subscriptions.has(project.id)
+    const newSubscriptions = new Set(subscriptions)
+    
+    if (isSubscribed) {
+      newSubscriptions.delete(project.id)
+      toast.success(`🔔 Unsubscribed from ${project.title}`, {
+        description: 'You will no longer receive updates about this project'
+      })
+    } else {
+      newSubscriptions.add(project.id)
+      toast.success(`🌱 Subscribed to ${project.title}!`, {
+        description: 'You will receive updates when this project reaches milestones'
+      })
+    }
+    
+    setSubscriptions(newSubscriptions)
+  }
+
+  const handleSupportProject = (project: GAiAProject) => {
+    toast.success(`💚 Supporting ${project.title}!`, {
+      description: `Contributing ${project.reward} GAiA tokens to this environmental project`,
+      duration: 5000
+    })
+    
+    // Update project funding in real-time
+    setAnimatedProjects(prev => 
+      prev.map(p => 
+        p.id === project.id 
+          ? { ...p, currentFunding: (p.currentFunding || 0) + project.reward, participants: p.participants + 1 }
+          : p
+      )
+    )
+  }
+
   return (
     <div className="space-y-8">
       <div className="text-center">
@@ -111,7 +149,7 @@ export function GAiACommunityProjects() {
           The complete collection of your innovative environmental projects
         </p>
         <div className="text-sm text-green-400">
-          ✨ Created by Culture of Harmony • Fully Transparent • Community Driven
+          ✨ Created by Culture of Harmony • Fully Transparent • Community Driven • Subscribe to Updates
         </div>
       </div>
 
@@ -142,9 +180,9 @@ export function GAiACommunityProjects() {
         <div className="text-center p-4 bg-orange-900/30 rounded-lg border-2 border-orange-500/30">
           <Award className="h-8 w-8 text-orange-400 mx-auto mb-2" />
           <div className="text-2xl font-bold text-orange-400">
-            {projects.reduce((sum, p) => sum + p.reward, 0).toLocaleString()}
+            {subscriptions.size}
           </div>
-          <div className="text-sm text-orange-300">Total Rewards (GAiA)</div>
+          <div className="text-sm text-orange-300">Your Subscriptions</div>
         </div>
       </div>
 
@@ -155,13 +193,16 @@ export function GAiACommunityProjects() {
             : project.progress
           const isNearingGoal = fundingPercentage > 80
           const hasSpecialPage = ['heart-of-gaia', 'techno-soul-solutions'].includes(project.id)
+          const isSubscribed = subscriptions.has(project.id)
 
           return (
             <Card 
               key={project.id}
               className={`bg-gradient-to-br from-green-900/20 to-emerald-900/20 border-green-500/30 transition-all duration-300 hover:scale-105 cursor-pointer ${
                 isNearingGoal ? 'ring-2 ring-green-400/50' : ''
-              } ${hasSpecialPage ? 'border-2 border-purple-500/50' : ''}`}
+              } ${hasSpecialPage ? 'border-2 border-purple-500/50' : ''} ${
+                isSubscribed ? 'border-2 border-blue-500/50 shadow-lg shadow-blue-500/20' : ''
+              }`}
               onClick={() => handleProjectClick(project)}
             >
               <CardHeader>
@@ -174,6 +215,11 @@ export function GAiACommunityProjects() {
                     {hasSpecialPage && (
                       <Badge className="bg-purple-600 text-white">
                         LIVE
+                      </Badge>
+                    )}
+                    {isSubscribed && (
+                      <Badge className="bg-blue-600 text-white animate-pulse">
+                        SUBSCRIBED
                       </Badge>
                     )}
                   </div>
@@ -236,10 +282,27 @@ export function GAiACommunityProjects() {
                   <Button 
                     className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white"
                     size="sm"
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleSupportProject(project)
+                    }}
                   >
                     <DollarSign className="h-4 w-4 mr-1" />
                     Support
+                  </Button>
+                  
+                  <Button 
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleSubscribe(project)
+                    }}
+                    className={`${isSubscribed 
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                      : 'bg-gray-600 hover:bg-gray-700 text-white'
+                    }`}
+                    size="sm"
+                  >
+                    {isSubscribed ? <Bell className="h-4 w-4" /> : <BellOff className="h-4 w-4" />}
                   </Button>
                   
                   {hasSpecialPage ? (
@@ -270,11 +333,22 @@ export function GAiACommunityProjects() {
         })}
       </div>
 
-      <div className="text-center">
+      <div className="text-center space-y-4">
         <Button size="lg" className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
           <Target className="h-5 w-5 mr-2" />
           View All GAiA Projects
         </Button>
+        
+        {subscriptions.size > 0 && (
+          <div className="text-center p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
+            <div className="text-blue-400 font-bold">
+              🔔 You're subscribed to {subscriptions.size} project{subscriptions.size !== 1 ? 's' : ''}
+            </div>
+            <div className="text-sm text-blue-300">
+              You'll receive notifications when these projects reach milestones
+            </div>
+          </div>
+        )}
       </div>
 
       <ProjectDetailsModal 
