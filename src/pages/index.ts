@@ -15,6 +15,7 @@ export { default as SeaGreenPsychohistoricalProject } from './SeaGreenPsychohist
 // Phase 3 exports
 export { default as CommunityEngagementHub } from './CommunityEngagementHub'
 export { default as PartnershipManagement } from './PartnershipManagement'
+export { default as DeploymentCenter } from './DeploymentCenter'
 
 // Legacy pages
 export { default as Home } from './Home'

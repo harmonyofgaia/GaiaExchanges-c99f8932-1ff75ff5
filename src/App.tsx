@@ -31,6 +31,7 @@ const SeaGreenPsychohistoricalProject = lazy(() => import("./pages/SeaGreenPsych
 // Phase 3 pages
 const CommunityEngagementHub = lazy(() => import("./pages/CommunityEngagementHub"));
 const PartnershipManagement = lazy(() => import("./pages/PartnershipManagement"));
+const DeploymentCenter = lazy(() => import("./pages/DeploymentCenter"));
 
 const queryClient = new QueryClient();
 
@@ -66,6 +67,7 @@ function App() {
             {/* Phase 3 Routes */}
             <Route path="/community-engagement-hub" element={<Suspense fallback={<div>Loading...</div>}><CommunityEngagementHub /></Suspense>} />
             <Route path="/partnership-management" element={<Suspense fallback={<div>Loading...</div>}><PartnershipManagement /></Suspense>} />
+            <Route path="/deployment-center" element={<Suspense fallback={<div>Loading...</div>}><DeploymentCenter /></Suspense>} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
