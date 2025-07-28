@@ -19,6 +19,13 @@ export default function Dashboard() {
     window.open(GAIA_TOKEN.OFFICIAL_WEBSITE, '_blank', 'noopener,noreferrer')
   }
 
+  // Use actual GAiA token data or fallback to constants
+  const gaiaHolders = tokenData?.holders || GAIA_METRICS.HOLDERS
+  const gaiaVolume = tokenData?.volume24h || GAIA_METRICS.VOLUME_24H
+  const gaiaMarketCap = tokenData?.marketCap || GAIA_METRICS.MARKET_CAP
+  const gaiaPrice = tokenData?.price || GAIA_METRICS.CURRENT_PRICE
+  const gaiaTransactions = tokenData?.transactions24h || GAIA_METRICS.TRANSACTIONS_24H
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
       <div className="container mx-auto px-4 py-8">
@@ -36,11 +43,14 @@ export default function Dashboard() {
             </Badge>
             <Badge variant="outline" className="border-blue-500/50 text-blue-400">
               <Shield className="h-3 w-3 mr-1" />
-              Solana Network
+              {GAIA_TOKEN.NETWORK} Network
             </Badge>
             <Badge variant="outline" className="border-purple-500/50 text-purple-400">
               <Coins className="h-3 w-3 mr-1" />
               {formatGaiaNumber(GAIA_TOKEN.TOTAL_SUPPLY)} Supply
+            </Badge>
+            <Badge variant="outline" className="border-orange-500/50 text-orange-400">
+              {tokenData?.isLive ? '🟢 LIVE DATA' : '📊 SIMULATED'}
             </Badge>
           </div>
         </div>
@@ -53,6 +63,7 @@ export default function Dashboard() {
         {/* Coin Crafter Illustration */}
         <CoinCrafterIllustration />
 
+        {/* GAiA Token Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -61,60 +72,61 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-white">
-                {tokenData ? formatGaiaNumber(tokenData.holders) : formatGaiaNumber(GAIA_METRICS.HOLDERS)}
+                {formatGaiaNumber(gaiaHolders)}
               </div>
               <p className="text-xs text-muted-foreground">
-                +12% from last month
+                Growing community of GAiA believers
               </p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-400">GAiA Volume</CardTitle>
+              <CardTitle className="text-sm font-medium text-blue-400">GAiA 24h Volume</CardTitle>
               <Coins className="h-4 w-4 text-blue-400" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-white">
-                ${tokenData ? formatGaiaNumber(tokenData.volume24h) : formatGaiaNumber(GAIA_METRICS.VOLUME_24H)}
+                ${formatGaiaNumber(gaiaVolume)}
               </div>
               <p className="text-xs text-muted-foreground">
-                24h trading volume
+                24h trading volume on {GAIA_TOKEN.NETWORK}
               </p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-purple-900/20 to-black/50 border-purple-500/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-purple-400">Market Cap</CardTitle>
+              <CardTitle className="text-sm font-medium text-purple-400">GAiA Market Cap</CardTitle>
               <TrendingUp className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-white">
-                ${tokenData ? formatGaiaNumber(tokenData.marketCap) : formatGaiaNumber(GAIA_METRICS.MARKET_CAP)}
+                ${formatGaiaNumber(gaiaMarketCap)}
               </div>
               <p className="text-xs text-muted-foreground">
-                Current market valuation
+                Current GAiA token valuation
               </p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-orange-900/20 to-black/50 border-orange-500/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-orange-400">Token Price</CardTitle>
+              <CardTitle className="text-sm font-medium text-orange-400">GAiA Price</CardTitle>
               <BarChart3 className="h-4 w-4 text-orange-400" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-white">
-                {tokenData ? formatGaiaPrice(tokenData.price) : formatGaiaPrice(GAIA_METRICS.CURRENT_PRICE)}
+                {formatGaiaPrice(gaiaPrice)}
               </div>
               <p className="text-xs text-muted-foreground">
-                Real-time GAiA price
+                Real-time GAiA token price
               </p>
             </CardContent>
           </Card>
         </div>
 
+        {/* GAiA Network Activity and Token Information */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
             <CardHeader>
@@ -131,19 +143,25 @@ export default function Dashboard() {
                 <div className="flex items-center space-x-4">
                   <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
                   <div className="text-sm text-white">
-                    GAiA transactions: +{formatGaiaNumber(tokenData?.transactions24h || GAIA_METRICS.TRANSACTIONS_24H)} last 24h
+                    GAiA transactions: +{formatGaiaNumber(gaiaTransactions)} last 24h
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
                   <div className="text-sm text-white">
-                    Trees planted: {formatGaiaNumber(GAIA_TOKEN.TREES_PLANTED_TOTAL)}
+                    Environmental impact: {formatGaiaNumber(GAIA_TOKEN.TREES_PLANTED_TOTAL)} trees planted
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
                   <div className="text-sm text-white">
-                    Ocean cleanup: ${formatGaiaNumber(GAIA_TOKEN.OCEAN_CLEANUP_CONTRIBUTION)}
+                    Ocean cleanup: ${formatGaiaNumber(GAIA_TOKEN.OCEAN_CLEANUP_CONTRIBUTION)} contributed
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                  <div className="text-sm text-white">
+                    CO2 offset: {GAIA_METRICS.CO2_OFFSET_TOTAL} tons neutralized
                   </div>
                 </div>
               </div>
@@ -157,20 +175,28 @@ export default function Dashboard() {
             <CardContent>
               <div className="space-y-4">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Contract Address</span>
-                  <span className="text-white font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 8)}...</span>
+                  <span className="text-muted-foreground">Token Symbol</span>
+                  <span className="text-white font-bold">{GAIA_TOKEN.SYMBOL}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Network</span>
                   <span className="text-white font-bold">{GAIA_TOKEN.NETWORK}</span>
                 </div>
                 <div className="flex justify-between">
+                  <span className="text-muted-foreground">Contract Address</span>
+                  <span className="text-white font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 8)}...</span>
+                </div>
+                <div className="flex justify-between">
                   <span className="text-muted-foreground">Total Supply</span>
                   <span className="text-white font-bold">{formatGaiaNumber(GAIA_TOKEN.TOTAL_SUPPLY)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">CO2 Offset</span>
-                  <span className="text-white font-bold">{GAIA_METRICS.CO2_OFFSET_TOTAL} tons</span>
+                  <span className="text-muted-foreground">Current Holders</span>
+                  <span className="text-white font-bold">{formatGaiaNumber(gaiaHolders)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Data Source</span>
+                  <span className="text-white font-bold">{tokenData?.isLive ? 'Live API' : 'Simulated'}</span>
                 </div>
               </div>
             </CardContent>
@@ -183,27 +209,30 @@ export default function Dashboard() {
             <CardTitle className="text-purple-400">GAiA Token Actions</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex gap-4 flex-wrap">
+            <div className="flex gap-4 flex-wrap mb-4">
               <Button onClick={openPumpFun} className="bg-green-600 hover:bg-green-700">
                 <ExternalLink className="h-4 w-4 mr-2" />
-                Trade on Pump.fun
+                Trade GAiA on Pump.fun
               </Button>
-              <Button onClick={openWebsite} variant="outline">
+              <Button onClick={openWebsite} variant="outline" className="border-blue-500/30 text-blue-400">
                 <Globe className="h-4 w-4 mr-2" />
-                Official Website
+                Official GAiA Website
               </Button>
-              <Button onClick={refetch} variant="outline" disabled={isLoading}>
+              <Button onClick={refetch} variant="outline" disabled={isLoading} className="border-purple-500/30 text-purple-400">
                 <RefreshCw className={`h-4 w-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
-                Refresh Data
+                Refresh GAiA Data
               </Button>
             </div>
-            <div className="mt-4 p-4 rounded-lg bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/30">
+            <div className="p-4 rounded-lg bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/30">
               <p className="text-sm text-green-300">
                 <Shield className="h-4 w-4 inline mr-2" />
                 {GAIA_TOKEN.OFFICIAL_DISCLAIMER}
               </p>
               <div className="mt-2 text-xs text-blue-300">
-                Contract: <code className="bg-black/30 px-2 py-1 rounded">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+                GAiA Contract: <code className="bg-black/30 px-2 py-1 rounded">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+              </div>
+              <div className="mt-1 text-xs text-purple-300">
+                Admin Wallet: <code className="bg-black/30 px-2 py-1 rounded">{GAIA_TOKEN.WALLET_ADDRESS}</code>
               </div>
             </div>
           </CardContent>
