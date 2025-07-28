@@ -34,7 +34,11 @@ import {
   DollarSign,
   ShoppingBag,
   BarChart3,
-  Users
+  Users,
+  Activity,
+  Trophy,
+  MessageCircle,
+  Handshake
 } from 'lucide-react'
 
 interface NavItem {
@@ -51,6 +55,11 @@ export function Navbar() {
     { name: 'Dashboard', path: '/dashboard', icon: BarChart3 },
     { name: 'Green Impact', path: '/green-impact-dashboard', icon: Leaf },
     { name: 'Eco Avatar', path: '/eco-avatar', icon: Users },
+    { name: 'Deployment Status', path: '/deployment-status', icon: Activity },
+    { name: 'Earning Activities', path: '/earning-activities', icon: Coins },
+    { name: 'Enhanced Leaderboard', path: '/enhanced-leaderboard', icon: Trophy },
+    { name: 'Community Hub', path: '/community-engagement-hub', icon: MessageCircle },
+    { name: 'Partnership Management', path: '/partnership-management', icon: Handshake },
     { name: 'Virtual World', path: '/virtual-world', icon: Globe },
     { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
     { name: 'Gaming Hub', path: '/gaming', icon: Gamepad2 },
@@ -84,7 +93,7 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
-            {navItems.slice(0, 8).map((item) => {
+            {navItems.slice(0, 10).map((item) => {
               const Icon = item.icon
               return (
                 <Link
@@ -107,7 +116,7 @@ export function Navbar() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
-                {navItems.slice(8).map((item) => {
+                {navItems.slice(10).map((item) => {
                   const Icon = item.icon
                   return (
                     <DropdownMenuItem key={item.path} asChild>
