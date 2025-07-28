@@ -21,68 +21,52 @@ export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
 
   return (
-    <AdminProtectedRoute>
-      <AdminOnlyAccess>
-        <div className="relative min-h-screen">
-          <EnhancedBackgroundManager 
-            settings={{
-              type: 'neural',
-              intensity: 'high',
-              color: '#00ff00',
-              speed: 1.5,
-              autoGenerate: true
-            }}
-          />
-          
-          <div className="relative z-10 container mx-auto px-4 py-6">
-            <div className="mb-8">
-              <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-red-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-                🛡️ SECURE ADMIN COMMAND CENTER 🛡️
-              </h1>
-              <p className="text-center text-muted-foreground mt-2">
-                Ultimate control and protection for the GAiA ecosystem
-              </p>
-            </div>
+    <div className="container mx-auto px-4 py-6">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-red-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+          🛡️ SECURE ADMIN COMMAND CENTER 🛡️
+        </h1>
+        <p className="text-center text-muted-foreground mt-2">
+          Ultimate control and protection for the GAiA ecosystem
+        </p>
+      </div>
 
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-6">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="security">Security</TabsTrigger>
-                <TabsTrigger value="tools">Admin Tools</TabsTrigger>
-                <TabsTrigger value="control">Supreme Control</TabsTrigger>
-                <TabsTrigger value="isolation">User Control</TabsTrigger>
-                <TabsTrigger value="ai">AI Engine</TabsTrigger>
-              </TabsList>
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className="grid w-full grid-cols-6">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="security">Security</TabsTrigger>
+          <TabsTrigger value="tools">Admin Tools</TabsTrigger>
+          <TabsTrigger value="control">Supreme Control</TabsTrigger>
+          <TabsTrigger value="isolation">User Control</TabsTrigger>
+          <TabsTrigger value="ai">AI Engine</TabsTrigger>
+        </TabsList>
 
-              <TabsContent value="overview" className="space-y-6">
-                <AdminDashboardTabs />
-              </TabsContent>
+        <TabsContent value="overview" className="space-y-6">
+          <AdminDashboardTabs />
+        </TabsContent>
 
-              <TabsContent value="security" className="space-y-6">
-                <UltimateSecurity />
-                <RefactoredSecuritySuite />
-              </TabsContent>
+        <TabsContent value="security" className="space-y-6">
+          <UltimateSecurity />
+          <RefactoredSecuritySuite />
+        </TabsContent>
 
-              <TabsContent value="tools" className="space-y-6">
-                <RefactoredAdminTools />
-              </TabsContent>
+        <TabsContent value="tools" className="space-y-6">
+          <RefactoredAdminTools />
+        </TabsContent>
 
-              <TabsContent value="control" className="space-y-6">
-                <SupremeControlSuite />
-              </TabsContent>
+        <TabsContent value="control" className="space-y-6">
+          <SupremeControlSuite />
+        </TabsContent>
 
-              <TabsContent value="isolation" className="space-y-6">
-                <UserIsolationSystem />
-              </TabsContent>
+        <TabsContent value="isolation" className="space-y-6">
+          <UserIsolationSystem />
+        </TabsContent>
 
-              <TabsContent value="ai" className="space-y-6">
-                <AIEngineCapabilities />
-                <ChatSecurityPanel />
-              </TabsContent>
-            </Tabs>
-          </div>
-        </div>
-      </AdminOnlyAccess>
-    </AdminProtectedRoute>
+        <TabsContent value="ai" className="space-y-6">
+          <AIEngineCapabilities />
+          <ChatSecurityPanel />
+        </TabsContent>
+      </Tabs>
+    </div>
   )
 }
