@@ -1,192 +1,164 @@
 
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
-import { Shield, Lock, Eye, EyeOff, Globe, Users, AlertTriangle } from 'lucide-react'
+import { Shield, Lock, Eye, EyeOff, Globe, AlertTriangle, Skull } from 'lucide-react'
 import { toast } from 'sonner'
-import { AdminDashboardTabs } from '@/components/admin/AdminDashboardTabs'
-import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 
 export default function AdminLogin() {
-  const navigate = useNavigate()
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
   })
   const [showPassword, setShowPassword] = useState(false)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [clientIP, setClientIP] = useState('')
-  const [activeSessions, setActiveSessions] = useState(0)
-  const { isAdmin, adminSession, grantAdminAccess, revokeAdminAccess } = useSecureAdmin()
+  const [attackerIP, setAttackerIP] = useState('')
+  const [attemptCount, setAttemptCount] = useState(0)
 
   useEffect(() => {
-    // Get client IP information
-    const getClientInfo = async () => {
-      try {
-        // Simulate getting client IP (in production, this would be from a service)
-        const ip = `192.168.1.${Math.floor(Math.random() * 255)}`
-        setClientIP(ip)
-        
-        // Check for existing admin sessions
-        const existingAdminIP = localStorage.getItem('gaia-admin-ip')
-        if (existingAdminIP && existingAdminIP !== ip) {
-          setActiveSessions(1)
-        }
-      } catch (error) {
-        console.error('Failed to get client info:', error)
+    // Log the attacker's presence
+    const logAttackerAccess = () => {
+      const attackerData = {
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        platform: navigator.platform,
+        referrer: document.referrer || 'Direct Access',
+        ip: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`
+      }
+      
+      setAttackerIP(attackerData.ip)
+      
+      console.log('🚨 HONEYPOT TRIGGERED - ATTACKER DETECTED!')
+      console.log('👹 HACKER FELL INTO THE TRAP')
+      console.log('📊 Attacker Data:', attackerData)
+      
+      // Store attacker data
+      const existingLogs = JSON.parse(localStorage.getItem('honeypot-logs') || '[]')
+      existingLogs.push(attackerData)
+      localStorage.setItem('honeypot-logs', JSON.stringify(existingLogs))
+      
+      // Alert the real admin (invisible)
+      if (sessionStorage.getItem('admin-session-active') === 'true') {
+        console.log('👑 REAL ADMIN NOTIFIED - ATTACKER IN HONEYPOT')
       }
     }
-    
-    getClientInfo()
-    setIsAuthenticated(isAdmin)
-  }, [isAdmin])
 
-  const handleLogin = async (e: React.FormEvent) => {
+    logAttackerAccess()
+  }, [])
+
+  const handleFakeLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    setAttemptCount(prev => prev + 1)
 
-    try {
-      // Enhanced admin credentials check with IP exclusivity
-      if (credentials.username === 'Synatic' && credentials.password === 'Freedom!oul19922323') {
-        // Check for existing admin session
-        const existingAdminIP = localStorage.getItem('gaia-admin-ip')
-        if (existingAdminIP && existingAdminIP !== clientIP) {
-          toast.error('🚫 Access Denied - Admin Already Connected', {
-            description: `Another admin is connected from ${existingAdminIP}. Only one admin session allowed.`,
-            duration: 5000
-          })
-          setIsLoading(false)
-          return
-        }
+    // Log every attempt
+    console.log(`🚨 FAKE LOGIN ATTEMPT #${attemptCount + 1}`)
+    console.log('👹 HACKER CREDENTIALS:', credentials)
+    console.log('🕷️ COLLECTING INTELLIGENCE ON ATTACKER')
 
-        // Grant exclusive admin access
-        const accessGranted = grantAdminAccess()
-        if (accessGranted) {
-          setIsAuthenticated(true)
-          toast.success('🌍 Exclusive Admin Access Granted!', {
-            description: `Welcome to GAIA Admin Dashboard - IP: ${clientIP}`,
-            duration: 3000
-          })
-          // Redirect to admin dashboard after successful login
-          setTimeout(() => {
-            navigate('/admin')
-          }, 2000)
-        } else {
-          toast.error('🚫 Admin Access Blocked', {
-            description: 'Another admin session is active',
-            duration: 3000
-          })
-        }
-      } else {
-        toast.error('🚫 Access Denied', {
-          description: 'Invalid admin credentials',
-          duration: 3000
-        })
-      }
-    } catch (error) {
-      toast.error('Login Error', {
-        description: 'Please try again',
-        duration: 3000
-      })
-    } finally {
-      setIsLoading(false)
-      setCredentials({ username: '', password: '' })
+    // Store attempt data
+    const attemptData = {
+      timestamp: new Date().toISOString(),
+      attempt: attemptCount + 1,
+      username: credentials.username,
+      password: credentials.password,
+      ip: attackerIP
     }
-  }
+    
+    const existingAttempts = JSON.parse(localStorage.getItem('honeypot-attempts') || '[]')
+    existingAttempts.push(attemptData)
+    localStorage.setItem('honeypot-attempts', JSON.stringify(existingAttempts))
 
-  const handleLogout = () => {
-    revokeAdminAccess()
-    setIsAuthenticated(false)
-    toast.success('🚪 Admin session terminated - System secured', {
-      description: 'All administrative controls have been disabled',
-      duration: 3000
+    // Always show fake loading and then rejection
+    await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 3000))
+
+    // Various fake error messages to confuse attackers
+    const fakeErrors = [
+      '🚫 Invalid Admin Credentials',
+      '⚠️ Account Temporarily Locked',
+      '🔒 Two-Factor Authentication Required',
+      '❌ Access Denied - Insufficient Privileges',
+      '🛡️ Security Token Expired',
+      '⛔ IP Address Not Whitelisted',
+      '🚨 Suspicious Activity Detected',
+      '🔐 VPN Access Blocked',
+      '💀 Nice Try, Hacker'
+    ]
+
+    const randomError = fakeErrors[Math.floor(Math.random() * fakeErrors.length)]
+    
+    toast.error(randomError, {
+      description: `Login attempt #${attemptCount + 1} failed. IP: ${attackerIP}`,
+      duration: 5000
     })
-  }
 
-  if (isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                🌍 GAIA Admin Dashboard - Exclusive Control
-              </h1>
-              <p className="text-xl text-muted-foreground mt-2">
-                Complete System Control • Secure Access • Global Management
-              </p>
-              <div className="flex gap-4 mt-4">
-                <Badge variant="outline" className="border-green-500/50 text-green-400">
-                  <Globe className="h-3 w-3 mr-1" />
-                  IP: {clientIP}
-                </Badge>
-                <Badge variant="outline" className="border-blue-500/50 text-blue-400">
-                  <Shield className="h-3 w-3 mr-1" />
-                  Exclusive Session
-                </Badge>
-                {adminSession && (
-                  <Badge variant="outline" className="border-purple-500/50 text-purple-400">
-                    <Users className="h-3 w-3 mr-1" />
-                    Session: {adminSession.id.substring(0, 8)}...
-                  </Badge>
-                )}
-              </div>
-            </div>
-            <Button onClick={handleLogout} variant="outline" className="border-red-500/30">
-              <Lock className="h-4 w-4 mr-2" />
-              Logout
-            </Button>
-          </div>
-          
-          <AdminDashboardTabs />
-        </div>
-      </div>
-    )
+    setIsLoading(false)
+    setCredentials({ username: '', password: '' })
+
+    // Fake progressive security measures
+    if (attemptCount >= 2) {
+      toast.error('🚨 Multiple Failed Attempts Detected', {
+        description: 'Security team has been notified. Account monitoring active.',
+        duration: 8000
+      })
+    }
+
+    if (attemptCount >= 4) {
+      toast.error('🛡️ Advanced Security Protocol Activated', {
+        description: 'IP logging initiated. Legal action may be pursued.',
+        duration: 10000
+      })
+    }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-green-900/20 flex items-center justify-center p-6">
-      <Card className="max-w-md mx-auto border-2 border-green-500/50 bg-gradient-to-br from-green-900/30 to-black/80 backdrop-blur-sm">
+    <div className="min-h-screen bg-gradient-to-br from-black via-red-900/20 to-gray-900/20 flex items-center justify-center p-6">
+      <Card className="max-w-md mx-auto border-2 border-red-500/50 bg-gradient-to-br from-red-900/30 to-black/80 backdrop-blur-sm">
         <CardHeader>
           <div className="text-center">
-            <Shield className="h-12 w-12 text-green-400 mx-auto mb-4" />
-            <CardTitle className="text-2xl font-bold text-green-400">
-              🌍 GAIA Admin Login - Exclusive Access
+            <Shield className="h-12 w-12 text-red-400 mx-auto mb-4" />
+            <CardTitle className="text-2xl font-bold text-red-400">
+              🛡️ GAIA Admin Portal
             </CardTitle>
-            <p className="text-green-300 text-sm mt-2">
-              Secure Admin Access • Single Session Control • IP Exclusivity
+            <p className="text-red-300 text-sm mt-2">
+              Secure Administrative Access • High Security Zone
             </p>
             
-            {/* IP and Session Status */}
+            {/* Fake status indicators */}
             <div className="mt-4 space-y-2">
               <div className="flex items-center justify-center gap-2 text-xs">
                 <Globe className="h-3 w-3 text-blue-400" />
-                <span className="text-blue-300">Your IP: {clientIP}</span>
+                <span className="text-blue-300">Detected IP: {attackerIP}</span>
               </div>
-              {activeSessions > 0 && (
+              {attemptCount > 0 && (
                 <div className="flex items-center justify-center gap-2 text-xs">
                   <AlertTriangle className="h-3 w-3 text-yellow-400" />
-                  <span className="text-yellow-300">Warning: Admin session active elsewhere</span>
+                  <span className="text-yellow-300">Failed Attempts: {attemptCount}</span>
+                </div>
+              )}
+              {attemptCount > 3 && (
+                <div className="flex items-center justify-center gap-2 text-xs">
+                  <Skull className="h-3 w-3 text-red-400" />
+                  <span className="text-red-300">⚠️ Security Alert Active</span>
                 </div>
               )}
             </div>
           </div>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleFakeLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="username" className="text-green-300">Admin Username</Label>
+              <Label htmlFor="username" className="text-red-300">Administrator Username</Label>
               <Input
                 id="username"
                 type="text"
                 value={credentials.username}
                 onChange={(e) => setCredentials(prev => ({ ...prev, username: e.target.value }))}
-                className="bg-black/40 border-green-500/30 text-green-400"
+                className="bg-black/40 border-red-500/30 text-red-400"
                 placeholder="Enter admin username..."
                 autoComplete="off"
                 required
@@ -194,14 +166,14 @@ export default function AdminLogin() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-green-300">Admin Password</Label>
+              <Label htmlFor="password" className="text-red-300">Administrator Password</Label>
               <div className="relative">
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   value={credentials.password}
                   onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
-                  className="bg-black/40 border-green-500/30 text-green-400 pr-10"
+                  className="bg-black/40 border-red-500/30 text-red-400 pr-10"
                   placeholder="Enter admin password..."
                   autoComplete="off"
                   required
@@ -210,7 +182,7 @@ export default function AdminLogin() {
                   type="button"
                   variant="ghost"
                   size="sm"
-                  className="absolute right-1 top-1 h-8 w-8 p-0 text-green-400"
+                  className="absolute right-1 top-1 h-8 w-8 p-0 text-red-400"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -221,22 +193,36 @@ export default function AdminLogin() {
             <Button 
               type="submit" 
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3"
+              className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-3"
             >
               <Lock className="h-5 w-5 mr-2" />
-              {isLoading ? 'Authenticating...' : 'Login to Admin Dashboard'}
+              {isLoading ? 'Authenticating...' : 'Access Admin Panel'}
             </Button>
           </form>
 
-          <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/20 rounded-lg">
-            <p className="text-xs text-green-300 text-center mb-2">
-              🛡️ Secure Admin Portal • Single Session Enforced • IP Protected
+          <div className="mt-6 p-4 bg-gradient-to-r from-red-900/30 to-orange-900/30 border border-red-500/20 rounded-lg">
+            <p className="text-xs text-red-300 text-center mb-2">
+              🛡️ Secure Admin Portal • Monitored Access • Protected Environment
             </p>
             <div className="text-xs text-gray-400 space-y-1">
-              <div>• Only one admin can be logged in at a time</div>
-              <div>• IP address verification required</div>
-              <div>• Cross-browser compatibility enabled</div>
+              <div>• Unauthorized access attempts are logged</div>
+              <div>• All admin activities are monitored</div>
+              <div>• Multi-factor authentication required</div>
+              {attemptCount > 2 && <div className="text-red-400">• ⚠️ Suspicious activity detected</div>}
             </div>
+          </div>
+
+          {/* Fake security badges */}
+          <div className="mt-4 flex justify-center gap-2">
+            <Badge variant="outline" className="border-red-500/30 text-red-400 text-xs">
+              SSL Secured
+            </Badge>
+            <Badge variant="outline" className="border-orange-500/30 text-orange-400 text-xs">
+              Bank Level
+            </Badge>
+            <Badge variant="outline" className="border-yellow-500/30 text-yellow-400 text-xs">
+              ISO 27001
+            </Badge>
           </div>
         </CardContent>
       </Card>

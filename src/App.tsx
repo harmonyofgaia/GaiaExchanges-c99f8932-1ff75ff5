@@ -1,4 +1,3 @@
-
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
@@ -6,6 +5,7 @@ import { Navbar } from '@/components/Navbar'
 import { GaiaLogo } from '@/components/GaiaLogo'
 import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
 import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
+import { HoneypotRedirect } from '@/components/security/HoneypotRedirect'
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
@@ -45,6 +45,7 @@ function App() {
     <Router>
       <div className="min-h-screen bg-background text-foreground" data-router="true">
         <CrossPagePersistence />
+        <HoneypotRedirect />
         <Navbar />
         <main className="flex-1">
           <Suspense fallback={
