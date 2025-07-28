@@ -1,3 +1,4 @@
+
 export { InteractiveVideoPlayer } from './InteractiveVideoPlayer'
 export { VideoAdminControl } from './VideoAdminControl'
 export { VideoChallengesEvents } from './VideoChallengesEvents'
@@ -15,3 +16,7 @@ export { VideoChannelSubscriptions } from './VideoChannelSubscriptions'
 
 // Export new live streaming component
 export { VideoLiveStreaming } from './VideoLiveStreaming'
+
+// Export Phase 1 components
+export { VideoContentModeration } from './VideoContentModeration'
+export { VideoSearchDiscovery } from './VideoSearchDiscovery'

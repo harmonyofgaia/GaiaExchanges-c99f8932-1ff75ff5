@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -16,9 +15,11 @@ import {
   VideoSecurityCompliance,
   VideoMusicUploadSystem,
   VideoChannelSubscriptions,
-  VideoLiveStreaming
+  VideoLiveStreaming,
+  VideoContentModeration,
+  VideoSearchDiscovery
 } from '@/components/video-exchange'
-import { Video, Users, Upload, MessageCircle, Bell, Coins, Trophy, Calendar, Shield, Lock, Music, Radio } from 'lucide-react'
+import { Video, Users, Upload, MessageCircle, Bell, Coins, Trophy, Calendar, Shield, Lock, Music, Radio, Search, Bot } from 'lucide-react'
 
 interface VideoStats {
   totalVideos: number
@@ -54,6 +55,8 @@ export function VideoExchangeDashboard() {
     { value: "upload", label: "Upload", icon: <Upload className="h-4 w-4 mb-1" /> },
     { value: "music", label: "Music", icon: <Music className="h-4 w-4 mb-1" /> },
     { value: "live", label: "Live Stream", icon: <Radio className="h-4 w-4 mb-1" /> },
+    { value: "search", label: "Search", icon: <Search className="h-4 w-4 mb-1" /> },
+    { value: "moderation", label: "Moderation", icon: <Bot className="h-4 w-4 mb-1" /> },
     { value: "subscriptions", label: "Subscribe", icon: <Bell className="h-4 w-4 mb-1" /> },
     { value: "player", label: "Player", icon: <Video className="h-4 w-4 mb-1" /> },
     { value: "chat", label: "Chat", icon: <MessageCircle className="h-4 w-4 mb-1" /> },
@@ -264,6 +267,14 @@ export function VideoExchangeDashboard() {
 
         <TabsContent value="live">
           <VideoLiveStreaming />
+        </TabsContent>
+
+        <TabsContent value="search">
+          <VideoSearchDiscovery />
+        </TabsContent>
+
+        <TabsContent value="moderation">
+          <VideoContentModeration />
         </TabsContent>
 
         <TabsContent value="subscriptions">
