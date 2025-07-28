@@ -58,6 +58,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { name: 'Home', path: '/', icon: Home },
+  { name: 'Exchange', path: '/exchange', icon: ArrowRightLeft },
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
   { name: 'Green Impact', path: '/green-impact-dashboard', icon: Leaf },
   { name: 'Eco Avatar', path: '/eco-avatar', icon: User },
@@ -71,7 +72,6 @@ const navItems: NavItem[] = [
   { name: 'Virtual World', path: '/virtual-world', icon: Globe },
   { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
   { name: 'Gaming Hub', path: '/gaming', icon: Gamepad2 },
-  { name: 'Exchange', path: '/exchange', icon: ArrowRightLeft },
   { name: 'Marketplace', path: '/marketplace', icon: ShoppingBag },
   { name: 'Wallet', path: '/wallet', icon: Wallet },
   { name: 'Video Exchange', path: '/video-exchange', icon: Video },
