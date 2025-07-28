@@ -1,15 +1,9 @@
+import { createContext, useContext, useEffect, useState } from 'react'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
+import type { ThemeProviderProps } from 'next-themes/dist/types'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
-
-export interface ThemeInfo {
-  name: string
-  description: string
-  icon: string
-}
-
-export type ThemeName = 'dark' | 'light' | 'mellow-colorful' | 'space' | 'forest' | 'ocean'
-
-export const AVAILABLE_THEMES: Record<ThemeName, ThemeInfo> = {
+// Available theme options
+export const AVAILABLE_THEMES = {
   dark: {
     name: 'Dark',
     description: 'Classic dark theme with matrix aesthetics',
@@ -20,7 +14,7 @@ export const AVAILABLE_THEMES: Record<ThemeName, ThemeInfo> = {
     description: 'Clean light theme for daytime use',
     icon: '☀️'
   },
-  'mellow-colorful': {
+  mellow: {
     name: 'Mellow Colorful',
     description: 'Soft, warm colors with earth tones',
     icon: '🌈'
@@ -40,8 +34,11 @@ export const AVAILABLE_THEMES: Record<ThemeName, ThemeInfo> = {
     description: 'Deep ocean blues and aqua tones',
     icon: '🌊'
   }
-}
+} as const
 
+export type ThemeName = keyof typeof AVAILABLE_THEMES
+
+// Lock context for UI protection
 interface LockContextType {
   isLocked: boolean
   toggleLock: () => void
@@ -49,11 +46,29 @@ interface LockContextType {
 
 const LockContext = createContext<LockContextType | undefined>(undefined)
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [isLocked, setIsLocked] = useState(true)
+export function useLock() {
+  const context = useContext(LockContext)
+  if (context === undefined) {
+    throw new Error('useLock must be used within a LockProvider')
+  }
+  return context
+}
+
+function LockProvider({ children }: { children: React.ReactNode }) {
+  const [isLocked, setIsLocked] = useState(false)
+
+  useEffect(() => {
+    // Load lock state from localStorage
+    const stored = localStorage.getItem('gaia-ui-lock')
+    if (stored) {
+      setIsLocked(JSON.parse(stored))
+    }
+  }, [])
 
   const toggleLock = () => {
-    setIsLocked(!isLocked)
+    const newLockState = !isLocked
+    setIsLocked(newLockState)
+    localStorage.setItem('gaia-ui-lock', JSON.stringify(newLockState))
   }
 
   return (
@@ -63,10 +78,21 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   )
 }
 
-export function useLock() {
-  const context = useContext(LockContext)
-  if (context === undefined) {
-    throw new Error('useLock must be used within a ThemeProvider')
-  }
-  return context
+export function ThemeProvider({
+  children,
+  ...props
+}: ThemeProviderProps) {
+  return (
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem={false}
+      themes={Object.keys(AVAILABLE_THEMES)}
+      {...props}
+    >
+      <LockProvider>
+        {children}
+      </LockProvider>
+    </NextThemesProvider>
+  )
 }
