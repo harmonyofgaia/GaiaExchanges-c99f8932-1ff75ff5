@@ -65,7 +65,10 @@ const GreenInvestments = () => {
               <Flame className="h-4 w-4 mr-1" />
               FEATURED PROTECTION PROJECT
             </Badge>
-            <h2 className="text-2xl font-bold text-orange-400">Our Latest Environmental Protection Initiative</h2>
+            <h2 className="text-2xl font-bold text-orange-400">Advanced Wildfire Sand Barrier Protection System</h2>
+            <p className="text-muted-foreground mt-2">
+              Revolutionary sand barrier technology protecting communities from wildfire threats with real-time monitoring
+            </p>
           </div>
           <WildfireSandProtection />
         </div>
