@@ -2277,6 +2277,48 @@ export type Database = {
         }
         Relationships: []
       }
+      system_health_logs: {
+        Row: {
+          blocked_queries: number | null
+          checked_at: string | null
+          detected_at: string
+          id: number
+          issue_description: string
+          issue_type: string
+          long_queries: number | null
+          resolved: boolean
+          severity: number
+          tables_without_pk: number | null
+          total_connections: number | null
+        }
+        Insert: {
+          blocked_queries?: number | null
+          checked_at?: string | null
+          detected_at?: string
+          id?: number
+          issue_description: string
+          issue_type: string
+          long_queries?: number | null
+          resolved?: boolean
+          severity?: number
+          tables_without_pk?: number | null
+          total_connections?: number | null
+        }
+        Update: {
+          blocked_queries?: number | null
+          checked_at?: string | null
+          detected_at?: string
+          id?: number
+          issue_description?: string
+          issue_type?: string
+          long_queries?: number | null
+          resolved?: boolean
+          severity?: number
+          tables_without_pk?: number | null
+          total_connections?: number | null
+        }
+        Relationships: []
+      }
       table_dependencies: {
         Row: {
           cascade_delete: boolean | null
@@ -3679,6 +3721,15 @@ export type Database = {
         Returns: {
           remediation_risk_level: string
           remediation_steps: string[]
+        }[]
+      }
+      get_system_health: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          total_connections: number
+          long_queries: number
+          blocked_queries: number
+          tables_without_pk: number
         }[]
       }
       get_table_data: {
