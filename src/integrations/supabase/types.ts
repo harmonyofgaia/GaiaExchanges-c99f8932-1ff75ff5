@@ -416,12 +416,15 @@ export type Database = {
       }
       bad_example: {
         Row: {
+          id: number
           logged_at: string | null
         }
         Insert: {
+          id?: never
           logged_at?: string | null
         }
         Update: {
+          id?: never
           logged_at?: string | null
         }
         Relationships: []
@@ -981,6 +984,77 @@ export type Database = {
           },
         ]
       }
+      function_search_path_audit: {
+        Row: {
+          error_details: string | null
+          function_name: string
+          id: number
+          modification_status: string | null
+          modified_at: string | null
+          original_definition: string | null
+          remediation_sql: string | null
+          risk_level: number | null
+          schema_name: string
+        }
+        Insert: {
+          error_details?: string | null
+          function_name: string
+          id?: never
+          modification_status?: string | null
+          modified_at?: string | null
+          original_definition?: string | null
+          remediation_sql?: string | null
+          risk_level?: number | null
+          schema_name: string
+        }
+        Update: {
+          error_details?: string | null
+          function_name?: string
+          id?: never
+          modification_status?: string | null
+          modified_at?: string | null
+          original_definition?: string | null
+          remediation_sql?: string | null
+          risk_level?: number | null
+          schema_name?: string
+        }
+        Relationships: []
+      }
+      function_search_path_fixes: {
+        Row: {
+          fixed_at: string | null
+          function_name: string | null
+          id: number
+          schema_name: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          fixed_at?: string | null
+          function_name?: string | null
+          id?: never
+          schema_name?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          fixed_at?: string | null
+          function_name?: string | null
+          id?: never
+          schema_name?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "function_search_path_fixes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
       gaia_earning_activities: {
         Row: {
           activity_description: string | null
@@ -1165,6 +1239,30 @@ export type Database = {
           resolution_notes?: string | null
           resolved_at?: string | null
           severity_level?: number
+        }
+        Relationships: []
+      }
+      monitoring_events: {
+        Row: {
+          created_at: string
+          details: Json | null
+          id: number
+          message: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          details?: Json | null
+          id?: never
+          message: string
+          status: string
+        }
+        Update: {
+          created_at?: string
+          details?: Json | null
+          id?: never
+          message?: string
+          status?: string
         }
         Relationships: []
       }
@@ -2756,6 +2854,19 @@ export type Database = {
         }
         Relationships: []
       }
+      function_security_audit: {
+        Row: {
+          argument_data_types: string | null
+          function_name: string | null
+          has_search_path: boolean | null
+          recommendation: string | null
+          result_data_type: string | null
+          schema_name: string | null
+          search_path_value: string | null
+          security_definer: boolean | null
+        }
+        Relationships: []
+      }
       order_items_view: {
         Row: {
           created_at: string | null
@@ -2796,6 +2907,14 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      performance_status: {
+        Row: {
+          column_name: unknown | null
+          issue_type: string | null
+          table_name: string | null
+        }
+        Relationships: []
       }
       robust_data_view: {
         Row: {
@@ -2994,7 +3113,15 @@ export type Database = {
           | { user_email: string; user_role?: string }
         Returns: string
       }
+      add_missing_fk_indexes: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       add_missing_indexes: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      add_missing_primary_keys: {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
@@ -3034,6 +3161,17 @@ export type Database = {
           error_trend: Json
         }[]
       }
+      analyze_function_search_paths: {
+        Args: { max_risk_level?: number; dry_run?: boolean }
+        Returns: {
+          schema_name: string
+          function_name: string
+          remediation_status: string
+          error_message: string
+          function_risk_level: number
+          remediation_sql: string
+        }[]
+      }
       analyze_function_security: {
         Args: Record<PropertyKey, never>
         Returns: {
@@ -3051,23 +3189,79 @@ export type Database = {
           mean_time: number
         }[]
       }
+      analyze_unused_indexes: {
+        Args: { min_size_mb?: number }
+        Returns: {
+          schema_name: string
+          table_name: string
+          index_name: string
+          index_size_mb: number
+          table_size_mb: number
+          index_scans: number
+          is_primary: boolean
+          is_unique: boolean
+          is_constraint: boolean
+          drop_statement: string
+        }[]
+      }
       assign_admin_role: {
         Args:
           | { target_user_email: string; admin_user_email: string }
           | { target_user_uuid: string; admin_user_uuid: string }
         Returns: boolean
       }
+      audit_function_security: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          schema_name: string
+          function_name: string
+          argument_data_types: string
+          result_data_type: string
+          security_definer: boolean
+          has_search_path: boolean
+          search_path_value: string
+          recommendation: string
+        }[]
+      }
+      audit_logs_cleanup: {
+        Args: Record<PropertyKey, never> | { retention_days?: number }
+        Returns: number
+      }
       auto_resolve_errors: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      bulk_search_path_remediation: {
+        Args: { max_risk_level?: number; dry_run?: boolean }
+        Returns: Record<string, unknown>[]
       }
       check_password_complexity: {
         Args: { password: string }
         Returns: boolean
       }
+      cleanup_audit_logs_by_days: {
+        Args: { days_to_retain: number }
+        Returns: number
+      }
+      cleanup_audit_logs_v2: {
+        Args: {
+          retention_days?: number
+          batch_size?: number
+          max_runtime_seconds?: number
+        }
+        Returns: number
+      }
       cleanup_indexes: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      cleanup_old_audit_logs: {
+        Args: {
+          retention_days?: number
+          batch_size?: number
+          max_runtime_seconds?: number
+        }
+        Returns: number
       }
       comprehensive_error_test: {
         Args: Record<PropertyKey, never>
@@ -3088,6 +3282,10 @@ export type Database = {
         }[]
       }
       configure_secure_search_path: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      consolidate_permissive_policies: {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
@@ -3115,6 +3313,10 @@ export type Database = {
               index_definition: string
             }
         Returns: boolean
+      }
+      create_monitoring_table: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
       }
       create_security_alert: {
         Args: {
@@ -3186,6 +3388,24 @@ export type Database = {
           provolatile: string
         }[]
       }
+      diagnose_table_dependencies: {
+        Args:
+          | Record<PropertyKey, never>
+          | { schema_name: string; table_name: string }
+        Returns: {
+          dependent_object: string
+          object_type: string
+          dependency_type: string
+        }[]
+      }
+      diagnose_table_dependencies_fixed: {
+        Args: { table_name: string; schema_name?: string }
+        Returns: {
+          dependent_table: string
+          dependent_schema: string
+          dependency_type: string
+        }[]
+      }
       enable_admin_two_factor: {
         Args: { admin_email: string }
         Returns: boolean
@@ -3229,6 +3449,109 @@ export type Database = {
           function_body: string
         }[]
       }
+      fix_all_function_search_paths: {
+        Args: Record<PropertyKey, never> | { target_schema?: string }
+        Returns: {
+          schema_name: string
+          function_name: string
+          parameter_types: string
+          status: string
+        }[]
+      }
+      fix_backslash_syntax_errors: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          object_type: string
+          object_name: string
+          error_type: string
+          status: string
+        }[]
+      }
+      fix_common_syntax_errors: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          object_type: string
+          object_name: string
+          error_type: string
+          status: string
+        }[]
+      }
+      fix_foreign_tables_location: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          original_schema: string
+          table_name: string
+          status: string
+        }[]
+      }
+      fix_function_search_paths: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          schema_name: string
+          function_name: string
+          status: string
+        }[]
+      }
+      fix_incorrect_search_paths: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          function_name: string
+          old_search_path: string
+          status: string
+        }[]
+      }
+      fix_materialized_views_location: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          original_schema: string
+          view_name: string
+          status: string
+        }[]
+      }
+      fix_missing_rls: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          schema_name: string
+          table_name: string
+          status: string
+        }[]
+      }
+      fix_one_function_search_path: {
+        Args: { schema_name: string; function_name: string }
+        Returns: string
+      }
+      fix_performance_issues: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
+      }
+      fix_rls_policies: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      fix_schema_function_search_paths: {
+        Args: { p_schema_name: string }
+        Returns: {
+          function_name: string
+          parameter_types: string
+          status: string
+        }[]
+      }
+      fix_schema_functions: {
+        Args: { target_schema: string }
+        Returns: string[]
+      }
+      fix_security_framework_search_paths: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      fix_security_issues: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
+      }
+      fix_specific_function_search_path: {
+        Args: { p_schema_name: string; p_function_name: string }
+        Returns: string
+      }
       generate_basic_rls_policies: {
         Args: Record<PropertyKey, never>
         Returns: {
@@ -3245,9 +3568,32 @@ export type Database = {
           remediation_script: string
         }[]
       }
+      generate_search_path_fixes: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          fix_sql: string
+        }[]
+      }
+      generate_secure_function_wrapper: {
+        Args: { p_schema: string; p_function_name: string }
+        Returns: {
+          original_function: string
+          secure_wrapper: string
+          security_notes: string
+        }[]
+      }
       generate_security_alert: {
         Args: { p_alert_type: string; p_severity: number; p_details: Json }
         Returns: string
+      }
+      generate_security_diagnostic_report: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          diagnostic_category: string
+          diagnostic_name: string
+          diagnostic_risk_level: string
+          diagnostic_details: Json
+        }[]
       }
       generate_security_report: {
         Args: { p_start_date?: string; p_end_date?: string }
@@ -3292,6 +3638,18 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      get_filtered_records: {
+        Args: {
+          table_name: string
+          filter_column: string
+          filter_value: string
+        }
+        Returns: {
+          id: number
+          record_data: Json
+          tags: string[]
+        }[]
+      }
       get_rls_policies: {
         Args: Record<PropertyKey, never>
         Returns: {
@@ -3316,6 +3674,17 @@ export type Database = {
           unique_ips: number
         }[]
       }
+      get_security_remediation_guidance: {
+        Args: { p_diagnostic_risk_level?: string }
+        Returns: {
+          remediation_risk_level: string
+          remediation_steps: string[]
+        }[]
+      }
+      get_table_data: {
+        Args: { table_name: string }
+        Returns: Record<string, unknown>[]
+      }
       get_table_dependencies: {
         Args: { target_table: unknown }
         Returns: {
@@ -3324,6 +3693,10 @@ export type Database = {
           dependency_type: string
           object_type: string
         }[]
+      }
+      get_user_ids: {
+        Args: { department_name: string }
+        Returns: number[]
       }
       get_user_uuid_by_email: {
         Args: { user_email: string }
@@ -3370,6 +3743,15 @@ export type Database = {
           function_definition: string
         }[]
       }
+      inspect_function_search_paths: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          function_schema: string
+          function_name: string
+          current_search_path: string
+          function_definition: string
+        }[]
+      }
       install_extension: {
         Args: { extension_name: string }
         Returns: boolean
@@ -3405,6 +3787,10 @@ export type Database = {
           function_name: string
           argument_types: string
         }[]
+      }
+      list_vulnerable_schemas: {
+        Args: Record<PropertyKey, never>
+        Returns: string[]
       }
       log_audit_event: {
         Args: {
@@ -3443,6 +3829,7 @@ export type Database = {
       }
       log_error: {
         Args:
+          | { message: string }
           | { p_error_message: string; p_context?: string }
           | {
               p_error_type: string
@@ -3450,6 +3837,10 @@ export type Database = {
               p_context?: Json
               p_is_critical?: boolean
             }
+        Returns: undefined
+      }
+      log_security_diagnostics: {
+        Args: Record<PropertyKey, never>
         Returns: undefined
       }
       log_security_event: {
@@ -3562,11 +3953,23 @@ export type Database = {
           severity: number
         }[]
       }
+      my_function: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      my_routine: {
+        Args: { param1: string; param2: number }
+        Returns: undefined
+      }
       optimize_database: {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
       optimize_database_objects: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      optimize_database_performance: {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
@@ -3584,9 +3987,42 @@ export type Database = {
           prediction_features: Json
         }[]
       }
+      process_data: {
+        Args: { table_name: string }
+        Returns: undefined
+      }
+      purge_audit_logs: {
+        Args: { retention_days?: number }
+        Returns: number
+      }
+      purge_old_audit_logs: {
+        Args: { retention_days?: number }
+        Returns: number
+      }
+      purge_old_audit_records: {
+        Args: { days_to_retain?: number }
+        Returns: number
+      }
+      remediate_search_path_vulnerabilities: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          function_schema: string
+          function_name: string
+          remediation_status: string
+        }[]
+      }
       remove_admin_role: {
         Args: { p_user_id?: string }
         Returns: boolean
+      }
+      report_search_path_issues: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          schema_name: string
+          function_name: string
+          function_args: string
+          owner: string
+        }[]
       }
       resolve_error: {
         Args: { p_error_id: string }
@@ -3600,6 +4036,10 @@ export type Database = {
           connection_details: string
         }[]
       }
+      retry_query: {
+        Args: { p_query: string }
+        Returns: Json
+      }
       revoke_admin_role: {
         Args:
           | { target_user_email: string; admin_user_email: string }
@@ -3609,6 +4049,15 @@ export type Database = {
       risky_database_operation: {
         Args: Record<PropertyKey, never>
         Returns: boolean
+      }
+      run_all_security_fixes: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          fix_type: string
+          object_schema: string
+          object_name: string
+          status: string
+        }[]
       }
       safe_execute: {
         Args: { p_function_name: string; p_params?: Json } | { p_query: string }
@@ -3627,7 +4076,11 @@ export type Database = {
         }[]
       }
       secure_function_template: {
-        Args: { p_input: number } | { p_input: string } | { p_input: string }
+        Args:
+          | { p_input: number }
+          | { p_input: string }
+          | { p_input: string }
+          | { param1: string; param2: number }
         Returns: Json
       }
       secure_login: {
@@ -3642,6 +4095,34 @@ export type Database = {
           user_id: string
           error_message: string
         }[]
+      }
+      security_diagnostic_report: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          category: string
+          name: string
+          risk_level: string
+          details: Json
+        }[]
+      }
+      security_logging_test: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      security_monitoring_setup: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      security_remediation_guide: {
+        Args: { p_risk_level?: string }
+        Returns: {
+          risk_level: string
+          remediation_steps: string[]
+        }[]
+      }
+      security_test_function: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
       }
       send_external_error_notification: {
         Args: { p_error_id: string; p_notification_type?: string }
@@ -3685,9 +4166,38 @@ export type Database = {
           details: Json
         }[]
       }
+      system_error_test: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      table_dependencies_diagnose: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          schema_name: string
+          table_name: string
+          dependent_object: string
+          dependent_type: string
+        }[]
+      }
+      table_dependency_analysis: {
+        Args: { table_name: string; schema_name?: string }
+        Returns: {
+          dependent_table: string
+          dependent_schema: string
+          dependency_type: string
+        }[]
+      }
       test_error_management: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      test_function: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
+      test_search_path: {
+        Args: Record<PropertyKey, never>
+        Returns: string
       }
       track_error: {
         Args:
