@@ -1,209 +1,132 @@
 
-import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
+import { BarChart3, Users, Coins, TrendingUp, Globe, Shield } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
-import { 
-  TrendingUp, 
-  Users, 
-  Leaf, 
-  DollarSign, 
-  Target, 
-  Award,
-  Activity,
-  Globe
-} from 'lucide-react'
-import { AnimatedCounter } from '@/components/ui/animated-counter'
 
 export default function Dashboard() {
-  const [stats, setStats] = useState({
-    totalUsers: 12847,
-    activeProjects: 156,
-    tokensEarned: 2847395,
-    carbonOffset: 58392,
-    projectsCompleted: 89,
-    communityScore: 94
-  })
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStats(prev => ({
-        totalUsers: prev.totalUsers + Math.floor(Math.random() * 5),
-        activeProjects: prev.activeProjects + Math.floor(Math.random() * 2),
-        tokensEarned: prev.tokensEarned + Math.floor(Math.random() * 100),
-        carbonOffset: prev.carbonOffset + Math.floor(Math.random() * 10),
-        projectsCompleted: prev.projectsCompleted,
-        communityScore: Math.min(100, prev.communityScore + Math.floor(Math.random() * 2))
-      }))
-    }, 3000)
-
-    return () => clearInterval(interval)
-  }, [])
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            🌍 GAiA Dashboard
+            🌍 GAIA Dashboard
           </h1>
           <p className="text-xl text-muted-foreground mt-2">
-            Real-time overview of your environmental impact and community engagement
+            Comprehensive Platform Analytics & Overview
           </p>
+          <div className="flex gap-4 mt-4">
+            <Badge variant="outline" className="border-green-500/50 text-green-400">
+              <Globe className="h-3 w-3 mr-1" />
+              Global Network
+            </Badge>
+            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
+              <Shield className="h-3 w-3 mr-1" />
+              Secure Platform
+            </Badge>
+          </div>
         </div>
 
-        {/* Main Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-500/30">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-green-300 text-sm font-medium">Total Users</p>
-                  <div className="text-2xl font-bold text-green-400">
-                    <AnimatedCounter value={stats.totalUsers} />
-                  </div>
-                </div>
-                <Users className="h-8 w-8 text-green-400" />
-              </div>
+          <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-green-400">Total Users</CardTitle>
+              <Users className="h-4 w-4 text-green-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">125,847</div>
+              <p className="text-xs text-muted-foreground">
+                +12% from last month
+              </p>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-blue-500/30">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-blue-300 text-sm font-medium">Active Projects</p>
-                  <div className="text-2xl font-bold text-blue-400">
-                    <AnimatedCounter value={stats.activeProjects} />
-                  </div>
-                </div>
-                <Target className="h-8 w-8 text-blue-400" />
-              </div>
+          <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-blue-400">GAiA Volume</CardTitle>
+              <Coins className="h-4 w-4 text-blue-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">2.4M GAiA</div>
+              <p className="text-xs text-muted-foreground">
+                +8% from last week
+              </p>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-purple-500/30">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-purple-300 text-sm font-medium">Tokens Earned</p>
-                  <div className="text-2xl font-bold text-purple-400">
-                    <AnimatedCounter value={stats.tokensEarned} />
-                  </div>
-                </div>
-                <DollarSign className="h-8 w-8 text-purple-400" />
-              </div>
+          <Card className="bg-gradient-to-br from-purple-900/20 to-black/50 border-purple-500/20">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-purple-400">Platform Growth</CardTitle>
+              <TrendingUp className="h-4 w-4 text-purple-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">+24.5%</div>
+              <p className="text-xs text-muted-foreground">
+                Monthly active users
+              </p>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-orange-900/30 to-red-900/30 border-orange-500/30">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-orange-300 text-sm font-medium">Carbon Offset</p>
-                  <div className="text-2xl font-bold text-orange-400">
-                    <AnimatedCounter value={stats.carbonOffset} />
-                    <span className="text-sm text-orange-300 ml-1">tons</span>
-                  </div>
-                </div>
-                <Leaf className="h-8 w-8 text-orange-400" />
-              </div>
+          <Card className="bg-gradient-to-br from-orange-900/20 to-black/50 border-orange-500/20">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-orange-400">System Health</CardTitle>
+              <BarChart3 className="h-4 w-4 text-orange-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">99.9%</div>
+              <p className="text-xs text-muted-foreground">
+                Uptime this month
+              </p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Progress Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <Card className="border-green-500/30 bg-green-900/20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <Activity className="h-5 w-5" />
-                Project Completion Rate
-              </CardTitle>
+              <CardTitle className="text-green-400">Recent Activity</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Completed Projects</span>
-                  <span className="text-green-400 font-bold">{stats.projectsCompleted}/156</span>
+                <div className="flex items-center space-x-4">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="text-sm text-white">New user registration: +247 today</div>
                 </div>
-                <Progress value={(stats.projectsCompleted / 156) * 100} className="h-3" />
-                <div className="text-xs text-muted-foreground">
-                  {((stats.projectsCompleted / 156) * 100).toFixed(1)}% completion rate
+                <div className="flex items-center space-x-4">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  <div className="text-sm text-white">GAiA transactions: +1,234 in last hour</div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                  <div className="text-sm text-white">Environmental projects funded: 3</div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="border-purple-500/30 bg-purple-900/20">
+          <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-purple-400">
-                <Award className="h-5 w-5" />
-                Community Engagement
-              </CardTitle>
+              <CardTitle className="text-blue-400">Platform Statistics</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Community Score</span>
-                  <span className="text-purple-400 font-bold">{stats.communityScore}/100</span>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Total Transactions</span>
+                  <span className="text-white font-bold">45.2M</span>
                 </div>
-                <Progress value={stats.communityScore} className="h-3" />
-                <Badge className="bg-purple-600 text-white">
-                  {stats.communityScore >= 90 ? 'Excellent' : stats.communityScore >= 70 ? 'Good' : 'Growing'}
-                </Badge>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Active Projects</span>
+                  <span className="text-white font-bold">1,247</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Carbon Offset</span>
+                  <span className="text-white font-bold">12.4K tons</span>
+                </div>
               </div>
             </CardContent>
           </Card>
         </div>
-
-        {/* Recent Activity */}
-        <Card className="border-blue-500/30 bg-blue-900/20">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-blue-400">
-              <Globe className="h-5 w-5" />
-              Recent Environmental Impact
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 bg-green-800/30 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <Leaf className="h-5 w-5 text-green-400" />
-                  <div>
-                    <div className="font-medium text-white">Ocean Cleanup Project</div>
-                    <div className="text-sm text-muted-foreground">2,500 tons of plastic removed</div>
-                  </div>
-                </div>
-                <Badge className="bg-green-600">Active</Badge>
-              </div>
-              
-              <div className="flex items-center justify-between p-3 bg-blue-800/30 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <Target className="h-5 w-5 text-blue-400" />
-                  <div>
-                    <div className="font-medium text-white">Forest Restoration</div>
-                    <div className="text-sm text-muted-foreground">50,000 trees planted this month</div>
-                  </div>
-                </div>
-                <Badge className="bg-blue-600">Ongoing</Badge>
-              </div>
-              
-              <div className="flex items-center justify-between p-3 bg-purple-800/30 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <TrendingUp className="h-5 w-5 text-purple-400" />
-                  <div>
-                    <div className="font-medium text-white">Renewable Energy Initiative</div>
-                    <div className="text-sm text-muted-foreground">15MW solar capacity added</div>
-                  </div>
-                </div>
-                <Badge className="bg-purple-600">Completed</Badge>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   )

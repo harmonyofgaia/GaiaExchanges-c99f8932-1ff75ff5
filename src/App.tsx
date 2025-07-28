@@ -1,53 +1,101 @@
-import { Suspense, lazy } from 'react';
-import { Routes, Route } from "react-router-dom";
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter } from "react-router-dom";
 
-const HomePage = lazy(() => import("./pages/HomePage"));
-const About = lazy(() => import("./pages/About"));
-const Contact = lazy(() => import("./pages/Contact"));
-const DecentralizedProjectFundingPools = lazy(() => import("./pages/DecentralizedProjectFundingPools"));
-const GreenInvestments = lazy(() => import("./pages/GreenInvestments"));
-const SandProtect = lazy(() => import("./pages/SandProtect"));
-const AdminPanel = lazy(() => import("./pages/AdminPanel"));
-const ForestShieldMasterPlan = lazy(() => import("./pages/ForestShieldMasterPlan"));
+import { lazy, Suspense } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Toaster } from 'sonner'
+import { Navbar } from '@/components/Navbar'
+import { GaiaLogo } from '@/components/GaiaLogo'
+import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
+import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
+import { HoneypotRedirect } from '@/components/security/HoneypotRedirect'
 
-// Phase 1 new pages
-const Dashboard = lazy(() => import("./pages/Dashboard"));
-const GreenImpactDashboard = lazy(() => import("./pages/GreenImpactDashboard"));
-const GAiAConsistencyStatus = lazy(() => import("./pages/GAiAConsistencyStatus"));
-const Security = lazy(() => import("./pages/Security"));
-
-const queryClient = new QueryClient();
+// Lazy load pages for better performance
+const Home = lazy(() => import('./pages/Home'))
+const LiveTracking = lazy(() => import('./pages/LiveTracking'))
+const Gaming = lazy(() => import('./pages/Gaming'))
+const Wallet = lazy(() => import('./pages/Wallet'))
+const Markets = lazy(() => import('./pages/Markets'))
+const VideoExchange = lazy(() => import('./pages/VideoExchange'))
+const StreamingShows = lazy(() => import('./pages/StreamingShows'))
+const GaiaBikeEcosystem = lazy(() => import('./pages/GaiaBikeEcosystem'))
+const TokenMining = lazy(() => import('./pages/TokenMining'))
+const GreenInvestments = lazy(() => import('./pages/GreenInvestments'))
+const CoinCrafter = lazy(() => import('./pages/CoinCrafter'))
+const SandProtect = lazy(() => import('./pages/SandProtect'))
+const GaiasProjects = lazy(() => import('./pages/GaiasProjects'))
+const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlockchainSwapToken'))
+const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
+const Admin = lazy(() => import('./pages/Admin'))
+const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
+const DeploymentStatus = lazy(() => import('./pages/DeploymentStatus'))
+const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'))
+const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'))
+const LandscapeBuilder = lazy(() => import('./pages/LandscapeBuilder'))
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Pricing = lazy(() => import('./pages/Pricing'))
+const VirtualWorld = lazy(() => import('./pages/VirtualWorld'))
+const AnimalWelfare = lazy(() => import('./pages/AnimalWelfare'))
+const Exchange = lazy(() => import('./pages/Exchange'))
+const NFTGreenAnimals = lazy(() => import('./pages/NFTGreenAnimals'))
+const AuraLandScrapyard = lazy(() => import('./pages/AuraLandScrapyard'))
+const ComprehensiveStatus = lazy(() => import('./pages/ComprehensiveStatus'))
 
 function App() {
+  useGlobalBackgroundServices()
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Suspense fallback={<div>Loading...</div>}><HomePage /></Suspense>} />
-            <Route path="/about" element={<Suspense fallback={<div>Loading...</div>}><About /></Suspense>} />
-            <Route path="/contact" element={<Suspense fallback={<div>Loading...</div>}><Contact /></Suspense>} />
-            <Route path="/decentralized-project-funding-pools" element={<Suspense fallback={<div>Loading...</div>}><DecentralizedProjectFundingPools /></Suspense>} />
-            <Route path="/green-investments" element={<Suspense fallback={<div>Loading...</div>}><GreenInvestments /></Suspense>} />
-            <Route path="/sand-protect" element={<Suspense fallback={<div>Loading...</div>}><SandProtect /></Suspense>} />
-            <Route path="/admin-panel" element={<Suspense fallback={<div>Loading...</div>}><AdminPanel /></Suspense>} />
-            <Route path="/forest-shield-master-plan" element={<Suspense fallback={<div>Loading...</div>}><ForestShieldMasterPlan /></Suspense>} />
-            
-            {/* Phase 1 New Routes */}
-            <Route path="/dashboard" element={<Suspense fallback={<div>Loading...</div>}><Dashboard /></Suspense>} />
-            <Route path="/green-impact-dashboard" element={<Suspense fallback={<div>Loading...</div>}><GreenImpactDashboard /></Suspense>} />
-            <Route path="/gaia-consistency-status" element={<Suspense fallback={<div>Loading...</div>}><GAiAConsistencyStatus /></Suspense>} />
-            <Route path="/security" element={<Suspense fallback={<div>Loading...</div>}><Security /></Suspense>} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  );
+    <Router>
+      <div className="min-h-screen bg-background text-foreground" data-router="true">
+        <CrossPagePersistence />
+        <HoneypotRedirect />
+        <Navbar />
+        <main className="flex-1">
+          <Suspense fallback={
+            <div className="min-h-screen bg-background flex items-center justify-center">
+              <div className="text-center">
+                <GaiaLogo size="xl" variant="matrix" />
+                <div className="mt-4 text-primary animate-pulse">Loading GAiA Universe...</div>
+              </div>
+            </div>
+          }>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/virtual-world" element={<VirtualWorld />} />
+              <Route path="/animal-welfare" element={<AnimalWelfare />} />
+              <Route path="/gaming" element={<Gaming />} />
+              <Route path="/exchange" element={<Exchange />} />
+              <Route path="/nft-green-animals" element={<NFTGreenAnimals />} />
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/markets" element={<Markets />} />
+              <Route path="/video-exchange" element={<VideoExchange />} />
+              <Route path="/streaming-shows" element={<StreamingShows />} />
+              <Route path="/gaia-bike-ecosystem" element={<GaiaBikeEcosystem />} />
+              <Route path="/token-mining" element={<TokenMining />} />
+              <Route path="/green-investments" element={<GreenInvestments />} />
+              <Route path="/coin-crafter" element={<CoinCrafter />} />
+              <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+              <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
+              <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/live-tracking" element={<LiveTracking />} />
+              <Route path="/sand-protect" element={<SandProtect />} />
+              <Route path="/gaias-projects" element={<GaiasProjects />} />
+              <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
+              <Route path="/private-blockchain" element={<PrivateBlockchain />} />
+              <Route path="/secure-admin" element={<SecureAdmin />} />
+              <Route path="/deployment-status" element={<DeploymentStatus />} />
+              <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
+              <Route path="/enhanced-leaderboard" element={<EnhancedLeaderboard />} />
+            </Routes>
+          </Suspense>
+        </main>
+        <Toaster position="top-right" />
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
