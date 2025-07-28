@@ -1,10 +1,10 @@
+
 import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
-import { MenuControlProvider } from '@/components/providers/MenuControlProvider'
 import { BackgroundManager } from '@/components/ui/background-manager'
 import { Navbar } from '@/components/Navbar'
 import { VisualControlButton } from '@/components/visual/VisualControlButton'
@@ -23,34 +23,32 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <MenuControlProvider>
-            <ProjectManagementProvider>
-              <div className="min-h-screen bg-background text-foreground">
-                <BackgroundManager />
-                <Navbar />
-                <main className="relative z-10">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/gaming" element={<Gaming />} />
-                    <Route path="/markets" element={<Markets />} />
-                    <Route path="/admin" element={<Admin />} />
-                    <Route path="/security" element={<Security />} />
-                  </Routes>
-                </main>
-                <Toaster 
-                  position="bottom-right"
-                  toastOptions={{
-                    style: {
-                      background: 'hsl(var(--background))',
-                      color: 'hsl(var(--foreground))',
-                      border: '1px solid hsl(var(--border))',
-                    },
-                  }}
-                />
-                <VisualControlButton />
-              </div>
-            </ProjectManagementProvider>
-          </MenuControlProvider>
+          <ProjectManagementProvider>
+            <div className="min-h-screen bg-background text-foreground">
+              <BackgroundManager />
+              <Navbar />
+              <main className="relative z-10">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/gaming" element={<Gaming />} />
+                  <Route path="/markets" element={<Markets />} />
+                  <Route path="/admin" element={<Admin />} />
+                  <Route path="/security" element={<Security />} />
+                </Routes>
+              </main>
+              <Toaster 
+                position="bottom-right"
+                toastOptions={{
+                  style: {
+                    background: 'hsl(var(--background))',
+                    color: 'hsl(var(--foreground))',
+                    border: '1px solid hsl(var(--border))',
+                  },
+                }}
+              />
+              <VisualControlButton />
+            </div>
+          </ProjectManagementProvider>
         </ThemeProvider>
       </BrowserRouter>
     </QueryClientProvider>
