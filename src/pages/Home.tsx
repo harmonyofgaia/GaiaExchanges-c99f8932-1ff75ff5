@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -16,10 +17,6 @@ import { LiveEarningsDisplay } from '@/components/earnings/LiveEarningsDisplay'
 import { EcoMissionCard } from '@/components/missions/EcoMissionCard'
 import { ThemeSelector } from '@/components/ThemeSelector'
 import { VisualControlButton } from '@/components/visual/VisualControlButton'
-import { MasterSystemOrchestrator } from '@/components/system/MasterSystemOrchestrator'
-import { UltimateSecurityWall } from '@/components/security/UltimateSecurityWall'
-import { AdminOnlySecurityBarrier } from '@/components/admin/AdminOnlySecurityBarrier'
-import { AdminRouteProtector } from '@/components/admin/AdminRouteProtector'
 
 export default function Home() {
   const [stats, setStats] = useState({
@@ -29,43 +26,17 @@ export default function Home() {
     projectsFunded: 245
   })
 
-  const [cloudEngineStatus, setCloudEngineStatus] = useState({
-    status: 'PROTECTED',
-    securityLevel: 'MAXIMUM',
-    defenseWallActive: true,
-    quantumProtection: 100
-  })
-
   useEffect(() => {
-    console.log('🛡️ HOME: Protected Cloud Engine Initializing')
-    console.log('🌟 HARMONY OF GAIA: All security systems active')
-    console.log('👑 ADMIN PROTECTION: Quantum level engaged')
-    
-    // Optimized stats updates - reduced frequency for performance
-    const statsInterval = setInterval(() => {
+    const interval = setInterval(() => {
       setStats(prev => ({
-        totalUsers: prev.totalUsers + Math.floor(Math.random() * 3),
-        tokensEarned: prev.tokensEarned + Math.floor(Math.random() * 50),
-        carbonOffset: prev.carbonOffset + Math.floor(Math.random() * 5),
-        projectsFunded: prev.projectsFunded + Math.floor(Math.random() * 1)
+        totalUsers: prev.totalUsers + Math.floor(Math.random() * 5),
+        tokensEarned: prev.tokensEarned + Math.floor(Math.random() * 100),
+        carbonOffset: prev.carbonOffset + Math.floor(Math.random() * 10),
+        projectsFunded: prev.projectsFunded + Math.floor(Math.random() * 2)
       }))
-    }, 5000) // Increased to 5 seconds for better performance
+    }, 3000)
 
-    // Cloud engine status monitoring
-    const statusInterval = setInterval(() => {
-      setCloudEngineStatus(prev => ({
-        ...prev,
-        quantumProtection: Math.min(100, prev.quantumProtection + Math.random() * 0.1)
-      }))
-      
-      console.log('☁️ PROTECTED CLOUD ENGINE: All systems operational')
-      console.log('🛡️ DEFENSE WALL: Quantum barriers holding strong')
-    }, 10000)
-
-    return () => {
-      clearInterval(statsInterval)
-      clearInterval(statusInterval)
-    }
+    return () => clearInterval(interval)
   }, [])
 
   const sampleMission = {
@@ -82,52 +53,25 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
-      {/* Core System Components - Protected Cloud Engine */}
       <SystemMonitor />
       <CrossPagePersistence />
       <InvisibleEcoIndicator />
-      <MasterSystemOrchestrator />
-      <AdminOnlySecurityBarrier />
-      <AdminRouteProtector />
       
-      {/* Optimized Background Manager */}
       <EnhancedBackgroundManager 
         settings={{
-          type: 'neural',
+          type: 'matrix',
           intensity: 'low',
           color: '#00ff00',
           speed: 0.5,
-          autoGenerate: false
+          autoGenerate: true
         }}
       />
       
       <Navbar />
       
-      {/* Design Control Buttons - Positioned for visibility */}
-      <div className="fixed bottom-6 left-6 z-50 flex flex-col gap-4">
-        <VisualControlButton />
-        <ThemeSelector />
-      </div>
-
-      {/* Background Changer - Top Right */}
-      <div className="fixed top-4 right-4 z-50">
-        {/* BackgroundChanger will render here automatically */}
-      </div>
-      
-      {/* Protected Cloud Engine Status */}
-      <div className="fixed top-20 right-4 z-50">
-        <Card className="bg-green-900/20 border-green-500/30 backdrop-blur-sm">
-          <CardContent className="p-3">
-            <div className="flex items-center gap-2">
-              <Shield className="h-4 w-4 text-green-400 animate-pulse" />
-              <div className="text-xs">
-                <div className="text-green-400 font-bold">☁️ PROTECTED ENGINE</div>
-                <div className="text-green-300">🛡️ {cloudEngineStatus.securityLevel}</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      {/* Control Buttons */}
+      <VisualControlButton />
+      <ThemeSelector />
       
       <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Hero Section */}
@@ -144,10 +88,6 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-green-300/90 font-medium">
               Together We Make The World A Better Place
             </p>
-            <div className="flex items-center justify-center gap-2 text-sm text-green-400">
-              <Shield className="h-4 w-4" />
-              <span>Protected by Quantum Defense Wall • Cloud Engine Secured</span>
-            </div>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Join the revolutionary ecosystem that rewards environmental action, 
               sustainable living, and positive community impact through our GAiA token.
@@ -167,7 +107,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Live Stats - Optimized */}
+        {/* Live Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
           <Card className="bg-green-900/20 border-green-500/30">
             <CardContent className="p-6 text-center">
@@ -206,34 +146,6 @@ export default function Home() {
                 <AnimatedCounter value={stats.projectsFunded} />
               </div>
               <div className="text-sm text-purple-300/80">Projects Funded</div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Security Status Display */}
-        <div className="mb-8">
-          <Card className="bg-gradient-to-r from-green-900/30 to-blue-900/30 border-green-500/30">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <Shield className="h-5 w-5 animate-pulse" />
-                🛡️ Protected Cloud Engine Status
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-400">ACTIVE</div>
-                  <div className="text-sm text-green-300">Defense Wall Status</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-400">{cloudEngineStatus.quantumProtection.toFixed(1)}%</div>
-                  <div className="text-sm text-blue-300">Quantum Protection</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-400">SECURED</div>
-                  <div className="text-sm text-purple-300">Cloud Engine</div>
-                </div>
-              </div>
             </CardContent>
           </Card>
         </div>
@@ -297,22 +209,17 @@ export default function Home() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-purple-400">
                   <Shield className="h-5 w-5" />
-                  Quantum Secured
+                  Secure & Transparent
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-purple-300/80">
-                  Built with military-grade security through our Protected Cloud Engine. 
-                  Every transaction is secured by our Quantum Defense Wall system.
+                  Built on blockchain technology with military-grade security. 
+                  Every transaction is transparent and verified by our community.
                 </p>
               </CardContent>
             </Card>
           </div>
-        </div>
-
-        {/* Ultimate Security Wall Integration */}
-        <div className="mt-12">
-          <UltimateSecurityWall />
         </div>
       </div>
     </div>
