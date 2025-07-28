@@ -4,12 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Globe, Users, Gamepad2, Zap, Crown, Star, Rocket, Cpu, Palette, Mountain, Trees } from 'lucide-react'
+import { Globe, Users, Gamepad2, Zap, Crown, Star, Rocket, Cpu } from 'lucide-react'
 import { toast } from 'sonner'
-import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
+import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
+import LandscapeBuilder from '@/legacy-pages/LandscapeBuilder'
 import { MyLandscapeManager } from '@/components/landscapes/MyLandscapeManager'
-import { LandscapeMarketplace } from '@/components/virtualworld/LandscapeMarketplace'
-import { LandscapeBuilder } from '@/components/landscapes/LandscapeBuilder'
 
 export default function VirtualWorld() {
   const [worldState, setWorldState] = useState({
@@ -101,22 +100,11 @@ export default function VirtualWorld() {
     })
   }
 
-  const handleLandscapePurchase = (landscape: string) => {
-    console.log('Purchased landscape:', landscape)
-    toast.success('🛒 Landscape Purchased!', {
-      description: `${landscape} added to your collection!`,
-      duration: 3000
-    })
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-blue-900/20">
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-center mb-8">
-          <AnimatedEarthLogo 
-            size="lg" 
-            animated={true}
-            showText={true}
+          <UniversalGaiaLogo 
             className="hover:scale-105 transition-transform duration-300"
           />
         </div>
@@ -124,39 +112,23 @@ export default function VirtualWorld() {
         <Card className="border-4 border-cyan-500/50 bg-gradient-to-br from-cyan-900/40 via-blue-900/40 to-purple-900/40 mb-8">
           <CardHeader>
             <CardTitle className="text-center text-5xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              🌍 GAIA'S EXCHANGES VIRTUAL UNIVERSE
+              🌍 HARMONY VIRTUAL UNIVERSE
             </CardTitle>
             <div className="text-center text-2xl text-cyan-300 font-bold">
               8K Ultra Graphics • Unlimited Creation • Multiplayer Sandbox
             </div>
           </CardHeader>
           <CardContent>
-            
-            <Tabs defaultValue="virtual-world" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-5 bg-black/50">
-                <TabsTrigger value="virtual-world" className="flex items-center gap-2">
-                  <Globe className="h-4 w-4" />
-                  Virtual World
-                </TabsTrigger>
-                <TabsTrigger value="landscape-builder" className="flex items-center gap-2">
-                  <Palette className="h-4 w-4" />
-                  Landscape Builder
-                </TabsTrigger>
-                <TabsTrigger value="advanced-creator" className="flex items-center gap-2">
-                  <Mountain className="h-4 w-4" />
-                  Advanced Creator
-                </TabsTrigger>
-                <TabsTrigger value="my-landscapes" className="flex items-center gap-2">
-                  <Trees className="h-4 w-4" />
-                  My Landscapes
-                </TabsTrigger>
-                <TabsTrigger value="restoration" className="flex items-center gap-2">
-                  <Star className="h-4 w-4" />
-                  Restoration
-                </TabsTrigger>
+            <Tabs defaultValue="world" className="w-full">
+              <TabsList className="grid w-full grid-cols-5">
+                <TabsTrigger value="world">🌍 Virtual World</TabsTrigger>
+                <TabsTrigger value="builder">🏗️ Landscape Builder</TabsTrigger>
+                <TabsTrigger value="advanced">⚡ Advanced Creator</TabsTrigger>
+                <TabsTrigger value="manager">📁 My Landscapes</TabsTrigger>
+                <TabsTrigger value="restoration">🌱 Restoration</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="virtual-world" className="space-y-8">
+              <TabsContent value="world" className="space-y-8 mt-8">
                 {/* World Statistics */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center p-4 bg-cyan-900/50 rounded-lg border-2 border-cyan-500/50">
@@ -269,14 +241,8 @@ export default function VirtualWorld() {
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {[
-                      'Ray Tracing 8K',
-                      'Cloud Processing',
-                      'VR/AR Ready',
-                      'Multiplayer 10K+',
-                      'Physics Engine',
-                      'AI Creatures',
-                      'Dynamic Weather',
-                      'Infinite Worlds'
+                      'Ray Tracing 8K', 'Cloud Processing', 'VR/AR Ready', 'Multiplayer 10K+',
+                      'Physics Engine', 'AI Creatures', 'Dynamic Weather', 'Infinite Worlds'
                     ].map((feature, index) => (
                       <Badge key={index} className="bg-gradient-to-r from-cyan-600 to-blue-600 p-3 text-center text-white">
                         {feature}
@@ -284,40 +250,49 @@ export default function VirtualWorld() {
                     ))}
                   </div>
                 </div>
+
+                <div className="text-center">
+                  <div className="text-4xl font-black text-cyan-400 mb-2">
+                    🌌 UNLIMITED VIRTUAL REALITY 🌌
+                  </div>
+                  <div className="text-xl text-cyan-300">
+                    Create • Explore • Conquer • Build Your Own Universe
+                  </div>
+                </div>
               </TabsContent>
 
-              <TabsContent value="landscape-builder">
+              <TabsContent value="builder">
                 <LandscapeBuilder />
               </TabsContent>
 
-              <TabsContent value="advanced-creator">
-                <div className="text-center py-12">
-                  <div className="text-6xl mb-4">🏗️</div>
-                  <h3 className="text-2xl font-bold text-white mb-4">Advanced Landscape Creator</h3>
-                  <p className="text-muted-foreground mb-6">Professional tools for complex landscape design</p>
-                  <Button className="bg-gradient-to-r from-purple-600 to-pink-600">
-                    Coming Soon - Advanced Tools
+              <TabsContent value="advanced">
+                <div className="text-center py-16">
+                  <div className="text-6xl mb-6">⚡</div>
+                  <h2 className="text-3xl font-bold text-white mb-4">Advanced Creator Suite</h2>
+                  <p className="text-muted-foreground mb-8">Professional landscape creation tools coming soon</p>
+                  <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+                    <Star className="h-5 w-5 mr-2" />
+                    Join Beta Waitlist
                   </Button>
                 </div>
               </TabsContent>
 
-              <TabsContent value="my-landscapes">
+              <TabsContent value="manager">
                 <MyLandscapeManager />
               </TabsContent>
 
               <TabsContent value="restoration">
-                <LandscapeMarketplace onPurchase={handleLandscapePurchase} />
+                <div className="text-center py-16">
+                  <div className="text-6xl mb-6">🌱</div>
+                  <h2 className="text-3xl font-bold text-white mb-4">Environmental Restoration</h2>
+                  <p className="text-muted-foreground mb-8">AI-powered ecosystem restoration and regeneration tools</p>
+                  <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
+                    <Crown className="h-5 w-5 mr-2" />
+                    Start Restoration Project
+                  </Button>
+                </div>
               </TabsContent>
             </Tabs>
-
-            <div className="text-center mt-8">
-              <div className="text-4xl font-black text-cyan-400 mb-2">
-                🌌 UNLIMITED VIRTUAL REALITY 🌌
-              </div>
-              <div className="text-xl text-cyan-300">
-                Create • Explore • Conquer • Build Your Own Universe
-              </div>
-            </div>
           </CardContent>
         </Card>
       </div>
