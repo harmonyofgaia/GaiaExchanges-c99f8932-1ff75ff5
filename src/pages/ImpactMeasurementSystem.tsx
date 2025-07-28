@@ -1,346 +1,227 @@
-import { useState, useEffect } from 'react'
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
-import { 
-  TreePine, 
-  Droplets, 
-  Wind, 
-  Zap, 
-  Target, 
-  TrendingUp, 
-  Users, 
-  Shield, 
-  Plus,
-  BarChart3,
-  Globe,
-  Leaf
-} from 'lucide-react'
+import { Progress } from '@/components/ui/progress'
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts'
+import { TrendingUp, Target, Award, Activity, Leaf, Droplets, Wind, Globe } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 
-interface ImpactData {
-  id: string
-  category: string
-  metric: string
-  value: number
-  unit: string
-  timestamp: Date
-  source: string
-  confidenceLevel: number
-  notes?: string
-}
-
-interface EnvironmentalProject {
-  id: string
-  name: string
-  description: string
-  location: string
-  startDate: Date
-  endDate?: Date
-  status: 'active' | 'completed' | 'pending' | 'cancelled'
-  impactMetrics: ImpactData[]
-  fundingGoal: number
-  currentFunding: number
-  leadOrganization: string
-  contactPerson: string
-}
+const impactData = [
+  { month: 'Jan', co2: 45, water: 120, energy: 78 },
+  { month: 'Feb', co2: 52, water: 145, energy: 89 },
+  { month: 'Mar', co2: 48, water: 138, energy: 95 },
+  { month: 'Apr', co2: 61, water: 167, energy: 102 },
+  { month: 'May', co2: 55, water: 189, energy: 118 },
+  { month: 'Jun', co2: 67, water: 201, energy: 134 }
+]
 
 export default function ImpactMeasurementSystem() {
-  const [projects, setProjects] = useState<EnvironmentalProject[]>([
-    {
-      id: 'forest-restoration-1',
-      name: 'Amazon Rainforest Restoration',
-      description: 'Reforestation project in the Amazon basin to restore biodiversity and sequester carbon.',
-      location: 'Amazon Basin, Brazil',
-      startDate: new Date('2023-01-01'),
-      endDate: new Date('2028-01-01'),
-      status: 'active',
-      impactMetrics: [
-        {
-          id: 'carbon-seq-1',
-          category: 'Carbon Sequestration',
-          metric: 'CO2 Sequestered',
-          value: 15000,
-          unit: 'tons',
-          timestamp: new Date(),
-          source: 'Satellite Data',
-          confidenceLevel: 95,
-          notes: 'Based on annual growth rate and area covered.'
-        },
-        {
-          id: 'biodiversity-1',
-          category: 'Biodiversity',
-          metric: 'Species Count',
-          value: 2500,
-          unit: 'species',
-          timestamp: new Date(),
-          source: 'Field Surveys',
-          confidenceLevel: 85,
-          notes: 'Includes plants, insects, and vertebrates.'
-        }
-      ],
-      fundingGoal: 5000000,
-      currentFunding: 3800000,
-      leadOrganization: 'Rainforest Alliance',
-      contactPerson: 'Dr. Jane Goodall'
-    },
-    {
-      id: 'ocean-cleanup-1',
-      name: 'Great Pacific Garbage Patch Cleanup',
-      description: 'Project to remove plastic waste from the Great Pacific Garbage Patch.',
-      location: 'North Pacific Ocean',
-      startDate: new Date('2022-06-01'),
-      status: 'active',
-      impactMetrics: [
-        {
-          id: 'plastic-rem-1',
-          category: 'Ocean Cleanup',
-          metric: 'Plastic Removed',
-          value: 5000,
-          unit: 'tons',
-          timestamp: new Date(),
-          source: 'Direct Measurement',
-          confidenceLevel: 98,
-          notes: 'Collected by specialized vessels.'
-        },
-        {
-          id: 'marine-life-1',
-          category: 'Marine Life',
-          metric: 'Entanglement Reduction',
-          value: 75,
-          unit: '%',
-          timestamp: new Date(),
-          source: 'Observation',
-          confidenceLevel: 90,
-          notes: 'Reduction in marine animal entanglements.'
-        }
-      ],
-      fundingGoal: 10000000,
-      currentFunding: 8200000,
-      leadOrganization: 'The Ocean Cleanup',
-      contactPerson: 'Boyan Slat'
-    }
-  ])
-  const [selectedProject, setSelectedProject] = useState<EnvironmentalProject | null>(null)
-  const [newImpactData, setNewImpactData] = useState<Omit<ImpactData, 'id' | 'timestamp'>>({
-    category: '',
-    metric: '',
-    value: 0,
-    unit: '',
-    source: '',
-    confidenceLevel: 0,
-    notes: ''
-  })
-  const [showAddImpactForm, setShowAddImpactForm] = useState(false)
-
-  const handleProjectSelect = (project: EnvironmentalProject) => {
-    setSelectedProject(project)
-  }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setNewImpactData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  const handleAddImpactData = () => {
-    if (!selectedProject) return
-
-    const newImpact: ImpactData = {
-      id: `impact-${Date.now()}`,
-      timestamp: new Date(),
-      ...newImpactData
-    }
-
-    setProjects(prevProjects =>
-      prevProjects.map(project =>
-        project.id === selectedProject.id
-          ? { ...project, impactMetrics: [...project.impactMetrics, newImpact] }
-          : project
-      )
-    )
-
-    setNewImpactData({
-      category: '',
-      metric: '',
-      value: 0,
-      unit: '',
-      source: '',
-      confidenceLevel: 0,
-      notes: ''
-    })
-    setShowAddImpactForm(false)
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            🌱 Impact Measurement System
+            📊 Impact Measurement System
           </h1>
           <p className="text-xl text-muted-foreground mt-2">
-            Track and visualize the environmental impact of your projects with precision.
+            Comprehensive Environmental Impact Analytics & Reporting
           </p>
+          <div className="flex gap-4 mt-4">
+            <Badge variant="outline" className="border-green-500/50 text-green-400">
+              <Activity className="h-3 w-3 mr-1" />
+              Real-time Tracking
+            </Badge>
+            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
+              <Target className="h-3 w-3 mr-1" />
+              Goal Achievement
+            </Badge>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-green-400">CO₂ Reduction</CardTitle>
+              <Leaf className="h-4 w-4 text-green-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">67K tons</div>
+              <p className="text-xs text-muted-foreground">+22% from last month</p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-blue-400">Water Saved</CardTitle>
+              <Droplets className="h-4 w-4 text-blue-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">201K L</div>
+              <p className="text-xs text-muted-foreground">+18% from last month</p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-yellow-900/20 to-black/50 border-yellow-500/20">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-yellow-400">Clean Energy</CardTitle>
+              <Wind className="h-4 w-4 text-yellow-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">134 MWh</div>
+              <p className="text-xs text-muted-foreground">+15% from last month</p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-purple-900/20 to-black/50 border-purple-500/20">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-purple-400">Impact Score</CardTitle>
+              <Award className="h-4 w-4 text-purple-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">8.9/10</div>
+              <p className="text-xs text-muted-foreground">Overall performance</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
+            <CardHeader>
+              <CardTitle className="text-green-400">Environmental Impact Trends</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={impactData}>
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Bar dataKey="co2" fill="#22c55e" />
+                  <Bar dataKey="water" fill="#3b82f6" />
+                  <Bar dataKey="energy" fill="#eab308" />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
+            <CardHeader>
+              <CardTitle className="text-blue-400">Goal Progress Tracking</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-6">
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-white font-medium">Carbon Neutrality 2030</span>
+                    <span className="text-green-400">73%</span>
+                  </div>
+                  <Progress value={73} className="h-3" />
+                  <p className="text-xs text-muted-foreground mt-1">On track to meet 2030 targets</p>
+                </div>
+
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-white font-medium">Renewable Energy Goal</span>
+                    <span className="text-blue-400">89%</span>
+                  </div>
+                  <Progress value={89} className="h-3" />
+                  <p className="text-xs text-muted-foreground mt-1">Ahead of schedule</p>
+                </div>
+
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-white font-medium">Biodiversity Conservation</span>
+                    <span className="text-purple-400">45%</span>
+                  </div>
+                  <Progress value={45} className="h-3" />
+                  <p className="text-xs text-muted-foreground mt-1">Accelerating efforts needed</p>
+                </div>
+
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-white font-medium">Community Engagement</span>
+                    <span className="text-yellow-400">67%</span>
+                  </div>
+                  <Progress value={67} className="h-3" />
+                  <p className="text-xs text-muted-foreground mt-1">Growing participation</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Project Selection Cards */}
-          <div className="md:col-span-1">
-            <h2 className="text-2xl font-semibold mb-4">Select a Project</h2>
-            {projects.map(project => (
-              <Card
-                key={project.id}
-                className={`bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20 hover:scale-105 transition-all duration-300 cursor-pointer ${selectedProject?.id === project.id ? 'border-2 border-green-500' : ''}`}
-                onClick={() => handleProjectSelect(project)}
-              >
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-white">
-                    <Leaf className="h-5 w-5 text-green-400" />
-                    {project.name}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-sm">{project.description}</p>
-                  <div className="mt-2 flex justify-between items-center">
-                    <span className="text-green-400 font-bold">${project.currentFunding.toLocaleString()}</span>
-                    <span className="text-muted-foreground text-xs">Raised of ${project.fundingGoal.toLocaleString()}</span>
-                  </div>
-                  <Progress value={(project.currentFunding / project.fundingGoal) * 100} className="h-2" />
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Impact Metrics and Visualization */}
-          <div className="md:col-span-2">
-            {selectedProject ? (
-              <>
-                <h2 className="text-2xl font-semibold mb-4">
-                  Impact Metrics for {selectedProject.name}
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {selectedProject.impactMetrics.map(impact => (
-                    <Card key={impact.id} className="bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20">
-                      <CardHeader>
-                        <CardTitle className="text-white">{impact.metric}</CardTitle>
-                        <Badge className="bg-blue-600">{impact.category}</Badge>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-3xl font-bold text-green-400">{impact.value} {impact.unit}</div>
-                        <p className="text-muted-foreground text-sm mt-2">
-                          Source: {impact.source} ({impact.confidenceLevel}% confidence)
-                        </p>
-                        {impact.notes && <p className="text-xs text-gray-500 mt-1">Notes: {impact.notes}</p>}
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-
-                {/* Add Impact Data Form */}
-                <div className="mt-6">
-                  <Button onClick={() => setShowAddImpactForm(!showAddImpactForm)} className="bg-blue-600 hover:bg-blue-700">
-                    {showAddImpactForm ? 'Hide Form' : 'Add New Impact Data'}
-                  </Button>
-
-                  {showAddImpactForm && (
-                    <Card className="mt-4 bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20">
-                      <CardContent className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium text-white">Category</label>
-                          <input
-                            type="text"
-                            name="category"
-                            value={newImpactData.category}
-                            onChange={handleInputChange}
-                            className="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-green-500 focus:ring-green-500 bg-gray-800 text-white"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-white">Metric</label>
-                          <input
-                            type="text"
-                            name="metric"
-                            value={newImpactData.metric}
-                            onChange={handleInputChange}
-                            className="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-green-500 focus:ring-green-500 bg-gray-800 text-white"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-white">Value</label>
-                          <input
-                            type="number"
-                            name="value"
-                            value={newImpactData.value}
-                            onChange={handleInputChange}
-                            className="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-green-500 focus:ring-green-500 bg-gray-800 text-white"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-white">Unit</label>
-                          <input
-                            type="text"
-                            name="unit"
-                            value={newImpactData.unit}
-                            onChange={handleInputChange}
-                            className="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-green-500 focus:ring-green-500 bg-gray-800 text-white"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-white">Source</label>
-                          <input
-                            type="text"
-                            name="source"
-                            value={newImpactData.source}
-                            onChange={handleInputChange}
-                            className="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-green-500 focus:ring-green-500 bg-gray-800 text-white"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-white">Confidence Level (%)</label>
-                          <input
-                            type="number"
-                            name="confidenceLevel"
-                            value={newImpactData.confidenceLevel}
-                            onChange={handleInputChange}
-                            className="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-green-500 focus:ring-green-500 bg-gray-800 text-white"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-white">Notes</label>
-                          <textarea
-                            name="notes"
-                            value={newImpactData.notes}
-                            onChange={handleInputChange}
-                            rows={3}
-                            className="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-green-500 focus:ring-green-500 bg-gray-800 text-white"
-                          />
-                        </div>
-                        <Button onClick={handleAddImpactData} className="bg-green-600 hover:bg-green-700">
-                          Add Impact Data
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  )}
-                </div>
-              </>
-            ) : (
-              <div className="text-center">
-                <p className="text-xl text-muted-foreground">Select a project to view its impact metrics.</p>
-                <BarChart3 className="h-12 w-12 mx-auto mt-4 text-gray-500" />
+          <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
+            <CardHeader>
+              <CardTitle className="text-green-400 text-center">Environmental KPIs</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Forest Coverage</span>
+                <span className="text-green-400 font-bold">+12%</span>
               </div>
-            )}
-          </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Air Quality Index</span>
+                <span className="text-blue-400 font-bold">85/100</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Waste Reduction</span>
+                <span className="text-purple-400 font-bold">34%</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Species Protected</span>
+                <span className="text-yellow-400 font-bold">247</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
+            <CardHeader>
+              <CardTitle className="text-blue-400 text-center">Social Impact</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Communities Served</span>
+                <span className="text-green-400 font-bold">1,247</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Jobs Created</span>
+                <span className="text-blue-400 font-bold">3,456</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Education Programs</span>
+                <span className="text-purple-400 font-bold">89</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Health Improvements</span>
+                <span className="text-yellow-400 font-bold">+28%</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-purple-900/20 to-black/50 border-purple-500/20">
+            <CardHeader>
+              <CardTitle className="text-purple-400 text-center">Economic Value</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Green Investment</span>
+                <span className="text-green-400 font-bold">$45M</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Cost Savings</span>
+                <span className="text-blue-400 font-bold">$12.3M</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">ROI</span>
+                <span className="text-purple-400 font-bold">327%</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Market Value</span>
+                <span className="text-yellow-400 font-bold">$89M</span>
+              </div>
+            </CardContent>
+          </Card>
         </div>
-        
-        <Button className="bg-green-600 hover:bg-green-700">
-          <Plus className="h-4 w-4 mr-2" />
-          Add Impact Data
-        </Button>
       </div>
     </div>
   )

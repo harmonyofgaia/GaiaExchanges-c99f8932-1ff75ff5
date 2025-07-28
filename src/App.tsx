@@ -12,6 +12,9 @@ import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
+const GreenImpactDashboard = lazy(() => import('./pages/GreenImpactDashboard'))
+const EcoAvatar = lazy(() => import('./legacy-pages/EcoAvatar'))
+const DeploymentCenter = lazy(() => import('./legacy-pages/DeploymentCenter'))
 const LiveTracking = lazy(() => import('./pages/LiveTracking'))
 const Gaming = lazy(() => import('./pages/Gaming'))
 const Wallet = lazy(() => import('./pages/Wallet'))
@@ -32,6 +35,11 @@ const DeploymentStatus = lazy(() => import('./pages/DeploymentStatus'))
 const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'))
 const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'))
 const DecentralizedProjectFundingPools = lazy(() => import('./pages/DecentralizedProjectFundingPools'))
+const CommunityEngagementHub = lazy(() => import('./pages/CommunityEngagementHub'))
+const PartnershipManagement = lazy(() => import('./pages/PartnershipManagement'))
+const ImpactMeasurementSystem = lazy(() => import('./pages/ImpactMeasurementSystem'))
+const SeaGreenPsychohistorical = lazy(() => import('./pages/SeaGreenPsychohistorical'))
+const GaiaTokenStatus = lazy(() => import('./pages/GaiaTokenStatus'))
 const LandscapeBuilder = lazy(() => import('./pages/LandscapeBuilder'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
@@ -65,6 +73,14 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
+              <Route path="/eco-avatar" element={<EcoAvatar />} />
+              <Route path="/community-engagement-hub" element={<CommunityEngagementHub />} />
+              <Route path="/partnership-management" element={<PartnershipManagement />} />
+              <Route path="/impact-measurement-system" element={<ImpactMeasurementSystem />} />
+              <Route path="/sea-green-psychohistorical" element={<SeaGreenPsychohistorical />} />
+              <Route path="/gaia-token-status" element={<GaiaTokenStatus />} />
+              <Route path="/deployment-center" element={<DeploymentCenter />} />
               <Route path="/virtual-world" element={<VirtualWorld />} />
               <Route path="/animal-welfare" element={<AnimalWelfare />} />
               <Route path="/gaming" element={<Gaming />} />
