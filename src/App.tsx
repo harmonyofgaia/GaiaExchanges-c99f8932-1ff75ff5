@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { MenuControlProvider } from "@/components/ui/MenuControlProvider";
-import Navbar from "./components/Navbar";
+import { Navbar } from "./components/Navbar";
 import Index from "./legacy-pages/Index";
 import About from "./legacy-pages/About";
 import Wallet from "./legacy-pages/Wallet";
