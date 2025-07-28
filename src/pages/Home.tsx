@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -94,19 +93,26 @@ export default function Home() {
       {/* Optimized Background Manager */}
       <EnhancedBackgroundManager 
         settings={{
-          type: 'matrix',
+          type: 'neural',
           intensity: 'low',
           color: '#00ff00',
-          speed: 0.3,
+          speed: 0.5,
           autoGenerate: false
         }}
       />
       
       <Navbar />
       
-      {/* Control Buttons */}
-      <VisualControlButton />
-      <ThemeSelector />
+      {/* Design Control Buttons - Positioned for visibility */}
+      <div className="fixed bottom-6 left-6 z-50 flex flex-col gap-4">
+        <VisualControlButton />
+        <ThemeSelector />
+      </div>
+
+      {/* Background Changer - Top Right */}
+      <div className="fixed top-4 right-4 z-50">
+        {/* BackgroundChanger will render here automatically */}
+      </div>
       
       {/* Protected Cloud Engine Status */}
       <div className="fixed top-20 right-4 z-50">

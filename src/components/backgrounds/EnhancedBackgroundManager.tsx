@@ -1,13 +1,18 @@
+
 import { useEffect, useRef, useState } from 'react'
 
+export interface EnhancedBackgroundSettings {
+  type: EnhancedBackgroundType
+  intensity: 'low' | 'medium' | 'high'
+  color: string
+  speed: number
+  autoGenerate: boolean
+}
+
+export type EnhancedBackgroundType = 'neural' | 'matrix' | 'creative'
+
 interface EnhancedBackgroundManagerProps {
-  settings: {
-    type: 'neural' | 'matrix'
-    intensity: 'low' | 'medium' | 'high'
-    color: string
-    speed: number
-    autoGenerate: boolean
-  }
+  settings: EnhancedBackgroundSettings
 }
 
 interface Particle {
@@ -20,19 +25,59 @@ interface Particle {
   hue: number
 }
 
+// Global state for background config
+let globalBackgroundConfig: EnhancedBackgroundSettings = {
+  type: 'neural',
+  intensity: 'medium',
+  color: '#00ffff',
+  speed: 1.5,
+  autoGenerate: false
+}
+
+// Export function to update background config globally
+export const updateBackgroundConfig = (config: Partial<EnhancedBackgroundSettings>) => {
+  globalBackgroundConfig = { ...globalBackgroundConfig, ...config }
+  
+  // Dispatch custom event for components to listen to
+  window.dispatchEvent(new CustomEvent('background-config-updated', {
+    detail: globalBackgroundConfig
+  }))
+  
+  console.log('🎨 Background config updated:', globalBackgroundConfig)
+}
+
+// Export function to get current background config
+export const getCurrentBackgroundConfig = (): EnhancedBackgroundSettings => {
+  return globalBackgroundConfig
+}
+
 export function EnhancedBackgroundManager({ settings }: EnhancedBackgroundManagerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef<number>()
   const particlesRef = useRef<Particle[]>([])
   const [isActive, setIsActive] = useState(true)
+  const [currentSettings, setCurrentSettings] = useState(settings)
+  
+  // Listen for background config updates
+  useEffect(() => {
+    const handleConfigUpdate = (event: CustomEvent) => {
+      setCurrentSettings(event.detail)
+    }
+    
+    window.addEventListener('background-config-updated', handleConfigUpdate as EventListener)
+    
+    return () => {
+      window.removeEventListener('background-config-updated', handleConfigUpdate as EventListener)
+    }
+  }, [])
   
   // Reduced particle count for better performance
   const getParticleCount = () => {
-    switch (settings.intensity) {
-      case 'low': return 15  // Reduced from 30
-      case 'medium': return 25 // Reduced from 50
-      case 'high': return 40   // Reduced from 80
-      default: return 15
+    switch (currentSettings.intensity) {
+      case 'low': return 8   // Further reduced for performance
+      case 'medium': return 15
+      case 'high': return 25
+      default: return 8
     }
   }
 
@@ -58,10 +103,10 @@ export function EnhancedBackgroundManager({ settings }: EnhancedBackgroundManage
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * settings.speed * 0.5, // Reduced speed multiplier
-          vy: (Math.random() - 0.5) * settings.speed * 0.5,
-          size: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.5 + 0.2,
+          vx: (Math.random() - 0.5) * currentSettings.speed * 0.3,
+          vy: (Math.random() - 0.5) * currentSettings.speed * 0.3,
+          size: Math.random() * 1.5 + 0.5,
+          opacity: Math.random() * 0.4 + 0.1,
           hue: Math.random() * 60 + 100
         })
       }
@@ -70,8 +115,8 @@ export function EnhancedBackgroundManager({ settings }: EnhancedBackgroundManage
     // Optimized animation loop with reduced frequency
     let lastFrame = 0
     const animate = (currentTime: number) => {
-      // Limit to 30 FPS for better performance
-      if (currentTime - lastFrame < 33) {
+      // Limit to 24 FPS for better performance
+      if (currentTime - lastFrame < 42) {
         animationRef.current = requestAnimationFrame(animate)
         return
       }
@@ -83,11 +128,11 @@ export function EnhancedBackgroundManager({ settings }: EnhancedBackgroundManage
       }
 
       // Clear with optimized alpha for subtle trail effect
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.03)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       // Update and draw particles
-      particlesRef.current.forEach((particle, index) => {
+      particlesRef.current.forEach((particle) => {
         // Update position
         particle.x += particle.vx
         particle.y += particle.vy
@@ -99,14 +144,20 @@ export function EnhancedBackgroundManager({ settings }: EnhancedBackgroundManage
         if (particle.y > canvas.height) particle.y = 0
 
         // Draw particle based on type
-        ctx.globalAlpha = particle.opacity * 0.6 // Reduced opacity for performance
+        ctx.globalAlpha = particle.opacity * 0.5
         
-        if (settings.type === 'matrix') {
-          ctx.fillStyle = settings.color || '#00ff00'
-          ctx.font = `${particle.size * 8}px monospace`
+        if (currentSettings.type === 'matrix') {
+          ctx.fillStyle = currentSettings.color || '#00ff00'
+          ctx.font = `${particle.size * 6}px monospace`
           ctx.fillText(String.fromCharCode(0x30A0 + Math.random() * 96), particle.x, particle.y)
+        } else if (currentSettings.type === 'creative') {
+          ctx.fillStyle = `hsl(${(particle.hue + Date.now() * 0.01) % 360}, 70%, 50%)`
+          ctx.beginPath()
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
+          ctx.fill()
         } else {
-          ctx.fillStyle = `hsl(${particle.hue}, 70%, 50%)`
+          // Neural network style
+          ctx.fillStyle = currentSettings.color || '#00ffff'
           ctx.beginPath()
           ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
           ctx.fill()
@@ -120,10 +171,9 @@ export function EnhancedBackgroundManager({ settings }: EnhancedBackgroundManage
     resizeCanvas()
     initParticles()
     
-    // Security and protection logging
-    console.log('🛡️ BACKGROUND MANAGER: Protected by Quantum Defense Wall')
-    console.log('☁️ VISUAL ENGINE: Running through Protected Cloud')
-    console.log('🌟 PERFORMANCE: Optimized for smooth experience')
+    // Protected cloud engine logging
+    console.log('🛡️ PROTECTED CLOUD ENGINE: Background Manager Secured')
+    console.log('☁️ DEFENSE WALL: Visual systems protected')
 
     window.addEventListener('resize', resizeCanvas)
     animationRef.current = requestAnimationFrame(animate)
@@ -134,17 +184,7 @@ export function EnhancedBackgroundManager({ settings }: EnhancedBackgroundManage
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [settings, isActive])
-
-  // Performance monitoring
-  useEffect(() => {
-    const performanceMonitor = setInterval(() => {
-      console.log('🎨 BACKGROUND ENGINE: Optimized performance active')
-      console.log('🛡️ VISUAL PROTECTION: All systems secured')
-    }, 60000) // Every minute
-
-    return () => clearInterval(performanceMonitor)
-  }, [])
+  }, [currentSettings, isActive])
 
   return (
     <canvas

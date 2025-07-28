@@ -1,13 +1,19 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Palette, Sparkles, Zap, Eye } from 'lucide-react'
-import { updateBackgroundConfig } from '@/components/backgrounds/EnhancedBackgroundManager'
+import { updateBackgroundConfig, getCurrentBackgroundConfig } from '@/components/backgrounds/EnhancedBackgroundManager'
 
 export function BackgroundChanger() {
   const [activeBackground, setActiveBackground] = useState('neural')
+  
+  useEffect(() => {
+    // Get initial config
+    const currentConfig = getCurrentBackgroundConfig()
+    setActiveBackground(currentConfig.type)
+  }, [])
   
   const backgroundOptions = [
     {
@@ -42,9 +48,9 @@ export function BackgroundChanger() {
     // Update the background configuration
     const config = {
       type: backgroundId as any,
-      intensity: 'medium' as const,
+      intensity: 'low' as const,
       color: backgroundId === 'neural' ? '#00ffff' : backgroundId === 'matrix' ? '#00ff00' : '#ff00ff',
-      speed: 1.5,
+      speed: 1.0,
       autoGenerate: false
     }
     
