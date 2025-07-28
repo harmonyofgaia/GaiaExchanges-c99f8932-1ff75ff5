@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Lock, Eye, AlertTriangle, Zap, Crown, Activity, Globe, Users, TrendingUp } from 'lucide-react'
+import { Shield, Lock, Eye, AlertTriangle, Zap, Crown, Activity, Globe, Users, TrendingUp, Gavel } from 'lucide-react'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
 import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
@@ -16,6 +16,7 @@ import { UserIsolationSystem } from './UserIsolationSystem'
 import { AIEngineCapabilities } from './AIEngineCapabilities'
 import { ChatSecurityPanel } from './ChatSecurityPanel'
 import UltimateSecurity from './UltimateSecurity'
+import { RuleSystemManagement } from './RuleSystemManagement'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -32,13 +33,17 @@ export function SecureAdminDashboard() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-6">
+        <TabsList className="grid w-full grid-cols-7">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="security">Security</TabsTrigger>
           <TabsTrigger value="tools">Admin Tools</TabsTrigger>
           <TabsTrigger value="control">Supreme Control</TabsTrigger>
           <TabsTrigger value="isolation">User Control</TabsTrigger>
           <TabsTrigger value="ai">AI Engine</TabsTrigger>
+          <TabsTrigger value="rules" className="bg-gradient-to-r from-purple-600/20 to-amber-600/20 border border-purple-500/30">
+            <Gavel className="h-4 w-4 mr-2" />
+            Rules 24/7
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
@@ -65,6 +70,10 @@ export function SecureAdminDashboard() {
         <TabsContent value="ai" className="space-y-6">
           <AIEngineCapabilities />
           <ChatSecurityPanel />
+        </TabsContent>
+
+        <TabsContent value="rules" className="space-y-6">
+          <RuleSystemManagement />
         </TabsContent>
       </Tabs>
     </div>
