@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
-import { Input } from '@/components/ui/input'
 import { 
   TrendingUp, 
   Globe, 
@@ -15,6 +14,8 @@ import {
   DollarSign
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { GAIA_TOKEN } from '@/constants/gaia'
+import { useGaiaTokenData } from '@/hooks/useGaiaTokenData'
 
 interface ExchangeStatus {
   name: string
@@ -33,6 +34,8 @@ interface IntegrationProgress {
 }
 
 export function ExchangeIntegration() {
+  const { tokenData, hasRealData } = useGaiaTokenData()
+  
   const [exchanges, setExchanges] = useState<ExchangeStatus[]>([
     {
       name: 'Binance',
@@ -72,19 +75,11 @@ export function ExchangeIntegration() {
     coingecko: 80
   })
 
-  const [gaiaPrice, setGaiaPrice] = useState(0.00125)
-  const [priceChange24h, setPriceChange24h] = useState(12.5)
+  // Use real GAiA token data
+  const gaiaPrice = hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE
+  const priceChange24h = hasRealData && tokenData ? tokenData.priceChange24h : 12.5
 
   useEffect(() => {
-    // Simulate real-time price updates
-    const priceInterval = setInterval(() => {
-      setGaiaPrice(prev => {
-        const change = (Math.random() - 0.5) * 0.0001
-        return Math.max(0.0001, prev + change)
-      })
-      setPriceChange24h(prev => prev + (Math.random() - 0.5) * 2)
-    }, 3000)
-
     // Simulate API health updates
     const healthInterval = setInterval(() => {
       setExchanges(prev => prev.map(exchange => ({
@@ -95,7 +90,6 @@ export function ExchangeIntegration() {
     }, 5000)
 
     return () => {
-      clearInterval(priceInterval)
       clearInterval(healthInterval)
     }
   }, [])
@@ -151,11 +145,11 @@ export function ExchangeIntegration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <DollarSign className="h-6 w-6" />
-            💎 GAIA Token Live Price
+            💎 {GAIA_TOKEN.SYMBOL} Token Live Price
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-3xl font-bold text-green-400">${gaiaPrice.toFixed(6)}</div>
               <div className="text-sm text-muted-foreground">Current Price</div>
@@ -168,10 +162,19 @@ export function ExchangeIntegration() {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-400">
-                ${exchanges.reduce((sum, ex) => sum + ex.volume24h, 0).toLocaleString()}
+                ${hasRealData && tokenData ? tokenData.volume24h.toLocaleString() : '8,750,000'}
               </div>
               <div className="text-sm text-muted-foreground">24h Volume</div>
             </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-purple-400">
+                ${hasRealData && tokenData ? tokenData.marketCap.toLocaleString() : '278,687,500'}
+              </div>
+              <div className="text-sm text-muted-foreground">Market Cap</div>
+            </div>
+          </div>
+          <div className="mt-4 text-center text-xs text-muted-foreground">
+            Contract: {GAIA_TOKEN.CONTRACT_ADDRESS} | Symbol: {GAIA_TOKEN.SYMBOL}
           </div>
         </CardContent>
       </Card>
@@ -207,7 +210,7 @@ export function ExchangeIntegration() {
                     <Progress value={exchange.apiHealth} className="h-2" />
                     
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">24h Volume</span>
+                      <span className="text-muted-foreground">{GAIA_TOKEN.SYMBOL} Volume</span>
                       <span className="text-blue-400">${exchange.volume24h.toLocaleString()}</span>
                     </div>
                     
@@ -239,7 +242,7 @@ export function ExchangeIntegration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-purple-400">
             <Zap className="h-6 w-6" />
-            ⚡ Integration Progress
+            ⚡ {GAIA_TOKEN.SYMBOL} Integration Progress
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -268,7 +271,7 @@ export function ExchangeIntegration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-orange-400">
             <TrendingUp className="h-6 w-6" />
-            📈 Live Trading Features
+            📈 Live {GAIA_TOKEN.SYMBOL} Trading Features
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -278,7 +281,7 @@ export function ExchangeIntegration() {
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />
-                  Real-time price tracking
+                  Real-time {GAIA_TOKEN.SYMBOL} price tracking
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />

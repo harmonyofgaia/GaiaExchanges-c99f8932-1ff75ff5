@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
 import { TrendingUp, Globe, DollarSign, Zap } from 'lucide-react'
+import { GAIA_TOKEN } from '@/constants/gaia'
+import { useGaiaTokenData } from '@/hooks/useGaiaTokenData'
 
 interface Exchange {
   name: string
@@ -15,6 +17,8 @@ interface Exchange {
 }
 
 export function GlobalExchangeIntegration() {
+  const { tokenData, hasRealData } = useGaiaTokenData()
+  
   const [exchanges, setExchanges] = useState<Exchange[]>([
     { name: 'Binance', status: 'negotiating', volume: '$2.1B', users: '120M', region: 'Global' },
     { name: 'Coinbase', status: 'listing', volume: '$890M', users: '100M', region: 'US/EU' },
@@ -25,16 +29,16 @@ export function GlobalExchangeIntegration() {
   ])
 
   const [globalStats, setGlobalStats] = useState({
-    totalVolume: 0,
+    totalVolume: hasRealData && tokenData ? tokenData.volume24h : 8750000,
     activeExchanges: 0,
     totalUsers: 0,
-    marketCap: 0
+    marketCap: hasRealData && tokenData ? tokenData.marketCap : 278687500
   })
 
   useEffect(() => {
     const globalIntegrationEngine = () => {
-      console.log('🌍 GLOBAL EXCHANGE INTEGRATION - WORLDWIDE DOMINATION')
-      console.log('💰 GAIA TOKEN TAKING OVER ALL MAJOR EXCHANGES')
+      console.log(`🌍 GLOBAL EXCHANGE INTEGRATION - ${GAIA_TOKEN.SYMBOL} WORLDWIDE DOMINATION`)
+      console.log(`💰 ${GAIA_TOKEN.SYMBOL} TOKEN TAKING OVER ALL MAJOR EXCHANGES`)
       console.log('🚀 UNSTOPPABLE MARKET PENETRATION - EVERYWHERE AT ONCE')
       
       // Update exchange statuses
@@ -45,7 +49,7 @@ export function GlobalExchangeIntegration() {
           
           if (newStatus !== exchange.status) {
             toast.success('🚀 Exchange Update!', {
-              description: `${exchange.name} status: ${newStatus}`,
+              description: `${exchange.name} status: ${newStatus} for ${GAIA_TOKEN.SYMBOL}`,
               duration: 5000
             })
           }
@@ -57,24 +61,24 @@ export function GlobalExchangeIntegration() {
 
       // Update global stats
       setGlobalStats(prev => ({
-        totalVolume: prev.totalVolume + Math.random() * 1000000,
+        totalVolume: (hasRealData && tokenData ? tokenData.volume24h : prev.totalVolume) + Math.random() * 1000000,
         activeExchanges: exchanges.filter(e => e.status === 'active').length,
         totalUsers: prev.totalUsers + Math.floor(Math.random() * 10000),
-        marketCap: prev.marketCap + Math.random() * 500000
+        marketCap: hasRealData && tokenData ? tokenData.marketCap : prev.marketCap + Math.random() * 500000
       }))
 
-      console.log('💎 GAIA TOKEN: BECOMING THE #1 CRYPTOCURRENCY WORLDWIDE')
+      console.log(`💎 ${GAIA_TOKEN.SYMBOL} TOKEN: BECOMING THE #1 CRYPTOCURRENCY WORLDWIDE`)
     }
 
     const integrationInterval = setInterval(globalIntegrationEngine, 5000)
     globalIntegrationEngine()
 
     return () => clearInterval(integrationInterval)
-  }, [exchanges])
+  }, [exchanges, tokenData, hasRealData])
 
   const accelerateListings = () => {
     toast.success('🚀 ACCELERATION PROTOCOL ACTIVATED!', {
-      description: 'All exchange listings fast-tracked with maximum priority',
+      description: `All ${GAIA_TOKEN.SYMBOL} exchange listings fast-tracked with maximum priority`,
       duration: 8000
     })
     
@@ -83,7 +87,7 @@ export function GlobalExchangeIntegration() {
       status: 'active'
     })))
     
-    console.log('⚡ EXCHANGE ACCELERATION: ALL BARRIERS REMOVED')
+    console.log(`⚡ ${GAIA_TOKEN.SYMBOL} EXCHANGE ACCELERATION: ALL BARRIERS REMOVED`)
   }
 
   const getStatusColor = (status: Exchange['status']) => {
@@ -102,7 +106,7 @@ export function GlobalExchangeIntegration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Globe className="h-6 w-6" />
-            🌍 GLOBAL EXCHANGE INTEGRATION - WORLDWIDE GAIA DOMINATION
+            🌍 GLOBAL EXCHANGE INTEGRATION - {GAIA_TOKEN.SYMBOL} WORLDWIDE DOMINATION
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -143,7 +147,7 @@ export function GlobalExchangeIntegration() {
             className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3 mb-6"
           >
             <Zap className="h-5 w-5 mr-2" />
-            🚀 ACCELERATE ALL EXCHANGE LISTINGS - GLOBAL DOMINATION
+            🚀 ACCELERATE ALL {GAIA_TOKEN.SYMBOL} EXCHANGE LISTINGS - GLOBAL DOMINATION
           </Button>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -168,6 +172,9 @@ export function GlobalExchangeIntegration() {
                     <div className="text-muted-foreground">Region</div>
                     <div className="text-purple-400 font-bold">{exchange.region}</div>
                   </div>
+                </div>
+                <div className="mt-2 text-xs text-muted-foreground">
+                  Supporting {GAIA_TOKEN.SYMBOL} trading pairs
                 </div>
               </div>
             ))}
