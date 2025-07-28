@@ -31,7 +31,6 @@ const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlo
 const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
 const Admin = lazy(() => import('./pages/Admin'))
 const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
-const DeploymentStatus = lazy(() => import('./pages/DeploymentStatus'))
 const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'))
 const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'))
 const DecentralizedProjectFundingPools = lazy(() => import('./pages/DecentralizedProjectFundingPools'))
@@ -106,7 +105,6 @@ function App() {
               <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
               <Route path="/secure-admin" element={<SecureAdmin />} />
-              <Route path="/deployment-status" element={<DeploymentStatus />} />
               <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
               <Route path="/enhanced-leaderboard" element={<EnhancedLeaderboard />} />
               <Route path="/project-funding" element={<DecentralizedProjectFundingPools />} />

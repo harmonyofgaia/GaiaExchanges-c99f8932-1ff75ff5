@@ -1,99 +1,103 @@
+
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
-import { Button } from '@/components/ui/button'
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 import {
   Home,
-  TrendingUp,
+  LayoutDashboard,
+  Leaf,
+  User,
+  Globe,
+  Heart,
   Gamepad2,
+  ArrowRightLeft,
+  ShoppingBag,
   Wallet,
   Video,
-  Film,
+  Tv,
   Bike,
   Pickaxe,
-  Leaf,
+  TrendingUp,
   Coins,
-  Settings,
+  Shield,
+  Folder,
+  Lock,
   Menu,
   X,
-  MoreHorizontal,
-  Heart,
-  Globe,
-  Mountain,
-  Palette,
-  Crown,
-  Info,
-  Mail,
-  DollarSign,
-  ShoppingBag,
-  BarChart3,
-  Users,
+  ChevronDown,
   Activity,
   Trophy,
   MessageCircle,
   Handshake,
   Target,
-  Brain,
-  Shield
+  Brain
 } from 'lucide-react'
 
 interface NavItem {
   name: string
   path: string
-  icon: any
+  icon: React.ComponentType<{ className?: string }>
+  badge?: string
 }
 
-export function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+const navItems: NavItem[] = [
+  { name: 'Home', path: '/', icon: Home },
+  { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+  { name: 'Green Impact', path: '/green-impact-dashboard', icon: Leaf },
+  { name: 'Eco Avatar', path: '/eco-avatar', icon: User },
+  { name: 'Earning Activities', path: '/earning-activities', icon: Activity },
+  { name: 'Enhanced Leaderboard', path: '/enhanced-leaderboard', icon: Trophy },
+  { name: 'Community Hub', path: '/community-engagement-hub', icon: MessageCircle },
+  { name: 'Partnership Management', path: '/partnership-management', icon: Handshake },
+  { name: 'Impact Measurement', path: '/impact-measurement-system', icon: Target },
+  { name: 'Sea Green AI', path: '/sea-green-psychohistorical', icon: Brain },
+  { name: 'Gaia Token Status', path: '/gaia-token-status', icon: Shield },
+  { name: 'Virtual World', path: '/virtual-world', icon: Globe },
+  { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
+  { name: 'Gaming Hub', path: '/gaming', icon: Gamepad2 },
+  { name: 'Exchange', path: '/exchange', icon: ArrowRightLeft },
+  { name: 'Marketplace', path: '/marketplace', icon: ShoppingBag },
+  { name: 'Wallet', path: '/wallet', icon: Wallet },
+  { name: 'Video Exchange', path: '/video-exchange', icon: Video },
+  { name: 'Streaming Shows', path: '/streaming-shows', icon: Tv },
+  { name: 'Gaia Bike', path: '/gaia-bike-ecosystem', icon: Bike },
+  { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
+  { name: 'Green Investments', path: '/green-investments', icon: TrendingUp },
+  { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
+  { name: 'Sand Protect', path: '/sand-protect', icon: Shield },
+  { name: 'Projects', path: '/gaias-projects', icon: Folder },
+  { name: 'Private Blockchain', path: '/private-blockchain', icon: Lock },
+]
 
-  const navItems = [
-    { name: 'Galaxy Home', path: '/', icon: Home },
-    { name: 'Dashboard', path: '/dashboard', icon: BarChart3 },
-    { name: 'Green Impact', path: '/green-impact-dashboard', icon: Leaf },
-    { name: 'Eco Avatar', path: '/eco-avatar', icon: Users },
-    { name: 'Deployment Status', path: '/deployment-status', icon: Activity },
-    { name: 'Earning Activities', path: '/earning-activities', icon: Coins },
-    { name: 'Enhanced Leaderboard', path: '/enhanced-leaderboard', icon: Trophy },
-    { name: 'Community Hub', path: '/community-engagement-hub', icon: MessageCircle },
-    { name: 'Partnership Management', path: '/partnership-management', icon: Handshake },
-    { name: 'Impact Measurement', path: '/impact-measurement-system', icon: Target },
-    { name: 'Sea Green AI', path: '/sea-green-psychohistorical', icon: Brain },
-    { name: 'Gaia Token Status', path: '/gaia-token-status', icon: Shield },
-    { name: 'Virtual World', path: '/virtual-world', icon: Globe },
-    { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
-    { name: 'Gaming Hub', path: '/gaming', icon: Gamepad2 },
-    { name: 'Exchange', path: '/exchange', icon: TrendingUp },
-    { name: 'Marketplace', path: '/marketplace', icon: ShoppingBag },
-    { name: 'Wallet', path: '/wallet', icon: Wallet },
-    { name: 'Video Exchange', path: '/video-exchange', icon: Video },
-    { name: 'Streaming Shows', path: '/streaming-shows', icon: Film },
-    { name: 'Bike Ecosystem', path: '/gaia-bike-ecosystem', icon: Bike },
-    { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
-    { name: 'Green Investments', path: '/green-investments', icon: Leaf },
-    { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
-    { name: 'Landscape Builder', path: '/landscape-builder', icon: Mountain },
-    { name: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', icon: Palette },
-    { name: 'Comprehensive Status', path: '/comprehensive-status', icon: Settings },
-    { name: 'About GAiA', path: '/about', icon: Info },
-    { name: 'Contact', path: '/contact', icon: Mail },
-    { name: 'Pricing', path: '/pricing', icon: DollarSign },
-    { name: '👑 Admin Portal', path: '/admin', icon: Crown }
-  ]
+export function Navbar() {
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="bg-background/95 backdrop-blur-sm border-b border-primary/30 sticky top-0 z-50">
+    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <AnimatedEarthLogo />
-            <span className="font-bold text-primary text-xl">Gaia's Exchanges</span>
+            <span className="text-xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              GAiA
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -104,20 +108,25 @@ export function Navbar() {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                  className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-all relative group"
                 >
                   <Icon className="h-4 w-4" />
                   <span>{item.name}</span>
+                  {item.badge && (
+                    <Badge variant="secondary" className="ml-1 text-xs">
+                      {item.badge}
+                    </Badge>
+                  )}
                 </Link>
               )
             })}
             
-            {/* More menu for additional items */}
+            {/* More Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
-                  <MoreHorizontal className="h-4 w-4 mr-1" />
-                  More
+                <Button variant="ghost" size="sm" className="flex items-center space-x-1">
+                  <span>More</span>
+                  <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
@@ -125,12 +134,14 @@ export function Navbar() {
                   const Icon = item.icon
                   return (
                     <DropdownMenuItem key={item.path} asChild>
-                      <Link
-                        to={item.path}
-                        className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
-                      >
+                      <Link to={item.path} className="flex items-center space-x-2 w-full">
                         <Icon className="h-4 w-4" />
                         <span>{item.name}</span>
+                        {item.badge && (
+                          <Badge variant="secondary" className="ml-auto text-xs">
+                            {item.badge}
+                          </Badge>
+                        )}
                       </Link>
                     </DropdownMenuItem>
                   )
@@ -144,29 +155,34 @@ export function Navbar() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-primary hover:bg-primary/10"
+              onClick={() => setIsOpen(!isOpen)}
+              className="relative"
             >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-primary/30">
-            <div className="grid grid-cols-1 gap-2">
+        {isOpen && (
+          <div className="lg:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border/40 bg-background/95 backdrop-blur">
               {navItems.map((item) => {
                 const Icon = item.icon
                 return (
                   <Link
                     key={item.path}
                     to={item.path}
-                    className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center space-x-2 px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-all"
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className="h-5 w-5" />
                     <span>{item.name}</span>
+                    {item.badge && (
+                      <Badge variant="secondary" className="ml-auto text-xs">
+                        {item.badge}
+                      </Badge>
+                    )}
                   </Link>
                 )
               })}
