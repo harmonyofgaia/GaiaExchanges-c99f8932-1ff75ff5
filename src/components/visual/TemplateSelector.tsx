@@ -2,62 +2,91 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Palette, Wand2 } from 'lucide-react'
+import { Wand2, Sparkles } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface TemplateSelectorProps {
   onTemplateApplied: (template: any) => void
-  isLocked?: boolean
+  isLocked: boolean
 }
 
-export function TemplateSelector({ onTemplateApplied, isLocked = false }: TemplateSelectorProps) {
+export function TemplateSelector({ onTemplateApplied, isLocked }: TemplateSelectorProps) {
   const templates = [
-    { id: 'ocean', name: 'Ocean Theme', colors: ['#0066cc', '#0080ff', '#00ccff'] },
-    { id: 'forest', name: 'Forest Theme', colors: ['#006600', '#00cc00', '#66ff66'] },
-    { id: 'sunset', name: 'Sunset Theme', colors: ['#ff6600', '#ff9900', '#ffcc00'] },
-    { id: 'cosmic', name: 'Cosmic Theme', colors: ['#6600cc', '#9900ff', '#cc66ff'] }
+    {
+      id: 'gaia-nature',
+      name: 'GAIA Nature',
+      description: 'Earth-friendly green theme',
+      preview: 'bg-gradient-to-br from-green-600 to-emerald-600'
+    },
+    {
+      id: 'cosmic-purple',
+      name: 'Cosmic Purple',
+      description: 'Space-inspired purple theme',
+      preview: 'bg-gradient-to-br from-purple-600 to-violet-600'
+    },
+    {
+      id: 'ocean-blue',
+      name: 'Ocean Blue',
+      description: 'Deep ocean blue theme',
+      preview: 'bg-gradient-to-br from-blue-600 to-cyan-600'
+    },
+    {
+      id: 'sunset-orange',
+      name: 'Sunset Orange',
+      description: 'Warm sunset theme',
+      preview: 'bg-gradient-to-br from-orange-600 to-red-600'
+    }
   ]
 
-  const handleApplyTemplate = (template: any) => {
-    if (isLocked) return
+  const applyTemplate = (template: any) => {
+    if (isLocked) {
+      toast.error('Visual controls are locked')
+      return
+    }
+    
     onTemplateApplied(template)
+    toast.success(`Applied ${template.name} template!`, {
+      description: 'Theme has been updated successfully'
+    })
   }
 
   return (
-    <Card className="border-purple-500/20 bg-purple-900/10">
+    <Card className="border-indigo-500/20 bg-indigo-900/10">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-purple-400">
-          <Palette className="h-5 w-5" />
-          Visual Templates
+        <CardTitle className="flex items-center gap-2 text-indigo-400">
+          <Sparkles className="h-5 w-5" />
+          Template Gallery
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {templates.map((template) => (
-            <div key={template.id} className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium">{template.name}</span>
-                <Badge variant="secondary">{template.colors.length} colors</Badge>
-              </div>
-              <div className="flex gap-1">
-                {template.colors.map((color, index) => (
-                  <div 
-                    key={index}
-                    className="w-6 h-6 rounded"
-                    style={{ backgroundColor: color }}
-                  />
-                ))}
-              </div>
-              <Button 
-                onClick={() => handleApplyTemplate(template)}
-                size="sm"
-                className="w-full"
-                disabled={isLocked}
-              >
-                <Wand2 className="h-3 w-3 mr-1" />
-                Apply
-              </Button>
-            </div>
+            <Card 
+              key={template.id}
+              className="cursor-pointer border transition-all hover:border-indigo-500/50 hover:scale-105"
+              onClick={() => applyTemplate(template)}
+            >
+              <CardContent className="p-4">
+                <div className={`w-full h-16 rounded-lg mb-3 ${template.preview}`} />
+                <h4 className="font-bold text-indigo-400 mb-1">{template.name}</h4>
+                <p className="text-sm text-muted-foreground">{template.description}</p>
+                <Button 
+                  size="sm" 
+                  className="w-full mt-3 bg-indigo-600 hover:bg-indigo-700"
+                  disabled={isLocked}
+                >
+                  <Wand2 className="h-3 w-3 mr-2" />
+                  Apply Theme
+                </Button>
+              </CardContent>
+            </Card>
           ))}
+        </div>
+        
+        <div className="text-center pt-4">
+          <Badge className="bg-indigo-600">
+            🎨 More templates coming soon
+          </Badge>
         </div>
       </CardContent>
     </Card>
