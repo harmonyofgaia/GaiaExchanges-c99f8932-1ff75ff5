@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -12,9 +13,11 @@ import {
   VideoLeaderboards,
   VideoChallengesEvents,
   VideoAdminControl,
-  VideoSecurityCompliance
+  VideoSecurityCompliance,
+  VideoMusicUploadSystem,
+  VideoChannelSubscriptions
 } from '@/components/video-exchange'
-import { Video, Users, Upload, MessageCircle, Bell, Coins, Trophy, Calendar, Shield, Lock } from 'lucide-react'
+import { Video, Users, Upload, MessageCircle, Bell, Coins, Trophy, Calendar, Shield, Lock, Music, Radio } from 'lucide-react'
 
 interface VideoStats {
   totalVideos: number
@@ -25,6 +28,8 @@ interface VideoStats {
   totalSubscriptions: number
   totalPoints: number
   totalTokens: number
+  totalMusicTracks: number
+  totalMusicPlays: number
 }
 
 export function VideoExchangeDashboard() {
@@ -37,16 +42,19 @@ export function VideoExchangeDashboard() {
     totalComments: 234567,
     totalSubscriptions: 89234,
     totalPoints: 5678901,
-    totalTokens: 234567
+    totalTokens: 234567,
+    totalMusicTracks: 8945,
+    totalMusicPlays: 2345678
   })
 
   const tabs = [
     { value: "overview", label: "Overview", icon: <Video className="h-4 w-4 mb-1" /> },
     { value: "channels", label: "Channels", icon: <Users className="h-4 w-4 mb-1" /> },
     { value: "upload", label: "Upload", icon: <Upload className="h-4 w-4 mb-1" /> },
+    { value: "music", label: "Music", icon: <Music className="h-4 w-4 mb-1" /> },
+    { value: "subscriptions", label: "Subscribe", icon: <Bell className="h-4 w-4 mb-1" /> },
     { value: "player", label: "Player", icon: <Video className="h-4 w-4 mb-1" /> },
     { value: "chat", label: "Chat", icon: <MessageCircle className="h-4 w-4 mb-1" /> },
-    { value: "subscriptions", label: "Subscribe", icon: <Bell className="h-4 w-4 mb-1" /> },
     { value: "tokens", label: "Tokens", icon: <Coins className="h-4 w-4 mb-1" /> },
     { value: "leaderboards", label: "Leaderboards", icon: <Trophy className="h-4 w-4 mb-1" /> },
     { value: "events", label: "Events", icon: <Calendar className="h-4 w-4 mb-1" /> },
@@ -61,59 +69,75 @@ export function VideoExchangeDashboard() {
           <div className="flex items-center gap-3">
             <Video className="h-8 w-8 text-green-400" />
             <div>
-              <h2 className="text-2xl font-bold text-green-400">🎬 GAiA Community Video Exchange</h2>
-              <p className="text-green-300">Outstanding Experience Platform • Unified Admin Control • Environmental Impact Focus</p>
+              <h2 className="text-2xl font-bold text-green-400">🎬 GAiA Community Video & Music Exchange</h2>
+              <p className="text-green-300">Outstanding Experience Platform • Music & Video Upload • GAiA Token Earning • Subscription System</p>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Stats Overview */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+      {/* Enhanced Stats Overview */}
+      <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-4">
         <Card className="border-blue-500/30">
           <CardContent className="p-4 text-center">
             <Video className="h-8 w-8 text-blue-400 mx-auto mb-2" />
             <div className="text-2xl font-bold text-blue-400">{stats.totalVideos.toLocaleString()}</div>
-            <div className="text-xs text-muted-foreground">Total Videos</div>
+            <div className="text-xs text-muted-foreground">Videos</div>
           </CardContent>
         </Card>
         
         <Card className="border-purple-500/30">
           <CardContent className="p-4 text-center">
-            <Users className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-purple-400">{stats.totalChannels.toLocaleString()}</div>
-            <div className="text-xs text-muted-foreground">Channels</div>
+            <Music className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-purple-400">{stats.totalMusicTracks.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground">Music Tracks</div>
           </CardContent>
         </Card>
         
         <Card className="border-green-500/30">
           <CardContent className="p-4 text-center">
             <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-green-400">{stats.totalUsers.toLocaleString()}</div>
-            <div className="text-xs text-muted-foreground">Active Users</div>
+            <div className="text-2xl font-bold text-green-400">{stats.totalChannels.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground">Channels</div>
           </CardContent>
         </Card>
         
         <Card className="border-orange-500/30">
           <CardContent className="p-4 text-center">
-            <Video className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-orange-400">{stats.totalViews.toLocaleString()}</div>
-            <div className="text-xs text-muted-foreground">Total Views</div>
+            <Users className="h-8 w-8 text-orange-400 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-orange-400">{stats.totalUsers.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground">Users</div>
           </CardContent>
         </Card>
         
         <Card className="border-teal-500/30">
           <CardContent className="p-4 text-center">
-            <MessageCircle className="h-8 w-8 text-teal-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-teal-400">{stats.totalComments.toLocaleString()}</div>
-            <div className="text-xs text-muted-foreground">Comments</div>
+            <Video className="h-8 w-8 text-teal-400 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-teal-400">{stats.totalViews.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground">Video Views</div>
           </CardContent>
         </Card>
         
         <Card className="border-pink-500/30">
           <CardContent className="p-4 text-center">
-            <Bell className="h-8 w-8 text-pink-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-pink-400">{stats.totalSubscriptions.toLocaleString()}</div>
+            <Radio className="h-8 w-8 text-pink-400 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-pink-400">{stats.totalMusicPlays.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground">Music Plays</div>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-cyan-500/30">
+          <CardContent className="p-4 text-center">
+            <MessageCircle className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-cyan-400">{stats.totalComments.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground">Comments</div>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-rose-500/30">
+          <CardContent className="p-4 text-center">
+            <Bell className="h-8 w-8 text-rose-400 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-rose-400">{stats.totalSubscriptions.toLocaleString()}</div>
             <div className="text-xs text-muted-foreground">Subscriptions</div>
           </CardContent>
         </Card>
@@ -122,7 +146,7 @@ export function VideoExchangeDashboard() {
           <CardContent className="p-4 text-center">
             <Coins className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
             <div className="text-2xl font-bold text-yellow-400">{stats.totalPoints.toLocaleString()}</div>
-            <div className="text-xs text-muted-foreground">Points Earned</div>
+            <div className="text-xs text-muted-foreground">Points</div>
           </CardContent>
         </Card>
         
@@ -158,19 +182,19 @@ export function VideoExchangeDashboard() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Video className="h-5 w-5" />
-                Video Exchange Overview
+                Video & Music Exchange Overview
                 <Badge variant="secondary">Active</Badge>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <p className="text-muted-foreground">
-                  The GAiA Community Video Exchange is an outstanding experience platform that combines video sharing 
-                  with environmental impact and community engagement. All features are routed through secure admin 
-                  controls for maximum oversight and safety.
+                  The GAiA Community Video & Music Exchange is an outstanding experience platform that combines 
+                  video sharing, musical performances, and environmental impact. Creators earn real GAiA tokens 
+                  for their content while building communities around sustainability and harmony.
                 </p>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   <Card className="border-green-500/30">
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2 mb-2">
@@ -178,19 +202,7 @@ export function VideoExchangeDashboard() {
                         <h4 className="font-semibold text-green-400">Personal Channels</h4>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        "Little Heaven" customizable channels with banners, playlists, and analytics.
-                      </p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="border-blue-500/30">
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Upload className="h-5 w-5 text-blue-400" />
-                        <h4 className="font-semibold text-blue-400">Seamless Upload</h4>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        Drag-and-drop with instant transcoding and environmental impact tagging.
+                        Customizable channels with upload storage, subscriber management, and analytics.
                       </p>
                     </CardContent>
                   </Card>
@@ -198,11 +210,35 @@ export function VideoExchangeDashboard() {
                   <Card className="border-purple-500/30">
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2 mb-2">
-                        <Video className="h-5 w-5 text-purple-400" />
-                        <h4 className="font-semibold text-purple-400">Interactive Player</h4>
+                        <Music className="h-5 w-5 text-purple-400" />
+                        <h4 className="font-semibold text-purple-400">Music Upload & Earning</h4>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        HD streaming with live chat, reactions, and eco-impact tracking.
+                        Upload musical performances and earn GAiA tokens based on plays and engagement.
+                      </p>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="border-blue-500/30">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Bell className="h-5 w-5 text-blue-400" />
+                        <h4 className="font-semibold text-blue-400">Subscription System</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Follow favorite creators, get notifications, and build communities around content.
+                      </p>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="border-yellow-500/30">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Coins className="h-5 w-5 text-yellow-400" />
+                        <h4 className="font-semibold text-yellow-400">Token Rewards</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Earn real GAiA tokens for quality content, engagement, and community building.
                       </p>
                     </CardContent>
                   </Card>
@@ -220,16 +256,20 @@ export function VideoExchangeDashboard() {
           <VideoUploadSystem />
         </TabsContent>
 
+        <TabsContent value="music">
+          <VideoMusicUploadSystem />
+        </TabsContent>
+
+        <TabsContent value="subscriptions">
+          <VideoChannelSubscriptions />
+        </TabsContent>
+
         <TabsContent value="player">
           <InteractiveVideoPlayer />
         </TabsContent>
 
         <TabsContent value="chat">
           <VideoChatEngine />
-        </TabsContent>
-
-        <TabsContent value="subscriptions">
-          <VideoSubscriptionSystem />
         </TabsContent>
 
         <TabsContent value="tokens">
