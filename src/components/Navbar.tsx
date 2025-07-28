@@ -1,143 +1,104 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { GaiaLogo } from '@/components/GaiaLogo'
-import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
-import {
-  Home,
-  TrendingUp,
-  Gamepad2,
-  Wallet,
-  BarChart3,
-  Video,
-  Bike,
-  Pickaxe,
-  Leaf,
-  Coins,
-  Shield,
-  Settings,
-  Menu,
-  X,
-  MoreHorizontal
-} from 'lucide-react'
 
-interface NavItem {
-  name: string
-  path: string
-  icon: any
-}
+import { useState } from 'react';
+import { Menu, X, Coins, Leaf, TrendingUp, Activity, Zap } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 export function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = [
-    { name: 'Home', path: '/', icon: Home },
-    { name: 'Live Tracking', path: '/live-tracking', icon: TrendingUp },
-    { name: 'Gaming', path: '/gaming', icon: Gamepad2 },
-    { name: 'Wallet', path: '/wallet', icon: Wallet },
-    { name: 'Markets', path: '/markets', icon: BarChart3 },
-    { name: 'Video Exchange', path: '/video-exchange', icon: Video },
-    { name: 'Bike Ecosystem', path: '/gaia-bike-ecosystem', icon: Bike },
-    { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
-    { name: 'Green Investments', path: '/green-investments', icon: Leaf },
-    { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
-    { name: 'Private Blockchain', path: '/private-blockchain', icon: Shield },
-    { name: 'Secure Admin', path: '/secure-admin', icon: Settings }
-  ]
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="bg-background/95 backdrop-blur-sm border-b border-primary/30 sticky top-0 z-50">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+    <nav className="bg-gradient-to-r from-green-900/80 to-emerald-900/80 backdrop-blur-sm border-b border-green-500/30 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <GaiaLogo size="sm" variant="matrix" showText={false} />
-            <span className="font-bold text-primary text-xl">Gaia Exchanges</span>
+            <div className="bg-gradient-to-r from-green-400 to-emerald-400 p-2 rounded-lg">
+              <Leaf className="h-6 w-6 text-white" />
+            </div>
+            <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
+              GAiA
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navItems.slice(0, 8).map((item) => {
-              const Icon = item.icon
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
-                >
-                  <Icon className="h-4 w-4" />
-                  <span>{item.name}</span>
-                </Link>
-              )
-            })}
-            
-            {/* More menu for additional items */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
-                  <MoreHorizontal className="h-4 w-4 mr-1" />
-                  More
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
-                {navItems.slice(8).map((item) => {
-                  const Icon = item.icon
-                  return (
-                    <DropdownMenuItem key={item.path} asChild>
-                      <Link
-                        to={item.path}
-                        className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
-                      >
-                        <Icon className="h-4 w-4" />
-                        <span>{item.name}</span>
-                      </Link>
-                    </DropdownMenuItem>
-                  )
-                })}
-              </DropdownMenuContent>
-            </DropdownMenu>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link to="/" className="text-green-300 hover:text-green-200 transition-colors">
+              Home
+            </Link>
+            <Link to="/green-investments" className="text-green-300 hover:text-green-200 transition-colors flex items-center gap-2">
+              <TrendingUp className="h-4 w-4" />
+              Green Investments
+            </Link>
+            <Link to="/earning-activities" className="text-green-300 hover:text-green-200 transition-colors flex items-center gap-2">
+              <Activity className="h-4 w-4" />
+              Earning Activities
+            </Link>
+            <Link to="/earning-systems" className="text-green-300 hover:text-green-200 transition-colors flex items-center gap-2">
+              <Zap className="h-4 w-4" />
+              Earning Systems
+            </Link>
+            <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
+              <Coins className="h-4 w-4 mr-2" />
+              Connect Wallet
+            </Button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-primary hover:bg-primary/10"
+          <div className="md:hidden">
+            <button
+              onClick={toggleMenu}
+              className="text-green-300 hover:text-green-200 focus:outline-none"
             >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-primary/30">
-            <div className="grid grid-cols-2 gap-2">
-              {navItems.map((item) => {
-                const Icon = item.icon
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <Icon className="h-4 w-4" />
-                    <span>{item.name}</span>
-                  </Link>
-                )
-              })}
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-green-900/50 backdrop-blur-sm rounded-lg mt-2">
+              <Link 
+                to="/" 
+                className="block px-3 py-2 text-green-300 hover:text-green-200 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Home
+              </Link>
+              <Link 
+                to="/green-investments" 
+                className="block px-3 py-2 text-green-300 hover:text-green-200 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Green Investments
+              </Link>
+              <Link 
+                to="/earning-activities" 
+                className="block px-3 py-2 text-green-300 hover:text-green-200 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Earning Activities
+              </Link>
+              <Link 
+                to="/earning-systems" 
+                className="block px-3 py-2 text-green-300 hover:text-green-200 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Earning Systems
+              </Link>
+              <div className="px-3 py-2">
+                <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
+                  <Coins className="h-4 w-4 mr-2" />
+                  Connect Wallet
+                </Button>
+              </div>
             </div>
           </div>
         )}
       </div>
     </nav>
-  )
+  );
 }
