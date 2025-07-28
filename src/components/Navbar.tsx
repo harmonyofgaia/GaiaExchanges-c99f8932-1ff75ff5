@@ -32,7 +32,9 @@ import {
   Info,
   Mail,
   DollarSign,
-  ShoppingBag
+  ShoppingBag,
+  BarChart3,
+  Users
 } from 'lucide-react'
 
 interface NavItem {
@@ -46,6 +48,9 @@ export function Navbar() {
 
   const navItems = [
     { name: 'Galaxy Home', path: '/', icon: Home },
+    { name: 'Dashboard', path: '/dashboard', icon: BarChart3 },
+    { name: 'Green Impact', path: '/green-impact-dashboard', icon: Leaf },
+    { name: 'Eco Avatar', path: '/eco-avatar', icon: Users },
     { name: 'Virtual World', path: '/virtual-world', icon: Globe },
     { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
     { name: 'Gaming Hub', path: '/gaming', icon: Gamepad2 },
@@ -79,7 +84,7 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
-            {navItems.slice(0, 7).map((item) => {
+            {navItems.slice(0, 8).map((item) => {
               const Icon = item.icon
               return (
                 <Link
@@ -102,7 +107,7 @@ export function Navbar() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
-                {navItems.slice(7).map((item) => {
+                {navItems.slice(8).map((item) => {
                   const Icon = item.icon
                   return (
                     <DropdownMenuItem key={item.path} asChild>
