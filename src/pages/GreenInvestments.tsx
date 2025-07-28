@@ -2,8 +2,9 @@
 import { Navbar } from '@/components/Navbar'
 import { GAiACommunityProjects } from '@/components/green-investments/GAiACommunityProjects'
 import { GaiaCommunityProjects } from '@/components/GaiaCommunityProjects'
+import { WildfireSandProtection } from '@/components/green-investments/WildfireSandProtection'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Leaf, Globe, TrendingUp } from 'lucide-react'
+import { Leaf, Globe, TrendingUp, Shield, Flame } from 'lucide-react'
 
 const GreenInvestments = () => {
   return (
@@ -31,7 +32,7 @@ const GreenInvestments = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div className="text-center p-4 bg-green-800/20 rounded-lg">
                 <Leaf className="h-8 w-8 text-green-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-green-400">Environmental</div>
@@ -47,9 +48,26 @@ const GreenInvestments = () => {
                 <div className="text-2xl font-bold text-purple-400">Global</div>
                 <div className="text-sm text-muted-foreground">Community</div>
               </div>
+              <div className="text-center p-4 bg-orange-800/20 rounded-lg">
+                <Shield className="h-8 w-8 text-orange-400 mx-auto mb-2" />
+                <div className="text-2xl font-bold text-orange-400">Protection</div>
+                <div className="text-sm text-muted-foreground">& Prevention</div>
+              </div>
             </div>
           </CardContent>
         </Card>
+
+        {/* Featured Project: Wildfire Sand Protection */}
+        <div className="mb-12">
+          <div className="text-center mb-6">
+            <Badge className="bg-orange-600 text-white mb-2">
+              <Flame className="h-4 w-4 mr-1" />
+              FEATURED PROTECTION PROJECT
+            </Badge>
+            <h2 className="text-2xl font-bold text-orange-400">Our Latest Environmental Protection Initiative</h2>
+          </div>
+          <WildfireSandProtection />
+        </div>
 
         {/* Your Restored GAiA Community Projects */}
         <div className="mb-12">
