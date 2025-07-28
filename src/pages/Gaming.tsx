@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import HoverSidebar from '@/components/HoverSidebar'
 import { Link } from 'react-router-dom'
-import { Gamepad2, Zap, Crown, Sword, Users, Star } from 'lucide-react'
+import { Gamepad2, Zap, Crown, Sword, Users, Star, Building2, Target } from 'lucide-react'
 
 const Gaming = () => {
   const games = [
@@ -14,6 +14,20 @@ const Gaming = () => {
       icon: <Crown className="h-6 w-6" />,
       color: "from-green-600 to-blue-600",
       featured: true
+    },
+    {
+      title: "🏨 Habbo Tycoon",
+      path: "/game",
+      description: "Build your virtual hotel empire with chat rooms",
+      icon: <Building2 className="h-6 w-6" />,
+      color: "from-purple-600 to-pink-600"
+    },
+    {
+      title: "💥 Worms Arena",
+      path: "/game",
+      description: "Strategic artillery battles with environmental themes",
+      icon: <Target className="h-6 w-6" />,
+      color: "from-orange-600 to-red-600"
     },
     {
       title: "🐍 Snake Arena",
@@ -32,7 +46,7 @@ const Gaming = () => {
     {
       title: "🎮 Game Hub",
       path: "/game",
-      description: "Access all games",
+      description: "Access all games in one place",
       icon: <Gamepad2 className="h-6 w-6" />,
       color: "from-blue-600 to-cyan-600"
     }
@@ -121,7 +135,7 @@ const Gaming = () => {
                 </div>
                 <div className="text-center p-4 bg-blue-900/20 rounded-lg">
                   <Gamepad2 className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-blue-400">4</div>
+                  <div className="text-2xl font-bold text-blue-400">6</div>
                   <div className="text-sm text-muted-foreground">Available Games</div>
                 </div>
                 <div className="text-center p-4 bg-purple-900/20 rounded-lg">
@@ -149,6 +163,8 @@ const Gaming = () => {
                 <div className="text-sm text-green-300 space-y-1">
                   <div>• Every game session contributes to real environmental projects</div>
                   <div>• GAIA MMORPG: 15,000 real trees planted through gameplay</div>
+                  <div>• Habbo Tycoon: Virtual hotels powered by renewable energy</div>
+                  <div>• Worms Arena: Each battle plants trees in real forests</div>
                   <div>• Snake Arena: 2,500 square meters of coral reef restored</div>
                   <div>• Gaia Fighter: 500 tons of ocean plastic removed</div>
                   <div>• Gaming achievements unlock real-world conservation efforts</div>
