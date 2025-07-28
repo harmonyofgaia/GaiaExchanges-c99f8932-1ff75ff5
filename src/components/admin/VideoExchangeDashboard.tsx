@@ -15,7 +15,8 @@ import {
   VideoAdminControl,
   VideoSecurityCompliance,
   VideoMusicUploadSystem,
-  VideoChannelSubscriptions
+  VideoChannelSubscriptions,
+  VideoLiveStreaming
 } from '@/components/video-exchange'
 import { Video, Users, Upload, MessageCircle, Bell, Coins, Trophy, Calendar, Shield, Lock, Music, Radio } from 'lucide-react'
 
@@ -52,6 +53,7 @@ export function VideoExchangeDashboard() {
     { value: "channels", label: "Channels", icon: <Users className="h-4 w-4 mb-1" /> },
     { value: "upload", label: "Upload", icon: <Upload className="h-4 w-4 mb-1" /> },
     { value: "music", label: "Music", icon: <Music className="h-4 w-4 mb-1" /> },
+    { value: "live", label: "Live Stream", icon: <Radio className="h-4 w-4 mb-1" /> },
     { value: "subscriptions", label: "Subscribe", icon: <Bell className="h-4 w-4 mb-1" /> },
     { value: "player", label: "Player", icon: <Video className="h-4 w-4 mb-1" /> },
     { value: "chat", label: "Chat", icon: <MessageCircle className="h-4 w-4 mb-1" /> },
@@ -70,7 +72,7 @@ export function VideoExchangeDashboard() {
             <Video className="h-8 w-8 text-green-400" />
             <div>
               <h2 className="text-2xl font-bold text-green-400">🎬 GAiA Community Video & Music Exchange</h2>
-              <p className="text-green-300">Outstanding Experience Platform • Music & Video Upload • GAiA Token Earning • Subscription System</p>
+              <p className="text-green-300">Outstanding Experience Platform • Music & Video Upload • Live Streaming • GAiA Token Earning • Subscription System</p>
             </div>
           </div>
         </CardContent>
@@ -91,6 +93,14 @@ export function VideoExchangeDashboard() {
             <Music className="h-8 w-8 text-purple-400 mx-auto mb-2" />
             <div className="text-2xl font-bold text-purple-400">{stats.totalMusicTracks.toLocaleString()}</div>
             <div className="text-xs text-muted-foreground">Music Tracks</div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-red-500/30">
+          <CardContent className="p-4 text-center">
+            <Radio className="h-8 w-8 text-red-400 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-red-400">156</div>
+            <div className="text-xs text-muted-foreground">Live Streams</div>
           </CardContent>
         </Card>
         
@@ -149,14 +159,6 @@ export function VideoExchangeDashboard() {
             <div className="text-xs text-muted-foreground">Points</div>
           </CardContent>
         </Card>
-        
-        <Card className="border-indigo-500/30">
-          <CardContent className="p-4 text-center">
-            <Coins className="h-8 w-8 text-indigo-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-indigo-400">{stats.totalTokens.toLocaleString()}</div>
-            <div className="text-xs text-muted-foreground">GAiA Tokens</div>
-          </CardContent>
-        </Card>
       </div>
 
       {/* Main Tabs */}
@@ -190,7 +192,7 @@ export function VideoExchangeDashboard() {
               <div className="space-y-4">
                 <p className="text-muted-foreground">
                   The GAiA Community Video & Music Exchange is an outstanding experience platform that combines 
-                  video sharing, musical performances, and environmental impact. Creators earn real GAiA tokens 
+                  video sharing, live streaming, musical performances, and environmental impact. Creators earn real GAiA tokens 
                   for their content while building communities around sustainability and harmony.
                 </p>
                 
@@ -218,6 +220,18 @@ export function VideoExchangeDashboard() {
                       </p>
                     </CardContent>
                   </Card>
+
+                  <Card className="border-red-500/30">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Radio className="h-5 w-5 text-red-400" />
+                        <h4 className="font-semibold text-red-400">Live Streaming</h4>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Stream live music and videos with real-time interaction and token earning.
+                      </p>
+                    </CardContent>
+                  </Card>
                   
                   <Card className="border-blue-500/30">
                     <CardContent className="p-4">
@@ -227,18 +241,6 @@ export function VideoExchangeDashboard() {
                       </div>
                       <p className="text-sm text-muted-foreground">
                         Follow favorite creators, get notifications, and build communities around content.
-                      </p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="border-yellow-500/30">
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Coins className="h-5 w-5 text-yellow-400" />
-                        <h4 className="font-semibold text-yellow-400">Token Rewards</h4>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        Earn real GAiA tokens for quality content, engagement, and community building.
                       </p>
                     </CardContent>
                   </Card>
@@ -258,6 +260,10 @@ export function VideoExchangeDashboard() {
 
         <TabsContent value="music">
           <VideoMusicUploadSystem />
+        </TabsContent>
+
+        <TabsContent value="live">
+          <VideoLiveStreaming />
         </TabsContent>
 
         <TabsContent value="subscriptions">
