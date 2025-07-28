@@ -6,7 +6,7 @@ import {
   Shield,
   Wallet,
   LineChart,
-  FileContract,
+  FileText,
   Gamepad2,
   Download,
   Megaphone,
@@ -55,7 +55,7 @@ export const navItems = [
   {
     title: "Smart Contracts",
     to: "/smart-contracts",
-    icon: FileContract,
+    icon: FileText,
   },
   {
     title: "Gaming Hub",
