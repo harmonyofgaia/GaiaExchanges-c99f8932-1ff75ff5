@@ -1,10 +1,13 @@
-
 import { useState, useEffect } from 'react'
 import { MatrixRainBackground } from './MatrixRainBackground'
 import { NeuroBackground } from './NeuroBackground'
 import { PuzzleBackground } from './PuzzleBackground'
+import { CyberPunkBackground } from './CyberPunkBackground'
+import { QuantumBackground } from './QuantumBackground'
+import { BioElectricBackground } from './BioElectricBackground'
+import { HolographicBackground } from './HolographicBackground'
 
-export type EnhancedBackgroundType = 'matrix' | 'neural' | 'puzzle' | 'particles' | 'waves'
+export type EnhancedBackgroundType = 'matrix' | 'neural' | 'puzzle' | 'cyberpunk' | 'quantum' | 'bioelectric' | 'holographic'
 
 export interface EnhancedBackgroundSettings {
   type: EnhancedBackgroundType
@@ -131,6 +134,18 @@ export function EnhancedBackgroundManager({
       
       case 'puzzle':
         return <PuzzleBackground {...baseProps} />
+        
+      case 'cyberpunk':
+        return <CyberPunkBackground {...baseProps} />
+        
+      case 'quantum':
+        return <QuantumBackground {...baseProps} />
+        
+      case 'bioelectric':
+        return <BioElectricBackground {...baseProps} />
+        
+      case 'holographic':
+        return <HolographicBackground {...baseProps} />
       
       default:
         return <MatrixRainBackground {...baseProps} />

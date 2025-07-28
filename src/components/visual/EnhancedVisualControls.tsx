@@ -1,4 +1,3 @@
-
 import { useState, useCallback, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -8,6 +7,7 @@ import { Slider } from '@/components/ui/slider'
 import { Switch } from '@/components/ui/switch'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { 
   Palette, 
   Settings, 
@@ -18,12 +18,14 @@ import {
   Monitor,
   Lock,
   Unlock,
-  Zap
+  Zap,
+  Library
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { useDebounce } from '@/hooks/useDebounce'
+import { VisualLibrary } from './VisualLibrary'
 
-type BackgroundType = 'matrix' | 'neural' | 'puzzle' | 'particles' | 'waves'
+type BackgroundType = 'matrix' | 'neural' | 'puzzle' | 'cyberpunk' | 'quantum' | 'bioelectric' | 'holographic'
 type BackgroundIntensity = 'low' | 'medium' | 'high'
 
 interface BackgroundSettings {
@@ -175,182 +177,201 @@ export function EnhancedVisualControls() {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      {/* Lock Control */}
-      <Card className="border-yellow-500/30 bg-yellow-900/20">
-        <CardHeader>
-          <CardTitle className="flex items-center justify-between text-yellow-400">
-            <div className="flex items-center gap-2">
-              {isLocked ? <Lock className="h-5 w-5" /> : <Unlock className="h-5 w-5" />}
-              Background Lock
-            </div>
-            <Badge variant={isLocked ? 'destructive' : 'secondary'}>
-              {isLocked ? 'Locked' : 'Unlocked'}
-            </Badge>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-muted-foreground">
-                {isLocked 
-                  ? 'Background settings are protected from changes'
-                  : 'Background settings can be modified'
-                }
-              </p>
-            </div>
-            <Button
-              onClick={toggleLock}
-              variant={isLocked ? "destructive" : "default"}
-              className="flex items-center gap-2"
-            >
-              {isLocked ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
-              {isLocked ? 'Unlock' : 'Lock'}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      <Tabs defaultValue="controls" className="w-full">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="controls">Background Controls</TabsTrigger>
+          <TabsTrigger value="library">
+            <Library className="h-4 w-4 mr-2" />
+            Style Library
+          </TabsTrigger>
+          <TabsTrigger value="settings">UI Settings</TabsTrigger>
+        </TabsList>
 
-      {/* Background Controls */}
-      <Card className="border-green-500/30 bg-green-900/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-400">
-            <Monitor className="h-5 w-5" />
-            Matrix Background Settings
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Background Type */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium">Background Type</Label>
-            <div className="grid grid-cols-3 gap-2">
-              {(['matrix', 'neural', 'puzzle'] as BackgroundType[]).map((type) => (
+        <TabsContent value="controls" className="space-y-6">
+          {/* Lock Control */}
+          <Card className="border-yellow-500/30 bg-yellow-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between text-yellow-400">
+                <div className="flex items-center gap-2">
+                  {isLocked ? <Lock className="h-5 w-5" /> : <Unlock className="h-5 w-5" />}
+                  Background Lock
+                </div>
+                <Badge variant={isLocked ? 'destructive' : 'secondary'}>
+                  {isLocked ? 'Locked' : 'Unlocked'}
+                </Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-muted-foreground">
+                    {isLocked 
+                      ? 'Background settings are protected from changes'
+                      : 'Background settings can be modified'
+                    }
+                  </p>
+                </div>
                 <Button
-                  key={type}
-                  onClick={() => handleBackgroundTypeChange(type)}
-                  variant={backgroundSettings.type === type ? "default" : "outline"}
-                  size="sm"
-                  disabled={isLocked}
-                  className="capitalize"
+                  onClick={toggleLock}
+                  variant={isLocked ? "destructive" : "default"}
+                  className="flex items-center gap-2"
                 >
-                  {type}
+                  {isLocked ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
+                  {isLocked ? 'Unlock' : 'Lock'}
                 </Button>
-              ))}
-            </div>
-          </div>
+              </div>
+            </CardContent>
+          </Card>
 
-          {/* Intensity */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium">Intensity</Label>
-            <div className="grid grid-cols-3 gap-2">
-              {(['low', 'medium', 'high'] as BackgroundIntensity[]).map((intensity) => (
-                <Button
-                  key={intensity}
-                  onClick={() => handleIntensityChange(intensity)}
-                  variant={backgroundSettings.intensity === intensity ? "default" : "outline"}
-                  size="sm"
+          {/* Background Controls */}
+          <Card className="border-green-500/30 bg-green-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <Monitor className="h-5 w-5" />
+                Enhanced Background Settings
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Background Type */}
+              <div className="space-y-3">
+                <Label className="text-sm font-medium">Background Type</Label>
+                <div className="grid grid-cols-3 gap-2">
+                  {(['matrix', 'neural', 'puzzle', 'cyberpunk', 'quantum', 'bioelectric', 'holographic'] as BackgroundType[]).map((type) => (
+                    <Button
+                      key={type}
+                      onClick={() => handleBackgroundTypeChange(type)}
+                      variant={backgroundSettings.type === type ? "default" : "outline"}
+                      size="sm"
+                      disabled={isLocked}
+                      className="capitalize"
+                    >
+                      {type === 'bioelectric' ? 'Bio' : type}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Intensity */}
+              <div className="space-y-3">
+                <Label className="text-sm font-medium">Intensity</Label>
+                <div className="grid grid-cols-3 gap-2">
+                  {(['low', 'medium', 'high'] as BackgroundIntensity[]).map((intensity) => (
+                    <Button
+                      key={intensity}
+                      onClick={() => handleIntensityChange(intensity)}
+                      variant={backgroundSettings.intensity === intensity ? "default" : "outline"}
+                      size="sm"
+                      disabled={isLocked}
+                      className="capitalize"
+                    >
+                      {intensity}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Color and Speed */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Matrix Color</Label>
+                  <Input
+                    type="color"
+                    value={backgroundSettings.color}
+                    onChange={(e) => handleColorChange(e.target.value)}
+                    disabled={isLocked}
+                    className="h-10"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label>Animation Speed: {backgroundSettings.speed.toFixed(1)}x</Label>
+                  <Slider
+                    value={[backgroundSettings.speed]}
+                    onValueChange={handleSpeedChange}
+                    max={3}
+                    min={0.1}
+                    step={0.1}
+                    disabled={isLocked}
+                    className="w-full"
+                  />
+                </div>
+              </div>
+
+              {/* Auto Generation Toggle */}
+              <div className="flex items-center justify-between p-4 border border-muted rounded-lg">
+                <div className="space-y-1">
+                  <Label className="text-sm font-medium">Auto-Generate Background</Label>
+                  <p className="text-xs text-muted-foreground">
+                    Automatically change background every 30 seconds
+                  </p>
+                </div>
+                <Switch
+                  checked={backgroundSettings.autoGenerate}
+                  onCheckedChange={toggleAutoGenerate}
                   disabled={isLocked}
-                  className="capitalize"
-                >
-                  {intensity}
-                </Button>
-              ))}
-            </div>
-          </div>
+                />
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-          {/* Color and Speed */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Matrix Color</Label>
-              <Input
-                type="color"
-                value={backgroundSettings.color}
-                onChange={(e) => handleColorChange(e.target.value)}
-                disabled={isLocked}
-                className="h-10"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label>Animation Speed: {backgroundSettings.speed.toFixed(1)}x</Label>
-              <Slider
-                value={[backgroundSettings.speed]}
-                onValueChange={handleSpeedChange}
-                max={3}
-                min={0.1}
-                step={0.1}
-                disabled={isLocked}
-                className="w-full"
-              />
-            </div>
-          </div>
+        <TabsContent value="library">
+          <VisualLibrary />
+        </TabsContent>
 
-          {/* Auto Generation Toggle */}
-          <div className="flex items-center justify-between p-4 border border-muted rounded-lg">
-            <div className="space-y-1">
-              <Label className="text-sm font-medium">Auto-Generate Background</Label>
-              <p className="text-xs text-muted-foreground">
-                Automatically change background every 30 seconds
-              </p>
-            </div>
-            <Switch
-              checked={backgroundSettings.autoGenerate}
-              onCheckedChange={toggleAutoGenerate}
-              disabled={isLocked}
-            />
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* UI Controls */}
-      <Card className="border-blue-500/30 bg-blue-900/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-400">
-            <Settings className="h-5 w-5" />
-            UI Settings
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Font Size: {fontSize}px</Label>
-              <Slider
-                value={[fontSize]}
-                onValueChange={(value) => setFontSize(value[0])}
-                max={24}
-                min={12}
-                step={1}
-                disabled={isLocked}
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label>Spacing: {spacing}px</Label>
-              <Slider
-                value={[spacing]}
-                onValueChange={(value) => setSpacing(value[0])}
-                max={32}
-                min={8}
-                step={2}
-                disabled={isLocked}
-              />
-            </div>
-          </div>
-          
-          <div className="flex items-center justify-between p-4 border border-muted rounded-lg">
-            <div className="space-y-1">
-              <Label className="text-sm font-medium">Particle Effects</Label>
-              <p className="text-xs text-muted-foreground">
-                Enable floating particle animations
-              </p>
-            </div>
-            <Switch
-              checked={particleEffects}
-              onCheckedChange={setParticleEffects}
-              disabled={isLocked}
-            />
-          </div>
-        </CardContent>
-      </Card>
+        <TabsContent value="settings" className="space-y-6">
+          {/* UI Controls */}
+          <Card className="border-blue-500/30 bg-blue-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-400">
+                <Settings className="h-5 w-5" />
+                UI Settings
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Font Size: {fontSize}px</Label>
+                  <Slider
+                    value={[fontSize]}
+                    onValueChange={(value) => setFontSize(value[0])}
+                    max={24}
+                    min={12}
+                    step={1}
+                    disabled={isLocked}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label>Spacing: {spacing}px</Label>
+                  <Slider
+                    value={[spacing]}
+                    onValueChange={(value) => setSpacing(value[0])}
+                    max={32}
+                    min={8}
+                    step={2}
+                    disabled={isLocked}
+                  />
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-between p-4 border border-muted rounded-lg">
+                <div className="space-y-1">
+                  <Label className="text-sm font-medium">Particle Effects</Label>
+                  <p className="text-xs text-muted-foreground">
+                    Enable floating particle animations
+                  </p>
+                </div>
+                <Switch
+                  checked={particleEffects}
+                  onCheckedChange={setParticleEffects}
+                  disabled={isLocked}
+                />
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
 
       {/* Action Buttons */}
       <div className="flex flex-wrap gap-3 justify-center">
