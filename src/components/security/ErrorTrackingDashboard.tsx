@@ -33,11 +33,11 @@ export function ErrorTrackingDashboard() {
   const loadErrorData = async () => {
     setLoading(true)
     try {
-      // Load error aggregates
+      // Load error aggregates with correct parameter names
       const { data: aggregates, error: aggError } = await supabase
         .rpc('aggregate_errors', {
           p_time_window: selectedTimeWindow,
-          p_min_severity: selectedSeverity
+          p_severity_threshold: selectedSeverity
         })
       
       if (aggError) throw aggError

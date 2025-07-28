@@ -12,7 +12,7 @@ interface AdminUser {
   user_id: string
   email: string
   created_at: string
-  is_active: boolean
+  is_active?: boolean
 }
 
 interface SecurityEvent {
@@ -21,7 +21,7 @@ interface SecurityEvent {
   severity: string
   created_at: string
   event_details: any
-  source_system: string
+  source_system?: string
 }
 
 export function AdminSecurityManager() {
@@ -39,7 +39,12 @@ export function AdminSecurityManager() {
     try {
       const { data, error } = await supabase.rpc('list_active_admins')
       if (error) throw error
-      setAdminUsers(data || [])
+      // Add is_active property to match interface
+      const adminUsersWithStatus = (data || []).map(user => ({
+        ...user,
+        is_active: true
+      }))
+      setAdminUsers(adminUsersWithStatus)
     } catch (error) {
       console.error('Error loading admin users:', error)
       toast.error('Failed to load admin users')
@@ -55,7 +60,13 @@ export function AdminSecurityManager() {
         .limit(20)
       
       if (error) throw error
-      setSecurityEvents(data || [])
+      // Map database fields to match interface
+      const mappedEvents = (data || []).map(event => ({
+        ...event,
+        source_system: event.source_system || 'system',
+        severity: event.severity?.toString() || 'INFO'
+      }))
+      setSecurityEvents(mappedEvents)
     } catch (error) {
       console.error('Error loading security events:', error)
     }
@@ -71,14 +82,14 @@ export function AdminSecurityManager() {
     try {
       // First get the user UUID by email
       const { data: userUuid, error: uuidError } = await supabase
-        .rpc('get_user_uuid_by_email', { p_email: newAdminEmail })
+        .rpc('get_user_uuid_by_email', { user_email: newAdminEmail })
       
       if (uuidError) throw uuidError
 
       // Grant admin access
       const { data, error } = await supabase
         .rpc('manage_admin_user', {
-          p_target_user_id: userUuid,
+          p_user_id: userUuid,
           p_action: 'grant'
         })
 
@@ -107,7 +118,7 @@ export function AdminSecurityManager() {
     try {
       const { data, error } = await supabase
         .rpc('manage_admin_user', {
-          p_target_user_id: userId,
+          p_user_id: userId,
           p_action: 'revoke'
         })
 

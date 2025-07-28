@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -7,7 +8,7 @@ import {
   LogOut, 
   Wallet,
   TreePine,
-  Bicycle,
+  Car,
   Gamepad2,
   TrendingUp,
   Coins,
@@ -25,7 +26,8 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import {
   NavigationMenu,
@@ -40,7 +42,7 @@ const mainNavItems = [
   { name: 'Dashboard', path: '/dashboard', icon: Home },
   { name: 'GAiA Token Wallet', path: '/wallet', icon: Wallet },
   { name: 'Game Center', path: '/game-center', icon: Gamepad2 },
-  { name: 'Bike-to-Earn', path: '/bike-to-earn', icon: Bicycle },
+  { name: 'Bike-to-Earn', path: '/bike-to-earn', icon: Car },
   { name: 'Eco Missions', path: '/eco-missions', icon: TreePine },
 ]
 
