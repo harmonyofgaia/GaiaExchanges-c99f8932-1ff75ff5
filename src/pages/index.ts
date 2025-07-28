@@ -1,26 +1,27 @@
 
-export { default as Index } from './Index';
-export { default as About } from './About';
-export { default as Wallet } from './Wallet';
-export { default as Markets } from './Markets';
-export { default as SmartContracts } from './SmartContracts';
-export { default as SystemStatus } from './SystemStatus';
-export { default as ComprehensiveStatus } from './ComprehensiveStatus';
-export { default as GaiaConsistencyStatus } from './GaiaConsistencyStatus';
-export { default as Downloads } from './Downloads';
-export { default as Marketing } from './Marketing';
-export { default as Reinvestments } from './Reinvestments';
-export { default as Transparency } from './Transparency';
-export { default as Admin } from './Admin';
-export { default as Gaming } from './Gaming';
-export { default as GaiaFighterGame } from './GaiaFighterGame';
-export { default as LiveTracking } from './LiveTracking';
-export { default as GaiaCoinCrafter } from './GaiaCoinCrafter';
-export { default as LandscapeBuilder } from './LandscapeBuilder';
-export { default as ForestShieldMasterPlan } from './ForestShieldMasterPlan';
-export { default as WildfireDefenseDashboard } from './WildfireDefenseDashboard';
-export { default as ForestTokenSystem } from './ForestTokenSystem';
-export { default as CommunityEngagementHub } from './CommunityEngagementHub';
-export { default as PartnershipManagement } from './PartnershipManagement';
-export { default as ImpactMeasurementSystem } from './ImpactMeasurementSystem';
-export { default as NotFound } from './NotFound';
+// Phase 1 exports
+export { default as Dashboard } from './Dashboard'
+export { default as GreenImpactDashboard } from './GreenImpactDashboard'
+export { default as GaiaConsistencyStatus } from './GaiaConsistencyStatus'
+export { default as Security } from './Security'
+
+// Phase 2 exports
+export { default as ProjectFunding } from './ProjectFunding'
+export { default as WildfireDefenseDashboard } from './WildfireDefenseDashboard'
+export { default as ForestTokenSystem } from './ForestTokenSystem'
+export { default as ImpactMeasurementSystem } from './ImpactMeasurementSystem'
+export { default as SeaGreenPsychohistoricalProject } from './SeaGreenPsychohistoricalProject'
+
+// Phase 3 exports
+export { default as CommunityEngagementHub } from './CommunityEngagementHub'
+export { default as PartnershipManagement } from './PartnershipManagement'
+
+// Legacy pages
+export { default as Home } from './Home'
+export { default as About } from './About'
+export { default as Contact } from './Contact'
+export { default as DecentralizedProjectFundingPools } from './DecentralizedProjectFundingPools'
+export { default as GreenInvestments } from './GreenInvestments'
+export { default as SandProtect } from './SandProtect'
+export { default as Admin } from './Admin'
+export { default as ForestShieldMasterPlan } from './ForestShieldMasterPlan'
