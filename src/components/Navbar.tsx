@@ -14,7 +14,6 @@ import {
   TrendingUp,
   Gamepad2,
   Wallet,
-  BarChart3,
   Video,
   Film,
   Bike,
@@ -53,7 +52,6 @@ export function Navbar() {
     { name: 'Exchange', path: '/exchange', icon: TrendingUp },
     { name: 'Marketplace', path: '/marketplace', icon: ShoppingBag },
     { name: 'Wallet', path: '/wallet', icon: Wallet },
-    { name: 'Markets', path: '/markets', icon: BarChart3 },
     { name: 'Video Exchange', path: '/video-exchange', icon: Video },
     { name: 'Streaming Shows', path: '/streaming-shows', icon: Film },
     { name: 'Bike Ecosystem', path: '/gaia-bike-ecosystem', icon: Bike },
@@ -81,7 +79,7 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
-            {navItems.slice(0, 8).map((item) => {
+            {navItems.slice(0, 7).map((item) => {
               const Icon = item.icon
               return (
                 <Link
@@ -104,7 +102,7 @@ export function Navbar() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
-                {navItems.slice(8).map((item) => {
+                {navItems.slice(7).map((item) => {
                   const Icon = item.icon
                   return (
                     <DropdownMenuItem key={item.path} asChild>
