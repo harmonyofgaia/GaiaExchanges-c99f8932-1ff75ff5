@@ -32,9 +32,7 @@ import {
   Crown,
   Info,
   Mail,
-  DollarSign,
-  Users,
-  Handshake
+  DollarSign
 } from 'lucide-react'
 
 interface NavItem {
@@ -64,9 +62,6 @@ export function Navbar() {
     { name: 'Landscape Builder', path: '/landscape-builder', icon: Mountain },
     { name: 'Aura Land Scrapyard', path: '/aura-land-scrapyard', icon: Palette },
     { name: 'Comprehensive Status', path: '/comprehensive-status', icon: Settings },
-    // Adding the missing created pages
-    { name: 'Community Hub', path: '/community-engagement-hub', icon: Users },
-    { name: 'Partnerships', path: '/partnership-management', icon: Handshake },
     { name: 'About GAiA', path: '/about', icon: Info },
     { name: 'Contact', path: '/contact', icon: Mail },
     { name: 'Pricing', path: '/pricing', icon: DollarSign },

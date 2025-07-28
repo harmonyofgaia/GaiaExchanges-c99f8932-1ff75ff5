@@ -1,117 +1,226 @@
 
-import { Navbar } from '@/components/Navbar'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Link } from 'react-router-dom'
-import { Leaf, Globe, Zap, Crown, GamepadIcon, Coins } from 'lucide-react'
+import { ArrowRight, Zap, Users, Globe, Leaf, Star, Trophy, Shield } from 'lucide-react'
+import { Navbar } from '@/components/Navbar'
+import { GaiaLogo } from '@/components/GaiaLogo'
+import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
+import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
+import { GaiaCommunityProjects } from '@/components/GaiaCommunityProjects'
+import { SystemMonitor } from '@/components/SystemMonitor'
+import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
+import { InvisibleEcoIndicator } from '@/components/eco/InvisibleEcoIndicator'
+import { AnimatedCounter } from '@/components/ui/animated-counter'
+import { LiveEarningsDisplay } from '@/components/earnings/LiveEarningsDisplay'
+import { EcoMissionCard } from '@/components/missions/EcoMissionCard'
+import { ThemeSelector } from '@/components/ThemeSelector'
+import { VisualControlButton } from '@/components/visual/VisualControlButton'
 
 export default function Home() {
+  const [stats, setStats] = useState({
+    totalUsers: 12589,
+    tokensEarned: 2456789,
+    carbonOffset: 15678,
+    projectsFunded: 245
+  })
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStats(prev => ({
+        totalUsers: prev.totalUsers + Math.floor(Math.random() * 5),
+        tokensEarned: prev.tokensEarned + Math.floor(Math.random() * 100),
+        carbonOffset: prev.carbonOffset + Math.floor(Math.random() * 10),
+        projectsFunded: prev.projectsFunded + Math.floor(Math.random() * 2)
+      }))
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const sampleMission = {
+    id: 'water-conservation',
+    title: 'Water Conservation Challenge',
+    description: 'Reduce water usage by 20% this month through smart conservation techniques.',
+    reward: 150,
+    progress: 67,
+    maxProgress: 100,
+    difficulty: 'Medium' as const,
+    timeLeft: '12 days',
+    participants: 1250
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-green-900/10 to-blue-900/10">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
+      <SystemMonitor />
+      <CrossPagePersistence />
+      <InvisibleEcoIndicator />
+      
+      <EnhancedBackgroundManager 
+        settings={{
+          type: 'matrix',
+          intensity: 'low',
+          color: '#00ff00',
+          speed: 0.5,
+          autoGenerate: true
+        }}
+      />
+      
       <Navbar />
-      <div className="container mx-auto px-4 py-8">
+      
+      {/* Control Buttons */}
+      <VisualControlButton />
+      <ThemeSelector />
+      
+      <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
-            🌍 GAIA ECOSYSTEM
-          </h1>
-          <p className="text-2xl text-muted-foreground mb-6">
-            Seeds Will Form Into Music - A Creative Circuit To Happiness
-          </p>
-          <p className="text-lg text-green-400 mb-8">
-            Building the Future of Green Innovation & Creative Expression
-          </p>
+        <div className="text-center space-y-6 mb-12">
+          <div className="flex items-center justify-center gap-4">
+            <UniversalGaiaLogo size="lg" animated={true} />
+            <GaiaLogo size="lg" variant="glow" />
+          </div>
           
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Badge variant="outline" className="border-green-500/50 text-green-400 text-lg px-4 py-2">
-              <Leaf className="h-4 w-4 mr-2" />
-              Environmental Focus
-            </Badge>
-            <Badge variant="outline" className="border-blue-500/50 text-blue-400 text-lg px-4 py-2">
-              <Globe className="h-4 w-4 mr-2" />
-              Global Impact
-            </Badge>
-            <Badge variant="outline" className="border-purple-500/50 text-purple-400 text-lg px-4 py-2">
-              <Zap className="h-4 w-4 mr-2" />
-              Innovation Powered
-            </Badge>
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+              Harmony of Gaia
+            </h1>
+            <p className="text-xl md:text-2xl text-green-300/90 font-medium">
+              Together We Make The World A Better Place
+            </p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Join the revolutionary ecosystem that rewards environmental action, 
+              sustainable living, and positive community impact through our GAiA token.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+              <Zap className="h-5 w-5 mr-2" />
+              Start Earning GAIA
+              <ArrowRight className="h-5 w-5 ml-2" />
+            </Button>
+            <Button size="lg" variant="outline" className="border-green-400 text-green-400 hover:bg-green-900/20">
+              <Globe className="h-5 w-5 mr-2" />
+              Explore Projects
+            </Button>
           </div>
         </div>
 
-        {/* Quick Access Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          <Link to="/gaming">
-            <Card className="border-purple-500/30 bg-purple-900/20 hover:bg-purple-900/30 transition-all cursor-pointer h-full">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-purple-400">
-                  <GamepadIcon className="h-6 w-6" />
-                  Gaming Hub
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Experience the ultimate Gaia Fighter Game with environmental themes and rewards
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
+        {/* Live Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+          <Card className="bg-green-900/20 border-green-500/30">
+            <CardContent className="p-6 text-center">
+              <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-green-400">
+                <AnimatedCounter value={stats.totalUsers} />
+              </div>
+              <div className="text-sm text-green-300/80">Community Members</div>
+            </CardContent>
+          </Card>
 
-          <Link to="/token-mining">
-            <Card className="border-gold-500/30 bg-yellow-900/20 hover:bg-yellow-900/30 transition-all cursor-pointer h-full">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-yellow-400">
-                  <Coins className="h-6 w-6" />
-                  Token Mining
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Mine Gaia Coins and contribute to the sustainable future of our planet
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
+          <Card className="bg-blue-900/20 border-blue-500/30">
+            <CardContent className="p-6 text-center">
+              <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-blue-400">
+                <AnimatedCounter value={stats.tokensEarned} />
+              </div>
+              <div className="text-sm text-blue-300/80">GAIA Tokens Earned</div>
+            </CardContent>
+          </Card>
 
-          <Link to="/admin">
-            <Card className="border-red-500/30 bg-red-900/20 hover:bg-red-900/30 transition-all cursor-pointer h-full">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-red-400">
-                  <Crown className="h-6 w-6" />
-                  Admin Portal
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Access the secure admin dashboard for system management and control
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
+          <Card className="bg-emerald-900/20 border-emerald-500/30">
+            <CardContent className="p-6 text-center">
+              <Leaf className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-emerald-400">
+                <AnimatedCounter value={stats.carbonOffset} />
+              </div>
+              <div className="text-sm text-emerald-300/80">Tons CO₂ Offset</div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-purple-900/20 border-purple-500/30">
+            <CardContent className="p-6 text-center">
+              <Star className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-purple-400">
+                <AnimatedCounter value={stats.projectsFunded} />
+              </div>
+              <div className="text-sm text-purple-300/80">Projects Funded</div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Vision Statement */}
-        <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
-          <CardHeader>
-            <CardTitle className="text-center text-3xl text-green-400">
-              Our Vision
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-center space-y-4">
-            <p className="text-xl text-muted-foreground">
-              "We Are a Strong Creative Open Minded Circuit To Happiness"
-            </p>
-            <p className="text-lg text-blue-300">
-              A Lot of Grooves and Styles and Businesses And Ideas Are Involved in This Green And Alive Story
-            </p>
-            <p className="text-lg text-purple-300">
-              We Will Not Make You Only Be Surprised but We Show You True Souls, True Life, True Smiles
-            </p>
-            <p className="text-xl font-bold text-green-400">
-              "Doesn't Matter if You're Black Or White" - Creating Unity Through Innovation
-            </p>
-          </CardContent>
-        </Card>
+        {/* Live Earnings Display */}
+        <div className="mb-12">
+          <LiveEarningsDisplay />
+        </div>
+
+        {/* Featured Mission */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-green-400 mb-6 text-center">
+            🌱 Featured Eco Mission
+          </h2>
+          <div className="max-w-md mx-auto">
+            <EcoMissionCard mission={sampleMission} />
+          </div>
+        </div>
+
+        {/* Community Projects */}
+        <GaiaCommunityProjects />
+
+        {/* Features Section */}
+        <div className="mt-12 space-y-8">
+          <h2 className="text-3xl font-bold text-center text-green-400 mb-8">
+            🌍 Why Choose Harmony of Gaia?
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-500/30">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-green-400">
+                  <Trophy className="h-5 w-5" />
+                  Earn While You Impact
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-green-300/80">
+                  Get rewarded with GAIA tokens for every positive environmental action you take. 
+                  From water conservation to renewable energy adoption.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-blue-500/30">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-blue-400">
+                  <Users className="h-5 w-5" />
+                  Global Community
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-blue-300/80">
+                  Connect with thousands of eco-warriors worldwide. Share experiences, 
+                  collaborate on projects, and amplify your environmental impact.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-purple-500/30">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-purple-400">
+                  <Shield className="h-5 w-5" />
+                  Secure & Transparent
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-purple-300/80">
+                  Built on blockchain technology with military-grade security. 
+                  Every transaction is transparent and verified by our community.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   )
