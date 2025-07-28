@@ -29,79 +29,43 @@ export function MatrixRainBackground({
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
 
-    // Matrix rain configuration with GAiA theme
+    // Matrix rain configuration
     const fontSize = 16
-    const columns = Math.floor(canvas.width / fontSize)
+    const columns = canvas.width / fontSize
     const drops: number[] = []
 
-    // Initialize drops with staggered start positions for smooth effect
+    // Initialize drops
     for (let i = 0; i < columns; i++) {
-      drops[i] = Math.random() * -canvas.height
+      drops[i] = 1
     }
 
-    // Enhanced matrix characters with GAiA symbols
-    const matrixChars = 'GAiAEXCHANGE01234567890ハーチャクモニー龍神様ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*()_+-=[]{}|;:,.<>?'
-    const gaiaSymbols = ['🌍', '🌿', '⚡', '💎', '🐉', '🌱', '✨', '🔮']
-
-    // Get intensity-based settings
-    const densityMultiplier = intensity === 'low' ? 0.7 : intensity === 'high' ? 1.5 : 1
-    const trailOpacity = intensity === 'low' ? 0.08 : intensity === 'high' ? 0.03 : 0.05
+    // Matrix characters
+    const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?'
 
     const draw = () => {
-      // Create trailing effect
-      ctx.fillStyle = `rgba(0, 0, 0, ${trailOpacity})`
+      // Semi-transparent background to create trailing effect
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
+      ctx.fillStyle = color
       ctx.font = `${fontSize}px monospace`
 
-      // Draw matrix rain
-      for (let i = 0; i < drops.length * densityMultiplier; i++) {
-        const columnIndex = i % columns
-        const x = columnIndex * fontSize
-        const y = drops[columnIndex] * fontSize
+      // Draw characters
+      for (let i = 0; i < drops.length; i++) {
+        const text = matrixChars[Math.floor(Math.random() * matrixChars.length)]
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize)
 
-        // Randomly choose character type
-        let char: string
-        if (Math.random() < 0.95) {
-          char = matrixChars[Math.floor(Math.random() * matrixChars.length)]
-        } else {
-          char = gaiaSymbols[Math.floor(Math.random() * gaiaSymbols.length)]
+        // Reset drop to top randomly
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0
         }
 
-        // Create glow effect for special characters
-        const isSpecial = gaiaSymbols.includes(char)
-        
-        if (isSpecial) {
-          // Glow effect for GAiA symbols
-          ctx.shadowColor = color
-          ctx.shadowBlur = 15
-          ctx.fillStyle = color
-          ctx.globalAlpha = 0.8
-        } else {
-          // Regular matrix characters with varying opacity
-          ctx.shadowBlur = 5
-          ctx.shadowColor = color
-          ctx.fillStyle = color
-          ctx.globalAlpha = Math.random() * 0.8 + 0.2
-        }
-
-        ctx.fillText(char, x, y)
-        
-        // Reset shadow
-        ctx.shadowBlur = 0
-
-        // Move drop down and reset if needed
-        if (drops[columnIndex] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[columnIndex] = Math.random() * -100
-        }
-        drops[columnIndex] += speed * (Math.random() * 0.5 + 0.5)
+        // Move drop down
+        drops[i] += speed * (intensity === 'low' ? 0.5 : intensity === 'high' ? 1.5 : 1)
       }
-
-      ctx.globalAlpha = 1
     }
 
-    // Use consistent animation timing
-    const animationId = setInterval(draw, 50) // 20 FPS for smooth consistent animation
+    const animationId = setInterval(draw, 33) // ~30 FPS
 
     return () => {
       clearInterval(animationId)
@@ -113,10 +77,7 @@ export function MatrixRainBackground({
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ 
-        background: 'linear-gradient(135deg, #000000 0%, #001100 30%, #000800 70%, #000000 100%)',
-        opacity: 0.8 
-      }}
+      style={{ opacity: 0.3 }}
     />
   )
 }

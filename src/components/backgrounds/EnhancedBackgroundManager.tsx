@@ -27,24 +27,48 @@ export interface BackgroundConfig {
 }
 
 interface EnhancedBackgroundManagerProps {
-  settings?: EnhancedBackgroundSettings
+  settings: EnhancedBackgroundSettings
   className?: string
 }
 
-// Default stable matrix settings
-const DEFAULT_MATRIX_SETTINGS: EnhancedBackgroundSettings = {
-  type: 'matrix',
-  intensity: 'medium',
-  color: '#00ff00',
-  speed: 1,
-  autoGenerate: false
-}
+const ANIMATION_CYCLE_DURATION = 30000 // 30 seconds
 
 export function EnhancedBackgroundManager({ 
-  settings = DEFAULT_MATRIX_SETTINGS, 
+  settings, 
   className = '' 
 }: EnhancedBackgroundManagerProps) {
-  const [currentSettings] = useState(settings)
+  const [currentSettings, setCurrentSettings] = useState(settings)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
+  // Auto-generate new backgrounds
+  useEffect(() => {
+    if (!settings.autoGenerate) return
+
+    const interval = setInterval(() => {
+      setIsTransitioning(true)
+      
+      setTimeout(() => {
+        const backgroundTypes: EnhancedBackgroundType[] = ['matrix', 'neural', 'puzzle']
+        const colors = ['#00ff00', '#00ffff', '#ff00ff', '#ffff00', '#ff0080']
+        const intensities: Array<'low' | 'medium' | 'high'> = ['low', 'medium', 'high']
+        
+        const newSettings: EnhancedBackgroundSettings = {
+          type: backgroundTypes[Math.floor(Math.random() * backgroundTypes.length)],
+          intensity: intensities[Math.floor(Math.random() * intensities.length)],
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speed: Math.random() * 2 + 0.5,
+          autoGenerate: true,
+          pattern: 'default',
+          neuralDensity: Math.floor(Math.random() * 100) + 20
+        }
+        
+        setCurrentSettings(newSettings)
+        setIsTransitioning(false)
+      }, 1000)
+    }, ANIMATION_CYCLE_DURATION)
+
+    return () => clearInterval(interval)
+  }, [settings.autoGenerate])
 
   const renderBackground = () => {
     const baseProps = {
@@ -76,11 +100,18 @@ export function EnhancedBackgroundManager({
 
   return (
     <div className={`fixed inset-0 pointer-events-none z-0 ${className}`}>
-      {renderBackground()}
+      <div
+        className={`transition-opacity duration-1000 ${
+          isTransitioning ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
+        {renderBackground()}
+      </div>
     </div>
   )
 }
 
 export function updateBackgroundConfig(config: BackgroundConfig) {
+  // Mock function for updating background config
   console.log('Updating background config:', config)
 }
