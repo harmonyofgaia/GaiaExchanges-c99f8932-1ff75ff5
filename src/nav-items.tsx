@@ -1,4 +1,5 @@
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket, Zap, Trophy, Film, Tv } from "lucide-react";
+
+import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket, Zap, Trophy } from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -370,27 +371,6 @@ export const navigationItems: NavigationItem[] = [
       "Security, Privacy & Compliance"
     ],
     description: "Master Plan v7: GAiA Community Video Exchange Outstanding Experience",
-    lazyLoaded: true,
-  },
-  {
-    title: "Streaming Shows",
-    to: "/streaming-shows",
-    icon: Tv,
-    variant: "ghost" as const,
-    masterPlanVersion: "v7",
-    features: [
-      "70s & 80s Documentary Collection",
-      "Party & Event Streaming",
-      "Music Concert Archives",
-      "Lifestyle & Culture Content",
-      "Auto-Discovery System",
-      "Daily Web Scanning",
-      "Community Ratings",
-      "Download & Share Features",
-      "Curated Vintage Content",
-      "Retro Living Inspiration"
-    ],
-    description: "Master Plan v7: Vintage streaming platform with auto-discovering 70s/80s content to inspire better living",
     lazyLoaded: true,
   },
 ];
