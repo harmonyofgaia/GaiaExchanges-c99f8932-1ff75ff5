@@ -1,7 +1,7 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ThemeProvider } from '@/components/providers/ThemeProvider'
+import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import { Navbar } from '@/components/Navbar'
 
@@ -10,6 +10,7 @@ import Index from './pages/Index'
 import Dashboard from './pages/Dashboard'
 import Exchange from './pages/Exchange'
 import GreenInvestments from './pages/GreenInvestments'
+import EarningActivities from './pages/EarningActivities'
 import EnhancedLeaderboard from './pages/EnhancedLeaderboard'
 import GreenImpactDashboard from './pages/GreenImpactDashboard'
 import EcoAvatar from './pages/EcoAvatar'
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/exchange" element={<Exchange />} />
                 <Route path="/green-investments" element={<GreenInvestments />} />
+                <Route path="/earning-activities" element={<EarningActivities />} />
                 <Route path="/enhanced-leaderboard" element={<EnhancedLeaderboard />} />
                 <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
                 <Route path="/eco-avatar" element={<EcoAvatar />} />
