@@ -20,7 +20,7 @@ import { AnalyticsDashboard } from './AnalyticsDashboard'
 import { AutoIssueResolver } from '../AutoIssueResolver'
 import AdminControlSystem from '../AdminControlSystem'
 import { ComprehensiveSystemIntegration } from '../ComprehensiveSystemIntegration'
-import { StorageManagement } from '../../pages/StorageManagement'
+import StorageManagement from '../../pages/StorageManagement'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
