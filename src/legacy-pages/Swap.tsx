@@ -1,5 +1,5 @@
 
-import { Navbar } from '@/components/Navbar'
+import Navbar from '@/components/Navbar'
 import { PureInvestmentExchange } from '@/components/exchange/PureInvestmentExchange'
 import { EnhancedSwapSystem } from '@/components/EnhancedSwapSystem'
 import { LiveTradingCharts } from '@/components/LiveTradingCharts'
