@@ -1,176 +1,128 @@
 
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, CandlestickChart } from 'recharts'
-import { TrendingUp, BarChart3, Activity, Zap } from 'lucide-react'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { TrendingUp, TrendingDown, Activity } from 'lucide-react';
 
-interface TradingData {
-  timestamp: string
-  price: number
-  volume: number
-  high: number
-  low: number
-  open: number
-  close: number
-}
+const mockTradingData = [
+  { time: '09:00', price: 150, volume: 1200, high: 155, low: 148, open: 150, close: 152 },
+  { time: '10:00', price: 152, volume: 1800, high: 158, low: 150, open: 152, close: 156 },
+  { time: '11:00', price: 156, volume: 2200, high: 162, low: 154, open: 156, close: 160 },
+  { time: '12:00', price: 160, volume: 1900, high: 165, low: 158, open: 160, close: 163 },
+  { time: '13:00', price: 163, volume: 2400, high: 168, low: 161, open: 163, close: 166 },
+  { time: '14:00', price: 166, volume: 2100, high: 170, low: 164, open: 166, close: 168 },
+  { time: '15:00', price: 168, volume: 1700, high: 172, low: 166, open: 168, close: 170 },
+  { time: '16:00', price: 170, volume: 1500, high: 174, low: 168, open: 170, close: 172 }
+];
 
 export function AdvancedTradingCharts() {
-  const [tradingData, setTradingData] = useState<TradingData[]>([])
-  const [selectedTimeframe, setSelectedTimeframe] = useState('1h')
-  const [activeIndicators, setActiveIndicators] = useState(['RSI', 'MACD'])
-
-  useEffect(() => {
-    // Generate sample trading data with technical indicators
-    const generateTradingData = () => {
-      const data = []
-      const now = Date.now()
-      
-      for (let i = 0; i < 100; i++) {
-        const timestamp = new Date(now - (100 - i) * 60000).toISOString()
-        const basePrice = 2500 + Math.sin(i * 0.1) * 200 + Math.random() * 50
-        
-        data.push({
-          timestamp,
-          price: basePrice,
-          volume: Math.random() * 1000000 + 500000,
-          high: basePrice + Math.random() * 20,
-          low: basePrice - Math.random() * 20,
-          open: basePrice + (Math.random() - 0.5) * 10,
-          close: basePrice + (Math.random() - 0.5) * 15
-        })
-      }
-      
-      setTradingData(data)
-    }
-
-    generateTradingData()
-    const interval = setInterval(generateTradingData, 5000)
-
-    return () => clearInterval(interval)
-  }, [selectedTimeframe])
-
-  const timeframes = ['5m', '15m', '1h', '4h', '1d']
-  const indicators = ['RSI', 'MACD', 'SMA', 'EMA', 'Bollinger']
-
   return (
-    <Card className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/30">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-blue-400">
-          <BarChart3 className="h-6 w-6" />
-          Advanced Trading Charts
-          <Badge className="bg-green-600 animate-pulse">LIVE</Badge>
-        </CardTitle>
-        <div className="flex gap-2 flex-wrap">
-          {timeframes.map(tf => (
-            <Button
-              key={tf}
-              variant={selectedTimeframe === tf ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedTimeframe(tf)}
-              className={selectedTimeframe === tf ? "bg-blue-600" : "border-blue-500/30"}
-            >
-              {tf}
-            </Button>
-          ))}
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="h-96">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={tradingData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-              <XAxis 
-                dataKey="timestamp" 
-                tickFormatter={(value) => new Date(value).toLocaleTimeString()}
-                stroke="#9CA3AF"
-              />
-              <YAxis stroke="#9CA3AF" />
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <Card className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-500/30">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-blue-400">
+            <TrendingUp className="h-5 w-5" />
+            Price Chart
+            <Badge className="bg-green-600 animate-pulse">LIVE</Badge>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={mockTradingData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+              <XAxis dataKey="time" stroke="rgba(255,255,255,0.7)" />
+              <YAxis stroke="rgba(255,255,255,0.7)" />
               <Tooltip 
                 contentStyle={{ 
-                  backgroundColor: '#1F2937', 
-                  border: '1px solid #374151',
+                  backgroundColor: 'rgba(0,0,0,0.8)', 
+                  border: '1px solid rgba(59,130,246,0.5)',
                   borderRadius: '8px'
-                }}
-                labelStyle={{ color: '#F3F4F6' }}
+                }} 
               />
+              <Legend />
               <Line 
                 type="monotone" 
                 dataKey="price" 
-                stroke="#3B82F6" 
+                stroke="#3b82f6" 
                 strokeWidth={2}
-                dot={false}
+                dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
+              />
+              <Line 
+                type="monotone" 
+                dataKey="high" 
+                stroke="#10b981" 
+                strokeWidth={1}
+                strokeDasharray="5 5"
+              />
+              <Line 
+                type="monotone" 
+                dataKey="low" 
+                stroke="#ef4444" 
+                strokeWidth={1}
+                strokeDasharray="5 5"
               />
             </LineChart>
           </ResponsiveContainer>
-        </div>
+        </CardContent>
+      </Card>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-green-900/30 p-3 rounded-lg">
-            <div className="flex items-center gap-2 mb-2">
-              <TrendingUp className="h-4 w-4 text-green-400" />
-              <span className="text-sm text-green-400">Current Price</span>
+      <Card className="bg-gradient-to-br from-green-900/20 to-blue-900/20 border-green-500/30">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-green-400">
+            <Activity className="h-5 w-5" />
+            Volume Analysis
+            <Badge className="bg-blue-600">REAL-TIME</Badge>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={mockTradingData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+              <XAxis dataKey="time" stroke="rgba(255,255,255,0.7)" />
+              <YAxis stroke="rgba(255,255,255,0.7)" />
+              <Tooltip 
+                contentStyle={{ 
+                  backgroundColor: 'rgba(0,0,0,0.8)', 
+                  border: '1px solid rgba(16,185,129,0.5)',
+                  borderRadius: '8px'
+                }} 
+              />
+              <Legend />
+              <Bar dataKey="volume" fill="#10b981" />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
+
+      <Card className="lg:col-span-2 bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/30">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-purple-400">
+            <TrendingDown className="h-5 w-5" />
+            Technical Indicators
+            <Badge className="bg-purple-600">ADVANCED</Badge>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="text-center p-4 bg-green-900/30 rounded-lg">
+              <div className="text-2xl font-bold text-green-400">+12.5%</div>
+              <div className="text-sm text-muted-foreground">24h Change</div>
             </div>
-            <div className="text-xl font-bold text-white">
-              ${tradingData[tradingData.length - 1]?.price?.toFixed(2) || '0'}
+            <div className="text-center p-4 bg-blue-900/30 rounded-lg">
+              <div className="text-2xl font-bold text-blue-400">$172.00</div>
+              <div className="text-sm text-muted-foreground">Current Price</div>
+            </div>
+            <div className="text-center p-4 bg-yellow-900/30 rounded-lg">
+              <div className="text-2xl font-bold text-yellow-400">2.4M</div>
+              <div className="text-sm text-muted-foreground">Volume</div>
+            </div>
+            <div className="text-center p-4 bg-purple-900/30 rounded-lg">
+              <div className="text-2xl font-bold text-purple-400">RSI: 68</div>
+              <div className="text-sm text-muted-foreground">Momentum</div>
             </div>
           </div>
-
-          <div className="bg-blue-900/30 p-3 rounded-lg">
-            <div className="flex items-center gap-2 mb-2">
-              <Activity className="h-4 w-4 text-blue-400" />
-              <span className="text-sm text-blue-400">24h Volume</span>
-            </div>
-            <div className="text-xl font-bold text-white">
-              {(tradingData[tradingData.length - 1]?.volume || 0).toLocaleString()}
-            </div>
-          </div>
-
-          <div className="bg-purple-900/30 p-3 rounded-lg">
-            <div className="flex items-center gap-2 mb-2">
-              <Zap className="h-4 w-4 text-purple-400" />
-              <span className="text-sm text-purple-400">RSI</span>
-            </div>
-            <div className="text-xl font-bold text-white">
-              {Math.floor(Math.random() * 40 + 30)}
-            </div>
-          </div>
-
-          <div className="bg-yellow-900/30 p-3 rounded-lg">
-            <div className="flex items-center gap-2 mb-2">
-              <BarChart3 className="h-4 w-4 text-yellow-400" />
-              <span className="text-sm text-yellow-400">MACD</span>
-            </div>
-            <div className="text-xl font-bold text-white">
-              {(Math.random() - 0.5).toFixed(3)}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex gap-2 flex-wrap">
-          <span className="text-sm text-muted-foreground">Technical Indicators:</span>
-          {indicators.map(indicator => (
-            <Badge 
-              key={indicator}
-              className={`cursor-pointer ${
-                activeIndicators.includes(indicator) 
-                  ? 'bg-blue-600' 
-                  : 'bg-gray-600 hover:bg-gray-500'
-              }`}
-              onClick={() => {
-                setActiveIndicators(prev => 
-                  prev.includes(indicator) 
-                    ? prev.filter(i => i !== indicator)
-                    : [...prev, indicator]
-                )
-              }}
-            >
-              {indicator}
-            </Badge>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
-  )
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
