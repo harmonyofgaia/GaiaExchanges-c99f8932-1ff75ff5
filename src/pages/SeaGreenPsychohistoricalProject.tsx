@@ -1,4 +1,4 @@
-import { Navbar } from '@/components/Navbar'
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
@@ -34,7 +34,6 @@ import { PsychohistoricalDocumentation } from '@/components/psychohistorical/Psy
 export default function SeaGreenPsychohistoricalProject() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
-      <Navbar />
       <div className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="text-center mb-8">
