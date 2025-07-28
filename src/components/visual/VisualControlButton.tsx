@@ -10,15 +10,19 @@ import {
   DropdownMenuLabel
 } from "@/components/ui/dropdown-menu"
 import { Badge } from '@/components/ui/badge'
-import { Settings, Brush, Lock, Unlock, Palette, LayoutDashboard, Zap, Eye } from 'lucide-react'
+import { Settings, Brush, Lock, Unlock, Palette, LayoutDashboard, Zap, Eye, Menu, Shield } from 'lucide-react'
 import { useLock } from '@/components/providers/ThemeProvider'
+import { useMenuControl } from '@/components/menu/MenuControlProvider'
 import { toast } from 'sonner'
 import { EnhancedVisualControls } from './EnhancedVisualControls'
+import { MenuControlDialog } from '@/components/menu/MenuControlDialog'
 
 export function VisualControlButton() {
   const { isLocked, toggleLock } = useLock()
+  const { isMenuLocked } = useMenuControl()
   const [isOpen, setIsOpen] = useState(false)
   const [showFullMenu, setShowFullMenu] = useState(false)
+  const [showMenuControl, setShowMenuControl] = useState(false)
 
   const handleLockToggle = () => {
     toggleLock()
@@ -42,6 +46,11 @@ export function VisualControlButton() {
     setIsOpen(false)
   }
 
+  const handleOpenMenuControl = () => {
+    setShowMenuControl(true)
+    setIsOpen(false)
+  }
+
   return (
     <>
       <div className="fixed bottom-6 left-6 z-50">
@@ -50,7 +59,7 @@ export function VisualControlButton() {
             <Button
               size="lg"
               className="h-14 w-14 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 shadow-lg border-2 border-purple-400/30 backdrop-blur-sm"
-              title="Visual Controls"
+              title="Design & Menu Controls"
             >
               <Brush className="h-6 w-6" />
             </Button>
@@ -59,11 +68,32 @@ export function VisualControlButton() {
           <DropdownMenuContent 
             align="start" 
             side="top"
-            className="w-72 bg-background/95 border-primary/30 backdrop-blur-sm"
+            className="w-80 bg-background/95 border-primary/30 backdrop-blur-sm"
           >
             <DropdownMenuLabel className="text-primary font-semibold">
-              🎨 Visual Controls
+              🎨 Design & Menu Controls
             </DropdownMenuLabel>
+            
+            <DropdownMenuSeparator className="bg-primary/30" />
+            
+            {/* Menu Control System */}
+            <DropdownMenuItem 
+              onClick={handleOpenMenuControl}
+              className="text-orange-300 hover:text-orange-200 hover:bg-orange-500/10 cursor-pointer"
+            >
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-2">
+                  <Menu className="h-4 w-4" />
+                  <span>Advanced Menu Control</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Badge variant={isMenuLocked ? 'destructive' : 'secondary'} className="text-xs">
+                    {isMenuLocked ? 'Locked' : 'Unlocked'}
+                  </Badge>
+                  <Shield className="h-3 w-3" />
+                </div>
+              </div>
+            </DropdownMenuItem>
             
             <DropdownMenuSeparator className="bg-primary/30" />
             
@@ -75,7 +105,7 @@ export function VisualControlButton() {
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-2">
                   {isLocked ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
-                  <span>{isLocked ? 'Controls Locked' : 'Controls Unlocked'}</span>
+                  <span>{isLocked ? 'Visual Controls Locked' : 'Visual Controls Unlocked'}</span>
                 </div>
                 <Badge variant={isLocked ? 'destructive' : 'secondary'} className="text-xs">
                   {isLocked ? 'Protected' : 'Editable'}
@@ -176,6 +206,12 @@ export function VisualControlButton() {
           </div>
         </div>
       )}
+
+      {/* Menu Control Dialog */}
+      <MenuControlDialog 
+        open={showMenuControl} 
+        onOpenChange={setShowMenuControl} 
+      />
     </>
   )
 }

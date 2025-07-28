@@ -33,6 +33,7 @@ import {
   Mail,
   DollarSign
 } from 'lucide-react'
+import { useMenuControl } from '@/components/menu/MenuControlProvider'
 
 interface NavItem {
   name: string
@@ -42,8 +43,9 @@ interface NavItem {
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { isPageVisible } = useMenuControl()
 
-  const navItems = [
+  const allNavItems = [
     { name: 'Galaxy Home', path: '/', icon: Home },
     { name: 'Virtual World', path: '/virtual-world', icon: Globe },
     { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
@@ -65,6 +67,9 @@ export function Navbar() {
     { name: 'Pricing', path: '/pricing', icon: DollarSign },
     { name: '👑 Admin Portal', path: '/admin', icon: Crown }
   ]
+
+  // Filter navigation items based on visibility settings
+  const navItems = allNavItems.filter(item => isPageVisible(item.path))
 
   return (
     <nav className="bg-background/95 backdrop-blur-sm border-b border-primary/30 sticky top-0 z-50">
@@ -93,30 +98,32 @@ export function Navbar() {
             })}
             
             {/* More menu for additional items */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
-                  <MoreHorizontal className="h-4 w-4 mr-1" />
-                  More
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
-                {navItems.slice(8).map((item) => {
-                  const Icon = item.icon
-                  return (
-                    <DropdownMenuItem key={item.path} asChild>
-                      <Link
-                        to={item.path}
-                        className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
-                      >
-                        <Icon className="h-4 w-4" />
-                        <span>{item.name}</span>
-                      </Link>
-                    </DropdownMenuItem>
-                  )
-                })}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {navItems.length > 8 && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
+                    <MoreHorizontal className="h-4 w-4 mr-1" />
+                    More
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
+                  {navItems.slice(8).map((item) => {
+                    const Icon = item.icon
+                    return (
+                      <DropdownMenuItem key={item.path} asChild>
+                        <Link
+                          to={item.path}
+                          className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
+                        >
+                          <Icon className="h-4 w-4" />
+                          <span>{item.name}</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    )
+                  })}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </div>
 
           {/* Mobile menu button */}
