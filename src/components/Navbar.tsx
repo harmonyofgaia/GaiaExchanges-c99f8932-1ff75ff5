@@ -66,10 +66,6 @@ export function Navbar() {
     { name: '👑 Admin Portal', path: '/admin', icon: Crown }
   ]
 
-  // Split items for desktop view - show first 7 directly, rest in dropdown
-  const directItems = navItems.slice(0, 7)
-  const dropdownItems = navItems.slice(7)
-
   return (
     <nav className="bg-background/95 backdrop-blur-sm border-b border-primary/30 sticky top-0 z-50">
       <div className="container mx-auto px-4">
@@ -80,9 +76,9 @@ export function Navbar() {
             <span className="font-bold text-primary text-xl">GAiA Universe</span>
           </Link>
 
-          {/* Desktop Navigation - Show first 7 items directly */}
+          {/* Desktop Navigation - Show first 8 items directly */}
           <div className="hidden lg:flex items-center space-x-1">
-            {directItems.map((item) => {
+            {navItems.slice(0, 8).map((item) => {
               const Icon = item.icon
               return (
                 <Link
@@ -97,32 +93,30 @@ export function Navbar() {
             })}
             
             {/* More menu for remaining items */}
-            {dropdownItems.length > 0 && (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
-                    <MoreHorizontal className="h-4 w-4 mr-1" />
-                    More
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
-                  {dropdownItems.map((item) => {
-                    const Icon = item.icon
-                    return (
-                      <DropdownMenuItem key={item.path} asChild>
-                        <Link
-                          to={item.path}
-                          className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
-                        >
-                          <Icon className="h-4 w-4" />
-                          <span>{item.name}</span>
-                        </Link>
-                      </DropdownMenuItem>
-                    )
-                  })}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
+                  <MoreHorizontal className="h-4 w-4 mr-1" />
+                  More
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
+                {navItems.slice(8).map((item) => {
+                  const Icon = item.icon
+                  return (
+                    <DropdownMenuItem key={item.path} asChild>
+                      <Link
+                        to={item.path}
+                        className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
+                      >
+                        <Icon className="h-4 w-4" />
+                        <span>{item.name}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )
+                })}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Mobile menu button */}
