@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Zap, Users, Globe, Leaf, Star, Trophy, Shield } from 'lucide-react'
-import { Navbar } from '@/components/Navbar'
 import { GaiaLogo } from '@/components/GaiaLogo'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
@@ -66,8 +65,6 @@ export default function Home() {
           autoGenerate: true
         }}
       />
-      
-      <Navbar />
       
       {/* Control Buttons */}
       <VisualControlButton />
