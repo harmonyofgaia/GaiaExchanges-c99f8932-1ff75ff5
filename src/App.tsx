@@ -13,7 +13,6 @@ const Home = lazy(() => import('./pages/Home'))
 const LiveTracking = lazy(() => import('./pages/LiveTracking'))
 const Gaming = lazy(() => import('./pages/Gaming'))
 const Wallet = lazy(() => import('./pages/Wallet'))
-const Markets = lazy(() => import('./pages/Markets'))
 const Marketplace = lazy(() => import('./pages/Marketplace'))
 const VideoExchange = lazy(() => import('./pages/VideoExchange'))
 const StreamingShows = lazy(() => import('./pages/StreamingShows'))
@@ -66,7 +65,6 @@ function App() {
               <Route path="/exchange" element={<Exchange />} />
               <Route path="/marketplace" element={<Marketplace />} />
               <Route path="/wallet" element={<Wallet />} />
-              <Route path="/markets" element={<Markets />} />
               <Route path="/video-exchange" element={<VideoExchange />} />
               <Route path="/streaming-shows" element={<StreamingShows />} />
               <Route path="/gaia-bike-ecosystem" element={<GaiaBikeEcosystem />} />

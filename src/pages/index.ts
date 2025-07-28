@@ -2,7 +2,6 @@
 export { default as Index } from './Index';
 export { default as About } from './About';
 export { default as Wallet } from './Wallet';
-export { default as Markets } from './Markets';
 export { default as SmartContracts } from './SmartContracts';
 export { default as SystemStatus } from './SystemStatus';
 export { default as ComprehensiveStatus } from './ComprehensiveStatus';

@@ -4,11 +4,10 @@ import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import HoverSidebar from '@/components/HoverSidebar'
 import { GameNavigationHub } from '@/components/gaming/GameNavigationHub'
-import { GaiaGameHub } from '@/components/GaiaGameHub'
-import { EnhancedGamingModes } from '@/components/EnhancedGamingModes'
+import { GaiaGameHub } from '@/components/gaming/GaiaGameHub'
+import { EnhancedGamingModes } from '@/components/gaming/EnhancedGamingModes'
 import { Link } from 'react-router-dom'
 import { Gamepad2, Crown, Users, Star, Building2, Target, Sparkles, Rocket } from 'lucide-react'
-import { StorageUpgradePanel } from '@/components/storage/StorageUpgradePanel'
 
 const Gaming = () => {
   const featuredGames = [
@@ -92,7 +91,7 @@ const Gaming = () => {
 
           {/* Unified Gaming Tabs */}
           <Tabs defaultValue="hub" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 bg-black/20 mb-8">
+            <TabsList className="grid w-full grid-cols-3 bg-black/20 mb-8">
               <TabsTrigger value="hub" className="data-[state=active]:bg-purple-600">
                 <Crown className="h-4 w-4 mr-2" />
                 🎮 Game Hub
@@ -104,10 +103,6 @@ const Gaming = () => {
               <TabsTrigger value="enhanced" className="data-[state=active]:bg-green-600">
                 <Sparkles className="h-4 w-4 mr-2" />
                 🔥 Enhanced Modes
-              </TabsTrigger>
-              <TabsTrigger value="storage" className="data-[state=active]:bg-orange-600">
-                <Building2 className="h-4 w-4 mr-2" />
-                💾 Storage Hub
               </TabsTrigger>
             </TabsList>
 
@@ -121,10 +116,6 @@ const Gaming = () => {
 
             <TabsContent value="enhanced" className="space-y-6">
               <EnhancedGamingModes />
-            </TabsContent>
-
-            <TabsContent value="storage" className="space-y-6">
-              <StorageUpgradePanel />
             </TabsContent>
           </Tabs>
 
