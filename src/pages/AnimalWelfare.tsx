@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Heart, Paw, Shield } from 'lucide-react'
+import { Heart, Shield, PawPrint } from 'lucide-react'
 
 export default function AnimalWelfare() {
   return (
@@ -56,7 +56,7 @@ export default function AnimalWelfare() {
           <Card className="border-purple-500/50 bg-purple-900/20">
             <CardHeader>
               <CardTitle className="text-purple-400 flex items-center gap-2">
-                <Paw className="h-6 w-6" />
+                <PawPrint className="h-6 w-6" />
                 Adoption Network
               </CardTitle>
             </CardHeader>
