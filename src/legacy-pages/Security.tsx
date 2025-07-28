@@ -1,5 +1,5 @@
 
-import Navbar from '@/components/Navbar'
+import { Navbar } from '@/components/Navbar'
 import { SecurityDashboard } from '@/components/admin/security/SecurityDashboard'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 

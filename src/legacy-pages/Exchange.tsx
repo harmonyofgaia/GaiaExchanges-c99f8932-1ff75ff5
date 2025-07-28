@@ -1,4 +1,5 @@
-import Navbar from '@/components/Navbar'
+
+import { Navbar } from '@/components/Navbar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowLeftRight, TrendingUp, Shield } from 'lucide-react'

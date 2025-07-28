@@ -1,5 +1,5 @@
 
-import Navbar from '@/components/Navbar'
+import { Navbar } from '@/components/Navbar'
 import { DeploymentAutomation } from '@/components/deployment/DeploymentAutomation'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 

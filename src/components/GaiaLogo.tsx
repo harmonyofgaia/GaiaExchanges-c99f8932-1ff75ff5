@@ -6,15 +6,13 @@ interface GaiaLogoProps {
   variant?: 'default' | 'matrix' | 'glow'
   className?: string
   showText?: boolean
-  animated?: boolean
 }
 
 export function GaiaLogo({ 
   size = 'md', 
   variant = 'default', 
   className = '', 
-  showText = true,
-  animated = false
+  showText = true 
 }: GaiaLogoProps) {
   const sizeClasses = {
     sm: 'w-8 h-8 text-sm',
@@ -29,13 +27,11 @@ export function GaiaLogo({
     glow: 'text-green-400 drop-shadow-[0_0_15px_rgba(34,197,94,0.8)]'
   }
 
-  const animationClass = animated ? 'animate-spin' : ''
-
   return (
     <div className={`${sizeClasses[size]} ${variantClasses[variant]} ${className} flex items-center gap-3`}>
       <div className="relative">
         {/* Main Logo Symbol */}
-        <div className={`text-4xl font-bold relative ${animationClass}`}>
+        <div className="text-4xl font-bold relative">
           🌍
           {variant === 'matrix' && (
             <div className="absolute inset-0 text-green-300 animate-ping opacity-30">

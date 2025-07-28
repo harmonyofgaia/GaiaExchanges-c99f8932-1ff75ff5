@@ -1,9 +1,9 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { Leaf, TreePine, Droplets, Wind, Target, Users } from 'lucide-react'
-import Navbar from '@/components/Navbar'
+import { Leaf, TreePine, Droplets, Wind, Globe } from 'lucide-react'
+import { Navbar } from '@/components/Navbar'
 
 export default function GreenImpactDashboard() {
   return (
@@ -15,40 +15,70 @@ export default function GreenImpactDashboard() {
             🌱 Green Impact Dashboard
           </h1>
           <p className="text-xl text-muted-foreground mt-2">
-            Track your environmental impact and contribute to global sustainability
+            Master Plan v7: Enhanced Environmental Impact Tracking with AI Insights
           </p>
+          <div className="flex gap-4 mt-4">
+            <Badge variant="outline" className="border-green-500/50 text-green-400">
+              <Leaf className="h-3 w-3 mr-1" />
+              AI Powered
+            </Badge>
+            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
+              <Globe className="h-3 w-3 mr-1" />
+              Global Metrics
+            </Badge>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
-            <CardContent className="p-6 text-center">
-              <Leaf className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">127 kg</div>
-              <div className="text-muted-foreground">Carbon Offset</div>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-green-400">Carbon Offset</CardTitle>
+              <TreePine className="h-4 w-4 text-green-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">12.4K tons</div>
+              <p className="text-xs text-muted-foreground">
+                +15% from last month
+              </p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
-            <CardContent className="p-6 text-center">
-              <TreePine className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">23</div>
-              <div className="text-muted-foreground">Trees Planted</div>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-blue-400">Water Saved</CardTitle>
+              <Droplets className="h-4 w-4 text-blue-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">2.1M L</div>
+              <p className="text-xs text-muted-foreground">
+                +22% from last month
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-yellow-900/20 to-black/50 border-yellow-500/20">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-yellow-400">Clean Energy</CardTitle>
+              <Wind className="h-4 w-4 text-yellow-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">847 MWh</div>
+              <p className="text-xs text-muted-foreground">
+                +18% from last month
+              </p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-purple-900/20 to-black/50 border-purple-500/20">
-            <CardContent className="p-6 text-center">
-              <Droplets className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">45 L</div>
-              <div className="text-muted-foreground">Ocean Cleanup</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-orange-900/20 to-black/50 border-orange-500/20">
-            <CardContent className="p-6 text-center">
-              <Wind className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">92%</div>
-              <div className="text-muted-foreground">Air Quality</div>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-purple-400">Biodiversity Score</CardTitle>
+              <Globe className="h-4 w-4 text-purple-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-white">8.7/10</div>
+              <p className="text-xs text-muted-foreground">
+                +0.3 from last month
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -56,25 +86,30 @@ export default function GreenImpactDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
             <CardHeader>
-              <CardTitle className="text-green-400">Personal Impact</CardTitle>
+              <CardTitle className="text-green-400">Global Impact Progress</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-4">
-                  <Leaf className="h-5 w-5 text-green-400" />
-                  <div>
-                    <div className="text-sm font-medium text-white">Carbon Footprint</div>
-                    <Progress value={65} className="h-2 w-48" />
-                    <div className="text-xs text-muted-foreground">65% offset</div>
+              <div className="space-y-6">
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-white">Reforestation Goal</span>
+                    <span className="text-green-400">73%</span>
                   </div>
+                  <Progress value={73} className="h-2" />
                 </div>
-                <div className="flex items-center space-x-4">
-                  <TreePine className="h-5 w-5 text-blue-400" />
-                  <div>
-                    <div className="text-sm font-medium text-white">Trees Planted</div>
-                    <Progress value={30} className="h-2 w-48" />
-                    <div className="text-xs text-muted-foreground">30 trees</div>
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-white">Ocean Cleanup</span>
+                    <span className="text-blue-400">45%</span>
                   </div>
+                  <Progress value={45} className="h-2" />
+                </div>
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-white">Renewable Energy</span>
+                    <span className="text-yellow-400">89%</span>
+                  </div>
+                  <Progress value={89} className="h-2" />
                 </div>
               </div>
             </CardContent>
@@ -82,21 +117,21 @@ export default function GreenImpactDashboard() {
 
           <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
             <CardHeader>
-              <CardTitle className="text-blue-400">Community Contributions</CardTitle>
+              <CardTitle className="text-blue-400">AI Environmental Predictions</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Active Projects</span>
-                  <span className="text-white font-bold">47</span>
+                <div className="p-3 bg-green-900/20 rounded-lg border border-green-500/20">
+                  <div className="text-sm font-medium text-green-400 mb-1">Forest Recovery</div>
+                  <div className="text-xs text-muted-foreground">Predicted 25% improvement in next 6 months</div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Participants</span>
-                  <span className="text-white font-bold">1,247</span>
+                <div className="p-3 bg-blue-900/20 rounded-lg border border-blue-500/20">
+                  <div className="text-sm font-medium text-blue-400 mb-1">Water Quality</div>
+                  <div className="text-xs text-muted-foreground">Marine ecosystems showing 15% recovery</div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Total Impact</span>
-                  <span className="text-white font-bold">24,567 tons</span>
+                <div className="p-3 bg-purple-900/20 rounded-lg border border-purple-500/20">
+                  <div className="text-sm font-medium text-purple-400 mb-1">Biodiversity Index</div>
+                  <div className="text-xs text-muted-foreground">Species diversity up 8% in protected areas</div>
                 </div>
               </div>
             </CardContent>

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Globe, Heart, Zap, Users, Shield, Gamepad2, Wallet } from 'lucide-react'
 import { GAIA_TOKEN } from '@/constants/gaia'
 import { WalletConnection } from '@/components/WalletConnection'
-import Navbar from '@/components/Navbar'
+import { Navbar } from '@/components/Navbar'
 import { setHomepageVisited } from '@/utils/authAccessControl'
 
 const Index = () => {

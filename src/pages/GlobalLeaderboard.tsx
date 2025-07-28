@@ -1,5 +1,5 @@
 
-import Navbar from '@/components/Navbar'
+import { Navbar } from '@/components/Navbar'
 import { GlobalLeaderboard } from '@/components/leaderboard/GlobalLeaderboard'
 
 export default function GlobalLeaderboardPage() {

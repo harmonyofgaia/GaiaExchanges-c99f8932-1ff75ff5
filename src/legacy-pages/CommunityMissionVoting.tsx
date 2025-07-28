@@ -1,415 +1,748 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { 
   Vote, 
+  Trophy, 
+  Target, 
   Users, 
-  TrendingUp, 
-  Heart, 
-  Leaf, 
-  Droplets,
-  Sun,
-  TreePine,
-  Fish,
-  Award,
+  TrendingUp,
   Clock,
-  Target,
   CheckCircle,
-  AlertCircle,
-  BarChart3,
+  MapPin,
+  Coins,
+  Star,
+  Award,
+  Zap,
   Globe,
+  TreePine,
+  Heart,
   Shield,
-  Zap
+  Eye,
+  ThumbsUp,
+  ThumbsDown,
+  BarChart3
 } from 'lucide-react'
 import { toast } from 'sonner'
-import { cn } from '@/lib/utils'
-import Navbar from '@/components/Navbar'
+import { Navbar } from '@/components/Navbar'
 
 interface Mission {
-  id: number
+  id: string
   title: string
   description: string
-  votes: number
-  status: 'active' | 'completed' | 'pending'
-  category: 'Environment' | 'Community' | 'Technology' | 'Education'
-  startDate: string
-  endDate: string
-  targetCompletion: number
-  currentProgress: number
-  impactScore: number
-  budget: number
-  teamMembers: number
-  successRate: number
+  category: 'conservation' | 'renewable_energy' | 'waste_reduction' | 'education' | 'transportation'
+  location: string
+  target_amount: number
+  current_funding: number
+  votes_for: number
+  votes_against: number
+  total_voters: number
+  deadline: Date
+  status: 'voting' | 'approved' | 'funded' | 'active' | 'completed'
+  reward_pool: number
+  impact_metrics: {
+    carbon_reduction: number
+    trees_planted: number
+    people_impacted: number
+  }
+  created_by: string
+  created_date: Date
+  user_vote?: 'for' | 'against'
 }
 
-const missionsData: Mission[] = [
-  {
-    id: 1,
-    title: 'Clean Water Initiative',
-    description: 'Provide clean water access to rural communities.',
-    votes: 125,
-    status: 'active',
-    category: 'Environment',
-    startDate: '2024-01-15',
-    endDate: '2024-07-15',
-    targetCompletion: 10000,
-    currentProgress: 6800,
-    impactScore: 85,
-    budget: 75000,
-    teamMembers: 15,
-    successRate: 72
-  },
-  {
-    id: 2,
-    title: 'Education for All',
-    description: 'Improve educational resources in underserved schools.',
-    votes: 98,
-    status: 'active',
-    category: 'Education',
-    startDate: '2024-02-01',
-    endDate: '2024-08-01',
-    targetCompletion: 5000,
-    currentProgress: 3200,
-    impactScore: 92,
-    budget: 60000,
-    teamMembers: 12,
-    successRate: 88
-  },
-  {
-    id: 3,
-    title: 'Green Energy Transition',
-    description: 'Promote the use of renewable energy sources.',
-    votes: 156,
-    status: 'active',
-    category: 'Technology',
-    startDate: '2024-03-10',
-    endDate: '2024-09-10',
-    targetCompletion: 2000,
-    currentProgress: 1500,
-    impactScore: 78,
-    budget: 90000,
-    teamMembers: 18,
-    successRate: 65
-  },
-  {
-    id: 4,
-    title: 'Community Health Program',
-    description: 'Improve healthcare services in local communities.',
-    votes: 85,
-    status: 'active',
-    category: 'Community',
-    startDate: '2024-04-01',
-    endDate: '2024-10-01',
-    targetCompletion: 8000,
-    currentProgress: 5500,
-    impactScore: 80,
-    budget: 70000,
-    teamMembers: 14,
-    successRate: 78
-  },
-  {
-    id: 5,
-    title: 'Reforestation Project',
-    description: 'Plant trees to combat deforestation and promote biodiversity.',
-    votes: 180,
-    status: 'active',
-    category: 'Environment',
-    startDate: '2024-05-01',
-    endDate: '2024-11-01',
-    targetCompletion: 15000,
-    currentProgress: 11000,
-    impactScore: 95,
-    budget: 80000,
-    teamMembers: 16,
-    successRate: 90
-  },
-  {
-    id: 6,
-    title: 'Digital Literacy Program',
-    description: 'Provide digital skills training to bridge the digital divide.',
-    votes: 110,
-    status: 'active',
-    category: 'Education',
-    startDate: '2024-06-15',
-    endDate: '2024-12-15',
-    targetCompletion: 6000,
-    currentProgress: 4000,
-    impactScore: 88,
-    budget: 65000,
-    teamMembers: 13,
-    successRate: 82
-  },
-  {
-    id: 7,
-    title: 'Sustainable Agriculture Initiative',
-    description: 'Promote sustainable farming practices for food security.',
-    votes: 140,
-    status: 'active',
-    category: 'Technology',
-    startDate: '2024-07-01',
-    endDate: '2025-01-01',
-    targetCompletion: 1000,
-    currentProgress: 750,
-    impactScore: 82,
-    budget: 85000,
-    teamMembers: 17,
-    successRate: 75
-  },
-  {
-    id: 8,
-    title: 'Mental Health Support',
-    description: 'Offer mental health services and support to those in need.',
-    votes: 92,
-    status: 'active',
-    category: 'Community',
-    startDate: '2024-08-01',
-    endDate: '2025-02-01',
-    targetCompletion: 4000,
-    currentProgress: 2800,
-    impactScore: 75,
-    budget: 72000,
-    teamMembers: 15,
-    successRate: 70
-  },
-  {
-    id: 9,
-    title: 'Ocean Cleanup Campaign',
-    description: 'Remove plastic waste from oceans and protect marine life.',
-    votes: 165,
-    status: 'active',
-    category: 'Environment',
-    startDate: '2024-09-15',
-    endDate: '2025-03-15',
-    targetCompletion: 12000,
-    currentProgress: 9000,
-    impactScore: 90,
-    budget: 78000,
-    teamMembers: 16,
-    successRate: 85
-  },
-  {
-    id: 10,
-    title: 'Skills Development Program',
-    description: 'Provide vocational training and skills development opportunities.',
-    votes: 105,
-    status: 'active',
-    category: 'Education',
-    startDate: '2024-10-01',
-    endDate: '2025-04-01',
-    targetCompletion: 5500,
-    currentProgress: 3800,
-    impactScore: 85,
-    budget: 62000,
-    teamMembers: 13,
-    successRate: 80
-  }
-]
+interface LeaderboardEntry {
+  id: string
+  username: string
+  avatar: string
+  eco_score: number
+  missions_completed: number
+  tokens_earned: number
+  votes_cast: number
+  rank: number
+  rank_change: number
+  badges: string[]
+  location: string
+  join_date: Date
+}
 
-const categories = ['Environment', 'Community', 'Technology', 'Education']
-const missionStatuses = ['active', 'completed', 'pending']
+interface CommunityStats {
+  total_missions: number
+  active_missions: number
+  completed_missions: number
+  total_funding: number
+  community_members: number
+  votes_cast_today: number
+  environmental_impact: {
+    total_carbon_saved: number
+    total_trees_planted: number
+    total_people_impacted: number
+  }
+}
 
 export default function CommunityMissionVoting() {
-  const [missions, setMissions] = useState<Mission[]>(missionsData)
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const [selectedStatus, setSelectedStatus] = useState<string | null>(null)
-  const [searchTerm, setSearchTerm] = useState<string>('')
+  const [missions, setMissions] = useState<Mission[]>([])
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
+  const [communityStats, setCommunityStats] = useState<CommunityStats>({
+    total_missions: 0,
+    active_missions: 0,
+    completed_missions: 0,
+    total_funding: 0,
+    community_members: 0,
+    votes_cast_today: 0,
+    environmental_impact: {
+      total_carbon_saved: 0,
+      total_trees_planted: 0,
+      total_people_impacted: 0
+    }
+  })
 
-  const handleVote = (id: number) => {
-    setMissions(
-      missions.map((mission) =>
-        mission.id === id ? { ...mission, votes: mission.votes + 1 } : mission
-      )
-    )
-    toast.success('Vote submitted successfully!', {
-      description: 'Your vote helps shape our community initiatives.',
+  useEffect(() => {
+    initializeMissions()
+    initializeLeaderboard()
+    initializeCommunityStats()
+
+    // Real-time updates
+    const interval = setInterval(() => {
+      updateStats()
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const initializeMissions = () => {
+    const mockMissions: Mission[] = [
+      {
+        id: 'mission-1',
+        title: 'Urban Forest Initiative - Downtown District',
+        description: 'Plant 1,000 native trees in the downtown core to improve air quality and create green corridors for wildlife.',
+        category: 'conservation',
+        location: 'Downtown Metropolitan Area',
+        target_amount: 50000,
+        current_funding: 32500,
+        votes_for: 847,
+        votes_against: 123,
+        total_voters: 970,
+        deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        status: 'voting',
+        reward_pool: 15000,
+        impact_metrics: {
+          carbon_reduction: 25000,
+          trees_planted: 1000,
+          people_impacted: 50000
+        },
+        created_by: 'EcoWarrior2024',
+        created_date: new Date('2024-12-01'),
+        user_vote: undefined
+      },
+      {
+        id: 'mission-2',
+        title: 'Solar Power for Rural Schools',
+        description: 'Install solar panels on 25 rural schools to provide clean energy and reduce operational costs.',
+        category: 'renewable_energy',
+        location: 'Rural Education Districts',
+        target_amount: 125000,
+        current_funding: 89000,
+        votes_for: 1234,
+        votes_against: 56,
+        total_voters: 1290,
+        deadline: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
+        status: 'approved',
+        reward_pool: 25000,
+        impact_metrics: {
+          carbon_reduction: 45000,
+          trees_planted: 0,
+          people_impacted: 12500
+        },
+        created_by: 'SolarAdvocate',
+        created_date: new Date('2024-11-15'),
+        user_vote: 'for'
+      },
+      {
+        id: 'mission-3',
+        title: 'Ocean Plastic Cleanup Initiative',
+        description: 'Remove 10 tons of plastic waste from coastal areas and establish permanent cleanup stations.',
+        category: 'waste_reduction',
+        location: 'Pacific Coastal Regions',
+        target_amount: 75000,
+        current_funding: 75000,
+        votes_for: 2156,
+        votes_against: 89,
+        total_voters: 2245,
+        deadline: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+        status: 'active',
+        reward_pool: 20000,
+        impact_metrics: {
+          carbon_reduction: 8000,
+          trees_planted: 0,
+          people_impacted: 100000
+        },
+        created_by: 'OceanGuardian',
+        created_date: new Date('2024-10-20'),
+        user_vote: 'for'
+      },
+      {
+        id: 'mission-4',
+        title: 'Community Bike Share Network',
+        description: 'Establish bike sharing stations across the city to reduce carbon emissions from transportation.',
+        category: 'transportation',
+        location: 'Metropolitan Transit Network',
+        target_amount: 200000,
+        current_funding: 156000,
+        votes_for: 1876,
+        votes_against: 234,
+        total_voters: 2110,
+        deadline: new Date(Date.now() + 21 * 24 * 60 * 60 * 1000),
+        status: 'voting',
+        reward_pool: 35000,
+        impact_metrics: {
+          carbon_reduction: 120000,
+          trees_planted: 0,
+          people_impacted: 250000
+        },
+        created_by: 'GreenTransport',
+        created_date: new Date('2024-12-05'),
+        user_vote: undefined
+      }
+    ]
+    setMissions(mockMissions)
+  }
+
+  const initializeLeaderboard = () => {
+    const mockLeaderboard: LeaderboardEntry[] = [
+      {
+        id: 'user-1',
+        username: 'EcoChampion2024',
+        avatar: '🌟',
+        eco_score: 2850,
+        missions_completed: 15,
+        tokens_earned: 12500,
+        votes_cast: 89,
+        rank: 1,
+        rank_change: 0,
+        badges: ['Eco Warrior', 'Top Voter', 'Mission Leader'],
+        location: 'Global',
+        join_date: new Date('2024-01-15')
+      },
+      {
+        id: 'user-2',
+        username: 'GreenGuardian',
+        avatar: '🌱',
+        eco_score: 2720,
+        missions_completed: 12,
+        tokens_earned: 10800,
+        votes_cast: 76,
+        rank: 2,
+        rank_change: 1,
+        badges: ['Conservation Hero', 'Active Participant'],
+        location: 'North America',
+        join_date: new Date('2024-02-03')
+      },
+      {
+        id: 'user-3',
+        username: 'PlanetDefender',
+        avatar: '🌍',
+        eco_score: 2650,
+        missions_completed: 11,
+        tokens_earned: 9750,
+        votes_cast: 82,
+        rank: 3,
+        rank_change: -1,
+        badges: ['Environmental Advocate', 'Community Builder'],
+        location: 'Europe',
+        join_date: new Date('2024-01-28')
+      },
+      {
+        id: 'user-4',
+        username: 'SustainabilityPro',
+        avatar: '♻️',
+        eco_score: 2420,
+        missions_completed: 9,
+        tokens_earned: 8200,
+        votes_cast: 65,
+        rank: 4,
+        rank_change: 2,
+        badges: ['Sustainability Expert'],
+        location: 'Asia',
+        join_date: new Date('2024-03-10')
+      },
+      {
+        id: 'user-5',
+        username: 'NatureProtector',
+        avatar: '🦋',
+        eco_score: 2380,
+        missions_completed: 10,
+        tokens_earned: 7890,
+        votes_cast: 58,
+        rank: 5,
+        rank_change: -1,
+        badges: ['Wildlife Guardian', 'Dedicated Voter'],
+        location: 'South America',
+        join_date: new Date('2024-02-18')
+      }
+    ]
+    setLeaderboard(mockLeaderboard)
+  }
+
+  const initializeCommunityStats = () => {
+    setCommunityStats({
+      total_missions: 147,
+      active_missions: 23,
+      completed_missions: 89,
+      total_funding: 2450000,
+      community_members: 12847,
+      votes_cast_today: 342,
+      environmental_impact: {
+        total_carbon_saved: 1250000,
+        total_trees_planted: 45600,
+        total_people_impacted: 890000
+      }
     })
   }
 
-  const filteredMissions = missions.filter((mission) => {
-    const categoryMatch = selectedCategory
-      ? mission.category === selectedCategory
-      : true
-    const statusMatch = selectedStatus ? mission.status === selectedStatus : true
-    const searchMatch = mission.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
-    return categoryMatch && statusMatch && searchMatch
-  })
-
-  const handleCategoryFilter = (category: string | null) => {
-    setSelectedCategory(category)
+  const updateStats = () => {
+    setCommunityStats(prev => ({
+      ...prev,
+      votes_cast_today: prev.votes_cast_today + Math.floor(Math.random() * 3),
+      community_members: prev.community_members + Math.floor(Math.random() * 2),
+      total_funding: prev.total_funding + Math.floor(Math.random() * 1000)
+    }))
   }
 
-  const handleStatusFilter = (status: string | null) => {
-    setSelectedStatus(status)
+  const voteOnMission = (missionId: string, vote: 'for' | 'against') => {
+    setMissions(prev => prev.map(mission => {
+      if (mission.id === missionId) {
+        const updatedMission = { ...mission }
+        
+        // Remove previous vote if exists
+        if (mission.user_vote === 'for') {
+          updatedMission.votes_for -= 1
+        } else if (mission.user_vote === 'against') {
+          updatedMission.votes_against -= 1
+        } else {
+          updatedMission.total_voters += 1
+        }
+
+        // Add new vote
+        if (vote === 'for') {
+          updatedMission.votes_for += 1
+        } else {
+          updatedMission.votes_against += 1
+        }
+
+        updatedMission.user_vote = vote
+        return updatedMission
+      }
+      return mission
+    }))
+
+    const mission = missions.find(m => m.id === missionId)
+    toast.success(`Vote recorded!`, {
+      description: `You voted ${vote} for "${mission?.title}"`,
+      duration: 3000
+    })
   }
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value)
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'conservation': return <TreePine className="h-4 w-4" />
+      case 'renewable_energy': return <Zap className="h-4 w-4" />
+      case 'waste_reduction': return <Shield className="h-4 w-4" />
+      case 'education': return <Star className="h-4 w-4" />
+      case 'transportation': return <Globe className="h-4 w-4" />
+      default: return <Target className="h-4 w-4" />
+    }
+  }
+
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case 'conservation': return 'border-green-500/50 text-green-400'
+      case 'renewable_energy': return 'border-yellow-500/50 text-yellow-400'
+      case 'waste_reduction': return 'border-blue-500/50 text-blue-400'
+      case 'education': return 'border-purple-500/50 text-purple-400'
+      case 'transportation': return 'border-cyan-500/50 text-cyan-400'
+      default: return 'border-gray-500/50 text-gray-400'
+    }
+  }
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'voting': return 'border-yellow-500/50 text-yellow-400'
+      case 'approved': return 'border-green-500/50 text-green-400'
+      case 'funded': return 'border-blue-500/50 text-blue-400'
+      case 'active': return 'border-purple-500/50 text-purple-400'
+      case 'completed': return 'border-cyan-500/50 text-cyan-400'
+      default: return 'border-gray-500/50 text-gray-400'
+    }
+  }
+
+  const getRankChangeIcon = (change: number) => {
+    if (change > 0) return <TrendingUp className="h-3 w-3 text-green-400" />
+    if (change < 0) return <TrendingUp className="h-3 w-3 text-red-400 rotate-180" />
+    return <span className="w-3 h-3 text-gray-400">-</span>
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
+    <div className="min-h-screen bg-background">
       <Navbar />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto p-4 space-y-6">
+        {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent mb-4">
-            🗳️ Community Mission Voting
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
+            🗳️ Community Mission Voting & Leaderboard
           </h1>
           <p className="text-xl text-muted-foreground">
-            Vote for your favorite community missions and help shape our future
+            Vote on Environmental Missions • Compete for Impact • Build a Better World Together
           </p>
         </div>
 
-        {/* Filters and Search */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          {/* Category Filter */}
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-green-400">
-              Filter by Category
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                className={cn(
-                  'border-green-500/50 text-green-300 hover:bg-green-500/10',
-                  selectedCategory === null && 'bg-green-500/10'
-                )}
-                onClick={() => handleCategoryFilter(null)}
-              >
-                All Categories
-              </Button>
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant="outline"
-                  className={cn(
-                    'border-green-500/50 text-green-300 hover:bg-green-500/10',
-                    selectedCategory === category && 'bg-green-500/10'
-                  )}
-                  onClick={() => handleCategoryFilter(category)}
-                >
-                  {category}
-                </Button>
+        {/* Community Stats */}
+        <Card className="border-green-500/20 bg-gradient-to-r from-green-900/20 to-blue-900/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-green-400">
+              <BarChart3 className="h-5 w-5" />
+              Global Community Impact
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-400">{communityStats.total_missions}</div>
+                <div className="text-sm text-muted-foreground">Total Missions</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-400">{communityStats.active_missions}</div>
+                <div className="text-sm text-muted-foreground">Active Now</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-purple-400">{communityStats.completed_missions}</div>
+                <div className="text-sm text-muted-foreground">Completed</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-yellow-400">${(communityStats.total_funding / 1000000).toFixed(1)}M</div>
+                <div className="text-sm text-muted-foreground">Total Funding</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-cyan-400">{communityStats.community_members.toLocaleString()}</div>
+                <div className="text-sm text-muted-foreground">Members</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-orange-400">{communityStats.votes_cast_today}</div>
+                <div className="text-sm text-muted-foreground">Votes Today</div>
+              </div>
+              <div className="text-center">
+                <div className="text-lg font-bold text-red-400">{(communityStats.environmental_impact.total_carbon_saved / 1000).toFixed(0)}T</div>
+                <div className="text-sm text-muted-foreground">CO₂ Saved</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Tabs defaultValue="missions" className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="missions">🎯 Active Missions</TabsTrigger>
+            <TabsTrigger value="leaderboard">🏆 Leaderboard</TabsTrigger>
+            <TabsTrigger value="analytics">📊 Impact Analytics</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="missions" className="space-y-4">
+            <div className="space-y-6">
+              {missions.map((mission) => (
+                <Card key={mission.id} className="border-gray-500/20 bg-black/20">
+                  <CardContent className="pt-6">
+                    <div className="space-y-4">
+                      {/* Mission Header */}
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h3 className="text-xl font-bold text-white">{mission.title}</h3>
+                            <Badge variant="outline" className={getCategoryColor(mission.category)}>
+                              {getCategoryIcon(mission.category)}
+                              {mission.category.replace('_', ' ')}
+                            </Badge>
+                            <Badge variant="outline" className={getStatusColor(mission.status)}>
+                              {mission.status}
+                            </Badge>
+                          </div>
+                          <p className="text-muted-foreground mb-3">{mission.description}</p>
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-1">
+                              <MapPin className="h-3 w-3" />
+                              {mission.location}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-3 w-3" />
+                              Ends: {mission.deadline.toLocaleDateString()}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Users className="h-3 w-3" />
+                              Created by {mission.created_by}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Funding Progress */}
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span>Funding Progress</span>
+                          <span>${mission.current_funding.toLocaleString()} / ${mission.target_amount.toLocaleString()}</span>
+                        </div>
+                        <Progress value={(mission.current_funding / mission.target_amount) * 100} className="h-2" />
+                      </div>
+
+                      {/* Voting Section */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-3">
+                          <h4 className="font-semibold text-white">Community Voting</h4>
+                          <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                              <div className="flex items-center gap-2">
+                                <ThumbsUp className="h-4 w-4 text-green-400" />
+                                <span>Support ({mission.votes_for})</span>
+                              </div>
+                              <div className="text-green-400 font-bold">
+                                {Math.round((mission.votes_for / mission.total_voters) * 100)}%
+                              </div>
+                            </div>
+                            <Progress value={(mission.votes_for / mission.total_voters) * 100} className="h-1" />
+                            
+                            <div className="flex justify-between items-center">
+                              <div className="flex items-center gap-2">
+                                <ThumbsDown className="h-4 w-4 text-red-400" />
+                                <span>Against ({mission.votes_against})</span>
+                              </div>
+                              <div className="text-red-400 font-bold">
+                                {Math.round((mission.votes_against / mission.total_voters) * 100)}%
+                              </div>
+                            </div>
+                            <Progress value={(mission.votes_against / mission.total_voters) * 100} className="h-1" />
+                          </div>
+
+                          {mission.status === 'voting' && (
+                            <div className="flex gap-2 mt-4">
+                              <Button
+                                onClick={() => voteOnMission(mission.id, 'for')}
+                                className={`flex-1 ${mission.user_vote === 'for' ? 'bg-green-600' : 'bg-green-600/70'} hover:bg-green-700`}
+                              >
+                                <ThumbsUp className="h-4 w-4 mr-2" />
+                                {mission.user_vote === 'for' ? 'Voted Support' : 'Vote Support'}
+                              </Button>
+                              <Button
+                                onClick={() => voteOnMission(mission.id, 'against')}
+                                variant="outline"
+                                className={`flex-1 ${mission.user_vote === 'against' ? 'border-red-500 text-red-400' : 'border-gray-500'}`}
+                              >
+                                <ThumbsDown className="h-4 w-4 mr-2" />
+                                {mission.user_vote === 'against' ? 'Voted Against' : 'Vote Against'}
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="space-y-3">
+                          <h4 className="font-semibold text-white">Expected Impact</h4>
+                          <div className="space-y-2">
+                            <div className="flex justify-between">
+                              <span className="flex items-center gap-2">
+                                <Globe className="h-4 w-4 text-blue-400" />
+                                CO₂ Reduction
+                              </span>
+                              <span className="font-bold text-blue-400">{mission.impact_metrics.carbon_reduction.toLocaleString()} kg</span>
+                            </div>
+                            {mission.impact_metrics.trees_planted > 0 && (
+                              <div className="flex justify-between">
+                                <span className="flex items-center gap-2">
+                                  <TreePine className="h-4 w-4 text-green-400" />
+                                  Trees Planted
+                                </span>
+                                <span className="font-bold text-green-400">{mission.impact_metrics.trees_planted.toLocaleString()}</span>
+                              </div>
+                            )}
+                            <div className="flex justify-between">
+                              <span className="flex items-center gap-2">
+                                <Users className="h-4 w-4 text-purple-400" />
+                                People Impacted
+                              </span>
+                              <span className="font-bold text-purple-400">{mission.impact_metrics.people_impacted.toLocaleString()}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="flex items-center gap-2">
+                                <Coins className="h-4 w-4 text-yellow-400" />
+                                Reward Pool
+                              </span>
+                              <span className="font-bold text-yellow-400">{mission.reward_pool.toLocaleString()} GAIA</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
-          </div>
+          </TabsContent>
 
-          {/* Status Filter */}
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-blue-400">Filter by Status</h3>
-            <div className="flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                className={cn(
-                  'border-blue-500/50 text-blue-300 hover:bg-blue-500/10',
-                  selectedStatus === null && 'bg-blue-500/10'
-                )}
-                onClick={() => handleStatusFilter(null)}
-              >
-                All Statuses
-              </Button>
-              {missionStatuses.map((status) => (
-                <Button
-                  key={status}
-                  variant="outline"
-                  className={cn(
-                    'border-blue-500/50 text-blue-300 hover:bg-blue-500/10',
-                    selectedStatus === status && 'bg-blue-500/10'
-                  )}
-                  onClick={() => handleStatusFilter(status)}
-                >
-                  {status}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          {/* Search */}
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-purple-400">Search Missions</h3>
-            <input
-              type="text"
-              placeholder="Search by title"
-              className="w-full rounded-md border border-purple-500/50 px-3 py-2 bg-transparent text-purple-300 focus:outline-none focus:border-purple-500"
-              onChange={handleSearch}
-            />
-          </div>
-        </div>
-
-        {/* Mission Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredMissions.map((mission) => (
-            <Card key={mission.id} className="border-green-500/20">
+          <TabsContent value="leaderboard" className="space-y-4">
+            <Card className="border-yellow-500/20">
               <CardHeader>
-                <CardTitle className="flex items-center justify-between text-green-400">
-                  {mission.title}
-                  <Badge
-                    className={cn(
-                      'text-white',
-                      mission.status === 'active' && 'bg-green-600',
-                      mission.status === 'completed' && 'bg-blue-600',
-                      mission.status === 'pending' && 'bg-orange-600'
-                    )}
-                  >
-                    {mission.status}
-                  </Badge>
+                <CardTitle className="flex items-center gap-2 text-yellow-400">
+                  <Trophy className="h-5 w-5" />
+                  Community Leaderboard - Environmental Champions
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-sm text-muted-foreground">{mission.description}</p>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div className="flex items-center gap-2 text-blue-300">
-                    <Clock className="h-4 w-4" />
-                    {mission.startDate} - {mission.endDate}
-                  </div>
-                  <div className="flex items-center gap-2 text-purple-300">
-                    <Target className="h-4 w-4" />
-                    {mission.targetCompletion}
-                  </div>
-                  <div className="flex items-center gap-2 text-orange-300">
-                    <CheckCircle className="h-4 w-4" />
-                    {mission.currentProgress}
-                  </div>
-                  <div className="flex items-center gap-2 text-cyan-300">
-                    <AlertCircle className="h-4 w-4" />
-                    {mission.successRate}%
-                  </div>
-                </div>
-                <Progress
-                  value={(mission.currentProgress / mission.targetCompletion) * 100}
-                  className="w-full"
-                />
-                <div className="flex justify-between text-sm">
-                  <span className="text-green-400">
-                    {Math.round(
-                      (mission.currentProgress / mission.targetCompletion) * 100
-                    )}
-                    % Complete
-                  </span>
-                  <span className="text-muted-foreground">
-                    Impact Score: {mission.impactScore}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <Button
-                    className="bg-blue-600 hover:bg-blue-700"
-                    onClick={() => handleVote(mission.id)}
-                  >
-                    <Vote className="h-4 w-4 mr-2" />
-                    Vote
-                  </Button>
-                  <div className="flex items-center gap-2 text-yellow-300">
-                    <TrendingUp className="h-4 w-4" />
-                    {mission.votes} Votes
-                  </div>
+              <CardContent>
+                <div className="space-y-4">
+                  {leaderboard.map((user) => (
+                    <Card key={user.id} className="border-gray-500/20 bg-black/10">
+                      <CardContent className="pt-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4">
+                            <div className="flex flex-col items-center">
+                              <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${
+                                user.rank === 1 ? 'bg-yellow-500' : 
+                                user.rank === 2 ? 'bg-gray-400' : 
+                                user.rank === 3 ? 'bg-orange-600' : 'bg-gray-600'
+                              }`}>
+                                {user.rank <= 3 ? '👑' : user.avatar}
+                              </div>
+                              <div className="flex items-center gap-1 mt-1">
+                                <span className="text-lg font-bold">#{user.rank}</span>
+                                {getRankChangeIcon(user.rank_change)}
+                              </div>
+                            </div>
+                            
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-1">
+                                <h3 className="font-bold text-white text-lg">{user.username}</h3>
+                                <Badge variant="outline" className="border-purple-500/50 text-purple-400">
+                                  {user.location}
+                                </Badge>
+                              </div>
+                              
+                              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-2">
+                                <div>
+                                  <div className="text-sm text-muted-foreground">Eco Score</div>
+                                  <div className="font-bold text-green-400">{user.eco_score.toLocaleString()}</div>
+                                </div>
+                                <div>
+                                  <div className="text-sm text-muted-foreground">Missions</div>
+                                  <div className="font-bold text-blue-400">{user.missions_completed}</div>
+                                </div>
+                                <div>
+                                  <div className="text-sm text-muted-foreground">Tokens</div>
+                                  <div className="font-bold text-yellow-400">{user.tokens_earned.toLocaleString()}</div>
+                                </div>
+                                <div>
+                                  <div className="text-sm text-muted-foreground">Votes Cast</div>
+                                  <div className="font-bold text-purple-400">{user.votes_cast}</div>
+                                </div>
+                              </div>
+                              
+                              <div className="flex flex-wrap gap-1">
+                                {user.badges.map((badge, index) => (
+                                  <Badge key={index} variant="outline" className="text-xs border-green-500/50 text-green-400">
+                                    <Award className="h-3 w-3 mr-1" />
+                                    {badge}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="text-right">
+                            <div className="text-sm text-muted-foreground">Joined</div>
+                            <div className="text-sm text-white">{user.join_date.toLocaleDateString()}</div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
+          </TabsContent>
+
+          <TabsContent value="analytics" className="space-y-4">
+            <div className="grid gap-4 md:grid-cols-2">
+              <Card className="border-green-500/20">
+                <CardHeader>
+                  <CardTitle className="text-green-400">Mission Success Rates</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {[
+                      { category: 'Conservation', success: 94, total: 45 },
+                      { category: 'Renewable Energy', success: 89, total: 32 },
+                      { category: 'Waste Reduction', success: 92, total: 28 },
+                      { category: 'Transportation', success: 87, total: 23 },
+                      { category: 'Education', success: 96, total: 19 }
+                    ].map((item) => (
+                      <div key={item.category} className="space-y-2">
+                        <div className="flex justify-between">
+                          <span>{item.category}</span>
+                          <span className="font-bold text-green-400">{item.success}% ({item.total} missions)</span>
+                        </div>
+                        <Progress value={item.success} className="h-2" />
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-blue-500/20">
+                <CardHeader>
+                  <CardTitle className="text-blue-400">Global Environmental Impact</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-green-400 mb-2">
+                        {(communityStats.environmental_impact.total_carbon_saved / 1000).toFixed(1)}T
+                      </div>
+                      <div className="text-sm text-muted-foreground">Total CO₂ Saved</div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 text-center">
+                      <div>
+                        <div className="text-xl font-bold text-blue-400">
+                          {communityStats.environmental_impact.total_trees_planted.toLocaleString()}
+                        </div>
+                        <div className="text-xs text-muted-foreground">Trees Planted</div>
+                      </div>
+                      <div>
+                        <div className="text-xl font-bold text-purple-400">
+                          {(communityStats.environmental_impact.total_people_impacted / 1000).toFixed(0)}K
+                        </div>
+                        <div className="text-xs text-muted-foreground">People Impacted</div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="text-sm font-medium">This Month's Progress:</div>
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-sm">
+                          <span>New Missions</span>
+                          <span className="text-green-400">+12</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>Completed Projects</span>
+                          <span className="text-blue-400">+8</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>Community Growth</span>
+                          <span className="text-purple-400">+15%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   )
