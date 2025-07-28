@@ -76,7 +76,7 @@ export function Navbar() {
             <span className="font-bold text-primary text-xl">GAiA Universe</span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Show first 8 items directly */}
           <div className="hidden lg:flex items-center space-x-1">
             {navItems.slice(0, 8).map((item) => {
               const Icon = item.icon
@@ -92,7 +92,7 @@ export function Navbar() {
               )
             })}
             
-            {/* More menu for additional items */}
+            {/* More menu for remaining items */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary hover:bg-primary/10">
