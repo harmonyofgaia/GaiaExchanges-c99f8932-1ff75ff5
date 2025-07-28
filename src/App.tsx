@@ -1,4 +1,3 @@
-
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
@@ -33,6 +32,10 @@ const SeaGreenPsychohistoricalProject = lazy(() => import("./pages/SeaGreenPsych
 const CommunityEngagementHub = lazy(() => import("./pages/CommunityEngagementHub"));
 const PartnershipManagement = lazy(() => import("./pages/PartnershipManagement"));
 const DeploymentCenter = lazy(() => import("./pages/DeploymentCenter"));
+
+// Existing pages that were created
+const GaiaCoinCrafterPage = lazy(() => import("./pages/GaiaCoinCrafter"));
+const GaiaFighterGamePage = lazy(() => import("./pages/GaiaFighterGame"));
 
 const queryClient = new QueryClient();
 
@@ -70,6 +73,12 @@ function App() {
             <Route path="/community-engagement-hub" element={<Suspense fallback={<div>Loading...</div>}><CommunityEngagementHub /></Suspense>} />
             <Route path="/partnership-management" element={<Suspense fallback={<div>Loading...</div>}><PartnershipManagement /></Suspense>} />
             <Route path="/deployment-center" element={<Suspense fallback={<div>Loading...</div>}><DeploymentCenter /></Suspense>} />
+
+            {/* Your existing game pages */}
+            <Route path="/token-mining" element={<Suspense fallback={<div>Loading...</div>}><GaiaCoinCrafterPage /></Suspense>} />
+            <Route path="/coin-crafter" element={<Suspense fallback={<div>Loading...</div>}><GaiaCoinCrafterPage /></Suspense>} />
+            <Route path="/gaia-fighter-game" element={<Suspense fallback={<div>Loading...</div>}><GaiaFighterGamePage /></Suspense>} />
+            <Route path="/gaming" element={<Suspense fallback={<div>Loading...</div>}><GaiaFighterGamePage /></Suspense>} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
