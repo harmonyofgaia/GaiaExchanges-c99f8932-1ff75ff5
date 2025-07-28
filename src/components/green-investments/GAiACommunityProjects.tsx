@@ -13,19 +13,16 @@ import {
   Award,
   Heart,
   TrendingUp,
-  Globe,
-  Github
+  Globe
 } from 'lucide-react'
 import { GAIA_PROJECTS } from '@/constants/gaia-projects'
 import { ProjectDataRestorer } from './ProjectDataRestorer'
-import { GitHubProjectRestorer } from './GitHubProjectRestorer'
 import { toast } from 'sonner'
 
 export function GAiACommunityProjects() {
   const [projects, setProjects] = useState(GAIA_PROJECTS)
   const [subscribedProjects, setSubscribedProjects] = useState<Set<string>>(new Set())
   const [showRestorer, setShowRestorer] = useState(false)
-  const [showGitHubRestorer, setShowGitHubRestorer] = useState(false)
   const [restoredData, setRestoredData] = useState<any>(null)
 
   useEffect(() => {
@@ -65,50 +62,11 @@ export function GAiACommunityProjects() {
   }
 
   const handleDataRestored = (data: any) => {
-    console.log('🌱 Data restored:', data);
+    console.log('🌱 Original GAiA project data restored:', data);
     setRestoredData(data);
     
-    if (data && data.source === 'github' && data.projects) {
-      // Merge GitHub project data with existing projects
-      const updatedProjects = [...projects]
-      
-      data.projects.forEach((githubProject: any) => {
-        const existingIndex = updatedProjects.findIndex(p => 
-          p.title.toLowerCase().includes(githubProject.title.toLowerCase().substring(0, 10))
-        )
-        
-        if (existingIndex !== -1) {
-          // Update existing project with GitHub data
-          updatedProjects[existingIndex] = {
-            ...updatedProjects[existingIndex],
-            description: githubProject.description || updatedProjects[existingIndex].description,
-            expectedImpact: githubProject.expectedImpact || updatedProjects[existingIndex].expectedImpact,
-            location: githubProject.location || updatedProjects[existingIndex].location,
-            tags: [...new Set([...updatedProjects[existingIndex].tags, ...githubProject.tags])],
-            fundingGoal: githubProject.fundingGoal || updatedProjects[existingIndex].fundingGoal,
-            currentFunding: githubProject.currentFunding || updatedProjects[existingIndex].currentFunding
-          }
-        } else if (githubProject.title && githubProject.title.length > 5) {
-          // Add new project from GitHub
-          updatedProjects.push({
-            ...githubProject,
-            status: githubProject.status || 'active',
-            progress: githubProject.progress || 50,
-            participants: githubProject.participants || 100,
-            reward: githubProject.reward || 500,
-            deadline: githubProject.deadline || '2024-12-31',
-            impact: githubProject.impact || 'High'
-          })
-        }
-      })
-      
-      setProjects(updatedProjects)
-      
-      toast.success('✨ Project information updated from GitHub!', {
-        description: `Updated ${data.projects.length} projects with your original data`,
-        duration: 5000
-      });
-    } else {
+    // Parse and integrate the restored project data
+    if (data && data.data && Array.isArray(data.data)) {
       toast.success('✨ Project information updated!', {
         description: 'Your original GAiA projects have been restored',
         duration: 5000
@@ -148,30 +106,17 @@ export function GAiACommunityProjects() {
           ✨ Subscribed to {subscribedProjects.size} projects • Supporting Global Harmony
         </div>
         
-        <div className="flex justify-center gap-4 mt-4">
-          <Button 
-            onClick={() => setShowRestorer(!showRestorer)}
-            className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
-          >
-            <Leaf className="h-4 w-4 mr-2" />
-            {showRestorer ? 'Hide' : 'Restore from Google Sites'}
-          </Button>
-          <Button 
-            onClick={() => setShowGitHubRestorer(!showGitHubRestorer)}
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
-          >
-            <Github className="h-4 w-4 mr-2" />
-            {showGitHubRestorer ? 'Hide' : 'Restore from GitHub'}
-          </Button>
-        </div>
+        <Button 
+          onClick={() => setShowRestorer(!showRestorer)}
+          className="mt-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
+        >
+          <Leaf className="h-4 w-4 mr-2" />
+          {showRestorer ? 'Hide' : 'Restore Original Project Data'}
+        </Button>
       </div>
 
       {showRestorer && (
         <ProjectDataRestorer onDataRestored={handleDataRestored} />
-      )}
-
-      {showGitHubRestorer && (
-        <GitHubProjectRestorer onDataRestored={handleDataRestored} />
       )}
 
       {restoredData && (
@@ -182,7 +127,6 @@ export function GAiACommunityProjects() {
               <div className="text-lg font-bold">✨ Original Data Successfully Restored!</div>
               <div className="text-sm text-emerald-300/80 mt-1">
                 Your authentic GAiA project information is now active
-                {restoredData.source && ` from ${restoredData.source}`}
               </div>
             </div>
           </CardContent>
