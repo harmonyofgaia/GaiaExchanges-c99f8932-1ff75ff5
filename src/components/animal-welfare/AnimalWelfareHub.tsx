@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -23,6 +22,7 @@ import { AnimalNFTMarketplace } from './AnimalNFTMarketplace'
 import { AnimalVRExperience } from './AnimalVRExperience'
 import { AnimalWalletManager } from './AnimalWalletManager'
 import { LiveAnimalTracker } from './LiveAnimalTracker'
+import { GlobalRelocationMap } from './GlobalRelocationMap'
 
 interface RealAnimal {
   id: string
@@ -153,7 +153,7 @@ export function AnimalWelfareHub() {
             🐾 GAiA ANIMAL WELFARE - REAL LIVES, REAL IMPACT
           </CardTitle>
           <p className="text-center text-xl text-green-300">
-            Every Animal in Captivity Gets Its Own Wallet • Own NFT • Own Goal • VR Rehabilitation
+            Every Animal in Captivity Gets Its Own Wallet • Own NFT • Own Goal • VR Rehabilitation • Global Relocation
           </p>
         </CardHeader>
         <CardContent>
@@ -182,12 +182,13 @@ export function AnimalWelfareHub() {
 
       {/* Main Content Tabs */}
       <Tabs defaultValue="rescue-animals" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="rescue-animals">🆘 Rescue Animals</TabsTrigger>
           <TabsTrigger value="nft-marketplace">🏪 NFT Marketplace</TabsTrigger>
           <TabsTrigger value="vr-experience">🥽 VR Experience</TabsTrigger>
           <TabsTrigger value="animal-wallets">💰 Animal Wallets</TabsTrigger>
           <TabsTrigger value="live-tracking">📡 Live Tracking</TabsTrigger>
+          <TabsTrigger value="global-relocation">🌍 Global Map</TabsTrigger>
         </TabsList>
 
         <TabsContent value="rescue-animals" className="space-y-6">
@@ -297,6 +298,10 @@ export function AnimalWelfareHub() {
 
         <TabsContent value="live-tracking">
           <LiveAnimalTracker animals={animals} />
+        </TabsContent>
+
+        <TabsContent value="global-relocation">
+          <GlobalRelocationMap />
         </TabsContent>
       </Tabs>
     </div>
