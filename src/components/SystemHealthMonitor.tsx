@@ -64,51 +64,6 @@ export function SystemHealthMonitor() {
     }
   }, [quantumCore, masterSecurity])
 
-  // Return null - this is a background monitoring component
-  return null
-}
-
-// Hook version for components that need the data
-export function useSystemHealth() {
-  const [systemHealth, setSystemHealth] = useState<SystemHealth>({
-    overall_status: 'optimal',
-    performance_score: 100,
-    security: 'maximum',
-    uptime: 100,
-    threats_blocked: 0,
-    quantum_protection: true
-  })
-
-  const [isHealthy, setIsHealthy] = useState(true)
-  const [hasCriticalIssues, setHasCriticalIssues] = useState(false)
-
-  // Initialize security systems
-  const quantumCore = QuantumSecurityCore()
-  const masterSecurity = MasterSecurityOrchestrator()
-
-  useEffect(() => {
-    const monitorSystemHealth = () => {
-      const threatsBlocked = (quantumCore.metrics.quantumKeysActive ? 1 : 0) + (systemHealth.threats_blocked || 0)
-      
-      setSystemHealth({
-        overall_status: 'optimal',
-        performance_score: 100,
-        security: 'maximum',
-        uptime: 100,
-        threats_blocked: threatsBlocked,
-        quantum_protection: quantumCore.metrics.isQuantumSecure
-      })
-
-      setIsHealthy(true)
-      setHasCriticalIssues(false)
-    }
-
-    const interval = setInterval(monitorSystemHealth, 3000)
-    monitorSystemHealth()
-
-    return () => clearInterval(interval)
-  }, [quantumCore, masterSecurity])
-
   return {
     systemHealth,
     isHealthy,

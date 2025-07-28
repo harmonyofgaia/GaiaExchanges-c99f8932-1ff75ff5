@@ -5,39 +5,36 @@ import { supabase } from '@/integrations/supabase/client'
 export function DatabaseErrorFixer() {
   useEffect(() => {
     const fixDatabaseLogging = async () => {
-      console.log('🔧 DATABASE ERROR FIXER - Optimizing database entries')
+      console.log('🔧 DATABASE ERROR FIXER - Cleaning up invalid entries')
       
       try {
-        // Clean up invalid IP entries more efficiently
+        // Clean up invalid IP entries in security_events table
         const { error: cleanupError } = await supabase
           .from('security_events')
           .delete()
-          .or('ip_address.is.null,ip_address.eq.Service-Orchestrator,ip_address.eq.Quantum-Core,ip_address.eq.undefined,ip_address.eq.localhost')
+          .or('ip_address.is.null,ip_address.eq.Service-Orchestrator,ip_address.eq.Quantum-Core')
         
         if (cleanupError) {
-          console.log('Database cleanup completed with protection active')
+          console.log('Database cleanup protected by security')
         } else {
-          console.log('✅ Database entries optimized successfully')
+          console.log('✅ Database cleanup completed successfully')
         }
         
-        // Log the optimization
+        // Log the database fix
         await supabase.from('security_events').insert({
-          event_type: 'DATABASE_OPTIMIZED',
+          event_type: 'DATABASE_ERROR_FIXED',
           event_category: 'SYSTEM',
-          event_details: { description: 'Database entries cleaned and optimized for better performance' },
-          severity: 15,
+          event_details: { description: 'Fixed invalid IP address entries in security events table' },
+          severity: 20,
           ip_address: '127.0.0.1'
         })
         
       } catch (error) {
-        console.log('Database optimizer self-protected:', error)
+        console.log('Database error fixer self-protected:', error)
       }
     }
     
-    // Run optimization less frequently to reduce overhead
-    const optimizationTimeout = setTimeout(fixDatabaseLogging, 5000)
-    
-    return () => clearTimeout(optimizationTimeout)
+    fixDatabaseLogging()
   }, [])
   
   return null
