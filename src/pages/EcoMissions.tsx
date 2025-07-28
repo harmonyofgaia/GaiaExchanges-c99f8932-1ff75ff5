@@ -1,9 +1,8 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Target, MapPin, Trophy, Zap, Users } from 'lucide-react'
-import { Navbar } from '@/components/Navbar'
+import Navbar from '@/components/Navbar'
 
 export default function EcoMissions() {
   const missions = [

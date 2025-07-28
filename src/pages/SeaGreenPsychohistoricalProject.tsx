@@ -1,256 +1,107 @@
-import { Navbar } from '@/components/Navbar'
+import Navbar from '@/components/Navbar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { 
-  Brain,
-  Waves,
-  TrendingUp,
-  Globe,
-  Shield,
-  Users,
-  Coins,
-  Bell,
-  BookOpen,
-  Target,
-  Eye,
-  Zap,
-  TreePine,
-  BarChart3,
-  Settings,
-  AlertTriangle,
-  CheckCircle,
-  Clock,
-  Lightbulb,
-  Database,
-  Activity
-} from 'lucide-react'
-import { PsychohistoricalEngine } from '@/components/psychohistorical/PsychohistoricalEngine'
-import { SecurePsychohistoricalAdmin } from '@/components/psychohistorical/SecurePsychohistoricalAdmin'
-import { PsychohistoricalIntegration } from '@/components/psychohistorical/PsychohistoricalIntegration'
-import { PsychohistoricalDocumentation } from '@/components/psychohistorical/PsychohistoricalDocumentation'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { Brain, Wave, Eye, Shield, Zap, Globe } from 'lucide-react'
+import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 
 export default function SeaGreenPsychohistoricalProject() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        {/* Hero Section */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
-            🌊 SEA GREEN PSYCHOHISTORICAL PROJECT
-          </h1>
-          <p className="text-xl text-muted-foreground mb-6">
-            Advanced AI-Powered Environmental Future Prediction & Idea Generation System
-          </p>
-          <div className="flex flex-wrap justify-center gap-2 mb-6">
-            <Badge variant="outline" className="border-green-500/50 text-green-400">
-              <Brain className="h-3 w-3 mr-1" />
-              Psychohistorical AI
-            </Badge>
-            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
-              <Waves className="h-3 w-3 mr-1" />
-              Global Data Analysis
-            </Badge>
-            <Badge variant="outline" className="border-purple-500/50 text-purple-400">
-              <TrendingUp className="h-3 w-3 mr-1" />
-              Future Prediction
-            </Badge>
-            <Badge variant="outline" className="border-yellow-500/50 text-yellow-400">
-              <Coins className="h-3 w-3 mr-1" />
-              GAIA Token Economy
-            </Badge>
-          </div>
+        <div className="flex items-center justify-center mb-8">
+          <UniversalGaiaLogo 
+            size="lg" 
+            animated={true}
+            showText={true}
+            className="hover:scale-105 transition-transform duration-300"
+          />
         </div>
 
-        {/* Core Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="border-green-500/20 bg-gradient-to-br from-green-900/20 to-green-800/20">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-green-400">Prediction Accuracy</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <Eye className="h-8 w-8 text-green-400 mr-3" />
-                <div>
-                  <div className="text-2xl font-bold text-green-400">87.3%</div>
-                  <p className="text-xs text-muted-foreground">Environmental forecasts</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-500/20 bg-gradient-to-br from-blue-900/20 to-blue-800/20">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-blue-400">Ideas Generated</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <Lightbulb className="h-8 w-8 text-blue-400 mr-3" />
-                <div>
-                  <div className="text-2xl font-bold text-blue-400">2,847</div>
-                  <p className="text-xs text-muted-foreground">This month</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-purple-800/20">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-purple-400">Implementations</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <CheckCircle className="h-8 w-8 text-purple-400 mr-3" />
-                <div>
-                  <div className="text-2xl font-bold text-purple-400">341</div>
-                  <p className="text-xs text-muted-foreground">Active solutions</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-yellow-500/20 bg-gradient-to-br from-yellow-900/20 to-yellow-800/20">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-yellow-400">Global Impact</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <Globe className="h-8 w-8 text-yellow-400 mr-3" />
-                <div>
-                  <div className="text-2xl font-bold text-yellow-400">156T</div>
-                  <p className="text-xs text-muted-foreground">CO₂ prevented</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Main Interface Tabs */}
-        <Tabs defaultValue="engine" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="engine" className="flex items-center gap-2">
-              <Brain className="h-4 w-4" />
-              Psychohistorical Engine
-            </TabsTrigger>
-            <TabsTrigger value="admin" className="flex items-center gap-2">
-              <Shield className="h-4 w-4" />
-              Secure Admin
-            </TabsTrigger>
-            <TabsTrigger value="governance" className="flex items-center gap-2">
-              <Users className="h-4 w-4" />
-              Token Governance
-            </TabsTrigger>
-            <TabsTrigger value="documentation" className="flex items-center gap-2">
-              <BookOpen className="h-4 w-4" />
-              Auto-Documentation
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="engine" className="space-y-6">
-            <Card className="border-green-500/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-green-400">
-                  <Brain className="h-5 w-5" />
-                  Psychohistorical Analysis Engine
-                </CardTitle>
-                <p className="text-muted-foreground">
-                  Advanced AI system scanning global environmental data and generating future-oriented green solutions
-                </p>
-              </CardHeader>
-              <CardContent>
-                <PsychohistoricalEngine />
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="admin" className="space-y-6">
-            <Card className="border-blue-500/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-blue-400">
-                  <Shield className="h-5 w-5" />
-                  Secure Administrative Dashboard
-                </CardTitle>
-                <p className="text-muted-foreground">
-                  Protected interface for managing generated ideas and monitoring system integrity
-                </p>
-              </CardHeader>
-              <CardContent>
-                <SecurePsychohistoricalAdmin />
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="governance" className="space-y-6">
-            <Card className="border-purple-500/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-purple-400">
-                  <Users className="h-5 w-5" />
-                  Community Governance & Token Integration
-                </CardTitle>
-                <p className="text-muted-foreground">
-                  Decentralized voting, rewards distribution, and community participation systems
-                </p>
-              </CardHeader>
-              <CardContent>
-                <PsychohistoricalIntegration />
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="documentation" className="space-y-6">
-            <Card className="border-yellow-500/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-yellow-400">
-                  <BookOpen className="h-5 w-5" />
-                  Auto-Documentation & Community Alerts
-                </CardTitle>
-                <p className="text-muted-foreground">
-                  Automated knowledge management and real-time community notification systems
-                </p>
-              </CardHeader>
-              <CardContent>
-                <PsychohistoricalDocumentation />
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-
-        {/* System Status */}
-        <Card className="mt-8 border-gray-500/20 bg-gradient-to-r from-gray-900/20 to-black/20">
+        <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
-              <Activity className="h-5 w-5" />
-              System Status & Health
+            <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
+              🌊 Sea Green Psychohistorical Project
             </CardTitle>
+            <p className="text-center text-xl text-muted-foreground">
+              Predicting and Shaping the Future of Marine Ecosystems
+            </p>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <div className="w-3 h-3 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                  <span className="text-green-400 font-semibold">Active</span>
-                </div>
-                <p className="text-sm text-muted-foreground">Data Collection Systems</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="text-center p-6 bg-green-900/30 rounded-lg border border-green-500/30">
+                <Brain className="h-12 w-12 mx-auto text-green-400 animate-pulse mb-4" />
+                <div className="text-2xl font-bold text-green-400">AI Analysis</div>
+                <div className="text-sm text-muted-foreground">Predictive Modeling</div>
+                <Badge className="bg-green-600 mt-2">Deep Insights</Badge>
               </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <div className="w-3 h-3 bg-blue-400 rounded-full mr-2 animate-pulse"></div>
-                  <span className="text-blue-400 font-semibold">Processing</span>
-                </div>
-                <p className="text-sm text-muted-foreground">AI Analysis Pipeline</p>
+
+              <div className="text-center p-6 bg-blue-900/30 rounded-lg border border-blue-500/30">
+                <Wave className="h-12 w-12 mx-auto text-blue-400 animate-pulse mb-4" />
+                <div className="text-2xl font-bold text-blue-400">Ocean Data</div>
+                <div className="text-sm text-muted-foreground">Real-Time Monitoring</div>
+                <Badge className="bg-blue-600 mt-2">Live Updates</Badge>
               </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <div className="w-3 h-3 bg-purple-400 rounded-full mr-2 animate-pulse"></div>
-                  <span className="text-purple-400 font-semibold">Distributing</span>
-                </div>
-                <p className="text-sm text-muted-foreground">Community Alerts</p>
+
+              <div className="text-center p-6 bg-purple-900/30 rounded-lg border border-purple-500/30">
+                <Eye className="h-12 w-12 mx-auto text-purple-400 animate-pulse mb-4" />
+                <div className="text-2xl font-bold text-purple-400">Psychohistory</div>
+                <div className="text-sm text-muted-foreground">Future Projections</div>
+                <Badge className="bg-purple-600 mt-2">Visionary</Badge>
+              </div>
+
+              <div className="text-center p-6 bg-yellow-900/30 rounded-lg border border-yellow-500/30">
+                <Shield className="h-12 w-12 mx-auto text-yellow-400 animate-pulse mb-4" />
+                <div className="text-2xl font-bold text-yellow-400">Ecosystem Defense</div>
+                <div className="text-sm text-muted-foreground">Protecting Marine Life</div>
+                <Badge className="bg-yellow-600 mt-2">Guardian Status</Badge>
               </div>
             </div>
           </CardContent>
         </Card>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="border-blue-500/30 bg-blue-900/20">
+            <CardHeader>
+              <CardTitle className="text-blue-400">AI-Driven Predictions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Using advanced AI to forecast ecological changes and potential threats.
+              </p>
+              <Progress value={85} className="mt-4" />
+              <div className="flex justify-between text-sm mt-2">
+                <span>Accuracy</span>
+                <span>85%</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-purple-500/30 bg-purple-900/20">
+            <CardHeader>
+              <CardTitle className="text-purple-400">Ecosystem Interventions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Strategies for restoring and protecting marine ecosystems.
+              </p>
+              <Button className="w-full mt-4 bg-purple-600 hover:bg-purple-700">
+                Explore Solutions
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="mt-8 text-center">
+          <div className="text-4xl font-bold text-blue-400 mb-2">
+            🌊 Shaping a Sustainable Marine Future 🌊
+          </div>
+          <div className="text-xl text-blue-300">
+            Combining AI, data, and psychohistory to protect our oceans.
+          </div>
+        </div>
       </div>
     </div>
   )

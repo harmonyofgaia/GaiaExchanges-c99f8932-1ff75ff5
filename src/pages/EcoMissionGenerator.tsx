@@ -1,10 +1,11 @@
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Target, Brain, Zap, Globe, Users, Award, MapPin } from 'lucide-react'
-import { Navbar } from '@/components/Navbar'
+import Navbar from '@/components/Navbar'
 import { EcoMission, AIInsight, parseJsonField } from '@/types/ui-types'
 import { supabase } from '@/integrations/supabase/client'
 

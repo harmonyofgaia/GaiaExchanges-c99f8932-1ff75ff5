@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
@@ -19,7 +18,7 @@ import { SecurityDashboard } from '@/components/admin/security/SecurityDashboard
 import { UserManagementSystemRefactored } from '@/components/admin/UserManagementSystemRefactored'
 import { AdminDashboard } from '@/components/admin/AdminDashboard'
 import { OmniscientGPSEngine } from '@/components/tracking/OmniscientGPSEngine'
-import { Navbar } from '@/components/Navbar'
+import Navbar from '@/components/Navbar'
 
 export default function Admin() {
   return (
