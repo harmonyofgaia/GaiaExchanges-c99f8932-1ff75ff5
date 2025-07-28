@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Lock, Eye, AlertTriangle, Zap, Crown, Activity, Globe, Users, TrendingUp } from 'lucide-react'
+import { Shield, Lock, Eye, AlertTriangle, Zap, Crown, Activity, Globe, Users, TrendingUp, Database, Upload, Settings, FileText } from 'lucide-react'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
 import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
@@ -16,6 +16,11 @@ import { UserIsolationSystem } from './UserIsolationSystem'
 import { AIEngineCapabilities } from './AIEngineCapabilities'
 import { ChatSecurityPanel } from './ChatSecurityPanel'
 import UltimateSecurity from './UltimateSecurity'
+import { AnalyticsDashboard } from './AnalyticsDashboard'
+import { AutoIssueResolver } from '../AutoIssueResolver'
+import AdminControlSystem from '../AdminControlSystem'
+import { ComprehensiveSystemIntegration } from '../ComprehensiveSystemIntegration'
+import { StorageManagement } from '../../pages/StorageManagement'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -40,22 +45,27 @@ export function SecureAdminDashboard() {
                 🛡️ SECURE ADMIN COMMAND CENTER 🛡️
               </h1>
               <p className="text-center text-muted-foreground mt-2">
-                Ultimate control and protection for the GAiA ecosystem
+                Ultimate control and protection for the GAiA ecosystem - All Admin Functions Unified
               </p>
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-6">
+              <TabsList className="grid w-full grid-cols-8">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="security">Security</TabsTrigger>
                 <TabsTrigger value="tools">Admin Tools</TabsTrigger>
                 <TabsTrigger value="control">Supreme Control</TabsTrigger>
                 <TabsTrigger value="isolation">User Control</TabsTrigger>
                 <TabsTrigger value="ai">AI Engine</TabsTrigger>
+                <TabsTrigger value="analytics">Analytics</TabsTrigger>
+                <TabsTrigger value="storage">Storage</TabsTrigger>
               </TabsList>
 
               <TabsContent value="overview" className="space-y-6">
                 <AdminDashboardTabs />
+                <AdminControlSystem />
+                <AutoIssueResolver />
+                <ComprehensiveSystemIntegration />
               </TabsContent>
 
               <TabsContent value="security" className="space-y-6">
@@ -78,6 +88,27 @@ export function SecureAdminDashboard() {
               <TabsContent value="ai" className="space-y-6">
                 <AIEngineCapabilities />
                 <ChatSecurityPanel />
+              </TabsContent>
+
+              <TabsContent value="analytics" className="space-y-6">
+                <AnalyticsDashboard />
+              </TabsContent>
+
+              <TabsContent value="storage" className="space-y-6">
+                <Card className="border-green-500/50 bg-green-900/20">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-green-400">
+                      <Database className="h-6 w-6" />
+                      🗄️ INTEGRATED STORAGE MANAGEMENT
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-green-300 mb-4">
+                      Complete file storage system integrated within admin panel - manage all uploads, media, and documents
+                    </p>
+                    <StorageManagement />
+                  </CardContent>
+                </Card>
               </TabsContent>
             </Tabs>
           </div>
