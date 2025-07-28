@@ -35,7 +35,6 @@ import {
   TrendingUp,
   Coins,
   Shield,
-  Lock,
   Menu,
   X,
   ChevronDown,
@@ -79,7 +78,6 @@ const navItems: NavItem[] = [
   { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
   { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
   { name: 'Sand Protect', path: '/sand-protect', icon: Shield },
-  { name: 'Private Blockchain', path: '/private-blockchain', icon: Lock },
 ]
 
 export function Navbar() {
