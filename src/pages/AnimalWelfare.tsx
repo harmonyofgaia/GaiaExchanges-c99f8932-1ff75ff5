@@ -63,13 +63,12 @@ export default function AnimalWelfare() {
 
         {/* Main Tabs */}
         <Tabs defaultValue="rescue" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="rescue">🆘 Animal Rescue</TabsTrigger>
             <TabsTrigger value="cameras">📹 Live Cameras</TabsTrigger>
             <TabsTrigger value="vr">🥽 VR Experience</TabsTrigger>
             <TabsTrigger value="marketplace">🏪 Marketplace</TabsTrigger>
             <TabsTrigger value="gaming">🎮 Gaming</TabsTrigger>
-            <TabsTrigger value="virtual-world">🌍 Virtual World</TabsTrigger>
           </TabsList>
 
           <TabsContent value="rescue" className="space-y-6">
@@ -138,31 +137,6 @@ export default function AnimalWelfare() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="virtual-world" className="space-y-6">
-            <Card className="border-cyan-500/30 bg-cyan-900/20">
-              <CardHeader>
-                <CardTitle className="text-cyan-400 flex items-center gap-2">
-                  <Hammer className="h-6 w-6" />
-                  🌍 Virtual World Creation Suite
-                </CardTitle>
-                <p className="text-muted-foreground">
-                  Build and explore virtual environments integrated with animal welfare
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="text-xl font-bold text-green-400 mb-4">🏗️ Minecraft Builder</h3>
-                    <MinecraftLandscapeBuilder />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-purple-400 mb-4">🎨 Content Creator</h3>
-                    <VirtualLandscapeCreator />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
         </Tabs>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { toast } from 'sonner'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 import LandscapeBuilder from '@/legacy-pages/LandscapeBuilder'
 import { MyLandscapeManager } from '@/components/landscapes/MyLandscapeManager'
+import { MinecraftLandscapeBuilder } from '@/components/MinecraftLandscapeBuilder'
 
 export default function VirtualWorld() {
   const [worldState, setWorldState] = useState({
@@ -120,8 +121,9 @@ export default function VirtualWorld() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="world" className="w-full">
-              <TabsList className="grid w-full grid-cols-5">
+              <TabsList className="grid w-full grid-cols-6">
                 <TabsTrigger value="world">🌍 Virtual World</TabsTrigger>
+                <TabsTrigger value="minecraft">⛏️ Minecraft Builder</TabsTrigger>
                 <TabsTrigger value="builder">🏗️ Landscape Builder</TabsTrigger>
                 <TabsTrigger value="advanced">⚡ Advanced Creator</TabsTrigger>
                 <TabsTrigger value="manager">📁 My Landscapes</TabsTrigger>
@@ -259,6 +261,10 @@ export default function VirtualWorld() {
                     Create • Explore • Conquer • Build Your Own Universe
                   </div>
                 </div>
+              </TabsContent>
+
+              <TabsContent value="minecraft">
+                <MinecraftLandscapeBuilder />
               </TabsContent>
 
               <TabsContent value="builder">
