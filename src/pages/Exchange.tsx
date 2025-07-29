@@ -196,32 +196,32 @@ export default function Exchange() {
       {/* Mega Header */}
       <div className="relative overflow-hidden border-b border-border/50 bg-gradient-to-r from-green-900/30 via-blue-900/30 to-purple-900/30 backdrop-blur-sm">
         <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 via-blue-500/10 to-purple-500/10 animate-pulse" />
-        <div className="container mx-auto px-6 py-8 relative">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-4 mb-4">
-              <GaiaLogo size="xl" variant="glow" />
-              <div className="text-6xl animate-bounce">🌍</div>
+        <div className="container mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8 relative max-w-7xl">
+          <div className="text-center mb-4 sm:mb-6 lg:mb-8">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-4">
+              <GaiaLogo size="lg" variant="glow" />
+              <div className="text-3xl sm:text-4xl lg:text-6xl animate-bounce">🌍</div>
             </div>
-            <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 mb-4">
+            <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 mb-2 sm:mb-4">
               GAIA BLOCKCHAIN UNIVERSE
             </h1>
-            <p className="text-2xl text-green-400 mb-2">
+            <p className="text-sm sm:text-lg lg:text-2xl text-green-400 mb-1 sm:mb-2">
               World's Most Advanced • Quantum-Secured • Dragon-Protected
             </p>
-            <p className="text-xl text-blue-400 mb-6">
+            <p className="text-sm sm:text-base lg:text-xl text-blue-400 mb-4 sm:mb-6">
               Complete Trading Ecosystem & Private Blockchain Network
             </p>
             
-            <div className="flex justify-center gap-3 flex-wrap">
-              <Badge className="bg-green-600 text-white px-4 py-2 text-lg">🚀 Zero Fees</Badge>
-              <Badge className="bg-blue-600 text-white px-4 py-2 text-lg">⚡ 100k TPS</Badge>
-              <Badge className="bg-purple-600 text-white px-4 py-2 text-lg">🛡️ Quantum Safe</Badge>
-              <Badge className="bg-yellow-600 text-white px-4 py-2 text-lg">🌱 Carbon Negative</Badge>
+            <div className="flex justify-center gap-2 sm:gap-3 flex-wrap">
+              <Badge className="bg-green-600 text-white px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm lg:text-lg">🚀 Zero Fees</Badge>
+              <Badge className="bg-blue-600 text-white px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm lg:text-lg">⚡ 100k TPS</Badge>
+              <Badge className="bg-purple-600 text-white px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm lg:text-lg">🛡️ Quantum Safe</Badge>
+              <Badge className="bg-yellow-600 text-white px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm lg:text-lg">🌱 Carbon Negative</Badge>
             </div>
           </div>
 
           {/* Real-time Metrics Overview */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 sm:gap-4 mb-4 sm:mb-6 lg:mb-8">
             <Card className="bg-green-900/30 border-green-500/50">
               <CardContent className="p-4 text-center">
                 <div className="text-2xl font-bold text-green-400">{metrics.health.toFixed(1)}%</div>
@@ -274,12 +274,12 @@ export default function Exchange() {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div className="container mx-auto px-2 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8 max-w-7xl">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {/* Main Content Area */}
-          <div className="lg:col-span-3 space-y-8">
+          <div className="xl:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
             {/* Quick Access Tools */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {/* Instant Token Swap */}
               <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
                 <CardHeader>
@@ -473,7 +473,7 @@ export default function Exchange() {
 
             {/* Main Features Tabs */}
             <Tabs defaultValue="blockchain" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 md:grid-cols-8 bg-gradient-to-r from-green-900/30 to-purple-900/30">
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 bg-gradient-to-r from-green-900/30 to-purple-900/30 gap-1 overflow-x-auto">
                 <TabsTrigger value="blockchain">🔗 Blockchain</TabsTrigger>
                 <TabsTrigger value="exchange">💱 Exchange</TabsTrigger>
                 <TabsTrigger value="trading">📈 Trading</TabsTrigger>
@@ -579,8 +579,8 @@ export default function Exchange() {
           </div>
 
           {/* Community Vault Column */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-8">
+          <div className="xl:col-span-1">
+            <div className="sticky top-4 sm:top-8">
               <CommunityVault />
             </div>
           </div>

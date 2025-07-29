@@ -168,13 +168,13 @@ export function CommunityVault() {
       <Card className="relative border-green-500/50 bg-gradient-to-br from-green-900/40 to-emerald-900/40 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 via-transparent to-blue-500/10 animate-pulse" />
         <CardHeader className="relative">
-          <CardTitle className="text-2xl font-bold text-center">
-            <div className="flex items-center justify-center gap-3 mb-3">
+          <CardTitle className="text-xl sm:text-2xl font-bold text-center">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3">
               <div className="relative">
-                <Shield className="h-8 w-8 text-green-400 animate-pulse" />
+                <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-green-400 animate-pulse" />
                 <div className="absolute inset-0 bg-green-400/20 rounded-full blur-lg animate-ping" />
               </div>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400 text-base sm:text-xl lg:text-2xl">
                 🏦 COMMUNITY VAULT
               </span>
               <div className="relative">
