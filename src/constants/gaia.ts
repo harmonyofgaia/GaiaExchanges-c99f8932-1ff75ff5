@@ -1,4 +1,3 @@
-
 export const GAIA_TOKEN = {
   // Official GAiA Token Addresses
   WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
@@ -14,7 +13,7 @@ export const GAIA_TOKEN = {
   TOTAL_SUPPLY: 1000000000000, // 1 Trillion tokens
   BURNED_TOKENS: 0,
   CIRCULATING_SUPPLY: 1000000000000,
-  INITIAL_PRICE: 0.0001,
+  INITIAL_PRICE: 0.0001, // Added back for compatibility
   
   // Tokenomics
   BURN_RATE: 0, // 0% burn rate
@@ -38,7 +37,7 @@ export const GAIA_METRICS = {
   HOLDERS: 10000,
   TRANSACTIONS_24H: 5000,
   
-  // Compatibility metrics
+  // Added back for compatibility
   INITIAL_PRICE: 0.0001,
   INITIAL_HOLDERS: 10000,
   INITIAL_MARKET_CAP: 100000,
@@ -68,7 +67,7 @@ export const formatGaiaNumber = (num: number): string => {
   return num.toString()
 }
 
-// Security constants
+// Additional security constants for Phase 2 & 3
 export const SECURITY_CONFIG = {
   ADMIN_IP_LOCK: true,
   BREACH_PROTOCOL_LEVELS: 4,

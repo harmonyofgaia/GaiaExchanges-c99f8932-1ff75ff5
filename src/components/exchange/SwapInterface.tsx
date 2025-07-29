@@ -13,7 +13,7 @@ interface SwapInterfaceProps {
   showHeader?: boolean
 }
 
-export function SwapInterface({ title = "GAiA Investment Portal", showHeader = true }: SwapInterfaceProps) {
+export function SwapInterface({ title = "Investment Portal", showHeader = true }: SwapInterfaceProps) {
   const [fromAmount, setFromAmount] = useState<string>('')
   const [toAmount, setToAmount] = useState<string>('')
   const [fromCurrency, setFromCurrency] = useState<string>(GAIA_TOKEN.SYMBOL)
@@ -46,7 +46,7 @@ export function SwapInterface({ title = "GAiA Investment Portal", showHeader = t
         ? `Long-term investment: ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency}`
         : `Investment transaction: ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency} (using estimated rates)`
       
-      toast.success('🌱 GAiA Investment Confirmed - Fees Sent to Community Wallet!', {
+      toast.success('🌱 Investment Confirmed - Fees Sent to Community Wallet!', {
         description: `${message} • All fees transparently sent to: ${GAIA_TOKEN.WALLET_ADDRESS}`
       })
       setFromAmount('')
@@ -69,7 +69,7 @@ export function SwapInterface({ title = "GAiA Investment Portal", showHeader = t
           <CardTitle>{title}</CardTitle>
           {!hasRealData && (
             <p className="text-sm text-yellow-400">
-              ⚠️ Using estimated rates - live GAiA data loading
+              ⚠️ Using estimated rates - real data not available
             </p>
           )}
         </CardHeader>
@@ -93,7 +93,6 @@ export function SwapInterface({ title = "GAiA Investment Portal", showHeader = t
               >
                 <option value={GAIA_TOKEN.SYMBOL}>{GAIA_TOKEN.SYMBOL}</option>
                 <option value="USDC">USDC</option>
-                <option value="SOL">SOL</option>
               </select>
             </div>
           </div>
@@ -125,7 +124,6 @@ export function SwapInterface({ title = "GAiA Investment Portal", showHeader = t
                 className="px-4 py-2 bg-muted border border-border rounded-md min-w-[100px]"
               >
                 <option value="USDC">USDC</option>
-                <option value="SOL">SOL</option>
                 <option value={GAIA_TOKEN.SYMBOL}>{GAIA_TOKEN.SYMBOL}</option>
               </select>
             </div>
@@ -140,22 +138,22 @@ export function SwapInterface({ title = "GAiA Investment Portal", showHeader = t
           {isSwapping ? (
             <>
               <Zap className="h-4 w-4 mr-2 animate-spin" />
-              Processing GAiA Investment...
+              Processing Investment...
             </>
           ) : (
             <>
               <Heart className="h-4 w-4 mr-2" />
-              {hasRealData ? 'Make Long-term GAiA Investment' : 'Demo GAiA Investment'}
+              {hasRealData ? 'Make Long-term Investment' : 'Demo Investment'}
             </>
           )}
         </Button>
 
         <div className="text-xs text-muted-foreground space-y-1">
           <div>Rate: 1 {GAIA_TOKEN.SYMBOL} = ${exchangeRate.toFixed(6)} USDC {!hasRealData && '(estimated)'}</div>
-          <div>Investment Fee: 0.1% (transparently sent to GAiA community wallet)</div>
-          <div>📍 GAiA Community Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...</div>
+          <div>Investment Fee: 0.1% (transparently sent to community wallet)</div>
+          <div>📍 Community Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...</div>
           <div>🌱 100% of fees reinvested in environmental projects</div>
-          <div>🛡️ No staking = No gambling = Stable GAiA forever</div>
+          <div>🛡️ No staking = No gambling = Stable forever</div>
         </div>
       </CardContent>
     </Card>
