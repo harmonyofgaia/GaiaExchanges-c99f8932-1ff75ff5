@@ -9,6 +9,7 @@ import { FullyFunctionalExchange } from '@/components/FullyFunctionalExchange'
 import { MultiExchangeIntegration } from '@/components/MultiExchangeIntegration'
 import { GaiaFeeManager } from '@/components/GaiaFeeManager'
 import { BlockchainStatus } from '@/components/blockchain/BlockchainStatus'
+import { LiveTransactionMatrix } from '@/components/LiveTransactionMatrix'
 
 export default function Exchange() {
   return (
@@ -30,6 +31,11 @@ export default function Exchange() {
             </div>
           </CardHeader>
         </Card>
+
+        {/* Live Transaction Matrix - Full Transparency */}
+        <div className="mb-8">
+          <LiveTransactionMatrix />
+        </div>
 
         {/* Blockchain Network Status */}
         <div className="mb-8">
