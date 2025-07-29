@@ -36,6 +36,23 @@ import { InteractiveFoodMap } from '@/components/community/InteractiveFoodMap'
 import { EcosystemIntegration } from '@/components/earning/EcosystemIntegration'
 import { MentorshipProgram } from '@/components/earning/MentorshipProgram'
 
+// Import recovered and new earning activities
+import { BeeHotelActions } from '@/components/earning/BeeHotelActions'
+import { WaterSavingActions } from '@/components/earning/WaterSavingActions'
+import { CarbonCreditActions } from '@/components/earning/CarbonCreditActions'
+import { EnvironmentalEducationActions } from '@/components/earning/EnvironmentalEducationActions'
+import { HomeGrownFoodActions } from '@/components/earning/HomeGrownFoodActions'
+import { ReferralSystem } from '@/components/earning/ReferralSystem'
+import { SkillBasedEarning } from '@/components/earning/SkillBasedEarning'
+import { TreePlantingActions } from '@/components/earning/TreePlantingActions'
+import { SolarPanelActions } from '@/components/earning/SolarPanelActions'
+import { RecyclingActions } from '@/components/earning/RecyclingActions'
+import { CompostingActions } from '@/components/earning/CompostingActions'
+import { CommunityCleanupActions } from '@/components/earning/CommunityCleanupActions'
+import { WildlifeConservationActions } from '@/components/earning/WildlifeConservationActions'
+import { CommunityRewardsProgram } from '@/components/earning/CommunityRewardsProgram'
+import { AdvancedCommunityFeatures } from '@/components/earning/AdvancedCommunityFeatures'
+
 export default function EarningActivities() {
   const [activePhase, setActivePhase] = useState('phase1')
 
@@ -165,11 +182,20 @@ export default function EarningActivities() {
               </p>
             </div>
             
-            <div className="space-y-12">
+            <div className="space-y-8">
               <GaiaBikeEarning />
               <EnhancedBadgeSystem />
               <PhotoVerificationSystem />
               <InteractiveFoodMap />
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <BeeHotelActions />
+                <WaterSavingActions />
+                <CarbonCreditActions />
+                <EnvironmentalEducationActions />
+                <HomeGrownFoodActions />
+                <TreePlantingActions />
+              </div>
             </div>
           </TabsContent>
 
@@ -182,11 +208,23 @@ export default function EarningActivities() {
               </p>
             </div>
             
-            <div className="space-y-12">
+            <div className="space-y-8">
+              <AdvancedCommunityFeatures />
+              <CommunityRewardsProgram />
               <LocationBasedMissions />
               <CommunityProjectVoting />
               <TeamChallenges />
               <TokenStakingSystem />
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <SolarPanelActions />
+                <RecyclingActions />
+                <CompostingActions />
+                <CommunityCleanupActions />
+                <WildlifeConservationActions />
+                <ReferralSystem />
+                <SkillBasedEarning />
+              </div>
             </div>
           </TabsContent>
 
