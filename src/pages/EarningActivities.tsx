@@ -22,7 +22,7 @@ import {
   CheckCircle
 } from 'lucide-react'
 
-// Import existing components
+// Import all earning components
 import { GaiaBikeEarning } from '@/components/earning/GaiaBikeEarning'
 import { EnhancedBadgeSystem } from '@/components/earning/EnhancedBadgeSystem'
 import { PhotoVerificationSystem } from '@/components/earning/PhotoVerificationSystem'
@@ -165,7 +165,7 @@ export default function EarningActivities() {
               </p>
             </div>
             
-            <div className="space-y-8">
+            <div className="space-y-12">
               <GaiaBikeEarning />
               <EnhancedBadgeSystem />
               <PhotoVerificationSystem />
@@ -182,7 +182,7 @@ export default function EarningActivities() {
               </p>
             </div>
             
-            <div className="space-y-8">
+            <div className="space-y-12">
               <LocationBasedMissions />
               <CommunityProjectVoting />
               <TeamChallenges />
@@ -199,7 +199,7 @@ export default function EarningActivities() {
               </p>
             </div>
             
-            <div className="space-y-8">
+            <div className="space-y-12">
               <AdvancedTokenMechanics />
               <CommunityGovernance />
               <EcosystemIntegration />
