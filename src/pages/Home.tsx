@@ -103,25 +103,6 @@ export default function Home() {
               Explore Projects
             </Button>
           </div>
-
-          {/* GAiA Exchanges Website Banner */}
-          <Card className="bg-gradient-to-r from-blue-900/40 to-purple-900/40 border-2 border-cyan-500/50 mt-8">
-            <CardContent className="p-6 text-center">
-              <div className="text-2xl font-bold text-cyan-400 mb-2">🌐 Official Trading Platform</div>
-              <div className="text-lg text-white mb-3">
-                Visit <span className="text-green-400 font-bold">www.gaiaexchanges.com</span> for complete trading experience
-              </div>
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700"
-                onClick={() => window.open('https://www.gaiaexchanges.com', '_blank')}
-              >
-                <Globe className="h-5 w-5 mr-2" />
-                Visit GAiA Exchanges
-                <ArrowRight className="h-5 w-5 ml-2" />
-              </Button>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Live Stats */}
