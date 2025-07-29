@@ -428,7 +428,6 @@ export default function Exchange() {
                         { id: 'unified', icon: '🌿', name: 'Unified Hub', color: 'emerald' },
                         { id: 'trading', icon: '📈', name: 'Pro Trading', color: 'blue' },
                         { id: 'exchange', icon: '💱', name: 'Investment', color: 'purple' },
-                        { id: 'platform', icon: '🚀', name: 'Platform', color: 'cyan' },
                         { id: 'analytics', icon: '📊', name: 'Analytics', color: 'yellow' },
                         { id: 'blockchain', icon: '⛓️', name: 'Blockchain', color: 'green' }
                       ].map((interface_item) => (
@@ -622,12 +621,6 @@ export default function Exchange() {
                     </div>
                   )}
 
-                  {activeInterface === 'platform' && (
-                    <div className="space-y-6">
-                      <GaiasExchange />
-                      <MultiExchangeIntegration />
-                    </div>
-                  )}
 
                   {activeInterface === 'analytics' && (
                     <div className="space-y-6">
