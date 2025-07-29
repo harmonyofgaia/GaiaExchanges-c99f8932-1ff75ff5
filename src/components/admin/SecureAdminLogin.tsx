@@ -209,7 +209,7 @@ export function SecureAdminLogin() {
             <h3 className="text-blue-400 font-bold mb-2">🌐 Live Blockchain Network</h3>
             <p className="text-sm text-muted-foreground mb-3">Real-time Architek Network monitoring</p>
             <Button 
-              onClick={() => window.location.href = '/admin'}
+              onClick={() => window.location.href = '/secure-admin'}
               className="w-full bg-blue-600 hover:bg-blue-700"
             >
               View Live Blockchain
@@ -220,7 +220,7 @@ export function SecureAdminLogin() {
             <h3 className="text-green-400 font-bold mb-2">👥 User Management</h3>
             <p className="text-sm text-muted-foreground mb-3">Control all user accounts & permissions</p>
             <Button 
-              onClick={() => window.location.href = '/admin'}
+              onClick={() => window.location.href = '/secure-admin'}
               className="w-full bg-green-600 hover:bg-green-700"
             >
               Manage Users
@@ -231,7 +231,7 @@ export function SecureAdminLogin() {
             <h3 className="text-purple-400 font-bold mb-2">🚀 Marketing Engine</h3>
             <p className="text-sm text-muted-foreground mb-3">Global advertising & investor outreach</p>
             <Button 
-              onClick={() => window.location.href = '/admin'}
+              onClick={() => window.location.href = '/secure-admin'}
               className="w-full bg-purple-600 hover:bg-purple-700"
             >
               Launch Campaigns
@@ -242,7 +242,7 @@ export function SecureAdminLogin() {
             <h3 className="text-cyan-400 font-bold mb-2">🛡️ Security Center</h3>
             <p className="text-sm text-muted-foreground mb-3">Advanced threat monitoring & protection</p>
             <Button 
-              onClick={() => window.location.href = '/admin'}
+              onClick={() => window.location.href = '/secure-admin'}
               className="w-full bg-cyan-600 hover:bg-cyan-700"
             >
               Security Dashboard
@@ -253,7 +253,7 @@ export function SecureAdminLogin() {
             <h3 className="text-orange-400 font-bold mb-2">🎮 Gaming Controls</h3>
             <p className="text-sm text-muted-foreground mb-3">Game security & tournament management</p>
             <Button 
-              onClick={() => window.location.href = '/admin'}
+              onClick={() => window.location.href = '/secure-admin'}
               className="w-full bg-orange-600 hover:bg-orange-700"
             >
               Gaming Center
@@ -264,7 +264,7 @@ export function SecureAdminLogin() {
             <h3 className="text-yellow-400 font-bold mb-2">⚡ Quantum Vault</h3>
             <p className="text-sm text-muted-foreground mb-3">Advanced vault monitoring & control</p>
             <Button 
-              onClick={() => window.location.href = '/admin'}
+              onClick={() => window.location.href = '/secure-admin'}
               className="w-full bg-yellow-600 hover:bg-yellow-700"
             >
               Vault Dashboard
