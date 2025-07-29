@@ -1,0 +1,163 @@
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { Badge } from '@/components/ui/badge'
+import { toast } from 'sonner'
+import { globalSurveillance } from '@/services/globalSurveillance'
+import { Satellite, Eye, Globe, Radar, Activity, Database } from 'lucide-react'
+
+export function GlobalSurveillanceDashboard() {
+  const [status, setStatus] = useState({
+    isActive: false,
+    surveillanceNodes: 0,
+    globalCoverage: 0,
+    threatsMonitored: 0,
+    intelligenceOperations: 0,
+    dataCollectionRate: 0,
+    predictiveAccuracy: 0
+  })
+
+  useEffect(() => {
+    const updateStatus = () => {
+      setStatus(globalSurveillance.getGlobalSurveillanceStatus())
+    }
+
+    const interval = setInterval(updateStatus, 2000)
+    updateStatus()
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const handleInitializeGlobalSurveillance = async () => {
+    try {
+      await globalSurveillance.initializeGlobalSurveillanceSystem()
+      toast.success('🛰️ Global Surveillance System Activated')
+    } catch (error) {
+      toast.error('Failed to initialize global surveillance')
+    }
+  }
+
+  const handleDeploySatelliteNetwork = async () => {
+    try {
+      await globalSurveillance.deploySatelliteNetwork()
+    } catch (error) {
+      toast.error('Failed to deploy satellite network')
+    }
+  }
+
+  const handleActivateQuantumRadar = async () => {
+    try {
+      await globalSurveillance.activateQuantumRadar()
+    } catch (error) {
+      toast.error('Failed to activate quantum radar')
+    }
+  }
+
+  return (
+    <Card className="border-gradient">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Satellite className="h-6 w-6 text-primary" />
+          Phase 8: Global Surveillance & Intelligence Network
+          <Badge variant={status.isActive ? "default" : "secondary"}>
+            {status.isActive ? "MONITORING" : "OFFLINE"}
+          </Badge>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <Satellite className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium">Surveillance Nodes</span>
+            </div>
+            <div className="text-2xl font-bold text-primary">{status.surveillanceNodes}</div>
+          </div>
+          
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <Globe className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium">Global Coverage</span>
+            </div>
+            <Progress value={status.globalCoverage} className="mt-2" />
+            <div className="text-sm text-muted-foreground">{status.globalCoverage}% Earth</div>
+          </div>
+          
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <Eye className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium">Threats Monitored</span>
+            </div>
+            <div className="text-2xl font-bold text-primary">{status.threatsMonitored}</div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <Activity className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium">Intelligence Ops</span>
+            </div>
+            <div className="text-xl font-bold">{status.intelligenceOperations}</div>
+          </div>
+          
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <Database className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium">Data Collection</span>
+            </div>
+            <Progress value={status.dataCollectionRate} className="mt-2" />
+            <div className="text-sm text-muted-foreground">{status.dataCollectionRate}% Rate</div>
+          </div>
+          
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <Radar className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium">Predictive Accuracy</span>
+            </div>
+            <Progress value={status.predictiveAccuracy} className="mt-2" />
+            <div className="text-sm text-muted-foreground">{status.predictiveAccuracy}% Accurate</div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          <Button onClick={handleInitializeGlobalSurveillance} size="sm">
+            <Satellite className="h-4 w-4 mr-2" />
+            Initialize Global Surveillance
+          </Button>
+          
+          <Button onClick={handleDeploySatelliteNetwork} variant="outline" size="sm">
+            <Globe className="h-4 w-4 mr-2" />
+            Deploy Satellite Network
+          </Button>
+          
+          <Button onClick={handleActivateQuantumRadar} variant="outline" size="sm">
+            <Radar className="h-4 w-4 mr-2" />
+            Activate Quantum Radar
+          </Button>
+        </div>
+
+        <div className="space-y-2">
+          <h4 className="font-medium">Active Surveillance Capabilities</h4>
+          <div className="flex flex-wrap gap-2">
+            <Badge variant="default">Satellite Network</Badge>
+            <Badge variant="default">Quantum Radar Array</Badge>
+            <Badge variant="default">Global Intelligence Grid</Badge>
+            <Badge variant="default">Predictive Threat Analysis</Badge>
+            <Badge variant="default">Real-time Monitoring</Badge>
+          </div>
+        </div>
+
+        <div className="p-4 bg-muted/50 rounded-lg">
+          <h4 className="font-medium mb-2">🛰️ Total Global Awareness Guarantee</h4>
+          <p className="text-sm text-muted-foreground">
+            Our global surveillance system provides complete planetary monitoring 
+            through quantum radar, satellite networks, and predictive intelligence. 
+            Total situational awareness achieved.
+          </p>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}

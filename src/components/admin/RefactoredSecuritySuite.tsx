@@ -7,6 +7,11 @@ import { DragonSecurityDashboard } from '@/components/security/DragonSecurityDas
 import { QuantumFortressDashboard } from '@/components/security/QuantumFortressDashboard'
 import { ThreatIntelligenceDashboard } from '@/components/security/ThreatIntelligenceDashboard'
 import { BlockchainSupremacyDashboard } from '@/components/security/BlockchainSupremacyDashboard'
+import { TokenWarfareDashboard } from '@/components/security/TokenWarfareDashboard'
+import { AdminDominationDashboard } from '@/components/security/AdminDominationDashboard'
+import { InvisibleDefenseDashboard } from '@/components/security/InvisibleDefenseDashboard'
+import { WeaponizedCounterAttackDashboard } from '@/components/security/WeaponizedCounterAttackDashboard'
+import { GlobalSurveillanceDashboard } from '@/components/security/GlobalSurveillanceDashboard'
 
 export function RefactoredSecuritySuite() {
   return (
@@ -19,6 +24,21 @@ export function RefactoredSecuritySuite() {
       
       {/* Phase 3: Blockchain Supremacy Engine */}
       <BlockchainSupremacyDashboard />
+      
+      {/* Phase 4: Token Warfare & Economic Domination */}
+      <TokenWarfareDashboard />
+      
+      {/* Phase 5: Ultimate Admin Domination Arsenal */}
+      <AdminDominationDashboard />
+      
+      {/* Phase 6: Invisible Defense & Stealth Matrix */}
+      <InvisibleDefenseDashboard />
+      
+      {/* Phase 7: Weaponized Counter-Attack Systems */}
+      <WeaponizedCounterAttackDashboard />
+      
+      {/* Phase 8: Global Surveillance & Intelligence Network */}
+      <GlobalSurveillanceDashboard />
       
       {/* Existing Security Systems */}
       <AdvancedBreachProtocol />

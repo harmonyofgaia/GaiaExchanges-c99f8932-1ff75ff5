@@ -112,7 +112,7 @@ class WeaponizedCounterAttackService {
         await this.executeExploitMirror(attack)
         break
       case 'social_reversal':
-        await this.executeSocialReversal(attack)
+        await this.executeSocialReversalAttack(attack)
         break
       case 'honeypot_trap':
         await this.executeHoneypotTrap(attack)
@@ -153,7 +153,7 @@ class WeaponizedCounterAttackService {
     await new Promise(resolve => setTimeout(resolve, 1500))
   }
 
-  private async executeSocialReversal(attack: CounterAttack): Promise<void> {
+  private async executeSocialReversalAttack(attack: CounterAttack): Promise<void> {
     console.log('🎭 Executing Social Engineering Reversal')
     
     // Create counter social engineering campaign
