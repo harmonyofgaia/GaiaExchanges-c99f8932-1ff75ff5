@@ -19,7 +19,7 @@ const Webshop = () => {
             Purchase NFTs that make a real difference in the world • Powered by GAiA Token
           </p>
           <p className="text-green-400 mt-1">
-            Visit www.gaiaexchanges.net for complete trading experience
+            Visit www.gaiaexchanges.com for complete trading experience
           </p>
         </div>
         

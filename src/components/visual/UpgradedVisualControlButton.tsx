@@ -161,10 +161,10 @@ export function UpgradedVisualControlButton() {
           <DropdownMenuTrigger asChild>
             <Button
               size="lg"
-              className="h-16 w-16 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 shadow-2xl border-2 border-white/20 backdrop-blur-sm transition-all duration-300 hover:scale-110 animate-pulse"
+              className="h-16 w-16 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:via-pink-700 hover:to-indigo-700 shadow-2xl border-2 border-white/20 backdrop-blur-sm transition-all duration-300 hover:scale-105"
               title="Advanced Visual Controls"
             >
-              <Brush className="h-7 w-7 animate-bounce" />
+              <Brush className="h-7 w-7" />
             </Button>
           </DropdownMenuTrigger>
           

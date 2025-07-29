@@ -15,6 +15,7 @@ import { AnimatedCounter } from '@/components/ui/animated-counter'
 import { LiveEarningsDisplay } from '@/components/earnings/LiveEarningsDisplay'
 import { EcoMissionCard } from '@/components/missions/EcoMissionCard'
 import { ThemeSelector } from '@/components/ThemeSelector'
+import { EnhancedPersistentMusicPlayer } from '@/components/music/EnhancedPersistentMusicPlayer'
 import { UpgradedVisualControlButton } from '@/components/visual/UpgradedVisualControlButton'
 
 export default function Home() {
@@ -67,8 +68,8 @@ export default function Home() {
       />
       
       {/* Control Buttons */}
+      <EnhancedPersistentMusicPlayer />
       <UpgradedVisualControlButton />
-      <ThemeSelector />
       
       <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Hero Section */}

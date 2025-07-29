@@ -352,7 +352,7 @@ export default function GaiaPrivateBlockchainSwapToken() {
           <CardContent>
             <div className="text-center mb-6">
               <div className="text-2xl font-bold text-green-400 mb-2">
-                www.gaiaexchanges.net
+                www.gaiaexchanges.com
               </div>
               <div className="text-lg text-blue-400 mb-4">
                 Our Private Hosting Infrastructure - Coming Online Soon

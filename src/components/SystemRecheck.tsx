@@ -87,7 +87,7 @@ export function SystemRecheck() {
       id: 'hosting',
       name: 'Website Hosting',
       status: 'checking',
-      description: 'Testing www.gaiaexchanges.net deployment',
+      description: 'Testing www.gaiaexchanges.com deployment',
       lastChecked: new Date(),
       critical: true
     }

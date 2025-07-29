@@ -54,7 +54,7 @@ class AddressValidationService {
     console.log(`📍 Contract: ${this.CORRECT_CONTRACT}`)
     console.log('🌍 Network: Solana (Pump.fun)')
     console.log('🚫 NOT GAIA Everworld - We are GAiA Token by Harmony of Gaia')
-    console.log('🌐 Official Website: https://www.gaiaexchanges.net')
+    console.log('🌐 Official Website: https://www.gaiaexchanges.com')
     console.log('💼 Admin Wallet Connected: All systems secured')
   }
 }

@@ -22,7 +22,7 @@ export function UniversalBackupSystem() {
       console.log('☁️ BACKUP SYSTEM ACTIVE - ALL DATA SECURED')
       console.log('🛡️ HARMONY OF GAIA PROTECTION - UNBREAKABLE')
       console.log('🌍 GITHUB & SUPABASE FULLY PROTECTED')
-      console.log('💎 GAIAEXCHANGES.NET SECURED')
+      console.log('💎 GAIAEXCHANGES.COM SECURED')
     }, 5000)
 
     return () => clearInterval(backupMonitoring)
@@ -74,7 +74,7 @@ export function UniversalBackupSystem() {
               <div>• All wallets and transactions</div>
               <div>• GitHub repositories</div>
               <div>• Supabase configurations</div>
-              <div>• Gaiaexchanges.net platform</div>
+              <div>• Gaiaexchanges.com platform</div>
               <div>• All games and applications</div>
             </div>
           </div>

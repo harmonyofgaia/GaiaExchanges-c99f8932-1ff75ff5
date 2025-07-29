@@ -422,7 +422,7 @@ export default function Exchange() {
                     <strong>Contract:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
                   </div>
                   <div className="text-sm text-green-400 mt-1">
-                    <strong>Official Website:</strong> www.gaiaexchanges.net
+                    <strong>Official Website:</strong> www.gaiaexchanges.com
                   </div>
                 </div>
               </CardHeader>
@@ -521,7 +521,7 @@ export default function Exchange() {
                     </CardHeader>
                     <CardContent>
                       <div className="text-center mb-4">
-                        <div className="text-2xl font-bold text-green-400 mb-2">www.gaiaexchanges.net</div>
+                        <div className="text-2xl font-bold text-green-400 mb-2">www.gaiaexchanges.com</div>
                         <div className="text-blue-400 mb-4">Private Hosting Infrastructure</div>
                         <Progress value={85} className="h-4 mb-2" />
                         <div className="text-sm text-muted-foreground">85% Complete</div>

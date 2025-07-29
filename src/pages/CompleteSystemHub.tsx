@@ -126,7 +126,7 @@ const CompleteSystemHub = () => {
                       <h3 className="font-bold text-orange-400">Web Hosting</h3>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Official website hosting at www.gaiaexchanges.net with quantum security
+                      Official website hosting at www.gaiaexchanges.com with quantum security
                     </p>
                   </div>
 

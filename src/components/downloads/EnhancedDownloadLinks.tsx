@@ -46,7 +46,7 @@ export function EnhancedDownloadLinks() {
       platform: 'Web App',
       icon: <Globe className="h-5 w-5" />,
       description: 'Browser-based Trading Platform',
-      downloadUrl: 'https://gaiaexchanges.net',
+      downloadUrl: 'https://gaiaexchanges.com',
       version: 'Latest',
       size: 'Online',
       color: 'bg-orange-600'

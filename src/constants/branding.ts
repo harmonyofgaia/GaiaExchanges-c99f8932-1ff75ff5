@@ -6,7 +6,7 @@ export const GAIA_BRANDING = {
   LOGO_URL: '/gaia-logo.svg',
   TOKEN_SYMBOL: 'GAiA',
   TOKEN_NAME: 'GAiA Token',
-  OFFICIAL_WEBSITE: 'https://www.gaiaexchanges.net',
+  OFFICIAL_WEBSITE: 'https://www.gaiaexchanges.com',
   BRAND_COLORS: {
     primary: 'hsl(142, 76%, 36%)',
     accent: 'hsl(142, 70%, 45%)',

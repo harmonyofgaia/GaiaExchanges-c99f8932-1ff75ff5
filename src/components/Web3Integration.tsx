@@ -193,7 +193,7 @@ const Web3Integration: React.FC<Web3Props> = ({
             <h3 className="text-green-400 font-bold mb-2">🌐 Official GAiA Website:</h3>
             <Button onClick={openOfficialWebsite} className="bg-green-600 hover:bg-green-700">
               <Globe className="w-4 h-4 mr-2" />
-              Visit www.gaiaexchanges.net
+              Visit www.gaiaexchanges.com
             </Button>
           </div>
 

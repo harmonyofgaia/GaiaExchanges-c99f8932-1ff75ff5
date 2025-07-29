@@ -42,7 +42,7 @@ export function WebsiteHostingManager() {
   const { isAdmin } = useSecureAdmin()
   
   const [hostingStatus, setHostingStatus] = useState<HostingStatus>({
-    domain: 'www.gaiaexchanges.net',
+    domain: 'www.gaiaexchanges.com',
     status: 'active',
     uptime: 99.9,
     visitors: 15420,
@@ -107,7 +107,7 @@ export function WebsiteHostingManager() {
 
   const testBrowserCompatibility = async () => {
     toast.info('🌐 Testing Cross-Browser Compatibility...', {
-      description: 'Checking www.gaiaexchanges.net across all browsers',
+      description: 'Checking www.gaiaexchanges.com across all browsers',
       duration: 3000
     })
 
@@ -155,7 +155,7 @@ export function WebsiteHostingManager() {
     setHostingStatus(prev => ({ ...prev, status: 'deploying' }))
 
     toast.info('🚀 Deploying Website...', {
-      description: 'Setting up www.gaiaexchanges.net with quantum security',
+      description: 'Setting up www.gaiaexchanges.com with quantum security',
       duration: 3000
     })
 
@@ -169,7 +169,7 @@ export function WebsiteHostingManager() {
       setIsDeploying(false)
 
       toast.success('🌍 Website Deployed Successfully!', {
-        description: 'www.gaiaexchanges.net is now live with maximum security',
+        description: 'www.gaiaexchanges.com is now live with maximum security',
         duration: 5000
       })
     }, 3000)
@@ -393,7 +393,7 @@ export function WebsiteHostingManager() {
                 className="w-full"
               >
                 <ExternalLink className="h-4 w-4 mr-2" />
-                Visit www.gaiaexchanges.net
+                Visit www.gaiaexchanges.com
               </Button>
             </div>
           </div>
@@ -480,7 +480,7 @@ export function WebsiteHostingManager() {
           <br />
           🛡️ Protected by Quantum Security • ⚡ Optimized for Speed • 🌍 Global CDN Active
           <br />
-          <span className="text-green-400">✅ Domain: www.gaiaexchanges.net is LIVE and globally accessible</span>
+          <span className="text-green-400">✅ Domain: www.gaiaexchanges.com is LIVE and globally accessible</span>
         </div>
       </CardContent>
     </Card>
