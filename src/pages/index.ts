@@ -1,43 +1,25 @@
 
-export { default as Home } from './Home'
-export { Vault } from './Vault'
-export { default as Auth } from './Auth'
-export { default as Profile } from './Profile'
-export { Chat } from './Chat'
-export { default as Community } from './Community'
-export { News } from './News'
-export { Trading } from './Trading'
-export { Staking } from './Staking'
-export { Airdrop } from './Airdrop'
-export { Referral } from './Referral'
-export { Tokenomics } from './Tokenomics'
-export { Roadmap } from './Roadmap'
-export { Games } from './Games'
-export { Tournaments } from './Tournaments'
-export { Lore } from './Lore'
-export { default as Docs } from './Docs'
-export { Support } from './Support'
-export { default as Partnerships } from './Partnerships'
-export { Governance } from './Governance'
-export { default as NFTs } from './NFTs'
-export { Metaverse } from './Metaverse'
-export { AI } from './AI'
-export { DeFi } from './DeFi'
-export { Store } from './Store'
-export { Creator } from './Creator'
-export { Events } from './Events'
-export { default as Analytics } from './Analytics'
-export { Earning } from './Earning'
-export { LoyaltyProgram } from './LoyaltyProgram'
-export { Farming } from './Farming'
-export { Ecosystem } from './Ecosystem'
-export { Sustainability } from './Sustainability'
-export { Portfolio } from './Portfolio'
-export { Launchpad } from './Launchpad'
-export { Bridge } from './Bridge'
-export { Lending } from './Lending'
-export { Insurance } from './Insurance'
-export { Prediction } from './Prediction'
-export { DAO } from './DAO'
-export { IDE } from './IDE'
-export { default as SecureAdmin } from './SecureAdmin'
+export { default as Index } from './Index';
+export { default as About } from './About';
+export { default as Wallet } from './Wallet';
+export { default as SmartContracts } from './SmartContracts';
+export { default as SystemStatus } from './SystemStatus';
+export { default as ComprehensiveStatus } from './ComprehensiveStatus';
+export { default as GaiaConsistencyStatus } from './GaiaConsistencyStatus';
+export { default as Downloads } from './Downloads';
+export { default as Marketing } from './Marketing';
+export { default as Reinvestments } from './Reinvestments';
+export { default as Transparency } from './Transparency';
+export { default as Admin } from './Admin';
+export { default as Gaming } from './Gaming';
+export { default as GaiaFighterGame } from './GaiaFighterGame';
+export { default as LiveTracking } from './LiveTracking';
+export { default as GaiaCoinCrafter } from './GaiaCoinCrafter';
+export { default as LandscapeBuilder } from './LandscapeBuilder';
+export { default as ForestShieldMasterPlan } from './ForestShieldMasterPlan';
+export { default as WildfireDefenseDashboard } from './WildfireDefenseDashboard';
+export { default as ForestTokenSystem } from './ForestTokenSystem';
+export { default as CommunityEngagementHub } from './CommunityEngagementHub';
+export { default as PartnershipManagement } from './PartnershipManagement';
+export { default as ImpactMeasurementSystem } from './ImpactMeasurementSystem';
+export { default as NotFound } from './NotFound';

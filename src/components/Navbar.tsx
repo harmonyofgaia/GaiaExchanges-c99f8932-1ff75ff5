@@ -1,297 +1,187 @@
-
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { Button } from './ui/button'
-import { Menu, X, User, LogOut, ChevronDown } from 'lucide-react'
-import { useAuth } from './auth/AuthProvider'
-import { toast } from 'sonner'
+import { Link } from 'react-router-dom'
+import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from './ui/navigation-menu'
+} from '@/components/ui/navigation-menu'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
+import {
+  Home,
+  LayoutDashboard,
+  Leaf,
+  User,
+  Globe,
+  Heart,
+  Gamepad2,
+  ArrowRightLeft,
+  ShoppingBag,
+  Wallet,
+  Video,
+  Tv,
+  Bike,
+  Pickaxe,
+  TrendingUp,
+  Coins,
+  Shield,
+  Menu,
+  X,
+  ChevronDown,
+  Activity,
+  Trophy,
+  MessageCircle,
+  Handshake,
+  Target,
+  Brain
+} from 'lucide-react'
+
+interface NavItem {
+  name: string
+  path: string
+  icon: React.ComponentType<{ className?: string }>
+  badge?: string
+}
+
+const navItems: NavItem[] = [
+  { name: 'Home', path: '/', icon: Home },
+  { name: 'Exchange', path: '/exchange', icon: ArrowRightLeft },
+  { name: 'Green Investments', path: '/green-investments', icon: TrendingUp },
+  { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+  { name: 'Green Impact', path: '/green-impact-dashboard', icon: Leaf },
+  { name: 'Eco Avatar', path: '/eco-avatar', icon: User },
+  { name: 'Earning Activities', path: '/earning-activities', icon: Activity },
+  { name: 'Enhanced Leaderboard', path: '/enhanced-leaderboard', icon: Trophy },
+  { name: 'Community Hub', path: '/community-engagement-hub', icon: MessageCircle },
+  { name: 'Partnership Management', path: '/partnership-management', icon: Handshake },
+  { name: 'Impact Measurement', path: '/impact-measurement-system', icon: Target },
+  { name: 'Sea Green AI', path: '/sea-green-psychohistorical', icon: Brain },
+  { name: 'Gaia Token Status', path: '/gaia-token-status', icon: Shield },
+  { name: 'Virtual World', path: '/virtual-world', icon: Globe },
+  { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
+  { name: 'Gaming Hub', path: '/gaming', icon: Gamepad2 },
+  { name: 'Marketplace', path: '/marketplace', icon: ShoppingBag },
+  { name: 'Wallet', path: '/wallet', icon: Wallet },
+  { name: 'Video Exchange', path: '/video-exchange', icon: Video },
+  { name: 'Streaming Shows', path: '/streaming-shows', icon: Tv },
+  { name: 'Gaia Bike', path: '/gaia-bike-ecosystem', icon: Bike },
+  { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
+  { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
+  { name: 'Sand Protect', path: '/sand-protect', icon: Shield },
+]
 
 export function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { user, logout } = useAuth()
-  const location = useLocation()
-
-  const handleLogout = async () => {
-    try {
-      await logout()
-      toast.success('Logged out successfully')
-    } catch (error) {
-      toast.error('Error logging out')
-    }
-  }
-
-  const coreNavLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/tokenomics', label: 'Tokenomics' },
-    { href: '/roadmap', label: 'Roadmap' },
-    { href: '/games', label: 'Games' },
-    { href: '/vault', label: 'Vault' },
-    { href: '/community', label: 'Community' },
-    { href: '/news', label: 'News' },
-    { href: '/trading', label: 'Trading' }
-  ]
-
-  const defiLinks = [
-    { href: '/staking', label: 'Staking' },
-    { href: '/farming', label: 'Farming' },
-    { href: '/lending', label: 'Lending' },
-    { href: '/bridge', label: 'Bridge' },
-    { href: '/defi', label: 'DeFi' },
-    { href: '/launchpad', label: 'Launchpad' }
-  ]
-
-  const ecosystemLinks = [
-    { href: '/nfts', label: 'NFTs' },
-    { href: '/metaverse', label: 'Metaverse' },
-    { href: '/ai', label: 'AI' },
-    { href: '/dao', label: 'DAO' },
-    { href: '/governance', label: 'Governance' },
-    { href: '/ecosystem', label: 'Ecosystem' }
-  ]
-
-  const earningLinks = [
-    { href: '/airdrop', label: 'Airdrop' },
-    { href: '/earning', label: 'Earning' },
-    { href: '/referral', label: 'Referral' },
-    { href: '/tournaments', label: 'Tournaments' },
-    { href: '/loyalty-program', label: 'Loyalty' },
-    { href: '/prediction', label: 'Prediction' }
-  ]
-
-  const platformLinks = [
-    { href: '/store', label: 'Store' },
-    { href: '/creator', label: 'Creator' },
-    { href: '/events', label: 'Events' },
-    { href: '/analytics', label: 'Analytics' },
-    { href: '/portfolio', label: 'Portfolio' },
-    { href: '/insurance', label: 'Insurance' }
-  ]
-
-  const supportLinks = [
-    { href: '/docs', label: 'Docs' },
-    { href: '/support', label: 'Support' },
-    { href: '/partnerships', label: 'Partnerships' },
-    { href: '/lore', label: 'Lore' },
-    { href: '/sustainability', label: 'Sustainability' },
-    { href: '/ide', label: 'IDE' },
-    { href: '/chat', label: 'Chat' }
-  ]
-
-  const allNavLinks = [
-    ...coreNavLinks,
-    ...defiLinks,
-    ...ecosystemLinks,
-    ...earningLinks,
-    ...platformLinks,
-    ...supportLinks
-  ]
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b border-border">
+    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-primary">GAiA</span>
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo - Enhanced for better visibility */}
+          <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity min-w-fit flex-shrink-0">
+            <AnimatedEarthLogo />
+            <span className="text-xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent whitespace-nowrap">
+              Gaia's Exchanges
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            <NavigationMenu>
-              <NavigationMenuList>
-                {/* Core Navigation */}
-                {coreNavLinks.slice(0, 4).map((link) => (
-                  <NavigationMenuItem key={link.href}>
-                    <Link
-                      to={link.href}
-                      className={`px-3 py-2 text-sm font-medium transition-colors hover:text-primary ${
-                        location.pathname === link.href
-                          ? 'text-primary border-b-2 border-primary'
-                          : 'text-muted-foreground'
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  </NavigationMenuItem>
-                ))}
-
-                {/* DeFi Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-medium">
-                    DeFi
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {defiLinks.map((link) => (
-                        <NavigationMenuLink key={link.href} asChild>
-                          <Link
-                            to={link.href}
-                            className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground ${
-                              location.pathname === link.href ? 'bg-accent' : ''
-                            }`}
-                          >
-                            <div className="text-sm font-medium leading-none">{link.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      ))}
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* Ecosystem Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-medium">
-                    Ecosystem
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {ecosystemLinks.map((link) => (
-                        <NavigationMenuLink key={link.href} asChild>
-                          <Link
-                            to={link.href}
-                            className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground ${
-                              location.pathname === link.href ? 'bg-accent' : ''
-                            }`}
-                          >
-                            <div className="text-sm font-medium leading-none">{link.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      ))}
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* Earning Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-medium">
-                    Earning
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {earningLinks.map((link) => (
-                        <NavigationMenuLink key={link.href} asChild>
-                          <Link
-                            to={link.href}
-                            className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground ${
-                              location.pathname === link.href ? 'bg-accent' : ''
-                            }`}
-                          >
-                            <div className="text-sm font-medium leading-none">{link.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      ))}
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* Platform Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-medium">
-                    Platform
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {platformLinks.map((link) => (
-                        <NavigationMenuLink key={link.href} asChild>
-                          <Link
-                            to={link.href}
-                            className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground ${
-                              location.pathname === link.href ? 'bg-accent' : ''
-                            }`}
-                          >
-                            <div className="text-sm font-medium leading-none">{link.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      ))}
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* Support Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-medium">
-                    More
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {supportLinks.map((link) => (
-                        <NavigationMenuLink key={link.href} asChild>
-                          <Link
-                            to={link.href}
-                            className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground ${
-                              location.pathname === link.href ? 'bg-accent' : ''
-                            }`}
-                          >
-                            <div className="text-sm font-medium leading-none">{link.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      ))}
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+          <div className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
+            {navItems.slice(0, 10).map((item) => {
+              const Icon = item.icon
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-all relative group"
+                >
+                  <Icon className="h-4 w-4" />
+                  <span>{item.name}</span>
+                  {item.badge && (
+                    <Badge variant="secondary" className="ml-1 text-xs">
+                      {item.badge}
+                    </Badge>
+                  )}
+                </Link>
+              )
+            })}
+            
+            {/* More Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="flex items-center space-x-1">
+                  <span>More</span>
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
+                {navItems.slice(10).map((item) => {
+                  const Icon = item.icon
+                  return (
+                    <DropdownMenuItem key={item.path} asChild>
+                      <Link to={item.path} className="flex items-center space-x-2 w-full">
+                        <Icon className="h-4 w-4" />
+                        <span>{item.name}</span>
+                        {item.badge && (
+                          <Badge variant="secondary" className="ml-auto text-xs">
+                            {item.badge}
+                          </Badge>
+                        )}
+                      </Link>
+                    </DropdownMenuItem>
+                  )
+                })}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
-          {/* User Menu */}
-          <div className="flex items-center space-x-4">
-            {user ? (
-              <div className="flex items-center space-x-2">
-                <Link to="/profile">
-                  <Button variant="ghost" size="sm">
-                    <User className="h-4 w-4 mr-2" />
-                    Profile
-                  </Button>
-                </Link>
-                <Button variant="ghost" size="sm" onClick={handleLogout}>
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Logout
-                </Button>
-              </div>
-            ) : (
-              <Link to="/auth">
-                <Button variant="default" size="sm">
-                  Login
-                </Button>
-              </Link>
-            )}
-
-            {/* Mobile menu button */}
+          {/* Mobile menu button */}
+          <div className="lg:hidden">
             <Button
               variant="ghost"
               size="sm"
-              className="lg:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => setIsOpen(!isOpen)}
+              className="relative"
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden py-4 space-y-2 max-h-[70vh] overflow-y-auto">
-            {allNavLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`block px-3 py-2 text-sm font-medium transition-colors hover:text-primary ${
-                  location.pathname === link.href
-                    ? 'text-primary bg-primary/10'
-                    : 'text-muted-foreground'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+        {isOpen && (
+          <div className="lg:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border/40 bg-background/95 backdrop-blur">
+              {navItems.map((item) => {
+                const Icon = item.icon
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center space-x-2 px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-all"
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span>{item.name}</span>
+                    {item.badge && (
+                      <Badge variant="secondary" className="ml-auto text-xs">
+                        {item.badge}
+                      </Badge>
+                    )}
+                  </Link>
+                )
+              })}
+            </div>
           </div>
         )}
       </div>

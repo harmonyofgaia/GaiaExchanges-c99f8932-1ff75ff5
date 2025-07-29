@@ -1,126 +1,119 @@
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { AuthProvider } from './components/auth/AuthProvider'
-import { Navbar } from './components/Navbar'
-import { Footer } from './components/Footer'
-import { EnhancedBackgroundManager } from './components/backgrounds/EnhancedBackgroundManager'
-import Home from './pages/Home'
-import { Tokenomics } from './pages/Tokenomics'
-import { Roadmap } from './pages/Roadmap'
-import { Games } from './pages/Games'
-import { Vault } from './pages/Vault'
-import Auth from './pages/Auth'
-import Profile from './pages/Profile'
-import { Chat } from './pages/Chat'
-import Community from './pages/Community'
-import { News } from './pages/News'
-import { Trading } from './pages/Trading'
-import { Staking } from './pages/Staking'
-import { Airdrop } from './pages/Airdrop'
-import { Referral } from './pages/Referral'
-import { Tournaments } from './pages/Tournaments'
-import { Lore } from './pages/Lore'
-import Docs from './pages/Docs'
-import { Support } from './pages/Support'
-import Partnerships from './pages/Partnerships'
-import { Governance } from './pages/Governance'
-import NFTs from './pages/NFTs'
-import { Metaverse } from './pages/Metaverse'
-import { AI } from './pages/AI'
-import { DeFi } from './pages/DeFi'
-import { Store } from './pages/Store'
-import { Creator } from './pages/Creator'
-import { Events } from './pages/Events'
-import Analytics from './pages/Analytics'
-import { Earning } from './pages/Earning'
-import { LoyaltyProgram } from './pages/LoyaltyProgram'
-import { Farming } from './pages/Farming'
-import { Ecosystem } from './pages/Ecosystem'
-import { Sustainability } from './pages/Sustainability'
-import { Portfolio } from './pages/Portfolio'
-import { Launchpad } from './pages/Launchpad'
-import { Bridge } from './pages/Bridge'
-import { Lending } from './pages/Lending'
-import { Insurance } from './pages/Insurance'
-import { Prediction } from './pages/Prediction'
-import { DAO } from './pages/DAO'
-import { IDE } from './pages/IDE'
-import SecureAdmin from './pages/SecureAdmin'
+import { lazy, Suspense } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
-import { AdminRouteProtector } from './components/admin/AdminRouteProtector'
-import { PersistentAdminSession } from './components/admin/PersistentAdminSession'
+import { Navbar } from '@/components/Navbar'
+import { GaiaLogo } from '@/components/GaiaLogo'
+import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
+import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
+import { HoneypotRedirect } from '@/components/security/HoneypotRedirect'
+import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
+
+// Lazy load pages for better performance
+const Home = lazy(() => import('./pages/Home'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
+const GreenImpactDashboard = lazy(() => import('./pages/GreenImpactDashboard'))
+const EcoAvatar = lazy(() => import('./legacy-pages/EcoAvatar'))
+const DeploymentCenter = lazy(() => import('./legacy-pages/DeploymentCenter'))
+const LiveTracking = lazy(() => import('./pages/LiveTracking'))
+const Gaming = lazy(() => import('./pages/Gaming'))
+const Wallet = lazy(() => import('./pages/Wallet'))
+const Marketplace = lazy(() => import('./pages/Marketplace'))
+const VideoExchange = lazy(() => import('./pages/VideoExchange'))
+const StreamingShows = lazy(() => import('./pages/StreamingShows'))
+const GaiaBikeEcosystem = lazy(() => import('./pages/GaiaBikeEcosystem'))
+const TokenMining = lazy(() => import('./pages/TokenMining'))
+const GreenInvestments = lazy(() => import('./pages/GreenInvestments'))
+const CoinCrafter = lazy(() => import('./pages/CoinCrafter'))
+const SandProtect = lazy(() => import('./pages/SandProtect'))
+const GaiasProjects = lazy(() => import('./pages/GaiasProjects'))
+const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlockchainSwapToken'))
+const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
+const Admin = lazy(() => import('./pages/Admin'))
+const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
+const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'))
+const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'))
+const DecentralizedProjectFundingPools = lazy(() => import('./pages/DecentralizedProjectFundingPools'))
+const CommunityEngagementHub = lazy(() => import('./pages/CommunityEngagementHub'))
+const PartnershipManagement = lazy(() => import('./pages/PartnershipManagement'))
+const ImpactMeasurementSystem = lazy(() => import('./pages/ImpactMeasurementSystem'))
+const SeaGreenPsychohistorical = lazy(() => import('./pages/SeaGreenPsychohistorical'))
+const GaiaTokenStatus = lazy(() => import('./pages/GaiaTokenStatus'))
+const LandscapeBuilder = lazy(() => import('./pages/LandscapeBuilder'))
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Pricing = lazy(() => import('./pages/Pricing'))
+const VirtualWorld = lazy(() => import('./pages/VirtualWorld'))
+const AnimalWelfare = lazy(() => import('./pages/AnimalWelfare'))
+const Exchange = lazy(() => import('./pages/Exchange'))
+const AuraLandScrapyard = lazy(() => import('./pages/AuraLandScrapyard'))
+const ComprehensiveStatus = lazy(() => import('./pages/ComprehensiveStatus'))
 
 function App() {
+  useGlobalBackgroundServices()
+
   return (
-    <AuthProvider>
-      <Router>
-        <div className="flex flex-col min-h-screen">
-          <EnhancedBackgroundManager 
-            settings={{
-              type: 'matrix',
-              intensity: 'medium',
-              color: '#00ff00',
-              speed: 1,
-              autoGenerate: true
-            }}
-          />
-          
-          <Navbar />
-          <AdminRouteProtector />
-          <PersistentAdminSession />
-          
-          <main className="flex-1 relative z-10">
+    <Router>
+      <div className="min-h-screen bg-background text-foreground" data-router="true">
+        <CrossPagePersistence />
+        <HoneypotRedirect />
+        <Navbar />
+        <main className="flex-1">
+          <Suspense fallback={
+            <div className="min-h-screen bg-background flex items-center justify-center">
+              <div className="text-center">
+                <div className="mb-4 flex justify-center">
+                  <AnimatedEarthLogo />
+                </div>
+                <div className="mt-4 text-primary animate-pulse">Loading Gaia's Exchanges...</div>
+              </div>
+            </div>
+          }>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/tokenomics" element={<Tokenomics />} />
-              <Route path="/roadmap" element={<Roadmap />} />
-              <Route path="/games" element={<Games />} />
-              <Route path="/vault" element={<Vault />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/chat" element={<Chat />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/news" element={<News />} />
-              <Route path="/trading" element={<Trading />} />
-              <Route path="/staking" element={<Staking />} />
-              <Route path="/airdrop" element={<Airdrop />} />
-              <Route path="/referral" element={<Referral />} />
-              <Route path="/tournaments" element={<Tournaments />} />
-              <Route path="/lore" element={<Lore />} />
-              <Route path="/docs" element={<Docs />} />
-              <Route path="/support" element={<Support />} />
-              <Route path="/partnerships" element={<Partnerships />} />
-              <Route path="/governance" element={<Governance />} />
-              <Route path="/nfts" element={<NFTs />} />
-              <Route path="/metaverse" element={<Metaverse />} />
-              <Route path="/ai" element={<AI />} />
-              <Route path="/defi" element={<DeFi />} />
-              <Route path="/store" element={<Store />} />
-              <Route path="/creator" element={<Creator />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/analytics" element={<Analytics />} />
-              <Route path="/earning" element={<Earning />} />
-              <Route path="/loyalty-program" element={<LoyaltyProgram />} />
-              <Route path="/farming" element={<Farming />} />
-              <Route path="/ecosystem" element={<Ecosystem />} />
-              <Route path="/sustainability" element={<Sustainability />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/launchpad" element={<Launchpad />} />
-              <Route path="/bridge" element={<Bridge />} />
-              <Route path="/lending" element={<Lending />} />
-              <Route path="/insurance" element={<Insurance />} />
-              <Route path="/prediction" element={<Prediction />} />
-              <Route path="/dao" element={<DAO />} />
-              <Route path="/ide" element={<IDE />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
+              <Route path="/eco-avatar" element={<EcoAvatar />} />
+              <Route path="/community-engagement-hub" element={<CommunityEngagementHub />} />
+              <Route path="/partnership-management" element={<PartnershipManagement />} />
+              <Route path="/impact-measurement-system" element={<ImpactMeasurementSystem />} />
+              <Route path="/sea-green-psychohistorical" element={<SeaGreenPsychohistorical />} />
+              <Route path="/gaia-token-status" element={<GaiaTokenStatus />} />
+              <Route path="/deployment-center" element={<DeploymentCenter />} />
+              <Route path="/virtual-world" element={<VirtualWorld />} />
+              <Route path="/animal-welfare" element={<AnimalWelfare />} />
+              <Route path="/gaming" element={<Gaming />} />
+              <Route path="/exchange" element={<Exchange />} />
+              <Route path="/marketplace" element={<Marketplace />} />
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/video-exchange" element={<VideoExchange />} />
+              <Route path="/streaming-shows" element={<StreamingShows />} />
+              <Route path="/gaia-bike-ecosystem" element={<GaiaBikeEcosystem />} />
+              <Route path="/token-mining" element={<TokenMining />} />
+              <Route path="/green-investments" element={<GreenInvestments />} />
+              <Route path="/coin-crafter" element={<CoinCrafter />} />
+              <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+              <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
+              <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/live-tracking" element={<LiveTracking />} />
+              <Route path="/sand-protect" element={<SandProtect />} />
+              <Route path="/gaias-projects" element={<GaiasProjects />} />
+              <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
+              <Route path="/private-blockchain" element={<PrivateBlockchain />} />
               <Route path="/secure-admin" element={<SecureAdmin />} />
+              <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
+              <Route path="/enhanced-leaderboard" element={<EnhancedLeaderboard />} />
+              <Route path="/project-funding" element={<DecentralizedProjectFundingPools />} />
             </Routes>
-          </main>
-          
-          <Footer />
-          <Toaster richColors position="bottom-right" />
-        </div>
-      </Router>
-    </AuthProvider>
+          </Suspense>
+        </main>
+        <Toaster position="top-right" />
+      </div>
+    </Router>
   )
 }
 
