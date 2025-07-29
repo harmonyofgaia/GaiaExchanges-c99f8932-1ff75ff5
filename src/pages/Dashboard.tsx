@@ -7,6 +7,7 @@ import { useGaiaTokenData } from '@/hooks/useGaiaTokenData'
 import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
 import { CoinCrafterIllustration } from '@/components/CoinCrafterIllustration'
 import { TokenDataDisplay } from '@/components/TokenDataDisplay'
+import { RealTimeCoinGeneration } from '@/components/RealTimeCoinGeneration'
 
 export default function Dashboard() {
   const { tokenData, isLoading, refetch } = useGaiaTokenData(true)
@@ -30,8 +31,9 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            🌍 GAiA Dashboard - Harmony of Gaia
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent flex items-center gap-3">
+            <img src="/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png" alt="Harmony of Gaia" className="w-12 h-12" />
+            GAiA Dashboard - Harmony of Gaia
           </h1>
           <p className="text-xl text-muted-foreground mt-2">
             {GAIA_TOKEN.BRAND_STATEMENT}
@@ -53,6 +55,11 @@ export default function Dashboard() {
               {tokenData?.isLive ? '🟢 LIVE DATA' : '📊 SIMULATED'}
             </Badge>
           </div>
+        </div>
+
+        {/* Real-Time Coin Generation Module */}
+        <div className="mb-8">
+          <RealTimeCoinGeneration />
         </div>
 
         {/* GAiA Token Live Data */}
