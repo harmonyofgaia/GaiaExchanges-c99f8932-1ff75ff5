@@ -50,7 +50,7 @@ import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/c
 
 // Token configuration for comprehensive trading
 const supportedTokens = [
-  { name: 'Harmony of Gaia', symbol: 'GAiA', icon: '🌍', fee: 0, address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh' },
+  { name: 'Harmony of Gaia', symbol: 'GAiA', icon: '/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png', fee: 0, address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh' },
   { name: 'Bitcoin', symbol: 'BTC', icon: '₿', fee: 0.0001, address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' },
   { name: 'Ethereum', symbol: 'ETH', icon: 'Ξ', fee: 0.001, address: '0x0000000000000000000000000000000000000000' },
   { name: 'Solana', symbol: 'SOL', icon: '◎', fee: 0.00005, address: 'So11111111111111111111111111111111111111112' },
@@ -203,7 +203,7 @@ export default function Exchange() {
           <div className="text-center mb-4 sm:mb-6 lg:mb-8">
             <div className="flex items-center justify-center gap-2 sm:gap-4 mb-4">
               <GaiaLogo size="lg" variant="glow" />
-              <div className="text-3xl sm:text-4xl lg:text-6xl animate-bounce">🌍</div>
+              <img src="/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png" alt="Harmony of Gaia" className="w-12 h-12 sm:w-16 sm:h-16 lg:w-24 lg:h-24 animate-bounce" />
             </div>
             <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 mb-2 sm:mb-4">
               GAIA BLOCKCHAIN UNIVERSE
@@ -352,7 +352,8 @@ export default function Exchange() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-cyan-400 text-center justify-center">
                   <Download className="h-6 w-6" />
-                  🌍 GAIA EXCHANGES - MULTI-PLATFORM ECOSYSTEM
+                  <img src="/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png" alt="Harmony of Gaia" className="w-6 h-6 inline mr-2" />
+                  GAIA EXCHANGES - MULTI-PLATFORM ECOSYSTEM
                 </CardTitle>
                 <div className="text-center">
                   <div className="text-sm text-blue-400 mt-2">
@@ -412,7 +413,7 @@ export default function Exchange() {
             <Card className="border-emerald-500/30 bg-gradient-to-br from-emerald-900/30 via-green-900/30 to-blue-900/30">
               <CardHeader className="text-center">
                 <CardTitle className="text-3xl font-bold bg-gradient-to-r from-emerald-400 via-green-400 to-blue-400 bg-clip-text text-transparent flex items-center justify-center gap-4">
-                  <div className="text-4xl">🌍</div>
+                  <img src="/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png" alt="Harmony of Gaia" className="w-12 h-12" />
                   GAIA'S PRIVATE EXCHANGE NETWORK
                   <div className="text-4xl">🚀</div>
                 </CardTitle>
@@ -424,7 +425,7 @@ export default function Exchange() {
                   <div className="bg-black/50 p-2 rounded-lg border border-emerald-500/30">
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
                       {[
-                        { id: 'unified', icon: '🌍', name: 'Unified Hub', color: 'emerald' },
+                        { id: 'unified', icon: '🌿', name: 'Unified Hub', color: 'emerald' },
                         { id: 'trading', icon: '📈', name: 'Pro Trading', color: 'blue' },
                         { id: 'exchange', icon: '💱', name: 'Investment', color: 'purple' },
                         { id: 'platform', icon: '🚀', name: 'Platform', color: 'cyan' },
@@ -510,7 +511,7 @@ export default function Exchange() {
                               <TabsTrigger value="spot-trading">📊 Spot Trading</TabsTrigger>
                               <TabsTrigger value="multi-exchange">🔄 Multi-Exchange</TabsTrigger>
                               <TabsTrigger value="advanced-charts">📈 Analytics</TabsTrigger>
-                              <TabsTrigger value="gaia-exchange">🌍 GAIA Exchange</TabsTrigger>
+                              <TabsTrigger value="gaia-exchange">🌿 GAIA Exchange</TabsTrigger>
                             </TabsList>
                             
                             <TabsContent value="pro-swap" className="space-y-6">

@@ -79,7 +79,9 @@ export function CoinGeckoTrading() {
             <div key={index} className="flex items-center justify-between p-3 bg-black/30 rounded-lg border border-gray-500/30 hover:border-yellow-500/50 transition-colors">
               <div className="flex items-center gap-3">
                 <div className="text-2xl">
-                  {coin.symbol === 'GAiA' ? '🌍' : coin.symbol === 'BTC' ? '₿' : '♦️'}
+                  {coin.symbol === 'GAiA' ? (
+                    <img src="/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png" alt="Harmony of Gaia" className="w-8 h-8" />
+                  ) : coin.symbol === 'BTC' ? '₿' : '♦️'}
                 </div>
                 <div>
                   <div className="font-bold text-white">{coin.name}</div>

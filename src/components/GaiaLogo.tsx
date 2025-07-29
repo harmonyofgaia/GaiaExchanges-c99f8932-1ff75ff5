@@ -31,11 +31,19 @@ export function GaiaLogo({
     <div className={`${sizeClasses[size]} ${variantClasses[variant]} ${className} flex items-center gap-3`}>
       <div className="relative">
         {/* Main Logo Symbol */}
-        <div className="text-4xl font-bold relative">
-          🌍
+        <div className="relative flex items-center justify-center">
+          <img 
+            src="/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png" 
+            alt="Harmony of Gaia" 
+            className={`${size === 'sm' ? 'w-8 h-8' : size === 'md' ? 'w-12 h-12' : size === 'lg' ? 'w-16 h-16' : 'w-24 h-24'} object-contain`}
+          />
           {variant === 'matrix' && (
-            <div className="absolute inset-0 text-green-300 animate-ping opacity-30">
-              🌍
+            <div className="absolute inset-0 opacity-30 animate-ping">
+              <img 
+                src="/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png" 
+                alt="Harmony of Gaia" 
+                className={`${size === 'sm' ? 'w-8 h-8' : size === 'md' ? 'w-12 h-12' : size === 'lg' ? 'w-16 h-16' : 'w-24 h-24'} object-contain filter brightness-150`}
+              />
             </div>
           )}
         </div>
