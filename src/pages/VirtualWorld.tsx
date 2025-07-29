@@ -10,6 +10,7 @@ import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 import LandscapeBuilder from '@/legacy-pages/LandscapeBuilder'
 import { MyLandscapeManager } from '@/components/landscapes/MyLandscapeManager'
 import { MinecraftLandscapeBuilder } from '@/components/MinecraftLandscapeBuilder'
+import { AdvancedLandscapeBuilder } from '@/components/landscapes/AdvancedLandscapeBuilder'
 
 export default function VirtualWorld() {
   const [worldState, setWorldState] = useState({
@@ -272,15 +273,7 @@ export default function VirtualWorld() {
               </TabsContent>
 
               <TabsContent value="advanced">
-                <div className="text-center py-16">
-                  <div className="text-6xl mb-6">⚡</div>
-                  <h2 className="text-3xl font-bold text-white mb-4">Advanced Creator Suite</h2>
-                  <p className="text-muted-foreground mb-8">Professional landscape creation tools coming soon</p>
-                  <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-                    <Star className="h-5 w-5 mr-2" />
-                    Join Beta Waitlist
-                  </Button>
-                </div>
+                <AdvancedLandscapeBuilder />
               </TabsContent>
 
               <TabsContent value="manager">

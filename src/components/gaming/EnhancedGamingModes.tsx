@@ -5,8 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { GameModeSelector } from './GameModeSelector'
 import { GameStyleSelector } from './GameStyleSelector'
-import { LandscapePreview } from './LandscapePreview'
-import { Zap, Crown, Sword, Shield, Star, Rocket, Gamepad2, Mountain, Users, Trophy, Brain, Sparkles } from 'lucide-react'
+import { Zap, Crown, Sword, Shield, Star, Rocket, Gamepad2, Users, Trophy, Brain, Sparkles } from 'lucide-react'
 
 export function EnhancedGamingModes() {
   const gameModes = [
@@ -112,7 +111,7 @@ export function EnhancedGamingModes() {
       </Card>
 
       <Tabs defaultValue="modes" className="w-full">
-        <TabsList className="grid w-full grid-cols-4 bg-black/20 mb-6">
+        <TabsList className="grid w-full grid-cols-3 bg-black/20 mb-6">
           <TabsTrigger value="modes" className="data-[state=active]:bg-purple-600">
             <Crown className="h-4 w-4 mr-2" />
             Game Modes
@@ -120,10 +119,6 @@ export function EnhancedGamingModes() {
           <TabsTrigger value="styles" className="data-[state=active]:bg-blue-600">
             <Star className="h-4 w-4 mr-2" />
             Game Styles
-          </TabsTrigger>
-          <TabsTrigger value="landscapes" className="data-[state=active]:bg-green-600">
-            <Mountain className="h-4 w-4 mr-2" />
-            Landscapes
           </TabsTrigger>
           <TabsTrigger value="advanced" className="data-[state=active]:bg-cyan-600">
             <Sparkles className="h-4 w-4 mr-2" />
@@ -175,38 +170,6 @@ export function EnhancedGamingModes() {
 
         <TabsContent value="styles" className="space-y-6">
           <GameStyleSelector />
-        </TabsContent>
-
-        <TabsContent value="landscapes" className="space-y-6">
-          <LandscapePreview />
-          
-          <Card className="bg-gradient-to-r from-green-900/30 to-blue-900/30 border-green-500/30">
-            <CardHeader>
-              <CardTitle className="text-green-400 flex items-center gap-2">
-                <Mountain className="h-6 w-6" />
-                🌍 Landscape Builder Integration
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-green-900/20 rounded border border-green-500/20">
-                  <div className="text-3xl mb-2">🏔️</div>
-                  <div className="font-bold text-green-400">Infinite Worlds</div>
-                  <div className="text-sm text-muted-foreground">400TB+ quantum landscapes</div>
-                </div>
-                <div className="text-center p-4 bg-blue-900/20 rounded border border-blue-500/20">
-                  <div className="text-3xl mb-2">🎮</div>
-                  <div className="font-bold text-blue-400">Gaming Ready</div>
-                  <div className="text-sm text-muted-foreground">Optimized for all game modes</div>
-                </div>
-                <div className="text-center p-4 bg-purple-900/20 rounded border border-purple-500/20">
-                  <div className="text-3xl mb-2">⚡</div>
-                  <div className="font-bold text-purple-400">Real-time Creation</div>
-                  <div className="text-sm text-muted-foreground">AI-powered generation</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </TabsContent>
 
         <TabsContent value="advanced" className="space-y-6">
@@ -275,7 +238,6 @@ export function EnhancedGamingModes() {
             ✅ Cross-platform synchronization<br/>
             ✅ Advanced analytics and performance tracking<br/>
             ✅ Dynamic difficulty adjustment system<br/>
-            ✅ Landscape builder integration<br/>
             ✅ Blockchain-powered achievements
           </div>
         </div>
@@ -284,10 +246,9 @@ export function EnhancedGamingModes() {
           <h4 className="font-medium text-green-400 mb-2">🌍 Gaming Ecosystem Status</h4>
           <div className="text-sm text-green-300">
             ✅ All game modes operational<br/>
-            ✅ 400TB+ landscapes available<br/>
             ✅ 15,000+ active players online<br/>
             ✅ Real-time environmental impact tracking<br/>
-            ✅ AI-powered world generation active<br/>
+            ✅ AI-powered game generation active<br/>
             ✅ Quantum physics engine stable<br/>
             ✅ Global tournaments running
           </div>
