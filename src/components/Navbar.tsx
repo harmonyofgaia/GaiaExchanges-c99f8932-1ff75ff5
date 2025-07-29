@@ -88,7 +88,11 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo - Enhanced for better visibility */}
           <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity min-w-fit flex-shrink-0">
-            <AnimatedEarthLogo />
+            <img 
+              src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
+              alt="Harmony of Gaia"
+              className="w-8 h-8 object-contain"
+            />
             <span className="text-xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent whitespace-nowrap">
               Gaia's Exchanges
             </span>

@@ -181,7 +181,7 @@ export function UniversalSwapInterface() {
             <div className="flex items-center gap-2">
               {selectedToken.logo === 'harmony-logo' ? (
                 <img 
-                  src="/lovable-uploads/92accea3-19a3-48db-bd65-888252fd27e7.png"
+                  src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
                   alt="Harmony of Gaia"
                   className="w-6 h-6 object-contain"
                 />
@@ -199,7 +199,7 @@ export function UniversalSwapInterface() {
               <div className="flex items-center gap-2">
                 {token.logo === 'harmony-logo' ? (
                   <img 
-                    src="/lovable-uploads/92accea3-19a3-48db-bd65-888252fd27e7.png"
+                    src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
                     alt="Harmony of Gaia"
                     className="w-5 h-5 object-contain"
                   />
@@ -216,7 +216,7 @@ export function UniversalSwapInterface() {
       {selectedToken.isGaiaToken && (
         <div className="flex items-center gap-2 p-2 bg-white/5 rounded-lg border border-green-500/20">
           <img 
-            src="/lovable-uploads/92accea3-19a3-48db-bd65-888252fd27e7.png"
+            src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
             alt="Harmony of Gaia"
             className="w-6 h-6 object-contain"
           />

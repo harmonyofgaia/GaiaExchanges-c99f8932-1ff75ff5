@@ -12,9 +12,9 @@ export default function Exchange() {
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-20 h-20 relative">
               <img 
-                src="/lovable-uploads/92accea3-19a3-48db-bd65-888252fd27e7.png"
+                src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
                 alt="Harmony of Gaia Logo"
-                className="w-full h-full object-contain filter brightness-100"
+                className="w-full h-full object-contain"
               />
             </div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
