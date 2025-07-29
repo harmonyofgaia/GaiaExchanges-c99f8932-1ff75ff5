@@ -1,7 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import HoverSidebar from '@/components/HoverSidebar'
 import { Link } from 'react-router-dom'
 import { Gamepad2, Zap, Crown, Sword, Users, Star } from 'lucide-react'
 
@@ -40,7 +39,6 @@ const Gaming = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
-      <HoverSidebar />
       
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">

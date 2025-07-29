@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Globe, Heart, Zap, Users, Shield, Gamepad2 } from 'lucide-react'
-import HoverSidebar from '@/components/HoverSidebar'
 import { CallToAction } from '@/components/home/CallToAction'
 import { ExchangeLinks } from '@/components/home/ExchangeLinks'
 import { BackgroundMusic } from '@/components/BackgroundMusic'
@@ -12,7 +11,6 @@ import { GAIA_TOKEN } from '@/constants/gaia'
 const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
-      <HoverSidebar />
       <BackgroundMusic />
       
       <div className="ml-16 min-h-screen">

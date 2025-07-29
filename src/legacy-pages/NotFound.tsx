@@ -3,12 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Home, ArrowLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import HoverSidebar from '@/components/HoverSidebar'
 
 const NotFound = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-900/20 via-purple-900/20 to-blue-900/20">
-      <HoverSidebar />
       
       <div className="ml-16 min-h-screen flex items-center justify-center">
         <div className="container mx-auto px-6 py-8">

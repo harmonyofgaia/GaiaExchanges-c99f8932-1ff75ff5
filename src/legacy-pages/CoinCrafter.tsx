@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Hammer, Zap, Coins, Settings } from 'lucide-react'
 import { useState } from 'react'
-import HoverSidebar from '@/components/HoverSidebar'
 import { CoinCrafterIllustration } from '@/components/CoinCrafterIllustration'
 
 const CoinCrafter = () => {
@@ -15,7 +14,6 @@ const CoinCrafter = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-900/20 via-red-900/20 to-yellow-900/20">
-      <HoverSidebar />
       
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">

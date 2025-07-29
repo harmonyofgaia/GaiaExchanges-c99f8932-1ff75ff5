@@ -1,7 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import HoverSidebar from '@/components/HoverSidebar'
 import { GamingNFTMarketplace } from '@/components/GamingNFTMarketplace'
 import { RealTimeAnimalTracker } from '@/components/RealTimeAnimalTracker'
 import { AnimalNFTCreator } from '@/components/nft/AnimalNFTCreator'
@@ -12,7 +11,6 @@ import { GlobalInvestorMagnet } from '@/components/investor/GlobalInvestorMagnet
 const NFTGreenAnimalPlatform = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-emerald-900/20">
-      <HoverSidebar />
       
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">
