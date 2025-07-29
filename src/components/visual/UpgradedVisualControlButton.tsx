@@ -258,11 +258,11 @@ export function UpgradedVisualControlButton() {
               </DropdownMenuSubContent>
             </DropdownMenuSub>
 
-            {/* Media Controls */}
+            {/* Screen Capture */}
             <DropdownMenuSub>
               <DropdownMenuSubTrigger className="text-green-300 hover:text-green-200 hover:bg-green-500/10">
-                <Image className="h-4 w-4 mr-2" />
-                Media Controls
+                <Camera className="h-4 w-4 mr-2" />
+                Screen Capture
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="bg-background/95 backdrop-blur-md">
                 <DropdownMenuItem onClick={handleScreenshot}>
@@ -273,10 +273,6 @@ export function UpgradedVisualControlButton() {
                   <Video className="h-4 w-4 mr-2" />
                   {isRecording ? 'Stop Recording' : 'Record Screen'}
                   {isRecording && <div className="w-2 h-2 bg-red-500 rounded-full ml-2 animate-pulse" />}
-                </DropdownMenuItem>
-                <DropdownMenuItem disabled={isLocked}>
-                  <Music className="h-4 w-4 mr-2" />
-                  Audio Visualizer
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuSub>
