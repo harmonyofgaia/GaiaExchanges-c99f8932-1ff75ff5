@@ -56,7 +56,7 @@ export function SecureAdminDashboard() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-21 gap-1 h-auto p-1 text-xs">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-22 gap-1 h-auto p-1 text-xs">
           <TabsTrigger value="overview" className="p-2 text-center">
             <div className="flex flex-col items-center">
               <span>📊</span>
@@ -201,13 +201,19 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">Honeypot</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="rules" className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-amber-600/20 border border-purple-500/30">
-            <div className="flex flex-col items-center">
-              <Gavel className="h-4 w-4" />
-              <span className="hidden sm:inline">Rules 24/7</span>
-            </div>
-          </TabsTrigger>
-        </TabsList>
+            <TabsTrigger value="rules" className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-amber-600/20 border border-purple-500/30">
+              <div className="flex flex-col items-center">
+                <Gavel className="h-4 w-4" />
+                <span className="hidden sm:inline">Rules 24/7</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="storage" className="p-2 text-center bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border border-cyan-500/30">
+              <div className="flex flex-col items-center">
+                <span>📁</span>
+                <span className="hidden sm:inline">Storage</span>
+              </div>
+            </TabsTrigger>
+          </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
           <AnimalDefenseCommandCenter />
