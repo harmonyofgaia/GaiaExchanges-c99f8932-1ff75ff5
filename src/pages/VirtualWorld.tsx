@@ -11,6 +11,7 @@ import LandscapeBuilder from '@/legacy-pages/LandscapeBuilder'
 import { MyLandscapeManager } from '@/components/landscapes/MyLandscapeManager'
 import { MinecraftLandscapeBuilder } from '@/components/MinecraftLandscapeBuilder'
 import { AdvancedLandscapeBuilder } from '@/components/landscapes/AdvancedLandscapeBuilder'
+import { LandscapeStyleApplier } from '@/components/landscapes/LandscapeStyleApplier'
 
 export default function VirtualWorld() {
   const [worldState, setWorldState] = useState({
@@ -274,6 +275,7 @@ export default function VirtualWorld() {
 
               <TabsContent value="advanced">
                 <AdvancedLandscapeBuilder />
+                <LandscapeStyleApplier />
               </TabsContent>
 
               <TabsContent value="manager">
