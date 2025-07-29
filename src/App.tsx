@@ -31,7 +31,7 @@ const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlo
 const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
 const Admin = lazy(() => import('./pages/Admin'))
 const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
-const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'))
+const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivities'))
 const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'))
 const DecentralizedProjectFundingPools = lazy(() => import('./pages/DecentralizedProjectFundingPools'))
 const CommunityEngagementHub = lazy(() => import('./pages/CommunityEngagementHub'))
