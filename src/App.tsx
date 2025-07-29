@@ -74,7 +74,7 @@ function App() {
               <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
               <Route path="/eco-avatar" element={<EcoAvatar />} />
               <Route path="/community-engagement-hub" element={<CommunityEngagementHub />} />
-              <Route path="/partnership-management" element={<PartnershipManagement />} />
+              {/* Partnership management moved to secure admin only */}
               <Route path="/impact-measurement-system" element={<ImpactMeasurementSystem />} />
               <Route path="/sea-green-psychohistorical" element={<SeaGreenPsychohistorical />} />
               <Route path="/gaia-token-status" element={<GaiaTokenStatus />} />

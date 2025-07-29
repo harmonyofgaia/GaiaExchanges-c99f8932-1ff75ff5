@@ -2,6 +2,7 @@
 import { HabboTycoonGame } from '@/components/games/HabboTycoonGame'
 import { WormsGameArena } from '@/components/WormsGameArena'
 import { CreativeGameEngine } from '@/components/games/CreativeGameEngine'
+import { SnakeToWormsIntegration } from '@/components/games/SnakeToWormsIntegration'
 import { InvisibleAttachmentSystem } from '@/components/security/InvisibleAttachmentSystem'
 import { InvisibleSecurityCore } from '@/components/security/InvisibleSecurityCore'
 import { InvisibleAdminProtection } from '@/components/security/InvisibleAdminProtection'
