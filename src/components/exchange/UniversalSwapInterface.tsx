@@ -10,13 +10,14 @@ import { toast } from 'sonner'
 import { GAIA_TOKEN } from '@/constants/gaia'
 import { useGaiaTokenData } from '@/hooks/useGaiaTokenData'
 import { GaiaLogo } from '@/components/GaiaLogo'
+import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 
 // Legally confirmed tokens for Gaia's Private Exchange Network
 const SUPPORTED_TOKENS = [
   {
     symbol: GAIA_TOKEN.SYMBOL,
     name: 'GAiA - Harmony of Gaia',
-    logo: '🌍',
+    logo: 'harmony-logo',
     contractAddress: GAIA_TOKEN.CONTRACT_ADDRESS,
     network: 'Solana',
     isGaiaToken: true,
@@ -178,7 +179,11 @@ export function UniversalSwapInterface() {
         <SelectTrigger className="w-full h-12 bg-card border-border">
           <SelectValue>
             <div className="flex items-center gap-2">
-              <span className="text-lg">{selectedToken.logo}</span>
+              {selectedToken.logo === 'harmony-logo' ? (
+                <UniversalGaiaLogo size="xs" variant="default" animated={false} showText={false} />
+              ) : (
+                <span className="text-lg">{selectedToken.logo}</span>
+              )}
               <span>{selectedToken.symbol}</span>
               <span className="text-xs text-muted-foreground">- {selectedToken.name}</span>
             </div>
@@ -188,7 +193,11 @@ export function UniversalSwapInterface() {
           {SUPPORTED_TOKENS.map((token) => (
             <SelectItem key={token.symbol} value={token.symbol}>
               <div className="flex items-center gap-2">
-                <span className="text-lg">{token.logo}</span>
+                {token.logo === 'harmony-logo' ? (
+                  <UniversalGaiaLogo size="xs" variant="default" animated={false} showText={false} />
+                ) : (
+                  <span className="text-lg">{token.logo}</span>
+                )}
                 <span>{token.symbol}</span>
                 <span className="text-xs text-muted-foreground">- {token.name}</span>
               </div>
@@ -198,7 +207,7 @@ export function UniversalSwapInterface() {
       </Select>
       {selectedToken.isGaiaToken && (
         <div className="flex items-center gap-2 p-2 bg-white/5 rounded-lg border border-green-500/20">
-          <GaiaLogo size="sm" variant="glow" showText={false} />
+          <UniversalGaiaLogo size="sm" variant="default" animated={true} showText={false} />
           <span className="text-xs text-green-400 font-medium">Harmony of Gaia Official Token</span>
         </div>
       )}

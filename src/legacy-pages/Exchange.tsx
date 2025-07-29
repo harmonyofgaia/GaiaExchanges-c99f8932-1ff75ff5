@@ -1,6 +1,6 @@
 
 import { Navbar } from '@/components/Navbar'
-import { GaiaLogo } from '@/components/GaiaLogo'
+import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 import { UniversalSwapInterface } from '@/components/exchange/UniversalSwapInterface'
 
 export default function Exchange() {
@@ -10,7 +10,7 @@ export default function Exchange() {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-4 mb-4">
-            <GaiaLogo size="xl" variant="glow" />
+            <UniversalGaiaLogo size="xl" variant="default" animated={true} showText={false} />
             <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
               GAIA Private Exchange Network
             </h1>
