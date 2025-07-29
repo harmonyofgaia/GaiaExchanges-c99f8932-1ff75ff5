@@ -10,7 +10,7 @@ export { default as Downloads } from './Downloads';
 export { default as Marketing } from './Marketing';
 export { default as Reinvestments } from './Reinvestments';
 export { default as Transparency } from './Transparency';
-export { default as Admin } from './Admin';
+
 export { default as Gaming } from './Gaming';
 export { default as GaiaFighterGame } from './GaiaFighterGame';
 export { default as LiveTracking } from './LiveTracking';
