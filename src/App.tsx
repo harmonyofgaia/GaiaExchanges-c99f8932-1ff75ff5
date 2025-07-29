@@ -40,7 +40,7 @@ function App() {
             {/* Global Background Manager */}
             <EnhancedBackgroundManager 
               settings={{
-                type: 'particles',
+                type: 'matrix',
                 intensity: 'medium',
                 color: '#00ff00',
                 speed: 1.0,
