@@ -101,6 +101,9 @@ export default function Exchange() {
     'Private blockchain network optimized ⚡'
   ])
 
+  // Active interface state for organizing multiple trading interfaces
+  const [activeInterface, setActiveInterface] = useState('unified')
+
   // Token swap state
   const [fromToken, setFromToken] = useState(supportedTokens[0])
   const [toToken, setToToken] = useState(supportedTokens[1])
@@ -471,111 +474,182 @@ export default function Exchange() {
               </CardContent>
             </Card>
 
-            {/* Main Features Tabs */}
-            <Tabs defaultValue="blockchain" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 bg-gradient-to-r from-green-900/30 to-purple-900/30 gap-1 overflow-x-auto">
-                <TabsTrigger value="blockchain">🔗 Blockchain</TabsTrigger>
-                <TabsTrigger value="exchange">💱 Exchange</TabsTrigger>
-                <TabsTrigger value="trading">📈 Trading</TabsTrigger>
-                <TabsTrigger value="security">🛡️ Security</TabsTrigger>
-                <TabsTrigger value="analytics">📊 Analytics</TabsTrigger>
-                <TabsTrigger value="investors">👥 Investors</TabsTrigger>
-                <TabsTrigger value="fees">💰 Fees</TabsTrigger>
-                <TabsTrigger value="platform">🌍 Platform</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="blockchain" className="space-y-6">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
-                    <CardHeader>
-                      <CardTitle className="text-green-400">🔗 Private Blockchain Network</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div className="text-center p-6 bg-black rounded-lg">
-                          <div className="text-4xl mb-4">🎬</div>
-                          <div className="text-xl font-bold text-green-400 mb-2">GAIA BLOCKCHAIN EXPLAINED</div>
-                          <div className="text-blue-400 animate-pulse">Animated Movie Coming Soon...</div>
-                        </div>
-                        <div className="grid grid-cols-3 gap-4">
-                          <div className="text-center p-4 bg-green-900/30 rounded-lg">
-                            <Shield className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                            <div className="font-bold text-green-400">Quantum Secure</div>
-                          </div>
-                          <div className="text-center p-4 bg-blue-900/30 rounded-lg">
-                            <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                            <div className="font-bold text-blue-400">100k TPS</div>
-                          </div>
-                          <div className="text-center p-4 bg-purple-900/30 rounded-lg">
-                            <Heart className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                            <div className="font-bold text-purple-400">Eco-Friendly</div>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-cyan-900/30">
-                    <CardHeader>
-                      <CardTitle className="text-blue-400">🌐 Hosting Infrastructure</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-center mb-4">
-                        <div className="text-2xl font-bold text-green-400 mb-2">www.gaiaexchanges.com</div>
-                        <div className="text-blue-400 mb-4">Private Hosting Infrastructure</div>
-                        <Progress value={85} className="h-4 mb-2" />
-                        <div className="text-sm text-muted-foreground">85% Complete</div>
-                      </div>
-                      <div className="grid grid-cols-3 gap-4">
-                        <div className="text-center p-4 bg-green-900/30 rounded-lg">
-                          <Rocket className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                          <div className="font-bold text-green-400">99.99% Uptime</div>
-                        </div>
-                        <div className="text-center p-4 bg-blue-900/30 rounded-lg">
-                          <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                          <div className="font-bold text-blue-400">Global CDN</div>
-                        </div>
-                        <div className="text-center p-4 bg-purple-900/30 rounded-lg">
-                          <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                          <div className="font-bold text-purple-400">Military Security</div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+            {/* Unified GAIA Private Exchange Network Interface */}
+            <Card className="border-emerald-500/30 bg-gradient-to-br from-emerald-900/30 via-green-900/30 to-blue-900/30">
+              <CardHeader className="text-center">
+                <CardTitle className="text-3xl font-bold bg-gradient-to-r from-emerald-400 via-green-400 to-blue-400 bg-clip-text text-transparent flex items-center justify-center gap-4">
+                  <div className="text-4xl">🌍</div>
+                  GAIA'S PRIVATE EXCHANGE NETWORK
+                  <div className="text-4xl">🚀</div>
+                </CardTitle>
+                <p className="text-emerald-400 text-lg">Ultimate Trading Ecosystem • All-in-One Interface • Zero Fees Forever</p>
+              </CardHeader>
+              <CardContent>
+                {/* Interface Selector */}
+                <div className="flex justify-center mb-6">
+                  <div className="bg-black/50 p-2 rounded-lg border border-emerald-500/30">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+                      {[
+                        { id: 'unified', icon: '🌍', name: 'Unified Hub', color: 'emerald' },
+                        { id: 'trading', icon: '📈', name: 'Pro Trading', color: 'blue' },
+                        { id: 'exchange', icon: '💱', name: 'Investment', color: 'purple' },
+                        { id: 'platform', icon: '🚀', name: 'Platform', color: 'cyan' },
+                        { id: 'analytics', icon: '📊', name: 'Analytics', color: 'yellow' },
+                        { id: 'blockchain', icon: '⛓️', name: 'Blockchain', color: 'green' }
+                      ].map((interface_item) => (
+                        <Button
+                          key={interface_item.id}
+                          onClick={() => setActiveInterface(interface_item.id)}
+                          variant={activeInterface === interface_item.id ? "default" : "outline"}
+                          className={`h-auto py-3 px-4 flex-col gap-1 text-xs ${
+                            activeInterface === interface_item.id 
+                              ? `bg-${interface_item.color}-600 text-white border-${interface_item.color}-500` 
+                              : `border-${interface_item.color}-500/30 text-${interface_item.color}-400 hover:bg-${interface_item.color}-900/30`
+                          }`}
+                        >
+                          <div className="text-xl">{interface_item.icon}</div>
+                          <div>{interface_item.name}</div>
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <BlockchainStatus />
-                <LiveTransactionMatrix />
-              </TabsContent>
-              
-              <TabsContent value="exchange" className="space-y-6">
-                <FullyFunctionalExchange />
-              </TabsContent>
-              
-              <TabsContent value="trading" className="space-y-6">
-                <TradingInterface />
-              </TabsContent>
-              
-              <TabsContent value="security" className="space-y-6">
-                <SecurityCenter notifications={notifications} />
-              </TabsContent>
-              
-              <TabsContent value="analytics" className="space-y-6">
-                <ChartAnalytics />
-              </TabsContent>
-              
-              <TabsContent value="investors" className="space-y-6">
-                <InvestorScoutingSystem />
-              </TabsContent>
-              
-              <TabsContent value="fees" className="space-y-6">
-                <GaiaFeeManager />
-              </TabsContent>
-              
-              <TabsContent value="platform" className="space-y-6">
-                <GaiasExchange />
-                <MultiExchangeIntegration />
-              </TabsContent>
-            </Tabs>
+
+                {/* Unified Content Display */}
+                <div className="space-y-6">
+                  {activeInterface === 'unified' && (
+                    <Tabs defaultValue="overview" className="w-full">
+                      <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 bg-gradient-to-r from-emerald-900/30 to-blue-900/30">
+                        <TabsTrigger value="overview">🏠 Overview</TabsTrigger>
+                        <TabsTrigger value="swap">💱 Instant Swap</TabsTrigger>
+                        <TabsTrigger value="security">🛡️ Security</TabsTrigger>
+                        <TabsTrigger value="fees">💰 Fee Manager</TabsTrigger>
+                        <TabsTrigger value="investors">👥 Investors</TabsTrigger>
+                        <TabsTrigger value="vault">🏛️ Vault</TabsTrigger>
+                      </TabsList>
+                      
+                      <TabsContent value="overview" className="space-y-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                          <BlockchainStatus />
+                          <LiveTransactionMatrix />
+                        </div>
+                      </TabsContent>
+                      
+                      <TabsContent value="swap" className="space-y-6">
+                        <FullyFunctionalExchange />
+                      </TabsContent>
+                      
+                      <TabsContent value="security" className="space-y-6">
+                        <SecurityCenter notifications={notifications} />
+                      </TabsContent>
+                      
+                      <TabsContent value="fees" className="space-y-6">
+                        <GaiaFeeManager />
+                      </TabsContent>
+                      
+                      <TabsContent value="investors" className="space-y-6">
+                        <InvestorScoutingSystem />
+                      </TabsContent>
+                      
+                      <TabsContent value="vault" className="space-y-6">
+                        <CommunityVault />
+                      </TabsContent>
+                    </Tabs>
+                  )}
+
+                  {activeInterface === 'trading' && (
+                    <div className="space-y-6">
+                      <TradingInterface />
+                      <ChartAnalytics />
+                    </div>
+                  )}
+
+                  {activeInterface === 'exchange' && (
+                    <div className="space-y-6">
+                      <FullyFunctionalExchange />
+                    </div>
+                  )}
+
+                  {activeInterface === 'platform' && (
+                    <div className="space-y-6">
+                      <GaiasExchange />
+                      <MultiExchangeIntegration />
+                    </div>
+                  )}
+
+                  {activeInterface === 'analytics' && (
+                    <div className="space-y-6">
+                      <ChartAnalytics />
+                    </div>
+                  )}
+
+                  {activeInterface === 'blockchain' && (
+                    <div className="space-y-6">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
+                          <CardHeader>
+                            <CardTitle className="text-green-400">🔗 Private Blockchain Network</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="space-y-4">
+                              <div className="text-center p-6 bg-black rounded-lg">
+                                <div className="text-4xl mb-4">🎬</div>
+                                <div className="text-xl font-bold text-green-400 mb-2">GAIA BLOCKCHAIN EXPLAINED</div>
+                                <div className="text-blue-400 animate-pulse">Animated Movie Coming Soon...</div>
+                              </div>
+                              <div className="grid grid-cols-3 gap-4">
+                                <div className="text-center p-4 bg-green-900/30 rounded-lg">
+                                  <Shield className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                                  <div className="font-bold text-green-400">Quantum Secure</div>
+                                </div>
+                                <div className="text-center p-4 bg-blue-900/30 rounded-lg">
+                                  <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                                  <div className="font-bold text-blue-400">100k TPS</div>
+                                </div>
+                                <div className="text-center p-4 bg-purple-900/30 rounded-lg">
+                                  <Heart className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                                  <div className="font-bold text-purple-400">Eco-Friendly</div>
+                                </div>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                        
+                        <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-cyan-900/30">
+                          <CardHeader>
+                            <CardTitle className="text-blue-400">🌐 Hosting Infrastructure</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="text-center mb-4">
+                              <div className="text-2xl font-bold text-green-400 mb-2">www.gaiaexchanges.com</div>
+                              <div className="text-blue-400 mb-4">Private Hosting Infrastructure</div>
+                              <Progress value={85} className="h-4 mb-2" />
+                              <div className="text-sm text-muted-foreground">85% Complete</div>
+                            </div>
+                            <div className="grid grid-cols-3 gap-4">
+                              <div className="text-center p-4 bg-green-900/30 rounded-lg">
+                                <Rocket className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                                <div className="font-bold text-green-400">99.99% Uptime</div>
+                              </div>
+                              <div className="text-center p-4 bg-blue-900/30 rounded-lg">
+                                <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                                <div className="font-bold text-blue-400">Global CDN</div>
+                              </div>
+                              <div className="text-center p-4 bg-purple-900/30 rounded-lg">
+                                <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                                <div className="font-bold text-purple-400">Military Security</div>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </div>
+                      <BlockchainStatus />
+                      <LiveTransactionMatrix />
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Community Vault Column */}
