@@ -8,79 +8,85 @@ export function PersistentAdminSession() {
   const [sessionActive, setSessionActive] = useState(false)
 
   useEffect(() => {
-    // Create ultra-persistent admin session that survives everything
+    // Create ultra-persistent admin session with quota management
     const createUltraPersistentSession = () => {
       if (isAdmin && adminSession) {
-        // Multiple storage layers for maximum persistence
-        const sessionData = {
-          sessionId: adminSession.id,
-          timestamp: adminSession.timestamp,
-          persistent: true,
-          ultraSecure: true,
-          quantumProtected: true
-        }
-        
-        // Store in multiple locations
-        localStorage.setItem('gaia-admin-session', JSON.stringify(sessionData))
-        localStorage.setItem('gaia-admin-backup', JSON.stringify(sessionData))
-        localStorage.setItem('admin-quantum-key', btoa(JSON.stringify(sessionData)))
-        
-        sessionStorage.setItem('admin-active', 'true')
-        sessionStorage.setItem('admin-quantum-active', 'true')
-        
-        // Browser persistence
-        if ('indexedDB' in window) {
-          const request = indexedDB.open('GaiaAdminDB', 1)
-          request.onsuccess = (event) => {
-            const db = (event.target as IDBRequest).result
-            const transaction = db.transaction(['adminSessions'], 'readwrite')
-            const store = transaction.objectStore('adminSessions')
-            store.put(sessionData, 'current-session')
+        try {
+          // Lightweight session data to prevent quota issues
+          const sessionData = {
+            sessionId: adminSession.id,
+            timestamp: adminSession.timestamp,
+            persistent: true
+          }
+          
+          // Clear old data first to prevent quota exceeded
+          const keysToClean = ['gaia-admin-backup', 'admin-quantum-key']
+          keysToClean.forEach(key => {
+            try {
+              localStorage.removeItem(key)
+            } catch (e) {
+              // Ignore cleanup errors
+            }
+          })
+          
+          // Store only essential data
+          localStorage.setItem('gaia-admin-session', JSON.stringify(sessionData))
+          sessionStorage.setItem('admin-active', 'true')
+          
+          setSessionActive(true)
+          console.log('🛡️ ADMIN SESSION ACTIVATED')
+        } catch (error) {
+          console.warn('Storage quota exceeded, using minimal session')
+          // Fallback: only use sessionStorage
+          try {
+            sessionStorage.setItem('admin-active', 'true')
+            setSessionActive(true)
+          } catch (e) {
+            console.error('Critical: Cannot create admin session')
           }
         }
-        
-        setSessionActive(true)
-        console.log('🛡️ ULTRA-PERSISTENT ADMIN SESSION ACTIVATED')
-        console.log('👑 QUANTUM PROTECTION ENABLED - INFINITE SESSION TIME')
       }
     }
 
-    // Keep session alive with multiple heartbeats
+    // Simplified heartbeat to prevent quota issues
     const multiLayerHeartbeat = () => {
       if (isAdmin && adminSession) {
-        const sessions = [
-          localStorage.getItem('gaia-admin-session'),
-          localStorage.getItem('gaia-admin-backup'),
-          sessionStorage.getItem('admin-active')
-        ]
-        
-        if (sessions.some(s => s)) {
-          // Refresh all session timestamps
-          const sessionData = {
-            sessionId: adminSession.id,
-            timestamp: Date.now(),
-            persistent: true,
-            ultraSecure: true,
-            quantumProtected: true
+        try {
+          const sessions = [
+            localStorage.getItem('gaia-admin-session'),
+            sessionStorage.getItem('admin-active')
+          ]
+          
+          if (sessions.some(s => s)) {
+            // Update timestamp only if storage allows
+            const sessionData = {
+              sessionId: adminSession.id,
+              timestamp: Date.now(),
+              persistent: true
+            }
+            
+            localStorage.setItem('gaia-admin-session', JSON.stringify(sessionData))
+            sessionStorage.setItem('admin-active', 'true')
+            sessionStorage.setItem('admin-heartbeat', Date.now().toString())
+            
+            console.log('💗 ADMIN HEARTBEAT ACTIVE')
           }
-          
-          localStorage.setItem('gaia-admin-session', JSON.stringify(sessionData))
-          localStorage.setItem('gaia-admin-backup', JSON.stringify(sessionData))
-          sessionStorage.setItem('admin-active', 'true')
-          sessionStorage.setItem('admin-quantum-active', 'true')
-          sessionStorage.setItem('admin-heartbeat', Date.now().toString())
-          
-          console.log('💗 QUANTUM ADMIN HEARTBEAT - ULTRA PERSISTENCE ACTIVE')
+        } catch (error) {
+          // If localStorage fails, use sessionStorage only
+          try {
+            sessionStorage.setItem('admin-active', 'true')
+          } catch (e) {
+            console.warn('Storage quota exceeded, session may be limited')
+          }
         }
       }
     }
 
     createUltraPersistentSession()
     
-    // Multiple heartbeat intervals for redundancy
-    const interval1 = setInterval(multiLayerHeartbeat, 2000) // Every 2 seconds
-    const interval2 = setInterval(multiLayerHeartbeat, 5000) // Every 5 seconds
-    const interval3 = setInterval(multiLayerHeartbeat, 10000) // Every 10 seconds
+    // Reduced heartbeat frequency to prevent quota issues
+    const interval1 = setInterval(multiLayerHeartbeat, 10000) // Every 10 seconds
+    const interval2 = setInterval(multiLayerHeartbeat, 30000) // Every 30 seconds
     
     // Prevent any kind of session loss
     const preventLogout = () => {
@@ -122,7 +128,6 @@ export function PersistentAdminSession() {
     return () => {
       clearInterval(interval1)
       clearInterval(interval2)
-      clearInterval(interval3)
       window.removeEventListener('beforeunload', preventLogout)
       window.removeEventListener('pagehide', preventLogout)
       window.removeEventListener('visibilitychange', preventLogout)
