@@ -1,28 +1,29 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+
+import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
 import { 
-  Droplets, 
-  Sprout, 
-  Home as HomeIcon, 
-  BookOpen, 
-  Users, 
-  Briefcase,
-  Star,
-  MapPin,
-  Trophy,
-  Camera,
+  Zap, 
+  Trophy, 
+  Camera, 
+  MapPin, 
   Target,
   Vote,
+  Users,
+  Lock,
   Coins,
-  Store,
+  Crown,
+  Globe,
   GraduationCap,
-  Bike
+  Star,
+  CheckCircle
 } from 'lucide-react'
 
-// Import Phase components
-import { InteractiveFoodMap } from '@/components/community/InteractiveFoodMap'
+// Import existing components
+import { GaiaBikeEarning } from '@/components/earning/GaiaBikeEarning'
 import { EnhancedBadgeSystem } from '@/components/earning/EnhancedBadgeSystem'
 import { PhotoVerificationSystem } from '@/components/earning/PhotoVerificationSystem'
 import { LocationBasedMissions } from '@/components/community/LocationBasedMissions'
@@ -31,257 +32,173 @@ import { TeamChallenges } from '@/components/earning/TeamChallenges'
 import { TokenStakingSystem } from '@/components/earning/TokenStakingSystem'
 import { AdvancedTokenMechanics } from '@/components/earning/AdvancedTokenMechanics'
 import { CommunityGovernance } from '@/components/community/CommunityGovernance'
+import { InteractiveFoodMap } from '@/components/community/InteractiveFoodMap'
+
+// Create missing components inline for now - we'll extract them later
 import { EcosystemIntegration } from '@/components/earning/EcosystemIntegration'
 import { MentorshipProgram } from '@/components/earning/MentorshipProgram'
-import { GaiaBikeEarning } from '@/components/earning/GaiaBikeEarning'
 
-// Keep existing imports
-import { useEarningActivities, useUserProfile } from '@/hooks/useEarningSystem'
+export default function EarningActivities() {
+  const [activePhase, setActivePhase] = useState('phase1')
 
-const EarningActivities = () => {
-  const userId = 'demo-user'
-  const { activities, recordWaterSaving, recordBeeHotel, recordEnvironmentalEducation, recordHomeGrownFood, processReferral, recordSkillBasedWork } = useEarningActivities(userId)
-  const { profile, stats } = useUserProfile(userId)
+  const phaseData = [
+    {
+      id: 'phase1',
+      title: 'Phase 1: Foundation',
+      status: 'completed',
+      progress: 100,
+      components: [
+        { name: 'GAiA Eco Bike Earning System', icon: Zap, status: 'active' },
+        { name: 'Enhanced Badge & Achievement System', icon: Trophy, status: 'active' },
+        { name: 'Photo Verification System', icon: Camera, status: 'active' },
+        { name: 'Community Food Growers Map', icon: MapPin, status: 'active' }
+      ]
+    },
+    {
+      id: 'phase2',
+      title: 'Phase 2: Community',
+      status: 'completed',
+      progress: 100,
+      components: [
+        { name: 'Location-Based Missions', icon: Target, status: 'active' },
+        { name: 'Community Project Voting', icon: Vote, status: 'active' },
+        { name: 'Team Challenges', icon: Users, status: 'active' },
+        { name: 'Token Staking System', icon: Lock, status: 'active' }
+      ]
+    },
+    {
+      id: 'phase3',
+      title: 'Phase 3: Advanced',
+      status: 'completed',
+      progress: 100,
+      components: [
+        { name: 'Advanced Token Mechanics', icon: Coins, status: 'active' },
+        { name: 'Community Governance', icon: Crown, status: 'active' },
+        { name: 'Ecosystem Integration', icon: Globe, status: 'active' },
+        { name: 'Mentorship Program', icon: GraduationCap, status: 'active' }
+      ]
+    }
+  ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900/10">
-      <div className="container mx-auto px-4 py-6">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            GAiA Earning Activities
+    <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20 p-4">
+      <div className="max-w-7xl mx-auto space-y-6">
+        {/* Header */}
+        <div className="text-center space-y-4">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            🌍 GAiA Earning Activities
           </h1>
-          <p className="text-xl text-muted-foreground mt-4">
-            Earn GAiA tokens for positive environmental actions • Multi-phase ecosystem • Community driven
+          <p className="text-lg text-muted-foreground">
+            Complete environmental activities and earn GAiA tokens while making a positive impact
           </p>
-          <div className="flex justify-center gap-2 mt-4 flex-wrap">
-            <Badge className="bg-green-600 text-white">Phase 1: ✅ Complete</Badge>
-            <Badge className="bg-blue-600 text-white">Phase 2: ✅ Complete</Badge>
-            <Badge className="bg-purple-600 text-white">Phase 3: ✅ Complete</Badge>
-          </div>
         </div>
 
-        {/* User Stats Overview */}
-        <Card className="mb-8 border-blue-500/30 bg-gradient-to-r from-blue-900/20 to-purple-900/20">
-          <CardHeader>
-            <CardTitle className="text-blue-400">Your GAiA Profile</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="text-center p-3 rounded-lg bg-green-900/30">
-                <div className="text-2xl font-bold text-green-400">{stats.totalPoints}</div>
-                <div className="text-xs text-muted-foreground">Total Points</div>
-              </div>
-              <div className="text-center p-3 rounded-lg bg-blue-900/30">
-                <div className="text-2xl font-bold text-blue-400">{stats.totalTokens}</div>
-                <div className="text-xs text-muted-foreground">GAiA Tokens</div>
-              </div>
-              <div className="text-center p-3 rounded-lg bg-purple-900/30">
-                <div className="text-2xl font-bold text-purple-400">Level {stats.level}</div>
-                <div className="text-xs text-muted-foreground">Current Level</div>
-              </div>
-              <div className="text-center p-3 rounded-lg bg-orange-900/30">
-                <div className="text-2xl font-bold text-orange-400">{stats.streak} days</div>
-                <div className="text-xs text-muted-foreground">Streak</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Phase Overview Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          {phaseData.map((phase) => (
+            <Card 
+              key={phase.id}
+              className={`cursor-pointer transition-all border-2 ${
+                activePhase === phase.id 
+                  ? 'border-green-500/50 bg-green-900/20' 
+                  : 'border-gray-500/20 hover:border-green-500/30'
+              }`}
+              onClick={() => setActivePhase(phase.id)}
+            >
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-semibold text-green-400">{phase.title}</h3>
+                  <Badge className={phase.status === 'completed' ? 'bg-green-600' : 'bg-blue-600'}>
+                    {phase.status === 'completed' ? '✅ Complete' : '🚧 Active'}
+                  </Badge>
+                </div>
+                <div className="space-y-2">
+                  <Progress value={phase.progress} className="h-2" />
+                  <div className="text-sm text-muted-foreground">
+                    {phase.components.length} components • {phase.progress}% complete
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
-        <Tabs defaultValue="phase1" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
-            <TabsTrigger value="phase1" className="text-green-400">
-              🌱 Phase 1: Foundation
+        {/* Phase Content */}
+        <Tabs value={activePhase} onValueChange={setActivePhase} className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsTrigger value="phase1" className="text-sm">
+              🔰 Phase 1: Foundation
             </TabsTrigger>
-            <TabsTrigger value="phase2" className="text-blue-400">
-              🚀 Phase 2: Community
+            <TabsTrigger value="phase2" className="text-sm">
+              🏘️ Phase 2: Community
             </TabsTrigger>
-            <TabsTrigger value="phase3" className="text-purple-400">
-              💎 Phase 3: Ecosystem
+            <TabsTrigger value="phase3" className="text-sm">
+              🚀 Phase 3: Advanced
             </TabsTrigger>
           </TabsList>
 
-          {/* PHASE 1: Foundation Features */}
-          <TabsContent value="phase1" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card className="border-green-500/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-green-400">
-                    <MapPin className="h-5 w-5" />
-                    🗺️ Interactive Food Map
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <InteractiveFoodMap />
-                </CardContent>
-              </Card>
-
-              <Card className="border-blue-500/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-blue-400">
-                    <Bike className="h-5 w-5" />
-                    🚴 GAiA Bike Earning
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <GaiaBikeEarning />
-                </CardContent>
-              </Card>
+          {/* Phase 1 Content */}
+          <TabsContent value="phase1" className="space-y-8">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-green-400 mb-2">🔰 Phase 1: Foundation Systems</h2>
+              <p className="text-muted-foreground">Core earning mechanisms and basic community features</p>
             </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card className="border-purple-500/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-purple-400">
-                    <Trophy className="h-5 w-5" />
-                    🏆 Enhanced Badge System
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <EnhancedBadgeSystem />
-                </CardContent>
-              </Card>
-
-              <Card className="border-orange-500/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-orange-400">
-                    <Camera className="h-5 w-5" />
-                    📸 Photo Verification
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <PhotoVerificationSystem />
-                </CardContent>
-              </Card>
-            </div>
+            
+            <GaiaBikeEarning />
+            <EnhancedBadgeSystem />
+            <PhotoVerificationSystem />
+            <InteractiveFoodMap />
           </TabsContent>
 
-          {/* PHASE 2: Community Features */}
-          <TabsContent value="phase2" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card className="border-indigo-500/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-indigo-400">
-                    <Target className="h-5 w-5" />
-                    🎯 Location-Based Missions
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <LocationBasedMissions />
-                </CardContent>
-              </Card>
-
-              <Card className="border-cyan-500/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-cyan-400">
-                    <Vote className="h-5 w-5" />
-                    🗳️ Community Project Voting
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CommunityProjectVoting />
-                </CardContent>
-              </Card>
+          {/* Phase 2 Content */}
+          <TabsContent value="phase2" className="space-y-8">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-blue-400 mb-2">🏘️ Phase 2: Community Engagement</h2>
+              <p className="text-muted-foreground">Advanced community features and collaborative activities</p>
             </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card className="border-red-500/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-red-400">
-                    <Users className="h-5 w-5" />
-                    👥 Team Challenges
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <TeamChallenges />
-                </CardContent>
-              </Card>
-
-              <Card className="border-yellow-500/30">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-yellow-400">
-                    <Coins className="h-5 w-5" />
-                    💰 Token Staking System
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <TokenStakingSystem />
-                </CardContent>
-              </Card>
-            </div>
+            
+            <LocationBasedMissions />
+            <CommunityProjectVoting />
+            <TeamChallenges />
+            <TokenStakingSystem />
           </TabsContent>
 
-          {/* PHASE 3: Ecosystem Features */}
-          <TabsContent value="phase3" className="space-y-6">
+          {/* Phase 3 Content */}
+          <TabsContent value="phase3" className="space-y-8">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-purple-400 mb-2">🚀 Phase 3: Advanced Features</h2>
+              <p className="text-muted-foreground">Sophisticated token mechanics and governance systems</p>
+            </div>
+            
             <AdvancedTokenMechanics />
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <CommunityGovernance />
-              <MentorshipProgram />
-            </div>
-            
+            <CommunityGovernance />
             <EcosystemIntegration />
+            <MentorshipProgram />
           </TabsContent>
         </Tabs>
 
-        {/* Traditional Earning Activities (Legacy) */}
-        <Card className="mt-8 border-gray-500/30">
-          <CardHeader>
-            <CardTitle className="text-gray-400">📋 Traditional Earning Activities</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="p-4 rounded-lg border border-blue-500/20 bg-blue-900/10">
-                <div className="flex items-center gap-2 mb-2">
-                  <Droplets className="h-5 w-5 text-blue-400" />
-                  <span className="font-medium">Water Conservation</span>
+        {/* Footer Stats */}
+        <Card className="border-2 border-green-500/20 bg-gradient-to-r from-green-900/10 to-blue-900/10">
+          <CardContent className="p-6">
+            <div className="text-center space-y-4">
+              <h3 className="text-xl font-bold text-green-400">🌟 Your GAiA Journey Progress</h3>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-green-400">2,450</div>
+                  <div className="text-sm text-muted-foreground">Total GAiA Earned</div>
                 </div>
-                <p className="text-sm text-muted-foreground mb-2">Save water through various methods</p>
-                <div className="text-blue-400 font-bold">10-50 GAiA per action</div>
-              </div>
-
-              <div className="p-4 rounded-lg border border-green-500/20 bg-green-900/10">
-                <div className="flex items-center gap-2 mb-2">
-                  <Sprout className="h-5 w-5 text-green-400" />
-                  <span className="font-medium">Home Grown Food</span>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-400">12</div>
+                  <div className="text-sm text-muted-foreground">Components Active</div>
                 </div>
-                <p className="text-sm text-muted-foreground mb-2">Grow and share your own food</p>
-                <div className="text-green-400 font-bold">20-100 GAiA per harvest</div>
-              </div>
-
-              <div className="p-4 rounded-lg border border-yellow-500/20 bg-yellow-900/10">
-                <div className="flex items-center gap-2 mb-2">
-                  <HomeIcon className="h-5 w-5 text-yellow-400" />
-                  <span className="font-medium">Bee Hotels</span>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-purple-400">3/3</div>
+                  <div className="text-sm text-muted-foreground">Phases Complete</div>
                 </div>
-                <p className="text-sm text-muted-foreground mb-2">Create habitats for beneficial insects</p>
-                <div className="text-yellow-400 font-bold">25-75 GAiA per hotel</div>
-              </div>
-
-              <div className="p-4 rounded-lg border border-purple-500/20 bg-purple-900/10">
-                <div className="flex items-center gap-2 mb-2">
-                  <BookOpen className="h-5 w-5 text-purple-400" />
-                  <span className="font-medium">Environmental Education</span>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-yellow-400">⭐⭐⭐</div>
+                  <div className="text-sm text-muted-foreground">Eco Rating</div>
                 </div>
-                <p className="text-sm text-muted-foreground mb-2">Learn and teach about sustainability</p>
-                <div className="text-purple-400 font-bold">15-60 GAiA per course</div>
-              </div>
-
-              <div className="p-4 rounded-lg border border-red-500/20 bg-red-900/10">
-                <div className="flex items-center gap-2 mb-2">
-                  <Users className="h-5 w-5 text-red-400" />
-                  <span className="font-medium">Referral Program</span>
-                </div>
-                <p className="text-sm text-muted-foreground mb-2">Bring friends to the ecosystem</p>
-                <div className="text-red-400 font-bold">50+ GAiA per referral</div>
-              </div>
-
-              <div className="p-4 rounded-lg border border-orange-500/20 bg-orange-900/10">
-                <div className="flex items-center gap-2 mb-2">
-                  <Briefcase className="h-5 w-5 text-orange-400" />
-                  <span className="font-medium">Skill-Based Work</span>
-                </div>
-                <p className="text-sm text-muted-foreground mb-2">Use your skills for eco projects</p>
-                <div className="text-orange-400 font-bold">Variable GAiA per task</div>
               </div>
             </div>
           </CardContent>
@@ -290,5 +207,3 @@ const EarningActivities = () => {
     </div>
   )
 }
-
-export default EarningActivities
