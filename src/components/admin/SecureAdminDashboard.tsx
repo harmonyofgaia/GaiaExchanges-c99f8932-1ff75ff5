@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -9,7 +9,9 @@ import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
 import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
 import { AdminDashboardTabs } from './AdminDashboardTabs'
-import { RefactoredSecuritySuite } from './RefactoredSecuritySuite'
+
+// Lazy load heavy components to improve performance
+const RefactoredSecuritySuite = lazy(() => import('./RefactoredSecuritySuite').then(module => ({ default: module.RefactoredSecuritySuite })))
 import RefactoredAdminTools from './RefactoredAdminTools'
 import { SupremeControlSuite } from './SupremeControlSuite'
 import { UserIsolationSystem } from './UserIsolationSystem'
@@ -226,7 +228,16 @@ export function SecureAdminDashboard() {
         <TabsContent value="security" className="space-y-6">
           <SecurityDashboard />
           <UltimateSecurity />
-          <RefactoredSecuritySuite />
+          <Suspense fallback={
+            <Card>
+              <CardContent className="p-8 text-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+                <div className="text-muted-foreground">Loading Security Suite...</div>
+              </CardContent>
+            </Card>
+          }>
+            <RefactoredSecuritySuite />
+          </Suspense>
         </TabsContent>
 
         <TabsContent value="users" className="space-y-6">

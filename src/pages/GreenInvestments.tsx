@@ -2,6 +2,7 @@
 import { GAiACommunityProjects } from '@/components/green-investments/GAiACommunityProjects'
 import { GaiaCommunityProjects } from '@/components/GaiaCommunityProjects'
 import { WildfireSandProtection } from '@/components/green-investments/WildfireSandProtection'
+import { SandProtectInvestmentProject } from '@/components/green-investments/SandProtectInvestmentProject'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -262,16 +263,31 @@ const GreenInvestments = () => {
           </div>
         </div>
 
-        {/* Featured Project: Wildfire Sand Protection */}
+        {/* Featured Project: SandProtect Investment Opportunity */}
         <div className="mb-12">
           <div className="text-center mb-6">
             <Badge className="bg-orange-600 text-white mb-2">
               <Flame className="h-4 w-4 mr-1" />
-              FEATURED PROTECTION PROJECT
+              FEATURED INVESTMENT PROJECT
             </Badge>
-            <h2 className="text-2xl font-bold text-orange-400">Advanced Wildfire Sand Barrier Protection System</h2>
+            <h2 className="text-3xl font-bold text-orange-400">SandProtect Initiative</h2>
             <p className="text-muted-foreground mt-2">
-              Revolutionary sand barrier technology protecting communities from wildfire threats with real-time monitoring
+              Revolutionary sand barrier technology with multiple investment tiers and proven ROI
+            </p>
+          </div>
+          <SandProtectInvestmentProject />
+        </div>
+
+        {/* Technical Implementation: Wildfire Sand Protection */}
+        <div className="mb-12">
+          <div className="text-center mb-6">
+            <Badge className="bg-blue-600 text-white mb-2">
+              <Shield className="h-4 w-4 mr-1" />
+              TECHNICAL SHOWCASE
+            </Badge>
+            <h2 className="text-2xl font-bold text-blue-400">Advanced Wildfire Sand Barrier Technology</h2>
+            <p className="text-muted-foreground mt-2">
+              Deep dive into the technical implementation and real-time monitoring systems
             </p>
           </div>
           <WildfireSandProtection />
