@@ -18,11 +18,11 @@ export default function Exchange() {
               />
             </div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-              GAIA Private Exchange Network
+              Gaia's Private Blockchain Network
             </h1>
           </div>
           <p className="text-xl text-muted-foreground mb-2">
-            Universal Multi-Token Exchange • Zero Fees • Full Transparency
+            Unified Token Exchange • Zero Fees • 100% Community Controlled
           </p>
           <div className="flex items-center justify-center gap-2 mb-2">
             <img 

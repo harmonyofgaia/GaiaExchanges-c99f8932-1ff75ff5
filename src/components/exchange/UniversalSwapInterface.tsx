@@ -145,8 +145,8 @@ export function UniversalSwapInterface() {
     setIsSwapping(true)
     
     setTimeout(() => {
-      toast.success('✅ Swap Confirmed in GAIA Private Network!', {
-        description: `${fromAmount} ${fromToken.symbol} → ${toAmount} ${toToken.symbol} • ${selectedOption?.name} applied`
+      toast.success('✅ Swap Executed on Gaia Blockchain!', {
+        description: `${fromAmount} ${fromToken.symbol} → ${toAmount} ${toToken.symbol} • ${selectedOption?.name} applied to Community Vault`
       })
       setFromAmount('')
       setToAmount('')
@@ -229,192 +229,127 @@ export function UniversalSwapInterface() {
   return (
     <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30 backdrop-blur-sm">
       <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-3 text-green-400">
-            <Globe className="h-6 w-6" />
-            Universal Token Exchange
-            <Shield className="h-5 w-5 text-blue-400" />
-          </CardTitle>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setShowAdvanced(!showAdvanced)}
-            className="border-green-500/30"
-          >
-            <Settings className="h-4 w-4 mr-2" />
-            {showAdvanced ? 'Simple' : 'Advanced'}
-          </Button>
-        </div>
+        <CardTitle className="flex items-center gap-3 text-green-400">
+          <img 
+            src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
+            alt="Harmony of Gaia"
+            className="w-8 h-8 object-contain"
+          />
+          Gaia's Private Blockchain Network
+          <Shield className="h-5 w-5 text-blue-400" />
+        </CardTitle>
         <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-2">
-            <img 
-              src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
-              alt="Harmony of Gaia"
-              className="w-5 h-5 object-contain"
-            />
-            <p className="text-sm text-green-300">
-              <strong>GAIA Private Exchange Network</strong> - All tokens legally confirmed and verified
-            </p>
-          </div>
-          <p className="text-xs text-green-400 mt-1">
-            Zero fees • Instant swaps • 100% transparency • Community-owned
+          <p className="text-sm text-green-300 mb-2">
+            <strong>Universal Token Exchange</strong> - Powered by Gaia's Private Blockchain
+          </p>
+          <p className="text-xs text-green-400">
+            Zero fees • Instant swaps • 100% transparency • Community vault rewards
           </p>
         </div>
       </CardHeader>
       
       <CardContent className="space-y-6">
-        {showAdvanced ? (
-          <Tabs defaultValue="swap" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="swap">Token Swap</TabsTrigger>
-              <TabsTrigger value="fees">Fee Options</TabsTrigger>
-              <TabsTrigger value="info">Market Info</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="swap" className="space-y-4">
-              <div className="space-y-4">
-                <div className="space-y-3">
-                  <TokenSelector 
-                    selectedToken={fromToken}
-                    onSelect={setFromToken}
-                    label="From"
-                  />
-                  <Input
-                    type="number"
-                    placeholder="0.00"
-                    value={fromAmount}
-                    onChange={(e) => setFromAmount(e.target.value)}
-                    className="text-lg h-14 bg-card border-border focus:border-green-500"
-                  />
-                </div>
-
-                <div className="flex justify-center py-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={switchTokens}
-                    className="rounded-full w-12 h-12 p-0 border-green-500/30 hover:border-green-500 hover:bg-green-500/10"
-                  >
-                    <ArrowUpDown className="h-5 w-5 text-green-400" />
-                  </Button>
-                </div>
-
-                <div className="space-y-3">
-                  <TokenSelector 
-                    selectedToken={toToken}
-                    onSelect={setToToken}
-                    label="To"
-                  />
-                  <Input
-                    type="number"
-                    placeholder="0.00"
-                    value={toAmount}
-                    readOnly
-                    className="text-lg h-14 bg-muted border-border"
-                  />
-                </div>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="fees" className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {FEE_OPTIONS.map((option) => (
-                  <div
-                    key={option.id}
-                    className={`p-3 rounded-lg border cursor-pointer transition-all hover:scale-105 ${
-                      selectedFeeOption === option.id
-                        ? 'border-blue-500 bg-blue-500/10'
-                        : 'border-border/50 hover:border-blue-400/50'
-                    }`}
-                    onClick={() => setSelectedFeeOption(option.id)}
-                  >
-                    <div className="flex items-start gap-3">
-                      {option.icon}
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-sm">{option.name}</h4>
-                        <p className="text-xs text-muted-foreground mb-2">
-                          {option.description}
-                        </p>
-                        <Badge variant={selectedFeeOption === option.id ? 'default' : 'outline'} className="text-xs">
-                          {option.percentage === 0 ? 'FREE' : `${option.percentage}% fee`}
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-
-            <TabsContent value="info" className="space-y-4">
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <div className="p-3 bg-green-500/10 rounded-lg border border-green-500/20">
-                  <div className="text-lg font-bold text-green-400">{SUPPORTED_TOKENS.length}</div>
-                  <div className="text-xs text-green-300">Verified Tokens</div>
-                </div>
-                <div className="p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
-                  <div className="text-lg font-bold text-blue-400">0%</div>
-                  <div className="text-xs text-blue-300">Default Fees</div>
-                </div>
-              </div>
-              
-              <div className="text-xs text-muted-foreground space-y-1">
-                <div>Rate: 1 {fromToken.symbol} = {getExchangeRate(fromToken, toToken).toFixed(8)} {toToken.symbol}</div>
-                <div>🏦 Community Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...</div>
-                <div>🌱 All fees fund environmental and community projects</div>
-                <div>🔒 All tokens verified and legally confirmed for trading</div>
-              </div>
-            </TabsContent>
-          </Tabs>
-        ) : (
-          // Simple mode - just the swap interface
-          <div className="space-y-4">
-            <div className="space-y-3">
-              <TokenSelector 
-                selectedToken={fromToken}
-                onSelect={setFromToken}
-                label="From"
-              />
-              <Input
-                type="number"
-                placeholder="0.00"
-                value={fromAmount}
-                onChange={(e) => setFromAmount(e.target.value)}
-                className="text-lg h-14 bg-card border-border focus:border-green-500"
-              />
-            </div>
-
-            <div className="flex justify-center py-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={switchTokens}
-                className="rounded-full w-12 h-12 p-0 border-green-500/30 hover:border-green-500 hover:bg-green-500/10"
-              >
-                <ArrowUpDown className="h-5 w-5 text-green-400" />
-              </Button>
-            </div>
-
-            <div className="space-y-3">
-              <TokenSelector 
-                selectedToken={toToken}
-                onSelect={setToToken}
-                label="To"
-              />
-              <Input
-                type="number"
-                placeholder="0.00"
-                value={toAmount}
-                readOnly
-                className="text-lg h-14 bg-muted border-border"
-              />
-            </div>
-
-            <div className="text-xs text-center text-muted-foreground">
-              Current fee option: {FEE_OPTIONS.find(opt => opt.id === selectedFeeOption)?.name} • Click Advanced for more options
-            </div>
+        {/* Token Swap Interface */}
+        <div className="space-y-4">
+          <div className="space-y-3">
+            <TokenSelector 
+              selectedToken={fromToken}
+              onSelect={setFromToken}
+              label="From"
+            />
+            <Input
+              type="number"
+              placeholder="0.00"
+              value={fromAmount}
+              onChange={(e) => setFromAmount(e.target.value)}
+              className="text-lg h-14 bg-card border-border focus:border-green-500"
+            />
           </div>
-        )}
 
+          <div className="flex justify-center py-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={switchTokens}
+              className="rounded-full w-12 h-12 p-0 border-green-500/30 hover:border-green-500 hover:bg-green-500/10"
+            >
+              <ArrowUpDown className="h-5 w-5 text-green-400" />
+            </Button>
+          </div>
+
+          <div className="space-y-3">
+            <TokenSelector 
+              selectedToken={toToken}
+              onSelect={setToToken}
+              label="To"
+            />
+            <Input
+              type="number"
+              placeholder="0.00"
+              value={toAmount}
+              readOnly
+              className="text-lg h-14 bg-muted border-border"
+            />
+          </div>
+        </div>
+
+        {/* Fee Options - Integrated directly into swap */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-semibold text-green-400 flex items-center gap-2">
+            <DollarSign className="h-4 w-4" />
+            Choose Your Fee Contribution
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {FEE_OPTIONS.map((option) => (
+              <div
+                key={option.id}
+                className={`p-3 rounded-lg border cursor-pointer transition-all hover:scale-105 ${
+                  selectedFeeOption === option.id
+                    ? 'border-green-500 bg-green-500/10 ring-1 ring-green-500/30'
+                    : 'border-border/50 hover:border-green-400/50'
+                }`}
+                onClick={() => setSelectedFeeOption(option.id)}
+              >
+                <div className="flex items-start gap-3">
+                  {option.icon}
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-sm">{option.name}</h4>
+                    <p className="text-xs text-muted-foreground mb-2">
+                      {option.description}
+                    </p>
+                    <Badge variant={selectedFeeOption === option.id ? 'default' : 'outline'} className="text-xs">
+                      {option.percentage === 0 ? 'FREE' : `${option.percentage}% fee`}
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Exchange Rate and Info */}
+        <div className="bg-card/50 rounded-lg p-4 space-y-2">
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Exchange Rate:</span>
+            <span className="text-green-400 font-mono">
+              1 {fromToken.symbol} = {getExchangeRate(fromToken, toToken).toFixed(8)} {toToken.symbol}
+            </span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Selected Fee:</span>
+            <span className="text-green-400">
+              {FEE_OPTIONS.find(opt => opt.id === selectedFeeOption)?.name}
+            </span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Community Vault:</span>
+            <span className="text-green-400 font-mono text-xs">
+              {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 12)}...{GAIA_TOKEN.WALLET_ADDRESS.slice(-8)}
+            </span>
+          </div>
+        </div>
+
+        {/* Swap Button */}
         <Button 
           onClick={handleSwap}
           disabled={!fromAmount || Number(fromAmount) <= 0 || isSwapping}
@@ -423,15 +358,31 @@ export function UniversalSwapInterface() {
           {isSwapping ? (
             <>
               <Zap className="h-5 w-5 mr-2 animate-spin" />
-              Processing Swap...
+              Processing on Gaia Blockchain...
             </>
           ) : (
             <>
               <Heart className="h-5 w-5 mr-2" />
-              Swap in GAIA Network
+              Execute Swap on Gaia Network
             </>
           )}
         </Button>
+
+        {/* Network Stats */}
+        <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="p-3 bg-green-500/10 rounded-lg border border-green-500/20">
+            <div className="text-lg font-bold text-green-400">{SUPPORTED_TOKENS.length}</div>
+            <div className="text-xs text-green-300">Verified Tokens</div>
+          </div>
+          <div className="p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
+            <div className="text-lg font-bold text-blue-400">100%</div>
+            <div className="text-xs text-blue-300">Transparency</div>
+          </div>
+          <div className="p-3 bg-purple-500/10 rounded-lg border border-purple-500/20">
+            <div className="text-lg font-bold text-purple-400">24/7</div>
+            <div className="text-xs text-purple-300">Network Active</div>
+          </div>
+        </div>
       </CardContent>
     </Card>
   )
