@@ -102,14 +102,16 @@ export function UniversalMarketplace() {
         </CardHeader>
       </Card>
 
-      <Tabs defaultValue="marketplace" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="marketplace">🛒 Marketplace</TabsTrigger>
-          <TabsTrigger value="gaming-items">🎮 Gaming Items</TabsTrigger>
-          <TabsTrigger value="eco-products">🌱 Eco Products</TabsTrigger>
-          <TabsTrigger value="digital-assets">💎 Digital Assets</TabsTrigger>
-          <TabsTrigger value="upload">📤 Upload</TabsTrigger>
-        </TabsList>
+        <Tabs defaultValue="marketplace" className="w-full">
+          <TabsList className="grid w-full grid-cols-7">
+            <TabsTrigger value="marketplace">🛒 Marketplace</TabsTrigger>
+            <TabsTrigger value="gaming-items">🎮 Gaming Items</TabsTrigger>
+            <TabsTrigger value="eco-products">🌱 Eco Products</TabsTrigger>
+            <TabsTrigger value="digital-assets">💎 Digital Assets</TabsTrigger>
+            <TabsTrigger value="services">🛠️ Services</TabsTrigger>
+            <TabsTrigger value="rentals">🏠 Rentals</TabsTrigger>
+            <TabsTrigger value="upload">📤 Upload</TabsTrigger>
+          </TabsList>
 
         <TabsContent value="marketplace" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -309,6 +311,105 @@ export function UniversalMarketplace() {
                     <li>• Cross-game compatibility</li>
                     <li>• Quality assurance</li>
                   </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="services" className="space-y-6">
+          <Card className="border-orange-500/30 bg-orange-900/20">
+            <CardHeader>
+              <CardTitle className="text-orange-400 flex items-center gap-2">
+                <Hammer className="h-6 w-6" />
+                🛠️ Professional Services Marketplace
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <Card className="bg-blue-900/20 border-blue-500/30">
+                  <CardContent className="p-4">
+                    <div className="text-4xl mb-2 text-center">👨‍💻</div>
+                    <h3 className="font-bold text-white">Custom Game Development</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Professional game creation services</p>
+                    <div className="text-xl font-bold text-green-400 mb-2">Starting at 1000 GAiA</div>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700">Book Service</Button>
+                  </CardContent>
+                </Card>
+                <Card className="bg-green-900/20 border-green-500/30">
+                  <CardContent className="p-4">
+                    <div className="text-4xl mb-2 text-center">🎨</div>
+                    <h3 className="font-bold text-white">3D Asset Creation</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Custom 3D models and textures</p>
+                    <div className="text-xl font-bold text-green-400 mb-2">Starting at 500 GAiA</div>
+                    <Button className="w-full bg-green-600 hover:bg-green-700">Book Service</Button>
+                  </CardContent>
+                </Card>
+                <Card className="bg-purple-900/20 border-purple-500/30">
+                  <CardContent className="p-4">
+                    <div className="text-4xl mb-2 text-center">🎵</div>
+                    <h3 className="font-bold text-white">Audio Production</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Music and sound effects creation</p>
+                    <div className="text-xl font-bold text-green-400 mb-2">Starting at 300 GAiA</div>
+                    <Button className="w-full bg-purple-600 hover:bg-purple-700">Book Service</Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="rentals" className="space-y-6">
+          <Card className="border-yellow-500/30 bg-yellow-900/20">
+            <CardHeader>
+              <CardTitle className="text-yellow-400 flex items-center gap-2">
+                <Crown className="h-6 w-6" />
+                🏠 Virtual Real Estate & Equipment Rentals
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-yellow-400">🏰 Virtual Properties</h3>
+                  <Card className="bg-purple-800/20 border-purple-400/30">
+                    <CardContent className="p-4">
+                      <div className="text-4xl mb-2 text-center">🏰</div>
+                      <h4 className="font-bold text-white">Floating Castle</h4>
+                      <p className="text-sm text-muted-foreground mb-3">Premium sky castle with 50 rooms</p>
+                      <div className="text-lg font-bold text-green-400 mb-2">50 GAiA/day</div>
+                      <Button className="w-full bg-purple-600 hover:bg-purple-700">Rent Property</Button>
+                    </CardContent>
+                  </Card>
+                  <Card className="bg-blue-800/20 border-blue-400/30">
+                    <CardContent className="p-4">
+                      <div className="text-4xl mb-2 text-center">🌊</div>
+                      <h4 className="font-bold text-white">Underwater Base</h4>
+                      <p className="text-sm text-muted-foreground mb-3">Deep ocean research facility</p>
+                      <div className="text-lg font-bold text-green-400 mb-2">75 GAiA/day</div>
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700">Rent Property</Button>
+                    </CardContent>
+                  </Card>
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-yellow-400">⚡ Gaming Equipment</h3>
+                  <Card className="bg-red-800/20 border-red-400/30">
+                    <CardContent className="p-4">
+                      <div className="text-4xl mb-2 text-center">🎮</div>
+                      <h4 className="font-bold text-white">Ultra Gaming Setup</h4>
+                      <p className="text-sm text-muted-foreground mb-3">High-end gaming rig with VR</p>
+                      <div className="text-lg font-bold text-green-400 mb-2">25 GAiA/hour</div>
+                      <Button className="w-full bg-red-600 hover:bg-red-700">Rent Equipment</Button>
+                    </CardContent>
+                  </Card>
+                  <Card className="bg-cyan-800/20 border-cyan-400/30">
+                    <CardContent className="p-4">
+                      <div className="text-4xl mb-2 text-center">🤖</div>
+                      <h4 className="font-bold text-white">AI Assistant Bot</h4>
+                      <p className="text-sm text-muted-foreground mb-3">Personal gaming and creation AI</p>
+                      <div className="text-lg font-bold text-green-400 mb-2">15 GAiA/hour</div>
+                      <Button className="w-full bg-cyan-600 hover:bg-cyan-700">Rent AI Bot</Button>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
             </CardContent>
