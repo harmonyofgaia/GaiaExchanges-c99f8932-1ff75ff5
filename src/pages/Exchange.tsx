@@ -23,7 +23,7 @@ import {
   Activity,
   Users,
   Download,
-  Github,
+  
   ExternalLink,
   Bell,
   Lock,
@@ -174,10 +174,10 @@ export default function Exchange() {
 
   const handleDownloadApp = (platform: string) => {
     const downloadLinks = {
-      windows: 'https://github.com/harmonyofgaia/gaia-exchanges/releases/latest/download/gaia-exchanges-windows-x64.exe',
-      macos: 'https://github.com/harmonyofgaia/gaia-exchanges/releases/latest/download/gaia-exchanges-macos-universal.dmg',
-      android: 'https://github.com/harmonyofgaia/gaia-exchanges/releases/latest/download/gaia-exchanges-android.apk',
-      linux: 'https://github.com/harmonyofgaia/gaia-exchanges/releases/latest/download/gaia-exchanges-linux-amd64.deb',
+      windows: 'https://releases.harmonyofgaia.net/gaia-exchanges-windows-x64.exe',
+      macos: 'https://releases.harmonyofgaia.net/gaia-exchanges-macos-universal.dmg',
+      android: 'https://releases.harmonyofgaia.net/gaia-exchanges-android.apk',
+      linux: 'https://releases.harmonyofgaia.net/gaia-exchanges-linux-amd64.deb',
       ios: 'https://apps.apple.com/search?term=gaia+exchanges',
       web: 'https://app.gaiaexchanges.com'
     }
@@ -455,12 +455,6 @@ export default function Exchange() {
                 </div>
                 
                 <div className="mt-6 flex justify-center gap-4 flex-wrap">
-                  <Button variant="outline" size="sm" asChild>
-                    <a href="https://github.com/harmonyofgaia/gaia-exchanges" target="_blank" rel="noopener noreferrer">
-                      <Github className="h-4 w-4 mr-2" />
-                      GitHub Repository
-                    </a>
-                  </Button>
                   <Button variant="outline" size="sm" asChild>
                     <a href={GAIA_TOKEN.PUMP_FUN_URL} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4 mr-2" />
