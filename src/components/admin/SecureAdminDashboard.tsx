@@ -44,6 +44,7 @@ import { PlatformManagement } from './PlatformManagement'
 import { QuantumDefenseWall } from './QuantumDefenseWall'
 import { BackgroundTacticalSystems } from './BackgroundTacticalSystems'
 import { MultiExchangeIntegration } from '@/components/MultiExchangeIntegration'
+import { InvestorScoutingSystem } from '@/components/InvestorScoutingSystem'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -241,6 +242,12 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">Multi-Exchange</span>
             </div>
           </TabsTrigger>
+          <TabsTrigger value="investors" className="p-2 text-center bg-gradient-to-r from-yellow-600/20 to-amber-600/20 border border-yellow-500/30">
+            <div className="flex flex-col items-center">
+              <span>👥</span>
+              <span className="hidden sm:inline">Investors</span>
+            </div>
+          </TabsTrigger>
           </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
@@ -361,6 +368,10 @@ export function SecureAdminDashboard() {
 
         <TabsContent value="multi-exchange" className="space-y-6">
           <MultiExchangeIntegration />
+        </TabsContent>
+
+        <TabsContent value="investors" className="space-y-6">
+          <InvestorScoutingSystem />
         </TabsContent>
       </Tabs>
     </div>

@@ -34,7 +34,7 @@ import {
   LineChart
 } from 'lucide-react'
 import { GaiasExchange } from '@/components/GaiasExchange'
-import { InvestorScoutingSystem } from '@/components/InvestorScoutingSystem'
+
 import { FullyFunctionalExchange } from '@/components/FullyFunctionalExchange'
 
 import { GaiaFeeManager } from '@/components/GaiaFeeManager'
@@ -427,7 +427,7 @@ export default function Exchange() {
                       {[
                         { id: 'unified', icon: '🌿', name: 'Unified Hub', color: 'emerald' },
                         
-                        { id: 'exchange', icon: '💱', name: 'Investment', color: 'purple' },
+                        
                         { id: 'analytics', icon: '📊', name: 'Analytics', color: 'yellow' },
                         { id: 'blockchain', icon: '⛓️', name: 'Blockchain', color: 'green' }
                       ].map((interface_item) => (
@@ -458,7 +458,7 @@ export default function Exchange() {
                         <TabsTrigger value="swap">💱 Instant Swap</TabsTrigger>
                         <TabsTrigger value="security">🛡️ Security</TabsTrigger>
                         <TabsTrigger value="fees">💰 Fee Manager</TabsTrigger>
-                        <TabsTrigger value="investors">👥 Investors</TabsTrigger>
+                        
                         <TabsTrigger value="vault">🏛️ Vault</TabsTrigger>
                       </TabsList>
                       
@@ -481,9 +481,6 @@ export default function Exchange() {
                         <GaiaFeeManager />
                       </TabsContent>
                       
-                      <TabsContent value="investors" className="space-y-6">
-                        <InvestorScoutingSystem />
-                      </TabsContent>
                       
                       <TabsContent value="vault" className="space-y-6">
                         <CommunityVault />
