@@ -156,6 +156,22 @@ export function AdminMediaLibrary() {
       // Refresh data
       refetch()
 
+      // Update persistent audio controls with new playlist
+      if (isBackgroundMusic) {
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('admin-audio-update', {
+            detail: { 
+              action: 'playlist_update',
+              tracks: [...musicFiles, { 
+                id: Date.now(), 
+                original_name: selectedFile.name,
+                storage_path: uploadData.path 
+              }]
+            }
+          }))
+        }, 1000)
+      }
+
     } catch (error) {
       console.error('Upload error:', error)
       toast.error('Failed to upload file. Please try again.')
@@ -215,6 +231,15 @@ export function AdminMediaLibrary() {
         await audioRef.current.play()
         setIsPlaying(true)
         toast.success(`🎵 Now playing: ${file.original_name}`)
+        
+        // Broadcast to persistent audio controls
+        window.dispatchEvent(new CustomEvent('admin-audio-update', {
+          detail: { 
+            track: file, 
+            action: 'play',
+            tracks: musicFiles 
+          }
+        }))
       } catch (error) {
         console.error('Play error:', error)
         toast.error('Failed to play audio file')
