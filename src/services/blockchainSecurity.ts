@@ -76,7 +76,7 @@ class BlockchainSecurityService {
         lastBlock: Math.floor(Math.random() * 1000000) + 15000000
       }
 
-      if (chain.consensus === 'PoS' || chain.consensus === 'DPoS') {
+      if (chain.consensus === 'PoS' || chain.consensus === 'PoA') {
         node.validators = Math.floor(Math.random() * 1000) + 100
       } else {
         node.hashRate = Math.random() * 200 + 100 // TH/s
