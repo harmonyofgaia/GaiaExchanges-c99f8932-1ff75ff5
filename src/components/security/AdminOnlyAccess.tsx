@@ -21,20 +21,41 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
   const maxAttempts = 3
 
   useEffect(() => {
-    // Check for existing admin session
-    const adminSession = localStorage.getItem('gaia-admin-session')
-    const sessionExpiry = localStorage.getItem('gaia-admin-expiry')
+    // Check for existing admin session (both new and old formats)
+    const newSession = localStorage.getItem('gaia-admin') || sessionStorage.getItem('gaia-admin')
+    const oldSession = localStorage.getItem('gaia-admin-session')
+    const adminActive = sessionStorage.getItem('admin-active')
     
-    if (adminSession && sessionExpiry) {
-      const now = Date.now()
-      if (now < parseInt(sessionExpiry)) {
-        setIsAdminAuthenticated(true)
-      } else {
-        // Session expired, clear storage
-        localStorage.removeItem('gaia-admin-session')
-        localStorage.removeItem('gaia-admin-expiry')
+    let sessionValid = false
+    
+    // Check new format first
+    if (newSession && (adminActive === '1' || adminActive === 'true')) {
+      try {
+        const sessionData = JSON.parse(newSession)
+        if (sessionData.active) {
+          sessionValid = true
+        }
+      } catch (e) {
+        // Invalid session data, ignore
       }
     }
+    
+    // Check old format as fallback
+    if (!sessionValid && oldSession) {
+      const sessionExpiry = localStorage.getItem('gaia-admin-expiry')
+      if (sessionExpiry && (adminActive === '1' || adminActive === 'true')) {
+        const now = Date.now()
+        if (now < parseInt(sessionExpiry)) {
+          sessionValid = true
+        } else {
+          // Session expired, clear old storage
+          localStorage.removeItem('gaia-admin-session')
+          localStorage.removeItem('gaia-admin-expiry')
+        }
+      }
+    }
+    
+    setIsAdminAuthenticated(sessionValid)
   }, [])
 
   const handleAdminLogin = (e: React.FormEvent) => {
@@ -49,13 +70,22 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
     if (adminCredentials.username === 'Synatic' && adminCredentials.password === 'Freedom!oul19922323') {
       setIsAdminAuthenticated(true)
       
-      // Set admin session with 24-hour expiry
+      // Set optimized admin session
       const sessionId = `admin-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-      const expiryTime = Date.now() + (24 * 60 * 60 * 1000) // 24 hours
+      const sessionData = {
+        id: sessionId,
+        ts: Date.now(),
+        active: true
+      }
       
-      localStorage.setItem('gaia-admin-session', sessionId)
-      localStorage.setItem('gaia-admin-expiry', expiryTime.toString())
-      sessionStorage.setItem('admin-active', 'true')
+      // Try localStorage first, fallback to sessionStorage
+      try {
+        localStorage.setItem('gaia-admin', JSON.stringify(sessionData))
+      } catch (e) {
+        sessionStorage.setItem('gaia-admin', JSON.stringify(sessionData))
+      }
+      
+      sessionStorage.setItem('admin-active', '1')
       
       console.log('🛡️ ADMIN ACCESS GRANTED - QUANTUM SECURITY ACTIVE')
     } else {
@@ -67,9 +97,13 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
 
   const handleLogout = () => {
     setIsAdminAuthenticated(false)
+    // Clear both new and old session formats
+    localStorage.removeItem('gaia-admin')
     localStorage.removeItem('gaia-admin-session')
     localStorage.removeItem('gaia-admin-expiry')
+    sessionStorage.removeItem('gaia-admin')
     sessionStorage.removeItem('admin-active')
+    sessionStorage.removeItem('admin-hb')
     setAdminCredentials({ username: '', password: '' })
     setAttempts(0)
   }

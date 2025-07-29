@@ -8,89 +8,115 @@ export function PersistentAdminSession() {
   const [sessionActive, setSessionActive] = useState(false)
 
   useEffect(() => {
-    // Create ultra-persistent admin session with quota management
-    const createUltraPersistentSession = () => {
+    // Optimized session management to prevent storage quota issues
+    const createOptimizedSession = () => {
       if (isAdmin && adminSession) {
         try {
-          // Lightweight session data to prevent quota issues
-          const sessionData = {
-            sessionId: adminSession.id,
-            timestamp: adminSession.timestamp,
-            persistent: true
-          }
+          // Clear any large data that might cause quota issues
+          const keysToClean = [
+            'gaia-admin-backup', 'admin-quantum-key', 'admin-mega-data',
+            'admin-logs', 'admin-cache', 'admin-temp-data'
+          ]
           
-          // Clear old data first to prevent quota exceeded
-          const keysToClean = ['gaia-admin-backup', 'admin-quantum-key']
           keysToClean.forEach(key => {
             try {
               localStorage.removeItem(key)
+              sessionStorage.removeItem(key)
             } catch (e) {
               // Ignore cleanup errors
             }
           })
           
-          // Store only essential data
-          localStorage.setItem('gaia-admin-session', JSON.stringify(sessionData))
-          sessionStorage.setItem('admin-active', 'true')
+          // Use minimal session data only
+          const essentialData = {
+            id: adminSession.id,
+            ts: Date.now(),
+            active: true
+          }
           
-          setSessionActive(true)
-          console.log('🛡️ ADMIN SESSION ACTIVATED')
-        } catch (error) {
-          console.warn('Storage quota exceeded, using minimal session')
-          // Fallback: only use sessionStorage
+          // Try localStorage first, fallback to sessionStorage
           try {
-            sessionStorage.setItem('admin-active', 'true')
+            localStorage.setItem('gaia-admin', JSON.stringify(essentialData))
+          } catch (storageError) {
+            // If localStorage fails, use sessionStorage only
+            console.warn('LocalStorage full, using sessionStorage')
+            sessionStorage.setItem('gaia-admin', JSON.stringify(essentialData))
+          }
+          
+          // Always set session flag
+          sessionStorage.setItem('admin-active', '1')
+          setSessionActive(true)
+          
+          console.log('🛡️ ADMIN SESSION OPTIMIZED')
+        } catch (error) {
+          console.warn('Storage optimization failed, using minimal session')
+          // Emergency fallback - minimal data only
+          try {
+            sessionStorage.setItem('admin-active', '1')
             setSessionActive(true)
           } catch (e) {
-            console.error('Critical: Cannot create admin session')
+            console.error('Critical: Cannot create any admin session')
           }
         }
       }
     }
 
-    // Simplified heartbeat to prevent quota issues
-    const multiLayerHeartbeat = () => {
+    // Optimized heartbeat - minimal storage usage
+    const optimizedHeartbeat = () => {
       if (isAdmin && adminSession) {
         try {
-          const sessions = [
-            localStorage.getItem('gaia-admin-session'),
-            sessionStorage.getItem('admin-active')
-          ]
+          // Only update if session exists
+          const hasLocalSession = localStorage.getItem('gaia-admin')
+          const hasSessionSession = sessionStorage.getItem('admin-active')
           
-          if (sessions.some(s => s)) {
-            // Update timestamp only if storage allows
-            const sessionData = {
-              sessionId: adminSession.id,
-              timestamp: Date.now(),
-              persistent: true
+          if (hasLocalSession || hasSessionSession) {
+            // Minimal update
+            const essentialData = {
+              id: adminSession.id,
+              ts: Date.now(),
+              active: true
             }
             
-            localStorage.setItem('gaia-admin-session', JSON.stringify(sessionData))
-            sessionStorage.setItem('admin-active', 'true')
-            sessionStorage.setItem('admin-heartbeat', Date.now().toString())
+            // Try to maintain localStorage, fallback to sessionStorage
+            try {
+              if (hasLocalSession) {
+                localStorage.setItem('gaia-admin', JSON.stringify(essentialData))
+              }
+            } catch (e) {
+              // If localStorage fails, clear it and use sessionStorage
+              try {
+                localStorage.removeItem('gaia-admin')
+              } catch (clearError) {
+                // Ignore
+              }
+            }
             
-            console.log('💗 ADMIN HEARTBEAT ACTIVE')
+            // Always maintain sessionStorage
+            sessionStorage.setItem('admin-active', '1')
+            sessionStorage.setItem('admin-hb', Date.now().toString())
+            
+            console.log('💗 ADMIN HEARTBEAT OPTIMIZED')
           }
         } catch (error) {
-          // If localStorage fails, use sessionStorage only
+          // Emergency fallback
           try {
-            sessionStorage.setItem('admin-active', 'true')
+            sessionStorage.setItem('admin-active', '1')
           } catch (e) {
-            console.warn('Storage quota exceeded, session may be limited')
+            console.warn('Storage critically full, session may be unstable')
           }
         }
       }
     }
 
-    createUltraPersistentSession()
+    createOptimizedSession()
     
-    // Reduced heartbeat frequency to prevent quota issues
-    const interval1 = setInterval(multiLayerHeartbeat, 10000) // Every 10 seconds
-    const interval2 = setInterval(multiLayerHeartbeat, 30000) // Every 30 seconds
+    // Optimized intervals - less frequent to reduce storage stress
+    const interval1 = setInterval(optimizedHeartbeat, 15000) // Every 15 seconds
+    const interval2 = setInterval(optimizedHeartbeat, 45000) // Every 45 seconds
     
-    // Prevent any kind of session loss
+    // Prevent session loss with optimized callbacks
     const preventLogout = () => {
-      multiLayerHeartbeat()
+      optimizedHeartbeat()
     }
     
     // Listen for all possible session loss events
@@ -102,10 +128,10 @@ export function PersistentAdminSession() {
     document.addEventListener('click', preventLogout)
     document.addEventListener('keydown', preventLogout)
     
-    // Navigation protection
+    // Navigation protection with optimized callbacks
     const protectNavigation = () => {
-      if (sessionStorage.getItem('admin-active') === 'true') {
-        multiLayerHeartbeat()
+      if (sessionStorage.getItem('admin-active') === '1') {
+        optimizedHeartbeat()
       }
     }
     

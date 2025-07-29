@@ -146,6 +146,14 @@ export function UpgradedVisualControlButton() {
     'Monochrome', 'Earth Tones', 'Ice', 'Fire', 'Aurora', 'Deep Space'
   ])
 
+  // Check if this is production environment
+  const isProduction = window.location.hostname === 'www.gaiaexchanges.com'
+
+  // Don't show visual controls in production
+  if (isProduction) {
+    return null
+  }
+
   const handleLockToggle = () => {
     toggleLock()
     toast.success(isLocked ? 'Visual controls unlocked' : 'Visual controls locked', {

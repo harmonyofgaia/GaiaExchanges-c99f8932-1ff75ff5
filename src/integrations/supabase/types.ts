@@ -2384,41 +2384,33 @@ export type Database = {
       }
       security_log: {
         Row: {
-          additional_details: Json | null
-          event_timestamp: string | null
+          created_by: string | null
           event_type: string
-          id: number
-          ip_address: unknown | null
-          user_agent: string | null
-          user_id: string | null
+          id: string
+          logged_at: string
+          message: string
+          metadata: Json | null
+          severity: string
         }
         Insert: {
-          additional_details?: Json | null
-          event_timestamp?: string | null
+          created_by?: string | null
           event_type: string
-          id?: never
-          ip_address?: unknown | null
-          user_agent?: string | null
-          user_id?: string | null
+          id?: string
+          logged_at?: string
+          message: string
+          metadata?: Json | null
+          severity?: string
         }
         Update: {
-          additional_details?: Json | null
-          event_timestamp?: string | null
+          created_by?: string | null
           event_type?: string
-          id?: never
-          ip_address?: unknown | null
-          user_agent?: string | null
-          user_id?: string | null
+          id?: string
+          logged_at?: string
+          message?: string
+          metadata?: Json | null
+          severity?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "security_log_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "auth_comprehensive_debug_view"
-            referencedColumns: ["user_id"]
-          },
-        ]
+        Relationships: []
       }
       security_logs: {
         Row: {
@@ -3441,14 +3433,6 @@ export type Database = {
           data?: Json | null
           id?: number | null
           updated_at?: string | null
-        }
-        Relationships: []
-      }
-      security_log_summary: {
-        Row: {
-          event_count: number | null
-          event_type: string | null
-          latest_event: string | null
         }
         Relationships: []
       }
