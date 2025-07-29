@@ -26,7 +26,7 @@ const GaiaBikeEcosystem = lazy(() => import('./pages/GaiaBikeEcosystem'))
 const TokenMining = lazy(() => import('./pages/TokenMining'))
 const GreenInvestments = lazy(() => import('./pages/GreenInvestments'))
 const CoinCrafter = lazy(() => import('./pages/CoinCrafter'))
-const SandProtect = lazy(() => import('./pages/SandProtect'))
+
 const GaiasProjects = lazy(() => import('./pages/GaiasProjects'))
 const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlockchainSwapToken'))
 const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
@@ -100,7 +100,7 @@ function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/admin" element={<Navigate to="/secure-admin" replace />} />
               <Route path="/live-tracking" element={<LiveTracking />} />
-              <Route path="/sand-protect" element={<SandProtect />} />
+              
               <Route path="/gaias-projects" element={<GaiasProjects />} />
               <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />

@@ -76,7 +76,7 @@ const navItems: NavItem[] = [
   { name: 'Gaia Bike', path: '/gaia-bike-ecosystem', icon: Bike },
   { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
   { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
-  { name: 'Sand Protect', path: '/sand-protect', icon: Shield },
+  
 ]
 
 export function Navbar() {
