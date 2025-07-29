@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Lock, Eye, AlertTriangle, Zap, Crown, Activity, Globe, Users, TrendingUp, Gavel, Skull, Server, Building2, DollarSign } from 'lucide-react'
+import { Shield, Lock, Eye, AlertTriangle, Zap, Crown, Activity, Globe, Users, TrendingUp, Gavel, Skull, Server } from 'lucide-react'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
 import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
@@ -40,9 +40,6 @@ import { UserManagementSystemRefactored } from './UserManagementSystemRefactored
 import { AdminDashboard } from './AdminDashboard'
 import { OmniscientGPSEngine } from '@/components/tracking/OmniscientGPSEngine'
 import { AnimalDefenseCommandCenter } from './AnimalDefenseCommandCenter'
-// New Admin Components from Exchange Platform
-import { GlobalExpansionInvestmentOpportunities } from './GlobalExpansionInvestmentOpportunities'
-import { AdminMultiExchangeIntegration } from './AdminMultiExchangeIntegration'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -216,18 +213,6 @@ export function SecureAdminDashboard() {
                 <span className="hidden sm:inline">Storage</span>
               </div>
             </TabsTrigger>
-            <TabsTrigger value="investment" className="p-2 text-center bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/30">
-              <div className="flex flex-col items-center">
-                <DollarSign className="h-4 w-4" />
-                <span className="hidden sm:inline">Investments</span>
-              </div>
-            </TabsTrigger>
-            <TabsTrigger value="exchanges" className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30">
-              <div className="flex flex-col items-center">
-                <Building2 className="h-4 w-4" />
-                <span className="hidden sm:inline">Exchanges</span>
-              </div>
-            </TabsTrigger>
           </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
@@ -332,14 +317,6 @@ export function SecureAdminDashboard() {
 
         <TabsContent value="rules" className="space-y-6">
           <RuleSystemManagement />
-        </TabsContent>
-
-        <TabsContent value="investment" className="space-y-6">
-          <GlobalExpansionInvestmentOpportunities />
-        </TabsContent>
-
-        <TabsContent value="exchanges" className="space-y-6">
-          <AdminMultiExchangeIntegration />
         </TabsContent>
       </Tabs>
     </div>

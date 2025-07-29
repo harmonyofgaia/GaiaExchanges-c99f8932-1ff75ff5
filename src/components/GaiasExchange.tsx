@@ -351,26 +351,47 @@ export function GaiasExchange() {
           </TabsContent>
         </Tabs>
 
-        {/* Admin Access Notice */}
+        {/* Investment Opportunities */}
         <Card className="border-yellow-500/30 bg-gradient-to-r from-yellow-900/20 to-orange-900/20">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-yellow-400">
-              <Lock className="h-5 w-5" />
-              Investment Opportunities - Admin Access Required
+              <TrendingUp className="h-5 w-5" />
+              Global Expansion & Investment Opportunities
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-center space-y-4">
-              <div className="text-4xl">🔒</div>
-              <p className="text-muted-foreground">
-                Global Expansion & Investment Opportunities have been moved to the secure admin portal.
-              </p>
-              <Button 
-                onClick={() => window.location.href = '/secure-admin'}
-                className="bg-yellow-600 hover:bg-yellow-700"
-              >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-3">
+                <h4 className="font-semibold text-green-400">🤝 Strategic Partnerships</h4>
+                <ul className="text-sm space-y-1 text-muted-foreground">
+                  <li>• Institutional investors ($5M+ portfolio)</li>
+                  <li>• Licensed financial service providers</li>
+                  <li>• Global regulatory compliance teams</li>
+                  <li>• Web3 infrastructure partners</li>
+                </ul>
+              </div>
+              <div className="space-y-3">
+                <h4 className="font-semibold text-blue-400">🌍 Global Market Presence</h4>
+                <ul className="text-sm space-y-1 text-muted-foreground">
+                  <li>• Available on all major app stores</li>
+                  <li>• Multi-blockchain network support</li>
+                  <li>• 24/7 automated trading systems</li>
+                  <li>• Real-time global market data</li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-4 flex gap-4 flex-wrap">
+              <Button className="bg-green-600 hover:bg-green-700">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                Partner With Us
+              </Button>
+              <Button variant="outline">
+                <Globe className="h-4 w-4 mr-2" />
+                Global Expansion Plan
+              </Button>
+              <Button variant="outline">
                 <Shield className="h-4 w-4 mr-2" />
-                Access Secure Admin Portal
+                Security Audit Reports
               </Button>
             </div>
           </CardContent>

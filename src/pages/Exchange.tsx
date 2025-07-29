@@ -23,6 +23,7 @@ import {
   Activity,
   Users,
   Download,
+  
   ExternalLink,
   Bell,
   Lock,
@@ -623,37 +624,8 @@ export default function Exchange() {
 
                   {activeInterface === 'platform' && (
                     <div className="space-y-6">
-                      <Card className="border-yellow-500/30 bg-gradient-to-r from-yellow-900/30 to-orange-900/30">
-                        <CardHeader>
-                          <CardTitle className="text-yellow-400 flex items-center gap-2">
-                            <Lock className="h-5 w-5" />
-                            Restricted Platform Access
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="text-center space-y-4">
-                            <div className="text-6xl">🔒</div>
-                            <h3 className="text-xl font-bold text-yellow-400">
-                              Administrative Access Required
-                            </h3>
-                            <p className="text-muted-foreground">
-                              Global Expansion & Investment Opportunities and Multi-Exchange Integration 
-                              have been moved to the secure admin portal for enhanced security and control.
-                            </p>
-                            <div className="flex gap-3 justify-center">
-                              <Badge className="bg-red-600 text-white">RESTRICTED</Badge>
-                              <Badge className="bg-orange-600 text-white">ADMIN ONLY</Badge>
-                            </div>
-                            <Button 
-                              onClick={() => window.location.href = '/secure-admin'}
-                              className="bg-yellow-600 hover:bg-yellow-700 mt-4"
-                            >
-                              <Shield className="h-4 w-4 mr-2" />
-                              Access Secure Admin Portal
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
+                      <GaiasExchange />
+                      <MultiExchangeIntegration />
                     </div>
                   )}
 
