@@ -29,8 +29,9 @@ const WalletPage = () => {
   }
 
   // Matrix wallet addresses as requested
-  const matrixWallet2 = 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7'
+  const greenInvestmentsWallet = 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7'
   const communityVault = '6DAj3dhtwBDv3HY3UYw1ykjHGRLTU7yMKQmCn8bNoTpW'
+  const animalWelfareWallet = 'GRboWoafk4CYZyiuFtB84wT8DCswmhQtYthpGg31yJEf'
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20">
@@ -48,8 +49,8 @@ const WalletPage = () => {
             </CardHeader>
           </Card>
 
-          {/* Matrix Wallet Displays - 3 Side by Side */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          {/* Matrix Wallet Displays - 4 Side by Side */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
             {/* Matrix Wallet 1 - Official GAiA */}
             <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-black">
               <CardHeader>
@@ -60,32 +61,33 @@ const WalletPage = () => {
               </CardContent>
             </Card>
 
-            {/* Matrix Wallet 2 - Coral Reef Investment */}
-            <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-black">
+            {/* Matrix Wallet 2 - Green Investments */}
+            <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-black">
               <CardHeader>
-                <CardTitle className="text-blue-400 text-center">🪸 CORAL REEF MATRIX</CardTitle>
+                <CardTitle className="text-green-400 text-center">🌱 GREEN INVESTMENTS MATRIX</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
+                <MatrixWalletDisplay />
+                <div className="space-y-4 mt-4">
                   <div className="text-center">
-                    <div className="text-lg font-bold text-blue-400 mb-2">CORAL REEF INVESTMENT</div>
-                    <div className="font-mono text-sm bg-blue-900/20 p-2 rounded border border-blue-500/20">
-                      {matrixWallet2}
+                    <div className="text-lg font-bold text-green-400 mb-2">GREEN INVESTMENTS WALLET</div>
+                    <div className="font-mono text-sm bg-green-900/20 p-2 rounded border border-green-500/20">
+                      {greenInvestmentsWallet}
                     </div>
                     <Button 
                       onClick={() => {
-                        navigator.clipboard.writeText(matrixWallet2)
-                        toast.success('Coral Reef Address Copied!')
+                        navigator.clipboard.writeText(greenInvestmentsWallet)
+                        toast.success('Green Investments Address Copied!')
                       }}
-                      className="mt-2 bg-blue-600 hover:bg-blue-700"
+                      className="mt-2 bg-green-600 hover:bg-green-700"
                       size="sm"
                     >
                       <Copy className="h-3 w-3 mr-1" />
                       Copy Address
                     </Button>
                   </div>
-                  <div className="text-center text-sm text-blue-300">
-                    Real-time coral reef protection investments with full transparency
+                  <div className="text-center text-sm text-green-300">
+                    Real-time environmental project investments with full transparency
                   </div>
                 </div>
               </CardContent>
@@ -97,7 +99,8 @@ const WalletPage = () => {
                 <CardTitle className="text-purple-400 text-center">🏦 COMMUNITY VAULT MATRIX</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
+                <MatrixWalletDisplay />
+                <div className="space-y-4 mt-4">
                   <div className="text-center">
                     <div className="text-lg font-bold text-purple-400 mb-2">COMMUNITY VAULT</div>
                     <div className="font-mono text-sm bg-purple-900/20 p-2 rounded border border-purple-500/20">
@@ -117,6 +120,38 @@ const WalletPage = () => {
                   </div>
                   <div className="text-center text-sm text-purple-300">
                     Secure community investments with instant transparency
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Matrix Wallet 4 - Animal Welfare */}
+            <Card className="border-orange-500/30 bg-gradient-to-br from-orange-900/30 to-black">
+              <CardHeader>
+                <CardTitle className="text-orange-400 text-center">🐾 ANIMAL WELFARE MATRIX</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <MatrixWalletDisplay />
+                <div className="space-y-4 mt-4">
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-orange-400 mb-2">ANIMAL WELFARE WALLET</div>
+                    <div className="font-mono text-sm bg-orange-900/20 p-2 rounded border border-orange-500/20">
+                      {animalWelfareWallet}
+                    </div>
+                    <Button 
+                      onClick={() => {
+                        navigator.clipboard.writeText(animalWelfareWallet)
+                        toast.success('Animal Welfare Address Copied!')
+                      }}
+                      className="mt-2 bg-orange-600 hover:bg-orange-700"
+                      size="sm"
+                    >
+                      <Copy className="h-3 w-3 mr-1" />
+                      Copy Address
+                    </Button>
+                  </div>
+                  <div className="text-center text-sm text-orange-300">
+                    Direct animal protection funding with complete transparency
                   </div>
                 </div>
               </CardContent>
