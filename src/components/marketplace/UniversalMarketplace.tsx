@@ -103,11 +103,12 @@ export function UniversalMarketplace() {
       </Card>
 
       <Tabs defaultValue="marketplace" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="marketplace">🛒 Marketplace</TabsTrigger>
-          <TabsTrigger value="builders">🔨 Content Builders</TabsTrigger>
-          <TabsTrigger value="minecraft">⛏️ Minecraft Builder</TabsTrigger>
-          <TabsTrigger value="upload">📤 Upload Creations</TabsTrigger>
+          <TabsTrigger value="gaming-items">🎮 Gaming Items</TabsTrigger>
+          <TabsTrigger value="eco-products">🌱 Eco Products</TabsTrigger>
+          <TabsTrigger value="digital-assets">💎 Digital Assets</TabsTrigger>
+          <TabsTrigger value="upload">📤 Upload</TabsTrigger>
         </TabsList>
 
         <TabsContent value="marketplace" className="space-y-6">
@@ -147,77 +148,129 @@ export function UniversalMarketplace() {
           </div>
         </TabsContent>
 
-        <TabsContent value="builders" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="border-green-500/30 bg-green-900/20">
-              <CardHeader>
-                <CardTitle className="text-green-400 flex items-center gap-2">
-                  <TreePine className="h-6 w-6" />
-                  Landscape Builder
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Create stunning landscapes for Minecraft and other games
-                </p>
-                <Button 
-                  onClick={() => launchBuilder('Landscape')}
-                  className="w-full bg-green-600 hover:bg-green-700"
-                >
-                  <Mountain className="h-4 w-4 mr-2" />
-                  Launch Builder
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-blue-500/30 bg-blue-900/20">
-              <CardHeader>
-                <CardTitle className="text-blue-400 flex items-center gap-2">
-                  <Sword className="h-6 w-6" />
-                  Weapon Creator
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Design weapons and items for GAiA Fantasy and other games
-                </p>
-                <Button 
-                  onClick={() => launchBuilder('Weapon')}
-                  className="w-full bg-blue-600 hover:bg-blue-700"
-                >
-                  <Sword className="h-4 w-4 mr-2" />
-                  Launch Builder
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-
+        <TabsContent value="gaming-items" className="space-y-6">
           <Card className="border-purple-500/30 bg-purple-900/20">
             <CardHeader>
               <CardTitle className="text-purple-400 flex items-center gap-2">
                 <Gamepad2 className="h-6 w-6" />
-                🎮 Game Integration
+                🎮 Gaming Power-Ups & Items
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Button className="bg-orange-600 hover:bg-orange-700">
-                  🐛 Worms Arena Items
-                </Button>
-                <Button className="bg-purple-600 hover:bg-purple-700">
-                  ⚔️ GAiA Fantasy Gear
-                </Button>
-                <Button className="bg-green-600 hover:bg-green-700">
-                  ⛏️ Minecraft Builds
-                </Button>
+                <Card className="bg-red-900/20 border-red-500/30">
+                  <CardContent className="p-4 text-center">
+                    <div className="text-4xl mb-2">⚡</div>
+                    <h3 className="font-bold text-white">Speed Boost Pack</h3>
+                    <p className="text-sm text-muted-foreground mb-3">10x speed boost for all games</p>
+                    <div className="text-xl font-bold text-green-400 mb-2">75 GAiA</div>
+                    <Button className="w-full bg-red-600 hover:bg-red-700">Purchase</Button>
+                  </CardContent>
+                </Card>
+                <Card className="bg-blue-900/20 border-blue-500/30">
+                  <CardContent className="p-4 text-center">
+                    <div className="text-4xl mb-2">🛡️</div>
+                    <h3 className="font-bold text-white">Protection Shield</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Ultimate defense upgrade</p>
+                    <div className="text-xl font-bold text-green-400 mb-2">100 GAiA</div>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700">Purchase</Button>
+                  </CardContent>
+                </Card>
+                <Card className="bg-yellow-900/20 border-yellow-500/30">
+                  <CardContent className="p-4 text-center">
+                    <div className="text-4xl mb-2">💰</div>
+                    <h3 className="font-bold text-white">Token Multiplier</h3>
+                    <p className="text-sm text-muted-foreground mb-3">2x GAiA earning boost</p>
+                    <div className="text-xl font-bold text-green-400 mb-2">150 GAiA</div>
+                    <Button className="w-full bg-yellow-600 hover:bg-yellow-700">Purchase</Button>
+                  </CardContent>
+                </Card>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="minecraft" className="space-y-6">
-          <MinecraftLandscapeBuilder />
+        <TabsContent value="eco-products" className="space-y-6">
+          <Card className="border-green-500/30 bg-green-900/20">
+            <CardHeader>
+              <CardTitle className="text-green-400 flex items-center gap-2">
+                <TreePine className="h-6 w-6" />
+                🌱 Eco-Friendly Products & Conservation
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <Card className="bg-green-800/20 border-green-400/30">
+                  <CardContent className="p-4">
+                    <div className="text-4xl mb-2 text-center">🌳</div>
+                    <h3 className="font-bold text-white">Plant 100 Trees</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Real trees planted in your name</p>
+                    <div className="text-xl font-bold text-green-400 mb-2">200 GAiA</div>
+                    <Button className="w-full bg-green-600 hover:bg-green-700">Plant Trees</Button>
+                  </CardContent>
+                </Card>
+                <Card className="bg-blue-800/20 border-blue-400/30">
+                  <CardContent className="p-4">
+                    <div className="text-4xl mb-2 text-center">🌊</div>
+                    <h3 className="font-bold text-white">Ocean Cleanup Fund</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Support ocean cleaning projects</p>
+                    <div className="text-xl font-bold text-green-400 mb-2">250 GAiA</div>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700">Support Ocean</Button>
+                  </CardContent>
+                </Card>
+                <Card className="bg-purple-800/20 border-purple-400/30">
+                  <CardContent className="p-4">
+                    <div className="text-4xl mb-2 text-center">☀️</div>
+                    <h3 className="font-bold text-white">Solar Panel Fund</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Contribute to renewable energy</p>
+                    <div className="text-xl font-bold text-green-400 mb-2">300 GAiA</div>
+                    <Button className="w-full bg-purple-600 hover:bg-purple-700">Fund Solar</Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
+
+        <TabsContent value="digital-assets" className="space-y-6">
+          <Card className="border-cyan-500/30 bg-cyan-900/20">
+            <CardHeader>
+              <CardTitle className="text-cyan-400 flex items-center gap-2">
+                <Crown className="h-6 w-6" />
+                💎 Premium Digital Assets
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Card className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 border-purple-500/30">
+                  <CardContent className="p-4">
+                    <div className="text-center mb-4">
+                      <div className="text-6xl mb-2">👑</div>
+                      <Badge className="bg-gradient-to-r from-purple-600 to-pink-600">EXCLUSIVE</Badge>
+                    </div>
+                    <h3 className="font-bold text-white text-lg">GAiA Premium Avatar</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Exclusive avatar with special abilities</p>
+                    <div className="text-2xl font-bold text-green-400 mb-4">500 GAiA</div>
+                    <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600">Get Avatar</Button>
+                  </CardContent>
+                </Card>
+                <Card className="bg-gradient-to-br from-blue-900/40 to-cyan-900/40 border-blue-500/30">
+                  <CardContent className="p-4">
+                    <div className="text-center mb-4">
+                      <div className="text-6xl mb-2">🎵</div>
+                      <Badge className="bg-gradient-to-r from-blue-600 to-cyan-600">PREMIUM</Badge>
+                    </div>
+                    <h3 className="font-bold text-white text-lg">Custom Music Pack</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Personalized background music</p>
+                    <div className="text-2xl font-bold text-green-400 mb-4">350 GAiA</div>
+                    <Button className="w-full bg-gradient-to-r from-blue-600 to-cyan-600">Get Music</Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
 
         <TabsContent value="upload" className="space-y-6">
           <Card className="border-yellow-500/30 bg-yellow-900/20">

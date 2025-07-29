@@ -16,9 +16,9 @@ import {
   TreePine
 } from 'lucide-react'
 import { AnimalRescueNFT } from '@/components/nft/AnimalRescueNFT'
-import { AnimalNFTMarketplace } from '@/components/animal-welfare/AnimalNFTMarketplace'
+import { MinecraftLandscapeBuilder } from '@/components/MinecraftLandscapeBuilder'
+import { VirtualLandscapeCreator } from '@/components/landscapes/VirtualLandscapeCreator'
 import { RealTimeAnimalTracker } from '@/components/RealTimeAnimalTracker'
-import { LiveAnimalNFTs } from '@/components/LiveAnimalNFTs'
 import { toast } from 'sonner'
 
 export default function AnimalWelfare() {
@@ -65,27 +65,41 @@ export default function AnimalWelfare() {
         <Tabs defaultValue="rescue" className="w-full">
           <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="rescue">🆘 Animal Rescue</TabsTrigger>
-            <TabsTrigger value="nft-animals">🎨 NFT Animals</TabsTrigger>
-            <TabsTrigger value="marketplace">🏪 NFT Marketplace</TabsTrigger>
-            <TabsTrigger value="tracking">📡 Live Tracking</TabsTrigger>
-            <TabsTrigger value="gaming">🎮 Gaming Integration</TabsTrigger>
-            <TabsTrigger value="builder">🔨 Content Builder</TabsTrigger>
+            <TabsTrigger value="cameras">📹 Live Cameras</TabsTrigger>
+            <TabsTrigger value="vr">🥽 VR Experience</TabsTrigger>
+            <TabsTrigger value="marketplace">🏪 Marketplace</TabsTrigger>
+            <TabsTrigger value="gaming">🎮 Gaming</TabsTrigger>
+            <TabsTrigger value="virtual-world">🌍 Virtual World</TabsTrigger>
           </TabsList>
 
           <TabsContent value="rescue" className="space-y-6">
             <AnimalRescueNFT />
           </TabsContent>
 
-          <TabsContent value="nft-animals" className="space-y-6">
-            <LiveAnimalNFTs />
+          <TabsContent value="cameras" className="space-y-6">
+            <RealTimeAnimalTracker />
+          </TabsContent>
+
+          <TabsContent value="vr" className="space-y-6">
+            <Card className="border-cyan-500/30 bg-cyan-900/20">
+              <CardHeader>
+                <CardTitle className="text-cyan-400">🥽 Virtual Reality Animal Experiences</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">Immersive VR experiences coming soon!</p>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="marketplace" className="space-y-6">
-            <AnimalNFTMarketplace />
-          </TabsContent>
-
-          <TabsContent value="tracking" className="space-y-6">
-            <RealTimeAnimalTracker />
+            <Card className="border-green-500/30 bg-green-900/20">
+              <CardHeader>
+                <CardTitle className="text-green-400">🏪 Animal Conservation Marketplace</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">Conservation items marketplace coming soon!</p>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="gaming" className="space-y-6">
@@ -96,7 +110,7 @@ export default function AnimalWelfare() {
                   🎮 Gaming Integration Hub
                 </CardTitle>
                 <p className="text-muted-foreground">
-                  Use your animal NFTs in various games and earn rewards for conservation
+                  Use your animal contributions in various games and earn rewards for conservation
                 </p>
               </CardHeader>
               <CardContent>
@@ -114,54 +128,36 @@ export default function AnimalWelfare() {
                     ⚔️ Enter GAiA Fantasy
                   </Button>
                   <Button 
-                    onClick={() => launchIntoGame('Minecraft Builder')}
+                    onClick={() => launchIntoGame('Virtual World')}
                     className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
                   >
-                    🏗️ Minecraft Builder
+                    🌍 Virtual World
                   </Button>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
 
-          <TabsContent value="builder" className="space-y-6">
+          <TabsContent value="virtual-world" className="space-y-6">
             <Card className="border-cyan-500/30 bg-cyan-900/20">
               <CardHeader>
                 <CardTitle className="text-cyan-400 flex items-center gap-2">
                   <Hammer className="h-6 w-6" />
-                  🔨 Content Creation Engine
+                  🌍 Virtual World Creation Suite
                 </CardTitle>
                 <p className="text-muted-foreground">
-                  Build custom landscapes, weapons, and items that can be used across our ecosystem
+                  Build and explore virtual environments integrated with animal welfare
                 </p>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-bold text-cyan-400">Available Builders</h3>
-                    <div className="space-y-2">
-                      <Button className="w-full bg-green-600 hover:bg-green-700">
-                        <TreePine className="h-4 w-4 mr-2" />
-                        Minecraft Landscape Builder
-                      </Button>
-                      <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                        <ShoppingCart className="h-4 w-4 mr-2" />
-                        Weapon & Item Creator
-                      </Button>
-                      <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                        <Globe className="h-4 w-4 mr-2" />
-                        3D Environment Designer
-                      </Button>
-                    </div>
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div>
+                    <h3 className="text-xl font-bold text-green-400 mb-4">🏗️ Minecraft Builder</h3>
+                    <MinecraftLandscapeBuilder />
                   </div>
-                  <div className="bg-black/30 rounded-lg p-4">
-                    <h4 className="font-bold text-yellow-400 mb-2">🌟 Creator Benefits</h4>
-                    <ul className="text-sm space-y-1">
-                      <li>• Earn GAiA tokens for popular creations</li>
-                      <li>• Get featured in marketplace</li>
-                      <li>• Integration with all our games</li>
-                      <li>• Animal welfare donation matching</li>
-                    </ul>
+                  <div>
+                    <h3 className="text-xl font-bold text-purple-400 mb-4">🎨 Content Creator</h3>
+                    <VirtualLandscapeCreator />
                   </div>
                 </div>
               </CardContent>
