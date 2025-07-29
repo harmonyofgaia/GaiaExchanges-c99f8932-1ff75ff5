@@ -63,7 +63,6 @@ const navItems: NavItem[] = [
   { name: 'Earning Activities', path: '/earning-activities', icon: Activity },
   { name: 'Enhanced Leaderboard', path: '/enhanced-leaderboard', icon: Trophy },
   { name: 'Community Hub', path: '/community-engagement-hub', icon: MessageCircle },
-  { name: 'Partnership Management', path: '/partnership-management', icon: Handshake },
   { name: 'Impact Measurement', path: '/impact-measurement-system', icon: Target },
   { name: 'Sea Green AI', path: '/sea-green-psychohistorical', icon: Brain },
   { name: 'Gaia Token Status', path: '/gaia-token-status', icon: Shield },
