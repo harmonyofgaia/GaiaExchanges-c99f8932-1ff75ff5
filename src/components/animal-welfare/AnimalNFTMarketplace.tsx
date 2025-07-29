@@ -88,7 +88,7 @@ export function AnimalNFTMarketplace() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-purple-400">
             <Star className="h-6 w-6" />
-            🏪 Animal Guardian NFT Marketplace
+            🏪 NFT Marketplace - Animal Guardians
           </CardTitle>
           <p className="text-muted-foreground">
             Purchase NFTs to become an official guardian. 100% of proceeds go to the animal's dedicated wallet.

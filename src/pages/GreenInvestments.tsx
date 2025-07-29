@@ -3,11 +3,13 @@ import { GAiACommunityProjects } from '@/components/green-investments/GAiACommun
 import { GaiaCommunityProjects } from '@/components/GaiaCommunityProjects'
 import { WildfireSandProtection } from '@/components/green-investments/WildfireSandProtection'
 import { SandProtectInvestmentProject } from '@/components/green-investments/SandProtectInvestmentProject'
+import { GreenInvestmentWalletManager } from '@/components/green-investments/GreenInvestmentWalletManager'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { Leaf, Globe, TrendingUp, Shield, Flame, Heart, Zap, Snowflake, TreePine, Coffee, Music, Users, GamepadIcon } from 'lucide-react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Leaf, Globe, TrendingUp, Shield, Flame, Heart, Zap, Snowflake, TreePine, Coffee, Music, Users, GamepadIcon, Wallet } from 'lucide-react'
 
 const GreenInvestments = () => {
   // Your original projects data
@@ -301,6 +303,46 @@ const GreenInvestments = () => {
         {/* Additional Community Projects */}
         <div className="mb-12">
           <GaiaCommunityProjects />
+        </div>
+
+        {/* Wallet and Fee Management */}
+        <div className="mb-12">
+          <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/20 to-cyan-900/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-400">
+                <Wallet className="h-6 w-6" />
+                💰 Green Investment Management
+              </CardTitle>
+              <p className="text-blue-300">
+                Configure your fees to automatically support environmental projects
+              </p>
+            </CardHeader>
+            <CardContent>
+              <Tabs defaultValue="wallet" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="wallet">💰 Wallet & Fees</TabsTrigger>
+                  <TabsTrigger value="projects">🌱 Project Funding</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="wallet" className="space-y-6">
+                  <GreenInvestmentWalletManager />
+                </TabsContent>
+
+                <TabsContent value="projects" className="space-y-6">
+                  <Card className="border-green-500/30 bg-green-900/20">
+                    <CardHeader>
+                      <CardTitle className="text-green-400">🌱 Project Impact Dashboard</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">
+                        Real-time project funding and environmental impact metrics coming soon!
+                      </p>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              </Tabs>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

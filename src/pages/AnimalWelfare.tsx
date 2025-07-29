@@ -20,6 +20,7 @@ import { MinecraftLandscapeBuilder } from '@/components/MinecraftLandscapeBuilde
 import { VirtualLandscapeCreator } from '@/components/landscapes/VirtualLandscapeCreator'
 import { RealTimeAnimalTracker } from '@/components/RealTimeAnimalTracker'
 import { AnimalWelfareWalletManager } from '@/components/animal-welfare/AnimalWelfareWalletManager'
+import { AnimalNFTMarketplace } from '@/components/animal-welfare/AnimalNFTMarketplace'
 import { toast } from 'sonner'
 
 export default function AnimalWelfare() {
@@ -68,7 +69,7 @@ export default function AnimalWelfare() {
             <TabsTrigger value="rescue">🆘 Animal Rescue</TabsTrigger>
             <TabsTrigger value="cameras">📹 Live Cameras</TabsTrigger>
             <TabsTrigger value="vr">🥽 VR Experience</TabsTrigger>
-            <TabsTrigger value="marketplace">🏪 Marketplace</TabsTrigger>
+            <TabsTrigger value="marketplace">🏪 NFT Marketplace</TabsTrigger>
             <TabsTrigger value="gaming">🎮 Gaming</TabsTrigger>
             <TabsTrigger value="wallet">💰 Wallet & Fees</TabsTrigger>
           </TabsList>
@@ -93,14 +94,7 @@ export default function AnimalWelfare() {
           </TabsContent>
 
           <TabsContent value="marketplace" className="space-y-6">
-            <Card className="border-green-500/30 bg-green-900/20">
-              <CardHeader>
-                <CardTitle className="text-green-400">🏪 Animal Conservation Marketplace</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Conservation items marketplace coming soon!</p>
-              </CardContent>
-            </Card>
+            <AnimalNFTMarketplace />
           </TabsContent>
 
           <TabsContent value="gaming" className="space-y-6">
