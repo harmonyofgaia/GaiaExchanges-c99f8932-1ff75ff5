@@ -19,7 +19,6 @@ import {
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { supabase } from '@/integrations/supabase/client'
-import { useAuth } from '@/components/auth/AuthProvider'
 
 interface GreenInvestmentConfig {
   default_fee_percentage: number
@@ -42,7 +41,7 @@ interface GreenProject {
 const GREEN_INVESTMENT_WALLET = 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7'
 
 export function GreenInvestmentWalletManager() {
-  const { user } = useAuth() || { user: null }
+  const [user, setUser] = useState<any>(null)
   const [config, setConfig] = useState<GreenInvestmentConfig>({
     default_fee_percentage: 0.001,
     preferred_fee_destination: 'green_projects',
@@ -108,6 +107,13 @@ export function GreenInvestmentWalletManager() {
   ]
 
   useEffect(() => {
+    // Get current user session
+    const getCurrentUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      setUser(user)
+    }
+    getCurrentUser()
+    
     fetchUserConfig()
     
     const total = greenProjects.reduce((sum, project) => sum + project.total_received, 0)
