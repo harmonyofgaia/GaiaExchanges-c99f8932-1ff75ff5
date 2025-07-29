@@ -41,6 +41,8 @@ import { AdminDashboard } from './AdminDashboard'
 import { OmniscientGPSEngine } from '@/components/tracking/OmniscientGPSEngine'
 import { AnimalDefenseCommandCenter } from './AnimalDefenseCommandCenter'
 import { PlatformManagement } from './PlatformManagement'
+import { QuantumDefenseWall } from './QuantumDefenseWall'
+import { BackgroundTacticalSystems } from './BackgroundTacticalSystems'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -220,6 +222,18 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">Platform</span>
             </div>
           </TabsTrigger>
+          <TabsTrigger value="defense-wall" className="p-2 text-center bg-gradient-to-r from-red-600/20 to-purple-600/20 border border-red-500/30">
+            <div className="flex flex-col items-center">
+              <span>🛡️</span>
+              <span className="hidden sm:inline">Defense Wall</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="tactical" className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30">
+            <div className="flex flex-col items-center">
+              <span>🚀</span>
+              <span className="hidden sm:inline">Tactical</span>
+            </div>
+          </TabsTrigger>
           </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
@@ -328,6 +342,14 @@ export function SecureAdminDashboard() {
 
         <TabsContent value="platform" className="space-y-6">
           <PlatformManagement />
+        </TabsContent>
+
+        <TabsContent value="defense-wall" className="space-y-6">
+          <QuantumDefenseWall />
+        </TabsContent>
+
+        <TabsContent value="tactical" className="space-y-6">
+          <BackgroundTacticalSystems />
         </TabsContent>
       </Tabs>
     </div>
