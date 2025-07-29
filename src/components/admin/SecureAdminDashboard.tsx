@@ -37,6 +37,7 @@ import { SecurityDashboard } from './security/SecurityDashboard'
 import { UserManagementSystemRefactored } from './UserManagementSystemRefactored'
 import { AdminDashboard } from './AdminDashboard'
 import { OmniscientGPSEngine } from '@/components/tracking/OmniscientGPSEngine'
+import { AnimalDefenseCommandCenter } from './AnimalDefenseCommandCenter'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -53,7 +54,7 @@ export function SecureAdminDashboard() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-20 gap-1 h-auto p-1 text-xs">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-21 gap-1 h-auto p-1 text-xs">
           <TabsTrigger value="overview" className="p-2 text-center">
             <div className="flex flex-col items-center">
               <span>📊</span>
@@ -64,6 +65,12 @@ export function SecureAdminDashboard() {
             <div className="flex flex-col items-center">
               <span>🏠</span>
               <span className="hidden sm:inline">Dashboard</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="animals" className="p-2 text-center bg-gradient-to-r from-orange-600/20 to-red-600/20 border border-orange-500/30">
+            <div className="flex flex-col items-center">
+              <span>🐾</span>
+              <span className="hidden sm:inline">Animals</span>
             </div>
           </TabsTrigger>
           <TabsTrigger value="live-tracking" className="p-2 text-center">
@@ -199,6 +206,10 @@ export function SecureAdminDashboard() {
             </div>
           </TabsTrigger>
         </TabsList>
+
+        <TabsContent value="animals" className="space-y-6">
+          <AnimalDefenseCommandCenter />
+        </TabsContent>
 
         <TabsContent value="overview" className="space-y-6">
           <UltimateAdminSuite />
