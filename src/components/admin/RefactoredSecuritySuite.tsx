@@ -12,6 +12,7 @@ import { AdminDominationDashboard } from '@/components/security/AdminDominationD
 import { InvisibleDefenseDashboard } from '@/components/security/InvisibleDefenseDashboard'
 import { WeaponizedCounterAttackDashboard } from '@/components/security/WeaponizedCounterAttackDashboard'
 import { GlobalSurveillanceDashboard } from '@/components/security/GlobalSurveillanceDashboard'
+import { QuantumAIDashboard } from '@/components/security/QuantumAIDashboard'
 
 export function RefactoredSecuritySuite() {
   return (
@@ -39,6 +40,9 @@ export function RefactoredSecuritySuite() {
       
       {/* Phase 8: Global Surveillance & Intelligence Network */}
       <GlobalSurveillanceDashboard />
+      
+      {/* Phase 9: Quantum-AI Supremacy */}
+      <QuantumAIDashboard />
       
       {/* Existing Security Systems */}
       <AdvancedBreachProtocol />

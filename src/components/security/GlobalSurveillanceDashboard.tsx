@@ -10,12 +10,10 @@ import { Satellite, Eye, Globe, Radar, Activity, Database } from 'lucide-react'
 export function GlobalSurveillanceDashboard() {
   const [status, setStatus] = useState({
     isActive: false,
-    surveillanceNodes: 0,
-    globalCoverage: 0,
-    threatsMonitored: 0,
-    intelligenceOperations: 0,
-    dataCollectionRate: 0,
-    predictiveAccuracy: 0
+    satelliteNetwork: { total: 0, active: 0, threats: 0 },
+    deepWebMonitoring: { layers: 0, threats: 0, intelligence: 0 },
+    governmentIntegration: { agencies: 0, feeds: 0, classification: 'UNCLASSIFIED' },
+    internationalCoordination: { partners: 0, threats: 0, responses: 0 }
   })
 
   useEffect(() => {
@@ -46,11 +44,11 @@ export function GlobalSurveillanceDashboard() {
     }
   }
 
-  const handleActivateQuantumRadar = async () => {
+  const handleCreateDeepWebMonitor = async () => {
     try {
-      await globalSurveillance.activateQuantumRadar()
+      await globalSurveillance.deploySatelliteNetwork()
     } catch (error) {
-      toast.error('Failed to activate quantum radar')
+      toast.error('Failed to deploy satellite network')
     }
   }
 
@@ -70,26 +68,25 @@ export function GlobalSurveillanceDashboard() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Satellite className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Surveillance Nodes</span>
+              <span className="text-sm font-medium">Satellites</span>
             </div>
-            <div className="text-2xl font-bold text-primary">{status.surveillanceNodes}</div>
+            <div className="text-2xl font-bold text-primary">{status.satelliteNetwork.total}</div>
           </div>
           
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Globe className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Global Coverage</span>
+              <span className="text-sm font-medium">Active Nodes</span>
             </div>
-            <Progress value={status.globalCoverage} className="mt-2" />
-            <div className="text-sm text-muted-foreground">{status.globalCoverage}% Earth</div>
+            <div className="text-2xl font-bold text-primary">{status.satelliteNetwork.active}</div>
           </div>
           
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Eye className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Threats Monitored</span>
+              <span className="text-sm font-medium">Threats Detected</span>
             </div>
-            <div className="text-2xl font-bold text-primary">{status.threatsMonitored}</div>
+            <div className="text-2xl font-bold text-primary">{status.satelliteNetwork.threats}</div>
           </div>
         </div>
 
@@ -97,27 +94,25 @@ export function GlobalSurveillanceDashboard() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Activity className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Intelligence Ops</span>
+              <span className="text-sm font-medium">Deep Web Layers</span>
             </div>
-            <div className="text-xl font-bold">{status.intelligenceOperations}</div>
+            <div className="text-xl font-bold">{status.deepWebMonitoring.layers}</div>
           </div>
           
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Database className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Data Collection</span>
+              <span className="text-sm font-medium">Gov Agencies</span>
             </div>
-            <Progress value={status.dataCollectionRate} className="mt-2" />
-            <div className="text-sm text-muted-foreground">{status.dataCollectionRate}% Rate</div>
+            <div className="text-xl font-bold">{status.governmentIntegration.agencies}</div>
           </div>
           
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Radar className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Predictive Accuracy</span>
+              <span className="text-sm font-medium">International Partners</span>
             </div>
-            <Progress value={status.predictiveAccuracy} className="mt-2" />
-            <div className="text-sm text-muted-foreground">{status.predictiveAccuracy}% Accurate</div>
+            <div className="text-xl font-bold">{status.internationalCoordination.partners}</div>
           </div>
         </div>
 
@@ -132,9 +127,9 @@ export function GlobalSurveillanceDashboard() {
             Deploy Satellite Network
           </Button>
           
-          <Button onClick={handleActivateQuantumRadar} variant="outline" size="sm">
+          <Button onClick={handleCreateDeepWebMonitor} variant="outline" size="sm">
             <Radar className="h-4 w-4 mr-2" />
-            Activate Quantum Radar
+            Deploy Deep Web Monitor
           </Button>
         </div>
 

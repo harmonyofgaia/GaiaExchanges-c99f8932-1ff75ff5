@@ -10,11 +10,12 @@ import { Coins, Shield, Zap, Target, TrendingUp, DollarSign } from 'lucide-react
 export function TokenWarfareDashboard() {
   const [status, setStatus] = useState({
     isActive: false,
-    tokensGenerated: 0,
-    marketValue: 0,
-    economicWarfare: 0,
-    liquidityPools: 0,
-    tradingBots: 0
+    totalSupply: 0,
+    burnedTokens: 0,
+    stakingTiers: 0,
+    activeProposals: 0,
+    protectedPools: 0,
+    tokenMechanisms: 0
   })
 
   useEffect(() => {
@@ -37,30 +38,19 @@ export function TokenWarfareDashboard() {
     }
   }
 
-  const handleGenerateUtilityToken = async () => {
+  const handleCreateTokenMechanism = async () => {
     try {
-      await tokenWarfare.generateUtilityToken({
-        name: 'SecureToken',
-        symbol: 'SECTK',
-        totalSupply: 1000000,
-        utilities: ['governance', 'staking', 'access_control']
-      })
+      await tokenWarfare.activateTokenMechanism('governance')
     } catch (error) {
-      toast.error('Failed to generate utility token')
+      toast.error('Failed to create token mechanism')
     }
   }
 
-  const handleDeployLiquidityPool = async () => {
+  const handleCreateLiquidityPool = async () => {
     try {
-      await tokenWarfare.deployLiquidityPool({
-        tokenA: 'SECTK',
-        tokenB: 'ETH',
-        initialLiquidityA: 100000,
-        initialLiquidityB: 50,
-        feeStructure: 'dynamic'
-      })
+      await tokenWarfare.protectLiquidityPool('pool-1')
     } catch (error) {
-      toast.error('Failed to deploy liquidity pool')
+      toast.error('Failed to create liquidity pool')
     }
   }
 
@@ -80,26 +70,25 @@ export function TokenWarfareDashboard() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Coins className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Tokens Generated</span>
+              <span className="text-sm font-medium">Total Supply</span>
             </div>
-            <div className="text-2xl font-bold text-primary">{status.tokensGenerated}</div>
+            <div className="text-2xl font-bold text-primary">{status.totalSupply.toLocaleString()}</div>
           </div>
           
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <DollarSign className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Market Value</span>
+              <span className="text-sm font-medium">Burned Tokens</span>
             </div>
-            <div className="text-2xl font-bold text-primary">${status.marketValue.toLocaleString()}</div>
+            <div className="text-2xl font-bold text-primary">{status.burnedTokens.toLocaleString()}</div>
           </div>
           
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Economic Warfare</span>
+              <span className="text-sm font-medium">Active Proposals</span>
             </div>
-            <Progress value={status.economicWarfare} className="mt-2" />
-            <div className="text-sm text-muted-foreground">{status.economicWarfare}% Dominance</div>
+            <div className="text-2xl font-bold text-primary">{status.activeProposals}</div>
           </div>
         </div>
 
@@ -107,17 +96,17 @@ export function TokenWarfareDashboard() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Liquidity Pools</span>
+              <span className="text-sm font-medium">Staking Tiers</span>
             </div>
-            <div className="text-xl font-bold">{status.liquidityPools} Active</div>
+            <div className="text-xl font-bold">{status.stakingTiers}</div>
           </div>
           
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Zap className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Trading Bots</span>
+              <span className="text-sm font-medium">Protected Pools</span>
             </div>
-            <div className="text-xl font-bold">{status.tradingBots} Running</div>
+            <div className="text-xl font-bold">{status.protectedPools}</div>
           </div>
         </div>
 
@@ -127,14 +116,14 @@ export function TokenWarfareDashboard() {
             Initialize Token Warfare
           </Button>
           
-          <Button onClick={handleGenerateUtilityToken} variant="outline" size="sm">
+          <Button onClick={handleCreateTokenMechanism} variant="outline" size="sm">
             <Coins className="h-4 w-4 mr-2" />
-            Generate Utility Token
+            Create Token Mechanism
           </Button>
           
-          <Button onClick={handleDeployLiquidityPool} variant="outline" size="sm">
+          <Button onClick={handleCreateLiquidityPool} variant="outline" size="sm">
             <Shield className="h-4 w-4 mr-2" />
-            Deploy Liquidity Pool
+            Create Liquidity Pool
           </Button>
         </div>
 

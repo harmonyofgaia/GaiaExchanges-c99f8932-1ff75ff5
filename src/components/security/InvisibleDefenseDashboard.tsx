@@ -10,11 +10,11 @@ import { EyeOff, Ghost, Shield, Zap, Radar, Network } from 'lucide-react'
 export function InvisibleDefenseDashboard() {
   const [status, setStatus] = useState({
     isActive: false,
-    stealthLevel: 0,
-    cloakingNodes: 0,
-    hiddenServices: 0,
-    phantomDecoys: 0,
-    invisibilityRating: 0
+    stealthCommunications: 0,
+    obfuscatedTraffic: 0,
+    activeDecoys: 0,
+    quantumCloaking: 0,
+    totalAttacksDeflected: 0
   })
 
   useEffect(() => {
@@ -37,19 +37,19 @@ export function InvisibleDefenseDashboard() {
     }
   }
 
-  const handleActivateGhostMode = async () => {
+  const handleCreateStealthMessage = async () => {
     try {
-      await invisibleDefense.activateGhostMode()
+      await invisibleDefense.createStealthMessage('Demo message', 'image')
     } catch (error) {
-      toast.error('Failed to activate ghost mode')
+      toast.error('Failed to create stealth message')
     }
   }
 
-  const handleDeployPhantomDecoys = async () => {
+  const handleDeployDecoyNodes = async () => {
     try {
-      await invisibleDefense.deployPhantomDecoys(10)
+      await invisibleDefense.deployDecoyNode('phantom', 'Node Alpha')
     } catch (error) {
-      toast.error('Failed to deploy phantom decoys')
+      toast.error('Failed to deploy decoy nodes')
     }
   }
 
@@ -69,26 +69,25 @@ export function InvisibleDefenseDashboard() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Ghost className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Stealth Level</span>
+              <span className="text-sm font-medium">Stealth Communications</span>
             </div>
-            <Progress value={status.stealthLevel} className="mt-2" />
-            <div className="text-sm text-muted-foreground">{status.stealthLevel}% Hidden</div>
+            <div className="text-2xl font-bold text-primary">{status.stealthCommunications}</div>
           </div>
           
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Network className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Cloaking Nodes</span>
+              <span className="text-sm font-medium">Obfuscated Traffic</span>
             </div>
-            <div className="text-2xl font-bold text-primary">{status.cloakingNodes}</div>
+            <div className="text-2xl font-bold text-primary">{status.obfuscatedTraffic}</div>
           </div>
           
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Radar className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Phantom Decoys</span>
+              <span className="text-sm font-medium">Active Decoys</span>
             </div>
-            <div className="text-2xl font-bold text-primary">{status.phantomDecoys}</div>
+            <div className="text-2xl font-bold text-primary">{status.activeDecoys}</div>
           </div>
         </div>
 
@@ -96,18 +95,17 @@ export function InvisibleDefenseDashboard() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Hidden Services</span>
+              <span className="text-sm font-medium">Quantum Cloaking</span>
             </div>
-            <div className="text-xl font-bold">{status.hiddenServices} Active</div>
+            <div className="text-xl font-bold">{status.quantumCloaking} Active</div>
           </div>
           
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <EyeOff className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">Invisibility Rating</span>
+              <span className="text-sm font-medium">Attacks Deflected</span>
             </div>
-            <Progress value={status.invisibilityRating} className="mt-2" />
-            <div className="text-sm text-muted-foreground">{status.invisibilityRating}% Undetectable</div>
+            <div className="text-xl font-bold">{status.totalAttacksDeflected}</div>
           </div>
         </div>
 
@@ -117,14 +115,14 @@ export function InvisibleDefenseDashboard() {
             Initialize Invisible Defense
           </Button>
           
-          <Button onClick={handleActivateGhostMode} variant="outline" size="sm">
+          <Button onClick={handleCreateStealthMessage} variant="outline" size="sm">
             <Ghost className="h-4 w-4 mr-2" />
-            Activate Ghost Mode
+            Create Stealth Message
           </Button>
           
-          <Button onClick={handleDeployPhantomDecoys} variant="outline" size="sm">
+          <Button onClick={handleDeployDecoyNodes} variant="outline" size="sm">
             <Radar className="h-4 w-4 mr-2" />
-            Deploy Phantom Decoys
+            Deploy Decoy Nodes
           </Button>
         </div>
 
