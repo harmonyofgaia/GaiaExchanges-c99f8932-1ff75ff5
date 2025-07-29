@@ -89,7 +89,7 @@ const SlidingMenu = () => {
   ]
 
   const adminMenuItems = [
-    { icon: Crown, label: '👑 Admin Portal', path: '/admin', category: 'admin' }
+    { icon: Crown, label: '👑 Admin Portal', path: '/secure-admin', category: 'admin' }
   ]
 
   const menuItems = [...baseMenuItems, ...adminMenuItems]

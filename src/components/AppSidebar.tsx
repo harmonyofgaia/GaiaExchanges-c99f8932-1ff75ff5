@@ -67,7 +67,7 @@ const items = [
   },
   {
     title: "Admin Panel",
-    url: "/admin",
+    url: "/secure-admin",
     icon: Crown,
   },
   {

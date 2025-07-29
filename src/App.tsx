@@ -1,6 +1,6 @@
 
 import { lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { Navbar } from '@/components/Navbar'
 import { GaiaLogo } from '@/components/GaiaLogo'
@@ -97,7 +97,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/pricing" element={<Pricing />} />
-              <Route path="/admin" element={<SecureAdmin />} />
+              <Route path="/admin" element={<Navigate to="/secure-admin" replace />} />
               <Route path="/live-tracking" element={<LiveTracking />} />
               <Route path="/sand-protect" element={<SandProtect />} />
               <Route path="/gaias-projects" element={<GaiasProjects />} />
