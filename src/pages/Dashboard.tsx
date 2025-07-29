@@ -31,27 +31,35 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent flex items-center gap-3">
-            <img src="/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png" alt="Harmony of Gaia" className="w-12 h-12" />
-            GAiA Dashboard - Harmony of Gaia
-          </h1>
-          <p className="text-xl text-muted-foreground mt-2">
-            {GAIA_TOKEN.BRAND_STATEMENT}
-          </p>
-          <div className="flex gap-4 mt-4 flex-wrap">
-            <Badge variant="outline" className="border-green-500/50 text-green-400">
+          <div className="text-center mb-6">
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <img src="/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png" alt="Harmony of Gaia" className="w-16 h-16 animate-pulse" />
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Harmony of Gaia Dashboard
+              </h1>
+            </div>
+            <p className="text-xl text-green-400 mb-2">
+              {GAIA_TOKEN.BRAND_STATEMENT}
+            </p>
+            <p className="text-lg text-blue-400">
+              Complete ecosystem monitoring & real-time analytics
+            </p>
+          </div>
+          
+          <div className="flex justify-center gap-3 flex-wrap">
+            <Badge className="bg-green-600 text-white px-4 py-2">
               <Globe className="h-3 w-3 mr-1" />
               {GAIA_TOKEN.SYMBOL} Token
             </Badge>
-            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
+            <Badge className="bg-blue-600 text-white px-4 py-2">
               <Shield className="h-3 w-3 mr-1" />
               {GAIA_TOKEN.NETWORK} Network
             </Badge>
-            <Badge variant="outline" className="border-purple-500/50 text-purple-400">
+            <Badge className="bg-purple-600 text-white px-4 py-2">
               <Coins className="h-3 w-3 mr-1" />
               {formatGaiaNumber(GAIA_TOKEN.TOTAL_SUPPLY)} Supply
             </Badge>
-            <Badge variant="outline" className="border-orange-500/50 text-orange-400">
+            <Badge className={`${tokenData?.isLive ? 'bg-green-600' : 'bg-orange-600'} text-white px-4 py-2`}>
               {tokenData?.isLive ? '🟢 LIVE DATA' : '📊 SIMULATED'}
             </Badge>
           </div>

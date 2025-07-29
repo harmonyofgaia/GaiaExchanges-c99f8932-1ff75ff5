@@ -40,6 +40,7 @@ import { UserManagementSystemRefactored } from './UserManagementSystemRefactored
 import { AdminDashboard } from './AdminDashboard'
 import { OmniscientGPSEngine } from '@/components/tracking/OmniscientGPSEngine'
 import { AnimalDefenseCommandCenter } from './AnimalDefenseCommandCenter'
+import { PlatformManagement } from './PlatformManagement'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -207,12 +208,18 @@ export function SecureAdminDashboard() {
                 <span className="hidden sm:inline">Rules 24/7</span>
               </div>
             </TabsTrigger>
-            <TabsTrigger value="storage" className="p-2 text-center bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border border-cyan-500/30">
-              <div className="flex flex-col items-center">
-                <span>📁</span>
-                <span className="hidden sm:inline">Storage</span>
-              </div>
-            </TabsTrigger>
+          <TabsTrigger value="storage" className="p-2 text-center bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border border-cyan-500/30">
+            <div className="flex flex-col items-center">
+              <span>📁</span>
+              <span className="hidden sm:inline">Storage</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="platform" className="p-2 text-center bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/30">
+            <div className="flex flex-col items-center">
+              <span>🌍</span>
+              <span className="hidden sm:inline">Platform</span>
+            </div>
+          </TabsTrigger>
           </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
@@ -317,6 +324,10 @@ export function SecureAdminDashboard() {
 
         <TabsContent value="rules" className="space-y-6">
           <RuleSystemManagement />
+        </TabsContent>
+
+        <TabsContent value="platform" className="space-y-6">
+          <PlatformManagement />
         </TabsContent>
       </Tabs>
     </div>
