@@ -1,4 +1,3 @@
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -28,6 +27,12 @@ import { InteractiveFoodMap } from '@/components/community/InteractiveFoodMap'
 import { GaiaBikeEarning } from '@/components/earning/GaiaBikeEarning'
 import { EnhancedBadgeSystem } from '@/components/earning/EnhancedBadgeSystem'
 import { PhotoVerificationSystem } from '@/components/earning/PhotoVerificationSystem'
+
+// Import Phase 2 components
+import { LocationBasedMissions } from '@/components/community/LocationBasedMissions'
+import { CommunityProjectVoting } from '@/components/community/CommunityProjectVoting'
+import { TeamChallenges } from '@/components/earning/TeamChallenges'
+import { TokenStakingSystem } from '@/components/earning/TokenStakingSystem'
 
 export default function EarningActivities() {
   const userStats = {
@@ -111,7 +116,7 @@ export default function EarningActivities() {
 
         {/* Activity Tabs */}
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 h-auto bg-black/50 border border-gray-700/50">
+          <TabsList className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-9 h-auto bg-black/50 border border-gray-700/50">
             <TabsTrigger value="overview" className="data-[state=active]:bg-green-600">
               <Target className="h-4 w-4 mr-1" />
               Overview
@@ -132,13 +137,21 @@ export default function EarningActivities() {
               <Camera className="h-4 w-4 mr-1" />
               Photo Verify
             </TabsTrigger>
-            <TabsTrigger value="water" className="data-[state=active]:bg-blue-600">
-              <Droplets className="h-4 w-4 mr-1" />
-              Water
+            <TabsTrigger value="missions" className="data-[state=active]:bg-red-600">
+              <Target className="h-4 w-4 mr-1" />
+              Missions
             </TabsTrigger>
-            <TabsTrigger value="food" className="data-[state=active]:bg-green-600">
-              <Leaf className="h-4 w-4 mr-1" />
-              Food
+            <TabsTrigger value="voting" className="data-[state=active]:bg-indigo-600">
+              <Users className="h-4 w-4 mr-1" />
+              Voting
+            </TabsTrigger>
+            <TabsTrigger value="teams" className="data-[state=active]:bg-pink-600">
+              <Users className="h-4 w-4 mr-1" />
+              Teams
+            </TabsTrigger>
+            <TabsTrigger value="staking" className="data-[state=active]:bg-yellow-600">
+              <Zap className="h-4 w-4 mr-1" />
+              Staking
             </TabsTrigger>
           </TabsList>
 
@@ -175,18 +188,63 @@ export default function EarningActivities() {
                 </CardContent>
               </Card>
 
-              <Card className="border-purple-500/20 hover:border-purple-500/40 transition-colors cursor-pointer">
+              <Card className="border-red-500/20 hover:border-red-500/40 transition-colors cursor-pointer">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-purple-400">
-                    <Trophy className="h-5 w-5" />
-                    Badge Collection
+                  <CardTitle className="flex items-center gap-2 text-red-400">
+                    <Target className="h-5 w-5" />
+                    Location Missions
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Unlock achievements and earn bonus tokens through consistent action
+                    Complete real-world environmental missions in your area
                   </p>
-                  <Badge className="bg-purple-600">Up to 1000 GAiA</Badge>
+                  <Badge className="bg-red-600">Up to 300 GAiA</Badge>
+                </CardContent>
+              </Card>
+
+              <Card className="border-indigo-500/20 hover:border-indigo-500/40 transition-colors cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-indigo-400">
+                    <Users className="h-5 w-5" />
+                    Community Voting
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Vote on environmental projects and propose new initiatives
+                  </p>
+                  <Badge className="bg-indigo-600">+10 GAiA per Vote</Badge>
+                </CardContent>
+              </Card>
+
+              <Card className="border-pink-500/20 hover:border-pink-500/40 transition-colors cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-pink-400">
+                    <Trophy className="h-5 w-5" />
+                    Team Challenges
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Join teams and compete in environmental challenges
+                  </p>
+                  <Badge className="bg-pink-600">5000 GAiA Prize Pool</Badge>
+                </CardContent>
+              </Card>
+
+              <Card className="border-yellow-500/20 hover:border-yellow-500/40 transition-colors cursor-pointer">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-yellow-400">
+                    <Zap className="h-5 w-5" />
+                    Token Staking
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Stake your GAiA tokens to earn rewards and support projects
+                  </p>
+                  <Badge className="bg-yellow-600">Up to 25% APY</Badge>
                 </CardContent>
               </Card>
             </div>
@@ -208,6 +266,22 @@ export default function EarningActivities() {
             <PhotoVerificationSystem />
           </TabsContent>
 
+          <TabsContent value="missions">
+            <LocationBasedMissions />
+          </TabsContent>
+
+          <TabsContent value="voting">
+            <CommunityProjectVoting />
+          </TabsContent>
+
+          <TabsContent value="teams">
+            <TeamChallenges />
+          </TabsContent>
+
+          <TabsContent value="staking">
+            <TokenStakingSystem />
+          </TabsContent>
+
           <TabsContent value="water">
             <WaterSavingActions />
           </TabsContent>
@@ -217,21 +291,37 @@ export default function EarningActivities() {
           </TabsContent>
         </Tabs>
 
-        {/* Coming Soon - Phase 2 & 3 */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="border-cyan-500/30 bg-gradient-to-br from-cyan-900/20 to-blue-900/20">
+        {/* Phase Status - Updated */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="border-2 border-green-500/50 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-cyan-400">
-                <Users className="h-6 w-6" />
-                Phase 2: Advanced Community
-                <Badge variant="outline" className="border-cyan-500/50 text-cyan-400">Coming Soon</Badge>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <Trophy className="h-6 w-6" />
+                Phase 1: Core Infrastructure
+                <Badge className="bg-green-600 text-white">COMPLETE</Badge>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <p className="text-sm text-cyan-300/80">🎯 Location-based missions</p>
-              <p className="text-sm text-cyan-300/80">🗳️ Community project voting</p>
-              <p className="text-sm text-cyan-300/80">👥 Team challenges</p>
-              <p className="text-sm text-cyan-300/80">🔒 Token staking system</p>
+              <p className="text-sm text-green-300/80">✅ Community food map</p>
+              <p className="text-sm text-green-300/80">✅ GAiA bike system</p>
+              <p className="text-sm text-green-300/80">✅ Enhanced badges</p>
+              <p className="text-sm text-green-300/80">✅ Photo verification</p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-2 border-blue-500/50 bg-gradient-to-r from-blue-900/30 to-cyan-900/30">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-400">
+                <Users className="h-6 w-6" />
+                Phase 2: Advanced Community
+                <Badge className="bg-blue-600 text-white">LIVE</Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <p className="text-sm text-blue-300/80">🎯 Location-based missions</p>
+              <p className="text-sm text-blue-300/80">🗳️ Community project voting</p>
+              <p className="text-sm text-blue-300/80">👥 Team challenges</p>
+              <p className="text-sm text-blue-300/80">🔒 Token staking system</p>
             </CardContent>
           </Card>
 
@@ -240,7 +330,7 @@ export default function EarningActivities() {
               <CardTitle className="flex items-center gap-2 text-yellow-400">
                 <Building2 className="h-6 w-6" />
                 Phase 3: Business Integration
-                <Badge variant="outline" className="border-yellow-500/50 text-yellow-400">Planned</Badge>
+                <Badge variant="outline" className="border-yellow-500/50 text-yellow-400">Coming Soon</Badge>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
