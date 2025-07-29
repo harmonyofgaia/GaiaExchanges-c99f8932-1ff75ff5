@@ -70,6 +70,17 @@ export function AdvancedLandscapeBuilder() {
       aiGenerated: true
     },
     {
+      id: 'jungle',
+      name: '🌿 Jungle Kingdom',
+      icon: <TreePine className="h-6 w-6" />,
+      color: 'from-green-600 to-emerald-600',
+      description: 'Dense tropical rainforest with canopy bridges and hidden temples',
+      features: ['Biodiversity AI', 'Canopy Physics', 'Weather Systems', 'Ancient Ruins'],
+      difficulty: 'Hard',
+      memorySize: '128 TB',
+      aiGenerated: true
+    },
+    {
       id: 'mountain',
       name: '🏔️ Mountain Kingdom',
       icon: <Mountain className="h-6 w-6" />,
@@ -104,7 +115,7 @@ export function AdvancedLandscapeBuilder() {
     },
     {
       id: 'city',
-      name: '🏙️ Mega City',
+      name: '🏙️ Future Metropolis',
       icon: <Building className="h-6 w-6" />,
       color: 'from-yellow-600 to-orange-600',
       description: 'Sprawling cyberpunk metropolis with flying cars and neon lights',
@@ -126,10 +137,10 @@ export function AdvancedLandscapeBuilder() {
     },
     {
       id: 'desert',
-      name: '🏜️ Desert Oasis',
+      name: '🏜️ Desert Empire',
       icon: <Sun className="h-6 w-6" />,
       color: 'from-orange-600 to-red-600',
-      description: 'Vast sand dunes with hidden oases and ancient ruins',
+      description: 'Vast sand dunes with hidden oases and ancient pyramids',
       features: ['Sand Physics', 'Heat Mirages', 'Sandstorm Weather', 'Ancient Structures'],
       difficulty: 'Hard',
       memorySize: '87 TB',
@@ -148,7 +159,7 @@ export function AdvancedLandscapeBuilder() {
     },
     {
       id: 'floating',
-      name: '☁️ Floating Islands',
+      name: '☁️ Sky Islands',
       icon: <Cloud className="h-6 w-6" />,
       color: 'from-purple-600 to-pink-600',
       description: 'Mystical floating landmasses connected by energy bridges',
@@ -189,7 +200,81 @@ export function AdvancedLandscapeBuilder() {
       difficulty: 'Hard',
       memorySize: '134 TB',
       aiGenerated: true
+    },
+    {
+      id: 'swamp',
+      name: '🐸 Mystic Swamplands',
+      icon: <Waves className="h-6 w-6" />,
+      color: 'from-green-600 to-brown-600',
+      description: 'Mysterious wetlands with ancient spirits and glowing flora',
+      features: ['Wetland Ecology', 'Fog Effects', 'Spirit AI', 'Bioluminescent Plants'],
+      difficulty: 'Medium',
+      memorySize: '98 TB',
+      aiGenerated: true
+    },
+    {
+      id: 'steampunk',
+      name: '⚙️ Steampunk City',
+      icon: <Building className="h-6 w-6" />,
+      color: 'from-amber-600 to-copper-600',
+      description: 'Victorian-era city with steam-powered machines and airships',
+      features: ['Steam Physics', 'Gear Mechanisms', 'Airship Traffic', 'Victorian Architecture'],
+      difficulty: 'Hard',
+      memorySize: '145 TB',
+      aiGenerated: true
+    },
+    {
+      id: 'alien',
+      name: '👽 Alien World',
+      icon: <Star className="h-6 w-6" />,
+      color: 'from-lime-600 to-green-600',
+      description: 'Exotic alien planet with strange gravity and alien life forms',
+      features: ['Alien Physics', 'Exotic Matter', 'Strange Gravity', 'Alien Ecosystems'],
+      difficulty: 'Legendary',
+      memorySize: '289 TB',
+      aiGenerated: true
+    },
+    {
+      id: 'pirate',
+      name: '🏴‍☠️ Pirate Islands',
+      icon: <Waves className="h-6 w-6" />,
+      color: 'from-blue-600 to-brown-600',
+      description: 'Caribbean-style islands with treasure caves and pirate ships',
+      features: ['Ocean Physics', 'Ship Simulation', 'Treasure Systems', 'Storm Weather'],
+      difficulty: 'Medium',
+      memorySize: '112 TB',
+      aiGenerated: true
+    },
+    {
+      id: 'medieval',
+      name: '🏰 Medieval Kingdom',
+      icon: <Crown className="h-6 w-6" />,
+      color: 'from-stone-600 to-gold-600',
+      description: 'Medieval realm with castles, dragons, and knight tournaments',
+      features: ['Castle Physics', 'Dragon AI', 'Combat Systems', 'Medieval Architecture'],
+      difficulty: 'Hard',
+      memorySize: '167 TB',
+      aiGenerated: true
     }
+  ]
+
+  const advancedTools = [
+    { name: 'Quantum Terrain Sculptor', description: 'Shape reality with quantum precision', icon: '🔨' },
+    { name: 'Ocean Generator Pro', description: 'Create infinite water worlds', icon: '🌊' },
+    { name: 'Forest AI', description: 'Grows realistic ecosystems automatically', icon: '🌲' },
+    { name: 'Castle Architect', description: 'Medieval fortresses instantly', icon: '🏰' },
+    { name: 'Weather God Mode', description: 'Control all natural forces', icon: '⚡' },
+    { name: 'Galaxy Painter', description: 'Create star systems and nebulae', icon: '🌌' },
+    { name: 'Creature Spawner', description: 'Bring mythical beings to life', icon: '🦄' },
+    { name: 'Reality Brush', description: 'Paint physics laws with reality', icon: '🎨' },
+    { name: 'Time Manipulator', description: 'Control time flow in environments', icon: '⏰' },
+    { name: 'Gravity Controller', description: 'Adjust gravitational forces', icon: '🌍' },
+    { name: 'Element Forge', description: 'Create new matter types', icon: '⚗️' },
+    { name: 'Life Creator', description: 'Generate new species instantly', icon: '🧬' },
+    { name: 'Space Bender', description: 'Warp space-time itself', icon: '🌀' },
+    { name: 'Memory Architect', description: 'Build environments from memories', icon: '🧠' },
+    { name: 'Dream Weaver', description: 'Create landscapes from dreams', icon: '💭' },
+    { name: 'Soul Infuser', description: 'Give consciousness to environments', icon: '👻' }
   ]
 
   useEffect(() => {
@@ -372,13 +457,33 @@ export function AdvancedLandscapeBuilder() {
       <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-lg p-4">
         <h4 className="font-medium text-indigo-400 mb-2">🚀 Advanced Builder Features</h4>
         <div className="text-sm text-indigo-300">
-          ✅ 12 unique environment types available<br/>
-          ✅ AI-powered quantum generation<br/>
+          ✅ {environments.length} unique environment types available<br/>
+          ✅ AI-powered quantum generation with {advancedTools.length}+ tools<br/>
           ✅ Ultra-high detail physics simulation<br/>
           ✅ Real-time weather and lighting systems<br/>
           ✅ Infinite memory and processing power<br/>
           ✅ Cross-platform compatibility<br/>
-          ✅ VR/AR ready environments
+          ✅ VR/AR ready environments<br/>
+          ✅ Reality-bending quantum effects<br/>
+          ✅ Time manipulation and gravity control<br/>
+          ✅ Living AI ecosystems that evolve
+        </div>
+      </div>
+
+      {/* AI Tools Showcase */}
+      <div className="bg-gradient-to-r from-purple-900/30 to-cyan-900/30 border border-purple-500/20 rounded-lg p-6">
+        <h4 className="font-medium text-purple-400 mb-4 text-center text-xl">🛠️ AI GENERATED TOOLS & WEAPONS (Admin Inventory)</h4>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {advancedTools.map((tool, index) => (
+            <div key={index} className="p-3 bg-black/30 rounded-lg border border-purple-500/20 text-center hover:scale-105 transition-all">
+              <div className="text-2xl mb-1">{tool.icon}</div>
+              <div className="text-xs font-bold text-purple-400">{tool.name}</div>
+              <div className="text-xs text-muted-foreground mt-1">{tool.description}</div>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-4 text-purple-300">
+          ⚡ New tools automatically generated every minute by quantum AI engine
         </div>
       </div>
     </div>
