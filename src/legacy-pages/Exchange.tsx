@@ -19,7 +19,7 @@ export default function Exchange() {
             Universal Multi-Token Exchange • Zero Fees • Full Transparency
           </p>
           <p className="text-sm text-green-400">
-            🌍 Legally Confirmed Tokens Only • Powered by Harmony of Gaia
+            🌍 Legally Confirmed Tokens Only • Powered by Harmony of Gaia ✨
           </p>
         </div>
 
