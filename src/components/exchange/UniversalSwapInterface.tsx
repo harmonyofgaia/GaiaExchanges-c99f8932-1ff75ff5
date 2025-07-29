@@ -180,7 +180,11 @@ export function UniversalSwapInterface() {
           <SelectValue>
             <div className="flex items-center gap-2">
               {selectedToken.logo === 'harmony-logo' ? (
-                <UniversalGaiaLogo size="xs" variant="default" animated={false} showText={false} />
+                <img 
+                  src="/lovable-uploads/92accea3-19a3-48db-bd65-888252fd27e7.png"
+                  alt="Harmony of Gaia"
+                  className="w-6 h-6 object-contain"
+                />
               ) : (
                 <span className="text-lg">{selectedToken.logo}</span>
               )}
@@ -194,7 +198,11 @@ export function UniversalSwapInterface() {
             <SelectItem key={token.symbol} value={token.symbol}>
               <div className="flex items-center gap-2">
                 {token.logo === 'harmony-logo' ? (
-                  <UniversalGaiaLogo size="xs" variant="default" animated={false} showText={false} />
+                  <img 
+                    src="/lovable-uploads/92accea3-19a3-48db-bd65-888252fd27e7.png"
+                    alt="Harmony of Gaia"
+                    className="w-5 h-5 object-contain"
+                  />
                 ) : (
                   <span className="text-lg">{token.logo}</span>
                 )}
@@ -207,7 +215,11 @@ export function UniversalSwapInterface() {
       </Select>
       {selectedToken.isGaiaToken && (
         <div className="flex items-center gap-2 p-2 bg-white/5 rounded-lg border border-green-500/20">
-          <UniversalGaiaLogo size="sm" variant="default" animated={true} showText={false} />
+          <img 
+            src="/lovable-uploads/92accea3-19a3-48db-bd65-888252fd27e7.png"
+            alt="Harmony of Gaia"
+            className="w-6 h-6 object-contain"
+          />
           <span className="text-xs text-green-400 font-medium">Harmony of Gaia Official Token</span>
         </div>
       )}

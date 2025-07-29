@@ -10,7 +10,13 @@ export default function Exchange() {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-4 mb-4">
-            <UniversalGaiaLogo size="xl" variant="default" animated={true} showText={false} />
+            <div className="w-20 h-20 relative">
+              <img 
+                src="/lovable-uploads/92accea3-19a3-48db-bd65-888252fd27e7.png"
+                alt="Harmony of Gaia Logo"
+                className="w-full h-full object-contain filter brightness-100"
+              />
+            </div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
               GAIA Private Exchange Network
             </h1>
