@@ -203,7 +203,7 @@ export default function Exchange() {
           <div className="text-center mb-4 sm:mb-6 lg:mb-8">
             <div className="flex items-center justify-center gap-2 sm:gap-4 mb-4">
               <GaiaLogo size="lg" variant="glow" />
-              <img src="/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png" alt="Harmony of Gaia" className="w-12 h-12 sm:w-16 sm:h-16 lg:w-24 lg:h-24 animate-bounce" />
+              <img src="/lovable-uploads/e2cc6708-58e6-4f52-b2ad-b98967ce3b7c.png" alt="Harmony of Gaia" className="w-12 h-12 sm:w-16 sm:h-16 lg:w-24 lg:h-24" />
             </div>
             <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 mb-2 sm:mb-4">
               GAIA BLOCKCHAIN UNIVERSE
