@@ -352,30 +352,35 @@ export function GaiasExchange() {
           </TabsContent>
         </Tabs>
 
-        {/* Admin Access Notice */}
-        <Card className="border-red-500/30 bg-gradient-to-r from-red-900/20 to-orange-900/20">
+        {/* Community Features */}
+        <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-red-400">
-              <Lock className="h-5 w-5" />
-              🔐 Platform Management - Admin Access Required
+            <CardTitle className="flex items-center gap-2 text-green-400">
+              <Users className="h-5 w-5" />
+              🌍 Community & Trading Features
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-center space-y-4">
               <p className="text-muted-foreground">
-                Global expansion and multi-exchange integration features have been moved to the secure admin portal for enhanced security and control.
+                Join our global community of traders and contribute to the Harmony of Gaia ecosystem.
               </p>
-              <div className="flex justify-center gap-4">
-                <Button className="bg-red-600 hover:bg-red-700" asChild>
-                  <Link to="/secure-admin">
-                    <Shield className="h-4 w-4 mr-2" />
-                    Access Admin Portal
-                  </Link>
-                </Button>
-                <Button variant="outline">
-                  <Eye className="h-4 w-4 mr-2" />
-                  Request Admin Access
-                </Button>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                <div className="p-4 rounded-lg bg-green-900/30 border border-green-500/30">
+                  <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                  <h4 className="font-semibold text-green-400 mb-2">Community Trading</h4>
+                  <p className="text-sm text-muted-foreground">Connect with traders worldwide</p>
+                </div>
+                <div className="p-4 rounded-lg bg-blue-900/30 border border-blue-500/30">
+                  <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                  <h4 className="font-semibold text-blue-400 mb-2">Global Markets</h4>
+                  <p className="text-sm text-muted-foreground">Access international exchanges</p>
+                </div>
+                <div className="p-4 rounded-lg bg-purple-900/30 border border-purple-500/30">
+                  <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                  <h4 className="font-semibold text-purple-400 mb-2">Secure Trading</h4>
+                  <p className="text-sm text-muted-foreground">Military-grade security</p>
+                </div>
               </div>
             </div>
           </CardContent>

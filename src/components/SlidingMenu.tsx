@@ -85,14 +85,10 @@ const SlidingMenu = () => {
     { icon: Leaf, label: 'Green Investments', path: '/green-investments', category: 'projects' },
     { icon: Coins, label: 'Coin Crafter', path: '/coin-crafter', category: 'tools' },
     { icon: Shield, label: 'Gaia Private Blockchain Swap Token', path: '/gaia-private-blockchain-swap-token', category: 'security' },
-    { icon: Settings, label: 'Secure Admin', path: '/secure-admin', category: 'admin' }
   ]
 
-  const adminMenuItems = [
-    { icon: Crown, label: '👑 Admin Portal', path: '/secure-admin', category: 'admin' }
-  ]
-
-  const menuItems = [...baseMenuItems, ...adminMenuItems]
+  // Remove admin items from public menu - admin access only through direct URL
+  const menuItems = baseMenuItems
 
   const toggleMenu = () => setIsOpen(!isOpen)
 
@@ -169,13 +165,6 @@ const SlidingMenu = () => {
               <p className="text-xs text-purple-400">
                 Harmony of Culture + AI Evolution
               </p>
-              {isAuthorizedIP && (
-                <div className="mt-2">
-                  <div className="text-xs bg-green-600 text-white px-2 py-1 rounded animate-pulse">
-                    🛡️ ADMIN ACCESS + KOALA AI
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>

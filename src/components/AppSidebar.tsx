@@ -66,11 +66,6 @@ const items = [
     icon: Sparkles,
   },
   {
-    title: "Admin Panel",
-    url: "/secure-admin",
-    icon: Crown,
-  },
-  {
     title: "Settings",
     url: "/settings",
     icon: Settings,
