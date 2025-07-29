@@ -49,17 +49,17 @@ class GaiaTokenService {
               const tokenInfo = data.pairs?.[0] || data.data || data.token || data
               
               return {
-                price: tokenInfo.priceUsd || tokenInfo.price || 0.000125,
-                volume24h: tokenInfo.volume?.h24 || tokenInfo.volume24h || 8750000,
-                marketCap: tokenInfo.marketCap || tokenInfo.market_cap || 278687500,
-                priceChange24h: tokenInfo.priceChange?.h24 || tokenInfo.price_change_24h || 12.5,
-                holders: tokenInfo.holders || 12450,
-                transactions24h: tokenInfo.transactions?.h24 || tokenInfo.txns24h || 45780,
+                price: tokenInfo.priceUsd || tokenInfo.price || 0.0001,
+                volume24h: tokenInfo.volume?.h24 || tokenInfo.volume24h || 50000,
+                marketCap: tokenInfo.marketCap || tokenInfo.market_cap || 100000,
+                priceChange24h: tokenInfo.priceChange?.h24 || tokenInfo.price_change_24h || 5.2,
+                holders: tokenInfo.holders || 10000,
+                transactions24h: tokenInfo.transactions?.h24 || tokenInfo.txns24h || 5000,
                 lastUpdated: new Date(),
                 isLive: true,
-                burnRate: 3.5,
-                totalBurned: 14250000,
-                circulatingSupply: 85750000
+                burnRate: 0,
+                totalBurned: 0,
+                circulatingSupply: GAIA_TOKEN.CIRCULATING_SUPPLY
               }
             }
           }
@@ -84,22 +84,22 @@ class GaiaTokenService {
   }
 
   private generateSimulatedData(): TokenData {
-    const basePrice = 0.000125
-    const priceVariation = (Math.random() - 0.5) * 0.00002
-    const currentPrice = Math.max(0.00001, basePrice + priceVariation)
+    const basePrice = 0.0001
+    const priceVariation = (Math.random() - 0.5) * 0.000002
+    const currentPrice = Math.max(0.000001, basePrice + priceVariation)
     
     return {
       price: currentPrice,
-      volume24h: 8750000 + (Math.random() - 0.5) * 1000000,
-      marketCap: Math.floor(currentPrice * 100000000),
-      priceChange24h: (Math.random() - 0.5) * 20,
-      holders: 12450 + Math.floor(Math.random() * 100),
-      transactions24h: 45780 + Math.floor(Math.random() * 1000),
+      volume24h: 50000 + (Math.random() - 0.5) * 10000,
+      marketCap: Math.floor(currentPrice * GAIA_TOKEN.TOTAL_SUPPLY),
+      priceChange24h: (Math.random() - 0.5) * 10,
+      holders: 10000 + Math.floor(Math.random() * 100),
+      transactions24h: 5000 + Math.floor(Math.random() * 500),
       lastUpdated: new Date(),
       isLive: false,
-      burnRate: 3.5 + (Math.random() - 0.5) * 0.5,
-      totalBurned: 14250000 + Math.floor(Math.random() * 50000),
-      circulatingSupply: 85750000 - Math.floor(Math.random() * 10000)
+      burnRate: 0,
+      totalBurned: 0,
+      circulatingSupply: GAIA_TOKEN.CIRCULATING_SUPPLY
     }
   }
 
@@ -132,12 +132,12 @@ class GaiaTokenService {
       // Simulate price history for GAiA token
       const history = []
       const now = new Date()
-      const basePrice = 0.000125
+      const basePrice = 0.0001
       
       for (let i = days; i >= 0; i--) {
         const date = new Date(now.getTime() - (i * 24 * 60 * 60 * 1000))
-        const priceVariation = (Math.random() - 0.5) * 0.00002
-        const price = Math.max(0.00001, basePrice + priceVariation)
+        const priceVariation = (Math.random() - 0.5) * 0.000002
+        const price = Math.max(0.000001, basePrice + priceVariation)
         
         history.push({
           timestamp: date,

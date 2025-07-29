@@ -16,6 +16,7 @@ import {
   DollarSign
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { GAIA_TOKEN } from '@/constants/gaia'
 
 interface DiscountTier {
   id: string
@@ -35,7 +36,6 @@ interface BurnEvent {
 
 export function AdvancedTokenMechanics() {
   const [userTokens, setUserTokens] = useState(1250)
-  const [stakedTokens, setStakedTokens] = useState(500)
   const [referralEarnings, setReferralEarnings] = useState(245)
   const [discountTier, setDiscountTier] = useState<DiscountTier>({
     id: '2',
@@ -81,36 +81,29 @@ export function AdvancedTokenMechanics() {
       id: '1',
       amount: 50000,
       date: new Date('2024-01-15'),
-      reason: 'Community Vote: Increase Token Value',
+      reason: 'Community Vote: Increase GAiA Token Value',
       participantCount: 1250
     },
     {
       id: '2',
       amount: 25000,
       date: new Date('2024-01-10'),
-      reason: 'Milestone Achievement: 10K Users',
+      reason: 'Milestone Achievement: 10K GAiA Users',
       participantCount: 890
     }
-  ]
-
-  const stakingRewards = [
-    { duration: '30 days', apy: 8, multiplier: 1.2 },
-    { duration: '90 days', apy: 12, multiplier: 1.5 },
-    { duration: '180 days', apy: 18, multiplier: 2.0 },
-    { duration: '365 days', apy: 25, multiplier: 3.0 }
   ]
 
   const handleClaimReferralBonus = () => {
     setUserTokens(prev => prev + 50)
     toast.success('🎉 Referral Bonus Claimed!', {
-      description: 'You earned 50 GAiA tokens from your active referrals!',
+      description: `You earned 50 ${GAIA_TOKEN.SYMBOL} tokens from your active referrals!`,
       duration: 4000
     })
   }
 
   const initiateTokenBurn = () => {
-    toast.success('🔥 Token Burn Vote Started!', {
-      description: 'Your vote to burn 100,000 tokens has been registered. Results in 24 hours!',
+    toast.success('🔥 GAiA Token Burn Vote Started!', {
+      description: `Your vote to burn 100,000 ${GAIA_TOKEN.SYMBOL} tokens has been registered. Results in 24 hours!`,
       duration: 4000
     })
   }
@@ -121,56 +114,16 @@ export function AdvancedTokenMechanics() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-purple-400">
             <Coins className="h-6 w-6" />
-            💎 Advanced Token Mechanics
+            💎 Advanced GAiA Token Mechanics
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="staking" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="staking">Staking</TabsTrigger>
+          <Tabs defaultValue="discounts" className="w-full">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="discounts">Discounts</TabsTrigger>
               <TabsTrigger value="referrals">Referrals</TabsTrigger>
               <TabsTrigger value="burning">Token Burns</TabsTrigger>
             </TabsList>
-
-            <TabsContent value="staking" className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-blue-400">Current Staking</h3>
-                  <div className="p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
-                    <div className="flex justify-between mb-2">
-                      <span className="text-muted-foreground">Staked Amount:</span>
-                      <span className="text-blue-400 font-bold">{stakedTokens} GAiA</span>
-                    </div>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-muted-foreground">Current APY:</span>
-                      <span className="text-green-400 font-bold">18%</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Earning Multiplier:</span>
-                      <span className="text-purple-400 font-bold">2.0x</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-purple-400">Staking Options</h3>
-                  {stakingRewards.map((option, index) => (
-                    <div key={index} className="p-3 bg-purple-900/20 rounded-lg border border-purple-500/20">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <div className="font-medium">{option.duration}</div>
-                          <div className="text-sm text-muted-foreground">{option.apy}% APY • {option.multiplier}x multiplier</div>
-                        </div>
-                        <Button size="sm" variant="outline">
-                          Stake
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </TabsContent>
 
             <TabsContent value="discounts" className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -193,7 +146,7 @@ export function AdvancedTokenMechanics() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-orange-400 mb-4">All Tiers</h3>
+                  <h3 className="text-lg font-semibold text-orange-400 mb-4">All GAiA Tiers</h3>
                   <div className="space-y-3">
                     {discountTiers.map((tier, index) => (
                       <div 
@@ -208,7 +161,7 @@ export function AdvancedTokenMechanics() {
                           <div>
                             <div className="font-medium">{tier.name}</div>
                             <div className="text-sm text-muted-foreground">
-                              {tier.requirement} GAiA required
+                              {tier.requirement} {GAIA_TOKEN.SYMBOL} required
                             </div>
                           </div>
                           <Badge variant="outline">{tier.discount}%</Badge>
@@ -228,20 +181,20 @@ export function AdvancedTokenMechanics() {
                 </div>
                 <div className="p-4 bg-green-900/30 rounded-lg border border-green-500/20 text-center">
                   <div className="text-2xl font-bold text-green-400">{referralEarnings}</div>
-                  <div className="text-sm text-muted-foreground">Total Earned</div>
+                  <div className="text-sm text-muted-foreground">Total {GAIA_TOKEN.SYMBOL} Earned</div>
                 </div>
                 <div className="p-4 bg-blue-900/30 rounded-lg border border-blue-500/20 text-center">
                   <div className="text-2xl font-bold text-blue-400">50</div>
-                  <div className="text-sm text-muted-foreground">Claimable Now</div>
+                  <div className="text-sm text-muted-foreground">{GAIA_TOKEN.SYMBOL} Claimable</div>
                 </div>
               </div>
 
               <div className="p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
-                <h4 className="font-semibold mb-3">Referral Program Benefits:</h4>
+                <h4 className="font-semibold mb-3">GAiA Referral Program Benefits:</h4>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-center gap-2">
                     <Target className="h-4 w-4 text-purple-400" />
-                    Earn 10% of your referrals' lifetime earnings
+                    Earn 10% of your referrals' lifetime {GAIA_TOKEN.SYMBOL} earnings
                   </li>
                   <li className="flex items-center gap-2">
                     <TrendingUp className="h-4 w-4 text-purple-400" />
@@ -249,14 +202,14 @@ export function AdvancedTokenMechanics() {
                   </li>
                   <li className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-purple-400" />
-                    Exclusive rewards for referring 25+ users
+                    Exclusive rewards for referring 25+ users to GAiA
                   </li>
                 </ul>
                 <Button 
                   onClick={handleClaimReferralBonus}
                   className="w-full mt-4 bg-purple-600 hover:bg-purple-700"
                 >
-                  Claim Available Bonus
+                  Claim Available {GAIA_TOKEN.SYMBOL} Bonus
                 </Button>
               </div>
             </TabsContent>
@@ -265,10 +218,10 @@ export function AdvancedTokenMechanics() {
               <div className="p-4 bg-red-900/30 rounded-lg border border-red-500/20">
                 <div className="flex items-center gap-2 mb-3">
                   <Flame className="h-5 w-5 text-red-400" />
-                  <h3 className="text-lg font-semibold text-red-400">Community Token Burns</h3>
+                  <h3 className="text-lg font-semibold text-red-400">Community GAiA Token Burns</h3>
                 </div>
                 <p className="text-sm text-red-300/80 mb-4">
-                  The community votes to burn tokens, reducing supply and potentially increasing value for all holders.
+                  The community votes to burn {GAIA_TOKEN.SYMBOL} tokens, reducing supply and potentially increasing value for all holders.
                 </p>
                 
                 <div className="space-y-3 mb-4">
@@ -276,7 +229,7 @@ export function AdvancedTokenMechanics() {
                     <div key={event.id} className="p-3 bg-red-900/20 rounded border border-red-500/20">
                       <div className="flex justify-between items-center">
                         <div>
-                          <div className="font-medium">{event.amount.toLocaleString()} GAiA Burned</div>
+                          <div className="font-medium">{event.amount.toLocaleString()} {GAIA_TOKEN.SYMBOL} Burned</div>
                           <div className="text-sm text-muted-foreground">{event.reason}</div>
                         </div>
                         <div className="text-right">
@@ -293,7 +246,7 @@ export function AdvancedTokenMechanics() {
                   className="w-full bg-red-600 hover:bg-red-700"
                 >
                   <Flame className="h-4 w-4 mr-2" />
-                  Vote for Next Token Burn
+                  Vote for Next {GAIA_TOKEN.SYMBOL} Token Burn
                 </Button>
               </div>
             </TabsContent>
