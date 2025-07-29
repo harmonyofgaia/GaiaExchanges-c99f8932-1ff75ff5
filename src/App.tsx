@@ -98,7 +98,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/pricing" element={<Pricing />} />
-              <Route path="/admin" element={<Admin />} />
+              <Route path="/admin" element={<SecureAdmin />} />
               <Route path="/live-tracking" element={<LiveTracking />} />
               <Route path="/sand-protect" element={<SandProtect />} />
               <Route path="/gaias-projects" element={<GaiasProjects />} />

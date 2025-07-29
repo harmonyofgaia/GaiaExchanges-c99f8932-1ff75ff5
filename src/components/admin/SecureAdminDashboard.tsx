@@ -19,6 +19,24 @@ import UltimateSecurity from './UltimateSecurity'
 import { RuleSystemManagement } from './RuleSystemManagement'
 import { HoneypotMonitor } from '@/components/security/HoneypotMonitor'
 import { DeploymentStatusPanel } from './DeploymentStatusPanel'
+// Integrated Admin Page Components
+import { UltimateAdminSuite } from './UltimateAdminSuite'
+import { MasterAdminControlCenter } from './MasterAdminControlCenter'
+import { DragonAIDefense } from './DragonAIDefense'
+import { KoalaAIEngine } from './KoalaAIEngine'
+import { UltimateIntelligenceHub } from './UltimateIntelligenceHub'
+import { AdminMediaLibrary } from './AdminMediaLibrary'
+import { WalletEngineAdmin } from './WalletEngineAdmin'
+import { TokenBurnController } from './TokenBurnController'
+import { GitHubIntegrationSuite } from '@/components/system/GitHubIntegrationSuite'
+import { NotificationController } from './NotificationController'
+import { PsychohistoricalEngine } from './PsychohistoricalEngine'
+import { PhoenixGuardian } from './PhoenixGuardian'
+import { GaiaIATool } from './GaiaIATool'
+import { SecurityDashboard } from './security/SecurityDashboard'
+import { UserManagementSystemRefactored } from './UserManagementSystemRefactored'
+import { AdminDashboard } from './AdminDashboard'
+import { OmniscientGPSEngine } from '@/components/tracking/OmniscientGPSEngine'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -35,38 +53,226 @@ export function SecureAdminDashboard() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-9">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="security">Security</TabsTrigger>
-          <TabsTrigger value="tools">Admin Tools</TabsTrigger>
-          <TabsTrigger value="control">Supreme Control</TabsTrigger>
-          <TabsTrigger value="isolation">User Control</TabsTrigger>
-          <TabsTrigger value="ai">AI Engine</TabsTrigger>
-          <TabsTrigger value="deployment" className="bg-gradient-to-r from-green-600/20 to-blue-600/20 border border-green-500/30">
-            <Server className="h-4 w-4 mr-2" />
-            Deploy
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-20 gap-1 h-auto p-1 text-xs">
+          <TabsTrigger value="overview" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>📊</span>
+              <span className="hidden sm:inline">Overview</span>
+            </div>
           </TabsTrigger>
-          <TabsTrigger value="honeypot" className="bg-gradient-to-r from-red-600/20 to-orange-600/20 border border-red-500/30">
-            <Skull className="h-4 w-4 mr-2" />
-            Honeypot
+          <TabsTrigger value="dashboard" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🏠</span>
+              <span className="hidden sm:inline">Dashboard</span>
+            </div>
           </TabsTrigger>
-          <TabsTrigger value="rules" className="bg-gradient-to-r from-purple-600/20 to-amber-600/20 border border-purple-500/30">
-            <Gavel className="h-4 w-4 mr-2" />
-            Rules 24/7
+          <TabsTrigger value="live-tracking" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🛰️</span>
+              <span className="hidden sm:inline">Live Tracking</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="security" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🛡️</span>
+              <span className="hidden sm:inline">Security</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="users" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>👥</span>
+              <span className="hidden sm:inline">Users</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="gaia-ia" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🧠</span>
+              <span className="hidden sm:inline">GAIA IA</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="master-control" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>👑</span>
+              <span className="hidden sm:inline">Master Control</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="tools" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🔧</span>
+              <span className="hidden sm:inline">Admin Tools</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="notifications" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🔔</span>
+              <span className="hidden sm:inline">Notifications</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="github" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>📱</span>
+              <span className="hidden sm:inline">GitHub</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="tokens" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🔥</span>
+              <span className="hidden sm:inline">Token Burn</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="wallets" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>💰</span>
+              <span className="hidden sm:inline">Wallets</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="media" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>📸</span>
+              <span className="hidden sm:inline">Media</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="intelligence" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🧠</span>
+              <span className="hidden sm:inline">Intelligence</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="koala" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🐨</span>
+              <span className="hidden sm:inline">Koala AI</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="dragon" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🐉</span>
+              <span className="hidden sm:inline">Dragon AI</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="phoenix" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🦅</span>
+              <span className="hidden sm:inline">Phoenix</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="psycho" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🔮</span>
+              <span className="hidden sm:inline">Psychohistory</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="control" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>👑</span>
+              <span className="hidden sm:inline">Supreme Control</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="isolation" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🔒</span>
+              <span className="hidden sm:inline">User Control</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="ai" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🤖</span>
+              <span className="hidden sm:inline">AI Engine</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="deployment" className="p-2 text-center bg-gradient-to-r from-green-600/20 to-blue-600/20 border border-green-500/30">
+            <div className="flex flex-col items-center">
+              <Server className="h-4 w-4" />
+              <span className="hidden sm:inline">Deploy</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="honeypot" className="p-2 text-center bg-gradient-to-r from-red-600/20 to-orange-600/20 border border-red-500/30">
+            <div className="flex flex-col items-center">
+              <Skull className="h-4 w-4" />
+              <span className="hidden sm:inline">Honeypot</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="rules" className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-amber-600/20 border border-purple-500/30">
+            <div className="flex flex-col items-center">
+              <Gavel className="h-4 w-4" />
+              <span className="hidden sm:inline">Rules 24/7</span>
+            </div>
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
-          <AdminDashboardTabs />
+          <UltimateAdminSuite />
+        </TabsContent>
+
+        <TabsContent value="dashboard" className="space-y-6">
+          <AdminDashboard />
+        </TabsContent>
+
+        <TabsContent value="live-tracking" className="space-y-6">
+          <OmniscientGPSEngine />
         </TabsContent>
 
         <TabsContent value="security" className="space-y-6">
+          <SecurityDashboard />
           <UltimateSecurity />
           <RefactoredSecuritySuite />
         </TabsContent>
 
+        <TabsContent value="users" className="space-y-6">
+          <UserManagementSystemRefactored />
+          <UserIsolationSystem />
+        </TabsContent>
+
+        <TabsContent value="gaia-ia" className="space-y-6">
+          <GaiaIATool />
+        </TabsContent>
+
+        <TabsContent value="master-control" className="space-y-6">
+          <MasterAdminControlCenter />
+        </TabsContent>
+
         <TabsContent value="tools" className="space-y-6">
           <RefactoredAdminTools />
+        </TabsContent>
+
+        <TabsContent value="notifications" className="space-y-6">
+          <NotificationController />
+        </TabsContent>
+
+        <TabsContent value="github" className="space-y-6">
+          <GitHubIntegrationSuite />
+        </TabsContent>
+
+        <TabsContent value="tokens" className="space-y-6">
+          <TokenBurnController />
+        </TabsContent>
+
+        <TabsContent value="wallets" className="space-y-6">
+          <WalletEngineAdmin />
+        </TabsContent>
+
+        <TabsContent value="media" className="space-y-6">
+          <AdminMediaLibrary />
+        </TabsContent>
+
+        <TabsContent value="intelligence" className="space-y-6">
+          <UltimateIntelligenceHub />
+        </TabsContent>
+
+        <TabsContent value="koala" className="space-y-6">
+          <KoalaAIEngine />
+        </TabsContent>
+
+        <TabsContent value="dragon" className="space-y-6">
+          <DragonAIDefense />
+        </TabsContent>
+
+        <TabsContent value="phoenix" className="space-y-6">
+          <PhoenixGuardian />
+        </TabsContent>
+
+        <TabsContent value="psycho" className="space-y-6">
+          <PsychohistoricalEngine />
         </TabsContent>
 
         <TabsContent value="control" className="space-y-6">
