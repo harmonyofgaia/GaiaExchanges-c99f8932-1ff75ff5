@@ -1,21 +1,20 @@
 
 import { useEffect, useState } from 'react'
-import { useAuth } from '@/components/auth/AuthProvider'
+import { useSecureAdmin } from '@/hooks/useSecureAdmin'
 import { toast } from 'sonner'
 
 export function PersistentAdminSession() {
-  const { user } = useAuth()
+  const { isAdmin, adminSession } = useSecureAdmin()
   const [sessionActive, setSessionActive] = useState(false)
 
   useEffect(() => {
     // Create ultra-persistent admin session that survives everything
     const createUltraPersistentSession = () => {
-      if (user) {
+      if (isAdmin && adminSession) {
         // Multiple storage layers for maximum persistence
         const sessionData = {
-          userId: user.id,
-          email: user.email,
-          timestamp: Date.now(),
+          sessionId: adminSession.id,
+          timestamp: adminSession.timestamp,
           persistent: true,
           ultraSecure: true,
           quantumProtected: true
@@ -48,7 +47,7 @@ export function PersistentAdminSession() {
 
     // Keep session alive with multiple heartbeats
     const multiLayerHeartbeat = () => {
-      if (user) {
+      if (isAdmin && adminSession) {
         const sessions = [
           localStorage.getItem('gaia-admin-session'),
           localStorage.getItem('gaia-admin-backup'),
@@ -58,8 +57,7 @@ export function PersistentAdminSession() {
         if (sessions.some(s => s)) {
           // Refresh all session timestamps
           const sessionData = {
-            userId: user.id,
-            email: user.email,
+            sessionId: adminSession.id,
             timestamp: Date.now(),
             persistent: true,
             ultraSecure: true,
@@ -136,7 +134,7 @@ export function PersistentAdminSession() {
       history.pushState = originalPushState
       history.replaceState = originalReplaceState
     }
-  }, [user])
+  }, [isAdmin, adminSession])
 
   return null // Background service component
 }
