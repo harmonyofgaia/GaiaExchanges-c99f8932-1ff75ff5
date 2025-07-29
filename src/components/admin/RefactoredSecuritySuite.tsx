@@ -16,6 +16,9 @@ import { QuantumAIDashboard } from '@/components/security/QuantumAIDashboard'
 import { MultiverseControlDashboard } from '@/components/security/MultiverseControlDashboard'
 import { UniversalDominationDashboard } from '@/components/security/UniversalDominationDashboard'
 import { UltimateOmnipotenceDashboard } from '@/components/security/UltimateOmnipotenceDashboard'
+import { MemeticWarfareDashboard } from '@/components/security/MemeticWarfareDashboard'
+import { RealityManipulationDashboard } from '@/components/security/RealityManipulationDashboard'
+import { ExistentialDefenseDashboard } from '@/components/security/ExistentialDefenseDashboard'
 
 export function RefactoredSecuritySuite() {
   return (
@@ -55,6 +58,15 @@ export function RefactoredSecuritySuite() {
       
       {/* Phase 12: Ultimate Omnipotence & Transcendence */}
       <UltimateOmnipotenceDashboard />
+      
+      {/* Phase 13: Memetic Warfare & Cognitive Manipulation */}
+      <MemeticWarfareDashboard />
+      
+      {/* Phase 14: Reality Manipulation & Probability Control */}
+      <RealityManipulationDashboard />
+      
+      {/* Phase 15: Existential Defense & Ontological Warfare */}
+      <ExistentialDefenseDashboard />
       
       {/* Existing Security Systems */}
       <AdvancedBreachProtocol />
