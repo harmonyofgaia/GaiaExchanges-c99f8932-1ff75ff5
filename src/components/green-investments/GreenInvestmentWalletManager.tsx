@@ -42,7 +42,7 @@ interface GreenProject {
 const GREEN_INVESTMENT_WALLET = 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7'
 
 export function GreenInvestmentWalletManager() {
-  const { user } = useAuth()
+  const { user } = useAuth() || { user: null }
   const [config, setConfig] = useState<GreenInvestmentConfig>({
     default_fee_percentage: 0.001,
     preferred_fee_destination: 'green_projects',
@@ -123,7 +123,10 @@ export function GreenInvestmentWalletManager() {
   }, [user])
 
   const fetchUserConfig = async () => {
-    if (!user) return
+    if (!user) {
+      setLoading(false)
+      return
+    }
 
     try {
       const { data, error } = await supabase
@@ -150,7 +153,10 @@ export function GreenInvestmentWalletManager() {
   }
 
   const saveConfiguration = async () => {
-    if (!user) return
+    if (!user) {
+      toast.error('Please log in to save configuration')
+      return
+    }
 
     setSaving(true)
     try {
@@ -193,7 +199,9 @@ export function GreenInvestmentWalletManager() {
   if (loading) {
     return (
       <Card className="animate-pulse">
-        <div className="h-64 bg-muted/50 rounded"></div>
+        <CardContent className="p-6">
+          <div className="h-64 bg-muted/50 rounded"></div>
+        </CardContent>
       </Card>
     )
   }
@@ -209,6 +217,7 @@ export function GreenInvestmentWalletManager() {
           </CardTitle>
           <p className="text-green-300">
             Configure how your transaction fees automatically support global environmental initiatives
+            {!user && <span className="text-yellow-400 ml-2">(Login required for custom settings)</span>}
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -296,10 +305,11 @@ export function GreenInvestmentWalletManager() {
           <div className="flex gap-4">
             <Button 
               onClick={saveConfiguration}
-              disabled={saving}
-              className="flex-1 bg-green-600 hover:bg-green-700"
+              disabled={saving || !user}
+              className="flex-1 bg-green-600 hover:bg-green-700 disabled:opacity-50"
+              title={!user ? "Login required to save settings" : ""}
             >
-              {saving ? 'Saving...' : '🌱 Save Green Investment Config'}
+              {saving ? 'Saving...' : !user ? '🔒 Login to Save Config' : '🌱 Save Green Investment Config'}
             </Button>
             <Button 
               variant="outline"
