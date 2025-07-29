@@ -1,93 +1,75 @@
 
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Globe } from 'lucide-react'
-import { Button } from './ui/button'
-import { UniversalGaiaLogo } from './branding/UniversalGaiaLogo'
-import { cn } from '@/lib/utils'
+import { Link } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const location = useLocation()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navItems = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
     { name: 'Tokenomics', path: '/tokenomics' },
     { name: 'Roadmap', path: '/roadmap' },
     { name: 'Games', path: '/games' },
     { name: 'Earning Activities', path: '/earning-activities' },
     { name: 'Video Exchange', path: '/video-exchange' },
-    { name: 'Community', path: '/community' },
-    { name: 'Transparency', path: '/transparency' },
-    { name: 'Contact', path: '/contact' }
   ]
 
-  const isActive = (path: string) => location.pathname === path
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-green-500/20">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <UniversalGaiaLogo size="sm" />
+    <nav className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <Link to="/" className="flex-shrink-0">
+            <UniversalGaiaLogo size="sm" animated={true} />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={cn(
-                  "px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200",
-                  isActive(item.path)
-                    ? "text-green-400 bg-green-400/10"
-                    : "text-gray-300 hover:text-green-400 hover:bg-green-400/5"
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-green-400"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-black/95 backdrop-blur-md rounded-lg mt-2 border border-green-500/20">
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={cn(
-                    "block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200",
-                    isActive(item.path)
-                      ? "text-green-400 bg-green-400/10"
-                      : "text-gray-300 hover:text-green-400 hover:bg-green-400/5"
-                  )}
-                  onClick={() => setIsOpen(false)}
+                  className="text-muted-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   {item.name}
                 </Link>
               ))}
             </div>
           </div>
-        )}
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
+          </div>
+        </div>
       </div>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background/95 backdrop-blur-md border-t border-border">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className="text-muted-foreground hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   )
 }
