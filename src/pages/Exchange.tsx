@@ -36,7 +36,7 @@ import {
 import { GaiasExchange } from '@/components/GaiasExchange'
 import { InvestorScoutingSystem } from '@/components/InvestorScoutingSystem'
 import { FullyFunctionalExchange } from '@/components/FullyFunctionalExchange'
-import { MultiExchangeIntegration } from '@/components/MultiExchangeIntegration'
+
 import { GaiaFeeManager } from '@/components/GaiaFeeManager'
 import { BlockchainStatus } from '@/components/blockchain/BlockchainStatus'
 import { LiveTransactionMatrix } from '@/components/LiveTransactionMatrix'
@@ -426,7 +426,7 @@ export default function Exchange() {
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
                       {[
                         { id: 'unified', icon: '🌿', name: 'Unified Hub', color: 'emerald' },
-                        { id: 'trading', icon: '📈', name: 'Pro Trading', color: 'blue' },
+                        
                         { id: 'exchange', icon: '💱', name: 'Investment', color: 'purple' },
                         { id: 'analytics', icon: '📊', name: 'Analytics', color: 'yellow' },
                         { id: 'blockchain', icon: '⛓️', name: 'Blockchain', color: 'green' }
@@ -508,7 +508,7 @@ export default function Exchange() {
                             <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
                               <TabsTrigger value="pro-swap">💱 Pro Swap</TabsTrigger>
                               <TabsTrigger value="spot-trading">📊 Spot Trading</TabsTrigger>
-                              <TabsTrigger value="multi-exchange">🔄 Multi-Exchange</TabsTrigger>
+                              
                               <TabsTrigger value="advanced-charts">📈 Analytics</TabsTrigger>
                               <TabsTrigger value="gaia-exchange">🌿 GAIA Exchange</TabsTrigger>
                             </TabsList>
@@ -598,9 +598,6 @@ export default function Exchange() {
                               <TradingInterface />
                             </TabsContent>
                             
-                            <TabsContent value="multi-exchange" className="space-y-6">
-                              <MultiExchangeIntegration />
-                            </TabsContent>
                             
                             <TabsContent value="advanced-charts" className="space-y-6">
                               <ChartAnalytics />

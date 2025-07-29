@@ -43,6 +43,7 @@ import { AnimalDefenseCommandCenter } from './AnimalDefenseCommandCenter'
 import { PlatformManagement } from './PlatformManagement'
 import { QuantumDefenseWall } from './QuantumDefenseWall'
 import { BackgroundTacticalSystems } from './BackgroundTacticalSystems'
+import { MultiExchangeIntegration } from '@/components/MultiExchangeIntegration'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -234,6 +235,12 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">Tactical</span>
             </div>
           </TabsTrigger>
+          <TabsTrigger value="multi-exchange" className="p-2 text-center bg-gradient-to-r from-emerald-600/20 to-teal-600/20 border border-emerald-500/30">
+            <div className="flex flex-col items-center">
+              <span>🔄</span>
+              <span className="hidden sm:inline">Multi-Exchange</span>
+            </div>
+          </TabsTrigger>
           </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
@@ -350,6 +357,10 @@ export function SecureAdminDashboard() {
 
         <TabsContent value="tactical" className="space-y-6">
           <BackgroundTacticalSystems />
+        </TabsContent>
+
+        <TabsContent value="multi-exchange" className="space-y-6">
+          <MultiExchangeIntegration />
         </TabsContent>
       </Tabs>
     </div>
