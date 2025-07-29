@@ -6,6 +6,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Shield, Zap, Eye, Activity, AlertTriangle, Users, TrendingUp } from 'lucide-react'
 import { toast } from 'sonner'
 import { useInvisibleSecurity } from '@/services/invisibleSecurity'
+import { AIDefenseAnimals } from './AIDefenseAnimals'
+import { DefenseCreatureArmy } from './DefenseCreatureArmy'
+import { ImmortalDefenseCore } from '../security/ImmortalDefenseCore'
+import { UltimateDefenseBarrier } from './UltimateDefenseBarrier'
+import { UltimateDefenseAnimalsSupreme } from './UltimateDefenseAnimalsSupreme'
 
 interface DefenseAnimal {
   id: string
@@ -456,10 +461,15 @@ export function AnimalDefenseCommandCenter() {
       </div>
 
       <Tabs defaultValue="animals" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-7">
           <TabsTrigger value="animals">Defense Animals</TabsTrigger>
           <TabsTrigger value="patterns">Attack Patterns</TabsTrigger>
           <TabsTrigger value="command">Command Center</TabsTrigger>
+          <TabsTrigger value="ai-animals">AI Animals</TabsTrigger>
+          <TabsTrigger value="creature-army">Creature Army</TabsTrigger>
+          <TabsTrigger value="immortal-core">Immortal Core</TabsTrigger>
+          <TabsTrigger value="barrier">Defense Barrier</TabsTrigger>
+          <TabsTrigger value="supreme">Supreme</TabsTrigger>
         </TabsList>
 
         <TabsContent value="animals" className="space-y-4">
@@ -685,6 +695,26 @@ export function AnimalDefenseCommandCenter() {
               </CardContent>
             </Card>
           )}
+        </TabsContent>
+
+        <TabsContent value="ai-animals" className="space-y-6">
+          <AIDefenseAnimals />
+        </TabsContent>
+
+        <TabsContent value="creature-army" className="space-y-6">
+          <DefenseCreatureArmy />
+        </TabsContent>
+
+        <TabsContent value="immortal-core" className="space-y-6">
+          <ImmortalDefenseCore />
+        </TabsContent>
+
+        <TabsContent value="barrier" className="space-y-6">
+          <UltimateDefenseBarrier />
+        </TabsContent>
+
+        <TabsContent value="supreme" className="space-y-6">
+          <UltimateDefenseAnimalsSupreme />
         </TabsContent>
       </Tabs>
     </div>
