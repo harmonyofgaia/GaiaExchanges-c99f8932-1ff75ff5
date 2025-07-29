@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 
-export default function Wallet() {
+export default function NFT() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-center mb-8">
@@ -14,21 +14,21 @@ export default function Wallet() {
         />
       </div>
       
-      <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
+      <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
         <CardHeader>
-          <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-            💳 Digital Wallet
+          <CardTitle className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
+            🎨 NFT Collection
           </CardTitle>
           <p className="text-center text-xl text-muted-foreground">
-            Secure storage and management of your digital assets
+            Discover and collect unique digital assets
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="text-center">
-            <div className="text-6xl mb-4">💳</div>
-            <h3 className="text-2xl font-bold text-purple-400 mb-2">Multi-Chain Wallet</h3>
+            <div className="text-6xl mb-4">🎨</div>
+            <h3 className="text-2xl font-bold text-green-400 mb-2">NFT Marketplace</h3>
             <p className="text-muted-foreground">
-              Store, send, and receive tokens across multiple blockchain networks with military-grade security.
+              Browse, buy, and sell unique digital collectibles in the GAiA ecosystem.
             </p>
           </div>
         </CardContent>
