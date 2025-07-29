@@ -9,9 +9,12 @@ export default function Exchange() {
       <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent text-center mb-4">
-            GAIA Private Exchange Network
-          </h1>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <GaiaLogo size="xl" variant="glow" />
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+              GAIA Private Exchange Network
+            </h1>
+          </div>
           <p className="text-xl text-muted-foreground mb-2">
             Universal Multi-Token Exchange • Zero Fees • Full Transparency
           </p>

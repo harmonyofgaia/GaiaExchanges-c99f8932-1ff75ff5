@@ -1,6 +1,6 @@
 export const GAIA_TOKEN = {
   // Official GAiA Token Addresses
-  WALLET_ADDRESS: '6DAj3dhtwBDv3HY3UYw1ykjHGRLTU7yMKQmCn8bNoTpW',
+  WALLET_ADDRESS: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   SYMBOL: 'GAiA',
   NAME: 'GAiA Token - Harmony of Gaia',
