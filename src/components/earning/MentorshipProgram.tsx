@@ -1,377 +1,437 @@
-
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import { Progress } from '@/components/ui/progress'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { 
   GraduationCap, 
   Users, 
   Star, 
-  BookOpen,
-  Award,
-  MessageCircle,
+  MessageCircle, 
   Calendar,
-  TrendingUp
+  Trophy,
+  BookOpen,
+  Target,
+  Heart,
+  Zap
 } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface Mentor {
   id: string
   name: string
-  expertise: string[]
+  specialty: string
   rating: number
-  studentsHelped: number
-  tokensEarned: number
+  totalSessions: number
   avatar: string
-  status: 'available' | 'busy' | 'offline'
+  skills: string[]
 }
 
-interface Student {
+interface Session {
   id: string
-  name: string
-  level: 'beginner' | 'intermediate' | 'advanced'
-  interests: string[]
-  progress: number
-  sessionsCompleted: number
-  avatar: string
-}
-
-interface MentorshipSession {
-  id: string
-  mentorId: string
-  studentId: string
   topic: string
-  date: Date
-  duration: number
-  status: 'scheduled' | 'completed' | 'cancelled'
-  tokensEarned: number
+  mentorName: string
+  date: string
+  time: string
+  duration: string
+  status: 'upcoming' | 'completed' | 'cancelled'
 }
 
 export function MentorshipProgram() {
-  const [userRole, setUserRole] = useState<'mentor' | 'student' | 'both'>('student')
-  
-  const [mentors] = useState<Mentor[]>([
-    {
-      id: '1',
-      name: 'EcoExpert Sarah',
-      expertise: ['Solar Energy', 'Sustainable Living', 'Carbon Footprint'],
-      rating: 4.9,
-      studentsHelped: 47,
-      tokensEarned: 2340,
-      avatar: '👩‍🔬',
-      status: 'available'
-    },
-    {
-      id: '2',
-      name: 'GreenGuru Mike',
-      expertise: ['Permaculture', 'Waste Reduction', 'Eco Business'],
-      rating: 4.8,
-      studentsHelped: 32,
-      tokensEarned: 1890,
-      avatar: '👨‍🌾',
-      status: 'busy'
-    },
-    {
-      id: '3',
-      name: 'ClimateCoach Anna',
-      expertise: ['Climate Science', 'Policy', 'Community Action'],
-      rating: 5.0,
-      studentsHelped: 28,
-      tokensEarned: 1650,
-      avatar: '👩‍🎓',
-      status: 'available'
-    }
-  ])
+  const [userRole, setUserRole] = useState<'student' | 'mentor' | 'both'>('student')
+  const [selectedMentor, setSelectedMentor] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<'browse' | 'sessions' | 'progress'>('browse')
 
-  const [students] = useState<Student[]>([
-    {
-      id: '1',
-      name: 'EcoNewbie Tom',
-      level: 'beginner',
-      interests: ['Solar Power', 'Recycling'],
-      progress: 25,
-      sessionsCompleted: 3,
-      avatar: '👨‍💼'
-    },
-    {
-      id: '2',
-      name: 'GreenLearner Lisa',
-      level: 'intermediate',
-      interests: ['Sustainable Food', 'Water Conservation'],
-      progress: 60,
-      sessionsCompleted: 8,
-      avatar: '👩‍💻'
-    }
-  ])
-
-  const [sessions] = useState<MentorshipSession[]>([
-    {
-      id: '1',
-      mentorId: '1',
-      studentId: '1',
-      topic: 'Introduction to Solar Energy',
-      date: new Date('2024-01-28T14:00:00'),
-      duration: 60,
-      status: 'scheduled',
-      tokensEarned: 50
-    },
-    {
-      id: '2',
-      mentorId: '3',
-      studentId: '2',
-      topic: 'Climate Action Planning',
-      date: new Date('2024-01-25T10:00:00'),
-      duration: 45,
-      status: 'completed',
-      tokensEarned: 45
-    }
-  ])
-
-  const becomeMentor = () => {
-    setUserRole('mentor')
-    toast.success('🎓 Mentor Application Submitted!', {
-      description: 'Your application will be reviewed. Start earning by helping others!',
-      duration: 4000
+  const handleRoleSwitch = (role: 'student' | 'mentor' | 'both') => {
+    setUserRole(role)
+    toast.success(`🎓 Role switched to ${role}`, {
+      description: `You're now viewing as ${role}`,
+      duration: 3000
     })
   }
 
-  const bookSession = (mentorId: string) => {
-    toast.success('📅 Session Booked!', {
-      description: 'Your mentorship session has been scheduled. Check your calendar!',
-      duration: 4000
+  const handleMentorSelect = (mentorId: string) => {
+    setSelectedMentor(mentorId)
+    toast.success('🎯 Mentor selected!', {
+      description: 'You can now book sessions with this mentor',
+      duration: 3000
     })
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'available': return 'bg-green-600'
-      case 'busy': return 'bg-yellow-600'
-      case 'offline': return 'bg-gray-600'
-      default: return 'bg-gray-600'
-    }
-  }
-
-  const getLevelColor = (level: string) => {
-    switch (level) {
-      case 'beginner': return 'bg-green-600'
-      case 'intermediate': return 'bg-blue-600'
-      case 'advanced': return 'bg-purple-600'
-      default: return 'bg-gray-600'
-    }
+  const handleBookSession = (mentorId: string) => {
+    toast.success('📅 Session booked!', {
+      description: 'Your mentorship session has been scheduled',
+      duration: 3000
+    })
   }
 
   return (
-    <div className="space-y-6">
-      <Card className="border-indigo-500/30 bg-gradient-to-br from-indigo-900/20 to-purple-900/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-indigo-400">
-            <GraduationCap className="h-6 w-6" />
-            🎓 Mentorship Program
-            <Badge className="bg-indigo-600">Phase 3</Badge>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {/* Role Selection */}
-          <div className="flex gap-2 mb-6">
-            <Button 
-              variant={userRole === 'student' ? 'default' : 'outline'}
-              onClick={() => setUserRole('student')}
+    <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-pink-900/20">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-purple-400">
+          <GraduationCap className="h-6 w-6" />
+          🎓 GAIA Mentorship Program
+        </CardTitle>
+        <div className="flex gap-2">
+          {(['student', 'mentor', 'both'] as const).map((role) => (
+            <Button
+              key={role}
+              onClick={() => handleRoleSwitch(role)}
+              variant={userRole === role ? "default" : "outline"}
+              size="sm"
+              className={userRole === role ? "bg-purple-600" : ""}
             >
-              📚 I want to learn
+              {role === 'student' ? '🎓' : role === 'mentor' ? '👨‍🏫' : '🤝'} {role.toUpperCase()}
             </Button>
-            <Button 
-              variant={userRole === 'mentor' ? 'default' : 'outline'}
-              onClick={() => setUserRole('mentor')}
-            >
-              👨‍🏫 I want to teach
-            </Button>
-            <Button 
-              variant={userRole === 'both' ? 'default' : 'outline'}
-              onClick={() => setUserRole('both')}
-            >
-              🔄 Both
-            </Button>
-          </div>
+          ))}
+        </div>
+      </CardHeader>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Available Mentors */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-indigo-400 flex items-center gap-2">
-                <Users className="h-5 w-5" />
-                Available Mentors
-              </h3>
-              
-              {mentors.map((mentor) => (
-                <Card key={mentor.id} className="border-indigo-500/20">
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        <Avatar className="h-12 w-12">
-                          <AvatarFallback className="text-2xl">{mentor.avatar}</AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h4 className="font-semibold">{mentor.name}</h4>
-                            <Badge className={getStatusColor(mentor.status)}>
-                              {mentor.status}
-                            </Badge>
-                          </div>
-                          <div className="flex items-center gap-1 text-sm">
-                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                            <span>{mentor.rating}</span>
-                            <span className="text-muted-foreground">
-                              • {mentor.studentsHelped} students helped
-                            </span>
-                          </div>
-                        </div>
+      <CardContent className="space-y-6">
+        {/* Stats Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="bg-purple-900/30 p-4 rounded-lg border border-purple-500/30 text-center">
+            <div className="text-2xl font-bold text-purple-400">247</div>
+            <div className="text-sm text-purple-300">Active Mentors</div>
+          </div>
+          <div className="bg-pink-900/30 p-4 rounded-lg border border-pink-500/30 text-center">
+            <div className="text-2xl font-bold text-pink-400">892</div>
+            <div className="text-sm text-pink-300">Students</div>
+          </div>
+          <div className="bg-blue-900/30 p-4 rounded-lg border border-blue-500/30 text-center">
+            <div className="text-2xl font-bold text-blue-400">1,547</div>
+            <div className="text-sm text-blue-300">Sessions Completed</div>
+          </div>
+          <div className="bg-green-900/30 p-4 rounded-lg border border-green-500/30 text-center">
+            <div className="text-2xl font-bold text-green-400">4.9/5</div>
+            <div className="text-sm text-green-300">Average Rating</div>
+          </div>
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="flex gap-2">
+          {([
+            { key: 'browse', label: '👥 Browse Mentors', icon: Users },
+            { key: 'sessions', label: '📅 My Sessions', icon: Calendar },
+            { key: 'progress', label: '📊 Progress Tracking', icon: Target }
+          ] as const).map(({ key, label, icon: Icon }) => (
+            <Button
+              key={key}
+              onClick={() => setActiveTab(key)}
+              variant={activeTab === key ? "default" : "outline"}
+              size="sm"
+              className={activeTab === key ? "bg-purple-600" : "border-purple-500/30"}
+            >
+              <Icon className="h-4 w-4 mr-1" />
+              {label}
+            </Button>
+          ))}
+        </div>
+
+        {/* Browse Mentors Tab */}
+        {activeTab === 'browse' && (
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-purple-400">🔍 Find Your Perfect Mentor</h3>
+            
+            {/* Mentor Categories */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {mentorCategories.map((category) => (
+                <Button
+                  key={category.name}
+                  variant="outline"
+                  size="sm"
+                  className="border-purple-500/30 text-purple-400"
+                >
+                  {category.icon} {category.name}
+                </Button>
+              ))}
+            </div>
+
+            {/* Mentor Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {mockMentors.map((mentor) => (
+                <Card key={mentor.id} className="border-purple-500/30 bg-purple-900/10">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center gap-3">
+                      <Avatar>
+                        <AvatarImage src={mentor.avatar} />
+                        <AvatarFallback>{mentor.name.slice(0, 2)}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <h4 className="font-semibold text-purple-400">{mentor.name}</h4>
+                        <p className="text-sm text-muted-foreground">{mentor.specialty}</p>
                       </div>
                     </div>
-                    
-                    <div className="mb-3">
-                      <div className="text-sm text-muted-foreground mb-1">Expertise:</div>
-                      <div className="flex flex-wrap gap-1">
-                        {mentor.expertise.map((skill) => (
-                          <Badge key={skill} variant="outline" className="text-xs">
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <Star className="h-4 w-4 text-yellow-400" />
+                      <span className="text-sm">{mentor.rating}/5</span>
+                      <span className="text-xs text-muted-foreground">({mentor.totalSessions} sessions)</span>
                     </div>
                     
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-green-400 font-medium">
-                        +{mentor.tokensEarned} GAiA earned
-                      </span>
-                      <Button 
+                    <div className="flex flex-wrap gap-1">
+                      {mentor.skills.slice(0, 3).map((skill) => (
+                        <Badge 
+                          key={skill} 
+                          className="text-xs bg-purple-600/20 text-purple-300"
+                        >
+                          {skill}
+                        </Badge>
+                      ))}
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <Button
+                        onClick={() => handleMentorSelect(mentor.id)}
                         size="sm"
-                        onClick={() => bookSession(mentor.id)}
-                        disabled={mentor.status !== 'available'}
+                        className="flex-1 bg-purple-600 hover:bg-purple-700"
                       >
-                        <Calendar className="h-4 w-4 mr-1" />
-                        Book Session
+                        <Heart className="h-3 w-3 mr-1" />
+                        Select
+                      </Button>
+                      <Button
+                        onClick={() => handleBookSession(mentor.id)}
+                        size="sm"
+                        variant="outline"
+                        className="flex-1 border-purple-500/30"
+                      >
+                        <Calendar className="h-3 w-3 mr-1" />
+                        Book
                       </Button>
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
-
-            {/* Learning Progress / Mentoring Stats */}
-            <div className="space-y-4">
-              {userRole === 'student' || userRole === 'both' ? (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-indigo-400 flex items-center gap-2">
-                    <BookOpen className="h-5 w-5" />
-                    Your Learning Journey
-                  </h3>
-                  
-                  <Card className="border-green-500/20">
-                    <CardContent className="p-4">
-                      <div className="space-y-3">
-                        <div className="flex justify-between">
-                          <span className="font-medium">Overall Progress</span>
-                          <span className="text-green-400">45%</span>
-                        </div>
-                        <Progress value={45} className="h-2" />
-                        
-                        <div className="grid grid-cols-2 gap-4 text-sm">
-                          <div>
-                            <div className="text-muted-foreground">Sessions Completed</div>
-                            <div className="font-bold text-blue-400">11</div>
-                          </div>
-                          <div>
-                            <div className="text-muted-foreground">Hours Learned</div>
-                            <div className="font-bold text-purple-400">18.5</div>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              ) : null}
-
-              {userRole === 'mentor' || userRole === 'both' ? (
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-lg font-semibold text-indigo-400">
-                      👨‍🏫 Mentoring Dashboard
-                    </h3>
-                    {userRole === 'student' && (
-                      <Button onClick={becomeMentor} size="sm" className="bg-purple-600">
-                        <Award className="h-4 w-4 mr-1" />
-                        Become Mentor
-                      </Button>
-                    )}
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="p-3 bg-blue-900/20 rounded-lg border border-blue-500/20 text-center">
-                      <div className="text-xl font-bold text-blue-400">8</div>
-                      <div className="text-xs text-muted-foreground">Students Mentored</div>
-                    </div>
-                    <div className="p-3 bg-green-900/20 rounded-lg border border-green-500/20 text-center">
-                      <div className="text-xl font-bold text-green-400">340</div>
-                      <div className="text-xs text-muted-foreground">GAiA Earned</div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="font-medium text-indigo-400">Recent Students</h4>
-                    {students.slice(0, 2).map((student) => (
-                      <div key={student.id} className="p-2 bg-muted/20 rounded border">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm">{student.avatar}</span>
-                            <span className="text-sm font-medium">{student.name}</span>
-                            <Badge className={getLevelColor(student.level)} size="sm">
-                              {student.level}
-                            </Badge>
-                          </div>
-                          <span className="text-xs text-green-400">{student.progress}%</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
-            </div>
           </div>
+        )}
 
-          {/* Upcoming Sessions */}
-          <div className="mt-6">
-            <h4 className="font-semibold text-indigo-400 mb-3 flex items-center gap-2">
-              <Calendar className="h-4 w-4" />
-              Upcoming Sessions
-            </h4>
-            <div className="space-y-2">
-              {sessions.filter(s => s.status === 'scheduled').map((session) => {
-                const mentor = mentors.find(m => m.id === session.mentorId)
-                return (
-                  <div key={session.id} className="p-3 bg-indigo-900/20 rounded-lg border border-indigo-500/20">
-                    <div className="flex justify-between items-center">
+        {/* My Sessions Tab */}
+        {activeTab === 'sessions' && (userRole === 'student' || userRole === 'both') && (
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-purple-400">📅 Your Mentorship Sessions</h3>
+            
+            <div className="grid gap-4">
+              {mockSessions.map((session) => (
+                <Card key={session.id} className="border-blue-500/30 bg-blue-900/10">
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
                       <div>
-                        <div className="font-medium">{session.topic}</div>
-                        <div className="text-sm text-muted-foreground">
-                          with {mentor?.name} • {session.date.toLocaleDateString()} at {session.date.toLocaleTimeString()}
+                        <h4 className="font-semibold text-blue-400">{session.topic}</h4>
+                        <p className="text-sm text-muted-foreground">
+                          with {session.mentorName} • {session.date} at {session.time}
+                        </p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <Badge className={`${
+                            session.status === 'completed' ? 'bg-green-600' :
+                            session.status === 'upcoming' ? 'bg-blue-600' :
+                            'bg-yellow-600'
+                          } text-white`}>
+                            {session.status}
+                          </Badge>
+                          <span className="text-xs text-muted-foreground">{session.duration}</span>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="text-sm text-green-400">+{session.tokensEarned} GAiA</div>
+                      <div className="flex gap-2">
                         <Button size="sm" variant="outline">
                           <MessageCircle className="h-3 w-3 mr-1" />
-                          Join
+                          Chat
                         </Button>
+                        {session.status === 'upcoming' && (
+                          <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                            <Calendar className="h-3 w-3 mr-1" />
+                            Join
+                          </Button>
+                        )}
                       </div>
                     </div>
-                  </div>
-                )
-              })}
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+        )}
+
+        {/* Progress Tracking Tab */}
+        {activeTab === 'progress' && (
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-purple-400">📊 Your Learning Journey</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Learning Progress */}
+              <Card className="border-green-500/30 bg-green-900/10">
+                <CardHeader>
+                  <CardTitle className="text-green-400 flex items-center gap-2">
+                    <BookOpen className="h-5 w-5" />
+                    Learning Progress
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {[
+                    { skill: 'Sustainability Practices', progress: 85 },
+                    { skill: 'Community Leadership', progress: 67 },
+                    { skill: 'Project Management', progress: 45 },
+                    { skill: 'Green Technology', progress: 73 }
+                  ].map((item) => (
+                    <div key={item.skill} className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-sm text-green-300">{item.skill}</span>
+                        <span className="text-sm text-green-400">{item.progress}%</span>
+                      </div>
+                      <Progress value={item.progress} className="h-2" />
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+
+              {/* Achievements */}
+              <Card className="border-yellow-500/30 bg-yellow-900/10">
+                <CardHeader>
+                  <CardTitle className="text-yellow-400 flex items-center gap-2">
+                    <Trophy className="h-5 w-5" />
+                    Mentorship Achievements
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {[
+                    { name: 'First Session Complete', earned: true },
+                    { name: '10 Sessions Milestone', earned: true },
+                    { name: 'Skill Mastery', earned: false },
+                    { name: 'Community Leader', earned: false },
+                    { name: 'Mentor Graduate', earned: false }
+                  ].map((achievement) => (
+                    <div key={achievement.name} className="flex items-center gap-3">
+                      <div className={`w-3 h-3 rounded-full ${
+                        achievement.earned ? 'bg-yellow-400' : 'bg-gray-600'
+                      }`} />
+                      <span className={`text-sm ${
+                        achievement.earned ? 'text-yellow-300' : 'text-gray-400'
+                      }`}>
+                        {achievement.name}
+                      </span>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        )}
+
+        {/* Mentor Dashboard (if user is mentor or both) */}
+        {(userRole === 'mentor' || userRole === 'both') && (
+          <Card className="border-orange-500/30 bg-orange-900/20">
+            <CardHeader>
+              <CardTitle className="text-orange-400 flex items-center gap-2">
+                <GraduationCap className="h-5 w-5" />
+                👨‍🏫 Mentor Dashboard
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="text-center p-4 bg-orange-900/30 rounded-lg">
+                  <div className="text-2xl font-bold text-orange-400">12</div>
+                  <div className="text-sm text-orange-300">Active Students</div>
+                </div>
+                <div className="text-center p-4 bg-orange-900/30 rounded-lg">
+                  <div className="text-2xl font-bold text-orange-400">47</div>
+                  <div className="text-sm text-orange-300">Sessions This Month</div>
+                </div>
+                <div className="text-center p-4 bg-orange-900/30 rounded-lg">
+                  <div className="text-2xl font-bold text-orange-400">4.8</div>
+                  <div className="text-sm text-orange-300">Average Rating</div>
+                </div>
+              </div>
+              
+              <div className="flex gap-2">
+                <Button className="bg-orange-600 hover:bg-orange-700">
+                  <Calendar className="h-4 w-4 mr-2" />
+                  Manage Schedule
+                </Button>
+                <Button variant="outline" className="border-orange-500/30 text-orange-400">
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  Student Messages
+                </Button>
+                <Button variant="outline" className="border-orange-500/30 text-orange-400">
+                  <Zap className="h-4 w-4 mr-2" />
+                  Update Profile
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+      </CardContent>
+    </Card>
   )
 }
+
+// Mock data
+const mentorCategories = [
+  { name: 'Sustainability', icon: '🌱' },
+  { name: 'Technology', icon: '💻' },
+  { name: 'Leadership', icon: '👑' },
+  { name: 'Business', icon: '💼' }
+]
+
+const mockMentors = [
+  {
+    id: '1',
+    name: 'Dr. Sarah Green',
+    specialty: 'Sustainability Expert',
+    rating: 4.9,
+    totalSessions: 156,
+    avatar: '',
+    skills: ['Environmental Science', 'Carbon Footprint', 'Green Energy', 'Waste Management']
+  },
+  {
+    id: '2',
+    name: 'Marcus Tech',
+    specialty: 'Blockchain Developer',
+    rating: 4.8,
+    totalSessions: 89,
+    avatar: '',
+    skills: ['Blockchain', 'Smart Contracts', 'DeFi', 'Web3']
+  },
+  {
+    id: '3',
+    name: 'Luna Community',
+    specialty: 'Community Leader',
+    rating: 4.9,
+    totalSessions: 203,
+    avatar: '',
+    skills: ['Leadership', 'Community Building', 'Project Management', 'Communication']
+  }
+]
+
+const mockSessions = [
+  {
+    id: '1',
+    topic: 'Introduction to Sustainable Living',
+    mentorName: 'Dr. Sarah Green',
+    date: 'Today',
+    time: '2:00 PM',
+    duration: '60 min',
+    status: 'upcoming' as const
+  },
+  {
+    id: '2',
+    topic: 'Smart Contract Fundamentals',
+    mentorName: 'Marcus Tech',
+    date: 'Yesterday',
+    time: '4:00 PM',
+    duration: '45 min',
+    status: 'completed' as const
+  },
+  {
+    id: '3',
+    topic: 'Community Project Planning',
+    mentorName: 'Luna Community',
+    date: 'Tomorrow',
+    time: '10:00 AM',
+    duration: '90 min',
+    status: 'upcoming' as const
+  }
+]
