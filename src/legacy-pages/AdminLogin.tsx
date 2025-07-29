@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -24,11 +25,14 @@ export default function AdminLogin() {
   const { isAdmin, adminSession, grantAdminAccess, revokeAdminAccess } = useSecureAdmin()
 
   useEffect(() => {
+    // Get client IP information
     const getClientInfo = async () => {
       try {
+        // Simulate getting client IP (in production, this would be from a service)
         const ip = `192.168.1.${Math.floor(Math.random() * 255)}`
         setClientIP(ip)
         
+        // Check for existing admin sessions
         const existingAdminIP = localStorage.getItem('gaia-admin-ip')
         if (existingAdminIP && existingAdminIP !== ip) {
           setActiveSessions(1)
@@ -47,7 +51,9 @@ export default function AdminLogin() {
     setIsLoading(true)
 
     try {
+      // Enhanced admin credentials check with IP exclusivity
       if (credentials.username === 'Synatic' && credentials.password === 'Freedom!oul19922323') {
+        // Check for existing admin session
         const existingAdminIP = localStorage.getItem('gaia-admin-ip')
         if (existingAdminIP && existingAdminIP !== clientIP) {
           toast.error('🚫 Access Denied - Admin Already Connected', {
@@ -58,6 +64,7 @@ export default function AdminLogin() {
           return
         }
 
+        // Grant exclusive admin access
         const accessGranted = grantAdminAccess()
         if (accessGranted) {
           setIsAuthenticated(true)
@@ -65,8 +72,9 @@ export default function AdminLogin() {
             description: `Welcome to GAIA Admin Dashboard - IP: ${clientIP}`,
             duration: 3000
           })
+          // Redirect to admin dashboard after successful login
           setTimeout(() => {
-            navigate('/secure-admin')
+            navigate('/admin')
           }, 2000)
         } else {
           toast.error('🚫 Admin Access Blocked', {
