@@ -16,7 +16,7 @@ const SUPPORTED_TOKENS = [
   {
     symbol: GAIA_TOKEN.SYMBOL,
     name: 'GAiA - Harmony of Gaia',
-    logo: '🌍',
+    logo: <GaiaLogo size="sm" variant="glow" showText={false} />,
     contractAddress: GAIA_TOKEN.CONTRACT_ADDRESS,
     network: 'Solana',
     isGaiaToken: true,
@@ -178,7 +178,11 @@ export function UniversalSwapInterface() {
         <SelectTrigger className="w-full h-12 bg-card border-border">
           <SelectValue>
             <div className="flex items-center gap-2">
-              <span className="text-lg">{selectedToken.logo}</span>
+              {selectedToken.isGaiaToken ? (
+                <GaiaLogo size="sm" variant="glow" showText={false} />
+              ) : (
+                <span className="text-lg">{selectedToken.logo}</span>
+              )}
               <span>{selectedToken.symbol}</span>
               <span className="text-xs text-muted-foreground">- {selectedToken.name}</span>
             </div>
@@ -188,7 +192,11 @@ export function UniversalSwapInterface() {
           {SUPPORTED_TOKENS.map((token) => (
             <SelectItem key={token.symbol} value={token.symbol}>
               <div className="flex items-center gap-2">
-                <span className="text-lg">{token.logo}</span>
+                {token.isGaiaToken ? (
+                  <GaiaLogo size="sm" variant="glow" showText={false} />
+                ) : (
+                  <span className="text-lg">{token.logo}</span>
+                )}
                 <span>{token.symbol}</span>
                 <span className="text-xs text-muted-foreground">- {token.name}</span>
               </div>
