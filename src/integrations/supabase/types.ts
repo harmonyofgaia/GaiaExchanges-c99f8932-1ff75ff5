@@ -364,6 +364,210 @@ export type Database = {
           },
         ]
       }
+      ai_generated_images: {
+        Row: {
+          created_at: string
+          enhanced_prompt: string
+          generation_time: number
+          id: string
+          image_data: string
+          metadata: Json | null
+          model: string
+          prompt: string
+          quality: string
+          size: string
+          style: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          enhanced_prompt: string
+          generation_time: number
+          id?: string
+          image_data: string
+          metadata?: Json | null
+          model?: string
+          prompt: string
+          quality?: string
+          size?: string
+          style: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          enhanced_prompt?: string
+          generation_time?: number
+          id?: string
+          image_data?: string
+          metadata?: Json | null
+          model?: string
+          prompt?: string
+          quality?: string
+          size?: string
+          style?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      ai_learning_database: {
+        Row: {
+          category: string
+          confidence_score: number | null
+          created_at: string
+          data_source: string
+          effectiveness_score: number | null
+          id: string
+          knowledge_type: string
+          last_accessed: string | null
+          learning_content: Json
+          updated_at: string
+          usage_count: number | null
+          validation_status: string | null
+        }
+        Insert: {
+          category: string
+          confidence_score?: number | null
+          created_at?: string
+          data_source: string
+          effectiveness_score?: number | null
+          id?: string
+          knowledge_type: string
+          last_accessed?: string | null
+          learning_content: Json
+          updated_at?: string
+          usage_count?: number | null
+          validation_status?: string | null
+        }
+        Update: {
+          category?: string
+          confidence_score?: number | null
+          created_at?: string
+          data_source?: string
+          effectiveness_score?: number | null
+          id?: string
+          knowledge_type?: string
+          last_accessed?: string | null
+          learning_content?: Json
+          updated_at?: string
+          usage_count?: number | null
+          validation_status?: string | null
+        }
+        Relationships: []
+      }
+      ai_neural_interactions: {
+        Row: {
+          context: string | null
+          created_at: string
+          id: string
+          metadata: Json | null
+          mode: string
+          model: string
+          processing_time: number
+          prompt: string
+          response: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          context?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          mode: string
+          model?: string
+          processing_time: number
+          prompt: string
+          response: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          context?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          mode?: string
+          model?: string
+          processing_time?: number
+          prompt?: string
+          response?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      ai_system_performance: {
+        Row: {
+          baseline_value: number | null
+          id: string
+          improvement_percentage: number | null
+          measurement_time: string
+          metadata: Json | null
+          metric_value: number
+          performance_metric: string
+          status: string | null
+          system_component: string
+        }
+        Insert: {
+          baseline_value?: number | null
+          id?: string
+          improvement_percentage?: number | null
+          measurement_time?: string
+          metadata?: Json | null
+          metric_value: number
+          performance_metric: string
+          status?: string | null
+          system_component: string
+        }
+        Update: {
+          baseline_value?: number | null
+          id?: string
+          improvement_percentage?: number | null
+          measurement_time?: string
+          metadata?: Json | null
+          metric_value?: number
+          performance_metric?: string
+          status?: string | null
+          system_component?: string
+        }
+        Relationships: []
+      }
+      ai_voice_interactions: {
+        Row: {
+          audio_duration: number | null
+          created_at: string
+          id: string
+          mode: string
+          model_id: string
+          text: string
+          user_id: string | null
+          voice_id: string
+          voice_type: string
+        }
+        Insert: {
+          audio_duration?: number | null
+          created_at?: string
+          id?: string
+          mode: string
+          model_id: string
+          text: string
+          user_id?: string | null
+          voice_id: string
+          voice_type: string
+        }
+        Update: {
+          audio_duration?: number | null
+          created_at?: string
+          id?: string
+          mode?: string
+          model_id?: string
+          text?: string
+          user_id?: string | null
+          voice_id?: string
+          voice_type?: string
+        }
+        Relationships: []
+      }
       audit_logs: {
         Row: {
           action_type: string
@@ -1242,6 +1446,42 @@ export type Database = {
         }
         Relationships: []
       }
+      main_wallet_config: {
+        Row: {
+          auto_routing_enabled: boolean | null
+          created_at: string | null
+          id: string
+          is_primary: boolean | null
+          routing_threshold: number | null
+          updated_at: string | null
+          wallet_address: string
+          wallet_name: string
+          wallet_type: string
+        }
+        Insert: {
+          auto_routing_enabled?: boolean | null
+          created_at?: string | null
+          id?: string
+          is_primary?: boolean | null
+          routing_threshold?: number | null
+          updated_at?: string | null
+          wallet_address: string
+          wallet_name: string
+          wallet_type?: string
+        }
+        Update: {
+          auto_routing_enabled?: boolean | null
+          created_at?: string | null
+          id?: string
+          is_primary?: boolean | null
+          routing_threshold?: number | null
+          updated_at?: string | null
+          wallet_address?: string
+          wallet_name?: string
+          wallet_type?: string
+        }
+        Relationships: []
+      }
       monitoring_events: {
         Row: {
           created_at: string
@@ -1563,6 +1803,178 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "auth_comprehensive_debug_view"
             referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      project_investment_summaries: {
+        Row: {
+          average_investment: number | null
+          carbon_credits_generated: number | null
+          id: string
+          investment_goal_percentage: number | null
+          last_investment_date: string | null
+          project_id: string
+          roi_percentage: number | null
+          total_invested: number | null
+          total_investors: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          average_investment?: number | null
+          carbon_credits_generated?: number | null
+          id?: string
+          investment_goal_percentage?: number | null
+          last_investment_date?: string | null
+          project_id: string
+          roi_percentage?: number | null
+          total_invested?: number | null
+          total_investors?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          average_investment?: number | null
+          carbon_credits_generated?: number | null
+          id?: string
+          investment_goal_percentage?: number | null
+          last_investment_date?: string | null
+          project_id?: string
+          roi_percentage?: number | null
+          total_invested?: number | null
+          total_investors?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_investment_summaries_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "green_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_investment_wallets: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          private_key_encrypted: string | null
+          project_id: string
+          total_received: number | null
+          total_routed: number | null
+          updated_at: string | null
+          wallet_address: string
+          wallet_type: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          private_key_encrypted?: string | null
+          project_id: string
+          total_received?: number | null
+          total_routed?: number | null
+          updated_at?: string | null
+          wallet_address: string
+          wallet_type?: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          private_key_encrypted?: string | null
+          project_id?: string
+          total_received?: number | null
+          total_routed?: number | null
+          updated_at?: string | null
+          wallet_address?: string
+          wallet_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_investment_wallets_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "green_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_transactions: {
+        Row: {
+          amount: number
+          block_number: number | null
+          confirmed_at: string | null
+          created_at: string | null
+          currency: string
+          from_address: string
+          gas_fee: number | null
+          id: string
+          metadata: Json | null
+          project_id: string
+          project_wallet_id: string
+          routed_at: string | null
+          routed_to_main_wallet: boolean | null
+          routing_transaction_hash: string | null
+          status: string
+          to_address: string
+          transaction_hash: string
+          transaction_type: string
+        }
+        Insert: {
+          amount: number
+          block_number?: number | null
+          confirmed_at?: string | null
+          created_at?: string | null
+          currency?: string
+          from_address: string
+          gas_fee?: number | null
+          id?: string
+          metadata?: Json | null
+          project_id: string
+          project_wallet_id: string
+          routed_at?: string | null
+          routed_to_main_wallet?: boolean | null
+          routing_transaction_hash?: string | null
+          status?: string
+          to_address: string
+          transaction_hash: string
+          transaction_type?: string
+        }
+        Update: {
+          amount?: number
+          block_number?: number | null
+          confirmed_at?: string | null
+          created_at?: string | null
+          currency?: string
+          from_address?: string
+          gas_fee?: number | null
+          id?: string
+          metadata?: Json | null
+          project_id?: string
+          project_wallet_id?: string
+          routed_at?: string | null
+          routed_to_main_wallet?: boolean | null
+          routing_transaction_hash?: string | null
+          status?: string
+          to_address?: string
+          transaction_hash?: string
+          transaction_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_transactions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "green_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_transactions_project_wallet_id_fkey"
+            columns: ["project_wallet_id"]
+            isOneToOne: false
+            referencedRelation: "project_investment_wallets"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -2450,6 +2862,56 @@ export type Database = {
           volume_24h?: number | null
         }
         Relationships: []
+      }
+      transaction_routing_logs: {
+        Row: {
+          amount_routed: number
+          confirmed_at: string | null
+          from_wallet: string
+          id: string
+          metadata: Json | null
+          project_id: string
+          routed_at: string | null
+          routing_fee: number | null
+          routing_status: string
+          routing_transaction_hash: string | null
+          to_wallet: string
+        }
+        Insert: {
+          amount_routed: number
+          confirmed_at?: string | null
+          from_wallet: string
+          id?: string
+          metadata?: Json | null
+          project_id: string
+          routed_at?: string | null
+          routing_fee?: number | null
+          routing_status?: string
+          routing_transaction_hash?: string | null
+          to_wallet: string
+        }
+        Update: {
+          amount_routed?: number
+          confirmed_at?: string | null
+          from_wallet?: string
+          id?: string
+          metadata?: Json | null
+          project_id?: string
+          routed_at?: string | null
+          routing_fee?: number | null
+          routing_status?: string
+          routing_transaction_hash?: string | null
+          to_wallet?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transaction_routing_logs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "green_projects"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       transaction_types: {
         Row: {
@@ -3618,6 +4080,10 @@ export type Database = {
           remediation_script: string
         }[]
       }
+      generate_project_wallet_address: {
+        Args: { p_project_id: string }
+        Returns: string
+      }
       generate_search_path_fixes: {
         Args: Record<PropertyKey, never>
         Returns: {
@@ -3662,6 +4128,10 @@ export type Database = {
           schema_name?: string
         }
         Returns: string
+      }
+      get_admin_financial_overview: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
       }
       get_admin_user_id: {
         Args: { role_or_user_id: string }
@@ -4109,6 +4579,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
+      route_project_funds_to_main_wallet: {
+        Args: { p_project_id: string }
+        Returns: Json
+      }
       run_all_security_fixes: {
         Args: Record<PropertyKey, never>
         Returns: {
@@ -4295,6 +4769,10 @@ export type Database = {
           function_name: string
           update_status: string
         }[]
+      }
+      update_project_investment_summary: {
+        Args: { p_project_id: string }
+        Returns: undefined
       }
       validate_admin_access: {
         Args: { client_ip: unknown }
