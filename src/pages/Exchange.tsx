@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -45,6 +44,7 @@ import { TradingInterface } from '@/components/TradingInterface'
 import { ChartAnalytics } from '@/components/ChartAnalytics'
 import { SecurityCenter } from '@/components/SecurityCenter'
 import { GaiaLogo } from '@/components/GaiaLogo'
+import { CommunityVault } from '@/components/CommunityVault'
 import { toast } from 'sonner'
 import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
 
@@ -186,7 +186,7 @@ export default function Exchange() {
     if (url) {
       window.open(url, '_blank', 'noopener,noreferrer')
       toast.success(`Opening Gaia's Exchanges for ${platform}`, {
-        description: '🌍 World\'s most secure crypto exchange'
+        description: "🌍 World's most secure crypto exchange"
       })
     }
   }
@@ -274,311 +274,323 @@ export default function Exchange() {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 py-8 space-y-8">
-        {/* Quick Access Tools */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Instant Token Swap */}
-          <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
-            <CardHeader>
-              <CardTitle className="text-purple-400 flex items-center gap-2">
-                <Coins className="h-6 w-6" />
-                Instant Blockchain Swap
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <div className="flex gap-2">
-                  <select 
-                    className="flex h-10 w-24 rounded-md border border-input bg-background px-2 py-2 text-sm"
-                    value={fromToken.symbol}
-                    onChange={(e) => setFromToken(supportedTokens.find(t => t.symbol === e.target.value) || supportedTokens[0])}
-                  >
-                    {supportedTokens.map(token => (
-                      <option key={token.symbol} value={token.symbol}>
-                        {token.icon} {token.symbol}
-                      </option>
-                    ))}
-                  </select>
-                  <Input
-                    placeholder="0.0"
-                    value={fromAmount}
-                    onChange={(e) => setFromAmount(e.target.value)}
-                    className="flex-1"
-                  />
-                </div>
-                <div className="flex justify-center">
-                  <Button onClick={handleSwapTokens} variant="outline" size="sm" className="rounded-full p-2">
-                    <ArrowUpDown className="h-4 w-4" />
-                  </Button>
-                </div>
-                <div className="flex gap-2">
-                  <select 
-                    className="flex h-10 w-24 rounded-md border border-input bg-background px-2 py-2 text-sm"
-                    value={toToken.symbol}
-                    onChange={(e) => setToToken(supportedTokens.find(t => t.symbol === e.target.value) || supportedTokens[0])}
-                  >
-                    {supportedTokens.map(token => (
-                      <option key={token.symbol} value={token.symbol}>
-                        {token.icon} {token.symbol}
-                      </option>
-                    ))}
-                  </select>
-                  <Input
-                    placeholder="0.0"
-                    value={toAmount}
-                    readOnly
-                    className="flex-1 bg-muted"
-                  />
-                </div>
-              </div>
-              <div className="text-center text-sm text-muted-foreground">
-                Rate: 1 {fromToken.symbol} = {swapRate.toFixed(6)} {toToken.symbol}
-              </div>
-              <Button 
-                onClick={executeSwap}
-                disabled={isSwapping || !fromAmount}
-                className="w-full bg-purple-600 hover:bg-purple-700"
-              >
-                {isSwapping ? 'Swapping...' : 'Execute Secure Swap'}
-              </Button>
-            </CardContent>
-          </Card>
-
-          {/* Market Overview */}
-          <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
-            <CardHeader>
-              <CardTitle className="text-green-400 flex items-center gap-2">
-                <TrendingUp className="h-6 w-6" />
-                Live Market Data
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {marketData.map((coin) => (
-                  <div key={coin.symbol} className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="font-mono text-sm">{coin.symbol}</div>
+      <div className="container mx-auto px-6 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Main Content Area */}
+          <div className="lg:col-span-3 space-y-8">
+            {/* Quick Access Tools */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Instant Token Swap */}
+              <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
+                <CardHeader>
+                  <CardTitle className="text-purple-400 flex items-center gap-2">
+                    <Coins className="h-6 w-6" />
+                    Instant Blockchain Swap
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <div className="flex gap-2">
+                      <select 
+                        className="flex h-10 w-24 rounded-md border border-input bg-background px-2 py-2 text-sm"
+                        value={fromToken.symbol}
+                        onChange={(e) => setFromToken(supportedTokens.find(t => t.symbol === e.target.value) || supportedTokens[0])}
+                      >
+                        {supportedTokens.map(token => (
+                          <option key={token.symbol} value={token.symbol}>
+                            {token.icon} {token.symbol}
+                          </option>
+                        ))}
+                      </select>
+                      <Input
+                        placeholder="0.0"
+                        value={fromAmount}
+                        onChange={(e) => setFromAmount(e.target.value)}
+                        className="flex-1"
+                      />
                     </div>
-                    <div className="text-right">
-                      <div className="font-bold">{formatGaiaPrice(coin.price)}</div>
-                      <div className={`text-sm flex items-center gap-1 ${coin.change24h >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                        {coin.change24h >= 0 ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
-                        {Math.abs(coin.change24h).toFixed(2)}%
-                      </div>
+                    <div className="flex justify-center">
+                      <Button onClick={handleSwapTokens} variant="outline" size="sm" className="rounded-full p-2">
+                        <ArrowUpDown className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <div className="flex gap-2">
+                      <select 
+                        className="flex h-10 w-24 rounded-md border border-input bg-background px-2 py-2 text-sm"
+                        value={toToken.symbol}
+                        onChange={(e) => setToToken(supportedTokens.find(t => t.symbol === e.target.value) || supportedTokens[0])}
+                      >
+                        {supportedTokens.map(token => (
+                          <option key={token.symbol} value={token.symbol}>
+                            {token.icon} {token.symbol}
+                          </option>
+                        ))}
+                      </select>
+                      <Input
+                        placeholder="0.0"
+                        value={toAmount}
+                        readOnly
+                        className="flex-1 bg-muted"
+                      />
                     </div>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                  <div className="text-center text-sm text-muted-foreground">
+                    Rate: 1 {fromToken.symbol} = {swapRate.toFixed(6)} {toToken.symbol}
+                  </div>
+                  <Button 
+                    onClick={executeSwap}
+                    disabled={isSwapping || !fromAmount}
+                    className="w-full bg-purple-600 hover:bg-purple-700"
+                  >
+                    {isSwapping ? 'Swapping...' : 'Execute Secure Swap'}
+                  </Button>
+                </CardContent>
+              </Card>
 
-          {/* Security Center */}
-          <Card className="border-red-500/30 bg-gradient-to-br from-red-900/30 to-orange-900/30">
-            <CardHeader>
-              <CardTitle className="text-red-400 flex items-center gap-2">
-                <Shield className="h-6 w-6" />
-                Security Status
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Quantum Security</span>
-                  <Badge className="bg-green-600">Active</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Dragon Protection</span>
-                  <Badge className="bg-green-600">Active</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Multi-Layer Defense</span>
-                  <Badge className="bg-green-600">Active</Badge>
-                </div>
-                <div className="space-y-2">
-                  <div className="text-sm text-muted-foreground">Recent Alerts:</div>
-                  {notifications.slice(0, 2).map((notification, idx) => (
-                    <div key={idx} className="text-xs bg-green-900/30 p-2 rounded border border-green-500/30">
-                      {notification}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Download Apps Section */}
-        <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-900/20 to-blue-900/20">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-cyan-400 text-center justify-center">
-              <Download className="h-6 w-6" />
-              🌍 GAIA EXCHANGES - MULTI-PLATFORM ECOSYSTEM
-            </CardTitle>
-            <div className="text-center">
-              <div className="text-sm text-blue-400 mt-2">
-                <strong>Contract:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
-              </div>
-              <div className="text-sm text-green-400 mt-1">
-                <strong>Official Website:</strong> www.gaiaexchanges.net
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
-              <Button onClick={() => handleDownloadApp('windows')} className="bg-blue-600 hover:bg-blue-700 h-auto py-4 flex-col gap-2">
-                <div className="text-3xl">🪟</div>
-                <div className="text-sm">Windows</div>
-              </Button>
-              <Button onClick={() => handleDownloadApp('macos')} className="bg-gray-600 hover:bg-gray-700 h-auto py-4 flex-col gap-2">
-                <div className="text-3xl">🍎</div>
-                <div className="text-sm">macOS</div>
-              </Button>
-              <Button onClick={() => handleDownloadApp('android')} className="bg-green-600 hover:bg-green-700 h-auto py-4 flex-col gap-2">
-                <div className="text-3xl">🤖</div>
-                <div className="text-sm">Android</div>
-              </Button>
-              <Button onClick={() => handleDownloadApp('ios')} className="bg-purple-600 hover:bg-purple-700 h-auto py-4 flex-col gap-2">
-                <div className="text-3xl">📱</div>
-                <div className="text-sm">iOS</div>
-              </Button>
-              <Button onClick={() => handleDownloadApp('linux')} className="bg-orange-600 hover:bg-orange-700 h-auto py-4 flex-col gap-2">
-                <div className="text-3xl">🐧</div>
-                <div className="text-sm">Linux</div>
-              </Button>
-              <Button onClick={() => handleDownloadApp('web')} className="bg-cyan-600 hover:bg-cyan-700 h-auto py-4 flex-col gap-2">
-                <div className="text-3xl">🌐</div>
-                <div className="text-sm">Web3 DApp</div>
-              </Button>
-            </div>
-            
-            <div className="mt-6 flex justify-center gap-4 flex-wrap">
-              <Button variant="outline" size="sm" asChild>
-                <a href="https://github.com/harmonyofgaia/gaia-exchanges" target="_blank" rel="noopener noreferrer">
-                  <Github className="h-4 w-4 mr-2" />
-                  GitHub Repository
-                </a>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <a href={GAIA_TOKEN.PUMP_FUN_URL} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  Trade on Pump.fun
-                </a>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <a href={GAIA_TOKEN.OFFICIAL_WEBSITE} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  Official Website
-                </a>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Main Features Tabs */}
-        <Tabs defaultValue="blockchain" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 md:grid-cols-8 bg-gradient-to-r from-green-900/30 to-purple-900/30">
-            <TabsTrigger value="blockchain">🔗 Blockchain</TabsTrigger>
-            <TabsTrigger value="exchange">💱 Exchange</TabsTrigger>
-            <TabsTrigger value="trading">📈 Trading</TabsTrigger>
-            <TabsTrigger value="security">🛡️ Security</TabsTrigger>
-            <TabsTrigger value="analytics">📊 Analytics</TabsTrigger>
-            <TabsTrigger value="investors">👥 Investors</TabsTrigger>
-            <TabsTrigger value="fees">💰 Fees</TabsTrigger>
-            <TabsTrigger value="platform">🌍 Platform</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="blockchain" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Market Overview */}
               <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
                 <CardHeader>
-                  <CardTitle className="text-green-400">🔗 Private Blockchain Network</CardTitle>
+                  <CardTitle className="text-green-400 flex items-center gap-2">
+                    <TrendingUp className="h-6 w-6" />
+                    Live Market Data
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
-                    <div className="text-center p-6 bg-black rounded-lg">
-                      <div className="text-4xl mb-4">🎬</div>
-                      <div className="text-xl font-bold text-green-400 mb-2">GAIA BLOCKCHAIN EXPLAINED</div>
-                      <div className="text-blue-400 animate-pulse">Animated Movie Coming Soon...</div>
-                    </div>
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="text-center p-4 bg-green-900/30 rounded-lg">
-                        <Shield className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                        <div className="font-bold text-green-400">Quantum Secure</div>
+                  <div className="space-y-3">
+                    {marketData.map((coin) => (
+                      <div key={coin.symbol} className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="font-mono text-sm">{coin.symbol}</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-bold">{formatGaiaPrice(coin.price)}</div>
+                          <div className={`text-sm flex items-center gap-1 ${coin.change24h >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                            {coin.change24h >= 0 ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
+                            {Math.abs(coin.change24h).toFixed(2)}%
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-center p-4 bg-blue-900/30 rounded-lg">
-                        <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                        <div className="font-bold text-blue-400">100k TPS</div>
-                      </div>
-                      <div className="text-center p-4 bg-purple-900/30 rounded-lg">
-                        <Heart className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                        <div className="font-bold text-purple-400">Eco-Friendly</div>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
-              
-              <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-cyan-900/30">
+
+              {/* Security Center */}
+              <Card className="border-red-500/30 bg-gradient-to-br from-red-900/30 to-orange-900/30">
                 <CardHeader>
-                  <CardTitle className="text-blue-400">🌐 Hosting Infrastructure</CardTitle>
+                  <CardTitle className="text-red-400 flex items-center gap-2">
+                    <Shield className="h-6 w-6" />
+                    Security Status
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-center mb-4">
-                    <div className="text-2xl font-bold text-green-400 mb-2">www.gaiaexchanges.net</div>
-                    <div className="text-blue-400 mb-4">Private Hosting Infrastructure</div>
-                    <Progress value={85} className="h-4 mb-2" />
-                    <div className="text-sm text-muted-foreground">85% Complete</div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="text-center p-4 bg-green-900/30 rounded-lg">
-                      <Rocket className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                      <div className="font-bold text-green-400">99.99% Uptime</div>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm">Quantum Security</span>
+                      <Badge className="bg-green-600">Active</Badge>
                     </div>
-                    <div className="text-center p-4 bg-blue-900/30 rounded-lg">
-                      <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                      <div className="font-bold text-blue-400">Global CDN</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm">Dragon Protection</span>
+                      <Badge className="bg-green-600">Active</Badge>
                     </div>
-                    <div className="text-center p-4 bg-purple-900/30 rounded-lg">
-                      <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                      <div className="font-bold text-purple-400">Military Security</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm">Multi-Layer Defense</span>
+                      <Badge className="bg-green-600">Active</Badge>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="text-sm text-muted-foreground">Recent Alerts:</div>
+                      {notifications.slice(0, 2).map((notification, idx) => (
+                        <div key={idx} className="text-xs bg-green-900/30 p-2 rounded border border-green-500/30">
+                          {notification}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </div>
-            <BlockchainStatus />
-            <LiveTransactionMatrix />
-          </TabsContent>
-          
-          <TabsContent value="exchange" className="space-y-6">
-            <FullyFunctionalExchange />
-          </TabsContent>
-          
-          <TabsContent value="trading" className="space-y-6">
-            <TradingInterface />
-          </TabsContent>
-          
-          <TabsContent value="security" className="space-y-6">
-            <SecurityCenter notifications={notifications} />
-          </TabsContent>
-          
-          <TabsContent value="analytics" className="space-y-6">
-            <ChartAnalytics />
-          </TabsContent>
-          
-          <TabsContent value="investors" className="space-y-6">
-            <InvestorScoutingSystem />
-          </TabsContent>
-          
-          <TabsContent value="fees" className="space-y-6">
-            <GaiaFeeManager />
-          </TabsContent>
-          
-          <TabsContent value="platform" className="space-y-6">
-            <GaiasExchange />
-            <MultiExchangeIntegration />
-          </TabsContent>
-        </Tabs>
+
+            {/* Download Apps Section */}
+            <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-900/20 to-blue-900/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-cyan-400 text-center justify-center">
+                  <Download className="h-6 w-6" />
+                  🌍 GAIA EXCHANGES - MULTI-PLATFORM ECOSYSTEM
+                </CardTitle>
+                <div className="text-center">
+                  <div className="text-sm text-blue-400 mt-2">
+                    <strong>Contract:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+                  </div>
+                  <div className="text-sm text-green-400 mt-1">
+                    <strong>Official Website:</strong> www.gaiaexchanges.net
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+                  <Button onClick={() => handleDownloadApp('windows')} className="bg-blue-600 hover:bg-blue-700 h-auto py-4 flex-col gap-2">
+                    <div className="text-3xl">🪟</div>
+                    <div className="text-sm">Windows</div>
+                  </Button>
+                  <Button onClick={() => handleDownloadApp('macos')} className="bg-gray-600 hover:bg-gray-700 h-auto py-4 flex-col gap-2">
+                    <div className="text-3xl">🍎</div>
+                    <div className="text-sm">macOS</div>
+                  </Button>
+                  <Button onClick={() => handleDownloadApp('android')} className="bg-green-600 hover:bg-green-700 h-auto py-4 flex-col gap-2">
+                    <div className="text-3xl">🤖</div>
+                    <div className="text-sm">Android</div>
+                  </Button>
+                  <Button onClick={() => handleDownloadApp('ios')} className="bg-purple-600 hover:bg-purple-700 h-auto py-4 flex-col gap-2">
+                    <div className="text-3xl">📱</div>
+                    <div className="text-sm">iOS</div>
+                  </Button>
+                  <Button onClick={() => handleDownloadApp('linux')} className="bg-orange-600 hover:bg-orange-700 h-auto py-4 flex-col gap-2">
+                    <div className="text-3xl">🐧</div>
+                    <div className="text-sm">Linux</div>
+                  </Button>
+                  <Button onClick={() => handleDownloadApp('web')} className="bg-cyan-600 hover:bg-cyan-700 h-auto py-4 flex-col gap-2">
+                    <div className="text-3xl">🌐</div>
+                    <div className="text-sm">Web3 DApp</div>
+                  </Button>
+                </div>
+                
+                <div className="mt-6 flex justify-center gap-4 flex-wrap">
+                  <Button variant="outline" size="sm" asChild>
+                    <a href="https://github.com/harmonyofgaia/gaia-exchanges" target="_blank" rel="noopener noreferrer">
+                      <Github className="h-4 w-4 mr-2" />
+                      GitHub Repository
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={GAIA_TOKEN.PUMP_FUN_URL} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Trade on Pump.fun
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={GAIA_TOKEN.OFFICIAL_WEBSITE} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Official Website
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Main Features Tabs */}
+            <Tabs defaultValue="blockchain" className="w-full">
+              <TabsList className="grid w-full grid-cols-3 md:grid-cols-8 bg-gradient-to-r from-green-900/30 to-purple-900/30">
+                <TabsTrigger value="blockchain">🔗 Blockchain</TabsTrigger>
+                <TabsTrigger value="exchange">💱 Exchange</TabsTrigger>
+                <TabsTrigger value="trading">📈 Trading</TabsTrigger>
+                <TabsTrigger value="security">🛡️ Security</TabsTrigger>
+                <TabsTrigger value="analytics">📊 Analytics</TabsTrigger>
+                <TabsTrigger value="investors">👥 Investors</TabsTrigger>
+                <TabsTrigger value="fees">💰 Fees</TabsTrigger>
+                <TabsTrigger value="platform">🌍 Platform</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="blockchain" className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
+                    <CardHeader>
+                      <CardTitle className="text-green-400">🔗 Private Blockchain Network</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="text-center p-6 bg-black rounded-lg">
+                          <div className="text-4xl mb-4">🎬</div>
+                          <div className="text-xl font-bold text-green-400 mb-2">GAIA BLOCKCHAIN EXPLAINED</div>
+                          <div className="text-blue-400 animate-pulse">Animated Movie Coming Soon...</div>
+                        </div>
+                        <div className="grid grid-cols-3 gap-4">
+                          <div className="text-center p-4 bg-green-900/30 rounded-lg">
+                            <Shield className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                            <div className="font-bold text-green-400">Quantum Secure</div>
+                          </div>
+                          <div className="text-center p-4 bg-blue-900/30 rounded-lg">
+                            <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                            <div className="font-bold text-blue-400">100k TPS</div>
+                          </div>
+                          <div className="text-center p-4 bg-purple-900/30 rounded-lg">
+                            <Heart className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                            <div className="font-bold text-purple-400">Eco-Friendly</div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-cyan-900/30">
+                    <CardHeader>
+                      <CardTitle className="text-blue-400">🌐 Hosting Infrastructure</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-center mb-4">
+                        <div className="text-2xl font-bold text-green-400 mb-2">www.gaiaexchanges.net</div>
+                        <div className="text-blue-400 mb-4">Private Hosting Infrastructure</div>
+                        <Progress value={85} className="h-4 mb-2" />
+                        <div className="text-sm text-muted-foreground">85% Complete</div>
+                      </div>
+                      <div className="grid grid-cols-3 gap-4">
+                        <div className="text-center p-4 bg-green-900/30 rounded-lg">
+                          <Rocket className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                          <div className="font-bold text-green-400">99.99% Uptime</div>
+                        </div>
+                        <div className="text-center p-4 bg-blue-900/30 rounded-lg">
+                          <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                          <div className="font-bold text-blue-400">Global CDN</div>
+                        </div>
+                        <div className="text-center p-4 bg-purple-900/30 rounded-lg">
+                          <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                          <div className="font-bold text-purple-400">Military Security</div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+                <BlockchainStatus />
+                <LiveTransactionMatrix />
+              </TabsContent>
+              
+              <TabsContent value="exchange" className="space-y-6">
+                <FullyFunctionalExchange />
+              </TabsContent>
+              
+              <TabsContent value="trading" className="space-y-6">
+                <TradingInterface />
+              </TabsContent>
+              
+              <TabsContent value="security" className="space-y-6">
+                <SecurityCenter notifications={notifications} />
+              </TabsContent>
+              
+              <TabsContent value="analytics" className="space-y-6">
+                <ChartAnalytics />
+              </TabsContent>
+              
+              <TabsContent value="investors" className="space-y-6">
+                <InvestorScoutingSystem />
+              </TabsContent>
+              
+              <TabsContent value="fees" className="space-y-6">
+                <GaiaFeeManager />
+              </TabsContent>
+              
+              <TabsContent value="platform" className="space-y-6">
+                <GaiasExchange />
+                <MultiExchangeIntegration />
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          {/* Community Vault Column */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-8">
+              <CommunityVault />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
