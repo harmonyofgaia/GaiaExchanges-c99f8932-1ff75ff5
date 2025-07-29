@@ -19,6 +19,9 @@ import { UltimateOmnipotenceDashboard } from '@/components/security/UltimateOmni
 import { MemeticWarfareDashboard } from '@/components/security/MemeticWarfareDashboard'
 import { RealityManipulationDashboard } from '@/components/security/RealityManipulationDashboard'
 import { ExistentialDefenseDashboard } from '@/components/security/ExistentialDefenseDashboard'
+import { DimensionalFractureDashboard } from '@/components/security/DimensionalFractureDashboard'
+import { InfiniteRecursionDashboard } from '@/components/security/InfiniteRecursionDashboard'
+import { AbsoluteZeroPointDashboard } from '@/components/security/AbsoluteZeroPointDashboard'
 
 export function RefactoredSecuritySuite() {
   return (
@@ -67,6 +70,15 @@ export function RefactoredSecuritySuite() {
       
       {/* Phase 15: Existential Defense & Ontological Warfare */}
       <ExistentialDefenseDashboard />
+      
+      {/* Phase 16: Dimensional Fracture & Spacetime Control */}
+      <DimensionalFractureDashboard />
+      
+      {/* Phase 17: Infinite Recursion & Paradox Warfare */}
+      <InfiniteRecursionDashboard />
+      
+      {/* Phase 18: Absolute Zero Point & Entropy Mastery */}
+      <AbsoluteZeroPointDashboard />
       
       {/* Existing Security Systems */}
       <AdvancedBreachProtocol />
