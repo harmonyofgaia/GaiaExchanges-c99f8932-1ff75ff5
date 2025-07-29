@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -78,7 +77,7 @@ const SlidingMenu = () => {
     { icon: TrendingUp, label: 'Live Tracking', path: '/live-tracking', category: 'main' },
     { icon: Gamepad2, label: 'Gaming', path: '/gaming', category: 'main' },
     { icon: Wallet, label: 'Wallet', path: '/wallet', category: 'main' },
-    { icon: BarChart3, label: 'Markets', path: '/markets', category: 'main' },
+    { icon: BarChart3, label: 'Exchange & Markets', path: '/exchange', category: 'main' },
     { icon: Video, label: 'Video Exchange', path: '/video-exchange', category: 'entertainment' },
     { icon: Bike, label: 'Bike Ecosystem', path: '/gaia-bike-ecosystem', category: 'tools' },
     { icon: Pickaxe, label: 'Token Mining', path: '/token-mining', category: 'tools' },
