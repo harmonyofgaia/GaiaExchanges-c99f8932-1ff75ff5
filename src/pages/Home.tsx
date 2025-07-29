@@ -15,7 +15,7 @@ import { AnimatedCounter } from '@/components/ui/animated-counter'
 import { LiveEarningsDisplay } from '@/components/earnings/LiveEarningsDisplay'
 import { EcoMissionCard } from '@/components/missions/EcoMissionCard'
 import { ThemeSelector } from '@/components/ThemeSelector'
-import { VisualControlButton } from '@/components/visual/VisualControlButton'
+import { UpgradedVisualControlButton } from '@/components/visual/UpgradedVisualControlButton'
 
 export default function Home() {
   const [stats, setStats] = useState({
@@ -67,7 +67,7 @@ export default function Home() {
       />
       
       {/* Control Buttons */}
-      <VisualControlButton />
+      <UpgradedVisualControlButton />
       <ThemeSelector />
       
       <div className="relative z-10 container mx-auto px-4 py-8">
