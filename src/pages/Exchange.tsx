@@ -282,73 +282,7 @@ export default function Exchange() {
           {/* Main Content Area */}
           <div className="xl:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
             {/* Quick Access Tools */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {/* Instant Token Swap */}
-              <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
-                <CardHeader>
-                  <CardTitle className="text-purple-400 flex items-center gap-2">
-                    <Coins className="h-6 w-6" />
-                    Instant Blockchain Swap
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex gap-2">
-                      <select 
-                        className="flex h-10 w-24 rounded-md border border-input bg-background px-2 py-2 text-sm"
-                        value={fromToken.symbol}
-                        onChange={(e) => setFromToken(supportedTokens.find(t => t.symbol === e.target.value) || supportedTokens[0])}
-                      >
-                        {supportedTokens.map(token => (
-                          <option key={token.symbol} value={token.symbol}>
-                            {token.icon} {token.symbol}
-                          </option>
-                        ))}
-                      </select>
-                      <Input
-                        placeholder="0.0"
-                        value={fromAmount}
-                        onChange={(e) => setFromAmount(e.target.value)}
-                        className="flex-1"
-                      />
-                    </div>
-                    <div className="flex justify-center">
-                      <Button onClick={handleSwapTokens} variant="outline" size="sm" className="rounded-full p-2">
-                        <ArrowUpDown className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="flex gap-2">
-                      <select 
-                        className="flex h-10 w-24 rounded-md border border-input bg-background px-2 py-2 text-sm"
-                        value={toToken.symbol}
-                        onChange={(e) => setToToken(supportedTokens.find(t => t.symbol === e.target.value) || supportedTokens[0])}
-                      >
-                        {supportedTokens.map(token => (
-                          <option key={token.symbol} value={token.symbol}>
-                            {token.icon} {token.symbol}
-                          </option>
-                        ))}
-                      </select>
-                      <Input
-                        placeholder="0.0"
-                        value={toAmount}
-                        readOnly
-                        className="flex-1 bg-muted"
-                      />
-                    </div>
-                  </div>
-                  <div className="text-center text-sm text-muted-foreground">
-                    Rate: 1 {fromToken.symbol} = {swapRate.toFixed(6)} {toToken.symbol}
-                  </div>
-                  <Button 
-                    onClick={executeSwap}
-                    disabled={isSwapping || !fromAmount}
-                    className="w-full bg-purple-600 hover:bg-purple-700"
-                  >
-                    {isSwapping ? 'Swapping...' : 'Execute Secure Swap'}
-                  </Button>
-                </CardContent>
-              </Card>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
 
               {/* Market Overview */}
               <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
@@ -559,8 +493,125 @@ export default function Exchange() {
 
                   {activeInterface === 'trading' && (
                     <div className="space-y-6">
-                      <TradingInterface />
-                      <ChartAnalytics />
+                      {/* Comprehensive Pro Trading Module */}
+                      <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-indigo-900/30">
+                        <CardHeader className="text-center">
+                          <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent flex items-center justify-center gap-3">
+                            <div className="text-3xl">📈</div>
+                            GAIA PRO TRADING SUITE
+                            <div className="text-3xl">🚀</div>
+                          </CardTitle>
+                          <p className="text-blue-400">Professional Trading • Advanced Analytics • Multi-Platform Integration</p>
+                        </CardHeader>
+                        <CardContent>
+                          <Tabs defaultValue="pro-swap" className="w-full">
+                            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
+                              <TabsTrigger value="pro-swap">💱 Pro Swap</TabsTrigger>
+                              <TabsTrigger value="spot-trading">📊 Spot Trading</TabsTrigger>
+                              <TabsTrigger value="multi-exchange">🔄 Multi-Exchange</TabsTrigger>
+                              <TabsTrigger value="advanced-charts">📈 Analytics</TabsTrigger>
+                              <TabsTrigger value="gaia-exchange">🌍 GAIA Exchange</TabsTrigger>
+                            </TabsList>
+                            
+                            <TabsContent value="pro-swap" className="space-y-6">
+                              {/* Advanced Swap Interface */}
+                              <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
+                                <CardHeader>
+                                  <CardTitle className="text-purple-400 flex items-center gap-2">
+                                    <Coins className="h-6 w-6" />
+                                    Professional Blockchain Swap Engine
+                                  </CardTitle>
+                                </CardHeader>
+                                <CardContent className="space-y-4">
+                                  <div className="space-y-2">
+                                    <div className="flex gap-2">
+                                      <select 
+                                        className="flex h-10 w-24 rounded-md border border-input bg-background px-2 py-2 text-sm"
+                                        value={fromToken.symbol}
+                                        onChange={(e) => setFromToken(supportedTokens.find(t => t.symbol === e.target.value) || supportedTokens[0])}
+                                      >
+                                        {supportedTokens.map(token => (
+                                          <option key={token.symbol} value={token.symbol}>
+                                            {token.icon} {token.symbol}
+                                          </option>
+                                        ))}
+                                      </select>
+                                      <Input
+                                        placeholder="0.0"
+                                        value={fromAmount}
+                                        onChange={(e) => setFromAmount(e.target.value)}
+                                        className="flex-1"
+                                      />
+                                    </div>
+                                    <div className="flex justify-center">
+                                      <Button onClick={handleSwapTokens} variant="outline" size="sm" className="rounded-full p-2">
+                                        <ArrowUpDown className="h-4 w-4" />
+                                      </Button>
+                                    </div>
+                                    <div className="flex gap-2">
+                                      <select 
+                                        className="flex h-10 w-24 rounded-md border border-input bg-background px-2 py-2 text-sm"
+                                        value={toToken.symbol}
+                                        onChange={(e) => setToToken(supportedTokens.find(t => t.symbol === e.target.value) || supportedTokens[0])}
+                                      >
+                                        {supportedTokens.map(token => (
+                                          <option key={token.symbol} value={token.symbol}>
+                                            {token.icon} {token.symbol}
+                                          </option>
+                                        ))}
+                                      </select>
+                                      <Input
+                                        placeholder="0.0"
+                                        value={toAmount}
+                                        readOnly
+                                        className="flex-1 bg-muted"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="text-center text-sm text-muted-foreground">
+                                    Professional Rate: 1 {fromToken.symbol} = {swapRate.toFixed(6)} {toToken.symbol}
+                                  </div>
+                                  <Button 
+                                    onClick={executeSwap}
+                                    disabled={isSwapping || !fromAmount}
+                                    className="w-full bg-purple-600 hover:bg-purple-700"
+                                  >
+                                    {isSwapping ? 'Processing Professional Swap...' : 'Execute Professional Swap'}
+                                  </Button>
+                                  <div className="grid grid-cols-3 gap-2 text-center text-xs">
+                                    <div className="bg-green-900/30 p-2 rounded">
+                                      <div className="text-green-400 font-bold">Zero Fees</div>
+                                    </div>
+                                    <div className="bg-blue-900/30 p-2 rounded">
+                                      <div className="text-blue-400 font-bold">Instant</div>
+                                    </div>
+                                    <div className="bg-purple-900/30 p-2 rounded">
+                                      <div className="text-purple-400 font-bold">Secure</div>
+                                    </div>
+                                  </div>
+                                </CardContent>
+                              </Card>
+                              <FullyFunctionalExchange />
+                            </TabsContent>
+                            
+                            <TabsContent value="spot-trading" className="space-y-6">
+                              <TradingInterface />
+                            </TabsContent>
+                            
+                            <TabsContent value="multi-exchange" className="space-y-6">
+                              <MultiExchangeIntegration />
+                            </TabsContent>
+                            
+                            <TabsContent value="advanced-charts" className="space-y-6">
+                              <ChartAnalytics />
+                            </TabsContent>
+                            
+                            <TabsContent value="gaia-exchange" className="space-y-6">
+                              <GaiasExchange />
+                            </TabsContent>
+                          </Tabs>
+                        </CardContent>
+                      </Card>
                     </div>
                   )}
 
