@@ -145,7 +145,7 @@ export function UniversalSwapInterface() {
     setIsSwapping(true)
     
     setTimeout(() => {
-      toast.success('🌍 Swap Confirmed in GAIA Private Network!', {
+      toast.success('✅ Swap Confirmed in GAIA Private Network!', {
         description: `${fromAmount} ${fromToken.symbol} → ${toAmount} ${toToken.symbol} • ${selectedOption?.name} applied`
       })
       setFromAmount('')
@@ -246,9 +246,16 @@ export function UniversalSwapInterface() {
           </Button>
         </div>
         <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
-          <p className="text-sm text-green-300">
-            🌍 <strong>GAIA Private Exchange Network</strong> - All tokens legally confirmed and verified
-          </p>
+          <div className="flex items-center gap-2 mb-2">
+            <img 
+              src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
+              alt="Harmony of Gaia"
+              className="w-5 h-5 object-contain"
+            />
+            <p className="text-sm text-green-300">
+              <strong>GAIA Private Exchange Network</strong> - All tokens legally confirmed and verified
+            </p>
+          </div>
           <p className="text-xs text-green-400 mt-1">
             Zero fees • Instant swaps • 100% transparency • Community-owned
           </p>

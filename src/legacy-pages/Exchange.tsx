@@ -24,9 +24,16 @@ export default function Exchange() {
           <p className="text-xl text-muted-foreground mb-2">
             Universal Multi-Token Exchange • Zero Fees • Full Transparency
           </p>
-          <p className="text-sm text-green-400">
-            🌍 Legally Confirmed Tokens Only • Powered by Harmony of Gaia ✨
-          </p>
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <img 
+              src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
+              alt="Harmony of Gaia"
+              className="w-4 h-4 object-contain"
+            />
+            <p className="text-sm text-green-400">
+              Legally Confirmed Tokens Only • Powered by Harmony of Gaia ✨
+            </p>
+          </div>
         </div>
 
         <div className="max-w-2xl mx-auto">
