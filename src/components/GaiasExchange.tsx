@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -366,10 +367,10 @@ export function GaiasExchange() {
               </p>
               <div className="flex justify-center gap-4">
                 <Button className="bg-red-600 hover:bg-red-700" asChild>
-                  <a href="/secure-admin">
+                  <Link to="/secure-admin">
                     <Shield className="h-4 w-4 mr-2" />
                     Access Admin Portal
-                  </a>
+                  </Link>
                 </Button>
                 <Button variant="outline">
                   <Eye className="h-4 w-4 mr-2" />

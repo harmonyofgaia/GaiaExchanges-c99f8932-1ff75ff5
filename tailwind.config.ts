@@ -54,7 +54,7 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        gold: "#FFD700",
+        gold: "hsl(47 95% 53%)",
       },
       borderRadius: {
         lg: "var(--radius)",
