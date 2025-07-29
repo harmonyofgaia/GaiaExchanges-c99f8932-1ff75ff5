@@ -40,7 +40,7 @@ export function TokenWarfareDashboard() {
 
   const handleCreateTokenMechanism = async () => {
     try {
-      await tokenWarfare.activateTokenMechanism('governance')
+      await tokenWarfare.initializeTokenWarfareSystem()
     } catch (error) {
       toast.error('Failed to create token mechanism')
     }

@@ -47,7 +47,7 @@ export function InvisibleDefenseDashboard() {
 
   const handleDeployDecoyNodes = async () => {
     try {
-      await invisibleDefense.deployDecoyNode('phantom', 'Node Alpha')
+      await invisibleDefense.deployDecoyNode({ nodeType: 'phantom', location: 'Network Alpha' })
     } catch (error) {
       toast.error('Failed to deploy decoy nodes')
     }

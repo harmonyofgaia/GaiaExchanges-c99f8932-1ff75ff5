@@ -12,8 +12,8 @@ export function GlobalSurveillanceDashboard() {
     isActive: false,
     satelliteNetwork: { total: 0, active: 0, threats: 0 },
     deepWebMonitoring: { layers: 0, threats: 0, intelligence: 0 },
-    governmentIntegration: { agencies: 0, feeds: 0, classification: 'UNCLASSIFIED' },
-    internationalCoordination: { partners: 0, threats: 0, responses: 0 }
+    governmentIntegration: { agencies: 0, realTimeFeeds: 0 },
+    internationalCoordination: { activeThreats: 0, coordinatedResponses: 0 }
   })
 
   useEffect(() => {
@@ -110,9 +110,9 @@ export function GlobalSurveillanceDashboard() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Radar className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">International Partners</span>
+              <span className="text-sm font-medium">Coordinated Responses</span>
             </div>
-            <div className="text-xl font-bold">{status.internationalCoordination.partners}</div>
+            <div className="text-xl font-bold">{status.internationalCoordination.coordinatedResponses}</div>
           </div>
         </div>
 
