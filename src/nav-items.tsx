@@ -287,8 +287,8 @@ export const navigationItems: NavigationItem[] = [
     lazyLoaded: true,
   },
   {
-    title: "Admin",
-    to: "/admin",
+    title: "Secure Admin",
+    to: "/secure-admin",
     icon: Settings,
     variant: "ghost" as const,
     description: "Platform administration and management",
