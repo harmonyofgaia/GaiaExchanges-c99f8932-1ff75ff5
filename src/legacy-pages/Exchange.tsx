@@ -4,6 +4,8 @@ import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
 import { UniversalSwapInterface } from '@/components/exchange/UniversalSwapInterface'
 
 export default function Exchange() {
+  console.log('🔄 Exchange page rendering with new logo and unified interface')
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
       <Navbar />
@@ -18,7 +20,7 @@ export default function Exchange() {
               />
             </div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-              Gaia's Private Blockchain Network
+              🔄 Gaia's Private Blockchain Network - UPDATED
             </h1>
           </div>
           <p className="text-xl text-muted-foreground mb-2">

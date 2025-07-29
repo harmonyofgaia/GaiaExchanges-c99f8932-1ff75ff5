@@ -102,13 +102,15 @@ const FEE_OPTIONS = [
 ]
 
 export function UniversalSwapInterface() {
+  console.log('🔄 UniversalSwapInterface rendering - NEW UNIFIED VERSION')
+  console.log('🖼️ Logo should be:', '/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png')
+  
   const [fromAmount, setFromAmount] = useState<string>('')
   const [toAmount, setToAmount] = useState<string>('')
   const [fromToken, setFromToken] = useState(SUPPORTED_TOKENS[0])
   const [toToken, setToToken] = useState(SUPPORTED_TOKENS[1])
   const [isSwapping, setIsSwapping] = useState<boolean>(false)
   const [selectedFeeOption, setSelectedFeeOption] = useState('zero-fee')
-  const [showAdvanced, setShowAdvanced] = useState(false)
 
   const { tokenData, hasRealData } = useGaiaTokenData()
   
