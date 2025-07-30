@@ -11,6 +11,8 @@ import { DefenseCreatureArmy } from './DefenseCreatureArmy'
 import { ImmortalDefenseCore } from '../security/ImmortalDefenseCore'
 import { UltimateDefenseBarrier } from './UltimateDefenseBarrier'
 import { UltimateDefenseAnimalsSupreme } from './UltimateDefenseAnimalsSupreme'
+import { TacticalEvolutionAnimals } from './TacticalEvolutionAnimals'
+import { ComprehensiveUpgradePlan } from './ComprehensiveUpgradePlan'
 
 interface DefenseAnimal {
   id: string
@@ -461,15 +463,67 @@ export function AnimalDefenseCommandCenter() {
       </div>
 
       <Tabs defaultValue="animals" className="w-full">
-        <TabsList className="grid w-full grid-cols-7">
-          <TabsTrigger value="animals">Defense Animals</TabsTrigger>
-          <TabsTrigger value="patterns">Attack Patterns</TabsTrigger>
-          <TabsTrigger value="command">Command Center</TabsTrigger>
-          <TabsTrigger value="ai-animals">AI Animals</TabsTrigger>
-          <TabsTrigger value="creature-army">Creature Army</TabsTrigger>
-          <TabsTrigger value="immortal-core">Immortal Core</TabsTrigger>
-          <TabsTrigger value="barrier">Defense Barrier</TabsTrigger>
-          <TabsTrigger value="supreme">Supreme</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-1 h-auto p-1 text-xs">
+          <TabsTrigger value="animals" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🐾</span>
+              <span className="hidden sm:inline">Defense Animals</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="tactical" className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30">
+            <div className="flex flex-col items-center">
+              <span>🧬</span>
+              <span className="hidden sm:inline">Tactical Evolution</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="upgrade-plan" className="p-2 text-center bg-gradient-to-r from-green-600/20 to-blue-600/20 border border-green-500/30">
+            <div className="flex flex-col items-center">
+              <span>🌍</span>
+              <span className="hidden sm:inline">Master Plan</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="patterns" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>⚔️</span>
+              <span className="hidden sm:inline">Attack Patterns</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="command" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🎯</span>
+              <span className="hidden sm:inline">Command Center</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="ai-animals" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🤖</span>
+              <span className="hidden sm:inline">AI Animals</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="creature-army" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🦄</span>
+              <span className="hidden sm:inline">Creature Army</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="immortal-core" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>♾️</span>
+              <span className="hidden sm:inline">Immortal Core</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="barrier" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>🛡️</span>
+              <span className="hidden sm:inline">Defense Barrier</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="supreme" className="p-2 text-center">
+            <div className="flex flex-col items-center">
+              <span>👑</span>
+              <span className="hidden sm:inline">Supreme</span>
+            </div>
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="animals" className="space-y-4">
@@ -711,6 +765,14 @@ export function AnimalDefenseCommandCenter() {
 
         <TabsContent value="barrier" className="space-y-6">
           <UltimateDefenseBarrier />
+        </TabsContent>
+
+        <TabsContent value="tactical" className="space-y-6">
+          <TacticalEvolutionAnimals />
+        </TabsContent>
+
+        <TabsContent value="upgrade-plan" className="space-y-6">
+          <ComprehensiveUpgradePlan />
         </TabsContent>
 
         <TabsContent value="supreme" className="space-y-6">
