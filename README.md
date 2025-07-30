@@ -178,6 +178,10 @@ The following minor TypeScript issues exist in unrelated components but do not a
 - SystemConsistencyScanner.tsx: missing function definition
 - EnhancedBackgroundManager.tsx: missing constants
 
+## Merge and Deployment Policy
+
+All changes must go through a reviewed pull request with passing CI checks. See [GOVERNANCE.md](GOVERNANCE.md) for details.
+
 These are isolated to their respective components and do not impact the admin dashboard system.
 
 ## Can I connect a custom domain to my Lovable project?
@@ -187,3 +191,4 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
