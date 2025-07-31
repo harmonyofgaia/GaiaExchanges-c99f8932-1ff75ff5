@@ -14,7 +14,6 @@ import { UltimateDefenseAnimalsSupreme } from './UltimateDefenseAnimalsSupreme'
 import { TacticalEvolutionAnimals } from './TacticalEvolutionAnimals'
 import { ComprehensiveUpgradePlan } from './ComprehensiveUpgradePlan'
 import { MissingTacticalOperations } from './MissingTacticalOperations'
-import { GhostAnimalArmy } from './GhostAnimalArmy'
 
 interface DefenseAnimal {
   id: string
@@ -465,17 +464,11 @@ export function AnimalDefenseCommandCenter() {
       </div>
 
       <Tabs defaultValue="animals" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-1 h-auto p-1 text-xs">
+        <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-1 h-auto p-1 text-xs">
           <TabsTrigger value="animals" className="p-2 text-center">
             <div className="flex flex-col items-center">
               <span>🐾</span>
               <span className="hidden sm:inline">Defense Animals</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="ghosts" className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-indigo-600/20 border border-purple-500/30">
-            <div className="flex flex-col items-center">
-              <span>👻</span>
-              <span className="hidden sm:inline">Ghost Army</span>
             </div>
           </TabsTrigger>
           <TabsTrigger value="tactical" className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30">
@@ -787,10 +780,6 @@ export function AnimalDefenseCommandCenter() {
 
         <TabsContent value="upgrade-plan" className="space-y-6">
           <ComprehensiveUpgradePlan />
-        </TabsContent>
-
-        <TabsContent value="ghosts" className="space-y-6">
-          <GhostAnimalArmy />
         </TabsContent>
 
         <TabsContent value="missing-tactical" className="space-y-6">
