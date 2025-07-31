@@ -13,6 +13,7 @@ import { UltimateDefenseBarrier } from './UltimateDefenseBarrier'
 import { UltimateDefenseAnimalsSupreme } from './UltimateDefenseAnimalsSupreme'
 import { TacticalEvolutionAnimals } from './TacticalEvolutionAnimals'
 import { ComprehensiveUpgradePlan } from './ComprehensiveUpgradePlan'
+import { MissingTacticalOperations } from './MissingTacticalOperations'
 
 interface DefenseAnimal {
   id: string
@@ -482,6 +483,12 @@ export function AnimalDefenseCommandCenter() {
               <span className="hidden sm:inline">Master Plan</span>
             </div>
           </TabsTrigger>
+          <TabsTrigger value="missing-tactical" className="p-2 text-center bg-gradient-to-r from-red-600/20 to-orange-600/20 border border-red-500/30">
+            <div className="flex flex-col items-center">
+              <span>⚔️</span>
+              <span className="hidden sm:inline">Missing Tactical</span>
+            </div>
+          </TabsTrigger>
           <TabsTrigger value="patterns" className="p-2 text-center">
             <div className="flex flex-col items-center">
               <span>⚔️</span>
@@ -773,6 +780,10 @@ export function AnimalDefenseCommandCenter() {
 
         <TabsContent value="upgrade-plan" className="space-y-6">
           <ComprehensiveUpgradePlan />
+        </TabsContent>
+
+        <TabsContent value="missing-tactical" className="space-y-6">
+          <MissingTacticalOperations />
         </TabsContent>
 
         <TabsContent value="supreme" className="space-y-6">
