@@ -45,6 +45,7 @@ import { QuantumDefenseWall } from './QuantumDefenseWall'
 import { BackgroundTacticalSystems } from './BackgroundTacticalSystems'
 import { MultiExchangeIntegration } from '@/components/MultiExchangeIntegration'
 import { InvestorScoutingSystem } from '@/components/InvestorScoutingSystem'
+import { MasterUpgradePlan } from './MasterUpgradePlan'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -248,6 +249,12 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">Investors</span>
             </div>
           </TabsTrigger>
+          <TabsTrigger value="master-plan" className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30">
+            <div className="flex flex-col items-center">
+              <span>🚀</span>
+              <span className="hidden sm:inline">Master Plan</span>
+            </div>
+          </TabsTrigger>
           </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
@@ -372,6 +379,10 @@ export function SecureAdminDashboard() {
 
         <TabsContent value="investors" className="space-y-6">
           <InvestorScoutingSystem />
+        </TabsContent>
+
+        <TabsContent value="master-plan" className="space-y-6">
+          <MasterUpgradePlan />
         </TabsContent>
       </Tabs>
     </div>
