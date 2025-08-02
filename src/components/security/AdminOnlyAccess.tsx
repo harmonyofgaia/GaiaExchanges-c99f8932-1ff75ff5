@@ -71,7 +71,12 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
     console.log('[DEBUG] Entered password:', adminCredentials.password)
 
     // Admin credentials check
-    if (adminCredentials.username === 'Synatic' && adminCredentials.password === 'Freedom!oul19922323') {
+    // Normalize input for comparison
+    const inputUsername = adminCredentials.username.trim().toLowerCase();
+    const inputPassword = adminCredentials.password.trim();
+    const validUsername = 'synatic';
+    const validPassword = 'Freedom!oul19922323';
+    if (inputUsername === validUsername && inputPassword === validPassword) {
       setIsAdminAuthenticated(true)
       
       // Set optimized admin session
