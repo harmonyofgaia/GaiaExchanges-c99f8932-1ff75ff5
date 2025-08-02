@@ -30,6 +30,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
   const [attempts, setAttempts] = useState(0)
   const [ipAllowed, setIpAllowed] = useState(true)
   const [clientIP, setClientIP] = useState('')
+  const [manualLocalIP, setManualLocalIP] = useState('')
   const allowedIPs = ['192.168.1.121'] // Add more as needed
   const maxAttempts = 3
 
@@ -37,8 +38,11 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
     // Check client IP on mount
     getPublicIP().then(ip => {
       setClientIP(ip || '')
+      // Only block if neither public nor manual local IP is allowed
       if (ip && !allowedIPs.includes(ip)) {
         setIpAllowed(false)
+      } else if (ip && allowedIPs.includes(ip)) {
+        setIpAllowed(true)
       }
     })
     // Check for existing admin session (both new and old formats)
@@ -80,8 +84,10 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
 
   const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!ipAllowed) {
-      alert(`⛔ IP Address Not Whitelisted. Your IP: ${clientIP}`)
+    // Allow if either public IP or manual local IP is in allowed list
+    const ipOk = allowedIPs.includes(clientIP) || (manualLocalIP && allowedIPs.includes(manualLocalIP))
+    if (!ipOk) {
+      alert(`⛔ IP Address Not Whitelisted. Your Public IP: ${clientIP} | Manual Local IP: ${manualLocalIP}`)
       return
     }
     if (attempts >= maxAttempts) {
@@ -173,7 +179,8 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
             <p className="text-red-300 text-sm mt-2">
               Ultra-Secure Admin Portal • Quantum Protection Active
             </p>
-            <div className="text-xs text-red-300 mt-2">Your IP: <code>{clientIP}</code></div>
+            <div className="text-xs text-red-300 mt-2">Your Public IP: <code>{clientIP}</code></div>
+            <div className="text-xs text-red-300 mt-1">Manual Local IP: <code>{manualLocalIP}</code></div>
             {!ipAllowed && (
               <div className="text-red-500 font-bold mt-2">⛔ IP Address Not Whitelisted</div>
             )}
@@ -194,6 +201,17 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
             </div>
           ) : (
             <form onSubmit={handleAdminLogin} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="manual-local-ip" className="text-red-300">Manual Local IP (if needed)</Label>
+                <Input
+                  id="manual-local-ip"
+                  type="text"
+                  value={manualLocalIP}
+                  onChange={e => setManualLocalIP(e.target.value)}
+                  className="bg-black/40 border-red-500/30 text-red-400"
+                  placeholder="Enter your local IP if public IP is not allowed..."
+                />
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="admin-username" className="text-red-300">Admin Username</Label>
                 <Input
