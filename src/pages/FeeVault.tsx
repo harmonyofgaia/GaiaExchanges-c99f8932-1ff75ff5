@@ -216,7 +216,7 @@ const FeeVault = () => {
                     <Progress value={destination.percentage_allocation} className="h-2" />
                     {destination.wallet_address && (
                       <div className="text-xs text-muted-foreground">
-                        Wallet: {destination.wallet_address.slice(0, 16)}...
+                        Wallet: {GAIA_TOKEN.COMMUNITY_VAULT_WALLET.slice(0, 16)}...
                       </div>
                     )}
                   </div>

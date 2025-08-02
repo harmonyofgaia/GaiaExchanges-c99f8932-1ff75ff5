@@ -377,7 +377,7 @@ export default function VaultSystem() {
               <div className="text-center p-4 bg-purple-900/20 rounded-lg">
                 <div className="text-purple-400 font-bold mb-2">Wallet Address</div>
                 <div className="text-white font-mono text-sm break-all">
-                  {GAIA_TOKEN.WALLET_ADDRESS}
+                  {GAIA_TOKEN.COMMUNITY_VAULT_WALLET}
                 </div>
               </div>
               <div className="text-center p-4 bg-blue-900/20 rounded-lg">

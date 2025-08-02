@@ -61,7 +61,7 @@ const Reinvestments = () => {
       description: "Personal project: Restoring coral reefs with balanced underwater audio signals to attract marine life and recover ecosystems",
       burnContribution: 5, // 5% of all burns go here
       category: "Marine Conservation",
-      walletAddress: GAIA_TOKEN.WALLET_ADDRESS
+      walletAddress: GAIA_TOKEN.GREEN_INVESTMENTS_WALLET
     },
     {
       id: 2,
