@@ -30,7 +30,7 @@ export function GreenProjectWalletManager() {
       id: '1',
       name: '🌍 Global Reforestation Initiative',
       description: 'Tree planting and forest restoration worldwide',
-      wallet_address: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+      wallet_address: GAIA_TOKEN.GREEN_INVESTMENTS_WALLET,
       allocation_percentage: 25,
       total_received: 12547.89,
       project_status: 'active'
