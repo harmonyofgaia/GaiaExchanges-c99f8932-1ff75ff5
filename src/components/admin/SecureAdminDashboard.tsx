@@ -46,9 +46,6 @@ import { BackgroundTacticalSystems } from './BackgroundTacticalSystems'
 import { MultiExchangeIntegration } from '@/components/MultiExchangeIntegration'
 import { InvestorScoutingSystem } from '@/components/InvestorScoutingSystem'
 import { MasterUpgradePlan } from './MasterUpgradePlan'
-import { BundledAdminPages } from './BundledAdminPages'
-import { FarmerEcosystem } from './FarmerEcosystem'
-import { PDFTransactionTracker } from './PDFTransactionTracker'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -258,24 +255,6 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">Master Plan</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="bundled-admin" className="p-2 text-center bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border border-cyan-500/30">
-            <div className="flex flex-col items-center">
-              <span>👑</span>
-              <span className="hidden sm:inline">Admin Hub</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="farmer-ecosystem" className="p-2 text-center bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30">
-            <div className="flex flex-col items-center">
-              <span>🌱</span>
-              <span className="hidden sm:inline">Farmer System</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="pdf-tracker" className="p-2 text-center bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/30">
-            <div className="flex flex-col items-center">
-              <span>📊</span>
-              <span className="hidden sm:inline">PDF Tracker</span>
-            </div>
-          </TabsTrigger>
           </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
@@ -404,18 +383,6 @@ export function SecureAdminDashboard() {
 
         <TabsContent value="master-plan" className="space-y-6">
           <MasterUpgradePlan />
-        </TabsContent>
-
-        <TabsContent value="bundled-admin" className="space-y-6">
-          <BundledAdminPages />
-        </TabsContent>
-
-        <TabsContent value="farmer-ecosystem" className="space-y-6">
-          <FarmerEcosystem />
-        </TabsContent>
-
-        <TabsContent value="pdf-tracker" className="space-y-6">
-          <PDFTransactionTracker />
         </TabsContent>
       </Tabs>
     </div>
