@@ -1,8 +1,12 @@
-﻿{
-  "name": "vite_react_shadcn_ts",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+
+
+
+
+{
+  "name": "gaiaexchanges",
+  "version": "1.0.0",
+  "description": "Restored minimal package.json for GaiaExchanges",
+  "main": "index.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,16 +14,6 @@
     "build:vercel": "vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "typedoc": "typedoc",
-    "test:e2e": "playwright test",
-    "test:integration": "vitest run --dir src/test/integration",
-    "coverage": "vitest run --coverage",
-    "lighthouse": "lighthouse http://localhost:4173 --output html --output-path ./lighthouse-report.html --chrome-flags='--headless'",
-    "sentry:wizard": "npx @sentry/wizard@latest -i react",
-    "i18n:extract": "i18next 'src/**/*.{ts,tsx}' --output locales/en/translation.json",
-    "pwa:build": "vite build && workbox injectManifest workbox-config.js",
     "preview": "vite preview",
     "install:legacy": "npm install --legacy-peer-deps",
     "postinstall": "echo 'Note: If you encounter peer dependency conflicts, run: npm run install:legacy'",
@@ -33,10 +27,9 @@
     "deploy:auto": "./scripts/pre-deploy-check.sh && ./scripts/deploy.sh",
     "deploy:doctor": "./scripts/deployment-doctor.sh",
     "deploy:validate": "./scripts/post-deploy-validate.sh",
-    "deploy:complete": "npm run deploy:doctor && npm run deploy:auto && npm run deploy:validate",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "deploy:complete": "npm run deploy:doctor && npm run deploy:auto && npm run deploy:validate"
   },
+  "license": "MIT",
   "dependencies": {
     "@capacitor/android": "^7.4.0",
     "@capacitor/cli": "^7.4.0",
@@ -98,17 +91,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "prettier": "^3.3.2",
-    "@storybook/react": "^7.6.0",
-    "@storybook/addon-essentials": "^7.6.0",
-    "typedoc": "^0.25.0",
-    "playwright": "^1.44.0",
-    "lighthouse": "^12.10.0",
-    "@sentry/react": "^7.100.0",
-    "@sentry/webpack-plugin": "^2.17.0",
-    "i18next": "^23.10.0",
-    "react-i18next": "^13.2.0",
-    "workbox-cli": "^7.0.0"
     "@eslint/js": "^9.9.0",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.5.5",
@@ -128,3 +110,4 @@
     "vite": "^7.0.6"
   }
 }
+
