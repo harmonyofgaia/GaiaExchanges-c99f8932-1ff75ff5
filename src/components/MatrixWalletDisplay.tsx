@@ -15,7 +15,13 @@ interface MatrixChar {
   opacity: number
 }
 
-export function MatrixWalletDisplay() {
+
+interface MatrixWalletDisplayProps {
+  walletAddress: string
+  label: string
+}
+
+export function MatrixWalletDisplay({ walletAddress, label }: MatrixWalletDisplayProps) {
   const [showFullAddress, setShowFullAddress] = useState(false)
   const [matrixChars, setMatrixChars] = useState<MatrixChar[]>([])
   const [isAnimating, setIsAnimating] = useState(true)
@@ -52,9 +58,9 @@ export function MatrixWalletDisplay() {
   }, [isAnimating])
 
   const copyWalletAddress = () => {
-    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
+    navigator.clipboard.writeText(walletAddress)
     toast.success('Wallet Address Copied!', {
-      description: 'GAiA official wallet address copied to clipboard',
+      description: `${label} copied to clipboard`,
       duration: 3000
     })
   }
@@ -118,11 +124,11 @@ export function MatrixWalletDisplay() {
       </CardHeader>
 
       <CardContent className="relative z-10 space-y-6">
-        {/* Official Wallet Address */}
+        {/* Wallet Address Display */}
         <div className="p-4 bg-black/40 rounded-lg border border-green-500/30">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <span className="text-green-400 font-bold">Official GAiA Wallet:</span>
+              <span className="text-green-400 font-bold">{label}</span>
               <Badge className="bg-green-600 text-white">OFFICIAL</Badge>
             </div>
             <div className="flex gap-2">
@@ -145,7 +151,7 @@ export function MatrixWalletDisplay() {
             </div>
           </div>
           <div className="font-mono text-green-300 text-sm bg-black/30 p-2 rounded border border-green-500/20">
-            {formatAddress(GAIA_TOKEN.WALLET_ADDRESS)}
+            {formatAddress(walletAddress)}
           </div>
         </div>
 

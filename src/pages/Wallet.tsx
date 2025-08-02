@@ -48,15 +48,17 @@ const WalletPage = () => {
 
           {/* Matrix Wallet Displays - 4 Side by Side */}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+
             {/* Matrix Wallet 1 - Official GAiA */}
             <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-black">
               <CardHeader>
                 <CardTitle className="text-green-400 text-center">🌍 OFFICIAL GAIA MATRIX</CardTitle>
               </CardHeader>
               <CardContent>
-                <MatrixWalletDisplay />
+                <MatrixWalletDisplay walletAddress={GAIA_TOKEN.WALLET_ADDRESS} label="Main Community Wallet" />
               </CardContent>
             </Card>
+
 
             {/* Matrix Wallet 2 - Green Investments */}
             <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-black">
@@ -64,31 +66,10 @@ const WalletPage = () => {
                 <CardTitle className="text-green-400 text-center">🌱 GREEN INVESTMENTS MATRIX</CardTitle>
               </CardHeader>
               <CardContent>
-                <MatrixWalletDisplay />
-                <div className="space-y-4 mt-4">
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-green-400 mb-2">GREEN INVESTMENTS WALLET</div>
-                    <div className="font-mono text-sm bg-green-900/20 p-2 rounded border border-green-500/20">
-                      {GAIA_TOKEN.GREEN_INVESTMENTS_WALLET}
-                    </div>
-                    <Button 
-                      onClick={() => {
-                        navigator.clipboard.writeText(GAIA_TOKEN.GREEN_INVESTMENTS_WALLET)
-                        toast.success('Green Investments Address Copied!')
-                      }}
-                      className="mt-2 bg-green-600 hover:bg-green-700"
-                      size="sm"
-                    >
-                      <Copy className="h-3 w-3 mr-1" />
-                      Copy Address
-                    </Button>
-                  </div>
-                  <div className="text-center text-sm text-green-300">
-                    Real-time environmental project investments with full transparency
-                  </div>
-                </div>
+                <MatrixWalletDisplay walletAddress={GAIA_TOKEN.GREEN_INVESTMENTS_WALLET} label="Green Investments Wallet" />
               </CardContent>
             </Card>
+
 
             {/* Matrix Wallet 3 - Community Vault */}
             <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black">
@@ -96,31 +77,10 @@ const WalletPage = () => {
                 <CardTitle className="text-purple-400 text-center">🏦 COMMUNITY VAULT MATRIX</CardTitle>
               </CardHeader>
               <CardContent>
-                <MatrixWalletDisplay />
-                <div className="space-y-4 mt-4">
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-purple-400 mb-2">COMMUNITY VAULT</div>
-                    <div className="font-mono text-sm bg-purple-900/20 p-2 rounded border border-purple-500/20">
-                      {GAIA_TOKEN.COMMUNITY_VAULT_WALLET}
-                    </div>
-                    <Button 
-                      onClick={() => {
-                        navigator.clipboard.writeText(GAIA_TOKEN.COMMUNITY_VAULT_WALLET)
-                        toast.success('Community Vault Address Copied!')
-                      }}
-                      className="mt-2 bg-purple-600 hover:bg-purple-700"
-                      size="sm"
-                    >
-                      <Copy className="h-3 w-3 mr-1" />
-                      Copy Address
-                    </Button>
-                  </div>
-                  <div className="text-center text-sm text-purple-300">
-                    Secure community investments with instant transparency
-                  </div>
-                </div>
+                <MatrixWalletDisplay walletAddress={GAIA_TOKEN.COMMUNITY_VAULT_WALLET} label="Community Vault Wallet" />
               </CardContent>
             </Card>
+
 
             {/* Matrix Wallet 4 - Animal Welfare */}
             <Card className="border-orange-500/30 bg-gradient-to-br from-orange-900/30 to-black">
@@ -128,29 +88,7 @@ const WalletPage = () => {
                 <CardTitle className="text-orange-400 text-center">🐾 ANIMAL WELFARE MATRIX</CardTitle>
               </CardHeader>
               <CardContent>
-                <MatrixWalletDisplay />
-                <div className="space-y-4 mt-4">
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-orange-400 mb-2">ANIMAL WELFARE WALLET</div>
-                    <div className="font-mono text-sm bg-orange-900/20 p-2 rounded border border-orange-500/20">
-                      {GAIA_TOKEN.ANIMAL_WELFARE_WALLET}
-                    </div>
-                    <Button 
-                      onClick={() => {
-                        navigator.clipboard.writeText(GAIA_TOKEN.ANIMAL_WELFARE_WALLET)
-                        toast.success('Animal Welfare Address Copied!')
-                      }}
-                      className="mt-2 bg-orange-600 hover:bg-orange-700"
-                      size="sm"
-                    >
-                      <Copy className="h-3 w-3 mr-1" />
-                      Copy Address
-                    </Button>
-                  </div>
-                  <div className="text-center text-sm text-orange-300">
-                    Direct animal protection funding with complete transparency
-                  </div>
-                </div>
+                <MatrixWalletDisplay walletAddress={GAIA_TOKEN.ANIMAL_WELFARE_WALLET} label="Animal Welfare Wallet" />
               </CardContent>
             </Card>
           </div>
