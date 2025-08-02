@@ -68,7 +68,7 @@ export function CoinCrafterIllustration() {
               <div>
                 <div className="text-green-300 font-medium">Official GAiA Wallet:</div>
                 <div className="text-green-400 font-mono text-xs break-all">
-                  5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
+                  {GAIA_TOKEN.WALLET_ADDRESS}
                 </div>
               </div>
               <div>

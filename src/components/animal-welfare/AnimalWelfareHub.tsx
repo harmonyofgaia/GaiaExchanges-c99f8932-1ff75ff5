@@ -53,7 +53,7 @@ export function AnimalWelfareHub() {
       emoji: '🐅',
       currentLocation: 'Wildlife Sanctuary, India',
       cageType: 'Rehabilitation Enclosure',
-      walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+      walletAddress: GAIA_TOKEN.ANIMAL_WELFARE_WALLET,
       nftTokenId: 'MAYA_TIGER_001',
       fundingGoal: 25000,
       currentFunding: 18750,

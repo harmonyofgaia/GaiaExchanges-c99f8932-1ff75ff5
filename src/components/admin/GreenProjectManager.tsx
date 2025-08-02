@@ -156,7 +156,7 @@ export function GreenProjectManager() {
                   />
                   <select
                     value={newProject.category}
-                    onChange={(e) => setNewProject(prev => ({ ...prev, category: e.target.value as any }))}
+                    onChange={(e) => setNewProject(prev => ({ ...prev, category: e.target.value as string }))}
                     className="px-3 py-2 bg-background border border-input rounded-md"
                   >
                     <option value="trees">Forest/Trees</option>

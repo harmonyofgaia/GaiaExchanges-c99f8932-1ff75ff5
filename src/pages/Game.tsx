@@ -5,7 +5,6 @@ import { CreativeGameEngine } from '@/components/games/CreativeGameEngine'
 import { SnakeToWormsIntegration } from '@/components/games/SnakeToWormsIntegration'
 import { InvisibleAttachmentSystem } from '@/components/security/InvisibleAttachmentSystem'
 import { InvisibleSecurityCore } from '@/components/security/InvisibleSecurityCore'
-import { InvisibleAdminProtection } from '@/components/security/InvisibleAdminProtection'
 import { Invisible4StepVerification } from '@/components/security/Invisible4StepVerification'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -17,7 +16,6 @@ const Game = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20 p-6">
       <InvisibleAttachmentSystem />
       <InvisibleSecurityCore />
-      <InvisibleAdminProtection />
       <Invisible4StepVerification />
       
       <div className="container mx-auto space-y-6">

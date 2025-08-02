@@ -19,7 +19,7 @@ export function PumpFunPromotion() {
 🔥 Get in before the massive pump - Last chance!
 ⚡ Flying high to save the world while making you rich
 
-Contract: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
+Contract: {GAIA_TOKEN.WALLET_ADDRESS}
 
 #GAiAToken #PumpFun #CryptoRevolution #BabyBoom #ToTheMoon #EcoCrypto
 
@@ -45,7 +45,7 @@ Why GAiA will moon:
 ✅ Gaming integration (play to earn)
 ✅ Community-driven (true democracy)
 
-Contract: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
+Contract: {GAIA_TOKEN.WALLET_ADDRESS}
 
 #LastChance #GAiAToken #PumpItUp #ToTheMoon`,
 
@@ -69,7 +69,7 @@ Get your bag before the masses wake up!
 
 This will be the last time you see these prices!
 
-Contract: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
+Contract: {GAIA_TOKEN.WALLET_ADDRESS}
 
 #FinalCall #GAiAToken #CryptoRevolution #LastChance`
   ]

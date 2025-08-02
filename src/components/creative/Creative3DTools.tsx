@@ -27,7 +27,7 @@ export function Creative3DTools() {
   const [brushSize, setBrushSize] = useState([5])
   const [rotationSpeed, setRotationSpeed] = useState([1])
   const [animationStyle, setAnimationStyle] = useState('float')
-  const [scene3D, setScene3D] = useState<any>(null)
+  const [scene3D, setScene3D] = useState<unknown>(null)
 
   const tools3D = [
     { id: 'cube', name: '3D Cube', icon: Box, color: 'from-blue-600 to-cyan-600' },

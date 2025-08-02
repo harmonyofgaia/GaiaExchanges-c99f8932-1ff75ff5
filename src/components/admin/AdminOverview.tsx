@@ -110,7 +110,7 @@ export function AdminOverview() {
               <div>
                 <div className="text-blue-400 font-bold">Wallet Address:</div>
                 <div className="font-mono text-xs bg-black/20 p-2 rounded mt-1">
-                  5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
+                  {GAIA_TOKEN.WALLET_ADDRESS}
                 </div>
               </div>
             </div>

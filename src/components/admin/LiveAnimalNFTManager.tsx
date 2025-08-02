@@ -59,7 +59,7 @@ export function LiveAnimalNFTManager() {
         location: 'Alaska Wildlife Reserve',
         status: 'healthy',
         nftGenerated: true,
-        walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+        walletAddress: GAIA_TOKEN.ANIMAL_WELFARE_WALLET,
         goalAmount: 2500,
         currentAmount: 1847,
         stats: {
@@ -78,7 +78,7 @@ export function LiveAnimalNFTManager() {
         location: 'Yellowstone National Park',
         status: 'protected',
         nftGenerated: true,
-        walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh',
+        walletAddress: GAIA_TOKEN.ANIMAL_WELFARE_WALLET,
         goalAmount: 3000,
         currentAmount: 2156,
         stats: {
@@ -119,7 +119,7 @@ export function LiveAnimalNFTManager() {
         ? { 
             ...animal, 
             nftGenerated: true,
-            walletAddress: '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
+            walletAddress: GAIA_TOKEN.ANIMAL_WELFARE_WALLET
           }
         : animal
     ))
