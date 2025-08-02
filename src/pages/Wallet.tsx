@@ -28,10 +28,7 @@ const WalletPage = () => {
     window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
   }
 
-  // Matrix wallet addresses as requested
-  const greenInvestmentsWallet = 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7'
-  const communityVault = '6DAj3dhtwBDv3HY3UYw1ykjHGRLTU7yMKQmCn8bNoTpW'
-  const animalWelfareWallet = 'GRboWoafk4CYZyiuFtB84wT8DCswmhQtYthpGg31yJEf'
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20">
@@ -72,11 +69,11 @@ const WalletPage = () => {
                   <div className="text-center">
                     <div className="text-lg font-bold text-green-400 mb-2">GREEN INVESTMENTS WALLET</div>
                     <div className="font-mono text-sm bg-green-900/20 p-2 rounded border border-green-500/20">
-                      {greenInvestmentsWallet}
+                      {GAIA_TOKEN.GREEN_INVESTMENTS_WALLET}
                     </div>
                     <Button 
                       onClick={() => {
-                        navigator.clipboard.writeText(greenInvestmentsWallet)
+                        navigator.clipboard.writeText(GAIA_TOKEN.GREEN_INVESTMENTS_WALLET)
                         toast.success('Green Investments Address Copied!')
                       }}
                       className="mt-2 bg-green-600 hover:bg-green-700"
@@ -104,11 +101,11 @@ const WalletPage = () => {
                   <div className="text-center">
                     <div className="text-lg font-bold text-purple-400 mb-2">COMMUNITY VAULT</div>
                     <div className="font-mono text-sm bg-purple-900/20 p-2 rounded border border-purple-500/20">
-                      {communityVault}
+                      {GAIA_TOKEN.COMMUNITY_VAULT_WALLET}
                     </div>
                     <Button 
                       onClick={() => {
-                        navigator.clipboard.writeText(communityVault)
+                        navigator.clipboard.writeText(GAIA_TOKEN.COMMUNITY_VAULT_WALLET)
                         toast.success('Community Vault Address Copied!')
                       }}
                       className="mt-2 bg-purple-600 hover:bg-purple-700"
@@ -136,11 +133,11 @@ const WalletPage = () => {
                   <div className="text-center">
                     <div className="text-lg font-bold text-orange-400 mb-2">ANIMAL WELFARE WALLET</div>
                     <div className="font-mono text-sm bg-orange-900/20 p-2 rounded border border-orange-500/20">
-                      {animalWelfareWallet}
+                      {GAIA_TOKEN.ANIMAL_WELFARE_WALLET}
                     </div>
                     <Button 
                       onClick={() => {
-                        navigator.clipboard.writeText(animalWelfareWallet)
+                        navigator.clipboard.writeText(GAIA_TOKEN.ANIMAL_WELFARE_WALLET)
                         toast.success('Animal Welfare Address Copied!')
                       }}
                       className="mt-2 bg-orange-600 hover:bg-orange-700"
