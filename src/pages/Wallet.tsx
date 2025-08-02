@@ -171,32 +171,69 @@ const WalletPage = () => {
               <CardTitle className="text-green-400">🌍 Official GAiA Wallet Connection</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+              {/* All Official Wallet Addresses */}
+              {/* Main GAiA Wallet */}
+              <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mb-2">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-blue-400 font-bold">Official GAiA Wallet Address:</span>
-                  <div className="flex gap-2">
-                    <Button 
-                      onClick={copyWalletAddress}
-                      variant="outline" 
-                      size="sm"
-                      className="border-blue-500/30 text-blue-400"
-                    >
-                      <Copy className="h-3 w-3 mr-1" />
-                      Copy
-                    </Button>
-                    <Button 
-                      onClick={openPumpFun}
-                      variant="outline" 
-                      size="sm"
-                      className="border-purple-500/30 text-purple-400"
-                    >
-                      <ExternalLink className="h-3 w-3 mr-1" />
-                      Pump.fun
-                    </Button>
-                  </div>
+                  <span className="text-blue-400 font-bold">Main Community Wallet:</span>
+                  <Button 
+                    onClick={() => {navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS); toast.success('Main Community Wallet Address Copied!')}}
+                    variant="outline" 
+                    className="border-blue-500/30 text-blue-400"
+                  >
+                    <Copy className="h-3 w-3 mr-1" /> Copy
+                  </Button>
                 </div>
                 <code className="text-blue-300 font-mono text-sm break-all block bg-blue-900/10 p-2 rounded">
                   {GAIA_TOKEN.WALLET_ADDRESS}
+                </code>
+              </div>
+              {/* Green Investments Wallet */}
+              <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 mb-2">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-green-400 font-bold">Green Investments Wallet:</span>
+                  <Button 
+                    onClick={() => {navigator.clipboard.writeText(GAIA_TOKEN.GREEN_INVESTMENTS_WALLET); toast.success('Green Investments Wallet Address Copied!')}}
+                    variant="outline" 
+                    className="border-green-500/30 text-green-400"
+                  >
+                    <Copy className="h-3 w-3 mr-1" /> Copy
+                  </Button>
+                </div>
+                <code className="text-green-300 font-mono text-sm break-all block bg-green-900/10 p-2 rounded">
+                  {GAIA_TOKEN.GREEN_INVESTMENTS_WALLET}
+                </code>
+              </div>
+              {/* Community Vault Wallet */}
+              <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4 mb-2">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-purple-400 font-bold">Community Vault Wallet:</span>
+                  <Button 
+                    onClick={() => {navigator.clipboard.writeText(GAIA_TOKEN.COMMUNITY_VAULT_WALLET); toast.success('Community Vault Wallet Address Copied!')}}
+                    variant="outline" 
+                    className="border-purple-500/30 text-purple-400"
+                  >
+                    <Copy className="h-3 w-3 mr-1" /> Copy
+                  </Button>
+                </div>
+                <code className="text-purple-300 font-mono text-sm break-all block bg-purple-900/10 p-2 rounded">
+                  {GAIA_TOKEN.COMMUNITY_VAULT_WALLET}
+                </code>
+              </div>
+              {/* Animal Welfare Wallet */}
+              <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-orange-400 font-bold">Animal Welfare Wallet:</span>
+                  <Button 
+                    onClick={() => {navigator.clipboard.writeText(GAIA_TOKEN.ANIMAL_WELFARE_WALLET); toast.success('Animal Welfare Wallet Address Copied!')}}
+                    variant="outline" 
+                    className="border-orange-500/30 text-orange-400"
+                  >
+                    <Copy className="h-3 w-3 mr-1" /> Copy
+                  </Button>
+                </div>
+                <code className="text-orange-300 font-mono text-sm break-all block bg-orange-900/10 p-2 rounded">
+                  {GAIA_TOKEN.ANIMAL_WELFARE_WALLET}
                 </code>
               </div>
 
