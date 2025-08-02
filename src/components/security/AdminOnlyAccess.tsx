@@ -212,6 +212,11 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
                   Failed attempts: {attempts}/{maxAttempts}
                 </div>
               )}
+              {/* DEBUG: Show entered credentials for troubleshooting */}
+              <div className="mt-4 p-2 bg-black/30 border border-red-500/20 rounded text-xs text-red-300">
+                <div><b>DEBUG:</b> Entered Username: <code>{adminCredentials.username}</code></div>
+                <div><b>DEBUG:</b> Entered Password: <code>{adminCredentials.password}</code></div>
+              </div>
             </form>
           )}
         </CardContent>
