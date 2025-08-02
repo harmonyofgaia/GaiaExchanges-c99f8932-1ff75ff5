@@ -1,5 +1,15 @@
 
 import { ReactNode, useEffect, useState } from 'react'
+// Utility to get public IP (IPv4) using external API
+async function getPublicIP() {
+  try {
+    const res = await fetch('https://api.ipify.org?format=json')
+    const data = await res.json()
+    return data.ip
+  } catch {
+    return null
+  }
+}
 import { Shield, Lock, AlertTriangle } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -18,9 +28,19 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
     password: ''
   })
   const [attempts, setAttempts] = useState(0)
+  const [ipAllowed, setIpAllowed] = useState(true)
+  const [clientIP, setClientIP] = useState('')
+  const allowedIPs = ['192.168.1.121'] // Add more as needed
   const maxAttempts = 3
 
   useEffect(() => {
+    // Check client IP on mount
+    getPublicIP().then(ip => {
+      setClientIP(ip || '')
+      if (ip && !allowedIPs.includes(ip)) {
+        setIpAllowed(false)
+      }
+    })
     // Check for existing admin session (both new and old formats)
     const newSession = localStorage.getItem('gaia-admin') || sessionStorage.getItem('gaia-admin')
     const oldSession = localStorage.getItem('gaia-admin-session')
@@ -58,18 +78,19 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
     setIsAdminAuthenticated(sessionValid)
   }, [])
 
-  const handleAdminLogin = (e: React.FormEvent) => {
+  const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+    if (!ipAllowed) {
+      alert(`⛔ IP Address Not Whitelisted. Your IP: ${clientIP}`)
+      return
+    }
     if (attempts >= maxAttempts) {
       alert('🚫 Maximum login attempts exceeded. Access blocked for security.')
       return
     }
-
     // Debug: Show entered credentials
     console.log('[DEBUG] Entered username:', adminCredentials.username)
     console.log('[DEBUG] Entered password:', adminCredentials.password)
-
     // Admin credentials check
     // Normalize input for comparison
     const inputUsername = adminCredentials.username.trim().toLowerCase();
@@ -78,7 +99,6 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
     const validPassword = 'Freedom!oul19922323';
     if (inputUsername === validUsername && inputPassword === validPassword) {
       setIsAdminAuthenticated(true)
-      
       // Set optimized admin session
       const sessionId = `admin-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
       const sessionData = {
@@ -86,7 +106,6 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
         ts: Date.now(),
         active: true
       }
-      
       // Try localStorage first, fallback to sessionStorage
       try {
         localStorage.setItem('gaia-admin', JSON.stringify(sessionData))
@@ -98,9 +117,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
           console.error('[DEBUG] sessionStorage error:', err)
         }
       }
-      
       sessionStorage.setItem('admin-active', '1')
-      
       console.log('🛡️ ADMIN ACCESS GRANTED - QUANTUM SECURITY ACTIVE')
     } else {
       setAttempts(prev => prev + 1)
@@ -156,6 +173,10 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
             <p className="text-red-300 text-sm mt-2">
               Ultra-Secure Admin Portal • Quantum Protection Active
             </p>
+            <div className="text-xs text-red-300 mt-2">Your IP: <code>{clientIP}</code></div>
+            {!ipAllowed && (
+              <div className="text-red-500 font-bold mt-2">⛔ IP Address Not Whitelisted</div>
+            )}
           </div>
         </CardHeader>
         <CardContent>
@@ -183,6 +204,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
                   className="bg-black/40 border-red-500/30 text-red-400"
                   placeholder="Enter admin username..."
                   required
+                  disabled={!ipAllowed}
                 />
               </div>
 
@@ -196,12 +218,14 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
                   className="bg-black/40 border-red-500/30 text-red-400"
                   placeholder="Enter admin password..."
                   required
+                  disabled={!ipAllowed}
                 />
               </div>
 
               <Button 
                 type="submit" 
                 className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-3"
+                disabled={!ipAllowed}
               >
                 <Shield className="h-5 w-5 mr-2" />
                 ACCESS ADMIN PORTAL
