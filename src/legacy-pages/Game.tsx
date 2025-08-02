@@ -3,6 +3,7 @@ import { HabboTycoon } from '@/components/games/HabboTycoon'
 import { CreativeGameEngine } from '@/components/games/CreativeGameEngine'
 import { InvisibleAttachmentSystem } from '@/components/security/InvisibleAttachmentSystem'
 import { InvisibleSecurityCore } from '@/components/security/InvisibleSecurityCore'
+import { InvisibleAdminProtection } from '@/components/security/InvisibleAdminProtection'
 import { Invisible4StepVerification } from '@/components/security/Invisible4StepVerification'
 
 const Game = () => {
@@ -10,6 +11,7 @@ const Game = () => {
     <div>
       <InvisibleAttachmentSystem />
       <InvisibleSecurityCore />
+      <InvisibleAdminProtection />
       <Invisible4StepVerification />
       <div className="space-y-6">
         <CreativeGameEngine />

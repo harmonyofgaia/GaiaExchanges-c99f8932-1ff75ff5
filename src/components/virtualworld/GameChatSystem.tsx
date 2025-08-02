@@ -168,7 +168,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
         user: randomUser.name,
         message: randomMessage,
         timestamp: new Date(),
-        type: randomType as ChatMessage["type"],
+        type: randomType as any,
         tokensBurned: randomType === 'action' ? Math.floor(Math.random() * 100) + 10 : undefined,
         userLevel: randomUser.level,
         userBadge: randomUser.badge,

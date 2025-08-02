@@ -31,7 +31,7 @@ export const migrateAddress = async (oldAddress: string, newAddress: string): Pr
 }
 
 // Function to fetch migration history
-export const fetchMigrationHistory = async (): Promise<unknown[]> => {
+export const fetchMigrationHistory = async (): Promise<any[]> => {
   try {
     // Mock implementation - return empty array since we don't have the table
     console.log('Fetching migration history')

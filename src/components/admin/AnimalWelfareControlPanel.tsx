@@ -69,6 +69,12 @@ interface FundingMetrics {
 }
 
 interface CommunityVaultStats {
+  legacyProducts: {
+    blackberryClassic: { available: number; gifted: number }
+    oldtimerWatch: { available: number; gifted: number }
+    quantumHarmonyPod: { available: number; gifted: number }
+    innovationToolkit: { available: number; gifted: number }
+  }
   activeEvents: number
   totalGifts: number
   communityEngagement: number
@@ -82,6 +88,12 @@ function AnimalWelfareControlPanel() {
     combinedImpact: { animalsRescued: 330, activeRescues: 528, awaitingRescue: 858 }
   })
   const [vaultStats, setVaultStats] = useState<CommunityVaultStats>({
+    legacyProducts: {
+      blackberryClassic: { available: 25, gifted: 147 },
+      oldtimerWatch: { available: 89, gifted: 203 },
+      quantumHarmonyPod: { available: 12, gifted: 78 },
+      innovationToolkit: { available: 34, gifted: 156 }
+    },
     activeEvents: 3,
     totalGifts: 584,
     communityEngagement: 94
@@ -98,7 +110,7 @@ function AnimalWelfareControlPanel() {
         name: 'Luna',
         species: 'Siberian Tiger',
         location: 'Remote Forest, Siberia',
-        walletAddress: GAIA_TOKEN.ANIMAL_WELFARE_WALLET,
+        walletAddress: '0x742d35CC6Bb53D8d01F5eF3F',
         urgencyLevel: 9,
         emotionalState: { sadness: 85, hope: 32, fear: 78, trust: 15 },
         rescueProgress: 45,
@@ -111,7 +123,7 @@ function AnimalWelfareControlPanel() {
         name: 'Sunny',
         species: 'Golden Eagle',
         location: 'Mountain Range, Colorado',
-        walletAddress: GAIA_TOKEN.ANIMAL_WELFARE_WALLET,
+        walletAddress: '0x0000000000000000000000000000000000000000',
         urgencyLevel: 7,
         emotionalState: { sadness: 60, hope: 55, fear: 45, trust: 40 },
         rescueProgress: 72,
@@ -124,7 +136,7 @@ function AnimalWelfareControlPanel() {
         name: 'Freedom',
         species: 'African Elephant',
         location: 'Wildlife Reserve, Kenya',
-        walletAddress: GAIA_TOKEN.ANIMAL_WELFARE_WALLET,
+        walletAddress: '0xa1b2c3d4e5f6789012ab',
         urgencyLevel: 8,
         emotionalState: { sadness: 72, hope: 48, fear: 65, trust: 28 },
         rescueProgress: 23,
@@ -453,11 +465,87 @@ function AnimalWelfareControlPanel() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-orange-400">
                 <Gift className="h-5 w-5" />
-                Community Vault Administration
+                Community Vault & Legacy Products Administration
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Removed legacy product cards */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <Card className="border-gray-700">
+                  <CardContent className="p-3 text-center">
+                    <h5 className="font-medium text-sm">GAiA Blackberry Classic</h5>
+                    <p className="text-xs text-muted-foreground mb-2">$150 (orig. $599)</p>
+                    <div className="text-xs space-y-1">
+                      <div>Available: {vaultStats.legacyProducts.blackberryClassic.available}</div>
+                      <div>Gifted: {vaultStats.legacyProducts.blackberryClassic.gifted}</div>
+                    </div>
+                    <Button 
+                      size="sm" 
+                      className="w-full mt-2" 
+                      variant="outline"
+                      onClick={() => handleVaultGiftApproval('Blackberry Classic')}
+                    >
+                      Approve Gifts
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-gray-700">
+                  <CardContent className="p-3 text-center">
+                    <h5 className="font-medium text-sm">GAiA Oldtimer Watch</h5>
+                    <p className="text-xs text-muted-foreground mb-2">$89 (orig. $349)</p>
+                    <div className="text-xs space-y-1">
+                      <div>Available: {vaultStats.legacyProducts.oldtimerWatch.available}</div>
+                      <div>Gifted: {vaultStats.legacyProducts.oldtimerWatch.gifted}</div>
+                    </div>
+                    <Button 
+                      size="sm" 
+                      className="w-full mt-2" 
+                      variant="outline"
+                      onClick={() => handleVaultGiftApproval('Oldtimer Watch')}
+                    >
+                      Approve Gifts
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-gray-700">
+                  <CardContent className="p-3 text-center">
+                    <h5 className="font-medium text-sm">Quantum Harmony Pod</h5>
+                    <p className="text-xs text-muted-foreground mb-2">$325 (orig. $1299)</p>
+                    <div className="text-xs space-y-1">
+                      <div>Available: {vaultStats.legacyProducts.quantumHarmonyPod.available}</div>
+                      <div>Gifted: {vaultStats.legacyProducts.quantumHarmonyPod.gifted}</div>
+                    </div>
+                    <Button 
+                      size="sm" 
+                      className="w-full mt-2" 
+                      variant="outline"
+                      onClick={() => handleVaultGiftApproval('Quantum Harmony Pod')}
+                    >
+                      Approve Gifts
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-gray-700">
+                  <CardContent className="p-3 text-center">
+                    <h5 className="font-medium text-sm">Innovation Toolkit</h5>
+                    <p className="text-xs text-muted-foreground mb-2">$199 (orig. $799)</p>
+                    <div className="text-xs space-y-1">
+                      <div>Available: {vaultStats.legacyProducts.innovationToolkit.available}</div>
+                      <div>Gifted: {vaultStats.legacyProducts.innovationToolkit.gifted}</div>
+                    </div>
+                    <Button 
+                      size="sm" 
+                      className="w-full mt-2" 
+                      variant="outline"
+                      onClick={() => handleVaultGiftApproval('Innovation Toolkit')}
+                    >
+                      Approve Gifts
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
 
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>

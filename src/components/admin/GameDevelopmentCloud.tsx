@@ -321,7 +321,7 @@ export function GameDevelopmentCloud() {
     const newAsset: GameAsset = {
       id: `custom-world-${Date.now()}`,
       name: customPrompt,
-      type: selectedAssetType as GameAsset["type"],
+      type: selectedAssetType as any,
       quality: 'mythic',
       description: `Custom ${selectedAssetType} designed for First Gaia World with WoW exploration, Rage combat, and Final Fantasy aesthetics`,
       cloudUrl: `/custom-worlds/${Date.now()}.png`,

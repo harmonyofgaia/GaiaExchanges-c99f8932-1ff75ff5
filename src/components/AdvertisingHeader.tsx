@@ -46,7 +46,7 @@ export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
           </div>
           <div className="mt-2 px-4 py-1 bg-blue-500/20 backdrop-blur-sm rounded-full border border-blue-400/30">
             <span className="text-blue-300 text-xs font-mono">
-              GAiA: {GAIA_TOKEN.WALLET_ADDRESS}
+              GAiA: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
             </span>
           </div>
           <div className="mt-3">

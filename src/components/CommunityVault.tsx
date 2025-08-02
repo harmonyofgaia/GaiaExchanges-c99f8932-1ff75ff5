@@ -115,7 +115,7 @@ export function CommunityVault() {
   }, [])
 
   const copyWalletAddress = () => {
-    navigator.clipboard.writeText(GAIA_TOKEN.COMMUNITY_VAULT_WALLET)
+    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
     toast.success('Community Wallet Address Copied!', {
       description: 'This is where all fees go - 100% transparent'
     })
@@ -203,7 +203,7 @@ export function CommunityVault() {
                 </Button>
               </div>
               <code className="font-mono text-xs block mt-2 text-emerald-300 break-all">
-                {GAIA_TOKEN.COMMUNITY_VAULT_WALLET}
+                {GAIA_TOKEN.WALLET_ADDRESS}
               </code>
             </div>
           </div>
@@ -337,7 +337,7 @@ export function CommunityVault() {
           
           <div className="mt-4 flex justify-center gap-4">
             <Button variant="outline" size="sm" asChild>
-              <a href={`https://solscan.io/account/${GAIA_TOKEN.COMMUNITY_VAULT_WALLET}`} target="_blank" rel="noopener noreferrer">
+              <a href={`https://solscan.io/account/${GAIA_TOKEN.WALLET_ADDRESS}`} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 View on Solscan
               </a>

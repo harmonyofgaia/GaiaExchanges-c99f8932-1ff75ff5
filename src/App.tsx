@@ -1,63 +1,123 @@
 
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from 'react'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
+import { Toaster } from 'sonner'
+import { Navbar } from '@/components/Navbar'
+import { GaiaLogo } from '@/components/GaiaLogo'
+import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
+import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
+import { HoneypotRedirect } from '@/components/security/HoneypotRedirect'
+import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
+import { PersistentAudioControls } from '@/components/audio/PersistentAudioControls'
 
-import { MainLayout } from "@/components/layout/MainLayout";
-import { Navbar } from "@/components/Navbar";
+// Lazy load pages for better performance
+const Home = lazy(() => import('./pages/Home'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
+const GreenImpactDashboard = lazy(() => import('./pages/GreenImpactDashboard'))
+const EcoAvatar = lazy(() => import('./legacy-pages/EcoAvatar'))
+const DeploymentCenter = lazy(() => import('./legacy-pages/DeploymentCenter'))
+const LiveTracking = lazy(() => import('./pages/LiveTracking'))
+const Gaming = lazy(() => import('./pages/Gaming'))
+const Wallet = lazy(() => import('./pages/Wallet'))
+const Marketplace = lazy(() => import('./pages/Marketplace'))
+const VideoExchange = lazy(() => import('./pages/VideoExchange'))
+const StreamingShows = lazy(() => import('./pages/StreamingShows'))
+const GaiaBikeEcosystem = lazy(() => import('./pages/GaiaBikeEcosystem'))
+const TokenMining = lazy(() => import('./pages/TokenMining'))
+const GreenInvestments = lazy(() => import('./pages/GreenInvestments'))
+const CoinCrafter = lazy(() => import('./pages/CoinCrafter'))
 
-
-
-// Import all sidebar and main navigation pages statically
-import Index from "@/pages/Index";
-import Home from "@/pages/Home";
-import Dashboard from "@/pages/Dashboard";
-import Games from "@/pages/Games";
-import VirtualWorld from "@/pages/VirtualWorld";
-import Community from "@/pages/Community";
-import Leaderboard from "@/pages/Leaderboard";
-import GaiaTokenStatus from "@/pages/GaiaTokenStatus";
-import SystemStatus from "@/pages/SystemStatus";
-import AuraLandScrapyard from "@/pages/AuraLandScrapyard";
-import Settings from "@/pages/Settings";
-import About from "@/pages/About";
-import Docs from "@/pages/Docs";
-import NotFound from "@/pages/NotFound";
-import Profile from "@/pages/Profile";
-import Marketplace from "@/pages/Marketplace";
-import AdminLogin from "@/pages/AdminLogin";
+const GaiasProjects = lazy(() => import('./pages/GaiasProjects'))
+const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlockchainSwapToken'))
+const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
+const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
+const AdminLogin = lazy(() => import('./pages/AdminLogin'))
+const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivities'))
+const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'))
+const DecentralizedProjectFundingPools = lazy(() => import('./pages/DecentralizedProjectFundingPools'))
+const CommunityEngagementHub = lazy(() => import('./pages/CommunityEngagementHub'))
+const PartnershipManagement = lazy(() => import('./pages/PartnershipManagement'))
+const ImpactMeasurementSystem = lazy(() => import('./pages/ImpactMeasurementSystem'))
+const SeaGreenPsychohistorical = lazy(() => import('./pages/SeaGreenPsychohistorical'))
+const GaiaTokenStatus = lazy(() => import('./pages/GaiaTokenStatus'))
+const LandscapeBuilder = lazy(() => import('./pages/LandscapeBuilder'))
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Pricing = lazy(() => import('./pages/Pricing'))
+const VirtualWorld = lazy(() => import('./pages/VirtualWorld'))
+const AnimalWelfare = lazy(() => import('./pages/AnimalWelfare'))
+const Exchange = lazy(() => import('./pages/Exchange'))
+const AuraLandScrapyard = lazy(() => import('./pages/AuraLandScrapyard'))
+const ComprehensiveStatus = lazy(() => import('./pages/ComprehensiveStatus'))
 
 function App() {
+  useGlobalBackgroundServices()
+
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-background flex flex-col">
+    <Router>
+      <div className="min-h-screen bg-background text-foreground" data-router="true">
+        <CrossPagePersistence />
+        <HoneypotRedirect />
         <Navbar />
-        <div className="flex-1">
-          <MainLayout>
+        <main className="flex-1">
+          <Suspense fallback={
+            <div className="min-h-screen bg-background flex items-center justify-center">
+              <div className="text-center">
+                <div className="mb-4 flex justify-center">
+                  <AnimatedEarthLogo />
+                </div>
+                <div className="mt-4 text-primary animate-pulse">Loading Gaia's Exchanges...</div>
+              </div>
+            </div>
+          }>
             <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/games" element={<Games />} />
+              <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
+              <Route path="/eco-avatar" element={<EcoAvatar />} />
+              <Route path="/community-engagement-hub" element={<CommunityEngagementHub />} />
+              {/* Partnership management moved to secure admin only */}
+              <Route path="/impact-measurement-system" element={<ImpactMeasurementSystem />} />
+              <Route path="/sea-green-psychohistorical" element={<SeaGreenPsychohistorical />} />
+              <Route path="/gaia-token-status" element={<GaiaTokenStatus />} />
+              <Route path="/deployment-center" element={<DeploymentCenter />} />
               <Route path="/virtual-world" element={<VirtualWorld />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/token-info" element={<GaiaTokenStatus />} />
-              <Route path="/gaia-system" element={<SystemStatus />} />
-              <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/docs" element={<Docs />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/animal-welfare" element={<AnimalWelfare />} />
+              <Route path="/gaming" element={<Gaming />} />
+              <Route path="/exchange" element={<Exchange />} />
               <Route path="/marketplace" element={<Marketplace />} />
-              <Route path="/admin" element={<AdminLogin />} />
-              {/* Add more routes for other pages as needed */}
-              <Route path="*" element={<NotFound />} />
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/video-exchange" element={<VideoExchange />} />
+              <Route path="/streaming-shows" element={<StreamingShows />} />
+              <Route path="/gaia-bike-ecosystem" element={<GaiaBikeEcosystem />} />
+              <Route path="/token-mining" element={<TokenMining />} />
+              <Route path="/green-investments" element={<GreenInvestments />} />
+              <Route path="/coin-crafter" element={<CoinCrafter />} />
+              <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+              <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
+              <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/admin" element={<Navigate to="/secure-admin" replace />} />
+              <Route path="/live-tracking" element={<LiveTracking />} />
+              
+              <Route path="/gaias-projects" element={<GaiasProjects />} />
+              <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
+              <Route path="/private-blockchain" element={<PrivateBlockchain />} />
+              <Route path="/secure-admin" element={<SecureAdmin />} />
+              <Route path="/admin-login" element={<AdminLogin />} />
+              <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
+              <Route path="/enhanced-leaderboard" element={<EnhancedLeaderboard />} />
+              <Route path="/project-funding" element={<DecentralizedProjectFundingPools />} />
             </Routes>
-          </MainLayout>
-        </div>
+          </Suspense>
+        </main>
+        <PersistentAudioControls />
+        <Toaster position="top-right" />
       </div>
-    </BrowserRouter>
-  );
+    </Router>
+  )
 }
 
-export default App;
+export default App
