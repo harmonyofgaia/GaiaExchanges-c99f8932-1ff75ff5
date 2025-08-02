@@ -66,6 +66,10 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
       return
     }
 
+    // Debug: Show entered credentials
+    console.log('[DEBUG] Entered username:', adminCredentials.username)
+    console.log('[DEBUG] Entered password:', adminCredentials.password)
+
     // Admin credentials check
     if (adminCredentials.username === 'Synatic' && adminCredentials.password === 'Freedom!oul19922323') {
       setIsAdminAuthenticated(true)
@@ -82,7 +86,12 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
       try {
         localStorage.setItem('gaia-admin', JSON.stringify(sessionData))
       } catch (e) {
-        sessionStorage.setItem('gaia-admin', JSON.stringify(sessionData))
+        console.error('[DEBUG] localStorage error:', e)
+        try {
+          sessionStorage.setItem('gaia-admin', JSON.stringify(sessionData))
+        } catch (err) {
+          console.error('[DEBUG] sessionStorage error:', err)
+        }
       }
       
       sessionStorage.setItem('admin-active', '1')
@@ -150,6 +159,12 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
               <AlertTriangle className="h-16 w-16 text-red-400 mx-auto" />
               <div className="text-red-400 font-bold">ACCESS BLOCKED</div>
               <p className="text-red-300 text-sm">Maximum login attempts exceeded</p>
+              <Button 
+                className="mt-4 bg-red-700 text-white" 
+                onClick={() => { setAttempts(0); setAdminCredentials({ username: '', password: '' }); }}
+              >
+                Reset Attempts
+              </Button>
             </div>
           ) : (
             <form onSubmit={handleAdminLogin} className="space-y-4">
