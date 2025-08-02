@@ -332,9 +332,9 @@ class AdminDominationService {
   async generateAdminForensicsReport(adminId?: string): Promise<{
     totalSessions: number
     activeSessions: number
-    recentActions: any[]
-    securityAlerts: any[]
-    privilegeEscalations: any[]
+    recentActions: RemoteOverride[]
+    securityAlerts: string[]
+    privilegeEscalations: string[]
   }> {
     const sessions = adminId 
       ? Array.from(this.adminSessions.values()).filter(s => s.adminId === adminId)

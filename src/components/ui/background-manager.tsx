@@ -135,7 +135,7 @@ export function BackgroundManager() {
 }
 
 // Render functions for different effects
-function renderParticles(ctx: CanvasRenderingContext2D, particles: any[], effect: BackgroundEffect, time: number) {
+function renderParticles(ctx: CanvasRenderingContext2D, particles: unknown[], effect: BackgroundEffect, time: number) {
   particles.forEach((particle, i) => {
     const pulse = Math.sin(time + i * 0.1) * 0.3 + 0.7
     ctx.fillStyle = effect.color + Math.floor(particle.alpha * pulse * 255).toString(16).padStart(2, '0')
@@ -174,7 +174,7 @@ function renderMatrix(ctx: CanvasRenderingContext2D, effect: BackgroundEffect, t
   }
 }
 
-function renderNeural(ctx: CanvasRenderingContext2D, particles: any[], effect: BackgroundEffect, time: number) {
+function renderNeural(ctx: CanvasRenderingContext2D, particles: unknown[], effect: BackgroundEffect, time: number) {
   // Draw connections between nearby particles
   ctx.strokeStyle = effect.color + '30'
   ctx.lineWidth = 1

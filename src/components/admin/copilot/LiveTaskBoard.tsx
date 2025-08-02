@@ -41,9 +41,13 @@ interface Task {
   createdAt: Date;
   startedAt?: Date;
   completedAt?: Date;
-  suggestions?: any[];
+  suggestions?: Suggestion[];
 }
 
+interface Suggestion {
+  type: string;
+  content: string;
+}
 const taskData: Task[] = [
   {
     id: '1',
@@ -131,7 +135,7 @@ export function LiveTaskBoard() {
     console.log('Auto-processing tasks...');
   }, [isAutoProcessing]);
 
-  const applySuggestion = useCallback((taskId: string, suggestion: any) => {
+  const applySuggestion = useCallback((taskId: string, suggestion: Suggestion) => {
     console.log(`Applying suggestion to task ${taskId}:`, suggestion);
     // Apply suggestion logic here
   }, []);

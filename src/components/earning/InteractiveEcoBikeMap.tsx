@@ -89,7 +89,7 @@ export function InteractiveEcoBikeMap() {
     }
   }, [isRiding, activeRide])
 
-  const startRide = (route: any) => {
+  const startRide = (route: Record<string, unknown>) => {
     setActiveRide(route)
     setIsRiding(true)
     setDistance(0)

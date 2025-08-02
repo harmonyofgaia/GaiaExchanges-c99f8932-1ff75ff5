@@ -7,8 +7,23 @@ import { Shield, Zap, Lock, Key, Atom, Activity } from 'lucide-react'
 import { quantumSecurity } from '@/services/quantumSecurity'
 import { toast } from 'sonner'
 
+interface QuantumKey {
+  id: string;
+  entanglementId: string;
+  timestamp: number;
+  isQuantumVerified: boolean;
+}
+
+interface QuantumStatus {
+  isActive: boolean;
+  activeKeys: number;
+  entanglements: number;
+  systemUptime: number;
+  quantumReadiness: number;
+}
+
 export function QuantumFortressDashboard() {
-  const [quantumStatus, setQuantumStatus] = useState({
+  const [quantumStatus, setQuantumStatus] = useState<QuantumStatus>({
     isActive: false,
     activeKeys: 0,
     entanglements: 0,
@@ -16,7 +31,7 @@ export function QuantumFortressDashboard() {
     quantumReadiness: 0
   })
 
-  const [quantumKeys, setQuantumKeys] = useState<any[]>([])
+  const [quantumKeys, setQuantumKeys] = useState<QuantumKey[]>([])
   const [isInitializing, setIsInitializing] = useState(false)
 
   useEffect(() => {

@@ -35,7 +35,7 @@ interface UserAnalytics {
 export function EnhancedUserAnalytics() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedUser, setSelectedUser] = useState<UserAnalytics | null>(null)
-  const [calculationResults, setCalculationResults] = useState<any>(null)
+  const [calculationResults, setCalculationResults] = useState<Record<string, unknown> | null>(null)
   const [isCalculating, setIsCalculating] = useState(false)
 
   const mockUsers: UserAnalytics[] = [

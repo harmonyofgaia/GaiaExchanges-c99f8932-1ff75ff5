@@ -12,7 +12,7 @@ interface Metric {
   metric_value: number
   metric_type: string
   last_updated: string
-  metadata: any
+  metadata: Record<string, unknown>
 }
 
 export function RealTimeAdminMetrics() {

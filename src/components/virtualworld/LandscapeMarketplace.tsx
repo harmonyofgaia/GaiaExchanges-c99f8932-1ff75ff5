@@ -27,7 +27,7 @@ interface MarketplaceItem {
   name: string
   description: string
   price: number
-  icon: any
+  icon: React.ElementType
   rarity: 'common' | 'rare' | 'epic' | 'legendary'
   environmentalImpact: string
   tokensRequired: number

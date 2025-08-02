@@ -1,5 +1,5 @@
 
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { Navbar } from '@/components/Navbar'
@@ -9,6 +9,17 @@ import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
 import { HoneypotRedirect } from '@/components/security/HoneypotRedirect'
 import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
 import { PersistentAudioControls } from '@/components/audio/PersistentAudioControls'
+
+// Utility imports for global integrations
+import { trackEvent } from '@/utils/analytics';
+import { subscribeToChannel } from '@/utils/realtime';
+import { getProvider } from '@/utils/blockchain';
+import { registerPush } from '@/utils/pushNotifications';
+import { generateText } from '@/utils/ai';
+import { uploadToIPFS } from '@/utils/ipfs';
+import { registerMobilePush } from '@/utils/mobile';
+import { changeLanguage } from '@/utils/localization';
+import './App.css';
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
@@ -51,7 +62,46 @@ const AuraLandScrapyard = lazy(() => import('./pages/AuraLandScrapyard'))
 const ComprehensiveStatus = lazy(() => import('./pages/ComprehensiveStatus'))
 
 function App() {
-  useGlobalBackgroundServices()
+  useGlobalBackgroundServices();
+  useEffect(() => {
+    // Analytics: track page view
+    trackEvent('page_view', { page: window.location.pathname });
+
+function App() {
+  useGlobalBackgroundServices();
+  useEffect(() => {
+    // Analytics: track page view
+    trackEvent('page_view', { page: window.location.pathname });
+    // Realtime: subscribe to user channel
+    subscribeToChannel('user', (payload) => {
+      // handle user-specific updates
+      // Optionally show notification or update state
+    });
+    // Blockchain: ensure provider is available
+    getProvider();
+    // Push notifications (web)
+    // registerPush();
+    // Mobile push (Capacitor)
+    // registerMobilePush();
+
+    // Realtime: subscribe to user channel
+    subscribeToChannel('user', (payload) => {
+      // handle user-specific updates
+      // Optionally show notification or update state
+    });
+    // Blockchain: ensure provider is available
+    getProvider();
+    // Push notifications (web)
+    // registerPush();
+    // Mobile push (Capacitor)
+    // registerMobilePush();
+    // Example: AI usage
+    // generateText('Hello world').then(console.log);
+    // Example: IPFS upload
+    // uploadToIPFS(new Blob(['test']));
+    // Example: change language
+    // changeLanguage('en');
+  }, []);
 
   return (
     <Router>
@@ -101,7 +151,6 @@ function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/admin" element={<Navigate to="/secure-admin" replace />} />
               <Route path="/live-tracking" element={<LiveTracking />} />
-              
               <Route path="/gaias-projects" element={<GaiasProjects />} />
               <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
@@ -117,7 +166,5 @@ function App() {
         <Toaster position="top-right" />
       </div>
     </Router>
-  )
-}
+  );
 
-export default App

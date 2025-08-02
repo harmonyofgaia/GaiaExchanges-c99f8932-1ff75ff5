@@ -192,7 +192,7 @@ class QuantumAIService {
   }
 
   // Quantum Algorithm Execution
-  async executeQuantumAlgorithm(algorithm: string, data: any): Promise<any> {
+  async executeQuantumAlgorithm(algorithm: string, data: unknown): Promise<unknown> {
     const availableComputers = Array.from(this.quantumComputers.values()).filter(qc => qc.isOnline)
     
     if (availableComputers.length === 0) {
@@ -227,7 +227,7 @@ class QuantumAIService {
   }
 
   // AI Training and Optimization
-  async trainAIModel(modelId: string, trainingData: any): Promise<void> {
+  async trainAIModel(modelId: string, trainingData: unknown): Promise<void> {
     const model = this.aiModels.get(modelId)
     if (!model) throw new Error('AI model not found')
 

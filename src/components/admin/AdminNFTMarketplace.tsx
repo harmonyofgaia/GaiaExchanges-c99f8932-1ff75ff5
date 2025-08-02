@@ -353,7 +353,7 @@ export function AdminNFTMarketplace() {
                   <label className="text-sm font-medium">Category *</label>
                   <select
                     value={newNFT.category || ''}
-                    onChange={(e) => setNewNFT(prev => ({ ...prev, category: e.target.value as any }))}
+                    onChange={(e) => setNewNFT(prev => ({ ...prev, category: e.target.value as NFTCategory }))}
                     className="w-full px-3 py-2 bg-muted border border-border rounded-md"
                   >
                     <option value="">Select category</option>
@@ -369,7 +369,7 @@ export function AdminNFTMarketplace() {
                   <label className="text-sm font-medium">Rarity</label>
                   <select
                     value={newNFT.rarity || 'Common'}
-                    onChange={(e) => setNewNFT(prev => ({ ...prev, rarity: e.target.value as any }))}
+                    onChange={(e) => setNewNFT(prev => ({ ...prev, rarity: e.target.value as NFTRarity }))}
                     className="w-full px-3 py-2 bg-muted border border-border rounded-md"
                   >
                     <option value="Common">Common</option>

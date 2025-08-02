@@ -38,7 +38,7 @@ interface WeaponizedHoneypot {
   honeypotType: 'web' | 'ssh' | 'database' | 'email' | 'quantum'
   weaponization: 'data_collection' | 'counter_exploitation' | 'attacker_tracking' | 'system_infection'
   attackersTrapped: number
-  dataCollected: any[]
+  dataCollected: unknown[]
   isActive: boolean
 }
 
@@ -252,7 +252,7 @@ class WeaponizedCounterAttackService {
     return reversal
   }
 
-  private async generateReversalStrategy(attack: any): Promise<string> {
+  private async generateReversalStrategy(attack: unknown): Promise<string> {
     const strategies = {
       phishing: 'Counter-phishing with attacker intelligence gathering',
       pretexting: 'Reverse pretexting to expose attacker identity',
@@ -263,7 +263,7 @@ class WeaponizedCounterAttackService {
     return strategies[attack.type as keyof typeof strategies] || 'Generic reversal strategy'
   }
 
-  private async createReversalContent(attack: any): Promise<string> {
+  private async createReversalContent(attack: unknown): Promise<string> {
     // Generate convincing counter-content
     const templates = {
       phishing: 'Legitimate-looking response that actually gathers attacker data',
@@ -378,8 +378,8 @@ class WeaponizedCounterAttackService {
     if (!this.autoRetaliationEnabled) return
 
     // Determine counter-attack type based on threat
-    let counterAttackType: any = 'ddos_reflection'
-    let intensity: any = 'moderate'
+    let counterAttackType: unknown = 'ddos_reflection'
+    let intensity: unknown = 'moderate'
 
     if (threatData.severity > 0.8) {
       counterAttackType = 'quantum_retaliation'

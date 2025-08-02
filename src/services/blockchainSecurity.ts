@@ -134,7 +134,7 @@ class BlockchainSecurityService {
 
   private async performCrossChainSecurityChecks(
     tx: CrossChainTransaction, 
-    details: any
+    details: Record<string, unknown>
   ): Promise<{ checksPassed: string[], riskLevel: number }> {
     const checks = []
     let riskLevel = 0

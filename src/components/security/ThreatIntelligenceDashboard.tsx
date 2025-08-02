@@ -7,8 +7,33 @@ import { Brain, Shield, AlertTriangle, Eye, Target, Zap } from 'lucide-react'
 import { threatIntelligence } from '@/services/threatIntelligence'
 import { toast } from 'sonner'
 
+interface ThreatPrediction {
+  id: string;
+  predictedThreat: string;
+  probability: number;
+  timeframe: string;
+  indicators: string[];
+  recommendedActions: string[];
+}
+
+interface SystemStatus {
+  isActive: boolean;
+  threatSignatures: number;
+  behaviorPatterns: number;
+  predictions: number;
+  globalSources: number;
+  blockedIPs: number;
+}
+
+interface MonitoringStats {
+  threatsDetected: number;
+  behaviorAnomalies: number;
+  predictiveAccuracy: number;
+  responseTime: number;
+}
+
 export function ThreatIntelligenceDashboard() {
-  const [systemStatus, setSystemStatus] = useState({
+  const [systemStatus, setSystemStatus] = useState<SystemStatus>({
     isActive: false,
     threatSignatures: 0,
     behaviorPatterns: 0,
@@ -17,9 +42,9 @@ export function ThreatIntelligenceDashboard() {
     blockedIPs: 0
   })
 
-  const [threatPredictions, setThreatPredictions] = useState<any[]>([])
+  const [threatPredictions, setThreatPredictions] = useState<ThreatPrediction[]>([])
   const [isInitializing, setIsInitializing] = useState(false)
-  const [monitoringStats, setMonitoringStats] = useState({
+  const [monitoringStats, setMonitoringStats] = useState<MonitoringStats>({
     threatsDetected: 0,
     behaviorAnomalies: 0,
     predictiveAccuracy: 94.7,

@@ -248,7 +248,7 @@ export function AIDefenseAnimals() {
     toast.success('Animal status updated successfully!')
   }
 
-  const updateAnimalAttribute = (id: number, attribute: string, value: any) => {
+  const updateAnimalAttribute = (id: number, attribute: keyof AnimalDefense, value: AnimalDefense[keyof AnimalDefense]) => {
     setAnimalDefenses(prev => prev.map(animal => 
       animal.id === id 
         ? { ...animal, [attribute]: value }
@@ -281,8 +281,8 @@ export function AIDefenseAnimals() {
     toast.success('Animal stats reset!')
   }
 
-  const addNewAnimal = (animalData: any) => {
-    const newAnimal = {
+  const addNewAnimal = (animalData: Omit<AnimalDefense, 'id' | 'threatsRepelled' | 'activityLevel'>) => {
+    const newAnimal: AnimalDefense = {
       ...animalData,
       id: Math.max(...animalDefenses.map(a => a.id)) + 1,
       threatsRepelled: 0,

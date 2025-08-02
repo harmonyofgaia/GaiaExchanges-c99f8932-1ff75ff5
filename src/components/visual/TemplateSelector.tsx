@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { Palette, Wand2 } from 'lucide-react'
 
 interface TemplateSelectorProps {
-  onTemplateApplied: (template: any) => void
+  onTemplateApplied: (template: Record<string, unknown>) => void
   isLocked?: boolean
 }
 
@@ -17,7 +17,7 @@ export function TemplateSelector({ onTemplateApplied, isLocked = false }: Templa
     { id: 'cosmic', name: 'Cosmic Theme', colors: ['#6600cc', '#9900ff', '#cc66ff'] }
   ]
 
-  const handleApplyTemplate = (template: any) => {
+  const handleApplyTemplate = (template: Record<string, unknown>) => {
     if (isLocked) return
     onTemplateApplied(template)
   }

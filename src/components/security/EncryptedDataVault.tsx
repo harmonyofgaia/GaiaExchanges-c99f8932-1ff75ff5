@@ -63,7 +63,7 @@ export function EncryptedDataVault() {
     if (phrase.toLowerCase() === correctPhrases[stage as keyof typeof correctPhrases]) {
       console.log(`🔑 RECOVERY PHRASE ${stage} VERIFIED - PROCEEDING TO NEXT BARRIER`)
       
-      const nextStage = `recovery-${stage + 1}` as any
+      const nextStage = `recovery-${stage + 1}` as 'recovery-1' | 'recovery-2' | 'recovery-3' | 'recovery-4';
       if (stage === 4) {
         setRecoveryStage('unlocked')
         toast.success('🎯 ALL RECOVERY PHRASES VERIFIED!', {

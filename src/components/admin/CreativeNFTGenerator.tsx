@@ -255,8 +255,8 @@ export function CreativeNFTGenerator() {
     const newNFT: CreativeNFT = {
       id: `gen-${Date.now()}`,
       name: `${randomTheme} ${randomCategory.charAt(0).toUpperCase() + randomCategory.slice(1)}`,
-      category: randomCategory as any,
-      rarity: randomRarity as any,
+      category: randomCategory as NFTCategory,
+      rarity: randomRarity as NFTRarity,
       price: Math.floor(Math.random() * 5000) + 500,
       image: ['🌟', '✨', '💎', '🔥', '⚡', '🌙', '☀️', '🦄'][Math.floor(Math.random() * 8)],
       description: `AI-generated ${randomTheme.toLowerCase()} ${randomCategory} with unique properties`,
@@ -448,7 +448,7 @@ export function CreativeNFTGenerator() {
                 <div className="grid grid-cols-2 gap-2">
                   <select
                     value={nft.distributionMode}
-                    onChange={(e) => updateDistributionMode(nft.id, e.target.value as any)}
+                    onChange={(e) => updateDistributionMode(nft.id, e.target.value as CreativeNFT['distributionMode'])}
                     className="px-2 py-1 bg-muted border border-border rounded text-xs"
                   >
                     <option value="sell">💰 Sell</option>

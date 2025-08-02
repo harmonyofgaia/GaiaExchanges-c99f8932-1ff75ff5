@@ -45,7 +45,7 @@ export function GlobalNetworkHoneypots() {
       ][Math.floor(Math.random() * 8)],
       sourceIP: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
       timestamp: new Date().toLocaleTimeString(),
-      severity: ['low', 'medium', 'high', 'critical'][Math.floor(Math.random() * 4)] as any
+      severity: ['low', 'medium', 'high', 'critical'][Math.floor(Math.random() * 4)] as 'low' | 'medium' | 'high' | 'critical'
     })
 
     const interval = setInterval(() => {

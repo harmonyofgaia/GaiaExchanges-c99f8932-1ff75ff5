@@ -37,9 +37,9 @@ export function EnhancedNeuroBackground({
 
     // Enhanced neural network parameters based on pattern
     const nodeCount = Math.floor((intensity === 'low' ? 30 : intensity === 'medium' ? 60 : 100) * (neuralDensity / 100))
-    const nodes: any[] = []
-    const connections: any[] = []
-    const particles: any[] = []
+    const nodes: unknown[] = []
+    const connections: unknown[] = []
+    const particles: unknown[] = []
     
     // Helper function to convert hex to RGB
     function hexToRgb(hex: string) {
@@ -53,7 +53,7 @@ export function EnhancedNeuroBackground({
 
     // Helper function to create pattern-specific nodes
     function createPatternNode(index: number, total: number, canvas: HTMLCanvasElement, pattern: string) {
-      let node: any
+      let node: unknown
       
       switch (pattern) {
         case 'creative':
@@ -266,7 +266,7 @@ export function EnhancedNeuroBackground({
     }
 
     // Helper function to update pattern-specific nodes
-    function updatePatternNode(node: any, pattern: string, time: number, speed: number, canvas: HTMLCanvasElement) {
+    function updatePatternNode(node: unknown, pattern: string, time: number, speed: number, canvas: HTMLCanvasElement) {
       switch (pattern) {
         case 'creative':
           // Creative resonance behavior
@@ -324,7 +324,7 @@ export function EnhancedNeuroBackground({
     }
 
     // Helper function to draw pattern-specific connections
-    function drawPatternConnection(ctx: CanvasRenderingContext2D, fromNode: any, toNode: any, connection: any, pattern: string, time: number, color: string) {
+    function drawPatternConnection(ctx: CanvasRenderingContext2D, fromNode: unknown, toNode: unknown, connection: unknown, pattern: string, time: number, color: string) {
       const pulseX = fromNode.x + (toNode.x - fromNode.x) * connection.pulse
       const pulseY = fromNode.y + (toNode.y - fromNode.y) * connection.pulse
       
@@ -430,7 +430,7 @@ export function EnhancedNeuroBackground({
     }
 
     // Helper function to draw pattern-specific nodes
-    function drawPatternNode(ctx: CanvasRenderingContext2D, node: any, pattern: string, time: number, color: string) {
+    function drawPatternNode(ctx: CanvasRenderingContext2D, node: unknown, pattern: string, time: number, color: string) {
       const colorValues = hexToRgb(color)
       const activityGlow = 0.5 + node.activity * 0.5
       

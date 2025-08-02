@@ -9,10 +9,10 @@ import { Crown, Shield, Zap, Target, Users, Brain } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface AdminControlsProps {
-  playerData: any
-  setPlayerData: (data: any) => void
-  buildings: any[]
-  setBuildings: (buildings: any[]) => void
+  playerData: Record<string, unknown>
+  setPlayerData: (data: Record<string, unknown>) => void
+  buildings: unknown[]
+  setBuildings: (buildings: unknown[]) => void
 }
 
 interface TrainedAnimal {
@@ -77,7 +77,7 @@ export function AdminTycoonControls({ playerData, setPlayerData, buildings, setB
   })
 
   const giveCoins = () => {
-    setPlayerData((prev: any) => ({
+    setPlayerData((prev: Record<string, unknown>) => ({
       ...prev,
       coins: prev.coins + 10000
     }))
@@ -88,7 +88,7 @@ export function AdminTycoonControls({ playerData, setPlayerData, buildings, setB
   }
 
   const maxLevel = () => {
-    setPlayerData((prev: any) => ({
+    setPlayerData((prev: Record<string, unknown>) => ({
       ...prev,
       level: 100,
       reputation: 100

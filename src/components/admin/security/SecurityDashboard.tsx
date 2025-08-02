@@ -67,7 +67,7 @@ interface ThreatIntelligence {
   severity_level: string
   ip_address: string | null
   user_agent: string | null
-  geolocation: any
+  geolocation: Record<string, unknown> | null
   detected_at: string
   resolved_at: string | null
   status: string
