@@ -1,9 +1,0 @@
-{
-    "recommendations": [
-        "ms-azuretools.vscode-azurefunctions",
-        "ms-azuretools.vscode-azurestorage",
-        "ms-azuretools.vscode-azurestaticwebapps",
-        "ms-azuretools.vscode-azurecontainerapps",
-        "davidanson.vscode-markdownlint"
-    ]
-}

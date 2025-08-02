@@ -40,7 +40,7 @@ interface AutomationStep {
   type: 'trigger' | 'condition' | 'action' | 'delay'
   name: string
   description: string
-  config: Record<string, unknown>
+  config: Record<string, any>
   position: { x: number, y: number }
   connections: string[]
 }
@@ -437,7 +437,7 @@ export function CustomAutomationBuilder() {
           description: `${automation.name} is now ${newStatus}`,
           duration: 3000
         })
-        return { ...automation, status: newStatus as Automation['status'] }
+        return { ...automation, status: newStatus as any }
       }
       return automation
     }))

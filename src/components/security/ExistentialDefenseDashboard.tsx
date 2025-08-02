@@ -1,27 +1,14 @@
 import { useState, useEffect } from 'react'
-import { Shield, Zap, Star, Infinity as InfinityIcon } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
 import { existentialDefense } from '@/services/existentialDefense'
+import { Shield, Infinity, Zap, Star } from 'lucide-react'
 
-import type { FC } from 'react'
-
-interface ExistentialDefenseStatus {
-  isActive: boolean;
-  existenceStability: number;
-  voidContainment: number;
-  realityIntegrity: number;
-  existentialThreats: { total: number; contained: number; active: number };
-  voidBarriers: { total: number; active: number };
-  existenceProtocols: { total: number; armed: number };
-  conceptualWeapons: { total: number; charged: number };
-}
-
-export const ExistentialDefenseDashboard: FC = () => {
-  const [status, setStatus] = useState<ExistentialDefenseStatus>({
+export function ExistentialDefenseDashboard() {
+  const [status, setStatus] = useState({
     isActive: false,
     existenceStability: 0,
     voidContainment: 0,
@@ -39,7 +26,7 @@ export const ExistentialDefenseDashboard: FC = () => {
     const interval = setInterval(updateStatus, 2000)
     updateStatus()
     return () => clearInterval(interval)
-  }, [existentialDefense])
+  }, [])
 
   const handleInitialize = async () => {
     try {
@@ -79,7 +66,7 @@ export const ExistentialDefenseDashboard: FC = () => {
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <InfinityIcon className="h-4 w-4 text-primary" />
+              <Infinity className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Existential Anchors</span>
             </div>
             <div className="text-2xl font-bold text-primary">{status.existentialThreats.contained}</div>

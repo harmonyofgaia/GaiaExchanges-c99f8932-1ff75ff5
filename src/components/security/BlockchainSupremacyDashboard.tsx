@@ -7,42 +7,8 @@ import { Link, Shield, AlertTriangle, GitBranch, TrendingUp, Zap } from 'lucide-
 import { blockchainSecurity } from '@/services/blockchainSecurity'
 import { toast } from 'sonner'
 
-interface Vulnerability {
-  type: string;
-  description: string;
-  severity: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' | string;
-}
-
-interface ContractScan {
-  address: string;
-  chainId: number;
-  riskScore: number;
-  isVerified: boolean;
-  vulnerabilities: Vulnerability[];
-}
-
-interface CrossChainTx {
-  id: string;
-  sourceChain: number;
-  targetChain: number;
-  amount: string;
-  token: string;
-  riskLevel: number;
-  status: string;
-  securityChecks: string[];
-}
-
-interface SecurityStatus {
-  isActive: boolean;
-  monitoredChains: number;
-  scannedContracts: number;
-  detectedForks: number;
-  crossChainTransactions: number;
-  secureChains: number;
-}
-
 export function BlockchainSupremacyDashboard() {
-  const [securityStatus, setSecurityStatus] = useState<SecurityStatus>({
+  const [securityStatus, setSecurityStatus] = useState({
     isActive: false,
     monitoredChains: 0,
     scannedContracts: 0,
@@ -51,8 +17,8 @@ export function BlockchainSupremacyDashboard() {
     secureChains: 0
   })
 
-  const [contractScans, setContractScans] = useState<ContractScan[]>([])
-  const [crossChainTxs, setCrossChainTxs] = useState<CrossChainTx[]>([])
+  const [contractScans, setContractScans] = useState<any[]>([])
+  const [crossChainTxs, setCrossChainTxs] = useState<any[]>([])
   const [isInitializing, setIsInitializing] = useState(false)
 
   useEffect(() => {
@@ -306,7 +272,7 @@ export function BlockchainSupremacyDashboard() {
                   {contract.vulnerabilities.length > 0 && (
                     <div className="space-y-2">
                       <div className="text-xs font-medium text-muted-foreground">Vulnerabilities Found:</div>
-                      {contract.vulnerabilities.map((vuln, i) => (
+                      {contract.vulnerabilities.map((vuln: any, i: number) => (
                         <div key={i} className="flex items-center justify-between p-2 bg-red-900/20 rounded border border-red-500/30">
                           <div>
                             <div className="text-sm font-medium text-red-400">{vuln.type}</div>

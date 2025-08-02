@@ -38,7 +38,7 @@ interface WalletSummary {
   totalOutcome: number
   transactionCount: number
   color: string
-  icon: React.ElementType
+  icon: any
 }
 
 export function PDFTransactionTracker() {

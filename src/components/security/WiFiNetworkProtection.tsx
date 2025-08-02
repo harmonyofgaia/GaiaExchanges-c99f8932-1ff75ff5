@@ -77,7 +77,7 @@ export function WiFiNetworkProtection() {
 
         // 2. ENCRYPTION STRENGTH VALIDATION
         const validateEncryption = () => {
-          const connection = (navigator as Navigator & { connection?: { effectiveType?: string; downlink?: number; rtt?: number } }).connection
+          const connection = (navigator as any).connection
           if (connection && connection.effectiveType) {
             const networkType = connection.effectiveType
             
@@ -160,7 +160,7 @@ export function WiFiNetworkProtection() {
 
         // Update network strength based on connection quality
         const updateNetworkStrength = () => {
-          const connection = (navigator as Navigator & { connection?: { effectiveType?: string; downlink?: number; rtt?: number } }).connection
+          const connection = (navigator as any).connection
           if (connection) {
             const rtt = connection.rtt || 50
             const downlink = connection.downlink || 10

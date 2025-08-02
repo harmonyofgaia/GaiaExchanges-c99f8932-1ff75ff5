@@ -68,7 +68,7 @@ export function GAiACommunityProjects() {
     })
   }
 
-  const handleDataRestored = (data: unknown) => {
+  const handleDataRestored = (data: any) => {
     console.log('🌱 Original GAiA project data restored:', data);
     setRestoredData(data);
     
@@ -100,7 +100,7 @@ export function GAiACommunityProjects() {
     }
   }
 
-  const renderFeaturedProject = (project: unknown) => {
+  const renderFeaturedProject = (project: any) => {
     const fundingPercentage = project.fundingGoal ? 
       (project.currentFunding || 0) / project.fundingGoal * 100 : 0
     const isSubscribed = subscribedProjects.has(project.id)
@@ -234,7 +234,7 @@ export function GAiACommunityProjects() {
     )
   }
 
-  const renderRegularProject = (project: unknown) => {
+  const renderRegularProject = (project: any) => {
     const fundingPercentage = project.fundingGoal ? 
       (project.currentFunding || 0) / project.fundingGoal * 100 : 0
     const isSubscribed = subscribedProjects.has(project.id)

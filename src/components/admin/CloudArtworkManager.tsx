@@ -27,7 +27,7 @@ interface CloudArtwork {
   cloud_url: string
   cloud_path: string
   file_size: number
-  storage_metadata: Record<string, unknown>
+  storage_metadata: any
   generated_at: string
   downloads: number
   nft_ready: boolean

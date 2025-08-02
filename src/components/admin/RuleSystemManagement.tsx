@@ -499,7 +499,7 @@ function RuleCreator({ rule, onSave }: { rule: Rule | null, onSave: (rule: Rule)
             <label className="text-sm font-medium">Category</label>
             <Select
               value={formData.category || 'security'}
-              onValueChange={(value: string) => setFormData({ ...formData, category: value })}
+              onValueChange={(value: any) => setFormData({ ...formData, category: value })}
             >
               <SelectTrigger>
                 <SelectValue />
@@ -529,7 +529,7 @@ function RuleCreator({ rule, onSave }: { rule: Rule | null, onSave: (rule: Rule)
             <label className="text-sm font-medium">Priority</label>
             <Select
               value={formData.priority || 'medium'}
-              onValueChange={(value: string) => setFormData({ ...formData, priority: value })}
+              onValueChange={(value: any) => setFormData({ ...formData, priority: value })}
             >
               <SelectTrigger>
                 <SelectValue />
@@ -546,7 +546,7 @@ function RuleCreator({ rule, onSave }: { rule: Rule | null, onSave: (rule: Rule)
             <label className="text-sm font-medium">Enforcement</label>
             <Select
               value={formData.enforcement || 'warning'}
-              onValueChange={(value: string) => setFormData({ ...formData, enforcement: value })}
+              onValueChange={(value: any) => setFormData({ ...formData, enforcement: value })}
             >
               <SelectTrigger>
                 <SelectValue />

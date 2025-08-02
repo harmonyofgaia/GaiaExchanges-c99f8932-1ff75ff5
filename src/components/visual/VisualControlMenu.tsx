@@ -24,7 +24,7 @@ import { useLock } from '@/components/providers/ThemeProvider'
 export function VisualControlMenu() {
   const { isLocked, toggleLock } = useLock()
   
-  const handleTemplateApplied = (template: Record<string, unknown>) => {
+  const handleTemplateApplied = (template: any) => {
     console.log('Template applied:', template)
   }
 

@@ -5,7 +5,7 @@ interface TokenMechanism {
   type: 'burn' | 'mint' | 'stake' | 'governance' | 'liquidity'
   name: string
   isActive: boolean
-  parameters: Record<string, unknown>
+  parameters: Record<string, any>
   performance: {
     efficiency: number
     impact: number

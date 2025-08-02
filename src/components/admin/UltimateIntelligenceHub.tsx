@@ -32,7 +32,7 @@ interface IntelligenceData {
   id: string
   source: string
   data_type: string
-  content: unknown
+  content: any
   confidence_level: number
   timestamp: Date
   classification: 'public' | 'private' | 'classified' | 'top_secret'

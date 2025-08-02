@@ -56,10 +56,10 @@ interface DesignTemplate {
   id: string
   name: string
   description: string
-  background: unknown
+  background: any
   colors: string[]
-  animations: unknown[]
-  effects: unknown[]
+  animations: any[]
+  effects: any[]
   created: Date
   isDefault?: boolean
 }
@@ -300,7 +300,7 @@ export function CreativeEngine({ className = '', onAssetGenerated, onTemplateCre
     ]
   }
 
-  const generateAnimationsFromAsset = (asset: CreativeAsset): unknown[] => {
+  const generateAnimationsFromAsset = (asset: CreativeAsset): any[] => {
     // Generate animation parameters based on asset properties
     return [
       { type: 'flow', speed: processingParams.speed / 100, direction: 'radial' },
@@ -309,7 +309,7 @@ export function CreativeEngine({ className = '', onAssetGenerated, onTemplateCre
     ]
   }
 
-  const generateEffectsFromAsset = (asset: CreativeAsset): unknown[] => {
+  const generateEffectsFromAsset = (asset: CreativeAsset): any[] => {
     // Generate visual effects based on asset
     return [
       { type: 'glow', intensity: 0.7, color: '#ffffff' },

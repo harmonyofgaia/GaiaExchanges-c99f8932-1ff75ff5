@@ -244,7 +244,7 @@ export function UniversalStyleController() {
     window.dispatchEvent(new CustomEvent('admin-style-update', { detail: style }))
   }
 
-  const handleStyleChange = (category: keyof StyleState, property: string, value: string | number) => {
+  const handleStyleChange = (category: keyof StyleState, property: string, value: any) => {
     const updatedStyle = {
       ...currentStyle,
       [category]: {

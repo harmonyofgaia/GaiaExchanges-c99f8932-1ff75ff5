@@ -38,7 +38,7 @@ export function SelfTrainingDefenseSystem() {
       if (Math.random() < 0.4) {
         const newThreat: DefenseThreat = {
           id: `threat-${Date.now()}`,
-          level: ['medium', 'high', 'critical'][Math.floor(Math.random() * 3)] as 'medium' | 'high' | 'critical',
+          level: ['medium', 'high', 'critical'][Math.floor(Math.random() * 3)] as any,
           source: possibleThreats[Math.floor(Math.random() * possibleThreats.length)],
           blocked: true,
           timestamp: new Date()

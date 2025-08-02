@@ -27,8 +27,8 @@ interface Chatroom {
 }
 
 interface ChatroomProps {
-  selectedLocation: Record<string, unknown>
-  playerData: Record<string, unknown>
+  selectedLocation: any
+  playerData: any
   isAdmin: boolean
 }
 

@@ -8,28 +8,16 @@ import { Shield, Lock, Eye, Zap, Globe, Wifi, Router, AlertTriangle } from 'luci
 import { toast } from 'sonner'
 import { supabase } from '@/integrations/supabase/client'
 
-
-
-
-interface IPThreat {
-  id: string;
-  type: 'CRITICAL' | 'HIGH' | string;
-  source: string;
-  description: string;
-  blocked: boolean;
-  timestamp: Date;
-}
-
 interface IPSecurityMetrics {
-  protectionLevel: number;
-  threatsBlocked: number;
-  encryptionStrength: string;
-  lastSecurityScan: Date;
-  connectionStability: number;
-  quantumShieldActive: boolean;
+  protectionLevel: number
+  threatsBlocked: number
+  encryptionStrength: string
+  lastSecurityScan: Date
+  connectionStability: number
+  quantumShieldActive: boolean
 }
 
-const AdvancedIPProtection = () => {
+export function AdvancedIPProtection() {
   const [metrics, setMetrics] = useState<IPSecurityMetrics>({
     protectionLevel: 100,
     threatsBlocked: 0,
@@ -39,7 +27,7 @@ const AdvancedIPProtection = () => {
     quantumShieldActive: true
   })
 
-  const [ipThreats, setIpThreats] = useState<IPThreat[]>([])
+  const [ipThreats, setIpThreats] = useState<any[]>([])
   const [protectionActive, setProtectionActive] = useState(true)
   const securityInterval = useRef<NodeJS.Timeout>()
 
@@ -51,7 +39,7 @@ const AdvancedIPProtection = () => {
         console.log('🛡️ GAIA IP PROTECTION - MAXIMUM QUANTUM DEFENSE ACTIVE')
         console.log('🔐 TARGET IP PROTECTED WITH LIFELONG SECURITY WALL')
         
-        const newThreats: IPThreat[] = []
+        const newThreats: any[] = []
 
         // 1. QUANTUM IP ENCRYPTION SHIELD
         const activateQuantumIPShield = () => {
@@ -60,7 +48,7 @@ const AdvancedIPProtection = () => {
           
           // Monitor all network requests for IP exposure
           const originalFetch = window.fetch
-          window.fetch = async (...args: unknown[]) => {
+          window.fetch = async (...args: any[]) => {
             const url = args[0]?.toString() || ''
             
             // Block any attempt to reveal real IP
@@ -93,7 +81,7 @@ const AdvancedIPProtection = () => {
         // 2. ADVANCED WIFI SECURITY MONITORING
         const monitorWiFiSecurity = () => {
           // Check connection quality and security
-          const connection = (navigator as Navigator & { connection?: { effectiveType: string; downlink: number; rtt: number } }).connection
+          const connection = (navigator as any).connection
           if (connection) {
             const networkType = connection.effectiveType
             const downlink = connection.downlink
@@ -231,7 +219,6 @@ const AdvancedIPProtection = () => {
 
     // Run maximum protection every 2 seconds
     securityInterval.current = setInterval(performMaximumIPProtection, 2000)
-
     performMaximumIPProtection()
 
     return () => {
@@ -283,12 +270,21 @@ const AdvancedIPProtection = () => {
             <div className="text-sm text-muted-foreground">Protection Level</div>
             <Badge className="mt-2 bg-green-600 text-white">MAXIMUM</Badge>
           </div>
-          <div className="text-center p-4 rounded-lg bg-gradient-to-br from-red-500/20 to-rose-500/20 border border-red-500/30">
-            <Shield className="h-8 w-8 mx-auto text-red-400 mb-2" />
+
+          <div className="text-center p-4 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30">
+            <Lock className="h-8 w-8 mx-auto text-blue-400 mb-2" />
+            <div className="text-xl font-bold text-blue-400">{metrics.encryptionStrength}</div>
+            <div className="text-sm text-muted-foreground">Encryption Level</div>
+            <Badge className="mt-2 bg-blue-600 text-white">QUANTUM</Badge>
+          </div>
+
+          <div className="text-center p-4 rounded-lg bg-gradient-to-br from-red-500/20 to-pink-500/20 border border-red-500/30">
+            <Eye className="h-8 w-8 mx-auto text-red-400 mb-2" />
             <div className="text-2xl font-bold text-red-400">{metrics.threatsBlocked}</div>
             <div className="text-sm text-muted-foreground">Threats Blocked</div>
             <Badge className="mt-2 bg-red-600 text-white">ACTIVE</Badge>
           </div>
+
           <div className="text-center p-4 rounded-lg bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/30">
             <Wifi className="h-8 w-8 mx-auto text-purple-400 mb-2" />
             <div className="text-2xl font-bold text-purple-400">{metrics.connectionStability}%</div>
@@ -399,5 +395,3 @@ const AdvancedIPProtection = () => {
     </Card>
   )
 }
-
-export default AdvancedIPProtection

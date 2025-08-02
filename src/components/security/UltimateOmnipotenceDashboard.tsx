@@ -5,7 +5,7 @@ import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
 import { ultimateOmnipotence } from '@/services/ultimateOmnipotence'
-import { Star, Crown, Zap, Infinity as InfinityIcon } from 'lucide-react'
+import { Star, Crown, Zap, Infinity } from 'lucide-react'
 
 export function UltimateOmnipotenceDashboard() {
   const [status, setStatus] = useState({
@@ -72,7 +72,7 @@ export function UltimateOmnipotenceDashboard() {
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <InfinityIcon className="h-4 w-4 text-primary" />
+              <Infinity className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Transcendent Powers</span>
             </div>
             <div className="text-2xl font-bold text-primary">{status.transcendentCapabilities.active}</div>
@@ -87,7 +87,7 @@ export function UltimateOmnipotenceDashboard() {
         </div>
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <InfinityIcon className="h-4 w-4 text-primary" />
+            <Infinity className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium">Transcendence Level</span>
           </div>
           <div className="text-4xl font-bold text-primary">{status.transcendenceLevel.toLocaleString()}</div>

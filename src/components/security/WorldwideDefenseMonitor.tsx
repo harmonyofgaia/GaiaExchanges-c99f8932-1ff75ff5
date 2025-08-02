@@ -97,12 +97,12 @@ export function WorldwideDefenseMonitor() {
           id: `threat-${Date.now()}-${i}`,
           source: globalThreatSources[Math.floor(Math.random() * globalThreatSources.length)],
           type: advancedThreatTypes[Math.floor(Math.random() * advancedThreatTypes.length)],
-          severity: ['low', 'medium', 'high', 'critical'][Math.floor(Math.random() * 4)] as 'low' | 'medium' | 'high' | 'critical',
+          severity: ['low', 'medium', 'high', 'critical'][Math.floor(Math.random() * 4)] as any,
           region: regions[Math.floor(Math.random() * regions.length)],
           timestamp: new Date(),
           description: `Advanced AI-detected threat neutralized before impact - Tech superiority maintained`,
           countermeasure: 'Quantum-level multi-layer defense protocol activated with tech analysis',
-          status: ['detected', 'analyzing', 'blocked', 'neutralized'][Math.floor(Math.random() * 4)] as 'detected' | 'analyzing' | 'blocked' | 'neutralized'
+          status: ['detected', 'analyzing', 'blocked', 'neutralized'][Math.floor(Math.random() * 4)] as any
         }
         newThreats.push(threat)
       }

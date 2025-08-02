@@ -25,7 +25,7 @@ interface SystemMetric {
   value: number
   threshold: number
   status: 'healthy' | 'warning' | 'critical'
-  icon: React.ElementType
+  icon: any
   unit: string
   lastChecked: number
 }

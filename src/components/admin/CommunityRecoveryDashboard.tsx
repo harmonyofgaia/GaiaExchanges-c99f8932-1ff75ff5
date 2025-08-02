@@ -20,23 +20,8 @@ import { toast } from 'sonner'
 
 export function CommunityRecoveryDashboard() {
   const [searchAddress, setSearchAddress] = useState('')
-  interface RecoveryRequest {
-    id: number;
-    userEmail: string;
-    walletAddress: string;
-    status: 'pending' | 'approved' | 'rejected';
-    description: string;
-    timestamp: string;
-    priority: 'high' | 'medium' | 'low';
-  }
-  interface WalletAnalysis {
-    address: string;
-    balance: number;
-    riskScore: number;
-    [key: string]: unknown;
-  }
-  const [recoveryRequests, setRecoveryRequests] = useState<RecoveryRequest[]>([])
-  const [walletAnalysis, setWalletAnalysis] = useState<WalletAnalysis | null>(null)
+  const [recoveryRequests, setRecoveryRequests] = useState<any[]>([])
+  const [walletAnalysis, setWalletAnalysis] = useState<any>(null)
   const [isScanning, setIsScanning] = useState(false)
 
   // Generate sample recovery data

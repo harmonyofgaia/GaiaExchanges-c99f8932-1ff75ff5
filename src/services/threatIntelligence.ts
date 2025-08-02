@@ -36,7 +36,7 @@ class ThreatIntelligenceService {
   private threatSignatures: Map<string, ThreatSignature> = new Map()
   private behaviorPatterns: Map<string, BehaviorPattern> = new Map()
   private threatPredictions: ThreatPrediction[] = []
-  private globalThreatFeed: unknown[] = []
+  private globalThreatFeed: any[] = []
   private isMonitoringActive = false
 
   // AI-Powered Predictive Attack Detection
@@ -167,7 +167,7 @@ class ThreatIntelligenceService {
         id: `sig-${Date.now()}-${i}`,
         type: threatTypes[Math.floor(Math.random() * threatTypes.length)],
         pattern: this.generateThreatPattern(),
-        severity: ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'][Math.floor(Math.random() * 4)] as ThreatSeverity,
+        severity: ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'][Math.floor(Math.random() * 4)] as any,
         confidence: Math.random() * 0.3 + 0.7,
         lastSeen: Date.now(),
         description: 'Global threat intelligence signature'
@@ -323,7 +323,7 @@ class ThreatIntelligenceService {
   }
 
   // Neural Network Threat Classification
-  async classifyThreatWithNN(input: unknown): Promise<{
+  async classifyThreatWithNN(input: any): Promise<{
     classification: string
     confidence: number
     features: string[]
@@ -339,7 +339,7 @@ class ThreatIntelligenceService {
     }
   }
 
-  private extractFeatures(input: unknown): string[] {
+  private extractFeatures(input: any): string[] {
     const features = []
     
     if (typeof input === 'string') {

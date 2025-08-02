@@ -20,7 +20,7 @@ interface Location {
 interface WorldMapProps {
   selectedLocation: Location | null
   setSelectedLocation: (location: Location) => void
-  playerData: Record<string, unknown>
+  playerData: any
   isAdmin: boolean
 }
 

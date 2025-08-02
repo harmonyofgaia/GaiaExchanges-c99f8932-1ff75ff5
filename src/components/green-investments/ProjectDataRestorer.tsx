@@ -9,14 +9,14 @@ import { toast } from 'sonner';
 import { Leaf, Download, Key, Globe } from 'lucide-react';
 
 interface ProjectDataRestorerProps {
-  onDataRestored: (projectData: unknown) => void;
+  onDataRestored: (projectData: any) => void;
 }
 
 export function ProjectDataRestorer({ onDataRestored }: ProjectDataRestorerProps) {
   const [apiKey, setApiKey] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [crawlResult, setCrawlResult] = useState<unknown>(null);
+  const [crawlResult, setCrawlResult] = useState<any>(null);
 
   const handleApiKeySubmit = async () => {
     if (!apiKey.trim()) {
