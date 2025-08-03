@@ -374,10 +374,28 @@ export default function VaultSystem() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="text-center p-4 bg-purple-900/20 rounded-lg">
-                <div className="text-purple-400 font-bold mb-2">Wallet Address</div>
+              <div className="text-center p-4 bg-blue-900/20 rounded-lg">
+                <div className="text-blue-400 font-bold mb-2">Main Community Wallet</div>
                 <div className="text-white font-mono text-sm break-all">
                   {GAIA_TOKEN.WALLET_ADDRESS}
+                </div>
+              </div>
+              <div className="text-center p-4 bg-green-900/20 rounded-lg">
+                <div className="text-green-400 font-bold mb-2">Green Investments Wallet</div>
+                <div className="text-white font-mono text-sm break-all">
+                  {GAIA_TOKEN.GREEN_INVESTMENTS_WALLET}
+                </div>
+              </div>
+              <div className="text-center p-4 bg-purple-900/20 rounded-lg">
+                <div className="text-purple-400 font-bold mb-2">Community Vault Wallet</div>
+                <div className="text-white font-mono text-sm break-all">
+                  {GAIA_TOKEN.COMMUNITY_VAULT_WALLET}
+                </div>
+              </div>
+              <div className="text-center p-4 bg-orange-900/20 rounded-lg">
+                <div className="text-orange-400 font-bold mb-2">Animal Welfare Wallet</div>
+                <div className="text-white font-mono text-sm break-all">
+                  {GAIA_TOKEN.ANIMAL_WELFARE_WALLET}
                 </div>
               </div>
               <div className="text-center p-4 bg-blue-900/20 rounded-lg">
