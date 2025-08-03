@@ -1,5 +1,4 @@
-import { useAuth } from '@/components/auth/AuthProvider'
-import { GAIA_TOKEN } from '@/constants/gaia'
+import { GAIA_TOKEN } from '@/constants/tokens'
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -21,7 +20,7 @@ import {
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { supabase } from '@/integrations/supabase/client'
-import { useAuth } from '@/components/auth/AuthProvider'
+import { useAuth } from '@/hooks/useAuth'
 
 interface AnimalWelfareConfig {
   default_fee_percentage: number
@@ -333,7 +332,7 @@ export function AnimalWelfareWalletManager() {
           </p>
           <div className="bg-black/30 p-3 rounded-lg">
             <div className="text-sm text-muted-foreground mb-1">Official Animal Welfare Wallet:</div>
-            <div className="font-mono text-pink-400 text-sm break-all">{GAIA_TOKEN.ANIMAL_WELFARE_WALLET}</div>
+            <div className="font-mono text-pink-400 text-sm break-all">{GAIA_TOKEN.address}</div>
           </div>
         </CardHeader>
         <CardContent>

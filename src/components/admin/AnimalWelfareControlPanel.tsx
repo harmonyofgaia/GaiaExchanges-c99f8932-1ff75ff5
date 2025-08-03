@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { GAIA_TOKEN } from '@/constants/tokens'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -98,7 +99,7 @@ function AnimalWelfareControlPanel() {
         name: 'Luna',
         species: 'Siberian Tiger',
         location: 'Remote Forest, Siberia',
-        walletAddress: GAIA_TOKEN.ANIMAL_WELFARE_WALLET,
+        walletAddress: GAIA_TOKEN.address,
         urgencyLevel: 9,
         emotionalState: { sadness: 85, hope: 32, fear: 78, trust: 15 },
         rescueProgress: 45,
@@ -111,7 +112,7 @@ function AnimalWelfareControlPanel() {
         name: 'Sunny',
         species: 'Golden Eagle',
         location: 'Mountain Range, Colorado',
-        walletAddress: GAIA_TOKEN.ANIMAL_WELFARE_WALLET,
+        walletAddress: GAIA_TOKEN.address,
         urgencyLevel: 7,
         emotionalState: { sadness: 60, hope: 55, fear: 45, trust: 40 },
         rescueProgress: 72,
@@ -124,7 +125,7 @@ function AnimalWelfareControlPanel() {
         name: 'Freedom',
         species: 'African Elephant',
         location: 'Wildlife Reserve, Kenya',
-        walletAddress: GAIA_TOKEN.ANIMAL_WELFARE_WALLET,
+        walletAddress: GAIA_TOKEN.address,
         urgencyLevel: 8,
         emotionalState: { sadness: 72, hope: 48, fear: 65, trust: 28 },
         rescueProgress: 23,
