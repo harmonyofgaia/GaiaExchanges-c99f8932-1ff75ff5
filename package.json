@@ -12,6 +12,7 @@
     "private": true,
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
+    "build:dev": "vite build --mode development",
     "install:legacy": "npm install --legacy-peer-deps",
     "postinstall": "echo 'Note: If you encounter peer dependency conflicts, run: npm run install:legacy'",
     "deploy": "./scripts/deploy.sh",
