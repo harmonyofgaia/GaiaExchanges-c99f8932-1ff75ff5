@@ -21,6 +21,7 @@ interface AdminOnlyAccessProps {
   children: ReactNode
 }
 
+
 export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
   const [adminCredentials, setAdminCredentials] = useState({
@@ -28,16 +29,24 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
     password: ''
   })
   const [attempts, setAttempts] = useState(0)
-  const [ipAllowed, setIpAllowed] = useState(true)
+  const [ipAllowed, setIpAllowed] = useState(true) // default true for SSR safety
   const [clientIP, setClientIP] = useState('')
-  const allowedIPs = ['192.168.1.121'] // Add more as needed
+  // Add your allowed IPs here
+  const allowedIPs = [
+    '127.0.0.1', // localhost
+    '::1',
+    // '192.168.1.121', // example LAN IP
+    // Add your real public IP here
+  ]
   const maxAttempts = 3
 
   useEffect(() => {
-    // Check client IP on mount
+    // Fetch public IP and check whitelist
     getPublicIP().then(ip => {
       setClientIP(ip || '')
-      if (ip && !allowedIPs.includes(ip)) {
+      if (ip && allowedIPs.includes(ip)) {
+        setIpAllowed(true)
+      } else {
         setIpAllowed(false)
       }
     })
@@ -45,9 +54,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
     const newSession = localStorage.getItem('gaia-admin') || sessionStorage.getItem('gaia-admin')
     const oldSession = localStorage.getItem('gaia-admin-session')
     const adminActive = sessionStorage.getItem('admin-active')
-    
     let sessionValid = false
-    
     // Check new format first
     if (newSession && (adminActive === '1' || adminActive === 'true')) {
       try {
@@ -59,7 +66,6 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
         // Invalid session data, ignore
       }
     }
-    
     // Check old format as fallback
     if (!sessionValid && oldSession) {
       const sessionExpiry = localStorage.getItem('gaia-admin-expiry')
@@ -74,7 +80,6 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
         }
       }
     }
-    
     setIsAdminAuthenticated(sessionValid)
   }, [])
 
@@ -191,6 +196,12 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
               >
                 Reset Attempts
               </Button>
+            </div>
+          ) : !ipAllowed ? (
+            <div className="text-center p-6 space-y-4">
+              <AlertTriangle className="h-16 w-16 text-red-400 mx-auto" />
+              <div className="text-red-400 font-bold">ACCESS DENIED</div>
+              <p className="text-red-300 text-sm">Your IP ({clientIP || 'unknown'}) is not allowed to access the admin portal.</p>
             </div>
           ) : (
             <form onSubmit={handleAdminLogin} className="space-y-4">
