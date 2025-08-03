@@ -12,4 +12,3 @@ dsn: import.meta.env.VITE_SENTRY_DSN,
     replaysSessionSampleRate: 0.1,
     replaysOnErrorSampleRate: 1.0,
 });
-
