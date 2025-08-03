@@ -3,7 +3,7 @@ import { BrowserTracing } from "@sentry/browser";
 import { Replay } from "@sentry/replay";
 
 Sentry.init({
-    dsn: process.env.REACT_APP_SENTRY_DSN,
+    dsn: import.meta.env.VITE_SENTRY_DSN,
     integrations: [
         new BrowserTracing(),
         new Replay(),
