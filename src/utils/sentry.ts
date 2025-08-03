@@ -3,7 +3,7 @@ import { BrowserTracing } from "@sentry/browser";
 import { Replay } from "@sentry/replay";
 
 Sentry.init({
-    dsn: import.meta.env.VITE_SENTRY_DSN,
+dsn: import.meta.env.VITE_SENTRY_DSN,
     integrations: [
         new BrowserTracing(),
         new Replay(),
@@ -12,3 +12,4 @@ Sentry.init({
     replaysSessionSampleRate: 0.1,
     replaysOnErrorSampleRate: 1.0,
 });
+
