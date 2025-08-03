@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { GAIA_TOKEN } from '@/constants/tokens'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
@@ -31,7 +30,7 @@ export function GreenProjectWalletManager() {
       id: '1',
       name: '🌍 Global Reforestation Initiative',
       description: 'Tree planting and forest restoration worldwide',
-      wallet_address: GAIA_TOKEN.address,
+      wallet_address: GAIA_TOKEN.GREEN_INVESTMENTS_WALLET,
       allocation_percentage: 25,
       total_received: 12547.89,
       project_status: 'active'

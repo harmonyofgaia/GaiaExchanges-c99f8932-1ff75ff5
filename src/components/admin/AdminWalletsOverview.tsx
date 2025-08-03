@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { GAIA_TOKEN } from '@/constants/tokens';
+import { GAIA_TOKEN } from '@/constants/gaia';
 
 // Import project data from managers
 import { GreenProjectWalletManager } from '@/components/vault/GreenProjectWalletManager';
@@ -13,20 +13,14 @@ import { AnimalWelfareWalletManager } from '@/components/animal-welfare/AnimalWe
 
 
 // Import or define real project data here
-const greenProjects = [
-  { name: 'Green Project 1', wallet_address: 'GP1...', allocation_percentage: 30, total_received: 10000 },
-  { name: 'Green Project 2', wallet_address: 'GP2...', allocation_percentage: 25, total_received: 8500 }
-];
-const animalProjects = [
-  { name: 'Animal Project 1', wallet_address: 'AP1...', allocation_percentage: 35, total_received: 12000 },
-  { name: 'Animal Project 2', wallet_address: 'AP2...', allocation_percentage: 20, total_received: 7000 }
-];
+import { greenProjects } from '@/components/vault/GreenProjectWalletManager';
+import { animalProjects } from '@/components/animal-welfare/AnimalWelfareWalletManager';
 // If you have per-project vaults, import or define them here
 const communityVaultProjects = [];
 const mainWalletOverview = {
-  address: GAIA_TOKEN.address,
-  network: 'Solana',
-  contract: GAIA_TOKEN.address,
+  address: GAIA_TOKEN.WALLET_ADDRESS,
+  network: GAIA_TOKEN.NETWORK,
+  contract: GAIA_TOKEN.CONTRACT_ADDRESS,
 };
 
 export const AdminWalletsOverview: React.FC = () => {
@@ -44,26 +38,26 @@ export const AdminWalletsOverview: React.FC = () => {
     });
 
     // Green Investments
-    doc.text('Green Investments Projects', 14, 50);
+    doc.text('Green Investments Projects', 14, doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 50);
     autoTable(doc, {
-      startY: 54,
+      startY: doc.lastAutoTable ? doc.lastAutoTable.finalY + 14 : 54,
       head: [['Project', 'Wallet Address', 'Allocation %', 'Total Received']],
       body: greenProjects.map(p => [p.name, p.wallet_address, p.allocation_percentage, p.total_received]),
     });
 
     // Animal Welfare
-    doc.text('Animal Welfare Projects', 14, 100);
+    doc.text('Animal Welfare Projects', 14, doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 100);
     autoTable(doc, {
-      startY: 104,
+      startY: doc.lastAutoTable ? doc.lastAutoTable.finalY + 14 : 104,
       head: [['Project', 'Wallet Address', 'Allocation %', 'Total Received']],
       body: animalProjects.map(p => [p.name, p.wallet_address, p.allocation_percentage, p.total_received]),
     });
 
     // Community Vault (if any)
     if (communityVaultProjects.length > 0) {
-      doc.text('Community Vault Projects', 14, 150);
+      doc.text('Community Vault Projects', 14, doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 150);
       autoTable(doc, {
-        startY: 154,
+        startY: doc.lastAutoTable ? doc.lastAutoTable.finalY + 14 : 154,
         head: [['Project', 'Wallet Address', 'Allocation %', 'Total Received']],
         body: communityVaultProjects.map(p => [p.name, p.wallet_address, p.allocation_percentage, p.total_received]),
       });

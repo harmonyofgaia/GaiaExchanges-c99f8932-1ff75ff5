@@ -282,20 +282,7 @@ export function SecureAdminDashboard() {
           <AnimalDefenseCommandCenter />
         </TabsContent>
 
-          {/* Phase 1 & 2 Implementation Tabs */}
-          <TabsContent value="bundled-admin" className="space-y-6">
-            <BundledAdminPages />
-          </TabsContent>
-
-          <TabsContent value="farmer-ecosystem" className="space-y-6">
-            <FarmerEcosystem />
-          </TabsContent>
-
-          <TabsContent value="pdf-tracker" className="space-y-6">
-            <PDFTransactionTracker />
-          </TabsContent>
-
-          <TabsContent value="overview" className="space-y-6">
+        <TabsContent value="overview" className="space-y-6">
           <UltimateAdminSuite />
         </TabsContent>
 

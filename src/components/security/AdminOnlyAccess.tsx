@@ -35,7 +35,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
   const allowedIPs = [
     '127.0.0.1', // localhost
     '::1',
-    '192.168.1.121', // allowed LAN IP
+    // '192.168.1.121', // example LAN IP
     // Add your real public IP here
   ]
   const maxAttempts = 3

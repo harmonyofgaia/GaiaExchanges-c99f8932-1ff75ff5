@@ -56,10 +56,7 @@ const WalletPage = () => {
                 <CardTitle className="text-green-400 text-center">🌍 OFFICIAL GAIA MATRIX</CardTitle>
               </CardHeader>
               <CardContent>
-                <MatrixWalletDisplay 
-                  walletAddress="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa" 
-                  label="GAIA Matrix Wallet" 
-                />
+                <MatrixWalletDisplay />
               </CardContent>
             </Card>
 
