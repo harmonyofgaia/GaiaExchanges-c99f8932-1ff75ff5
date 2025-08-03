@@ -61,7 +61,7 @@ const Reinvestments = () => {
       description: "Personal project: Restoring coral reefs with balanced underwater audio signals to attract marine life and recover ecosystems",
       burnContribution: 5, // 5% of all burns go here
       category: "Marine Conservation",
-      walletAddress: GAIA_TOKEN.GREEN_INVESTMENTS_WALLET
+      walletAddress: GAIA_TOKEN.WALLET_ADDRESS
     },
     {
       id: 2,
@@ -161,7 +161,7 @@ const Reinvestments = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-blue-400 font-bold">Main Community Wallet:</span>
+                <span className="text-blue-400 font-bold">Official GAiA Wallet:</span>
                 <Button onClick={copyOfficialWalletAddress} variant="outline" size="sm" className="border-blue-500/30 text-blue-400">
                   <Copy className="h-3 w-3 mr-1" />
                   Copy
@@ -414,11 +414,7 @@ const Reinvestments = () => {
                       <div className="bg-black/30 p-2 rounded">
                         <div className="text-xs text-cyan-400 mb-1">Connected to Official Wallet:</div>
                         <div className="font-mono text-xs text-cyan-300 break-all">
-                          {project.walletAddress === GAIA_TOKEN.WALLET_ADDRESS ? 'Main Community Wallet' :
-                            project.walletAddress === GAIA_TOKEN.GREEN_INVESTMENTS_WALLET ? 'Green Investments Wallet' :
-                            project.walletAddress === GAIA_TOKEN.COMMUNITY_VAULT_WALLET ? 'Community Vault Wallet' :
-                            project.walletAddress === GAIA_TOKEN.ANIMAL_WELFARE_WALLET ? 'Animal Welfare Wallet' :
-                            'Custom Wallet'}: {project.walletAddress}
+                          {project.walletAddress}
                         </div>
                       </div>
                     </div>
@@ -470,7 +466,7 @@ const Reinvestments = () => {
                 Every token verified • Every transaction transparent • Every reinvestment tracked • 90% project reinvestment • Building the future of sustainable finance
               </p>
               <div className="mt-2 text-xs text-green-400">
-                Main Community Wallet: {GAIA_TOKEN.WALLET_ADDRESS} | Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}
+                Official Wallet: {GAIA_TOKEN.WALLET_ADDRESS} | Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}
               </div>
             </div>
           </div>

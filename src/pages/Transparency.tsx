@@ -81,7 +81,7 @@ const Transparency = () => {
 
         {/* Matrix Wallet Display */}
         <div className="mb-8">
-          <MatrixWalletDisplay walletAddress={GAIA_TOKEN.WALLET_ADDRESS} label="Main Community Wallet" />
+          <MatrixWalletDisplay />
         </div>
 
         {/* Real-time System Metrics */}

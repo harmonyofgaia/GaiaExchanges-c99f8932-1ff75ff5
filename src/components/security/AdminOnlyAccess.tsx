@@ -1,15 +1,5 @@
 
 import { ReactNode, useEffect, useState } from 'react'
-// Utility to get public IP (IPv4) using external API
-async function getPublicIP() {
-  try {
-    const res = await fetch('https://api.ipify.org?format=json')
-    const data = await res.json()
-    return data.ip
-  } catch {
-    return null
-  }
-}
 import { Shield, Lock, AlertTriangle } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -28,11 +18,9 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
     password: ''
   })
   const [attempts, setAttempts] = useState(0)
-  // IP restrictions removed for universal access
   const maxAttempts = 3
 
-  // No IP restriction logic
-
+  useEffect(() => {
     // Check for existing admin session (both new and old formats)
     const newSession = localStorage.getItem('gaia-admin') || sessionStorage.getItem('gaia-admin')
     const oldSession = localStorage.getItem('gaia-admin-session')
@@ -68,25 +56,20 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
     }
     
     setIsAdminAuthenticated(sessionValid)
-  // (removed orphaned useEffect)
+  }, [])
 
-  const handleAdminLogin = async (e: React.FormEvent) => {
+  const handleAdminLogin = (e: React.FormEvent) => {
     e.preventDefault()
+    
     if (attempts >= maxAttempts) {
       alert('🚫 Maximum login attempts exceeded. Access blocked for security.')
       return
     }
-    // Debug: Show entered credentials
-    console.log('[DEBUG] Entered username:', adminCredentials.username)
-    console.log('[DEBUG] Entered password:', adminCredentials.password)
+
     // Admin credentials check
-    // Normalize input for comparison
-    const inputUsername = adminCredentials.username.trim().toLowerCase();
-    const inputPassword = adminCredentials.password.trim();
-    const validUsername = 'synatic';
-    const validPassword = 'Freedom!oul19922323';
-    if (inputUsername === validUsername && inputPassword === validPassword) {
+    if (adminCredentials.username === 'Synatic' && adminCredentials.password === 'Freedom!oul19922323') {
       setIsAdminAuthenticated(true)
+      
       // Set optimized admin session
       const sessionId = `admin-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
       const sessionData = {
@@ -94,18 +77,16 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
         ts: Date.now(),
         active: true
       }
+      
       // Try localStorage first, fallback to sessionStorage
       try {
         localStorage.setItem('gaia-admin', JSON.stringify(sessionData))
       } catch (e) {
-        console.error('[DEBUG] localStorage error:', e)
-        try {
-          sessionStorage.setItem('gaia-admin', JSON.stringify(sessionData))
-        } catch (err) {
-          console.error('[DEBUG] sessionStorage error:', err)
-        }
+        sessionStorage.setItem('gaia-admin', JSON.stringify(sessionData))
       }
+      
       sessionStorage.setItem('admin-active', '1')
+      
       console.log('🛡️ ADMIN ACCESS GRANTED - QUANTUM SECURITY ACTIVE')
     } else {
       setAttempts(prev => prev + 1)
@@ -161,7 +142,6 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
             <p className="text-red-300 text-sm mt-2">
               Ultra-Secure Admin Portal • Quantum Protection Active
             </p>
-            {/* IP restriction display removed */}
           </div>
         </CardHeader>
         <CardContent>
@@ -170,12 +150,6 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
               <AlertTriangle className="h-16 w-16 text-red-400 mx-auto" />
               <div className="text-red-400 font-bold">ACCESS BLOCKED</div>
               <p className="text-red-300 text-sm">Maximum login attempts exceeded</p>
-              <Button 
-                className="mt-4 bg-red-700 text-white" 
-                onClick={() => { setAttempts(0); setAdminCredentials({ username: '', password: '' }); }}
-              >
-                Reset Attempts
-              </Button>
             </div>
           ) : (
             <form onSubmit={handleAdminLogin} className="space-y-4">
@@ -189,7 +163,6 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
                   className="bg-black/40 border-red-500/30 text-red-400"
                   placeholder="Enter admin username..."
                   required
-                  disabled={!ipAllowed}
                 />
               </div>
 
@@ -203,14 +176,12 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
                   className="bg-black/40 border-red-500/30 text-red-400"
                   placeholder="Enter admin password..."
                   required
-                  disabled={!ipAllowed}
                 />
               </div>
 
               <Button 
                 type="submit" 
                 className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-3"
-                disabled={!ipAllowed}
               >
                 <Shield className="h-5 w-5 mr-2" />
                 ACCESS ADMIN PORTAL
@@ -221,11 +192,6 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
                   Failed attempts: {attempts}/{maxAttempts}
                 </div>
               )}
-              {/* DEBUG: Show entered credentials for troubleshooting */}
-              <div className="mt-4 p-2 bg-black/30 border border-red-500/20 rounded text-xs text-red-300">
-                <div><b>DEBUG:</b> Entered Username: <code>{adminCredentials.username}</code></div>
-                <div><b>DEBUG:</b> Entered Password: <code>{adminCredentials.password}</code></div>
-              </div>
             </form>
           )}
         </CardContent>

@@ -216,13 +216,7 @@ const FeeVault = () => {
                     <Progress value={destination.percentage_allocation} className="h-2" />
                     {destination.wallet_address && (
                       <div className="text-xs text-muted-foreground">
-                        Wallet: {(() => {
-                          if (destination.wallet_address === GAIA_TOKEN.WALLET_ADDRESS) return 'Main Community Wallet';
-                          if (destination.wallet_address === GAIA_TOKEN.GREEN_INVESTMENTS_WALLET) return 'Green Investments Wallet';
-                          if (destination.wallet_address === GAIA_TOKEN.COMMUNITY_VAULT_WALLET) return 'Community Vault Wallet';
-                          if (destination.wallet_address === GAIA_TOKEN.ANIMAL_WELFARE_WALLET) return 'Animal Welfare Wallet';
-                          return 'Custom Wallet';
-                        })()} - {destination.wallet_address.slice(0, 16)}...
+                        Wallet: {destination.wallet_address.slice(0, 16)}...
                       </div>
                     )}
                   </div>

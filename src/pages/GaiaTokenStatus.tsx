@@ -58,30 +58,9 @@ export default function GaiaTokenStatus() {
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />
-                  <strong>Main Community Wallet:</strong> 
+                  <strong>Official Wallet:</strong> 
                   <code className="bg-gray-800 px-2 py-1 rounded text-blue-400 font-mono">
                     {GAIA_TOKEN.WALLET_ADDRESS}
-                  </code>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-400" />
-                  <strong>Green Investments Wallet:</strong> 
-                  <code className="bg-gray-800 px-2 py-1 rounded text-green-400 font-mono">
-                    {GAIA_TOKEN.GREEN_INVESTMENTS_WALLET}
-                  </code>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-400" />
-                  <strong>Community Vault Wallet:</strong> 
-                  <code className="bg-gray-800 px-2 py-1 rounded text-purple-400 font-mono">
-                    {GAIA_TOKEN.COMMUNITY_VAULT_WALLET}
-                  </code>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-400" />
-                  <strong>Animal Welfare Wallet:</strong> 
-                  <code className="bg-gray-800 px-2 py-1 rounded text-orange-400 font-mono">
-                    {GAIA_TOKEN.ANIMAL_WELFARE_WALLET}
                   </code>
                 </div>
                 <div className="flex items-center gap-2">

@@ -15,13 +15,7 @@ interface MatrixChar {
   opacity: number
 }
 
-
-interface MatrixWalletDisplayProps {
-  walletAddress: string
-  label: string
-}
-
-export function MatrixWalletDisplay({ walletAddress, label }: MatrixWalletDisplayProps) {
+export function MatrixWalletDisplay() {
   const [showFullAddress, setShowFullAddress] = useState(false)
   const [matrixChars, setMatrixChars] = useState<MatrixChar[]>([])
   const [isAnimating, setIsAnimating] = useState(true)
@@ -58,9 +52,9 @@ export function MatrixWalletDisplay({ walletAddress, label }: MatrixWalletDispla
   }, [isAnimating])
 
   const copyWalletAddress = () => {
-    navigator.clipboard.writeText(walletAddress)
+    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
     toast.success('Wallet Address Copied!', {
-      description: `${label} copied to clipboard`,
+      description: 'GAiA official wallet address copied to clipboard',
       duration: 3000
     })
   }
@@ -124,11 +118,11 @@ export function MatrixWalletDisplay({ walletAddress, label }: MatrixWalletDispla
       </CardHeader>
 
       <CardContent className="relative z-10 space-y-6">
-        {/* Wallet Address Display */}
+        {/* Official Wallet Address */}
         <div className="p-4 bg-black/40 rounded-lg border border-green-500/30">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <span className="text-green-400 font-bold">{label}</span>
+              <span className="text-green-400 font-bold">Official GAiA Wallet:</span>
               <Badge className="bg-green-600 text-white">OFFICIAL</Badge>
             </div>
             <div className="flex gap-2">
@@ -151,7 +145,7 @@ export function MatrixWalletDisplay({ walletAddress, label }: MatrixWalletDispla
             </div>
           </div>
           <div className="font-mono text-green-300 text-sm bg-black/30 p-2 rounded border border-green-500/20">
-            {formatAddress(walletAddress)}
+            {formatAddress(GAIA_TOKEN.WALLET_ADDRESS)}
           </div>
         </div>
 

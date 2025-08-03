@@ -32,8 +32,7 @@ const mockGaiaData: GaiaTokenData = {
 }
 
 const GAIA_CONTRACT_ADDRESS = "t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump"
-import { GAIA_TOKEN } from '@/constants/gaia'
-const GAIA_WALLET_ADDRESS = GAIA_TOKEN.WALLET_ADDRESS
+const GAIA_WALLET_ADDRESS = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh"
 
 export function GaiaTokenTracker() {
   const [gaiaData, setGaiaData] = useState<GaiaTokenData>(mockGaiaData)

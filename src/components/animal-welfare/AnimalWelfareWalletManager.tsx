@@ -1,6 +1,3 @@
-import { useAuth } from '@/components/auth/AuthProvider'
-import { GAIA_TOKEN } from '@/constants/gaia'
-
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -41,7 +38,7 @@ interface AnimalProject {
   animal_count: number
 }
 
-// const ANIMAL_WELFARE_WALLET = 'GRboWoafk4CYZyiuFtB84wT8DCswmhQtYthpGg31yJEf'
+const ANIMAL_WELFARE_WALLET = 'GRboWoafk4CYZyiuFtB84wT8DCswmhQtYthpGg31yJEf'
 
 export function AnimalWelfareWalletManager() {
   const { user } = useAuth()
@@ -56,13 +53,12 @@ export function AnimalWelfareWalletManager() {
   const [totalAllocated, setTotalAllocated] = useState(0)
   const [isProcessingFees, setIsProcessingFees] = useState(false)
 
-  // Each project now has its own unique wallet address
   const animalProjects: AnimalProject[] = [
     {
       id: '1',
       name: '🐾 Global Animal Rescue Network',
       description: 'Emergency rescue operations for animals in crisis worldwide',
-      wallet_address: 'AW1o9xG7pQzRbVx8uT9wE6cJdL3vF1sA2rP5qW8xN9kM',
+      wallet_address: ANIMAL_WELFARE_WALLET,
       allocation_percentage: 30,
       total_received: 15847.92,
       project_status: 'active',
@@ -72,7 +68,7 @@ export function AnimalWelfareWalletManager() {
       id: '2',
       name: '🏥 Wildlife Rehabilitation Centers',
       description: 'Medical care and rehabilitation for injured wildlife',
-      wallet_address: 'AW2HyK2mN7pQsRbVx8uT9wE6cJdL3vF1sA2rP5qW8xN',
+      wallet_address: ANIMAL_WELFARE_WALLET,
       allocation_percentage: 25,
       total_received: 12963.45,
       project_status: 'active',
@@ -82,7 +78,7 @@ export function AnimalWelfareWalletManager() {
       id: '3',
       name: '🌿 Habitat Preservation Initiative',
       description: 'Protecting and restoring natural animal habitats',
-      wallet_address: 'AW3KjF3vR9sT2eN5qW8xL4mP6yC1zA9dH5uI7oE2nQ4r',
+      wallet_address: ANIMAL_WELFARE_WALLET,
       allocation_percentage: 20,
       total_received: 10782.34,
       project_status: 'active',
@@ -92,7 +88,7 @@ export function AnimalWelfareWalletManager() {
       id: '4',
       name: '🚫 Anti-Poaching Operations',
       description: 'Advanced technology to stop illegal hunting and trafficking',
-      wallet_address: 'AW4VbN8jK5sT9eR4wQ7xL3mP1yC6zA5dH9uI4oE8nF7r',
+      wallet_address: ANIMAL_WELFARE_WALLET,
       allocation_percentage: 15,
       total_received: 8429.12,
       project_status: 'active',
@@ -102,7 +98,7 @@ export function AnimalWelfareWalletManager() {
       id: '5',
       name: '🐕 Street Animal Care Program',
       description: 'Feeding, medical care, and shelter for street animals',
-      wallet_address: 'AW59MkL5vR2sT6eN8qW4xJ7mP3yC1zA2dH6uI9oE5nQ',
+      wallet_address: ANIMAL_WELFARE_WALLET,
       allocation_percentage: 10,
       total_received: 5156.78,
       project_status: 'active',
@@ -333,7 +329,7 @@ export function AnimalWelfareWalletManager() {
           </p>
           <div className="bg-black/30 p-3 rounded-lg">
             <div className="text-sm text-muted-foreground mb-1">Official Animal Welfare Wallet:</div>
-            <div className="font-mono text-pink-400 text-sm break-all">{GAIA_TOKEN.ANIMAL_WELFARE_WALLET}</div>
+            <div className="font-mono text-pink-400 text-sm break-all">{ANIMAL_WELFARE_WALLET}</div>
           </div>
         </CardHeader>
         <CardContent>

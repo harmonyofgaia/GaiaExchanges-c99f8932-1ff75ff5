@@ -1,6 +1,6 @@
 export const GAIA_TOKEN = {
   // Official GAiA Token Addresses
-  WALLET_ADDRESS: 'ERS1S7HqgSEh6edNVQzq2eZWSCw3jprJELHvLZ4LAzeY', // Main GAiA token wallet
+  WALLET_ADDRESS: '6DAj3dhtwBDv3HY3UYw1ykjHGRLTU7yMKQmCn8bNoTpW',
   CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   SYMBOL: 'GAiA',
   NAME: 'GAiA Token - Harmony of Gaia',
@@ -8,28 +8,23 @@ export const GAIA_TOKEN = {
   NETWORK: 'Solana',
   PUMP_FUN_URL: 'https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
   OFFICIAL_WEBSITE: 'https://www.gaiaexchanges.com',
-
-  // Additional Wallets
-  GREEN_INVESTMENTS_WALLET: 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7',
-  COMMUNITY_VAULT_WALLET: '6DAj3dhtwBDv3HY3UYw1ykjHGRLTU7yMKQmCn8bNoTpW',
-  ANIMAL_WELFARE_WALLET: 'GRboWoafk4CYZyiuFtB84wT8DCswmhQtYthpGg31yJEf',
-
+  
   // Token Metrics
   TOTAL_SUPPLY: 1000000000000, // 1 Trillion tokens
   BURNED_TOKENS: 0,
   CIRCULATING_SUPPLY: 1000000000000,
   INITIAL_PRICE: 0.0001, // Added back for compatibility
-
+  
   // Tokenomics
   BURN_RATE: 0, // 0% burn rate
   REFLECTION_RATE: 0, // 0% reflection
   LIQUIDITY_POOL: 100, // 100% liquidity locked
-
+  
   // Environmental Impact
   CARBON_OFFSET_PER_TRANSACTION: 0.001, // kg CO2
   TREES_PLANTED_TOTAL: 50000,
   OCEAN_CLEANUP_CONTRIBUTION: 25000, // USD
-
+  
   // Brand messaging
   BRAND_STATEMENT: 'We Are a Strong Creative Open Minded Circuit To Happiness - Seeds Will form in to Music',
   OFFICIAL_DISCLAIMER: 'This is the ONLY official GAiA Token. Verify contract address before trading.',
