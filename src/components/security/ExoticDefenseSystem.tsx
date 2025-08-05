@@ -42,7 +42,7 @@ export function ExoticDefenseSystem() {
   })
 
   const [isActivatingExoticMode, setIsActivatingExoticMode] = useState(false)
-  const defenseInterval = useRef<NodeJS.Timeout>()
+  const defenseInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const runExoticDefenseSystem = async () => {

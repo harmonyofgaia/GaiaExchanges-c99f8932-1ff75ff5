@@ -29,7 +29,7 @@ export function AdvancedIPProtection() {
 
   const [ipThreats, setIpThreats] = useState<any[]>([])
   const [protectionActive, setProtectionActive] = useState(true)
-  const securityInterval = useRef<NodeJS.Timeout>()
+  const securityInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const performMaximumIPProtection = async () => {

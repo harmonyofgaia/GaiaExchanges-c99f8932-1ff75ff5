@@ -45,7 +45,7 @@ export function AttackCounterSystem() {
 
   const [counterAttacks, setCounterAttacks] = useState<CounterAttack[]>([])
   const [autoRetaliation, setAutoRetaliation] = useState(true)
-  const counterSystemInterval = useRef<NodeJS.Timeout>()
+  const counterSystemInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const runCounterSystem = async () => {

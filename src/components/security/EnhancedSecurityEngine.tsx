@@ -31,7 +31,7 @@ export function EnhancedSecurityEngine() {
   
   const [threats, setThreats] = useState<SecurityThreat[]>([])
   const notificationHistory = useRef<Set<string>>(new Set())
-  const securityInterval = useRef<NodeJS.Timeout>()
+  const securityInterval = useRef<NodeJS.Timeout>(undefined)
 
   // Advanced security scanning every second
   useEffect(() => {
