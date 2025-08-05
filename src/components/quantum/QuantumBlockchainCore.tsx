@@ -58,7 +58,7 @@ export function QuantumBlockchainCore() {
     ipMonitoring: 'GLOBAL'
   })
 
-  const blockchainInterval = useRef<NodeJS.Timeout>()
+  const blockchainInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const runQuantumBlockchain = () => {

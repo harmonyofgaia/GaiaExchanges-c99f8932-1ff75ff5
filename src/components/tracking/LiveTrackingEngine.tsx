@@ -46,7 +46,7 @@ export function LiveTrackingEngine() {
   })
 
   const [liveEvents, setLiveEvents] = useState<LiveGAiAEvent[]>([])
-  const trackingInterval = useRef<NodeJS.Timeout>()
+  const trackingInterval = useRef<NodeJS.Timeout>(undefined)
   const eventCounter = useRef(0)
 
   useEffect(() => {

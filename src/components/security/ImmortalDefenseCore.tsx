@@ -184,8 +184,8 @@ export function ImmortalDefenseCore() {
 
   const [isImmortalActive, setIsImmortalActive] = useState(true)
   const [quantumEvolutionActive, setQuantumEvolutionActive] = useState(true)
-  const immortalInterval = useRef<NodeJS.Timeout>()
-  const evolutionBoostInterval = useRef<NodeJS.Timeout>()
+  const immortalInterval = useRef<NodeJS.Timeout>(undefined)
+  const evolutionBoostInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const runImmortalDefenseCore = () => {

@@ -50,7 +50,7 @@ export function SecurityOrchestrator() {
       lastCheck: new Date()
     }
   ])
-  const orchestratorInterval = useRef<NodeJS.Timeout>()
+  const orchestratorInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const runSecurityOrchestrator = () => {
