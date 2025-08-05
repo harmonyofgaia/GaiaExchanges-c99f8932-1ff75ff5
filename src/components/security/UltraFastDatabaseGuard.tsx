@@ -49,7 +49,7 @@ export function UltraFastDatabaseGuard() {
   })
   
   const [isUltraFastModeActive, setIsUltraFastModeActive] = useState(true)
-  const nanosecondInterval = useRef<NodeJS.Timeout>()
+  const nanosecondInterval = useRef<NodeJS.Timeout>(undefined)
 
   // ULTRA-FAST DATABASE ATTACK DETECTION AND WATERSOLID RESPONSE
   useEffect(() => {

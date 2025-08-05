@@ -52,7 +52,7 @@ export function WorldwideDefenseMonitor() {
     globalRanking: 1
   })
 
-  const monitorInterval = useRef<NodeJS.Timeout>()
+  const monitorInterval = useRef<NodeJS.Timeout>(undefined)
   const regions = [
     'North America', 'Europe', 'Asia-Pacific', 'Middle East', 
     'Africa', 'South America', 'Eastern Europe', 'Oceania'

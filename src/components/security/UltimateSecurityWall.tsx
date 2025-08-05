@@ -57,7 +57,7 @@ export function UltimateSecurityWall() {
 
   const [isUnbreakable, setIsUnbreakable] = useState(true)
   const [quantumProtection, setQuantumProtection] = useState(100)
-  const securityInterval = useRef<NodeJS.Timeout>()
+  const securityInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const maintainUltimateDefense = () => {

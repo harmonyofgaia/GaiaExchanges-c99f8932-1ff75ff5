@@ -37,7 +37,7 @@ export function WiFiNetworkProtection() {
   
   const [threats, setThreats] = useState<NetworkThreat[]>([])
   const [wifiProtectionActive, setWifiProtectionActive] = useState(true)
-  const protectionInterval = useRef<NodeJS.Timeout>()
+  const protectionInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const performWiFiSecurityScan = async () => {

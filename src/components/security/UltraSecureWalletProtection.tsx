@@ -41,7 +41,7 @@ export function UltraSecureWalletProtection() {
 
   const [threats, setThreats] = useState<GlobalThreat[]>([])
   const [isScanning, setIsScanning] = useState(true)
-  const globalScanInterval = useRef<NodeJS.Timeout>()
+  const globalScanInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const performGlobalSecurityScan = async () => {
