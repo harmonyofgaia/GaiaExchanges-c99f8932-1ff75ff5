@@ -34,7 +34,7 @@ export function OmniscientGPSEngine() {
   const [trackingInput, setTrackingInput] = useState('')
   const [isTracking, setIsTracking] = useState(false)
   const [systemPower, setSystemPower] = useState(1000)
-  const trackingInterval = useRef<NodeJS.Timeout>()
+  const trackingInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('🛰️ OMNISCIENT GPS ENGINE - UNLIMITED TRACKING POWER')

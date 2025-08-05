@@ -29,8 +29,8 @@ export function PersistentDragonCore() {
     worldwideInfluence: 1
   })
 
-  const growthInterval = useRef<NodeJS.Timeout>()
-  const saveInterval = useRef<NodeJS.Timeout>()
+  const growthInterval = useRef<NodeJS.Timeout>(undefined)
+  const saveInterval = useRef<NodeJS.Timeout>(undefined)
   const startTime = useRef(Date.now())
 
   // Load persistent dragon data on component mount

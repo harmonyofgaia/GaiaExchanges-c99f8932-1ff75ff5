@@ -49,8 +49,8 @@ export function HeavyDutyEngineCluster() {
     impossibleToReplicate: true
   })
 
-  const clusterInterval = useRef<NodeJS.Timeout>()
-  const webDominationInterval = useRef<NodeJS.Timeout>()
+  const clusterInterval = useRef<NodeJS.Timeout>(undefined)
+  const webDominationInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('🏭 HEAVY DUTY ENGINE CLUSTER - TRANSCENDENT INDUSTRIAL POWER')

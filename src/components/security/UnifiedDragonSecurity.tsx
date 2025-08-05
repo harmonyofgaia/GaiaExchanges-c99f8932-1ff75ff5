@@ -54,7 +54,7 @@ export function UnifiedDragonSecurity() {
   ])
 
   const [ultimateProtection, setUltimateProtection] = useState(true)
-  const dragonInterval = useRef<NodeJS.Timeout>()
+  const dragonInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const maintainDragonDefense = () => {

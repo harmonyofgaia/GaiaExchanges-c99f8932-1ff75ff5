@@ -36,7 +36,7 @@ export function QuantumTaskEngine() {
   const [realityCommand, setRealityCommand] = useState('')
   const [transcendenceLevel, setTranscendenceLevel] = useState(999999)
   const [isProcessing, setIsProcessing] = useState(false)
-  const omnipotenceRef = useRef<NodeJS.Timeout>()
+  const omnipotenceRef = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('🌌 QUANTUM TASK ENGINE - REALITY TRANSCENDENCE ACTIVE')

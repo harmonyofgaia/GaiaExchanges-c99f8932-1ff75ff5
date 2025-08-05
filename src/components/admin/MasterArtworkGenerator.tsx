@@ -43,8 +43,8 @@ export function MasterArtworkGenerator() {
   const [totalGenerated, setTotalGenerated] = useState(0)
   const [bestArtwork, setBestArtwork] = useState<GeneratedArtwork | null>(null)
   
-  const intervalRef = useRef<NodeJS.Timeout>()
-  const countdownRef = useRef<NodeJS.Timeout>()
+  const intervalRef = useRef<NodeJS.Timeout>(undefined)
+  const countdownRef = useRef<NodeJS.Timeout>(undefined)
 
   // Enhanced base prompts inspired by user's uploaded artwork
   const basePrompts = [

@@ -40,8 +40,8 @@ export function UpgradeSafeCloudOrchestrator() {
     impossibleToReplicate: true
   })
 
-  const orchestratorInterval = useRef<NodeJS.Timeout>()
-  const transcendentInterval = useRef<NodeJS.Timeout>()
+  const orchestratorInterval = useRef<NodeJS.Timeout>(undefined)
+  const transcendentInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('🎯 TRANSCENDENT UPGRADE-SAFE CLOUD ORCHESTRATOR')

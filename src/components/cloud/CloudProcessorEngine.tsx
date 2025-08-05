@@ -65,9 +65,9 @@ export function CloudProcessorEngine() {
     opportunitiesFound: 0
   })
 
-  const processingInterval = useRef<NodeJS.Timeout>()
-  const webScanningInterval = useRef<NodeJS.Timeout>()
-  const transcendenceInterval = useRef<NodeJS.Timeout>()
+  const processingInterval = useRef<NodeJS.Timeout>(undefined)
+  const webScanningInterval = useRef<NodeJS.Timeout>(undefined)
+  const transcendenceInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('🌐 CLOUD PROCESSOR ENGINE - WORLD-WIDE WEB OMNISCANNER ACTIVE')
