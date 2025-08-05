@@ -41,14 +41,11 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
   const maxAttempts = 3
 
   useEffect(() => {
-    // Fetch public IP and check whitelist
+    // Fetch public IP for display but allow all IPs for admin access
     getPublicIP().then(ip => {
       setClientIP(ip || '')
-      if (ip && allowedIPs.includes(ip)) {
-        setIpAllowed(true)
-      } else {
-        setIpAllowed(false)
-      }
+      // Remove IP restriction - allow admin from any IP
+      setIpAllowed(true)
     })
     // Check for existing admin session (both new and old formats)
     const newSession = localStorage.getItem('gaia-admin') || sessionStorage.getItem('gaia-admin')
@@ -85,10 +82,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
 
   const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!ipAllowed) {
-      alert(`⛔ IP Address Not Whitelisted. Your IP: ${clientIP}`)
-      return
-    }
+    // IP restriction removed - allow admin access from any IP
     if (attempts >= maxAttempts) {
       alert('🚫 Maximum login attempts exceeded. Access blocked for security.')
       return

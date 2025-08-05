@@ -14,13 +14,15 @@
     "lighthouse": "lighthouse http://localhost:5173 --output html --output-path ./lighthouse-report.html --chrome-flags=\"--headless\""
   },
   "dependencies": {
+    "lovable-tagger": "^1.1.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.2"
+    "react-router-dom": "^6.26.2",
+    "sonner": "^2.0.7"
   },
   "devDependencies": {
-    "vite": "^7.0.6",
     "eslint": "^9.9.0",
-    "lighthouse": "^12.0.0"
+    "lighthouse": "^12.0.0",
+    "vite": "^7.0.6"
   }
 }
