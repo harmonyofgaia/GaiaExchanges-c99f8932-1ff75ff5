@@ -72,7 +72,7 @@ export function SecureConnectionManager() {
     '172.16.0.25 - Copy Protection Violation'
   ])
 
-  const quantumInterval = useRef<NodeJS.Timeout>()
+  const quantumInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     // ARCHITEK NETWORK QUANTUM SECURITY CORE

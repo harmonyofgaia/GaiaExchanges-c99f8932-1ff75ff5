@@ -324,7 +324,7 @@ export function AnimalDefenseCommandCenter() {
   ])
 
   const [selectedAnimal, setSelectedAnimal] = useState<DefenseAnimal | null>(null)
-  const evolutionInterval = useRef<NodeJS.Timeout>()
+  const evolutionInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     // Continuous animal evolution and training

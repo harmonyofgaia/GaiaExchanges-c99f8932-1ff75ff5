@@ -260,7 +260,7 @@ export function UltimateDefenseAnimalsSupreme() {
     timelineProtected: 0
   })
 
-  const supremeInterval = useRef<NodeJS.Timeout>()
+  const supremeInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const runSupremeDefense = () => {

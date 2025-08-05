@@ -35,7 +35,7 @@ export function UniversalSystemController() {
   const [scanningActive, setScanningActive] = useState(true)
   const [totalSystemsControlled, setTotalSystemsControlled] = useState(0)
   const [networkDominationLevel, setNetworkDominationLevel] = useState(0)
-  const scanInterval = useRef<NodeJS.Timeout>()
+  const scanInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('🌐 UNIVERSAL SYSTEM CONTROLLER - NETWORK OMNIPOTENCE ACTIVE')

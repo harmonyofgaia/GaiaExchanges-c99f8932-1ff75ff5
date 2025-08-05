@@ -49,7 +49,7 @@ export function QuantumGlobalCommandCenter() {
   const [swapAmount, setSwapAmount] = useState('')
   const [globalPower, setGlobalPower] = useState(0)
   const [satelliteConnections, setSatelliteConnections] = useState(0)
-  const commandInterval = useRef<NodeJS.Timeout>()
+  const commandInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     // Initialize quantum computers worldwide

@@ -155,7 +155,7 @@ export function UltimateDefenseBarrier() {
     lastBreach: null as string | null
   })
 
-  const barrierInterval = useRef<NodeJS.Timeout>()
+  const barrierInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const runUltimateDefenseBarrier = () => {

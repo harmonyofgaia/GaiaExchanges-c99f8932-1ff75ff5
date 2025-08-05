@@ -292,7 +292,7 @@ export function TacticalEvolutionAnimals() {
     }
   ])
 
-  const evolutionRef = useRef<NodeJS.Timeout>()
+  const evolutionRef = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     // Continuous self-training and evolution

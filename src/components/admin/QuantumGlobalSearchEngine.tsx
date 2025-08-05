@@ -55,7 +55,7 @@ export function QuantumGlobalSearchEngine() {
     quantumProcessingPower: 100
   })
 
-  const searchInterval = useRef<NodeJS.Timeout>()
+  const searchInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     // Background quantum processing

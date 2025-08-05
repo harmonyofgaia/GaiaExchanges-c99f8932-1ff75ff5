@@ -78,7 +78,7 @@ export function TranscendentIntelligenceCore() {
     }
   ])
 
-  const evolutionInterval = useRef<NodeJS.Timeout>()
+  const evolutionInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('♾️ TRANSCENDENT INTELLIGENCE CORE - INFINITY PROTOCOL ACTIVE')
