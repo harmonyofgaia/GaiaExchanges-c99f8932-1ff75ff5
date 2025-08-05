@@ -48,7 +48,7 @@ export function FutureProofSecurityEngine() {
   })
   
   const [threats, setThreats] = useState<ThreatIntelligence[]>([])
-  const securityInterval = useRef<NodeJS.Timeout>()
+  const securityInterval = useRef<NodeJS.Timeout>(undefined)
   const threatHistory = useRef<Set<string>>(new Set())
   const warnedIPs = useRef<Set<string>>(new Set())
   const level1BreachedIPs = useRef<Set<string>>(new Set())

@@ -68,7 +68,7 @@ export function GlobalTechIntelligence() {
     innovationsImplemented: 0
   })
 
-  const scanInterval = useRef<NodeJS.Timeout>()
+  const scanInterval = useRef<NodeJS.Timeout>(undefined)
 
   // Advanced Technology Intelligence Gathering - Every 5 minutes
   useEffect(() => {

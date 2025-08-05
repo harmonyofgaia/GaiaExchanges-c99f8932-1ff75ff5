@@ -59,7 +59,7 @@ export function NetworkDefenseGrid() {
   })
 
   const [isLaunchingGlobalDefense, setIsLaunchingGlobalDefense] = useState(false)
-  const networkInterval = useRef<NodeJS.Timeout>()
+  const networkInterval = useRef<NodeJS.Timeout>(undefined)
 
   // Network Defense Grid Updates - Every 5 seconds
   useEffect(() => {

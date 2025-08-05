@@ -21,7 +21,7 @@ interface InvestorLead {
 export function InvestorScoutingSystem() {
   const [investorLeads, setInvestorLeads] = useState<InvestorLead[]>([])
   const [scoutingActive, setScoutingActive] = useState(true)
-  const scoutingInterval = useRef<NodeJS.Timeout>()
+  const scoutingInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const scoutForInvestors = () => {
