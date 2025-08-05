@@ -24,7 +24,7 @@ import { toast } from 'sonner'
 interface EnvironmentType {
   id: string
   name: string
-  icon: JSX.Element
+  icon: React.ReactElement
   color: string
   description: string
   features: string[]

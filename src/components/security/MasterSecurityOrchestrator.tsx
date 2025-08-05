@@ -14,7 +14,7 @@ export function MasterSecurityOrchestrator() {
     dragonPower: 100
   })
   
-  const orchestratorInterval = useRef<NodeJS.Timeout>()
+  const orchestratorInterval = useRef<NodeJS.Timeout>(undefined)
 
   // Initialize all security systems
   const dragonSecurity = UnifiedDragonSecurity()

@@ -71,7 +71,7 @@ export function HabboTycoon() {
   const [totalRevenue, setTotalRevenue] = useState(0)
   const [securityLevel, setSecurityLevel] = useState(100)
 
-  const gameLoopRef = useRef<NodeJS.Timeout>()
+  const gameLoopRef = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('🏨 HABBO TYCOON - ADVANCED GAMING SYSTEM INITIALIZED')

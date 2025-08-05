@@ -64,7 +64,7 @@ export function HarmonyGamingEngineAdvanced() {
     overallLeadership: '756% ahead of industry average'
   })
 
-  const trainingRef = useRef<NodeJS.Timeout>()
+  const trainingRef = useRef<NodeJS.Timeout>(undefined)
 
   // Continuous self-improvement system
   useEffect(() => {

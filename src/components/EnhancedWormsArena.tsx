@@ -64,7 +64,7 @@ export function EnhancedWormsArena() {
   const [playerTokens, setPlayerTokens] = useState(15420)
   const [leaderboard, setLeaderboard] = useState<any[]>([])
 
-  const arenaInterval = useRef<NodeJS.Timeout>()
+  const arenaInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('🪱 ENHANCED WORMS ARENA - BATTLE ROYALE ACTIVE')

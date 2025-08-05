@@ -58,7 +58,7 @@ export function InvisibleTrackingDashboard() {
   const [securityEvents, setSecurityEvents] = useState<SecurityEvent[]>([])
   const [totalThreatsBlocked, setTotalThreatsBlocked] = useState(0)
   const [isInvisibleMode, setIsInvisibleMode] = useState(true)
-  const trackingInterval = useRef<NodeJS.Timeout>()
+  const trackingInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('👻 INVISIBLE TRACKING SYSTEM - ADMIN EYES ONLY ACTIVATED')

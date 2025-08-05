@@ -20,7 +20,7 @@ export function CreativeGameEngine() {
     quantumEfficiency: 100
   })
   
-  const engineRef = useRef<NodeJS.Timeout>()
+  const engineRef = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('🎮 CREATIVE GAME ENGINE - MAXIMUM POWER ACTIVATED')

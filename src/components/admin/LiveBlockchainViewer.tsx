@@ -60,7 +60,7 @@ export function LiveBlockchainViewer() {
     networkUptime: '100%'
   })
 
-  const blockchainRef = useRef<NodeJS.Timeout>()
+  const blockchainRef = useRef<NodeJS.Timeout>(undefined)
 
   // Generate realistic blockchain data
   const generateTransaction = (): BlockchainTransaction => {

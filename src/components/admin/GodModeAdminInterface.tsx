@@ -35,7 +35,7 @@ export function GodModeAdminInterface() {
   const [godCommands, setGodCommands] = useState<GodModeCommand[]>([])
   const [quantumAuthActive, setQuantumAuthActive] = useState(true)
   const [omnipotenceLevel, setOmnipotenceLevel] = useState(999999)
-  const powerInterval = useRef<NodeJS.Timeout>()
+  const powerInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('👑 GOD MODE ADMIN INTERFACE - SUPREME AUTHORITY ACTIVE')

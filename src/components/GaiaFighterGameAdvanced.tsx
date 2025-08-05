@@ -217,7 +217,7 @@ export function GaiaFighterGameAdvanced() {
   ])
 
   const gameCanvasRef = useRef<HTMLDivElement>(null)
-  const quantumTrainingRef = useRef<NodeJS.Timeout>()
+  const quantumTrainingRef = useRef<NodeJS.Timeout>(undefined)
 
   // Quantum Engine Training System
   useEffect(() => {

@@ -76,7 +76,7 @@ export function GaiaFighterGamePro() {
 
   const [battleLog, setBattleLog] = useState<string[]>([])
   const [isTraining, setIsTraining] = useState(false)
-  const gameLoopRef = useRef<NodeJS.Timeout>()
+  const gameLoopRef = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('⚔️ GAIA FIGHTER GAME PRO - ADVANCED COMBAT SYSTEM')

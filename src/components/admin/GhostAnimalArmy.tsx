@@ -32,7 +32,7 @@ export function GhostAnimalArmy() {
     energyLevel: 90
   })
 
-  const intervalRef = useRef<NodeJS.Timeout>()
+  const intervalRef = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('👻 GHOST ANIMAL ARMY - SPIRITUAL DEFENSE ACTIVATED')

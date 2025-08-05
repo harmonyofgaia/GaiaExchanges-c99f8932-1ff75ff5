@@ -39,7 +39,7 @@ interface Weapon {
   damage: number
   cost: number
   radius: number
-  icon: JSX.Element
+  icon: React.ReactElement
   description: string
 }
 

@@ -74,7 +74,7 @@ export function GameDevelopmentCloud() {
   const [cloudStorageUsed, setCloudStorageUsed] = useState(0)
   const [assetsGenerated, setAssetsGenerated] = useState(0)
 
-  const trainingRef = useRef<NodeJS.Timeout>()
+  const trainingRef = useRef<NodeJS.Timeout>(undefined)
 
   // Initialize with World of Warcraft + Rage 1 + Final Fantasy inspired assets
   useEffect(() => {

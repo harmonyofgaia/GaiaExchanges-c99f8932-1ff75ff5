@@ -63,7 +63,7 @@ export function GaiaFighterGameRestored() {
   })
 
   const [gaiaRewards, setGaiaRewards] = useState(0)
-  const gameLoopRef = useRef<NodeJS.Timeout>()
+  const gameLoopRef = useRef<NodeJS.Timeout>(undefined)
 
   const startGame = () => {
     setGameState(prev => ({

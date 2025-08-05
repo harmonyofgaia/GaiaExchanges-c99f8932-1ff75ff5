@@ -54,8 +54,8 @@ export function SnakeToWormsIntegration() {
     transitionBonuses: 0
   })
 
-  const gameLoopRef = useRef<NodeJS.Timeout>()
-  const transitionRef = useRef<NodeJS.Timeout>()
+  const gameLoopRef = useRef<NodeJS.Timeout>(undefined)
+  const transitionRef = useRef<NodeJS.Timeout>(undefined)
 
   // Snake game logic
   const moveSnake = useCallback(() => {

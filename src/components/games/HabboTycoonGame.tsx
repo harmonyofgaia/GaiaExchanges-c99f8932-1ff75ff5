@@ -72,7 +72,7 @@ export function HabboTycoonGame() {
   const [selectedLocation, setSelectedLocation] = useState<any>(null)
   const [chatMode, setChatMode] = useState(false)
 
-  const gameLoopRef = useRef<NodeJS.Timeout>()
+  const gameLoopRef = useRef<NodeJS.Timeout>(undefined)
 
   const buildingTypes = [
     { id: 'hotel', name: 'Luxury Hotel', cost: 2500, income: 250, icon: '🏨' },
