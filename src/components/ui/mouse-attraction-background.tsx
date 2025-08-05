@@ -25,7 +25,7 @@ interface MouseAttraction {
 
 export function MouseAttractionBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(0)
   const [particles, setParticles] = useState<AttractedParticle[]>([])
   const [mouseAttraction, setMouseAttraction] = useState<MouseAttraction>({
     x: 0,

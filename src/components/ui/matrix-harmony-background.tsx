@@ -13,7 +13,7 @@ interface MatrixElement {
 export function MatrixHarmonyBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const elementsRef = useRef<MatrixElement[]>([])
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(0)
 
   useEffect(() => {
     const canvas = canvasRef.current

@@ -26,7 +26,7 @@ interface WaveSystem {
 
 export function QuantumAnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(0)
   const [particles, setParticles] = useState<Particle[]>([])
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })

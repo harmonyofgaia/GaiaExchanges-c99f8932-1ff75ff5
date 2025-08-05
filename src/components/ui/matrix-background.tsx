@@ -15,7 +15,7 @@ export function MatrixBackground({
   fadeEffect = true 
 }: MatrixBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(0)
 
   useEffect(() => {
     const canvas = canvasRef.current

@@ -26,7 +26,7 @@ export function FuturisticAnimationStudio() {
   const [animationSpeed, setAnimationSpeed] = useState([30])
   const [selectedStyle, setSelectedStyle] = useState('neon')
   const [selectedEffect, setSelectedEffect] = useState('particles')
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(0)
 
   const animationStyles = [
     { id: 'neon', name: 'Neon Glow', color: 'from-cyan-400 to-purple-400' },

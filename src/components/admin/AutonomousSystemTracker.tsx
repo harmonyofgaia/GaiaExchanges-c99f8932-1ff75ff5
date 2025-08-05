@@ -34,7 +34,7 @@ export function AutonomousSystemTracker() {
   })
 
   const [realTimeData, setRealTimeData] = useState<string[]>([])
-  const intervalRef = useRef<NodeJS.Timeout>()
+  const intervalRef = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     // Real-time system tracking every second

@@ -28,7 +28,7 @@ export function OfflineGrowthManager() {
     }
   })
 
-  const growthTimer = useRef<NodeJS.Timeout>()
+  const growthTimer = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     console.log('🌙 OFFLINE GROWTH MANAGER - ENSURING CONTINUOUS EVOLUTION')

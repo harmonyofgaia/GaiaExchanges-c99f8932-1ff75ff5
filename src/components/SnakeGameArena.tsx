@@ -40,7 +40,7 @@ interface GaiaToken {
 
 export function SnakeGameArena() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const gameLoopRef = useRef<number>()
+  const gameLoopRef = useRef<number>(0)
   
   const [gameState, setGameState] = useState<'menu' | 'playing' | 'paused' | 'gameover' | 'blackhole'>('menu')
   const [snake, setSnake] = useState<Position[]>([{ x: 10, y: 10 }])

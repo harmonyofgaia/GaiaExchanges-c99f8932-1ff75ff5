@@ -42,7 +42,7 @@ export function PersistentEvolutionEngine() {
     }
   })
 
-  const evolutionInterval = useRef<NodeJS.Timeout>()
+  const evolutionInterval = useRef<NodeJS.Timeout>(undefined)
   const startTime = useRef(Date.now())
 
   useEffect(() => {

@@ -13,7 +13,7 @@ export function PuzzleBackground({
   speed = 1 
 }: PuzzleBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(0)
 
   useEffect(() => {
     const canvas = canvasRef.current

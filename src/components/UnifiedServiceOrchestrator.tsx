@@ -20,7 +20,7 @@ export function UnifiedServiceOrchestrator() {
   ])
 
   const [allServicesActive, setAllServicesActive] = useState(true)
-  const orchestratorInterval = useRef<NodeJS.Timeout>()
+  const orchestratorInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const runServiceOrchestrator = async () => {

@@ -24,7 +24,7 @@ export function SystemHealthMonitor() {
 
   const [isHealthy, setIsHealthy] = useState(true)
   const [hasCriticalIssues, setHasCriticalIssues] = useState(false)
-  const healthInterval = useRef<NodeJS.Timeout>()
+  const healthInterval = useRef<NodeJS.Timeout>(undefined)
 
   // Initialize security systems
   const quantumCore = QuantumSecurityCore()

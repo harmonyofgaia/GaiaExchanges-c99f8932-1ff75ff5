@@ -49,8 +49,8 @@ const CANVAS_SIZE = 400
 
 export function EnhancedSnakeGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const gameLoopRef = useRef<number>()
-  const xpTimerRef = useRef<number>()
+  const gameLoopRef = useRef<number>(0)
+  const xpTimerRef = useRef<number>(0)
   
   const [gameState, setGameState] = useState<GameState>({
     snake: [{ x: 10, y: 10 }],

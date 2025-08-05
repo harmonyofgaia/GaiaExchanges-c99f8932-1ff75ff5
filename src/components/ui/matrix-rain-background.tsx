@@ -13,7 +13,7 @@ export function MatrixRainBackground({
   speed = 1 
 }: MatrixRainBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(0)
 
   useEffect(() => {
     const canvas = canvasRef.current

@@ -12,7 +12,7 @@ interface BackgroundEffect {
 export function BackgroundManager() {
   const location = useLocation()
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(0)
   const [effect, setEffect] = useState<BackgroundEffect>({
     type: 'particles',
     intensity: 0.5,

@@ -47,7 +47,7 @@ export function EnhancedSwapSystem() {
     notifications: true
   })
 
-  const swapInterval = useRef<NodeJS.Timeout>()
+  const swapInterval = useRef<NodeJS.Timeout>(undefined)
 
   // Get current swap pair
   const currentPair = swapPairs.find(pair => pair.from === fromToken && pair.to === toToken)
