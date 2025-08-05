@@ -4,11 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "name": "vite_react_shadcn_ts",
+    "version": "0.0.0",
+    "type": "module",
+    "description": "Restored minimal package.json for GaiaExchanges",
+    "main": "index.js",
+    "private": true,
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
-    "build:dev": "vite build --mode development",
-    "build:vercel": "vite build",
-    "build": "vite build",
     "install:legacy": "npm install --legacy-peer-deps",
     "postinstall": "echo 'Note: If you encounter peer dependency conflicts, run: npm run install:legacy'",
     "deploy": "./scripts/deploy.sh",
@@ -103,8 +106,5 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^7.0.6"
-  },
-  "engines": {
-    "node": "22.x"
   }
 }

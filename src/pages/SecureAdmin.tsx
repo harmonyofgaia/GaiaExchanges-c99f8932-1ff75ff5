@@ -27,6 +27,3 @@ export default function SecureAdmin() {
     </AdminProtectedRoute>
   )
 }
-<a href="/docs/GAIA_ENGINE_BLUEPRINT.md" download>
-  Download GAIA Engine Blueprint
-</a>
