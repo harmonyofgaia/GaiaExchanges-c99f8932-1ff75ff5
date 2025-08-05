@@ -30,7 +30,7 @@ export function UltimateResilienceEngine() {
   })
 
   const [dragonTraining, setDragonTraining] = useState(true)
-  const resilienceInterval = useRef<NodeJS.Timeout>()
+  const resilienceInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const runUltimateResilience = () => {

@@ -24,7 +24,7 @@ export function QuantumSecurityEngine() {
     quantumSecurityScore: 100
   })
 
-  const securityEngineInterval = useRef<NodeJS.Timeout>()
+  const securityEngineInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const runQuantumSecurityEngine = async () => {

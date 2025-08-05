@@ -56,7 +56,7 @@ export function PrehistoricGuardian() {
   const [isScanning, setIsScanning] = useState(false)
   const [lastScan, setLastScan] = useState(new Date())
   const [guardianActive, setGuardianActive] = useState(true)
-  const scanInterval = useRef<NodeJS.Timeout>()
+  const scanInterval = useRef<NodeJS.Timeout>(undefined)
 
   // Auto-learning and improvement system
   useEffect(() => {

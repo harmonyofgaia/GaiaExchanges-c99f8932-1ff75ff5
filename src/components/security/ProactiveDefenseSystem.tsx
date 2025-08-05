@@ -57,7 +57,7 @@ export function ProactiveDefenseSystem() {
   ])
 
   const [isDeployingBots, setIsDeployingBots] = useState(false)
-  const defenseInterval = useRef<NodeJS.Timeout>()
+  const defenseInterval = useRef<NodeJS.Timeout>(undefined)
 
   // AI Defense System - Every 4 seconds
   useEffect(() => {
