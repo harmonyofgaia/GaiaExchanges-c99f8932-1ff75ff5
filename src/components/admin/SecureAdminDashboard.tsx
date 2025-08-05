@@ -49,6 +49,8 @@ import { MasterUpgradePlan } from './MasterUpgradePlan'
 import { BundledAdminPages } from './BundledAdminPages'
 import { FarmerEcosystem } from './FarmerEcosystem'
 import { PDFTransactionTracker } from './PDFTransactionTracker'
+import { AnimalGrazingRecovery } from './AnimalGrazingRecovery'
+import { AnimalTransferProtocols } from './AnimalTransferProtocols'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -276,6 +278,18 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">PDF Tracker</span>
             </div>
           </TabsTrigger>
+          <TabsTrigger value="animal-grazing" className="p-2 text-center bg-gradient-to-r from-green-600/20 to-lime-600/20 border border-green-500/30">
+            <div className="flex flex-col items-center">
+              <span>🌱</span>
+              <span className="hidden sm:inline">Land Recovery</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="animal-transfer" className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30">
+            <div className="flex flex-col items-center">
+              <span>🚛</span>
+              <span className="hidden sm:inline">Animal Transfer</span>
+            </div>
+          </TabsTrigger>
           </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
@@ -293,6 +307,14 @@ export function SecureAdminDashboard() {
 
           <TabsContent value="pdf-tracker" className="space-y-6">
             <PDFTransactionTracker />
+          </TabsContent>
+
+          <TabsContent value="animal-grazing" className="space-y-6">
+            <AnimalGrazingRecovery />
+          </TabsContent>
+
+          <TabsContent value="animal-transfer" className="space-y-6">
+            <AnimalTransferProtocols />
           </TabsContent>
 
           <TabsContent value="overview" className="space-y-6">
