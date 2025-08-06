@@ -11,8 +11,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lighthouse": "lighthouse http://localhost:5173 --output html --output-path ./lighthouse-report.html --chrome-flags=\"--headless\"",
-    "pre-deploy": "echo Pre-deploy check"
+    "lighthouse": "lighthouse http://localhost:5173 --output html --output-path ./lighthouse-report.html --chrome-flags=\"--headless\""
   },
   "dependencies": {
     "@mendable/firecrawl-js": "^1.29.3",
@@ -37,7 +36,6 @@
     "lovable-tagger": "^1.1.9",
     "lucide-react": "^0.536.0",
     "next-themes": "^0.4.6",
-    "postcss": "^8.4.38",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-is": "^19.1.1",
@@ -45,7 +43,8 @@
     "recharts": "^3.1.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "eslint": "^9.9.0",
