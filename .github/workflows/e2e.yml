@@ -1,0 +1,22 @@
+name: E2E Tests
+
+on:
+  pull_request:
+    branches: [main, deploy]
+  push:
+    branches: [main, deploy]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm ci
+      - name: Run E2E tests
+        run: |
+          if npm run | grep -q "e2e"; then
+            npm run e2e
+          else
+            echo "No e2e script found. Skipping."
+          fi

@@ -5,46 +5,42 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    
+    env:
+      VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+      SKIP_LINT: true
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm install --legacy-peer-deps
-    
-    - name: Run pre-deployment checks
-      run: npm run pre-deploy
-      continue-on-error: true
-    
-    - name: Build application
-      run: npm run build
-      env:
-        VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://placeholder.supabase.co' }}
-        VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY || 'placeholder-key' }}
-        SKIP_LINT: true
-    
-    - name: Test build output
-      run: |
-        ls -la dist/
-        echo "Build completed successfully!"
-        echo "Build size: $(du -sh dist/ | cut -f1)"
-    
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: production-build
-        path: dist/
-        retention-days: 30
-
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+      - name: Run pre-deployment checks
+        run: npm run pre-deploy
+        continue-on-error: true
+      - name: Build application
+        run: |
+          if [ -z "$VITE_SUPABASE_URL" ]; then export VITE_SUPABASE_URL="https://placeholder.supabase.co"; fi
+          if [ -z "$VITE_SUPABASE_ANON_KEY" ]; then export VITE_SUPABASE_ANON_KEY="placeholder-key"; fi
+          npm run build
+      - name: Test build output
+        run: |
+          ls -la dist/
+          echo "Build completed successfully!"
+          echo "Build size: $(du -sh dist/ | cut -f1)"
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build
+          path: dist/
+          retention-days: 30
   deploy-primary:
     needs: build-and-test
     runs-on: ubuntu-latest
@@ -54,35 +50,34 @@ jobs:
       platform_used: ${{ steps.set_platform.outputs.platform }}
       deployment_url: ${{ steps.deploy_vercel.outputs.url }}
     
+    env:
+      VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm install --legacy-peer-deps
-    
-    - name: Set platform
-      id: set_platform
-      run: echo "platform=vercel" >> $GITHUB_OUTPUT
-    
-    - name: Deploy to Vercel (Primary)
-      id: deploy_vercel
-      continue-on-error: true
-      run: |
-        echo "🚀 Attempting deployment to Vercel (Primary Platform)..."
-        DEPLOYMENT_URL=$(npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }} | tail -n 1)
-        echo "url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
-        echo "✅ Vercel deployment successful: $DEPLOYMENT_URL"
-      env:
-        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-        VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-        VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+      - name: Set platform
+        id: set_platform
+        run: echo "platform=vercel" >> $GITHUB_OUTPUT
+      - name: Deploy to Vercel (Primary)
+        id: deploy_vercel
+        continue-on-error: true
+        run: |
+          if [ -z "$VITE_SUPABASE_URL" ]; then export VITE_SUPABASE_URL="https://placeholder.supabase.co"; fi
+          if [ -z "$VITE_SUPABASE_ANON_KEY" ]; then export VITE_SUPABASE_ANON_KEY="placeholder-key"; fi
+          echo "🚀 Attempting deployment to Vercel (Primary Platform)..."
+          DEPLOYMENT_URL=$(npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }} | tail -n 1)
+          echo "url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+          echo "✅ Vercel deployment successful: $DEPLOYMENT_URL"
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
   deploy-fallback-netlify:
     needs: [build-and-test, deploy-primary]
@@ -93,38 +88,34 @@ jobs:
       platform_used: netlify
       deployment_url: ${{ steps.deploy_netlify.outputs.url }}
     
+    env:
+      VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+      SKIP_LINT: true
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm install --legacy-peer-deps
-    
-    - name: Build for production
-      run: npm run build
-      env:
-        VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-        VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-        SKIP_LINT: true
-    
-    - name: Notify fallback deployment
-      run: |
-        echo "⚠️ Primary Vercel deployment failed, attempting Netlify fallback..."
-    
-    - name: Deploy to Netlify (Fallback)
-      id: deploy_netlify
-      uses: netlify/actions/deploy@master
-      with:
-        publish-dir: ./dist
-        production-deploy: true
-      env:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+      - name: Build for production
+        run: |
+          if [ -z "$VITE_SUPABASE_URL" ]; then export VITE_SUPABASE_URL="https://placeholder.supabase.co"; fi
+          if [ -z "$VITE_SUPABASE_ANON_KEY" ]; then export VITE_SUPABASE_ANON_KEY="placeholder-key"; fi
+          npm run build
+      - name: Notify fallback deployment
+        run: |
+          echo "⚠️ Primary Vercel deployment failed, attempting Netlify fallback..."
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+      - name: Deploy to Netlify (Fallback)
+        id: deploy_netlify
+        run: netlify deploy --dir=dist --prod --site ${{ secrets.NETLIFY_SITE_ID }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
   deploy-fallback-github-pages:
     needs: [build-and-test, deploy-primary, deploy-fallback-netlify]
@@ -142,42 +133,37 @@ jobs:
       platform_used: github-pages
       deployment_url: ${{ steps.deployment.outputs.page_url }}
     
+    env:
+      VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+      SKIP_LINT: true
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm install --legacy-peer-deps
-    
-    - name: Build for GitHub Pages
-      run: |
-        npm run build
-        touch dist/.nojekyll
-      env:
-        VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-        VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-        SKIP_LINT: true
-    
-    - name: Notify final fallback deployment
-      run: |
-        echo "⚠️ Both Vercel and Netlify deployments failed, attempting GitHub Pages fallback..."
-    
-    - name: Setup Pages
-      uses: actions/configure-pages@v3
-    
-    - name: Upload to GitHub Pages
-      uses: actions/upload-pages-artifact@v2
-      with:
-        path: ./dist
-    
-    - name: Deploy to GitHub Pages (Final Fallback)
-      id: deployment
-      uses: actions/deploy-pages@v2
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+      - name: Build for GitHub Pages
+        run: |
+          if [ -z "$VITE_SUPABASE_URL" ]; then export VITE_SUPABASE_URL="https://placeholder.supabase.co"; fi
+          if [ -z "$VITE_SUPABASE_ANON_KEY" ]; then export VITE_SUPABASE_ANON_KEY="placeholder-key"; fi
+          npm run build
+          touch dist/.nojekyll
+      - name: Notify final fallback deployment
+        run: |
+          echo "⚠️ Both Vercel and Netlify deployments failed, attempting GitHub Pages fallback..."
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./dist
+      - name: Deploy to GitHub Pages (Final Fallback)
+        id: deployment
+        uses: actions/deploy-pages@v2
 
   notify-admin:
     needs: [deploy-primary, deploy-fallback-netlify, deploy-fallback-github-pages]
