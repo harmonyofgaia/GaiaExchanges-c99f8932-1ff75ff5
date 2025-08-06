@@ -1,7 +1,8 @@
+
 {
   "name": "lovable-app",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -22,3 +23,5 @@
     "lighthouse": "^12.0.0"
   }
 }
+
+
