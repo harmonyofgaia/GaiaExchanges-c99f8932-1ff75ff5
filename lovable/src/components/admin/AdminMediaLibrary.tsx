@@ -31,7 +31,16 @@ export function AdminMediaLibrary() {
   const [isBackgroundMusic, setIsBackgroundMusic] = useState(false)
   
   // Music player state
-  const [currentTrack, setCurrentTrack] = useState<any>(null)
+  interface MediaFile {
+    id: number;
+    original_name: string;
+    storage_path: string;
+    mime_type: string;
+    file_type: string;
+    file_size: number;
+    is_background_music?: boolean;
+  }
+  const [currentTrack, setCurrentTrack] = useState<MediaFile | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [volume, setVolume] = useState(1)
   const [currentTime, setCurrentTime] = useState(0)
@@ -180,7 +189,7 @@ export function AdminMediaLibrary() {
     }
   }
 
-  const deleteFile = async (file: any) => {
+  const deleteFile = async (file: MediaFile) => {
     if (!confirm(`Are you sure you want to delete "${file.original_name}"?`)) {
       return
     }
@@ -219,7 +228,7 @@ export function AdminMediaLibrary() {
     }
   }
 
-  const playTrack = async (file: any) => {
+  const playTrack = async (file: MediaFile) => {
     if (!file.mime_type.startsWith('audio/')) return
 
     const audioUrl = supabase.storage.from('admin-media').getPublicUrl(file.storage_path).data.publicUrl
