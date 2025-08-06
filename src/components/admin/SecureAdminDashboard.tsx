@@ -54,6 +54,7 @@ import { AnimalTransferProtocols } from './AnimalTransferProtocols'
 import { IAEngine } from './IAEngine'
 import { DailyEngineAutomation } from './DailyEngineAutomation'
 import { GaiaBlockchainNetwork } from './GaiaBlockchainNetwork'
+import { MarketingCampaignManager } from './MarketingCampaignManager'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -311,6 +312,12 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">Blockchain</span>
             </div>
           </TabsTrigger>
+          <TabsTrigger value="marketing" className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30">
+            <div className="flex flex-col items-center">
+              <span>🚀</span>
+              <span className="hidden sm:inline">Marketing</span>
+            </div>
+          </TabsTrigger>
           </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
@@ -348,6 +355,10 @@ export function SecureAdminDashboard() {
           
           <TabsContent value="blockchain" className="space-y-6">
             <GaiaBlockchainNetwork />
+          </TabsContent>
+
+          <TabsContent value="marketing" className="space-y-6">
+            <MarketingCampaignManager />
           </TabsContent>
 
           <TabsContent value="overview" className="space-y-6">
