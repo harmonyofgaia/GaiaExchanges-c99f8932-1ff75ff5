@@ -2,7 +2,6 @@ import { SecureAdminDashboard } from '@/components/admin/SecureAdminDashboard'
 import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
-import { SupabaseImageGallery } from '@/components/admin/SupabaseImageGallery'
 
 export default function SecureAdmin() {
   return (
@@ -53,7 +52,6 @@ export default function SecureAdmin() {
                 Download GAIA Engine Blueprint
               </a>
             </div>
-            <SupabaseImageGallery />
             <SecureAdminDashboard />
           </div>
         </div>
