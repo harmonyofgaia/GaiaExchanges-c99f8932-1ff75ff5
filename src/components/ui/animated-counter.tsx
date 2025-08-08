@@ -12,7 +12,7 @@ export function AnimatedCounter({ value, duration = 2000, className = '' }: Anim
 
   useEffect(() => {
     let startTime: number
-    let startValue = displayValue
+    const startValue = displayValue
 
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime

@@ -5,12 +5,12 @@ This is the starting point for the GAIA Engine development, based on the unified
 
 ## Live Progress
 
-- Core Engine Architecture: 10%
-- Modular System: 10%
+- Core Engine Architecture: 30%
+- Modular System: 30%
 - Storage System (Cloud/External): 10%
-- Plugin/Extension System: 10%
+- Plugin/Extension System: 20%
 - AI Integration: 10%
 - UI/UX Framework: 10%
-- Live Stats & Analytics: 10%
+- Live Stats & Analytics: 20%
 
-Progress updated: All core modules scaffolded (10%).
+Progress updated: Main engine entrypoint wired up, core and modular system at 30%.
