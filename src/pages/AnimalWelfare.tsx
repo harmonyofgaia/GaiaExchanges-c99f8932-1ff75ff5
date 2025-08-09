@@ -21,6 +21,7 @@ import { VirtualLandscapeCreator } from '@/components/landscapes/VirtualLandscap
 import { RealTimeAnimalTracker } from '@/components/RealTimeAnimalTracker'
 import { AnimalWelfareWalletManager } from '@/components/animal-welfare/AnimalWelfareWalletManager'
 import { AnimalNFTMarketplace } from '@/components/animal-welfare/AnimalNFTMarketplace'
+import { RealAnimalDatabase } from '@/components/animal-welfare/RealAnimalDatabase'
 import { toast } from 'sonner'
 
 export default function AnimalWelfare() {
@@ -65,8 +66,9 @@ export default function AnimalWelfare() {
 
         {/* Main Tabs */}
         <Tabs defaultValue="rescue" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="rescue">🆘 Animal Rescue</TabsTrigger>
+            <TabsTrigger value="database">🦎 Real Animals</TabsTrigger>
             <TabsTrigger value="cameras">📹 Live Cameras</TabsTrigger>
             <TabsTrigger value="vr">🥽 VR Experience</TabsTrigger>
             <TabsTrigger value="marketplace">🏪 NFT Marketplace</TabsTrigger>
@@ -76,6 +78,10 @@ export default function AnimalWelfare() {
 
           <TabsContent value="rescue" className="space-y-6">
             <AnimalRescueNFT />
+          </TabsContent>
+
+          <TabsContent value="database" className="space-y-6">
+            <RealAnimalDatabase />
           </TabsContent>
 
           <TabsContent value="cameras" className="space-y-6">

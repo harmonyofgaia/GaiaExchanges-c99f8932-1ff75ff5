@@ -55,6 +55,7 @@ import { IAEngine } from './IAEngine'
 import { DailyEngineAutomation } from './DailyEngineAutomation'
 import { GaiaBlockchainNetwork } from './GaiaBlockchainNetwork'
 import { MarketingCampaignManager } from './MarketingCampaignManager'
+import { MasterVisionControlPanel } from './MasterVisionControlPanel'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -70,20 +71,26 @@ export function SecureAdminDashboard() {
         </p>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-22 gap-1 h-auto p-1 text-xs">
-          <TabsTrigger value="overview" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <span>📊</span>
-              <span className="hidden sm:inline">Overview</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="dashboard" className="p-2 text-center">
-            <div className="flex flex-col items-center">
-              <span>🏠</span>
-              <span className="hidden sm:inline">Dashboard</span>
-            </div>
-          </TabsTrigger>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-1 h-auto p-1 text-xs">
+            <TabsTrigger value="overview" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>📊</span>
+                <span className="hidden sm:inline">Overview</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="vision" className="p-2 text-center bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border border-cyan-500/30">
+              <div className="flex flex-col items-center">
+                <span>🎯</span>
+                <span className="hidden sm:inline">Vision</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="dashboard" className="p-2 text-center">
+              <div className="flex flex-col items-center">
+                <span>🏠</span>
+                <span className="hidden sm:inline">Dashboard</span>
+              </div>
+            </TabsTrigger>
           <TabsTrigger value="animals" className="p-2 text-center bg-gradient-to-r from-orange-600/20 to-red-600/20 border border-orange-500/30">
             <div className="flex flex-col items-center">
               <span>🐾</span>
@@ -363,6 +370,10 @@ export function SecureAdminDashboard() {
 
           <TabsContent value="overview" className="space-y-6">
           <UltimateAdminSuite />
+        </TabsContent>
+
+        <TabsContent value="vision" className="space-y-6">
+          <MasterVisionControlPanel />
         </TabsContent>
 
         <TabsContent value="dashboard" className="space-y-6">
