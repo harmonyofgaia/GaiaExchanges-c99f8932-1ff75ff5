@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-{"scripts": {"dev": "vite"}}
-=======
 {
   "name": "lovable-app",
   "private": true,
   "version": "1.0.0",
   "scripts": {
-<<<<<<< HEAD
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "build:vercel": "vite build",
@@ -100,6 +96,3 @@
   "vite": "^7.0.6"
   }
 }
->>>>>>> 8572c03 (Resolve post-pull merge conflicts in blueprint and package.json)
-=======
->>>>>>> cea5a1b (Resolve final merge conflicts in blueprint and package.json)

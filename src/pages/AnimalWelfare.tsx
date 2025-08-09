@@ -12,18 +12,6 @@ import {
   ShoppingCart,
   Gamepad2,
   Hammer,
-<<<<<<< HEAD
-  TreePine
-} from 'lucide-react'
-import { AnimalRescueNFT } from '@/components/nft/AnimalRescueNFT'
-import { MinecraftLandscapeBuilder } from '@/components/MinecraftLandscapeBuilder'
-import { VirtualLandscapeCreator } from '@/components/landscapes/VirtualLandscapeCreator'
-import { RealTimeAnimalTracker } from '@/components/RealTimeAnimalTracker'
-import { AnimalWelfareWalletManager } from '@/components/animal-welfare/AnimalWelfareWalletManager'
-import { AnimalNFTMarketplace } from '@/components/animal-welfare/AnimalNFTMarketplace'
-import { RealAnimalDatabase } from '@/components/animal-welfare/RealAnimalDatabase'
-import { toast } from 'sonner'
-=======
   TreePine,
 } from "lucide-react";
 import { AnimalRescueNFT } from "@/components/nft/AnimalRescueNFT";
@@ -33,7 +21,6 @@ import { RealTimeAnimalTracker } from "@/components/RealTimeAnimalTracker";
 import { AnimalWelfareWalletManager } from "@/components/animal-welfare/AnimalWelfareWalletManager";
 import { AnimalNFTMarketplace } from "@/components/animal-welfare/AnimalNFTMarketplace";
 import { toast } from "sonner";
->>>>>>> 7d6f23b (Resolve all remaining rebase conflicts, mark deleted files, and continue)
 
 export default function AnimalWelfare() {
   const [activeAnimals, setActiveAnimals] = useState(247);

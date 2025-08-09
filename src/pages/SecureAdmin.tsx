@@ -2,14 +2,12 @@ import { SecureAdminDashboard } from '@/components/admin/SecureAdminDashboard'
 import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
-<<<<<<< HEAD
-import { SecurityCenter } from '@/components/SecurityCenter'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useState } from 'react'
-=======
 import styles from './SecureAdmin.module.css'
->>>>>>> a99e069 (Resolve all remaining merge conflicts and clean up code)
+
+import { useState } from 'react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { SecurityCenter } from '@/components/SecurityCenter';
 
 export default function SecureAdmin() {
   const [notifications] = useState<string[]>([
@@ -33,7 +31,6 @@ export default function SecureAdmin() {
               autoGenerate: true,
             }}
           />
-<<<<<<< HEAD
           <div className="relative z-10 p-4">
             <div className="container mx-auto max-w-7xl">
               <div className="mb-8">
@@ -44,7 +41,6 @@ export default function SecureAdmin() {
                   Advanced security monitoring, blockchain management, and administrative controls
                 </p>
               </div>
-
               <Tabs defaultValue="dashboard" className="w-full">
                 <TabsList className="grid w-full grid-cols-4 bg-black/50 mb-8">
                   <TabsTrigger value="dashboard">🏠 Dashboard</TabsTrigger>
@@ -52,7 +48,6 @@ export default function SecureAdmin() {
                   <TabsTrigger value="threats">⚠️ Threat Monitor</TabsTrigger>
                   <TabsTrigger value="blockchain">⛓️ Blockchain Admin</TabsTrigger>
                 </TabsList>
-
                 <TabsContent value="dashboard">
                   <div className="space-y-6">
                     <div className="flex gap-4 mb-6">
@@ -75,7 +70,6 @@ export default function SecureAdmin() {
                     <SecureAdminDashboard />
                   </div>
                 </TabsContent>
-
                 <TabsContent value="security">
                   <Card className="border-red-500/30 bg-gradient-to-br from-red-900/30 to-orange-900/30">
                     <CardHeader>
@@ -86,7 +80,6 @@ export default function SecureAdmin() {
                     </CardContent>
                   </Card>
                 </TabsContent>
-
                 <TabsContent value="threats">
                   <Card className="border-orange-500/30 bg-gradient-to-br from-orange-900/30 to-yellow-900/30">
                     <CardHeader>
@@ -104,7 +97,6 @@ export default function SecureAdmin() {
                             ))}
                           </div>
                         </div>
-                        
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div className="bg-green-900/30 p-4 rounded-lg border border-green-500/30">
                             <div className="text-green-400 font-bold">Network Security</div>
@@ -126,7 +118,6 @@ export default function SecureAdmin() {
                     </CardContent>
                   </Card>
                 </TabsContent>
-
                 <TabsContent value="blockchain">
                   <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
                     <CardHeader>
@@ -155,30 +146,10 @@ export default function SecureAdmin() {
                   </Card>
                 </TabsContent>
               </Tabs>
-=======
-
-          <div className="relative z-10">
-            <div className="blueprint-links">
-              <a
-                href="/public/GAIA_ENGINE_BLUEPRINT.md"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="blueprint-link view"
-              >
-                View GAIA Engine Blueprint
-              </a>
-              <a
-                href="/public/GAIA_ENGINE_BLUEPRINT.md"
-                download
-                className="blueprint-link download"
-              >
-                Download GAIA Engine Blueprint
-              </a>
->>>>>>> a99e069 (Resolve all remaining merge conflicts and clean up code)
             </div>
           </div>
         </div>
       </AdminOnlyAccess>
     </AdminProtectedRoute>
-  )
+  );
 }

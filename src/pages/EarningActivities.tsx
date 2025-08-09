@@ -97,19 +97,11 @@ export default function EarningActivities() {
 
   const earningCategories = [
     {
-<<<<<<< HEAD
       id: 'foundation',
       title: '🔰 Essential Eco Actions',
       description: 'Core environmental activities for all levels',
       color: 'from-green-900/30 to-emerald-900/30',
       borderColor: 'border-green-500/30',
-=======
-      id: "foundation",
-      title: "🔰 Foundation Activities",
-      description: "Essential eco actions for beginners",
-      color: "from-green-900/30 to-emerald-900/30",
-      borderColor: "border-green-500/30",
->>>>>>> a99e069 (Resolve all remaining merge conflicts and clean up code)
       completedCount: 12,
       totalCount: 15,
       components: [

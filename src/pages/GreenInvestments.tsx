@@ -470,14 +470,8 @@ const GreenInvestments = () => {
                 <TreePine className="h-6 w-6" />
                 🌱 Green Impact & Environmental Progress
               </CardTitle>
-<<<<<<< HEAD
               <p className="text-emerald-300">
                 Track your environmental impact across all GAiA projects and investments
-=======
-              <p className="text-blue-300">
-                Configure your fees to automatically support environmental
-                projects
->>>>>>> a99e069 (Resolve all remaining merge conflicts and clean up code)
               </p>
             </CardHeader>
             <CardContent>
@@ -508,7 +502,6 @@ const GreenInvestments = () => {
                   </CardContent>
                 </Card>
 
-<<<<<<< HEAD
                 <Card className="bg-gradient-to-br from-yellow-900/20 to-black/50 border-yellow-500/20">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium text-yellow-400">Clean Energy</CardTitle>
@@ -590,24 +583,6 @@ const GreenInvestments = () => {
                   </CardContent>
                 </Card>
               </div>
-=======
-                <TabsContent value="projects" className="space-y-6">
-                  <Card className="border-green-500/30 bg-green-900/20">
-                    <CardHeader>
-                      <CardTitle className="text-green-400">
-                        🌱 Project Impact Dashboard
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground">
-                        Real-time project funding and environmental impact
-                        metrics coming soon!
-                      </p>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-              </Tabs>
->>>>>>> a99e069 (Resolve all remaining merge conflicts and clean up code)
             </CardContent>
           </Card>
         </div>

@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { ArrowRight, Zap, Users, Globe, Leaf, Star, Trophy, Shield } from 'lucide-react'
-import { GaiaLogo } from '@/components/GaiaLogo'
-import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
-import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
-import { GaiaCommunityProjects } from '@/components/GaiaCommunityProjects'
-import { SystemMonitor } from '@/components/SystemMonitor'
-import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
-import { InvisibleEcoIndicator } from '@/components/eco/InvisibleEcoIndicator'
-import { AnimatedCounter } from '@/components/ui/animated-counter'
-import { LiveEarningsDisplay } from '@/components/earnings/LiveEarningsDisplay'
-import { EcoMissionCard } from '@/components/missions/EcoMissionCard'
-import { ThemeSelector } from '@/components/ThemeSelector'
-
-import { UpgradedVisualControlButton } from '@/components/visual/UpgradedVisualControlButton'
-=======
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -46,7 +25,6 @@ import { EcoMissionCard } from "@/components/missions/EcoMissionCard";
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { EnhancedPersistentMusicPlayer } from "@/components/music/EnhancedPersistentMusicPlayer";
 import { UpgradedVisualControlButton } from "@/components/visual/UpgradedVisualControlButton";
->>>>>>> 7d6f23b (Resolve all remaining rebase conflicts, mark deleted files, and continue)
 
 export default function Home() {
   const [stats, setStats] = useState({
