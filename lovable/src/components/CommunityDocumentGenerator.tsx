@@ -1,36 +1,35 @@
-
-import { useState, useRef } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { Download, FileText, Shield, Globe, Zap, Crown } from 'lucide-react'
-import { toast } from 'sonner'
+import { useState, useRef } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Download, FileText, Shield, Globe, Zap, Crown } from "lucide-react";
+import { toast } from "sonner";
 
 export function CommunityDocumentGenerator() {
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [downloadProgress, setDownloadProgress] = useState(0)
-  const documentRef = useRef<HTMLDivElement>(null)
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState(0);
+  const documentRef = useRef<HTMLDivElement>(null);
 
   const generateCommunityDocument = async () => {
-    setIsGenerating(true)
-    setDownloadProgress(0)
-    
+    setIsGenerating(true);
+    setDownloadProgress(0);
+
     try {
       // Simulate document generation progress
       const progressInterval = setInterval(() => {
-        setDownloadProgress(prev => {
+        setDownloadProgress((prev) => {
           if (prev >= 100) {
-            clearInterval(progressInterval)
-            return 100
+            clearInterval(progressInterval);
+            return 100;
           }
-          return prev + 10
-        })
-      }, 200)
+          return prev + 10;
+        });
+      }, 200);
 
       // Generate comprehensive community document
-      const documentContent = generateDocumentContent()
-      
+      const documentContent = generateDocumentContent();
+
       // Create downloadable PDF content
       const htmlContent = `
         <!DOCTYPE html>
@@ -54,32 +53,32 @@ export function CommunityDocumentGenerator() {
           ${documentContent}
         </body>
         </html>
-      `
+      `;
 
       // Create and download the document
-      const blob = new Blob([htmlContent], { type: 'text/html' })
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = 'Harmony-of-Gaia-Community-Vision.html'
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      URL.revokeObjectURL(url)
+      const blob = new Blob([htmlContent], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "Harmony-of-Gaia-Community-Vision.html";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
 
-      toast.success('🌍 Community Document Generated!', {
-        description: 'Your comprehensive Harmony of Gaia vision document is ready for download',
-        duration: 5000
-      })
-
+      toast.success("🌍 Community Document Generated!", {
+        description:
+          "Your comprehensive Harmony of Gaia vision document is ready for download",
+        duration: 5000,
+      });
     } catch (error) {
-      toast.error('Document generation failed', {
-        description: 'Please try again in a moment'
-      })
+      toast.error("Document generation failed", {
+        description: "Please try again in a moment",
+      });
     } finally {
-      setIsGenerating(false)
+      setIsGenerating(false);
     }
-  }
+  };
 
   const generateDocumentContent = () => {
     return `
@@ -175,8 +174,8 @@ export function CommunityDocumentGenerator() {
         <p>The Ultimate Cryptocurrency Ecosystem for Global Prosperity</p>
         <p style="font-size: 0.9em; margin-top: 20px;">This document represents our community vision and technological achievements. All features mentioned are actively implemented and operational.</p>
       </div>
-    `
-  }
+    `;
+  };
 
   return (
     <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
@@ -186,7 +185,8 @@ export function CommunityDocumentGenerator() {
           Community Vision Document Generator
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Generate a comprehensive PDF document showcasing our ecosystem for the community
+          Generate a comprehensive PDF document showcasing our ecosystem for the
+          community
         </p>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -213,7 +213,9 @@ export function CommunityDocumentGenerator() {
             </div>
           </div>
           <div className="space-y-2">
-            <h4 className="font-semibold text-purple-400">Privacy Protected:</h4>
+            <h4 className="font-semibold text-purple-400">
+              Privacy Protected:
+            </h4>
             <div className="space-y-1 text-sm text-muted-foreground">
               <p>✅ No private information included</p>
               <p>✅ Only community-focused content</p>
@@ -226,20 +228,26 @@ export function CommunityDocumentGenerator() {
         {isGenerating && (
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Generating document...</span>
-              <span className="text-sm text-green-400">{downloadProgress}%</span>
+              <span className="text-sm text-muted-foreground">
+                Generating document...
+              </span>
+              <span className="text-sm text-green-400">
+                {downloadProgress}%
+              </span>
             </div>
             <Progress value={downloadProgress} className="h-2" />
           </div>
         )}
 
-        <Button 
+        <Button
           onClick={generateCommunityDocument}
           disabled={isGenerating}
           className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold"
         >
           <Download className="h-4 w-4 mr-2" />
-          {isGenerating ? 'Generating Document...' : 'Generate Community Document'}
+          {isGenerating
+            ? "Generating Document..."
+            : "Generate Community Document"}
         </Button>
 
         <div className="text-center pt-4 border-t border-green-500/20">
@@ -249,5 +257,5 @@ export function CommunityDocumentGenerator() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

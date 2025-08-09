@@ -1,67 +1,82 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Slider } from '@/components/ui/slider'
-import { Palette, Zap, Star, Settings } from 'lucide-react'
-import { EnhancedBackgroundManager, EnhancedBackgroundType, EnhancedBackgroundSettings } from '../backgrounds/EnhancedBackgroundManager'
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Slider } from "@/components/ui/slider";
+import { Palette, Zap, Star, Settings } from "lucide-react";
+import {
+  EnhancedBackgroundManager,
+  EnhancedBackgroundType,
+  EnhancedBackgroundSettings,
+} from "../backgrounds/EnhancedBackgroundManager";
 
 export function ThemeDesigner() {
   const [currentTheme, setCurrentTheme] = useState<EnhancedBackgroundSettings>({
-    type: 'matrix',
-    intensity: 'medium',
-    color: '#00ff00',
+    type: "matrix",
+    intensity: "medium",
+    color: "#00ff00",
     speed: 1,
-    autoGenerate: false
-  })
+    autoGenerate: false,
+  });
 
-  const backgroundTypes: { id: EnhancedBackgroundType; name: string; description: string }[] = [
+  const backgroundTypes: {
+    id: EnhancedBackgroundType;
+    name: string;
+    description: string;
+  }[] = [
     {
-      id: 'matrix',
-      name: 'Matrix Rain',
-      description: 'Classic falling code effect'
+      id: "matrix",
+      name: "Matrix Rain",
+      description: "Classic falling code effect",
     },
     {
-      id: 'neural',
-      name: 'Neural Network',
-      description: 'Connected nodes and synapses'
+      id: "neural",
+      name: "Neural Network",
+      description: "Connected nodes and synapses",
     },
     {
-      id: 'puzzle',
-      name: 'Puzzle Pieces',
-      description: 'Animated puzzle elements'
+      id: "puzzle",
+      name: "Puzzle Pieces",
+      description: "Animated puzzle elements",
     },
     {
-      id: 'cyberpunk',
-      name: 'CyberPunk Grid',
-      description: 'Futuristic grid and glitch effects'
+      id: "cyberpunk",
+      name: "CyberPunk Grid",
+      description: "Futuristic grid and glitch effects",
     },
     {
-      id: 'quantum',
-      name: 'Quantum Field',
-      description: 'Particle entanglement visualization'
+      id: "quantum",
+      name: "Quantum Field",
+      description: "Particle entanglement visualization",
     },
     {
-      id: 'bioelectric',
-      name: 'Bio-Electric',
-      description: 'Organic energy patterns'
+      id: "bioelectric",
+      name: "Bio-Electric",
+      description: "Organic energy patterns",
     },
     {
-      id: 'holographic',
-      name: 'Holographic',
-      description: 'Hologram scan line effects'
-    }
-  ]
+      id: "holographic",
+      name: "Holographic",
+      description: "Hologram scan line effects",
+    },
+  ];
 
   const colors = [
-    '#00ff00', '#00ffff', '#ff00ff', '#ffff00', '#ff0080',
-    '#0080ff', '#ff8000', '#8000ff', '#ff0040', '#40ff00'
-  ]
+    "#00ff00",
+    "#00ffff",
+    "#ff00ff",
+    "#ffff00",
+    "#ff0080",
+    "#0080ff",
+    "#ff8000",
+    "#8000ff",
+    "#ff0040",
+    "#40ff00",
+  ];
 
   const updateTheme = (updates: Partial<EnhancedBackgroundSettings>) => {
-    setCurrentTheme(prev => ({ ...prev, ...updates }))
-  }
+    setCurrentTheme((prev) => ({ ...prev, ...updates }));
+  };
 
   return (
     <div className="space-y-6">
@@ -80,12 +95,14 @@ export function ThemeDesigner() {
               {backgroundTypes.map((type) => (
                 <Button
                   key={type.id}
-                  variant={currentTheme.type === type.id ? 'default' : 'outline'}
+                  variant={
+                    currentTheme.type === type.id ? "default" : "outline"
+                  }
                   onClick={() => updateTheme({ type: type.id })}
                   className={`text-xs p-2 h-auto ${
-                    currentTheme.type === type.id 
-                      ? 'bg-purple-600 hover:bg-purple-700' 
-                      : 'border-purple-500/50 hover:bg-purple-900/20'
+                    currentTheme.type === type.id
+                      ? "bg-purple-600 hover:bg-purple-700"
+                      : "border-purple-500/50 hover:bg-purple-900/20"
                   }`}
                 >
                   <div className="text-center">
@@ -106,9 +123,9 @@ export function ThemeDesigner() {
                   key={color}
                   onClick={() => updateTheme({ color })}
                   className={`h-8 w-8 rounded-full border-2 ${
-                    currentTheme.color === color 
-                      ? 'border-white' 
-                      : 'border-gray-600'
+                    currentTheme.color === color
+                      ? "border-white"
+                      : "border-gray-600"
                   }`}
                   style={{ backgroundColor: color }}
                 />
@@ -120,15 +137,17 @@ export function ThemeDesigner() {
           <div className="space-y-3">
             <h4 className="font-medium text-purple-400">Intensity</h4>
             <div className="flex gap-2">
-              {(['low', 'medium', 'high'] as const).map((intensity) => (
+              {(["low", "medium", "high"] as const).map((intensity) => (
                 <Button
                   key={intensity}
-                  variant={currentTheme.intensity === intensity ? 'default' : 'outline'}
+                  variant={
+                    currentTheme.intensity === intensity ? "default" : "outline"
+                  }
                   onClick={() => updateTheme({ intensity })}
                   className={`flex-1 ${
-                    currentTheme.intensity === intensity 
-                      ? 'bg-purple-600 hover:bg-purple-700' 
-                      : 'border-purple-500/50 hover:bg-purple-900/20'
+                    currentTheme.intensity === intensity
+                      ? "bg-purple-600 hover:bg-purple-700"
+                      : "border-purple-500/50 hover:bg-purple-900/20"
                   }`}
                 >
                   {intensity.charAt(0).toUpperCase() + intensity.slice(1)}
@@ -160,11 +179,17 @@ export function ThemeDesigner() {
           <div className="flex items-center justify-between">
             <span className="text-purple-400">Auto-generate themes</span>
             <Button
-              variant={currentTheme.autoGenerate ? 'default' : 'outline'}
-              onClick={() => updateTheme({ autoGenerate: !currentTheme.autoGenerate })}
-              className={currentTheme.autoGenerate ? 'bg-purple-600 hover:bg-purple-700' : 'border-purple-500/50'}
+              variant={currentTheme.autoGenerate ? "default" : "outline"}
+              onClick={() =>
+                updateTheme({ autoGenerate: !currentTheme.autoGenerate })
+              }
+              className={
+                currentTheme.autoGenerate
+                  ? "bg-purple-600 hover:bg-purple-700"
+                  : "border-purple-500/50"
+              }
             >
-              {currentTheme.autoGenerate ? 'ON' : 'OFF'}
+              {currentTheme.autoGenerate ? "ON" : "OFF"}
             </Button>
           </div>
         </CardContent>
@@ -187,5 +212,5 @@ export function ThemeDesigner() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

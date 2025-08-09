@@ -1,10 +1,9 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { Database, Network, Shield, Cpu, Zap, Activity } from 'lucide-react'
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Database, Network, Shield, Cpu, Zap, Activity } from "lucide-react";
 
 export function PrivateBlockchainNetwork() {
   const [networkStats, setNetworkStats] = useState({
@@ -13,21 +12,24 @@ export function PrivateBlockchainNetwork() {
     hashRate: 987654,
     networkHealth: 99.8,
     securityLevel: 100,
-    dataIntegrity: 100
-  })
+    dataIntegrity: 100,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setNetworkStats(prev => ({
+      setNetworkStats((prev) => ({
         ...prev,
         transactions: prev.transactions + Math.floor(Math.random() * 50),
         hashRate: prev.hashRate + Math.floor(Math.random() * 10000 - 5000),
-        networkHealth: Math.max(95, Math.min(100, prev.networkHealth + (Math.random() - 0.5) * 0.2))
-      }))
-    }, 2000)
+        networkHealth: Math.max(
+          95,
+          Math.min(100, prev.networkHealth + (Math.random() - 0.5) * 0.2),
+        ),
+      }));
+    }, 2000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="space-y-6">
@@ -46,16 +48,24 @@ export function PrivateBlockchainNetwork() {
         <CardContent className="space-y-6">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-green-900/20 rounded border border-green-500/20">
-              <div className="text-2xl font-bold text-green-400">{networkStats.nodes}</div>
+              <div className="text-2xl font-bold text-green-400">
+                {networkStats.nodes}
+              </div>
               <div className="text-sm text-muted-foreground">Active Nodes</div>
             </div>
             <div className="text-center p-4 bg-blue-900/20 rounded border border-blue-500/20">
-              <div className="text-2xl font-bold text-blue-400">{networkStats.transactions.toLocaleString()}</div>
+              <div className="text-2xl font-bold text-blue-400">
+                {networkStats.transactions.toLocaleString()}
+              </div>
               <div className="text-sm text-muted-foreground">Transactions</div>
             </div>
             <div className="text-center p-4 bg-purple-900/20 rounded border border-purple-500/20">
-              <div className="text-2xl font-bold text-purple-400">{networkStats.hashRate.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Hash Rate (H/s)</div>
+              <div className="text-2xl font-bold text-purple-400">
+                {networkStats.hashRate.toLocaleString()}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Hash Rate (H/s)
+              </div>
             </div>
           </div>
 
@@ -63,23 +73,29 @@ export function PrivateBlockchainNetwork() {
             <div>
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-green-400">Network Health</span>
-                <span className="text-green-400">{networkStats.networkHealth.toFixed(1)}%</span>
+                <span className="text-green-400">
+                  {networkStats.networkHealth.toFixed(1)}%
+                </span>
               </div>
               <Progress value={networkStats.networkHealth} className="h-2" />
             </div>
-            
+
             <div>
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-blue-400">Security Level</span>
-                <span className="text-blue-400">{networkStats.securityLevel}%</span>
+                <span className="text-blue-400">
+                  {networkStats.securityLevel}%
+                </span>
               </div>
               <Progress value={networkStats.securityLevel} className="h-2" />
             </div>
-            
+
             <div>
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-purple-400">Data Integrity</span>
-                <span className="text-purple-400">{networkStats.dataIntegrity}%</span>
+                <span className="text-purple-400">
+                  {networkStats.dataIntegrity}%
+                </span>
               </div>
               <Progress value={networkStats.dataIntegrity} className="h-2" />
             </div>
@@ -97,19 +113,27 @@ export function PrivateBlockchainNetwork() {
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">Consensus Algorithm:</span>
-              <span className="text-green-400 font-bold">Quantum Proof of Stake</span>
+              <span className="text-sm text-muted-foreground">
+                Consensus Algorithm:
+              </span>
+              <span className="text-green-400 font-bold">
+                Quantum Proof of Stake
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="text-sm text-muted-foreground">Block Time:</span>
               <span className="text-blue-400 font-bold">0.5 seconds</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">Transaction Speed:</span>
+              <span className="text-sm text-muted-foreground">
+                Transaction Speed:
+              </span>
               <span className="text-purple-400 font-bold">50,000 TPS</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">Network Type:</span>
+              <span className="text-sm text-muted-foreground">
+                Network Type:
+              </span>
               <span className="text-cyan-400 font-bold">Private & Secure</span>
             </div>
           </CardContent>
@@ -125,18 +149,26 @@ export function PrivateBlockchainNetwork() {
           <CardContent className="space-y-3">
             <div className="flex justify-between">
               <span className="text-sm text-muted-foreground">Encryption:</span>
-              <span className="text-green-400 font-bold">Quantum-Resistant</span>
+              <span className="text-green-400 font-bold">
+                Quantum-Resistant
+              </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">Authentication:</span>
+              <span className="text-sm text-muted-foreground">
+                Authentication:
+              </span>
               <span className="text-blue-400 font-bold">Multi-Layer</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">Data Privacy:</span>
+              <span className="text-sm text-muted-foreground">
+                Data Privacy:
+              </span>
               <span className="text-purple-400 font-bold">Zero-Knowledge</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">Immutability:</span>
+              <span className="text-sm text-muted-foreground">
+                Immutability:
+              </span>
               <span className="text-cyan-400 font-bold">Absolute</span>
             </div>
           </CardContent>
@@ -153,10 +185,15 @@ export function PrivateBlockchainNetwork() {
         <CardContent>
           <div className="space-y-3">
             {Array.from({ length: 5 }, (_, i) => (
-              <div key={i} className="flex items-center justify-between p-3 bg-black/20 rounded border border-purple-500/20">
+              <div
+                key={i}
+                className="flex items-center justify-between p-3 bg-black/20 rounded border border-purple-500/20"
+              >
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-sm">Block #{(15847 + i).toLocaleString()} mined</span>
+                  <span className="text-sm">
+                    Block #{(15847 + i).toLocaleString()} mined
+                  </span>
                 </div>
                 <div className="text-sm text-purple-400">
                   {Math.floor(Math.random() * 100) + 50} transactions
@@ -186,5 +223,5 @@ export function PrivateBlockchainNetwork() {
         </Button>
       </div>
     </div>
-  )
+  );
 }

@@ -1,27 +1,28 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Switch } from '@/components/ui/switch'
-import { Bell, BellOff, Settings, Volume2, VolumeX } from 'lucide-react'
-import { toast } from 'sonner'
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
+import { Bell, BellOff, Settings, Volume2, VolumeX } from "lucide-react";
+import { toast } from "sonner";
 
 export function NotificationController() {
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true)
-  const [soundEnabled, setSoundEnabled] = useState(true)
-  const [criticalAlertsOnly, setCriticalAlertsOnly] = useState(false)
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [criticalAlertsOnly, setCriticalAlertsOnly] = useState(false);
 
   const toggleNotifications = () => {
-    setNotificationsEnabled(!notificationsEnabled)
-    toast.success(notificationsEnabled ? 'Notifications disabled' : 'Notifications enabled')
-  }
+    setNotificationsEnabled(!notificationsEnabled);
+    toast.success(
+      notificationsEnabled ? "Notifications disabled" : "Notifications enabled",
+    );
+  };
 
   const testNotification = () => {
-    toast.success('🔔 Test notification sent successfully!', {
-      description: 'This is how admin notifications will appear'
-    })
-  }
+    toast.success("🔔 Test notification sent successfully!", {
+      description: "This is how admin notifications will appear",
+    });
+  };
 
   return (
     <div className="space-y-6">
@@ -41,11 +42,15 @@ export function NotificationController() {
             </div>
             <div className="p-4 bg-blue-900/20 rounded-lg text-center">
               <div className="text-2xl font-bold text-blue-400">47</div>
-              <div className="text-sm text-muted-foreground">Today's Alerts</div>
+              <div className="text-sm text-muted-foreground">
+                Today's Alerts
+              </div>
             </div>
             <div className="p-4 bg-purple-900/20 rounded-lg text-center">
               <div className="text-2xl font-bold text-purple-400">3</div>
-              <div className="text-sm text-muted-foreground">Critical Pending</div>
+              <div className="text-sm text-muted-foreground">
+                Critical Pending
+              </div>
             </div>
           </div>
 
@@ -70,8 +75,12 @@ export function NotificationController() {
                   checked={notificationsEnabled}
                   onCheckedChange={toggleNotifications}
                 />
-                <Badge className={notificationsEnabled ? 'bg-green-600' : 'bg-red-600'}>
-                  {notificationsEnabled ? 'ON' : 'OFF'}
+                <Badge
+                  className={
+                    notificationsEnabled ? "bg-green-600" : "bg-red-600"
+                  }
+                >
+                  {notificationsEnabled ? "ON" : "OFF"}
                 </Badge>
               </div>
             </div>
@@ -123,7 +132,7 @@ export function NotificationController() {
               Test Notification
             </Button>
             <Button
-              onClick={() => toast.info('All notifications cleared')}
+              onClick={() => toast.info("All notifications cleared")}
               variant="outline"
             >
               Clear All Alerts
@@ -132,5 +141,5 @@ export function NotificationController() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

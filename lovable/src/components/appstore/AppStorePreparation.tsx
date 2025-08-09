@@ -1,26 +1,32 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Download, Smartphone, Apple, Play, FileText, Shield } from 'lucide-react'
-import { toast } from 'sonner'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Download,
+  Smartphone,
+  Apple,
+  Play,
+  FileText,
+  Shield,
+} from "lucide-react";
+import { toast } from "sonner";
 
 export function AppStorePreparation() {
   const downloadDocument = (filename: string, content: string) => {
-    const blob = new Blob([content], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = filename
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-    
+    const blob = new Blob([content], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
     toast.success(`${filename} downloaded!`, {
-      description: 'Document ready for app store submission'
-    })
-  }
+      description: "Document ready for app store submission",
+    });
+  };
 
   const privacyPolicy = `PRIVACY POLICY FOR HARMONY OF GAIA - GAIA'S EXCHANGES
 
@@ -71,7 +77,7 @@ Website: www.cultureofharmony.net
 8. UPDATES TO THIS POLICY
 We may update this Privacy Policy. Users will be notified of significant changes through the app or email.
 
-This Privacy Policy is designed to comply with GDPR, CCPA, and other major privacy regulations.`
+This Privacy Policy is designed to comply with GDPR, CCPA, and other major privacy regulations.`;
 
   const termsOfService = `TERMS OF SERVICE FOR HARMONY OF GAIA - GAIA'S EXCHANGES
 
@@ -128,7 +134,7 @@ For questions about these terms:
 Email: info@cultureofharmony.net
 Website: www.cultureofharmony.net
 
-These terms are governed by applicable laws and designed for international compliance.`
+These terms are governed by applicable laws and designed for international compliance.`;
 
   const appStoreDescription = `Harmony of Gaia - Gaia's Exchanges: Revolutionary Sustainable Crypto Trading
 
@@ -175,9 +181,9 @@ Download now and start your journey toward sustainable cryptocurrency trading!
 Contact: info@cultureofharmony.net
 Website: www.cultureofharmony.net
 
-#SustainableCrypto #GreenTrading #CultureOfHarmony #EnvironmentalBlockchain`
+#SustainableCrypto #GreenTrading #CultureOfHarmony #EnvironmentalBlockchain`;
 
-  const appStoreKeywords = `cryptocurrency, crypto trading, sustainable blockchain, environmental, green crypto, GAiA token, wallet, secure trading, zero fees, eco-friendly, digital assets, DeFi, Culture of Harmony, sustainable finance, green technology, blockchain, bitcoin, ethereum, trading platform, crypto exchange, environmental impact, sustainable investing, clean energy crypto, carbon neutral trading, eco trading`
+  const appStoreKeywords = `cryptocurrency, crypto trading, sustainable blockchain, environmental, green crypto, GAiA token, wallet, secure trading, zero fees, eco-friendly, digital assets, DeFi, Culture of Harmony, sustainable finance, green technology, blockchain, bitcoin, ethereum, trading platform, crypto exchange, environmental impact, sustainable investing, clean energy crypto, carbon neutral trading, eco trading`;
 
   return (
     <div className="space-y-6">
@@ -188,7 +194,8 @@ Website: www.cultureofharmony.net
             App Store Submission Package
           </CardTitle>
           <p className="text-muted-foreground">
-            Complete documentation package for Apple App Store and Google Play Store submissions
+            Complete documentation package for Apple App Store and Google Play
+            Store submissions
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -206,10 +213,15 @@ Website: www.cultureofharmony.net
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between items-center">
                       <span>Privacy Policy</span>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="outline"
-                        onClick={() => downloadDocument('Privacy_Policy_iOS.txt', privacyPolicy)}
+                        onClick={() =>
+                          downloadDocument(
+                            "Privacy_Policy_iOS.txt",
+                            privacyPolicy,
+                          )
+                        }
                       >
                         <Download className="h-3 w-3 mr-1" />
                         Download
@@ -217,10 +229,15 @@ Website: www.cultureofharmony.net
                     </div>
                     <div className="flex justify-between items-center">
                       <span>Terms of Service</span>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="outline"
-                        onClick={() => downloadDocument('Terms_of_Service_iOS.txt', termsOfService)}
+                        onClick={() =>
+                          downloadDocument(
+                            "Terms_of_Service_iOS.txt",
+                            termsOfService,
+                          )
+                        }
                       >
                         <Download className="h-3 w-3 mr-1" />
                         Download
@@ -228,10 +245,15 @@ Website: www.cultureofharmony.net
                     </div>
                     <div className="flex justify-between items-center">
                       <span>App Description</span>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="outline"
-                        onClick={() => downloadDocument('App_Store_Description.txt', appStoreDescription)}
+                        onClick={() =>
+                          downloadDocument(
+                            "App_Store_Description.txt",
+                            appStoreDescription,
+                          )
+                        }
                       >
                         <Download className="h-3 w-3 mr-1" />
                         Download
@@ -239,10 +261,15 @@ Website: www.cultureofharmony.net
                     </div>
                     <div className="flex justify-between items-center">
                       <span>Keywords</span>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="outline"
-                        onClick={() => downloadDocument('App_Store_Keywords.txt', appStoreKeywords)}
+                        onClick={() =>
+                          downloadDocument(
+                            "App_Store_Keywords.txt",
+                            appStoreKeywords,
+                          )
+                        }
                       >
                         <Download className="h-3 w-3 mr-1" />
                         Download
@@ -267,10 +294,15 @@ Website: www.cultureofharmony.net
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between items-center">
                       <span>Privacy Policy</span>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="outline"
-                        onClick={() => downloadDocument('Privacy_Policy_Android.txt', privacyPolicy)}
+                        onClick={() =>
+                          downloadDocument(
+                            "Privacy_Policy_Android.txt",
+                            privacyPolicy,
+                          )
+                        }
                       >
                         <Download className="h-3 w-3 mr-1" />
                         Download
@@ -278,10 +310,15 @@ Website: www.cultureofharmony.net
                     </div>
                     <div className="flex justify-between items-center">
                       <span>Terms of Service</span>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="outline"
-                        onClick={() => downloadDocument('Terms_of_Service_Android.txt', termsOfService)}
+                        onClick={() =>
+                          downloadDocument(
+                            "Terms_of_Service_Android.txt",
+                            termsOfService,
+                          )
+                        }
                       >
                         <Download className="h-3 w-3 mr-1" />
                         Download
@@ -289,10 +326,15 @@ Website: www.cultureofharmony.net
                     </div>
                     <div className="flex justify-between items-center">
                       <span>App Description</span>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="outline"
-                        onClick={() => downloadDocument('Play_Store_Description.txt', appStoreDescription)}
+                        onClick={() =>
+                          downloadDocument(
+                            "Play_Store_Description.txt",
+                            appStoreDescription,
+                          )
+                        }
                       >
                         <Download className="h-3 w-3 mr-1" />
                         Download
@@ -300,10 +342,15 @@ Website: www.cultureofharmony.net
                     </div>
                     <div className="flex justify-between items-center">
                       <span>Keywords</span>
-                      <Button 
-                        size="sm" 
+                      <Button
+                        size="sm"
                         variant="outline"
-                        onClick={() => downloadDocument('Play_Store_Keywords.txt', appStoreKeywords)}
+                        onClick={() =>
+                          downloadDocument(
+                            "Play_Store_Keywords.txt",
+                            appStoreKeywords,
+                          )
+                        }
                       >
                         <Download className="h-3 w-3 mr-1" />
                         Download
@@ -326,22 +373,34 @@ Website: www.cultureofharmony.net
             <CardContent className="space-y-4">
               <div className="space-y-3">
                 <div>
-                  <h4 className="font-medium text-green-400 mb-2">Step 1: Download All Documents</h4>
+                  <h4 className="font-medium text-green-400 mb-2">
+                    Step 1: Download All Documents
+                  </h4>
                   <p className="text-sm text-muted-foreground">
-                    Download all the policy documents and descriptions using the buttons above.
+                    Download all the policy documents and descriptions using the
+                    buttons above.
                   </p>
                 </div>
-                
+
                 <div>
-                  <h4 className="font-medium text-blue-400 mb-2">Step 2: Create Developer Accounts</h4>
+                  <h4 className="font-medium text-blue-400 mb-2">
+                    Step 2: Create Developer Accounts
+                  </h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Apple Developer Program: $99/year (developer.apple.com)</li>
-                    <li>• Google Play Console: $25 one-time fee (play.google.com/console)</li>
+                    <li>
+                      • Apple Developer Program: $99/year (developer.apple.com)
+                    </li>
+                    <li>
+                      • Google Play Console: $25 one-time fee
+                      (play.google.com/console)
+                    </li>
                   </ul>
                 </div>
-                
+
                 <div>
-                  <h4 className="font-medium text-yellow-400 mb-2">Step 3: App Information</h4>
+                  <h4 className="font-medium text-yellow-400 mb-2">
+                    Step 3: App Information
+                  </h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
                     <li>• App Name: "Harmony of Gaia - Gaia's Exchanges"</li>
                     <li>• Category: Finance</li>
@@ -349,25 +408,36 @@ Website: www.cultureofharmony.net
                     <li>• Content Rating: Suitable for mature audiences</li>
                   </ul>
                 </div>
-                
+
                 <div>
-                  <h4 className="font-medium text-purple-400 mb-2">Step 4: Required Assets</h4>
+                  <h4 className="font-medium text-purple-400 mb-2">
+                    Step 4: Required Assets
+                  </h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• App Icon: Use the official Gaia logo (1024x1024 for iOS, various sizes for Android)</li>
+                    <li>
+                      • App Icon: Use the official Gaia logo (1024x1024 for iOS,
+                      various sizes for Android)
+                    </li>
                     <li>• Screenshots: Take screenshots of the working app</li>
-                    <li>• App Store description: Use the downloaded description files</li>
+                    <li>
+                      • App Store description: Use the downloaded description
+                      files
+                    </li>
                   </ul>
                 </div>
               </div>
-              
+
               <div className="bg-gradient-to-r from-red-900/20 to-orange-900/20 border border-red-500/20 rounded-lg p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <Shield className="h-4 w-4 text-red-400" />
-                  <h4 className="font-medium text-red-400">Important Security Note</h4>
+                  <h4 className="font-medium text-red-400">
+                    Important Security Note
+                  </h4>
                 </div>
                 <p className="text-sm text-red-300">
-                  You must manually submit these applications using your own developer accounts. 
-                  Never share your Apple ID, Google account credentials, or developer account access with anyone.
+                  You must manually submit these applications using your own
+                  developer accounts. Never share your Apple ID, Google account
+                  credentials, or developer account access with anyone.
                 </p>
               </div>
             </CardContent>
@@ -375,5 +445,5 @@ Website: www.cultureofharmony.net
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

@@ -1,14 +1,13 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield } from 'lucide-react'
-import { UserControlPanel } from './UserControlPanel'
-import { IPControlCenter } from './IPControlCenter'
-import { QuickActionsPanel } from './QuickActionsPanel'
-import { ChatSecurityPanel } from './ChatSecurityPanel'
-import { EnhancedUserAnalytics } from './EnhancedUserAnalytics'
-import { EncryptedSecurityReports } from './EncryptedSecurityReports'
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Shield } from "lucide-react";
+import { UserControlPanel } from "./UserControlPanel";
+import { IPControlCenter } from "./IPControlCenter";
+import { QuickActionsPanel } from "./QuickActionsPanel";
+import { ChatSecurityPanel } from "./ChatSecurityPanel";
+import { EnhancedUserAnalytics } from "./EnhancedUserAnalytics";
+import { EncryptedSecurityReports } from "./EncryptedSecurityReports";
 
 export function UserManagementSystemRefactored() {
   return (
@@ -58,5 +57,5 @@ export function UserManagementSystemRefactored() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

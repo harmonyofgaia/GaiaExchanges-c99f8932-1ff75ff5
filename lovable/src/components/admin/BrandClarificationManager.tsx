@@ -1,13 +1,13 @@
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { AlertTriangle, CheckCircle, Copy, FileText } from 'lucide-react'
-import { toast } from 'sonner'
-import { GAIA_TOKEN } from '@/constants/gaia'
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { AlertTriangle, CheckCircle, Copy, FileText } from "lucide-react";
+import { toast } from "sonner";
+import { GAIA_TOKEN } from "@/constants/gaia";
 
 export function BrandClarificationManager() {
-  const [documentsGenerated, setDocumentsGenerated] = useState(false)
+  const [documentsGenerated, setDocumentsGenerated] = useState(false);
 
   const officialStatement = `
 OFFICIAL BRAND CLARIFICATION STATEMENT
@@ -35,27 +35,27 @@ and public communications.
 
 Date: ${new Date().toLocaleDateString()}
 Project Authority: Harmony of Gaia Admin
-`
+`;
 
   const copyStatement = () => {
-    navigator.clipboard.writeText(officialStatement)
-    toast.success('Official statement copied to clipboard!', {
-      description: 'Ready to paste in official documents'
-    })
-  }
+    navigator.clipboard.writeText(officialStatement);
+    toast.success("Official statement copied to clipboard!", {
+      description: "Ready to paste in official documents",
+    });
+  };
 
   const generateDocuments = () => {
-    setDocumentsGenerated(true)
-    
-    console.log('🔥 GENERATING OFFICIAL BRAND CLARIFICATION DOCUMENTS')
-    console.log('📋 PREPARING PARTNERSHIP AGREEMENTS WITH DISCLAIMER')
-    console.log('⚖️ CREATING LEGAL FRAMEWORK FOR BRAND DISTINCTION')
-    
-    toast.success('Official Documents Generated!', {
-      description: 'Brand clarification documents ready for partnerships',
-      duration: 5000
-    })
-  }
+    setDocumentsGenerated(true);
+
+    console.log("🔥 GENERATING OFFICIAL BRAND CLARIFICATION DOCUMENTS");
+    console.log("📋 PREPARING PARTNERSHIP AGREEMENTS WITH DISCLAIMER");
+    console.log("⚖️ CREATING LEGAL FRAMEWORK FOR BRAND DISTINCTION");
+
+    toast.success("Official Documents Generated!", {
+      description: "Brand clarification documents ready for partnerships",
+      duration: 5000,
+    });
+  };
 
   return (
     <div className="space-y-6">
@@ -68,15 +68,21 @@ Project Authority: Harmony of Gaia Admin
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="bg-black/40 p-4 rounded-lg border border-red-500/30">
-            <h3 className="text-xl font-bold text-red-400 mb-4">CRITICAL DISTINCTION REQUIRED</h3>
+            <h3 className="text-xl font-bold text-red-400 mb-4">
+              CRITICAL DISTINCTION REQUIRED
+            </h3>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <Badge className="bg-red-600">NOT US</Badge>
-                <span className="text-red-300">GAIA Everworld (coinmarketcap.com/currencies/gaia-everworld/)</span>
+                <span className="text-red-300">
+                  GAIA Everworld (coinmarketcap.com/currencies/gaia-everworld/)
+                </span>
               </div>
               <div className="flex items-center gap-3">
                 <Badge className="bg-green-600">WE ARE</Badge>
-                <span className="text-green-300">GAiA Token - Harmony of Gaia Projects - Culture of Harmony</span>
+                <span className="text-green-300">
+                  GAiA Token - Harmony of Gaia Projects - Culture of Harmony
+                </span>
               </div>
             </div>
           </div>
@@ -84,22 +90,32 @@ Project Authority: Harmony of Gaia Admin
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="text-center p-4 bg-green-900/40 rounded-lg border border-green-500/30">
               <CheckCircle className="h-8 w-8 mx-auto text-green-400 mb-2" />
-              <div className="text-lg font-bold text-green-400">CORRECT WALLET</div>
-              <code className="text-xs text-green-300 break-all">{GAIA_TOKEN.WALLET_ADDRESS}</code>
+              <div className="text-lg font-bold text-green-400">
+                CORRECT WALLET
+              </div>
+              <code className="text-xs text-green-300 break-all">
+                {GAIA_TOKEN.WALLET_ADDRESS}
+              </code>
             </div>
             <div className="text-center p-4 bg-blue-900/40 rounded-lg border border-blue-500/30">
               <CheckCircle className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-lg font-bold text-blue-400">CORRECT CONTRACT</div>
-              <code className="text-xs text-blue-300 break-all">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+              <div className="text-lg font-bold text-blue-400">
+                CORRECT CONTRACT
+              </div>
+              <code className="text-xs text-blue-300 break-all">
+                {GAIA_TOKEN.CONTRACT_ADDRESS}
+              </code>
             </div>
           </div>
 
           <div className="bg-black/40 p-4 rounded-lg border border-yellow-500/30">
-            <h4 className="text-lg font-bold text-yellow-400 mb-3">📋 OFFICIAL STATEMENT FOR PARTNERSHIPS</h4>
+            <h4 className="text-lg font-bold text-yellow-400 mb-3">
+              📋 OFFICIAL STATEMENT FOR PARTNERSHIPS
+            </h4>
             <div className="bg-black/60 p-4 rounded text-sm text-gray-300 font-mono whitespace-pre-line max-h-40 overflow-y-auto">
               {officialStatement}
             </div>
-            <Button 
+            <Button
               onClick={copyStatement}
               className="mt-3 bg-yellow-600 hover:bg-yellow-700"
             >
@@ -109,7 +125,7 @@ Project Authority: Harmony of Gaia Admin
           </div>
 
           <div className="flex gap-4">
-            <Button 
+            <Button
               onClick={generateDocuments}
               className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-6"
             >
@@ -125,12 +141,14 @@ Project Authority: Harmony of Gaia Admin
                 DOCUMENTS READY FOR DEPLOYMENT
               </div>
               <p className="text-green-300 text-sm">
-                Official brand clarification documents have been prepared and are ready for all partnership agreements and public communications.
+                Official brand clarification documents have been prepared and
+                are ready for all partnership agreements and public
+                communications.
               </p>
             </div>
           )}
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

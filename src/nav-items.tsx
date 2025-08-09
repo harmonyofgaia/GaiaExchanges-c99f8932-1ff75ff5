@@ -1,5 +1,24 @@
-
-import { HomeIcon, Users, Settings, Shield, BarChart3, Leaf, Target, Sparkles, Globe, Heart, TreePine, Flame, Coins, Handshake, Video, Brain, Rocket, Zap, Trophy } from "lucide-react";
+import {
+  HomeIcon,
+  Users,
+  Settings,
+  Shield,
+  BarChart3,
+  Leaf,
+  Target,
+  Sparkles,
+  Globe,
+  Heart,
+  TreePine,
+  Flame,
+  Coins,
+  Handshake,
+  Video,
+  Brain,
+  Rocket,
+  Zap,
+  Trophy,
+} from "lucide-react";
 
 // Enhanced navigation with Master Plan v7 features
 export interface NavigationItem {
@@ -54,7 +73,7 @@ export const navigationItems: NavigationItem[] = [
     masterPlanVersion: "v7",
     features: [
       "Water-saving Actions Points",
-      "Home-grown Food Rewards", 
+      "Home-grown Food Rewards",
       "Bee Hotel Creation System",
       "Environmental Education Points",
       "Skill-based Earning Platform",
@@ -66,9 +85,10 @@ export const navigationItems: NavigationItem[] = [
       "Emergency Response Points",
       "Long-term Commitment Bonuses",
       "Innovation Bonus System",
-      "Accessibility Rewards"
+      "Accessibility Rewards",
     ],
-    description: "Master Plan v7: Comprehensive points earning system for all environmental activities",
+    description:
+      "Master Plan v7: Comprehensive points earning system for all environmental activities",
     lazyLoaded: true,
   },
   {
@@ -87,9 +107,10 @@ export const navigationItems: NavigationItem[] = [
       "Badge Display System",
       "Country-based Rankings",
       "Trend Analysis",
-      "Performance Analytics"
+      "Performance Analytics",
     ],
-    description: "Master Plan v7: Comprehensive leaderboard system with global and category rankings",
+    description:
+      "Master Plan v7: Comprehensive leaderboard system with global and category rankings",
     lazyLoaded: true,
   },
   {
@@ -103,9 +124,10 @@ export const navigationItems: NavigationItem[] = [
       "AI-Powered Predictions",
       "Global Leaderboards",
       "Achievement System",
-      "Real-time Environmental Data"
+      "Real-time Environmental Data",
     ],
-    description: "Master Plan v7: Enhanced environmental impact tracking with AI insights",
+    description:
+      "Master Plan v7: Enhanced environmental impact tracking with AI insights",
     lazyLoaded: true,
   },
   {
@@ -119,9 +141,10 @@ export const navigationItems: NavigationItem[] = [
       "Smart Contract Automation",
       "Multi-signature Security",
       "Impact Verification",
-      "Community Voting"
+      "Community Voting",
     ],
-    description: "Master Plan v7: Advanced decentralized funding with governance",
+    description:
+      "Master Plan v7: Advanced decentralized funding with governance",
     lazyLoaded: true,
   },
   {
@@ -135,7 +158,7 @@ export const navigationItems: NavigationItem[] = [
       "Dynamic Rarity System",
       "Ecosystem Interactions",
       "Trading Marketplace",
-      "Conservation Partnerships"
+      "Conservation Partnerships",
     ],
     description: "Master Plan v7: Advanced biodiversity NFT ecosystem",
     lazyLoaded: true,
@@ -151,9 +174,10 @@ export const navigationItems: NavigationItem[] = [
       "Elemental Meditation",
       "Spiritual Evolution",
       "Avatar Customization",
-      "Environmental Bonding"
+      "Environmental Bonding",
     ],
-    description: "Master Plan v7: Deep spiritual connection with nature through avatars",
+    description:
+      "Master Plan v7: Deep spiritual connection with nature through avatars",
     lazyLoaded: true,
   },
   {
@@ -167,7 +191,7 @@ export const navigationItems: NavigationItem[] = [
       "AI Wildfire Detection",
       "Blockchain Token System",
       "Community Engagement Hub",
-      "Global Partnership Network"
+      "Global Partnership Network",
     ],
     description: "Forest Shield Sand Cannon Wildfire Defense Master Plan",
     lazyLoaded: true,
@@ -184,9 +208,10 @@ export const navigationItems: NavigationItem[] = [
       "Token Reward System",
       "Governance & Voting",
       "Eco-Action History",
-      "Blockchain Integration"
+      "Blockchain Integration",
     ],
-    description: "Community project for wildfire prevention through sand cannon technology (Owner: harmonyofgaia)",
+    description:
+      "Community project for wildfire prevention through sand cannon technology (Owner: harmonyofgaia)",
     lazyLoaded: true,
   },
   {
@@ -200,7 +225,7 @@ export const navigationItems: NavigationItem[] = [
       "Sand Cannon Control",
       "IoT Sensor Network",
       "Emergency Response",
-      "Performance Analytics"
+      "Performance Analytics",
     ],
     description: "Real-time wildfire defense monitoring and control dashboard",
     lazyLoaded: true,
@@ -216,9 +241,10 @@ export const navigationItems: NavigationItem[] = [
       "Staking & Rewards",
       "DAO Governance",
       "Impact Verification",
-      "Blockchain Integration"
+      "Blockchain Integration",
     ],
-    description: "Multi-tier blockchain token system for forest defense funding and governance",
+    description:
+      "Multi-tier blockchain token system for forest defense funding and governance",
     lazyLoaded: true,
   },
   {
@@ -232,7 +258,7 @@ export const navigationItems: NavigationItem[] = [
       "Community Coordination",
       "Achievement System",
       "Challenge Participation",
-      "Global Leaderboards"
+      "Global Leaderboards",
     ],
     description: "Community training, coordination, and engagement platform",
     lazyLoaded: true,
@@ -248,7 +274,7 @@ export const navigationItems: NavigationItem[] = [
       "Collaboration Management",
       "Partnership Analytics",
       "Initiative Tracking",
-      "Performance Monitoring"
+      "Performance Monitoring",
     ],
     description: "NGO, agency, and tech firm partnership coordination platform",
     lazyLoaded: true,
@@ -264,7 +290,7 @@ export const navigationItems: NavigationItem[] = [
       "Blockchain Verification",
       "Carbon Credit Management",
       "SDG Alignment Monitoring",
-      "Transparent Reporting"
+      "Transparent Reporting",
     ],
     description: "Environmental impact tracking and verification system",
     lazyLoaded: true,
@@ -281,9 +307,10 @@ export const navigationItems: NavigationItem[] = [
       "Future Prediction Models",
       "Secure Admin Dashboard",
       "Token Governance Integration",
-      "Auto-Documentation System"
+      "Auto-Documentation System",
     ],
-    description: "Master Plan v7: Advanced AI-powered environmental future prediction and idea generation",
+    description:
+      "Master Plan v7: Advanced AI-powered environmental future prediction and idea generation",
     lazyLoaded: true,
   },
   {
@@ -299,13 +326,14 @@ export const navigationItems: NavigationItem[] = [
     to: "/gaia-consistency-status",
     icon: Shield,
     variant: "ghost" as const,
-    description: "GAiA token integration consistency monitoring and system verification",
+    description:
+      "GAiA token integration consistency monitoring and system verification",
     features: [
       "Real-time Consistency Scanning",
       "Component Integration Status",
       "Official Token Verification",
       "System Health Monitoring",
-      "Issue Detection & Recommendations"
+      "Issue Detection & Recommendations",
     ],
     lazyLoaded: true,
   },
@@ -323,9 +351,10 @@ export const navigationItems: NavigationItem[] = [
       "Comprehensive Security Checks",
       "Zero-Downtime Deployment",
       "AI-Assisted Live Support",
-      "Quantum Security Protocols"
+      "Quantum Security Protocols",
     ],
-    description: "Master Plan v7: V2+ Deployment Center with Einstein Copilot assistance",
+    description:
+      "Master Plan v7: V2+ Deployment Center with Einstein Copilot assistance",
     lazyLoaded: true,
   },
   {
@@ -347,9 +376,10 @@ export const navigationItems: NavigationItem[] = [
       "Multi-Token Swap Support",
       "Real-time Rate Updates",
       "Advanced Validation",
-      "Dragon-Level Protection"
+      "Dragon-Level Protection",
     ],
-    description: "Master Plan v7: Enhanced private blockchain with secure token swapping",
+    description:
+      "Master Plan v7: Enhanced private blockchain with secure token swapping",
     lazyLoaded: true,
   },
   {
@@ -368,22 +398,23 @@ export const navigationItems: NavigationItem[] = [
       "Leaderboards & Badges",
       "Challenges & Events",
       "Deep Admin Control & Audit",
-      "Security, Privacy & Compliance"
+      "Security, Privacy & Compliance",
     ],
-    description: "Master Plan v7: GAiA Community Video Exchange Outstanding Experience",
+    description:
+      "Master Plan v7: GAiA Community Video Exchange Outstanding Experience",
     lazyLoaded: true,
   },
 ];
 
 // Helper functions for Master Plan v7 features
-export const getMasterPlanV7Items = () => 
-  navigationItems.filter(item => item.masterPlanVersion === "v7");
+export const getMasterPlanV7Items = () =>
+  navigationItems.filter((item) => item.masterPlanVersion === "v7");
 
-export const getLazyLoadedItems = () => 
-  navigationItems.filter(item => item.lazyLoaded);
+export const getLazyLoadedItems = () =>
+  navigationItems.filter((item) => item.lazyLoaded);
 
-export const getItemFeatures = (path: string) => 
-  navigationItems.find(item => item.to === path)?.features || [];
+export const getItemFeatures = (path: string) =>
+  navigationItems.find((item) => item.to === path)?.features || [];
 
 // Default export for compatibility with './nav-items' import pattern
 export default navigationItems;

@@ -1,58 +1,65 @@
-
-import React, { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { AlertCircle, Leaf, Shield, Globe } from 'lucide-react'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { useAuth } from './AuthProvider'
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AlertCircle, Leaf, Shield, Globe } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useAuth } from "./AuthProvider";
 
 export function AuthPage() {
-  const { signIn, signUp } = useAuth()
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
+  const { signIn, signUp } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
-    
-    const formData = new FormData(e.currentTarget)
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
-    const { error } = await signIn(email, password)
-    
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const { error } = await signIn(email, password);
+
     if (error) {
-      setError(error.message || 'Failed to sign in')
+      setError(error.message || "Failed to sign in");
     }
-    
-    setIsLoading(false)
-  }
+
+    setIsLoading(false);
+  };
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
-    setSuccess(null)
-    
-    const formData = new FormData(e.currentTarget)
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    setSuccess(null);
 
-    const { error } = await signUp(email, password)
-    
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const { error } = await signUp(email, password);
+
     if (error) {
-      setError(error.message || 'Failed to sign up')
+      setError(error.message || "Failed to sign up");
     } else {
-      setSuccess('Account created successfully! Please check your email to verify your account.')
+      setSuccess(
+        "Account created successfully! Please check your email to verify your account.",
+      );
     }
-    
-    setIsLoading(false)
-  }
+
+    setIsLoading(false);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20 flex items-center justify-center p-4">
@@ -61,17 +68,22 @@ export function AuthPage() {
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-2">
             <Leaf className="h-8 w-8 text-green-400" />
-            <h1 className="text-3xl font-bold text-green-400">Gaia's Exchanges</h1>
+            <h1 className="text-3xl font-bold text-green-400">
+              Gaia's Exchanges
+            </h1>
           </div>
           <p className="text-muted-foreground">
-            Join the Culture of Harmony ecosystem - Your gateway to eco-conscious trading
+            Join the Culture of Harmony ecosystem - Your gateway to
+            eco-conscious trading
           </p>
         </div>
 
         {/* Auth Card */}
         <Card className="border-green-500/20">
           <CardHeader>
-            <CardTitle className="text-center">Welcome to Gaia's Exchanges</CardTitle>
+            <CardTitle className="text-center">
+              Welcome to Gaia's Exchanges
+            </CardTitle>
             <CardDescription className="text-center">
               Sign in to your account or create a new one
             </CardDescription>
@@ -82,7 +94,7 @@ export function AuthPage() {
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
                 <TabsTrigger value="signup">Sign Up</TabsTrigger>
               </TabsList>
-              
+
               <TabsContent value="signin" className="space-y-4 mt-6">
                 <form onSubmit={handleSignIn} className="space-y-4">
                   <div className="space-y-2">
@@ -105,16 +117,16 @@ export function AuthPage() {
                       required
                     />
                   </div>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full bg-green-600 hover:bg-green-700"
                     disabled={isLoading}
                   >
-                    {isLoading ? 'Signing In...' : 'Sign In'}
+                    {isLoading ? "Signing In..." : "Sign In"}
                   </Button>
                 </form>
               </TabsContent>
-              
+
               <TabsContent value="signup" className="space-y-4 mt-6">
                 <form onSubmit={handleSignUp} className="space-y-4">
                   <div className="space-y-2">
@@ -157,12 +169,12 @@ export function AuthPage() {
                       required
                     />
                   </div>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full bg-green-600 hover:bg-green-700"
                     disabled={isLoading}
                   >
-                    {isLoading ? 'Creating Account...' : 'Create Account'}
+                    {isLoading ? "Creating Account..." : "Create Account"}
                   </Button>
                 </form>
               </TabsContent>
@@ -201,5 +213,5 @@ export function AuthPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,36 +1,35 @@
-
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback } from "react";
 
 interface LightningStrike {
-  id: number
-  x: number
-  y: number
-  timestamp: number
+  id: number;
+  x: number;
+  y: number;
+  timestamp: number;
 }
 
 export function LightningClickEffect() {
-  const [strikes, setStrikes] = useState<LightningStrike[]>([])
+  const [strikes, setStrikes] = useState<LightningStrike[]>([]);
 
   const handleClick = useCallback((e: MouseEvent) => {
     const newStrike: LightningStrike = {
       id: Date.now() + Math.random(),
       x: e.clientX,
       y: e.clientY,
-      timestamp: Date.now()
-    }
+      timestamp: Date.now(),
+    };
 
-    setStrikes(prev => [...prev, newStrike])
+    setStrikes((prev) => [...prev, newStrike]);
 
     // Remove strike after animation completes
     setTimeout(() => {
-      setStrikes(prev => prev.filter(strike => strike.id !== newStrike.id))
-    }, 800)
-  }, [])
+      setStrikes((prev) => prev.filter((strike) => strike.id !== newStrike.id));
+    }, 800);
+  }, []);
 
   useEffect(() => {
-    document.addEventListener('click', handleClick)
-    return () => document.removeEventListener('click', handleClick)
-  }, [handleClick])
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [handleClick]);
 
   return (
     <>
@@ -61,7 +60,13 @@ export function LightningClickEffect() {
                   className="drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]"
                 />
                 <defs>
-                  <linearGradient id="lightningGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <linearGradient
+                    id="lightningGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="0%"
+                    y2="100%"
+                  >
                     <stop offset="0%" stopColor="#60a5fa" />
                     <stop offset="50%" stopColor="#3b82f6" />
                     <stop offset="100%" stopColor="#1d4ed8" />
@@ -79,7 +84,7 @@ export function LightningClickEffect() {
                       left: `${Math.random() * 20}px`,
                       top: `${Math.random() * 24}px`,
                       animationDelay: `${i * 0.1}s`,
-                      boxShadow: '0 0 4px rgba(59, 130, 246, 1)'
+                      boxShadow: "0 0 4px rgba(59, 130, 246, 1)",
                     }}
                   />
                 ))}
@@ -92,8 +97,9 @@ export function LightningClickEffect() {
         ))}
       </div>
 
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
           @keyframes lightning {
             0% {
               opacity: 0;
@@ -142,8 +148,9 @@ export function LightningClickEffect() {
               transform: scale(3);
             }
           }
-        `
-      }} />
+        `,
+        }}
+      />
     </>
-  )
+  );
 }

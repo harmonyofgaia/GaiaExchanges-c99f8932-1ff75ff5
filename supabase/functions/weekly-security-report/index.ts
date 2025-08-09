@@ -1,197 +1,227 @@
-
-import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
+};
 
 serve(async (req) => {
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders })
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
   }
 
   try {
     const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
-    )
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+    );
 
     // Generate weekly security report
-    const report = await generateWeeklySecurityReport(supabaseClient)
+    const report = await generateWeeklySecurityReport(supabaseClient);
 
     return new Response(
       JSON.stringify({
         success: true,
-        report: report
+        report: report,
       }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    )
-
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
   } catch (error) {
-    console.error('Weekly report error:', error)
-    return new Response('Internal Server Error', { status: 500, headers: corsHeaders })
+    console.error("Weekly report error:", error);
+    return new Response("Internal Server Error", {
+      status: 500,
+      headers: corsHeaders,
+    });
   }
-})
+});
 
 async function generateWeeklySecurityReport(supabaseClient: any) {
-  const endDate = new Date()
-  const startDate = new Date(endDate.getTime() - 7 * 24 * 60 * 60 * 1000) // 7 days ago
+  const endDate = new Date();
+  const startDate = new Date(endDate.getTime() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
 
   // Gather data from the past week
   const { data: scans } = await supabaseClient
-    .from('security_scans')
-    .select('*')
-    .gte('created_at', startDate.toISOString())
-    .lte('created_at', endDate.toISOString())
-    .order('created_at', { ascending: false })
+    .from("security_scans")
+    .select("*")
+    .gte("created_at", startDate.toISOString())
+    .lte("created_at", endDate.toISOString())
+    .order("created_at", { ascending: false });
 
   const { data: threats } = await supabaseClient
-    .from('threat_intelligence')
-    .select('*')
-    .gte('detected_at', startDate.toISOString())
-    .lte('detected_at', endDate.toISOString())
-    .order('detected_at', { ascending: false })
+    .from("threat_intelligence")
+    .select("*")
+    .gte("detected_at", startDate.toISOString())
+    .lte("detected_at", endDate.toISOString())
+    .order("detected_at", { ascending: false });
 
   const { data: remediations } = await supabaseClient
-    .from('security_remediation_logs')
-    .select('*')
-    .gte('created_at', startDate.toISOString())
-    .lte('created_at', endDate.toISOString())
+    .from("security_remediation_logs")
+    .select("*")
+    .gte("created_at", startDate.toISOString())
+    .lte("created_at", endDate.toISOString());
 
   // Calculate metrics
   const metrics = {
     totalScans: scans?.length || 0,
-    averageComplianceScore: scans?.reduce((sum, scan) => sum + scan.compliance_score, 0) / (scans?.length || 1),
+    averageComplianceScore:
+      scans?.reduce((sum, scan) => sum + scan.compliance_score, 0) /
+      (scans?.length || 1),
     totalThreats: threats?.length || 0,
-    threatsResolved: threats?.filter(t => t.resolved_at).length || 0,
-    criticalIssues: scans?.reduce((sum, scan) => sum + scan.critical_issues, 0) || 0,
+    threatsResolved: threats?.filter((t) => t.resolved_at).length || 0,
+    criticalIssues:
+      scans?.reduce((sum, scan) => sum + scan.critical_issues, 0) || 0,
     highIssues: scans?.reduce((sum, scan) => sum + scan.high_issues, 0) || 0,
-    mediumIssues: scans?.reduce((sum, scan) => sum + scan.medium_issues, 0) || 0,
+    mediumIssues:
+      scans?.reduce((sum, scan) => sum + scan.medium_issues, 0) || 0,
     lowIssues: scans?.reduce((sum, scan) => sum + scan.low_issues, 0) || 0,
-    successfulRemediations: remediations?.filter(r => r.success).length || 0,
-    failedRemediations: remediations?.filter(r => !r.success).length || 0
-  }
+    successfulRemediations: remediations?.filter((r) => r.success).length || 0,
+    failedRemediations: remediations?.filter((r) => !r.success).length || 0,
+  };
 
   // Generate insights
-  const insights = generateSecurityInsights(metrics, scans, threats)
+  const insights = generateSecurityInsights(metrics, scans, threats);
 
   // Generate recommendations
-  const recommendations = generateSecurityRecommendations(metrics, scans, threats)
+  const recommendations = generateSecurityRecommendations(
+    metrics,
+    scans,
+    threats,
+  );
 
   // Create HTML report
-  const htmlReport = generateHTMLReport(metrics, insights, recommendations, startDate, endDate)
+  const htmlReport = generateHTMLReport(
+    metrics,
+    insights,
+    recommendations,
+    startDate,
+    endDate,
+  );
 
   return {
     reportId: `weekly-${Date.now()}`,
     period: {
       start: startDate.toISOString(),
-      end: endDate.toISOString()
+      end: endDate.toISOString(),
     },
     metrics,
     insights,
     recommendations,
     htmlReport,
-    generatedAt: new Date().toISOString()
-  }
+    generatedAt: new Date().toISOString(),
+  };
 }
 
 function generateSecurityInsights(metrics: any, scans: any[], threats: any[]) {
-  const insights = []
+  const insights = [];
 
   // Compliance trend
   if (metrics.averageComplianceScore >= 95) {
     insights.push({
-      type: 'positive',
-      title: 'Excellent Compliance',
-      description: `Average compliance score of ${metrics.averageComplianceScore.toFixed(1)}% indicates strong security posture.`
-    })
+      type: "positive",
+      title: "Excellent Compliance",
+      description: `Average compliance score of ${metrics.averageComplianceScore.toFixed(1)}% indicates strong security posture.`,
+    });
   } else if (metrics.averageComplianceScore < 80) {
     insights.push({
-      type: 'warning',
-      title: 'Compliance Concern',
-      description: `Average compliance score of ${metrics.averageComplianceScore.toFixed(1)}% requires attention.`
-    })
+      type: "warning",
+      title: "Compliance Concern",
+      description: `Average compliance score of ${metrics.averageComplianceScore.toFixed(1)}% requires attention.`,
+    });
   }
 
   // Threat analysis
   if (metrics.totalThreats === 0) {
     insights.push({
-      type: 'positive',
-      title: 'No Threats Detected',
-      description: 'No security threats were detected this week.'
-    })
+      type: "positive",
+      title: "No Threats Detected",
+      description: "No security threats were detected this week.",
+    });
   } else {
-    const resolutionRate = (metrics.threatsResolved / metrics.totalThreats) * 100
+    const resolutionRate =
+      (metrics.threatsResolved / metrics.totalThreats) * 100;
     insights.push({
-      type: resolutionRate >= 90 ? 'positive' : 'warning',
-      title: 'Threat Resolution',
-      description: `${resolutionRate.toFixed(1)}% of threats were resolved (${metrics.threatsResolved}/${metrics.totalThreats}).`
-    })
+      type: resolutionRate >= 90 ? "positive" : "warning",
+      title: "Threat Resolution",
+      description: `${resolutionRate.toFixed(1)}% of threats were resolved (${metrics.threatsResolved}/${metrics.totalThreats}).`,
+    });
   }
 
   // Issue trends
   if (metrics.criticalIssues > 0) {
     insights.push({
-      type: 'critical',
-      title: 'Critical Issues Found',
-      description: `${metrics.criticalIssues} critical security issues require immediate attention.`
-    })
+      type: "critical",
+      title: "Critical Issues Found",
+      description: `${metrics.criticalIssues} critical security issues require immediate attention.`,
+    });
   }
 
-  return insights
+  return insights;
 }
 
-function generateSecurityRecommendations(metrics: any, scans: any[], threats: any[]) {
-  const recommendations = []
+function generateSecurityRecommendations(
+  metrics: any,
+  scans: any[],
+  threats: any[],
+) {
+  const recommendations = [];
 
   // Compliance recommendations
   if (metrics.averageComplianceScore < 90) {
     recommendations.push({
-      priority: 'high',
-      title: 'Improve Compliance Score',
-      description: 'Focus on resolving high and medium priority issues to improve overall compliance.',
+      priority: "high",
+      title: "Improve Compliance Score",
+      description:
+        "Focus on resolving high and medium priority issues to improve overall compliance.",
       actionItems: [
-        'Review and update security policies',
-        'Implement additional security controls',
-        'Regular security training for team members'
-      ]
-    })
+        "Review and update security policies",
+        "Implement additional security controls",
+        "Regular security training for team members",
+      ],
+    });
   }
 
   // Threat mitigation
   if (metrics.totalThreats > 0) {
     recommendations.push({
-      priority: 'medium',
-      title: 'Enhance Threat Detection',
-      description: 'Strengthen threat detection capabilities to identify and respond to threats faster.',
+      priority: "medium",
+      title: "Enhance Threat Detection",
+      description:
+        "Strengthen threat detection capabilities to identify and respond to threats faster.",
       actionItems: [
-        'Implement real-time monitoring',
-        'Update threat intelligence sources',
-        'Improve incident response procedures'
-      ]
-    })
+        "Implement real-time monitoring",
+        "Update threat intelligence sources",
+        "Improve incident response procedures",
+      ],
+    });
   }
 
   // Performance optimization
   if (metrics.totalScans > 0) {
     recommendations.push({
-      priority: 'low',
-      title: 'Optimize Security Scans',
-      description: 'Regular security scans are running well. Consider optimizing scan frequency.',
+      priority: "low",
+      title: "Optimize Security Scans",
+      description:
+        "Regular security scans are running well. Consider optimizing scan frequency.",
       actionItems: [
-        'Review scan scheduling',
-        'Optimize scan performance',
-        'Implement automated remediation'
-      ]
-    })
+        "Review scan scheduling",
+        "Optimize scan performance",
+        "Implement automated remediation",
+      ],
+    });
   }
 
-  return recommendations
+  return recommendations;
 }
 
-function generateHTMLReport(metrics: any, insights: any[], recommendations: any[], startDate: Date, endDate: Date) {
+function generateHTMLReport(
+  metrics: any,
+  insights: any[],
+  recommendations: any[],
+  startDate: Date,
+  endDate: Date,
+) {
   return `
     <!DOCTYPE html>
     <html>
@@ -236,23 +266,31 @@ function generateHTMLReport(metrics: any, insights: any[], recommendations: any[
       </div>
       
       <h2>Key Insights</h2>
-      ${insights.map(insight => `
+      ${insights
+        .map(
+          (insight) => `
         <div class="insight ${insight.type}">
           <h3>${insight.title}</h3>
           <p>${insight.description}</p>
         </div>
-      `).join('')}
+      `,
+        )
+        .join("")}
       
       <h2>Recommendations</h2>
-      ${recommendations.map(rec => `
+      ${recommendations
+        .map(
+          (rec) => `
         <div class="recommendation">
           <h3>${rec.title} (${rec.priority.toUpperCase()} Priority)</h3>
           <p>${rec.description}</p>
           <ul>
-            ${rec.actionItems.map(item => `<li>${item}</li>`).join('')}
+            ${rec.actionItems.map((item) => `<li>${item}</li>`).join("")}
           </ul>
         </div>
-      `).join('')}
+      `,
+        )
+        .join("")}
       
       <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #64748b;">
         <p>Generated on ${new Date().toLocaleString()}</p>
@@ -260,5 +298,5 @@ function generateHTMLReport(metrics: any, insights: any[], recommendations: any[
       </div>
     </body>
     </html>
-  `
+  `;
 }

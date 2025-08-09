@@ -1,50 +1,56 @@
-import { useState, useEffect, useRef } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { 
-  Palette, 
-  Download, 
-  Sparkles, 
-  Timer, 
+import { useState, useEffect, useRef } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Palette,
+  Download,
+  Sparkles,
+  Timer,
   Image as ImageIcon,
   Wand2,
   Zap,
   Crown,
   Star,
   RefreshCw,
-  Shield
-} from 'lucide-react'
-import { toast } from 'sonner'
-import { ArtworkUploadProcessor } from './ArtworkUploadProcessor'
-import { Creative3DTools } from '../creative/Creative3DTools'
-import { FuturisticAnimationStudio } from '../creative/FuturisticAnimationStudio'
+  Shield,
+} from "lucide-react";
+import { toast } from "sonner";
+import { ArtworkUploadProcessor } from "./ArtworkUploadProcessor";
+import { Creative3DTools } from "../creative/Creative3DTools";
+import { FuturisticAnimationStudio } from "../creative/FuturisticAnimationStudio";
 
 interface GeneratedArtwork {
-  id: string
-  prompt: string
-  artwork_type: string
-  style: string
-  image_data: string
-  generated_at: string
-  downloads: number
-  nft_ready: boolean
+  id: string;
+  prompt: string;
+  artwork_type: string;
+  style: string;
+  image_data: string;
+  generated_at: string;
+  downloads: number;
+  nft_ready: boolean;
 }
 
 export function MasterArtworkGenerator() {
-  const [artworks, setArtworks] = useState<GeneratedArtwork[]>([])
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [autoGenerate, setAutoGenerate] = useState(true)
-  const [selectedStyle, setSelectedStyle] = useState('abstract')
-  const [nextUpdateIn, setNextUpdateIn] = useState(300) // 5 minutes
-  const [totalGenerated, setTotalGenerated] = useState(0)
-  const [bestArtwork, setBestArtwork] = useState<GeneratedArtwork | null>(null)
-  
-  const intervalRef = useRef<NodeJS.Timeout>(undefined)
-  const countdownRef = useRef<NodeJS.Timeout>(undefined)
+  const [artworks, setArtworks] = useState<GeneratedArtwork[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [autoGenerate, setAutoGenerate] = useState(true);
+  const [selectedStyle, setSelectedStyle] = useState("abstract");
+  const [nextUpdateIn, setNextUpdateIn] = useState(300); // 5 minutes
+  const [totalGenerated, setTotalGenerated] = useState(0);
+  const [bestArtwork, setBestArtwork] = useState<GeneratedArtwork | null>(null);
+
+  const intervalRef = useRef<NodeJS.Timeout>(undefined);
+  const countdownRef = useRef<NodeJS.Timeout>(undefined);
 
   // Enhanced base prompts inspired by user's uploaded artwork
   const basePrompts = [
@@ -57,200 +63,206 @@ export function MasterArtworkGenerator() {
     "abstract digital matrix background with green binary patterns, cyberpunk aesthetic",
     "electric lightning neural connections with blue-purple energy, dramatic bioelectric effects",
     "futuristic quantum neural networks with multi-colored synaptic firing patterns",
-    
+
     // Enhanced artistic combinations
     "cybernetic neural brain patterns mixed with flowing green energy streams",
     "matrix digital rain combined with bioelectric orange neural connections",
     "lightning strike effects merged with circuit board pathways and cyan glows",
-    "organic neural networks blended with geometric digital matrix patterns"
-  ]
+    "organic neural networks blended with geometric digital matrix patterns",
+  ];
 
   // Reference images from user uploads for inspiration
   const referenceImages = [
-    '/lovable-uploads/8dc2817a-08c9-4335-8775-43870a7f26c5.png', // Circuit pathways
-    '/lovable-uploads/20a0d750-cf9d-4320-8cc2-1591c5f19aea.png', // Neural network
-    '/lovable-uploads/28f681a5-8b61-4af1-89e4-7c58ef582a15.png', // Green energy flow
-    '/lovable-uploads/3930cd91-f3ea-4ad6-9fc1-d3448d12bb1e.png', // Matrix digital
-    '/lovable-uploads/4bcf8fca-25cd-4cd4-a563-eaa0ef11ef1e.png', // Neural connections
-    '/lovable-uploads/2486d68b-0497-4fd3-98a6-4c6b23e61741.png', // Matrix code
-    '/lovable-uploads/1c09cba7-4648-42f8-9d7e-53cd2213616d.png', // Lightning strikes
-    '/lovable-uploads/05787e50-5b20-4f59-b531-da2bc13bf3fb.png'  // Blue matrix
-  ]
+    "/lovable-uploads/8dc2817a-08c9-4335-8775-43870a7f26c5.png", // Circuit pathways
+    "/lovable-uploads/20a0d750-cf9d-4320-8cc2-1591c5f19aea.png", // Neural network
+    "/lovable-uploads/28f681a5-8b61-4af1-89e4-7c58ef582a15.png", // Green energy flow
+    "/lovable-uploads/3930cd91-f3ea-4ad6-9fc1-d3448d12bb1e.png", // Matrix digital
+    "/lovable-uploads/4bcf8fca-25cd-4cd4-a563-eaa0ef11ef1e.png", // Neural connections
+    "/lovable-uploads/2486d68b-0497-4fd3-98a6-4c6b23e61741.png", // Matrix code
+    "/lovable-uploads/1c09cba7-4648-42f8-9d7e-53cd2213616d.png", // Lightning strikes
+    "/lovable-uploads/05787e50-5b20-4f59-b531-da2bc13bf3fb.png", // Blue matrix
+  ];
 
   const artworkTypes = [
-    { value: 'neural_circuit', label: '🧠 Neural Circuits' },
-    { value: 'bioelectric_flow', label: '⚡ Bioelectric Flow' },
-    { value: 'matrix_code', label: '💚 Matrix Code' },
-    { value: 'lightning_neural', label: '⚡ Lightning Neural' },
-    { value: 'quantum_pathways', label: '🌌 Quantum Pathways' },
-    { value: 'digital_organic', label: '🔬 Digital Organic' },
-    { value: 'cybernetic_fusion', label: '🤖 Cybernetic Fusion' },
-    { value: 'energy_streams', label: '🌊 Energy Streams' }
-  ]
+    { value: "neural_circuit", label: "🧠 Neural Circuits" },
+    { value: "bioelectric_flow", label: "⚡ Bioelectric Flow" },
+    { value: "matrix_code", label: "💚 Matrix Code" },
+    { value: "lightning_neural", label: "⚡ Lightning Neural" },
+    { value: "quantum_pathways", label: "🌌 Quantum Pathways" },
+    { value: "digital_organic", label: "🔬 Digital Organic" },
+    { value: "cybernetic_fusion", label: "🤖 Cybernetic Fusion" },
+    { value: "energy_streams", label: "🌊 Energy Streams" },
+  ];
 
   useEffect(() => {
-    loadExistingArtworks()
+    loadExistingArtworks();
     if (autoGenerate) {
-      startAutoGeneration()
+      startAutoGeneration();
     }
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current)
-      if (countdownRef.current) clearInterval(countdownRef.current)
-    }
-  }, [autoGenerate])
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (countdownRef.current) clearInterval(countdownRef.current);
+    };
+  }, [autoGenerate]);
 
   const loadExistingArtworks = async () => {
     try {
       // Since the database table doesn't exist in types yet, we'll simulate data
-      const mockArtworks: GeneratedArtwork[] = []
-      setArtworks(mockArtworks)
-      setTotalGenerated(mockArtworks.length)
-      
+      const mockArtworks: GeneratedArtwork[] = [];
+      setArtworks(mockArtworks);
+      setTotalGenerated(mockArtworks.length);
+
       if (mockArtworks.length > 0) {
-        const best = mockArtworks.reduce((prev, current) => 
-          (prev.downloads > current.downloads) ? prev : current
-        )
-        setBestArtwork(best)
+        const best = mockArtworks.reduce((prev, current) =>
+          prev.downloads > current.downloads ? prev : current,
+        );
+        setBestArtwork(best);
       }
     } catch (error) {
-      console.error('Error loading artworks:', error)
+      console.error("Error loading artworks:", error);
     }
-  }
+  };
 
   const startAutoGeneration = () => {
     // Generate every 5 minutes
     intervalRef.current = setInterval(() => {
       if (autoGenerate) {
-        generateNewArtwork()
+        generateNewArtwork();
       }
-    }, 300000) // 5 minutes
+    }, 300000); // 5 minutes
 
     // Countdown timer
     countdownRef.current = setInterval(() => {
-      setNextUpdateIn(prev => {
+      setNextUpdateIn((prev) => {
         if (prev <= 1) {
-          return 300 // Reset to 5 minutes
+          return 300; // Reset to 5 minutes
         }
-        return prev - 1
-      })
-    }, 1000)
-  }
+        return prev - 1;
+      });
+    }, 1000);
+  };
 
   const generateNewArtwork = async () => {
-    setIsGenerating(true)
+    setIsGenerating(true);
     try {
-      const randomPrompt = basePrompts[Math.floor(Math.random() * basePrompts.length)]
-      
+      const randomPrompt =
+        basePrompts[Math.floor(Math.random() * basePrompts.length)];
+
       // Enhanced prompt with reference to uploaded artwork styles
-      const enhancedPrompt = `${randomPrompt}, inspired by neural circuit designs and matrix digital aesthetics, high quality digital art, vibrant neon colors, dramatic lighting effects, professional cyberpunk artwork`
-      
-      const response = await fetch('/functions/v1/generate-artwork', {
-        method: 'POST',
+      const enhancedPrompt = `${randomPrompt}, inspired by neural circuit designs and matrix digital aesthetics, high quality digital art, vibrant neon colors, dramatic lighting effects, professional cyberpunk artwork`;
+
+      const response = await fetch("/functions/v1/generate-artwork", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           basePrompt: enhancedPrompt,
           artworkType: selectedStyle,
-          style: 'neural_matrix_fusion_collection'
-        })
-      })
+          style: "neural_matrix_fusion_collection",
+        }),
+      });
 
-      const result = await response.json()
-      
+      const result = await response.json();
+
       if (result.success) {
         // Add the new artwork to our local state
         const newArtwork: GeneratedArtwork = {
           id: result.artwork_id || `artwork-${Date.now()}`,
           prompt: enhancedPrompt,
           artwork_type: selectedStyle,
-          style: 'neural_matrix_fusion_collection',
+          style: "neural_matrix_fusion_collection",
           image_data: result.image,
           generated_at: new Date().toISOString(),
           downloads: 0,
-          nft_ready: true
-        }
-        
-        setArtworks(prev => [newArtwork, ...prev])
-        setTotalGenerated(prev => prev + 1)
+          nft_ready: true,
+        };
+
+        setArtworks((prev) => [newArtwork, ...prev]);
+        setTotalGenerated((prev) => prev + 1);
 
         // Automatically save to secure cloud storage (admin only)
         try {
-          const cloudResponse = await fetch('/functions/v1/save-artwork-to-cloud', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
+          const cloudResponse = await fetch(
+            "/functions/v1/save-artwork-to-cloud",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                artworkId: newArtwork.id,
+                imageData: result.image,
+                artworkType: selectedStyle,
+                prompt: enhancedPrompt,
+              }),
             },
-            body: JSON.stringify({
-              artworkId: newArtwork.id,
-              imageData: result.image,
-              artworkType: selectedStyle,
-              prompt: enhancedPrompt
-            })
-          })
+          );
 
-          const cloudResult = await cloudResponse.json()
-          
+          const cloudResult = await cloudResponse.json();
+
           if (cloudResult.success) {
-            toast.success('🎨 Neural Matrix Art Created & Secured!', {
+            toast.success("🎨 Neural Matrix Art Created & Secured!", {
               description: `Generated artwork saved to admin-only cloud storage`,
-              duration: 6000
-            })
+              duration: 6000,
+            });
           }
         } catch (cloudError) {
-          console.error('Cloud save error:', cloudError)
-          toast.warning('⚠️ Artwork generated but cloud save failed', {
-            description: 'Check your connection and try again'
-          })
+          console.error("Cloud save error:", cloudError);
+          toast.warning("⚠️ Artwork generated but cloud save failed", {
+            description: "Check your connection and try again",
+          });
         }
-        
-        toast.success('🧠 New Neural Matrix Masterpiece Created!', {
+
+        toast.success("🧠 New Neural Matrix Masterpiece Created!", {
           description: `Cybernetic artwork generated with ${selectedStyle} style using your uploaded neural references`,
-          duration: 4000
-        })
+          duration: 4000,
+        });
       }
     } catch (error) {
-      console.error('Generation error:', error)
-      toast.error('Generation failed', {
-        description: 'Please check your AI image generation API connection'
-      })
+      console.error("Generation error:", error);
+      toast.error("Generation failed", {
+        description: "Please check your AI image generation API connection",
+      });
     }
-    setIsGenerating(false)
-  }
+    setIsGenerating(false);
+  };
 
   const downloadArtwork = async (artwork: GeneratedArtwork) => {
     try {
       // Update download count locally
-      setArtworks(prev => prev.map(art => 
-        art.id === artwork.id 
-          ? { ...art, downloads: art.downloads + 1 }
-          : art
-      ))
+      setArtworks((prev) =>
+        prev.map((art) =>
+          art.id === artwork.id
+            ? { ...art, downloads: art.downloads + 1 }
+            : art,
+        ),
+      );
 
       // Create download link
-      const link = document.createElement('a')
-      link.href = artwork.image_data
-      link.download = `harmony-gaia-neural-art-${artwork.id}.png`
-      link.click()
+      const link = document.createElement("a");
+      link.href = artwork.image_data;
+      link.download = `harmony-gaia-neural-art-${artwork.id}.png`;
+      link.click();
 
-      toast.success('🎨 Neural Artwork Downloaded!', {
-        description: 'Perfect for NFT minting or selling'
-      })
+      toast.success("🎨 Neural Artwork Downloaded!", {
+        description: "Perfect for NFT minting or selling",
+      });
     } catch (error) {
-      console.error('Download error:', error)
+      console.error("Download error:", error);
     }
-  }
+  };
 
   const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60)
-    const secs = seconds % 60
-    return `${mins}:${secs.toString().padStart(2, '0')}`
-  }
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
 
   return (
     <div className="space-y-6">
       <ArtworkUploadProcessor />
-      
+
       <Card className="border-2 border-purple-500/50 bg-gradient-to-br from-purple-900/20 to-green-900/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-purple-300">
@@ -260,7 +272,8 @@ export function MasterArtworkGenerator() {
                 Neural Matrix Art Generator
               </div>
               <div className="text-sm font-normal text-purple-400">
-                AI-Powered Neural Circuit & Matrix Art Creation - Inspired by Your Uploads
+                AI-Powered Neural Circuit & Matrix Art Creation - Inspired by
+                Your Uploads
               </div>
             </div>
             <Sparkles className="h-6 w-6 text-green-400 animate-bounce" />
@@ -274,8 +287,10 @@ export function MasterArtworkGenerator() {
               🔒 Admin-Only Neural Art Cloud Storage
             </h3>
             <p className="text-xs text-blue-300">
-              ✨ All generated neural artworks are automatically saved to secure cloud storage accessible only by admin users. 
-              Your cybernetic creations are protected with quantum-level security and neural encryption.
+              ✨ All generated neural artworks are automatically saved to secure
+              cloud storage accessible only by admin users. Your cybernetic
+              creations are protected with quantum-level security and neural
+              encryption.
             </p>
           </div>
 
@@ -287,37 +302,49 @@ export function MasterArtworkGenerator() {
             </h3>
             <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
               {referenceImages.map((img, index) => (
-                <div key={index} className="aspect-square rounded-lg overflow-hidden border border-green-500/30">
-                  <img 
-                    src={img} 
-                    alt={`Neural Reference ${index + 1}`} 
+                <div
+                  key={index}
+                  className="aspect-square rounded-lg overflow-hidden border border-green-500/30"
+                >
+                  <img
+                    src={img}
+                    alt={`Neural Reference ${index + 1}`}
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                   />
                 </div>
               ))}
             </div>
             <p className="text-xs text-green-300 mt-2">
-              🧠 These neural circuit and matrix designs inspire the AI to create cybernetic pathways, 
-              bioelectric connections, and futuristic digital art with lightning effects
+              🧠 These neural circuit and matrix designs inspire the AI to
+              create cybernetic pathways, bioelectric connections, and
+              futuristic digital art with lightning effects
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-purple-400">{totalGenerated}</div>
-              <div className="text-sm text-muted-foreground">Neural Artworks Created</div>
+              <div className="text-3xl font-bold text-purple-400">
+                {totalGenerated}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Neural Artworks Created
+              </div>
             </div>
             <div className="text-center space-y-2">
               <div className="text-3xl font-bold text-green-400">
-                {autoGenerate ? formatTime(nextUpdateIn) : 'Paused'}
+                {autoGenerate ? formatTime(nextUpdateIn) : "Paused"}
               </div>
-              <div className="text-sm text-muted-foreground">Next Neural Generation</div>
+              <div className="text-sm text-muted-foreground">
+                Next Neural Generation
+              </div>
             </div>
             <div className="text-center space-y-2">
               <div className="text-3xl font-bold text-cyan-400">
                 {artworks.reduce((sum, art) => sum + (art.downloads || 0), 0)}
               </div>
-              <div className="text-sm text-muted-foreground">Total Downloads</div>
+              <div className="text-sm text-muted-foreground">
+                Total Downloads
+              </div>
             </div>
             <div className="text-center space-y-2">
               <div className="text-3xl font-bold text-yellow-400">100%</div>
@@ -331,7 +358,7 @@ export function MasterArtworkGenerator() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {artworkTypes.map(type => (
+                {artworkTypes.map((type) => (
                   <SelectItem key={type.value} value={type.value}>
                     {type.label}
                   </SelectItem>
@@ -362,7 +389,7 @@ export function MasterArtworkGenerator() {
               variant={autoGenerate ? "destructive" : "default"}
             >
               <Timer className="h-4 w-4 mr-2" />
-              Auto Neural: {autoGenerate ? 'ON' : 'OFF'}
+              Auto Neural: {autoGenerate ? "ON" : "OFF"}
             </Button>
           </div>
 
@@ -370,7 +397,8 @@ export function MasterArtworkGenerator() {
             <div className="mb-6">
               <Progress value={75} className="h-3" />
               <p className="text-sm text-center mt-2 text-purple-300">
-                Creating neural matrix artwork inspired by your cybernetic references...
+                Creating neural matrix artwork inspired by your cybernetic
+                references...
               </p>
             </div>
           )}
@@ -398,11 +426,14 @@ export function MasterArtworkGenerator() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {referenceImages.map((img, index) => (
-                  <div key={index} className="bg-gradient-to-br from-green-900/10 to-blue-900/10 border border-green-500/20 rounded-lg overflow-hidden">
+                  <div
+                    key={index}
+                    className="bg-gradient-to-br from-green-900/10 to-blue-900/10 border border-green-500/20 rounded-lg overflow-hidden"
+                  >
                     <div className="aspect-square">
-                      <img 
-                        src={img} 
-                        alt={`Reference ${index + 1}`} 
+                      <img
+                        src={img}
+                        alt={`Reference ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -411,8 +442,11 @@ export function MasterArtworkGenerator() {
                         Reference #{index + 1}
                       </Badge>
                       <p className="text-xs text-muted-foreground">
-                        {index < 3 ? 'Atmospheric Lighting' : 
-                         index < 5 ? 'Architectural & Nature' : 'Artistic Composition'}
+                        {index < 3
+                          ? "Atmospheric Lighting"
+                          : index < 5
+                            ? "Architectural & Nature"
+                            : "Artistic Composition"}
                       </p>
                     </div>
                   </div>
@@ -420,8 +454,9 @@ export function MasterArtworkGenerator() {
               </div>
               <div className="mt-6 text-center">
                 <p className="text-sm text-green-300">
-                  🎨 These references inspire the AI to create similar atmospheric effects, 
-                  color palettes, and artistic styles in generated artworks.
+                  🎨 These references inspire the AI to create similar
+                  atmospheric effects, color palettes, and artistic styles in
+                  generated artworks.
                 </p>
               </div>
             </CardContent>
@@ -431,11 +466,14 @@ export function MasterArtworkGenerator() {
         <TabsContent value="gallery" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {artworks.map((artwork) => (
-              <Card key={artwork.id} className="border border-purple-500/20 bg-gradient-to-br from-purple-900/10 to-pink-900/10">
+              <Card
+                key={artwork.id}
+                className="border border-purple-500/20 bg-gradient-to-br from-purple-900/10 to-pink-900/10"
+              >
                 <CardContent className="p-4">
                   <div className="aspect-square rounded-lg overflow-hidden mb-3">
-                    <img 
-                      src={artwork.image_data} 
+                    <img
+                      src={artwork.image_data}
                       alt="Generated Artwork"
                       className="w-full h-full object-cover"
                     />
@@ -492,8 +530,8 @@ export function MasterArtworkGenerator() {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="aspect-square rounded-lg overflow-hidden">
-                    <img 
-                      src={bestArtwork.image_data} 
+                    <img
+                      src={bestArtwork.image_data}
                       alt="Best Artwork"
                       className="w-full h-full object-cover"
                     />
@@ -510,11 +548,17 @@ export function MasterArtworkGenerator() {
                     <div className="space-y-2">
                       <div className="flex justify-between">
                         <span>Downloads:</span>
-                        <span className="font-bold text-yellow-400">{bestArtwork.downloads}</span>
+                        <span className="font-bold text-yellow-400">
+                          {bestArtwork.downloads}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span>Generated:</span>
-                        <span>{new Date(bestArtwork.generated_at).toLocaleDateString()}</span>
+                        <span>
+                          {new Date(
+                            bestArtwork.generated_at,
+                          ).toLocaleDateString()}
+                        </span>
                       </div>
                     </div>
                     <Button
@@ -538,14 +582,20 @@ export function MasterArtworkGenerator() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {artworkTypes.map(type => {
-                  const count = artworks.filter(art => art.artwork_type === type.value).length
+                {artworkTypes.map((type) => {
+                  const count = artworks.filter(
+                    (art) => art.artwork_type === type.value,
+                  ).length;
                   return (
                     <div key={type.value} className="text-center space-y-2">
-                      <div className="text-2xl font-bold text-purple-400">{count}</div>
-                      <div className="text-xs text-muted-foreground">{type.label}</div>
+                      <div className="text-2xl font-bold text-purple-400">
+                        {count}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {type.label}
+                      </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </CardContent>
@@ -553,5 +603,5 @@ export function MasterArtworkGenerator() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

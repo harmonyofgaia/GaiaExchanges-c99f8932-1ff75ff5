@@ -1,173 +1,182 @@
-
-import React, { useState, useEffect, useRef } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  ArrowUpDown, 
-  Zap, 
-  TrendingUp, 
-  Shield, 
+import React, { useState, useEffect, useRef } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  ArrowUpDown,
+  Zap,
+  TrendingUp,
+  Shield,
   Globe,
   Coins,
-  Activity
-} from 'lucide-react'
-import { toast } from 'sonner'
-import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice } from '@/constants/gaia'
+  Activity,
+} from "lucide-react";
+import { toast } from "sonner";
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice } from "@/constants/gaia";
 
 interface SwapPair {
-  from: string
-  to: string
-  rate: number
-  liquidity: number
-  volume24h: number
+  from: string;
+  to: string;
+  rate: number;
+  liquidity: number;
+  volume24h: number;
 }
 
 interface UserConfig {
-  slippageTolerance: number
-  gasPrice: string
-  autoSwap: boolean
-  notifications: boolean
+  slippageTolerance: number;
+  gasPrice: string;
+  autoSwap: boolean;
+  notifications: boolean;
 }
 
 export function EnhancedSwapSystem() {
-  const [fromToken, setFromToken] = useState('SOL')
-  const [toToken, setToToken] = useState('GAiA')
-  const [fromAmount, setFromAmount] = useState('')
-  const [toAmount, setToAmount] = useState('')
-  const [isSwapping, setIsSwapping] = useState(false)
-  const [swapPairs, setSwapPairs] = useState<SwapPair[]>([])
+  const [fromToken, setFromToken] = useState("SOL");
+  const [toToken, setToToken] = useState("GAiA");
+  const [fromAmount, setFromAmount] = useState("");
+  const [toAmount, setToAmount] = useState("");
+  const [isSwapping, setIsSwapping] = useState(false);
+  const [swapPairs, setSwapPairs] = useState<SwapPair[]>([]);
   const [userConfig, setUserConfig] = useState<UserConfig>({
     slippageTolerance: 0.5,
-    gasPrice: 'medium',
+    gasPrice: "medium",
     autoSwap: false,
-    notifications: true
-  })
+    notifications: true,
+  });
 
-  const swapInterval = useRef<NodeJS.Timeout>(undefined)
+  const swapInterval = useRef<NodeJS.Timeout>(undefined);
 
   // Get current swap pair
-  const currentPair = swapPairs.find(pair => pair.from === fromToken && pair.to === toToken)
+  const currentPair = swapPairs.find(
+    (pair) => pair.from === fromToken && pair.to === toToken,
+  );
 
   useEffect(() => {
-    console.log('💱 ENHANCED SWAP SYSTEM - MULTI-DEX AGGREGATION ACTIVE')
-    console.log('🌐 Connected to GAiA Token:', GAIA_TOKEN.CONTRACT_ADDRESS)
-    console.log('⚡ 15x Faster Swaps Than Traditional DEXs')
-    
+    console.log("💱 ENHANCED SWAP SYSTEM - MULTI-DEX AGGREGATION ACTIVE");
+    console.log("🌐 Connected to GAiA Token:", GAIA_TOKEN.CONTRACT_ADDRESS);
+    console.log("⚡ 15x Faster Swaps Than Traditional DEXs");
+
     // Fetch user configuration
     const fetchUserConfig = async () => {
-      console.log('📊 Enhanced Swap System: Fetching user configuration')
-      return userConfig
-    }
-    
-    fetchUserConfig()
-    
+      console.log("📊 Enhanced Swap System: Fetching user configuration");
+      return userConfig;
+    };
+
+    fetchUserConfig();
+
     // Initialize swap pairs with live data simulation
     const initializeSwapPairs = () => {
       const pairs: SwapPair[] = [
         {
-          from: 'SOL',
-          to: 'GAiA',
+          from: "SOL",
+          to: "GAiA",
           rate: 0.000045,
           liquidity: 2500000,
-          volume24h: 850000
+          volume24h: 850000,
         },
         {
-          from: 'USDC',
-          to: 'GAiA',
+          from: "USDC",
+          to: "GAiA",
           rate: 0.000032,
           liquidity: 1800000,
-          volume24h: 620000
+          volume24h: 620000,
         },
         {
-          from: 'GAiA',
-          to: 'SOL',
+          from: "GAiA",
+          to: "SOL",
           rate: 22222.22,
           liquidity: 3200000,
-          volume24h: 940000
-        }
-      ]
-      
-      setSwapPairs(pairs)
-    }
+          volume24h: 940000,
+        },
+      ];
 
-    initializeSwapPairs()
+      setSwapPairs(pairs);
+    };
+
+    initializeSwapPairs();
 
     // Update rates every 3 seconds
     swapInterval.current = setInterval(() => {
-      setSwapPairs(prev => prev.map(pair => ({
-        ...pair,
-        rate: pair.rate * (1 + (Math.random() - 0.5) * 0.001),
-        volume24h: pair.volume24h + Math.random() * 10000
-      })))
-    }, 3000)
+      setSwapPairs((prev) =>
+        prev.map((pair) => ({
+          ...pair,
+          rate: pair.rate * (1 + (Math.random() - 0.5) * 0.001),
+          volume24h: pair.volume24h + Math.random() * 10000,
+        })),
+      );
+    }, 3000);
 
     return () => {
-      if (swapInterval.current) clearInterval(swapInterval.current)
-    }
-  }, [])
+      if (swapInterval.current) clearInterval(swapInterval.current);
+    };
+  }, []);
 
   const handleFromAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setFromAmount(value)
+    const value = e.target.value;
+    setFromAmount(value);
 
     if (value && currentPair) {
-      const calculatedAmount = (parseFloat(value) * currentPair.rate).toFixed(6)
-      setToAmount(calculatedAmount)
+      const calculatedAmount = (parseFloat(value) * currentPair.rate).toFixed(
+        6,
+      );
+      setToAmount(calculatedAmount);
     } else {
-      setToAmount('')
+      setToAmount("");
     }
-  }
+  };
 
   const handleToAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setToAmount(value)
+    const value = e.target.value;
+    setToAmount(value);
 
     if (value && currentPair) {
-      const calculatedAmount = (parseFloat(value) / currentPair.rate).toFixed(6)
-      setFromAmount(calculatedAmount)
+      const calculatedAmount = (parseFloat(value) / currentPair.rate).toFixed(
+        6,
+      );
+      setFromAmount(calculatedAmount);
     } else {
-      setFromAmount('')
+      setFromAmount("");
     }
-  }
+  };
 
   const handleSwapDirection = () => {
-    const tempFromToken = fromToken
-    const tempFromAmount = fromAmount
+    const tempFromToken = fromToken;
+    const tempFromAmount = fromAmount;
 
-    setFromToken(toToken)
-    setFromAmount(toAmount)
+    setFromToken(toToken);
+    setFromAmount(toAmount);
 
-    setToToken(tempFromToken)
-    setToAmount(tempFromAmount)
-  }
+    setToToken(tempFromToken);
+    setToAmount(tempFromAmount);
+  };
 
   const handleSwap = async () => {
     if (!fromAmount || !currentPair) {
-      toast.error('Please enter a valid amount and select tokens')
-      return
+      toast.error("Please enter a valid amount and select tokens");
+      return;
     }
 
-    setIsSwapping(true)
+    setIsSwapping(true);
 
     try {
       // Simulate swap processing
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      toast.success(`Successfully swapped ${fromAmount} ${fromToken} for ${toAmount} ${toToken}`)
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      toast.success(
+        `Successfully swapped ${fromAmount} ${fromToken} for ${toAmount} ${toToken}`,
+      );
+
       // Clear amounts
-      setFromAmount('')
-      setToAmount('')
+      setFromAmount("");
+      setToAmount("");
     } catch (error) {
-      toast.error('Swap failed. Please try again.')
+      toast.error("Swap failed. Please try again.");
     } finally {
-      setIsSwapping(false)
+      setIsSwapping(false);
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -178,7 +187,8 @@ export function EnhancedSwapSystem() {
             Enhanced Multi-DEX Swap Aggregator
           </CardTitle>
           <p className="text-sm text-muted-foreground">
-            15x faster swaps with optimal routing across multiple decentralized exchanges
+            15x faster swaps with optimal routing across multiple decentralized
+            exchanges
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -254,15 +264,25 @@ export function EnhancedSwapSystem() {
                   <CardContent className="p-4">
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">Exchange Rate</span>
-                      <span className="text-sm">1 {fromToken} = {currentPair.rate.toFixed(6)} {toToken}</span>
+                      <span className="text-sm">
+                        1 {fromToken} = {currentPair.rate.toFixed(6)} {toToken}
+                      </span>
                     </div>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-muted-foreground">24h Volume</span>
-                      <span className="text-sm">${currentPair.volume24h.toLocaleString()}</span>
+                      <span className="text-sm text-muted-foreground">
+                        24h Volume
+                      </span>
+                      <span className="text-sm">
+                        ${currentPair.volume24h.toLocaleString()}
+                      </span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Liquidity</span>
-                      <span className="text-sm">${currentPair.liquidity.toLocaleString()}</span>
+                      <span className="text-sm text-muted-foreground">
+                        Liquidity
+                      </span>
+                      <span className="text-sm">
+                        ${currentPair.liquidity.toLocaleString()}
+                      </span>
                     </div>
                   </CardContent>
                 </Card>
@@ -292,7 +312,8 @@ export function EnhancedSwapSystem() {
               <Card>
                 <CardContent className="p-4">
                   <p className="text-center text-muted-foreground">
-                    Limit orders coming soon! Set your desired price and let the system execute automatically.
+                    Limit orders coming soon! Set your desired price and let the
+                    system execute automatically.
                   </p>
                 </CardContent>
               </Card>
@@ -305,13 +326,24 @@ export function EnhancedSwapSystem() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Slippage Tolerance</label>
+                    <label className="text-sm font-medium">
+                      Slippage Tolerance
+                    </label>
                     <div className="flex gap-2">
-                      {[0.1, 0.5, 1.0, 2.0].map(value => (
+                      {[0.1, 0.5, 1.0, 2.0].map((value) => (
                         <Button
                           key={value}
-                          onClick={() => setUserConfig(prev => ({ ...prev, slippageTolerance: value }))}
-                          variant={userConfig.slippageTolerance === value ? "default" : "outline"}
+                          onClick={() =>
+                            setUserConfig((prev) => ({
+                              ...prev,
+                              slippageTolerance: value,
+                            }))
+                          }
+                          variant={
+                            userConfig.slippageTolerance === value
+                              ? "default"
+                              : "outline"
+                          }
                           size="sm"
                         >
                           {value}%
@@ -324,7 +356,12 @@ export function EnhancedSwapSystem() {
                     <label className="text-sm font-medium">Gas Price</label>
                     <select
                       value={userConfig.gasPrice}
-                      onChange={(e) => setUserConfig(prev => ({ ...prev, gasPrice: e.target.value }))}
+                      onChange={(e) =>
+                        setUserConfig((prev) => ({
+                          ...prev,
+                          gasPrice: e.target.value,
+                        }))
+                      }
                       className="w-full px-4 py-2 bg-muted border border-border rounded-md"
                     >
                       <option value="slow">Slow (Cheaper)</option>
@@ -342,26 +379,34 @@ export function EnhancedSwapSystem() {
             <div className="text-center space-y-1">
               <Shield className="h-5 w-5 mx-auto text-green-400" />
               <div className="text-sm font-medium">Secure</div>
-              <div className="text-xs text-muted-foreground">Audited Smart Contracts</div>
+              <div className="text-xs text-muted-foreground">
+                Audited Smart Contracts
+              </div>
             </div>
             <div className="text-center space-y-1">
               <Zap className="h-5 w-5 mx-auto text-yellow-400" />
               <div className="text-sm font-medium">Fast</div>
-              <div className="text-xs text-muted-foreground">15x Faster Execution</div>
+              <div className="text-xs text-muted-foreground">
+                15x Faster Execution
+              </div>
             </div>
             <div className="text-center space-y-1">
               <TrendingUp className="h-5 w-5 mx-auto text-blue-400" />
               <div className="text-sm font-medium">Best Rates</div>
-              <div className="text-xs text-muted-foreground">Multi-DEX Aggregation</div>
+              <div className="text-xs text-muted-foreground">
+                Multi-DEX Aggregation
+              </div>
             </div>
             <div className="text-center space-y-1">
               <Globe className="h-5 w-5 mx-auto text-purple-400" />
               <div className="text-sm font-medium">Global</div>
-              <div className="text-xs text-muted-foreground">Cross-Chain Support</div>
+              <div className="text-xs text-muted-foreground">
+                Cross-Chain Support
+              </div>
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

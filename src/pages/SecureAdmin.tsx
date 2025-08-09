@@ -2,10 +2,14 @@ import { SecureAdminDashboard } from '@/components/admin/SecureAdminDashboard'
 import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
 import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
 import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
+<<<<<<< HEAD
 import { SecurityCenter } from '@/components/SecurityCenter'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useState } from 'react'
+=======
+import styles from './SecureAdmin.module.css'
+>>>>>>> a99e069 (Resolve all remaining merge conflicts and clean up code)
 
 export default function SecureAdmin() {
   const [notifications] = useState<string[]>([
@@ -20,15 +24,16 @@ export default function SecureAdmin() {
     <AdminProtectedRoute>
       <AdminOnlyAccess>
         <div className="relative min-h-screen">
-          <EnhancedBackgroundManager 
+          <EnhancedBackgroundManager
             settings={{
-              type: 'neural',
-              intensity: 'high',
-              color: '#00ff00',
+              type: "neural",
+              intensity: "high",
+              color: "#00ff00",
               speed: 1.5,
-              autoGenerate: true
+              autoGenerate: true,
             }}
           />
+<<<<<<< HEAD
           <div className="relative z-10 p-4">
             <div className="container mx-auto max-w-7xl">
               <div className="mb-8">
@@ -150,6 +155,26 @@ export default function SecureAdmin() {
                   </Card>
                 </TabsContent>
               </Tabs>
+=======
+
+          <div className="relative z-10">
+            <div className="blueprint-links">
+              <a
+                href="/public/GAIA_ENGINE_BLUEPRINT.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="blueprint-link view"
+              >
+                View GAIA Engine Blueprint
+              </a>
+              <a
+                href="/public/GAIA_ENGINE_BLUEPRINT.md"
+                download
+                className="blueprint-link download"
+              >
+                Download GAIA Engine Blueprint
+              </a>
+>>>>>>> a99e069 (Resolve all remaining merge conflicts and clean up code)
             </div>
           </div>
         </div>

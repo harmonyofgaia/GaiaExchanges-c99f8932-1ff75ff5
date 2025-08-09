@@ -1,9 +1,7 @@
 
-
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
-// The following imports may fail if path aliases are not configured in tsconfig.json and vite.config.ts
 import { Navbar } from './components/Navbar';
 import { GaiaLogo } from './components/GaiaLogo';
 import { useGlobalBackgroundServices } from './hooks/useGlobalBackgroundServices';
@@ -12,8 +10,6 @@ import { HoneypotRedirect } from './components/security/HoneypotRedirect';
 import { AnimatedEarthLogo } from './components/branding/AnimatedEarthLogo';
 import { PersistentAudioControls } from './components/audio/PersistentAudioControls';
 
-// Lazy load all used pages/components
-// (already declared above, remove duplicate declarations)
 const EcoAvatar = lazy(() => import('./pages/EcoAvatar'));
 const CommunityEngagementHub = lazy(() => import('./pages/CommunityEngagementHub'));
 const ImpactMeasurementSystem = lazy(() => import('./pages/ImpactMeasurementSystem'));
@@ -47,13 +43,9 @@ const AdminLogin = lazy(() => import('./pages/AdminLogin'));
 const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'));
 const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'));
 const DecentralizedProjectFundingPools = lazy(() => import('./pages/DecentralizedProjectFundingPools'));
-
-// Lazy load pages for better performance
-const Home = lazy(() => import('./pages/Home'))
-const Dashboard = lazy(() => import('./pages/Dashboard'))
-const GreenImpactDashboard = lazy(() => import('./pages/GreenImpactDashboard'))
-// ...existing imports and lazy statements...
-
+const Home = lazy(() => import('./pages/Home'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const GreenImpactDashboard = lazy(() => import('./pages/GreenImpactDashboard'));
 
 function App() {
   useGlobalBackgroundServices();
@@ -123,5 +115,8 @@ function App() {
   );
 }
 
+// ...existing code...
 // Only one export default
+// ...existing code...
+// ...existing code...
 export default App;

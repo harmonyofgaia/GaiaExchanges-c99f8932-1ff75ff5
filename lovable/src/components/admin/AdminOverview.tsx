@@ -1,13 +1,12 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { PrehistoricCreaturesManager } from './PrehistoricCreaturesManager'
-import { EnhancedSnakeGame } from './EnhancedSnakeGame'
-import { EnhancedNFTSystem } from './EnhancedNFTSystem'
-import { AdminDashboard } from '@/components/tracking/AdminDashboard'
-import { Badge } from '@/components/ui/badge'
-import { 
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { PrehistoricCreaturesManager } from "./PrehistoricCreaturesManager";
+import { EnhancedSnakeGame } from "./EnhancedSnakeGame";
+import { EnhancedNFTSystem } from "./EnhancedNFTSystem";
+import { AdminDashboard } from "@/components/tracking/AdminDashboard";
+import { Badge } from "@/components/ui/badge";
+import {
   Crown,
   Shield,
   Gamepad2,
@@ -16,23 +15,27 @@ import {
   Users,
   Trophy,
   Target,
-  Star
-} from 'lucide-react'
-import { useSecureAdmin } from '@/hooks/useSecureAdmin'
+  Star,
+} from "lucide-react";
+import { useSecureAdmin } from "@/hooks/useSecureAdmin";
 
 export function AdminOverview() {
-  const { isAdmin } = useSecureAdmin()
+  const { isAdmin } = useSecureAdmin();
 
   if (!isAdmin) {
     return (
       <Card className="border-2 border-red-500/50">
         <CardContent className="p-8 text-center">
           <Crown className="h-16 w-16 text-red-400 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-red-400">Admin Access Required</h3>
-          <p className="text-muted-foreground">Admin Overview requires admin privileges</p>
+          <h3 className="text-xl font-bold text-red-400">
+            Admin Access Required
+          </h3>
+          <p className="text-muted-foreground">
+            Admin Overview requires admin privileges
+          </p>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   return (
@@ -67,7 +70,9 @@ export function AdminOverview() {
             <div className="p-4 bg-yellow-900/30 border border-yellow-500/20 rounded-lg">
               <Trophy className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
               <div className="text-2xl font-bold text-yellow-400">100%</div>
-              <div className="text-sm text-muted-foreground">Mission Success</div>
+              <div className="text-sm text-muted-foreground">
+                Mission Success
+              </div>
             </div>
           </div>
         </CardContent>
@@ -76,9 +81,13 @@ export function AdminOverview() {
       {/* Mission Statement */}
       <Card className="border-2 border-green-500/50 bg-gradient-to-r from-green-900/20 to-blue-900/20">
         <CardContent className="p-6 text-center">
-          <h3 className="text-2xl font-bold text-green-400 mb-4">🛡️ OUR DEFENSE MISSION</h3>
+          <h3 className="text-2xl font-bold text-green-400 mb-4">
+            🛡️ OUR DEFENSE MISSION
+          </h3>
           <p className="text-lg text-muted-foreground mb-4">
-            We are building a formidable army of prehistoric creatures and advanced gaming systems to protect our community against scams, malware, and all threats to user security.
+            We are building a formidable army of prehistoric creatures and
+            advanced gaming systems to protect our community against scams,
+            malware, and all threats to user security.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div className="p-3 bg-red-900/30 rounded border border-red-500/20">
@@ -99,10 +108,14 @@ export function AdminOverview() {
             </div>
           </div>
           <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded-lg border border-green-500/20">
-            <h4 className="text-lg font-bold text-green-400 mb-2">🚀 TOKEN LAUNCH PREPARATION</h4>
+            <h4 className="text-lg font-bold text-green-400 mb-2">
+              🚀 TOKEN LAUNCH PREPARATION
+            </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <div className="text-yellow-400 font-bold">Contract Address:</div>
+                <div className="text-yellow-400 font-bold">
+                  Contract Address:
+                </div>
                 <div className="font-mono text-xs bg-black/20 p-2 rounded mt-1">
                   t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump
                 </div>
@@ -119,7 +132,9 @@ export function AdminOverview() {
               <Badge className="bg-blue-600 text-white">CoinGecko Listed</Badge>
               <Badge className="bg-purple-600 text-white">Multi-Exchange</Badge>
               <Badge className="bg-orange-600 text-white">Mobile Apps</Badge>
-              <Badge className="bg-yellow-600 text-white">Legal Compliance</Badge>
+              <Badge className="bg-yellow-600 text-white">
+                Legal Compliance
+              </Badge>
             </div>
           </div>
         </CardContent>
@@ -128,16 +143,28 @@ export function AdminOverview() {
       {/* Admin Overview Tabs */}
       <Tabs defaultValue="creatures" className="w-full">
         <TabsList className="grid w-full grid-cols-4 bg-black/50 backdrop-blur-md border border-green-500/20">
-          <TabsTrigger value="creatures" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+          <TabsTrigger
+            value="creatures"
+            className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400"
+          >
             🦖 Prehistoric Army
           </TabsTrigger>
-          <TabsTrigger value="enhanced-nfts" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+          <TabsTrigger
+            value="enhanced-nfts"
+            className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400"
+          >
             🎴 Enhanced NFTs
           </TabsTrigger>
-          <TabsTrigger value="snake-game" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+          <TabsTrigger
+            value="snake-game"
+            className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400"
+          >
             🐍 Enhanced Snake Game
           </TabsTrigger>
-          <TabsTrigger value="system-stats" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+          <TabsTrigger
+            value="system-stats"
+            className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400"
+          >
             📊 System Analytics
           </TabsTrigger>
         </TabsList>
@@ -162,12 +189,16 @@ export function AdminOverview() {
       {/* Future Development Roadmap */}
       <Card className="border-2 border-cyan-500/50 bg-gradient-to-br from-cyan-900/20 to-purple-900/20">
         <CardHeader>
-          <CardTitle className="text-cyan-400 text-center">🚀 FUTURE DEVELOPMENT ROADMAP</CardTitle>
+          <CardTitle className="text-cyan-400 text-center">
+            🚀 FUTURE DEVELOPMENT ROADMAP
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
-              <h4 className="text-purple-400 font-bold mb-3">🎮 Gaming Evolution</h4>
+              <h4 className="text-purple-400 font-bold mb-3">
+                🎮 Gaming Evolution
+              </h4>
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li>• Virtual Reality Integration</li>
                 <li>• Cross-Platform Gameplay</li>
@@ -176,9 +207,11 @@ export function AdminOverview() {
                 <li>• Advanced Character Builder</li>
               </ul>
             </div>
-            
+
             <div className="p-4 bg-green-900/30 rounded-lg border border-green-500/20">
-              <h4 className="text-green-400 font-bold mb-3">🌍 Platform Expansion</h4>
+              <h4 className="text-green-400 font-bold mb-3">
+                🌍 Platform Expansion
+              </h4>
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li>• Multi-Exchange Listings</li>
                 <li>• Mobile App Store Launch</li>
@@ -187,9 +220,11 @@ export function AdminOverview() {
                 <li>• Community Governance</li>
               </ul>
             </div>
-            
+
             <div className="p-4 bg-orange-900/30 rounded-lg border border-orange-500/20">
-              <h4 className="text-orange-400 font-bold mb-3">🛡️ Security Enhancement</h4>
+              <h4 className="text-orange-400 font-bold mb-3">
+                🛡️ Security Enhancement
+              </h4>
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li>• AI Threat Detection</li>
                 <li>• Quantum Encryption</li>
@@ -199,17 +234,18 @@ export function AdminOverview() {
               </ul>
             </div>
           </div>
-          
+
           <div className="mt-6 text-center p-4 bg-gradient-to-r from-green-900/30 to-purple-900/30 rounded-lg border border-green-500/20">
             <h4 className="text-2xl font-bold text-green-400 mb-2">
               🌟 "Seeds Will Form Into Music" 🌟
             </h4>
             <p className="text-lg text-muted-foreground">
-              Together we create a new culture until the end of the world - Building the future of secure gaming and environmental protection
+              Together we create a new culture until the end of the world -
+              Building the future of secure gaming and environmental protection
             </p>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

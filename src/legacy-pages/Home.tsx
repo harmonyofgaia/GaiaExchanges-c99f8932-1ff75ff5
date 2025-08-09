@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -7,11 +8,26 @@ import { CallToAction } from '@/components/home/CallToAction'
 import { ExchangeLinks } from '@/components/home/ExchangeLinks'
 
 import { GAIA_TOKEN } from '@/constants/gaia'
+=======
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Globe, Heart, Zap, Users, Shield, Gamepad2 } from "lucide-react";
+import { CallToAction } from "@/components/home/CallToAction";
+import { ExchangeLinks } from "@/components/home/ExchangeLinks";
+import { BackgroundMusic } from "@/components/BackgroundMusic";
+import { GAIA_TOKEN } from "@/constants/gaia";
+>>>>>>> 7d6f23b (Resolve all remaining rebase conflicts, mark deleted files, and continue)
 
 const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
+<<<<<<< HEAD
       
+=======
+      <BackgroundMusic />
+
+>>>>>>> 7d6f23b (Resolve all remaining rebase conflicts, mark deleted files, and continue)
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">
           {/* Hero Section */}
@@ -60,7 +76,8 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Every transaction contributes to real-world environmental restoration projects.
+                  Every transaction contributes to real-world environmental
+                  restoration projects.
                 </p>
               </CardContent>
             </Card>
@@ -74,7 +91,8 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Play games, earn tokens, and compete in tournaments while helping the planet.
+                  Play games, earn tokens, and compete in tournaments while
+                  helping the planet.
                 </p>
               </CardContent>
             </Card>
@@ -88,7 +106,8 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Advanced security protocols protect your assets and transactions.
+                  Advanced security protocols protect your assets and
+                  transactions.
                 </p>
               </CardContent>
             </Card>
@@ -116,7 +135,8 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Earn GAiA tokens instantly through various platform activities.
+                  Earn GAiA tokens instantly through various platform
+                  activities.
                 </p>
               </CardContent>
             </Card>
@@ -138,7 +158,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

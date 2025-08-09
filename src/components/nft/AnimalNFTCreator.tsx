@@ -1,30 +1,29 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Slider } from '@/components/ui/slider'
-import { Camera, Heart, Shield, Zap, Star } from 'lucide-react'
-import { toast } from 'sonner'
-import { GAIA_TOKEN } from '@/constants/gaia'
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Slider } from "@/components/ui/slider";
+import { Camera, Heart, Shield, Zap, Star } from "lucide-react";
+import { toast } from "sonner";
+import { GAIA_TOKEN } from "@/constants/gaia";
 
 export function AnimalNFTCreator() {
   const [animalNFT, setAnimalNFT] = useState({
-    name: '',
-    species: '',
+    name: "",
+    species: "",
     rarity: [75],
     conservationValue: [85],
     trackingEnabled: true,
-    realAnimal: true
-  })
+    realAnimal: true,
+  });
 
   const handleCreateNFT = () => {
     toast.success(`🐾 Created Animal NFT: ${animalNFT.name}!`, {
       description: `Species: ${animalNFT.species} | Rarity: ${animalNFT.rarity[0]}% | Conservation Impact: High`,
-      duration: 5000
-    })
-  }
+      duration: 5000,
+    });
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -35,26 +34,35 @@ export function AnimalNFTCreator() {
             🎨 Animal NFT Creator
           </CardTitle>
           <p className="text-muted-foreground">
-            Create unique animal NFTs connected to real wildlife conservation efforts
+            Create unique animal NFTs connected to real wildlife conservation
+            efforts
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium text-green-400 mb-2 block">Animal Name</label>
+              <label className="text-sm font-medium text-green-400 mb-2 block">
+                Animal Name
+              </label>
               <Input
                 placeholder="e.g., Thunder the Eagle"
                 value={animalNFT.name}
-                onChange={(e) => setAnimalNFT(prev => ({ ...prev, name: e.target.value }))}
+                onChange={(e) =>
+                  setAnimalNFT((prev) => ({ ...prev, name: e.target.value }))
+                }
                 className="border-green-500/20"
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-blue-400 mb-2 block">Species</label>
+              <label className="text-sm font-medium text-blue-400 mb-2 block">
+                Species
+              </label>
               <Input
                 placeholder="e.g., Golden Eagle"
                 value={animalNFT.species}
-                onChange={(e) => setAnimalNFT(prev => ({ ...prev, species: e.target.value }))}
+                onChange={(e) =>
+                  setAnimalNFT((prev) => ({ ...prev, species: e.target.value }))
+                }
                 className="border-blue-500/20"
               />
             </div>
@@ -66,7 +74,9 @@ export function AnimalNFTCreator() {
             </label>
             <Slider
               value={animalNFT.rarity}
-              onValueChange={(value) => setAnimalNFT(prev => ({ ...prev, rarity: value }))}
+              onValueChange={(value) =>
+                setAnimalNFT((prev) => ({ ...prev, rarity: value }))
+              }
               max={100}
               min={1}
               step={1}
@@ -80,7 +90,9 @@ export function AnimalNFTCreator() {
             </label>
             <Slider
               value={animalNFT.conservationValue}
-              onValueChange={(value) => setAnimalNFT(prev => ({ ...prev, conservationValue: value }))}
+              onValueChange={(value) =>
+                setAnimalNFT((prev) => ({ ...prev, conservationValue: value }))
+              }
               max={100}
               min={1}
               step={1}
@@ -105,7 +117,10 @@ export function AnimalNFTCreator() {
             </div>
           </div>
 
-          <Button onClick={handleCreateNFT} className="w-full bg-green-600 hover:bg-green-700">
+          <Button
+            onClick={handleCreateNFT}
+            className="w-full bg-green-600 hover:bg-green-700"
+          >
             <Camera className="h-4 w-4 mr-2" />
             Create Animal NFT
           </Button>
@@ -124,10 +139,10 @@ export function AnimalNFTCreator() {
             <div className="text-8xl mb-4">🦅</div>
             <div className="text-center space-y-2">
               <h3 className="text-xl font-bold text-blue-400">
-                {animalNFT.name || 'Unnamed Animal'}
+                {animalNFT.name || "Unnamed Animal"}
               </h3>
               <p className="text-muted-foreground">
-                {animalNFT.species || 'Species not specified'}
+                {animalNFT.species || "Species not specified"}
               </p>
               <div className="flex justify-center gap-2 mt-4">
                 <Badge className="bg-purple-600">
@@ -143,7 +158,9 @@ export function AnimalNFTCreator() {
           <div className="mt-6 space-y-3">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Powered by:</span>
-              <span className="text-green-400 font-bold">{GAIA_TOKEN.SYMBOL} Token</span>
+              <span className="text-green-400 font-bold">
+                {GAIA_TOKEN.SYMBOL} Token
+              </span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Network:</span>
@@ -157,5 +174,5 @@ export function AnimalNFTCreator() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

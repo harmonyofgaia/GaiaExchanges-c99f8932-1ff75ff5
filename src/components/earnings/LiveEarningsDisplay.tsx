@@ -1,33 +1,37 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Coins, TrendingUp, Zap } from 'lucide-react'
-import { AnimatedCounter } from '@/components/ui/animated-counter'
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Coins, TrendingUp, Zap } from "lucide-react";
+import { AnimatedCounter } from "@/components/ui/animated-counter";
 
 interface LiveEarningsDisplayProps {
-  userId?: string
+  userId?: string;
 }
 
-export function LiveEarningsDisplay({ userId = 'default' }: LiveEarningsDisplayProps) {
+export function LiveEarningsDisplay({
+  userId = "default",
+}: LiveEarningsDisplayProps) {
   const [earnings, setEarnings] = useState({
     totalEarned: 0,
     dailyEarnings: 0,
-    currentStreak: 0
-  })
+    currentStreak: 0,
+  });
 
   useEffect(() => {
     const updateEarnings = () => {
-      setEarnings(prev => ({
+      setEarnings((prev) => ({
         totalEarned: prev.totalEarned + Math.floor(Math.random() * 10),
         dailyEarnings: prev.dailyEarnings + Math.floor(Math.random() * 5),
-        currentStreak: Math.max(prev.currentStreak, Math.floor(Math.random() * 30))
-      }))
-    }
+        currentStreak: Math.max(
+          prev.currentStreak,
+          Math.floor(Math.random() * 30),
+        ),
+      }));
+    };
 
-    const interval = setInterval(updateEarnings, 5000)
-    return () => clearInterval(interval)
-  }, [])
+    const interval = setInterval(updateEarnings, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-500/30">
@@ -45,14 +49,14 @@ export function LiveEarningsDisplay({ userId = 'default' }: LiveEarningsDisplayP
             </div>
             <div className="text-sm text-green-300/80">Total GAIA</div>
           </div>
-          
+
           <div className="text-center">
             <div className="text-2xl font-bold text-emerald-400">
               <AnimatedCounter value={earnings.dailyEarnings} />
             </div>
             <div className="text-sm text-emerald-300/80">Today</div>
           </div>
-          
+
           <div className="text-center">
             <div className="text-2xl font-bold text-yellow-400">
               <AnimatedCounter value={earnings.currentStreak} />
@@ -73,5 +77,5 @@ export function LiveEarningsDisplay({ userId = 'default' }: LiveEarningsDisplayP
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

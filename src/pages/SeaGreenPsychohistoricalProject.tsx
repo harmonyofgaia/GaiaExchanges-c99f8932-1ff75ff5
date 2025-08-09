@@ -1,9 +1,8 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
   Brain,
   Waves,
   TrendingUp,
@@ -24,12 +23,12 @@ import {
   Clock,
   Lightbulb,
   Database,
-  Activity
-} from 'lucide-react'
-import { PsychohistoricalEngine } from '@/components/psychohistorical/PsychohistoricalEngine'
-import { SecurePsychohistoricalAdmin } from '@/components/psychohistorical/SecurePsychohistoricalAdmin'
-import { PsychohistoricalIntegration } from '@/components/psychohistorical/PsychohistoricalIntegration'
-import { PsychohistoricalDocumentation } from '@/components/psychohistorical/PsychohistoricalDocumentation'
+  Activity,
+} from "lucide-react";
+import { PsychohistoricalEngine } from "@/components/psychohistorical/PsychohistoricalEngine";
+import { SecurePsychohistoricalAdmin } from "@/components/psychohistorical/SecurePsychohistoricalAdmin";
+import { PsychohistoricalIntegration } from "@/components/psychohistorical/PsychohistoricalIntegration";
+import { PsychohistoricalDocumentation } from "@/components/psychohistorical/PsychohistoricalDocumentation";
 
 export default function SeaGreenPsychohistoricalProject() {
   return (
@@ -41,22 +40,35 @@ export default function SeaGreenPsychohistoricalProject() {
             🌊 SEA GREEN PSYCHOHISTORICAL PROJECT
           </h1>
           <p className="text-xl text-muted-foreground mb-6">
-            Advanced AI-Powered Environmental Future Prediction & Idea Generation System
+            Advanced AI-Powered Environmental Future Prediction & Idea
+            Generation System
           </p>
           <div className="flex flex-wrap justify-center gap-2 mb-6">
-            <Badge variant="outline" className="border-green-500/50 text-green-400">
+            <Badge
+              variant="outline"
+              className="border-green-500/50 text-green-400"
+            >
               <Brain className="h-3 w-3 mr-1" />
               Psychohistorical AI
             </Badge>
-            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
+            <Badge
+              variant="outline"
+              className="border-blue-500/50 text-blue-400"
+            >
               <Waves className="h-3 w-3 mr-1" />
               Global Data Analysis
             </Badge>
-            <Badge variant="outline" className="border-purple-500/50 text-purple-400">
+            <Badge
+              variant="outline"
+              className="border-purple-500/50 text-purple-400"
+            >
               <TrendingUp className="h-3 w-3 mr-1" />
               Future Prediction
             </Badge>
-            <Badge variant="outline" className="border-yellow-500/50 text-yellow-400">
+            <Badge
+              variant="outline"
+              className="border-yellow-500/50 text-yellow-400"
+            >
               <Coins className="h-3 w-3 mr-1" />
               GAIA Token Economy
             </Badge>
@@ -67,14 +79,18 @@ export default function SeaGreenPsychohistoricalProject() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card className="border-green-500/20 bg-gradient-to-br from-green-900/20 to-green-800/20">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-green-400">Prediction Accuracy</CardTitle>
+              <CardTitle className="text-sm font-medium text-green-400">
+                Prediction Accuracy
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">
                 <Eye className="h-8 w-8 text-green-400 mr-3" />
                 <div>
                   <div className="text-2xl font-bold text-green-400">87.3%</div>
-                  <p className="text-xs text-muted-foreground">Environmental forecasts</p>
+                  <p className="text-xs text-muted-foreground">
+                    Environmental forecasts
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -82,7 +98,9 @@ export default function SeaGreenPsychohistoricalProject() {
 
           <Card className="border-blue-500/20 bg-gradient-to-br from-blue-900/20 to-blue-800/20">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-blue-400">Ideas Generated</CardTitle>
+              <CardTitle className="text-sm font-medium text-blue-400">
+                Ideas Generated
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">
@@ -97,14 +115,18 @@ export default function SeaGreenPsychohistoricalProject() {
 
           <Card className="border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-purple-800/20">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-purple-400">Implementations</CardTitle>
+              <CardTitle className="text-sm font-medium text-purple-400">
+                Implementations
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">
                 <CheckCircle className="h-8 w-8 text-purple-400 mr-3" />
                 <div>
                   <div className="text-2xl font-bold text-purple-400">341</div>
-                  <p className="text-xs text-muted-foreground">Active solutions</p>
+                  <p className="text-xs text-muted-foreground">
+                    Active solutions
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -112,7 +134,9 @@ export default function SeaGreenPsychohistoricalProject() {
 
           <Card className="border-yellow-500/20 bg-gradient-to-br from-yellow-900/20 to-yellow-800/20">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-yellow-400">Global Impact</CardTitle>
+              <CardTitle className="text-sm font-medium text-yellow-400">
+                Global Impact
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">
@@ -141,7 +165,10 @@ export default function SeaGreenPsychohistoricalProject() {
               <Users className="h-4 w-4" />
               Token Governance
             </TabsTrigger>
-            <TabsTrigger value="documentation" className="flex items-center gap-2">
+            <TabsTrigger
+              value="documentation"
+              className="flex items-center gap-2"
+            >
               <BookOpen className="h-4 w-4" />
               Auto-Documentation
             </TabsTrigger>
@@ -155,7 +182,8 @@ export default function SeaGreenPsychohistoricalProject() {
                   Psychohistorical Analysis Engine
                 </CardTitle>
                 <p className="text-muted-foreground">
-                  Advanced AI system scanning global environmental data and generating future-oriented green solutions
+                  Advanced AI system scanning global environmental data and
+                  generating future-oriented green solutions
                 </p>
               </CardHeader>
               <CardContent>
@@ -172,7 +200,8 @@ export default function SeaGreenPsychohistoricalProject() {
                   Secure Administrative Dashboard
                 </CardTitle>
                 <p className="text-muted-foreground">
-                  Protected interface for managing generated ideas and monitoring system integrity
+                  Protected interface for managing generated ideas and
+                  monitoring system integrity
                 </p>
               </CardHeader>
               <CardContent>
@@ -189,7 +218,8 @@ export default function SeaGreenPsychohistoricalProject() {
                   Community Governance & Token Integration
                 </CardTitle>
                 <p className="text-muted-foreground">
-                  Decentralized voting, rewards distribution, and community participation systems
+                  Decentralized voting, rewards distribution, and community
+                  participation systems
                 </p>
               </CardHeader>
               <CardContent>
@@ -206,7 +236,8 @@ export default function SeaGreenPsychohistoricalProject() {
                   Auto-Documentation & Community Alerts
                 </CardTitle>
                 <p className="text-muted-foreground">
-                  Automated knowledge management and real-time community notification systems
+                  Automated knowledge management and real-time community
+                  notification systems
                 </p>
               </CardHeader>
               <CardContent>
@@ -231,26 +262,36 @@ export default function SeaGreenPsychohistoricalProject() {
                   <div className="w-3 h-3 bg-green-400 rounded-full mr-2 animate-pulse"></div>
                   <span className="text-green-400 font-semibold">Active</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Data Collection Systems</p>
+                <p className="text-sm text-muted-foreground">
+                  Data Collection Systems
+                </p>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center mb-2">
                   <div className="w-3 h-3 bg-blue-400 rounded-full mr-2 animate-pulse"></div>
-                  <span className="text-blue-400 font-semibold">Processing</span>
+                  <span className="text-blue-400 font-semibold">
+                    Processing
+                  </span>
                 </div>
-                <p className="text-sm text-muted-foreground">AI Analysis Pipeline</p>
+                <p className="text-sm text-muted-foreground">
+                  AI Analysis Pipeline
+                </p>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center mb-2">
                   <div className="w-3 h-3 bg-purple-400 rounded-full mr-2 animate-pulse"></div>
-                  <span className="text-purple-400 font-semibold">Distributing</span>
+                  <span className="text-purple-400 font-semibold">
+                    Distributing
+                  </span>
                 </div>
-                <p className="text-sm text-muted-foreground">Community Alerts</p>
+                <p className="text-sm text-muted-foreground">
+                  Community Alerts
+                </p>
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
     </div>
-  )
+  );
 }

@@ -1,7 +1,6 @@
-
-import { GameProjectGrid } from './gaming/GameProjectGrid'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Flame } from 'lucide-react'
+import { GameProjectGrid } from "./gaming/GameProjectGrid";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Flame } from "lucide-react";
 
 export function EnhancedGamingLayout() {
   return (
@@ -32,17 +31,23 @@ export function EnhancedGamingLayout() {
             <div className="text-center p-4 bg-green-900/20 rounded-lg border border-green-500/20">
               <div className="text-4xl mb-2">🐸</div>
               <div className="text-green-400 font-bold">Level 1-25</div>
-              <div className="text-xs text-muted-foreground">Peaceful Forest</div>
+              <div className="text-xs text-muted-foreground">
+                Peaceful Forest
+              </div>
             </div>
             <div className="text-center p-4 bg-yellow-900/20 rounded-lg border border-yellow-500/20">
               <div className="text-4xl mb-2">🐺</div>
               <div className="text-yellow-400 font-bold">Level 26-50</div>
-              <div className="text-xs text-muted-foreground">Wild Predators</div>
+              <div className="text-xs text-muted-foreground">
+                Wild Predators
+              </div>
             </div>
             <div className="text-center p-4 bg-red-900/20 rounded-lg border border-red-500/20">
               <div className="text-4xl mb-2">🐉</div>
               <div className="text-red-400 font-bold">Level 51-75</div>
-              <div className="text-xs text-muted-foreground">Ancient Dragons</div>
+              <div className="text-xs text-muted-foreground">
+                Ancient Dragons
+              </div>
             </div>
             <div className="text-center p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
               <div className="text-4xl mb-2">👹</div>
@@ -53,5 +58,5 @@ export function EnhancedGamingLayout() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

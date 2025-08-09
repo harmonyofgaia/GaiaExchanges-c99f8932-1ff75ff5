@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
   Shield,
   Eye,
   Activity,
@@ -12,28 +12,32 @@ import {
   Users,
   Zap,
   Copy,
-  ExternalLink
-} from 'lucide-react'
-import { toast } from 'sonner'
-import { GAIA_TOKEN, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
+  ExternalLink,
+} from "lucide-react";
+import { toast } from "sonner";
+import {
+  GAIA_TOKEN,
+  formatGaiaPrice,
+  formatGaiaNumber,
+} from "@/constants/gaia";
 
 interface Transaction {
-  id: string
-  type: 'deposit' | 'withdrawal' | 'burn' | 'environmental' | 'community'
-  amount: number
-  hash: string
-  timestamp: Date
-  purpose: string
-  status: 'pending' | 'confirmed' | 'completed'
+  id: string;
+  type: "deposit" | "withdrawal" | "burn" | "environmental" | "community";
+  amount: number;
+  hash: string;
+  timestamp: Date;
+  purpose: string;
+  status: "pending" | "confirmed" | "completed";
 }
 
 interface VaultStats {
-  totalBalance: number
-  environmentalFunds: number
-  communityFunds: number
-  burnedTokens: number
-  totalTransactions: number
-  activeUsers: number
+  totalBalance: number;
+  environmentalFunds: number;
+  communityFunds: number;
+  burnedTokens: number;
+  totalTransactions: number;
+  activeUsers: number;
 }
 
 export function CommunityVault() {
@@ -41,44 +45,50 @@ export function CommunityVault() {
     totalBalance: 2847592.45,
     environmentalFunds: 1245832.12,
     communityFunds: 987654.33,
-    burnedTokens: 614106.00,
+    burnedTokens: 614106.0,
     totalTransactions: 45782,
-    activeUsers: 12847
-  })
+    activeUsers: 12847,
+  });
 
-  const [liveTransactions, setLiveTransactions] = useState<Transaction[]>([])
-  const [matrixEffect, setMatrixEffect] = useState<string[]>([])
+  const [liveTransactions, setLiveTransactions] = useState<Transaction[]>([]);
+  const [matrixEffect, setMatrixEffect] = useState<string[]>([]);
 
   // Generate matrix effect characters
   useEffect(() => {
-    const chars = '01ГΑΊΑGAiA🌍⚡🛡️💎'.split('')
+    const chars = "01ГΑΊΑGAiA🌍⚡🛡️💎".split("");
     const interval = setInterval(() => {
-      setMatrixEffect(prev => {
-        const newEffect = []
+      setMatrixEffect((prev) => {
+        const newEffect = [];
         for (let i = 0; i < 20; i++) {
-          newEffect.push(chars[Math.floor(Math.random() * chars.length)])
+          newEffect.push(chars[Math.floor(Math.random() * chars.length)]);
         }
-        return newEffect
-      })
-    }, 150)
+        return newEffect;
+      });
+    }, 150);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   // Simulate live transactions
   useEffect(() => {
     const generateTransaction = (): Transaction => {
-      const types: Transaction['type'][] = ['deposit', 'withdrawal', 'burn', 'environmental', 'community']
+      const types: Transaction["type"][] = [
+        "deposit",
+        "withdrawal",
+        "burn",
+        "environmental",
+        "community",
+      ];
       const purposes = [
-        'Tree Planting Initiative',
-        'Ocean Cleanup Project',
-        'Community Development',
-        'Token Burn Event',
-        'Environmental Research',
-        'Renewable Energy Fund',
-        'Wildlife Conservation',
-        'Carbon Offset Program'
-      ]
+        "Tree Planting Initiative",
+        "Ocean Cleanup Project",
+        "Community Development",
+        "Token Burn Event",
+        "Environmental Research",
+        "Renewable Energy Fund",
+        "Wildlife Conservation",
+        "Carbon Offset Program",
+      ];
 
       return {
         id: Math.random().toString(36).substr(2, 9),
@@ -87,61 +97,86 @@ export function CommunityVault() {
         hash: `0x${Math.random().toString(16).substr(2, 8)}...${Math.random().toString(16).substr(2, 4)}`,
         timestamp: new Date(),
         purpose: purposes[Math.floor(Math.random() * purposes.length)],
-        status: Math.random() > 0.3 ? 'confirmed' : 'pending'
-      }
-    }
+        status: Math.random() > 0.3 ? "confirmed" : "pending",
+      };
+    };
 
     // Add initial transactions
-    const initialTransactions = Array.from({ length: 8 }, generateTransaction)
-    setLiveTransactions(initialTransactions)
+    const initialTransactions = Array.from({ length: 8 }, generateTransaction);
+    setLiveTransactions(initialTransactions);
 
     // Add new transactions periodically
     const interval = setInterval(() => {
-      const newTransaction = generateTransaction()
-      setLiveTransactions(prev => [newTransaction, ...prev.slice(0, 19)]) // Keep last 20
+      const newTransaction = generateTransaction();
+      setLiveTransactions((prev) => [newTransaction, ...prev.slice(0, 19)]); // Keep last 20
 
       // Update vault stats
-      setVaultStats(prev => ({
+      setVaultStats((prev) => ({
         ...prev,
-        totalBalance: prev.totalBalance + (newTransaction.type === 'deposit' ? newTransaction.amount : -newTransaction.amount * 0.1),
+        totalBalance:
+          prev.totalBalance +
+          (newTransaction.type === "deposit"
+            ? newTransaction.amount
+            : -newTransaction.amount * 0.1),
         totalTransactions: prev.totalTransactions + 1,
-        environmentalFunds: newTransaction.type === 'environmental' ? prev.environmentalFunds + newTransaction.amount : prev.environmentalFunds,
-        communityFunds: newTransaction.type === 'community' ? prev.communityFunds + newTransaction.amount : prev.communityFunds,
-        burnedTokens: newTransaction.type === 'burn' ? prev.burnedTokens + newTransaction.amount : prev.burnedTokens
-      }))
-    }, 2500)
+        environmentalFunds:
+          newTransaction.type === "environmental"
+            ? prev.environmentalFunds + newTransaction.amount
+            : prev.environmentalFunds,
+        communityFunds:
+          newTransaction.type === "community"
+            ? prev.communityFunds + newTransaction.amount
+            : prev.communityFunds,
+        burnedTokens:
+          newTransaction.type === "burn"
+            ? prev.burnedTokens + newTransaction.amount
+            : prev.burnedTokens,
+      }));
+    }, 2500);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const copyWalletAddress = () => {
-    navigator.clipboard.writeText(GAIA_TOKEN.COMMUNITY_VAULT_WALLET)
-    toast.success('Community Wallet Address Copied!', {
-      description: 'This is where all fees go - 100% transparent'
-    })
-  }
+    navigator.clipboard.writeText(GAIA_TOKEN.COMMUNITY_VAULT_WALLET);
+    toast.success("Community Wallet Address Copied!", {
+      description: "This is where all fees go - 100% transparent",
+    });
+  };
 
-  const getTransactionIcon = (type: Transaction['type']) => {
+  const getTransactionIcon = (type: Transaction["type"]) => {
     switch (type) {
-      case 'deposit': return '💰'
-      case 'withdrawal': return '📤'
-      case 'burn': return '🔥'
-      case 'environmental': return '🌱'
-      case 'community': return '👥'
-      default: return '⚡'
+      case "deposit":
+        return "💰";
+      case "withdrawal":
+        return "📤";
+      case "burn":
+        return "🔥";
+      case "environmental":
+        return "🌱";
+      case "community":
+        return "👥";
+      default:
+        return "⚡";
     }
-  }
+  };
 
-  const getTransactionColor = (type: Transaction['type']) => {
+  const getTransactionColor = (type: Transaction["type"]) => {
     switch (type) {
-      case 'deposit': return 'text-green-400'
-      case 'withdrawal': return 'text-orange-400'
-      case 'burn': return 'text-red-400'
-      case 'environmental': return 'text-emerald-400'
-      case 'community': return 'text-blue-400'
-      default: return 'text-purple-400'
+      case "deposit":
+        return "text-green-400";
+      case "withdrawal":
+        return "text-orange-400";
+      case "burn":
+        return "text-red-400";
+      case "environmental":
+        return "text-emerald-400";
+      case "community":
+        return "text-blue-400";
+      default:
+        return "text-purple-400";
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -155,7 +190,7 @@ export function CommunityVault() {
               style={{
                 left: `${(index * 5) % 100}%`,
                 top: `${(index * 7) % 100}%`,
-                animationDelay: `${index * 0.1}s`
+                animationDelay: `${index * 0.1}s`,
               }}
             >
               {char}
@@ -192,9 +227,9 @@ export function CommunityVault() {
                 <div className="text-sm text-green-400">
                   <strong>🏦 Community Wallet Address:</strong>
                 </div>
-                <Button 
+                <Button
                   onClick={copyWalletAddress}
-                  variant="outline" 
+                  variant="outline"
                   size="sm"
                   className="border-green-500/30 text-green-400 hover:bg-green-500/20"
                 >
@@ -279,7 +314,9 @@ export function CommunityVault() {
           <CardTitle className="flex items-center gap-2 text-cyan-400">
             <Activity className="h-6 w-6 animate-pulse" />
             🔴 LIVE TRANSACTION MATRIX
-            <Badge className="bg-red-600 text-white animate-pulse ml-2">LIVE</Badge>
+            <Badge className="bg-red-600 text-white animate-pulse ml-2">
+              LIVE
+            </Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -290,25 +327,30 @@ export function CommunityVault() {
                   key={tx.id}
                   className={`
                     flex items-center justify-between p-3 rounded-lg border transition-all duration-500
-                    ${index === 0 ? 'bg-green-900/50 border-green-500/50 animate-pulse' : 'bg-gray-900/30 border-gray-700/30'}
+                    ${index === 0 ? "bg-green-900/50 border-green-500/50 animate-pulse" : "bg-gray-900/30 border-gray-700/30"}
                     hover:bg-cyan-900/30 hover:border-cyan-500/30
                   `}
                   style={{
-                    opacity: Math.max(0.3, 1 - (index * 0.05)),
-                    animationDelay: `${index * 0.1}s`
+                    opacity: Math.max(0.3, 1 - index * 0.05),
+                    animationDelay: `${index * 0.1}s`,
                   }}
                 >
                   <div className="flex items-center gap-3">
                     <div className="text-xl">{getTransactionIcon(tx.type)}</div>
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className={`font-bold ${getTransactionColor(tx.type)}`}>
+                        <span
+                          className={`font-bold ${getTransactionColor(tx.type)}`}
+                        >
                           {tx.type.toUpperCase()}
                         </span>
-                        <Badge 
+                        <Badge
                           className={`text-xs ${
-                            tx.status === 'confirmed' ? 'bg-green-600' : 
-                            tx.status === 'pending' ? 'bg-yellow-600' : 'bg-blue-600'
+                            tx.status === "confirmed"
+                              ? "bg-green-600"
+                              : tx.status === "pending"
+                                ? "bg-yellow-600"
+                                : "bg-blue-600"
                           }`}
                         >
                           {tx.status}
@@ -323,8 +365,11 @@ export function CommunityVault() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className={`font-bold ${getTransactionColor(tx.type)}`}>
-                      {tx.type === 'withdrawal' ? '-' : '+'}{formatGaiaNumber(tx.amount)} GAiA
+                    <div
+                      className={`font-bold ${getTransactionColor(tx.type)}`}
+                    >
+                      {tx.type === "withdrawal" ? "-" : "+"}
+                      {formatGaiaNumber(tx.amount)} GAiA
                     </div>
                     <div className="text-xs text-muted-foreground">
                       ${formatGaiaPrice(tx.amount * GAIA_TOKEN.INITIAL_PRICE)}
@@ -334,16 +379,24 @@ export function CommunityVault() {
               ))}
             </div>
           </div>
-          
+
           <div className="mt-4 flex justify-center gap-4">
             <Button variant="outline" size="sm" asChild>
-              <a href={`https://solscan.io/account/${GAIA_TOKEN.COMMUNITY_VAULT_WALLET}`} target="_blank" rel="noopener noreferrer">
+              <a
+                href={`https://solscan.io/account/${GAIA_TOKEN.COMMUNITY_VAULT_WALLET}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ExternalLink className="h-4 w-4 mr-2" />
                 View on Solscan
               </a>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a href={GAIA_TOKEN.PUMP_FUN_URL} target="_blank" rel="noopener noreferrer">
+              <a
+                href={GAIA_TOKEN.PUMP_FUN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Track on Pump.fun
               </a>
@@ -361,22 +414,31 @@ export function CommunityVault() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div className="bg-green-900/30 p-4 rounded-lg border border-green-500/30">
-                <div className="font-bold text-green-400 mb-2">🌱 Environmental Impact</div>
+                <div className="font-bold text-green-400 mb-2">
+                  🌱 Environmental Impact
+                </div>
                 <p className="text-green-300">
-                  All environmental fees directly fund verified tree planting, ocean cleanup, 
-                  and renewable energy projects. Track every contribution in real-time.
+                  All environmental fees directly fund verified tree planting,
+                  ocean cleanup, and renewable energy projects. Track every
+                  contribution in real-time.
                 </p>
               </div>
               <div className="bg-blue-900/30 p-4 rounded-lg border border-blue-500/30">
-                <div className="font-bold text-blue-400 mb-2">👥 Community Development</div>
+                <div className="font-bold text-blue-400 mb-2">
+                  👥 Community Development
+                </div>
                 <p className="text-blue-300">
-                  Community fees support platform development, user rewards, and ecosystem growth. 
-                  Every decision is transparent and community-driven.
+                  Community fees support platform development, user rewards, and
+                  ecosystem growth. Every decision is transparent and
+                  community-driven.
                 </p>
               </div>
             </div>
             <p className="text-muted-foreground">
-              <strong>🔒 Zero Hidden Fees • 🌍 Real Environmental Impact • 👥 Community Controlled</strong>
+              <strong>
+                🔒 Zero Hidden Fees • 🌍 Real Environmental Impact • 👥
+                Community Controlled
+              </strong>
             </p>
           </div>
         </CardContent>
@@ -393,5 +455,5 @@ export function CommunityVault() {
         }
       `}</style>
     </div>
-  )
+  );
 }

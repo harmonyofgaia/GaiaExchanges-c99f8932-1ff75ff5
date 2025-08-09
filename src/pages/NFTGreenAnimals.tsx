@@ -1,7 +1,6 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Coins, Sparkles, Shield, Trophy } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Coins, Sparkles, Shield, Trophy } from "lucide-react";
 
 export default function NFTGreenAnimals() {
   return (
@@ -34,7 +33,8 @@ export default function NFTGreenAnimals() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Collect NFTs of endangered species and contribute to their conservation.
+                Collect NFTs of endangered species and contribute to their
+                conservation.
               </p>
             </CardContent>
           </Card>
@@ -48,7 +48,8 @@ export default function NFTGreenAnimals() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Each NFT purchase directly funds real-world conservation efforts.
+                Each NFT purchase directly funds real-world conservation
+                efforts.
               </p>
             </CardContent>
           </Card>
@@ -62,7 +63,8 @@ export default function NFTGreenAnimals() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Breed your digital animals to create unique combinations and traits.
+                Breed your digital animals to create unique combinations and
+                traits.
               </p>
             </CardContent>
           </Card>
@@ -76,12 +78,13 @@ export default function NFTGreenAnimals() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Trade your collection with other conservationists in our secure marketplace.
+                Trade your collection with other conservationists in our secure
+                marketplace.
               </p>
             </CardContent>
           </Card>
         </div>
       </div>
     </div>
-  )
+  );
 }

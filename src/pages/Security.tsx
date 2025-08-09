@@ -1,7 +1,6 @@
-
-import { Navbar } from '@/components/Navbar'
-import { SecurityDashboard } from '@/components/admin/security/SecurityDashboard'
-import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
+import { Navbar } from "@/components/Navbar";
+import { SecurityDashboard } from "@/components/admin/security/SecurityDashboard";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 
 export default function Security() {
   return (
@@ -21,5 +20,5 @@ export default function Security() {
         </div>
       </div>
     </ProtectedRoute>
-  )
+  );
 }

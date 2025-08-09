@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -17,59 +18,89 @@ import { EcoMissionCard } from '@/components/missions/EcoMissionCard'
 import { ThemeSelector } from '@/components/ThemeSelector'
 
 import { UpgradedVisualControlButton } from '@/components/visual/UpgradedVisualControlButton'
+=======
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  ArrowRight,
+  Zap,
+  Users,
+  Globe,
+  Leaf,
+  Star,
+  Trophy,
+  Shield,
+} from "lucide-react";
+import { GaiaLogo } from "@/components/GaiaLogo";
+import { UniversalGaiaLogo } from "@/components/branding/UniversalGaiaLogo";
+import { EnhancedBackgroundManager } from "@/components/backgrounds/EnhancedBackgroundManager";
+import { GaiaCommunityProjects } from "@/components/GaiaCommunityProjects";
+import { SystemMonitor } from "@/components/SystemMonitor";
+import { CrossPagePersistence } from "@/components/system/CrossPagePersistence";
+import { InvisibleEcoIndicator } from "@/components/eco/InvisibleEcoIndicator";
+import { AnimatedCounter } from "@/components/ui/animated-counter";
+import { LiveEarningsDisplay } from "@/components/earnings/LiveEarningsDisplay";
+import { EcoMissionCard } from "@/components/missions/EcoMissionCard";
+import { ThemeSelector } from "@/components/ThemeSelector";
+import { EnhancedPersistentMusicPlayer } from "@/components/music/EnhancedPersistentMusicPlayer";
+import { UpgradedVisualControlButton } from "@/components/visual/UpgradedVisualControlButton";
+>>>>>>> 7d6f23b (Resolve all remaining rebase conflicts, mark deleted files, and continue)
 
 export default function Home() {
   const [stats, setStats] = useState({
     totalUsers: 12589,
     tokensEarned: 2456789,
     carbonOffset: 15678,
-    projectsFunded: 245
-  })
+    projectsFunded: 245,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setStats(prev => ({
+      setStats((prev) => ({
         totalUsers: prev.totalUsers + Math.floor(Math.random() * 5),
         tokensEarned: prev.tokensEarned + Math.floor(Math.random() * 100),
         carbonOffset: prev.carbonOffset + Math.floor(Math.random() * 10),
-        projectsFunded: prev.projectsFunded + Math.floor(Math.random() * 2)
-      }))
-    }, 3000)
+        projectsFunded: prev.projectsFunded + Math.floor(Math.random() * 2),
+      }));
+    }, 3000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const sampleMission = {
-    id: 'water-conservation',
-    title: 'Water Conservation Challenge',
-    description: 'Reduce water usage by 20% this month through smart conservation techniques.',
+    id: "water-conservation",
+    title: "Water Conservation Challenge",
+    description:
+      "Reduce water usage by 20% this month through smart conservation techniques.",
     reward: 150,
     progress: 67,
     maxProgress: 100,
-    difficulty: 'Medium' as const,
-    timeLeft: '12 days',
-    participants: 1250
-  }
+    difficulty: "Medium" as const,
+    timeLeft: "12 days",
+    participants: 1250,
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
       <SystemMonitor />
       <CrossPagePersistence />
       <InvisibleEcoIndicator />
-      
-      <EnhancedBackgroundManager 
+
+      <EnhancedBackgroundManager
         settings={{
-          type: 'matrix',
-          intensity: 'low',
-          color: '#00ff00',
+          type: "matrix",
+          intensity: "low",
+          color: "#00ff00",
           speed: 0.5,
-          autoGenerate: true
+          autoGenerate: true,
         }}
       />
-      
+
       {/* Control Buttons */}
       <UpgradedVisualControlButton />
-      
+
       <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="text-center space-y-6 mb-12">
@@ -77,7 +108,7 @@ export default function Home() {
             <UniversalGaiaLogo size="lg" animated={true} />
             <GaiaLogo size="lg" variant="glow" />
           </div>
-          
+
           <div className="space-y-4">
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
               Harmony of Gaia
@@ -86,18 +117,26 @@ export default function Home() {
               Together We Make The World A Better Place
             </p>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Join the revolutionary ecosystem that rewards environmental action, 
-              sustainable living, and positive community impact through our GAiA token.
+              Join the revolutionary ecosystem that rewards environmental
+              action, sustainable living, and positive community impact through
+              our GAiA token.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+            <Button
+              size="lg"
+              className="bg-green-600 hover:bg-green-700 text-white"
+            >
               <Zap className="h-5 w-5 mr-2" />
               Start Earning GAIA
               <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
-            <Button size="lg" variant="outline" className="border-green-400 text-green-400 hover:bg-green-900/20">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-green-400 text-green-400 hover:bg-green-900/20"
+            >
               <Globe className="h-5 w-5 mr-2" />
               Explore Projects
             </Button>
@@ -170,7 +209,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center text-green-400 mb-8">
             🌍 Why Choose Harmony of Gaia?
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-500/30">
               <CardHeader>
@@ -181,8 +220,9 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-green-300/80">
-                  Get rewarded with GAIA tokens for every positive environmental action you take. 
-                  From water conservation to renewable energy adoption.
+                  Get rewarded with GAIA tokens for every positive environmental
+                  action you take. From water conservation to renewable energy
+                  adoption.
                 </p>
               </CardContent>
             </Card>
@@ -196,8 +236,9 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-blue-300/80">
-                  Connect with thousands of eco-warriors worldwide. Share experiences, 
-                  collaborate on projects, and amplify your environmental impact.
+                  Connect with thousands of eco-warriors worldwide. Share
+                  experiences, collaborate on projects, and amplify your
+                  environmental impact.
                 </p>
               </CardContent>
             </Card>
@@ -211,8 +252,9 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-purple-300/80">
-                  Built on blockchain technology with military-grade security. 
-                  Every transaction is transparent and verified by our community.
+                  Built on blockchain technology with military-grade security.
+                  Every transaction is transparent and verified by our
+                  community.
                 </p>
               </CardContent>
             </Card>
@@ -220,5 +262,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-  )
+  );
 }

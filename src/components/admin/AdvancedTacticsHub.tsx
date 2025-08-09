@@ -1,16 +1,15 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { 
-  Zap, 
-  Shield, 
-  Target, 
-  Rocket, 
-  Brain, 
-  Eye, 
-  Flame, 
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Zap,
+  Shield,
+  Target,
+  Rocket,
+  Brain,
+  Eye,
+  Flame,
   Crown,
   Sword,
   Star,
@@ -19,81 +18,81 @@ import {
   Activity,
   TrendingUp,
   Users,
-  BarChart3
-} from 'lucide-react'
-import { toast } from 'sonner'
+  BarChart3,
+} from "lucide-react";
+import { toast } from "sonner";
 
 export function AdvancedTacticsHub() {
-  const [activeTactics, setActiveTactics] = useState(12)
-  const [successRate, setSuccessRate] = useState(97.8)
-  const [globalReach, setGlobalReach] = useState(125)
+  const [activeTactics, setActiveTactics] = useState(12);
+  const [successRate, setSuccessRate] = useState(97.8);
+  const [globalReach, setGlobalReach] = useState(125);
 
   const executeAdvancedTactic = (tacticName: string) => {
-    toast.success(`⚔️ ${tacticName} tactic executed successfully`)
-  }
+    toast.success(`⚔️ ${tacticName} tactic executed successfully`);
+  };
 
   const tactics = [
     {
-      id: 'market-dominance',
-      name: 'Market Dominance Protocol',
-      description: 'Advanced market positioning and competitive analysis',
+      id: "market-dominance",
+      name: "Market Dominance Protocol",
+      description: "Advanced market positioning and competitive analysis",
       icon: Crown,
-      color: 'text-yellow-400',
-      bgColor: 'bg-yellow-900/20',
-      borderColor: 'border-yellow-500/30',
-      status: 'ACTIVE'
+      color: "text-yellow-400",
+      bgColor: "bg-yellow-900/20",
+      borderColor: "border-yellow-500/30",
+      status: "ACTIVE",
     },
     {
-      id: 'viral-expansion',
-      name: 'Viral Expansion Engine',
-      description: 'Exponential growth through network effects',
+      id: "viral-expansion",
+      name: "Viral Expansion Engine",
+      description: "Exponential growth through network effects",
       icon: Rocket,
-      color: 'text-red-400',
-      bgColor: 'bg-red-900/20',
-      borderColor: 'border-red-500/30',
-      status: 'ACTIVE'
+      color: "text-red-400",
+      bgColor: "bg-red-900/20",
+      borderColor: "border-red-500/30",
+      status: "ACTIVE",
     },
     {
-      id: 'stealth-operations',
-      name: 'Stealth Operations Matrix',
-      description: 'Behind-the-scenes strategic positioning',
+      id: "stealth-operations",
+      name: "Stealth Operations Matrix",
+      description: "Behind-the-scenes strategic positioning",
       icon: Eye,
-      color: 'text-purple-400',
-      bgColor: 'bg-purple-900/20',
-      borderColor: 'border-purple-500/30',
-      status: 'STEALTH'
+      color: "text-purple-400",
+      bgColor: "bg-purple-900/20",
+      borderColor: "border-purple-500/30",
+      status: "STEALTH",
     },
     {
-      id: 'influence-network',
-      name: 'Global Influence Network',
-      description: 'Strategic partnerships and alliances',
+      id: "influence-network",
+      name: "Global Influence Network",
+      description: "Strategic partnerships and alliances",
       icon: Globe,
-      color: 'text-blue-400',
-      bgColor: 'bg-blue-900/20',
-      borderColor: 'border-blue-500/30',
-      status: 'EXPANDING'
+      color: "text-blue-400",
+      bgColor: "bg-blue-900/20",
+      borderColor: "border-blue-500/30",
+      status: "EXPANDING",
     },
     {
-      id: 'psychological-tactics',
-      name: 'Psychological Warfare Suite',
-      description: 'Advanced behavioral influence systems',
+      id: "psychological-tactics",
+      name: "Psychological Warfare Suite",
+      description: "Advanced behavioral influence systems",
       icon: Brain,
-      color: 'text-green-400',
-      bgColor: 'bg-green-900/20',
-      borderColor: 'border-green-500/30',
-      status: 'ACTIVE'
+      color: "text-green-400",
+      bgColor: "bg-green-900/20",
+      borderColor: "border-green-500/30",
+      status: "ACTIVE",
     },
     {
-      id: 'economic-disruption',
-      name: 'Economic Disruption Protocol',
-      description: 'Market transformation strategies',
+      id: "economic-disruption",
+      name: "Economic Disruption Protocol",
+      description: "Market transformation strategies",
       icon: TrendingUp,
-      color: 'text-orange-400',
-      bgColor: 'bg-orange-900/20',
-      borderColor: 'border-orange-500/30',
-      status: 'READY'
-    }
-  ]
+      color: "text-orange-400",
+      bgColor: "bg-orange-900/20",
+      borderColor: "border-orange-500/30",
+      status: "READY",
+    },
+  ];
 
   return (
     <div className="space-y-6">
@@ -105,21 +104,30 @@ export function AdvancedTacticsHub() {
             ⚔️ ADVANCED TACTICS HUB - Strategic Warfare Command
           </CardTitle>
           <p className="text-muted-foreground">
-            Military-grade strategic operations center with advanced psychological and market warfare capabilities
+            Military-grade strategic operations center with advanced
+            psychological and market warfare capabilities
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-red-900/30 border border-red-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-red-400">{activeTactics}</div>
-              <div className="text-sm text-muted-foreground">Active Tactics</div>
+              <div className="text-2xl font-bold text-red-400">
+                {activeTactics}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Active Tactics
+              </div>
             </div>
             <div className="text-center p-4 bg-green-900/30 border border-green-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-green-400">{successRate}%</div>
+              <div className="text-2xl font-bold text-green-400">
+                {successRate}%
+              </div>
               <div className="text-sm text-muted-foreground">Success Rate</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 border border-blue-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-blue-400">{globalReach}</div>
+              <div className="text-2xl font-bold text-blue-400">
+                {globalReach}
+              </div>
               <div className="text-sm text-muted-foreground">Countries</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 border border-purple-500/20 rounded-lg">
@@ -133,16 +141,23 @@ export function AdvancedTacticsHub() {
       {/* Tactics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tactics.map((tactic) => {
-          const IconComponent = tactic.icon
+          const IconComponent = tactic.icon;
           return (
-            <Card key={tactic.id} className={`${tactic.borderColor} ${tactic.bgColor}`}>
+            <Card
+              key={tactic.id}
+              className={`${tactic.borderColor} ${tactic.bgColor}`}
+            >
               <CardHeader>
-                <CardTitle className={`${tactic.color} flex items-center gap-2`}>
+                <CardTitle
+                  className={`${tactic.color} flex items-center gap-2`}
+                >
                   <IconComponent className="h-6 w-6" />
                   {tactic.name}
                 </CardTitle>
                 <div className="flex justify-between items-center">
-                  <Badge className={`${tactic.status === 'ACTIVE' ? 'bg-green-600' : tactic.status === 'STEALTH' ? 'bg-purple-600' : tactic.status === 'EXPANDING' ? 'bg-blue-600' : 'bg-orange-600'} text-white`}>
+                  <Badge
+                    className={`${tactic.status === "ACTIVE" ? "bg-green-600" : tactic.status === "STEALTH" ? "bg-purple-600" : tactic.status === "EXPANDING" ? "bg-blue-600" : "bg-orange-600"} text-white`}
+                  >
                     {tactic.status}
                   </Badge>
                 </div>
@@ -151,23 +166,25 @@ export function AdvancedTacticsHub() {
                 <p className="text-sm text-muted-foreground mb-4">
                   {tactic.description}
                 </p>
-                <Button 
+                <Button
                   onClick={() => executeAdvancedTactic(tactic.name)}
-                  className={`w-full ${tactic.color.replace('text-', 'bg-').replace('-400', '-600')} hover:${tactic.color.replace('text-', 'bg-').replace('-400', '-700')}`}
+                  className={`w-full ${tactic.color.replace("text-", "bg-").replace("-400", "-600")} hover:${tactic.color.replace("text-", "bg-").replace("-400", "-700")}`}
                 >
                   <Zap className="h-4 w-4 mr-2" />
                   Execute Tactic
                 </Button>
               </CardContent>
             </Card>
-          )
+          );
         })}
       </div>
 
       {/* Strategic Command Center */}
       <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-900/30 to-blue-900/30">
         <CardHeader>
-          <CardTitle className="text-cyan-400">🎯 Strategic Command Center</CardTitle>
+          <CardTitle className="text-cyan-400">
+            🎯 Strategic Command Center
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -195,7 +212,9 @@ export function AdvancedTacticsHub() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="border-green-500/30 bg-green-900/20">
           <CardHeader>
-            <CardTitle className="text-green-400">🧠 Intelligence Operations</CardTitle>
+            <CardTitle className="text-green-400">
+              🧠 Intelligence Operations
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -221,7 +240,9 @@ export function AdvancedTacticsHub() {
 
         <Card className="border-blue-500/30 bg-blue-900/20">
           <CardHeader>
-            <CardTitle className="text-blue-400">📊 Tactical Analytics</CardTitle>
+            <CardTitle className="text-blue-400">
+              📊 Tactical Analytics
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -292,5 +313,5 @@ export function AdvancedTacticsHub() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
