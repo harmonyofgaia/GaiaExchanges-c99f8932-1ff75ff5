@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,14 +8,14 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
+} from "./ui/dropdown-menu";
+import { Badge } from "./ui/badge";
 import { Palette, Lock, Unlock, Check, Moon, Sun } from "lucide-react";
 import {
   AVAILABLE_THEMES,
   type ThemeName,
   useLock,
-} from "@/components/providers/ThemeProvider";
+} from "./providers/ThemeProvider";
 import { toast } from "sonner";
 
 export function ThemeSelector() {

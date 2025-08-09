@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,9 +11,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuCheckboxItem,
-} from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
-import { Slider } from "@/components/ui/slider";
+} from "../ui/dropdown-menu";
+import { Badge } from "../ui/badge";
+import { Slider } from "../ui/slider";
 import {
   Settings,
   Brush,
@@ -103,7 +103,7 @@ import {
   Wrench,
   Zap as Lightning,
 } from "lucide-react";
-import { useLock } from "@/components/providers/ThemeProvider";
+import { useLock } from "../providers/ThemeProvider";
 import { toast } from "sonner";
 import { FullVisualControlPanel } from "./FullVisualControlPanel";
 

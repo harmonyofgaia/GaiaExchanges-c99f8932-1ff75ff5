@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Textarea } from "../ui/textarea";
 import {
   Settings,
   Palette,
@@ -18,7 +18,7 @@ import {
 
 import { TemplateSelector } from "./TemplateSelector";
 import { LockToggle } from "./LockToggle";
-import { useLock } from "@/components/providers/ThemeProvider";
+import { useLock } from "../providers/ThemeProvider";
 
 export function VisualControlMenu() {
   const { isLocked, toggleLock } = useLock();

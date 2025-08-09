@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,8 +7,8 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
+} from "../ui/dropdown-menu";
+import { Badge } from "../ui/badge";
 import {
   Settings,
   Brush,
@@ -19,7 +19,7 @@ import {
   Zap,
   Eye,
 } from "lucide-react";
-import { useLock } from "@/components/providers/ThemeProvider";
+import { useLock } from "../providers/ThemeProvider";
 import { toast } from "sonner";
 import { VisualControlMenu } from "./VisualControlMenu";
 import { EnhancedVisualControls } from "./EnhancedVisualControls";
