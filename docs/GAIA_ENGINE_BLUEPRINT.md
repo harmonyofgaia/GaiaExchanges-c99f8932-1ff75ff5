@@ -343,5 +343,4 @@ A next-generation, cloud-native, modular game engine designed for ultimate creat
 
 ---
 
->>>>>>> e0821d5 (fix: add build:vercel script for Vercel deployment compatibility)
 For more details, see the included documentation files.

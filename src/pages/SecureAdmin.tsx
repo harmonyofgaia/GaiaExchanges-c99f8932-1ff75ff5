@@ -29,7 +29,6 @@ export default function SecureAdmin() {
               autoGenerate: true
             }}
           />
-          
           <div className="relative z-10 p-4">
             <div className="container mx-auto max-w-7xl">
               <div className="mb-8">

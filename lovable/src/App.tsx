@@ -1,58 +1,62 @@
 
-import { lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
-import { Toaster } from 'sonner'
-import { Navbar } from '@/components/Navbar'
-import { GaiaLogo } from '@/components/GaiaLogo'
-import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices'
-import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
-import { HoneypotRedirect } from '@/components/security/HoneypotRedirect'
-import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
-import { PersistentAudioControls } from '@/components/audio/PersistentAudioControls'
+
+import { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { Toaster } from 'sonner';
+// The following imports may fail if path aliases are not configured in tsconfig.json and vite.config.ts
+import { Navbar } from './components/Navbar';
+import { GaiaLogo } from './components/GaiaLogo';
+import { useGlobalBackgroundServices } from './hooks/useGlobalBackgroundServices';
+import { CrossPagePersistence } from './components/system/CrossPagePersistence';
+import { HoneypotRedirect } from './components/security/HoneypotRedirect';
+import { AnimatedEarthLogo } from './components/branding/AnimatedEarthLogo';
+import { PersistentAudioControls } from './components/audio/PersistentAudioControls';
+
+// Lazy load all used pages/components
+// (already declared above, remove duplicate declarations)
+const EcoAvatar = lazy(() => import('./pages/EcoAvatar'));
+const CommunityEngagementHub = lazy(() => import('./pages/CommunityEngagementHub'));
+const ImpactMeasurementSystem = lazy(() => import('./pages/ImpactMeasurementSystem'));
+const SeaGreenPsychohistorical = lazy(() => import('./pages/SeaGreenPsychohistorical'));
+const GaiaTokenStatus = lazy(() => import('./pages/GaiaTokenStatus'));
+const DeploymentCenter = lazy(() => import('./pages/DeploymentCenter'));
+const VirtualWorld = lazy(() => import('./pages/VirtualWorld'));
+const AnimalWelfare = lazy(() => import('./pages/AnimalWelfare'));
+const Gaming = lazy(() => import('./pages/Gaming'));
+const Exchange = lazy(() => import('./pages/Exchange'));
+const Marketplace = lazy(() => import('./pages/Marketplace'));
+const Wallet = lazy(() => import('./pages/Wallet'));
+const VideoExchange = lazy(() => import('./pages/VideoExchange'));
+const StreamingShows = lazy(() => import('./pages/StreamingShows'));
+const GaiaBikeEcosystem = lazy(() => import('./pages/GaiaBikeEcosystem'));
+const TokenMining = lazy(() => import('./pages/TokenMining'));
+const GreenInvestments = lazy(() => import('./pages/GreenInvestments'));
+const CoinCrafter = lazy(() => import('./pages/CoinCrafter'));
+const LandscapeBuilder = lazy(() => import('./pages/LandscapeBuilder'));
+const AuraLandScrapyard = lazy(() => import('./pages/AuraLandScrapyard'));
+const ComprehensiveStatus = lazy(() => import('./pages/ComprehensiveStatus'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Pricing = lazy(() => import('./pages/Pricing'));
+const LiveTracking = lazy(() => import('./pages/LiveTracking'));
+const GaiasProjects = lazy(() => import('./pages/GaiasProjects'));
+const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlockchainSwapToken'));
+const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'));
+const SecureAdmin = lazy(() => import('./pages/SecureAdmin'));
+const AdminLogin = lazy(() => import('./pages/AdminLogin'));
+const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivitiesDashboard'));
+const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'));
+const DecentralizedProjectFundingPools = lazy(() => import('./pages/DecentralizedProjectFundingPools'));
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const GreenImpactDashboard = lazy(() => import('./pages/GreenImpactDashboard'))
-const EcoAvatar = lazy(() => import('./legacy-pages/EcoAvatar'))
-const DeploymentCenter = lazy(() => import('./legacy-pages/DeploymentCenter'))
-const LiveTracking = lazy(() => import('./pages/LiveTracking'))
-const Gaming = lazy(() => import('./pages/Gaming'))
-const Wallet = lazy(() => import('./pages/Wallet'))
-const Marketplace = lazy(() => import('./pages/Marketplace'))
-const VideoExchange = lazy(() => import('./pages/VideoExchange'))
-const StreamingShows = lazy(() => import('./pages/StreamingShows'))
-const GaiaBikeEcosystem = lazy(() => import('./pages/GaiaBikeEcosystem'))
-const TokenMining = lazy(() => import('./pages/TokenMining'))
-const GreenInvestments = lazy(() => import('./pages/GreenInvestments'))
-const CoinCrafter = lazy(() => import('./pages/CoinCrafter'))
+// ...existing imports and lazy statements...
 
-const GaiasProjects = lazy(() => import('./pages/GaiasProjects'))
-const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlockchainSwapToken'))
-const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
-const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
-const AdminLogin = lazy(() => import('./pages/AdminLogin'))
-const EarningActivitiesDashboard = lazy(() => import('./pages/EarningActivities'))
-const EnhancedLeaderboard = lazy(() => import('./pages/EnhancedLeaderboard'))
-const DecentralizedProjectFundingPools = lazy(() => import('./pages/DecentralizedProjectFundingPools'))
-const CommunityEngagementHub = lazy(() => import('./pages/CommunityEngagementHub'))
-const PartnershipManagement = lazy(() => import('./pages/PartnershipManagement'))
-const ImpactMeasurementSystem = lazy(() => import('./pages/ImpactMeasurementSystem'))
-const SeaGreenPsychohistorical = lazy(() => import('./pages/SeaGreenPsychohistorical'))
-const GaiaTokenStatus = lazy(() => import('./pages/GaiaTokenStatus'))
-const LandscapeBuilder = lazy(() => import('./pages/LandscapeBuilder'))
-const About = lazy(() => import('./pages/About'))
-const Contact = lazy(() => import('./pages/Contact'))
-const Pricing = lazy(() => import('./pages/Pricing'))
-const VirtualWorld = lazy(() => import('./pages/VirtualWorld'))
-const AnimalWelfare = lazy(() => import('./pages/AnimalWelfare'))
-const Exchange = lazy(() => import('./pages/Exchange'))
-const AuraLandScrapyard = lazy(() => import('./pages/AuraLandScrapyard'))
-const ComprehensiveStatus = lazy(() => import('./pages/ComprehensiveStatus'))
 
 function App() {
-  useGlobalBackgroundServices()
-
+  useGlobalBackgroundServices();
   return (
     <Router>
       <div className="min-h-screen bg-background text-foreground" data-router="true">
@@ -101,7 +105,6 @@ function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/admin" element={<Navigate to="/secure-admin" replace />} />
               <Route path="/live-tracking" element={<LiveTracking />} />
-              
               <Route path="/gaias-projects" element={<GaiasProjects />} />
               <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
@@ -117,6 +120,8 @@ function App() {
         <Toaster position="top-right" />
       </div>
     </Router>
-  )
+  );
 }
-export default App
+
+// Only one export default
+export default App;

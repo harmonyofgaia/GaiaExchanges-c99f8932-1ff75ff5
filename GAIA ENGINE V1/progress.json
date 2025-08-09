@@ -1,9 +1,9 @@
 {
   "coreEngine": 30,
   "modularSystem": 30,
-  "storageSystem": 10,
+  "storageSystem": 20,
   "pluginSystem": 20,
-  "aiIntegration": 10,
+  "aiIntegration": 20,
   "uiFramework": 10,
   "liveStats": 20
 }
