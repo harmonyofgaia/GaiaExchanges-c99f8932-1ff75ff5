@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Switch } from "@/components/ui/switch";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import { Progress } from "../ui/progress";
+import { Switch } from "../ui/switch";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../ui/select";
 import {
-  Shield,
   Heart,
   Zap,
   AlertTriangle,
@@ -31,6 +32,7 @@ import {
   PauseCircle,
   RotateCcw,
   Target,
+  Shield,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -268,7 +270,6 @@ export function AIDefenseAnimals() {
     toast.success("Animal status updated successfully!");
   };
 
-<<<<<<< HEAD
   const updateAnimalAttribute = (id: number, attribute: keyof AnimalDefense, value: string | number) => {
     setAnimalDefenses(prev => prev.map(animal => 
       animal.id === id 
@@ -277,16 +278,6 @@ export function AIDefenseAnimals() {
     ))
     toast.success(`Animal ${attribute} updated!`)
   }
-=======
-  const updateAnimalAttribute = (id: number, attribute: string, value: any) => {
-    setAnimalDefenses((prev) =>
-      prev.map((animal) =>
-        animal.id === id ? { ...animal, [attribute]: value } : animal,
-      ),
-    );
-    toast.success(`Animal ${attribute} updated!`);
-  };
->>>>>>> d65f6bc (Apply Prettier formatting to entire codebase)
 
   const deleteAnimal = (id: number) => {
     setAnimalDefenses((prev) => prev.filter((animal) => animal.id !== id));
@@ -554,10 +545,9 @@ export function AIDefenseAnimals() {
                 <Input
                   value={editingAnimal.location}
                   onChange={(e) =>
-                    setEditingAnimal((prev) => ({
-                      ...prev,
-                      location: e.target.value,
-                    }))
+                    setEditingAnimal((prev) =>
+                      prev ? { ...prev, location: e.target.value } : prev
+                    )
                   }
                 />
               </div>
@@ -567,10 +557,9 @@ export function AIDefenseAnimals() {
                   type="number"
                   value={editingAnimal.contributors}
                   onChange={(e) =>
-                    setEditingAnimal((prev) => ({
-                      ...prev,
-                      contributors: parseInt(e.target.value),
-                    }))
+                    setEditingAnimal((prev) =>
+                      prev ? { ...prev, contributors: parseInt(e.target.value) } : prev
+                    )
                   }
                 />
               </div>
@@ -582,10 +571,9 @@ export function AIDefenseAnimals() {
                   max="100"
                   value={editingAnimal.effectiveness}
                   onChange={(e) =>
-                    setEditingAnimal((prev) => ({
-                      ...prev,
-                      effectiveness: parseInt(e.target.value),
-                    }))
+                    setEditingAnimal((prev) =>
+                      prev ? { ...prev, effectiveness: parseInt(e.target.value) } : prev
+                    )
                   }
                 />
               </div>
@@ -594,7 +582,9 @@ export function AIDefenseAnimals() {
                 <Select
                   value={editingAnimal.status}
                   onValueChange={(value) =>
-                    setEditingAnimal((prev) => ({ ...prev, status: value }))
+                    setEditingAnimal((prev) =>
+                      prev ? { ...prev, status: value } : prev
+                    )
                   }
                 >
                   <SelectTrigger>
@@ -614,10 +604,9 @@ export function AIDefenseAnimals() {
               <Input
                 value={editingAnimal.description}
                 onChange={(e) =>
-                  setEditingAnimal((prev) => ({
-                    ...prev,
-                    description: e.target.value,
-                  }))
+                  setEditingAnimal((prev) =>
+                    prev ? { ...prev, description: e.target.value } : prev
+                  )
                 }
               />
             </div>
