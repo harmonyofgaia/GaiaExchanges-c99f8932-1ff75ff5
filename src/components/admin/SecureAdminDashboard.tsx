@@ -1,3 +1,7 @@
+import { IAEngine } from './IAEngine';
+import { DailyEngineAutomation } from './DailyEngineAutomation';
+import { GaiaBlockchainNetwork } from './GaiaBlockchainNetwork';
+import { MarketingCampaignManager } from './MarketingCampaignManager';
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -35,42 +39,9 @@ import { RuleSystemManagement } from "./RuleSystemManagement";
 import { HoneypotMonitor } from "@/components/security/HoneypotMonitor";
 import { DeploymentStatusPanel } from "./DeploymentStatusPanel";
 // Integrated Admin Page Components
-<<<<<<< HEAD
-import { UltimateAdminSuite } from './UltimateAdminSuite'
-import { MasterAdminControlCenter } from './MasterAdminControlCenter'
-import { DragonAIDefense } from './DragonAIDefense'
-import { KoalaAIEngine } from './KoalaAIEngine'
-import { UltimateIntelligenceHub } from './UltimateIntelligenceHub'
-import { AdminMediaLibrary } from './AdminMediaLibrary'
-import { WalletEngineAdmin } from './WalletEngineAdmin'
-import { TokenBurnController } from './TokenBurnController'
-import { GitHubIntegrationSuite } from '@/components/system/GitHubIntegrationSuite'
-import { NotificationController } from './NotificationController'
-import { PsychohistoricalEngine } from './PsychohistoricalEngine'
-import { PhoenixGuardian } from './PhoenixGuardian'
-import { GaiaIATool } from './GaiaIATool'
-import { SecurityDashboard } from './security/SecurityDashboard'
-import { UserManagementSystemRefactored } from './UserManagementSystemRefactored'
-import { AdminDashboard } from './AdminDashboard'
-import { OmniscientGPSEngine } from '@/components/tracking/OmniscientGPSEngine'
-import { AnimalDefenseCommandCenter } from './AnimalDefenseCommandCenter'
-import { PlatformManagement } from './PlatformManagement'
-import { QuantumDefenseWall } from './QuantumDefenseWall'
-import { BackgroundTacticalSystems } from './BackgroundTacticalSystems'
-import { MultiExchangeIntegration } from '@/components/MultiExchangeIntegration'
-import { InvestorScoutingSystem } from '@/components/InvestorScoutingSystem'
-import { MasterUpgradePlan } from './MasterUpgradePlan'
-import { BundledAdminPages } from './BundledAdminPages'
-import { FarmerEcosystem } from './FarmerEcosystem'
-import { PDFTransactionTracker } from './PDFTransactionTracker'
-import { AnimalGrazingRecovery } from './AnimalGrazingRecovery'
-import { AnimalTransferProtocols } from './AnimalTransferProtocols'
-import { IAEngine } from './IAEngine'
-import { DailyEngineAutomation } from './DailyEngineAutomation'
-import { GaiaBlockchainNetwork } from './GaiaBlockchainNetwork'
-import { MarketingCampaignManager } from './MarketingCampaignManager'
+// Duplicate imports removed
+// Duplicate imports removed
 import { MasterVisionControlPanel } from './MasterVisionControlPanel'
-=======
 import { UltimateAdminSuite } from "./UltimateAdminSuite";
 import { MasterAdminControlCenter } from "./MasterAdminControlCenter";
 import { DragonAIDefense } from "./DragonAIDefense";
@@ -100,11 +71,7 @@ import { FarmerEcosystem } from "./FarmerEcosystem";
 import { PDFTransactionTracker } from "./PDFTransactionTracker";
 import { AnimalGrazingRecovery } from "./AnimalGrazingRecovery";
 import { AnimalTransferProtocols } from "./AnimalTransferProtocols";
-import { IAEngine } from "./IAEngine";
-import { DailyEngineAutomation } from "./DailyEngineAutomation";
-import { GaiaBlockchainNetwork } from "./GaiaBlockchainNetwork";
-import { MarketingCampaignManager } from "./MarketingCampaignManager";
->>>>>>> 7d6f23b (Resolve all remaining rebase conflicts, mark deleted files, and continue)
+// Duplicate imports removed
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -120,30 +87,7 @@ export function SecureAdminDashboard() {
         </p>
       </div>
 
-<<<<<<< HEAD
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-1 h-auto p-1 text-xs">
-            <TabsTrigger value="overview" className="p-2 text-center">
-              <div className="flex flex-col items-center">
-                <span>📊</span>
-                <span className="hidden sm:inline">Overview</span>
-              </div>
-            </TabsTrigger>
-            <TabsTrigger value="vision" className="p-2 text-center bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border border-cyan-500/30">
-              <div className="flex flex-col items-center">
-                <span>🎯</span>
-                <span className="hidden sm:inline">Vision</span>
-              </div>
-            </TabsTrigger>
-            <TabsTrigger value="dashboard" className="p-2 text-center">
-              <div className="flex flex-col items-center">
-                <span>🏠</span>
-                <span className="hidden sm:inline">Dashboard</span>
-              </div>
-            </TabsTrigger>
-          <TabsTrigger value="animals" className="p-2 text-center bg-gradient-to-r from-orange-600/20 to-red-600/20 border border-orange-500/30">
-=======
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+  <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-22 gap-1 h-auto p-1 text-xs">
           <TabsTrigger value="overview" className="p-2 text-center">
             <div className="flex flex-col items-center">
@@ -161,7 +105,6 @@ export function SecureAdminDashboard() {
             value="animals"
             className="p-2 text-center bg-gradient-to-r from-orange-600/20 to-red-600/20 border border-orange-500/30"
           >
->>>>>>> 7d6f23b (Resolve all remaining rebase conflicts, mark deleted files, and continue)
             <div className="flex flex-col items-center">
               <span>🐾</span>
               <span className="hidden sm:inline">Animals</span>
