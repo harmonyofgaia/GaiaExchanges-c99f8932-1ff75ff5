@@ -8,7 +8,7 @@ import { useGlobalBackgroundServices } from '@/hooks/useGlobalBackgroundServices
 import { CrossPagePersistence } from '@/components/system/CrossPagePersistence'
 import { HoneypotRedirect } from '@/components/security/HoneypotRedirect'
 import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
-import { PersistentAudioControls } from '@/components/audio/PersistentAudioControls'
+import { UnifiedMusicPlayer } from '@/components/music/UnifiedMusicPlayer'
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
@@ -113,7 +113,7 @@ function App() {
             </Routes>
           </Suspense>
         </main>
-        <PersistentAudioControls />
+        <UnifiedMusicPlayer />
         <Toaster position="top-right" />
       </div>
     </Router>

@@ -5,13 +5,12 @@ import { Button } from '@/components/ui/button'
 import { Globe, Heart, Zap, Users, Shield, Gamepad2 } from 'lucide-react'
 import { CallToAction } from '@/components/home/CallToAction'
 import { ExchangeLinks } from '@/components/home/ExchangeLinks'
-import { BackgroundMusic } from '@/components/BackgroundMusic'
+
 import { GAIA_TOKEN } from '@/constants/gaia'
 
 const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
-      <BackgroundMusic />
       
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">
