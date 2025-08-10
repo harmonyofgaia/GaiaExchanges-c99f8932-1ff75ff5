@@ -39,6 +39,7 @@
 > **GAIA Engine is the only platform where you can create, own, and play in real-life environments—remixed, reimagined, and made legendary by the global community. With GAIA tokens powering access and creativity, and seamless integration of real-world maps and HD video, every player can walk their own streets, explore their dream cities, and share their world with the planet. This is the future of gaming, creation, and connection—impossible anywhere else.**
 
 ---
+
 ## Editor Theme & Game Style Separation
 
 To maximize creative freedom and user experience, GAIA’s development environment (menus, editors, creation tools) supports multiple visual themes (e.g., Classic Matrix, Modern, Retro). These editor themes are completely independent from the visual style, assets, and experience of the games created or played with GAIA. Game visuals and styles remain fully customizable by creators, ensuring that editor preferences never affect the look or feel of published games.

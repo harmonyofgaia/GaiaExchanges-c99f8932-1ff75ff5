@@ -50,7 +50,11 @@ export class FirecrawlService {
 
   static async crawlWebsite(
     url: string,
-  ): Promise<{ success: boolean; error?: string; data?: Record<string, unknown>[] }> {
+  ): Promise<{
+    success: boolean;
+    error?: string;
+    data?: Record<string, unknown>[];
+  }> {
     const apiKey = this.getApiKey();
     if (!apiKey) {
       return { success: false, error: "API key not found" };

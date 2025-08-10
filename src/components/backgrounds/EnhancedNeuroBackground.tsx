@@ -103,7 +103,13 @@ export function EnhancedNeuroBackground({
       pattern: string,
     ) {
       // Move lexical declarations outside case blocks
-      let angle: number, radius: number, gridSize: number, cellWidth: number, cellHeight: number, gridX: number, gridY: number;
+      let angle: number,
+        radius: number,
+        gridSize: number,
+        cellWidth: number,
+        cellHeight: number,
+        gridX: number,
+        gridY: number;
       switch (pattern) {
         case "creative": {
           const node: Node = {
@@ -125,8 +131,12 @@ export function EnhancedNeuroBackground({
           angle = (index / total) * Math.PI * 2 + Math.random() * 0.5;
           radius = 100 + Math.random() * 200;
           const node: Node = {
-            x: canvas.width / 2 + Math.cos(angle) * radius + Math.random() * 100,
-            y: canvas.height / 2 + Math.sin(angle) * radius + Math.random() * 100,
+            x:
+              canvas.width / 2 + Math.cos(angle) * radius + Math.random() * 100,
+            y:
+              canvas.height / 2 +
+              Math.sin(angle) * radius +
+              Math.random() * 100,
             vx: Math.cos(angle + Math.PI / 2) * speed,
             vy: Math.sin(angle + Math.PI / 2) * speed,
             radius: 3 + Math.random() * 6,

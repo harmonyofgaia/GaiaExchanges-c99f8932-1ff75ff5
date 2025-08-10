@@ -34,7 +34,8 @@ export const useTypeValidation = (componentName: string) => {
   return {
     validateTokenConfig: (config: unknown) =>
       TypeValidator.validateTokenConfig(config),
-    validateMetrics: (metrics: unknown) => TypeValidator.validateMetrics(metrics),
+    validateMetrics: (metrics: unknown) =>
+      TypeValidator.validateMetrics(metrics),
     isValidConfiguration: () => {
       const tokenErrors = TypeValidator.validateTokenConfig(GAIA_TOKEN);
       const metricsErrors = TypeValidator.validateMetrics(GAIA_METRICS);
