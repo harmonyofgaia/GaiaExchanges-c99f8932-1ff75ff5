@@ -7,4 +7,3 @@ if git diff --cached --name-only | grep -E '\.(js|ts|tsx|jsx|css|md|json)$' > /d
 else
 	echo "No matching staged files for lint-staged. Skipping."
 fi
-npx lint-staged
