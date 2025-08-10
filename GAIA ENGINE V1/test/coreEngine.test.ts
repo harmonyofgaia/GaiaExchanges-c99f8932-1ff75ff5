@@ -1,3 +1,5 @@
+
+import { describe, it, expect } from "vitest";
 import { GaiaEngine } from "../src/coreEngine";
 
 describe("GaiaEngine", () => {
