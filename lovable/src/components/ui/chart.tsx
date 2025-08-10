@@ -104,15 +104,15 @@ const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
     active?: boolean;
-  payload?: Record<string, unknown>[];
+    payload?: Record<string, unknown>[];
     label?: string;
     hideLabel?: boolean;
     hideIndicator?: boolean;
     indicator?: "line" | "dot" | "dashed";
     nameKey?: string;
     labelKey?: string;
-  labelFormatter?: (...args: unknown[]) => string;
-  formatter?: (...args: unknown[]) => string;
+    labelFormatter?: (...args: unknown[]) => string;
+    formatter?: (...args: unknown[]) => string;
     color?: string;
     labelClassName?: string;
   }
@@ -195,8 +195,12 @@ const ChartTooltipContent = React.forwardRef<
             const key = `${nameKey || (item.name as string) || (item.dataKey as string) || "value"}`;
             const itemConfig = getPayloadConfigFromPayload(config, item, key);
             // Type guard for item.payload
-            const itemPayload = (item.payload && typeof item.payload === "object") ? (item.payload as Record<string, unknown>) : {};
-            const indicatorColor = color || (itemPayload.fill as string) || (item.color as string);
+            const itemPayload =
+              item.payload && typeof item.payload === "object"
+                ? (item.payload as Record<string, unknown>)
+                : {};
+            const indicatorColor =
+              color || (itemPayload.fill as string) || (item.color as string);
 
             return (
               <div
@@ -251,8 +255,8 @@ const ChartTooltipContent = React.forwardRef<
                           {typeof item.value === "number"
                             ? item.value.toLocaleString()
                             : typeof item.value === "string"
-                            ? item.value
-                            : JSON.stringify(item.value)}
+                              ? item.value
+                              : JSON.stringify(item.value)}
                         </span>
                       )}
                     </div>

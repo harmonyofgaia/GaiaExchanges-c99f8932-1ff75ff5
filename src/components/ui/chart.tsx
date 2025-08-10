@@ -104,15 +104,23 @@ const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
     active?: boolean;
-  payload?: Record<string, unknown>[];
+    payload?: Record<string, unknown>[];
     label?: string;
     hideLabel?: boolean;
     hideIndicator?: boolean;
     indicator?: "line" | "dot" | "dashed";
     nameKey?: string;
     labelKey?: string;
-  labelFormatter?: (value: unknown, name?: string, props?: Record<string, unknown>) => string;
-  formatter?: (value: unknown, name?: string, props?: Record<string, unknown>) => string;
+    labelFormatter?: (
+      value: unknown,
+      name?: string,
+      props?: Record<string, unknown>,
+    ) => string;
+    formatter?: (
+      value: unknown,
+      name?: string,
+      props?: Record<string, unknown>,
+    ) => string;
     color?: string;
     labelClassName?: string;
   }
@@ -156,8 +164,10 @@ const ChartTooltipContent = React.forwardRef<
           <div className={cn("font-medium", labelClassName)}>
             {labelFormatter(
               typeof value === "string" ? value : String(value),
-              typeof item.name === "string" ? item.name : String(item.name ?? ""),
-              item
+              typeof item.name === "string"
+                ? item.name
+                : String(item.name ?? ""),
+              item,
             )}
           </div>
         );
@@ -198,8 +208,12 @@ const ChartTooltipContent = React.forwardRef<
             const item = itemRaw as Record<string, unknown>;
             const key = `${nameKey || (item.name as string) || (item.dataKey as string) || "value"}`;
             const itemConfig = getPayloadConfigFromPayload(config, item, key);
-            const itemPayload = (item.payload && typeof item.payload === "object") ? (item.payload as Record<string, unknown>) : {};
-            const indicatorColor = color || (itemPayload.fill as string) || (item.color as string);
+            const itemPayload =
+              item.payload && typeof item.payload === "object"
+                ? (item.payload as Record<string, unknown>)
+                : {};
+            const indicatorColor =
+              color || (itemPayload.fill as string) || (item.color as string);
 
             return (
               <div
@@ -212,8 +226,10 @@ const ChartTooltipContent = React.forwardRef<
                 {formatter && item?.value !== undefined && item.name ? (
                   formatter(
                     item.value,
-                    typeof item.name === "string" ? item.name : String(item.name ?? ""),
-                    item
+                    typeof item.name === "string"
+                      ? item.name
+                      : String(item.name ?? ""),
+                    item,
                   )
                 ) : (
                   <>
@@ -258,8 +274,8 @@ const ChartTooltipContent = React.forwardRef<
                           {typeof item.value === "number"
                             ? item.value.toLocaleString()
                             : typeof item.value === "string"
-                            ? item.value
-                            : JSON.stringify(item.value)}
+                              ? item.value
+                              : JSON.stringify(item.value)}
                         </span>
                       )}
                     </div>
@@ -280,7 +296,7 @@ const ChartLegend = RechartsPrimitive.Legend;
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
-  payload?: Record<string, unknown>[];
+    payload?: Record<string, unknown>[];
     verticalAlign?: "top" | "bottom";
     hideIcon?: boolean;
     nameKey?: string;
