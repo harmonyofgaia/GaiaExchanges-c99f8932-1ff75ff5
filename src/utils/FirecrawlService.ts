@@ -48,9 +48,7 @@ export class FirecrawlService {
     }
   }
 
-  static async crawlWebsite(
-    url: string,
-  ): Promise<{
+  static async crawlWebsite(url: string): Promise<{
     success: boolean;
     error?: string;
     data?: Record<string, unknown>[];
