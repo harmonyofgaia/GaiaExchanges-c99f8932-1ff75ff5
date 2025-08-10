@@ -20,6 +20,7 @@ import { VirtualLandscapeCreator } from "@/components/landscapes/VirtualLandscap
 import { RealTimeAnimalTracker } from "@/components/RealTimeAnimalTracker";
 import { AnimalWelfareWalletManager } from "@/components/animal-welfare/AnimalWelfareWalletManager";
 import { AnimalNFTMarketplace } from "@/components/animal-welfare/AnimalNFTMarketplace";
+import { RealAnimalDatabase } from "@/components/animal-welfare/RealAnimalDatabase";
 import { toast } from "sonner";
 
 export default function AnimalWelfare() {
@@ -79,7 +80,7 @@ export default function AnimalWelfare() {
           </TabsContent>
 
           <TabsContent value="database" className="space-y-6">
-            <RealAnimalDatabase />
+          <RealAnimalDatabase />
           </TabsContent>
 
           <TabsContent value="cameras" className="space-y-6">

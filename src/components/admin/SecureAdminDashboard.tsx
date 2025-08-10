@@ -41,7 +41,9 @@ import { DeploymentStatusPanel } from "./DeploymentStatusPanel";
 // Integrated Admin Page Components
 // Duplicate imports removed
 // Duplicate imports removed
-import { MasterVisionControlPanel } from './MasterVisionControlPanel'
+import { MasterVisionControlPanel } from './MasterVisionControlPanel';
+import { EinsteinTacticalAnimals } from "../defense/EinsteinTacticalAnimals";
+import { FoodPackageSystem } from "../community/FoodPackageSystem";
 import { UltimateAdminSuite } from "./UltimateAdminSuite";
 import { MasterAdminControlCenter } from "./MasterAdminControlCenter";
 import { DragonAIDefense } from "./DragonAIDefense";
@@ -395,6 +397,33 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">Marketing</span>
             </div>
           </TabsTrigger>
+          <TabsTrigger
+            value="master-vision"
+            className="p-2 text-center bg-gradient-to-r from-gold-600/20 to-yellow-600/20 border border-gold-500/30"
+          >
+            <div className="flex flex-col items-center">
+              <span>🗺️</span>
+              <span className="hidden sm:inline">Master Vision</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger
+            value="einstein-animals"
+            className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-indigo-600/20 border border-purple-500/30"
+          >
+            <div className="flex flex-col items-center">
+              <span>🧠</span>
+              <span className="hidden sm:inline">Einstein Animals</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger
+            value="food-system"
+            className="p-2 text-center bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30"
+          >
+            <div className="flex flex-col items-center">
+              <span>🍎</span>
+              <span className="hidden sm:inline">Food System</span>
+            </div>
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
@@ -576,6 +605,18 @@ export function SecureAdminDashboard() {
 
         <TabsContent value="pdf-tracker" className="space-y-6">
           <PDFTransactionTracker />
+        </TabsContent>
+
+        <TabsContent value="master-vision" className="space-y-6">
+          <MasterVisionControlPanel />
+        </TabsContent>
+
+        <TabsContent value="einstein-animals" className="space-y-6">
+          <EinsteinTacticalAnimals />
+        </TabsContent>
+
+        <TabsContent value="food-system" className="space-y-6">
+          <FoodPackageSystem />
         </TabsContent>
       </Tabs>
     </div>

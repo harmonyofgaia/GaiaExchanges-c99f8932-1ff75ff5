@@ -1,33 +1,14 @@
-<<<<<<< HEAD
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Globe, Heart, Zap, Users, Shield, Gamepad2 } from 'lucide-react'
-import { CallToAction } from '@/components/home/CallToAction'
-import { ExchangeLinks } from '@/components/home/ExchangeLinks'
-
-import { GAIA_TOKEN } from '@/constants/gaia'
-=======
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Globe, Heart, Zap, Users, Shield, Gamepad2 } from "lucide-react";
 import { CallToAction } from "@/components/home/CallToAction";
 import { ExchangeLinks } from "@/components/home/ExchangeLinks";
-import { BackgroundMusic } from "@/components/BackgroundMusic";
 import { GAIA_TOKEN } from "@/constants/gaia";
->>>>>>> 7d6f23b (Resolve all remaining rebase conflicts, mark deleted files, and continue)
 
 const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
-<<<<<<< HEAD
-      
-=======
-      <BackgroundMusic />
-
->>>>>>> 7d6f23b (Resolve all remaining rebase conflicts, mark deleted files, and continue)
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">
           {/* Hero Section */}

@@ -119,5 +119,15 @@ export default function Exchange() {
     users: 50000,
     trades: 100000
   });
-  // TODO: Restore the main return statement here with valid JSX.
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+          🚀 GAIA EXCHANGE
+        </h1>
+        <GaiasExchange />
+      </div>
+    </div>
+  );
 }
