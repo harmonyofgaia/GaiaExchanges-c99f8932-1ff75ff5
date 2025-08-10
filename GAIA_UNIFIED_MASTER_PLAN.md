@@ -1,3 +1,7 @@
+## Editor Theme & Game Style Separation
+
+To maximize creative freedom and user experience, GAIA’s development environment (menus, editors, creation tools) supports multiple visual themes (e.g., Classic Matrix, Modern, Retro). These editor themes are completely independent from the visual style, assets, and experience of the games created or played with GAIA. Game visuals and styles remain fully customizable by creators, ensuring that editor preferences never affect the look or feel of published games.
+
 ## GAIA Engine: The Ultimate, Unrepeatable Game Engine Master Plan
 
 ### New “Blow Their Mind” Additions for 2025+ (to be added to the master plan)
