@@ -270,14 +270,18 @@ export function AIDefenseAnimals() {
     toast.success("Animal status updated successfully!");
   };
 
-  const updateAnimalAttribute = (id: number, attribute: keyof AnimalDefense, value: string | number) => {
-    setAnimalDefenses(prev => prev.map(animal => 
-      animal.id === id 
-        ? { ...animal, [attribute]: value }
-        : animal
-    ))
-    toast.success(`Animal ${attribute} updated!`)
-  }
+  const updateAnimalAttribute = (
+    id: number,
+    attribute: keyof AnimalDefense,
+    value: string | number,
+  ) => {
+    setAnimalDefenses((prev) =>
+      prev.map((animal) =>
+        animal.id === id ? { ...animal, [attribute]: value } : animal,
+      ),
+    );
+    toast.success(`Animal ${attribute} updated!`);
+  };
 
   const deleteAnimal = (id: number) => {
     setAnimalDefenses((prev) => prev.filter((animal) => animal.id !== id));
@@ -314,7 +318,9 @@ export function AIDefenseAnimals() {
     toast.success("Animal stats reset!");
   };
 
-  const addNewAnimal = (animalData: Omit<AnimalDefense, 'id' | 'threatsRepelled' | 'activityLevel'>) => {
+  const addNewAnimal = (
+    animalData: Omit<AnimalDefense, "id" | "threatsRepelled" | "activityLevel">,
+  ) => {
     const newAnimal = {
       ...animalData,
       id: Math.max(...animalDefenses.map((a) => a.id)) + 1,
@@ -546,7 +552,7 @@ export function AIDefenseAnimals() {
                   value={editingAnimal.location}
                   onChange={(e) =>
                     setEditingAnimal((prev) =>
-                      prev ? { ...prev, location: e.target.value } : prev
+                      prev ? { ...prev, location: e.target.value } : prev,
                     )
                   }
                 />
@@ -558,7 +564,9 @@ export function AIDefenseAnimals() {
                   value={editingAnimal.contributors}
                   onChange={(e) =>
                     setEditingAnimal((prev) =>
-                      prev ? { ...prev, contributors: parseInt(e.target.value) } : prev
+                      prev
+                        ? { ...prev, contributors: parseInt(e.target.value) }
+                        : prev,
                     )
                   }
                 />
@@ -572,7 +580,9 @@ export function AIDefenseAnimals() {
                   value={editingAnimal.effectiveness}
                   onChange={(e) =>
                     setEditingAnimal((prev) =>
-                      prev ? { ...prev, effectiveness: parseInt(e.target.value) } : prev
+                      prev
+                        ? { ...prev, effectiveness: parseInt(e.target.value) }
+                        : prev,
                     )
                   }
                 />
@@ -583,7 +593,7 @@ export function AIDefenseAnimals() {
                   value={editingAnimal.status}
                   onValueChange={(value) =>
                     setEditingAnimal((prev) =>
-                      prev ? { ...prev, status: value } : prev
+                      prev ? { ...prev, status: value } : prev,
                     )
                   }
                 >
@@ -605,7 +615,7 @@ export function AIDefenseAnimals() {
                 value={editingAnimal.description}
                 onChange={(e) =>
                   setEditingAnimal((prev) =>
-                    prev ? { ...prev, description: e.target.value } : prev
+                    prev ? { ...prev, description: e.target.value } : prev,
                   )
                 }
               />

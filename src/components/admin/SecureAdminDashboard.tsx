@@ -1,7 +1,7 @@
-import { IAEngine } from './IAEngine';
-import { DailyEngineAutomation } from './DailyEngineAutomation';
-import { GaiaBlockchainNetwork } from './GaiaBlockchainNetwork';
-import { MarketingCampaignManager } from './MarketingCampaignManager';
+import { IAEngine } from "./IAEngine";
+import { DailyEngineAutomation } from "./DailyEngineAutomation";
+import { GaiaBlockchainNetwork } from "./GaiaBlockchainNetwork";
+import { MarketingCampaignManager } from "./MarketingCampaignManager";
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -41,7 +41,7 @@ import { DeploymentStatusPanel } from "./DeploymentStatusPanel";
 // Integrated Admin Page Components
 // Duplicate imports removed
 // Duplicate imports removed
-import { MasterVisionControlPanel } from './MasterVisionControlPanel';
+import { MasterVisionControlPanel } from "./MasterVisionControlPanel";
 import { EinsteinTacticalAnimals } from "../defense/EinsteinTacticalAnimals";
 import { FoodPackageSystem } from "../community/FoodPackageSystem";
 import { UltimateAdminSuite } from "./UltimateAdminSuite";
@@ -89,7 +89,7 @@ export function SecureAdminDashboard() {
         </p>
       </div>
 
-  <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-22 gap-1 h-auto p-1 text-xs">
           <TabsTrigger value="overview" className="p-2 text-center">
             <div className="flex flex-col items-center">

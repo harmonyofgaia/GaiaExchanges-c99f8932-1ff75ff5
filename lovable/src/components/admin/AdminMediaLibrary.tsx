@@ -236,7 +236,7 @@ export function AdminMediaLibrary() {
   };
 
   const playTrack = async (file: MediaFile) => {
-    if (!file.mime_type.startsWith('audio/')) return;
+    if (!file.mime_type.startsWith("audio/")) return;
 
     const audioUrl = supabase.storage
       .from("admin-media")
