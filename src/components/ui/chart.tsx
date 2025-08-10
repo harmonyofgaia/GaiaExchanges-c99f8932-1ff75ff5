@@ -111,8 +111,8 @@ const ChartTooltipContent = React.forwardRef<
     indicator?: "line" | "dot" | "dashed";
     nameKey?: string;
     labelKey?: string;
-    labelFormatter?: Function;
-    formatter?: Function;
+  labelFormatter?: (value: any, name?: string, props?: any) => string;
+  formatter?: (value: any, name?: string, props?: any) => string;
     color?: string;
     labelClassName?: string;
   }
@@ -153,7 +153,7 @@ const ChartTooltipContent = React.forwardRef<
       if (labelFormatter) {
         return (
           <div className={cn("font-medium", labelClassName)}>
-            {labelFormatter(value, payload)}
+            {labelFormatter(value, item?.name, item)}
           </div>
         );
       }
@@ -203,7 +203,7 @@ const ChartTooltipContent = React.forwardRef<
                 )}
               >
                 {formatter && item?.value !== undefined && item.name ? (
-                  formatter(item.value, item.name, item, index, item.payload)
+                  formatter(item.value, item.name, item)
                 ) : (
                   <>
                     {itemConfig?.icon ? (

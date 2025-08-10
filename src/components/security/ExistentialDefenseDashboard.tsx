@@ -5,7 +5,8 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { existentialDefense } from "@/services/existentialDefense";
-import { Shield, Infinity, Zap, Star } from "lucide-react";
+import { Shield, Zap, Star } from "lucide-react";
+import { Infinity as InfinityIcon } from "lucide-react";
 
 export function ExistentialDefenseDashboard() {
   const [status, setStatus] = useState({
