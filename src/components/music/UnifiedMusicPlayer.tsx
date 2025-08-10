@@ -24,6 +24,7 @@ interface Track {
   url?: string;
 }
 
+
 export function UnifiedMusicPlayer() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -37,10 +38,13 @@ export function UnifiedMusicPlayer() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Initialize and check for background music
+  // --- Move playTrack and playNext above all useEffect hooks that reference them ---
 
-  // --- Move playTrack and playNext above this useEffect ---
 
+
+  // --- Move useEffect hooks below playTrack and playNext declarations ---
+
+  // useEffect for loading media and handling admin updates
   useEffect(() => {
     const loadActiveMedia = () => {
       const activeMediaId = localStorage.getItem("activeBackgroundMedia");
