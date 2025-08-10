@@ -161,7 +161,7 @@
 
 @layer base {
   * {
-    border-color: theme('colors.border');
+    border-color: theme("colors.border");
   }
   body {
     @apply bg-background text-foreground;
