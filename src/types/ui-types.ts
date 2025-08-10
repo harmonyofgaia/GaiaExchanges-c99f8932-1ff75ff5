@@ -252,7 +252,9 @@ export interface SolanaProvider {
   isPhantom?: boolean;
   connect: () => Promise<{ publicKey: { toString: () => string } }>;
   disconnect: () => Promise<void>;
-  signAndSendTransaction: (transaction: unknown) => Promise<{ signature: string }>;
+  signAndSendTransaction: (
+    transaction: unknown,
+  ) => Promise<{ signature: string }>;
   publicKey?: { toString: () => string };
   isConnected: boolean;
   request: (options: unknown) => Promise<unknown>;

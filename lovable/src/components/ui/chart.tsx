@@ -111,8 +111,8 @@ const ChartTooltipContent = React.forwardRef<
     indicator?: "line" | "dot" | "dashed";
     nameKey?: string;
     labelKey?: string;
-  labelFormatter?: (...args: any[]) => string;
-  formatter?: (...args: any[]) => string;
+    labelFormatter?: (...args: any[]) => string;
+    formatter?: (...args: any[]) => string;
     color?: string;
     labelClassName?: string;
   }

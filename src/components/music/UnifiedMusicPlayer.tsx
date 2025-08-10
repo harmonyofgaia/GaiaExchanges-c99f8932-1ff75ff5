@@ -41,8 +41,6 @@ export function UnifiedMusicPlayer() {
 
   // --- Move playTrack and playNext above this useEffect ---
 
-
-
   useEffect(() => {
     const loadActiveMedia = () => {
       const activeMediaId = localStorage.getItem("activeBackgroundMedia");
