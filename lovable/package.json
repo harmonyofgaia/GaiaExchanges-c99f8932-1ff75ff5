@@ -7,10 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-  "lint": "eslint . --ext .js,.ts,.tsx",
-  "lint:fix": "eslint . --ext .js,.ts,.tsx --fix",
-  "lighthouse": "lighthouse http://localhost:5173 --output html --output-path ./lighthouse-report.html --chrome-flags=\"--headless\"",
-  "build:vercel": "vite build"
+    "lint": "eslint . --ext .js,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.ts,.tsx --fix",
+    "lighthouse": "lighthouse http://localhost:5173 --output html --output-path ./lighthouse-report.html --chrome-flags=\"--headless\"",
+    "build:vercel": "vite build"
   },
   "dependencies": {
     "@mendable/firecrawl-js": "^1.29.3",
@@ -63,11 +63,12 @@
     "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.9.0",
     "lighthouse": "^12.0.0",
-    "tailwindcss": "^3.4.3",
     "postcss": "^8.4.38",
-    "autoprefixer": "^10.4.21"
+    "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7",
+    "vite": "^5.0.0"
   }
 }
