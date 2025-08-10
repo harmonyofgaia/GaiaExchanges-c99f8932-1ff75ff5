@@ -11,7 +11,7 @@ export interface EarningActivity {
   pointsEarned: number;
   tokensEarned: number;
   verified?: boolean;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, string | number | boolean | null | undefined>;
 }
 
 export interface UserProfile {
@@ -77,7 +77,7 @@ export function useEarningActivities(userId: string) {
     }, 1000);
   };
 
-  const recordBeeHotel = async (data: any) => {
+  const recordBeeHotel = async (data: Record<string, string | number | boolean | null | undefined>) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),
       type: "bee_hotel",
@@ -94,24 +94,24 @@ export function useEarningActivities(userId: string) {
     return activity;
   };
 
-  const recordWaterSaving = async (data: any) => {
+  const recordWaterSaving = async (data: Record<string, string | number | boolean | null | undefined>) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),
       type: "water_saving",
       title: "Water Conservation",
-      amount: data.amount * 0.1,
+  amount: Number(data.amount) * 0.1,
       timestamp: new Date(),
       description: `Water saved: ${data.amount}L`,
       status: "completed",
-      pointsEarned: Math.floor(data.amount * 0.1),
-      tokensEarned: Math.floor(data.amount * 0.02),
+  pointsEarned: Math.floor(Number(data.amount) * 0.1),
+  tokensEarned: Math.floor(Number(data.amount) * 0.02),
       metadata: data,
     };
     addActivity(activity);
     return activity;
   };
 
-  const recordEnvironmentalEducation = async (data: any) => {
+  const recordEnvironmentalEducation = async (data: Record<string, string | number | boolean | null | undefined>) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),
       type: "environmental_education",
@@ -128,7 +128,7 @@ export function useEarningActivities(userId: string) {
     return activity;
   };
 
-  const recordHomeGrownFood = async (data: any) => {
+  const recordHomeGrownFood = async (data: Record<string, string | number | boolean | null | undefined>) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),
       type: "home_grown_food",
@@ -145,7 +145,7 @@ export function useEarningActivities(userId: string) {
     return activity;
   };
 
-  const processReferral = async (data: any) => {
+  const processReferral = async (data: Record<string, string | number | boolean | null | undefined>) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),
       type: "referral",
@@ -162,17 +162,17 @@ export function useEarningActivities(userId: string) {
     return activity;
   };
 
-  const recordSkillBasedWork = async (data: any) => {
+  const recordSkillBasedWork = async (data: Record<string, string | number | boolean | null | undefined>) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),
       type: "skill_based_work",
       title: "Skill-Based Work",
-      amount: data.hoursWorked * 10,
+  amount: Number(data.hoursWorked) * 10,
       timestamp: new Date(),
       description: `Skill-based work: ${data.skillType}`,
       status: "completed",
-      pointsEarned: data.hoursWorked * 10,
-      tokensEarned: data.hoursWorked * 2,
+  pointsEarned: Number(data.hoursWorked) * 10,
+  tokensEarned: Number(data.hoursWorked) * 2,
       metadata: data,
     };
     addActivity(activity);

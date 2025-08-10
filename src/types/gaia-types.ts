@@ -113,7 +113,7 @@ export interface EarningActivity {
     longitude: number;
     address: string;
   };
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export enum EarningActivityType {
