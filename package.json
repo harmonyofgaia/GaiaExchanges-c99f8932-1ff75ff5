@@ -4,7 +4,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-  "pre-deploy": "echo \"No pre-deploy steps required\"",
+    "pre-deploy": "echo \"No pre-deploy steps required\"",
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
@@ -12,7 +12,9 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.ts,.tsx --fix",
-    "lighthouse": "lighthouse http://localhost:5173 --output html --output-path ./lighthouse-report.html --chrome-flags=\"--headless\""
+    "lighthouse": "lighthouse http://localhost:5173 --output html --output-path ./lighthouse-report.html --chrome-flags=\"--headless\"",
+  "prepare": "husky install",
+  "test": "vitest run"
   },
   "dependencies": {
     "@mendable/firecrawl-js": "^1.29.3",
@@ -89,8 +91,10 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.15.0",
+    "husky": "^8.0.0",
     "jest": "^30.0.5",
     "lighthouse": "^12.0.0",
+    "lint-staged": "^16.1.5",
     "lovable-tagger": "^1.1.7",
     "postcss": "^8.5.6",
     "postcss-load-config": "^6.0.1",
