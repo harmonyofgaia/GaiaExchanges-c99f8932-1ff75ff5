@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -38,6 +38,11 @@ export function UnifiedMusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Initialize and check for background music
+
+  // --- Move playTrack and playNext above this useEffect ---
+
+
+
   useEffect(() => {
     const loadActiveMedia = () => {
       const activeMediaId = localStorage.getItem("activeBackgroundMedia");
@@ -63,7 +68,7 @@ export function UnifiedMusicPlayer() {
     loadActiveMedia();
 
     // Listen for admin updates
-    const handleMediaUpdate = (event: any) => {
+    const handleMediaUpdate = (event: CustomEvent) => {
       const { track, action } = event.detail || {};
 
       if (action === "play" && track) {
@@ -88,7 +93,7 @@ export function UnifiedMusicPlayer() {
       window.removeEventListener("backgroundMediaUpdated", loadActiveMedia);
       window.removeEventListener("admin-audio-update", handleMediaUpdate);
     };
-  }, []);
+  }, [playTrack]);
 
   // Audio event handlers
   useEffect(() => {
@@ -123,7 +128,7 @@ export function UnifiedMusicPlayer() {
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("pause", handlePause);
     };
-  }, [currentIndex, playlist]);
+  }, [currentIndex, playlist, playNext]);
 
   // Volume control
   useEffect(() => {
@@ -181,9 +186,9 @@ export function UnifiedMusicPlayer() {
     return () => {
       window.removeEventListener("beforeunload", saveState);
     };
-  }, [currentTrack]);
+  }, [currentTrack, isMuted, isPlaying, volume]);
 
-  const playTrack = async (track: Track) => {
+  const playTrack = useCallback(async (track: Track) => {
     if (!audioRef.current) return;
 
     try {
@@ -202,7 +207,7 @@ export function UnifiedMusicPlayer() {
       console.error("Failed to play track:", error);
       toast.error("Failed to play audio file");
     }
-  };
+  }, []);
 
   const togglePlay = async () => {
     if (!audioRef.current || !currentTrack) return;
@@ -229,12 +234,12 @@ export function UnifiedMusicPlayer() {
     });
   };
 
-  const playNext = () => {
+  const playNext = useCallback(() => {
     if (playlist.length === 0) return;
     const nextIndex = (currentIndex + 1) % playlist.length;
     setCurrentIndex(nextIndex);
     playTrack(playlist[nextIndex]);
-  };
+  }, [playlist, currentIndex, playTrack]);
 
   const playPrevious = () => {
     if (playlist.length === 0) return;
