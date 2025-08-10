@@ -24,7 +24,6 @@ interface Track {
   url?: string;
 }
 
-
 export function UnifiedMusicPlayer() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -39,8 +38,6 @@ export function UnifiedMusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // --- Move playTrack and playNext above all useEffect hooks that reference them ---
-
-
 
   // --- Move useEffect hooks below playTrack and playNext declarations ---
 
