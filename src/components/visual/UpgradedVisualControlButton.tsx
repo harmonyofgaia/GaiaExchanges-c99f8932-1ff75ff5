@@ -72,7 +72,7 @@ import {
   Gauge,
   HardDrive,
   Hexagon,
-  Infinity as InfinityIcon,
+  Infinity,
   Laptop,
   Lightbulb,
   Wand as Magic,
@@ -612,7 +612,7 @@ export function UpgradedVisualControlButton() {
                   Performance Monitor
                 </DropdownMenuItem>
                 <DropdownMenuItem disabled={isLocked}>
-                  <InfinityIcon className="h-4 w-4 mr-2" />
+                  <Infinity className="h-4 w-4 mr-2" />
                   Infinite Scroll Effects
                 </DropdownMenuItem>
               </DropdownMenuSubContent>

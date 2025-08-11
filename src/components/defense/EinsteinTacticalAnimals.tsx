@@ -135,11 +135,11 @@ export function EinsteinTacticalAnimals() {
           threatsNeutralized:
             animal.threatsNeutralized + Math.floor(Math.random() * 10000),
           evolutionStage: Math.min(animal.evolutionStage + 0.1, 100),
-        })),
+        }))
       );
 
       setTotalQuantumPower(
-        animals.reduce((sum, animal) => sum + animal.quantumPower, 0),
+        animals.reduce((sum, animal) => sum + animal.quantumPower, 0)
       );
 
       if (Math.random() < 0.1) {
@@ -172,7 +172,7 @@ export function EinsteinTacticalAnimals() {
         status: "omniscient" as const,
         intelligenceLevel: animal.intelligenceLevel * 2,
         quantumPower: animal.quantumPower * 3,
-      })),
+      }))
     );
 
     toast.success("🧠 MAXIMUM INTELLIGENCE ACTIVATED!", {
@@ -214,10 +214,10 @@ export function EinsteinTacticalAnimals() {
                       animal.status === "omniscient"
                         ? "bg-gold-600"
                         : animal.status === "transcending"
-                          ? "bg-purple-600"
-                          : animal.status === "reality-bending"
-                            ? "bg-red-600"
-                            : "bg-blue-600"
+                        ? "bg-purple-600"
+                        : animal.status === "reality-bending"
+                        ? "bg-red-600"
+                        : "bg-blue-600"
                     } text-xs`}
                   >
                     {animal.status.toUpperCase()}
@@ -305,10 +305,7 @@ export function EinsteinTacticalAnimals() {
           >
             🌌 DIMENSIONAL SCAN
           </Button>
-          <Button
-            variant="outline"
-            className="border-indigo-500 text-indigo-400"
-          >
+          <Button variant="outline" className="border-indigo-500 text-indigo-400">
             ⚡ QUANTUM EVOLUTION
           </Button>
         </div>

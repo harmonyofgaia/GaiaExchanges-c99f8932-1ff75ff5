@@ -92,7 +92,7 @@ interface BlockchainMetrics {
   uptime: number;
   volume: number;
   users: number;
-  trades: number;
+	trades: number;
 }
 
 interface MarketData {
@@ -105,9 +105,9 @@ interface MarketData {
 
 export default function Exchange() {
   const interfaceOptions = [
-    { id: "unified", icon: "🌿", name: "Unified Hub", color: "emerald" },
-    { id: "analytics", icon: "📊", name: "Analytics", color: "yellow" },
-    { id: "blockchain", icon: "⛓️", name: "Blockchain", color: "green" },
+    { id: 'unified', icon: '🌿', name: 'Unified Hub', color: 'emerald' },
+    { id: 'analytics', icon: '📊', name: 'Analytics', color: 'yellow' },
+    { id: 'blockchain', icon: '⛓️', name: 'Blockchain', color: 'green' }
   ];
   const [metrics, setMetrics] = useState<BlockchainMetrics>({
     health: 98.7,
@@ -117,7 +117,7 @@ export default function Exchange() {
     uptime: 99.99,
     volume: 1000000,
     users: 50000,
-    trades: 100000,
+    trades: 100000
   });
 
   return (

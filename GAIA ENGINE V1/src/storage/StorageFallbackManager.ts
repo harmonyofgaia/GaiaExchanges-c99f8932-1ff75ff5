@@ -1,13 +1,13 @@
 // StorageFallbackManager
 // Handles seamless fallback between external, local, and cloud storage for GAIA Engine
 
-import { StorageSystem, StorageConfig } from "../storageSystem";
+import { StorageSystem, StorageConfig } from '../storageSystem';
 
 export class StorageFallbackManager {
   private storages: StorageSystem[] = [];
 
   constructor(configs: StorageConfig[]) {
-    this.storages = configs.map((cfg) => new StorageSystem(cfg));
+    this.storages = configs.map(cfg => new StorageSystem(cfg));
   }
 
   async save(key: string, data: unknown): Promise<void> {
@@ -19,7 +19,7 @@ export class StorageFallbackManager {
         // Try next storage
       }
     }
-    throw new Error("All storage backends failed.");
+    throw new Error('All storage backends failed.');
   }
 
   async load(key: string): Promise<unknown> {

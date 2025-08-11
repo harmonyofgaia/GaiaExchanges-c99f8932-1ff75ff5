@@ -10,7 +10,7 @@ interface Transaction {
   currency: string;
   status: string | null;
   external_reference: string | null;
-  metadata: Record<string, string | number | boolean | null | undefined>;
+  metadata: any;
   created_at: string;
   updated_at: string | null;
 }

@@ -80,7 +80,7 @@ export default function AnimalWelfare() {
           </TabsContent>
 
           <TabsContent value="database" className="space-y-6">
-            <RealAnimalDatabase />
+          <RealAnimalDatabase />
           </TabsContent>
 
           <TabsContent value="cameras" className="space-y-6">

@@ -3,14 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import {
-  ShoppingCart,
-  Leaf,
-  Users,
-  MapPin,
-  Calendar,
-  Gift,
-} from "lucide-react";
+import { ShoppingCart, Leaf, Users, MapPin, Calendar, Gift } from "lucide-react";
 
 interface FoodPackage {
   id: string;
@@ -82,12 +75,7 @@ export function FoodPackageSystem() {
       ],
       nutritionalValue: 98,
       environmentalImpact: "regenerative",
-      deliveryPartners: [
-        "Sprouts",
-        "Trader Joe's",
-        "Fresh Market",
-        "Local Farms",
-      ],
+      deliveryPartners: ["Sprouts", "Trader Joe's", "Fresh Market", "Local Farms"],
       value: 120,
       availability: "preparing",
     },
@@ -113,10 +101,8 @@ export function FoodPackageSystem() {
       setCommunityStats((prev) => ({
         ...prev,
         totalMembers: prev.totalMembers + Math.floor(Math.random() * 50),
-        activeRecipients:
-          prev.activeRecipients + Math.floor(Math.random() * 20),
-        packagesDelivered:
-          prev.packagesDelivered + Math.floor(Math.random() * 100),
+        activeRecipients: prev.activeRecipients + Math.floor(Math.random() * 20),
+        packagesDelivered: prev.packagesDelivered + Math.floor(Math.random() * 100),
         carbonOffset: prev.carbonOffset + Math.floor(Math.random() * 10),
       }));
 
@@ -144,8 +130,7 @@ export function FoodPackageSystem() {
 
   const claimWeeklyPackage = () => {
     toast.success("📦 Weekly Package Claimed!", {
-      description:
-        "Your Eco Premium Package will be ready for pickup in 24 hours",
+      description: "Your Eco Premium Package will be ready for pickup in 24 hours",
       duration: 5000,
     });
 
@@ -159,8 +144,7 @@ export function FoodPackageSystem() {
 
   const inviteFriends = () => {
     toast.success("👥 Invitation Sent!", {
-      description:
-        "Share the abundance! Each friend you invite gets a starter package",
+      description: "Share the abundance! Each friend you invite gets a starter package",
       duration: 4000,
     });
   };
@@ -174,8 +158,7 @@ export function FoodPackageSystem() {
             🍎 GAIA COMMUNITY FOOD ABUNDANCE PROGRAM
           </CardTitle>
           <p className="text-center text-xl text-green-300">
-            Free Weekly Food Packages • Sustainable Living • Community Support •
-            Environmental Impact
+            Free Weekly Food Packages • Sustainable Living • Community Support • Environmental Impact
           </p>
         </CardHeader>
       </Card>
@@ -187,9 +170,7 @@ export function FoodPackageSystem() {
             <div className="text-2xl font-bold text-green-400">
               {communityStats.totalMembers.toLocaleString()}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Community Members
-            </div>
+            <div className="text-sm text-muted-foreground">Community Members</div>
           </CardContent>
         </Card>
         <Card className="border-blue-400/30 bg-blue-900/20">
@@ -197,9 +178,7 @@ export function FoodPackageSystem() {
             <div className="text-2xl font-bold text-blue-400">
               {communityStats.activeRecipients.toLocaleString()}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Active Recipients
-            </div>
+            <div className="text-sm text-muted-foreground">Active Recipients</div>
           </CardContent>
         </Card>
         <Card className="border-purple-400/30 bg-purple-900/20">
@@ -207,9 +186,7 @@ export function FoodPackageSystem() {
             <div className="text-2xl font-bold text-purple-400">
               {communityStats.packagesDelivered.toLocaleString()}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Packages Delivered
-            </div>
+            <div className="text-sm text-muted-foreground">Packages Delivered</div>
           </CardContent>
         </Card>
         <Card className="border-orange-400/30 bg-orange-900/20">
@@ -244,9 +221,7 @@ export function FoodPackageSystem() {
               <div className="text-xl font-bold text-green-400">
                 {userRewards.currentStreak} weeks
               </div>
-              <div className="text-xs text-muted-foreground">
-                Current Streak
-              </div>
+              <div className="text-xs text-muted-foreground">Current Streak</div>
             </div>
             <div className="text-center p-3 bg-blue-900/30 rounded-lg">
               <div className="text-xl font-bold text-blue-400">
@@ -258,17 +233,13 @@ export function FoodPackageSystem() {
               <div className="text-xl font-bold text-purple-400">
                 {userRewards.loyaltyPoints.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Loyalty Points
-              </div>
+              <div className="text-xs text-muted-foreground">Loyalty Points</div>
             </div>
             <div className="text-center p-3 bg-orange-900/30 rounded-lg">
               <div className="text-xl font-bold text-orange-400">
                 {userRewards.specialOffers}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Special Offers
-              </div>
+              <div className="text-xs text-muted-foreground">Special Offers</div>
             </div>
           </div>
         </CardContent>
@@ -289,8 +260,8 @@ export function FoodPackageSystem() {
                     pkg.environmentalImpact === "carbon-negative"
                       ? "bg-green-600"
                       : pkg.environmentalImpact === "regenerative"
-                        ? "bg-emerald-600"
-                        : "bg-blue-600"
+                      ? "bg-emerald-600"
+                      : "bg-blue-600"
                   }`}
                 >
                   {pkg.environmentalImpact}
@@ -300,8 +271,8 @@ export function FoodPackageSystem() {
                     pkg.availability === "available"
                       ? "bg-green-600"
                       : pkg.availability === "preparing"
-                        ? "bg-orange-600"
-                        : "bg-gray-600"
+                      ? "bg-orange-600"
+                      : "bg-gray-600"
                   }`}
                 >
                   {pkg.availability}
@@ -310,15 +281,10 @@ export function FoodPackageSystem() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <div className="text-sm font-semibold text-green-400 mb-2">
-                  Package Contents:
-                </div>
+                <div className="text-sm font-semibold text-green-400 mb-2">Package Contents:</div>
                 <div className="space-y-1">
                   {pkg.contents.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="text-sm text-muted-foreground flex items-center gap-2"
-                    >
+                    <div key={idx} className="text-sm text-muted-foreground flex items-center gap-2">
                       <Leaf className="h-3 w-3 text-green-400" />
                       {item}
                     </div>
@@ -328,25 +294,17 @@ export function FoodPackageSystem() {
 
               <div className="flex justify-between items-center">
                 <div className="text-center">
-                  <div className="text-lg font-bold text-green-400">
-                    ${pkg.value}
-                  </div>
+                  <div className="text-lg font-bold text-green-400">${pkg.value}</div>
                   <div className="text-xs text-muted-foreground">Value</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-lg font-bold text-emerald-400">
-                    {pkg.nutritionalValue}%
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Nutrition Score
-                  </div>
+                  <div className="text-lg font-bold text-emerald-400">{pkg.nutritionalValue}%</div>
+                  <div className="text-xs text-muted-foreground">Nutrition Score</div>
                 </div>
               </div>
 
               <div>
-                <div className="text-sm font-semibold text-blue-400 mb-2">
-                  Available at:
-                </div>
+                <div className="text-sm font-semibold text-blue-400 mb-2">Available at:</div>
                 <div className="flex flex-wrap gap-1">
                   {pkg.deliveryPartners.map((partner, idx) => (
                     <Badge
@@ -394,9 +352,7 @@ export function FoodPackageSystem() {
       {/* How It Works */}
       <Card className="border-blue-500/50 bg-gradient-to-r from-blue-900/30 to-cyan-900/30">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            🎯 How the Food Abundance Program Works
-          </CardTitle>
+          <CardTitle className="text-blue-400">🎯 How the Food Abundance Program Works</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -411,24 +367,19 @@ export function FoodPackageSystem() {
               <div className="text-3xl mb-2">2️⃣</div>
               <div className="font-semibold text-green-300">Participate</div>
               <div className="text-sm text-muted-foreground">
-                Trade, play games, help the environment - all activities earn
-                rewards
+                Trade, play games, help the environment - all activities earn rewards
               </div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
               <div className="text-3xl mb-2">3️⃣</div>
-              <div className="font-semibold text-purple-300">
-                Choose Package
-              </div>
+              <div className="font-semibold text-purple-300">Choose Package</div>
               <div className="text-sm text-muted-foreground">
                 Select your preferred food package based on dietary needs
               </div>
             </div>
             <div className="text-center p-4 bg-orange-900/30 rounded-lg">
               <div className="text-3xl mb-2">4️⃣</div>
-              <div className="font-semibold text-orange-300">
-                Collect Weekly
-              </div>
+              <div className="font-semibold text-orange-300">Collect Weekly</div>
               <div className="text-sm text-muted-foreground">
                 Pick up your free package at any partner store location
               </div>

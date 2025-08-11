@@ -5,7 +5,7 @@ interface TokenMechanism {
   type: "burn" | "mint" | "stake" | "governance" | "liquidity";
   name: string;
   isActive: boolean;
-  parameters: Record<string, string | number | boolean | undefined>;
+  parameters: Record<string, any>;
   performance: {
     efficiency: number;
     impact: number;
@@ -136,19 +136,19 @@ class TokenWarfareService {
     let impact = "";
 
     switch (strategy) {
-      case "conservative": {
+      case "conservative":
         burnAmount = Math.floor(this.totalSupply * 0.005); // 0.5%
         burnReason = "Conservative deflationary pressure";
         impact = "Gradual value increase";
         break;
-      }
-      case "aggressive": {
+
+      case "aggressive":
         burnAmount = Math.floor(this.totalSupply * 0.03); // 3%
         burnReason = "Aggressive scarcity creation";
         impact = "Significant value boost";
         break;
-      }
-      case "adaptive": {
+
+      case "adaptive":
         const marketPressure = Math.random();
         burnAmount = Math.floor(
           this.totalSupply * (0.005 + marketPressure * 0.02),
@@ -156,7 +156,6 @@ class TokenWarfareService {
         burnReason = "AI-driven adaptive burning";
         impact = "Optimized market response";
         break;
-      }
     }
 
     this.burnedTokens += burnAmount;
