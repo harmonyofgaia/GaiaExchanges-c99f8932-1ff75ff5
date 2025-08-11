@@ -520,7 +520,7 @@ export default function NFTCardGame() {
                   <Button
                     variant="ghost"
                     onClick={() => setSelectedCard(null)}
-                    className="text-white hover:bg-white/10"
+                    className="text-white bg-white-10"
                   >
                     ×
                   </Button>

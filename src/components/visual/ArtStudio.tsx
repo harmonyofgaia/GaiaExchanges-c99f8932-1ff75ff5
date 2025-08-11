@@ -332,7 +332,7 @@ export function ArtStudio() {
           {/* Canvas */}
           <div className="flex justify-center">
             <div className="border-2 border-dashed border-muted-foreground/30 rounded-lg overflow-hidden">
-              <canvas ref={canvasRef} className="bg-white cursor-crosshair" />
+              <canvas ref={canvasRef} className="cursor-crosshair bg-staticwhite" />
             </div>
           </div>
 

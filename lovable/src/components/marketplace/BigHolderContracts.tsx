@@ -183,7 +183,7 @@ export function BigHolderContracts() {
             </CardTitle>
           </CardHeader>
           <CardContent className="text-center space-y-4">
-            <div className="inline-block p-4 bg-white rounded-lg">
+            <div className="inline-block p-4 rounded-lg bg-staticwhite">
               <img
                 src={generateQRCode()}
                 alt="QR Code for verification"

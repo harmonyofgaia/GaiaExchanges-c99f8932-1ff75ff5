@@ -111,7 +111,7 @@ export function InteractiveVideoPlayer() {
             {/* Video Controls Overlay */}
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
               {/* Progress Bar */}
-              <div className="w-full bg-white/20 h-1 rounded-full mb-3 cursor-pointer">
+              <div className="w-full bg-white-20 h-1 rounded-full mb-3 cursor-pointer">
                 <div
                   className="bg-green-400 h-full rounded-full"
                   style={{ width: `${(currentTime / duration) * 100}%` }}
@@ -125,7 +125,7 @@ export function InteractiveVideoPlayer() {
                     size="sm"
                     variant="ghost"
                     onClick={handlePlayPause}
-                    className="text-white hover:bg-white/20"
+                    className="text-white bg-white-20"
                   >
                     {isPlaying ? (
                       <Pause className="h-5 w-5" />
@@ -136,10 +136,10 @@ export function InteractiveVideoPlayer() {
 
                   <div className="flex items-center gap-2">
                     <Volume2 className="h-4 w-4 text-white" />
-                    <div className="w-20 h-1 bg-white/20 rounded-full">
+                    <div className="w-20 h-1 bg-white-20 rounded-full">
                       <div
-                        className="bg-white h-full rounded-full"
-                        style={{ width: `${volume}%` }}
+                        className={`h-full rounded-full bg-staticwhite video-volume-bar`}
+                        data-bar-width={volume}
                       />
                     </div>
                   </div>
@@ -153,14 +153,14 @@ export function InteractiveVideoPlayer() {
                   <Button
                     size="sm"
                     variant="ghost"
-                    className="text-white hover:bg-white/20"
+                    className="text-white bg-white-20"
                   >
                     <Settings className="h-4 w-4" />
                   </Button>
                   <Button
                     size="sm"
                     variant="ghost"
-                    className="text-white hover:bg-white/20"
+                    className="text-white bg-white-20"
                   >
                     <Maximize className="h-4 w-4" />
                   </Button>

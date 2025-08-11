@@ -194,7 +194,7 @@ export default function DAOGovernance() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 space-y-6">
+  <div className="container mx-auto px-4 py-6 space-y-6 bg-staticwhite">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-green-400">
           🏛️ DAO GOVERNANCE
@@ -326,7 +326,7 @@ export default function DAOGovernance() {
               <div>
                 <label className="text-sm font-medium mb-2 block">Type</label>
                 <select
-                  className="w-full p-2 border rounded-md bg-background"
+                  className="w-full p-2 border rounded-md bg-staticwhite"
                   value={newProposal.type}
                   onChange={(e) =>
                     setNewProposal((prev) => ({

@@ -92,9 +92,9 @@ export function GameIntroMovie({ onComplete, onSkip }: GameIntroMovieProps) {
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse top-1/4 left-1/4"></div>
-          <div className="absolute w-64 h-64 bg-white/5 rounded-full blur-2xl animate-pulse bottom-1/4 right-1/4"></div>
-          <div className="absolute w-48 h-48 bg-white/15 rounded-full blur-xl animate-pulse top-3/4 left-3/4"></div>
+          <div className="absolute w-96 h-96 rounded-full blur-3xl animate-pulse top-1/4 left-1/4 bg-white-10"></div>
+          <div className="absolute w-64 h-64 rounded-full blur-2xl animate-pulse bottom-1/4 right-1/4 bg-white-5"></div>
+          <div className="absolute w-48 h-48 rounded-full blur-xl animate-pulse top-3/4 left-3/4 bg-white-15"></div>
         </div>
 
         {/* Floating Particles */}

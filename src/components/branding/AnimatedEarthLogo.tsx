@@ -13,9 +13,9 @@ export function AnimatedEarthLogo() {
         <div className="absolute bottom-1 right-2 w-1.5 h-1 bg-green-700 rounded-sm opacity-80" />
 
         {/* Clouds */}
-        <div className="absolute top-0.5 left-2 w-3 h-1 bg-white/30 rounded-full animate-pulse" />
+        <div className="absolute top-0.5 left-2 w-3 h-1 bg-white-20 rounded-full animate-pulse" />
         <div
-          className="absolute bottom-0.5 right-1 w-2 h-0.5 bg-white/40 rounded-full animate-pulse"
+          className="absolute bottom-0.5 right-1 w-2 h-0.5 bg-white-10 rounded-full animate-pulse"
           style={{ animationDelay: "1s" }}
         />
 

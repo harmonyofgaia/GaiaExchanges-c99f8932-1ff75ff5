@@ -459,7 +459,7 @@ export function VirtualWorldCanvas({
                     <span className="text-xs text-center">
                       {landscape.name}
                     </span>
-                    <Badge className="bg-white/20 text-white text-xs">
+                    <Badge className="text-white text-xs bg-white-20">
                       Power: {landscape.power}
                     </Badge>
                   </div>

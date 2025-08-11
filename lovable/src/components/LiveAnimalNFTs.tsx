@@ -505,7 +505,7 @@ export function LiveAnimalNFTs() {
                     {nft.liveFeed && (
                       <div className="absolute top-1 right-1">
                         <div className="flex items-center gap-1 bg-red-600 text-white px-1 py-0.5 rounded text-xs">
-                          <div className="w-1 h-1 bg-white rounded-full animate-pulse" />
+                          <div className="w-1 h-1 rounded-full animate-pulse bg-staticwhite" />
                           LIVE
                         </div>
                       </div>

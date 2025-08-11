@@ -317,12 +317,12 @@ export function FullVisualControlPanel({
   return (
     <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
       <div
-        className={`bg-background/98 backdrop-blur-md border border-primary/30 rounded-xl shadow-2xl overflow-hidden transition-all duration-300 ${
+  className={`backdrop-blur-md border border-gray-300 rounded-xl shadow-2xl overflow-hidden transition-all duration-300 bg-[#fff] ${
           isMaximized ? "w-full h-full" : "max-w-7xl w-full max-h-[95vh]"
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-primary/20 bg-gradient-to-r from-purple-900/30 to-indigo-900/30">
+  <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-purple-900/30 to-indigo-900/30">
           <div className="flex items-center gap-3">
             <Wand2 className="h-8 w-8 text-purple-400" />
             <div>

@@ -92,9 +92,9 @@ export function GameIntroMovie({ onComplete, onSkip }: GameIntroMovieProps) {
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse top-1/4 left-1/4"></div>
-          <div className="absolute w-64 h-64 bg-white/5 rounded-full blur-2xl animate-pulse bottom-1/4 right-1/4"></div>
-          <div className="absolute w-48 h-48 bg-white/15 rounded-full blur-xl animate-pulse top-3/4 left-3/4"></div>
+          <div className="absolute w-96 h-96 bg-white-10 rounded-full blur-3xl animate-pulse top-1/4 left-1/4"></div>
+          <div className="absolute w-64 h-64 bg-white-5 rounded-full blur-2xl animate-pulse bottom-1/4 right-1/4"></div>
+          <div className="absolute w-48 h-48 bg-white-15 rounded-full blur-xl animate-pulse top-3/4 left-3/4"></div>
         </div>
 
         {/* Floating Particles */}
@@ -102,7 +102,7 @@ export function GameIntroMovie({ onComplete, onSkip }: GameIntroMovieProps) {
           {[...Array(20)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-2 h-2 bg-white/30 rounded-full animate-bounce"
+              className="absolute w-2 h-2 bg-white-20 rounded-full animate-bounce"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -147,7 +147,7 @@ export function GameIntroMovie({ onComplete, onSkip }: GameIntroMovieProps) {
               key={index}
               className={`
                 w-3 h-3 rounded-full transition-all duration-500
-                ${index === currentScene ? "bg-white scale-125" : "bg-white/30"}
+                ${index === currentScene ? "bg-staticwhite scale-125" : "bg-white-20"}
               `}
             />
           ))}

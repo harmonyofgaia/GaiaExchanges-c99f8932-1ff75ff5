@@ -38,33 +38,8 @@ export default function MobileDashboard() {
       time: "3h ago",
     },
   ]);
-
-  const quickActions = [
-    {
-      id: "check-in",
-      label: "✅ Daily Check-in",
-      color: "bg-green-600",
-      action: () => handleDailyCheckIn(),
-    },
-    {
-      id: "scan-receipt",
-      label: "🧾 Scan Receipt",
-      color: "bg-blue-600",
-      action: () => handleScanReceipt(),
-    },
-    {
-      id: "plant-tree",
-      label: "🌱 Plant Tree",
-      color: "bg-emerald-600",
-      action: () => handlePlantTree(),
-    },
-    {
-      id: "share-impact",
-      label: "📤 Share Impact",
-      color: "bg-purple-600",
-      action: () => handleShareImpact(),
-    },
-  ];
+  return (
+    <div style={{ minHeight: '100vh', background: '#fff', color: '#000' }}>
 
   const stats = {
     totalTokens: 2847,
@@ -104,9 +79,9 @@ export default function MobileDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+  <div style={{ minHeight: '100vh', background: '#fff' }}>
       {/* Mobile Header */}
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b">
+  <div style={{ position: 'sticky', top: 0, zIndex: 50, background: '#fff', borderBottom: '1px solid #eee' }}>
         <div className="flex items-center justify-between p-4">
           <Button
             variant="ghost"
@@ -138,7 +113,7 @@ export default function MobileDashboard() {
             className="fixed inset-0 bg-black/50"
             onClick={() => setSidebarOpen(false)}
           />
-          <div className="fixed left-0 top-0 h-full w-64 bg-background border-r p-4 space-y-4">
+          <div style={{ position: 'fixed', left: 0, top: 0, height: '100%', width: '16rem', background: '#fff', borderRight: '1px solid #eee', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div className="flex items-center justify-between mb-6">
               <h2 className="font-bold">Navigation</h2>
               <Button
@@ -317,7 +292,7 @@ export default function MobileDashboard() {
       </div>
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-t">
+  <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, background: '#f3f4f6', borderTop: '1px solid #eee', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.25rem', padding: '0.5rem' }}>
         <div className="grid grid-cols-5 gap-1 p-2">
           {[
             { icon: Activity, label: "Home", active: true },

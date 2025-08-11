@@ -125,7 +125,7 @@ export function LiveArtistShow() {
                       onClick={handlePlayPause}
                       variant="ghost"
                       size="sm"
-                      className="text-white hover:bg-white/20"
+                      className="text-white bg-white-20"
                     >
                       {isPlaying ? (
                         <Pause className="h-5 w-5" />
@@ -139,7 +139,7 @@ export function LiveArtistShow() {
                         onClick={toggleMute}
                         variant="ghost"
                         size="sm"
-                        className="text-white hover:bg-white/20"
+                        className="text-white bg-white-20"
                       >
                         {isMuted ? (
                           <VolumeX className="h-4 w-4" />
@@ -165,14 +165,14 @@ export function LiveArtistShow() {
                       onClick={toggleFullscreen}
                       variant="ghost"
                       size="sm"
-                      className="text-white hover:bg-white/20"
+                      className="text-white bg-white-20"
                     >
                       <Maximize className="h-4 w-4" />
                     </Button>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-white hover:bg-white/20"
+                      className="text-white bg-white-20"
                     >
                       <Settings className="h-4 w-4" />
                     </Button>

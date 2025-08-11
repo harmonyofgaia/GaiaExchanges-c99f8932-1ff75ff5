@@ -329,7 +329,7 @@ export function VideoStreamingPlatform() {
                     <Button
                       onClick={() => watchStream(stream)}
                       size="sm"
-                      className="bg-white/20 hover:bg-white/30"
+                      className="bg-white-20"
                     >
                       <Play className="h-4 w-4" />
                     </Button>

@@ -89,8 +89,8 @@ const navItems: NavItem[] = [
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4">
+  <nav className="sticky top-0 z-50 w-full border-b border-gray-300 backdrop-blur supports-[backdrop-filter]:bg-[#fff]/60 bg-[#fff]/95">
+  <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo - Enhanced for better visibility */}
           <Link
@@ -140,7 +140,7 @@ export function Navbar() {
                   <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
+              <DropdownMenuContent className="border-gray-300 backdrop-blur-sm bg-[#fff]/95">
                 {navItems.slice(10).map((item) => {
                   const Icon = item.icon;
                   return (
@@ -187,7 +187,7 @@ export function Navbar() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border/40 bg-background/95 backdrop-blur">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-300 backdrop-blur bg-[#fff]/95">
               {navItems.map((item) => {
                 const Icon = item.icon;
                 return (

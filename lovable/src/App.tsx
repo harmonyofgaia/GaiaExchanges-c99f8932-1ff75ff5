@@ -105,7 +105,7 @@ function App() {
   return (
     <ErrorBoundary>
       <Router>
-        <div className="min-h-screen bg-black text-foreground relative overflow-hidden" data-router="true">
+        <div className="min-h-screen bg-black text-black relative overflow-hidden" data-router="true">
           {/* Matrix background always visible */}
           <div className="fixed inset-0 z-0 pointer-events-none">
             <MatrixRainBackground intensity="medium" color="#00ff00" speed={1} />
@@ -117,7 +117,7 @@ function App() {
             <main className="flex-1">
               <Suspense
                 fallback={
-                  <div className="min-h-screen bg-background flex items-center justify-center">
+                  <div className="min-h-screen flex items-center justify-center bg-staticwhite">
                     <div className="text-center">
                       <div className="mb-4 flex justify-center">
                         <AnimatedEarthLogo />

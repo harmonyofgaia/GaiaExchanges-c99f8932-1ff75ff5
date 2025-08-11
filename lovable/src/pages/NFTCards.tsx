@@ -387,7 +387,7 @@ export default function NFTCards() {
                   <select
                     value={selectedRarity}
                     onChange={(e) => setSelectedRarity(e.target.value)}
-                    className="px-3 py-2 bg-background border border-border rounded-md"
+                    className="px-3 py-2 border border-gray-200 rounded-md nftcards-select-bg"
                   >
                     <option value="all">All Rarities</option>
                     <option value="common">Common</option>
@@ -400,7 +400,7 @@ export default function NFTCards() {
                   <select
                     value={selectedType}
                     onChange={(e) => setSelectedType(e.target.value)}
-                    className="px-3 py-2 bg-background border border-border rounded-md"
+                    className="px-3 py-2 border border-gray-200 rounded-md nftcards-select-bg"
                   >
                     <option value="all">All Types</option>
                     <option value="creature">Creature</option>

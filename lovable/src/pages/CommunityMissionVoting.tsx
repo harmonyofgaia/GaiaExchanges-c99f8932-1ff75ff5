@@ -415,7 +415,7 @@ export default function CommunityMissionVoting() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+  <div style={{ minHeight: '100vh', background: '#fff' }}>
       <Navbar />
       <div className="container mx-auto p-4 space-y-6">
         {/* Header */}
@@ -505,7 +505,7 @@ export default function CommunityMissionVoting() {
               {missions.map((mission) => (
                 <Card
                   key={mission.id}
-                  className="border-gray-500/20 bg-black/20"
+                  className="border border-gray-300 bg-gray-100"
                 >
                   <CardContent className="pt-6">
                     <div className="space-y-4">
