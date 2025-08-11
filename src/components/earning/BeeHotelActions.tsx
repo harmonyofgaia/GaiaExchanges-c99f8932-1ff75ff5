@@ -31,7 +31,7 @@ export function BeeHotelActions() {
         hotelType,
         location,
         size: "medium",
-        installDate: new Date().toISOString(),
+        installDate: new Date(),
         occupancyRate: 75,
         maintenanceDone: true,
         educationalContent: true,

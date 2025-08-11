@@ -39,12 +39,7 @@ export function useTransactions() {
         if (error) {
           console.error("Error fetching transactions:", error);
         } else {
-          setTransactions((data || []).map(item => ({
-            ...item,
-            metadata: typeof item.metadata === 'string' 
-              ? JSON.parse(item.metadata) 
-              : item.metadata || {}
-          })));
+          setTransactions(data || []);
         }
       } catch (error) {
         console.error("Error fetching transactions:", error);
