@@ -84,7 +84,10 @@ import { EnergyConsumptionTracker } from "@/components/earning/EnergyConsumption
 export default function EarningActivities() {
   const [activeTab, setActiveTab] = useState("globe");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedActivity, setSelectedActivity] = useState<{category: string, activityId: string} | null>(null);
+  const [selectedActivity, setSelectedActivity] = useState<{
+    category: string;
+    activityId: string;
+  } | null>(null);
 
   const [userStats] = useState({
     totalTokens: 4890,
@@ -439,14 +442,18 @@ export default function EarningActivities() {
 
   const getSelectedActivityComponent = () => {
     if (!selectedActivity) return null;
-    
-    const category = earningCategories.find(cat => cat.id === selectedActivity.category);
+
+    const category = earningCategories.find(
+      (cat) => cat.id === selectedActivity.category,
+    );
     if (!category) return null;
-    
-    const activityIndex = parseInt(selectedActivity.activityId.split('-')[1]);
+
+    const activityIndex = parseInt(selectedActivity.activityId.split("-")[1]);
     const activity = category.components[activityIndex];
-    
-    return activity ? <activity.component key={selectedActivity.activityId} /> : null;
+
+    return activity ? (
+      <activity.component key={selectedActivity.activityId} />
+    ) : null;
   };
 
   return (
@@ -554,10 +561,7 @@ export default function EarningActivities() {
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 mb-8 h-16 bg-black/20">
-            <TabsTrigger
-              value="globe"
-              className="text-base font-medium h-12"
-            >
+            <TabsTrigger value="globe" className="text-base font-medium h-12">
               🌍 Globe Menu
             </TabsTrigger>
             <TabsTrigger
@@ -590,11 +594,12 @@ export default function EarningActivities() {
                 🌍 Interactive Activity Globe
               </h2>
               <p className="text-lg text-muted-foreground">
-                Navigate through activities using our 3D matrix-style globe interface
+                Navigate through activities using our 3D matrix-style globe
+                interface
               </p>
             </div>
 
-            <InteractiveGlobeMenu 
+            <InteractiveGlobeMenu
               onActivitySelect={handleActivitySelect}
               categories={earningCategories}
             />
