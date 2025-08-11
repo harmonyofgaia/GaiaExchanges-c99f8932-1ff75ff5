@@ -25,36 +25,18 @@ interface Track {
 }
 
 export function UnifiedMusicPlayer() {
-  // --- Ensure playTrack and playNext are declared before any useEffect that references them ---
-  const playTrack = useCallback(async (track: Track) => {
-    if (!audioRef.current) return;
-
-    try {
-      const audioUrl = track.storage_path
-        ? `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`
-        : track.url;
-
-      if (audioUrl) {
-        audioRef.current.src = audioUrl;
-        await audioRef.current.play();
-        setIsPlaying(true);
-        setCurrentTrack(track);
-        toast.success(`🎵 Now playing: ${track.original_name || track.name}`);
-      }
-    } catch (error) {
-      console.error("Failed to play track:", error);
-      toast.error("Failed to play audio file");
-    }
-  }, []);
-
-  const playNext = useCallback(() => {
-    if (playlist.length === 0) return;
-    const nextIndex = (currentIndex + 1) % playlist.length;
-    setCurrentIndex(nextIndex);
-    playTrack(playlist[nextIndex]);
-  }, [playlist, currentIndex, playTrack]);
-
   const [isVisible, setIsVisible] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(0.7);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [playlist, setPlaylist] = useState<Track[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const playTrack = useCallback(
     async (track: Track) => {
@@ -77,7 +59,7 @@ export function UnifiedMusicPlayer() {
         toast.error("Failed to play audio file");
       }
     },
-    [audioRef, setIsPlaying, setCurrentTrack],
+    [],
   );
 
   const playNext = useCallback(() => {
@@ -234,27 +216,6 @@ export function UnifiedMusicPlayer() {
     };
   }, [currentTrack, isMuted, isPlaying, volume]);
 
-  const playTrack = useCallback(async (track: Track) => {
-    if (!audioRef.current) return;
-
-    try {
-      const audioUrl = track.storage_path
-        ? `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`
-        : track.url;
-
-      if (audioUrl) {
-        audioRef.current.src = audioUrl;
-        await audioRef.current.play();
-        setIsPlaying(true);
-        setCurrentTrack(track);
-        toast.success(`🎵 Now playing: ${track.original_name || track.name}`);
-      }
-    } catch (error) {
-      console.error("Failed to play track:", error);
-      toast.error("Failed to play audio file");
-    }
-  }, []);
-
   const togglePlay = async () => {
     if (!audioRef.current || !currentTrack) return;
 
@@ -279,13 +240,6 @@ export function UnifiedMusicPlayer() {
       duration: 1000,
     });
   };
-
-  const playNext = useCallback(() => {
-    if (playlist.length === 0) return;
-    const nextIndex = (currentIndex + 1) % playlist.length;
-    setCurrentIndex(nextIndex);
-    playTrack(playlist[nextIndex]);
-  }, [playlist, currentIndex, playTrack]);
 
   const playPrevious = () => {
     if (playlist.length === 0) return;
