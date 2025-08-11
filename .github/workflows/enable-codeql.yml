@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.repository.full_name }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Add CodeQL workflow
         run: |
