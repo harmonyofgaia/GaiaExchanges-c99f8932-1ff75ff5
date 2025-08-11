@@ -20,7 +20,7 @@ const config: Config = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border, 220 13% 91%))",
+  // border color is defined above, do not duplicate
         input: "#e5e7eb",
         ring: "#22c55e",
         background: "#ffffff",
@@ -52,6 +52,9 @@ const config: Config = {
         card: {
           DEFAULT: "#ffffff",
           foreground: "#09090b",
+        },
+        border: {
+          DEFAULT: "#e5e7eb", // fallback for border color
         },
       },
       borderRadius: {
