@@ -1,36 +1,56 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Badge } from '@/components/ui/badge'
-import { Upload, Video, Play, Eye, Clock, Coins } from 'lucide-react'
-import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { Upload, Video, Play, Eye, Clock, Coins } from "lucide-react";
+import { useState } from "react";
 
 export default function VideoUpload() {
-  const [uploadProgress, setUploadProgress] = useState(0)
-  const [isUploading, setIsUploading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
 
   const recentVideos = [
-    { id: 1, title: "Ocean Cleanup Initiative", views: 1247, duration: "5:32", tokens: 125, status: "approved" },
-    { id: 2, title: "Forest Conservation Tips", views: 856, duration: "3:45", tokens: 89, status: "pending" },
-    { id: 3, title: "Renewable Energy Tutorial", views: 2103, duration: "8:21", tokens: 210, status: "approved" }
-  ]
+    {
+      id: 1,
+      title: "Ocean Cleanup Initiative",
+      views: 1247,
+      duration: "5:32",
+      tokens: 125,
+      status: "approved",
+    },
+    {
+      id: 2,
+      title: "Forest Conservation Tips",
+      views: 856,
+      duration: "3:45",
+      tokens: 89,
+      status: "pending",
+    },
+    {
+      id: 3,
+      title: "Renewable Energy Tutorial",
+      views: 2103,
+      duration: "8:21",
+      tokens: 210,
+      status: "approved",
+    },
+  ];
 
   const handleUpload = () => {
-    setIsUploading(true)
+    setIsUploading(true);
     const interval = setInterval(() => {
-      setUploadProgress(prev => {
+      setUploadProgress((prev) => {
         if (prev >= 100) {
-          clearInterval(interval)
-          setIsUploading(false)
-          return 100
+          clearInterval(interval);
+          setIsUploading(false);
+          return 100;
         }
-        return prev + 10
-      })
-    }, 200)
-  }
+        return prev + 10;
+      });
+    }, 200);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900/10 via-purple-900/10 to-green-900/10 p-6">
@@ -59,20 +79,27 @@ export default function VideoUpload() {
                 <Label htmlFor="video-file">Video File</Label>
                 <Input id="video-file" type="file" accept="video/*" />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="title">Video Title</Label>
                 <Input id="title" placeholder="Enter video title..." />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
-                <Textarea id="description" placeholder="Describe your eco-friendly content..." rows={4} />
+                <Textarea
+                  id="description"
+                  placeholder="Describe your eco-friendly content..."
+                  rows={4}
+                />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="tags">Tags</Label>
-                <Input id="tags" placeholder="eco, environment, green, sustainable..." />
+                <Input
+                  id="tags"
+                  placeholder="eco, environment, green, sustainable..."
+                />
               </div>
 
               {isUploading && (
@@ -82,7 +109,7 @@ export default function VideoUpload() {
                     <span>{uploadProgress}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
+                    <div
                       className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                       style={{ width: `${uploadProgress}%` }}
                     ></div>
@@ -90,17 +117,19 @@ export default function VideoUpload() {
                 </div>
               )}
 
-              <Button 
+              <Button
                 onClick={handleUpload}
                 disabled={isUploading}
                 className="w-full bg-blue-600 hover:bg-blue-700"
               >
                 <Upload className="h-4 w-4 mr-2" />
-                {isUploading ? 'Uploading...' : 'Upload Video'}
+                {isUploading ? "Uploading..." : "Upload Video"}
               </Button>
 
               <div className="p-4 bg-green-900/20 border border-green-500/20 rounded-lg">
-                <h4 className="font-bold text-green-400 mb-2">Earning Potential</h4>
+                <h4 className="font-bold text-green-400 mb-2">
+                  Earning Potential
+                </h4>
                 <div className="text-sm text-muted-foreground space-y-1">
                   <div>• Base reward: 50 GAIA tokens</div>
                   <div>• Duration bonus: +1 token per 10 seconds</div>
@@ -126,11 +155,17 @@ export default function VideoUpload() {
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between mb-2">
                         <h4 className="font-medium">{video.title}</h4>
-                        <Badge variant={video.status === 'approved' ? 'default' : 'secondary'}>
+                        <Badge
+                          variant={
+                            video.status === "approved"
+                              ? "default"
+                              : "secondary"
+                          }
+                        >
                           {video.status}
                         </Badge>
                       </div>
-                      
+
                       <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                         <div className="flex items-center gap-1">
                           <Eye className="h-4 w-4" />
@@ -145,7 +180,7 @@ export default function VideoUpload() {
                           {video.tokens} GAIA
                         </div>
                       </div>
-                      
+
                       <div className="flex gap-2">
                         <Button size="sm" variant="outline">
                           <Play className="h-4 w-4 mr-1" />
@@ -169,7 +204,9 @@ export default function VideoUpload() {
             <CardContent className="p-4 text-center">
               <Video className="h-8 w-8 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">247</div>
-              <div className="text-sm text-muted-foreground">Videos Uploaded</div>
+              <div className="text-sm text-muted-foreground">
+                Videos Uploaded
+              </div>
             </CardContent>
           </Card>
           <Card className="border-blue-500/30 bg-blue-900/10">
@@ -196,5 +233,5 @@ export default function VideoUpload() {
         </div>
       </div>
     </div>
-  )
+  );
 }

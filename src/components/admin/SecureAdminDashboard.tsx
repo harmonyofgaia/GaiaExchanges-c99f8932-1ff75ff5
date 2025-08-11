@@ -1,63 +1,82 @@
-
-import { useState, useEffect, lazy, Suspense } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Shield, Lock, Eye, AlertTriangle, Zap, Crown, Activity, Globe, Users, TrendingUp, Gavel, Skull, Server } from 'lucide-react'
-import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
-import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
-import { EnhancedBackgroundManager } from '@/components/backgrounds/EnhancedBackgroundManager'
-import { AdminDashboardTabs } from './AdminDashboardTabs'
+import { IAEngine } from "./IAEngine";
+import { DailyEngineAutomation } from "./DailyEngineAutomation";
+import { GaiaBlockchainNetwork } from "./GaiaBlockchainNetwork";
+import { MarketingCampaignManager } from "./MarketingCampaignManager";
+import { useState, useEffect, lazy, Suspense } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Shield,
+  Lock,
+  Eye,
+  AlertTriangle,
+  Zap,
+  Crown,
+  Activity,
+  Globe,
+  Users,
+  TrendingUp,
+  Gavel,
+  Skull,
+  Server,
+} from "lucide-react";
+import { AdminProtectedRoute } from "@/components/auth/AdminProtectedRoute";
+import { AdminOnlyAccess } from "@/components/security/AdminOnlyAccess";
+import { EnhancedBackgroundManager } from "@/components/backgrounds/EnhancedBackgroundManager";
+import { AdminDashboardTabs } from "./AdminDashboardTabs";
 
 // Import directly to fix loading issues
-import { RefactoredSecuritySuite } from './RefactoredSecuritySuite'
-import RefactoredAdminTools from './RefactoredAdminTools'
-import { SupremeControlSuite } from './SupremeControlSuite'
-import { UserIsolationSystem } from './UserIsolationSystem'
-import { AIEngineCapabilities } from './AIEngineCapabilities'
-import { ChatSecurityPanel } from './ChatSecurityPanel'
-import UltimateSecurity from './UltimateSecurity'
-import { RuleSystemManagement } from './RuleSystemManagement'
-import { HoneypotMonitor } from '@/components/security/HoneypotMonitor'
-import { DeploymentStatusPanel } from './DeploymentStatusPanel'
+import { RefactoredSecuritySuite } from "./RefactoredSecuritySuite";
+import RefactoredAdminTools from "./RefactoredAdminTools";
+import { SupremeControlSuite } from "./SupremeControlSuite";
+import { UserIsolationSystem } from "./UserIsolationSystem";
+import { AIEngineCapabilities } from "./AIEngineCapabilities";
+import { ChatSecurityPanel } from "./ChatSecurityPanel";
+import UltimateSecurity from "./UltimateSecurity";
+import { RuleSystemManagement } from "./RuleSystemManagement";
+import { HoneypotMonitor } from "@/components/security/HoneypotMonitor";
+import { DeploymentStatusPanel } from "./DeploymentStatusPanel";
 // Integrated Admin Page Components
-import { UltimateAdminSuite } from './UltimateAdminSuite'
-import { MasterAdminControlCenter } from './MasterAdminControlCenter'
-import { DragonAIDefense } from './DragonAIDefense'
-import { KoalaAIEngine } from './KoalaAIEngine'
-import { UltimateIntelligenceHub } from './UltimateIntelligenceHub'
-import { AdminMediaLibrary } from './AdminMediaLibrary'
-import { WalletEngineAdmin } from './WalletEngineAdmin'
-import { TokenBurnController } from './TokenBurnController'
-import { GitHubIntegrationSuite } from '@/components/system/GitHubIntegrationSuite'
-import { NotificationController } from './NotificationController'
-import { PsychohistoricalEngine } from './PsychohistoricalEngine'
-import { PhoenixGuardian } from './PhoenixGuardian'
-import { GaiaIATool } from './GaiaIATool'
-import { SecurityDashboard } from './security/SecurityDashboard'
-import { UserManagementSystemRefactored } from './UserManagementSystemRefactored'
-import { AdminDashboard } from './AdminDashboard'
-import { OmniscientGPSEngine } from '@/components/tracking/OmniscientGPSEngine'
-import { AnimalDefenseCommandCenter } from './AnimalDefenseCommandCenter'
-import { PlatformManagement } from './PlatformManagement'
-import { QuantumDefenseWall } from './QuantumDefenseWall'
-import { BackgroundTacticalSystems } from './BackgroundTacticalSystems'
-import { MultiExchangeIntegration } from '@/components/MultiExchangeIntegration'
-import { InvestorScoutingSystem } from '@/components/InvestorScoutingSystem'
-import { MasterUpgradePlan } from './MasterUpgradePlan'
-import { BundledAdminPages } from './BundledAdminPages'
-import { FarmerEcosystem } from './FarmerEcosystem'
-import { PDFTransactionTracker } from './PDFTransactionTracker'
-import { AnimalGrazingRecovery } from './AnimalGrazingRecovery'
-import { AnimalTransferProtocols } from './AnimalTransferProtocols'
-import { IAEngine } from './IAEngine'
-import { DailyEngineAutomation } from './DailyEngineAutomation'
-import { GaiaBlockchainNetwork } from './GaiaBlockchainNetwork'
-import { MarketingCampaignManager } from './MarketingCampaignManager'
+// Duplicate imports removed
+// Duplicate imports removed
+import { MasterVisionControlPanel } from "./MasterVisionControlPanel";
+import { EinsteinTacticalAnimals } from "../defense/EinsteinTacticalAnimals";
+import { FoodPackageSystem } from "../community/FoodPackageSystem";
+import { UltimateAdminSuite } from "./UltimateAdminSuite";
+import { MasterAdminControlCenter } from "./MasterAdminControlCenter";
+import { DragonAIDefense } from "./DragonAIDefense";
+import { KoalaAIEngine } from "./KoalaAIEngine";
+import { UltimateIntelligenceHub } from "./UltimateIntelligenceHub";
+import { AdminMediaLibrary } from "./AdminMediaLibrary";
+import { WalletEngineAdmin } from "./WalletEngineAdmin";
+import { TokenBurnController } from "./TokenBurnController";
+import { GitHubIntegrationSuite } from "@/components/system/GitHubIntegrationSuite";
+import { NotificationController } from "./NotificationController";
+import { PsychohistoricalEngine } from "./PsychohistoricalEngine";
+import { PhoenixGuardian } from "./PhoenixGuardian";
+import { GaiaIATool } from "./GaiaIATool";
+import { SecurityDashboard } from "./security/SecurityDashboard";
+import { UserManagementSystemRefactored } from "./UserManagementSystemRefactored";
+import { AdminDashboard } from "./AdminDashboard";
+import { OmniscientGPSEngine } from "@/components/tracking/OmniscientGPSEngine";
+import { AnimalDefenseCommandCenter } from "./AnimalDefenseCommandCenter";
+import { PlatformManagement } from "./PlatformManagement";
+import { QuantumDefenseWall } from "./QuantumDefenseWall";
+import { BackgroundTacticalSystems } from "./BackgroundTacticalSystems";
+import { MultiExchangeIntegration } from "@/components/MultiExchangeIntegration";
+import { InvestorScoutingSystem } from "@/components/InvestorScoutingSystem";
+import { MasterUpgradePlan } from "./MasterUpgradePlan";
+import { BundledAdminPages } from "./BundledAdminPages";
+import { FarmerEcosystem } from "./FarmerEcosystem";
+import { PDFTransactionTracker } from "./PDFTransactionTracker";
+import { AnimalGrazingRecovery } from "./AnimalGrazingRecovery";
+import { AnimalTransferProtocols } from "./AnimalTransferProtocols";
+// Duplicate imports removed
 
 export function SecureAdminDashboard() {
-  const [activeTab, setActiveTab] = useState('overview')
+  const [activeTab, setActiveTab] = useState("overview");
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -84,7 +103,10 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">Dashboard</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="animals" className="p-2 text-center bg-gradient-to-r from-orange-600/20 to-red-600/20 border border-orange-500/30">
+          <TabsTrigger
+            value="animals"
+            className="p-2 text-center bg-gradient-to-r from-orange-600/20 to-red-600/20 border border-orange-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🐾</span>
               <span className="hidden sm:inline">Animals</span>
@@ -204,165 +226,253 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">AI Engine</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="deployment" className="p-2 text-center bg-gradient-to-r from-green-600/20 to-blue-600/20 border border-green-500/30">
+          <TabsTrigger
+            value="deployment"
+            className="p-2 text-center bg-gradient-to-r from-green-600/20 to-blue-600/20 border border-green-500/30"
+          >
             <div className="flex flex-col items-center">
               <Server className="h-4 w-4" />
               <span className="hidden sm:inline">Deploy</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="honeypot" className="p-2 text-center bg-gradient-to-r from-red-600/20 to-orange-600/20 border border-red-500/30">
+          <TabsTrigger
+            value="honeypot"
+            className="p-2 text-center bg-gradient-to-r from-red-600/20 to-orange-600/20 border border-red-500/30"
+          >
             <div className="flex flex-col items-center">
               <Skull className="h-4 w-4" />
               <span className="hidden sm:inline">Honeypot</span>
             </div>
           </TabsTrigger>
-            <TabsTrigger value="rules" className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-amber-600/20 border border-purple-500/30">
-              <div className="flex flex-col items-center">
-                <Gavel className="h-4 w-4" />
-                <span className="hidden sm:inline">Rules 24/7</span>
-              </div>
-            </TabsTrigger>
-          <TabsTrigger value="storage" className="p-2 text-center bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border border-cyan-500/30">
+          <TabsTrigger
+            value="rules"
+            className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-amber-600/20 border border-purple-500/30"
+          >
+            <div className="flex flex-col items-center">
+              <Gavel className="h-4 w-4" />
+              <span className="hidden sm:inline">Rules 24/7</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger
+            value="storage"
+            className="p-2 text-center bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border border-cyan-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>📁</span>
               <span className="hidden sm:inline">Storage</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="platform" className="p-2 text-center bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/30">
+          <TabsTrigger
+            value="platform"
+            className="p-2 text-center bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🌍</span>
               <span className="hidden sm:inline">Platform</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="defense-wall" className="p-2 text-center bg-gradient-to-r from-red-600/20 to-purple-600/20 border border-red-500/30">
+          <TabsTrigger
+            value="defense-wall"
+            className="p-2 text-center bg-gradient-to-r from-red-600/20 to-purple-600/20 border border-red-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🛡️</span>
               <span className="hidden sm:inline">Defense Wall</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="tactical" className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30">
+          <TabsTrigger
+            value="tactical"
+            className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🚀</span>
               <span className="hidden sm:inline">Tactical</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="multi-exchange" className="p-2 text-center bg-gradient-to-r from-emerald-600/20 to-teal-600/20 border border-emerald-500/30">
+          <TabsTrigger
+            value="multi-exchange"
+            className="p-2 text-center bg-gradient-to-r from-emerald-600/20 to-teal-600/20 border border-emerald-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🔄</span>
               <span className="hidden sm:inline">Multi-Exchange</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="investors" className="p-2 text-center bg-gradient-to-r from-yellow-600/20 to-amber-600/20 border border-yellow-500/30">
+          <TabsTrigger
+            value="investors"
+            className="p-2 text-center bg-gradient-to-r from-yellow-600/20 to-amber-600/20 border border-yellow-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>👥</span>
               <span className="hidden sm:inline">Investors</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="master-plan" className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30">
+          <TabsTrigger
+            value="master-plan"
+            className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🚀</span>
               <span className="hidden sm:inline">Master Plan</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="bundled-admin" className="p-2 text-center bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border border-cyan-500/30">
+          <TabsTrigger
+            value="bundled-admin"
+            className="p-2 text-center bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border border-cyan-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>👑</span>
               <span className="hidden sm:inline">Admin Hub</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="farmer-ecosystem" className="p-2 text-center bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30">
+          <TabsTrigger
+            value="farmer-ecosystem"
+            className="p-2 text-center bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🌱</span>
               <span className="hidden sm:inline">Farmer System</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="pdf-tracker" className="p-2 text-center bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/30">
+          <TabsTrigger
+            value="pdf-tracker"
+            className="p-2 text-center bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>📊</span>
               <span className="hidden sm:inline">PDF Tracker</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="animal-grazing" className="p-2 text-center bg-gradient-to-r from-green-600/20 to-lime-600/20 border border-green-500/30">
+          <TabsTrigger
+            value="animal-grazing"
+            className="p-2 text-center bg-gradient-to-r from-green-600/20 to-lime-600/20 border border-green-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🌱</span>
               <span className="hidden sm:inline">Land Recovery</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="animal-transfer" className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30">
+          <TabsTrigger
+            value="animal-transfer"
+            className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🚛</span>
               <span className="hidden sm:inline">Animal Transfer</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="ia-engine" className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30">
+          <TabsTrigger
+            value="ia-engine"
+            className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🧠</span>
               <span className="hidden sm:inline">IA Engine</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="automation" className="p-2 text-center bg-gradient-to-r from-orange-600/20 to-red-600/20 border border-orange-500/30">
+          <TabsTrigger
+            value="automation"
+            className="p-2 text-center bg-gradient-to-r from-orange-600/20 to-red-600/20 border border-orange-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🔄</span>
               <span className="hidden sm:inline">Automation</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="blockchain" className="p-2 text-center bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30">
+          <TabsTrigger
+            value="blockchain"
+            className="p-2 text-center bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🌍</span>
               <span className="hidden sm:inline">Blockchain</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="marketing" className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30">
+          <TabsTrigger
+            value="marketing"
+            className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30"
+          >
             <div className="flex flex-col items-center">
               <span>🚀</span>
               <span className="hidden sm:inline">Marketing</span>
             </div>
           </TabsTrigger>
-          </TabsList>
+          <TabsTrigger
+            value="master-vision"
+            className="p-2 text-center bg-gradient-to-r from-gold-600/20 to-yellow-600/20 border border-gold-500/30"
+          >
+            <div className="flex flex-col items-center">
+              <span>🗺️</span>
+              <span className="hidden sm:inline">Master Vision</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger
+            value="einstein-animals"
+            className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-indigo-600/20 border border-purple-500/30"
+          >
+            <div className="flex flex-col items-center">
+              <span>🧠</span>
+              <span className="hidden sm:inline">Einstein Animals</span>
+            </div>
+          </TabsTrigger>
+          <TabsTrigger
+            value="food-system"
+            className="p-2 text-center bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30"
+          >
+            <div className="flex flex-col items-center">
+              <span>🍎</span>
+              <span className="hidden sm:inline">Food System</span>
+            </div>
+          </TabsTrigger>
+        </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
           <AnimalDefenseCommandCenter />
         </TabsContent>
 
-          {/* Phase 1 & 2 Implementation Tabs */}
-          <TabsContent value="bundled-admin" className="space-y-6">
-            <BundledAdminPages />
-          </TabsContent>
+        {/* Phase 1 & 2 Implementation Tabs */}
+        <TabsContent value="bundled-admin" className="space-y-6">
+          <BundledAdminPages />
+        </TabsContent>
 
-          <TabsContent value="farmer-ecosystem" className="space-y-6">
-            <FarmerEcosystem />
-          </TabsContent>
+        <TabsContent value="farmer-ecosystem" className="space-y-6">
+          <FarmerEcosystem />
+        </TabsContent>
 
-          <TabsContent value="pdf-tracker" className="space-y-6">
-            <PDFTransactionTracker />
-          </TabsContent>
+        <TabsContent value="pdf-tracker" className="space-y-6">
+          <PDFTransactionTracker />
+        </TabsContent>
 
-          <TabsContent value="animal-grazing" className="space-y-6">
-            <AnimalGrazingRecovery />
-          </TabsContent>
+        <TabsContent value="animal-grazing" className="space-y-6">
+          <AnimalGrazingRecovery />
+        </TabsContent>
 
-          <TabsContent value="animal-transfer" className="space-y-6">
-            <AnimalTransferProtocols />
-          </TabsContent>
-          
-          <TabsContent value="ia-engine" className="space-y-6">
-            <IAEngine />
-          </TabsContent>
-          
-          <TabsContent value="automation" className="space-y-6">
-            <DailyEngineAutomation />
-          </TabsContent>
-          
-          <TabsContent value="blockchain" className="space-y-6">
-            <GaiaBlockchainNetwork />
-          </TabsContent>
+        <TabsContent value="animal-transfer" className="space-y-6">
+          <AnimalTransferProtocols />
+        </TabsContent>
 
-          <TabsContent value="marketing" className="space-y-6">
-            <MarketingCampaignManager />
-          </TabsContent>
+        <TabsContent value="ia-engine" className="space-y-6">
+          <IAEngine />
+        </TabsContent>
 
-          <TabsContent value="overview" className="space-y-6">
+        <TabsContent value="automation" className="space-y-6">
+          <DailyEngineAutomation />
+        </TabsContent>
+
+        <TabsContent value="blockchain" className="space-y-6">
+          <GaiaBlockchainNetwork />
+        </TabsContent>
+
+        <TabsContent value="marketing" className="space-y-6">
+          <MarketingCampaignManager />
+        </TabsContent>
+
+        <TabsContent value="overview" className="space-y-6">
           <UltimateAdminSuite />
+        </TabsContent>
+
+        <TabsContent value="vision" className="space-y-6">
+          <MasterVisionControlPanel />
         </TabsContent>
 
         <TabsContent value="dashboard" className="space-y-6">
@@ -496,7 +606,19 @@ export function SecureAdminDashboard() {
         <TabsContent value="pdf-tracker" className="space-y-6">
           <PDFTransactionTracker />
         </TabsContent>
+
+        <TabsContent value="master-vision" className="space-y-6">
+          <MasterVisionControlPanel />
+        </TabsContent>
+
+        <TabsContent value="einstein-animals" className="space-y-6">
+          <EinsteinTacticalAnimals />
+        </TabsContent>
+
+        <TabsContent value="food-system" className="space-y-6">
+          <FoodPackageSystem />
+        </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

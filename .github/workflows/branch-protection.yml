@@ -1,0 +1,21 @@
+name: Branch Protection
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  enforce-branch-protection:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for direct push to protected branches
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        run: |
+          echo "Direct pushes to main/master are not allowed. Please use pull requests."
+          exit 1

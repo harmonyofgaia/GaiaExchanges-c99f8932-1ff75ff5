@@ -1,4 +1,3 @@
-
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 
@@ -6,7 +5,8 @@ const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
 };
 
 interface ContactEmailRequest {
@@ -25,9 +25,23 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, email, subject, message, contactType, to, timestamp }: ContactEmailRequest = await req.json();
+    const {
+      name,
+      email,
+      subject,
+      message,
+      contactType,
+      to,
+      timestamp,
+    }: ContactEmailRequest = await req.json();
 
-    console.log("Sending contact email:", { name, email, subject, contactType, to });
+    console.log("Sending contact email:", {
+      name,
+      email,
+      subject,
+      contactType,
+      to,
+    });
 
     const emailResponse = await resend.emails.send({
       from: "Culture of Harmony <onboarding@resend.dev>",
@@ -53,7 +67,7 @@ const handler = async (req: Request): Promise<Response> => {
             <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
               <h2 style="color: #34d399; margin-bottom: 15px;">Message:</h2>
               <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; line-height: 1.6;">
-                ${message.replace(/\n/g, '<br>')}
+                ${message.replace(/\n/g, "<br>")}
               </div>
             </div>
             
@@ -85,13 +99,10 @@ const handler = async (req: Request): Promise<Response> => {
     });
   } catch (error: any) {
     console.error("Error in send-contact-email function:", error);
-    return new Response(
-      JSON.stringify({ error: error.message }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
-    );
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
   }
 };
 
