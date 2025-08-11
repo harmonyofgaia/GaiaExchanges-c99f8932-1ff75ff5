@@ -22,4 +22,4 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .github/workflows/codeql.yml
           git commit -m "chore: add CodeQL code scanning workflow"
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/harmonyofgaia/GaiaExchanges-c99f8932-1ff75ff5.git main
+          git push https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/harmonyofgaia/GaiaExchanges-c99f8932-1ff75ff5.git main
