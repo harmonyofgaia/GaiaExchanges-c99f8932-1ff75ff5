@@ -41,6 +41,9 @@ const DEFAULT_SETTINGS: EnhancedBackgroundSettings = {
   neuralDensity: 50,
 };
 
+// Always use default settings for public (non-admin) users
+const DEFAULT_SETTINGS_FOR_PUBLIC = DEFAULT_SETTINGS;
+
 const ANIMATION_CYCLE_DURATION = 30000; // 30 seconds
 
 export function EnhancedBackgroundManager({
