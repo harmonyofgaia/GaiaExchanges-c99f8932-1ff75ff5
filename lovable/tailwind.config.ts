@@ -20,7 +20,7 @@ const config: Config = {
     },
     extend: {
       colors: {
-        border: "#e5e7eb",
+        border: "hsl(var(--border, 220 13% 91%))",
         input: "#e5e7eb",
         ring: "#22c55e",
         background: "#ffffff",

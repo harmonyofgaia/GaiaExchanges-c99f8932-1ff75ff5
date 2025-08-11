@@ -1,20 +1,20 @@
 import { useState, useRef, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Slider } from "../ui/slider";
+import { Switch } from "../ui/switch";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { Textarea } from "@/components/ui/textarea";
+} from "../ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { Badge } from "../ui/badge";
+import { Textarea } from "../ui/textarea";
 import {
   X,
   Palette,
@@ -104,41 +104,16 @@ export function FullVisualControlPanel({
 }: FullVisualControlPanelProps) {
   const [activeTab, setActiveTab] = useState("effects");
   const [isMaximized, setIsMaximized] = useState(false);
-  // Always use default theme config, ignore localStorage and user customizations
-  const [themeConfig, setThemeConfig] = useState<ThemeConfig>({
-    colors: {
-      primary: "#00ff00",
-      secondary: "#0066cc",
-      accent: "#ff6600",
-      background: "#000000",
-      foreground: "#ffffff",
-      muted: "#666666",
-      border: "#333333",
-    },
-    effects: {
-      blur: 0,
-      brightness: 100,
-      contrast: 100,
-      saturation: 100,
-      hue: 0,
-      opacity: 100,
-    },
-    animation: {
-      speed: 1,
-      intensity: 50,
-      enabled: true,
-    },
-    layout: {
-      spacing: 16,
-      borderRadius: 8,
-      fontSize: 16,
-      lineHeight: 1.5,
-    },
-  });
-
-  // Always reset to default theme config on open
-  useEffect(() => {
-    setThemeConfig({
+  const [themeConfig, setThemeConfig] = useState<ThemeConfig>(() => {
+    const saved = localStorage.getItem("gaia-theme-config");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // fallback to default
+      }
+    }
+    return {
       colors: {
         primary: "#00ff00",
         secondary: "#0066cc",
@@ -167,7 +142,20 @@ export function FullVisualControlPanel({
         fontSize: 16,
         lineHeight: 1.5,
       },
-    });
+    };
+  });
+
+  useEffect(() => {
+    if (isOpen) {
+      const saved = localStorage.getItem("gaia-theme-config");
+      if (saved) {
+        try {
+          setThemeConfig(JSON.parse(saved));
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
   }, [isOpen]);
 
   const [customCSS, setCustomCSS] = useState("");
