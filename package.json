@@ -55,6 +55,7 @@
     "detect-libc": "2.0.4",
     "embla-carousel-react": "^8.6.0",
     "fabric": "^6.7.1",
+    "framer-motion": "^12.23.12",
     "input-otp": "^1.4.2",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
