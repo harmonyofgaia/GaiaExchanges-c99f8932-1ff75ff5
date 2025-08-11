@@ -1,90 +1,89 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Mail, Send, Shield, CheckCircle } from "lucide-react";
-import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { Badge } from '@/components/ui/badge'
+import { Mail, Send, Shield, CheckCircle } from 'lucide-react'
+import { toast } from 'sonner'
+import { supabase } from '@/integrations/supabase/client'
 
 export function ContactSystem() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-    contactType: "general",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    contactType: 'general'
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+    e.preventDefault()
+    setIsSubmitting(true)
 
     try {
       // Send email through Supabase Edge Function
-      const response = await supabase.functions.invoke("send-contact-email", {
+      const response = await supabase.functions.invoke('send-contact-email', {
         body: {
           ...formData,
-          to: "info@cultureofharmony.net",
-          timestamp: new Date().toISOString(),
-        },
-      });
+          to: 'info@cultureofharmony.net',
+          timestamp: new Date().toISOString()
+        }
+      })
 
       if (response.error) {
-        throw new Error(response.error.message);
+        throw new Error(response.error.message)
       }
 
       // Store contact in database for tracking
-      const { error: dbError } = await supabase
-        .from("contact_submissions")
-        .insert({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          contact_type: formData.contactType,
-          status: "sent",
-        });
+      const { error: dbError } = await supabase.from('contact_submissions').insert({
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        contact_type: formData.contactType,
+        status: 'sent'
+      })
 
       if (dbError) {
-        console.error("Database error:", dbError);
+        console.error('Database error:', dbError)
         // Continue anyway since email was sent
       }
 
-      toast.success("Message sent successfully!", {
-        description: "Your message has been sent to info@cultureofharmony.net",
-      });
+      toast.success('Message sent successfully!', {
+        description: 'Your message has been sent to info@cultureofharmony.net'
+      })
 
       // Reset form
       setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-        contactType: "general",
-      });
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+        contactType: 'general'
+      })
+
     } catch (error) {
-      console.error("Contact form error:", error);
-      toast.error("Failed to send message", {
-        description:
-          "Please try again or contact us directly at info@cultureofharmony.net",
-      });
+      console.error('Contact form error:', error)
+      toast.error('Failed to send message', {
+        description: 'Please try again or contact us directly at info@cultureofharmony.net'
+      })
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   const contactTypes = [
-    { value: "general", label: "General Inquiry" },
-    { value: "support", label: "Technical Support" },
-    { value: "partnership", label: "Partnership Opportunity" },
-    { value: "investment", label: "Investment Interest" },
-    { value: "media", label: "Media & Press" },
-    { value: "legal", label: "Legal & Compliance" },
-  ];
+    { value: 'general', label: 'General Inquiry' },
+    { value: 'support', label: 'Technical Support' },
+    { value: 'partnership', label: 'Partnership Opportunity' },
+    { value: 'investment', label: 'Investment Interest' },
+    { value: 'media', label: 'Media & Press' },
+    { value: 'legal', label: 'Legal & Compliance' }
+  ]
 
   return (
     <div className="space-y-6">
@@ -95,8 +94,7 @@ export function ContactSystem() {
             Contact Culture of Harmony
           </CardTitle>
           <p className="text-muted-foreground">
-            Get in touch with us at info@cultureofharmony.net - We respond
-            within 24 hours
+            Get in touch with us at info@cultureofharmony.net - We respond within 24 hours
           </p>
         </CardHeader>
         <CardContent>
@@ -108,9 +106,7 @@ export function ContactSystem() {
                   id="name"
                   type="text"
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, name: e.target.value }))
-                  }
+                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                   required
                   placeholder="Your full name"
                 />
@@ -121,9 +117,7 @@ export function ContactSystem() {
                   id="email"
                   type="email"
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, email: e.target.value }))
-                  }
+                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                   required
                   placeholder="your@email.com"
                 />
@@ -135,12 +129,7 @@ export function ContactSystem() {
               <select
                 id="contactType"
                 value={formData.contactType}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    contactType: e.target.value,
-                  }))
-                }
+                onChange={(e) => setFormData(prev => ({ ...prev, contactType: e.target.value }))}
                 className="w-full px-3 py-2 border border-input bg-background rounded-md text-sm"
               >
                 {contactTypes.map((type) => (
@@ -157,9 +146,7 @@ export function ContactSystem() {
                 id="subject"
                 type="text"
                 value={formData.subject}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, subject: e.target.value }))
-                }
+                onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
                 required
                 placeholder="What is this about?"
               />
@@ -170,9 +157,7 @@ export function ContactSystem() {
               <Textarea
                 id="message"
                 value={formData.message}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, message: e.target.value }))
-                }
+                onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
                 required
                 placeholder="Please provide details about your inquiry..."
                 className="min-h-[120px]"
@@ -181,14 +166,11 @@ export function ContactSystem() {
 
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Shield className="h-4 w-4 text-green-400" />
-              <span>
-                Your information is securely encrypted and sent directly to
-                info@cultureofharmony.net
-              </span>
+              <span>Your information is securely encrypted and sent directly to info@cultureofharmony.net</span>
             </div>
 
-            <Button
-              type="submit"
+            <Button 
+              type="submit" 
               disabled={isSubmitting}
               className="w-full bg-green-600 hover:bg-green-700"
             >
@@ -225,21 +207,17 @@ export function ContactSystem() {
               <Badge className="bg-blue-600">Coming Soon</Badge>
             </div>
           </div>
-
+          
           <div className="bg-gradient-to-r from-green-900/20 to-blue-900/20 rounded-lg p-4">
-            <h4 className="font-medium text-purple-400 mb-2">
-              About Culture of Harmony
-            </h4>
+            <h4 className="font-medium text-purple-400 mb-2">About Culture of Harmony</h4>
             <p className="text-sm text-muted-foreground">
-              We are building the future of sustainable cryptocurrency and
-              environmental blockchain technology. Our mission is to create
-              tools that not only advance financial technology but also
-              contribute to healing our planet. Together we make the world a
-              better place.
+              We are building the future of sustainable cryptocurrency and environmental blockchain technology. 
+              Our mission is to create tools that not only advance financial technology but also contribute to 
+              healing our planet. Together we make the world a better place.
             </p>
           </div>
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

@@ -1,5 +1,6 @@
-import { Navbar } from "@/components/Navbar";
-import { GlobalLeaderboard } from "@/components/leaderboard/GlobalLeaderboard";
+
+import { Navbar } from '@/components/Navbar'
+import { GlobalLeaderboard } from '@/components/leaderboard/GlobalLeaderboard'
 
 export default function GlobalLeaderboardPage() {
   return (
@@ -9,5 +10,5 @@ export default function GlobalLeaderboardPage() {
         <GlobalLeaderboard />
       </div>
     </div>
-  );
+  )
 }

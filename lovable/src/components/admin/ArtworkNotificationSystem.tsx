@@ -1,140 +1,134 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
-import { Mail, Send, CheckCircle, AlertCircle, Palette } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { toast } from 'sonner'
+import { Mail, Send, CheckCircle, AlertCircle, Palette } from 'lucide-react'
+import { supabase } from '@/integrations/supabase/client'
 
 interface NotificationData {
-  recipient: string;
-  subject: string;
-  message: string;
-  artworkUrl?: string;
-  artworkTitle?: string;
+  recipient: string
+  subject: string
+  message: string
+  artworkUrl?: string
+  artworkTitle?: string
 }
 
 export function ArtworkNotificationSystem() {
   const [notificationData, setNotificationData] = useState<NotificationData>({
-    recipient: "info@cultureofharmony.net",
-    subject: "New Artwork Generated - Culture of Harmony",
-    message: "A new artwork has been generated and is ready for review.",
-    artworkUrl: "",
-    artworkTitle: "",
-  });
-  const [isSending, setIsSending] = useState(false);
-  const [lastSentTime, setLastSentTime] = useState<Date | null>(null);
+    recipient: 'info@cultureofharmony.net',
+    subject: 'New Artwork Generated - Culture of Harmony',
+    message: 'A new artwork has been generated and is ready for review.',
+    artworkUrl: '',
+    artworkTitle: ''
+  })
+  const [isSending, setIsSending] = useState(false)
+  const [lastSentTime, setLastSentTime] = useState<Date | null>(null)
 
   const sendArtworkNotification = async () => {
-    if (
-      !notificationData.recipient ||
-      !notificationData.subject ||
-      !notificationData.message
-    ) {
-      toast.error("Missing required fields", {
-        description: "Please fill in recipient, subject, and message",
-      });
-      return;
+    if (!notificationData.recipient || !notificationData.subject || !notificationData.message) {
+      toast.error('Missing required fields', {
+        description: 'Please fill in recipient, subject, and message'
+      })
+      return
     }
 
-    setIsSending(true);
-    console.log(
-      "📧 Sending artwork notification to:",
-      notificationData.recipient,
-    );
+    setIsSending(true)
+    console.log('📧 Sending artwork notification to:', notificationData.recipient)
 
     try {
-      const { data, error } = await supabase.functions.invoke(
-        "send-contact-email",
-        {
-          body: {
-            name: "Culture of Harmony System",
-            email: notificationData.recipient,
-            subject: notificationData.subject,
-            message: `${notificationData.message}
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: 'Culture of Harmony System',
+          email: notificationData.recipient,
+          subject: notificationData.subject,
+          message: `${notificationData.message}
 
-${notificationData.artworkTitle ? `Artwork Title: ${notificationData.artworkTitle}` : ""}
-${notificationData.artworkUrl ? `Artwork URL: ${notificationData.artworkUrl}` : ""}
+${notificationData.artworkTitle ? `Artwork Title: ${notificationData.artworkTitle}` : ''}
+${notificationData.artworkUrl ? `Artwork URL: ${notificationData.artworkUrl}` : ''}
 
 Generated automatically by the Culture of Harmony artwork system.
 
 Best regards,
 Culture of Harmony Team
 🌍 Making the world a better place through sustainable creativity`,
-            contactType: "artwork_notification",
-          },
-        },
-      );
+          contactType: 'artwork_notification'
+        }
+      })
 
       if (error) {
-        console.error("❌ Email sending error:", error);
-        toast.error("Failed to send notification", {
+        console.error('❌ Email sending error:', error)
+        toast.error('Failed to send notification', {
           description: `Email error: ${error.message}`,
-          duration: 5000,
-        });
-        return;
+          duration: 5000
+        })
+        return
       }
 
-      console.log("✅ Artwork notification sent successfully:", data);
-      setLastSentTime(new Date());
+      console.log('✅ Artwork notification sent successfully:', data)
+      setLastSentTime(new Date())
+      
+      toast.success('🎨 Artwork Notification Sent!', {
+        description: `Successfully notified ${notificationData.recipient}`,
+        duration: 5000
+      })
+
     } catch (error: unknown) {
-      console.error("❌ Notification sending failed:", error);
-      let message = "Unknown error";
-      if (error && typeof error === "object" && "message" in error) {
+      console.error('❌ Notification sending failed:', error)
+      let message = 'Unknown error';
+      if (error && typeof error === 'object' && 'message' in error) {
         message = (error as { message: string }).message;
       }
-      toast.error("Notification Failed", {
+      toast.error('Notification Failed', {
         description: `Error: ${message}`,
-        duration: 5000,
-      });
+        duration: 5000
+      })
     } finally {
-      setIsSending(false);
+      setIsSending(false)
     }
-  };
+  }
 
   const testEmailConnection = async () => {
-    console.log("🔍 Testing email connection...");
-
-    setIsSending(true);
+    console.log('🔍 Testing email connection...')
+    
+    setIsSending(true)
     try {
-      const { data, error } = await supabase.functions.invoke(
-        "send-contact-email",
-        {
-          body: {
-            name: "System Test",
-            email: "info@cultureofharmony.net",
-            subject: "Culture of Harmony - Email System Test",
-            message:
-              "This is a test email to verify the Resend API connection is working properly.\n\nIf you receive this message, the artwork notification system is ready!",
-            contactType: "system_test",
-          },
-        },
-      );
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: 'System Test',
+          email: 'info@cultureofharmony.net',
+          subject: 'Culture of Harmony - Email System Test',
+          message: 'This is a test email to verify the Resend API connection is working properly.\n\nIf you receive this message, the artwork notification system is ready!',
+          contactType: 'system_test'
+        }
+      })
 
       if (error) {
-        throw error;
+        throw error
       }
 
-      toast.success("✅ Email Connection Test Successful!", {
-        description: "Resend API is properly configured",
-        duration: 5000,
-      });
+      toast.success('✅ Email Connection Test Successful!', {
+        description: 'Resend API is properly configured',
+        duration: 5000
+      })
+      
     } catch (error: unknown) {
-      let message = "Unknown error";
-      if (error && typeof error === "object" && "message" in error) {
+      let message = 'Unknown error';
+      if (error && typeof error === 'object' && 'message' in error) {
         message = (error as { message: string }).message;
       }
-      toast.error("❌ Email Connection Test Failed", {
+      toast.error('❌ Email Connection Test Failed', {
         description: `Please check Resend API configuration: ${message}`,
-        duration: 8000,
-      });
+        duration: 8000
+      })
     } finally {
-      setIsSending(false);
+      setIsSending(false)
     }
-  };
+  }
 
   return (
     <Card className="border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-pink-900/20">
@@ -144,8 +138,7 @@ Culture of Harmony Team
           🎨 Artwork Notification System
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Automatic email notifications for new artwork generation to Culture of
-          Harmony team
+          Automatic email notifications for new artwork generation to Culture of Harmony team
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -156,27 +149,17 @@ Culture of Harmony Team
               id="recipient"
               type="email"
               value={notificationData.recipient}
-              onChange={(e) =>
-                setNotificationData((prev) => ({
-                  ...prev,
-                  recipient: e.target.value,
-                }))
-              }
+              onChange={(e) => setNotificationData(prev => ({ ...prev, recipient: e.target.value }))}
               placeholder="info@cultureofharmony.net"
             />
           </div>
-
+          
           <div className="space-y-2">
             <Label htmlFor="subject">Email Subject</Label>
             <Input
               id="subject"
               value={notificationData.subject}
-              onChange={(e) =>
-                setNotificationData((prev) => ({
-                  ...prev,
-                  subject: e.target.value,
-                }))
-              }
+              onChange={(e) => setNotificationData(prev => ({ ...prev, subject: e.target.value }))}
               placeholder="New Artwork Generated"
             />
           </div>
@@ -187,12 +170,7 @@ Culture of Harmony Team
           <Textarea
             id="message"
             value={notificationData.message}
-            onChange={(e) =>
-              setNotificationData((prev) => ({
-                ...prev,
-                message: e.target.value,
-              }))
-            }
+            onChange={(e) => setNotificationData(prev => ({ ...prev, message: e.target.value }))}
             placeholder="A new artwork has been generated and is ready for review..."
             rows={3}
           />
@@ -204,27 +182,17 @@ Culture of Harmony Team
             <Input
               id="artworkTitle"
               value={notificationData.artworkTitle}
-              onChange={(e) =>
-                setNotificationData((prev) => ({
-                  ...prev,
-                  artworkTitle: e.target.value,
-                }))
-              }
+              onChange={(e) => setNotificationData(prev => ({ ...prev, artworkTitle: e.target.value }))}
               placeholder="Generated Artwork Title"
             />
           </div>
-
+          
           <div className="space-y-2">
             <Label htmlFor="artworkUrl">Artwork URL (Optional)</Label>
             <Input
               id="artworkUrl"
               value={notificationData.artworkUrl}
-              onChange={(e) =>
-                setNotificationData((prev) => ({
-                  ...prev,
-                  artworkUrl: e.target.value,
-                }))
-              }
+              onChange={(e) => setNotificationData(prev => ({ ...prev, artworkUrl: e.target.value }))}
               placeholder="https://example.com/artwork.png"
             />
           </div>
@@ -248,7 +216,7 @@ Culture of Harmony Team
               </>
             )}
           </Button>
-
+          
           <Button
             onClick={testEmailConnection}
             disabled={isSending}
@@ -278,12 +246,11 @@ Culture of Harmony Team
             <h4 className="font-medium text-blue-400">Integration Ready</h4>
           </div>
           <p className="text-sm text-muted-foreground">
-            This notification system will automatically send emails when new
-            artworks are generated. Perfect for keeping the Culture of Harmony
-            team informed about creative outputs.
+            This notification system will automatically send emails when new artworks are generated. 
+            Perfect for keeping the Culture of Harmony team informed about creative outputs.
           </p>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

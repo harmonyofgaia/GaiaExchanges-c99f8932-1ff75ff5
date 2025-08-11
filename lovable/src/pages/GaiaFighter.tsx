@@ -1,32 +1,33 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Sword, Shield, Zap, Crown, Trophy, Target } from "lucide-react";
-import { toast } from "sonner";
+
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { Badge } from '@/components/ui/badge'
+import { Sword, Shield, Zap, Crown, Trophy, Target } from 'lucide-react'
+import { toast } from 'sonner'
 
 export default function GaiaFighter() {
-  const [playerLevel, setPlayerLevel] = useState(15);
-  const [playerXP, setPlayerXP] = useState(2450);
-  const [playerHealth, setPlayerHealth] = useState(100);
-  const [playerMana, setPlayerMana] = useState(85);
-  const [inBattle, setInBattle] = useState(false);
+  const [playerLevel, setPlayerLevel] = useState(15)
+  const [playerXP, setPlayerXP] = useState(2450)
+  const [playerHealth, setPlayerHealth] = useState(100)
+  const [playerMana, setPlayerMana] = useState(85)
+  const [inBattle, setInBattle] = useState(false)
 
   const startBattle = (opponent: string) => {
-    setInBattle(true);
+    setInBattle(true)
     toast.success(`⚔️ Battle started against ${opponent}!`, {
-      description: "Prepare your combat strategy",
-      duration: 3000,
-    });
-  };
+      description: 'Prepare your combat strategy',
+      duration: 3000
+    })
+  }
 
   const fighters = [
-    { name: "Earth Guardian", level: 12, element: "Earth", difficulty: "Easy" },
-    { name: "Water Sage", level: 18, element: "Water", difficulty: "Medium" },
-    { name: "Fire Dragon", level: 25, element: "Fire", difficulty: "Hard" },
-    { name: "Air Elemental", level: 30, element: "Air", difficulty: "Expert" },
-  ];
+    { name: 'Earth Guardian', level: 12, element: 'Earth', difficulty: 'Easy' },
+    { name: 'Water Sage', level: 18, element: 'Water', difficulty: 'Medium' },
+    { name: 'Fire Dragon', level: 25, element: 'Fire', difficulty: 'Hard' },
+    { name: 'Air Elemental', level: 30, element: 'Air', difficulty: 'Expert' }
+  ]
 
   return (
     <div className="container mx-auto px-4 py-6 space-y-6">
@@ -50,15 +51,11 @@ export default function GaiaFighter() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-400">
-                Level {playerLevel}
-              </div>
+              <div className="text-2xl font-bold text-red-400">Level {playerLevel}</div>
               <div className="text-sm text-muted-foreground">Fighter Level</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-orange-400">
-                {playerXP}
-              </div>
+              <div className="text-2xl font-bold text-orange-400">{playerXP}</div>
               <div className="text-sm text-muted-foreground">Experience</div>
             </div>
             <div className="space-y-2">
@@ -91,18 +88,14 @@ export default function GaiaFighter() {
           <CardContent>
             <div className="space-y-4">
               {fighters.map((fighter, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
-                >
+                <div key={index} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                   <div>
                     <div className="font-bold">{fighter.name}</div>
                     <div className="text-sm text-muted-foreground">
-                      Level {fighter.level} • {fighter.element} •{" "}
-                      {fighter.difficulty}
+                      Level {fighter.level} • {fighter.element} • {fighter.difficulty}
                     </div>
                   </div>
-                  <Button
+                  <Button 
                     onClick={() => startBattle(fighter.name)}
                     disabled={inBattle}
                     variant="outline"
@@ -129,11 +122,9 @@ export default function GaiaFighter() {
               <div className="text-center">
                 <Badge className="bg-yellow-600 mb-4">SEASON 3 ACTIVE</Badge>
                 <div className="text-lg font-bold">Current Ranking: #127</div>
-                <div className="text-sm text-muted-foreground">
-                  out of 15,247 players
-                </div>
+                <div className="text-sm text-muted-foreground">out of 15,247 players</div>
               </div>
-
+              
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span>Tournament Points</span>
@@ -176,7 +167,7 @@ export default function GaiaFighter() {
                 <div className="text-xs mt-2">Deals 150-200 fire damage</div>
               </div>
             </div>
-
+            
             <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
               <div className="text-center">
                 <Shield className="h-8 w-8 mx-auto text-blue-400 mb-2" />
@@ -185,7 +176,7 @@ export default function GaiaFighter() {
                 <div className="text-xs mt-2">Absorbs 300 damage</div>
               </div>
             </div>
-
+            
             <div className="p-4 bg-purple-900/20 rounded-lg border border-purple-500/30">
               <div className="text-center">
                 <Zap className="h-8 w-8 mx-auto text-purple-400 mb-2" />
@@ -198,5 +189,5 @@ export default function GaiaFighter() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

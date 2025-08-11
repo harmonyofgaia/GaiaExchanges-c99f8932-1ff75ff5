@@ -1,13 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  Shield,
-  Crown,
-  Gamepad2,
-  Lock,
-  AlertTriangle,
-  Zap,
-} from "lucide-react";
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Shield, Crown, Gamepad2, Lock, AlertTriangle, Zap } from 'lucide-react'
 
 export function GamingProtectionPolicies() {
   return (
@@ -97,22 +91,17 @@ export function GamingProtectionPolicies() {
             🎮 GAMING TECHNOLOGY MONOPOLY
           </h3>
           <p className="text-muted-foreground mb-4">
-            Habbo Tycoon and all associated gaming technologies are exclusively
-            owned and protected. Any attempt to copy, steal, or replicate our
-            gaming systems will be detected instantly and prosecuted globally.
+            Habbo Tycoon and all associated gaming technologies are exclusively owned and protected.
+            Any attempt to copy, steal, or replicate our gaming systems will be detected instantly and prosecuted globally.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-green-400">100%</div>
-              <div className="text-xs text-muted-foreground">
-                Gaming Protection
-              </div>
+              <div className="text-xs text-muted-foreground">Gaming Protection</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-400">24/7</div>
-              <div className="text-xs text-muted-foreground">
-                Code Monitoring
-              </div>
+              <div className="text-xs text-muted-foreground">Code Monitoring</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-400">∞</div>
@@ -120,35 +109,28 @@ export function GamingProtectionPolicies() {
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-red-400">EXCLUSIVE</div>
-              <div className="text-xs text-muted-foreground">
-                Technology Rights
-              </div>
+              <div className="text-xs text-muted-foreground">Technology Rights</div>
             </div>
           </div>
         </div>
 
         <div className="bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded-lg p-4 border border-green-500/30">
-          <h4 className="text-lg font-bold text-green-400 mb-2">
-            🌍 GLOBAL GAMING AUTHORITY
-          </h4>
+          <h4 className="text-lg font-bold text-green-400 mb-2">🌍 GLOBAL GAMING AUTHORITY</h4>
           <div className="text-sm text-muted-foreground space-y-2">
             <p>
-              <strong className="text-green-400">HABBO TYCOON</strong>{" "}
-              represents the future of virtual real-life gaming. Our
-              quantum-secured, parabolic universe-protected gaming platform is
-              the only authorized virtual reality social gaming system on Earth.
+              <strong className="text-green-400">HABBO TYCOON</strong> represents the future of virtual real-life gaming.
+              Our quantum-secured, parabolic universe-protected gaming platform is the only authorized
+              virtual reality social gaming system on Earth.
             </p>
             <p>
-              <strong className="text-blue-400">LEGAL DECLARATION:</strong> All
-              gaming technologies, communication protocols, and virtual reality
-              systems developed by Harmony of Gaia / GAiA Token are protected by
-              international copyright, patent, and gaming industry laws.
+              <strong className="text-blue-400">LEGAL DECLARATION:</strong> All gaming technologies, 
+              communication protocols, and virtual reality systems developed by Harmony of Gaia / GAiA Token
+              are protected by international copyright, patent, and gaming industry laws.
             </p>
             <p className="text-red-400">
-              <strong>⚖️ VIOLATION WARNING:</strong> Any entity attempting to
-              copy, reverse engineer, or replicate our gaming technologies will
-              face immediate legal action and permanent exclusion from the
-              global gaming industry.
+              <strong>⚖️ VIOLATION WARNING:</strong> Any entity attempting to copy, reverse engineer, 
+              or replicate our gaming technologies will face immediate legal action and permanent
+              exclusion from the global gaming industry.
             </p>
           </div>
         </div>
@@ -158,16 +140,14 @@ export function GamingProtectionPolicies() {
             🎮 GAMING TECHNOLOGY PROTECTION ACT - INTERNATIONALLY RECOGNIZED
           </p>
           <p>
-            This gaming technology is exclusively owned by Harmony of Gaia /
-            GAiA Token project. All rights reserved. Protected by international
-            gaming, copyright, and patent laws.
+            This gaming technology is exclusively owned by Harmony of Gaia / GAiA Token project.
+            All rights reserved. Protected by international gaming, copyright, and patent laws.
           </p>
           <p className="mt-2 text-xs">
-            Last Updated: {new Date().toLocaleDateString()} | Gaming Security
-            Level: MAXIMUM | Legal Status: ENFORCED
+            Last Updated: {new Date().toLocaleDateString()} | Gaming Security Level: MAXIMUM | Legal Status: ENFORCED
           </p>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import React, { useState, useEffect, useCallback } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
   Table,
   TableBody,
@@ -12,11 +12,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+} from "@/components/ui/table"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Textarea } from "@/components/ui/textarea"
+import { Badge } from "@/components/ui/badge"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,28 +24,20 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  MoreVertical,
-  UserRound,
-  CheckCircle2,
-  Clock4,
-  AlertTriangle,
-  PauseCircle,
-  PlayCircle,
-} from "lucide-react";
-import { toast } from "sonner";
+} from "@/components/ui/dropdown-menu"
+import { MoreVertical, UserRound, CheckCircle2, Clock4, AlertTriangle, PauseCircle, PlayCircle } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface Task {
   id: string;
   title: string;
   description: string;
-  status: "pending" | "in-progress" | "completed" | "blocked";
+  status: 'pending' | 'in-progress' | 'completed' | 'blocked';
   assignee: {
     name: string;
     avatar: string;
   };
-  priority: "high" | "medium" | "low";
+  priority: 'high' | 'medium' | 'low';
   createdAt: Date;
   startedAt?: Date;
   completedAt?: Date;
@@ -54,103 +46,89 @@ interface Task {
 
 const taskData: Task[] = [
   {
-    id: "1",
-    title: "Design Onboarding Flow",
-    description: "Create a seamless onboarding experience for new users.",
-    status: "pending",
+    id: '1',
+    title: 'Design Onboarding Flow',
+    description: 'Create a seamless onboarding experience for new users.',
+    status: 'pending',
     assignee: {
-      name: "Alice Johnson",
-      avatar: "https://avatar.vercel.sh/1.png",
+      name: 'Alice Johnson',
+      avatar: 'https://avatar.vercel.sh/1.png',
     },
-    priority: "high",
+    priority: 'high',
     createdAt: new Date(),
     suggestions: [
-      {
-        type: "copy",
-        content: "Simplify the initial steps to reduce drop-off.",
-      },
-      {
-        type: "design",
-        content: "Use visual cues to guide users through the process.",
-      },
+      { type: 'copy', content: 'Simplify the initial steps to reduce drop-off.' },
+      { type: 'design', content: 'Use visual cues to guide users through the process.' },
     ],
   },
   {
-    id: "2",
-    title: "Implement User Authentication",
-    description: "Set up secure authentication methods for user accounts.",
-    status: "in-progress",
+    id: '2',
+    title: 'Implement User Authentication',
+    description: 'Set up secure authentication methods for user accounts.',
+    status: 'in-progress',
     assignee: {
-      name: "Bob Williams",
-      avatar: "https://avatar.vercel.sh/2.png",
+      name: 'Bob Williams',
+      avatar: 'https://avatar.vercel.sh/2.png',
     },
-    priority: "medium",
+    priority: 'medium',
     createdAt: new Date(),
     startedAt: new Date(),
     suggestions: [
-      {
-        type: "code",
-        content: "Use OAuth 2.0 for third-party authentication.",
-      },
+      { type: 'code', content: 'Use OAuth 2.0 for third-party authentication.' },
     ],
   },
   {
-    id: "3",
-    title: "Write Blog Post",
-    description: "Draft a blog post about the latest product updates.",
-    status: "completed",
+    id: '3',
+    title: 'Write Blog Post',
+    description: 'Draft a blog post about the latest product updates.',
+    status: 'completed',
     assignee: {
-      name: "Charlie Brown",
-      avatar: "https://avatar.vercel.sh/3.png",
+      name: 'Charlie Brown',
+      avatar: 'https://avatar.vercel.sh/3.png',
     },
-    priority: "low",
+    priority: 'low',
     createdAt: new Date(),
     startedAt: new Date(),
     completedAt: new Date(),
     suggestions: [],
   },
   {
-    id: "4",
-    title: "Fix Performance Bottleneck",
-    description: "Identify and resolve the main performance issues.",
-    status: "blocked",
+    id: '4',
+    title: 'Fix Performance Bottleneck',
+    description: 'Identify and resolve the main performance issues.',
+    status: 'blocked',
     assignee: {
-      name: "Diana Miller",
-      avatar: "https://avatar.vercel.sh/4.png",
+      name: 'Diana Miller',
+      avatar: 'https://avatar.vercel.sh/4.png',
     },
-    priority: "high",
+    priority: 'high',
     createdAt: new Date(),
     suggestions: [
-      {
-        type: "code",
-        content: "Profile the application to find slow queries.",
-      },
+      { type: 'code', content: 'Profile the application to find slow queries.' },
     ],
   },
 ];
 
 export function LiveTaskBoard() {
   const [tasks, setTasks] = useState<Task[]>(taskData);
-  const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [newTaskDescription, setNewTaskDescription] = useState("");
+  const [newTaskTitle, setNewTaskTitle] = useState('');
+  const [newTaskDescription, setNewTaskDescription] = useState('');
   const [isAutoProcessing, setIsAutoProcessing] = useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
   const startTask = useCallback((taskId: string) => {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === taskId
-          ? { ...task, status: "in-progress", startedAt: new Date() }
-          : task,
-      ),
-    );
+    setTasks(prev => prev.map(task => 
+      task.id === taskId 
+        ? { ...task, status: 'in-progress', startedAt: new Date() }
+        : task
+    ));
   }, []);
 
   const autoProcessTasks = useCallback(() => {
     if (!isAutoProcessing) return;
-
+    
     // Auto-process logic here
-    console.log("Auto-processing tasks...");
+    console.log('Auto-processing tasks...');
   }, [isAutoProcessing]);
 
   const applySuggestion = useCallback((taskId: string, suggestion: any) => {
@@ -165,35 +143,33 @@ export function LiveTaskBoard() {
   }, [isAutoProcessing, autoProcessTasks]);
 
   const completeTask = (taskId: string) => {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === taskId
-          ? { ...task, status: "completed", completedAt: new Date() }
-          : task,
-      ),
-    );
-    toast.success("Task Completed", {
-      description: "The task has been marked as completed.",
+    setTasks(prev => prev.map(task =>
+      task.id === taskId
+        ? { ...task, status: 'completed', completedAt: new Date() }
+        : task
+    ));
+    toast.success('Task Completed', {
+      description: 'The task has been marked as completed.',
       duration: 3000,
     });
   };
 
   const blockTask = (taskId: string) => {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === taskId ? { ...task, status: "blocked" } : task,
-      ),
-    );
-    toast.warning("Task Blocked", {
-      description: "The task has been marked as blocked.",
+    setTasks(prev => prev.map(task =>
+      task.id === taskId
+        ? { ...task, status: 'blocked' }
+        : task
+    ));
+    toast.warning('Task Blocked', {
+      description: 'The task has been marked as blocked.',
       duration: 3000,
     });
   };
 
   const addTask = () => {
-    if (newTaskTitle.trim() === "" || newTaskDescription.trim() === "") {
-      toast.error("Please fill in all fields", {
-        description: "Task title and description cannot be empty.",
+    if (newTaskTitle.trim() === '' || newTaskDescription.trim() === '') {
+      toast.error('Please fill in all fields', {
+        description: 'Task title and description cannot be empty.',
         duration: 3000,
       });
       return;
@@ -203,29 +179,29 @@ export function LiveTaskBoard() {
       id: Date.now().toString(),
       title: newTaskTitle,
       description: newTaskDescription,
-      status: "pending",
+      status: 'pending',
       assignee: {
-        name: "Unassigned",
-        avatar: "https://avatar.vercel.sh/0.png",
+        name: 'Unassigned',
+        avatar: 'https://avatar.vercel.sh/0.png',
       },
-      priority: "medium",
+      priority: 'medium',
       createdAt: new Date(),
       suggestions: [],
     };
 
-    setTasks((prev) => [...prev, newTask]);
-    setNewTaskTitle("");
-    setNewTaskDescription("");
-    toast.success("Task Added", {
-      description: "A new task has been added to the board.",
+    setTasks(prev => [...prev, newTask]);
+    setNewTaskTitle('');
+    setNewTaskDescription('');
+    toast.success('Task Added', {
+      description: 'A new task has been added to the board.',
       duration: 3000,
     });
   };
 
   const toggleAutoProcessing = () => {
-    setIsAutoProcessing((prev) => !prev);
-    toast.info(`Auto Processing ${isAutoProcessing ? "Disabled" : "Enabled"}`, {
-      description: `Task auto-processing has been ${isAutoProcessing ? "disabled" : "enabled"}.`,
+    setIsAutoProcessing(prev => !prev);
+    toast.info(`Auto Processing ${isAutoProcessing ? 'Disabled' : 'Enabled'}`, {
+      description: `Task auto-processing has been ${isAutoProcessing ? 'disabled' : 'enabled'}.`,
       duration: 3000,
     });
   };
@@ -270,10 +246,7 @@ export function LiveTaskBoard() {
                 />
               </div>
             </div>
-            <Button
-              onClick={addTask}
-              className="bg-blue-600 hover:bg-blue-700 text-white"
-            >
+            <Button onClick={addTask} className="bg-blue-600 hover:bg-blue-700 text-white">
               Add Task
             </Button>
           </CardContent>
@@ -301,33 +274,16 @@ export function LiveTaskBoard() {
                   <TableRow key={task.id}>
                     <TableCell className="font-medium">{task.title}</TableCell>
                     <TableCell>
-                      {task.status === "pending" && (
-                        <Badge variant="secondary">Pending</Badge>
-                      )}
-                      {task.status === "in-progress" && (
-                        <Badge className="bg-blue-500 text-white">
-                          In Progress
-                        </Badge>
-                      )}
-                      {task.status === "completed" && (
-                        <Badge className="bg-green-500 text-white">
-                          Completed
-                        </Badge>
-                      )}
-                      {task.status === "blocked" && (
-                        <Badge className="bg-red-500 text-white">Blocked</Badge>
-                      )}
+                      {task.status === 'pending' && <Badge variant="secondary">Pending</Badge>}
+                      {task.status === 'in-progress' && <Badge className="bg-blue-500 text-white">In Progress</Badge>}
+                      {task.status === 'completed' && <Badge className="bg-green-500 text-white">Completed</Badge>}
+                      {task.status === 'blocked' && <Badge className="bg-red-500 text-white">Blocked</Badge>}
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <Avatar>
-                          <AvatarImage
-                            src={task.assignee.avatar}
-                            alt={task.assignee.name}
-                          />
-                          <AvatarFallback>
-                            {task.assignee.name.slice(0, 2)}
-                          </AvatarFallback>
+                          <AvatarImage src={task.assignee.avatar} alt={task.assignee.name} />
+                          <AvatarFallback>{task.assignee.name.slice(0, 2)}</AvatarFallback>
                         </Avatar>
                         <span>{task.assignee.name}</span>
                       </div>
@@ -348,9 +304,7 @@ export function LiveTaskBoard() {
                             <Clock4 className="h-4 w-4 mr-2" />
                             Start Task
                           </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => completeTask(task.id)}
-                          >
+                          <DropdownMenuItem onClick={() => completeTask(task.id)}>
                             <CheckCircle2 className="h-4 w-4 mr-2" />
                             Complete Task
                           </DropdownMenuItem>
@@ -359,9 +313,7 @@ export function LiveTaskBoard() {
                             Block Task
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem
-                            onClick={() => setSelectedTask(task)}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedTask(task)}>
                             <UserRound className="h-4 w-4 mr-2" />
                             View Details
                           </DropdownMenuItem>

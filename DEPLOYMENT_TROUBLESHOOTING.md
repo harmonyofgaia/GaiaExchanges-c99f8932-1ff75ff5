@@ -3,7 +3,6 @@
 ## Quick Diagnosis
 
 🩺 **Run the Deployment Doctor first for instant diagnosis:**
-
 ```bash
 npm run deploy:doctor
 ```
@@ -17,7 +16,6 @@ This will automatically detect and provide solutions for most common issues.
 **Problem**: Build fails or app doesn't work after deployment due to placeholder values.
 
 **Solution**:
-
 ```bash
 # Check your .env file for placeholder values
 grep -n "placeholder\|your-project-id" .env
@@ -28,7 +26,6 @@ VITE_SUPABASE_ANON_KEY=your-actual-anonymous-key
 ```
 
 **For Production Deployment**:
-
 - **Vercel**: Set environment variables in project dashboard
 - **Netlify**: Set environment variables in site settings
 - **GitHub Pages**: Use GitHub Secrets in workflow
@@ -40,7 +37,6 @@ VITE_SUPABASE_ANON_KEY=your-actual-anonymous-key
 **Solutions**:
 
 **Option 1 - Use our deployment scripts (recommended)**:
-
 ```bash
 # These scripts automatically handle CLI tool installation
 npm run deploy:vercel    # Uses npx if CLI not installed
@@ -49,14 +45,12 @@ npm run deploy:auto      # Runs checks and deploys
 ```
 
 **Option 2 - Install globally**:
-
 ```bash
 npm install -g vercel
 npm install -g netlify-cli
 ```
 
 **Option 3 - Use npx directly**:
-
 ```bash
 npx vercel --prod
 npx netlify-cli deploy --prod --dir=dist
@@ -67,7 +61,6 @@ npx netlify-cli deploy --prod --dir=dist
 **Problem**: Build fails during deployment
 
 **Diagnosis**:
-
 ```bash
 # Run comprehensive diagnostic first
 npm run deploy:doctor
@@ -80,7 +73,6 @@ npm run build 2>&1 | grep -i error
 ```
 
 **Common Solutions**:
-
 - **Linting errors**: Run `npm run lint:fix` or set `SKIP_LINT=true`
 - **TypeScript errors**: Fix type issues or update tsconfig.json
 - **Memory issues**: Increase Node.js memory: `NODE_OPTIONS=--max-old-space-size=4096 npm run build`
@@ -91,7 +83,6 @@ npm run build 2>&1 | grep -i error
 **Problem**: GitHub Actions workflow fails
 
 **Check these**:
-
 1. **Secrets are set**:
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_ANON_KEY`
@@ -107,7 +98,6 @@ npm run build 2>&1 | grep -i error
 **Problem**: App loads but shows blank page or 404 on refresh
 
 **Solutions**:
-
 1. **Configure SPA routing**:
    - **Netlify**: Already configured in `netlify.toml`
    - **Vercel**: Already configured in `vercel.json`
@@ -125,9 +115,7 @@ npm run build 2>&1 | grep -i error
 **Problem**: App loads slowly after deployment
 
 **Solutions**:
-
 1. **Check build size**:
-
    ```bash
    npm run build
    du -sh dist/
@@ -143,7 +131,6 @@ npm run build 2>&1 | grep -i error
 **Problem**: API calls fail after deployment
 
 **Solutions**:
-
 1. **Update Supabase settings**: Add your domain to allowed origins
 2. **Check environment variables**: Ensure correct API URLs in production
 
@@ -152,7 +139,6 @@ npm run build 2>&1 | grep -i error
 After successful deployment, verify:
 
 ### 1. Basic Functionality
-
 ```bash
 # Test build locally first
 npm run preview
@@ -164,13 +150,11 @@ npm run preview
 ```
 
 ### 2. Environment Variables
-
 - Check browser console for any environment variable errors
 - Verify Supabase connection works
 - Test API endpoints
 
 ### 3. Performance
-
 - Run Lighthouse audit
 - Check Core Web Vitals
 - Test on mobile devices
@@ -178,7 +162,6 @@ npm run preview
 ## Platform-Specific Instructions
 
 ### Vercel Deployment
-
 ```bash
 # Method 1: Using Vercel CLI
 npx vercel --prod
@@ -191,7 +174,6 @@ npm run deploy:vercel
 ```
 
 ### Netlify Deployment
-
 ```bash
 # Method 1: Using Netlify CLI
 npx netlify-cli deploy --prod --dir=dist
@@ -204,7 +186,6 @@ npm run deploy:netlify
 ```
 
 ### GitHub Pages
-
 ```bash
 # Method 1: GitHub Actions (recommended)
 # Push to main branch - automatic deployment
@@ -215,7 +196,6 @@ npm run deploy:github-pages
 ```
 
 ### Static Hosting (Any Provider)
-
 ```bash
 # Build and create deployment package
 npm run deploy:static
@@ -226,14 +206,12 @@ npm run deploy:static
 ## Getting Help
 
 ### Debug Steps
-
 1. **Check logs**: Look at build logs for specific errors
 2. **Test locally**: Always test with `npm run preview` first
 3. **Check environment**: Verify all environment variables are set correctly
 4. **Run diagnostics**: Use `npm run pre-deploy` for comprehensive checks
 
 ### Contact Information
-
 - **Documentation**: See `DEPLOYMENT_GUIDE.md` for detailed instructions
 - **Status Page**: Check `/deployment-status` for real-time system health
 - **Build Logs**: Check your platform's build logs for specific errors
@@ -282,7 +260,6 @@ If deployment breaks production:
 ## Success Indicators
 
 ✅ **Deployment Successful When**:
-
 - Build completes without errors
 - All health checks pass (21/25 minimum)
 - App loads correctly at deployed URL

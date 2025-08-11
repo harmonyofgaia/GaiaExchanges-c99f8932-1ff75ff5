@@ -1,19 +1,20 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
-import {
-  Shield,
-  Settings,
-  Users,
-  BarChart3,
-  Zap,
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Link } from 'react-router-dom'
+import { 
+  Shield, 
+  Settings, 
+  Users, 
+  BarChart3, 
+  Zap, 
   Globe,
   Lock,
   Database,
   Activity,
-  AlertTriangle,
-} from "lucide-react";
+  AlertTriangle
+} from 'lucide-react'
 
 export function EnhancedAdminMenu() {
   return (
@@ -47,10 +48,7 @@ export function EnhancedAdminMenu() {
             Next-gen quantum protection systems
           </p>
           <Link to="/quantum-security">
-            <Button
-              size="sm"
-              className="w-full bg-purple-600 hover:bg-purple-700"
-            >
+            <Button size="sm" className="w-full bg-purple-600 hover:bg-purple-700">
               Quantum Access
             </Button>
           </Link>
@@ -83,10 +81,7 @@ export function EnhancedAdminMenu() {
           <p className="text-xs text-muted-foreground mb-4">
             Real-time platform analytics
           </p>
-          <Button
-            size="sm"
-            className="w-full bg-orange-600 hover:bg-orange-700"
-          >
+          <Button size="sm" className="w-full bg-orange-600 hover:bg-orange-700">
             View Analytics
           </Button>
         </CardContent>
@@ -118,10 +113,7 @@ export function EnhancedAdminMenu() {
           <p className="text-xs text-muted-foreground mb-4">
             Platform configuration & tweaks
           </p>
-          <Button
-            size="sm"
-            className="w-full bg-yellow-600 hover:bg-yellow-700"
-          >
+          <Button size="sm" className="w-full bg-yellow-600 hover:bg-yellow-700">
             System Config
           </Button>
         </CardContent>
@@ -153,14 +145,11 @@ export function EnhancedAdminMenu() {
           <p className="text-xs text-muted-foreground mb-4">
             Real-time system monitoring
           </p>
-          <Button
-            size="sm"
-            className="w-full bg-indigo-600 hover:bg-indigo-700"
-          >
+          <Button size="sm" className="w-full bg-indigo-600 hover:bg-indigo-700">
             Health Monitor
           </Button>
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

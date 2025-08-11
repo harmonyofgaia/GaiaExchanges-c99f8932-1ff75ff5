@@ -1,6 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Wrench, Cpu, Shield, Zap } from "lucide-react";
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Wrench, Cpu, Shield, Zap } from 'lucide-react'
 
 const TechnoSoulSolutions = () => {
   return (
@@ -52,7 +53,7 @@ const TechnoSoulSolutions = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TechnoSoulSolutions;
+export default TechnoSoulSolutions

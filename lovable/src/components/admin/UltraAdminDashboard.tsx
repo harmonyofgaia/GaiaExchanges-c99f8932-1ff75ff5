@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Shield,
-  Users,
-  TrendingUp,
-  Globe,
+
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { 
+  Shield, 
+  Users, 
+  TrendingUp, 
+  Globe, 
   Zap,
   Crown,
   Target,
@@ -16,9 +17,9 @@ import {
   Activity,
   Settings,
   AlertTriangle,
-  CheckCircle,
-} from "lucide-react";
-import { toast } from "sonner";
+  CheckCircle
+} from 'lucide-react'
+import { toast } from 'sonner'
 
 export function UltraAdminDashboard() {
   const [realTimeStats, setRealTimeStats] = useState({
@@ -27,79 +28,68 @@ export function UltraAdminDashboard() {
     globalReach: 89.5,
     securityLevel: 99.8,
     growthRate: 156.7,
-    communityScore: 94.2,
-  });
+    communityScore: 94.2
+  })
 
   const [systemControls, setSystemControls] = useState({
     autoGrowthEngine: true,
     securityMaxMode: true,
     globalExpansion: true,
     investorMagnet: true,
-    viralMarketing: false,
-  });
+    viralMarketing: false
+  })
 
   // Real-time stats update every 3 seconds
   useEffect(() => {
     const updateStats = () => {
-      setRealTimeStats((prev) => ({
+      setRealTimeStats(prev => ({
         activeUsers: prev.activeUsers + Math.floor(Math.random() * 15 + 2),
-        totalTransactions:
-          prev.totalTransactions + Math.floor(Math.random() * 25 + 5),
-        globalReach: Math.min(100, prev.globalReach + Math.random() * 0.5),
-        securityLevel: Math.max(
-          99,
-          Math.min(100, prev.securityLevel + (Math.random() * 0.2 - 0.1)),
-        ),
+        totalTransactions: prev.totalTransactions + Math.floor(Math.random() * 25 + 5),
+        globalReach: Math.min(100, prev.globalReach + (Math.random() * 0.5)),
+        securityLevel: Math.max(99, Math.min(100, prev.securityLevel + (Math.random() * 0.2 - 0.1))),
         growthRate: prev.growthRate + (Math.random() * 5 - 2),
-        communityScore: Math.max(
-          90,
-          Math.min(100, prev.communityScore + (Math.random() * 1 - 0.5)),
-        ),
-      }));
-    };
+        communityScore: Math.max(90, Math.min(100, prev.communityScore + (Math.random() * 1 - 0.5)))
+      }))
+    }
 
-    const interval = setInterval(updateStats, 3000);
-    return () => clearInterval(interval);
-  }, []);
+    const interval = setInterval(updateStats, 3000)
+    return () => clearInterval(interval)
+  }, [])
 
   const toggleSystemControl = (control: keyof typeof systemControls) => {
-    setSystemControls((prev) => ({
+    setSystemControls(prev => ({
       ...prev,
-      [control]: !prev[control],
-    }));
+      [control]: !prev[control]
+    }))
 
     const controlNames = {
-      autoGrowthEngine: "Auto Growth Engine",
-      securityMaxMode: "Maximum Security Mode",
-      globalExpansion: "Global Expansion Protocol",
-      investorMagnet: "Investor Magnetism System",
-      viralMarketing: "Viral Marketing Campaign",
-    };
+      autoGrowthEngine: 'Auto Growth Engine',
+      securityMaxMode: 'Maximum Security Mode',
+      globalExpansion: 'Global Expansion Protocol',
+      investorMagnet: 'Investor Magnetism System',
+      viralMarketing: 'Viral Marketing Campaign'
+    }
 
-    toast.success(
-      `${controlNames[control]} ${systemControls[control] ? "Disabled" : "Activated"}!`,
-      {
-        description: `System control updated - Effects active immediately`,
-        duration: 3000,
-      },
-    );
-  };
+    toast.success(`${controlNames[control]} ${systemControls[control] ? 'Disabled' : 'Activated'}!`, {
+      description: `System control updated - Effects active immediately`,
+      duration: 3000
+    })
+  }
 
   const executeEmergencyProtocol = () => {
-    toast.success("⚡ EMERGENCY PROTOCOL ACTIVATED!", {
-      description:
-        "All systems maximized - Quantum security engaged - Global expansion accelerated",
-      duration: 8000,
-    });
-
+    toast.success('⚡ EMERGENCY PROTOCOL ACTIVATED!', {
+      description: 'All systems maximized - Quantum security engaged - Global expansion accelerated',
+      duration: 8000
+    })
+    
     setSystemControls({
       autoGrowthEngine: true,
       securityMaxMode: true,
       globalExpansion: true,
       investorMagnet: true,
-      viralMarketing: true,
-    });
-  };
+      viralMarketing: true
+    })
+  }
 
   return (
     <div className="space-y-6">
@@ -109,67 +99,49 @@ export function UltraAdminDashboard() {
           <CardTitle className="flex items-center gap-2 text-red-400">
             <Crown className="h-6 w-6" />
             🚀 ULTRA ADMIN COMMAND CENTER - REAL-TIME CONTROL
-            <Badge className="bg-red-600 text-white animate-pulse">
-              ADMIN ONLY
-            </Badge>
+            <Badge className="bg-red-600 text-white animate-pulse">ADMIN ONLY</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
             <div className="text-center p-3 rounded-lg bg-blue-900/30 border border-blue-500/20">
               <Users className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {realTimeStats.activeUsers.toLocaleString()}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{realTimeStats.activeUsers.toLocaleString()}</div>
               <div className="text-xs text-muted-foreground">Active Users</div>
             </div>
-
+            
             <div className="text-center p-3 rounded-lg bg-green-900/30 border border-green-500/20">
               <Activity className="h-6 w-6 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {realTimeStats.totalTransactions.toLocaleString()}
-              </div>
+              <div className="text-2xl font-bold text-green-400">{realTimeStats.totalTransactions.toLocaleString()}</div>
               <div className="text-xs text-muted-foreground">Transactions</div>
             </div>
-
+            
             <div className="text-center p-3 rounded-lg bg-purple-900/30 border border-purple-500/20">
               <Globe className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                {realTimeStats.globalReach.toFixed(1)}%
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{realTimeStats.globalReach.toFixed(1)}%</div>
               <div className="text-xs text-muted-foreground">Global Reach</div>
             </div>
-
+            
             <div className="text-center p-3 rounded-lg bg-red-900/30 border border-red-500/20">
               <Shield className="h-6 w-6 text-red-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-red-400">
-                {realTimeStats.securityLevel.toFixed(1)}%
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Security Level
-              </div>
+              <div className="text-2xl font-bold text-red-400">{realTimeStats.securityLevel.toFixed(1)}%</div>
+              <div className="text-xs text-muted-foreground">Security Level</div>
             </div>
-
+            
             <div className="text-center p-3 rounded-lg bg-yellow-900/30 border border-yellow-500/20">
               <TrendingUp className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-yellow-400">
-                {realTimeStats.growthRate.toFixed(1)}%
-              </div>
+              <div className="text-2xl font-bold text-yellow-400">{realTimeStats.growthRate.toFixed(1)}%</div>
               <div className="text-xs text-muted-foreground">Growth Rate</div>
             </div>
-
+            
             <div className="text-center p-3 rounded-lg bg-cyan-900/30 border border-cyan-500/20">
               <Target className="h-6 w-6 text-cyan-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-cyan-400">
-                {realTimeStats.communityScore.toFixed(1)}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Community Score
-              </div>
+              <div className="text-2xl font-bold text-cyan-400">{realTimeStats.communityScore.toFixed(1)}</div>
+              <div className="text-xs text-muted-foreground">Community Score</div>
             </div>
           </div>
 
-          <Button
+          <Button 
             onClick={executeEmergencyProtocol}
             className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-4"
           >
@@ -195,19 +167,17 @@ export function UltraAdminDashboard() {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-3">
                     <h4 className="font-semibold text-sm capitalize">
-                      {key.replace(/([A-Z])/g, " $1").trim()}
+                      {key.replace(/([A-Z])/g, ' $1').trim()}
                     </h4>
-                    <Badge className={value ? "bg-green-600" : "bg-gray-600"}>
-                      {value ? "ACTIVE" : "INACTIVE"}
+                    <Badge className={value ? 'bg-green-600' : 'bg-gray-600'}>
+                      {value ? 'ACTIVE' : 'INACTIVE'}
                     </Badge>
                   </div>
                   <Button
-                    onClick={() =>
-                      toggleSystemControl(key as keyof typeof systemControls)
-                    }
-                    className={`w-full ${value ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}`}
+                    onClick={() => toggleSystemControl(key as keyof typeof systemControls)}
+                    className={`w-full ${value ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'}`}
                   >
-                    {value ? "Disable" : "Activate"}
+                    {value ? 'Disable' : 'Activate'}
                   </Button>
                 </CardContent>
               </Card>
@@ -219,9 +189,7 @@ export function UltraAdminDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card className="border-blue-500/20">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  Performance Metrics
-                </CardTitle>
+                <CardTitle className="text-blue-400">Performance Metrics</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -250,9 +218,7 @@ export function UltraAdminDashboard() {
 
             <Card className="border-green-500/20">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  Security Analytics
-                </CardTitle>
+                <CardTitle className="text-green-400">Security Analytics</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -275,9 +241,7 @@ export function UltraAdminDashboard() {
         <TabsContent value="community" className="space-y-4">
           <Card className="border-purple-500/20">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                Community Health
-              </CardTitle>
+              <CardTitle className="text-purple-400">Community Health</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -303,9 +267,7 @@ export function UltraAdminDashboard() {
         <TabsContent value="global" className="space-y-4">
           <Card className="border-orange-500/20">
             <CardHeader>
-              <CardTitle className="text-orange-400">
-                Global Operations
-              </CardTitle>
+              <CardTitle className="text-orange-400">Global Operations</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -323,9 +285,7 @@ export function UltraAdminDashboard() {
                 </div>
                 <div className="text-center">
                   <div className="text-lg font-bold text-orange-400">∞</div>
-                  <div className="text-xs text-muted-foreground">
-                    Scalability
-                  </div>
+                  <div className="text-xs text-muted-foreground">Scalability</div>
                 </div>
               </div>
             </CardContent>
@@ -333,5 +293,5 @@ export function UltraAdminDashboard() {
         </TabsContent>
       </Tabs>
     </div>
-  );
+  )
 }

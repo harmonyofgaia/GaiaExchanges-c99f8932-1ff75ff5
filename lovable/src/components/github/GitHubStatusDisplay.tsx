@@ -1,14 +1,13 @@
-import { CheckCircle, AlertCircle, Lock } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { GitHubStatus } from "./types";
+
+import { CheckCircle, AlertCircle, Lock } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { GitHubStatus } from './types'
 
 interface GitHubStatusDisplayProps {
-  githubStatus: GitHubStatus;
+  githubStatus: GitHubStatus
 }
 
-export function GitHubStatusDisplay({
-  githubStatus,
-}: GitHubStatusDisplayProps) {
+export function GitHubStatusDisplay({ githubStatus }: GitHubStatusDisplayProps) {
   return (
     <div className="flex items-center justify-between p-3 rounded-lg bg-muted/20">
       <div className="flex items-center gap-3">
@@ -25,19 +24,13 @@ export function GitHubStatusDisplay({
             )}
           </div>
           <div className="text-sm text-muted-foreground">
-            {githubStatus.isConnected
-              ? "Repository Connected & Secured"
-              : "Repository Not Found"}
+            {githubStatus.isConnected ? 'Repository Connected & Secured' : 'Repository Not Found'}
           </div>
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <Badge
-          className={
-            githubStatus.isConnected ? "bg-green-600" : "bg-orange-600"
-          }
-        >
-          {githubStatus.isConnected ? "Connected" : "Pending"}
+        <Badge className={githubStatus.isConnected ? 'bg-green-600' : 'bg-orange-600'}>
+          {githubStatus.isConnected ? 'Connected' : 'Pending'}
         </Badge>
         {githubStatus.isPrivate && (
           <Badge className="bg-blue-600 text-white">
@@ -47,5 +40,5 @@ export function GitHubStatusDisplay({
         )}
       </div>
     </div>
-  );
+  )
 }

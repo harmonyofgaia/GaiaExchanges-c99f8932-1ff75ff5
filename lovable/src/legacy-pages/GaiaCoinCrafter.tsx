@@ -1,7 +1,8 @@
-import { GaiaCoinCrafter } from "@/components/GaiaCoinCrafter";
+
+import { GaiaCoinCrafter } from '@/components/GaiaCoinCrafter'
 
 const GaiaCoinCrafterPage = () => {
-  return <GaiaCoinCrafter />;
-};
+  return <GaiaCoinCrafter />
+}
 
-export default GaiaCoinCrafterPage;
+export default GaiaCoinCrafterPage

@@ -7,13 +7,11 @@ The GaiaExchanges application uses a **reliable, single-platform deployment stra
 ### Automated Deployment Strategy
 
 #### Primary Platform: Vercel
-
 - **Default deployment platform**: Vercel provides zero-configuration deployment with automatic HTTPS and CDN
 - **Triggers**: Automatic deployment on push to `main` branch
 - **Configuration**: Uses `vercel.json` for build settings
 
 #### Fallback Chain
-
 If the primary deployment fails, the system automatically attempts fallbacks in this order:
 
 1. **Vercel** (Primary) → Deploy first, fastest and most reliable
@@ -21,7 +19,6 @@ If the primary deployment fails, the system automatically attempts fallbacks in 
 3. **GitHub Pages** (Final Fallback) → If both Vercel and Netlify fail
 
 #### Key Features
-
 - ✅ **No double deployments**: Only one platform deploys successfully
 - ✅ **No PR deployments**: Deployments only trigger on main branch pushes
 - ✅ **Admin notifications**: Automatic alerts when fallbacks are used
@@ -58,7 +55,6 @@ npm run deploy:vercel
 ```
 
 **Vercel Configuration:**
-
 - Build Command: `npm run build:vercel`
 - Output Directory: `dist`
 - Environment Variables: Set in Vercel dashboard
@@ -77,7 +73,6 @@ npm run deploy:netlify
 ```
 
 **Netlify Configuration:**
-
 - Build Command: `npm run build`
 - Publish Directory: `dist`
 - Environment Variables: Set in Netlify dashboard
@@ -101,12 +96,10 @@ cp .env.example .env
 ```
 
 **Required Variables:**
-
 - `VITE_SUPABASE_URL`: Your Supabase project URL
 - `VITE_SUPABASE_ANON_KEY`: Your Supabase anonymous key
 
 **Optional Variables:**
-
 - `VITE_WS_TOKEN`: WebSocket token for development
 - `VITE_API_BASE_URL`: Custom API base URL
 - `VITE_ENABLE_ANALYTICS`: Enable/disable analytics
@@ -125,17 +118,15 @@ The repository includes a **simplified and reliable GitHub Actions workflow** (`
 5. **Deployment Summary**: Provides comprehensive deployment status
 
 #### Workflow Triggers:
-
 - ✅ **Push to main branch**: Automatic deployment
 - ✅ **Manual trigger**: Via GitHub Actions UI
 - ❌ **Pull Requests**: No deployments (prevents test/preview deployments)
 
 #### Required Secrets:
-
 ```bash
 # Primary Platform (Vercel)
 VERCEL_TOKEN=your-vercel-token
-VERCEL_PROJECT_ID=your-project-id
+VERCEL_PROJECT_ID=your-project-id  
 VERCEL_ORG_ID=your-org-id
 
 # Fallback Platform (Netlify)
@@ -148,19 +139,17 @@ VITE_SUPABASE_ANON_KEY=your-supabase-key
 ```
 
 #### Deployment Flow:
-
 ```
 Push to main → Build → Vercel (Primary)
                  ↓ (if fails)
               Netlify (Fallback 1)
-                 ↓ (if fails)
+                 ↓ (if fails)  
            GitHub Pages (Fallback 2)
                  ↓
          Admin Notification (if fallback used)
 ```
 
 #### Benefits:
-
 - **Reliability**: Multiple deployment options ensure high availability
 - **Speed**: Vercel provides fastest deployments when available
 - **Monitoring**: Automatic notifications when issues occur
@@ -170,25 +159,21 @@ Push to main → Build → Vercel (Primary)
 ### Deployment Monitoring & Notifications
 
 #### Admin Notification System
-
 When fallback deployments occur, administrators receive detailed notifications including:
 
 - **Platform Status**: Which platforms succeeded/failed
-- **Deployment URLs**: Links to successful deployments
+- **Deployment URLs**: Links to successful deployments  
 - **Error Context**: Information about why primary deployment failed
 - **Action Items**: Specific steps to investigate and resolve issues
 
 #### Deployment Summary
-
 Every deployment generates a comprehensive summary with:
-
 - Build status and statistics
 - Platform-by-platform results
 - Deployment URLs and accessibility
 - Next steps and recommendations
 
 #### Troubleshooting Fallbacks
-
 If you receive fallback notifications:
 
 1. **Check Vercel Status**: Verify platform health and token validity
@@ -220,21 +205,18 @@ npm run preview
 Each platform is automatically configured but can be customized:
 
 #### Vercel (Primary Platform)
-
 - **Auto-detection**: Framework detected automatically
 - **Zero-configuration**: Works out of the box with `vercel.json`
 - **Features**: Automatic HTTPS, CDN, edge functions
 - **Config File**: `vercel.json`
 
 #### Netlify (First Fallback)
-
 - **Build Integration**: Uses `netlify.toml` configuration
 - **Features**: Form handling, edge functions, build plugins
 - **Headers**: Optimized caching and security headers
 - **Config File**: `netlify.toml`
 
 #### GitHub Pages (Final Fallback)
-
 - **Static Hosting**: Perfect for emergency deployments
 - **Features**: Free hosting, custom domains, HTTPS
 - **Limitations**: Static sites only, no server-side functions
@@ -243,14 +225,12 @@ Each platform is automatically configured but can be customized:
 ### Deployment Checklist
 
 **Prerequisites:**
-
 - [ ] Repository secrets configured (VERCEL_TOKEN, NETLIFY_AUTH_TOKEN, etc.)
 - [ ] Environment variables set (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)
 - [ ] Platform accounts linked and configured
 - [ ] Build process tested locally
 
 **For Production Deployment:**
-
 - [ ] Push changes to `main` branch
 - [ ] Monitor GitHub Actions workflow
 - [ ] Verify successful deployment notification
@@ -258,7 +238,6 @@ Each platform is automatically configured but can be customized:
 - [ ] Test core application functionality
 
 **If Fallback Occurs:**
-
 - [ ] Review admin notification details
 - [ ] Check primary platform status and configuration
 - [ ] Investigate logs for root cause
@@ -300,7 +279,7 @@ If a deployment fails or causes issues:
 **Common Issues:**
 
 - **Build Failures**: Check Node.js version compatibility and dependency conflicts
-- **Environment Variables**: Verify all VITE\_ prefixed variables are properly set
+- **Environment Variables**: Verify all VITE_ prefixed variables are properly set
 - **Platform Tokens**: Ensure authentication tokens haven't expired
 - **Domain Issues**: Check DNS settings and SSL configuration
 
