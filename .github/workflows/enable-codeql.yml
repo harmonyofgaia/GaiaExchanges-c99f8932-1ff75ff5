@@ -18,8 +18,9 @@ jobs:
         run: |
           mkdir -p .github/workflows
           curl -o .github/workflows/codeql.yml https://raw.githubusercontent.com/github/codeql-action/main/.github/workflows/codeql.yml
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
           git add .github/workflows/codeql.yml
           git commit -m "chore: add CodeQL code scanning workflow"
+          git pull --rebase origin main
           git push https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/harmonyofgaia/GaiaExchanges-c99f8932-1ff75ff5.git main
