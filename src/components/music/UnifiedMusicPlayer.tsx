@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -25,70 +25,19 @@ interface Track {
 }
 
 export function UnifiedMusicPlayer() {
-  // --- Ensure playTrack and playNext are declared before any useEffect that references them ---
-  const playTrack = useCallback(async (track: Track) => {
-    if (!audioRef.current) return;
-
-    try {
-      const audioUrl = track.storage_path
-        ? `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`
-        : track.url;
-
-      if (audioUrl) {
-        audioRef.current.src = audioUrl;
-        await audioRef.current.play();
-        setIsPlaying(true);
-        setCurrentTrack(track);
-        toast.success(`🎵 Now playing: ${track.original_name || track.name}`);
-      }
-    } catch (error) {
-      console.error("Failed to play track:", error);
-      toast.error("Failed to play audio file");
-    }
-  }, []);
-
-  const playNext = useCallback(() => {
-    if (playlist.length === 0) return;
-    const nextIndex = (currentIndex + 1) % playlist.length;
-    setCurrentIndex(nextIndex);
-    playTrack(playlist[nextIndex]);
-  }, [playlist, currentIndex, playTrack]);
-
   const [isVisible, setIsVisible] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
+  const [volume, setVolume] = useState(0.7);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [playlist, setPlaylist] = useState<Track[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  const playTrack = useCallback(
-    async (track: Track) => {
-      if (!audioRef.current) return;
-
-      try {
-        const audioUrl = track.storage_path
-          ? `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`
-          : track.url;
-
-        if (audioUrl) {
-          audioRef.current.src = audioUrl;
-          await audioRef.current.play();
-          setIsPlaying(true);
-          setCurrentTrack(track);
-          toast.success(`🎵 Now playing: ${track.original_name || track.name}`);
-        }
-      } catch (error) {
-        console.error("Failed to play track:", error);
-        toast.error("Failed to play audio file");
-      }
-    },
-    [audioRef, setIsPlaying, setCurrentTrack],
-  );
-
-  const playNext = useCallback(() => {
-    if (playlist.length === 0) return;
-    const nextIndex = (currentIndex + 1) % playlist.length;
-    setCurrentIndex(nextIndex);
-    playTrack(playlist[nextIndex]);
-  }, [playlist, currentIndex, playTrack]);
-  // useEffect for loading media and handling admin updates (moved below playTrack and playNext)
-  // Audio event handlers (moved below playTrack and playNext)
-  // useEffect for loading media and handling admin updates
+  // Initialize and check for background music
   useEffect(() => {
     const loadActiveMedia = () => {
       const activeMediaId = localStorage.getItem("activeBackgroundMedia");
@@ -114,7 +63,7 @@ export function UnifiedMusicPlayer() {
     loadActiveMedia();
 
     // Listen for admin updates
-    const handleMediaUpdate = (event: CustomEvent) => {
+    const handleMediaUpdate = (event: any) => {
       const { track, action } = event.detail || {};
 
       if (action === "play" && track) {
@@ -139,7 +88,7 @@ export function UnifiedMusicPlayer() {
       window.removeEventListener("backgroundMediaUpdated", loadActiveMedia);
       window.removeEventListener("admin-audio-update", handleMediaUpdate);
     };
-  }, [playTrack]);
+  }, []);
 
   // Audio event handlers
   useEffect(() => {
@@ -174,7 +123,7 @@ export function UnifiedMusicPlayer() {
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("pause", handlePause);
     };
-  }, [currentIndex, playlist, playNext]);
+  }, [currentIndex, playlist]);
 
   // Volume control
   useEffect(() => {
@@ -232,9 +181,9 @@ export function UnifiedMusicPlayer() {
     return () => {
       window.removeEventListener("beforeunload", saveState);
     };
-  }, [currentTrack, isMuted, isPlaying, volume]);
+  }, [currentTrack]);
 
-  const playTrack = useCallback(async (track: Track) => {
+  const playTrack = async (track: Track) => {
     if (!audioRef.current) return;
 
     try {
@@ -253,7 +202,7 @@ export function UnifiedMusicPlayer() {
       console.error("Failed to play track:", error);
       toast.error("Failed to play audio file");
     }
-  }, []);
+  };
 
   const togglePlay = async () => {
     if (!audioRef.current || !currentTrack) return;
@@ -280,12 +229,12 @@ export function UnifiedMusicPlayer() {
     });
   };
 
-  const playNext = useCallback(() => {
+  const playNext = () => {
     if (playlist.length === 0) return;
     const nextIndex = (currentIndex + 1) % playlist.length;
     setCurrentIndex(nextIndex);
     playTrack(playlist[nextIndex]);
-  }, [playlist, currentIndex, playTrack]);
+  };
 
   const playPrevious = () => {
     if (playlist.length === 0) return;

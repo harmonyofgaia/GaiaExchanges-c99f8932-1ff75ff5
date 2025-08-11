@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Only run lint-staged if there are staged files matching the config
+if git diff --cached --name-only | grep -E '\.(js|ts|tsx|jsx|css|md|json)$' > /dev/null; then
+	npx lint-staged --config lint-staged.config.json
+else
+	echo "No matching staged files for lint-staged. Skipping."
+fi
+npx lint-staged

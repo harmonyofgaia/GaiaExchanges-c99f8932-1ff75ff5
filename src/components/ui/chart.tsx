@@ -104,23 +104,15 @@ const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
     active?: boolean;
-    payload?: Record<string, unknown>[];
+    payload?: any[];
     label?: string;
     hideLabel?: boolean;
     hideIndicator?: boolean;
     indicator?: "line" | "dot" | "dashed";
     nameKey?: string;
     labelKey?: string;
-    labelFormatter?: (
-      value: unknown,
-      name?: string,
-      props?: Record<string, unknown>,
-    ) => string;
-    formatter?: (
-      value: unknown,
-      name?: string,
-      props?: Record<string, unknown>,
-    ) => string;
+    labelFormatter?: (value: any, name?: string, props?: any) => string;
+    formatter?: (value: any, name?: string, props?: any) => string;
     color?: string;
     labelClassName?: string;
   }
@@ -150,9 +142,8 @@ const ChartTooltipContent = React.forwardRef<
         return null;
       }
 
-      const [itemRaw] = payload;
-      const item = itemRaw as Record<string, unknown>;
-      const key = `${labelKey || (item.dataKey as string) || (item.name as string) || "value"}`;
+      const [item] = payload;
+      const key = `${labelKey || item.dataKey || item.name || "value"}`;
       const itemConfig = getPayloadConfigFromPayload(config, item, key);
       const value =
         !labelKey && typeof label === "string"
@@ -162,13 +153,7 @@ const ChartTooltipContent = React.forwardRef<
       if (labelFormatter) {
         return (
           <div className={cn("font-medium", labelClassName)}>
-            {labelFormatter(
-              typeof value === "string" ? value : String(value),
-              typeof item.name === "string"
-                ? item.name
-                : String(item.name ?? ""),
-              item,
-            )}
+            {labelFormatter(value, item?.name, item)}
           </div>
         );
       }
@@ -204,33 +189,21 @@ const ChartTooltipContent = React.forwardRef<
       >
         {!nestLabel ? tooltipLabel : null}
         <div className="grid gap-1.5">
-          {payload.map((itemRaw, index) => {
-            const item = itemRaw as Record<string, unknown>;
-            const key = `${nameKey || (item.name as string) || (item.dataKey as string) || "value"}`;
+          {payload.map((item, index) => {
+            const key = `${nameKey || item.name || item.dataKey || "value"}`;
             const itemConfig = getPayloadConfigFromPayload(config, item, key);
-            const itemPayload =
-              item.payload && typeof item.payload === "object"
-                ? (item.payload as Record<string, unknown>)
-                : {};
-            const indicatorColor =
-              color || (itemPayload.fill as string) || (item.color as string);
+            const indicatorColor = color || item.payload.fill || item.color;
 
             return (
               <div
-                key={String(item.dataKey) || index}
+                key={item.dataKey}
                 className={cn(
                   "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
                   indicator === "dot" && "items-center",
                 )}
               >
                 {formatter && item?.value !== undefined && item.name ? (
-                  formatter(
-                    item.value,
-                    typeof item.name === "string"
-                      ? item.name
-                      : String(item.name ?? ""),
-                    item,
-                  )
+                  formatter(item.value, item.name, item)
                 ) : (
                   <>
                     {itemConfig?.icon ? (
@@ -266,16 +239,12 @@ const ChartTooltipContent = React.forwardRef<
                       <div className="grid gap-1.5">
                         {nestLabel ? tooltipLabel : null}
                         <span className="text-muted-foreground">
-                          {itemConfig?.label || (item.name as React.ReactNode)}
+                          {itemConfig?.label || item.name}
                         </span>
                       </div>
-                      {item.value !== undefined && item.value !== null && (
+                      {item.value && (
                         <span className="font-mono font-medium tabular-nums text-foreground">
-                          {typeof item.value === "number"
-                            ? item.value.toLocaleString()
-                            : typeof item.value === "string"
-                              ? item.value
-                              : JSON.stringify(item.value)}
+                          {item.value.toLocaleString()}
                         </span>
                       )}
                     </div>
@@ -296,7 +265,7 @@ const ChartLegend = RechartsPrimitive.Legend;
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
-    payload?: Record<string, unknown>[];
+    payload?: any[];
     verticalAlign?: "top" | "bottom";
     hideIcon?: boolean;
     nameKey?: string;
@@ -327,13 +296,13 @@ const ChartLegendContent = React.forwardRef<
           className,
         )}
       >
-        {payload.map((itemRaw, index) => {
-          const item = itemRaw as Record<string, unknown>;
-          const key = `${nameKey || (item.dataKey as string) || "value"}`;
+        {payload.map((item) => {
+          const key = `${nameKey || item.dataKey || "value"}`;
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
+
           return (
             <div
-              key={String(item.value) || index}
+              key={item.value}
               className={cn(
                 "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground",
               )}
@@ -344,11 +313,11 @@ const ChartLegendContent = React.forwardRef<
                 <div
                   className="h-2 w-2 shrink-0 rounded-[2px]"
                   style={{
-                    backgroundColor: item.color as string,
+                    backgroundColor: item.color,
                   }}
                 />
               )}
-              {itemConfig?.label as React.ReactNode}
+              {itemConfig?.label}
             </div>
           );
         })}

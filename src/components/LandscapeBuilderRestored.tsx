@@ -64,7 +64,7 @@ export function LandscapeBuilderRestored() {
   const tools: {
     id: LandscapeElement["type"];
     name: string;
-    icon: React.ElementType;
+    icon: any;
     color: string;
   }[] = [
     { id: "tree", name: "Trees", icon: TreePine, color: "#228B22" },

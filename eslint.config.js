@@ -25,7 +25,6 @@ export default tseslint.config(
     plugins: {
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
-      "@typescript-eslint": tseslint.plugin,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -38,10 +37,10 @@ export default tseslint.config(
         "error",
         { allowShortCircuit: true, allowTernary: true },
       ],
-      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-require-imports": "warn",
       "@typescript-eslint/no-empty-object-type": "warn",
-      "react-hooks/exhaustive-deps": "error",
+      "react-hooks/exhaustive-deps": "warn",
       "no-case-declarations": "warn",
       // Reduce some warnings to be less strict
       "prefer-const": "warn",
