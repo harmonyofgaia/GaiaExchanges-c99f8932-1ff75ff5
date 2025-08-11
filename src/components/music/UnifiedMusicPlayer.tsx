@@ -56,33 +56,36 @@ export function UnifiedMusicPlayer() {
 
   const [isVisible, setIsVisible] = useState(false);
 
-        const playTrack = useCallback(async (track: Track) => {
-          if (!audioRef.current) return;
+  const playTrack = useCallback(
+    async (track: Track) => {
+      if (!audioRef.current) return;
 
-          try {
-            const audioUrl = track.storage_path
-              ? `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`
-              : track.url;
+      try {
+        const audioUrl = track.storage_path
+          ? `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`
+          : track.url;
 
-            if (audioUrl) {
-              audioRef.current.src = audioUrl;
-              await audioRef.current.play();
-              setIsPlaying(true);
-              setCurrentTrack(track);
-              toast.success(`🎵 Now playing: ${track.original_name || track.name}`);
-            }
-          } catch (error) {
-            console.error("Failed to play track:", error);
-            toast.error("Failed to play audio file");
-          }
-        }, [audioRef, setIsPlaying, setCurrentTrack]);
+        if (audioUrl) {
+          audioRef.current.src = audioUrl;
+          await audioRef.current.play();
+          setIsPlaying(true);
+          setCurrentTrack(track);
+          toast.success(`🎵 Now playing: ${track.original_name || track.name}`);
+        }
+      } catch (error) {
+        console.error("Failed to play track:", error);
+        toast.error("Failed to play audio file");
+      }
+    },
+    [audioRef, setIsPlaying, setCurrentTrack],
+  );
 
-        const playNext = useCallback(() => {
-          if (playlist.length === 0) return;
-          const nextIndex = (currentIndex + 1) % playlist.length;
-          setCurrentIndex(nextIndex);
-          playTrack(playlist[nextIndex]);
-        }, [playlist, currentIndex, playTrack]);
+  const playNext = useCallback(() => {
+    if (playlist.length === 0) return;
+    const nextIndex = (currentIndex + 1) % playlist.length;
+    setCurrentIndex(nextIndex);
+    playTrack(playlist[nextIndex]);
+  }, [playlist, currentIndex, playTrack]);
   // useEffect for loading media and handling admin updates (moved below playTrack and playNext)
   // Audio event handlers (moved below playTrack and playNext)
   // useEffect for loading media and handling admin updates
