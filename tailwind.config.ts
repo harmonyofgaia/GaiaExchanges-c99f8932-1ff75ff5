@@ -21,7 +21,7 @@ const config: Config = {
     },
     extend: {
       colors: {
-  // border color is defined below with fallback
+        // border color is defined below with fallback
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
@@ -55,7 +55,7 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
         gold: "hsl(47 95% 53%)",
-  border: "hsl(var(--border, 220 13% 91%))",
+        border: "hsl(var(--border, 220 13% 91%))",
       },
       borderRadius: {
         lg: "var(--radius)",

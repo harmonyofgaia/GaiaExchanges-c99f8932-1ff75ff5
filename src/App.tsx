@@ -172,12 +172,14 @@ function App() {
             </Routes>
           </Suspense>
         </main>
-        <UnifiedMusicPlayer playlist={[
-          {
-            name: "Sample Track",
-            url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          }
-        ]} />
+        <UnifiedMusicPlayer
+          playlist={[
+            {
+              name: "Sample Track",
+              url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+            },
+          ]}
+        />
         <Toaster position="top-right" />
       </div>
     </Router>
