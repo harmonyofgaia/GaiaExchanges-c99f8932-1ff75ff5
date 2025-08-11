@@ -49,6 +49,7 @@ import { CrossPagePersistence } from "./components/system/CrossPagePersistence";
 import { HoneypotRedirect } from "./components/security/HoneypotRedirect";
 import { AnimatedEarthLogo } from "./components/branding/AnimatedEarthLogo";
 import { PersistentAudioControls } from "./components/audio/PersistentAudioControls";
+import { MatrixRainBackground } from "./components/backgrounds/MatrixRainBackground";
 
 const EcoAvatar = lazy(() => import("./pages/EcoAvatar"));
 const CommunityEngagementHub = lazy(
@@ -104,123 +105,75 @@ function App() {
   return (
     <ErrorBoundary>
       <Router>
-        <div
-          className="min-h-screen bg-background text-foreground"
-          data-router="true"
-        >
-          <CrossPagePersistence />
-          <HoneypotRedirect />
-          <Navbar />
-          <main className="flex-1">
-            <Suspense
-              fallback={
-                <div className="min-h-screen bg-background flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="mb-4 flex justify-center">
-                      <AnimatedEarthLogo />
-                    </div>
-                    <div className="mt-4 text-primary animate-pulse">
-                      Loading Gaia's Exchanges...
+        <div className="min-h-screen bg-black text-foreground relative overflow-hidden" data-router="true">
+          {/* Matrix background always visible */}
+          <div className="fixed inset-0 z-0 pointer-events-none">
+            <MatrixRainBackground intensity="medium" color="#00ff00" speed={1} />
+          </div>
+          <div className="relative z-10">
+            <CrossPagePersistence />
+            <HoneypotRedirect />
+            <Navbar />
+            <main className="flex-1">
+              <Suspense
+                fallback={
+                  <div className="min-h-screen bg-background flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="mb-4 flex justify-center">
+                        <AnimatedEarthLogo />
+                      </div>
+                      <div className="mt-4 text-primary animate-pulse">
+                        Loading Gaia's Exchanges...
+                      </div>
                     </div>
                   </div>
-                </div>
-              }
-            >
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route
-                  path="/green-impact-dashboard"
-                  element={<GreenImpactDashboard />}
-                />
-                <Route path="/eco-avatar" element={<EcoAvatar />} />
-                <Route
-                  path="/community-engagement-hub"
-                  element={<CommunityEngagementHub />}
-                />
-                {/* Partnership management moved to secure admin only */}
-                <Route
-                  path="/impact-measurement-system"
-                  element={<ImpactMeasurementSystem />}
-                />
-                <Route
-                  path="/sea-green-psychohistorical"
-                  element={<SeaGreenPsychohistorical />}
-                />
-                <Route
-                  path="/gaia-token-status"
-                  element={<GaiaTokenStatus />}
-                />
-                <Route
-                  path="/deployment-center"
-                  element={<DeploymentCenter />}
-                />
-                <Route path="/virtual-world" element={<VirtualWorld />} />
-                <Route path="/animal-welfare" element={<AnimalWelfare />} />
-                <Route path="/gaming" element={<Gaming />} />
-                <Route path="/exchange" element={<Exchange />} />
-                <Route path="/marketplace" element={<Marketplace />} />
-                <Route path="/wallet" element={<Wallet />} />
-                <Route path="/video-exchange" element={<VideoExchange />} />
-                <Route path="/streaming-shows" element={<StreamingShows />} />
-                <Route
-                  path="/gaia-bike-ecosystem"
-                  element={<GaiaBikeEcosystem />}
-                />
-                <Route path="/token-mining" element={<TokenMining />} />
-                <Route
-                  path="/green-investments"
-                  element={<GreenInvestments />}
-                />
-                <Route path="/coin-crafter" element={<CoinCrafter />} />
-                <Route
-                  path="/landscape-builder"
-                  element={<LandscapeBuilder />}
-                />
-                <Route
-                  path="/aura-land-scrapyard"
-                  element={<AuraLandScrapyard />}
-                />
-                <Route
-                  path="/comprehensive-status"
-                  element={<ComprehensiveStatus />}
-                />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/pricing" element={<Pricing />} />
-                <Route
-                  path="/admin"
-                  element={<Navigate to="/secure-admin" replace />}
-                />
-                <Route path="/live-tracking" element={<LiveTracking />} />
-                <Route path="/gaias-projects" element={<GaiasProjects />} />
-                <Route
-                  path="/gaia-private-blockchain-swap-token"
-                  element={<GaiaPrivateBlockchainSwapToken />}
-                />
-                <Route
-                  path="/private-blockchain"
-                  element={<PrivateBlockchain />}
-                />
-                <Route path="/secure-admin" element={<SecureAdmin />} />
-                <Route path="/admin-login" element={<AdminLogin />} />
-                <Route
-                  path="/earning-activities"
-                  element={<EarningActivitiesDashboard />}
-                />
-                <Route
-                  path="/enhanced-leaderboard"
-                  element={<EnhancedLeaderboard />}
-                />
-                <Route
-                  path="/project-funding"
-                  element={<DecentralizedProjectFundingPools />}
-                />
-              </Routes>
-            </Suspense>
-          </main>
-          <PersistentAudioControls />
-          <Toaster position="top-right" />
+                }
+              >
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
+                  <Route path="/eco-avatar" element={<EcoAvatar />} />
+                  <Route path="/community-engagement-hub" element={<CommunityEngagementHub />} />
+                  {/* Partnership management moved to secure admin only */}
+                  <Route path="/impact-measurement-system" element={<ImpactMeasurementSystem />} />
+                  <Route path="/sea-green-psychohistorical" element={<SeaGreenPsychohistorical />} />
+                  <Route path="/gaia-token-status" element={<GaiaTokenStatus />} />
+                  <Route path="/deployment-center" element={<DeploymentCenter />} />
+                  <Route path="/virtual-world" element={<VirtualWorld />} />
+                  <Route path="/animal-welfare" element={<AnimalWelfare />} />
+                  <Route path="/gaming" element={<Gaming />} />
+                  <Route path="/exchange" element={<Exchange />} />
+                  <Route path="/marketplace" element={<Marketplace />} />
+                  <Route path="/wallet" element={<Wallet />} />
+                  <Route path="/video-exchange" element={<VideoExchange />} />
+                  <Route path="/streaming-shows" element={<StreamingShows />} />
+                  <Route path="/gaia-bike-ecosystem" element={<GaiaBikeEcosystem />} />
+                  <Route path="/token-mining" element={<TokenMining />} />
+                  <Route path="/green-investments" element={<GreenInvestments />} />
+                  <Route path="/coin-crafter" element={<CoinCrafter />} />
+                  <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+                  <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
+                  <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/admin" element={<Navigate to="/secure-admin" replace />} />
+                  <Route path="/live-tracking" element={<LiveTracking />} />
+                  <Route path="/gaias-projects" element={<GaiasProjects />} />
+                  <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
+                  <Route path="/private-blockchain" element={<PrivateBlockchain />} />
+                  <Route path="/secure-admin" element={<SecureAdmin />} />
+                  <Route path="/admin-login" element={<AdminLogin />} />
+                  <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
+                  <Route path="/enhanced-leaderboard" element={<EnhancedLeaderboard />} />
+                  <Route path="/project-funding" element={<DecentralizedProjectFundingPools />} />
+                </Routes>
+              </Suspense>
+            </main>
+            <PersistentAudioControls />
+            <Toaster position="top-right" />
+          </div>
         </div>
       </Router>
     </ErrorBoundary>
