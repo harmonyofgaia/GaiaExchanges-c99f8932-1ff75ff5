@@ -72,13 +72,13 @@ function App() {
   return (
     <Router>
       <div
-        className="min-h-screen bg-background text-foreground"
+        className="flex flex-col min-h-screen bg-background text-foreground"
         data-router="true"
       >
         <CrossPagePersistence />
         <HoneypotRedirect />
         <Navbar />
-        <main className="flex-1">
+        <main className="flex-1 w-full mx-auto">
           <Suspense
             fallback={
               <div className="min-h-screen bg-background flex items-center justify-center">
