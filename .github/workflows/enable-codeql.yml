@@ -1,8 +1,6 @@
 name: Enable CodeQL on New Repositories
 
 on:
-  repository:
-    types: [created]
   push:
     branches: [main]
 
