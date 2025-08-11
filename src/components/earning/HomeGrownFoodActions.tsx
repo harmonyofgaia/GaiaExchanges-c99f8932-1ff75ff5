@@ -32,7 +32,7 @@ export function HomeGrownFoodActions() {
         quantity: parseFloat(quantity),
         growthDuration: 90,
         organicCertified: true,
-        harvestDate: new Date(),
+        harvestDate: new Date().toISOString(),
         seedsShared: 0,
         knowledgeShared: true,
       });

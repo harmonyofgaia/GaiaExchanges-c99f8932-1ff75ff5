@@ -61,7 +61,12 @@ export function EnhancedWormsArena() {
   const [battleResults, setBattleResults] = useState<BattleResult[]>([]);
   const [tournaments, setTournaments] = useState<Tournament[]>([]);
   const [playerTokens, setPlayerTokens] = useState(15420);
-  const [leaderboard, setLeaderboard] = useState<any[]>([]);
+  interface LeaderboardEntry {
+    player: string;
+    score: number;
+    rank: number;
+  }
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
 
   const arenaInterval = useRef<NodeJS.Timeout>(undefined);
 

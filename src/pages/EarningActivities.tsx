@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
+import { InteractiveGlobeMenu } from "@/components/earning/InteractiveGlobeMenu";
 import {
   Zap,
   Trophy,
@@ -81,8 +82,12 @@ import { GreenShoppingRewards } from "@/components/earning/GreenShoppingRewards"
 import { EnergyConsumptionTracker } from "@/components/earning/EnergyConsumptionTracker";
 
 export default function EarningActivities() {
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState("globe");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedActivity, setSelectedActivity] = useState<{
+    category: string;
+    activityId: string;
+  } | null>(null);
 
   const [userStats] = useState({
     totalTokens: 4890,
@@ -97,11 +102,11 @@ export default function EarningActivities() {
 
   const earningCategories = [
     {
-      id: 'foundation',
-      title: '🔰 Essential Eco Actions',
-      description: 'Core environmental activities for all levels',
-      color: 'from-green-900/30 to-emerald-900/30',
-      borderColor: 'border-green-500/30',
+      id: "foundation",
+      title: "🔰 Essential Eco Actions",
+      description: "Core environmental activities for all levels",
+      color: "from-green-900/30 to-emerald-900/30",
+      borderColor: "border-green-500/30",
       completedCount: 12,
       totalCount: 15,
       components: [
@@ -430,6 +435,27 @@ export default function EarningActivities() {
       ),
   );
 
+  const handleActivitySelect = (category: string, activityId: string) => {
+    setSelectedActivity({ category, activityId });
+    setActiveTab("categories");
+  };
+
+  const getSelectedActivityComponent = () => {
+    if (!selectedActivity) return null;
+
+    const category = earningCategories.find(
+      (cat) => cat.id === selectedActivity.category,
+    );
+    if (!category) return null;
+
+    const activityIndex = parseInt(selectedActivity.activityId.split("-")[1]);
+    const activity = category.components[activityIndex];
+
+    return activity ? (
+      <activity.component key={selectedActivity.activityId} />
+    ) : null;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/10 via-blue-900/10 to-purple-900/10">
       <div className="max-w-7xl mx-auto p-4 space-y-8">
@@ -534,7 +560,10 @@ export default function EarningActivities() {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8 h-16 bg-black/20">
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 mb-8 h-16 bg-black/20">
+            <TabsTrigger value="globe" className="text-base font-medium h-12">
+              🌍 Globe Menu
+            </TabsTrigger>
             <TabsTrigger
               value="overview"
               className="text-base font-medium h-12"
@@ -557,6 +586,41 @@ export default function EarningActivities() {
               🏆 Achievements
             </TabsTrigger>
           </TabsList>
+
+          {/* Globe Tab */}
+          <TabsContent value="globe" className="space-y-8">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-cyan-400 mb-3">
+                🌍 Interactive Activity Globe
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Navigate through activities using our 3D matrix-style globe
+                interface
+              </p>
+            </div>
+
+            <InteractiveGlobeMenu
+              onActivitySelect={handleActivitySelect}
+              categories={earningCategories}
+            />
+
+            {/* Selected Activity Display */}
+            {selectedActivity && getSelectedActivityComponent() && (
+              <div className="mt-8 space-y-4">
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold text-primary mb-2">
+                    Selected Activity
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Click on another globe point to switch activities
+                  </p>
+                </div>
+                <div className="bg-black/20 rounded-2xl p-6 border border-cyan-500/30">
+                  {getSelectedActivityComponent()}
+                </div>
+              </div>
+            )}
+          </TabsContent>
 
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-8">

@@ -38,7 +38,10 @@ const SecureAdmin = () => {
         </Link>
       </div>
       <div>
-        <p>Welcome to the Secure Admin dashboard. Use the buttons above to access admin tools and documentation.</p>
+        <p>
+          Welcome to the Secure Admin dashboard. Use the buttons above to access
+          admin tools and documentation.
+        </p>
       </div>
     </div>
   );

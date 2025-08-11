@@ -40,9 +40,48 @@ export function EnhancedNeuroBackground({
       (intensity === "low" ? 30 : intensity === "medium" ? 60 : 100) *
         (neuralDensity / 100),
     );
-    const nodes: any[] = [];
-    const connections: any[] = [];
-    const particles: any[] = [];
+    interface Node {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+      activity: number;
+      activitySpeed: number;
+      pulse: number;
+      // Optional pattern-specific properties
+      type?: number;
+      resonance?: number;
+      harmonic?: number;
+      morphing?: boolean;
+      morphSpeed?: number;
+      organic?: boolean;
+      flowField?: { x: number; y: number };
+      breathing?: number;
+      geometric?: boolean;
+      sides?: number;
+    }
+    interface Connection {
+      from: number;
+      to: number;
+      strength: number;
+      pulse: number;
+      pulseSpeed: number;
+      distance: number;
+      pattern: string;
+    }
+    interface Particle {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      life: number;
+      maxLife: number;
+      size: number;
+    }
+    const nodes: Node[] = [];
+    const connections: Connection[] = [];
+    const particles: Particle[] = [];
 
     // Helper function to convert hex to RGB
     function hexToRgb(hex: string) {
@@ -63,11 +102,17 @@ export function EnhancedNeuroBackground({
       canvas: HTMLCanvasElement,
       pattern: string,
     ) {
-      let node: any;
-
+      // Move lexical declarations outside case blocks
+      let angle: number,
+        radius: number,
+        gridSize: number,
+        cellWidth: number,
+        cellHeight: number,
+        gridX: number,
+        gridY: number;
       switch (pattern) {
-        case "creative":
-          node = {
+        case "creative": {
+          const node: Node = {
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
             vx: (Math.random() - 0.5) * 3 * speed,
@@ -76,16 +121,16 @@ export function EnhancedNeuroBackground({
             activity: Math.random(),
             activitySpeed: 0.008 + Math.random() * 0.025,
             pulse: 0,
-            type: Math.floor(Math.random() * 4), // Different node types
+            type: Math.floor(Math.random() * 4),
             resonance: Math.random() * Math.PI * 2,
             harmonic: 1 + Math.random() * 3,
           };
-          break;
-
-        case "abstract":
-          const angle = (index / total) * Math.PI * 2 + Math.random() * 0.5;
-          const radius = 100 + Math.random() * 200;
-          node = {
+          return node;
+        }
+        case "abstract": {
+          angle = (index / total) * Math.PI * 2 + Math.random() * 0.5;
+          radius = 100 + Math.random() * 200;
+          const node: Node = {
             x:
               canvas.width / 2 + Math.cos(angle) * radius + Math.random() * 100,
             y:
@@ -101,10 +146,10 @@ export function EnhancedNeuroBackground({
             morphing: true,
             morphSpeed: 0.005 + Math.random() * 0.01,
           };
-          break;
-
-        case "organic":
-          node = {
+          return node;
+        }
+        case "organic": {
+          const node: Node = {
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
             vx: (Math.random() - 0.5) * 2 * speed,
@@ -120,17 +165,15 @@ export function EnhancedNeuroBackground({
             },
             breathing: Math.random() * Math.PI * 2,
           };
-          break;
-
-        case "geometric":
-          const gridSize = Math.sqrt(total);
-          const cellWidth = canvas.width / gridSize;
-          const cellHeight = canvas.height / gridSize;
-          const gridX = (index % gridSize) * cellWidth + cellWidth / 2;
-          const gridY =
-            Math.floor(index / gridSize) * cellHeight + cellHeight / 2;
-
-          node = {
+          return node;
+        }
+        case "geometric": {
+          gridSize = Math.sqrt(total);
+          cellWidth = canvas.width / gridSize;
+          cellHeight = canvas.height / gridSize;
+          gridX = (index % gridSize) * cellWidth + cellWidth / 2;
+          gridY = Math.floor(index / gridSize) * cellHeight + cellHeight / 2;
+          const node: Node = {
             x: gridX + (Math.random() - 0.5) * 50,
             y: gridY + (Math.random() - 0.5) * 50,
             vx: (Math.random() - 0.5) * speed,
@@ -142,10 +185,10 @@ export function EnhancedNeuroBackground({
             geometric: true,
             sides: 3 + Math.floor(Math.random() * 5),
           };
-          break;
-
-        default: // 'default'
-          node = {
+          return node;
+        }
+        default: {
+          const node: Node = {
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
             vx: (Math.random() - 0.5) * 2 * speed,
@@ -155,9 +198,9 @@ export function EnhancedNeuroBackground({
             activitySpeed: 0.01 + Math.random() * 0.02,
             pulse: 0,
           };
+          return node;
+        }
       }
-
-      return node;
     }
 
     // Create enhanced nodes with pattern-specific properties
@@ -319,7 +362,7 @@ export function EnhancedNeuroBackground({
 
     // Helper function to update pattern-specific nodes
     function updatePatternNode(
-      node: any,
+      node: Node,
       pattern: string,
       time: number,
       speed: number,
@@ -385,9 +428,9 @@ export function EnhancedNeuroBackground({
     // Helper function to draw pattern-specific connections
     function drawPatternConnection(
       ctx: CanvasRenderingContext2D,
-      fromNode: any,
-      toNode: any,
-      connection: any,
+      fromNode: Node,
+      toNode: Node,
+      connection: Connection,
       pattern: string,
       time: number,
       color: string,
@@ -399,7 +442,7 @@ export function EnhancedNeuroBackground({
       const colorValues = hexToRgb(color);
 
       switch (pattern) {
-        case "creative":
+        case "creative": {
           // Creative multi-colored connections
           const creativePulse = Math.sin(
             time * 3 + connection.pulse * Math.PI * 2,
@@ -440,8 +483,8 @@ export function EnhancedNeuroBackground({
             ctx.fill();
           }
           break;
-
-        case "abstract":
+        }
+        case "abstract": {
           // Abstract flowing connections
           const abstractWave = Math.sin(time * 2 + connection.distance * 0.01);
           const abstractOpacity =
@@ -460,8 +503,8 @@ export function EnhancedNeuroBackground({
           ctx.quadraticCurveTo(midX, midY, toNode.x, toNode.y);
           ctx.stroke();
           break;
-
-        case "organic":
+        }
+        case "organic": {
           // Organic flowing connections
           const organicFlow = Math.sin(time + connection.distance * 0.02);
           const organicOpacity =
@@ -483,8 +526,8 @@ export function EnhancedNeuroBackground({
             ctx.fill();
           }
           break;
-
-        case "geometric":
+        }
+        case "geometric": {
           // Geometric precise connections
           const geometricOpacity = connection.strength * 0.4;
 
@@ -501,8 +544,8 @@ export function EnhancedNeuroBackground({
             ctx.fillRect(pulseX - 2, pulseY - 2, 4, 4);
           }
           break;
-
-        default:
+        }
+        default: {
           // Default connection rendering
           const opacity = connection.strength * 0.3;
           ctx.strokeStyle = `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, ${opacity})`;
@@ -511,13 +554,14 @@ export function EnhancedNeuroBackground({
           ctx.moveTo(fromNode.x, fromNode.y);
           ctx.lineTo(toNode.x, toNode.y);
           ctx.stroke();
+        }
       }
     }
 
     // Helper function to draw pattern-specific nodes
     function drawPatternNode(
       ctx: CanvasRenderingContext2D,
-      node: any,
+      node: Node,
       pattern: string,
       time: number,
       color: string,
@@ -526,9 +570,9 @@ export function EnhancedNeuroBackground({
       const activityGlow = 0.5 + node.activity * 0.5;
 
       switch (pattern) {
-        case "creative":
+        case "creative": {
           // Creative multi-type nodes
-          const creativeGlow = Math.sin(time * 2 + node.resonance) * 0.3 + 0.7;
+          const creativeGlow = Math.sin(time * 2 + node.resonance!) * 0.3 + 0.7;
           const nodeGradient = ctx.createRadialGradient(
             node.x,
             node.y,
@@ -586,8 +630,8 @@ export function EnhancedNeuroBackground({
           ctx.arc(node.x, node.y, node.radius * creativeGlow, 0, Math.PI * 2);
           ctx.fill();
           break;
-
-        case "abstract":
+        }
+        case "abstract": {
           // Abstract morphing nodes
           const morphGlow = node.morphing ? Math.sin(time * 4) * 0.3 + 0.7 : 1;
           const abstractGradient = ctx.createRadialGradient(
@@ -612,11 +656,11 @@ export function EnhancedNeuroBackground({
           ctx.arc(node.x, node.y, node.radius * morphGlow, 0, Math.PI * 2);
           ctx.fill();
           break;
-
-        case "organic":
+        }
+        case "organic": {
           // Organic breathing nodes
           const breathingRadius =
-            node.radius * (0.8 + Math.sin(node.breathing) * 0.2);
+            node.radius * (0.8 + Math.sin(node.breathing!) * 0.2);
           const organicGradient = ctx.createRadialGradient(
             node.x,
             node.y,
@@ -639,8 +683,8 @@ export function EnhancedNeuroBackground({
           ctx.arc(node.x, node.y, breathingRadius, 0, Math.PI * 2);
           ctx.fill();
           break;
-
-        case "geometric":
+        }
+        case "geometric": {
           // Geometric shaped nodes
           const geometricGradient = ctx.createRadialGradient(
             node.x,
@@ -663,13 +707,13 @@ export function EnhancedNeuroBackground({
           ctx.beginPath();
 
           // Draw polygon based on sides
-          const angleStep = (Math.PI * 2) / node.sides;
+          const angleStep = (Math.PI * 2) / node.sides!;
           ctx.moveTo(
             node.x + Math.cos(0) * node.radius,
             node.y + Math.sin(0) * node.radius,
           );
 
-          for (let i = 1; i <= node.sides; i++) {
+          for (let i = 1; i <= node.sides!; i++) {
             ctx.lineTo(
               node.x + Math.cos(angleStep * i) * node.radius,
               node.y + Math.sin(angleStep * i) * node.radius,
@@ -679,8 +723,8 @@ export function EnhancedNeuroBackground({
           ctx.closePath();
           ctx.fill();
           break;
-
-        default:
+        }
+        default: {
           // Default node rendering
           const defaultGradient = ctx.createRadialGradient(
             node.x,
@@ -703,6 +747,7 @@ export function EnhancedNeuroBackground({
           ctx.beginPath();
           ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
           ctx.fill();
+        }
       }
     }
 

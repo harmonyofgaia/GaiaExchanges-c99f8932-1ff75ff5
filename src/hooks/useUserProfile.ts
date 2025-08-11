@@ -81,7 +81,7 @@ export function useUserProfile() {
       setError(null);
 
       // Only update fields that exist in the profiles table
-      const profileUpdates: any = {};
+      const profileUpdates: Record<string, unknown> = {};
       if (updates.full_name !== undefined)
         profileUpdates.full_name = updates.full_name;
       // Note: avatar_url is not included since it doesn't exist in the current schema

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/components/auth/AuthProvider";
+import { supabase } from "../../src/integrations/supabase/client";
+import { useAuth } from "../../src/components/auth/AuthProvider";
 
 interface Transaction {
   id: number;
@@ -10,7 +10,7 @@ interface Transaction {
   currency: string;
   status: string | null;
   external_reference: string | null;
-  metadata: any;
+  metadata: Record<string, unknown>;
   created_at: string;
   updated_at: string | null;
 }
@@ -39,7 +39,19 @@ export function useTransactions() {
         if (error) {
           console.error("Error fetching transactions:", error);
         } else {
-          setTransactions(data || []);
+          setTransactions(
+            (data || []).map((tx) => ({
+              ...tx,
+              user_id: tx.user_id ?? "",
+              metadata:
+                typeof tx.metadata === "object" &&
+                tx.metadata !== null &&
+                !Array.isArray(tx.metadata)
+                  ? (tx.metadata as Record<string, unknown>)
+                  : {},
+              created_at: tx.created_at ?? "",
+            })),
+          );
         }
       } catch (error) {
         console.error("Error fetching transactions:", error);

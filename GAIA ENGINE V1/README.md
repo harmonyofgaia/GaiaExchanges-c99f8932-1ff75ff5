@@ -2,7 +2,6 @@
 
 This is the starting point for the GAIA Engine development, based on the unified master plan. Progress will be tracked live as each module is developed.
 
-
 ## Live Progress
 
 - Core Engine Architecture: 30%

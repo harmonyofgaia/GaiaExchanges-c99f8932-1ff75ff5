@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/components/auth/AuthProvider";
+import { supabase } from "../../src/integrations/supabase/client";
+import { useAuth } from "../../src/components/auth/AuthProvider";
 
 interface UserProfile {
   id: string;
@@ -56,8 +56,8 @@ export function useUserProfile() {
           email: user.email || "",
           full_name: profileData.full_name || "",
           role: roleData?.role || "user",
-          created_at: profileData.created_at,
-          updated_at: profileData.updated_at,
+          created_at: profileData.created_at ?? "",
+          updated_at: profileData.updated_at ?? "",
           avatar_url: null, // Set to null since this field doesn't exist in the current schema
           last_login: user.last_sign_in_at || null,
         };
@@ -81,7 +81,10 @@ export function useUserProfile() {
       setError(null);
 
       // Only update fields that exist in the profiles table
-      const profileUpdates: any = {};
+      const profileUpdates: Record<
+        string,
+        string | number | boolean | null | undefined
+      > = {};
       if (updates.full_name !== undefined)
         profileUpdates.full_name = updates.full_name;
       // Note: avatar_url is not included since it doesn't exist in the current schema
@@ -140,8 +143,8 @@ export function useUserProfile() {
         email: user.email || "",
         full_name: profileData.full_name || "",
         role: roleData?.role || "user",
-        created_at: profileData.created_at,
-        updated_at: profileData.updated_at,
+        created_at: profileData.created_at ?? "",
+        updated_at: profileData.updated_at ?? "",
         avatar_url: null, // Set to null since this field doesn't exist in the current schema
         last_login: user.last_sign_in_at || null,
       };

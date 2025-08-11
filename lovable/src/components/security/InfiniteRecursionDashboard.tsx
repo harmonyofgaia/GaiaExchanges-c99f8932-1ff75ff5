@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import {
-  Infinity,
+  Infinity as InfinityIcon,
   RotateCcw,
   Zap,
   Target,
@@ -74,7 +74,7 @@ export function InfiniteRecursionDashboard() {
     <Card className="border-purple-500/20 bg-gradient-to-br from-purple-950/20 to-indigo-950/20">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-purple-400">
-          <Infinity className="h-6 w-6" />
+          <InfinityIcon className="h-6 w-6" />
           Phase 17: Infinite Recursion & Paradox Warfare
           <Badge variant={isActive ? "destructive" : "secondary"}>
             {isActive ? "INFINITE" : "FINITE"}
@@ -84,7 +84,7 @@ export function InfiniteRecursionDashboard() {
       <CardContent className="space-y-6">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div className="flex items-center gap-2">
-            <Infinity className="h-4 w-4 text-purple-400" />
+            <InfinityIcon className="h-4 w-4 text-purple-400" />
             <span className="text-sm">
               Recursion Depth: {recursionDepth.toLocaleString()}
             </span>

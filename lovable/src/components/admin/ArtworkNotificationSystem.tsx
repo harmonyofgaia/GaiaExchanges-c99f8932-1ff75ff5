@@ -80,17 +80,16 @@ Culture of Harmony Team
 
       console.log("✅ Artwork notification sent successfully:", data);
       setLastSentTime(new Date());
-
     } catch (error: unknown) {
-      console.error('❌ Notification sending failed:', error)
-      let message = 'Unknown error';
-      if (error && typeof error === 'object' && 'message' in error) {
+      console.error("❌ Notification sending failed:", error);
+      let message = "Unknown error";
+      if (error && typeof error === "object" && "message" in error) {
         message = (error as { message: string }).message;
       }
-      toast.error('Notification Failed', {
+      toast.error("Notification Failed", {
         description: `Error: ${message}`,
-        duration: 5000
-      })
+        duration: 5000,
+      });
     } finally {
       setIsSending(false);
     }
@@ -119,20 +118,19 @@ Culture of Harmony Team
         throw error;
       }
 
-      toast.success('✅ Email Connection Test Successful!', {
-        description: 'Resend API is properly configured',
-        duration: 5000
-      })
-      
+      toast.success("✅ Email Connection Test Successful!", {
+        description: "Resend API is properly configured",
+        duration: 5000,
+      });
     } catch (error: unknown) {
-      let message = 'Unknown error';
-      if (error && typeof error === 'object' && 'message' in error) {
+      let message = "Unknown error";
+      if (error && typeof error === "object" && "message" in error) {
         message = (error as { message: string }).message;
       }
-      toast.error('❌ Email Connection Test Failed', {
+      toast.error("❌ Email Connection Test Failed", {
         description: `Please check Resend API configuration: ${message}`,
-        duration: 8000
-      })
+        duration: 8000,
+      });
     } finally {
       setIsSending(false);
     }

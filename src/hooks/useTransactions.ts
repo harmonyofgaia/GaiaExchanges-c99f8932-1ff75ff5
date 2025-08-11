@@ -10,7 +10,7 @@ interface Transaction {
   currency: string;
   status: string | null;
   external_reference: string | null;
-  metadata: any;
+  metadata: Record<string, unknown>;
   created_at: string;
   updated_at: string | null;
 }
@@ -39,7 +39,15 @@ export function useTransactions() {
         if (error) {
           console.error("Error fetching transactions:", error);
         } else {
-          setTransactions(data || []);
+          setTransactions(
+            (data || []).map((item) => ({
+              ...item,
+              metadata:
+                typeof item.metadata === "string"
+                  ? JSON.parse(item.metadata)
+                  : item.metadata || {},
+            })),
+          );
         }
       } catch (error) {
         console.error("Error fetching transactions:", error);

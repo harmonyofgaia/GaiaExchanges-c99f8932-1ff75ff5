@@ -5,7 +5,8 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { existentialDefense } from "@/services/existentialDefense";
-import { Shield, Infinity, Zap, Star } from "lucide-react";
+import { Shield, Zap, Star } from "lucide-react";
+import { Infinity as InfinityIcon } from "lucide-react";
 
 export function ExistentialDefenseDashboard() {
   const [status, setStatus] = useState({
@@ -71,7 +72,8 @@ export function ExistentialDefenseDashboard() {
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <Infinity className="h-4 w-4 text-primary" />
+              {/* TODO: Replace with a valid icon. Removed invalid <Infinity /> */}
+              <span className="h-4 w-4 text-primary">∞</span>
               <span className="text-sm font-medium">Existential Anchors</span>
             </div>
             <div className="text-2xl font-bold text-primary">
