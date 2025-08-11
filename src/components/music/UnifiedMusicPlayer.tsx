@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Card, CardContent } from "../../ui/card";
-import { Button } from "../../ui/button";
-import { Slider } from "../../ui/slider";
+import { Button } from "../../../lovable/src/ui/button";
+import { Slider } from "../../../lovable/src/ui/slider";
 import {
   Music,
   Maximize2,
@@ -54,7 +54,7 @@ const UnifiedMusicPlayer: React.FC<UnifiedMusicPlayerProps> = ({
     if (isPlaying) {
       audio.play().catch(() => setIsPlaying(false));
     }
-  }, [currentTrack]);
+  }, [currentTrack, isPlaying]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -125,7 +125,7 @@ const UnifiedMusicPlayer: React.FC<UnifiedMusicPlayerProps> = ({
 
   const toggleMute = () => {
     setIsMuted((prev) => !prev);
-    toast.info(!isMuted ? "🔇 Audio muted" : "🔊 Audio unmuted", {
+    toast(!isMuted ? "🔇 Audio muted" : "🔊 Audio unmuted", {
       duration: 1000,
     });
   };
@@ -174,8 +174,7 @@ const UnifiedMusicPlayer: React.FC<UnifiedMusicPlayerProps> = ({
             </div>
             <div className="flex items-center gap-1">
               <Button
-                variant="ghost"
-                size="sm"
+                variant="secondary"
                 onClick={() => setIsMinimized(!isMinimized)}
                 className="h-6 w-6 p-0 text-muted-foreground hover:text-primary"
               >
@@ -186,8 +185,7 @@ const UnifiedMusicPlayer: React.FC<UnifiedMusicPlayerProps> = ({
                 )}
               </Button>
               <Button
-                variant="ghost"
-                size="sm"
+                variant="secondary"
                 onClick={hidePlayer}
                 className="h-6 w-6 p-0 text-destructive hover:text-destructive/80"
               >
@@ -210,11 +208,11 @@ const UnifiedMusicPlayer: React.FC<UnifiedMusicPlayerProps> = ({
               {/* Progress bar */}
               <div className="mb-3">
                 <Slider
-                  value={[duration > 0 ? (currentTime / duration) * 100 : 0]}
+                  value={duration > 0 ? (currentTime / duration) * 100 : 0}
                   max={100}
                   step={1}
                   className="w-full"
-                  onValueChange={handleSeek}
+                  onChange={e => handleSeek([Number(e.target.value)])}
                 />
               </div>
             </>
@@ -225,8 +223,7 @@ const UnifiedMusicPlayer: React.FC<UnifiedMusicPlayerProps> = ({
           >
             {!isMinimized && playlist.length > 1 && (
               <Button
-                variant="ghost"
-                size="sm"
+                variant="secondary"
                 onClick={playPrevious}
                 className="h-8 w-8 p-0 text-primary hover:text-primary/80"
               >
@@ -234,8 +231,7 @@ const UnifiedMusicPlayer: React.FC<UnifiedMusicPlayerProps> = ({
               </Button>
             )}
             <Button
-              variant="ghost"
-              size="sm"
+              variant="secondary"
               onClick={togglePlay}
               className="h-8 w-8 p-0 text-primary hover:text-primary/80"
             >
@@ -249,8 +245,7 @@ const UnifiedMusicPlayer: React.FC<UnifiedMusicPlayerProps> = ({
               <>
                 {playlist.length > 1 && (
                   <Button
-                    variant="ghost"
-                    size="sm"
+                    variant="secondary"
                     onClick={playNext}
                     className="h-8 w-8 p-0 text-primary hover:text-primary/80"
                   >
@@ -259,8 +254,7 @@ const UnifiedMusicPlayer: React.FC<UnifiedMusicPlayerProps> = ({
                 )}
                 <div className="flex items-center gap-2">
                   <Button
-                    variant="ghost"
-                    size="sm"
+                    variant="secondary"
                     onClick={toggleMute}
                     className="h-6 w-6 p-0 text-primary hover:text-primary/80"
                   >
@@ -271,11 +265,11 @@ const UnifiedMusicPlayer: React.FC<UnifiedMusicPlayerProps> = ({
                     )}
                   </Button>
                   <Slider
-                    value={[volume * 100]}
+                    value={volume * 100}
                     max={100}
                     step={5}
                     className="w-16"
-                    onValueChange={(value) => setVolume(value[0] / 100)}
+                    onChange={e => setVolume(Number(e.target.value) / 100)}
                   />
                 </div>
               </>

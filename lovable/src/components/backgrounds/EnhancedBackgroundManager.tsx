@@ -47,50 +47,16 @@ export function EnhancedBackgroundManager({
   settings: propSettings,
   className = "",
 }: EnhancedBackgroundManagerProps) {
-  const [currentSettings, setCurrentSettings] =
-    useState<EnhancedBackgroundSettings>(propSettings || DEFAULT_SETTINGS);
+  // Always use default settings, ignore localStorage and user changes
+  const [currentSettings, setCurrentSettings] = useState<EnhancedBackgroundSettings>(propSettings || DEFAULT_SETTINGS);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
 
-  // Load settings from localStorage and listen for changes
+  // Ignore all persisted settings and always use default
   useEffect(() => {
-    const loadSettings = () => {
-      const savedSettings = localStorage.getItem("gaia-background-settings");
-      const savedLock = localStorage.getItem("gaia-background-lock");
-
-      if (savedSettings) {
-        try {
-          const parsed = JSON.parse(savedSettings);
-          setCurrentSettings(parsed);
-        } catch (error) {
-          console.warn("Failed to parse saved background settings");
-        }
-      }
-
-      setIsLocked(savedLock === "true");
-    };
-
-    loadSettings();
-
-    // Listen for settings changes from visual controls
-    const handleSettingsChange = (event: CustomEvent) => {
-      if (!isLocked) {
-        setCurrentSettings(event.detail);
-      }
-    };
-
-    window.addEventListener(
-      "background-settings-changed",
-      handleSettingsChange as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        "background-settings-changed",
-        handleSettingsChange as EventListener,
-      );
-    };
-  }, [isLocked]);
+    setCurrentSettings(propSettings || DEFAULT_SETTINGS);
+    setIsLocked(false);
+  }, [propSettings]);
 
   // Auto-generate new backgrounds only if enabled and not locked
   useEffect(() => {

@@ -104,6 +104,7 @@ export function FullVisualControlPanel({
 }: FullVisualControlPanelProps) {
   const [activeTab, setActiveTab] = useState("effects");
   const [isMaximized, setIsMaximized] = useState(false);
+  // Always use default theme config, ignore localStorage and user customizations
   const [themeConfig, setThemeConfig] = useState<ThemeConfig>({
     colors: {
       primary: "#00ff00",
@@ -134,6 +135,40 @@ export function FullVisualControlPanel({
       lineHeight: 1.5,
     },
   });
+
+  // Always reset to default theme config on open
+  useEffect(() => {
+    setThemeConfig({
+      colors: {
+        primary: "#00ff00",
+        secondary: "#0066cc",
+        accent: "#ff6600",
+        background: "#000000",
+        foreground: "#ffffff",
+        muted: "#666666",
+        border: "#333333",
+      },
+      effects: {
+        blur: 0,
+        brightness: 100,
+        contrast: 100,
+        saturation: 100,
+        hue: 0,
+        opacity: 100,
+      },
+      animation: {
+        speed: 1,
+        intensity: 50,
+        enabled: true,
+      },
+      layout: {
+        spacing: 16,
+        borderRadius: 8,
+        fontSize: 16,
+        lineHeight: 1.5,
+      },
+    });
+  }, [isOpen]);
 
   const [customCSS, setCustomCSS] = useState("");
   const [mediaFiles, setMediaFiles] = useState<File[]>([]);
