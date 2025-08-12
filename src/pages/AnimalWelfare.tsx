@@ -58,7 +58,32 @@ export default function AnimalWelfare() {
                   <span className="text-lg font-bold text-white drop-shadow">{tokensRaised.toLocaleString()}</span>
                   <span className="text-xs text-white/80">GAiA Raised</span>
                 </div>
-                <div className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-300 px-8 py-4 flex flex-col items-center border-4 border-white/40 -ml-4 z-10">
+                <div
+                  className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-green-400 via-green-500 to-blue-400 px-8 py-4 flex flex-col items-center border-4 border-white/40 -mr-4 z-30 focus:outline-none focus:ring-4 focus:ring-green-300 focus:z-40"
+                  role="region"
+                  aria-label="Animals Protected"
+                  tabIndex={0}
+                >
+                  <Heart className="h-6 w-6 mb-1 text-white drop-shadow" />
+                  <span className="text-lg font-bold text-white drop-shadow">{activeAnimals}</span>
+                  <span className="text-xs text-white/80">Animals Protected</span>
+                </div>
+                <div
+                  className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-blue-400 via-blue-500 to-purple-400 px-8 py-4 flex flex-col items-center border-4 border-white/40 z-20 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:z-40"
+                  role="region"
+                  aria-label="GAiA Raised"
+                  tabIndex={0}
+                >
+                  <Shield className="h-6 w-6 mb-1 text-white drop-shadow" />
+                  <span className="text-lg font-bold text-white drop-shadow">{tokensRaised.toLocaleString()}</span>
+                  <span className="text-xs text-white/80">GAiA Raised</span>
+                </div>
+                <div
+                  className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-300 px-8 py-4 flex flex-col items-center border-4 border-white/40 -ml-4 z-10 focus:outline-none focus:ring-4 focus:ring-yellow-300 focus:z-40"
+                  role="region"
+                  aria-label="NFT Powered"
+                  tabIndex={0}
+                >
                   <Star className="h-6 w-6 mb-1 text-white drop-shadow" />
                   <span className="text-lg font-bold text-white drop-shadow">NFT</span>
                   <span className="text-xs text-white/80">Powered</span>
