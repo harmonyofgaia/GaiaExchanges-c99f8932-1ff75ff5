@@ -12,19 +12,20 @@ Two new features have been added to enhance user experience and provide UI prote
 ## Theme Selection Feature
 
 ### Location
+
 - **Homepage**: Small floating theme selector button in the bottom-right corner
 - **All Pages**: Themes apply globally across the entire application
 
 ### Available Themes
 
-| Theme | Icon | Description |
-|-------|------|-------------|
-| Dark | 🌙 | Classic dark theme with matrix aesthetics (default) |
-| Light | ☀️ | Clean light theme for daytime use |
-| Mellow Colorful | 🌈 | Soft, warm colors with earth tones |
-| Space | 🚀 | Deep space theme with cosmic colors |
-| Forest | 🌲 | Natural forest theme with green harmony |
-| Ocean | 🌊 | Deep ocean blues and aqua tones |
+| Theme           | Icon | Description                                         |
+| --------------- | ---- | --------------------------------------------------- |
+| Dark            | 🌙   | Classic dark theme with matrix aesthetics (default) |
+| Light           | ☀️   | Clean light theme for daytime use                   |
+| Mellow Colorful | 🌈   | Soft, warm colors with earth tones                  |
+| Space           | 🚀   | Deep space theme with cosmic colors                 |
+| Forest          | 🌲   | Natural forest theme with green harmony             |
+| Ocean           | 🌊   | Deep ocean blues and aqua tones                     |
 
 ### Usage
 
@@ -43,17 +44,19 @@ Two new features have been added to enhance user experience and provide UI prote
 ## UI Lock Feature
 
 ### Purpose
+
 Prevents accidental changes or deletions to the design/layout while allowing additions.
 
 ### Location
+
 Available in the same theme selector menu.
 
 ### States
 
-| State | Icon | Status | Description |
-|-------|------|--------|-------------|
-| Unlocked | 🔓 | Editable | Theme and layout changes allowed |
-| Locked | 🔒 | Protected | Theme and layout changes prevented |
+| State    | Icon | Status    | Description                        |
+| -------- | ---- | --------- | ---------------------------------- |
+| Unlocked | 🔓   | Editable  | Theme and layout changes allowed   |
+| Locked   | 🔒   | Protected | Theme and layout changes prevented |
 
 ### Usage
 
@@ -106,16 +109,16 @@ src/
 ```typescript
 // Available themes
 const AVAILABLE_THEMES = {
-  dark: { name: 'Dark', description: '...', icon: '🌙' },
-  light: { name: 'Light', description: '...', icon: '☀️' },
+  dark: { name: "Dark", description: "...", icon: "🌙" },
+  light: { name: "Light", description: "...", icon: "☀️" },
   // ... more themes
-}
+};
 
 // Theme selection
-const { theme, setTheme } = useTheme()
+const { theme, setTheme } = useTheme();
 
-// Lock functionality  
-const { isLocked, toggleLock } = useLock()
+// Lock functionality
+const { isLocked, toggleLock } = useLock();
 ```
 
 ### CSS Variables
@@ -150,16 +153,19 @@ Potential improvements for future versions:
 ## Troubleshooting
 
 ### Theme Not Persisting
+
 - Check browser localStorage permissions
 - Verify `next-themes` is properly configured
 - Clear browser cache and localStorage
 
 ### Lock Not Working
+
 - Ensure `gaia-ui-lock` key exists in localStorage
 - Check React Context provider hierarchy
 - Verify component is wrapped in ThemeProvider
 
 ### Theme Selector Not Visible
+
 - Confirm ThemeSelector component is imported in Home.tsx
 - Check CSS positioning and z-index values
 - Verify no conflicting styles are hiding the button

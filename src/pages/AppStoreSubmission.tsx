@@ -1,10 +1,9 @@
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ContactSystem } from '@/components/contact/ContactSystem'
-import { AppStorePreparation } from '@/components/appstore/AppStorePreparation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Smartphone, Mail, Download, Shield, ExternalLink } from 'lucide-react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ContactSystem } from "@/components/contact/ContactSystem";
+import { AppStorePreparation } from "@/components/appstore/AppStorePreparation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Smartphone, Mail, Download, Shield, ExternalLink } from "lucide-react";
 
 const AppStoreSubmission = () => {
   return (
@@ -14,7 +13,8 @@ const AppStoreSubmission = () => {
           App Store Submission Center
         </h1>
         <p className="text-xl text-muted-foreground mt-2">
-          Complete package for submitting Harmony of Gaia to Apple App Store and Google Play Store
+          Complete package for submitting Harmony of Gaia to Apple App Store and
+          Google Play Store
         </p>
         <Badge className="mt-4 bg-gradient-to-r from-green-600 to-blue-600 text-white text-lg px-6 py-2">
           Ready for Manual Submission
@@ -56,7 +56,9 @@ const AppStoreSubmission = () => {
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-blue-400">Apple App Store Submission</h3>
+                  <h3 className="text-lg font-semibold text-blue-400">
+                    Apple App Store Submission
+                  </h3>
                   <div className="space-y-3 text-sm">
                     <div className="p-3 bg-blue-500/10 rounded-lg">
                       <h4 className="font-medium mb-2">1. Prerequisites</h4>
@@ -86,7 +88,9 @@ const AppStoreSubmission = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-yellow-400">Google Play Store Submission</h3>
+                  <h3 className="text-lg font-semibold text-yellow-400">
+                    Google Play Store Submission
+                  </h3>
                   <div className="space-y-3 text-sm">
                     <div className="p-3 bg-yellow-500/10 rounded-lg">
                       <h4 className="font-medium mb-2">1. Prerequisites</h4>
@@ -117,10 +121,14 @@ const AppStoreSubmission = () => {
               </div>
 
               <div className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border border-green-500/20 rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-green-400 mb-4">What We've Prepared for You</h3>
+                <h3 className="text-xl font-semibold text-green-400 mb-4">
+                  What We've Prepared for You
+                </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <h4 className="font-medium text-blue-400 mb-2">📱 Complete Documentation</h4>
+                    <h4 className="font-medium text-blue-400 mb-2">
+                      📱 Complete Documentation
+                    </h4>
                     <ul className="text-sm space-y-1 text-muted-foreground">
                       <li>✅ Privacy Policy (GDPR & CCPA compliant)</li>
                       <li>✅ Terms of Service (International)</li>
@@ -129,7 +137,9 @@ const AppStoreSubmission = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-medium text-purple-400 mb-2">🔧 Technical Assets</h4>
+                    <h4 className="font-medium text-purple-400 mb-2">
+                      🔧 Technical Assets
+                    </h4>
                     <ul className="text-sm space-y-1 text-muted-foreground">
                       <li>✅ Official Gaia Logo (App Icon ready)</li>
                       <li>✅ Working Web Application</li>
@@ -138,13 +148,17 @@ const AppStoreSubmission = () => {
                     </ul>
                   </div>
                 </div>
-                
+
                 <div className="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
-                  <h4 className="font-medium text-yellow-400 mb-2">⚠️ Manual Steps Required</h4>
+                  <h4 className="font-medium text-yellow-400 mb-2">
+                    ⚠️ Manual Steps Required
+                  </h4>
                   <p className="text-sm text-muted-foreground">
-                    You'll need to personally create developer accounts, build the mobile app versions, 
-                    and submit through the official app store portals. This ensures your complete control 
-                    over the submission process and maintains security of your developer credentials.
+                    You'll need to personally create developer accounts, build
+                    the mobile app versions, and submit through the official app
+                    store portals. This ensures your complete control over the
+                    submission process and maintains security of your developer
+                    credentials.
                   </p>
                 </div>
               </div>
@@ -153,7 +167,7 @@ const AppStoreSubmission = () => {
         </TabsContent>
       </Tabs>
     </div>
-  )
-}
+  );
+};
 
-export default AppStoreSubmission
+export default AppStoreSubmission;

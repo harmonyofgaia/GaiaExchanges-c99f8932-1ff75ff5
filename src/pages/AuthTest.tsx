@@ -1,7 +1,6 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { AuthTest as AuthTestComponent } from '@/components/auth/AuthTest'
-import { Shield } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AuthTest as AuthTestComponent } from "@/components/auth/AuthTest";
+import { Shield } from "lucide-react";
 
 const AuthTest = () => {
   return (
@@ -20,7 +19,7 @@ const AuthTest = () => {
         </Card>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AuthTest
+export default AuthTest;

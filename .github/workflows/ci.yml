@@ -2,6 +2,7 @@ name: CI
 
 on:
   pull_request:
+<<<<<<< HEAD
     branches:
       - '*'
 
@@ -22,3 +23,34 @@ jobs:
         run: npm run lint
       - name: Build
         run: npm run build:vercel
+=======
+    branches: [main, deploy]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm cache clean --force
+      - run: rm -rf node_modules package-lock.json
+      - run: npm install
+      - run: npm run lint
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm cache clean --force
+      - run: rm -rf node_modules package-lock.json
+      - run: npm install
+      - run: npm run build
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm cache clean --force
+      - run: rm -rf node_modules package-lock.json
+      - run: npm install
+      - run: npm test
+>>>>>>> fd1607a7 (Reverted to commit da2378e82a9135b78ca1d633d747e5bb6e83a714)
