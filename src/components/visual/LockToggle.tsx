@@ -1,9 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Lock, Unlock } from "lucide-react";
+
+import { Button } from '@/components/ui/button'
+import { Lock, Unlock } from 'lucide-react'
 
 interface LockToggleProps {
-  isLocked: boolean;
-  onLockToggle: () => void;
+  isLocked: boolean
+  onLockToggle: () => void
 }
 
 export function LockToggle({ isLocked, onLockToggle }: LockToggleProps) {
@@ -26,5 +27,5 @@ export function LockToggle({ isLocked, onLockToggle }: LockToggleProps) {
         </>
       )}
     </Button>
-  );
+  )
 }

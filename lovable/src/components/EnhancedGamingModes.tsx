@@ -1,5 +1,6 @@
-import { GameModeSelector } from "./gaming/GameModeSelector";
-import { GameStyleSelector } from "./gaming/GameStyleSelector";
+
+import { GameModeSelector } from './gaming/GameModeSelector'
+import { GameStyleSelector } from './gaming/GameStyleSelector'
 
 export function EnhancedGamingModes() {
   return (
@@ -7,5 +8,5 @@ export function EnhancedGamingModes() {
       <GameModeSelector />
       <GameStyleSelector />
     </div>
-  );
+  )
 }

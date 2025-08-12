@@ -1,7 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Target, TrendingUp, Users, Globe, Zap, Share2 } from "lucide-react";
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Target, TrendingUp, Users, Globe, Zap, Share2 } from 'lucide-react'
 
 const Marketing = () => {
   return (
@@ -70,7 +71,7 @@ const Marketing = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Marketing;
+export default Marketing

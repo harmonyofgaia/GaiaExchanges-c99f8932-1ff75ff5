@@ -1,78 +1,35 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Play,
-  Upload,
-  Heart,
-  MessageCircle,
-  Share,
-  Bell,
-  Trophy,
-} from "lucide-react";
-import { toast } from "sonner";
+
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Play, Upload, Heart, MessageCircle, Share, Bell, Trophy } from 'lucide-react'
+import { toast } from 'sonner'
 
 export default function VideoExchange() {
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [subscribers, setSubscribers] = useState(1247);
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const [subscribers, setSubscribers] = useState(1247)
 
   const channels = [
-    {
-      name: "Nature Harmony",
-      owner: "EcoGardener",
-      subscribers: "12.3K",
-      videos: 47,
-      category: "Environmental",
-    },
-    {
-      name: "Green Tech Hub",
-      owner: "TechSage",
-      subscribers: "8.9K",
-      videos: 23,
-      category: "Technology",
-    },
-    {
-      name: "Wildlife Stories",
-      owner: "WildExplorer",
-      subscribers: "15.6K",
-      videos: 89,
-      category: "Wildlife",
-    },
-  ];
+    { name: 'Nature Harmony', owner: 'EcoGardener', subscribers: '12.3K', videos: 47, category: 'Environmental' },
+    { name: 'Green Tech Hub', owner: 'TechSage', subscribers: '8.9K', videos: 23, category: 'Technology' },
+    { name: 'Wildlife Stories', owner: 'WildExplorer', subscribers: '15.6K', videos: 89, category: 'Wildlife' },
+  ]
 
   const videos = [
-    {
-      title: "Building a Sustainable Garden",
-      channel: "Nature Harmony",
-      views: "45K",
-      likes: "2.1K",
-      duration: "12:34",
-    },
-    {
-      title: "Solar Panel Installation Guide",
-      channel: "Green Tech Hub",
-      views: "23K",
-      likes: "987",
-      duration: "18:45",
-    },
-    {
-      title: "Rare Birds Documentary",
-      channel: "Wildlife Stories",
-      views: "78K",
-      likes: "4.5K",
-      duration: "45:12",
-    },
-  ];
+    { title: 'Building a Sustainable Garden', channel: 'Nature Harmony', views: '45K', likes: '2.1K', duration: '12:34' },
+    { title: 'Solar Panel Installation Guide', channel: 'Green Tech Hub', views: '23K', likes: '987', duration: '18:45' },
+    { title: 'Rare Birds Documentary', channel: 'Wildlife Stories', views: '78K', likes: '4.5K', duration: '45:12' },
+  ]
 
   const uploadVideo = () => {
-    toast.success("🎥 Video upload started!", {
-      description: "Your video is being processed and will be available soon",
-      duration: 5000,
-    });
-  };
+    toast.success('🎥 Video upload started!', {
+      description: 'Your video is being processed and will be available soon',
+      duration: 5000
+    })
+  }
 
   return (
     <div className="container mx-auto px-4 py-6 space-y-6">
@@ -96,9 +53,7 @@ export default function VideoExchange() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400">
-                {subscribers.toLocaleString()}
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{subscribers.toLocaleString()}</div>
               <div className="text-sm text-muted-foreground">Subscribers</div>
             </div>
             <div className="text-center">
@@ -129,10 +84,7 @@ export default function VideoExchange() {
         <TabsContent value="discover" className="space-y-4">
           <div className="grid gap-4">
             {videos.map((video, index) => (
-              <Card
-                key={index}
-                className="border border-border hover:border-primary/50 transition-colors cursor-pointer"
-              >
+              <Card key={index} className="border border-border hover:border-primary/50 transition-colors cursor-pointer">
                 <CardContent className="p-4">
                   <div className="flex gap-4">
                     <div className="relative">
@@ -143,12 +95,10 @@ export default function VideoExchange() {
                         {video.duration}
                       </Badge>
                     </div>
-
+                    
                     <div className="flex-1 space-y-2">
                       <div className="font-bold text-lg">{video.title}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {video.channel}
-                      </div>
+                      <div className="text-sm text-muted-foreground">{video.channel}</div>
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         <span>{video.views} views</span>
                         <div className="flex items-center gap-1">
@@ -175,30 +125,22 @@ export default function VideoExchange() {
         <TabsContent value="channels" className="space-y-4">
           <div className="grid gap-4">
             {channels.map((channel, index) => (
-              <Card
-                key={index}
-                className="border border-border hover:border-primary/50 transition-colors"
-              >
+              <Card key={index} className="border border-border hover:border-primary/50 transition-colors">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                        <span className="font-bold text-white">
-                          {channel.name[0]}
-                        </span>
+                        <span className="font-bold text-white">{channel.name[0]}</span>
                       </div>
                       <div>
                         <div className="font-bold">{channel.name}</div>
-                        <div className="text-sm text-muted-foreground">
-                          by {channel.owner}
-                        </div>
+                        <div className="text-sm text-muted-foreground">by {channel.owner}</div>
                         <div className="text-xs text-muted-foreground">
-                          {channel.subscribers} subscribers • {channel.videos}{" "}
-                          videos
+                          {channel.subscribers} subscribers • {channel.videos} videos
                         </div>
                       </div>
                     </div>
-
+                    
                     <div className="flex items-center gap-2">
                       <Badge variant="outline">{channel.category}</Badge>
                       <Button size="sm">
@@ -224,9 +166,7 @@ export default function VideoExchange() {
             <CardContent className="space-y-4">
               <div className="border-2 border-dashed border-green-500/30 rounded-lg p-8 text-center">
                 <Upload className="h-12 w-12 mx-auto text-green-400 mb-4" />
-                <div className="text-lg font-bold text-green-400 mb-2">
-                  Drop your video here
-                </div>
+                <div className="text-lg font-bold text-green-400 mb-2">Drop your video here</div>
                 <div className="text-muted-foreground mb-4">
                   Supports MP4, AVI, MOV up to 2GB
                 </div>
@@ -234,7 +174,7 @@ export default function VideoExchange() {
                   Choose File
                 </Button>
               </div>
-
+              
               <div className="space-y-2">
                 <Input placeholder="Video title" />
                 <Input placeholder="Video description" />
@@ -249,11 +189,8 @@ export default function VideoExchange() {
                   </select>
                 </div>
               </div>
-
-              <Button
-                onClick={uploadVideo}
-                className="w-full bg-gradient-to-r from-green-600 to-blue-600"
-              >
+              
+              <Button onClick={uploadVideo} className="w-full bg-gradient-to-r from-green-600 to-blue-600">
                 <Upload className="h-4 w-4 mr-2" />
                 🚀 Upload Video
               </Button>
@@ -265,9 +202,7 @@ export default function VideoExchange() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card className="border border-border">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  📊 Channel Performance
-                </CardTitle>
+                <CardTitle className="text-blue-400">📊 Channel Performance</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -289,9 +224,7 @@ export default function VideoExchange() {
 
             <Card className="border border-border">
               <CardHeader>
-                <CardTitle className="text-purple-400">
-                  🎯 Audience Insights
-                </CardTitle>
+                <CardTitle className="text-purple-400">🎯 Audience Insights</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -325,25 +258,19 @@ export default function VideoExchange() {
                 <div className="text-center p-4 bg-orange-900/20 rounded-lg">
                   <Heart className="h-8 w-8 mx-auto text-orange-400 mb-2" />
                   <div className="font-bold">Gifting System</div>
-                  <div className="text-sm text-muted-foreground">
-                    Send tokens as gifts
-                  </div>
+                  <div className="text-sm text-muted-foreground">Send tokens as gifts</div>
                 </div>
-
+                
                 <div className="text-center p-4 bg-purple-900/20 rounded-lg">
                   <Trophy className="h-8 w-8 mx-auto text-purple-400 mb-2" />
                   <div className="font-bold">Challenges</div>
-                  <div className="text-sm text-muted-foreground">
-                    Weekly video challenges
-                  </div>
+                  <div className="text-sm text-muted-foreground">Weekly video challenges</div>
                 </div>
-
+                
                 <div className="text-center p-4 bg-blue-900/20 rounded-lg">
                   <Badge className="h-8 w-8 mx-auto text-blue-400 mb-2" />
                   <div className="font-bold">Badges</div>
-                  <div className="text-sm text-muted-foreground">
-                    Earn achievement badges
-                  </div>
+                  <div className="text-sm text-muted-foreground">Earn achievement badges</div>
                 </div>
               </div>
             </CardContent>
@@ -351,5 +278,5 @@ export default function VideoExchange() {
         </TabsContent>
       </Tabs>
     </div>
-  );
+  )
 }

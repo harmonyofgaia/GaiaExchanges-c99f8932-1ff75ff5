@@ -1,9 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Settings, Shield, DollarSign, Eye } from "lucide-react";
-import { TokenManagement } from "./admin/TokenManagement";
-import { DailyAdvertising } from "./admin/DailyAdvertising";
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Settings, Shield, DollarSign, Eye } from 'lucide-react'
+import { TokenManagement } from './admin/TokenManagement'
+import { DailyAdvertising } from './admin/DailyAdvertising'
 
 function AdminControlSystem() {
   return (
@@ -68,12 +69,9 @@ function AdminControlSystem() {
             </CardHeader>
             <CardContent>
               <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                <h4 className="font-medium text-green-400 mb-2">
-                  Zero-Cost Trading Vision
-                </h4>
+                <h4 className="font-medium text-green-400 mb-2">Zero-Cost Trading Vision</h4>
                 <p className="text-sm text-green-300">
-                  GAiA token trading operates with zero fees, setting the
-                  industry standard for cost-effective cryptocurrency exchange.
+                  GAiA token trading operates with zero fees, setting the industry standard for cost-effective cryptocurrency exchange.
                 </p>
               </div>
             </CardContent>
@@ -91,9 +89,7 @@ function AdminControlSystem() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                  <h4 className="font-medium text-green-400 mb-2">
-                    Public Access
-                  </h4>
+                  <h4 className="font-medium text-green-400 mb-2">Public Access</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Wallet Visibility:</span>
@@ -106,9 +102,7 @@ function AdminControlSystem() {
                   </div>
                 </div>
                 <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-                  <h4 className="font-medium text-blue-400 mb-2">
-                    Community Features
-                  </h4>
+                  <h4 className="font-medium text-blue-400 mb-2">Community Features</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Open Source:</span>
@@ -126,7 +120,7 @@ function AdminControlSystem() {
         </TabsContent>
       </Tabs>
     </div>
-  );
+  )
 }
 
-export default AdminControlSystem;
+export default AdminControlSystem

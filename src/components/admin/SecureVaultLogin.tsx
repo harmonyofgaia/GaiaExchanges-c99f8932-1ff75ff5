@@ -1,74 +1,69 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Shield, Lock, Eye, EyeOff, Crown, Globe } from "lucide-react";
-import { toast } from "sonner";
-import { AdminDashboardTabs } from "./AdminDashboardTabs";
+
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Badge } from '@/components/ui/badge'
+import { Shield, Lock, Eye, EyeOff, Crown, Globe } from 'lucide-react'
+import { toast } from 'sonner'
+import { AdminDashboardTabs } from './AdminDashboardTabs'
 
 export function SecureVaultLogin() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+    username: '',
+    password: ''
+  })
+  const [showPassword, setShowPassword] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+    e.preventDefault()
+    setIsLoading(true)
 
     try {
       // Admin credentials check
-      if (
-        credentials.username === "Synatic" &&
-        credentials.password === "Freedom!oul19922323"
-      ) {
+      if (credentials.username === 'Synatic' && credentials.password === 'Freedom!oul19922323') {
         // Set admin session
-        localStorage.setItem("gaia-admin-session", `admin-${Date.now()}`);
-        localStorage.setItem(
-          "gaia-admin-expiry",
-          (Date.now() + 24 * 60 * 60 * 1000).toString(),
-        );
-        sessionStorage.setItem("admin-active", "true");
-
-        setIsAuthenticated(true);
-        toast.success("🌍 GAIA Admin Access Granted!", {
-          description: "Welcome to the Ultimate Control Center",
-          duration: 5000,
-        });
+        localStorage.setItem('gaia-admin-session', `admin-${Date.now()}`)
+        localStorage.setItem('gaia-admin-expiry', (Date.now() + 24 * 60 * 60 * 1000).toString())
+        sessionStorage.setItem('admin-active', 'true')
+        
+        setIsAuthenticated(true)
+        toast.success('🌍 GAIA Admin Access Granted!', {
+          description: 'Welcome to the Ultimate Control Center',
+          duration: 5000
+        })
       } else {
-        toast.error("🚫 Access Denied", {
-          description: "Invalid admin credentials",
-          duration: 5000,
-        });
+        toast.error('🚫 Access Denied', {
+          description: 'Invalid admin credentials',
+          duration: 5000
+        })
       }
     } catch (error) {
-      toast.error("Login Error", {
-        description: "Please try again",
-        duration: 5000,
-      });
+      toast.error('Login Error', {
+        description: 'Please try again',
+        duration: 5000
+      })
     } finally {
-      setIsLoading(false);
-      setCredentials({ username: "", password: "" });
+      setIsLoading(false)
+      setCredentials({ username: '', password: '' })
     }
-  };
+  }
 
   const handleLogout = () => {
-    localStorage.removeItem("gaia-admin-session");
-    localStorage.removeItem("gaia-admin-expiry");
-    sessionStorage.removeItem("admin-active");
-    setIsAuthenticated(false);
-    toast.success("🚪 Admin session terminated", {
-      description: "System secured",
-      duration: 3000,
-    });
-  };
+    localStorage.removeItem('gaia-admin-session')
+    localStorage.removeItem('gaia-admin-expiry')
+    sessionStorage.removeItem('admin-active')
+    setIsAuthenticated(false)
+    toast.success('🚪 Admin session terminated', {
+      description: 'System secured',
+      duration: 3000
+    })
+  }
 
   if (isAuthenticated) {
     return (
@@ -83,36 +78,26 @@ export function SecureVaultLogin() {
                 Ultimate Control Center • Secure Access • Global Management
               </p>
               <div className="flex gap-4 mt-4">
-                <Badge
-                  variant="outline"
-                  className="border-green-500/50 text-green-400"
-                >
+                <Badge variant="outline" className="border-green-500/50 text-green-400">
                   <Globe className="h-3 w-3 mr-1" />
                   Global Admin
                 </Badge>
-                <Badge
-                  variant="outline"
-                  className="border-blue-500/50 text-blue-400"
-                >
+                <Badge variant="outline" className="border-blue-500/50 text-blue-400">
                   <Shield className="h-3 w-3 mr-1" />
                   Vault Access
                 </Badge>
               </div>
             </div>
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className="border-red-500/30"
-            >
+            <Button onClick={handleLogout} variant="outline" className="border-red-500/30">
               <Lock className="h-4 w-4 mr-2" />
               Logout
             </Button>
           </div>
-
+          
           <AdminDashboardTabs />
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -132,19 +117,12 @@ export function SecureVaultLogin() {
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="username" className="text-green-300">
-                Admin Username
-              </Label>
+              <Label htmlFor="username" className="text-green-300">Admin Username</Label>
               <Input
                 id="username"
                 type="text"
                 value={credentials.username}
-                onChange={(e) =>
-                  setCredentials((prev) => ({
-                    ...prev,
-                    username: e.target.value,
-                  }))
-                }
+                onChange={(e) => setCredentials(prev => ({ ...prev, username: e.target.value }))}
                 className="bg-black/30 border-green-500/30 text-green-400"
                 placeholder="Admin username..."
                 autoComplete="off"
@@ -153,20 +131,13 @@ export function SecureVaultLogin() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-green-300">
-                Vault Password
-              </Label>
+              <Label htmlFor="password" className="text-green-300">Vault Password</Label>
               <div className="relative">
                 <Input
                   id="password"
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   value={credentials.password}
-                  onChange={(e) =>
-                    setCredentials((prev) => ({
-                      ...prev,
-                      password: e.target.value,
-                    }))
-                  }
+                  onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
                   className="bg-black/30 border-green-500/30 text-green-400 pr-10"
                   placeholder="Vault password..."
                   autoComplete="off"
@@ -179,22 +150,18 @@ export function SecureVaultLogin() {
                   className="absolute right-1 top-1 h-8 w-8 p-0 text-green-400"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </Button>
               </div>
             </div>
 
-            <Button
-              type="submit"
+            <Button 
+              type="submit" 
               disabled={isLoading}
               className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3"
             >
               <Lock className="h-5 w-5 mr-2" />
-              {isLoading ? "Verifying Access..." : "ENTER GAIA VAULT"}
+              {isLoading ? 'Verifying Access...' : 'ENTER GAIA VAULT'}
             </Button>
           </form>
 
@@ -206,5 +173,5 @@ export function SecureVaultLogin() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

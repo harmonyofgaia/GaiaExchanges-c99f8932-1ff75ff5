@@ -1,129 +1,105 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import {
-  Search,
-  Plus,
-  Minus,
-  ArrowUp,
-  Brain,
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { 
+  Search, 
+  Plus, 
+  Minus, 
+  ArrowUp, 
+  Brain, 
   Shield,
   Zap,
   Target,
   Command,
-  Sparkles,
-} from "lucide-react";
-import { toast } from "sonner";
+  Sparkles
+} from 'lucide-react'
+import { toast } from 'sonner'
 
 interface AICommand {
-  id: string;
-  command: string;
-  status: "pending" | "executing" | "completed";
-  result?: string;
-  timestamp: Date;
+  id: string
+  command: string
+  status: 'pending' | 'executing' | 'completed'
+  result?: string
+  timestamp: Date
 }
 
 export function AdvancedAdminControl() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [commands, setCommands] = useState<AICommand[]>([]);
-  const [isExecuting, setIsExecuting] = useState(false);
-  const [adminIP] = useState("127.0.0.1"); // This would be dynamically set
+  const [searchQuery, setSearchQuery] = useState('')
+  const [commands, setCommands] = useState<AICommand[]>([])
+  const [isExecuting, setIsExecuting] = useState(false)
+  const [adminIP] = useState('127.0.0.1') // This would be dynamically set
 
   const executeAICommand = async (command: string) => {
-    if (!command.trim()) return;
+    if (!command.trim()) return
 
     const newCommand: AICommand = {
       id: Date.now().toString(),
       command,
-      status: "pending",
-      timestamp: new Date(),
-    };
+      status: 'pending',
+      timestamp: new Date()
+    }
 
-    setCommands((prev) => [newCommand, ...prev.slice(0, 9)]);
-    setIsExecuting(true);
+    setCommands(prev => [newCommand, ...prev.slice(0, 9)])
+    setIsExecuting(true)
 
     // Simulate AI command execution
     setTimeout(() => {
-      setCommands((prev) =>
-        prev.map((cmd) =>
-          cmd.id === newCommand.id
-            ? { ...cmd, status: "executing" as const }
-            : cmd,
-        ),
-      );
+      setCommands(prev => prev.map(cmd => 
+        cmd.id === newCommand.id 
+          ? { ...cmd, status: 'executing' as const }
+          : cmd
+      ))
 
       setTimeout(() => {
         const results = [
-          "System optimization completed - 15% performance increase",
-          "Security protocols enhanced - 3 new defense layers added",
-          "Database query speed improved by 40%",
-          "AI learning algorithm upgraded - pattern recognition enhanced",
-          "Memory management optimized - resource usage reduced by 25%",
-          "Network latency reduced by 60% through smart routing",
-          "User experience improvements applied across 12 components",
-        ];
+          'System optimization completed - 15% performance increase',
+          'Security protocols enhanced - 3 new defense layers added',
+          'Database query speed improved by 40%',
+          'AI learning algorithm upgraded - pattern recognition enhanced',
+          'Memory management optimized - resource usage reduced by 25%',
+          'Network latency reduced by 60% through smart routing',
+          'User experience improvements applied across 12 components'
+        ]
 
-        const randomResult =
-          results[Math.floor(Math.random() * results.length)];
+        const randomResult = results[Math.floor(Math.random() * results.length)]
 
-        setCommands((prev) =>
-          prev.map((cmd) =>
-            cmd.id === newCommand.id
-              ? { ...cmd, status: "completed" as const, result: randomResult }
-              : cmd,
-          ),
-        );
+        setCommands(prev => prev.map(cmd => 
+          cmd.id === newCommand.id 
+            ? { ...cmd, status: 'completed' as const, result: randomResult }
+            : cmd
+        ))
 
-        setIsExecuting(false);
-        setSearchQuery("");
+        setIsExecuting(false)
+        setSearchQuery('')
 
-        toast.success("🚀 AI Command Executed Successfully!", {
+        toast.success('🚀 AI Command Executed Successfully!', {
           description: randomResult,
-          duration: 5000,
-        });
+          duration: 5000
+        })
 
-        console.log("🤖 AI COMMAND EXECUTED:", command);
-        console.log("✅ RESULT:", randomResult);
-        console.log("🔒 ADMIN IP:", adminIP);
-      }, 3000);
-    }, 1000);
-  };
+        console.log('🤖 AI COMMAND EXECUTED:', command)
+        console.log('✅ RESULT:', randomResult)
+        console.log('🔒 ADMIN IP:', adminIP)
+      }, 3000)
+    }, 1000)
+  }
 
   const quickActions = [
-    {
-      label: "Optimize Performance",
-      icon: Zap,
-      command: "optimize system performance",
-    },
-    {
-      label: "Enhance Security",
-      icon: Shield,
-      command: "upgrade security protocols",
-    },
-    {
-      label: "Improve AI Learning",
-      icon: Brain,
-      command: "enhance ai learning algorithms",
-    },
-    {
-      label: "System Analysis",
-      icon: Target,
-      command: "analyze system bottlenecks",
-    },
-  ];
+    { label: 'Optimize Performance', icon: Zap, command: 'optimize system performance' },
+    { label: 'Enhance Security', icon: Shield, command: 'upgrade security protocols' },
+    { label: 'Improve AI Learning', icon: Brain, command: 'enhance ai learning algorithms' },
+    { label: 'System Analysis', icon: Target, command: 'analyze system bottlenecks' }
+  ]
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "completed":
-        return "bg-green-600";
-      case "executing":
-        return "bg-yellow-600";
-      default:
-        return "bg-blue-600";
+      case 'completed': return 'bg-green-600'
+      case 'executing': return 'bg-yellow-600'
+      default: return 'bg-blue-600'
     }
-  };
+  }
 
   return (
     <Card className="border-purple-500/50 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
@@ -146,16 +122,12 @@ export function AdvancedAdminControl() {
                 placeholder="Tell me what you want to do with the AI engine - no boundaries..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyPress={(e) =>
-                  e.key === "Enter" &&
-                  !isExecuting &&
-                  executeAICommand(searchQuery)
-                }
+                onKeyPress={(e) => e.key === 'Enter' && !isExecuting && executeAICommand(searchQuery)}
                 className="pl-10"
                 disabled={isExecuting}
               />
             </div>
-            <Button
+            <Button 
               onClick={() => executeAICommand(searchQuery)}
               disabled={isExecuting || !searchQuery.trim()}
               className="bg-purple-600 hover:bg-purple-700"
@@ -187,17 +159,12 @@ export function AdvancedAdminControl() {
         <div className="space-y-3">
           <h4 className="text-purple-400 font-bold">Recent AI Commands</h4>
           {commands.map((command) => (
-            <div
-              key={command.id}
-              className="p-3 bg-black/40 rounded-lg border border-purple-500/30"
-            >
+            <div key={command.id} className="p-3 bg-black/40 rounded-lg border border-purple-500/30">
               <div className="flex justify-between items-start mb-2">
                 <div className="text-sm font-semibold text-white">
                   💬 {command.command}
                 </div>
-                <Badge
-                  className={`${getStatusColor(command.status)} text-white text-xs`}
-                >
+                <Badge className={`${getStatusColor(command.status)} text-white text-xs`}>
                   {command.status.toUpperCase()}
                 </Badge>
               </div>
@@ -217,9 +184,7 @@ export function AdvancedAdminControl() {
         <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="font-semibold text-green-400">
-                🔒 Admin IP Authorization
-              </h4>
+              <h4 className="font-semibold text-green-400">🔒 Admin IP Authorization</h4>
               <p className="text-sm text-muted-foreground">
                 Authorized IP: {adminIP} • Full System Access Granted
               </p>
@@ -232,5 +197,5 @@ export function AdvancedAdminControl() {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

@@ -1,5 +1,6 @@
-import { Navbar } from "@/components/Navbar";
-import { EnvironmentalGamesHub } from "@/components/games/EnvironmentalGamesHub";
+
+import { Navbar } from '@/components/Navbar'
+import { EnvironmentalGamesHub } from '@/components/games/EnvironmentalGamesHub'
 
 export default function EnvironmentalGames() {
   return (
@@ -9,5 +10,5 @@ export default function EnvironmentalGames() {
         <EnvironmentalGamesHub />
       </div>
     </div>
-  );
+  )
 }

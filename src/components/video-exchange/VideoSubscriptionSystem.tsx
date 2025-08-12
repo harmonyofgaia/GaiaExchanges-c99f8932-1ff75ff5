@@ -1,67 +1,59 @@
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Subscription } from "@/types/ui-types";
-import {
-  CheckCircle,
-  AlertTriangle,
-  RotateCcw,
-  UserPlus,
-  UserMinus,
-} from "lucide-react";
-import { toast } from "sonner";
+import React, { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Subscription } from '@/types/ui-types'
+import { CheckCircle, AlertTriangle, RotateCcw, UserPlus, UserMinus } from 'lucide-react'
+import { toast } from 'sonner'
 
 export function VideoSubscriptionSystem() {
-  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [subscriptions, setSubscriptions] = useState<Subscription[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     // Simulate fetching subscriptions from an API
-    setLoading(true);
+    setLoading(true)
     setTimeout(() => {
       const mockSubscriptions: Subscription[] = [
         {
-          id: "sub-1",
+          id: 'sub-1',
           subscribedAt: new Date(),
           isActive: true,
-          tier: "Premium",
+          tier: 'Premium'
         },
         {
-          id: "sub-2",
+          id: 'sub-2',
           subscribedAt: new Date(Date.now() - 86400000), // 24 hours ago
           isActive: false,
-          tier: "Basic",
-        },
-      ];
-      setSubscriptions(mockSubscriptions);
-      setLoading(false);
-    }, 1500);
-  }, []);
+          tier: 'Basic'
+        }
+      ]
+      setSubscriptions(mockSubscriptions)
+      setLoading(false)
+    }, 1500)
+  }, [])
 
   const handleSubscription = (subscription: Subscription) => {
     toast.promise(
       new Promise((resolve, reject) => {
         setTimeout(() => {
           // Simulate successful subscription update
-          subscription.isActive
-            ? resolve("Unsubscribed successfully!")
-            : resolve("Subscribed successfully!");
-        }, 1000);
+          subscription.isActive ? resolve('Unsubscribed successfully!') : resolve('Subscribed successfully!')
+        }, 1000)
       }),
       {
-        loading: "Updating subscription...",
+        loading: 'Updating subscription...',
         success: (data) => `${data}`,
         error: (err) => `Update failed: ${err}`,
-      },
-    );
-
+      }
+    )
+    
     // Fix the property access
     if (subscription.isActive) {
-      console.log("User is subscribed since:", subscription.subscribedAt);
+      console.log('User is subscribed since:', subscription.subscribedAt)
     }
-  };
+  }
 
   return (
     <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
@@ -86,27 +78,17 @@ export function VideoSubscriptionSystem() {
         ) : (
           <div className="space-y-2">
             {subscriptions.map((subscription) => (
-              <div
-                key={subscription.id}
-                className="flex items-center justify-between rounded-md border p-4"
-              >
+              <div key={subscription.id} className="flex items-center justify-between rounded-md border p-4">
                 <div>
-                  <h3 className="text-lg font-semibold text-white">
-                    {subscription.tier} Tier
-                  </h3>
+                  <h3 className="text-lg font-semibold text-white">{subscription.tier} Tier</h3>
                   <p className="text-sm text-muted-foreground">
-                    Subscribed on:{" "}
-                    {subscription.subscribedAt.toLocaleDateString()}
+                    Subscribed on: {subscription.subscribedAt.toLocaleDateString()}
                   </p>
                 </div>
-                <Button
+                <Button 
                   variant="outline"
                   onClick={() => handleSubscription(subscription)}
-                  className={
-                    subscription.isActive
-                      ? "border-red-500 text-red-500 hover:bg-red-500/10"
-                      : "border-green-500 text-green-500 hover:bg-green-500/10"
-                  }
+                  className={subscription.isActive ? 'border-red-500 text-red-500 hover:bg-red-500/10' : 'border-green-500 text-green-500 hover:bg-green-500/10'}
                 >
                   {subscription.isActive ? (
                     <>
@@ -126,5 +108,5 @@ export function VideoSubscriptionSystem() {
         )}
       </CardContent>
     </Card>
-  );
+  )
 }

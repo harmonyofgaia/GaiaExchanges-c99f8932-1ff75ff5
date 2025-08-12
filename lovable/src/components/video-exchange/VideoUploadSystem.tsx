@@ -1,107 +1,95 @@
-import { useState, useCallback } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Upload,
-  Video,
-  Image,
-  FileText,
-  CheckCircle,
-  AlertTriangle,
-} from "lucide-react";
-import { toast } from "sonner";
+
+import { useState, useCallback } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Upload, Video, Image, FileText, CheckCircle, AlertTriangle } from 'lucide-react'
+import { toast } from 'sonner'
 
 export function VideoUploadSystem() {
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [isUploading, setIsUploading] = useState(false);
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const [isUploading, setIsUploading] = useState(false)
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
   const [videoData, setVideoData] = useState({
-    title: "",
-    description: "",
-    category: "",
-    tags: "",
-    visibility: "public",
-  });
+    title: '',
+    description: '',
+    category: '',
+    tags: '',
+    visibility: 'public'
+  })
 
   const handleFileUpload = useCallback((files: FileList | null) => {
-    if (!files) return;
-
-    const validFiles = Array.from(files).filter((file) => {
-      const isVideo = file.type.startsWith("video/");
-      const isValidSize = file.size <= 500 * 1024 * 1024; // 500MB limit
-
+    if (!files) return
+    
+    const validFiles = Array.from(files).filter(file => {
+      const isVideo = file.type.startsWith('video/')
+      const isValidSize = file.size <= 500 * 1024 * 1024 // 500MB limit
+      
       if (!isVideo) {
-        toast.error(`${file.name} is not a valid video file`);
-        return false;
+        toast.error(`${file.name} is not a valid video file`)
+        return false
       }
-
+      
       if (!isValidSize) {
-        toast.error(`${file.name} exceeds 500MB size limit`);
-        return false;
+        toast.error(`${file.name} exceeds 500MB size limit`)
+        return false
       }
-
-      return true;
-    });
-
-    setUploadedFiles((prev) => [...prev, ...validFiles]);
-
+      
+      return true
+    })
+    
+    setUploadedFiles(prev => [...prev, ...validFiles])
+    
     if (validFiles.length > 0) {
-      toast.success(`${validFiles.length} video(s) ready for upload`);
+      toast.success(`${validFiles.length} video(s) ready for upload`)
     }
-  }, []);
+  }, [])
 
   const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
+    e.preventDefault()
+  }
 
   const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    handleFileUpload(e.dataTransfer.files);
-  };
+    e.preventDefault()
+    handleFileUpload(e.dataTransfer.files)
+  }
 
   const startUpload = async () => {
     if (uploadedFiles.length === 0) {
-      toast.error("Please select at least one video file");
-      return;
+      toast.error('Please select at least one video file')
+      return
     }
-
+    
     if (!videoData.title || !videoData.description || !videoData.category) {
-      toast.error("Please fill in all required fields");
-      return;
+      toast.error('Please fill in all required fields')
+      return
     }
-
-    setIsUploading(true);
-    setUploadProgress(0);
-
+    
+    setIsUploading(true)
+    setUploadProgress(0)
+    
     // Simulate upload progress
     const interval = setInterval(() => {
-      setUploadProgress((prev) => {
+      setUploadProgress(prev => {
         if (prev >= 100) {
-          clearInterval(interval);
-          setIsUploading(false);
-          toast.success("Video uploaded successfully!");
-          return 100;
+          clearInterval(interval)
+          setIsUploading(false)
+          toast.success('Video uploaded successfully!')
+          return 100
         }
-        return prev + Math.random() * 15;
-      });
-    }, 500);
-  };
+        return prev + Math.random() * 15
+      })
+    }, 500)
+  }
 
   const removeFile = (index: number) => {
-    setUploadedFiles((prev) => prev.filter((_, i) => i !== index));
-  };
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index))
+  }
 
   return (
     <div className="space-y-6">
@@ -120,12 +108,8 @@ export function VideoUploadSystem() {
             onDrop={handleDrop}
           >
             <Video className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-            <p className="text-lg font-semibold mb-2">
-              Drag & Drop Your Videos Here
-            </p>
-            <p className="text-muted-foreground mb-4">
-              Or click to browse files (Max 500MB each)
-            </p>
+            <p className="text-lg font-semibold mb-2">Drag & Drop Your Videos Here</p>
+            <p className="text-muted-foreground mb-4">Or click to browse files (Max 500MB each)</p>
             <input
               type="file"
               accept="video/*"
@@ -147,10 +131,7 @@ export function VideoUploadSystem() {
             <div className="space-y-3">
               <h3 className="font-semibold">Selected Videos:</h3>
               {uploadedFiles.map((file, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between p-3 bg-muted rounded-lg"
-                >
+                <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
                   <div className="flex items-center gap-3">
                     <Video className="h-5 w-5 text-green-400" />
                     <div>
@@ -181,52 +162,30 @@ export function VideoUploadSystem() {
                   id="title"
                   placeholder="Enter your video title"
                   value={videoData.title}
-                  onChange={(e) =>
-                    setVideoData((prev) => ({ ...prev, title: e.target.value }))
-                  }
+                  onChange={(e) => setVideoData(prev => ({ ...prev, title: e.target.value }))}
                 />
               </div>
-
+              
               <div>
                 <Label htmlFor="category">Category *</Label>
-                <Select
-                  value={videoData.category}
-                  onValueChange={(value) =>
-                    setVideoData((prev) => ({ ...prev, category: value }))
-                  }
-                >
+                <Select value={videoData.category} onValueChange={(value) => setVideoData(prev => ({ ...prev, category: value }))}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="climate-action">
-                      Climate Action
-                    </SelectItem>
-                    <SelectItem value="renewable-energy">
-                      Renewable Energy
-                    </SelectItem>
+                    <SelectItem value="climate-action">Climate Action</SelectItem>
+                    <SelectItem value="renewable-energy">Renewable Energy</SelectItem>
                     <SelectItem value="conservation">Conservation</SelectItem>
-                    <SelectItem value="sustainable-living">
-                      Sustainable Living
-                    </SelectItem>
-                    <SelectItem value="green-technology">
-                      Green Technology
-                    </SelectItem>
-                    <SelectItem value="environmental-education">
-                      Environmental Education
-                    </SelectItem>
+                    <SelectItem value="sustainable-living">Sustainable Living</SelectItem>
+                    <SelectItem value="green-technology">Green Technology</SelectItem>
+                    <SelectItem value="environmental-education">Environmental Education</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
-
+              
               <div>
                 <Label htmlFor="visibility">Visibility</Label>
-                <Select
-                  value={videoData.visibility}
-                  onValueChange={(value) =>
-                    setVideoData((prev) => ({ ...prev, visibility: value }))
-                  }
-                >
+                <Select value={videoData.visibility} onValueChange={(value) => setVideoData(prev => ({ ...prev, visibility: value }))}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -238,7 +197,7 @@ export function VideoUploadSystem() {
                 </Select>
               </div>
             </div>
-
+            
             <div className="space-y-4">
               <div>
                 <Label htmlFor="description">Description *</Label>
@@ -247,24 +206,17 @@ export function VideoUploadSystem() {
                   placeholder="Describe your environmental content..."
                   rows={4}
                   value={videoData.description}
-                  onChange={(e) =>
-                    setVideoData((prev) => ({
-                      ...prev,
-                      description: e.target.value,
-                    }))
-                  }
+                  onChange={(e) => setVideoData(prev => ({ ...prev, description: e.target.value }))}
                 />
               </div>
-
+              
               <div>
                 <Label htmlFor="tags">Tags (comma-separated)</Label>
                 <Input
                   id="tags"
                   placeholder="climate, renewable, sustainability"
                   value={videoData.tags}
-                  onChange={(e) =>
-                    setVideoData((prev) => ({ ...prev, tags: e.target.value }))
-                  }
+                  onChange={(e) => setVideoData(prev => ({ ...prev, tags: e.target.value }))}
                 />
               </div>
             </div>
@@ -275,9 +227,7 @@ export function VideoUploadSystem() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium">Uploading...</span>
-                <span className="text-sm text-muted-foreground">
-                  {Math.round(uploadProgress)}%
-                </span>
+                <span className="text-sm text-muted-foreground">{Math.round(uploadProgress)}%</span>
               </div>
               <Progress value={uploadProgress} className="w-full" />
             </div>
@@ -288,8 +238,8 @@ export function VideoUploadSystem() {
             <Button variant="outline" disabled={isUploading}>
               Save as Draft
             </Button>
-            <Button
-              onClick={startUpload}
+            <Button 
+              onClick={startUpload} 
               disabled={isUploading || uploadedFiles.length === 0}
               className="bg-green-600 hover:bg-green-700"
             >
@@ -317,9 +267,7 @@ export function VideoUploadSystem() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-semibold mb-3 text-green-400">
-                Recommended Content
-              </h3>
+              <h3 className="font-semibold mb-3 text-green-400">Recommended Content</h3>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />
@@ -339,11 +287,9 @@ export function VideoUploadSystem() {
                 </li>
               </ul>
             </div>
-
+            
             <div>
-              <h3 className="font-semibold mb-3 text-yellow-400">
-                Technical Requirements
-              </h3>
+              <h3 className="font-semibold mb-3 text-yellow-400">Technical Requirements</h3>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4 text-yellow-400" />
@@ -367,5 +313,5 @@ export function VideoUploadSystem() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

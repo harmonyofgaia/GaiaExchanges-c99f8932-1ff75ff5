@@ -1,137 +1,120 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  ArrowUpDown,
-  Zap,
-  Shield,
+
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { 
+  ArrowUpDown, 
+  Zap, 
+  Shield, 
   Clock,
   RefreshCw,
   DollarSign,
   TrendingUp,
   Wallet,
-  Settings,
-} from "lucide-react";
-import { toast } from "sonner";
+  Settings
+} from 'lucide-react'
+import { toast } from 'sonner'
 
 interface Token {
-  symbol: string;
-  name: string;
-  balance: number;
-  price: number;
-  icon: string;
+  symbol: string
+  name: string
+  balance: number
+  price: number
+  icon: string
 }
 
 export default function Swap() {
   const [fromToken, setFromToken] = useState<Token>({
-    symbol: "ETH",
-    name: "Ethereum",
+    symbol: 'ETH',
+    name: 'Ethereum',
     balance: 2.5,
     price: 2500,
-    icon: "⚡",
-  });
-
+    icon: '⚡'
+  })
+  
   const [toToken, setToToken] = useState<Token>({
-    symbol: "GAIA",
-    name: "GAiA Token",
+    symbol: 'GAIA',
+    name: 'GAiA Token',
     balance: 0,
     price: 0.00085432,
-    icon: "🌱",
-  });
+    icon: '🌱'
+  })
 
-  const [fromAmount, setFromAmount] = useState("");
-  const [toAmount, setToAmount] = useState("");
-  const [slippage, setSlippage] = useState("0.5");
-  const [isSwapping, setIsSwapping] = useState(false);
+  const [fromAmount, setFromAmount] = useState('')
+  const [toAmount, setToAmount] = useState('')
+  const [slippage, setSlippage] = useState('0.5')
+  const [isSwapping, setIsSwapping] = useState(false)
 
   const availableTokens: Token[] = [
-    { symbol: "ETH", name: "Ethereum", balance: 2.5, price: 2500, icon: "⚡" },
-    {
-      symbol: "GAIA",
-      name: "GAiA Token",
-      balance: 125000,
-      price: 0.00085432,
-      icon: "🌱",
-    },
-    { symbol: "USDT", name: "Tether USD", balance: 1000, price: 1, icon: "💵" },
-    { symbol: "USDC", name: "USD Coin", balance: 500, price: 1, icon: "💎" },
-    { symbol: "BTC", name: "Bitcoin", balance: 0.1, price: 45000, icon: "₿" },
-  ];
+    { symbol: 'ETH', name: 'Ethereum', balance: 2.5, price: 2500, icon: '⚡' },
+    { symbol: 'GAIA', name: 'GAiA Token', balance: 125000, price: 0.00085432, icon: '🌱' },
+    { symbol: 'USDT', name: 'Tether USD', balance: 1000, price: 1, icon: '💵' },
+    { symbol: 'USDC', name: 'USD Coin', balance: 500, price: 1, icon: '💎' },
+    { symbol: 'BTC', name: 'Bitcoin', balance: 0.1, price: 45000, icon: '₿' }
+  ]
 
   const calculateSwapAmount = (amount: string, from: Token, to: Token) => {
-    if (!amount || isNaN(parseFloat(amount))) return "";
-    const fromValue = parseFloat(amount) * from.price;
-    const toTokenAmount = fromValue / to.price;
-    return toTokenAmount.toFixed(8);
-  };
+    if (!amount || isNaN(parseFloat(amount))) return ''
+    const fromValue = parseFloat(amount) * from.price
+    const toTokenAmount = fromValue / to.price
+    return toTokenAmount.toFixed(8)
+  }
 
   const handleFromAmountChange = (value: string) => {
-    setFromAmount(value);
-    setToAmount(calculateSwapAmount(value, fromToken, toToken));
-  };
+    setFromAmount(value)
+    setToAmount(calculateSwapAmount(value, fromToken, toToken))
+  }
 
   const handleSwapTokens = () => {
-    const temp = fromToken;
-    setFromToken(toToken);
-    setToToken(temp);
-    setFromAmount("");
-    setToAmount("");
-  };
+    const temp = fromToken
+    setFromToken(toToken)
+    setToToken(temp)
+    setFromAmount('')
+    setToAmount('')
+  }
 
   const handleSwap = async () => {
     if (!fromAmount || !toAmount) {
-      toast.error("Please enter swap amounts");
-      return;
+      toast.error('Please enter swap amounts')
+      return
     }
 
-    setIsSwapping(true);
-    toast.loading("Processing swap...", { duration: 2000 });
-
+    setIsSwapping(true)
+    toast.loading('Processing swap...', { duration: 2000 })
+    
     setTimeout(() => {
-      setIsSwapping(false);
-      toast.success(
-        `Successfully swapped ${fromAmount} ${fromToken.symbol} for ${toAmount} ${toToken.symbol}!`,
-      );
-      setFromAmount("");
-      setToAmount("");
-    }, 2000);
-  };
+      setIsSwapping(false)
+      toast.success(`Successfully swapped ${fromAmount} ${fromToken.symbol} for ${toAmount} ${toToken.symbol}!`)
+      setFromAmount('')
+      setToAmount('')
+    }, 2000)
+  }
 
-  const TokenSelector = ({
-    token,
-    onSelect,
-    label,
-  }: {
-    token: Token;
-    onSelect: (token: Token) => void;
-    label: string;
+  const TokenSelector = ({ 
+    token, 
+    onSelect, 
+    label 
+  }: { 
+    token: Token
+    onSelect: (token: Token) => void
+    label: string 
   }) => (
     <div className="space-y-2">
       <label className="text-sm text-muted-foreground">{label}</label>
-      <Select
-        onValueChange={(value) => {
-          const selectedToken = availableTokens.find((t) => t.symbol === value);
-          if (selectedToken) onSelect(selectedToken);
-        }}
-      >
+      <Select onValueChange={(value) => {
+        const selectedToken = availableTokens.find(t => t.symbol === value)
+        if (selectedToken) onSelect(selectedToken)
+      }}>
         <SelectTrigger className="bg-black/20">
           <SelectValue>
             <div className="flex items-center gap-2">
               <span className="text-2xl">{token.icon}</span>
               <div>
                 <div className="font-semibold">{token.symbol}</div>
-                <div className="text-xs text-muted-foreground">
-                  Balance: {token.balance.toLocaleString()}
-                </div>
+                <div className="text-xs text-muted-foreground">Balance: {token.balance.toLocaleString()}</div>
               </div>
             </div>
           </SelectValue>
@@ -147,9 +130,7 @@ export default function Swap() {
                 </div>
                 <div className="ml-auto text-right">
                   <div className="text-sm">{t.balance.toLocaleString()}</div>
-                  <div className="text-xs text-muted-foreground">
-                    ${t.price.toFixed(4)}
-                  </div>
+                  <div className="text-xs text-muted-foreground">${t.price.toFixed(4)}</div>
                 </div>
               </div>
             </SelectItem>
@@ -157,7 +138,7 @@ export default function Swap() {
         </SelectContent>
       </Select>
     </div>
-  );
+  )
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900/20 to-purple-900/20 p-6">
@@ -170,8 +151,7 @@ export default function Swap() {
             </CardTitle>
             <div className="text-center space-y-2">
               <p className="text-xl text-muted-foreground">
-                Instant, secure, and zero-fee token swaps powered by dragon
-                technology
+                Instant, secure, and zero-fee token swaps powered by dragon technology
               </p>
               <div className="flex justify-center gap-4">
                 <Badge className="bg-blue-600">⚡ Instant Swaps</Badge>
@@ -195,7 +175,7 @@ export default function Swap() {
               <CardContent className="space-y-6">
                 {/* From Token */}
                 <div className="space-y-4">
-                  <TokenSelector
+                  <TokenSelector 
                     token={fromToken}
                     onSelect={setFromToken}
                     label="From"
@@ -209,9 +189,7 @@ export default function Swap() {
                       className="text-2xl font-bold h-16 pr-20"
                     />
                     <Button
-                      onClick={() =>
-                        handleFromAmountChange(fromToken.balance.toString())
-                      }
+                      onClick={() => handleFromAmountChange(fromToken.balance.toString())}
                       size="sm"
                       variant="outline"
                       className="absolute right-2 top-1/2 transform -translate-y-1/2"
@@ -240,7 +218,7 @@ export default function Swap() {
 
                 {/* To Token */}
                 <div className="space-y-4">
-                  <TokenSelector
+                  <TokenSelector 
                     token={toToken}
                     onSelect={setToToken}
                     label="To"
@@ -265,13 +243,7 @@ export default function Swap() {
                     <CardContent className="p-4 space-y-2">
                       <div className="flex justify-between text-sm">
                         <span>Exchange Rate:</span>
-                        <span>
-                          1 {fromToken.symbol} ={" "}
-                          {(
-                            parseFloat(toAmount) / parseFloat(fromAmount)
-                          ).toFixed(6)}{" "}
-                          {toToken.symbol}
-                        </span>
+                        <span>1 {fromToken.symbol} = {(parseFloat(toAmount) / parseFloat(fromAmount)).toFixed(6)} {toToken.symbol}</span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span>Slippage Tolerance:</span>
@@ -323,16 +295,14 @@ export default function Swap() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="text-sm text-muted-foreground mb-2 block">
-                    Slippage Tolerance
-                  </label>
+                  <label className="text-sm text-muted-foreground mb-2 block">Slippage Tolerance</label>
                   <div className="flex gap-2">
-                    {["0.1", "0.5", "1.0"].map((value) => (
+                    {['0.1', '0.5', '1.0'].map((value) => (
                       <Button
                         key={value}
                         onClick={() => setSlippage(value)}
                         size="sm"
-                        variant={slippage === value ? "default" : "outline"}
+                        variant={slippage === value ? 'default' : 'outline'}
                         className="flex-1"
                       >
                         {value}%
@@ -352,34 +322,23 @@ export default function Swap() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                {availableTokens
-                  .filter((t) => t.balance > 0)
-                  .map((token) => (
-                    <div
-                      key={token.symbol}
-                      className="flex items-center justify-between p-2 bg-black/20 rounded"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="text-xl">{token.icon}</span>
-                        <div>
-                          <div className="font-semibold text-sm">
-                            {token.symbol}
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            {token.name}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-sm font-semibold">
-                          {token.balance.toLocaleString()}
-                        </div>
-                        <div className="text-xs text-muted-foreground">
-                          ${(token.balance * token.price).toFixed(2)}
-                        </div>
+                {availableTokens.filter(t => t.balance > 0).map((token) => (
+                  <div key={token.symbol} className="flex items-center justify-between p-2 bg-black/20 rounded">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">{token.icon}</span>
+                      <div>
+                        <div className="font-semibold text-sm">{token.symbol}</div>
+                        <div className="text-xs text-muted-foreground">{token.name}</div>
                       </div>
                     </div>
-                  ))}
+                    <div className="text-right">
+                      <div className="text-sm font-semibold">{token.balance.toLocaleString()}</div>
+                      <div className="text-xs text-muted-foreground">
+                        ${(token.balance * token.price).toFixed(2)}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </CardContent>
             </Card>
 
@@ -440,13 +399,11 @@ export default function Swap() {
             <CardContent className="p-4 text-center">
               <Shield className="h-6 w-6 text-orange-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-orange-400">100%</div>
-              <div className="text-xs text-muted-foreground">
-                Security Score
-              </div>
+              <div className="text-xs text-muted-foreground">Security Score</div>
             </CardContent>
           </Card>
         </div>
       </div>
     </div>
-  );
+  )
 }

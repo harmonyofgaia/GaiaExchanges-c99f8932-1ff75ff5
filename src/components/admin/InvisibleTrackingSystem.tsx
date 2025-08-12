@@ -1,5 +1,6 @@
-import { InvisibleTrackingDashboard } from "./InvisibleTrackingDashboard";
+
+import { InvisibleTrackingDashboard } from './InvisibleTrackingDashboard'
 
 export function InvisibleTrackingSystem() {
-  return <InvisibleTrackingDashboard />;
+  return <InvisibleTrackingDashboard />
 }

@@ -1,8 +1,9 @@
-import { Navbar } from "@/components/Navbar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Target, MapPin, Award, Clock } from "lucide-react";
+
+import { Navbar } from '@/components/Navbar'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Target, MapPin, Award, Clock } from 'lucide-react'
 
 export default function EcoMissions() {
   return (
@@ -28,22 +29,11 @@ export default function EcoMissions() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-2">
-                <Badge
-                  variant="outline"
-                  className="border-green-500/30 text-green-400"
-                >
-                  Easy
-                </Badge>
-                <Badge
-                  variant="outline"
-                  className="border-blue-500/30 text-blue-400"
-                >
-                  50 GAIA
-                </Badge>
+                <Badge variant="outline" className="border-green-500/30 text-green-400">Easy</Badge>
+                <Badge variant="outline" className="border-blue-500/30 text-blue-400">50 GAIA</Badge>
               </div>
               <p className="text-sm text-muted-foreground">
-                Collect plastic waste from your local beach and document your
-                impact
+                Collect plastic waste from your local beach and document your impact
               </p>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
@@ -68,18 +58,8 @@ export default function EcoMissions() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-2">
-                <Badge
-                  variant="outline"
-                  className="border-orange-500/30 text-orange-400"
-                >
-                  Medium
-                </Badge>
-                <Badge
-                  variant="outline"
-                  className="border-blue-500/30 text-blue-400"
-                >
-                  100 GAIA
-                </Badge>
+                <Badge variant="outline" className="border-orange-500/30 text-orange-400">Medium</Badge>
+                <Badge variant="outline" className="border-blue-500/30 text-blue-400">100 GAIA</Badge>
               </div>
               <p className="text-sm text-muted-foreground">
                 Plant native trees in designated areas and track their growth
@@ -107,18 +87,8 @@ export default function EcoMissions() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-2">
-                <Badge
-                  variant="outline"
-                  className="border-red-500/30 text-red-400"
-                >
-                  Hard
-                </Badge>
-                <Badge
-                  variant="outline"
-                  className="border-blue-500/30 text-blue-400"
-                >
-                  200 GAIA
-                </Badge>
+                <Badge variant="outline" className="border-red-500/30 text-red-400">Hard</Badge>
+                <Badge variant="outline" className="border-blue-500/30 text-blue-400">200 GAIA</Badge>
               </div>
               <p className="text-sm text-muted-foreground">
                 Help install solar panels in community centers
@@ -139,5 +109,5 @@ export default function EcoMissions() {
         </div>
       </div>
     </div>
-  );
+  )
 }

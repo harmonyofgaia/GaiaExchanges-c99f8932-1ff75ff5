@@ -1,134 +1,135 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import {
-  Music,
-  Play,
-  Pause,
-  Heart,
-  Share2,
-  Radio,
+
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
+import { 
+  Music, 
+  Play, 
+  Pause, 
+  Heart, 
+  Share2, 
+  Radio, 
   Users,
   Star,
   Volume2,
   Headphones,
-  TrendingUp,
-} from "lucide-react";
-import { toast } from "sonner";
+  TrendingUp
+} from 'lucide-react'
+import { toast } from 'sonner'
 
 interface Artist {
-  id: string;
-  name: string;
-  genre: string;
-  listeners: number;
-  avatar: string;
-  isLive: boolean;
-  currentSong?: string;
-  streamUrl?: string;
+  id: string
+  name: string
+  genre: string
+  listeners: number
+  avatar: string
+  isLive: boolean
+  currentSong?: string
+  streamUrl?: string
 }
 
 interface Track {
-  id: string;
-  title: string;
-  artist: string;
-  duration: string;
-  genre: string;
-  plays: number;
-  likes: number;
+  id: string
+  title: string
+  artist: string
+  duration: string
+  genre: string
+  plays: number
+  likes: number
 }
 
 export default function ArtistStreaming() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
-  const [liveArtists, setLiveArtists] = useState<Artist[]>([]);
-  const [featuredTracks, setFeaturedTracks] = useState<Track[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null)
+  const [liveArtists, setLiveArtists] = useState<Artist[]>([])
+  const [featuredTracks, setFeaturedTracks] = useState<Track[]>([])
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     // Mock data for live artists
     setLiveArtists([
       {
-        id: "1",
-        name: "EcoSounds Collective",
-        genre: "Ambient Nature",
+        id: '1',
+        name: 'EcoSounds Collective',
+        genre: 'Ambient Nature',
         listeners: 2547,
-        avatar: "🌿",
+        avatar: '🌿',
         isLive: true,
-        currentSong: "Forest Whispers",
-        streamUrl: "/stream/ecosounds",
+        currentSong: 'Forest Whispers',
+        streamUrl: '/stream/ecosounds'
       },
       {
-        id: "2",
-        name: "Harmony of Gaia",
-        genre: "Electronic Eco",
+        id: '2',
+        name: 'Harmony of Gaia',
+        genre: 'Electronic Eco',
         listeners: 1823,
-        avatar: "🌍",
+        avatar: '🌍',
         isLive: true,
-        currentSong: "Seeds Will Form Into Music",
-        streamUrl: "/stream/harmony",
+        currentSong: 'Seeds Will Form Into Music',
+        streamUrl: '/stream/harmony'
       },
       {
-        id: "3",
-        name: "Ocean Voices",
-        genre: "Healing Sounds",
+        id: '3',
+        name: 'Ocean Voices',
+        genre: 'Healing Sounds',
         listeners: 987,
-        avatar: "🌊",
+        avatar: '🌊',
         isLive: false,
-        currentSong: "Deep Blue Meditation",
-      },
-    ]);
+        currentSong: 'Deep Blue Meditation'
+      }
+    ])
 
     // Mock featured tracks
     setFeaturedTracks([
       {
-        id: "1",
-        title: "Seeds Will Form Into Music",
-        artist: "Harmony of Gaia",
-        duration: "4:32",
-        genre: "Electronic Eco",
+        id: '1',
+        title: 'Seeds Will Form Into Music',
+        artist: 'Harmony of Gaia',
+        duration: '4:32',
+        genre: 'Electronic Eco',
         plays: 15673,
-        likes: 2341,
+        likes: 2341
       },
       {
-        id: "2",
-        title: "Dragon's Breath",
-        artist: "Culture of Harmony",
-        duration: "3:45",
-        genre: "Mystical",
+        id: '2',
+        title: 'Dragon\'s Breath',
+        artist: 'Culture of Harmony',
+        duration: '3:45',
+        genre: 'Mystical',
         plays: 12890,
-        likes: 1876,
+        likes: 1876
       },
       {
-        id: "3",
-        title: "Green Revolution",
-        artist: "EcoWarriors",
-        duration: "5:18",
-        genre: "Electronic",
+        id: '3',
+        title: 'Green Revolution',
+        artist: 'EcoWarriors',
+        duration: '5:18',
+        genre: 'Electronic',
         plays: 9876,
-        likes: 1543,
-      },
-    ]);
-  }, []);
+        likes: 1543
+      }
+    ])
+  }, [])
 
   const handlePlay = (track: Track) => {
-    setCurrentTrack(track);
-    setIsPlaying(true);
-    toast.success(`Now playing: ${track.title} by ${track.artist}`);
-  };
+    setCurrentTrack(track)
+    setIsPlaying(true)
+    toast.success(`Now playing: ${track.title} by ${track.artist}`)
+  }
 
   const handlePause = () => {
-    setIsPlaying(false);
-  };
+    setIsPlaying(false)
+  }
 
   const handleLike = (trackId: string) => {
-    toast.success("Added to favorites! 💚");
-  };
+    toast.success('Added to favorites! 💚')
+  }
 
   const handleJoinLiveStream = (artist: Artist) => {
-    toast.success(`Joined ${artist.name}'s live stream! 🎵`);
-  };
+    toast.success(`Joined ${artist.name}'s live stream! 🎵`)
+  }
 
   const LiveArtistCard = ({ artist }: { artist: Artist }) => (
     <Card className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border-purple-500/30">
@@ -149,30 +150,28 @@ export default function ArtistStreaming() {
             </div>
           </div>
         </div>
-
+        
         {artist.currentSong && (
           <div className="mb-4 p-3 bg-black/20 rounded-lg">
             <div className="flex items-center gap-2 mb-1">
               <Music className="h-4 w-4 text-green-400" />
-              <span className="text-sm font-medium text-green-400">
-                Now Playing
-              </span>
+              <span className="text-sm font-medium text-green-400">Now Playing</span>
             </div>
             <p className="text-white font-semibold">{artist.currentSong}</p>
           </div>
         )}
-
-        <Button
+        
+        <Button 
           onClick={() => handleJoinLiveStream(artist)}
           className="w-full bg-purple-600 hover:bg-purple-700"
           disabled={!artist.isLive}
         >
           <Radio className="h-4 w-4 mr-2" />
-          {artist.isLive ? "Join Live Stream" : "Not Live"}
+          {artist.isLive ? 'Join Live Stream' : 'Not Live'}
         </Button>
       </CardContent>
     </Card>
-  );
+  )
 
   const TrackCard = ({ track }: { track: Track }) => (
     <Card className="bg-card/50 border-green-500/20 hover:bg-card/70 transition-colors">
@@ -182,12 +181,8 @@ export default function ArtistStreaming() {
             <h4 className="font-semibold text-white">{track.title}</h4>
             <p className="text-sm text-muted-foreground">{track.artist}</p>
             <div className="flex items-center gap-4 mt-2">
-              <Badge variant="outline" className="text-xs">
-                {track.genre}
-              </Badge>
-              <span className="text-xs text-muted-foreground">
-                {track.duration}
-              </span>
+              <Badge variant="outline" className="text-xs">{track.genre}</Badge>
+              <span className="text-xs text-muted-foreground">{track.duration}</span>
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <TrendingUp className="h-3 w-3" />
                 {track.plays.toLocaleString()}
@@ -215,7 +210,7 @@ export default function ArtistStreaming() {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 to-blue-900/20 p-6">
@@ -249,30 +244,18 @@ export default function ArtistStreaming() {
                     <Music className="h-8 w-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white">
-                      {currentTrack.title}
-                    </h3>
-                    <p className="text-muted-foreground">
-                      {currentTrack.artist}
-                    </p>
-                    <Badge className="bg-green-600 mt-1">
-                      {currentTrack.genre}
-                    </Badge>
+                    <h3 className="text-xl font-bold text-white">{currentTrack.title}</h3>
+                    <p className="text-muted-foreground">{currentTrack.artist}</p>
+                    <Badge className="bg-green-600 mt-1">{currentTrack.genre}</Badge>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <Button
-                    onClick={
-                      isPlaying ? handlePause : () => handlePlay(currentTrack)
-                    }
+                    onClick={isPlaying ? handlePause : () => handlePlay(currentTrack)}
                     size="lg"
                     className="bg-green-600 hover:bg-green-700"
                   >
-                    {isPlaying ? (
-                      <Pause className="h-6 w-6" />
-                    ) : (
-                      <Play className="h-6 w-6" />
-                    )}
+                    {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
                   </Button>
                   <Button size="lg" variant="outline">
                     <Volume2 className="h-6 w-6" />
@@ -304,7 +287,7 @@ export default function ArtistStreaming() {
         <div className="space-y-4">
           <h2 className="text-2xl font-bold text-purple-400 flex items-center gap-2">
             <Radio className="h-6 w-6" />
-            Live Artists ({liveArtists.filter((a) => a.isLive).length} online)
+            Live Artists ({liveArtists.filter(a => a.isLive).length} online)
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {liveArtists.map((artist) => (
@@ -332,18 +315,14 @@ export default function ArtistStreaming() {
             <CardContent className="p-4 text-center">
               <Headphones className="h-6 w-6 text-purple-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-purple-400">12.5K</div>
-              <div className="text-xs text-muted-foreground">
-                Active Listeners
-              </div>
+              <div className="text-xs text-muted-foreground">Active Listeners</div>
             </CardContent>
           </Card>
           <Card className="bg-green-900/30 border-green-500/30">
             <CardContent className="p-4 text-center">
               <Music className="h-6 w-6 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">847</div>
-              <div className="text-xs text-muted-foreground">
-                Available Tracks
-              </div>
+              <div className="text-xs text-muted-foreground">Available Tracks</div>
             </CardContent>
           </Card>
           <Card className="bg-blue-900/30 border-blue-500/30">
@@ -363,5 +342,5 @@ export default function ArtistStreaming() {
         </div>
       </div>
     </div>
-  );
+  )
 }

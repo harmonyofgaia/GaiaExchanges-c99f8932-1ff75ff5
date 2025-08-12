@@ -1,32 +1,27 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
-import { useEarningActivities } from "@/hooks/useEarningSystem";
-import { Zap } from "lucide-react";
+
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
+import { toast } from 'sonner'
+import { useEarningActivities } from '@/hooks/useEarningSystem'
+import { Zap } from 'lucide-react'
 
 export function SkillBasedEarning() {
-  const [skillType, setSkillType] = useState("");
-  const [projectTitle, setProjectTitle] = useState("");
-  const [hoursWorked, setHoursWorked] = useState("");
-  const [description, setDescription] = useState("");
-  const { recordSkillBasedWork, loading } = useEarningActivities("user-123");
+  const [skillType, setSkillType] = useState('')
+  const [projectTitle, setProjectTitle] = useState('')
+  const [hoursWorked, setHoursWorked] = useState('')
+  const [description, setDescription] = useState('')
+  const { recordSkillBasedWork, loading } = useEarningActivities('user-123')
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+    e.preventDefault()
+    
     if (!skillType || !projectTitle || !hoursWorked) {
-      toast.error("Please fill in all required fields");
-      return;
+      toast.error('Please fill in all required fields')
+      return
     }
 
     try {
@@ -38,25 +33,26 @@ export function SkillBasedEarning() {
         qualityRating: 5,
         clientSatisfaction: 5,
         ecoImpact: true,
-        description,
-      });
-
-      const points = parseFloat(hoursWorked) * 10;
-      toast.success(`Skill-based work recorded! +${points} points earned`);
-      setSkillType("");
-      setProjectTitle("");
-      setHoursWorked("");
-      setDescription("");
+        description
+      })
+      
+      const points = parseFloat(hoursWorked) * 10
+      toast.success(`Skill-based work recorded! +${points} points earned`)
+      setSkillType('')
+      setProjectTitle('')
+      setHoursWorked('')
+      setDescription('')
     } catch (error) {
-      toast.error("Failed to record skill-based work");
+      toast.error('Failed to record skill-based work')
     }
-  };
+  }
 
   return (
     <Card className="border-cyan-500/30 bg-cyan-900/20">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-cyan-400">
-          <Zap className="h-5 w-5" />⚡ Skill-Based Earning
+          <Zap className="h-5 w-5" />
+          ⚡ Skill-Based Earning
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -78,22 +74,18 @@ export function SkillBasedEarning() {
               </SelectContent>
             </Select>
           </div>
-
+          
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Project Title
-            </label>
+            <label className="block text-sm font-medium mb-2">Project Title</label>
             <Input
               value={projectTitle}
               onChange={(e) => setProjectTitle(e.target.value)}
               placeholder="Name of your project"
             />
           </div>
-
+          
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Hours Worked
-            </label>
+            <label className="block text-sm font-medium mb-2">Hours Worked</label>
             <Input
               type="number"
               step="0.5"
@@ -105,9 +97,7 @@ export function SkillBasedEarning() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Description (optional)
-            </label>
+            <label className="block text-sm font-medium mb-2">Description (optional)</label>
             <Textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -115,23 +105,18 @@ export function SkillBasedEarning() {
               rows={3}
             />
           </div>
-
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-cyan-600 hover:bg-cyan-700"
-          >
-            {loading ? "Recording..." : "⚡ Record Skill Work (10 Points/Hour)"}
+          
+          <Button type="submit" disabled={loading} className="w-full bg-cyan-600 hover:bg-cyan-700">
+            {loading ? 'Recording...' : '⚡ Record Skill Work (10 Points/Hour)'}
           </Button>
         </form>
-
+        
         <div className="mt-4 p-3 bg-cyan-900/20 rounded-lg border border-cyan-500/30">
           <p className="text-sm text-cyan-300">
-            💡 <strong>Earning:</strong> 10 points per hour + quality bonuses
-            for excellent work
+            💡 <strong>Earning:</strong> 10 points per hour + quality bonuses for excellent work
           </p>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }
