@@ -6,10 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:dev": "vite build --mode development",
+  "build:dev": "vite build --mode development",
   "build:vercel": "npx tsc && vite build",
   "preview": "vite preview",
-  "build:vercel": "vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lighthouse": "lighthouse http://localhost:5173 --output html --output-path ./lighthouse-report.html --chrome-flags=\"--headless\""
