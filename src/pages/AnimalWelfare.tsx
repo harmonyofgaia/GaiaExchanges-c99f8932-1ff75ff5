@@ -46,7 +46,7 @@ export default function AnimalWelfare() {
             <p className="text-center text-xl text-muted-foreground">
               Real Animals • Real Impact • NFT Integration • Gaming Connected
             </p>
-            <div className="flex justify-center gap-0 flex-wrap mt-4 relative z-10">
+            <div className="flex justify-center gap-0 flex-wrap mt-4 relative">
               <div className="relative -mx-2 flex">
                 <div className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-green-400 via-green-500 to-blue-400 px-8 py-4 flex flex-col items-center border-4 border-white/40 -mr-4 z-30">
                   <Heart className="h-6 w-6 mb-1 text-white drop-shadow" />
