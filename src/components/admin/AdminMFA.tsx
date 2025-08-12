@@ -29,28 +29,39 @@ export function AdminMFA({ onMFASuccess }: AdminMFAProps) {
     }, 2000);
   };
 
-  const verifyCode = () => {
+  const verifyCode = async () => {
     setIsLoading(true);
 
-    // Admin codes for recovery (these would be secure in production)
-    const validCodes = ["246810", "135791", "369258", "147852"];
-
-    setTimeout(() => {
-      if (validCodes.includes(mfaCode)) {
-        toast.success("🛡️ Vault Access Verified!", {
-          description: "MFA authentication successful - Admin access granted",
+    try {
+      // In production, this would verify against a secure MFA service
+      // For now, we'll simulate the verification process
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Generate time-based verification (simplified example)
+      const timeWindow = Math.floor(Date.now() / 30000); // 30-second windows
+      const expectedCode = ((timeWindow % 900000) + 100000).toString();
+      
+      if (mfaCode === expectedCode || mfaCode === "000000") { // Emergency code
+        toast.success("🛡️ MFA Verification Successful!", {
+          description: "Multi-factor authentication completed",
           duration: 5000,
         });
         onMFASuccess();
       } else {
-        toast.error("❌ Invalid Code", {
-          description: "Security code verification failed",
+        toast.error("❌ Invalid Verification Code", {
+          description: "The entered code is incorrect or expired",
           duration: 5000,
         });
       }
+    } catch (error) {
+      toast.error("🔒 Verification Error", {
+        description: "Unable to verify code at this time",
+        duration: 5000,
+      });
+    } finally {
       setIsLoading(false);
       setMfaCode("");
-    }, 2000);
+    }
   };
 
   return (
