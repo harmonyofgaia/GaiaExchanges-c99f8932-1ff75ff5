@@ -1,6 +1,16 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/components/auth/AuthProvider";
+
+// Safe useAuth that handles missing AuthProvider
+function useSafeAuth() {
+  try {
+    const { useAuth } = require("@/components/auth/AuthProvider");
+    return useAuth();
+  } catch (error) {
+    // Return null user if AuthProvider is not available
+    return { user: null };
+  }
+}
 
 interface AdminSession {
   id: string;
@@ -12,7 +22,7 @@ export function useSecureAdmin() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminSession, setAdminSession] = useState<AdminSession | null>(null);
   const [isValidating, setIsValidating] = useState(true);
-  const { user } = useAuth();
+  const { user } = useSafeAuth();
 
   useEffect(() => {
     if (user) {
