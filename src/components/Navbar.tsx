@@ -61,7 +61,6 @@ const navItems: NavItem[] = [
   { name: "Gaming Hub", path: "/gaming", icon: Gamepad2 },
   { name: "Wallet", path: "/wallet", icon: Wallet },
   { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
-  { name: "Green Impact", path: "/green-impact-dashboard", icon: Leaf },
   { name: "Eco Avatar", path: "/eco-avatar", icon: User },
   { name: "Earning Activities", path: "/earning-activities", icon: Activity },
   { name: "Enhanced Leaderboard", path: "/enhanced-leaderboard", icon: Trophy },
