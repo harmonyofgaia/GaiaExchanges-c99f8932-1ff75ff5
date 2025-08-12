@@ -452,7 +452,7 @@ export default function EarningActivities() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/10 via-blue-900/10 to-purple-900/10">
       <div className="max-w-7xl mx-auto p-4 space-y-8">
-        {/* Hero Header */}
+        {/* Hero Header with Globe Integration */}
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-green-600/20 via-blue-600/20 to-purple-600/20 border border-green-500/30 p-8">
           <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 via-blue-500/5 to-purple-500/5"></div>
           <div className="relative text-center space-y-6">
@@ -461,13 +461,24 @@ export default function EarningActivities() {
               <h1 className="text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                 GAiA Earning Universe
               </h1>
-              <Sparkles className="h-12 w-12 text-yellow-400 animate-pulse" />
+              <Globe className="h-12 w-12 text-blue-400 animate-spin" />
             </div>
             <p className="text-2xl text-muted-foreground max-w-4xl mx-auto">
               The world's most comprehensive environmental action and reward
               ecosystem. Earn GAiA tokens while making a real impact on our
               planet! 🌍
             </p>
+            
+            {/* Quick Access to Categories */}
+            <div className="flex justify-center gap-4 mt-6">
+              <Button 
+                onClick={() => window.location.href = '/categories'}
+                className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2"
+              >
+                <Globe className="h-4 w-4" />
+                Explore Categories & Globe
+              </Button>
+            </div>
 
             {/* Quick Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mt-8">
