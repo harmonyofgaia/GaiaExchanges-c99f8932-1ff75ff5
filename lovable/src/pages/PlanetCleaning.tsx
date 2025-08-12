@@ -1,8 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Globe, Satellite, MapPin, Users, CheckCircle } from "lucide-react";
-import { Navbar } from "@/components/Navbar";
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Globe, Satellite, MapPin, Users, CheckCircle } from 'lucide-react'
+import { Navbar } from '@/components/Navbar'
 
 export default function PlanetCleaning() {
   return (
@@ -14,21 +15,14 @@ export default function PlanetCleaning() {
             🌍 Planet Cleaning
           </h1>
           <p className="text-xl text-muted-foreground mt-2">
-            Master Plan v7: Verified Cleanup Activities with Satellite
-            Monitoring
+            Master Plan v7: Verified Cleanup Activities with Satellite Monitoring
           </p>
           <div className="flex gap-4 mt-4">
-            <Badge
-              variant="outline"
-              className="border-green-500/50 text-green-400"
-            >
+            <Badge variant="outline" className="border-green-500/50 text-green-400">
               <Satellite className="h-3 w-3 mr-1" />
               Satellite Verified
             </Badge>
-            <Badge
-              variant="outline"
-              className="border-blue-500/50 text-blue-400"
-            >
+            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
               <Globe className="h-3 w-3 mr-1" />
               Global Impact
             </Badge>
@@ -77,33 +71,20 @@ export default function PlanetCleaning() {
             <CardContent>
               <div className="space-y-4">
                 <p className="text-muted-foreground">
-                  Advanced satellite monitoring verifies cleanup activities in
-                  real-time, ensuring accurate tracking and reward distribution.
+                  Advanced satellite monitoring verifies cleanup activities in real-time, ensuring accurate tracking and reward distribution.
                 </p>
                 <div className="space-y-3">
                   <div className="p-3 bg-green-900/20 rounded-lg border border-green-500/20">
-                    <div className="font-medium text-green-400 mb-1">
-                      Real-time Monitoring
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      24/7 satellite surveillance of cleanup zones
-                    </div>
+                    <div className="font-medium text-green-400 mb-1">Real-time Monitoring</div>
+                    <div className="text-sm text-muted-foreground">24/7 satellite surveillance of cleanup zones</div>
                   </div>
                   <div className="p-3 bg-blue-900/20 rounded-lg border border-blue-500/20">
-                    <div className="font-medium text-blue-400 mb-1">
-                      IoT Sensor Integration
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Ground sensors validate cleanup completion
-                    </div>
+                    <div className="font-medium text-blue-400 mb-1">IoT Sensor Integration</div>
+                    <div className="text-sm text-muted-foreground">Ground sensors validate cleanup completion</div>
                   </div>
                   <div className="p-3 bg-purple-900/20 rounded-lg border border-purple-500/20">
-                    <div className="font-medium text-purple-400 mb-1">
-                      Blockchain Rewards
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Automatic GAiA token distribution upon verification
-                    </div>
+                    <div className="font-medium text-purple-400 mb-1">Blockchain Rewards</div>
+                    <div className="text-sm text-muted-foreground">Automatic GAiA token distribution upon verification</div>
                   </div>
                 </div>
               </div>
@@ -120,15 +101,12 @@ export default function PlanetCleaning() {
             <CardContent>
               <div className="space-y-4">
                 <p className="text-muted-foreground">
-                  Interactive global map showing cleanup progress and
-                  environmental recovery across the planet.
+                  Interactive global map showing cleanup progress and environmental recovery across the planet.
                 </p>
                 <div className="bg-blue-900/20 rounded-lg p-6 border border-blue-500/20">
                   <div className="text-center">
                     <div className="text-6xl mb-4">🗺️</div>
-                    <div className="text-lg font-bold text-blue-400 mb-2">
-                      Interactive Map
-                    </div>
+                    <div className="text-lg font-bold text-blue-400 mb-2">Interactive Map</div>
                     <div className="text-sm text-muted-foreground">
                       View real-time cleanup activities worldwide
                     </div>
@@ -150,11 +128,10 @@ export default function PlanetCleaning() {
               Join the Global Cleanup Movement
             </h2>
             <p className="text-xl text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Make a verified impact on our planet while earning GAiA tokens
-              through satellite-monitored cleanup activities.
+              Make a verified impact on our planet while earning GAiA tokens through satellite-monitored cleanup activities.
             </p>
-            <Button
-              size="lg"
+            <Button 
+              size="lg" 
               className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold px-12 py-6 text-xl"
             >
               <Globe className="h-6 w-6 mr-3" />
@@ -164,5 +141,5 @@ export default function PlanetCleaning() {
         </Card>
       </div>
     </div>
-  );
+  )
 }

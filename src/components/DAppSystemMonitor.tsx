@@ -1,232 +1,203 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import {
-  Activity,
-  Database,
-  Globe,
-  Shield,
-  Zap,
+
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { 
+  Activity, 
+  Database, 
+  Globe, 
+  Shield, 
+  Zap, 
   CheckCircle,
   AlertTriangle,
   GitBranch,
   Server,
   Cpu,
   HardDrive,
-  Wifi,
-} from "lucide-react";
-import { toast } from "sonner";
+  Wifi
+} from 'lucide-react'
+import { toast } from 'sonner'
 
 interface SystemHealth {
-  component: string;
-  status: "healthy" | "warning" | "error" | "maintenance";
-  performance: number;
-  uptime: number;
-  lastCheck: Date;
-  icon: React.ReactNode;
+  component: string
+  status: 'healthy' | 'warning' | 'error' | 'maintenance'
+  performance: number
+  uptime: number
+  lastCheck: Date
+  icon: React.ReactNode
 }
 
 export function DAppSystemMonitor() {
   const [systemHealth, setSystemHealth] = useState<SystemHealth[]>([
     {
-      component: "Supabase Database",
-      status: "healthy",
+      component: 'Supabase Database',
+      status: 'healthy',
       performance: 98.5,
       uptime: 99.9,
       lastCheck: new Date(),
-      icon: <Database className="h-4 w-4" />,
+      icon: <Database className="h-4 w-4" />
     },
     {
-      component: "GitHub Integration",
-      status: "healthy",
+      component: 'GitHub Integration',
+      status: 'healthy',
       performance: 97.2,
       uptime: 99.8,
       lastCheck: new Date(),
-      icon: <GitBranch className="h-4 w-4" />,
+      icon: <GitBranch className="h-4 w-4" />
     },
     {
-      component: "Web3 Connection",
-      status: "healthy",
+      component: 'Web3 Connection',
+      status: 'healthy',
       performance: 95.8,
       uptime: 99.7,
       lastCheck: new Date(),
-      icon: <Globe className="h-4 w-4" />,
+      icon: <Globe className="h-4 w-4" />
     },
     {
-      component: "Security Engine",
-      status: "healthy",
+      component: 'Security Engine',
+      status: 'healthy',
       performance: 99.9,
       uptime: 100,
       lastCheck: new Date(),
-      icon: <Shield className="h-4 w-4" />,
+      icon: <Shield className="h-4 w-4" />
     },
     {
-      component: "Cross-Platform API",
-      status: "healthy",
+      component: 'Cross-Platform API',
+      status: 'healthy',
       performance: 94.3,
       uptime: 99.6,
       lastCheck: new Date(),
-      icon: <Server className="h-4 w-4" />,
+      icon: <Server className="h-4 w-4" />
     },
     {
-      component: "Token Management",
-      status: "healthy",
+      component: 'Token Management',
+      status: 'healthy',
       performance: 99.1,
       uptime: 99.9,
       lastCheck: new Date(),
-      icon: <Zap className="h-4 w-4" />,
-    },
-  ]);
+      icon: <Zap className="h-4 w-4" />
+    }
+  ])
 
-  const [overallHealth, setOverallHealth] = useState(0);
-  const [autoFix, setAutoFix] = useState(true);
+  const [overallHealth, setOverallHealth] = useState(0)
+  const [autoFix, setAutoFix] = useState(true)
 
   useEffect(() => {
     // System monitoring every 5 seconds
     const monitorSystem = () => {
-      setSystemHealth((prev) =>
-        prev.map((system) => {
-          // Simulate real-time monitoring
-          const performanceVariation = (Math.random() - 0.5) * 2; // ±1%
-          const uptimeVariation = (Math.random() - 0.5) * 0.2; // ±0.1%
+      setSystemHealth(prev => prev.map(system => {
+        // Simulate real-time monitoring
+        const performanceVariation = (Math.random() - 0.5) * 2 // ±1%
+        const uptimeVariation = (Math.random() - 0.5) * 0.2 // ±0.1%
+        
+        const newPerformance = Math.max(85, Math.min(100, system.performance + performanceVariation))
+        const newUptime = Math.max(95, Math.min(100, system.uptime + uptimeVariation))
+        
+        // Auto-fix issues
+        let newStatus = system.status
+        if (newPerformance < 90 && autoFix) {
+          newStatus = 'maintenance'
+          // Simulate auto-repair
+          setTimeout(() => {
+            setSystemHealth(current => current.map(s => 
+              s.component === system.component 
+                ? { ...s, status: 'healthy', performance: Math.min(100, s.performance + 5) }
+                : s
+            ))
+            toast.success(`🔧 Auto-Fixed: ${system.component}`, {
+              description: 'System automatically resolved performance issues',
+              duration: 3000
+            })
+          }, 2000)
+        } else if (newPerformance >= 95) {
+          newStatus = 'healthy'
+        } else if (newPerformance >= 90) {
+          newStatus = 'warning'
+        } else {
+          newStatus = 'error'
+        }
 
-          const newPerformance = Math.max(
-            85,
-            Math.min(100, system.performance + performanceVariation),
-          );
-          const newUptime = Math.max(
-            95,
-            Math.min(100, system.uptime + uptimeVariation),
-          );
+        return {
+          ...system,
+          performance: newPerformance,
+          uptime: newUptime,
+          status: newStatus,
+          lastCheck: new Date()
+        }
+      }))
+    }
 
-          // Auto-fix issues
-          let newStatus = system.status;
-          if (newPerformance < 90 && autoFix) {
-            newStatus = "maintenance";
-            // Simulate auto-repair
-            setTimeout(() => {
-              setSystemHealth((current) =>
-                current.map((s) =>
-                  s.component === system.component
-                    ? {
-                        ...s,
-                        status: "healthy",
-                        performance: Math.min(100, s.performance + 5),
-                      }
-                    : s,
-                ),
-              );
-              toast.success(`🔧 Auto-Fixed: ${system.component}`, {
-                description: "System automatically resolved performance issues",
-                duration: 3000,
-              });
-            }, 2000);
-          } else if (newPerformance >= 95) {
-            newStatus = "healthy";
-          } else if (newPerformance >= 90) {
-            newStatus = "warning";
-          } else {
-            newStatus = "error";
-          }
-
-          return {
-            ...system,
-            performance: newPerformance,
-            uptime: newUptime,
-            status: newStatus,
-            lastCheck: new Date(),
-          };
-        }),
-      );
-    };
-
-    const interval = setInterval(monitorSystem, 5000);
-    return () => clearInterval(interval);
-  }, [autoFix]);
+    const interval = setInterval(monitorSystem, 5000)
+    return () => clearInterval(interval)
+  }, [autoFix])
 
   useEffect(() => {
     // Calculate overall system health
-    const totalPerformance = systemHealth.reduce(
-      (sum, system) => sum + system.performance,
-      0,
-    );
-    const avgPerformance = totalPerformance / systemHealth.length;
-    setOverallHealth(avgPerformance);
-  }, [systemHealth]);
+    const totalPerformance = systemHealth.reduce((sum, system) => sum + system.performance, 0)
+    const avgPerformance = totalPerformance / systemHealth.length
+    setOverallHealth(avgPerformance)
+  }, [systemHealth])
 
   const runFullSystemCheck = () => {
-    toast.success("🔍 Full System Diagnostic Started", {
-      description: "Running comprehensive health check across all components",
-      duration: 5000,
-    });
+    toast.success('🔍 Full System Diagnostic Started', {
+      description: 'Running comprehensive health check across all components',
+      duration: 5000
+    })
 
-    setSystemHealth((prev) =>
-      prev.map((system) => ({
-        ...system,
-        status: "maintenance",
-        lastCheck: new Date(),
-      })),
-    );
+    setSystemHealth(prev => prev.map(system => ({
+      ...system,
+      status: 'maintenance',
+      lastCheck: new Date()
+    })))
 
     // Simulate comprehensive check
     setTimeout(() => {
-      setSystemHealth((prev) =>
-        prev.map((system) => ({
-          ...system,
-          status: "healthy",
-          performance: Math.min(100, system.performance + 3),
-          uptime: Math.min(100, system.uptime + 0.1),
-        })),
-      );
-
-      toast.success("✅ System Health Check Complete", {
-        description:
-          "All components optimized and functioning at peak performance",
-        duration: 3000,
-      });
-    }, 5000);
-  };
+      setSystemHealth(prev => prev.map(system => ({
+        ...system,
+        status: 'healthy',
+        performance: Math.min(100, system.performance + 3),
+        uptime: Math.min(100, system.uptime + 0.1)
+      })))
+      
+      toast.success('✅ System Health Check Complete', {
+        description: 'All components optimized and functioning at peak performance',
+        duration: 3000
+      })
+    }, 5000)
+  }
 
   const optimizePerformance = () => {
-    toast.success("⚡ Performance Optimization Started", {
-      description:
-        "Applying advanced optimization protocols across all systems",
-      duration: 4000,
-    });
+    toast.success('⚡ Performance Optimization Started', {
+      description: 'Applying advanced optimization protocols across all systems',
+      duration: 4000
+    })
 
-    setSystemHealth((prev) =>
-      prev.map((system) => ({
-        ...system,
-        performance: Math.min(100, system.performance + 5),
-        status: system.performance < 95 ? "maintenance" : "healthy",
-      })),
-    );
+    setSystemHealth(prev => prev.map(system => ({
+      ...system,
+      performance: Math.min(100, system.performance + 5),
+      status: system.performance < 95 ? 'maintenance' : 'healthy'
+    })))
 
-    console.log("🚀 System performance optimization completed");
-  };
+    console.log('🚀 System performance optimization completed')
+  }
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "healthy":
-        return "bg-green-600";
-      case "warning":
-        return "bg-yellow-600";
-      case "error":
-        return "bg-red-600";
-      case "maintenance":
-        return "bg-blue-600";
-      default:
-        return "bg-gray-600";
+      case 'healthy': return 'bg-green-600'
+      case 'warning': return 'bg-yellow-600'
+      case 'error': return 'bg-red-600'
+      case 'maintenance': return 'bg-blue-600'
+      default: return 'bg-gray-600'
     }
-  };
+  }
 
   const getPerformanceColor = (performance: number) => {
-    if (performance >= 95) return "text-green-400";
-    if (performance >= 90) return "text-yellow-400";
-    return "text-red-400";
-  };
+    if (performance >= 95) return 'text-green-400'
+    if (performance >= 90) return 'text-yellow-400'
+    return 'text-red-400'
+  }
 
   return (
     <div className="space-y-6">
@@ -247,32 +218,29 @@ export function DAppSystemMonitor() {
               <p className="text-muted-foreground">Overall System Health</p>
               <Progress value={overallHealth} className="mt-3" />
             </div>
-
+            
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
               <div className="text-center">
                 <div className="text-2xl font-bold text-green-400">
-                  {systemHealth.filter((s) => s.status === "healthy").length}
+                  {systemHealth.filter(s => s.status === 'healthy').length}
                 </div>
                 <p className="text-muted-foreground">Healthy</p>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-yellow-400">
-                  {systemHealth.filter((s) => s.status === "warning").length}
+                  {systemHealth.filter(s => s.status === 'warning').length}
                 </div>
                 <p className="text-muted-foreground">Warnings</p>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-400">
-                  {
-                    systemHealth.filter((s) => s.status === "maintenance")
-                      .length
-                  }
+                  {systemHealth.filter(s => s.status === 'maintenance').length}
                 </div>
                 <p className="text-muted-foreground">Maintenance</p>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-red-400">
-                  {systemHealth.filter((s) => s.status === "error").length}
+                  {systemHealth.filter(s => s.status === 'error').length}
                 </div>
                 <p className="text-muted-foreground">Errors</p>
               </div>
@@ -289,12 +257,11 @@ export function DAppSystemMonitor() {
         <CardContent>
           <div className="space-y-4">
             {systemHealth.map((system, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between p-4 rounded-lg bg-muted/30"
-              >
+              <div key={index} className="flex items-center justify-between p-4 rounded-lg bg-muted/30">
                 <div className="flex items-center gap-3">
-                  <div className="text-blue-400">{system.icon}</div>
+                  <div className="text-blue-400">
+                    {system.icon}
+                  </div>
                   <div>
                     <div className="font-medium">{system.component}</div>
                     <div className="text-sm text-muted-foreground">
@@ -302,36 +269,30 @@ export function DAppSystemMonitor() {
                     </div>
                   </div>
                 </div>
-
+                
                 <div className="flex items-center gap-4">
                   <div className="text-right">
-                    <div
-                      className={`text-sm font-medium ${getPerformanceColor(system.performance)}`}
-                    >
+                    <div className={`text-sm font-medium ${getPerformanceColor(system.performance)}`}>
                       {system.performance.toFixed(1)}%
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Performance
-                    </div>
+                    <div className="text-xs text-muted-foreground">Performance</div>
                   </div>
-
+                  
                   <div className="text-right">
                     <div className="text-sm font-medium text-green-400">
                       {system.uptime.toFixed(1)}%
                     </div>
                     <div className="text-xs text-muted-foreground">Uptime</div>
                   </div>
-
-                  <Badge
-                    className={`${getStatusColor(system.status)} text-white`}
-                  >
+                  
+                  <Badge className={`${getStatusColor(system.status)} text-white`}>
                     {system.status}
                   </Badge>
-
-                  {system.status === "healthy" && (
+                  
+                  {system.status === 'healthy' && (
                     <CheckCircle className="h-4 w-4 text-green-400" />
                   )}
-                  {system.status === "warning" && (
+                  {system.status === 'warning' && (
                     <AlertTriangle className="h-4 w-4 text-yellow-400" />
                   )}
                 </div>
@@ -350,7 +311,7 @@ export function DAppSystemMonitor() {
           <Activity className="h-4 w-4 mr-2" />
           Run Full System Check
         </Button>
-
+        
         <Button
           onClick={optimizePerformance}
           className="bg-green-600 hover:bg-green-700"
@@ -358,20 +319,20 @@ export function DAppSystemMonitor() {
           <Zap className="h-4 w-4 mr-2" />
           Optimize Performance
         </Button>
-
+        
         <Button
           variant="outline"
           className="border-purple-500/20"
           onClick={() => {
-            setAutoFix(!autoFix);
-            toast.success(`Auto-Fix ${autoFix ? "Disabled" : "Enabled"}`, {
-              description: `System will ${autoFix ? "no longer" : "now"} automatically resolve issues`,
-              duration: 3000,
-            });
+            setAutoFix(!autoFix)
+            toast.success(`Auto-Fix ${autoFix ? 'Disabled' : 'Enabled'}`, {
+              description: `System will ${autoFix ? 'no longer' : 'now'} automatically resolve issues`,
+              duration: 3000
+            })
           }}
         >
           <Shield className="h-4 w-4 mr-2" />
-          Auto-Fix: {autoFix ? "ON" : "OFF"}
+          Auto-Fix: {autoFix ? 'ON' : 'OFF'}
         </Button>
       </div>
 
@@ -419,5 +380,5 @@ export function DAppSystemMonitor() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

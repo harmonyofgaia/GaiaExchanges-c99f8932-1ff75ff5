@@ -1,205 +1,196 @@
-import { useState, useEffect, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  MessageSquare,
-  Shield,
-  Users,
-  Lock,
-  Eye,
+import { useState, useEffect, useRef } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { 
+  MessageSquare, 
+  Shield, 
+  Users, 
+  Lock, 
+  Eye, 
   EyeOff,
   Crown,
   AlertTriangle,
   CheckCircle,
   Send,
-  Settings,
-} from "lucide-react";
-import { toast } from "sonner";
+  Settings
+} from 'lucide-react'
+import { toast } from 'sonner'
 
 interface ChatMessage {
-  id: string;
-  user: string;
-  message: string;
-  timestamp: Date;
-  verified: boolean;
-  role: "admin" | "moderator" | "user";
-  encrypted: boolean;
+  id: string
+  user: string
+  message: string
+  timestamp: Date
+  verified: boolean
+  role: 'admin' | 'moderator' | 'user'
+  encrypted: boolean
 }
 
 interface ChatRoom {
-  id: string;
-  name: string;
-  description: string;
-  memberCount: number;
-  securityLevel: "low" | "medium" | "high" | "quantum";
-  adminOnly?: boolean;
+  id: string
+  name: string
+  description: string
+  memberCount: number
+  securityLevel: 'low' | 'medium' | 'high' | 'quantum'
+  adminOnly?: boolean
 }
 
 export function SecureChatIntegration() {
-  const [currentRoom, setCurrentRoom] = useState<string>("habbo-main");
+  const [currentRoom, setCurrentRoom] = useState<string>('habbo-main')
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
-      id: "1",
-      user: "TycoonMaster",
-      message: "🏨 Welcome to the secure Habbo Tycoon community!",
+      id: '1',
+      user: 'TycoonMaster',
+      message: '🏨 Welcome to the secure Habbo Tycoon community!',
       timestamp: new Date(),
       verified: true,
-      role: "admin",
-      encrypted: true,
+      role: 'admin',
+      encrypted: true
     },
     {
-      id: "2",
-      user: "EcoBuilder",
-      message: "This quantum encryption is amazing! Total privacy 🔒",
+      id: '2',
+      user: 'EcoBuilder',
+      message: 'This quantum encryption is amazing! Total privacy 🔒',
       timestamp: new Date(),
       verified: true,
-      role: "user",
-      encrypted: true,
-    },
-  ]);
-
-  const [newMessage, setNewMessage] = useState("");
-  const [onlineUsers] = useState(2847);
-  const [isAdminView, setIsAdminView] = useState(true); // Admin can see everything
-  const [monitoringMode, setMonitoringMode] = useState(false);
+      role: 'user',
+      encrypted: true
+    }
+  ])
+  
+  const [newMessage, setNewMessage] = useState('')
+  const [onlineUsers] = useState(2847)
+  const [isAdminView, setIsAdminView] = useState(true) // Admin can see everything
+  const [monitoringMode, setMonitoringMode] = useState(false)
   const [privacySettings, setPrivacySettings] = useState({
-    encryptionLevel: "quantum",
+    encryptionLevel: 'quantum',
     autoModeration: true,
     adminAuditLog: true,
-    userDataProtection: true,
-  });
+    userDataProtection: true
+  })
 
   const chatRooms: ChatRoom[] = [
     {
-      id: "habbo-main",
-      name: "🏨 Habbo Tycoon Main",
-      description: "Main discussion for Habbo Tycoon players",
+      id: 'habbo-main',
+      name: '🏨 Habbo Tycoon Main',
+      description: 'Main discussion for Habbo Tycoon players',
       memberCount: 1247,
-      securityLevel: "quantum",
+      securityLevel: 'quantum'
     },
     {
-      id: "partnership-hub",
-      name: "🤝 Partnership Hub",
-      description: "Community partnership discussions",
+      id: 'partnership-hub',
+      name: '🤝 Partnership Hub',
+      description: 'Community partnership discussions',
       memberCount: 156,
-      securityLevel: "high",
+      securityLevel: 'high'
     },
     {
-      id: "admin-vault",
-      name: "👑 Admin Vault",
-      description: "Secure admin communications",
+      id: 'admin-vault',
+      name: '👑 Admin Vault',
+      description: 'Secure admin communications',
       memberCount: 5,
-      securityLevel: "quantum",
-      adminOnly: true,
+      securityLevel: 'quantum',
+      adminOnly: true
     },
     {
-      id: "gaming-arena",
-      name: "🎮 Gaming Arena",
-      description: "Game discussions and challenges",
+      id: 'gaming-arena',
+      name: '🎮 Gaming Arena',
+      description: 'Game discussions and challenges',
       memberCount: 892,
-      securityLevel: "medium",
-    },
-  ];
+      securityLevel: 'medium'
+    }
+  ]
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // Auto-scroll to bottom when new messages arrive
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
 
   useEffect(() => {
     // Simulate real-time messages
     const interval = setInterval(() => {
       if (Math.random() < 0.3) {
-        const randomUsers = [
-          "GameMaster",
-          "EcoWarrior",
-          "BuilderPro",
-          "ChatModerator",
-        ];
+        const randomUsers = ['GameMaster', 'EcoWarrior', 'BuilderPro', 'ChatModerator']
         const randomMessages = [
-          "Just completed a major building project! 🏗️",
-          "Anyone want to form an alliance?",
-          "The new security features are incredible!",
-          "Partnership opportunities in renewable energy 🌱",
-          "Quantum encryption working perfectly! 🔐",
-        ];
-
+          'Just completed a major building project! 🏗️',
+          'Anyone want to form an alliance?',
+          'The new security features are incredible!',
+          'Partnership opportunities in renewable energy 🌱',
+          'Quantum encryption working perfectly! 🔐'
+        ]
+        
         const newMsg: ChatMessage = {
           id: Date.now().toString(),
           user: randomUsers[Math.floor(Math.random() * randomUsers.length)],
-          message:
-            randomMessages[Math.floor(Math.random() * randomMessages.length)],
+          message: randomMessages[Math.floor(Math.random() * randomMessages.length)],
           timestamp: new Date(),
           verified: Math.random() > 0.2,
-          role: Math.random() > 0.9 ? "moderator" : "user",
-          encrypted: true,
-        };
-
-        setMessages((prev) => [...prev, newMsg]);
+          role: Math.random() > 0.9 ? 'moderator' : 'user',
+          encrypted: true
+        }
+        
+        setMessages(prev => [...prev, newMsg])
       }
-    }, 8000);
+    }, 8000)
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
 
   const sendMessage = () => {
-    if (!newMessage.trim()) return;
+    if (!newMessage.trim()) return
 
     const message: ChatMessage = {
       id: Date.now().toString(),
-      user: "Admin (You)",
+      user: 'Admin (You)',
       message: newMessage,
       timestamp: new Date(),
       verified: true,
-      role: "admin",
-      encrypted: true,
-    };
+      role: 'admin',
+      encrypted: true
+    }
 
-    setMessages((prev) => [...prev, message]);
-    setNewMessage("");
-
-    toast.success("🔐 Message sent with quantum encryption", {
-      description: "Your message is now visible to verified community members",
-    });
-  };
+    setMessages(prev => [...prev, message])
+    setNewMessage('')
+    
+    toast.success('🔐 Message sent with quantum encryption', {
+      description: 'Your message is now visible to verified community members'
+    })
+  }
 
   const toggleMonitoring = () => {
-    setMonitoringMode(!monitoringMode);
+    setMonitoringMode(!monitoringMode)
     toast.info(
-      monitoringMode ? "👁️ Monitoring disabled" : "👁️ Admin monitoring enabled",
-      {
-        description: monitoringMode
-          ? "Chat privacy restored for community"
-          : "Full admin oversight active for security",
-      },
-    );
-  };
+      monitoringMode ? '👁️ Monitoring disabled' : '👁️ Admin monitoring enabled',
+      { 
+        description: monitoringMode 
+          ? 'Chat privacy restored for community' 
+          : 'Full admin oversight active for security'
+      }
+    )
+  }
 
   const getRoleIcon = (role: string) => {
     switch (role) {
-      case "admin":
-        return "👑";
-      case "moderator":
-        return "🛡️";
-      default:
-        return "👤";
+      case 'admin': return '👑'
+      case 'moderator': return '🛡️'
+      default: return '👤'
     }
-  };
+  }
 
   const getSecurityBadge = (level: string) => {
     const colors = {
-      low: "bg-yellow-600",
-      medium: "bg-blue-600",
-      high: "bg-green-600",
-      quantum: "bg-purple-600",
-    };
-    return colors[level as keyof typeof colors] || "bg-gray-600";
-  };
+      low: 'bg-yellow-600',
+      medium: 'bg-blue-600',
+      high: 'bg-green-600',
+      quantum: 'bg-purple-600'
+    }
+    return colors[level as keyof typeof colors] || 'bg-gray-600'
+  }
 
   return (
     <div className="space-y-6">
@@ -232,11 +223,7 @@ export function SecureChatIntegration() {
         </CardHeader>
       </Card>
 
-      <Tabs
-        value={currentRoom}
-        onValueChange={setCurrentRoom}
-        className="w-full"
-      >
+      <Tabs value={currentRoom} onValueChange={setCurrentRoom} className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           {chatRooms.map((room) => (
             <TabsTrigger key={room.id} value={room.id} className="text-xs">
@@ -266,9 +253,7 @@ export function SecureChatIntegration() {
                         </Badge>
                       </div>
                     </div>
-                    <p className="text-muted-foreground text-sm">
-                      {room.description}
-                    </p>
+                    <p className="text-muted-foreground text-sm">{room.description}</p>
                   </CardHeader>
                   <CardContent>
                     {/* Messages */}
@@ -276,35 +261,22 @@ export function SecureChatIntegration() {
                       <div className="space-y-3">
                         {messages.map((msg) => (
                           <div key={msg.id} className="flex gap-3">
-                            <div className="text-lg">
-                              {getRoleIcon(msg.role)}
-                            </div>
+                            <div className="text-lg">{getRoleIcon(msg.role)}</div>
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-1">
-                                <span
-                                  className={`font-medium ${
-                                    msg.role === "admin"
-                                      ? "text-purple-400"
-                                      : msg.role === "moderator"
-                                        ? "text-green-400"
-                                        : "text-blue-400"
-                                  }`}
-                                >
+                                <span className={`font-medium ${
+                                  msg.role === 'admin' ? 'text-purple-400' : 
+                                  msg.role === 'moderator' ? 'text-green-400' : 'text-blue-400'
+                                }`}>
                                   {msg.user}
                                 </span>
-                                {msg.verified && (
-                                  <CheckCircle className="h-3 w-3 text-green-400" />
-                                )}
-                                {msg.encrypted && (
-                                  <Lock className="h-3 w-3 text-purple-400" />
-                                )}
+                                {msg.verified && <CheckCircle className="h-3 w-3 text-green-400" />}
+                                {msg.encrypted && <Lock className="h-3 w-3 text-purple-400" />}
                                 <span className="text-xs text-muted-foreground">
                                   {msg.timestamp.toLocaleTimeString()}
                                 </span>
                               </div>
-                              <p className="text-gray-300 text-sm">
-                                {msg.message}
-                              </p>
+                              <p className="text-gray-300 text-sm">{msg.message}</p>
                             </div>
                           </div>
                         ))}
@@ -319,12 +291,9 @@ export function SecureChatIntegration() {
                         onChange={(e) => setNewMessage(e.target.value)}
                         placeholder="Type your message... (Admin privileges active)"
                         className="flex-1 bg-black/50 border-blue-500/30"
-                        onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+                        onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
                       />
-                      <Button
-                        onClick={sendMessage}
-                        className="bg-purple-600 hover:bg-purple-700"
-                      >
+                      <Button onClick={sendMessage} className="bg-purple-600 hover:bg-purple-700">
                         <Send className="h-4 w-4" />
                       </Button>
                     </div>
@@ -344,28 +313,18 @@ export function SecureChatIntegration() {
                   <CardContent className="space-y-3">
                     <Button
                       onClick={toggleMonitoring}
-                      className={`w-full ${monitoringMode ? "bg-red-600 hover:bg-red-700" : "bg-blue-600 hover:bg-blue-700"}`}
+                      className={`w-full ${monitoringMode ? 'bg-red-600 hover:bg-red-700' : 'bg-blue-600 hover:bg-blue-700'}`}
                     >
-                      {monitoringMode ? (
-                        <EyeOff className="h-4 w-4 mr-2" />
-                      ) : (
-                        <Eye className="h-4 w-4 mr-2" />
-                      )}
-                      {monitoringMode ? "Disable Monitor" : "Enable Monitor"}
+                      {monitoringMode ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
+                      {monitoringMode ? 'Disable Monitor' : 'Enable Monitor'}
                     </Button>
-
-                    <Button
-                      variant="outline"
-                      className="w-full border-green-500/30"
-                    >
+                    
+                    <Button variant="outline" className="w-full border-green-500/30">
                       <Shield className="h-4 w-4 mr-2" />
                       Security Logs
                     </Button>
-
-                    <Button
-                      variant="outline"
-                      className="w-full border-yellow-500/30"
-                    >
+                    
+                    <Button variant="outline" className="w-full border-yellow-500/30">
                       <AlertTriangle className="h-4 w-4 mr-2" />
                       Moderation Queue
                     </Button>
@@ -374,9 +333,7 @@ export function SecureChatIntegration() {
 
                 <Card className="bg-black/30 border-green-500/30">
                   <CardHeader>
-                    <CardTitle className="text-green-400 text-sm">
-                      Privacy Settings
-                    </CardTitle>
+                    <CardTitle className="text-green-400 text-sm">Privacy Settings</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2 text-xs">
                     <div className="flex justify-between">
@@ -400,9 +357,7 @@ export function SecureChatIntegration() {
 
                 <Card className="bg-black/30 border-yellow-500/30">
                   <CardHeader>
-                    <CardTitle className="text-yellow-400 text-sm">
-                      Chat Analytics
-                    </CardTitle>
+                    <CardTitle className="text-yellow-400 text-sm">Chat Analytics</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2 text-xs">
                     <div className="flex justify-between">
@@ -411,9 +366,7 @@ export function SecureChatIntegration() {
                     </div>
                     <div className="flex justify-between">
                       <span>Active Users:</span>
-                      <span className="text-green-400">
-                        {onlineUsers.toLocaleString()}
-                      </span>
+                      <span className="text-green-400">{onlineUsers.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Mod Actions:</span>
@@ -431,5 +384,5 @@ export function SecureChatIntegration() {
         ))}
       </Tabs>
     </div>
-  );
+  )
 }

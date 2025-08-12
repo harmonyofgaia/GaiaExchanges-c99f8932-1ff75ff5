@@ -1,6 +1,7 @@
-import { Navbar } from "@/components/Navbar";
-import { DeploymentAutomation } from "@/components/deployment/DeploymentAutomation";
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+
+import { Navbar } from '@/components/Navbar'
+import { DeploymentAutomation } from '@/components/deployment/DeploymentAutomation'
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
 export default function DeploymentCenter() {
   return (
@@ -12,5 +13,5 @@ export default function DeploymentCenter() {
         </div>
       </div>
     </ProtectedRoute>
-  );
+  )
 }

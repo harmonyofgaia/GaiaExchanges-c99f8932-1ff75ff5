@@ -1,23 +1,24 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
-import { Badge } from "@/components/ui/badge";
-import { Palette, Settings, Wand2, Download, Upload } from "lucide-react";
-import { toast } from "sonner";
+
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Slider } from '@/components/ui/slider'
+import { Switch } from '@/components/ui/switch'
+import { Badge } from '@/components/ui/badge'
+import { Palette, Settings, Wand2, Download, Upload } from 'lucide-react'
+import { toast } from 'sonner'
 
 export default function AdminVisualControls() {
-  const [backgroundIntensity, setBackgroundIntensity] = useState(50);
-  const [animationSpeed, setAnimationSpeed] = useState(1);
-  const [fontSize, setFontSize] = useState(16);
-  const [spacing, setSpacing] = useState(16);
+  const [backgroundIntensity, setBackgroundIntensity] = useState(50)
+  const [animationSpeed, setAnimationSpeed] = useState(1)
+  const [fontSize, setFontSize] = useState(16)
+  const [spacing, setSpacing] = useState(16)
 
   const applyChanges = () => {
-    toast.success("Visual changes applied successfully!");
-  };
+    toast.success('Visual changes applied successfully!')
+  }
 
   return (
     <div className="space-y-6">
@@ -40,7 +41,7 @@ export default function AdminVisualControls() {
                 step={5}
               />
             </div>
-
+            
             <div className="space-y-2">
               <Label>Animation Speed</Label>
               <Slider
@@ -62,7 +63,7 @@ export default function AdminVisualControls() {
                 step={1}
               />
             </div>
-
+            
             <div className="space-y-2">
               <Label>Spacing</Label>
               <Slider
@@ -74,17 +75,14 @@ export default function AdminVisualControls() {
               />
             </div>
           </div>
-
+          
           <div className="flex items-center space-x-2">
             <Switch />
             <Label>Enable Particle Effects</Label>
           </div>
-
+          
           <div className="flex gap-2">
-            <Button
-              onClick={applyChanges}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={applyChanges} className="bg-purple-600 hover:bg-purple-700">
               <Wand2 className="h-4 w-4 mr-2" />
               Apply Changes
             </Button>
@@ -100,5 +98,5 @@ export default function AdminVisualControls() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

@@ -1,57 +1,45 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Flame,
-  ExternalLink,
-  Eye,
-  DollarSign,
-  Leaf,
-  Shield,
-  Activity,
-  TrendingUp,
-  Zap,
-} from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Flame, ExternalLink, Eye, DollarSign, Leaf, Shield, Activity, TrendingUp, Zap } from 'lucide-react'
+import { useToast } from '@/hooks/use-toast'
 
 export function BurningSystem() {
-  const [burnAmount, setBurnAmount] = useState("");
-  const [totalBurned, setTotalBurned] = useState(1_250_000);
-  const [burnRate, setBurnRate] = useState(25000);
-  const [coralReefFunding, setCoralReefFunding] = useState(62500);
-  const [realMoneyGenerated, setRealMoneyGenerated] = useState(485000); // USD
-  const [parabolicMultiplier, setParabolicMultiplier] = useState(2.5);
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
+  const [burnAmount, setBurnAmount] = useState('')
+  const [totalBurned, setTotalBurned] = useState(1_250_000)
+  const [burnRate, setBurnRate] = useState(25000)
+  const [coralReefFunding, setCoralReefFunding] = useState(62500)
+  const [realMoneyGenerated, setRealMoneyGenerated] = useState(485000) // USD
+  const [parabolicMultiplier, setParabolicMultiplier] = useState(2.5)
+  const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast()
 
   // Parabolic money generation algorithm
   useEffect(() => {
     const moneyGenerationEngine = setInterval(() => {
-      setRealMoneyGenerated((prev) => {
-        const burnBonus = totalBurned * 0.035; // Each burned token = $0.035
-        const parabolicBonus = prev * (parabolicMultiplier / 1000);
-        const networkEffect = Math.log(totalBurned + 1) * 125;
+      setRealMoneyGenerated(prev => {
+        const burnBonus = totalBurned * 0.035 // Each burned token = $0.035
+        const parabolicBonus = prev * (parabolicMultiplier / 1000)
+        const networkEffect = Math.log(totalBurned + 1) * 125
+        
+        return prev + burnBonus + parabolicBonus + networkEffect
+      })
+      
+      setParabolicMultiplier(prev => prev * 1.002) // Compound growth
+      
+      console.log('💰 PARABOLIC MONEY GENERATION - INVISIBLE TO ALL EXCEPT ADMIN')
+      console.log('🚀 REAL MONEY MULTIPLICATION ACTIVE')
+    }, 1000)
 
-        return prev + burnBonus + parabolicBonus + networkEffect;
-      });
-
-      setParabolicMultiplier((prev) => prev * 1.002); // Compound growth
-
-      console.log(
-        "💰 PARABOLIC MONEY GENERATION - INVISIBLE TO ALL EXCEPT ADMIN",
-      );
-      console.log("🚀 REAL MONEY MULTIPLICATION ACTIVE");
-    }, 1000);
-
-    return () => clearInterval(moneyGenerationEngine);
-  }, [totalBurned, parabolicMultiplier]);
+    return () => clearInterval(moneyGenerationEngine)
+  }, [totalBurned, parabolicMultiplier])
 
   // Updated burning wallet address
-  const burningWalletAddress = "ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7";
-  const mainWalletAddress = "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh";
+  const burningWalletAddress = 'ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7'
+  const mainWalletAddress = '5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh'
 
   const handleBurn = async () => {
     if (!burnAmount || parseFloat(burnAmount) <= 0) {
@@ -59,85 +47,85 @@ export function BurningSystem() {
         title: "Invalid Amount",
         description: "Please enter a valid amount to burn",
         variant: "destructive",
-      });
-      return;
+      })
+      return
     }
 
-    setIsLoading(true);
-
+    setIsLoading(true)
+    
     setTimeout(() => {
-      const amount = parseFloat(burnAmount);
-      const coralReefShare = amount * 0.05;
-      const instantMoneyGeneration = amount * 0.25; // Each token burned = $0.25 real money
-
-      setTotalBurned((prev) => prev + amount);
-      setBurnRate((prev) => prev + Math.floor(amount / 10));
-      setCoralReefFunding((prev) => prev + coralReefShare);
-      setRealMoneyGenerated((prev) => prev + instantMoneyGeneration);
-
+      const amount = parseFloat(burnAmount)
+      const coralReefShare = amount * 0.05
+      const instantMoneyGeneration = amount * 0.25 // Each token burned = $0.25 real money
+      
+      setTotalBurned(prev => prev + amount)
+      setBurnRate(prev => prev + Math.floor(amount / 10))
+      setCoralReefFunding(prev => prev + coralReefShare)
+      setRealMoneyGenerated(prev => prev + instantMoneyGeneration)
+      
       toast({
         title: "🔥 PARABOLIC BURN SUCCESS",
         description: `${amount.toLocaleString()} GAiA burned → $${instantMoneyGeneration.toLocaleString()} real money generated instantly!`,
-      });
-
-      setBurnAmount("");
-      setIsLoading(false);
-    }, 2000);
-  };
+      })
+      
+      setBurnAmount('')
+      setIsLoading(false)
+    }, 2000)
+  }
 
   const copyAddress = (address: string, name: string) => {
-    navigator.clipboard.writeText(address);
+    navigator.clipboard.writeText(address)
     toast({
       title: "Address Copied",
       description: `${name} address copied to clipboard`,
-    });
-  };
+    })
+  }
 
   const environmentalProjects = [
     {
-      name: "Sound Riffs Re Grau dio - Coral Reef Restoration",
+      name: 'Sound Riffs Re Grau dio - Coral Reef Restoration',
       allocated: coralReefFunding,
-      status: "Active",
-      impact: "Audio signals helping 3 reef sites recover",
+      status: 'Active',
+      impact: 'Audio signals helping 3 reef sites recover',
       burnPercentage: 5,
-      walletAddress: burningWalletAddress,
+      walletAddress: burningWalletAddress
     },
     {
-      name: "Ocean Cleanup Initiative",
+      name: 'Ocean Cleanup Initiative',
       allocated: 142500, // Adjusted for 95% distribution
-      status: "Active",
-      impact: "Removed 45 tons of plastic",
-      burnPercentage: 19,
+      status: 'Active', 
+      impact: 'Removed 45 tons of plastic',
+      burnPercentage: 19
     },
     {
-      name: "Reforestation Project Brazil",
+      name: 'Reforestation Project Brazil',
       allocated: 190000, // Adjusted for 95% distribution
-      status: "Active",
-      impact: "12,000 trees planted",
-      burnPercentage: 25,
+      status: 'Active', 
+      impact: '12,000 trees planted',
+      burnPercentage: 25
     },
     {
-      name: "Solar Energy Villages Africa",
+      name: 'Solar Energy Villages Africa',
       allocated: 118750, // Adjusted for 95% distribution
-      status: "Pending",
-      impact: "Planning phase",
-      burnPercentage: 16,
+      status: 'Pending',
+      impact: 'Planning phase',
+      burnPercentage: 16
     },
     {
-      name: "Carbon Capture Technology",
+      name: 'Carbon Capture Technology',
       allocated: 166250, // Adjusted for 95% distribution
-      status: "Active",
-      impact: "500 tons CO2 captured",
-      burnPercentage: 22,
+      status: 'Active',
+      impact: '500 tons CO2 captured',
+      burnPercentage: 22
     },
     {
-      name: "Clean Water Access Global",
+      name: 'Clean Water Access Global',
       allocated: 95000, // Adjusted for 95% distribution
-      status: "Active",
-      impact: "8 communities served",
-      burnPercentage: 13,
-    },
-  ];
+      status: 'Active',
+      impact: '8 communities served',
+      burnPercentage: 13
+    }
+  ]
 
   return (
     <div className="space-y-6">
@@ -158,9 +146,7 @@ export function BurningSystem() {
 
         <Card className="border-green-500/20 bg-gradient-to-br from-green-900/10 to-emerald-900/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Real Money Generated
-            </CardTitle>
+            <CardTitle className="text-sm font-medium">Real Money Generated</CardTitle>
             <DollarSign className="h-4 w-4 text-green-400" />
           </CardHeader>
           <CardContent>
@@ -173,9 +159,7 @@ export function BurningSystem() {
 
         <Card className="border-purple-500/20 bg-gradient-to-br from-purple-900/10 to-pink-900/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Parabolic Multiplier
-            </CardTitle>
+            <CardTitle className="text-sm font-medium">Parabolic Multiplier</CardTitle>
             <Zap className="h-4 w-4 text-purple-400 animate-pulse" />
           </CardHeader>
           <CardContent>
@@ -188,9 +172,7 @@ export function BurningSystem() {
 
         <Card className="border-cyan-500/20 bg-gradient-to-br from-cyan-900/10 to-blue-900/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Coral Reef (5%)
-            </CardTitle>
+            <CardTitle className="text-sm font-medium">Coral Reef (5%)</CardTitle>
             <div className="text-lg">🪸</div>
           </CardHeader>
           <CardContent>
@@ -203,9 +185,7 @@ export function BurningSystem() {
 
         <Card className="border-blue-500/20 bg-gradient-to-br from-blue-900/10 to-cyan-900/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Weekly Burn Rate
-            </CardTitle>
+            <CardTitle className="text-sm font-medium">Weekly Burn Rate</CardTitle>
             <Activity className="h-4 w-4 text-blue-400" />
           </CardHeader>
           <CardContent>
@@ -218,14 +198,12 @@ export function BurningSystem() {
 
         <Card className="border-yellow-500/20 bg-gradient-to-br from-yellow-900/10 to-orange-900/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Money Velocity
-            </CardTitle>
+            <CardTitle className="text-sm font-medium">Money Velocity</CardTitle>
             <TrendingUp className="h-4 w-4 text-yellow-400" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold mono-numbers text-yellow-400">
-              ${((realMoneyGenerated * 0.15) / 24).toFixed(0)}/hr
+              ${(realMoneyGenerated * 0.15 / 24).toFixed(0)}/hr
             </div>
             <p className="text-xs text-yellow-400">Real money per hour</p>
           </CardContent>
@@ -248,27 +226,17 @@ export function BurningSystem() {
               <CardContent className="pt-6">
                 <div className="text-center space-y-3">
                   <div className="text-4xl">💰🔥🚀</div>
-                  <h3 className="text-xl font-bold text-green-400">
-                    PARABOLIC MONEY GENERATION ENGINE
-                  </h3>
+                  <h3 className="text-xl font-bold text-green-400">PARABOLIC MONEY GENERATION ENGINE</h3>
                   <p className="text-green-300">
-                    Every token burned generates REAL MONEY through our
-                    parabolic universe algorithm
+                    Every token burned generates REAL MONEY through our parabolic universe algorithm
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-md mx-auto">
                     <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                      <div className="text-2xl font-bold text-green-400">
-                        $
-                        {((realMoneyGenerated / totalBurned) * 1000).toFixed(3)}
-                      </div>
-                      <div className="text-sm text-green-300">
-                        Per 1000 tokens
-                      </div>
+                      <div className="text-2xl font-bold text-green-400">${(realMoneyGenerated / totalBurned * 1000).toFixed(3)}</div>
+                      <div className="text-sm text-green-300">Per 1000 tokens</div>
                     </div>
                     <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-4">
-                      <div className="text-2xl font-bold text-purple-400">
-                        {parabolicMultiplier.toFixed(2)}x
-                      </div>
+                      <div className="text-2xl font-bold text-purple-400">{parabolicMultiplier.toFixed(2)}x</div>
                       <div className="text-sm text-purple-300">Multiplier</div>
                     </div>
                     <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-4">
@@ -289,9 +257,7 @@ export function BurningSystem() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium">
-                    Amount to Burn (GAiA)
-                  </label>
+                  <label className="block text-sm font-medium">Amount to Burn (GAiA)</label>
                   <Input
                     type="number"
                     value={burnAmount}
@@ -302,21 +268,16 @@ export function BurningSystem() {
                     step="0.01"
                   />
                   <p className="text-sm text-green-400">
-                    💰 Estimated real money generation: $
-                    {burnAmount
-                      ? (parseFloat(burnAmount) * 0.25).toLocaleString()
-                      : "0.00"}
+                    💰 Estimated real money generation: ${burnAmount ? (parseFloat(burnAmount) * 0.25).toLocaleString() : '0.00'}
                   </p>
                 </div>
-
-                <Button
+                
+                <Button 
                   onClick={handleBurn}
                   className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
                   disabled={!burnAmount || isLoading}
                 >
-                  {isLoading
-                    ? "Generating Real Money..."
-                    : "🔥 BURN → GENERATE MONEY"}
+                  {isLoading ? 'Generating Real Money...' : '🔥 BURN → GENERATE MONEY'}
                 </Button>
               </CardContent>
             </Card>
@@ -343,41 +304,29 @@ export function BurningSystem() {
                         style={{
                           left: `${(i * 2) % 100}%`,
                           animationDelay: `${i * 0.1}s`,
-                          animationDuration: `${2 + (i % 3)}s`,
+                          animationDuration: `${2 + (i % 3)}s`
                         }}
                       >
-                        {["1", "0", "🪸", "GAiA", "🔥"][i % 5]}
+                        {['1', '0', '🪸', 'GAiA', '🔥'][i % 5]}
                       </div>
                     ))}
                   </div>
                 </div>
-
+                
                 {/* Matrix Wallet Display */}
                 <div className="relative z-10 space-y-6">
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-6">
                     <div className="text-center space-y-4">
-                      <div className="text-4xl text-green-400 animate-pulse">
-                        🔥💰🪸
-                      </div>
-                      <h3 className="text-xl font-bold text-green-400 font-mono">
-                        BURNING PROTOCOL ACTIVE
-                      </h3>
+                      <div className="text-4xl text-green-400 animate-pulse">🔥💰🪸</div>
+                      <h3 className="text-xl font-bold text-green-400 font-mono">BURNING PROTOCOL ACTIVE</h3>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-black/50 border border-green-500/30 rounded p-3">
-                          <div className="text-green-400 font-mono text-sm">
-                            TOTAL_BURNED
-                          </div>
-                          <div className="text-2xl font-bold text-green-400 font-mono">
-                            {totalBurned.toLocaleString()}
-                          </div>
+                          <div className="text-green-400 font-mono text-sm">TOTAL_BURNED</div>
+                          <div className="text-2xl font-bold text-green-400 font-mono">{totalBurned.toLocaleString()}</div>
                         </div>
                         <div className="bg-black/50 border border-cyan-500/30 rounded p-3">
-                          <div className="text-cyan-400 font-mono text-sm">
-                            CORAL_FUNDING
-                          </div>
-                          <div className="text-2xl font-bold text-cyan-400 font-mono">
-                            {coralReefFunding.toLocaleString()}
-                          </div>
+                          <div className="text-cyan-400 font-mono text-sm">CORAL_FUNDING</div>
+                          <div className="text-2xl font-bold text-cyan-400 font-mono">{coralReefFunding.toLocaleString()}</div>
                         </div>
                       </div>
                     </div>
@@ -387,37 +336,23 @@ export function BurningSystem() {
                   <div className="bg-black/70 border border-green-500/30 rounded-lg p-4">
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <h4 className="text-green-400 font-mono text-sm">
-                          BURN_WALLET_ADDRESS
-                        </h4>
-                        <Badge className="bg-green-600 font-mono">
-                          PHANTOM_INTEGRATED
-                        </Badge>
+                        <h4 className="text-green-400 font-mono text-sm">BURN_WALLET_ADDRESS</h4>
+                        <Badge className="bg-green-600 font-mono">PHANTOM_INTEGRATED</Badge>
                       </div>
                       <div className="font-mono text-xs bg-black/50 p-3 rounded border-green-500/20 border break-all text-green-400">
                         {burningWalletAddress}
                       </div>
                       <div className="flex gap-2">
-                        <Button
-                          variant="outline"
+                        <Button 
+                          variant="outline" 
                           size="sm"
-                          onClick={() =>
-                            copyAddress(
-                              burningWalletAddress,
-                              "Matrix Burn Wallet",
-                            )
-                          }
+                          onClick={() => copyAddress(burningWalletAddress, 'Matrix Burn Wallet')}
                           className="border-green-500/30 text-green-400 hover:bg-green-900/20 font-mono"
                         >
                           COPY_ADDRESS
                         </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          asChild
-                          className="border-green-500/30 text-green-400 hover:bg-green-900/20 font-mono"
-                        >
-                          <a
+                        <Button variant="outline" size="sm" asChild className="border-green-500/30 text-green-400 hover:bg-green-900/20 font-mono">
+                          <a 
                             href={`https://solscan.io/account/${burningWalletAddress}`}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -433,28 +368,16 @@ export function BurningSystem() {
                   {/* Live Matrix Stats */}
                   <div className="grid grid-cols-3 gap-4">
                     <div className="bg-black/50 border border-green-500/20 rounded p-3 text-center">
-                      <div className="text-green-400 font-mono text-xs">
-                        BURN_RATE
-                      </div>
-                      <div className="text-lg font-bold text-green-400 font-mono">
-                        0.21%
-                      </div>
+                      <div className="text-green-400 font-mono text-xs">BURN_RATE</div>
+                      <div className="text-lg font-bold text-green-400 font-mono">0.21%</div>
                     </div>
                     <div className="bg-black/50 border border-cyan-500/20 rounded p-3 text-center">
-                      <div className="text-cyan-400 font-mono text-xs">
-                        REEF_ALLOCATION
-                      </div>
-                      <div className="text-lg font-bold text-cyan-400 font-mono">
-                        5.00%
-                      </div>
+                      <div className="text-cyan-400 font-mono text-xs">REEF_ALLOCATION</div>
+                      <div className="text-lg font-bold text-cyan-400 font-mono">5.00%</div>
                     </div>
                     <div className="bg-black/50 border border-orange-500/20 rounded p-3 text-center">
-                      <div className="text-orange-400 font-mono text-xs">
-                        STATUS
-                      </div>
-                      <div className="text-lg font-bold text-orange-400 font-mono animate-pulse">
-                        ACTIVE
-                      </div>
+                      <div className="text-orange-400 font-mono text-xs">STATUS</div>
+                      <div className="text-lg font-bold text-orange-400 font-mono animate-pulse">ACTIVE</div>
                     </div>
                   </div>
                 </div>
@@ -474,9 +397,7 @@ export function BurningSystem() {
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <h4 className="font-bold text-green-400">
-                    💰 Real Money Algorithms:
-                  </h4>
+                  <h4 className="font-bold text-green-400">💰 Real Money Algorithms:</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Burn-to-Money Rate:</span>
@@ -484,15 +405,11 @@ export function BurningSystem() {
                     </div>
                     <div className="flex justify-between">
                       <span>Parabolic Multiplier:</span>
-                      <span className="text-purple-400">
-                        {parabolicMultiplier.toFixed(3)}x
-                      </span>
+                      <span className="text-purple-400">{parabolicMultiplier.toFixed(3)}x</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Network Effect Bonus:</span>
-                      <span className="text-blue-400">
-                        ${(Math.log(totalBurned + 1) * 125).toFixed(0)}
-                      </span>
+                      <span className="text-blue-400">${(Math.log(totalBurned + 1) * 125).toFixed(0)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Compound Growth Rate:</span>
@@ -500,50 +417,36 @@ export function BurningSystem() {
                     </div>
                   </div>
                 </div>
-
+                
                 <div className="space-y-4">
-                  <h4 className="font-bold text-green-400">
-                    🚀 Money Velocity:
-                  </h4>
+                  <h4 className="font-bold text-green-400">🚀 Money Velocity:</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Per Hour:</span>
-                      <span className="text-green-400">
-                        ${((realMoneyGenerated * 0.15) / 24).toFixed(0)}
-                      </span>
+                      <span className="text-green-400">${(realMoneyGenerated * 0.15 / 24).toFixed(0)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Per Day:</span>
-                      <span className="text-green-400">
-                        ${(realMoneyGenerated * 0.15).toFixed(0)}
-                      </span>
+                      <span className="text-green-400">${(realMoneyGenerated * 0.15).toFixed(0)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Per Week:</span>
-                      <span className="text-green-400">
-                        ${(realMoneyGenerated * 0.15 * 7).toFixed(0)}
-                      </span>
+                      <span className="text-green-400">${(realMoneyGenerated * 0.15 * 7).toFixed(0)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Projected Monthly:</span>
-                      <span className="text-green-400">
-                        ${(realMoneyGenerated * 0.15 * 30).toFixed(0)}
-                      </span>
+                      <span className="text-green-400">${(realMoneyGenerated * 0.15 * 30).toFixed(0)}</span>
                     </div>
                   </div>
                 </div>
               </div>
-
+              
               <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                <h5 className="font-bold text-green-400 mb-2">
-                  🧠 PARABOLIC UNIVERSE ALGORITHM:
-                </h5>
+                <h5 className="font-bold text-green-400 mb-2">🧠 PARABOLIC UNIVERSE ALGORITHM:</h5>
                 <p className="text-sm text-green-300">
-                  Our proprietary algorithm converts token burns into real money
-                  through quantum financial mathematics. Each burn activates
-                  multiple revenue streams: direct conversion ($0.25/token),
-                  compound growth multipliers, network effect bonuses, and
-                  parabolic universe expansion rewards.
+                  Our proprietary algorithm converts token burns into real money through quantum financial mathematics. 
+                  Each burn activates multiple revenue streams: direct conversion ($0.25/token), compound growth multipliers, 
+                  network effect bonuses, and parabolic universe expansion rewards.
                 </p>
               </div>
             </CardContent>
@@ -562,66 +465,36 @@ export function BurningSystem() {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {environmentalProjects.map((project, index) => (
-                    <div
-                      key={index}
-                      className={`${index === 0 ? "bg-cyan-500/10 border-cyan-500/20" : "bg-muted/30 border-border/30"} rounded-lg p-4 space-y-3 border`}
-                    >
+                    <div key={index} className={`${index === 0 ? 'bg-cyan-500/10 border-cyan-500/20' : 'bg-muted/30 border-border/30'} rounded-lg p-4 space-y-3 border`}>
                       <div className="flex items-center justify-between">
-                        <h4
-                          className={`font-medium ${index === 0 ? "text-cyan-400" : ""}`}
-                        >
-                          {index === 0 && "🪸 "}
-                          {project.name}
+                        <h4 className={`font-medium ${index === 0 ? 'text-cyan-400' : ''}`}>
+                          {index === 0 && '🪸 '}{project.name}
                         </h4>
                         <div className="flex items-center gap-2">
-                          <Badge
-                            variant={
-                              project.status === "Active"
-                                ? "default"
-                                : "secondary"
-                            }
-                          >
+                          <Badge variant={project.status === 'Active' ? 'default' : 'secondary'}>
                             {project.status}
                           </Badge>
-                          <Badge
-                            className={
-                              index === 0
-                                ? "bg-cyan-600 text-white"
-                                : "bg-green-600 text-white"
-                            }
-                          >
+                          <Badge className={index === 0 ? 'bg-cyan-600 text-white' : 'bg-green-600 text-white'}>
                             {project.burnPercentage}% Share
                           </Badge>
                         </div>
                       </div>
                       <div className="space-y-1 text-sm">
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">
-                            Allocated:
-                          </span>
-                          <span
-                            className={
-                              index === 0 ? "text-cyan-400" : "text-green-400"
-                            }
-                          >
+                          <span className="text-muted-foreground">Allocated:</span>
+                          <span className={index === 0 ? 'text-cyan-400' : 'text-green-400'}>
                             {project.allocated.toLocaleString()} GAiA
                           </span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-muted-foreground">Impact:</span>
-                          <span
-                            className={
-                              index === 0 ? "text-cyan-400" : "text-blue-400"
-                            }
-                          >
+                          <span className={index === 0 ? 'text-cyan-400' : 'text-blue-400'}>
                             {project.impact}
                           </span>
                         </div>
                         {project.walletAddress && (
                           <div className="pt-2">
-                            <div className="text-xs text-muted-foreground mb-1">
-                              Wallet Address:
-                            </div>
+                            <div className="text-xs text-muted-foreground mb-1">Wallet Address:</div>
                             <div className="font-mono text-xs bg-muted/50 p-2 rounded break-all">
                               {project.walletAddress}
                             </div>
@@ -630,8 +503,7 @@ export function BurningSystem() {
                       </div>
                       {index === 0 && (
                         <div className="text-xs text-cyan-300 bg-cyan-500/5 p-2 rounded">
-                          🎵 Automated funding from token burns helps restore
-                          marine ecosystems
+                          🎵 Automated funding from token burns helps restore marine ecosystems
                         </div>
                       )}
                     </div>
@@ -702,5 +574,5 @@ export function BurningSystem() {
         </TabsContent>
       </Tabs>
     </div>
-  );
+  )
 }

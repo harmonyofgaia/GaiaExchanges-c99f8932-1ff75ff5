@@ -1,6 +1,7 @@
-import { Navbar } from "@/components/Navbar";
-import { QuantumSecurityDashboard } from "@/components/security/QuantumSecurityDashboard";
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+
+import { Navbar } from '@/components/Navbar'
+import { QuantumSecurityDashboard } from '@/components/security/QuantumSecurityDashboard'
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
 export default function QuantumSecurity() {
   return (
@@ -12,5 +13,5 @@ export default function QuantumSecurity() {
         </div>
       </div>
     </ProtectedRoute>
-  );
+  )
 }

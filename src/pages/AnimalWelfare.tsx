@@ -1,38 +1,38 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Heart,
-  Shield,
-  Star,
-  Globe,
+
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { 
+  Heart, 
+  Shield, 
+  Star, 
+  Globe, 
   Camera,
   ShoppingCart,
   Gamepad2,
   Hammer,
-  TreePine,
-} from "lucide-react";
-import { AnimalRescueNFT } from "@/components/nft/AnimalRescueNFT";
-import { MinecraftLandscapeBuilder } from "@/components/MinecraftLandscapeBuilder";
-import { VirtualLandscapeCreator } from "@/components/landscapes/VirtualLandscapeCreator";
-import { RealTimeAnimalTracker } from "@/components/RealTimeAnimalTracker";
-import { AnimalWelfareWalletManager } from "@/components/animal-welfare/AnimalWelfareWalletManager";
-import { AnimalNFTMarketplace } from "@/components/animal-welfare/AnimalNFTMarketplace";
-import { RealAnimalDatabase } from "@/components/animal-welfare/RealAnimalDatabase";
-import { toast } from "sonner";
+  TreePine
+} from 'lucide-react'
+import { AnimalRescueNFT } from '@/components/nft/AnimalRescueNFT'
+import { MinecraftLandscapeBuilder } from '@/components/MinecraftLandscapeBuilder'
+import { VirtualLandscapeCreator } from '@/components/landscapes/VirtualLandscapeCreator'
+import { RealTimeAnimalTracker } from '@/components/RealTimeAnimalTracker'
+import { AnimalWelfareWalletManager } from '@/components/animal-welfare/AnimalWelfareWalletManager'
+import { AnimalNFTMarketplace } from '@/components/animal-welfare/AnimalNFTMarketplace'
+import { toast } from 'sonner'
 
 export default function AnimalWelfare() {
-  const [activeAnimals, setActiveAnimals] = useState(247);
-  const [tokensRaised, setTokensRaised] = useState(1547820);
+  const [activeAnimals] = useState(247);
+  const [tokensRaised] = useState(1547820);
 
   const launchIntoGame = (gameName: string) => {
     toast.success(`🎮 Launching into ${gameName}!`, {
-      description: "Your animal NFTs will provide special abilities in-game",
+      description: 'Your animal NFTs will provide special abilities in-game',
       duration: 4000,
     });
-  };
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20 p-6">
@@ -87,6 +87,7 @@ export default function AnimalWelfare() {
                   <Star className="h-6 w-6 mb-1 text-white drop-shadow" />
                   <span className="text-lg font-bold text-white drop-shadow">NFT</span>
                   <span className="text-xs text-white/80">Powered</span>
+                </div>
                 <BadgeCard gradientClassName="bg-gradient-to-r from-green-400 via-green-500 to-blue-400" className="-mr-4 z-30">
                   <Heart className="h-6 w-6 mb-1 text-white drop-shadow" />
                   <span className="text-lg font-bold text-white drop-shadow">{activeAnimals}</span>
@@ -109,9 +110,8 @@ export default function AnimalWelfare() {
 
         {/* Main Tabs */}
         <Tabs defaultValue="rescue" className="w-full">
-          <TabsList className="grid w-full grid-cols-7">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="rescue">🆘 Animal Rescue</TabsTrigger>
-            <TabsTrigger value="database">🦎 Real Animals</TabsTrigger>
             <TabsTrigger value="cameras">📹 Live Cameras</TabsTrigger>
             <TabsTrigger value="vr">🥽 VR Experience</TabsTrigger>
             <TabsTrigger value="marketplace">🏪 NFT Marketplace</TabsTrigger>
@@ -123,10 +123,6 @@ export default function AnimalWelfare() {
             <AnimalRescueNFT />
           </TabsContent>
 
-          <TabsContent value="database" className="space-y-6">
-            <RealAnimalDatabase />
-          </TabsContent>
-
           <TabsContent value="cameras" className="space-y-6">
             <RealTimeAnimalTracker />
           </TabsContent>
@@ -134,14 +130,10 @@ export default function AnimalWelfare() {
           <TabsContent value="vr" className="space-y-6">
             <Card className="border-cyan-500/30 bg-cyan-900/20">
               <CardHeader>
-                <CardTitle className="text-cyan-400">
-                  🥽 Virtual Reality Animal Experiences
-                </CardTitle>
+                <CardTitle className="text-cyan-400">🥽 Virtual Reality Animal Experiences</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
-                  Immersive VR experiences coming soon!
-                </p>
+                <p className="text-muted-foreground">Immersive VR experiences coming soon!</p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -158,26 +150,25 @@ export default function AnimalWelfare() {
                   🎮 Gaming Integration Hub
                 </CardTitle>
                 <p className="text-muted-foreground">
-                  Use your animal contributions in various games and earn
-                  rewards for conservation
+                  Use your animal contributions in various games and earn rewards for conservation
                 </p>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Button
-                    onClick={() => launchIntoGame("Worms Arena")}
+                  <Button 
+                    onClick={() => launchIntoGame('Worms Arena')}
                     className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
                   >
                     🐛 Launch Worms Game
                   </Button>
-                  <Button
-                    onClick={() => launchIntoGame("GAiA Fantasy")}
+                  <Button 
+                    onClick={() => launchIntoGame('GAiA Fantasy')}
                     className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
                   >
                     ⚔️ Enter GAiA Fantasy
                   </Button>
-                  <Button
-                    onClick={() => launchIntoGame("Virtual World")}
+                  <Button 
+                    onClick={() => launchIntoGame('Virtual World')}
                     className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
                   >
                     🌍 Virtual World
@@ -190,8 +181,10 @@ export default function AnimalWelfare() {
           <TabsContent value="wallet" className="space-y-6">
             <AnimalWelfareWalletManager />
           </TabsContent>
+
         </Tabs>
       </div>
     </div>
-  );
+
+  )
 }

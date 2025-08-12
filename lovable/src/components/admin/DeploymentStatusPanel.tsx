@@ -1,100 +1,66 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import {
-  CheckCircle,
-  AlertTriangle,
-  Clock,
+
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { 
+  CheckCircle, 
+  AlertTriangle, 
+  Clock, 
   RefreshCw,
   Server,
   Database,
   Globe,
-  Shield,
-} from "lucide-react";
+  Shield
+} from 'lucide-react'
 
 export function DeploymentStatusPanel() {
   const [deploymentStatus, setDeploymentStatus] = useState({
-    overall: "success" as "success" | "warning" | "error" | "pending",
+    overall: 'success' as 'success' | 'warning' | 'error' | 'pending',
     services: [
-      {
-        name: "Frontend",
-        status: "success",
-        uptime: "99.9%",
-        lastDeployed: "2 hours ago",
-      },
-      {
-        name: "Backend API",
-        status: "success",
-        uptime: "99.8%",
-        lastDeployed: "1 hour ago",
-      },
-      {
-        name: "Database",
-        status: "success",
-        uptime: "100%",
-        lastDeployed: "5 hours ago",
-      },
-      {
-        name: "CDN",
-        status: "success",
-        uptime: "99.9%",
-        lastDeployed: "3 hours ago",
-      },
+      { name: 'Frontend', status: 'success', uptime: '99.9%', lastDeployed: '2 hours ago' },
+      { name: 'Backend API', status: 'success', uptime: '99.8%', lastDeployed: '1 hour ago' },
+      { name: 'Database', status: 'success', uptime: '100%', lastDeployed: '5 hours ago' },
+      { name: 'CDN', status: 'success', uptime: '99.9%', lastDeployed: '3 hours ago' }
     ],
     metrics: {
-      responseTime: "245ms",
-      throughput: "1.2k req/s",
-      errorRate: "0.01%",
-      availability: "99.9%",
-    },
-  });
+      responseTime: '245ms',
+      throughput: '1.2k req/s',
+      errorRate: '0.01%',
+      availability: '99.9%'
+    }
+  })
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case "success":
-        return <CheckCircle className="h-5 w-5 text-green-500" />;
-      case "warning":
-        return <AlertTriangle className="h-5 w-5 text-yellow-500" />;
-      case "error":
-        return <AlertTriangle className="h-5 w-5 text-red-500" />;
-      case "pending":
-        return <Clock className="h-5 w-5 text-blue-500" />;
-      default:
-        return <Clock className="h-5 w-5 text-gray-500" />;
+      case 'success': return <CheckCircle className="h-5 w-5 text-green-500" />
+      case 'warning': return <AlertTriangle className="h-5 w-5 text-yellow-500" />
+      case 'error': return <AlertTriangle className="h-5 w-5 text-red-500" />
+      case 'pending': return <Clock className="h-5 w-5 text-blue-500" />
+      default: return <Clock className="h-5 w-5 text-gray-500" />
     }
-  };
+  }
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "success":
-        return "bg-green-100 text-green-800";
-      case "warning":
-        return "bg-yellow-100 text-yellow-800";
-      case "error":
-        return "bg-red-100 text-red-800";
-      case "pending":
-        return "bg-blue-100 text-blue-800";
-      default:
-        return "bg-gray-100 text-gray-800";
+      case 'success': return 'bg-green-100 text-green-800'
+      case 'warning': return 'bg-yellow-100 text-yellow-800'
+      case 'error': return 'bg-red-100 text-red-800'
+      case 'pending': return 'bg-blue-100 text-blue-800'
+      default: return 'bg-gray-100 text-gray-800'
     }
-  };
+  }
 
   const getServiceIcon = (serviceName: string) => {
     switch (serviceName) {
-      case "Frontend":
-        return <Globe className="h-5 w-5" />;
-      case "Backend API":
-        return <Server className="h-5 w-5" />;
-      case "Database":
-        return <Database className="h-5 w-5" />;
-      case "CDN":
-        return <Shield className="h-5 w-5" />;
-      default:
-        return <Server className="h-5 w-5" />;
+      case 'Frontend': return <Globe className="h-5 w-5" />
+      case 'Backend API': return <Server className="h-5 w-5" />
+      case 'Database': return <Database className="h-5 w-5" />
+      case 'CDN': return <Shield className="h-5 w-5" />
+      default: return <Server className="h-5 w-5" />
     }
-  };
+  }
 
   return (
     <div className="space-y-6">
@@ -121,27 +87,19 @@ export function DeploymentStatusPanel() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">
-                {deploymentStatus.metrics.responseTime}
-              </div>
+              <div className="text-2xl font-bold text-green-600">{deploymentStatus.metrics.responseTime}</div>
               <div className="text-sm text-muted-foreground">Response Time</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">
-                {deploymentStatus.metrics.throughput}
-              </div>
+              <div className="text-2xl font-bold text-blue-600">{deploymentStatus.metrics.throughput}</div>
               <div className="text-sm text-muted-foreground">Throughput</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-600">
-                {deploymentStatus.metrics.errorRate}
-              </div>
+              <div className="text-2xl font-bold text-yellow-600">{deploymentStatus.metrics.errorRate}</div>
               <div className="text-sm text-muted-foreground">Error Rate</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">
-                {deploymentStatus.metrics.availability}
-              </div>
+              <div className="text-2xl font-bold text-purple-600">{deploymentStatus.metrics.availability}</div>
               <div className="text-sm text-muted-foreground">Availability</div>
             </div>
           </div>
@@ -201,5 +159,5 @@ export function DeploymentStatusPanel() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

@@ -1,19 +1,20 @@
-import { SwapInterface } from "./SwapInterface";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Shield, Heart, TrendingUp, Copy } from "lucide-react";
-import { toast } from "sonner";
-import { GAIA_TOKEN } from "@/constants/gaia";
-import { TokenDataDisplay } from "@/components/TokenDataDisplay";
+
+import { SwapInterface } from './SwapInterface'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Shield, Heart, TrendingUp, Copy } from 'lucide-react'
+import { toast } from 'sonner'
+import { GAIA_TOKEN } from '@/constants/gaia'
+import { TokenDataDisplay } from '@/components/TokenDataDisplay'
 
 export function PureInvestmentExchange() {
   const copyWalletAddress = () => {
-    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS);
-    toast.success("Community Wallet Address Copied!", {
-      description: "This is where all fees go - completely transparent",
-    });
-  };
+    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
+    toast.success('Community Wallet Address Copied!', {
+      description: 'This is where all fees go - completely transparent'
+    })
+  }
 
   return (
     <div className="space-y-6">
@@ -24,16 +25,14 @@ export function PureInvestmentExchange() {
             🌱 Pure Investment Exchange - For Believers, Not Traders
           </CardTitle>
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-            <h3 className="text-blue-400 font-bold mb-2">
-              🏦 All Fees Go to Community Wallet:
-            </h3>
+            <h3 className="text-blue-400 font-bold mb-2">🏦 All Fees Go to Community Wallet:</h3>
             <div className="flex items-center justify-between">
               <code className="text-blue-300 font-mono text-sm break-all bg-blue-900/10 p-2 rounded flex-1 mr-2">
                 {GAIA_TOKEN.WALLET_ADDRESS}
               </code>
-              <Button
+              <Button 
                 onClick={copyWalletAddress}
-                variant="outline"
+                variant="outline" 
                 size="sm"
                 className="border-blue-500/30 text-blue-400"
               >
@@ -75,7 +74,10 @@ export function PureInvestmentExchange() {
 
       <TokenDataDisplay showFullDetails={true} />
 
-      <SwapInterface title="Long-term Investment Portal" showHeader={true} />
+      <SwapInterface 
+        title="Long-term Investment Portal" 
+        showHeader={true}
+      />
     </div>
-  );
+  )
 }

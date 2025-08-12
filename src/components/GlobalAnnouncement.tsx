@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Textarea } from "@/components/ui/textarea";
-import { Download, Share2, Globe, Megaphone, Sparkles } from "lucide-react";
-import { AbstractArtOverlay } from "@/components/ui/abstract-art-overlay";
+
+import React, { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Textarea } from '@/components/ui/textarea'
+import { Download, Share2, Globe, Megaphone, Sparkles } from 'lucide-react'
+import { AbstractArtOverlay } from '@/components/ui/abstract-art-overlay'
 
 export function GlobalAnnouncement() {
-  const [announcement, setAnnouncement] = useState("");
+  const [announcement, setAnnouncement] = useState('')
 
   const generateAnnouncement = () => {
     const announcementText = `
@@ -65,29 +66,29 @@ JOIN THE REVOLUTION TODAY!
 "Doesn't matter if you're Black or White - We're all part of this beautiful Earth" 🌍✨
 
 Together we create a new culture until the end of the world - Seeds will form into Music 🎵
-    `.trim();
-
-    setAnnouncement(announcementText);
-  };
+    `.trim()
+    
+    setAnnouncement(announcementText)
+  }
 
   const downloadAnnouncement = () => {
-    const element = document.createElement("a");
-    const file = new Blob([announcement], { type: "text/plain" });
-    element.href = URL.createObjectURL(file);
-    element.download = "harmony-of-gaia-global-announcement.txt";
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-  };
+    const element = document.createElement('a')
+    const file = new Blob([announcement], { type: 'text/plain' })
+    element.href = URL.createObjectURL(file)
+    element.download = 'harmony-of-gaia-global-announcement.txt'
+    document.body.appendChild(element)
+    element.click()
+    document.body.removeChild(element)
+  }
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(announcement);
-  };
+    navigator.clipboard.writeText(announcement)
+  }
 
   return (
     <div className="relative p-6 bg-gradient-to-br from-green-900/20 to-purple-900/20 rounded-lg border border-green-500/20">
       <AbstractArtOverlay artType="quantum" intensity="medium" />
-
+      
       <div className="relative z-10">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
@@ -111,10 +112,7 @@ Together we create a new culture until the end of the world - Seeds will form in
 
         <CardContent className="space-y-6">
           <div className="flex gap-4 justify-center">
-            <Button
-              onClick={generateAnnouncement}
-              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
-            >
+            <Button onClick={generateAnnouncement} className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
               <Megaphone className="w-4 h-4 mr-2" />
               Generate Announcement
             </Button>
@@ -128,20 +126,13 @@ Together we create a new culture until the end of the world - Seeds will form in
                 className="min-h-[400px] bg-black/20 border-green-500/20 text-green-100 font-mono text-sm"
                 placeholder="Your global announcement will appear here..."
               />
-
+              
               <div className="flex gap-4 justify-center">
-                <Button
-                  onClick={downloadAnnouncement}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                >
+                <Button onClick={downloadAnnouncement} className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
                   <Download className="w-4 h-4 mr-2" />
                   Download as TXT
                 </Button>
-                <Button
-                  onClick={copyToClipboard}
-                  variant="outline"
-                  className="border-green-500/50 text-green-400 hover:bg-green-500/10"
-                >
+                <Button onClick={copyToClipboard} variant="outline" className="border-green-500/50 text-green-400 hover:bg-green-500/10">
                   <Share2 className="w-4 h-4 mr-2" />
                   Copy to Clipboard
                 </Button>
@@ -151,5 +142,5 @@ Together we create a new culture until the end of the world - Seeds will form in
         </CardContent>
       </div>
     </div>
-  );
+  )
 }

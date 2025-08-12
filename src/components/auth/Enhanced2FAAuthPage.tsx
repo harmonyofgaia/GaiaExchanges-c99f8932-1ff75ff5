@@ -1,89 +1,80 @@
-import React, { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AlertCircle, Leaf, Shield, Globe, Smartphone } from "lucide-react";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useAuth } from "./AuthProvider";
-import { GoogleAuthenticator } from "./GoogleAuthenticator";
+
+import React, { useState } from 'react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { AlertCircle, Leaf, Shield, Globe, Smartphone } from 'lucide-react'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { useAuth } from './AuthProvider'
+import { GoogleAuthenticator } from './GoogleAuthenticator'
 
 export function Enhanced2FAAuthPage() {
-  const { signIn, signUp } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
-  const [show2FASetup, setShow2FASetup] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
+  const { signIn, signUp } = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
+  const [show2FASetup, setShow2FASetup] = useState(false)
+  const [userEmail, setUserEmail] = useState('')
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
+    e.preventDefault()
+    setIsLoading(true)
+    setError(null)
+    
+    const formData = new FormData(e.currentTarget)
+    const email = formData.get('email') as string
+    const password = formData.get('password') as string
 
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-
-    const { error } = await signIn(email, password);
-
+    const { error } = await signIn(email, password)
+    
     if (error) {
-      setError(error.message || "Failed to sign in");
+      setError(error.message || 'Failed to sign in')
     }
-
-    setIsLoading(false);
-  };
+    
+    setIsLoading(false)
+  }
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
-    setSuccess(null);
+    e.preventDefault()
+    setIsLoading(true)
+    setError(null)
+    setSuccess(null)
+    
+    const formData = new FormData(e.currentTarget)
+    const email = formData.get('email') as string
+    const password = formData.get('password') as string
 
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+    setUserEmail(email)
 
-    setUserEmail(email);
-
-    const { error } = await signUp(email, password);
-
+    const { error } = await signUp(email, password)
+    
     if (error) {
-      setError(error.message || "Failed to sign up");
+      setError(error.message || 'Failed to sign up')
     } else {
-      setSuccess(
-        "Account created successfully! Please set up 2FA for maximum security.",
-      );
-      setShow2FASetup(true);
+      setSuccess('Account created successfully! Please set up 2FA for maximum security.')
+      setShow2FASetup(true)
     }
-
-    setIsLoading(false);
-  };
+    
+    setIsLoading(false)
+  }
 
   const handle2FASetupComplete = () => {
-    setShow2FASetup(false);
-    setSuccess(
-      "🔐 Account created with maximum security! Please check your email to verify your account.",
-    );
-  };
+    setShow2FASetup(false)
+    setSuccess('🔐 Account created with maximum security! Please check your email to verify your account.')
+  }
 
   if (show2FASetup) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20 flex items-center justify-center p-4">
-        <GoogleAuthenticator
+        <GoogleAuthenticator 
           onSetupComplete={handle2FASetupComplete}
           onVerificationSuccess={handle2FASetupComplete}
           userEmail={userEmail}
         />
       </div>
-    );
+    )
   }
 
   return (
@@ -103,9 +94,7 @@ export function Enhanced2FAAuthPage() {
         {/* Security Features Showcase */}
         <Card className="border-blue-500/20 bg-gradient-to-br from-blue-900/20 to-purple-900/20">
           <CardContent className="p-4">
-            <h3 className="text-lg font-bold text-blue-400 mb-3 text-center">
-              🛡️ Ultra-Secure Gaming Platform
-            </h3>
+            <h3 className="text-lg font-bold text-blue-400 mb-3 text-center">🛡️ Ultra-Secure Gaming Platform</h3>
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-green-400" />
@@ -126,9 +115,7 @@ export function Enhanced2FAAuthPage() {
         {/* Auth Card */}
         <Card className="border-green-500/20">
           <CardHeader>
-            <CardTitle className="text-center">
-              Welcome to Gaia's Gaming World
-            </CardTitle>
+            <CardTitle className="text-center">Welcome to Gaia's Gaming World</CardTitle>
             <CardDescription className="text-center">
               Sign in to your account or create a new one with maximum security
             </CardDescription>
@@ -139,7 +126,7 @@ export function Enhanced2FAAuthPage() {
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
                 <TabsTrigger value="signup">Sign Up</TabsTrigger>
               </TabsList>
-
+              
               <TabsContent value="signin" className="space-y-4 mt-6">
                 <form onSubmit={handleSignIn} className="space-y-4">
                   <div className="space-y-2">
@@ -162,16 +149,16 @@ export function Enhanced2FAAuthPage() {
                       required
                     />
                   </div>
-                  <Button
-                    type="submit"
+                  <Button 
+                    type="submit" 
                     className="w-full bg-green-600 hover:bg-green-700"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Signing In..." : "Sign In Securely"}
+                    {isLoading ? 'Signing In...' : 'Sign In Securely'}
                   </Button>
                 </form>
               </TabsContent>
-
+              
               <TabsContent value="signup" className="space-y-4 mt-6">
                 <form onSubmit={handleSignUp} className="space-y-4">
                   <div className="space-y-2">
@@ -214,14 +201,12 @@ export function Enhanced2FAAuthPage() {
                       required
                     />
                   </div>
-                  <Button
-                    type="submit"
+                  <Button 
+                    type="submit" 
                     className="w-full bg-green-600 hover:bg-green-700"
                     disabled={isLoading}
                   >
-                    {isLoading
-                      ? "Creating Account..."
-                      : "Create Secure Account"}
+                    {isLoading ? 'Creating Account...' : 'Create Secure Account'}
                   </Button>
                 </form>
               </TabsContent>
@@ -251,9 +236,7 @@ export function Enhanced2FAAuthPage() {
         <div className="space-y-3 text-center text-sm text-muted-foreground">
           <div className="flex items-center justify-center gap-2">
             <Shield className="h-4 w-4 text-green-400" />
-            <span>
-              Military-grade security with environmental impact tracking
-            </span>
+            <span>Military-grade security with environmental impact tracking</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <Globe className="h-4 w-4 text-blue-400" />
@@ -262,5 +245,5 @@ export function Enhanced2FAAuthPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

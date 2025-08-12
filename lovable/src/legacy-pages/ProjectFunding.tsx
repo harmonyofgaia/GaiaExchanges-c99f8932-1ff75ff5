@@ -1,8 +1,9 @@
-import { Navbar } from "@/components/Navbar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Heart, Users, Target } from "lucide-react";
+
+import { Navbar } from '@/components/Navbar'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { Heart, Users, Target } from 'lucide-react'
 
 export default function ProjectFunding() {
   return (
@@ -28,8 +29,7 @@ export default function ProjectFunding() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-sm text-muted-foreground">
-                Remove plastic waste from oceans using advanced filtration
-                systems
+                Remove plastic waste from oceans using advanced filtration systems
               </p>
               <Progress value={75} className="w-full" />
               <div className="flex justify-between text-sm">
@@ -88,5 +88,5 @@ export default function ProjectFunding() {
         </div>
       </div>
     </div>
-  );
+  )
 }

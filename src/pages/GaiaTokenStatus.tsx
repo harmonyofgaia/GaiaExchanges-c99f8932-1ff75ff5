@@ -1,30 +1,24 @@
-import { TokenDataDisplay } from "@/components/TokenDataDisplay";
-import { GaiaTokenTracker } from "@/components/GaiaTokenTracker";
-import { BlockchainStatus } from "@/components/blockchain/BlockchainStatus";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Shield,
-  ExternalLink,
-  CheckCircle,
-  Coins,
-  TrendingUp,
-  Users,
-} from "lucide-react";
-import { GAIA_TOKEN, GAIA_METRICS } from "@/constants/gaia";
-import { useGaiaTokenData } from "@/hooks/useGaiaTokenData";
+
+import { TokenDataDisplay } from '@/components/TokenDataDisplay'
+import { GaiaTokenTracker } from '@/components/GaiaTokenTracker'
+import { BlockchainStatus } from '@/components/blockchain/BlockchainStatus'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Shield, ExternalLink, CheckCircle, Coins, TrendingUp, Users } from 'lucide-react'
+import { GAIA_TOKEN, GAIA_METRICS } from '@/constants/gaia'
+import { useGaiaTokenData } from '@/hooks/useGaiaTokenData'
 
 export default function GaiaTokenStatus() {
-  const { tokenData, isLoading, hasRealData } = useGaiaTokenData(true);
+  const { tokenData, isLoading, hasRealData } = useGaiaTokenData(true)
 
   const openPumpFun = () => {
-    window.open(GAIA_TOKEN.PUMP_FUN_URL, "_blank", "noopener,noreferrer");
-  };
+    window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank', 'noopener,noreferrer')
+  }
 
   const openWebsite = () => {
-    window.open(GAIA_TOKEN.OFFICIAL_WEBSITE, "_blank", "noopener,noreferrer");
-  };
+    window.open(GAIA_TOKEN.OFFICIAL_WEBSITE, '_blank', 'noopener,noreferrer')
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
@@ -57,35 +51,35 @@ export default function GaiaTokenStatus() {
               <div className="text-sm space-y-2">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />
-                  <strong>Contract Address:</strong>
+                  <strong>Contract Address:</strong> 
                   <code className="bg-gray-800 px-2 py-1 rounded text-blue-400 font-mono">
                     {GAIA_TOKEN.CONTRACT_ADDRESS}
                   </code>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />
-                  <strong>Main Community Wallet:</strong>
+                  <strong>Main Community Wallet:</strong> 
                   <code className="bg-gray-800 px-2 py-1 rounded text-blue-400 font-mono">
                     {GAIA_TOKEN.WALLET_ADDRESS}
                   </code>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />
-                  <strong>Green Investments Wallet:</strong>
+                  <strong>Green Investments Wallet:</strong> 
                   <code className="bg-gray-800 px-2 py-1 rounded text-green-400 font-mono">
                     {GAIA_TOKEN.GREEN_INVESTMENTS_WALLET}
                   </code>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />
-                  <strong>Community Vault Wallet:</strong>
+                  <strong>Community Vault Wallet:</strong> 
                   <code className="bg-gray-800 px-2 py-1 rounded text-purple-400 font-mono">
                     {GAIA_TOKEN.COMMUNITY_VAULT_WALLET}
                   </code>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />
-                  <strong>Animal Welfare Wallet:</strong>
+                  <strong>Animal Welfare Wallet:</strong> 
                   <code className="bg-gray-800 px-2 py-1 rounded text-orange-400 font-mono">
                     {GAIA_TOKEN.ANIMAL_WELFARE_WALLET}
                   </code>
@@ -106,10 +100,7 @@ export default function GaiaTokenStatus() {
             </div>
 
             <div className="flex gap-2">
-              <Button
-                onClick={openPumpFun}
-                className="bg-orange-600 hover:bg-orange-700"
-              >
+              <Button onClick={openPumpFun} className="bg-orange-600 hover:bg-orange-700">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 View on Pump.fun
               </Button>
@@ -132,12 +123,10 @@ export default function GaiaTokenStatus() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-green-400">
-                $
-                {tokenData?.price?.toFixed(6) ||
-                  GAIA_METRICS.CURRENT_PRICE.toFixed(6)}
+                ${tokenData?.price?.toFixed(6) || GAIA_METRICS.CURRENT_PRICE.toFixed(6)}
               </div>
               <div className="text-sm text-muted-foreground">
-                {hasRealData ? "Live Price" : "Simulated"}
+                {hasRealData ? 'Live Price' : 'Simulated'}
               </div>
             </CardContent>
           </Card>
@@ -151,11 +140,11 @@ export default function GaiaTokenStatus() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-blue-400">
-                $
-                {tokenData?.marketCap?.toLocaleString() ||
-                  GAIA_METRICS.MARKET_CAP.toLocaleString()}
+                ${tokenData?.marketCap?.toLocaleString() || GAIA_METRICS.MARKET_CAP.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">Total Value</div>
+              <div className="text-sm text-muted-foreground">
+                Total Value
+              </div>
             </CardContent>
           </Card>
 
@@ -168,8 +157,7 @@ export default function GaiaTokenStatus() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-purple-400">
-                {tokenData?.holders?.toLocaleString() ||
-                  GAIA_METRICS.HOLDERS.toLocaleString()}
+                {tokenData?.holders?.toLocaleString() || GAIA_METRICS.HOLDERS.toLocaleString()}
               </div>
               <div className="text-sm text-muted-foreground">
                 Community Size
@@ -187,7 +175,9 @@ export default function GaiaTokenStatus() {
               <div className="text-2xl font-bold text-orange-400">
                 {GAIA_METRICS.ECOSYSTEM_HEALTH}%
               </div>
-              <div className="text-sm text-muted-foreground">System Status</div>
+              <div className="text-sm text-muted-foreground">
+                System Status
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -211,36 +201,20 @@ export default function GaiaTokenStatus() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="text-center p-4 bg-green-500/10 rounded-lg">
-                <div className="text-2xl font-bold text-green-400">
-                  {GAIA_METRICS.CO2_OFFSET_TOTAL}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Tons CO2 Offset
-                </div>
+                <div className="text-2xl font-bold text-green-400">{GAIA_METRICS.CO2_OFFSET_TOTAL}</div>
+                <div className="text-sm text-muted-foreground">Tons CO2 Offset</div>
               </div>
               <div className="text-center p-4 bg-blue-500/10 rounded-lg">
-                <div className="text-2xl font-bold text-blue-400">
-                  {GAIA_TOKEN.TREES_PLANTED_TOTAL.toLocaleString()}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Trees Planted
-                </div>
+                <div className="text-2xl font-bold text-blue-400">{GAIA_TOKEN.TREES_PLANTED_TOTAL.toLocaleString()}</div>
+                <div className="text-sm text-muted-foreground">Trees Planted</div>
               </div>
               <div className="text-center p-4 bg-purple-500/10 rounded-lg">
-                <div className="text-2xl font-bold text-purple-400">
-                  {GAIA_METRICS.RENEWABLE_ENERGY_PROJECTS}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Energy Projects
-                </div>
+                <div className="text-2xl font-bold text-purple-400">{GAIA_METRICS.RENEWABLE_ENERGY_PROJECTS}</div>
+                <div className="text-sm text-muted-foreground">Energy Projects</div>
               </div>
               <div className="text-center p-4 bg-cyan-500/10 rounded-lg">
-                <div className="text-2xl font-bold text-cyan-400">
-                  ${GAIA_TOKEN.OCEAN_CLEANUP_CONTRIBUTION.toLocaleString()}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Ocean Cleanup
-                </div>
+                <div className="text-2xl font-bold text-cyan-400">${GAIA_TOKEN.OCEAN_CLEANUP_CONTRIBUTION.toLocaleString()}</div>
+                <div className="text-sm text-muted-foreground">Ocean Cleanup</div>
               </div>
             </div>
           </CardContent>
@@ -259,9 +233,7 @@ export default function GaiaTokenStatus() {
                 {GAIA_TOKEN.OFFICIAL_DISCLAIMER}
               </p>
               <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
-                <h4 className="font-bold text-red-400 mb-2">
-                  Always Verify Before Trading:
-                </h4>
+                <h4 className="font-bold text-red-400 mb-2">Always Verify Before Trading:</h4>
                 <ul className="text-sm text-red-300 space-y-1">
                   <li>• Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}</li>
                   <li>• Wallet: {GAIA_TOKEN.WALLET_ADDRESS}</li>
@@ -274,5 +246,5 @@ export default function GaiaTokenStatus() {
         </Card>
       </div>
     </div>
-  );
+  )
 }

@@ -1,8 +1,9 @@
-import { UltimateIntelligenceHub } from "./UltimateIntelligenceHub";
-import { GlobalDominationSuite } from "./GlobalDominationSuite";
-import { MarketDominationSuite } from "./MarketDominationSuite";
-import { QuantumSearchEngine } from "./QuantumSearchEngine";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import { UltimateIntelligenceHub } from './UltimateIntelligenceHub'
+import { GlobalDominationSuite } from './GlobalDominationSuite'
+import { MarketDominationSuite } from './MarketDominationSuite'
+import { QuantumSearchEngine } from './QuantumSearchEngine'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export function SupremeControlSuite() {
   return (
@@ -32,5 +33,5 @@ export function SupremeControlSuite() {
         </TabsContent>
       </Tabs>
     </div>
-  );
+  )
 }

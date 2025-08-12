@@ -1,27 +1,28 @@
-import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserCheck, Mail, Lock, Globe } from "lucide-react";
+
+import React, { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { UserCheck, Mail, Lock, Globe } from 'lucide-react'
 
 export default function UserAuth() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+    e.preventDefault()
+    setIsLoading(true)
     // Simulate login process
-    setTimeout(() => setIsLoading(false), 2000);
-  };
+    setTimeout(() => setIsLoading(false), 2000)
+  }
 
   const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+    e.preventDefault()
+    setIsLoading(true)
     // Simulate signup process
-    setTimeout(() => setIsLoading(false), 2000);
-  };
+    setTimeout(() => setIsLoading(false), 2000)
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/10 via-blue-900/10 to-purple-900/10 flex items-center justify-center p-6">
@@ -40,20 +41,14 @@ export default function UserAuth() {
         <CardContent>
           <Tabs defaultValue="login" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger
-                value="login"
-                className="data-[state=active]:bg-green-600"
-              >
+              <TabsTrigger value="login" className="data-[state=active]:bg-green-600">
                 Login
               </TabsTrigger>
-              <TabsTrigger
-                value="signup"
-                className="data-[state=active]:bg-blue-600"
-              >
+              <TabsTrigger value="signup" className="data-[state=active]:bg-blue-600">
                 Sign Up
               </TabsTrigger>
             </TabsList>
-
+            
             <TabsContent value="login" className="space-y-4">
               <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-2">
@@ -61,12 +56,12 @@ export default function UserAuth() {
                     <Mail className="h-4 w-4 inline mr-2" />
                     Email
                   </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    placeholder="Enter your email" 
                     className="bg-black/20 border-green-500/30"
-                    required
+                    required 
                   />
                 </div>
                 <div className="space-y-2">
@@ -74,25 +69,25 @@ export default function UserAuth() {
                     <Lock className="h-4 w-4 inline mr-2" />
                     Password
                   </Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Enter your password"
+                  <Input 
+                    id="password" 
+                    type="password" 
+                    placeholder="Enter your password" 
                     className="bg-black/20 border-green-500/30"
-                    required
+                    required 
                   />
                 </div>
-                <Button
-                  type="submit"
+                <Button 
+                  type="submit" 
                   className="w-full bg-green-600 hover:bg-green-700"
                   disabled={isLoading}
                 >
                   <UserCheck className="h-4 w-4 mr-2" />
-                  {isLoading ? "Logging in..." : "Login to GAiA"}
+                  {isLoading ? 'Logging in...' : 'Login to GAiA'}
                 </Button>
               </form>
             </TabsContent>
-
+            
             <TabsContent value="signup" className="space-y-4">
               <form onSubmit={handleSignup} className="space-y-4">
                 <div className="space-y-2">
@@ -100,12 +95,12 @@ export default function UserAuth() {
                     <Mail className="h-4 w-4 inline mr-2" />
                     Email
                   </Label>
-                  <Input
-                    id="signup-email"
-                    type="email"
-                    placeholder="Enter your email"
+                  <Input 
+                    id="signup-email" 
+                    type="email" 
+                    placeholder="Enter your email" 
                     className="bg-black/20 border-blue-500/30"
-                    required
+                    required 
                   />
                 </div>
                 <div className="space-y-2">
@@ -113,12 +108,12 @@ export default function UserAuth() {
                     <Lock className="h-4 w-4 inline mr-2" />
                     Password
                   </Label>
-                  <Input
-                    id="signup-password"
-                    type="password"
-                    placeholder="Create a password"
+                  <Input 
+                    id="signup-password" 
+                    type="password" 
+                    placeholder="Create a password" 
                     className="bg-black/20 border-blue-500/30"
-                    required
+                    required 
                   />
                 </div>
                 <div className="space-y-2">
@@ -126,21 +121,21 @@ export default function UserAuth() {
                     <Lock className="h-4 w-4 inline mr-2" />
                     Confirm Password
                   </Label>
-                  <Input
-                    id="confirm-password"
-                    type="password"
-                    placeholder="Confirm your password"
+                  <Input 
+                    id="confirm-password" 
+                    type="password" 
+                    placeholder="Confirm your password" 
                     className="bg-black/20 border-blue-500/30"
-                    required
+                    required 
                   />
                 </div>
-                <Button
-                  type="submit"
+                <Button 
+                  type="submit" 
                   className="w-full bg-blue-600 hover:bg-blue-700"
                   disabled={isLoading}
                 >
                   <Globe className="h-4 w-4 mr-2" />
-                  {isLoading ? "Creating account..." : "Join GAiA Exchanges"}
+                  {isLoading ? 'Creating account...' : 'Join GAiA Exchanges'}
                 </Button>
               </form>
             </TabsContent>
@@ -157,5 +152,5 @@ export default function UserAuth() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

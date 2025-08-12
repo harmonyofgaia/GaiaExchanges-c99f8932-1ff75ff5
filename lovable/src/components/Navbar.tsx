@@ -1,22 +1,22 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { AnimatedEarthLogo } from "@/components/branding/AnimatedEarthLogo";
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { AnimatedEarthLogo } from '@/components/branding/AnimatedEarthLogo'
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+} from '@/components/ui/navigation-menu'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 import {
   Home,
   LayoutDashboard,
@@ -43,61 +43,52 @@ import {
   MessageCircle,
   Handshake,
   Target,
-  Brain,
-} from "lucide-react";
+  Brain
+} from 'lucide-react'
 
 interface NavItem {
-  name: string;
-  path: string;
-  icon: React.ComponentType<{ className?: string }>;
-  badge?: string;
+  name: string
+  path: string
+  icon: React.ComponentType<{ className?: string }>
+  badge?: string
 }
 
 const navItems: NavItem[] = [
-  { name: "Home", path: "/", icon: Home },
-  { name: "Exchange", path: "/exchange", icon: ArrowRightLeft },
-  { name: "Green Investments", path: "/green-investments", icon: TrendingUp },
-  { name: "Animal Welfare", path: "/animal-welfare", icon: Heart },
-  { name: "Gaming Hub", path: "/gaming", icon: Gamepad2 },
-  { name: "Wallet", path: "/wallet", icon: Wallet },
-  { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
-  { name: "Green Impact", path: "/green-impact-dashboard", icon: Leaf },
-  { name: "Eco Avatar", path: "/eco-avatar", icon: User },
-  { name: "Earning Activities", path: "/earning-activities", icon: Activity },
-  { name: "Enhanced Leaderboard", path: "/enhanced-leaderboard", icon: Trophy },
-  {
-    name: "Community Hub",
-    path: "/community-engagement-hub",
-    icon: MessageCircle,
-  },
-  {
-    name: "Impact Measurement",
-    path: "/impact-measurement-system",
-    icon: Target,
-  },
-  { name: "Sea Green AI", path: "/sea-green-psychohistorical", icon: Brain },
-  { name: "Gaia Token Status", path: "/gaia-token-status", icon: Shield },
-  { name: "Virtual World", path: "/virtual-world", icon: Globe },
-  { name: "Marketplace", path: "/marketplace", icon: ShoppingBag },
-  { name: "Video Exchange", path: "/video-exchange", icon: Video },
-  { name: "Streaming Shows", path: "/streaming-shows", icon: Tv },
-  { name: "Gaia Bike", path: "/gaia-bike-ecosystem", icon: Bike },
-  { name: "Token Mining", path: "/token-mining", icon: Pickaxe },
-  { name: "Coin Crafter", path: "/coin-crafter", icon: Coins },
-];
+  { name: 'Home', path: '/', icon: Home },
+  { name: 'Exchange', path: '/exchange', icon: ArrowRightLeft },
+  { name: 'Green Investments', path: '/green-investments', icon: TrendingUp },
+  { name: 'Animal Welfare', path: '/animal-welfare', icon: Heart },
+  { name: 'Gaming Hub', path: '/gaming', icon: Gamepad2 },
+  { name: 'Wallet', path: '/wallet', icon: Wallet },
+  { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+  { name: 'Green Impact', path: '/green-impact-dashboard', icon: Leaf },
+  { name: 'Eco Avatar', path: '/eco-avatar', icon: User },
+  { name: 'Earning Activities', path: '/earning-activities', icon: Activity },
+  { name: 'Enhanced Leaderboard', path: '/enhanced-leaderboard', icon: Trophy },
+  { name: 'Community Hub', path: '/community-engagement-hub', icon: MessageCircle },
+  { name: 'Impact Measurement', path: '/impact-measurement-system', icon: Target },
+  { name: 'Sea Green AI', path: '/sea-green-psychohistorical', icon: Brain },
+  { name: 'Gaia Token Status', path: '/gaia-token-status', icon: Shield },
+  { name: 'Virtual World', path: '/virtual-world', icon: Globe },
+  { name: 'Marketplace', path: '/marketplace', icon: ShoppingBag },
+  { name: 'Video Exchange', path: '/video-exchange', icon: Video },
+  { name: 'Streaming Shows', path: '/streaming-shows', icon: Tv },
+  { name: 'Gaia Bike', path: '/gaia-bike-ecosystem', icon: Bike },
+  { name: 'Token Mining', path: '/token-mining', icon: Pickaxe },
+  { name: 'Coin Crafter', path: '/coin-crafter', icon: Coins },
+  
+]
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-  <nav className="sticky top-0 z-50 w-full border-b border-gray-300 backdrop-blur supports-[backdrop-filter]:bg-[#fff]/60 bg-[#fff]/95">
-  <div className="container mx-auto px-4">
+    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo - Enhanced for better visibility */}
-          <Link
-            to="/"
-            className="flex items-center space-x-3 hover:opacity-80 transition-opacity min-w-fit flex-shrink-0"
-          >
-            <img
+          <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity min-w-fit flex-shrink-0">
+            <img 
               src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
               alt="Harmony of Gaia"
               className="w-8 h-8 object-contain"
@@ -110,7 +101,7 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
             {navItems.slice(0, 10).map((item) => {
-              const Icon = item.icon;
+              const Icon = item.icon
               return (
                 <Link
                   key={item.path}
@@ -125,43 +116,33 @@ export function Navbar() {
                     </Badge>
                   )}
                 </Link>
-              );
+              )
             })}
-
+            
             {/* More Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center space-x-1"
-                >
+                <Button variant="ghost" size="sm" className="flex items-center space-x-1">
                   <span>More</span>
                   <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="border-gray-300 backdrop-blur-sm bg-[#fff]/95">
+              <DropdownMenuContent className="bg-background/95 border-primary/30 backdrop-blur-sm">
                 {navItems.slice(10).map((item) => {
-                  const Icon = item.icon;
+                  const Icon = item.icon
                   return (
                     <DropdownMenuItem key={item.path} asChild>
-                      <Link
-                        to={item.path}
-                        className="flex items-center space-x-2 w-full"
-                      >
+                      <Link to={item.path} className="flex items-center space-x-2 w-full">
                         <Icon className="h-4 w-4" />
                         <span>{item.name}</span>
                         {item.badge && (
-                          <Badge
-                            variant="secondary"
-                            className="ml-auto text-xs"
-                          >
+                          <Badge variant="secondary" className="ml-auto text-xs">
                             {item.badge}
                           </Badge>
                         )}
                       </Link>
                     </DropdownMenuItem>
-                  );
+                  )
                 })}
               </DropdownMenuContent>
             </DropdownMenu>
@@ -175,11 +156,7 @@ export function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               className="relative"
             >
-              {isOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
@@ -187,9 +164,9 @@ export function Navbar() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-300 backdrop-blur bg-[#fff]/95">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border/40 bg-background/95 backdrop-blur">
               {navItems.map((item) => {
-                const Icon = item.icon;
+                const Icon = item.icon
                 return (
                   <Link
                     key={item.path}
@@ -205,12 +182,12 @@ export function Navbar() {
                       </Badge>
                     )}
                   </Link>
-                );
+                )
               })}
             </div>
           </div>
         )}
       </div>
     </nav>
-  );
+  )
 }

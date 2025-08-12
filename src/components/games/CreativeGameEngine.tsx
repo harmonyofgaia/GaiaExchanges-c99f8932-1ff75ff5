@@ -1,14 +1,15 @@
-import { useState, useEffect, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Zap, Cpu, Brain, Shield } from "lucide-react";
+
+import { useState, useEffect, useRef } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Zap, Cpu, Brain, Shield } from 'lucide-react'
 
 interface EngineMetrics {
-  processingPower: number;
-  creativityIndex: number;
-  realTimeUpdates: number;
-  quantumEfficiency: number;
+  processingPower: number
+  creativityIndex: number
+  realTimeUpdates: number
+  quantumEfficiency: number
 }
 
 export function CreativeGameEngine() {
@@ -16,32 +17,32 @@ export function CreativeGameEngine() {
     processingPower: 99.9,
     creativityIndex: 100,
     realTimeUpdates: 1000,
-    quantumEfficiency: 100,
-  });
-
-  const engineRef = useRef<NodeJS.Timeout>(undefined);
+    quantumEfficiency: 100
+  })
+  
+  const engineRef = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
-    console.log("🎮 CREATIVE GAME ENGINE - MAXIMUM POWER ACTIVATED");
-    console.log("🚀 QUANTUM PROCESSING - 10X FASTER THAN ANY SYSTEM");
-    console.log("🧠 AI CREATIVITY - INFINITE POSSIBILITIES UNLOCKED");
-
+    console.log('🎮 CREATIVE GAME ENGINE - MAXIMUM POWER ACTIVATED')
+    console.log('🚀 QUANTUM PROCESSING - 10X FASTER THAN ANY SYSTEM')
+    console.log('🧠 AI CREATIVITY - INFINITE POSSIBILITIES UNLOCKED')
+    
     // Engine optimization loop - making it 10x faster every second
     engineRef.current = setInterval(() => {
-      setMetrics((prev) => ({
+      setMetrics(prev => ({
         processingPower: Math.min(999.9, prev.processingPower * 1.001),
         creativityIndex: Math.min(1000, prev.creativityIndex * 1.001),
         realTimeUpdates: Math.min(10000, prev.realTimeUpdates * 1.001),
-        quantumEfficiency: 100, // Always maximum
-      }));
-
-      console.log("🔥 ENGINE EVOLVING - BECOMING UNSTOPPABLE");
-    }, 1000);
+        quantumEfficiency: 100 // Always maximum
+      }))
+      
+      console.log('🔥 ENGINE EVOLVING - BECOMING UNSTOPPABLE')
+    }, 1000)
 
     return () => {
-      if (engineRef.current) clearInterval(engineRef.current);
-    };
-  }, []);
+      if (engineRef.current) clearInterval(engineRef.current)
+    }
+  }, [])
 
   return (
     <Card className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 border-purple-500/30">
@@ -68,9 +69,7 @@ export function CreativeGameEngine() {
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <h4 className="text-lg font-bold text-purple-400">
-              🚀 ENGINE CAPABILITIES
-            </h4>
+            <h4 className="text-lg font-bold text-purple-400">🚀 ENGINE CAPABILITIES</h4>
             <div className="text-sm text-muted-foreground space-y-1">
               <div>• Infinite building possibilities</div>
               <div>• Real-time landscape generation</div>
@@ -80,11 +79,9 @@ export function CreativeGameEngine() {
               <div>• 10x faster than any competitor</div>
             </div>
           </div>
-
+          
           <div className="space-y-2">
-            <h4 className="text-lg font-bold text-blue-400">
-              🛡️ SECURITY FEATURES
-            </h4>
+            <h4 className="text-lg font-bold text-blue-400">🛡️ SECURITY FEATURES</h4>
             <div className="text-sm text-muted-foreground space-y-1">
               <div>• Anti-cheat quantum protection</div>
               <div>• Invisible admin monitoring</div>
@@ -95,21 +92,17 @@ export function CreativeGameEngine() {
             </div>
           </div>
         </div>
-
+        
         <div className="mt-4 p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
-          <h4 className="text-lg font-bold text-purple-400 mb-2">
-            🌟 LIVE ENGINE STATUS
-          </h4>
+          <h4 className="text-lg font-bold text-purple-400 mb-2">🌟 LIVE ENGINE STATUS</h4>
           <div className="text-sm text-green-400">
-            ✅ All systems operational at maximum efficiency
-            <br />
-            ✅ Creative algorithms evolving every second
-            <br />
-            ✅ Quantum processing at infinite capacity
-            <br />✅ Building landscapes powered by ultimate AI
+            ✅ All systems operational at maximum efficiency<br/>
+            ✅ Creative algorithms evolving every second<br/>
+            ✅ Quantum processing at infinite capacity<br/>
+            ✅ Building landscapes powered by ultimate AI
           </div>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

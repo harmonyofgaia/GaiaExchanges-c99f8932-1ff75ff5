@@ -1,9 +1,9 @@
 /**
  * Loading Fallback Component for AdminDashboardTabs
- *
+ * 
  * This component provides consistent loading states for tab content
  * while components are being rendered or when they take time to load.
- *
+ * 
  * Features:
  * - Skeleton loading animation
  * - Consistent styling with dashboard theme
@@ -11,18 +11,18 @@
  * - Accessible loading indicators
  */
 
-import React from "react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
+import React from 'react'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Loader2 } from 'lucide-react'
 
 interface AdminTabLoadingProps {
-  tabName?: string;
-  message?: string;
+  tabName?: string
+  message?: string
 }
 
-export function AdminTabLoading({
-  tabName = "Content",
-  message = "Loading admin tools...",
+export function AdminTabLoading({ 
+  tabName = 'Content', 
+  message = 'Loading admin tools...' 
 }: AdminTabLoadingProps) {
   return (
     <div className="space-y-6">
@@ -47,7 +47,7 @@ export function AdminTabLoading({
                 </div>
               ))}
             </div>
-
+            
             <div className="space-y-2">
               <div className="h-3 bg-gradient-to-r from-slate-700/40 to-transparent rounded animate-pulse" />
               <div className="h-3 bg-gradient-to-r from-slate-600/30 to-transparent rounded animate-pulse w-5/6" />
@@ -81,29 +81,29 @@ export function AdminTabLoading({
         </p>
       </div>
     </div>
-  );
+  )
 }
 
 /**
  * Simple inline loading spinner for smaller components
  */
-export function AdminTabInlineLoading({
-  size = "sm",
-  message = "Loading...",
-}: {
-  size?: "sm" | "md" | "lg";
-  message?: string;
+export function AdminTabInlineLoading({ 
+  size = 'sm',
+  message = 'Loading...' 
+}: { 
+  size?: 'sm' | 'md' | 'lg'
+  message?: string 
 }) {
   const sizeClasses = {
-    sm: "h-4 w-4",
-    md: "h-5 w-5",
-    lg: "h-6 w-6",
-  };
+    sm: 'h-4 w-4',
+    md: 'h-5 w-5', 
+    lg: 'h-6 w-6'
+  }
 
   return (
     <div className="flex items-center justify-center gap-2 py-8">
       <Loader2 className={`${sizeClasses[size]} text-blue-400 animate-spin`} />
       <span className="text-sm text-muted-foreground">{message}</span>
     </div>
-  );
+  )
 }

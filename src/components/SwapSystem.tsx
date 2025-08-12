@@ -1,90 +1,55 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { ArrowUpDown, Zap, DollarSign, Shield, Sparkles } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { GAIA_TOKEN } from "@/constants/tokens";
+
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { ArrowUpDown, Zap, DollarSign, Shield, Sparkles } from 'lucide-react'
+import { useToast } from '@/hooks/use-toast'
+import { GAIA_TOKEN } from '@/constants/tokens'
 
 const supportedTokens = [
-  {
-    name: "Harmony of Gaia",
-    symbol: "GAiA",
-    icon: "🌍",
-    fee: 0,
-    address: GAIA_TOKEN.address,
-  },
-  {
-    name: "Bitcoin",
-    symbol: "BTC",
-    icon: "₿",
-    fee: 0.0001,
-    address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
-  },
-  {
-    name: "Ethereum",
-    symbol: "ETH",
-    icon: "Ξ",
-    fee: 0.001,
-    address: "0x0000000000000000000000000000000000000000",
-  },
-  {
-    name: "Solana",
-    symbol: "SOL",
-    icon: "◎",
-    fee: 0.00005,
-    address: "So11111111111111111111111111111111111111112",
-  },
-  { name: "Cardano", symbol: "ADA", icon: "₳", fee: 0.17, address: "addr1..." },
-  { name: "Polkadot", symbol: "DOT", icon: "●", fee: 0.01, address: "1..." },
-  {
-    name: "Chainlink",
-    symbol: "LINK",
-    icon: "🔗",
-    fee: 0.1,
-    address: "0x514910771AF9Ca656af840dff83E8264EcF986CA",
-  },
-  {
-    name: "Binance Coin",
-    symbol: "BNB",
-    icon: "🟡",
-    fee: 0.0005,
-    address: "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
-  },
+  { name: 'Harmony of Gaia', symbol: 'GAiA', icon: '🌍', fee: 0, address: GAIA_TOKEN.address },
+  { name: 'Bitcoin', symbol: 'BTC', icon: '₿', fee: 0.0001, address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' },
+  { name: 'Ethereum', symbol: 'ETH', icon: 'Ξ', fee: 0.001, address: '0x0000000000000000000000000000000000000000' },
+  { name: 'Solana', symbol: 'SOL', icon: '◎', fee: 0.00005, address: 'So11111111111111111111111111111111111111112' },
+  { name: 'Cardano', symbol: 'ADA', icon: '₳', fee: 0.17, address: 'addr1...' },
+  { name: 'Polkadot', symbol: 'DOT', icon: '●', fee: 0.01, address: '1...' },
+  { name: 'Chainlink', symbol: 'LINK', icon: '🔗', fee: 0.1, address: '0x514910771AF9Ca656af840dff83E8264EcF986CA' },
+  { name: 'Binance Coin', symbol: 'BNB', icon: '🟡', fee: 0.0005, address: '0xB8c77482e45F1F44dE1745F52C74426C631bDD52' },
   // Removed legacy GAIA (Old Token) entry
-];
+]
 
 export function SwapSystem() {
-  const [fromToken, setFromToken] = useState(supportedTokens[0]); // Default to GAiA
-  const [toToken, setToToken] = useState(supportedTokens[1]);
-  const [fromAmount, setFromAmount] = useState("");
-  const [isOptimizing, setIsOptimizing] = useState(false);
-  const [optimizedFee, setOptimizedFee] = useState(0);
-  const { toast } = useToast();
+  const [fromToken, setFromToken] = useState(supportedTokens[0]) // Default to GAiA
+  const [toToken, setToToken] = useState(supportedTokens[1])
+  const [fromAmount, setFromAmount] = useState('')
+  const [isOptimizing, setIsOptimizing] = useState(false)
+  const [optimizedFee, setOptimizedFee] = useState(0)
+  const { toast } = useToast()
 
   const handleSwapTokens = () => {
-    const temp = fromToken;
-    setFromToken(toToken);
-    setToToken(temp);
-  };
+    const temp = fromToken
+    setFromToken(toToken)
+    setToToken(temp)
+  }
 
   const optimizeFees = async () => {
-    setIsOptimizing(true);
-
+    setIsOptimizing(true)
+    
     // Simulate fee optimization
     setTimeout(() => {
-      const originalFee = fromToken.fee + toToken.fee;
-      const optimized = Math.max(0, originalFee * 0.1); // 90% fee reduction
-      setOptimizedFee(optimized);
-      setIsOptimizing(false);
-
+      const originalFee = fromToken.fee + toToken.fee
+      const optimized = Math.max(0, originalFee * 0.1) // 90% fee reduction
+      setOptimizedFee(optimized)
+      setIsOptimizing(false)
+      
       toast({
         title: "Fee Optimization Complete",
-        description: `Found route with ${originalFee === 0 ? "zero" : (100 - (optimized / originalFee) * 100).toFixed(1) + "% lower"} fees`,
-      });
-    }, 2000);
-  };
+        description: `Found route with ${originalFee === 0 ? 'zero' : (100 - (optimized/originalFee)*100).toFixed(1) + '% lower'} fees`,
+      })
+    }, 2000)
+  }
 
   const handleSwap = async () => {
     if (!fromAmount || parseFloat(fromAmount) <= 0) {
@@ -92,23 +57,22 @@ export function SwapSystem() {
         title: "Invalid Amount",
         description: "Please enter a valid amount to swap",
         variant: "destructive",
-      });
-      return;
+      })
+      return
     }
 
     toast({
       title: "Swap Initiated",
       description: `Swapping ${fromAmount} ${fromToken.symbol} to ${toToken.symbol} with optimized fees`,
-    });
-  };
+    })
+  }
 
   const askCustomerVision = () => {
     toast({
       title: "Customer Vision Request",
-      description:
-        "We'd love to hear your thoughts on achieving zero-cost swaps! Please share your ideas with us at Info@cultureofharmony.com",
-    });
-  };
+      description: "We'd love to hear your thoughts on achieving zero-cost swaps! Please share your ideas with us at Info@cultureofharmony.com",
+    })
+  }
 
   return (
     <div className="space-y-6">
@@ -121,26 +85,18 @@ export function SwapSystem() {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="text-center space-y-2">
-            <p className="text-lg font-semibold text-primary">
-              How can we achieve zero-cost GAiA swaps together?
-            </p>
+            <p className="text-lg font-semibold text-primary">How can we achieve zero-cost GAiA swaps together?</p>
             <p className="text-sm text-muted-foreground">
-              Share your vision and ideas with our transparent GAiA community to
-              help us find the best ways to eliminate swap costs for everyone.
+              Share your vision and ideas with our transparent GAiA community to help us find the best 
+              ways to eliminate swap costs for everyone.
             </p>
             <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 mt-4">
-              <p className="text-green-400 font-medium">
-                Connected GAiA Wallet:
-              </p>
+              <p className="text-green-400 font-medium">Connected GAiA Wallet:</p>
               <code className="text-green-300 font-mono text-xs break-all">
                 {GAIA_TOKEN.address}
               </code>
             </div>
-            <Button
-              onClick={askCustomerVision}
-              variant="outline"
-              className="mt-2"
-            >
+            <Button onClick={askCustomerVision} variant="outline" className="mt-2">
               Share Your GAiA Vision 💡
             </Button>
           </div>
@@ -159,17 +115,12 @@ export function SwapSystem() {
           <div className="space-y-2">
             <label className="block text-sm font-medium">From</label>
             <div className="flex gap-2">
-              <select
+              <select 
                 value={fromToken.symbol}
-                onChange={(e) =>
-                  setFromToken(
-                    supportedTokens.find((t) => t.symbol === e.target.value) ||
-                      supportedTokens[0],
-                  )
-                }
+                onChange={(e) => setFromToken(supportedTokens.find(t => t.symbol === e.target.value) || supportedTokens[0])}
                 className="flex-1 p-3 rounded-lg bg-muted border border-border"
               >
-                {supportedTokens.map((token) => (
+                {supportedTokens.map(token => (
                   <option key={token.symbol} value={token.symbol}>
                     {token.icon} {token.name} ({token.symbol})
                   </option>
@@ -184,10 +135,8 @@ export function SwapSystem() {
             </div>
             <div className="text-sm text-muted-foreground">
               Network Fee: {fromToken.fee} {fromToken.symbol}
-              {fromToken.symbol === "GAiA" && (
-                <Badge className="ml-2 bg-green-600 text-white">
-                  Zero Fee!
-                </Badge>
+              {fromToken.symbol === 'GAiA' && (
+                <Badge className="ml-2 bg-green-600 text-white">Zero Fee!</Badge>
               )}
             </div>
           </div>
@@ -202,17 +151,12 @@ export function SwapSystem() {
           {/* To Token */}
           <div className="space-y-2">
             <label className="block text-sm font-medium">To</label>
-            <select
+            <select 
               value={toToken.symbol}
-              onChange={(e) =>
-                setToToken(
-                  supportedTokens.find((t) => t.symbol === e.target.value) ||
-                    supportedTokens[1],
-                )
-              }
+              onChange={(e) => setToToken(supportedTokens.find(t => t.symbol === e.target.value) || supportedTokens[1])}
               className="w-full p-3 rounded-lg bg-muted border border-border"
             >
-              {supportedTokens.map((token) => (
+              {supportedTokens.map(token => (
                 <option key={token.symbol} value={token.symbol}>
                   {token.icon} {token.name} ({token.symbol})
                 </option>
@@ -220,10 +164,8 @@ export function SwapSystem() {
             </select>
             <div className="text-sm text-muted-foreground">
               Network Fee: {toToken.fee} {toToken.symbol}
-              {toToken.symbol === "GAiA" && (
-                <Badge className="ml-2 bg-green-600 text-white">
-                  Zero Fee!
-                </Badge>
+              {toToken.symbol === 'GAiA' && (
+                <Badge className="ml-2 bg-green-600 text-white">Zero Fee!</Badge>
               )}
             </div>
           </div>
@@ -234,20 +176,18 @@ export function SwapSystem() {
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <Zap className="h-4 w-4 text-yellow-400" />
-                  <span className="font-medium">
-                    24/7 GAiA Fee Optimization
-                  </span>
+                  <span className="font-medium">24/7 GAiA Fee Optimization</span>
                 </div>
-                <Button
-                  onClick={optimizeFees}
-                  size="sm"
+                <Button 
+                  onClick={optimizeFees} 
+                  size="sm" 
                   disabled={isOptimizing}
                   className="bg-green-600 hover:bg-green-700"
                 >
-                  {isOptimizing ? "Optimizing..." : "Find Cheapest Route"}
+                  {isOptimizing ? 'Optimizing...' : 'Find Cheapest Route'}
                 </Button>
               </div>
-
+              
               {optimizedFee !== null && (
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
@@ -256,19 +196,12 @@ export function SwapSystem() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-green-400">Optimized Fee:</span>
-                    <span className="text-green-400">
-                      {optimizedFee.toFixed(6)}
-                    </span>
+                    <span className="text-green-400">{optimizedFee.toFixed(6)}</span>
                   </div>
                   <div className="flex justify-between text-sm font-medium">
                     <span>You Save:</span>
                     <span className="text-green-400">
-                      {(
-                        ((fromToken.fee + toToken.fee - optimizedFee) /
-                          (fromToken.fee + toToken.fee)) *
-                        100
-                      ).toFixed(1)}
-                      %
+                      {((fromToken.fee + toToken.fee - optimizedFee) / (fromToken.fee + toToken.fee) * 100).toFixed(1)}%
                     </span>
                   </div>
                 </div>
@@ -277,7 +210,7 @@ export function SwapSystem() {
           </Card>
 
           {/* Swap Action */}
-          <Button
+          <Button 
             onClick={handleSwap}
             className="w-full bg-blue-600 hover:bg-blue-700"
             disabled={!fromAmount}
@@ -291,16 +224,12 @@ export function SwapSystem() {
             <div className="text-center space-y-1">
               <Shield className="h-5 w-5 mx-auto text-green-400" />
               <div className="text-sm font-medium">100% GAiA Secure</div>
-              <div className="text-xs text-muted-foreground">
-                Transparent & Verified
-              </div>
+              <div className="text-xs text-muted-foreground">Transparent & Verified</div>
             </div>
             <div className="text-center space-y-1">
               <Zap className="h-5 w-5 mx-auto text-yellow-400" />
               <div className="text-sm font-medium">Instant GAiA Swap</div>
-              <div className="text-xs text-muted-foreground">
-                No Waiting Time
-              </div>
+              <div className="text-xs text-muted-foreground">No Waiting Time</div>
             </div>
           </div>
         </CardContent>
@@ -309,24 +238,17 @@ export function SwapSystem() {
       {/* Supported Currencies List */}
       <Card>
         <CardHeader>
-          <CardTitle>
-            All Supported Digital Currencies in GAiA Exchange
-          </CardTitle>
+          <CardTitle>All Supported Digital Currencies in GAiA Exchange</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {supportedTokens.map((token, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between p-3 rounded-lg bg-muted/30"
-              >
+              <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
                 <div className="flex items-center gap-2">
                   <span className="text-lg">{token.icon}</span>
                   <div>
                     <div className="font-medium">{token.symbol}</div>
-                    <div className="text-xs text-muted-foreground">
-                      {token.name}
-                    </div>
+                    <div className="text-xs text-muted-foreground">{token.name}</div>
                     {token.address && (
                       <div className="text-xs font-mono text-blue-400 truncate max-w-[120px]">
                         {token.address}
@@ -335,25 +257,14 @@ export function SwapSystem() {
                   </div>
                 </div>
                 <div className="flex flex-col items-end gap-1">
-                  <Badge
-                    variant="outline"
-                    className={
-                      token.fee === 0
-                        ? "border-green-500/20 text-green-400"
-                        : ""
-                    }
-                  >
-                    {token.fee === 0 ? "Zero Fee" : `${token.fee} fee`}
+                  <Badge variant="outline" className={token.fee === 0 ? "border-green-500/20 text-green-400" : ""}>
+                    {token.fee === 0 ? 'Zero Fee' : `${token.fee} fee`}
                   </Badge>
-                  {token.symbol === "GAiA" && (
-                    <Badge className="bg-green-600 text-white text-xs">
-                      Primary Token
-                    </Badge>
+                  {token.symbol === 'GAiA' && (
+                    <Badge className="bg-green-600 text-white text-xs">Primary Token</Badge>
                   )}
-                  {token.symbol === "GAIA" && (
-                    <Badge className="bg-orange-600 text-white text-xs">
-                      Legacy Only
-                    </Badge>
+                  {token.symbol === 'GAIA' && (
+                    <Badge className="bg-orange-600 text-white text-xs">Legacy Only</Badge>
                   )}
                 </div>
               </div>
@@ -362,5 +273,5 @@ export function SwapSystem() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

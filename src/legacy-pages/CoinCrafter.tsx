@@ -1,18 +1,20 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Hammer, Zap, Coins, Settings } from "lucide-react";
-import { useState } from "react";
-import { CoinCrafterIllustration } from "@/components/CoinCrafterIllustration";
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Hammer, Zap, Coins, Settings } from 'lucide-react'
+import { useState } from 'react'
+import { CoinCrafterIllustration } from '@/components/CoinCrafterIllustration'
 
 const CoinCrafter = () => {
-  const [tokenName, setTokenName] = useState("");
-  const [tokenSymbol, setTokenSymbol] = useState("");
-  const [totalSupply, setTotalSupply] = useState("");
+  const [tokenName, setTokenName] = useState('')
+  const [tokenSymbol, setTokenSymbol] = useState('')
+  const [totalSupply, setTotalSupply] = useState('')
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-900/20 via-red-900/20 to-yellow-900/20">
+      
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">
           <CoinCrafterIllustration />
@@ -36,7 +38,7 @@ const CoinCrafter = () => {
                     className="bg-black/30 border-orange-500/30"
                   />
                 </div>
-
+                
                 <div>
                   <Label htmlFor="tokenSymbol">Token Symbol</Label>
                   <Input
@@ -47,7 +49,7 @@ const CoinCrafter = () => {
                     className="bg-black/30 border-orange-500/30"
                   />
                 </div>
-
+                
                 <div>
                   <Label htmlFor="totalSupply">Total Supply</Label>
                   <Input
@@ -77,33 +79,20 @@ const CoinCrafter = () => {
               <CardContent className="space-y-4">
                 <div className="text-center">
                   <div className="text-6xl mb-4">⚡</div>
-                  <h3 className="text-xl font-bold text-red-400 mb-2">
-                    Advanced Features
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Configure advanced token properties
-                  </p>
+                  <h3 className="text-xl font-bold text-red-400 mb-2">Advanced Features</h3>
+                  <p className="text-muted-foreground">Configure advanced token properties</p>
                 </div>
-
+                
                 <div className="space-y-3">
-                  <Button
-                    variant="outline"
-                    className="w-full border-red-500/30"
-                  >
+                  <Button variant="outline" className="w-full border-red-500/30">
                     <Settings className="h-4 w-4 mr-2" />
                     Token Economics
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full border-red-500/30"
-                  >
+                  <Button variant="outline" className="w-full border-red-500/30">
                     <Coins className="h-4 w-4 mr-2" />
                     Supply Management
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full border-red-500/30"
-                  >
+                  <Button variant="outline" className="w-full border-red-500/30">
                     <Zap className="h-4 w-4 mr-2" />
                     Advanced Settings
                   </Button>
@@ -114,7 +103,7 @@ const CoinCrafter = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CoinCrafter;
+export default CoinCrafter
