@@ -1,6 +1,7 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AbstractArtOverlay } from "@/components/ui/abstract-art-overlay";
+
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AbstractArtOverlay } from '@/components/ui/abstract-art-overlay'
 
 const PlatformCompatibility = () => {
   return (
@@ -52,9 +53,7 @@ const PlatformCompatibility = () => {
 
           <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/30">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                Mobile & Tablets
-              </CardTitle>
+              <CardTitle className="text-purple-400">Mobile & Tablets</CardTitle>
             </CardHeader>
             <CardContent>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
@@ -102,9 +101,7 @@ const PlatformCompatibility = () => {
 
           <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-cyan-500/30">
             <CardHeader>
-              <CardTitle className="text-cyan-400">
-                Performance & Scalability
-              </CardTitle>
+              <CardTitle className="text-cyan-400">Performance & Scalability</CardTitle>
             </CardHeader>
             <CardContent>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
@@ -120,14 +117,9 @@ const PlatformCompatibility = () => {
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <h2 className="text-3xl font-bold text-green-400 mb-4">
-            Join the Quantum Revolution
-          </h2>
+          <h2 className="text-3xl font-bold text-green-400 mb-4">Join the Quantum Revolution</h2>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Harmony of Gaia is designed to be the most universal, secure, and
-            immersive platform for environmental gaming and blockchain
-            integration. Experience the future of gaming and sustainability
-            across all your devices and realities.
+            Harmony of Gaia is designed to be the most universal, secure, and immersive platform for environmental gaming and blockchain integration. Experience the future of gaming and sustainability across all your devices and realities.
           </p>
           <Badge className="bg-gradient-to-r from-purple-600 to-cyan-600 text-white px-6 py-3 text-lg cursor-pointer hover:opacity-90">
             🚀 Get Started Now
@@ -135,7 +127,7 @@ const PlatformCompatibility = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PlatformCompatibility;
+export default PlatformCompatibility

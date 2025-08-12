@@ -1,137 +1,85 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  AlertTriangle,
-  CheckCircle,
-  Globe,
-  Database,
-  Shield,
-  Server,
-  Cloud,
-  ExternalLink,
-} from "lucide-react";
-import { toast } from "sonner";
+
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { AlertTriangle, CheckCircle, Globe, Database, Shield, Server, Cloud, ExternalLink } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface SystemStatus {
-  service: string;
-  status: "operational" | "degraded" | "down" | "maintenance";
-  uptime: number;
-  lastCheck: Date;
-  url?: string;
+  service: string
+  status: 'operational' | 'degraded' | 'down' | 'maintenance'
+  uptime: number
+  lastCheck: Date
+  url?: string
 }
 
 export function SystemControlCenter() {
   const [systemStatuses, setSystemStatuses] = useState<SystemStatus[]>([
-    {
-      service: "www.gaiaexchange.net",
-      status: "operational",
-      uptime: 99.9,
-      lastCheck: new Date(),
-      url: "https://www.gaiaexchange.net",
-    },
-    {
-      service: "Database (Supabase)",
-      status: "operational",
-      uptime: 100,
-      lastCheck: new Date(),
-    },
-    {
-      service: "Cloud Storage",
-      status: "operational",
-      uptime: 99.8,
-      lastCheck: new Date(),
-    },
-    {
-      service: "Admin Dashboard",
-      status: "operational",
-      uptime: 100,
-      lastCheck: new Date(),
-    },
-    {
-      service: "Security Systems",
-      status: "operational",
-      uptime: 100,
-      lastCheck: new Date(),
-    },
-    {
-      service: "Background Services",
-      status: "operational",
-      uptime: 99.7,
-      lastCheck: new Date(),
-    },
-  ]);
+    { service: 'www.gaiaexchange.net', status: 'operational', uptime: 99.9, lastCheck: new Date(), url: 'https://www.gaiaexchange.net' },
+    { service: 'Database (Supabase)', status: 'operational', uptime: 100, lastCheck: new Date() },
+    { service: 'Cloud Storage', status: 'operational', uptime: 99.8, lastCheck: new Date() },
+    { service: 'Admin Dashboard', status: 'operational', uptime: 100, lastCheck: new Date() },
+    { service: 'Security Systems', status: 'operational', uptime: 100, lastCheck: new Date() },
+    { service: 'Background Services', status: 'operational', uptime: 99.7, lastCheck: new Date() }
+  ])
 
   const [adminCredentials] = useState({
-    supabaseUrl: "https://slheudxfcqqppyphyobq.supabase.co",
-    projectId: "slheudxfcqqppyphyobq",
-    adminDashboard:
-      "https://supabase.com/dashboard/project/slheudxfcqqppyphyobq",
-    githubRepo: "https://github.com/harmonyofgaia/gaia-exchanges",
-    website: "https://www.gaiaexchange.net", // Fixed: consistent domain
-    backupSite:
-      "https://8dfae018-363f-4770-8e5c-27c14bec8426.lovableproject.com",
-  });
+    supabaseUrl: 'https://slheudxfcqqppyphyobq.supabase.co',
+    projectId: 'slheudxfcqqppyphyobq',
+    adminDashboard: 'https://supabase.com/dashboard/project/slheudxfcqqppyphyobq',
+    githubRepo: 'https://github.com/harmonyofgaia/gaia-exchanges',
+    website: 'https://www.gaiaexchange.net', // Fixed: consistent domain
+    backupSite: 'https://8dfae018-363f-4770-8e5c-27c14bec8426.lovableproject.com'
+  })
 
   useEffect(() => {
     // Simulate real-time monitoring
     const interval = setInterval(() => {
-      setSystemStatuses((prev) =>
-        prev.map((status) => ({
-          ...status,
-          lastCheck: new Date(),
-          uptime: Math.min(100, status.uptime + Math.random() * 0.1),
-        })),
-      );
-    }, 30000);
+      setSystemStatuses(prev => prev.map(status => ({
+        ...status,
+        lastCheck: new Date(),
+        uptime: Math.min(100, status.uptime + Math.random() * 0.1)
+      })))
+    }, 30000)
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "operational":
-        return "bg-green-600";
-      case "degraded":
-        return "bg-yellow-600";
-      case "down":
-        return "bg-red-600";
-      case "maintenance":
-        return "bg-blue-600";
-      default:
-        return "bg-gray-600";
+      case 'operational': return 'bg-green-600'
+      case 'degraded': return 'bg-yellow-600'
+      case 'down': return 'bg-red-600'
+      case 'maintenance': return 'bg-blue-600'
+      default: return 'bg-gray-600'
     }
-  };
+  }
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case "operational":
-        return <CheckCircle className="h-4 w-4" />;
-      case "degraded":
-        return <AlertTriangle className="h-4 w-4" />;
-      case "down":
-        return <AlertTriangle className="h-4 w-4" />;
-      default:
-        return <Server className="h-4 w-4" />;
+      case 'operational': return <CheckCircle className="h-4 w-4" />
+      case 'degraded': return <AlertTriangle className="h-4 w-4" />
+      case 'down': return <AlertTriangle className="h-4 w-4" />
+      default: return <Server className="h-4 w-4" />
     }
-  };
+  }
 
   const openService = (url: string) => {
-    window.open(url, "_blank", "noopener,noreferrer");
-    toast.success("Opening service in new tab");
-  };
+    window.open(url, '_blank', 'noopener,noreferrer')
+    toast.success('Opening service in new tab')
+  }
 
   const testAllSystems = () => {
-    toast.info("Running comprehensive system test...", { duration: 3000 });
-
+    toast.info('Running comprehensive system test...', { duration: 3000 })
+    
     setTimeout(() => {
-      toast.success("All systems operational!", {
-        description: "Complete system check passed successfully",
-        duration: 5000,
-      });
-    }, 3000);
-  };
+      toast.success('All systems operational!', {
+        description: 'Complete system check passed successfully',
+        duration: 5000
+      })
+    }, 3000)
+  }
 
   return (
     <div className="space-y-6">
@@ -149,16 +97,10 @@ export function SystemControlCenter() {
               <Card key={index} className="border border-gray-700 bg-black/20">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-sm">
-                      {system.service}
-                    </span>
-                    <Badge
-                      className={`${getStatusColor(system.status)} text-white`}
-                    >
+                    <span className="font-medium text-sm">{system.service}</span>
+                    <Badge className={`${getStatusColor(system.status)} text-white`}>
                       {getStatusIcon(system.status)}
-                      <span className="ml-1">
-                        {system.status.toUpperCase()}
-                      </span>
+                      <span className="ml-1">{system.status.toUpperCase()}</span>
                     </Badge>
                   </div>
                   <div className="text-xs text-muted-foreground mb-2">
@@ -182,16 +124,13 @@ export function SystemControlCenter() {
               </Card>
             ))}
           </div>
-
+          
           <div className="mt-6 flex gap-4">
-            <Button
-              onClick={testAllSystems}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
+            <Button onClick={testAllSystems} className="bg-blue-600 hover:bg-blue-700">
               <Server className="h-4 w-4 mr-2" />
               Test All Systems
             </Button>
-            <Button
+            <Button 
               onClick={() => openService(adminCredentials.website)}
               className="bg-green-600 hover:bg-green-700"
             >
@@ -205,16 +144,12 @@ export function SystemControlCenter() {
       {/* Domain Status Verification */}
       <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-cyan-900/20">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            🌐 Website Status & Features Completion
-          </CardTitle>
+          <CardTitle className="text-blue-400">🌐 Website Status & Features Completion</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              <h4 className="font-semibold text-white">
-                ✅ Completed Features
-              </h4>
+              <h4 className="font-semibold text-white">✅ Completed Features</h4>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />
@@ -246,23 +181,17 @@ export function SystemControlCenter() {
                 </div>
               </div>
             </div>
-
+            
             <div className="space-y-4">
-              <h4 className="font-semibold text-white">
-                🔗 Access Information
-              </h4>
+              <h4 className="font-semibold text-white">🔗 Access Information</h4>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Correct Domain:</span>
-                  <code className="text-green-400 font-mono">
-                    www.gaiaexchange.net
-                  </code>
+                  <code className="text-green-400 font-mono">www.gaiaexchange.net</code>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Platform:</span>
-                  <code className="text-blue-400 font-mono">
-                    Lovable Hosting
-                  </code>
+                  <code className="text-blue-400 font-mono">Lovable Hosting</code>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Status:</span>
@@ -275,11 +204,9 @@ export function SystemControlCenter() {
               </div>
             </div>
           </div>
-
+          
           <div className="mt-6 p-4 bg-green-900/20 border border-green-500/30 rounded-lg">
-            <h4 className="font-semibold text-green-400 mb-2">
-              ✅ All Requested Features Completed!
-            </h4>
+            <h4 className="font-semibold text-green-400 mb-2">✅ All Requested Features Completed!</h4>
             <div className="text-sm text-muted-foreground space-y-1">
               <p>• Neural background systems with 7 unique animated styles</p>
               <p>• Community illustration generator with cloud storage</p>
@@ -294,9 +221,7 @@ export function SystemControlCenter() {
       {/* Admin Credentials & Access */}
       <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-cyan-900/20">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            🔑 Full Administrative Access
-          </CardTitle>
+          <CardTitle className="text-blue-400">🔑 Full Administrative Access</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -305,15 +230,11 @@ export function SystemControlCenter() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Supabase URL:</span>
-                  <code className="text-green-400 font-mono text-xs">
-                    {adminCredentials.supabaseUrl}
-                  </code>
+                  <code className="text-green-400 font-mono text-xs">{adminCredentials.supabaseUrl}</code>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Project ID:</span>
-                  <code className="text-blue-400 font-mono">
-                    {adminCredentials.projectId}
-                  </code>
+                  <code className="text-blue-400 font-mono">{adminCredentials.projectId}</code>
                 </div>
                 <Button
                   size="sm"
@@ -326,21 +247,17 @@ export function SystemControlCenter() {
                 </Button>
               </div>
             </div>
-
+            
             <div className="space-y-4">
               <h4 className="font-semibold text-white">Deployment & Code</h4>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Main Website:</span>
-                  <code className="text-green-400 font-mono text-xs">
-                    {adminCredentials.website}
-                  </code>
+                  <code className="text-green-400 font-mono text-xs">{adminCredentials.website}</code>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Development:</span>
-                  <code className="text-purple-400 font-mono text-xs">
-                    {adminCredentials.backupSite.slice(0, 40)}...
-                  </code>
+                  <code className="text-purple-400 font-mono text-xs">{adminCredentials.backupSite.slice(0, 40)}...</code>
                 </div>
                 <Button
                   size="sm"
@@ -354,11 +271,9 @@ export function SystemControlCenter() {
               </div>
             </div>
           </div>
-
+          
           <div className="mt-6 p-4 bg-yellow-900/20 border border-yellow-500/30 rounded-lg">
-            <h4 className="font-semibold text-yellow-400 mb-2">
-              ⚡ Quick Migration Instructions
-            </h4>
+            <h4 className="font-semibold text-yellow-400 mb-2">⚡ Quick Migration Instructions</h4>
             <div className="text-sm text-muted-foreground space-y-1">
               <p>1. All your data is stored in Supabase (cloud database)</p>
               <p>2. Code repository is available on GitHub</p>
@@ -369,5 +284,5 @@ export function SystemControlCenter() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

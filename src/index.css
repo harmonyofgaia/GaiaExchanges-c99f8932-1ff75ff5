@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -161,10 +162,9 @@
 
 @layer base {
   * {
-    border-color: #e5e7eb;
+    @apply border-border;
   }
   body {
-  background: #fff;
-  color: #000;
+    @apply bg-background text-foreground;
   }
 }

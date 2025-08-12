@@ -1,6 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Palette, Recycle, Sparkles, Hammer } from "lucide-react";
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Palette, Recycle, Sparkles, Hammer } from 'lucide-react'
 
 export default function AuraLandScrapyard() {
   return (
@@ -33,8 +34,7 @@ export default function AuraLandScrapyard() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Create stunning digital artwork using our advanced design tools
-                and AI assistance.
+                Create stunning digital artwork using our advanced design tools and AI assistance.
               </p>
             </CardContent>
           </Card>
@@ -48,8 +48,7 @@ export default function AuraLandScrapyard() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Transform waste materials into beautiful digital assets and earn
-                rewards.
+                Transform waste materials into beautiful digital assets and earn rewards.
               </p>
             </CardContent>
           </Card>
@@ -63,13 +62,12 @@ export default function AuraLandScrapyard() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Use recycled materials to craft unique items and environmental
-                solutions.
+                Use recycled materials to craft unique items and environmental solutions.
               </p>
             </CardContent>
           </Card>
         </div>
       </div>
     </div>
-  );
+  )
 }

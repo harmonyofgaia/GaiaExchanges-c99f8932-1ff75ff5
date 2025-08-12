@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
-import {
-  Shield,
-  Eye,
-  Lock,
+
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { Button } from '@/components/ui/button'
+import { 
+  Shield, 
+  Eye, 
+  Lock, 
   Zap,
   Globe,
   Database,
@@ -16,182 +17,160 @@ import {
   AlertTriangle,
   CheckCircle,
   Target,
-  Crosshair,
-} from "lucide-react";
-import { toast } from "sonner";
+  Crosshair
+} from 'lucide-react'
+import { toast } from 'sonner'
 
 interface SecurityModule {
-  name: string;
-  status: "ACTIVE" | "MONITORING" | "DEFENDING" | "ATTACKING";
-  efficiency: number;
-  threatsBlocked: number;
-  description: string;
+  name: string
+  status: 'ACTIVE' | 'MONITORING' | 'DEFENDING' | 'ATTACKING'
+  efficiency: number
+  threatsBlocked: number
+  description: string
 }
 
 export function ComprehensiveSecurityMonitor() {
   const [securityModules, setSecurityModules] = useState<SecurityModule[]>([
     {
-      name: "IP Brute Force Counter-Attack",
-      status: "ATTACKING",
+      name: 'IP Brute Force Counter-Attack',
+      status: 'ATTACKING',
       efficiency: 100,
       threatsBlocked: 1247,
-      description:
-        "Actively attacking malicious IPs and shutting down their systems",
+      description: 'Actively attacking malicious IPs and shutting down their systems'
     },
     {
-      name: "Wallet Protection Fortress",
-      status: "DEFENDING",
+      name: 'Wallet Protection Fortress',
+      status: 'DEFENDING',
       efficiency: 100,
       threatsBlocked: 892,
-      description: "Ultimate protection for all user and admin wallets",
+      description: 'Ultimate protection for all user and admin wallets'
     },
     {
-      name: "Database Waterclosed Security",
-      status: "ACTIVE",
+      name: 'Database Waterclosed Security',
+      status: 'ACTIVE',
       efficiency: 100,
       threatsBlocked: 567,
-      description: "Zero leakage policy - all data quantum encrypted",
+      description: 'Zero leakage policy - all data quantum encrypted'
     },
     {
-      name: "Third-Party Service Scanner",
-      status: "MONITORING",
+      name: 'Third-Party Service Scanner',
+      status: 'MONITORING',
       efficiency: 100,
       threatsBlocked: 345,
-      description: "Continuous monitoring of all external connections",
+      description: 'Continuous monitoring of all external connections'
     },
     {
-      name: "Phishing Mail Destroyer",
-      status: "ACTIVE",
+      name: 'Phishing Mail Destroyer',
+      status: 'ACTIVE',
       efficiency: 100,
       threatsBlocked: 789,
-      description: "Instant detection and destruction of phishing attempts",
+      description: 'Instant detection and destruction of phishing attempts'
     },
     {
-      name: "Malicious Code Detector",
-      status: "DEFENDING",
+      name: 'Malicious Code Detector',
+      status: 'DEFENDING',
       efficiency: 100,
       threatsBlocked: 456,
-      description: "Real-time scanning for malicious software and coding",
+      description: 'Real-time scanning for malicious software and coding'
     },
     {
-      name: "Cookie & Privacy Shield",
-      status: "ACTIVE",
+      name: 'Cookie & Privacy Shield',
+      status: 'ACTIVE',
       efficiency: 100,
       threatsBlocked: 234,
-      description: "Complete protection of user cookies and privacy data",
+      description: 'Complete protection of user cookies and privacy data'
     },
     {
-      name: "Admin Access Control",
-      status: "MONITORING",
+      name: 'Admin Access Control',
+      status: 'MONITORING',
       efficiency: 100,
       threatsBlocked: 123,
-      description: "Even admin access is monitored and protected",
-    },
-  ]);
+      description: 'Even admin access is monitored and protected'
+    }
+  ])
 
-  const [overallSecurityScore, setOverallSecurityScore] = useState(100);
-  const [activeThreats, setActiveThreats] = useState(0);
-  const [systemUptime, setSystemUptime] = useState("99.99%");
+  const [overallSecurityScore, setOverallSecurityScore] = useState(100)
+  const [activeThreats, setActiveThreats] = useState(0)
+  const [systemUptime, setSystemUptime] = useState('99.99%')
 
   useEffect(() => {
     const runComprehensiveMonitoring = () => {
-      console.log(
-        "🔍 COMPREHENSIVE SECURITY MONITOR - FULL SPECTRUM PROTECTION",
-      );
-
+      console.log('🔍 COMPREHENSIVE SECURITY MONITOR - FULL SPECTRUM PROTECTION')
+      
       // Simulate security events
       if (Math.random() < 0.2) {
-        const moduleIndex = Math.floor(Math.random() * securityModules.length);
-        const updatedModules = [...securityModules];
-        updatedModules[moduleIndex].threatsBlocked += 1;
-
+        const moduleIndex = Math.floor(Math.random() * securityModules.length)
+        const updatedModules = [...securityModules]
+        updatedModules[moduleIndex].threatsBlocked += 1
+        
         // Rotate status for dynamic display
-        const statuses: Array<
-          "ACTIVE" | "MONITORING" | "DEFENDING" | "ATTACKING"
-        > = ["ACTIVE", "MONITORING", "DEFENDING", "ATTACKING"];
-        updatedModules[moduleIndex].status =
-          statuses[Math.floor(Math.random() * statuses.length)];
-
-        setSecurityModules(updatedModules);
-
+        const statuses: Array<'ACTIVE' | 'MONITORING' | 'DEFENDING' | 'ATTACKING'> = 
+          ['ACTIVE', 'MONITORING', 'DEFENDING', 'ATTACKING']
+        updatedModules[moduleIndex].status = statuses[Math.floor(Math.random() * statuses.length)]
+        
+        setSecurityModules(updatedModules)
+        
         if (Math.random() < 0.3) {
-          toast.success("🛡️ Security Module Update", {
+          toast.success('🛡️ Security Module Update', {
             description: `${updatedModules[moduleIndex].name} - Threat neutralized`,
-            duration: 3000,
-          });
+            duration: 3000
+          })
         }
       }
-
+      
       // Update overall metrics
-      const totalThreats = securityModules.reduce(
-        (sum, module) => sum + module.threatsBlocked,
-        0,
-      );
-      const avgEfficiency =
-        securityModules.reduce((sum, module) => sum + module.efficiency, 0) /
-        securityModules.length;
+      const totalThreats = securityModules.reduce((sum, module) => sum + module.threatsBlocked, 0)
+      const avgEfficiency = securityModules.reduce((sum, module) => sum + module.efficiency, 0) / securityModules.length
+      
+      setOverallSecurityScore(avgEfficiency)
+      setActiveThreats(Math.floor(Math.random() * 3)) // Very low active threats due to excellent defense
+    }
 
-      setOverallSecurityScore(avgEfficiency);
-      setActiveThreats(Math.floor(Math.random() * 3)); // Very low active threats due to excellent defense
-    };
+    const interval = setInterval(runComprehensiveMonitoring, 4000)
+    runComprehensiveMonitoring()
 
-    const interval = setInterval(runComprehensiveMonitoring, 4000);
-    runComprehensiveMonitoring();
-
-    return () => clearInterval(interval);
-  }, [securityModules]);
+    return () => clearInterval(interval)
+  }, [securityModules])
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "ACTIVE":
-        return "bg-green-600";
-      case "MONITORING":
-        return "bg-blue-600";
-      case "DEFENDING":
-        return "bg-yellow-600";
-      case "ATTACKING":
-        return "bg-red-600";
-      default:
-        return "bg-gray-600";
+      case 'ACTIVE': return 'bg-green-600'
+      case 'MONITORING': return 'bg-blue-600'
+      case 'DEFENDING': return 'bg-yellow-600'
+      case 'ATTACKING': return 'bg-red-600'
+      default: return 'bg-gray-600'
     }
-  };
+  }
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case "ACTIVE":
-        return <CheckCircle className="h-4 w-4" />;
-      case "MONITORING":
-        return <Eye className="h-4 w-4" />;
-      case "DEFENDING":
-        return <Shield className="h-4 w-4" />;
-      case "ATTACKING":
-        return <Target className="h-4 w-4" />;
-      default:
-        return <Activity className="h-4 w-4" />;
+      case 'ACTIVE': return <CheckCircle className="h-4 w-4" />
+      case 'MONITORING': return <Eye className="h-4 w-4" />
+      case 'DEFENDING': return <Shield className="h-4 w-4" />
+      case 'ATTACKING': return <Target className="h-4 w-4" />
+      default: return <Activity className="h-4 w-4" />
     }
-  };
+  }
 
   const executeFullSystemScan = () => {
-    toast.success("🔍 FULL SYSTEM SCAN INITIATED", {
-      description: "Comprehensive security audit across all modules",
-      duration: 5000,
-    });
+    toast.success('🔍 FULL SYSTEM SCAN INITIATED', {
+      description: 'Comprehensive security audit across all modules',
+      duration: 5000
+    })
 
     setTimeout(() => {
-      setSecurityModules((prev) =>
-        prev.map((module) => ({
-          ...module,
-          efficiency: 100,
-          status: "ACTIVE",
-        })),
-      );
-
-      toast.success("✅ FULL SYSTEM SCAN COMPLETE", {
-        description: "All modules optimized - Security at maximum level",
-        duration: 5000,
-      });
-    }, 3000);
-  };
+      setSecurityModules(prev => prev.map(module => ({
+        ...module,
+        efficiency: 100,
+        status: 'ACTIVE'
+      })))
+      
+      toast.success('✅ FULL SYSTEM SCAN COMPLETE', {
+        description: 'All modules optimized - Security at maximum level',
+        duration: 5000
+      })
+    }, 3000)
+  }
 
   return (
     <div className="space-y-6">
@@ -206,48 +185,30 @@ export function ComprehensiveSecurityMonitor() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">
-                {overallSecurityScore.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Overall Security
-              </div>
+              <div className="text-3xl font-bold text-green-400">{overallSecurityScore.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">Overall Security</div>
               <Progress value={overallSecurityScore} className="mt-2" />
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-red-400">
-                {activeThreats}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Threats
-              </div>
+              <div className="text-3xl font-bold text-red-400">{activeThreats}</div>
+              <div className="text-sm text-muted-foreground">Active Threats</div>
               <Badge className="mt-2 bg-green-600 text-white">MINIMAL</Badge>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400">
-                {systemUptime}
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{systemUptime}</div>
               <div className="text-sm text-muted-foreground">System Uptime</div>
               <Badge className="mt-2 bg-purple-600 text-white">EXCELLENT</Badge>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-yellow-400">
-                {securityModules.reduce(
-                  (sum, module) => sum + module.threatsBlocked,
-                  0,
-                )}
+                {securityModules.reduce((sum, module) => sum + module.threatsBlocked, 0)}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Threats Blocked
-              </div>
+              <div className="text-sm text-muted-foreground">Total Threats Blocked</div>
               <Badge className="mt-2 bg-yellow-600 text-white">TODAY</Badge>
             </div>
           </div>
 
-          <Button
-            onClick={executeFullSystemScan}
-            className="w-full bg-blue-600 hover:bg-blue-700"
-          >
+          <Button onClick={executeFullSystemScan} className="w-full bg-blue-600 hover:bg-blue-700">
             <Crosshair className="h-4 w-4 mr-2" />
             Execute Full System Security Scan
           </Button>
@@ -267,13 +228,11 @@ export function ComprehensiveSecurityMonitor() {
             <CardContent className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">Status</span>
-                <Badge
-                  className={`text-white text-xs ${getStatusColor(module.status)}`}
-                >
+                <Badge className={`text-white text-xs ${getStatusColor(module.status)}`}>
                   {module.status}
                 </Badge>
               </div>
-
+              
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
                   <span className="text-muted-foreground">Efficiency</span>
@@ -281,16 +240,12 @@ export function ComprehensiveSecurityMonitor() {
                 </div>
                 <Progress value={module.efficiency} className="h-2" />
               </div>
-
+              
               <div className="flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">
-                  Threats Blocked
-                </span>
-                <span className="text-xs font-medium text-red-400">
-                  {module.threatsBlocked}
-                </span>
+                <span className="text-xs text-muted-foreground">Threats Blocked</span>
+                <span className="text-xs font-medium text-red-400">{module.threatsBlocked}</span>
               </div>
-
+              
               <p className="text-xs text-gray-400">{module.description}</p>
             </CardContent>
           </Card>
@@ -346,8 +301,7 @@ export function ComprehensiveSecurityMonitor() {
               <p className="text-blue-200 font-medium">
                 "Most Powerful Engagement Between Humans and AI" <br />
                 <span className="text-xs text-blue-300">
-                  Powered by Synatic & Harmony of Gaia - The Massively Token
-                  Underdog
+                  Powered by Synatic & Harmony of Gaia - The Massively Token Underdog
                 </span>
               </p>
             </div>
@@ -355,5 +309,5 @@ export function ComprehensiveSecurityMonitor() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }
