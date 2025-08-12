@@ -1,8 +1,7 @@
-
-import { ContractDeployment } from '@/components/ContractDeployment'
-import { ContractLegalFramework } from '@/components/ContractLegalFramework'
-import { SmartContractInterface } from '@/components/SmartContractInterface'
-import { GaiaLogo } from '@/components/GaiaLogo'
+import { ContractDeployment } from "@/components/ContractDeployment";
+import { ContractLegalFramework } from "@/components/ContractLegalFramework";
+import { SmartContractInterface } from "@/components/SmartContractInterface";
+import { GaiaLogo } from "@/components/GaiaLogo";
 
 const SmartContracts = () => {
   return (
@@ -32,7 +31,7 @@ const SmartContracts = () => {
         <ContractLegalFramework />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SmartContracts
+export default SmartContracts;
