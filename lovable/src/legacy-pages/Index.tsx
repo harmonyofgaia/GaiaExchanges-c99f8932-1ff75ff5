@@ -1,27 +1,35 @@
-import { useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Globe, Heart, Zap, Users, Shield, Gamepad2, Wallet } from 'lucide-react'
-import { GAIA_TOKEN } from '@/constants/gaia'
-import { WalletConnection } from '@/components/WalletConnection'
-import { Navbar } from '@/components/Navbar'
-import { setHomepageVisited } from '@/utils/authAccessControl'
+import { useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Globe,
+  Heart,
+  Zap,
+  Users,
+  Shield,
+  Gamepad2,
+  Wallet,
+} from "lucide-react";
+import { GAIA_TOKEN } from "@/constants/gaia";
+import { WalletConnection } from "@/components/WalletConnection";
+import { Navbar } from "@/components/Navbar";
+import { setHomepageVisited } from "@/utils/authAccessControl";
 
 const Index = () => {
   // Track homepage visit for auth access control
   useEffect(() => {
-    setHomepageVisited()
-  }, [])
+    setHomepageVisited();
+  }, []);
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Navigation */}
       <Navbar />
-      
+
       {/* Moving Background */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20" />
-        
+
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
           {Array.from({ length: 50 }).map((_, i) => (
@@ -32,23 +40,34 @@ const Index = () => {
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
-                animationDelay: `${Math.random() * 5}s`
+                animationDelay: `${Math.random() * 5}s`,
               }}
             >
-              <div className={`w-2 h-2 rounded-full ${
-                i % 4 === 0 ? 'bg-green-400' : 
-                i % 4 === 1 ? 'bg-blue-400' : 
-                i % 4 === 2 ? 'bg-purple-400' : 
-                'bg-cyan-400'
-              } blur-sm animate-pulse`} />
+              <div
+                className={`w-2 h-2 rounded-full ${
+                  i % 4 === 0
+                    ? "bg-green-400"
+                    : i % 4 === 1
+                      ? "bg-blue-400"
+                      : i % 4 === 2
+                        ? "bg-purple-400"
+                        : "bg-cyan-400"
+                } blur-sm animate-pulse`}
+              />
             </div>
           ))}
         </div>
 
         {/* Moving Gradient Orbs */}
         <div className="absolute top-10 left-10 w-72 h-72 bg-green-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
+        <div
+          className="absolute bottom-10 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "2s" }}
+        />
+        <div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "4s" }}
+        />
       </div>
 
       {/* Content */}
@@ -96,7 +115,8 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Every transaction contributes to real-world environmental restoration projects.
+                Every transaction contributes to real-world environmental
+                restoration projects.
               </p>
             </CardContent>
           </Card>
@@ -110,7 +130,8 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Play games, earn tokens, and compete in tournaments while helping the planet.
+                Play games, earn tokens, and compete in tournaments while
+                helping the planet.
               </p>
             </CardContent>
           </Card>
@@ -124,7 +145,8 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Advanced security protocols protect your assets and transactions.
+                Advanced security protocols protect your assets and
+                transactions.
               </p>
             </CardContent>
           </Card>
@@ -184,7 +206,7 @@ const Index = () => {
         `}
       </style>
     </div>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;

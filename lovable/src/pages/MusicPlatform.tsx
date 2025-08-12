@@ -1,39 +1,71 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Slider } from '@/components/ui/slider'
-import { Play, Pause, SkipForward, SkipBack, Volume2, Heart, Shuffle, Repeat, Music, Headphones, Coins } from 'lucide-react'
-import { useState } from 'react'
-import { GAIA_TOKEN } from '@/constants/gaia'
-import { toast } from 'sonner'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Slider } from "@/components/ui/slider";
+import {
+  Play,
+  Pause,
+  SkipForward,
+  SkipBack,
+  Volume2,
+  Heart,
+  Shuffle,
+  Repeat,
+  Music,
+  Headphones,
+  Coins,
+} from "lucide-react";
+import { useState } from "react";
+import { GAIA_TOKEN } from "@/constants/gaia";
+import { toast } from "sonner";
 
 export default function MusicPlatform() {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [volume, setVolume] = useState([75])
-  const [progress, setProgress] = useState([32])
-  const [userTokens, setUserTokens] = useState(850)
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState([75]);
+  const [progress, setProgress] = useState([32]);
+  const [userTokens, setUserTokens] = useState(850);
 
   const earnTokensForListening = () => {
-    const tokensEarned = Math.floor(Math.random() * 10) + 5
-    setUserTokens(prev => prev + tokensEarned)
-    toast.success(`🎵 Earned ${tokensEarned} ${GAIA_TOKEN.SYMBOL} tokens for listening!`, {
-      description: 'Keep supporting eco-conscious music to earn more'
-    })
-  }
+    const tokensEarned = Math.floor(Math.random() * 10) + 5;
+    setUserTokens((prev) => prev + tokensEarned);
+    toast.success(
+      `🎵 Earned ${tokensEarned} ${GAIA_TOKEN.SYMBOL} tokens for listening!`,
+      {
+        description: "Keep supporting eco-conscious music to earn more",
+      },
+    );
+  };
 
   const playlists = [
-    { id: 1, name: "Eco Chill", songs: 24, duration: "1h 45m", category: "ambient" },
-    { id: 2, name: "Green Beats", songs: 18, duration: "58m", category: "electronic" },
-    { id: 3, name: "Nature Sounds", songs: 32, duration: "2h 15m", category: "nature" }
-  ]
+    {
+      id: 1,
+      name: "Eco Chill",
+      songs: 24,
+      duration: "1h 45m",
+      category: "ambient",
+    },
+    {
+      id: 2,
+      name: "Green Beats",
+      songs: 18,
+      duration: "58m",
+      category: "electronic",
+    },
+    {
+      id: 3,
+      name: "Nature Sounds",
+      songs: 32,
+      duration: "2h 15m",
+      category: "nature",
+    },
+  ];
 
   const currentTrack = {
     title: "Forest Meditation",
     artist: "EcoSoul",
     album: "Natural Harmony",
-    duration: "4:32"
-  }
+    duration: "4:32",
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/10 via-blue-900/10 to-green-900/10 p-6">
@@ -44,9 +76,12 @@ export default function MusicPlatform() {
             🎵 Music Platform
           </h1>
           <p className="text-xl text-muted-foreground">
-            Discover and stream eco-conscious music • Earn {GAIA_TOKEN.SYMBOL} tokens for listening
+            Discover and stream eco-conscious music • Earn {GAIA_TOKEN.SYMBOL}{" "}
+            tokens for listening
             <br />
-            <span className="text-sm">Connected to Official {GAIA_TOKEN.NAME}</span>
+            <span className="text-sm">
+              Connected to Official {GAIA_TOKEN.NAME}
+            </span>
           </p>
         </div>
 
@@ -59,8 +94,12 @@ export default function MusicPlatform() {
                   <div className="flex items-center gap-3">
                     <Coins className="h-6 w-6 text-green-400" />
                     <div>
-                      <div className="text-2xl font-bold text-green-400">{userTokens}</div>
-                      <div className="text-sm text-muted-foreground">{GAIA_TOKEN.SYMBOL} Tokens Earned</div>
+                      <div className="text-2xl font-bold text-green-400">
+                        {userTokens}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {GAIA_TOKEN.SYMBOL} Tokens Earned
+                      </div>
                     </div>
                   </div>
                   <div className="text-sm text-muted-foreground">
@@ -87,8 +126,12 @@ export default function MusicPlatform() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold">{currentTrack.title}</h3>
-                    <p className="text-muted-foreground">{currentTrack.artist}</p>
-                    <p className="text-sm text-muted-foreground">{currentTrack.album}</p>
+                    <p className="text-muted-foreground">
+                      {currentTrack.artist}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {currentTrack.album}
+                    </p>
                   </div>
                 </div>
 
@@ -115,16 +158,20 @@ export default function MusicPlatform() {
                   <Button variant="ghost" size="sm">
                     <SkipBack className="h-5 w-5" />
                   </Button>
-                  <Button 
+                  <Button
                     onClick={() => {
-                      setIsPlaying(!isPlaying)
+                      setIsPlaying(!isPlaying);
                       if (!isPlaying) {
-                        earnTokensForListening()
+                        earnTokensForListening();
                       }
                     }}
                     className="bg-purple-600 hover:bg-purple-700 rounded-full w-12 h-12"
                   >
-                    {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
+                    {isPlaying ? (
+                      <Pause className="h-6 w-6" />
+                    ) : (
+                      <Play className="h-6 w-6" />
+                    )}
                   </Button>
                   <Button variant="ghost" size="sm">
                     <SkipForward className="h-5 w-5" />
@@ -162,18 +209,25 @@ export default function MusicPlatform() {
               <CardContent>
                 <div className="space-y-3">
                   {Array.from({ length: 5 }, (_, i) => (
-                    <div key={i} className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/50 cursor-pointer">
+                    <div
+                      key={i}
+                      className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/50 cursor-pointer"
+                    >
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-400 rounded flex items-center justify-center">
                           <Music className="h-4 w-4 text-white" />
                         </div>
                         <div>
                           <p className="font-medium">Ocean Waves {i + 1}</p>
-                          <p className="text-sm text-muted-foreground">Nature Sounds</p>
+                          <p className="text-sm text-muted-foreground">
+                            Nature Sounds
+                          </p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-muted-foreground">3:45</span>
+                        <span className="text-sm text-muted-foreground">
+                          3:45
+                        </span>
                         <Button variant="ghost" size="sm">
                           <Play className="h-4 w-4" />
                         </Button>
@@ -197,7 +251,10 @@ export default function MusicPlatform() {
               <CardContent>
                 <div className="space-y-4">
                   {playlists.map((playlist) => (
-                    <Card key={playlist.id} className="border-gray-700 cursor-pointer hover:border-green-500/50">
+                    <Card
+                      key={playlist.id}
+                      className="border-gray-700 cursor-pointer hover:border-green-500/50"
+                    >
                       <CardContent className="p-4">
                         <div className="flex justify-between items-start mb-2">
                           <h4 className="font-medium">{playlist.name}</h4>
@@ -220,7 +277,9 @@ export default function MusicPlatform() {
             {/* Stats */}
             <Card className="border-yellow-500/30 mt-6">
               <CardHeader>
-                <CardTitle className="text-yellow-400">Listening Stats</CardTitle>
+                <CardTitle className="text-yellow-400">
+                  Listening Stats
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between">
@@ -245,5 +304,5 @@ export default function MusicPlatform() {
         </div>
       </div>
     </div>
-  )
+  );
 }

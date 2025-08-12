@@ -1,92 +1,95 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  ShoppingCart, 
-  Hammer, 
-  Sword, 
-  Mountain, 
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  ShoppingCart,
+  Hammer,
+  Sword,
+  Mountain,
   TreePine,
   Upload,
   Star,
   Crown,
-  Gamepad2
-} from 'lucide-react'
-import { MinecraftLandscapeBuilder } from '@/components/MinecraftLandscapeBuilder'
-import { toast } from 'sonner'
+  Gamepad2,
+} from "lucide-react";
+import { MinecraftLandscapeBuilder } from "@/components/MinecraftLandscapeBuilder";
+import { toast } from "sonner";
 
 interface MarketplaceItem {
-  id: string
-  name: string
-  creator: string
-  price: number
-  category: 'landscape' | 'weapon' | 'building' | 'decoration'
-  rarity: 'common' | 'rare' | 'epic' | 'legendary'
-  gameCompatible: string[]
-  image: string
+  id: string;
+  name: string;
+  creator: string;
+  price: number;
+  category: "landscape" | "weapon" | "building" | "decoration";
+  rarity: "common" | "rare" | "epic" | "legendary";
+  gameCompatible: string[];
+  image: string;
 }
 
 export function UniversalMarketplace() {
   const [marketplaceItems] = useState<MarketplaceItem[]>([
     {
-      id: '1',
-      name: 'Dragon Mountain Fortress',
-      creator: 'GAiA Builder Pro',
+      id: "1",
+      name: "Dragon Mountain Fortress",
+      creator: "GAiA Builder Pro",
       price: 500,
-      category: 'landscape',
-      rarity: 'legendary',
-      gameCompatible: ['Minecraft', 'GAiA Fantasy', 'Worms Arena'],
-      image: '🏔️'
+      category: "landscape",
+      rarity: "legendary",
+      gameCompatible: ["Minecraft", "GAiA Fantasy", "Worms Arena"],
+      image: "🏔️",
     },
     {
-      id: '2',
-      name: 'Crystal Sword of Harmony',
-      creator: 'Community Creator',
+      id: "2",
+      name: "Crystal Sword of Harmony",
+      creator: "Community Creator",
       price: 150,
-      category: 'weapon',
-      rarity: 'epic',
-      gameCompatible: ['GAiA Fantasy', 'Adventure Mode'],
-      image: '⚔️'
+      category: "weapon",
+      rarity: "epic",
+      gameCompatible: ["GAiA Fantasy", "Adventure Mode"],
+      image: "⚔️",
     },
     {
-      id: '3',
-      name: 'Enchanted Forest Biome',
-      creator: 'EcoBuilder',
+      id: "3",
+      name: "Enchanted Forest Biome",
+      creator: "EcoBuilder",
       price: 300,
-      category: 'landscape',
-      rarity: 'rare',
-      gameCompatible: ['Minecraft', 'Survival Mode'],
-      image: '🌲'
-    }
-  ])
+      category: "landscape",
+      rarity: "rare",
+      gameCompatible: ["Minecraft", "Survival Mode"],
+      image: "🌲",
+    },
+  ]);
 
-  const [uploadMode, setUploadMode] = useState(false)
+  const [uploadMode, setUploadMode] = useState(false);
 
   const purchaseItem = (item: MarketplaceItem) => {
     toast.success(`🛒 Purchased ${item.name}!`, {
-      description: `Item added to your inventory • Compatible with: ${item.gameCompatible.join(', ')}`,
-      duration: 5000
-    })
-  }
+      description: `Item added to your inventory • Compatible with: ${item.gameCompatible.join(", ")}`,
+      duration: 5000,
+    });
+  };
 
   const launchBuilder = (builderType: string) => {
     toast.success(`🔨 Launching ${builderType} Builder!`, {
-      description: 'Create amazing content and earn GAiA tokens',
-      duration: 4000
-    })
-  }
+      description: "Create amazing content and earn GAiA tokens",
+      duration: 4000,
+    });
+  };
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
-      case 'legendary': return 'from-purple-600 to-pink-600'
-      case 'epic': return 'from-blue-600 to-cyan-600'
-      case 'rare': return 'from-green-600 to-emerald-600'
-      default: return 'from-gray-600 to-slate-600'
+      case "legendary":
+        return "from-purple-600 to-pink-600";
+      case "epic":
+        return "from-blue-600 to-cyan-600";
+      case "rare":
+        return "from-green-600 to-emerald-600";
+      default:
+        return "from-gray-600 to-slate-600";
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -97,47 +100,59 @@ export function UniversalMarketplace() {
             🏪 UNIVERSAL MARKETPLACE & BUILDER ENGINE
           </CardTitle>
           <p className="text-muted-foreground">
-            Buy, sell, and create content that works across our entire gaming ecosystem
+            Buy, sell, and create content that works across our entire gaming
+            ecosystem
           </p>
         </CardHeader>
       </Card>
 
-        <Tabs defaultValue="marketplace" className="w-full">
-          <TabsList className="grid w-full grid-cols-7">
-            <TabsTrigger value="marketplace">🛒 Marketplace</TabsTrigger>
-            <TabsTrigger value="gaming-items">🎮 Gaming Items</TabsTrigger>
-            <TabsTrigger value="eco-products">🌱 Eco Products</TabsTrigger>
-            <TabsTrigger value="digital-assets">💎 Digital Assets</TabsTrigger>
-            <TabsTrigger value="services">🛠️ Services</TabsTrigger>
-            <TabsTrigger value="rentals">🏠 Rentals</TabsTrigger>
-            <TabsTrigger value="upload">📤 Upload</TabsTrigger>
-          </TabsList>
+      <Tabs defaultValue="marketplace" className="w-full">
+        <TabsList className="grid w-full grid-cols-7">
+          <TabsTrigger value="marketplace">🛒 Marketplace</TabsTrigger>
+          <TabsTrigger value="gaming-items">🎮 Gaming Items</TabsTrigger>
+          <TabsTrigger value="eco-products">🌱 Eco Products</TabsTrigger>
+          <TabsTrigger value="digital-assets">💎 Digital Assets</TabsTrigger>
+          <TabsTrigger value="services">🛠️ Services</TabsTrigger>
+          <TabsTrigger value="rentals">🏠 Rentals</TabsTrigger>
+          <TabsTrigger value="upload">📤 Upload</TabsTrigger>
+        </TabsList>
 
         <TabsContent value="marketplace" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {marketplaceItems.map((item) => (
-              <Card key={item.id} className={`border-2 bg-gradient-to-br ${getRarityColor(item.rarity)}/20 hover:scale-105 transition-all`}>
+              <Card
+                key={item.id}
+                className={`border-2 bg-gradient-to-br ${getRarityColor(item.rarity)}/20 hover:scale-105 transition-all`}
+              >
                 <CardContent className="p-4 space-y-4">
                   <div className="text-center">
                     <div className="text-6xl mb-2">{item.image}</div>
-                    <Badge className={`bg-gradient-to-r ${getRarityColor(item.rarity)} text-white`}>
+                    <Badge
+                      className={`bg-gradient-to-r ${getRarityColor(item.rarity)} text-white`}
+                    >
                       {item.rarity.toUpperCase()}
                     </Badge>
                   </div>
-                  
+
                   <div>
-                    <h3 className="font-bold text-lg text-white mb-1">{item.name}</h3>
-                    <p className="text-sm text-muted-foreground">by {item.creator}</p>
+                    <h3 className="font-bold text-lg text-white mb-1">
+                      {item.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      by {item.creator}
+                    </p>
                   </div>
 
                   <div>
-                    <div className="text-2xl font-bold text-green-400 mb-2">{item.price} GAiA</div>
+                    <div className="text-2xl font-bold text-green-400 mb-2">
+                      {item.price} GAiA
+                    </div>
                     <div className="text-xs text-muted-foreground">
-                      Compatible: {item.gameCompatible.join(', ')}
+                      Compatible: {item.gameCompatible.join(", ")}
                     </div>
                   </div>
 
-                  <Button 
+                  <Button
                     onClick={() => purchaseItem(item)}
                     className={`w-full bg-gradient-to-r ${getRarityColor(item.rarity)}`}
                   >
@@ -164,27 +179,45 @@ export function UniversalMarketplace() {
                   <CardContent className="p-4 text-center">
                     <div className="text-4xl mb-2">⚡</div>
                     <h3 className="font-bold text-white">Speed Boost Pack</h3>
-                    <p className="text-sm text-muted-foreground mb-3">10x speed boost for all games</p>
-                    <div className="text-xl font-bold text-green-400 mb-2">75 GAiA</div>
-                    <Button className="w-full bg-red-600 hover:bg-red-700">Purchase</Button>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      10x speed boost for all games
+                    </p>
+                    <div className="text-xl font-bold text-green-400 mb-2">
+                      75 GAiA
+                    </div>
+                    <Button className="w-full bg-red-600 hover:bg-red-700">
+                      Purchase
+                    </Button>
                   </CardContent>
                 </Card>
                 <Card className="bg-blue-900/20 border-blue-500/30">
                   <CardContent className="p-4 text-center">
                     <div className="text-4xl mb-2">🛡️</div>
                     <h3 className="font-bold text-white">Protection Shield</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Ultimate defense upgrade</p>
-                    <div className="text-xl font-bold text-green-400 mb-2">100 GAiA</div>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700">Purchase</Button>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Ultimate defense upgrade
+                    </p>
+                    <div className="text-xl font-bold text-green-400 mb-2">
+                      100 GAiA
+                    </div>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                      Purchase
+                    </Button>
                   </CardContent>
                 </Card>
                 <Card className="bg-yellow-900/20 border-yellow-500/30">
                   <CardContent className="p-4 text-center">
                     <div className="text-4xl mb-2">💰</div>
                     <h3 className="font-bold text-white">Token Multiplier</h3>
-                    <p className="text-sm text-muted-foreground mb-3">2x GAiA earning boost</p>
-                    <div className="text-xl font-bold text-green-400 mb-2">150 GAiA</div>
-                    <Button className="w-full bg-yellow-600 hover:bg-yellow-700">Purchase</Button>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      2x GAiA earning boost
+                    </p>
+                    <div className="text-xl font-bold text-green-400 mb-2">
+                      150 GAiA
+                    </div>
+                    <Button className="w-full bg-yellow-600 hover:bg-yellow-700">
+                      Purchase
+                    </Button>
                   </CardContent>
                 </Card>
               </div>
@@ -206,27 +239,45 @@ export function UniversalMarketplace() {
                   <CardContent className="p-4">
                     <div className="text-4xl mb-2 text-center">🌳</div>
                     <h3 className="font-bold text-white">Plant 100 Trees</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Real trees planted in your name</p>
-                    <div className="text-xl font-bold text-green-400 mb-2">200 GAiA</div>
-                    <Button className="w-full bg-green-600 hover:bg-green-700">Plant Trees</Button>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Real trees planted in your name
+                    </p>
+                    <div className="text-xl font-bold text-green-400 mb-2">
+                      200 GAiA
+                    </div>
+                    <Button className="w-full bg-green-600 hover:bg-green-700">
+                      Plant Trees
+                    </Button>
                   </CardContent>
                 </Card>
                 <Card className="bg-blue-800/20 border-blue-400/30">
                   <CardContent className="p-4">
                     <div className="text-4xl mb-2 text-center">🌊</div>
                     <h3 className="font-bold text-white">Ocean Cleanup Fund</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Support ocean cleaning projects</p>
-                    <div className="text-xl font-bold text-green-400 mb-2">250 GAiA</div>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700">Support Ocean</Button>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Support ocean cleaning projects
+                    </p>
+                    <div className="text-xl font-bold text-green-400 mb-2">
+                      250 GAiA
+                    </div>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                      Support Ocean
+                    </Button>
                   </CardContent>
                 </Card>
                 <Card className="bg-purple-800/20 border-purple-400/30">
                   <CardContent className="p-4">
                     <div className="text-4xl mb-2 text-center">☀️</div>
                     <h3 className="font-bold text-white">Solar Panel Fund</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Contribute to renewable energy</p>
-                    <div className="text-xl font-bold text-green-400 mb-2">300 GAiA</div>
-                    <Button className="w-full bg-purple-600 hover:bg-purple-700">Fund Solar</Button>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Contribute to renewable energy
+                    </p>
+                    <div className="text-xl font-bold text-green-400 mb-2">
+                      300 GAiA
+                    </div>
+                    <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                      Fund Solar
+                    </Button>
                   </CardContent>
                 </Card>
               </div>
@@ -248,31 +299,50 @@ export function UniversalMarketplace() {
                   <CardContent className="p-4">
                     <div className="text-center mb-4">
                       <div className="text-6xl mb-2">👑</div>
-                      <Badge className="bg-gradient-to-r from-purple-600 to-pink-600">EXCLUSIVE</Badge>
+                      <Badge className="bg-gradient-to-r from-purple-600 to-pink-600">
+                        EXCLUSIVE
+                      </Badge>
                     </div>
-                    <h3 className="font-bold text-white text-lg">GAiA Premium Avatar</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Exclusive avatar with special abilities</p>
-                    <div className="text-2xl font-bold text-green-400 mb-4">500 GAiA</div>
-                    <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600">Get Avatar</Button>
+                    <h3 className="font-bold text-white text-lg">
+                      GAiA Premium Avatar
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Exclusive avatar with special abilities
+                    </p>
+                    <div className="text-2xl font-bold text-green-400 mb-4">
+                      500 GAiA
+                    </div>
+                    <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600">
+                      Get Avatar
+                    </Button>
                   </CardContent>
                 </Card>
                 <Card className="bg-gradient-to-br from-blue-900/40 to-cyan-900/40 border-blue-500/30">
                   <CardContent className="p-4">
                     <div className="text-center mb-4">
                       <div className="text-6xl mb-2">🎵</div>
-                      <Badge className="bg-gradient-to-r from-blue-600 to-cyan-600">PREMIUM</Badge>
+                      <Badge className="bg-gradient-to-r from-blue-600 to-cyan-600">
+                        PREMIUM
+                      </Badge>
                     </div>
-                    <h3 className="font-bold text-white text-lg">Custom Music Pack</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Personalized background music</p>
-                    <div className="text-2xl font-bold text-green-400 mb-4">350 GAiA</div>
-                    <Button className="w-full bg-gradient-to-r from-blue-600 to-cyan-600">Get Music</Button>
+                    <h3 className="font-bold text-white text-lg">
+                      Custom Music Pack
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Personalized background music
+                    </p>
+                    <div className="text-2xl font-bold text-green-400 mb-4">
+                      350 GAiA
+                    </div>
+                    <Button className="w-full bg-gradient-to-r from-blue-600 to-cyan-600">
+                      Get Music
+                    </Button>
                   </CardContent>
                 </Card>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
-
 
         <TabsContent value="upload" className="space-y-6">
           <Card className="border-yellow-500/30 bg-yellow-900/20">
@@ -285,7 +355,9 @@ export function UniversalMarketplace() {
             <CardContent className="space-y-4">
               <div className="text-center p-8 border-2 border-dashed border-yellow-500/50 rounded-lg">
                 <Upload className="h-16 w-16 mx-auto text-yellow-400 mb-4" />
-                <h3 className="text-xl font-bold text-yellow-400 mb-2">Upload Your Content</h3>
+                <h3 className="text-xl font-bold text-yellow-400 mb-2">
+                  Upload Your Content
+                </h3>
                 <p className="text-muted-foreground mb-4">
                   Share your creations with the community and earn GAiA tokens
                 </p>
@@ -297,7 +369,9 @@ export function UniversalMarketplace() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-green-900/20 p-4 rounded border border-green-500/20">
-                  <h4 className="font-bold text-green-400 mb-2">💰 Earn GAiA Tokens</h4>
+                  <h4 className="font-bold text-green-400 mb-2">
+                    💰 Earn GAiA Tokens
+                  </h4>
                   <ul className="text-sm space-y-1">
                     <li>• 50 GAiA per approved landscape</li>
                     <li>• 30 GAiA per weapon design</li>
@@ -305,7 +379,9 @@ export function UniversalMarketplace() {
                   </ul>
                 </div>
                 <div className="bg-blue-900/20 p-4 rounded border border-blue-500/20">
-                  <h4 className="font-bold text-blue-400 mb-2">🎮 Multi-Game Support</h4>
+                  <h4 className="font-bold text-blue-400 mb-2">
+                    🎮 Multi-Game Support
+                  </h4>
                   <ul className="text-sm space-y-1">
                     <li>• Automatic format conversion</li>
                     <li>• Cross-game compatibility</li>
@@ -330,28 +406,48 @@ export function UniversalMarketplace() {
                 <Card className="bg-blue-900/20 border-blue-500/30">
                   <CardContent className="p-4">
                     <div className="text-4xl mb-2 text-center">👨‍💻</div>
-                    <h3 className="font-bold text-white">Custom Game Development</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Professional game creation services</p>
-                    <div className="text-xl font-bold text-green-400 mb-2">Starting at 1000 GAiA</div>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700">Book Service</Button>
+                    <h3 className="font-bold text-white">
+                      Custom Game Development
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Professional game creation services
+                    </p>
+                    <div className="text-xl font-bold text-green-400 mb-2">
+                      Starting at 1000 GAiA
+                    </div>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                      Book Service
+                    </Button>
                   </CardContent>
                 </Card>
                 <Card className="bg-green-900/20 border-green-500/30">
                   <CardContent className="p-4">
                     <div className="text-4xl mb-2 text-center">🎨</div>
                     <h3 className="font-bold text-white">3D Asset Creation</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Custom 3D models and textures</p>
-                    <div className="text-xl font-bold text-green-400 mb-2">Starting at 500 GAiA</div>
-                    <Button className="w-full bg-green-600 hover:bg-green-700">Book Service</Button>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Custom 3D models and textures
+                    </p>
+                    <div className="text-xl font-bold text-green-400 mb-2">
+                      Starting at 500 GAiA
+                    </div>
+                    <Button className="w-full bg-green-600 hover:bg-green-700">
+                      Book Service
+                    </Button>
                   </CardContent>
                 </Card>
                 <Card className="bg-purple-900/20 border-purple-500/30">
                   <CardContent className="p-4">
                     <div className="text-4xl mb-2 text-center">🎵</div>
                     <h3 className="font-bold text-white">Audio Production</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Music and sound effects creation</p>
-                    <div className="text-xl font-bold text-green-400 mb-2">Starting at 300 GAiA</div>
-                    <Button className="w-full bg-purple-600 hover:bg-purple-700">Book Service</Button>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Music and sound effects creation
+                    </p>
+                    <div className="text-xl font-bold text-green-400 mb-2">
+                      Starting at 300 GAiA
+                    </div>
+                    <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                      Book Service
+                    </Button>
                   </CardContent>
                 </Card>
               </div>
@@ -370,44 +466,74 @@ export function UniversalMarketplace() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-yellow-400">🏰 Virtual Properties</h3>
+                  <h3 className="text-xl font-bold text-yellow-400">
+                    🏰 Virtual Properties
+                  </h3>
                   <Card className="bg-purple-800/20 border-purple-400/30">
                     <CardContent className="p-4">
                       <div className="text-4xl mb-2 text-center">🏰</div>
                       <h4 className="font-bold text-white">Floating Castle</h4>
-                      <p className="text-sm text-muted-foreground mb-3">Premium sky castle with 50 rooms</p>
-                      <div className="text-lg font-bold text-green-400 mb-2">50 GAiA/day</div>
-                      <Button className="w-full bg-purple-600 hover:bg-purple-700">Rent Property</Button>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Premium sky castle with 50 rooms
+                      </p>
+                      <div className="text-lg font-bold text-green-400 mb-2">
+                        50 GAiA/day
+                      </div>
+                      <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                        Rent Property
+                      </Button>
                     </CardContent>
                   </Card>
                   <Card className="bg-blue-800/20 border-blue-400/30">
                     <CardContent className="p-4">
                       <div className="text-4xl mb-2 text-center">🌊</div>
                       <h4 className="font-bold text-white">Underwater Base</h4>
-                      <p className="text-sm text-muted-foreground mb-3">Deep ocean research facility</p>
-                      <div className="text-lg font-bold text-green-400 mb-2">75 GAiA/day</div>
-                      <Button className="w-full bg-blue-600 hover:bg-blue-700">Rent Property</Button>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Deep ocean research facility
+                      </p>
+                      <div className="text-lg font-bold text-green-400 mb-2">
+                        75 GAiA/day
+                      </div>
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                        Rent Property
+                      </Button>
                     </CardContent>
                   </Card>
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-yellow-400">⚡ Gaming Equipment</h3>
+                  <h3 className="text-xl font-bold text-yellow-400">
+                    ⚡ Gaming Equipment
+                  </h3>
                   <Card className="bg-red-800/20 border-red-400/30">
                     <CardContent className="p-4">
                       <div className="text-4xl mb-2 text-center">🎮</div>
-                      <h4 className="font-bold text-white">Ultra Gaming Setup</h4>
-                      <p className="text-sm text-muted-foreground mb-3">High-end gaming rig with VR</p>
-                      <div className="text-lg font-bold text-green-400 mb-2">25 GAiA/hour</div>
-                      <Button className="w-full bg-red-600 hover:bg-red-700">Rent Equipment</Button>
+                      <h4 className="font-bold text-white">
+                        Ultra Gaming Setup
+                      </h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        High-end gaming rig with VR
+                      </p>
+                      <div className="text-lg font-bold text-green-400 mb-2">
+                        25 GAiA/hour
+                      </div>
+                      <Button className="w-full bg-red-600 hover:bg-red-700">
+                        Rent Equipment
+                      </Button>
                     </CardContent>
                   </Card>
                   <Card className="bg-cyan-800/20 border-cyan-400/30">
                     <CardContent className="p-4">
                       <div className="text-4xl mb-2 text-center">🤖</div>
                       <h4 className="font-bold text-white">AI Assistant Bot</h4>
-                      <p className="text-sm text-muted-foreground mb-3">Personal gaming and creation AI</p>
-                      <div className="text-lg font-bold text-green-400 mb-2">15 GAiA/hour</div>
-                      <Button className="w-full bg-cyan-600 hover:bg-cyan-700">Rent AI Bot</Button>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Personal gaming and creation AI
+                      </p>
+                      <div className="text-lg font-bold text-green-400 mb-2">
+                        15 GAiA/hour
+                      </div>
+                      <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
+                        Rent AI Bot
+                      </Button>
                     </CardContent>
                   </Card>
                 </div>
@@ -417,5 +543,5 @@ export function UniversalMarketplace() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

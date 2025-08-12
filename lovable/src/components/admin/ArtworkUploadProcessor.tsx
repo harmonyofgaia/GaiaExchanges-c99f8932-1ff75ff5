@@ -1,65 +1,66 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Upload, Image, Sparkles, Wand2 } from 'lucide-react'
-import { toast } from 'sonner'
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Upload, Image, Sparkles, Wand2 } from "lucide-react";
+import { toast } from "sonner";
 
 export function ArtworkUploadProcessor() {
-  const [uploadedImages, setUploadedImages] = useState<string[]>([])
-  const [isProcessing, setIsProcessing] = useState(false)
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files
-    if (!files) return
+    const files = event.target.files;
+    if (!files) return;
 
-    Array.from(files).forEach(file => {
-      const reader = new FileReader()
+    Array.from(files).forEach((file) => {
+      const reader = new FileReader();
       reader.onload = (e) => {
-        const result = e.target?.result as string
-        setUploadedImages(prev => [...prev, result])
-      }
-      reader.readAsDataURL(file)
-    })
+        const result = e.target?.result as string;
+        setUploadedImages((prev) => [...prev, result]);
+      };
+      reader.readAsDataURL(file);
+    });
 
-    toast.success('🎨 Images Uploaded!', {
-      description: 'Ready to create abstract variations'
-    })
-  }
+    toast.success("🎨 Images Uploaded!", {
+      description: "Ready to create abstract variations",
+    });
+  };
 
   const createAbstractVariations = async () => {
-    setIsProcessing(true)
-    
+    setIsProcessing(true);
+
     for (const imageData of uploadedImages) {
       try {
         // Create variations based on the uploaded image using the edge function
-        const response = await fetch('/functions/v1/generate-artwork', {
-          method: 'POST',
+        const response = await fetch("/functions/v1/generate-artwork", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            basePrompt: 'Based on uploaded nature image: abstract geometric patterns inspired by nature',
-            artworkType: 'user_inspired',
-            style: 'abstract_variation'
-          })
-        })
+            basePrompt:
+              "Based on uploaded nature image: abstract geometric patterns inspired by nature",
+            artworkType: "user_inspired",
+            style: "abstract_variation",
+          }),
+        });
 
         if (response.ok) {
-          const result = await response.json()
-          console.log('Generated artwork:', result)
+          const result = await response.json();
+          console.log("Generated artwork:", result);
         }
       } catch (error) {
-        console.error('Error processing image:', error)
+        console.error("Error processing image:", error);
       }
     }
 
-    setIsProcessing(false)
-    toast.success('🌟 Abstract Variations Created!', {
-      description: 'Your uploaded images have been processed into unique artworks'
-    })
-  }
+    setIsProcessing(false);
+    toast.success("🌟 Abstract Variations Created!", {
+      description:
+        "Your uploaded images have been processed into unique artworks",
+    });
+  };
 
   return (
     <Card className="border-2 border-green-500/50">
@@ -87,12 +88,19 @@ export function ArtworkUploadProcessor() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {uploadedImages.map((img, index) => (
-                <div key={index} className="aspect-square rounded-lg overflow-hidden">
-                  <img src={img} alt={`Upload ${index}`} className="w-full h-full object-cover" />
+                <div
+                  key={index}
+                  className="aspect-square rounded-lg overflow-hidden"
+                >
+                  <img
+                    src={img}
+                    alt={`Upload ${index}`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               ))}
             </div>
-            
+
             <Button
               onClick={createAbstractVariations}
               disabled={isProcessing}
@@ -114,5 +122,5 @@ export function ArtworkUploadProcessor() {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,8 +1,9 @@
-
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 export function AnimatedBackground() {
-  const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, size: number}>>([])
+  const [particles, setParticles] = useState<
+    Array<{ id: number; x: number; y: number; size: number }>
+  >([]);
 
   useEffect(() => {
     const createParticles = () => {
@@ -10,15 +11,15 @@ export function AnimatedBackground() {
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: Math.random() * 3 + 1
-      }))
-      setParticles(newParticles)
-    }
+        size: Math.random() * 3 + 1,
+      }));
+      setParticles(newParticles);
+    };
 
-    createParticles()
-    const interval = setInterval(createParticles, 10000)
-    return () => clearInterval(interval)
-  }, [])
+    createParticles();
+    const interval = setInterval(createParticles, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-20">
@@ -33,10 +34,10 @@ export function AnimatedBackground() {
             width: `${particle.size}px`,
             height: `${particle.size}px`,
             animationDelay: `${particle.id * 0.1}s`,
-            animationDuration: `${3 + Math.random() * 2}s`
+            animationDuration: `${3 + Math.random() * 2}s`,
           }}
         />
       ))}
     </div>
-  )
+  );
 }

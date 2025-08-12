@@ -1,105 +1,119 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Gamepad2, Trophy, Users, Star, Play, Settings, Zap, Rocket } from 'lucide-react'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ArtilleryCreatorEngine } from './ArtilleryCreatorEngine'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Gamepad2,
+  Trophy,
+  Users,
+  Star,
+  Play,
+  Settings,
+  Zap,
+  Rocket,
+} from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArtilleryCreatorEngine } from "./ArtilleryCreatorEngine";
 
 export function GaiaGameHub() {
-  const navigate = useNavigate()
-  const [allGamesWorking, setAllGamesWorking] = useState(true)
+  const navigate = useNavigate();
+  const [allGamesWorking, setAllGamesWorking] = useState(true);
 
   const games = [
     {
-      id: 'gaia-fighter',
-      name: 'GAiA Fighter',
-      description: 'Quantum-powered fighting game with environmental impact',
-      status: 'active',
+      id: "gaia-fighter",
+      name: "GAiA Fighter",
+      description: "Quantum-powered fighting game with environmental impact",
+      status: "active",
       players: 15247,
-      route: '/gaia-fighter-game',
-      icon: '🥊',
-      difficulty: 'Expert'
+      route: "/gaia-fighter-game",
+      icon: "🥊",
+      difficulty: "Expert",
     },
     {
-      id: 'gaia-fantasy-mmorpg',
-      name: 'GAiA Fantasy MMORPG',
-      description: 'Epic environmental adventure with real impact',
-      status: 'active',
+      id: "gaia-fantasy-mmorpg",
+      name: "GAiA Fantasy MMORPG",
+      description: "Epic environmental adventure with real impact",
+      status: "active",
       players: 28934,
-      route: '/game/gaia-fantasy-mmorpg',
-      icon: '🌍',
-      difficulty: 'Medium'
+      route: "/game/gaia-fantasy-mmorpg",
+      icon: "🌍",
+      difficulty: "Medium",
     },
     {
-      id: 'snake-arena',
-      name: 'Snake Arena',
-      description: 'Classic snake game with multiplayer battles',
-      status: 'active',
+      id: "snake-arena",
+      name: "Snake Arena",
+      description: "Classic snake game with multiplayer battles",
+      status: "active",
       players: 8934,
-      route: '/game/snake-arena',
-      icon: '🐍',
-      difficulty: 'Medium'
+      route: "/game/snake-arena",
+      icon: "🐍",
+      difficulty: "Medium",
     },
     {
-      id: 'worms-battle',
-      name: 'Worms Battle',
-      description: 'Strategic artillery game with environmental themes',
-      status: 'active',
+      id: "worms-battle",
+      name: "Worms Battle",
+      description: "Strategic artillery game with environmental themes",
+      status: "active",
       players: 12456,
-      route: '/game',
-      icon: '🪱',
-      difficulty: 'Hard'
+      route: "/game",
+      icon: "🪱",
+      difficulty: "Hard",
     },
     {
-      id: 'tetris-eco',
-      name: 'Tetris Eco',
-      description: 'Eco-friendly Tetris with recycling mechanics',
-      status: 'active',
+      id: "tetris-eco",
+      name: "Tetris Eco",
+      description: "Eco-friendly Tetris with recycling mechanics",
+      status: "active",
       players: 6789,
-      route: '/game',
-      icon: '🧩',
-      difficulty: 'Easy'
+      route: "/game",
+      icon: "🧩",
+      difficulty: "Easy",
     },
     {
-      id: 'habbo-tycoon',
-      name: 'Habbo Tycoon',
-      description: 'Build and manage your virtual eco-friendly empire',
-      status: 'active',
+      id: "habbo-tycoon",
+      name: "Habbo Tycoon",
+      description: "Build and manage your virtual eco-friendly empire",
+      status: "active",
       players: 9876,
-      route: '/game',
-      icon: '🏢',
-      difficulty: 'Medium'
+      route: "/game",
+      icon: "🏢",
+      difficulty: "Medium",
     },
     {
-      id: 'minecraft-landscapes',
-      name: 'Minecraft Landscapes',
-      description: 'Build environmental landscapes in Minecraft style',
-      status: 'active',
+      id: "minecraft-landscapes",
+      name: "Minecraft Landscapes",
+      description: "Build environmental landscapes in Minecraft style",
+      status: "active",
       players: 18654,
-      route: '/landscape-builder',
-      icon: '🏔️',
-      difficulty: 'Creative'
-    }
-  ]
+      route: "/landscape-builder",
+      icon: "🏔️",
+      difficulty: "Creative",
+    },
+  ];
 
   const handleGameLaunch = (route: string, gameName: string) => {
-    console.log(`🎮 Launching ${gameName} - All systems operational`)
-    navigate(route)
-  }
+    console.log(`🎮 Launching ${gameName} - All systems operational`);
+    navigate(route);
+  };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Easy': return 'bg-green-600'
-      case 'Medium': return 'bg-yellow-600'
-      case 'Hard': return 'bg-red-600'
-      case 'Expert': return 'bg-purple-600'
-      case 'Creative': return 'bg-blue-600'
-      default: return 'bg-gray-600'
+      case "Easy":
+        return "bg-green-600";
+      case "Medium":
+        return "bg-yellow-600";
+      case "Hard":
+        return "bg-red-600";
+      case "Expert":
+        return "bg-purple-600";
+      case "Creative":
+        return "bg-blue-600";
+      default:
+        return "bg-gray-600";
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -118,15 +132,23 @@ export function GaiaGameHub() {
               🎯 {games.length} Games Available
             </Badge>
             <Badge className="bg-purple-600">
-              👥 {games.reduce((sum, game) => sum + game.players, 0).toLocaleString()} Active Players
+              👥{" "}
+              {games
+                .reduce((sum, game) => sum + game.players, 0)
+                .toLocaleString()}{" "}
+              Active Players
             </Badge>
           </div>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
             <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/20">
-              <div className="text-2xl font-bold text-green-400">{games.length}</div>
-              <div className="text-sm text-muted-foreground">Games Available</div>
+              <div className="text-2xl font-bold text-green-400">
+                {games.length}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Games Available
+              </div>
             </div>
             <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
               <div className="text-2xl font-bold text-blue-400">100%</div>
@@ -152,7 +174,10 @@ export function GaiaGameHub() {
           {/* Games Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {games.map((game) => (
-              <Card key={game.id} className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-blue-900/20 hover:border-purple-400/50 transition-all">
+              <Card
+                key={game.id}
+                className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-blue-900/20 hover:border-purple-400/50 transition-all"
+              >
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-purple-400">
                     <span className="text-2xl">{game.icon}</span>
@@ -160,18 +185,24 @@ export function GaiaGameHub() {
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     <Badge className="bg-green-600">ACTIVE</Badge>
-                    <Badge className={`${getDifficultyColor(game.difficulty)} text-white`}>
+                    <Badge
+                      className={`${getDifficultyColor(game.difficulty)} text-white`}
+                    >
                       {game.difficulty}
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-muted-foreground text-sm">{game.description}</p>
-                  
+                  <p className="text-muted-foreground text-sm">
+                    {game.description}
+                  </p>
+
                   <div className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-1">
                       <Users className="h-4 w-4 text-blue-400" />
-                      <span className="text-blue-400">{game.players.toLocaleString()} players</span>
+                      <span className="text-blue-400">
+                        {game.players.toLocaleString()} players
+                      </span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4 text-yellow-400" />
@@ -179,7 +210,7 @@ export function GaiaGameHub() {
                     </div>
                   </div>
 
-                  <Button 
+                  <Button
                     onClick={() => handleGameLaunch(game.route, game.name)}
                     className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
                   >
@@ -204,19 +235,31 @@ export function GaiaGameHub() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Button variant="outline" className="border-green-500/30 text-green-400">
+                <Button
+                  variant="outline"
+                  className="border-green-500/30 text-green-400"
+                >
                   <Trophy className="h-4 w-4 mr-2" />
                   Leaderboards
                 </Button>
-                <Button variant="outline" className="border-blue-500/30 text-blue-400">
+                <Button
+                  variant="outline"
+                  className="border-blue-500/30 text-blue-400"
+                >
                   <Users className="h-4 w-4 mr-2" />
                   Find Players
                 </Button>
-                <Button variant="outline" className="border-purple-500/30 text-purple-400">
+                <Button
+                  variant="outline"
+                  className="border-purple-500/30 text-purple-400"
+                >
                   <Settings className="h-4 w-4 mr-2" />
                   Game Settings
                 </Button>
-                <Button variant="outline" className="border-yellow-500/30 text-yellow-400">
+                <Button
+                  variant="outline"
+                  className="border-yellow-500/30 text-yellow-400"
+                >
                   <Zap className="h-4 w-4 mr-2" />
                   Power-Ups
                 </Button>
@@ -228,16 +271,22 @@ export function GaiaGameHub() {
 
       {/* System Status */}
       <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-        <h4 className="font-medium text-green-400 mb-2">🎮 Game Hub System Status</h4>
+        <h4 className="font-medium text-green-400 mb-2">
+          🎮 Game Hub System Status
+        </h4>
         <div className="text-sm text-green-300">
-          ✅ All games are fully operational and connected to the GAiA ecosystem<br/>
-          ✅ Real-time multiplayer connectivity established<br/>
-          ✅ Environmental impact tracking active<br/>
-          ✅ Quantum-secured game state management<br/>
-          ✅ 24/7 uptime with automatic failover protection<br/>
-          ✅ Artillery Creator Engine fully integrated and operational
+          ✅ All games are fully operational and connected to the GAiA ecosystem
+          <br />
+          ✅ Real-time multiplayer connectivity established
+          <br />
+          ✅ Environmental impact tracking active
+          <br />
+          ✅ Quantum-secured game state management
+          <br />
+          ✅ 24/7 uptime with automatic failover protection
+          <br />✅ Artillery Creator Engine fully integrated and operational
         </div>
       </div>
     </div>
-  )
+  );
 }

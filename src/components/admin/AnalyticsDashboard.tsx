@@ -1,6 +1,5 @@
-
-import { AdminAnalyticsDashboard } from './AdminAnalyticsDashboard'
+import { AdminAnalyticsDashboard } from "./AdminAnalyticsDashboard";
 
 export function AnalyticsDashboard() {
-  return <AdminAnalyticsDashboard />
+  return <AdminAnalyticsDashboard />;
 }

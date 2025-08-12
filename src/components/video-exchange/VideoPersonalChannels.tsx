@@ -1,77 +1,83 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Play, Plus, Settings, Eye, Heart, MessageCircle } from 'lucide-react'
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Play, Plus, Settings, Eye, Heart, MessageCircle } from "lucide-react";
 
 export function VideoPersonalChannels() {
   const [channels] = useState([
     {
       id: 1,
       name: "EcoWarrior Sarah",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616c96f40b3?w=64&h=64&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108755-2616c96f40b3?w=64&h=64&fit=crop&crop=face",
       subscribers: 15420,
       videos: 89,
       category: "Climate Action",
       verified: true,
-      description: "Sharing sustainable living tips and climate action strategies"
+      description:
+        "Sharing sustainable living tips and climate action strategies",
     },
     {
       id: 2,
       name: "Green Tech Mike",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=face",
       subscribers: 8932,
       videos: 67,
       category: "Technology",
       verified: false,
-      description: "Exploring renewable energy and green technology solutions"
+      description: "Exploring renewable energy and green technology solutions",
     },
     {
       id: 3,
       name: "Nature Lover Emma",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&fit=crop&crop=face",
       subscribers: 12156,
       videos: 134,
       category: "Conservation",
       verified: true,
-      description: "Wildlife conservation and biodiversity protection content"
-    }
-  ])
+      description: "Wildlife conservation and biodiversity protection content",
+    },
+  ]);
 
   const [userVideos] = useState([
     {
       id: 1,
       title: "10 Ways to Reduce Your Carbon Footprint",
-      thumbnail: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e5?w=300&h=200&fit=crop",
+      thumbnail:
+        "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e5?w=300&h=200&fit=crop",
       views: 2543,
       likes: 189,
       comments: 34,
       duration: "8:45",
-      uploadDate: "2 days ago"
+      uploadDate: "2 days ago",
     },
     {
       id: 2,
       title: "Solar Panel Installation Guide",
-      thumbnail: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=300&h=200&fit=crop",
+      thumbnail:
+        "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=300&h=200&fit=crop",
       views: 1876,
       likes: 145,
       comments: 28,
       duration: "12:30",
-      uploadDate: "5 days ago"
+      uploadDate: "5 days ago",
     },
     {
       id: 3,
       title: "Composting for Beginners",
-      thumbnail: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=200&fit=crop",
+      thumbnail:
+        "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=200&fit=crop",
       views: 3421,
       likes: 267,
       comments: 52,
       duration: "6:15",
-      uploadDate: "1 week ago"
-    }
-  ])
+      uploadDate: "1 week ago",
+    },
+  ]);
 
   return (
     <div className="space-y-6">
@@ -91,7 +97,9 @@ export function VideoPersonalChannels() {
             </Avatar>
             <div className="flex-1">
               <h3 className="font-semibold">Your Eco Channel</h3>
-              <p className="text-sm text-muted-foreground">Share your environmental journey with the community</p>
+              <p className="text-sm text-muted-foreground">
+                Share your environmental journey with the community
+              </p>
             </div>
             <Button className="bg-green-600 hover:bg-green-700">
               <Settings className="h-4 w-4 mr-2" />
@@ -119,19 +127,29 @@ export function VideoPersonalChannels() {
                     <div className="flex items-center gap-2">
                       <h3 className="font-semibold">{channel.name}</h3>
                       {channel.verified && (
-                        <Badge variant="secondary" className="text-xs">✓</Badge>
+                        <Badge variant="secondary" className="text-xs">
+                          ✓
+                        </Badge>
                       )}
                     </div>
-                    <p className="text-xs text-muted-foreground">{channel.category}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {channel.category}
+                    </p>
                   </div>
                 </div>
-                
-                <p className="text-sm text-muted-foreground mb-3">{channel.description}</p>
-                
+
+                <p className="text-sm text-muted-foreground mb-3">
+                  {channel.description}
+                </p>
+
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex gap-4">
-                    <span className="text-muted-foreground">{channel.subscribers.toLocaleString()} subscribers</span>
-                    <span className="text-muted-foreground">{channel.videos} videos</span>
+                    <span className="text-muted-foreground">
+                      {channel.subscribers.toLocaleString()} subscribers
+                    </span>
+                    <span className="text-muted-foreground">
+                      {channel.videos} videos
+                    </span>
                   </div>
                   <Button size="sm" variant="outline">
                     Subscribe
@@ -153,8 +171,8 @@ export function VideoPersonalChannels() {
             {userVideos.map((video) => (
               <div key={video.id} className="group cursor-pointer">
                 <div className="relative overflow-hidden rounded-lg mb-3">
-                  <img 
-                    src={video.thumbnail} 
+                  <img
+                    src={video.thumbnail}
                     alt={video.title}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200"
                   />
@@ -166,10 +184,14 @@ export function VideoPersonalChannels() {
                     <Play className="h-12 w-12 text-white" />
                   </div>
                 </div>
-                
-                <h3 className="font-semibold mb-1 line-clamp-2">{video.title}</h3>
-                <p className="text-xs text-muted-foreground mb-2">{video.uploadDate}</p>
-                
+
+                <h3 className="font-semibold mb-1 line-clamp-2">
+                  {video.title}
+                </h3>
+                <p className="text-xs text-muted-foreground mb-2">
+                  {video.uploadDate}
+                </p>
+
                 <div className="flex items-center gap-4 text-xs text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <Eye className="h-3 w-3" />
@@ -190,5 +212,5 @@ export function VideoPersonalChannels() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

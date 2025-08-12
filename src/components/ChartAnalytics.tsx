@@ -1,16 +1,15 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { BarChart3, TrendingUp, Activity } from 'lucide-react'
-import { GAIA_METRICS } from '@/constants/gaia'
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { BarChart3, TrendingUp, Activity } from "lucide-react";
+import { GAIA_METRICS } from "@/constants/gaia";
 
 interface AnalyticsData {
-  totalTrades: number
-  activeUsers: number
-  systemHealth: number
-  networkSpeed: number
+  totalTrades: number;
+  activeUsers: number;
+  systemHealth: number;
+  networkSpeed: number;
 }
 
 export function ChartAnalytics() {
@@ -18,22 +17,28 @@ export function ChartAnalytics() {
     totalTrades: GAIA_METRICS.INITIAL_TRANSACTIONS,
     activeUsers: GAIA_METRICS.INITIAL_HOLDERS,
     systemHealth: GAIA_METRICS.ECOSYSTEM_HEALTH,
-    networkSpeed: GAIA_METRICS.NETWORK_SPEED
-  })
+    networkSpeed: GAIA_METRICS.NETWORK_SPEED,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnalytics(prev => ({
+      setAnalytics((prev) => ({
         ...prev,
         totalTrades: prev.totalTrades + Math.floor(Math.random() * 20) + 5,
         activeUsers: prev.activeUsers + Math.floor(Math.random() * 10),
-        systemHealth: Math.max(90, Math.min(100, prev.systemHealth + (Math.random() - 0.5) * 2)),
-        networkSpeed: Math.max(2000, Math.min(3000, prev.networkSpeed + (Math.random() - 0.5) * 100))
-      }))
-    }, 3000)
+        systemHealth: Math.max(
+          90,
+          Math.min(100, prev.systemHealth + (Math.random() - 0.5) * 2),
+        ),
+        networkSpeed: Math.max(
+          2000,
+          Math.min(3000, prev.networkSpeed + (Math.random() - 0.5) * 100),
+        ),
+      }));
+    }, 3000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-purple-500/30">
@@ -48,7 +53,9 @@ export function ChartAnalytics() {
           <div className="p-4 bg-black/30 rounded-lg border border-purple-500/30">
             <div className="flex items-center gap-2 mb-2">
               <TrendingUp className="h-4 w-4 text-green-400" />
-              <span className="text-green-400 font-semibold">Trading Activity</span>
+              <span className="text-green-400 font-semibold">
+                Trading Activity
+              </span>
             </div>
             <div className="text-2xl font-bold text-white mb-1">
               {analytics.totalTrades.toLocaleString()}
@@ -85,11 +92,16 @@ export function ChartAnalytics() {
             <div className="text-2xl font-bold text-cyan-400 mb-1">
               {analytics.networkSpeed.toFixed(0)} TPS
             </div>
-            <Progress value={(analytics.networkSpeed / 3000) * 100} className="h-2" />
-            <Badge className="mt-2 bg-cyan-600 text-white">High Performance</Badge>
+            <Progress
+              value={(analytics.networkSpeed / 3000) * 100}
+              className="h-2"
+            />
+            <Badge className="mt-2 bg-cyan-600 text-white">
+              High Performance
+            </Badge>
           </div>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

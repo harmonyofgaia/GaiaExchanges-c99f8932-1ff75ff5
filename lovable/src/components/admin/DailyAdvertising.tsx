@@ -1,57 +1,56 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  Megaphone, 
-  Target, 
-  TrendingUp, 
-  Users, 
-  Globe, 
-  Zap, 
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Megaphone,
+  Target,
+  TrendingUp,
+  Users,
+  Globe,
+  Zap,
   MessageSquare,
   BarChart3,
   Play,
-  Pause
-} from 'lucide-react'
-import { toast } from 'sonner'
+  Pause,
+} from "lucide-react";
+import { toast } from "sonner";
 
 export function DailyAdvertising() {
   const [campaign, setCampaign] = useState({
-    title: '',
-    description: '',
-    budget: '',
-    targetAudience: 'global'
-  })
-  const [isLive, setIsLive] = useState(false)
+    title: "",
+    description: "",
+    budget: "",
+    targetAudience: "global",
+  });
+  const [isLive, setIsLive] = useState(false);
 
   const handleLaunchCampaign = () => {
     if (!campaign.title || !campaign.description) {
-      toast.error('Campaign Incomplete', {
-        description: 'Please fill in all campaign details',
-        duration: 3000
-      })
-      return
+      toast.error("Campaign Incomplete", {
+        description: "Please fill in all campaign details",
+        duration: 3000,
+      });
+      return;
     }
 
-    setIsLive(true)
-    toast.success('🚀 Global Campaign Launched!', {
+    setIsLive(true);
+    toast.success("🚀 Global Campaign Launched!", {
       description: `"${campaign.title}" is now reaching worldwide audience`,
-      duration: 5000
-    })
-  }
+      duration: 5000,
+    });
+  };
 
   const handlePauseCampaign = () => {
-    setIsLive(false)
-    toast.success('⏸️ Campaign Paused', {
-      description: 'Marketing campaign temporarily suspended',
-      duration: 3000
-    })
-  }
+    setIsLive(false);
+    toast.success("⏸️ Campaign Paused", {
+      description: "Marketing campaign temporarily suspended",
+      duration: 3000,
+    });
+  };
 
   return (
     <Card className="border-orange-500/30 bg-gradient-to-br from-orange-900/20 to-red-900/20">
@@ -76,7 +75,9 @@ export function DailyAdvertising() {
               <Card className="border-green-500/20 bg-green-500/10">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-green-400">Global Reach Campaign</h4>
+                    <h4 className="font-medium text-green-400">
+                      Global Reach Campaign
+                    </h4>
                     <Badge className={isLive ? "bg-green-600" : "bg-gray-600"}>
                       {isLive ? "ACTIVE" : "PAUSED"}
                     </Badge>
@@ -86,12 +87,20 @@ export function DailyAdvertising() {
                   </p>
                   <div className="flex gap-2">
                     {!isLive ? (
-                      <Button size="sm" onClick={handleLaunchCampaign} className="bg-green-600">
+                      <Button
+                        size="sm"
+                        onClick={handleLaunchCampaign}
+                        className="bg-green-600"
+                      >
                         <Play className="h-4 w-4 mr-1" />
                         Launch
                       </Button>
                     ) : (
-                      <Button size="sm" onClick={handlePauseCampaign} className="bg-orange-600">
+                      <Button
+                        size="sm"
+                        onClick={handlePauseCampaign}
+                        className="bg-orange-600"
+                      >
                         <Pause className="h-4 w-4 mr-1" />
                         Pause
                       </Button>
@@ -103,7 +112,9 @@ export function DailyAdvertising() {
               <Card className="border-blue-500/20 bg-blue-500/10">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-blue-400">Investor Outreach</h4>
+                    <h4 className="font-medium text-blue-400">
+                      Investor Outreach
+                    </h4>
                     <Badge className="bg-blue-600">SCHEDULED</Badge>
                   </div>
                   <p className="text-sm text-muted-foreground mb-3">
@@ -119,7 +130,9 @@ export function DailyAdvertising() {
               <Card className="border-purple-500/20 bg-purple-500/10">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-purple-400">Community Growth</h4>
+                    <h4 className="font-medium text-purple-400">
+                      Community Growth
+                    </h4>
                     <Badge className="bg-purple-600">ACTIVE</Badge>
                   </div>
                   <p className="text-sm text-muted-foreground mb-3">
@@ -137,8 +150,12 @@ export function DailyAdvertising() {
           <TabsContent value="create" className="space-y-6">
             <div className="max-w-2xl mx-auto space-y-6">
               <div className="text-center">
-                <h3 className="text-xl font-bold text-orange-400">Create New Marketing Campaign</h3>
-                <p className="text-sm text-muted-foreground">Launch global advertising initiatives</p>
+                <h3 className="text-xl font-bold text-orange-400">
+                  Create New Marketing Campaign
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Launch global advertising initiatives
+                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -147,32 +164,49 @@ export function DailyAdvertising() {
                   <Input
                     placeholder="Enter campaign title..."
                     value={campaign.title}
-                    onChange={(e) => setCampaign(prev => ({ ...prev, title: e.target.value }))}
+                    onChange={(e) =>
+                      setCampaign((prev) => ({
+                        ...prev,
+                        title: e.target.value,
+                      }))
+                    }
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Budget (GAiA)</label>
                   <Input
                     placeholder="Campaign budget..."
                     value={campaign.budget}
-                    onChange={(e) => setCampaign(prev => ({ ...prev, budget: e.target.value }))}
+                    onChange={(e) =>
+                      setCampaign((prev) => ({
+                        ...prev,
+                        budget: e.target.value,
+                      }))
+                    }
                     type="number"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium">Campaign Description</label>
+                <label className="text-sm font-medium">
+                  Campaign Description
+                </label>
                 <Textarea
                   placeholder="Describe your marketing campaign..."
                   value={campaign.description}
-                  onChange={(e) => setCampaign(prev => ({ ...prev, description: e.target.value }))}
+                  onChange={(e) =>
+                    setCampaign((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }))
+                  }
                   rows={4}
                 />
               </div>
 
-              <Button 
+              <Button
                 onClick={handleLaunchCampaign}
                 className="w-full bg-orange-600 hover:bg-orange-700 text-lg py-3"
                 disabled={!campaign.title || !campaign.description}
@@ -188,21 +222,23 @@ export function DailyAdvertising() {
               <div className="text-center p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
                 <Globe className="h-8 w-8 text-green-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-green-400">847M</div>
-                <p className="text-sm text-muted-foreground">Global Impressions</p>
+                <p className="text-sm text-muted-foreground">
+                  Global Impressions
+                </p>
               </div>
-              
+
               <div className="text-center p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
                 <Users className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-blue-400">2.4M</div>
                 <p className="text-sm text-muted-foreground">New Users</p>
               </div>
-              
+
               <div className="text-center p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
                 <MessageSquare className="h-8 w-8 text-purple-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-purple-400">156K</div>
                 <p className="text-sm text-muted-foreground">Engagements</p>
               </div>
-              
+
               <div className="text-center p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg">
                 <TrendingUp className="h-8 w-8 text-orange-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-orange-400">+324%</div>
@@ -215,7 +251,9 @@ export function DailyAdvertising() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card className="border-cyan-500/20">
                 <CardHeader>
-                  <CardTitle className="text-cyan-400">Geographic Targeting</CardTitle>
+                  <CardTitle className="text-cyan-400">
+                    Geographic Targeting
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -241,7 +279,9 @@ export function DailyAdvertising() {
 
               <Card className="border-pink-500/20">
                 <CardHeader>
-                  <CardTitle className="text-pink-400">Audience Segments</CardTitle>
+                  <CardTitle className="text-pink-400">
+                    Audience Segments
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -269,5 +309,5 @@ export function DailyAdvertising() {
         </Tabs>
       </CardContent>
     </Card>
-  )
+  );
 }

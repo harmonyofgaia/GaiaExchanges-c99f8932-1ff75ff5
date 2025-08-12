@@ -1,14 +1,13 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { toast } from 'sonner'
-import { supabase } from '@/integrations/supabase/client'
-import { 
-  ShoppingCart, 
-  Palette, 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import {
+  ShoppingCart,
+  Palette,
   Users,
   Shield,
   Zap,
@@ -18,190 +17,218 @@ import {
   Crown,
   Gem,
   Search,
-  Filter
-} from 'lucide-react'
-import { GAIA_TOKEN } from '@/constants/gaia'
-import { gaiaTokenService } from '@/services/gaiaTokenService'
+  Filter,
+} from "lucide-react";
+import { GAIA_TOKEN } from "@/constants/gaia";
+import { gaiaTokenService } from "@/services/gaiaTokenService";
 
 interface MarketplaceItem {
-  id: string
-  title: string
-  description: string
-  price: number
-  currency: string
-  image_url: string
-  category: string
-  status: string
-  user_id: string
-  created_at: string
-  rarity: 'Common' | 'Rare' | 'Epic' | 'Legendary' | 'Mythical'
-  tokensForBurning: number
-  artistEarnings: number
-  views: number
-  likes: number
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  currency: string;
+  image_url: string;
+  category: string;
+  status: string;
+  user_id: string;
+  created_at: string;
+  rarity: "Common" | "Rare" | "Epic" | "Legendary" | "Mythical";
+  tokensForBurning: number;
+  artistEarnings: number;
+  views: number;
+  likes: number;
 }
 
 export function ArtMarketplace() {
-  const [items, setItems] = useState<MarketplaceItem[]>([])
-  const [loading, setLoading] = useState(true)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState<string>('All')
-  const [totalBurned, setTotalBurned] = useState(0)
+  const [items, setItems] = useState<MarketplaceItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [totalBurned, setTotalBurned] = useState(0);
 
   useEffect(() => {
-    fetchMarketplaceItems()
-    
+    fetchMarketplaceItems();
+
     // Auto-refresh every 30 seconds for live updates
-    const interval = setInterval(fetchMarketplaceItems, 30000)
-    return () => clearInterval(interval)
-  }, [])
+    const interval = setInterval(fetchMarketplaceItems, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   const fetchMarketplaceItems = async () => {
     try {
-      console.log('🎨 MARKETPLACE: Fetching items with quantum security protection')
-      
+      console.log(
+        "🎨 MARKETPLACE: Fetching items with quantum security protection",
+      );
+
       // Enhanced mock data with token burning mechanics
       const mockItems: MarketplaceItem[] = [
         {
-          id: '1',
-          title: 'Digital Harmony #001',
-          description: 'A beautiful digital art piece representing the harmony of nature and technology',
+          id: "1",
+          title: "Digital Harmony #001",
+          description:
+            "A beautiful digital art piece representing the harmony of nature and technology",
           price: 250,
-          currency: 'GAiA',
-          image_url: '',
-          category: 'Digital Art',
-          status: 'active',
-          user_id: 'demo',
+          currency: "GAiA",
+          image_url: "",
+          category: "Digital Art",
+          status: "active",
+          user_id: "demo",
           created_at: new Date().toISOString(),
-          rarity: 'Epic',
+          rarity: "Epic",
           tokensForBurning: 25,
           artistEarnings: 200,
           views: 1547,
-          likes: 234
+          likes: 234,
         },
         {
-          id: '2',
-          title: 'Eco Vision #002',
-          description: 'An inspiring artwork showcasing the future of sustainable living',
+          id: "2",
+          title: "Eco Vision #002",
+          description:
+            "An inspiring artwork showcasing the future of sustainable living",
           price: 500,
-          currency: 'GAiA',
-          image_url: '',
-          category: 'Environmental Art',
-          status: 'active',
-          user_id: 'demo',
+          currency: "GAiA",
+          image_url: "",
+          category: "Environmental Art",
+          status: "active",
+          user_id: "demo",
           created_at: new Date().toISOString(),
-          rarity: 'Legendary',
+          rarity: "Legendary",
           tokensForBurning: 75,
           artistEarnings: 375,
           views: 2847,
-          likes: 567
+          likes: 567,
         },
         {
-          id: '3',
-          title: 'Quantum Dreams #003',
-          description: 'Mesmerizing quantum-inspired digital artwork with dragon-powered security aesthetics',
+          id: "3",
+          title: "Quantum Dreams #003",
+          description:
+            "Mesmerizing quantum-inspired digital artwork with dragon-powered security aesthetics",
           price: 1000,
-          currency: 'GAiA',
-          image_url: '',
-          category: 'Quantum Art',
-          status: 'active',
-          user_id: 'demo',
+          currency: "GAiA",
+          image_url: "",
+          category: "Quantum Art",
+          status: "active",
+          user_id: "demo",
           created_at: new Date().toISOString(),
-          rarity: 'Mythical',
+          rarity: "Mythical",
           tokensForBurning: 200,
           artistEarnings: 700,
           views: 5847,
-          likes: 1247
+          likes: 1247,
         },
         {
-          id: '4',
-          title: 'Nature\'s Whisper',
-          description: 'Serene landscape with token-burning environmental message',
+          id: "4",
+          title: "Nature's Whisper",
+          description:
+            "Serene landscape with token-burning environmental message",
           price: 350,
-          currency: 'GAiA',
-          image_url: '',
-          category: 'Landscape',
-          status: 'active',
-          user_id: 'demo',
+          currency: "GAiA",
+          image_url: "",
+          category: "Landscape",
+          status: "active",
+          user_id: "demo",
           created_at: new Date().toISOString(),
-          rarity: 'Rare',
+          rarity: "Rare",
           tokensForBurning: 35,
           artistEarnings: 280,
           views: 847,
-          likes: 156
+          likes: 156,
         },
         {
-          id: '5',
-          title: 'Cosmic Energy Flow',
-          description: 'Abstract representation of energy and token burning processes',
+          id: "5",
+          title: "Cosmic Energy Flow",
+          description:
+            "Abstract representation of energy and token burning processes",
           price: 750,
-          currency: 'GAiA',
-          image_url: '',
-          category: 'Abstract',
-          status: 'active',
-          user_id: 'demo',
+          currency: "GAiA",
+          image_url: "",
+          category: "Abstract",
+          status: "active",
+          user_id: "demo",
           created_at: new Date().toISOString(),
-          rarity: 'Epic',
+          rarity: "Epic",
           tokensForBurning: 112,
           artistEarnings: 525,
           views: 3247,
-          likes: 678
-        }
-      ]
-      
-      setItems(mockItems)
-      setTotalBurned(mockItems.reduce((sum, item) => sum + item.tokensForBurning, 0))
-      console.log('🎨 MARKETPLACE: Loaded quantum-protected art collection')
+          likes: 678,
+        },
+      ];
+
+      setItems(mockItems);
+      setTotalBurned(
+        mockItems.reduce((sum, item) => sum + item.tokensForBurning, 0),
+      );
+      console.log("🎨 MARKETPLACE: Loaded quantum-protected art collection");
     } catch (error) {
-      console.error('Error in marketplace - quantum security engaged:', error)
+      console.error("Error in marketplace - quantum security engaged:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
-      case 'Mythical': return 'from-purple-600 to-pink-600'
-      case 'Legendary': return 'from-yellow-600 to-orange-600'
-      case 'Epic': return 'from-blue-600 to-cyan-600'
-      case 'Rare': return 'from-green-600 to-emerald-600'
-      default: return 'from-gray-600 to-slate-600'
+      case "Mythical":
+        return "from-purple-600 to-pink-600";
+      case "Legendary":
+        return "from-yellow-600 to-orange-600";
+      case "Epic":
+        return "from-blue-600 to-cyan-600";
+      case "Rare":
+        return "from-green-600 to-emerald-600";
+      default:
+        return "from-gray-600 to-slate-600";
     }
-  }
+  };
 
   const handlePurchase = async (item: MarketplaceItem) => {
     try {
-      const { data: user } = await supabase.auth.getUser()
+      const { data: user } = await supabase.auth.getUser();
       if (!user.user) {
-        toast.error('Please log in to make purchases')
-        return
+        toast.error("Please log in to make purchases");
+        return;
       }
 
       // Burn tokens for the purchase
-      const burnSuccess = await gaiaTokenService.burnTokens(item.tokensForBurning, `Art purchase: ${item.title}`)
-      
+      const burnSuccess = await gaiaTokenService.burnTokens(
+        item.tokensForBurning,
+        `Art purchase: ${item.title}`,
+      );
+
       if (burnSuccess) {
-        toast.success('🎨 Artwork purchased successfully!', {
+        toast.success("🎨 Artwork purchased successfully!", {
           description: `You now own "${item.title}" | ${item.tokensForBurning} GAiA tokens burned | Artist earned ${item.artistEarnings} GAiA`,
-          duration: 5000
-        })
-        
-        console.log('🎨 MARKETPLACE: Art purchase completed with token burning')
-        setTotalBurned(prev => prev + item.tokensForBurning)
+          duration: 5000,
+        });
+
+        console.log(
+          "🎨 MARKETPLACE: Art purchase completed with token burning",
+        );
+        setTotalBurned((prev) => prev + item.tokensForBurning);
       }
     } catch (error) {
-      toast.error('Purchase failed - Quantum security protection active')
+      toast.error("Purchase failed - Quantum security protection active");
     }
-  }
+  };
 
-  const filteredItems = items.filter(item => {
-    const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.description.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory
-    return matchesSearch && matchesCategory
-  })
+  const filteredItems = items.filter((item) => {
+    const matchesSearch =
+      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "All" || item.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
-  const categories = ['All', 'Digital Art', 'Environmental Art', 'Quantum Art', 'Landscape', 'Abstract']
+  const categories = [
+    "All",
+    "Digital Art",
+    "Environmental Art",
+    "Quantum Art",
+    "Landscape",
+    "Abstract",
+  ];
 
   return (
     <div className="space-y-6">
@@ -213,14 +240,19 @@ export function ArtMarketplace() {
             🎨 GAiA Art Marketplace - Quantum Protected with Token Burning
           </CardTitle>
           <p className="text-muted-foreground">
-            Buy and sell exclusive art with GAiA tokens - Every purchase burns tokens for environmental impact
+            Buy and sell exclusive art with GAiA tokens - Every purchase burns
+            tokens for environmental impact
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
             <div className="p-3 rounded-lg bg-green-900/30 border border-green-500/20">
-              <div className="text-xl font-bold text-green-400">{items.length}</div>
-              <div className="text-xs text-muted-foreground">Active Listings</div>
+              <div className="text-xl font-bold text-green-400">
+                {items.length}
+              </div>
+              <div className="text-xs text-muted-foreground">
+                Active Listings
+              </div>
             </div>
             <div className="p-3 rounded-lg bg-blue-900/30 border border-blue-500/20">
               <div className="text-xl font-bold text-blue-400">∞</div>
@@ -228,10 +260,14 @@ export function ArtMarketplace() {
             </div>
             <div className="p-3 rounded-lg bg-purple-900/30 border border-purple-500/20">
               <div className="text-xl font-bold text-purple-400">100%</div>
-              <div className="text-xs text-muted-foreground">Quantum Security</div>
+              <div className="text-xs text-muted-foreground">
+                Quantum Security
+              </div>
             </div>
             <div className="p-3 rounded-lg bg-orange-900/30 border border-orange-500/20">
-              <div className="text-xl font-bold text-orange-400">{totalBurned}</div>
+              <div className="text-xl font-bold text-orange-400">
+                {totalBurned}
+              </div>
               <div className="text-xs text-muted-foreground">Tokens Burned</div>
             </div>
             <div className="p-3 rounded-lg bg-red-900/30 border border-red-500/20">
@@ -260,8 +296,10 @@ export function ArtMarketplace() {
               onChange={(e) => setSelectedCategory(e.target.value)}
               className="px-4 py-2 bg-muted border border-border rounded-md"
             >
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
               ))}
             </select>
           </div>
@@ -284,20 +322,33 @@ export function ArtMarketplace() {
         ) : filteredItems.length === 0 ? (
           <div className="col-span-full text-center py-12">
             <Palette className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-muted-foreground">No artwork available</h3>
-            <p className="text-sm text-muted-foreground">Be the first to list your art in the GAiA marketplace!</p>
+            <h3 className="text-lg font-semibold text-muted-foreground">
+              No artwork available
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Be the first to list your art in the GAiA marketplace!
+            </p>
           </div>
         ) : (
           filteredItems.map((item) => (
-            <Card key={item.id} className={`border-2 bg-gradient-to-br ${getRarityColor(item.rarity)}/10 hover:scale-105 transition-all duration-300`}>
+            <Card
+              key={item.id}
+              className={`border-2 bg-gradient-to-br ${getRarityColor(item.rarity)}/10 hover:scale-105 transition-all duration-300`}
+            >
               <div className="aspect-square bg-gradient-to-br from-purple-900/20 to-pink-900/20 rounded-t-lg flex items-center justify-center relative">
                 {item.image_url ? (
-                  <img src={item.image_url} alt={item.title} className="w-full h-full object-cover rounded-t-lg" />
+                  <img
+                    src={item.image_url}
+                    alt={item.title}
+                    className="w-full h-full object-cover rounded-t-lg"
+                  />
                 ) : (
                   <Palette className="h-16 w-16 text-purple-400" />
                 )}
                 <div className="absolute top-2 left-2">
-                  <Badge className={`bg-gradient-to-r ${getRarityColor(item.rarity)} text-white`}>
+                  <Badge
+                    className={`bg-gradient-to-r ${getRarityColor(item.rarity)} text-white`}
+                  >
                     {item.rarity}
                   </Badge>
                 </div>
@@ -314,18 +365,22 @@ export function ArtMarketplace() {
                 <div>
                   <h3 className="font-semibold text-lg">{item.title}</h3>
                   {item.description && (
-                    <p className="text-sm text-muted-foreground line-clamp-2">{item.description}</p>
+                    <p className="text-sm text-muted-foreground line-clamp-2">
+                      {item.description}
+                    </p>
                   )}
                 </div>
-                
+
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-green-400">{item.price}</span>
+                    <span className="text-2xl font-bold text-green-400">
+                      {item.price}
+                    </span>
                     <Badge className="bg-green-600 text-white">
                       {item.currency}
                     </Badge>
                   </div>
-                  
+
                   <div className="flex justify-between text-xs">
                     <span className="flex items-center gap-1">
                       <Flame className="h-3 w-3 text-orange-400" />
@@ -336,13 +391,13 @@ export function ArtMarketplace() {
                       Artist: {item.artistEarnings}
                     </span>
                   </div>
-                  
+
                   <Badge variant="outline" className="text-xs w-fit">
                     {item.category}
                   </Badge>
                 </div>
-                
-                <Button 
+
+                <Button
                   onClick={() => handlePurchase(item)}
                   className={`w-full bg-gradient-to-r ${getRarityColor(item.rarity)} hover:opacity-90`}
                 >
@@ -365,14 +420,21 @@ export function ArtMarketplace() {
         <CardContent>
           <div className="text-center space-y-2">
             <div className="text-sm text-green-400">
-              <strong>Contract:</strong> <code className="font-mono text-xs bg-black/20 px-2 py-1 rounded">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
+              <strong>Contract:</strong>{" "}
+              <code className="font-mono text-xs bg-black/20 px-2 py-1 rounded">
+                {GAIA_TOKEN.CONTRACT_ADDRESS}
+              </code>
             </div>
             <div className="text-sm text-blue-400">
-              <strong>Wallet:</strong> <code className="font-mono text-xs bg-black/20 px-2 py-1 rounded">{GAIA_TOKEN.WALLET_ADDRESS}</code>
+              <strong>Wallet:</strong>{" "}
+              <code className="font-mono text-xs bg-black/20 px-2 py-1 rounded">
+                {GAIA_TOKEN.WALLET_ADDRESS}
+              </code>
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              Every art purchase burns GAiA tokens for environmental impact while supporting artists. 
-              Join the creative revolution with real-world conservation impact!
+              Every art purchase burns GAiA tokens for environmental impact
+              while supporting artists. Join the creative revolution with
+              real-world conservation impact!
             </p>
             <div className="flex justify-center gap-4 text-xs mt-3">
               <Badge className="bg-green-600 text-white">
@@ -396,5 +458,5 @@ export function ArtMarketplace() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

@@ -1,27 +1,26 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { 
-  TrendingUp, 
-  Activity, 
-  Users, 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import {
+  TrendingUp,
+  Activity,
+  Users,
   Globe,
   BarChart3,
   DollarSign,
   Zap,
-  Target
-} from 'lucide-react'
-import { supabase } from '@/integrations/supabase/client'
+  Target,
+} from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface VaultStats {
-  totalFees: number
-  dailyFees: number
-  weeklyGrowth: number
-  activeUsers: number
-  totalTransactions: number
-  avgFeePerTransaction: number
+  totalFees: number;
+  dailyFees: number;
+  weeklyGrowth: number;
+  activeUsers: number;
+  totalTransactions: number;
+  avgFeePerTransaction: number;
 }
 
 export function LiveVaultStats() {
@@ -31,22 +30,22 @@ export function LiveVaultStats() {
     weeklyGrowth: 0,
     activeUsers: 0,
     totalTransactions: 0,
-    avgFeePerTransaction: 0
-  })
-  const [loading, setLoading] = useState(true)
+    avgFeePerTransaction: 0,
+  });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchLiveStats()
-    
+    fetchLiveStats();
+
     // Update stats every 10 seconds
-    const interval = setInterval(fetchLiveStats, 10000)
-    return () => clearInterval(interval)
-  }, [])
+    const interval = setInterval(fetchLiveStats, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   const fetchLiveStats = async () => {
     try {
-      console.log('📊 STATS: Fetching live vault statistics')
-      
+      console.log("📊 STATS: Fetching live vault statistics");
+
       // For demo purposes, generate realistic looking stats
       // In production, these would come from actual database queries
       const mockStats: VaultStats = {
@@ -55,17 +54,17 @@ export function LiveVaultStats() {
         weeklyGrowth: Math.random() * 20 + 5,
         activeUsers: Math.floor(Math.random() * 500) + 12500,
         totalTransactions: Math.floor(Math.random() * 10000) + 85000,
-        avgFeePerTransaction: Math.random() * 0.5 + 0.1
-      }
-      
-      setStats(mockStats)
-      console.log('📊 STATS: Live statistics updated')
+        avgFeePerTransaction: Math.random() * 0.5 + 0.1,
+      };
+
+      setStats(mockStats);
+      console.log("📊 STATS: Live statistics updated");
     } catch (error) {
-      console.error('Error fetching vault stats:', error)
+      console.error("Error fetching vault stats:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   if (loading) {
     return (
@@ -76,7 +75,7 @@ export function LiveVaultStats() {
           </Card>
         ))}
       </div>
-    )
+    );
   }
 
   return (
@@ -99,7 +98,9 @@ export function LiveVaultStats() {
               <div className="text-2xl font-bold text-green-400">
                 {stats.totalFees.toLocaleString()} GAIA
               </div>
-              <div className="text-xs text-muted-foreground">Total Fees Collected</div>
+              <div className="text-xs text-muted-foreground">
+                Total Fees Collected
+              </div>
             </div>
 
             {/* Daily Fees */}
@@ -111,7 +112,9 @@ export function LiveVaultStats() {
               <div className="text-2xl font-bold text-blue-400">
                 {stats.dailyFees.toLocaleString()} GAIA
               </div>
-              <div className="text-xs text-muted-foreground">Daily Fee Collection</div>
+              <div className="text-xs text-muted-foreground">
+                Daily Fee Collection
+              </div>
             </div>
 
             {/* Weekly Growth */}
@@ -123,7 +126,9 @@ export function LiveVaultStats() {
               <div className="text-2xl font-bold text-purple-400">
                 +{stats.weeklyGrowth.toFixed(1)}%
               </div>
-              <div className="text-xs text-muted-foreground">Weekly Growth Rate</div>
+              <div className="text-xs text-muted-foreground">
+                Weekly Growth Rate
+              </div>
             </div>
 
             {/* Active Users */}
@@ -147,7 +152,9 @@ export function LiveVaultStats() {
               <div className="text-2xl font-bold text-cyan-400">
                 {stats.totalTransactions.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">Total Transactions</div>
+              <div className="text-xs text-muted-foreground">
+                Total Transactions
+              </div>
             </div>
 
             {/* Average Fee */}
@@ -159,7 +166,9 @@ export function LiveVaultStats() {
               <div className="text-2xl font-bold text-pink-400">
                 {stats.avgFeePerTransaction.toFixed(3)} GAIA
               </div>
-              <div className="text-xs text-muted-foreground">Avg Fee per Transaction</div>
+              <div className="text-xs text-muted-foreground">
+                Avg Fee per Transaction
+              </div>
             </div>
           </div>
         </CardContent>
@@ -168,7 +177,9 @@ export function LiveVaultStats() {
       {/* Distribution Chart */}
       <Card className="border-green-500/30">
         <CardHeader>
-          <CardTitle className="text-green-400">Fee Distribution Breakdown</CardTitle>
+          <CardTitle className="text-green-400">
+            Fee Distribution Breakdown
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-3">
@@ -177,19 +188,19 @@ export function LiveVaultStats() {
               <span className="text-sm font-medium">40%</span>
             </div>
             <Progress value={40} className="h-2" />
-            
+
             <div className="flex items-center justify-between">
               <span className="text-sm">🔥 Token Burning</span>
               <span className="text-sm font-medium">30%</span>
             </div>
             <Progress value={30} className="h-2" />
-            
+
             <div className="flex items-center justify-between">
               <span className="text-sm">🌱 Green Projects</span>
               <span className="text-sm font-medium">20%</span>
             </div>
             <Progress value={20} className="h-2" />
-            
+
             <div className="flex items-center justify-between">
               <span className="text-sm">❤️ Humanity Fund</span>
               <span className="text-sm font-medium">10%</span>
@@ -211,7 +222,9 @@ export function LiveVaultStats() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div className="p-3 rounded-lg bg-green-900/30 border border-green-500/20">
               <div className="text-lg font-bold text-green-400">127</div>
-              <div className="text-xs text-muted-foreground">Countries Reached</div>
+              <div className="text-xs text-muted-foreground">
+                Countries Reached
+              </div>
             </div>
             <div className="p-3 rounded-lg bg-blue-900/30 border border-blue-500/20">
               <div className="text-lg font-bold text-blue-400">2.4M</div>
@@ -223,11 +236,13 @@ export function LiveVaultStats() {
             </div>
             <div className="p-3 rounded-lg bg-orange-900/30 border border-orange-500/20">
               <div className="text-lg font-bold text-orange-400">89%</div>
-              <div className="text-xs text-muted-foreground">Efficiency Rate</div>
+              <div className="text-xs text-muted-foreground">
+                Efficiency Rate
+              </div>
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

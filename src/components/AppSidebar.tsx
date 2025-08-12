@@ -1,4 +1,3 @@
-
 import {
   Sidebar,
   SidebarContent,
@@ -8,21 +7,21 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { 
-  Home, 
-  Gamepad2, 
-  Users, 
-  Trophy, 
-  Coins, 
-  Settings, 
+} from "@/components/ui/sidebar";
+import {
+  Home,
+  Gamepad2,
+  Users,
+  Trophy,
+  Coins,
+  Settings,
   Info,
   Globe,
   Sparkles,
   Zap,
-  Crown
-} from "lucide-react"
-import { Link, useLocation } from "react-router-dom"
+  Crown,
+} from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const items = [
   {
@@ -47,7 +46,7 @@ const items = [
   },
   {
     title: "Leaderboard",
-    url: "/leaderboard", 
+    url: "/leaderboard",
     icon: Trophy,
   },
   {
@@ -75,10 +74,10 @@ const items = [
     url: "/about",
     icon: Info,
   },
-]
+];
 
 export function AppSidebar() {
-  const location = useLocation()
+  const location = useLocation();
 
   return (
     <Sidebar>
@@ -90,27 +89,29 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
-                const Icon = item.icon
-                const isActive = location.pathname === item.url
-                
+                const Icon = item.icon;
+                const isActive = location.pathname === item.url;
+
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton 
-                      asChild 
-                      className={`${isActive ? 'bg-primary/10 text-primary font-semibold' : ''} hover:bg-primary/5`}
+                    <SidebarMenuButton
+                      asChild
+                      className={`${isActive ? "bg-primary/10 text-primary font-semibold" : ""} hover:bg-primary/5`}
                     >
                       <Link to={item.url} className="flex items-center gap-3">
-                        <Icon className={`h-4 w-4 ${isActive ? 'text-primary' : ''}`} />
+                        <Icon
+                          className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
+                        />
                         <span>{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
-                )
+                );
               })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

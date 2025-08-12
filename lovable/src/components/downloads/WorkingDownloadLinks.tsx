@@ -1,236 +1,244 @@
-
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { toast } from 'sonner'
-import { 
-  Download, 
-  Shield, 
-  CheckCircle, 
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { toast } from "sonner";
+import {
+  Download,
+  Shield,
+  CheckCircle,
   ExternalLink,
   Smartphone,
   Monitor,
   Globe,
-  Star
-} from 'lucide-react'
-import { GAIA_TOKEN } from '@/constants/gaia'
+  Star,
+} from "lucide-react";
+import { GAIA_TOKEN } from "@/constants/gaia";
 
 interface WorkingDownload {
-  id: string
-  name: string
-  platform: string
-  version: string
-  size: string
-  icon: string
-  primaryUrl: string
-  fallbackUrls: string[]
-  storeUrl?: string
-  verified: boolean
-  description: string
-  isWorking: boolean
+  id: string;
+  name: string;
+  platform: string;
+  version: string;
+  size: string;
+  icon: string;
+  primaryUrl: string;
+  fallbackUrls: string[];
+  storeUrl?: string;
+  verified: boolean;
+  description: string;
+  isWorking: boolean;
 }
 
 export function WorkingDownloadLinks() {
-  const [downloadProgress, setDownloadProgress] = useState<Record<string, number>>({})
-  const [isDownloading, setIsDownloading] = useState<Record<string, boolean>>({})
+  const [downloadProgress, setDownloadProgress] = useState<
+    Record<string, number>
+  >({});
+  const [isDownloading, setIsDownloading] = useState<Record<string, boolean>>(
+    {},
+  );
 
   const workingDownloads: WorkingDownload[] = [
     {
-      id: 'web-app',
-      name: 'Gaia\'s Exchanges Web App',
-      platform: 'Web Browser',
-      version: '2.1.0',
-      size: 'Progressive Web App',
-      icon: '🌐',
-      primaryUrl: 'https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange',
+      id: "web-app",
+      name: "Gaia's Exchanges Web App",
+      platform: "Web Browser",
+      version: "2.1.0",
+      size: "Progressive Web App",
+      icon: "🌐",
+      primaryUrl:
+        "https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange",
       fallbackUrls: [
-        'https://sites.google.com/view/culture-of-harmony/',
-        'https://gaiaexchanges.com'
+        "https://sites.google.com/view/culture-of-harmony/",
+        "https://gaiaexchanges.com",
       ],
       verified: true,
-      description: 'Full-featured web application with real-time GAiA trading',
-      isWorking: true
+      description: "Full-featured web application with real-time GAiA trading",
+      isWorking: true,
     },
     {
-      id: 'android-apk',
-      name: 'Gaia\'s Exchanges for Android',
-      platform: 'Android',
-      version: '2.1.0',
-      size: '34.7 MB',
-      icon: '🤖',
-      primaryUrl: 'https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange',
+      id: "android-apk",
+      name: "Gaia's Exchanges for Android",
+      platform: "Android",
+      version: "2.1.0",
+      size: "34.7 MB",
+      icon: "🤖",
+      primaryUrl:
+        "https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange",
       fallbackUrls: [
-        'https://play.google.com/store/search?q=gaia+exchanges&c=apps',
-        'https://apkpure.com/search?q=gaia+exchanges'
+        "https://play.google.com/store/search?q=gaia+exchanges&c=apps",
+        "https://apkpure.com/search?q=gaia+exchanges",
       ],
-      storeUrl: 'https://play.google.com/store/search?q=gaia+exchanges&c=apps',
+      storeUrl: "https://play.google.com/store/search?q=gaia+exchanges&c=apps",
       verified: true,
-      description: 'Native Android app with GAiA token integration',
-      isWorking: true
+      description: "Native Android app with GAiA token integration",
+      isWorking: true,
     },
     {
-      id: 'ios-app',
-      name: 'Gaia\'s Exchanges for iOS',
-      platform: 'iOS',
-      version: '2.1.0',
-      size: '41.2 MB',
-      icon: '📱',
-      primaryUrl: 'https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange',
+      id: "ios-app",
+      name: "Gaia's Exchanges for iOS",
+      platform: "iOS",
+      version: "2.1.0",
+      size: "41.2 MB",
+      icon: "📱",
+      primaryUrl:
+        "https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange",
       fallbackUrls: [
-        'https://apps.apple.com/search?term=gaia+exchanges',
-        'https://testflight.apple.com/join/gaiaexchanges'
+        "https://apps.apple.com/search?term=gaia+exchanges",
+        "https://testflight.apple.com/join/gaiaexchanges",
       ],
-      storeUrl: 'https://apps.apple.com/search?term=gaia+exchanges',
+      storeUrl: "https://apps.apple.com/search?term=gaia+exchanges",
       verified: true,
-      description: 'Native iOS app optimized for iPhone and iPad',
-      isWorking: true
+      description: "Native iOS app optimized for iPhone and iPad",
+      isWorking: true,
     },
     {
-      id: 'blackberry-app',
-      name: 'Gaia\'s Exchanges for BlackBerry',
-      platform: 'BlackBerry OS',
-      version: '2.1.0',
-      size: '28.4 MB',
-      icon: '📱',
-      primaryUrl: 'https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange',
+      id: "blackberry-app",
+      name: "Gaia's Exchanges for BlackBerry",
+      platform: "BlackBerry OS",
+      version: "2.1.0",
+      size: "28.4 MB",
+      icon: "📱",
+      primaryUrl:
+        "https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange",
       fallbackUrls: [
-        'https://appworld.blackberry.com/search/?q=gaia+exchanges',
-        'https://github.com/harmony-of-gaia/blackberry-releases'
+        "https://appworld.blackberry.com/search/?q=gaia+exchanges",
+        "https://github.com/harmony-of-gaia/blackberry-releases",
       ],
-      storeUrl: 'https://appworld.blackberry.com/search/?q=gaia+exchanges',
+      storeUrl: "https://appworld.blackberry.com/search/?q=gaia+exchanges",
       verified: true,
-      description: 'Optimized for BlackBerry keyboards and security features',
-      isWorking: true
+      description: "Optimized for BlackBerry keyboards and security features",
+      isWorking: true,
     },
     {
-      id: 'windows-app',
-      name: 'Gaia\'s Exchanges for Windows',
-      platform: 'Windows',
-      version: '2.1.0',
-      size: '58.1 MB',
-      icon: '🪟',
-      primaryUrl: 'https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange',
+      id: "windows-app",
+      name: "Gaia's Exchanges for Windows",
+      platform: "Windows",
+      version: "2.1.0",
+      size: "58.1 MB",
+      icon: "🪟",
+      primaryUrl:
+        "https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange",
       fallbackUrls: [
-        'https://www.microsoft.com/store/search?q=gaia+exchanges',
-        'https://github.com/releases/gaia-exchanges'
+        "https://www.microsoft.com/store/search?q=gaia+exchanges",
+        "https://github.com/releases/gaia-exchanges",
       ],
-      storeUrl: 'https://www.microsoft.com/store/search?q=gaia+exchanges',
+      storeUrl: "https://www.microsoft.com/store/search?q=gaia+exchanges",
       verified: true,
-      description: 'Full desktop application for Windows 10/11',
-      isWorking: true
+      description: "Full desktop application for Windows 10/11",
+      isWorking: true,
     },
     {
-      id: 'macos-app',
-      name: 'Gaia\'s Exchanges for macOS',
-      platform: 'macOS',
-      version: '2.1.0',
-      size: '61.4 MB',
-      icon: '🍎',
-      primaryUrl: 'https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange',
+      id: "macos-app",
+      name: "Gaia's Exchanges for macOS",
+      platform: "macOS",
+      version: "2.1.0",
+      size: "61.4 MB",
+      icon: "🍎",
+      primaryUrl:
+        "https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange",
       fallbackUrls: [
-        'https://apps.apple.com/search?term=gaia+exchanges',
-        'https://github.com/releases/gaia-exchanges'
+        "https://apps.apple.com/search?term=gaia+exchanges",
+        "https://github.com/releases/gaia-exchanges",
       ],
-      storeUrl: 'https://apps.apple.com/search?term=gaia+exchanges',
+      storeUrl: "https://apps.apple.com/search?term=gaia+exchanges",
       verified: true,
-      description: 'Universal binary for Intel and Apple Silicon Macs',
-      isWorking: true
-    }
-  ]
+      description: "Universal binary for Intel and Apple Silicon Macs",
+      isWorking: true,
+    },
+  ];
 
   const handleDownload = async (download: WorkingDownload) => {
-    console.log(`🚀 Starting download/access: ${download.name}`)
-    console.log(`🔗 Official GAiA Token: ${GAIA_TOKEN.CONTRACT_ADDRESS}`)
-    
-    setIsDownloading(prev => ({ ...prev, [download.id]: true }))
-    setDownloadProgress(prev => ({ ...prev, [download.id]: 0 }))
+    console.log(`🚀 Starting download/access: ${download.name}`);
+    console.log(`🔗 Official GAiA Token: ${GAIA_TOKEN.CONTRACT_ADDRESS}`);
+
+    setIsDownloading((prev) => ({ ...prev, [download.id]: true }));
+    setDownloadProgress((prev) => ({ ...prev, [download.id]: 0 }));
 
     try {
       const progressInterval = setInterval(() => {
-        setDownloadProgress(prev => {
-          const current = prev[download.id] || 0
+        setDownloadProgress((prev) => {
+          const current = prev[download.id] || 0;
           if (current >= 100) {
-            clearInterval(progressInterval)
-            return prev
+            clearInterval(progressInterval);
+            return prev;
           }
-          return { ...prev, [download.id]: current + 20 }
-        })
-      }, 300)
+          return { ...prev, [download.id]: current + 20 };
+        });
+      }, 300);
 
-      const urlToOpen = download.primaryUrl
-      
-      if (download.id === 'web-app') {
-        window.open(urlToOpen, '_blank', 'noopener,noreferrer')
-        
+      const urlToOpen = download.primaryUrl;
+
+      if (download.id === "web-app") {
+        window.open(urlToOpen, "_blank", "noopener,noreferrer");
+
         toast.success(`Opening ${download.name}`, {
-          description: '🌍 Culture of Harmony - Official GAiA Platform',
-          duration: 5000
-        })
-      } else if (download.id === 'blackberry-app') {
-        window.open(urlToOpen, '_blank', 'noopener,noreferrer')
-        
+          description: "🌍 Culture of Harmony - Official GAiA Platform",
+          duration: 5000,
+        });
+      } else if (download.id === "blackberry-app") {
+        window.open(urlToOpen, "_blank", "noopener,noreferrer");
+
         // Also open BlackBerry World after delay
         setTimeout(() => {
           if (download.storeUrl) {
-            window.open(download.storeUrl, '_blank', 'noopener,noreferrer')
+            window.open(download.storeUrl, "_blank", "noopener,noreferrer");
           }
-        }, 2000)
-        
+        }, 2000);
+
         toast.success(`Opening ${download.name}`, {
-          description: '📱 BlackBerry OS - Official GAiA Token Support',
-          duration: 5000
-        })
+          description: "📱 BlackBerry OS - Official GAiA Token Support",
+          duration: 5000,
+        });
       } else {
-        window.open(urlToOpen, '_blank', 'noopener,noreferrer')
-        
+        window.open(urlToOpen, "_blank", "noopener,noreferrer");
+
         setTimeout(() => {
           if (download.storeUrl) {
-            window.open(download.storeUrl, '_blank', 'noopener,noreferrer')
+            window.open(download.storeUrl, "_blank", "noopener,noreferrer");
           }
-        }, 2000)
-        
+        }, 2000);
+
         toast.success(`Opening ${download.name}`, {
           description: `📱 ${download.platform} - Harmony of Gaia Token`,
-          duration: 5000
-        })
+          duration: 5000,
+        });
       }
 
       setTimeout(() => {
-        setDownloadProgress(prev => ({ ...prev, [download.id]: 100 }))
-        setIsDownloading(prev => ({ ...prev, [download.id]: false }))
-      }, 1500)
-
+        setDownloadProgress((prev) => ({ ...prev, [download.id]: 100 }));
+        setIsDownloading((prev) => ({ ...prev, [download.id]: false }));
+      }, 1500);
     } catch (error) {
-      console.error(`❌ Error opening ${download.name}:`, error)
-      
+      console.error(`❌ Error opening ${download.name}:`, error);
+
       for (const fallbackUrl of download.fallbackUrls) {
         try {
-          window.open(fallbackUrl, '_blank', 'noopener,noreferrer')
+          window.open(fallbackUrl, "_blank", "noopener,noreferrer");
           toast.info(`Using fallback link for ${download.name}`, {
-            description: 'Opening alternative download source',
-            duration: 3000
-          })
-          break
+            description: "Opening alternative download source",
+            duration: 3000,
+          });
+          break;
         } catch (fallbackError) {
-          console.error('Fallback URL failed:', fallbackError)
+          console.error("Fallback URL failed:", fallbackError);
         }
       }
-      
-      setIsDownloading(prev => ({ ...prev, [download.id]: false }))
+
+      setIsDownloading((prev) => ({ ...prev, [download.id]: false }));
     }
-  }
+  };
 
   const handleStoreLink = (download: WorkingDownload) => {
     if (download.storeUrl) {
-      window.open(download.storeUrl, '_blank', 'noopener,noreferrer')
+      window.open(download.storeUrl, "_blank", "noopener,noreferrer");
       toast.success(`Opening ${download.platform} Store`, {
         description: `🏪 Official store page for ${download.name}`,
-        duration: 3000
-      })
+        duration: 3000,
+      });
     }
-  }
+  };
 
   return (
     <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
@@ -249,7 +257,10 @@ export function WorkingDownloadLinks() {
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {workingDownloads.map((download) => (
-            <Card key={download.id} className="border-border/50 bg-muted/20 hover:bg-muted/30 transition-colors">
+            <Card
+              key={download.id}
+              className="border-border/50 bg-muted/20 hover:bg-muted/30 transition-colors"
+            >
               <CardContent className="p-4 space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="text-3xl">{download.icon}</div>
@@ -265,7 +276,7 @@ export function WorkingDownloadLinks() {
                           Working
                         </Badge>
                       )}
-                      {download.id === 'blackberry-app' && (
+                      {download.id === "blackberry-app" && (
                         <Badge className="bg-orange-600 text-white text-xs">
                           Legacy
                         </Badge>
@@ -276,11 +287,11 @@ export function WorkingDownloadLinks() {
                     <Shield className="h-4 w-4 text-green-400" />
                   )}
                 </div>
-                
+
                 <p className="text-xs text-muted-foreground">
                   {download.description}
                 </p>
-                
+
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between">
                     <span>Version:</span>
@@ -298,7 +309,7 @@ export function WorkingDownloadLinks() {
                     </div>
                   </div>
                 </div>
-                
+
                 {isDownloading[download.id] && (
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs">
@@ -308,7 +319,7 @@ export function WorkingDownloadLinks() {
                     <Progress value={downloadProgress[download.id] || 0} />
                   </div>
                 )}
-                
+
                 <div className="flex gap-2">
                   <Button
                     onClick={() => handleDownload(download)}
@@ -317,9 +328,9 @@ export function WorkingDownloadLinks() {
                     size="sm"
                   >
                     <Download className="h-4 w-4 mr-2" />
-                    {isDownloading[download.id] ? 'Opening...' : 'Access Now'}
+                    {isDownloading[download.id] ? "Opening..." : "Access Now"}
                   </Button>
-                  
+
                   {download.storeUrl && (
                     <Button
                       onClick={() => handleStoreLink(download)}
@@ -334,12 +345,15 @@ export function WorkingDownloadLinks() {
             </Card>
           ))}
         </div>
-        
+
         <div className="mt-6 p-4 rounded-lg bg-blue-900/20 border border-blue-500/20">
           <div className="text-center space-y-2">
-            <h4 className="font-semibold text-blue-400">🌍 Official Harmony of Gaia - Global Access</h4>
+            <h4 className="font-semibold text-blue-400">
+              🌍 Official Harmony of Gaia - Global Access
+            </h4>
             <p className="text-sm text-muted-foreground">
-              All download links are tested and working 100% - Connected to official GAiA token!
+              All download links are tested and working 100% - Connected to
+              official GAiA token!
             </p>
             <div className="text-xs text-green-400 font-mono">
               Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}
@@ -362,5 +376,5 @@ export function WorkingDownloadLinks() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

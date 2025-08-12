@@ -1,61 +1,78 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Separator } from '@/components/ui/separator'
-import { 
-  Coins, 
-  TrendingUp, 
-  Zap, 
-  Shield, 
-  Award, 
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
+import {
+  Coins,
+  TrendingUp,
+  Zap,
+  Shield,
+  Award,
   Gamepad2,
   Factory,
   Hammer,
   Users,
   Target,
-  Flame
-} from 'lucide-react'
-import { toast } from 'sonner'
-import { GAIA_TOKEN } from '@/constants/gaia'
-import { GaiaCoinCrafter } from '@/components/GaiaCoinCrafter'
+  Flame,
+} from "lucide-react";
+import { toast } from "sonner";
+import { GAIA_TOKEN } from "@/constants/gaia";
+import { GaiaCoinCrafter } from "@/components/GaiaCoinCrafter";
 
 export default function CoinCrafter() {
-  const [tokenName, setTokenName] = useState('')
-  const [tokenSymbol, setTokenSymbol] = useState('')
-  const [totalSupply, setTotalSupply] = useState('')
-  const [gaiaRequired, setGaiaRequired] = useState(500)
-  const [userGaiaBalance] = useState(1250)
-  const [createdTokens, setCreatedTokens] = useState(23)
+  const [tokenName, setTokenName] = useState("");
+  const [tokenSymbol, setTokenSymbol] = useState("");
+  const [totalSupply, setTotalSupply] = useState("");
+  const [gaiaRequired, setGaiaRequired] = useState(500);
+  const [userGaiaBalance] = useState(1250);
+  const [createdTokens, setCreatedTokens] = useState(23);
 
   const createCustomToken = () => {
     if (!tokenName || !tokenSymbol || !totalSupply) {
-      toast.error('Please fill in all required fields')
-      return
+      toast.error("Please fill in all required fields");
+      return;
     }
-    
+
     if (userGaiaBalance < gaiaRequired) {
-      toast.error('Insufficient GAiA tokens required for token creation')
-      return
+      toast.error("Insufficient GAiA tokens required for token creation");
+      return;
     }
-    
+
     toast.success(`🎮 Custom Token "${tokenName}" Created!`, {
       description: `${gaiaRequired} GAiA spent • Ready for Gaia Fantasy Game tactics`,
-      duration: 5000
-    })
-    
-    setCreatedTokens(prev => prev + 1)
-  }
+      duration: 5000,
+    });
+
+    setCreatedTokens((prev) => prev + 1);
+  };
 
   const customTokens = [
-    { name: 'DragonFire Token', symbol: 'DFIRE', supply: '10,000', tactics: 'Fire Magic', gaiaSpent: 500 },
-    { name: 'Forest Guardian', symbol: 'FGRD', supply: '25,000', tactics: 'Nature Defense', gaiaSpent: 750 },
-    { name: 'Lightning Strike', symbol: 'LSTK', supply: '5,000', tactics: 'Thunder Attacks', gaiaSpent: 400 },
-  ]
+    {
+      name: "DragonFire Token",
+      symbol: "DFIRE",
+      supply: "10,000",
+      tactics: "Fire Magic",
+      gaiaSpent: 500,
+    },
+    {
+      name: "Forest Guardian",
+      symbol: "FGRD",
+      supply: "25,000",
+      tactics: "Nature Defense",
+      gaiaSpent: 750,
+    },
+    {
+      name: "Lightning Strike",
+      symbol: "LSTK",
+      supply: "5,000",
+      tactics: "Thunder Attacks",
+      gaiaSpent: 400,
+    },
+  ];
 
   return (
     <div className="container mx-auto px-4 py-6 space-y-6">
@@ -64,7 +81,8 @@ export default function CoinCrafter() {
           🏭 GAiA TOKEN ECOSYSTEM
         </h1>
         <p className="text-muted-foreground mt-2">
-          Create custom game tokens • Stabilize GAiA supply • Power your Gaia Fantasy tactics
+          Create custom game tokens • Stabilize GAiA supply • Power your Gaia
+          Fantasy tactics
         </p>
       </div>
 
@@ -86,8 +104,12 @@ export default function CoinCrafter() {
                     <Coins className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-lg font-bold text-green-400">{userGaiaBalance.toLocaleString()} GAiA</div>
-                    <div className="text-sm text-muted-foreground">Your Balance</div>
+                    <div className="text-lg font-bold text-green-400">
+                      {userGaiaBalance.toLocaleString()} GAiA
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Your Balance
+                    </div>
                   </div>
                 </div>
                 <Badge className="bg-green-600 text-white">
@@ -112,28 +134,30 @@ export default function CoinCrafter() {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="token-name">Token Name</Label>
-                  <Input 
+                  <Input
                     id="token-name"
                     value={tokenName}
                     onChange={(e) => setTokenName(e.target.value)}
                     placeholder="e.g., Lightning Warrior Token"
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="token-symbol">Symbol</Label>
-                  <Input 
+                  <Input
                     id="token-symbol"
                     value={tokenSymbol}
-                    onChange={(e) => setTokenSymbol(e.target.value.toUpperCase())}
+                    onChange={(e) =>
+                      setTokenSymbol(e.target.value.toUpperCase())
+                    }
                     placeholder="e.g., LWAR"
                     maxLength={6}
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="total-supply">Supply for Game</Label>
-                  <Input 
+                  <Input
                     id="total-supply"
                     value={totalSupply}
                     onChange={(e) => setTotalSupply(e.target.value)}
@@ -146,18 +170,21 @@ export default function CoinCrafter() {
 
                 <div className="bg-purple-900/20 border border-purple-500/20 rounded-lg p-4">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="font-medium text-purple-400">GAiA Required:</span>
-                    <span className="text-2xl font-bold text-purple-400">{gaiaRequired}</span>
+                    <span className="font-medium text-purple-400">
+                      GAiA Required:
+                    </span>
+                    <span className="text-2xl font-bold text-purple-400">
+                      {gaiaRequired}
+                    </span>
                   </div>
                   <div className="text-xs text-purple-300/80">
-                    • Only usable in Gaia Fantasy Exchange
-                    • Powers character tactics & abilities
-                    • Enhances gameplay strategies
+                    • Only usable in Gaia Fantasy Exchange • Powers character
+                    tactics & abilities • Enhances gameplay strategies
                   </div>
                 </div>
-                
-                <Button 
-                  onClick={createCustomToken} 
+
+                <Button
+                  onClick={createCustomToken}
                   className="w-full bg-gradient-to-r from-purple-600 to-pink-600"
                   disabled={userGaiaBalance < gaiaRequired}
                 >
@@ -177,7 +204,9 @@ export default function CoinCrafter() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="p-4 bg-blue-900/20 rounded-lg">
-                    <div className="font-bold text-blue-400 mb-2">🎯 Tactical Advantages</div>
+                    <div className="font-bold text-blue-400 mb-2">
+                      🎯 Tactical Advantages
+                    </div>
                     <ul className="text-sm space-y-1 text-muted-foreground">
                       <li>• Custom character abilities</li>
                       <li>• Enhanced combat strategies</li>
@@ -185,9 +214,11 @@ export default function CoinCrafter() {
                       <li>• Special skill combinations</li>
                     </ul>
                   </div>
-                  
+
                   <div className="p-4 bg-green-900/20 rounded-lg">
-                    <div className="font-bold text-green-400 mb-2">🔒 Exchange Integration</div>
+                    <div className="font-bold text-green-400 mb-2">
+                      🔒 Exchange Integration
+                    </div>
                     <ul className="text-sm space-y-1 text-muted-foreground">
                       <li>• Trade only in Gaia Fantasy Exchange</li>
                       <li>• Connect with other players</li>
@@ -197,7 +228,9 @@ export default function CoinCrafter() {
                   </div>
 
                   <div className="p-4 bg-purple-900/20 rounded-lg">
-                    <div className="font-bold text-purple-400 mb-2">💎 Rarity System</div>
+                    <div className="font-bold text-purple-400 mb-2">
+                      💎 Rarity System
+                    </div>
                     <ul className="text-sm space-y-1 text-muted-foreground">
                       <li>• Common: 100-500 GAiA cost</li>
                       <li>• Rare: 500-1000 GAiA cost</li>
@@ -214,7 +247,10 @@ export default function CoinCrafter() {
         <TabsContent value="portfolio" className="space-y-4">
           <div className="grid gap-4">
             {customTokens.map((token, index) => (
-              <Card key={index} className="border border-border hover:border-primary/50 transition-colors">
+              <Card
+                key={index}
+                className="border border-border hover:border-primary/50 transition-colors"
+              >
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -223,10 +259,12 @@ export default function CoinCrafter() {
                       </div>
                       <div>
                         <div className="font-bold">{token.name}</div>
-                        <div className="text-sm text-muted-foreground">{token.symbol}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {token.symbol}
+                        </div>
                       </div>
                     </div>
-                    
+
                     <div className="text-right">
                       <Badge className="bg-purple-600 mb-2">
                         {token.tactics}
@@ -236,10 +274,14 @@ export default function CoinCrafter() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="mt-3 pt-3 border-t border-border flex justify-between text-sm">
-                    <span className="text-muted-foreground">GAiA Invested:</span>
-                    <span className="font-bold text-green-400">{token.gaiaSpent}</span>
+                    <span className="text-muted-foreground">
+                      GAiA Invested:
+                    </span>
+                    <span className="font-bold text-green-400">
+                      {token.gaiaSpent}
+                    </span>
                   </div>
                 </CardContent>
               </Card>
@@ -255,7 +297,8 @@ export default function CoinCrafter() {
                 🔥 GAiA SUPPLY FORGE - "The Eternal Stabilizer"
               </CardTitle>
               <p className="text-orange-300">
-                Automated GAiA token creation and burning system that maintains perfect supply balance
+                Automated GAiA token creation and burning system that maintains
+                perfect supply balance
               </p>
             </CardHeader>
             <CardContent>
@@ -273,18 +316,26 @@ export default function CoinCrafter() {
                     The Eternal Stabilizer Concept
                   </h4>
                   <p className="text-orange-300/90 mb-3">
-                    An autonomous AI-powered forge that continuously monitors GAiA token supply and demand. 
-                    When demand increases, it mints new tokens. When supply exceeds demand, it burns excess tokens. 
-                    This ensures GAiA always maintains stable value for the ecosystem.
+                    An autonomous AI-powered forge that continuously monitors
+                    GAiA token supply and demand. When demand increases, it
+                    mints new tokens. When supply exceeds demand, it burns
+                    excess tokens. This ensures GAiA always maintains stable
+                    value for the ecosystem.
                   </p>
                   <div className="grid grid-cols-2 gap-4 mt-4">
                     <div className="text-center p-3 bg-green-900/20 rounded">
                       <div className="text-2xl font-bold text-green-400">∞</div>
-                      <div className="text-sm text-muted-foreground">Eternal Operation</div>
+                      <div className="text-sm text-muted-foreground">
+                        Eternal Operation
+                      </div>
                     </div>
                     <div className="text-center p-3 bg-blue-900/20 rounded">
-                      <div className="text-2xl font-bold text-blue-400">99.9%</div>
-                      <div className="text-sm text-muted-foreground">Stability Rate</div>
+                      <div className="text-2xl font-bold text-blue-400">
+                        99.9%
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        Stability Rate
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -300,7 +351,9 @@ export default function CoinCrafter() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card className="border border-border">
               <CardHeader>
-                <CardTitle className="text-purple-400">🎮 Game Token Metrics</CardTitle>
+                <CardTitle className="text-purple-400">
+                  🎮 Game Token Metrics
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -322,7 +375,9 @@ export default function CoinCrafter() {
 
             <Card className="border border-border">
               <CardHeader>
-                <CardTitle className="text-orange-400">🔥 Stabilizer Analytics</CardTitle>
+                <CardTitle className="text-orange-400">
+                  🔥 Stabilizer Analytics
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -345,5 +400,5 @@ export default function CoinCrafter() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

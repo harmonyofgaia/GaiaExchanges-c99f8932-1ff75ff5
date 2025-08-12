@@ -1,189 +1,198 @@
-import { useState, useRef, useEffect } from 'react'
-import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Slider } from '@/components/ui/slider'
-import { 
-  Play, 
-  Pause, 
-  Square, 
-  SkipForward, 
-  SkipBack, 
+import { useState, useRef, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
+import {
+  Play,
+  Pause,
+  Square,
+  SkipForward,
+  SkipBack,
   Volume2,
   Music,
   Minimize2,
-  Maximize2
-} from 'lucide-react'
-import { toast } from 'sonner'
+  Maximize2,
+} from "lucide-react";
+import { toast } from "sonner";
 
 interface Track {
-  id: string
-  original_name: string
-  storage_path: string
+  id: string;
+  original_name: string;
+  storage_path: string;
 }
 
 export function PersistentAudioControls() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [isMinimized, setIsMinimized] = useState(false)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [currentTrack, setCurrentTrack] = useState<Track | null>(null)
-  const [volume, setVolume] = useState(0.7)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(0)
-  const [playlist, setPlaylist] = useState<Track[]>([])
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const audioRef = useRef<HTMLAudioElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
+  const [volume, setVolume] = useState(0.7);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [playlist, setPlaylist] = useState<Track[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   // Check for background music on mount and listen for changes
   useEffect(() => {
     const checkBackgroundMusic = () => {
       // Listen for events from admin media library
       const handleMediaUpdate = (event: CustomEvent) => {
-        const { track, action } = event.detail
-        
-        if (action === 'play') {
-          setCurrentTrack(track)
-          setIsVisible(true)
-          playTrack(track)
-        } else if (action === 'playlist_update') {
-          setPlaylist(event.detail.tracks || [])
+        const { track, action } = event.detail;
+
+        if (action === "play") {
+          setCurrentTrack(track);
+          setIsVisible(true);
+          playTrack(track);
+        } else if (action === "playlist_update") {
+          setPlaylist(event.detail.tracks || []);
           if (event.detail.tracks?.length > 0) {
-            setIsVisible(true)
+            setIsVisible(true);
           }
         }
-      }
+      };
 
-      window.addEventListener('admin-audio-update', handleMediaUpdate as EventListener)
-      
+      window.addEventListener(
+        "admin-audio-update",
+        handleMediaUpdate as EventListener,
+      );
+
       return () => {
-        window.removeEventListener('admin-audio-update', handleMediaUpdate as EventListener)
-      }
-    }
+        window.removeEventListener(
+          "admin-audio-update",
+          handleMediaUpdate as EventListener,
+        );
+      };
+    };
 
-    checkBackgroundMusic()
-  }, [])
+    checkBackgroundMusic();
+  }, []);
 
   // Audio event handlers
   useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
+    const audio = audioRef.current;
+    if (!audio) return;
 
-    const updateTime = () => setCurrentTime(audio.currentTime)
-    const updateDuration = () => setDuration(audio.duration)
+    const updateTime = () => setCurrentTime(audio.currentTime);
+    const updateDuration = () => setDuration(audio.duration);
     const handleEnded = () => {
-      setIsPlaying(false)
+      setIsPlaying(false);
       if (playlist.length > 1 && currentIndex < playlist.length - 1) {
-        playNext()
+        playNext();
       }
-    }
+    };
 
-    audio.addEventListener('timeupdate', updateTime)
-    audio.addEventListener('loadedmetadata', updateDuration)
-    audio.addEventListener('ended', handleEnded)
+    audio.addEventListener("timeupdate", updateTime);
+    audio.addEventListener("loadedmetadata", updateDuration);
+    audio.addEventListener("ended", handleEnded);
 
     return () => {
-      audio.removeEventListener('timeupdate', updateTime)
-      audio.removeEventListener('loadedmetadata', updateDuration)
-      audio.removeEventListener('ended', handleEnded)
-    }
-  }, [currentIndex, playlist])
+      audio.removeEventListener("timeupdate", updateTime);
+      audio.removeEventListener("loadedmetadata", updateDuration);
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, [currentIndex, playlist]);
 
   // Volume control
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = volume
+      audioRef.current.volume = volume;
     }
-  }, [volume])
+  }, [volume]);
 
   const playTrack = async (track: Track) => {
-    if (!audioRef.current) return
+    if (!audioRef.current) return;
 
     try {
-      const audioUrl = `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`
-      audioRef.current.src = audioUrl
-      await audioRef.current.play()
-      setIsPlaying(true)
-      setCurrentTrack(track)
-      toast.success(`🎵 Now playing: ${track.original_name}`)
+      const audioUrl = `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`;
+      audioRef.current.src = audioUrl;
+      await audioRef.current.play();
+      setIsPlaying(true);
+      setCurrentTrack(track);
+      toast.success(`🎵 Now playing: ${track.original_name}`);
     } catch (error) {
-      console.error('Failed to play track:', error)
-      toast.error('Failed to play audio file')
+      console.error("Failed to play track:", error);
+      toast.error("Failed to play audio file");
     }
-  }
+  };
 
   const togglePlay = async () => {
-    if (!audioRef.current || !currentTrack) return
+    if (!audioRef.current || !currentTrack) return;
 
     if (isPlaying) {
-      audioRef.current.pause()
-      setIsPlaying(false)
+      audioRef.current.pause();
+      setIsPlaying(false);
     } else {
       try {
-        await audioRef.current.play()
-        setIsPlaying(true)
+        await audioRef.current.play();
+        setIsPlaying(true);
       } catch (error) {
-        toast.error('Failed to play audio')
+        toast.error("Failed to play audio");
       }
     }
-  }
+  };
 
   const stopAudio = () => {
     if (audioRef.current) {
-      audioRef.current.pause()
-      audioRef.current.currentTime = 0
-      setIsPlaying(false)
-      setCurrentTime(0)
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      setIsPlaying(false);
+      setCurrentTime(0);
     }
-  }
+  };
 
   const playNext = () => {
-    if (playlist.length === 0) return
-    const nextIndex = (currentIndex + 1) % playlist.length
-    setCurrentIndex(nextIndex)
-    playTrack(playlist[nextIndex])
-  }
+    if (playlist.length === 0) return;
+    const nextIndex = (currentIndex + 1) % playlist.length;
+    setCurrentIndex(nextIndex);
+    playTrack(playlist[nextIndex]);
+  };
 
   const playPrevious = () => {
-    if (playlist.length === 0) return
-    const prevIndex = currentIndex === 0 ? playlist.length - 1 : currentIndex - 1
-    setCurrentIndex(prevIndex)
-    playTrack(playlist[prevIndex])
-  }
+    if (playlist.length === 0) return;
+    const prevIndex =
+      currentIndex === 0 ? playlist.length - 1 : currentIndex - 1;
+    setCurrentIndex(prevIndex);
+    playTrack(playlist[prevIndex]);
+  };
 
   const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60)
-    const secs = Math.floor(seconds % 60)
-    return `${mins}:${secs.toString().padStart(2, '0')}`
-  }
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
 
   const hidePlayer = () => {
-    setIsVisible(false)
+    setIsVisible(false);
     if (audioRef.current) {
-      audioRef.current.pause()
-      setIsPlaying(false)
+      audioRef.current.pause();
+      setIsPlaying(false);
     }
-  }
+  };
 
   if (!isVisible || !currentTrack) {
-    return <audio ref={audioRef} />
+    return <audio ref={audioRef} />;
   }
 
   return (
     <>
       <audio ref={audioRef} />
-      
-      <Card className={`fixed bottom-4 right-4 z-40 border-purple-500/50 bg-black/90 backdrop-blur-md transition-all duration-300 ${
-        isMinimized ? 'w-64 h-16' : 'w-80 h-auto'
-      }`}>
+
+      <Card
+        className={`fixed bottom-4 right-4 z-40 border-purple-500/50 bg-black/90 backdrop-blur-md transition-all duration-300 ${
+          isMinimized ? "w-64 h-16" : "w-80 h-auto"
+        }`}
+      >
         <CardContent className="p-3">
           {/* Header with minimize/close */}
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
               <Music className="h-4 w-4 text-purple-400" />
               <span className="text-sm font-medium text-purple-400">
-                {isMinimized ? '🎵' : 'Background Music'}
+                {isMinimized ? "🎵" : "Background Music"}
               </span>
             </div>
-            
+
             <div className="flex items-center gap-1">
               <Button
                 variant="ghost"
@@ -191,9 +200,13 @@ export function PersistentAudioControls() {
                 onClick={() => setIsMinimized(!isMinimized)}
                 className="h-6 w-6 p-0 text-purple-400 hover:text-purple-300"
               >
-                {isMinimized ? <Maximize2 className="h-3 w-3" /> : <Minimize2 className="h-3 w-3" />}
+                {isMinimized ? (
+                  <Maximize2 className="h-3 w-3" />
+                ) : (
+                  <Minimize2 className="h-3 w-3" />
+                )}
               </Button>
-              
+
               <Button
                 variant="ghost"
                 size="sm"
@@ -227,7 +240,8 @@ export function PersistentAudioControls() {
                   className="w-full"
                   onValueChange={(value) => {
                     if (audioRef.current && duration > 0) {
-                      audioRef.current.currentTime = (value[0] / 100) * duration
+                      audioRef.current.currentTime =
+                        (value[0] / 100) * duration;
                     }
                   }}
                 />
@@ -236,7 +250,9 @@ export function PersistentAudioControls() {
           )}
 
           {/* Controls */}
-          <div className={`flex items-center ${isMinimized ? 'justify-center gap-2' : 'justify-between'}`}>
+          <div
+            className={`flex items-center ${isMinimized ? "justify-center gap-2" : "justify-between"}`}
+          >
             {!isMinimized && (
               <Button
                 variant="ghost"
@@ -255,7 +271,11 @@ export function PersistentAudioControls() {
               onClick={togglePlay}
               className="h-8 w-8 p-0 text-purple-400 hover:text-purple-300"
             >
-              {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+              {isPlaying ? (
+                <Pause className="h-4 w-4" />
+              ) : (
+                <Play className="h-4 w-4" />
+              )}
             </Button>
 
             <Button
@@ -295,5 +315,5 @@ export function PersistentAudioControls() {
         </CardContent>
       </Card>
     </>
-  )
+  );
 }

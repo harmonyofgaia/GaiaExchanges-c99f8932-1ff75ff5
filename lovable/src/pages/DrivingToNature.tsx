@@ -1,14 +1,13 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { 
-  Leaf, 
-  Waves, 
-  TreePine, 
-  Fish, 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import {
+  Leaf,
+  Waves,
+  TreePine,
+  Fish,
   Heart,
   Target,
   DollarSign,
@@ -16,9 +15,9 @@ import {
   Sparkles,
   Globe,
   Music,
-  Volume2
-} from 'lucide-react'
-import { toast } from 'sonner'
+  Volume2,
+} from "lucide-react";
+import { toast } from "sonner";
 
 const DrivingToNature = () => {
   const [coralReefProgress, setCoralReefProgress] = useState({
@@ -27,42 +26,53 @@ const DrivingToNature = () => {
     fundsAllocated: 62500,
     progressPercentage: 12,
     animalsHelped: 1247,
-    reefHealthImprovement: 23
-  })
+    reefHealthImprovement: 23,
+  });
 
   const [soundRiffsStats, setSoundRiffsStats] = useState({
     activeSignals: 15,
-    frequencyRange: '20-2000 Hz',
+    frequencyRange: "20-2000 Hz",
     marineLifeAttracted: 847,
-    ecosystemBalance: 89
-  })
+    ecosystemBalance: 89,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCoralReefProgress(prev => ({
+      setCoralReefProgress((prev) => ({
         ...prev,
         animalsHelped: prev.animalsHelped + Math.floor(Math.random() * 5),
-        reefHealthImprovement: Math.min(prev.reefHealthImprovement + Math.random() * 0.5, 100),
-        progressPercentage: Math.min(prev.progressPercentage + Math.random() * 0.1, 100)
-      }))
+        reefHealthImprovement: Math.min(
+          prev.reefHealthImprovement + Math.random() * 0.5,
+          100,
+        ),
+        progressPercentage: Math.min(
+          prev.progressPercentage + Math.random() * 0.1,
+          100,
+        ),
+      }));
 
-      setSoundRiffsStats(prev => ({
+      setSoundRiffsStats((prev) => ({
         ...prev,
         activeSignals: 12 + Math.floor(Math.random() * 8),
-        marineLifeAttracted: prev.marineLifeAttracted + Math.floor(Math.random() * 3),
-        ecosystemBalance: Math.min(prev.ecosystemBalance + Math.random() * 0.2, 100)
-      }))
-    }, 5000)
+        marineLifeAttracted:
+          prev.marineLifeAttracted + Math.floor(Math.random() * 3),
+        ecosystemBalance: Math.min(
+          prev.ecosystemBalance + Math.random() * 0.2,
+          100,
+        ),
+      }));
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const supportProject = () => {
-    toast.success('🌊 Supporting Sound Riffs Re Grau dio!', {
-      description: '5% of all GAiA token burns automatically support coral reef restoration!',
-      duration: 5000
-    })
-  }
+    toast.success("🌊 Supporting Sound Riffs Re Grau dio!", {
+      description:
+        "5% of all GAiA token burns automatically support coral reef restoration!",
+      duration: 5000,
+    });
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -88,10 +98,10 @@ const DrivingToNature = () => {
               left: `${10 + i * 15}%`,
               bottom: `${10 + Math.random() * 30}%`,
               animationDelay: `${i * 0.3}s`,
-              animationDuration: `${8 + Math.random() * 4}s`
+              animationDuration: `${8 + Math.random() * 4}s`,
             }}
           >
-            <TreePine 
+            <TreePine
               className={`h-${8 + Math.floor(Math.random() * 12)} w-${6 + Math.floor(Math.random() * 8)} text-green-400 opacity-${60 + Math.floor(Math.random() * 40)}`}
             />
           </div>
@@ -105,7 +115,7 @@ const DrivingToNature = () => {
               className="absolute bottom-0 animate-waves"
               style={{
                 left: `${i * 12.5}%`,
-                animationDelay: `${i * 0.5}s`
+                animationDelay: `${i * 0.5}s`,
               }}
             >
               <Waves className="h-16 w-16 text-blue-300 opacity-70" />
@@ -122,7 +132,7 @@ const DrivingToNature = () => {
               top: `${20 + Math.random() * 40}%`,
               left: `${-10}%`,
               animationDelay: `${i * 2}s`,
-              animationDuration: `${6 + Math.random() * 4}s`
+              animationDuration: `${6 + Math.random() * 4}s`,
             }}
           >
             <Fish className="h-8 w-8 text-cyan-400 opacity-80" />
@@ -138,7 +148,7 @@ const DrivingToNature = () => {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 80}%`,
               animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`
+              animationDuration: `${3 + Math.random() * 4}s`,
             }}
           >
             <Leaf className="h-4 w-4 text-green-300 opacity-60" />
@@ -147,8 +157,8 @@ const DrivingToNature = () => {
 
         {/* Logo Decoration */}
         <div className="absolute top-10 right-10 opacity-20">
-          <img 
-            src="/lovable-uploads/78f81378-5535-4da5-bb6c-28f9a9866f3e.png" 
+          <img
+            src="/lovable-uploads/78f81378-5535-4da5-bb6c-28f9a9866f3e.png"
             alt="Gaia Logo"
             className="w-32 h-32 object-contain animate-pulse"
           />
@@ -181,7 +191,9 @@ const DrivingToNature = () => {
             <div className="text-center">
               <div className="text-6xl mb-4">🪸🎵🌊</div>
               <p className="text-xl text-cyan-300 mb-6">
-                Revolutionary underwater audio technology restoring coral reefs through balanced sound frequencies that attract marine life and stimulate coral growth
+                Revolutionary underwater audio technology restoring coral reefs
+                through balanced sound frequencies that attract marine life and
+                stimulate coral growth
               </p>
             </div>
 
@@ -189,15 +201,21 @@ const DrivingToNature = () => {
               <Card className="bg-cyan-500/10 border border-cyan-500/20">
                 <CardContent className="pt-4 text-center">
                   <Volume2 className="h-6 w-6 text-cyan-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-cyan-400">{soundRiffsStats.activeSignals}</div>
-                  <div className="text-xs text-cyan-300">Active Audio Signals</div>
+                  <div className="text-2xl font-bold text-cyan-400">
+                    {soundRiffsStats.activeSignals}
+                  </div>
+                  <div className="text-xs text-cyan-300">
+                    Active Audio Signals
+                  </div>
                 </CardContent>
               </Card>
 
               <Card className="bg-blue-500/10 border border-blue-500/20">
                 <CardContent className="pt-4 text-center">
                   <Waves className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-blue-400">{soundRiffsStats.frequencyRange}</div>
+                  <div className="text-2xl font-bold text-blue-400">
+                    {soundRiffsStats.frequencyRange}
+                  </div>
                   <div className="text-xs text-blue-300">Frequency Range</div>
                 </CardContent>
               </Card>
@@ -205,49 +223,83 @@ const DrivingToNature = () => {
               <Card className="bg-green-500/10 border border-green-500/20">
                 <CardContent className="pt-4 text-center">
                   <Fish className="h-6 w-6 text-green-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-green-400">{soundRiffsStats.marineLifeAttracted}</div>
-                  <div className="text-xs text-green-300">Marine Life Attracted</div>
+                  <div className="text-2xl font-bold text-green-400">
+                    {soundRiffsStats.marineLifeAttracted}
+                  </div>
+                  <div className="text-xs text-green-300">
+                    Marine Life Attracted
+                  </div>
                 </CardContent>
               </Card>
 
               <Card className="bg-purple-500/10 border border-purple-500/20">
                 <CardContent className="pt-4 text-center">
                   <Heart className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-purple-400">{soundRiffsStats.ecosystemBalance.toFixed(1)}%</div>
-                  <div className="text-xs text-purple-300">Ecosystem Balance</div>
+                  <div className="text-2xl font-bold text-purple-400">
+                    {soundRiffsStats.ecosystemBalance.toFixed(1)}%
+                  </div>
+                  <div className="text-xs text-purple-300">
+                    Ecosystem Balance
+                  </div>
                 </CardContent>
               </Card>
             </div>
 
             <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-6">
-              <h4 className="text-xl font-bold text-cyan-400 mb-4 text-center">🎵 How Sound Riffs Re Grau dio Works</h4>
+              <h4 className="text-xl font-bold text-cyan-400 mb-4 text-center">
+                🎵 How Sound Riffs Re Grau dio Works
+              </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
-                    <span className="text-cyan-300">🔊 Emit balanced underwater audio frequencies (20-2000 Hz)</span>
+                    <div className="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center text-white font-bold">
+                      1
+                    </div>
+                    <span className="text-cyan-300">
+                      🔊 Emit balanced underwater audio frequencies (20-2000 Hz)
+                    </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
-                    <span className="text-blue-300">🐟 Attract fish and marine organisms to damaged reef areas</span>
+                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                      2
+                    </div>
+                    <span className="text-blue-300">
+                      🐟 Attract fish and marine organisms to damaged reef areas
+                    </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
-                    <span className="text-green-300">🪸 Stimulate natural coral growth and reproduction</span>
+                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">
+                      3
+                    </div>
+                    <span className="text-green-300">
+                      🪸 Stimulate natural coral growth and reproduction
+                    </span>
                   </div>
                 </div>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold">4</div>
-                    <span className="text-purple-300">🌊 Restore natural ecosystem balance and biodiversity</span>
+                    <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold">
+                      4
+                    </div>
+                    <span className="text-purple-300">
+                      🌊 Restore natural ecosystem balance and biodiversity
+                    </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold">5</div>
-                    <span className="text-yellow-300">📈 Monitor and measure recovery progress in real-time</span>
+                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold">
+                      5
+                    </div>
+                    <span className="text-yellow-300">
+                      📈 Monitor and measure recovery progress in real-time
+                    </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold">6</div>
-                    <span className="text-pink-300">🔬 Apply scientific research for optimal results</span>
+                    <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold">
+                      6
+                    </div>
+                    <span className="text-pink-300">
+                      🔬 Apply scientific research for optimal results
+                    </span>
                   </div>
                 </div>
               </div>
@@ -266,20 +318,37 @@ const DrivingToNature = () => {
           <CardContent className="space-y-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
-                <div className="text-3xl font-bold text-green-400">{coralReefProgress.sitesRestored}/{coralReefProgress.totalSites}</div>
-                <div className="text-sm text-muted-foreground">Reef Sites Active</div>
+                <div className="text-3xl font-bold text-green-400">
+                  {coralReefProgress.sitesRestored}/
+                  {coralReefProgress.totalSites}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Reef Sites Active
+                </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-400">${coralReefProgress.fundsAllocated.toLocaleString()}</div>
-                <div className="text-sm text-muted-foreground">Funds Allocated</div>
+                <div className="text-3xl font-bold text-cyan-400">
+                  ${coralReefProgress.fundsAllocated.toLocaleString()}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Funds Allocated
+                </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400">{coralReefProgress.animalsHelped}</div>
-                <div className="text-sm text-muted-foreground">Marine Animals Helped</div>
+                <div className="text-3xl font-bold text-blue-400">
+                  {coralReefProgress.animalsHelped}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Marine Animals Helped
+                </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-purple-400">{coralReefProgress.reefHealthImprovement.toFixed(1)}%</div>
-                <div className="text-sm text-muted-foreground">Reef Health Improvement</div>
+                <div className="text-3xl font-bold text-purple-400">
+                  {coralReefProgress.reefHealthImprovement.toFixed(1)}%
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Reef Health Improvement
+                </div>
               </div>
             </div>
 
@@ -288,11 +357,14 @@ const DrivingToNature = () => {
                 <span>Overall Restoration Progress</span>
                 <span>{coralReefProgress.progressPercentage.toFixed(1)}%</span>
               </div>
-              <Progress value={coralReefProgress.progressPercentage} className="h-4" />
+              <Progress
+                value={coralReefProgress.progressPercentage}
+                className="h-4"
+              />
             </div>
 
             <div className="text-center">
-              <Button 
+              <Button
                 onClick={supportProject}
                 className="bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 hover:from-cyan-700 hover:via-blue-700 hover:to-green-700 text-white font-bold py-4 px-8"
               >
@@ -306,26 +378,42 @@ const DrivingToNature = () => {
         {/* Project Mission */}
         <Card className="bg-gradient-to-br from-blue-900/30 to-green-900/30 border-2 border-blue-500/50">
           <CardContent className="p-8 text-center">
-            <h3 className="text-4xl font-bold text-blue-400 mb-6">🌍 MISSION: HARMONY BETWEEN TECHNOLOGY & NATURE</h3>
+            <h3 className="text-4xl font-bold text-blue-400 mb-6">
+              🌍 MISSION: HARMONY BETWEEN TECHNOLOGY & NATURE
+            </h3>
             <p className="text-xl text-muted-foreground mb-6">
-              Every GAiA token burned drives us closer to restoring our planet's coral reefs. 
-              Through Sound Riffs Re Grau dio technology, we're proving that innovation can heal nature.
+              Every GAiA token burned drives us closer to restoring our planet's
+              coral reefs. Through Sound Riffs Re Grau dio technology, we're
+              proving that innovation can heal nature.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="p-6 bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-lg border border-cyan-500/20">
                 <Globe className="h-12 w-12 text-cyan-400 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-cyan-400 mb-2">Global Impact</h4>
-                <p className="text-sm text-muted-foreground">Restoring coral reefs worldwide through innovative audio technology</p>
+                <h4 className="text-xl font-bold text-cyan-400 mb-2">
+                  Global Impact
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  Restoring coral reefs worldwide through innovative audio
+                  technology
+                </p>
               </div>
               <div className="p-6 bg-gradient-to-br from-green-900/30 to-teal-900/30 rounded-lg border border-green-500/20">
                 <Heart className="h-12 w-12 text-green-400 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-green-400 mb-2">Ecosystem Revival</h4>
-                <p className="text-sm text-muted-foreground">Bringing marine life back to damaged reef ecosystems</p>
+                <h4 className="text-xl font-bold text-green-400 mb-2">
+                  Ecosystem Revival
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  Bringing marine life back to damaged reef ecosystems
+                </p>
               </div>
               <div className="p-6 bg-gradient-to-br from-blue-900/30 to-purple-900/30 rounded-lg border border-blue-500/20">
                 <TrendingUp className="h-12 w-12 text-blue-400 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-blue-400 mb-2">Sustainable Future</h4>
-                <p className="text-sm text-muted-foreground">Building a future where technology serves nature's recovery</p>
+                <h4 className="text-xl font-bold text-blue-400 mb-2">
+                  Sustainable Future
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  Building a future where technology serves nature's recovery
+                </p>
               </div>
             </div>
           </CardContent>
@@ -382,7 +470,7 @@ const DrivingToNature = () => {
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default DrivingToNature
+export default DrivingToNature;

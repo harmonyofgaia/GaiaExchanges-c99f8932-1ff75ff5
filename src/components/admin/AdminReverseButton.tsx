@@ -1,50 +1,55 @@
-
-import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { RotateCcw, Eye, EyeOff } from 'lucide-react'
-import { useSecureAdmin } from '@/hooks/useSecureAdmin'
-import { toast } from 'sonner'
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { RotateCcw, Eye, EyeOff } from "lucide-react";
+import { useSecureAdmin } from "@/hooks/useSecureAdmin";
+import { toast } from "sonner";
 
 interface AdminReverseButtonProps {
-  onReverse?: () => void
+  onReverse?: () => void;
 }
 
 export function AdminReverseButton({ onReverse }: AdminReverseButtonProps) {
-  const { isAdmin } = useSecureAdmin()
-  const [isVisible, setIsVisible] = useState(false)
-  const [isEnabled, setIsEnabled] = useState(true)
+  const { isAdmin } = useSecureAdmin();
+  const [isVisible, setIsVisible] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
 
   // Load visibility setting from localStorage
   useEffect(() => {
-    const savedVisibility = localStorage.getItem('admin-reverse-button-visible')
-    setIsVisible(savedVisibility === 'true')
-  }, [])
+    const savedVisibility = localStorage.getItem(
+      "admin-reverse-button-visible",
+    );
+    setIsVisible(savedVisibility === "true");
+  }, []);
 
   // Don't render if not admin
-  if (!isAdmin) return null
+  if (!isAdmin) return null;
 
   const handleReverse = () => {
     if (onReverse) {
-      onReverse()
+      onReverse();
     } else {
       // Default reverse action - show instruction to user
-      toast.info('Reverse Last Action', {
-        description: 'Go to chat history and click "Restore" on the previous edit to revert changes.',
-        duration: 5000
-      })
+      toast.info("Reverse Last Action", {
+        description:
+          'Go to chat history and click "Restore" on the previous edit to revert changes.',
+        duration: 5000,
+      });
     }
-  }
+  };
 
   const toggleVisibility = () => {
-    const newVisibility = !isVisible
-    setIsVisible(newVisibility)
-    localStorage.setItem('admin-reverse-button-visible', newVisibility.toString())
-    
-    toast.success(`Reverse button ${newVisibility ? 'enabled' : 'disabled'}`, {
-      description: `Admin reverse button is now ${newVisibility ? 'visible' : 'hidden'} on all pages.`,
-      duration: 3000
-    })
-  }
+    const newVisibility = !isVisible;
+    setIsVisible(newVisibility);
+    localStorage.setItem(
+      "admin-reverse-button-visible",
+      newVisibility.toString(),
+    );
+
+    toast.success(`Reverse button ${newVisibility ? "enabled" : "disabled"}`, {
+      description: `Admin reverse button is now ${newVisibility ? "visible" : "hidden"} on all pages.`,
+      duration: 3000,
+    });
+  };
 
   return (
     <>
@@ -54,7 +59,11 @@ export function AdminReverseButton({ onReverse }: AdminReverseButtonProps) {
         className="fixed top-4 right-4 z-50 bg-purple-600 hover:bg-purple-700 opacity-50 hover:opacity-100 transition-all duration-300"
         size="sm"
       >
-        {isVisible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+        {isVisible ? (
+          <EyeOff className="h-4 w-4" />
+        ) : (
+          <Eye className="h-4 w-4" />
+        )}
       </Button>
 
       {/* Reverse button - conditionally visible */}
@@ -70,5 +79,5 @@ export function AdminReverseButton({ onReverse }: AdminReverseButtonProps) {
         </Button>
       )}
     </>
-  )
+  );
 }

@@ -1,9 +1,8 @@
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { GlobalMarketingEngine } from '@/components/marketing/GlobalMarketingEngine'
-import { GlobalSEOOptimizer } from '@/components/seo/GlobalSEOOptimizer'
-import { InvestorAcquisitionSystem } from '@/components/investor/InvestorAcquisitionSystem'
-import { AppStoreLinks } from '@/components/AppStoreLinks'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { GlobalMarketingEngine } from "@/components/marketing/GlobalMarketingEngine";
+import { GlobalSEOOptimizer } from "@/components/seo/GlobalSEOOptimizer";
+import { InvestorAcquisitionSystem } from "@/components/investor/InvestorAcquisitionSystem";
+import { AppStoreLinks } from "@/components/AppStoreLinks";
 
 const GlobalMarketingDashboard = () => {
   return (
@@ -14,48 +13,62 @@ const GlobalMarketingDashboard = () => {
             🚀 Global Marketing & Investor Acquisition
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Making Culture of Harmony #1 Worldwide - Finding 20 Investors × €100 in 1 Hour
+            Making Culture of Harmony #1 Worldwide - Finding 20 Investors × €100
+            in 1 Hour
           </p>
           <p className="text-sm text-green-400 mt-2">
-            🌟 "Seeds Will Form Into Music" - Building Path of Global Success Together! 🌟
+            🌟 "Seeds Will Form Into Music" - Building Path of Global Success
+            Together! 🌟
           </p>
         </div>
 
         <Tabs defaultValue="marketing" className="w-full">
           <TabsList className="grid w-full grid-cols-4 bg-black/50 backdrop-blur-md border border-green-500/20">
-            <TabsTrigger value="marketing" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+            <TabsTrigger
+              value="marketing"
+              className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400"
+            >
               🚀 Global Marketing
             </TabsTrigger>
-            <TabsTrigger value="investors" className="data-[state=active]:bg-gold-500/20 data-[state=active]:text-gold-400">
+            <TabsTrigger
+              value="investors"
+              className="data-[state=active]:bg-gold-500/20 data-[state=active]:text-gold-400"
+            >
               💰 Investor Hunter
             </TabsTrigger>
-            <TabsTrigger value="seo" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
+            <TabsTrigger
+              value="seo"
+              className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400"
+            >
               🔍 SEO Optimizer
             </TabsTrigger>
-            <TabsTrigger value="platforms" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
+            <TabsTrigger
+              value="platforms"
+              className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400"
+            >
               📱 Platform Access
             </TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="marketing" className="space-y-6 mt-6">
             <GlobalMarketingEngine />
           </TabsContent>
-          
+
           <TabsContent value="investors" className="space-y-6 mt-6">
             <InvestorAcquisitionSystem />
           </TabsContent>
-          
+
           <TabsContent value="seo" className="space-y-6 mt-6">
             <GlobalSEOOptimizer />
           </TabsContent>
-          
+
           <TabsContent value="platforms" className="space-y-6 mt-6">
             <AppStoreLinks />
           </TabsContent>
         </Tabs>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default GlobalMarketingDashboard
+export default GlobalMarketingDashboard;

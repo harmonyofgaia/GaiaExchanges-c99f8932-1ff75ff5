@@ -1,79 +1,85 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { Brain, TrendingUp, Eye, Zap, Target, Activity } from 'lucide-react'
-import { toast } from 'sonner'
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Brain, TrendingUp, Eye, Zap, Target, Activity } from "lucide-react";
+import { toast } from "sonner";
 
 interface Prediction {
-  type: string
-  probability: number
-  timeframe: string
-  impact: 'Low' | 'Medium' | 'High'
-  description: string
+  type: string;
+  probability: number;
+  timeframe: string;
+  impact: "Low" | "Medium" | "High";
+  description: string;
 }
 
 export function PsychohistoricalEngine() {
-  const [isActive, setIsActive] = useState(true)
-  const [predictionAccuracy, setPredictionAccuracy] = useState(94.7)
-  const [dataPoints, setDataPoints] = useState(15847629)
+  const [isActive, setIsActive] = useState(true);
+  const [predictionAccuracy, setPredictionAccuracy] = useState(94.7);
+  const [dataPoints, setDataPoints] = useState(15847629);
   const [predictions, setPredictions] = useState<Prediction[]>([
     {
-      type: 'Market Trend',
+      type: "Market Trend",
       probability: 87,
-      timeframe: '24 hours',
-      impact: 'High',
-      description: 'GAIA token price likely to increase by 15-25%'
+      timeframe: "24 hours",
+      impact: "High",
+      description: "GAIA token price likely to increase by 15-25%",
     },
     {
-      type: 'User Behavior',
+      type: "User Behavior",
       probability: 92,
-      timeframe: '7 days',
-      impact: 'Medium',
-      description: 'Bike usage expected to surge in urban areas'
+      timeframe: "7 days",
+      impact: "Medium",
+      description: "Bike usage expected to surge in urban areas",
     },
     {
-      type: 'Security Event',
+      type: "Security Event",
       probability: 23,
-      timeframe: '48 hours',
-      impact: 'Low',
-      description: 'Minor security scanning attempts predicted'
+      timeframe: "48 hours",
+      impact: "Low",
+      description: "Minor security scanning attempts predicted",
     },
     {
-      type: 'Network Growth',
+      type: "Network Growth",
       probability: 78,
-      timeframe: '30 days',
-      impact: 'High',
-      description: 'New user registrations likely to double'
-    }
-  ])
+      timeframe: "30 days",
+      impact: "High",
+      description: "New user registrations likely to double",
+    },
+  ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDataPoints(prev => prev + Math.floor(Math.random() * 100) + 50)
-      setPredictionAccuracy(prev => Math.min(99.9, prev + (Math.random() - 0.5) * 0.1))
-    }, 3000)
+      setDataPoints((prev) => prev + Math.floor(Math.random() * 100) + 50);
+      setPredictionAccuracy((prev) =>
+        Math.min(99.9, prev + (Math.random() - 0.5) * 0.1),
+      );
+    }, 3000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const runAnalysis = () => {
-    setIsActive(false)
-    toast.info('🧠 Running psychohistorical analysis...')
-    
+    setIsActive(false);
+    toast.info("🧠 Running psychohistorical analysis...");
+
     setTimeout(() => {
-      setIsActive(true)
-      toast.success('Analysis complete! New predictions generated.')
-      
+      setIsActive(true);
+      toast.success("Analysis complete! New predictions generated.");
+
       // Update predictions with slight variations
-      setPredictions(prev => prev.map(p => ({
-        ...p,
-        probability: Math.max(10, Math.min(95, p.probability + (Math.random() - 0.5) * 10))
-      })))
-    }, 3000)
-  }
+      setPredictions((prev) =>
+        prev.map((p) => ({
+          ...p,
+          probability: Math.max(
+            10,
+            Math.min(95, p.probability + (Math.random() - 0.5) * 10),
+          ),
+        })),
+      );
+    }, 3000);
+  };
 
   return (
     <div className="space-y-6">
@@ -82,12 +88,15 @@ export function PsychohistoricalEngine() {
           <CardTitle className="text-purple-400 flex items-center gap-2">
             <Brain className="h-6 w-6" />
             🔮 Psychohistorical Prediction Engine
-            <Badge className={`${isActive ? 'bg-green-600' : 'bg-orange-600'} animate-pulse`}>
-              {isActive ? 'ACTIVE' : 'ANALYZING'}
+            <Badge
+              className={`${isActive ? "bg-green-600" : "bg-orange-600"} animate-pulse`}
+            >
+              {isActive ? "ACTIVE" : "ANALYZING"}
             </Badge>
           </CardTitle>
           <p className="text-muted-foreground text-sm mt-2">
-            This secure admin dashboard displays all innovative ideas generated by our psychohistorical engine.
+            This secure admin dashboard displays all innovative ideas generated
+            by our psychohistorical engine.
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -95,18 +104,26 @@ export function PsychohistoricalEngine() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 bg-green-900/20 rounded-lg text-center">
               <Activity className="h-6 w-6 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">{predictionAccuracy.toFixed(1)}%</div>
+              <div className="text-2xl font-bold text-green-400">
+                {predictionAccuracy.toFixed(1)}%
+              </div>
               <div className="text-sm text-muted-foreground">Accuracy Rate</div>
             </div>
             <div className="p-4 bg-blue-900/20 rounded-lg text-center">
               <Eye className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">{dataPoints.toLocaleString()}</div>
+              <div className="text-2xl font-bold text-blue-400">
+                {dataPoints.toLocaleString()}
+              </div>
               <div className="text-sm text-muted-foreground">Data Points</div>
             </div>
             <div className="p-4 bg-purple-900/20 rounded-lg text-center">
               <Target className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-purple-400">{predictions.length}</div>
-              <div className="text-sm text-muted-foreground">Active Predictions</div>
+              <div className="text-2xl font-bold text-purple-400">
+                {predictions.length}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Active Predictions
+              </div>
             </div>
           </div>
 
@@ -121,7 +138,9 @@ export function PsychohistoricalEngine() {
 
           {/* Current Predictions */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-purple-400">Current Predictions</h3>
+            <h3 className="text-lg font-semibold text-purple-400">
+              Current Predictions
+            </h3>
             {predictions.map((prediction, index) => (
               <Card key={index} className="border-gray-700/50">
                 <CardContent className="pt-4">
@@ -129,10 +148,15 @@ export function PsychohistoricalEngine() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <h4 className="font-semibold">{prediction.type}</h4>
-                        <Badge className={`text-xs ${
-                          prediction.impact === 'High' ? 'bg-red-600' :
-                          prediction.impact === 'Medium' ? 'bg-orange-600' : 'bg-green-600'
-                        }`}>
+                        <Badge
+                          className={`text-xs ${
+                            prediction.impact === "High"
+                              ? "bg-red-600"
+                              : prediction.impact === "Medium"
+                                ? "bg-orange-600"
+                                : "bg-green-600"
+                          }`}
+                        >
                           {prediction.impact} Impact
                         </Badge>
                       </div>
@@ -147,7 +171,9 @@ export function PsychohistoricalEngine() {
                       <div className="text-2xl font-bold text-purple-400">
                         {prediction.probability}%
                       </div>
-                      <div className="text-xs text-muted-foreground">Probability</div>
+                      <div className="text-xs text-muted-foreground">
+                        Probability
+                      </div>
                     </div>
                   </div>
                   <Progress value={prediction.probability} className="h-2" />
@@ -164,10 +190,10 @@ export function PsychohistoricalEngine() {
               className="bg-purple-600 hover:bg-purple-700 flex-1"
             >
               <Brain className="h-4 w-4 mr-2" />
-              {isActive ? 'Run Deep Analysis' : 'Analyzing...'}
+              {isActive ? "Run Deep Analysis" : "Analyzing..."}
             </Button>
             <Button
-              onClick={() => toast.info('Historical data exported')}
+              onClick={() => toast.info("Historical data exported")}
               variant="outline"
             >
               <TrendingUp className="h-4 w-4 mr-2" />
@@ -177,5 +203,5 @@ export function PsychohistoricalEngine() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

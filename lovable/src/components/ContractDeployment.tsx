@@ -1,50 +1,53 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { toast } from 'sonner'
-import { 
-  FileText, 
-  Shield, 
-  Code, 
-  Download, 
-  CheckCircle, 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { toast } from "sonner";
+import {
+  FileText,
+  Shield,
+  Code,
+  Download,
+  CheckCircle,
   AlertTriangle,
   Globe,
   Lock,
   Zap,
   ExternalLink,
-  Copy
-} from 'lucide-react'
+  Copy,
+} from "lucide-react";
 
 interface ContractTemplate {
-  name: string
-  description: string
-  features: string[]
-  securityLevel: 'Standard' | 'Enhanced' | 'Military-Grade'
-  code: string
+  name: string;
+  description: string;
+  features: string[];
+  securityLevel: "Standard" | "Enhanced" | "Military-Grade";
+  code: string;
 }
 
 export function ContractDeployment() {
-  const [selectedContract, setSelectedContract] = useState<string>('gaia-token')
-  const [deploymentStatus, setDeploymentStatus] = useState<'ready' | 'deploying' | 'deployed' | 'error'>('ready')
-  const [contractAddress, setContractAddress] = useState<string>('')
+  const [selectedContract, setSelectedContract] =
+    useState<string>("gaia-token");
+  const [deploymentStatus, setDeploymentStatus] = useState<
+    "ready" | "deploying" | "deployed" | "error"
+  >("ready");
+  const [contractAddress, setContractAddress] = useState<string>("");
 
   const contractTemplates: Record<string, ContractTemplate> = {
-    'gaia-token': {
-      name: 'GAiA Token (ERC-20)',
-      description: 'Advanced ERC-20 token with burning, staking, and governance features',
+    "gaia-token": {
+      name: "GAiA Token (ERC-20)",
+      description:
+        "Advanced ERC-20 token with burning, staking, and governance features",
       features: [
-        'ERC-20 Standard Compliance',
-        'Automatic Burning Mechanism',
-        'Staking & Rewards System',
-        'Governance & Voting Rights',
-        'Multi-Signature Security',
-        'Pausable Emergency Features'
+        "ERC-20 Standard Compliance",
+        "Automatic Burning Mechanism",
+        "Staking & Rewards System",
+        "Governance & Voting Rights",
+        "Multi-Signature Security",
+        "Pausable Emergency Features",
       ],
-      securityLevel: 'Military-Grade',
+      securityLevel: "Military-Grade",
       code: `// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
@@ -122,20 +125,20 @@ contract GaiaToken is ERC20, ERC20Burnable, ERC20Pausable, Ownable, ReentrancyGu
     ) internal override(ERC20, ERC20Pausable) {
         super._beforeTokenTransfer(from, to, amount);
     }
-}`
+}`,
     },
-    'gaia-exchange': {
-      name: 'GAiA Exchange DEX',
-      description: 'Decentralized exchange with automated market making',
+    "gaia-exchange": {
+      name: "GAiA Exchange DEX",
+      description: "Decentralized exchange with automated market making",
       features: [
-        'Automated Market Making (AMM)',
-        'Liquidity Pool Management',
-        'Flash Loan Protection',
-        'Multi-Token Support',
-        'Fee Distribution System',
-        'Governance Integration'
+        "Automated Market Making (AMM)",
+        "Liquidity Pool Management",
+        "Flash Loan Protection",
+        "Multi-Token Support",
+        "Fee Distribution System",
+        "Governance Integration",
       ],
-      securityLevel: 'Military-Grade',
+      securityLevel: "Military-Grade",
       code: `// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
@@ -271,57 +274,57 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
     function authorizeToken(address token) external onlyOwner {
         authorizedTokens[token] = true;
     }
-}`
-    }
-  }
+}`,
+    },
+  };
 
   const handleDownloadContract = (contractType: string) => {
-    const contract = contractTemplates[contractType]
-    const blob = new Blob([contract.code], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${contractType}.sol`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-    
-    toast.success('Contract Downloaded', {
-      description: `${contract.name} smart contract saved successfully`
-    })
-  }
+    const contract = contractTemplates[contractType];
+    const blob = new Blob([contract.code], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${contractType}.sol`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    toast.success("Contract Downloaded", {
+      description: `${contract.name} smart contract saved successfully`,
+    });
+  };
 
   const handleCopyContract = (contractType: string) => {
-    const contract = contractTemplates[contractType]
-    navigator.clipboard.writeText(contract.code)
-    toast.success('Contract Copied', {
-      description: 'Smart contract code copied to clipboard'
-    })
-  }
+    const contract = contractTemplates[contractType];
+    navigator.clipboard.writeText(contract.code);
+    toast.success("Contract Copied", {
+      description: "Smart contract code copied to clipboard",
+    });
+  };
 
   const simulateDeployment = async () => {
-    setDeploymentStatus('deploying')
-    
+    setDeploymentStatus("deploying");
+
     try {
       // Simulate deployment process
-      await new Promise(resolve => setTimeout(resolve, 3000))
-      
-      const mockAddress = `0x${Math.random().toString(16).slice(2, 42)}`
-      setContractAddress(mockAddress)
-      setDeploymentStatus('deployed')
-      
-      toast.success('Contract Deployed Successfully', {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      const mockAddress = `0x${Math.random().toString(16).slice(2, 42)}`;
+      setContractAddress(mockAddress);
+      setDeploymentStatus("deployed");
+
+      toast.success("Contract Deployed Successfully", {
         description: `Contract deployed to: ${mockAddress}`,
-        duration: 5000
-      })
+        duration: 5000,
+      });
     } catch (error) {
-      setDeploymentStatus('error')
-      toast.error('Deployment Failed', {
-        description: 'Please check your configuration and try again'
-      })
+      setDeploymentStatus("error");
+      toast.error("Deployment Failed", {
+        description: "Please check your configuration and try again",
+      });
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -338,32 +341,41 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
               <TabsTrigger value="gaia-token">GAiA Token</TabsTrigger>
               <TabsTrigger value="gaia-exchange">GAiA Exchange</TabsTrigger>
             </TabsList>
-            
+
             {Object.entries(contractTemplates).map(([key, contract]) => (
               <TabsContent key={key} value={key} className="space-y-4">
                 <div className="p-4 rounded-lg bg-muted/20 border border-border/50">
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-semibold text-lg">{contract.name}</h3>
-                    <Badge className={`${
-                      contract.securityLevel === 'Military-Grade' ? 'bg-red-600' :
-                      contract.securityLevel === 'Enhanced' ? 'bg-orange-600' :
-                      'bg-green-600'
-                    } text-white`}>
+                    <Badge
+                      className={`${
+                        contract.securityLevel === "Military-Grade"
+                          ? "bg-red-600"
+                          : contract.securityLevel === "Enhanced"
+                            ? "bg-orange-600"
+                            : "bg-green-600"
+                      } text-white`}
+                    >
                       <Shield className="h-3 w-3 mr-1" />
                       {contract.securityLevel}
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-4">{contract.description}</p>
-                  
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {contract.description}
+                  </p>
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
                     {contract.features.map((feature, index) => (
-                      <div key={index} className="flex items-center gap-2 text-sm">
+                      <div
+                        key={index}
+                        className="flex items-center gap-2 text-sm"
+                      >
                         <CheckCircle className="h-3 w-3 text-green-400" />
                         <span>{feature}</span>
                       </div>
                     ))}
                   </div>
-                  
+
                   <div className="flex gap-3 flex-wrap">
                     <Button
                       onClick={() => handleDownloadContract(key)}
@@ -381,10 +393,10 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
                     </Button>
                     <Button
                       onClick={simulateDeployment}
-                      disabled={deploymentStatus === 'deploying'}
+                      disabled={deploymentStatus === "deploying"}
                       className="bg-purple-600 hover:bg-purple-700"
                     >
-                      {deploymentStatus === 'deploying' ? (
+                      {deploymentStatus === "deploying" ? (
                         <>
                           <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                           Deploying...
@@ -401,16 +413,22 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
               </TabsContent>
             ))}
           </Tabs>
-          
-          {deploymentStatus === 'deployed' && contractAddress && (
+
+          {deploymentStatus === "deployed" && contractAddress && (
             <div className="mt-4 p-4 rounded-lg bg-green-900/20 border border-green-500/20">
               <div className="flex items-center gap-2 mb-2">
                 <CheckCircle className="h-5 w-5 text-green-400" />
-                <h4 className="font-semibold text-green-400">Contract Deployed Successfully</h4>
+                <h4 className="font-semibold text-green-400">
+                  Contract Deployed Successfully
+                </h4>
               </div>
               <div className="text-sm">
-                <span className="text-muted-foreground">Contract Address: </span>
-                <code className="text-green-400 font-mono">{contractAddress}</code>
+                <span className="text-muted-foreground">
+                  Contract Address:{" "}
+                </span>
+                <code className="text-green-400 font-mono">
+                  {contractAddress}
+                </code>
               </div>
             </div>
           )}
@@ -428,7 +446,9 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 rounded-lg bg-muted/20 border border-border/50">
-              <h4 className="font-semibold text-blue-400 mb-2">Regulatory Compliance</h4>
+              <h4 className="font-semibold text-blue-400 mb-2">
+                Regulatory Compliance
+              </h4>
               <ul className="text-sm space-y-1 text-muted-foreground">
                 <li>• SEC Token Registration Framework</li>
                 <li>• CFTC Derivatives Compliance</li>
@@ -437,9 +457,11 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
                 <li>• SOX Financial Reporting</li>
               </ul>
             </div>
-            
+
             <div className="p-4 rounded-lg bg-muted/20 border border-border/50">
-              <h4 className="font-semibold text-purple-400 mb-2">Security Audits</h4>
+              <h4 className="font-semibold text-purple-400 mb-2">
+                Security Audits
+              </h4>
               <ul className="text-sm space-y-1 text-muted-foreground">
                 <li>• OpenZeppelin Security Standards</li>
                 <li>• Certik Smart Contract Audit</li>
@@ -449,36 +471,50 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
               </ul>
             </div>
           </div>
-          
+
           <div className="p-4 rounded-lg bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-500/20">
             <div className="flex items-start gap-2">
               <AlertTriangle className="h-5 w-5 text-yellow-400 mt-0.5" />
               <div>
-                <h4 className="font-semibold text-yellow-400">Important Legal Notice</h4>
+                <h4 className="font-semibold text-yellow-400">
+                  Important Legal Notice
+                </h4>
                 <p className="text-sm text-muted-foreground mt-1">
-                  These smart contracts are templates and require proper legal review, 
-                  regulatory compliance verification, and professional audit before deployment 
-                  to mainnet for commercial use.
+                  These smart contracts are templates and require proper legal
+                  review, regulatory compliance verification, and professional
+                  audit before deployment to mainnet for commercial use.
                 </p>
               </div>
             </div>
           </div>
-          
+
           <div className="flex gap-4 flex-wrap">
             <Button variant="outline" className="border-green-500/20" asChild>
-              <a href="https://docs.openzeppelin.com/contracts/" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://docs.openzeppelin.com/contracts/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ExternalLink className="h-4 w-4 mr-2" />
                 OpenZeppelin Docs
               </a>
             </Button>
             <Button variant="outline" className="border-blue-500/20" asChild>
-              <a href="https://ethereum.org/en/developers/docs/smart-contracts/security/" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://ethereum.org/en/developers/docs/smart-contracts/security/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Security Best Practices
               </a>
             </Button>
             <Button variant="outline" className="border-purple-500/20" asChild>
-              <a href="https://github.com/crytic/slither" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/crytic/slither"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Slither Analysis Tool
               </a>
@@ -487,5 +523,5 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
