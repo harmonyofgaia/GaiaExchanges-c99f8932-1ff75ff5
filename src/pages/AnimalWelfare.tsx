@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import {
   Heart,
   Shield,
@@ -13,6 +14,12 @@ import {
   Gamepad2,
   Hammer,
   TreePine,
+  MapPin,
+  AlertTriangle,
+  Users,
+  Zap,
+  Award,
+  Target,
 } from "lucide-react";
 import { AnimalRescueNFT } from "@/components/nft/AnimalRescueNFT";
 import { MinecraftLandscapeBuilder } from "@/components/MinecraftLandscapeBuilder";
@@ -21,11 +28,28 @@ import { RealTimeAnimalTracker } from "@/components/RealTimeAnimalTracker";
 import { AnimalWelfareWalletManager } from "@/components/animal-welfare/AnimalWelfareWalletManager";
 import { AnimalNFTMarketplace } from "@/components/animal-welfare/AnimalNFTMarketplace";
 import { RealAnimalDatabase } from "@/components/animal-welfare/RealAnimalDatabase";
+import { GlobalAnimalRescue } from "@/components/animal-welfare/GlobalAnimalRescue";
+import { LiveAnimalCameras } from "@/components/animal-welfare/LiveAnimalCameras";
+import { AnimalConservationProjects } from "@/components/animal-welfare/AnimalConservationProjects";
+import { AnimalWelfareAnalytics } from "@/components/animal-welfare/AnimalWelfareAnalytics";
 import { toast } from "sonner";
 
 export default function AnimalWelfare() {
   const [activeAnimals, setActiveAnimals] = useState(247);
   const [tokensRaised, setTokensRaised] = useState(1547820);
+  const [globalRescues, setGlobalRescues] = useState(12847);
+  const [sanctuariesSupported, setSanctuariesSupported] = useState(89);
+  const [liveCameras, setLiveCameras] = useState(156);
+
+  // Simulate real-time updates
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveAnimals(prev => prev + Math.floor(Math.random() * 3));
+      setTokensRaised(prev => prev + Math.floor(Math.random() * 100));
+      setGlobalRescues(prev => prev + Math.floor(Math.random() * 2));
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   const launchIntoGame = (gameName: string) => {
     toast.success(`🎮 Launching into ${gameName}!`, {
@@ -37,46 +61,82 @@ export default function AnimalWelfare() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20 p-6">
       <div className="container mx-auto space-y-8">
-        {/* Header */}
+        {/* Enhanced Header with Global Stats */}
         <Card className="border-2 border-green-500/50 bg-gradient-to-r from-green-900/30 to-blue-900/30">
           <CardHeader>
             <CardTitle className="text-center text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-              🐾 ANIMAL WELFARE & NFT ECOSYSTEM
+              🌍 GLOBAL ANIMAL WELFARE ECOSYSTEM
             </CardTitle>
             <p className="text-center text-xl text-muted-foreground">
-              Real Animals • Real Impact • NFT Integration • Gaming Connected
+              Real Animals • Global Rescue • Live Conservation • NFT Integration • Gaming Connected
             </p>
-            <div className="flex justify-center gap-4 flex-wrap mt-4">
-              <Badge className="bg-green-600">
-                <Heart className="h-4 w-4 mr-1" />
-                {activeAnimals} Animals Protected
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-6">
+              <Badge className="bg-green-600 p-3 text-center">
+                <div className="flex flex-col items-center">
+                  <Heart className="h-5 w-5 mb-1" />
+                  <span className="text-lg font-bold">{activeAnimals.toLocaleString()}</span>
+                  <span className="text-xs">Animals Protected</span>
+                </div>
               </Badge>
-              <Badge className="bg-blue-600">
-                <Shield className="h-4 w-4 mr-1" />
-                {tokensRaised.toLocaleString()} GAiA Raised
+              <Badge className="bg-blue-600 p-3 text-center">
+                <div className="flex flex-col items-center">
+                  <Shield className="h-5 w-5 mb-1" />
+                  <span className="text-lg font-bold">{tokensRaised.toLocaleString()}</span>
+                  <span className="text-xs">GAiA Raised</span>
+                </div>
               </Badge>
-              <Badge className="bg-purple-600">
-                <Star className="h-4 w-4 mr-1" />
-                NFT Powered
+              <Badge className="bg-purple-600 p-3 text-center">
+                <div className="flex flex-col items-center">
+                  <Globe className="h-5 w-5 mb-1" />
+                  <span className="text-lg font-bold">{globalRescues.toLocaleString()}</span>
+                  <span className="text-xs">Global Rescues</span>
+                </div>
+              </Badge>
+              <Badge className="bg-orange-600 p-3 text-center">
+                <div className="flex flex-col items-center">
+                  <TreePine className="h-5 w-5 mb-1" />
+                  <span className="text-lg font-bold">{sanctuariesSupported}</span>
+                  <span className="text-xs">Sanctuaries</span>
+                </div>
+              </Badge>
+              <Badge className="bg-red-600 p-3 text-center">
+                <div className="flex flex-col items-center">
+                  <Camera className="h-5 w-5 mb-1" />
+                  <span className="text-lg font-bold">{liveCameras}</span>
+                  <span className="text-xs">Live Cameras</span>
+                </div>
+              </Badge>
+              <Badge className="bg-pink-600 p-3 text-center">
+                <div className="flex flex-col items-center">
+                  <Star className="h-5 w-5 mb-1" />
+                  <span className="text-lg font-bold">24/7</span>
+                  <span className="text-xs">Active Monitoring</span>
+                </div>
               </Badge>
             </div>
           </CardHeader>
         </Card>
 
-        {/* Main Tabs */}
+        {/* Enhanced Main Tabs */}
         <Tabs defaultValue="rescue" className="w-full">
-          <TabsList className="grid w-full grid-cols-7">
-            <TabsTrigger value="rescue">🆘 Animal Rescue</TabsTrigger>
-            <TabsTrigger value="database">🦎 Real Animals</TabsTrigger>
-            <TabsTrigger value="cameras">📹 Live Cameras</TabsTrigger>
-            <TabsTrigger value="vr">🥽 VR Experience</TabsTrigger>
-            <TabsTrigger value="marketplace">🏪 NFT Marketplace</TabsTrigger>
-            <TabsTrigger value="gaming">🎮 Gaming</TabsTrigger>
-            <TabsTrigger value="wallet">💰 Wallet & Fees</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-9 gap-1">
+            <TabsTrigger value="rescue" className="text-xs">🆘 Rescue</TabsTrigger>
+            <TabsTrigger value="global" className="text-xs">🌍 Global</TabsTrigger>
+            <TabsTrigger value="database" className="text-xs">🦎 Database</TabsTrigger>
+            <TabsTrigger value="cameras" className="text-xs">📹 Live Cams</TabsTrigger>
+            <TabsTrigger value="conservation" className="text-xs">🌿 Projects</TabsTrigger>
+            <TabsTrigger value="marketplace" className="text-xs">🏪 NFT Market</TabsTrigger>
+            <TabsTrigger value="vr" className="text-xs">🥽 VR</TabsTrigger>
+            <TabsTrigger value="gaming" className="text-xs">🎮 Gaming</TabsTrigger>
+            <TabsTrigger value="analytics" className="text-xs">📊 Analytics</TabsTrigger>
           </TabsList>
 
           <TabsContent value="rescue" className="space-y-6">
             <AnimalRescueNFT />
+          </TabsContent>
+
+          <TabsContent value="global" className="space-y-6">
+            <GlobalAnimalRescue />
           </TabsContent>
 
           <TabsContent value="database" className="space-y-6">
@@ -84,7 +144,11 @@ export default function AnimalWelfare() {
           </TabsContent>
 
           <TabsContent value="cameras" className="space-y-6">
-            <RealTimeAnimalTracker />
+            <LiveAnimalCameras />
+          </TabsContent>
+
+          <TabsContent value="conservation" className="space-y-6">
+            <AnimalConservationProjects />
           </TabsContent>
 
           <TabsContent value="vr" className="space-y-6">
@@ -143,9 +207,21 @@ export default function AnimalWelfare() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="wallet" className="space-y-6">
-            <AnimalWelfareWalletManager />
+          <TabsContent value="analytics" className="space-y-6">
+            <AnimalWelfareAnalytics />
           </TabsContent>
+
+          {/* Wallet Section - Always Visible */}
+          <Card className="border-2 border-yellow-500/50 bg-gradient-to-r from-yellow-900/30 to-orange-900/30 mt-8">
+            <CardHeader>
+              <CardTitle className="text-center text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+                💰 Animal Welfare Funding Hub
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <AnimalWelfareWalletManager />
+            </CardContent>
+          </Card>
         </Tabs>
       </div>
     </div>
