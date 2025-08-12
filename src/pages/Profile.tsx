@@ -1,8 +1,7 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { User, Shield, Settings, Trophy, Wallet } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { User, Shield, Settings, Trophy, Wallet } from "lucide-react";
 
 const Profile = () => {
   return (
@@ -27,11 +26,15 @@ const Profile = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="text-sm text-muted-foreground">Username</label>
+                <label className="text-sm text-muted-foreground">
+                  Username
+                </label>
                 <p className="font-medium">GaiaWarrior2024</p>
               </div>
               <div>
-                <label className="text-sm text-muted-foreground">Member Since</label>
+                <label className="text-sm text-muted-foreground">
+                  Member Since
+                </label>
                 <p className="font-medium">January 2024</p>
               </div>
               <div>
@@ -117,7 +120,7 @@ const Profile = () => {
         </Card>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

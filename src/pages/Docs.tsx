@@ -1,6 +1,5 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Shield, Book, Code, Zap } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Shield, Book, Code, Zap } from "lucide-react";
 
 const Docs = () => {
   return (
@@ -90,9 +89,7 @@ const Docs = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-red-300">
-                What the Trained Dragon can do:
-              </p>
+              <p className="text-red-300">What the Trained Dragon can do:</p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                 <li>🔥 Destroy malicious systems</li>
                 <li>🌐 Block worldwide IP addresses</li>
@@ -111,8 +108,9 @@ const Docs = () => {
               🚨 SECURITY WARNING 🚨
             </h3>
             <p className="text-yellow-300 mb-4">
-              The Dragon Security System is extremely powerful and will automatically protect all assets.
-              Any attempt to breach the system will result in immediate and permanent consequences.
+              The Dragon Security System is extremely powerful and will
+              automatically protect all assets. Any attempt to breach the system
+              will result in immediate and permanent consequences.
             </p>
             <p className="text-red-400 font-bold">
               🐉 THE DRAGON NEVER SLEEPS - FULL PROTECTION ACTIVE 24/7 🐉
@@ -121,7 +119,7 @@ const Docs = () => {
         </Card>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Docs
+export default Docs;

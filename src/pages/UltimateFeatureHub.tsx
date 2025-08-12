@@ -1,11 +1,10 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { AllFeaturesIntegrated } from '@/components/AllFeaturesIntegrated'
-import { ComprehensiveSystemIntegration } from '@/components/ComprehensiveSystemIntegration'
-import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
-import { Crown, Zap, Globe, Shield, Star, Flame } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { AllFeaturesIntegrated } from "@/components/AllFeaturesIntegrated";
+import { ComprehensiveSystemIntegration } from "@/components/ComprehensiveSystemIntegration";
+import { UniversalGaiaLogo } from "@/components/branding/UniversalGaiaLogo";
+import { Crown, Zap, Globe, Shield, Star, Flame } from "lucide-react";
 
 const UltimateFeatureHub = () => {
   return (
@@ -13,8 +12,8 @@ const UltimateFeatureHub = () => {
       <div className="container mx-auto px-6 py-8">
         {/* Header with Gaia Logo */}
         <div className="flex items-center justify-center mb-8">
-          <UniversalGaiaLogo 
-            size="xl" 
+          <UniversalGaiaLogo
+            size="xl"
             animated={true}
             showText={true}
             className="hover:scale-105 transition-transform duration-300"
@@ -35,13 +34,16 @@ const UltimateFeatureHub = () => {
                 🚀 Every Feature • Every Tool • Every Power • Every Dream
               </div>
               <div className="text-xl text-blue-400">
-                🌟 Quantum Defense • Dragon Protection • Admin God Powers • Galaxy Control
+                🌟 Quantum Defense • Dragon Protection • Admin God Powers •
+                Galaxy Control
               </div>
               <div className="text-lg text-green-400">
-                ⚡ Virtual Worlds • Live Animals • Environmental Impact • Universal Currency
+                ⚡ Virtual Worlds • Live Animals • Environmental Impact •
+                Universal Currency
               </div>
               <div className="text-md text-cyan-400">
-                🛡️ Unbreakable Security • Self-Training AI • Immortal Systems • Infinite Possibilities
+                🛡️ Unbreakable Security • Self-Training AI • Immortal Systems •
+                Infinite Possibilities
               </div>
             </div>
           </CardHeader>
@@ -90,7 +92,9 @@ const UltimateFeatureHub = () => {
         <Tabs defaultValue="all-features" className="w-full">
           <TabsList className="grid w-full grid-cols-6 mb-6">
             <TabsTrigger value="all-features">🌟 All Features</TabsTrigger>
-            <TabsTrigger value="system-integration">⚡ System Integration</TabsTrigger>
+            <TabsTrigger value="system-integration">
+              ⚡ System Integration
+            </TabsTrigger>
             <TabsTrigger value="quantum-powers">🛡️ Quantum Powers</TabsTrigger>
             <TabsTrigger value="admin-control">👑 Admin Control</TabsTrigger>
             <TabsTrigger value="galaxy-status">🌌 Galaxy Status</TabsTrigger>
@@ -120,16 +124,28 @@ const UltimateFeatureHub = () => {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="p-4 bg-red-900/30 rounded-lg border border-red-500/30">
-                      <div className="text-2xl font-bold text-red-400">QUANTUM DEFENSE</div>
-                      <div className="text-sm text-muted-foreground">Impossible to penetrate</div>
+                      <div className="text-2xl font-bold text-red-400">
+                        QUANTUM DEFENSE
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        Impossible to penetrate
+                      </div>
                     </div>
                     <div className="p-4 bg-blue-900/30 rounded-lg border border-blue-500/30">
-                      <div className="text-2xl font-bold text-blue-400">DRAGON CORE</div>
-                      <div className="text-sm text-muted-foreground">Self-training immortal protection</div>
+                      <div className="text-2xl font-bold text-blue-400">
+                        DRAGON CORE
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        Self-training immortal protection
+                      </div>
                     </div>
                     <div className="p-4 bg-green-900/30 rounded-lg border border-green-500/30">
-                      <div className="text-2xl font-bold text-green-400">GALAXY SHIELD</div>
-                      <div className="text-sm text-muted-foreground">Universal coverage active</div>
+                      <div className="text-2xl font-bold text-green-400">
+                        GALAXY SHIELD
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        Universal coverage active
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -151,7 +167,8 @@ const UltimateFeatureHub = () => {
                     UNLIMITED • UNRESTRICTED • UNMATCHED
                   </div>
                   <div className="text-lg text-muted-foreground">
-                    Complete control over every system, feature, and cosmic power in the GAiA Universe
+                    Complete control over every system, feature, and cosmic
+                    power in the GAiA Universe
                   </div>
                 </div>
               </CardContent>
@@ -168,20 +185,34 @@ const UltimateFeatureHub = () => {
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   <div className="text-center p-4 bg-green-900/30 rounded-lg">
-                    <div className="text-3xl font-bold text-green-400">100%</div>
-                    <div className="text-sm text-muted-foreground">System Health</div>
+                    <div className="text-3xl font-bold text-green-400">
+                      100%
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      System Health
+                    </div>
                   </div>
                   <div className="text-center p-4 bg-blue-900/30 rounded-lg">
                     <div className="text-3xl font-bold text-blue-400">∞</div>
-                    <div className="text-sm text-muted-foreground">Processing Power</div>
+                    <div className="text-sm text-muted-foreground">
+                      Processing Power
+                    </div>
                   </div>
                   <div className="text-center p-4 bg-purple-900/30 rounded-lg">
-                    <div className="text-3xl font-bold text-purple-400">SUPREME</div>
-                    <div className="text-sm text-muted-foreground">Defense Level</div>
+                    <div className="text-3xl font-bold text-purple-400">
+                      SUPREME
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Defense Level
+                    </div>
                   </div>
                   <div className="text-center p-4 bg-yellow-900/30 rounded-lg">
-                    <div className="text-3xl font-bold text-yellow-400">GALAXY</div>
-                    <div className="text-sm text-muted-foreground">Coverage</div>
+                    <div className="text-3xl font-bold text-yellow-400">
+                      GALAXY
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Coverage
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -202,15 +233,25 @@ const UltimateFeatureHub = () => {
                     "A PLAN THAT HUMANITY WILL NEVER FORGET!"
                   </div>
                   <div className="text-lg text-muted-foreground max-w-4xl mx-auto">
-                    Every feature, every tool, every power, every dream has been integrated into one supreme galaxy-wide platform. 
-                    Quantum defense protects us, dragons guard our community, admin powers control the universe, 
-                    and environmental impact creates positive change for all living beings.
+                    Every feature, every tool, every power, every dream has been
+                    integrated into one supreme galaxy-wide platform. Quantum
+                    defense protects us, dragons guard our community, admin
+                    powers control the universe, and environmental impact
+                    creates positive change for all living beings.
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <Badge className="bg-purple-600 text-white p-4 text-lg">Virtual Worlds</Badge>
-                    <Badge className="bg-blue-600 text-white p-4 text-lg">Live Animals</Badge>
-                    <Badge className="bg-green-600 text-white p-4 text-lg">Environmental Impact</Badge>
-                    <Badge className="bg-yellow-600 text-white p-4 text-lg">Quantum Security</Badge>
+                    <Badge className="bg-purple-600 text-white p-4 text-lg">
+                      Virtual Worlds
+                    </Badge>
+                    <Badge className="bg-blue-600 text-white p-4 text-lg">
+                      Live Animals
+                    </Badge>
+                    <Badge className="bg-green-600 text-white p-4 text-lg">
+                      Environmental Impact
+                    </Badge>
+                    <Badge className="bg-yellow-600 text-white p-4 text-lg">
+                      Quantum Security
+                    </Badge>
                   </div>
                 </div>
               </CardContent>
@@ -219,7 +260,7 @@ const UltimateFeatureHub = () => {
         </Tabs>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UltimateFeatureHub
+export default UltimateFeatureHub;
