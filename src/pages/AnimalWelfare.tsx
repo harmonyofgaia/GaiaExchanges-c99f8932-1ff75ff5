@@ -46,19 +46,24 @@ export default function AnimalWelfare() {
             <p className="text-center text-xl text-muted-foreground">
               Real Animals • Real Impact • NFT Integration • Gaming Connected
             </p>
-            <div className="flex justify-center gap-4 flex-wrap mt-4">
-              <Badge className="bg-green-600">
-                <Heart className="h-4 w-4 mr-1" />
-                {activeAnimals} Animals Protected
-              </Badge>
-              <Badge className="bg-blue-600">
-                <Shield className="h-4 w-4 mr-1" />
-                {tokensRaised.toLocaleString()} GAiA Raised
-              </Badge>
-              <Badge className="bg-purple-600">
-                <Star className="h-4 w-4 mr-1" />
-                NFT Powered
-              </Badge>
+            <div className="flex justify-center gap-0 flex-wrap mt-4 relative z-10">
+              <div className="relative -mx-2 flex">
+                <div className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-green-400 via-green-500 to-blue-400 px-8 py-4 flex flex-col items-center border-4 border-white/40 -mr-4 z-30">
+                  <Heart className="h-6 w-6 mb-1 text-white drop-shadow" />
+                  <span className="text-lg font-bold text-white drop-shadow">{activeAnimals}</span>
+                  <span className="text-xs text-white/80">Animals Protected</span>
+                </div>
+                <div className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-blue-400 via-blue-500 to-purple-400 px-8 py-4 flex flex-col items-center border-4 border-white/40 z-20">
+                  <Shield className="h-6 w-6 mb-1 text-white drop-shadow" />
+                  <span className="text-lg font-bold text-white drop-shadow">{tokensRaised.toLocaleString()}</span>
+                  <span className="text-xs text-white/80">GAiA Raised</span>
+                </div>
+                <div className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-300 px-8 py-4 flex flex-col items-center border-4 border-white/40 -ml-4 z-10">
+                  <Star className="h-6 w-6 mb-1 text-white drop-shadow" />
+                  <span className="text-lg font-bold text-white drop-shadow">NFT</span>
+                  <span className="text-xs text-white/80">Powered</span>
+                </div>
+              </div>
             </div>
           </CardHeader>
         </Card>
