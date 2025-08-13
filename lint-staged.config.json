@@ -1,0 +1,10 @@
+{
+  "*.{js,ts,tsx,jsx,css,md,json}": [
+    "prettier --write",
+    "eslint --fix"
+  ],
+  "*.{ts,tsx,js,jsx}": [
+    "npx tsc --noEmit",
+    "vitest run --silent"
+  ]
+}
