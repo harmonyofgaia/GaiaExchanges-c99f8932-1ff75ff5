@@ -9,7 +9,6 @@
     "tailwind:build": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.output.css --minify",
     "lint": "eslint . --ext .js,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.ts,.tsx --fix",
-    "prepare": "husky install",
     "test": "echo \"No test runner configured\""
   },
   "dependencies": {
