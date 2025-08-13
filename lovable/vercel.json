@@ -1,7 +1,6 @@
 {
   "buildCommand": "npm run build:vercel",
   "outputDirectory": "dist",
-  "rootDirectory": "lovable",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "rewrites": [
