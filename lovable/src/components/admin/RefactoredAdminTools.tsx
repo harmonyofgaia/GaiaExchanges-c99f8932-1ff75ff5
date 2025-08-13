@@ -1,19 +1,20 @@
-import { ParabolicAIThinking } from "./ParabolicAIThinking";
-import { AutonomousMastermind } from "./AutonomousMastermind";
-import { DefenseCreatureArmy } from "./DefenseCreatureArmy";
-import { SearchTrackingSuite } from "./SearchTrackingSuite";
-import { EntertainmentRewardsHub } from "./EntertainmentRewardsHub";
-import { AutonomousSystemTracker } from "./AutonomousSystemTracker";
-import { AdvancedAdminControl } from "./AdvancedAdminControl";
-import { PredictiveOptimization } from "./PredictiveOptimization";
-import { SupremeSearchTracking } from "./SupremeSearchTracking";
-import { QuantumEncryptedCommunications } from "./QuantumEncryptedCommunications";
-import { AIThreatPredictionSystem } from "./AIThreatPredictionSystem";
-import { GlobalNetworkHoneypots } from "./GlobalNetworkHoneypots";
-import { RealTimeCounterAttack } from "./RealTimeCounterAttack";
-import { BiometricAccessControl } from "./BiometricAccessControl";
-import { BlockchainSecurityLogs } from "./BlockchainSecurityLogs";
-import { MultiDimensionalFirewall } from "./MultiDimensionalFirewall";
+
+import { ParabolicAIThinking } from './ParabolicAIThinking'
+import { AutonomousMastermind } from './AutonomousMastermind'
+import { DefenseCreatureArmy } from './DefenseCreatureArmy'
+import { SearchTrackingSuite } from './SearchTrackingSuite'
+import { EntertainmentRewardsHub } from './EntertainmentRewardsHub'
+import { AutonomousSystemTracker } from './AutonomousSystemTracker'
+import { AdvancedAdminControl } from './AdvancedAdminControl'
+import { PredictiveOptimization } from './PredictiveOptimization'
+import { SupremeSearchTracking } from './SupremeSearchTracking'
+import { QuantumEncryptedCommunications } from './QuantumEncryptedCommunications'
+import { AIThreatPredictionSystem } from './AIThreatPredictionSystem'
+import { GlobalNetworkHoneypots } from './GlobalNetworkHoneypots'
+import { RealTimeCounterAttack } from './RealTimeCounterAttack'
+import { BiometricAccessControl } from './BiometricAccessControl'
+import { BlockchainSecurityLogs } from './BlockchainSecurityLogs'
+import { MultiDimensionalFirewall } from './MultiDimensionalFirewall'
 
 function RefactoredAdminTools() {
   return (
@@ -26,19 +27,19 @@ function RefactoredAdminTools() {
       <BiometricAccessControl />
       <BlockchainSecurityLogs />
       <MultiDimensionalFirewall />
-
+      
       {/* Phase 1: Core Autonomous Engine */}
       <AutonomousSystemTracker />
-
+      
       {/* Phase 2 & 3: Advanced Admin Control */}
       <AdvancedAdminControl />
-
+      
       {/* Phase 4: Predictive Optimization */}
       <PredictiveOptimization />
-
+      
       {/* Supreme Search & Tracking */}
       <SupremeSearchTracking />
-
+      
       {/* Enhanced Original Components */}
       <ParabolicAIThinking />
       <AutonomousMastermind />
@@ -46,7 +47,7 @@ function RefactoredAdminTools() {
       <SearchTrackingSuite />
       <EntertainmentRewardsHub />
     </div>
-  );
+  )
 }
 
-export default RefactoredAdminTools;
+export default RefactoredAdminTools

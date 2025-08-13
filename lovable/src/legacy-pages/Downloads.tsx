@@ -1,18 +1,13 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Download,
-  Smartphone,
-  Monitor,
-  Tablet,
-  Shield,
-  Star,
-} from "lucide-react";
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Download, Smartphone, Monitor, Tablet, Shield, Star } from 'lucide-react'
 
 const Downloads = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-green-900/20">
+      
       <div className="ml-16 min-h-screen">
         <div className="container mx-auto px-6 py-8">
           <Card className="mb-8 border-purple-500/30 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
@@ -151,16 +146,15 @@ const Downloads = () => {
             </CardHeader>
             <CardContent>
               <p className="text-red-300">
-                Always download GAiA applications from official sources only.
-                Verify the authenticity of downloads and never share your
-                private keys or wallet information.
+                Always download GAiA applications from official sources only. 
+                Verify the authenticity of downloads and never share your private keys or wallet information.
               </p>
             </CardContent>
           </Card>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Downloads;
+export default Downloads

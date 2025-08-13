@@ -1,8 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Target, MapPin, Trophy, Zap, Users } from "lucide-react";
-import { Navbar } from "@/components/Navbar";
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Target, MapPin, Trophy, Zap, Users } from 'lucide-react'
+import { Navbar } from '@/components/Navbar'
 
 export default function EcoMissions() {
   const missions = [
@@ -14,7 +15,7 @@ export default function EcoMissions() {
       difficulty: "Medium",
       participants: 1247,
       timeLeft: "5 days",
-      type: "Community",
+      type: "Community"
     },
     {
       id: 2,
@@ -24,7 +25,7 @@ export default function EcoMissions() {
       difficulty: "Easy",
       participants: 892,
       timeLeft: "12 hours",
-      type: "Individual",
+      type: "Individual"
     },
     {
       id: 3,
@@ -34,9 +35,9 @@ export default function EcoMissions() {
       difficulty: "Hard",
       participants: 156,
       timeLeft: "2 weeks",
-      type: "Expert",
-    },
-  ];
+      type: "Expert"
+    }
+  ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 text-white">
@@ -50,17 +51,11 @@ export default function EcoMissions() {
             Master Plan v7: AI-Powered Mission Generation and Tracking
           </p>
           <div className="flex gap-4 mt-4">
-            <Badge
-              variant="outline"
-              className="border-green-500/50 text-green-400"
-            >
+            <Badge variant="outline" className="border-green-500/50 text-green-400">
               <Target className="h-3 w-3 mr-1" />
               AI Generated
             </Badge>
-            <Badge
-              variant="outline"
-              className="border-blue-500/50 text-blue-400"
-            >
+            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
               <MapPin className="h-3 w-3 mr-1" />
               Geolocation
             </Badge>
@@ -100,56 +95,40 @@ export default function EcoMissions() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {missions.map((mission) => (
-            <Card
-              key={mission.id}
-              className="bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20 hover:scale-105 transition-all duration-300"
-            >
+            <Card key={mission.id} className="bg-gradient-to-br from-black/50 to-gray-900/50 border-gray-700/20 hover:scale-105 transition-all duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-white">
                   <Target className="h-5 w-5 text-green-400" />
                   {mission.title}
                 </CardTitle>
                 <div className="flex gap-2">
-                  <Badge
-                    className={`${
-                      mission.difficulty === "Easy"
-                        ? "bg-green-600"
-                        : mission.difficulty === "Medium"
-                          ? "bg-yellow-600"
-                          : "bg-red-600"
-                    }`}
-                  >
+                  <Badge className={`${
+                    mission.difficulty === 'Easy' ? 'bg-green-600' :
+                    mission.difficulty === 'Medium' ? 'bg-yellow-600' : 'bg-red-600'
+                  }`}>
                     {mission.difficulty}
                   </Badge>
                   <Badge className="bg-blue-600">{mission.type}</Badge>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  {mission.description}
-                </p>
-
+                <p className="text-muted-foreground mb-4">{mission.description}</p>
+                
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Reward</span>
-                    <span className="text-green-400 font-bold">
-                      {mission.reward}
-                    </span>
+                    <span className="text-green-400 font-bold">{mission.reward}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Participants</span>
-                    <span className="text-white font-bold">
-                      {mission.participants.toLocaleString()}
-                    </span>
+                    <span className="text-white font-bold">{mission.participants.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Time Left</span>
-                    <span className="text-orange-400 font-bold">
-                      {mission.timeLeft}
-                    </span>
+                    <span className="text-orange-400 font-bold">{mission.timeLeft}</span>
                   </div>
                 </div>
-
+                
                 <Button className="w-full mt-6 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
                   <Target className="h-4 w-4 mr-2" />
                   Join Mission
@@ -160,5 +139,5 @@ export default function EcoMissions() {
         </div>
       </div>
     </div>
-  );
+  )
 }

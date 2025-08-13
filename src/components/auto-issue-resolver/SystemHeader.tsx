@@ -1,8 +1,9 @@
-import { Shield, RefreshCw } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+
+import { Shield, RefreshCw } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
 
 interface SystemHeaderProps {
-  lastCheck: Date;
+  lastCheck: Date
 }
 
 export function SystemHeader({ lastCheck }: SystemHeaderProps) {
@@ -19,5 +20,5 @@ export function SystemHeader({ lastCheck }: SystemHeaderProps) {
         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
       </div>
     </>
-  );
+  )
 }

@@ -1,23 +1,17 @@
 import { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
-import {
-  AlertTriangle,
-  Shield,
-  Target,
-  Satellite,
-  Flame,
+import { 
+  AlertTriangle, 
+  Shield, 
+  Target, 
+  Satellite, 
+  Flame, 
   Droplets,
   Wind,
   Thermometer,
@@ -36,14 +30,14 @@ import {
   Users,
   TrendingUp,
   Clock,
-  TreePine,
+  TreePine
 } from "lucide-react";
 
 interface SandCannon {
   id: string;
   name: string;
   location: { lat: number; lng: number; address: string };
-  status: "active" | "maintenance" | "offline" | "deployed";
+  status: 'active' | 'maintenance' | 'offline' | 'deployed';
   batteryLevel: number;
   sandLevel: number;
   range: number;
@@ -54,10 +48,10 @@ interface SandCannon {
 
 interface FireAlert {
   id: string;
-  severity: "low" | "medium" | "high" | "critical";
+  severity: 'low' | 'medium' | 'high' | 'critical';
   location: { lat: number; lng: number; address: string };
   detectedAt: string;
-  status: "detected" | "responding" | "contained" | "resolved";
+  status: 'detected' | 'responding' | 'contained' | 'resolved';
   confidence: number;
   estimatedSize: number;
   windSpeed: number;
@@ -70,97 +64,77 @@ const WildfireDefenseDashboard = () => {
   const [activeAlerts, setActiveAlerts] = useState<FireAlert[]>([]);
   const [sandCannons, setSandCannons] = useState<SandCannon[]>([]);
   const [selectedCannon, setSelectedCannon] = useState<SandCannon | null>(null);
-  const [systemMode, setSystemMode] = useState<"auto" | "manual">("auto");
+  const [systemMode, setSystemMode] = useState<'auto' | 'manual'>('auto');
   const [alertsEnabled, setAlertsEnabled] = useState(true);
 
   // Mock data initialization
   useEffect(() => {
     const mockCannons: SandCannon[] = [
       {
-        id: "SC-001",
-        name: "Redwood Guardian Alpha",
-        location: {
-          lat: 40.7589,
-          lng: -124.0933,
-          address: "Humboldt Redwoods State Park, CA",
-        },
-        status: "active",
+        id: 'SC-001',
+        name: 'Redwood Guardian Alpha',
+        location: { lat: 40.7589, lng: -124.0933, address: 'Humboldt Redwoods State Park, CA' },
+        status: 'active',
         batteryLevel: 87,
         sandLevel: 92,
         range: 500,
-        lastMaintenance: "2024-11-15",
+        lastMaintenance: '2024-11-15',
         firesDetected: 12,
-        firesExtinguished: 11,
+        firesExtinguished: 11
       },
       {
-        id: "SC-002",
-        name: "Sierra Defender Beta",
-        location: {
-          lat: 37.8651,
-          lng: -119.5383,
-          address: "Yosemite National Park, CA",
-        },
-        status: "deployed",
+        id: 'SC-002', 
+        name: 'Sierra Defender Beta',
+        location: { lat: 37.8651, lng: -119.5383, address: 'Yosemite National Park, CA' },
+        status: 'deployed',
         batteryLevel: 45,
         sandLevel: 34,
         range: 500,
-        lastMaintenance: "2024-11-10",
+        lastMaintenance: '2024-11-10',
         firesDetected: 8,
-        firesExtinguished: 7,
+        firesExtinguished: 7
       },
       {
-        id: "SC-003",
-        name: "Olympic Shield Gamma",
-        location: {
-          lat: 47.8021,
-          lng: -123.6044,
-          address: "Olympic National Forest, WA",
-        },
-        status: "maintenance",
+        id: 'SC-003',
+        name: 'Olympic Shield Gamma',
+        location: { lat: 47.8021, lng: -123.6044, address: 'Olympic National Forest, WA' },
+        status: 'maintenance',
         batteryLevel: 100,
         sandLevel: 100,
         range: 500,
-        lastMaintenance: "2024-12-01",
+        lastMaintenance: '2024-12-01',
         firesDetected: 3,
-        firesExtinguished: 3,
-      },
+        firesExtinguished: 3
+      }
     ];
 
     const mockAlerts: FireAlert[] = [
       {
-        id: "FA-001",
-        severity: "high",
-        location: {
-          lat: 40.7589,
-          lng: -124.0933,
-          address: "Humboldt Redwoods, Sector 7",
-        },
-        detectedAt: "2024-12-15T14:23:00Z",
-        status: "responding",
+        id: 'FA-001',
+        severity: 'high',
+        location: { lat: 40.7589, lng: -124.0933, address: 'Humboldt Redwoods, Sector 7' },
+        detectedAt: '2024-12-15T14:23:00Z',
+        status: 'responding',
         confidence: 94,
         estimatedSize: 0.5,
         windSpeed: 12,
         temperature: 32,
         humidity: 15,
-        nearestCannons: ["SC-001"],
+        nearestCannons: ['SC-001']
       },
       {
-        id: "FA-002",
-        severity: "medium",
-        location: {
-          lat: 37.8651,
-          lng: -119.5383,
-          address: "Yosemite Valley, Trail Ridge",
-        },
-        detectedAt: "2024-12-15T13:45:00Z",
-        status: "detected",
+        id: 'FA-002',
+        severity: 'medium',
+        location: { lat: 37.8651, lng: -119.5383, address: 'Yosemite Valley, Trail Ridge' },
+        detectedAt: '2024-12-15T13:45:00Z',
+        status: 'detected',
         confidence: 87,
         estimatedSize: 0.2,
         windSpeed: 8,
         temperature: 28,
         humidity: 22,
-        nearestCannons: ["SC-002"],
-      },
+        nearestCannons: ['SC-002']
+      }
     ];
 
     setSandCannons(mockCannons);
@@ -169,52 +143,36 @@ const WildfireDefenseDashboard = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "active":
-        return "bg-green-500";
-      case "deployed":
-        return "bg-yellow-500";
-      case "maintenance":
-        return "bg-blue-500";
-      case "offline":
-        return "bg-red-500";
-      default:
-        return "bg-gray-500";
+      case 'active': return 'bg-green-500';
+      case 'deployed': return 'bg-yellow-500';
+      case 'maintenance': return 'bg-blue-500';
+      case 'offline': return 'bg-red-500';
+      default: return 'bg-gray-500';
     }
   };
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case "low":
-        return "bg-green-100 text-green-800 border-green-300";
-      case "medium":
-        return "bg-yellow-100 text-yellow-800 border-yellow-300";
-      case "high":
-        return "bg-orange-100 text-orange-800 border-orange-300";
-      case "critical":
-        return "bg-red-100 text-red-800 border-red-300";
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-300";
+      case 'low': return 'bg-green-100 text-green-800 border-green-300';
+      case 'medium': return 'bg-yellow-100 text-yellow-800 border-yellow-300';
+      case 'high': return 'bg-orange-100 text-orange-800 border-orange-300';
+      case 'critical': return 'bg-red-100 text-red-800 border-red-300';
+      default: return 'bg-gray-100 text-gray-800 border-gray-300';
     }
   };
 
-  const handleCannonControl = (
-    cannonId: string,
-    action: "deploy" | "recall" | "test",
-  ) => {
-    setSandCannons((cannons) =>
-      cannons.map((cannon) =>
-        cannon.id === cannonId
-          ? {
-              ...cannon,
-              status:
-                action === "deploy"
-                  ? "deployed"
-                  : action === "recall"
-                    ? "active"
-                    : cannon.status,
+  const handleCannonControl = (cannonId: string, action: 'deploy' | 'recall' | 'test') => {
+    setSandCannons(cannons => 
+      cannons.map(cannon => 
+        cannon.id === cannonId 
+          ? { 
+              ...cannon, 
+              status: action === 'deploy' ? 'deployed' : 
+                     action === 'recall' ? 'active' : 
+                     cannon.status 
             }
-          : cannon,
-      ),
+          : cannon
+      )
     );
   };
 
@@ -227,40 +185,31 @@ const WildfireDefenseDashboard = () => {
             <div className="flex items-center">
               <Shield className="h-10 w-10 text-red-600 mr-3" />
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
-                  Wildfire Defense Dashboard
-                </h1>
-                <p className="text-lg text-gray-600">
-                  Real-time forest protection monitoring & control
-                </p>
+                <h1 className="text-3xl font-bold text-gray-900">Wildfire Defense Dashboard</h1>
+                <p className="text-lg text-gray-600">Real-time forest protection monitoring & control</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <span className="text-sm font-medium">System Mode:</span>
-                <Button
-                  variant={systemMode === "auto" ? "default" : "outline"}
+                <Button 
+                  variant={systemMode === 'auto' ? 'default' : 'outline'}
                   size="sm"
-                  onClick={() => setSystemMode("auto")}
+                  onClick={() => setSystemMode('auto')}
                 >
                   Auto
                 </Button>
-                <Button
-                  variant={systemMode === "manual" ? "default" : "outline"}
+                <Button 
+                  variant={systemMode === 'manual' ? 'default' : 'outline'}
                   size="sm"
-                  onClick={() => setSystemMode("manual")}
+                  onClick={() => setSystemMode('manual')}
                 >
                   Manual
                 </Button>
               </div>
               <div className="flex items-center space-x-2">
-                <Bell
-                  className={`h-5 w-5 ${alertsEnabled ? "text-red-600" : "text-gray-400"}`}
-                />
-                <Switch
-                  checked={alertsEnabled}
-                  onCheckedChange={setAlertsEnabled}
-                />
+                <Bell className={`h-5 w-5 ${alertsEnabled ? 'text-red-600' : 'text-gray-400'}`} />
+                <Switch checked={alertsEnabled} onCheckedChange={setAlertsEnabled} />
               </div>
             </div>
           </div>
@@ -274,27 +223,18 @@ const WildfireDefenseDashboard = () => {
               Active Fire Alerts ({activeAlerts.length})
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {activeAlerts.map((alert) => (
-                <Alert
-                  key={alert.id}
-                  className={`border-2 ${getSeverityColor(alert.severity)}`}
-                >
+              {activeAlerts.map(alert => (
+                <Alert key={alert.id} className={`border-2 ${getSeverityColor(alert.severity)}`}>
                   <AlertTriangle className="h-4 w-4" />
                   <AlertDescription>
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <div className="font-semibold">
-                          {alert.location.address}
-                        </div>
+                        <div className="font-semibold">{alert.location.address}</div>
                         <div className="text-sm opacity-75">
-                          Detected:{" "}
-                          {new Date(alert.detectedAt).toLocaleTimeString()}
+                          Detected: {new Date(alert.detectedAt).toLocaleTimeString()}
                         </div>
                       </div>
-                      <Badge
-                        variant="outline"
-                        className={getSeverityColor(alert.severity)}
-                      >
+                      <Badge variant="outline" className={getSeverityColor(alert.severity)}>
                         {alert.severity.toUpperCase()}
                       </Badge>
                     </div>
@@ -341,11 +281,9 @@ const WildfireDefenseDashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-gray-900">
-                    {sandCannons.filter((c) => c.status === "active").length}
+                    {sandCannons.filter(c => c.status === 'active').length}
                   </div>
-                  <div className="text-sm text-gray-600">
-                    Sand Cannons Online
-                  </div>
+                  <div className="text-sm text-gray-600">Sand Cannons Online</div>
                 </CardContent>
               </Card>
 
@@ -357,9 +295,7 @@ const WildfireDefenseDashboard = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-gray-900">
-                    {activeAlerts.length}
-                  </div>
+                  <div className="text-2xl font-bold text-gray-900">{activeAlerts.length}</div>
                   <div className="text-sm text-gray-600">Active Alerts</div>
                 </CardContent>
               </Card>
@@ -386,14 +322,9 @@ const WildfireDefenseDashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-gray-900">
-                    {sandCannons.reduce(
-                      (sum, cannon) => sum + cannon.firesExtinguished,
-                      0,
-                    )}
+                    {sandCannons.reduce((sum, cannon) => sum + cannon.firesExtinguished, 0)}
                   </div>
-                  <div className="text-sm text-gray-600">
-                    Fires Extinguished
-                  </div>
+                  <div className="text-sm text-gray-600">Fires Extinguished</div>
                 </CardContent>
               </Card>
             </div>
@@ -463,9 +394,7 @@ const WildfireDefenseDashboard = () => {
                     </div>
                     <div className="flex items-center justify-between">
                       <span>System Uptime</span>
-                      <span className="font-semibold text-green-600">
-                        99.9%
-                      </span>
+                      <span className="font-semibold text-green-600">99.9%</span>
                     </div>
                   </div>
                 </CardContent>
@@ -486,35 +415,27 @@ const WildfireDefenseDashboard = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      {sandCannons.map((cannon) => (
-                        <div
+                      {sandCannons.map(cannon => (
+                        <div 
                           key={cannon.id}
                           className={`p-4 border-2 rounded-lg cursor-pointer transition-colors ${
-                            selectedCannon?.id === cannon.id
-                              ? "border-blue-500 bg-blue-50"
-                              : "border-gray-200 hover:border-gray-300"
+                            selectedCannon?.id === cannon.id ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'
                           }`}
                           onClick={() => setSelectedCannon(cannon)}
                         >
                           <div className="flex items-center justify-between mb-3">
                             <div className="flex items-center space-x-3">
-                              <div
-                                className={`w-3 h-3 rounded-full ${getStatusColor(cannon.status)}`}
-                              ></div>
+                              <div className={`w-3 h-3 rounded-full ${getStatusColor(cannon.status)}`}></div>
                               <div>
-                                <div className="font-semibold">
-                                  {cannon.name}
-                                </div>
-                                <div className="text-sm text-gray-600">
-                                  {cannon.id}
-                                </div>
+                                <div className="font-semibold">{cannon.name}</div>
+                                <div className="text-sm text-gray-600">{cannon.id}</div>
                               </div>
                             </div>
                             <Badge variant="outline" className="capitalize">
                               {cannon.status}
                             </Badge>
                           </div>
-
+                          
                           <div className="grid grid-cols-2 gap-4 text-sm">
                             <div className="flex items-center space-x-2">
                               <Battery className="h-4 w-4 text-green-500" />
@@ -530,10 +451,7 @@ const WildfireDefenseDashboard = () => {
                             </div>
                             <div className="flex items-center space-x-2">
                               <MapPin className="h-4 w-4 text-purple-500" />
-                              <span>
-                                Fires: {cannon.firesExtinguished}/
-                                {cannon.firesDetected}
-                              </span>
+                              <span>Fires: {cannon.firesExtinguished}/{cannon.firesDetected}</span>
                             </div>
                           </div>
 
@@ -552,26 +470,24 @@ const WildfireDefenseDashboard = () => {
                   <Card>
                     <CardHeader>
                       <CardTitle>Cannon Control</CardTitle>
-                      <CardDescription>{selectedCannon.name}</CardDescription>
+                      <CardDescription>
+                        {selectedCannon.name}
+                      </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
-                          <Button
-                            onClick={() =>
-                              handleCannonControl(selectedCannon.id, "deploy")
-                            }
-                            disabled={selectedCannon.status === "deployed"}
+                          <Button 
+                            onClick={() => handleCannonControl(selectedCannon.id, 'deploy')}
+                            disabled={selectedCannon.status === 'deployed'}
                             className="w-full"
                           >
                             <Play className="h-4 w-4 mr-2" />
                             Deploy
                           </Button>
-                          <Button
-                            onClick={() =>
-                              handleCannonControl(selectedCannon.id, "recall")
-                            }
-                            disabled={selectedCannon.status !== "deployed"}
+                          <Button 
+                            onClick={() => handleCannonControl(selectedCannon.id, 'recall')}
+                            disabled={selectedCannon.status !== 'deployed'}
                             variant="outline"
                             className="w-full"
                           >
@@ -579,39 +495,35 @@ const WildfireDefenseDashboard = () => {
                             Recall
                           </Button>
                         </div>
-                        <Button
-                          onClick={() =>
-                            handleCannonControl(selectedCannon.id, "test")
-                          }
+                        <Button 
+                          onClick={() => handleCannonControl(selectedCannon.id, 'test')}
                           variant="outline"
                           className="w-full"
                         >
                           <Zap className="h-4 w-4 mr-2" />
                           Run Test
                         </Button>
-                        <Button variant="outline" className="w-full">
+                        <Button 
+                          variant="outline"
+                          className="w-full"
+                        >
                           <Settings className="h-4 w-4 mr-2" />
                           Settings
                         </Button>
 
                         <div className="pt-4 border-t">
-                          <h4 className="font-semibold mb-3">
-                            Range Adjustment
-                          </h4>
+                          <h4 className="font-semibold mb-3">Range Adjustment</h4>
                           <Slider
                             value={[selectedCannon.range]}
                             onValueChange={([value]) => {
-                              setSandCannons((cannons) =>
-                                cannons.map((cannon) =>
+                              setSandCannons(cannons =>
+                                cannons.map(cannon =>
                                   cannon.id === selectedCannon.id
                                     ? { ...cannon, range: value }
-                                    : cannon,
-                                ),
+                                    : cannon
+                                )
                               );
-                              setSelectedCannon({
-                                ...selectedCannon,
-                                range: value,
-                              });
+                              setSelectedCannon({ ...selectedCannon, range: value });
                             }}
                             max={1000}
                             min={100}
@@ -635,14 +547,10 @@ const WildfireDefenseDashboard = () => {
                           <div className="flex justify-between">
                             <span>Success Rate:</span>
                             <span>
-                              {selectedCannon.firesDetected > 0
-                                ? Math.round(
-                                    (selectedCannon.firesExtinguished /
-                                      selectedCannon.firesDetected) *
-                                      100,
-                                  )
-                                : 0}
-                              %
+                              {selectedCannon.firesDetected > 0 
+                                ? Math.round((selectedCannon.firesExtinguished / selectedCannon.firesDetected) * 100)
+                                : 0
+                              }%
                             </span>
                           </div>
                         </div>
@@ -732,9 +640,7 @@ const WildfireDefenseDashboard = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span>Detection Accuracy</span>
-                      <span className="font-semibold text-green-600">
-                        99.5%
-                      </span>
+                      <span className="font-semibold text-green-600">99.5%</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span>False Positives</span>
@@ -764,12 +670,8 @@ const WildfireDefenseDashboard = () => {
                 <div className="h-64 bg-gradient-to-r from-green-200 via-yellow-200 to-red-200 rounded-lg flex items-center justify-center">
                   <div className="text-center">
                     <MapPin className="h-12 w-12 text-gray-600 mx-auto mb-2" />
-                    <p className="text-gray-600">
-                      Interactive heat map would be displayed here
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Showing fire risk levels across protected areas
-                    </p>
+                    <p className="text-gray-600">Interactive heat map would be displayed here</p>
+                    <p className="text-sm text-gray-500">Showing fire risk levels across protected areas</p>
                   </div>
                 </div>
               </CardContent>
@@ -789,49 +691,21 @@ const WildfireDefenseDashboard = () => {
                 <CardContent>
                   <div className="space-y-6">
                     <div>
-                      <label className="text-sm font-medium block mb-2">
-                        Alert Sensitivity
-                      </label>
-                      <Slider
-                        defaultValue={[75]}
-                        max={100}
-                        step={5}
-                        className="w-full"
-                      />
-                      <div className="text-xs text-gray-500 mt-1">
-                        Current: High Sensitivity
-                      </div>
+                      <label className="text-sm font-medium block mb-2">Alert Sensitivity</label>
+                      <Slider defaultValue={[75]} max={100} step={5} className="w-full" />
+                      <div className="text-xs text-gray-500 mt-1">Current: High Sensitivity</div>
+                    </div>
+                    
+                    <div>
+                      <label className="text-sm font-medium block mb-2">Auto-Response Threshold</label>
+                      <Slider defaultValue={[80]} max={100} step={5} className="w-full" />
+                      <div className="text-xs text-gray-500 mt-1">Deploy at 80% confidence</div>
                     </div>
 
                     <div>
-                      <label className="text-sm font-medium block mb-2">
-                        Auto-Response Threshold
-                      </label>
-                      <Slider
-                        defaultValue={[80]}
-                        max={100}
-                        step={5}
-                        className="w-full"
-                      />
-                      <div className="text-xs text-gray-500 mt-1">
-                        Deploy at 80% confidence
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="text-sm font-medium block mb-2">
-                        Network Scan Frequency
-                      </label>
-                      <Slider
-                        defaultValue={[15]}
-                        max={60}
-                        min={5}
-                        step={5}
-                        className="w-full"
-                      />
-                      <div className="text-xs text-gray-500 mt-1">
-                        Every 15 minutes
-                      </div>
+                      <label className="text-sm font-medium block mb-2">Network Scan Frequency</label>
+                      <Slider defaultValue={[15]} max={60} min={5} step={5} className="w-full" />
+                      <div className="text-xs text-gray-500 mt-1">Every 15 minutes</div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
@@ -869,17 +743,17 @@ const WildfireDefenseDashboard = () => {
                       <AlertTriangle className="h-4 w-4 mr-2" />
                       Deploy All Cannons
                     </Button>
-
+                    
                     <Button className="w-full" size="lg" variant="outline">
                       <RotateCcw className="h-4 w-4 mr-2" />
                       System Reset
                     </Button>
-
+                    
                     <Button className="w-full" size="lg" variant="outline">
                       <Users className="h-4 w-4 mr-2" />
                       Alert Emergency Services
                     </Button>
-
+                    
                     <Button className="w-full" size="lg" variant="outline">
                       <Radio className="h-4 w-4 mr-2" />
                       Broadcast Warning
@@ -918,9 +792,7 @@ const WildfireDefenseDashboard = () => {
                 <CardContent>
                   <div className="text-2xl font-bold text-green-600">24s</div>
                   <div className="text-sm text-gray-600">Average</div>
-                  <div className="text-xs text-green-600">
-                    ↓ 12% from last week
-                  </div>
+                  <div className="text-xs text-green-600">↓ 12% from last week</div>
                 </CardContent>
               </Card>
 
@@ -931,9 +803,7 @@ const WildfireDefenseDashboard = () => {
                 <CardContent>
                   <div className="text-2xl font-bold text-green-600">96.7%</div>
                   <div className="text-sm text-gray-600">Fire Suppression</div>
-                  <div className="text-xs text-green-600">
-                    ↑ 2.1% from last month
-                  </div>
+                  <div className="text-xs text-green-600">↑ 2.1% from last month</div>
                 </CardContent>
               </Card>
 
@@ -944,9 +814,7 @@ const WildfireDefenseDashboard = () => {
                 <CardContent>
                   <div className="text-2xl font-bold text-blue-600">750</div>
                   <div className="text-sm text-gray-600">Hectares</div>
-                  <div className="text-xs text-blue-600">
-                    ↑ 50 hectares this month
-                  </div>
+                  <div className="text-xs text-blue-600">↑ 50 hectares this month</div>
                 </CardContent>
               </Card>
 
@@ -973,12 +841,8 @@ const WildfireDefenseDashboard = () => {
                 <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
                   <div className="text-center">
                     <TrendingUp className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                    <p className="text-gray-600">
-                      Performance charts would be displayed here
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Response times, success rates, and system uptime
-                    </p>
+                    <p className="text-gray-600">Performance charts would be displayed here</p>
+                    <p className="text-sm text-gray-500">Response times, success rates, and system uptime</p>
                   </div>
                 </div>
               </CardContent>

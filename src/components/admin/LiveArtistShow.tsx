@@ -1,14 +1,15 @@
-import { useState, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import {
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
-  Maximize,
+
+import { useState, useRef } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
+import { 
+  Play, 
+  Pause, 
+  Volume2, 
+  VolumeX, 
+  Maximize, 
   Settings,
   Users,
   MessageCircle,
@@ -17,72 +18,68 @@ import {
   Radio,
   Mic,
   Camera,
-  Monitor,
-} from "lucide-react";
-import { toast } from "sonner";
+  Monitor
+} from 'lucide-react'
+import { toast } from 'sonner'
 
 export function LiveArtistShow() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [volume, setVolume] = useState(75);
-  const [viewerCount, setViewerCount] = useState(1247);
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
+  const [volume, setVolume] = useState(75)
+  const [viewerCount, setViewerCount] = useState(1247)
   const [chatMessages, setChatMessages] = useState([
-    { user: "GaiaFan1", message: "Amazing performance! 🎵", time: "10:23" },
-    {
-      user: "EcoWarrior",
-      message: "Love the environmental message",
-      time: "10:24",
-    },
-    { user: "MusicLover", message: "This is incredible! 🔥", time: "10:25" },
-  ]);
-  const [newMessage, setNewMessage] = useState("");
-  const videoRef = useRef<HTMLVideoElement>(null);
+    { user: 'GaiaFan1', message: 'Amazing performance! 🎵', time: '10:23' },
+    { user: 'EcoWarrior', message: 'Love the environmental message', time: '10:24' },
+    { user: 'MusicLover', message: 'This is incredible! 🔥', time: '10:25' }
+  ])
+  const [newMessage, setNewMessage] = useState('')
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const handlePlayPause = () => {
     if (videoRef.current) {
       if (isPlaying) {
-        videoRef.current.pause();
+        videoRef.current.pause()
       } else {
-        videoRef.current.play();
+        videoRef.current.play()
       }
-      setIsPlaying(!isPlaying);
+      setIsPlaying(!isPlaying)
     }
-  };
+  }
 
   const handleVolumeChange = (newVolume: number) => {
-    setVolume(newVolume);
+    setVolume(newVolume)
     if (videoRef.current) {
-      videoRef.current.volume = newVolume / 100;
+      videoRef.current.volume = newVolume / 100
     }
-  };
+  }
 
   const toggleMute = () => {
-    setIsMuted(!isMuted);
+    setIsMuted(!isMuted)
     if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
+      videoRef.current.muted = !isMuted
     }
-  };
+  }
 
   const sendMessage = () => {
     if (newMessage.trim()) {
       const newMsg = {
-        user: "Admin",
+        user: 'Admin',
         message: newMessage,
-        time: new Date().toLocaleTimeString().slice(0, 5),
-      };
-      setChatMessages((prev) => [...prev, newMsg]);
-      setNewMessage("");
-      toast.success("Message sent to live chat!");
+        time: new Date().toLocaleTimeString().slice(0, 5)
+      }
+      setChatMessages(prev => [...prev, newMsg])
+      setNewMessage('')
+      toast.success('Message sent to live chat!')
     }
-  };
+  }
 
   const toggleFullscreen = () => {
     if (videoRef.current) {
       if (videoRef.current.requestFullscreen) {
-        videoRef.current.requestFullscreen();
+        videoRef.current.requestFullscreen()
       }
     }
-  };
+  }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -113,10 +110,10 @@ export function LiveArtistShow() {
                 <source src="/sample-video.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-
+              
               {/* Video Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
-
+              
               {/* Video Controls */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                 <div className="flex items-center justify-between">
@@ -127,13 +124,9 @@ export function LiveArtistShow() {
                       size="sm"
                       className="text-white hover:bg-white/20"
                     >
-                      {isPlaying ? (
-                        <Pause className="h-5 w-5" />
-                      ) : (
-                        <Play className="h-5 w-5" />
-                      )}
+                      {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                     </Button>
-
+                    
                     <div className="flex items-center gap-2">
                       <Button
                         onClick={toggleMute}
@@ -141,25 +134,19 @@ export function LiveArtistShow() {
                         size="sm"
                         className="text-white hover:bg-white/20"
                       >
-                        {isMuted ? (
-                          <VolumeX className="h-4 w-4" />
-                        ) : (
-                          <Volume2 className="h-4 w-4" />
-                        )}
+                        {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
                       </Button>
                       <input
                         type="range"
                         min="0"
                         max="100"
                         value={volume}
-                        onChange={(e) =>
-                          handleVolumeChange(Number(e.target.value))
-                        }
+                        onChange={(e) => handleVolumeChange(Number(e.target.value))}
                         className="w-20"
                       />
                     </div>
                   </div>
-
+                  
                   <div className="flex items-center gap-2">
                     <Button
                       onClick={toggleFullscreen}
@@ -185,12 +172,8 @@ export function LiveArtistShow() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center p-3 bg-red-900/20 rounded border border-red-500/20">
                 <Users className="h-5 w-5 text-red-400 mx-auto mb-1" />
-                <div className="font-bold text-red-400">
-                  {viewerCount.toLocaleString()}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Live Viewers
-                </div>
+                <div className="font-bold text-red-400">{viewerCount.toLocaleString()}</div>
+                <div className="text-xs text-muted-foreground">Live Viewers</div>
               </div>
               <div className="text-center p-3 bg-green-900/20 rounded border border-green-500/20">
                 <Heart className="h-5 w-5 text-green-400 mx-auto mb-1" />
@@ -214,9 +197,7 @@ export function LiveArtistShow() {
         {/* Admin Controls */}
         <Card className="border-orange-500/30 bg-orange-900/20">
           <CardHeader>
-            <CardTitle className="text-orange-400">
-              🎛️ Admin Stream Controls
-            </CardTitle>
+            <CardTitle className="text-orange-400">🎛️ Admin Stream Controls</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -256,9 +237,7 @@ export function LiveArtistShow() {
               {chatMessages.map((msg, index) => (
                 <div key={index} className="text-sm">
                   <span className="text-cyan-400 font-bold">{msg.user}</span>
-                  <span className="text-xs text-muted-foreground ml-2">
-                    {msg.time}
-                  </span>
+                  <span className="text-xs text-muted-foreground ml-2">{msg.time}</span>
                   <div className="text-white ml-2">{msg.message}</div>
                 </div>
               ))}
@@ -270,7 +249,7 @@ export function LiveArtistShow() {
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 placeholder="Send a message to viewers..."
-                onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+                onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
                 className="flex-1"
               />
               <Button onClick={sendMessage} size="sm">
@@ -306,5 +285,5 @@ export function LiveArtistShow() {
         </Card>
       </div>
     </div>
-  );
+  )
 }

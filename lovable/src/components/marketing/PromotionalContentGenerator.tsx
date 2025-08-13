@@ -1,13 +1,14 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Copy, Download, Megaphone, Globe, Leaf, Zap } from "lucide-react";
-import { toast } from "sonner";
+
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Copy, Download, Megaphone, Globe, Leaf, Zap } from 'lucide-react'
+import { toast } from 'sonner'
 
 export function PromotionalContentGenerator() {
-  const [copiedContent, setCopiedContent] = useState<string | null>(null);
+  const [copiedContent, setCopiedContent] = useState<string | null>(null)
 
   const promotionalContent = {
     headlines: [
@@ -16,18 +17,18 @@ export function PromotionalContentGenerator() {
       "💚 Be Part of the Love & Joy Protocol - Transform Finance Forever!",
       "🌱 Breaking Barriers, Building Futures - The GAIA Way!",
       "⚡ 10x Performance, 100% Sustainable - Welcome to Tomorrow!",
-      "🎯 Race to Build A Better Place - Keep Yourself in Open Minded SPACE!",
+      "🎯 Race to Build A Better Place - Keep Yourself in Open Minded SPACE!"
     ],
     socialMediaPosts: [
       "🌍 Ready to board the Night Train Express to environmental healing? GAIA's revolutionary Love & Joy protocol is transforming cryptocurrency into a force for planetary recovery! Join thousands building microscopical-level environmental solutions. #GAIAToken #GreenCrypto #CultureOfHarmony",
-
+      
       "🚀 We bark our way through barriers, deploying innovative ideas that help rebuild our green planet! GAIA Exchange offers ZERO fees, quantum security, and environmental impact tracking. Every trade heals the Earth! 🌱 #ZeroFees #QuantumSecurity",
-
+      
       "💡 Dive Deep into Our Race to find and Build A Better Place! GAIA's Virtual World lets you create landscapes, connect with VR, and trade in complete security. Keep yourself surrounded in Open Minded SPACE! 🎮 #VirtualWorld #VRGaming",
-
+      
       "⚡ 10x faster than Bitcoin + Ethereum COMBINED! GAIA's quantum-resistant technology processes 1M+ transactions per second while being 100% carbon-negative. The future of finance is HERE! 📈 #QuantumTech #CarbonNegative",
-
-      "🌟 From microscopic particle recovery to massive environmental restoration - GAIA operates on every level! Join our community of builders, dreamers, and planet healers. Download on ALL platforms! 📱💻 #CrossPlatform #EnvironmentalTech",
+      
+      "🌟 From microscopic particle recovery to massive environmental restoration - GAIA operates on every level! Join our community of builders, dreamers, and planet healers. Download on ALL platforms! 📱💻 #CrossPlatform #EnvironmentalTech"
     ],
     benefits: [
       "🔐 Quantum-Resistant Security - Your investments protected by military-grade encryption",
@@ -39,7 +40,7 @@ export function PromotionalContentGenerator() {
       "📊 Advanced Analytics - AI-powered market insights and predictions",
       "🏦 DeFi Integration - Complete financial ecosystem in one platform",
       "🔄 Cross-Chain Compatibility - Trade any cryptocurrency seamlessly",
-      "🛡️ 71-Layer Security - Unbreakable defense against all threats",
+      "🛡️ 71-Layer Security - Unbreakable defense against all threats"
     ],
     reasons: [
       "Environmental Impact: Every transaction removes carbon from the atmosphere while generating clean energy",
@@ -51,7 +52,7 @@ export function PromotionalContentGenerator() {
       "Open Source: Transparent, community-driven development with full code visibility",
       "Regulatory Compliance: Fully licensed and compliant in 195+ countries worldwide",
       "Educational Resources: Learn and grow with comprehensive guides and community support",
-      "Future-Proof: Quantum-resistant technology that remains secure for decades to come",
+      "Future-Proof: Quantum-resistant technology that remains secure for decades to come"
     ],
     callsToAction: [
       "🌟 Board the Night Train Express to Environmental Healing - Join GAIA Today!",
@@ -59,16 +60,16 @@ export function PromotionalContentGenerator() {
       "💚 Be the Change - Start Trading with Love & Joy Protocol!",
       "🌍 Help Heal the Planet One Transaction at a Time - Join GAIA!",
       "⚡ Experience 10x Performance - Try GAIA Exchange Today!",
-      "🎮 Enter the Virtual World - Build, Play, Earn with GAIA!",
-    ],
-  };
+      "🎮 Enter the Virtual World - Build, Play, Earn with GAIA!"
+    ]
+  }
 
   const copyToClipboard = (content: string, type: string) => {
-    navigator.clipboard.writeText(content);
-    setCopiedContent(content);
-    toast.success(`${type} copied to clipboard!`);
-    setTimeout(() => setCopiedContent(null), 2000);
-  };
+    navigator.clipboard.writeText(content)
+    setCopiedContent(content)
+    toast.success(`${type} copied to clipboard!`)
+    setTimeout(() => setCopiedContent(null), 2000)
+  }
 
   const downloadAllContent = () => {
     const allContent = `
@@ -78,34 +79,30 @@ export function PromotionalContentGenerator() {
 ---
 
 ## HEADLINES & TAGLINES
-${promotionalContent.headlines.map((headline, i) => `${i + 1}. ${headline}`).join("\n")}
+${promotionalContent.headlines.map((headline, i) => `${i + 1}. ${headline}`).join('\n')}
 
 ---
 
 ## SOCIAL MEDIA POSTS
-${promotionalContent.socialMediaPosts
-  .map(
-    (post, i) => `
+${promotionalContent.socialMediaPosts.map((post, i) => `
 POST ${i + 1}:
 ${post}
-`,
-  )
-  .join("\n")}
+`).join('\n')}
 
 ---
 
 ## KEY BENEFITS
-${promotionalContent.benefits.map((benefit, i) => `${i + 1}. ${benefit}`).join("\n")}
+${promotionalContent.benefits.map((benefit, i) => `${i + 1}. ${benefit}`).join('\n')}
 
 ---
 
 ## REASONS TO JOIN GAIA
-${promotionalContent.reasons.map((reason, i) => `${i + 1}. ${reason}`).join("\n")}
+${promotionalContent.reasons.map((reason, i) => `${i + 1}. ${reason}`).join('\n')}
 
 ---
 
 ## CALL-TO-ACTION PHRASES
-${promotionalContent.callsToAction.map((cta, i) => `${i + 1}. ${cta}`).join("\n")}
+${promotionalContent.callsToAction.map((cta, i) => `${i + 1}. ${cta}`).join('\n')}
 
 ---
 
@@ -121,24 +118,23 @@ ${promotionalContent.callsToAction.map((cta, i) => `${i + 1}. ${cta}`).join("\n"
 
 © 2024 Culture of Harmony - GAIA Ecosystem
 Generated: ${new Date().toLocaleDateString()}
-    `;
+    `
 
-    const blob = new Blob([allContent], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "GAIA-Promotional-Content-Library.txt";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    const blob = new Blob([allContent], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = 'GAIA-Promotional-Content-Library.txt'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
 
-    toast.success("Promotional Content Library Downloaded!", {
-      description:
-        "Complete marketing arsenal ready for environmental revolution",
-      duration: 3000,
-    });
-  };
+    toast.success('Promotional Content Library Downloaded!', {
+      description: 'Complete marketing arsenal ready for environmental revolution',
+      duration: 3000
+    })
+  }
 
   return (
     <div className="space-y-6">
@@ -151,14 +147,9 @@ Generated: ${new Date().toLocaleDateString()}
                 <Megaphone className="h-6 w-6" />
                 GAIA Promotional Arsenal
               </CardTitle>
-              <p className="text-muted-foreground">
-                Complete marketing library for environmental revolution
-              </p>
+              <p className="text-muted-foreground">Complete marketing library for environmental revolution</p>
             </div>
-            <Button
-              onClick={downloadAllContent}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={downloadAllContent} className="bg-purple-600 hover:bg-purple-700">
               <Download className="h-4 w-4 mr-2" />
               Download All Content
             </Button>
@@ -187,17 +178,12 @@ Generated: ${new Date().toLocaleDateString()}
             <CardContent>
               <div className="space-y-3">
                 {promotionalContent.headlines.map((headline, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-3 bg-muted/20 rounded-lg"
-                  >
+                  <div key={index} className="flex items-center justify-between p-3 bg-muted/20 rounded-lg">
                     <span className="flex-1">{headline}</span>
                     <Button
                       size="sm"
-                      onClick={() => copyToClipboard(headline, "Headline")}
-                      variant={
-                        copiedContent === headline ? "default" : "outline"
-                      }
+                      onClick={() => copyToClipboard(headline, 'Headline')}
+                      variant={copiedContent === headline ? "default" : "outline"}
                     >
                       <Copy className="h-3 w-3" />
                     </Button>
@@ -219,19 +205,12 @@ Generated: ${new Date().toLocaleDateString()}
             <CardContent>
               <div className="space-y-4">
                 {promotionalContent.socialMediaPosts.map((post, index) => (
-                  <div
-                    key={index}
-                    className="p-4 bg-muted/20 rounded-lg space-y-3"
-                  >
+                  <div key={index} className="p-4 bg-muted/20 rounded-lg space-y-3">
                     <div className="flex items-center justify-between">
-                      <Badge className="bg-blue-600 text-white">
-                        Post {index + 1}
-                      </Badge>
+                      <Badge className="bg-blue-600 text-white">Post {index + 1}</Badge>
                       <Button
                         size="sm"
-                        onClick={() =>
-                          copyToClipboard(post, "Social Media Post")
-                        }
+                        onClick={() => copyToClipboard(post, 'Social Media Post')}
                         variant={copiedContent === post ? "default" : "outline"}
                       >
                         <Copy className="h-3 w-3" />
@@ -256,17 +235,12 @@ Generated: ${new Date().toLocaleDateString()}
             <CardContent>
               <div className="grid gap-3">
                 {promotionalContent.benefits.map((benefit, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-3 bg-muted/20 rounded-lg"
-                  >
+                  <div key={index} className="flex items-center justify-between p-3 bg-muted/20 rounded-lg">
                     <span className="flex-1 text-sm">{benefit}</span>
                     <Button
                       size="sm"
-                      onClick={() => copyToClipboard(benefit, "Benefit")}
-                      variant={
-                        copiedContent === benefit ? "default" : "outline"
-                      }
+                      onClick={() => copyToClipboard(benefit, 'Benefit')}
+                      variant={copiedContent === benefit ? "default" : "outline"}
                     >
                       <Copy className="h-3 w-3" />
                     </Button>
@@ -285,20 +259,13 @@ Generated: ${new Date().toLocaleDateString()}
             <CardContent>
               <div className="space-y-3">
                 {promotionalContent.reasons.map((reason, index) => (
-                  <div
-                    key={index}
-                    className="p-3 bg-muted/20 rounded-lg space-y-2"
-                  >
+                  <div key={index} className="p-3 bg-muted/20 rounded-lg space-y-2">
                     <div className="flex items-center justify-between">
-                      <Badge className="bg-orange-600 text-white">
-                        Reason {index + 1}
-                      </Badge>
+                      <Badge className="bg-orange-600 text-white">Reason {index + 1}</Badge>
                       <Button
                         size="sm"
-                        onClick={() => copyToClipboard(reason, "Reason")}
-                        variant={
-                          copiedContent === reason ? "default" : "outline"
-                        }
+                        onClick={() => copyToClipboard(reason, 'Reason')}
+                        variant={copiedContent === reason ? "default" : "outline"}
                       >
                         <Copy className="h-3 w-3" />
                       </Button>
@@ -314,21 +281,16 @@ Generated: ${new Date().toLocaleDateString()}
         <TabsContent value="cta" className="space-y-4">
           <Card className="border-red-500/30">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                Call-to-Action Phrases
-              </CardTitle>
+              <CardTitle className="text-red-400">Call-to-Action Phrases</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 {promotionalContent.callsToAction.map((cta, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-3 bg-muted/20 rounded-lg"
-                  >
+                  <div key={index} className="flex items-center justify-between p-3 bg-muted/20 rounded-lg">
                     <span className="flex-1 font-medium">{cta}</span>
                     <Button
                       size="sm"
-                      onClick={() => copyToClipboard(cta, "Call-to-Action")}
+                      onClick={() => copyToClipboard(cta, 'Call-to-Action')}
                       variant={copiedContent === cta ? "default" : "outline"}
                     >
                       <Copy className="h-3 w-3" />
@@ -349,20 +311,17 @@ Generated: ${new Date().toLocaleDateString()}
               Our Mission Statement
             </h3>
             <p className="text-lg leading-relaxed max-w-4xl mx-auto">
-              "We bark our way through barriers of many projects to deploy ideas
-              and businesses, helping the green planet rebuild and recover every
-              particle on microscopical level. So we dive deep into our race to
-              find and build a better place. Keep yourself surrounded in an Open
-              Minded SPACE!"
+              "We bark our way through barriers of many projects to deploy ideas and businesses, 
+              helping the green planet rebuild and recover every particle on microscopical level. 
+              So we dive deep into our race to find and build a better place. 
+              Keep yourself surrounded in an Open Minded SPACE!"
             </p>
             <div className="flex justify-center">
               <Button
-                onClick={() =>
-                  copyToClipboard(
-                    "We bark our way through barriers of many projects to deploy ideas and businesses, helping the green planet rebuild and recover every particle on microscopical level. So we dive deep into our race to find and build a better place. Keep yourself surrounded in an Open Minded SPACE!",
-                    "Mission Statement",
-                  )
-                }
+                onClick={() => copyToClipboard(
+                  "We bark our way through barriers of many projects to deploy ideas and businesses, helping the green planet rebuild and recover every particle on microscopical level. So we dive deep into our race to find and build a better place. Keep yourself surrounded in an Open Minded SPACE!",
+                  'Mission Statement'
+                )}
                 className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
               >
                 <Copy className="h-4 w-4 mr-2" />
@@ -373,5 +332,5 @@ Generated: ${new Date().toLocaleDateString()}
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

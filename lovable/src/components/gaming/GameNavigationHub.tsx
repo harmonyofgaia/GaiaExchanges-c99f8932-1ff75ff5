@@ -1,71 +1,72 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { useNavigate } from "react-router-dom";
-import {
-  Gamepad2,
-  Mountain,
-  Coins,
-  Sword,
+
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { useNavigate } from 'react-router-dom'
+import { 
+  Gamepad2, 
+  Mountain, 
+  Coins, 
+  Sword, 
   Building2,
   Crown,
   Rocket,
-  Sparkles,
-} from "lucide-react";
+  Sparkles
+} from 'lucide-react'
 
 export function GameNavigationHub() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const games = [
     {
-      id: "gaia-fighter",
-      name: "⚔️ GAIA FIGHTER PRO",
-      description: "Ultimate combat system with global tournaments",
-      route: "/gaia-fighter",
+      id: 'gaia-fighter',
+      name: '⚔️ GAIA FIGHTER PRO',
+      description: 'Ultimate combat system with global tournaments',
+      route: '/gaia-fighter',
       icon: <Sword className="h-8 w-8" />,
-      color: "from-red-600 to-orange-600",
-      status: "ACTIVE",
-      players: "15,247",
+      color: 'from-red-600 to-orange-600',
+      status: 'ACTIVE',
+      players: '15,247'
     },
     {
-      id: "landscape-builder",
-      name: "🌍 LANDSCAPE BUILDER PRO",
-      description: "Unlimited cloud storage & AI generation",
-      route: "/landscape-builder",
+      id: 'landscape-builder',
+      name: '🌍 LANDSCAPE BUILDER PRO',
+      description: 'Unlimited cloud storage & AI generation',
+      route: '/landscape-builder',
       icon: <Mountain className="h-8 w-8" />,
-      color: "from-green-600 to-blue-600",
-      status: "ACTIVE",
-      players: "8,934",
+      color: 'from-green-600 to-blue-600',
+      status: 'ACTIVE',
+      players: '8,934'
     },
     {
-      id: "coin-crafter",
-      name: "💰 GAIA COIN CRAFTER",
-      description: "Advanced token creation & trading",
-      route: "/coin-crafter",
+      id: 'coin-crafter',
+      name: '💰 GAIA COIN CRAFTER',
+      description: 'Advanced token creation & trading',
+      route: '/coin-crafter',
       icon: <Coins className="h-8 w-8" />,
-      color: "from-yellow-600 to-green-600",
-      status: "ACTIVE",
-      players: "12,156",
+      color: 'from-yellow-600 to-green-600',
+      status: 'ACTIVE',
+      players: '12,156'
     },
     {
-      id: "habbo-tycoon",
-      name: "🏨 HABBO TYCOON",
-      description: "Virtual real life platform & empire building",
-      route: "/gaming",
+      id: 'habbo-tycoon',
+      name: '🏨 HABBO TYCOON',
+      description: 'Virtual real life platform & empire building',
+      route: '/gaming',
       icon: <Building2 className="h-8 w-8" />,
-      color: "from-purple-600 to-pink-600",
-      status: "ACTIVE",
-      players: "6,789",
-    },
-  ];
+      color: 'from-purple-600 to-pink-600',
+      status: 'ACTIVE',
+      players: '6,789'
+    }
+  ]
 
   const handleGameLaunch = (route: string, gameName: string) => {
-    console.log(`🎮 LAUNCHING GAME: ${gameName}`);
-    console.log(`🚀 QUANTUM GAME ENGINE: Initializing...`);
-    console.log(`🌍 ROUTE: ${route}`);
-
-    navigate(route);
-  };
+    console.log(`🎮 LAUNCHING GAME: ${gameName}`)
+    console.log(`🚀 QUANTUM GAME ENGINE: Initializing...`)
+    console.log(`🌍 ROUTE: ${route}`)
+    
+    navigate(route)
+  }
 
   return (
     <div className="space-y-6">
@@ -80,24 +81,19 @@ export function GameNavigationHub() {
               ✅ ALL GAMES ACTIVE
             </Badge>
             <Badge className="bg-blue-600 mr-2">
-              👥{" "}
-              {games
-                .reduce(
-                  (sum, game) => sum + parseInt(game.players.replace(",", "")),
-                  0,
-                )
-                .toLocaleString()}{" "}
-              Online
+              👥 {games.reduce((sum, game) => sum + parseInt(game.players.replace(',', '')), 0).toLocaleString()} Online
             </Badge>
-            <Badge className="bg-purple-600">🚀 QUANTUM ENGINE v2.0</Badge>
+            <Badge className="bg-purple-600">
+              🚀 QUANTUM ENGINE v2.0
+            </Badge>
           </div>
         </CardHeader>
       </Card>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {games.map((game) => (
-          <Card
-            key={game.id}
+          <Card 
+            key={game.id} 
             className={`bg-gradient-to-br ${game.color}/20 border-2 border-opacity-50 hover:scale-105 transition-all duration-300 cursor-pointer`}
             onClick={() => handleGameLaunch(game.route, game.name)}
           >
@@ -110,16 +106,18 @@ export function GameNavigationHub() {
                 <Badge className={`bg-gradient-to-r ${game.color}`}>
                   {game.status}
                 </Badge>
-                <Badge className="bg-blue-600">👥 {game.players} Online</Badge>
+                <Badge className="bg-blue-600">
+                  👥 {game.players} Online
+                </Badge>
               </div>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">{game.description}</p>
-              <Button
+              <Button 
                 className={`w-full bg-gradient-to-r ${game.color} hover:opacity-90 text-white font-bold`}
                 onClick={(e) => {
-                  e.stopPropagation();
-                  handleGameLaunch(game.route, game.name);
+                  e.stopPropagation()
+                  handleGameLaunch(game.route, game.name)
                 }}
               >
                 <Rocket className="h-4 w-4 mr-2" />
@@ -137,8 +135,7 @@ export function GameNavigationHub() {
             ALL GAMES FULLY OPERATIONAL
           </h3>
           <p className="text-muted-foreground mb-4">
-            Quantum game engine running at maximum capacity • All links active •
-            Cloud storage unlimited
+            Quantum game engine running at maximum capacity • All links active • Cloud storage unlimited
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-3 bg-green-900/20 rounded-lg">
@@ -161,5 +158,5 @@ export function GameNavigationHub() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

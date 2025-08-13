@@ -1,8 +1,9 @@
-import { CommunityDocumentGenerator } from "@/components/CommunityDocumentGenerator";
-import { EnhancedMultiExchangeSystem } from "@/components/EnhancedMultiExchangeSystem";
-import { WorkingDownloadLinks } from "@/components/downloads/WorkingDownloadLinks";
-import { InvestorOutreachSystem } from "@/components/marketing/InvestorOutreachSystem";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import { CommunityDocumentGenerator } from '@/components/CommunityDocumentGenerator'
+import { EnhancedMultiExchangeSystem } from '@/components/EnhancedMultiExchangeSystem'
+import { WorkingDownloadLinks } from '@/components/downloads/WorkingDownloadLinks'
+import { InvestorOutreachSystem } from '@/components/marketing/InvestorOutreachSystem'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const EnhancedDownloads = () => {
   return (
@@ -13,62 +14,48 @@ const EnhancedDownloads = () => {
             COMMUNITY RESOURCES & GLOBAL DOMINATION
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Generate documents, dominate exchanges, accelerate growth & download
-            apps
+            Generate documents, dominate exchanges, accelerate growth & download apps
           </p>
           <p className="text-sm text-green-400 mt-2">
-            🌍 Breaking all barriers • 100X faster growth • Maximum security •
-            Lions + Dolphins Power
+            🌍 Breaking all barriers • 100X faster growth • Maximum security • Lions + Dolphins Power
           </p>
         </div>
 
         <Tabs defaultValue="documents" className="w-full">
           <TabsList className="grid w-full grid-cols-4 bg-black/50 backdrop-blur-md border border-green-500/20">
-            <TabsTrigger
-              value="documents"
-              className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400"
-            >
+            <TabsTrigger value="documents" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
               📄 Community Documents
             </TabsTrigger>
-            <TabsTrigger
-              value="exchanges"
-              className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400"
-            >
+            <TabsTrigger value="exchanges" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">
               🌍 Global Exchange Listings
             </TabsTrigger>
-            <TabsTrigger
-              value="marketing"
-              className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400"
-            >
+            <TabsTrigger value="marketing" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
               🚀 Marketing & Investors
             </TabsTrigger>
-            <TabsTrigger
-              value="downloads"
-              className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-400"
-            >
+            <TabsTrigger value="downloads" className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-400">
               📱 App Downloads
             </TabsTrigger>
           </TabsList>
-
+          
           <TabsContent value="documents" className="space-y-6 mt-6">
             <CommunityDocumentGenerator />
           </TabsContent>
-
+          
           <TabsContent value="exchanges" className="space-y-6 mt-6">
             <EnhancedMultiExchangeSystem />
           </TabsContent>
-
+          
           <TabsContent value="marketing" className="space-y-6 mt-6">
             <InvestorOutreachSystem />
           </TabsContent>
-
+          
           <TabsContent value="downloads" className="space-y-6 mt-6">
             <WorkingDownloadLinks />
           </TabsContent>
         </Tabs>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EnhancedDownloads;
+export default EnhancedDownloads

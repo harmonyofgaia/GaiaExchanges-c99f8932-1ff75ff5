@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Textarea } from "@/components/ui/textarea";
-import { Copy, Rocket, TrendingUp, Zap } from "lucide-react";
-import { toast } from "sonner";
+
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Textarea } from '@/components/ui/textarea'
+import { Copy, Rocket, TrendingUp, Zap } from 'lucide-react'
+import { toast } from 'sonner'
 
 export function PumpFunPromotion() {
-  const [currentMessage, setCurrentMessage] = useState("");
-  const [viralCount, setViralCount] = useState(0);
+  const [currentMessage, setCurrentMessage] = useState('')
+  const [viralCount, setViralCount] = useState(0)
 
   const pumpFunMessages = [
     `🚀 BABY BOOM INCOMING: GAiA Token about to EXPLODE on pump.fun! 
@@ -70,39 +71,37 @@ This will be the last time you see these prices!
 
 Contract: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
 
-#FinalCall #GAiAToken #CryptoRevolution #LastChance`,
-  ];
+#FinalCall #GAiAToken #CryptoRevolution #LastChance`
+  ]
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const randomMessage =
-        pumpFunMessages[Math.floor(Math.random() * pumpFunMessages.length)];
-      setCurrentMessage(randomMessage);
-      setViralCount((prev) => prev + Math.floor(Math.random() * 100));
-    }, 10000);
+      const randomMessage = pumpFunMessages[Math.floor(Math.random() * pumpFunMessages.length)]
+      setCurrentMessage(randomMessage)
+      setViralCount(prev => prev + Math.floor(Math.random() * 100))
+    }, 10000)
 
     // Set initial message
-    setCurrentMessage(pumpFunMessages[0]);
+    setCurrentMessage(pumpFunMessages[0])
 
-    return () => clearInterval(interval);
-  }, [pumpFunMessages]);
+    return () => clearInterval(interval)
+  }, [pumpFunMessages])
 
   const copyMessage = () => {
-    navigator.clipboard.writeText(currentMessage);
-    toast.success("🚀 Pump.Fun Message Copied!", {
-      description: "Ready to paste on pump.fun and social media",
-      duration: 3000,
-    });
-  };
+    navigator.clipboard.writeText(currentMessage)
+    toast.success('🚀 Pump.Fun Message Copied!', {
+      description: 'Ready to paste on pump.fun and social media',
+      duration: 3000
+    })
+  }
 
   const generateNewMessage = () => {
-    const randomMessage =
-      pumpFunMessages[Math.floor(Math.random() * pumpFunMessages.length)];
-    setCurrentMessage(randomMessage);
-    toast.success("🎯 New Viral Message Generated!", {
-      description: "Optimized for maximum pump.fun engagement",
-    });
-  };
+    const randomMessage = pumpFunMessages[Math.floor(Math.random() * pumpFunMessages.length)]
+    setCurrentMessage(randomMessage)
+    toast.success('🎯 New Viral Message Generated!', {
+      description: 'Optimized for maximum pump.fun engagement'
+    })
+  }
 
   return (
     <Card className="border-2 border-orange-500/50 bg-gradient-to-r from-orange-900/20 to-red-900/20">
@@ -117,12 +116,8 @@ Contract: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center p-4 bg-green-900/30 rounded-lg">
             <TrendingUp className="h-8 w-8 text-green-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-green-400">
-              {viralCount.toLocaleString()}
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Viral Impressions
-            </div>
+            <div className="text-2xl font-bold text-green-400">{viralCount.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground">Viral Impressions</div>
           </div>
           <div className="text-center p-4 bg-purple-900/30 rounded-lg">
             <Zap className="h-8 w-8 text-purple-400 mx-auto mb-2" />
@@ -143,19 +138,13 @@ Contract: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
             className="min-h-64 bg-black/20 border-orange-500/20 text-orange-100"
             placeholder="Viral pump.fun message will appear here..."
           />
-
+          
           <div className="flex gap-4">
-            <Button
-              onClick={copyMessage}
-              className="flex-1 bg-green-600 hover:bg-green-700"
-            >
+            <Button onClick={copyMessage} className="flex-1 bg-green-600 hover:bg-green-700">
               <Copy className="h-4 w-4 mr-2" />
               📋 Copy for Pump.Fun
             </Button>
-            <Button
-              onClick={generateNewMessage}
-              className="flex-1 bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={generateNewMessage} className="flex-1 bg-purple-600 hover:bg-purple-700">
               <Zap className="h-4 w-4 mr-2" />
               🎯 Generate New Message
             </Button>
@@ -175,5 +164,5 @@ Contract: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

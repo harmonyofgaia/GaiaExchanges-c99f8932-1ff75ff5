@@ -1,5 +1,6 @@
-import { InvestorOutreachSystem } from "@/components/marketing/InvestorOutreachSystem";
-import { UltimateSecurityWall } from "@/components/security/UltimateSecurityWall";
+
+import { InvestorOutreachSystem } from '@/components/marketing/InvestorOutreachSystem'
+import { UltimateSecurityWall } from '@/components/security/UltimateSecurityWall'
 
 const MarketingHub = () => {
   return (
@@ -10,8 +11,7 @@ const MarketingHub = () => {
             🚀 MARKETING & INVESTOR OUTREACH HUB
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Accelerating community growth with automated marketing & secure
-            investor attraction
+            Accelerating community growth with automated marketing & secure investor attraction
           </p>
           <p className="text-sm text-purple-400 mt-2">
             🦁🐬 Lions + Dolphins Power = Unstoppable Market Domination
@@ -24,7 +24,7 @@ const MarketingHub = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MarketingHub;
+export default MarketingHub

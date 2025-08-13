@@ -1,41 +1,30 @@
-import { useState, useEffect, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import {
-  Shield,
-  Lock,
-  Eye,
-  Zap,
-  Globe,
-  AlertTriangle,
-  CheckCircle,
-} from "lucide-react";
-import { toast } from "sonner";
-import { GAIA_TOKEN } from "@/constants/gaia";
+
+import { useState, useEffect, useRef } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { Shield, Lock, Eye, Zap, Globe, AlertTriangle, CheckCircle } from 'lucide-react'
+import { toast } from 'sonner'
+import { GAIA_TOKEN } from '@/constants/gaia'
 
 interface SecurityMetrics {
-  encryptionLevel: number;
-  firewallStrength: number;
-  globalThreatScan: number;
-  privateKeyProtection: number;
-  antiCopyProtection: number;
-  communityShieldLevel: number;
-  bankLevelSecurity: number;
-  quantumResistance: number;
+  encryptionLevel: number
+  firewallStrength: number
+  globalThreatScan: number
+  privateKeyProtection: number
+  antiCopyProtection: number
+  communityShieldLevel: number
+  bankLevelSecurity: number
+  quantumResistance: number
 }
 
 interface GlobalThreat {
-  id: string;
-  type:
-    | "COPY_ATTEMPT"
-    | "WALLET_ATTACK"
-    | "STRATEGY_THEFT"
-    | "PRIVATE_INFO_BREACH";
-  location: string;
-  severity: "CRITICAL" | "HIGH" | "MEDIUM" | "LOW";
-  blocked: boolean;
-  timestamp: Date;
+  id: string
+  type: 'COPY_ATTEMPT' | 'WALLET_ATTACK' | 'STRATEGY_THEFT' | 'PRIVATE_INFO_BREACH'
+  location: string
+  severity: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW'
+  blocked: boolean
+  timestamp: Date
 }
 
 export function UltraSecureWalletProtection() {
@@ -47,50 +36,44 @@ export function UltraSecureWalletProtection() {
     antiCopyProtection: 100,
     communityShieldLevel: 100,
     bankLevelSecurity: 150,
-    quantumResistance: 100,
-  });
+    quantumResistance: 100
+  })
 
-  const [threats, setThreats] = useState<GlobalThreat[]>([]);
-  const [isScanning, setIsScanning] = useState(true);
-  const globalScanInterval = useRef<NodeJS.Timeout>(undefined);
+  const [threats, setThreats] = useState<GlobalThreat[]>([])
+  const [isScanning, setIsScanning] = useState(true)
+  const globalScanInterval = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const performGlobalSecurityScan = async () => {
-      console.log(
-        "🛡️ GLOBAL SECURITY SCAN - EVERY 10 SECONDS - WORLDWIDE PROTECTION ACTIVE",
-      );
-      console.log("🔒 BANK-LEVEL ENCRYPTION EXCEEDED - WE ARE ALWAYS STRONGER");
-
+      console.log('🛡️ GLOBAL SECURITY SCAN - EVERY 10 SECONDS - WORLDWIDE PROTECTION ACTIVE')
+      console.log('🔒 BANK-LEVEL ENCRYPTION EXCEEDED - WE ARE ALWAYS STRONGER')
+      
       try {
-        const copyAttempts = await detectCopyAttempts();
-        const walletAttacks = await detectWalletAttacks();
-        const strategyThefts = await detectStrategyTheft();
-        const privateInfoBreaches = await detectPrivateInfoBreaches();
-
+        const copyAttempts = await detectCopyAttempts()
+        const walletAttacks = await detectWalletAttacks()
+        const strategyThefts = await detectStrategyTheft()
+        const privateInfoBreaches = await detectPrivateInfoBreaches()
+        
         const allThreats = [
           ...copyAttempts,
           ...walletAttacks,
           ...strategyThefts,
-          ...privateInfoBreaches,
-        ];
-
+          ...privateInfoBreaches
+        ]
+        
         if (allThreats.length > 0) {
-          setThreats((prev) => [...allThreats, ...prev.slice(0, 20)]);
-
-          allThreats.forEach((threat) => {
-            blockThreatInstantly(threat);
-          });
-
-          toast.error(
-            `🚨 ${allThreats.length} GLOBAL THREATS DETECTED & BLOCKED`,
-            {
-              description:
-                "All threats neutralized instantly - Community protected",
-              duration: 5000,
-            },
-          );
+          setThreats(prev => [...allThreats, ...prev.slice(0, 20)])
+          
+          allThreats.forEach(threat => {
+            blockThreatInstantly(threat)
+          })
+          
+          toast.error(`🚨 ${allThreats.length} GLOBAL THREATS DETECTED & BLOCKED`, {
+            description: 'All threats neutralized instantly - Community protected',
+            duration: 5000
+          })
         }
-
+        
         setMetrics({
           encryptionLevel: 100,
           firewallStrength: 100,
@@ -99,132 +82,121 @@ export function UltraSecureWalletProtection() {
           antiCopyProtection: 100,
           communityShieldLevel: 100,
           bankLevelSecurity: 150,
-          quantumResistance: 100,
-        });
+          quantumResistance: 100
+        })
+        
       } catch (error) {
-        console.log("🔒 Ultra-secure system self-protected:", error);
-        setMetrics((prev) => ({
+        console.log('🔒 Ultra-secure system self-protected:', error)
+        setMetrics(prev => ({
           ...prev,
-          bankLevelSecurity: 150,
-        }));
+          bankLevelSecurity: 150
+        }))
       }
-    };
-
-    globalScanInterval.current = setInterval(performGlobalSecurityScan, 10000);
-    performGlobalSecurityScan();
-
-    return () => {
-      if (globalScanInterval.current) clearInterval(globalScanInterval.current);
-    };
-  }, []);
-
-  const detectCopyAttempts = async (): Promise<GlobalThreat[]> => {
-    const threats: GlobalThreat[] = [];
-
-    if (Math.random() < 0.3) {
-      const locations = [
-        "Russia",
-        "China",
-        "North Korea",
-        "Unknown VPN",
-        "Dark Web",
-      ];
-
-      threats.push({
-        id: `copy_${Date.now()}`,
-        type: "COPY_ATTEMPT",
-        location: locations[Math.floor(Math.random() * locations.length)],
-        severity: "CRITICAL",
-        blocked: true,
-        timestamp: new Date(),
-      });
     }
 
-    return threats;
-  };
+    globalScanInterval.current = setInterval(performGlobalSecurityScan, 10000)
+    performGlobalSecurityScan()
+
+    return () => {
+      if (globalScanInterval.current) clearInterval(globalScanInterval.current)
+    }
+  }, [])
+
+  const detectCopyAttempts = async (): Promise<GlobalThreat[]> => {
+    const threats: GlobalThreat[] = []
+    
+    if (Math.random() < 0.3) {
+      const locations = ['Russia', 'China', 'North Korea', 'Unknown VPN', 'Dark Web']
+      
+      threats.push({
+        id: `copy_${Date.now()}`,
+        type: 'COPY_ATTEMPT',
+        location: locations[Math.floor(Math.random() * locations.length)],
+        severity: 'CRITICAL',
+        blocked: true,
+        timestamp: new Date()
+      })
+    }
+    
+    return threats
+  }
 
   const detectWalletAttacks = async (): Promise<GlobalThreat[]> => {
-    const threats: GlobalThreat[] = [];
-
+    const threats: GlobalThreat[] = []
+    
     if (Math.random() < 0.2) {
       threats.push({
         id: `wallet_${Date.now()}`,
-        type: "WALLET_ATTACK",
-        location: "Global Network Scan",
-        severity: "CRITICAL",
+        type: 'WALLET_ATTACK',
+        location: 'Global Network Scan',
+        severity: 'CRITICAL',
         blocked: true,
-        timestamp: new Date(),
-      });
+        timestamp: new Date()
+      })
     }
-
-    return threats;
-  };
+    
+    return threats
+  }
 
   const detectStrategyTheft = async (): Promise<GlobalThreat[]> => {
-    const threats: GlobalThreat[] = [];
-
+    const threats: GlobalThreat[] = []
+    
     if (Math.random() < 0.15) {
       threats.push({
         id: `strategy_${Date.now()}`,
-        type: "STRATEGY_THEFT",
-        location: "Competitor Analysis",
-        severity: "HIGH",
+        type: 'STRATEGY_THEFT',
+        location: 'Competitor Analysis',
+        severity: 'HIGH',
         blocked: true,
-        timestamp: new Date(),
-      });
+        timestamp: new Date()
+      })
     }
-
-    return threats;
-  };
+    
+    return threats
+  }
 
   const detectPrivateInfoBreaches = async (): Promise<GlobalThreat[]> => {
-    const threats: GlobalThreat[] = [];
-
+    const threats: GlobalThreat[] = []
+    
     if (Math.random() < 0.1) {
       threats.push({
         id: `privacy_${Date.now()}`,
-        type: "PRIVATE_INFO_BREACH",
-        location: "Data Mining Attempt",
-        severity: "CRITICAL",
+        type: 'PRIVATE_INFO_BREACH',
+        location: 'Data Mining Attempt',
+        severity: 'CRITICAL',
         blocked: true,
-        timestamp: new Date(),
-      });
+        timestamp: new Date()
+      })
     }
-
-    return threats;
-  };
+    
+    return threats
+  }
 
   const blockThreatInstantly = (threat: GlobalThreat) => {
-    console.log(
-      `🚨 BLOCKING THREAT INSTANTLY: ${threat.type} from ${threat.location}`,
-    );
-
+    console.log(`🚨 BLOCKING THREAT INSTANTLY: ${threat.type} from ${threat.location}`)
+    
     const blockingActions = [
-      "IP_WORLDWIDE_BAN",
-      "FIREWALL_REINFORCEMENT",
-      "ENCRYPTION_UPGRADE",
-      "QUANTUM_SHIELD_ACTIVATION",
-      "COMMUNITY_ALERT_SENT",
-      "LAW_ENFORCEMENT_NOTIFIED",
-    ];
-
-    blockingActions.forEach((action) => {
-      console.log(`⚡ EXECUTING: ${action} - THREAT NEUTRALIZED`);
-    });
-  };
+      'IP_WORLDWIDE_BAN',
+      'FIREWALL_REINFORCEMENT',
+      'ENCRYPTION_UPGRADE',
+      'QUANTUM_SHIELD_ACTIVATION',
+      'COMMUNITY_ALERT_SENT',
+      'LAW_ENFORCEMENT_NOTIFIED'
+    ]
+    
+    blockingActions.forEach(action => {
+      console.log(`⚡ EXECUTING: ${action} - THREAT NEUTRALIZED`)
+    })
+  }
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case "CRITICAL":
-        return "bg-red-600 text-white";
-      case "HIGH":
-        return "bg-orange-600 text-white";
-      case "MEDIUM":
-        return "bg-yellow-600 text-white";
-      default:
-        return "bg-blue-600 text-white";
+      case 'CRITICAL': return 'bg-red-600 text-white'
+      case 'HIGH': return 'bg-orange-600 text-white'
+      case 'MEDIUM': return 'bg-yellow-600 text-white'
+      default: return 'bg-blue-600 text-white'
     }
-  };
+  }
 
   return (
     <Card className="border-red-500/30 bg-gradient-to-br from-red-900/30 to-orange-900/30">
@@ -234,74 +206,40 @@ export function UltraSecureWalletProtection() {
           🛡️ ULTRA-SECURE WALLET PROTECTION - BEYOND BANK LEVEL
         </CardTitle>
         <p className="text-muted-foreground">
-          Global scanning every 10 seconds • Always stronger than banks •
-          Forbidden to copy
+          Global scanning every 10 seconds • Always stronger than banks • Forbidden to copy
         </p>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-green-400 font-bold">
-              🔒 GAiA Token Security:
-            </span>
-            <Badge className="bg-green-600 text-white">
-              MAXIMUM PROTECTION
-            </Badge>
+            <span className="text-green-400 font-bold">🔒 GAiA Token Security:</span>
+            <Badge className="bg-green-600 text-white">MAXIMUM PROTECTION</Badge>
           </div>
           <div className="text-sm space-y-1">
-            <div>
-              Contract:{" "}
-              <code className="font-mono text-xs">
-                {GAIA_TOKEN.CONTRACT_ADDRESS}
-              </code>
-            </div>
-            <div>
-              Wallet:{" "}
-              <code className="font-mono text-xs">
-                {GAIA_TOKEN.WALLET_ADDRESS}
-              </code>
-            </div>
+            <div>Contract: <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code></div>
+            <div>Wallet: <code className="font-mono text-xs">{GAIA_TOKEN.WALLET_ADDRESS}</code></div>
           </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-green-400">
-              {metrics.encryptionLevel}%
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Encryption Level
-            </div>
+            <div className="text-2xl font-bold text-green-400">{metrics.encryptionLevel}%</div>
+            <div className="text-xs text-muted-foreground">Encryption Level</div>
             <Progress value={metrics.encryptionLevel} className="h-2 mt-1" />
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-blue-400">
-              {metrics.firewallStrength}%
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Firewall Strength
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{metrics.firewallStrength}%</div>
+            <div className="text-xs text-muted-foreground">Firewall Strength</div>
             <Progress value={metrics.firewallStrength} className="h-2 mt-1" />
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-purple-400">
-              {metrics.bankLevelSecurity}%
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Bank Level Security
-            </div>
-            <Progress
-              value={Math.min(100, metrics.bankLevelSecurity)}
-              className="h-2 mt-1"
-            />
+            <div className="text-2xl font-bold text-purple-400">{metrics.bankLevelSecurity}%</div>
+            <div className="text-xs text-muted-foreground">Bank Level Security</div>
+            <Progress value={Math.min(100, metrics.bankLevelSecurity)} className="h-2 mt-1" />
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-orange-400">
-              {metrics.quantumResistance}%
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Quantum Resistance
-            </div>
+            <div className="text-2xl font-bold text-orange-400">{metrics.quantumResistance}%</div>
+            <div className="text-xs text-muted-foreground">Quantum Resistance</div>
             <Progress value={metrics.quantumResistance} className="h-2 mt-1" />
           </div>
         </div>
@@ -309,16 +247,11 @@ export function UltraSecureWalletProtection() {
         <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
           <div className="flex items-center gap-2 mb-2">
             <Globe className="h-5 w-5 text-blue-400" />
-            <span className="text-blue-400 font-bold">
-              Global Security Scanning
-            </span>
-            {isScanning && (
-              <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse" />
-            )}
+            <span className="text-blue-400 font-bold">Global Security Scanning</span>
+            {isScanning && <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse" />}
           </div>
           <div className="text-sm text-muted-foreground">
-            Scanning worldwide every 10 seconds for threats, copy attempts, and
-            attacks
+            Scanning worldwide every 10 seconds for threats, copy attempts, and attacks
           </div>
         </div>
 
@@ -330,17 +263,10 @@ export function UltraSecureWalletProtection() {
             </h4>
             <div className="space-y-2 max-h-40 overflow-y-auto">
               {threats.slice(0, 5).map((threat) => (
-                <div
-                  key={threat.id}
-                  className="flex items-center justify-between p-2 bg-black/20 rounded border border-red-500/20"
-                >
+                <div key={threat.id} className="flex items-center justify-between p-2 bg-black/20 rounded border border-red-500/20">
                   <div className="text-sm">
-                    <div className="font-semibold text-red-400">
-                      {threat.type.replace("_", " ")}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {threat.location}
-                    </div>
+                    <div className="font-semibold text-red-400">{threat.type.replace('_', ' ')}</div>
+                    <div className="text-xs text-muted-foreground">{threat.location}</div>
                   </div>
                   <div className="flex items-center gap-2">
                     <Badge className={getSeverityColor(threat.severity)}>
@@ -374,5 +300,5 @@ export function UltraSecureWalletProtection() {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

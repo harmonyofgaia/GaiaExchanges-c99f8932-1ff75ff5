@@ -1,72 +1,66 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ArrowUpDown, Zap, Heart } from "lucide-react";
-import { toast } from "sonner";
-import { GAIA_TOKEN } from "@/constants/gaia";
-import { useGaiaTokenData } from "@/hooks/useGaiaTokenData";
+
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { ArrowUpDown, Zap, Heart } from 'lucide-react'
+import { toast } from 'sonner'
+import { GAIA_TOKEN } from '@/constants/gaia'
+import { useGaiaTokenData } from '@/hooks/useGaiaTokenData'
 
 interface SwapInterfaceProps {
-  title?: string;
-  showHeader?: boolean;
+  title?: string
+  showHeader?: boolean
 }
 
-export function SwapInterface({
-  title = "Investment Portal",
-  showHeader = true,
-}: SwapInterfaceProps) {
-  const [fromAmount, setFromAmount] = useState<string>("");
-  const [toAmount, setToAmount] = useState<string>("");
-  const [fromCurrency, setFromCurrency] = useState<string>(GAIA_TOKEN.SYMBOL);
-  const [toCurrency, setToCurrency] = useState<string>("USDC");
-  const [isSwapping, setIsSwapping] = useState<boolean>(false);
+export function SwapInterface({ title = "Investment Portal", showHeader = true }: SwapInterfaceProps) {
+  const [fromAmount, setFromAmount] = useState<string>('')
+  const [toAmount, setToAmount] = useState<string>('')
+  const [fromCurrency, setFromCurrency] = useState<string>(GAIA_TOKEN.SYMBOL)
+  const [toCurrency, setToCurrency] = useState<string>('USDC')
+  const [isSwapping, setIsSwapping] = useState<boolean>(false)
 
-  const { tokenData, hasRealData } = useGaiaTokenData();
-  const exchangeRate =
-    hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE;
+  const { tokenData, hasRealData } = useGaiaTokenData()
+  const exchangeRate = hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE
 
   useEffect(() => {
     if (fromAmount && !isNaN(Number(fromAmount))) {
-      if (fromCurrency === GAIA_TOKEN.SYMBOL && toCurrency === "USDC") {
-        setToAmount((Number(fromAmount) * exchangeRate).toFixed(6));
-      } else if (fromCurrency === "USDC" && toCurrency === GAIA_TOKEN.SYMBOL) {
-        setToAmount((Number(fromAmount) / exchangeRate).toFixed(2));
+      if (fromCurrency === GAIA_TOKEN.SYMBOL && toCurrency === 'USDC') {
+        setToAmount((Number(fromAmount) * exchangeRate).toFixed(6))
+      } else if (fromCurrency === 'USDC' && toCurrency === GAIA_TOKEN.SYMBOL) {
+        setToAmount((Number(fromAmount) / exchangeRate).toFixed(2))
       }
     }
-  }, [fromAmount, fromCurrency, toCurrency, exchangeRate]);
+  }, [fromAmount, fromCurrency, toCurrency, exchangeRate])
 
   const handleSwap = () => {
     if (!fromAmount || Number(fromAmount) <= 0) {
-      toast.error("Please enter a valid amount");
-      return;
+      toast.error('Please enter a valid amount')
+      return
     }
 
-    setIsSwapping(true);
-
+    setIsSwapping(true)
+    
     setTimeout(() => {
-      const message = hasRealData
+      const message = hasRealData 
         ? `Long-term investment: ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency}`
-        : `Investment transaction: ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency} (using estimated rates)`;
-
-      toast.success(
-        "🌱 Investment Confirmed - Fees Sent to Community Wallet!",
-        {
-          description: `${message} • All fees transparently sent to: ${GAIA_TOKEN.WALLET_ADDRESS}`,
-        },
-      );
-      setFromAmount("");
-      setToAmount("");
-      setIsSwapping(false);
-    }, 2000);
-  };
+        : `Investment transaction: ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency} (using estimated rates)`
+      
+      toast.success('🌱 Investment Confirmed - Fees Sent to Community Wallet!', {
+        description: `${message} • All fees transparently sent to: ${GAIA_TOKEN.WALLET_ADDRESS}`
+      })
+      setFromAmount('')
+      setToAmount('')
+      setIsSwapping(false)
+    }, 2000)
+  }
 
   const switchCurrencies = () => {
-    setFromCurrency(toCurrency);
-    setToCurrency(fromCurrency);
-    setFromAmount(toAmount);
-    setToAmount(fromAmount);
-  };
+    setFromCurrency(toCurrency)
+    setToCurrency(fromCurrency)
+    setFromAmount(toAmount)
+    setToAmount(fromAmount)
+  }
 
   return (
     <Card className="border-border/50">
@@ -136,7 +130,7 @@ export function SwapInterface({
           </div>
         </div>
 
-        <Button
+        <Button 
           onClick={handleSwap}
           disabled={!fromAmount || Number(fromAmount) <= 0 || isSwapping}
           className="w-full bg-green-600 hover:bg-green-700 text-white"
@@ -149,26 +143,19 @@ export function SwapInterface({
           ) : (
             <>
               <Heart className="h-4 w-4 mr-2" />
-              {hasRealData ? "Make Long-term Investment" : "Demo Investment"}
+              {hasRealData ? 'Make Long-term Investment' : 'Demo Investment'}
             </>
           )}
         </Button>
 
         <div className="text-xs text-muted-foreground space-y-1">
-          <div>
-            Rate: 1 {GAIA_TOKEN.SYMBOL} = ${exchangeRate.toFixed(6)} USDC{" "}
-            {!hasRealData && "(estimated)"}
-          </div>
-          <div>
-            Investment Fee: 0.1% (transparently sent to community wallet)
-          </div>
-          <div>
-            📍 Community Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...
-          </div>
+          <div>Rate: 1 {GAIA_TOKEN.SYMBOL} = ${exchangeRate.toFixed(6)} USDC {!hasRealData && '(estimated)'}</div>
+          <div>Investment Fee: 0.1% (transparently sent to community wallet)</div>
+          <div>📍 Community Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...</div>
           <div>🌱 100% of fees reinvested in environmental projects</div>
           <div>🛡️ No staking = No gambling = Stable forever</div>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

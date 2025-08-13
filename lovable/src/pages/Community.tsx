@@ -1,4 +1,5 @@
-import { CommunityContract } from "@/components/CommunityContract";
+
+import { CommunityContract } from '@/components/CommunityContract'
 
 const Community = () => {
   return (
@@ -9,19 +10,17 @@ const Community = () => {
             Community Reinvestment Projects
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Join our sustainable community initiatives • Sign contracts for
-            green projects • Make a difference
+            Join our sustainable community initiatives • Sign contracts for green projects • Make a difference
           </p>
           <p className="text-sm text-green-400 mt-2">
-            🌱 Managed by Culture of Harmony • Fully transparent • Community
-            driven
+            🌱 Managed by Culture of Harmony • Fully transparent • Community driven
           </p>
         </div>
 
         <CommunityContract />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Community;
+export default Community

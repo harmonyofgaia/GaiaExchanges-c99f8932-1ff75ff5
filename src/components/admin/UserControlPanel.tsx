@@ -1,56 +1,51 @@
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Search, Eye, Ban } from "lucide-react";
+
+import { useState } from 'react'
+import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { Search, Eye, Ban } from 'lucide-react'
 
 interface User {
-  id: string;
-  username: string;
-  email: string;
-  status: "active" | "warned" | "restricted" | "banned";
-  joinDate: string;
-  lastActivity: string;
-  ipAddress: string;
-  location: string;
+  id: string
+  username: string
+  email: string
+  status: 'active' | 'warned' | 'restricted' | 'banned'
+  joinDate: string
+  lastActivity: string
+  ipAddress: string
+  location: string
 }
 
 export function UserControlPanel() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('')
   const [users] = useState<User[]>([
     {
-      id: "1",
-      username: "TestUser1",
-      email: "user1@example.com",
-      status: "active",
-      joinDate: "2024-01-15",
-      lastActivity: "2 min ago",
-      ipAddress: "192.168.1.101",
-      location: "United States",
-    },
-  ]);
+      id: '1',
+      username: 'TestUser1',
+      email: 'user1@example.com',
+      status: 'active',
+      joinDate: '2024-01-15',
+      lastActivity: '2 min ago',
+      ipAddress: '192.168.1.101',
+      location: 'United States'
+    }
+  ])
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "active":
-        return "bg-green-600";
-      case "warned":
-        return "bg-yellow-600";
-      case "restricted":
-        return "bg-orange-600";
-      case "banned":
-        return "bg-red-600";
-      default:
-        return "bg-gray-600";
+      case 'active': return 'bg-green-600'
+      case 'warned': return 'bg-yellow-600'
+      case 'restricted': return 'bg-orange-600'
+      case 'banned': return 'bg-red-600'
+      default: return 'bg-gray-600'
     }
-  };
+  }
 
-  const filteredUsers = users.filter(
-    (user) =>
-      user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  const filteredUsers = users.filter(user => 
+    user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <div className="space-y-4">
@@ -66,10 +61,8 @@ export function UserControlPanel() {
         </Button>
       </div>
 
-      <h3 className="text-lg font-semibold text-green-400">
-        Active Users ({filteredUsers.length})
-      </h3>
-
+      <h3 className="text-lg font-semibold text-green-400">Active Users ({filteredUsers.length})</h3>
+      
       {filteredUsers.map((user) => (
         <Card key={user.id} className="bg-black/30">
           <CardContent className="p-4">
@@ -77,9 +70,7 @@ export function UserControlPanel() {
               <div className="flex items-center gap-4">
                 <div>
                   <div className="font-semibold">{user.username}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {user.email}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{user.email}</div>
                   <div className="text-xs text-muted-foreground">
                     IP: {user.ipAddress} • Location: {user.location}
                   </div>
@@ -91,7 +82,7 @@ export function UserControlPanel() {
                   {user.status.toUpperCase()}
                 </Badge>
               </div>
-
+              
               <div className="flex gap-2">
                 <Button size="sm" variant="outline">
                   <Eye className="h-4 w-4" />
@@ -105,5 +96,5 @@ export function UserControlPanel() {
         </Card>
       ))}
     </div>
-  );
+  )
 }

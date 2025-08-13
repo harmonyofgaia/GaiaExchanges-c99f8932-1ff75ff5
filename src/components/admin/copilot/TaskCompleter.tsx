@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, Clock, AlertTriangle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
+import React, { useState, useEffect, useCallback } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { CheckCircle, XCircle, Clock, AlertTriangle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface Task {
   id: string;
   title: string;
   description: string;
-  status: "pending" | "in-progress" | "completed" | "failed";
+  status: 'pending' | 'in-progress' | 'completed' | 'failed';
   createdAt: Date;
   startedAt?: Date;
   completedAt?: Date;
@@ -21,26 +22,15 @@ interface TaskCompleterProps {
   toolId?: string;
 }
 
-export function TaskCompleter({
-  selectedTask,
-  toolName,
-  toolId,
-}: TaskCompleterProps) {
-  const [taskStatus, setTaskStatus] = useState(
-    selectedTask?.status || "pending",
-  );
+export function TaskCompleter({ selectedTask, toolName, toolId }: TaskCompleterProps) {
+  const [taskStatus, setTaskStatus] = useState(selectedTask?.status || 'pending');
   const [completionResult, setCompletionResult] = useState<string | null>(null);
   const [failureReason, setFailureReason] = useState<string | null>(null);
 
-  const executeTask = useCallback(
-    async (taskId: string) => {
-      console.log(
-        `Executing task ${taskId}${toolName ? ` for ${toolName}` : ""}`,
-      );
-      // Task execution logic here
-    },
-    [toolName],
-  );
+  const executeTask = useCallback(async (taskId: string) => {
+    console.log(`Executing task ${taskId}${toolName ? ` for ${toolName}` : ''}`);
+    // Task execution logic here
+  }, [toolName]);
 
   useEffect(() => {
     // Use executeTask in effect
@@ -59,7 +49,7 @@ export function TaskCompleter({
     <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-purple-900/20">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-blue-400">
-          {selectedTask ? selectedTask.title : "No Task Selected"}
+          {selectedTask ? selectedTask.title : 'No Task Selected'}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -80,25 +70,25 @@ export function TaskCompleter({
                 )}
               </div>
               <Badge className="bg-blue-600 text-white">
-                {taskStatus === "pending" && (
+                {taskStatus === 'pending' && (
                   <>
                     <Clock className="h-3 w-3 mr-1" />
                     Pending
                   </>
                 )}
-                {taskStatus === "in-progress" && (
+                {taskStatus === 'in-progress' && (
                   <>
                     <Clock className="h-3 w-3 mr-1 animate-spin" />
                     In Progress
                   </>
                 )}
-                {taskStatus === "completed" && (
+                {taskStatus === 'completed' && (
                   <>
                     <CheckCircle className="h-3 w-3 mr-1" />
                     Completed
                   </>
                 )}
-                {taskStatus === "failed" && (
+                {taskStatus === 'failed' && (
                   <>
                     <XCircle className="h-3 w-3 mr-1" />
                     Failed
@@ -107,7 +97,7 @@ export function TaskCompleter({
               </Badge>
             </div>
 
-            {taskStatus === "failed" && (
+            {taskStatus === 'failed' && (
               <div className="rounded-md border border-red-500/50 bg-red-900/20 p-4">
                 <div className="flex items-center space-x-2">
                   <AlertTriangle className="h-4 w-4 text-red-400" />
@@ -115,9 +105,7 @@ export function TaskCompleter({
                     Failure Reason:
                   </p>
                 </div>
-                <p className="text-sm text-red-300">
-                  {failureReason || selectedTask.failureReason || "Unknown"}
-                </p>
+                <p className="text-sm text-red-300">{failureReason || selectedTask.failureReason || 'Unknown'}</p>
               </div>
             )}
 
@@ -134,26 +122,17 @@ export function TaskCompleter({
             )}
 
             <div className="flex items-center space-x-2">
-              {taskStatus === "pending" && (
-                <Button
-                  onClick={() => setTaskStatus("in-progress")}
-                  className="bg-blue-600 hover:bg-blue-700"
-                >
+              {taskStatus === 'pending' && (
+                <Button onClick={() => setTaskStatus('in-progress')} className="bg-blue-600 hover:bg-blue-700">
                   Start Task
                 </Button>
               )}
-              {taskStatus === "in-progress" && (
+              {taskStatus === 'in-progress' && (
                 <>
-                  <Button
-                    onClick={() => setTaskStatus("completed")}
-                    className="bg-green-600 hover:bg-green-700"
-                  >
+                  <Button onClick={() => setTaskStatus('completed')} className="bg-green-600 hover:bg-green-700">
                     Complete Task
                   </Button>
-                  <Button
-                    onClick={() => setTaskStatus("failed")}
-                    variant="destructive"
-                  >
+                  <Button onClick={() => setTaskStatus('failed')} variant="destructive">
                     Mark as Failed
                   </Button>
                 </>
@@ -161,10 +140,7 @@ export function TaskCompleter({
             </div>
           </>
         ) : (
-          <p className="text-gray-500">
-            No task selected. Please select a task to view details and take
-            action.
-          </p>
+          <p className="text-gray-500">No task selected. Please select a task to view details and take action.</p>
         )}
       </CardContent>
     </Card>

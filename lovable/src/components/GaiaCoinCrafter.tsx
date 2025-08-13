@@ -1,75 +1,66 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import {
-  Coins,
-  Flame,
-  Factory,
-  TrendingUp,
+
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { Badge } from '@/components/ui/badge'
+import { 
+  Coins, 
+  Flame, 
+  Factory, 
+  TrendingUp, 
   Calendar,
   Zap,
   Target,
   Recycle,
   Copy,
   ExternalLink,
-  BarChart3,
-} from "lucide-react";
-import {
-  GAIA_TOKEN,
-  GAIA_METRICS,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
-import { toast } from "sonner";
+  BarChart3
+} from 'lucide-react'
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
+import { toast } from 'sonner'
 
 export function GaiaCoinCrafter() {
-  const [monthlyProgress, setMonthlyProgress] = useState(67);
-  const [totalCrafted, setTotalCrafted] = useState(245678);
-  const [burnedForReinvestment, setBurnedForReinvestment] = useState(12459);
-  const [nextCraftingIn, setNextCraftingIn] = useState(13);
+  const [monthlyProgress, setMonthlyProgress] = useState(67)
+  const [totalCrafted, setTotalCrafted] = useState(245678)
+  const [burnedForReinvestment, setBurnedForReinvestment] = useState(12459)
+  const [nextCraftingIn, setNextCraftingIn] = useState(13)
 
   // Auto-update system connected to official token
   useEffect(() => {
-    console.log(
-      "🏭 GAiA Coin Crafter: Connected to official token address:",
-      GAIA_TOKEN.WALLET_ADDRESS,
-    );
+    console.log('🏭 GAiA Coin Crafter: Connected to official token address:', GAIA_TOKEN.WALLET_ADDRESS)
     const interval = setInterval(() => {
-      setMonthlyProgress((prev) => Math.min(prev + 0.15, 100));
-      setTotalCrafted((prev) => prev + Math.floor(Math.random() * 12) + 5);
-      setBurnedForReinvestment(
-        (prev) => prev + Math.floor(Math.random() * 4) + 1,
-      );
-    }, 8000);
+      setMonthlyProgress(prev => Math.min(prev + 0.15, 100))
+      setTotalCrafted(prev => prev + Math.floor(Math.random() * 12) + 5)
+      setBurnedForReinvestment(prev => prev + Math.floor(Math.random() * 4) + 1)
+    }, 8000)
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
 
   const copyOfficialWalletAddress = () => {
-    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS);
-    toast.success("Official GAiA Wallet Address Copied!", {
-      description: "Connected to official GAiA wallet address",
-      duration: 3000,
-    });
-  };
+    navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS)
+    toast.success('Official GAiA Wallet Address Copied!', {
+      description: 'Connected to official GAiA wallet address',
+      duration: 3000
+    })
+  }
 
   const copyOfficialContractAddress = () => {
-    navigator.clipboard.writeText(GAIA_TOKEN.CONTRACT_ADDRESS);
-    toast.success("Official GAiA Contract Address Copied!", {
-      description: "Connected to official GAiA contract address",
-      duration: 3000,
-    });
-  };
+    navigator.clipboard.writeText(GAIA_TOKEN.CONTRACT_ADDRESS)
+    toast.success('Official GAiA Contract Address Copied!', {
+      description: 'Connected to official GAiA contract address',
+      duration: 3000
+    })
+  }
 
   const openOfficialPumpFun = () => {
-    window.open(GAIA_TOKEN.PUMP_FUN_URL, "_blank");
-    toast.info("🚀 Opening Official GAiA on Pump.fun", {
-      description: "Redirecting to official GAiA token page...",
-      duration: 3000,
-    });
-  };
+    window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')
+    toast.info('🚀 Opening Official GAiA on Pump.fun', {
+      description: 'Redirecting to official GAiA token page...',
+      duration: 3000
+    })
+  }
 
   return (
     <div className="space-y-6">
@@ -86,25 +77,13 @@ export function GaiaCoinCrafter() {
             {/* Official Wallet Address */}
             <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-blue-400 font-bold">
-                  Official GAiA Wallet:
-                </span>
+                <span className="text-blue-400 font-bold">Official GAiA Wallet:</span>
                 <div className="flex gap-2">
-                  <Button
-                    onClick={copyOfficialWalletAddress}
-                    variant="outline"
-                    size="sm"
-                    className="border-blue-500/30 text-blue-400"
-                  >
+                  <Button onClick={copyOfficialWalletAddress} variant="outline" size="sm" className="border-blue-500/30 text-blue-400">
                     <Copy className="h-3 w-3 mr-1" />
                     Copy
                   </Button>
-                  <Button
-                    onClick={openOfficialPumpFun}
-                    variant="outline"
-                    size="sm"
-                    className="border-purple-500/30 text-purple-400"
-                  >
+                  <Button onClick={openOfficialPumpFun} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
                     <BarChart3 className="h-3 w-3 mr-1" />
                     Charts
                   </Button>
@@ -118,15 +97,8 @@ export function GaiaCoinCrafter() {
             {/* Official Contract Address */}
             <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-purple-400 font-bold">
-                  Official GAiA Contract:
-                </span>
-                <Button
-                  onClick={copyOfficialContractAddress}
-                  variant="outline"
-                  size="sm"
-                  className="border-purple-500/30 text-purple-400"
-                >
+                <span className="text-purple-400 font-bold">Official GAiA Contract:</span>
+                <Button onClick={copyOfficialContractAddress} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
                   <Copy className="h-3 w-3 mr-1" />
                   Copy
                 </Button>
@@ -139,27 +111,19 @@ export function GaiaCoinCrafter() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div className="text-center p-3 bg-green-900/20 rounded border border-green-500/20">
-              <div className="text-lg font-bold text-green-400">
-                {formatGaiaPrice(GAIA_TOKEN.INITIAL_PRICE)}
-              </div>
+              <div className="text-lg font-bold text-green-400">{formatGaiaPrice(GAIA_TOKEN.INITIAL_PRICE)}</div>
               <div className="text-muted-foreground">Official GAiA Price</div>
             </div>
             <div className="text-center p-3 bg-blue-900/20 rounded border border-blue-500/20">
-              <div className="text-lg font-bold text-blue-400">
-                {formatGaiaNumber(GAIA_METRICS.INITIAL_HOLDERS)}
-              </div>
+              <div className="text-lg font-bold text-blue-400">{formatGaiaNumber(GAIA_METRICS.INITIAL_HOLDERS)}</div>
               <div className="text-muted-foreground">Official Holders</div>
             </div>
             <div className="text-center p-3 bg-purple-900/20 rounded border border-purple-500/20">
-              <div className="text-lg font-bold text-purple-400">
-                {formatGaiaPrice(GAIA_METRICS.INITIAL_MARKET_CAP)}
-              </div>
+              <div className="text-lg font-bold text-purple-400">{formatGaiaPrice(GAIA_METRICS.INITIAL_MARKET_CAP)}</div>
               <div className="text-muted-foreground">Official Market Cap</div>
             </div>
             <div className="text-center p-3 bg-yellow-900/20 rounded border border-yellow-500/20">
-              <div className="text-lg font-bold text-yellow-400">
-                {formatGaiaPrice(GAIA_METRICS.INITIAL_VOLUME)}
-              </div>
+              <div className="text-lg font-bold text-yellow-400">{formatGaiaPrice(GAIA_METRICS.INITIAL_VOLUME)}</div>
               <div className="text-muted-foreground">Official Volume 24h</div>
             </div>
           </div>
@@ -169,8 +133,8 @@ export function GaiaCoinCrafter() {
       {/* Main Crafting System - Connected to Official Token */}
       <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/30 relative overflow-hidden">
         <div className="absolute top-4 left-4 opacity-10">
-          <img
-            src="/lovable-uploads/78f81378-5535-4da5-bb6c-28f9a9866f3e.png"
+          <img 
+            src="/lovable-uploads/78f81378-5535-4da5-bb6c-28f9a9866f3e.png" 
             alt="Gaia Logo"
             className="w-24 h-24 object-contain"
           />
@@ -182,8 +146,7 @@ export function GaiaCoinCrafter() {
             🏭 OFFICIAL GAiA COIN CRAFTER - Connected to Official Token
           </CardTitle>
           <p className="text-muted-foreground">
-            Automatically fills market supply connected to official GAiA token
-            address
+            Automatically fills market supply connected to official GAiA token address
           </p>
         </CardHeader>
 
@@ -191,44 +154,30 @@ export function GaiaCoinCrafter() {
           {/* Monthly Progress */}
           <div className="space-y-3">
             <div className="flex justify-between items-center">
-              <span className="font-bold text-purple-400">
-                Official Token Crafting Progress
-              </span>
+              <span className="font-bold text-purple-400">Official Token Crafting Progress</span>
               <Badge className="bg-purple-600 text-white">
                 {monthlyProgress.toFixed(1)}% Complete
               </Badge>
             </div>
-
+            
             <Progress value={monthlyProgress} className="h-4" />
-
+            
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div className="text-center">
-                <div className="text-2xl font-bold text-green-400">
-                  {totalCrafted.toLocaleString()}
-                </div>
-                <div className="text-muted-foreground">
-                  Official Tokens Crafted
-                </div>
+                <div className="text-2xl font-bold text-green-400">{totalCrafted.toLocaleString()}</div>
+                <div className="text-muted-foreground">Official Tokens Crafted</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-orange-400">
-                  {burnedForReinvestment.toLocaleString()}
-                </div>
-                <div className="text-muted-foreground">
-                  Burned for Reinvestment
-                </div>
+                <div className="text-2xl font-bold text-orange-400">{burnedForReinvestment.toLocaleString()}</div>
+                <div className="text-muted-foreground">Burned for Reinvestment</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-cyan-400">
-                  {nextCraftingIn}
-                </div>
+                <div className="text-2xl font-bold text-cyan-400">{nextCraftingIn}</div>
                 <div className="text-muted-foreground">Days to Next Craft</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-yellow-400">99.2%</div>
-                <div className="text-muted-foreground">
-                  Official System Efficiency
-                </div>
+                <div className="text-muted-foreground">Official System Efficiency</div>
               </div>
             </div>
           </div>
@@ -245,27 +194,19 @@ export function GaiaCoinCrafter() {
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
                   <span>Official GAiA Stream Viewers:</span>
-                  <span className="text-orange-400 font-bold">
-                    1 GAiA per viewer
-                  </span>
+                  <span className="text-orange-400 font-bold">1 GAiA per viewer</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Official Community Trades:</span>
-                  <span className="text-orange-400 font-bold">
-                    0.15% of volume
-                  </span>
+                  <span className="text-orange-400 font-bold">0.15% of volume</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Official NFT Purchases:</span>
-                  <span className="text-orange-400 font-bold">
-                    7% burn rate
-                  </span>
+                  <span className="text-orange-400 font-bold">7% burn rate</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Official Gaming Rewards:</span>
-                  <span className="text-orange-400 font-bold">
-                    Enhanced burn
-                  </span>
+                  <span className="text-orange-400 font-bold">Enhanced burn</span>
                 </div>
               </CardContent>
             </Card>
@@ -320,5 +261,5 @@ export function GaiaCoinCrafter() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }
