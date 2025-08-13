@@ -89,6 +89,18 @@ import {
 // import { InteractiveFoodMap } from "@/components/community/InteractiveFoodMap";
 // import { EcosystemIntegration } from "@/components/earning/EcosystemIntegration";
 // import { MentorshipProgram } from "@/components/earning/MentorshipProgram";
+
+export default function EarningActivities() {
+  // State for search query
+  const [searchQuery, setSearchQuery] = useState("");
+  // State for selected activity
+  const [selectedActivity, setSelectedActivity] = useState<{
+    category: string;
+    activityId: string;
+  } | null>(null);
+  // State for active tab
+  const [activeTab, setActiveTab] = useState("overview");
+  // User stats
   const [userStats] = useState({
     totalTokens: 4890,
     weeklyEarnings: 347,
@@ -807,3 +819,4 @@ import {
     </div>
   );
 }
+
