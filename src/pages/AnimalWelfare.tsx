@@ -70,49 +70,47 @@ export default function AnimalWelfare() {
             <p className="text-center text-xl text-muted-foreground">
               Real Animals • Global Rescue • Live Conservation • NFT Integration • Gaming Connected
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-6">
-              <Badge className="bg-green-600 p-3 text-center">
-                <div className="flex flex-col items-center">
-                  <Heart className="h-5 w-5 mb-1" />
-                  <span className="text-lg font-bold">{activeAnimals.toLocaleString()}</span>
-                  <span className="text-xs">Animals Protected</span>
+            <div className="flex justify-center gap-0 flex-wrap mt-4 relative z-10">
+              <div className="relative -mx-2 flex">
+                <div className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-green-400 via-green-500 to-blue-400 px-8 py-4 flex flex-col items-center border-4 border-white/40 -mr-4 z-30">
+                  <Heart className="h-6 w-6 mb-1 text-white drop-shadow" />
+                  <span className="text-lg font-bold text-white drop-shadow">{activeAnimals.toLocaleString()}</span>
+                  <span className="text-xs text-white/80">Animals Protected</span>
                 </div>
-              </Badge>
-              <Badge className="bg-blue-600 p-3 text-center">
-                <div className="flex flex-col items-center">
-                  <Shield className="h-5 w-5 mb-1" />
-                  <span className="text-lg font-bold">{tokensRaised.toLocaleString()}</span>
-                  <span className="text-xs">GAiA Raised</span>
+                <div className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-blue-400 via-blue-500 to-purple-400 px-8 py-4 flex flex-col items-center border-4 border-white/40 z-20">
+                  <Shield className="h-6 w-6 mb-1 text-white drop-shadow" />
+                  <span className="text-lg font-bold text-white drop-shadow">{tokensRaised.toLocaleString()}</span>
+                  <span className="text-xs text-white/80">GAiA Raised</span>
                 </div>
-              </Badge>
-              <Badge className="bg-purple-600 p-3 text-center">
-                <div className="flex flex-col items-center">
-                  <Globe className="h-5 w-5 mb-1" />
-                  <span className="text-lg font-bold">{globalRescues.toLocaleString()}</span>
-                  <span className="text-xs">Global Rescues</span>
+                <div className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-300 px-8 py-4 flex flex-col items-center border-4 border-white/40 -ml-4 z-10">
+                  <Star className="h-6 w-6 mb-1 text-white drop-shadow" />
+                  <span className="text-lg font-bold text-white drop-shadow">NFT</span>
+                  <span className="text-xs text-white/80">Powered</span>
                 </div>
-              </Badge>
-              <Badge className="bg-orange-600 p-3 text-center">
-                <div className="flex flex-col items-center">
-                  <TreePine className="h-5 w-5 mb-1" />
-                  <span className="text-lg font-bold">{sanctuariesSupported}</span>
-                  <span className="text-xs">Sanctuaries</span>
-                </div>
-              </Badge>
-              <Badge className="bg-red-600 p-3 text-center">
-                <div className="flex flex-col items-center">
-                  <Camera className="h-5 w-5 mb-1" />
-                  <span className="text-lg font-bold">{liveCameras}</span>
-                  <span className="text-xs">Live Cameras</span>
-                </div>
-              </Badge>
-              <Badge className="bg-pink-600 p-3 text-center">
-                <div className="flex flex-col items-center">
-                  <Star className="h-5 w-5 mb-1" />
-                  <span className="text-lg font-bold">24/7</span>
-                  <span className="text-xs">Active Monitoring</span>
-                </div>
-              </Badge>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6 ml-8">
+                <Badge className="bg-purple-600 p-3 text-center">
+                  <div className="flex flex-col items-center">
+                    <Globe className="h-5 w-5 mb-1" />
+                    <span className="text-lg font-bold">{globalRescues.toLocaleString()}</span>
+                    <span className="text-xs">Global Rescues</span>
+                  </div>
+                </Badge>
+                <Badge className="bg-orange-600 p-3 text-center">
+                  <div className="flex flex-col items-center">
+                    <TreePine className="h-5 w-5 mb-1" />
+                    <span className="text-lg font-bold">{sanctuariesSupported}</span>
+                    <span className="text-xs">Sanctuaries</span>
+                  </div>
+                </Badge>
+                <Badge className="bg-red-600 p-3 text-center">
+                  <div className="flex flex-col items-center">
+                    <Camera className="h-5 w-5 mb-1" />
+                    <span className="text-lg font-bold">{liveCameras}</span>
+                    <span className="text-xs">Live Cameras</span>
+                  </div>
+                </Badge>
+              </div>
             </div>
           </CardHeader>
         </Card>
