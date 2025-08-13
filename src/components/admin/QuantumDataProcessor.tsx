@@ -1,46 +1,45 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Brain, Database, Zap, Shield, Globe, Activity } from "lucide-react";
-import { useState, useEffect } from "react";
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { Brain, Database, Zap, Shield, Globe, Activity } from 'lucide-react'
+import { useState, useEffect } from 'react'
 
 export function QuantumDataProcessor() {
   const [processingStats, setProcessingStats] = useState({
     totalProcessed: 0,
     activeConnections: 0,
     quantumEfficiency: 0,
-    threatLevel: "LOW",
-  });
+    threatLevel: 'LOW'
+  })
 
   const [realTimeData, setRealTimeData] = useState({
     networkTraffic: 0,
     dataIntegrity: 100,
     processingSpeed: 0,
-    securityStatus: "OPTIMAL",
-  });
+    securityStatus: 'OPTIMAL'
+  })
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProcessingStats((prev) => ({
+      setProcessingStats(prev => ({
         totalProcessed: prev.totalProcessed + Math.floor(Math.random() * 1000),
         activeConnections: Math.floor(Math.random() * 50) + 20,
         quantumEfficiency: Math.floor(Math.random() * 20) + 80,
-        threatLevel: ["LOW", "MEDIUM", "HIGH"][Math.floor(Math.random() * 3)],
-      }));
+        threatLevel: ['LOW', 'MEDIUM', 'HIGH'][Math.floor(Math.random() * 3)]
+      }))
 
-      setRealTimeData((prev) => ({
+      setRealTimeData(prev => ({
         networkTraffic: Math.floor(Math.random() * 100),
         dataIntegrity: Math.floor(Math.random() * 10) + 90,
         processingSpeed: Math.floor(Math.random() * 1000) + 500,
-        securityStatus: ["OPTIMAL", "GOOD", "WARNING"][
-          Math.floor(Math.random() * 3)
-        ],
-      }));
-    }, 2000);
+        securityStatus: ['OPTIMAL', 'GOOD', 'WARNING'][Math.floor(Math.random() * 3)]
+      }))
+    }, 2000)
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className="space-y-6">
@@ -108,18 +107,10 @@ export function QuantumDataProcessor() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <Badge
-              variant={
-                processingStats.threatLevel === "LOW"
-                  ? "default"
-                  : "destructive"
-              }
-            >
+            <Badge variant={processingStats.threatLevel === 'LOW' ? 'default' : 'destructive'}>
               {processingStats.threatLevel}
             </Badge>
-            <p className="text-xs text-muted-foreground mt-1">
-              Security status
-            </p>
+            <p className="text-xs text-muted-foreground mt-1">Security status</p>
           </CardContent>
         </Card>
       </div>
@@ -171,13 +162,7 @@ export function QuantumDataProcessor() {
                 <span>Processing Speed</span>
                 <span>{realTimeData.processingSpeed} ops/sec</span>
               </div>
-              <Progress
-                value={Math.min(
-                  (realTimeData.processingSpeed / 1000) * 100,
-                  100,
-                )}
-                className="h-2"
-              />
+              <Progress value={Math.min((realTimeData.processingSpeed / 1000) * 100, 100)} className="h-2" />
             </div>
           </div>
         </CardContent>
@@ -195,9 +180,7 @@ export function QuantumDataProcessor() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <Card className="border border-purple-200">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm">
-                  🌀 Quantum Entanglement
-                </CardTitle>
+                <CardTitle className="text-sm">🌀 Quantum Entanglement</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground">
@@ -211,9 +194,7 @@ export function QuantumDataProcessor() {
 
             <Card className="border border-blue-200">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm">
-                  🔮 Predictive Analysis
-                </CardTitle>
+                <CardTitle className="text-sm">🔮 Predictive Analysis</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground">
@@ -231,8 +212,7 @@ export function QuantumDataProcessor() {
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground">
-                  Process terabytes of data in milliseconds using quantum
-                  computing
+                  Process terabytes of data in milliseconds using quantum computing
                 </p>
                 <Button size="sm" className="mt-2 w-full" variant="outline">
                   Process
@@ -242,33 +222,22 @@ export function QuantumDataProcessor() {
           </div>
 
           <div className="mt-6 p-4 bg-gradient-to-r from-purple-100 to-blue-100 rounded-lg">
-            <h4 className="font-semibold text-purple-800 mb-2">
-              🚀 System Status
-            </h4>
+            <h4 className="font-semibold text-purple-800 mb-2">🚀 System Status</h4>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
                 <span className="text-gray-600">Security Status:</span>
-                <Badge
-                  className="ml-2"
-                  variant={
-                    realTimeData.securityStatus === "OPTIMAL"
-                      ? "default"
-                      : "secondary"
-                  }
-                >
+                <Badge className="ml-2" variant={realTimeData.securityStatus === 'OPTIMAL' ? 'default' : 'secondary'}>
                   {realTimeData.securityStatus}
                 </Badge>
               </div>
               <div>
                 <span className="text-gray-600">Quantum State:</span>
-                <Badge className="ml-2" variant="default">
-                  SUPERPOSITION
-                </Badge>
+                <Badge className="ml-2" variant="default">SUPERPOSITION</Badge>
               </div>
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

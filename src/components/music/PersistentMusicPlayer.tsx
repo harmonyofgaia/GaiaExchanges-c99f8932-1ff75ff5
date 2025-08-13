@@ -1,168 +1,160 @@
-import { useState, useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Volume2,
-  VolumeX,
-  Play,
-  Pause,
-  SkipForward,
-  SkipBack,
-  X,
-} from "lucide-react";
-import { Slider } from "@/components/ui/slider";
+
+import { useState, useEffect, useRef } from 'react'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Volume2, VolumeX, Play, Pause, SkipForward, SkipBack, X } from 'lucide-react'
+import { Slider } from '@/components/ui/slider'
 
 export function PersistentMusicPlayer() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [volume, setVolume] = useState(0.5);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [currentTrack, setCurrentTrack] = useState<any>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [playlist, setPlaylist] = useState<any[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
+  const [volume, setVolume] = useState(0.5)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const [currentTrack, setCurrentTrack] = useState<any>(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const [playlist, setPlaylist] = useState<any[]>([])
+  const [currentIndex, setCurrentIndex] = useState(0)
+  
+  const audioRef = useRef<HTMLAudioElement>(null)
 
   useEffect(() => {
     // Load active background media and create persistent player
     const loadActiveMedia = () => {
-      const activeMediaId = localStorage.getItem("activeBackgroundMedia");
-      const activeMediaData = localStorage.getItem("activeBackgroundMediaData");
-
+      const activeMediaId = localStorage.getItem('activeBackgroundMedia')
+      const activeMediaData = localStorage.getItem('activeBackgroundMediaData')
+      
       if (activeMediaId && activeMediaData) {
         try {
-          const mediaData = JSON.parse(activeMediaData);
-          if (mediaData.type === "audio") {
-            setCurrentTrack(mediaData);
-            setIsVisible(true);
-            console.log("🎵 Persistent Music Player Loaded:", mediaData.name);
+          const mediaData = JSON.parse(activeMediaData)
+          if (mediaData.type === 'audio') {
+            setCurrentTrack(mediaData)
+            setIsVisible(true)
+            console.log('🎵 Persistent Music Player Loaded:', mediaData.name)
           }
         } catch (error) {
-          console.log("Error loading persistent music:", error);
+          console.log('Error loading persistent music:', error)
         }
       }
-    };
+    }
 
-    loadActiveMedia();
+    loadActiveMedia()
 
     // Listen for media changes
     const handleMediaChange = () => {
-      loadActiveMedia();
-    };
+      loadActiveMedia()
+    }
 
-    window.addEventListener("storage", handleMediaChange);
-    window.addEventListener("backgroundMediaUpdated", handleMediaChange);
+    window.addEventListener('storage', handleMediaChange)
+    window.addEventListener('backgroundMediaUpdated', handleMediaChange)
 
     return () => {
-      window.removeEventListener("storage", handleMediaChange);
-      window.removeEventListener("backgroundMediaUpdated", handleMediaChange);
-    };
-  }, []);
+      window.removeEventListener('storage', handleMediaChange)
+      window.removeEventListener('backgroundMediaUpdated', handleMediaChange)
+    }
+  }, [])
 
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
+    const audio = audioRef.current
+    if (!audio) return
 
     const updateTime = () => {
-      setCurrentTime(audio.currentTime);
-      setDuration(audio.duration);
-    };
+      setCurrentTime(audio.currentTime)
+      setDuration(audio.duration)
+    }
 
     const handleEnded = () => {
       if (playlist.length > 1) {
-        playNext();
+        playNext()
       } else {
-        setIsPlaying(false);
+        setIsPlaying(false)
       }
-    };
+    }
 
-    audio.addEventListener("timeupdate", updateTime);
-    audio.addEventListener("loadedmetadata", updateTime);
-    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener('timeupdate', updateTime)
+    audio.addEventListener('loadedmetadata', updateTime)
+    audio.addEventListener('ended', handleEnded)
 
     return () => {
-      audio.removeEventListener("timeupdate", updateTime);
-      audio.removeEventListener("loadedmetadata", updateTime);
-      audio.removeEventListener("ended", handleEnded);
-    };
-  }, [playlist, currentIndex]);
+      audio.removeEventListener('timeupdate', updateTime)
+      audio.removeEventListener('loadedmetadata', updateTime)
+      audio.removeEventListener('ended', handleEnded)
+    }
+  }, [playlist, currentIndex])
 
   const togglePlay = () => {
-    const audio = audioRef.current;
-    if (!audio || !currentTrack) return;
+    const audio = audioRef.current
+    if (!audio || !currentTrack) return
 
     if (isPlaying) {
-      audio.pause();
+      audio.pause()
     } else {
-      audio.src = currentTrack.url;
-      audio.play();
+      audio.src = currentTrack.url
+      audio.play()
     }
-    setIsPlaying(!isPlaying);
-  };
+    setIsPlaying(!isPlaying)
+  }
 
   const toggleMute = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
+    const audio = audioRef.current
+    if (!audio) return
 
-    audio.muted = !isMuted;
-    setIsMuted(!isMuted);
-  };
+    audio.muted = !isMuted
+    setIsMuted(!isMuted)
+  }
 
   const handleVolumeChange = (value: number[]) => {
-    const audio = audioRef.current;
-    if (!audio) return;
+    const audio = audioRef.current
+    if (!audio) return
 
-    const newVolume = value[0];
-    audio.volume = newVolume;
-    setVolume(newVolume);
-  };
+    const newVolume = value[0]
+    audio.volume = newVolume
+    setVolume(newVolume)
+  }
 
   const handleSeek = (value: number[]) => {
-    const audio = audioRef.current;
-    if (!audio) return;
+    const audio = audioRef.current
+    if (!audio) return
 
-    audio.currentTime = value[0];
-    setCurrentTime(value[0]);
-  };
+    audio.currentTime = value[0]
+    setCurrentTime(value[0])
+  }
 
   const playNext = () => {
     if (playlist.length > 1) {
-      const nextIndex = (currentIndex + 1) % playlist.length;
-      setCurrentIndex(nextIndex);
-      setCurrentTrack(playlist[nextIndex]);
+      const nextIndex = (currentIndex + 1) % playlist.length
+      setCurrentIndex(nextIndex)
+      setCurrentTrack(playlist[nextIndex])
     }
-  };
+  }
 
   const playPrevious = () => {
     if (playlist.length > 1) {
-      const prevIndex =
-        currentIndex === 0 ? playlist.length - 1 : currentIndex - 1;
-      setCurrentIndex(prevIndex);
-      setCurrentTrack(playlist[prevIndex]);
+      const prevIndex = currentIndex === 0 ? playlist.length - 1 : currentIndex - 1
+      setCurrentIndex(prevIndex)
+      setCurrentTrack(playlist[prevIndex])
     }
-  };
+  }
 
   const formatTime = (time: number) => {
-    if (isNaN(time)) return "0:00";
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-  };
+    if (isNaN(time)) return '0:00'
+    const minutes = Math.floor(time / 60)
+    const seconds = Math.floor(time % 60)
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`
+  }
 
   const closePlayer = () => {
-    const audio = audioRef.current;
+    const audio = audioRef.current
     if (audio) {
-      audio.pause();
+      audio.pause()
     }
-    setIsVisible(false);
-    setIsPlaying(false);
-    localStorage.removeItem("activeBackgroundMedia");
-    localStorage.removeItem("activeBackgroundMediaData");
-  };
+    setIsVisible(false)
+    setIsPlaying(false)
+    localStorage.removeItem('activeBackgroundMedia')
+    localStorage.removeItem('activeBackgroundMediaData')
+  }
 
-  if (!isVisible || !currentTrack) return null;
+  if (!isVisible || !currentTrack) return null
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
@@ -222,11 +214,7 @@ export function PersistentMusicPlayer() {
                 onClick={togglePlay}
                 className="h-8 w-8 p-0 text-purple-400 hover:text-purple-300"
               >
-                {isPlaying ? (
-                  <Pause className="h-4 w-4" />
-                ) : (
-                  <Play className="h-4 w-4" />
-                )}
+                {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
               </Button>
               <Button
                 size="sm"
@@ -245,11 +233,7 @@ export function PersistentMusicPlayer() {
                 onClick={toggleMute}
                 className="h-6 w-6 p-0 text-purple-400 hover:text-purple-300"
               >
-                {isMuted ? (
-                  <VolumeX className="h-3 w-3" />
-                ) : (
-                  <Volume2 className="h-3 w-3" />
-                )}
+                {isMuted ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
               </Button>
               <div className="w-16">
                 <Slider
@@ -275,5 +259,5 @@ export function PersistentMusicPlayer() {
         preload="metadata"
       />
     </div>
-  );
+  )
 }

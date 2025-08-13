@@ -1,67 +1,68 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Heart, Coins, Target, TrendingUp } from "lucide-react";
-import { toast } from "sonner";
+
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { Heart, Coins, Target, TrendingUp } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface DonationWidgetProps {
-  onDonate: (projectId: string, amount: number) => void;
+  onDonate: (projectId: string, amount: number) => void
 }
 
 export function DonationWidget({ onDonate }: DonationWidgetProps) {
-  const [donationAmount, setDonationAmount] = useState("");
-  const [selectedProject, setSelectedProject] = useState("");
+  const [donationAmount, setDonationAmount] = useState('')
+  const [selectedProject, setSelectedProject] = useState('')
 
   const projects = [
     {
-      id: "reforestation-amazon",
-      name: "Amazon Reforestation",
-      description: "Plant trees in the Amazon rainforest",
+      id: 'reforestation-amazon',
+      name: 'Amazon Reforestation',
+      description: 'Plant trees in the Amazon rainforest',
       raised: 45000,
       target: 100000,
-      donors: 234,
+      donors: 234
     },
     {
-      id: "ocean-cleanup",
-      name: "Ocean Plastic Cleanup",
-      description: "Remove plastic waste from oceans",
+      id: 'ocean-cleanup',
+      name: 'Ocean Plastic Cleanup',
+      description: 'Remove plastic waste from oceans',
       raised: 78000,
       target: 150000,
-      donors: 456,
+      donors: 456
     },
     {
-      id: "renewable-energy",
-      name: "Solar Panel Installation",
-      description: "Install solar panels in rural communities",
+      id: 'renewable-energy',
+      name: 'Solar Panel Installation',
+      description: 'Install solar panels in rural communities',
       raised: 23000,
       target: 75000,
-      donors: 123,
-    },
-  ];
+      donors: 123
+    }
+  ]
 
   const handleDonate = () => {
-    const amount = parseFloat(donationAmount);
+    const amount = parseFloat(donationAmount)
     if (!selectedProject) {
-      toast.error("Please select a project to donate to");
-      return;
+      toast.error('Please select a project to donate to')
+      return
     }
     if (!amount || amount <= 0) {
-      toast.error("Please enter a valid donation amount");
-      return;
+      toast.error('Please enter a valid donation amount')
+      return
     }
 
-    onDonate(selectedProject, amount);
-
+    onDonate(selectedProject, amount)
+    
     toast.success(`💚 Donated $${amount} successfully!`, {
       description: `Thank you for supporting environmental projects`,
-      duration: 5000,
-    });
-
-    setDonationAmount("");
-    setSelectedProject("");
-  };
+      duration: 5000
+    })
+    
+    setDonationAmount('')
+    setSelectedProject('')
+  }
 
   return (
     <Card className="border-green-500/30 bg-green-900/20">
@@ -74,17 +75,15 @@ export function DonationWidget({ onDonate }: DonationWidgetProps) {
       <CardContent className="space-y-4">
         {/* Project Selection */}
         <div>
-          <label className="text-sm font-medium mb-2 block">
-            Select Project
-          </label>
+          <label className="text-sm font-medium mb-2 block">Select Project</label>
           <div className="space-y-2">
             {projects.map((project) => (
               <div
                 key={project.id}
                 className={`p-3 border rounded-lg cursor-pointer transition-colors ${
                   selectedProject === project.id
-                    ? "border-green-500 bg-green-900/30"
-                    : "border-gray-700 hover:border-green-500/50"
+                    ? 'border-green-500 bg-green-900/30'
+                    : 'border-gray-700 hover:border-green-500/50'
                 }`}
                 onClick={() => setSelectedProject(project.id)}
               >
@@ -92,20 +91,16 @@ export function DonationWidget({ onDonate }: DonationWidgetProps) {
                   <h4 className="font-semibold">{project.name}</h4>
                   <Badge variant="outline">{project.donors} donors</Badge>
                 </div>
-                <p className="text-sm text-muted-foreground mb-2">
-                  {project.description}
-                </p>
+                <p className="text-sm text-muted-foreground mb-2">{project.description}</p>
                 <div className="space-y-1">
                   <div className="flex justify-between text-sm">
                     <span>Raised: ${project.raised.toLocaleString()}</span>
                     <span>Target: ${project.target.toLocaleString()}</span>
                   </div>
                   <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div
+                    <div 
                       className="bg-green-500 h-2 rounded-full transition-all duration-300"
-                      style={{
-                        width: `${(project.raised / project.target) * 100}%`,
-                      }}
+                      style={{ width: `${(project.raised / project.target) * 100}%` }}
                     />
                   </div>
                 </div>
@@ -116,9 +111,7 @@ export function DonationWidget({ onDonate }: DonationWidgetProps) {
 
         {/* Donation Amount */}
         <div>
-          <label className="text-sm font-medium mb-2 block">
-            Donation Amount ($)
-          </label>
+          <label className="text-sm font-medium mb-2 block">Donation Amount ($)</label>
           <div className="flex gap-2">
             <Input
               type="number"
@@ -170,5 +163,5 @@ export function DonationWidget({ onDonate }: DonationWidgetProps) {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

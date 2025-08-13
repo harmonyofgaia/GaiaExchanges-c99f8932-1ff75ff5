@@ -1,5 +1,5 @@
-import { Outlet } from "react-router-dom";
-import { PersistentAudioControls } from "@/components/audio/PersistentAudioControls";
+import { Outlet } from 'react-router-dom'
+import { PersistentAudioControls } from '@/components/audio/PersistentAudioControls'
 
 export function MainLayout() {
   return (
@@ -9,5 +9,5 @@ export function MainLayout() {
       </main>
       <PersistentAudioControls />
     </div>
-  );
+  )
 }

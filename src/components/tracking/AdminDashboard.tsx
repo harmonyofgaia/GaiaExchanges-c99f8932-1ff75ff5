@@ -1,38 +1,28 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Shield,
-  Settings,
-  Database,
-  Server,
-  AlertTriangle,
-  CheckCircle,
-  Activity,
-  Users,
-  Lock,
-  Eye,
-} from "lucide-react";
-import { toast } from "sonner";
+
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Shield, Settings, Database, Server, AlertTriangle, CheckCircle, Activity, Users, Lock, Eye } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface SystemHealth {
-  server: number;
-  database: number;
-  network: number;
-  security: number;
-  performance: number;
+  server: number
+  database: number
+  network: number
+  security: number
+  performance: number
 }
 
 interface AdminMetrics {
-  totalUsers: number;
-  activeUsers: number;
-  totalTransactions: number;
-  serverUptime: number;
-  securityThreats: number;
-  systemLoad: number;
+  totalUsers: number
+  activeUsers: number
+  totalTransactions: number
+  serverUptime: number
+  securityThreats: number
+  systemLoad: number
 }
 
 export function AdminDashboard() {
@@ -41,8 +31,8 @@ export function AdminDashboard() {
     database: 100,
     network: 98.5,
     security: 100,
-    performance: 95.2,
-  });
+    performance: 95.2
+  })
 
   const [adminMetrics, setAdminMetrics] = useState<AdminMetrics>({
     totalUsers: 125847,
@@ -50,71 +40,64 @@ export function AdminDashboard() {
     totalTransactions: 2847593,
     serverUptime: 99.99,
     securityThreats: 0,
-    systemLoad: 23.5,
-  });
+    systemLoad: 23.5
+  })
 
-  const [realTimeAlerts, setRealTimeAlerts] = useState<string[]>([]);
+  const [realTimeAlerts, setRealTimeAlerts] = useState<string[]>([])
 
   // Simulate real-time admin data updates
   useEffect(() => {
     const updateAdminData = () => {
-      setSystemHealth((prev) => ({
+      setSystemHealth(prev => ({
         server: Math.min(100, prev.server + (Math.random() - 0.5) * 0.1),
         database: Math.min(100, prev.database + (Math.random() - 0.5) * 0.05),
         network: Math.min(100, prev.network + (Math.random() - 0.5) * 0.2),
         security: 100, // Always perfect security
-        performance: Math.min(
-          100,
-          prev.performance + (Math.random() - 0.5) * 0.3,
-        ),
-      }));
+        performance: Math.min(100, prev.performance + (Math.random() - 0.5) * 0.3)
+      }))
 
-      setAdminMetrics((prev) => ({
+      setAdminMetrics(prev => ({
         ...prev,
         activeUsers: prev.activeUsers + Math.floor(Math.random() * 50 - 25),
-        totalTransactions:
-          prev.totalTransactions + Math.floor(Math.random() * 100),
-        systemLoad: Math.max(
-          0,
-          Math.min(100, prev.systemLoad + (Math.random() - 0.5) * 2),
-        ),
-      }));
+        totalTransactions: prev.totalTransactions + Math.floor(Math.random() * 100),
+        systemLoad: Math.max(0, Math.min(100, prev.systemLoad + (Math.random() - 0.5) * 2))
+      }))
 
       // Randomly add alerts
       if (Math.random() > 0.8) {
         const alerts = [
-          "🚀 Performance boost applied - 10x speed increase detected",
-          "🛡️ Security scan completed - All systems secure",
-          "📊 New user milestone reached - Growth accelerating",
-          "⚡ Network optimization successful - Latency improved",
-          "🌍 Global expansion - New region activated",
-        ];
-        const newAlert = alerts[Math.floor(Math.random() * alerts.length)];
-        setRealTimeAlerts((prev) => [newAlert, ...prev.slice(0, 4)]);
+          '🚀 Performance boost applied - 10x speed increase detected',
+          '🛡️ Security scan completed - All systems secure',
+          '📊 New user milestone reached - Growth accelerating',
+          '⚡ Network optimization successful - Latency improved',
+          '🌍 Global expansion - New region activated'
+        ]
+        const newAlert = alerts[Math.floor(Math.random() * alerts.length)]
+        setRealTimeAlerts(prev => [newAlert, ...prev.slice(0, 4)])
       }
-    };
+    }
 
-    const interval = setInterval(updateAdminData, 3000);
-    return () => clearInterval(interval);
-  }, []);
+    const interval = setInterval(updateAdminData, 3000)
+    return () => clearInterval(interval)
+  }, [])
 
   const handleSystemAction = (action: string) => {
     toast.success(`Admin Action: ${action}`, {
-      description: "System operation completed successfully",
-    });
-  };
+      description: 'System operation completed successfully'
+    })
+  }
 
   const getHealthColor = (value: number) => {
-    if (value >= 95) return "text-green-400";
-    if (value >= 85) return "text-yellow-400";
-    return "text-red-400";
-  };
+    if (value >= 95) return 'text-green-400'
+    if (value >= 85) return 'text-yellow-400'
+    return 'text-red-400'
+  }
 
   const getHealthBadge = (value: number) => {
-    if (value >= 95) return "bg-green-600";
-    if (value >= 85) return "bg-yellow-600";
-    return "bg-red-600";
-  };
+    if (value >= 95) return 'bg-green-600'
+    if (value >= 85) return 'bg-yellow-600'
+    return 'bg-red-600'
+  }
 
   return (
     <div className="space-y-6">
@@ -125,12 +108,8 @@ export function AdminDashboard() {
             <div className="flex items-center gap-4">
               <Shield className="h-8 w-8 text-red-400" />
               <div>
-                <h2 className="text-2xl font-bold text-red-400">
-                  🔒 ADMIN CONTROL CENTER
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  Ultimate system control & monitoring dashboard
-                </p>
+                <h2 className="text-2xl font-bold text-red-400">🔒 ADMIN CONTROL CENTER</h2>
+                <p className="text-sm text-muted-foreground">Ultimate system control & monitoring dashboard</p>
               </div>
             </div>
             <div className="flex gap-2">
@@ -163,9 +142,7 @@ export function AdminDashboard() {
                 <div className="text-center space-y-2">
                   <Server className="h-6 w-6 text-green-400 mx-auto" />
                   <p className="text-sm text-muted-foreground">Server Health</p>
-                  <p
-                    className={`text-xl font-bold ${getHealthColor(systemHealth.server)}`}
-                  >
+                  <p className={`text-xl font-bold ${getHealthColor(systemHealth.server)}`}>
                     {systemHealth.server.toFixed(1)}%
                   </p>
                   <Progress value={systemHealth.server} className="h-2" />
@@ -178,9 +155,7 @@ export function AdminDashboard() {
                 <div className="text-center space-y-2">
                   <Database className="h-6 w-6 text-blue-400 mx-auto" />
                   <p className="text-sm text-muted-foreground">Database</p>
-                  <p
-                    className={`text-xl font-bold ${getHealthColor(systemHealth.database)}`}
-                  >
+                  <p className={`text-xl font-bold ${getHealthColor(systemHealth.database)}`}>
                     {systemHealth.database.toFixed(1)}%
                   </p>
                   <Progress value={systemHealth.database} className="h-2" />
@@ -193,9 +168,7 @@ export function AdminDashboard() {
                 <div className="text-center space-y-2">
                   <Activity className="h-6 w-6 text-purple-400 mx-auto" />
                   <p className="text-sm text-muted-foreground">Network</p>
-                  <p
-                    className={`text-xl font-bold ${getHealthColor(systemHealth.network)}`}
-                  >
+                  <p className={`text-xl font-bold ${getHealthColor(systemHealth.network)}`}>
                     {systemHealth.network.toFixed(1)}%
                   </p>
                   <Progress value={systemHealth.network} className="h-2" />
@@ -208,9 +181,7 @@ export function AdminDashboard() {
                 <div className="text-center space-y-2">
                   <Shield className="h-6 w-6 text-red-400 mx-auto" />
                   <p className="text-sm text-muted-foreground">Security</p>
-                  <p
-                    className={`text-xl font-bold ${getHealthColor(systemHealth.security)}`}
-                  >
+                  <p className={`text-xl font-bold ${getHealthColor(systemHealth.security)}`}>
                     {systemHealth.security.toFixed(1)}%
                   </p>
                   <Progress value={systemHealth.security} className="h-2" />
@@ -223,9 +194,7 @@ export function AdminDashboard() {
                 <div className="text-center space-y-2">
                   <Settings className="h-6 w-6 text-yellow-400 mx-auto" />
                   <p className="text-sm text-muted-foreground">Performance</p>
-                  <p
-                    className={`text-xl font-bold ${getHealthColor(systemHealth.performance)}`}
-                  >
+                  <p className={`text-xl font-bold ${getHealthColor(systemHealth.performance)}`}>
                     {systemHealth.performance.toFixed(1)}%
                   </p>
                   <Progress value={systemHealth.performance} className="h-2" />
@@ -245,10 +214,7 @@ export function AdminDashboard() {
             <CardContent>
               <div className="space-y-2 max-h-32 overflow-y-auto">
                 {realTimeAlerts.map((alert, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 p-2 rounded bg-card/50 border border-border/50"
-                  >
+                  <div key={index} className="flex items-center gap-2 p-2 rounded bg-card/50 border border-border/50">
                     <CheckCircle className="h-4 w-4 text-green-400" />
                     <span className="text-sm">{alert}</span>
                     <Badge className="ml-auto bg-green-600 text-white text-xs">
@@ -275,15 +241,11 @@ export function AdminDashboard() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center">
                   <p className="text-2xl font-bold text-green-400">0</p>
-                  <p className="text-sm text-muted-foreground">
-                    Active Threats
-                  </p>
+                  <p className="text-sm text-muted-foreground">Active Threats</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-green-400">100%</p>
-                  <p className="text-sm text-muted-foreground">
-                    Protection Level
-                  </p>
+                  <p className="text-sm text-muted-foreground">Protection Level</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-blue-400">24/7</p>
@@ -291,9 +253,7 @@ export function AdminDashboard() {
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-purple-400">∞</p>
-                  <p className="text-sm text-muted-foreground">
-                    Security Layers
-                  </p>
+                  <p className="text-sm text-muted-foreground">Security Layers</p>
                 </div>
               </div>
             </CardContent>
@@ -303,28 +263,20 @@ export function AdminDashboard() {
         <TabsContent value="performance" className="space-y-6">
           <Card className="border-green-500/30">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                ⚡ Performance Metrics
-              </CardTitle>
+              <CardTitle className="text-green-400">⚡ Performance Metrics</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center">
                   <p className="text-2xl font-bold text-green-400">10x</p>
-                  <p className="text-sm text-muted-foreground">
-                    Speed Multiplier
-                  </p>
+                  <p className="text-sm text-muted-foreground">Speed Multiplier</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-blue-400">
-                    {adminMetrics.systemLoad.toFixed(1)}%
-                  </p>
+                  <p className="text-2xl font-bold text-blue-400">{adminMetrics.systemLoad.toFixed(1)}%</p>
                   <p className="text-sm text-muted-foreground">System Load</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-purple-400">
-                    {adminMetrics.serverUptime}%
-                  </p>
+                  <p className="text-2xl font-bold text-purple-400">{adminMetrics.serverUptime}%</p>
                   <p className="text-sm text-muted-foreground">Uptime</p>
                 </div>
                 <div className="text-center">
@@ -347,30 +299,20 @@ export function AdminDashboard() {
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-green-400">
-                    {adminMetrics.totalUsers.toLocaleString()}
-                  </p>
+                  <p className="text-2xl font-bold text-green-400">{adminMetrics.totalUsers.toLocaleString()}</p>
                   <p className="text-sm text-muted-foreground">Total Users</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-blue-400">
-                    {adminMetrics.activeUsers.toLocaleString()}
-                  </p>
+                  <p className="text-2xl font-bold text-blue-400">{adminMetrics.activeUsers.toLocaleString()}</p>
                   <p className="text-sm text-muted-foreground">Active Now</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-purple-400">
-                    {adminMetrics.totalTransactions.toLocaleString()}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Total Transactions
-                  </p>
+                  <p className="text-2xl font-bold text-purple-400">{adminMetrics.totalTransactions.toLocaleString()}</p>
+                  <p className="text-sm text-muted-foreground">Total Transactions</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-yellow-400">98.5%</p>
-                  <p className="text-sm text-muted-foreground">
-                    Satisfaction Rate
-                  </p>
+                  <p className="text-sm text-muted-foreground">Satisfaction Rate</p>
                 </div>
               </div>
             </CardContent>
@@ -381,32 +323,30 @@ export function AdminDashboard() {
       {/* Admin Quick Actions */}
       <Card className="border-purple-500/30">
         <CardHeader>
-          <CardTitle className="text-purple-400">
-            🚀 Quick Admin Actions
-          </CardTitle>
+          <CardTitle className="text-purple-400">🚀 Quick Admin Actions</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Button
-              onClick={() => handleSystemAction("System Optimization")}
+            <Button 
+              onClick={() => handleSystemAction('System Optimization')}
               className="bg-green-600 hover:bg-green-700"
             >
               Optimize System
             </Button>
-            <Button
-              onClick={() => handleSystemAction("Security Scan")}
+            <Button 
+              onClick={() => handleSystemAction('Security Scan')}
               className="bg-red-600 hover:bg-red-700"
             >
               Run Security Scan
             </Button>
-            <Button
-              onClick={() => handleSystemAction("Performance Boost")}
+            <Button 
+              onClick={() => handleSystemAction('Performance Boost')}
               className="bg-blue-600 hover:bg-blue-700"
             >
               Apply 10x Boost
             </Button>
-            <Button
-              onClick={() => handleSystemAction("System Backup")}
+            <Button 
+              onClick={() => handleSystemAction('System Backup')}
               className="bg-purple-600 hover:bg-purple-700"
             >
               Create Backup
@@ -415,5 +355,5 @@ export function AdminDashboard() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

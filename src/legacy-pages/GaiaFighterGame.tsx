@@ -1,7 +1,8 @@
-import { GaiaFighterGamePro } from "@/components/games/GaiaFighterGamePro";
+
+import { GaiaFighterGamePro } from '@/components/games/GaiaFighterGamePro'
 
 const GaiaFighterGame = () => {
-  return <GaiaFighterGamePro />;
-};
+  return <GaiaFighterGamePro />
+}
 
-export default GaiaFighterGame;
+export default GaiaFighterGame

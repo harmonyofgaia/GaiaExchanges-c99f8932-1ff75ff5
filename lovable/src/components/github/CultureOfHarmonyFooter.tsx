@@ -1,3 +1,5 @@
+
+
 export function CultureOfHarmonyFooter() {
   return (
     <div className="pt-3 border-t border-border/20 text-center">
@@ -17,5 +19,6 @@ export function CultureOfHarmonyFooter() {
         <span className="text-yellow-400">🔍 Continuously Monitored</span>
       </div>
     </div>
-  );
+  )
 }
+

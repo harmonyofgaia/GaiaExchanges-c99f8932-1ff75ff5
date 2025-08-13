@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  TrendingUp,
-  TrendingDown,
-  Shield,
-  Globe,
+
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { 
+  TrendingUp, 
+  TrendingDown, 
+  Shield, 
+  Globe, 
   Download,
   LineChart,
   BarChart3,
@@ -24,35 +25,30 @@ import {
   Settings,
   Lock,
   ExternalLink,
-  Eye,
-} from "lucide-react";
-import { GaiaLogo } from "./GaiaLogo";
-import { TradingInterface } from "./TradingInterface";
-import { CoinGeckoTrading } from "./CoinGeckoTrading";
-import { ChartAnalytics } from "./ChartAnalytics";
-import { SecurityCenter } from "./SecurityCenter";
-import { toast } from "sonner";
-import {
-  GAIA_TOKEN,
-  GAIA_METRICS,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
+  Eye
+} from 'lucide-react'
+import { GaiaLogo } from './GaiaLogo'
+import { TradingInterface } from './TradingInterface'
+import { CoinGeckoTrading } from './CoinGeckoTrading'
+import { ChartAnalytics } from './ChartAnalytics'
+import { SecurityCenter } from './SecurityCenter'
+import { toast } from 'sonner'
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from '@/constants/gaia'
 
 interface ExchangeStats {
-  totalVolume: number;
-  dailyUsers: number;
-  totalTrades: number;
-  securityScore: number;
-  uptime: number;
+  totalVolume: number
+  dailyUsers: number
+  totalTrades: number
+  securityScore: number
+  uptime: number
 }
 
 interface MarketData {
-  symbol: string;
-  price: number;
-  change24h: number;
-  volume: number;
-  marketCap: number;
+  symbol: string
+  price: number
+  change24h: number
+  volume: number
+  marketCap: number
 }
 
 export function GaiasExchange() {
@@ -61,115 +57,91 @@ export function GaiasExchange() {
     dailyUsers: GAIA_METRICS.INITIAL_HOLDERS,
     totalTrades: GAIA_METRICS.INITIAL_TRANSACTIONS,
     securityScore: GAIA_METRICS.SECURITY_SCORE,
-    uptime: GAIA_METRICS.ECOSYSTEM_HEALTH,
-  });
+    uptime: GAIA_METRICS.ECOSYSTEM_HEALTH
+  })
 
   const [marketData, setMarketData] = useState<MarketData[]>([
-    {
-      symbol: GAIA_TOKEN.SYMBOL,
-      price: GAIA_TOKEN.INITIAL_PRICE,
-      change24h: 5.67,
-      volume: 8750000,
-      marketCap: GAIA_METRICS.INITIAL_MARKET_CAP,
-    },
-    {
-      symbol: "BTC",
-      price: 43250.67,
-      change24h: 2.34,
-      volume: 15420000000,
-      marketCap: 847000000000,
-    },
-    {
-      symbol: "ETH",
-      price: 2543.21,
-      change24h: -1.87,
-      volume: 8750000000,
-      marketCap: 305000000000,
-    },
-  ]);
+    { symbol: GAIA_TOKEN.SYMBOL, price: GAIA_TOKEN.INITIAL_PRICE, change24h: 5.67, volume: 8750000, marketCap: GAIA_METRICS.INITIAL_MARKET_CAP },
+    { symbol: 'BTC', price: 43250.67, change24h: 2.34, volume: 15420000000, marketCap: 847000000000 },
+    { symbol: 'ETH', price: 2543.21, change24h: -1.87, volume: 8750000000, marketCap: 305000000000 }
+  ])
 
-  const [notifications, setNotifications] = useState<string[]>([]);
-  const [isSecurityScanActive, setIsSecurityScanActive] = useState(true);
+  const [notifications, setNotifications] = useState<string[]>([])
+  const [isSecurityScanActive, setIsSecurityScanActive] = useState(true)
 
   // Real-time updates every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       // Update market data with realistic fluctuations
-      setMarketData((prev) =>
-        prev.map((coin) => ({
-          ...coin,
-          price: coin.price * (1 + (Math.random() - 0.5) * 0.002),
-          change24h: coin.change24h + (Math.random() - 0.5) * 0.1,
-          volume: coin.volume * (1 + (Math.random() - 0.5) * 0.05),
-        })),
-      );
+      setMarketData(prev => prev.map(coin => ({
+        ...coin,
+        price: coin.price * (1 + (Math.random() - 0.5) * 0.002),
+        change24h: coin.change24h + (Math.random() - 0.5) * 0.1,
+        volume: coin.volume * (1 + (Math.random() - 0.5) * 0.05)
+      })))
 
       // Update exchange stats
-      setStats((prev) => ({
+      setStats(prev => ({
         ...prev,
         totalVolume: prev.totalVolume + Math.random() * 1000000,
         dailyUsers: prev.dailyUsers + Math.floor(Math.random() * 100),
-        totalTrades: prev.totalTrades + Math.floor(Math.random() * 50),
-      }));
+        totalTrades: prev.totalTrades + Math.floor(Math.random() * 50)
+      }))
 
-      console.log("🔄 Market data updated:", new Date().toISOString());
-    }, 5000);
+      console.log('🔄 Market data updated:', new Date().toISOString())
+    }, 5000)
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
 
   // Security monitoring system
   useEffect(() => {
-    if (!isSecurityScanActive) return;
+    if (!isSecurityScanActive) return
 
     const securityInterval = setInterval(() => {
       // Simulate security checks
       const threats = [
-        "Suspicious login attempt blocked",
-        "DDoS protection activated",
-        "Wallet security scan completed",
-        "Smart contract audit passed",
-        "API rate limiting enforced",
-      ];
+        'Suspicious login attempt blocked',
+        'DDoS protection activated',
+        'Wallet security scan completed',
+        'Smart contract audit passed',
+        'API rate limiting enforced'
+      ]
 
-      if (Math.random() < 0.1) {
-        // 10% chance of security notification
-        const threat = threats[Math.floor(Math.random() * threats.length)];
-        setNotifications((prev) => [threat, ...prev.slice(0, 4)]);
-
-        toast.success("Security Alert", {
+      if (Math.random() < 0.1) { // 10% chance of security notification
+        const threat = threats[Math.floor(Math.random() * threats.length)]
+        setNotifications(prev => [threat, ...prev.slice(0, 4)])
+        
+        toast.success('Security Alert', {
           description: `✅ ${threat}`,
-          duration: 3000,
-        });
+          duration: 3000
+        })
       }
-    }, 10000);
+    }, 10000)
 
-    return () => clearInterval(securityInterval);
-  }, [isSecurityScanActive]);
+    return () => clearInterval(securityInterval)
+  }, [isSecurityScanActive])
 
   const handleDownloadApp = (platform: string) => {
     const downloadLinks = {
-      windows:
-        "https://releases.harmonyofgaia.net/gaia-exchanges-windows-x64.exe",
-      macos:
-        "https://releases.harmonyofgaia.net/gaia-exchanges-macos-universal.dmg",
-      android: "https://releases.harmonyofgaia.net/gaia-exchanges-android.apk",
-      linux:
-        "https://releases.harmonyofgaia.net/gaia-exchanges-linux-amd64.deb",
-      ios: "https://apps.apple.com/search?term=gaia+exchanges",
-      web: "https://app.gaiaexchanges.com",
-    };
-
-    const url = downloadLinks[platform as keyof typeof downloadLinks];
-    if (url) {
-      console.log(`🚀 Opening Gaia's Exchanges for ${platform}: ${url}`);
-
-      window.open(url, "_blank", "noopener,noreferrer");
-      toast.success(`Opening Gaia's Exchanges for ${platform}`, {
-        description: "🌍 Culture of Harmony platform",
-      });
+      windows: 'https://releases.harmonyofgaia.net/gaia-exchanges-windows-x64.exe',
+      macos: 'https://releases.harmonyofgaia.net/gaia-exchanges-macos-universal.dmg',
+      android: 'https://releases.harmonyofgaia.net/gaia-exchanges-android.apk',
+      linux: 'https://releases.harmonyofgaia.net/gaia-exchanges-linux-amd64.deb',
+      ios: 'https://apps.apple.com/search?term=gaia+exchanges',
+      web: 'https://app.gaiaexchanges.com'
     }
-  };
+
+    const url = downloadLinks[platform as keyof typeof downloadLinks]
+    if (url) {
+      console.log(`🚀 Opening Gaia's Exchanges for ${platform}: ${url}`)
+      
+      window.open(url, '_blank', 'noopener,noreferrer')
+      toast.success(`Opening Gaia's Exchanges for ${platform}`, {
+        description: '🌍 Culture of Harmony platform'
+      })
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 to-blue-900/20">
@@ -180,21 +152,14 @@ export function GaiasExchange() {
             <div className="flex items-center gap-4">
               <GaiaLogo size="lg" variant="glow" />
               <div>
-                <h1 className="text-2xl font-bold text-primary">
-                  Gaia's Exchanges
-                </h1>
-                <p className="text-sm text-green-400">
-                  World's Most Secure Web3 Trading Platform
-                </p>
+                <h1 className="text-2xl font-bold text-primary">Gaia's Exchanges</h1>
+                <p className="text-sm text-green-400">World's Most Secure Web3 Trading Platform</p>
                 <div className="text-xs text-blue-400 mt-1">
-                  Contract:{" "}
-                  <code className="font-mono">
-                    {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...
-                  </code>
+                  Contract: <code className="font-mono">{GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...</code>
                 </div>
               </div>
             </div>
-
+            
             <div className="flex items-center gap-4">
               <Badge className="bg-green-600 text-white animate-pulse">
                 <Shield className="h-3 w-3 mr-1" />
@@ -221,9 +186,7 @@ export function GaiasExchange() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">24h Volume</p>
-                  <p className="text-2xl font-bold text-green-400">
-                    {formatGaiaNumber(stats.totalVolume)}
-                  </p>
+                  <p className="text-2xl font-bold text-green-400">{formatGaiaNumber(stats.totalVolume)}</p>
                 </div>
                 <DollarSign className="h-8 w-8 text-green-400" />
               </div>
@@ -235,9 +198,7 @@ export function GaiasExchange() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">Active Users</p>
-                  <p className="text-2xl font-bold text-blue-400">
-                    {stats.dailyUsers.toLocaleString()}
-                  </p>
+                  <p className="text-2xl font-bold text-blue-400">{stats.dailyUsers.toLocaleString()}</p>
                 </div>
                 <Users className="h-8 w-8 text-blue-400" />
               </div>
@@ -249,9 +210,7 @@ export function GaiasExchange() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">Total Trades</p>
-                  <p className="text-2xl font-bold text-purple-400">
-                    {stats.totalTrades.toLocaleString()}
-                  </p>
+                  <p className="text-2xl font-bold text-purple-400">{stats.totalTrades.toLocaleString()}</p>
                 </div>
                 <BarChart3 className="h-8 w-8 text-purple-400" />
               </div>
@@ -262,12 +221,8 @@ export function GaiasExchange() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">
-                    Security Score
-                  </p>
-                  <p className="text-2xl font-bold text-yellow-400">
-                    {stats.securityScore}%
-                  </p>
+                  <p className="text-sm text-muted-foreground">Security Score</p>
+                  <p className="text-2xl font-bold text-yellow-400">{stats.securityScore}%</p>
                 </div>
                 <Shield className="h-8 w-8 text-yellow-400" />
               </div>
@@ -283,56 +238,53 @@ export function GaiasExchange() {
               Download Gaia's Exchanges - Multi-Platform
             </CardTitle>
             <div className="text-sm text-blue-400 mt-2">
-              <strong>New Contract Address:</strong>{" "}
-              <code className="font-mono text-xs">
-                {GAIA_TOKEN.CONTRACT_ADDRESS}
-              </code>
+              <strong>New Contract Address:</strong> <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
             </div>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
-              <Button
-                onClick={() => handleDownloadApp("windows")}
+              <Button 
+                onClick={() => handleDownloadApp('windows')}
                 className="bg-blue-600 hover:bg-blue-700 h-auto py-4 flex-col gap-2"
               >
                 <div className="text-2xl">🪟</div>
                 <div className="text-sm">Windows</div>
                 <div className="text-xs opacity-75">x64</div>
               </Button>
-              <Button
-                onClick={() => handleDownloadApp("macos")}
+              <Button 
+                onClick={() => handleDownloadApp('macos')}
                 className="bg-gray-600 hover:bg-gray-700 h-auto py-4 flex-col gap-2"
               >
                 <div className="text-2xl">🍎</div>
                 <div className="text-sm">macOS</div>
                 <div className="text-xs opacity-75">Universal</div>
               </Button>
-              <Button
-                onClick={() => handleDownloadApp("android")}
+              <Button 
+                onClick={() => handleDownloadApp('android')}
                 className="bg-green-600 hover:bg-green-700 h-auto py-4 flex-col gap-2"
               >
                 <div className="text-2xl">🤖</div>
                 <div className="text-sm">Android</div>
                 <div className="text-xs opacity-75">Play Store</div>
               </Button>
-              <Button
-                onClick={() => handleDownloadApp("ios")}
+              <Button 
+                onClick={() => handleDownloadApp('ios')}
                 className="bg-purple-600 hover:bg-purple-700 h-auto py-4 flex-col gap-2"
               >
                 <div className="text-2xl">📱</div>
                 <div className="text-sm">iOS</div>
                 <div className="text-xs opacity-75">App Store</div>
               </Button>
-              <Button
-                onClick={() => handleDownloadApp("linux")}
+              <Button 
+                onClick={() => handleDownloadApp('linux')}
                 className="bg-orange-600 hover:bg-orange-700 h-auto py-4 flex-col gap-2"
               >
                 <div className="text-2xl">🐧</div>
                 <div className="text-sm">Linux</div>
                 <div className="text-xs opacity-75">DEB/RPM</div>
               </Button>
-              <Button
-                onClick={() => handleDownloadApp("web")}
+              <Button 
+                onClick={() => handleDownloadApp('web')}
                 className="bg-cyan-600 hover:bg-cyan-700 h-auto py-4 flex-col gap-2"
               >
                 <div className="text-2xl">🌐</div>
@@ -340,35 +292,23 @@ export function GaiasExchange() {
                 <div className="text-xs opacity-75">Browser</div>
               </Button>
             </div>
-
+            
             <div className="mt-6 space-y-2">
               <div className="flex items-center justify-center gap-4">
                 <Button variant="outline" size="sm" asChild>
-                  <a
-                    href="https://docs.gaiaexchanges.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="https://docs.gaiaexchanges.com" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     Documentation
                   </a>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
-                  <a
-                    href={GAIA_TOKEN.OFFICIAL_WEBSITE}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={GAIA_TOKEN.OFFICIAL_WEBSITE} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     Official Website
                   </a>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
-                  <a
-                    href={GAIA_TOKEN.PUMP_FUN_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={GAIA_TOKEN.PUMP_FUN_URL} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     Trade on Pump.fun
                   </a>
@@ -394,19 +334,19 @@ export function GaiasExchange() {
             <TabsTrigger value="markets">All Markets</TabsTrigger>
             <TabsTrigger value="security">Security Center</TabsTrigger>
           </TabsList>
-
+          
           <TabsContent value="trading" className="space-y-6">
             <TradingInterface />
           </TabsContent>
-
+          
           <TabsContent value="charts" className="space-y-6">
             <ChartAnalytics />
           </TabsContent>
-
+          
           <TabsContent value="markets" className="space-y-6">
             <CoinGeckoTrading />
           </TabsContent>
-
+          
           <TabsContent value="security" className="space-y-6">
             <SecurityCenter notifications={notifications} />
           </TabsContent>
@@ -423,36 +363,23 @@ export function GaiasExchange() {
           <CardContent>
             <div className="text-center space-y-4">
               <p className="text-muted-foreground">
-                Join our global community of traders and contribute to the
-                Harmony of Gaia ecosystem.
+                Join our global community of traders and contribute to the Harmony of Gaia ecosystem.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                 <div className="p-4 rounded-lg bg-green-900/30 border border-green-500/30">
                   <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                  <h4 className="font-semibold text-green-400 mb-2">
-                    Community Trading
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    Connect with traders worldwide
-                  </p>
+                  <h4 className="font-semibold text-green-400 mb-2">Community Trading</h4>
+                  <p className="text-sm text-muted-foreground">Connect with traders worldwide</p>
                 </div>
                 <div className="p-4 rounded-lg bg-blue-900/30 border border-blue-500/30">
                   <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                  <h4 className="font-semibold text-blue-400 mb-2">
-                    Global Markets
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    Access international exchanges
-                  </p>
+                  <h4 className="font-semibold text-blue-400 mb-2">Global Markets</h4>
+                  <p className="text-sm text-muted-foreground">Access international exchanges</p>
                 </div>
                 <div className="p-4 rounded-lg bg-purple-900/30 border border-purple-500/30">
                   <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                  <h4 className="font-semibold text-purple-400 mb-2">
-                    Secure Trading
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    Military-grade security
-                  </p>
+                  <h4 className="font-semibold text-purple-400 mb-2">Secure Trading</h4>
+                  <p className="text-sm text-muted-foreground">Military-grade security</p>
                 </div>
               </div>
             </div>
@@ -460,5 +387,5 @@ export function GaiasExchange() {
         </Card>
       </div>
     </div>
-  );
+  )
 }

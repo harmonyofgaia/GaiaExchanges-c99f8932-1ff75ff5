@@ -1,13 +1,12 @@
+
 # GAIA Engine Blueprint
 
 ## Overview
-
 A next-generation, cloud-native, modular game engine designed for ultimate creativity, scalability, and security. This blueprint integrates all original and new requirements, including GameHub, endless storage, modularity, AI, marketplace, and advanced security.
 
 ---
 
 ## Key Features
-
 - **GameHub**: In-engine creative suite for building, sharing, and managing games and assets.
 - **Endless Storage**: Cloud-based, scalable storage for assets, games, and user data.
 - **Modularity**: Plug-and-play architecture for engine features, tools, and integrations.
@@ -21,8 +20,7 @@ A next-generation, cloud-native, modular game engine designed for ultimate creat
 
 ## Architecture Diagram (Textual)
 
-```text
-
+```
 ┌────────────────────────────────────────────────────────────┐
 │                    GAIA ENGINE (Core)                     │
 │  ┌────────────┬─────────────┬─────────────┬─────────────┐ │
@@ -35,7 +33,6 @@ A next-generation, cloud-native, modular game engine designed for ultimate creat
 └────────────────────────────────────────────────────────────┘
          │             │             │             │
    Web/Desktop   Mobile   Admin Panel   APIs (REST/GraphQL)
-
 ```
 
 ---
