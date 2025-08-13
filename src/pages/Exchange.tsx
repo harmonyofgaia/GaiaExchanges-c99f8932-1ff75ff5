@@ -42,7 +42,7 @@ import { BlockchainStatus } from '@/components/blockchain/BlockchainStatus'
 import { LiveTransactionMatrix } from '@/components/LiveTransactionMatrix'
 import { TradingInterface } from '@/components/TradingInterface'
 import { ChartAnalytics } from '@/components/ChartAnalytics'
-import { SecurityCenter } from '@/components/SecurityCenter'
+import { GreenInvestmentWalletManager } from '@/components/green-investments/GreenInvestmentWalletManager'
 import { GaiaLogo } from '@/components/GaiaLogo'
 import { CommunityVault } from '@/components/CommunityVault'
 import { toast } from 'sonner'
@@ -456,8 +456,7 @@ export default function Exchange() {
                       <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 bg-gradient-to-r from-emerald-900/30 to-blue-900/30">
                         <TabsTrigger value="overview">🏠 Overview</TabsTrigger>
                         <TabsTrigger value="swap">💱 Instant Swap</TabsTrigger>
-                        <TabsTrigger value="security">🛡️ Security</TabsTrigger>
-                        <TabsTrigger value="fees">💰 Fee Manager</TabsTrigger>
+                        <TabsTrigger value="fees">💰 Green Investment Manager</TabsTrigger>
                         
                         <TabsTrigger value="vault">🏛️ Vault</TabsTrigger>
                       </TabsList>
@@ -473,11 +472,16 @@ export default function Exchange() {
                         <FullyFunctionalExchange />
                       </TabsContent>
                       
-                      <TabsContent value="security" className="space-y-6">
-                        <SecurityCenter notifications={notifications} />
-                      </TabsContent>
-                      
                       <TabsContent value="fees" className="space-y-6">
+                        <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
+                          <CardHeader>
+                            <CardTitle className="text-green-400">💰 Green Investment Management</CardTitle>
+                            <p className="text-green-300">Configure your fees to automatically support environmental projects</p>
+                          </CardHeader>
+                          <CardContent>
+                            <GreenInvestmentWalletManager />
+                          </CardContent>
+                        </Card>
                         <GaiaFeeManager />
                       </TabsContent>
                       

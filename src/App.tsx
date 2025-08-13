@@ -13,7 +13,7 @@ import { PersistentAudioControls } from '@/components/audio/PersistentAudioContr
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
-const GreenImpactDashboard = lazy(() => import('./pages/GreenImpactDashboard'))
+
 const EcoAvatar = lazy(() => import('./legacy-pages/EcoAvatar'))
 const DeploymentCenter = lazy(() => import('./legacy-pages/DeploymentCenter'))
 const LiveTracking = lazy(() => import('./pages/LiveTracking'))
@@ -28,7 +28,7 @@ const GreenInvestments = lazy(() => import('./pages/GreenInvestments'))
 const CoinCrafter = lazy(() => import('./pages/CoinCrafter'))
 
 const GaiasProjects = lazy(() => import('./pages/GaiasProjects'))
-const GaiaPrivateBlockchainSwapToken = lazy(() => import('./pages/GaiaPrivateBlockchainSwapToken'))
+
 const PrivateBlockchain = lazy(() => import('./pages/PrivateBlockchain'))
 const SecureAdmin = lazy(() => import('./pages/SecureAdmin'))
 const AdminLogin = lazy(() => import('./pages/AdminLogin'))
@@ -73,7 +73,6 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
               <Route path="/eco-avatar" element={<EcoAvatar />} />
               <Route path="/community-engagement-hub" element={<CommunityEngagementHub />} />
               {/* Partnership management moved to secure admin only */}
@@ -103,8 +102,9 @@ function App() {
               <Route path="/live-tracking" element={<LiveTracking />} />
               
               <Route path="/gaias-projects" element={<GaiasProjects />} />
-              <Route path="/gaia-private-blockchain-swap-token" element={<GaiaPrivateBlockchainSwapToken />} />
               <Route path="/private-blockchain" element={<PrivateBlockchain />} />
+              {/* Redirect blockchain swap to main exchange */}
+              <Route path="/gaia-private-blockchain-swap-token" element={<Navigate to="/exchange" replace />} />
               <Route path="/secure-admin" element={<SecureAdmin />} />
               <Route path="/admin-login" element={<AdminLogin />} />
               <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
