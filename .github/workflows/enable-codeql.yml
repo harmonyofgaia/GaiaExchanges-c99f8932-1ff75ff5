@@ -1,8 +1,6 @@
 name: Enable CodeQL on New Repositories
 
 on:
-  repository:
-    types: [created]
   push:
     branches: [main]
 
@@ -10,11 +8,8 @@ jobs:
   add-codeql-workflow:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the new repository
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          repository: ${{ github.event.repository.full_name }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add CodeQL workflow
         run: |
