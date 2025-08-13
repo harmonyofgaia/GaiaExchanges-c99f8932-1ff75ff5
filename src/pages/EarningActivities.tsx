@@ -1,39 +1,4 @@
-import { useState, Suspense, lazy } from "react";
-// Dynamic imports for all large feature components
-const GaiaBikeEarning = lazy(() => import("@/components/earning/GaiaBikeEarning").then(m => ({ default: m.GaiaBikeEarning })));
-const EnhancedBadgeSystem = lazy(() => import("@/components/earning/EnhancedBadgeSystem").then(m => ({ default: m.EnhancedBadgeSystem })));
-const PhotoVerificationSystem = lazy(() => import("@/components/earning/PhotoVerificationSystem").then(m => ({ default: m.PhotoVerificationSystem })));
-const LocationBasedMissions = lazy(() => import("@/components/community/LocationBasedMissions").then(m => ({ default: m.LocationBasedMissions })));
-const CommunityProjectVoting = lazy(() => import("@/components/community/CommunityProjectVoting").then(m => ({ default: m.CommunityProjectVoting })));
-const TeamChallenges = lazy(() => import("@/components/earning/TeamChallenges").then(m => ({ default: m.TeamChallenges })));
-const TokenStakingSystem = lazy(() => import("@/components/earning/TokenStakingSystem").then(m => ({ default: m.TokenStakingSystem })));
-const AdvancedTokenMechanics = lazy(() => import("@/components/earning/AdvancedTokenMechanics").then(m => ({ default: m.AdvancedTokenMechanics })));
-const CommunityGovernance = lazy(() => import("@/components/community/CommunityGovernance").then(m => ({ default: m.CommunityGovernance })));
-const InteractiveFoodMap = lazy(() => import("@/components/community/InteractiveFoodMap").then(m => ({ default: m.InteractiveFoodMap })));
-const EcosystemIntegration = lazy(() => import("@/components/earning/EcosystemIntegration").then(m => ({ default: m.EcosystemIntegration })));
-const MentorshipProgram = lazy(() => import("@/components/earning/MentorshipProgram").then(m => ({ default: m.MentorshipProgram })));
-const BeeHotelActions = lazy(() => import("@/components/earning/BeeHotelActions").then(m => ({ default: m.BeeHotelActions })));
-const WaterSavingActions = lazy(() => import("@/components/earning/WaterSavingActions").then(m => ({ default: m.WaterSavingActions })));
-const CarbonCreditActions = lazy(() => import("@/components/earning/CarbonCreditActions").then(m => ({ default: m.CarbonCreditActions })));
-const EnvironmentalEducationActions = lazy(() => import("@/components/earning/EnvironmentalEducationActions").then(m => ({ default: m.EnvironmentalEducationActions })));
-const HomeGrownFoodActions = lazy(() => import("@/components/earning/HomeGrownFoodActions").then(m => ({ default: m.HomeGrownFoodActions })));
-const ReferralSystem = lazy(() => import("@/components/earning/ReferralSystem").then(m => ({ default: m.ReferralSystem })));
-const SkillBasedEarning = lazy(() => import("@/components/earning/SkillBasedEarning").then(m => ({ default: m.SkillBasedEarning })));
-const TreePlantingActions = lazy(() => import("@/components/earning/TreePlantingActions").then(m => ({ default: m.TreePlantingActions })));
-const SolarPanelActions = lazy(() => import("@/components/earning/SolarPanelActions").then(m => ({ default: m.SolarPanelActions })));
-const RecyclingActions = lazy(() => import("@/components/earning/RecyclingActions").then(m => ({ default: m.RecyclingActions })));
-const CompostingActions = lazy(() => import("@/components/earning/CompostingActions").then(m => ({ default: m.CompostingActions })));
-const CommunityCleanupActions = lazy(() => import("@/components/earning/CommunityCleanupActions").then(m => ({ default: m.CommunityCleanupActions })));
-const WildlifeConservationActions = lazy(() => import("@/components/earning/WildlifeConservationActions").then(m => ({ default: m.WildlifeConservationActions })));
-const CommunityRewardsProgram = lazy(() => import("@/components/earning/CommunityRewardsProgram").then(m => ({ default: m.CommunityRewardsProgram })));
-const AdvancedCommunityFeatures = lazy(() => import("@/components/earning/AdvancedCommunityFeatures").then(m => ({ default: m.AdvancedCommunityFeatures })));
-const PartyEventEarning = lazy(() => import("@/components/earning/PartyEventEarning").then(m => ({ default: m.PartyEventEarning })));
-const EcoTravelRewards = lazy(() => import("@/components/earning/EcoTravelRewards").then(m => ({ default: m.EcoTravelRewards })));
-const InteractiveEcoBikeMap = lazy(() => import("@/components/earning/InteractiveEcoBikeMap").then(m => ({ default: m.InteractiveEcoBikeMap })));
-const EnhancedHomeGrownFoodTracker = lazy(() => import("@/components/earning/EnhancedHomeGrownFoodTracker").then(m => ({ default: m.EnhancedHomeGrownFoodTracker })));
-const PublicTransportRewards = lazy(() => import("@/components/earning/PublicTransportRewards").then(m => ({ default: m.PublicTransportRewards })));
-const GreenShoppingRewards = lazy(() => import("@/components/earning/GreenShoppingRewards").then(m => ({ default: m.GreenShoppingRewards })));
-const EnergyConsumptionTracker = lazy(() => import("@/components/earning/EnergyConsumptionTracker").then(m => ({ default: m.EnergyConsumptionTracker })));
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -77,30 +42,50 @@ import {
 } from "lucide-react";
 
 // Import all earning components
-// import { GaiaBikeEarning } from "@/components/earning/GaiaBikeEarning";
-// import { EnhancedBadgeSystem } from "@/components/earning/EnhancedBadgeSystem";
-// import { PhotoVerificationSystem } from "@/components/earning/PhotoVerificationSystem";
-// import { LocationBasedMissions } from "@/components/community/LocationBasedMissions";
-// import { CommunityProjectVoting } from "@/components/community/CommunityProjectVoting";
-// import { TeamChallenges } from "@/components/earning/TeamChallenges";
-// import { TokenStakingSystem } from "@/components/earning/TokenStakingSystem";
-// import { AdvancedTokenMechanics } from "@/components/earning/AdvancedTokenMechanics";
-// import { CommunityGovernance } from "@/components/community/CommunityGovernance";
-// import { InteractiveFoodMap } from "@/components/community/InteractiveFoodMap";
-// import { EcosystemIntegration } from "@/components/earning/EcosystemIntegration";
-// import { MentorshipProgram } from "@/components/earning/MentorshipProgram";
+import { GaiaBikeEarning } from "@/components/earning/GaiaBikeEarning";
+import { EnhancedBadgeSystem } from "@/components/earning/EnhancedBadgeSystem";
+import { PhotoVerificationSystem } from "@/components/earning/PhotoVerificationSystem";
+import { LocationBasedMissions } from "@/components/community/LocationBasedMissions";
+import { CommunityProjectVoting } from "@/components/community/CommunityProjectVoting";
+import { TeamChallenges } from "@/components/earning/TeamChallenges";
+import { TokenStakingSystem } from "@/components/earning/TokenStakingSystem";
+import { AdvancedTokenMechanics } from "@/components/earning/AdvancedTokenMechanics";
+import { CommunityGovernance } from "@/components/community/CommunityGovernance";
+import { InteractiveFoodMap } from "@/components/community/InteractiveFoodMap";
+import { EcosystemIntegration } from "@/components/earning/EcosystemIntegration";
+import { MentorshipProgram } from "@/components/earning/MentorshipProgram";
+
+// Import recovered and new earning activities
+import { BeeHotelActions } from "@/components/earning/BeeHotelActions";
+import { WaterSavingActions } from "@/components/earning/WaterSavingActions";
+import { CarbonCreditActions } from "@/components/earning/CarbonCreditActions";
+import { EnvironmentalEducationActions } from "@/components/earning/EnvironmentalEducationActions";
+import { HomeGrownFoodActions } from "@/components/earning/HomeGrownFoodActions";
+import { ReferralSystem } from "@/components/earning/ReferralSystem";
+import { SkillBasedEarning } from "@/components/earning/SkillBasedEarning";
+import { TreePlantingActions } from "@/components/earning/TreePlantingActions";
+import { SolarPanelActions } from "@/components/earning/SolarPanelActions";
+import { RecyclingActions } from "@/components/earning/RecyclingActions";
+import { CompostingActions } from "@/components/earning/CompostingActions";
+import { CommunityCleanupActions } from "@/components/earning/CommunityCleanupActions";
+import { WildlifeConservationActions } from "@/components/earning/WildlifeConservationActions";
+import { CommunityRewardsProgram } from "@/components/earning/CommunityRewardsProgram";
+import { AdvancedCommunityFeatures } from "@/components/earning/AdvancedCommunityFeatures";
+
+// Import new comprehensive components
+import { PartyEventEarning } from "@/components/earning/PartyEventEarning";
+import { EcoTravelRewards } from "@/components/earning/EcoTravelRewards";
+import { InteractiveEcoBikeMap } from "@/components/earning/InteractiveEcoBikeMap";
+import { EnhancedHomeGrownFoodTracker } from "@/components/earning/EnhancedHomeGrownFoodTracker";
+import { PublicTransportRewards } from "@/components/earning/PublicTransportRewards";
+import { GreenShoppingRewards } from "@/components/earning/GreenShoppingRewards";
+import { EnergyConsumptionTracker } from "@/components/earning/EnergyConsumptionTracker";
 
 export default function EarningActivities() {
-  // State for search query
+  const [activeTab, setActiveTab] = useState("globe");
   const [searchQuery, setSearchQuery] = useState("");
-  // State for selected activity
-  const [selectedActivity, setSelectedActivity] = useState<{
-    category: string;
-    activityId: string;
-  } | null>(null);
-  // State for active tab
-  const [activeTab, setActiveTab] = useState("overview");
-  // User stats
+  const [selectedActivity, setSelectedActivity] = useState<{category: string, activityId: string} | null>(null);
+
   const [userStats] = useState({
     totalTokens: 4890,
     weeklyEarnings: 347,
@@ -461,11 +446,7 @@ export default function EarningActivities() {
     const activityIndex = parseInt(selectedActivity.activityId.split('-')[1]);
     const activity = category.components[activityIndex];
     
-    return activity ? (
-      <Suspense fallback={<div>Loading activity...</div>}>
-        <activity.component key={selectedActivity.activityId} />
-      </Suspense>
-    ) : null;
+    return activity ? <activity.component key={selectedActivity.activityId} /> : null;
   };
 
   return (
@@ -819,4 +800,3 @@ export default function EarningActivities() {
     </div>
   );
 }
-

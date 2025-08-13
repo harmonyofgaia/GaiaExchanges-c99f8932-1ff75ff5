@@ -6,7 +6,7 @@
   "scripts": {
     "pre-deploy": "echo \"No pre-deploy steps required\"",
     "dev": "vite",
-    "build": "npm run tailwind:build && vite build",
+    "build": "vite build",
     "build:dev": "vite build --mode development",
     "build:vercel": "npx tsc && vite build",
     "preview": "vite preview",
@@ -14,16 +14,7 @@
     "lint:fix": "eslint . --ext .js,.ts,.tsx --fix",
     "lighthouse": "lighthouse http://localhost:5173 --output html --output-path ./lighthouse-report.html --chrome-flags=\"--headless\"",
     "prepare": "husky install",
-    "test": "vitest run",
-    "tailwind:build": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.output.css --minify",
-    "deploy:complete": "sh ./scripts/deploy.sh && sh ./scripts/post-deploy-validate.sh",
-    "deploy:doctor": "powershell -ExecutionPolicy Bypass -File ./scripts/deployment-doctor.ps1",
-    "deploy": "npm run build && npm run deploy:vercel",
-    "deploy:validate": "sh ./scripts/post-deploy-validate.sh",
-    "deploy:auto": "sh ./scripts/deploy.sh",
-    "deploy:vercel": "npx vercel --prod --yes --archive=tgz",
-    "deploy:netlify": "npx netlify deploy --prod",
-    "deploy:static": "npm run build && echo 'Static build complete'"
+    "test": "vitest run"
   },
   "dependencies": {
     "@mendable/firecrawl-js": "^1.29.3",
@@ -55,6 +46,7 @@
     "@radix-ui/react-toggle-group": "^1.1.10",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@supabase/supabase-js": "^2.53.0",
+    "@tailwindcss/postcss": "4.1.11",
     "@tanstack/react-query": "^5.84.1",
     "autoprefixer": "^10.4.21",
     "class-variance-authority": "^0.7.1",
@@ -68,11 +60,11 @@
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
     "lovable-tagger": "^1.1.9",
-    "lucide-react": "^0.539.0",
+    "lucide-react": "0.539.0",
     "next-themes": "^0.4.6",
-    "react": "^18.3.1",
+    "react": "19.1.1",
     "react-day-picker": "^9.8.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "19.1.1",
     "react-hook-form": "^7.62.0",
     "react-is": "^19.1.1",
     "react-resizable-panels": "^3.0.4",
@@ -101,7 +93,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "16.3.0",
-    "husky": "9.1.7",
+    "husky": "^9.1.7",
     "jest": "^30.0.5",
     "lighthouse": "^12.0.0",
     "lint-staged": "^16.1.5",
@@ -109,10 +101,20 @@
     "postcss": "^8.5.6",
     "postcss-load-config": "^6.0.1",
     "prettier": "^3.6.2",
-    "tailwindcss": "^3.3.3",
+    "tailwindcss": "4.1.11",
     "ts-jest": "^29.4.1",
     "typescript": "5.9.2",
     "typescript-eslint": "^8.0.1",
     "vite": "^7.1.1"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,jsx,css,md,json}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{ts,tsx,js,jsx}": [
+      "npx tsc --noEmit",
+      "vitest run --silent"
+    ]
   }
 }

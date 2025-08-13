@@ -15,7 +15,7 @@ import {
   AVAILABLE_THEMES,
   type ThemeName,
   useLock,
-} from "lovable/src/components/providers/ThemeProvider";
+} from "@/components/providers/ThemeProvider";
 import { toast } from "sonner";
 
 export function ThemeSelector() {
