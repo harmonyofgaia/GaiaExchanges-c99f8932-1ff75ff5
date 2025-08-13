@@ -49,12 +49,6 @@ import { MasterUpgradePlan } from './MasterUpgradePlan'
 import { BundledAdminPages } from './BundledAdminPages'
 import { FarmerEcosystem } from './FarmerEcosystem'
 import { PDFTransactionTracker } from './PDFTransactionTracker'
-import { AnimalGrazingRecovery } from './AnimalGrazingRecovery'
-import { AnimalTransferProtocols } from './AnimalTransferProtocols'
-import { IAEngine } from './IAEngine'
-import { DailyEngineAutomation } from './DailyEngineAutomation'
-import { GaiaBlockchainNetwork } from './GaiaBlockchainNetwork'
-import { MarketingCampaignManager } from './MarketingCampaignManager'
 
 export function SecureAdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -282,42 +276,6 @@ export function SecureAdminDashboard() {
               <span className="hidden sm:inline">PDF Tracker</span>
             </div>
           </TabsTrigger>
-          <TabsTrigger value="animal-grazing" className="p-2 text-center bg-gradient-to-r from-green-600/20 to-lime-600/20 border border-green-500/30">
-            <div className="flex flex-col items-center">
-              <span>🌱</span>
-              <span className="hidden sm:inline">Land Recovery</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="animal-transfer" className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30">
-            <div className="flex flex-col items-center">
-              <span>🚛</span>
-              <span className="hidden sm:inline">Animal Transfer</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="ia-engine" className="p-2 text-center bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30">
-            <div className="flex flex-col items-center">
-              <span>🧠</span>
-              <span className="hidden sm:inline">IA Engine</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="automation" className="p-2 text-center bg-gradient-to-r from-orange-600/20 to-red-600/20 border border-orange-500/30">
-            <div className="flex flex-col items-center">
-              <span>🔄</span>
-              <span className="hidden sm:inline">Automation</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="blockchain" className="p-2 text-center bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30">
-            <div className="flex flex-col items-center">
-              <span>🌍</span>
-              <span className="hidden sm:inline">Blockchain</span>
-            </div>
-          </TabsTrigger>
-          <TabsTrigger value="marketing" className="p-2 text-center bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30">
-            <div className="flex flex-col items-center">
-              <span>🚀</span>
-              <span className="hidden sm:inline">Marketing</span>
-            </div>
-          </TabsTrigger>
           </TabsList>
 
         <TabsContent value="animals" className="space-y-6">
@@ -335,30 +293,6 @@ export function SecureAdminDashboard() {
 
           <TabsContent value="pdf-tracker" className="space-y-6">
             <PDFTransactionTracker />
-          </TabsContent>
-
-          <TabsContent value="animal-grazing" className="space-y-6">
-            <AnimalGrazingRecovery />
-          </TabsContent>
-
-          <TabsContent value="animal-transfer" className="space-y-6">
-            <AnimalTransferProtocols />
-          </TabsContent>
-          
-          <TabsContent value="ia-engine" className="space-y-6">
-            <IAEngine />
-          </TabsContent>
-          
-          <TabsContent value="automation" className="space-y-6">
-            <DailyEngineAutomation />
-          </TabsContent>
-          
-          <TabsContent value="blockchain" className="space-y-6">
-            <GaiaBlockchainNetwork />
-          </TabsContent>
-
-          <TabsContent value="marketing" className="space-y-6">
-            <MarketingCampaignManager />
           </TabsContent>
 
           <TabsContent value="overview" className="space-y-6">

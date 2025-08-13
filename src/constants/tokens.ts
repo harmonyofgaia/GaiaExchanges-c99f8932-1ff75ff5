@@ -4,13 +4,7 @@ export const GAIA_TOKEN = {
   name: 'Gaia Exchange Token',
   decimals: 18,
   totalSupply: 1000000000, // 1 billion tokens
-  
-  // Official GAiA Token Addresses
-  WALLET_ADDRESS: 'ERS1S7HqgSEh6edNVQzq2eZWSCw3jprJELHvLZ4LAzeY',
-  CONTRACT_ADDRESS: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
-  
-  // Legacy support
-  address: 't7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump',
+  address: '0x0000000000000000000000000000000000000000', // Placeholder address
   icon: '🌍'
 }
 
