@@ -77,7 +77,7 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
-  chunkSizeWarningLimit: 2500,
+    chunkSizeWarningLimit: 1400,
     target: "esnext",
     minify: "esbuild",
   },
