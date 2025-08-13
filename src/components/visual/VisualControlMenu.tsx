@@ -18,7 +18,7 @@ import {
 
 import { TemplateSelector } from "./TemplateSelector";
 import { LockToggle } from "./LockToggle";
-import { useLock } from "lovable/src/components/providers/ThemeProvider";
+import { useLock } from "@/components/providers/ThemeProvider";
 
 export function VisualControlMenu() {
   const { isLocked, toggleLock } = useLock();
