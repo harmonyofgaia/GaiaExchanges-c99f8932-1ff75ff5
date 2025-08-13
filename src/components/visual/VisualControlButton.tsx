@@ -19,7 +19,7 @@ import {
   Zap,
   Eye,
 } from "lucide-react";
-import { useLock } from "@/components/providers/ThemeProvider";
+import { useLock } from "lovable/src/components/providers/ThemeProvider";
 import { toast } from "sonner";
 import { VisualControlMenu } from "./VisualControlMenu";
 import { EnhancedVisualControls } from "./EnhancedVisualControls";

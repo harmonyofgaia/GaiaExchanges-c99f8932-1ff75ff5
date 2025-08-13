@@ -103,7 +103,7 @@ import {
   Wrench,
   Zap as Lightning,
 } from "lucide-react";
-import { useLock } from "@/components/providers/ThemeProvider";
+import { useLock } from "lovable/src/components/providers/ThemeProvider";
 import { toast } from "sonner";
 import { FullVisualControlPanel } from "./FullVisualControlPanel";
 
