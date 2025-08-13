@@ -2,12 +2,16 @@ import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./src/components/**/*.{ts,tsx}",
+    "./src/components/**/*.tsx",
+    "./src/components/**/*.ts",
+    "./src/**/*.css",
   ],
   safelist: [
     "bg-background",
@@ -61,6 +65,7 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        gold: "hsl(47 95% 53%)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -84,6 +89,6 @@ const config: Config = {
     },
   },
   plugins: [tailwindcssAnimate],
-};
+} satisfies Config;
 
 export default config;
