@@ -1,156 +1,172 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { toast } from 'sonner'
-import { 
-  Smartphone, 
-  Apple, 
-  Play, 
-  Download, 
-  Shield, 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { toast } from "sonner";
+import {
+  Smartphone,
+  Apple,
+  Play,
+  Download,
+  Shield,
   CheckCircle,
   Globe,
   Star,
   Users,
-  Package
-} from 'lucide-react'
+  Package,
+} from "lucide-react";
 
 interface AppStoreStatus {
-  platform: 'ios' | 'android' | 'windows' | 'macos'
-  name: string
-  status: 'preparing' | 'submitted' | 'approved' | 'published'
-  progress: number
-  icon: React.ReactNode
-  color: string
-  version: string
-  buildNumber: number
+  platform: "ios" | "android" | "windows" | "macos";
+  name: string;
+  status: "preparing" | "submitted" | "approved" | "published";
+  progress: number;
+  icon: React.ReactNode;
+  color: string;
+  version: string;
+  buildNumber: number;
 }
 
 export function AppStoreDeployment() {
   const [deploymentStatus, setDeploymentStatus] = useState<AppStoreStatus[]>([
     {
-      platform: 'ios',
-      name: 'Apple App Store',
-      status: 'preparing',
+      platform: "ios",
+      name: "Apple App Store",
+      status: "preparing",
       progress: 85,
       icon: <Apple className="h-5 w-5" />,
-      color: 'bg-gray-600',
-      version: '1.0.0',
-      buildNumber: 1
+      color: "bg-gray-600",
+      version: "1.0.0",
+      buildNumber: 1,
     },
     {
-      platform: 'android',
-      name: 'Google Play Store',
-      status: 'preparing',
+      platform: "android",
+      name: "Google Play Store",
+      status: "preparing",
       progress: 90,
       icon: <Play className="h-5 w-5" />,
-      color: 'bg-green-600',
-      version: '1.0.0',
-      buildNumber: 1
+      color: "bg-green-600",
+      version: "1.0.0",
+      buildNumber: 1,
     },
     {
-      platform: 'windows',
-      name: 'Microsoft Store',
-      status: 'preparing',
+      platform: "windows",
+      name: "Microsoft Store",
+      status: "preparing",
       progress: 75,
       icon: <Package className="h-5 w-5" />,
-      color: 'bg-blue-600',
-      version: '1.0.0',
-      buildNumber: 1
+      color: "bg-blue-600",
+      version: "1.0.0",
+      buildNumber: 1,
     },
     {
-      platform: 'macos',
-      name: 'Mac App Store',
-      status: 'preparing',
+      platform: "macos",
+      name: "Mac App Store",
+      status: "preparing",
       progress: 80,
       icon: <Apple className="h-5 w-5" />,
-      color: 'bg-gray-700',
-      version: '1.0.0',
-      buildNumber: 1
-    }
-  ])
+      color: "bg-gray-700",
+      version: "1.0.0",
+      buildNumber: 1,
+    },
+  ]);
 
-  const [overallProgress, setOverallProgress] = useState(0)
-  const [securityCompliance, setSecurityCompliance] = useState(98)
+  const [overallProgress, setOverallProgress] = useState(0);
+  const [securityCompliance, setSecurityCompliance] = useState(98);
 
   // Simulate deployment progress
   useEffect(() => {
     const interval = setInterval(() => {
-      setDeploymentStatus(prev => prev.map(store => {
-        if (store.progress < 100) {
-          const newProgress = Math.min(100, store.progress + Math.random() * 3)
-          let newStatus = store.status
-          
-          if (newProgress >= 100 && store.status === 'preparing') {
-            newStatus = 'submitted'
-            toast.success(`🚀 ${store.name} Submission Complete!`, {
-              description: 'App successfully submitted for review',
-              duration: 4000
-            })
-          }
-          
-          return { ...store, progress: newProgress, status: newStatus }
-        }
-        return store
-      }))
-    }, 2000)
+      setDeploymentStatus((prev) =>
+        prev.map((store) => {
+          if (store.progress < 100) {
+            const newProgress = Math.min(
+              100,
+              store.progress + Math.random() * 3,
+            );
+            let newStatus = store.status;
 
-    return () => clearInterval(interval)
-  }, [])
+            if (newProgress >= 100 && store.status === "preparing") {
+              newStatus = "submitted";
+              toast.success(`🚀 ${store.name} Submission Complete!`, {
+                description: "App successfully submitted for review",
+                duration: 4000,
+              });
+            }
+
+            return { ...store, progress: newProgress, status: newStatus };
+          }
+          return store;
+        }),
+      );
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Calculate overall progress
   useEffect(() => {
-    const totalProgress = deploymentStatus.reduce((sum, store) => sum + store.progress, 0)
-    setOverallProgress(totalProgress / deploymentStatus.length)
-  }, [deploymentStatus])
+    const totalProgress = deploymentStatus.reduce(
+      (sum, store) => sum + store.progress,
+      0,
+    );
+    setOverallProgress(totalProgress / deploymentStatus.length);
+  }, [deploymentStatus]);
 
   const submitToAppStore = (platform: string) => {
-    setDeploymentStatus(prev => prev.map(store => {
-      if (store.platform === platform) {
-        toast.success(`🚀 Submitting to ${store.name}`, {
-          description: 'Automated submission process started',
-          duration: 3000
-        })
-        return { ...store, status: 'submitted', progress: 100 }
-      }
-      return store
-    }))
-  }
+    setDeploymentStatus((prev) =>
+      prev.map((store) => {
+        if (store.platform === platform) {
+          toast.success(`🚀 Submitting to ${store.name}`, {
+            description: "Automated submission process started",
+            duration: 3000,
+          });
+          return { ...store, status: "submitted", progress: 100 };
+        }
+        return store;
+      }),
+    );
+  };
 
   const generateAppBundle = () => {
-    toast.success('📦 Generating App Bundles', {
-      description: 'Creating optimized builds for all platforms',
-      duration: 4000
-    })
+    toast.success("📦 Generating App Bundles", {
+      description: "Creating optimized builds for all platforms",
+      duration: 4000,
+    });
 
-    setDeploymentStatus(prev => prev.map(store => ({
-      ...store,
-      progress: Math.min(100, store.progress + 15),
-      buildNumber: store.buildNumber + 1
-    })))
-  }
+    setDeploymentStatus((prev) =>
+      prev.map((store) => ({
+        ...store,
+        progress: Math.min(100, store.progress + 15),
+        buildNumber: store.buildNumber + 1,
+      })),
+    );
+  };
 
   const runSecurityAudit = () => {
-    toast.success('🔒 Security Audit Started', {
-      description: 'Comprehensive security compliance check',
-      duration: 3000
-    })
+    toast.success("🔒 Security Audit Started", {
+      description: "Comprehensive security compliance check",
+      duration: 3000,
+    });
 
-    setSecurityCompliance(prev => Math.min(100, prev + 2))
-  }
+    setSecurityCompliance((prev) => Math.min(100, prev + 2));
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'preparing': return 'bg-yellow-600'
-      case 'submitted': return 'bg-blue-600'
-      case 'approved': return 'bg-green-600'
-      case 'published': return 'bg-purple-600'
-      default: return 'bg-gray-600'
+      case "preparing":
+        return "bg-yellow-600";
+      case "submitted":
+        return "bg-blue-600";
+      case "approved":
+        return "bg-green-600";
+      case "published":
+        return "bg-purple-600";
+      default:
+        return "bg-gray-600";
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -165,20 +181,35 @@ export function AppStoreDeployment() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center mb-6">
             <div>
-              <div className="text-3xl font-bold text-blue-400">{overallProgress.toFixed(1)}%</div>
-              <div className="text-sm text-muted-foreground">Overall Progress</div>
+              <div className="text-3xl font-bold text-blue-400">
+                {overallProgress.toFixed(1)}%
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Overall Progress
+              </div>
               <Progress value={overallProgress} className="mt-2" />
             </div>
             <div>
-              <div className="text-3xl font-bold text-green-400">{securityCompliance}%</div>
-              <div className="text-sm text-muted-foreground">Security Compliance</div>
+              <div className="text-3xl font-bold text-green-400">
+                {securityCompliance}%
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Security Compliance
+              </div>
               <Progress value={securityCompliance} className="mt-2" />
             </div>
             <div>
               <div className="text-3xl font-bold text-purple-400">
-                {deploymentStatus.filter(s => s.status === 'submitted' || s.status === 'approved').length}/4
+                {
+                  deploymentStatus.filter(
+                    (s) => s.status === "submitted" || s.status === "approved",
+                  ).length
+                }
+                /4
               </div>
-              <div className="text-sm text-muted-foreground">Stores Submitted</div>
+              <div className="text-sm text-muted-foreground">
+                Stores Submitted
+              </div>
             </div>
           </div>
 
@@ -252,10 +283,12 @@ export function AppStoreDeployment() {
 
               <Button
                 onClick={() => submitToAppStore(store.platform)}
-                disabled={store.status === 'submitted'}
+                disabled={store.status === "submitted"}
                 className={`w-full ${store.color} hover:opacity-90`}
               >
-                {store.status === 'submitted' ? 'Submitted' : `Submit to ${store.name}`}
+                {store.status === "submitted"
+                  ? "Submitted"
+                  : `Submit to ${store.name}`}
               </Button>
             </CardContent>
           </Card>
@@ -264,16 +297,22 @@ export function AppStoreDeployment() {
 
       {/* Deployment Actions */}
       <div className="flex gap-4 flex-wrap">
-        <Button onClick={generateAppBundle} className="bg-blue-600 hover:bg-blue-700">
+        <Button
+          onClick={generateAppBundle}
+          className="bg-blue-600 hover:bg-blue-700"
+        >
           <Package className="h-4 w-4 mr-2" />
           Generate All App Bundles
         </Button>
-        
-        <Button onClick={runSecurityAudit} className="bg-green-600 hover:bg-green-700">
+
+        <Button
+          onClick={runSecurityAudit}
+          className="bg-green-600 hover:bg-green-700"
+        >
           <Shield className="h-4 w-4 mr-2" />
           Run Security Audit
         </Button>
-        
+
         <Button variant="outline" className="border-purple-500/20">
           <Globe className="h-4 w-4 mr-2" />
           Configure Global Settings
@@ -336,5 +375,5 @@ export function AppStoreDeployment() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

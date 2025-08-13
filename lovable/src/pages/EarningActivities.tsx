@@ -1,16 +1,15 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Progress } from '@/components/ui/progress'
-import { Input } from '@/components/ui/input'
-import { 
-  Zap, 
-  Trophy, 
-  Camera, 
-  MapPin, 
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
+import { Input } from "@/components/ui/input";
+import {
+  Zap,
+  Trophy,
+  Camera,
+  MapPin,
   Target,
   Vote,
   Users,
@@ -38,52 +37,52 @@ import {
   Bird,
   Award,
   Heart,
-  Lightbulb
-} from 'lucide-react'
+  Lightbulb,
+} from "lucide-react";
 
 // Import all earning components
-import { GaiaBikeEarning } from '@/components/earning/GaiaBikeEarning'
-import { EnhancedBadgeSystem } from '@/components/earning/EnhancedBadgeSystem'
-import { PhotoVerificationSystem } from '@/components/earning/PhotoVerificationSystem'
-import { LocationBasedMissions } from '@/components/community/LocationBasedMissions'
-import { CommunityProjectVoting } from '@/components/community/CommunityProjectVoting'
-import { TeamChallenges } from '@/components/earning/TeamChallenges'
-import { TokenStakingSystem } from '@/components/earning/TokenStakingSystem'
-import { AdvancedTokenMechanics } from '@/components/earning/AdvancedTokenMechanics'
-import { CommunityGovernance } from '@/components/community/CommunityGovernance'
-import { InteractiveFoodMap } from '@/components/community/InteractiveFoodMap'
-import { EcosystemIntegration } from '@/components/earning/EcosystemIntegration'
-import { MentorshipProgram } from '@/components/earning/MentorshipProgram'
+import { GaiaBikeEarning } from "@/components/earning/GaiaBikeEarning";
+import { EnhancedBadgeSystem } from "@/components/earning/EnhancedBadgeSystem";
+import { PhotoVerificationSystem } from "@/components/earning/PhotoVerificationSystem";
+import { LocationBasedMissions } from "@/components/community/LocationBasedMissions";
+import { CommunityProjectVoting } from "@/components/community/CommunityProjectVoting";
+import { TeamChallenges } from "@/components/earning/TeamChallenges";
+import { TokenStakingSystem } from "@/components/earning/TokenStakingSystem";
+import { AdvancedTokenMechanics } from "@/components/earning/AdvancedTokenMechanics";
+import { CommunityGovernance } from "@/components/community/CommunityGovernance";
+import { InteractiveFoodMap } from "@/components/community/InteractiveFoodMap";
+import { EcosystemIntegration } from "@/components/earning/EcosystemIntegration";
+import { MentorshipProgram } from "@/components/earning/MentorshipProgram";
 
 // Import recovered and new earning activities
-import { BeeHotelActions } from '@/components/earning/BeeHotelActions'
-import { WaterSavingActions } from '@/components/earning/WaterSavingActions'
-import { CarbonCreditActions } from '@/components/earning/CarbonCreditActions'
-import { EnvironmentalEducationActions } from '@/components/earning/EnvironmentalEducationActions'
-import { HomeGrownFoodActions } from '@/components/earning/HomeGrownFoodActions'
-import { ReferralSystem } from '@/components/earning/ReferralSystem'
-import { SkillBasedEarning } from '@/components/earning/SkillBasedEarning'
-import { TreePlantingActions } from '@/components/earning/TreePlantingActions'
-import { SolarPanelActions } from '@/components/earning/SolarPanelActions'
-import { RecyclingActions } from '@/components/earning/RecyclingActions'
-import { CompostingActions } from '@/components/earning/CompostingActions'
-import { CommunityCleanupActions } from '@/components/earning/CommunityCleanupActions'
-import { WildlifeConservationActions } from '@/components/earning/WildlifeConservationActions'
-import { CommunityRewardsProgram } from '@/components/earning/CommunityRewardsProgram'
-import { AdvancedCommunityFeatures } from '@/components/earning/AdvancedCommunityFeatures'
+import { BeeHotelActions } from "@/components/earning/BeeHotelActions";
+import { WaterSavingActions } from "@/components/earning/WaterSavingActions";
+import { CarbonCreditActions } from "@/components/earning/CarbonCreditActions";
+import { EnvironmentalEducationActions } from "@/components/earning/EnvironmentalEducationActions";
+import { HomeGrownFoodActions } from "@/components/earning/HomeGrownFoodActions";
+import { ReferralSystem } from "@/components/earning/ReferralSystem";
+import { SkillBasedEarning } from "@/components/earning/SkillBasedEarning";
+import { TreePlantingActions } from "@/components/earning/TreePlantingActions";
+import { SolarPanelActions } from "@/components/earning/SolarPanelActions";
+import { RecyclingActions } from "@/components/earning/RecyclingActions";
+import { CompostingActions } from "@/components/earning/CompostingActions";
+import { CommunityCleanupActions } from "@/components/earning/CommunityCleanupActions";
+import { WildlifeConservationActions } from "@/components/earning/WildlifeConservationActions";
+import { CommunityRewardsProgram } from "@/components/earning/CommunityRewardsProgram";
+import { AdvancedCommunityFeatures } from "@/components/earning/AdvancedCommunityFeatures";
 
 // Import new comprehensive components
-import { PartyEventEarning } from '@/components/earning/PartyEventEarning'
-import { EcoTravelRewards } from '@/components/earning/EcoTravelRewards'
-import { InteractiveEcoBikeMap } from '@/components/earning/InteractiveEcoBikeMap'
-import { EnhancedHomeGrownFoodTracker } from '@/components/earning/EnhancedHomeGrownFoodTracker'
-import { PublicTransportRewards } from '@/components/earning/PublicTransportRewards'
-import { GreenShoppingRewards } from '@/components/earning/GreenShoppingRewards'
-import { EnergyConsumptionTracker } from '@/components/earning/EnergyConsumptionTracker'
+import { PartyEventEarning } from "@/components/earning/PartyEventEarning";
+import { EcoTravelRewards } from "@/components/earning/EcoTravelRewards";
+import { InteractiveEcoBikeMap } from "@/components/earning/InteractiveEcoBikeMap";
+import { EnhancedHomeGrownFoodTracker } from "@/components/earning/EnhancedHomeGrownFoodTracker";
+import { PublicTransportRewards } from "@/components/earning/PublicTransportRewards";
+import { GreenShoppingRewards } from "@/components/earning/GreenShoppingRewards";
+import { EnergyConsumptionTracker } from "@/components/earning/EnergyConsumptionTracker";
 
 export default function EarningActivities() {
-  const [activeTab, setActiveTab] = useState('overview')
-  const [searchQuery, setSearchQuery] = useState('')
+  const [activeTab, setActiveTab] = useState("overview");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [userStats] = useState({
     totalTokens: 4890,
@@ -93,137 +92,343 @@ export default function EarningActivities() {
     badgesEarned: 23,
     co2Offset: 245.7,
     communityRank: 47,
-    streakDays: 23
-  })
+    streakDays: 23,
+  });
 
   const earningCategories = [
     {
-      id: 'foundation',
-      title: '🔰 Foundation Activities',
-      description: 'Essential eco actions for beginners',
-      color: 'from-green-900/30 to-emerald-900/30',
-      borderColor: 'border-green-500/30',
+      id: "foundation",
+      title: "🔰 Foundation Activities",
+      description: "Essential eco actions for beginners",
+      color: "from-green-900/30 to-emerald-900/30",
+      borderColor: "border-green-500/30",
       completedCount: 12,
       totalCount: 15,
       components: [
-        { component: BeeHotelActions, icon: Home, title: 'Bee Hotel Maintenance', points: '25 pts', difficulty: 'Easy' },
-        { component: WaterSavingActions, icon: Zap, title: 'Water Conservation', points: '0.1 pts/L', difficulty: 'Easy' },
-        { component: CarbonCreditActions, icon: TreePine, title: 'Carbon Credits', points: '10 pts/kg', difficulty: 'Easy' },
-        { component: EnvironmentalEducationActions, icon: GraduationCap, title: 'Environmental Education', points: '15 pts', difficulty: 'Easy' },
-        { component: TreePlantingActions, icon: TreePine, title: 'Tree Planting', points: '50 pts/tree', difficulty: 'Medium' }
-      ]
+        {
+          component: BeeHotelActions,
+          icon: Home,
+          title: "Bee Hotel Maintenance",
+          points: "25 pts",
+          difficulty: "Easy",
+        },
+        {
+          component: WaterSavingActions,
+          icon: Zap,
+          title: "Water Conservation",
+          points: "0.1 pts/L",
+          difficulty: "Easy",
+        },
+        {
+          component: CarbonCreditActions,
+          icon: TreePine,
+          title: "Carbon Credits",
+          points: "10 pts/kg",
+          difficulty: "Easy",
+        },
+        {
+          component: EnvironmentalEducationActions,
+          icon: GraduationCap,
+          title: "Environmental Education",
+          points: "15 pts",
+          difficulty: "Easy",
+        },
+        {
+          component: TreePlantingActions,
+          icon: TreePine,
+          title: "Tree Planting",
+          points: "50 pts/tree",
+          difficulty: "Medium",
+        },
+      ],
     },
     {
-      id: 'lifestyle',
-      title: '🏡 Sustainable Lifestyle',
-      description: 'Daily living and consumption choices',
-      color: 'from-blue-900/30 to-cyan-900/30',
-      borderColor: 'border-blue-500/30',
+      id: "lifestyle",
+      title: "🏡 Sustainable Lifestyle",
+      description: "Daily living and consumption choices",
+      color: "from-blue-900/30 to-cyan-900/30",
+      borderColor: "border-blue-500/30",
       completedCount: 18,
       totalCount: 20,
       components: [
-        { component: EnhancedHomeGrownFoodTracker, icon: Carrot, title: 'Home Food Growing', points: 'Variable', difficulty: 'Medium' },
-        { component: EnergyConsumptionTracker, icon: Zap, title: 'Energy Efficiency', points: '10 pts/kWh', difficulty: 'Medium' },
-        { component: GreenShoppingRewards, icon: ShoppingBag, title: 'Sustainable Shopping', points: '2 pts/$', difficulty: 'Easy' },
-        { component: PublicTransportRewards, icon: Bus, title: 'Public Transport', points: '2 pts/km', difficulty: 'Easy' },
-        { component: InteractiveEcoBikeMap, icon: Bike, title: 'Eco Bike Routes', points: 'Live tracking', difficulty: 'Medium' }
-      ]
+        {
+          component: EnhancedHomeGrownFoodTracker,
+          icon: Carrot,
+          title: "Home Food Growing",
+          points: "Variable",
+          difficulty: "Medium",
+        },
+        {
+          component: EnergyConsumptionTracker,
+          icon: Zap,
+          title: "Energy Efficiency",
+          points: "10 pts/kWh",
+          difficulty: "Medium",
+        },
+        {
+          component: GreenShoppingRewards,
+          icon: ShoppingBag,
+          title: "Sustainable Shopping",
+          points: "2 pts/$",
+          difficulty: "Easy",
+        },
+        {
+          component: PublicTransportRewards,
+          icon: Bus,
+          title: "Public Transport",
+          points: "2 pts/km",
+          difficulty: "Easy",
+        },
+        {
+          component: InteractiveEcoBikeMap,
+          icon: Bike,
+          title: "Eco Bike Routes",
+          points: "Live tracking",
+          difficulty: "Medium",
+        },
+      ],
     },
     {
-      id: 'environmental',
-      title: '🌍 Environmental Action',
-      description: 'Direct environmental impact activities',
-      color: 'from-emerald-900/30 to-teal-900/30',
-      borderColor: 'border-emerald-500/30',
+      id: "environmental",
+      title: "🌍 Environmental Action",
+      description: "Direct environmental impact activities",
+      color: "from-emerald-900/30 to-teal-900/30",
+      borderColor: "border-emerald-500/30",
       completedCount: 14,
       totalCount: 17,
       components: [
-        { component: SolarPanelActions, icon: Sun, title: 'Solar Installations', points: 'Variable', difficulty: 'Hard' },
-        { component: RecyclingActions, icon: RotateCcw, title: 'Recycling Programs', points: 'Material bonus', difficulty: 'Easy' },
-        { component: CompostingActions, icon: Leaf, title: 'Composting', points: '5 pts/kg', difficulty: 'Easy' },
-        { component: WildlifeConservationActions, icon: Bird, title: 'Wildlife Conservation', points: '100+ pts', difficulty: 'Hard' },
-        { component: CommunityCleanupActions, icon: Users, title: 'Community Cleanups', points: 'Leadership bonus', difficulty: 'Medium' }
-      ]
+        {
+          component: SolarPanelActions,
+          icon: Sun,
+          title: "Solar Installations",
+          points: "Variable",
+          difficulty: "Hard",
+        },
+        {
+          component: RecyclingActions,
+          icon: RotateCcw,
+          title: "Recycling Programs",
+          points: "Material bonus",
+          difficulty: "Easy",
+        },
+        {
+          component: CompostingActions,
+          icon: Leaf,
+          title: "Composting",
+          points: "5 pts/kg",
+          difficulty: "Easy",
+        },
+        {
+          component: WildlifeConservationActions,
+          icon: Bird,
+          title: "Wildlife Conservation",
+          points: "100+ pts",
+          difficulty: "Hard",
+        },
+        {
+          component: CommunityCleanupActions,
+          icon: Users,
+          title: "Community Cleanups",
+          points: "Leadership bonus",
+          difficulty: "Medium",
+        },
+      ],
     },
     {
-      id: 'community',
-      title: '🎉 Community & Events',
-      description: 'Social engagement and community building',
-      color: 'from-purple-900/30 to-pink-900/30',
-      borderColor: 'border-purple-500/30',
+      id: "community",
+      title: "🎉 Community & Events",
+      description: "Social engagement and community building",
+      color: "from-purple-900/30 to-pink-900/30",
+      borderColor: "border-purple-500/30",
       completedCount: 8,
       totalCount: 12,
       components: [
-        { component: PartyEventEarning, icon: PartyPopper, title: 'Environmental Events', points: '200+ pts', difficulty: 'Medium' },
-        { component: AdvancedCommunityFeatures, icon: Users, title: 'Community Hub', points: 'Variable', difficulty: 'Medium' },
-        { component: LocationBasedMissions, icon: MapPin, title: 'Local Missions', points: 'Location bonus', difficulty: 'Medium' },
-        { component: CommunityProjectVoting, icon: Vote, title: 'Project Voting', points: '10 pts/vote', difficulty: 'Easy' },
-        { component: TeamChallenges, icon: Trophy, title: 'Team Challenges', points: 'Team bonus', difficulty: 'Medium' }
-      ]
+        {
+          component: PartyEventEarning,
+          icon: PartyPopper,
+          title: "Environmental Events",
+          points: "200+ pts",
+          difficulty: "Medium",
+        },
+        {
+          component: AdvancedCommunityFeatures,
+          icon: Users,
+          title: "Community Hub",
+          points: "Variable",
+          difficulty: "Medium",
+        },
+        {
+          component: LocationBasedMissions,
+          icon: MapPin,
+          title: "Local Missions",
+          points: "Location bonus",
+          difficulty: "Medium",
+        },
+        {
+          component: CommunityProjectVoting,
+          icon: Vote,
+          title: "Project Voting",
+          points: "10 pts/vote",
+          difficulty: "Easy",
+        },
+        {
+          component: TeamChallenges,
+          icon: Trophy,
+          title: "Team Challenges",
+          points: "Team bonus",
+          difficulty: "Medium",
+        },
+      ],
     },
     {
-      id: 'travel',
-      title: '✈️ Eco Travel & Exploration',
-      description: 'Sustainable tourism and mobility',
-      color: 'from-cyan-900/30 to-blue-900/30',
-      borderColor: 'border-cyan-500/30',
+      id: "travel",
+      title: "✈️ Eco Travel & Exploration",
+      description: "Sustainable tourism and mobility",
+      color: "from-cyan-900/30 to-blue-900/30",
+      borderColor: "border-cyan-500/30",
       completedCount: 5,
       totalCount: 8,
       components: [
-        { component: EcoTravelRewards, icon: Plane, title: 'Sustainable Travel', points: 'Transport bonus', difficulty: 'Medium' },
-        { component: GaiaBikeEarning, icon: Bike, title: 'GAiA Bike System', points: '2 pts/km', difficulty: 'Easy' },
-        { component: InteractiveFoodMap, icon: MapPin, title: 'Local Food Map', points: 'Discovery bonus', difficulty: 'Easy' }
-      ]
+        {
+          component: EcoTravelRewards,
+          icon: Plane,
+          title: "Sustainable Travel",
+          points: "Transport bonus",
+          difficulty: "Medium",
+        },
+        {
+          component: GaiaBikeEarning,
+          icon: Bike,
+          title: "GAiA Bike System",
+          points: "2 pts/km",
+          difficulty: "Easy",
+        },
+        {
+          component: InteractiveFoodMap,
+          icon: MapPin,
+          title: "Local Food Map",
+          points: "Discovery bonus",
+          difficulty: "Easy",
+        },
+      ],
     },
     {
-      id: 'advanced',
-      title: '🚀 Advanced & Professional',
-      description: 'Expert-level activities and earning systems',
-      color: 'from-yellow-900/30 to-orange-900/30',
-      borderColor: 'border-yellow-500/30',
+      id: "advanced",
+      title: "🚀 Advanced & Professional",
+      description: "Expert-level activities and earning systems",
+      color: "from-yellow-900/30 to-orange-900/30",
+      borderColor: "border-yellow-500/30",
       completedCount: 11,
       totalCount: 15,
       components: [
-        { component: CommunityRewardsProgram, icon: Gift, title: 'Rewards Program', points: 'Tier-based', difficulty: 'Advanced' },
-        { component: AdvancedTokenMechanics, icon: Coins, title: 'Token Mechanics', points: 'Staking rewards', difficulty: 'Advanced' },
-        { component: TokenStakingSystem, icon: Lock, title: 'Token Staking', points: 'APY rewards', difficulty: 'Advanced' },
-        { component: SkillBasedEarning, icon: Star, title: 'Skill-Based Work', points: '10 pts/hour', difficulty: 'Medium' },
-        { component: ReferralSystem, icon: Users, title: 'Referral Program', points: '50 pts', difficulty: 'Easy' }
-      ]
+        {
+          component: CommunityRewardsProgram,
+          icon: Gift,
+          title: "Rewards Program",
+          points: "Tier-based",
+          difficulty: "Advanced",
+        },
+        {
+          component: AdvancedTokenMechanics,
+          icon: Coins,
+          title: "Token Mechanics",
+          points: "Staking rewards",
+          difficulty: "Advanced",
+        },
+        {
+          component: TokenStakingSystem,
+          icon: Lock,
+          title: "Token Staking",
+          points: "APY rewards",
+          difficulty: "Advanced",
+        },
+        {
+          component: SkillBasedEarning,
+          icon: Star,
+          title: "Skill-Based Work",
+          points: "10 pts/hour",
+          difficulty: "Medium",
+        },
+        {
+          component: ReferralSystem,
+          icon: Users,
+          title: "Referral Program",
+          points: "50 pts",
+          difficulty: "Easy",
+        },
+      ],
     },
     {
-      id: 'systems',
-      title: '🏛️ Governance & Systems',
-      description: 'Platform governance and ecosystem features',
-      color: 'from-gray-900/30 to-slate-900/30',
-      borderColor: 'border-gray-500/30',
+      id: "systems",
+      title: "🏛️ Governance & Systems",
+      description: "Platform governance and ecosystem features",
+      color: "from-gray-900/30 to-slate-900/30",
+      borderColor: "border-gray-500/30",
       completedCount: 6,
       totalCount: 10,
       components: [
-        { component: CommunityGovernance, icon: Crown, title: 'Community Governance', points: 'Voting power', difficulty: 'Advanced' },
-        { component: EcosystemIntegration, icon: Globe, title: 'Ecosystem Integration', points: 'Cross-platform', difficulty: 'Advanced' },
-        { component: MentorshipProgram, icon: GraduationCap, title: 'Mentorship Program', points: 'Knowledge sharing', difficulty: 'Medium' },
-        { component: EnhancedBadgeSystem, icon: Award, title: 'Badge System', points: 'Achievement unlocks', difficulty: 'Easy' },
-        { component: PhotoVerificationSystem, icon: Camera, title: 'Photo Verification', points: 'Verification bonus', difficulty: 'Easy' }
-      ]
-    }
-  ]
+        {
+          component: CommunityGovernance,
+          icon: Crown,
+          title: "Community Governance",
+          points: "Voting power",
+          difficulty: "Advanced",
+        },
+        {
+          component: EcosystemIntegration,
+          icon: Globe,
+          title: "Ecosystem Integration",
+          points: "Cross-platform",
+          difficulty: "Advanced",
+        },
+        {
+          component: MentorshipProgram,
+          icon: GraduationCap,
+          title: "Mentorship Program",
+          points: "Knowledge sharing",
+          difficulty: "Medium",
+        },
+        {
+          component: EnhancedBadgeSystem,
+          icon: Award,
+          title: "Badge System",
+          points: "Achievement unlocks",
+          difficulty: "Easy",
+        },
+        {
+          component: PhotoVerificationSystem,
+          icon: Camera,
+          title: "Photo Verification",
+          points: "Verification bonus",
+          difficulty: "Easy",
+        },
+      ],
+    },
+  ];
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Easy': return 'bg-green-600'
-      case 'Medium': return 'bg-yellow-600'
-      case 'Hard': return 'bg-orange-600'
-      case 'Advanced': return 'bg-red-600'
-      default: return 'bg-gray-600'
+      case "Easy":
+        return "bg-green-600";
+      case "Medium":
+        return "bg-yellow-600";
+      case "Hard":
+        return "bg-orange-600";
+      case "Advanced":
+        return "bg-red-600";
+      default:
+        return "bg-gray-600";
     }
-  }
+  };
 
-  const filteredCategories = earningCategories.filter(category =>
-    category.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    category.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    category.components.some(comp => comp.title.toLowerCase().includes(searchQuery.toLowerCase()))
-  )
+  const filteredCategories = earningCategories.filter(
+    (category) =>
+      category.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      category.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      category.components.some((comp) =>
+        comp.title.toLowerCase().includes(searchQuery.toLowerCase()),
+      ),
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/10 via-blue-900/10 to-purple-900/10">
@@ -240,42 +445,69 @@ export default function EarningActivities() {
               <Sparkles className="h-12 w-12 text-yellow-400 animate-pulse" />
             </div>
             <p className="text-2xl text-muted-foreground max-w-4xl mx-auto">
-              The world's most comprehensive environmental action and reward ecosystem. 
-              Earn GAiA tokens while making a real impact on our planet! 🌍
+              The world's most comprehensive environmental action and reward
+              ecosystem. Earn GAiA tokens while making a real impact on our
+              planet! 🌍
             </p>
-            
+
             {/* Quick Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mt-8">
               <div className="text-center p-4 bg-green-900/30 rounded-lg border border-green-500/20">
-                <div className="text-2xl font-bold text-green-400">{userStats.totalTokens.toLocaleString()}</div>
+                <div className="text-2xl font-bold text-green-400">
+                  {userStats.totalTokens.toLocaleString()}
+                </div>
                 <div className="text-xs text-muted-foreground">Total GAiA</div>
               </div>
               <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
-                <div className="text-2xl font-bold text-blue-400">{userStats.weeklyEarnings}</div>
-                <div className="text-xs text-muted-foreground">Weekly Earnings</div>
+                <div className="text-2xl font-bold text-blue-400">
+                  {userStats.weeklyEarnings}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Weekly Earnings
+                </div>
               </div>
               <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
-                <div className="text-2xl font-bold text-purple-400">{userStats.completedActivities}</div>
-                <div className="text-xs text-muted-foreground">Activities Done</div>
+                <div className="text-2xl font-bold text-purple-400">
+                  {userStats.completedActivities}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Activities Done
+                </div>
               </div>
               <div className="text-center p-4 bg-yellow-900/30 rounded-lg border border-yellow-500/20">
-                <div className="text-2xl font-bold text-yellow-400">Level {userStats.currentLevel}</div>
-                <div className="text-xs text-muted-foreground">Current Level</div>
+                <div className="text-2xl font-bold text-yellow-400">
+                  Level {userStats.currentLevel}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Current Level
+                </div>
               </div>
               <div className="text-center p-4 bg-orange-900/30 rounded-lg border border-orange-500/20">
-                <div className="text-2xl font-bold text-orange-400">{userStats.badgesEarned}</div>
-                <div className="text-xs text-muted-foreground">Badges Earned</div>
+                <div className="text-2xl font-bold text-orange-400">
+                  {userStats.badgesEarned}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Badges Earned
+                </div>
               </div>
               <div className="text-center p-4 bg-teal-900/30 rounded-lg border border-teal-500/20">
-                <div className="text-2xl font-bold text-teal-400">{userStats.co2Offset}kg</div>
+                <div className="text-2xl font-bold text-teal-400">
+                  {userStats.co2Offset}kg
+                </div>
                 <div className="text-xs text-muted-foreground">CO2 Offset</div>
               </div>
               <div className="text-center p-4 bg-pink-900/30 rounded-lg border border-pink-500/20">
-                <div className="text-2xl font-bold text-pink-400">#{userStats.communityRank}</div>
-                <div className="text-xs text-muted-foreground">Community Rank</div>
+                <div className="text-2xl font-bold text-pink-400">
+                  #{userStats.communityRank}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Community Rank
+                </div>
               </div>
               <div className="text-center p-4 bg-red-900/30 rounded-lg border border-red-500/20">
-                <div className="text-2xl font-bold text-red-400">{userStats.streakDays}</div>
+                <div className="text-2xl font-bold text-red-400">
+                  {userStats.streakDays}
+                </div>
                 <div className="text-xs text-muted-foreground">Day Streak</div>
               </div>
             </div>
@@ -303,16 +535,25 @@ export default function EarningActivities() {
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8 h-16 bg-black/20">
-            <TabsTrigger value="overview" className="text-base font-medium h-12">
+            <TabsTrigger
+              value="overview"
+              className="text-base font-medium h-12"
+            >
               🌟 Overview
             </TabsTrigger>
-            <TabsTrigger value="categories" className="text-base font-medium h-12">
+            <TabsTrigger
+              value="categories"
+              className="text-base font-medium h-12"
+            >
               📂 Categories
             </TabsTrigger>
             <TabsTrigger value="live" className="text-base font-medium h-12">
               🔴 Live Activities
             </TabsTrigger>
-            <TabsTrigger value="achievements" className="text-base font-medium h-12">
+            <TabsTrigger
+              value="achievements"
+              className="text-base font-medium h-12"
+            >
               🏆 Achievements
             </TabsTrigger>
           </TabsList>
@@ -321,35 +562,51 @@ export default function EarningActivities() {
           <TabsContent value="overview" className="space-y-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredCategories.map((category) => (
-                <Card 
+                <Card
                   key={category.id}
                   className={`border-2 ${category.borderColor} bg-gradient-to-br ${category.color} hover:scale-105 transition-all duration-300 cursor-pointer`}
-                  onClick={() => setActiveTab('categories')}
+                  onClick={() => setActiveTab("categories")}
                 >
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-xl font-bold text-primary">{category.title}</h3>
+                      <h3 className="text-xl font-bold text-primary">
+                        {category.title}
+                      </h3>
                       <Badge className="bg-primary/20 text-primary">
                         {category.completedCount}/{category.totalCount}
                       </Badge>
                     </div>
-                    <p className="text-sm text-muted-foreground">{category.description}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {category.description}
+                    </p>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <Progress value={(category.completedCount / category.totalCount) * 100} className="h-3" />
-                    
+                    <Progress
+                      value={
+                        (category.completedCount / category.totalCount) * 100
+                      }
+                      className="h-3"
+                    />
+
                     <div className="space-y-2">
                       {category.components.slice(0, 3).map((comp, index) => (
-                        <div key={index} className="flex items-center justify-between text-sm bg-black/20 rounded-lg p-2">
+                        <div
+                          key={index}
+                          className="flex items-center justify-between text-sm bg-black/20 rounded-lg p-2"
+                        >
                           <div className="flex items-center gap-2">
                             <comp.icon className="h-4 w-4 text-primary" />
                             <span className="truncate">{comp.title}</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Badge className={getDifficultyColor(comp.difficulty)}>
+                            <Badge
+                              className={getDifficultyColor(comp.difficulty)}
+                            >
                               {comp.difficulty}
                             </Badge>
-                            <span className="text-xs text-yellow-400">{comp.points}</span>
+                            <span className="text-xs text-yellow-400">
+                              {comp.points}
+                            </span>
                           </div>
                         </div>
                       ))}
@@ -371,17 +628,26 @@ export default function EarningActivities() {
               <div key={category.id} className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-3xl font-bold text-primary mb-2">{category.title}</h2>
-                    <p className="text-lg text-muted-foreground">{category.description}</p>
+                    <h2 className="text-3xl font-bold text-primary mb-2">
+                      {category.title}
+                    </h2>
+                    <p className="text-lg text-muted-foreground">
+                      {category.description}
+                    </p>
                   </div>
                   <div className="text-right">
                     <div className="text-2xl font-bold text-primary">
                       {category.completedCount}/{category.totalCount}
                     </div>
-                    <Progress value={(category.completedCount / category.totalCount) * 100} className="w-32 h-3" />
+                    <Progress
+                      value={
+                        (category.completedCount / category.totalCount) * 100
+                      }
+                      className="w-32 h-3"
+                    />
                   </div>
                 </div>
-                
+
                 <div className="space-y-8">
                   {category.components.map((comp, index) => (
                     <comp.component key={index} />
@@ -394,12 +660,14 @@ export default function EarningActivities() {
           {/* Live Activities Tab */}
           <TabsContent value="live" className="space-y-8">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-red-400 mb-3">🔴 Live Environmental Activities</h2>
+              <h2 className="text-3xl font-bold text-red-400 mb-3">
+                🔴 Live Environmental Activities
+              </h2>
               <p className="text-lg text-muted-foreground">
                 Real-time earning opportunities and active community events
               </p>
             </div>
-            
+
             <div className="space-y-8">
               <InteractiveEcoBikeMap />
               <EnergyConsumptionTracker />
@@ -411,12 +679,14 @@ export default function EarningActivities() {
           {/* Achievements Tab */}
           <TabsContent value="achievements" className="space-y-8">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-yellow-400 mb-3">🏆 Achievements & Rewards</h2>
+              <h2 className="text-3xl font-bold text-yellow-400 mb-3">
+                🏆 Achievements & Rewards
+              </h2>
               <p className="text-lg text-muted-foreground">
                 Your progress, badges, and reward systems
               </p>
             </div>
-            
+
             <div className="space-y-8">
               <EnhancedBadgeSystem />
               <CommunityRewardsProgram />
@@ -433,15 +703,23 @@ export default function EarningActivities() {
               🌟 Ready to Change the World?
             </h3>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Join millions of eco-warriors earning GAiA tokens while protecting our planet. 
-              Every action counts, every token matters, every person makes a difference! 🌍
+              Join millions of eco-warriors earning GAiA tokens while protecting
+              our planet. Every action counts, every token matters, every person
+              makes a difference! 🌍
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 px-8">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 px-8"
+              >
                 <Heart className="h-5 w-5 mr-2" />
                 Start Your First Activity
               </Button>
-              <Button size="lg" variant="outline" className="border-green-500/30 text-green-400 hover:bg-green-900/20 px-8">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-green-500/30 text-green-400 hover:bg-green-900/20 px-8"
+              >
                 <Trophy className="h-5 w-5 mr-2" />
                 View Global Impact
               </Button>
@@ -450,5 +728,5 @@ export default function EarningActivities() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

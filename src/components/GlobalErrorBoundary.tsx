@@ -1,81 +1,86 @@
-
-import React, { Component, ErrorInfo, ReactNode } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { AlertTriangle, RefreshCw } from 'lucide-react'
+import React, { Component, ErrorInfo, ReactNode } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { AlertTriangle, RefreshCw } from "lucide-react";
 
 interface Props {
-  children: ReactNode
+  children: ReactNode;
 }
 
 interface State {
-  hasError: boolean
-  error?: Error
-  errorInfo?: ErrorInfo
-  autoRecoveryAttempts: number
+  hasError: boolean;
+  error?: Error;
+  errorInfo?: ErrorInfo;
+  autoRecoveryAttempts: number;
 }
 
 export class GlobalErrorBoundary extends Component<Props, State> {
-  private autoRecoveryTimer?: NodeJS.Timeout
+  private autoRecoveryTimer?: NodeJS.Timeout;
 
   constructor(props: Props) {
-    super(props)
-    this.state = { 
-      hasError: false, 
-      autoRecoveryAttempts: 0 
-    }
+    super(props);
+    this.state = {
+      hasError: false,
+      autoRecoveryAttempts: 0,
+    };
   }
 
   static getDerivedStateFromError(error: Error): State {
-    return { 
-      hasError: true, 
-      error, 
-      autoRecoveryAttempts: 0 
-    }
+    return {
+      hasError: true,
+      error,
+      autoRecoveryAttempts: 0,
+    };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.log('🌍 Harmony of Gaia - Error boundary caught error:', error, errorInfo)
-    
-    this.setState({ 
-      error, 
+    console.log(
+      "🌍 Harmony of Gaia - Error boundary caught error:",
+      error,
       errorInfo,
-      hasError: true 
-    })
+    );
+
+    this.setState({
+      error,
+      errorInfo,
+      hasError: true,
+    });
 
     // Auto-recovery mechanism
-    this.attemptAutoRecovery()
+    this.attemptAutoRecovery();
   }
 
   attemptAutoRecovery = () => {
     if (this.state.autoRecoveryAttempts < 3) {
-      console.log(`🔄 Harmony of Gaia - Auto-recovery attempt ${this.state.autoRecoveryAttempts + 1}/3`)
-      
+      console.log(
+        `🔄 Harmony of Gaia - Auto-recovery attempt ${this.state.autoRecoveryAttempts + 1}/3`,
+      );
+
       this.autoRecoveryTimer = setTimeout(() => {
-        this.setState(prevState => ({
+        this.setState((prevState) => ({
           hasError: false,
           error: undefined,
           errorInfo: undefined,
-          autoRecoveryAttempts: prevState.autoRecoveryAttempts + 1
-        }))
-      }, 2000)
+          autoRecoveryAttempts: prevState.autoRecoveryAttempts + 1,
+        }));
+      }, 2000);
     }
-  }
+  };
 
   handleManualRestart = () => {
-    console.log('🌍 Harmony of Gaia - Manual restart initiated')
-    
+    console.log("🌍 Harmony of Gaia - Manual restart initiated");
+
     this.setState({
       hasError: false,
       error: undefined,
       errorInfo: undefined,
-      autoRecoveryAttempts: 0
-    })
-  }
+      autoRecoveryAttempts: 0,
+    });
+  };
 
   componentWillUnmount() {
     if (this.autoRecoveryTimer) {
-      clearTimeout(this.autoRecoveryTimer)
+      clearTimeout(this.autoRecoveryTimer);
     }
   }
 
@@ -97,26 +102,29 @@ export class GlobalErrorBoundary extends Component<Props, State> {
                   Culture of Harmony Protection Active
                 </h2>
                 <p className="text-muted-foreground">
-                  The system encountered an issue and is automatically recovering...
+                  The system encountered an issue and is automatically
+                  recovering...
                 </p>
               </div>
 
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <RefreshCw className="h-4 w-4 text-blue-400 animate-spin" />
-                  <span className="text-blue-400 font-medium">Auto-Recovery Status</span>
+                  <span className="text-blue-400 font-medium">
+                    Auto-Recovery Status
+                  </span>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Attempt {this.state.autoRecoveryAttempts + 1}/3 - 
-                  {this.state.autoRecoveryAttempts < 3 
-                    ? ' System will automatically restart in 2 seconds...' 
-                    : ' Ready for manual restart'}
+                  Attempt {this.state.autoRecoveryAttempts + 1}/3 -
+                  {this.state.autoRecoveryAttempts < 3
+                    ? " System will automatically restart in 2 seconds..."
+                    : " Ready for manual restart"}
                 </p>
               </div>
 
               {this.state.autoRecoveryAttempts >= 3 && (
                 <div className="text-center">
-                  <Button 
+                  <Button
                     onClick={this.handleManualRestart}
                     className="bg-green-600 hover:bg-green-700"
                   >
@@ -128,13 +136,16 @@ export class GlobalErrorBoundary extends Component<Props, State> {
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 text-center">
                 <p className="text-sm text-green-300">
-                  🌟 <strong>Full Permission Granted</strong> - All issues are automatically resolved by Harmony of Gaia protection systems
+                  🌟 <strong>Full Permission Granted</strong> - All issues are
+                  automatically resolved by Harmony of Gaia protection systems
                 </p>
               </div>
 
-              {process.env.NODE_ENV === 'development' && this.state.error && (
+              {process.env.NODE_ENV === "development" && this.state.error && (
                 <details className="text-xs text-muted-foreground">
-                  <summary className="cursor-pointer">Technical Details</summary>
+                  <summary className="cursor-pointer">
+                    Technical Details
+                  </summary>
                   <pre className="mt-2 p-2 bg-black/20 rounded text-xs overflow-auto">
                     {this.state.error.toString()}
                     {this.state.errorInfo?.componentStack}
@@ -144,9 +155,9 @@ export class GlobalErrorBoundary extends Component<Props, State> {
             </CardContent>
           </Card>
         </div>
-      )
+      );
     }
 
-    return this.props.children
+    return this.props.children;
   }
 }

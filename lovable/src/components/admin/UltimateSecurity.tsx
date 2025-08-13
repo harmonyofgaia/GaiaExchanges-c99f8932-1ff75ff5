@@ -1,22 +1,21 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Shield, Lock, Eye, AlertTriangle, Zap, Crown } from 'lucide-react'
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Shield, Lock, Eye, AlertTriangle, Zap, Crown } from "lucide-react";
 
 export default function UltimateSecurity() {
-  const [securityLevel, setSecurityLevel] = useState(100)
-  const [threatsBlocked, setThreatsBlocked] = useState(0)
+  const [securityLevel, setSecurityLevel] = useState(100);
+  const [threatsBlocked, setThreatsBlocked] = useState(0);
 
   useEffect(() => {
     const securityInterval = setInterval(() => {
-      setSecurityLevel(prev => Math.min(100, prev + 1))
-      setThreatsBlocked(prev => prev + Math.floor(Math.random() * 3))
-    }, 2000)
+      setSecurityLevel((prev) => Math.min(100, prev + 1));
+      setThreatsBlocked((prev) => prev + Math.floor(Math.random() * 3));
+    }, 2000);
 
-    return () => clearInterval(securityInterval)
-  }, [])
+    return () => clearInterval(securityInterval);
+  }, []);
 
   return (
     <Card className="bg-gradient-to-br from-red-900/30 to-orange-900/30 border-red-500/30">
@@ -37,15 +36,19 @@ export default function UltimateSecurity() {
               <Crown className="h-4 w-4" />
               <span className="font-medium">Security Level</span>
             </div>
-            <div className="text-2xl font-bold text-green-300">{securityLevel}%</div>
+            <div className="text-2xl font-bold text-green-300">
+              {securityLevel}%
+            </div>
           </div>
-          
+
           <div className="bg-blue-900/20 border border-blue-500/20 rounded-lg p-3">
             <div className="flex items-center gap-2 text-blue-400">
               <Eye className="h-4 w-4" />
               <span className="font-medium">Threats Blocked</span>
             </div>
-            <div className="text-2xl font-bold text-blue-300">{threatsBlocked}</div>
+            <div className="text-2xl font-bold text-blue-300">
+              {threatsBlocked}
+            </div>
           </div>
         </div>
 
@@ -61,5 +64,5 @@ export default function UltimateSecurity() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,11 +1,10 @@
-
-import { Navbar } from '@/components/Navbar'
-import { UniversalGaiaLogo } from '@/components/branding/UniversalGaiaLogo'
-import { UniversalSwapInterface } from '@/components/exchange/UniversalSwapInterface'
+import { Navbar } from "@/components/Navbar";
+import { UniversalGaiaLogo } from "@/components/branding/UniversalGaiaLogo";
+import { UniversalSwapInterface } from "@/components/exchange/UniversalSwapInterface";
 
 export default function Exchange() {
-  console.log('🔄 Exchange page rendering with new logo and unified interface')
-  
+  console.log("🔄 Exchange page rendering with new logo and unified interface");
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900/20 via-blue-900/20 to-purple-900/20">
       <Navbar />
@@ -13,7 +12,7 @@ export default function Exchange() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-24 h-24 relative">
-              <img 
+              <img
                 src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
                 alt="Harmony of Gaia Logo"
                 className="w-full h-full object-contain"
@@ -27,7 +26,7 @@ export default function Exchange() {
             Unified Token Exchange • Zero Fees • 100% Community Controlled
           </p>
           <div className="flex items-center justify-center gap-2 mb-2">
-            <img 
+            <img
               src="/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png"
               alt="Harmony of Gaia"
               className="w-4 h-4 object-contain"
@@ -43,5 +42,5 @@ export default function Exchange() {
         </div>
       </div>
     </div>
-  )
+  );
 }

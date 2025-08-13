@@ -1,105 +1,107 @@
-
-import React, { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Wallet, Check, AlertCircle, Copy } from 'lucide-react'
-import { toast } from 'sonner'
-import { SolanaProvider, WindowWithProviders } from '@/types/ui-types'
-import { GAIA_TOKEN } from '@/constants/gaia'
+import React, { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Wallet, Check, AlertCircle, Copy } from "lucide-react";
+import { toast } from "sonner";
+import { SolanaProvider, WindowWithProviders } from "@/types/ui-types";
+import { GAIA_TOKEN } from "@/constants/gaia";
 
 export function WalletConnection() {
-  const [isConnected, setIsConnected] = useState(false)
-  const [walletAddress, setWalletAddress] = useState<string>('')
-  const [isConnecting, setIsConnecting] = useState(false)
-  const [provider, setProvider] = useState<SolanaProvider | null>(null)
+  const [isConnected, setIsConnected] = useState(false);
+  const [walletAddress, setWalletAddress] = useState<string>("");
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [provider, setProvider] = useState<SolanaProvider | null>(null);
 
   useEffect(() => {
-    console.log('💰 WALLET CONNECTION - Multi-Wallet Support Active')
-    console.log('🔗 GAiA Token Integration:', GAIA_TOKEN.CONTRACT_ADDRESS)
-    
+    console.log("💰 WALLET CONNECTION - Multi-Wallet Support Active");
+    console.log("🔗 GAiA Token Integration:", GAIA_TOKEN.CONTRACT_ADDRESS);
+
     // Check for existing connection
-    checkWalletConnection()
-  }, [])
+    checkWalletConnection();
+  }, []);
 
   const checkWalletConnection = async () => {
     try {
-      const windowWithProviders = window as WindowWithProviders
-      
+      const windowWithProviders = window as WindowWithProviders;
+
       if (windowWithProviders.solana) {
-        const solanaProvider = windowWithProviders.solana
-        setProvider(solanaProvider)
-        
+        const solanaProvider = windowWithProviders.solana;
+        setProvider(solanaProvider);
+
         if (solanaProvider.isConnected && solanaProvider.publicKey) {
-          setIsConnected(true)
-          setWalletAddress(solanaProvider.publicKey.toString())
-          console.log('✅ Wallet already connected:', solanaProvider.publicKey.toString())
+          setIsConnected(true);
+          setWalletAddress(solanaProvider.publicKey.toString());
+          console.log(
+            "✅ Wallet already connected:",
+            solanaProvider.publicKey.toString(),
+          );
         }
       }
     } catch (error) {
-      console.log('ℹ️ No wallet found or connection check failed')
+      console.log("ℹ️ No wallet found or connection check failed");
     }
-  }
+  };
 
   const connectWallet = async () => {
-    setIsConnecting(true)
-    
+    setIsConnecting(true);
+
     try {
-      const windowWithProviders = window as WindowWithProviders
-      
+      const windowWithProviders = window as WindowWithProviders;
+
       if (!windowWithProviders.solana) {
-        toast.error('Please install Phantom wallet or another Solana wallet')
-        setIsConnecting(false)
-        return
+        toast.error("Please install Phantom wallet or another Solana wallet");
+        setIsConnecting(false);
+        return;
       }
 
-      const solanaProvider = windowWithProviders.solana
-      const response = await solanaProvider.connect()
-      
+      const solanaProvider = windowWithProviders.solana;
+      const response = await solanaProvider.connect();
+
       if (response.publicKey) {
-        setProvider(solanaProvider)
-        setIsConnected(true)
-        setWalletAddress(response.publicKey.toString())
-        
-        toast.success('🎉 Wallet Connected Successfully!', {
+        setProvider(solanaProvider);
+        setIsConnected(true);
+        setWalletAddress(response.publicKey.toString());
+
+        toast.success("🎉 Wallet Connected Successfully!", {
           description: `Connected to ${response.publicKey.toString().slice(0, 8)}...${response.publicKey.toString().slice(-8)}`,
-          duration: 5000
-        })
-        
-        console.log('✅ Wallet connected:', response.publicKey.toString())
+          duration: 5000,
+        });
+
+        console.log("✅ Wallet connected:", response.publicKey.toString());
       }
     } catch (error) {
-      console.error('❌ Wallet connection failed:', error)
-      toast.error('Failed to connect wallet. Please try again.')
+      console.error("❌ Wallet connection failed:", error);
+      toast.error("Failed to connect wallet. Please try again.");
     } finally {
-      setIsConnecting(false)
+      setIsConnecting(false);
     }
-  }
+  };
 
   const disconnectWallet = async () => {
     try {
       if (provider && provider.disconnect) {
-        await provider.disconnect()
+        await provider.disconnect();
       }
-      
-      setIsConnected(false)
-      setWalletAddress('')
-      setProvider(null)
-      
-      toast.success('Wallet disconnected successfully')
-      console.log('🔌 Wallet disconnected')
+
+      setIsConnected(false);
+      setWalletAddress("");
+      setProvider(null);
+
+      toast.success("Wallet disconnected successfully");
+      console.log("🔌 Wallet disconnected");
     } catch (error) {
-      console.error('❌ Wallet disconnect failed:', error)
-      toast.error('Failed to disconnect wallet')
+      console.error("❌ Wallet disconnect failed:", error);
+      toast.error("Failed to disconnect wallet");
     }
-  }
+  };
 
   const copyAddress = () => {
     if (walletAddress) {
-      navigator.clipboard.writeText(walletAddress)
-      toast.success('Address copied to clipboard!')
+      navigator.clipboard.writeText(walletAddress);
+      toast.success("Address copied to clipboard!");
     }
-  }
+  };
 
   return (
     <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
@@ -143,11 +145,13 @@ export function WalletConnection() {
               </div>
               <Badge className="bg-green-600">Active</Badge>
             </div>
-            
+
             <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/20">
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
-                  <div className="text-sm text-muted-foreground">Wallet Address</div>
+                  <div className="text-sm text-muted-foreground">
+                    Wallet Address
+                  </div>
                   <div className="font-mono text-sm text-green-400">
                     {`${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`}
                   </div>
@@ -175,16 +179,16 @@ export function WalletConnection() {
             </div>
 
             <div className="flex gap-2">
-              <Button 
+              <Button
                 onClick={disconnectWallet}
                 variant="outline"
                 className="flex-1 border-red-500/30 text-red-400"
               >
                 Disconnect
               </Button>
-              <Button 
+              <Button
                 className="flex-1 bg-green-600 hover:bg-green-700"
-                onClick={() => window.open(GAIA_TOKEN.PUMP_FUN_URL, '_blank')}
+                onClick={() => window.open(GAIA_TOKEN.PUMP_FUN_URL, "_blank")}
               >
                 View GAiA Token
               </Button>
@@ -206,5 +210,5 @@ export function WalletConnection() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

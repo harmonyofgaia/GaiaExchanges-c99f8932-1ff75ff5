@@ -1,14 +1,13 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  Mountain, 
-  Trees, 
-  Waves, 
-  Sun, 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Mountain,
+  Trees,
+  Waves,
+  Sun,
   Zap,
   Settings,
   Palette,
@@ -17,72 +16,75 @@ import {
   Cpu,
   Globe,
   Crown,
-  Building2
-} from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { toast } from 'sonner'
-import { UltimateLandscapeBuilder } from '@/components/landscapes/UltimateLandscapeBuilder'
-import { VirtualLandscapeCreator } from '@/components/landscapes/VirtualLandscapeCreator'
-import { LandscapeToolbox } from '@/components/landscapes/LandscapeToolbox'
-import { LandscapeMarketplace } from '@/components/virtualworld/LandscapeMarketplace'
-import { LandscapeBuilderAdvanced } from '@/components/LandscapeBuilderAdvanced'
+  Building2,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import { UltimateLandscapeBuilder } from "@/components/landscapes/UltimateLandscapeBuilder";
+import { VirtualLandscapeCreator } from "@/components/landscapes/VirtualLandscapeCreator";
+import { LandscapeToolbox } from "@/components/landscapes/LandscapeToolbox";
+import { LandscapeMarketplace } from "@/components/virtualworld/LandscapeMarketplace";
+import { LandscapeBuilderAdvanced } from "@/components/LandscapeBuilderAdvanced";
 
 export default function LandscapeBuilder() {
-  const [landscapePower, setLandscapePower] = useState(50000)
-  const [ecosystems, setEcosystems] = useState(247)
-  const [activeEngines, setActiveEngines] = useState(12)
-  const [virtualWorlds, setVirtualWorlds] = useState(8)
+  const [landscapePower, setLandscapePower] = useState(50000);
+  const [ecosystems, setEcosystems] = useState(247);
+  const [activeEngines, setActiveEngines] = useState(12);
+  const [virtualWorlds, setVirtualWorlds] = useState(8);
 
   useEffect(() => {
-    console.log('🏔️ LANDSCAPE BUILDER PRO - ULTIMATE ECOSYSTEM CREATION ACTIVE')
-    console.log('🌍 ENVIRONMENTAL RESTORATION: UNLIMITED POWER')
-    console.log('⚡ ALL ENGINES ACTIVATED: Reality Bending Mode')
-    
+    console.log(
+      "🏔️ LANDSCAPE BUILDER PRO - ULTIMATE ECOSYSTEM CREATION ACTIVE",
+    );
+    console.log("🌍 ENVIRONMENTAL RESTORATION: UNLIMITED POWER");
+    console.log("⚡ ALL ENGINES ACTIVATED: Reality Bending Mode");
+
     const growthInterval = setInterval(() => {
-      setLandscapePower(prev => prev * 1.005)
-      setEcosystems(prev => prev + Math.floor(Math.random() * 5) + 1)
-      setActiveEngines(prev => Math.min(prev + 1, 50))
-    }, 4000)
+      setLandscapePower((prev) => prev * 1.005);
+      setEcosystems((prev) => prev + Math.floor(Math.random() * 5) + 1);
+      setActiveEngines((prev) => Math.min(prev + 1, 50));
+    }, 4000);
 
     // Engine activation notifications
     const engineInterval = setInterval(() => {
       const engines = [
-        '🌊 Ocean Physics Engine - Realistic Water Simulation',
-        '🏔️ Mountain Generator Pro - Infinite Terrain Creation',
-        '🌲 Forest AI Engine - Intelligent Ecosystem Growth',
-        '⚡ Weather Control System - Climate Manipulation',
-        '🔥 Volcano Engine - Geological Formation',
-        '❄️ Ice Age Simulator - Climate Change Effects',
-        '🌪️ Storm Generator - Dynamic Weather Systems',
-        '🌅 Day/Night Cycle Engine - Time Manipulation'
-      ]
-      
-      const randomEngine = engines[Math.floor(Math.random() * engines.length)]
-      toast.success('🔧 ENGINE ACTIVATED!', {
+        "🌊 Ocean Physics Engine - Realistic Water Simulation",
+        "🏔️ Mountain Generator Pro - Infinite Terrain Creation",
+        "🌲 Forest AI Engine - Intelligent Ecosystem Growth",
+        "⚡ Weather Control System - Climate Manipulation",
+        "🔥 Volcano Engine - Geological Formation",
+        "❄️ Ice Age Simulator - Climate Change Effects",
+        "🌪️ Storm Generator - Dynamic Weather Systems",
+        "🌅 Day/Night Cycle Engine - Time Manipulation",
+      ];
+
+      const randomEngine = engines[Math.floor(Math.random() * engines.length)];
+      toast.success("🔧 ENGINE ACTIVATED!", {
         description: randomEngine,
-        duration: 3000
-      })
-    }, 10000)
+        duration: 3000,
+      });
+    }, 10000);
 
     return () => {
-      clearInterval(growthInterval)
-      clearInterval(engineInterval)
-    }
-  }, [])
+      clearInterval(growthInterval);
+      clearInterval(engineInterval);
+    };
+  }, []);
 
   const createMegaLandscape = () => {
-    toast.success('🌍 MEGA LANDSCAPE CREATED!', {
-      description: 'Universe-scale ecosystem generated with all engines active!',
-      duration: 5000
-    })
-  }
+    toast.success("🌍 MEGA LANDSCAPE CREATED!", {
+      description:
+        "Universe-scale ecosystem generated with all engines active!",
+      duration: 5000,
+    });
+  };
 
   const handlePurchase = (landscape: string) => {
-    toast.success('🛒 Landscape Purchased!', {
+    toast.success("🛒 Landscape Purchased!", {
       description: `${landscape} added to your collection with environmental impact!`,
-      duration: 4000
-    })
-  }
+      duration: 4000,
+    });
+  };
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
@@ -199,8 +201,12 @@ export default function LandscapeBuilder() {
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
-                        <div className="text-3xl font-bold text-green-400">2.8M</div>
-                        <div className="text-sm text-green-300">Trees Planted</div>
+                        <div className="text-3xl font-bold text-green-400">
+                          2.8M
+                        </div>
+                        <div className="text-sm text-green-300">
+                          Trees Planted
+                        </div>
                         <Button className="w-full bg-green-600 hover:bg-green-700">
                           <Trees className="h-4 w-4 mr-2" />
                           Plant Forest
@@ -218,8 +224,12 @@ export default function LandscapeBuilder() {
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
-                        <div className="text-3xl font-bold text-blue-400">18K</div>
-                        <div className="text-sm text-blue-300">Reefs Restored</div>
+                        <div className="text-3xl font-bold text-blue-400">
+                          18K
+                        </div>
+                        <div className="text-sm text-blue-300">
+                          Reefs Restored
+                        </div>
                         <Button className="w-full bg-blue-600 hover:bg-blue-700">
                           <Waves className="h-4 w-4 mr-2" />
                           Clean Ocean
@@ -237,8 +247,12 @@ export default function LandscapeBuilder() {
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
-                        <div className="text-3xl font-bold text-orange-400">500</div>
-                        <div className="text-sm text-orange-300">Peaks Restored</div>
+                        <div className="text-3xl font-bold text-orange-400">
+                          500
+                        </div>
+                        <div className="text-sm text-orange-300">
+                          Peaks Restored
+                        </div>
                         <Button className="w-full bg-orange-600 hover:bg-orange-700">
                           <Mountain className="h-4 w-4 mr-2" />
                           Restore Mountains
@@ -255,23 +269,39 @@ export default function LandscapeBuilder() {
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                       <div className="space-y-2">
-                        <div className="text-green-400">🌲 Amazon Rainforest Recovery: 95% Complete</div>
-                        <div className="text-blue-400">🐋 Whale Migration Routes: Restored</div>
-                        <div className="text-purple-400">🦋 Butterfly Sanctuaries: 1,200 Created</div>
-                        <div className="text-orange-400">🏔️ Alpine Ecosystem Renewal: Active</div>
+                        <div className="text-green-400">
+                          🌲 Amazon Rainforest Recovery: 95% Complete
+                        </div>
+                        <div className="text-blue-400">
+                          🐋 Whale Migration Routes: Restored
+                        </div>
+                        <div className="text-purple-400">
+                          🦋 Butterfly Sanctuaries: 1,200 Created
+                        </div>
+                        <div className="text-orange-400">
+                          🏔️ Alpine Ecosystem Renewal: Active
+                        </div>
                       </div>
                       <div className="space-y-2">
-                        <div className="text-cyan-400">🌊 Coral Reef Regeneration: 2.5M m²</div>
-                        <div className="text-yellow-400">🌅 Wetland Restoration: 800 Sites</div>
-                        <div className="text-pink-400">🌸 Pollinator Gardens: 15,000 Planted</div>
-                        <div className="text-green-300">🌱 Soil Remediation: 50,000 Acres</div>
+                        <div className="text-cyan-400">
+                          🌊 Coral Reef Regeneration: 2.5M m²
+                        </div>
+                        <div className="text-yellow-400">
+                          🌅 Wetland Restoration: 800 Sites
+                        </div>
+                        <div className="text-pink-400">
+                          🌸 Pollinator Gardens: 15,000 Planted
+                        </div>
+                        <div className="text-green-300">
+                          🌱 Soil Remediation: 50,000 Acres
+                        </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
                 <div className="text-center">
-                  <Button 
+                  <Button
                     onClick={createMegaLandscape}
                     className="bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 hover:from-green-700 hover:via-blue-700 hover:to-purple-700 text-white font-black text-2xl px-12 py-6 rounded-xl shadow-2xl transform hover:scale-110 transition-all duration-300"
                   >
@@ -288,7 +318,9 @@ export default function LandscapeBuilder() {
       {/* Quick Access Links */}
       <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-500/30">
         <CardHeader>
-          <CardTitle className="text-purple-400 text-center">🌟 QUICK ACCESS - PREMIUM FEATURES</CardTitle>
+          <CardTitle className="text-purple-400 text-center">
+            🌟 QUICK ACCESS - PREMIUM FEATURES
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -297,11 +329,13 @@ export default function LandscapeBuilder() {
                 <Sparkles className="h-6 w-6 mr-2 animate-pulse" />
                 <div className="text-left">
                   <div className="font-bold">🌟 Aura Scrapyard</div>
-                  <div className="text-xs">Transform scrap to landscape materials</div>
+                  <div className="text-xs">
+                    Transform scrap to landscape materials
+                  </div>
                 </div>
               </Button>
             </Link>
-            
+
             <Link to="/virtual-world">
               <Button className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 h-16">
                 <Globe className="h-6 w-6 mr-2 animate-spin" />
@@ -311,7 +345,7 @@ export default function LandscapeBuilder() {
                 </div>
               </Button>
             </Link>
-            
+
             <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 h-16">
               <Crown className="h-6 w-6 mr-2 animate-bounce" />
               <div className="text-left">
@@ -323,5 +357,5 @@ export default function LandscapeBuilder() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

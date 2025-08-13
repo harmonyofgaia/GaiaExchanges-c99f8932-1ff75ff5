@@ -1,19 +1,25 @@
 import { useState, useEffect, useMemo } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import { 
-  Coins, 
-  TrendingUp, 
-  Users, 
-  Vote, 
-  Shield, 
-  Leaf, 
-  Target, 
+import {
+  Coins,
+  TrendingUp,
+  Users,
+  Vote,
+  Shield,
+  Leaf,
+  Target,
   Award,
   Wallet,
   ArrowUpDown,
@@ -26,11 +32,11 @@ import {
   Gift,
   Crown,
   Star,
-  TreePine
+  TreePine,
 } from "lucide-react";
 
 interface TokenBalance {
-  type: 'impact' | 'governance' | 'investor' | 'community' | 'development';
+  type: "impact" | "governance" | "investor" | "community" | "development";
   symbol: string;
   balance: number;
   value: number;
@@ -55,8 +61,8 @@ interface GovernanceProposal {
   id: string;
   title: string;
   description: string;
-  type: 'deployment' | 'funding' | 'technical' | 'partnership';
-  status: 'active' | 'passed' | 'rejected' | 'executed';
+  type: "deployment" | "funding" | "technical" | "partnership";
+  status: "active" | "passed" | "rejected" | "executed";
   votesFor: number;
   votesAgainst: number;
   totalVotes: number;
@@ -70,169 +76,193 @@ const ForestTokenSystem = () => {
   const [stakingAmount, setStakingAmount] = useState("");
   const [votingPower, setVotingPower] = useState(0);
 
-  const tokenBalances: TokenBalance[] = useMemo(() => [
-    {
-      type: 'impact',
-      symbol: 'IMPACT',
-      balance: 2450,
-      value: 12250,
-      change24h: 5.2,
-      staked: 1200,
-      rewards: 45.6
-    },
-    {
-      type: 'governance',
-      symbol: 'GOVERN',
-      balance: 850,
-      value: 17000,
-      change24h: -2.1,
-      staked: 500,
-      rewards: 23.4
-    },
-    {
-      type: 'investor',
-      symbol: 'INVEST',
-      balance: 125,
-      value: 25000,
-      change24h: 8.7,
-      staked: 75,
-      rewards: 18.2
-    },
-    {
-      type: 'community',
-      symbol: 'COMM',
-      balance: 3200,
-      value: 6400,
-      change24h: 3.4,
-      staked: 1800,
-      rewards: 67.5
-    },
-    {
-      type: 'development',
-      symbol: 'DEV',
-      balance: 180,
-      value: 3600,
-      change24h: 1.2,
-      staked: 0,
-      rewards: 0
-    }
-  ], []);
+  const tokenBalances: TokenBalance[] = useMemo(
+    () => [
+      {
+        type: "impact",
+        symbol: "IMPACT",
+        balance: 2450,
+        value: 12250,
+        change24h: 5.2,
+        staked: 1200,
+        rewards: 45.6,
+      },
+      {
+        type: "governance",
+        symbol: "GOVERN",
+        balance: 850,
+        value: 17000,
+        change24h: -2.1,
+        staked: 500,
+        rewards: 23.4,
+      },
+      {
+        type: "investor",
+        symbol: "INVEST",
+        balance: 125,
+        value: 25000,
+        change24h: 8.7,
+        staked: 75,
+        rewards: 18.2,
+      },
+      {
+        type: "community",
+        symbol: "COMM",
+        balance: 3200,
+        value: 6400,
+        change24h: 3.4,
+        staked: 1800,
+        rewards: 67.5,
+      },
+      {
+        type: "development",
+        symbol: "DEV",
+        balance: 180,
+        value: 3600,
+        change24h: 1.2,
+        staked: 0,
+        rewards: 0,
+      },
+    ],
+    [],
+  );
 
   const stakingPools: StakingPool[] = [
     {
-      id: 'impact-30',
-      name: 'Impact Validator Pool',
-      tokenType: 'IMPACT',
+      id: "impact-30",
+      name: "Impact Validator Pool",
+      tokenType: "IMPACT",
       apy: 12.5,
       totalStaked: 2500000,
       userStaked: 1200,
       lockPeriod: 30,
       rewards: 45.6,
-      description: 'Validate environmental impact measurements and earn rewards'
+      description:
+        "Validate environmental impact measurements and earn rewards",
     },
     {
-      id: 'governance-90',
-      name: 'Governance Authority Pool',
-      tokenType: 'GOVERN',
+      id: "governance-90",
+      name: "Governance Authority Pool",
+      tokenType: "GOVERN",
       apy: 18.3,
       totalStaked: 850000,
       userStaked: 500,
       lockPeriod: 90,
       rewards: 23.4,
-      description: 'Participate in critical system governance decisions'
+      description: "Participate in critical system governance decisions",
     },
     {
-      id: 'investor-365',
-      name: 'Long-term Investor Pool',
-      tokenType: 'INVEST',
+      id: "investor-365",
+      name: "Long-term Investor Pool",
+      tokenType: "INVEST",
       apy: 25.0,
       totalStaked: 125000,
       userStaked: 75,
       lockPeriod: 365,
       rewards: 18.2,
-      description: 'Long-term commitment with highest rewards'
+      description: "Long-term commitment with highest rewards",
     },
     {
-      id: 'community-14',
-      name: 'Community Responder Pool',
-      tokenType: 'COMM',
+      id: "community-14",
+      name: "Community Responder Pool",
+      tokenType: "COMM",
       apy: 8.7,
       totalStaked: 5000000,
       userStaked: 1800,
       lockPeriod: 14,
       rewards: 67.5,
-      description: 'Support local wildfire response training and coordination'
-    }
+      description: "Support local wildfire response training and coordination",
+    },
   ];
 
   const governanceProposals: GovernanceProposal[] = [
     {
-      id: 'FSP-001',
-      title: 'Deploy Sand Cannons to Australian Outback',
-      description: 'Proposal to deploy 500 sand cannon units across high-risk areas in the Australian Outback, focusing on protecting critical koala habitats and eucalyptus forests.',
-      type: 'deployment',
-      status: 'active',
+      id: "FSP-001",
+      title: "Deploy Sand Cannons to Australian Outback",
+      description:
+        "Proposal to deploy 500 sand cannon units across high-risk areas in the Australian Outback, focusing on protecting critical koala habitats and eucalyptus forests.",
+      type: "deployment",
+      status: "active",
       votesFor: 234500,
       votesAgainst: 45600,
       totalVotes: 280100,
-      endDate: '2024-12-25T23:59:59Z',
-      requiredTokens: 100
+      endDate: "2024-12-25T23:59:59Z",
+      requiredTokens: 100,
     },
     {
-      id: 'FSP-002',
-      title: 'Partnership with California Fire Department',
-      description: 'Establish formal partnership agreement with California Fire Department for integrated emergency response protocols and data sharing.',
-      type: 'partnership',
-      status: 'active',
+      id: "FSP-002",
+      title: "Partnership with California Fire Department",
+      description:
+        "Establish formal partnership agreement with California Fire Department for integrated emergency response protocols and data sharing.",
+      type: "partnership",
+      status: "active",
       votesFor: 156700,
       votesAgainst: 23400,
       totalVotes: 180100,
-      endDate: '2024-12-22T23:59:59Z',
-      requiredTokens: 50
+      endDate: "2024-12-22T23:59:59Z",
+      requiredTokens: 50,
     },
     {
-      id: 'FSP-003',
-      title: 'AI Model Upgrade to v4.0',
-      description: 'Upgrade the wildfire detection AI to version 4.0 with improved accuracy and reduced false positives.',
-      type: 'technical',
-      status: 'passed',
+      id: "FSP-003",
+      title: "AI Model Upgrade to v4.0",
+      description:
+        "Upgrade the wildfire detection AI to version 4.0 with improved accuracy and reduced false positives.",
+      type: "technical",
+      status: "passed",
       votesFor: 445600,
       votesAgainst: 67800,
       totalVotes: 513400,
-      endDate: '2024-12-15T23:59:59Z',
-      requiredTokens: 200
-    }
+      endDate: "2024-12-15T23:59:59Z",
+      requiredTokens: 200,
+    },
   ];
 
   const getTokenIcon = (type: string) => {
     switch (type) {
-      case 'impact': return Leaf;
-      case 'governance': return Vote;
-      case 'investor': return TrendingUp;
-      case 'community': return Users;
-      case 'development': return Settings;
-      default: return Coins;
+      case "impact":
+        return Leaf;
+      case "governance":
+        return Vote;
+      case "investor":
+        return TrendingUp;
+      case "community":
+        return Users;
+      case "development":
+        return Settings;
+      default:
+        return Coins;
     }
   };
 
   const getTokenColor = (type: string) => {
     switch (type) {
-      case 'impact': return 'text-green-600';
-      case 'governance': return 'text-blue-600';
-      case 'investor': return 'text-yellow-600';
-      case 'community': return 'text-purple-600';
-      case 'development': return 'text-red-600';
-      default: return 'text-gray-600';
+      case "impact":
+        return "text-green-600";
+      case "governance":
+        return "text-blue-600";
+      case "investor":
+        return "text-yellow-600";
+      case "community":
+        return "text-purple-600";
+      case "development":
+        return "text-red-600";
+      default:
+        return "text-gray-600";
     }
   };
 
   const getProposalIcon = (type: string) => {
     switch (type) {
-      case 'deployment': return Target;
-      case 'funding': return Coins;
-      case 'technical': return Settings;
-      case 'partnership': return Users;
-      default: return Vote;
+      case "deployment":
+        return Target;
+      case "funding":
+        return Coins;
+      case "technical":
+        return Settings;
+      case "partnership":
+        return Users;
+      default:
+        return Vote;
     }
   };
 
@@ -241,14 +271,17 @@ const ForestTokenSystem = () => {
   }, [tokenBalances]);
 
   const totalStaked = useMemo(() => {
-    return tokenBalances.reduce((sum, token) => sum + (token.staked * (token.value / token.balance)), 0);
+    return tokenBalances.reduce(
+      (sum, token) => sum + token.staked * (token.value / token.balance),
+      0,
+    );
   }, [tokenBalances]);
 
   const totalRewards = useMemo(() => {
     return tokenBalances.reduce((sum, token) => sum + token.rewards, 0);
   }, [tokenBalances]);
   useEffect(() => {
-    const governanceTokens = tokenBalances.find(t => t.type === 'governance');
+    const governanceTokens = tokenBalances.find((t) => t.type === "governance");
     if (governanceTokens) {
       setVotingPower(governanceTokens.balance + governanceTokens.staked);
     }
@@ -263,14 +296,22 @@ const ForestTokenSystem = () => {
             <div className="flex items-center">
               <Coins className="h-10 w-10 text-green-600 mr-3" />
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Forest Shield Token System</h1>
-                <p className="text-lg text-gray-600">Multi-tier blockchain rewards for wildfire defense</p>
+                <h1 className="text-3xl font-bold text-gray-900">
+                  Forest Shield Token System
+                </h1>
+                <p className="text-lg text-gray-600">
+                  Multi-tier blockchain rewards for wildfire defense
+                </p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <div className="text-right">
-                <div className="text-sm text-gray-600">Total Portfolio Value</div>
-                <div className="text-2xl font-bold text-green-600">${totalPortfolioValue.toLocaleString()}</div>
+                <div className="text-sm text-gray-600">
+                  Total Portfolio Value
+                </div>
+                <div className="text-2xl font-bold text-green-600">
+                  ${totalPortfolioValue.toLocaleString()}
+                </div>
               </div>
               <Button>
                 <Wallet className="h-4 w-4 mr-2" />
@@ -344,7 +385,11 @@ const ForestTokenSystem = () => {
         </div>
 
         {/* Main Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+        <Tabs
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="space-y-6"
+        >
           <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="portfolio">Portfolio</TabsTrigger>
             <TabsTrigger value="staking">Staking</TabsTrigger>
@@ -369,41 +414,60 @@ const ForestTokenSystem = () => {
                       {tokenBalances.map((token) => {
                         const IconComponent = getTokenIcon(token.type);
                         return (
-                          <div 
+                          <div
                             key={token.symbol}
                             className={`p-4 border-2 rounded-lg cursor-pointer transition-colors ${
-                              selectedToken?.symbol === token.symbol ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'
+                              selectedToken?.symbol === token.symbol
+                                ? "border-blue-500 bg-blue-50"
+                                : "border-gray-200 hover:border-gray-300"
                             }`}
                             onClick={() => setSelectedToken(token)}
                           >
                             <div className="flex items-center justify-between mb-3">
                               <div className="flex items-center space-x-3">
-                                <IconComponent className={`h-8 w-8 ${getTokenColor(token.type)}`} />
+                                <IconComponent
+                                  className={`h-8 w-8 ${getTokenColor(token.type)}`}
+                                />
                                 <div>
-                                  <div className="font-semibold">{token.symbol}</div>
-                                  <div className="text-sm text-gray-600 capitalize">{token.type} Token</div>
+                                  <div className="font-semibold">
+                                    {token.symbol}
+                                  </div>
+                                  <div className="text-sm text-gray-600 capitalize">
+                                    {token.type} Token
+                                  </div>
                                 </div>
                               </div>
                               <div className="text-right">
-                                <div className="font-semibold">{token.balance.toLocaleString()}</div>
-                                <div className="text-sm text-gray-600">${token.value.toLocaleString()}</div>
+                                <div className="font-semibold">
+                                  {token.balance.toLocaleString()}
+                                </div>
+                                <div className="text-sm text-gray-600">
+                                  ${token.value.toLocaleString()}
+                                </div>
                               </div>
                             </div>
-                            
+
                             <div className="grid grid-cols-3 gap-4 text-sm">
                               <div>
                                 <div className="text-gray-600">24h Change</div>
-                                <div className={`font-semibold ${token.change24h >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                  {token.change24h >= 0 ? '+' : ''}{token.change24h}%
+                                <div
+                                  className={`font-semibold ${token.change24h >= 0 ? "text-green-600" : "text-red-600"}`}
+                                >
+                                  {token.change24h >= 0 ? "+" : ""}
+                                  {token.change24h}%
                                 </div>
                               </div>
                               <div>
                                 <div className="text-gray-600">Staked</div>
-                                <div className="font-semibold">{token.staked.toLocaleString()}</div>
+                                <div className="font-semibold">
+                                  {token.staked.toLocaleString()}
+                                </div>
                               </div>
                               <div>
                                 <div className="text-gray-600">Rewards</div>
-                                <div className="font-semibold text-green-600">{token.rewards}</div>
+                                <div className="font-semibold text-green-600">
+                                  {token.rewards}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -420,8 +484,14 @@ const ForestTokenSystem = () => {
                     <CardHeader>
                       <CardTitle className="flex items-center">
                         {(() => {
-                          const IconComponent = getTokenIcon(selectedToken.type);
-                          return <IconComponent className={`h-5 w-5 mr-2 ${getTokenColor(selectedToken.type)}`} />;
+                          const IconComponent = getTokenIcon(
+                            selectedToken.type,
+                          );
+                          return (
+                            <IconComponent
+                              className={`h-5 w-5 mr-2 ${getTokenColor(selectedToken.type)}`}
+                            />
+                          );
                         })()}
                         {selectedToken.symbol} Actions
                       </CardTitle>
@@ -443,28 +513,30 @@ const ForestTokenSystem = () => {
 
                         <div className="pt-4 border-t space-y-3">
                           <h4 className="font-semibold">Token Utility</h4>
-                          {selectedToken.type === 'impact' && (
+                          {selectedToken.type === "impact" && (
                             <ul className="text-sm text-gray-600 space-y-1">
-                              <li>• Reward environmental impact verification</li>
+                              <li>
+                                • Reward environmental impact verification
+                              </li>
                               <li>• Access premium impact tracking tools</li>
                               <li>• Participate in conservation projects</li>
                             </ul>
                           )}
-                          {selectedToken.type === 'governance' && (
+                          {selectedToken.type === "governance" && (
                             <ul className="text-sm text-gray-600 space-y-1">
                               <li>• Vote on system deployments</li>
                               <li>• Propose new initiatives</li>
                               <li>• Control treasury allocations</li>
                             </ul>
                           )}
-                          {selectedToken.type === 'investor' && (
+                          {selectedToken.type === "investor" && (
                             <ul className="text-sm text-gray-600 space-y-1">
                               <li>• Share in system revenue</li>
                               <li>• Priority access to new features</li>
                               <li>• Higher staking rewards</li>
                             </ul>
                           )}
-                          {selectedToken.type === 'community' && (
+                          {selectedToken.type === "community" && (
                             <ul className="text-sm text-gray-600 space-y-1">
                               <li>• Local responder coordination</li>
                               <li>• Community training access</li>
@@ -488,7 +560,10 @@ const ForestTokenSystem = () => {
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg">{pool.name}</CardTitle>
-                      <Badge variant="outline" className="bg-green-100 text-green-800">
+                      <Badge
+                        variant="outline"
+                        className="bg-green-100 text-green-800"
+                      >
                         {pool.apy}% APY
                       </Badge>
                     </div>
@@ -499,31 +574,42 @@ const ForestTokenSystem = () => {
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
                           <div className="text-gray-600">Your Staked</div>
-                          <div className="font-semibold">{pool.userStaked.toLocaleString()} {pool.tokenType}</div>
+                          <div className="font-semibold">
+                            {pool.userStaked.toLocaleString()} {pool.tokenType}
+                          </div>
                         </div>
                         <div>
                           <div className="text-gray-600">Lock Period</div>
-                          <div className="font-semibold">{pool.lockPeriod} days</div>
+                          <div className="font-semibold">
+                            {pool.lockPeriod} days
+                          </div>
                         </div>
                         <div>
                           <div className="text-gray-600">Total Staked</div>
-                          <div className="font-semibold">{(pool.totalStaked / 1000000).toFixed(1)}M {pool.tokenType}</div>
+                          <div className="font-semibold">
+                            {(pool.totalStaked / 1000000).toFixed(1)}M{" "}
+                            {pool.tokenType}
+                          </div>
                         </div>
                         <div>
                           <div className="text-gray-600">Your Rewards</div>
-                          <div className="font-semibold text-green-600">{pool.rewards}</div>
+                          <div className="font-semibold text-green-600">
+                            {pool.rewards}
+                          </div>
                         </div>
                       </div>
 
                       <div className="space-y-2">
                         <Label>Stake Amount</Label>
                         <div className="flex space-x-2">
-                          <Input 
+                          <Input
                             placeholder="0.00"
                             value={stakingAmount}
                             onChange={(e) => setStakingAmount(e.target.value)}
                           />
-                          <Button variant="outline" size="sm">Max</Button>
+                          <Button variant="outline" size="sm">
+                            Max
+                          </Button>
                         </div>
                       </div>
 
@@ -564,20 +650,32 @@ const ForestTokenSystem = () => {
                     <div className="space-y-6">
                       {governanceProposals.map((proposal) => {
                         const IconComponent = getProposalIcon(proposal.type);
-                        const votePercentage = proposal.totalVotes > 0 ? (proposal.votesFor / proposal.totalVotes) * 100 : 0;
-                        const isActive = proposal.status === 'active';
-                        
+                        const votePercentage =
+                          proposal.totalVotes > 0
+                            ? (proposal.votesFor / proposal.totalVotes) * 100
+                            : 0;
+                        const isActive = proposal.status === "active";
+
                         return (
-                          <div key={proposal.id} className="border-2 border-gray-200 rounded-lg p-4">
+                          <div
+                            key={proposal.id}
+                            className="border-2 border-gray-200 rounded-lg p-4"
+                          >
                             <div className="flex items-start justify-between mb-3">
                               <div className="flex items-start space-x-3">
                                 <IconComponent className="h-6 w-6 text-blue-600 mt-1" />
                                 <div>
-                                  <h3 className="font-semibold">{proposal.title}</h3>
-                                  <p className="text-sm text-gray-600 mt-1">{proposal.description}</p>
+                                  <h3 className="font-semibold">
+                                    {proposal.title}
+                                  </h3>
+                                  <p className="text-sm text-gray-600 mt-1">
+                                    {proposal.description}
+                                  </p>
                                 </div>
                               </div>
-                              <Badge variant={isActive ? "default" : "secondary"}>
+                              <Badge
+                                variant={isActive ? "default" : "secondary"}
+                              >
                                 {proposal.status.toUpperCase()}
                               </Badge>
                             </div>
@@ -585,12 +683,18 @@ const ForestTokenSystem = () => {
                             <div className="space-y-3">
                               <div>
                                 <div className="flex justify-between items-center mb-1">
-                                  <span className="text-sm font-medium">Votes: {votePercentage.toFixed(1)}% For</span>
+                                  <span className="text-sm font-medium">
+                                    Votes: {votePercentage.toFixed(1)}% For
+                                  </span>
                                   <span className="text-sm text-gray-600">
-                                    {proposal.totalVotes.toLocaleString()} total votes
+                                    {proposal.totalVotes.toLocaleString()} total
+                                    votes
                                   </span>
                                 </div>
-                                <Progress value={votePercentage} className="h-2" />
+                                <Progress
+                                  value={votePercentage}
+                                  className="h-2"
+                                />
                               </div>
 
                               <div className="grid grid-cols-2 gap-4 text-sm">
@@ -601,7 +705,9 @@ const ForestTokenSystem = () => {
                                   </div>
                                 </div>
                                 <div>
-                                  <div className="text-gray-600">Votes Against</div>
+                                  <div className="text-gray-600">
+                                    Votes Against
+                                  </div>
                                   <div className="font-semibold text-red-600">
                                     {proposal.votesAgainst.toLocaleString()}
                                   </div>
@@ -614,7 +720,11 @@ const ForestTokenSystem = () => {
                                     <Vote className="h-4 w-4 mr-2" />
                                     Vote For
                                   </Button>
-                                  <Button size="sm" variant="outline" className="flex-1">
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className="flex-1"
+                                  >
                                     <Vote className="h-4 w-4 mr-2" />
                                     Vote Against
                                   </Button>
@@ -622,11 +732,11 @@ const ForestTokenSystem = () => {
                               )}
 
                               <div className="text-xs text-gray-500 pt-2">
-                                {isActive 
+                                {isActive
                                   ? `Voting ends: ${new Date(proposal.endDate).toLocaleDateString()}`
-                                  : `Proposal ${proposal.status}`
-                                }
-                                • Required tokens: {proposal.requiredTokens} GOVERN
+                                  : `Proposal ${proposal.status}`}
+                                • Required tokens: {proposal.requiredTokens}{" "}
+                                GOVERN
                               </div>
                             </div>
                           </div>
@@ -648,17 +758,27 @@ const ForestTokenSystem = () => {
                         <div className="text-3xl font-bold text-blue-600">
                           {votingPower.toLocaleString()}
                         </div>
-                        <div className="text-sm text-gray-600">GOVERN Tokens</div>
+                        <div className="text-sm text-gray-600">
+                          GOVERN Tokens
+                        </div>
                       </div>
 
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm">
                           <span>Held Tokens:</span>
-                          <span>{tokenBalances.find(t => t.type === 'governance')?.balance.toLocaleString() || 0}</span>
+                          <span>
+                            {tokenBalances
+                              .find((t) => t.type === "governance")
+                              ?.balance.toLocaleString() || 0}
+                          </span>
                         </div>
                         <div className="flex justify-between text-sm">
                           <span>Staked Tokens:</span>
-                          <span>{tokenBalances.find(t => t.type === 'governance')?.staked.toLocaleString() || 0}</span>
+                          <span>
+                            {tokenBalances
+                              .find((t) => t.type === "governance")
+                              ?.staked.toLocaleString() || 0}
+                          </span>
                         </div>
                         <div className="border-t pt-2">
                           <div className="flex justify-between font-semibold">
@@ -674,7 +794,9 @@ const ForestTokenSystem = () => {
                       </Button>
 
                       <div className="pt-4 border-t">
-                        <h4 className="font-semibold mb-2">Governance History</h4>
+                        <h4 className="font-semibold mb-2">
+                          Governance History
+                        </h4>
                         <div className="text-sm text-gray-600 space-y-1">
                           <div>Proposals Voted: 12</div>
                           <div>Success Rate: 83%</div>
@@ -701,7 +823,9 @@ const ForestTokenSystem = () => {
                 <CardContent>
                   <div className="text-2xl font-bold text-green-600">45.6</div>
                   <div className="text-sm text-gray-600">IMPACT Earned</div>
-                  <Button size="sm" className="w-full mt-3">Claim</Button>
+                  <Button size="sm" className="w-full mt-3">
+                    Claim
+                  </Button>
                 </CardContent>
               </Card>
 
@@ -715,7 +839,9 @@ const ForestTokenSystem = () => {
                 <CardContent>
                   <div className="text-2xl font-bold text-blue-600">23.4</div>
                   <div className="text-sm text-gray-600">GOVERN Earned</div>
-                  <Button size="sm" className="w-full mt-3">Claim</Button>
+                  <Button size="sm" className="w-full mt-3">
+                    Claim
+                  </Button>
                 </CardContent>
               </Card>
 
@@ -729,7 +855,9 @@ const ForestTokenSystem = () => {
                 <CardContent>
                   <div className="text-2xl font-bold text-yellow-600">18.2</div>
                   <div className="text-sm text-gray-600">INVEST Earned</div>
-                  <Button size="sm" className="w-full mt-3">Claim</Button>
+                  <Button size="sm" className="w-full mt-3">
+                    Claim
+                  </Button>
                 </CardContent>
               </Card>
 
@@ -743,7 +871,9 @@ const ForestTokenSystem = () => {
                 <CardContent>
                   <div className="text-2xl font-bold text-purple-600">67.5</div>
                   <div className="text-sm text-gray-600">COMM Earned</div>
-                  <Button size="sm" className="w-full mt-3">Claim</Button>
+                  <Button size="sm" className="w-full mt-3">
+                    Claim
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -752,7 +882,8 @@ const ForestTokenSystem = () => {
               <CardHeader>
                 <CardTitle>Reward Activities</CardTitle>
                 <CardDescription>
-                  Track your contributions and earned rewards across all token types
+                  Track your contributions and earned rewards across all token
+                  types
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -761,12 +892,18 @@ const ForestTokenSystem = () => {
                     <div className="flex items-center space-x-3">
                       <TreePine className="h-6 w-6 text-green-600" />
                       <div>
-                        <div className="font-semibold">Forest Impact Verification</div>
-                        <div className="text-sm text-gray-600">Verified 12 hectares protected</div>
+                        <div className="font-semibold">
+                          Forest Impact Verification
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          Verified 12 hectares protected
+                        </div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="font-semibold text-green-600">+15.2 IMPACT</div>
+                      <div className="font-semibold text-green-600">
+                        +15.2 IMPACT
+                      </div>
                       <div className="text-xs text-gray-500">2 hours ago</div>
                     </div>
                   </div>
@@ -775,12 +912,18 @@ const ForestTokenSystem = () => {
                     <div className="flex items-center space-x-3">
                       <Vote className="h-6 w-6 text-blue-600" />
                       <div>
-                        <div className="font-semibold">Governance Participation</div>
-                        <div className="text-sm text-gray-600">Voted on deployment proposal</div>
+                        <div className="font-semibold">
+                          Governance Participation
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          Voted on deployment proposal
+                        </div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="font-semibold text-blue-600">+5.8 GOVERN</div>
+                      <div className="font-semibold text-blue-600">
+                        +5.8 GOVERN
+                      </div>
                       <div className="text-xs text-gray-500">1 day ago</div>
                     </div>
                   </div>
@@ -790,11 +933,15 @@ const ForestTokenSystem = () => {
                       <Shield className="h-6 w-6 text-purple-600" />
                       <div>
                         <div className="font-semibold">Emergency Response</div>
-                        <div className="text-sm text-gray-600">Participated in wildfire alert</div>
+                        <div className="text-sm text-gray-600">
+                          Participated in wildfire alert
+                        </div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="font-semibold text-purple-600">+25.0 COMM</div>
+                      <div className="font-semibold text-purple-600">
+                        +25.0 COMM
+                      </div>
                       <div className="text-xs text-gray-500">3 days ago</div>
                     </div>
                   </div>
@@ -809,7 +956,9 @@ const ForestTokenSystem = () => {
               <Card>
                 <CardHeader>
                   <CardTitle>Token Exchange</CardTitle>
-                  <CardDescription>Swap between different Forest Shield token types</CardDescription>
+                  <CardDescription>
+                    Swap between different Forest Shield token types
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -820,7 +969,7 @@ const ForestTokenSystem = () => {
                         <Button variant="outline">IMPACT</Button>
                       </div>
                     </div>
-                    
+
                     <div className="flex justify-center">
                       <Button variant="outline" size="sm">
                         <ArrowUpDown className="h-4 w-4" />
@@ -850,36 +999,51 @@ const ForestTokenSystem = () => {
               <Card>
                 <CardHeader>
                   <CardTitle>Gaia Product Rewards</CardTitle>
-                  <CardDescription>Future Gaia products available for token holders</CardDescription>
+                  <CardDescription>
+                    Future Gaia products available for token holders
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="p-4 border rounded-lg">
-                      <div className="font-semibold mb-2">Gaia Forest Guardian NFT</div>
+                      <div className="font-semibold mb-2">
+                        Gaia Forest Guardian NFT
+                      </div>
                       <div className="text-sm text-gray-600 mb-3">
-                        Exclusive NFT collection for token holders with verified environmental impact
+                        Exclusive NFT collection for token holders with verified
+                        environmental impact
                       </div>
                       <div className="flex justify-between items-center">
                         <Badge variant="outline">500 IMPACT Required</Badge>
-                        <Button size="sm" disabled>Coming Soon</Button>
+                        <Button size="sm" disabled>
+                          Coming Soon
+                        </Button>
                       </div>
                     </div>
 
                     <div className="p-4 border rounded-lg">
-                      <div className="font-semibold mb-2">Gaia Smart Garden Kit</div>
+                      <div className="font-semibold mb-2">
+                        Gaia Smart Garden Kit
+                      </div>
                       <div className="text-sm text-gray-600 mb-3">
-                        IoT-enabled garden monitoring system for personal sustainability
+                        IoT-enabled garden monitoring system for personal
+                        sustainability
                       </div>
                       <div className="flex justify-between items-center">
                         <Badge variant="outline">1000 COMM Required</Badge>
-                        <Button size="sm" disabled>Q2 2025</Button>
+                        <Button size="sm" disabled>
+                          Q2 2025
+                        </Button>
                       </div>
                     </div>
 
                     <div className="p-4 border rounded-lg">
-                      <div className="font-semibold mb-2">Gaia Carbon Credit Package</div>
+                      <div className="font-semibold mb-2">
+                        Gaia Carbon Credit Package
+                      </div>
                       <div className="text-sm text-gray-600 mb-3">
-                        Verified carbon credits from Forest Shield protected areas
+                        Verified carbon credits from Forest Shield protected
+                        areas
                       </div>
                       <div className="flex justify-between items-center">
                         <Badge variant="outline">100 INVEST Required</Badge>

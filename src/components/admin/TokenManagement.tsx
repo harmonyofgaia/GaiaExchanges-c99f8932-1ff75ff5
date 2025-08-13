@@ -1,35 +1,41 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Coins, TrendingUp, Users, DollarSign, PlusCircle, Settings } from 'lucide-react'
-import { toast } from 'sonner'
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Coins,
+  TrendingUp,
+  Users,
+  DollarSign,
+  PlusCircle,
+  Settings,
+} from "lucide-react";
+import { toast } from "sonner";
 
 export function TokenManagement() {
-  const [totalSupply, setTotalSupply] = useState('1000000000')
-  const [mintAmount, setMintAmount] = useState('')
-  const [burnAmount, setBurnAmount] = useState('')
+  const [totalSupply, setTotalSupply] = useState("1000000000");
+  const [mintAmount, setMintAmount] = useState("");
+  const [burnAmount, setBurnAmount] = useState("");
 
   const handleMint = () => {
-    if (!mintAmount) return
-    toast.success('🪙 Tokens Minted Successfully', {
+    if (!mintAmount) return;
+    toast.success("🪙 Tokens Minted Successfully", {
       description: `${mintAmount} GAiA tokens added to circulation`,
-      duration: 4000
-    })
-    setMintAmount('')
-  }
+      duration: 4000,
+    });
+    setMintAmount("");
+  };
 
   const handleBurn = () => {
-    if (!burnAmount) return
-    toast.success('🔥 Tokens Burned Successfully', {
+    if (!burnAmount) return;
+    toast.success("🔥 Tokens Burned Successfully", {
       description: `${burnAmount} GAiA tokens removed from circulation`,
-      duration: 4000
-    })
-    setBurnAmount('')
-  }
+      duration: 4000,
+    });
+    setBurnAmount("");
+  };
 
   return (
     <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/20 to-purple-900/20">
@@ -56,21 +62,23 @@ export function TokenManagement() {
                 <p className="text-sm text-muted-foreground">Total Supply</p>
                 <Badge className="mt-2 bg-green-600">Unlimited Mint</Badge>
               </div>
-              
+
               <div className="text-center p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
                 <TrendingUp className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-blue-400">$0.001</div>
                 <p className="text-sm text-muted-foreground">Current Price</p>
                 <Badge className="mt-2 bg-blue-600">Stable Growth</Badge>
               </div>
-              
+
               <div className="text-center p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
                 <Users className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-purple-400">125,847</div>
+                <div className="text-2xl font-bold text-purple-400">
+                  125,847
+                </div>
                 <p className="text-sm text-muted-foreground">Token Holders</p>
                 <Badge className="mt-2 bg-purple-600">Growing Daily</Badge>
               </div>
-              
+
               <div className="text-center p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg">
                 <DollarSign className="h-8 w-8 text-orange-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-orange-400">0%</div>
@@ -83,10 +91,14 @@ export function TokenManagement() {
           <TabsContent value="mint" className="space-y-6">
             <div className="max-w-md mx-auto space-y-4">
               <div className="text-center">
-                <h3 className="text-lg font-bold text-green-400">Mint New GAiA Tokens</h3>
-                <p className="text-sm text-muted-foreground">Add tokens to circulation for community rewards</p>
+                <h3 className="text-lg font-bold text-green-400">
+                  Mint New GAiA Tokens
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Add tokens to circulation for community rewards
+                </p>
               </div>
-              
+
               <div className="space-y-4">
                 <Input
                   placeholder="Amount to mint..."
@@ -95,8 +107,8 @@ export function TokenManagement() {
                   type="number"
                   className="text-center text-lg"
                 />
-                
-                <Button 
+
+                <Button
                   onClick={handleMint}
                   className="w-full bg-green-600 hover:bg-green-700"
                   disabled={!mintAmount}
@@ -111,10 +123,14 @@ export function TokenManagement() {
           <TabsContent value="burn" className="space-y-6">
             <div className="max-w-md mx-auto space-y-4">
               <div className="text-center">
-                <h3 className="text-lg font-bold text-red-400">Burn GAiA Tokens</h3>
-                <p className="text-sm text-muted-foreground">Remove tokens from circulation permanently</p>
+                <h3 className="text-lg font-bold text-red-400">
+                  Burn GAiA Tokens
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Remove tokens from circulation permanently
+                </p>
               </div>
-              
+
               <div className="space-y-4">
                 <Input
                   placeholder="Amount to burn..."
@@ -123,8 +139,8 @@ export function TokenManagement() {
                   type="number"
                   className="text-center text-lg"
                 />
-                
-                <Button 
+
+                <Button
                   onClick={handleBurn}
                   className="w-full bg-red-600 hover:bg-red-700"
                   disabled={!burnAmount}
@@ -139,7 +155,9 @@ export function TokenManagement() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card className="border-green-500/20">
                 <CardHeader>
-                  <CardTitle className="text-green-400">Community Rewards</CardTitle>
+                  <CardTitle className="text-green-400">
+                    Community Rewards
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
@@ -165,7 +183,9 @@ export function TokenManagement() {
 
               <Card className="border-blue-500/20">
                 <CardHeader>
-                  <CardTitle className="text-blue-400">Distribution Controls</CardTitle>
+                  <CardTitle className="text-blue-400">
+                    Distribution Controls
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <Button className="w-full bg-blue-600 hover:bg-blue-700">
@@ -187,5 +207,5 @@ export function TokenManagement() {
         </Tabs>
       </CardContent>
     </Card>
-  )
+  );
 }

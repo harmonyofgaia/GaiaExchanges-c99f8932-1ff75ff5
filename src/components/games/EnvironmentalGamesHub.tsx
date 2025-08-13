@@ -1,21 +1,13 @@
-
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { 
-  Gamepad2, 
-  TreePine, 
-  Target, 
-  Trophy,
-  Zap,
-  Users
-} from 'lucide-react'
-import { HabboTycoonGame } from './HabboTycoonGame'
-import { EcoMissionsHub } from './EcoMissionsHub'
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Gamepad2, TreePine, Target, Trophy, Zap, Users } from "lucide-react";
+import { HabboTycoonGame } from "./HabboTycoonGame";
+import { EcoMissionsHub } from "./EcoMissionsHub";
 
 export function EnvironmentalGamesHub() {
-  const [activeTab, setActiveTab] = useState('habbo-tycoon')
+  const [activeTab, setActiveTab] = useState("habbo-tycoon");
 
   return (
     <div className="space-y-6">
@@ -34,17 +26,23 @@ export function EnvironmentalGamesHub() {
             <div className="text-center p-4 bg-green-900/30 rounded-lg border border-green-500/30">
               <Gamepad2 className="h-8 w-8 mx-auto text-green-400 mb-2" />
               <div className="font-bold text-green-400">Fun Games</div>
-              <div className="text-sm text-muted-foreground">Engaging gameplay with environmental themes</div>
+              <div className="text-sm text-muted-foreground">
+                Engaging gameplay with environmental themes
+              </div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/30">
               <Zap className="h-8 w-8 mx-auto text-blue-400 mb-2" />
               <div className="font-bold text-blue-400">Earn Tokens</div>
-              <div className="text-sm text-muted-foreground">Get rewarded with real GAiA tokens</div>
+              <div className="text-sm text-muted-foreground">
+                Get rewarded with real GAiA tokens
+              </div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/30">
               <TreePine className="h-8 w-8 mx-auto text-purple-400 mb-2" />
               <div className="font-bold text-purple-400">Real Impact</div>
-              <div className="text-sm text-muted-foreground">Your gameplay funds real environmental projects</div>
+              <div className="text-sm text-muted-foreground">
+                Your gameplay funds real environmental projects
+              </div>
             </div>
           </div>
         </CardContent>
@@ -95,15 +93,20 @@ export function EnvironmentalGamesHub() {
           <TabsContent value="challenges" className="mt-0">
             <Card className="border-purple-500/30">
               <CardHeader>
-                <CardTitle className="text-purple-400">🏆 Environmental Challenges</CardTitle>
+                <CardTitle className="text-purple-400">
+                  🏆 Environmental Challenges
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center py-12">
                   <Trophy className="h-16 w-16 mx-auto text-purple-400 mb-4" />
-                  <h3 className="text-xl font-bold text-purple-400 mb-2">Coming Soon!</h3>
+                  <h3 className="text-xl font-bold text-purple-400 mb-2">
+                    Coming Soon!
+                  </h3>
                   <p className="text-muted-foreground">
-                    Weekly environmental challenges with massive GAiA token rewards.
-                    Compete with players worldwide to make the biggest environmental impact!
+                    Weekly environmental challenges with massive GAiA token
+                    rewards. Compete with players worldwide to make the biggest
+                    environmental impact!
                   </p>
                 </div>
               </CardContent>
@@ -113,15 +116,20 @@ export function EnvironmentalGamesHub() {
           <TabsContent value="leaderboard" className="mt-0">
             <Card className="border-orange-500/30">
               <CardHeader>
-                <CardTitle className="text-orange-400">⚡ Global Leaderboard</CardTitle>
+                <CardTitle className="text-orange-400">
+                  ⚡ Global Leaderboard
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center py-12">
                   <Zap className="h-16 w-16 mx-auto text-orange-400 mb-4" />
-                  <h3 className="text-xl font-bold text-orange-400 mb-2">Global Rankings Coming Soon!</h3>
+                  <h3 className="text-xl font-bold text-orange-400 mb-2">
+                    Global Rankings Coming Soon!
+                  </h3>
                   <p className="text-muted-foreground">
-                    See how your environmental impact compares with players worldwide.
-                    Climb the ranks and earn exclusive badges and rewards!
+                    See how your environmental impact compares with players
+                    worldwide. Climb the ranks and earn exclusive badges and
+                    rewards!
                   </p>
                 </div>
               </CardContent>
@@ -130,5 +138,5 @@ export function EnvironmentalGamesHub() {
         </div>
       </Tabs>
     </div>
-  )
+  );
 }

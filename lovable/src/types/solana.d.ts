@@ -1,4 +1,3 @@
-
 export interface PhantomProvider {
   isPhantom: boolean;
   publicKey: {

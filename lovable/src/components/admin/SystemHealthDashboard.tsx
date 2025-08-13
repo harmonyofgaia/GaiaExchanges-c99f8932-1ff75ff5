@@ -1,149 +1,174 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { 
-  Activity, 
-  Shield, 
-  Zap, 
-  Globe, 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Activity,
+  Shield,
+  Zap,
+  Globe,
   Database,
   Cloud,
   Smartphone,
   CheckCircle,
   AlertTriangle,
-  TrendingUp
-} from 'lucide-react'
-import { toast } from 'sonner'
+  TrendingUp,
+} from "lucide-react";
+import { toast } from "sonner";
 
 interface HealthMetric {
-  name: string
-  value: number
-  status: 'excellent' | 'good' | 'warning' | 'critical'
-  trend: 'up' | 'down' | 'stable'
-  unit: string
+  name: string;
+  value: number;
+  status: "excellent" | "good" | "warning" | "critical";
+  trend: "up" | "down" | "stable";
+  unit: string;
 }
 
 export function SystemHealthDashboard() {
   const [healthMetrics, setHealthMetrics] = useState<HealthMetric[]>([
     {
-      name: 'Overall System Health',
+      name: "Overall System Health",
       value: 98.5,
-      status: 'excellent',
-      trend: 'up',
-      unit: '%'
+      status: "excellent",
+      trend: "up",
+      unit: "%",
     },
     {
-      name: 'API Response Time',
+      name: "API Response Time",
       value: 45,
-      status: 'excellent',
-      trend: 'stable',
-      unit: 'ms'
+      status: "excellent",
+      trend: "stable",
+      unit: "ms",
     },
     {
-      name: 'Database Performance',
+      name: "Database Performance",
       value: 99.9,
-      status: 'excellent',
-      trend: 'up',
-      unit: '%'
+      status: "excellent",
+      trend: "up",
+      unit: "%",
     },
     {
-      name: 'Security Score',
+      name: "Security Score",
       value: 100,
-      status: 'excellent',
-      trend: 'stable',
-      unit: '%'
+      status: "excellent",
+      trend: "stable",
+      unit: "%",
     },
     {
-      name: 'Cloud Storage',
+      name: "Cloud Storage",
       value: 95.2,
-      status: 'excellent',
-      trend: 'up',
-      unit: '%'
+      status: "excellent",
+      trend: "up",
+      unit: "%",
     },
     {
-      name: 'Mobile Compatibility',
+      name: "Mobile Compatibility",
       value: 100,
-      status: 'excellent',
-      trend: 'stable',
-      unit: '%'
-    }
-  ])
+      status: "excellent",
+      trend: "stable",
+      unit: "%",
+    },
+  ]);
 
   const [systemStatus, setSystemStatus] = useState({
-    uptime: '99.98%',
+    uptime: "99.98%",
     totalRequests: 12547,
     successRate: 99.94,
-    activeUsers: 1284
-  })
+    activeUsers: 1284,
+  });
 
   useEffect(() => {
     // Simulate real-time updates
     const interval = setInterval(() => {
-      setHealthMetrics(prev => prev.map(metric => ({
-        ...metric,
-        value: Math.max(85, Math.min(100, metric.value + (Math.random() - 0.5) * 2))
-      })))
+      setHealthMetrics((prev) =>
+        prev.map((metric) => ({
+          ...metric,
+          value: Math.max(
+            85,
+            Math.min(100, metric.value + (Math.random() - 0.5) * 2),
+          ),
+        })),
+      );
 
-      setSystemStatus(prev => ({
+      setSystemStatus((prev) => ({
         ...prev,
         totalRequests: prev.totalRequests + Math.floor(Math.random() * 50 + 10),
-        activeUsers: prev.activeUsers + Math.floor(Math.random() * 20 - 10)
-      }))
-    }, 10000)
+        activeUsers: prev.activeUsers + Math.floor(Math.random() * 20 - 10),
+      }));
+    }, 10000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'excellent': return 'text-green-400'
-      case 'good': return 'text-blue-400'
-      case 'warning': return 'text-yellow-400'
-      case 'critical': return 'text-red-400'
-      default: return 'text-gray-400'
+      case "excellent":
+        return "text-green-400";
+      case "good":
+        return "text-blue-400";
+      case "warning":
+        return "text-yellow-400";
+      case "critical":
+        return "text-red-400";
+      default:
+        return "text-gray-400";
     }
-  }
+  };
 
   const getStatusBadgeColor = (status: string) => {
     switch (status) {
-      case 'excellent': return 'bg-green-600'
-      case 'good': return 'bg-blue-600'
-      case 'warning': return 'bg-yellow-600'
-      case 'critical': return 'bg-red-600'
-      default: return 'bg-gray-600'
+      case "excellent":
+        return "bg-green-600";
+      case "good":
+        return "bg-blue-600";
+      case "warning":
+        return "bg-yellow-600";
+      case "critical":
+        return "bg-red-600";
+      default:
+        return "bg-gray-600";
     }
-  }
+  };
 
   const getTrendIcon = (trend: string) => {
     switch (trend) {
-      case 'up': return <TrendingUp className="h-3 w-3 text-green-400" />
-      case 'down': return <TrendingUp className="h-3 w-3 text-red-400 rotate-180" />
-      case 'stable': return <div className="h-3 w-3 rounded-full bg-blue-400" />
-      default: return null
+      case "up":
+        return <TrendingUp className="h-3 w-3 text-green-400" />;
+      case "down":
+        return <TrendingUp className="h-3 w-3 text-red-400 rotate-180" />;
+      case "stable":
+        return <div className="h-3 w-3 rounded-full bg-blue-400" />;
+      default:
+        return null;
     }
-  }
+  };
 
   const runHealthCheck = () => {
-    toast.success('🔍 Health Check Started', {
-      description: 'Running comprehensive system health analysis...'
-    })
+    toast.success("🔍 Health Check Started", {
+      description: "Running comprehensive system health analysis...",
+    });
 
     // Simulate health check
     setTimeout(() => {
-      setHealthMetrics(prev => prev.map(metric => ({
-        ...metric,
-        value: Math.min(100, metric.value + Math.random() * 5),
-        status: metric.value > 95 ? 'excellent' : metric.value > 80 ? 'good' : 'warning'
-      })))
+      setHealthMetrics((prev) =>
+        prev.map((metric) => ({
+          ...metric,
+          value: Math.min(100, metric.value + Math.random() * 5),
+          status:
+            metric.value > 95
+              ? "excellent"
+              : metric.value > 80
+                ? "good"
+                : "warning",
+        })),
+      );
 
-      toast.success('✅ Health Check Complete', {
-        description: 'All systems operating at optimal levels'
-      })
-    }, 3000)
-  }
+      toast.success("✅ Health Check Complete", {
+        description: "All systems operating at optimal levels",
+      });
+    }, 3000);
+  };
 
   return (
     <div className="space-y-6">
@@ -165,19 +190,29 @@ export function SystemHealthDashboard() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-green-400">{systemStatus.uptime}</div>
+              <div className="text-3xl font-bold text-green-400">
+                {systemStatus.uptime}
+              </div>
               <div className="text-sm text-muted-foreground">Uptime</div>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-blue-400">{systemStatus.totalRequests.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Total Requests</div>
+              <div className="text-3xl font-bold text-blue-400">
+                {systemStatus.totalRequests.toLocaleString()}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Total Requests
+              </div>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-purple-400">{systemStatus.successRate}%</div>
+              <div className="text-3xl font-bold text-purple-400">
+                {systemStatus.successRate}%
+              </div>
               <div className="text-sm text-muted-foreground">Success Rate</div>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-cyan-400">{systemStatus.activeUsers}</div>
+              <div className="text-3xl font-bold text-cyan-400">
+                {systemStatus.activeUsers}
+              </div>
               <div className="text-sm text-muted-foreground">Active Users</div>
             </div>
           </div>
@@ -198,16 +233,23 @@ export function SystemHealthDashboard() {
                   </Badge>
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <div className="flex justify-between items-end">
-                  <span className={`text-2xl font-bold ${getStatusColor(metric.status)}`}>
-                    {metric.value.toFixed(1)}{metric.unit}
+                  <span
+                    className={`text-2xl font-bold ${getStatusColor(metric.status)}`}
+                  >
+                    {metric.value.toFixed(1)}
+                    {metric.unit}
                   </span>
                 </div>
-                <Progress 
-                  value={metric.name === 'API Response Time' ? 100 - (metric.value / 200 * 100) : metric.value} 
-                  className="h-2" 
+                <Progress
+                  value={
+                    metric.name === "API Response Time"
+                      ? 100 - (metric.value / 200) * 100
+                      : metric.value
+                  }
+                  className="h-2"
                 />
               </div>
             </CardContent>
@@ -236,7 +278,7 @@ export function SystemHealthDashboard() {
                   <span className="text-green-400 text-sm">Online</span>
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-between p-3 bg-green-900/20 rounded border border-green-500/20">
                 <div className="flex items-center gap-2">
                   <Cloud className="h-5 w-5 text-green-400" />
@@ -247,7 +289,7 @@ export function SystemHealthDashboard() {
                   <span className="text-green-400 text-sm">Operational</span>
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-between p-3 bg-green-900/20 rounded border border-green-500/20">
                 <div className="flex items-center gap-2">
                   <Globe className="h-5 w-5 text-green-400" />
@@ -259,7 +301,7 @@ export function SystemHealthDashboard() {
                 </div>
               </div>
             </div>
-            
+
             <div className="space-y-3">
               <div className="flex items-center justify-between p-3 bg-green-900/20 rounded border border-green-500/20">
                 <div className="flex items-center gap-2">
@@ -271,7 +313,7 @@ export function SystemHealthDashboard() {
                   <span className="text-green-400 text-sm">Ready</span>
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-between p-3 bg-green-900/20 rounded border border-green-500/20">
                 <div className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-green-400" />
@@ -282,7 +324,7 @@ export function SystemHealthDashboard() {
                   <span className="text-green-400 text-sm">Protected</span>
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-between p-3 bg-green-900/20 rounded border border-green-500/20">
                 <div className="flex items-center gap-2">
                   <Zap className="h-5 w-5 text-green-400" />
@@ -309,5 +351,5 @@ export function SystemHealthDashboard() {
         </Button>
       </div>
     </div>
-  )
+  );
 }

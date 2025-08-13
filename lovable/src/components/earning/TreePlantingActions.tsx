@@ -1,49 +1,57 @@
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { toast } from 'sonner'
-import { useEarningActivities } from '@/hooks/useEarningSystem'
-import { TreePine } from 'lucide-react'
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { toast } from "sonner";
+import { useEarningActivities } from "@/hooks/useEarningSystem";
+import { TreePine } from "lucide-react";
 
 export function TreePlantingActions() {
-  const [treeType, setTreeType] = useState('')
-  const [quantity, setQuantity] = useState('')
-  const [location, setLocation] = useState('')
-  const { addActivity, loading } = useEarningActivities('user-123')
+  const [treeType, setTreeType] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [location, setLocation] = useState("");
+  const { addActivity, loading } = useEarningActivities("user-123");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     if (!treeType || !quantity || !location) {
-      toast.error('Please fill in all fields')
-      return
+      toast.error("Please fill in all fields");
+      return;
     }
 
-    const points = parseInt(quantity) * 50
-    const tokens = parseInt(quantity) * 10
+    const points = parseInt(quantity) * 50;
+    const tokens = parseInt(quantity) * 10;
 
     const activity = {
       id: Date.now().toString(),
-      type: 'tree_planting',
-      title: 'Tree Planting Initiative',
+      type: "tree_planting",
+      title: "Tree Planting Initiative",
       amount: points,
       timestamp: new Date(),
       description: `Planted ${quantity} ${treeType} trees at ${location}`,
-      status: 'completed' as const,
+      status: "completed" as const,
       pointsEarned: points,
       tokensEarned: tokens,
       verified: true,
-      metadata: { treeType, quantity: parseInt(quantity), location }
-    }
+      metadata: { treeType, quantity: parseInt(quantity), location },
+    };
 
-    addActivity(activity)
-    toast.success(`Tree planting recorded! +${points} points earned for ${quantity} trees`)
-    setTreeType('')
-    setQuantity('')
-    setLocation('')
-  }
+    addActivity(activity);
+    toast.success(
+      `Tree planting recorded! +${points} points earned for ${quantity} trees`,
+    );
+    setTreeType("");
+    setQuantity("");
+    setLocation("");
+  };
 
   return (
     <Card className="border-green-500/30 bg-green-900/20">
@@ -71,9 +79,11 @@ export function TreePlantingActions() {
               </SelectContent>
             </Select>
           </div>
-          
+
           <div>
-            <label className="block text-sm font-medium mb-2">Number of Trees</label>
+            <label className="block text-sm font-medium mb-2">
+              Number of Trees
+            </label>
             <Input
               type="number"
               value={quantity}
@@ -91,18 +101,25 @@ export function TreePlantingActions() {
               placeholder="Park, forest, community area..."
             />
           </div>
-          
-          <Button type="submit" disabled={loading} className="w-full bg-green-600 hover:bg-green-700">
-            {loading ? 'Recording...' : '🌳 Record Tree Planting (+50 Points per Tree)'}
+
+          <Button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-green-600 hover:bg-green-700"
+          >
+            {loading
+              ? "Recording..."
+              : "🌳 Record Tree Planting (+50 Points per Tree)"}
           </Button>
         </form>
-        
+
         <div className="mt-4 p-3 bg-green-900/20 rounded-lg border border-green-500/30">
           <p className="text-sm text-green-300">
-            💡 <strong>Impact:</strong> Each tree planted captures 22kg CO2 annually and supports biodiversity!
+            💡 <strong>Impact:</strong> Each tree planted captures 22kg CO2
+            annually and supports biodiversity!
           </p>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,8 +1,7 @@
-
-import { AdminDashboardTabs } from './AdminDashboardTabs'
-import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
-import { AdminOnlyAccess } from '@/components/security/AdminOnlyAccess'
-import { EnhancedAdminMenu } from './EnhancedAdminMenu'
+import { AdminDashboardTabs } from "./AdminDashboardTabs";
+import { AdminProtectedRoute } from "@/components/auth/AdminProtectedRoute";
+import { AdminOnlyAccess } from "@/components/security/AdminOnlyAccess";
+import { EnhancedAdminMenu } from "./EnhancedAdminMenu";
 
 export function AdminDashboard() {
   return (
@@ -17,10 +16,10 @@ export function AdminDashboard() {
               Ultimate transparency and control for community protection
             </p>
           </div>
-          
+
           {/* Enhanced Admin Menu */}
           <EnhancedAdminMenu />
-          
+
           {/* Original Admin Dashboard Tabs */}
           <div className="mt-8">
             <AdminDashboardTabs />
@@ -28,5 +27,5 @@ export function AdminDashboard() {
         </div>
       </AdminOnlyAccess>
     </AdminProtectedRoute>
-  )
+  );
 }

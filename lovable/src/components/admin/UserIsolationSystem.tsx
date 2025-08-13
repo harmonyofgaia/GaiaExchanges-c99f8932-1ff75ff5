@@ -1,20 +1,19 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Shield, Lock, Ban, Eye, AlertTriangle } from 'lucide-react'
-import { RealTimeCoinCrafter } from '@/components/RealTimeCoinCrafter'
-import { AIBackgroundCapabilities } from './AIBackgroundCapabilities'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Shield, Lock, Ban, Eye, AlertTriangle } from "lucide-react";
+import { RealTimeCoinCrafter } from "@/components/RealTimeCoinCrafter";
+import { AIBackgroundCapabilities } from "./AIBackgroundCapabilities";
 
 export function UserIsolationSystem() {
   return (
     <div className="space-y-6">
       {/* Real-Time Coin Crafter */}
       <RealTimeCoinCrafter />
-      
+
       {/* AI Background Capabilities */}
       <AIBackgroundCapabilities />
-      
+
       {/* User Isolation Controls */}
       <Card className="bg-gradient-to-br from-red-900/30 to-orange-900/30 border-red-500/30">
         <CardHeader>
@@ -50,5 +49,5 @@ export function UserIsolationSystem() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

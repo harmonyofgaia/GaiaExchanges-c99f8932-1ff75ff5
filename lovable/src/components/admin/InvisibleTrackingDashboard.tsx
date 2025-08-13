@@ -1,193 +1,232 @@
-
-import { useState, useEffect, useRef } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
-import { Eye, Shield, Users, Activity, Globe, Clock, Zap, Lock } from 'lucide-react'
-import { toast } from 'sonner'
+import { useState, useEffect, useRef } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import {
+  Eye,
+  Shield,
+  Users,
+  Activity,
+  Globe,
+  Clock,
+  Zap,
+  Lock,
+} from "lucide-react";
+import { toast } from "sonner";
 
 interface TrackedUser {
-  id: string
-  ipAddress: string
-  location: string
-  country: string
-  city: string
-  userAgent: string
-  deviceFingerprint: string
-  firstSeen: Date
-  lastActivity: Date
-  pageVisits: number
-  timeSpent: number
-  threatLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'
-  suspiciousActivity: string[]
+  id: string;
+  ipAddress: string;
+  location: string;
+  country: string;
+  city: string;
+  userAgent: string;
+  deviceFingerprint: string;
+  firstSeen: Date;
+  lastActivity: Date;
+  pageVisits: number;
+  timeSpent: number;
+  threatLevel: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+  suspiciousActivity: string[];
   browserData: {
-    language: string
-    timezone: string
-    screenResolution: string
-    cookiesEnabled: boolean
-  }
+    language: string;
+    timezone: string;
+    screenResolution: string;
+    cookiesEnabled: boolean;
+  };
   networkData: {
-    connectionType: string
-    downloadSpeed: number
-    isp: string
-  }
+    connectionType: string;
+    downloadSpeed: number;
+    isp: string;
+  };
 }
 
 interface SecurityEvent {
-  id: string
-  timestamp: Date
-  type: 'UNAUTHORIZED_ACCESS' | 'SUSPICIOUS_BEHAVIOR' | 'BREAKTHROUGH_ATTEMPT' | 'ADMIN_LOGIN'
-  userId: string
-  description: string
-  severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'
-  blocked: boolean
+  id: string;
+  timestamp: Date;
+  type:
+    | "UNAUTHORIZED_ACCESS"
+    | "SUSPICIOUS_BEHAVIOR"
+    | "BREAKTHROUGH_ATTEMPT"
+    | "ADMIN_LOGIN";
+  userId: string;
+  description: string;
+  severity: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+  blocked: boolean;
 }
 
 // Extend Navigator interface for optional properties
 interface ExtendedNavigator extends Navigator {
-  deviceMemory?: number
+  deviceMemory?: number;
   connection?: {
-    effectiveType?: string
-    downlink?: number
-  }
+    effectiveType?: string;
+    downlink?: number;
+  };
 }
 
 export function InvisibleTrackingDashboard() {
-  const [trackedUsers, setTrackedUsers] = useState<TrackedUser[]>([])
-  const [securityEvents, setSecurityEvents] = useState<SecurityEvent[]>([])
-  const [totalThreatsBlocked, setTotalThreatsBlocked] = useState(0)
-  const [isInvisibleMode, setIsInvisibleMode] = useState(true)
-  const trackingInterval = useRef<NodeJS.Timeout>(undefined)
+  const [trackedUsers, setTrackedUsers] = useState<TrackedUser[]>([]);
+  const [securityEvents, setSecurityEvents] = useState<SecurityEvent[]>([]);
+  const [totalThreatsBlocked, setTotalThreatsBlocked] = useState(0);
+  const [isInvisibleMode, setIsInvisibleMode] = useState(true);
+  const trackingInterval = useRef<NodeJS.Timeout>(undefined);
 
   useEffect(() => {
-    console.log('👻 INVISIBLE TRACKING SYSTEM - ADMIN EYES ONLY ACTIVATED')
-    console.log('🔍 COLLECTING ALL USER DATA - COMPLETELY UNDETECTABLE')
-    
+    console.log("👻 INVISIBLE TRACKING SYSTEM - ADMIN EYES ONLY ACTIVATED");
+    console.log("🔍 COLLECTING ALL USER DATA - COMPLETELY UNDETECTABLE");
+
     const startInvisibleTracking = async () => {
       try {
         // Get user's real IP and location data
-        const ipResponse = await fetch('https://api.ipify.org?format=json')
-        const ipData = await ipResponse.json()
-        const userIP = ipData.ip
+        const ipResponse = await fetch("https://api.ipify.org?format=json");
+        const ipData = await ipResponse.json();
+        const userIP = ipData.ip;
 
-        const locationResponse = await fetch(`https://ipapi.co/${userIP}/json/`)
-        const locationData = await locationResponse.json()
+        const locationResponse = await fetch(
+          `https://ipapi.co/${userIP}/json/`,
+        );
+        const locationData = await locationResponse.json();
 
         // Create comprehensive device fingerprint with safe property access
-        const extendedNavigator = navigator as ExtendedNavigator
+        const extendedNavigator = navigator as ExtendedNavigator;
         const deviceFingerprint = btoa(
-          navigator.userAgent + 
-          screen.width + 'x' + screen.height +
-          navigator.language +
-          Intl.DateTimeFormat().resolvedOptions().timeZone +
-          (navigator.hardwareConcurrency || 0) +
-          (extendedNavigator.deviceMemory || 0) +
-          Date.now()
-        )
+          navigator.userAgent +
+            screen.width +
+            "x" +
+            screen.height +
+            navigator.language +
+            Intl.DateTimeFormat().resolvedOptions().timeZone +
+            (navigator.hardwareConcurrency || 0) +
+            (extendedNavigator.deviceMemory || 0) +
+            Date.now(),
+        );
 
         // Detect suspicious behavior
-        const suspiciousActivity = []
-        if (navigator.webdriver) suspiciousActivity.push('Bot/Automation detected')
-        if (navigator.userAgent.includes('HeadlessChrome')) suspiciousActivity.push('Headless browser detected')
-        if (window.outerHeight - window.innerHeight < 50) suspiciousActivity.push('Suspicious window size')
+        const suspiciousActivity = [];
+        if (navigator.webdriver)
+          suspiciousActivity.push("Bot/Automation detected");
+        if (navigator.userAgent.includes("HeadlessChrome"))
+          suspiciousActivity.push("Headless browser detected");
+        if (window.outerHeight - window.innerHeight < 50)
+          suspiciousActivity.push("Suspicious window size");
 
         const newUser: TrackedUser = {
           id: `user-${Date.now()}`,
           ipAddress: userIP,
           location: `${locationData.city}, ${locationData.region}, ${locationData.country_name}`,
-          country: locationData.country_name || 'Unknown',
-          city: locationData.city || 'Unknown',
+          country: locationData.country_name || "Unknown",
+          city: locationData.city || "Unknown",
           userAgent: navigator.userAgent,
           deviceFingerprint,
           firstSeen: new Date(),
           lastActivity: new Date(),
           pageVisits: 1,
           timeSpent: 0,
-          threatLevel: suspiciousActivity.length > 0 ? 'HIGH' : 'LOW',
+          threatLevel: suspiciousActivity.length > 0 ? "HIGH" : "LOW",
           suspiciousActivity,
           browserData: {
             language: navigator.language,
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             screenResolution: `${screen.width}x${screen.height}`,
-            cookiesEnabled: navigator.cookieEnabled
+            cookiesEnabled: navigator.cookieEnabled,
           },
           networkData: {
-            connectionType: extendedNavigator.connection?.effectiveType || 'Unknown',
+            connectionType:
+              extendedNavigator.connection?.effectiveType || "Unknown",
             downloadSpeed: extendedNavigator.connection?.downlink || 0,
-            isp: locationData.org || 'Unknown'
-          }
-        }
+            isp: locationData.org || "Unknown",
+          },
+        };
 
-        setTrackedUsers(prev => [newUser, ...prev.slice(0, 99)])
+        setTrackedUsers((prev) => [newUser, ...prev.slice(0, 99)]);
 
         // Create security event
         const securityEvent: SecurityEvent = {
           id: `event-${Date.now()}`,
           timestamp: new Date(),
-          type: suspiciousActivity.length > 0 ? 'SUSPICIOUS_BEHAVIOR' : 'UNAUTHORIZED_ACCESS',
+          type:
+            suspiciousActivity.length > 0
+              ? "SUSPICIOUS_BEHAVIOR"
+              : "UNAUTHORIZED_ACCESS",
           userId: newUser.id,
-          description: `User tracked: ${suspiciousActivity.length > 0 ? 'Suspicious activity detected' : 'Normal access'}`,
-          severity: newUser.threatLevel as 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL',
-          blocked: suspiciousActivity.length > 2
-        }
+          description: `User tracked: ${suspiciousActivity.length > 0 ? "Suspicious activity detected" : "Normal access"}`,
+          severity: newUser.threatLevel as
+            | "LOW"
+            | "MEDIUM"
+            | "HIGH"
+            | "CRITICAL",
+          blocked: suspiciousActivity.length > 2,
+        };
 
-        setSecurityEvents(prev => [securityEvent, ...prev.slice(0, 49)])
+        setSecurityEvents((prev) => [securityEvent, ...prev.slice(0, 49)]);
 
         if (suspiciousActivity.length > 0) {
-          setTotalThreatsBlocked(prev => prev + 1)
-          console.log('🚨 THREAT DETECTED AND BLOCKED:', suspiciousActivity)
+          setTotalThreatsBlocked((prev) => prev + 1);
+          console.log("🚨 THREAT DETECTED AND BLOCKED:", suspiciousActivity);
         }
 
-        console.log('👻 USER COMPLETELY TRACKED - INVISIBLE TO THEM:', newUser)
-
+        console.log("👻 USER COMPLETELY TRACKED - INVISIBLE TO THEM:", newUser);
       } catch (error) {
-        console.log('👻 Invisible tracking protected by quantum shields:', error)
+        console.log(
+          "👻 Invisible tracking protected by quantum shields:",
+          error,
+        );
       }
-    }
+    };
 
-    startInvisibleTracking()
-    trackingInterval.current = setInterval(startInvisibleTracking, 30000)
+    startInvisibleTracking();
+    trackingInterval.current = setInterval(startInvisibleTracking, 30000);
 
     return () => {
-      if (trackingInterval.current) clearInterval(trackingInterval.current)
-    }
-  }, [])
+      if (trackingInterval.current) clearInterval(trackingInterval.current);
+    };
+  }, []);
 
   const activateInvisibleMode = () => {
-    setIsInvisibleMode(true)
-    console.log('👻 INVISIBLE MODE ACTIVATED - PLATFORM BECOMES GHOST TO HACKERS')
-    console.log('🚫 ALL UNAUTHORIZED USERS WILL SEE NOTHING')
-    
+    setIsInvisibleMode(true);
+    console.log(
+      "👻 INVISIBLE MODE ACTIVATED - PLATFORM BECOMES GHOST TO HACKERS",
+    );
+    console.log("🚫 ALL UNAUTHORIZED USERS WILL SEE NOTHING");
+
     // Block all non-admin interactions
     const blockAllNonAdminAccess = () => {
-      const isAdminSession = sessionStorage.getItem('admin-session-active') === 'true'
-      const isFirefoxBrowser = navigator.userAgent.toLowerCase().includes('firefox')
-      
+      const isAdminSession =
+        sessionStorage.getItem("admin-session-active") === "true";
+      const isFirefoxBrowser = navigator.userAgent
+        .toLowerCase()
+        .includes("firefox");
+
       if (!isAdminSession || !isFirefoxBrowser) {
         // Make page completely invisible to non-admins
-        document.body.style.display = 'none'
-        console.log('👻 PAGE INVISIBLE TO NON-ADMIN - GHOST MODE ACTIVE')
+        document.body.style.display = "none";
+        console.log("👻 PAGE INVISIBLE TO NON-ADMIN - GHOST MODE ACTIVE");
       }
-    }
+    };
 
-    setTimeout(blockAllNonAdminAccess, 1000)
-    
-    toast.success('👻 Invisible Mode Activated', {
-      description: 'Platform is now completely invisible to unauthorized users',
-      duration: 5000
-    })
-  }
+    setTimeout(blockAllNonAdminAccess, 1000);
+
+    toast.success("👻 Invisible Mode Activated", {
+      description: "Platform is now completely invisible to unauthorized users",
+      duration: 5000,
+    });
+  };
 
   const getThreatColor = (level: string) => {
     switch (level) {
-      case 'CRITICAL': return 'text-red-400 bg-red-900/20'
-      case 'HIGH': return 'text-orange-400 bg-orange-900/20'
-      case 'MEDIUM': return 'text-yellow-400 bg-yellow-900/20'
-      case 'LOW': return 'text-green-400 bg-green-900/20'
-      default: return 'text-gray-400 bg-gray-900/20'
+      case "CRITICAL":
+        return "text-red-400 bg-red-900/20";
+      case "HIGH":
+        return "text-orange-400 bg-orange-900/20";
+      case "MEDIUM":
+        return "text-yellow-400 bg-yellow-900/20";
+      case "LOW":
+        return "text-green-400 bg-green-900/20";
+      default:
+        return "text-gray-400 bg-gray-900/20";
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -201,31 +240,45 @@ export function InvisibleTrackingDashboard() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-400">{trackedUsers.length}</div>
+              <div className="text-2xl font-bold text-red-400">
+                {trackedUsers.length}
+              </div>
               <div className="text-sm text-muted-foreground">Tracked Users</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-orange-400">{totalThreatsBlocked}</div>
-              <div className="text-sm text-muted-foreground">Threats Blocked</div>
+              <div className="text-2xl font-bold text-orange-400">
+                {totalThreatsBlocked}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Threats Blocked
+              </div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">{securityEvents.length}</div>
-              <div className="text-sm text-muted-foreground">Security Events</div>
+              <div className="text-2xl font-bold text-green-400">
+                {securityEvents.length}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Security Events
+              </div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-400">100%</div>
-              <div className="text-sm text-muted-foreground">Invisibility Level</div>
+              <div className="text-sm text-muted-foreground">
+                Invisibility Level
+              </div>
             </div>
           </div>
-          
+
           <div className="flex justify-center">
-            <Button 
+            <Button
               onClick={activateInvisibleMode}
               className="bg-red-600 hover:bg-red-700 text-white"
               disabled={isInvisibleMode}
             >
               <Shield className="h-4 w-4 mr-2" />
-              {isInvisibleMode ? '👻 Invisible Mode Active' : 'Activate Invisible Mode'}
+              {isInvisibleMode
+                ? "👻 Invisible Mode Active"
+                : "Activate Invisible Mode"}
             </Button>
           </div>
         </CardContent>
@@ -242,7 +295,10 @@ export function InvisibleTrackingDashboard() {
           <CardContent>
             <div className="max-h-64 overflow-y-auto space-y-2">
               {trackedUsers.slice(0, 10).map((user) => (
-                <div key={user.id} className="p-3 rounded border border-border/50 bg-card/30">
+                <div
+                  key={user.id}
+                  className="p-3 rounded border border-border/50 bg-card/30"
+                >
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
@@ -253,16 +309,20 @@ export function InvisibleTrackingDashboard() {
                           {user.location}
                         </span>
                       </div>
-                      <div className="text-sm font-mono mt-1">{user.ipAddress}</div>
+                      <div className="text-sm font-mono mt-1">
+                        {user.ipAddress}
+                      </div>
                       <div className="text-xs text-muted-foreground mt-1">
-                        Device: {user.browserData.screenResolution} • {user.browserData.language}
+                        Device: {user.browserData.screenResolution} •{" "}
+                        {user.browserData.language}
                       </div>
                       <div className="text-xs text-muted-foreground">
-                        ISP: {user.networkData.isp} • Connection: {user.networkData.connectionType}
+                        ISP: {user.networkData.isp} • Connection:{" "}
+                        {user.networkData.connectionType}
                       </div>
                       {user.suspiciousActivity.length > 0 && (
                         <div className="text-xs text-red-400 mt-1">
-                          🚨 Suspicious: {user.suspiciousActivity.join(', ')}
+                          🚨 Suspicious: {user.suspiciousActivity.join(", ")}
                         </div>
                       )}
                     </div>
@@ -291,7 +351,10 @@ export function InvisibleTrackingDashboard() {
           <CardContent>
             <div className="max-h-64 overflow-y-auto space-y-2">
               {securityEvents.slice(0, 10).map((event) => (
-                <div key={event.id} className="p-2 rounded border border-border/50 bg-card/30">
+                <div
+                  key={event.id}
+                  className="p-2 rounded border border-border/50 bg-card/30"
+                >
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
@@ -324,8 +387,9 @@ export function InvisibleTrackingDashboard() {
               🛡️ QUANTUM INVISIBLE DEFENSE SYSTEM - GOD MODE ACTIVE
             </h3>
             <p className="text-muted-foreground">
-              Every user interaction is tracked and analyzed in real-time. 
-              Threat detection at 100% accuracy with quantum-level invisibility protection.
+              Every user interaction is tracked and analyzed in real-time.
+              Threat detection at 100% accuracy with quantum-level invisibility
+              protection.
             </p>
             <div className="flex justify-center gap-4">
               <Badge className="bg-red-600 text-white px-4 py-2">
@@ -342,5 +406,5 @@ export function InvisibleTrackingDashboard() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

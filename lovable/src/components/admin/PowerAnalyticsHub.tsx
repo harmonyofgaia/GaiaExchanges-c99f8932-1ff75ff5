@@ -1,20 +1,19 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { 
-  TrendingUp, 
-  BarChart3, 
-  PieChart, 
-  Activity, 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import {
+  TrendingUp,
+  BarChart3,
+  PieChart,
+  Activity,
   Users,
   DollarSign,
   Globe,
   Zap,
   Target,
-  Database
-} from 'lucide-react'
+  Database,
+} from "lucide-react";
 
 export function PowerAnalyticsHub() {
   const [analytics, setAnalytics] = useState({
@@ -23,24 +22,33 @@ export function PowerAnalyticsHub() {
     totalRevenue: 847293.45,
     growthRate: 23.7,
     networkActivity: 89.2,
-    securityScore: 98.5
-  })
+    securityScore: 98.5,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnalytics(prev => ({
+      setAnalytics((prev) => ({
         ...prev,
         totalUsers: prev.totalUsers + Math.floor(Math.random() * 10),
         activeUsers: Math.floor(Math.random() * 3000),
         totalRevenue: prev.totalRevenue + Math.random() * 100,
-        growthRate: Math.max(0, Math.min(100, prev.growthRate + (Math.random() - 0.5) * 2)),
-        networkActivity: Math.max(0, Math.min(100, prev.networkActivity + (Math.random() - 0.5) * 5)),
-        securityScore: Math.max(0, Math.min(100, prev.securityScore + (Math.random() - 0.5) * 1))
-      }))
-    }, 3000)
+        growthRate: Math.max(
+          0,
+          Math.min(100, prev.growthRate + (Math.random() - 0.5) * 2),
+        ),
+        networkActivity: Math.max(
+          0,
+          Math.min(100, prev.networkActivity + (Math.random() - 0.5) * 5),
+        ),
+        securityScore: Math.max(
+          0,
+          Math.min(100, prev.securityScore + (Math.random() - 0.5) * 1),
+        ),
+      }));
+    }, 3000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="space-y-6">
@@ -67,47 +75,61 @@ export function PowerAnalyticsHub() {
         <Card className="border-green-500/30 bg-green-900/20">
           <CardContent className="p-4 text-center">
             <Users className="h-8 w-8 mx-auto text-green-400 mb-2" />
-            <div className="text-2xl font-bold text-green-400">{analytics.totalUsers.toLocaleString()}</div>
+            <div className="text-2xl font-bold text-green-400">
+              {analytics.totalUsers.toLocaleString()}
+            </div>
             <div className="text-sm text-muted-foreground">Total Users</div>
           </CardContent>
         </Card>
-        
+
         <Card className="border-blue-500/30 bg-blue-900/20">
           <CardContent className="p-4 text-center">
             <Activity className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-            <div className="text-2xl font-bold text-blue-400">{analytics.activeUsers.toLocaleString()}</div>
+            <div className="text-2xl font-bold text-blue-400">
+              {analytics.activeUsers.toLocaleString()}
+            </div>
             <div className="text-sm text-muted-foreground">Active Users</div>
           </CardContent>
         </Card>
-        
+
         <Card className="border-yellow-500/30 bg-yellow-900/20">
           <CardContent className="p-4 text-center">
             <DollarSign className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
-            <div className="text-2xl font-bold text-yellow-400">${analytics.totalRevenue.toLocaleString()}</div>
+            <div className="text-2xl font-bold text-yellow-400">
+              ${analytics.totalRevenue.toLocaleString()}
+            </div>
             <div className="text-sm text-muted-foreground">Revenue</div>
           </CardContent>
         </Card>
-        
+
         <Card className="border-purple-500/30 bg-purple-900/20">
           <CardContent className="p-4 text-center">
             <TrendingUp className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-            <div className="text-2xl font-bold text-purple-400">{analytics.growthRate.toFixed(1)}%</div>
+            <div className="text-2xl font-bold text-purple-400">
+              {analytics.growthRate.toFixed(1)}%
+            </div>
             <div className="text-sm text-muted-foreground">Growth Rate</div>
           </CardContent>
         </Card>
-        
+
         <Card className="border-cyan-500/30 bg-cyan-900/20">
           <CardContent className="p-4 text-center">
             <Globe className="h-8 w-8 mx-auto text-cyan-400 mb-2" />
-            <div className="text-2xl font-bold text-cyan-400">{analytics.networkActivity.toFixed(1)}%</div>
-            <div className="text-sm text-muted-foreground">Network Activity</div>
+            <div className="text-2xl font-bold text-cyan-400">
+              {analytics.networkActivity.toFixed(1)}%
+            </div>
+            <div className="text-sm text-muted-foreground">
+              Network Activity
+            </div>
           </CardContent>
         </Card>
-        
+
         <Card className="border-red-500/30 bg-red-900/20">
           <CardContent className="p-4 text-center">
             <Zap className="h-8 w-8 mx-auto text-red-400 mb-2" />
-            <div className="text-2xl font-bold text-red-400">{analytics.securityScore.toFixed(1)}%</div>
+            <div className="text-2xl font-bold text-red-400">
+              {analytics.securityScore.toFixed(1)}%
+            </div>
             <div className="text-sm text-muted-foreground">Security Score</div>
           </CardContent>
         </Card>
@@ -127,11 +149,13 @@ export function PowerAnalyticsHub() {
               <div>
                 <div className="flex justify-between mb-2">
                   <span>User Growth</span>
-                  <span className="text-green-400">{analytics.growthRate.toFixed(1)}%</span>
+                  <span className="text-green-400">
+                    {analytics.growthRate.toFixed(1)}%
+                  </span>
                 </div>
                 <Progress value={analytics.growthRate} className="h-2" />
               </div>
-              
+
               <div>
                 <div className="flex justify-between mb-2">
                   <span>Revenue Growth</span>
@@ -139,7 +163,7 @@ export function PowerAnalyticsHub() {
                 </div>
                 <Progress value={31.2} className="h-2" />
               </div>
-              
+
               <div>
                 <div className="flex justify-between mb-2">
                   <span>Network Expansion</span>
@@ -167,7 +191,7 @@ export function PowerAnalyticsHub() {
                 </div>
                 <Progress value={94.7} className="h-2" />
               </div>
-              
+
               <div>
                 <div className="flex justify-between mb-2">
                   <span>User Satisfaction</span>
@@ -175,11 +199,13 @@ export function PowerAnalyticsHub() {
                 </div>
                 <Progress value={96.3} className="h-2" />
               </div>
-              
+
               <div>
                 <div className="flex justify-between mb-2">
                   <span>Network Stability</span>
-                  <span className="text-blue-400">{analytics.networkActivity.toFixed(1)}%</span>
+                  <span className="text-blue-400">
+                    {analytics.networkActivity.toFixed(1)}%
+                  </span>
                 </div>
                 <Progress value={analytics.networkActivity} className="h-2" />
               </div>
@@ -201,15 +227,17 @@ export function PowerAnalyticsHub() {
             <div className="text-center p-4 bg-black/30 rounded-lg">
               <Target className="h-12 w-12 mx-auto text-purple-400 mb-2" />
               <div className="text-2xl font-bold text-purple-400">2,847</div>
-              <div className="text-sm text-muted-foreground">Active Sessions</div>
+              <div className="text-sm text-muted-foreground">
+                Active Sessions
+              </div>
             </div>
-            
+
             <div className="text-center p-4 bg-black/30 rounded-lg">
               <Globe className="h-12 w-12 mx-auto text-cyan-400 mb-2" />
               <div className="text-2xl font-bold text-cyan-400">127</div>
               <div className="text-sm text-muted-foreground">Countries</div>
             </div>
-            
+
             <div className="text-center p-4 bg-black/30 rounded-lg">
               <Zap className="h-12 w-12 mx-auto text-yellow-400 mb-2" />
               <div className="text-2xl font-bold text-yellow-400">0.23s</div>
@@ -219,5 +247,5 @@ export function PowerAnalyticsHub() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

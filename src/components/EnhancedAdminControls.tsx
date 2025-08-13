@@ -1,53 +1,87 @@
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Badge } from '@/components/ui/badge'
-import { Switch } from '@/components/ui/switch'
-import { Settings, Shield, Lock, Eye, AlertTriangle, Activity, Globe, DollarSign } from 'lucide-react'
-import { useToast } from '@/hooks/use-toast'
-import { AdminProtectedRoute } from '@/components/auth/AdminProtectedRoute'
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
+import {
+  Settings,
+  Shield,
+  Lock,
+  Eye,
+  AlertTriangle,
+  Activity,
+  Globe,
+  DollarSign,
+} from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { AdminProtectedRoute } from "@/components/auth/AdminProtectedRoute";
 
 function EnhancedAdminControlsContent() {
-  const [securityLevel, setSecurityLevel] = useState('maximum')
-  const [autoSecurityUpdates, setAutoSecurityUpdates] = useState(true)
-  const [realTimeMonitoring, setRealTimeMonitoring] = useState(true)
-  const [adminOnlyMode, setAdminOnlyMode] = useState(false)
-  const [maintenanceMode, setMaintenanceMode] = useState(false)
-  const { toast } = useToast()
+  const [securityLevel, setSecurityLevel] = useState("maximum");
+  const [autoSecurityUpdates, setAutoSecurityUpdates] = useState(true);
+  const [realTimeMonitoring, setRealTimeMonitoring] = useState(true);
+  const [adminOnlyMode, setAdminOnlyMode] = useState(false);
+  const [maintenanceMode, setMaintenanceMode] = useState(false);
+  const { toast } = useToast();
 
   const securityMetrics = [
-    { name: 'Firewall Status', status: 'Active', level: 'Maximum' },
-    { name: 'DDoS Protection', status: 'Active', level: 'Enterprise' },
-    { name: 'Intrusion Detection', status: 'Active', level: 'Real-time' },
-    { name: 'Wallet Security', status: 'Active', level: 'Military-grade' },
-    { name: 'Transaction Monitoring', status: 'Active', level: '24/7' },
-    { name: 'Scam Prevention', status: 'Active', level: 'AI-powered' }
-  ]
+    { name: "Firewall Status", status: "Active", level: "Maximum" },
+    { name: "DDoS Protection", status: "Active", level: "Enterprise" },
+    { name: "Intrusion Detection", status: "Active", level: "Real-time" },
+    { name: "Wallet Security", status: "Active", level: "Military-grade" },
+    { name: "Transaction Monitoring", status: "Active", level: "24/7" },
+    { name: "Scam Prevention", status: "Active", level: "AI-powered" },
+  ];
 
   const recentTransactions = [
-    { id: '1', type: 'Swap', amount: '1,250 GAiA', status: 'Completed', reversible: true },
-    { id: '2', type: 'Burn', amount: '500 GAiA', status: 'Completed', reversible: false },
-    { id: '3', type: 'Swap', amount: '2,100 BTC', status: 'Pending', reversible: true },
-    { id: '4', type: 'Transfer', amount: '850 GAiA', status: 'Completed', reversible: true }
-  ]
+    {
+      id: "1",
+      type: "Swap",
+      amount: "1,250 GAiA",
+      status: "Completed",
+      reversible: true,
+    },
+    {
+      id: "2",
+      type: "Burn",
+      amount: "500 GAiA",
+      status: "Completed",
+      reversible: false,
+    },
+    {
+      id: "3",
+      type: "Swap",
+      amount: "2,100 BTC",
+      status: "Pending",
+      reversible: true,
+    },
+    {
+      id: "4",
+      type: "Transfer",
+      amount: "850 GAiA",
+      status: "Completed",
+      reversible: true,
+    },
+  ];
 
   const handleEmergencyStop = () => {
-    setMaintenanceMode(true)
+    setMaintenanceMode(true);
     toast({
       title: "Emergency Stop Activated",
-      description: "All trading has been suspended. Only admin access is available.",
+      description:
+        "All trading has been suspended. Only admin access is available.",
       variant: "destructive",
-    })
-  }
+    });
+  };
 
   const handleReverseTransaction = (transactionId: string) => {
     toast({
       title: "Transaction Reversal Initiated",
       description: `Transaction ${transactionId} will be reversed within 2 weeks as per admin privileges.`,
-    })
-  }
+    });
+  };
 
   return (
     <div className="space-y-6">
@@ -105,10 +139,13 @@ function EnhancedAdminControlsContent() {
                     <div key={index} className="bg-muted/30 rounded-lg p-4">
                       <div className="flex items-center justify-between mb-2">
                         <h4 className="font-medium text-sm">{metric.name}</h4>
-                        <Badge className="bg-green-600 text-xs">{metric.status}</Badge>
+                        <Badge className="bg-green-600 text-xs">
+                          {metric.status}
+                        </Badge>
                       </div>
                       <div className="text-xs text-muted-foreground">
-                        Level: <span className="text-green-400">{metric.level}</span>
+                        Level:{" "}
+                        <span className="text-green-400">{metric.level}</span>
                       </div>
                     </div>
                   ))}
@@ -117,21 +154,29 @@ function EnhancedAdminControlsContent() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <label className="text-sm font-medium">Auto Security Updates</label>
-                      <p className="text-xs text-muted-foreground">Automatically update security protocols</p>
+                      <label className="text-sm font-medium">
+                        Auto Security Updates
+                      </label>
+                      <p className="text-xs text-muted-foreground">
+                        Automatically update security protocols
+                      </p>
                     </div>
-                    <Switch 
+                    <Switch
                       checked={autoSecurityUpdates}
                       onCheckedChange={setAutoSecurityUpdates}
                     />
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div>
-                      <label className="text-sm font-medium">Real-time Threat Monitoring</label>
-                      <p className="text-xs text-muted-foreground">Monitor for suspicious activities 24/7</p>
+                      <label className="text-sm font-medium">
+                        Real-time Threat Monitoring
+                      </label>
+                      <p className="text-xs text-muted-foreground">
+                        Monitor for suspicious activities 24/7
+                      </p>
                     </div>
-                    <Switch 
+                    <Switch
                       checked={realTimeMonitoring}
                       onCheckedChange={setRealTimeMonitoring}
                     />
@@ -139,10 +184,14 @@ function EnhancedAdminControlsContent() {
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <label className="text-sm font-medium">Admin-Only Mode</label>
-                      <p className="text-xs text-muted-foreground">Restrict access to admin only</p>
+                      <label className="text-sm font-medium">
+                        Admin-Only Mode
+                      </label>
+                      <p className="text-xs text-muted-foreground">
+                        Restrict access to admin only
+                      </p>
                     </div>
-                    <Switch 
+                    <Switch
                       checked={adminOnlyMode}
                       onCheckedChange={setAdminOnlyMode}
                     />
@@ -164,33 +213,48 @@ function EnhancedAdminControlsContent() {
               </CardHeader>
               <CardContent>
                 <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 mb-6">
-                  <h4 className="font-medium text-yellow-400 mb-2">Admin Privilege: 2-Week Transaction Reversal</h4>
+                  <h4 className="font-medium text-yellow-400 mb-2">
+                    Admin Privilege: 2-Week Transaction Reversal
+                  </h4>
                   <p className="text-sm text-yellow-300">
-                    As admin, you have the exclusive ability to reverse transactions within 2 weeks, 
-                    even after blockchain confirmation. This system is for fraud protection and user security.
+                    As admin, you have the exclusive ability to reverse
+                    transactions within 2 weeks, even after blockchain
+                    confirmation. This system is for fraud protection and user
+                    security.
                   </p>
                 </div>
 
                 <div className="space-y-4">
                   {recentTransactions.map((tx) => (
-                    <div key={tx.id} className="flex items-center justify-between p-4 rounded-lg bg-muted/30">
+                    <div
+                      key={tx.id}
+                      className="flex items-center justify-between p-4 rounded-lg bg-muted/30"
+                    >
                       <div className="flex items-center gap-4">
                         <div>
                           <div className="font-medium">{tx.type}</div>
-                          <div className="text-sm text-muted-foreground">ID: {tx.id}</div>
+                          <div className="text-sm text-muted-foreground">
+                            ID: {tx.id}
+                          </div>
                         </div>
                         <div>
                           <div className="font-medium">{tx.amount}</div>
-                          <div className="text-sm text-muted-foreground">{tx.status}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {tx.status}
+                          </div>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Badge variant={tx.status === 'Completed' ? 'default' : 'secondary'}>
+                        <Badge
+                          variant={
+                            tx.status === "Completed" ? "default" : "secondary"
+                          }
+                        >
                           {tx.status}
                         </Badge>
                         {tx.reversible && (
-                          <Button 
-                            size="sm" 
+                          <Button
+                            size="sm"
                             variant="destructive"
                             onClick={() => handleReverseTransaction(tx.id)}
                           >
@@ -273,22 +337,27 @@ function EnhancedAdminControlsContent() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
-                <h4 className="font-medium text-red-400 mb-2">Emergency Controls</h4>
+                <h4 className="font-medium text-red-400 mb-2">
+                  Emergency Controls
+                </h4>
                 <p className="text-sm text-red-300 mb-4">
-                  These controls should only be used in emergency situations. They will immediately 
-                  affect all users and transactions on the platform.
+                  These controls should only be used in emergency situations.
+                  They will immediately affect all users and transactions on the
+                  platform.
                 </p>
                 <div className="space-y-3">
-                  <Button 
+                  <Button
                     variant="destructive"
                     onClick={handleEmergencyStop}
                     disabled={maintenanceMode}
                     className="w-full"
                   >
-                    {maintenanceMode ? 'Emergency Mode Active' : 'Emergency Stop All Trading'}
+                    {maintenanceMode
+                      ? "Emergency Mode Active"
+                      : "Emergency Stop All Trading"}
                   </Button>
                   {maintenanceMode && (
-                    <Button 
+                    <Button
                       variant="outline"
                       onClick={() => setMaintenanceMode(false)}
                       className="w-full"
@@ -301,10 +370,14 @@ function EnhancedAdminControlsContent() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">Maintenance Mode</label>
-                  <p className="text-xs text-muted-foreground">Block all user access except admin</p>
+                  <label className="text-sm font-medium">
+                    Maintenance Mode
+                  </label>
+                  <p className="text-xs text-muted-foreground">
+                    Block all user access except admin
+                  </p>
                 </div>
-                <Switch 
+                <Switch
                   checked={maintenanceMode}
                   onCheckedChange={setMaintenanceMode}
                 />
@@ -324,8 +397,10 @@ function EnhancedAdminControlsContent() {
             <CardContent className="space-y-6">
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Security Level</label>
-                  <select 
+                  <label className="block text-sm font-medium mb-2">
+                    Security Level
+                  </label>
+                  <select
                     value={securityLevel}
                     onChange={(e) => setSecurityLevel(e.target.value)}
                     className="w-full p-2 rounded-lg bg-muted border border-border"
@@ -338,17 +413,22 @@ function EnhancedAdminControlsContent() {
                 </div>
 
                 <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-                  <h4 className="font-medium text-blue-400 mb-2">Admin Wallet Address</h4>
+                  <h4 className="font-medium text-blue-400 mb-2">
+                    Admin Wallet Address
+                  </h4>
                   <div className="font-mono text-sm bg-muted/50 p-2 rounded break-all">
                     ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7
                   </div>
                   <p className="text-xs text-blue-300 mt-2">
-                    This wallet has full administrative privileges over Gaia's Exchanges
+                    This wallet has full administrative privileges over Gaia's
+                    Exchanges
                   </p>
                 </div>
 
                 <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                  <h4 className="font-medium text-green-400 mb-2">Current Privileges</h4>
+                  <h4 className="font-medium text-green-400 mb-2">
+                    Current Privileges
+                  </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
                     <div className="flex items-center gap-2">
                       <span className="text-green-400">✓</span>
@@ -382,7 +462,7 @@ function EnhancedAdminControlsContent() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
 
 export function EnhancedAdminControls() {
@@ -390,5 +470,5 @@ export function EnhancedAdminControls() {
     <AdminProtectedRoute>
       <EnhancedAdminControlsContent />
     </AdminProtectedRoute>
-  )
+  );
 }

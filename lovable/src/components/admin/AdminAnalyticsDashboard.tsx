@@ -1,8 +1,7 @@
-
-import { AdvancedAnalyticsDashboard } from '@/components/analytics/AdvancedAnalyticsDashboard'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Shield, Eye, Lock } from 'lucide-react'
+import { AdvancedAnalyticsDashboard } from "@/components/analytics/AdvancedAnalyticsDashboard";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Shield, Eye, Lock } from "lucide-react";
 
 export function AdminAnalyticsDashboard() {
   return (
@@ -25,13 +24,14 @@ export function AdminAnalyticsDashboard() {
               <span className="font-bold">COMMUNITY PROTECTION ANALYTICS</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              🔒 Encrypted • 👻 Invisible to malicious software • 🛡️ Admin-only access
+              🔒 Encrypted • 👻 Invisible to malicious software • 🛡️ Admin-only
+              access
             </p>
           </div>
         </CardContent>
       </Card>
-      
+
       <AdvancedAnalyticsDashboard />
     </div>
-  )
+  );
 }

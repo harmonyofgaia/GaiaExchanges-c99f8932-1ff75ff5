@@ -1,153 +1,133 @@
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
-import { useState, useEffect } from 'react'
+// Safe useAuth that handles missing AuthProvider
+function useSafeAuth() {
+  try {
+    const { useAuth } = require("@/components/auth/AuthProvider");
+    return useAuth();
+  } catch (error) {
+    // Return null user if AuthProvider is not available
+    return { user: null };
+  }
+}
 
 interface AdminSession {
-  id: string
-  timestamp: number
-  ip?: string
+  id: string;
+  timestamp: number;
+  level?: string;
 }
 
 export function useSecureAdmin() {
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [adminSession, setAdminSession] = useState<AdminSession | null>(null)
-  const [isValidating, setIsValidating] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminSession, setAdminSession] = useState<AdminSession | null>(null);
+  const [isValidating, setIsValidating] = useState(true);
+  const { user } = useSafeAuth();
 
   useEffect(() => {
-    validateAdminSession()
-  }, [])
+    if (user) {
+      validateAdminSession();
+    } else {
+      setIsAdmin(false);
+      setAdminSession(null);
+      setIsValidating(false);
+    }
+  }, [user]);
 
-  const validateAdminSession = () => {
+  const validateAdminSession = async () => {
+    if (!user) {
+      setIsValidating(false);
+      return;
+    }
+
     try {
-      // Check both new optimized keys and old keys for backward compatibility
-      const newSession = localStorage.getItem('gaia-admin') || sessionStorage.getItem('gaia-admin')
-      const oldSession = localStorage.getItem('gaia-admin-session')
-      const adminActive = sessionStorage.getItem('admin-active')
-      
-      let sessionData = null
-      
-      // Try new format first
-      if (newSession) {
-        try {
-          sessionData = JSON.parse(newSession)
-        } catch (e) {
-          // Invalid JSON, clear it
-          localStorage.removeItem('gaia-admin')
-          sessionStorage.removeItem('gaia-admin')
-        }
-      }
-      
-      // Fallback to old format
-      if (!sessionData && oldSession) {
-        const sessionExpiry = localStorage.getItem('gaia-admin-expiry')
-        if (sessionExpiry) {
-          const now = Date.now()
-          const expiry = parseInt(sessionExpiry)
-          
-          if (now < expiry) {
-            sessionData = { id: oldSession, ts: now, active: true }
-          }
-        }
-      }
-      
-      // Check if session is valid
-      if (sessionData && (adminActive === '1' || adminActive === 'true')) {
-        // Session is valid
-        setIsAdmin(true)
+      // Check if user has admin account in database  
+      const { data: adminAccount, error } = await supabase
+        .from('admin_users')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('is_active', true)
+        .maybeSingle();
+
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error checking admin status:', error);
+        setIsAdmin(false);
+        setAdminSession(null);
+      } else if (adminAccount) {
+        setIsAdmin(true);
         setAdminSession({
-          id: sessionData.id,
-          timestamp: sessionData.ts || Date.now()
-        })
+          id: adminAccount.user_id,
+          timestamp: Date.now(),
+          level: 'admin',
+        });
       } else {
-        // No valid session
-        revokeAdminAccess()
+        setIsAdmin(false);
+        setAdminSession(null);
       }
     } catch (error) {
-      console.error('Error validating admin session:', error)
-      revokeAdminAccess()
+      console.error('Error validating admin session:', error);
+      setIsAdmin(false);
+      setAdminSession(null);
     } finally {
-      setIsValidating(false)
+      setIsValidating(false);
     }
-  }
+  };
 
-  const grantAdminAccess = (): boolean => {
+  const grantAdminAccess = async (): Promise<boolean> => {
+    if (!user) return false;
+
     try {
-      // Check if another admin session exists (both new and old formats)
-      const newSession = localStorage.getItem('gaia-admin') || sessionStorage.getItem('gaia-admin')
-      const oldSession = localStorage.getItem('gaia-admin-session')
+      // Create a secure session token
+      const sessionToken = `session-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
       
-      if (newSession || oldSession) {
-        // Check if existing session is still valid
-        const adminActive = sessionStorage.getItem('admin-active')
-        if (adminActive === '1' || adminActive === 'true') {
-          return false // Another admin already logged in
-        }
+      // Create admin session record
+      const { error } = await supabase
+        .from('admin_sessions')
+        .insert([
+          {
+            session_token: sessionToken,
+            ip_address: '127.0.0.1', // Would be real IP in production
+            user_agent: navigator.userAgent,
+          }
+        ]);
+
+      if (error) {
+        console.error('Error creating admin session:', error);
+        return false;
       }
 
-      // Create new optimized admin session
-      const sessionId = `admin-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-      const sessionData = {
-        id: sessionId,
-        ts: Date.now(),
-        active: true
-      }
-      
-      // Try localStorage first, fallback to sessionStorage
-      try {
-        localStorage.setItem('gaia-admin', JSON.stringify(sessionData))
-      } catch (storageError) {
-        console.warn('LocalStorage full, using sessionStorage for admin session')
-        sessionStorage.setItem('gaia-admin', JSON.stringify(sessionData))
-      }
-      
-      sessionStorage.setItem('admin-active', '1')
-      
-      setIsAdmin(true)
-      setAdminSession({
-        id: sessionId,
-        timestamp: Date.now()
-      })
-      
-      return true
+      await validateAdminSession();
+      return true;
     } catch (error) {
-      console.error('Error granting admin access:', error)
-      return false
+      console.error('Error granting admin access:', error);
+      return false;
     }
-  }
+  };
 
-  const revokeAdminAccess = () => {
-    // Clear both new and old session formats
-    localStorage.removeItem('gaia-admin')
-    localStorage.removeItem('gaia-admin-session')
-    localStorage.removeItem('gaia-admin-expiry')
-    sessionStorage.removeItem('gaia-admin')
-    sessionStorage.removeItem('admin-active')
-    sessionStorage.removeItem('admin-hb')
-    setIsAdmin(false)
-    setAdminSession(null)
-  }
+  const revokeAdminAccess = async () => {
+    if (!user || !adminSession) return;
 
-  const extendSession = () => {
-    if (isAdmin && adminSession) {
-      try {
-        const sessionData = {
-          id: adminSession.id,
-          ts: Date.now(),
-          active: true
-        }
-        
-        // Try to update localStorage, fallback to sessionStorage
-        try {
-          localStorage.setItem('gaia-admin', JSON.stringify(sessionData))
-        } catch (e) {
-          sessionStorage.setItem('gaia-admin', JSON.stringify(sessionData))
-        }
-        
-        sessionStorage.setItem('admin-active', '1')
-      } catch (error) {
-        console.error('Error extending session:', error)
-      }
+    try {
+      // Clear admin session data - no need to update database in this simplified version
+      console.log("Admin session revoked");
+    } catch (error) {
+      console.error('Error revoking admin access:', error);
     }
-  }
+
+    setIsAdmin(false);
+    setAdminSession(null);
+  };
+
+  const extendSession = async () => {
+    if (!user || !isAdmin) return;
+
+    try {
+      // Session extended - log for now in simplified version
+      console.log("Admin session extended");
+    } catch (error) {
+      console.error('Error extending session:', error);
+    }
+  };
 
   return {
     isAdmin,
@@ -156,6 +136,6 @@ export function useSecureAdmin() {
     grantAdminAccess,
     revokeAdminAccess,
     extendSession,
-    validateAdminSession
-  }
+    validateAdminSession,
+  };
 }

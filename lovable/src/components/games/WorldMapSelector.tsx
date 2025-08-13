@@ -1,59 +1,135 @@
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Globe, MapPin, Shield, Users, Lock } from 'lucide-react'
-import { toast } from 'sonner'
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Globe, MapPin, Shield, Users, Lock } from "lucide-react";
+import { toast } from "sonner";
 
 interface Location {
-  id: string
-  city: string
-  country: string
-  lat: number
-  lng: number
-  players: number
-  securityLevel: number
-  chatrooms: number
+  id: string;
+  city: string;
+  country: string;
+  lat: number;
+  lng: number;
+  players: number;
+  securityLevel: number;
+  chatrooms: number;
 }
 
 interface WorldMapProps {
-  selectedLocation: Location | null
-  setSelectedLocation: (location: Location) => void
-  playerData: any
-  isAdmin: boolean
+  selectedLocation: Location | null;
+  setSelectedLocation: (location: Location) => void;
+  playerData: any;
+  isAdmin: boolean;
 }
 
-export function WorldMapSelector({ selectedLocation, setSelectedLocation, playerData, isAdmin }: WorldMapProps) {
+export function WorldMapSelector({
+  selectedLocation,
+  setSelectedLocation,
+  playerData,
+  isAdmin,
+}: WorldMapProps) {
   const [locations] = useState<Location[]>([
-    { id: '1', city: 'Tokyo', country: 'Japan', lat: 35.6762, lng: 139.6503, players: 2543, securityLevel: 100, chatrooms: 15 },
-    { id: '2', city: 'New York', country: 'USA', lat: 40.7128, lng: -74.0060, players: 3421, securityLevel: 100, chatrooms: 22 },
-    { id: '3', city: 'London', country: 'UK', lat: 51.5074, lng: -0.1278, players: 1876, securityLevel: 100, chatrooms: 18 },
-    { id: '4', city: 'Paris', country: 'France', lat: 48.8566, lng: 2.3522, players: 1654, securityLevel: 100, chatrooms: 12 },
-    { id: '5', city: 'Berlin', country: 'Germany', lat: 52.5200, lng: 13.4050, players: 1432, securityLevel: 100, chatrooms: 14 },
-    { id: '6', city: 'Sydney', country: 'Australia', lat: -33.8688, lng: 151.2093, players: 987, securityLevel: 100, chatrooms: 8 },
-    { id: '7', city: 'Dubai', country: 'UAE', lat: 25.2048, lng: 55.2708, players: 1234, securityLevel: 100, chatrooms: 10 },
-    { id: '8', city: 'São Paulo', country: 'Brazil', lat: -23.5505, lng: -46.6333, players: 1567, securityLevel: 100, chatrooms: 11 }
-  ])
+    {
+      id: "1",
+      city: "Tokyo",
+      country: "Japan",
+      lat: 35.6762,
+      lng: 139.6503,
+      players: 2543,
+      securityLevel: 100,
+      chatrooms: 15,
+    },
+    {
+      id: "2",
+      city: "New York",
+      country: "USA",
+      lat: 40.7128,
+      lng: -74.006,
+      players: 3421,
+      securityLevel: 100,
+      chatrooms: 22,
+    },
+    {
+      id: "3",
+      city: "London",
+      country: "UK",
+      lat: 51.5074,
+      lng: -0.1278,
+      players: 1876,
+      securityLevel: 100,
+      chatrooms: 18,
+    },
+    {
+      id: "4",
+      city: "Paris",
+      country: "France",
+      lat: 48.8566,
+      lng: 2.3522,
+      players: 1654,
+      securityLevel: 100,
+      chatrooms: 12,
+    },
+    {
+      id: "5",
+      city: "Berlin",
+      country: "Germany",
+      lat: 52.52,
+      lng: 13.405,
+      players: 1432,
+      securityLevel: 100,
+      chatrooms: 14,
+    },
+    {
+      id: "6",
+      city: "Sydney",
+      country: "Australia",
+      lat: -33.8688,
+      lng: 151.2093,
+      players: 987,
+      securityLevel: 100,
+      chatrooms: 8,
+    },
+    {
+      id: "7",
+      city: "Dubai",
+      country: "UAE",
+      lat: 25.2048,
+      lng: 55.2708,
+      players: 1234,
+      securityLevel: 100,
+      chatrooms: 10,
+    },
+    {
+      id: "8",
+      city: "São Paulo",
+      country: "Brazil",
+      lat: -23.5505,
+      lng: -46.6333,
+      players: 1567,
+      securityLevel: 100,
+      chatrooms: 11,
+    },
+  ]);
 
   const [globalStats] = useState({
     totalPlayers: 15847,
     activeChatrooms: 156,
     securedLocations: 247,
-    quantumEncryption: 100
-  })
+    quantumEncryption: 100,
+  });
 
   const selectLocation = (location: Location) => {
-    setSelectedLocation(location)
-    console.log(`🌍 LOCATION SELECTED: ${location.city}, ${location.country}`)
-    console.log(`🛡️ QUANTUM SECURITY LEVEL: ${location.securityLevel}%`)
-    console.log(`👥 ACTIVE PLAYERS: ${location.players}`)
-    
+    setSelectedLocation(location);
+    console.log(`🌍 LOCATION SELECTED: ${location.city}, ${location.country}`);
+    console.log(`🛡️ QUANTUM SECURITY LEVEL: ${location.securityLevel}%`);
+    console.log(`👥 ACTIVE PLAYERS: ${location.players}`);
+
     toast.success(`🌍 Location Selected: ${location.city}!`, {
       description: `${location.players} players online - Security Level: ${location.securityLevel}%`,
-      duration: 3000
-    })
-  }
+      duration: 3000,
+    });
+  };
 
   return (
     <div className="space-y-6">
@@ -83,12 +159,12 @@ export function WorldMapSelector({ selectedLocation, setSelectedLocation, player
       {/* World Map Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {locations.map((location) => (
-          <Card 
-            key={location.id} 
+          <Card
+            key={location.id}
             className={`cursor-pointer transition-all hover:scale-105 ${
-              selectedLocation?.id === location.id 
-                ? 'bg-gradient-to-r from-green-900/50 to-blue-900/50 border-green-500' 
-                : 'bg-black/30 border-gray-500/30'
+              selectedLocation?.id === location.id
+                ? "bg-gradient-to-r from-green-900/50 to-blue-900/50 border-green-500"
+                : "bg-black/30 border-gray-500/30"
             }`}
             onClick={() => selectLocation(location)}
           >
@@ -96,9 +172,11 @@ export function WorldMapSelector({ selectedLocation, setSelectedLocation, player
               <div className="text-center mb-3">
                 <div className="text-2xl mb-2">🌍</div>
                 <h3 className="font-bold text-lg">{location.city}</h3>
-                <p className="text-sm text-muted-foreground">{location.country}</p>
+                <p className="text-sm text-muted-foreground">
+                  {location.country}
+                </p>
               </div>
-              
+
               <div className="space-y-2 text-xs">
                 <div className="flex justify-between">
                   <span>👥 Players:</span>
@@ -110,13 +188,23 @@ export function WorldMapSelector({ selectedLocation, setSelectedLocation, player
                 </div>
                 <div className="flex justify-between">
                   <span>🛡️ Security:</span>
-                  <span className="text-purple-400">{location.securityLevel}%</span>
+                  <span className="text-purple-400">
+                    {location.securityLevel}%
+                  </span>
                 </div>
               </div>
-              
+
               <div className="mt-3 flex justify-center">
-                <Badge className={selectedLocation?.id === location.id ? "bg-green-600" : "bg-gray-600"}>
-                  {selectedLocation?.id === location.id ? "✅ Selected" : "📍 Select"}
+                <Badge
+                  className={
+                    selectedLocation?.id === location.id
+                      ? "bg-green-600"
+                      : "bg-gray-600"
+                  }
+                >
+                  {selectedLocation?.id === location.id
+                    ? "✅ Selected"
+                    : "📍 Select"}
                 </Badge>
               </div>
             </CardContent>
@@ -130,44 +218,63 @@ export function WorldMapSelector({ selectedLocation, setSelectedLocation, player
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-green-400">
               <MapPin className="h-6 w-6" />
-              📍 Selected Location: {selectedLocation.city}, {selectedLocation.country}
+              📍 Selected Location: {selectedLocation.city},{" "}
+              {selectedLocation.country}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center p-4 bg-green-900/30 rounded-lg">
                 <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-green-400">{selectedLocation.players}</div>
-                <div className="text-sm text-muted-foreground">Online Players</div>
+                <div className="text-2xl font-bold text-green-400">
+                  {selectedLocation.players}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Online Players
+                </div>
               </div>
-              
+
               <div className="text-center p-4 bg-blue-900/30 rounded-lg">
                 <Shield className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-blue-400">{selectedLocation.securityLevel}%</div>
-                <div className="text-sm text-muted-foreground">Security Level</div>
+                <div className="text-2xl font-bold text-blue-400">
+                  {selectedLocation.securityLevel}%
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Security Level
+                </div>
               </div>
-              
+
               <div className="text-center p-4 bg-purple-900/30 rounded-lg">
                 <Lock className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-purple-400">{selectedLocation.chatrooms}</div>
-                <div className="text-sm text-muted-foreground">Private Chatrooms</div>
+                <div className="text-2xl font-bold text-purple-400">
+                  {selectedLocation.chatrooms}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Private Chatrooms
+                </div>
               </div>
             </div>
-            
+
             <div className="mt-4 p-4 bg-black/30 rounded-lg border border-green-500/20">
-              <h4 className="text-lg font-bold text-green-400 mb-2">🔒 QUANTUM SECURITY FEATURES</h4>
+              <h4 className="text-lg font-bold text-green-400 mb-2">
+                🔒 QUANTUM SECURITY FEATURES
+              </h4>
               <div className="text-sm text-muted-foreground space-y-1">
                 <div>✅ End-to-end quantum encryption</div>
                 <div>✅ Zero-trace communication protocols</div>
                 <div>✅ AI-powered threat detection</div>
                 <div>✅ Parabolic universe protection</div>
                 <div>✅ Admin-only monitoring capabilities</div>
-                {isAdmin && <div className="text-red-400">👑 Admin: Full surveillance access enabled</div>}
+                {isAdmin && (
+                  <div className="text-red-400">
+                    👑 Admin: Full surveillance access enabled
+                  </div>
+                )}
               </div>
             </div>
           </CardContent>
         </Card>
       )}
     </div>
-  )
+  );
 }

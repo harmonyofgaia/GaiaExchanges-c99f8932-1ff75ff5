@@ -1,96 +1,95 @@
-
-import { useEffect, useState, useRef } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Volume2, VolumeX, Play, Pause, X } from 'lucide-react'
+import { useEffect, useState, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Volume2, VolumeX, Play, Pause, X } from "lucide-react";
 
 interface MediaPreferences {
-  enabled: boolean
-  volume: number
-  autoplay: boolean
+  enabled: boolean;
+  volume: number;
+  autoplay: boolean;
 }
 
 export function BackgroundMediaEngine() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isMuted, setIsMuted] = useState(false)
-  const [currentMedia, setCurrentMedia] = useState<any>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [currentMedia, setCurrentMedia] = useState<any>(null);
   const [preferences, setPreferences] = useState<MediaPreferences>({
     enabled: false,
     volume: 0.3,
-    autoplay: false
-  })
-  
-  const audioRef = useRef<HTMLAudioElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
+    autoplay: false,
+  });
+
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     // Check for active background media set by admin
-    const activeMediaId = localStorage.getItem('activeBackgroundMedia')
-    const activeMediaData = localStorage.getItem('activeBackgroundMediaData')
-    
+    const activeMediaId = localStorage.getItem("activeBackgroundMedia");
+    const activeMediaData = localStorage.getItem("activeBackgroundMediaData");
+
     if (activeMediaId && activeMediaData) {
-      const mediaData = JSON.parse(activeMediaData)
-      setCurrentMedia(mediaData)
-      
+      const mediaData = JSON.parse(activeMediaData);
+      setCurrentMedia(mediaData);
+
       // Show media preferences dialog if not set
-      const userPrefs = localStorage.getItem('gaiaMediaPreferences')
+      const userPrefs = localStorage.getItem("gaiaMediaPreferences");
       if (!userPrefs) {
-        setIsVisible(true)
+        setIsVisible(true);
       } else {
-        const prefs = JSON.parse(userPrefs)
-        setPreferences(prefs)
+        const prefs = JSON.parse(userPrefs);
+        setPreferences(prefs);
         if (prefs.enabled && prefs.autoplay) {
-          playMedia()
+          playMedia();
         }
       }
     }
-  }, [])
+  }, []);
 
   const playMedia = () => {
-    if (!currentMedia) return
-    
-    if (currentMedia.type === 'video' && videoRef.current) {
-      videoRef.current.volume = preferences.volume
-      videoRef.current.play()
-      setIsPlaying(true)
-    } else if (currentMedia.type === 'audio' && audioRef.current) {
-      audioRef.current.volume = preferences.volume
-      audioRef.current.play()
-      setIsPlaying(true)
+    if (!currentMedia) return;
+
+    if (currentMedia.type === "video" && videoRef.current) {
+      videoRef.current.volume = preferences.volume;
+      videoRef.current.play();
+      setIsPlaying(true);
+    } else if (currentMedia.type === "audio" && audioRef.current) {
+      audioRef.current.volume = preferences.volume;
+      audioRef.current.play();
+      setIsPlaying(true);
     }
-  }
+  };
 
   const pauseMedia = () => {
-    if (videoRef.current) videoRef.current.pause()
-    if (audioRef.current) audioRef.current.pause()
-    setIsPlaying(false)
-  }
+    if (videoRef.current) videoRef.current.pause();
+    if (audioRef.current) audioRef.current.pause();
+    setIsPlaying(false);
+  };
 
   const toggleMute = () => {
-    const newMuted = !isMuted
-    setIsMuted(newMuted)
-    
-    if (videoRef.current) videoRef.current.muted = newMuted
-    if (audioRef.current) audioRef.current.muted = newMuted
-  }
+    const newMuted = !isMuted;
+    setIsMuted(newMuted);
+
+    if (videoRef.current) videoRef.current.muted = newMuted;
+    if (audioRef.current) audioRef.current.muted = newMuted;
+  };
 
   const acceptMediaExperience = () => {
-    const newPrefs = { ...preferences, enabled: true, autoplay: true }
-    setPreferences(newPrefs)
-    localStorage.setItem('gaiaMediaPreferences', JSON.stringify(newPrefs))
-    setIsVisible(false)
-    playMedia()
-  }
+    const newPrefs = { ...preferences, enabled: true, autoplay: true };
+    setPreferences(newPrefs);
+    localStorage.setItem("gaiaMediaPreferences", JSON.stringify(newPrefs));
+    setIsVisible(false);
+    playMedia();
+  };
 
   const declineMediaExperience = () => {
-    const newPrefs = { ...preferences, enabled: false, autoplay: false }
-    setPreferences(newPrefs)
-    localStorage.setItem('gaiaMediaPreferences', JSON.stringify(newPrefs))
-    setIsVisible(false)
-  }
+    const newPrefs = { ...preferences, enabled: false, autoplay: false };
+    setPreferences(newPrefs);
+    localStorage.setItem("gaiaMediaPreferences", JSON.stringify(newPrefs));
+    setIsVisible(false);
+  };
 
-  if (!currentMedia) return null
+  if (!currentMedia) return null;
 
   return (
     <>
@@ -105,26 +104,28 @@ export function BackgroundMediaEngine() {
                   Experience Gaia's Harmony
                 </h3>
                 <p className="text-muted-foreground text-sm">
-                  We've prepared a special {currentMedia.type} experience to enhance your journey. 
-                  Would you like to enable background media?
+                  We've prepared a special {currentMedia.type} experience to
+                  enhance your journey. Would you like to enable background
+                  media?
                 </p>
               </div>
-              
+
               <div className="bg-black/20 rounded-lg p-3 mb-4">
                 <div className="text-sm text-green-300">
-                  Now Playing: <span className="font-semibold">{currentMedia.name}</span>
+                  Now Playing:{" "}
+                  <span className="font-semibold">{currentMedia.name}</span>
                 </div>
               </div>
-              
+
               <div className="flex gap-3">
-                <Button 
+                <Button
                   onClick={acceptMediaExperience}
                   className="flex-1 bg-green-600 hover:bg-green-700 text-white"
                 >
                   <Play className="h-4 w-4 mr-2" />
                   Yes, Immerse Me
                 </Button>
-                <Button 
+                <Button
                   onClick={declineMediaExperience}
                   variant="outline"
                   className="flex-1"
@@ -132,7 +133,7 @@ export function BackgroundMediaEngine() {
                   No Thanks
                 </Button>
               </div>
-              
+
               <p className="text-xs text-muted-foreground mt-3">
                 You can change this preference anytime in settings
               </p>
@@ -157,7 +158,11 @@ export function BackgroundMediaEngine() {
                     onClick={isPlaying ? pauseMedia : playMedia}
                     className="h-8 w-8 p-0 text-green-400 hover:text-green-300"
                   >
-                    {isPlaying ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
+                    {isPlaying ? (
+                      <Pause className="h-3 w-3" />
+                    ) : (
+                      <Play className="h-3 w-3" />
+                    )}
                   </Button>
                   <Button
                     size="sm"
@@ -165,12 +170,18 @@ export function BackgroundMediaEngine() {
                     onClick={toggleMute}
                     className="h-8 w-8 p-0 text-green-400 hover:text-green-300"
                   >
-                    {isMuted ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
+                    {isMuted ? (
+                      <VolumeX className="h-3 w-3" />
+                    ) : (
+                      <Volume2 className="h-3 w-3" />
+                    )}
                   </Button>
                   <Button
                     size="sm"
                     variant="ghost"
-                    onClick={() => setPreferences({...preferences, enabled: false})}
+                    onClick={() =>
+                      setPreferences({ ...preferences, enabled: false })
+                    }
                     className="h-8 w-8 p-0 text-red-400 hover:text-red-300"
                   >
                     <X className="h-3 w-3" />
@@ -183,7 +194,7 @@ export function BackgroundMediaEngine() {
       )}
 
       {/* Hidden Media Elements */}
-      {currentMedia?.type === 'audio' && (
+      {currentMedia?.type === "audio" && (
         <audio
           ref={audioRef}
           src={currentMedia.url}
@@ -193,8 +204,8 @@ export function BackgroundMediaEngine() {
           onEnded={() => setIsPlaying(false)}
         />
       )}
-      
-      {currentMedia?.type === 'video' && (
+
+      {currentMedia?.type === "video" && (
         <video
           ref={videoRef}
           src={currentMedia.url}
@@ -207,5 +218,5 @@ export function BackgroundMediaEngine() {
         />
       )}
     </>
-  )
+  );
 }
