@@ -1,0 +1,7 @@
+/* Styles for LiveStatsPanel */
+.panel {
+  background: #222;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}

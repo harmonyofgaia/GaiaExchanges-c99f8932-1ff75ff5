@@ -47,7 +47,7 @@ interface WeaponizedHoneypot {
     | "attacker_tracking"
     | "system_infection";
   attackersTrapped: number;
-  dataCollected: any[];
+  dataCollected: Record<string, unknown>[];
   isActive: boolean;
 }
 
@@ -271,7 +271,11 @@ class WeaponizedCounterAttackService {
     return reversal;
   }
 
-  private async generateReversalStrategy(attack: any): Promise<string> {
+  private async generateReversalStrategy(attack: {
+    type: "phishing" | "pretexting" | "baiting" | "quid_pro_quo";
+    source: string;
+    content: string;
+  }): Promise<string> {
     const strategies = {
       phishing: "Counter-phishing with attacker intelligence gathering",
       pretexting: "Reverse pretexting to expose attacker identity",
@@ -285,7 +289,11 @@ class WeaponizedCounterAttackService {
     );
   }
 
-  private async createReversalContent(attack: any): Promise<string> {
+  private async createReversalContent(attack: {
+    type: "phishing" | "pretexting" | "baiting" | "quid_pro_quo";
+    source: string;
+    content: string;
+  }): Promise<string> {
     // Generate convincing counter-content
     const templates = {
       phishing:
@@ -415,8 +423,8 @@ class WeaponizedCounterAttackService {
     if (!this.autoRetaliationEnabled) return;
 
     // Determine counter-attack type based on threat
-    let counterAttackType: any = "ddos_reflection";
-    let intensity: any = "moderate";
+  let counterAttackType: CounterAttack["attackType"] = "ddos_reflection";
+  let intensity: CounterAttack["intensity"] = "moderate";
 
     if (threatData.severity > 0.8) {
       counterAttackType = "quantum_retaliation";

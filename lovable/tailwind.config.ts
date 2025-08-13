@@ -9,6 +9,14 @@ const config: Config = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
+  safelist: [
+    "bg-background",
+    "bg-background/30",
+    "bg-background/50",
+    "bg-background/80",
+    "bg-background/90",
+    "bg-background/95"
+  ],
   prefix: "",
   theme: {
     container: {

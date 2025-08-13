@@ -38,7 +38,7 @@ interface EcoMission {
   tokens_reward: number;
   carbon_impact: number;
   status: string;
-  completion_data: any;
+  completion_data: Record<string, unknown>;
   created_at: string;
   completed_at: string | null;
   ai_generated?: boolean;
@@ -51,7 +51,7 @@ interface EcoMission {
 
 interface AIGenerationParams {
   userLocation: string;
-  environmentalData: any;
+  environmentalData: Record<string, unknown>;
   userPreferences: string[];
   seasonality: string;
   communityNeeds: string[];
@@ -81,7 +81,13 @@ export default function EcoMissionGenerator() {
     aiAccuracy: 94.7,
     optimalWeather: true,
   });
-  const [aiInsights, setAiInsights] = useState<any[]>([]);
+  interface AIInsight {
+    type: string;
+    message: string;
+    confidence: number;
+    action: string;
+  }
+  const [aiInsights, setAiInsights] = useState<AIInsight[]>([]);
 
   useEffect(() => {
     if (user) {

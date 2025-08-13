@@ -1,3 +1,11 @@
+interface FeatureToggle {
+  id: string;
+  feature_name: string;
+  feature_description?: string;
+  category: string;
+  admin_only?: boolean;
+  is_enabled: boolean;
+}
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -124,7 +132,7 @@ export default function TaskReverser() {
   };
 
   const getCategoryIcon = (category: string) => {
-    const icons: Record<string, any> = {
+  const icons: Record<string, React.ElementType> = {
       admin: Shield,
       ai: Zap,
       general: Settings,
@@ -142,7 +150,7 @@ export default function TaskReverser() {
         acc[feature.category].push(feature);
         return acc;
       },
-      {} as Record<string, any[]>,
+  {} as Record<string, unknown[]>,
     ) || {};
 
   if (!user) {
@@ -192,7 +200,7 @@ export default function TaskReverser() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid gap-4">
-                    {categoryFeatures.map((feature) => (
+                    {(categoryFeatures as FeatureToggle[]).map((feature) => (
                       <div
                         key={feature.id}
                         className="flex items-center justify-between p-4 bg-black/40 rounded-lg"
@@ -290,7 +298,7 @@ export default function TaskReverser() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="category">Category</Label>
-                  <select
+                  <select title="Feature Category"
                     id="category"
                     value={newFeature.category}
                     onChange={(e) =>

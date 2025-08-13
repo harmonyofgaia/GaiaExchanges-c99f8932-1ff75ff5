@@ -157,6 +157,10 @@
     --input: 200 30% 28%;
     --ring: 190 80% 55%;
   }
+
+:root {
+  --background: 0 0% 100%; /* Default background color, adjust as needed */
+}
 }
 
 @layer base {

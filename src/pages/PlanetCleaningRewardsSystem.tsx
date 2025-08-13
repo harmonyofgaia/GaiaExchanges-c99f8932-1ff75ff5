@@ -1,4 +1,8 @@
-import { useState, useEffect } from "react";
+type CleaningRewardRaw = Omit<CleaningReward, 'location_data' | 'environmental_impact'> & {
+  location_data: any;
+  environmental_impact: any;
+};
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -38,14 +42,14 @@ interface CleaningReward {
   id: string;
   user_id: string;
   activity_type: string;
-  location_data: any;
+  location_data: Record<string, unknown>;
   verification_method: string;
   tokens_earned: number;
-  environmental_impact: any;
+  environmental_impact: Record<string, unknown>;
   verified_at: string | null;
   created_at: string;
   satellite_verified?: boolean;
-  iot_sensor_data?: any;
+  iot_sensor_data?: Record<string, unknown>;
   blockchain_hash?: string;
   community_validation_score?: number;
   real_time_tracking?: boolean;
@@ -94,6 +98,32 @@ export default function PlanetCleaningRewardsSystem() {
     blockchainTransactions: 89432,
   });
 
+  const loadRewards = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from("planet_cleaning_rewards")
+        .select("*")
+        .eq("user_id", user!.id)
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      setRewards((data || []).map((reward: CleaningRewardRaw) => ({
+        ...reward,
+        location_data: typeof reward.location_data === 'string'
+          ? JSON.parse(reward.location_data)
+          : reward.location_data,
+        environmental_impact: typeof reward.environmental_impact === 'string'
+          ? JSON.parse(reward.environmental_impact)
+          : reward.environmental_impact,
+      })));
+    } catch (error) {
+      console.error("Error loading rewards:", error);
+      toast.error("Failed to load cleaning rewards");
+    } finally {
+      setLoading(false);
+    }
+  }, [user]);
+
   useEffect(() => {
     if (user) {
       loadRewards();
@@ -101,7 +131,7 @@ export default function PlanetCleaningRewardsSystem() {
       loadIoTReadings();
       loadGlobalMetrics();
     }
-  }, [user]);
+  }, [user, loadRewards]);
 
   const loadSatelliteData = async () => {
     // Mock satellite verification data
@@ -167,25 +197,9 @@ export default function PlanetCleaningRewardsSystem() {
     if (user) {
       loadRewards();
     }
-  }, [user]);
+  }, [user, loadRewards]);
 
-  const loadRewards = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("planet_cleaning_rewards")
-        .select("*")
-        .eq("user_id", user!.id)
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-      setRewards(data || []);
-    } catch (error) {
-      console.error("Error loading rewards:", error);
-      toast.error("Failed to load cleaning rewards");
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Duplicate loadRewards removed. Main loadRewards is above and will be refactored.
 
   const submitCleaningActivity = async () => {
     if (!user) {
@@ -731,7 +745,7 @@ export default function PlanetCleaningRewardsSystem() {
                             .replace(/\b\w/g, (l) => l.toUpperCase())}
                         </h4>
                         <p className="text-sm text-muted-foreground">
-                          {reward.location_data?.location || "Unknown location"}
+                          {typeof reward.location_data?.location === 'string' ? reward.location_data.location : Array.isArray(reward.location_data?.location) ? reward.location_data.location.join(', ') : JSON.stringify(reward.location_data?.location) || "Unknown location"}
                         </p>
                         <div className="flex items-center gap-2 mt-1">
                           <MapPin className="h-3 w-3 text-muted-foreground" />

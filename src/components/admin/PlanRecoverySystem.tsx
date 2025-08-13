@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -53,13 +53,7 @@ function PlanRecoverySystem() {
     implemented: 0,
   });
 
-  useEffect(() => {
-    // Initialize and start 24/7 monitoring
-    initializePlanRecovery();
-    startRealTimeMonitoring();
-  }, []);
-
-  const initializePlanRecovery = async () => {
+  const initializePlanRecovery = useCallback(async () => {
     setIsScanning(true);
     toast.success("🚀 Initializing Plan Recovery System...", {
       description: "Scanning GitHub repository and conversation history",
@@ -82,7 +76,25 @@ function PlanRecoverySystem() {
     } finally {
       setIsScanning(false);
     }
-  };
+  }, [plans]);
+
+  const startRealTimeMonitoring = useCallback(() => {
+    // Start 24/7 monitoring
+    const interval = setInterval(() => {
+      setLastUpdate(new Date());
+      // Check for new commits, PRs, etc.
+      checkForUpdates();
+    }, 60000); // Check every minute
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    // Initialize and start 24/7 monitoring
+    initializePlanRecovery();
+    startRealTimeMonitoring();
+  }, [initializePlanRecovery, startRealTimeMonitoring]);
+
 
   const scanGitHubRepository = async () => {
     // Simulate GitHub API integration
@@ -195,16 +207,6 @@ function PlanRecoverySystem() {
     setPlans((prevPlans) => [...prevPlans, ...hiddenIdeas]);
   };
 
-  const startRealTimeMonitoring = () => {
-    // Start 24/7 monitoring
-    const interval = setInterval(() => {
-      setLastUpdate(new Date());
-      // Check for new commits, PRs, etc.
-      checkForUpdates();
-    }, 60000); // Check every minute
-
-    return () => clearInterval(interval);
-  };
 
   const checkForUpdates = async () => {
     // Simulate real-time updates

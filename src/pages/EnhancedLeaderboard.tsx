@@ -120,7 +120,7 @@ export default function EnhancedLeaderboard() {
 
         <Tabs
           value={timeFrame}
-          onValueChange={(value) => setTimeFrame(value as any)}
+          onValueChange={(value) => setTimeFrame(value as typeof timeFrame)}
           className="w-full"
         >
           <TabsList className="grid w-full grid-cols-3 mb-8">
