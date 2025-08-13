@@ -8,88 +8,88 @@ Write-Host "🩺 GaiaExchanges Deployment Doctor - Diagnosing Issues..." -Foregr
 $ISSUES_FOUND = 0
 $WARNINGS_FOUND = 0
 
-function Print-Header($msg) {
+function Write-Header($msg) {
     Write-Host "\n==================== $msg ====================" -ForegroundColor Blue
 }
-function Print-Success($msg) {
+function Write-Success($msg) {
     Write-Host "✅ GOOD: $msg" -ForegroundColor Green
 }
-function Print-Warning($msg) {
+function Write-WarningMsg($msg) {
     Write-Host "⚠️  WARNING: $msg" -ForegroundColor Yellow
     $global:WARNINGS_FOUND++
 }
-function Print-Issue($msg) {
+function Write-Issue($msg) {
     Write-Host "❌ ISSUE: $msg" -ForegroundColor Red
     $global:ISSUES_FOUND++
 }
-function Print-Solution($msg) {
+function Write-Solution($msg) {
     Write-Host "💡 SOLUTION: $msg" -ForegroundColor Magenta
 }
 
-Print-Header "ENVIRONMENT ANALYSIS"
+Write-Header "ENVIRONMENT ANALYSIS"
 
 # Node.js version
 $nodeVersion = node --version 2>$null
 if ($LASTEXITCODE -eq 0) {
     Write-Host "Node.js version: $nodeVersion"
     if ($nodeVersion -match "v1[8-9]|v[2-9][0-9]") {
-        Print-Success "Node.js version is compatible ($nodeVersion)"
+    Write-Success "Node.js version is compatible ($nodeVersion)"
     } else {
-        Print-Issue "Node.js version may be too old ($nodeVersion)"
-        Print-Solution "Update to Node.js 18+ using nvm or installer."
+    Write-Issue "Node.js version may be too old ($nodeVersion)"
+    Write-Solution "Update to Node.js 18+ using nvm or installer."
     }
 } else {
-    Print-Issue "Node.js is not installed."
-    Print-Solution "Install Node.js from https://nodejs.org/"
+    Write-Issue "Node.js is not installed."
+    Write-Solution "Install Node.js from https://nodejs.org/"
 }
 
 # npm version
 $npmVersion = npm --version 2>$null
 if ($LASTEXITCODE -eq 0) {
-    Print-Success "npm is available ($npmVersion)"
+    Write-Success "npm is available ($npmVersion)"
 } else {
-    Print-Issue "npm is not available"
-    Print-Solution "Install npm or update Node.js"
+    Write-Issue "npm is not available"
+    Write-Solution "Install npm or update Node.js"
 }
 
-Print-Header "CONFIGURATION FILES ANALYSIS"
+Write-Header "CONFIGURATION FILES ANALYSIS"
 
 # package.json
 if (Test-Path "package.json") {
-    Print-Success "package.json exists"
+    Write-Success "package.json exists"
     $packageJson = Get-Content package.json -Raw | ConvertFrom-Json
     $requiredScripts = @("build", "dev", "deploy")
     foreach ($script in $requiredScripts) {
         if ($packageJson.scripts.$script) {
-            Print-Success "Script '$script' is defined"
+            Write-Success "Script '$script' is defined"
         } else {
-            Print-Warning "Script '$script' is missing"
-            Print-Solution "Add '$script' script to package.json"
+            Write-WarningMsg "Script '$script' is missing"
+            Write-Solution "Add '$script' script to package.json"
         }
     }
 } else {
-    Print-Issue "package.json is missing"
-    Print-Solution "Initialize project with: npm init"
+    Write-Issue "package.json is missing"
+    Write-Solution "Initialize project with: npm init"
 }
 
 # .env file
 if (Test-Path ".env") {
-    Print-Success ".env file exists"
+    Write-Success ".env file exists"
     $envContent = Get-Content .env
     if ($envContent -match "placeholder|your-project-id|your-supabase-anonymous-key") {
-        Print-Warning "Environment file contains placeholder values"
-        Print-Solution "Update .env with actual values or use platform environment variables"
+    Write-WarningMsg "Environment file contains placeholder values"
+    Write-Solution "Update .env with actual values or use platform environment variables"
         Write-Host "Found these placeholders:"
         $envContent | Select-String "placeholder|your-project-id|your-supabase-anonymous-key"
     } else {
-        Print-Success "Environment file has actual values"
+    Write-Success "Environment file has actual values"
     }
 } else {
-    Print-Warning ".env file is missing"
+    Write-WarningMsg ".env file is missing"
     if (Test-Path ".env.example") {
-        Print-Solution "Copy .env.example to .env and update values"
+    Write-Solution "Copy .env.example to .env and update values"
     } else {
-        Print-Solution "Create .env file with required environment variables"
+    Write-Solution "Create .env file with required environment variables"
     }
 }
 
@@ -97,60 +97,60 @@ if (Test-Path ".env") {
 $deploymentConfigs = @("vercel.json", "netlify.toml")
 foreach ($config in $deploymentConfigs) {
     if (Test-Path $config) {
-        Print-Success "$config exists"
+    Write-Success "$config exists"
     } else {
-        Print-Warning "$config is missing"
-        Print-Solution "Create $config for optimal deployment configuration"
+    Write-WarningMsg "$config is missing"
+    Write-Solution "Create $config for optimal deployment configuration"
     }
 }
 
-Print-Header "DEPENDENCY ANALYSIS"
+Write-Header "DEPENDENCY ANALYSIS"
 
 if (Test-Path "node_modules") {
-    Print-Success "node_modules directory exists"
+    Write-Success "node_modules directory exists"
     if (Test-Path "package-lock.json") {
-        Print-Success "package-lock.json exists (dependency versions locked)"
+    Write-Success "package-lock.json exists (dependency versions locked)"
     } else {
-        Print-Warning "package-lock.json is missing"
-        Print-Solution "Run 'npm install' to generate package-lock.json"
+    Write-WarningMsg "package-lock.json is missing"
+    Write-Solution "Run 'npm install' to generate package-lock.json"
     }
 } else {
-    Print-Issue "node_modules directory is missing"
-    Print-Solution "Run: npm install --legacy-peer-deps"
+    Write-Issue "node_modules directory is missing"
+    Write-Solution "Run: npm install --legacy-peer-deps"
 }
 
-Print-Header "BUILD SYSTEM ANALYSIS"
+Write-Header "BUILD SYSTEM ANALYSIS"
 
 Write-Host "Testing build process..."
 try {
     npm run build | Out-Null
-    Print-Success "Build process works"
+    Write-Success "Build process works"
     if (Test-Path "dist/index.html") {
-        Print-Success "Build produces index.html"
+    Write-Success "Build produces index.html"
     } else {
-        Print-Issue "Build doesn't produce index.html"
-        Print-Solution "Check Vite configuration and build process"
+    Write-Issue "Build doesn't produce index.html"
+    Write-Solution "Check Vite configuration and build process"
     }
     if (Test-Path "dist/assets") {
-        Print-Success "Build produces assets directory"
+    Write-Success "Build produces assets directory"
     } else {
-        Print-Warning "No assets directory in build output"
+    Write-WarningMsg "No assets directory in build output"
     }
 } catch {
-    Print-Issue "Build process fails"
-    Print-Solution "Check build errors above."
+    Write-Issue "Build process fails"
+    Write-Solution "Check build errors above."
 }
 
-Print-Header "DEPLOYMENT PLATFORM READINESS"
+Write-Header "DEPLOYMENT PLATFORM READINESS"
 
 $deploymentTools = @("vercel", "netlify")
 foreach ($tool in $deploymentTools) {
     $toolPath = (Get-Command $tool -ErrorAction SilentlyContinue)
     if ($toolPath) {
-        Print-Success "$tool CLI is available"
+    Write-Success "$tool CLI is available"
     } else {
-        Print-Warning "$tool CLI is not installed"
-        Print-Solution "Install with: npm install -g $tool-cli or use npx $tool"
+    Write-WarningMsg "$tool CLI is not installed"
+    Write-Solution "Install with: npm install -g $tool-cli or use npx $tool"
     }
 }
 
@@ -159,43 +159,50 @@ $gitPath = (Get-Command git -ErrorAction SilentlyContinue)
 if ($gitPath) {
     $gitStatus = git status --porcelain
     if ($gitStatus) {
-        Print-Warning "There are uncommitted changes"
-        Print-Solution "Commit changes before deployment: git add . && git commit -m 'Update'"
+        Write-WarningMsg "There are uncommitted changes"
+        Write-Solution "Commit changes before deployment: git add . && git commit -m 'Update'"
     } else {
-        Print-Success "No uncommitted changes"
+        Write-Success "No uncommitted changes"
     }
 } else {
-    Print-Warning "Git is not available"
-    Print-Solution "Install Git for version control"
+    Write-WarningMsg "Git is not available"
+    Write-Solution "Install Git for version control"
 }
 
-Print-Header "SECURITY ANALYSIS"
+Write-Header "SECURITY ANALYSIS"
 
 Write-Host "Checking for security vulnerabilities..."
 try {
     npm audit --audit-level=high | Out-Null
-    Print-Success "No high-severity security vulnerabilities"
+    Write-Success "No high-severity security vulnerabilities"
 } catch {
-    Print-Warning "Security vulnerabilities found"
-    Print-Solution "Run: npm audit fix"
+    Write-WarningMsg "Security vulnerabilities found"
+    Write-Solution "Run: npm audit fix"
 }
 
-Print-Header "PERFORMANCE ANALYSIS"
+Write-Header "PERFORMANCE ANALYSIS"
 
 if (Test-Path "dist") {
     $buildSize = (Get-ChildItem -Recurse -File dist | Measure-Object -Property Length -Sum).Sum / 1MB
     if ($buildSize -lt 50) {
-        Print-Success "Build size is reasonable ($([math]::Round($buildSize,2)) MB)"
+    Write-Success "Build size is reasonable ($([math]::Round($buildSize,2)) MB)"
     } elseif ($buildSize -lt 100) {
-        Print-Warning "Build size is large ($([math]::Round($buildSize,2)) MB)"
-        Print-Solution "Consider code splitting and bundle optimization"
+    Write-WarningMsg "Build size is large ($([math]::Round($buildSize,2)) MB)"
+    Write-Solution "Consider code splitting and bundle optimization"
     } else {
-        Print-Issue "Build size is very large ($([math]::Round($buildSize,2)) MB)"
-        Print-Solution "Optimize bundle size, remove unused dependencies"
+    Write-Issue "Build size is very large ($([math]::Round($buildSize,2)) MB)"
+    Write-Solution "Optimize bundle size, remove unused dependencies"
+    }
+
+    # Check for large chunks in Vite output
+    $chunkFiles = Get-ChildItem -Recurse -File dist | Where-Object { $_.Length -gt 500KB -and $_.Extension -eq ".js" }
+    foreach ($chunk in $chunkFiles) {
+    Write-WarningMsg "Chunk $($chunk.Name) is larger than 500kB after minification."
+    Write-Solution "Consider using dynamic import() for code-splitting, or configure build.rollupOptions.output.manualChunks in vite.config.ts. See: https://rollupjs.org/configuration-options/#output-manualchunks"
     }
 }
 
-Print-Header "DEPLOYMENT RECOMMENDATIONS"
+Write-Header "DEPLOYMENT RECOMMENDATIONS"
 Write-Host "\n📚 For Vercel:"
 Write-Host "   1. Ensure vercel.json is configured"
 Write-Host "   2. Set environment variables in Vercel dashboard"
@@ -209,7 +216,7 @@ Write-Host "   1. Enable GitHub Actions in repository settings"
 Write-Host "   2. Set secrets in repository settings"
 Write-Host "   3. Push to main branch for automatic deployment"
 
-Print-Header "DIAGNOSTIC SUMMARY"
+Write-Header "DIAGNOSTIC SUMMARY"
 Write-Host "\n📊 Diagnostic Results:"
 Write-Host "Issues found: $ISSUES_FOUND"
 Write-Host "Warnings found: $WARNINGS_FOUND"
