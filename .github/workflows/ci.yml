@@ -1,3 +1,4 @@
+---
 name: CI
 
 on:
@@ -119,7 +120,9 @@ jobs:
       - name: TypeScript type-check
         run: |
           if npx --yes tsc -v >/dev/null 2>&1 || [ -f tsconfig.json ]; then
-            npx --yes tsc --noEmit || ${{ steps.pkg.outputs.manager }} run -s typecheck || echo "Type-check script missing; ensure TS passes locally."
+            npx --yes tsc --noEmit || \
+            ${{ steps.pkg.outputs.manager }} run -s typecheck || \
+            echo "Type-check script missing; ensure TS passes locally."
           else
             echo "No TypeScript config; skipping type-check."
           fi

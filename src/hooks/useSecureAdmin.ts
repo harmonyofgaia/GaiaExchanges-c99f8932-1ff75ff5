@@ -9,7 +9,9 @@ function useSafeAuth() {
     // Try to get user from Supabase auth directly
     const getUser = async () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
         setUser(user);
       } catch (error) {
         setUser(null);
@@ -19,7 +21,9 @@ function useSafeAuth() {
     getUser();
 
     // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user || null);
     });
 
