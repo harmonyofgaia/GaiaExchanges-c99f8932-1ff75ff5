@@ -124,7 +124,7 @@ export default function TaskReverser() {
   };
 
   const getCategoryIcon = (category: string) => {
-    const icons: Record<string, any> = {
+    const icons: Record<string, React.ComponentType<{ className?: string }>> = {
       admin: Shield,
       ai: Zap,
       general: Settings,
@@ -142,7 +142,7 @@ export default function TaskReverser() {
         acc[feature.category].push(feature);
         return acc;
       },
-      {} as Record<string, any[]>,
+      {} as Record<string, typeof features>,
     ) || {};
 
   if (!user) {
