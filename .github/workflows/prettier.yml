@@ -11,7 +11,47 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
       - name: Install dependencies
         run: npm ci
-      - name: Run Prettier
-        run: npx prettier --check .
+
+      - name: Run Prettier with auto-fix
+        run: npx prettier --write .
+
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Files have been formatted by Prettier"
+            git status --porcelain
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No formatting changes needed"
+          fi
+
+      - name: Commit formatting changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Auto-fix code formatting with Prettier [skip ci]"
+          git push
+
+      - name: Fail if formatting was required
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          echo "::error::Code formatting was required. The formatting has been auto-fixed and committed."
+          echo "::error::Please pull the latest changes to your local branch before continuing."
+          echo "::error::To prevent this in the future, run 'npm run lint:fix' or enable Husky pre-commit hooks locally."
+          exit 1

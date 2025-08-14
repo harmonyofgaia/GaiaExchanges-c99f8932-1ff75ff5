@@ -27,8 +27,11 @@ export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
 
     try {
       // Use Supabase authentication
-      const { error: authError } = await signIn(credentials.email, credentials.password);
-      
+      const { error: authError } = await signIn(
+        credentials.email,
+        credentials.password,
+      );
+
       if (authError) {
         toast.error("🚫 Authentication Failed", {
           description: authError.message,
@@ -39,10 +42,10 @@ export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
 
       // Check if user has admin privileges
       const { data: adminAccount, error: adminError } = await supabase
-        .from('admin_users')
-        .select('*')
-        .eq('user_id', (await supabase.auth.getUser()).data.user?.id)
-        .eq('is_active', true)
+        .from("admin_users")
+        .select("*")
+        .eq("user_id", (await supabase.auth.getUser()).data.user?.id)
+        .eq("is_active", true)
         .maybeSingle();
 
       if (adminError || !adminAccount) {

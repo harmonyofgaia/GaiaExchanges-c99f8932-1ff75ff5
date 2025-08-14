@@ -35,13 +35,14 @@ export function AdminMFA({ onMFASuccess }: AdminMFAProps) {
     try {
       // In production, this would verify against a secure MFA service
       // For now, we'll simulate the verification process
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       // Generate time-based verification (simplified example)
       const timeWindow = Math.floor(Date.now() / 30000); // 30-second windows
       const expectedCode = ((timeWindow % 900000) + 100000).toString();
-      
-      if (mfaCode === expectedCode || mfaCode === "000000") { // Emergency code
+
+      if (mfaCode === expectedCode || mfaCode === "000000") {
+        // Emergency code
         toast.success("🛡️ MFA Verification Successful!", {
           description: "Multi-factor authentication completed",
           duration: 5000,

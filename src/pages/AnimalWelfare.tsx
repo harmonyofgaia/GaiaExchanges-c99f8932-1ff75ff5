@@ -44,9 +44,9 @@ export default function AnimalWelfare() {
   // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveAnimals(prev => prev + Math.floor(Math.random() * 3));
-      setTokensRaised(prev => prev + Math.floor(Math.random() * 100));
-      setGlobalRescues(prev => prev + Math.floor(Math.random() * 2));
+      setActiveAnimals((prev) => prev + Math.floor(Math.random() * 3));
+      setTokensRaised((prev) => prev + Math.floor(Math.random() * 100));
+      setGlobalRescues((prev) => prev + Math.floor(Math.random() * 2));
     }, 10000);
     return () => clearInterval(interval);
   }, []);
@@ -68,23 +68,32 @@ export default function AnimalWelfare() {
               🌍 GLOBAL ANIMAL WELFARE ECOSYSTEM
             </CardTitle>
             <p className="text-center text-xl text-muted-foreground">
-              Real Animals • Global Rescue • Live Conservation • NFT Integration • Gaming Connected
+              Real Animals • Global Rescue • Live Conservation • NFT Integration
+              • Gaming Connected
             </p>
             <div className="flex justify-center gap-0 flex-wrap mt-4 relative z-10">
               <div className="relative -mx-2 flex">
                 <div className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-green-400 via-green-500 to-blue-400 px-8 py-4 flex flex-col items-center border-4 border-white/40 -mr-4 z-30">
                   <Heart className="h-6 w-6 mb-1 text-white drop-shadow" />
-                  <span className="text-lg font-bold text-white drop-shadow">{activeAnimals.toLocaleString()}</span>
-                  <span className="text-xs text-white/80">Animals Protected</span>
+                  <span className="text-lg font-bold text-white drop-shadow">
+                    {activeAnimals.toLocaleString()}
+                  </span>
+                  <span className="text-xs text-white/80">
+                    Animals Protected
+                  </span>
                 </div>
                 <div className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-blue-400 via-blue-500 to-purple-400 px-8 py-4 flex flex-col items-center border-4 border-white/40 z-20">
                   <Shield className="h-6 w-6 mb-1 text-white drop-shadow" />
-                  <span className="text-lg font-bold text-white drop-shadow">{tokensRaised.toLocaleString()}</span>
+                  <span className="text-lg font-bold text-white drop-shadow">
+                    {tokensRaised.toLocaleString()}
+                  </span>
                   <span className="text-xs text-white/80">GAiA Raised</span>
                 </div>
                 <div className="rounded-b-full rounded-t-2xl shadow-lg bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-300 px-8 py-4 flex flex-col items-center border-4 border-white/40 -ml-4 z-10">
                   <Star className="h-6 w-6 mb-1 text-white drop-shadow" />
-                  <span className="text-lg font-bold text-white drop-shadow">NFT</span>
+                  <span className="text-lg font-bold text-white drop-shadow">
+                    NFT
+                  </span>
                   <span className="text-xs text-white/80">Powered</span>
                 </div>
               </div>
@@ -92,14 +101,18 @@ export default function AnimalWelfare() {
                 <Badge className="bg-purple-600 p-3 text-center">
                   <div className="flex flex-col items-center">
                     <Globe className="h-5 w-5 mb-1" />
-                    <span className="text-lg font-bold">{globalRescues.toLocaleString()}</span>
+                    <span className="text-lg font-bold">
+                      {globalRescues.toLocaleString()}
+                    </span>
                     <span className="text-xs">Global Rescues</span>
                   </div>
                 </Badge>
                 <Badge className="bg-orange-600 p-3 text-center">
                   <div className="flex flex-col items-center">
                     <TreePine className="h-5 w-5 mb-1" />
-                    <span className="text-lg font-bold">{sanctuariesSupported}</span>
+                    <span className="text-lg font-bold">
+                      {sanctuariesSupported}
+                    </span>
                     <span className="text-xs">Sanctuaries</span>
                   </div>
                 </Badge>
@@ -118,15 +131,33 @@ export default function AnimalWelfare() {
         {/* Enhanced Main Tabs */}
         <Tabs defaultValue="rescue" className="w-full">
           <TabsList className="grid w-full grid-cols-4 lg:grid-cols-9 gap-1">
-            <TabsTrigger value="rescue" className="text-xs">🆘 Rescue</TabsTrigger>
-            <TabsTrigger value="global" className="text-xs">🌍 Global</TabsTrigger>
-            <TabsTrigger value="database" className="text-xs">🦎 Database</TabsTrigger>
-            <TabsTrigger value="cameras" className="text-xs">📹 Live Cams</TabsTrigger>
-            <TabsTrigger value="conservation" className="text-xs">🌿 Projects</TabsTrigger>
-            <TabsTrigger value="marketplace" className="text-xs">🏪 NFT Market</TabsTrigger>
-            <TabsTrigger value="vr" className="text-xs">🥽 VR</TabsTrigger>
-            <TabsTrigger value="gaming" className="text-xs">🎮 Gaming</TabsTrigger>
-            <TabsTrigger value="analytics" className="text-xs">📊 Analytics</TabsTrigger>
+            <TabsTrigger value="rescue" className="text-xs">
+              🆘 Rescue
+            </TabsTrigger>
+            <TabsTrigger value="global" className="text-xs">
+              🌍 Global
+            </TabsTrigger>
+            <TabsTrigger value="database" className="text-xs">
+              🦎 Database
+            </TabsTrigger>
+            <TabsTrigger value="cameras" className="text-xs">
+              📹 Live Cams
+            </TabsTrigger>
+            <TabsTrigger value="conservation" className="text-xs">
+              🌿 Projects
+            </TabsTrigger>
+            <TabsTrigger value="marketplace" className="text-xs">
+              🏪 NFT Market
+            </TabsTrigger>
+            <TabsTrigger value="vr" className="text-xs">
+              🥽 VR
+            </TabsTrigger>
+            <TabsTrigger value="gaming" className="text-xs">
+              🎮 Gaming
+            </TabsTrigger>
+            <TabsTrigger value="analytics" className="text-xs">
+              📊 Analytics
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="rescue" className="space-y-6">
