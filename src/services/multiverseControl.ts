@@ -237,7 +237,18 @@ class MultiverseControlService {
   }
 
   // Parallel Universe Access
-  async accessParallelUniverse(universeId: string): Promise<any> {
+  async accessParallelUniverse(universeId: string): Promise<{
+    universeId: string;
+    physicsConstants: {
+      speedOfLight: number;
+      planckConstant: number;
+      gravitationalConstant: number;
+    };
+    timelineVariations: number;
+    inhabitedWorlds: number;
+    technologicalLevel: number;
+    accessibility: number;
+  }> {
     console.log(`🚪 Accessing Parallel Universe: ${universeId}`);
 
     // Simulate universe access

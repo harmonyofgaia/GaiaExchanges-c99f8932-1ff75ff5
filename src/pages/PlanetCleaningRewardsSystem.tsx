@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -38,14 +38,32 @@ interface CleaningReward {
   id: string;
   user_id: string;
   activity_type: string;
-  location_data: any;
+  location_data: {
+    latitude: number;
+    longitude: number;
+    altitude?: number;
+    accuracy: number;
+    address?: string;
+  };
   verification_method: string;
   tokens_earned: number;
-  environmental_impact: any;
+  environmental_impact: {
+    co2_reduced: number;
+    energy_saved: number;
+    waste_recycled: number;
+    water_saved: number;
+    impact_score: number;
+  };
   verified_at: string | null;
   created_at: string;
   satellite_verified?: boolean;
-  iot_sensor_data?: any;
+  iot_sensor_data?: {
+    temperature: number;
+    humidity: number;
+    air_quality: number;
+    timestamp: number;
+    sensor_id: string;
+  };
   blockchain_hash?: string;
   community_validation_score?: number;
   real_time_tracking?: boolean;
@@ -101,7 +119,7 @@ export default function PlanetCleaningRewardsSystem() {
       loadIoTReadings();
       loadGlobalMetrics();
     }
-  }, [user]);
+  }, [user, loadRewards]);
 
   const loadSatelliteData = async () => {
     // Mock satellite verification data
@@ -164,14 +182,16 @@ export default function PlanetCleaningRewardsSystem() {
     if (user) {
       loadRewards();
     }
-  }, [user]);
+  }, [user, loadRewards]);
 
-  const loadRewards = async () => {
+  const loadRewards = useCallback(async () => {
+    if (!user) return;
+
     try {
       const { data, error } = await supabase
         .from("planet_cleaning_rewards")
         .select("*")
-        .eq("user_id", user!.id)
+        .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
       if (error) throw error;
@@ -182,7 +202,7 @@ export default function PlanetCleaningRewardsSystem() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
 
   const submitCleaningActivity = async () => {
     if (!user) {

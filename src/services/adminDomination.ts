@@ -336,9 +336,25 @@ class AdminDominationService {
   async generateAdminForensicsReport(adminId?: string): Promise<{
     totalSessions: number;
     activeSessions: number;
-    recentActions: any[];
-    securityAlerts: any[];
-    privilegeEscalations: any[];
+    recentActions: Array<{
+      timestamp: number;
+      action: string;
+      adminId: string;
+      details: Record<string, unknown>;
+    }>;
+    securityAlerts: Array<{
+      id: string;
+      severity: "low" | "medium" | "high" | "critical";
+      message: string;
+      timestamp: number;
+    }>;
+    privilegeEscalations: Array<{
+      adminId: string;
+      fromLevel: string;
+      toLevel: string;
+      timestamp: number;
+      authorized: boolean;
+    }>;
   }> {
     const sessions = adminId
       ? Array.from(this.adminSessions.values()).filter((s) => s.adminId === adminId)

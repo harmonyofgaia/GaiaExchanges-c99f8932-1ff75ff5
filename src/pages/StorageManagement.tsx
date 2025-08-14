@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,12 +41,15 @@ export default function StorageManagement() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBucket, setSelectedBucket] = useState("all");
 
-  const buckets = [
-    { id: "artwork-files", name: "Artwork Files", icon: Image },
-    { id: "video-uploads", name: "Videos", icon: Video },
-    { id: "audio-files", name: "Audio", icon: Music },
-    { id: "documents", name: "Documents", icon: FileText },
-  ];
+  const buckets = useMemo(
+    () => [
+      { id: "artwork-files", name: "Artwork Files", icon: Image },
+      { id: "video-uploads", name: "Videos", icon: Video },
+      { id: "audio-files", name: "Audio", icon: Music },
+      { id: "documents", name: "Documents", icon: FileText },
+    ],
+    []
+  );
 
   const getFileType = useCallback((fileName: string): StorageFile["type"] => {
     const ext = fileName.split(".").pop()?.toLowerCase();

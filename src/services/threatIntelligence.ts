@@ -36,7 +36,14 @@ class ThreatIntelligenceService {
   private threatSignatures: Map<string, ThreatSignature> = new Map();
   private behaviorPatterns: Map<string, BehaviorPattern> = new Map();
   private threatPredictions: ThreatPrediction[] = [];
-  private globalThreatFeed: any[] = [];
+  private globalThreatFeed: Array<{
+    id: string;
+    type: string;
+    severity: "low" | "medium" | "high" | "critical";
+    source: string;
+    data: Record<string, unknown>;
+    timestamp: number;
+  }> = [];
   private isMonitoringActive = false;
 
   // AI-Powered Predictive Attack Detection
@@ -167,7 +174,11 @@ class ThreatIntelligenceService {
         id: `sig-${Date.now()}-${i}`,
         type: threatTypes[Math.floor(Math.random() * threatTypes.length)],
         pattern: this.generateThreatPattern(),
-        severity: ["LOW", "MEDIUM", "HIGH", "CRITICAL"][Math.floor(Math.random() * 4)] as any,
+        severity: ["LOW", "MEDIUM", "HIGH", "CRITICAL"][Math.floor(Math.random() * 4)] as
+          | "LOW"
+          | "MEDIUM"
+          | "HIGH"
+          | "CRITICAL",
         confidence: Math.random() * 0.3 + 0.7,
         lastSeen: Date.now(),
         description: "Global threat intelligence signature",
@@ -327,7 +338,7 @@ class ThreatIntelligenceService {
   }
 
   // Neural Network Threat Classification
-  async classifyThreatWithNN(input: any): Promise<{
+  async classifyThreatWithNN(input: Record<string, unknown>): Promise<{
     classification: string;
     confidence: number;
     features: string[];
@@ -343,15 +354,23 @@ class ThreatIntelligenceService {
     };
   }
 
-  private extractFeatures(input: any): string[] {
+  private extractFeatures(input: Record<string, unknown>): string[] {
     const features = [];
 
-    if (typeof input === "string") {
-      if (input.includes("script")) features.push("script_content");
-      if (input.includes("eval")) features.push("code_evaluation");
-      if (input.includes("http")) features.push("url_reference");
-      if (/[<>]/.test(input)) features.push("html_tags");
-      if (/'|"/.test(input)) features.push("quote_characters");
+    // Check for common threat indicators in the input object
+    for (const [key, value] of Object.entries(input)) {
+      const strValue = String(value);
+
+      if (strValue.includes("script")) features.push("script_content");
+      if (strValue.includes("eval")) features.push("code_evaluation");
+      if (strValue.includes("http")) features.push("url_reference");
+      if (/[<>]/.test(strValue)) features.push("html_tags");
+      if (/'|"/.test(strValue)) features.push("quote_characters");
+
+      // Check key names for threat indicators
+      if (key.toLowerCase().includes("password")) features.push("credential_related");
+      if (key.toLowerCase().includes("token")) features.push("auth_related");
+      if (key.toLowerCase().includes("admin")) features.push("privilege_related");
     }
 
     return features;

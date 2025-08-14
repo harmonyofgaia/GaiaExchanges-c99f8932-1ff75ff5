@@ -15,7 +15,13 @@ interface DeepWebMonitor {
   layer: "surface" | "deep" | "dark" | "marianas" | "quantum_void";
   marketplaces: string[];
   threatsFound: number;
-  intelligence: any[];
+  intelligence: Array<{
+    type: string;
+    severity: "low" | "medium" | "high" | "critical";
+    source: string;
+    data: Record<string, unknown>;
+    timestamp: number;
+  }>;
   isActive: boolean;
 }
 
@@ -128,7 +134,14 @@ class GlobalSurveillanceService {
     }, 45000); // Scan every 45 seconds
   }
 
-  async getSatelliteIntelligence(): Promise<any> {
+  async getSatelliteIntelligence(): Promise<{
+    activeSatellites: number;
+    totalThreats: number;
+    globalCoverage: string;
+    quantumMonitoring: boolean;
+    lastUpdate: string;
+    networkStatus: string;
+  }> {
     const intelligence = {
       activeSatellites: Array.from(this.satelliteNetwork.values()).filter((s) => s.isActive).length,
       totalThreats: Array.from(this.satelliteNetwork.values()).reduce(
@@ -354,7 +367,12 @@ class GlobalSurveillanceService {
     return internationalThreat;
   }
 
-  private async activateInternationalPartners(threat: any): Promise<string[]> {
+  private async activateInternationalPartners(threat: {
+    threatType: string;
+    origin: string;
+    severity: string;
+    data?: Record<string, unknown>;
+  }): Promise<string[]> {
     const allPartners = [
       "Five Eyes Alliance",
       "NATO Cyber Command",
@@ -395,7 +413,13 @@ class GlobalSurveillanceService {
     return activatedPartners;
   }
 
-  private async coordinateGlobalResponse(alert: any): Promise<void> {
+  private async coordinateGlobalResponse(alert: {
+    source: string;
+    satellite?: string;
+    threat: string;
+    coverage?: string;
+    severity?: number;
+  }): Promise<void> {
     console.log("🌐 Coordinating Global Response:", alert);
 
     // Automatically escalate to international coordination if severe

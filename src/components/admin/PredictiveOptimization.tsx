@@ -92,7 +92,9 @@ export function PredictiveOptimization() {
           ] as PredictiveInsight["type"],
           prediction: newPredictions[Math.floor(Math.random() * newPredictions.length)],
           confidence: 80 + Math.random() * 20,
-          impact: ["medium", "high", "critical"][Math.floor(Math.random() * 3)] as PredictiveInsight["impact"],
+          impact: ["medium", "high", "critical"][
+            Math.floor(Math.random() * 3)
+          ] as PredictiveInsight["impact"],
           autoApply: true,
           status: "predicted",
         };

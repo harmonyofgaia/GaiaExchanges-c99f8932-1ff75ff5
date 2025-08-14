@@ -107,49 +107,52 @@ export function AutonomousMastermind() {
   const [countdownTimer, setCountdownTimer] = useState<number | null>(null);
   const [pendingFeature, setPendingFeature] = useState<string | null>(null);
 
-  const applyFeature = useCallback((featureId: string, isAutomatic = false) => {
-    setFeatures((prev) =>
-      prev.map((f) => {
-        if (f.id === featureId) {
-          return { ...f, status: "analyzing" as const, progress: 10 };
-        }
-        return f;
-      })
-    );
-
-    // Reset countdown
-    setCountdownTimer(null);
-    setPendingFeature(null);
-
-    const feature = features.find((f) => f.id === featureId);
-    if (!feature) return;
-
-    toast.success(`🧠 ${isAutomatic ? "Auto-Applying" : "Applying"}: ${feature.name}`, {
-      description: "Mastermind system activating...",
-      duration: 3000,
-    });
-
-    // Simulate implementation progress
-    const progressInterval = setInterval(() => {
+  const applyFeature = useCallback(
+    (featureId: string, isAutomatic = false) => {
       setFeatures((prev) =>
         prev.map((f) => {
           if (f.id === featureId) {
-            const newProgress = f.progress + Math.random() * 20 + 10;
-            if (newProgress >= 100) {
-              clearInterval(progressInterval);
-              toast.success(`✅ Feature Complete: ${f.name}`, {
-                description: "Mastermind enhancement successfully integrated",
-                duration: 4000,
-              });
-              return { ...f, status: "complete" as const, progress: 100 };
-            }
-            return { ...f, progress: Math.min(newProgress, 95) };
+            return { ...f, status: "analyzing" as const, progress: 10 };
           }
           return f;
         })
       );
-    }, 1500);
-  }, [features]);
+
+      // Reset countdown
+      setCountdownTimer(null);
+      setPendingFeature(null);
+
+      const feature = features.find((f) => f.id === featureId);
+      if (!feature) return;
+
+      toast.success(`🧠 ${isAutomatic ? "Auto-Applying" : "Applying"}: ${feature.name}`, {
+        description: "Mastermind system activating...",
+        duration: 3000,
+      });
+
+      // Simulate implementation progress
+      const progressInterval = setInterval(() => {
+        setFeatures((prev) =>
+          prev.map((f) => {
+            if (f.id === featureId) {
+              const newProgress = f.progress + Math.random() * 20 + 10;
+              if (newProgress >= 100) {
+                clearInterval(progressInterval);
+                toast.success(`✅ Feature Complete: ${f.name}`, {
+                  description: "Mastermind enhancement successfully integrated",
+                  duration: 4000,
+                });
+                return { ...f, status: "complete" as const, progress: 100 };
+              }
+              return { ...f, progress: Math.min(newProgress, 95) };
+            }
+            return f;
+          })
+        );
+      }, 1500);
+    },
+    [features]
+  );
 
   // Auto-apply system - applies features after 20 seconds of no admin interaction
   useEffect(() => {

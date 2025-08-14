@@ -90,7 +90,9 @@ export function ParabolicAIThinking() {
       actionable: Math.random() > 0.3,
       timestamp: new Date(),
       status: autoApprove ? "approved" : "pending",
-      systemImpact: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as AIResponse["systemImpact"],
+      systemImpact: ["low", "medium", "high", "critical"][
+        Math.floor(Math.random() * 4)
+      ] as AIResponse["systemImpact"],
     };
 
     setAiResponses((prev) => [newResponse, ...prev]);

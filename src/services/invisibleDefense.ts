@@ -11,8 +11,18 @@ interface StealthCommunication {
 
 interface TrafficObfuscation {
   id: string;
-  originalTraffic: any;
-  obfuscatedTraffic: any;
+  originalTraffic: {
+    source: string;
+    destination: string;
+    payload: Record<string, unknown>;
+    timestamp: number;
+  };
+  obfuscatedTraffic: {
+    sources: string[];
+    routes: string[];
+    encryptedPayload: string;
+    timestamp: number;
+  };
   obfuscationType: "routing" | "timing" | "volume" | "protocol";
   effectiveness: number;
 }
@@ -160,7 +170,12 @@ class InvisibleDefenseService {
 
   // Traffic Obfuscation Engine
   async obfuscateNetworkTraffic(
-    trafficData: any,
+    trafficData: {
+      source: string;
+      destination: string;
+      payload: Record<string, unknown>;
+      timestamp: number;
+    },
     obfuscationType: "routing" | "timing" | "volume" | "protocol"
   ): Promise<TrafficObfuscation> {
     const obfuscation: TrafficObfuscation = {
@@ -183,45 +198,74 @@ class InvisibleDefenseService {
     return obfuscation;
   }
 
-  private async applyObfuscation(traffic: any, type: string): Promise<any> {
+  private async applyObfuscation(
+    traffic: {
+      source: string;
+      destination: string;
+      payload: Record<string, unknown>;
+      timestamp: number;
+    },
+    type: string
+  ): Promise<{
+    sources: string[];
+    routes: string[];
+    encryptedPayload: string;
+    timestamp: number;
+  }> {
     switch (type) {
       case "routing":
         return {
-          ...traffic,
-          route: this.generateDecoyRoute(),
-          hops: Math.floor(Math.random() * 5) + 3,
-          obfuscated: true,
+          sources: [traffic.source, ...this.generateDecoyRoute()],
+          routes: this.generateDecoyRoute(),
+          encryptedPayload: btoa(JSON.stringify(traffic.payload)),
+          timestamp: traffic.timestamp,
         };
 
       case "timing":
         return {
-          ...traffic,
-          artificialDelay: Math.random() * 1000,
-          randomizedTimestamp: Date.now() + Math.random() * 10000,
-          obfuscated: true,
+          sources: [traffic.source],
+          routes: [traffic.destination],
+          encryptedPayload: btoa(JSON.stringify(traffic.payload)),
+          timestamp: Date.now() + Math.random() * 10000,
         };
 
       case "volume":
         return {
-          ...traffic,
-          paddingData: Array.from({ length: Math.floor(Math.random() * 1000) }, () =>
-            Math.random()
+          sources: [traffic.source],
+          routes: [traffic.destination],
+          encryptedPayload: btoa(
+            JSON.stringify({
+              ...traffic.payload,
+              padding: Array.from({ length: Math.floor(Math.random() * 1000) }, () =>
+                Math.random()
+              ),
+            })
           ),
-          compressedData: "fake-compression-data",
-          obfuscated: true,
+          timestamp: traffic.timestamp,
         };
 
       case "protocol":
         return {
-          disguisedAs: "HTTP/HTTPS",
-          realProtocol: traffic.protocol || "CUSTOM",
-          headers: this.generateFakeHeaders(),
-          payload: traffic,
-          obfuscated: true,
+          sources: [traffic.source],
+          routes: [traffic.destination],
+          encryptedPayload: btoa(
+            JSON.stringify({
+              disguisedAs: "HTTP/HTTPS",
+              realProtocol: "CUSTOM",
+              headers: this.generateFakeHeaders(),
+              payload: traffic.payload,
+            })
+          ),
+          timestamp: traffic.timestamp,
         };
 
       default:
-        return traffic;
+        return {
+          sources: [traffic.source],
+          routes: [traffic.destination],
+          encryptedPayload: btoa(JSON.stringify(traffic.payload)),
+          timestamp: traffic.timestamp,
+        };
     }
   }
 

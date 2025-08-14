@@ -499,7 +499,12 @@ export function CreativeNFTGenerator() {
                 <div className="grid grid-cols-2 gap-2">
                   <select
                     value={nft.distributionMode}
-                    onChange={(e) => updateDistributionMode(nft.id, e.target.value as CreativeNFT["distributionMode"])}
+                    onChange={(e) =>
+                      updateDistributionMode(
+                        nft.id,
+                        e.target.value as CreativeNFT["distributionMode"]
+                      )
+                    }
                     className="px-2 py-1 bg-muted border border-border rounded text-xs"
                   >
                     <option value="sell">💰 Sell</option>
