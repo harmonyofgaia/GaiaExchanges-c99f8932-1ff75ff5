@@ -96,7 +96,7 @@ export function TetrisGame() {
     return { ...piece, shape: rotated };
   };
 
-  const isValidMove = (
+  const isValidMove = useCallback((
     piece: Tetromino,
     newX: number,
     newY: number,
@@ -116,9 +116,9 @@ export function TetrisGame() {
       }
     }
     return true;
-  };
+  }, [board]);
 
-  const placePiece = (piece: Tetromino) => {
+  const placePiece = useCallback((piece: Tetromino) => {
     const newBoard = [...board];
 
     for (let y = 0; y < piece.shape.length; y++) {
@@ -135,9 +135,9 @@ export function TetrisGame() {
 
     setBoard(newBoard);
     clearLines(newBoard);
-  };
+  }, [board, clearLines]);
 
-  const clearLines = (board: string[][]) => {
+  const clearLines = useCallback((board: string[][]) => {
     const newBoard = board.filter((row) => !row.every((cell) => cell !== ""));
     const linesCleared = 20 - newBoard.length;
 
@@ -157,7 +157,7 @@ export function TetrisGame() {
         description: `+${linesCleared * 100 * level} points, +${linesCleared * 2} GAiA tokens`,
       });
     }
-  };
+  }, [level, lines]);
 
   const movePiece = useCallback(
     (dx: number, dy: number) => {
@@ -184,19 +184,19 @@ export function TetrisGame() {
         }
       }
     },
-    [currentPiece, isPlaying, gameOver, board, score, gaiaTokensEarned, level, lines]
+    [currentPiece, isPlaying, gameOver, score, gaiaTokensEarned, isValidMove, placePiece]
   );
 
-  const rotatePieceHandler = () => {
+  const rotatePieceHandler = useCallback(() => {
     if (!currentPiece || !isPlaying || gameOver) return;
 
     const rotated = rotatePiece(currentPiece);
     if (isValidMove(rotated, rotated.x, rotated.y, rotated.shape)) {
       setCurrentPiece(rotated);
     }
-  };
+  }, [currentPiece, isPlaying, gameOver, isValidMove]);
 
-  const dropPiece = () => {
+  const dropPiece = useCallback(() => {
     if (!currentPiece || !isPlaying || gameOver) return;
 
     let newY = currentPiece.y;
@@ -204,7 +204,7 @@ export function TetrisGame() {
       newY++;
     }
     setCurrentPiece({ ...currentPiece, y: newY });
-  };
+  }, [currentPiece, isPlaying, gameOver, isValidMove]);
 
   useEffect(() => {
     if (!isPlaying || gameOver) return;
@@ -245,7 +245,7 @@ export function TetrisGame() {
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [movePiece, isPlaying, gameOver]);
+  }, [movePiece, isPlaying, gameOver, dropPiece, rotatePieceHandler]);
 
   const startGame = () => {
     setBoard(
