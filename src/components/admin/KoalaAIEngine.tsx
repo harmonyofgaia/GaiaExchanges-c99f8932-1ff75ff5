@@ -122,7 +122,7 @@ export function KoalaAIEngine() {
   }, []);
 
   const getActivityIcon = (type: string) => {
-    const icons: Record<string, any> = {
+    const icons: Record<string, React.ComponentType> = {
       optimization: TrendingUp,
       security: Shield,
       learning: Brain,

@@ -89,10 +89,10 @@ export function PredictiveOptimization() {
           id: Date.now().toString(),
           type: ["optimization", "security", "performance", "user_experience"][
             Math.floor(Math.random() * 4)
-          ] as any,
+          ] as PredictiveInsight["type"],
           prediction: newPredictions[Math.floor(Math.random() * newPredictions.length)],
           confidence: 80 + Math.random() * 20,
-          impact: ["medium", "high", "critical"][Math.floor(Math.random() * 3)] as any,
+          impact: ["medium", "high", "critical"][Math.floor(Math.random() * 3)] as PredictiveInsight["impact"],
           autoApply: true,
           status: "predicted",
         };

@@ -63,7 +63,7 @@ export function InvisibleDolphin() {
             ][Math.floor(Math.random() * 8)],
             type: ["encrypted", "deleted", "hidden", "classified"][
               Math.floor(Math.random() * 4)
-            ] as any,
+            ] as DataNode["type"],
             size: `${(Math.random() * 999 + 1).toFixed(0)}MB`,
             timestamp: new Date(),
             extracted: Math.random() > 0.3,

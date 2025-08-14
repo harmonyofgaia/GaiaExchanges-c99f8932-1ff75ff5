@@ -156,7 +156,7 @@ export function ComprehensiveSystemCheck() {
     }, 30000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [systemComponents]);
 
   const performSystemCheck = async () => {
     // Simulate comprehensive system check

@@ -27,7 +27,7 @@ interface Phase {
   status: "pending" | "approved" | "in-progress" | "completed";
   features: string[];
   timeline: string;
-  icon: any;
+  icon: React.ComponentType;
 }
 
 const masterVisionPhases: Phase[] = [
