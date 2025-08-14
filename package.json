@@ -56,7 +56,6 @@
     "@radix-ui/react-tooltip": "^1.2.7",
     "@supabase/supabase-js": "^2.53.0",
     "@tanstack/react-query": "^5.84.1",
-    "autoprefixer": "^10.4.21",
     "class-variance-authority": "^0.7.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
@@ -86,7 +85,6 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.0",
-    "@tailwindcss/postcss": "^4.1.11",
     "@tailwindcss/typography": "^0.5.15",
     "@types/jest": "^30.0.0",
     "@types/node": "24.2.0",
@@ -109,10 +107,14 @@
     "postcss": "^8.5.6",
     "postcss-load-config": "^6.0.1",
     "prettier": "^3.6.2",
-    "tailwindcss": "^3.3.3",
+    "tailwindcss": "3.4.17",
     "ts-jest": "^29.4.1",
     "typescript": "5.9.2",
     "typescript-eslint": "^8.0.1",
     "vite": "^7.1.1"
+  },
+  "overrides": {
+    "@tailwindcss/postcss": "0.0.0-DO-NOT-INSTALL",
+    "@tailwindcss/node": "0.0.0-DO-NOT-INSTALL"
   }
 }
