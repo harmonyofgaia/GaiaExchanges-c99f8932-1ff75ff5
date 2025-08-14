@@ -35,7 +35,7 @@ export function BlockchainSecurityLogs() {
       ][Math.floor(Math.random() * 8)],
       hash: `0x${Math.random().toString(16).substr(2, 32)}`,
       timestamp: new Date().toLocaleTimeString(),
-      severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as any,
+      severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as SecurityLog["severity"],
       verified: true,
     });
 

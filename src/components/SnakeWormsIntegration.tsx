@@ -110,72 +110,78 @@ export function SnakeWormsIntegration() {
     });
   }, [direction, gameState, worms, initiateWormBattle]);
 
-  const initiateWormBattle = useCallback((worm: Worm) => {
-    const damage = selectedWeapon.damage + Math.floor(Math.random() * 25);
+  const initiateWormBattle = useCallback(
+    (worm: Worm) => {
+      const damage = selectedWeapon.damage + Math.floor(Math.random() * 25);
 
-    setWorms(
-      (prev) =>
-        prev
-          .map((w) => {
-            if (w.id === worm.id) {
-              const newHealth = Math.max(0, w.health - damage);
-              if (newHealth === 0) {
-                // Worm destroyed
-                setGameStats((stats) => ({
-                  ...stats,
-                  score: stats.score + 100,
-                  wormsDestroyed: stats.wormsDestroyed + 1,
-                  gaiaTokensEarned: stats.gaiaTokensEarned + 2.5,
-                }));
+      setWorms(
+        (prev) =>
+          prev
+            .map((w) => {
+              if (w.id === worm.id) {
+                const newHealth = Math.max(0, w.health - damage);
+                if (newHealth === 0) {
+                  // Worm destroyed
+                  setGameStats((stats) => ({
+                    ...stats,
+                    score: stats.score + 100,
+                    wormsDestroyed: stats.wormsDestroyed + 1,
+                    gaiaTokensEarned: stats.gaiaTokensEarned + 2.5,
+                  }));
 
-                toast.success(`🐍 Snake Victory!`, {
-                  description: `Worm destroyed with ${selectedWeapon.icon} ${selectedWeapon.name}! +2.5 GAiA earned!`,
-                  duration: 3000,
-                });
+                  toast.success(`🐍 Snake Victory!`, {
+                    description: `Worm destroyed with ${selectedWeapon.icon} ${selectedWeapon.name}! +2.5 GAiA earned!`,
+                    duration: 3000,
+                  });
 
-                // Add explosion effect
-                setExplosions((prev) => [...prev, ...w.segments]);
-                setTimeout(() => {
-                  setExplosions((prev) =>
-                    prev.filter(
-                      (pos) => !w.segments.some((seg) => seg.x === pos.x && seg.y === pos.y)
-                    )
-                  );
-                }, 1000);
+                  // Add explosion effect
+                  setExplosions((prev) => [...prev, ...w.segments]);
+                  setTimeout(() => {
+                    setExplosions((prev) =>
+                      prev.filter(
+                        (pos) => !w.segments.some((seg) => seg.x === pos.x && seg.y === pos.y)
+                      )
+                    );
+                  }, 1000);
 
-                return null; // Remove worm
+                  return null; // Remove worm
+                }
+                return { ...w, health: newHealth };
               }
-              return { ...w, health: newHealth };
-            }
-            return w;
-          })
-          .filter(Boolean) as Worm[]
-    );
-  }, [selectedWeapon]);
+              return w;
+            })
+            .filter(Boolean) as Worm[]
+      );
+    },
+    [selectedWeapon]
+  );
 
-  const fireWeapon = useCallback((targetX: number, targetY: number) => {
-    if (gameState !== "playing") return;
+  const fireWeapon = useCallback(
+    (targetX: number, targetY: number) => {
+      if (gameState !== "playing") return;
 
-    // Check if any worms are in weapon radius
-    const hitWorms = worms.filter((worm) =>
-      worm.segments.some(
-        (segment) =>
-          Math.abs(segment.x - targetX) <= selectedWeapon.radius &&
-          Math.abs(segment.y - targetY) <= selectedWeapon.radius
-      )
-    );
+      // Check if any worms are in weapon radius
+      const hitWorms = worms.filter((worm) =>
+        worm.segments.some(
+          (segment) =>
+            Math.abs(segment.x - targetX) <= selectedWeapon.radius &&
+            Math.abs(segment.y - targetY) <= selectedWeapon.radius
+        )
+      );
 
-    hitWorms.forEach((worm) => {
-      initiateWormBattle(worm);
-    });
-
-    if (hitWorms.length === 0) {
-      toast.info("🎯 Missed!", {
-        description: "No worms in weapon range",
-        duration: 2000,
+      hitWorms.forEach((worm) => {
+        initiateWormBattle(worm);
       });
-    }
-  }, [gameState, worms, selectedWeapon, initiateWormBattle]);
+
+      if (hitWorms.length === 0) {
+        toast.info("🎯 Missed!", {
+          description: "No worms in weapon range",
+          duration: 2000,
+        });
+      }
+    },
+    [gameState, worms, selectedWeapon, initiateWormBattle]
+  );
 
   useEffect(() => {
     if (gameState === "playing") {

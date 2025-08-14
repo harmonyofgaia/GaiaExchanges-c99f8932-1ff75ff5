@@ -137,7 +137,7 @@ function BackgroundManagerContent() {
     } else {
       setDailyInspiration(localStorage.getItem("dailyInspiration") || inspirations[0]);
     }
-  }, []);
+  }, [predefinedStyles]);
 
   const handleReverseButtonToggle = (checked: boolean) => {
     setReverseButtonVisible(checked);

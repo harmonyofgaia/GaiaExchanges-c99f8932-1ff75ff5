@@ -229,36 +229,39 @@ export function AdminMediaLibrary() {
     }
   };
 
-  const playTrack = useCallback(async (file: MediaFile) => {
-    if (!file.mime_type.startsWith("audio/")) return;
+  const playTrack = useCallback(
+    async (file: MediaFile) => {
+      if (!file.mime_type.startsWith("audio/")) return;
 
-    const audioUrl = supabase.storage.from("admin-media").getPublicUrl(file.storage_path)
-      .data.publicUrl;
+      const audioUrl = supabase.storage.from("admin-media").getPublicUrl(file.storage_path)
+        .data.publicUrl;
 
-    if (audioRef.current) {
-      setCurrentTrack(file);
-      audioRef.current.src = audioUrl;
-      try {
-        await audioRef.current.play();
-        setIsPlaying(true);
-        toast.success(`🎵 Now playing: ${file.original_name}`);
+      if (audioRef.current) {
+        setCurrentTrack(file);
+        audioRef.current.src = audioUrl;
+        try {
+          await audioRef.current.play();
+          setIsPlaying(true);
+          toast.success(`🎵 Now playing: ${file.original_name}`);
 
-        // Broadcast to persistent audio controls
-        window.dispatchEvent(
-          new CustomEvent("admin-audio-update", {
-            detail: {
-              track: file,
-              action: "play",
-              tracks: musicFiles,
-            },
-          })
-        );
-      } catch (error) {
-        console.error("Play error:", error);
-        toast.error("Failed to play audio file");
+          // Broadcast to persistent audio controls
+          window.dispatchEvent(
+            new CustomEvent("admin-audio-update", {
+              detail: {
+                track: file,
+                action: "play",
+                tracks: musicFiles,
+              },
+            })
+          );
+        } catch (error) {
+          console.error("Play error:", error);
+          toast.error("Failed to play audio file");
+        }
       }
-    }
-  }, [musicFiles]);
+    },
+    [musicFiles]
+  );
 
   const togglePlayPause = async () => {
     if (audioRef.current) {
@@ -296,11 +299,13 @@ export function AdminMediaLibrary() {
     }
   };
 
-  const musicFiles = useMemo(() => 
-    mediaFiles?.filter((file) => file.is_background_music) || [], [mediaFiles]
+  const musicFiles = useMemo(
+    () => mediaFiles?.filter((file) => file.is_background_music) || [],
+    [mediaFiles]
   );
-  const otherFiles = useMemo(() => 
-    mediaFiles?.filter((file) => !file.is_background_music) || [], [mediaFiles]
+  const otherFiles = useMemo(
+    () => mediaFiles?.filter((file) => !file.is_background_music) || [],
+    [mediaFiles]
   );
 
   return (

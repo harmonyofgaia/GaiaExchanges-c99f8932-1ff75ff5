@@ -96,68 +96,72 @@ export function TetrisGame() {
     return { ...piece, shape: rotated };
   };
 
-  const isValidMove = useCallback((
-    piece: Tetromino,
-    newX: number,
-    newY: number,
-    newShape?: number[][]
-  ): boolean => {
-    const shape = newShape || piece.shape;
+  const isValidMove = useCallback(
+    (piece: Tetromino, newX: number, newY: number, newShape?: number[][]): boolean => {
+      const shape = newShape || piece.shape;
 
-    for (let y = 0; y < shape.length; y++) {
-      for (let x = 0; x < shape[y].length; x++) {
-        if (shape[y][x]) {
-          const boardX = newX + x;
-          const boardY = newY + y;
+      for (let y = 0; y < shape.length; y++) {
+        for (let x = 0; x < shape[y].length; x++) {
+          if (shape[y][x]) {
+            const boardX = newX + x;
+            const boardY = newY + y;
 
-          if (boardX < 0 || boardX >= 10 || boardY >= 20) return false;
-          if (boardY >= 0 && board[boardY][boardX]) return false;
-        }
-      }
-    }
-    return true;
-  }, [board]);
-
-  const placePiece = useCallback((piece: Tetromino) => {
-    const newBoard = [...board];
-
-    for (let y = 0; y < piece.shape.length; y++) {
-      for (let x = 0; x < piece.shape[y].length; x++) {
-        if (piece.shape[y][x]) {
-          const boardY = piece.y + y;
-          const boardX = piece.x + x;
-          if (boardY >= 0) {
-            newBoard[boardY][boardX] = piece.color;
+            if (boardX < 0 || boardX >= 10 || boardY >= 20) return false;
+            if (boardY >= 0 && board[boardY][boardX]) return false;
           }
         }
       }
-    }
+      return true;
+    },
+    [board]
+  );
 
-    setBoard(newBoard);
-    clearLines(newBoard);
-  }, [board, clearLines]);
+  const placePiece = useCallback(
+    (piece: Tetromino) => {
+      const newBoard = [...board];
 
-  const clearLines = useCallback((board: string[][]) => {
-    const newBoard = board.filter((row) => !row.every((cell) => cell !== ""));
-    const linesCleared = 20 - newBoard.length;
+      for (let y = 0; y < piece.shape.length; y++) {
+        for (let x = 0; x < piece.shape[y].length; x++) {
+          if (piece.shape[y][x]) {
+            const boardY = piece.y + y;
+            const boardX = piece.x + x;
+            if (boardY >= 0) {
+              newBoard[boardY][boardX] = piece.color;
+            }
+          }
+        }
+      }
 
-    if (linesCleared > 0) {
-      const emptyRows = Array(linesCleared)
-        .fill(null)
-        .map(() => Array(10).fill(""));
-      const finalBoard = [...emptyRows, ...newBoard];
+      setBoard(newBoard);
+      clearLines(newBoard);
+    },
+    [board, clearLines]
+  );
 
-      setBoard(finalBoard);
-      setLines((prev) => prev + linesCleared);
-      setScore((prev) => prev + linesCleared * 100 * level);
-      setGaiaTokensEarned((prev) => prev + linesCleared * 2);
-      setLevel(Math.floor((lines + linesCleared) / 10) + 1);
+  const clearLines = useCallback(
+    (board: string[][]) => {
+      const newBoard = board.filter((row) => !row.every((cell) => cell !== ""));
+      const linesCleared = 20 - newBoard.length;
 
-      toast.success(`${linesCleared} lines cleared! 🎉`, {
-        description: `+${linesCleared * 100 * level} points, +${linesCleared * 2} GAiA tokens`,
-      });
-    }
-  }, [level, lines]);
+      if (linesCleared > 0) {
+        const emptyRows = Array(linesCleared)
+          .fill(null)
+          .map(() => Array(10).fill(""));
+        const finalBoard = [...emptyRows, ...newBoard];
+
+        setBoard(finalBoard);
+        setLines((prev) => prev + linesCleared);
+        setScore((prev) => prev + linesCleared * 100 * level);
+        setGaiaTokensEarned((prev) => prev + linesCleared * 2);
+        setLevel(Math.floor((lines + linesCleared) / 10) + 1);
+
+        toast.success(`${linesCleared} lines cleared! 🎉`, {
+          description: `+${linesCleared * 100 * level} points, +${linesCleared * 2} GAiA tokens`,
+        });
+      }
+    },
+    [level, lines]
+  );
 
   const movePiece = useCallback(
     (dx: number, dy: number) => {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -107,36 +107,7 @@ export function AutonomousMastermind() {
   const [countdownTimer, setCountdownTimer] = useState<number | null>(null);
   const [pendingFeature, setPendingFeature] = useState<string | null>(null);
 
-  // Auto-apply system - applies features after 20 seconds of no admin interaction
-  useEffect(() => {
-    if (!autoApplyEnabled) return;
-
-    const pendingFeatures = features.filter((f) => f.status === "pending" && f.autoApply);
-    if (pendingFeatures.length === 0) return;
-
-    const nextFeature = pendingFeatures[0];
-    setPendingFeature(nextFeature.id);
-    setCountdownTimer(20);
-
-    const countdownInterval = setInterval(() => {
-      setCountdownTimer((prev) => {
-        if (prev === null || prev <= 1) {
-          // Auto-apply the feature
-          applyFeature(nextFeature.id, true);
-          return null;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => {
-      clearInterval(countdownInterval);
-      setCountdownTimer(null);
-      setPendingFeature(null);
-    };
-  }, [features, autoApplyEnabled]);
-
-  const applyFeature = (featureId: string, isAutomatic = false) => {
+  const applyFeature = useCallback((featureId: string, isAutomatic = false) => {
     setFeatures((prev) =>
       prev.map((f) => {
         if (f.id === featureId) {
@@ -178,7 +149,36 @@ export function AutonomousMastermind() {
         })
       );
     }, 1500);
-  };
+  }, [features]);
+
+  // Auto-apply system - applies features after 20 seconds of no admin interaction
+  useEffect(() => {
+    if (!autoApplyEnabled) return;
+
+    const pendingFeatures = features.filter((f) => f.status === "pending" && f.autoApply);
+    if (pendingFeatures.length === 0) return;
+
+    const nextFeature = pendingFeatures[0];
+    setPendingFeature(nextFeature.id);
+    setCountdownTimer(20);
+
+    const countdownInterval = setInterval(() => {
+      setCountdownTimer((prev) => {
+        if (prev === null || prev <= 1) {
+          // Auto-apply the feature
+          applyFeature(nextFeature.id, true);
+          return null;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(countdownInterval);
+      setCountdownTimer(null);
+      setPendingFeature(null);
+    };
+  }, [features, autoApplyEnabled, applyFeature]);
 
   const getStatusColor = (status: string) => {
     switch (status) {

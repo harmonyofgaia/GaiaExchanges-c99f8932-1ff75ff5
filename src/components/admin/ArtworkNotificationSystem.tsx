@@ -78,7 +78,7 @@ Culture of Harmony Team
     } catch (error: unknown) {
       console.error("❌ Notification sending failed:", error);
       toast.error("Notification Failed", {
-        description: `Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        description: `Error: ${error instanceof Error ? error.message : "Unknown error"}`,
         duration: 5000,
       });
     } finally {
@@ -112,7 +112,7 @@ Culture of Harmony Team
       });
     } catch (error: unknown) {
       toast.error("❌ Email Connection Test Failed", {
-        description: `Please check Resend API configuration: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        description: `Please check Resend API configuration: ${error instanceof Error ? error.message : "Unknown error"}`,
         duration: 8000,
       });
     } finally {

@@ -17,10 +17,29 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+interface RecoveryRequest {
+  id: number;
+  userEmail: string;
+  walletAddress: string;
+  status: "pending" | "in-progress" | "completed" | "rejected";
+  description: string;
+  timestamp: string;
+  priority: "high" | "medium" | "low";
+}
+
+interface WalletAnalysis {
+  address: string;
+  balance: number;
+  transactions: number;
+  lastActivity: string;
+  riskLevel: "low" | "medium" | "high";
+  recoverable: boolean;
+}
+
 export function CommunityRecoveryDashboard() {
   const [searchAddress, setSearchAddress] = useState("");
-  const [recoveryRequests, setRecoveryRequests] = useState<any[]>([]);
-  const [walletAnalysis, setWalletAnalysis] = useState<any>(null);
+  const [recoveryRequests, setRecoveryRequests] = useState<RecoveryRequest[]>([]);
+  const [walletAnalysis, setWalletAnalysis] = useState<WalletAnalysis | null>(null);
   const [isScanning, setIsScanning] = useState(false);
 
   // Generate sample recovery data
