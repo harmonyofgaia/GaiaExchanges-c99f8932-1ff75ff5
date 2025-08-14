@@ -69,7 +69,7 @@ const supportedTokens = [
     icon: "₿",
     fee: 0.0001,
     address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
-    price: 67420.50,
+    price: 67420.5,
     change24h: 2.3,
     volume: 28500000000,
     marketCap: 1320000000000,
@@ -80,7 +80,7 @@ const supportedTokens = [
     icon: "Ξ",
     fee: 0.001,
     address: "0x0000000000000000000000000000000000000000",
-    price: 3840.20,
+    price: 3840.2,
     change24h: -1.2,
     volume: 15200000000,
     marketCap: 462000000000,
@@ -96,22 +96,22 @@ const supportedTokens = [
     volume: 3200000000,
     marketCap: 94000000000,
   },
-  { 
-    name: "Cardano", 
-    symbol: "ADA", 
-    icon: "₳", 
-    fee: 0.17, 
+  {
+    name: "Cardano",
+    symbol: "ADA",
+    icon: "₳",
+    fee: 0.17,
     address: "addr1...",
     price: 0.52,
     change24h: -0.8,
     volume: 450000000,
     marketCap: 18300000000,
   },
-  { 
-    name: "Polkadot", 
-    symbol: "DOT", 
-    icon: "●", 
-    fee: 0.01, 
+  {
+    name: "Polkadot",
+    symbol: "DOT",
+    icon: "●",
+    fee: 0.01,
     address: "1...",
     price: 7.23,
     change24h: 4.2,
@@ -166,29 +166,31 @@ export default function Exchange() {
   });
 
   const [marketData, setMarketData] = useState<MarketData[]>(
-    supportedTokens.map(token => ({
+    supportedTokens.map((token) => ({
       symbol: token.symbol,
       price: token.price || 0,
       change24h: token.change24h || 0,
       volume: token.volume || 0,
       marketCap: token.marketCap || 0,
-    }))
+    })),
   );
 
   // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
-      setMetrics(prev => ({
+      setMetrics((prev) => ({
         ...prev,
         transactions: prev.transactions + Math.floor(Math.random() * 10) + 1,
         volume: prev.volume + Math.floor(Math.random() * 10000),
       }));
 
-      setMarketData(prev => prev.map(data => ({
-        ...data,
-        price: data.price * (1 + (Math.random() - 0.5) * 0.001),
-        change24h: data.change24h + (Math.random() - 0.5) * 0.1,
-      })));
+      setMarketData((prev) =>
+        prev.map((data) => ({
+          ...data,
+          price: data.price * (1 + (Math.random() - 0.5) * 0.001),
+          change24h: data.change24h + (Math.random() - 0.5) * 0.1,
+        })),
+      );
     }, 3000);
 
     return () => clearInterval(interval);
@@ -200,7 +202,9 @@ export default function Exchange() {
       return;
     }
 
-    toast.success(`${tradeType.toUpperCase()} order placed: ${tradeAmount} ${selectedPair.split('/')[0]} at ${tradePrice}`);
+    toast.success(
+      `${tradeType.toUpperCase()} order placed: ${tradeAmount} ${selectedPair.split("/")[0]} at ${tradePrice}`,
+    );
     setTradeAmount("");
     setTradePrice("");
   };
@@ -219,20 +223,30 @@ export default function Exchange() {
           <CardContent>
             <div className="space-y-4">
               {marketData.slice(0, 6).map((token, index) => (
-                <div key={token.symbol} className="flex items-center justify-between p-3 bg-black/20 rounded-lg">
+                <div
+                  key={token.symbol}
+                  className="flex items-center justify-between p-3 bg-black/20 rounded-lg"
+                >
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-400 rounded-full flex items-center justify-center text-sm font-bold">
                       {supportedTokens[index]?.icon || token.symbol[0]}
                     </div>
                     <div>
                       <div className="font-medium">{token.symbol}</div>
-                      <div className="text-sm text-muted-foreground">{supportedTokens[index]?.name}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {supportedTokens[index]?.name}
+                      </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-medium">${token.price.toFixed(token.symbol === 'GAiA' ? 4 : 2)}</div>
-                    <div className={`text-sm ${token.change24h >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                      {token.change24h >= 0 ? '+' : ''}{token.change24h.toFixed(2)}%
+                    <div className="font-medium">
+                      ${token.price.toFixed(token.symbol === "GAiA" ? 4 : 2)}
+                    </div>
+                    <div
+                      className={`text-sm ${token.change24h >= 0 ? "text-green-400" : "text-red-400"}`}
+                    >
+                      {token.change24h >= 0 ? "+" : ""}
+                      {token.change24h.toFixed(2)}%
                     </div>
                   </div>
                 </div>
@@ -250,9 +264,11 @@ export default function Exchange() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <label className="text-sm text-muted-foreground">Trading Pair</label>
-              <select 
-                value={selectedPair} 
+              <label className="text-sm text-muted-foreground">
+                Trading Pair
+              </label>
+              <select
+                value={selectedPair}
                 onChange={(e) => setSelectedPair(e.target.value)}
                 className="w-full mt-1 p-2 bg-black/20 border border-gray-600 rounded-lg"
               >
@@ -263,9 +279,9 @@ export default function Exchange() {
             </div>
             <div>
               <label className="text-sm text-muted-foreground">Amount</label>
-              <Input 
-                type="number" 
-                placeholder="0.00" 
+              <Input
+                type="number"
+                placeholder="0.00"
                 value={tradeAmount}
                 onChange={(e) => setTradeAmount(e.target.value)}
                 className="mt-1"
@@ -273,31 +289,34 @@ export default function Exchange() {
             </div>
             <div>
               <label className="text-sm text-muted-foreground">Price</label>
-              <Input 
-                type="number" 
-                placeholder="0.00" 
+              <Input
+                type="number"
+                placeholder="0.00"
                 value={tradePrice}
                 onChange={(e) => setTradePrice(e.target.value)}
                 className="mt-1"
               />
             </div>
             <div className="flex gap-2">
-              <Button 
-                variant={tradeType === 'buy' ? 'default' : 'outline'}
-                onClick={() => setTradeType('buy')}
+              <Button
+                variant={tradeType === "buy" ? "default" : "outline"}
+                onClick={() => setTradeType("buy")}
                 className="flex-1"
               >
                 Buy
               </Button>
-              <Button 
-                variant={tradeType === 'sell' ? 'default' : 'outline'}
-                onClick={() => setTradeType('sell')}
+              <Button
+                variant={tradeType === "sell" ? "default" : "outline"}
+                onClick={() => setTradeType("sell")}
                 className="flex-1"
               >
                 Sell
               </Button>
             </div>
-            <Button onClick={handleTrade} className="w-full bg-green-600 hover:bg-green-700">
+            <Button
+              onClick={handleTrade}
+              className="w-full bg-green-600 hover:bg-green-700"
+            >
               Place Order
             </Button>
           </CardContent>
@@ -325,7 +344,7 @@ export default function Exchange() {
     <div className="space-y-6">
       <ChartAnalytics />
       <LiveTransactionMatrix />
-      
+
       {/* Advanced Analytics */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 border-yellow-500/30">
@@ -339,7 +358,9 @@ export default function Exchange() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span>24h Volume</span>
-                <span className="font-bold">{formatGaiaNumber(metrics.volume)}</span>
+                <span className="font-bold">
+                  {formatGaiaNumber(metrics.volume)}
+                </span>
               </div>
               <Progress value={75} className="h-2" />
               <div className="text-sm text-muted-foreground">
@@ -360,7 +381,9 @@ export default function Exchange() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span>Active Users</span>
-                <span className="font-bold">{formatGaiaNumber(metrics.users)}</span>
+                <span className="font-bold">
+                  {formatGaiaNumber(metrics.users)}
+                </span>
               </div>
               <Progress value={60} className="h-2" />
               <div className="text-sm text-muted-foreground">
@@ -381,7 +404,9 @@ export default function Exchange() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span>Total Trades</span>
-                <span className="font-bold">{formatGaiaNumber(metrics.trades)}</span>
+                <span className="font-bold">
+                  {formatGaiaNumber(metrics.trades)}
+                </span>
               </div>
               <Progress value={85} className="h-2" />
               <div className="text-sm text-muted-foreground">
@@ -398,21 +423,46 @@ export default function Exchange() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6">
         {[
-          { label: "Network Health", value: metrics.health, icon: Heart, color: "text-red-400" },
-          { label: "Total Transactions", value: metrics.transactions, icon: Database, color: "text-blue-400" },
-          { label: "Active Nodes", value: metrics.nodes, icon: Network, color: "text-green-400" },
-          { label: "Security Score", value: metrics.security, icon: Shield, color: "text-purple-400" },
+          {
+            label: "Network Health",
+            value: metrics.health,
+            icon: Heart,
+            color: "text-red-400",
+          },
+          {
+            label: "Total Transactions",
+            value: metrics.transactions,
+            icon: Database,
+            color: "text-blue-400",
+          },
+          {
+            label: "Active Nodes",
+            value: metrics.nodes,
+            icon: Network,
+            color: "text-green-400",
+          },
+          {
+            label: "Security Score",
+            value: metrics.security,
+            icon: Shield,
+            color: "text-purple-400",
+          },
         ].map((metric, index) => (
-          <Card key={index} className="bg-gradient-to-br from-gray-900/30 to-slate-900/30 border-gray-500/30">
+          <Card
+            key={index}
+            className="bg-gradient-to-br from-gray-900/30 to-slate-900/30 border-gray-500/30"
+          >
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">{metric.label}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {metric.label}
+                  </p>
                   <p className="text-2xl font-bold">
-                    {metric.label.includes('Health') || metric.label.includes('Security') 
-                      ? `${metric.value}%` 
-                      : formatGaiaNumber(metric.value)
-                    }
+                    {metric.label.includes("Health") ||
+                    metric.label.includes("Security")
+                      ? `${metric.value}%`
+                      : formatGaiaNumber(metric.value)}
                   </p>
                 </div>
                 <metric.icon className={`h-8 w-8 ${metric.color}`} />
@@ -421,7 +471,7 @@ export default function Exchange() {
           </Card>
         ))}
       </div>
-      
+
       <LiveTransactionMatrix />
       <BlockchainStatus />
     </div>
@@ -440,7 +490,7 @@ export default function Exchange() {
   const renderSecurity = () => (
     <div className="space-y-6">
       <SecurityCenter notifications={[]} />
-      
+
       {/* Security Metrics */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="bg-gradient-to-br from-red-900/30 to-orange-900/30 border-red-500/30">
@@ -528,7 +578,8 @@ export default function Exchange() {
             <Rocket className="h-12 w-12 text-yellow-400 animate-pulse" />
           </div>
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-            The world's most advanced ecological blockchain exchange. Trade sustainably, earn rewards, and help heal our planet. 🌍✨
+            The world's most advanced ecological blockchain exchange. Trade
+            sustainably, earn rewards, and help heal our planet. 🌍✨
           </p>
         </div>
 
@@ -540,9 +591,9 @@ export default function Exchange() {
               variant={activeInterface === option.id ? "default" : "outline"}
               onClick={() => setActiveInterface(option.id)}
               className={`flex items-center gap-2 ${
-                activeInterface === option.id 
-                  ? `bg-${option.color}-600 hover:bg-${option.color}-700` 
-                  : ''
+                activeInterface === option.id
+                  ? `bg-${option.color}-600 hover:bg-${option.color}-700`
+                  : ""
               }`}
             >
               <span className="text-lg">{option.icon}</span>
@@ -563,17 +614,38 @@ export default function Exchange() {
         {/* Footer Stats */}
         <div className="mt-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {[
-            { label: "Total Volume", value: formatGaiaPrice(metrics.volume), icon: DollarSign },
-            { label: "Total Users", value: formatGaiaNumber(metrics.users), icon: Users },
-            { label: "Live Transactions", value: formatGaiaNumber(metrics.transactions), icon: Activity },
-            { label: "Active Nodes", value: metrics.nodes.toString(), icon: Network },
+            {
+              label: "Total Volume",
+              value: formatGaiaPrice(metrics.volume),
+              icon: DollarSign,
+            },
+            {
+              label: "Total Users",
+              value: formatGaiaNumber(metrics.users),
+              icon: Users,
+            },
+            {
+              label: "Live Transactions",
+              value: formatGaiaNumber(metrics.transactions),
+              icon: Activity,
+            },
+            {
+              label: "Active Nodes",
+              value: metrics.nodes.toString(),
+              icon: Network,
+            },
             { label: "Security", value: `${metrics.security}%`, icon: Shield },
             { label: "Uptime", value: `${metrics.uptime}%`, icon: TrendingUp },
           ].map((stat, index) => (
-            <Card key={index} className="text-center bg-gradient-to-br from-gray-900/30 to-slate-900/30 border-gray-500/30">
+            <Card
+              key={index}
+              className="text-center bg-gradient-to-br from-gray-900/30 to-slate-900/30 border-gray-500/30"
+            >
               <CardContent className="p-4">
                 <stat.icon className="h-6 w-6 mx-auto mb-2 text-green-400" />
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-sm text-muted-foreground">
+                  {stat.label}
+                </div>
                 <div className="font-bold text-lg">{stat.value}</div>
               </CardContent>
             </Card>
