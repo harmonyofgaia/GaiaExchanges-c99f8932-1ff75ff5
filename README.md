@@ -60,6 +60,52 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Code Scanning / CodeQL
+
+This repository uses GitHub CodeQL for automated security analysis and code quality scanning. CodeQL analyzes JavaScript and TypeScript code for potential security vulnerabilities, bugs, and code quality issues.
+
+### Enabling Code Scanning
+
+**Important**: Code scanning must be enabled in the repository settings for results to appear and for the workflow to upload SARIF results successfully.
+
+To enable code scanning:
+
+1. Go to your repository on GitHub
+2. Navigate to **Settings** → **Code security and analysis**
+3. Find the **Code scanning** section
+4. Click **Set up** next to "CodeQL analysis"
+5. Choose **Default** setup for automatic configuration
+
+After enabling code scanning in the repository settings, the CodeQL workflow will run automatically and upload results successfully.
+
+### CodeQL Configuration
+
+Our CodeQL setup includes:
+
+- **Languages**: JavaScript and TypeScript combined analysis
+- **Query Suites**: 
+  - `security-extended` - Extended security analysis
+  - `security-and-quality` - Comprehensive security and quality checks
+- **Triggers**: 
+  - Push to main/deploy branches
+  - Pull requests
+  - Weekly scheduled runs (Sundays)
+- **Coverage**: Broad scanning of the entire repository with intelligent exclusions
+
+### Excluded Paths
+
+The following paths are excluded from CodeQL analysis to focus on source code:
+- `node_modules/`, `dist/`, `build/`, `coverage/`
+- Generated files and vendor dependencies
+- Build artifacts and deployment files
+
+### Documentation
+
+For more information about GitHub Code Scanning:
+- [About code scanning](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning)
+- [Setting up code scanning](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/setting-up-code-scanning-for-a-repository)
+- [CodeQL CLI documentation](https://docs.github.com/en/code-security/codeql-cli)
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/8dfae018-363f-4770-8e5c-27c14bec8426) and click on Share -> Publish.
